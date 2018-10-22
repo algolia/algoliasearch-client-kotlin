@@ -5,10 +5,14 @@ import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.*
+import kotlinx.coroutines.withTimeout
+
 
 class Client(
     val applicationId: ApplicationId,
-    val apiKey: ApiKey
+    val apiKey: ApiKey,
+    val readTimeout: Long = 30000,
+    val searchTimeout: Long = 5000
 ) {
 
     private val host = "https://${applicationId.string}-dsn.algolia.net"
@@ -17,6 +21,7 @@ class Client(
             serializer = KotlinxSerializer().also {
                 it.setMapper(ListIndexes::class, ListIndexes.serializer())
                 it.setMapper(ListIndexes.Item::class, ListIndexes.Item.serializer())
+                it.setMapper(Hits::class, Hits.serializer())
             }
         }
         install(DefaultRequest) {
@@ -25,7 +30,19 @@ class Client(
         }
     }
 
+    private fun formatUrlIndexes(index: StringUTF8): String {
+        return "$host/1/indexes/${index.string}/"
+    }
+
     suspend fun getListIndexes(): ListIndexes {
-        return httpClient.get("$host/1/indexes/")
+        return withTimeout(readTimeout) {
+            httpClient.get<ListIndexes>("$host/1/indexes/")
+        }
+    }
+
+    suspend fun search(index: Index): Hits {
+        return withTimeout(searchTimeout) {
+            httpClient.get<Hits>(formatUrlIndexes(index.encode()))
+        }
     }
 }

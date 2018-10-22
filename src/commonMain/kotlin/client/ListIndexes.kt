@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ListIndexes(
-    val items: List<Item>?,
+    val items: List<Item>,
     val nbPages: Int
 ) {
 
