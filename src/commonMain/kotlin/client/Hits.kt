@@ -24,7 +24,7 @@ data class Hits(
         companion object : KSerializer<Hit> {
             override fun deserialize(input: Decoder): Hit {
                 val json = (input as JSON.JsonInput).readAsTree()
-                return Hit(json.jsonObject.toString())
+                return Hit(json.toString())
             }
         }
     }
