@@ -14,8 +14,16 @@ data class Hits(
     val processingTimeMS: Long,
     val exhaustiveNbHits: Boolean,
     val query: String,
-    val params: String
+    val params: String,
+    @Optional val facets: Map<String, Facet>? = null,
+    @Optional val exhaustiveFacetsCount: Boolean? = null
 ) {
+
+    @Serializable
+    data class Facet(
+        val name: String,
+        val count: Int
+    )
 
     @Serializable
     data class Hit(val serialized: String) {
