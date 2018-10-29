@@ -23,6 +23,11 @@ class TestEndpoints {
     }
 
     @Test
+    fun params() {
+        println(SearchParameters().stringify())
+    }
+
+    @Test
     fun search() {
         runBlocking {
             println(client.search(index))
@@ -33,9 +38,7 @@ class TestEndpoints {
     fun searchQuery() {
         runBlocking {
             try {
-                val searchParameters = SearchParameters(
-                    restrictSearchableAttributes = listOf("color")
-                )
+                val searchParameters = SearchParameters()
                 val response = client.searchQuery(index, searchParameters)
                 println(response)
             } catch (exception: BadResponseStatus) {
