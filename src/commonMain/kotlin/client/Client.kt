@@ -30,19 +30,19 @@ class Client(
         }
     }
 
-    private fun formatUrlIndexes(index: StringUTF8): String {
-        return "$host/1/indexes/${index.string}/"
+    private fun pathIndexes(index: StringUTF8): String {
+        return "$host/1/indexes/${index.string}"
     }
 
     suspend fun getListIndexes(): ListIndexes {
         return withTimeout(readTimeout) {
-            httpClient.get<ListIndexes>("$host/1/indexes/")
+            httpClient.get<ListIndexes>("$host/1/indexes")
         }
     }
 
     suspend fun search(index: Index): Hits {
         return withTimeout(searchTimeout) {
-            httpClient.get<Hits>(formatUrlIndexes(index.encode()))
+            httpClient.get<Hits>(pathIndexes(index.encode()))
         }
     }
 }
