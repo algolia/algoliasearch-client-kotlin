@@ -2,7 +2,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import client.*
+import io.ktor.client.features.BadResponseStatus
 import kotlinx.coroutines.runBlocking
+import kotlin.test.fail
 
 
 @RunWith(JUnit4::class)
@@ -30,7 +32,15 @@ class TestEndpoints {
     @Test
     fun searchQuery() {
         runBlocking {
-            println(client.searchQuery(index))
+            try {
+                val searchParameters = SearchParameters(
+                    restrictSearchableAttributes = listOf("color")
+                )
+                val response = client.searchQuery(index, searchParameters)
+                println(response)
+            } catch (exception: BadResponseStatus) {
+                fail(exception.localizedMessage)
+            }
         }
     }
 }

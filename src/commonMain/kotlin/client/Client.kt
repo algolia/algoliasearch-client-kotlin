@@ -24,7 +24,7 @@ class Client(
                 it.setMapper(ListIndexes.Item::class, ListIndexes.Item.serializer())
                 it.setMapper(Hits::class, Hits.serializer())
             }
-        }
+    }
         install(DefaultRequest) {
             setApplicationId(applicationId)
             setApiKey(apiKey)
@@ -51,10 +51,10 @@ class Client(
         }
     }
 
-    suspend fun searchQuery(index: Index): Hits {
+    suspend fun searchQuery(index: Index, searchParameters: SearchParameters): Hits {
         return withTimeout(searchTimeout) {
             httpClient.post<Hits>(pathIndexes(index.encode()) + "/query") {
-                body = JSON.stringify(SearchParams(facets = listOf("color")))
+                body = JSON.stringify(searchParameters)
             }
         }
     }
