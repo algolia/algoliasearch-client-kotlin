@@ -6,6 +6,7 @@ import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.*
 import kotlinx.coroutines.withTimeout
+import kotlinx.serialization.json.JSON
 
 
 class Client(
@@ -42,7 +43,19 @@ class Client(
 
     suspend fun search(index: Index): Hits {
         return withTimeout(searchTimeout) {
-            httpClient.get<Hits>(pathIndexes(index.encode()))
+            httpClient.get<Hits>(pathIndexes(index.encode())) {
+                url {
+                    parameters["facets"] = JSON.stringify(listOf("color"))
+                }
+            }
+        }
+    }
+
+    suspend fun searchQuery(index: Index): Hits {
+        return withTimeout(searchTimeout) {
+            httpClient.post<Hits>(pathIndexes(index.encode()) + "/query") {
+                body = JSON.stringify(SearchParams(facets = listOf("color")))
+            }
         }
     }
 }

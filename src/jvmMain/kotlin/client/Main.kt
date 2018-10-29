@@ -21,7 +21,7 @@ fun main(args: Array<String>) {
         try {
             val stuff = client.search(index)
 
-            println(stuff.hits.map { JSON.nonstrict.parse<Stuff>(it.serialized) })
+//            println(stuff.hits.map { JSON.nonstrict.parse<SearchParams>(it.serialized) })
         } catch (exception: BadResponseStatus) {
             println(exception.statusCode.value)
             println(exception.statusCode.description)
