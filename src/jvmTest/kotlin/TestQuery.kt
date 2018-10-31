@@ -24,7 +24,7 @@ class TestQuery {
         val query = Query()
         val attributes = arrayOf("attributeA", "attributeB")
 
-        assertEquals(listOf(), query.getAttributesToRetrieve())
+        assertEquals(null, query.getAttributesToRetrieve())
         query.setAttributesToRetrieve(*attributes)
         assertEquals(attributes.toList(), query.getAttributesToRetrieve())
 
@@ -33,7 +33,7 @@ class TestQuery {
         query.setAttributesToRetrieveExcept(*attributes)
 
         assertEquals(listOf("-attributeA", "-attributeB", "*"), query.getAttributesToRetrieve())
-        query.setAttributesToRetrieveExcept()
-        assertEquals(listOf(), query.getAttributesToRetrieve())
+        query.clearAttributesToRetrieve()
+        assertEquals(null, query.getAttributesToRetrieve())
     }
 }
