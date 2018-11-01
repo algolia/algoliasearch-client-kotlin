@@ -3,6 +3,97 @@ package client
 
 class Query {
 
+    enum class SortFacetValuesBy(val raw: String) {
+        /**
+         * Facet values are sorted by decreasing count.
+         * The count is the number of records containing this facet value in the results of the query.
+         */
+        Count("count"),
+        /**
+         * Facet values are sorted in alphabetical order, ascending from A to Z.
+         * The count is the number of records containing this facet value in the results of the query.
+         */
+        Alpha("alpha")
+    }
+
+    enum class QueryType(val raw: String) {
+        /**
+         *  Only the last word is interpreted as a prefix (default behavior).
+         */
+        PrefixLast("prefixLast"),
+        /**
+         * # All query words are interpreted as prefixes.
+         * This option is not recommended, as it tends to yield counterintuitiveresults and has a negative impact
+         * on performance.
+         */
+        PrefixAll("prefixAll"),
+        /**
+         * No query word is interpreted as a prefix.
+         * This option is not recommended, especially in an instant search setup, as the user will have to type
+         * the entire word(s) before getting any relevant results.
+         */
+        PrefixNone("prefixNone")
+    }
+
+    enum class RemoveWordIfNoResults(val raw: String) {
+        /**
+         * No specific processing is done when a query does not return any results (default behavior).
+         */
+        None("none"),
+        /**
+         * When a query does not return any results, treat the last word as optional.
+         * The process is repeated with words N-1, N-2, etc. until there are results, or the beginning of the query
+         * string has been reached.
+         */
+        LastWords("lastWords"),
+        /**
+         * When a query does not return any results, treat the first word as optional.
+         * The process is repeated with words 2, 3, etc. until there are results, or the end of the query string has
+         * been reached.
+         */
+        FirstWords("firstWords"),
+        /**
+         * When a query does not return any results, make a second attempt treating all words as optional.
+         * This is equivalent to transforming the implicit AND operator applied between query words to an OR.
+         */
+        AllOptional("allOptional")
+    }
+
+    enum class ExactOnSingleWordQuery(val raw: String) {
+        /**
+         * The exact ranking criterion is set to 1 if the query matches exactly an entire attribute value (default behavior).
+         * For example, if you search for the TV show “V”, you want it to match the query “V” before all popular
+         * TV shows starting with the letter V.
+         */
+        Attribute("attribute"),
+        /**
+         * The exact ranking criterion is ignored on single word queries.
+         */
+        None("none"),
+        /**
+         * The exact ranking criterion is set to 1 if the query word is found in the record.
+         * The query word must be at least 3 characters long and must not be a stop word in any supported language.
+         * For example, if you search for the TV show “Road”, and in your dataset you have 2 records,
+         * “Road” and “Road Trip”, both will be considered to match exactly.
+         */
+        Word("word")
+    }
+
+    enum class AlternativesAsExact(val raw: String) {
+        /**
+         * Alternative words added by the [ignorePlurals] feature.
+         */
+        IgnorePlurals("ignorePlurals"),
+        /**
+         * Single-word synonyms (example: “NY” = “NYC”).
+         */
+        SingleWordSynonym("singleWordSynonym"),
+        /**
+         * Multiple-words synonyms (example: “NY” = “New York”).
+         */
+        MultiWordSynonym("multiWordsSynonym")
+    }
+
     /**
      * The text to search in the index.
      * Engine default: "" (empty string)
@@ -80,6 +171,13 @@ class Query {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/facetingAfterDistinct/]
      */
     var facetingAfterDistinct: Boolean? = null
+
+    /**
+     * Controls how facet values are sorted.
+     * Engine default: [SortFacetValuesBy.Count]
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/sortFacetValuesBy/]
+     */
+    var sortFacetValuesBy: SortFacetValuesBy? = null
 
     /**
      * List of attributes to highlight.
@@ -200,6 +298,20 @@ class Query {
     var minimumAroundRadius: Int? = null
 
     /**
+     * Treats singular, plurals, and other forms of declensions as matching terms.
+     * Engine default: false.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/ignorePlurals/]
+     */
+    var ignorePlurals: BooleanOrISOCodes? = null
+
+    /**
+     * Removes stop (common) words from the query before executing it.
+     * Engine default: false.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/removeStopWords/]
+     */
+    var removeStopWords: BooleanOrISOCodes? = null
+
+    /**
      * Whether rules should be globally enabled.
      * Engine default: true.
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/enableRules/]
@@ -212,6 +324,20 @@ class Query {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/ruleContexts/]
      */
     var ruleContexts: List<String>? = null
+
+    /**
+     * Controls if and how query words are interpreted as [prefixes][https://www.algolia.com/doc/guides/textual-relevance/prefix-search/].
+     * Engine default: [QueryType.PrefixLast]
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryType/]
+     */
+    var queryType: QueryType? = null
+
+    /**
+     * Selects a strategy to remove words from the query when it doesn’t match any hits.
+     * Engine default: [RemoveWordIfNoResults.None]
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/removeWordsIfNoResults/]
+     */
+    var removeWordsIfNoResults: RemoveWordIfNoResults? = null
 
     /**
      * Enables the advanced query syntax.
@@ -242,6 +368,20 @@ class Query {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/disableExactOnAttributes/]
      */
     var disableExactOnAttributes: List<String>? = null
+
+    /**
+     * Controls how the exact ranking criterion is computed when the query contains only one word.
+     * Engine default: [ExactOnSingleWordQuery.Attribute]
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/exactOnSingleWordQuery/]
+     */
+    var exactOnSingleWordQuery: ExactOnSingleWordQuery? = null
+
+    /**
+     * List of alternatives that should be considered an exact match by the exact ranking criterion.
+     * Engine default: [[AlternativesAsExact.IgnorePlurals], [AlternativesAsExact.SingleWordSynonym]]
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/alternativesAsExact/]
+     */
+    var alternativesAsExact: List<AlternativesAsExact>? = null
 
     /**
      * Enables de-duplication or grouping of results.

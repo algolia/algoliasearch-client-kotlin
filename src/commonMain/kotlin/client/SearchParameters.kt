@@ -79,23 +79,6 @@ data class SearchParameters(
     @Optional val percentileComputation: Boolean? = null
 ) {
 
-    sealed class AroundRadius {
-
-        object All : AroundRadius() {
-
-            const val parameter = "all"
-        }
-
-        data class InMeters(val int: kotlin.Int) : AroundRadius()
-    }
-
-    sealed class BooleanOrISOCodes {
-
-        class Boolean(val boolean: kotlin.Boolean) : BooleanOrISOCodes()
-
-        class ISOCodes(val codes: List<String>) : BooleanOrISOCodes()
-    }
-
     fun stringify(): String {
         val map = mutableMapOf<String, String>()
 
