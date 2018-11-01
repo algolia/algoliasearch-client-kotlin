@@ -5,7 +5,7 @@ sealed class AroundRadius {
 
     object All : AroundRadius() {
 
-        const val parameter = "all"
+        const val raw = "all"
     }
 
     data class InMeters(val int: kotlin.Int) : AroundRadius()

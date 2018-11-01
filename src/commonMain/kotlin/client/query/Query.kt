@@ -344,6 +344,13 @@ class Query {
     var minWordSizefor2Typos: Int? = null
 
     /**
+     * Controls whether typo tolerance is enabled and how it is applied.
+     * Engine defaults: true.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/typoTolerance/]
+     */
+    var typoTolerance: TypoTolerance? = null
+
+    /**
      * Whether to allow typos on numbers (“numeric tokens”) in the query string.
      * Engine default: true.
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/allowTyposOnNumericTokens/]
