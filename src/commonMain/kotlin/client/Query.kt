@@ -54,6 +54,13 @@ class Query {
     var sumOrFiltersScores: Boolean? = null
 
     /**
+     * Maximum number of facet values to return for each facet during a regular search.
+     * Engine default: 100
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/maxValuesPerFacet/]
+     */
+    var maxValuesPerFacet: Int? = null
+
+    /**
      * Force faceting to be applied after de-duplication (via the Distinct setting).
      * Engine default: false.
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/facetingAfterDistinct/]
@@ -66,6 +73,48 @@ class Query {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/restrictHighlightAndSnippetArrays/]
      */
     var restrictHighlightAndSnippetArray: Boolean? = null
+
+    /**
+     * Specify the page to retrieve.
+     * Engine default: 0.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/page/]
+     */
+    var page: Int? = null
+
+    /**
+     * Set the number of hits per page.
+     * Engine default: 20.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/hitsPerPage/]
+     */
+    var hitsPerPage: Int? = null
+
+    /**
+     * Specify the offset of the first hit to return.
+     * Engine default: null.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/offset/]
+     */
+    var offset: Int? = null
+
+    /**
+     * Set the number of hits to retrieve (used only with offset).
+     * Engine default: null.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/length/]
+     */
+    var length: Int? = null
+
+    /**
+     * Minimum number of characters a word in the query string must contain to accept matches with 1 typo.
+     * Engine default: 4.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minWordSizefor1Typo/]
+     */
+    var minWordSizefor1Typo: Int? = null
+
+    /**
+     * Minimum number of characters a word in the query string must contain to accept matches with 2 typos.
+     * Engine default: 8.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minWordSizefor2Typos/]
+     */
+    var minWordSizefor2Typos: Int? = null
 
     /**
      * Whether to allow typos on numbers (“numeric tokens”) in the query string.
@@ -82,6 +131,20 @@ class Query {
     var aroundLatLngViaIP: Boolean? = null
 
     /**
+     * Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
+     * Engine default: 1.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundPrecision/]
+     */
+    var aroundPrecision: Int? = null
+
+    /**
+     * Minimum radius (in meters) used for a geo search when [aroundRadius] is not set.
+     * Engine default: null.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minimumAroundRadius/]
+     */
+    var minimumAroundRadius: Int? = null
+
+    /**
      * Whether rules should be globally enabled.
      * Engine default: true.
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/enableRules/]
@@ -94,6 +157,13 @@ class Query {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/advancedSyntax/]
      */
     var advancedSyntax: Boolean? = null
+
+    /**
+     * Enables de-duplication or grouping of results.
+     * Engine default: 0.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/distinct/]
+     */
+    var distinct: Int? = null
 
     /**
      * Retrieve detailed ranking information.
@@ -129,6 +199,20 @@ class Query {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/replaceSynonymsInHighlight/]
      */
     var replaceSynonymsInHighlight: Boolean? = null
+
+    /**
+     * Precision of the proximity ranking criterion.
+     * Engine default: 1.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minProximity/]
+     */
+    var minProximity: Int? = null
+
+    /**
+     * Maximum number of facet hits to return during a search for facet values.
+     * Engine default: 10.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/maxFacetHits/]
+     */
+    var maxFacetHits: Int? = null
 
     /**
      * Whether to include or exclude a query from the processing-time percentile computation.
