@@ -5,6 +5,7 @@ import client.*
 import io.ktor.client.features.BadResponseStatus
 import kotlinx.coroutines.runBlocking
 import kotlin.test.fail
+import client.query.SearchParameters
 
 
 @RunWith(JUnit4::class)
@@ -24,7 +25,7 @@ class TestEndpoints {
 
     @Test
     fun params() {
-        println(client.query.SearchParameters().stringify())
+        println(SearchParameters().stringify())
     }
 
     @Test
@@ -38,7 +39,7 @@ class TestEndpoints {
     fun searchQuery() {
         runBlocking {
             try {
-                val searchParameters = client.query.SearchParameters()
+                val searchParameters = SearchParameters()
                 val response = client.searchQuery(index, searchParameters)
                 println(response)
             } catch (exception: BadResponseStatus) {
