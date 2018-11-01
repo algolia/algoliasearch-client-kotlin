@@ -94,6 +94,28 @@ class Query {
         MultiWordSynonym("multiWordsSynonym")
     }
 
+    enum class ResponseFields(val raw: String) {
+        All("*"),
+        AroundLatLng("aroundLatLng"),
+        AutomaticRadius("automaticRadius"),
+        ExhaustiveFacetsCount("exhaustiveFacetsCount"),
+        Facets("facets"),
+        FacetsStats("facets_stats"),
+        Hits("hits"),
+        HitsPerPage("hitsPerPage"),
+        Index("index"),
+        Length("length"),
+        NbHits("nbHits"),
+        NbPages("nbPages"),
+        Offset("offset"),
+        Page("page"),
+        Params("params"),
+        ProcessingTimeMS("processingTimeMS"),
+        Query("query"),
+        QueryAfterRemoval("queryAfterRemoval"),
+        UserData("userData")
+    }
+
     /**
      * The text to search in the index.
      * Engine default: "" (empty string)
@@ -431,6 +453,13 @@ class Query {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minProximity/]
      */
     var minProximity: Int? = null
+
+    /**
+     * Choose which fields the response will contain. Applies to search and browse queries.
+     * Engine default: [ResponseFields.All]
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/responseFields/]
+     */
+    var responseFields: List<ResponseFields>? = null
 
     /**
      * Maximum number of facet hits to return during a search for facet values.
