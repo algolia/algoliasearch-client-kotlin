@@ -1,4 +1,4 @@
-package client
+package client.query
 
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON

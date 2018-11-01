@@ -1,4 +1,4 @@
-package client
+package client.query
 
 
 class Query {

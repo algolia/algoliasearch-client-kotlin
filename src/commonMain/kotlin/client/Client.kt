@@ -1,5 +1,6 @@
 package client
 
+import client.query.SearchParameters
 import io.ktor.client.HttpClient
 import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature
