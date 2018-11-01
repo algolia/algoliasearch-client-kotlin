@@ -16,6 +16,65 @@ class Query {
         Alpha("alpha")
     }
 
+    enum class QueryLanguage(val code: String) {
+        Afrikaans("af"),
+        Arabic("ar"),
+        Azeri("az"),
+        Bulgarian("bg"),
+        Brunei("bn"),
+        Catalan("ca"),
+        Czech("cs"),
+        Welsh("cy"),
+        Danis("da"),
+        German("de"),
+        English("en"),
+        Esperanto("eo"),
+        Spanish("es"),
+        Estonian("et"),
+        Basque("eu"),
+        Finnish("fi"),
+        Faroese("fo"),
+        French("fr"),
+        Galician("gl"),
+        Hebrew("he"),
+        Hindi("hi"),
+        Hungarian("hu"),
+        Armenian("hy"),
+        Indonesian("id"),
+        Icelandic("is"),
+        Italian("it"),
+        Japanese("ja"),
+        Georgian("ka"),
+        Kazakh("kk"),
+        Korean("ko"),
+        Kyrgyz("ky"),
+        Lithuanian("lt"),
+        Maori("mi"),
+        Mongolian("mn"),
+        Marathi("mr"),
+        Malay("ms"),
+        Maltese("mt"),
+        Norwegian("nb"),
+        Dutch("nl"),
+        NorthernSotho("ns"),
+        Polish("pl"),
+        Pashto("ps"),
+        Portuguese("pt"),
+        Quechua("qu"),
+        Romanian("ro"),
+        Russian("ru"),
+        Slovak("sk"),
+        Albanian("sq"),
+        Swedish("sv"),
+        Swahili("sw"),
+        Tamil("ta"),
+        Telugu("te"),
+        Tagalog("tl"),
+        Tswana("tn"),
+        Turkish("tr"),
+        Tatar("tt")
+    }
+
     enum class QueryType(val raw: String) {
         /**
          *  Only the last word is interpreted as a prefix (default behavior).
@@ -332,6 +391,15 @@ class Query {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/removeStopWords/]
      */
     var removeStopWords: BooleanOrISOCodes? = null
+
+    /**
+     * Sets the languages to be used by language-specific settings and functionalities such as
+     * [ignorePlurals], [removeStopWords], and
+     * [CJK word-detection][https://www.algolia.com/doc/guides/textual-relevance/languages/#using-a-language-specific-dictionary-for-cjk-words].
+     * Engine default: [].
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryLanguages/]
+     */
+    var queryLanguages: List<QueryLanguage>? = null
 
     /**
      * Whether rules should be globally enabled.
