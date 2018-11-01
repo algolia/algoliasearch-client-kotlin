@@ -295,6 +295,34 @@ class Query {
     }
 
     /**
+     * List of attributes to snippet, with an optional maximum number of words to snippet.
+     * Engine default: [] (no attribute is snippeted)
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToSnippet/]
+     */
+    var attributesToSnippet: List<Snippet>? = null
+
+    /**
+     * The HTML string to insert before the highlighted parts in all highlight and snippet results.
+     * Engine default: <em>.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/highlightPreTag/]
+     */
+    var highlightPreTag: String? = null
+
+    /**
+     * The HTML string to insert after the highlighted parts in all highlight and snippet results.
+     * Engine default: </em>.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/highlightPostTag/]
+     */
+    var highlightPostTag: String? = null
+
+    /**
+     * String used as an ellipsis indicator when a snippet is truncated.
+     * Engine default: "…" (U+2026, HORIZONTAL ELLIPSIS)
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/snippetEllipsisText/]
+     */
+    var snippetEllipsisText: String? = null
+
+    /**
      * Restrict highlighting and snippeting to items that matched the query.
      * Engine default: false.
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/restrictHighlightAndSnippetArrays/]
