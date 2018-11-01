@@ -1,14 +1,8 @@
 package client.query
 
-import client.query.SearchParameters.Companion.encodeInt
-import client.query.SearchParameters.Companion.encodeString
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.FloatSerializer
 import kotlinx.serialization.internal.StringSerializer
-import kotlinx.serialization.json.JSON
-import kotlinx.serialization.json.JsonPrimitive
-import kotlin.properties.ReadOnlyProperty
-import kotlin.reflect.KProperty
 
 
 @Serializable
