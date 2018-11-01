@@ -11,40 +11,11 @@ class Query {
     var query: String? = null
 
     /**
-     * A list of attributes set for retrieval.
-     * Engine default: ["*"]
+     * Gives control over which attributes to retrieve and which not to retrieve.
+     * Engine default: [*]
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToRetrieve/]
      */
-    private var attributesToRetrieve: List<String>? = null
-
-    /**
-     * @return The list of attributes to be retrieved in the search response.
-     */
-    fun getAttributesToRetrieve(): List<String>? = attributesToRetrieve
-
-    /**
-     * @param attributes A list of attributes.
-     * Set which attributes should be included the in the search response.
-     */
-    fun setAttributesToRetrieve(vararg attributes: String) {
-        attributesToRetrieve = attributes.toList()
-    }
-
-    /**
-     * @param attributes A list of attributes.
-     * Set which attributes should be excluded from the search response.
-     */
-    fun setAttributesToRetrieveExcept(vararg attributes: String) {
-        val excepts = attributes.map { "-$it" }
-        attributesToRetrieve = if (excepts.isNotEmpty()) excepts.plus("*") else excepts
-    }
-
-    /**
-     * Set the list of attributes to be retrieved in the search response to null.
-     */
-    fun clearAttributesToRetrieve() {
-        attributesToRetrieve = null
-    }
+    var attributesToRetrieve: List<String>? = null
 
     /**
      * Restricts a given query to look in only a subset of your searchable attributes.
@@ -93,34 +64,7 @@ class Query {
      * Engine default: null. (all searchable attributes)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToHighlight/]
      */
-    private var attributesToHighlight: List<String>? = null
-
-    /**
-     * @return The list of attributes to be highlighted in the search response.
-     */
-    fun getAttributesToHighlight(): List<String>? = attributesToHighlight
-
-    /**
-     * @param attributes A list of attributes.
-     * Set which attributes should be highlighted in the search response.
-     */
-    fun setAttributesToHighlight(vararg attributes: String) {
-        attributesToHighlight = attributes.toList()
-    }
-
-    /**
-     * Set all attributes to be highlighted in the search response.
-     */
-    fun highlightAllAttributes() {
-        attributesToHighlight = listOf("*")
-    }
-
-    /**
-     * Set the list of attributes to be highlighted in the search response to null.
-     */
-    fun clearAttributesToHighlight() {
-        attributesToHighlight = null
-    }
+    var attributesToHighlight: List<String>? = null
 
     /**
      * List of attributes to snippet, with an optional maximum number of words to snippet.
