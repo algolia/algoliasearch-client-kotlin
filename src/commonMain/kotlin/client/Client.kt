@@ -55,7 +55,7 @@ class Client(
     suspend fun searchQuery(index: Index, searchParameters: SearchParameters): Hits {
         return withTimeout(searchTimeout) {
             httpClient.post<Hits>(pathIndexes(index.encode()) + "/query") {
-                body = searchParameters.stringify()
+                body = JSON.stringify(searchParameters)
             }
         }
     }
