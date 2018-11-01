@@ -18,7 +18,7 @@ class Query {
     private var attributesToRetrieve: List<String>? = null
 
     /**
-     * @return A list of attributes set for retrieval.
+     * @return The list of attributes to be retrieved in the search response.
      */
     fun getAttributesToRetrieve(): List<String>? = attributesToRetrieve
 
@@ -40,11 +40,18 @@ class Query {
     }
 
     /**
-     * Set the list of attributes to retrieve to null.
+     * Set the list of attributes to be retrieved in the search response to null.
      */
     fun clearAttributesToRetrieve() {
         attributesToRetrieve = null
     }
+
+    /**
+     * Restricts a given query to look in only a subset of your searchable attributes.
+     * Engine default: all attributes in searchableAttributes.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/restrictSearchableAttributes/]
+     */
+    var restrictSearchableAttributes: List<String>? = null
 
     /**
      * Determines how to calculate the total score for filtering.
@@ -52,6 +59,13 @@ class Query {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/sumOrFiltersScores/]
      */
     var sumOrFiltersScores: Boolean? = null
+
+    /**
+     * Facets to retrieve.
+     * Engine default: []. (no facets retrieved)
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/facets/]
+     */
+    var facets: List<String>? = null
 
     /**
      * Maximum number of facet values to return for each facet during a regular search.
@@ -66,6 +80,40 @@ class Query {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/facetingAfterDistinct/]
      */
     var facetingAfterDistinct: Boolean? = null
+
+    /**
+     * List of attributes to highlight.
+     * Engine default: null. (all searchable attributes)
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToHighlight/]
+     */
+    private var attributesToHighlight: List<String>? = null
+
+    /**
+     * @return The list of attributes to be highlighted in the search response.
+     */
+    fun getAttributesToHighlight(): List<String>? = attributesToHighlight
+
+    /**
+     * @param attributes A list of attributes.
+     * Set which attributes should be highlighted in the search response.
+     */
+    fun setAttributesToHighlight(vararg attributes: String) {
+        attributesToHighlight = attributes.toList()
+    }
+
+    /**
+     * Set all attributes to be highlighted in the search response.
+     */
+    fun highlightAllAttributes() {
+        attributesToHighlight = listOf("*")
+    }
+
+    /**
+     * Set the list of attributes to be highlighted in the search response to null.
+     */
+    fun clearAttributesToHighlight() {
+        attributesToHighlight = null
+    }
 
     /**
      * Restrict highlighting and snippeting to items that matched the query.
@@ -124,6 +172,13 @@ class Query {
     var allowTyposOnNumericTokens: Boolean? = null
 
     /**
+     * List of attributes on which you want to disable typo tolerance.
+     * Engine default: [].
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/disableTypoToleranceOnAttributes/]
+     */
+    var disableTypoToleranceOnAttributes: List<String>? = null
+
+    /**
      * Whether to search entries around a given location automatically computed from the requester’s IP address.
      * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundLatLngViaIP/]
@@ -152,11 +207,41 @@ class Query {
     var enableRules: Boolean? = null
 
     /**
+     * Enables contextual rules.
+     * Engine default: [].
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/ruleContexts/]
+     */
+    var ruleContexts: List<String>? = null
+
+    /**
      * Enables the advanced query syntax.
      * Engine default: false.
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/advancedSyntax/]
      */
     var advancedSyntax: Boolean? = null
+
+    /**
+     * A list of words that should be considered as optional when found in the query.
+     * Engine default: [].
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalWords/]
+     */
+    var optionalWords: List<String>? = null
+
+    /**
+     * When this attribute is set to true, the list of words in [optionalWords] will be replaced by all the words
+     * found in the current [query].
+     * This will trigger the engine to return records containing any word matching the query (OR operation).
+     * Otherwise, the engine return records containing all the word matching the query (AND operation).
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalWords/#doing-an-or-between-all-words-of-a-query]
+     */
+    var isEveryWordInQueryOptional: Boolean = false
+
+    /**
+     * List of attributes on which you want to disable the exact ranking criterion.
+     * Engine default: [].
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/disableExactOnAttributes/]
+     */
+    var disableExactOnAttributes: List<String>? = null
 
     /**
      * Enables de-duplication or grouping of results.
