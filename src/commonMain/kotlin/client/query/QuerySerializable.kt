@@ -140,7 +140,10 @@ internal data class QuerySerializable(
             // Geo-search
             encoder.encodeString(obj.aroundLatLng, 28)
             encoder.encodeBoolean(obj.aroundLatLngViaIP, 29)
-            encoder.encodeSerializable(obj.aroundRadius, 30, AroundRadius.serializer())
+            when (obj.aroundRadius) {
+                is AroundRadius.All -> encoder.encodeString(obj.aroundRadius.raw, 30)
+                is AroundRadius.InMeters -> encoder.encodeInt(obj.aroundRadius.int, 30)
+            }
             encoder.encodeInt(obj.aroundPrecision, 31)
             encoder.encodeInt(obj.minimumAroundRadius, 32)
             encoder.encodeSerializable(obj.insideBoundingBox, 33, FloatSerializer.list)
