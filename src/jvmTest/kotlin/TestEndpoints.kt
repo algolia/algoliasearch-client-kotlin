@@ -5,7 +5,7 @@ import client.*
 import io.ktor.client.features.BadResponseStatus
 import kotlinx.coroutines.runBlocking
 import kotlin.test.fail
-import client.query.SearchParameters
+import client.query.QuerySerializable
 import kotlinx.serialization.json.JSON
 
 
@@ -26,7 +26,7 @@ class TestEndpoints {
 
     @Test
     fun params() {
-        val parameters = SearchParameters()
+        val parameters = QuerySerializable()
         println(JSON.stringify(parameters))
     }
 
@@ -41,7 +41,7 @@ class TestEndpoints {
     fun searchQuery() {
         runBlocking {
             try {
-                val searchParameters = SearchParameters(
+                val searchParameters = QuerySerializable(
                     numericFilters = listOf(listOf("nbLike > 0", "nbLike < 1000"), listOf("nbLike != 381"))
                 )
                 val response = client.searchQuery(index, searchParameters)

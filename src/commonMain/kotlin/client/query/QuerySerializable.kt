@@ -6,7 +6,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable
-data class SearchParameters(
+internal data class QuerySerializable(
     // Query
     @Optional val query: String? = null,
     // Attributes
@@ -39,7 +39,7 @@ data class SearchParameters(
     // Typos
     @Optional val minWordSizefor1Typo: Int? = null,
     @Optional val minWordSizefor2Typos: Int? = null,
-    @Optional val typoTolerance: String? = null,
+    @Optional val typoTolerance: TypoTolerance? = null,
     @Optional val allowTyposOnNumericTokens: Boolean? = null,
     @Optional val disableTypoToleranceOnAttributes: List<String>? = null,
     // Geo-Search
@@ -57,7 +57,7 @@ data class SearchParameters(
     // Query-rules
     @Optional val enableRules: Boolean? = null,
     @Optional val ruleContexts: List<String>? = null,
-    // Query-Strategy
+    // Query-strategy
     @Optional val queryType: String? = null,
     @Optional val removeWordsIfNoResults: String? = null,
     @Optional val advancedSyntax: Boolean? = null,
@@ -70,7 +70,7 @@ data class SearchParameters(
     @Optional val getRankingInfo: Boolean? = null,
     @Optional val clickAnalytics: Boolean? = null,
     @Optional val analytics: Boolean? = null,
-    @Optional val analyticsTags: Boolean? = null,
+    @Optional val analyticsTags: List<String>? = null,
     @Optional val synonyms: Boolean? = null,
     @Optional val replaceSynonymsInHighlight: Boolean? = null,
     @Optional val minProximity: Int? = null,
@@ -79,8 +79,8 @@ data class SearchParameters(
     @Optional val percentileComputation: Boolean? = null
 ) {
 
-    @Serializer(forClass = SearchParameters::class)
-    companion object : KSerializer<SearchParameters> {
+    @Serializer(forClass = QuerySerializable::class)
+    companion object : KSerializer<QuerySerializable> {
 
         private fun CompositeEncoder.encodeString(property: String?, index: Int) {
             if (property != null) encodeStringElement(descriptor, index, property)
@@ -98,7 +98,7 @@ data class SearchParameters(
             if (property != null) encodeSerializableElement(descriptor, index, saver, property)
         }
 
-        override fun serialize(output: Encoder, obj: SearchParameters) {
+        override fun serialize(output: Encoder, obj: QuerySerializable) {
             val encoder = output.beginStructure(descriptor)
 
             // Query
@@ -134,7 +134,7 @@ data class SearchParameters(
             // Typos
             encoder.encodeInt(obj.minWordSizefor1Typo, 23)
             encoder.encodeInt(obj.minWordSizefor2Typos, 24)
-            encoder.encodeString(obj.typoTolerance, 25)
+            encoder.encodeSerializable(obj.typoTolerance, 25, TypoTolerance.serializer())
             encoder.encodeBoolean(obj.allowTyposOnNumericTokens, 26)
             encoder.encodeSerializable(obj.disableTypoToleranceOnAttributes, 27, StringSerializer.list)
             // Geo-search
@@ -165,7 +165,7 @@ data class SearchParameters(
             encoder.encodeBoolean(obj.getRankingInfo, 48)
             encoder.encodeBoolean(obj.clickAnalytics, 49)
             encoder.encodeBoolean(obj.analytics, 50)
-            encoder.encodeBoolean(obj.analyticsTags, 51)
+            encoder.encodeSerializable(obj.analyticsTags, 51, StringSerializer.list)
             encoder.encodeBoolean(obj.synonyms, 52)
             encoder.encodeBoolean(obj.replaceSynonymsInHighlight, 53)
             encoder.encodeInt(obj.minProximity, 54)

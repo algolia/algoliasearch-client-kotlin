@@ -1,6 +1,6 @@
 package client
 
-import client.query.SearchParameters
+import client.query.Query
 import io.ktor.client.HttpClient
 import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature
@@ -52,10 +52,10 @@ class Client(
         }
     }
 
-    suspend fun searchQuery(index: Index, searchParameters: SearchParameters): Hits {
+    suspend fun searchQuery(index: Index, query: Query): Hits {
         return withTimeout(searchTimeout) {
             httpClient.post<Hits>(pathIndexes(index.encode()) + "/query") {
-                body = JSON.stringify(searchParameters)
+                body = JSON.stringify(query)
             }
         }
     }
