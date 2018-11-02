@@ -7,6 +7,7 @@ import kotlinx.coroutines.runBlocking
 import kotlin.test.fail
 import client.query.QuerySerializable
 import kotlinx.serialization.json.JSON
+import client.query.*
 
 
 @RunWith(JUnit4::class)
@@ -41,10 +42,7 @@ class TestEndpoints {
     fun searchQuery() {
         runBlocking {
             try {
-                val searchParameters = QuerySerializable(
-                    numericFilters = listOf(listOf("nbLike > 0", "nbLike < 1000"), listOf("nbLike != 381"))
-                )
-                val response = client.searchQuery(index, searchParameters)
+                val response = client.searchQuery(index, Query())
                 println(response)
             } catch (exception: BadResponseStatus) {
                 fail(exception.localizedMessage)
