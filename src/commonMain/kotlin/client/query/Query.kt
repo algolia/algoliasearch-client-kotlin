@@ -201,11 +201,25 @@ class Query {
     var disableTypoToleranceOnAttributes: List<String>? = null
 
     /**
+     * Search for entries around a central geolocation, enabling a geo search within a circular area.
+     * Engine default: null
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundLatLng/]
+     */
+    var aroundLatLng: String? = null
+
+    /**
      * Whether to search entries around a given location automatically computed from the requester’s IP address.
      * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundLatLngViaIP/]
      */
     var aroundLatLngViaIP: Boolean? = null
+
+    /**
+     * Define the maximum radius for a geo search (in meters).
+     * Engine default: null
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundRadius/]
+     */
+    var aroundRadius: AroundRadius? = null
 
     /**
      * Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
@@ -220,6 +234,20 @@ class Query {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minimumAroundRadius/]
      */
     var minimumAroundRadius: Int? = null
+
+    /**
+     * Search inside a rectangular area (in geo coordinates).
+     * Engine default: null
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/insideBoundingBox/]
+     */
+    var insideBoundingBox: List<Float>? = null
+
+    /**
+     * Search inside a polygon (in geo coordinates).
+     * Engine default: null
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/insidePolygon/]
+     */
+    var insidePolygon: List<Float>? = null
 
     /**
      * Treats singular, plurals, and other forms of declensions as matching terms.
