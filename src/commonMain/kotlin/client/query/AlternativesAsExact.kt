@@ -3,7 +3,7 @@ package client.query
 
 enum class AlternativesAsExact(val raw: String) {
     /**
-     * Alternative words added by the [ignorePlurals] feature.
+     * Alternative words added by the [Query.ignorePlurals] feature.
      */
     IgnorePlurals("ignorePlurals"),
     /**
