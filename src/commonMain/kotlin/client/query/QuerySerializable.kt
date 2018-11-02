@@ -42,7 +42,7 @@ internal data class QuerySerializable(
     @Optional val typoTolerance: TypoTolerance? = null,
     @Optional val allowTyposOnNumericTokens: Boolean? = null,
     @Optional val disableTypoToleranceOnAttributes: List<String>? = null,
-    // Geo-Search
+    // Geo-search
     @Optional val aroundLatLng: String? = null,
     @Optional val aroundLatLngViaIP: Boolean? = null,
     @Optional val aroundRadius: AroundRadius? = null,
@@ -51,8 +51,8 @@ internal data class QuerySerializable(
     @Optional val insideBoundingBox: List<Float>? = null,
     @Optional val insidePolygon: List<Float>? = null,
     // Languages
-    @Optional val ignorePlurals: BooleanOrISOCodes? = null,
-    @Optional val removeStopWords: BooleanOrISOCodes? = null,
+    @Optional val ignorePlurals: BooleanOrQueryLanguage? = null,
+    @Optional val removeStopWords: BooleanOrQueryLanguage? = null,
     @Optional val queryLanguages: List<String>? = null,
     // Query-rules
     @Optional val enableRules: Boolean? = null,
@@ -134,7 +134,11 @@ internal data class QuerySerializable(
             // Typos
             encoder.encodeInt(obj.minWordSizefor1Typo, 23)
             encoder.encodeInt(obj.minWordSizefor2Typos, 24)
-            encoder.encodeSerializable(obj.typoTolerance, 25, TypoTolerance.serializer())
+            when (obj.typoTolerance) {
+                is TypoTolerance.Strict -> encoder.encodeString(obj.typoTolerance.raw, 25)
+                is TypoTolerance.Min -> encoder.encodeString(obj.typoTolerance.raw, 25)
+                is TypoTolerance.Boolean -> encoder.encodeBoolean(obj.typoTolerance.boolean, 25)
+            }
             encoder.encodeBoolean(obj.allowTyposOnNumericTokens, 26)
             encoder.encodeSerializable(obj.disableTypoToleranceOnAttributes, 27, StringSerializer.list)
             // Geo-search
@@ -149,8 +153,22 @@ internal data class QuerySerializable(
             encoder.encodeSerializable(obj.insideBoundingBox, 33, FloatSerializer.list)
             encoder.encodeSerializable(obj.insidePolygon, 34, FloatSerializer.list)
             // Languages
-            encoder.encodeSerializable(obj.ignorePlurals, 35, BooleanOrISOCodes.serializer())
-            encoder.encodeSerializable(obj.removeStopWords, 36, BooleanOrISOCodes.serializer())
+            when (obj.ignorePlurals) {
+                is BooleanOrQueryLanguage.Boolean -> encoder.encodeBoolean(obj.ignorePlurals.boolean, 35)
+                is BooleanOrQueryLanguage.QueryLanguages -> {
+                    val isoCodes = obj.ignorePlurals.queryLanguage.map { it.raw }
+
+                    encoder.encodeSerializable(isoCodes, 35, StringSerializer.list)
+                }
+            }
+            when (obj.removeStopWords) {
+                is BooleanOrQueryLanguage.Boolean -> encoder.encodeBoolean(obj.removeStopWords.boolean, 36)
+                is BooleanOrQueryLanguage.QueryLanguages -> {
+                    val isoCodes = obj.removeStopWords.queryLanguage.map { it.raw }
+
+                    encoder.encodeSerializable(isoCodes, 36, StringSerializer.list)
+                }
+            }
             encoder.encodeSerializable(obj.queryLanguages, 37, StringSerializer.list)
             // Query-rules
             encoder.encodeBoolean(obj.enableRules, 38)

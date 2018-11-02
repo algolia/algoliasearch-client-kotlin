@@ -25,7 +25,7 @@ internal fun Query.toQuerySerializable() = QuerySerializable(
     highlightPreTag = highlightPreTag,
     highlightPostTag = highlightPostTag,
     snippetEllipsisText = snippetEllipsisText,
-    restrictHighlightAndSnippetArrays = restrictHighlightAndSnippetArray,
+    restrictHighlightAndSnippetArrays = restrictHighlightAndSnippetArrays,
     // Pagination
     page = page,
     hitsPerPage = hitsPerPage,
