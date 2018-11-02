@@ -25,15 +25,51 @@ class Query {
     var restrictSearchableAttributes: List<String>? = null
 
     /**
+     * Filter the query with numeric, facet and/or tag filters.
+     * Engine default: "" (no filters)
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
+     */
+    var filters: String? = null
+
+    /**
+     * Filter hits by facet value.
+     * Engine default: []
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/facetFilters/]
+     */
+    var facetFilters: List<List<String>>? = null
+
+
+    /**
+     * Create filters for ranking purposes, where records that match the filter are ranked highest.
+     * Engine default: []
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
+     */
+    var optionalFilters: List<List<String>>? = null
+
+    /**
+     * Filter on numeric attributes.
+     * Engine default: []
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/numericFilters/]
+     */
+    var numericFilters: List<List<String>>? = null
+
+    /**
+     * Filter hits by tags.
+     * Engine default: []
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/tagFilters/]
+     */
+    var tagFilters: List<List<String>>? = null
+
+    /**
      * Determines how to calculate the total score for filtering.
-     * Engine default: false.
+     * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/sumOrFiltersScores/]
      */
     var sumOrFiltersScores: Boolean? = null
 
     /**
      * Facets to retrieve.
-     * Engine default: []. (no facets retrieved)
+     * Engine default: [] (no facets retrieved)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/facets/]
      */
     var facets: List<String>? = null
@@ -47,7 +83,7 @@ class Query {
 
     /**
      * Force faceting to be applied after de-duplication (via the Distinct setting).
-     * Engine default: false.
+     * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/facetingAfterDistinct/]
      */
     var facetingAfterDistinct: Boolean? = null
@@ -61,7 +97,7 @@ class Query {
 
     /**
      * List of attributes to highlight.
-     * Engine default: null. (all searchable attributes)
+     * Engine default: null (all searchable attributes)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToHighlight/]
      */
     var attributesToHighlight: List<String>? = null
@@ -75,14 +111,14 @@ class Query {
 
     /**
      * The HTML string to insert before the highlighted parts in all highlight and snippet results.
-     * Engine default: <em>.
+     * Engine default: <em>
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/highlightPreTag/]
      */
     var highlightPreTag: String? = null
 
     /**
      * The HTML string to insert after the highlighted parts in all highlight and snippet results.
-     * Engine default: </em>.
+     * Engine default: </em>
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/highlightPostTag/]
      */
     var highlightPostTag: String? = null
@@ -96,70 +132,70 @@ class Query {
 
     /**
      * Restrict highlighting and snippeting to items that matched the query.
-     * Engine default: false.
+     * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/restrictHighlightAndSnippetArrays/]
      */
     var restrictHighlightAndSnippetArray: Boolean? = null
 
     /**
      * Specify the page to retrieve.
-     * Engine default: 0.
+     * Engine default: 0
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/page/]
      */
     var page: Int? = null
 
     /**
      * Set the number of hits per page.
-     * Engine default: 20.
+     * Engine default: 20
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/hitsPerPage/]
      */
     var hitsPerPage: Int? = null
 
     /**
      * Specify the offset of the first hit to return.
-     * Engine default: null.
+     * Engine default: null
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/offset/]
      */
     var offset: Int? = null
 
     /**
      * Set the number of hits to retrieve (used only with offset).
-     * Engine default: null.
+     * Engine default: null
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/length/]
      */
     var length: Int? = null
 
     /**
      * Minimum number of characters a word in the query string must contain to accept matches with 1 typo.
-     * Engine default: 4.
+     * Engine default: 4
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minWordSizefor1Typo/]
      */
     var minWordSizefor1Typo: Int? = null
 
     /**
      * Minimum number of characters a word in the query string must contain to accept matches with 2 typos.
-     * Engine default: 8.
+     * Engine default: 8
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minWordSizefor2Typos/]
      */
     var minWordSizefor2Typos: Int? = null
 
     /**
      * Controls whether typo tolerance is enabled and how it is applied.
-     * Engine defaults: true.
+     * Engine defaults: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/typoTolerance/]
      */
     var typoTolerance: TypoTolerance? = null
 
     /**
      * Whether to allow typos on numbers (“numeric tokens”) in the query string.
-     * Engine default: true.
+     * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/allowTyposOnNumericTokens/]
      */
     var allowTyposOnNumericTokens: Boolean? = null
 
     /**
      * List of attributes on which you want to disable typo tolerance.
-     * Engine default: [].
+     * Engine default: []
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/disableTypoToleranceOnAttributes/]
      */
     var disableTypoToleranceOnAttributes: List<String>? = null
@@ -173,28 +209,28 @@ class Query {
 
     /**
      * Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
-     * Engine default: 1.
+     * Engine default: 1
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundPrecision/]
      */
     var aroundPrecision: Int? = null
 
     /**
      * Minimum radius (in meters) used for a geo search when [aroundRadius] is not set.
-     * Engine default: null.
+     * Engine default: null
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minimumAroundRadius/]
      */
     var minimumAroundRadius: Int? = null
 
     /**
      * Treats singular, plurals, and other forms of declensions as matching terms.
-     * Engine default: false.
+     * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/ignorePlurals/]
      */
     var ignorePlurals: BooleanOrISOCodes? = null
 
     /**
      * Removes stop (common) words from the query before executing it.
-     * Engine default: false.
+     * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/removeStopWords/]
      */
     var removeStopWords: BooleanOrISOCodes? = null
@@ -203,21 +239,21 @@ class Query {
      * Sets the languages to be used by language-specific settings and functionalities such as
      * [ignorePlurals], [removeStopWords], and
      * [CJK word-detection][https://www.algolia.com/doc/guides/textual-relevance/languages/#using-a-language-specific-dictionary-for-cjk-words].
-     * Engine default: [].
+     * Engine default: []
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryLanguages/]
      */
     var queryLanguages: List<QueryLanguage>? = null
 
     /**
      * Whether rules should be globally enabled.
-     * Engine default: true.
+     * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/enableRules/]
      */
     var enableRules: Boolean? = null
 
     /**
      * Enables contextual rules.
-     * Engine default: [].
+     * Engine default: []
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/ruleContexts/]
      */
     var ruleContexts: List<String>? = null
@@ -238,14 +274,14 @@ class Query {
 
     /**
      * Enables the advanced query syntax.
-     * Engine default: false.
+     * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/advancedSyntax/]
      */
     var advancedSyntax: Boolean? = null
 
     /**
      * A list of words that should be considered as optional when found in the query.
-     * Engine default: [].
+     * Engine default: []
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalWords/]
      */
     var optionalWords: List<String>? = null
@@ -261,7 +297,7 @@ class Query {
 
     /**
      * List of attributes on which you want to disable the exact ranking criterion.
-     * Engine default: [].
+     * Engine default: []
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/disableExactOnAttributes/]
      */
     var disableExactOnAttributes: List<String>? = null
@@ -282,14 +318,14 @@ class Query {
 
     /**
      * Enables de-duplication or grouping of results.
-     * Engine default: 0.
+     * Engine default: 0
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/distinct/]
      */
     var distinct: Int? = null
 
     /**
      * Retrieve detailed ranking information.
-     * Engine default: false.
+     * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/getRankingInfo/]
      */
     var getRankingInfo: Boolean? = null
@@ -303,28 +339,35 @@ class Query {
 
     /**
      * Whether the current query will be taken into account in the Analytics.
-     * Engine default: true.
+     * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/analytics/]
      */
     var analytics: Boolean? = null
 
     /**
+     * List of tags to apply to the query in the analytics.
+     * Engine default: []
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/]
+     */
+    var analyticsTags: List<String>? = null
+
+    /**
      * Whether to take into account an index’s synonyms for a particular search.
-     * Engine default: true.
+     * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/synonyms/]
      */
     var synonyms: Boolean? = null
 
     /**
      * Whether to highlight and snippet the original word that matches the synonym or the synonym itself.
-     * Engine default: true.
+     * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/replaceSynonymsInHighlight/]
      */
     var replaceSynonymsInHighlight: Boolean? = null
 
     /**
      * Precision of the proximity ranking criterion.
-     * Engine default: 1.
+     * Engine default: 1
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minProximity/]
      */
     var minProximity: Int? = null
@@ -338,14 +381,14 @@ class Query {
 
     /**
      * Maximum number of facet hits to return during a search for facet values.
-     * Engine default: 10.
+     * Engine default: 10
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/maxFacetHits/]
      */
     var maxFacetHits: Int? = null
 
     /**
      * Whether to include or exclude a query from the processing-time percentile computation.
-     * Engine default: true.
+     * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/percentileComputation/]
      */
     var percentileComputation: Boolean? = null
