@@ -1,6 +1,9 @@
 package client
 
 import client.query.Query
+import client.query.stringify
+import client.response.Hits
+import client.response.ListIndexes
 import io.ktor.client.HttpClient
 import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature
@@ -42,7 +45,7 @@ class Client(
         }
     }
 
-    suspend fun search(index: Index): Hits {
+    private suspend fun search(index: Index): Hits {
         return withTimeout(searchTimeout) {
             httpClient.get<Hits>(pathIndexes(index.encode())) {
                 url {
@@ -52,10 +55,28 @@ class Client(
         }
     }
 
-    suspend fun searchQuery(index: Index, query: Query): Hits {
+    suspend fun search(index: Index, query: Query): Hits {
         return withTimeout(searchTimeout) {
             httpClient.post<Hits>(pathIndexes(index.encode()) + "/query") {
-                body = JSON.stringify(query)
+                body = query.stringify()
+            }
+        }
+    }
+
+    suspend fun browse(index: Index, query: Query): Hits {
+        return withTimeout(searchTimeout) {
+            httpClient.post<Hits>(pathIndexes(index.encode()) + "/browse") {
+                body = query.stringify()
+            }
+        }
+    }
+
+    suspend fun browse(index: Index, cursor: String): Hits {
+        return withTimeout(searchTimeout) {
+            httpClient.get<Hits>(pathIndexes(index.encode()) + "/browse") {
+                url {
+                    parameters["cursor"] = cursor
+                }
             }
         }
     }

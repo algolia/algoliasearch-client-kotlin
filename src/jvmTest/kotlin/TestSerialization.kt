@@ -1,5 +1,4 @@
 import client.query.*
-import kotlinx.serialization.json.JSON
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -7,10 +6,6 @@ import kotlin.test.assertEquals
 
 @RunWith(JUnit4::class)
 class TestSerialization {
-
-    private fun Query.stringify(): String {
-        return JSON.stringify(toQuerySerializable())
-    }
 
     @Test
     fun aroundRadius() {

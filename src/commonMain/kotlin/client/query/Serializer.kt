@@ -1,5 +1,7 @@
 package client.query
 
+import kotlinx.serialization.json.JSON
+
 
 internal fun Query.toQuerySerializable() = QuerySerializable(
     // Query
@@ -73,3 +75,7 @@ internal fun Query.toQuerySerializable() = QuerySerializable(
     maxFacetHits = maxFacetHits,
     percentileComputation = percentileComputation
 )
+
+internal fun Query.stringify(): String {
+    return JSON.stringify(toQuerySerializable())
+}

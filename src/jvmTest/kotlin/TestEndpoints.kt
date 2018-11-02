@@ -34,16 +34,27 @@ class TestEndpoints {
     @Test
     fun search() {
         runBlocking {
-            println(client.search(index))
+            try {
+                val response = client.search(index, Query())
+                println(response)
+            } catch (exception: BadResponseStatus) {
+                fail(exception.localizedMessage)
+            }
         }
     }
 
     @Test
-    fun searchQuery() {
+    fun browse() {
         runBlocking {
             try {
-                val response = client.searchQuery(index, Query())
-                println(response)
+                val responseA = client.browse(index, Query())
+
+                println(responseA)
+                responseA.cursor?.let {
+                    val responseB = client.browse(index, it)
+
+                    println(responseB)
+                }
             } catch (exception: BadResponseStatus) {
                 fail(exception.localizedMessage)
             }
