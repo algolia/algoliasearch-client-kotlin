@@ -33,6 +33,11 @@ kotlin {
         fromPreset(presets.macosX64, 'macos')
     }
     sourceSets {
+        all {
+            languageSettings {
+                enableLanguageFeature('InlineClasses')
+            }
+        }
         commonMain {
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
