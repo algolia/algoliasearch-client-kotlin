@@ -1,7 +1,7 @@
 package client.query
 
 
-enum class QueryLanguage(val code: String) {
+enum class QueryLanguage(val raw: String) {
     Afrikaans("af"),
     Arabic("ar"),
     Azeri("az"),

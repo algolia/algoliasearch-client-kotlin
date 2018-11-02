@@ -13,5 +13,5 @@ enum class AlternativesAsExact(val raw: String) {
     /**
      * Multiple-words synonyms (example: “NY” = “New York”).
      */
-    MultiWordSynonym("multiWordsSynonym")
+    MultiWordsSynonym("multiWordsSynonym")
 }

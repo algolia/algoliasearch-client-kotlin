@@ -3,5 +3,5 @@ package client.query
 
 data class FacetFilter(val attribute: String, val value: String, val negates: Boolean = false) {
 
-    fun render() = "$attribute:${if (negates) "-" else ""}$value"
+    val raw = if (negates) "$attribute:-$value" else "$attribute:$value"
 }

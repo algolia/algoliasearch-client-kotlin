@@ -48,7 +48,7 @@ internal fun Query.toQuerySerializable() = QuerySerializable(
     // Languages
     ignorePlurals = ignorePlurals,
     removeStopWords = removeStopWords,
-    queryLanguages = queryLanguages?.map { it.code },
+    queryLanguages = queryLanguages?.map { it.raw },
     // Query-rules
     enableRules = enableRules,
     ruleContexts = ruleContexts,
