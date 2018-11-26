@@ -17,3 +17,4 @@ fun example() {
     }
     println(query.attributesToRetrieve) // ["-attributeA", "-attributeB", "*"]
 }
+
