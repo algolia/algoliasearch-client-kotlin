@@ -39,14 +39,14 @@ class TestQuery {
 
     @Test
     fun facetFilter() {
-        assertEquals("attributeA:valueA", FacetFilter("attributeA", "valueA").raw)
-        assertEquals("attributeA:-valueA", FacetFilter("attributeA", "valueA", true).raw)
+        assertEquals("attributeA:valueA", Filter.Facet("attributeA", "valueA").raw)
+        assertEquals("attributeA:-valueA", Filter.Facet("attributeA", "valueA", true).raw)
     }
 
     @Test
     fun numericFilter() {
-        assertEquals("attributeA > 4.0", NumericFilter.Comparison("attributeA", BooleanOperator.Greater, 4.0).raw)
-        assertEquals("attributeA 0.3 TO 0.4", NumericFilter.Range("attributeA", 0.3, 0.4).raw)
+        assertEquals("attributeA > 4.0", Filter.Numeric.Comparison("attributeA", BooleanOperator.Greater, 4.0).raw)
+        assertEquals("attributeA 0.3 TO 0.4", Filter.Numeric.Range("attributeA", 0.3, 0.4).raw)
     }
 
     @Test
