@@ -37,7 +37,6 @@ class Query(
      */
     var facetFilters: List<List<String>>? = null,
 
-
     /**
      * Create filters for ranking purposes, where records that match the filter are ranked highest.
      * Engine default: []

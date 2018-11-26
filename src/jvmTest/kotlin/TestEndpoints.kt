@@ -2,12 +2,12 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import client.*
-import io.ktor.client.features.BadResponseStatus
 import kotlinx.coroutines.runBlocking
 import kotlin.test.fail
 import client.query.QuerySerializable
 import kotlinx.serialization.json.JSON
 import client.query.*
+import io.ktor.client.features.BadResponseStatusException
 
 
 @RunWith(JUnit4::class)
@@ -28,7 +28,7 @@ class TestEndpoints {
     @Test
     fun params() {
         val parameters = QuerySerializable()
-        println(JSON.stringify(parameters))
+        println(JSON.stringify(QuerySerializable.serializer(), parameters))
     }
 
     @Test
@@ -37,7 +37,7 @@ class TestEndpoints {
             try {
                 val response = client.search(index, Query())
                 println(response)
-            } catch (exception: BadResponseStatus) {
+            } catch (exception: BadResponseStatusException) {
                 fail(exception.localizedMessage)
             }
         }
@@ -55,7 +55,7 @@ class TestEndpoints {
 
                     println(responseB)
                 }
-            } catch (exception: BadResponseStatus) {
+            } catch (exception: BadResponseStatusException) {
                 fail(exception.localizedMessage)
             }
         }

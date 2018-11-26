@@ -77,5 +77,5 @@ internal fun Query.toQuerySerializable() = QuerySerializable(
 )
 
 internal fun Query.stringify(): String {
-    return JSON.stringify(toQuerySerializable())
+    return JSON.stringify(QuerySerializable.serializer(), toQuerySerializable())
 }

@@ -24,9 +24,9 @@ class Client(
     private val httpClient = HttpClient {
         install(JsonFeature) {
             serializer = KotlinxSerializer().also {
-                it.setMapper(ListIndexes::class, ListIndexes.serializer())
-                it.setMapper(ListIndexes.Item::class, ListIndexes.Item.serializer())
-                it.setMapper(Hits::class, Hits.serializer())
+                it.register<ListIndexes>()
+                it.register<ListIndexes.Item>()
+                it.register<Hits>()
             }
         }
         install(DefaultRequest) {
@@ -47,11 +47,7 @@ class Client(
 
     private suspend fun search(index: Index): Hits {
         return withTimeout(searchTimeout) {
-            httpClient.get<Hits>(pathIndexes(index.encode())) {
-                url {
-                    parameters["facets"] = JSON.stringify(listOf("color"))
-                }
-            }
+            httpClient.get<Hits>(pathIndexes(index.encode()))
         }
     }
 
