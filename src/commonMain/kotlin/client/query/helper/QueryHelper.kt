@@ -1,4 +1,6 @@
-package client.query
+package client.query.helper
+
+import client.query.Query
 
 
 fun queryBuilder(init: Query.() -> Unit) = Query().apply(init)
