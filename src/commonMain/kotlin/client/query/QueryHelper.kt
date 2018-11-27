@@ -11,6 +11,10 @@ fun Query.attributesToRetrieve(vararg attribute: String, excludeAttributes: Bool
     } else attribute.toList()
 }
 
+fun Query.restrictSearchableAttribute(vararg attribute: String) {
+    restrictSearchableAttributes = attribute.toList()
+}
+
 fun example() {
     val query = queryBuilder {
         attributesToRetrieve("attributeA", "attributeB", excludeAttributes = true)
