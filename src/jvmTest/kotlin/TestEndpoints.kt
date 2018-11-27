@@ -21,7 +21,7 @@ class TestEndpoints {
     @Test
     fun listIndexes() {
         runBlocking {
-            println(client.getListIndexes())
+            println(client.getListIndexes(RequestOptions().setHeader("stuff", "qwe")))
         }
     }
 
