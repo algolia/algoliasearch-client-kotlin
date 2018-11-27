@@ -1,13 +1,13 @@
+
+import client.*
+import client.query.QuerySerializable
+import io.ktor.client.features.BadResponseStatusException
+import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.JSON
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import client.*
-import kotlinx.coroutines.runBlocking
 import kotlin.test.fail
-import client.query.QuerySerializable
-import kotlinx.serialization.json.JSON
-import client.query.*
-import io.ktor.client.features.BadResponseStatusException
 
 
 @RunWith(JUnit4::class)
@@ -35,7 +35,7 @@ class TestEndpoints {
     fun search() {
         runBlocking {
             try {
-                val response = client.search(index, Query())
+                val response = client.search(index)
                 println(response)
             } catch (exception: BadResponseStatusException) {
                 fail(exception.localizedMessage)
@@ -47,7 +47,7 @@ class TestEndpoints {
     fun browse() {
         runBlocking {
             try {
-                val responseA = client.browse(index, Query())
+                val responseA = client.browse(index)
 
                 println(responseA)
                 responseA.cursor?.let {
@@ -56,6 +56,20 @@ class TestEndpoints {
                     println(responseB)
                 }
             } catch (exception: BadResponseStatusException) {
+                fail(exception.localizedMessage)
+            }
+        }
+    }
+
+    @Test
+    fun searchForFacetValue() {
+        runBlocking {
+            try {
+                val response = client.searchForFacetValue(index, "color")
+
+                println(response)
+            } catch (exception: BadResponseStatusException) {
+                exception.printStackTrace()
                 fail(exception.localizedMessage)
             }
         }
