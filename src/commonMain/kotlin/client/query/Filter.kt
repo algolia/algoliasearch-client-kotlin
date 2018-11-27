@@ -1,35 +1,55 @@
 package client.query
 
 
-sealed class Filter {
+sealed class Filter(
+    open val negates: kotlin.Boolean
+) {
 
     abstract val raw: String
 
-    data class Facet(val attribute: String, val value: String, val negates: kotlin.Boolean = false): Filter() {
-
-        override val raw = if (negates) "$attribute:-$value" else "$attribute:$value"
-    }
-
-    data class Boolean(val attribute: String, val value: kotlin.Boolean): Filter() {
+    data class Facet(
+        val attribute: String,
+        val value: String,
+        override val negates: kotlin.Boolean = false
+    ) : Filter(negates) {
 
         override val raw = "$attribute:$value"
     }
 
-    data class Tag(val value: String): Filter() {
+    data class Boolean(
+        val attribute: String,
+        val value: kotlin.Boolean,
+        override val negates: kotlin.Boolean = false
+    ) : Filter(negates) {
+
+        override val raw = "$attribute:$value"
+    }
+
+    data class Tag(
+        val value: String,
+        override val negates: kotlin.Boolean = false
+    ) : Filter(negates) {
 
         override val raw = "_tags:$value"
     }
 
-    sealed class Numeric: Filter() {
+    data class Comparison(
+        val attribute: String,
+        val operator: BooleanOperator,
+        val value: Double,
+        override val negates: kotlin.Boolean = false
+    ) : Filter(negates) {
 
-        data class Comparison(val attribute: String, val operator: BooleanOperator, val value: Double) : Numeric() {
+        override val raw = "$attribute ${operator.raw} $value"
+    }
 
-            override val raw = "$attribute ${operator.raw} $value"
-        }
+    data class Range(
+        val attribute: String,
+        val lowerBound: Double,
+        val upperBound: Double,
+        override val negates: kotlin.Boolean = false
+    ) : Filter(negates) {
 
-        data class Range(val attribute: String, val lowerBound: Double, val upperBound: Double) : Numeric() {
-
-            override val raw = "$attribute $lowerBound TO $upperBound"
-        }
+        override val raw = "$attribute $lowerBound TO $upperBound"
     }
 }
