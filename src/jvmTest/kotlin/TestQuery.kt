@@ -40,7 +40,7 @@ class TestQuery {
     @Test
     fun facetFilter() {
         assertEquals("attributeA:valueA", Filter.Facet("attributeA", "valueA").raw)
-        assertEquals("attributeA:-valueA", Filter.Facet("attributeA", "valueA", true).raw)
+        assertEquals("attributeA:valueA", Filter.Facet("attributeA", "valueA", true).raw)
     }
 
     @Test
