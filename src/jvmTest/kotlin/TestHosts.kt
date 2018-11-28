@@ -3,6 +3,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 
@@ -20,24 +21,19 @@ class TestHosts {
     fun fallbackHosts() {
         val hosts = Hosts("appId")
 
-        assertEquals("appId-1.algolianet.com", hosts.fallbackHosts[0])
-        assertEquals("appId-2.algolianet.com", hosts.fallbackHosts[1])
-        assertEquals("appId-3.algolianet.com", hosts.fallbackHosts[2])
-    }
-
-    @Test
-    fun fallback() {
-        val hosts = Hosts("appId")
-
-        assertTrue { hosts.fallbackHosts.contains(hosts.fallback) }
+        assertTrue { hosts.fallbackHosts.contains("appId-1.algolianet.com") }
+        assertTrue { hosts.fallbackHosts.contains("appId-2.algolianet.com") }
+        assertTrue { hosts.fallbackHosts.contains("appId-3.algolianet.com") }
+        assertEquals(3, hosts.fallbackHosts.size)
     }
 
     @Test
     fun random() {
-        val hosts = Hosts("appId")
 
-        repeat(1000) {
-            assertTrue { hosts.fallbackHosts.contains(hosts.getRandomFallbackHost()) }
+        val result = (0 until 1000).map {
+            val hosts = Hosts("appId")
+            hosts.fallbackHosts[0] == "appId-1.algolianet.com"
         }
+        assertFalse { result.all { it } }
     }
 }

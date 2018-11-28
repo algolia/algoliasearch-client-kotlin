@@ -12,13 +12,17 @@ internal class Hosts(appId: String) {
 
     val default = "$appId-dsn.algolia.net"
 
-    val fallbackHosts = listOf(
+    private val hosts = mutableListOf(
         "$appId-1.$host",
         "$appId-2.$host",
         "$appId-3.$host"
     )
 
-    internal fun getRandomFallbackHost() = fallbackHosts[Random.nextInt(0, fallbackHosts.size)]
+    val fallbackHosts = mutableListOf<String>()
 
-    val fallback = getRandomFallbackHost()
+    init {
+        fallbackHosts += hosts.removeAt(Random.nextInt(0, hosts.size))
+        fallbackHosts += hosts.removeAt(Random.nextInt(0, hosts.size))
+        fallbackHosts += hosts.last()
+    }
 }
