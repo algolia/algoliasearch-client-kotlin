@@ -20,7 +20,7 @@ data class RequestOptions(
         return this
     }
 
-    fun setAlgoliaUserId(userId: String): RequestOptions {
+    fun setHeaderAlgoliaUserId(userId: String): RequestOptions {
         headers["X-Algolia-UserID"] = userId
         return this
     }
