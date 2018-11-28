@@ -1,6 +1,10 @@
 package client
 
 
+fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {
+    return RequestOptions().apply(init)
+}
+
 data class RequestOptions(
     val readTimeout: Long? = null,
     val searchTimeout: Long? = null
@@ -10,22 +14,22 @@ data class RequestOptions(
 
     val urlParameters = mutableMapOf<String, String>()
 
-    fun setHeader(key: String, value: String): RequestOptions {
+    fun header(key: String, value: String): RequestOptions {
         headers[key] = value
         return this
     }
 
-    fun setHeaderForwardedFor(ipAddress: String): RequestOptions {
+    fun headerForwardedFor(ipAddress: String): RequestOptions {
         headers["X-Forwarded-For"] = ipAddress
         return this
     }
 
-    fun setHeaderAlgoliaUserId(userId: String): RequestOptions {
+    fun headerAlgoliaUserId(userId: String): RequestOptions {
         headers["X-Algolia-UserID"] = userId
         return this
     }
 
-    fun setUrlParameters(key: String, value: String): RequestOptions {
+    fun urlParameter(key: String, value: String): RequestOptions {
         urlParameters[key] = value
         return this
     }
