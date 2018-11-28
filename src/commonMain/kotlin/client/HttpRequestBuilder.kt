@@ -1,11 +1,11 @@
 package client
 
 import client.query.Query
-import client.query.stringify
+import client.serialize.serialize
+import client.serialize.toMap
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
-import kotlinx.serialization.json.*
 
 
 fun HttpRequestBuilder.setApplicationId(applicationId: ApplicationId) {
@@ -22,5 +22,9 @@ fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions?) {
 }
 
 fun HttpRequestBuilder.setQuery(query: Query?) {
-    body = query?.stringify() ?: "{}"
+    body = query?.toMap()?.serialize()?.toString() ?: "{}"
+}
+
+fun HttpRequestBuilder.setBody(map: Map<String, Any>) {
+    body = map.serialize().toString()
 }

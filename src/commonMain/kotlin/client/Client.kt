@@ -4,11 +4,14 @@ import client.query.Query
 import client.response.FacetHits
 import client.response.Hits
 import client.response.ListIndexes
+import client.serialize.toMap
 import io.ktor.client.HttpClient
 import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.request.*
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
+import io.ktor.client.request.post
 import kotlinx.coroutines.withTimeout
 
 
@@ -84,7 +87,11 @@ class Client(
         return withTimeout(searchTimeout(requestOptions)) {
             httpClient.post<FacetHits>(pathIndexes(index.encode()) + "/facets/$facetName/query") {
                 setRequestOptions(requestOptions)
-                setQuery(query)
+                val map = query?.toMap() ?: mutableMapOf()
+
+                maxFacetHits?.let { map["maxFacetHits"] = it }
+                facetQuery?.let { map["facetQuery"] = it }
+                setBody(map)
             }
         }
     }

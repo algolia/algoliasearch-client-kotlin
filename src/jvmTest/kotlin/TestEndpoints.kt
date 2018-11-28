@@ -1,9 +1,8 @@
 
 import client.*
-import client.query.QuerySerializable
+import client.query.Query
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.JSON
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -23,12 +22,6 @@ class TestEndpoints {
         runBlocking {
             println(client.getListIndexes(RequestOptions().setHeader("stuff", "qwe")))
         }
-    }
-
-    @Test
-    fun params() {
-        val parameters = QuerySerializable()
-        println(JSON.stringify(QuerySerializable.serializer(), parameters))
     }
 
     @Test
@@ -65,7 +58,7 @@ class TestEndpoints {
     fun searchForFacetValue() {
         runBlocking {
             try {
-                val response = client.searchForFacetValue(index, "color")
+                val response = client.searchForFacetValue(index, "color", maxFacetHits = 2, facetQuery = "co", query = Query(maxFacetHits = 2))
 
                 println(response)
             } catch (exception: BadResponseStatusException) {
