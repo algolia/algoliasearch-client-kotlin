@@ -30,7 +30,7 @@ kotlin {
     targets {
         fromPreset(presets.jvm, 'jvm')
 //        fromPreset(presets.js, 'js')
-        fromPreset(presets.macosX64, 'macos')
+//        fromPreset(presets.macosX64, 'macos')
     }
     sourceSets {
         all {
@@ -66,6 +66,7 @@ kotlin {
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-test"
                 implementation "org.jetbrains.kotlin:kotlin-test-junit"
+                implementation "io.ktor:ktor-client-mock-jvm:$ktor"
             }
         }
         jsMain {
