@@ -10,13 +10,13 @@ internal typealias HostStatus = Pair<Status, Long>
 internal val ApplicationId.readHost get() = "$string-dsn.algolia.net"
 internal val ApplicationId.writeHost get() = "$string.algolia.net"
 
-internal fun List<HostStatus>.hostStatusExpiration(hostStatusExpirationDelay: Long): List<HostStatus> {
+internal fun Status.getHostStatus() = this to Time.getCurrentTimeMillis()
+
+internal fun List<HostStatus>.areStatusExpired(hostStatusExpirationDelay: Long): Boolean {
     val lastRequestTimestamp = maxBy { it.second }?.second ?: 0L
     val someTimeAgo = Time.getCurrentTimeMillis() - hostStatusExpirationDelay
 
-    return if (lastRequestTimestamp <= someTimeAgo) {
-        map { HostStatus(Status.Unknown, 0L) }
-    } else this
+    return lastRequestTimestamp <= someTimeAgo
 }
 
 internal fun List<HostStatus>.selectNextHostIndex(): Int {

@@ -1,7 +1,8 @@
+
 import client.Time
 import client.host.HostStatus
 import client.host.Status
-import client.host.hostStatusExpiration
+import client.host.areStatusExpired
 import client.host.selectNextHostIndex
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,16 +16,16 @@ class TestHostStatus {
     @Test
     fun initialState() {
         val expected = listOf(Status.Unknown to 0L, Status.Unknown to 0L, Status.Unknown to 0L)
-        val actual = expected.hostStatusExpiration(5000L)
+        val actual = expected.areStatusExpired(5000L)
 
-        assertEquals(expected, actual)
+        assertEquals(true, actual)
     }
 
     @Test
     fun invalid() {
         val initial = listOf<HostStatus>()
 
-        assertEquals(initial, initial.hostStatusExpiration(5000))
+        assertEquals(true, initial.areStatusExpired(5000))
     }
 
     @Test
@@ -34,9 +35,9 @@ class TestHostStatus {
         val statuses = listOf(Status.Up to sixSecondsAgo, Status.Unknown to 0L)
 
         // The last request was made 6 seconds ago, expiration is 5 seconds. Host statuses have expired
-        assertEquals(initial, statuses.hostStatusExpiration(5000L))
+        assertEquals(true, statuses.areStatusExpired(5000L))
         // The last request was made 6 seconds ago, expiration is 7 seconds. Host status are still valid.
-        assertEquals(statuses, statuses.hostStatusExpiration(7000L))
+        assertEquals(false, statuses.areStatusExpired(7000L))
     }
 
     @Test
@@ -50,7 +51,7 @@ class TestHostStatus {
 
         // The last request was made 4 seconds ago. Even though one request was made 6 seconds ago, which is greater
         // than our expiration delay, our statuses should not be invalidated.
-        assertEquals(statuses, statuses.hostStatusExpiration(hostStatusExpirationDelay))
+        assertEquals(false, statuses.areStatusExpired(hostStatusExpirationDelay))
     }
 
     @Test
