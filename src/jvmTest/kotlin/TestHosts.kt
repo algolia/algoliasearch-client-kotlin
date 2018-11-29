@@ -1,4 +1,9 @@
-import client.Hosts
+
+import client.ApplicationId
+import client.host.computeFallbackHosts
+import client.host.randomizeFallbackHosts
+import client.host.readHost
+import client.host.writeHost
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -10,29 +15,32 @@ import kotlin.test.assertTrue
 @RunWith(JUnit4::class)
 class TestHosts {
 
+    private val applicationId = ApplicationId("appId")
+    private val host = "algolianet.com"
+
     @Test
     fun default() {
-        val hosts = Hosts("appId")
-
-        assertEquals("appId-dsn.algolia.net", hosts.default)
+        assertEquals("${applicationId.string}-dsn.algolia.net", applicationId.readHost)
+        assertEquals("${applicationId.string}.algolia.net", applicationId.writeHost)
     }
 
     @Test
     fun fallbackHosts() {
-        val hosts = Hosts("appId")
+        val hosts = applicationId.computeFallbackHosts()
 
-        assertTrue { hosts.fallbackHosts.contains("appId-1.algolianet.com") }
-        assertTrue { hosts.fallbackHosts.contains("appId-2.algolianet.com") }
-        assertTrue { hosts.fallbackHosts.contains("appId-3.algolianet.com") }
-        assertEquals(3, hosts.fallbackHosts.size)
+        assertTrue { hosts.contains("${applicationId.string}-1.$host") }
+        assertTrue { hosts.contains("${applicationId.string}-2.$host") }
+        assertTrue { hosts.contains("${applicationId.string}-3.$host") }
+        assertEquals(3, hosts.size)
     }
 
     @Test
     fun random() {
-
         val result = (0 until 1000).map {
-            val hosts = Hosts("appId")
-            hosts.fallbackHosts[0] == "appId-1.algolianet.com"
+            val hosts = applicationId.computeFallbackHosts()
+            val randomized = hosts.randomizeFallbackHosts()
+
+            randomized[0] == "${applicationId.string}-1.$host"
         }
         assertFalse { result.all { it } }
     }
