@@ -37,4 +37,18 @@ class TestHostStatus {
         // The last request was made 6 seconds ago, expiration is 7 seconds. Host status are still valid.
         assertEquals(statuses, statuses.hostStatusExpiration(7000L))
     }
+
+    @Test
+    fun hostExpiration_lasdtRequestBeforeExpirationDelay() {
+        val now = Time.getCurrentTimeMillis()
+        val fourSecondsAgo = now - 4000L
+        val sixSecondsAgo = now - 6000L
+        val hostStatusExpirationDelay = 5000L
+
+        val initial = listOf(Status.Unknown to 0L, Status.Up to fourSecondsAgo, Status.Down to sixSecondsAgo)
+
+        // The last request was made 4 seconds ago. Even though one request was made 6 seconds ago, which is greater
+        // than our expiration delay, our statuses should not be invalidated.
+        assertEquals(initial, initial.hostStatusExpiration(hostStatusExpirationDelay))
+    }
 }
