@@ -6,6 +6,7 @@ import kotlin.random.Random
 
 
 internal typealias HostStatus = Pair<Status, Long>
+
 internal val ApplicationId.readHost get() = "$string-dsn.algolia.net"
 internal val ApplicationId.writeHost get() = "$string.algolia.net"
 
@@ -16,6 +17,13 @@ internal fun List<HostStatus>.hostStatusExpiration(hostStatusExpirationDelay: Lo
     return if (lastRequestTimestamp <= someTimeAgo) {
         map { HostStatus(Status.Unknown, 0L) }
     } else this
+}
+
+internal fun List<HostStatus>.selectNextHostIndex(): Int {
+    val hasUp = firstOrNull { it.first == Status.Up }
+    val hasUnknown = hasUp ?: firstOrNull { it.first == Status.Unknown }
+
+    return indexOf(hasUnknown).coerceAtLeast(0)
 }
 
 internal fun List<String>.randomizeFallbackHosts(): List<String> {
@@ -29,7 +37,7 @@ internal fun List<String>.randomizeFallbackHosts(): List<String> {
     }
 }
 
-internal fun List<String>.initialHostStatus(): MutableList<HostStatus> = map { Status.Unknown to 0L }.toMutableList()
+internal fun List<String>.initialHostStatus() = map { Status.Unknown to 0L }.toMutableList()
 
 internal fun ApplicationId.computeFallbackHosts(host: String = "algolianet.com"): List<String> {
     return listOf(
