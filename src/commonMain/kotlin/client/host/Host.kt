@@ -41,8 +41,8 @@ internal fun List<String>.initialHostStatus() = map { Status.Unknown to 0L }.toM
 
 internal fun ApplicationId.computeFallbackHosts(host: String = "algolianet.com"): List<String> {
     return listOf(
-        "$string-1.$host",
-        "$string-2.$host",
-        "$string-3.$host"
+        "https://$string-1.$host",
+        "https://$string-2.$host",
+        "https://$string-3.$host"
     )
 }

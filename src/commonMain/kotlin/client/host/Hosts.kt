@@ -14,9 +14,9 @@ internal class Hosts(
     private val hostStatusExpirationDelay: Long = 1000L * 60L * 5L
 ) {
 
-    private val hosts = applicationId.computeFallbackHosts()
-    private val fallbackHosts = hosts.randomizeFallbackHosts()
-    private val statuses = fallbackHosts.initialHostStatus()
+    val hosts = applicationId.computeFallbackHosts()
+    val fallbackHosts = hosts.randomizeFallbackHosts()
+    val statuses = fallbackHosts.initialHostStatus()
 
     suspend fun retryLogic(
         timeout: Long,
@@ -34,7 +34,7 @@ internal class Hosts(
 
         return try {
             withTimeout(timeout * attempt) {
-                val response = request("https://$host$path")
+                val response = request("$host$path")
                 statuses[index] = Status.Up.getHostStatus()
                 response
             }

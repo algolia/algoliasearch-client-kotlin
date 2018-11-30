@@ -1,4 +1,3 @@
-
 import client.ApplicationId
 import client.host.Hosts
 import io.ktor.client.HttpClient
@@ -20,7 +19,7 @@ import kotlin.test.assertEquals
 class TestRetryLogic {
 
     private val hosts = Hosts(ApplicationId("appId"))
-    private val path = "path"
+    private val path = "/path"
     private val mockEngine = MockEngine {
         MockHttpResponse(
             call,
@@ -63,10 +62,15 @@ class TestRetryLogic {
         runBlocking {
             var retry = -1
 
-            hosts.retryLogic(500L, path) {
+            hosts.retryLogic(500L, path) { path ->
                 retry++
+                when (retry) {
+                    0 -> assertEquals(hosts.fallbackHosts[0], path)
+                    1 -> assertEquals(hosts.fallbackHosts[1], path)
+                    2 -> assertEquals(hosts.fallbackHosts[2], path)
+                }
                 if (retry < 3) delay(500L * (retry + 1))
-                httpClient.get()
+                httpClient.get(path)
             }
             assertEquals(3, retry)
         }
