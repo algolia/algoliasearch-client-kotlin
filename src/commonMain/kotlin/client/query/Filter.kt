@@ -5,7 +5,9 @@ sealed class Filter(
     open val negates: kotlin.Boolean
 ) {
 
-    abstract val raw: String
+    protected abstract val expression: String
+
+    fun raw() = if (negates) "NOT $expression" else expression
 
     data class Facet(
         val attribute: String,
@@ -13,7 +15,7 @@ sealed class Filter(
         override val negates: kotlin.Boolean = false
     ) : Filter(negates) {
 
-        override val raw = "$attribute:$value"
+        override val expression = "$attribute:$value"
     }
 
     data class Boolean(
@@ -22,7 +24,7 @@ sealed class Filter(
         override val negates: kotlin.Boolean = false
     ) : Filter(negates) {
 
-        override val raw = "$attribute:$value"
+        override val expression = "$attribute:$value"
     }
 
     data class Tag(
@@ -30,7 +32,7 @@ sealed class Filter(
         override val negates: kotlin.Boolean = false
     ) : Filter(negates) {
 
-        override val raw = "_tags:$value"
+        override val expression = "_tags:$value"
     }
 
     data class Comparison(
@@ -40,7 +42,7 @@ sealed class Filter(
         override val negates: kotlin.Boolean = false
     ) : Filter(negates) {
 
-        override val raw = "$attribute ${operator.raw} $value"
+        override val expression = "$attribute ${operator.raw} $value"
     }
 
     data class Range(
@@ -50,6 +52,6 @@ sealed class Filter(
         override val negates: kotlin.Boolean = false
     ) : Filter(negates) {
 
-        override val raw = "$attribute $lowerBound TO $upperBound"
+        override val expression = "$attribute:$lowerBound TO $upperBound"
     }
 }

@@ -38,18 +38,6 @@ class TestQuery {
     }
 
     @Test
-    fun facetFilter() {
-        assertEquals("attributeA:valueA", Filter.Facet("attributeA", "valueA").raw)
-        assertEquals("attributeA:valueA", Filter.Facet("attributeA", "valueA", true).raw)
-    }
-
-    @Test
-    fun numericFilter() {
-        assertEquals("attributeA > 4.0", Filter.Comparison("attributeA", BooleanOperator.Greater, 4.0).raw)
-        assertEquals("attributeA 0.3 TO 0.4", Filter.Range("attributeA", 0.3, 0.4).raw)
-    }
-
-    @Test
     fun queryLanguage() {
         assertEquals("af", QueryLanguage.Afrikaans.raw)
         assertEquals("ar", QueryLanguage.Arabic.raw)
