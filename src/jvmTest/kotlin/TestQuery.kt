@@ -22,12 +22,12 @@ class TestQuery {
 
     @Test
     fun booleanOperator() {
-        assertEquals("<", BooleanOperator.Lesser.raw)
-        assertEquals("<=", BooleanOperator.LesserOrEqual.raw)
-        assertEquals("=", BooleanOperator.Equals.raw)
-        assertEquals("!=", BooleanOperator.NotEquals.raw)
-        assertEquals(">=", BooleanOperator.GreaterOrEqual.raw)
-        assertEquals(">", BooleanOperator.Greater.raw)
+        assertEquals("<", NumericOperator.Lesser.raw)
+        assertEquals("<=", NumericOperator.LesserOrEqual.raw)
+        assertEquals("=", NumericOperator.Equals.raw)
+        assertEquals("!=", NumericOperator.NotEquals.raw)
+        assertEquals(">=", NumericOperator.GreaterOrEqual.raw)
+        assertEquals(">", NumericOperator.Greater.raw)
     }
 
     @Test

@@ -1,5 +1,6 @@
-import client.query.BooleanOperator
+
 import client.query.Filter
+import client.query.NumericOperator
 import client.query.helper.FilterHelper
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -52,8 +53,8 @@ class TestFilterHelper {
     @Test
     fun oneDisjunctiveGroup() {
         val helper = FilterHelper()
-        val comparisonA = Filter.Comparison("attributeA", BooleanOperator.NotEquals, 10.0)
-        val comparisonB = Filter.Comparison("attributeB", BooleanOperator.Equals, 5.0, true)
+        val comparisonA = Filter.Comparison("attributeA", NumericOperator.NotEquals, 10.0)
+        val comparisonB = Filter.Comparison("attributeB", NumericOperator.Equals, 5.0, true)
 
         helper.addFilterOr(comparisonA, comparisonB)
         assertEquals("attributeA != 10.0 OR NOT attributeB = 5.0", helper.raw())

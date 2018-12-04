@@ -42,7 +42,7 @@ sealed class Filter(
 
     data class Comparison(
         override val attribute: String,
-        val operator: BooleanOperator,
+        val operator: NumericOperator,
         val value: Double,
         override val negates: kotlin.Boolean = false,
         override val variant: String? = null

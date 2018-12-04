@@ -1,4 +1,4 @@
-import client.query.BooleanOperator
+import client.query.NumericOperator
 import client.query.Filter
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,8 +51,8 @@ class TestFilter {
 
     @Test
     fun comparison() {
-        val filter = Filter.Comparison("attributeA", BooleanOperator.Greater, 5.0)
-        val filterNegate = Filter.Comparison("attributeA", BooleanOperator.Greater, 5.0, true)
+        val filter = Filter.Comparison("attributeA", NumericOperator.Greater, 5.0)
+        val filterNegate = Filter.Comparison("attributeA", NumericOperator.Greater, 5.0, true)
 
         assertEquals("attributeA > 5.0", filter.raw())
         assertEquals("NOT attributeA > 5.0", filterNegate.raw())
