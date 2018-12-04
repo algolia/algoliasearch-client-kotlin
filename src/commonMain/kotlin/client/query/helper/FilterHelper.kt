@@ -24,7 +24,11 @@ class FilterHelper {
         return addDisjunctiveGroupInternal(first, second, *filter)
     }
 
-    fun addFilterOr(first: Filter.Comparison, second: Filter.Comparison, vararg filter: Filter.Comparison): FilterHelper {
+    fun addFilterOr(
+        first: Filter.Comparison,
+        second: Filter.Comparison,
+        vararg filter: Filter.Comparison
+    ): FilterHelper {
         return addDisjunctiveGroupInternal(first, second, *filter)
     }
 
@@ -59,6 +63,18 @@ class FilterHelper {
             filters.addAll(clean)
         }
         return this
+    }
+
+    fun clear(variant: String) {
+        filters.forEach {
+            it.removeAll { it.variant == variant }
+        }
+    }
+
+    fun get(variant: String): List<Filter> {
+        return filters.flatMap {
+            it.filter { it.variant == variant }
+        }
     }
 
     fun assign(vararg query: Query) {

@@ -88,7 +88,10 @@ class TestFilterHelper {
 
         helper.addFilterOr(facetA, facetB)
         helper.addFilterOr(booleanA, booleanB)
-        assertEquals("(attributeA:valueA OR attributeB:valueB) AND (attributeC:false OR NOT attributeD:true)", helper.raw())
+        assertEquals(
+            "(attributeA:valueA OR attributeB:valueB) AND (attributeC:false OR NOT attributeD:true)",
+            helper.raw()
+        )
         helper.remove(booleanA, booleanB)
         assertEquals("attributeA:valueA OR attributeB:valueB", helper.raw())
     }
@@ -102,8 +105,14 @@ class TestFilterHelper {
 
         helper.addFilterAnd(facetA, facetB)
         helper.addFilterOr(facetA, facetB)
-        assertEquals("attributeA:valueA AND attributeB:valueB AND (attributeA:valueA OR attributeB:valueB)", helper.raw())
+        assertEquals(
+            "attributeA:valueA AND attributeB:valueB AND (attributeA:valueA OR attributeB:valueB)",
+            helper.raw()
+        )
         helper.replace(facetA, facetC)
-        assertEquals("attributeC:valueC AND attributeB:valueB AND (attributeC:valueC OR attributeB:valueB)", helper.raw())
+        assertEquals(
+            "attributeC:valueC AND attributeB:valueB AND (attributeC:valueC OR attributeB:valueB)",
+            helper.raw()
+        )
     }
 }

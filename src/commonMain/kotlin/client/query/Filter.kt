@@ -3,7 +3,8 @@ package client.query
 
 sealed class Filter(
     open val attribute: String,
-    open val negates: kotlin.Boolean
+    open val negates: kotlin.Boolean,
+    open val variant: String?
 ) {
 
     protected abstract val expression: String
@@ -13,8 +14,9 @@ sealed class Filter(
     data class Facet(
         override val attribute: String,
         val value: String,
-        override val negates: kotlin.Boolean = false
-    ) : Filter(attribute, negates) {
+        override val negates: kotlin.Boolean = false,
+        override val variant: String? = null
+    ) : Filter(attribute, negates, variant) {
 
         override val expression = "$attribute:$value"
     }
@@ -22,16 +24,18 @@ sealed class Filter(
     data class Boolean(
         override val attribute: String,
         val value: kotlin.Boolean,
-        override val negates: kotlin.Boolean = false
-    ) : Filter(attribute, negates) {
+        override val negates: kotlin.Boolean = false,
+        override val variant: String? = null
+    ) : Filter(attribute, negates, variant) {
 
         override val expression = "$attribute:$value"
     }
 
     data class Tag(
         override val attribute: String,
-        override val negates: kotlin.Boolean = false
-    ) : Filter(attribute, negates) {
+        override val negates: kotlin.Boolean = false,
+        override val variant: String? = null
+    ) : Filter(attribute, negates, variant) {
 
         override val expression = "_tags:$attribute"
     }
@@ -40,8 +44,9 @@ sealed class Filter(
         override val attribute: String,
         val operator: BooleanOperator,
         val value: Double,
-        override val negates: kotlin.Boolean = false
-    ) : Filter(attribute, negates) {
+        override val negates: kotlin.Boolean = false,
+        override val variant: String? = null
+    ) : Filter(attribute, negates, variant) {
 
         override val expression = "$attribute ${operator.raw} $value"
     }
@@ -50,8 +55,9 @@ sealed class Filter(
         override val attribute: String,
         val lowerBound: Double,
         val upperBound: Double,
-        override val negates: kotlin.Boolean = false
-    ) : Filter(attribute, negates) {
+        override val negates: kotlin.Boolean = false,
+        override val variant: String? = null
+    ) : Filter(attribute, negates, variant) {
 
         override val expression = "$attribute:$lowerBound TO $upperBound"
     }
