@@ -8,7 +8,7 @@ class FilterHelper {
 
     private val filters = mutableListOf<MutableList<Filter>>()
 
-    fun add(vararg filter: Filter): FilterHelper {
+    fun addFilterAnd(vararg filter: Filter): FilterHelper {
         filter.forEach {
             filters += mutableListOf(it)
         }
@@ -20,28 +20,28 @@ class FilterHelper {
         return this
     }
 
-    fun addDisjunctiveGroup(vararg filter: Filter.Boolean): FilterHelper {
-        return addDisjunctiveGroupInternal(*filter)
+    fun addFilterOr(first: Filter.Boolean, second: Filter.Boolean, vararg filter: Filter.Boolean): FilterHelper {
+        return addDisjunctiveGroupInternal(first, second, *filter)
     }
 
-    fun addDisjunctiveGroup(vararg filter: Filter.Comparison): FilterHelper {
-        return addDisjunctiveGroupInternal(*filter)
+    fun addFilterOr(first: Filter.Comparison, second: Filter.Comparison, vararg filter: Filter.Comparison): FilterHelper {
+        return addDisjunctiveGroupInternal(first, second, *filter)
     }
 
-    fun addDisjunctiveGroup(vararg filter: Filter.Range): FilterHelper {
-        return addDisjunctiveGroupInternal(*filter)
+    fun addFilterOr(first: Filter.Range, second: Filter.Range, vararg filter: Filter.Range): FilterHelper {
+        return addDisjunctiveGroupInternal(first, second, *filter)
     }
 
-    fun addDisjunctiveGroup(vararg filter: Filter.Tag): FilterHelper {
-        return addDisjunctiveGroupInternal(*filter)
+    fun addFilterOr(first: Filter.Tag, second: Filter.Range, vararg filter: Filter.Tag): FilterHelper {
+        return addDisjunctiveGroupInternal(first, second, *filter)
     }
 
-    fun addDisjunctiveGroup(vararg filter: Filter.Facet): FilterHelper {
-        return addDisjunctiveGroupInternal(*filter)
+    fun addFilterOr(first: Filter.Facet, second: Filter.Facet, vararg filter: Filter.Facet): FilterHelper {
+        return addDisjunctiveGroupInternal(first, second, *filter)
     }
 
     fun replace(filter: Filter, replacement: Filter) {
-        filters.forEach {  filters ->
+        filters.forEach { filters ->
             val index = filters.indexOf(filter)
 
             if (index != -1) {
