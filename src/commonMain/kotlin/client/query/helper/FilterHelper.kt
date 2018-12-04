@@ -15,12 +15,15 @@ class FilterHelper {
         return this
     }
 
-    private fun addDisjunctiveGroupInternal(vararg filter: Filter): FilterHelper {
-        filters += mutableListOf(*filter)
-        return this
+    fun addFilterOr(first: Filter.Facet, second: Filter.Facet, vararg filter: Filter.Facet): FilterHelper {
+        return addDisjunctiveGroupInternal(first, second, *filter)
     }
 
     fun addFilterOr(first: Filter.Boolean, second: Filter.Boolean, vararg filter: Filter.Boolean): FilterHelper {
+        return addDisjunctiveGroupInternal(first, second, *filter)
+    }
+
+    fun addFilterOr(first: Filter.Tag, second: Filter.Range, vararg filter: Filter.Tag): FilterHelper {
         return addDisjunctiveGroupInternal(first, second, *filter)
     }
 
@@ -36,15 +39,32 @@ class FilterHelper {
         return addDisjunctiveGroupInternal(first, second, *filter)
     }
 
-    fun addFilterOr(first: Filter.Tag, second: Filter.Range, vararg filter: Filter.Tag): FilterHelper {
-        return addDisjunctiveGroupInternal(first, second, *filter)
+    private fun addDisjunctiveGroupInternal(vararg filter: Filter): FilterHelper {
+        filters += mutableListOf(*filter)
+        return this
     }
 
-    fun addFilterOr(first: Filter.Facet, second: Filter.Facet, vararg filter: Filter.Facet): FilterHelper {
-        return addDisjunctiveGroupInternal(first, second, *filter)
+    fun replace(filter: Filter.Facet, replacement: Filter.Facet) {
+        replace(filter, replacement)
     }
 
-    fun replace(filter: Filter, replacement: Filter) {
+    fun replace(filter: Filter.Boolean, replacement: Filter.Boolean) {
+        replace(filter, replacement)
+    }
+
+    fun replace(filter: Filter.Tag, replacement: Filter.Tag) {
+        replace(filter, replacement)
+    }
+
+    fun replace(filter: Filter.Comparison, replacement: Filter.Comparison) {
+        replace(filter, replacement)
+    }
+
+    fun replace(filter: Filter.Range, replacement: Filter.Range) {
+        replace(filter, replacement)
+    }
+
+    private fun replace(filter: Filter, replacement: Filter) {
         filters.forEach { filters ->
             val index = filters.indexOf(filter)
 
