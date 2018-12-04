@@ -45,26 +45,26 @@ class FilterHelper {
     }
 
     fun replace(filter: Filter.Facet, replacement: Filter.Facet) {
-        replace(filter, replacement)
+        replaceInternal(filter, replacement)
     }
 
     fun replace(filter: Filter.Boolean, replacement: Filter.Boolean) {
-        replace(filter, replacement)
+        replaceInternal(filter, replacement)
     }
 
     fun replace(filter: Filter.Tag, replacement: Filter.Tag) {
-        replace(filter, replacement)
+        replaceInternal(filter, replacement)
     }
 
     fun replace(filter: Filter.Comparison, replacement: Filter.Comparison) {
-        replace(filter, replacement)
+        replaceInternal(filter, replacement)
     }
 
     fun replace(filter: Filter.Range, replacement: Filter.Range) {
-        replace(filter, replacement)
+        replaceInternal(filter, replacement)
     }
 
-    private fun replace(filter: Filter, replacement: Filter) {
+    private fun replaceInternal(filter: Filter, replacement: Filter) {
         filters.forEach { filters ->
             val index = filters.indexOf(filter)
 
