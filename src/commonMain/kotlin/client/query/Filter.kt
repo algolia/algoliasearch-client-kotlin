@@ -32,12 +32,12 @@ sealed class Filter(
     }
 
     data class Tag(
-        override val attribute: String,
+        val value: String,
         override val negates: kotlin.Boolean = false,
         override val variant: String? = null
-    ) : Filter(attribute, negates, variant) {
+    ) : Filter("_tags", negates, variant) {
 
-        override val expression = "_tags:$attribute"
+        override val expression = "$attribute:$value"
     }
 
     data class Comparison(
