@@ -145,6 +145,7 @@ class TestFilterHelper {
         val filterC = Filter.Comparison("attributeC", NumericOperator.Greater, 10.0, variant = "variantA")
 
         helper.addFilterAnd(filterA, filterB, filterC)
+        assertEquals(listOf(filterA, filterC), helper.getVariant("variantA"))
         assertEquals("attributeA:valueA AND attributeB:true AND attributeC > 10.0", helper.build())
         helper.clear("variantA")
         assertEquals("attributeB:true", helper.build())

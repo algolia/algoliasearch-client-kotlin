@@ -127,7 +127,7 @@ class FilterHelper {
         return this
     }
 
-    fun get(variant: String): List<Filter> {
+    fun getVariant(variant: String): List<Filter> {
         return filters.flatMap {
             it.filter { it.variant == variant }
         }
