@@ -144,4 +144,19 @@ class TestFilterHelper {
         helper.clear("variantA")
         assertEquals("attributeB:true", helper.build())
     }
+
+    @Test
+    fun replaceAttribute() {
+        val helper = FilterHelper()
+        val filterA = Filter.Facet("attributeA", "valueA", variant = "variantA")
+        val filterB = Filter.Boolean("attributeA", true, variant = "variantB")
+        val filterC = Filter.Comparison("attributeA", NumericOperator.Greater, 10.0, variant = "variantA")
+
+        helper.addFilterAnd(filterA, filterB, filterC)
+        assertEquals("attributeA:valueA AND attributeA:true AND attributeA > 10.0", helper.build())
+        helper.replaceAttribute("attributeA", "attributeB")
+        assertEquals("attributeB:valueA AND attributeB:true AND attributeB > 10.0", helper.build())
+        helper.replaceAttribute("attributeB", "attributeC", "variantA")
+        assertEquals("attributeC:valueA AND attributeB:true AND attributeC > 10.0", helper.build())
+    }
 }

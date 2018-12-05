@@ -90,6 +90,35 @@ class FilterHelper {
         filters.removeAll { it.isEmpty() }
     }
 
+    /**
+     *  If a variant is specified, only filter using this variant will have its attribute replaced
+     */
+    fun replaceAttribute(attribute: String, replacement: String, variant: String? = null) {
+        filters.forEach { filters ->
+            val list =
+                filters.filter {
+                    it.attribute == attribute && if (variant != null) variant == it.variant else true
+                }
+
+            list.forEach {
+                val index = filters.indexOf(it)
+
+                filters.removeAt(index)
+                filters.add(index, modifyAttribute(it, replacement))
+            }
+        }
+    }
+
+    private fun modifyAttribute(filter: Filter, attribute: String): Filter {
+        return when (filter) {
+            is Filter.Comparison -> filter.copy(attribute = attribute)
+            is Filter.Tag -> filter
+            is Filter.Boolean -> filter.copy(attribute = attribute)
+            is Filter.Facet -> filter.copy(attribute = attribute)
+            is Filter.Range -> filter.copy(attribute = attribute)
+        }
+    }
+
     fun clear() {
         filters.clear()
     }
