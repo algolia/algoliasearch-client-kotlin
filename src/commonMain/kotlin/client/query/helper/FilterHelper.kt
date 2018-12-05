@@ -78,11 +78,16 @@ class FilterHelper {
     fun remove(vararg filter: Filter): FilterHelper {
         filter.forEach {
             filters.forEach { filters -> filters.remove(it) }
-            val clean = filters.filterNot { it.isEmpty() }
-            filters.clear()
-            filters.addAll(clean)
         }
+        filters.removeAll { it.isEmpty() }
         return this
+    }
+
+    fun clear(variant: String) {
+        filters.forEach {
+            it.removeAll { it.variant == variant }
+        }
+        filters.removeAll { it.isEmpty() }
     }
 
     fun clear() {

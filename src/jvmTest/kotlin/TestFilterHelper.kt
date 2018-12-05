@@ -131,4 +131,17 @@ class TestFilterHelper {
         helper.clear()
         assertEquals("", helper.build())
     }
+
+    @Test
+    fun variant() {
+        val helper = FilterHelper()
+        val filterA = Filter.Facet("attributeA", "valueA", variant = "variantA")
+        val filterB = Filter.Boolean("attributeB", true, variant = "variantB")
+        val filterC = Filter.Comparison("attributeC", NumericOperator.Greater, 10.0, variant = "variantA")
+
+        helper.addFilterAnd(filterA, filterB, filterC)
+        assertEquals("attributeA:valueA AND attributeB:true AND attributeC > 10.0", helper.build())
+        helper.clear("variantA")
+        assertEquals("attributeB:true", helper.build())
+    }
 }
