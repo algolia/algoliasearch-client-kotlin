@@ -41,6 +41,15 @@ class FilterHelper {
     }
 
     /**
+     * You can only create a disjunctive group of filters with exactly the same [Filter] type.
+     * Public methods [addFilterOr] with the same [Filter] parameters in the method signature enforce this rule.
+     */
+    private fun addDisjunctiveGroupInternal(vararg filter: Filter): FilterHelper {
+        filters += mutableListOf(*filter)
+        return this
+    }
+
+    /**
      * @param first The first [Filter.Facet].
      * @param second the second [Filter.Facet].
      * @param filter Between 0 and N other [Filter.Facet].
@@ -105,11 +114,18 @@ class FilterHelper {
     }
 
     /**
-     * You can only create a disjunctive group of filters with exactly the same [Filter] type.
-     * Public methods [addFilterOr] with the same [Filter] parameters in the method signature enforce this rule.
+     * You can only replace a [Filter] by another [Filter] of exactly the same type.
+     * Public methods [replace] with the same [Filter] parameters in the method signature enforce this rule.
      */
-    private fun addDisjunctiveGroupInternal(vararg filter: Filter): FilterHelper {
-        filters += mutableListOf(*filter)
+    private fun replaceInternal(filter: Filter, replacement: Filter): FilterHelper {
+        filters.forEach { filters ->
+            val index = filters.indexOf(filter)
+
+            if (index != -1) {
+                filters.removeAt(index)
+                filters.add(index, replacement)
+            }
+        }
         return this
     }
 
@@ -163,18 +179,6 @@ class FilterHelper {
         return replaceInternal(filter, replacement)
     }
 
-    private fun replaceInternal(filter: Filter, replacement: Filter): FilterHelper {
-        filters.forEach { filters ->
-            val index = filters.indexOf(filter)
-
-            if (index != -1) {
-                filters.removeAt(index)
-                filters.add(index, replacement)
-            }
-        }
-        return this
-    }
-
     /**
      * @param filter The [Filter] to remove.
      *
@@ -189,6 +193,25 @@ class FilterHelper {
     }
 
     /**
+     * Remove all [Filter] from the [filters] list.
+     */
+    fun clear(): FilterHelper {
+        filters.clear()
+        return this
+    }
+
+    /**
+     * @param variant The [Filter.variant] used for matching.
+     *
+     * Retrieve all [Filter] in the [filters] list matching the [variant].
+     */
+    fun getVariant(variant: String): List<Filter> {
+        return filters.flatMap {
+            it.filter { it.variant == variant }
+        }
+    }
+
+    /**
      * @param variant The variant matching [Filter.variant].
      *
      * Remove all [Filter] in [filters] that match the [variant].
@@ -200,17 +223,6 @@ class FilterHelper {
         filters.removeAll { it.isEmpty() }
         return this
     }
-
-//    val helper = FilterHelper()
-//    val filterA = Filter.Facet("attributeA", "valueA", variant = "variantA")
-//    val filterB = Filter.Boolean("attributeB", true, variant = "variantB")
-//    val filterC = Filter.Comparison("attributeC", NumericOperator.Greater, 10.0, variant = "variantA")
-//
-//    helper.addFilterAnd(filterA, filterB, filterC)
-//    assertEquals(listOf(filterA, filterC), helper.getVariant("variantA"))
-//    assertEquals("attributeA:valueA AND attributeB:true AND attributeC > 10.0", helper.build())
-//    helper.clear("variantA")
-//    assertEquals("attributeB:true", helper.build())
 
     /**
      * @param attribute The attribute matching [Filter.attribute].
@@ -265,25 +277,6 @@ class FilterHelper {
             is Filter.Boolean -> filter.copy(attribute = attribute)
             is Filter.Facet -> filter.copy(attribute = attribute)
             is Filter.Range -> filter.copy(attribute = attribute)
-        }
-    }
-
-    /**
-     * Remove all [Filter] from the [filters] list.
-     */
-    fun clear(): FilterHelper {
-        filters.clear()
-        return this
-    }
-
-    /**
-     * @param variant The [Filter.variant] used for matching.
-     *
-     * Retrieve all [Filter] in the [filters] list matching the [variant].
-     */
-    fun getVariant(variant: String): List<Filter> {
-        return filters.flatMap {
-            it.filter { it.variant == variant }
         }
     }
 
