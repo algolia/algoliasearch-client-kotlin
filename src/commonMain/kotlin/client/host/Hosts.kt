@@ -25,7 +25,7 @@ internal class Hosts(
         request: suspend (String) -> HttpResponse
     ): HttpResponse {
         if (statuses.areStatusExpired(hostStatusExpirationDelay)) {
-            for (index in statuses.indices)    {
+            for (index in statuses.indices) {
                 statuses[index] = Status.Unknown to 0L
             }
         }

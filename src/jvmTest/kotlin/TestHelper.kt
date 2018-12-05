@@ -1,4 +1,3 @@
-
 import client.query.Query
 import client.query.helper.FacetHelper
 import org.junit.Test
