@@ -1,5 +1,6 @@
 import client.query.Filter
 import client.query.NumericOperator
+import client.query.Query
 import client.query.helper.FilterHelper
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -9,6 +10,17 @@ import kotlin.test.assertEquals
 
 @RunWith(JUnit4::class)
 class TestFilterHelper {
+
+    @Test
+    fun assign() {
+        val query = Query()
+        val helper = FilterHelper()
+
+        helper
+            .addFilterAnd(Filter.Facet("attributeA", "valueA"))
+            .buildAndAssign(query)
+        assertEquals("attributeA:valueA", query.filters)
+    }
 
     @Test
     fun oneConjunctive() {

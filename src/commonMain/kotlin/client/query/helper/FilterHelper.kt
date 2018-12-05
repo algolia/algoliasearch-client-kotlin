@@ -133,7 +133,7 @@ class FilterHelper {
         }
     }
 
-    fun assign(vararg query: Query) {
+    fun buildAndAssign(vararg query: Query) {
         query.forEach {
             it.filters = build()
         }
