@@ -44,27 +44,27 @@ class FilterHelper {
         return this
     }
 
-    fun replace(filter: Filter.Facet, replacement: Filter.Facet) {
-        replaceInternal(filter, replacement)
+    fun replace(filter: Filter.Facet, replacement: Filter.Facet): FilterHelper {
+        return replaceInternal(filter, replacement)
     }
 
-    fun replace(filter: Filter.Boolean, replacement: Filter.Boolean) {
-        replaceInternal(filter, replacement)
+    fun replace(filter: Filter.Boolean, replacement: Filter.Boolean): FilterHelper {
+        return replaceInternal(filter, replacement)
     }
 
-    fun replace(filter: Filter.Tag, replacement: Filter.Tag) {
-        replaceInternal(filter, replacement)
+    fun replace(filter: Filter.Tag, replacement: Filter.Tag): FilterHelper {
+        return replaceInternal(filter, replacement)
     }
 
-    fun replace(filter: Filter.Comparison, replacement: Filter.Comparison) {
-        replaceInternal(filter, replacement)
+    fun replace(filter: Filter.Comparison, replacement: Filter.Comparison): FilterHelper {
+        return replaceInternal(filter, replacement)
     }
 
-    fun replace(filter: Filter.Range, replacement: Filter.Range) {
-        replaceInternal(filter, replacement)
+    fun replace(filter: Filter.Range, replacement: Filter.Range): FilterHelper {
+        return replaceInternal(filter, replacement)
     }
 
-    private fun replaceInternal(filter: Filter, replacement: Filter) {
+    private fun replaceInternal(filter: Filter, replacement: Filter): FilterHelper {
         filters.forEach { filters ->
             val index = filters.indexOf(filter)
 
@@ -73,6 +73,7 @@ class FilterHelper {
                 filters.add(index, replacement)
             }
         }
+        return this
     }
 
     fun remove(vararg filter: Filter): FilterHelper {
@@ -83,17 +84,18 @@ class FilterHelper {
         return this
     }
 
-    fun clear(variant: String) {
+    fun clear(variant: String): FilterHelper {
         filters.forEach {
             it.removeAll { it.variant == variant }
         }
         filters.removeAll { it.isEmpty() }
+        return this
     }
 
     /**
      *  If a variant is specified, only filter using this variant will have its attribute replaced
      */
-    fun replaceAttribute(attribute: String, replacement: String, variant: String? = null) {
+    fun replaceAttribute(attribute: String, replacement: String, variant: String? = null): FilterHelper {
         filters.forEach { filters ->
             val list =
                 filters.filter {
@@ -107,6 +109,7 @@ class FilterHelper {
                 filters.add(index, modifyAttribute(it, replacement))
             }
         }
+        return this
     }
 
     private fun modifyAttribute(filter: Filter, attribute: String): Filter {
@@ -119,8 +122,9 @@ class FilterHelper {
         }
     }
 
-    fun clear() {
+    fun clear(): FilterHelper {
         filters.clear()
+        return this
     }
 
     fun get(variant: String): List<Filter> {
@@ -129,7 +133,7 @@ class FilterHelper {
         }
     }
 
-    fun build(vararg query: Query) {
+    fun assign(vararg query: Query) {
         query.forEach {
             it.filters = build()
         }

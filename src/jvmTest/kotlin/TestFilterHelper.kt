@@ -68,13 +68,15 @@ class TestFilterHelper {
         val booleanA = Filter.Boolean("attributeB", false)
         val booleanB = Filter.Boolean("attributeC", true, true)
 
-        helper.addFilterAnd(facet)
-        helper.addFilterOr(booleanA, booleanB)
+        helper
+            .addFilterAnd(facet)
+            .addFilterOr(booleanA, booleanB)
         assertEquals("attributeA:valueA AND (attributeB:false OR NOT attributeC:true)", helper.build())
         helper.remove(booleanA)
         assertEquals("attributeA:valueA AND NOT attributeC:true", helper.build())
-        helper.remove(booleanA, booleanB)
-        helper.addFilterOr(booleanA, booleanB)
+        helper
+            .remove(booleanA, booleanB)
+            .addFilterOr(booleanA, booleanB)
         assertEquals("attributeA:valueA AND (attributeB:false OR NOT attributeC:true)", helper.build())
     }
 
@@ -86,8 +88,9 @@ class TestFilterHelper {
         val booleanA = Filter.Boolean("attributeC", false)
         val booleanB = Filter.Boolean("attributeD", true, true)
 
-        helper.addFilterOr(facetA, facetB)
-        helper.addFilterOr(booleanA, booleanB)
+        helper
+            .addFilterOr(facetA, facetB)
+            .addFilterOr(booleanA, booleanB)
         assertEquals(
             "(attributeA:valueA OR attributeB:valueB) AND (attributeC:false OR NOT attributeD:true)",
             helper.build()
@@ -103,8 +106,9 @@ class TestFilterHelper {
         val facetB = Filter.Facet("attributeB", "valueB")
         val facetC = Filter.Facet("attributeC", "valueC")
 
-        helper.addFilterAnd(facetA, facetB)
-        helper.addFilterOr(facetA, facetB)
+        helper
+            .addFilterAnd(facetA, facetB)
+            .addFilterOr(facetA, facetB)
         assertEquals(
             "attributeA:valueA AND attributeB:valueB AND (attributeA:valueA OR attributeB:valueB)",
             helper.build()
@@ -122,8 +126,9 @@ class TestFilterHelper {
         val facetA = Filter.Facet("attributeA", "valueA")
         val facetB = Filter.Facet("attributeB", "valueB")
 
-        helper.addFilterAnd(facetA, facetB)
-        helper.addFilterOr(facetA, facetB)
+        helper
+            .addFilterAnd(facetA, facetB)
+            .addFilterOr(facetA, facetB)
         assertEquals(
             "attributeA:valueA AND attributeB:valueB AND (attributeA:valueA OR attributeB:valueB)",
             helper.build()
