@@ -85,10 +85,8 @@ class FilterHelper {
         return this
     }
 
-    fun clear(variant: String) {
-        filters.forEach {
-            it.removeAll { it.variant == variant }
-        }
+    fun clear() {
+        filters.clear()
     }
 
     fun get(variant: String): List<Filter> {
@@ -97,13 +95,13 @@ class FilterHelper {
         }
     }
 
-    fun assign(vararg query: Query) {
+    fun build(vararg query: Query) {
         query.forEach {
-            it.filters = raw()
+            it.filters = build()
         }
     }
 
-    fun raw(): String {
+    fun build(): String {
         return filters.joinToString(separator = " AND ") { group ->
             val prefix = if (group.size == 1 || filters.size == 1) "" else "("
             val postfix = if (group.size == 1 || filters.size == 1) "" else ")"
