@@ -9,7 +9,7 @@ sealed class Filter(
 
     protected abstract val expression: String
 
-    fun raw() = if (negates) "NOT $expression" else expression
+    fun build() = if (negates) "NOT $expression" else expression
 
     data class Facet(
         override val attribute: String,

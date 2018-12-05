@@ -313,7 +313,7 @@ class FilterHelper {
             val postfix = if (group.size == 1 || filters.size == 1) "" else ")"
 
             group.joinToString(prefix = prefix, postfix = postfix, separator = " OR ") {
-                it.raw()
+                it.build()
             }
         }
     }
