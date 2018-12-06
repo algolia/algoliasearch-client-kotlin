@@ -1,5 +1,5 @@
-import client.query.NumericOperator
-import client.query.Filter
+import client.query.helper.NumericOperator
+import client.query.helper.Filter
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

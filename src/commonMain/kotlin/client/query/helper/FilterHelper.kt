@@ -1,6 +1,5 @@
 package client.query.helper
 
-import client.query.Filter
 import client.query.Query
 
 /**

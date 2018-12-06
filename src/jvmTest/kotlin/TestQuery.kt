@@ -1,4 +1,5 @@
 import client.query.*
+import client.query.helper.NumericOperator
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

@@ -1,4 +1,4 @@
-package client.query
+package client.query.helper
 
 
 sealed class Filter(
