@@ -8,7 +8,6 @@ package client.query.helper
 class FilterBuilder {
 
     /**
-     *
      * To represent our SQL-like syntax of filters, we use a nested array of [Filter].
      * Each nested MutableList<Filter> represents a group. If this group contains two or more elements,
      * it will be considered  as a disjunctive group (Operator OR).
@@ -31,149 +30,132 @@ class FilterBuilder {
      * Adding several filters will result in the following expression: FilterA AND FilterB AND ...
      */
     fun and(vararg filter: Filter): FilterBuilder {
-        filter.forEach {
-            filters += mutableListOf(it)
-        }
+        filters.and(*filter)
         return this
     }
 
     /**
-     * You can only create a disjunctive group of filters with exactly the same [Filter] type.
-     * Public methods [or] with the same [Filter] parameters in the method signature enforce this rule.
+     * @param first The first [FilterFacet].
+     * @param second the second [FilterFacet].
+     * @param filter Between 0 and N other [FilterFacet].
+     *
+     * Add at least two [FilterFacet] to the [filters] list as a disjunctive group.
+     * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    private fun orInternal(vararg filter: Filter): FilterBuilder {
-        filters += mutableListOf(*filter)
+    fun or(first: FilterFacet, second: FilterFacet, vararg filter: FilterFacet): FilterBuilder {
+        filters.or(first, second, *filter)
         return this
     }
 
     /**
-     * @param first The first [Filter.Facet].
-     * @param second the second [Filter.Facet].
-     * @param filter Between 0 and N other [Filter.Facet].
+     * @param first The first [FilterFacet].
+     * @param second the second [FilterBoolean].
+     * @param filter Between 0 and N other [FilterBoolean].
      *
-     * Add at least two [Filter.Facet] to the [filters] list as a disjunctive group.
+     * Add at least two [FilterBoolean] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun or(first: Filter.Facet, second: Filter.Facet, vararg filter: Filter.Facet): FilterBuilder {
-        return orInternal(first, second, *filter)
+    fun or(first: FilterBoolean, second: FilterBoolean, vararg filter: FilterBoolean): FilterBuilder {
+        filters.or(first, second, *filter)
+        return this
     }
 
     /**
-     * @param first The first [Filter.Facet].
-     * @param second the second [Filter.Boolean].
-     * @param filter Between 0 and N other [Filter.Boolean].
+     * @param first The first [FilterTag].
+     * @param second the second [FilterTag].
+     * @param filter Between 0 and N other [FilterTag].
      *
-     * Add at least two [Filter.Boolean] to the [filters] list as a disjunctive group.
+     * Add at least two [FilterTag] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun or(first: Filter.Boolean, second: Filter.Boolean, vararg filter: Filter.Boolean): FilterBuilder {
-        return orInternal(first, second, *filter)
+    fun or(first: FilterTag, second: FilterTag, vararg filter: FilterTag): FilterBuilder {
+        filters.or(first, second, *filter)
+        return this
     }
 
     /**
-     * @param first The first [Filter.Tag].
-     * @param second the second [Filter.Tag].
-     * @param filter Between 0 and N other [Filter.Tag].
+     * @param first The first [FilterComparison].
+     * @param second the second [FilterComparison].
+     * @param filter Between 0 and N other [FilterComparison].
      *
-     * Add at least two [Filter.Tag] to the [filters] list as a disjunctive group.
-     * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
-     */
-    fun or(first: Filter.Tag, second: Filter.Range, vararg filter: Filter.Tag): FilterBuilder {
-        return orInternal(first, second, *filter)
-    }
-
-    /**
-     * @param first The first [Filter.Comparison].
-     * @param second the second [Filter.Comparison].
-     * @param filter Between 0 and N other [Filter.Comparison].
-     *
-     * Add at least two [Filter.Comparison] to the [filters] list as a disjunctive group.
+     * Add at least two [FilterComparison] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
     fun or(
-        first: Filter.Comparison,
-        second: Filter.Comparison,
-        vararg filter: Filter.Comparison
+        first: FilterComparison,
+        second: FilterComparison,
+        vararg filter: FilterComparison
     ): FilterBuilder {
-        return orInternal(first, second, *filter)
-    }
-
-    /**
-     * @param first The first [Filter.Range].
-     * @param second the second [Filter.Range].
-     * @param filter Between 0 and N other [Filter.Range].
-     *
-     * Add at least two [Filter.Range] to the [filters] list as a disjunctive group.
-     * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
-     */
-    fun or(first: Filter.Range, second: Filter.Range, vararg filter: Filter.Range): FilterBuilder {
-        return orInternal(first, second, *filter)
-    }
-
-    /**
-     * You can only replace a [Filter] by another [Filter] of exactly the same type.
-     * Public methods [replace] with the same [Filter] parameters in the method signature enforce this rule.
-     */
-    private fun replaceInternal(filter: Filter, replacement: Filter): FilterBuilder {
-        filters.forEach { filters ->
-            val index = filters.indexOf(filter)
-
-            if (index != -1) {
-                filters.removeAt(index)
-                filters.add(index, replacement)
-            }
-        }
+        filters.or(first, second, *filter)
         return this
     }
 
     /**
-     * @param filter The [Filter.Facet] that will be replaced.
-     * @param replacement The [Filter.Facet] used as a replacement.
+     * @param first The first [FilterRange].
+     * @param second the second [FilterRange].
+     * @param filter Between 0 and N other [FilterRange].
      *
-     * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
+     * Add at least two [FilterRange] to the [filters] list as a disjunctive group.
+     * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun replace(filter: Filter.Facet, replacement: Filter.Facet): FilterBuilder {
-        return replaceInternal(filter, replacement)
+    fun or(first: FilterRange, second: FilterRange, vararg filter: FilterRange): FilterBuilder {
+        filters.or(first, second, *filter)
+        return this
     }
 
     /**
-     * @param filter The [Filter.Boolean] that will be replaced.
-     * @param replacement The [Filter.Boolean] used as a replacement.
+     * @param filter The [FilterFacet] that will be replaced.
+     * @param replacement The [FilterFacet] used as a replacement.
      *
      * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
      */
-    fun replace(filter: Filter.Boolean, replacement: Filter.Boolean): FilterBuilder {
-        return replaceInternal(filter, replacement)
+    fun replace(filter: FilterFacet, replacement: FilterFacet): FilterBuilder {
+        filters.replace(filter, replacement)
+        return this
     }
 
     /**
-     * @param filter The [Filter.Tag] that will be replaced.
-     * @param replacement The [Filter.Tag] used as a replacement.
+     * @param filter The [FilterBoolean] that will be replaced.
+     * @param replacement The [FilterBoolean] used as a replacement.
      *
      * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
      */
-    fun replace(filter: Filter.Tag, replacement: Filter.Tag): FilterBuilder {
-        return replaceInternal(filter, replacement)
+    fun replace(filter: FilterBoolean, replacement: FilterBoolean): FilterBuilder {
+        filters.replace(filter, replacement)
+        return this
     }
 
     /**
-     * @param filter The [Filter.Comparison] that will be replaced.
-     * @param replacement The [Filter.Comparison] used as a replacement.
+     * @param filter The [FilterTag] that will be replaced.
+     * @param replacement The [FilterTag] used as a replacement.
      *
      * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
      */
-    fun replace(filter: Filter.Comparison, replacement: Filter.Comparison): FilterBuilder {
-        return replaceInternal(filter, replacement)
+    fun replace(filter: FilterTag, replacement: FilterTag): FilterBuilder {
+        filters.replace(filter, replacement)
+        return this
     }
 
     /**
-     * @param filter The [Filter.Range] that will be replaced.
-     * @param replacement The [Filter.Range] used as a replacement.
+     * @param filter The [FilterComparison] that will be replaced.
+     * @param replacement The [FilterComparison] used as a replacement.
+     *
+     * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
+     */
+    fun replace(filter: FilterComparison, replacement: FilterComparison): FilterBuilder {
+        filters.replace(filter, replacement)
+        return this
+    }
+
+    /**
+     * @param filter The [FilterRange] that will be replaced.
+     * @param replacement The [FilterRange] used as a replacement.
      *
      * Search the [filters] list for the [filter] that match, and replace it with [replacement].
      */
-    fun replace(filter: Filter.Range, replacement: Filter.Range): FilterBuilder {
-        return replaceInternal(filter, replacement)
+    fun replace(filter: FilterRange, replacement: FilterRange): FilterBuilder {
+        filters.replace(filter, replacement)
+        return this
     }
 
     /**
@@ -182,18 +164,7 @@ class FilterBuilder {
      * Remove all occurrences of [filter] inside the [filters] list.
      */
     fun remove(vararg filter: Filter): FilterBuilder {
-        filter.forEach {
-            filters.forEach { filters -> filters.remove(it) }
-        }
-        filters.removeAll { it.isEmpty() }
-        return this
-    }
-
-    /**
-     * Remove all [Filter] from the [filters] list.
-     */
-    fun clear(): FilterBuilder {
-        filters.clear()
+        filters.remove(*filter)
         return this
     }
 
@@ -203,21 +174,21 @@ class FilterBuilder {
      * Retrieve all [Filter] in the [filters] list matching the [group].
      */
     fun getFilters(group: Group): List<Filter> {
-        return filters.flatMap {
-            it.filter { it.group == group }
-        }
+        return filters.getFilters(group)
     }
 
     /**
      * @param group The group matching [Filter.group].
      *
-     * Remove all [Filter] in [filters] that match the [group].
+     * Remove all [OptionalFilter] in [filters].
+     * You can specify a [group] to only remove [OptionalFilter] that matches.
      */
-    fun clear(group: Group): FilterBuilder {
-        filters.forEach {
-            it.removeAll { it.group == group }
+    fun clear(group: Group? = null): FilterBuilder {
+        if (group != null) {
+            filters.clear(group)
+        } else {
+            filters.clear()
         }
-        filters.removeAll { it.isEmpty() }
         return this
     }
 
@@ -235,8 +206,8 @@ class FilterBuilder {
      * ```
      * val helper = FilterBuilder()
      *
-     * val filterA = Filter.Facet("attributeA", "valueA", "groupA")
-     * val filterB = Filter.Facet("attributeA", "valueB", "groupB")
+     * val filterA = FilterFacet("attributeA", "valueA", "groupA")
+     * val filterB = FilterFacet("attributeA", "valueB", "groupB")
      *
      * helper.and(filterA, filterB)
      * assertEquals("attributeA:valueA AND attributeA:valueB", helper.build())
@@ -251,30 +222,8 @@ class FilterBuilder {
      * In this example, if no group would have been specified (group = null), both filters would have been affected.
      */
     fun replaceAttribute(attribute: Attribute, replacement: Attribute, group: Group? = null): FilterBuilder {
-        filters.forEach { filters ->
-            val list =
-                filters.filter {
-                    it.attribute == attribute && if (group != null) group == it.group else true
-                }
-
-            list.forEach {
-                val index = filters.indexOf(it)
-
-                filters.removeAt(index)
-                filters.add(index, modifyAttribute(it, replacement))
-            }
-        }
+        filters.replaceAttribute(attribute, replacement, group)
         return this
-    }
-
-    private fun modifyAttribute(filter: Filter, attribute: Attribute): Filter {
-        return when (filter) {
-            is Filter.Comparison -> filter.copy(attribute = attribute)
-            is Filter.Tag -> filter
-            is Filter.Boolean -> filter.copy(attribute = attribute)
-            is Filter.Facet -> filter.copy(attribute = attribute)
-            is Filter.Range -> filter.copy(attribute = attribute)
-        }
     }
 
     /**
