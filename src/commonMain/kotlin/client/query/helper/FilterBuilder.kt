@@ -7,7 +7,7 @@ import client.query.Query
  *
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
  */
-class FilterHelper {
+class FilterBuilder {
 
     /**
      *
@@ -32,7 +32,7 @@ class FilterHelper {
      * Add one or several conjunctive [Filter] to the [filters] list.
      * Adding several filters will result in the following expression: FilterA AND FilterB AND ...
      */
-    fun and(vararg filter: Filter): FilterHelper {
+    fun and(vararg filter: Filter): FilterBuilder {
         filter.forEach {
             filters += mutableListOf(it)
         }
@@ -43,7 +43,7 @@ class FilterHelper {
      * You can only create a disjunctive group of filters with exactly the same [Filter] type.
      * Public methods [or] with the same [Filter] parameters in the method signature enforce this rule.
      */
-    private fun orInternal(vararg filter: Filter): FilterHelper {
+    private fun orInternal(vararg filter: Filter): FilterBuilder {
         filters += mutableListOf(*filter)
         return this
     }
@@ -56,7 +56,7 @@ class FilterHelper {
      * Add at least two [Filter.Facet] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun or(first: Filter.Facet, second: Filter.Facet, vararg filter: Filter.Facet): FilterHelper {
+    fun or(first: Filter.Facet, second: Filter.Facet, vararg filter: Filter.Facet): FilterBuilder {
         return orInternal(first, second, *filter)
     }
 
@@ -68,7 +68,7 @@ class FilterHelper {
      * Add at least two [Filter.Boolean] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun or(first: Filter.Boolean, second: Filter.Boolean, vararg filter: Filter.Boolean): FilterHelper {
+    fun or(first: Filter.Boolean, second: Filter.Boolean, vararg filter: Filter.Boolean): FilterBuilder {
         return orInternal(first, second, *filter)
     }
 
@@ -80,7 +80,7 @@ class FilterHelper {
      * Add at least two [Filter.Tag] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun or(first: Filter.Tag, second: Filter.Range, vararg filter: Filter.Tag): FilterHelper {
+    fun or(first: Filter.Tag, second: Filter.Range, vararg filter: Filter.Tag): FilterBuilder {
         return orInternal(first, second, *filter)
     }
 
@@ -96,7 +96,7 @@ class FilterHelper {
         first: Filter.Comparison,
         second: Filter.Comparison,
         vararg filter: Filter.Comparison
-    ): FilterHelper {
+    ): FilterBuilder {
         return orInternal(first, second, *filter)
     }
 
@@ -108,7 +108,7 @@ class FilterHelper {
      * Add at least two [Filter.Range] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun or(first: Filter.Range, second: Filter.Range, vararg filter: Filter.Range): FilterHelper {
+    fun or(first: Filter.Range, second: Filter.Range, vararg filter: Filter.Range): FilterBuilder {
         return orInternal(first, second, *filter)
     }
 
@@ -116,7 +116,7 @@ class FilterHelper {
      * You can only replace a [Filter] by another [Filter] of exactly the same type.
      * Public methods [replace] with the same [Filter] parameters in the method signature enforce this rule.
      */
-    private fun replaceInternal(filter: Filter, replacement: Filter): FilterHelper {
+    private fun replaceInternal(filter: Filter, replacement: Filter): FilterBuilder {
         filters.forEach { filters ->
             val index = filters.indexOf(filter)
 
@@ -134,7 +134,7 @@ class FilterHelper {
      *
      * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
      */
-    fun replace(filter: Filter.Facet, replacement: Filter.Facet): FilterHelper {
+    fun replace(filter: Filter.Facet, replacement: Filter.Facet): FilterBuilder {
         return replaceInternal(filter, replacement)
     }
 
@@ -144,7 +144,7 @@ class FilterHelper {
      *
      * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
      */
-    fun replace(filter: Filter.Boolean, replacement: Filter.Boolean): FilterHelper {
+    fun replace(filter: Filter.Boolean, replacement: Filter.Boolean): FilterBuilder {
         return replaceInternal(filter, replacement)
     }
 
@@ -154,7 +154,7 @@ class FilterHelper {
      *
      * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
      */
-    fun replace(filter: Filter.Tag, replacement: Filter.Tag): FilterHelper {
+    fun replace(filter: Filter.Tag, replacement: Filter.Tag): FilterBuilder {
         return replaceInternal(filter, replacement)
     }
 
@@ -164,7 +164,7 @@ class FilterHelper {
      *
      * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
      */
-    fun replace(filter: Filter.Comparison, replacement: Filter.Comparison): FilterHelper {
+    fun replace(filter: Filter.Comparison, replacement: Filter.Comparison): FilterBuilder {
         return replaceInternal(filter, replacement)
     }
 
@@ -174,7 +174,7 @@ class FilterHelper {
      *
      * Search the [filters] list for the [filter] that match, and replace it with [replacement].
      */
-    fun replace(filter: Filter.Range, replacement: Filter.Range): FilterHelper {
+    fun replace(filter: Filter.Range, replacement: Filter.Range): FilterBuilder {
         return replaceInternal(filter, replacement)
     }
 
@@ -183,7 +183,7 @@ class FilterHelper {
      *
      * Remove all occurrences of [filter] inside the [filters] list.
      */
-    fun remove(vararg filter: Filter): FilterHelper {
+    fun remove(vararg filter: Filter): FilterBuilder {
         filter.forEach {
             filters.forEach { filters -> filters.remove(it) }
         }
@@ -194,7 +194,7 @@ class FilterHelper {
     /**
      * Remove all [Filter] from the [filters] list.
      */
-    fun clear(): FilterHelper {
+    fun clear(): FilterBuilder {
         filters.clear()
         return this
     }
@@ -215,7 +215,7 @@ class FilterHelper {
      *
      * Remove all [Filter] in [filters] that match the [group].
      */
-    fun clear(group: Group): FilterHelper {
+    fun clear(group: Group): FilterBuilder {
         filters.forEach {
             it.removeAll { it.group == group }
         }
@@ -235,7 +235,7 @@ class FilterHelper {
      * Example:
      *
      * ```
-     * val helper = FilterHelper()
+     * val helper = FilterBuilder()
      *
      * val filterA = Filter.Facet("attributeA", "valueA", "groupA")
      * val filterB = Filter.Facet("attributeA", "valueB", "groupB")
@@ -252,7 +252,7 @@ class FilterHelper {
      * be replaced by "attributeC".
      * In this example, if no group would have been specified (group = null), both filters would have been affected.
      */
-    fun replaceAttribute(attribute: Attribute, replacement: Attribute, group: Group? = null): FilterHelper {
+    fun replaceAttribute(attribute: Attribute, replacement: Attribute, group: Group? = null): FilterBuilder {
         filters.forEach { filters ->
             val list =
                 filters.filter {
@@ -283,11 +283,11 @@ class FilterHelper {
      * @param query One or several [Query] that will have the filters assigned to.
      *
      * Build the [filters] list into a SQL-like syntax using the [build] method,
-     * and assign it to one or several [Query].
-     * Each change to the [FilterHelper] should be followed by calling this method
+     * and assignTo it to one or several [Query].
+     * Each change to the [FilterBuilder] should be followed by calling this method
      * for changes to be taken into account by the [Query].
      */
-    fun buildAndAssign(vararg query: Query) {
+    fun assignTo(vararg query: Query) {
         query.forEach {
             it.filters = build()
         }
