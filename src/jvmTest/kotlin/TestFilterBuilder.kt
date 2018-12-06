@@ -19,12 +19,11 @@ class TestFilterBuilder {
     @Test
     fun assign() {
         val query = Query()
-        val helper = FilterBuilder()
 
-        helper
+        query.filterBuilder
             .and(Filter.Facet(attributeA, "valueA"))
-            .assignTo(query)
-        assertEquals("attributeA:valueA", query.filters)
+
+        assertEquals("attributeA:valueA", query.filterBuilder.build())
     }
 
     @Test

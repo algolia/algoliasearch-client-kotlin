@@ -1,7 +1,5 @@
 package client.query.helper
 
-import client.query.Query
-
 /**
  * For better understanding of Filters, please read the documentation linked below:
  *
@@ -276,20 +274,6 @@ class FilterBuilder {
             is Filter.Boolean -> filter.copy(attribute = attribute)
             is Filter.Facet -> filter.copy(attribute = attribute)
             is Filter.Range -> filter.copy(attribute = attribute)
-        }
-    }
-
-    /**
-     * @param query One or several [Query] that will have the filters assigned to.
-     *
-     * Build the [filters] list into a SQL-like syntax using the [build] method,
-     * and assignTo it to one or several [Query].
-     * Each change to the [FilterBuilder] should be followed by calling this method
-     * for changes to be taken into account by the [Query].
-     */
-    fun assignTo(vararg query: Query) {
-        query.forEach {
-            it.filters = build()
         }
     }
 

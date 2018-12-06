@@ -1,5 +1,7 @@
 package client.query
 
+import client.query.helper.FilterBuilder
+
 
 class Query(
     /**
@@ -419,4 +421,10 @@ class Query(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalWords/#doing-an-or-between-all-words-of-a-query]
      */
     var isEveryWordInQueryOptional: Boolean = false
+
+    /**
+     * You can modify this instance of [FilterBuilder] or assign a new one.
+     * If [filters] is null, the output of [FilterBuilder.build] will be passed to the request body of the next request.
+     */
+    var filterBuilder: FilterBuilder = FilterBuilder()
 }
