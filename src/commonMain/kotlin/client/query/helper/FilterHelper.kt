@@ -252,7 +252,7 @@ class FilterHelper {
      * be replaced by "attributeC".
      * In this example, if no group would have been specified (group = null), both filters would have been affected.
      */
-    fun replaceAttribute(attribute: String, replacement: String, group: Group? = null): FilterHelper {
+    fun replaceAttribute(attribute: Attribute, replacement: Attribute, group: Group? = null): FilterHelper {
         filters.forEach { filters ->
             val list =
                 filters.filter {
@@ -269,7 +269,7 @@ class FilterHelper {
         return this
     }
 
-    private fun modifyAttribute(filter: Filter, attribute: String): Filter {
+    private fun modifyAttribute(filter: Filter, attribute: Attribute): Filter {
         return when (filter) {
             is Filter.Comparison -> filter.copy(attribute = attribute)
             is Filter.Tag -> filter

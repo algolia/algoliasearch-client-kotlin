@@ -2,7 +2,7 @@ package client.query.helper
 
 
 sealed class Filter(
-    open val attribute: String,
+    open val attribute: Attribute,
     open val negates: kotlin.Boolean,
     open val group: Group?
 ) {
@@ -12,7 +12,7 @@ sealed class Filter(
     fun build() = if (negates) "NOT $expression" else expression
 
     data class Facet(
-        override val attribute: String,
+        override val attribute: Attribute,
         val value: String,
         override val negates: kotlin.Boolean = false,
         override val group: Group? = null
@@ -22,7 +22,7 @@ sealed class Filter(
     }
 
     data class Boolean(
-        override val attribute: String,
+        override val attribute: Attribute,
         val value: kotlin.Boolean,
         override val negates: kotlin.Boolean = false,
         override val group: Group? = null
@@ -35,13 +35,13 @@ sealed class Filter(
         val value: String,
         override val negates: kotlin.Boolean = false,
         override val group: Group? = null
-    ) : Filter("_tags", negates, group) {
+    ) : Filter(Attribute("_tags"), negates, group) {
 
         override val expression = "$attribute:$value"
     }
 
     data class Comparison(
-        override val attribute: String,
+        override val attribute: Attribute,
         val operator: NumericOperator,
         val value: Double,
         override val negates: kotlin.Boolean = false,
@@ -52,7 +52,7 @@ sealed class Filter(
     }
 
     data class Range(
-        override val attribute: String,
+        override val attribute: Attribute,
         val lowerBound: Double,
         val upperBound: Double,
         override val negates: kotlin.Boolean = false,
