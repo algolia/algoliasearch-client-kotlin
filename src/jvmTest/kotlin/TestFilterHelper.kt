@@ -22,7 +22,7 @@ class TestFilterHelper {
         val helper = FilterHelper()
 
         helper
-            .addFilterAnd(Filter.Facet(attributeA, "valueA"))
+            .and(Filter.Facet(attributeA, "valueA"))
             .buildAndAssign(query)
         assertEquals("attributeA:valueA", query.filters)
     }
@@ -32,7 +32,7 @@ class TestFilterHelper {
         val helper = FilterHelper()
         val facet = Filter.Facet(attributeA, "valueA")
 
-        helper.addFilterAnd(facet)
+        helper.and(facet)
         assertEquals("attributeA:valueA", helper.build())
         helper.remove(facet)
         assertEquals("", helper.build())
@@ -44,7 +44,7 @@ class TestFilterHelper {
         val facet = Filter.Facet(attributeA, "valueA")
         val tag = Filter.Tag("valueB")
 
-        helper.addFilterAnd(facet, tag)
+        helper.and(facet, tag)
         assertEquals("attributeA:valueA AND _tags:valueB", helper.build())
         helper.remove(facet)
         assertEquals("_tags:valueB", helper.build())
@@ -58,7 +58,7 @@ class TestFilterHelper {
         val boolean = Filter.Boolean(attributeA, true)
         val range = Filter.Range(attributeB, 5.0, 6.0, true)
 
-        helper.addFilterAnd(boolean, range)
+        helper.and(boolean, range)
         assertEquals("attributeA:true AND NOT attributeB:5.0 TO 6.0", helper.build())
         helper.remove(boolean)
         assertEquals("NOT attributeB:5.0 TO 6.0", helper.build())
@@ -72,7 +72,7 @@ class TestFilterHelper {
         val comparisonA = Filter.Comparison(attributeA, NumericOperator.NotEquals, 10.0)
         val comparisonB = Filter.Comparison(attributeB, NumericOperator.Equals, 5.0, true)
 
-        helper.addFilterOr(comparisonA, comparisonB)
+        helper.or(comparisonA, comparisonB)
         assertEquals("attributeA != 10.0 OR NOT attributeB = 5.0", helper.build())
         helper.remove(comparisonA)
         assertEquals("NOT attributeB = 5.0", helper.build())
@@ -86,14 +86,14 @@ class TestFilterHelper {
         val booleanB = Filter.Boolean(attributeC, true, true)
 
         helper
-            .addFilterAnd(facet)
-            .addFilterOr(booleanA, booleanB)
+            .and(facet)
+            .or(booleanA, booleanB)
         assertEquals("attributeA:valueA AND (attributeB:false OR NOT attributeC:true)", helper.build())
         helper.remove(booleanA)
         assertEquals("attributeA:valueA AND NOT attributeC:true", helper.build())
         helper
             .remove(booleanA, booleanB)
-            .addFilterOr(booleanA, booleanB)
+            .or(booleanA, booleanB)
         assertEquals("attributeA:valueA AND (attributeB:false OR NOT attributeC:true)", helper.build())
     }
 
@@ -106,8 +106,8 @@ class TestFilterHelper {
         val booleanB = Filter.Boolean(attributeD, true, true)
 
         helper
-            .addFilterOr(facetA, facetB)
-            .addFilterOr(booleanA, booleanB)
+            .or(facetA, facetB)
+            .or(booleanA, booleanB)
         assertEquals(
             "(attributeA:valueA OR attributeB:valueB) AND (attributeC:false OR NOT attributeD:true)",
             helper.build()
@@ -124,8 +124,8 @@ class TestFilterHelper {
         val facetC = Filter.Facet(attributeC, "valueC")
 
         helper
-            .addFilterAnd(facetA, facetB)
-            .addFilterOr(facetA, facetB)
+            .and(facetA, facetB)
+            .or(facetA, facetB)
         assertEquals(
             "attributeA:valueA AND attributeB:valueB AND (attributeA:valueA OR attributeB:valueB)",
             helper.build()
@@ -144,8 +144,8 @@ class TestFilterHelper {
         val facetB = Filter.Facet(attributeB, "valueB")
 
         helper
-            .addFilterAnd(facetA, facetB)
-            .addFilterOr(facetA, facetB)
+            .and(facetA, facetB)
+            .or(facetA, facetB)
         assertEquals(
             "attributeA:valueA AND attributeB:valueB AND (attributeA:valueA OR attributeB:valueB)",
             helper.build()
@@ -161,7 +161,7 @@ class TestFilterHelper {
         val filterB = Filter.Boolean(attributeB, true, group = groupB)
         val filterC = Filter.Comparison(attributeC, NumericOperator.Greater, 10.0, group = groupA)
 
-        helper.addFilterAnd(filterA, filterB, filterC)
+        helper.and(filterA, filterB, filterC)
         assertEquals(listOf(filterA, filterC), helper.getFilters(groupA))
         assertEquals("attributeA:valueA AND attributeB:true AND attributeC > 10.0", helper.build())
         helper.clear(groupA)
@@ -175,7 +175,7 @@ class TestFilterHelper {
         val filterB = Filter.Boolean(attributeA, true, group = groupB)
         val filterC = Filter.Comparison(attributeA, NumericOperator.Greater, 10.0, group = groupA)
 
-        helper.addFilterAnd(filterA, filterB, filterC)
+        helper.and(filterA, filterB, filterC)
         assertEquals("attributeA:valueA AND attributeA:true AND attributeA > 10.0", helper.build())
         helper.replaceAttribute(attributeA, attributeB)
         assertEquals("attributeB:valueA AND attributeB:true AND attributeB > 10.0", helper.build())

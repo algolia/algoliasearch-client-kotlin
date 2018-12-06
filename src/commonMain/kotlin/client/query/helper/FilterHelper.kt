@@ -32,7 +32,7 @@ class FilterHelper {
      * Add one or several conjunctive [Filter] to the [filters] list.
      * Adding several filters will result in the following expression: FilterA AND FilterB AND ...
      */
-    fun addFilterAnd(vararg filter: Filter): FilterHelper {
+    fun and(vararg filter: Filter): FilterHelper {
         filter.forEach {
             filters += mutableListOf(it)
         }
@@ -41,9 +41,9 @@ class FilterHelper {
 
     /**
      * You can only create a disjunctive group of filters with exactly the same [Filter] type.
-     * Public methods [addFilterOr] with the same [Filter] parameters in the method signature enforce this rule.
+     * Public methods [or] with the same [Filter] parameters in the method signature enforce this rule.
      */
-    private fun addDisjunctiveGroupInternal(vararg filter: Filter): FilterHelper {
+    private fun orInternal(vararg filter: Filter): FilterHelper {
         filters += mutableListOf(*filter)
         return this
     }
@@ -56,8 +56,8 @@ class FilterHelper {
      * Add at least two [Filter.Facet] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun addFilterOr(first: Filter.Facet, second: Filter.Facet, vararg filter: Filter.Facet): FilterHelper {
-        return addDisjunctiveGroupInternal(first, second, *filter)
+    fun or(first: Filter.Facet, second: Filter.Facet, vararg filter: Filter.Facet): FilterHelper {
+        return orInternal(first, second, *filter)
     }
 
     /**
@@ -68,8 +68,8 @@ class FilterHelper {
      * Add at least two [Filter.Boolean] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun addFilterOr(first: Filter.Boolean, second: Filter.Boolean, vararg filter: Filter.Boolean): FilterHelper {
-        return addDisjunctiveGroupInternal(first, second, *filter)
+    fun or(first: Filter.Boolean, second: Filter.Boolean, vararg filter: Filter.Boolean): FilterHelper {
+        return orInternal(first, second, *filter)
     }
 
     /**
@@ -80,8 +80,8 @@ class FilterHelper {
      * Add at least two [Filter.Tag] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun addFilterOr(first: Filter.Tag, second: Filter.Range, vararg filter: Filter.Tag): FilterHelper {
-        return addDisjunctiveGroupInternal(first, second, *filter)
+    fun or(first: Filter.Tag, second: Filter.Range, vararg filter: Filter.Tag): FilterHelper {
+        return orInternal(first, second, *filter)
     }
 
     /**
@@ -92,12 +92,12 @@ class FilterHelper {
      * Add at least two [Filter.Comparison] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun addFilterOr(
+    fun or(
         first: Filter.Comparison,
         second: Filter.Comparison,
         vararg filter: Filter.Comparison
     ): FilterHelper {
-        return addDisjunctiveGroupInternal(first, second, *filter)
+        return orInternal(first, second, *filter)
     }
 
     /**
@@ -108,8 +108,8 @@ class FilterHelper {
      * Add at least two [Filter.Range] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun addFilterOr(first: Filter.Range, second: Filter.Range, vararg filter: Filter.Range): FilterHelper {
-        return addDisjunctiveGroupInternal(first, second, *filter)
+    fun or(first: Filter.Range, second: Filter.Range, vararg filter: Filter.Range): FilterHelper {
+        return orInternal(first, second, *filter)
     }
 
     /**
@@ -240,7 +240,7 @@ class FilterHelper {
      * val filterA = Filter.Facet("attributeA", "valueA", "groupA")
      * val filterB = Filter.Facet("attributeA", "valueB", "groupB")
      *
-     * helper.addFilterAnd(filterA, filterB)
+     * helper.and(filterA, filterB)
      * assertEquals("attributeA:valueA AND attributeA:valueB", helper.build())
      *
      * helper.replaceAttribute(attribute = "attributeA", replacement = "attributeC", group = "groupA")
