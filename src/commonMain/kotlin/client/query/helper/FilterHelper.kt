@@ -200,24 +200,24 @@ class FilterHelper {
     }
 
     /**
-     * @param variant The [Filter.variant] used for matching.
+     * @param group The [Filter.group] used for matching.
      *
-     * Retrieve all [Filter] in the [filters] list matching the [variant].
+     * Retrieve all [Filter] in the [filters] list matching the [group].
      */
-    fun getVariant(variant: String): List<Filter> {
+    fun getFilters(group: Group): List<Filter> {
         return filters.flatMap {
-            it.filter { it.variant == variant }
+            it.filter { it.group == group }
         }
     }
 
     /**
-     * @param variant The variant matching [Filter.variant].
+     * @param group The group matching [Filter.group].
      *
-     * Remove all [Filter] in [filters] that match the [variant].
+     * Remove all [Filter] in [filters] that match the [group].
      */
-    fun clear(variant: String): FilterHelper {
+    fun clear(group: Group): FilterHelper {
         filters.forEach {
-            it.removeAll { it.variant == variant }
+            it.removeAll { it.group == group }
         }
         filters.removeAll { it.isEmpty() }
         return this
@@ -226,37 +226,37 @@ class FilterHelper {
     /**
      * @param attribute The attribute matching [Filter.attribute].
      * @param replacement Value used to replace the attribute that matched.
-     * @param variant A variant used for finer grained replacement.
+     * @param group A group used for finer grained replacement.
      *
      * Use this method to replace all [Filter] in the [filters] list which have the same [Filter.attribute]
-     * as the specified [attribute] with the [replacement]. If you specify a [variant],
-     * only [Filter] having a matching [Filter.variant] will have its [Filter.attribute] replaced by the [replacement].
+     * as the specified [attribute] with the [replacement]. If you specify a [group],
+     * only [Filter] having a matching [Filter.group] will have its [Filter.attribute] replaced by the [replacement].
      *
      * Example:
      *
      * ```
      * val helper = FilterHelper()
      *
-     * val filterA = Filter.Facet("attributeA", "valueA", "variantA")
-     * val filterB = Filter.Facet("attributeA", "valueB", "variantB")
+     * val filterA = Filter.Facet("attributeA", "valueA", "groupA")
+     * val filterB = Filter.Facet("attributeA", "valueB", "groupB")
      *
      * helper.addFilterAnd(filterA, filterB)
      * assertEquals("attributeA:valueA AND attributeA:valueB", helper.build())
      *
-     * helper.replaceAttribute(attribute = "attributeA", replacement = "attributeC", variant = "variantA")
+     * helper.replaceAttribute(attribute = "attributeA", replacement = "attributeC", group = "groupA")
      * assertEquals("attributeC:valueA", "attributeA:valueB", helper.build())
      *
      * ```
      *
-     * As you can see, only the filter with "variantA" was replaced, despite both filters having "attributeA" marked to
+     * As you can see, only the filter with "groupA" was replaced, despite both filters having "attributeA" marked to
      * be replaced by "attributeC".
-     * In this example, if no variant would have been specified (variant = null), both filters would have been affected.
+     * In this example, if no group would have been specified (group = null), both filters would have been affected.
      */
-    fun replaceAttribute(attribute: String, replacement: String, variant: String? = null): FilterHelper {
+    fun replaceAttribute(attribute: String, replacement: String, group: Group? = null): FilterHelper {
         filters.forEach { filters ->
             val list =
                 filters.filter {
-                    it.attribute == attribute && if (variant != null) variant == it.variant else true
+                    it.attribute == attribute && if (group != null) group == it.group else true
                 }
 
             list.forEach {

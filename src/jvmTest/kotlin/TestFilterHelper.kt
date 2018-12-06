@@ -1,7 +1,8 @@
-import client.query.helper.Filter
-import client.query.helper.NumericOperator
 import client.query.Query
+import client.query.helper.Filter
 import client.query.helper.FilterHelper
+import client.query.helper.Group
+import client.query.helper.NumericOperator
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -150,31 +151,35 @@ class TestFilterHelper {
     }
 
     @Test
-    fun variant() {
+    fun group() {
         val helper = FilterHelper()
-        val filterA = Filter.Facet("attributeA", "valueA", variant = "variantA")
-        val filterB = Filter.Boolean("attributeB", true, variant = "variantB")
-        val filterC = Filter.Comparison("attributeC", NumericOperator.Greater, 10.0, variant = "variantA")
+        val groupA = Group("groupA")
+        val groupB = Group("groupB")
+        val filterA = Filter.Facet("attributeA", "valueA", group = groupA)
+        val filterB = Filter.Boolean("attributeB", true, group = groupB)
+        val filterC = Filter.Comparison("attributeC", NumericOperator.Greater, 10.0, group = groupA)
 
         helper.addFilterAnd(filterA, filterB, filterC)
-        assertEquals(listOf(filterA, filterC), helper.getVariant("variantA"))
+        assertEquals(listOf(filterA, filterC), helper.getFilters(groupA))
         assertEquals("attributeA:valueA AND attributeB:true AND attributeC > 10.0", helper.build())
-        helper.clear("variantA")
+        helper.clear(groupA)
         assertEquals("attributeB:true", helper.build())
     }
 
     @Test
     fun replaceAttribute() {
         val helper = FilterHelper()
-        val filterA = Filter.Facet("attributeA", "valueA", variant = "variantA")
-        val filterB = Filter.Boolean("attributeA", true, variant = "variantB")
-        val filterC = Filter.Comparison("attributeA", NumericOperator.Greater, 10.0, variant = "variantA")
+        val groupA = Group("groupA")
+        val groupB = Group("groupB")
+        val filterA = Filter.Facet("attributeA", "valueA", group = groupA)
+        val filterB = Filter.Boolean("attributeA", true, group = groupB)
+        val filterC = Filter.Comparison("attributeA", NumericOperator.Greater, 10.0, group = groupA)
 
         helper.addFilterAnd(filterA, filterB, filterC)
         assertEquals("attributeA:valueA AND attributeA:true AND attributeA > 10.0", helper.build())
         helper.replaceAttribute("attributeA", "attributeB")
         assertEquals("attributeB:valueA AND attributeB:true AND attributeB > 10.0", helper.build())
-        helper.replaceAttribute("attributeB", "attributeC", "variantA")
+        helper.replaceAttribute("attributeB", "attributeC", groupA)
         assertEquals("attributeC:valueA AND attributeB:true AND attributeC > 10.0", helper.build())
     }
 }

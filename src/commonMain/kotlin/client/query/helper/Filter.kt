@@ -4,7 +4,7 @@ package client.query.helper
 sealed class Filter(
     open val attribute: String,
     open val negates: kotlin.Boolean,
-    open val variant: String?
+    open val group: Group?
 ) {
 
     protected abstract val expression: String
@@ -15,8 +15,8 @@ sealed class Filter(
         override val attribute: String,
         val value: String,
         override val negates: kotlin.Boolean = false,
-        override val variant: String? = null
-    ) : Filter(attribute, negates, variant) {
+        override val group: Group? = null
+    ) : Filter(attribute, negates, group) {
 
         override val expression = "$attribute:$value"
     }
@@ -25,8 +25,8 @@ sealed class Filter(
         override val attribute: String,
         val value: kotlin.Boolean,
         override val negates: kotlin.Boolean = false,
-        override val variant: String? = null
-    ) : Filter(attribute, negates, variant) {
+        override val group: Group? = null
+    ) : Filter(attribute, negates, group) {
 
         override val expression = "$attribute:$value"
     }
@@ -34,8 +34,8 @@ sealed class Filter(
     data class Tag(
         val value: String,
         override val negates: kotlin.Boolean = false,
-        override val variant: String? = null
-    ) : Filter("_tags", negates, variant) {
+        override val group: Group? = null
+    ) : Filter("_tags", negates, group) {
 
         override val expression = "$attribute:$value"
     }
@@ -45,8 +45,8 @@ sealed class Filter(
         val operator: NumericOperator,
         val value: Double,
         override val negates: kotlin.Boolean = false,
-        override val variant: String? = null
-    ) : Filter(attribute, negates, variant) {
+        override val group: Group? = null
+    ) : Filter(attribute, negates, group) {
 
         override val expression = "$attribute ${operator.raw} $value"
     }
@@ -56,8 +56,8 @@ sealed class Filter(
         val lowerBound: Double,
         val upperBound: Double,
         override val negates: kotlin.Boolean = false,
-        override val variant: String? = null
-    ) : Filter(attribute, negates, variant) {
+        override val group: Group? = null
+    ) : Filter(attribute, negates, group) {
 
         override val expression = "$attribute:$lowerBound TO $upperBound"
     }
