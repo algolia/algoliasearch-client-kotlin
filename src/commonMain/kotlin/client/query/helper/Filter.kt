@@ -1,11 +1,5 @@
 package client.query.helper
 
-sealed class OptionalFilter(
-    override val attribute: Attribute,
-    override val negates: kotlin.Boolean,
-    override val group: Group?
-) : Filter(attribute, negates, group)
-
 
 sealed class Filter(
     open val attribute: Attribute,
@@ -17,6 +11,12 @@ sealed class Filter(
 
     fun build() = if (negates) "NOT $expression" else expression
 }
+
+sealed class OptionalFilter(
+    override val attribute: Attribute,
+    override val negates: kotlin.Boolean,
+    override val group: Group?
+) : Filter(attribute, negates, group)
 
 data class FilterFacet(
     override val attribute: Attribute,

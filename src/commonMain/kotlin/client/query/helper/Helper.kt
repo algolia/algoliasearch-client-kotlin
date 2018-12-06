@@ -36,11 +36,13 @@ internal fun <T : Filter> Filters<T>.getFilters(group: Group): List<T> {
     }
 }
 
-internal fun <T : Filter> Filters<T>.clear(group: Group) {
-    forEach {
-        it.removeAll { it.group == group }
-    }
-    removeAll { it.isEmpty() }
+internal fun <T : Filter> Filters<T>.clear(group: Group? = null) {
+    if (group != null) {
+        forEach {
+            it.removeAll { it.group == group }
+        }
+        removeAll { it.isEmpty() }
+    } else clear()
 }
 
 internal inline fun <reified T : Filter> Filters<T>.replaceAttribute(

@@ -31,49 +31,25 @@ class OptionalFilterBuilder {
     }
 
     /**
-     * @param first The first [FilterFacet].
-     * @param second the second [FilterFacet].
-     * @param filter Between 0 and N other [FilterFacet].
+     * @param first The first [OptionalFilter].
+     * @param second the second [OptionalFilter].
+     * @param filter Between 0 and N other [OptionalFilter].
      *
-     * Add at least two [FilterFacet] to the [filters] list as a disjunctive group.
+     * Add at least two [OptionalFilter] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun or(first: FilterFacet, second: FilterFacet, vararg filter: FilterFacet): OptionalFilterBuilder {
+    fun or(first: OptionalFilter, second: OptionalFilter, vararg filter: OptionalFilter): OptionalFilterBuilder {
         filters.or(first, second, *filter)
         return this
     }
 
     /**
-     * @param first The first [FilterFacet].
-     * @param second the second [FilterBoolean].
-     * @param filter Between 0 and N other [FilterBoolean].
-     *
-     * Add at least two [FilterBoolean] to the [filters] list as a disjunctive group.
-     * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
-     */
-    fun or(first: FilterBoolean, second: FilterBoolean, vararg filter: FilterBoolean): OptionalFilterBuilder {
-        filters.or(first, second, *filter)
-        return this
-    }
-
-    /**
-     * @param filter The [FilterFacet] that will be replaced.
-     * @param replacement The [FilterFacet] used as a replacement.
+     * @param filter The [OptionalFilter] that will be replaced.
+     * @param replacement The [OptionalFilter] used as a replacement.
      *
      * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
      */
-    fun replace(filter: FilterFacet, replacement: FilterFacet): OptionalFilterBuilder {
-        filters.replace(filter, replacement)
-        return this
-    }
-
-    /**
-     * @param filter The [FilterBoolean] that will be replaced.
-     * @param replacement The [FilterBoolean] used as a replacement.
-     *
-     * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
-     */
-    fun replace(filter: FilterBoolean, replacement: FilterBoolean): OptionalFilterBuilder {
+    fun replace(filter: OptionalFilter, replacement: OptionalFilter): OptionalFilterBuilder {
         filters.replace(filter, replacement)
         return this
     }
@@ -83,8 +59,8 @@ class OptionalFilterBuilder {
      *
      * Remove all occurrences of [filter] inside the [filters] list.
      */
-    fun remove(filter: OptionalFilter): OptionalFilterBuilder {
-        filters.remove(filter)
+    fun remove(vararg filter: OptionalFilter): OptionalFilterBuilder {
+        filters.remove(*filter)
         return this
     }
 
@@ -104,11 +80,7 @@ class OptionalFilterBuilder {
      * You can specify a [group] to only remove [OptionalFilter] that matches.
      */
     fun clear(group: Group? = null): OptionalFilterBuilder {
-        if (group != null) {
-            filters.clear(group)
-        } else {
-            filters.clear()
-        }
+        filters.clear(group)
         return this
     }
 

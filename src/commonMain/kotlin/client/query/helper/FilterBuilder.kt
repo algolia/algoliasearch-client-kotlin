@@ -184,11 +184,7 @@ class FilterBuilder {
      * You can specify a [group] to only remove [OptionalFilter] that matches.
      */
     fun clear(group: Group? = null): FilterBuilder {
-        if (group != null) {
-            filters.clear(group)
-        } else {
-            filters.clear()
-        }
+        filters.clear(group)
         return this
     }
 

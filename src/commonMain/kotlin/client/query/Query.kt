@@ -1,6 +1,7 @@
 package client.query
 
 import client.query.helper.FilterBuilder
+import client.query.helper.OptionalFilterBuilder
 
 
 class Query(
@@ -427,4 +428,11 @@ class Query(
      * If [filters] is null, the output of [FilterBuilder.build] will be passed to the request body of the next request.
      */
     var filterBuilder: FilterBuilder = FilterBuilder()
+
+    /**
+     * You can modify this instance of [OptionalFilterBuilder] or assign a new one.
+     * If [optionalFilters] is null, the output of [OptionalFilterBuilder.build] will be passed to
+     * the request body of the next request.
+     */
+    var optionalFilterBuilder: OptionalFilterBuilder = OptionalFilterBuilder()
 }
