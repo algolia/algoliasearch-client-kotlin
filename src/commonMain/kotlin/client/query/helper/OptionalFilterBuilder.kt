@@ -31,15 +31,10 @@ class OptionalFilterBuilder {
     }
 
     /**
-     * @param first The first [OptionalFilter].
-     * @param second the second [OptionalFilter].
-     * @param filter Between 0 and N other [OptionalFilter].
-     *
-     * Add at least two [OptionalFilter] to the [filters] list as a disjunctive group.
-     * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
+     * @param filter One or many [OptionalFilter].
      */
-    fun or(first: OptionalFilter, second: OptionalFilter, vararg filter: OptionalFilter): OptionalFilterBuilder {
-        filters.or(first, second, *filter)
+    fun or(vararg filter: OptionalFilter): OptionalFilterBuilder {
+        filters.or(*filter)
         return this
     }
 

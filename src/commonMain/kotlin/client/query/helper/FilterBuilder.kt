@@ -35,58 +35,34 @@ class FilterBuilder {
     }
 
     /**
-     * @param first The first [FilterFacet].
-     * @param second the second [FilterFacet].
-     * @param filter Between 0 and N other [FilterFacet].
-     *
-     * Add at least two [FilterFacet] to the [filters] list as a disjunctive group.
-     * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
+     * @param filter One or many [FilterFacet].
      */
-    fun or(first: FilterFacet, second: FilterFacet, vararg filter: FilterFacet): FilterBuilder {
-        filters.or(first, second, *filter)
+    fun or(vararg filter: FilterFacet): FilterBuilder {
+        filters.or(*filter)
         return this
     }
 
     /**
-     * @param first The first [FilterFacet].
-     * @param second the second [FilterBoolean].
-     * @param filter Between 0 and N other [FilterBoolean].
-     *
-     * Add at least two [FilterBoolean] to the [filters] list as a disjunctive group.
-     * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
+     * @param filter One or many [FilterBoolean].
      */
-    fun or(first: FilterBoolean, second: FilterBoolean, vararg filter: FilterBoolean): FilterBuilder {
-        filters.or(first, second, *filter)
+    fun or(vararg filter: FilterBoolean): FilterBuilder {
+        filters.or(*filter)
         return this
     }
 
     /**
-     * @param first The first [FilterTag].
-     * @param second the second [FilterTag].
-     * @param filter Between 0 and N other [FilterTag].
-     *
-     * Add at least two [FilterTag] to the [filters] list as a disjunctive group.
-     * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
+     * @param filter One or many [FilterTag].
      */
-    fun or(first: FilterTag, second: FilterTag, vararg filter: FilterTag): FilterBuilder {
-        filters.or(first, second, *filter)
+    fun or(vararg filter: FilterTag): FilterBuilder {
+        filters.or(*filter)
         return this
     }
 
     /**
-     * @param first The first [FilterComparison].
-     * @param second the second [FilterComparison].
-     * @param filter Between 0 and N other [FilterComparison].
-     *
-     * Add at least two [FilterComparison] to the [filters] list as a disjunctive group.
-     * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
+     * @param filter One or many [FilterComparison].
      */
-    fun or(
-        first: FilterComparison,
-        second: FilterComparison,
-        vararg filter: FilterComparison
-    ): FilterBuilder {
-        filters.or(first, second, *filter)
+    fun or(vararg filter: FilterComparison): FilterBuilder {
+        filters.or(*filter)
         return this
     }
 
@@ -98,8 +74,8 @@ class FilterBuilder {
      * Add at least two [FilterRange] to the [filters] list as a disjunctive group.
      * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
      */
-    fun or(first: FilterRange, second: FilterRange, vararg filter: FilterRange): FilterBuilder {
-        filters.or(first, second, *filter)
+    fun or(vararg filter: FilterRange): FilterBuilder {
+        filters.or(*filter)
         return this
     }
 

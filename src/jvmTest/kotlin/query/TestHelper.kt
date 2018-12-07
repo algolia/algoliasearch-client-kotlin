@@ -37,9 +37,9 @@ class TestHelper {
     fun or() {
         filters().apply {
             or(filterA, filterB, filterC)
-            assertEquals(listOf(list(filterA, filterB, filterC)), this)
+            assertEquals(listOf(list(filterA, filterB), list(filterC)), this)
             or(filterD, filterE)
-            assertEquals(listOf(list(filterA, filterB, filterC), list(filterD, filterE)), this)
+            assertEquals(listOf(list(filterA, filterB), list(filterC), list(filterD), list(filterE)), this)
         }
     }
 
@@ -96,10 +96,10 @@ class TestHelper {
                 listOf(
                     list(
                         filterA.modifyAttribute(attributeB),
-                        filterB.modifyAttribute(attributeB),
-                        filterC,
-                        filterE
-                    )
+                        filterB.modifyAttribute(attributeB)
+                    ),
+                    list(filterC),
+                    list(filterE)
                 ), this
             )
             replaceAttribute(attributeB, attributeC)
@@ -107,10 +107,10 @@ class TestHelper {
                 listOf(
                     list(
                         filterA.modifyAttribute(attributeC),
-                        filterB.modifyAttribute(attributeC),
-                        filterC,
-                        filterE.modifyAttribute(attributeC)
-                    )
+                        filterB.modifyAttribute(attributeC)
+                    ),
+                    list(filterC),
+                    list(filterE.modifyAttribute(attributeC))
                 ), this
             )
         }

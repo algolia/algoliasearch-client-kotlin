@@ -9,7 +9,7 @@ internal fun <T : Filter> Filters<T>.and(vararg filter: T) {
 }
 
 internal fun <T : Filter> Filters<T>.or(vararg filter: T) {
-    this += filter.toMutableList()
+    filter.groupBy { it.attribute }.values.forEach { this += it.toMutableList() }
 }
 
 internal fun <T : Filter> Filters<T>.replace(filter: T, replacement: T) {
