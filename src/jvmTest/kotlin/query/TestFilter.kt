@@ -1,4 +1,4 @@
-
+package query
 import client.query.helper.*
 import org.junit.Test
 import org.junit.runner.RunWith

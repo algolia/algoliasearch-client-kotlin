@@ -30,16 +30,16 @@ internal fun <T : Filter> Filters<T>.remove(vararg filter: T) {
     removeAll { it.isEmpty() }
 }
 
-internal fun <T : Filter> Filters<T>.getFilters(group: Group): List<T> {
+internal fun <T : Filter> Filters<T>.getFilters(attribute: Attribute): List<T> {
     return flatMap {
-        it.filter { it.group == group }
+        it.filter { it.attribute == attribute }
     }
 }
 
-internal fun <T : Filter> Filters<T>.clear(group: Group? = null) {
-    if (group != null) {
+internal fun <T : Filter> Filters<T>.clear(attribute: Attribute? = null) {
+    if (attribute != null) {
         forEach {
-            it.removeAll { it.group == group }
+            it.removeAll { it.attribute == attribute }
         }
         removeAll { it.isEmpty() }
     } else clear()
@@ -47,13 +47,12 @@ internal fun <T : Filter> Filters<T>.clear(group: Group? = null) {
 
 internal inline fun <reified T : Filter> Filters<T>.replaceAttribute(
     attribute: Attribute,
-    replacement: Attribute,
-    group: Group? = null
+    replacement: Attribute
 ) {
 
     forEach { list ->
         val matches = list.filter {
-            it.attribute == attribute && if (group != null) group == it.group else true
+            it.attribute == attribute
         }
 
         matches.forEach {

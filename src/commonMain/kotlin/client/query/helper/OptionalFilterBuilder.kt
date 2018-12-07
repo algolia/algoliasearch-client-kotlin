@@ -65,33 +65,31 @@ class OptionalFilterBuilder {
     }
 
     /**
-     * @param group The [Filter.group] used for matching.
+     * @param attribute The [Filter.attribute] used for matching.
      *
-     * Retrieve all [OptionalFilter] in the [filters] list matching the [group].
+     * Retrieve all [OptionalFilter] in the [filters] list matching the [attribute].
      */
-    fun getFilters(group: Group): List<OptionalFilter> {
-        return filters.getFilters(group)
+    fun getFilters(attribute: Attribute): List<OptionalFilter> {
+        return filters.getFilters(attribute)
     }
 
     /**
-     * @param group The group matching [Filter.group].
+     * @param attribute The attribute matching [Filter.attribute].
      *
      * Remove all [OptionalFilter] in [filters].
-     * You can specify a [group] to only remove [OptionalFilter] that matches.
+     * You can specify a [attribute] to only remove [OptionalFilter] that matches.
      */
-    fun clear(group: Group? = null): OptionalFilterBuilder {
-        filters.clear(group)
+    fun clear(attribute: Attribute? = null): OptionalFilterBuilder {
+        filters.clear(attribute)
         return this
     }
 
     /**
      * @param attribute The attribute matching [Filter.attribute].
      * @param replacement Value used to replace the attribute that matched.
-     * @param group A group used for finer grained replacement.
      *
      * Use this method to replace all [Filter] in the [filters] list which have the same [Filter.attribute]
-     * as the specified [attribute] with the [replacement]. If you specify a [group],
-     * only [Filter] having a matching [Filter.group] will have its [Filter.attribute] replaced by the [replacement].
+     * as the specified [attribute] with the [replacement].
      *
      * Example:
      *
@@ -115,10 +113,9 @@ class OptionalFilterBuilder {
      */
     fun replaceAttribute(
         attribute: Attribute,
-        replacement: Attribute,
-        group: Group? = null
+        replacement: Attribute
     ): OptionalFilterBuilder {
-        filters.replaceAttribute(attribute, replacement, group)
+        filters.replaceAttribute(attribute, replacement)
         return this
     }
 

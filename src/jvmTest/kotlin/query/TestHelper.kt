@@ -1,3 +1,5 @@
+package query
+
 import client.query.helper.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -11,13 +13,11 @@ class TestHelper {
     private val attributeA = Attribute("attributeA")
     private val attributeB = Attribute("attributeB")
     private val attributeC = Attribute("attributeC")
-    private val groupA = Group("groupA")
-    private val groupB = Group("groupB")
-    private val filterA = FilterFacet(attributeA, "facetA", group = groupA)
-    private val filterB = FilterFacet(attributeA, "facetB", group = groupA)
-    private val filterC = FilterBoolean(attributeC, true, group = groupB)
+    private val filterA = FilterFacet(attributeA, "facetA")
+    private val filterB = FilterFacet(attributeA, "facetB")
+    private val filterC = FilterBoolean(attributeC, true)
     private val filterD = FilterTag("tag")
-    private val filterE = FilterComparison(attributeB, NumericOperator.Equals, 5.0, group = groupA)
+    private val filterE = FilterComparison(attributeB, NumericOperator.Equals, 5.0)
 
     private fun filters(): Filters<Filter> = mutableListOf()
 
@@ -68,11 +68,11 @@ class TestHelper {
     @Test
     fun getFilters() {
         filters().apply {
-            assertEquals(list<Filter>(), this.getFilters(groupA))
+            assertEquals(list<Filter>(), this.getFilters(attributeA))
             and(filterA, filterB)
             or(filterC, filterD, filterE)
-            assertEquals(listOf(filterA, filterB, filterE), this.getFilters(groupA))
-            assertEquals(listOf(filterC), this.getFilters(groupB))
+            assertEquals(listOf(filterA, filterB), this.getFilters(attributeA))
+            assertEquals(listOf(filterE), this.getFilters(attributeB))
         }
     }
 
@@ -80,7 +80,7 @@ class TestHelper {
     fun clear() {
         filters().apply {
             and(filterA, filterC)
-            clear(groupA)
+            clear(attributeA)
             assertEquals(listOf(list(filterC)), this)
             clear(null)
             assertEquals(filters(), this)
@@ -102,7 +102,7 @@ class TestHelper {
                     )
                 ), this
             )
-            replaceAttribute(attributeB, attributeC, groupA)
+            replaceAttribute(attributeB, attributeC)
             assertEquals(
                 listOf(
                     list(

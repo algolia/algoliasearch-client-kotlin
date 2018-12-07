@@ -1,3 +1,5 @@
+package query
+
 import client.query.Query
 import client.query.helper.Attribute
 import client.query.helper.FilterBoolean

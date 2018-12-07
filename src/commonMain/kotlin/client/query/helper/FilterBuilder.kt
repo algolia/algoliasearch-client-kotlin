@@ -169,33 +169,31 @@ class FilterBuilder {
     }
 
     /**
-     * @param group The [Filter.group] used for matching.
+     * @param attribute The [Filter.attribute] used for matching.
      *
-     * Retrieve all [Filter] in the [filters] list matching the [group].
+     * Retrieve all [Filter] in the [filters] list matching the [attribute].
      */
-    fun getFilters(group: Group): List<Filter> {
-        return filters.getFilters(group)
+    fun getFilters(attribute: Attribute): List<Filter> {
+        return filters.getFilters(attribute)
     }
 
     /**
-     * @param group The group matching [Filter.group].
+     * @param attribute The attribute matching [Filter.attribute].
      *
      * Remove all [OptionalFilter] in [filters].
-     * You can specify a [group] to only remove [OptionalFilter] that matches.
+     * You can specify a [attribute] to only remove [OptionalFilter] that matches.
      */
-    fun clear(group: Group? = null): FilterBuilder {
-        filters.clear(group)
+    fun clear(attribute: Attribute? = null): FilterBuilder {
+        filters.clear(attribute)
         return this
     }
 
     /**
      * @param attribute The attribute matching [Filter.attribute].
      * @param replacement Value used to replace the attribute that matched.
-     * @param group A group used for finer grained replacement.
      *
      * Use this method to replace all [Filter] in the [filters] list which have the same [Filter.attribute]
-     * as the specified [attribute] with the [replacement]. If you specify a [group],
-     * only [Filter] having a matching [Filter.group] will have its [Filter.attribute] replaced by the [replacement].
+     * as the specified [attribute] with the [replacement].
      *
      * Example:
      *
@@ -217,8 +215,8 @@ class FilterBuilder {
      * be replaced by "attributeC".
      * In this example, if no group would have been specified (group = null), both filters would have been affected.
      */
-    fun replaceAttribute(attribute: Attribute, replacement: Attribute, group: Group? = null): FilterBuilder {
-        filters.replaceAttribute(attribute, replacement, group)
+    fun replaceAttribute(attribute: Attribute, replacement: Attribute): FilterBuilder {
+        filters.replaceAttribute(attribute, replacement)
         return this
     }
 

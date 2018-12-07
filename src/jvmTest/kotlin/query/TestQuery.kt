@@ -1,3 +1,5 @@
+package query
+
 import client.query.*
 import client.query.helper.NumericOperator
 import org.junit.Test
