@@ -1,78 +1,74 @@
 package client.query.helper
 
 
+/**
+ * For a better understanding of Filters, please read the documentation linked below:
+ *
+ * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
+ */
 class OptionalFilterBuilder {
 
-    /**
-     * To represent our SQL-like syntax of filters, we use a nested array of [OptionalFilter].
-     * Each nested MutableList<Filter> represents a group. If this group contains two or more elements,
-     * it will be considered  as a disjunctive group (Operator OR).
-     * The operator AND will be used between each nested group.
-     *
-     * Example:
-     *
-     * ((FilterA), (FilterB), (FilterC, FilterD), (FilterE, FilterF))
-     *
-     * will give us the following SQL-like expression:
-     *
-     * FilterA AND FilterB AND (FilterC OR FilterD) AND (FilterE OR FilterF)
-     */
-    private val filters = mutableListOf<MutableList<OptionalFilter>>()
+
+    private val filters = Filters<FacetFilter>()
 
     /**
-     * @param filter One or many [OptionalFilter].
+     * @param filters One or many [FacetFilter].
      *
-     * Add one or several conjunctive [OptionalFilter] to the [filters] list.
-     * Adding several filters will result in the following expression: FilterA AND FilterB AND ...
+     * Add one or several AND (conjunctive) [FacetFilter] to the [filters] list.
+     * Conjunctive filters will result in a expression such as this: FilterA AND FilterB AND ...
      */
-    fun and(vararg filter: OptionalFilter): OptionalFilterBuilder {
-        filters.and(*filter)
+    fun and(vararg filters: FacetFilter): OptionalFilterBuilder {
+        this.filters.and(*filters)
         return this
     }
 
     /**
-     * @param filter One or many [OptionalFilter].
+     * @param filters One or many [FacetFilter].
+     * Add one or several OR (disjunctive) [FacetFilter] to the [filters] list.
+     * Disjunctive filters will be grouped by [FacetFilter.attribute] in a expression such as this:
+     * (attributeA:valueA OR attributeA:valueB) AND (attributeB:valueA OR attributeB:valueB)
      */
-    fun or(vararg filter: OptionalFilter): OptionalFilterBuilder {
-        filters.or(*filter)
+    fun or(vararg filters: FacetFilter): OptionalFilterBuilder {
+        this.filters.or(*filters)
         return this
     }
 
     /**
-     * @param filter The [OptionalFilter] that will be replaced.
-     * @param replacement The [OptionalFilter] used as a replacement.
+     * @param filter The [FacetFilter] to replace.
+     * @param replacement The [FacetFilter] to replace it with.
      *
-     * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
+     * Replace all occurrences of [filter] by [replacement], whether disjunctive or conjunctive.
      */
-    fun replace(filter: OptionalFilter, replacement: OptionalFilter): OptionalFilterBuilder {
+    fun replace(filter: FacetFilter, replacement: FacetFilter): OptionalFilterBuilder {
         filters.replace(filter, replacement)
         return this
     }
 
     /**
-     * @param filter The [OptionalFilter] to remove.
+     * @param filters The [FacetFilter] to remove.
      *
-     * Remove all occurrences of [filter] inside the [filters] list.
+     * Remove all occurrences of [filters], whether disjunctive or conjunctive.
      */
-    fun remove(vararg filter: OptionalFilter): OptionalFilterBuilder {
-        filters.remove(*filter)
+    fun remove(vararg filters: FacetFilter): OptionalFilterBuilder {
+        this.filters.remove(*filters)
         return this
     }
 
     /**
-     * @param attribute The [Filter.attribute] used for matching.
+     * @param attribute The [Attribute] used for matching, if any.
      *
-     * Retrieve all [OptionalFilter] in the [filters] list matching the [attribute].
+     * Retrieve all [FacetFilter] matching the [attribute], if any. Returns conjunctive and disjunctive
+     * filters indifferently.
      */
-    fun getFilters(attribute: Attribute): List<OptionalFilter> {
+    fun getFilters(attribute: Attribute? = null): List<FacetFilter> {
         return filters.getFilters(attribute)
     }
 
     /**
-     * @param attribute The attribute matching [Filter.attribute].
+     * @param attribute The [Attribute]] matching [FacetFilter.attribute], if any.
      *
-     * Remove all [OptionalFilter] in [filters].
-     * You can specify a [attribute] to only remove [OptionalFilter] that matches.
+     * Remove all [FacetFilter], whether disjunctive or conjunctive.
+     * You can specify a [attribute] to only remove [FacetFilter] that matches.
      */
     fun clear(attribute: Attribute? = null): OptionalFilterBuilder {
         filters.clear(attribute)
@@ -80,31 +76,10 @@ class OptionalFilterBuilder {
     }
 
     /**
-     * @param attribute The attribute matching [Filter.attribute].
-     * @param replacement Value used to replace the attribute that matched.
+     * @param attribute The [Attribute] to replace.
+     * @param replacement The [Attribute] to replacement.
      *
-     * Use this method to replace all [Filter] in the [filters] list which have the same [Filter.attribute]
-     * as the specified [attribute] with the [replacement].
-     *
-     * Example:
-     *
-     * ```
-     * val helper = FilterBuilder()
-     *
-     * val filterA = FilterFacet("attributeA", "valueA", "groupA")
-     * val filterB = FilterFacet("attributeA", "valueB", "groupB")
-     *
-     * helper.and(filterA, filterB)
-     * assertEquals("attributeA:valueA AND attributeA:valueB", helper.build())
-     *
-     * helper.replaceAttribute(attribute = "attributeA", replacement = "attributeC", group = "groupA")
-     * assertEquals("attributeC:valueA", "attributeA:valueB", helper.build())
-     *
-     * ```
-     *
-     * As you can see, only the filter with "groupA" was replaced, despite both filters having "attributeA" marked to
-     * be replaced by "attributeC".
-     * In this example, if no group would have been specified (group = null), both filters would have been affected.
+     * Replace all [FacetFilter.attribute] matching [attribute] by [replacement].
      */
     fun replaceAttribute(
         attribute: Attribute,
@@ -114,7 +89,14 @@ class OptionalFilterBuilder {
         return this
     }
 
+    /**
+     * Build the [filters] into a nested list of strings.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
+     */
     fun build(): List<List<String>> {
-        return filters.map { it.map { it.expression } }
+        val ands = filters.ands.map { it.expression }.map { listOf(it) }
+        val ors = filters.ors.groupBy { it.attribute }.map { it.value.map { it.expression } }
+
+        return ands + ors
     }
 }

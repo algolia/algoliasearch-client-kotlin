@@ -5,6 +5,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
+import kotlin.test.fail
 
 
 @RunWith(JUnit4::class)
@@ -19,38 +21,74 @@ class TestHelper {
     private val filterD = FilterTag("tag")
     private val filterE = FilterComparison(attributeB, NumericOperator.Equals, 5.0)
 
-    private fun filters(): Filters<Filter> = mutableListOf()
+    private fun filters() = Filters<Filter>()
 
-    private fun <T : Filter> list(vararg filter: T) = listOf<Filter>(*filter)
+    private fun set(vararg filter: Filter) = mutableSetOf(*filter)
 
     @Test
     fun and() {
         filters().apply {
             and(filterA)
-            assertEquals(listOf(list(filterA)), this)
+            assertEquals(set(filterA), ands)
+            assertTrue(ors.isEmpty())
             and(filterB, filterC)
-            assertEquals(listOf(list(filterA), list(filterB), list(filterC)), this)
+            assertEquals(set(filterA, filterB, filterC), ands)
+            assertTrue(ors.isEmpty())
         }
     }
 
     @Test
     fun or() {
         filters().apply {
-            or(filterA, filterB, filterC)
-            assertEquals(listOf(list(filterA, filterB), list(filterC)), this)
-            or(filterD, filterE)
-            assertEquals(listOf(list(filterA, filterB), list(filterC), list(filterD), list(filterE)), this)
+            or(filterA)
+            assertEquals(set(filterA), ors)
+            assertTrue(ands.isEmpty())
+            or(filterB, filterC)
+            assertEquals(set(filterA, filterB, filterC), ors)
+            assertTrue(ands.isEmpty())
         }
     }
+
+    @Test
+    fun orShouldThrow() {
+        filters().apply {
+            or(filterA)
+            assertEquals(set(filterA), ors)
+            var thrown = false
+            try {
+                or(filterE.modifyAttribute(filterA.attribute))
+            } catch (exception: Exception) {
+                thrown = true
+            }
+            assertTrue(thrown)
+        }
+    }
+
+    @Test
+    fun orShouldNotThrow() {
+        filters().apply {
+            or(filterA)
+            assertEquals(set(filterA), ors)
+            try {
+                or(filterC.modifyAttribute(filterA.attribute))
+            } catch (exception: Exception) {
+                fail(exception.localizedMessage)
+            }
+        }
+    }
+
 
     @Test
     fun replace() {
         filters().apply {
             replace(filterA, filterB)
-            assertEquals(filters(), this)
+            assertTrue(ands.isEmpty())
+            assertTrue(ors.isEmpty())
             and(filterA, filterA, filterC)
+            or(filterA)
             replace(filterA, filterB)
-            assertEquals(listOf(list(filterB), list(filterB), list(filterC)), this)
+            assertEquals(set(filterB, filterB, filterC), ands)
+            assertEquals(set(filterB), ors)
         }
     }
 
@@ -58,21 +96,25 @@ class TestHelper {
     fun remove() {
         filters().apply {
             remove(filterA, filterB)
-            assertEquals(filters(), this)
+            assertTrue(ands.isEmpty())
+            assertTrue(ors.isEmpty())
             and(filterA, filterA, filterC)
+            or(filterB)
             remove(filterA, filterB)
-            assertEquals(listOf(list(filterC)), this)
+            assertEquals(set(filterC), ands)
+            assertTrue(ors.isEmpty())
         }
     }
 
     @Test
     fun getFilters() {
         filters().apply {
-            assertEquals(list<Filter>(), this.getFilters(attributeA))
+            assertTrue(getFilters(attributeA).isEmpty())
             and(filterA, filterB)
             or(filterC, filterD, filterE)
-            assertEquals(listOf(filterA, filterB), this.getFilters(attributeA))
-            assertEquals(listOf(filterE), this.getFilters(attributeB))
+            assertEquals(listOf(filterA, filterB), getFilters(attributeA))
+            assertEquals(listOf(filterE), getFilters(attributeB))
+            assertEquals(listOf(filterA, filterB, filterC, filterD, filterE), getFilters())
         }
     }
 
@@ -80,10 +122,13 @@ class TestHelper {
     fun clear() {
         filters().apply {
             and(filterA, filterC)
+            or(filterA, filterC)
             clear(attributeA)
-            assertEquals(listOf(list(filterC)), this)
+            assertEquals(set(filterC), ands)
+            assertEquals(set(filterC), ors)
             clear(null)
-            assertEquals(filters(), this)
+            assertTrue(ands.isEmpty())
+            assertTrue(ors.isEmpty())
         }
     }
 
@@ -91,28 +136,29 @@ class TestHelper {
     fun replaceAttribute() {
         filters().apply {
             or(filterA, filterB, filterC, filterE)
+            and(filterA)
             replaceAttribute(attributeA, attributeB)
             assertEquals(
-                listOf(
-                    list(
-                        filterA.modifyAttribute(attributeB),
-                        filterB.modifyAttribute(attributeB)
-                    ),
-                    list(filterC),
-                    list(filterE)
-                ), this
+                set(
+                    filterA.modifyAttribute(attributeB),
+                    filterB.modifyAttribute(attributeB),
+                    filterC,
+                    filterE
+                ),
+                ors
             )
+            assertEquals(set(filterA.modifyAttribute(attributeB)), ands)
             replaceAttribute(attributeB, attributeC)
             assertEquals(
-                listOf(
-                    list(
-                        filterA.modifyAttribute(attributeC),
-                        filterB.modifyAttribute(attributeC)
-                    ),
-                    list(filterC),
-                    list(filterE.modifyAttribute(attributeC))
-                ), this
+                set(
+                    filterA.modifyAttribute(attributeC),
+                    filterB.modifyAttribute(attributeC),
+                    filterC,
+                    filterE.modifyAttribute(attributeC)
+                ),
+                ors
             )
+            assertEquals(set(filterA.modifyAttribute(attributeC)), ands)
         }
     }
 }

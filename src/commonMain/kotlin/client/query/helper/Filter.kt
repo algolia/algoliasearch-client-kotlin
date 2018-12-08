@@ -3,7 +3,7 @@ package client.query.helper
 
 sealed class Filter(
     open val attribute: Attribute,
-    open val negates: kotlin.Boolean
+    open val negates: Boolean
 ) {
 
     abstract val expression: String
@@ -11,16 +11,21 @@ sealed class Filter(
     fun build() = if (negates) "NOT $expression" else expression
 }
 
-sealed class OptionalFilter(
+sealed class FacetFilter(
     override val attribute: Attribute,
-    override val negates: kotlin.Boolean
+    override val negates: Boolean
+) : Filter(attribute, negates)
+
+sealed class NumericFilter(
+    override val attribute: Attribute,
+    override val negates: Boolean
 ) : Filter(attribute, negates)
 
 data class FilterFacet(
     override val attribute: Attribute,
     val value: String,
     override val negates: Boolean = false
-) : OptionalFilter(attribute, negates) {
+) : FacetFilter(attribute, negates) {
 
     override val expression = "$attribute:$value"
 }
@@ -29,7 +34,7 @@ data class FilterBoolean(
     override val attribute: Attribute,
     val value: Boolean,
     override val negates: Boolean = false
-) : OptionalFilter(attribute, negates) {
+) : FacetFilter(attribute, negates) {
 
     override val expression = "$attribute:$value"
 }
@@ -47,7 +52,7 @@ data class FilterComparison(
     val operator: NumericOperator,
     val value: Double,
     override val negates: Boolean = false
-) : Filter(attribute, negates) {
+) : NumericFilter(attribute, negates) {
 
     override val expression = "$attribute ${operator.raw} $value"
 }
@@ -57,7 +62,7 @@ data class FilterRange(
     val lowerBound: Double,
     val upperBound: Double,
     override val negates: Boolean = false
-) : Filter(attribute, negates) {
+) : NumericFilter(attribute, negates) {
 
     override val expression = "$attribute:$lowerBound TO $upperBound"
 }

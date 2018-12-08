@@ -1,163 +1,78 @@
 package client.query.helper
 
+
 /**
- * For better understanding of Filters, please read the documentation linked below:
+ * For a better understanding of Filters, please read the documentation linked below:
  *
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
  */
 class FilterBuilder {
 
-    /**
-     * To represent our SQL-like syntax of filters, we use a nested array of [Filter].
-     * Each nested MutableList<Filter> represents a group. If this group contains two or more elements,
-     * it will be considered  as a disjunctive group (Operator OR).
-     * The operator AND will be used between each nested group.
-     *
-     * Example:
-     *
-     * ((FilterA), (FilterB), (FilterC, FilterD), (FilterE, FilterF))
-     *
-     * will give us the following SQL-like expression:
-     *
-     * FilterA AND FilterB AND (FilterC OR FilterD) AND (FilterE OR FilterF)
-     */
-    private val filters = mutableListOf<MutableList<Filter>>()
+    private val filters = Filters<Filter>()
 
     /**
-     * @param filter One or many [Filter].
+     * @param filters One or many [Filter].
      *
-     * Add one or several conjunctive [Filter] to the [filters] list.
-     * Adding several filters will result in the following expression: FilterA AND FilterB AND ...
+     * Add one or several AND (conjunctive) [Filter] to the [filters] list.
+     * Conjunctive filters will result in a expression such as this: FilterA AND FilterB AND ...
      */
-    fun and(vararg filter: Filter): FilterBuilder {
-        filters.and(*filter)
+    fun and(vararg filters: Filter): FilterBuilder {
+        this.filters.and(*filters)
         return this
     }
 
     /**
-     * @param filter One or many [FilterFacet].
+     * @param filters One or many [Filter].
+     * Add one or several OR (disjunctive) [Filter] to the [filters] list.
+     * Disjunctive filters will be grouped by [Filter.attribute] in a expression such as this:
+     * (attributeA:valueA OR attributeA:valueB) AND (attributeB:valueA OR attributeB:valueB)
+     * If a disjunctive [Filter] is added, but the list of disjunctive filters already contains a [Filter] with the same
+     * [Filter.attribute] but has an incompatible type, an [IncompatibleFilterTypeException] will be thrown.
+     * [FilterFacet] and [FilterBoolean] are compatibles, which is represented by the [FacetFilter] class.
+     * [FilterRange] and [FilterComparison] are compatibles, which is represented by the [NumericFilter] class.
+     * [FacetFilter] and [NumericFilter] with the same [Attribute] are not compatibles.
      */
-    fun or(vararg filter: FilterFacet): FilterBuilder {
-        filters.or(*filter)
+    fun or(vararg filters: Filter): FilterBuilder {
+        this.filters.or(*filters)
         return this
     }
 
     /**
-     * @param filter One or many [FilterBoolean].
-     */
-    fun or(vararg filter: FilterBoolean): FilterBuilder {
-        filters.or(*filter)
-        return this
-    }
-
-    /**
-     * @param filter One or many [FilterTag].
-     */
-    fun or(vararg filter: FilterTag): FilterBuilder {
-        filters.or(*filter)
-        return this
-    }
-
-    /**
-     * @param filter One or many [FilterComparison].
-     */
-    fun or(vararg filter: FilterComparison): FilterBuilder {
-        filters.or(*filter)
-        return this
-    }
-
-    /**
-     * @param first The first [FilterRange].
-     * @param second the second [FilterRange].
-     * @param filter Between 0 and N other [FilterRange].
+     * @param filter The [Filter] to replace.
+     * @param replacement The [Filter] to replace it with.
      *
-     * Add at least two [FilterRange] to the [filters] list as a disjunctive group.
-     * Calling this method will result in the following expression: ... AND (FilterA OR FilterB OR ...) AND ...
+     * Replace all occurrences of [filter] by [replacement], whether disjunctive or conjunctive.
      */
-    fun or(vararg filter: FilterRange): FilterBuilder {
-        filters.or(*filter)
-        return this
-    }
-
-    /**
-     * @param filter The [FilterFacet] that will be replaced.
-     * @param replacement The [FilterFacet] used as a replacement.
-     *
-     * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
-     */
-    fun replace(filter: FilterFacet, replacement: FilterFacet): FilterBuilder {
+    fun replace(filter: Filter, replacement: Filter): FilterBuilder {
         filters.replace(filter, replacement)
         return this
     }
 
     /**
-     * @param filter The [FilterBoolean] that will be replaced.
-     * @param replacement The [FilterBoolean] used as a replacement.
+     * @param filters The [Filter] to remove.
      *
-     * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
+     * Remove all occurrences of [filters], whether disjunctive or conjunctive.
      */
-    fun replace(filter: FilterBoolean, replacement: FilterBoolean): FilterBuilder {
-        filters.replace(filter, replacement)
+    fun remove(vararg filters: Filter): FilterBuilder {
+        this.filters.remove(*filters)
         return this
     }
 
     /**
-     * @param filter The [FilterTag] that will be replaced.
-     * @param replacement The [FilterTag] used as a replacement.
+     * @param attribute The [Attribute] used for matching, if any.
      *
-     * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
+     * Retrieve all [Filter] matching the [attribute], if any. Returns conjunctive and disjunctive
+     * filters indifferently.
      */
-    fun replace(filter: FilterTag, replacement: FilterTag): FilterBuilder {
-        filters.replace(filter, replacement)
-        return this
-    }
-
-    /**
-     * @param filter The [FilterComparison] that will be replaced.
-     * @param replacement The [FilterComparison] used as a replacement.
-     *
-     * This method will search the [filters] list for the [filter] that match, and replace it with [replacement].
-     */
-    fun replace(filter: FilterComparison, replacement: FilterComparison): FilterBuilder {
-        filters.replace(filter, replacement)
-        return this
-    }
-
-    /**
-     * @param filter The [FilterRange] that will be replaced.
-     * @param replacement The [FilterRange] used as a replacement.
-     *
-     * Search the [filters] list for the [filter] that match, and replace it with [replacement].
-     */
-    fun replace(filter: FilterRange, replacement: FilterRange): FilterBuilder {
-        filters.replace(filter, replacement)
-        return this
-    }
-
-    /**
-     * @param filter The [Filter] to remove.
-     *
-     * Remove all occurrences of [filter] inside the [filters] list.
-     */
-    fun remove(vararg filter: Filter): FilterBuilder {
-        filters.remove(*filter)
-        return this
-    }
-
-    /**
-     * @param attribute The [Filter.attribute] used for matching.
-     *
-     * Retrieve all [Filter] in the [filters] list matching the [attribute].
-     */
-    fun getFilters(attribute: Attribute): List<Filter> {
+    fun getFilters(attribute: Attribute? = null): List<Filter> {
         return filters.getFilters(attribute)
     }
 
     /**
-     * @param attribute The attribute matching [Filter.attribute].
+     * @param attribute The [Attribute]] matching [Filter.attribute], if any.
      *
-     * Remove all [OptionalFilter] in [filters].
-     * You can specify a [attribute] to only remove [OptionalFilter] that matches.
+     * Remove all [Filter], whether disjunctive or conjunctive.
+     * You can specify a [attribute] to only remove [Filter] that matches.
      */
     fun clear(attribute: Attribute? = null): FilterBuilder {
         filters.clear(attribute)
@@ -165,31 +80,10 @@ class FilterBuilder {
     }
 
     /**
-     * @param attribute The attribute matching [Filter.attribute].
-     * @param replacement Value used to replace the attribute that matched.
+     * @param attribute The [Attribute] to replace.
+     * @param replacement The [Attribute] to replacement.
      *
-     * Use this method to replace all [Filter] in the [filters] list which have the same [Filter.attribute]
-     * as the specified [attribute] with the [replacement].
-     *
-     * Example:
-     *
-     * ```
-     * val helper = FilterBuilder()
-     *
-     * val filterA = FilterFacet("attributeA", "valueA", "groupA")
-     * val filterB = FilterFacet("attributeA", "valueB", "groupB")
-     *
-     * helper.and(filterA, filterB)
-     * assertEquals("attributeA:valueA AND attributeA:valueB", helper.build())
-     *
-     * helper.replaceAttribute(attribute = "attributeA", replacement = "attributeC", group = "groupA")
-     * assertEquals("attributeC:valueA", "attributeA:valueB", helper.build())
-     *
-     * ```
-     *
-     * As you can see, only the filter with "groupA" was replaced, despite both filters having "attributeA" marked to
-     * be replaced by "attributeC".
-     * In this example, if no group would have been specified (group = null), both filters would have been affected.
+     * Replace all [Filter.attribute] matching [attribute] by [replacement].
      */
     fun replaceAttribute(attribute: Attribute, replacement: Attribute): FilterBuilder {
         filters.replaceAttribute(attribute, replacement)
@@ -199,13 +93,21 @@ class FilterBuilder {
     /**
      * @return The SQL-like syntax represented by a [String]
      *
-     * Build the [filters] list into a SQL-like syntax.
+     * Build the [filters] into a SQL-like syntax.
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
      */
     fun build(): String {
+        val ands = filters.ands
+            .map { listOf(it) }
+        val ors = filters.ors
+            .groupBy { it.attribute }
+            .map { it.value }
+        val filters = ands + ors
+
         return filters.joinToString(separator = " AND ") { group ->
-            val prefix = if (group.size == 1 || filters.size == 1) "" else "("
-            val postfix = if (group.size == 1 || filters.size == 1) "" else ")"
+            val condition = group.size == 1 || (ands.isEmpty() && ors.size == 1)
+            val prefix = if (condition) "" else "("
+            val postfix = if (condition) "" else ")"
 
             group.joinToString(prefix = prefix, postfix = postfix, separator = " OR ") {
                 it.build()
