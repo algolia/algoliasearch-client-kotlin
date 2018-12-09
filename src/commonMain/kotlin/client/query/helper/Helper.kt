@@ -4,8 +4,8 @@ class IncompatibleFilterTypeException(
     filterA: Filter,
     filterB: Filter
 ) : Exception(
-    "Incompatible filters of type ${filterA::class.simpleName} and" +
-        "${filterA::class.simpleName} with the same attribute \"${filterB.attribute}\""
+    "Incompatible filters of type ${filterA::class.simpleName} and " +
+        "${filterB::class.simpleName} with the same attribute \"${filterB.attribute}\""
 )
 
 internal data class Filters<T : Filter>(

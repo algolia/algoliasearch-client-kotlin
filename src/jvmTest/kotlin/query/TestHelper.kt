@@ -58,6 +58,7 @@ class TestHelper {
             try {
                 or(filterE.modifyAttribute(filterA.attribute))
             } catch (exception: Exception) {
+                exception.printStackTrace()
                 thrown = true
             }
             assertTrue(thrown)
