@@ -11,39 +11,6 @@ import kotlin.test.assertEquals
 @RunWith(JUnit4::class)
 class TestFilterBuilder {
 
-    private val attributeA = Attribute("attributeA")
-    private val filterA = FilterFacet(attributeA, "facetA")
-    private val filterB = FilterFacet(attributeA, "facetB")
-
-    @Test
-    fun assign() {
-        val query = Query()
-
-        query.filterBuilder
-            .and(FilterFacet(attributeA, "valueA"))
-
-        assertEquals("attributeA:valueA", query.filterBuilder.build())
-    }
-
-    @Test
-    fun build() {
-        FilterBuilder().apply {
-            assertEquals("", build())
-            and(filterA)
-            assertEquals(filterA.build(), build())
-            and(filterB)
-            assertEquals("${filterA.build()} AND ${filterB.build()}", build())
-            or(filterA, filterB)
-            assertEquals(
-                "${filterA.build()} AND ${filterB.build()} AND (${filterA.build()} OR ${filterB.build()})",
-                build()
-            )
-            clear(null)
-            or(filterA, filterB)
-            assertEquals("${filterA.build()} OR ${filterB.build()}", build())
-        }
-    }
-
     @Test
     fun showCaseTwoDisjunctiveWidgets() {
         // First widget for disjunctive faceting on a category attribute
@@ -139,5 +106,15 @@ class TestFilterBuilder {
             replaceAttribute(euros, dollars)
             assertEquals("dollars != 10.0 AND dollars:0.0 TO 20.0", build())
         }
+    }
+
+    @Test
+    fun assign() {
+        val query = Query()
+
+        query.filterBuilder
+            .and(FilterFacet(Attribute("attributeA"), "valueA"))
+
+        assertEquals("attributeA:valueA", query.filterBuilder.build())
     }
 }
