@@ -37,15 +37,15 @@ class TestFilterBuilder {
 
     @Test
     fun showcaseRemoveAndReplace() {
-        val categoryPublished = FilterTag("published")
-        val categoryBestSeller = FilterTag("bestseller")
+        val published = FilterTag("published")
+        val bestseller = FilterTag("bestseller")
 
         FilterBuilder().apply {
-            and(categoryPublished)
+            and(published)
             assertEquals("_tags:published", build())
-            replace(categoryPublished, categoryBestSeller)
+            replace(published, bestseller)
             assertEquals("_tags:bestseller", build())
-            remove(categoryBestSeller)
+            remove(bestseller)
             assertEquals("", build())
         }
     }
