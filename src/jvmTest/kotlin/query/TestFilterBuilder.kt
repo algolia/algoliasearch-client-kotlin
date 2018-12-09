@@ -42,6 +42,7 @@ class TestFilterBuilder {
 
         FilterBuilder().apply {
             and(categoryPublished)
+            assertEquals("_tags:published", build())
             replace(categoryPublished, categoryBestSeller)
             assertEquals("_tags:bestseller", build())
             remove(categoryBestSeller)
