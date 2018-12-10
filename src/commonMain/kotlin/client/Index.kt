@@ -1,7 +1,7 @@
 package client
 
 
-inline class Index(
+data class Index(
     val string: String
 ) {
 

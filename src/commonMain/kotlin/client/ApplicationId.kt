@@ -1,4 +1,4 @@
 package client
 
 
-inline class ApplicationId(val string: String)
+data class ApplicationId(val string: String)
