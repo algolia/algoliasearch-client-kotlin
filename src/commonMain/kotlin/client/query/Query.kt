@@ -1,5 +1,6 @@
 package client.query
 
+import client.query.helper.Attribute
 import client.query.helper.FilterBuilder
 import client.query.helper.OptionalFilterBuilder
 
@@ -17,14 +18,14 @@ class Query(
      * Engine default: [*]
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToRetrieve/]
      */
-    var attributesToRetrieve: List<String>? = null,
+    var attributesToRetrieve: List<Attribute>? = null,
 
     /**
      * Restricts a given query to look in only a subset of your searchable attributes.
      * Engine default: all attributes in searchableAttributes.
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/restrictSearchableAttributes/]
      */
-    var restrictSearchableAttributes: List<String>? = null,
+    var restrictSearchableAttributes: List<Attribute>? = null,
 
     /**
      * Filter the query with numeric, facet and/or tag filters.
@@ -73,7 +74,7 @@ class Query(
      * Engine default: [] (no facets retrieved)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/facets/]
      */
-    var facets: List<String>? = null,
+    var facets: List<Attribute>? = null,
 
     /**
      * Maximum number of facet values to return for each facet during a regular search.
@@ -101,14 +102,14 @@ class Query(
      * Engine default: null (all searchable attributes)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToHighlight/]
      */
-    var attributesToHighlight: List<String>? = null,
+    var attributesToHighlight: List<Attribute>? = null,
 
     /**
      * List of attributes to snippet, with an optional maximum number of words to snippet.
      * Engine default: [] (no attribute is snippeted)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToSnippet/]
      */
-    var attributesToSnippet: List<Snippet>? = null,
+    var attributesToSnippet: List<String>? = null,
 
     /**
      * The HTML string to insert before the highlighted parts in all highlight and snippet results.
@@ -199,7 +200,7 @@ class Query(
      * Engine default: []
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/disableTypoToleranceOnAttributes/]
      */
-    var disableTypoToleranceOnAttributes: List<String>? = null,
+    var disableTypoToleranceOnAttributes: List<Attribute>? = null,
 
     /**
      * Search for entries around a central geolocation, enabling a geo search within a circular area.
@@ -269,7 +270,7 @@ class Query(
      * [ignorePlurals], [removeStopWords], and
      * [CJK word-detection][https://www.algolia.com/doc/guides/textual-relevance/queryLanguage/#using-a-language-specific-dictionary-for-cjk-words].
      * Engine default: []
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryLanguage/]
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryLanguages/]
      */
     var queryLanguages: List<QueryLanguage>? = null,
 
@@ -320,7 +321,7 @@ class Query(
      * Engine default: []
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/disableExactOnAttributes/]
      */
-    var disableExactOnAttributes: List<String>? = null,
+    var disableExactOnAttributes: List<Attribute>? = null,
 
     /**
      * Controls how the exact ranking criterion is computed when the query contains only one word.

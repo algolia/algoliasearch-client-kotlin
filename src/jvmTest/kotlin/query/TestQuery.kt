@@ -139,13 +139,6 @@ class TestQuery {
     }
 
     @Test
-    fun snippet() {
-        assertEquals("attributeA", Snippet.Attribute("attributeA").raw)
-        assertEquals("attributeA:10", Snippet.Attribute("attributeA", 10).raw)
-        assertEquals("*:80", Snippet.All(80).raw)
-    }
-
-    @Test
     fun sortFacetValuesBy() {
         assertEquals("alpha", SortFacetValuesBy.Alpha.raw)
         assertEquals("count", SortFacetValuesBy.Count.raw)

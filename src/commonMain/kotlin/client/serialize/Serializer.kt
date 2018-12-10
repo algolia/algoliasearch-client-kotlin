@@ -4,6 +4,7 @@ import client.query.AroundRadius
 import client.query.BooleanOrQueryLanguage
 import client.query.Query
 import client.query.TypoTolerance
+import client.query.helper.names
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
@@ -39,8 +40,8 @@ internal fun Query.toMap(): MutableMap<String, Any> {
     // Query
     query?.let { map["query"] = it }
     //Attributes
-    attributesToRetrieve?.let { map["attributesToRetrieve"] = it.toJsonArrayFromString() }
-    restrictSearchableAttributes?.let { map["restrictSearchableAttributes"] = it.toJsonArrayFromString() }
+    attributesToRetrieve?.let { map["attributesToRetrieve"] = it.names.toJsonArrayFromString() }
+    restrictSearchableAttributes?.let { map["restrictSearchableAttributes"] = it.names.toJsonArrayFromString() }
     // Filters
     filters?.let { map["filters"] = it }
     facetFilters?.let { map["facetFilters"] = it.toJsonArrayFromList() }
@@ -49,13 +50,13 @@ internal fun Query.toMap(): MutableMap<String, Any> {
     tagFilters?.let { map["tagFilters"] = it.toJsonArrayFromList() }
     sumOrFiltersScores?.let { map["sumOrFiltersScores"] = it }
     // Facets
-    facets?.let { map["facets"] = it.toJsonArrayFromString() }
+    facets?.let { map["facets"] = it.names.toJsonArrayFromString() }
     maxValuesPerFacet?.let { map["maxValuesPerFacet"] = it }
     facetingAfterDistinct?.let { map["facetingAfterDistinct"] = it }
     sortFacetValuesBy?.let { map["sortFacetValuesBy"] = it.raw }
     // Highlighting
-    attributesToHighlight?.let { map["attributesToHighlight"] = it.toJsonArrayFromString() }
-    attributesToSnippet?.let { map["attributesToSnippet"] = it.map { it.raw }.toJsonArrayFromString() }
+    attributesToHighlight?.let { map["attributesToHighlight"] = it.names.toJsonArrayFromString() }
+    attributesToSnippet?.let { map["attributesToSnippet"] = it.toJsonArrayFromString() }
     highlightPreTag?.let { map["highlightPreTag"] = it }
     highlightPostTag?.let { map["highlightPostTag"] = it }
     snippetEllipsisText?.let { map["snippetEllipsisText"] = it }
@@ -76,7 +77,7 @@ internal fun Query.toMap(): MutableMap<String, Any> {
         }
     }
     allowTyposOnNumericTokens?.let { map["allowTyposOnNumericTokens"] = it }
-    disableTypoToleranceOnAttributes?.let { map["disableTypoToleranceOnAttributes"] = it.toJsonArrayFromString() }
+    disableTypoToleranceOnAttributes?.let { map["disableTypoToleranceOnAttributes"] = it.names.toJsonArrayFromString() }
     // Geo-Search
     aroundLatLng?.let { map["aroundLatLng"] = it }
     aroundLatLngViaIP?.let { map["aroundLatLngViaIP"] = it }
@@ -102,7 +103,7 @@ internal fun Query.toMap(): MutableMap<String, Any> {
     removeWordsIfNoResults?.let { map["removeWordsIfNoResults"] = it.raw }
     advancedSyntax?.let { map["advancedSyntax"] = it }
     optionalWords?.let { map["optionalWords"] = it.toJsonArrayFromString() }
-    disableExactOnAttributes?.let { map["disableExactOnAttributes"] = it.toJsonArrayFromString() }
+    disableExactOnAttributes?.let { map["disableExactOnAttributes"] = it.names.toJsonArrayFromString() }
     exactOnSingleWordQuery?.let { map["exactOnSingleWordQuery"] = it.raw }
     alternativesAsExact?.let { map["alternativesAsExact"] = it.map { it.raw }.toJsonArrayFromString() }
     // Advanced

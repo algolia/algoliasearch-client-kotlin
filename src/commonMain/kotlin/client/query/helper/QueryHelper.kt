@@ -1,26 +1,86 @@
 package client.query.helper
 
+import client.query.AlternativesAsExact
 import client.query.Query
+import client.query.QueryLanguage
+import client.query.ResponseFields
 
+internal val Collection<Attribute>.names get() = map { it.name }
+
+internal val all = Attribute("*")
+
+fun String.toAttribute() = Attribute(this)
 
 fun queryBuilder(init: Query.() -> Unit) = Query().apply(init)
 
-fun Query.attributesToRetrieve(vararg attribute: String, excludeAttributes: Boolean = false) {
+fun Query.setAttributesToRetrieve(vararg attributes: Attribute, excludeAttributes: Boolean = false) {
     attributesToRetrieve = if (excludeAttributes) {
-        if (attribute.isNotEmpty()) {
-            attribute.map { "-$it" }.plus("*")
+        if (attributes.isNotEmpty()) {
+            attributes.map { Attribute("-${it.name}") }.plus(all)
         } else listOf()
-    } else attribute.toList()
+    } else attributes.toList()
 }
 
-fun Query.restrictSearchableAttribute(vararg attribute: String) {
-    restrictSearchableAttributes = attribute.toList()
+fun Query.setRetrieveAllAttributes() {
+    attributesToRetrieve = listOf(all)
 }
 
-fun example() {
-    val query = queryBuilder {
-        attributesToRetrieve("attributeA", "attributeB", excludeAttributes = true)
-    }
-    println(query.attributesToRetrieve) // ["-attributeA", "-attributeB", "*"]
+fun Query.setRestrictSearchableAttributes(vararg attributes: Attribute) {
+    restrictSearchableAttributes = attributes.toList()
 }
 
+fun Query.setFacets(vararg attributes: Attribute) {
+    facets = attributes.toList()
+}
+
+fun Query.setAllFacets() {
+    facets = listOf(all)
+}
+
+fun Query.setAttributesToHighlight(vararg attributes: Attribute) {
+    attributesToHighlight = attributes.toList()
+}
+
+fun Query.setHighlightAllAttributes() {
+    attributesToHighlight = listOf(all)
+}
+
+fun Query.setAttributesToSnippet(vararg attributes: Pair<Attribute, Int?>) {
+    attributesToSnippet = attributes.map { if (it.second != null) "${it.first.name}:${it.second}" else it.first.name }
+}
+
+fun Query.setSnippetAllAttributes(numberOfWords: Int? = null) {
+    attributesToSnippet = listOf(if (numberOfWords != null) "*:$numberOfWords" else "*")
+}
+
+fun Query.setDisableTypoToleranceOnAttributes(vararg attributes: Attribute) {
+    disableTypoToleranceOnAttributes = attributes.toList()
+}
+
+fun Query.setQueryLanguages(vararg languages: QueryLanguage) {
+    queryLanguages = languages.toList()
+}
+
+fun Query.setRuleContexts(vararg contexts: String) {
+    ruleContexts = contexts.toList()
+}
+
+fun Query.setOptionalWords(vararg words: String) {
+    optionalWords = words.toList()
+}
+
+fun Query.setDisableExactOnAttributes(vararg attributes: Attribute) {
+    disableExactOnAttributes = attributes.toList()
+}
+
+fun Query.setAlternativesAsExact(vararg alternativesAsExact: AlternativesAsExact) {
+    this.alternativesAsExact = alternativesAsExact.toList()
+}
+
+fun Query.setAnalyticsTags(vararg tags: String) {
+    analyticsTags = tags.toList()
+}
+
+fun Query.setResponseFields(vararg responseFields: ResponseFields) {
+    this.responseFields = responseFields.toList()
+}
