@@ -12,7 +12,7 @@ sealed class Filter(
     fun build() = if (not) "NOT $expression" else expression
 }
 
-sealed class NumericFilter(
+sealed class FilterNumeric(
     override val attribute: Attribute
 ) : Filter(attribute)
 
@@ -40,7 +40,7 @@ data class FilterComparison(
     override val attribute: Attribute,
     val operator: NumericOperator,
     val value: Double
-) : NumericFilter(attribute) {
+) : FilterNumeric(attribute) {
 
     override val expression = "$attribute ${operator.raw} $value"
 }
@@ -49,7 +49,7 @@ data class FilterRange(
     override val attribute: Attribute,
     val lowerBound: Double,
     val upperBound: Double
-) : NumericFilter(attribute) {
+) : FilterNumeric(attribute) {
 
     override val expression = "$attribute:$lowerBound TO $upperBound"
 }

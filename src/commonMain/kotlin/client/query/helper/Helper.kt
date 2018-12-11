@@ -21,7 +21,7 @@ internal fun <T : Filter> Filters<T>.or(vararg filters: T) {
     filters.forEach { filter ->
         ors.find { or ->
             filter.attribute == or.attribute && when (filter) {
-                is NumericFilter -> or !is NumericFilter
+                is FilterNumeric -> or !is FilterNumeric
                 is FilterFacet -> or !is FilterFacet
                 is FilterTag -> or !is FilterTag
                 else -> throw Exception("This should not happen.")

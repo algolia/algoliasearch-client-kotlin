@@ -30,8 +30,8 @@ class FilterBuilder {
      * If a disjunctive [Filter] is added, but the list of disjunctive filters already contains a [Filter] with the same
      * [Filter.attribute] but has an incompatible type, an [IncompatibleFilterTypeException] will be thrown.
      * [FilterFacet] and [FilterBoolean] are compatibles, which is represented by the [FacetFilter] class.
-     * [FilterRange] and [FilterComparison] are compatibles, which is represented by the [NumericFilter] class.
-     * [FacetFilter] and [NumericFilter] with the same [Attribute] are not compatibles.
+     * [FilterRange] and [FilterComparison] are compatibles, which is represented by the [FilterNumeric] class.
+     * [FacetFilter] and [FilterNumeric] with the same [Attribute] are not compatibles.
      */
     fun or(vararg filters: Filter): FilterBuilder {
         this.filters.or(*filters)
