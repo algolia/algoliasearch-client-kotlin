@@ -6,6 +6,7 @@ package client.query.helper
  *
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
  */
+@QueryHelper
 class FilterBuilder {
 
     private val filters = Filters<Filter>()

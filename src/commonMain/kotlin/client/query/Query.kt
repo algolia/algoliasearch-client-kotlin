@@ -1,10 +1,11 @@
 package client.query
 
 import client.query.helper.Attribute
+import client.query.helper.QueryHelper
 import client.query.helper.FilterBuilder
 import client.query.helper.OptionalFilterBuilder
 
-
+@QueryHelper
 class Query(
     /**
      * The text to search in the index.

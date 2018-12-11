@@ -130,4 +130,27 @@ class TestQueryHelper {
             assertEquals(listOf(ResponseFields.All), responseFields)
         }
     }
+
+    @Test
+    fun filterBuilder() {
+        val query = queryBuilder {
+            filterBuilder {
+                or(FilterFacet(attributeA, "valueA"), FilterBoolean(attributeB, true))
+            }
+        }
+        assertEquals("attributeA:valueA AND attributeB:true", query.filterBuilder.build())
+    }
+
+    @Test
+    fun optionalFilterBuilder() {
+        val query = queryBuilder {
+            optionalFilterBuilder {
+                and(FilterFacet(attributeA, "valueA"), FilterBoolean(attributeA, true))
+            }
+        }
+        assertEquals(
+            listOf(listOf("attributeA:valueA"), listOf("attributeA:true")),
+            query.optionalFilterBuilder.build()
+        )
+    }
 }

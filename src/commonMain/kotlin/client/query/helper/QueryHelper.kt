@@ -5,6 +5,9 @@ import client.query.Query
 import client.query.QueryLanguage
 import client.query.ResponseFields
 
+@DslMarker
+annotation class QueryHelper
+
 internal val Collection<Attribute>.names get() = map { it.name }
 
 internal val all = Attribute("*")
@@ -83,4 +86,12 @@ fun Query.setAnalyticsTags(vararg tags: String) {
 
 fun Query.setResponseFields(vararg responseFields: ResponseFields) {
     this.responseFields = responseFields.toList()
+}
+
+inline fun Query.filterBuilder(init: FilterBuilder.() -> Unit) {
+    filterBuilder.apply(init)
+}
+
+inline fun Query.optionalFilterBuilder(init: OptionalFilterBuilder.() -> Unit) {
+    optionalFilterBuilder.apply(init)
 }
