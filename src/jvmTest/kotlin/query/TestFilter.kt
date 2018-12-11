@@ -13,10 +13,10 @@ class TestFilter {
 
     @Test
     fun boolean() {
-        val filterTrue = FilterBoolean(attributeA, true)
-        val filterFalse = FilterBoolean(attributeA, false)
-        val filterTrueNegate = FilterBoolean(attributeA, true, true)
-        val filterFalseNegate = FilterBoolean(attributeA, false, true)
+        val filterTrue = FilterFacet(attributeA, true)
+        val filterFalse = FilterFacet(attributeA, false)
+        val filterTrueNegate = FilterFacet(attributeA, true).not()
+        val filterFalseNegate = FilterFacet(attributeA, false).not()
 
         assertEquals("attributeA:true", filterTrue.build())
         assertEquals("attributeA:false", filterFalse.build())
@@ -27,7 +27,7 @@ class TestFilter {
     @Test
     fun facet() {
         val filter = FilterFacet(attributeA, "valueA")
-        val filterNegate = FilterFacet(attributeA, "valueA", true)
+        val filterNegate = FilterFacet(attributeA, "valueA").not()
 
         assertEquals("attributeA:valueA", filter.build())
         assertEquals("NOT attributeA:valueA", filterNegate.build())
@@ -36,7 +36,7 @@ class TestFilter {
     @Test
     fun range() {
         val filter = FilterRange(attributeA, 5.0, 6.0)
-        val filterNegate = FilterRange(attributeA, 5.0, 6.0, true)
+        val filterNegate = FilterRange(attributeA, 5.0, 6.0).not()
 
         assertEquals("attributeA:5.0 TO 6.0", filter.build())
         assertEquals("NOT attributeA:5.0 TO 6.0", filterNegate.build())
@@ -45,7 +45,7 @@ class TestFilter {
     @Test
     fun tag() {
         val filter = FilterTag("valueA")
-        val filterNegate = FilterTag("valueA", true)
+        val filterNegate = FilterTag("valueA").not()
 
         assertEquals("_tags:valueA", filter.build())
         assertEquals("NOT _tags:valueA", filterNegate.build())
@@ -54,7 +54,7 @@ class TestFilter {
     @Test
     fun comparison() {
         val filter = FilterComparison(attributeA, NumericOperator.Greater, 5.0)
-        val filterNegate = FilterComparison(attributeA, NumericOperator.Greater, 5.0, true)
+        val filterNegate = FilterComparison(attributeA, NumericOperator.Greater, 5.0).not()
 
         assertEquals("attributeA > 5.0", filter.build())
         assertEquals("NOT attributeA > 5.0", filterNegate.build())

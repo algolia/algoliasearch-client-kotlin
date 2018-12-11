@@ -10,47 +10,47 @@ package client.query.helper
 class OptionalFilterBuilder {
 
 
-    private val filters = Filters<FacetFilter>()
+    private val filters = Filters<FilterFacet>()
 
     /**
-     * @param filters One or many [FacetFilter].
+     * @param filters One or many [FilterFacet].
      *
-     * Add one or several AND (conjunctive) [FacetFilter] to the [filters] list.
+     * Add one or several AND (conjunctive) [FilterFacet] to the [filters] list.
      * Conjunctive filters will result in a expression such as this: FilterA AND FilterB AND ...
      */
-    fun and(vararg filters: FacetFilter): OptionalFilterBuilder {
+    fun and(vararg filters: FilterFacet): OptionalFilterBuilder {
         this.filters.and(*filters)
         return this
     }
 
     /**
-     * @param filters One or many [FacetFilter].
-     * Add one or several OR (disjunctive) [FacetFilter] to the [filters] list.
-     * Disjunctive filters will be grouped by [FacetFilter.attribute] in a expression such as this:
+     * @param filters One or many [FilterFacet].
+     * Add one or several OR (disjunctive) [FilterFacet] to the [filters] list.
+     * Disjunctive filters will be grouped by [FilterFacet.attribute] in a expression such as this:
      * (attributeA:valueA OR attributeA:valueB) AND (attributeB:valueA OR attributeB:valueB)
      */
-    fun or(vararg filters: FacetFilter): OptionalFilterBuilder {
+    fun or(vararg filters: FilterFacet): OptionalFilterBuilder {
         this.filters.or(*filters)
         return this
     }
 
     /**
-     * @param filter The [FacetFilter] to replace.
-     * @param replacement The [FacetFilter] to replace it with.
+     * @param filter The [FilterFacet] to replace.
+     * @param replacement The [FilterFacet] to replace it with.
      *
      * Replace all occurrences of [filter] by [replacement], whether disjunctive or conjunctive.
      */
-    fun replace(filter: FacetFilter, replacement: FacetFilter): OptionalFilterBuilder {
+    fun replace(filter: FilterFacet, replacement: FilterFacet): OptionalFilterBuilder {
         filters.replace(filter, replacement)
         return this
     }
 
     /**
-     * @param filters The [FacetFilter] to remove.
+     * @param filters The [FilterFacet] to remove.
      *
      * Remove all occurrences of [filters], whether disjunctive or conjunctive.
      */
-    fun remove(vararg filters: FacetFilter): OptionalFilterBuilder {
+    fun remove(vararg filters: FilterFacet): OptionalFilterBuilder {
         this.filters.remove(*filters)
         return this
     }
@@ -58,18 +58,18 @@ class OptionalFilterBuilder {
     /**
      * @param attribute The [Attribute] used for matching, if any.
      *
-     * Retrieve all [FacetFilter] matching the [attribute], if any. Returns conjunctive and disjunctive
+     * Retrieve all [FilterFacet] matching the [attribute], if any. Returns conjunctive and disjunctive
      * filters indifferently.
      */
-    fun getFilters(attribute: Attribute? = null): Set<FacetFilter> {
+    fun getFilters(attribute: Attribute? = null): Set<FilterFacet> {
         return filters.getFilters(attribute)
     }
 
     /**
-     * @param attribute The [Attribute]] matching [FacetFilter.attribute], if any.
+     * @param attribute The [Attribute]] matching [FilterFacet.attribute], if any.
      *
-     * Remove all [FacetFilter], whether disjunctive or conjunctive.
-     * You can specify a [attribute] to only remove [FacetFilter] that matches.
+     * Remove all [FilterFacet], whether disjunctive or conjunctive.
+     * You can specify a [attribute] to only remove [FilterFacet] that matches.
      */
     fun clear(attribute: Attribute? = null): OptionalFilterBuilder {
         filters.clear(attribute)
@@ -80,7 +80,7 @@ class OptionalFilterBuilder {
      * @param attribute The [Attribute] to replace.
      * @param replacement The [Attribute] to replacement.
      *
-     * Replace all [FacetFilter.attribute] matching [attribute] by [replacement].
+     * Replace all [FilterFacet.attribute] matching [attribute] by [replacement].
      */
     fun replaceAttribute(
         attribute: Attribute,

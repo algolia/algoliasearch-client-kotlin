@@ -76,7 +76,7 @@ class TestFilterBuilder {
     fun showcaseConjunctiveWidgets() {
         // First widget for conjunctive filter on a isFeatured attribute
         val isFeatured = Attribute("isFeatured")
-        val isFeaturedBoolean = FilterBoolean(isFeatured, true)
+        val isFeaturedBoolean = FilterFacet(isFeatured, true)
         // Second widget for a conjunctive filter on price attribute
         val price = Attribute("price")
         val priceFilter = FilterComparison(price, NumericOperator.Greater, 10.0)

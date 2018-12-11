@@ -22,7 +22,7 @@ internal fun <T : Filter> Filters<T>.or(vararg filters: T) {
         ors.find { or ->
             filter.attribute == or.attribute && when (filter) {
                 is NumericFilter -> or !is NumericFilter
-                is FacetFilter -> or !is FacetFilter
+                is FilterFacet -> or !is FilterFacet
                 is FilterTag -> or !is FilterTag
                 else -> throw Exception("This should not happen.")
             }
@@ -78,8 +78,12 @@ internal fun Filter.modifyAttribute(attribute: Attribute): Filter {
     return when (this) {
         is FilterComparison -> copy(attribute = attribute)
         is FilterTag -> this
-        is FilterBoolean -> copy(attribute = attribute)
         is FilterFacet -> copy(attribute = attribute)
         is FilterRange -> copy(attribute = attribute)
     }
+}
+
+fun Filter.not(): Filter {
+    not = true
+    return this
 }

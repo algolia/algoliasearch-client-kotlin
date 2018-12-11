@@ -135,7 +135,7 @@ class TestQueryHelper {
     fun filterBuilder() {
         val query = queryBuilder {
             filterBuilder {
-                or(FilterFacet(attributeA, "valueA"), FilterBoolean(attributeB, true))
+                or(FilterFacet(attributeA, "valueA"), FilterFacet(attributeB, true))
             }
         }
         assertEquals("attributeA:valueA AND attributeB:true", query.filterBuilder.build())
@@ -145,7 +145,7 @@ class TestQueryHelper {
     fun optionalFilterBuilder() {
         val query = queryBuilder {
             optionalFilterBuilder {
-                and(FilterFacet(attributeA, "valueA"), FilterBoolean(attributeA, true))
+                and(FilterFacet(attributeA, "valueA"), FilterFacet(attributeA, true))
             }
         }
         assertEquals(

@@ -2,57 +2,45 @@ package client.query.helper
 
 
 sealed class Filter(
-    open val attribute: Attribute,
-    open val negates: Boolean
+    open val attribute: Attribute
 ) {
+
+    internal var not = false
 
     abstract val expression: String
 
-    fun build() = if (negates) "NOT $expression" else expression
+    fun build() = if (not) "NOT $expression" else expression
 }
-
-sealed class FacetFilter(
-    override val attribute: Attribute,
-    override val negates: Boolean
-) : Filter(attribute, negates)
 
 sealed class NumericFilter(
-    override val attribute: Attribute,
-    override val negates: Boolean
-) : Filter(attribute, negates)
-
-data class FilterFacet(
-    override val attribute: Attribute,
-    val value: String,
-    override val negates: Boolean = false
-) : FacetFilter(attribute, negates) {
-
-    override val expression = "$attribute:$value"
-}
-
-data class FilterBoolean(
-    override val attribute: Attribute,
-    val value: Boolean,
-    override val negates: Boolean = false
-) : FacetFilter(attribute, negates) {
-
-    override val expression = "$attribute:$value"
-}
+    override val attribute: Attribute
+) : Filter(attribute)
 
 data class FilterTag(
-    val value: String,
-    override val negates: Boolean = false
-) : Filter(Attribute("_tags"), negates) {
+    val value: String
+) : Filter(Attribute("_tags")) {
 
     override val expression = "$attribute:$value"
+}
+
+data class FilterFacet internal constructor(
+    override val attribute: Attribute,
+    private val string: String? = null,
+    private val boolean: Boolean? = null
+) : Filter(attribute) {
+
+    constructor(attribute: Attribute, string: String) : this(attribute, string, null)
+
+    constructor(attribute: Attribute, boolean: Boolean) : this(attribute, null, boolean)
+
+    override val expression: String = if (string != null) "$attribute:$string" else "$attribute:$boolean"
 }
 
 data class FilterComparison(
     override val attribute: Attribute,
     val operator: NumericOperator,
-    val value: Double,
-    override val negates: Boolean = false
-) : NumericFilter(attribute, negates) {
+    val value: Double
+) : NumericFilter(attribute) {
 
     override val expression = "$attribute ${operator.raw} $value"
 }
@@ -60,9 +48,8 @@ data class FilterComparison(
 data class FilterRange(
     override val attribute: Attribute,
     val lowerBound: Double,
-    val upperBound: Double,
-    override val negates: Boolean = false
-) : NumericFilter(attribute, negates) {
+    val upperBound: Double
+) : NumericFilter(attribute) {
 
     override val expression = "$attribute:$lowerBound TO $upperBound"
 }

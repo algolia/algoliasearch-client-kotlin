@@ -2,7 +2,6 @@ package query
 
 import client.query.Query
 import client.query.helper.Attribute
-import client.query.helper.FilterBoolean
 import client.query.helper.FilterFacet
 import client.query.helper.OptionalFilterBuilder
 import org.junit.Test
@@ -18,8 +17,8 @@ class TestOptionalFilterBuilder {
     private val attributeB = Attribute("attributeB")
     private val filterA = FilterFacet(attributeA, "facetA")
     private val filterB = FilterFacet(attributeA, "facetB")
-    private val filterC = FilterBoolean(attributeB, true)
-    private val filterD = FilterBoolean(attributeB, false)
+    private val filterC = FilterFacet(attributeB, true)
+    private val filterD = FilterFacet(attributeB, false)
 
     private fun builder() = OptionalFilterBuilder()
 

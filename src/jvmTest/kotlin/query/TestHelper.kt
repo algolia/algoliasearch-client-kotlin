@@ -17,7 +17,7 @@ class TestHelper {
     private val attributeC = Attribute("attributeC")
     private val filterA = FilterFacet(attributeA, "facetA")
     private val filterB = FilterFacet(attributeA, "facetB")
-    private val filterC = FilterBoolean(attributeC, true)
+    private val filterC = FilterFacet(attributeC, true)
     private val filterD = FilterTag("tag")
     private val filterE = FilterComparison(attributeB, NumericOperator.Equals, 5.0)
 
