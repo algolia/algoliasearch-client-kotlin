@@ -113,9 +113,9 @@ class TestHelper {
             assertTrue(getFilters(attributeA).isEmpty())
             and(filterA, filterB)
             or(filterC, filterD, filterE)
-            assertEquals(listOf(filterA, filterB), getFilters(attributeA))
-            assertEquals(listOf(filterE), getFilters(attributeB))
-            assertEquals(listOf(filterA, filterB, filterC, filterD, filterE), getFilters())
+            assertEquals(setOf(filterA, filterB), getFilters(attributeA))
+            assertEquals(setOf(filterE), getFilters(attributeB))
+            assertEquals(setOf(filterA, filterB, filterC, filterD, filterE), getFilters())
         }
     }
 

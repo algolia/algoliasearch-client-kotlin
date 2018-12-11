@@ -60,7 +60,7 @@ class OptionalFilterBuilder {
      * Retrieve all [FacetFilter] matching the [attribute], if any. Returns conjunctive and disjunctive
      * filters indifferently.
      */
-    fun getFilters(attribute: Attribute? = null): List<FacetFilter> {
+    fun getFilters(attribute: Attribute? = null): Set<FacetFilter> {
         return filters.getFilters(attribute)
     }
 

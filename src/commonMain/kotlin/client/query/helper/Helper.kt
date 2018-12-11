@@ -43,11 +43,11 @@ internal fun <T : Filter> Filters<T>.remove(vararg filters: T) {
     ors.removeAll(filters)
 }
 
-internal fun <T : Filter> Filters<T>.getFilters(attribute: Attribute? = null): List<T> {
+internal fun <T : Filter> Filters<T>.getFilters(attribute: Attribute? = null): Set<T> {
     return if (attribute != null) {
-        ands.filter { it.attribute == attribute } + ors.filter { it.attribute == attribute }
+        ands.filter { it.attribute == attribute }.toSet() + ors.filter { it.attribute == attribute }
     } else {
-        ands.toList() + ors
+        ands + ors
     }
 }
 

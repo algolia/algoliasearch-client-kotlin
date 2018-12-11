@@ -19,7 +19,7 @@ import kotlin.test.assertEquals
 class TestRetryLogic {
 
     private val hosts = Hosts(ApplicationId("appId"))
-    private val path = "/path"
+    private val route = "/route"
     private val mockEngine = MockEngine {
         MockHttpResponse(
             call,
@@ -35,7 +35,7 @@ class TestRetryLogic {
         runBlocking {
             var retry = -1
 
-            hosts.retryLogic(1000L, path) {
+            hosts.retryLogic(1000L, route) {
                 retry++
                 httpClient.get()
             }
@@ -48,7 +48,7 @@ class TestRetryLogic {
         runBlocking {
             var retry = -1
 
-            hosts.retryLogic(1000L, path) {
+            hosts.retryLogic(1000L, route) {
                 retry++
                 if (retry == 0) delay(2000L)
                 httpClient.get()
@@ -62,12 +62,12 @@ class TestRetryLogic {
         runBlocking {
             var retry = -1
 
-            hosts.retryLogic(500L, path) { path ->
+            hosts.retryLogic(500L, route) { path ->
                 retry++
                 when (retry) {
-                    0 -> assertEquals(hosts.fallbackHosts[0], path)
-                    1 -> assertEquals(hosts.fallbackHosts[1], path)
-                    2 -> assertEquals(hosts.fallbackHosts[2], path)
+                    0 -> assertEquals(hosts.fallbackHosts[0] + route, path)
+                    1 -> assertEquals(hosts.fallbackHosts[1] + route, path)
+                    2 -> assertEquals(hosts.fallbackHosts[2] + route, path)
                 }
                 if (retry < 3) delay(500L * (retry + 1))
                 httpClient.get(path)

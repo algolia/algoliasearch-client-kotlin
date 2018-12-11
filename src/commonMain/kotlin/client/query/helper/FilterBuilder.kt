@@ -64,7 +64,7 @@ class FilterBuilder {
      * Retrieve all [Filter] matching the [attribute], if any. Returns conjunctive and disjunctive
      * filters indifferently.
      */
-    fun getFilters(attribute: Attribute? = null): List<Filter> {
+    fun getFilters(attribute: Attribute? = null): Set<Filter> {
         return filters.getFilters(attribute)
     }
 

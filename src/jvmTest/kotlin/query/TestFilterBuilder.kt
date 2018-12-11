@@ -62,8 +62,8 @@ class TestFilterBuilder {
         FilterBuilder().apply {
             or(apple, samsung)
             or(intel, qualcomm)
-            assertEquals(listOf(intel, qualcomm), getFilters(chip))
-            assertEquals(listOf(apple, samsung, intel, qualcomm), getFilters())
+            assertEquals(setOf(intel, qualcomm), getFilters(chip))
+            assertEquals(setOf(apple, samsung, intel, qualcomm), getFilters())
             assertEquals("(phone:apple OR phone:samsung) AND (chip:intel OR chip:qualcomm)", build())
             clear(phone)
             assertEquals("chip:intel OR chip:qualcomm", build())
