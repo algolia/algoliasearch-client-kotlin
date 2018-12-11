@@ -1,80 +1,88 @@
 package client.query.helper
 
-class IncompatibleFilterTypeException(
-    filterA: Filter,
-    filterB: Filter
-) : Exception(
-    "Incompatible filters of type ${filterA::class.simpleName} and " +
-        "${filterB::class.simpleName} with the same attribute \"${filterB.attribute}\""
-)
+import kotlin.reflect.KClass
 
-internal data class Filters<T : Filter>(
-    val ands: MutableSet<T> = mutableSetOf(),
-    val ors: MutableSet<T> = mutableSetOf()
-)
 
-internal fun <T : Filter> Filters<T>.and(vararg filters: T) {
-    ands += filters
+internal data class GroupKey<T : Filter>(val name: String, val kClass: KClass<T>)
+
+sealed class Group(open val name: String) {
+
+    data class And(override val name: String) : Group(name)
+
+    data class Or(override val name: String) : Group(name)
 }
 
-internal fun <T : Filter> Filters<T>.or(vararg filters: T) {
-    filters.forEach { filter ->
-        ors.find { or ->
-            filter.attribute == or.attribute && when (filter) {
-                is FilterNumeric -> or !is FilterNumeric
-                is FilterFacet -> or !is FilterFacet
-                is FilterTag -> or !is FilterTag
-                else -> throw Exception("This should not happen.")
-            }
-        }.let {
-            if (it != null) throw IncompatibleFilterTypeException(it, filter)
+internal inline fun <reified T : Filter> Group.key(): GroupKey<T> {
+    return GroupKey(name, T::class)
+}
+
+internal typealias GroupMap = MutableMap<GroupKey<*>, MutableSet<Filter>>
+
+internal inline fun <reified T : Filter> GroupMap.add(group: Group, filters: Array<out T>) {
+    val key = group.key<T>()
+    getOrElse(key) { mutableSetOf() }.let {
+        it += filters
+        this[key] = it
+    }
+}
+
+internal inline fun <reified T : Filter> GroupMap.remove(group: Group, filters: Array<out T>): Boolean {
+    return get(group.key<T>())?.removeAll(filters) ?: false
+}
+
+internal inline fun <reified T : Filter> GroupMap.containsReified(group: Group, filter: T): Boolean {
+    return get(group.key<T>())?.contains(filter) ?: false
+}
+
+internal fun GroupMap.contains(group: Group, filter: Filter): Boolean {
+    return when (filter) {
+        is FilterFacet -> containsReified(group, filter)
+        is FilterNumeric -> containsReified(group, filter)
+        is FilterTag -> containsReified(group, filter)
+    }
+}
+
+internal fun GroupMap.clear(group: Group, attribute: Attribute?) {
+    clearReified<FilterFacet>(group, attribute)
+    clearReified<FilterNumeric>(group, attribute)
+    clearReified<FilterTag>(group, attribute)
+    clearReified<Filter>(group, attribute)
+}
+
+internal fun GroupMap.replaceAttribute(group: Group, attribute: Attribute, replacement: Attribute) {
+    replaceAttributeReified<FilterFacet>(group, attribute, replacement)
+    replaceAttributeReified<FilterNumeric>(group, attribute, replacement)
+    replaceAttributeReified<FilterTag>(group, attribute, replacement)
+    replaceAttributeReified<Filter>(group, attribute, replacement)
+}
+
+private inline fun <reified T : Filter> GroupMap.clearReified(group: Group, attribute: Attribute?) {
+    val key = group.key<T>()
+
+    get(key)?.let { set ->
+        if (attribute != null) {
+            set.removeAll { it.attribute == attribute }
+        } else {
+            set.clear()
         }
-        ors += filter
+        if (set.isEmpty()) remove(key)
     }
 }
 
-internal fun <T : Filter> Filters<T>.replace(filter: T, replacement: T) {
-    if (ands.remove(filter)) ands += replacement
-    if (ors.remove(filter)) ors += replacement
-}
-
-internal fun <T : Filter> Filters<T>.remove(vararg filters: T) {
-    ands.removeAll(filters)
-    ors.removeAll(filters)
-}
-
-internal fun <T : Filter> Filters<T>.getFilters(attribute: Attribute? = null): Set<T> {
-    return if (attribute != null) {
-        ands.filter { it.attribute == attribute }.toSet() + ors.filter { it.attribute == attribute }
-    } else {
-        ands + ors
-    }
-}
-
-internal fun <T : Filter> Filters<T>.clear(attribute: Attribute? = null) {
-    if (attribute != null) {
-        ands.removeAll { it.attribute == attribute }
-        ors.removeAll { it.attribute == attribute }
-    } else {
-        ands.clear()
-        ors.clear()
-    }
-}
-
-internal inline fun <reified T : Filter> Filters<T>.replaceAttribute(
+private inline fun <reified T : Filter> GroupMap.replaceAttributeReified(
+    group: Group,
     attribute: Attribute,
     replacement: Attribute
 ) {
-    val ands = ands.filter { it.attribute == attribute }
-    val ors = ors.filter { it.attribute == attribute }
+    get(group.key<T>())?.let {
+        val attributes = it.filter { it.attribute == attribute }
 
-    this.ands.removeAll(ands)
-    this.ors.removeAll(ors)
-    this.ands += ands.map { it.modifyAttribute(replacement) as T }
-    this.ors += ors.map { it.modifyAttribute(replacement) as T }
+        it.removeAll(attributes)
+        it += attributes.map { it.modifyAttribute(replacement) }
+    }
 }
 
-internal fun Filter.modifyAttribute(attribute: Attribute): Filter {
+private fun Filter.modifyAttribute(attribute: Attribute): Filter {
     return when (this) {
         is FilterComparison -> copy(attribute = attribute)
         is FilterTag -> this
