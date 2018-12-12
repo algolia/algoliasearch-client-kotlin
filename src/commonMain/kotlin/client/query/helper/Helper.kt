@@ -1,9 +1,13 @@
 package client.query.helper
 
-import kotlin.reflect.KClass
+internal enum class ClassKey {
+    Filter,
+    FilterFacet,
+    FilterNumeric,
+    FilterTag
+}
 
-
-internal data class GroupKey<T : Filter>(val name: String, val kClass: KClass<T>)
+internal data class GroupKey(val name: String, val key: ClassKey)
 
 sealed class Group(open val name: String) {
 
@@ -12,73 +16,57 @@ sealed class Group(open val name: String) {
     data class Or(override val name: String) : Group(name)
 }
 
-internal inline fun <reified T : Filter> Group.key(): GroupKey<T> {
-    return GroupKey(name, T::class)
+internal fun Group.key(filter: Filter): GroupKey {
+    val key = when (this) {
+        is Group.And -> when (filter) {
+            is FilterFacet -> ClassKey.FilterFacet
+            is FilterNumeric -> ClassKey.FilterNumeric
+            is FilterTag -> ClassKey.FilterTag
+        }
+        is Group.Or -> ClassKey.Filter
+    }
+    return GroupKey(name, key)
 }
 
-internal typealias GroupMap = MutableMap<GroupKey<*>, MutableSet<Filter>>
+internal typealias GroupMap = MutableMap<GroupKey, MutableSet<Filter>>
 
-internal inline fun <reified T : Filter> GroupMap.add(group: Group, filters: Array<out T>) {
-    val key = group.key<T>()
-    getOrElse(key) { mutableSetOf() }.let {
-        it += filters
-        this[key] = it
+internal fun GroupMap.add(group: Group, vararg filters: Filter) {
+    filters.forEach {
+        val key = group.key(it)
+        getOrElse(key) { mutableSetOf() }.let {
+            it += filters
+            this[key] = it
+        }
     }
 }
 
-internal inline fun <reified T : Filter> GroupMap.remove(group: Group, filters: Array<out T>): Boolean {
-    return get(group.key<T>())?.removeAll(filters) ?: false
-}
-
-internal inline fun <reified T : Filter> GroupMap.containsReified(group: Group, filter: T): Boolean {
-    return get(group.key<T>())?.contains(filter) ?: false
+internal fun GroupMap.remove(group: Group, vararg filters: Filter): Boolean {
+    return filters.any {
+        get(group.key(it))?.remove(it) ?: false
+    }
 }
 
 internal fun GroupMap.contains(group: Group, filter: Filter): Boolean {
-    return when (filter) {
-        is FilterFacet -> containsReified(group, filter)
-        is FilterNumeric -> containsReified(group, filter)
-        is FilterTag -> containsReified(group, filter)
-    }
+    return get(group.key(filter))?.contains(filter) ?: false
 }
 
 internal fun GroupMap.clear(group: Group, attribute: Attribute?) {
-    clearReified<FilterFacet>(group, attribute)
-    clearReified<FilterNumeric>(group, attribute)
-    clearReified<FilterTag>(group, attribute)
-    clearReified<Filter>(group, attribute)
-}
-
-internal fun GroupMap.replaceAttribute(group: Group, attribute: Attribute, replacement: Attribute) {
-    replaceAttributeReified<FilterFacet>(group, attribute, replacement)
-    replaceAttributeReified<FilterNumeric>(group, attribute, replacement)
-    replaceAttributeReified<FilterTag>(group, attribute, replacement)
-    replaceAttributeReified<Filter>(group, attribute, replacement)
-}
-
-private inline fun <reified T : Filter> GroupMap.clearReified(group: Group, attribute: Attribute?) {
-    val key = group.key<T>()
-
-    get(key)?.let { set ->
+    filterKeys { it.name == group.name }.forEach {
         if (attribute != null) {
-            set.removeAll { it.attribute == attribute }
+            it.value.removeAll { it.attribute == attribute }
         } else {
-            set.clear()
+            it.value.clear()
         }
-        if (set.isEmpty()) remove(key)
+        if (it.value.isEmpty()) remove(it.key)
     }
 }
 
-private inline fun <reified T : Filter> GroupMap.replaceAttributeReified(
-    group: Group,
-    attribute: Attribute,
-    replacement: Attribute
-) {
-    get(group.key<T>())?.let {
-        val attributes = it.filter { it.attribute == attribute }
+internal fun GroupMap.replaceAttribute(group: Group, attribute: Attribute, replacement: Attribute) {
+    filterKeys { it.name == group.name }.forEach {
+        val found = it.value.filter { it.attribute == attribute }
 
-        it.removeAll(attributes)
-        it += attributes.map { it.modifyAttribute(replacement) }
+        it.value -= found
+        it.value += found.map { it.modifyAttribute(replacement) }
     }
 }
 

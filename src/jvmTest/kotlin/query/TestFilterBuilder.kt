@@ -25,11 +25,13 @@ class TestFilterBuilder {
         val colors = Group.Or("colors")
 
         FilterBuilder {
-            categories.add(categoryBook, categoryOffice)
+            categories += categoryBook
+            categories += categoryOffice
             assertEquals("category:book OR category:office", build())
-            colors.add(colorRed, colorBlue)
+            colors += colorRed
+            colors += colorBlue
             assertEquals("(category:book OR category:office) AND (color:red OR color:blue)", build())
-            categories.remove(categoryBook)
+            categories -= categoryBook
             assertEquals("category:office AND (color:red OR color:blue)", build())
             categories.clear()
             assertEquals("color:red OR color:blue", build())
@@ -54,14 +56,26 @@ class TestFilterBuilder {
         val euros = Group.And("euros")
 
         FilterBuilder {
-            categories.add(categoryBook, categoryOffice)
+            categories += listOf(categoryBook, categoryOffice)
             assertEquals("category:book OR category:office", build())
-            euros.add(comparison)
+            euros += comparison
             assertEquals("euro != 15.0 AND (category:book OR category:office)", build())
-            euros.add(range)
+            euros += range
             assertEquals("euro != 15.0 AND euro:5.0 TO 20.0 AND (category:book OR category:office)", build())
             euros.replaceAttribute(euro, euro.copy(name = "dollar"))
             assertEquals("dollar != 15.0 AND dollar:5.0 TO 20.0 AND (category:book OR category:office)", build())
+        }
+    }
+
+    @Test
+    fun and() {
+        val groupA = Group.And("groupA")
+
+        FilterBuilder {
+            groupA += FilterFacet(Attribute("facet"))
+            groupA += FilterTag("value")
+
+            groupA
         }
     }
 }

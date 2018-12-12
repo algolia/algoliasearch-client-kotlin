@@ -16,41 +16,49 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) {
         init?.invoke(this)
     }
 
-    fun Group.Or.add(vararg filters: FilterFacet) {
-        ors.add(this, filters)
+    operator fun Group.Or.plusAssign(filter: Filter) {
+        ors.add(this, filter)
     }
 
-    fun Group.Or.add(vararg filters: FilterTag) {
-        ors.add(this, filters)
+    operator fun Group.Or.plusAssign(filters: Collection<Filter>) {
+        ors.add(this, *filters.toTypedArray())
     }
 
-    fun Group.Or.add(vararg filters: FilterNumeric) {
-        ors.add(this, filters)
+    operator fun Group.Or.minusAssign(filter: Filter) {
+        when (filter) {
+            is FilterNumeric -> ors.remove(this, filter)
+            is FilterTag -> ors.remove(this, filter)
+            is FilterFacet -> ors.remove(this, filter)
+        }
     }
 
-    fun Group.Or.remove(vararg filters: FilterFacet) {
-        ors.remove(this, filters)
+    operator fun Group.And.plusAssign(filter: Filter) {
+        ands.add(this, filter)
     }
 
-    fun Group.Or.remove(vararg filters: FilterNumeric) {
-        ors.remove(this, filters)
-    }
-
-    fun Group.Or.remove(vararg filters: FilterTag) {
-        ors.remove(this, filters)
-    }
-
-    fun Group.And.add(vararg filters: Filter) {
-        ands.add(this, filters)
+    operator fun Group.And.plusAssign(filters: Collection<Filter>) {
+        ands.add(this, *filters.toTypedArray())
     }
 
     fun Group.And.remove(vararg filters: Filter) {
+        ands.remove(this, *filters)
+    }
+
+    operator fun Group.And.minusAssign(filters: Filter) {
         ands.remove(this, filters)
     }
 
+    operator fun Group.And.minusAssign(filters: Collection<Filter>) {
+        ands.remove(this, *filters.toTypedArray())
+    }
+
+    /// ***********
+    /// GROUP
+    /// ***********
+
     fun Group.contains(filter: Filter): Boolean {
         return when (this) {
-            is Group.And -> ands.containsReified(this, filter)
+            is Group.And -> ands.contains(this, filter)
             is Group.Or -> ors.contains(this, filter)
         }
     }
