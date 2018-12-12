@@ -70,6 +70,16 @@ internal fun GroupMap.replaceAttribute(group: Group, attribute: Attribute, repla
     }
 }
 
+internal fun GroupMap.get(group: Group, attribute: Attribute?): Set<Filter> {
+    val filters = filterKeys { it.name == group.name }.flatMap { it.value }
+
+    return if (attribute != null) {
+        filters.filter { it.attribute == attribute }
+    } else {
+        filters
+    }.toSet()
+}
+
 private fun Filter.modifyAttribute(attribute: Attribute): Filter {
     return when (this) {
         is FilterComparison -> copy(attribute = attribute)
