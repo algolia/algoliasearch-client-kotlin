@@ -18,12 +18,12 @@ sealed class Group(open val name: String) {
 
 internal fun Group.key(filter: Filter): GroupKey {
     val key = when (this) {
-        is Group.And -> when (filter) {
+        is Group.Or -> when (filter) {
             is FilterFacet -> ClassKey.FilterFacet
             is FilterNumeric -> ClassKey.FilterNumeric
             is FilterTag -> ClassKey.FilterTag
         }
-        is Group.Or -> ClassKey.Filter
+        is Group.And -> ClassKey.Filter
     }
     return GroupKey(name, key)
 }
@@ -31,10 +31,10 @@ internal fun Group.key(filter: Filter): GroupKey {
 internal typealias GroupMap = MutableMap<GroupKey, MutableSet<Filter>>
 
 internal fun GroupMap.add(group: Group, vararg filters: Filter) {
-    filters.forEach {
-        val key = group.key(it)
+    filters.forEach { filter ->
+        val key = group.key(filter)
         getOrElse(key) { mutableSetOf() }.let {
-            it += filters
+            it += filter
             this[key] = it
         }
     }
