@@ -91,8 +91,3 @@ private inline fun <reified T> Filter.modifyAttribute(attribute: Attribute): T {
         is FilterRange -> copy(attribute = attribute)
     } as T
 }
-
-fun Filter.not(): Filter {
-    not = true
-    return this
-}

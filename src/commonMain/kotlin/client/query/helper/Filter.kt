@@ -10,6 +10,11 @@ sealed class Filter(
     abstract val expression: String
 
     fun build() = if (not) "NOT $expression" else expression
+
+    fun not(value: Boolean = true): Filter {
+        not = value
+        return this
+    }
 }
 
 sealed class FilterNumeric(
