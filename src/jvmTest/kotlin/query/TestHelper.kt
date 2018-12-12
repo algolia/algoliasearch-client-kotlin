@@ -51,7 +51,7 @@ class TestHelper {
 
     @Test
     fun add() {
-        val map: GroupMap = mutableMapOf()
+        val map: GroupMap<Filter> = mutableMapOf()
         val filters = arrayOf(facetA, facetB, comparisonA, comparisonB, rangeA, rangeB, tagA, tagB)
 
         map.apply {

@@ -7,52 +7,18 @@ package client.query.helper
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
  */
 @QueryHelper
-class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) {
-
-    private val filters: GroupMap = mutableMapOf()
+class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : AbstractFilterBuilder<Filter>() {
 
     init {
         init?.invoke(this)
     }
 
-    operator fun Group.minusAssign(filter: Filter) {
-        filters.remove(this, filter)
-    }
-
-    operator fun Group.minusAssign(filters: Collection<Filter>) {
-        this@FilterBuilder.filters.remove(this, *filters.toTypedArray())
-    }
-
-    operator fun Group.plusAssign(filter: Filter) {
-        filters.add(this, filter)
-    }
-
-    operator fun Group.plusAssign(filters: Collection<Filter>) {
-        this@FilterBuilder.filters.add(this, *filters.toTypedArray())
-    }
-
-    fun Group.contains(filter: Filter): Boolean {
-        return filters.contains(this, filter)
-    }
-
-    fun Group.clear(attribute: Attribute? = null) {
-        filters.clear(this, attribute)
-    }
-
-    fun Group.replaceAttribute(attribute: Attribute, replacement: Attribute) {
-        filters.replaceAttribute(this, attribute, replacement)
-    }
-
-    fun Group.get(attribute: Attribute? = null): Set<Filter> {
-        return filters.get(this, attribute)
-    }
-
-    fun clear() {
-        filters.clear()
+    override fun Group.replaceAttribute(attribute: Attribute, replacement: Attribute) {
+        groups.replaceAttribute(this, attribute, replacement)
     }
 
     fun build(): String {
-        val (andEntries, orEntries) = filters.entries.partition { it.key.key == ClassKey.Filter }
+        val (andEntries, orEntries) = groups.entries.partition { it.key.key == FilterKey.And }
         val ands = andEntries.joinToString(separator = " AND ") {
             val condition = andEntries.size > 1 && it.value.size > 1
             val prefix = if (condition) "(" else ""

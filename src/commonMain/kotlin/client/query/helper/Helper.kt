@@ -28,11 +28,12 @@ internal fun Group.key(filter: Filter): Group.Key {
     return Group.Key(name, key)
 }
 
-internal typealias GroupMap = MutableMap<Group.Key, MutableSet<Filter>>
+internal typealias GroupMap<T> = MutableMap<Group.Key, MutableSet<T>>
 
-internal fun GroupMap.add(group: Group, vararg filters: Filter) {
+internal fun <T : Filter> GroupMap<T>.add(group: Group, vararg filters: T) {
     filters.forEach { filter ->
         val key = group.key(filter)
+
         getOrElse(key) { mutableSetOf() }.let {
             it += filter
             this[key] = it
@@ -40,17 +41,15 @@ internal fun GroupMap.add(group: Group, vararg filters: Filter) {
     }
 }
 
-internal fun GroupMap.remove(group: Group, vararg filters: Filter): Boolean {
-    return filters.any {
-        get(group.key(it))?.remove(it) ?: false
-    }
+internal fun <T : Filter> GroupMap<T>.remove(group: Group, vararg filters: Filter): Boolean {
+    return filters.any { get(group.key(it))?.remove(it) ?: false }
 }
 
-internal fun GroupMap.contains(group: Group, filter: Filter): Boolean {
+internal fun <T : Filter> GroupMap<T>.contains(group: Group, filter: Filter): Boolean {
     return get(group.key(filter))?.contains(filter) ?: false
 }
 
-internal fun GroupMap.clear(group: Group, attribute: Attribute?) {
+internal fun <T : Filter> GroupMap<T>.clear(group: Group, attribute: Attribute?) {
     filterKeys { it.name == group.name }.forEach {
         if (attribute != null) {
             it.value.removeAll { it.attribute == attribute }
@@ -61,16 +60,20 @@ internal fun GroupMap.clear(group: Group, attribute: Attribute?) {
     }
 }
 
-internal fun GroupMap.replaceAttribute(group: Group, attribute: Attribute, replacement: Attribute) {
+internal inline fun <reified T : Filter> GroupMap<T>.replaceAttribute(
+    group: Group,
+    attribute: Attribute,
+    replacement: Attribute
+) {
     filterKeys { it.name == group.name }.forEach {
         val found = it.value.filter { it.attribute == attribute }
 
         it.value -= found
-        it.value += found.map { it.modifyAttribute(replacement) }
+        it.value += found.map { it.modifyAttribute<T>(replacement) }
     }
 }
 
-internal fun GroupMap.get(group: Group, attribute: Attribute?): Set<Filter> {
+internal fun <T : Filter> GroupMap<T>.get(group: Group, attribute: Attribute?): Set<T> {
     val filters = filterKeys { it.name == group.name }.flatMap { it.value }
 
     return if (attribute != null) {
@@ -80,13 +83,13 @@ internal fun GroupMap.get(group: Group, attribute: Attribute?): Set<Filter> {
     }.toSet()
 }
 
-private fun Filter.modifyAttribute(attribute: Attribute): Filter {
+private inline fun <reified T> Filter.modifyAttribute(attribute: Attribute): T {
     return when (this) {
         is FilterComparison -> copy(attribute = attribute)
         is FilterTag -> this
         is FilterFacet -> copy(attribute = attribute)
         is FilterRange -> copy(attribute = attribute)
-    }
+    } as T
 }
 
 fun Filter.not(): Filter {
