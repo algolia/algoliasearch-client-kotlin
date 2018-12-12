@@ -31,16 +31,16 @@ class TestHelper {
 
     @Test
     fun keyOr() {
-        assertEquals(GroupKey(nameA, ClassKey.FilterFacet), groupOrA.key(facetA))
-        assertEquals(GroupKey(nameA, ClassKey.FilterFacet), groupOrA.key(facetB))
-        assertEquals(GroupKey(nameA, ClassKey.FilterNumeric), groupOrA.key(comparisonA))
-        assertEquals(GroupKey(nameA, ClassKey.FilterNumeric), groupOrA.key(rangeA))
-        assertEquals(GroupKey(nameA, ClassKey.FilterTag), groupOrA.key(tagA))
+        assertEquals(Group.Key(nameA, FilterKey.OrFacet), groupOrA.key(facetA))
+        assertEquals(Group.Key(nameA, FilterKey.OrFacet), groupOrA.key(facetB))
+        assertEquals(Group.Key(nameA, FilterKey.OrNumeric), groupOrA.key(comparisonA))
+        assertEquals(Group.Key(nameA, FilterKey.OrNumeric), groupOrA.key(rangeA))
+        assertEquals(Group.Key(nameA, FilterKey.OrTag), groupOrA.key(tagA))
     }
 
     @Test
     fun keyAnd() {
-        val key = GroupKey(nameA, ClassKey.Filter)
+        val key = Group.Key(nameA, FilterKey.And)
 
         assertEquals(key, groupAndA.key(facetA))
         assertEquals(key, groupAndA.key(facetB))
@@ -62,14 +62,14 @@ class TestHelper {
         }
         assertEquals(
             mutableMapOf(
-                GroupKey(nameA, ClassKey.FilterFacet) to set(facetA, facetB),
-                GroupKey(nameA, ClassKey.FilterNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
-                GroupKey(nameA, ClassKey.FilterTag) to set(tagA, tagB),
-                GroupKey(nameA, ClassKey.Filter) to set(*filters),
-                GroupKey(nameB, ClassKey.FilterFacet) to set(facetA, facetB),
-                GroupKey(nameB, ClassKey.FilterNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
-                GroupKey(nameB, ClassKey.FilterTag) to set(tagA, tagB),
-                GroupKey(nameB, ClassKey.Filter) to set(*filters)
+                Group.Key(nameA, FilterKey.OrFacet) to set(facetA, facetB),
+                Group.Key(nameA, FilterKey.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
+                Group.Key(nameA, FilterKey.OrTag) to set(tagA, tagB),
+                Group.Key(nameA, FilterKey.And) to set(*filters),
+                Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB),
+                Group.Key(nameB, FilterKey.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
+                Group.Key(nameB, FilterKey.OrTag) to set(tagA, tagB),
+                Group.Key(nameB, FilterKey.And) to set(*filters)
             ),
             map
         )

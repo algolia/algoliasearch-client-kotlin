@@ -1,34 +1,34 @@
 package client.query.helper
 
-internal enum class ClassKey {
-    Filter,
-    FilterFacet,
-    FilterNumeric,
-    FilterTag
+internal enum class FilterKey {
+    And,
+    OrFacet,
+    OrNumeric,
+    OrTag
 }
 
-internal data class GroupKey(val name: String, val key: ClassKey)
-
 sealed class Group(open val name: String) {
+
+    internal data class Key(val name: String, val key: FilterKey)
 
     data class And(override val name: String) : Group(name)
 
     data class Or(override val name: String) : Group(name)
 }
 
-internal fun Group.key(filter: Filter): GroupKey {
+internal fun Group.key(filter: Filter): Group.Key {
     val key = when (this) {
         is Group.Or -> when (filter) {
-            is FilterFacet -> ClassKey.FilterFacet
-            is FilterNumeric -> ClassKey.FilterNumeric
-            is FilterTag -> ClassKey.FilterTag
+            is FilterFacet -> FilterKey.OrFacet
+            is FilterNumeric -> FilterKey.OrNumeric
+            is FilterTag -> FilterKey.OrTag
         }
-        is Group.And -> ClassKey.Filter
+        is Group.And -> FilterKey.And
     }
-    return GroupKey(name, key)
+    return Group.Key(name, key)
 }
 
-internal typealias GroupMap = MutableMap<GroupKey, MutableSet<Filter>>
+internal typealias GroupMap = MutableMap<Group.Key, MutableSet<Filter>>
 
 internal fun GroupMap.add(group: Group, vararg filters: Filter) {
     filters.forEach { filter ->
