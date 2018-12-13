@@ -9,11 +9,11 @@ package client.query.helper
 @QueryHelper
 class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInterface<Filter> {
 
+    private val groups: GroupMap<Filter> = mutableMapOf()
+
     init {
         init?.invoke(this)
     }
-
-    private val groups: GroupMap<Filter> = mutableMapOf()
 
     override operator fun Group.plusAssign(filter: Filter) {
         groups.add(this, filter)
@@ -67,5 +67,9 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
             it.value.joinToString(prefix = prefix, postfix = postfix, separator = " OR ") { it.build() }
         }
         return ands + ors
+    }
+
+    fun buildNoEscape(): String {
+        return build().replace("\"", "")
     }
 }

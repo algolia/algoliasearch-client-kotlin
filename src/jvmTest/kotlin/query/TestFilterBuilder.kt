@@ -23,14 +23,14 @@ class TestFilterBuilder {
             groupA += categoryBook
             groupA += categoryOffice
             groupA += categoryGift
-            assertEquals("category:book AND category:office AND category:gift", build())
+            assertEquals("category:book AND category:office AND category:gift", buildNoEscape())
         }
 
         FilterBuilder {
             groupA += categoryBook
             groupA += categoryOffice
             groupB += categoryGift
-            assertEquals("(category:book AND category:office) AND category:gift", build())
+            assertEquals("(category:book AND category:office) AND category:gift", buildNoEscape())
             assertEquals(setOf(categoryBook, categoryOffice), groupA.get())
         }
     }
@@ -52,16 +52,16 @@ class TestFilterBuilder {
         FilterBuilder {
             categories += categoryBook
             categories += categoryOffice
-            assertEquals("category:book OR category:office", build())
+            assertEquals("category:book OR category:office", buildNoEscape())
             colors += colorRed
             colors += colorBlue
-            assertEquals("(category:book OR category:office) AND (color:red OR color:blue)", build())
+            assertEquals("(category:book OR category:office) AND (color:red OR color:blue)", buildNoEscape())
             categories -= categoryBook
-            assertEquals("category:office AND (color:red OR color:blue)", build())
+            assertEquals("category:office AND (color:red OR color:blue)", buildNoEscape())
             categories.clear()
-            assertEquals("color:red OR color:blue", build())
+            assertEquals("color:red OR color:blue", buildNoEscape())
             clear()
-            assertEquals("", build())
+            assertEquals("", buildNoEscape())
         }
     }
 
@@ -82,13 +82,13 @@ class TestFilterBuilder {
 
         FilterBuilder {
             categories += listOf(categoryBook, categoryOffice)
-            assertEquals("category:book OR category:office", build())
+            assertEquals("category:book OR category:office", buildNoEscape())
             prices += comparison
-            assertEquals("price != 15.0 AND (category:book OR category:office)", build())
+            assertEquals("price != 15.0 AND (category:book OR category:office)", buildNoEscape())
             prices += range
-            assertEquals("price != 15.0 AND price:5.0 TO 20.0 AND (category:book OR category:office)", build())
+            assertEquals("price != 15.0 AND price:5.0 TO 20.0 AND (category:book OR category:office)", buildNoEscape())
             categories -= categoryBook
-            assertEquals("price != 15.0 AND price:5.0 TO 20.0 AND category:office", build())
+            assertEquals("price != 15.0 AND price:5.0 TO 20.0 AND category:office", buildNoEscape())
         }
     }
 
@@ -104,9 +104,9 @@ class TestFilterBuilder {
         FilterBuilder {
             currency += comparison
             currency += range
-            assertEquals("euro != 15.0 AND euro:5.0 TO 20.0", build())
+            assertEquals("euro != 15.0 AND euro:5.0 TO 20.0", buildNoEscape())
             currency.replaceAttribute(euro, dollar)
-            assertEquals("dollar != 15.0 AND dollar:5.0 TO 20.0", build())
+            assertEquals("dollar != 15.0 AND dollar:5.0 TO 20.0", buildNoEscape())
         }
     }
 
@@ -123,7 +123,7 @@ class TestFilterBuilder {
         FilterBuilder {
             groupA += comparisonPrice
             groupA += rangeLike
-            assertEquals("price != 15.0 OR nbLike:100.0 TO 200.0", build())
+            assertEquals("price != 15.0 OR nbLike:100.0 TO 200.0", buildNoEscape())
             assertEquals(setOf(comparisonPrice), groupA.get(price))
         }
 
@@ -131,7 +131,7 @@ class TestFilterBuilder {
         FilterBuilder {
             groupA += comparisonPrice
             groupB += rangeLike
-            assertEquals("price != 15.0 AND nbLike:100.0 TO 200.0", build())
+            assertEquals("price != 15.0 AND nbLike:100.0 TO 200.0", buildNoEscape())
         }
     }
 }

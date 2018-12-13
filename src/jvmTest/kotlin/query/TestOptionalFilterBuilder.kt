@@ -1,7 +1,5 @@
 package query
 
-import client.query.helper.Attribute
-import client.query.helper.FilterFacet
 import client.query.helper.OptionalFilterBuilder
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -10,12 +8,6 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 class TestOptionalFilterBuilder {
 
-    private val attributeA = Attribute("attributeA")
-    private val attributeB = Attribute("attributeB")
-    private val filterA = FilterFacet(attributeA, "facetA")
-    private val filterB = FilterFacet(attributeA, "facetB")
-    private val filterC = FilterFacet(attributeB, true)
-    private val filterD = FilterFacet(attributeB, false)
 
     private fun builder() = OptionalFilterBuilder()
 

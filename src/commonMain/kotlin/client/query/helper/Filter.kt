@@ -36,16 +36,40 @@ data class FilterTag(
 
 data class FilterFacet internal constructor(
     override val attribute: Attribute,
-    private val string: String? = null,
-    private val boolean: Boolean? = null
+    private val value: FacetValue<*>
 ) : Filter(attribute) {
 
-    constructor(attribute: Attribute, string: String) : this(attribute, string, null)
+    constructor(attribute: Attribute, value: String) : this(attribute, FacetValue.String(value))
+    constructor(attribute: Attribute, value: Boolean) : this(attribute, FacetValue.Boolean(value))
+    constructor(attribute: Attribute, value: Number) : this(attribute, FacetValue.Number(value))
 
-    constructor(attribute: Attribute, boolean: Boolean) : this(attribute, null, boolean)
-
-    override val expression: String = if (string != null) "\"$attribute\":\"$string\"" else "$attribute:$boolean"
+    override val expression: String = "\"$attribute\":${value.escape()}"
 }
+
+sealed class FacetValue<T> {
+
+    abstract val value: T
+
+    internal fun escape(): Any {
+        return when (this) {
+            is String -> "\"$value\""
+            is Boolean -> value
+            is Number -> value
+        }
+    }
+
+    data class String(override val value: kotlin.String) : FacetValue<kotlin.String>()
+
+    data class Boolean(override val value: kotlin.Boolean) : FacetValue<kotlin.Boolean>()
+
+    data class Number(override val value: kotlin.Number) : FacetValue<kotlin.Number>()
+}
+
+fun String.toFacetValue() = FacetValue.String(this)
+
+fun Boolean.toFacetValue() = FacetValue.Boolean(this)
+
+fun Number.toFacetValue() = FacetValue.Number(this)
 
 data class FilterComparison(
     override val attribute: Attribute,
