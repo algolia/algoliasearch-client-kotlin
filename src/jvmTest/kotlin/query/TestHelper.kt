@@ -22,10 +22,10 @@ class TestHelper {
     private val tagB = FilterTag("tagB")
     private val nameA = "nameA"
     private val nameB = "nameB"
-    private val groupOrA = Group.Or(nameA)
-    private val groupOrB = Group.Or(nameB)
-    private val groupAndA = Group.And(nameA)
-    private val groupAndB = Group.And(nameB)
+    private val groupOrA = GroupOr(nameA)
+    private val groupOrB = GroupOr(nameB)
+    private val groupAndA = GroupAnd(nameA)
+    private val groupAndB = GroupAnd(nameB)
 
     private fun set(vararg filters: Filter) = mutableSetOf(*filters)
 

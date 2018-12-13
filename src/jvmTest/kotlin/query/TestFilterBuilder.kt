@@ -16,8 +16,8 @@ class TestFilterBuilder {
         val categoryBook = FilterFacet(category, "book")
         val categoryOffice = FilterFacet(category, "office")
         val categoryGift = FilterFacet(category, "gift")
-        val groupA = Group.And("groupA")
-        val groupB = Group.And("groupB")
+        val groupA = GroupAnd("groupA")
+        val groupB = GroupAnd("groupB")
 
         FilterBuilder {
             groupA += categoryBook
@@ -46,8 +46,8 @@ class TestFilterBuilder {
         val colorRed = FilterFacet(color, "red")
         val colorBlue = FilterFacet(color, "blue")
 
-        val categories = Group.Or("categories")
-        val colors = Group.Or("colors")
+        val categories = GroupOr("categories")
+        val colors = GroupOr("colors")
 
         FilterBuilder {
             categories += categoryBook
@@ -77,8 +77,8 @@ class TestFilterBuilder {
         val comparison = FilterComparison(price, NumericOperator.NotEquals, 15.0)
         val range = FilterRange(price, 5.0, 20.0)
 
-        val categories = Group.Or("categories")
-        val prices = Group.And("prices")
+        val categories = GroupOr("categories")
+        val prices = GroupAnd("prices")
 
         FilterBuilder {
             categories += listOf(categoryBook, categoryOffice)
@@ -99,13 +99,13 @@ class TestFilterBuilder {
         val dollar = Attribute("dollar")
         val comparison = FilterComparison(euro, NumericOperator.NotEquals, 15.0)
         val range = FilterRange(euro, 5.0, 20.0)
-        val euros = Group.And("euros")
+        val currency = GroupAnd("currency")
 
         FilterBuilder {
-            euros += comparison
-            euros += range
+            currency += comparison
+            currency += range
             assertEquals("euro != 15.0 AND euro:5.0 TO 20.0", build())
-            euros.replaceAttribute(euro, dollar)
+            currency.replaceAttribute(euro, dollar)
             assertEquals("dollar != 15.0 AND dollar:5.0 TO 20.0", build())
         }
     }
@@ -116,8 +116,8 @@ class TestFilterBuilder {
         val nbLike = Attribute("nbLike")
         val comparisonPrice = FilterComparison(price, NumericOperator.NotEquals, 15.0)
         val rangeLike = FilterRange(nbLike, 100.0, 200.0)
-        val groupA = Group.Or("groupA")
-        val groupB = Group.Or("groupB")
+        val groupA = GroupOr("groupA")
+        val groupB = GroupOr("groupB")
 
         // In this scenario, we want to add them to the same OR group
         FilterBuilder {

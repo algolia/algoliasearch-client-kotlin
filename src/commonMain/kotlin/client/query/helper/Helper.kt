@@ -7,23 +7,14 @@ internal enum class FilterKey {
     OrTag
 }
 
-sealed class Group(open val name: String) {
-
-    internal data class Key(val name: String, val key: FilterKey)
-
-    data class And(override val name: String) : Group(name)
-
-    data class Or(override val name: String) : Group(name)
-}
-
 internal fun Group.key(filter: Filter): Group.Key {
     val key = when (this) {
-        is Group.Or -> when (filter) {
+        is GroupOr -> when (filter) {
             is FilterFacet -> FilterKey.OrFacet
             is FilterNumeric -> FilterKey.OrNumeric
             is FilterTag -> FilterKey.OrTag
         }
-        is Group.And -> FilterKey.And
+        is GroupAnd -> FilterKey.And
     }
     return Group.Key(name, key)
 }
