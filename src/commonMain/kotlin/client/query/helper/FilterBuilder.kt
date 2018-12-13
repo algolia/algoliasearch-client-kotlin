@@ -7,14 +7,48 @@ package client.query.helper
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
  */
 @QueryHelper
-class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : AbstractFilterBuilder<Filter>() {
+class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : AbstractFilterBuilder<Filter> {
 
     init {
         init?.invoke(this)
     }
 
+    private val groups: GroupMap<Filter> = mutableMapOf()
+
+    override operator fun Group.plusAssign(filter: Filter) {
+        groups.add(this, filter)
+    }
+
+    override operator fun Group.plusAssign(filters: Collection<Filter>) {
+        filters.forEach { groups.add(this, it) }
+    }
+
+    override operator fun Group.minusAssign(filter: Filter) {
+        groups.remove(this, filter)
+    }
+
+    override operator fun Group.minusAssign(filters: Collection<Filter>) {
+        filters.forEach { groups.remove(this, it) }
+    }
+
+    override fun Group.contains(filter: Filter): Boolean {
+        return groups.contains(this, filter)
+    }
+
+    override fun Group.clear(attribute: Attribute?) {
+        groups.clear(this, attribute)
+    }
+
     override fun Group.replaceAttribute(attribute: Attribute, replacement: Attribute) {
         groups.replaceAttribute(this, attribute, replacement)
+    }
+
+    override fun Group.get(attribute: Attribute?): Set<Filter> {
+        return groups.get(this, attribute)
+    }
+
+    override fun clear() {
+        groups.clear()
     }
 
     fun build(): String {

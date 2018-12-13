@@ -1,41 +1,23 @@
 package client.query.helper
 
 
-abstract class AbstractFilterBuilder<T : Filter> {
+interface AbstractFilterBuilder<T : Filter> {
 
-    internal val groups: GroupMap<T> = mutableMapOf()
+    operator fun Group.plusAssign(filter: T)
 
-    operator fun Group.plusAssign(filter: T) {
-        groups.add(this, filter)
-    }
+    operator fun Group.plusAssign(filters: Collection<T>)
 
-    operator fun Group.plusAssign(filters: Collection<T>) {
-        filters.forEach { groups.add(this, it) }
-    }
+    operator fun Group.minusAssign(filter: T)
 
-    operator fun Group.minusAssign(filter: T) {
-        groups.remove(this, filter)
-    }
+    operator fun Group.minusAssign(filters: Collection<T>)
 
-    operator fun Group.minusAssign(filters: Collection<T>) {
-        filters.forEach { groups.remove(this, it) }
-    }
+    fun Group.contains(filter: T): Boolean
 
-    fun Group.contains(filter: Filter): Boolean {
-        return groups.contains(this, filter)
-    }
+    fun Group.clear(attribute: Attribute? = null)
 
-    fun Group.clear(attribute: Attribute? = null) {
-        groups.clear(this, attribute)
-    }
+    fun Group.replaceAttribute(attribute: Attribute, replacement: Attribute)
 
-    abstract fun Group.replaceAttribute(attribute: Attribute, replacement: Attribute)
+    fun Group.get(attribute: Attribute? = null): Set<T>
 
-    fun Group.get(attribute: Attribute? = null): Set<T> {
-        return groups.get(this, attribute)
-    }
-
-    fun clear() {
-        groups.clear()
-    }
+    fun clear()
 }
