@@ -7,7 +7,7 @@ package client.query.helper
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
  */
 @QueryHelper
-class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : AbstractFilterBuilder<Filter> {
+class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInterface<Filter> {
 
     init {
         init?.invoke(this)

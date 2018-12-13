@@ -25,7 +25,7 @@ data class FilterTag(
     val value: String
 ) : Filter(Attribute("_tags")) {
 
-    override val expression = "$attribute:$value"
+    override val expression = "\"$attribute\":\"$value\""
 }
 
 data class FilterFacet internal constructor(
@@ -38,7 +38,7 @@ data class FilterFacet internal constructor(
 
     constructor(attribute: Attribute, boolean: Boolean) : this(attribute, null, boolean)
 
-    override val expression: String = if (string != null) "$attribute:$string" else "$attribute:$boolean"
+    override val expression: String = if (string != null) "\"$attribute\":\"$string\"" else "$attribute:$boolean"
 }
 
 data class FilterComparison(
@@ -47,7 +47,7 @@ data class FilterComparison(
     val value: Double
 ) : FilterNumeric(attribute) {
 
-    override val expression = "$attribute ${operator.raw} $value"
+    override val expression = "\"$attribute\" ${operator.raw} $value"
 }
 
 data class FilterRange(
@@ -56,5 +56,5 @@ data class FilterRange(
     val upperBound: Double
 ) : FilterNumeric(attribute) {
 
-    override val expression = "$attribute:$lowerBound TO $upperBound"
+    override val expression = "\"$attribute\":$lowerBound TO $upperBound"
 }

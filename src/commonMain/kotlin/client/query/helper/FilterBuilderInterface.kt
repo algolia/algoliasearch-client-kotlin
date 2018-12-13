@@ -1,7 +1,7 @@
 package client.query.helper
 
 
-interface AbstractFilterBuilder<T : Filter> {
+interface FilterBuilderInterface<T : Filter> {
 
     operator fun Group.plusAssign(filter: T)
 
@@ -21,3 +21,11 @@ interface AbstractFilterBuilder<T : Filter> {
 
     fun clear()
 }
+
+//fun Group.add(filter: T)
+//
+//fun Group.remove(filter: T)
+//
+//fun Group.removeAll(filters: Collection<T>)
+//
+//fun Group.addAll(filters: Collection<T>)

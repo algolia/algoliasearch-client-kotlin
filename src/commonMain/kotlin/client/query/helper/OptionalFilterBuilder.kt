@@ -7,7 +7,7 @@ package client.query.helper
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
  */
 @QueryHelper
-class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : AbstractFilterBuilder<FilterFacet> {
+class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : FilterBuilderInterface<FilterFacet> {
 
     init {
         init?.invoke(this)
