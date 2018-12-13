@@ -5,7 +5,8 @@ sealed class Filter(
     open val attribute: Attribute
 ) {
 
-    internal var not = false
+    var not = false
+        internal set
 
     abstract val expression: String
 
@@ -13,6 +14,11 @@ sealed class Filter(
 
     fun not(value: Boolean = true): Filter {
         not = value
+        return this
+    }
+
+    fun not(): Filter {
+        not = !not
         return this
     }
 }
