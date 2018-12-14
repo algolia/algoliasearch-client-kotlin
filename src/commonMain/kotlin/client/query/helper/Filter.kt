@@ -31,7 +31,7 @@ data class FilterTag(
     val value: String
 ) : Filter(Attribute("_tags")) {
 
-    override val expression = "\"$attribute\":\"$value\""
+    override val expression = "$attribute:\"$value\""
 }
 
 data class FilterFacet internal constructor(
