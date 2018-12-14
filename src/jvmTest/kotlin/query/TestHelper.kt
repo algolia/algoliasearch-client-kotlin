@@ -29,6 +29,7 @@ class TestHelper {
     private val groupAndA = GroupAnd(nameA)
     private val groupAndB = GroupAnd(nameB)
 
+    private fun groupMap(): GroupMap<Filter> = mutableMapOf()
     private fun set(vararg filters: Filter) = mutableSetOf(*filters)
 
     @Test
@@ -53,7 +54,7 @@ class TestHelper {
 
     @Test
     fun add() {
-        val map: GroupMap<Filter> = mutableMapOf()
+        val map = groupMap()
         val filters = arrayOf(facetA, facetB, comparisonA, comparisonB, rangeA, rangeB, tagA, tagB)
 
         map.apply {
@@ -79,7 +80,7 @@ class TestHelper {
 
     @Test
     fun remove() {
-        val map: GroupMap<Filter> = mutableMapOf()
+        val map = groupMap()
 
         map.apply {
             add(groupOrA, facetA, facetB)
@@ -106,7 +107,7 @@ class TestHelper {
 
     @Test
     fun contains() {
-        val map: GroupMap<Filter> = mutableMapOf()
+        val map = groupMap()
 
         map.apply {
             add(groupAndA, facetA)
@@ -117,5 +118,23 @@ class TestHelper {
         assertFalse(map.contains(groupAndA, facetB))
         assertTrue(map.contains(facetA))
         assertTrue(map.contains(facetB))
+    }
+
+    @Test
+    fun clear() {
+        val map = groupMap()
+
+        map.apply {
+            add(groupAndA, facetA, facetB, comparisonA, comparisonB)
+        }
+        map.clear(groupAndA, facetB.attribute)
+        assertEquals(
+            mutableMapOf(
+                Group.Key(nameA, FilterKey.And) to set(facetA, comparisonA)
+            ),
+            map
+        )
+        map.clear(groupAndA, null)
+        assertTrue(map.isEmpty())
     }
 }
