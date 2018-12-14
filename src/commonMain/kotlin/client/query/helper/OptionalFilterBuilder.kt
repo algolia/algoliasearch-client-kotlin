@@ -9,11 +9,11 @@ package client.query.helper
 @QueryHelper
 class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : FilterBuilderInterface<FilterFacet> {
 
+    private val groups: GroupMap<FilterFacet> = mutableMapOf()
+
     init {
         init?.invoke(this)
     }
-
-    private val groups: GroupMap<FilterFacet> = mutableMapOf()
 
     override operator fun Group.plusAssign(filter: FilterFacet) {
         groups.add(this, filter)
