@@ -67,6 +67,10 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
         groups.clear()
     }
 
+    override fun isEmpty(): Boolean {
+        return groups.isEmpty()
+    }
+
     fun build(): String {
         val (andEntries, orEntries) = groups.entries.partition { it.key.key == FilterKey.And }
         val ands = andEntries.joinToString(separator = " AND ") {

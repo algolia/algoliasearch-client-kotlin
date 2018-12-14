@@ -67,8 +67,8 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : 
         groups.clear()
     }
 
-    fun Group.replace(filter: FilterFacet, replacement: FilterFacet) {
-
+    override fun isEmpty(): Boolean {
+        return groups.isEmpty()
     }
 
     fun build(): List<List<String>> {

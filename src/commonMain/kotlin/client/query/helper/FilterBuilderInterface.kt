@@ -27,6 +27,8 @@ interface FilterBuilderInterface<T : Filter> {
 
     fun Group.get(attribute: Attribute? = null): Set<T>
 
+    fun isEmpty(): Boolean
+
     fun clear()
 }
 
