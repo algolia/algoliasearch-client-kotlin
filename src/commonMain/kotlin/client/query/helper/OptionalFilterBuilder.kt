@@ -63,6 +63,10 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : 
         return groups.replace(this, filter, replacement)
     }
 
+    override fun Group.move(destination: Group, filter: FilterFacet): Boolean {
+        return groups.move(this, destination, filter)
+    }
+
     override fun Group.get(attribute: Attribute?): Set<FilterFacet> {
         return groups.get(this, attribute)
     }

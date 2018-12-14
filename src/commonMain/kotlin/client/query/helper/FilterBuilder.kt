@@ -71,6 +71,10 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
         return groups.replace(this, filter, replacement)
     }
 
+    override fun Group.move(destination: Group, filter: Filter): Boolean {
+        return groups.move(this, destination, filter)
+    }
+
     override fun Group.get(attribute: Attribute?): Set<Filter> {
         return groups.get(this, attribute)
     }

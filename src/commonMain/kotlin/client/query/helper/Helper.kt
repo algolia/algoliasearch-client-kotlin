@@ -61,6 +61,15 @@ internal fun <T : Filter> GroupMap<T>.replace(group: Group, filter: T, replaceme
     } ?: false
 }
 
+internal fun <T : Filter> GroupMap<T>.move(origin: Group, destination: Group, filter: T): Boolean {
+    return get(origin.key(filter))?.let {
+        if (it.remove(filter)) {
+            add(destination, filter)
+            true
+        } else false
+    } ?: false
+}
+
 internal inline fun <reified T : Filter> GroupMap<T>.replaceAttribute(
     group: Group,
     attribute: Attribute,
