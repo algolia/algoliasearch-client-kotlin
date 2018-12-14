@@ -55,159 +55,151 @@ class TestHelper {
 
     @Test
     fun add() {
-        val map = groupMap()
-        val filters = arrayOf(facetA, facetB, comparisonA, comparisonB, rangeA, rangeB, tagA, tagB)
+        groupMap().apply {
+            val filters = arrayOf(facetA, facetB, comparisonA, comparisonB, rangeA, rangeB, tagA, tagB)
 
-        map.apply {
             add(groupOrA, *filters)
             add(groupOrB, *filters)
             add(groupAndA, *filters)
             add(groupAndB, *filters)
+            assertEquals(
+                mutableMapOf(
+                    Group.Key(nameA, FilterKey.OrFacet) to set(facetA, facetB),
+                    Group.Key(nameA, FilterKey.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
+                    Group.Key(nameA, FilterKey.OrTag) to set(tagA, tagB),
+                    Group.Key(nameA, FilterKey.And) to set(*filters),
+                    Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB),
+                    Group.Key(nameB, FilterKey.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
+                    Group.Key(nameB, FilterKey.OrTag) to set(tagA, tagB),
+                    Group.Key(nameB, FilterKey.And) to set(*filters)
+                ),
+                this
+            )
         }
-        assertEquals(
-            mutableMapOf(
-                Group.Key(nameA, FilterKey.OrFacet) to set(facetA, facetB),
-                Group.Key(nameA, FilterKey.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
-                Group.Key(nameA, FilterKey.OrTag) to set(tagA, tagB),
-                Group.Key(nameA, FilterKey.And) to set(*filters),
-                Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB),
-                Group.Key(nameB, FilterKey.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
-                Group.Key(nameB, FilterKey.OrTag) to set(tagA, tagB),
-                Group.Key(nameB, FilterKey.And) to set(*filters)
-            ),
-            map
-        )
     }
 
     @Test
     fun remove() {
-        val map = groupMap()
-
-        map.apply {
+        groupMap().apply {
             add(groupOrA, facetA, facetB)
             add(groupOrB, facetA, facetB)
             remove(groupOrA, facetA)
+            assertEquals(
+                mutableMapOf(
+                    Group.Key(nameA, FilterKey.OrFacet) to set(facetB),
+                    Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB)
+                ),
+                this
+            )
+            remove(groupOrA, facetB)
+            assertEquals(
+                mutableMapOf(
+                    Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB)
+                ),
+                this
+            )
         }
-        assertEquals(
-            mutableMapOf(
-                Group.Key(nameA, FilterKey.OrFacet) to set(facetB),
-                Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB)
-            ),
-            map
-        )
-
-        map.remove(groupOrA, facetB)
-
-        assertEquals(
-            mutableMapOf(
-                Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB)
-            ),
-            map
-        )
     }
 
     @Test
     fun contains() {
-        val map = groupMap()
-
-        map.apply {
+        groupMap().apply {
             add(groupAndA, facetA)
             add(groupAndB, facetB)
+            assertTrue(contains(groupAndA, facetA))
+            assertFalse(contains(groupAndA, facetB))
+            assertTrue(contains(facetA))
+            assertTrue(contains(facetB))
         }
-
-        assertTrue(map.contains(groupAndA, facetA))
-        assertFalse(map.contains(groupAndA, facetB))
-        assertTrue(map.contains(facetA))
-        assertTrue(map.contains(facetB))
     }
 
     @Test
     fun clear() {
-        val map = groupMap()
-
-        map.add(groupAndA, facetA, facetB, comparisonA, comparisonB)
-        map.clear(groupAndA, facetB.attribute)
-        assertEquals(
-            mutableMapOf(
-                Group.Key(nameA, FilterKey.And) to set(facetA, comparisonA)
-            ),
-            map
-        )
-        map.clear(groupAndA, null)
-        assertTrue(map.isEmpty())
+        groupMap().apply {
+            add(groupAndA, facetA, facetB, comparisonA, comparisonB)
+            clear(groupAndA, facetB.attribute)
+            assertEquals(
+                mutableMapOf(
+                    Group.Key(nameA, FilterKey.And) to set(facetA, comparisonA)
+                ),
+                this
+            )
+            clear(groupAndA, null)
+            assertTrue(isEmpty())
+        }
     }
 
     @Test
     fun replace() {
-        val map = groupMap()
-
-        map.add(groupOrA, facetA)
-        assertFalse(map.replace(groupOrB, facetA, facetB))
-        assertTrue(map.replace(groupOrA, facetA, facetB))
-        assertEquals(
-            mutableMapOf(
-                Group.Key(nameA, FilterKey.OrFacet) to set(facetB)
-            ),
-            map
-        )
+        groupMap().apply {
+            add(groupOrA, facetA)
+            assertFalse(replace(groupOrB, facetA, facetB))
+            assertTrue(replace(groupOrA, facetA, facetB))
+            assertEquals(
+                mutableMapOf(
+                    Group.Key(nameA, FilterKey.OrFacet) to set(facetB)
+                ),
+                this
+            )
+        }
     }
 
     @Test
     fun move() {
-        val map = groupMap()
-
-        map.add(groupOrA, facetA)
-        assertFalse(map.move(groupOrA, groupOrB, facetB))
-        assertFalse(map.move(groupOrB, groupOrA, facetA))
-        assertTrue(map.move(groupOrA, groupOrB, facetA))
-        assertEquals(
-            mutableMapOf(
-                Group.Key(nameB, FilterKey.OrFacet) to set(facetA)
-            ),
-            map
-        )
+        groupMap().apply {
+            add(groupOrA, facetA)
+            assertFalse(move(groupOrA, groupOrB, facetB))
+            assertFalse(move(groupOrB, groupOrA, facetA))
+            assertTrue(move(groupOrA, groupOrB, facetA))
+            assertEquals(
+                mutableMapOf(
+                    Group.Key(nameB, FilterKey.OrFacet) to set(facetA)
+                ),
+                this
+            )
+        }
     }
 
     @Test
     fun replaceAttribute() {
-        val map = groupMap()
+        groupMap().apply {
+            val original = mutableMapOf(
+                Group.Key(nameA, FilterKey.And) to set(facetA, facetB, comparisonA, comparisonB)
+            )
 
-        val original = mutableMapOf(
-            Group.Key(nameA, FilterKey.And) to set(facetA, facetB, comparisonA, comparisonB)
-        )
-
-        map.add(groupAndA, facetA, facetB, comparisonA, comparisonB)
-        map.replaceAttribute(groupAndA, attributeC, attributeA)
-        assertEquals(map, original)
-        map.replaceAttribute(groupAndB, attributeA, attributeB)
-        assertEquals(map, original)
-        map.replaceAttribute(groupAndA, attributeA, attributeC)
-        assertEquals(
-            mutableMapOf(
-                Group.Key(nameA, FilterKey.And) to set(
-                    facetA.copy(attribute = attributeC),
-                    facetB,
-                    comparisonA.copy(attribute = attributeC),
-                    comparisonB
-                )
-            ),
-            map
-        )
+            add(groupAndA, facetA, facetB, comparisonA, comparisonB)
+            replaceAttribute(groupAndA, attributeC, attributeA)
+            assertEquals(this, original)
+            replaceAttribute(groupAndB, attributeA, attributeB)
+            assertEquals(this, original)
+            replaceAttribute(groupAndA, attributeA, attributeC)
+            assertEquals(
+                mutableMapOf(
+                    Group.Key(nameA, FilterKey.And) to set(
+                        facetA.copy(attribute = attributeC),
+                        facetB,
+                        comparisonA.copy(attribute = attributeC),
+                        comparisonB
+                    )
+                ),
+                this
+            )
+        }
     }
 
     @Test
     fun get() {
-        val map = groupMap().apply {
+        groupMap().apply {
             add(groupAndA, facetA, facetB)
             add(groupAndB, facetA, facetB)
+            assertEquals(
+                set(facetA),
+                get(groupAndA, attributeA)
+            )
+            assertEquals(
+                set(facetA, facetB),
+                get(groupAndA, null)
+            )
         }
-        assertEquals(
-            set(facetA),
-            map.get(groupAndA, attributeA)
-        )
-        assertEquals(
-            set(facetA, facetB),
-            map.get(groupAndA, null)
-        )
     }
 }
