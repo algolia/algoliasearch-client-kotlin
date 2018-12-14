@@ -59,6 +59,18 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
         groups.replaceAttribute(this, attribute, replacement)
     }
 
+    fun Group.replace(filter: FilterFacet, replacement: FilterFacet): Boolean {
+        return groups.replace(this, filter, replacement)
+    }
+
+    fun Group.replace(filter: FilterNumeric, replacement: FilterNumeric): Boolean {
+        return groups.replace(this, filter, replacement)
+    }
+
+    fun Group.replace(filter: FilterTag, replacement: FilterTag): Boolean {
+        return groups.replace(this, filter, replacement)
+    }
+
     override fun Group.get(attribute: Attribute?): Set<Filter> {
         return groups.get(this, attribute)
     }

@@ -35,5 +35,3 @@ interface FilterBuilderInterface<T : Filter> {
 // Move
 
 // Get ?
-
-// Is Any filter
