@@ -124,9 +124,7 @@ class TestHelper {
     fun clear() {
         val map = groupMap()
 
-        map.apply {
-            add(groupAndA, facetA, facetB, comparisonA, comparisonB)
-        }
+        map.add(groupAndA, facetA, facetB, comparisonA, comparisonB)
         map.clear(groupAndA, facetB.attribute)
         assertEquals(
             mutableMapOf(
@@ -142,14 +140,28 @@ class TestHelper {
     fun replace() {
         val map = groupMap()
 
-        map.apply {
-            add(groupOrA, facetA)
-        }
+        map.add(groupOrA, facetA)
         assertFalse(map.replace(groupOrB, facetA, facetB))
         assertTrue(map.replace(groupOrA, facetA, facetB))
         assertEquals(
             mutableMapOf(
                 Group.Key(nameA, FilterKey.OrFacet) to set(facetB)
+            ),
+            map
+        )
+    }
+
+    @Test
+    fun move() {
+        val map = groupMap()
+
+        map.add(groupOrA, facetA)
+        assertFalse(map.move(groupOrA, groupOrB, facetB))
+        assertFalse(map.move(groupOrB, groupOrA, facetA))
+        assertTrue(map.move(groupOrA, groupOrB, facetA))
+        assertEquals(
+            mutableMapOf(
+                Group.Key(nameB, FilterKey.OrFacet) to set(facetA)
             ),
             map
         )
