@@ -74,4 +74,31 @@ class TestHelper {
             map
         )
     }
+
+    @Test
+    fun remove() {
+        val map: GroupMap<Filter> = mutableMapOf()
+
+        map.apply {
+            add(groupOrA, facetA, facetB)
+            add(groupOrB, facetA, facetB)
+            remove(groupOrA, facetA)
+        }
+        assertEquals(
+            mutableMapOf(
+                Group.Key(nameA, FilterKey.OrFacet) to set(facetB),
+                Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB)
+            ),
+            map
+        )
+
+        map.remove(groupOrA, facetB)
+
+        assertEquals(
+            mutableMapOf(
+                Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB)
+            ),
+            map
+        )
+    }
 }
