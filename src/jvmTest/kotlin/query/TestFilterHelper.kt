@@ -29,7 +29,7 @@ import kotlin.test.assertTrue
 
 
 @RunWith(JUnit4::class)
-class TestHelper {
+class TestFilterHelper {
 
     @Test
     fun keyOr() {
