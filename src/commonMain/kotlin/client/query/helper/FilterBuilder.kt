@@ -31,6 +31,22 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
         filters.forEach { groups.remove(this, it) }
     }
 
+    override fun Group.add(filter: Filter) {
+        groups.add(this, filter)
+    }
+
+    override fun Group.addAll(filters: Collection<Filter>) {
+        groups.add(this, *filters.toTypedArray())
+    }
+
+    override fun Group.remove(filter: Filter) {
+        groups.remove(this, filter)
+    }
+
+    override fun Group.removeAll(filters: Collection<Filter>) {
+        groups.remove(this, *filters.toTypedArray())
+    }
+
     override fun Group.contains(filter: Filter): Boolean {
         return groups.contains(this, filter)
     }

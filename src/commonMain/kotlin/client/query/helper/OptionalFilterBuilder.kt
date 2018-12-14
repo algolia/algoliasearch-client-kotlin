@@ -20,7 +20,7 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : 
     }
 
     override operator fun Group.plusAssign(filters: Collection<FilterFacet>) {
-        filters.forEach { groups.add(this, it) }
+        groups.add(this, *filters.toTypedArray())
     }
 
     override operator fun Group.minusAssign(filter: FilterFacet) {
@@ -28,7 +28,23 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : 
     }
 
     override operator fun Group.minusAssign(filters: Collection<FilterFacet>) {
-        filters.forEach { groups.remove(this, it) }
+        groups.remove(this, *filters.toTypedArray())
+    }
+
+    override fun Group.add(filter: FilterFacet) {
+        groups.add(this, filter)
+    }
+
+    override fun Group.addAll(filters: Collection<FilterFacet>) {
+        groups.add(this, *filters.toTypedArray())
+    }
+
+    override fun Group.remove(filter: FilterFacet) {
+        groups.remove(this, filter)
+    }
+
+    override fun Group.removeAll(filters: Collection<FilterFacet>) {
+        groups.remove(this, *filters.toTypedArray())
     }
 
     override fun Group.contains(filter: FilterFacet): Boolean {
@@ -49,6 +65,10 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : 
 
     override fun clear() {
         groups.clear()
+    }
+
+    fun Group.replace(filter: FilterFacet, replacement: FilterFacet) {
+
     }
 
     fun build(): List<List<String>> {

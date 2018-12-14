@@ -11,6 +11,14 @@ interface FilterBuilderInterface<T : Filter> {
 
     operator fun Group.minusAssign(filters: Collection<T>)
 
+    fun Group.add(filter: T)
+
+    fun Group.addAll(filters: Collection<T>)
+
+    fun Group.remove(filter: T)
+
+    fun Group.removeAll(filters: Collection<T>)
+
     fun Group.contains(filter: T): Boolean
 
     fun Group.clear(attribute: Attribute? = null)
@@ -22,10 +30,8 @@ interface FilterBuilderInterface<T : Filter> {
     fun clear()
 }
 
-//fun Group.add(filter: T)
-//
-//fun Group.remove(filter: T)
-//
-//fun Group.removeAll(filters: Collection<T>)
-//
-//fun Group.addAll(filters: Collection<T>)
+// Move
+
+// Get ?
+
+// Is Any filter
