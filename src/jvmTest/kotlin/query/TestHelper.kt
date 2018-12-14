@@ -200,6 +200,10 @@ class TestHelper {
                 set(facetA, facetB),
                 get(groupAndA, null)
             )
+            assertEquals(
+                set(facetA, facetB),
+                get(null)
+            )
         }
     }
 }
