@@ -1,9 +1,13 @@
 package query
 
+import buildTest
 import client.query.AlternativesAsExact
 import client.query.QueryLanguage
 import client.query.ResponseFields
 import client.query.helper.*
+import facetA
+import facetB
+import groupOrA
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -133,24 +137,21 @@ class TestQueryHelper {
 
     @Test
     fun filterBuilder() {
-//        val query = queryBuilder {
-//            filterBuilder {
-//                or(FilterFacet(attributeA, "valueA"), FilterFacet(attributeB, true))
-//            }
-//        }
-//        assertEquals("attributeA:valueA AND attributeB:true", query.filterBuilder.build())
+        val query = queryBuilder {
+            filterBuilder {
+                groupOrA.addAll(listOf(facetA, facetB))
+            }
+        }
+        assertEquals("attributeA:facetA OR attributeB:false", query.filterBuilder.buildTest())
     }
 
     @Test
     fun optionalFilterBuilder() {
-//        val query = queryBuilder {
-//            optionalFilterBuilder {
-//                and(FilterFacet(attributeA, "valueA"), FilterFacet(attributeA, true))
-//            }
-//        }
-//        assertEquals(
-//            listOf(listOf("attributeA:valueA"), listOf("attributeA:true")),
-//            query.optionalFilterBuilder.build()
-//        )
+        val query = queryBuilder {
+            optionalFilterBuilder {
+                groupOrA.addAll(listOf(facetA, facetB))
+            }
+        }
+        assertEquals(listOf(listOf(facetA.expression, facetB.expression)), query.optionalFilterBuilder.build())
     }
 }
