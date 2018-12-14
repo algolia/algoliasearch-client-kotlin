@@ -1,5 +1,6 @@
 package query
 
+import buildTest
 import client.query.helper.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,14 +24,14 @@ class TestFilterBuilderShowcase {
             groupA += categoryBook
             groupA += categoryOffice
             groupA += categoryGift
-            assertEquals("category:book AND category:office AND category:gift", buildNoEscape())
+            assertEquals("category:book AND category:office AND category:gift", buildTest())
         }
 
         FilterBuilder {
             groupA += categoryBook
             groupA += categoryOffice
             groupB += categoryGift
-            assertEquals("(category:book AND category:office) AND category:gift", buildNoEscape())
+            assertEquals("(category:book AND category:office) AND category:gift", buildTest())
             assertEquals(setOf(categoryBook, categoryOffice), groupA.get())
         }
     }
@@ -52,16 +53,16 @@ class TestFilterBuilderShowcase {
         FilterBuilder {
             categories += categoryBook
             categories += categoryOffice
-            assertEquals("category:book OR category:office", buildNoEscape())
+            assertEquals("category:book OR category:office", buildTest())
             colors += colorRed
             colors += colorBlue
-            assertEquals("(category:book OR category:office) AND (color:red OR color:blue)", buildNoEscape())
+            assertEquals("(category:book OR category:office) AND (color:red OR color:blue)", buildTest())
             categories -= categoryBook
-            assertEquals("category:office AND (color:red OR color:blue)", buildNoEscape())
+            assertEquals("category:office AND (color:red OR color:blue)", buildTest())
             categories.clear()
-            assertEquals("color:red OR color:blue", buildNoEscape())
+            assertEquals("color:red OR color:blue", buildTest())
             clear()
-            assertEquals("", buildNoEscape())
+            assertEquals("", buildTest())
         }
     }
 
@@ -82,13 +83,13 @@ class TestFilterBuilderShowcase {
 
         FilterBuilder {
             categories += listOf(categoryBook, categoryOffice)
-            assertEquals("category:book OR category:office", buildNoEscape())
+            assertEquals("category:book OR category:office", buildTest())
             prices += comparison
-            assertEquals("price != 15.0 AND (category:book OR category:office)", buildNoEscape())
+            assertEquals("price != 15.0 AND (category:book OR category:office)", buildTest())
             prices += range
-            assertEquals("price != 15.0 AND price:5.0 TO 20.0 AND (category:book OR category:office)", buildNoEscape())
+            assertEquals("price != 15.0 AND price:5.0 TO 20.0 AND (category:book OR category:office)", buildTest())
             categories -= categoryBook
-            assertEquals("price != 15.0 AND price:5.0 TO 20.0 AND category:office", buildNoEscape())
+            assertEquals("price != 15.0 AND price:5.0 TO 20.0 AND category:office", buildTest())
         }
     }
 
@@ -104,9 +105,9 @@ class TestFilterBuilderShowcase {
         FilterBuilder {
             currency += comparison
             currency += range
-            assertEquals("euro != 15.0 AND euro:5.0 TO 20.0", buildNoEscape())
+            assertEquals("euro != 15.0 AND euro:5.0 TO 20.0", buildTest())
             currency.replaceAttribute(euro, dollar)
-            assertEquals("dollar != 15.0 AND dollar:5.0 TO 20.0", buildNoEscape())
+            assertEquals("dollar != 15.0 AND dollar:5.0 TO 20.0", buildTest())
         }
     }
 
@@ -123,7 +124,7 @@ class TestFilterBuilderShowcase {
         FilterBuilder {
             groupA += comparisonPrice
             groupA += rangeLike
-            assertEquals("price != 15.0 OR nbLike:100.0 TO 200.0", buildNoEscape())
+            assertEquals("price != 15.0 OR nbLike:100.0 TO 200.0", buildTest())
             assertEquals(setOf(comparisonPrice), groupA.get(price))
         }
 
@@ -131,7 +132,7 @@ class TestFilterBuilderShowcase {
         FilterBuilder {
             groupA += comparisonPrice
             groupB += rangeLike
-            assertEquals("price != 15.0 AND nbLike:100.0 TO 200.0", buildNoEscape())
+            assertEquals("price != 15.0 AND nbLike:100.0 TO 200.0", buildTest())
         }
     }
 }

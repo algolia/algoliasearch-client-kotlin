@@ -112,8 +112,4 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
         }
         return ands + ors
     }
-
-    fun buildNoEscape(): String {
-        return build().replace("\"", "")
-    }
 }

@@ -15,9 +15,11 @@ internal val rangeA = FilterRange(attributeA, 0.0, 5.0)
 internal val rangeB = FilterRange(attributeB, 5.0, 10.0)
 internal val tagA = FilterTag("tagA")
 internal val tagB = FilterTag("tagB")
-internal val nameA = "nameA"
-internal val nameB = "nameB"
+internal const val nameA = "nameA"
+internal const val nameB = "nameB"
 internal val groupOrA = GroupOr(nameA)
 internal val groupOrB = GroupOr(nameB)
 internal val groupAndA = GroupAnd(nameA)
 internal val groupAndB = GroupAnd(nameB)
+
+internal fun FilterBuilder.buildTest() = build().replace("\"", "")
