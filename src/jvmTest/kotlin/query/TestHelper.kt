@@ -194,4 +194,20 @@ class TestHelper {
             map
         )
     }
+
+    @Test
+    fun get() {
+        val map = groupMap().apply {
+            add(groupAndA, facetA, facetB)
+            add(groupAndB, facetA, facetB)
+        }
+        assertEquals(
+            set(facetA),
+            map.get(groupAndA, attributeA)
+        )
+        assertEquals(
+            set(facetA, facetB),
+            map.get(groupAndA, null)
+        )
+    }
 }
