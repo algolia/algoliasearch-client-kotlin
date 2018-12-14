@@ -5,6 +5,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 
 @RunWith(JUnit4::class)
@@ -100,5 +102,20 @@ class TestHelper {
             ),
             map
         )
+    }
+
+    @Test
+    fun contains() {
+        val map: GroupMap<Filter> = mutableMapOf()
+
+        map.apply {
+            add(groupAndA, facetA)
+            add(groupAndB, facetB)
+        }
+
+        assertTrue(map.contains(groupAndA, facetA))
+        assertFalse(map.contains(groupAndA, facetB))
+        assertTrue(map.contains(facetA))
+        assertTrue(map.contains(facetB))
     }
 }
