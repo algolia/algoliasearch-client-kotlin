@@ -71,6 +71,14 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : 
         return groups.get(this, attribute)
     }
 
+    override fun get(attribute: Attribute?): Set<FilterFacet> {
+        return groups.get(attribute)
+    }
+
+    override fun contains(filter: FilterFacet): Boolean {
+        return groups.contains(filter)
+    }
+
     override fun clear() {
         groups.clear()
     }

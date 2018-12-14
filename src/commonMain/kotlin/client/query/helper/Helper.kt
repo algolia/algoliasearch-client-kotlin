@@ -33,11 +33,24 @@ internal fun <T : Filter> GroupMap<T>.add(group: Group, vararg filters: T) {
 }
 
 internal fun <T : Filter> GroupMap<T>.remove(group: Group, vararg filters: Filter): Boolean {
-    return filters.any { get(group.key(it))?.remove(it) ?: false }
+    return filters.any {
+        val key = group.key(it)
+        val set = get(key)
+        if (set != null) {
+            if (set.remove(it)) {
+                if (set.isEmpty()) remove(key)
+                true
+            } else false
+        } else false
+    }
 }
 
 internal fun <T : Filter> GroupMap<T>.contains(group: Group, filter: Filter): Boolean {
     return get(group.key(filter))?.contains(filter) ?: false
+}
+
+internal fun <T : Filter> GroupMap<T>.contains(filter: Filter): Boolean {
+    return any { it.value.contains(filter) }
 }
 
 internal fun <T : Filter> GroupMap<T>.clear(group: Group, attribute: Attribute?) {
@@ -90,6 +103,14 @@ internal fun <T : Filter> GroupMap<T>.get(group: Group, attribute: Attribute?): 
         filters.filter { it.attribute == attribute }
     } else {
         filters
+    }.toSet()
+}
+
+internal fun <T : Filter> GroupMap<T>.get(attribute: Attribute?): Set<T> {
+    return if (attribute != null) {
+        values.flatMap { it.filter { it.attribute == attribute } }
+    } else {
+        values.flatten()
     }.toSet()
 }
 

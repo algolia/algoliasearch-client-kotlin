@@ -79,6 +79,14 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
         return groups.get(this, attribute)
     }
 
+    override fun get(attribute: Attribute?): Set<Filter> {
+        return groups.get(attribute)
+    }
+
+    override fun contains(filter: Filter): Boolean {
+        return groups.contains(filter)
+    }
+
     override fun clear() {
         groups.clear()
     }
