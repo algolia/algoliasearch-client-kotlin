@@ -137,4 +137,21 @@ class TestHelper {
         map.clear(groupAndA, null)
         assertTrue(map.isEmpty())
     }
+
+    @Test
+    fun replace() {
+        val map = groupMap()
+
+        map.apply {
+            add(groupOrA, facetA)
+        }
+        assertFalse(map.replace(groupOrB, facetA, facetB))
+        assertTrue(map.replace(groupOrA, facetA, facetB))
+        assertEquals(
+            mutableMapOf(
+                Group.Key(nameA, FilterKey.OrFacet) to set(facetB)
+            ),
+            map
+        )
+    }
 }
