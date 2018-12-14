@@ -14,6 +14,7 @@ class TestHelper {
 
     private val attributeA = Attribute("attributeA")
     private val attributeB = Attribute("attributeB")
+    private val attributeC = Attribute("attributeC")
     private val facetA = FilterFacet(attributeA, "facetA")
     private val facetB = FilterFacet(attributeB, false)
     private val comparisonA = FilterComparison(attributeA, NumericOperator.Greater, 5.0)
@@ -162,6 +163,33 @@ class TestHelper {
         assertEquals(
             mutableMapOf(
                 Group.Key(nameB, FilterKey.OrFacet) to set(facetA)
+            ),
+            map
+        )
+    }
+
+    @Test
+    fun replaceAttribute() {
+        val map = groupMap()
+
+        val original = mutableMapOf(
+            Group.Key(nameA, FilterKey.And) to set(facetA, facetB, comparisonA, comparisonB)
+        )
+
+        map.add(groupAndA, facetA, facetB, comparisonA, comparisonB)
+        map.replaceAttribute(groupAndA, attributeC, attributeA)
+        assertEquals(map, original)
+        map.replaceAttribute(groupAndB, attributeA, attributeB)
+        assertEquals(map, original)
+        map.replaceAttribute(groupAndA, attributeA, attributeC)
+        assertEquals(
+            mutableMapOf(
+                Group.Key(nameA, FilterKey.And) to set(
+                    facetA.copy(attribute = attributeC),
+                    facetB,
+                    comparisonA.copy(attribute = attributeC),
+                    comparisonB
+                )
             ),
             map
         )
