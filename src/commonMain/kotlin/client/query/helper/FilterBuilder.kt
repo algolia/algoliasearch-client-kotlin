@@ -20,7 +20,7 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
     }
 
     override operator fun Group.plusAssign(filters: Collection<Filter>) {
-        filters.forEach { groups.add(this, it) }
+        groups.add(this, *filters.toTypedArray())
     }
 
     override operator fun Group.minusAssign(filter: Filter) {
@@ -28,7 +28,7 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
     }
 
     override operator fun Group.minusAssign(filters: Collection<Filter>) {
-        filters.forEach { groups.remove(this, it) }
+        groups.remove(this, *filters.toTypedArray())
     }
 
     override fun Group.add(filter: Filter) {
