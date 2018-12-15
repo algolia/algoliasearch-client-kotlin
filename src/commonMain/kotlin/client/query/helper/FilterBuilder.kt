@@ -2,6 +2,7 @@ package client.query.helper
 
 
 /**
+ * @see FilterBuilderInterface
  * For a better understanding of Filters, please read the documentation linked below:
  *
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
@@ -59,14 +60,26 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
         groups.replaceAttribute(this, attribute, replacement)
     }
 
+    /**
+     * Replace in this [Group] a [filter] by its [replacement].
+     * @return True if the [filter] was found and successfully replaced.
+     */
     fun Group.replace(filter: FilterFacet, replacement: FilterFacet): Boolean {
         return groups.replace(this, filter, replacement)
     }
 
+    /**
+     * Replace in this [Group] a [filter] by its [replacement].
+     * @return True if the [filter] was found and successfully replaced.
+     */
     fun Group.replace(filter: FilterNumeric, replacement: FilterNumeric): Boolean {
         return groups.replace(this, filter, replacement)
     }
 
+    /**
+     * Replace in this [Group] a [filter] by its [replacement].
+     * @return True if the [filter] was found and successfully replaced.
+     */
     fun Group.replace(filter: FilterTag, replacement: FilterTag): Boolean {
         return groups.replace(this, filter, replacement)
     }
@@ -95,8 +108,14 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
         return groups.isEmpty()
     }
 
+    /**
+     * Express every [Group] and [Filter] present in [groups] into a [String].
+     * This [String] uses SQL-like syntax, where boolean operators and parenthesis can be used to combined individual
+     * filters.
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
+     */
     fun build(): String {
-        val (andEntries, orEntries) = groups.entries.partition { it.key.key == FilterKey.And }
+        val (andEntries, orEntries) = groups.entries.partition { it.key.key == Group.FilterKey.And }
         val ands = andEntries.joinToString(separator = " AND ") {
             val condition = andEntries.size > 1 && it.value.size > 1
             val prefix = if (condition) "(" else ""

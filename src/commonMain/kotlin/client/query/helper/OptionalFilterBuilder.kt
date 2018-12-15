@@ -59,6 +59,10 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : 
         groups.replaceAttribute(this, attribute, replacement)
     }
 
+    /**
+     * Replace in this [Group] a [filter] by its [replacement].
+     * @return True if the [filter] was found and successfully replaced.
+     */
     fun Group.replace(filter: FilterFacet, replacement: FilterFacet): Boolean {
         return groups.replace(this, filter, replacement)
     }
@@ -87,8 +91,12 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : 
         return groups.isEmpty()
     }
 
+    /**
+     * Express every [Group] and [Filter] present in [groups] into a nested list of [String].
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
+     */
     fun build(): List<List<String>> {
-        val (andEntries, orEntries) = groups.entries.partition { it.key.key == FilterKey.And }
+        val (andEntries, orEntries) = groups.entries.partition { it.key.key == Group.FilterKey.And }
         val ands = andEntries.flatMap { it.value.map { listOf(it.expression) } }
         val ors = orEntries.map { it.value.map { it.expression } }
 
