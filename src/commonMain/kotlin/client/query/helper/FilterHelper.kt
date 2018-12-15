@@ -1,20 +1,13 @@
 package client.query.helper
 
-internal enum class FilterKey {
-    And,
-    OrFacet,
-    OrNumeric,
-    OrTag
-}
-
 internal fun Group.key(filter: Filter): Group.Key {
     val key = when (this) {
         is GroupOr -> when (filter) {
-            is FilterFacet -> FilterKey.OrFacet
-            is FilterNumeric -> FilterKey.OrNumeric
-            is FilterTag -> FilterKey.OrTag
+            is FilterFacet -> Group.FilterKey.OrFacet
+            is FilterNumeric -> Group.FilterKey.OrNumeric
+            is FilterTag -> Group.FilterKey.OrTag
         }
-        is GroupAnd -> FilterKey.And
+        is GroupAnd -> Group.FilterKey.And
     }
     return Group.Key(name, key)
 }
