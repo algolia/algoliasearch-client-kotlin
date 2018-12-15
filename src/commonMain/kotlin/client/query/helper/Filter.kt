@@ -18,15 +18,33 @@ sealed class Filter(
     }
 }
 
-sealed class FilterNumeric(
-    override val attribute: Attribute
-) : Filter(attribute)
-
 data class FilterTag(
     val value: String
 ) : Filter(Attribute("_tags")) {
 
     override val expression = "$attribute:\"$value\""
+}
+
+sealed class FilterNumeric(
+    override val attribute: Attribute
+) : Filter(attribute)
+
+data class FilterComparison(
+    override val attribute: Attribute,
+    val operator: NumericOperator,
+    val value: Double
+) : FilterNumeric(attribute) {
+
+    override val expression = "\"$attribute\" ${operator.raw} $value"
+}
+
+data class FilterRange(
+    override val attribute: Attribute,
+    val lowerBound: Double,
+    val upperBound: Double
+) : FilterNumeric(attribute) {
+
+    override val expression = "\"$attribute\":$lowerBound TO $upperBound"
 }
 
 data class FilterFacet internal constructor(
@@ -65,30 +83,3 @@ fun String.toFacetValue() = FacetValue.String(this)
 fun Boolean.toFacetValue() = FacetValue.Boolean(this)
 
 fun Number.toFacetValue() = FacetValue.Number(this)
-
-data class FilterComparison(
-    override val attribute: Attribute,
-    val operator: NumericOperator,
-    val value: Double
-) : FilterNumeric(attribute) {
-
-    override val expression = "\"$attribute\" ${operator.raw} $value"
-}
-
-data class FilterRange(
-    override val attribute: Attribute,
-    val lowerBound: Double,
-    val upperBound: Double
-) : FilterNumeric(attribute) {
-
-    override val expression = "\"$attribute\":$lowerBound TO $upperBound"
-}
-
-sealed class Group(open val name: String) {
-
-    internal data class Key(val name: String, val key: FilterKey)
-}
-
-data class GroupAnd(override val name: String) : Group(name)
-
-data class GroupOr(override val name: String) : Group(name)
