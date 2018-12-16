@@ -3,14 +3,14 @@ package client.query.helper
 
 sealed class Group(open val name: String) {
 
-    internal enum class FilterKey {
+    internal enum class Type {
         And,
         OrFacet,
         OrNumeric,
         OrTag
     }
 
-    internal data class Key(val name: String, val key: FilterKey)
+    internal data class Key(val name: String, val type: Type)
 }
 
 data class GroupAnd(override val name: String) : Group(name)

@@ -96,7 +96,7 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : 
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
      */
     fun build(): List<List<String>> {
-        val (andEntries, orEntries) = groups.entries.partition { it.key.key == Group.FilterKey.And }
+        val (andEntries, orEntries) = groups.entries.partition { it.key.type == Group.Type.And }
         val ands = andEntries.flatMap { it.value.map { listOf(it.expression) } }
         val ors = orEntries.map { it.value.map { it.expression } }
 

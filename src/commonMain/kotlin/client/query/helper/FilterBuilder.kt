@@ -115,7 +115,7 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
      */
     fun build(): String {
-        val (andEntries, orEntries) = groups.entries.partition { it.key.key == Group.FilterKey.And }
+        val (andEntries, orEntries) = groups.entries.partition { it.key.type == Group.Type.And }
         val ands = andEntries.joinToString(separator = " AND ") {
             val condition = andEntries.size > 1 && it.value.size > 1
             val prefix = if (condition) "(" else ""

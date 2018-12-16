@@ -33,16 +33,16 @@ class TestFilterHelper {
 
     @Test
     fun keyOr() {
-        assertEquals(Group.Key(nameA, FilterKey.OrFacet), groupOrA.key(facetA))
-        assertEquals(Group.Key(nameA, FilterKey.OrFacet), groupOrA.key(facetB))
-        assertEquals(Group.Key(nameA, FilterKey.OrNumeric), groupOrA.key(comparisonA))
-        assertEquals(Group.Key(nameA, FilterKey.OrNumeric), groupOrA.key(rangeA))
-        assertEquals(Group.Key(nameA, FilterKey.OrTag), groupOrA.key(tagA))
+        assertEquals(Group.Key(nameA, Group.Type.OrFacet), groupOrA.key(facetA))
+        assertEquals(Group.Key(nameA, Group.Type.OrFacet), groupOrA.key(facetB))
+        assertEquals(Group.Key(nameA, Group.Type.OrNumeric), groupOrA.key(comparisonA))
+        assertEquals(Group.Key(nameA, Group.Type.OrNumeric), groupOrA.key(rangeA))
+        assertEquals(Group.Key(nameA, Group.Type.OrTag), groupOrA.key(tagA))
     }
 
     @Test
     fun keyAnd() {
-        val key = Group.Key(nameA, FilterKey.And)
+        val key = Group.Key(nameA, Group.Type.And)
 
         assertEquals(key, groupAndA.key(facetA))
         assertEquals(key, groupAndA.key(facetB))
@@ -62,14 +62,14 @@ class TestFilterHelper {
             add(groupAndB, *filters)
             assertEquals(
                 mutableMapOf(
-                    Group.Key(nameA, FilterKey.OrFacet) to set(facetA, facetB),
-                    Group.Key(nameA, FilterKey.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
-                    Group.Key(nameA, FilterKey.OrTag) to set(tagA, tagB),
-                    Group.Key(nameA, FilterKey.And) to set(*filters),
-                    Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB),
-                    Group.Key(nameB, FilterKey.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
-                    Group.Key(nameB, FilterKey.OrTag) to set(tagA, tagB),
-                    Group.Key(nameB, FilterKey.And) to set(*filters)
+                    Group.Key(nameA, Group.Type.OrFacet) to set(facetA, facetB),
+                    Group.Key(nameA, Group.Type.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
+                    Group.Key(nameA, Group.Type.OrTag) to set(tagA, tagB),
+                    Group.Key(nameA, Group.Type.And) to set(*filters),
+                    Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB),
+                    Group.Key(nameB, Group.Type.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
+                    Group.Key(nameB, Group.Type.OrTag) to set(tagA, tagB),
+                    Group.Key(nameB, Group.Type.And) to set(*filters)
                 ),
                 this
             )
@@ -84,15 +84,15 @@ class TestFilterHelper {
             remove(groupOrA, facetA)
             assertEquals(
                 mutableMapOf(
-                    Group.Key(nameA, FilterKey.OrFacet) to set(facetB),
-                    Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB)
+                    Group.Key(nameA, Group.Type.OrFacet) to set(facetB),
+                    Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB)
                 ),
                 this
             )
             remove(groupOrA, facetB)
             assertEquals(
                 mutableMapOf(
-                    Group.Key(nameB, FilterKey.OrFacet) to set(facetA, facetB)
+                    Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB)
                 ),
                 this
             )
@@ -118,7 +118,7 @@ class TestFilterHelper {
             clear(groupAndA, facetB.attribute)
             assertEquals(
                 mutableMapOf(
-                    Group.Key(nameA, FilterKey.And) to set(facetA, comparisonA)
+                    Group.Key(nameA, Group.Type.And) to set(facetA, comparisonA)
                 ),
                 this
             )
@@ -135,7 +135,7 @@ class TestFilterHelper {
             assertTrue(replace(groupOrA, facetA, facetB))
             assertEquals(
                 mutableMapOf(
-                    Group.Key(nameA, FilterKey.OrFacet) to set(facetB)
+                    Group.Key(nameA, Group.Type.OrFacet) to set(facetB)
                 ),
                 this
             )
@@ -151,7 +151,7 @@ class TestFilterHelper {
             assertTrue(move(groupOrA, groupOrB, facetA))
             assertEquals(
                 mutableMapOf(
-                    Group.Key(nameB, FilterKey.OrFacet) to set(facetA)
+                    Group.Key(nameB, Group.Type.OrFacet) to set(facetA)
                 ),
                 this
             )
@@ -162,7 +162,7 @@ class TestFilterHelper {
     fun replaceAttribute() {
         groupMap().apply {
             val original = mutableMapOf(
-                Group.Key(nameA, FilterKey.And) to set(facetA, facetB, comparisonA, comparisonB)
+                Group.Key(nameA, Group.Type.And) to set(facetA, facetB, comparisonA, comparisonB)
             )
 
             add(groupAndA, facetA, facetB, comparisonA, comparisonB)
@@ -173,7 +173,7 @@ class TestFilterHelper {
             replaceAttribute(groupAndA, attributeA, attributeC)
             assertEquals(
                 mutableMapOf(
-                    Group.Key(nameA, FilterKey.And) to set(
+                    Group.Key(nameA, Group.Type.And) to set(
                         facetA.copy(attribute = attributeC),
                         facetB,
                         comparisonA.copy(attribute = attributeC),
