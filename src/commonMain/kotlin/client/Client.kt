@@ -1,5 +1,6 @@
 package client
 
+import client.host.Hosts
 import client.query.Query
 import client.response.FacetHits
 import client.response.Hits
@@ -12,7 +13,6 @@ import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
-import kotlinx.coroutines.withTimeout
 
 
 class Client(
@@ -22,7 +22,6 @@ class Client(
     val searchTimeout: Long = 5000
 ) {
 
-    private val host = "https://${applicationId.string}-dsn.algolia.net"
     private val httpClient = HttpClient {
         install(JsonFeature) {
             serializer = KotlinxSerializer().also {
@@ -39,39 +38,54 @@ class Client(
         }
     }
 
-    private fun searchTimeout(requestOptions: RequestOptions?): Long {
-        return requestOptions?.searchTimeout ?: searchTimeout
-    }
+    private val hosts = Hosts(applicationId)
 
-    private fun readTimeout(requestOptions: RequestOptions?): Long {
-        return requestOptions?.readTimeout ?: readTimeout
-    }
+    private val RequestOptions?.computedReadTimeout get() = this?.readTimeout ?: readTimeout
+    private val RequestOptions?.computedSearchTimeout get() = this?.searchTimeout ?: searchTimeout
 
-    private fun pathIndexes(index: StringUTF8): String {
-        return "$host/1/indexes/${index.string}"
+    private fun Index.pathIndexes(suffix: String = ""): String {
+        return "/1/indexes/${encode().string}" + suffix
     }
 
     suspend fun getListIndexes(requestOptions: RequestOptions? = null): ListIndexes {
-        return withTimeout(readTimeout(requestOptions)) {
-            httpClient.get<ListIndexes>("$host/1/indexes") {
+        return hosts.retryLogic(requestOptions.computedReadTimeout, "/1/indexes") { path ->
+            httpClient.get<ListIndexes>(path) {
                 setRequestOptions(requestOptions)
             }
         }
     }
 
-    private suspend fun search(index: Index, requestOptions: RequestOptions? = null): Hits {
-        return withTimeout(searchTimeout(requestOptions)) {
-            httpClient.get<Hits>(pathIndexes(index.encode())) {
+    internal suspend fun search(index: Index, requestOptions: RequestOptions? = null): Hits {
+        return hosts.retryLogic(requestOptions.computedSearchTimeout, index.pathIndexes()) { path ->
+            httpClient.get<Hits>(path) {
                 setRequestOptions(requestOptions)
             }
         }
     }
 
     suspend fun search(index: Index, query: Query? = null, requestOptions: RequestOptions? = null): Hits {
-        return withTimeout(searchTimeout(requestOptions)) {
-            httpClient.post<Hits>(pathIndexes(index.encode()) + "/query") {
+        return hosts.retryLogic(requestOptions.computedSearchTimeout, index.pathIndexes("/query")) { path ->
+            httpClient.post<Hits>(path) {
                 setRequestOptions(requestOptions)
                 setQuery(query)
+            }
+        }
+    }
+
+    suspend fun browse(index: Index, query: Query? = null, requestOptions: RequestOptions? = null): Hits {
+        return hosts.retryLogic(requestOptions.computedSearchTimeout, index.pathIndexes("/browse")) { path ->
+            httpClient.post<Hits>(path) {
+                setRequestOptions(requestOptions)
+                setQuery(query)
+            }
+        }
+    }
+
+    suspend fun browse(index: Index, cursor: String, requestOptions: RequestOptions? = null): Hits {
+        return hosts.retryLogic(requestOptions.computedSearchTimeout, index.pathIndexes("/browse")) { path ->
+            httpClient.get<Hits>(path) {
+                setRequestOptions(requestOptions)
+                parameter("cursor", cursor)
             }
         }
     }
@@ -84,32 +98,17 @@ class Client(
         maxFacetHits: Int? = null,
         requestOptions: RequestOptions? = null
     ): FacetHits {
-        return withTimeout(searchTimeout(requestOptions)) {
-            httpClient.post<FacetHits>(pathIndexes(index.encode()) + "/facets/$facetName/query") {
+        return hosts.retryLogic(
+            requestOptions.computedSearchTimeout,
+            index.pathIndexes("/facets/$facetName/query")
+        ) { path ->
+            httpClient.post<FacetHits>(path) {
                 setRequestOptions(requestOptions)
                 val map = query?.toMap() ?: mutableMapOf()
 
                 maxFacetHits?.let { map["maxFacetHits"] = it }
                 facetQuery?.let { map["facetQuery"] = it }
                 setBody(map)
-            }
-        }
-    }
-
-    suspend fun browse(index: Index, query: Query? = null, requestOptions: RequestOptions? = null): Hits {
-        return withTimeout(searchTimeout(requestOptions)) {
-            httpClient.post<Hits>(pathIndexes(index.encode()) + "/browse") {
-                setRequestOptions(requestOptions)
-                setQuery(query)
-            }
-        }
-    }
-
-    suspend fun browse(index: Index, cursor: String, requestOptions: RequestOptions? = null): Hits {
-        return withTimeout(searchTimeout(requestOptions)) {
-            httpClient.get<Hits>(pathIndexes(index.encode()) + "/browse") {
-                setRequestOptions(requestOptions)
-                parameter("cursor", cursor)
             }
         }
     }

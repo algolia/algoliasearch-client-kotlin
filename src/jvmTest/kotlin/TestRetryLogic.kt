@@ -4,6 +4,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.MockHttpResponse
 import io.ktor.client.request.get
+import io.ktor.client.response.HttpResponse
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import kotlinx.coroutines.delay
@@ -37,7 +38,7 @@ class TestRetryLogic {
 
             hosts.retryLogic(1000L, route) {
                 retry++
-                httpClient.get()
+                httpClient.get<HttpResponse>()
             }
             assertEquals(0, retry)
         }
@@ -51,7 +52,7 @@ class TestRetryLogic {
             hosts.retryLogic(1000L, route) {
                 retry++
                 if (retry == 0) delay(2000L)
-                httpClient.get()
+                httpClient.get<HttpResponse>()
             }
             assertEquals(1, retry)
         }
@@ -70,7 +71,7 @@ class TestRetryLogic {
                     2 -> assertEquals(hosts.fallbackHosts[2] + route, path)
                 }
                 if (retry < 3) delay(500L * (retry + 1))
-                httpClient.get(path)
+                httpClient.get<HttpResponse>(path)
             }
             assertEquals(3, retry)
         }

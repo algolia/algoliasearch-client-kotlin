@@ -2,7 +2,6 @@ package client.host
 
 import client.ApplicationId
 import io.ktor.client.features.BadResponseStatusException
-import io.ktor.client.response.HttpResponse
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
 import kotlinx.io.IOException
@@ -18,12 +17,12 @@ internal class Hosts(
     val fallbackHosts = hosts.randomizeFallbackHosts()
     val statuses = fallbackHosts.initialHostStatus()
 
-    suspend fun retryLogic(
+    suspend fun <T> retryLogic(
         timeout: Long,
         path: String,
         attempt: Int = 1,
-        request: suspend (String) -> HttpResponse
-    ): HttpResponse {
+        request: suspend (String) -> T
+    ): T {
         if (statuses.areStatusExpired(hostStatusExpirationDelay)) {
             for (index in statuses.indices) {
                 statuses[index] = Status.Unknown to 0L
