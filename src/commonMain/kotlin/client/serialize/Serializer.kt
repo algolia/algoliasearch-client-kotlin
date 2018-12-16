@@ -5,10 +5,9 @@ import client.query.BooleanOrQueryLanguage
 import client.query.Query
 import client.query.TypoTolerance
 import client.query.helper.names
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
+import io.ktor.http.Parameters
+import io.ktor.http.formUrlEncode
+import kotlinx.serialization.json.*
 
 internal fun Map<String, Any>.serialize(): JsonObject {
     return json {
@@ -23,6 +22,21 @@ internal fun Map<String, Any>.serialize(): JsonObject {
             }
         }
     }
+}
+
+internal fun Map<String, Any>.urlEncode(): String {
+    return Parameters.build {
+        entries.forEach { entry ->
+            val value = entry.value
+            when (value) {
+                is String -> append(entry.key, value)
+                is Number -> append(entry.key, value.toString())
+                is Boolean -> append(entry.key, value.toString())
+                is JsonArray -> appendAll(entry.key, value.content.map { it.content })
+                else -> throw Exception("Unsupported serialization type.")
+            }
+        }
+    }.formUrlEncode()
 }
 
 internal fun List<Float>.toJsonArrayFromFloat() = jsonArray { forEach { (it as Number).unaryPlus() } }

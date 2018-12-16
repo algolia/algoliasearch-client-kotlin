@@ -1,10 +1,13 @@
 package client
 
 import client.host.Hosts
+import client.query.IndexQuery
+import client.query.MultipleQueriesStrategy
 import client.query.Query
 import client.response.FacetHits
 import client.response.Hits
 import client.response.ListIndexes
+import client.response.MultipleHits
 import client.serialize.toMap
 import io.ktor.client.HttpClient
 import io.ktor.client.features.DefaultRequest
@@ -86,6 +89,19 @@ class Client(
             httpClient.get<Hits>(path) {
                 setRequestOptions(requestOptions)
                 parameter("cursor", cursor)
+            }
+        }
+    }
+
+    suspend fun multipleQueries(
+        queries: Collection<IndexQuery>,
+        strategy: MultipleQueriesStrategy = MultipleQueriesStrategy.None,
+        requestOptions: RequestOptions? = null
+    ): MultipleHits {
+        return hosts.retryLogic(requestOptions.computedSearchTimeout, "/1/indexes/*/queries") { path ->
+            httpClient.post<MultipleHits>(path) {
+                setRequestOptions(requestOptions)
+                setQueries(queries, strategy)
             }
         }
     }

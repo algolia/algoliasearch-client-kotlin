@@ -1,11 +1,16 @@
 package client
 
+import client.query.IndexQuery
+import client.query.MultipleQueriesStrategy
 import client.query.Query
 import client.serialize.serialize
 import client.serialize.toMap
+import client.serialize.urlEncode
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
+import kotlinx.serialization.json.json
+import kotlinx.serialization.json.jsonArray
 
 
 fun HttpRequestBuilder.setApplicationId(applicationId: ApplicationId) {
@@ -19,6 +24,20 @@ fun HttpRequestBuilder.setApiKey(apiKey: ApiKey) {
 fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions?) {
     requestOptions?.headers?.forEach { header(it.key, it.value) }
     requestOptions?.urlParameters?.forEach { parameter(it.key, it.value) }
+}
+
+fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: MultipleQueriesStrategy) {
+    body = json {
+        "requests" to jsonArray {
+            queries.forEach {
+                +json {
+                    "indexName" to it.index.string
+                    "params" to it.query.toMap().urlEncode()
+                }
+            }
+        }
+        "strategy" to strategy.raw
+    }.toString()
 }
 
 fun HttpRequestBuilder.setQuery(query: Query?) {

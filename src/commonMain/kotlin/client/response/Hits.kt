@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Hits(
+    @Optional val index: String? = null,
     @Optional val hits: List<Hit>? = null,
     @Optional val nbHits: Int? = null,
     @Optional val processingTimeMS: Long? = null,
