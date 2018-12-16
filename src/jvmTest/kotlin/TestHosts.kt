@@ -27,9 +27,9 @@ class TestHosts {
     fun fallbackHosts() {
         val hosts = applicationId.computeFallbackHosts()
 
-        assertTrue { hosts.contains("${applicationId.string}-1.$host") }
-        assertTrue { hosts.contains("${applicationId.string}-2.$host") }
-        assertTrue { hosts.contains("${applicationId.string}-3.$host") }
+        assertTrue { hosts.contains("https://${applicationId.string}-1.$host") }
+        assertTrue { hosts.contains("https://${applicationId.string}-2.$host") }
+        assertTrue { hosts.contains("https://${applicationId.string}-3.$host") }
         assertEquals(3, hosts.size)
     }
 
