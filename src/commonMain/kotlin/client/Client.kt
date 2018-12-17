@@ -32,13 +32,7 @@ class Client(
 
     private val httpClient = HttpClient {
         install(JsonFeature) {
-            serializer = KotlinxSerializer().also {
-                it.register<FacetHits>()
-                it.register<FacetHits.Item>()
-                it.register<ListIndexes>()
-                it.register<ListIndexes.Item>()
-                it.register<Hits>()
-            }
+            serializer = KotlinxSerializer()
         }
         install(DefaultRequest) {
             setApplicationId(applicationId)
