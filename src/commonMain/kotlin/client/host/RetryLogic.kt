@@ -26,10 +26,10 @@ internal class RetryLogic(
     internal val hosts = listOf(host) + applicationId.computeHosts().randomize()
     internal val statuses = hosts.initialHostStatus()
 
-    suspend fun <T> retry(
+    private suspend fun <T> retry(
         timeout: Long,
         path: String,
-        attempt: Int = 1,
+        attempt: Int,
         request: suspend (String) -> T
     ): T {
         if (statuses.areStatusExpired(hostStatusExpirationDelay)) {
@@ -55,10 +55,18 @@ internal class RetryLogic(
             val isRetryable = floor(code / 100f) != 4f && !isSuccessful
 
             statuses[index] = Status.Down.getHostStatus()
-            if (isRetryable) retry(timeout, path, attempt + 1, request) else throw exception
+            if (isRetryable) retry(timeout, path, attempt, request) else throw exception
         } catch (exception: IOException) {
             statuses[index] = Status.Down.getHostStatus()
-            retry(timeout, path, attempt + 1, request)
+            retry(timeout, path, attempt, request)
         }
+    }
+
+    suspend fun <T> retry(
+        timeout: Long,
+        path: String,
+        request: suspend (String) -> T
+    ): T {
+        return retry(timeout, path, 1, request)
     }
 }
