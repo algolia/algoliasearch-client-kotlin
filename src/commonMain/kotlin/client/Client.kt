@@ -26,7 +26,7 @@ class Client(
     val applicationId: ApplicationId,
     val apiKey: ApiKey,
     val readTimeout: Long = 30000,
-    val searchTimeout: Long = 5000,
+    val searchTimeout: Long = 2000,
     val logLevel: LogLevel = LogLevel.ALL
 ) {
 
