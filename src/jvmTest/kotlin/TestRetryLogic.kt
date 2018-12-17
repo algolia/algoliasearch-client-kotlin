@@ -1,5 +1,6 @@
 import client.ApplicationId
-import client.host.Hosts
+import client.host.RetryLogic
+import client.host.Status
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.MockHttpResponse
@@ -14,12 +15,14 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 
 @RunWith(JUnit4::class)
 class TestRetryLogic {
 
-    private val hosts = Hosts(ApplicationId("appId"))
+    private val applicationId = ApplicationId("appId")
+    private val retryLogic = RetryLogic(applicationId, RetryLogic.Type.Read)
     private val route = "/route"
     private val mockEngine = MockEngine {
         MockHttpResponse(
@@ -32,11 +35,22 @@ class TestRetryLogic {
     private val httpClient = HttpClient(mockEngine)
 
     @Test
+    fun hosts() {
+        assertEquals("https://${applicationId.string}-dsn.algolia.net", retryLogic.hosts.first())
+        assertTrue {
+            retryLogic.hosts.contains("https://${applicationId.string}-1.algolianet.com")
+            retryLogic.hosts.contains("https://${applicationId.string}-2.algolianet.com")
+            retryLogic.hosts.contains("https://${applicationId.string}-3.algolianet.com")
+        }
+        assertEquals(4, retryLogic.hosts.size)
+    }
+
+    @Test
     fun noRetry() {
         runBlocking {
             var retry = -1
 
-            hosts.retryLogic(1000L, route) {
+            retryLogic.retry(1000L, route) {
                 retry++
                 httpClient.get<HttpResponse>()
             }
@@ -49,7 +63,7 @@ class TestRetryLogic {
         runBlocking {
             var retry = -1
 
-            hosts.retryLogic(1000L, route) {
+            retryLogic.retry(1000L, route) {
                 retry++
                 if (retry == 0) delay(2000L)
                 httpClient.get<HttpResponse>()
@@ -59,21 +73,21 @@ class TestRetryLogic {
     }
 
     @Test
-    fun retryThree() {
+    fun retryFour() {
         runBlocking {
+            val count = 4
             var retry = -1
 
-            hosts.retryLogic(500L, route) { path ->
+            retryLogic.retry(100L, route) { path ->
                 retry++
-                when (retry) {
-                    0 -> assertEquals(hosts.fallbackHosts[0] + route, path)
-                    1 -> assertEquals(hosts.fallbackHosts[1] + route, path)
-                    2 -> assertEquals(hosts.fallbackHosts[2] + route, path)
-                }
-                if (retry < 3) delay(500L * (retry + 1))
+                val index = retry % count
+                assertEquals(retryLogic.hosts[index] + route, path)
+                if (retry < count) delay(150L * (retry + 1))
                 httpClient.get<HttpResponse>(path)
+                assertEquals(Status.Down, retryLogic.statuses[index].first)
             }
-            assertEquals(3, retry)
+            assertEquals(Status.Up, retryLogic.statuses.first().first)
+            assertEquals(count, retry)
         }
     }
 }

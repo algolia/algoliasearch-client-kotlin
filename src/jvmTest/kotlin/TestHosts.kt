@@ -1,6 +1,6 @@
 import client.ApplicationId
-import client.host.computeFallbackHosts
-import client.host.randomizeFallbackHosts
+import client.host.computeHosts
+import client.host.randomize
 import client.host.readHost
 import client.host.writeHost
 import org.junit.Test
@@ -19,13 +19,13 @@ class TestHosts {
 
     @Test
     fun default() {
-        assertEquals("${applicationId.string}-dsn.algolia.net", applicationId.readHost)
-        assertEquals("${applicationId.string}.algolia.net", applicationId.writeHost)
+        assertEquals("https://${applicationId.string}-dsn.algolia.net", applicationId.readHost)
+        assertEquals("https://${applicationId.string}.algolia.net", applicationId.writeHost)
     }
 
     @Test
-    fun fallbackHosts() {
-        val hosts = applicationId.computeFallbackHosts()
+    fun computeHosts() {
+        val hosts = applicationId.computeHosts()
 
         assertTrue { hosts.contains("https://${applicationId.string}-1.$host") }
         assertTrue { hosts.contains("https://${applicationId.string}-2.$host") }
@@ -36,8 +36,8 @@ class TestHosts {
     @Test
     fun random() {
         val result = (0 until 1000).map {
-            val hosts = applicationId.computeFallbackHosts()
-            val randomized = hosts.randomizeFallbackHosts()
+            val hosts = applicationId.computeHosts()
+            val randomized = hosts.randomize()
 
             randomized[0] == "${applicationId.string}-1.$host"
         }

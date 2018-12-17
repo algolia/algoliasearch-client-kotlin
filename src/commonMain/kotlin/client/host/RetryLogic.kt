@@ -8,16 +8,25 @@ import kotlinx.io.IOException
 import kotlin.math.floor
 
 
-internal class Hosts(
+internal class RetryLogic(
     applicationId: ApplicationId,
+    type: Type,
     private val hostStatusExpirationDelay: Long = 1000L * 60L * 5L
 ) {
 
-    val hosts = applicationId.computeFallbackHosts()
-    val fallbackHosts = hosts.randomizeFallbackHosts()
-    val statuses = fallbackHosts.initialHostStatus()
+    enum class Type {
+        Read,
+        Write
+    }
 
-    suspend fun <T> retryLogic(
+    private val host = when (type) {
+        Type.Read -> applicationId.readHost
+        Type.Write -> applicationId.writeHost
+    }
+    internal val hosts = listOf(host) + applicationId.computeHosts().randomize()
+    internal val statuses = hosts.initialHostStatus()
+
+    suspend fun <T> retry(
         timeout: Long,
         path: String,
         attempt: Int = 1,
@@ -29,7 +38,7 @@ internal class Hosts(
             }
         }
         val index = statuses.selectNextHostIndex()
-        val host = fallbackHosts[index]
+        val host = hosts[index]
 
         return try {
             withTimeout(timeout * attempt) {
@@ -39,17 +48,17 @@ internal class Hosts(
             }
         } catch (exception: TimeoutCancellationException) {
             statuses[index] = Status.Down.getHostStatus()
-            retryLogic(timeout, path, attempt + 1, request)
+            retry(timeout, path, attempt + 1, request)
         } catch (exception: BadResponseStatusException) {
             val code = exception.response.status.value
             val isSuccessful = floor(code / 100f) == 2f
             val isRetryable = floor(code / 100f) != 4f && !isSuccessful
 
             statuses[index] = Status.Down.getHostStatus()
-            if (isRetryable) retryLogic(timeout, path, attempt + 1, request) else throw exception
+            if (isRetryable) retry(timeout, path, attempt + 1, request) else throw exception
         } catch (exception: IOException) {
             statuses[index] = Status.Down.getHostStatus()
-            retryLogic(timeout, path, attempt + 1, request)
+            retry(timeout, path, attempt + 1, request)
         }
     }
 }

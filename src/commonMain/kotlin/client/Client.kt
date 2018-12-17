@@ -1,6 +1,6 @@
 package client
 
-import client.host.Hosts
+import client.host.RetryLogic
 import client.query.IndexQuery
 import client.query.MultipleQueriesStrategy
 import client.query.Query
@@ -50,7 +50,8 @@ class Client(
         }
     }
 
-    private val hosts = Hosts(applicationId)
+    private val read = RetryLogic(applicationId, RetryLogic.Type.Read)
+    private val write = RetryLogic(applicationId, RetryLogic.Type.Write)
 
     private val RequestOptions?.computedReadTimeout get() = this?.readTimeout ?: readTimeout
     private val RequestOptions?.computedSearchTimeout get() = this?.searchTimeout ?: searchTimeout
@@ -60,7 +61,7 @@ class Client(
     }
 
     suspend fun getListIndexes(requestOptions: RequestOptions? = null): ListIndexes {
-        return hosts.retryLogic(requestOptions.computedReadTimeout, "/1/indexes") { path ->
+        return read.retry(requestOptions.computedReadTimeout, "/1/indexes") { path ->
             httpClient.get<ListIndexes>(path) {
                 setRequestOptions(requestOptions)
             }
@@ -68,7 +69,7 @@ class Client(
     }
 
     internal suspend fun search(index: Index, requestOptions: RequestOptions? = null): Hits {
-        return hosts.retryLogic(requestOptions.computedSearchTimeout, index.pathIndexes()) { path ->
+        return read.retry(requestOptions.computedSearchTimeout, index.pathIndexes()) { path ->
             httpClient.get<Hits>(path) {
                 setRequestOptions(requestOptions)
             }
@@ -76,7 +77,7 @@ class Client(
     }
 
     suspend fun search(index: Index, query: Query? = null, requestOptions: RequestOptions? = null): Hits {
-        return hosts.retryLogic(requestOptions.computedSearchTimeout, index.pathIndexes("/query")) { path ->
+        return read.retry(requestOptions.computedSearchTimeout, index.pathIndexes("/query")) { path ->
             httpClient.post<Hits>(path) {
                 setRequestOptions(requestOptions)
                 setQuery(query)
@@ -85,7 +86,7 @@ class Client(
     }
 
     suspend fun browse(index: Index, query: Query? = null, requestOptions: RequestOptions? = null): Hits {
-        return hosts.retryLogic(requestOptions.computedSearchTimeout, index.pathIndexes("/browse")) { path ->
+        return read.retry(requestOptions.computedSearchTimeout, index.pathIndexes("/browse")) { path ->
             httpClient.post<Hits>(path) {
                 setRequestOptions(requestOptions)
                 setQuery(query)
@@ -94,7 +95,7 @@ class Client(
     }
 
     suspend fun browse(index: Index, cursor: String, requestOptions: RequestOptions? = null): Hits {
-        return hosts.retryLogic(requestOptions.computedSearchTimeout, index.pathIndexes("/browse")) { path ->
+        return read.retry(requestOptions.computedSearchTimeout, index.pathIndexes("/browse")) { path ->
             httpClient.get<Hits>(path) {
                 setRequestOptions(requestOptions)
                 parameter("cursor", cursor)
@@ -107,7 +108,7 @@ class Client(
         strategy: MultipleQueriesStrategy = MultipleQueriesStrategy.None,
         requestOptions: RequestOptions? = null
     ): MultipleHits {
-        return hosts.retryLogic(requestOptions.computedSearchTimeout, "/1/indexes/*/queries") { path ->
+        return read.retry(requestOptions.computedSearchTimeout, "/1/indexes/*/queries") { path ->
             httpClient.post<MultipleHits>(path) {
                 setRequestOptions(requestOptions)
                 setQueries(queries, strategy)
@@ -123,7 +124,7 @@ class Client(
         maxFacetHits: Int? = null,
         requestOptions: RequestOptions? = null
     ): FacetHits {
-        return hosts.retryLogic(
+        return read.retry(
             requestOptions.computedSearchTimeout,
             index.pathIndexes("/facets/$facetName/query")
         ) { path ->
