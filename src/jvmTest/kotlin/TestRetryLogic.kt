@@ -99,18 +99,22 @@ class TestRetryLogic {
     fun test404() {
         runBlocking {
             var retry = -1
+            var exceptionIsThrown = false
 
-            retryLogic.retry(1000L, route) { path ->
-                retry++
-                var exceptionIsThrown = false
-                try {
+            try {
+                retryLogic.retry(1000L, route) { path ->
+                    retry++
                     client404.get<String>(path)
-                } catch (exception: BadResponseStatusException) {
-                    exceptionIsThrown = true
                 }
-                assertTrue(exceptionIsThrown)
+            } catch (exception: BadResponseStatusException) {
+                exceptionIsThrown = true
             }
+            assertTrue(exceptionIsThrown)
             assertEquals(0, retry)
+            assertEquals(Status.Down, statuses[0].first)
+            assertEquals(Status.Unknown, statuses[1].first)
+            assertEquals(Status.Unknown, statuses[2].first)
+            assertEquals(Status.Unknown, statuses[3].first)
         }
     }
 }
