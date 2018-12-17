@@ -25,8 +25,8 @@ import io.ktor.client.request.post
 class Client(
     val applicationId: ApplicationId,
     val apiKey: ApiKey,
-    val readTimeout: Long = 30000,
-    val searchTimeout: Long = 2000,
+    val writeTimeout: Long = 30000,
+    val readTimeout: Long = 2000,
     val logLevel: LogLevel = LogLevel.ALL
 ) {
 
@@ -47,8 +47,8 @@ class Client(
     private val read = RetryLogic(applicationId, RetryLogic.Type.Read)
     private val write = RetryLogic(applicationId, RetryLogic.Type.Write)
 
+    private val RequestOptions?.computedWriteTimeout get() = this?.writeTimeout ?: writeTimeout
     private val RequestOptions?.computedReadTimeout get() = this?.readTimeout ?: readTimeout
-    private val RequestOptions?.computedSearchTimeout get() = this?.searchTimeout ?: searchTimeout
 
     private fun Index.pathIndexes(suffix: String = ""): String {
         return "/1/indexes/${encode().string}" + suffix
@@ -63,7 +63,7 @@ class Client(
     }
 
     internal suspend fun search(index: Index, requestOptions: RequestOptions? = null): Hits {
-        return read.retry(requestOptions.computedSearchTimeout, index.pathIndexes()) { path ->
+        return read.retry(requestOptions.computedReadTimeout, index.pathIndexes()) { path ->
             httpClient.get<Hits>(path) {
                 setRequestOptions(requestOptions)
             }
@@ -71,7 +71,7 @@ class Client(
     }
 
     suspend fun search(index: Index, query: Query? = null, requestOptions: RequestOptions? = null): Hits {
-        return read.retry(requestOptions.computedSearchTimeout, index.pathIndexes("/query")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, index.pathIndexes("/query")) { path ->
             httpClient.post<Hits>(path) {
                 setRequestOptions(requestOptions)
                 setQuery(query)
@@ -80,7 +80,7 @@ class Client(
     }
 
     suspend fun browse(index: Index, query: Query? = null, requestOptions: RequestOptions? = null): Hits {
-        return read.retry(requestOptions.computedSearchTimeout, index.pathIndexes("/browse")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, index.pathIndexes("/browse")) { path ->
             httpClient.post<Hits>(path) {
                 setRequestOptions(requestOptions)
                 setQuery(query)
@@ -89,7 +89,7 @@ class Client(
     }
 
     suspend fun browse(index: Index, cursor: String, requestOptions: RequestOptions? = null): Hits {
-        return read.retry(requestOptions.computedSearchTimeout, index.pathIndexes("/browse")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, index.pathIndexes("/browse")) { path ->
             httpClient.get<Hits>(path) {
                 setRequestOptions(requestOptions)
                 parameter("cursor", cursor)
@@ -102,7 +102,7 @@ class Client(
         strategy: MultipleQueriesStrategy = MultipleQueriesStrategy.None,
         requestOptions: RequestOptions? = null
     ): MultipleHits {
-        return read.retry(requestOptions.computedSearchTimeout, "/1/indexes/*/queries") { path ->
+        return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/queries") { path ->
             httpClient.post<MultipleHits>(path) {
                 setRequestOptions(requestOptions)
                 setQueries(queries, strategy)
@@ -119,7 +119,7 @@ class Client(
         requestOptions: RequestOptions? = null
     ): FacetHits {
         return read.retry(
-            requestOptions.computedSearchTimeout,
+            requestOptions.computedReadTimeout,
             index.pathIndexes("/facets/$facetName/query")
         ) { path ->
             httpClient.post<FacetHits>(path) {

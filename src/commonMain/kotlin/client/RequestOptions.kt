@@ -6,8 +6,8 @@ fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {
 }
 
 data class RequestOptions(
-    val readTimeout: Long? = null,
-    val searchTimeout: Long? = null
+    val writeTimeout: Long? = null,
+    val readTimeout: Long? = null
 ) {
 
     val headers = mutableMapOf<String, String>()
