@@ -13,6 +13,10 @@ import io.ktor.client.HttpClient
 import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.features.logging.Logger
+import io.ktor.client.features.logging.Logging
+import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
@@ -22,7 +26,8 @@ class Client(
     val applicationId: ApplicationId,
     val apiKey: ApiKey,
     val readTimeout: Long = 30000,
-    val searchTimeout: Long = 5000
+    val searchTimeout: Long = 5000,
+    val logLevel: LogLevel = LogLevel.ALL
 ) {
 
     private val httpClient = HttpClient {
@@ -38,6 +43,10 @@ class Client(
         install(DefaultRequest) {
             setApplicationId(applicationId)
             setApiKey(apiKey)
+        }
+        install(Logging) {
+            level = logLevel
+            logger = Logger.SIMPLE
         }
     }
 
