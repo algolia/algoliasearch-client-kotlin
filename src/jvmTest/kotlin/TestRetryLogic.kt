@@ -33,16 +33,18 @@ class TestRetryLogic {
         )
     }
     private val httpClient = HttpClient(mockEngine)
+    private val statuses = retryLogic.statuses
+    private val hosts = retryLogic.hosts
 
     @Test
     fun hosts() {
-        assertEquals("https://${applicationId.string}-dsn.algolia.net", retryLogic.hosts.first())
+        assertEquals("https://${applicationId.string}-dsn.algolia.net", hosts.first())
         assertTrue {
-            retryLogic.hosts.contains("https://${applicationId.string}-1.algolianet.com")
-            retryLogic.hosts.contains("https://${applicationId.string}-2.algolianet.com")
-            retryLogic.hosts.contains("https://${applicationId.string}-3.algolianet.com")
+            hosts.contains("https://${applicationId.string}-1.algolianet.com")
+            hosts.contains("https://${applicationId.string}-2.algolianet.com")
+            hosts.contains("https://${applicationId.string}-3.algolianet.com")
         }
-        assertEquals(4, retryLogic.hosts.size)
+        assertEquals(4, hosts.size)
     }
 
     @Test
@@ -63,11 +65,16 @@ class TestRetryLogic {
         runBlocking {
             var retry = -1
 
-            retryLogic.retry(1000L, route) {
+            retryLogic.retry(1000L, route) { path ->
                 retry++
+                assertEquals(hosts[retry] + route, path)
                 if (retry == 0) delay(2000L)
                 httpClient.get<HttpResponse>()
             }
+            assertEquals(Status.Down, statuses[0].first)
+            assertEquals(Status.Up, statuses[1].first)
+            assertEquals(Status.Unknown, statuses[2].first)
+            assertEquals(Status.Unknown, statuses[3].first)
             assertEquals(1, retry)
         }
     }
@@ -80,13 +87,14 @@ class TestRetryLogic {
 
             retryLogic.retry(100L, route) { path ->
                 retry++
-                val index = retry % count
-                assertEquals(retryLogic.hosts[index] + route, path)
+                assertEquals(hosts[retry % count] + route, path)
                 if (retry < count) delay(150L * (retry + 1))
                 httpClient.get<HttpResponse>(path)
-                assertEquals(Status.Down, retryLogic.statuses[index].first)
             }
-            assertEquals(Status.Up, retryLogic.statuses.first().first)
+            assertEquals(Status.Up, statuses[0].first)
+            assertEquals(Status.Down, statuses[1].first)
+            assertEquals(Status.Down, statuses[2].first)
+            assertEquals(Status.Down, statuses[3].first)
             assertEquals(count, retry)
         }
     }
