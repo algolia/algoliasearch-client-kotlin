@@ -4,12 +4,11 @@ import client.host.Status
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.MockHttpResponse
+import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.request.get
 import io.ktor.client.response.HttpResponse
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.headersOf
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.io.ByteReadChannel
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,15 +23,8 @@ class TestRetryLogic {
     private val applicationId = ApplicationId("appId")
     private val retryLogic = RetryLogic(applicationId, RetryLogic.Type.Read)
     private val route = "/route"
-    private val mockEngine = MockEngine {
-        MockHttpResponse(
-            call,
-            HttpStatusCode.OK,
-            ByteReadChannel(""),
-            headersOf()
-        )
-    }
-    private val httpClient = HttpClient(mockEngine)
+    private val client200 = HttpClient(MockEngine { MockHttpResponse(call, HttpStatusCode.OK) })
+    private val client404 = HttpClient(MockEngine { MockHttpResponse(call, HttpStatusCode.NotFound) })
     private val statuses = retryLogic.statuses
     private val hosts = retryLogic.hosts
 
@@ -54,10 +46,14 @@ class TestRetryLogic {
 
             retryLogic.retry(1000L, route) {
                 retry++
-                httpClient.get<HttpResponse>()
+                client200.get<HttpResponse>()
             }
             assertEquals(0, retry)
         }
+        assertEquals(Status.Up, statuses[0].first)
+        assertEquals(Status.Unknown, statuses[1].first)
+        assertEquals(Status.Unknown, statuses[2].first)
+        assertEquals(Status.Unknown, statuses[3].first)
     }
 
     @Test
@@ -69,7 +65,7 @@ class TestRetryLogic {
                 retry++
                 assertEquals(hosts[retry] + route, path)
                 if (retry == 0) delay(2000L)
-                httpClient.get<HttpResponse>()
+                client200.get<HttpResponse>()
             }
             assertEquals(Status.Down, statuses[0].first)
             assertEquals(Status.Up, statuses[1].first)
@@ -89,13 +85,32 @@ class TestRetryLogic {
                 retry++
                 assertEquals(hosts[retry % count] + route, path)
                 if (retry < count) delay(150L * (retry + 1))
-                httpClient.get<HttpResponse>(path)
+                client200.get<HttpResponse>(path)
             }
             assertEquals(Status.Up, statuses[0].first)
             assertEquals(Status.Down, statuses[1].first)
             assertEquals(Status.Down, statuses[2].first)
             assertEquals(Status.Down, statuses[3].first)
             assertEquals(count, retry)
+        }
+    }
+
+    @Test
+    fun test404() {
+        runBlocking {
+            var retry = -1
+
+            retryLogic.retry(1000L, route) { path ->
+                retry++
+                var exceptionIsThrown = false
+                try {
+                    client404.get<String>(path)
+                } catch (exception: BadResponseStatusException) {
+                    exceptionIsThrown = true
+                }
+                assertTrue(exceptionIsThrown)
+            }
+            assertEquals(0, retry)
         }
     }
 }
