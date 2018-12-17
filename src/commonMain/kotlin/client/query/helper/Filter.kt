@@ -49,14 +49,29 @@ data class FilterRange(
 
 data class FilterFacet internal constructor(
     override val attribute: Attribute,
-    private val value: FacetValue<*>
+    private val value: FacetValue<*>,
+    private val score: Int? = null
 ) : Filter(attribute) {
 
-    constructor(attribute: Attribute, value: String) : this(attribute, FacetValue.String(value))
-    constructor(attribute: Attribute, value: Boolean) : this(attribute, FacetValue.Boolean(value))
-    constructor(attribute: Attribute, value: Number) : this(attribute, FacetValue.Number(value))
+    constructor(attribute: Attribute, value: String, score: Int? = null) : this(
+        attribute,
+        FacetValue.String(value),
+        score
+    )
 
-    override val expression: String = "\"$attribute\":${value.escape()}"
+    constructor(attribute: Attribute, value: Boolean, score: Int? = null) : this(
+        attribute,
+        FacetValue.Boolean(value),
+        score
+    )
+
+    constructor(attribute: Attribute, value: Number, score: Int? = null) : this(
+        attribute,
+        FacetValue.Number(value),
+        score
+    )
+
+    override val expression: String = "\"$attribute\":${value.escape()}" + if (score != null) "<score=$score>" else ""
 }
 
 sealed class FacetValue<T> {
