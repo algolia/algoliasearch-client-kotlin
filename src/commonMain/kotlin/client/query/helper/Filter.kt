@@ -1,5 +1,7 @@
 package client.query.helper
 
+import client.data.Attribute
+
 
 sealed class Filter(
     open val attribute: Attribute

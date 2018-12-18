@@ -1,6 +1,7 @@
 package client.query
 
-import client.query.helper.Attribute
+import client.data.*
+import client.data.Attribute
 import client.query.helper.QueryHelper
 import client.query.helper.FilterBuilder
 import client.query.helper.OptionalFilterBuilder
@@ -257,14 +258,14 @@ class Query(
      * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/ignorePlurals/]
      */
-    var ignorePlurals: BooleanOrQueryLanguage? = null,
+    var ignorePlurals: BooleanOrQueryLanguages? = null,
 
     /**
      * Removes stop (common) words from the query before executing it.
      * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/removeStopWords/]
      */
-    var removeStopWords: BooleanOrQueryLanguage? = null,
+    var removeStopWords: BooleanOrQueryLanguages? = null,
 
     /**
      * Sets the queryLanguage to be used by language-specific settings and functionalities such as

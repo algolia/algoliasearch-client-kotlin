@@ -1,4 +1,6 @@
-import client.query.*
+
+import client.data.*
+import client.query.Query
 import client.serialize.serialize
 import client.serialize.toMap
 import kotlinx.serialization.json.json
@@ -26,9 +28,9 @@ class TestSerialization {
 
     @Test
     fun booleanOrQueryLanguages() {
-        val boolean = Query(ignorePlurals = BooleanOrQueryLanguage.Boolean(true))
+        val boolean = Query(ignorePlurals = BooleanOrQueryLanguages.Boolean(true))
         val languages = Query(
-            ignorePlurals = BooleanOrQueryLanguage.QueryLanguages(
+            ignorePlurals = BooleanOrQueryLanguages.QueryLanguages(
                 QueryLanguage.Afrikaans,
                 QueryLanguage.Albanian
             )

@@ -1,6 +1,6 @@
 package query
 
-import client.query.*
+import client.data.*
 import client.query.helper.NumericOperator
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -50,7 +50,7 @@ class TestQuery {
         assertEquals("ca", QueryLanguage.Catalan.raw)
         assertEquals("cs", QueryLanguage.Czech.raw)
         assertEquals("cy", QueryLanguage.Welsh.raw)
-        assertEquals("da", QueryLanguage.Danis.raw)
+        assertEquals("da", QueryLanguage.Danish.raw)
         assertEquals("de", QueryLanguage.German.raw)
         assertEquals("en", QueryLanguage.English.raw)
         assertEquals("eo", QueryLanguage.Esperanto.raw)

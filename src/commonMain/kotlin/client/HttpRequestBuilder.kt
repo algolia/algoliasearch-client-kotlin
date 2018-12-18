@@ -1,7 +1,7 @@
 package client
 
 import client.query.IndexQuery
-import client.query.MultipleQueriesStrategy
+import client.data.MultipleQueriesStrategy
 import client.query.Query
 import client.serialize.serialize
 import client.serialize.toMap

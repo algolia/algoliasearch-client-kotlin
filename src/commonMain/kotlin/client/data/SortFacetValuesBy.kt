@@ -1,15 +1,19 @@
-package client.query
+package client.data
 
 
-enum class SortFacetValuesBy(val raw: String) {
+sealed class SortFacetValuesBy(open val raw: String) {
+
     /**
      * FacetFilter values are sorted by decreasing count.
      * The count is the number of records containing this facet value in the results of the query.
      */
-    Count("count"),
+    object Count : SortFacetValuesBy("count")
+
     /**
      * FacetFilter values are sorted in alphabetical order, ascending from A to Z.
      * The count is the number of records containing this facet value in the results of the query.
      */
-    Alpha("alpha")
+    object Alpha : SortFacetValuesBy("alpha")
+
+    data class Unknown(override val raw: String) : SortFacetValuesBy(raw)
 }

@@ -2,7 +2,7 @@ package client
 
 import client.host.RetryLogic
 import client.query.IndexQuery
-import client.query.MultipleQueriesStrategy
+import client.data.MultipleQueriesStrategy
 import client.query.Query
 import client.response.FacetHits
 import client.response.Hits
@@ -107,6 +107,12 @@ class Client(
                 setRequestOptions(requestOptions)
                 setQueries(queries, strategy)
             }
+        }
+    }
+
+    suspend fun getSettings(index: Index): String {
+        return read.retry(readTimeout, index.pathIndexes("/settings")) { path ->
+            httpClient.get<String>(path)
         }
     }
 

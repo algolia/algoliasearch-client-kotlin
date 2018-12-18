@@ -1,4 +1,4 @@
-package client.query.helper
+package client.data
 
 
 data class Attribute(val name: String) {

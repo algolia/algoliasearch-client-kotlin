@@ -1,9 +1,10 @@
 package client.query.helper
 
-import client.query.AlternativesAsExact
+import client.data.AlternativesAsExact
+import client.data.Attribute
 import client.query.Query
-import client.query.QueryLanguage
-import client.query.ResponseFields
+import client.data.QueryLanguage
+import client.data.ResponseFields
 
 @DslMarker
 annotation class QueryHelper

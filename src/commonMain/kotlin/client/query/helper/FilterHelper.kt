@@ -1,5 +1,7 @@
 package client.query.helper
 
+import client.data.Attribute
+
 internal fun Group.key(filter: Filter): Group.Key {
     val key = when (this) {
         is GroupOr -> when (filter) {

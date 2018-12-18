@@ -1,9 +1,9 @@
 package client.serialize
 
-import client.query.AroundRadius
-import client.query.BooleanOrQueryLanguage
+import client.data.AroundRadius
+import client.data.BooleanOrQueryLanguages
+import client.data.TypoTolerance
 import client.query.Query
-import client.query.TypoTolerance
 import client.query.helper.names
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
@@ -43,9 +43,9 @@ internal fun List<Float>.toJsonArrayFromFloat() = jsonArray { forEach { (it as N
 internal fun List<String>.toJsonArrayFromString() = jsonArray { forEach { +it } }
 internal fun List<List<String>>.toJsonArrayFromList() = jsonArray { forEach { +jsonArray { it.forEach { +it } } } }
 
-internal fun BooleanOrQueryLanguage.toPrimitive(): Any = when (this) {
-    is BooleanOrQueryLanguage.Boolean -> boolean
-    is BooleanOrQueryLanguage.QueryLanguages -> queryLanguage.map { it.raw }.toJsonArrayFromString()
+internal fun BooleanOrQueryLanguages.toPrimitive(): Any = when (this) {
+    is BooleanOrQueryLanguages.Boolean -> boolean
+    is BooleanOrQueryLanguages.QueryLanguages -> queryLanguages.map { it.raw }.toJsonArrayFromString()
 }
 
 internal fun Query.toMap(): MutableMap<String, Any> {
@@ -88,6 +88,7 @@ internal fun Query.toMap(): MutableMap<String, Any> {
             is TypoTolerance.Boolean -> it.boolean
             is TypoTolerance.Min -> it.raw
             is TypoTolerance.Strict -> it.raw
+            is TypoTolerance.Unknown -> it.raw
         }
     }
     allowTyposOnNumericTokens?.let { map["allowTyposOnNumericTokens"] = it }
@@ -99,6 +100,7 @@ internal fun Query.toMap(): MutableMap<String, Any> {
         map["aroundRadius"] = when (it) {
             is AroundRadius.All -> it.raw
             is AroundRadius.InMeters -> it.int
+            is AroundRadius.Unknown -> it.raw
         }
     }
     aroundPrecision?.let { map["aroundPrecision"] = it }

@@ -1,5 +1,7 @@
 package client.query.helper
 
+import client.data.Attribute
+
 
 /**
  * For a better understanding of Filters, please read the documentation linked below:

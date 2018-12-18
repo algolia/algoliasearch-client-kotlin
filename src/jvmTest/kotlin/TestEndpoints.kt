@@ -68,4 +68,11 @@ class TestEndpoints {
             assertTrue(response.facetHits.size <= maxFacetHits)
         }
     }
+
+    @Test
+    fun getSettings() {
+        runBlocking {
+            api.getSettings(index)
+        }
+    }
 }
