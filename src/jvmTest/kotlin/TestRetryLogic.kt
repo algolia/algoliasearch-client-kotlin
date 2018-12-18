@@ -111,7 +111,7 @@ class TestRetryLogic {
             }
             assertTrue(exceptionIsThrown)
             assertEquals(0, retry)
-            assertEquals(Status.Down, statuses[0].first)
+            assertEquals(Status.Unknown, statuses[0].first)
             assertEquals(Status.Unknown, statuses[1].first)
             assertEquals(Status.Unknown, statuses[2].first)
             assertEquals(Status.Unknown, statuses[3].first)

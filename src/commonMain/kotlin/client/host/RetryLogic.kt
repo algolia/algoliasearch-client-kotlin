@@ -54,8 +54,10 @@ internal class RetryLogic(
             val isSuccessful = floor(code / 100f) == 2f
             val isRetryable = floor(code / 100f) != 4f && !isSuccessful
 
-            statuses[index] = Status.Down.getHostStatus()
-            if (isRetryable) retry(timeout, path, attempt, request) else throw exception
+            if (isRetryable) {
+                statuses[index] = Status.Down.getHostStatus()
+                retry(timeout, path, attempt, request)
+            } else throw exception
         } catch (exception: IOException) {
             statuses[index] = Status.Down.getHostStatus()
             retry(timeout, path, attempt, request)
