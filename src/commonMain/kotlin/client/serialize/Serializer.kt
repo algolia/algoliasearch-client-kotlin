@@ -105,7 +105,7 @@ internal fun Query.toMap(): MutableMap<String, Any> {
     }
     aroundPrecision?.let { map["aroundPrecision"] = it }
     minimumAroundRadius?.let { map["minimumAroundRadius"] = it }
-    insideBoundingBox?.let { map["insideBoundingBox"] = it.toJsonArrayFromFloat() }
+    insideBoundingBox?.let { map["insideBoundingBox"] = it.flatMap { it.floats }.toJsonArrayFromFloat() }
     insidePolygon?.let { map["insidePolygon"] = it.toJsonArrayFromFloat() }
     // Languages
     ignorePlurals?.let { map["ignorePlurals"] = it.toPrimitive() }

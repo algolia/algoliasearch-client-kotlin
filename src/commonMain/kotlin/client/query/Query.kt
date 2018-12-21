@@ -1,10 +1,9 @@
 package client.query
 
 import client.data.*
-import client.data.Attribute
-import client.query.helper.QueryHelper
 import client.query.helper.FilterBuilder
 import client.query.helper.OptionalFilterBuilder
+import client.query.helper.QueryHelper
 
 @QueryHelper
 class Query(
@@ -244,7 +243,7 @@ class Query(
      * Engine default: null
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/insideBoundingBox/]
      */
-    var insideBoundingBox: List<Float>? = null,
+    var insideBoundingBox: List<BoundingBox>? = null,
 
     /**
      * Search inside a polygon (in geo coordinates).
