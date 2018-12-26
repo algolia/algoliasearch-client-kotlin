@@ -250,7 +250,7 @@ class Query(
      * Engine default: null
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/insidePolygon/]
      */
-    var insidePolygon: List<Float>? = null,
+    var insidePolygon: List<Polygon>? = null,
 
     /**
      * Treats singular, plurals, and other forms of declensions as matching terms.
