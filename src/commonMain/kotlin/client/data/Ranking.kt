@@ -1,25 +1,29 @@
 package client.data
 
+import client.serialize.*
 
-sealed class Ranking(val raw: String) {
 
-    object Typo : Ranking("typo")
+sealed class Ranking(open val raw: String) {
 
-    object Geo : Ranking("geo")
+    object Typo : Ranking(typo)
 
-    object Words : Ranking("words")
+    object Geo : Ranking(geo)
 
-    object Filters : Ranking("filters")
+    object Words : Ranking(words)
 
-    object Proximity : Ranking("proximity")
+    object Filters : Ranking(filters)
 
-    object Attribute : Ranking("attribute")
+    object Proximity : Ranking(proximity)
 
-    object Exact : Ranking("exact")
+    object Attribute : Ranking(attribute)
 
-    object Custom : Ranking("custom")
+    object Exact : Ranking(exact)
 
-    data class Asc(val attribute: client.data.Attribute) : Ranking("asc")
+    object Custom : Ranking(custom)
 
-    data class Desc(val attribute: client.data.Attribute) : Ranking("desc")
+    data class Asc(val attribute: client.data.Attribute) : Ranking(asc)
+
+    data class Desc(val attribute: client.data.Attribute) : Ranking(desc)
+
+    data class Unknown(override val raw: String): Ranking(raw)
 }

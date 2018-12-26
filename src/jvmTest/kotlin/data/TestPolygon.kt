@@ -1,3 +1,5 @@
+package data
+
 import client.data.Point
 import client.data.Polygon
 import client.data.to

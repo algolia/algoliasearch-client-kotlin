@@ -31,7 +31,7 @@ fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: Mul
         "requests" to jsonArray {
             queries.forEach {
                 +json {
-                    "indexName" to it.index.string
+                    "indexName" to it.index.name
                     "params" to it.query.toMap().urlEncode()
                 }
             }

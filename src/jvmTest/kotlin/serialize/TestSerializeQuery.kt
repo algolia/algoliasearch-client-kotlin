@@ -1,4 +1,4 @@
-
+package serialize
 import client.data.*
 import client.query.Query
 import client.serialize.serialize
@@ -11,7 +11,7 @@ import org.junit.runners.JUnit4
 import kotlin.test.assertEquals
 
 @RunWith(JUnit4::class)
-class TestSerialization {
+class TestSerializeQuery {
 
     private fun Query.stringify(): String {
         return toMap().serialize().toString()
@@ -444,18 +444,18 @@ class TestSerialization {
     @Test
     fun serialize() {
         val map = mutableMapOf(
-            "keyA" to "string",
+            "keyA" to "name",
             "keyB" to true,
             "keyC" to 0,
             "keyD" to jsonArray {
-                +"string"
+                +"name"
                 (1 as Number).unaryPlus()
                 +true
                 +json { "keyD" to "value" }
             }
         )
         assertEquals(
-            "{\"keyA\": \"string\", \"keyB\": true, \"keyC\": 0, \"keyD\": [\"string\", 1, true, {\"keyD\": \"value\"}]}",
+            "{\"keyA\": \"name\", \"keyB\": true, \"keyC\": 0, \"keyD\": [\"name\", 1, true, {\"keyD\": \"value\"}]}",
             map.serialize().toString()
         )
     }

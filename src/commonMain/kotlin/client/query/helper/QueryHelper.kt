@@ -1,10 +1,7 @@
 package client.query.helper
 
-import client.data.AlternativesAsExact
-import client.data.Attribute
+import client.data.*
 import client.query.Query
-import client.data.QueryLanguage
-import client.data.ResponseFields
 
 @DslMarker
 annotation class QueryHelper
@@ -12,8 +9,6 @@ annotation class QueryHelper
 internal val Collection<Attribute>.names get() = map { it.name }
 
 internal val all = Attribute("*")
-
-fun String.toAttribute() = Attribute(this)
 
 fun queryBuilder(init: Query.() -> Unit) = Query().apply(init)
 
@@ -49,12 +44,12 @@ fun Query.setHighlightAllAttributes() {
     attributesToHighlight = listOf(all)
 }
 
-fun Query.setAttributesToSnippet(vararg attributes: Pair<Attribute, Int?>) {
-    attributesToSnippet = attributes.map { if (it.second != null) "${it.first.name}:${it.second}" else it.first.name }
+fun Query.setAttributesToSnippet(vararg snippets: Snippet) {
+    attributesToSnippet = snippets.toList()
 }
 
 fun Query.setSnippetAllAttributes(numberOfWords: Int? = null) {
-    attributesToSnippet = listOf(if (numberOfWords != null) "*:$numberOfWords" else "*")
+    attributesToSnippet = listOf(Snippet(Attribute("*"), numberOfWords))
 }
 
 fun Query.setDisableTypoToleranceOnAttributes(vararg attributes: Attribute) {

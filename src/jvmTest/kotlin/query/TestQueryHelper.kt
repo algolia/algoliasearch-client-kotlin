@@ -6,6 +6,7 @@ import client.data.Attribute
 import client.data.QueryLanguage
 import client.data.ResponseFields
 import client.query.helper.*
+import client.to
 import facetA
 import facetB
 import groupOrA
@@ -64,11 +65,11 @@ class TestQueryHelper {
     fun attributesToSnippet() {
         queryBuilder {
             setAttributesToSnippet(attributeA to 10, attributeB to null)
-            assertEquals(listOf("attributeA:10", "attributeB"), attributesToSnippet)
+            assertEquals(listOf("attributeA:10", "attributeB"), attributesToSnippet?.map { it.raw })
             setSnippetAllAttributes()
-            assertEquals(listOf("*"), attributesToSnippet)
+            assertEquals(listOf("*"), attributesToSnippet?.map { it.raw })
             setSnippetAllAttributes(10)
-            assertEquals(listOf("*:10"), attributesToSnippet)
+            assertEquals(listOf("*:10"), attributesToSnippet?.map { it.raw })
         }
     }
 

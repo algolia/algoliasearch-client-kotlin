@@ -1,52 +1,10 @@
 package client.serialize
 
 import client.data.AroundRadius
-import client.data.BooleanOrQueryLanguages
 import client.data.TypoTolerance
 import client.query.Query
 import client.query.helper.names
-import io.ktor.http.Parameters
-import io.ktor.http.formUrlEncode
-import kotlinx.serialization.json.*
 
-internal fun Map<String, Any>.serialize(): JsonObject {
-    return json {
-        entries.forEach { entry ->
-            val value = entry.value
-            when (value) {
-                is String -> entry.key to value
-                is Number -> entry.key to value
-                is Boolean -> entry.key to value
-                is JsonElement -> entry.key to value
-                else -> throw Exception("Unsupported serialization type.")
-            }
-        }
-    }
-}
-
-internal fun Map<String, Any>.urlEncode(): String {
-    return Parameters.build {
-        entries.forEach { entry ->
-            val value = entry.value
-            when (value) {
-                is String -> append(entry.key, value)
-                is Number -> append(entry.key, value.toString())
-                is Boolean -> append(entry.key, value.toString())
-                is JsonArray -> appendAll(entry.key, value.content.map { it.content })
-                else -> throw Exception("Unsupported serialization type.")
-            }
-        }
-    }.formUrlEncode()
-}
-
-internal fun List<Float>.toJsonArrayFromFloat() = jsonArray { forEach { (it as Number).unaryPlus() } }
-internal fun List<String>.toJsonArrayFromString() = jsonArray { forEach { +it } }
-internal fun List<List<String>>.toJsonArrayFromList() = jsonArray { forEach { +jsonArray { it.forEach { +it } } } }
-
-internal fun BooleanOrQueryLanguages.toPrimitive(): Any = when (this) {
-    is BooleanOrQueryLanguages.Boolean -> boolean
-    is BooleanOrQueryLanguages.QueryLanguages -> queryLanguages.map { it.raw }.toJsonArrayFromString()
-}
 
 internal fun Query.toMap(): MutableMap<String, Any> {
     val map = mutableMapOf<String, Any>()
@@ -70,7 +28,7 @@ internal fun Query.toMap(): MutableMap<String, Any> {
     sortFacetValuesBy?.let { map["sortFacetValuesBy"] = it.raw }
     // Highlighting
     attributesToHighlight?.let { map["attributesToHighlight"] = it.names.toJsonArrayFromString() }
-    attributesToSnippet?.let { map["attributesToSnippet"] = it.toJsonArrayFromString() }
+    attributesToSnippet?.let { map["attributesToSnippet"] = it.map { it.raw }.toJsonArrayFromString() }
     highlightPreTag?.let { map["highlightPreTag"] = it }
     highlightPostTag?.let { map["highlightPostTag"] = it }
     snippetEllipsisText?.let { map["snippetEllipsisText"] = it }

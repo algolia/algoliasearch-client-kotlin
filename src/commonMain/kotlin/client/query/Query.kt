@@ -9,7 +9,7 @@ import client.query.helper.QueryHelper
 class Query(
     /**
      * The text to search in the index.
-     * Engine default: "" (empty string)
+     * Engine default: "" (empty name)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/query/]
      */
     var query: String? = null,
@@ -110,17 +110,17 @@ class Query(
      * Engine default: [] (no attribute is snippeted)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToSnippet/]
      */
-    var attributesToSnippet: List<String>? = null,
+    var attributesToSnippet: List<Snippet>? = null,
 
     /**
-     * The HTML string to insert before the highlighted parts in all highlight and snippet results.
+     * The HTML name to insert before the highlighted parts in all highlight and snippet results.
      * Engine default: <em>
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/highlightPreTag/]
      */
     var highlightPreTag: String? = null,
 
     /**
-     * The HTML string to insert after the highlighted parts in all highlight and snippet results.
+     * The HTML name to insert after the highlighted parts in all highlight and snippet results.
      * Engine default: </em>
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/highlightPostTag/]
      */
@@ -169,14 +169,14 @@ class Query(
     var length: Int? = null,
 
     /**
-     * Minimum number of characters a word in the query string must contain to accept matches with 1 typo.
+     * Minimum number of characters a word in the query name must contain to accept matches with 1 typo.
      * Engine default: 4
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minWordSizefor1Typo/]
      */
     var minWordSizefor1Typo: Int? = null,
 
     /**
-     * Minimum number of characters a word in the query string must contain to accept matches with 2 typos.
+     * Minimum number of characters a word in the query name must contain to accept matches with 2 typos.
      * Engine default: 8
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minWordSizefor2Typos/]
      */
@@ -190,7 +190,7 @@ class Query(
     var typoTolerance: TypoTolerance? = null,
 
     /**
-     * Whether to allow typos on numbers (“numeric tokens”) in the query string.
+     * Whether to allow typos on numbers (“numeric tokens”) in the query name.
      * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/allowTyposOnNumericTokens/]
      */

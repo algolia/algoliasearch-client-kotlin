@@ -11,13 +11,13 @@ sealed class RemoveWordIfNoResults(open val raw: String) {
     /**
      * When a query does not return any results, treat the last word as optional.
      * The process is repeated with words N-1, N-2, etc. until there are results, or the beginning of the query
-     * string has been reached.
+     * name has been reached.
      */
     object LastWords : RemoveWordIfNoResults("lastWords")
 
     /**
      * When a query does not return any results, treat the first word as optional.
-     * The process is repeated with words 2, 3, etc. until there are results, or the end of the query string has
+     * The process is repeated with words 2, 3, etc. until there are results, or the end of the query name has
      * been reached.
      */
     object FirstWords : RemoveWordIfNoResults("firstWords")

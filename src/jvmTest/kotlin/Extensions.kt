@@ -1,3 +1,4 @@
+import client.Index
 import client.data.Attribute
 import client.query.helper.*
 
@@ -8,6 +9,7 @@ internal fun set(vararg filters: Filter) = mutableSetOf(*filters)
 internal val attributeA = Attribute("attributeA")
 internal val attributeB = Attribute("attributeB")
 internal val attributeC = Attribute("attributeC")
+internal val attributes = listOf(attributeA, attributeB)
 internal val facetA = FilterFacet(attributeA, "facetA")
 internal val facetB = FilterFacet(attributeB, false)
 internal val comparisonA = FilterComparison(attributeA, NumericOperator.Greater, 5.0)
@@ -22,5 +24,12 @@ internal val groupOrA = GroupOr(nameA)
 internal val groupOrB = GroupOr(nameB)
 internal val groupAndA = GroupAnd(nameA)
 internal val groupAndB = GroupAnd(nameB)
+internal val unknown = "unknown"
+internal val indexA = Index("indexA")
+internal val indexB = Index("indexB")
+internal val int = 0
+internal val boolean = true
+internal val string = "string"
+
 
 internal fun FilterBuilder.buildTest() = build().replace("\"", "")
