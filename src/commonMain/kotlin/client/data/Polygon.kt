@@ -1,12 +1,19 @@
 package client.data
 
 
-class Polygon(
+data class Polygon(
     val point1: Point,
     val point2: Point,
     val point3: Point,
-    private vararg val points: Point
+    private val points: List<Point>
 ) {
+
+    constructor(point1: Point, point2: Point, point3: Point, vararg points: Point) : this(
+        point1,
+        point2,
+        point3,
+        points.toList()
+    )
 
     operator fun get(index: Int): Point {
         return when (index) {
@@ -15,14 +22,6 @@ class Polygon(
             2 -> point3
             else -> points[index - 3]
         }
-    }
-
-    override fun hashCode(): Int {
-        return point1.hashCode() + point2.hashCode() + point3.hashCode() + points.toList().hashCode()
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return if (other is Polygon) other.hashCode() == hashCode() else false
     }
 
     internal val floats = listOf(
