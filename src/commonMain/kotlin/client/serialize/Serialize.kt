@@ -35,6 +35,10 @@ internal fun Map<String, Any>.urlEncode(): String {
     }.formUrlEncode()
 }
 
+internal fun <T> T?.unwrap(block: T.() -> JsonElement): JsonElement {
+    return if (this != null) block(this) else JsonNull
+}
+
 internal fun List<Float>.toJsonArrayFromFloat() = jsonArray { forEach { (it as Number).unaryPlus() } }
 internal fun List<String>.toJsonArrayFromString() = jsonArray { forEach { +it } }
 internal fun List<List<String>>.toJsonArrayFromList() = jsonArray { forEach { +jsonArray { it.forEach { +it } } } }

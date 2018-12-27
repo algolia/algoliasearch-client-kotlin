@@ -35,7 +35,7 @@ internal class TestAlternativesAsExact : TestSerializer<AlternativesAsExact> {
     }
 
     @Test
-    fun serialize() {
+    override fun serialize() {
         testSerialize(JsonPrimitive(KeyIgnorePlurals), IgnorePlurals)
         testSerialize(JsonPrimitive(KeySingleWordSynonym), SingleWordSynonym)
         testSerialize(JsonPrimitive(KeyMultiWordsSynonym), MultiWordsSynonym)
@@ -58,7 +58,7 @@ internal class TestAlternativesAsExact : TestSerializer<AlternativesAsExact> {
     }
 
     @Test
-    fun deserialize() {
+    override fun deserialize() {
         val jsonArray = jsonArray {
             +KeyIgnorePlurals
             +KeySingleWordSynonym

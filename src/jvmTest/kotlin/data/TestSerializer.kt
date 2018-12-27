@@ -21,4 +21,7 @@ internal interface TestSerializer<T> {
     fun testDeserialize(expected: T, actual: JsonElement) = testDeserialize(expected, actual, serializer)
     fun testDeserializeNull() = testDeserializeNull(serializer)
     fun testDeserializeArray(expected: List<T>, actual: JsonArray) = testDeserializeArray(expected, actual, serializer)
+
+    fun serialize()
+    fun deserialize()
 }

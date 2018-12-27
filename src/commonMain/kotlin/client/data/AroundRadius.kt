@@ -1,6 +1,9 @@
 package client.data
 
 import client.serialize.KeyAll
+import client.serialize.Serializer
+import client.serialize.unwrap
+import kotlinx.serialization.json.*
 
 
 sealed class AroundRadius(open val raw: String) {
@@ -10,4 +13,27 @@ sealed class AroundRadius(open val raw: String) {
     data class InMeters(val int: kotlin.Int) : AroundRadius(int.toString())
 
     data class Unknown(override val raw: String) : AroundRadius(raw)
+
+    internal companion object : Serializer<AroundRadius> {
+
+        override fun serialize(input: AroundRadius?): JsonElement {
+            return input.unwrap {
+                when (this) {
+                    is InMeters -> JsonPrimitive(int)
+                    else -> JsonPrimitive(raw)
+                }
+            }
+        }
+
+        override fun deserialize(element: JsonElement): AroundRadius? {
+            return when {
+                element.intOrNull != null -> InMeters(element.int)
+                element.contentOrNull != null -> when (element.content) {
+                    KeyAll -> All
+                    else -> Unknown(element.content)
+                }
+                else -> null
+            }
+        }
+    }
 }
