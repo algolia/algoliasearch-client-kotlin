@@ -2,6 +2,7 @@ package data
 
 import client.data.QueryLanguage
 import client.serialize.*
+import kotlinx.serialization.json.JsonPrimitive
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -9,7 +10,9 @@ import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestQueryLanguage {
+internal class TestQueryLanguage : TestSerializer<QueryLanguage> {
+
+    override val serializer = QueryLanguage
 
     @Test
     fun key() {
@@ -129,5 +132,127 @@ class TestQueryLanguage {
         assertEquals(KeyTswana, QueryLanguage.Tswana.raw)
         assertEquals(KeyTurkish, QueryLanguage.Turkish.raw)
         assertEquals(KeyTatar, QueryLanguage.Tatar.raw)
+    }
+
+    @Test
+    override fun serialize() {
+        testSerialize(JsonPrimitive(KeyAfrikaans), QueryLanguage.Afrikaans)
+        testSerialize(JsonPrimitive(KeyArabic), QueryLanguage.Arabic)
+        testSerialize(JsonPrimitive(KeyAzeri), QueryLanguage.Azeri)
+        testSerialize(JsonPrimitive(KeyBulgarian), QueryLanguage.Bulgarian)
+        testSerialize(JsonPrimitive(KeyBrunei), QueryLanguage.Brunei)
+        testSerialize(JsonPrimitive(KeyCatalan), QueryLanguage.Catalan)
+        testSerialize(JsonPrimitive(KeyCzech), QueryLanguage.Czech)
+        testSerialize(JsonPrimitive(KeyWelsh), QueryLanguage.Welsh)
+        testSerialize(JsonPrimitive(KeyDanish), QueryLanguage.Danish)
+        testSerialize(JsonPrimitive(KeyGerman), QueryLanguage.German)
+        testSerialize(JsonPrimitive(KeyEnglish), QueryLanguage.English)
+        testSerialize(JsonPrimitive(KeyEsperanto), QueryLanguage.Esperanto)
+        testSerialize(JsonPrimitive(KeySpanish), QueryLanguage.Spanish)
+        testSerialize(JsonPrimitive(KeyEstonian), QueryLanguage.Estonian)
+        testSerialize(JsonPrimitive(KeyBasque), QueryLanguage.Basque)
+        testSerialize(JsonPrimitive(KeyFinnish), QueryLanguage.Finnish)
+        testSerialize(JsonPrimitive(KeyFaroese), QueryLanguage.Faroese)
+        testSerialize(JsonPrimitive(KeyFrench), QueryLanguage.French)
+        testSerialize(JsonPrimitive(KeyGalician), QueryLanguage.Galician)
+        testSerialize(JsonPrimitive(KeyHebrew), QueryLanguage.Hebrew)
+        testSerialize(JsonPrimitive(KeyHindi), QueryLanguage.Hindi)
+        testSerialize(JsonPrimitive(KeyHungarian), QueryLanguage.Hungarian)
+        testSerialize(JsonPrimitive(KeyArmenian), QueryLanguage.Armenian)
+        testSerialize(JsonPrimitive(KeyIndonesian), QueryLanguage.Indonesian)
+        testSerialize(JsonPrimitive(KeyIcelandic), QueryLanguage.Icelandic)
+        testSerialize(JsonPrimitive(KeyItalian), QueryLanguage.Italian)
+        testSerialize(JsonPrimitive(KeyJapanese), QueryLanguage.Japanese)
+        testSerialize(JsonPrimitive(KeyGeorgian), QueryLanguage.Georgian)
+        testSerialize(JsonPrimitive(KeyKazakh), QueryLanguage.Kazakh)
+        testSerialize(JsonPrimitive(KeyKorean), QueryLanguage.Korean)
+        testSerialize(JsonPrimitive(KeyKyrgyz), QueryLanguage.Kyrgyz)
+        testSerialize(JsonPrimitive(KeyLithuanian), QueryLanguage.Lithuanian)
+        testSerialize(JsonPrimitive(KeyMaori), QueryLanguage.Maori)
+        testSerialize(JsonPrimitive(KeyMongolian), QueryLanguage.Mongolian)
+        testSerialize(JsonPrimitive(KeyMarathi), QueryLanguage.Marathi)
+        testSerialize(JsonPrimitive(KeyMalay), QueryLanguage.Malay)
+        testSerialize(JsonPrimitive(KeyMaltese), QueryLanguage.Maltese)
+        testSerialize(JsonPrimitive(KeyNorwegian), QueryLanguage.Norwegian)
+        testSerialize(JsonPrimitive(KeyDutch), QueryLanguage.Dutch)
+        testSerialize(JsonPrimitive(KeyNorthernSotho), QueryLanguage.NorthernSotho)
+        testSerialize(JsonPrimitive(KeyPolish), QueryLanguage.Polish)
+        testSerialize(JsonPrimitive(KeyPashto), QueryLanguage.Pashto)
+        testSerialize(JsonPrimitive(KeyPortuguese), QueryLanguage.Portuguese)
+        testSerialize(JsonPrimitive(KeyQuechua), QueryLanguage.Quechua)
+        testSerialize(JsonPrimitive(KeyRomanian), QueryLanguage.Romanian)
+        testSerialize(JsonPrimitive(KeyRussian), QueryLanguage.Russian)
+        testSerialize(JsonPrimitive(KeySlovak), QueryLanguage.Slovak)
+        testSerialize(JsonPrimitive(KeyAlbanian), QueryLanguage.Albanian)
+        testSerialize(JsonPrimitive(KeySwedish), QueryLanguage.Swedish)
+        testSerialize(JsonPrimitive(KeySwahili), QueryLanguage.Swahili)
+        testSerialize(JsonPrimitive(KeyTamil), QueryLanguage.Tamil)
+        testSerialize(JsonPrimitive(KeyTelugu), QueryLanguage.Telugu)
+        testSerialize(JsonPrimitive(KeyTagalog), QueryLanguage.Tagalog)
+        testSerialize(JsonPrimitive(KeyTswana), QueryLanguage.Tswana)
+        testSerialize(JsonPrimitive(KeyTurkish), QueryLanguage.Turkish)
+        testSerialize(JsonPrimitive(KeyTatar), QueryLanguage.Tatar)
+        testSerializeNull()
+    }
+
+    @Test
+    override fun deserialize() {
+        testDeserialize(QueryLanguage.Afrikaans, JsonPrimitive(KeyAfrikaans))
+        testDeserialize(QueryLanguage.Arabic, JsonPrimitive(KeyArabic))
+        testDeserialize(QueryLanguage.Azeri, JsonPrimitive(KeyAzeri))
+        testDeserialize(QueryLanguage.Bulgarian, JsonPrimitive(KeyBulgarian))
+        testDeserialize(QueryLanguage.Brunei, JsonPrimitive(KeyBrunei))
+        testDeserialize(QueryLanguage.Catalan, JsonPrimitive(KeyCatalan))
+        testDeserialize(QueryLanguage.Czech, JsonPrimitive(KeyCzech))
+        testDeserialize(QueryLanguage.Welsh, JsonPrimitive(KeyWelsh))
+        testDeserialize(QueryLanguage.Danish, JsonPrimitive(KeyDanish))
+        testDeserialize(QueryLanguage.German, JsonPrimitive(KeyGerman))
+        testDeserialize(QueryLanguage.English, JsonPrimitive(KeyEnglish))
+        testDeserialize(QueryLanguage.Esperanto, JsonPrimitive(KeyEsperanto))
+        testDeserialize(QueryLanguage.Spanish, JsonPrimitive(KeySpanish))
+        testDeserialize(QueryLanguage.Estonian, JsonPrimitive(KeyEstonian))
+        testDeserialize(QueryLanguage.Basque, JsonPrimitive(KeyBasque))
+        testDeserialize(QueryLanguage.Finnish, JsonPrimitive(KeyFinnish))
+        testDeserialize(QueryLanguage.Faroese, JsonPrimitive(KeyFaroese))
+        testDeserialize(QueryLanguage.French, JsonPrimitive(KeyFrench))
+        testDeserialize(QueryLanguage.Galician, JsonPrimitive(KeyGalician))
+        testDeserialize(QueryLanguage.Hebrew, JsonPrimitive(KeyHebrew))
+        testDeserialize(QueryLanguage.Hindi, JsonPrimitive(KeyHindi))
+        testDeserialize(QueryLanguage.Hungarian, JsonPrimitive(KeyHungarian))
+        testDeserialize(QueryLanguage.Armenian, JsonPrimitive(KeyArmenian))
+        testDeserialize(QueryLanguage.Indonesian, JsonPrimitive(KeyIndonesian))
+        testDeserialize(QueryLanguage.Icelandic, JsonPrimitive(KeyIcelandic))
+        testDeserialize(QueryLanguage.Italian, JsonPrimitive(KeyItalian))
+        testDeserialize(QueryLanguage.Japanese, JsonPrimitive(KeyJapanese))
+        testDeserialize(QueryLanguage.Georgian, JsonPrimitive(KeyGeorgian))
+        testDeserialize(QueryLanguage.Kazakh, JsonPrimitive(KeyKazakh))
+        testDeserialize(QueryLanguage.Korean, JsonPrimitive(KeyKorean))
+        testDeserialize(QueryLanguage.Kyrgyz, JsonPrimitive(KeyKyrgyz))
+        testDeserialize(QueryLanguage.Lithuanian, JsonPrimitive(KeyLithuanian))
+        testDeserialize(QueryLanguage.Maori, JsonPrimitive(KeyMaori))
+        testDeserialize(QueryLanguage.Mongolian, JsonPrimitive(KeyMongolian))
+        testDeserialize(QueryLanguage.Marathi, JsonPrimitive(KeyMarathi))
+        testDeserialize(QueryLanguage.Malay, JsonPrimitive(KeyMalay))
+        testDeserialize(QueryLanguage.Maltese, JsonPrimitive(KeyMaltese))
+        testDeserialize(QueryLanguage.Norwegian, JsonPrimitive(KeyNorwegian))
+        testDeserialize(QueryLanguage.Dutch, JsonPrimitive(KeyDutch))
+        testDeserialize(QueryLanguage.NorthernSotho, JsonPrimitive(KeyNorthernSotho))
+        testDeserialize(QueryLanguage.Polish, JsonPrimitive(KeyPolish))
+        testDeserialize(QueryLanguage.Pashto, JsonPrimitive(KeyPashto))
+        testDeserialize(QueryLanguage.Portuguese, JsonPrimitive(KeyPortuguese))
+        testDeserialize(QueryLanguage.Quechua, JsonPrimitive(KeyQuechua))
+        testDeserialize(QueryLanguage.Romanian, JsonPrimitive(KeyRomanian))
+        testDeserialize(QueryLanguage.Russian, JsonPrimitive(KeyRussian))
+        testDeserialize(QueryLanguage.Slovak, JsonPrimitive(KeySlovak))
+        testDeserialize(QueryLanguage.Albanian, JsonPrimitive(KeyAlbanian))
+        testDeserialize(QueryLanguage.Swedish, JsonPrimitive(KeySwedish))
+        testDeserialize(QueryLanguage.Swahili, JsonPrimitive(KeySwahili))
+        testDeserialize(QueryLanguage.Tamil, JsonPrimitive(KeyTamil))
+        testDeserialize(QueryLanguage.Telugu, JsonPrimitive(KeyTelugu))
+        testDeserialize(QueryLanguage.Tagalog, JsonPrimitive(KeyTagalog))
+        testDeserialize(QueryLanguage.Tswana, JsonPrimitive(KeyTswana))
+        testDeserialize(QueryLanguage.Turkish, JsonPrimitive(KeyTurkish))
+        testDeserialize(QueryLanguage.Tatar, JsonPrimitive(KeyTatar))
+        testDeserializeNull()
     }
 }

@@ -1,64 +1,140 @@
 package client.data
 
+import client.serialize.*
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.content
+import kotlinx.serialization.json.contentOrNull
+
 
 sealed class QueryLanguage(open val raw: String) {
 
-    object Afrikaans : QueryLanguage("af")
-    object Arabic : QueryLanguage("ar")
-    object Azeri : QueryLanguage("az")
-    object Bulgarian : QueryLanguage("bg")
-    object Brunei : QueryLanguage("bn")
-    object Catalan : QueryLanguage("ca")
-    object Czech : QueryLanguage("cs")
-    object Welsh : QueryLanguage("cy")
-    object Danish : QueryLanguage("da")
-    object German : QueryLanguage("de")
-    object English : QueryLanguage("en")
-    object Esperanto : QueryLanguage("eo")
-    object Spanish : QueryLanguage("es")
-    object Estonian : QueryLanguage("et")
-    object Basque : QueryLanguage("eu")
-    object Finnish : QueryLanguage("fi")
-    object Faroese : QueryLanguage("fo")
-    object French : QueryLanguage("fr")
-    object Galician : QueryLanguage("gl")
-    object Hebrew : QueryLanguage("he")
-    object Hindi : QueryLanguage("hi")
-    object Hungarian : QueryLanguage("hu")
-    object Armenian : QueryLanguage("hy")
-    object Indonesian : QueryLanguage("id")
-    object Icelandic : QueryLanguage("is")
-    object Italian : QueryLanguage("it")
-    object Japanese : QueryLanguage("ja")
-    object Georgian : QueryLanguage("ka")
-    object Kazakh : QueryLanguage("kk")
-    object Korean : QueryLanguage("ko")
-    object Kyrgyz : QueryLanguage("ky")
-    object Lithuanian : QueryLanguage("lt")
-    object Maori : QueryLanguage("mi")
-    object Mongolian : QueryLanguage("mn")
-    object Marathi : QueryLanguage("mr")
-    object Malay : QueryLanguage("ms")
-    object Maltese : QueryLanguage("mt")
-    object Norwegian : QueryLanguage("nb")
-    object Dutch : QueryLanguage("nl")
-    object NorthernSotho : QueryLanguage("ns")
-    object Polish : QueryLanguage("pl")
-    object Pashto : QueryLanguage("ps")
-    object Portuguese : QueryLanguage("pt")
-    object Quechua : QueryLanguage("qu")
-    object Romanian : QueryLanguage("ro")
-    object Russian : QueryLanguage("ru")
-    object Slovak : QueryLanguage("sk")
-    object Albanian : QueryLanguage("sq")
-    object Swedish : QueryLanguage("sv")
-    object Swahili : QueryLanguage("sw")
-    object Tamil : QueryLanguage("ta")
-    object Telugu : QueryLanguage("te")
-    object Tagalog : QueryLanguage("tl")
-    object Tswana : QueryLanguage("tn")
-    object Turkish : QueryLanguage("tr")
-    object Tatar : QueryLanguage("tt")
+    object Afrikaans : QueryLanguage(KeyAfrikaans)
+    object Arabic : QueryLanguage(KeyArabic)
+    object Azeri : QueryLanguage(KeyAzeri)
+    object Bulgarian : QueryLanguage(KeyBulgarian)
+    object Brunei : QueryLanguage(KeyBrunei)
+    object Catalan : QueryLanguage(KeyCatalan)
+    object Czech : QueryLanguage(KeyCzech)
+    object Welsh : QueryLanguage(KeyWelsh)
+    object Danish : QueryLanguage(KeyDanish)
+    object German : QueryLanguage(KeyGerman)
+    object English : QueryLanguage(KeyEnglish)
+    object Esperanto : QueryLanguage(KeyEsperanto)
+    object Spanish : QueryLanguage(KeySpanish)
+    object Estonian : QueryLanguage(KeyEstonian)
+    object Basque : QueryLanguage(KeyBasque)
+    object Finnish : QueryLanguage(KeyFinnish)
+    object Faroese : QueryLanguage(KeyFaroese)
+    object French : QueryLanguage(KeyFrench)
+    object Galician : QueryLanguage(KeyGalician)
+    object Hebrew : QueryLanguage(KeyHebrew)
+    object Hindi : QueryLanguage(KeyHindi)
+    object Hungarian : QueryLanguage(KeyHungarian)
+    object Armenian : QueryLanguage(KeyArmenian)
+    object Indonesian : QueryLanguage(KeyIndonesian)
+    object Icelandic : QueryLanguage(KeyIcelandic)
+    object Italian : QueryLanguage(KeyItalian)
+    object Japanese : QueryLanguage(KeyJapanese)
+    object Georgian : QueryLanguage(KeyGeorgian)
+    object Kazakh : QueryLanguage(KeyKazakh)
+    object Korean : QueryLanguage(KeyKorean)
+    object Kyrgyz : QueryLanguage(KeyKyrgyz)
+    object Lithuanian : QueryLanguage(KeyLithuanian)
+    object Maori : QueryLanguage(KeyMaori)
+    object Mongolian : QueryLanguage(KeyMongolian)
+    object Marathi : QueryLanguage(KeyMarathi)
+    object Malay : QueryLanguage(KeyMalay)
+    object Maltese : QueryLanguage(KeyMaltese)
+    object Norwegian : QueryLanguage(KeyNorwegian)
+    object Dutch : QueryLanguage(KeyDutch)
+    object NorthernSotho : QueryLanguage(KeyNorthernSotho)
+    object Polish : QueryLanguage(KeyPolish)
+    object Pashto : QueryLanguage(KeyPashto)
+    object Portuguese : QueryLanguage(KeyPortuguese)
+    object Quechua : QueryLanguage(KeyQuechua)
+    object Romanian : QueryLanguage(KeyRomanian)
+    object Russian : QueryLanguage(KeyRussian)
+    object Slovak : QueryLanguage(KeySlovak)
+    object Albanian : QueryLanguage(KeyAlbanian)
+    object Swedish : QueryLanguage(KeySwedish)
+    object Swahili : QueryLanguage(KeySwahili)
+    object Tamil : QueryLanguage(KeyTamil)
+    object Telugu : QueryLanguage(KeyTelugu)
+    object Tagalog : QueryLanguage(KeyTagalog)
+    object Tswana : QueryLanguage(KeyTswana)
+    object Turkish : QueryLanguage(KeyTurkish)
+    object Tatar : QueryLanguage(KeyTatar)
 
     data class Unknown(override val raw: String) : QueryLanguage(raw)
+
+    internal companion object : Serializer<QueryLanguage> {
+
+        override fun serialize(input: QueryLanguage?): JsonElement {
+            return input.unwrap { JsonPrimitive(raw) }
+        }
+
+        override fun deserialize(element: JsonElement): QueryLanguage? {
+            return when (element.contentOrNull) {
+                KeyAfrikaans -> QueryLanguage.Afrikaans
+                KeyArabic -> QueryLanguage.Arabic
+                KeyAzeri -> QueryLanguage.Azeri
+                KeyBulgarian -> QueryLanguage.Bulgarian
+                KeyBrunei -> QueryLanguage.Brunei
+                KeyCatalan -> QueryLanguage.Catalan
+                KeyCzech -> QueryLanguage.Czech
+                KeyWelsh -> QueryLanguage.Welsh
+                KeyDanish -> QueryLanguage.Danish
+                KeyGerman -> QueryLanguage.German
+                KeyEnglish -> QueryLanguage.English
+                KeyEsperanto -> QueryLanguage.Esperanto
+                KeySpanish -> QueryLanguage.Spanish
+                KeyEstonian -> QueryLanguage.Estonian
+                KeyBasque -> QueryLanguage.Basque
+                KeyFinnish -> QueryLanguage.Finnish
+                KeyFaroese -> QueryLanguage.Faroese
+                KeyFrench -> QueryLanguage.French
+                KeyGalician -> QueryLanguage.Galician
+                KeyHebrew -> QueryLanguage.Hebrew
+                KeyHindi -> QueryLanguage.Hindi
+                KeyHungarian -> QueryLanguage.Hungarian
+                KeyArmenian -> QueryLanguage.Armenian
+                KeyIndonesian -> QueryLanguage.Indonesian
+                KeyIcelandic -> QueryLanguage.Icelandic
+                KeyItalian -> QueryLanguage.Italian
+                KeyJapanese -> QueryLanguage.Japanese
+                KeyGeorgian -> QueryLanguage.Georgian
+                KeyKazakh -> QueryLanguage.Kazakh
+                KeyKorean -> QueryLanguage.Korean
+                KeyKyrgyz -> QueryLanguage.Kyrgyz
+                KeyLithuanian -> QueryLanguage.Lithuanian
+                KeyMaori -> QueryLanguage.Maori
+                KeyMongolian -> QueryLanguage.Mongolian
+                KeyMarathi -> QueryLanguage.Marathi
+                KeyMalay -> QueryLanguage.Malay
+                KeyMaltese -> QueryLanguage.Maltese
+                KeyNorwegian -> QueryLanguage.Norwegian
+                KeyDutch -> QueryLanguage.Dutch
+                KeyNorthernSotho -> QueryLanguage.NorthernSotho
+                KeyPolish -> QueryLanguage.Polish
+                KeyPashto -> QueryLanguage.Pashto
+                KeyPortuguese -> QueryLanguage.Portuguese
+                KeyQuechua -> QueryLanguage.Quechua
+                KeyRomanian -> QueryLanguage.Romanian
+                KeyRussian -> QueryLanguage.Russian
+                KeySlovak -> QueryLanguage.Slovak
+                KeyAlbanian -> QueryLanguage.Albanian
+                KeySwedish -> QueryLanguage.Swedish
+                KeySwahili -> QueryLanguage.Swahili
+                KeyTamil -> QueryLanguage.Tamil
+                KeyTelugu -> QueryLanguage.Telugu
+                KeyTagalog -> QueryLanguage.Tagalog
+                KeyTswana -> QueryLanguage.Tswana
+                KeyTurkish -> QueryLanguage.Turkish
+                KeyTatar -> QueryLanguage.Tatar
+                null -> null
+                else -> QueryLanguage.Unknown(element.content)
+            }
+        }
+    }
 }
