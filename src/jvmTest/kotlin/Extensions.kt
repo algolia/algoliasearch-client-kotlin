@@ -1,7 +1,11 @@
-
 import client.Index
 import client.data.Attribute
 import client.query.helper.*
+import client.serialize.Serializer
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonNull
+import kotlin.test.assertEquals
 
 
 internal fun groupMap(): GroupMap<Filter> = mutableMapOf()
@@ -35,3 +39,30 @@ internal val tagA = FilterTag("tagA")
 internal val tagB = FilterTag("tagB")
 
 internal fun FilterBuilder.buildTest() = build().replace("\"", "")
+
+internal fun <T> testDeserialize(expected: T, actual: JsonElement, serializer: Serializer<T>) {
+    assertEquals(expected, serializer.deserialize(actual))
+}
+
+internal fun <T> testDeserializeNull(serializer: Serializer<T>) {
+    assertEquals(null, serializer.deserialize(JsonNull))
+    assertEquals(null, serializer.deserializes(JsonNull))
+}
+
+internal fun <T> testDeserializeArray(expected: List<T>, actual: JsonArray, serializer: Serializer<T>) {
+    assertEquals(expected, serializer.deserializes(actual))
+}
+
+internal fun <T> testSerialize(expected: JsonElement, actual: T, serializer: Serializer<T>) {
+    assertEquals(expected, serializer.serialize(actual))
+}
+
+internal fun <T> testSerializeNull(serializer: Serializer<T>) {
+    assertEquals(JsonNull, serializer.serialize(null))
+    assertEquals(JsonNull, serializer.serializes(null))
+}
+
+internal fun <T> testSerializeArray(expected: JsonArray, actual: List<T>, serializer: Serializer<T>) {
+    assertEquals(expected, serializer.serializes(actual))
+}
+

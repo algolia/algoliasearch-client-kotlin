@@ -1,5 +1,6 @@
 package client.serialize
 
+import client.data.AlternativesAsExact
 import client.response.Settings
 import kotlinx.serialization.json.*
 
@@ -47,6 +48,7 @@ internal fun String.toSettings(): Settings {
             KeyAttributesToSnippet -> settings.attributesToSnippet = element.notNull { toSnippets() }
             KeyTypoTolerance -> settings.typoTolerance = element.notNull { toTypoTolerance() }
             KeyIgnorePlurals -> settings.ignorePlurals = element.notNull { toBooleanOrQueryLanguages() }
+            KeyAlternativesAsExact -> settings.alternativesAsExact = AlternativesAsExact.deserialize(element)
         }
     }
     return settings
