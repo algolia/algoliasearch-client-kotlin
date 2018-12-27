@@ -9,8 +9,8 @@ import kotlinx.serialization.json.*
 internal fun JsonElement.toAttributes() = jsonArray.content.map { it.primitive.content.toAttribute() }
 
 internal fun String.toRanking(): Ranking {
-    val asc = Regex("$Asc\\((.*)\\)")
-    val desc = Regex("$Desc\\((.*)\\)")
+    val asc = Regex("$KeyAsc\\((.*)\\)")
+    val desc = Regex("$KeyDesc\\((.*)\\)")
     val findAsc = asc.find(this)
     val findDesc = desc.find(this)
 
@@ -18,15 +18,15 @@ internal fun String.toRanking(): Ranking {
         findAsc != null -> client.data.Ranking.Asc(findAsc.groupValues[1].toAttribute())
         findDesc != null -> client.data.Ranking.Desc(findDesc.groupValues[1].toAttribute())
         else -> when (this) {
-            Typo -> client.data.Ranking.Typo
-            Geo -> client.data.Ranking.Geo
-            Words -> client.data.Ranking.Words
-            Filters -> client.data.Ranking.Filters
-            Proximity -> client.data.Ranking.Proximity
-            Attribute -> client.data.Ranking.Attribute
-            Exact -> client.data.Ranking.Exact
-            Custom -> client.data.Ranking.Custom
-            else -> client.data.Ranking.Unknown(this)
+            KeyTypo -> Ranking.Typo
+            KeyGeo -> Ranking.Geo
+            KeyWords -> Ranking.Words
+            KeyFilters -> Ranking.Filters
+            KeyProximity -> Ranking.Proximity
+            KeyAttribute -> Ranking.Attribute
+            KeyExact -> Ranking.Exact
+            KeyCustom -> Ranking.Custom
+            else -> Ranking.Unknown(this)
         }
     }
 }
@@ -38,8 +38,8 @@ internal fun JsonElement.toRankings() = jsonArray.content.map {
 internal fun JsonElement.toCustomRankings() = jsonArray.content.map { it.primitive.content.toCustomRanking() }
 
 internal fun String.toCustomRanking(): CustomRanking {
-    val asc = Regex("$Asc\\((.*)\\)")
-    val desc = Regex("$Desc\\((.*)\\)")
+    val asc = Regex("$KeyAsc\\((.*)\\)")
+    val desc = Regex("$KeyDesc\\((.*)\\)")
     val findAsc = asc.find(this)
     val findDesc = desc.find(this)
 
@@ -68,8 +68,8 @@ internal fun JsonElement.toTypoTolerance(): TypoTolerance {
     return when {
         booleanOrNull != null -> client.data.TypoTolerance.Boolean(boolean)
         else -> when (content) {
-            Strict -> client.data.TypoTolerance.Strict
-            Min -> client.data.TypoTolerance.Min
+            KeyStrict -> client.data.TypoTolerance.Strict
+            KeyMin -> client.data.TypoTolerance.Min
             else -> client.data.TypoTolerance.Unknown(content)
         }
     }

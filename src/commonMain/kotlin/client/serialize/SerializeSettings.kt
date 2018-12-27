@@ -10,43 +10,43 @@ internal fun String.toSettings(): Settings {
 
     json.forEach { (key, element) ->
         when (key) {
-            SearchableAttributes -> settings.searchableAttributes = element.notNull { toAttributes() }
-            AttributesForFaceting -> settings.attributesForFaceting = element.notNull { toAttributes() }
-            UnretrievableAttributes -> settings.unretrievableAttributes = element.notNull { toAttributes() }
-            AttributesToRetrieve -> settings.attributesToRetrieve = element.notNull { toAttributes() }
-            Ranking -> settings.ranking = element.notNull { toRankings() }
-            CustomRanking -> settings.customRanking = element.notNull { toCustomRankings() }
-            Replicas -> settings.replicas = element.notNull { toIndexes() }
-            MaxValuesPerFacet -> settings.maxValuesPerFacet = element.intOrNull
-            FacetingAfterDistinct -> settings.facetingAfterDistinct = element.booleanOrNull
-            HitsPerPage -> settings.hitsPerPage = element.intOrNull
-            PaginationLimitedTo -> settings.paginationLimitedTo = element.intOrNull
-            MinWordSizefor1Typo -> settings.minWordSizefor1Typo = element.intOrNull
-            MinWordSizefor2Typos -> settings.minWordSizefor2Typos = element.intOrNull
-            Distinct -> settings.distinct = element.intOrNull
-            MinProximity -> settings.minProximity = element.intOrNull
-            MaxFacetHits -> settings.maxFacetHits = element.intOrNull
-            RestrictHighlightAndSnippetArrays -> settings.restrictHighlightAndSnippetArrays = element.booleanOrNull
-            AllowTyposOnNumericTokens -> settings.allowTyposOnNumericTokens = element.booleanOrNull
-            EnableRules -> settings.enableRules = element.booleanOrNull
-            AdvancedSyntax -> settings.advancedSyntax = element.booleanOrNull
-            AllowCompressionOfIntegerArray -> settings.allowCompressionOfIntegerArray = element.booleanOrNull
-            Synonyms -> settings.synonyms = element.booleanOrNull
-            ReplaceSynonymsInHighlight -> settings.replaceSynonymsInHighlight = element.booleanOrNull
-            HighlightPreTag -> settings.highlightPreTag = element.contentOrNull
-            HighlightPostTag -> settings.highlightPostTag = element.contentOrNull
-            SnippetEllipsisText -> settings.snippetEllipsisText = element.contentOrNull
-            SeparatorsToIndex -> settings.separatorsToIndex = element.contentOrNull
-            KeepDiacriticsOnCharacters -> settings.keepDiacriticsOnCharacters = element.contentOrNull
-            AttributesToHighlight -> settings.attributesToHighlight = element.notNull { toAttributes() }
-            DisableTypoToleranceOnAttributes -> settings.disableTypoToleranceOnAttributes =
+            KeySearchableAttributes -> settings.searchableAttributes = element.notNull { toAttributes() }
+            KeyAttributesForFaceting -> settings.attributesForFaceting = element.notNull { toAttributes() }
+            KeyUnretrievableAttributes -> settings.unretrievableAttributes = element.notNull { toAttributes() }
+            KeyAttributesToRetrieve -> settings.attributesToRetrieve = element.notNull { toAttributes() }
+            KeyRanking -> settings.ranking = element.notNull { toRankings() }
+            KeyCustomRanking -> settings.customRanking = element.notNull { toCustomRankings() }
+            KeyReplicas -> settings.replicas = element.notNull { toIndexes() }
+            KeyMaxValuesPerFacet -> settings.maxValuesPerFacet = element.intOrNull
+            KeyFacetingAfterDistinct -> settings.facetingAfterDistinct = element.booleanOrNull
+            KeyHitsPerPage -> settings.hitsPerPage = element.intOrNull
+            KeyPaginationLimitedTo -> settings.paginationLimitedTo = element.intOrNull
+            KeyMinWordSizefor1Typo -> settings.minWordSizefor1Typo = element.intOrNull
+            KeyMinWordSizefor2Typos -> settings.minWordSizefor2Typos = element.intOrNull
+            KeyDistinct -> settings.distinct = element.intOrNull
+            KeyMinProximity -> settings.minProximity = element.intOrNull
+            KeyMaxFacetHits -> settings.maxFacetHits = element.intOrNull
+            KeyRestrictHighlightAndSnippetArrays -> settings.restrictHighlightAndSnippetArrays = element.booleanOrNull
+            KeyAllowTyposOnNumericTokens -> settings.allowTyposOnNumericTokens = element.booleanOrNull
+            KeyEnableRules -> settings.enableRules = element.booleanOrNull
+            KeyAdvancedSyntax -> settings.advancedSyntax = element.booleanOrNull
+            KeyAllowCompressionOfIntegerArray -> settings.allowCompressionOfIntegerArray = element.booleanOrNull
+            KeySynonyms -> settings.synonyms = element.booleanOrNull
+            KeyReplaceSynonymsInHighlight -> settings.replaceSynonymsInHighlight = element.booleanOrNull
+            KeyHighlightPreTag -> settings.highlightPreTag = element.contentOrNull
+            KeyHighlightPostTag -> settings.highlightPostTag = element.contentOrNull
+            KeySnippetEllipsisText -> settings.snippetEllipsisText = element.contentOrNull
+            KeySeparatorsToIndex -> settings.separatorsToIndex = element.contentOrNull
+            KeyKeepDiacriticsOnCharacters -> settings.keepDiacriticsOnCharacters = element.contentOrNull
+            KeyAttributesToHighlight -> settings.attributesToHighlight = element.notNull { toAttributes() }
+            KeyDisableTypoToleranceOnAttributes -> settings.disableTypoToleranceOnAttributes =
                 element.notNull { toAttributes() }
-            CamelCaseAttributes -> settings.camelCaseAttributes = element.notNull { toAttributes() }
-            DisablePrefixOnAttributes -> settings.disablePrefixOnAttributes = element.notNull { toAttributes() }
-            DisableExactOnAttributes -> settings.disableExactOnAttributes = element.notNull { toAttributes() }
-            AttributesToSnippet -> settings.attributesToSnippet = element.notNull { toSnippets() }
-            TypoTolerance -> settings.typoTolerance = element.notNull { toTypoTolerance() }
-            IgnorePlurals -> settings.ignorePlurals = element.notNull { toBooleanOrQueryLanguages() }
+            KeyCamelCaseAttributes -> settings.camelCaseAttributes = element.notNull { toAttributes() }
+            KeyDisablePrefixOnAttributes -> settings.disablePrefixOnAttributes = element.notNull { toAttributes() }
+            KeyDisableExactOnAttributes -> settings.disableExactOnAttributes = element.notNull { toAttributes() }
+            KeyAttributesToSnippet -> settings.attributesToSnippet = element.notNull { toSnippets() }
+            KeyTypoTolerance -> settings.typoTolerance = element.notNull { toTypoTolerance() }
+            KeyIgnorePlurals -> settings.ignorePlurals = element.notNull { toBooleanOrQueryLanguages() }
         }
     }
     return settings

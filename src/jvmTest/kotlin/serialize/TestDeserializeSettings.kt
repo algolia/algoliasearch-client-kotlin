@@ -34,38 +34,38 @@ class TestDeserializeSettings {
 
     @Test
     fun searchableAttributes() {
-        testAttributes(SearchableAttributes, Settings(searchableAttributes = attributes))
+        testAttributes(KeySearchableAttributes, Settings(searchableAttributes = attributes))
     }
 
     @Test
     fun attributesForFaceting() {
-        testAttributes(AttributesForFaceting, Settings(attributesForFaceting = attributes))
+        testAttributes(KeyAttributesForFaceting, Settings(attributesForFaceting = attributes))
     }
 
     @Test
     fun unretrievableAttributes() {
-        testAttributes(UnretrievableAttributes, Settings(unretrievableAttributes = attributes))
+        testAttributes(KeyUnretrievableAttributes, Settings(unretrievableAttributes = attributes))
     }
 
     @Test
     fun attributesToRetrieve() {
-        testAttributes(AttributesToRetrieve, Settings(attributesToRetrieve = attributes))
+        testAttributes(KeyAttributesToRetrieve, Settings(attributesToRetrieve = attributes))
     }
 
     @Test
     fun ranking() {
         val string = json {
-            Ranking to jsonArray {
-                +Geo
-                +Typo
-                +Words
-                +Filters
-                +Proximity
-                +Attribute
-                +Exact
-                +Custom
-                +"$Asc(${attributeA.name})"
-                +"$Desc(${attributeB.name})"
+            KeyRanking to jsonArray {
+                +KeyGeo
+                +KeyTypo
+                +KeyWords
+                +KeyFilters
+                +KeyProximity
+                +KeyAttribute
+                +KeyExact
+                +KeyCustom
+                +"$KeyAsc(${attributeA.name})"
+                +"$KeyDesc(${attributeB.name})"
                 +unknown
             }
         }.toString()
@@ -93,9 +93,9 @@ class TestDeserializeSettings {
     @Test
     fun customRanking() {
         val string = json {
-            CustomRanking to jsonArray {
-                +"$Asc(${attributeA.name})"
-                +"$Desc(${attributeB.name})"
+            KeyCustomRanking to jsonArray {
+                +"$KeyAsc(${attributeA.name})"
+                +"$KeyDesc(${attributeB.name})"
                 +unknown
             }
         }.toString()
@@ -114,7 +114,7 @@ class TestDeserializeSettings {
     @Test
     fun replicas() {
         val string = json {
-            Replicas to jsonArray {
+            KeyReplicas to jsonArray {
                 +indexA.name
                 +indexB.name
             }
@@ -125,138 +125,138 @@ class TestDeserializeSettings {
 
     @Test
     fun maxValuesPerFacet() {
-        testInt(MaxValuesPerFacet, Settings(maxValuesPerFacet = int))
+        testInt(KeyMaxValuesPerFacet, Settings(maxValuesPerFacet = int))
     }
 
     @Test
     fun facetingAfterDistinct() {
-        testBoolean(FacetingAfterDistinct, Settings(facetingAfterDistinct = boolean))
+        testBoolean(KeyFacetingAfterDistinct, Settings(facetingAfterDistinct = boolean))
     }
 
     @Test
     fun hitsPerPage() {
-        testInt(HitsPerPage, Settings(hitsPerPage = int))
+        testInt(KeyHitsPerPage, Settings(hitsPerPage = int))
     }
 
     @Test
     fun paginationLimitedTo() {
-        testInt(PaginationLimitedTo, Settings(paginationLimitedTo = int))
+        testInt(KeyPaginationLimitedTo, Settings(paginationLimitedTo = int))
     }
 
     @Test
     fun minWordSizefor1Typo() {
-        testInt(MinWordSizefor1Typo, Settings(minWordSizefor1Typo = int))
+        testInt(KeyMinWordSizefor1Typo, Settings(minWordSizefor1Typo = int))
     }
 
     @Test
     fun minWordSizefor2Typos() {
-        testInt(MinWordSizefor2Typos, Settings(minWordSizefor2Typos = int))
+        testInt(KeyMinWordSizefor2Typos, Settings(minWordSizefor2Typos = int))
     }
 
     @Test
     fun distinct() {
-        testInt(Distinct, Settings(distinct = int))
+        testInt(KeyDistinct, Settings(distinct = int))
     }
 
     @Test
     fun minProximity() {
-        testInt(MinProximity, Settings(minProximity = int))
+        testInt(KeyMinProximity, Settings(minProximity = int))
     }
 
     @Test
     fun maxFacetHits() {
-        testInt(MaxFacetHits, Settings(maxFacetHits = int))
+        testInt(KeyMaxFacetHits, Settings(maxFacetHits = int))
     }
 
     @Test
     fun restrictHighlightAndSnippetArrays() {
-        testBoolean(RestrictHighlightAndSnippetArrays, Settings(restrictHighlightAndSnippetArrays = boolean))
+        testBoolean(KeyRestrictHighlightAndSnippetArrays, Settings(restrictHighlightAndSnippetArrays = boolean))
     }
 
     @Test
     fun allowTyposOnNumericTokens() {
-        testBoolean(AllowTyposOnNumericTokens, Settings(allowTyposOnNumericTokens = boolean))
+        testBoolean(KeyAllowTyposOnNumericTokens, Settings(allowTyposOnNumericTokens = boolean))
     }
 
     @Test
     fun enableRules() {
-        testBoolean(EnableRules, Settings(enableRules = boolean))
+        testBoolean(KeyEnableRules, Settings(enableRules = boolean))
     }
 
     @Test
     fun advancedSyntax() {
-        testBoolean(AdvancedSyntax, Settings(advancedSyntax = boolean))
+        testBoolean(KeyAdvancedSyntax, Settings(advancedSyntax = boolean))
     }
 
     @Test
     fun allowCompressionOfIntegerArray() {
-        testBoolean(AllowCompressionOfIntegerArray, Settings(allowCompressionOfIntegerArray = boolean))
+        testBoolean(KeyAllowCompressionOfIntegerArray, Settings(allowCompressionOfIntegerArray = boolean))
     }
 
     @Test
     fun synonyms() {
-        testBoolean(Synonyms, Settings(synonyms = boolean))
+        testBoolean(KeySynonyms, Settings(synonyms = boolean))
     }
 
     @Test
     fun replaceSynonymsInHighlight() {
-        testBoolean(ReplaceSynonymsInHighlight, Settings(replaceSynonymsInHighlight = boolean))
+        testBoolean(KeyReplaceSynonymsInHighlight, Settings(replaceSynonymsInHighlight = boolean))
     }
 
     @Test
     fun highlightPreTag() {
-        testString(HighlightPreTag, Settings(highlightPreTag = string))
+        testString(KeyHighlightPreTag, Settings(highlightPreTag = string))
     }
 
     @Test
     fun highlightPostTag() {
-        testString(HighlightPostTag, Settings(highlightPostTag = string))
+        testString(KeyHighlightPostTag, Settings(highlightPostTag = string))
     }
 
     @Test
     fun snippetEllipsisText() {
-        testString(SnippetEllipsisText, Settings(snippetEllipsisText = string))
+        testString(KeySnippetEllipsisText, Settings(snippetEllipsisText = string))
     }
 
     @Test
     fun separatorsToIndex() {
-        testString(SeparatorsToIndex, Settings(separatorsToIndex = string))
+        testString(KeySeparatorsToIndex, Settings(separatorsToIndex = string))
     }
 
     @Test
     fun keepDiacriticsOnCharacters() {
-        testString(KeepDiacriticsOnCharacters, Settings(keepDiacriticsOnCharacters = string))
+        testString(KeyKeepDiacriticsOnCharacters, Settings(keepDiacriticsOnCharacters = string))
     }
 
     @Test
     fun attributesToHighlight() {
-        testAttributes(AttributesToHighlight, Settings(attributesToHighlight = attributes))
+        testAttributes(KeyAttributesToHighlight, Settings(attributesToHighlight = attributes))
     }
 
     @Test
     fun disableTypoToleranceOnAttributes() {
-        testAttributes(DisableTypoToleranceOnAttributes, Settings(disableTypoToleranceOnAttributes = attributes))
+        testAttributes(KeyDisableTypoToleranceOnAttributes, Settings(disableTypoToleranceOnAttributes = attributes))
     }
 
     @Test
     fun camelCaseAttributes() {
-        testAttributes(CamelCaseAttributes, Settings(camelCaseAttributes = attributes))
+        testAttributes(KeyCamelCaseAttributes, Settings(camelCaseAttributes = attributes))
     }
 
     @Test
     fun disablePrefixOnAttributes() {
-        testAttributes(DisablePrefixOnAttributes, Settings(disablePrefixOnAttributes = attributes))
+        testAttributes(KeyDisablePrefixOnAttributes, Settings(disablePrefixOnAttributes = attributes))
     }
 
     @Test
     fun disableExactOnAttributes() {
-        testAttributes(DisableExactOnAttributes, Settings(disableExactOnAttributes = attributes))
+        testAttributes(KeyDisableExactOnAttributes, Settings(disableExactOnAttributes = attributes))
     }
 
     @Test
     fun attributesToSnippet() {
         val string = json {
-            AttributesToSnippet to jsonArray {
+            KeyAttributesToSnippet to jsonArray {
                 +attributeA.name
                 +"*"
                 +"*:20"
@@ -279,11 +279,11 @@ class TestDeserializeSettings {
 
     @Test
     fun typoTolerance() {
-        val typoToleranceBoolean = json { TypoTolerance to boolean }.toString()
-        val typoToleranceStrict = json { TypoTolerance to Strict }.toString()
-        val typoToleranceMin = json { TypoTolerance to Min }.toString()
-        val typoToleranceUnknown = json { TypoTolerance to unknown }.toString()
-        val typoToleranceNull = json { TypoTolerance to JsonNull }.toString()
+        val typoToleranceBoolean = json { KeyTypoTolerance to boolean }.toString()
+        val typoToleranceStrict = json { KeyTypoTolerance to KeyStrict }.toString()
+        val typoToleranceMin = json { KeyTypoTolerance to KeyMin }.toString()
+        val typoToleranceUnknown = json { KeyTypoTolerance to unknown }.toString()
+        val typoToleranceNull = json { KeyTypoTolerance to JsonNull }.toString()
 
         assertEquals(
             Settings(typoTolerance = client.data.TypoTolerance.Boolean(boolean)),
@@ -300,9 +300,9 @@ class TestDeserializeSettings {
 
     @Test
     fun ignorePlurals() {
-        val ignorePluralsBoolean = json { IgnorePlurals to boolean }.toString()
+        val ignorePluralsBoolean = json { KeyIgnorePlurals to boolean }.toString()
         val ignorePluralsLanguages = json {
-            IgnorePlurals to jsonArray {
+            KeyIgnorePlurals to jsonArray {
                 +Afrikaans
                 +Albanian
             }
