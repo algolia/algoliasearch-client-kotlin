@@ -1,14 +1,11 @@
 package client.data
 
-import client.serialize.asc
-import client.serialize.desc
-
 
 sealed class CustomRanking(open val raw: String) {
 
-    data class Asc(val attribute: Attribute) : CustomRanking(asc)
+    data class Asc(val attribute: Attribute) : CustomRanking(client.serialize.Asc)
 
-    data class Desc(val attribute: Attribute) : CustomRanking(desc)
+    data class Desc(val attribute: Attribute) : CustomRanking(client.serialize.Desc)
 
     data class Unknown(override val raw: String) : CustomRanking(raw)
 }

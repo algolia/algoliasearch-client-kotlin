@@ -10,40 +10,40 @@ internal fun String.toSettings(): Settings {
 
     json.forEach { (key, element) ->
         when (key) {
-            searchableAttributes -> settings.searchableAttributes = element.notNull { toAttributes() }
-            attributesForFaceting -> settings.attributesForFaceting = element.notNull { toAttributes() }
-            unretrievableAttributes -> settings.unretrievableAttributes = element.notNull { toAttributes() }
-            attributesToRetrieve -> settings.attributesToRetrieve = element.notNull { toAttributes() }
-            ranking -> settings.ranking = element.notNull { toRankings() }
-            customRanking -> settings.customRanking = element.notNull { toCustomRankings() }
-            replicas -> settings.replicas = element.notNull { toIndexes() }
-            maxValuesPerFacet -> settings.maxValuesPerFacet = element.intOrNull
-            facetingAfterDistinct -> settings.facetingAfterDistinct = element.booleanOrNull
-            hitsPerPage -> settings.hitsPerPage = element.intOrNull
-            paginationLimitedTo -> settings.paginationLimitedTo = element.intOrNull
-            minWordSizefor1Typo -> settings.minWordSizefor1Typo = element.intOrNull
-            minWordSizefor2Typos -> settings.minWordSizefor2Typos = element.intOrNull
-            distinct -> settings.distinct = element.intOrNull
-            minProximity -> settings.minProximity = element.intOrNull
-            maxFacetHits -> settings.maxFacetHits = element.intOrNull
-            restrictHighlightAndSnippetArrays -> settings.restrictHighlightAndSnippetArrays = element.booleanOrNull
-            allowTyposOnNumericTokens -> settings.allowTyposOnNumericTokens = element.booleanOrNull
-            enableRules -> settings.enableRules = element.booleanOrNull
-            advancedSyntax -> settings.advancedSyntax = element.booleanOrNull
-            allowCompressionOfIntegerArray -> settings.allowCompressionOfIntegerArray = element.booleanOrNull
-            synonyms -> settings.synonyms = element.booleanOrNull
-            replaceSynonymsInHighlight -> settings.replaceSynonymsInHighlight = element.booleanOrNull
-            highlightPreTag -> settings.highlightPreTag = element.contentOrNull
-            highlightPostTag -> settings.highlightPostTag = element.contentOrNull
-            snippetEllipsisText -> settings.snippetEllipsisText = element.contentOrNull
-            separatorsToIndex -> settings.separatorsToIndex = element.contentOrNull
-            keepDiacriticsOnCharacters -> settings.keepDiacriticsOnCharacters = element.contentOrNull
-            attributesToHighlight -> settings.attributesToHighlight = element.notNull { toAttributes() }
-            disableTypoToleranceOnAttributes -> settings.disableTypoToleranceOnAttributes =
+            SearchableAttributes -> settings.searchableAttributes = element.notNull { toAttributes() }
+            AttributesForFaceting -> settings.attributesForFaceting = element.notNull { toAttributes() }
+            UnretrievableAttributes -> settings.unretrievableAttributes = element.notNull { toAttributes() }
+            AttributesToRetrieve -> settings.attributesToRetrieve = element.notNull { toAttributes() }
+            Ranking -> settings.ranking = element.notNull { toRankings() }
+            CustomRanking -> settings.customRanking = element.notNull { toCustomRankings() }
+            Replicas -> settings.replicas = element.notNull { toIndexes() }
+            MaxValuesPerFacet -> settings.maxValuesPerFacet = element.intOrNull
+            FacetingAfterDistinct -> settings.facetingAfterDistinct = element.booleanOrNull
+            HitsPerPage -> settings.hitsPerPage = element.intOrNull
+            PaginationLimitedTo -> settings.paginationLimitedTo = element.intOrNull
+            MinWordSizefor1Typo -> settings.minWordSizefor1Typo = element.intOrNull
+            MinWordSizefor2Typos -> settings.minWordSizefor2Typos = element.intOrNull
+            Distinct -> settings.distinct = element.intOrNull
+            MinProximity -> settings.minProximity = element.intOrNull
+            MaxFacetHits -> settings.maxFacetHits = element.intOrNull
+            RestrictHighlightAndSnippetArrays -> settings.restrictHighlightAndSnippetArrays = element.booleanOrNull
+            AllowTyposOnNumericTokens -> settings.allowTyposOnNumericTokens = element.booleanOrNull
+            EnableRules -> settings.enableRules = element.booleanOrNull
+            AdvancedSyntax -> settings.advancedSyntax = element.booleanOrNull
+            AllowCompressionOfIntegerArray -> settings.allowCompressionOfIntegerArray = element.booleanOrNull
+            Synonyms -> settings.synonyms = element.booleanOrNull
+            ReplaceSynonymsInHighlight -> settings.replaceSynonymsInHighlight = element.booleanOrNull
+            HighlightPreTag -> settings.highlightPreTag = element.contentOrNull
+            HighlightPostTag -> settings.highlightPostTag = element.contentOrNull
+            SnippetEllipsisText -> settings.snippetEllipsisText = element.contentOrNull
+            SeparatorsToIndex -> settings.separatorsToIndex = element.contentOrNull
+            KeepDiacriticsOnCharacters -> settings.keepDiacriticsOnCharacters = element.contentOrNull
+            AttributesToHighlight -> settings.attributesToHighlight = element.notNull { toAttributes() }
+            DisableTypoToleranceOnAttributes -> settings.disableTypoToleranceOnAttributes =
                 element.notNull { toAttributes() }
-            camelCaseAttributes -> settings.camelCaseAttributes = element.notNull { toAttributes() }
-            disablePrefixOnAttributes -> settings.disablePrefixOnAttributes = element.notNull { toAttributes() }
-            disableExactOnAttributes -> settings.disableExactOnAttributes = element.notNull { toAttributes() }
+            CamelCaseAttributes -> settings.camelCaseAttributes = element.notNull { toAttributes() }
+            DisablePrefixOnAttributes -> settings.disablePrefixOnAttributes = element.notNull { toAttributes() }
+            DisableExactOnAttributes -> settings.disableExactOnAttributes = element.notNull { toAttributes() }
         }
     }
     return settings

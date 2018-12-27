@@ -4,8 +4,6 @@ import attributeA
 import attributeB
 import attributes
 import boolean
-import client.data.CustomRanking
-import client.data.Ranking
 import client.response.Settings
 import client.serialize.*
 import indexA
@@ -32,38 +30,38 @@ class TestDeserializeSettings {
 
     @Test
     fun searchableAttributes() {
-        testAttributes(searchableAttributes, Settings(searchableAttributes = attributes))
+        testAttributes(SearchableAttributes, Settings(searchableAttributes = attributes))
     }
 
     @Test
     fun attributesForFaceting() {
-        testAttributes(attributesForFaceting, Settings(attributesForFaceting = attributes))
+        testAttributes(AttributesForFaceting, Settings(attributesForFaceting = attributes))
     }
 
     @Test
     fun unretrievableAttributes() {
-        testAttributes(unretrievableAttributes, Settings(unretrievableAttributes = attributes))
+        testAttributes(UnretrievableAttributes, Settings(unretrievableAttributes = attributes))
     }
 
     @Test
     fun attributesToRetrieve() {
-        testAttributes(attributesToRetrieve, Settings(attributesToRetrieve = attributes))
+        testAttributes(AttributesToRetrieve, Settings(attributesToRetrieve = attributes))
     }
 
     @Test
     fun ranking() {
         val string = json {
-            ranking to jsonArray {
-                +geo
-                +typo
-                +words
-                +filters
-                +proximity
-                +attribute
-                +exact
-                +custom
-                +"$asc(${attributeA.name})"
-                +"$desc(${attributeB.name})"
+            Ranking to jsonArray {
+                +Geo
+                +Typo
+                +Words
+                +Filters
+                +Proximity
+                +Attribute
+                +Exact
+                +Custom
+                +"$Asc(${attributeA.name})"
+                +"$Desc(${attributeB.name})"
                 +unknown
             }
         }.toString()
@@ -71,17 +69,17 @@ class TestDeserializeSettings {
         assertEquals(
             Settings(
                 ranking = listOf(
-                    Ranking.Geo,
-                    Ranking.Typo,
-                    Ranking.Words,
-                    Ranking.Filters,
-                    Ranking.Proximity,
-                    Ranking.Attribute,
-                    Ranking.Exact,
-                    Ranking.Custom,
-                    Ranking.Asc(attributeA),
-                    Ranking.Desc(attributeB),
-                    Ranking.Unknown(unknown)
+                    client.data.Ranking.Geo,
+                    client.data.Ranking.Typo,
+                    client.data.Ranking.Words,
+                    client.data.Ranking.Filters,
+                    client.data.Ranking.Proximity,
+                    client.data.Ranking.Attribute,
+                    client.data.Ranking.Exact,
+                    client.data.Ranking.Custom,
+                    client.data.Ranking.Asc(attributeA),
+                    client.data.Ranking.Desc(attributeB),
+                    client.data.Ranking.Unknown(unknown)
                 )
             ),
             string.toSettings()
@@ -91,9 +89,9 @@ class TestDeserializeSettings {
     @Test
     fun customRanking() {
         val string = json {
-            customRanking to jsonArray {
-                +"$asc(${attributeA.name})"
-                +"$desc(${attributeB.name})"
+            CustomRanking to jsonArray {
+                +"$Asc(${attributeA.name})"
+                +"$Desc(${attributeB.name})"
                 +unknown
             }
         }.toString()
@@ -101,9 +99,9 @@ class TestDeserializeSettings {
         assertEquals(
             Settings(
                 customRanking = listOf(
-                    CustomRanking.Asc(attributeA),
-                    CustomRanking.Desc(attributeB),
-                    CustomRanking.Unknown(unknown)
+                    client.data.CustomRanking.Asc(attributeA),
+                    client.data.CustomRanking.Desc(attributeB),
+                    client.data.CustomRanking.Unknown(unknown)
                 )
             ), string.toSettings()
         )
@@ -112,7 +110,7 @@ class TestDeserializeSettings {
     @Test
     fun replicas() {
         val string = json {
-            replicas to jsonArray {
+            Replicas to jsonArray {
                 +indexA.name
                 +indexB.name
             }
@@ -123,132 +121,132 @@ class TestDeserializeSettings {
 
     @Test
     fun maxValuesPerFacet() {
-        testInt(maxValuesPerFacet, Settings(maxValuesPerFacet = int))
+        testInt(MaxValuesPerFacet, Settings(maxValuesPerFacet = int))
     }
 
     @Test
     fun facetingAfterDistinct() {
-        testBoolean(facetingAfterDistinct, Settings(facetingAfterDistinct = boolean))
+        testBoolean(FacetingAfterDistinct, Settings(facetingAfterDistinct = boolean))
     }
 
     @Test
     fun hitsPerPage() {
-        testInt(hitsPerPage, Settings(hitsPerPage = int))
+        testInt(HitsPerPage, Settings(hitsPerPage = int))
     }
 
     @Test
     fun paginationLimitedTo() {
-        testInt(paginationLimitedTo, Settings(paginationLimitedTo = int))
+        testInt(PaginationLimitedTo, Settings(paginationLimitedTo = int))
     }
 
     @Test
     fun minWordSizefor1Typo() {
-        testInt(minWordSizefor1Typo, Settings(minWordSizefor1Typo = int))
+        testInt(MinWordSizefor1Typo, Settings(minWordSizefor1Typo = int))
     }
 
     @Test
     fun minWordSizefor2Typos() {
-        testInt(minWordSizefor2Typos, Settings(minWordSizefor2Typos = int))
+        testInt(MinWordSizefor2Typos, Settings(minWordSizefor2Typos = int))
     }
 
     @Test
     fun distinct() {
-        testInt(distinct, Settings(distinct = int))
+        testInt(Distinct, Settings(distinct = int))
     }
 
     @Test
     fun minProximity() {
-        testInt(minProximity, Settings(minProximity = int))
+        testInt(MinProximity, Settings(minProximity = int))
     }
 
     @Test
     fun maxFacetHits() {
-        testInt(maxFacetHits, Settings(maxFacetHits = int))
+        testInt(MaxFacetHits, Settings(maxFacetHits = int))
     }
 
     @Test
     fun restrictHighlightAndSnippetArrays() {
-        testBoolean(restrictHighlightAndSnippetArrays, Settings(restrictHighlightAndSnippetArrays = boolean))
+        testBoolean(RestrictHighlightAndSnippetArrays, Settings(restrictHighlightAndSnippetArrays = boolean))
     }
 
     @Test
     fun allowTyposOnNumericTokens() {
-        testBoolean(allowTyposOnNumericTokens, Settings(allowTyposOnNumericTokens = boolean))
+        testBoolean(AllowTyposOnNumericTokens, Settings(allowTyposOnNumericTokens = boolean))
     }
 
     @Test
     fun enableRules() {
-        testBoolean(enableRules, Settings(enableRules = boolean))
+        testBoolean(EnableRules, Settings(enableRules = boolean))
     }
 
     @Test
     fun advancedSyntax() {
-        testBoolean(advancedSyntax, Settings(advancedSyntax = boolean))
+        testBoolean(AdvancedSyntax, Settings(advancedSyntax = boolean))
     }
 
     @Test
     fun allowCompressionOfIntegerArray() {
-        testBoolean(allowCompressionOfIntegerArray, Settings(allowCompressionOfIntegerArray = boolean))
+        testBoolean(AllowCompressionOfIntegerArray, Settings(allowCompressionOfIntegerArray = boolean))
     }
 
     @Test
     fun synonyms() {
-        testBoolean(synonyms, Settings(synonyms = boolean))
+        testBoolean(Synonyms, Settings(synonyms = boolean))
     }
 
     @Test
     fun replaceSynonymsInHighlight() {
-        testBoolean(replaceSynonymsInHighlight, Settings(replaceSynonymsInHighlight = boolean))
+        testBoolean(ReplaceSynonymsInHighlight, Settings(replaceSynonymsInHighlight = boolean))
     }
 
     @Test
     fun highlightPreTag() {
-        testString(highlightPreTag, Settings(highlightPreTag = string))
+        testString(HighlightPreTag, Settings(highlightPreTag = string))
     }
 
     @Test
     fun highlightPostTag() {
-        testString(highlightPostTag, Settings(highlightPostTag = string))
+        testString(HighlightPostTag, Settings(highlightPostTag = string))
     }
 
     @Test
     fun snippetEllipsisText() {
-        testString(snippetEllipsisText, Settings(snippetEllipsisText = string))
+        testString(SnippetEllipsisText, Settings(snippetEllipsisText = string))
     }
 
     @Test
     fun separatorsToIndex() {
-        testString(separatorsToIndex, Settings(separatorsToIndex = string))
+        testString(SeparatorsToIndex, Settings(separatorsToIndex = string))
     }
 
     @Test
     fun keepDiacriticsOnCharacters() {
-        testString(keepDiacriticsOnCharacters, Settings(keepDiacriticsOnCharacters = string))
+        testString(KeepDiacriticsOnCharacters, Settings(keepDiacriticsOnCharacters = string))
     }
 
     @Test
     fun attributesToHighlight() {
-        testAttributes(attributesToHighlight, Settings(attributesToHighlight = attributes))
+        testAttributes(AttributesToHighlight, Settings(attributesToHighlight = attributes))
     }
 
     @Test
     fun disableTypoToleranceOnAttributes() {
-        testAttributes(disableTypoToleranceOnAttributes, Settings(disableTypoToleranceOnAttributes = attributes))
+        testAttributes(DisableTypoToleranceOnAttributes, Settings(disableTypoToleranceOnAttributes = attributes))
     }
 
     @Test
     fun camelCaseAttributes() {
-        testAttributes(camelCaseAttributes, Settings(camelCaseAttributes = attributes))
+        testAttributes(CamelCaseAttributes, Settings(camelCaseAttributes = attributes))
     }
 
     @Test
     fun disablePrefixOnAttributes() {
-        testAttributes(disablePrefixOnAttributes, Settings(disablePrefixOnAttributes = attributes))
+        testAttributes(DisablePrefixOnAttributes, Settings(disablePrefixOnAttributes = attributes))
     }
 
     @Test
     fun disableExactOnAttributes() {
-        testAttributes(disableExactOnAttributes, Settings(disableExactOnAttributes = attributes))
+        testAttributes(DisableExactOnAttributes, Settings(disableExactOnAttributes = attributes))
     }
 
     private fun testInt(key: String, settings: Settings) {

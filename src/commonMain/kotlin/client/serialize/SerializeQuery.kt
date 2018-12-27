@@ -10,87 +10,87 @@ internal fun Query.toMap(): MutableMap<String, Any> {
     val map = mutableMapOf<String, Any>()
 
     // Query
-    query?.let { map["query"] = it }
+    query?.let { map[Query] = it }
     //Attributes
-    attributesToRetrieve?.let { map["attributesToRetrieve"] = it.names.toJsonArrayFromString() }
-    restrictSearchableAttributes?.let { map["restrictSearchableAttributes"] = it.names.toJsonArrayFromString() }
+    attributesToRetrieve?.let { map[AttributesToRetrieve] = it.names.toJsonArrayFromString() }
+    restrictSearchableAttributes?.let { map[RestrictSearchableAttributes] = it.names.toJsonArrayFromString() }
     // Filters
-    filters?.let { map["filters"] = it }
-    facetFilters?.let { map["facetFilters"] = it.toJsonArrayFromList() }
-    optionalFilters?.let { map["optionalFilters"] = it.toJsonArrayFromList() }
-    numericFilters?.let { map["numericFilters"] = it.toJsonArrayFromList() }
-    tagFilters?.let { map["tagFilters"] = it.toJsonArrayFromList() }
-    sumOrFiltersScores?.let { map["sumOrFiltersScores"] = it }
+    filters?.let { map[Filters] = it }
+    facetFilters?.let { map[FacetFilters] = it.toJsonArrayFromList() }
+    optionalFilters?.let { map[OptionalFilters] = it.toJsonArrayFromList() }
+    numericFilters?.let { map[NumericFilters] = it.toJsonArrayFromList() }
+    tagFilters?.let { map[TagFilters] = it.toJsonArrayFromList() }
+    sumOrFiltersScores?.let { map[SumOrFiltersScores] = it }
     // Facets
-    facets?.let { map["facets"] = it.names.toJsonArrayFromString() }
-    maxValuesPerFacet?.let { map["maxValuesPerFacet"] = it }
-    facetingAfterDistinct?.let { map["facetingAfterDistinct"] = it }
-    sortFacetValuesBy?.let { map["sortFacetValuesBy"] = it.raw }
+    facets?.let { map[Facets] = it.names.toJsonArrayFromString() }
+    maxValuesPerFacet?.let { map[MaxValuesPerFacet] = it }
+    facetingAfterDistinct?.let { map[FacetingAfterDistinct] = it }
+    sortFacetValuesBy?.let { map[SortFacetValuesBy] = it.raw }
     // Highlighting
-    attributesToHighlight?.let { map["attributesToHighlight"] = it.names.toJsonArrayFromString() }
-    attributesToSnippet?.let { map["attributesToSnippet"] = it.map { it.raw }.toJsonArrayFromString() }
-    highlightPreTag?.let { map["highlightPreTag"] = it }
-    highlightPostTag?.let { map["highlightPostTag"] = it }
-    snippetEllipsisText?.let { map["snippetEllipsisText"] = it }
-    restrictHighlightAndSnippetArrays?.let { map["restrictHighlightAndSnippetArrays"] = it }
+    attributesToHighlight?.let { map[AttributesToHighlight] = it.names.toJsonArrayFromString() }
+    attributesToSnippet?.let { map[AttributesToSnippet] = it.map { it.raw }.toJsonArrayFromString() }
+    highlightPreTag?.let { map[HighlightPreTag] = it }
+    highlightPostTag?.let { map[HighlightPostTag] = it }
+    snippetEllipsisText?.let { map[SnippetEllipsisText] = it }
+    restrictHighlightAndSnippetArrays?.let { map[RestrictHighlightAndSnippetArrays] = it }
     // Pagination
-    page?.let { map["page"] = it }
-    hitsPerPage?.let { map["hitsPerPage"] = it }
-    offset?.let { map["offset"] = it }
-    length?.let { map["length"] = it }
+    page?.let { map[Page] = it }
+    hitsPerPage?.let { map[HitsPerPage] = it }
+    offset?.let { map[Offset] = it }
+    length?.let { map[Length] = it }
     //Typos
-    minWordSizefor1Typo?.let { map["minWordSizefor1Typo"] = it }
-    minWordSizefor2Typos?.let { map["minWordSizefor2Typos"] = it }
+    minWordSizefor1Typo?.let { map[MinWordSizefor1Typo] = it }
+    minWordSizefor2Typos?.let { map[MinWordSizefor2Typos] = it }
     typoTolerance?.let {
-        map["typoTolerance"] = when (it) {
+        map[TypoTolerance] = when (it) {
             is TypoTolerance.Boolean -> it.boolean
             is TypoTolerance.Min -> it.raw
             is TypoTolerance.Strict -> it.raw
             is TypoTolerance.Unknown -> it.raw
         }
     }
-    allowTyposOnNumericTokens?.let { map["allowTyposOnNumericTokens"] = it }
-    disableTypoToleranceOnAttributes?.let { map["disableTypoToleranceOnAttributes"] = it.names.toJsonArrayFromString() }
+    allowTyposOnNumericTokens?.let { map[AllowTyposOnNumericTokens] = it }
+    disableTypoToleranceOnAttributes?.let { map[DisableTypoToleranceOnAttributes] = it.names.toJsonArrayFromString() }
     // Geo-Search
-    aroundLatLng?.let { map["aroundLatLng"] = it }
-    aroundLatLngViaIP?.let { map["aroundLatLngViaIP"] = it }
+    aroundLatLng?.let { map[AroundLatLng] = it }
+    aroundLatLngViaIP?.let { map[AroundLatLngViaIP] = it }
     aroundRadius?.let {
-        map["aroundRadius"] = when (it) {
+        map[AroundRadius] = when (it) {
             is AroundRadius.All -> it.raw
             is AroundRadius.InMeters -> it.int
             is AroundRadius.Unknown -> it.raw
         }
     }
-    aroundPrecision?.let { map["aroundPrecision"] = it }
-    minimumAroundRadius?.let { map["minimumAroundRadius"] = it }
-    insideBoundingBox?.let { map["insideBoundingBox"] = it.flatMap { it.floats }.toJsonArrayFromFloat() }
-    insidePolygon?.let { map["insidePolygon"] = it.flatMap { it.floats }.toJsonArrayFromFloat() }
+    aroundPrecision?.let { map[AroundPrecision] = it }
+    minimumAroundRadius?.let { map[MinimumAroundRadius] = it }
+    insideBoundingBox?.let { map[InsideBoundingBox] = it.flatMap { it.floats }.toJsonArrayFromFloat() }
+    insidePolygon?.let { map[InsidePolygon] = it.flatMap { it.floats }.toJsonArrayFromFloat() }
     // Languages
-    ignorePlurals?.let { map["ignorePlurals"] = it.toPrimitive() }
-    removeStopWords?.let { map["removeStopWords"] = it.toPrimitive() }
-    queryLanguages?.let { map["queryLanguages"] = it.map { it.raw }.toJsonArrayFromString() }
+    ignorePlurals?.let { map[IgnorePlurals] = it.toPrimitive() }
+    removeStopWords?.let { map[RemoveStopWords] = it.toPrimitive() }
+    queryLanguages?.let { map[QueryLanguages] = it.map { it.raw }.toJsonArrayFromString() }
     // Query-rules
-    enableRules?.let { map["enableRules"] = it }
-    ruleContexts?.let { map["ruleContexts"] = it.toJsonArrayFromString() }
+    enableRules?.let { map[EnableRules] = it }
+    ruleContexts?.let { map[RuleContexts] = it.toJsonArrayFromString() }
     // Query-strategy
-    queryType?.let { map["queryType"] = it.raw }
-    removeWordsIfNoResults?.let { map["removeWordsIfNoResults"] = it.raw }
-    advancedSyntax?.let { map["advancedSyntax"] = it }
-    optionalWords?.let { map["optionalWords"] = it.toJsonArrayFromString() }
-    disableExactOnAttributes?.let { map["disableExactOnAttributes"] = it.names.toJsonArrayFromString() }
-    exactOnSingleWordQuery?.let { map["exactOnSingleWordQuery"] = it.raw }
-    alternativesAsExact?.let { map["alternativesAsExact"] = it.map { it.raw }.toJsonArrayFromString() }
+    queryType?.let { map[QueryType] = it.raw }
+    removeWordsIfNoResults?.let { map[RemoveWordsIfNoResults] = it.raw }
+    advancedSyntax?.let { map[AdvancedSyntax] = it }
+    optionalWords?.let { map[OptionalWords] = it.toJsonArrayFromString() }
+    disableExactOnAttributes?.let { map[DisableExactOnAttributes] = it.names.toJsonArrayFromString() }
+    exactOnSingleWordQuery?.let { map[ExactOnSingleWordQuery] = it.raw }
+    alternativesAsExact?.let { map[AlternativesAsExact] = it.map { it.raw }.toJsonArrayFromString() }
     // Advanced
-    distinct?.let { map["distinct"] = it }
-    getRankingInfo?.let { map["getRankingInfo"] = it }
-    clickAnalytics?.let { map["clickAnalytics"] = it }
-    analytics?.let { map["analytics"] = it }
-    analyticsTags?.let { map["analyticsTags"] = it.toJsonArrayFromString() }
-    synonyms?.let { map["synonyms"] = it }
-    replaceSynonymsInHighlight?.let { map["replaceSynonymsInHighlight"] = it }
-    minProximity?.let { map["minProximity"] = it }
-    responseFields?.let { map["responseFields"] = it.map { it.raw }.toJsonArrayFromString() }
-    maxFacetHits?.let { map["maxFacetHits"] = it }
-    percentileComputation?.let { map["percentileComputation"] = it }
+    distinct?.let { map[Distinct] = it }
+    getRankingInfo?.let { map[GetRankingInfo] = it }
+    clickAnalytics?.let { map[ClickAnalytics] = it }
+    analytics?.let { map[Analytics] = it }
+    analyticsTags?.let { map[AnalyticsTags] = it.toJsonArrayFromString() }
+    synonyms?.let { map[Synonyms] = it }
+    replaceSynonymsInHighlight?.let { map[ReplaceSynonymsInHighlight] = it }
+    minProximity?.let { map[MinProximity] = it }
+    responseFields?.let { map[ResponseFields] = it.map { it.raw }.toJsonArrayFromString() }
+    maxFacetHits?.let { map[MaxFacetHits] = it }
+    percentileComputation?.let { map[PercentileComputation] = it }
     return map
 }

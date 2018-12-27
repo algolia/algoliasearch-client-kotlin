@@ -11,24 +11,24 @@ import kotlinx.serialization.json.content
 internal fun JsonElement.toAttributes() = jsonArray.content.map { it.primitive.content.toAttribute() }
 
 internal fun String.toRanking(): Ranking {
-    val asc = Regex("$asc\\((.*)\\)")
-    val desc = Regex("$desc\\((.*)\\)")
+    val asc = Regex("$Asc\\((.*)\\)")
+    val desc = Regex("$Desc\\((.*)\\)")
     val findAsc = asc.find(this)
     val findDesc = desc.find(this)
 
     return when {
-        findAsc != null -> Ranking.Asc(findAsc.groupValues[1].toAttribute())
-        findDesc != null -> Ranking.Desc(findDesc.groupValues[1].toAttribute())
+        findAsc != null -> client.data.Ranking.Asc(findAsc.groupValues[1].toAttribute())
+        findDesc != null -> client.data.Ranking.Desc(findDesc.groupValues[1].toAttribute())
         else -> when (this) {
-            typo -> Ranking.Typo
-            geo -> Ranking.Geo
-            words -> Ranking.Words
-            filters -> Ranking.Filters
-            proximity -> Ranking.Proximity
-            attribute -> Ranking.Attribute
-            exact -> Ranking.Exact
-            custom -> Ranking.Custom
-            else -> Ranking.Unknown(this)
+            Typo -> client.data.Ranking.Typo
+            Geo -> client.data.Ranking.Geo
+            Words -> client.data.Ranking.Words
+            Filters -> client.data.Ranking.Filters
+            Proximity -> client.data.Ranking.Proximity
+            Attribute -> client.data.Ranking.Attribute
+            Exact -> client.data.Ranking.Exact
+            Custom -> client.data.Ranking.Custom
+            else -> client.data.Ranking.Unknown(this)
         }
     }
 }
@@ -40,15 +40,15 @@ internal fun JsonElement.toRankings() = jsonArray.content.map {
 internal fun JsonElement.toCustomRankings() = jsonArray.content.map { it.primitive.content.toCustomRanking() }
 
 internal fun String.toCustomRanking(): CustomRanking {
-    val asc = Regex("$asc\\((.*)\\)")
-    val desc = Regex("$desc\\((.*)\\)")
+    val asc = Regex("$Asc\\((.*)\\)")
+    val desc = Regex("$Desc\\((.*)\\)")
     val findAsc = asc.find(this)
     val findDesc = desc.find(this)
 
     return when {
-        findAsc != null -> CustomRanking.Asc(findAsc.groupValues[1].toAttribute())
-        findDesc != null -> CustomRanking.Desc(findDesc.groupValues[1].toAttribute())
-        else -> CustomRanking.Unknown(this)
+        findAsc != null -> client.data.CustomRanking.Asc(findAsc.groupValues[1].toAttribute())
+        findDesc != null -> client.data.CustomRanking.Desc(findDesc.groupValues[1].toAttribute())
+        else -> client.data.CustomRanking.Unknown(this)
     }
 }
 
