@@ -18,7 +18,7 @@ data class Settings(
     var facetingAfterDistinct: Boolean? = null,
     var sortFacetValuesBy: SortFacetValuesBy? = null,
     var attributesToHighlight: List<Attribute>? = null,
-    var attributesToSnippet: List<String>? = null,
+    var attributesToSnippet: List<Snippet>? = null,
     var highlightPreTag: String? = null,
     var highlightPostTag: String? = null,
     var snippetEllipsisText: String? = null,

@@ -44,6 +44,9 @@ internal fun String.toSettings(): Settings {
             CamelCaseAttributes -> settings.camelCaseAttributes = element.notNull { toAttributes() }
             DisablePrefixOnAttributes -> settings.disablePrefixOnAttributes = element.notNull { toAttributes() }
             DisableExactOnAttributes -> settings.disableExactOnAttributes = element.notNull { toAttributes() }
+            AttributesToSnippet -> settings.attributesToSnippet = element.notNull { toSnippets() }
+            TypoTolerance -> settings.typoTolerance = element.notNull { toTypoTolerance() }
+            IgnorePlurals -> settings.ignorePlurals = element.notNull { toBooleanOrQueryLanguages() }
         }
     }
     return settings

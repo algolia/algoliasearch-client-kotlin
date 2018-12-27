@@ -1,9 +1,13 @@
 package serialize
 
 import attributeA
+import attributeAll
 import attributeB
 import attributes
 import boolean
+import client.data.BooleanOrQueryLanguages
+import client.data.QueryLanguage
+import client.data.Snippet
 import client.response.Settings
 import client.serialize.*
 import indexA
@@ -247,6 +251,78 @@ class TestDeserializeSettings {
     @Test
     fun disableExactOnAttributes() {
         testAttributes(DisableExactOnAttributes, Settings(disableExactOnAttributes = attributes))
+    }
+
+    @Test
+    fun attributesToSnippet() {
+        val string = json {
+            AttributesToSnippet to jsonArray {
+                +attributeA.name
+                +"*"
+                +"*:20"
+                +"${attributeB.name}:10"
+            }
+        }.toString()
+
+        assertEquals(
+            Settings(
+                attributesToSnippet = listOf(
+                    Snippet(attributeA),
+                    Snippet(attributeAll),
+                    Snippet(attributeAll, 20),
+                    Snippet(attributeB, 10)
+                )
+            ),
+            string.toSettings()
+        )
+    }
+
+    @Test
+    fun typoTolerance() {
+        val typoToleranceBoolean = json { TypoTolerance to boolean }.toString()
+        val typoToleranceStrict = json { TypoTolerance to Strict }.toString()
+        val typoToleranceMin = json { TypoTolerance to Min }.toString()
+        val typoToleranceUnknown = json { TypoTolerance to unknown }.toString()
+        val typoToleranceNull = json { TypoTolerance to JsonNull }.toString()
+
+        assertEquals(
+            Settings(typoTolerance = client.data.TypoTolerance.Boolean(boolean)),
+            typoToleranceBoolean.toSettings()
+        )
+        assertEquals(Settings(typoTolerance = client.data.TypoTolerance.Strict), typoToleranceStrict.toSettings())
+        assertEquals(Settings(typoTolerance = client.data.TypoTolerance.Min), typoToleranceMin.toSettings())
+        assertEquals(
+            Settings(typoTolerance = client.data.TypoTolerance.Unknown(unknown)),
+            typoToleranceUnknown.toSettings()
+        )
+        assertEquals(Settings(), typoToleranceNull.toSettings())
+    }
+
+    @Test
+    fun ignorePlurals() {
+        val ignorePluralsBoolean = json { IgnorePlurals to boolean }.toString()
+        val ignorePluralsLanguages = json {
+            IgnorePlurals to jsonArray {
+                +Afrikaans
+                +Albanian
+            }
+        }.toString()
+
+        assertEquals(
+            Settings(ignorePlurals = BooleanOrQueryLanguages.Boolean(boolean)),
+            ignorePluralsBoolean.toSettings()
+        )
+        assertEquals(
+            Settings(
+                ignorePlurals = BooleanOrQueryLanguages.QueryLanguages(
+                    listOf(
+                        QueryLanguage.Afrikaans,
+                        QueryLanguage.Albanian
+                    )
+                )
+            ),
+            ignorePluralsLanguages.toSettings()
+        )
     }
 
     private fun testInt(key: String, settings: Settings) {

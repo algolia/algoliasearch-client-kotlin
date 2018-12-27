@@ -96,5 +96,7 @@ class TestKeys {
         assertEquals(Custom, "custom")
         assertEquals(Asc, "asc")
         assertEquals(Desc, "desc")
+        assertEquals(Strict, "strict")
+        assertEquals(Min, "min")
     }
 }
