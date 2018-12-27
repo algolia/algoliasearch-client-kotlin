@@ -15,7 +15,7 @@ fun queryBuilder(init: Query.() -> Unit) = Query().apply(init)
 fun Query.setAttributesToRetrieve(vararg attributes: Attribute, excludeAttributes: Boolean = false) {
     attributesToRetrieve = if (excludeAttributes) {
         if (attributes.isNotEmpty()) {
-            attributes.map { Attribute("-${it.name}") }.plus(all)
+            attributes.map { Attribute("-$it") }.plus(all)
         } else listOf()
     } else attributes.toList()
 }

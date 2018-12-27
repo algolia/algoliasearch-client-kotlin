@@ -12,18 +12,6 @@ import kotlin.test.assertEquals
 class TestQuery {
 
     @Test
-    fun alternativesAsExact() {
-        assertEquals("ignorePlurals", AlternativesAsExact.IgnorePlurals.raw)
-        assertEquals("singleWordSynonym", AlternativesAsExact.SingleWordSynonym.raw)
-        assertEquals("multiWordsSynonym", AlternativesAsExact.MultiWordsSynonym.raw)
-    }
-
-    @Test
-    fun aroundRadius() {
-        assertEquals("all", AroundRadius.All.raw)
-    }
-
-    @Test
     fun booleanOperator() {
         assertEquals("<", NumericOperator.Lesser.raw)
         assertEquals("<=", NumericOperator.LesserOrEqual.raw)
@@ -38,66 +26,6 @@ class TestQuery {
         assertEquals("attribute", ExactOnSingleWordQuery.Attribute.raw)
         assertEquals("word", ExactOnSingleWordQuery.Word.raw)
         assertEquals("none", ExactOnSingleWordQuery.None.raw)
-    }
-
-    @Test
-    fun queryLanguage() {
-        assertEquals("af", QueryLanguage.Afrikaans.raw)
-        assertEquals("ar", QueryLanguage.Arabic.raw)
-        assertEquals("az", QueryLanguage.Azeri.raw)
-        assertEquals("bg", QueryLanguage.Bulgarian.raw)
-        assertEquals("bn", QueryLanguage.Brunei.raw)
-        assertEquals("ca", QueryLanguage.Catalan.raw)
-        assertEquals("cs", QueryLanguage.Czech.raw)
-        assertEquals("cy", QueryLanguage.Welsh.raw)
-        assertEquals("da", QueryLanguage.Danish.raw)
-        assertEquals("de", QueryLanguage.German.raw)
-        assertEquals("en", QueryLanguage.English.raw)
-        assertEquals("eo", QueryLanguage.Esperanto.raw)
-        assertEquals("es", QueryLanguage.Spanish.raw)
-        assertEquals("et", QueryLanguage.Estonian.raw)
-        assertEquals("eu", QueryLanguage.Basque.raw)
-        assertEquals("fi", QueryLanguage.Finnish.raw)
-        assertEquals("fo", QueryLanguage.Faroese.raw)
-        assertEquals("fr", QueryLanguage.French.raw)
-        assertEquals("gl", QueryLanguage.Galician.raw)
-        assertEquals("he", QueryLanguage.Hebrew.raw)
-        assertEquals("hi", QueryLanguage.Hindi.raw)
-        assertEquals("hu", QueryLanguage.Hungarian.raw)
-        assertEquals("hy", QueryLanguage.Armenian.raw)
-        assertEquals("id", QueryLanguage.Indonesian.raw)
-        assertEquals("is", QueryLanguage.Icelandic.raw)
-        assertEquals("it", QueryLanguage.Italian.raw)
-        assertEquals("ja", QueryLanguage.Japanese.raw)
-        assertEquals("ka", QueryLanguage.Georgian.raw)
-        assertEquals("kk", QueryLanguage.Kazakh.raw)
-        assertEquals("ko", QueryLanguage.Korean.raw)
-        assertEquals("ky", QueryLanguage.Kyrgyz.raw)
-        assertEquals("lt", QueryLanguage.Lithuanian.raw)
-        assertEquals("mi", QueryLanguage.Maori.raw)
-        assertEquals("mn", QueryLanguage.Mongolian.raw)
-        assertEquals("mr", QueryLanguage.Marathi.raw)
-        assertEquals("ms", QueryLanguage.Malay.raw)
-        assertEquals("mt", QueryLanguage.Maltese.raw)
-        assertEquals("nb", QueryLanguage.Norwegian.raw)
-        assertEquals("nl", QueryLanguage.Dutch.raw)
-        assertEquals("ns", QueryLanguage.NorthernSotho.raw)
-        assertEquals("pl", QueryLanguage.Polish.raw)
-        assertEquals("ps", QueryLanguage.Pashto.raw)
-        assertEquals("pt", QueryLanguage.Portuguese.raw)
-        assertEquals("qu", QueryLanguage.Quechua.raw)
-        assertEquals("ro", QueryLanguage.Romanian.raw)
-        assertEquals("ru", QueryLanguage.Russian.raw)
-        assertEquals("sk", QueryLanguage.Slovak.raw)
-        assertEquals("sq", QueryLanguage.Albanian.raw)
-        assertEquals("sv", QueryLanguage.Swedish.raw)
-        assertEquals("sw", QueryLanguage.Swahili.raw)
-        assertEquals("ta", QueryLanguage.Tamil.raw)
-        assertEquals("te", QueryLanguage.Telugu.raw)
-        assertEquals("tl", QueryLanguage.Tagalog.raw)
-        assertEquals("tn", QueryLanguage.Tswana.raw)
-        assertEquals("tr", QueryLanguage.Turkish.raw)
-        assertEquals("tt", QueryLanguage.Tatar.raw)
     }
 
     @Test

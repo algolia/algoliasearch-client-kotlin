@@ -64,8 +64,8 @@ class TestDeserializeSettings {
                 +KeyAttribute
                 +KeyExact
                 +KeyCustom
-                +"$KeyAsc(${attributeA.name})"
-                +"$KeyDesc(${attributeB.name})"
+                +"$KeyAsc($attributeA)"
+                +"$KeyDesc($attributeB)"
                 +unknown
             }
         }.toString()
@@ -94,8 +94,8 @@ class TestDeserializeSettings {
     fun customRanking() {
         val string = json {
             KeyCustomRanking to jsonArray {
-                +"$KeyAsc(${attributeA.name})"
-                +"$KeyDesc(${attributeB.name})"
+                +"$KeyAsc($attributeA)"
+                +"$KeyDesc($attributeB)"
                 +unknown
             }
         }.toString()
@@ -260,7 +260,7 @@ class TestDeserializeSettings {
                 +attributeA.name
                 +"*"
                 +"*:20"
-                +"${attributeB.name}:10"
+                +"$attributeB:10"
             }
         }.toString()
 
@@ -303,8 +303,8 @@ class TestDeserializeSettings {
         val ignorePluralsBoolean = json { KeyIgnorePlurals to boolean }.toString()
         val ignorePluralsLanguages = json {
             KeyIgnorePlurals to jsonArray {
-                +Afrikaans
-                +Albanian
+                +KeyAfrikaans
+                +KeyAlbanian
             }
         }.toString()
 

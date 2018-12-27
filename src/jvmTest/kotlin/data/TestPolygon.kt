@@ -1,8 +1,7 @@
 package data
 
-import client.data.Point
 import client.data.Polygon
-import client.data.to
+import client.to
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -47,14 +46,5 @@ class TestPolygon {
     @Test
     fun equality() {
         assertEquals(Polygon(1f to 2f, 3f to 4f, 5f to 6f, 7f to 8f), polygon)
-    }
-
-
-    @Test
-    fun point() {
-        val point = 1f to 2f
-
-        assertEquals(listOf(1f, 2f), point.floats)
-        assertEquals(Point(1f, 2f), point)
     }
 }

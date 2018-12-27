@@ -8,7 +8,3 @@ data class Point(
 
     internal val floats = listOf(latitude, longitude)
 }
-
-infix fun Float.to(longitude: Float): Point {
-    return Point(this, longitude)
-}

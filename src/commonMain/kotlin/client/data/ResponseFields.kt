@@ -1,26 +1,28 @@
 package client.data
 
+import client.serialize.*
+
 
 sealed class ResponseFields(open val raw: String) {
-    object All : ResponseFields("*")
-    object AroundLatLng : ResponseFields("aroundLatLng")
-    object AutomaticRadius : ResponseFields("automaticRadius")
-    object ExhaustiveFacetsCount : ResponseFields("exhaustiveFacetsCount")
-    object Facets : ResponseFields("facets")
-    object FacetsStats : ResponseFields("facets_stats")
-    object Hits : ResponseFields("hits")
-    object HitsPerPage : ResponseFields("hitsPerPage")
-    object Index : ResponseFields("index")
-    object Length : ResponseFields("length")
-    object NbHits : ResponseFields("nbHits")
-    object NbPages : ResponseFields("nbPages")
-    object Offset : ResponseFields("offset")
-    object Page : ResponseFields("page")
-    object Params : ResponseFields("params")
-    object ProcessingTimeMS : ResponseFields("processingTimeMS")
-    object Query : ResponseFields("query")
-    object QueryAfterRemoval : ResponseFields("queryAfterRemoval")
-    object UserData : ResponseFields("userData")
+    object All : ResponseFields(KeyStar)
+    object AroundLatLng : ResponseFields(KeyAroundLatLng)
+    object AutomaticRadius : ResponseFields(KeyAutomaticRadius)
+    object ExhaustiveFacetsCount : ResponseFields(KeyExhaustiveFacetsCount)
+    object Facets : ResponseFields(KeyFacets)
+    object FacetsStats : ResponseFields(KeyFacetsStats)
+    object Hits : ResponseFields(KeyHits)
+    object HitsPerPage : ResponseFields(KeyHitsPerPage)
+    object Index : ResponseFields(KeyIndex)
+    object Length : ResponseFields(KeyLength)
+    object NbHits : ResponseFields(KeyNbHits)
+    object NbPages : ResponseFields(KeyNbPages)
+    object Offset : ResponseFields(KeyOffset)
+    object Page : ResponseFields(KeyPage)
+    object Params : ResponseFields(KeyParams)
+    object ProcessingTimeMS : ResponseFields(KeyProcessingTimeMS)
+    object Query : ResponseFields(KeyQuery)
+    object QueryAfterRemoval : ResponseFields(KeyQueryAfterRemoval)
+    object UserData : ResponseFields(KeyUserData)
 
     data class Unknown(override val raw: String) : ResponseFields(raw)
 }

@@ -21,9 +21,9 @@ sealed class Ranking(open val raw: String) {
 
     object Custom : Ranking(KeyCustom)
 
-    data class Asc(val attribute: client.data.Attribute) : Ranking(KeyAsc)
+    data class Asc(val attribute: client.data.Attribute) : Ranking("$KeyAsc($attribute)")
 
-    data class Desc(val attribute: client.data.Attribute) : Ranking(KeyDesc)
+    data class Desc(val attribute: client.data.Attribute) : Ranking("$KeyDesc($attribute)")
 
     data class Unknown(override val raw: String) : Ranking(raw)
 }
