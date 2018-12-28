@@ -9,7 +9,6 @@ import client.serialize.*
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
-import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
@@ -33,7 +32,7 @@ fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: Mul
             queries.forEach {
                 +json {
                     KeyIndexName to it.index.name
-                    KeyParams to (Query.serialize(it.query) as JsonObject).urlEncode()
+                    KeyParams to Query.serialize(it.query).urlEncode()
                 }
             }
         }

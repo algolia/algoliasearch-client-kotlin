@@ -21,7 +21,7 @@ sealed class TypoTolerance(override val raw: String) : Raw {
 
     internal companion object : Serializer<TypoTolerance>, Deserializer<TypoTolerance> {
 
-        override fun serialize(input: TypoTolerance): JsonElement {
+        override fun serialize(input: TypoTolerance): JsonPrimitive {
             return when (input) {
                 is Boolean -> JsonPrimitive(input.boolean)
                 else -> JsonPrimitive(input.raw)

@@ -142,7 +142,7 @@ class Client(
                 }
 
                 body = if (query != null) {
-                    val serialize = Query.serialize(query) as JsonObject
+                    val serialize = Query.serialize(query)
                     val map = serialize.toMutableMap()
 
                     map.putAll(extraParams)

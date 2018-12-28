@@ -5,7 +5,7 @@ import client.query.helper.FilterBuilder
 import client.query.helper.OptionalFilterBuilder
 import client.query.helper.QueryHelper
 import client.serialize.*
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 
 @QueryHelper
@@ -443,7 +443,7 @@ class Query(
 
     internal companion object : Serializer<Query> {
 
-        override fun serialize(input: Query): JsonElement {
+        override fun serialize(input: Query): JsonObject {
             return input.run {
                 json {
                     // Query

@@ -14,7 +14,7 @@ data class DecompoundedAttributes internal constructor(val language: QueryLangua
 
     internal companion object : Serializer<DecompoundedAttributes>, Deserializer<DecompoundedAttributes> {
 
-        override fun serialize(input: DecompoundedAttributes): JsonElement {
+        override fun serialize(input: DecompoundedAttributes): JsonObject {
             return json {
                 input.language.raw to jsonArray {
                     input.attributes.forEach { +it.raw }

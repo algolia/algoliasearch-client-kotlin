@@ -22,7 +22,7 @@ sealed class AroundRadius(override val raw: String) : Raw {
 
     internal companion object : Serializer<AroundRadius>, Deserializer<AroundRadius> {
 
-        override fun serialize(input: AroundRadius): JsonElement {
+        override fun serialize(input: AroundRadius): JsonPrimitive {
             return when (input) {
                 is InMeters -> JsonPrimitive(input.int)
                 else -> JsonPrimitive(input.raw)
