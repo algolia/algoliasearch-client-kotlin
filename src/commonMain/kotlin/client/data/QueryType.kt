@@ -29,6 +29,10 @@ sealed class QueryType(open val raw: String) {
 
     data class Unknown(override val raw: String) : QueryType(raw)
 
+    override fun toString(): String {
+        return raw
+    }
+
     internal companion object : Serializer<QueryType> {
 
         override fun serialize(input: QueryType?): JsonElement {

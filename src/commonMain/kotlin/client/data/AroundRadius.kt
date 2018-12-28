@@ -14,6 +14,10 @@ sealed class AroundRadius(open val raw: String) {
 
     data class Unknown(override val raw: String) : AroundRadius(raw)
 
+    override fun toString(): String {
+        return raw
+    }
+
     internal companion object : Serializer<AroundRadius> {
 
         override fun serialize(input: AroundRadius?): JsonElement {

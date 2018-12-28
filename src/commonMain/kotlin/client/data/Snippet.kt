@@ -17,6 +17,10 @@ data class Snippet(
 
     val raw = attribute.name + if (count != null) ":$count" else ""
 
+    override fun toString(): String {
+        return raw
+    }
+
     internal companion object : Serializer<Snippet> {
 
         override fun serialize(input: Snippet?): JsonElement {

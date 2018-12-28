@@ -35,6 +35,10 @@ sealed class RemoveWordIfNoResults(open val raw: String) {
 
     data class Unknown(override val raw: String) : RemoveWordIfNoResults(raw)
 
+    override fun toString(): String {
+        return raw
+    }
+
     internal companion object : Serializer<RemoveWordIfNoResults> {
 
         override fun serialize(input: RemoveWordIfNoResults?): JsonElement {

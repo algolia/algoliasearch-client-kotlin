@@ -15,6 +15,10 @@ sealed class CustomRanking(open val raw: String) {
 
     data class Unknown(override val raw: String) : CustomRanking(raw)
 
+    override fun toString(): String {
+        return raw
+    }
+
     internal companion object : Serializer<CustomRanking> {
 
         override fun serialize(input: CustomRanking?): JsonElement {

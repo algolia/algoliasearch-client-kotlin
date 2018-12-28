@@ -30,6 +30,9 @@ sealed class ExactOnSingleWordQuery(open val raw: String) {
 
     data class Unknown(override val raw: String) : ExactOnSingleWordQuery(raw)
 
+    override fun toString(): String {
+        return raw
+    }
 
     internal companion object : Serializer<ExactOnSingleWordQuery> {
 

@@ -17,6 +17,10 @@ sealed class TypoTolerance(open val raw: String) {
 
     data class Unknown(override val raw: String) : TypoTolerance(raw)
 
+    override fun toString(): String {
+        return raw
+    }
+
     internal companion object : Serializer<TypoTolerance> {
 
         override fun serialize(input: TypoTolerance?): JsonElement {

@@ -30,6 +30,10 @@ sealed class ResponseFields(open val raw: String) {
 
     data class Unknown(override val raw: String) : ResponseFields(raw)
 
+    override fun toString(): String {
+        return raw
+    }
+
     internal companion object : Serializer<ResponseFields> {
 
         override fun serialize(input: ResponseFields?): JsonElement {

@@ -14,6 +14,10 @@ data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boole
 
     val raw = if (equalOnly) "$KeyEqualOnly($attribute)" else attribute.name
 
+    override fun toString(): String {
+        return raw
+    }
+
     internal companion object : Serializer<NumericAttributeFilter> {
 
         override fun serialize(input: NumericAttributeFilter?): JsonElement {

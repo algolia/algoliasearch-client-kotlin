@@ -30,11 +30,11 @@ class TestRetryLogic {
 
     @Test
     fun hosts() {
-        assertEquals("https://${applicationId.string}-dsn.algolia.net", hosts.first())
+        assertEquals("https://$applicationId-dsn.algolia.net", hosts.first())
         assertTrue {
-            hosts.contains("https://${applicationId.string}-1.algolianet.com")
-            hosts.contains("https://${applicationId.string}-2.algolianet.com")
-            hosts.contains("https://${applicationId.string}-3.algolianet.com")
+            hosts.contains("https://$applicationId-1.algolianet.com")
+            hosts.contains("https://$applicationId-2.algolianet.com")
+            hosts.contains("https://$applicationId-3.algolianet.com")
         }
         assertEquals(4, hosts.size)
     }

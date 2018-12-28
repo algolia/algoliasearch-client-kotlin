@@ -17,6 +17,10 @@ sealed class MultipleQueriesStrategy(open val raw: String) {
 
     data class Unknown(override val raw: String) : MultipleQueriesStrategy(raw)
 
+    override fun toString(): String {
+        return raw
+    }
+
     internal companion object : Serializer<MultipleQueriesStrategy> {
 
         override fun serialize(input: MultipleQueriesStrategy?): JsonElement {

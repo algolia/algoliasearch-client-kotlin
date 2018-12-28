@@ -25,6 +25,10 @@ sealed class SortFacetValuesBy(open val raw: String) {
 
     data class Unknown(override val raw: String) : SortFacetValuesBy(raw)
 
+    override fun toString(): String {
+        return raw
+    }
+
     internal companion object : Serializer<SortFacetValuesBy> {
 
         override fun serialize(input: SortFacetValuesBy?): JsonElement {

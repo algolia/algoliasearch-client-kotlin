@@ -19,17 +19,17 @@ class TestHosts {
 
     @Test
     fun default() {
-        assertEquals("https://${applicationId.string}-dsn.algolia.net", applicationId.readHost)
-        assertEquals("https://${applicationId.string}.algolia.net", applicationId.writeHost)
+        assertEquals("https://$applicationId-dsn.algolia.net", applicationId.readHost)
+        assertEquals("https://$applicationId.algolia.net", applicationId.writeHost)
     }
 
     @Test
     fun computeHosts() {
         val hosts = applicationId.computeHosts()
 
-        assertTrue { hosts.contains("https://${applicationId.string}-1.$host") }
-        assertTrue { hosts.contains("https://${applicationId.string}-2.$host") }
-        assertTrue { hosts.contains("https://${applicationId.string}-3.$host") }
+        assertTrue { hosts.contains("https://$applicationId-1.$host") }
+        assertTrue { hosts.contains("https://$applicationId-2.$host") }
+        assertTrue { hosts.contains("https://$applicationId-3.$host") }
         assertEquals(3, hosts.size)
     }
 
@@ -39,7 +39,7 @@ class TestHosts {
             val hosts = applicationId.computeHosts()
             val randomized = hosts.randomize()
 
-            randomized[0] == "${applicationId.string}-1.$host"
+            randomized[0] == "$applicationId-1.$host"
         }
         assertFalse { result.all { it } }
     }
