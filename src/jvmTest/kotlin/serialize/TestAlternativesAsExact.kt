@@ -10,7 +10,7 @@ import tmp.TestSerializer
 import unknown
 
 @RunWith(JUnit4::class)
-internal class TestAlternativesAsExact: TestSerializer<AlternativesAsExact>(AlternativesAsExact) {
+internal class TestAlternativesAsExact : TestSerializer<AlternativesAsExact>(AlternativesAsExact) {
 
     override val item = listOf(
         IgnorePlurals to JsonPrimitive(IgnorePlurals.raw),
