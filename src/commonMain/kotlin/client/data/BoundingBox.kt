@@ -15,14 +15,14 @@ data class BoundingBox(
     val point4: Float
 ) {
 
-    internal val floats = listOf(point1, point2, point3, point4)
+    val asList = listOf(point1, point2, point3, point4)
 
     internal companion object : Serializer<BoundingBox>, Deserializer<BoundingBox> {
 
         override fun serialize(input: BoundingBox?): JsonElement {
             return input.unwrap {
                 jsonArray {
-                    floats.forEach {
+                    asList.forEach {
                         +(it as Number)
                     }
                 }

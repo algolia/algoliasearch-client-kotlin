@@ -31,11 +31,11 @@ data class Polygon(
         }
     }
 
-    internal val floats = listOf(
-        *point1.floats.toTypedArray(),
-        *point2.floats.toTypedArray(),
-        *point3.floats.toTypedArray(),
-        *points.flatMap { it.floats }.toTypedArray()
+    val asList = listOf(
+        *point1.asList.toTypedArray(),
+        *point2.asList.toTypedArray(),
+        *point3.asList.toTypedArray(),
+        *points.flatMap { it.asList }.toTypedArray()
     )
 
     internal companion object : Serializer<Polygon>, Deserializer<Polygon> {
@@ -43,7 +43,7 @@ data class Polygon(
         override fun serialize(input: Polygon?): JsonElement {
             return input.unwrap {
                 jsonArray {
-                    floats.forEach {
+                    asList.forEach {
                         +(it as Number)
                     }
                 }

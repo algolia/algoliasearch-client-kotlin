@@ -13,14 +13,14 @@ data class Point(
     val longitude: Float
 ) {
 
-    internal val floats = listOf(latitude, longitude)
+    val asList = listOf(latitude, longitude)
 
     internal companion object : Serializer<Point>, Deserializer<Point> {
 
         override fun serialize(input: Point?): JsonElement {
             return input.unwrap {
                 jsonArray {
-                    floats.forEach {
+                    asList.forEach {
                         +(it as Number)
                     }
                 }
