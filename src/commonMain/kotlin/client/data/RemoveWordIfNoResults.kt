@@ -1,9 +1,9 @@
 package client.data
 
-import client.serialize.KeyAllOptional
-import client.serialize.KeyFirstWords
-import client.serialize.KeyLastWords
-import client.serialize.KeyNone
+import client.serialize.*
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.contentOrNull
 
 
 sealed class RemoveWordIfNoResults(open val raw: String) {
@@ -34,4 +34,22 @@ sealed class RemoveWordIfNoResults(open val raw: String) {
     object AllOptional : RemoveWordIfNoResults(KeyAllOptional)
 
     data class Unknown(override val raw: String) : RemoveWordIfNoResults(raw)
+
+    internal companion object : Serializer<RemoveWordIfNoResults> {
+
+        override fun serialize(input: RemoveWordIfNoResults?): JsonElement {
+            return input.unwrap { JsonPrimitive(raw) }
+        }
+
+        override fun deserialize(element: JsonElement): RemoveWordIfNoResults? {
+            return when (val content = element.contentOrNull) {
+                KeyNone -> None
+                KeyLastWords -> LastWords
+                KeyFirstWords -> FirstWords
+                KeyAllOptional -> AllOptional
+                null -> null
+                else -> Unknown(content)
+            }
+        }
+    }
 }
