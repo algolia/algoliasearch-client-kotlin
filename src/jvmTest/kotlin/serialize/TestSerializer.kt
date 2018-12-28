@@ -1,4 +1,4 @@
-package tmp
+package serialize
 
 import client.serialize.Deserializer
 import client.serialize.Serializer
