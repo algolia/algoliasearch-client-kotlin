@@ -1,9 +1,6 @@
 package client.data
 
-import client.serialize.KeyAsc
-import client.serialize.KeyDesc
-import client.serialize.Serializer
-import client.serialize.unwrap
+import client.serialize.*
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
@@ -28,15 +25,13 @@ sealed class CustomRanking(open val raw: String) {
             return when (val content = element.contentOrNull) {
                 null -> null
                 else -> {
-                    val asc = Regex("$KeyAsc\\((.*)\\)")
-                    val desc = Regex("$KeyDesc\\((.*)\\)")
-                    val findAsc = asc.find(content)
-                    val findDesc = desc.find(content)
+                    val findAsc = regexAsc.find(content)
+                    val findDesc = regexDesc.find(content)
 
                     when {
-                        findAsc != null -> client.data.CustomRanking.Asc(findAsc.groupValues[1].toAttribute())
-                        findDesc != null -> client.data.CustomRanking.Desc(findDesc.groupValues[1].toAttribute())
-                        else -> client.data.CustomRanking.Unknown(content)
+                        findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
+                        findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
+                        else -> Unknown(content)
                     }
                 }
             }

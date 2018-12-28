@@ -2,6 +2,7 @@ package client.data
 
 import client.serialize.KeyEqualOnly
 import client.serialize.Serializer
+import client.serialize.regexEqualOnly
 import client.serialize.unwrap
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
@@ -23,8 +24,7 @@ data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boole
             return when (val content = element.contentOrNull) {
                 null -> null
                 else -> {
-                    val regex = Regex("$KeyEqualOnly\\((.*)\\)")
-                    val findEqualOnly = regex.find(content)
+                    val findEqualOnly = regexEqualOnly.find(content)
 
                     when {
                         findEqualOnly != null -> NumericAttributeFilter(
