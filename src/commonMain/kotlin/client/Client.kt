@@ -3,15 +3,17 @@ package client
 import client.data.ApiKey
 import client.data.ApplicationId
 import client.data.Index
+import client.data.MultipleQueriesStrategy
 import client.host.RetryLogic
 import client.query.IndexQuery
-import client.data.MultipleQueriesStrategy
 import client.query.Query
 import client.response.FacetHits
 import client.response.Hits
 import client.response.ListIndexes
 import client.response.MultipleHits
-import client.serialize.toMap
+import client.serialize.KeyFacetQuery
+import client.serialize.KeyMaxFacetHits
+import client.serialize.QuerySerializer
 import io.ktor.client.HttpClient
 import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature
@@ -23,6 +25,8 @@ import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.json
 
 
 class Client(
@@ -77,7 +81,7 @@ class Client(
         return read.retry(requestOptions.computedReadTimeout, index.pathIndexes("/query")) { path ->
             httpClient.post<Hits>(path) {
                 setRequestOptions(requestOptions)
-                setQuery(query)
+                setBody(query)
             }
         }
     }
@@ -86,7 +90,7 @@ class Client(
         return read.retry(requestOptions.computedReadTimeout, index.pathIndexes("/browse")) { path ->
             httpClient.post<Hits>(path) {
                 setRequestOptions(requestOptions)
-                setQuery(query)
+                setBody(query)
             }
         }
     }
@@ -133,11 +137,20 @@ class Client(
         ) { path ->
             httpClient.post<FacetHits>(path) {
                 setRequestOptions(requestOptions)
-                val map = query?.toMap() ?: mutableMapOf()
+                val serialize = QuerySerializer.serialize(query)
 
-                maxFacetHits?.let { map["maxFacetHits"] = it }
-                facetQuery?.let { map["facetQuery"] = it }
-                setBody(map)
+                val body = if (serialize is JsonObject) {
+                    val map = serialize.toMutableMap()
+                    maxFacetHits?.let { map[KeyMaxFacetHits] to it }
+                    facetQuery?.let { map[KeyFacetQuery] to it }
+                    JsonObject(map)
+                } else {
+                    json {
+                        maxFacetHits?.let { KeyMaxFacetHits to it }
+                        facetQuery?.let { KeyFacetQuery to it }
+                    }
+                }
+                setBody(body)
             }
         }
     }
