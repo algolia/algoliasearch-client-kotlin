@@ -2,6 +2,9 @@ package client.data
 
 import client.serialize.KeyMin
 import client.serialize.KeyStrict
+import client.serialize.Serializer
+import client.serialize.unwrap
+import kotlinx.serialization.json.*
 
 
 sealed class TypoTolerance(open val raw: String) {
@@ -13,4 +16,30 @@ sealed class TypoTolerance(open val raw: String) {
     object Strict : TypoTolerance(KeyStrict)
 
     data class Unknown(override val raw: String) : TypoTolerance(raw)
+
+    internal companion object : Serializer<TypoTolerance> {
+
+        override fun serialize(input: TypoTolerance?): JsonElement {
+            return input.unwrap {
+                when (this) {
+                    is Boolean -> JsonPrimitive(boolean)
+                    else -> JsonPrimitive(raw)
+                }
+            }
+        }
+
+        override fun deserialize(element: JsonElement): TypoTolerance? {
+            return when {
+                element.booleanOrNull != null -> Boolean(element.boolean)
+                else -> {
+                    when (val content = element.contentOrNull) {
+                        KeyMin -> Min
+                        KeyStrict -> Strict
+                        null -> null
+                        else -> Unknown(content)
+                    }
+                }
+            }
+        }
+    }
 }
