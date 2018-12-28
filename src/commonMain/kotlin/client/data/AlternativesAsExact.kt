@@ -2,7 +2,7 @@ package client.data
 
 import client.serialize.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.JsonPrimitive
 
 
 sealed class AlternativesAsExact(override val raw: String) : Raw {
@@ -31,12 +31,15 @@ sealed class AlternativesAsExact(override val raw: String) : Raw {
     internal companion object : RawSerializer<AlternativesAsExact>, Deserializer<AlternativesAsExact> {
 
         override fun deserialize(element: JsonElement): AlternativesAsExact? {
-            return when (val content = element.contentOrNull) {
-                KeyIgnorePlurals -> IgnorePlurals
-                KeySingleWordSynonym -> SingleWordSynonym
-                KeyMultiWordsSynonym -> MultiWordsSynonym
-                null -> null
-                else -> Unknown(content)
+            return when (element) {
+                is JsonPrimitive -> when (val content = element.contentOrNull) {
+                    KeyIgnorePlurals -> IgnorePlurals
+                    KeySingleWordSynonym -> SingleWordSynonym
+                    KeyMultiWordsSynonym -> MultiWordsSynonym
+                    null -> null
+                    else -> Unknown(content)
+                }
+                else -> null
             }
         }
     }

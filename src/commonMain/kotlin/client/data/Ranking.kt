@@ -3,7 +3,7 @@ package client.data
 import client.serialize.*
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.JsonPrimitive
 
 
 sealed class Ranking(override val raw: String) : Raw {
@@ -37,26 +37,28 @@ sealed class Ranking(override val raw: String) : Raw {
     internal companion object : RawSerializer<Ranking>, Deserializer<Ranking> {
 
         override fun deserialize(element: JsonElement): Ranking? {
-            return when (val content = element.contentOrNull) {
-                null -> null
-                else -> {
-                    val findAsc = regexAsc.find(content)
-                    val findDesc = regexDesc.find(content)
+            return when (element) {
+                is JsonPrimitive -> {
+                    element.contentOrNull?.let {
+                        val findAsc = regexAsc.find(it)
+                        val findDesc = regexDesc.find(it)
 
-                    when {
-                        findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
-                        findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
-                        content == KeyTypo -> Typo
-                        content == KeyGeo -> Geo
-                        content == KeyWords -> Words
-                        content == KeyFilters -> Filters
-                        content == KeyProximity -> Proximity
-                        content == KeyAttribute -> Attribute
-                        content == KeyExact -> Exact
-                        content == KeyCustom -> Custom
-                        else -> Unknown(content)
+                        when {
+                            findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
+                            findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
+                            it == KeyTypo -> Typo
+                            it == KeyGeo -> Geo
+                            it == KeyWords -> Words
+                            it == KeyFilters -> Filters
+                            it == KeyProximity -> Proximity
+                            it == KeyAttribute -> Attribute
+                            it == KeyExact -> Exact
+                            it == KeyCustom -> Custom
+                            else -> Unknown(it)
+                        }
                     }
                 }
+                else -> null
             }
         }
     }

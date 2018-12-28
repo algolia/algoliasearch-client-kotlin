@@ -3,7 +3,7 @@ package client.data
 import client.serialize.*
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.JsonPrimitive
 
 
 sealed class CustomRanking(override val raw: String) : Raw {
@@ -21,18 +21,20 @@ sealed class CustomRanking(override val raw: String) : Raw {
     internal companion object : RawSerializer<CustomRanking>, Deserializer<CustomRanking> {
 
         override fun deserialize(element: JsonElement): CustomRanking? {
-            return when (val content = element.contentOrNull) {
-                null -> null
-                else -> {
-                    val findAsc = regexAsc.find(content)
-                    val findDesc = regexDesc.find(content)
+            return when (element) {
+                is JsonPrimitive -> {
+                    element.contentOrNull?.let {
+                        val findAsc = regexAsc.find(it)
+                        val findDesc = regexDesc.find(it)
 
-                    when {
-                        findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
-                        findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
-                        else -> Unknown(content)
+                        when {
+                            findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
+                            findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
+                            else -> Unknown(it)
+                        }
                     }
                 }
+                else -> null
             }
         }
     }

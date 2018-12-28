@@ -28,7 +28,7 @@ data class DecompoundedAttributes internal constructor(val language: QueryLangua
                     val key = element.keys.first()
                     val attributes = element.getArrayOrNull(key)?.map { it.content.toAttribute() }
 
-                    return DecompoundedAttributes(
+                    DecompoundedAttributes(
                         QueryLanguage.deserialize(JsonPrimitive(key))!!,
                         attributes ?: listOf()
                     )

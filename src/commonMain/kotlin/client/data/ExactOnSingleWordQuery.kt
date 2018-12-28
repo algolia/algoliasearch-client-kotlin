@@ -2,7 +2,7 @@ package client.data
 
 import client.serialize.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.JsonPrimitive
 
 
 sealed class ExactOnSingleWordQuery(override val raw: String) : Raw {
@@ -36,12 +36,15 @@ sealed class ExactOnSingleWordQuery(override val raw: String) : Raw {
     internal companion object : RawSerializer<ExactOnSingleWordQuery>, Deserializer<ExactOnSingleWordQuery> {
 
         override fun deserialize(element: JsonElement): ExactOnSingleWordQuery? {
-            return when (val content = element.contentOrNull) {
-                KeyAttribute -> Attribute
-                KeyNone -> None
-                KeyWord -> Word
-                null -> null
-                else -> Unknown(content)
+            return when (element) {
+                is JsonPrimitive -> when (val content = element.contentOrNull) {
+                    KeyAttribute -> Attribute
+                    KeyNone -> None
+                    KeyWord -> Word
+                    null -> null
+                    else -> Unknown(content)
+                }
+                else -> null
             }
         }
     }

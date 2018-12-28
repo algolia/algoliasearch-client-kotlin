@@ -7,7 +7,6 @@ import client.serialize.regexEqualOnly
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.contentOrNull
 
 
 data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boolean = false) {
@@ -25,19 +24,21 @@ data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boole
         }
 
         override fun deserialize(element: JsonElement): NumericAttributeFilter? {
-            return when (val content = element.contentOrNull) {
-                null -> null
-                else -> {
-                    val findEqualOnly = regexEqualOnly.find(content)
+            return when (element) {
+                is JsonPrimitive -> {
+                    element.contentOrNull?.let {
+                        val findEqualOnly = regexEqualOnly.find(it)
 
-                    when {
-                        findEqualOnly != null -> NumericAttributeFilter(
-                            findEqualOnly.groupValues[1].toAttribute(),
-                            true
-                        )
-                        else -> NumericAttributeFilter(content.toAttribute())
+                        when {
+                            findEqualOnly != null -> NumericAttributeFilter(
+                                findEqualOnly.groupValues[1].toAttribute(),
+                                true
+                            )
+                            else -> NumericAttributeFilter(it.toAttribute())
+                        }
                     }
                 }
+                else -> null
             }
         }
     }

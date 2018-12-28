@@ -2,7 +2,7 @@ package client.data
 
 import client.serialize.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.JsonPrimitive
 
 
 sealed class ResponseFields(override val raw: String) : Raw {
@@ -36,28 +36,33 @@ sealed class ResponseFields(override val raw: String) : Raw {
     internal companion object : RawSerializer<ResponseFields>, Deserializer<ResponseFields> {
 
         override fun deserialize(element: JsonElement): ResponseFields? {
-            return when (val content = element.contentOrNull) {
-                KeyStar -> All
-                KeyAroundLatLng -> AroundLatLng
-                KeyAutomaticRadius -> AutomaticRadius
-                KeyExhaustiveFacetsCount -> ExhaustiveFacetsCount
-                KeyFacets -> Facets
-                KeyFacetsStats -> FacetsStats
-                KeyHits -> Hits
-                KeyHitsPerPage -> HitsPerPage
-                KeyIndex -> Index
-                KeyLength -> Length
-                KeyNbHits -> NbHits
-                KeyNbPages -> NbPages
-                KeyOffset -> Offset
-                KeyPage -> Page
-                KeyParams -> Params
-                KeyProcessingTimeMS -> ProcessingTimeMS
-                KeyQuery -> Query
-                KeyQueryAfterRemoval -> QueryAfterRemoval
-                KeyUserData -> UserData
-                null -> null
-                else -> Unknown(content)
+            return when (element) {
+                is JsonPrimitive -> {
+                    when (val content = element.contentOrNull) {
+                        KeyStar -> All
+                        KeyAroundLatLng -> AroundLatLng
+                        KeyAutomaticRadius -> AutomaticRadius
+                        KeyExhaustiveFacetsCount -> ExhaustiveFacetsCount
+                        KeyFacets -> Facets
+                        KeyFacetsStats -> FacetsStats
+                        KeyHits -> Hits
+                        KeyHitsPerPage -> HitsPerPage
+                        KeyIndex -> Index
+                        KeyLength -> Length
+                        KeyNbHits -> NbHits
+                        KeyNbPages -> NbPages
+                        KeyOffset -> Offset
+                        KeyPage -> Page
+                        KeyParams -> Params
+                        KeyProcessingTimeMS -> ProcessingTimeMS
+                        KeyQuery -> Query
+                        KeyQueryAfterRemoval -> QueryAfterRemoval
+                        KeyUserData -> UserData
+                        null -> null
+                        else -> Unknown(content)
+                    }
+                }
+                else -> null
             }
         }
     }

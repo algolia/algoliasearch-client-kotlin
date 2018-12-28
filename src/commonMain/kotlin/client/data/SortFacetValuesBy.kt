@@ -2,7 +2,7 @@ package client.data
 
 import client.serialize.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.JsonPrimitive
 
 
 sealed class SortFacetValuesBy(override val raw: String) : Raw {
@@ -28,11 +28,16 @@ sealed class SortFacetValuesBy(override val raw: String) : Raw {
     internal companion object : RawSerializer<SortFacetValuesBy>, Deserializer<SortFacetValuesBy> {
 
         override fun deserialize(element: JsonElement): SortFacetValuesBy? {
-            return when (val content = element.contentOrNull) {
-                KeyCount -> Count
-                KeyAlpha -> Alpha
-                null -> null
-                else -> Unknown(content)
+            return when (element) {
+                is JsonPrimitive -> {
+                    when (val content = element.contentOrNull) {
+                        KeyCount -> Count
+                        KeyAlpha -> Alpha
+                        null -> null
+                        else -> Unknown(content)
+                    }
+                }
+                else -> null
             }
         }
     }

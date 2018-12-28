@@ -4,7 +4,8 @@ import client.serialize.Deserializer
 import client.serialize.KeyAll
 import client.serialize.Raw
 import client.serialize.Serializer
-import kotlinx.serialization.json.*
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonPrimitive
 
 
 sealed class AroundRadius(override val raw: String) : Raw {
@@ -29,11 +30,16 @@ sealed class AroundRadius(override val raw: String) : Raw {
         }
 
         override fun deserialize(element: JsonElement): AroundRadius? {
-            return when {
-                element.intOrNull != null -> InMeters(element.int)
-                element.contentOrNull != null -> when (element.content) {
-                    KeyAll -> All
-                    else -> Unknown(element.content)
+            return when (element) {
+                is JsonPrimitive -> {
+                    when {
+                        element.intOrNull != null -> InMeters(element.int)
+                        element.contentOrNull != null -> when (element.content) {
+                            KeyAll -> All
+                            else -> Unknown(element.content)
+                        }
+                        else -> null
+                    }
                 }
                 else -> null
             }

@@ -6,8 +6,7 @@ import client.serialize.RawSerializer
 import client.serialize.regexSnippet
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.JsonPrimitive
 
 
 data class Snippet(
@@ -24,19 +23,21 @@ data class Snippet(
     internal companion object : RawSerializer<Snippet>, Deserializer<Snippet> {
 
         override fun deserialize(element: JsonElement): Snippet? {
-            return when (val content = element.contentOrNull) {
-                null -> null
-                else -> {
-                    val findSnippet = regexSnippet.find(content)
+            return when (element) {
+                is JsonPrimitive -> {
+                    element.contentOrNull?.let {
+                        val findSnippet = regexSnippet.find(it)
 
-                    when {
-                        findSnippet != null -> Snippet(
-                            findSnippet.groupValues[1].toAttribute(),
-                            findSnippet.groupValues[2].toInt()
-                        )
-                        else -> Snippet(element.content.toAttribute())
+                        when {
+                            findSnippet != null -> Snippet(
+                                findSnippet.groupValues[1].toAttribute(),
+                                findSnippet.groupValues[2].toInt()
+                            )
+                            else -> Snippet(it.toAttribute())
+                        }
                     }
                 }
+                else -> null
             }
         }
     }

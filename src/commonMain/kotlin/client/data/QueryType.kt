@@ -2,7 +2,7 @@ package client.data
 
 import client.serialize.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.JsonPrimitive
 
 
 sealed class QueryType(override val raw: String) : Raw {
@@ -35,12 +35,15 @@ sealed class QueryType(override val raw: String) : Raw {
     internal companion object : RawSerializer<QueryType>, Deserializer<QueryType> {
 
         override fun deserialize(element: JsonElement): QueryType? {
-            return when (val content = element.contentOrNull) {
-                KeyPrefixLast -> PrefixLast
-                KeyPrefixAll -> PrefixAll
-                KeyPrefixNone -> PrefixNone
-                null -> null
-                else -> Unknown(content)
+            return when (element) {
+                is JsonPrimitive -> when (val content = element.contentOrNull) {
+                    KeyPrefixLast -> PrefixLast
+                    KeyPrefixAll -> PrefixAll
+                    KeyPrefixNone -> PrefixNone
+                    null -> null
+                    else -> Unknown(content)
+                }
+                else -> null
             }
         }
     }
