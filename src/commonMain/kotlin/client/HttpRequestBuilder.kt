@@ -5,7 +5,7 @@ import client.data.ApplicationId
 import client.data.MultipleQueriesStrategy
 import client.query.IndexQuery
 import client.query.Query
-import client.serialize.urlEncode
+import client.serialize.*
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
@@ -30,15 +30,15 @@ fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions?) {
 
 fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: MultipleQueriesStrategy) {
     body = json {
-        "requests" to jsonArray {
+        KeyRequests to jsonArray {
             queries.forEach {
                 +json {
-                    "indexName" to it.index.name
-                    "params" to (Query.serialize(it.query) as JsonObject).urlEncode()
+                    KeyIndexName to it.index.name
+                    KeyParams to (Query.serialize(it.query) as JsonObject).urlEncode()
                 }
             }
         }
-        "strategy" to strategy.raw
+        KeyStrategy to strategy.raw
     }.toString()
 }
 
