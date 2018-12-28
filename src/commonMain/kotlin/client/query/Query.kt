@@ -449,23 +449,23 @@ class Query(
                     // Query
                     query?.let { KeyQuery to it }
                     //Attributes
-                    attributesToRetrieve?.let { KeyAttributesToRetrieve to Attribute.serializes(it) }
-                    restrictSearchableAttributes?.let { KeyRestrictSearchableAttributes to Attribute.serializes(it) }
+                    attributesToRetrieve?.let { KeyAttributesToRetrieve to Attribute.serializeList(it) }
+                    restrictSearchableAttributes?.let { KeyRestrictSearchableAttributes to Attribute.serializeList(it) }
                     // Filters
                     filters?.let { KeyFilters to it }
-                    facetFilters?.let { KeyFacetFilters to ListSerializer.serializes(it) }
-                    optionalFilters?.let { KeyOptionalFilters to ListSerializer.serializes(it) }
-                    numericFilters?.let { KeyNumericFilters to ListSerializer.serializes(it) }
-                    tagFilters?.let { KeyTagFilters to ListSerializer.serializes(it) }
+                    facetFilters?.let { KeyFacetFilters to ListSerializer.serializeList(it) }
+                    optionalFilters?.let { KeyOptionalFilters to ListSerializer.serializeList(it) }
+                    numericFilters?.let { KeyNumericFilters to ListSerializer.serializeList(it) }
+                    tagFilters?.let { KeyTagFilters to ListSerializer.serializeList(it) }
                     sumOrFiltersScores?.let { KeySumOrFiltersScores to it }
                     // Facets
-                    facets?.let { KeyFacets to Attribute.serializes(it) }
+                    facets?.let { KeyFacets to Attribute.serializeList(it) }
                     maxValuesPerFacet?.let { KeyMaxValuesPerFacet to it }
                     facetingAfterDistinct?.let { KeyFacetingAfterDistinct to it }
                     sortFacetValuesBy?.let { KeySortFacetValuesBy to SortFacetValuesBy.serialize(it) }
                     // Highlighting
-                    attributesToHighlight?.let { KeyAttributesToHighlight to Attribute.serializes(it) }
-                    attributesToSnippet?.let { KeyAttributesToSnippet to Snippet.serializes(it) }
+                    attributesToHighlight?.let { KeyAttributesToHighlight to Attribute.serializeList(it) }
+                    attributesToSnippet?.let { KeyAttributesToSnippet to Snippet.serializeList(it) }
                     highlightPreTag?.let { KeyHighlightPreTag to it }
                     highlightPostTag?.let { KeyHighlightPostTag to it }
                     snippetEllipsisText?.let { KeySnippetEllipsisText to it }
@@ -481,7 +481,7 @@ class Query(
                     typoTolerance?.let { KeyTypoTolerance to TypoTolerance.serialize(it) }
                     allowTyposOnNumericTokens?.let { KeyAllowTyposOnNumericTokens to it }
                     disableTypoToleranceOnAttributes?.let {
-                        KeyDisableTypoToleranceOnAttributes to Attribute.serializes(it)
+                        KeyDisableTypoToleranceOnAttributes to Attribute.serializeList(it)
                     }
                     // Geo-Search
                     aroundLatLng?.let { KeyAroundLatLng to it }
@@ -489,12 +489,12 @@ class Query(
                     aroundRadius?.let { KeyAroundRadius to AroundRadius.serialize(it) }
                     aroundPrecision?.let { KeyAroundPrecision to it }
                     minimumAroundRadius?.let { KeyMinimumAroundRadius to it }
-                    insideBoundingBox?.let { KeyInsideBoundingBox to BoundingBox.serializes(it) }
-                    insidePolygon?.let { KeyInsidePolygon to Polygon.serializes(it) }
+                    insideBoundingBox?.let { KeyInsideBoundingBox to BoundingBox.serializeList(it) }
+                    insidePolygon?.let { KeyInsidePolygon to Polygon.serializeList(it) }
                     // Languages
                     ignorePlurals?.let { KeyIgnorePlurals to BooleanOrQueryLanguages.serialize(it) }
                     removeStopWords?.let { KeyRemoveStopWords to BooleanOrQueryLanguages.serialize(it) }
-                    queryLanguages?.let { KeyQueryLanguages to QueryLanguage.serializes(it) }
+                    queryLanguages?.let { KeyQueryLanguages to QueryLanguage.serializeList(it) }
                     // Query-rules
                     enableRules?.let { KeyEnableRules to it }
                     ruleContexts?.let { KeyRuleContexts to ListSerializer.serialize(it) }
@@ -503,9 +503,9 @@ class Query(
                     removeWordsIfNoResults?.let { KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.serialize(it) }
                     advancedSyntax?.let { KeyAdvancedSyntax to it }
                     optionalWords?.let { KeyOptionalWords to ListSerializer.serialize(it) }
-                    disableExactOnAttributes?.let { KeyDisableExactOnAttributes to Attribute.serializes(it) }
+                    disableExactOnAttributes?.let { KeyDisableExactOnAttributes to Attribute.serializeList(it) }
                     exactOnSingleWordQuery?.let { KeyExactOnSingleWordQuery to ExactOnSingleWordQuery.serialize(it) }
-                    alternativesAsExact?.let { KeyAlternativesAsExact to AlternativesAsExact.serializes(it) }
+                    alternativesAsExact?.let { KeyAlternativesAsExact to AlternativesAsExact.serializeList(it) }
                     // Advanced
                     distinct?.let { KeyDistinct to it }
                     getRankingInfo?.let { KeyGetRankingInfo to it }
@@ -515,7 +515,7 @@ class Query(
                     synonyms?.let { KeySynonyms to it }
                     replaceSynonymsInHighlight?.let { KeyReplaceSynonymsInHighlight to it }
                     minProximity?.let { KeyMinProximity to it }
-                    responseFields?.let { KeyResponseFields to ResponseFields.serializes(it) }
+                    responseFields?.let { KeyResponseFields to ResponseFields.serializeList(it) }
                     maxFacetHits?.let { KeyMaxFacetHits to it }
                     percentileComputation?.let { KeyPercentileComputation to it }
                 }

@@ -1,11 +1,21 @@
 package client.serialize
 
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 
 internal interface Deserializer<T> {
 
     fun deserialize(element: JsonElement): T?
-    fun deserializes(element: JsonElement): List<T>? {
-        return if (element.isNull) null else element.jsonArray.map { deserialize(it)!! }
+    fun deserializeList(element: JsonElement): List<T>? {
+        return when (element) {
+            is JsonArray -> {
+                if (element.isNotEmpty()) {
+                    mutableListOf<T>().apply {
+                        element.jsonArray.forEach { deserialize(it)?.let(::add) }
+                    }
+                } else null
+            }
+            else -> null
+        }
     }
 }

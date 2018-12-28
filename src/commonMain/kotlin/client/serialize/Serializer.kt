@@ -8,7 +8,7 @@ import kotlinx.serialization.json.jsonArray
 internal interface Serializer<T> {
 
     fun serialize(input: T): JsonElement
-    fun serializes(input: List<T>): JsonArray {
+    fun serializeList(input: List<T>): JsonArray {
         return jsonArray { input.forEach { +serialize(it) } }
     }
 }

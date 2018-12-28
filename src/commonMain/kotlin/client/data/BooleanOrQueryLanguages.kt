@@ -21,13 +21,13 @@ sealed class BooleanOrQueryLanguages {
         override fun serialize(input: BooleanOrQueryLanguages): JsonElement {
             return when (input) {
                 is Boolean -> JsonPrimitive(input.boolean)
-                is QueryLanguages -> QueryLanguage.serializes(input.queryLanguages)
+                is QueryLanguages -> QueryLanguage.serializeList(input.queryLanguages)
             }
         }
 
         override fun deserialize(element: JsonElement): BooleanOrQueryLanguages? {
             return when (element) {
-                is JsonArray -> QueryLanguage.deserializes(element)?.let(::QueryLanguages)
+                is JsonArray -> QueryLanguage.deserializeList(element)?.let(::QueryLanguages)
                 is JsonPrimitive -> when {
                     element.booleanOrNull != null -> Boolean(element.boolean)
                     else -> null

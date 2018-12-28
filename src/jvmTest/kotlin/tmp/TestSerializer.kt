@@ -31,7 +31,7 @@ internal abstract class TestSerializer<T>(
     fun serializes() {
         if (serializer != null) {
             items.forEach {
-                assertEquals(it.second, serializer.serializes(it.first))
+                assertEquals(it.second, serializer.serializeList(it.first))
             }
         }
     }
@@ -40,7 +40,7 @@ internal abstract class TestSerializer<T>(
     fun deserializeNull() {
         if (deserializer != null) {
             assertEquals(null, deserializer.deserialize(JsonNull))
-            assertEquals(null, deserializer.deserializes(JsonNull))
+            assertEquals(null, deserializer.deserializeList(JsonNull))
         }
     }
 
@@ -57,7 +57,7 @@ internal abstract class TestSerializer<T>(
     fun deserializes() {
         if (deserializer != null) {
             items.forEach {
-                assertEquals(it.first, deserializer.deserializes(it.second))
+                assertEquals(it.first, deserializer.deserializeList(it.second))
             }
         }
     }
