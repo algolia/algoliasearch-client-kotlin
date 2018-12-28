@@ -9,7 +9,6 @@ import client.serialize.*
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
-import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
@@ -44,8 +43,4 @@ fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: Mul
 
 fun HttpRequestBuilder.setBody(query: Query?) {
     body = if (query != null) Query.serialize(query).toString() else "{}"
-}
-
-fun HttpRequestBuilder.setBody(json: JsonElement) {
-    body = json.toString()
 }

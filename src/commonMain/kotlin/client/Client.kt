@@ -136,7 +136,8 @@ class Client(
         ) { path ->
             httpClient.post<FacetHits>(path) {
                 setRequestOptions(requestOptions)
-                val body = if (query != null) {
+
+                body = if (query != null) {
                     val serialize = Query.serialize(query) as JsonObject
                     val map = serialize.toMutableMap()
 
@@ -148,8 +149,7 @@ class Client(
                         maxFacetHits?.let { KeyMaxFacetHits to it }
                         facetQuery?.let { KeyFacetQuery to it }
                     }
-                }
-                setBody(body)
+                }.toString()
             }
         }
     }
