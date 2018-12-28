@@ -2,7 +2,6 @@ package serialize
 
 import client.data.AroundRadius
 import client.data.AroundRadius.*
-import client.serialize.KeyAll
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonPrimitive
 import org.junit.runner.RunWith
@@ -16,7 +15,7 @@ internal class TestAroundRadius : TestSerializer<AroundRadius>() {
 
     override val serializer = AroundRadius
     override val item = listOf(
-        All to JsonPrimitive(KeyAll),
+        All to JsonPrimitive(All.raw),
         InMeters(10) to JsonPrimitive(10),
         Unknown(unknown) to JsonPrimitive(unknown)
     )

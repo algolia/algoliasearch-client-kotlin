@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestCustomRanking {
+internal class TestCustomRanking {
 
     @Test
     fun key() {

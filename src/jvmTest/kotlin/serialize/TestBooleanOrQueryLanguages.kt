@@ -2,7 +2,10 @@ package serialize
 
 import boolean
 import client.data.BooleanOrQueryLanguages
-import client.data.QueryLanguage
+import client.data.BooleanOrQueryLanguages.Boolean
+import client.data.BooleanOrQueryLanguages.QueryLanguages
+import client.data.QueryLanguage.Afrikaans
+import client.data.QueryLanguage.Albanian
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonArray
@@ -16,13 +19,13 @@ internal class TestBooleanOrQueryLanguages : TestSerializer<BooleanOrQueryLangua
 
     override val serializer = BooleanOrQueryLanguages
     override val item = listOf(
-        BooleanOrQueryLanguages.Boolean(boolean) to JsonPrimitive(boolean),
-        BooleanOrQueryLanguages.QueryLanguages(
-            QueryLanguage.Afrikaans,
-            QueryLanguage.Albanian
+        Boolean(boolean) to JsonPrimitive(boolean),
+        QueryLanguages(
+            Afrikaans,
+            Albanian
         ) to jsonArray {
-            +QueryLanguage.Afrikaans.raw
-            +QueryLanguage.Albanian.raw
+            +Afrikaans.raw
+            +Albanian.raw
         }
     )
     override val items: List<Pair<List<BooleanOrQueryLanguages>, JsonArray>> = listOf()

@@ -76,8 +76,8 @@ internal class TestQueryLanguage : TestSerializer<QueryLanguage>() {
 
     override val items = listOf(
         listOf(Afrikaans, Albanian) to jsonArray {
-            +KeyAfrikaans
-            +KeyAlbanian
+            +Afrikaans.raw
+            +Albanian.raw
         }
     )
 }
