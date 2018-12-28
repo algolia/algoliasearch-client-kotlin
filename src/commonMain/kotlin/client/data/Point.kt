@@ -20,8 +20,9 @@ data class Point(
         override fun serialize(input: Point?): JsonElement {
             return input.unwrap {
                 jsonArray {
-                    +(latitude as Number)
-                    +(longitude as Number)
+                    floats.forEach {
+                        +(it as Number)
+                    }
                 }
             }
         }

@@ -43,15 +43,8 @@ data class Polygon(
         override fun serialize(input: Polygon?): JsonElement {
             return input.unwrap {
                 jsonArray {
-                    +(point1.latitude as Number)
-                    +(point1.longitude as Number)
-                    +(point2.latitude as Number)
-                    +(point2.longitude as Number)
-                    +(point3.latitude as Number)
-                    +(point3.longitude as Number)
-                    points.forEach {
-                        +(it.latitude as Number)
-                        +(it.longitude as Number)
+                    floats.forEach {
+                        +(it as Number)
                     }
                 }
             }

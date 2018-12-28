@@ -22,10 +22,9 @@ data class BoundingBox(
         override fun serialize(input: BoundingBox?): JsonElement {
             return input.unwrap {
                 jsonArray {
-                    +(point1 as Number)
-                    +(point2 as Number)
-                    +(point3 as Number)
-                    +(point4 as Number)
+                    floats.forEach {
+                        +(it as Number)
+                    }
                 }
             }
         }
