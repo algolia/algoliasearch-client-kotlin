@@ -1,6 +1,6 @@
 package data
 
-import client.data.ExactOnSingleWordQuery
+import client.data.ExactOnSingleWordQuery.*
 import client.serialize.KeyAttribute
 import client.serialize.KeyNone
 import client.serialize.KeyWord
@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestExactOnSingleWordQuery {
+internal class TestExactOnSingleWordQuery {
 
     @Test
     fun key() {
@@ -23,9 +23,9 @@ class TestExactOnSingleWordQuery {
 
     @Test
     fun raw() {
-        assertEquals(KeyAttribute, ExactOnSingleWordQuery.Attribute.raw)
-        assertEquals(KeyNone, ExactOnSingleWordQuery.None.raw)
-        assertEquals(KeyWord, ExactOnSingleWordQuery.Word.raw)
-        assertEquals(unknown, ExactOnSingleWordQuery.Unknown(unknown).raw)
+        assertEquals(KeyAttribute, Attribute.raw)
+        assertEquals(KeyNone, None.raw)
+        assertEquals(KeyWord, Word.raw)
+        assertEquals(unknown, Unknown(unknown).raw)
     }
 }

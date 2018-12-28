@@ -1,4 +1,4 @@
 package data
 
 
-class TestWordDecompounding
+internal class TestWordDecompounding

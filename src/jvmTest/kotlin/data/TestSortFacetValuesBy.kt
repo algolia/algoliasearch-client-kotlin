@@ -1,6 +1,6 @@
 package data
 
-import client.data.SortFacetValuesBy
+import client.data.SortFacetValuesBy.*
 import client.serialize.KeyAlpha
 import client.serialize.KeyCount
 import org.junit.Test
@@ -11,7 +11,7 @@ import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestSortFacetValuesBy {
+internal class TestSortFacetValuesBy {
 
     @Test
     fun key() {
@@ -21,8 +21,8 @@ class TestSortFacetValuesBy {
 
     @Test
     fun raw() {
-        assertEquals(KeyCount, SortFacetValuesBy.Count.raw)
-        assertEquals(KeyAlpha, SortFacetValuesBy.Alpha.raw)
-        assertEquals(unknown, SortFacetValuesBy.Unknown(unknown).raw)
+        assertEquals(KeyCount, Count.raw)
+        assertEquals(KeyAlpha, Alpha.raw)
+        assertEquals(unknown, Unknown(unknown).raw)
     }
 }

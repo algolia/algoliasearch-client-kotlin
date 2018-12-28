@@ -1,6 +1,6 @@
 package data
 
-import client.data.AroundRadius
+import client.data.AroundRadius.*
 import client.serialize.KeyAll
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,8 +19,8 @@ internal class TestAroundRadius {
 
     @Test
     fun raw() {
-        assertEquals(KeyAll, AroundRadius.All.raw)
-        assertEquals("10", AroundRadius.InMeters(10).raw)
-        assertEquals(unknown, AroundRadius.Unknown(unknown).raw)
+        assertEquals(KeyAll, All.raw)
+        assertEquals("10", InMeters(10).raw)
+        assertEquals(unknown, Unknown(unknown).raw)
     }
 }

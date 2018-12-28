@@ -2,7 +2,7 @@ package data
 
 import attributeA
 import attributeB
-import client.data.Ranking
+import client.data.Ranking.*
 import client.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestRanking {
+internal class TestRanking {
 
     @Test
     fun key() {
@@ -30,15 +30,15 @@ class TestRanking {
 
     @Test
     fun raw() {
-        assertEquals(KeyGeo, Ranking.Geo.raw)
-        assertEquals(KeyWords, Ranking.Words.raw)
-        assertEquals(KeyFilters, Ranking.Filters.raw)
-        assertEquals(KeyProximity, Ranking.Proximity.raw)
-        assertEquals(KeyAttribute, Ranking.Attribute.raw)
-        assertEquals(KeyExact, Ranking.Exact.raw)
-        assertEquals(KeyCustom, Ranking.Custom.raw)
-        assertEquals("$KeyAsc($attributeA)", Ranking.Asc(attributeA).raw)
-        assertEquals("$KeyDesc($attributeB)", Ranking.Desc(attributeB).raw)
-        assertEquals(unknown, Ranking.Unknown(unknown).raw)
+        assertEquals(KeyGeo, Geo.raw)
+        assertEquals(KeyWords, Words.raw)
+        assertEquals(KeyFilters, Filters.raw)
+        assertEquals(KeyProximity, Proximity.raw)
+        assertEquals(KeyAttribute, Attribute.raw)
+        assertEquals(KeyExact, Exact.raw)
+        assertEquals(KeyCustom, Custom.raw)
+        assertEquals("$KeyAsc($attributeA)", Asc(attributeA).raw)
+        assertEquals("$KeyDesc($attributeB)", Desc(attributeB).raw)
+        assertEquals(unknown, Unknown(unknown).raw)
     }
 }

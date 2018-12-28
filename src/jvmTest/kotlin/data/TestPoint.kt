@@ -9,7 +9,7 @@ import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestPoint {
+internal class TestPoint {
 
     @Test
     fun dx() {

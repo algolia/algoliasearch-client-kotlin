@@ -8,7 +8,7 @@ import org.junit.runners.JUnit4
 import kotlin.test.assertEquals
 
 @RunWith(JUnit4::class)
-class TestPolygon {
+internal class TestPolygon {
 
     private val point1 = 1f to 2f
     private val point2 = 3f to 4f

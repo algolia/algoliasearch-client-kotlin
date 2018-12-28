@@ -2,7 +2,8 @@ package data
 
 import attributeA
 import attributeB
-import client.data.CustomRanking
+import client.data.CustomRanking.Asc
+import client.data.CustomRanking.Desc
 import client.serialize.KeyAsc
 import client.serialize.KeyDesc
 import org.junit.Test
@@ -22,7 +23,7 @@ internal class TestCustomRanking {
 
     @Test
     fun raw() {
-        assertEquals("$KeyAsc($attributeA)", CustomRanking.Asc(attributeA).raw)
-        assertEquals("$KeyDesc($attributeB)", CustomRanking.Desc(attributeB).raw)
+        assertEquals("$KeyAsc($attributeA)", Asc(attributeA).raw)
+        assertEquals("$KeyDesc($attributeB)", Desc(attributeB).raw)
     }
 }

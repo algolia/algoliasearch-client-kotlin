@@ -1,6 +1,6 @@
 package data
 
-import client.data.RemoveWordIfNoResults
+import client.data.RemoveWordIfNoResults.*
 import client.serialize.KeyAllOptional
 import client.serialize.KeyFirstWords
 import client.serialize.KeyLastWords
@@ -13,7 +13,7 @@ import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestRemoveWordIfNoResults {
+internal class TestRemoveWordIfNoResults {
 
     @Test
     fun key() {
@@ -25,10 +25,10 @@ class TestRemoveWordIfNoResults {
 
     @Test
     fun raw() {
-        assertEquals(KeyNone, RemoveWordIfNoResults.None.raw)
-        assertEquals(KeyLastWords, RemoveWordIfNoResults.LastWords.raw)
-        assertEquals(KeyFirstWords, RemoveWordIfNoResults.FirstWords.raw)
-        assertEquals(KeyAllOptional, RemoveWordIfNoResults.AllOptional.raw)
-        assertEquals(unknown, RemoveWordIfNoResults.Unknown(unknown).raw)
+        assertEquals(KeyNone, None.raw)
+        assertEquals(KeyLastWords, LastWords.raw)
+        assertEquals(KeyFirstWords, FirstWords.raw)
+        assertEquals(KeyAllOptional, AllOptional.raw)
+        assertEquals(unknown, Unknown(unknown).raw)
     }
 }

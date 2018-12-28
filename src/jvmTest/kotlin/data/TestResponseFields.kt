@@ -1,6 +1,6 @@
 package data
 
-import client.data.ResponseFields
+import client.data.ResponseFields.*
 import client.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -10,7 +10,7 @@ import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestResponseFields {
+internal class TestResponseFields {
 
     @Test
     fun key() {
@@ -37,25 +37,25 @@ class TestResponseFields {
 
     @Test
     fun raw() {
-        assertEquals(KeyStar, ResponseFields.All.raw)
-        assertEquals(KeyAroundLatLng, ResponseFields.AroundLatLng.raw)
-        assertEquals(KeyAutomaticRadius, ResponseFields.AutomaticRadius.raw)
-        assertEquals(KeyExhaustiveFacetsCount, ResponseFields.ExhaustiveFacetsCount.raw)
-        assertEquals(KeyFacets, ResponseFields.Facets.raw)
-        assertEquals(KeyFacetsStats, ResponseFields.FacetsStats.raw)
-        assertEquals(KeyHits, ResponseFields.Hits.raw)
-        assertEquals(KeyHitsPerPage, ResponseFields.HitsPerPage.raw)
-        assertEquals(KeyIndex, ResponseFields.Index.raw)
-        assertEquals(KeyLength, ResponseFields.Length.raw)
-        assertEquals(KeyNbHits, ResponseFields.NbHits.raw)
-        assertEquals(KeyNbPages, ResponseFields.NbPages.raw)
-        assertEquals(KeyOffset, ResponseFields.Offset.raw)
-        assertEquals(KeyPage, ResponseFields.Page.raw)
-        assertEquals(KeyParams, ResponseFields.Params.raw)
-        assertEquals(KeyProcessingTimeMS, ResponseFields.ProcessingTimeMS.raw)
-        assertEquals(KeyQuery, ResponseFields.Query.raw)
-        assertEquals(KeyQueryAfterRemoval, ResponseFields.QueryAfterRemoval.raw)
-        assertEquals(KeyUserData, ResponseFields.UserData.raw)
-        assertEquals(unknown, ResponseFields.Unknown(unknown).raw)
+        assertEquals(KeyStar, All.raw)
+        assertEquals(KeyAroundLatLng, AroundLatLng.raw)
+        assertEquals(KeyAutomaticRadius, AutomaticRadius.raw)
+        assertEquals(KeyExhaustiveFacetsCount, ExhaustiveFacetsCount.raw)
+        assertEquals(KeyFacets, Facets.raw)
+        assertEquals(KeyFacetsStats, FacetsStats.raw)
+        assertEquals(KeyHits, Hits.raw)
+        assertEquals(KeyHitsPerPage, HitsPerPage.raw)
+        assertEquals(KeyIndex, Index.raw)
+        assertEquals(KeyLength, Length.raw)
+        assertEquals(KeyNbHits, NbHits.raw)
+        assertEquals(KeyNbPages, NbPages.raw)
+        assertEquals(KeyOffset, Offset.raw)
+        assertEquals(KeyPage, Page.raw)
+        assertEquals(KeyParams, Params.raw)
+        assertEquals(KeyProcessingTimeMS, ProcessingTimeMS.raw)
+        assertEquals(KeyQuery, Query.raw)
+        assertEquals(KeyQueryAfterRemoval, QueryAfterRemoval.raw)
+        assertEquals(KeyUserData, UserData.raw)
+        assertEquals(unknown, Unknown(unknown).raw)
     }
 }

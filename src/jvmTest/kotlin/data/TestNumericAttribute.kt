@@ -1,4 +1,4 @@
 package data
 
 
-class TestNumericAttribute
+internal class TestNumericAttribute

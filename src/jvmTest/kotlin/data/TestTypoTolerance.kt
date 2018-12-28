@@ -1,7 +1,8 @@
 package data
 
 import boolean
-import client.data.TypoTolerance
+import client.data.TypoTolerance.*
+import client.data.TypoTolerance.Boolean
 import client.serialize.KeyMin
 import client.serialize.KeyStrict
 import org.junit.Test
@@ -12,7 +13,7 @@ import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestTypoTolerance {
+internal class TestTypoTolerance {
 
     @Test
     fun key() {
@@ -22,9 +23,9 @@ class TestTypoTolerance {
 
     @Test
     fun raw() {
-        assertEquals("$boolean", TypoTolerance.Boolean(boolean).raw)
-        assertEquals(KeyStrict, TypoTolerance.Strict.raw)
-        assertEquals(KeyMin, TypoTolerance.Min.raw)
-        assertEquals(unknown, TypoTolerance.Unknown(unknown).raw)
+        assertEquals("$boolean", Boolean(boolean).raw)
+        assertEquals(KeyStrict, Strict.raw)
+        assertEquals(KeyMin, Min.raw)
+        assertEquals(unknown, Unknown(unknown).raw)
     }
 }

@@ -1,6 +1,6 @@
 package data
 
-import client.data.QueryType
+import client.data.QueryType.*
 import client.serialize.KeyPrefixAll
 import client.serialize.KeyPrefixLast
 import client.serialize.KeyPrefixNone
@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestQueryType {
+internal class TestQueryType {
 
     @Test
     fun key() {
@@ -23,9 +23,9 @@ class TestQueryType {
 
     @Test
     fun raw() {
-        assertEquals(KeyPrefixLast, QueryType.PrefixLast.raw)
-        assertEquals(KeyPrefixAll, QueryType.PrefixAll.raw)
-        assertEquals(KeyPrefixNone, QueryType.PrefixNone.raw)
-        assertEquals(unknown, QueryType.Unknown(unknown).raw)
+        assertEquals(KeyPrefixLast, PrefixLast.raw)
+        assertEquals(KeyPrefixAll, PrefixAll.raw)
+        assertEquals(KeyPrefixNone, PrefixNone.raw)
+        assertEquals(unknown, Unknown(unknown).raw)
     }
 }

@@ -1,6 +1,6 @@
 package data
 
-import client.data.MultipleQueriesStrategy
+import client.data.MultipleQueriesStrategy.*
 import client.serialize.KeyNone
 import client.serialize.KeyStopIfEnoughMatches
 import org.junit.Test
@@ -21,8 +21,8 @@ class TestMultipleQueriesStrategy {
 
     @Test
     fun raw() {
-        assertEquals(KeyNone, MultipleQueriesStrategy.None.raw)
-        assertEquals(KeyStopIfEnoughMatches, MultipleQueriesStrategy.StopIfEnoughMatches.raw)
-        assertEquals(unknown, MultipleQueriesStrategy.Unknown(unknown).raw)
+        assertEquals(KeyNone, None.raw)
+        assertEquals(KeyStopIfEnoughMatches, StopIfEnoughMatches.raw)
+        assertEquals(unknown, Unknown(unknown).raw)
     }
 }

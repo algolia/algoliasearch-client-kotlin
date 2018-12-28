@@ -12,7 +12,7 @@ import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestSnippet {
+internal class TestSnippet {
 
     @Test
     fun key() {
