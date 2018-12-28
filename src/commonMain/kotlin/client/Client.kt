@@ -136,19 +136,19 @@ class Client(
         ) { path ->
             httpClient.post<FacetHits>(path) {
                 setRequestOptions(requestOptions)
+                val extraParams = json {
+                    maxFacetHits?.let { KeyMaxFacetHits to it }
+                    facetQuery?.let { KeyFacetQuery to it }
+                }
 
                 body = if (query != null) {
                     val serialize = Query.serialize(query) as JsonObject
                     val map = serialize.toMutableMap()
 
-                    maxFacetHits?.let { map[KeyMaxFacetHits] to it }
-                    facetQuery?.let { map[KeyFacetQuery] to it }
+                    map.putAll(extraParams)
                     JsonObject(map)
                 } else {
-                    json {
-                        maxFacetHits?.let { KeyMaxFacetHits to it }
-                        facetQuery?.let { KeyFacetQuery to it }
-                    }
+                    extraParams
                 }.toString()
             }
         }
