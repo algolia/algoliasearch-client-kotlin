@@ -5,6 +5,10 @@ import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.json.*
 
+internal val regexAsc = Regex("$KeyAsc\\((.*)\\)")
+internal val regexDesc = Regex("$KeyDesc\\((.*)\\)")
+internal val regexEqualOnly = Regex("$KeyEqualOnly\\((.*)\\)")
+
 internal fun Map<String, Any>.serialize(): JsonObject {
     return json {
         entries.forEach { entry ->
