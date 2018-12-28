@@ -16,12 +16,6 @@ import kotlin.test.assertEquals
 internal class TestTypoTolerance {
 
     @Test
-    fun key() {
-        assertEquals("strict", KeyStrict)
-        assertEquals("min", KeyMin)
-    }
-
-    @Test
     fun raw() {
         assertEquals("$boolean", Boolean(boolean).raw)
         assertEquals(KeyStrict, Strict.raw)

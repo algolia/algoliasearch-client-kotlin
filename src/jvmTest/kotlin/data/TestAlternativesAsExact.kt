@@ -15,14 +15,7 @@ import kotlin.test.assertEquals
 internal class TestAlternativesAsExact {
 
     @Test
-    fun key() {
-        assertEquals("ignorePlurals", KeyIgnorePlurals)
-        assertEquals("singleWordSynonym", KeySingleWordSynonym)
-        assertEquals("multiWordsSynonym", KeyMultiWordsSynonym)
-    }
-
-    @Test
-    fun raws() {
+    fun raw() {
         assertEquals(KeyIgnorePlurals, IgnorePlurals.raw)
         assertEquals(KeySingleWordSynonym, SingleWordSynonym.raw)
         assertEquals(KeyMultiWordsSynonym, MultiWordsSynonym.raw)

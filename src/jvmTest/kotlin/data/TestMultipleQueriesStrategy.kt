@@ -14,12 +14,6 @@ import kotlin.test.assertEquals
 class TestMultipleQueriesStrategy {
 
     @Test
-    fun key() {
-        assertEquals("none", KeyNone)
-        assertEquals("stopIfEnoughMatches", KeyStopIfEnoughMatches)
-    }
-
-    @Test
     fun raw() {
         assertEquals(KeyNone, None.raw)
         assertEquals(KeyStopIfEnoughMatches, StopIfEnoughMatches.raw)

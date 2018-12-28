@@ -16,14 +16,6 @@ import kotlin.test.assertEquals
 internal class TestRemoveWordIfNoResults {
 
     @Test
-    fun key() {
-        assertEquals("none", KeyNone)
-        assertEquals("lastWords", KeyLastWords)
-        assertEquals("firstWords", KeyFirstWords)
-        assertEquals("allOptional", KeyAllOptional)
-    }
-
-    @Test
     fun raw() {
         assertEquals(KeyNone, None.raw)
         assertEquals(KeyLastWords, LastWords.raw)

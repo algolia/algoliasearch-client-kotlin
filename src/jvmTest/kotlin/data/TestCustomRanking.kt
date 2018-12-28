@@ -16,12 +16,6 @@ import kotlin.test.assertEquals
 internal class TestCustomRanking {
 
     @Test
-    fun key() {
-        assertEquals("asc", KeyAsc)
-        assertEquals("desc", KeyDesc)
-    }
-
-    @Test
     fun raw() {
         assertEquals("$KeyAsc($attributeA)", Asc(attributeA).raw)
         assertEquals("$KeyDesc($attributeB)", Desc(attributeB).raw)

@@ -13,29 +13,6 @@ import kotlin.test.assertEquals
 internal class TestResponseFields {
 
     @Test
-    fun key() {
-        assertEquals("*", KeyStar)
-        assertEquals("aroundLatLng", KeyAroundLatLng)
-        assertEquals("automaticRadius", KeyAutomaticRadius)
-        assertEquals("exhaustiveFacetsCount", KeyExhaustiveFacetsCount)
-        assertEquals("facets", KeyFacets)
-        assertEquals("facets_stats", KeyFacetsStats)
-        assertEquals("hits", KeyHits)
-        assertEquals("hitsPerPage", KeyHitsPerPage)
-        assertEquals("index", KeyIndex)
-        assertEquals("length", KeyLength)
-        assertEquals("nbHits", KeyNbHits)
-        assertEquals("nbPages", KeyNbPages)
-        assertEquals("offset", KeyOffset)
-        assertEquals("page", KeyPage)
-        assertEquals("params", KeyParams)
-        assertEquals("processingTimeMS", KeyProcessingTimeMS)
-        assertEquals("query", KeyQuery)
-        assertEquals("queryAfterRemoval", KeyQueryAfterRemoval)
-        assertEquals("userData", KeyUserData)
-    }
-
-    @Test
     fun raw() {
         assertEquals(KeyStar, All.raw)
         assertEquals(KeyAroundLatLng, AroundLatLng.raw)

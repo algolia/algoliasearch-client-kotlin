@@ -15,13 +15,6 @@ import kotlin.test.assertEquals
 internal class TestQueryType {
 
     @Test
-    fun key() {
-        assertEquals("prefixLast", KeyPrefixLast)
-        assertEquals("prefixAll", KeyPrefixAll)
-        assertEquals("prefixNone", KeyPrefixNone)
-    }
-
-    @Test
     fun raw() {
         assertEquals(KeyPrefixLast, PrefixLast.raw)
         assertEquals(KeyPrefixAll, PrefixAll.raw)

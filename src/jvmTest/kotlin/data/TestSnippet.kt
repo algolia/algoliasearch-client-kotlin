@@ -4,7 +4,6 @@ import attributeA
 import attributeAll
 import attributeB
 import client.data.Snippet
-import client.serialize.KeyStar
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -13,11 +12,6 @@ import kotlin.test.assertEquals
 
 @RunWith(JUnit4::class)
 internal class TestSnippet {
-
-    @Test
-    fun key() {
-        assertEquals("*", KeyStar)
-    }
 
     @Test
     fun raw() {

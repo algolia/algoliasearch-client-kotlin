@@ -15,13 +15,6 @@ import kotlin.test.assertEquals
 internal class TestExactOnSingleWordQuery {
 
     @Test
-    fun key() {
-        assertEquals("attribute", KeyAttribute)
-        assertEquals("none", KeyNone)
-        assertEquals("word", KeyWord)
-    }
-
-    @Test
     fun raw() {
         assertEquals(KeyAttribute, Attribute.raw)
         assertEquals(KeyNone, None.raw)

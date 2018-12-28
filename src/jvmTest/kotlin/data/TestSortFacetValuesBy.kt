@@ -14,12 +14,6 @@ import kotlin.test.assertEquals
 internal class TestSortFacetValuesBy {
 
     @Test
-    fun key() {
-        assertEquals("count", KeyCount)
-        assertEquals("alpha", KeyAlpha)
-    }
-
-    @Test
     fun raw() {
         assertEquals(KeyCount, Count.raw)
         assertEquals(KeyAlpha, Alpha.raw)

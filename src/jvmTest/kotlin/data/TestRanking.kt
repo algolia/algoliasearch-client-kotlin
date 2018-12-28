@@ -15,20 +15,6 @@ import kotlin.test.assertEquals
 internal class TestRanking {
 
     @Test
-    fun key() {
-        assertEquals("typo", KeyTypo)
-        assertEquals("geo", KeyGeo)
-        assertEquals("words", KeyWords)
-        assertEquals("filters", KeyFilters)
-        assertEquals("proximity", KeyProximity)
-        assertEquals("attribute", KeyAttribute)
-        assertEquals("exact", KeyExact)
-        assertEquals("custom", KeyCustom)
-        assertEquals("asc", KeyAsc)
-        assertEquals("desc", KeyDesc)
-    }
-
-    @Test
     fun raw() {
         assertEquals(KeyGeo, Geo.raw)
         assertEquals(KeyWords, Words.raw)

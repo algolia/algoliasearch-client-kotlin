@@ -13,11 +13,6 @@ import kotlin.test.assertEquals
 internal class TestNumericAttribute {
 
     @Test
-    fun key() {
-        assertEquals("equalOnly", KeyEqualOnly)
-    }
-
-    @Test
     fun raw() {
         assertEquals(attributeA.raw, NumericAttributeFilter(attributeA).raw)
         assertEquals("$KeyEqualOnly($attributeA)", NumericAttributeFilter(attributeA, true).raw)

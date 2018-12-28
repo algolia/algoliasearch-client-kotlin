@@ -13,11 +13,6 @@ import kotlin.test.assertEquals
 internal class TestAroundRadius {
 
     @Test
-    fun key() {
-        assertEquals("all", KeyAll)
-    }
-
-    @Test
     fun raw() {
         assertEquals(KeyAll, All.raw)
         assertEquals("10", InMeters(10).raw)
