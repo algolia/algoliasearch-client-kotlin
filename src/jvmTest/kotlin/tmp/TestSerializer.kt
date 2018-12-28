@@ -19,14 +19,6 @@ internal abstract class TestSerializer<T>(
 
 
     @Test
-    fun serializeNull() {
-        if (serializer != null) {
-            assertEquals(JsonNull, serializer.serialize(null))
-            assertEquals(JsonNull, serializer.serializes(null))
-        }
-    }
-
-    @Test
     fun serialize() {
         if (serializer != null) {
             item.forEach {

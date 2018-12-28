@@ -2,7 +2,6 @@ package client.data
 
 import client.serialize.Deserializer
 import client.serialize.Serializer
-import client.serialize.unwrap
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonArray
@@ -19,12 +18,10 @@ data class BoundingBox(
 
     internal companion object : Serializer<BoundingBox>, Deserializer<BoundingBox> {
 
-        override fun serialize(input: BoundingBox?): JsonElement {
-            return input.unwrap {
-                jsonArray {
-                    asList.forEach {
-                        +(it as Number)
-                    }
+        override fun serialize(input: BoundingBox): JsonElement {
+            return jsonArray {
+                input.asList.forEach {
+                    +(it as Number)
                 }
             }
         }

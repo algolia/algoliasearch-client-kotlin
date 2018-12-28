@@ -2,7 +2,6 @@ package client.data
 
 import client.serialize.Deserializer
 import client.serialize.Serializer
-import client.serialize.unwrap
 import client.toAttribute
 import kotlinx.serialization.json.*
 
@@ -15,12 +14,10 @@ data class DecompoundedAttributes internal constructor(val language: QueryLangua
 
     internal companion object : Serializer<DecompoundedAttributes>, Deserializer<DecompoundedAttributes> {
 
-        override fun serialize(input: DecompoundedAttributes?): JsonElement {
-            return input.unwrap {
-                json {
-                    language.raw to jsonArray {
-                        attributes.forEach { +it.name }
-                    }
+        override fun serialize(input: DecompoundedAttributes): JsonElement {
+            return json {
+                input.language.raw to jsonArray {
+                    input.attributes.forEach { +it.name }
                 }
             }
         }

@@ -35,8 +35,8 @@ sealed class QueryType(open val raw: String) {
 
     internal companion object : Serializer<QueryType>, Deserializer<QueryType> {
 
-        override fun serialize(input: QueryType?): JsonElement {
-            return input.unwrap { JsonPrimitive(raw) }
+        override fun serialize(input: QueryType): JsonElement {
+            return JsonPrimitive(input.raw)
         }
 
         override fun deserialize(element: JsonElement): QueryType? {

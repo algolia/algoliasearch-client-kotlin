@@ -2,7 +2,6 @@ package client.data
 
 import client.serialize.Deserializer
 import client.serialize.Serializer
-import client.serialize.unwrap
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.jsonArray
@@ -17,12 +16,10 @@ data class Point(
 
     internal companion object : Serializer<Point>, Deserializer<Point> {
 
-        override fun serialize(input: Point?): JsonElement {
-            return input.unwrap {
-                jsonArray {
-                    asList.forEach {
-                        +(it as Number)
-                    }
+        override fun serialize(input: Point): JsonElement {
+            return jsonArray {
+                input.asList.forEach {
+                    +(it as Number)
                 }
             }
         }

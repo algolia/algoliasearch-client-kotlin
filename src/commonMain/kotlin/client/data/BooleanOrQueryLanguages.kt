@@ -2,7 +2,6 @@ package client.data
 
 import client.serialize.Deserializer
 import client.serialize.Serializer
-import client.serialize.unwrap
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
@@ -19,12 +18,10 @@ sealed class BooleanOrQueryLanguages {
 
     internal companion object : Serializer<BooleanOrQueryLanguages>, Deserializer<BooleanOrQueryLanguages> {
 
-        override fun serialize(input: BooleanOrQueryLanguages?): JsonElement {
-            return input.unwrap {
-                when (this) {
-                    is Boolean -> JsonPrimitive(boolean)
-                    is QueryLanguages -> QueryLanguage.serializes(queryLanguages)
-                }
+        override fun serialize(input: BooleanOrQueryLanguages): JsonElement {
+            return  when (input) {
+                is Boolean -> JsonPrimitive(input.boolean)
+                is QueryLanguages -> QueryLanguage.serializes(input.queryLanguages)
             }
         }
 

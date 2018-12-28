@@ -137,9 +137,9 @@ class Client(
         ) { path ->
             httpClient.post<FacetHits>(path) {
                 setRequestOptions(requestOptions)
-                val serialize = QuerySerializer.serialize(query)
+                val body = if (query != null) {
+                    val serialize = QuerySerializer.serialize(query) as JsonObject
 
-                val body = if (serialize is JsonObject) {
                     val map = serialize.toMutableMap()
                     maxFacetHits?.let { map[KeyMaxFacetHits] to it }
                     facetQuery?.let { map[KeyFacetQuery] to it }

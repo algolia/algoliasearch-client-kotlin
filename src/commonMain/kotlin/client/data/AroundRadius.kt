@@ -3,7 +3,6 @@ package client.data
 import client.serialize.Deserializer
 import client.serialize.KeyAll
 import client.serialize.Serializer
-import client.serialize.unwrap
 import kotlinx.serialization.json.*
 
 
@@ -21,12 +20,10 @@ sealed class AroundRadius(open val raw: String) {
 
     internal companion object : Serializer<AroundRadius>, Deserializer<AroundRadius> {
 
-        override fun serialize(input: AroundRadius?): JsonElement {
-            return input.unwrap {
-                when (this) {
-                    is InMeters -> JsonPrimitive(int)
-                    else -> JsonPrimitive(raw)
-                }
+        override fun serialize(input: AroundRadius): JsonElement {
+            return when (input) {
+                is InMeters -> JsonPrimitive(input.int)
+                else -> JsonPrimitive(input.raw)
             }
         }
 

@@ -41,8 +41,8 @@ sealed class RemoveWordIfNoResults(open val raw: String) {
 
     internal companion object : Serializer<RemoveWordIfNoResults>, Deserializer<RemoveWordIfNoResults> {
 
-        override fun serialize(input: RemoveWordIfNoResults?): JsonElement {
-            return input.unwrap { JsonPrimitive(raw) }
+        override fun serialize(input: RemoveWordIfNoResults): JsonElement {
+            return JsonPrimitive(input.raw)
         }
 
         override fun deserialize(element: JsonElement): RemoveWordIfNoResults? {

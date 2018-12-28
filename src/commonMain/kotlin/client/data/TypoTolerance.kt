@@ -1,6 +1,9 @@
 package client.data
 
-import client.serialize.*
+import client.serialize.Deserializer
+import client.serialize.KeyMin
+import client.serialize.KeyStrict
+import client.serialize.Serializer
 import kotlinx.serialization.json.*
 
 
@@ -20,12 +23,10 @@ sealed class TypoTolerance(open val raw: String) {
 
     internal companion object : Serializer<TypoTolerance>, Deserializer<TypoTolerance> {
 
-        override fun serialize(input: TypoTolerance?): JsonElement {
-            return input.unwrap {
-                when (this) {
-                    is Boolean -> JsonPrimitive(boolean)
-                    else -> JsonPrimitive(raw)
-                }
+        override fun serialize(input: TypoTolerance): JsonElement {
+            return when (input) {
+                is Boolean -> JsonPrimitive(input.boolean)
+                else -> JsonPrimitive(input.raw)
             }
         }
 

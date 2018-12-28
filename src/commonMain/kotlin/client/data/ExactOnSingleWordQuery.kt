@@ -36,8 +36,8 @@ sealed class ExactOnSingleWordQuery(open val raw: String) {
 
     internal companion object : Serializer<ExactOnSingleWordQuery>, Deserializer<ExactOnSingleWordQuery> {
 
-        override fun serialize(input: ExactOnSingleWordQuery?): JsonElement {
-            return input.unwrap { JsonPrimitive(raw) }
+        override fun serialize(input: ExactOnSingleWordQuery): JsonElement {
+            return JsonPrimitive(input.raw)
         }
 
         override fun deserialize(element: JsonElement): ExactOnSingleWordQuery? {

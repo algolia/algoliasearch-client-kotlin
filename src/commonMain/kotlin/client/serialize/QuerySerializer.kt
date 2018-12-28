@@ -8,8 +8,8 @@ import kotlinx.serialization.json.json
 
 object QuerySerializer : Serializer<Query> {
 
-    override fun serialize(input: Query?): JsonElement {
-        return input.unwrap {
+    override fun serialize(input: Query): JsonElement {
+        return input.run {
             json {
                 // Query
                 query?.let { KeyQuery to it }

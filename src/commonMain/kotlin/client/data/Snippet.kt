@@ -3,7 +3,6 @@ package client.data
 import client.serialize.Deserializer
 import client.serialize.Serializer
 import client.serialize.regexSnippet
-import client.serialize.unwrap
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
@@ -24,8 +23,8 @@ data class Snippet(
 
     internal companion object : Serializer<Snippet>, Deserializer<Snippet> {
 
-        override fun serialize(input: Snippet?): JsonElement {
-            return input.unwrap { JsonPrimitive(raw) }
+        override fun serialize(input: Snippet): JsonElement {
+            return JsonPrimitive(input.raw)
         }
 
         override fun deserialize(element: JsonElement): Snippet? {
