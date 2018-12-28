@@ -68,6 +68,10 @@ sealed class QueryLanguage(open val raw: String) {
 
     data class Unknown(override val raw: String) : QueryLanguage(raw)
 
+    override fun toString(): String {
+        return raw
+    }
+
     internal companion object : Serializer<QueryLanguage> {
 
         override fun serialize(input: QueryLanguage?): JsonElement {

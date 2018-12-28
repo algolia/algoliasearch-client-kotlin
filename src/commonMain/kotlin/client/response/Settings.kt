@@ -1,6 +1,5 @@
 package client.response
 
-import client.data.Index
 import client.data.*
 import kotlinx.serialization.Serializable
 
@@ -35,7 +34,7 @@ data class Settings(
     var ignorePlurals: BooleanOrQueryLanguages? = null,
     var removeStopWords: BooleanOrQueryLanguages? = null,
     var camelCaseAttributes: List<Attribute>? = null,
-    var decompoundedAttributes: WordDecompounding? = null,
+    var decompoundedAttributes: List<DecompoundedAttributes>? = null,
     var keepDiacriticsOnCharacters: String? = null,
     var queryLanguages: List<QueryLanguage>? = null,
     var enableRules: Boolean? = null,
