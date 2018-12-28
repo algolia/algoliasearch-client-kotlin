@@ -1,9 +1,13 @@
 package client.data
 
 import client.serialize.*
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.contentOrNull
 
 
 sealed class ResponseFields(open val raw: String) {
+
     object All : ResponseFields(KeyStar)
     object AroundLatLng : ResponseFields(KeyAroundLatLng)
     object AutomaticRadius : ResponseFields(KeyAutomaticRadius)
@@ -25,4 +29,37 @@ sealed class ResponseFields(open val raw: String) {
     object UserData : ResponseFields(KeyUserData)
 
     data class Unknown(override val raw: String) : ResponseFields(raw)
+
+    internal companion object : Serializer<ResponseFields> {
+
+        override fun serialize(input: ResponseFields?): JsonElement {
+            return input.unwrap { JsonPrimitive(raw) }
+        }
+
+        override fun deserialize(element: JsonElement): ResponseFields? {
+            return when (val content = element.contentOrNull) {
+                KeyStar -> All
+                KeyAroundLatLng -> AroundLatLng
+                KeyAutomaticRadius -> AutomaticRadius
+                KeyExhaustiveFacetsCount -> ExhaustiveFacetsCount
+                KeyFacets -> Facets
+                KeyFacetsStats -> FacetsStats
+                KeyHits -> Hits
+                KeyHitsPerPage -> HitsPerPage
+                KeyIndex -> Index
+                KeyLength -> Length
+                KeyNbHits -> NbHits
+                KeyNbPages -> NbPages
+                KeyOffset -> Offset
+                KeyPage -> Page
+                KeyParams -> Params
+                KeyProcessingTimeMS -> ProcessingTimeMS
+                KeyQuery -> Query
+                KeyQueryAfterRemoval -> QueryAfterRemoval
+                KeyUserData -> UserData
+                null -> null
+                else -> Unknown(content)
+            }
+        }
+    }
 }
