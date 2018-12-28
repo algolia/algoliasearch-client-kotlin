@@ -8,6 +8,7 @@ import kotlinx.serialization.json.*
 internal val regexAsc = Regex("$KeyAsc\\((.*)\\)")
 internal val regexDesc = Regex("$KeyDesc\\((.*)\\)")
 internal val regexEqualOnly = Regex("$KeyEqualOnly\\((.*)\\)")
+internal val regexSnippet = Regex("(.*):(\\d+)")
 
 internal fun Map<String, Any>.serialize(): JsonObject {
     return json {
