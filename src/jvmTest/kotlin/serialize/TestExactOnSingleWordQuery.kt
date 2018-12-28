@@ -11,7 +11,10 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestExactOnSingleWordQuery : TestSerializer<ExactOnSingleWordQuery>(ExactOnSingleWordQuery) {
+internal class TestExactOnSingleWordQuery : TestSerializer<ExactOnSingleWordQuery>(
+    ExactOnSingleWordQuery,
+    ExactOnSingleWordQuery
+) {
 
     override val item = listOf(
         Attribute to JsonPrimitive(Attribute.raw),

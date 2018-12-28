@@ -29,7 +29,7 @@ sealed class AlternativesAsExact(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<AlternativesAsExact> {
+    internal companion object : Serializer<AlternativesAsExact>, Deserializer<AlternativesAsExact> {
 
         override fun serialize(input: AlternativesAsExact?): JsonElement {
             return input.unwrap { JsonPrimitive(raw) }

@@ -1,5 +1,6 @@
 package client.data
 
+import client.serialize.Deserializer
 import client.serialize.Serializer
 import client.serialize.unwrap
 import client.toAttribute
@@ -14,7 +15,7 @@ data class Attribute(val name: String) {
         return name
     }
 
-    internal companion object : Serializer<Attribute> {
+    internal companion object : Serializer<Attribute>, Deserializer<Attribute> {
 
         override fun serialize(input: Attribute?): JsonElement {
             return input.unwrap { JsonPrimitive(name) }

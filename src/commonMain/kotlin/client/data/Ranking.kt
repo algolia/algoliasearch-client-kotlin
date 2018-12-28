@@ -35,7 +35,7 @@ sealed class Ranking(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<Ranking> {
+    internal companion object : Serializer<Ranking>, Deserializer<Ranking> {
 
         override fun serialize(input: Ranking?): JsonElement {
             return input.unwrap { JsonPrimitive(raw) }

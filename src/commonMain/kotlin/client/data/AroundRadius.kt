@@ -1,5 +1,6 @@
 package client.data
 
+import client.serialize.Deserializer
 import client.serialize.KeyAll
 import client.serialize.Serializer
 import client.serialize.unwrap
@@ -18,7 +19,7 @@ sealed class AroundRadius(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<AroundRadius> {
+    internal companion object : Serializer<AroundRadius>, Deserializer<AroundRadius> {
 
         override fun serialize(input: AroundRadius?): JsonElement {
             return input.unwrap {

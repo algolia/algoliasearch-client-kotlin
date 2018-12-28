@@ -11,7 +11,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestResponseFields : TestSerializer<ResponseFields>(ResponseFields) {
+internal class TestResponseFields : TestSerializer<ResponseFields>(ResponseFields, ResponseFields) {
 
     override val item = listOf(
         All to JsonPrimitive(All.raw),

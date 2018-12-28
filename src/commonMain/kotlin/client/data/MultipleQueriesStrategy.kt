@@ -1,9 +1,6 @@
 package client.data
 
-import client.serialize.KeyNone
-import client.serialize.KeyStopIfEnoughMatches
-import client.serialize.Serializer
-import client.serialize.unwrap
+import client.serialize.*
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
@@ -21,7 +18,7 @@ sealed class MultipleQueriesStrategy(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<MultipleQueriesStrategy> {
+    internal companion object : Serializer<MultipleQueriesStrategy>, Deserializer<MultipleQueriesStrategy> {
 
         override fun serialize(input: MultipleQueriesStrategy?): JsonElement {
             return input.unwrap { JsonPrimitive(raw) }

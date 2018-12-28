@@ -1,5 +1,6 @@
 package client.data
 
+import client.serialize.Deserializer
 import client.serialize.Serializer
 import client.serialize.unwrap
 import kotlinx.serialization.json.JsonArray
@@ -14,7 +15,7 @@ data class Point(
 
     internal val floats = listOf(latitude, longitude)
 
-    internal companion object : Serializer<Point> {
+    internal companion object : Serializer<Point>, Deserializer<Point> {
 
         override fun serialize(input: Point?): JsonElement {
             return input.unwrap {

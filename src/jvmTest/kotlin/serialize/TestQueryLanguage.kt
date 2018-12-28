@@ -11,7 +11,7 @@ import tmp.TestSerializer
 
 
 @RunWith(JUnit4::class)
-internal class TestQueryLanguage : TestSerializer<QueryLanguage>(QueryLanguage) {
+internal class TestQueryLanguage : TestSerializer<QueryLanguage>(QueryLanguage, QueryLanguage) {
 
     override val item = listOf(
         Afrikaans to JsonPrimitive(KeyAfrikaans),

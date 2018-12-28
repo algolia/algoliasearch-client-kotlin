@@ -11,7 +11,10 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestRemoveWordIfNoResults : TestSerializer<RemoveWordIfNoResults>(RemoveWordIfNoResults) {
+internal class TestRemoveWordIfNoResults : TestSerializer<RemoveWordIfNoResults>(
+    RemoveWordIfNoResults,
+    RemoveWordIfNoResults
+) {
 
     override val item = listOf(
         None to JsonPrimitive(None.raw),

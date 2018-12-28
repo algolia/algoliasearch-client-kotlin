@@ -34,7 +34,7 @@ sealed class ResponseFields(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<ResponseFields> {
+    internal companion object : Serializer<ResponseFields>, Deserializer<ResponseFields> {
 
         override fun serialize(input: ResponseFields?): JsonElement {
             return input.unwrap { JsonPrimitive(raw) }

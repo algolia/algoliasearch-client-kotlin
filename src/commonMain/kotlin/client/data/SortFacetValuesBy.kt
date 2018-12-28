@@ -1,9 +1,6 @@
 package client.data
 
-import client.serialize.KeyAlpha
-import client.serialize.KeyCount
-import client.serialize.Serializer
-import client.serialize.unwrap
+import client.serialize.*
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
@@ -29,7 +26,7 @@ sealed class SortFacetValuesBy(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<SortFacetValuesBy> {
+    internal companion object : Serializer<SortFacetValuesBy>, Deserializer<SortFacetValuesBy> {
 
         override fun serialize(input: SortFacetValuesBy?): JsonElement {
             return input.unwrap { JsonPrimitive(raw) }

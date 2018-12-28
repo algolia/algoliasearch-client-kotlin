@@ -12,7 +12,10 @@ import tmp.TestSerializer
 
 
 @RunWith(JUnit4::class)
-internal class TestDecompoundedAttributes : TestSerializer<DecompoundedAttributes>(DecompoundedAttributes) {
+internal class TestDecompoundedAttributes : TestSerializer<DecompoundedAttributes>(
+    DecompoundedAttributes,
+    DecompoundedAttributes
+) {
 
     private val decompoundedDe = DecompoundedAttributes(QueryLanguage.German, attributeA, attributeB)
     private val decompoundedFi = DecompoundedAttributes(QueryLanguage.Finnish, attributeA, attributeB)

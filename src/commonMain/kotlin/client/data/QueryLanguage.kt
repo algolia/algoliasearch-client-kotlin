@@ -72,7 +72,7 @@ sealed class QueryLanguage(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<QueryLanguage> {
+    internal companion object : Serializer<QueryLanguage>, Deserializer<QueryLanguage> {
 
         override fun serialize(input: QueryLanguage?): JsonElement {
             return input.unwrap { JsonPrimitive(raw) }

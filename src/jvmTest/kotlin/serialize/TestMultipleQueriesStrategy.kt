@@ -11,7 +11,10 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestMultipleQueriesStrategy : TestSerializer<MultipleQueriesStrategy>(MultipleQueriesStrategy) {
+internal class TestMultipleQueriesStrategy : TestSerializer<MultipleQueriesStrategy>(
+    MultipleQueriesStrategy,
+    MultipleQueriesStrategy
+) {
 
     override val item = listOf(
         None to JsonPrimitive(None.raw),

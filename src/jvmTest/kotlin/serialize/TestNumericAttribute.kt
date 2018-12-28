@@ -11,7 +11,10 @@ import tmp.TestSerializer
 
 
 @RunWith(JUnit4::class)
-internal class TestNumericAttribute : TestSerializer<NumericAttributeFilter>(NumericAttributeFilter) {
+internal class TestNumericAttribute : TestSerializer<NumericAttributeFilter>(
+    NumericAttributeFilter,
+    NumericAttributeFilter
+) {
 
     private val numericAttributeA = NumericAttributeFilter(attributeA)
     private val numericAttributeB = NumericAttributeFilter(attributeB, true)

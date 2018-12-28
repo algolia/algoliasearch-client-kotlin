@@ -1,5 +1,6 @@
 package client.data
 
+import client.serialize.Deserializer
 import client.serialize.Serializer
 import client.serialize.unwrap
 import client.toAttribute
@@ -12,7 +13,7 @@ data class DecompoundedAttributes internal constructor(val language: QueryLangua
     constructor(language: QueryLanguage.German, vararg attributes: Attribute) : this(language, attributes.toList())
     constructor(language: QueryLanguage.Dutch, vararg attributes: Attribute) : this(language, attributes.toList())
 
-    internal companion object : Serializer<DecompoundedAttributes> {
+    internal companion object : Serializer<DecompoundedAttributes>, Deserializer<DecompoundedAttributes> {
 
         override fun serialize(input: DecompoundedAttributes?): JsonElement {
             return input.unwrap {

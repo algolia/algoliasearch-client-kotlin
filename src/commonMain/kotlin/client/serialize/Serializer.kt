@@ -11,6 +11,9 @@ internal interface Serializer<T> {
     fun serializes(input: List<T>?): JsonElement {
         return if (input != null) jsonArray { input.forEach { +serialize(it) } } else JsonNull
     }
+}
+
+internal interface Deserializer<T> {
 
     fun deserialize(element: JsonElement): T?
     fun deserializes(element: JsonElement): List<T>? {

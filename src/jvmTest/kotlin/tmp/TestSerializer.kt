@@ -1,5 +1,6 @@
 package tmp
 
+import client.serialize.Deserializer
 import client.serialize.Serializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
@@ -8,7 +9,10 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 
-internal abstract class TestSerializer<T>(private val serializer: Serializer<T>) {
+internal abstract class TestSerializer<T>(
+    private val serializer: Serializer<T>?,
+    private val deserializer: Deserializer<T>?
+) {
 
     abstract val item: List<Pair<T, JsonElement>>
     abstract val items: List<Pair<List<T>, JsonArray>>
@@ -16,41 +20,53 @@ internal abstract class TestSerializer<T>(private val serializer: Serializer<T>)
 
     @Test
     fun serializeNull() {
-        assertEquals(JsonNull, serializer.serialize(null))
-        assertEquals(JsonNull, serializer.serializes(null))
+        if (serializer != null) {
+            assertEquals(JsonNull, serializer.serialize(null))
+            assertEquals(JsonNull, serializer.serializes(null))
+        }
     }
 
     @Test
     fun serialize() {
-        item.forEach {
-            assertEquals(it.second, serializer.serialize(it.first))
+        if (serializer != null) {
+            item.forEach {
+                assertEquals(it.second, serializer.serialize(it.first))
+            }
         }
     }
 
     @Test
     fun serializes() {
-        items.forEach {
-            assertEquals(it.second, serializer.serializes(it.first))
+        if (serializer != null) {
+            items.forEach {
+                assertEquals(it.second, serializer.serializes(it.first))
+            }
         }
     }
 
     @Test
     fun deserializeNull() {
-        assertEquals(null, serializer.deserialize(JsonNull))
-        assertEquals(null, serializer.deserializes(JsonNull))
+        if (deserializer != null) {
+            assertEquals(null, deserializer.deserialize(JsonNull))
+            assertEquals(null, deserializer.deserializes(JsonNull))
+        }
     }
 
     @Test
     fun deserialize() {
-        item.forEach {
-            assertEquals(it.first, serializer.deserialize(it.second))
+        if (deserializer != null) {
+            item.forEach {
+                assertEquals(it.first, deserializer.deserialize(it.second))
+            }
         }
     }
 
     @Test
     fun deserializes() {
-        items.forEach {
-            assertEquals(it.first, serializer.deserializes(it.second))
+        if (deserializer != null) {
+            items.forEach {
+                assertEquals(it.first, deserializer.deserializes(it.second))
+            }
         }
     }
 }

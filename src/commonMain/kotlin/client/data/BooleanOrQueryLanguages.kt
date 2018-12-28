@@ -1,5 +1,6 @@
 package client.data
 
+import client.serialize.Deserializer
 import client.serialize.Serializer
 import client.serialize.unwrap
 import kotlinx.serialization.json.JsonArray
@@ -16,7 +17,7 @@ sealed class BooleanOrQueryLanguages {
         constructor(vararg queryLanguage: QueryLanguage) : this(queryLanguage.toList())
     }
 
-    internal companion object : Serializer<BooleanOrQueryLanguages> {
+    internal companion object : Serializer<BooleanOrQueryLanguages>, Deserializer<BooleanOrQueryLanguages> {
 
         override fun serialize(input: BooleanOrQueryLanguages?): JsonElement {
             return input.unwrap {

@@ -39,7 +39,7 @@ sealed class RemoveWordIfNoResults(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<RemoveWordIfNoResults> {
+    internal companion object : Serializer<RemoveWordIfNoResults>, Deserializer<RemoveWordIfNoResults> {
 
         override fun serialize(input: RemoveWordIfNoResults?): JsonElement {
             return input.unwrap { JsonPrimitive(raw) }

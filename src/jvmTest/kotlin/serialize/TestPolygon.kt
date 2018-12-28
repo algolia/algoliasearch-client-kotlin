@@ -9,7 +9,7 @@ import tmp.TestSerializer
 
 
 @RunWith(JUnit4::class)
-internal class TestPolygon : TestSerializer<Polygon>(Polygon) {
+internal class TestPolygon : TestSerializer<Polygon>(Polygon, Polygon) {
 
     private val polygon = Polygon(
         1f to 2f,

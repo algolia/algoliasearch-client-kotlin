@@ -1,5 +1,6 @@
 package client.data
 
+import client.serialize.Deserializer
 import client.serialize.Serializer
 import client.serialize.regexSnippet
 import client.serialize.unwrap
@@ -21,7 +22,7 @@ data class Snippet(
         return raw
     }
 
-    internal companion object : Serializer<Snippet> {
+    internal companion object : Serializer<Snippet>, Deserializer<Snippet> {
 
         override fun serialize(input: Snippet?): JsonElement {
             return input.unwrap { JsonPrimitive(raw) }

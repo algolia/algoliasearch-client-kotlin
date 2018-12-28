@@ -1,9 +1,6 @@
 package client.data
 
-import client.serialize.KeyEqualOnly
-import client.serialize.Serializer
-import client.serialize.regexEqualOnly
-import client.serialize.unwrap
+import client.serialize.*
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
@@ -18,7 +15,7 @@ data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boole
         return raw
     }
 
-    internal companion object : Serializer<NumericAttributeFilter> {
+    internal companion object : Serializer<NumericAttributeFilter>, Deserializer<NumericAttributeFilter> {
 
         override fun serialize(input: NumericAttributeFilter?): JsonElement {
             return input.unwrap { JsonPrimitive(raw) }

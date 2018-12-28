@@ -11,7 +11,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestSortFacetValuesBy: TestSerializer<SortFacetValuesBy>(SortFacetValuesBy) {
+internal class TestSortFacetValuesBy: TestSerializer<SortFacetValuesBy>(SortFacetValuesBy, SortFacetValuesBy) {
 
     override val item = listOf(
         Alpha to JsonPrimitive(Alpha.raw),

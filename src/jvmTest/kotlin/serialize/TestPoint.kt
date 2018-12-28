@@ -8,7 +8,7 @@ import tmp.TestSerializer
 
 
 @RunWith(JUnit4::class)
-internal class TestPoint : TestSerializer<Point>(Point) {
+internal class TestPoint : TestSerializer<Point>(Point, Point) {
 
     private val point = Point(1f, 2f)
     private val jsonArray = jsonArray {

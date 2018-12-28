@@ -13,7 +13,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestCustomRanking : TestSerializer<CustomRanking>(CustomRanking) {
+internal class TestCustomRanking : TestSerializer<CustomRanking>(CustomRanking, CustomRanking) {
 
     private val asc = Asc(attributeA)
     private val desc = Desc(attributeB)

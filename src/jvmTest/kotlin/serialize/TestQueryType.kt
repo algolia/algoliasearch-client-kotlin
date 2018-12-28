@@ -11,7 +11,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestQueryType : TestSerializer<QueryType>(QueryType) {
+internal class TestQueryType : TestSerializer<QueryType>(QueryType, QueryType) {
 
     override val item = listOf(
         PrefixNone to JsonPrimitive(PrefixNone.raw),

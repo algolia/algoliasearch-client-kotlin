@@ -11,7 +11,7 @@ import tmp.TestSerializer
 
 
 @RunWith(JUnit4::class)
-internal class TestSnippet : TestSerializer<Snippet>(Snippet) {
+internal class TestSnippet : TestSerializer<Snippet>(Snippet, Snippet) {
 
     private val snippetA = Snippet(attributeA)
     private val snippetB = Snippet(attributeB, 10)
