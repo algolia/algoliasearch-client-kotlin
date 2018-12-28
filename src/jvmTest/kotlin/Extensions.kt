@@ -1,7 +1,7 @@
-
-import client.data.Index
 import client.data.Attribute
+import client.data.Index
 import client.query.helper.*
+import kotlinx.serialization.json.jsonArray
 
 
 internal fun groupMap(): GroupMap<Filter> = mutableMapOf()
@@ -33,6 +33,16 @@ internal val rangeA = FilterRange(attributeA, 0.0, 5.0)
 internal val rangeB = FilterRange(attributeB, 5.0, 10.0)
 internal val tagA = FilterTag("tagA")
 internal val tagB = FilterTag("tagB")
+internal val nestedLists = listOf(listOf(string), listOf(string))
+
+internal val jsonAttributes = jsonArray {
+    +attributeA.raw
+    +attributeB.raw
+}
+internal val jsonNestedLists = jsonArray {
+    +jsonArray { +string }
+    +jsonArray { +string }
+}
 
 internal fun FilterBuilder.buildTest() = build().replace("\"", "")
 
