@@ -293,6 +293,13 @@ class Query(
     var ruleContexts: List<String>? = null,
 
     /**
+     * Enable the Personalization feature.
+     * Engine default: false
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/enablePersonalization/]
+     */
+    var enablePersonalization: Boolean? = null,
+
+    /**
      * Controls if and how query words are interpreted as [prefixes][https://www.algolia.com/doc/guides/textual-relevance/prefix-search/].
      * Engine default: [QueryType.PrefixLast]
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryType/]
@@ -498,6 +505,8 @@ class Query(
                     // Query-rules
                     enableRules?.let { KeyEnableRules to it }
                     ruleContexts?.let { KeyRuleContexts to ListSerializer.serialize(it) }
+                    // Personalization
+                    enablePersonalization?.let { KeyEnablePersonalization to it }
                     // Query-strategy
                     queryType?.let { KeyQueryType to QueryType.serialize(it) }
                     removeWordsIfNoResults?.let { KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.serialize(it) }
