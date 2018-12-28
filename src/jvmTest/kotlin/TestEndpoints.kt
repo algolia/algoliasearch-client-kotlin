@@ -1,7 +1,7 @@
-import client.ApiKey
-import client.ApplicationId
+import client.data.ApiKey
+import client.data.ApplicationId
 import client.Client
-import client.Index
+import client.data.Index
 import client.query.IndexQuery
 import client.query.Query
 import kotlinx.coroutines.runBlocking

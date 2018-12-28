@@ -1,4 +1,4 @@
-import client.ApplicationId
+import client.data.ApplicationId
 import client.host.RetryLogic
 import client.host.Status
 import io.ktor.client.HttpClient

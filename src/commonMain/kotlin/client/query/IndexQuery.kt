@@ -1,6 +1,6 @@
 package client.query
 
-import client.Index
+import client.data.Index
 
 
 data class IndexQuery(

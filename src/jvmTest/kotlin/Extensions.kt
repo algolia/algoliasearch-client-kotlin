@@ -1,5 +1,5 @@
 
-import client.Index
+import client.data.Index
 import client.data.Attribute
 import client.query.helper.*
 

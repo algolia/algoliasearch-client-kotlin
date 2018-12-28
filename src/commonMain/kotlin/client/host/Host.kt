@@ -1,6 +1,6 @@
 package client.host
 
-import client.ApplicationId
+import client.data.ApplicationId
 import client.Time
 import kotlin.random.Random
 

@@ -1,4 +1,6 @@
-package client
+package client.data
+
+import client.StringUTF8
 
 
 data class Index(

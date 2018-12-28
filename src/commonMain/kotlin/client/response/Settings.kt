@@ -1,6 +1,6 @@
 package client.response
 
-import client.Index
+import client.data.Index
 import client.data.*
 import kotlinx.serialization.Serializable
 

@@ -1,5 +1,8 @@
 package client
 
+import client.data.ApiKey
+import client.data.ApplicationId
+import client.data.Index
 import client.host.RetryLogic
 import client.query.IndexQuery
 import client.data.MultipleQueriesStrategy

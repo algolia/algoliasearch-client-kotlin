@@ -1,6 +1,6 @@
 package client.host
 
-import client.ApplicationId
+import client.data.ApplicationId
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout

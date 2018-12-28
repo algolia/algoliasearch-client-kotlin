@@ -1,6 +1,7 @@
 package client
 
 import client.data.Attribute
+import client.data.Index
 import client.data.Point
 import client.data.Snippet
 

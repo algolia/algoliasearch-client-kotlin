@@ -1,5 +1,7 @@
 package client
 
+import client.data.ApiKey
+import client.data.ApplicationId
 import client.query.IndexQuery
 import client.data.MultipleQueriesStrategy
 import client.query.Query
