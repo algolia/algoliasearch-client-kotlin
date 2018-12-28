@@ -13,7 +13,6 @@ import client.response.ListIndexes
 import client.response.MultipleHits
 import client.serialize.KeyFacetQuery
 import client.serialize.KeyMaxFacetHits
-import client.serialize.QuerySerializer
 import io.ktor.client.HttpClient
 import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature
@@ -138,9 +137,9 @@ class Client(
             httpClient.post<FacetHits>(path) {
                 setRequestOptions(requestOptions)
                 val body = if (query != null) {
-                    val serialize = QuerySerializer.serialize(query) as JsonObject
-
+                    val serialize = Query.serialize(query) as JsonObject
                     val map = serialize.toMutableMap()
+
                     maxFacetHits?.let { map[KeyMaxFacetHits] to it }
                     facetQuery?.let { map[KeyFacetQuery] to it }
                     JsonObject(map)

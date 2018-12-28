@@ -5,7 +5,6 @@ import client.data.ApplicationId
 import client.data.MultipleQueriesStrategy
 import client.query.IndexQuery
 import client.query.Query
-import client.serialize.QuerySerializer
 import client.serialize.urlEncode
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
@@ -35,7 +34,7 @@ fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: Mul
             queries.forEach {
                 +json {
                     "indexName" to it.index.name
-                    "params" to (QuerySerializer.serialize(it.query) as JsonObject).urlEncode()
+                    "params" to (Query.serialize(it.query) as JsonObject).urlEncode()
                 }
             }
         }
@@ -44,7 +43,7 @@ fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: Mul
 }
 
 fun HttpRequestBuilder.setBody(query: Query?) {
-    body = if (query != null) QuerySerializer.serialize(query).toString() else json { }.toString()
+    body = if (query != null) Query.serialize(query).toString() else "{}"
 }
 
 fun HttpRequestBuilder.setBody(json: JsonElement) {
