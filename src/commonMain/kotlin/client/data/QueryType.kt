@@ -1,8 +1,9 @@
 package client.data
 
-import client.serialize.KeyPrefixAll
-import client.serialize.KeyPrefixLast
-import client.serialize.KeyPrefixNone
+import client.serialize.*
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.contentOrNull
 
 
 sealed class QueryType(open val raw: String) {
@@ -27,4 +28,21 @@ sealed class QueryType(open val raw: String) {
     object PrefixNone : QueryType(KeyPrefixNone)
 
     data class Unknown(override val raw: String) : QueryType(raw)
+
+    internal companion object : Serializer<QueryType> {
+
+        override fun serialize(input: QueryType?): JsonElement {
+            return input.unwrap { JsonPrimitive(raw) }
+        }
+
+        override fun deserialize(element: JsonElement): QueryType? {
+            return when (val content = element.contentOrNull) {
+                KeyPrefixLast -> PrefixLast
+                KeyPrefixAll -> PrefixAll
+                KeyPrefixNone -> PrefixNone
+                null -> null
+                else -> Unknown(content)
+            }
+        }
+    }
 }
