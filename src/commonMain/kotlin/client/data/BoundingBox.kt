@@ -1,6 +1,7 @@
 package client.data
 
 import client.serialize.Deserializer
+import client.serialize.Floats
 import client.serialize.FloatsSerializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement

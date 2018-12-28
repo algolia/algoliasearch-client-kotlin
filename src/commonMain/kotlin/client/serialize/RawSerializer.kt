@@ -1,6 +1,5 @@
 package client.serialize
 
-import client.data.Raw
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 

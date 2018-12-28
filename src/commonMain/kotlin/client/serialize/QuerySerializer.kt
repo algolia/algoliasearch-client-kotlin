@@ -18,10 +18,10 @@ object QuerySerializer : Serializer<Query> {
                 restrictSearchableAttributes?.let { KeyRestrictSearchableAttributes to Attribute.serializes(it) }
                 // Filters
                 filters?.let { KeyFilters to it }
-                facetFilters?.let { KeyFacetFilters to ListStringSerializer.serializes(it) }
-                optionalFilters?.let { KeyOptionalFilters to ListStringSerializer.serializes(it) }
-                numericFilters?.let { KeyNumericFilters to ListStringSerializer.serializes(it) }
-                tagFilters?.let { KeyTagFilters to ListStringSerializer.serializes(it) }
+                facetFilters?.let { KeyFacetFilters to ListSerializer.serializes(it) }
+                optionalFilters?.let { KeyOptionalFilters to ListSerializer.serializes(it) }
+                numericFilters?.let { KeyNumericFilters to ListSerializer.serializes(it) }
+                tagFilters?.let { KeyTagFilters to ListSerializer.serializes(it) }
                 sumOrFiltersScores?.let { KeySumOrFiltersScores to it }
                 // Facets
                 facets?.let { KeyFacets to Attribute.serializes(it) }
@@ -60,12 +60,12 @@ object QuerySerializer : Serializer<Query> {
                 queryLanguages?.let { KeyQueryLanguages to QueryLanguage.serializes(it) }
                 // Query-rules
                 enableRules?.let { KeyEnableRules to it }
-                ruleContexts?.let { KeyRuleContexts to ListStringSerializer.serialize(it) }
+                ruleContexts?.let { KeyRuleContexts to ListSerializer.serialize(it) }
                 // Query-strategy
                 queryType?.let { KeyQueryType to QueryType.serialize(it) }
                 removeWordsIfNoResults?.let { KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.serialize(it) }
                 advancedSyntax?.let { KeyAdvancedSyntax to it }
-                optionalWords?.let { KeyOptionalWords to ListStringSerializer.serialize(it) }
+                optionalWords?.let { KeyOptionalWords to ListSerializer.serialize(it) }
                 disableExactOnAttributes?.let { KeyDisableExactOnAttributes to Attribute.serializes(it) }
                 exactOnSingleWordQuery?.let { KeyExactOnSingleWordQuery to ExactOnSingleWordQuery.serialize(it) }
                 alternativesAsExact?.let { KeyAlternativesAsExact to AlternativesAsExact.serializes(it) }
@@ -74,7 +74,7 @@ object QuerySerializer : Serializer<Query> {
                 getRankingInfo?.let { KeyGetRankingInfo to it }
                 clickAnalytics?.let { KeyClickAnalytics to it }
                 analytics?.let { KeyAnalytics to it }
-                analyticsTags?.let { KeyAnalyticsTags to ListStringSerializer.serialize(it) }
+                analyticsTags?.let { KeyAnalyticsTags to ListSerializer.serialize(it) }
                 synonyms?.let { KeySynonyms to it }
                 replaceSynonymsInHighlight?.let { KeyReplaceSynonymsInHighlight to it }
                 minProximity?.let { KeyMinProximity to it }

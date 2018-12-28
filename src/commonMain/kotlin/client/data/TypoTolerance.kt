@@ -1,9 +1,6 @@
 package client.data
 
-import client.serialize.Deserializer
-import client.serialize.KeyMin
-import client.serialize.KeyStrict
-import client.serialize.Serializer
+import client.serialize.*
 import kotlinx.serialization.json.*
 
 

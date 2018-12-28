@@ -1,6 +1,7 @@
 package client.data
 
 import client.serialize.Deserializer
+import client.serialize.Raw
 import client.serialize.RawSerializer
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement

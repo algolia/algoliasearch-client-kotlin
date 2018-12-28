@@ -2,6 +2,7 @@ package client.data
 
 import client.serialize.Deserializer
 import client.serialize.KeyAll
+import client.serialize.Raw
 import client.serialize.Serializer
 import kotlinx.serialization.json.*
 

@@ -3,7 +3,6 @@ package client.data
 import client.serialize.*
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
 
 

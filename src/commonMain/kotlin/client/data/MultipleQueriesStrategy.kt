@@ -1,9 +1,6 @@
 package client.data
 
-import client.serialize.Deserializer
-import client.serialize.KeyNone
-import client.serialize.KeyStopIfEnoughMatches
-import client.serialize.RawSerializer
+import client.serialize.*
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.contentOrNull
 
