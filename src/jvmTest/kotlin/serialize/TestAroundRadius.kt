@@ -11,9 +11,8 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestAroundRadius : TestSerializer<AroundRadius>() {
+internal class TestAroundRadius : TestSerializer<AroundRadius>(AroundRadius) {
 
-    override val serializer = AroundRadius
     override val item = listOf(
         All to JsonPrimitive(All.raw),
         InMeters(10) to JsonPrimitive(10),

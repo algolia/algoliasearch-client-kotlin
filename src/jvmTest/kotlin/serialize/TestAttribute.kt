@@ -11,9 +11,7 @@ import tmp.TestSerializer
 
 
 @RunWith(JUnit4::class)
-internal class TestAttribute : TestSerializer<Attribute>() {
-
-    override val serializer = Attribute
+internal class TestAttribute : TestSerializer<Attribute>(Attribute) {
 
     override val item = listOf(
         attributeA to JsonPrimitive(attributeA.name)

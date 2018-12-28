@@ -8,9 +8,7 @@ import tmp.TestSerializer
 
 
 @RunWith(JUnit4::class)
-internal class TestBoundingBox : TestSerializer<BoundingBox>() {
-
-    override val serializer = BoundingBox
+internal class TestBoundingBox : TestSerializer<BoundingBox>(BoundingBox) {
 
     private val boundingBox = BoundingBox(1f, 2f, 3f, 4f)
     private val jsonArray = jsonArray {

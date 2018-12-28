@@ -15,9 +15,8 @@ import tmp.TestSerializer
 
 
 @RunWith(JUnit4::class)
-internal class TestBooleanOrQueryLanguages : TestSerializer<BooleanOrQueryLanguages>() {
+internal class TestBooleanOrQueryLanguages : TestSerializer<BooleanOrQueryLanguages>(BooleanOrQueryLanguages) {
 
-    override val serializer = BooleanOrQueryLanguages
     override val item = listOf(
         Boolean(boolean) to JsonPrimitive(boolean),
         QueryLanguages(

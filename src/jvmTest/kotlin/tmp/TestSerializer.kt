@@ -8,9 +8,7 @@ import org.junit.Test
 import kotlin.test.assertEquals
 
 
-internal abstract class TestSerializer<T> {
-
-    abstract val serializer: Serializer<T>
+internal abstract class TestSerializer<T>(private val serializer: Serializer<T>) {
 
     abstract val item: List<Pair<T, JsonElement>>
     abstract val items: List<Pair<List<T>, JsonArray>>
