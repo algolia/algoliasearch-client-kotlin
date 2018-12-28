@@ -47,7 +47,7 @@ data class Settings(
     var disableExactOnAttributes: List<Attribute>? = null,
     var exactOnSingleWordQuery: ExactOnSingleWordQuery? = null,
     var alternativesAsExact: AlternativesAsExact? = null,
-    var numericAttributesForFiltering: List<NumericAttributes>? = null,
+    var numericAttributesForFiltering: List<NumericAttributeFilter>? = null,
     var allowCompressionOfIntegerArray: Boolean? = null,
     var attributeForDistinct: Attribute? = null,
     var distinct: Int? = null,

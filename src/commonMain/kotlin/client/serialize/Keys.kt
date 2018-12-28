@@ -115,6 +115,7 @@ internal const val KeyQueryAfterRemoval = "queryAfterRemoval"
 internal const val KeyUserData = "userData"
 internal const val KeyCount = "count"
 internal const val KeyAlpha = "alpha"
+internal const val KeyEqualOnly = "equalOnly"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"
