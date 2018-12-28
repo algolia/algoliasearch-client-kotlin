@@ -19,7 +19,7 @@ internal class TestNumericAttribute {
 
     @Test
     fun raw() {
-        assertEquals(attributeA.name, NumericAttributeFilter(attributeA).raw)
+        assertEquals(attributeA.raw, NumericAttributeFilter(attributeA).raw)
         assertEquals("$KeyEqualOnly($attributeA)", NumericAttributeFilter(attributeA, true).raw)
     }
 }

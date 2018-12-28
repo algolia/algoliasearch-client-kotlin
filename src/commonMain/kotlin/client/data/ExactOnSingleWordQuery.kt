@@ -2,11 +2,10 @@ package client.data
 
 import client.serialize.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
 
 
-sealed class ExactOnSingleWordQuery(open val raw: String) {
+sealed class ExactOnSingleWordQuery(override val raw: String) : Raw {
 
     /**
      * The exact ranking criterion is set to 1 if the query matches exactly an entire attribute value (default behavior).
@@ -34,11 +33,7 @@ sealed class ExactOnSingleWordQuery(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<ExactOnSingleWordQuery>, Deserializer<ExactOnSingleWordQuery> {
-
-        override fun serialize(input: ExactOnSingleWordQuery): JsonElement {
-            return JsonPrimitive(input.raw)
-        }
+    internal companion object : RawSerializer<ExactOnSingleWordQuery>, Deserializer<ExactOnSingleWordQuery> {
 
         override fun deserialize(element: JsonElement): ExactOnSingleWordQuery? {
             return when (val content = element.contentOrNull) {

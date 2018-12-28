@@ -7,7 +7,7 @@ import client.serialize.Serializer
 import kotlinx.serialization.json.*
 
 
-sealed class TypoTolerance(open val raw: String) {
+sealed class TypoTolerance(override val raw: String) : Raw {
 
     data class Boolean(val boolean: kotlin.Boolean) : TypoTolerance(boolean.toString())
 

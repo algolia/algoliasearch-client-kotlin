@@ -19,7 +19,7 @@ sealed class BooleanOrQueryLanguages {
     internal companion object : Serializer<BooleanOrQueryLanguages>, Deserializer<BooleanOrQueryLanguages> {
 
         override fun serialize(input: BooleanOrQueryLanguages): JsonElement {
-            return  when (input) {
+            return when (input) {
                 is Boolean -> JsonPrimitive(input.boolean)
                 is QueryLanguages -> QueryLanguage.serializes(input.queryLanguages)
             }

@@ -2,11 +2,10 @@ package client.data
 
 import client.serialize.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
 
 
-sealed class AlternativesAsExact(open val raw: String) {
+sealed class AlternativesAsExact(override val raw: String) : Raw {
 
     /**
      * Alternative words added by the [client.query.Query.ignorePlurals] feature.
@@ -29,11 +28,7 @@ sealed class AlternativesAsExact(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<AlternativesAsExact>, Deserializer<AlternativesAsExact> {
-
-        override fun serialize(input: AlternativesAsExact): JsonElement {
-            return JsonPrimitive(input.raw)
-        }
+    internal companion object : RawSerializer<AlternativesAsExact>, Deserializer<AlternativesAsExact> {
 
         override fun deserialize(element: JsonElement): AlternativesAsExact? {
             return when (val content = element.contentOrNull) {

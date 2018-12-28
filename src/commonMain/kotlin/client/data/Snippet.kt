@@ -1,11 +1,10 @@
 package client.data
 
 import client.serialize.Deserializer
-import client.serialize.Serializer
+import client.serialize.RawSerializer
 import client.serialize.regexSnippet
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.contentOrNull
 
@@ -13,19 +12,15 @@ import kotlinx.serialization.json.contentOrNull
 data class Snippet(
     val attribute: Attribute,
     val count: Int? = null
-) {
+) : Raw {
 
-    val raw = attribute.name + if (count != null) ":$count" else ""
+    override val raw = attribute.raw + if (count != null) ":$count" else ""
 
     override fun toString(): String {
         return raw
     }
 
-    internal companion object : Serializer<Snippet>, Deserializer<Snippet> {
-
-        override fun serialize(input: Snippet): JsonElement {
-            return JsonPrimitive(input.raw)
-        }
+    internal companion object : RawSerializer<Snippet>, Deserializer<Snippet> {
 
         override fun deserialize(element: JsonElement): Snippet? {
             return when (val content = element.contentOrNull) {

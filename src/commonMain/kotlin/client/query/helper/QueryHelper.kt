@@ -6,7 +6,7 @@ import client.query.Query
 @DslMarker
 annotation class QueryHelper
 
-internal val Collection<Attribute>.names get() = map { it.name }
+internal val Collection<Attribute>.names get() = map { it.raw }
 
 internal val all = Attribute("*")
 

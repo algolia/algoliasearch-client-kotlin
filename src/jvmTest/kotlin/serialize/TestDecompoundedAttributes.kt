@@ -20,8 +20,8 @@ internal class TestDecompoundedAttributes : TestSerializer<DecompoundedAttribute
     private val decompoundedDe = DecompoundedAttributes(QueryLanguage.German, attributeA, attributeB)
     private val decompoundedFi = DecompoundedAttributes(QueryLanguage.Finnish, attributeA, attributeB)
     private val jsonArray = jsonArray {
-        +attributeA.name
-        +attributeB.name
+        +attributeA.raw
+        +attributeB.raw
     }
     private val jsonDe = json {
         QueryLanguage.German.raw to jsonArray

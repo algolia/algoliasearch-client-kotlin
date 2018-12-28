@@ -3,11 +3,10 @@ package client.data
 import client.serialize.*
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
 
 
-sealed class CustomRanking(open val raw: String) {
+sealed class CustomRanking(override val raw: String) : Raw {
 
     data class Asc(val attribute: Attribute) : CustomRanking("$KeyAsc($attribute)")
 
@@ -19,11 +18,7 @@ sealed class CustomRanking(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<CustomRanking>, Deserializer<CustomRanking> {
-
-        override fun serialize(input: CustomRanking): JsonElement {
-            return JsonPrimitive(input.raw)
-        }
+    internal companion object : RawSerializer<CustomRanking>, Deserializer<CustomRanking> {
 
         override fun deserialize(element: JsonElement): CustomRanking? {
             return when (val content = element.contentOrNull) {

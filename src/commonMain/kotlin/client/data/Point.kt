@@ -1,28 +1,19 @@
 package client.data
 
 import client.serialize.Deserializer
-import client.serialize.Serializer
+import client.serialize.FloatsSerializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.jsonArray
 
 
 data class Point(
     val latitude: Float,
     val longitude: Float
-) {
+) : Floats {
 
-    val asList = listOf(latitude, longitude)
+    override val asList = listOf(latitude, longitude)
 
-    internal companion object : Serializer<Point>, Deserializer<Point> {
-
-        override fun serialize(input: Point): JsonElement {
-            return jsonArray {
-                input.asList.forEach {
-                    +(it as Number)
-                }
-            }
-        }
+    internal companion object : FloatsSerializer<Point>, Deserializer<Point> {
 
         override fun deserialize(element: JsonElement): Point? {
             return when (element) {

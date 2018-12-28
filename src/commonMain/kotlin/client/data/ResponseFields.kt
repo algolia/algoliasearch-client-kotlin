@@ -2,11 +2,10 @@ package client.data
 
 import client.serialize.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
 
 
-sealed class ResponseFields(open val raw: String) {
+sealed class ResponseFields(override val raw: String) : Raw {
 
     object All : ResponseFields(KeyStar)
     object AroundLatLng : ResponseFields(KeyAroundLatLng)
@@ -34,11 +33,7 @@ sealed class ResponseFields(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<ResponseFields>, Deserializer<ResponseFields> {
-
-        override fun serialize(input: ResponseFields): JsonElement {
-            return JsonPrimitive(input.raw)
-        }
+    internal companion object : RawSerializer<ResponseFields>, Deserializer<ResponseFields> {
 
         override fun deserialize(element: JsonElement): ResponseFields? {
             return when (val content = element.contentOrNull) {

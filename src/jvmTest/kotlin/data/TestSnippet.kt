@@ -21,7 +21,7 @@ internal class TestSnippet {
 
     @Test
     fun raw() {
-        assertEquals(attributeA.name, Snippet(attributeA).raw)
+        assertEquals(attributeA.raw, Snippet(attributeA).raw)
         assertEquals("*", Snippet(attributeAll).raw)
         assertEquals("*:20", Snippet(attributeAll, 20).raw)
         assertEquals("$attributeB:10", Snippet(attributeB, 10).raw)

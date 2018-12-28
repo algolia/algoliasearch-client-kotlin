@@ -1,10 +1,9 @@
 package client.data
 
 import client.serialize.Deserializer
-import client.serialize.Serializer
+import client.serialize.FloatsSerializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.jsonArray
 
 
 data class BoundingBox(
@@ -12,19 +11,11 @@ data class BoundingBox(
     val point2: Float,
     val point3: Float,
     val point4: Float
-) {
+) : Floats {
 
-    val asList = listOf(point1, point2, point3, point4)
+    override val asList = listOf(point1, point2, point3, point4)
 
-    internal companion object : Serializer<BoundingBox>, Deserializer<BoundingBox> {
-
-        override fun serialize(input: BoundingBox): JsonElement {
-            return jsonArray {
-                input.asList.forEach {
-                    +(it as Number)
-                }
-            }
-        }
+    internal companion object : FloatsSerializer<BoundingBox>, Deserializer<BoundingBox> {
 
         override fun deserialize(element: JsonElement): BoundingBox? {
             return when (element) {

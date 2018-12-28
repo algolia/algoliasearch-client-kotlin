@@ -18,6 +18,6 @@ internal class TestAttribute {
 
     @Test
     fun raw() {
-        assertEquals("raw", Attribute("raw").name)
+        assertEquals("raw", Attribute("raw").raw)
     }
 }

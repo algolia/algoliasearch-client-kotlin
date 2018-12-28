@@ -2,11 +2,10 @@ package client.data
 
 import client.serialize.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
 
 
-sealed class RemoveWordIfNoResults(open val raw: String) {
+sealed class RemoveWordIfNoResults(override val raw: String) : Raw {
 
     /**
      * No specific processing is done when a query does not return any results (default behavior).
@@ -39,11 +38,7 @@ sealed class RemoveWordIfNoResults(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<RemoveWordIfNoResults>, Deserializer<RemoveWordIfNoResults> {
-
-        override fun serialize(input: RemoveWordIfNoResults): JsonElement {
-            return JsonPrimitive(input.raw)
-        }
+    internal companion object : RawSerializer<RemoveWordIfNoResults>, Deserializer<RemoveWordIfNoResults> {
 
         override fun deserialize(element: JsonElement): RemoveWordIfNoResults? {
             return when (val content = element.contentOrNull) {

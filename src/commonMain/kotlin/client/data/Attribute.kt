@@ -1,24 +1,19 @@
 package client.data
 
 import client.serialize.Deserializer
-import client.serialize.Serializer
+import client.serialize.RawSerializer
 import client.toAttribute
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
 
 
-data class Attribute(val name: String) {
+data class Attribute(override val raw: String) : Raw {
 
     override fun toString(): String {
-        return name
+        return raw
     }
 
-    internal companion object : Serializer<Attribute>, Deserializer<Attribute> {
-
-        override fun serialize(input: Attribute): JsonElement {
-            return  JsonPrimitive(input.name)
-        }
+    internal companion object : RawSerializer<Attribute>, Deserializer<Attribute> {
 
         override fun deserialize(element: JsonElement): Attribute? {
             return element.contentOrNull?.toAttribute()

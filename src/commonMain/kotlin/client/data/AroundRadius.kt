@@ -6,7 +6,7 @@ import client.serialize.Serializer
 import kotlinx.serialization.json.*
 
 
-sealed class AroundRadius(open val raw: String) {
+sealed class AroundRadius(override val raw: String) : Raw {
 
     object All : AroundRadius(KeyAll)
 

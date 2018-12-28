@@ -14,7 +14,7 @@ import tmp.TestSerializer
 internal class TestAttribute : TestSerializer<Attribute>(Attribute, Attribute) {
 
     override val item = listOf(
-        attributeA to JsonPrimitive(attributeA.name)
+        attributeA to JsonPrimitive(attributeA.raw)
     )
 
     override val items = listOf(
@@ -22,8 +22,8 @@ internal class TestAttribute : TestSerializer<Attribute>(Attribute, Attribute) {
             attributeA,
             attributeB
         ) to jsonArray {
-            +attributeA.name
-            +attributeB.name
+            +attributeA.raw
+            +attributeB.raw
         }
     )
 }

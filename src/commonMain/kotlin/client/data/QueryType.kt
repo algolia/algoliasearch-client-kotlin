@@ -2,11 +2,10 @@ package client.data
 
 import client.serialize.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.contentOrNull
 
 
-sealed class QueryType(open val raw: String) {
+sealed class QueryType(override val raw: String) : Raw {
 
     /**
      *  Only the last word is interpreted as a prefix (default behavior).
@@ -33,11 +32,7 @@ sealed class QueryType(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<QueryType>, Deserializer<QueryType> {
-
-        override fun serialize(input: QueryType): JsonElement {
-            return JsonPrimitive(input.raw)
-        }
+    internal companion object : RawSerializer<QueryType>, Deserializer<QueryType> {
 
         override fun deserialize(element: JsonElement): QueryType? {
             return when (val content = element.contentOrNull) {

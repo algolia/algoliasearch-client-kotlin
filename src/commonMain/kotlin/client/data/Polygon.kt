@@ -1,10 +1,9 @@
 package client.data
 
 import client.serialize.Deserializer
-import client.serialize.Serializer
+import client.serialize.FloatsSerializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.jsonArray
 
 
 data class Polygon(
@@ -12,7 +11,7 @@ data class Polygon(
     val point2: Point,
     val point3: Point,
     private val points: List<Point>
-) {
+) : Floats {
 
     constructor(point1: Point, point2: Point, point3: Point, vararg points: Point) : this(
         point1,
@@ -30,22 +29,14 @@ data class Polygon(
         }
     }
 
-    val asList = listOf(
+    override val asList = listOf(
         *point1.asList.toTypedArray(),
         *point2.asList.toTypedArray(),
         *point3.asList.toTypedArray(),
         *points.flatMap { it.asList }.toTypedArray()
     )
 
-    internal companion object : Serializer<Polygon>, Deserializer<Polygon> {
-
-        override fun serialize(input: Polygon): JsonElement {
-            return jsonArray {
-                input.asList.forEach {
-                    +(it as Number)
-                }
-            }
-        }
+    internal companion object : FloatsSerializer<Polygon>, Deserializer<Polygon> {
 
         override fun deserialize(element: JsonElement): Polygon? {
             return when (element) {

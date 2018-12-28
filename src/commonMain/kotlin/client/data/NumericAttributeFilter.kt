@@ -12,7 +12,7 @@ import kotlinx.serialization.json.contentOrNull
 
 data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boolean = false) {
 
-    val raw = if (equalOnly) "$KeyEqualOnly($attribute)" else attribute.name
+    val raw = if (equalOnly) "$KeyEqualOnly($attribute)" else attribute.raw
 
     override fun toString(): String {
         return raw

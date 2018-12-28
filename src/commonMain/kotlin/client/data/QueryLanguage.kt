@@ -2,12 +2,11 @@ package client.data
 
 import client.serialize.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.contentOrNull
 
 
-sealed class QueryLanguage(open val raw: String) {
+sealed class QueryLanguage(override val raw: String) : Raw {
 
     object Afrikaans : QueryLanguage(KeyAfrikaans)
     object Arabic : QueryLanguage(KeyArabic)
@@ -72,11 +71,7 @@ sealed class QueryLanguage(open val raw: String) {
         return raw
     }
 
-    internal companion object : Serializer<QueryLanguage>, Deserializer<QueryLanguage> {
-
-        override fun serialize(input: QueryLanguage): JsonElement {
-            return JsonPrimitive(input.raw)
-        }
+    internal companion object : RawSerializer<QueryLanguage>, Deserializer<QueryLanguage> {
 
         override fun deserialize(element: JsonElement): QueryLanguage? {
             return when (element.contentOrNull) {
