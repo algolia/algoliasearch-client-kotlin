@@ -1,6 +1,7 @@
+
+import client.Client
 import client.data.ApiKey
 import client.data.ApplicationId
-import client.Client
 import client.data.Index
 import client.query.IndexQuery
 import client.query.Query
@@ -72,7 +73,9 @@ class TestEndpoints {
     @Test
     fun getSettings() {
         runBlocking {
-            api.getSettings(index)
+            val settings = api.getSettings(index)
+
+            println(settings)
         }
     }
 }

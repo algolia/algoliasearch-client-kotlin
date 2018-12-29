@@ -7,10 +7,7 @@ import client.data.MultipleQueriesStrategy
 import client.host.RetryLogic
 import client.query.IndexQuery
 import client.query.Query
-import client.response.FacetHits
-import client.response.Hits
-import client.response.ListIndexes
-import client.response.MultipleHits
+import client.response.*
 import client.serialize.KeyFacetQuery
 import client.serialize.KeyMaxFacetHits
 import io.ktor.client.HttpClient
@@ -25,6 +22,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonTreeParser
 import kotlinx.serialization.json.json
 
 
@@ -116,9 +114,9 @@ class Client(
         }
     }
 
-    suspend fun getSettings(index: Index): String {
+    suspend fun getSettings(index: Index): Settings {
         return read.retry(readTimeout, index.pathIndexes("/settings")) { path ->
-            httpClient.get<String>(path)
+            Settings.deserialize(JsonTreeParser.parse(httpClient.get(path)))!!
         }
     }
 
