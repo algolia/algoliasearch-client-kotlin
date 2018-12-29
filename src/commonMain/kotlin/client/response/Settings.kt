@@ -3,8 +3,7 @@ package client.response
 import client.data.*
 import client.serialize.*
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.*
 
 
 @Serializable
@@ -58,7 +57,7 @@ data class Settings(
     var maxFacetHits: Int? = null
 ) {
 
-    internal companion object : Serializer<Settings> {
+    internal companion object : Serializer<Settings>, Deserializer<Settings> {
 
         override fun serialize(input: Settings): JsonElement {
             return input.run {
@@ -126,6 +125,90 @@ data class Settings(
                     responseFields?.let { KeyResponseFields to ResponseFields.serializeList(it) }
                     maxFacetHits?.let { KeyMaxFacetHits to it }
                 }
+            }
+        }
+
+        override fun deserialize(element: JsonElement): Settings? {
+            return when (element) {
+                is JsonObject -> {
+                    Settings().apply {
+                        element.forEach { (key, element) ->
+                            when (key) {
+                                // Attributes
+                                KeySearchableAttributes -> searchableAttributes = Attribute.deserializeList(element)
+                                KeyAttributesForFaceting -> attributesForFaceting = Attribute.deserializeList(element)
+                                KeyUnretrievableAttributes -> unretrievableAttributes =
+                                    Attribute.deserializeList(element)
+                                KeyAttributesToRetrieve -> attributesToRetrieve = Attribute.deserializeList(element)
+                                // Ranking
+                                KeyRanking -> ranking = Ranking.deserializeList(element)
+                                KeyCustomRanking -> customRanking = CustomRanking.deserializeList(element)
+                                KeyReplicas -> replicas = Index.deserializeList(element)
+                                // Faceting
+                                KeyMaxValuesPerFacet -> maxValuesPerFacet = element.intOrNull
+                                KeySortFacetValuesBy -> sortFacetValuesBy = SortFacetValuesBy.deserialize(element)
+                                // Highlighting
+                                KeyAttributesToHighlight -> attributesToHighlight = Attribute.deserializeList(element)
+                                KeyAttributesToSnippet -> attributesToSnippet = Snippet.deserializeList(element)
+                                KeyHighlightPreTag -> highlightPreTag = element.contentOrNull
+                                KeyHighlightPostTag -> highlightPostTag = element.contentOrNull
+                                KeySnippetEllipsisText -> snippetEllipsisText = element.contentOrNull
+                                KeyRestrictHighlightAndSnippetArrays -> restrictHighlightAndSnippetArrays =
+                                    element.booleanOrNull
+                                // Pagination
+                                KeyHitsPerPage -> hitsPerPage = element.intOrNull
+                                KeyPaginationLimitedTo -> paginationLimitedTo = element.intOrNull
+                                // Typos
+                                KeyMinWordSizefor1Typo -> minWordSizefor1Typo = element.intOrNull
+                                KeyMinWordSizefor2Typos -> minWordSizefor2Typos = element.intOrNull
+                                KeyTypoTolerance -> typoTolerance = TypoTolerance.deserialize(element)
+                                KeyAllowTyposOnNumericTokens -> allowTyposOnNumericTokens = element.booleanOrNull
+                                KeyDisableTypoToleranceOnAttributes -> disableTypoToleranceOnAttributes =
+                                    Attribute.deserializeList(element)
+                                KeyDisableTypoToleranceOnWords -> disableTypoToleranceOnWords =
+                                    ListSerializer.deserialize(element)
+                                KeySeparatorsToIndex -> separatorsToIndex = element.contentOrNull
+                                // Languages
+                                KeyIgnorePlurals -> ignorePlurals = BooleanOrQueryLanguages.deserialize(element)
+                                KeyRemoveStopWords -> removeStopWords = BooleanOrQueryLanguages.deserialize(element)
+                                KeyCamelCaseAttributes -> camelCaseAttributes = Attribute.deserializeList(element)
+                                KeyDecompoundedAttributes -> decompoundedAttributes =
+                                    DecompoundedAttributes.deserializeList(element)
+                                KeyKeepDiacriticsOnCharacters -> keepDiacriticsOnCharacters = element.contentOrNull
+                                KeyQueryLanguages -> queryLanguages = QueryLanguage.deserializeList(element)
+                                // Query-rules
+                                KeyEnableRules -> enableRules = element.booleanOrNull
+                                // Query-strategy
+                                KeyQueryType -> queryType = QueryType.deserialize(element)
+                                KeyRemoveWordsIfNoResults -> removeWordsIfNoResults =
+                                    RemoveWordIfNoResults.deserialize(element)
+                                KeyAdvancedSyntax -> advancedSyntax = element.booleanOrNull
+                                KeyOptionalWords -> optionalWords = ListSerializer.deserialize(element)
+                                KeyDisablePrefixOnAttributes -> disablePrefixOnAttributes =
+                                    Attribute.deserializeList(element)
+                                KeyDisableExactOnAttributes -> disableExactOnAttributes =
+                                    Attribute.deserializeList(element)
+                                KeyExactOnSingleWordQuery -> exactOnSingleWordQuery =
+                                    ExactOnSingleWordQuery.deserialize(element)
+                                KeyAlternativesAsExact -> alternativesAsExact =
+                                    AlternativesAsExact.deserializeList(element)
+                                // Performance
+                                KeyNumericAttributesForFiltering -> numericAttributesForFiltering =
+                                    NumericAttributeFilter.deserializeList(element)
+                                KeyAllowCompressionOfIntegerArray -> allowCompressionOfIntegerArray =
+                                    element.booleanOrNull
+                                // Advanced
+                                KeyAttributeForDistinct -> attributeForDistinct = Attribute.deserialize(element)
+                                KeyDistinct -> distinct = element.intOrNull
+                                KeyReplaceSynonymsInHighlight -> replaceSynonymsInHighlight = element.booleanOrNull
+                                KeyMinProximity -> minProximity = element.intOrNull
+                                KeyResponseFields -> responseFields = ResponseFields.deserializeList(element)
+                                KeyMaxFacetHits -> maxFacetHits = element.intOrNull
+                            }
+                        }
+                    }
+                }
+                else -> null
             }
         }
     }

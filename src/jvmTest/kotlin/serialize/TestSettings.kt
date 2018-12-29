@@ -18,7 +18,7 @@ import string
 
 
 @RunWith(JUnit4::class)
-internal class TestSettings : TestSerializer<Settings>(Settings, null) {
+internal class TestSettings : TestSerializer<Settings>(Settings, Settings) {
 
     override val item = listOf(
         Settings(
