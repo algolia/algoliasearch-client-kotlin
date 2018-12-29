@@ -9,6 +9,7 @@ import client.query.IndexQuery
 import client.query.Query
 import client.response.*
 import client.serialize.KeyFacetQuery
+import client.serialize.KeyForwardToReplicas
 import client.serialize.KeyMaxFacetHits
 import io.ktor.client.HttpClient
 import io.ktor.client.features.DefaultRequest
@@ -21,6 +22,7 @@ import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
+import io.ktor.client.request.put
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonTreeParser
 import kotlinx.serialization.json.json
@@ -117,6 +119,15 @@ class Client(
     suspend fun getSettings(index: Index): Settings {
         return read.retry(readTimeout, index.pathIndexes("/settings")) { path ->
             Settings.deserialize(JsonTreeParser.parse(httpClient.get(path)))!!
+        }
+    }
+
+    suspend fun setSettings(index: Index, settings: Settings, forwardToReplicas: Boolean = false): Task {
+        return write.retry(writeTimeout, index.pathIndexes("/settings")) { path ->
+            httpClient.put<Task>(path) {
+                body = Settings.serialize(settings).toString()
+                parameter(KeyForwardToReplicas, forwardToReplicas)
+            }
         }
     }
 

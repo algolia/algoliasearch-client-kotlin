@@ -118,6 +118,7 @@ internal const val KeyFacetQuery = "facetQuery"
 internal const val KeyStrategy = "strategy"
 internal const val KeyRequests = "requests"
 internal const val KeyIndexName = "indexName"
+internal const val KeyForwardToReplicas = "forwardToReplicas"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"

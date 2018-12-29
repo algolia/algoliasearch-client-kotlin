@@ -5,6 +5,7 @@ import client.data.ApplicationId
 import client.data.Index
 import client.query.IndexQuery
 import client.query.Query
+import client.response.Settings
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -76,6 +77,15 @@ class TestEndpoints {
             val settings = api.getSettings(index)
 
             println(settings)
+        }
+    }
+
+    @Test
+    fun setSettings() {
+        runBlocking {
+            val task = api.setSettings(index, Settings())
+
+            println(task)
         }
     }
 }
