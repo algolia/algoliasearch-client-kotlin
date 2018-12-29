@@ -5,7 +5,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
 
-sealed class ResponseFields(override val raw: String) : Raw {
+sealed class ResponseFields(override val raw: String) : RawString {
 
     object All : ResponseFields(KeyStar)
     object AroundLatLng : ResponseFields(KeyAroundLatLng)
@@ -33,7 +33,7 @@ sealed class ResponseFields(override val raw: String) : Raw {
         return raw
     }
 
-    internal companion object : RawSerializer<ResponseFields>, Deserializer<ResponseFields> {
+    internal companion object : RawStringSerializer<ResponseFields>, Deserializer<ResponseFields> {
 
         override fun deserialize(element: JsonElement): ResponseFields? {
             return when (element) {

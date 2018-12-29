@@ -18,6 +18,6 @@ internal class TestBoundingBox {
         assertEquals(2f, boundingBox.point2)
         assertEquals(3f, boundingBox.point3)
         assertEquals(4f, boundingBox.point4)
-        assertEquals(listOf(1f, 2f, 3f, 4f), boundingBox.asList)
+        assertEquals(listOf(1f, 2f, 3f, 4f), boundingBox.raw)
     }
 }

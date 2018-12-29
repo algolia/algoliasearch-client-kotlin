@@ -22,7 +22,7 @@ internal class TestPoint {
     fun point() {
         val point = Point(1f, 2f)
 
-        assertEquals(listOf(1f, 2f), point.asList)
+        assertEquals(listOf(1f, 2f), point.raw)
         assertEquals(point.latitude, 1f)
         assertEquals(point.longitude, 2f)
     }

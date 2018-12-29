@@ -460,10 +460,10 @@ class Query(
                     restrictSearchableAttributes?.let { KeyRestrictSearchableAttributes to Attribute.serializeList(it) }
                     // Filters
                     filters?.let { KeyFilters to it }
-                    facetFilters?.let { KeyFacetFilters to ListSerializer.serializeList(it) }
-                    optionalFilters?.let { KeyOptionalFilters to ListSerializer.serializeList(it) }
-                    numericFilters?.let { KeyNumericFilters to ListSerializer.serializeList(it) }
-                    tagFilters?.let { KeyTagFilters to ListSerializer.serializeList(it) }
+                    facetFilters?.let { KeyFacetFilters to ListStringSerializer.serializeList(it) }
+                    optionalFilters?.let { KeyOptionalFilters to ListStringSerializer.serializeList(it) }
+                    numericFilters?.let { KeyNumericFilters to ListStringSerializer.serializeList(it) }
+                    tagFilters?.let { KeyTagFilters to ListStringSerializer.serializeList(it) }
                     sumOrFiltersScores?.let { KeySumOrFiltersScores to it }
                     // Facets
                     facets?.let { KeyFacets to Attribute.serializeList(it) }
@@ -504,14 +504,14 @@ class Query(
                     queryLanguages?.let { KeyQueryLanguages to QueryLanguage.serializeList(it) }
                     // Query-rules
                     enableRules?.let { KeyEnableRules to it }
-                    ruleContexts?.let { KeyRuleContexts to ListSerializer.serialize(it) }
+                    ruleContexts?.let { KeyRuleContexts to ListStringSerializer.serialize(it) }
                     // Personalization
                     enablePersonalization?.let { KeyEnablePersonalization to it }
                     // Query-strategy
                     queryType?.let { KeyQueryType to QueryType.serialize(it) }
                     removeWordsIfNoResults?.let { KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.serialize(it) }
                     advancedSyntax?.let { KeyAdvancedSyntax to it }
-                    optionalWords?.let { KeyOptionalWords to ListSerializer.serialize(it) }
+                    optionalWords?.let { KeyOptionalWords to ListStringSerializer.serialize(it) }
                     disableExactOnAttributes?.let { KeyDisableExactOnAttributes to Attribute.serializeList(it) }
                     exactOnSingleWordQuery?.let { KeyExactOnSingleWordQuery to ExactOnSingleWordQuery.serialize(it) }
                     alternativesAsExact?.let { KeyAlternativesAsExact to AlternativesAsExact.serializeList(it) }
@@ -520,7 +520,7 @@ class Query(
                     getRankingInfo?.let { KeyGetRankingInfo to it }
                     clickAnalytics?.let { KeyClickAnalytics to it }
                     analytics?.let { KeyAnalytics to it }
-                    analyticsTags?.let { KeyAnalyticsTags to ListSerializer.serialize(it) }
+                    analyticsTags?.let { KeyAnalyticsTags to ListStringSerializer.serialize(it) }
                     synonyms?.let { KeySynonyms to it }
                     replaceSynonymsInHighlight?.let { KeyReplaceSynonymsInHighlight to it }
                     minProximity?.let { KeyMinProximity to it }

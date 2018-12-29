@@ -5,7 +5,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
 
-sealed class QueryType(override val raw: String) : Raw {
+sealed class QueryType(override val raw: String) : RawString {
 
     /**
      *  Only the last word is interpreted as a prefix (default behavior).
@@ -32,7 +32,7 @@ sealed class QueryType(override val raw: String) : Raw {
         return raw
     }
 
-    internal companion object : RawSerializer<QueryType>, Deserializer<QueryType> {
+    internal companion object : RawStringSerializer<QueryType>, Deserializer<QueryType> {
 
         override fun deserialize(element: JsonElement): QueryType? {
             return when (element) {

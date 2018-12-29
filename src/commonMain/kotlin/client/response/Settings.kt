@@ -92,7 +92,7 @@ data class Settings(
                     disableTypoToleranceOnAttributes?.let {
                         KeyDisableTypoToleranceOnAttributes to Attribute.serializeList(it)
                     }
-                    disableTypoToleranceOnWords?.let { KeyDisableTypoToleranceOnWords to ListSerializer.serialize(it) }
+                    disableTypoToleranceOnWords?.let { KeyDisableTypoToleranceOnWords to ListStringSerializer.serialize(it) }
                     separatorsToIndex?.let { KeySeparatorsToIndex to it }
                     // Languages
                     ignorePlurals?.let { KeyIgnorePlurals to BooleanOrQueryLanguages.serialize(it) }
@@ -107,7 +107,7 @@ data class Settings(
                     queryType?.let { KeyQueryType to QueryType.serialize(it) }
                     removeWordsIfNoResults?.let { KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.serialize(it) }
                     advancedSyntax?.let { KeyAdvancedSyntax to it }
-                    optionalWords?.let { KeyOptionalWords to ListSerializer.serialize(it) }
+                    optionalWords?.let { KeyOptionalWords to ListStringSerializer.serialize(it) }
                     disablePrefixOnAttributes?.let { KeyDisablePrefixOnAttributes to Attribute.serializeList(it) }
                     disableExactOnAttributes?.let { KeyDisableExactOnAttributes to Attribute.serializeList(it) }
                     exactOnSingleWordQuery?.let { KeyExactOnSingleWordQuery to ExactOnSingleWordQuery.serialize(it) }
@@ -166,7 +166,7 @@ data class Settings(
                                 KeyDisableTypoToleranceOnAttributes -> disableTypoToleranceOnAttributes =
                                     Attribute.deserializeList(element)
                                 KeyDisableTypoToleranceOnWords -> disableTypoToleranceOnWords =
-                                    ListSerializer.deserialize(element)
+                                    ListStringSerializer.deserialize(element)
                                 KeySeparatorsToIndex -> separatorsToIndex = element.contentOrNull
                                 // Languages
                                 KeyIgnorePlurals -> ignorePlurals = BooleanOrQueryLanguages.deserialize(element)
@@ -183,7 +183,7 @@ data class Settings(
                                 KeyRemoveWordsIfNoResults -> removeWordsIfNoResults =
                                     RemoveWordIfNoResults.deserialize(element)
                                 KeyAdvancedSyntax -> advancedSyntax = element.booleanOrNull
-                                KeyOptionalWords -> optionalWords = ListSerializer.deserialize(element)
+                                KeyOptionalWords -> optionalWords = ListStringSerializer.deserialize(element)
                                 KeyDisablePrefixOnAttributes -> disablePrefixOnAttributes =
                                     Attribute.deserializeList(element)
                                 KeyDisableExactOnAttributes -> disableExactOnAttributes =

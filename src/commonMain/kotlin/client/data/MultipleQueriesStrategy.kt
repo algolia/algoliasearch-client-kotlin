@@ -5,7 +5,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
 
-sealed class MultipleQueriesStrategy(override val raw: String) : Raw {
+sealed class MultipleQueriesStrategy(override val raw: String) : RawString {
 
     object None : MultipleQueriesStrategy(KeyNone)
 
@@ -17,7 +17,7 @@ sealed class MultipleQueriesStrategy(override val raw: String) : Raw {
         return raw
     }
 
-    internal companion object : RawSerializer<MultipleQueriesStrategy>, Deserializer<MultipleQueriesStrategy> {
+    internal companion object : RawStringSerializer<MultipleQueriesStrategy>, Deserializer<MultipleQueriesStrategy> {
 
         override fun deserialize(element: JsonElement): MultipleQueriesStrategy? {
             return when (element) {

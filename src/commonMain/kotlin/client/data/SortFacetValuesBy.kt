@@ -5,7 +5,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
 
-sealed class SortFacetValuesBy(override val raw: String) : Raw {
+sealed class SortFacetValuesBy(override val raw: String) : RawString {
 
     /**
      * FacetFilter values are sorted by decreasing count.
@@ -25,7 +25,7 @@ sealed class SortFacetValuesBy(override val raw: String) : Raw {
         return raw
     }
 
-    internal companion object : RawSerializer<SortFacetValuesBy>, Deserializer<SortFacetValuesBy> {
+    internal companion object : RawStringSerializer<SortFacetValuesBy>, Deserializer<SortFacetValuesBy> {
 
         override fun deserialize(element: JsonElement): SortFacetValuesBy? {
             return when (element) {

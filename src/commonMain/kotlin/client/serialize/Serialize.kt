@@ -2,7 +2,9 @@ package client.serialize
 
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
-import kotlinx.serialization.json.*
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.content
 
 internal val regexAsc = Regex("$KeyAsc\\((.*)\\)")
 internal val regexDesc = Regex("$KeyDesc\\((.*)\\)")
@@ -18,8 +20,4 @@ internal fun JsonObject.urlEncode(): String {
             }
         }
     }.formUrlEncode()
-}
-
-internal fun <T> T?.unwrap(block: T.() -> JsonElement): JsonElement {
-    return if (this != null) block(this) else JsonNull
 }

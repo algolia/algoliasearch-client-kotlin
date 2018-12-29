@@ -5,7 +5,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
 
-sealed class QueryLanguage(override val raw: String) : Raw {
+sealed class QueryLanguage(override val raw: String) : RawString {
 
     object Afrikaans : QueryLanguage(KeyAfrikaans)
     object Arabic : QueryLanguage(KeyArabic)
@@ -70,7 +70,7 @@ sealed class QueryLanguage(override val raw: String) : Raw {
         return raw
     }
 
-    internal companion object : RawSerializer<QueryLanguage>, Deserializer<QueryLanguage> {
+    internal companion object : RawStringSerializer<QueryLanguage>, Deserializer<QueryLanguage> {
 
         override fun deserialize(element: JsonElement): QueryLanguage? {
             return when (element) {

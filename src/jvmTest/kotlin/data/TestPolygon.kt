@@ -21,7 +21,7 @@ internal class TestPolygon {
         assertEquals(point1, polygon.point1)
         assertEquals(point2, polygon.point2)
         assertEquals(point3, polygon.point3)
-        assertEquals(listOf(1f, 2f, 3f, 4f, 5f, 6f, 7f, 8f), polygon.asList)
+        assertEquals(listOf(1f, 2f, 3f, 4f, 5f, 6f, 7f, 8f), polygon.raw)
     }
 
     @Test

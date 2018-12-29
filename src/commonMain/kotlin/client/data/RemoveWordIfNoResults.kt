@@ -5,7 +5,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
 
-sealed class RemoveWordIfNoResults(override val raw: String) : Raw {
+sealed class RemoveWordIfNoResults(override val raw: String) : RawString {
 
     /**
      * No specific processing is done when a query does not return any results (default behavior).
@@ -38,7 +38,7 @@ sealed class RemoveWordIfNoResults(override val raw: String) : Raw {
         return raw
     }
 
-    internal companion object : RawSerializer<RemoveWordIfNoResults>, Deserializer<RemoveWordIfNoResults> {
+    internal companion object : RawStringSerializer<RemoveWordIfNoResults>, Deserializer<RemoveWordIfNoResults> {
 
         override fun deserialize(element: JsonElement): RemoveWordIfNoResults? {
             return when (element) {

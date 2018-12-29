@@ -5,7 +5,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
 
-sealed class ExactOnSingleWordQuery(override val raw: String) : Raw {
+sealed class ExactOnSingleWordQuery(override val raw: String) : RawString {
 
     /**
      * The exact ranking criterion is set to 1 if the query matches exactly an entire attribute value (default behavior).
@@ -33,7 +33,7 @@ sealed class ExactOnSingleWordQuery(override val raw: String) : Raw {
         return raw
     }
 
-    internal companion object : RawSerializer<ExactOnSingleWordQuery>, Deserializer<ExactOnSingleWordQuery> {
+    internal companion object : RawStringSerializer<ExactOnSingleWordQuery>, Deserializer<ExactOnSingleWordQuery> {
 
         override fun deserialize(element: JsonElement): ExactOnSingleWordQuery? {
             return when (element) {

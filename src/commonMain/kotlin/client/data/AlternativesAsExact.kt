@@ -5,7 +5,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
 
-sealed class AlternativesAsExact(override val raw: String) : Raw {
+sealed class AlternativesAsExact(override val raw: String) : RawString {
 
     /**
      * Alternative words added by the [client.query.Query.ignorePlurals] feature.
@@ -28,7 +28,7 @@ sealed class AlternativesAsExact(override val raw: String) : Raw {
         return raw
     }
 
-    internal companion object : RawSerializer<AlternativesAsExact>, Deserializer<AlternativesAsExact> {
+    internal companion object : RawStringSerializer<AlternativesAsExact>, Deserializer<AlternativesAsExact> {
 
         override fun deserialize(element: JsonElement): AlternativesAsExact? {
             return when (element) {

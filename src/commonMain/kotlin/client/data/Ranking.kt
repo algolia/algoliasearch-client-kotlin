@@ -6,7 +6,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
 
-sealed class Ranking(override val raw: String) : Raw {
+sealed class Ranking(override val raw: String) : RawString {
 
     object Typo : Ranking(KeyTypo)
 
@@ -34,7 +34,7 @@ sealed class Ranking(override val raw: String) : Raw {
         return raw
     }
 
-    internal companion object : RawSerializer<Ranking>, Deserializer<Ranking> {
+    internal companion object : RawStringSerializer<Ranking>, Deserializer<Ranking> {
 
         override fun deserialize(element: JsonElement): Ranking? {
             return when (element) {

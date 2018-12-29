@@ -2,8 +2,7 @@ package client.data
 
 import client.StringUTF8
 import client.serialize.Deserializer
-import client.serialize.Raw
-import client.serialize.RawSerializer
+import client.serialize.RawStringSerializer
 import client.toIndex
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
@@ -11,7 +10,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 data class Index(
     override val raw: String
-) : Raw {
+) : RawString {
 
     fun encode(): StringUTF8 {
         return StringUTF8.encode(raw)
@@ -21,7 +20,7 @@ data class Index(
         return raw
     }
 
-    companion object : RawSerializer<Index>, Deserializer<Index> {
+    companion object : RawStringSerializer<Index>, Deserializer<Index> {
 
         override fun deserialize(element: JsonElement): Index? {
             return when (element) {
