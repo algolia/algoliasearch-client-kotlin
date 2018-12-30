@@ -8,7 +8,6 @@ interface EndpointsSearch {
 
     val indexName: IndexName
 
-    suspend fun getListIndexes(requestOptions: RequestOptions? = null): ListIndexes
 
     suspend fun search(requestOptions: RequestOptions? = null): Hits
 

@@ -19,16 +19,6 @@ class ClientSearch(
     override val indexName: IndexName
 ) : EndpointsSearch {
 
-    override suspend fun getListIndexes(requestOptions: RequestOptions?): ListIndexes {
-        return client.run {
-            read.retry(requestOptions.computedReadTimeout, "/1/indexes") { path ->
-                httpClient.get<ListIndexes>(path) {
-                    setRequestOptions(requestOptions)
-                }
-            }
-        }
-    }
-
     override suspend fun search(requestOptions: RequestOptions?): Hits {
         return client.run {
             read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes()) { path ->
