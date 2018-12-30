@@ -13,7 +13,7 @@ data class Settings(
     var attributesToRetrieve: List<Attribute>? = null,
     var ranking: List<Ranking>? = null,
     var customRanking: List<CustomRanking>? = null,
-    var replicas: List<Index>? = null,
+    var replicas: List<IndexName>? = null,
     var maxValuesPerFacet: Int? = null,
     var sortFacetValuesBy: SortFacetValuesBy? = null,
     var attributesToHighlight: List<Attribute>? = null,
@@ -69,7 +69,7 @@ data class Settings(
                     // Ranking
                     ranking?.let { KeyRanking to Ranking.serializeList(it) }
                     customRanking?.let { KeyCustomRanking to CustomRanking.serializeList(it) }
-                    replicas?.let { KeyReplicas to Index.serializeList(it) }
+                    replicas?.let { KeyReplicas to IndexName.serializeList(it) }
                     // Faceting
                     maxValuesPerFacet?.let { KeyMaxValuesPerFacet to it }
                     sortFacetValuesBy?.let { KeySortFacetValuesBy to SortFacetValuesBy.serialize(it) }
@@ -142,7 +142,7 @@ data class Settings(
                                 // Ranking
                                 KeyRanking -> ranking = Ranking.deserializeList(element)
                                 KeyCustomRanking -> customRanking = CustomRanking.deserializeList(element)
-                                KeyReplicas -> replicas = Index.deserializeList(element)
+                                KeyReplicas -> replicas = IndexName.deserializeList(element)
                                 // Faceting
                                 KeyMaxValuesPerFacet -> maxValuesPerFacet = element.intOrNull
                                 KeySortFacetValuesBy -> sortFacetValuesBy = SortFacetValuesBy.deserialize(element)

@@ -115,7 +115,7 @@ internal class TestKeys {
         "exhaustiveFacetsCount" shouldEqual KeyExhaustiveFacetsCount
         "facets_stats" shouldEqual KeyFacetsStats
         "hits" shouldEqual KeyHits
-        "index" shouldEqual KeyIndex
+        "indexName" shouldEqual KeyIndex
         "nbHits" shouldEqual KeyNbHits
         "nbPages" shouldEqual KeyNbPages
         "params" shouldEqual KeyParams

@@ -8,7 +8,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
 
-data class Index(
+data class IndexName(
     override val raw: String
 ) : RawString {
 
@@ -20,9 +20,9 @@ data class Index(
         return raw
     }
 
-    companion object : RawStringSerializer<Index>, Deserializer<Index> {
+    companion object : RawStringSerializer<IndexName>, Deserializer<IndexName> {
 
-        override fun deserialize(element: JsonElement): Index? {
+        override fun deserialize(element: JsonElement): IndexName? {
             return when (element) {
                 is JsonPrimitive -> element.contentOrNull?.toIndex()
                 else -> null

@@ -1,5 +1,5 @@
 import client.data.Attribute
-import client.data.Index
+import client.data.IndexName
 import client.query.*
 import kotlinx.serialization.json.jsonArray
 import kotlin.test.*
@@ -18,8 +18,8 @@ internal const val all = "*"
 internal val attributeA = Attribute("attributeA")
 internal val attributeB = Attribute("attributeB")
 internal val attributeC = Attribute("attributeC")
-internal val indexA = Index("indexA")
-internal val indexB = Index("indexB")
+internal val indexA = IndexName("indexA")
+internal val indexB = IndexName("indexB")
 internal val groupOrA = GroupOr(nameA)
 internal val groupOrB = GroupOr(nameB)
 internal val groupAndA = GroupAnd(nameA)

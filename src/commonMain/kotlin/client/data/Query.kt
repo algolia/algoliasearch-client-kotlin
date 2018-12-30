@@ -10,7 +10,7 @@ import kotlinx.serialization.json.json
 @QueryHelper
 class Query(
     /**
-     * The text to search in the index.
+     * The text to search in the indexName.
      * Engine default: "" (empty name)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/query/]
      */
@@ -383,7 +383,7 @@ class Query(
     var analyticsTags: List<String>? = null,
 
     /**
-     * Whether to take into account an index’s synonyms for a particular search.
+     * Whether to take into account an indexName’s synonyms for a particular search.
      * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/synonyms/]
      */

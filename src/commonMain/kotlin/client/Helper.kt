@@ -1,13 +1,13 @@
 package client
 
 import client.data.Attribute
-import client.data.Index
+import client.data.IndexName
 import client.data.Point
 import client.data.Snippet
 
 
-fun String.toIndex(): Index {
-    return Index(this)
+fun String.toIndex(): IndexName {
+    return IndexName(this)
 }
 
 fun String.toAttribute(): Attribute {

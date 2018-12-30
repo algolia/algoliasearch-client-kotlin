@@ -2,6 +2,6 @@ package client.data
 
 
 data class IndexQuery(
-    val index: Index,
+    val indexName: IndexName,
     val query: Query
 )

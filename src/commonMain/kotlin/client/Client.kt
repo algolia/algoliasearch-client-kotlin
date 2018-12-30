@@ -54,7 +54,7 @@ class Client(
     private val RequestOptions?.computedWriteTimeout get() = this?.writeTimeout ?: writeTimeout
     private val RequestOptions?.computedReadTimeout get() = this?.readTimeout ?: readTimeout
 
-    private fun Index.pathIndexes(suffix: String = ""): String {
+    private fun IndexName.pathIndexes(suffix: String = ""): String {
         return "/1/indexes/${encode().string}" + suffix
     }
 
@@ -66,16 +66,16 @@ class Client(
         }
     }
 
-    internal suspend fun search(index: Index, requestOptions: RequestOptions? = null): Hits {
-        return read.retry(requestOptions.computedReadTimeout, index.pathIndexes()) { path ->
+    internal suspend fun search(indexName: IndexName, requestOptions: RequestOptions? = null): Hits {
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes()) { path ->
             httpClient.get<Hits>(path) {
                 setRequestOptions(requestOptions)
             }
         }
     }
 
-    suspend fun search(index: Index, query: Query? = null, requestOptions: RequestOptions? = null): Hits {
-        return read.retry(requestOptions.computedReadTimeout, index.pathIndexes("/query")) { path ->
+    suspend fun search(indexName: IndexName, query: Query? = null, requestOptions: RequestOptions? = null): Hits {
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/query")) { path ->
             httpClient.post<Hits>(path) {
                 setRequestOptions(requestOptions)
                 setBody(query)
@@ -83,8 +83,8 @@ class Client(
         }
     }
 
-    suspend fun browse(index: Index, query: Query? = null, requestOptions: RequestOptions? = null): Hits {
-        return read.retry(requestOptions.computedReadTimeout, index.pathIndexes("/browse")) { path ->
+    suspend fun browse(indexName: IndexName, query: Query? = null, requestOptions: RequestOptions? = null): Hits {
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
             httpClient.post<Hits>(path) {
                 setRequestOptions(requestOptions)
                 setBody(query)
@@ -92,8 +92,8 @@ class Client(
         }
     }
 
-    suspend fun browse(index: Index, cursor: String, requestOptions: RequestOptions? = null): Hits {
-        return read.retry(requestOptions.computedReadTimeout, index.pathIndexes("/browse")) { path ->
+    suspend fun browse(indexName: IndexName, cursor: String, requestOptions: RequestOptions? = null): Hits {
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
             httpClient.get<Hits>(path) {
                 setRequestOptions(requestOptions)
                 parameter("cursor", cursor)
@@ -114,19 +114,19 @@ class Client(
         }
     }
 
-    suspend fun getSettings(index: Index): Settings {
-        return read.retry(readTimeout, index.pathIndexes("/settings")) { path ->
+    suspend fun getSettings(indexName: IndexName): Settings {
+        return read.retry(readTimeout, indexName.pathIndexes("/settings")) { path ->
             Settings.deserialize(JsonTreeParser.parse(httpClient.get(path)))!!
         }
     }
 
     suspend fun setSettings(
-        index: Index,
+        indexName: IndexName,
         settings: Settings,
         vararg resetToDefault: SettingsKey,
         forwardToReplicas: Boolean = false
     ): TaskSettings {
-        return write.retry(writeTimeout, index.pathIndexes("/settings")) { path ->
+        return write.retry(writeTimeout, indexName.pathIndexes("/settings")) { path ->
             httpClient.put<TaskSettings>(path) {
                 val map = Settings.serialize(settings).toMutableMap().apply {
                     resetToDefault.forEach {
@@ -139,18 +139,18 @@ class Client(
         }
     }
 
-    suspend fun getTask(index: Index, taskId: Long): TaskInfo {
-        return read.retry(writeTimeout, index.pathIndexes("/task/$taskId")) { path ->
+    suspend fun getTask(indexName: IndexName, taskId: Long): TaskInfo {
+        return read.retry(writeTimeout, indexName.pathIndexes("/task/$taskId")) { path ->
             TaskInfo.deserialize(JsonTreeParser.parse(httpClient.get(path)))!!
         }
     }
 
-    suspend fun wait(index: Index, taskId: Long): TaskInfo {
+    suspend fun wait(indexName: IndexName, taskId: Long): TaskInfo {
         val timeToWait = 10000L
         var attempt = 1
 
         while (true) {
-            getTask(index, taskId).let {
+            getTask(indexName, taskId).let {
                 if (it.status == TaskStatus.Published) return it
             }
             delay(timeToWait * attempt)
@@ -159,7 +159,7 @@ class Client(
     }
 
     suspend fun searchForFacetValue(
-        index: Index,
+        indexName: IndexName,
         facetName: String,
         query: Query? = null,
         facetQuery: String? = null,
@@ -168,7 +168,7 @@ class Client(
     ): FacetHits {
         return read.retry(
             requestOptions.computedReadTimeout,
-            index.pathIndexes("/facets/$facetName/query")
+            indexName.pathIndexes("/facets/$facetName/query")
         ) { path ->
             httpClient.post<FacetHits>(path) {
                 setRequestOptions(requestOptions)

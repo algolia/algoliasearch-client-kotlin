@@ -1,7 +1,7 @@
 import client.Client
 import client.data.ApiKey
 import client.data.ApplicationId
-import client.data.Index
+import client.data.IndexName
 import client.data.IndexQuery
 import client.data.Query
 import client.data.Settings
@@ -17,7 +17,7 @@ class TestEndpoints {
     private val apiKey = ApiKey("dc8e9efcfe38f7fbfb996047af06d8c5")
     private val applicationId = ApplicationId("latency")
     private val api = Client(applicationId, apiKey)
-    private val index = Index("products_android_demo")
+    private val index = IndexName("products_android_demo")
 
     @Test
     fun listIndexes() {
