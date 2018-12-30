@@ -14,12 +14,12 @@ class ClientAdvanced(
     override val indexName: IndexName
 ) : EndpointsAdvanced {
 
-    suspend fun TaskId.wait(taskId: Long): TaskInfo {
+    override suspend fun TaskId.wait(): TaskInfo {
         val timeToWait = 10000L
         var attempt = 1
 
         while (true) {
-            getTask(taskId).let {
+            getTask(taskID).let {
                 if (it.status == TaskStatus.Published) return it
             }
             delay(timeToWait * attempt)
@@ -33,5 +33,9 @@ class ClientAdvanced(
                 TaskInfo.deserialize(JsonTreeParser.parse(httpClient.get(path)))!!
             }
         }
+    }
+
+    override suspend fun getTask(taskId: TaskId): TaskInfo {
+        return getTask(taskId.taskID)
     }
 }
