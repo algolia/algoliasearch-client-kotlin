@@ -1,9 +1,7 @@
 package client.client
 
-import client.RequestOptions
 import client.data.IndexName
 import client.data.ListIndexes
-import client.setRequestOptions
 import io.ktor.client.request.get
 
 

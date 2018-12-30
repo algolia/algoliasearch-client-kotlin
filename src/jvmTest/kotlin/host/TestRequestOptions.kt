@@ -1,8 +1,9 @@
-
-import client.requestOptions
+package host
+import client.client.requestOptions
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldEqual
 
 
 @RunWith(JUnit4::class)

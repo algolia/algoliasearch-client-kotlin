@@ -1,6 +1,5 @@
 package client.client
 
-import client.RequestOptions
 import client.data.*
 
 

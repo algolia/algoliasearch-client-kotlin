@@ -1,4 +1,4 @@
-package client
+package client.client
 
 
 fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {

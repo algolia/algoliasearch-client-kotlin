@@ -1,7 +1,7 @@
 package client.host
 
 
-enum class Status {
+enum class HostStatus {
     Unknown,
     Down,
     Up

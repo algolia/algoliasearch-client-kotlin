@@ -1,12 +1,9 @@
 package client.client
 
-import client.RequestOptions
 import client.data.ApiKey
 import client.data.ApplicationId
 import client.data.IndexName
 import client.host.RetryLogic
-import client.setApiKey
-import client.setApplicationId
 import io.ktor.client.HttpClient
 import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature

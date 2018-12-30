@@ -1,4 +1,4 @@
-
+package host
 import client.data.ApplicationId
 import client.host.computeHosts
 import client.host.randomize
@@ -7,6 +7,9 @@ import client.host.writeHost
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldBeFalse
+import shouldBeTrue
+import shouldEqual
 
 
 @RunWith(JUnit4::class)

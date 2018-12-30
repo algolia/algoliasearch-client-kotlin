@@ -1,12 +1,8 @@
 package client.client
 
-import client.RequestOptions
 import client.data.*
 import client.serialize.KeyFacetQuery
 import client.serialize.KeyMaxFacetHits
-import client.setBody
-import client.setQueries
-import client.setRequestOptions
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post

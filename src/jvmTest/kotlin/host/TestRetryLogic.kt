@@ -1,7 +1,7 @@
-
+package host
 import client.data.ApplicationId
 import client.host.RetryLogic
-import client.host.Status
+import client.host.HostStatus
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.MockHttpResponse
@@ -14,6 +14,8 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldBeTrue
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
@@ -47,10 +49,10 @@ class TestRetryLogic {
             }
             0 shouldEqual retry
         }
-        Status.Up shouldEqual statuses[0].first
-        Status.Unknown shouldEqual statuses[1].first
-        Status.Unknown shouldEqual statuses[2].first
-        Status.Unknown shouldEqual statuses[3].first
+        HostStatus.Up shouldEqual statuses[0].first
+        HostStatus.Unknown shouldEqual statuses[1].first
+        HostStatus.Unknown shouldEqual statuses[2].first
+        HostStatus.Unknown shouldEqual statuses[3].first
     }
 
     @Test
@@ -64,10 +66,10 @@ class TestRetryLogic {
                 if (retry == 0) delay(2000L)
                 client200.get<HttpResponse>()
             }
-            Status.Down shouldEqual statuses[0].first
-            Status.Up shouldEqual statuses[1].first
-            Status.Unknown shouldEqual statuses[2].first
-            Status.Unknown shouldEqual statuses[3].first
+            HostStatus.Down shouldEqual statuses[0].first
+            HostStatus.Up shouldEqual statuses[1].first
+            HostStatus.Unknown shouldEqual statuses[2].first
+            HostStatus.Unknown shouldEqual statuses[3].first
             1 shouldEqual retry
         }
     }
@@ -84,10 +86,10 @@ class TestRetryLogic {
                 if (retry < count) delay(150L * (retry + 1))
                 client200.get<HttpResponse>(path)
             }
-            Status.Up shouldEqual statuses[0].first
-            Status.Down shouldEqual statuses[1].first
-            Status.Down shouldEqual statuses[2].first
-            Status.Down shouldEqual statuses[3].first
+            HostStatus.Up shouldEqual statuses[0].first
+            HostStatus.Down shouldEqual statuses[1].first
+            HostStatus.Down shouldEqual statuses[2].first
+            HostStatus.Down shouldEqual statuses[3].first
             count shouldEqual retry
         }
     }
@@ -108,10 +110,10 @@ class TestRetryLogic {
             }
             exceptionIsThrown.shouldBeTrue()
             0 shouldEqual retry
-            Status.Unknown shouldEqual statuses[0].first
-            Status.Unknown shouldEqual statuses[1].first
-            Status.Unknown shouldEqual statuses[2].first
-            Status.Unknown shouldEqual statuses[3].first
+            HostStatus.Unknown shouldEqual statuses[0].first
+            HostStatus.Unknown shouldEqual statuses[1].first
+            HostStatus.Unknown shouldEqual statuses[2].first
+            HostStatus.Unknown shouldEqual statuses[3].first
         }
     }
 }

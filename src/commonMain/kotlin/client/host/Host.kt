@@ -5,23 +5,23 @@ import client.data.ApplicationId
 import kotlin.random.Random
 
 
-internal typealias HostStatus = Pair<Status, Long>
+internal typealias HostStatuses = Pair<HostStatus, Long>
 
 internal val ApplicationId.readHost get() = "https://$name-dsn.algolia.net"
 internal val ApplicationId.writeHost get() = "https://$name.algolia.net"
 
-internal fun Status.getHostStatus() = this to Time.getCurrentTimeMillis()
+internal fun HostStatus.getHostStatus() = this to Time.getCurrentTimeMillis()
 
-internal fun List<HostStatus>.areStatusExpired(hostStatusExpirationDelay: Long): Boolean {
+internal fun List<HostStatuses>.areStatusExpired(hostStatusExpirationDelay: Long): Boolean {
     val lastRequestTimestamp = maxBy { it.second }?.second ?: 0L
     val someTimeAgo = Time.getCurrentTimeMillis() - hostStatusExpirationDelay
 
     return lastRequestTimestamp <= someTimeAgo
 }
 
-internal fun List<HostStatus>.selectNextHostIndex(): Int {
-    val hasUp = firstOrNull { it.first == Status.Up }
-    val hasUnknown = hasUp ?: firstOrNull { it.first == Status.Unknown }
+internal fun List<HostStatuses>.selectNextHostIndex(): Int {
+    val hasUp = firstOrNull { it.first == HostStatus.Up }
+    val hasUnknown = hasUp ?: firstOrNull { it.first == HostStatus.Unknown }
 
     return indexOf(hasUnknown).coerceAtLeast(0)
 }
@@ -36,7 +36,7 @@ internal fun List<String>.randomize(): List<String> {
     return destination
 }
 
-internal fun List<String>.initialHostStatus() = map { Status.Unknown to 0L }.toMutableList()
+internal fun List<String>.initialHostStatus() = map { HostStatus.Unknown to 0L }.toMutableList()
 
 internal fun ApplicationId.computeHosts(host: String = "algolianet.com"): List<String> {
     return listOf(

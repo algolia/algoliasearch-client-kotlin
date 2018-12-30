@@ -1,4 +1,4 @@
-package client
+package client.client
 
 import client.data.ApiKey
 import client.data.ApplicationId
