@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Task(
+data class TaskSettings(
     val updatedAt: String,
-    val taskID: Long
-)
+    override val taskID: Long
+) : TaskId

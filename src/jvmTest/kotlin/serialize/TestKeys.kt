@@ -129,6 +129,9 @@ internal class TestKeys {
         "strategy" shouldEqual KeyStrategy
         "requests" shouldEqual KeyRequests
         "indexName" shouldEqual KeyIndexName
+        "published" shouldEqual KeyPublished
+        "notPublished" shouldEqual KeyNotPublished
+        "status" shouldEqual KeyStatus
 
         "af" shouldEqual KeyAfrikaans
         "ar" shouldEqual KeyArabic

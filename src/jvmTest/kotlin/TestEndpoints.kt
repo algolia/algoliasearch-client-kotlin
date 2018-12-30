@@ -1,4 +1,3 @@
-
 import client.Client
 import client.data.ApiKey
 import client.data.ApplicationId
@@ -76,6 +75,15 @@ class TestEndpoints {
             val settings = api.getSettings(index)
 
             println(settings)
+        }
+    }
+
+    @Test
+    fun getTask() {
+        runBlocking {
+            val task = api.setSettings(index, Settings())
+
+            println(api.getTask(index, task.taskID))
         }
     }
 

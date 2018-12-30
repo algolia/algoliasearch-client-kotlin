@@ -20,6 +20,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.put
+import kotlinx.coroutines.delay
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonTreeParser
@@ -125,9 +126,9 @@ class Client(
         settings: Settings,
         vararg resetToDefault: SettingsKey,
         forwardToReplicas: Boolean = false
-    ): Task {
+    ): TaskSettings {
         return write.retry(writeTimeout, index.pathIndexes("/settings")) { path ->
-            httpClient.put<Task>(path) {
+            httpClient.put<TaskSettings>(path) {
                 val map = Settings.serialize(settings).toMutableMap().apply {
                     resetToDefault.forEach {
                         put(it.raw, JsonNull)
@@ -136,6 +137,25 @@ class Client(
                 body = JsonObject(map).toString()
                 parameter(KeyForwardToReplicas, forwardToReplicas)
             }
+        }
+    }
+
+    suspend fun getTask(index: Index, taskId: Long): TaskInfo {
+        return read.retry(writeTimeout, index.pathIndexes("/task/$taskId")) { path ->
+            TaskInfo.deserialize(JsonTreeParser.parse(httpClient.get(path)))!!
+        }
+    }
+
+    suspend fun wait(index: Index, taskId: Long): TaskInfo {
+        val timeToWait = 10000L
+        var attempt = 1
+
+        while (true) {
+            getTask(index, taskId).let {
+                if (it.status == TaskStatus.Published) return it
+            }
+            delay(timeToWait * attempt)
+            attempt++
         }
     }
 
