@@ -12,8 +12,12 @@ data class IndexName(
     override val raw: String
 ) : RawString {
 
-    fun encode(): StringUTF8 {
+    private fun encode(): StringUTF8 {
         return StringUTF8.encode(raw)
+    }
+
+    internal fun pathIndexes(suffix: String = ""): String {
+        return "/1/indexes/${encode().string}" + suffix
     }
 
     override fun toString(): String {

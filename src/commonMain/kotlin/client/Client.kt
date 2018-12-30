@@ -2,8 +2,6 @@ package client
 
 import client.data.*
 import client.host.RetryLogic
-import client.data.IndexQuery
-import client.data.Query
 import client.serialize.KeyFacetQuery
 import client.serialize.KeyForwardToReplicas
 import client.serialize.KeyMaxFacetHits
@@ -53,10 +51,6 @@ class Client(
 
     private val RequestOptions?.computedWriteTimeout get() = this?.writeTimeout ?: writeTimeout
     private val RequestOptions?.computedReadTimeout get() = this?.readTimeout ?: readTimeout
-
-    private fun IndexName.pathIndexes(suffix: String = ""): String {
-        return "/1/indexes/${encode().string}" + suffix
-    }
 
     suspend fun getListIndexes(requestOptions: RequestOptions? = null): ListIndexes {
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes") { path ->
