@@ -1,9 +1,6 @@
 package client
 
-import client.data.ApiKey
-import client.data.ApplicationId
-import client.data.Index
-import client.data.MultipleQueriesStrategy
+import client.data.*
 import client.host.RetryLogic
 import client.query.IndexQuery
 import client.query.Query
@@ -23,6 +20,7 @@ import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
 import io.ktor.client.request.put
+import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonTreeParser
 import kotlinx.serialization.json.json
@@ -122,10 +120,20 @@ class Client(
         }
     }
 
-    suspend fun setSettings(index: Index, settings: Settings, forwardToReplicas: Boolean = false): Task {
+    suspend fun setSettings(
+        index: Index,
+        settings: Settings,
+        vararg resetToDefault: SettingsKey,
+        forwardToReplicas: Boolean = false
+    ): Task {
         return write.retry(writeTimeout, index.pathIndexes("/settings")) { path ->
             httpClient.put<Task>(path) {
-                body = Settings.serialize(settings).toString()
+                val map = Settings.serialize(settings).toMutableMap().apply {
+                    resetToDefault.forEach {
+                        put(it.raw, JsonNull)
+                    }
+                }
+                body = JsonObject(map).toString()
                 parameter(KeyForwardToReplicas, forwardToReplicas)
             }
         }

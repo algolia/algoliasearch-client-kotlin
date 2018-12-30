@@ -2,6 +2,8 @@ import client.data.Attribute
 import client.data.Index
 import client.query.helper.*
 import kotlinx.serialization.json.jsonArray
+import kotlin.test.assertEquals
+import kotlin.test.assertNotEquals
 
 
 internal fun groupMap(): GroupMap<Filter> = mutableMapOf()
@@ -45,4 +47,12 @@ internal val jsonNestedLists = jsonArray {
 }
 
 internal fun FilterBuilder.buildTest() = build().replace("\"", "")
+
+internal infix fun <T> T.shouldEqual(actual: T) {
+    assertEquals(this, actual)
+}
+
+internal infix fun <T> T.shouldNotEqual(actual: T) {
+    assertNotEquals(this, actual)
+}
 

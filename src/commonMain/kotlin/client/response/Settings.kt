@@ -59,7 +59,7 @@ data class Settings(
 
     internal companion object : Serializer<Settings>, Deserializer<Settings> {
 
-        override fun serialize(input: Settings): JsonElement {
+        override fun serialize(input: Settings): JsonObject {
             return input.run {
                 json {
                     // Attributes
