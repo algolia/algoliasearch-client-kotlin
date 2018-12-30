@@ -1,9 +1,8 @@
-package client.query
+package client.data
 
-import client.data.*
-import client.query.helper.FilterBuilder
-import client.query.helper.OptionalFilterBuilder
-import client.query.helper.QueryHelper
+import client.query.FilterBuilder
+import client.query.OptionalFilterBuilder
+import client.query.QueryHelper
 import client.serialize.*
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json

@@ -4,7 +4,7 @@ import attributeA
 import attributes
 import boolean
 import client.data.*
-import client.query.Query
+import client.data.Query
 import client.serialize.*
 import client.to
 import int

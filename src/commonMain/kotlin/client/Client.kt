@@ -2,9 +2,8 @@ package client
 
 import client.data.*
 import client.host.RetryLogic
-import client.query.IndexQuery
-import client.query.Query
-import client.response.*
+import client.data.IndexQuery
+import client.data.Query
 import client.serialize.KeyFacetQuery
 import client.serialize.KeyForwardToReplicas
 import client.serialize.KeyMaxFacetHits

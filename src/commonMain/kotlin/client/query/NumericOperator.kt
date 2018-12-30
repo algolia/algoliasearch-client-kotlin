@@ -1,4 +1,4 @@
-package client.query.helper
+package client.query
 
 
 enum class NumericOperator(val raw: String) {

@@ -3,7 +3,7 @@ package query
 import attributeA
 import attributeB
 import attributeC
-import client.query.helper.*
+import client.query.*
 import comparisonA
 import comparisonB
 import facetA

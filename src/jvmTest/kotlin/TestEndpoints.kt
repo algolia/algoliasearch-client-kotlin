@@ -2,9 +2,9 @@ import client.Client
 import client.data.ApiKey
 import client.data.ApplicationId
 import client.data.Index
-import client.query.IndexQuery
-import client.query.Query
-import client.response.Settings
+import client.data.IndexQuery
+import client.data.Query
+import client.data.Settings
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith

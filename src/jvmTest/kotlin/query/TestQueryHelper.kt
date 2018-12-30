@@ -5,7 +5,7 @@ import client.data.AlternativesAsExact
 import client.data.Attribute
 import client.data.QueryLanguage
 import client.data.ResponseFields
-import client.query.helper.*
+import client.query.*
 import client.to
 import facetA
 import facetB
@@ -28,7 +28,11 @@ class TestQueryHelper {
             setAttributesToRetrieve(attributeA, attributeB)
             listOf(attributeA, attributeB) shouldEqual attributesToRetrieve
             setAttributesToRetrieve(attributeA, attributeB, excludeAttributes = true)
-            listOf(Attribute("-attributeA"), Attribute("-attributeB"), all) shouldEqual attributesToRetrieve
+            listOf(
+                Attribute("-attributeA"),
+                Attribute("-attributeB"),
+                all
+            ) shouldEqual attributesToRetrieve
             setRetrieveAllAttributes()
         }
     }

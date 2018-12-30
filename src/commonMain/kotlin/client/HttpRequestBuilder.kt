@@ -3,8 +3,8 @@ package client
 import client.data.ApiKey
 import client.data.ApplicationId
 import client.data.MultipleQueriesStrategy
-import client.query.IndexQuery
-import client.query.Query
+import client.data.IndexQuery
+import client.data.Query
 import client.serialize.*
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header

@@ -1,6 +1,6 @@
 package query
 
-import client.query.helper.OptionalFilterBuilder
+import client.query.OptionalFilterBuilder
 import facetA
 import facetB
 import groupAndA

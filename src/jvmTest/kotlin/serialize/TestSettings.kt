@@ -4,7 +4,7 @@ import attributeA
 import attributes
 import boolean
 import client.data.*
-import client.response.Settings
+import client.data.Settings
 import client.serialize.*
 import indexA
 import int

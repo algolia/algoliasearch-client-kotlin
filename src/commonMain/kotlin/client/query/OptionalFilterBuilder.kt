@@ -1,4 +1,4 @@
-package client.query.helper
+package client.query
 
 import client.data.Attribute
 
@@ -9,7 +9,8 @@ import client.data.Attribute
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
  */
 @QueryHelper
-class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) : FilterBuilderInterface<FilterFacet> {
+class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) :
+    FilterBuilderInterface<FilterFacet> {
 
     private val groups: GroupMap<FilterFacet> = mutableMapOf()
 

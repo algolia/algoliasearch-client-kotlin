@@ -1,4 +1,4 @@
-package client.response
+package client.data
 
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable

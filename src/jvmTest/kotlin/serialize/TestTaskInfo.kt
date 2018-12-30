@@ -1,7 +1,7 @@
 package serialize
 
 import client.data.TaskStatus
-import client.response.TaskInfo
+import client.data.TaskInfo
 import client.serialize.KeyPublished
 import client.serialize.KeyStatus
 import kotlinx.serialization.json.JsonArray

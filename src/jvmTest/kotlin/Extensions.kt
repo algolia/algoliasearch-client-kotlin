@@ -1,6 +1,6 @@
 import client.data.Attribute
 import client.data.Index
-import client.query.helper.*
+import client.query.*
 import kotlinx.serialization.json.jsonArray
 import kotlin.test.*
 

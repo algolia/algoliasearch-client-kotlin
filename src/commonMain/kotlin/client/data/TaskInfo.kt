@@ -1,6 +1,5 @@
-package client.response
+package client.data
 
-import client.data.TaskStatus
 import client.serialize.Deserializer
 import client.serialize.KeyStatus
 import kotlinx.serialization.json.JsonElement

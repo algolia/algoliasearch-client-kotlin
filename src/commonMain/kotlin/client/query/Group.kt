@@ -1,4 +1,4 @@
-package client.query.helper
+package client.query
 
 
 sealed class Group(open val name: String) {

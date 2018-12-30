@@ -1,6 +1,5 @@
-package client.response
+package client.data
 
-import client.data.*
 import client.serialize.*
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.*

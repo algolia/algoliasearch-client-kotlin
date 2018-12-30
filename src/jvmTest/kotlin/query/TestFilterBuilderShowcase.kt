@@ -2,7 +2,7 @@ package query
 
 import buildTest
 import client.data.Attribute
-import client.query.helper.*
+import client.query.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

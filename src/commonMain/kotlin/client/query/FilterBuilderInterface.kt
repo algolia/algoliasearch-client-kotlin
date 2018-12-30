@@ -1,4 +1,4 @@
-package client.query.helper
+package client.query
 
 import client.data.Attribute
 

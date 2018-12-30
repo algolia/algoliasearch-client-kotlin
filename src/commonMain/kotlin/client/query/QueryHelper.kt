@@ -1,7 +1,7 @@
-package client.query.helper
+package client.query
 
 import client.data.*
-import client.query.Query
+import client.data.Query
 
 @DslMarker
 annotation class QueryHelper
