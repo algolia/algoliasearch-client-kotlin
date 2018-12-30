@@ -5,8 +5,8 @@ import client.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldEqual
 import unknown
-import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
@@ -14,25 +14,25 @@ internal class TestResponseFields {
 
     @Test
     fun raw() {
-        assertEquals(KeyStar, All.raw)
-        assertEquals(KeyAroundLatLng, AroundLatLng.raw)
-        assertEquals(KeyAutomaticRadius, AutomaticRadius.raw)
-        assertEquals(KeyExhaustiveFacetsCount, ExhaustiveFacetsCount.raw)
-        assertEquals(KeyFacets, Facets.raw)
-        assertEquals(KeyFacetsStats, FacetsStats.raw)
-        assertEquals(KeyHits, Hits.raw)
-        assertEquals(KeyHitsPerPage, HitsPerPage.raw)
-        assertEquals(KeyIndex, Index.raw)
-        assertEquals(KeyLength, Length.raw)
-        assertEquals(KeyNbHits, NbHits.raw)
-        assertEquals(KeyNbPages, NbPages.raw)
-        assertEquals(KeyOffset, Offset.raw)
-        assertEquals(KeyPage, Page.raw)
-        assertEquals(KeyParams, Params.raw)
-        assertEquals(KeyProcessingTimeMS, ProcessingTimeMS.raw)
-        assertEquals(KeyQuery, Query.raw)
-        assertEquals(KeyQueryAfterRemoval, QueryAfterRemoval.raw)
-        assertEquals(KeyUserData, UserData.raw)
-        assertEquals(unknown, Unknown(unknown).raw)
+        KeyStar shouldEqual All.raw
+        KeyAroundLatLng shouldEqual AroundLatLng.raw
+        KeyAutomaticRadius shouldEqual AutomaticRadius.raw
+        KeyExhaustiveFacetsCount shouldEqual ExhaustiveFacetsCount.raw
+        KeyFacets shouldEqual Facets.raw
+        KeyFacetsStats shouldEqual FacetsStats.raw
+        KeyHits shouldEqual Hits.raw
+        KeyHitsPerPage shouldEqual HitsPerPage.raw
+        KeyIndex shouldEqual Index.raw
+        KeyLength shouldEqual Length.raw
+        KeyNbHits shouldEqual NbHits.raw
+        KeyNbPages shouldEqual NbPages.raw
+        KeyOffset shouldEqual Offset.raw
+        KeyPage shouldEqual Page.raw
+        KeyParams shouldEqual Params.raw
+        KeyProcessingTimeMS shouldEqual ProcessingTimeMS.raw
+        KeyQuery shouldEqual Query.raw
+        KeyQueryAfterRemoval shouldEqual QueryAfterRemoval.raw
+        KeyUserData shouldEqual UserData.raw
+        unknown shouldEqual Unknown(unknown).raw
     }
 }

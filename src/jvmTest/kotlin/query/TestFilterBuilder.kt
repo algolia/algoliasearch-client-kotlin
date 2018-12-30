@@ -8,8 +8,8 @@ import groupAndB
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import shouldBeFalse
+import shouldBeTrue
 
 
 @RunWith(JUnit4::class)
@@ -18,9 +18,9 @@ class TestFilterBuilder {
     @Test
     fun isEmpty() {
         FilterBuilder {
-            assertTrue(isEmpty())
+            isEmpty().shouldBeTrue()
             groupAndA += facetA
-            assertFalse(isEmpty())
+            isEmpty().shouldBeFalse()
         }
     }
 
@@ -30,7 +30,7 @@ class TestFilterBuilder {
             groupAndA += facetA
             groupAndB += facetB
             clear()
-            assertTrue(isEmpty())
+            isEmpty().shouldBeTrue()
         }
     }
 }

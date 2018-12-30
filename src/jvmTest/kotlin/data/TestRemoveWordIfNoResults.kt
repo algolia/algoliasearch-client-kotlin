@@ -8,8 +8,8 @@ import client.serialize.KeyNone
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldEqual
 import unknown
-import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
@@ -17,10 +17,10 @@ internal class TestRemoveWordIfNoResults {
 
     @Test
     fun raw() {
-        assertEquals(KeyNone, None.raw)
-        assertEquals(KeyLastWords, LastWords.raw)
-        assertEquals(KeyFirstWords, FirstWords.raw)
-        assertEquals(KeyAllOptional, AllOptional.raw)
-        assertEquals(unknown, Unknown(unknown).raw)
+        KeyNone shouldEqual None.raw
+        KeyLastWords shouldEqual LastWords.raw
+        KeyFirstWords shouldEqual FirstWords.raw
+        KeyAllOptional shouldEqual AllOptional.raw
+        unknown shouldEqual Unknown(unknown).raw
     }
 }

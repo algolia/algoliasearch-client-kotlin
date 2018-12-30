@@ -1,3 +1,4 @@
+
 import client.data.ApplicationId
 import client.host.computeHosts
 import client.host.randomize
@@ -6,9 +7,6 @@ import client.host.writeHost
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 
 @RunWith(JUnit4::class)
@@ -19,18 +17,18 @@ class TestHosts {
 
     @Test
     fun default() {
-        assertEquals("https://$applicationId-dsn.algolia.net", applicationId.readHost)
-        assertEquals("https://$applicationId.algolia.net", applicationId.writeHost)
+        "https://$applicationId-dsn.algolia.net" shouldEqual applicationId.readHost
+        "https://$applicationId.algolia.net" shouldEqual applicationId.writeHost
     }
 
     @Test
     fun computeHosts() {
         val hosts = applicationId.computeHosts()
 
-        assertTrue { hosts.contains("https://$applicationId-1.$host") }
-        assertTrue { hosts.contains("https://$applicationId-2.$host") }
-        assertTrue { hosts.contains("https://$applicationId-3.$host") }
-        assertEquals(3, hosts.size)
+        hosts.contains("https://$applicationId-1.$host").shouldBeTrue()
+        hosts.contains("https://$applicationId-2.$host").shouldBeTrue()
+        hosts.contains("https://$applicationId-3.$host").shouldBeTrue()
+        3 shouldEqual hosts.size
     }
 
     @Test
@@ -41,6 +39,6 @@ class TestHosts {
 
             randomized[0] == "$applicationId-1.$host"
         }
-        assertFalse { result.all { it } }
+        result.all { it }.shouldBeFalse()
     }
 }

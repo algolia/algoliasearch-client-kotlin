@@ -7,8 +7,8 @@ import client.serialize.KeyWord
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldEqual
 import unknown
-import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
@@ -16,9 +16,9 @@ internal class TestExactOnSingleWordQuery {
 
     @Test
     fun raw() {
-        assertEquals(KeyAttribute, Attribute.raw)
-        assertEquals(KeyNone, None.raw)
-        assertEquals(KeyWord, Word.raw)
-        assertEquals(unknown, Unknown(unknown).raw)
+        KeyAttribute shouldEqual Attribute.raw
+        KeyNone shouldEqual None.raw
+        KeyWord shouldEqual Word.raw
+        unknown shouldEqual Unknown(unknown).raw
     }
 }

@@ -7,8 +7,8 @@ import client.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldEqual
 import unknown
-import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
@@ -16,15 +16,15 @@ internal class TestRanking {
 
     @Test
     fun raw() {
-        assertEquals(KeyGeo, Geo.raw)
-        assertEquals(KeyWords, Words.raw)
-        assertEquals(KeyFilters, Filters.raw)
-        assertEquals(KeyProximity, Proximity.raw)
-        assertEquals(KeyAttribute, Attribute.raw)
-        assertEquals(KeyExact, Exact.raw)
-        assertEquals(KeyCustom, Custom.raw)
-        assertEquals("$KeyAsc($attributeA)", Asc(attributeA).raw)
-        assertEquals("$KeyDesc($attributeB)", Desc(attributeB).raw)
-        assertEquals(unknown, Unknown(unknown).raw)
+        KeyGeo shouldEqual Geo.raw
+        KeyWords shouldEqual Words.raw
+        KeyFilters shouldEqual Filters.raw
+        KeyProximity shouldEqual Proximity.raw
+        KeyAttribute shouldEqual Attribute.raw
+        KeyExact shouldEqual Exact.raw
+        KeyCustom shouldEqual Custom.raw
+        "$KeyAsc($attributeA)" shouldEqual Asc(attributeA).raw
+        "$KeyDesc($attributeB)" shouldEqual Desc(attributeB).raw
+        unknown shouldEqual Unknown(unknown).raw
     }
 }

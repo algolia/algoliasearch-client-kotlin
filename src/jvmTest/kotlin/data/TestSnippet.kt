@@ -7,7 +7,7 @@ import client.data.Snippet
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
@@ -15,9 +15,9 @@ internal class TestSnippet {
 
     @Test
     fun raw() {
-        assertEquals(attributeA.raw, Snippet(attributeA).raw)
-        assertEquals("*", Snippet(attributeAll).raw)
-        assertEquals("*:20", Snippet(attributeAll, 20).raw)
-        assertEquals("$attributeB:10", Snippet(attributeB, 10).raw)
+        attributeA.raw shouldEqual Snippet(attributeA).raw
+        "*" shouldEqual Snippet(attributeAll).raw
+        "*:20" shouldEqual Snippet(attributeAll, 20).raw
+        "$attributeB:10" shouldEqual Snippet(attributeB, 10).raw
     }
 }

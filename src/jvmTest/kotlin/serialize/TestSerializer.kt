@@ -6,7 +6,8 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonNull
 import org.junit.Test
-import kotlin.test.assertEquals
+import shouldBeNull
+import shouldEqual
 
 
 internal abstract class TestSerializer<T>(
@@ -22,7 +23,7 @@ internal abstract class TestSerializer<T>(
     fun serialize() {
         if (serializer != null) {
             item.forEach {
-                assertEquals(it.second, serializer.serialize(it.first))
+                it.second shouldEqual serializer.serialize(it.first)
             }
         }
     }
@@ -31,7 +32,7 @@ internal abstract class TestSerializer<T>(
     fun serializes() {
         if (serializer != null) {
             items.forEach {
-                assertEquals(it.second, serializer.serializeList(it.first))
+                it.second shouldEqual serializer.serializeList(it.first)
             }
         }
     }
@@ -39,8 +40,8 @@ internal abstract class TestSerializer<T>(
     @Test
     fun deserializeNull() {
         if (deserializer != null) {
-            assertEquals(null, deserializer.deserialize(JsonNull))
-            assertEquals(null, deserializer.deserializeList(JsonNull))
+            deserializer.deserialize(JsonNull).shouldBeNull()
+            deserializer.deserializeList(JsonNull).shouldBeNull()
         }
     }
 
@@ -48,7 +49,7 @@ internal abstract class TestSerializer<T>(
     fun deserialize() {
         if (deserializer != null) {
             item.forEach {
-                assertEquals(it.first, deserializer.deserialize(it.second))
+                it.first shouldEqual deserializer.deserialize(it.second)
             }
         }
     }
@@ -57,7 +58,7 @@ internal abstract class TestSerializer<T>(
     fun deserializes() {
         if (deserializer != null) {
             items.forEach {
-                assertEquals(it.first, deserializer.deserializeList(it.second))
+                it.first shouldEqual deserializer.deserializeList(it.second)
             }
         }
     }

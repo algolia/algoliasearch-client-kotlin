@@ -2,8 +2,7 @@ import client.data.Attribute
 import client.data.Index
 import client.query.helper.*
 import kotlinx.serialization.json.jsonArray
-import kotlin.test.assertEquals
-import kotlin.test.assertNotEquals
+import kotlin.test.*
 
 
 internal fun groupMap(): GroupMap<Filter> = mutableMapOf()
@@ -54,5 +53,17 @@ internal infix fun <T> T.shouldEqual(actual: T) {
 
 internal infix fun <T> T.shouldNotEqual(actual: T) {
     assertNotEquals(this, actual)
+}
+
+internal fun Any?.shouldBeNull() {
+    assertNull(this)
+}
+
+internal fun Boolean.shouldBeTrue() {
+    assertTrue(this)
+}
+
+internal fun Boolean.shouldBeFalse() {
+    assertFalse(this)
 }
 

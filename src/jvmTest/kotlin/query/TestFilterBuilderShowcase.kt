@@ -6,7 +6,7 @@ import client.query.helper.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
@@ -25,15 +25,15 @@ class TestFilterBuilderShowcase {
             groupA += categoryBook
             groupA += categoryOffice
             groupA += categoryGift
-            assertEquals("category:book AND category:office AND category:gift", buildTest())
+            "category:book AND category:office AND category:gift" shouldEqual buildTest()
         }
 
         FilterBuilder {
             groupA += categoryBook
             groupA += categoryOffice
             groupB += categoryGift
-            assertEquals("(category:book AND category:office) AND category:gift", buildTest())
-            assertEquals(setOf(categoryBook, categoryOffice), groupA.get())
+            "(category:book AND category:office) AND category:gift" shouldEqual buildTest()
+            setOf(categoryBook, categoryOffice) shouldEqual groupA.get()
         }
     }
 
@@ -54,16 +54,16 @@ class TestFilterBuilderShowcase {
         FilterBuilder {
             categories += categoryBook
             categories += categoryOffice
-            assertEquals("category:book OR category:office", buildTest())
+            "category:book OR category:office" shouldEqual buildTest()
             colors += colorRed
             colors += colorBlue
-            assertEquals("(category:book OR category:office) AND (color:red OR color:blue)", buildTest())
+            "(category:book OR category:office) AND (color:red OR color:blue)" shouldEqual buildTest()
             categories -= categoryBook
-            assertEquals("category:office AND (color:red OR color:blue)", buildTest())
+            "category:office AND (color:red OR color:blue)" shouldEqual buildTest()
             categories.clear()
-            assertEquals("color:red OR color:blue", buildTest())
+            "color:red OR color:blue" shouldEqual buildTest()
             clear()
-            assertEquals("", buildTest())
+            "" shouldEqual buildTest()
         }
     }
 
@@ -84,13 +84,13 @@ class TestFilterBuilderShowcase {
 
         FilterBuilder {
             categories += listOf(categoryBook, categoryOffice)
-            assertEquals("category:book OR category:office", buildTest())
+            "category:book OR category:office" shouldEqual buildTest()
             prices += comparison
-            assertEquals("price != 15.0 AND (category:book OR category:office)", buildTest())
+            "price != 15.0 AND (category:book OR category:office)" shouldEqual buildTest()
             prices += range
-            assertEquals("price != 15.0 AND price:5.0 TO 20.0 AND (category:book OR category:office)", buildTest())
+            "price != 15.0 AND price:5.0 TO 20.0 AND (category:book OR category:office)" shouldEqual buildTest()
             categories -= categoryBook
-            assertEquals("price != 15.0 AND price:5.0 TO 20.0 AND category:office", buildTest())
+            "price != 15.0 AND price:5.0 TO 20.0 AND category:office" shouldEqual buildTest()
         }
     }
 
@@ -106,9 +106,9 @@ class TestFilterBuilderShowcase {
         FilterBuilder {
             currency += comparison
             currency += range
-            assertEquals("euro != 15.0 AND euro:5.0 TO 20.0", buildTest())
+            "euro != 15.0 AND euro:5.0 TO 20.0" shouldEqual buildTest()
             currency.replaceAttribute(euro, dollar)
-            assertEquals("dollar != 15.0 AND dollar:5.0 TO 20.0", buildTest())
+            "dollar != 15.0 AND dollar:5.0 TO 20.0" shouldEqual buildTest()
         }
     }
 
@@ -125,15 +125,15 @@ class TestFilterBuilderShowcase {
         FilterBuilder {
             groupA += comparisonPrice
             groupA += rangeLike
-            assertEquals("price != 15.0 OR nbLike:100.0 TO 200.0", buildTest())
-            assertEquals(setOf(comparisonPrice), groupA.get(price))
+            "price != 15.0 OR nbLike:100.0 TO 200.0" shouldEqual buildTest()
+            setOf(comparisonPrice) shouldEqual groupA.get(price)
         }
 
         // In this scenario, we want to add them to different OR group
         FilterBuilder {
             groupA += comparisonPrice
             groupB += rangeLike
-            assertEquals("price != 15.0 AND nbLike:100.0 TO 200.0", buildTest())
+            "price != 15.0 AND nbLike:100.0 TO 200.0" shouldEqual buildTest()
         }
     }
 }

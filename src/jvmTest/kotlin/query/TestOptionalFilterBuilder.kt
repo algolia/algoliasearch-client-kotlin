@@ -10,9 +10,9 @@ import groupOrB
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import shouldBeFalse
+import shouldBeTrue
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
@@ -21,9 +21,9 @@ class TestOptionalFilterBuilder {
     @Test
     fun isEmpty() {
         OptionalFilterBuilder {
-            assertTrue(isEmpty())
+            isEmpty().shouldBeTrue()
             groupAndA += facetA
-            assertFalse(isEmpty())
+            isEmpty().shouldBeFalse()
         }
     }
 
@@ -33,7 +33,7 @@ class TestOptionalFilterBuilder {
             groupAndA += facetA
             groupAndB += facetB
             clear()
-            assertTrue(isEmpty())
+            isEmpty().shouldBeTrue()
         }
     }
 
@@ -46,15 +46,12 @@ class TestOptionalFilterBuilder {
             groupOrA += facetB
             groupOrB += facetA
 
-            assertEquals(
-                listOf(
-                    listOf(facetA.expression),
-                    listOf(facetB.expression),
-                    listOf(facetA.expression, facetB.expression),
-                    listOf(facetA.expression)
-                ),
-                build()
-            )
+            listOf(
+                listOf(facetA.expression),
+                listOf(facetB.expression),
+                listOf(facetA.expression, facetB.expression),
+                listOf(facetA.expression)
+            ) shouldEqual build()
         }
     }
 }

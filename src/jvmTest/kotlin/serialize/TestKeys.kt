@@ -4,7 +4,7 @@ import client.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
@@ -12,179 +12,179 @@ internal class TestKeys {
 
     @Test
     fun keys() {
-        assertEquals("query", KeyQuery)
-        assertEquals("searchableAttributes", KeySearchableAttributes)
-        assertEquals("attributesForFaceting", KeyAttributesForFaceting)
-        assertEquals("UnretrievableAttributes", KeyUnretrievableAttributes)
-        assertEquals("attributesToRetrieve", KeyAttributesToRetrieve)
-        assertEquals("restrictSearchableAttributes", KeyRestrictSearchableAttributes)
-        assertEquals("ranking", KeyRanking)
-        assertEquals("customRanking", KeyCustomRanking)
-        assertEquals("replicas", KeyReplicas)
-        assertEquals("filters", KeyFilters)
-        assertEquals("facetFilters", KeyFacetFilters)
-        assertEquals("optionalFilters", KeyOptionalFilters)
-        assertEquals("numericFilters", KeyNumericFilters)
-        assertEquals("tagFilters", KeyTagFilters)
-        assertEquals("sumOrFiltersScores", KeySumOrFiltersScores)
-        assertEquals("facets", KeyFacets)
-        assertEquals("maxValuesPerFacet", KeyMaxValuesPerFacet)
-        assertEquals("facetingAfterDistinct", KeyFacetingAfterDistinct)
-        assertEquals("sortFacetValuesBy", KeySortFacetValuesBy)
-        assertEquals("attributesToHighlight", KeyAttributesToHighlight)
-        assertEquals("attributesToSnippet", KeyAttributesToSnippet)
-        assertEquals("highlightPreTag", KeyHighlightPreTag)
-        assertEquals("highlightPostTag", KeyHighlightPostTag)
-        assertEquals("snippetEllipsisText", KeySnippetEllipsisText)
-        assertEquals("restrictHighlightAndSnippetArrays", KeyRestrictHighlightAndSnippetArrays)
-        assertEquals("page", KeyPage)
-        assertEquals("hitsPerPage", KeyHitsPerPage)
-        assertEquals("offset", KeyOffset)
-        assertEquals("length", KeyLength)
-        assertEquals("paginationLimitedTo", KeyPaginationLimitedTo)
-        assertEquals("minWordSizefor1Typo", KeyMinWordSizefor1Typo)
-        assertEquals("minWordSizefor2Typos", KeyMinWordSizefor2Typos)
-        assertEquals("typoTolerance", KeyTypoTolerance)
-        assertEquals("allowTyposOnNumericTokens", KeyAllowTyposOnNumericTokens)
-        assertEquals("disableTypoToleranceOnAttributes", KeyDisableTypoToleranceOnAttributes)
-        assertEquals("disableTypoToleranceOnWords", KeyDisableTypoToleranceOnWords)
-        assertEquals("separatorsToIndex", KeySeparatorsToIndex)
-        assertEquals("aroundLatLng", KeyAroundLatLng)
-        assertEquals("aroundLatLngViaIP", KeyAroundLatLngViaIP)
-        assertEquals("aroundRadius", KeyAroundRadius)
-        assertEquals("aroundPrecision", KeyAroundPrecision)
-        assertEquals("minimumAroundRadius", KeyMinimumAroundRadius)
-        assertEquals("insideBoundingBox", KeyInsideBoundingBox)
-        assertEquals("insidePolygon", KeyInsidePolygon)
-        assertEquals("ignorePlurals", KeyIgnorePlurals)
-        assertEquals("removeStopWords", KeyRemoveStopWords)
-        assertEquals("camelCaseAttributes", KeyCamelCaseAttributes)
-        assertEquals("decompoundedAttributes", KeyDecompoundedAttributes)
-        assertEquals("keepDiacriticsOnCharacters", KeyKeepDiacriticsOnCharacters)
-        assertEquals("queryLanguages", KeyQueryLanguages)
-        assertEquals("enableRules", KeyEnableRules)
-        assertEquals("ruleContexts", KeyRuleContexts)
-        assertEquals("enablePersonalization", KeyEnablePersonalization)
-        assertEquals("queryType", KeyQueryType)
-        assertEquals("removeWordsIfNoResults", KeyRemoveWordsIfNoResults)
-        assertEquals("advancedSyntax", KeyAdvancedSyntax)
-        assertEquals("optionalWords", KeyOptionalWords)
-        assertEquals("disablePrefixOnAttributes", KeyDisablePrefixOnAttributes)
-        assertEquals("disableExactOnAttributes", KeyDisableExactOnAttributes)
-        assertEquals("exactOnSingleWordQuery", KeyExactOnSingleWordQuery)
-        assertEquals("alternativesAsExact", KeyAlternativesAsExact)
-        assertEquals("numericAttributesForFiltering", KeyNumericAttributesForFiltering)
-        assertEquals("allowCompressionOfIntegerArray", KeyAllowCompressionOfIntegerArray)
-        assertEquals("attributeForDistinct", KeyAttributeForDistinct)
-        assertEquals("distinct", KeyDistinct)
-        assertEquals("getRankingInfo", KeyGetRankingInfo)
-        assertEquals("clickAnalytics", KeyClickAnalytics)
-        assertEquals("analytics", KeyAnalytics)
-        assertEquals("analyticsTags", KeyAnalyticsTags)
-        assertEquals("synonyms", KeySynonyms)
-        assertEquals("replaceSynonymsInHighlight", KeyReplaceSynonymsInHighlight)
-        assertEquals("minProximity", KeyMinProximity)
-        assertEquals("responseFields", KeyResponseFields)
-        assertEquals("maxFacetHits", KeyMaxFacetHits)
-        assertEquals("percentileComputation", KeyPercentileComputation)
-        assertEquals("geo", KeyGeo)
-        assertEquals("typo", KeyTypo)
-        assertEquals("words", KeyWords)
-        assertEquals("proximity", KeyProximity)
-        assertEquals("attribute", KeyAttribute)
-        assertEquals("exact", KeyExact)
-        assertEquals("custom", KeyCustom)
-        assertEquals("asc", KeyAsc)
-        assertEquals("desc", KeyDesc)
-        assertEquals("strict", KeyStrict)
-        assertEquals("min", KeyMin)
-        assertEquals("singleWordSynonym", KeySingleWordSynonym)
-        assertEquals("multiWordsSynonym", KeyMultiWordsSynonym)
-        assertEquals("all", KeyAll)
-        assertEquals("word", KeyWord)
-        assertEquals("none", KeyNone)
-        assertEquals("stopIfEnoughMatches", KeyStopIfEnoughMatches)
-        assertEquals("prefixLast", KeyPrefixLast)
-        assertEquals("prefixAll", KeyPrefixAll)
-        assertEquals("prefixNone", KeyPrefixNone)
-        assertEquals("lastWords", KeyLastWords)
-        assertEquals("firstWords", KeyFirstWords)
-        assertEquals("allOptional", KeyAllOptional)
-        assertEquals("*", KeyStar)
-        assertEquals("automaticRadius", KeyAutomaticRadius)
-        assertEquals("exhaustiveFacetsCount", KeyExhaustiveFacetsCount)
-        assertEquals("facets_stats", KeyFacetsStats)
-        assertEquals("hits", KeyHits)
-        assertEquals("index", KeyIndex)
-        assertEquals("nbHits", KeyNbHits)
-        assertEquals("nbPages", KeyNbPages)
-        assertEquals("params", KeyParams)
-        assertEquals("processingTimeMS", KeyProcessingTimeMS)
-        assertEquals("queryAfterRemoval", KeyQueryAfterRemoval)
-        assertEquals("userData", KeyUserData)
-        assertEquals("count", KeyCount)
-        assertEquals("alpha", KeyAlpha)
-        assertEquals("equalOnly", KeyEqualOnly)
-        assertEquals("facetQuery", KeyFacetQuery)
-        assertEquals("strategy", KeyStrategy)
-        assertEquals("requests", KeyRequests)
-        assertEquals("indexName", KeyIndexName)
+        "query" shouldEqual KeyQuery
+        "searchableAttributes" shouldEqual KeySearchableAttributes
+        "attributesForFaceting" shouldEqual KeyAttributesForFaceting
+        "UnretrievableAttributes" shouldEqual KeyUnretrievableAttributes
+        "attributesToRetrieve" shouldEqual KeyAttributesToRetrieve
+        "restrictSearchableAttributes" shouldEqual KeyRestrictSearchableAttributes
+        "ranking" shouldEqual KeyRanking
+        "customRanking" shouldEqual KeyCustomRanking
+        "replicas" shouldEqual KeyReplicas
+        "filters" shouldEqual KeyFilters
+        "facetFilters" shouldEqual KeyFacetFilters
+        "optionalFilters" shouldEqual KeyOptionalFilters
+        "numericFilters" shouldEqual KeyNumericFilters
+        "tagFilters" shouldEqual KeyTagFilters
+        "sumOrFiltersScores" shouldEqual KeySumOrFiltersScores
+        "facets" shouldEqual KeyFacets
+        "maxValuesPerFacet" shouldEqual KeyMaxValuesPerFacet
+        "facetingAfterDistinct" shouldEqual KeyFacetingAfterDistinct
+        "sortFacetValuesBy" shouldEqual KeySortFacetValuesBy
+        "attributesToHighlight" shouldEqual KeyAttributesToHighlight
+        "attributesToSnippet" shouldEqual KeyAttributesToSnippet
+        "highlightPreTag" shouldEqual KeyHighlightPreTag
+        "highlightPostTag" shouldEqual KeyHighlightPostTag
+        "snippetEllipsisText" shouldEqual KeySnippetEllipsisText
+        "restrictHighlightAndSnippetArrays" shouldEqual KeyRestrictHighlightAndSnippetArrays
+        "page" shouldEqual KeyPage
+        "hitsPerPage" shouldEqual KeyHitsPerPage
+        "offset" shouldEqual KeyOffset
+        "length" shouldEqual KeyLength
+        "paginationLimitedTo" shouldEqual KeyPaginationLimitedTo
+        "minWordSizefor1Typo" shouldEqual KeyMinWordSizefor1Typo
+        "minWordSizefor2Typos" shouldEqual KeyMinWordSizefor2Typos
+        "typoTolerance" shouldEqual KeyTypoTolerance
+        "allowTyposOnNumericTokens" shouldEqual KeyAllowTyposOnNumericTokens
+        "disableTypoToleranceOnAttributes" shouldEqual KeyDisableTypoToleranceOnAttributes
+        "disableTypoToleranceOnWords" shouldEqual KeyDisableTypoToleranceOnWords
+        "separatorsToIndex" shouldEqual KeySeparatorsToIndex
+        "aroundLatLng" shouldEqual KeyAroundLatLng
+        "aroundLatLngViaIP" shouldEqual KeyAroundLatLngViaIP
+        "aroundRadius" shouldEqual KeyAroundRadius
+        "aroundPrecision" shouldEqual KeyAroundPrecision
+        "minimumAroundRadius" shouldEqual KeyMinimumAroundRadius
+        "insideBoundingBox" shouldEqual KeyInsideBoundingBox
+        "insidePolygon" shouldEqual KeyInsidePolygon
+        "ignorePlurals" shouldEqual KeyIgnorePlurals
+        "removeStopWords" shouldEqual KeyRemoveStopWords
+        "camelCaseAttributes" shouldEqual KeyCamelCaseAttributes
+        "decompoundedAttributes" shouldEqual KeyDecompoundedAttributes
+        "keepDiacriticsOnCharacters" shouldEqual KeyKeepDiacriticsOnCharacters
+        "queryLanguages" shouldEqual KeyQueryLanguages
+        "enableRules" shouldEqual KeyEnableRules
+        "ruleContexts" shouldEqual KeyRuleContexts
+        "enablePersonalization" shouldEqual KeyEnablePersonalization
+        "queryType" shouldEqual KeyQueryType
+        "removeWordsIfNoResults" shouldEqual KeyRemoveWordsIfNoResults
+        "advancedSyntax" shouldEqual KeyAdvancedSyntax
+        "optionalWords" shouldEqual KeyOptionalWords
+        "disablePrefixOnAttributes" shouldEqual KeyDisablePrefixOnAttributes
+        "disableExactOnAttributes" shouldEqual KeyDisableExactOnAttributes
+        "exactOnSingleWordQuery" shouldEqual KeyExactOnSingleWordQuery
+        "alternativesAsExact" shouldEqual KeyAlternativesAsExact
+        "numericAttributesForFiltering" shouldEqual KeyNumericAttributesForFiltering
+        "allowCompressionOfIntegerArray" shouldEqual KeyAllowCompressionOfIntegerArray
+        "attributeForDistinct" shouldEqual KeyAttributeForDistinct
+        "distinct" shouldEqual KeyDistinct
+        "getRankingInfo" shouldEqual KeyGetRankingInfo
+        "clickAnalytics" shouldEqual KeyClickAnalytics
+        "analytics" shouldEqual KeyAnalytics
+        "analyticsTags" shouldEqual KeyAnalyticsTags
+        "synonyms" shouldEqual KeySynonyms
+        "replaceSynonymsInHighlight" shouldEqual KeyReplaceSynonymsInHighlight
+        "minProximity" shouldEqual KeyMinProximity
+        "responseFields" shouldEqual KeyResponseFields
+        "maxFacetHits" shouldEqual KeyMaxFacetHits
+        "percentileComputation" shouldEqual KeyPercentileComputation
+        "geo" shouldEqual KeyGeo
+        "typo" shouldEqual KeyTypo
+        "words" shouldEqual KeyWords
+        "proximity" shouldEqual KeyProximity
+        "attribute" shouldEqual KeyAttribute
+        "exact" shouldEqual KeyExact
+        "custom" shouldEqual KeyCustom
+        "asc" shouldEqual KeyAsc
+        "desc" shouldEqual KeyDesc
+        "strict" shouldEqual KeyStrict
+        "min" shouldEqual KeyMin
+        "singleWordSynonym" shouldEqual KeySingleWordSynonym
+        "multiWordsSynonym" shouldEqual KeyMultiWordsSynonym
+        "all" shouldEqual KeyAll
+        "word" shouldEqual KeyWord
+        "none" shouldEqual KeyNone
+        "stopIfEnoughMatches" shouldEqual KeyStopIfEnoughMatches
+        "prefixLast" shouldEqual KeyPrefixLast
+        "prefixAll" shouldEqual KeyPrefixAll
+        "prefixNone" shouldEqual KeyPrefixNone
+        "lastWords" shouldEqual KeyLastWords
+        "firstWords" shouldEqual KeyFirstWords
+        "allOptional" shouldEqual KeyAllOptional
+        "*" shouldEqual KeyStar
+        "automaticRadius" shouldEqual KeyAutomaticRadius
+        "exhaustiveFacetsCount" shouldEqual KeyExhaustiveFacetsCount
+        "facets_stats" shouldEqual KeyFacetsStats
+        "hits" shouldEqual KeyHits
+        "index" shouldEqual KeyIndex
+        "nbHits" shouldEqual KeyNbHits
+        "nbPages" shouldEqual KeyNbPages
+        "params" shouldEqual KeyParams
+        "processingTimeMS" shouldEqual KeyProcessingTimeMS
+        "queryAfterRemoval" shouldEqual KeyQueryAfterRemoval
+        "userData" shouldEqual KeyUserData
+        "count" shouldEqual KeyCount
+        "alpha" shouldEqual KeyAlpha
+        "equalOnly" shouldEqual KeyEqualOnly
+        "facetQuery" shouldEqual KeyFacetQuery
+        "strategy" shouldEqual KeyStrategy
+        "requests" shouldEqual KeyRequests
+        "indexName" shouldEqual KeyIndexName
 
-        assertEquals("af", KeyAfrikaans)
-        assertEquals("ar", KeyArabic)
-        assertEquals("az", KeyAzeri)
-        assertEquals("bg", KeyBulgarian)
-        assertEquals("bn", KeyBrunei)
-        assertEquals("ca", KeyCatalan)
-        assertEquals("cs", KeyCzech)
-        assertEquals("cy", KeyWelsh)
-        assertEquals("da", KeyDanish)
-        assertEquals("de", KeyGerman)
-        assertEquals("en", KeyEnglish)
-        assertEquals("eo", KeyEsperanto)
-        assertEquals("es", KeySpanish)
-        assertEquals("et", KeyEstonian)
-        assertEquals("eu", KeyBasque)
-        assertEquals("fi", KeyFinnish)
-        assertEquals("fo", KeyFaroese)
-        assertEquals("fr", KeyFrench)
-        assertEquals("gl", KeyGalician)
-        assertEquals("he", KeyHebrew)
-        assertEquals("hi", KeyHindi)
-        assertEquals("hu", KeyHungarian)
-        assertEquals("hy", KeyArmenian)
-        assertEquals("id", KeyIndonesian)
-        assertEquals("is", KeyIcelandic)
-        assertEquals("it", KeyItalian)
-        assertEquals("ja", KeyJapanese)
-        assertEquals("ka", KeyGeorgian)
-        assertEquals("kk", KeyKazakh)
-        assertEquals("ko", KeyKorean)
-        assertEquals("ky", KeyKyrgyz)
-        assertEquals("lt", KeyLithuanian)
-        assertEquals("mi", KeyMaori)
-        assertEquals("mn", KeyMongolian)
-        assertEquals("mr", KeyMarathi)
-        assertEquals("ms", KeyMalay)
-        assertEquals("mt", KeyMaltese)
-        assertEquals("nb", KeyNorwegian)
-        assertEquals("nl", KeyDutch)
-        assertEquals("ns", KeyNorthernSotho)
-        assertEquals("pl", KeyPolish)
-        assertEquals("ps", KeyPashto)
-        assertEquals("pt", KeyPortuguese)
-        assertEquals("qu", KeyQuechua)
-        assertEquals("ro", KeyRomanian)
-        assertEquals("ru", KeyRussian)
-        assertEquals("sk", KeySlovak)
-        assertEquals("sq", KeyAlbanian)
-        assertEquals("sv", KeySwedish)
-        assertEquals("sw", KeySwahili)
-        assertEquals("ta", KeyTamil)
-        assertEquals("te", KeyTelugu)
-        assertEquals("tl", KeyTagalog)
-        assertEquals("tn", KeyTswana)
-        assertEquals("tr", KeyTurkish)
-        assertEquals("tt", KeyTatar)
+        "af" shouldEqual KeyAfrikaans
+        "ar" shouldEqual KeyArabic
+        "az" shouldEqual KeyAzeri
+        "bg" shouldEqual KeyBulgarian
+        "bn" shouldEqual KeyBrunei
+        "ca" shouldEqual KeyCatalan
+        "cs" shouldEqual KeyCzech
+        "cy" shouldEqual KeyWelsh
+        "da" shouldEqual KeyDanish
+        "de" shouldEqual KeyGerman
+        "en" shouldEqual KeyEnglish
+        "eo" shouldEqual KeyEsperanto
+        "es" shouldEqual KeySpanish
+        "et" shouldEqual KeyEstonian
+        "eu" shouldEqual KeyBasque
+        "fi" shouldEqual KeyFinnish
+        "fo" shouldEqual KeyFaroese
+        "fr" shouldEqual KeyFrench
+        "gl" shouldEqual KeyGalician
+        "he" shouldEqual KeyHebrew
+        "hi" shouldEqual KeyHindi
+        "hu" shouldEqual KeyHungarian
+        "hy" shouldEqual KeyArmenian
+        "id" shouldEqual KeyIndonesian
+        "is" shouldEqual KeyIcelandic
+        "it" shouldEqual KeyItalian
+        "ja" shouldEqual KeyJapanese
+        "ka" shouldEqual KeyGeorgian
+        "kk" shouldEqual KeyKazakh
+        "ko" shouldEqual KeyKorean
+        "ky" shouldEqual KeyKyrgyz
+        "lt" shouldEqual KeyLithuanian
+        "mi" shouldEqual KeyMaori
+        "mn" shouldEqual KeyMongolian
+        "mr" shouldEqual KeyMarathi
+        "ms" shouldEqual KeyMalay
+        "mt" shouldEqual KeyMaltese
+        "nb" shouldEqual KeyNorwegian
+        "nl" shouldEqual KeyDutch
+        "ns" shouldEqual KeyNorthernSotho
+        "pl" shouldEqual KeyPolish
+        "ps" shouldEqual KeyPashto
+        "pt" shouldEqual KeyPortuguese
+        "qu" shouldEqual KeyQuechua
+        "ro" shouldEqual KeyRomanian
+        "ru" shouldEqual KeyRussian
+        "sk" shouldEqual KeySlovak
+        "sq" shouldEqual KeyAlbanian
+        "sv" shouldEqual KeySwedish
+        "sw" shouldEqual KeySwahili
+        "ta" shouldEqual KeyTamil
+        "te" shouldEqual KeyTelugu
+        "tl" shouldEqual KeyTagalog
+        "tn" shouldEqual KeyTswana
+        "tr" shouldEqual KeyTurkish
+        "tt" shouldEqual KeyTatar
     }
 }

@@ -1,8 +1,8 @@
+
 import client.requestOptions
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
@@ -15,7 +15,7 @@ class TestRequestOptions {
             header("keyB", "valueB")
         }
 
-        assertEquals(requestOptions.headers, mutableMapOf("keyA" to "valueA", "keyB" to "valueB"))
+        requestOptions.headers shouldEqual mutableMapOf("keyA" to "valueA", "keyB" to "valueB")
     }
 
     @Test
@@ -25,7 +25,7 @@ class TestRequestOptions {
             urlParameter("keyB", "valueB")
         }
 
-        assertEquals(requestOptions.urlParameters, mutableMapOf("keyA" to "valueA", "keyB" to "valueB"))
+        requestOptions.urlParameters shouldEqual mutableMapOf("keyA" to "valueA", "keyB" to "valueB")
     }
 
     @Test
@@ -33,7 +33,7 @@ class TestRequestOptions {
         val requestOptions = requestOptions {
             headerAlgoliaUserId("value")
         }
-        assertEquals(requestOptions.headers, mutableMapOf("X-Algolia-UserID" to "value"))
+        requestOptions.headers shouldEqual mutableMapOf("X-Algolia-UserID" to "value")
     }
 
     @Test
@@ -42,6 +42,6 @@ class TestRequestOptions {
             headerForwardedFor("value")
         }
 
-        assertEquals(requestOptions.headers, mutableMapOf("X-Forwarded-For" to "value"))
+        requestOptions.headers shouldEqual mutableMapOf("X-Forwarded-For" to "value")
     }
 }

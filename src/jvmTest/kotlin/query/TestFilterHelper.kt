@@ -21,11 +21,11 @@ import org.junit.runners.JUnit4
 import rangeA
 import rangeB
 import set
+import shouldBeFalse
+import shouldBeTrue
+import shouldEqual
 import tagA
 import tagB
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
 
 
 @RunWith(JUnit4::class)
@@ -33,22 +33,22 @@ class TestFilterHelper {
 
     @Test
     fun keyOr() {
-        assertEquals(Group.Key(nameA, Group.Type.OrFacet), groupOrA.key(facetA))
-        assertEquals(Group.Key(nameA, Group.Type.OrFacet), groupOrA.key(facetB))
-        assertEquals(Group.Key(nameA, Group.Type.OrNumeric), groupOrA.key(comparisonA))
-        assertEquals(Group.Key(nameA, Group.Type.OrNumeric), groupOrA.key(rangeA))
-        assertEquals(Group.Key(nameA, Group.Type.OrTag), groupOrA.key(tagA))
+        Group.Key(nameA, Group.Type.OrFacet) shouldEqual groupOrA.key(facetA)
+        Group.Key(nameA, Group.Type.OrFacet) shouldEqual groupOrA.key(facetB)
+        Group.Key(nameA, Group.Type.OrNumeric) shouldEqual groupOrA.key(comparisonA)
+        Group.Key(nameA, Group.Type.OrNumeric) shouldEqual groupOrA.key(rangeA)
+        Group.Key(nameA, Group.Type.OrTag) shouldEqual groupOrA.key(tagA)
     }
 
     @Test
     fun keyAnd() {
         val key = Group.Key(nameA, Group.Type.And)
 
-        assertEquals(key, groupAndA.key(facetA))
-        assertEquals(key, groupAndA.key(facetB))
-        assertEquals(key, groupAndA.key(comparisonA))
-        assertEquals(key, groupAndA.key(rangeA))
-        assertEquals(key, groupAndA.key(tagA))
+        key shouldEqual groupAndA.key(facetA)
+        key shouldEqual groupAndA.key(facetB)
+        key shouldEqual groupAndA.key(comparisonA)
+        key shouldEqual groupAndA.key(rangeA)
+        key shouldEqual groupAndA.key(tagA)
     }
 
     @Test
@@ -60,19 +60,16 @@ class TestFilterHelper {
             add(groupOrB, *filters)
             add(groupAndA, *filters)
             add(groupAndB, *filters)
-            assertEquals(
-                mutableMapOf(
-                    Group.Key(nameA, Group.Type.OrFacet) to set(facetA, facetB),
-                    Group.Key(nameA, Group.Type.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
-                    Group.Key(nameA, Group.Type.OrTag) to set(tagA, tagB),
-                    Group.Key(nameA, Group.Type.And) to set(*filters),
-                    Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB),
-                    Group.Key(nameB, Group.Type.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
-                    Group.Key(nameB, Group.Type.OrTag) to set(tagA, tagB),
-                    Group.Key(nameB, Group.Type.And) to set(*filters)
-                ),
-                this
-            )
+            mutableMapOf(
+                Group.Key(nameA, Group.Type.OrFacet) to set(facetA, facetB),
+                Group.Key(nameA, Group.Type.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
+                Group.Key(nameA, Group.Type.OrTag) to set(tagA, tagB),
+                Group.Key(nameA, Group.Type.And) to set(*filters),
+                Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB),
+                Group.Key(nameB, Group.Type.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
+                Group.Key(nameB, Group.Type.OrTag) to set(tagA, tagB),
+                Group.Key(nameB, Group.Type.And) to set(*filters)
+            ) shouldEqual this
         }
     }
 
@@ -82,20 +79,14 @@ class TestFilterHelper {
             add(groupOrA, facetA, facetB)
             add(groupOrB, facetA, facetB)
             remove(groupOrA, facetA)
-            assertEquals(
-                mutableMapOf(
-                    Group.Key(nameA, Group.Type.OrFacet) to set(facetB),
-                    Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB)
-                ),
-                this
-            )
+            mutableMapOf(
+                Group.Key(nameA, Group.Type.OrFacet) to set(facetB),
+                Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB)
+            ) shouldEqual this
             remove(groupOrA, facetB)
-            assertEquals(
-                mutableMapOf(
-                    Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB)
-                ),
-                this
-            )
+            mutableMapOf(
+                Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB)
+            ) shouldEqual this
         }
     }
 
@@ -104,10 +95,10 @@ class TestFilterHelper {
         groupMap().apply {
             add(groupAndA, facetA)
             add(groupAndB, facetB)
-            assertTrue(contains(groupAndA, facetA))
-            assertFalse(contains(groupAndA, facetB))
-            assertTrue(contains(facetA))
-            assertTrue(contains(facetB))
+            contains(groupAndA, facetA).shouldBeTrue()
+            contains(groupAndA, facetB).shouldBeFalse()
+            contains(facetA).shouldBeTrue()
+            contains(facetB).shouldBeTrue()
         }
     }
 
@@ -116,14 +107,11 @@ class TestFilterHelper {
         groupMap().apply {
             add(groupAndA, facetA, facetB, comparisonA, comparisonB)
             clear(groupAndA, facetB.attribute)
-            assertEquals(
-                mutableMapOf(
-                    Group.Key(nameA, Group.Type.And) to set(facetA, comparisonA)
-                ),
-                this
-            )
+            mutableMapOf(
+                Group.Key(nameA, Group.Type.And) to set(facetA, comparisonA)
+            ) shouldEqual this
             clear(groupAndA, null)
-            assertTrue(isEmpty())
+            isEmpty().shouldBeTrue()
         }
     }
 
@@ -131,14 +119,11 @@ class TestFilterHelper {
     fun replace() {
         groupMap().apply {
             add(groupOrA, facetA)
-            assertFalse(replace(groupOrB, facetA, facetB))
-            assertTrue(replace(groupOrA, facetA, facetB))
-            assertEquals(
-                mutableMapOf(
-                    Group.Key(nameA, Group.Type.OrFacet) to set(facetB)
-                ),
-                this
-            )
+            replace(groupOrB, facetA, facetB).shouldBeFalse()
+            replace(groupOrA, facetA, facetB).shouldBeTrue()
+            mutableMapOf(
+                Group.Key(nameA, Group.Type.OrFacet) to set(facetB)
+            ) shouldEqual this
         }
     }
 
@@ -146,15 +131,12 @@ class TestFilterHelper {
     fun move() {
         groupMap().apply {
             add(groupOrA, facetA)
-            assertFalse(move(groupOrA, groupOrB, facetB))
-            assertFalse(move(groupOrB, groupOrA, facetA))
-            assertTrue(move(groupOrA, groupOrB, facetA))
-            assertEquals(
-                mutableMapOf(
-                    Group.Key(nameB, Group.Type.OrFacet) to set(facetA)
-                ),
-                this
-            )
+            move(groupOrA, groupOrB, facetB).shouldBeFalse()
+            move(groupOrB, groupOrA, facetA).shouldBeFalse()
+            move(groupOrA, groupOrB, facetA).shouldBeTrue()
+            mutableMapOf(
+                Group.Key(nameB, Group.Type.OrFacet) to set(facetA)
+            ) shouldEqual this
         }
     }
 
@@ -167,21 +149,18 @@ class TestFilterHelper {
 
             add(groupAndA, facetA, facetB, comparisonA, comparisonB)
             replaceAttribute(groupAndA, attributeC, attributeA)
-            assertEquals(this, original)
+            original shouldEqual this
             replaceAttribute(groupAndB, attributeA, attributeB)
-            assertEquals(this, original)
+            original shouldEqual this
             replaceAttribute(groupAndA, attributeA, attributeC)
-            assertEquals(
-                mutableMapOf(
-                    Group.Key(nameA, Group.Type.And) to set(
-                        facetA.copy(attribute = attributeC),
-                        facetB,
-                        comparisonA.copy(attribute = attributeC),
-                        comparisonB
-                    )
-                ),
-                this
-            )
+            mutableMapOf(
+                Group.Key(nameA, Group.Type.And) to set(
+                    facetA.copy(attribute = attributeC),
+                    facetB,
+                    comparisonA.copy(attribute = attributeC),
+                    comparisonB
+                )
+            ) shouldEqual this
         }
     }
 
@@ -190,18 +169,9 @@ class TestFilterHelper {
         groupMap().apply {
             add(groupAndA, facetA, facetB)
             add(groupAndB, facetA, facetB)
-            assertEquals(
-                set(facetA),
-                get(groupAndA, attributeA)
-            )
-            assertEquals(
-                set(facetA, facetB),
-                get(groupAndA, null)
-            )
-            assertEquals(
-                set(facetA, facetB),
-                get(null)
-            )
+            set(facetA) shouldEqual get(groupAndA, attributeA)
+            set(facetA, facetB) shouldEqual get(groupAndA, null)
+            set(facetA, facetB) shouldEqual get(null)
         }
     }
 }

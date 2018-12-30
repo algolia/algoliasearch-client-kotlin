@@ -6,8 +6,8 @@ import client.serialize.KeyCount
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldEqual
 import unknown
-import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
@@ -15,8 +15,8 @@ internal class TestSortFacetValuesBy {
 
     @Test
     fun raw() {
-        assertEquals(KeyCount, Count.raw)
-        assertEquals(KeyAlpha, Alpha.raw)
-        assertEquals(unknown, Unknown(unknown).raw)
+        KeyCount shouldEqual Count.raw
+        KeyAlpha shouldEqual Alpha.raw
+        unknown shouldEqual Unknown(unknown).raw
     }
 }

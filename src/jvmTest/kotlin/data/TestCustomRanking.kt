@@ -9,7 +9,7 @@ import client.serialize.KeyDesc
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
@@ -17,7 +17,7 @@ internal class TestCustomRanking {
 
     @Test
     fun raw() {
-        assertEquals("$KeyAsc($attributeA)", Asc(attributeA).raw)
-        assertEquals("$KeyDesc($attributeB)", Desc(attributeB).raw)
+        "$KeyAsc($attributeA)" shouldEqual Asc(attributeA).raw
+        "$KeyDesc($attributeB)" shouldEqual Desc(attributeB).raw
     }
 }

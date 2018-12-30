@@ -5,7 +5,7 @@ import client.to
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
+import shouldEqual
 
 @RunWith(JUnit4::class)
 internal class TestPolygon {
@@ -18,18 +18,18 @@ internal class TestPolygon {
 
     @Test
     fun points() {
-        assertEquals(point1, polygon.point1)
-        assertEquals(point2, polygon.point2)
-        assertEquals(point3, polygon.point3)
-        assertEquals(listOf(1f, 2f, 3f, 4f, 5f, 6f, 7f, 8f), polygon.raw)
+        point1 shouldEqual polygon.point1
+        point2 shouldEqual polygon.point2
+        point3 shouldEqual polygon.point3
+        listOf(1f, 2f, 3f, 4f, 5f, 6f, 7f, 8f) shouldEqual polygon.raw
     }
 
     @Test
     fun operator() {
-        assertEquals(point1, polygon[0])
-        assertEquals(point2, polygon[1])
-        assertEquals(point3, polygon[2])
-        assertEquals(point4, polygon[3])
+        point1 shouldEqual polygon[0]
+        point2 shouldEqual polygon[1]
+        point3 shouldEqual polygon[2]
+        point4 shouldEqual polygon[3]
     }
 
     @Test
@@ -40,11 +40,11 @@ internal class TestPolygon {
         } catch (exception: IndexOutOfBoundsException) {
             thrown = true
         }
-        assertEquals(true, thrown)
+        true shouldEqual thrown
     }
 
     @Test
     fun equality() {
-        assertEquals(Polygon(1f to 2f, 3f to 4f, 5f to 6f, 7f to 8f), polygon)
+        Polygon(1f to 2f, 3f to 4f, 5f to 6f, 7f to 8f) shouldEqual polygon
     }
 }

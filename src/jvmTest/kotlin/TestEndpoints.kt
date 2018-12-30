@@ -10,7 +10,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertTrue
 
 
 @RunWith(JUnit4::class)
@@ -67,7 +66,7 @@ class TestEndpoints {
                 query = Query(maxFacetHits = maxFacetHits)
             )
 
-            assertTrue(response.facetHits.size <= maxFacetHits)
+            (response.facetHits.size <= maxFacetHits).shouldBeTrue()
         }
     }
 

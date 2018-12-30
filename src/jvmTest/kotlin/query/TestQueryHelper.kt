@@ -13,7 +13,7 @@ import groupOrA
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
@@ -26,9 +26,9 @@ class TestQueryHelper {
     fun attributesToRetrieve() {
         queryBuilder {
             setAttributesToRetrieve(attributeA, attributeB)
-            assertEquals(listOf(attributeA, attributeB), attributesToRetrieve)
+            listOf(attributeA, attributeB) shouldEqual attributesToRetrieve
             setAttributesToRetrieve(attributeA, attributeB, excludeAttributes = true)
-            assertEquals(listOf(Attribute("-attributeA"), Attribute("-attributeB"), all), attributesToRetrieve)
+            listOf(Attribute("-attributeA"), Attribute("-attributeB"), all) shouldEqual attributesToRetrieve
             setRetrieveAllAttributes()
         }
     }
@@ -37,7 +37,7 @@ class TestQueryHelper {
     fun restrictSearchableAttributes() {
         queryBuilder {
             setRestrictSearchableAttributes(attributeA, attributeB)
-            assertEquals(listOf(attributeA, attributeB), restrictSearchableAttributes)
+            listOf(attributeA, attributeB) shouldEqual restrictSearchableAttributes
         }
     }
 
@@ -45,9 +45,9 @@ class TestQueryHelper {
     fun facets() {
         queryBuilder {
             setFacets(attributeA, attributeB)
-            assertEquals(listOf(attributeA, attributeB), facets)
+            listOf(attributeA, attributeB) shouldEqual facets
             setAllFacets()
-            assertEquals(listOf(all), facets)
+            listOf(all) shouldEqual facets
         }
     }
 
@@ -55,9 +55,9 @@ class TestQueryHelper {
     fun attributesToHighlight() {
         queryBuilder {
             setAttributesToHighlight(attributeA, attributeB)
-            assertEquals(listOf(attributeA, attributeB), attributesToHighlight)
+            listOf(attributeA, attributeB) shouldEqual attributesToHighlight
             setHighlightAllAttributes()
-            assertEquals(listOf(all), attributesToHighlight)
+            listOf(all) shouldEqual attributesToHighlight
         }
     }
 
@@ -65,11 +65,11 @@ class TestQueryHelper {
     fun attributesToSnippet() {
         queryBuilder {
             setAttributesToSnippet(attributeA to 10, attributeB to null)
-            assertEquals(listOf("attributeA:10", "attributeB"), attributesToSnippet?.map { it.raw })
+            listOf("attributeA:10", "attributeB") shouldEqual attributesToSnippet?.map { it.raw }
             setSnippetAllAttributes()
-            assertEquals(listOf("*"), attributesToSnippet?.map { it.raw })
+            listOf("*") shouldEqual attributesToSnippet?.map { it.raw }
             setSnippetAllAttributes(10)
-            assertEquals(listOf("*:10"), attributesToSnippet?.map { it.raw })
+            listOf("*:10") shouldEqual attributesToSnippet?.map { it.raw }
         }
     }
 
@@ -77,7 +77,7 @@ class TestQueryHelper {
     fun disableTypoToleranceOnAttributes() {
         queryBuilder {
             setDisableTypoToleranceOnAttributes(attributeA, attributeB)
-            assertEquals(listOf(attributeA, attributeB), disableTypoToleranceOnAttributes)
+            listOf(attributeA, attributeB) shouldEqual disableTypoToleranceOnAttributes
         }
     }
 
@@ -85,7 +85,7 @@ class TestQueryHelper {
     fun queryLanguages() {
         queryBuilder {
             setQueryLanguages(QueryLanguage.Afrikaans, QueryLanguage.Albanian)
-            assertEquals(listOf(QueryLanguage.Afrikaans, QueryLanguage.Albanian), queryLanguages)
+            listOf(QueryLanguage.Afrikaans, QueryLanguage.Albanian) shouldEqual queryLanguages
         }
     }
 
@@ -93,7 +93,7 @@ class TestQueryHelper {
     fun ruleContexts() {
         queryBuilder {
             setRuleContexts("mobile", "desktop")
-            assertEquals(listOf("mobile", "desktop"), ruleContexts)
+            listOf("mobile", "desktop") shouldEqual ruleContexts
         }
     }
 
@@ -101,7 +101,7 @@ class TestQueryHelper {
     fun optionalWords() {
         queryBuilder {
             setOptionalWords("mobile", "desktop")
-            assertEquals(listOf("mobile", "desktop"), optionalWords)
+            listOf("mobile", "desktop") shouldEqual optionalWords
         }
     }
 
@@ -109,7 +109,7 @@ class TestQueryHelper {
     fun disableExactOnAttributes() {
         queryBuilder {
             setDisableExactOnAttributes(attributeA, attributeB)
-            assertEquals(listOf(attributeA, attributeB), disableExactOnAttributes)
+            listOf(attributeA, attributeB) shouldEqual disableExactOnAttributes
         }
     }
 
@@ -117,7 +117,7 @@ class TestQueryHelper {
     fun alternativesAsExact() {
         queryBuilder {
             setAlternativesAsExact(AlternativesAsExact.IgnorePlurals)
-            assertEquals(listOf(AlternativesAsExact.IgnorePlurals), alternativesAsExact)
+            listOf(AlternativesAsExact.IgnorePlurals) shouldEqual alternativesAsExact
         }
     }
 
@@ -125,7 +125,7 @@ class TestQueryHelper {
     fun analyticsTags() {
         queryBuilder {
             setAnalyticsTags("mobile", "desktop")
-            assertEquals(listOf("mobile", "desktop"), analyticsTags)
+            listOf("mobile", "desktop") shouldEqual analyticsTags
         }
     }
 
@@ -133,7 +133,7 @@ class TestQueryHelper {
     fun responseFields() {
         queryBuilder {
             setResponseFields(ResponseFields.All)
-            assertEquals(listOf(ResponseFields.All), responseFields)
+            listOf(ResponseFields.All) shouldEqual responseFields
         }
     }
 
@@ -144,7 +144,7 @@ class TestQueryHelper {
                 groupOrA.addAll(listOf(facetA, facetB))
             }
         }
-        assertEquals("attributeA:facetA OR attributeB:false", query.filterBuilder.buildTest())
+        "attributeA:facetA OR attributeB:false" shouldEqual query.filterBuilder.buildTest()
     }
 
     @Test
@@ -154,6 +154,6 @@ class TestQueryHelper {
                 groupOrA.addAll(listOf(facetA, facetB))
             }
         }
-        assertEquals(listOf(listOf(facetA.expression, facetB.expression)), query.optionalFilterBuilder.build())
+        listOf(listOf(facetA.expression, facetB.expression)) shouldEqual query.optionalFilterBuilder.build()
     }
 }

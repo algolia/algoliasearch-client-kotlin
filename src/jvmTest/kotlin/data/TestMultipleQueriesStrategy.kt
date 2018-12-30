@@ -6,8 +6,8 @@ import client.serialize.KeyStopIfEnoughMatches
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldEqual
 import unknown
-import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
@@ -15,8 +15,8 @@ class TestMultipleQueriesStrategy {
 
     @Test
     fun raw() {
-        assertEquals(KeyNone, None.raw)
-        assertEquals(KeyStopIfEnoughMatches, StopIfEnoughMatches.raw)
-        assertEquals(unknown, Unknown(unknown).raw)
+        KeyNone shouldEqual None.raw
+        KeyStopIfEnoughMatches shouldEqual StopIfEnoughMatches.raw
+        unknown shouldEqual Unknown(unknown).raw
     }
 }

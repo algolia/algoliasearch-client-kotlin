@@ -8,8 +8,8 @@ import client.serialize.KeyStrict
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldEqual
 import unknown
-import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
@@ -17,9 +17,9 @@ internal class TestTypoTolerance {
 
     @Test
     fun raw() {
-        assertEquals("$boolean", Boolean(boolean).raw)
-        assertEquals(KeyStrict, Strict.raw)
-        assertEquals(KeyMin, Min.raw)
-        assertEquals(unknown, Unknown(unknown).raw)
+        "$boolean" shouldEqual Boolean(boolean).raw
+        KeyStrict shouldEqual Strict.raw
+        KeyMin shouldEqual Min.raw
+        unknown shouldEqual Unknown(unknown).raw
     }
 }

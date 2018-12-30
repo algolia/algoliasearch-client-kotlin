@@ -1,3 +1,4 @@
+
 import client.data.ApplicationId
 import client.host.RetryLogic
 import client.host.Status
@@ -13,8 +14,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 
 @RunWith(JUnit4::class)
@@ -30,13 +29,11 @@ class TestRetryLogic {
 
     @Test
     fun hosts() {
-        assertEquals("https://$applicationId-dsn.algolia.net", hosts.first())
-        assertTrue {
-            hosts.contains("https://$applicationId-1.algolianet.com")
-            hosts.contains("https://$applicationId-2.algolianet.com")
-            hosts.contains("https://$applicationId-3.algolianet.com")
-        }
-        assertEquals(4, hosts.size)
+        "https://$applicationId-dsn.algolia.net" shouldEqual hosts.first()
+        hosts.contains("https://$applicationId-1.algolianet.com").shouldBeTrue()
+        hosts.contains("https://$applicationId-2.algolianet.com").shouldBeTrue()
+        hosts.contains("https://$applicationId-3.algolianet.com").shouldBeTrue()
+        4 shouldEqual hosts.size
     }
 
     @Test
@@ -48,12 +45,12 @@ class TestRetryLogic {
                 retry++
                 client200.get<HttpResponse>()
             }
-            assertEquals(0, retry)
+            0 shouldEqual retry
         }
-        assertEquals(Status.Up, statuses[0].first)
-        assertEquals(Status.Unknown, statuses[1].first)
-        assertEquals(Status.Unknown, statuses[2].first)
-        assertEquals(Status.Unknown, statuses[3].first)
+        Status.Up shouldEqual statuses[0].first
+        Status.Unknown shouldEqual statuses[1].first
+        Status.Unknown shouldEqual statuses[2].first
+        Status.Unknown shouldEqual statuses[3].first
     }
 
     @Test
@@ -63,15 +60,15 @@ class TestRetryLogic {
 
             retryLogic.retry(1000L, route) { path ->
                 retry++
-                assertEquals(hosts[retry] + route, path)
+                hosts[retry] + route shouldEqual path
                 if (retry == 0) delay(2000L)
                 client200.get<HttpResponse>()
             }
-            assertEquals(Status.Down, statuses[0].first)
-            assertEquals(Status.Up, statuses[1].first)
-            assertEquals(Status.Unknown, statuses[2].first)
-            assertEquals(Status.Unknown, statuses[3].first)
-            assertEquals(1, retry)
+            Status.Down shouldEqual statuses[0].first
+            Status.Up shouldEqual statuses[1].first
+            Status.Unknown shouldEqual statuses[2].first
+            Status.Unknown shouldEqual statuses[3].first
+            1 shouldEqual retry
         }
     }
 
@@ -83,15 +80,15 @@ class TestRetryLogic {
 
             retryLogic.retry(100L, route) { path ->
                 retry++
-                assertEquals(hosts[retry % count] + route, path)
+                hosts[retry % count] + route shouldEqual path
                 if (retry < count) delay(150L * (retry + 1))
                 client200.get<HttpResponse>(path)
             }
-            assertEquals(Status.Up, statuses[0].first)
-            assertEquals(Status.Down, statuses[1].first)
-            assertEquals(Status.Down, statuses[2].first)
-            assertEquals(Status.Down, statuses[3].first)
-            assertEquals(count, retry)
+            Status.Up shouldEqual statuses[0].first
+            Status.Down shouldEqual statuses[1].first
+            Status.Down shouldEqual statuses[2].first
+            Status.Down shouldEqual statuses[3].first
+            count shouldEqual retry
         }
     }
 
@@ -109,12 +106,12 @@ class TestRetryLogic {
             } catch (exception: BadResponseStatusException) {
                 exceptionIsThrown = true
             }
-            assertTrue(exceptionIsThrown)
-            assertEquals(0, retry)
-            assertEquals(Status.Unknown, statuses[0].first)
-            assertEquals(Status.Unknown, statuses[1].first)
-            assertEquals(Status.Unknown, statuses[2].first)
-            assertEquals(Status.Unknown, statuses[3].first)
+            exceptionIsThrown.shouldBeTrue()
+            0 shouldEqual retry
+            Status.Unknown shouldEqual statuses[0].first
+            Status.Unknown shouldEqual statuses[1].first
+            Status.Unknown shouldEqual statuses[2].first
+            Status.Unknown shouldEqual statuses[3].first
         }
     }
 }

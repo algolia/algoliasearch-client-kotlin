@@ -5,7 +5,7 @@ import client.to
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
@@ -15,15 +15,15 @@ internal class TestPoint {
     fun dx() {
         val point = 1f to 2f
 
-        assertEquals(Point(1f, 2f), point)
+        Point(1f, 2f) shouldEqual point
     }
 
     @Test
     fun point() {
         val point = Point(1f, 2f)
 
-        assertEquals(listOf(1f, 2f), point.raw)
-        assertEquals(point.latitude, 1f)
-        assertEquals(point.longitude, 2f)
+        listOf(1f, 2f) shouldEqual point.raw
+        point.latitude shouldEqual 1f
+        point.longitude shouldEqual 2f
     }
 }

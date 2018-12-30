@@ -5,7 +5,7 @@ import client.toAttribute
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
@@ -13,11 +13,11 @@ internal class TestAttribute {
 
     @Test
     fun dx() {
-        assertEquals(Attribute("attributeA"), "attributeA".toAttribute())
+        Attribute("attributeA") shouldEqual "attributeA".toAttribute()
     }
 
     @Test
     fun raw() {
-        assertEquals("raw", Attribute("raw").raw)
+        "raw" shouldEqual Attribute("raw").raw
     }
 }

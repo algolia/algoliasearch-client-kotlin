@@ -5,7 +5,7 @@ import client.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import kotlin.test.assertEquals
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
@@ -13,61 +13,61 @@ internal class TestQueryLanguage {
 
     @Test
     fun raw() {
-        assertEquals(KeyAfrikaans, Afrikaans.raw)
-        assertEquals(KeyArabic, Arabic.raw)
-        assertEquals(KeyAzeri, Azeri.raw)
-        assertEquals(KeyBulgarian, Bulgarian.raw)
-        assertEquals(KeyBrunei, Brunei.raw)
-        assertEquals(KeyCatalan, Catalan.raw)
-        assertEquals(KeyCzech, Czech.raw)
-        assertEquals(KeyWelsh, Welsh.raw)
-        assertEquals(KeyDanish, Danish.raw)
-        assertEquals(KeyGerman, German.raw)
-        assertEquals(KeyEnglish, English.raw)
-        assertEquals(KeyEsperanto, Esperanto.raw)
-        assertEquals(KeySpanish, Spanish.raw)
-        assertEquals(KeyEstonian, Estonian.raw)
-        assertEquals(KeyBasque, Basque.raw)
-        assertEquals(KeyFinnish, Finnish.raw)
-        assertEquals(KeyFaroese, Faroese.raw)
-        assertEquals(KeyFrench, French.raw)
-        assertEquals(KeyGalician, Galician.raw)
-        assertEquals(KeyHebrew, Hebrew.raw)
-        assertEquals(KeyHindi, Hindi.raw)
-        assertEquals(KeyHungarian, Hungarian.raw)
-        assertEquals(KeyArmenian, Armenian.raw)
-        assertEquals(KeyIndonesian, Indonesian.raw)
-        assertEquals(KeyIcelandic, Icelandic.raw)
-        assertEquals(KeyItalian, Italian.raw)
-        assertEquals(KeyJapanese, Japanese.raw)
-        assertEquals(KeyGeorgian, Georgian.raw)
-        assertEquals(KeyKazakh, Kazakh.raw)
-        assertEquals(KeyKorean, Korean.raw)
-        assertEquals(KeyKyrgyz, Kyrgyz.raw)
-        assertEquals(KeyLithuanian, Lithuanian.raw)
-        assertEquals(KeyMaori, Maori.raw)
-        assertEquals(KeyMongolian, Mongolian.raw)
-        assertEquals(KeyMarathi, Marathi.raw)
-        assertEquals(KeyMalay, Malay.raw)
-        assertEquals(KeyMaltese, Maltese.raw)
-        assertEquals(KeyNorwegian, Norwegian.raw)
-        assertEquals(KeyDutch, Dutch.raw)
-        assertEquals(KeyNorthernSotho, NorthernSotho.raw)
-        assertEquals(KeyPolish, Polish.raw)
-        assertEquals(KeyPashto, Pashto.raw)
-        assertEquals(KeyPortuguese, Portuguese.raw)
-        assertEquals(KeyQuechua, Quechua.raw)
-        assertEquals(KeyRomanian, Romanian.raw)
-        assertEquals(KeyRussian, Russian.raw)
-        assertEquals(KeySlovak, Slovak.raw)
-        assertEquals(KeyAlbanian, Albanian.raw)
-        assertEquals(KeySwedish, Swedish.raw)
-        assertEquals(KeySwahili, Swahili.raw)
-        assertEquals(KeyTamil, Tamil.raw)
-        assertEquals(KeyTelugu, Telugu.raw)
-        assertEquals(KeyTagalog, Tagalog.raw)
-        assertEquals(KeyTswana, Tswana.raw)
-        assertEquals(KeyTurkish, Turkish.raw)
-        assertEquals(KeyTatar, Tatar.raw)
+        KeyAfrikaans shouldEqual Afrikaans.raw
+        KeyArabic shouldEqual Arabic.raw
+        KeyAzeri shouldEqual Azeri.raw
+        KeyBulgarian shouldEqual Bulgarian.raw
+        KeyBrunei shouldEqual Brunei.raw
+        KeyCatalan shouldEqual Catalan.raw
+        KeyCzech shouldEqual Czech.raw
+        KeyWelsh shouldEqual Welsh.raw
+        KeyDanish shouldEqual Danish.raw
+        KeyGerman shouldEqual German.raw
+        KeyEnglish shouldEqual English.raw
+        KeyEsperanto shouldEqual Esperanto.raw
+        KeySpanish shouldEqual Spanish.raw
+        KeyEstonian shouldEqual Estonian.raw
+        KeyBasque shouldEqual Basque.raw
+        KeyFinnish shouldEqual Finnish.raw
+        KeyFaroese shouldEqual Faroese.raw
+        KeyFrench shouldEqual French.raw
+        KeyGalician shouldEqual Galician.raw
+        KeyHebrew shouldEqual Hebrew.raw
+        KeyHindi shouldEqual Hindi.raw
+        KeyHungarian shouldEqual Hungarian.raw
+        KeyArmenian shouldEqual Armenian.raw
+        KeyIndonesian shouldEqual Indonesian.raw
+        KeyIcelandic shouldEqual Icelandic.raw
+        KeyItalian shouldEqual Italian.raw
+        KeyJapanese shouldEqual Japanese.raw
+        KeyGeorgian shouldEqual Georgian.raw
+        KeyKazakh shouldEqual Kazakh.raw
+        KeyKorean shouldEqual Korean.raw
+        KeyKyrgyz shouldEqual Kyrgyz.raw
+        KeyLithuanian shouldEqual Lithuanian.raw
+        KeyMaori shouldEqual Maori.raw
+        KeyMongolian shouldEqual Mongolian.raw
+        KeyMarathi shouldEqual Marathi.raw
+        KeyMalay shouldEqual Malay.raw
+        KeyMaltese shouldEqual Maltese.raw
+        KeyNorwegian shouldEqual Norwegian.raw
+        KeyDutch shouldEqual Dutch.raw
+        KeyNorthernSotho shouldEqual NorthernSotho.raw
+        KeyPolish shouldEqual Polish.raw
+        KeyPashto shouldEqual Pashto.raw
+        KeyPortuguese shouldEqual Portuguese.raw
+        KeyQuechua shouldEqual Quechua.raw
+        KeyRomanian shouldEqual Romanian.raw
+        KeyRussian shouldEqual Russian.raw
+        KeySlovak shouldEqual Slovak.raw
+        KeyAlbanian shouldEqual Albanian.raw
+        KeySwedish shouldEqual Swedish.raw
+        KeySwahili shouldEqual Swahili.raw
+        KeyTamil shouldEqual Tamil.raw
+        KeyTelugu shouldEqual Telugu.raw
+        KeyTagalog shouldEqual Tagalog.raw
+        KeyTswana shouldEqual Tswana.raw
+        KeyTurkish shouldEqual Turkish.raw
+        KeyTatar shouldEqual Tatar.raw
     }
 }
