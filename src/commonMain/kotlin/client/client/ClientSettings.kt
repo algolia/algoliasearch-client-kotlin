@@ -18,10 +18,12 @@ class ClientSettings(
     override val indexName: IndexName
 ) : EndpointsSettings {
 
-    override suspend fun getSettings(): Settings {
+    override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
         return client.run {
             read.retry(readTimeout, indexName.pathIndexes("/settings")) { path ->
-                httpClient.get<Settings>(path)
+                httpClient.get<Settings>(path) {
+                    setRequestOptions(requestOptions)
+                }
             }
         }
     }
@@ -29,11 +31,13 @@ class ClientSettings(
     override suspend fun setSettings(
         settings: Settings,
         resetToDefault: List<SettingsKey>,
-        forwardToReplicas: Boolean
+        forwardToReplicas: Boolean,
+        requestOptions: RequestOptions?
     ): Task {
         return client.run {
             write.retry(writeTimeout, indexName.pathIndexes("/settings")) { path ->
                 httpClient.put<Task>(path) {
+                    setRequestOptions(requestOptions)
                     val map = settings
                         .encodeNoNulls()
                         .toMutableMap()

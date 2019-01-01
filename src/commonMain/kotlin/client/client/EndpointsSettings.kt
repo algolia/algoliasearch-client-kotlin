@@ -10,11 +10,12 @@ interface EndpointsSettings {
 
     val indexName: IndexName
 
-    suspend fun getSettings(): Settings
+    suspend fun getSettings(requestOptions: RequestOptions? = null): Settings
 
     suspend fun setSettings(
         settings: Settings,
         resetToDefault: List<SettingsKey> = listOf(),
-        forwardToReplicas: Boolean = false
+        forwardToReplicas: Boolean = false,
+        requestOptions: RequestOptions? = null
     ): Task
 }
