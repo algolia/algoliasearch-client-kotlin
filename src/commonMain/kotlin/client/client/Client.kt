@@ -47,7 +47,7 @@ class Client(
 
     private val indexes = mutableMapOf<IndexName, Index>()
 
-    fun initIndex(indexName: IndexName): Index {
+    fun getIndex(indexName: IndexName): Index {
         return indexes.getOrPut(indexName) {
             Index(this, indexName)
         }

@@ -13,8 +13,8 @@ import shouldEqual
 @RunWith(JUnit4::class)
 internal class TestClientIndices {
 
-    private val copy = client.initIndex(IndexName("products_android_demo_copy"))
-    private val destination = client.initIndex(IndexName("products_android_demo_move"))
+    private val copy = client.getIndex(IndexName("products_android_demo_copy"))
+    private val destination = client.getIndex(IndexName("products_android_demo_move"))
 
     private suspend fun deleteIndex(index: Index) {
         index.run {
