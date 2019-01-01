@@ -16,7 +16,7 @@ internal class TestClientIndices {
     fun listCopyAndDelete() {
         runBlocking {
             val destinationName = IndexName("products_android_demo_copy")
-            val destination = apiClient.initIndex(destinationName)
+            val destination = client.initIndex(destinationName)
             val list = destination.listIndexes()
 
             if (list.items.any { it.indexName == destinationName }) {
