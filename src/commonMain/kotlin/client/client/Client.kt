@@ -114,15 +114,16 @@ class Client(
         return getTask(indexName, taskId.taskID)
     }
 
-    suspend fun wait(indexName: IndexName, taskId: TaskId): TaskInfo {
-        val timeToWait = 10000L
+    private val maxTimeToWait = 10000L
+
+    suspend fun wait(indexName: IndexName, taskId: TaskId, timeToWait: Long = maxTimeToWait): TaskInfo {
         var attempt = 1
 
         while (true) {
             getTask(indexName, taskId).let {
                 if (it.status == TaskStatus.Published) return it
             }
-            delay(timeToWait * attempt)
+            delay((timeToWait * attempt).coerceAtMost(maxTimeToWait))
             attempt++
         }
     }
