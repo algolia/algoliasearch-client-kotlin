@@ -1,6 +1,7 @@
 package client.client
 
 import client.data.*
+import client.serialize.KeyCursor
 import client.serialize.KeyFacetQuery
 import client.serialize.KeyMaxFacetHits
 import client.serialize.encodeNoNulls
@@ -53,7 +54,7 @@ class ClientSearch(
             read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
                 httpClient.get<Hits>(path) {
                     setRequestOptions(requestOptions)
-                    parameter("cursor", cursor)
+                    parameter(KeyCursor, cursor)
                 }
             }
         }
