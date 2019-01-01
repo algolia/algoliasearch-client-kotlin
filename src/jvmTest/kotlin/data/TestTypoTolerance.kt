@@ -17,9 +17,9 @@ internal class TestTypoTolerance {
 
     @Test
     fun raw() {
-        "$boolean" shouldEqual Boolean(boolean).raw
-        KeyStrict shouldEqual Strict.raw
-        KeyMin shouldEqual Min.raw
-        unknown shouldEqual Unknown(unknown).raw
+        Boolean(boolean).raw shouldEqual "$boolean"
+        Strict.raw shouldEqual KeyStrict
+        Min.raw shouldEqual KeyMin
+        Unknown(unknown).raw shouldEqual unknown
     }
 }

@@ -15,9 +15,9 @@ internal class TestSnippet {
 
     @Test
     fun raw() {
-        attributeA.raw shouldEqual Snippet(attributeA).raw
-        "*" shouldEqual Snippet(attributeAll).raw
-        "*:20" shouldEqual Snippet(attributeAll, 20).raw
-        "$attributeB:10" shouldEqual Snippet(attributeB, 10).raw
+        Snippet(attributeA).raw shouldEqual attributeA.raw
+        Snippet(attributeAll).raw shouldEqual "*"
+        Snippet(attributeAll, 20).raw shouldEqual "*:20"
+        Snippet(attributeB, 10).raw shouldEqual "$attributeB:10"
     }
 }

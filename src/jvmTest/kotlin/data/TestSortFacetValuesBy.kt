@@ -15,8 +15,8 @@ internal class TestSortFacetValuesBy {
 
     @Test
     fun raw() {
-        KeyCount shouldEqual Count.raw
-        KeyAlpha shouldEqual Alpha.raw
-        unknown shouldEqual Unknown(unknown).raw
+        Count.raw shouldEqual KeyCount
+        Alpha.raw shouldEqual KeyAlpha
+        Unknown(unknown).raw shouldEqual unknown
     }
 }

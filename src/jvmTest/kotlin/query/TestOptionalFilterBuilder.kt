@@ -46,12 +46,12 @@ class TestOptionalFilterBuilder {
             groupOrA += facetB
             groupOrB += facetA
 
-            listOf(
+            build() shouldEqual listOf(
                 listOf(facetA.expression),
                 listOf(facetB.expression),
                 listOf(facetA.expression, facetB.expression),
                 listOf(facetA.expression)
-            ) shouldEqual build()
+            )
         }
     }
 }

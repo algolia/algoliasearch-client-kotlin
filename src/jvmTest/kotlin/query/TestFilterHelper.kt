@@ -60,7 +60,7 @@ class TestFilterHelper {
             add(groupOrB, *filters)
             add(groupAndA, *filters)
             add(groupAndB, *filters)
-            mutableMapOf(
+            this shouldEqual mutableMapOf(
                 Group.Key(nameA, Group.Type.OrFacet) to set(facetA, facetB),
                 Group.Key(nameA, Group.Type.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
                 Group.Key(nameA, Group.Type.OrTag) to set(tagA, tagB),
@@ -69,7 +69,7 @@ class TestFilterHelper {
                 Group.Key(nameB, Group.Type.OrNumeric) to set(comparisonA, comparisonB, rangeA, rangeB),
                 Group.Key(nameB, Group.Type.OrTag) to set(tagA, tagB),
                 Group.Key(nameB, Group.Type.And) to set(*filters)
-            ) shouldEqual this
+            )
         }
     }
 
@@ -79,14 +79,14 @@ class TestFilterHelper {
             add(groupOrA, facetA, facetB)
             add(groupOrB, facetA, facetB)
             remove(groupOrA, facetA)
-            mutableMapOf(
+            this shouldEqual mutableMapOf(
                 Group.Key(nameA, Group.Type.OrFacet) to set(facetB),
                 Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB)
-            ) shouldEqual this
+            )
             remove(groupOrA, facetB)
-            mutableMapOf(
+            this shouldEqual mutableMapOf(
                 Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB)
-            ) shouldEqual this
+            )
         }
     }
 
@@ -107,9 +107,9 @@ class TestFilterHelper {
         groupMap().apply {
             add(groupAndA, facetA, facetB, comparisonA, comparisonB)
             clear(groupAndA, facetB.attribute)
-            mutableMapOf(
+            this shouldEqual mutableMapOf(
                 Group.Key(nameA, Group.Type.And) to set(facetA, comparisonA)
-            ) shouldEqual this
+            )
             clear(groupAndA, null)
             isEmpty().shouldBeTrue()
         }
@@ -121,9 +121,9 @@ class TestFilterHelper {
             add(groupOrA, facetA)
             replace(groupOrB, facetA, facetB).shouldBeFalse()
             replace(groupOrA, facetA, facetB).shouldBeTrue()
-            mutableMapOf(
+            this shouldEqual mutableMapOf(
                 Group.Key(nameA, Group.Type.OrFacet) to set(facetB)
-            ) shouldEqual this
+            )
         }
     }
 
@@ -134,9 +134,9 @@ class TestFilterHelper {
             move(groupOrA, groupOrB, facetB).shouldBeFalse()
             move(groupOrB, groupOrA, facetA).shouldBeFalse()
             move(groupOrA, groupOrB, facetA).shouldBeTrue()
-            mutableMapOf(
+            this shouldEqual mutableMapOf(
                 Group.Key(nameB, Group.Type.OrFacet) to set(facetA)
-            ) shouldEqual this
+            )
         }
     }
 
@@ -149,18 +149,18 @@ class TestFilterHelper {
 
             add(groupAndA, facetA, facetB, comparisonA, comparisonB)
             replaceAttribute(groupAndA, attributeC, attributeA)
-            original shouldEqual this
+            this shouldEqual original
             replaceAttribute(groupAndB, attributeA, attributeB)
-            original shouldEqual this
+            this shouldEqual original
             replaceAttribute(groupAndA, attributeA, attributeC)
-            mutableMapOf(
+            this shouldEqual mutableMapOf(
                 Group.Key(nameA, Group.Type.And) to set(
                     facetA.copy(attribute = attributeC),
                     facetB,
                     comparisonA.copy(attribute = attributeC),
                     comparisonB
                 )
-            ) shouldEqual this
+            )
         }
     }
 
@@ -169,9 +169,9 @@ class TestFilterHelper {
         groupMap().apply {
             add(groupAndA, facetA, facetB)
             add(groupAndB, facetA, facetB)
-            set(facetA) shouldEqual get(groupAndA, attributeA)
-            set(facetA, facetB) shouldEqual get(groupAndA, null)
-            set(facetA, facetB) shouldEqual get(null)
+            get(groupAndA, attributeA) shouldEqual set(facetA)
+            get(groupAndA, null) shouldEqual set(facetA, facetB)
+            get(null) shouldEqual set(facetA, facetB)
         }
     }
 }

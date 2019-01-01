@@ -20,10 +20,10 @@ class TestFilter {
         val filterSpace = FilterFacet(attributeA, "value with space")
         val filterScore = FilterFacet(attributeA, "valueA", 1)
 
-        "\"attributeA\":\"valueA\"" shouldEqual filter.build()
-        "NOT \"attributeA\":\"valueA\"" shouldEqual filterNegate.build()
-        "\"attributeA\":\"value with space\"" shouldEqual filterSpace.build()
-        "\"attributeA\":\"valueA\"<score=1>" shouldEqual filterScore.build()
+        filter.build() shouldEqual "\"attributeA\":\"valueA\""
+        filterNegate.build() shouldEqual "NOT \"attributeA\":\"valueA\""
+        filterSpace.build() shouldEqual "\"attributeA\":\"value with space\""
+        filterScore.build() shouldEqual "\"attributeA\":\"valueA\"<score=1>"
     }
 
     @Test
@@ -34,11 +34,11 @@ class TestFilter {
         val filterFalseNegate = FilterFacet(attributeA, false).not()
         val filterScore = FilterFacet(attributeA, true, 4)
 
-        "\"attributeA\":true" shouldEqual filterTrue.build()
-        "\"attributeA\":false" shouldEqual filterFalse.build()
-        "NOT \"attributeA\":true" shouldEqual filterTrueNegate.build()
-        "NOT \"attributeA\":false" shouldEqual filterFalseNegate.build()
-        "\"attributeA\":true<score=4>" shouldEqual filterScore.build()
+        filterTrue.build() shouldEqual "\"attributeA\":true"
+        filterFalse.build() shouldEqual "\"attributeA\":false"
+        filterTrueNegate.build() shouldEqual "NOT \"attributeA\":true"
+        filterFalseNegate.build() shouldEqual "NOT \"attributeA\":false"
+        filterScore.build() shouldEqual "\"attributeA\":true<score=4>"
     }
 
     @Test
@@ -49,11 +49,11 @@ class TestFilter {
         val filterDouble = FilterFacet(attributeA, 1.0).not()
         val filterScore = FilterFacet(attributeA, 1, 2)
 
-        "\"attributeA\":1" shouldEqual filterInt.build()
-        "\"attributeA\":1" shouldEqual filterLong.build()
-        "\"attributeA\":1.0" shouldEqual filterFloat.build()
-        "NOT \"attributeA\":1.0" shouldEqual filterDouble.build()
-        "\"attributeA\":1<score=2>" shouldEqual filterScore.build()
+        filterInt.build() shouldEqual "\"attributeA\":1"
+        filterLong.build() shouldEqual "\"attributeA\":1"
+        filterFloat.build() shouldEqual "\"attributeA\":1.0"
+        filterDouble.build() shouldEqual "NOT \"attributeA\":1.0"
+        filterScore.build() shouldEqual "\"attributeA\":1<score=2>"
     }
 
     @Test
@@ -61,8 +61,8 @@ class TestFilter {
         val filter = FilterRange(attributeA, 5.0, 6.0)
         val filterNegate = FilterRange(attributeA, 5.0, 6.0).not()
 
-        "\"attributeA\":5.0 TO 6.0" shouldEqual filter.build()
-        "NOT \"attributeA\":5.0 TO 6.0" shouldEqual filterNegate.build()
+        filter.build() shouldEqual "\"attributeA\":5.0 TO 6.0"
+        filterNegate.build() shouldEqual "NOT \"attributeA\":5.0 TO 6.0"
     }
 
     @Test
@@ -70,8 +70,8 @@ class TestFilter {
         val filter = FilterTag("valueA")
         val filterNegate = FilterTag("valueA").not()
 
-        "_tags:\"valueA\"" shouldEqual filter.build()
-        "NOT _tags:\"valueA\"" shouldEqual filterNegate.build()
+        filter.build() shouldEqual "_tags:\"valueA\""
+        filterNegate.build() shouldEqual "NOT _tags:\"valueA\""
     }
 
     @Test
@@ -79,7 +79,7 @@ class TestFilter {
         val filter = FilterComparison(attributeA, NumericOperator.Greater, 5.0)
         val filterNegate = FilterComparison(attributeA, NumericOperator.Greater, 5.0).not()
 
-        "\"attributeA\" > 5.0" shouldEqual filter.build()
-        "NOT \"attributeA\" > 5.0" shouldEqual filterNegate.build()
+        filter.build() shouldEqual "\"attributeA\" > 5.0"
+        filterNegate.build() shouldEqual "NOT \"attributeA\" > 5.0"
     }
 }

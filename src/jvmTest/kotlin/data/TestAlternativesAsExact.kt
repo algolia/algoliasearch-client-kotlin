@@ -16,9 +16,9 @@ internal class TestAlternativesAsExact {
 
     @Test
     fun raw() {
-        KeyIgnorePlurals shouldEqual IgnorePlurals.raw
-        KeySingleWordSynonym shouldEqual SingleWordSynonym.raw
-        KeyMultiWordsSynonym shouldEqual MultiWordsSynonym.raw
-        unknown shouldEqual Unknown(unknown).raw
+        IgnorePlurals.raw shouldEqual KeyIgnorePlurals
+        SingleWordSynonym.raw shouldEqual KeySingleWordSynonym
+        MultiWordsSynonym.raw shouldEqual KeyMultiWordsSynonym
+        Unknown(unknown).raw shouldEqual unknown
     }
 }

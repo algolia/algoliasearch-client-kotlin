@@ -1,7 +1,7 @@
 package host
 import client.Time
-import client.host.HostStatuses
 import client.host.HostStatus
+import client.host.HostStatuses
 import client.host.areStatusExpired
 import client.host.selectNextHostIndex
 import org.junit.Test
@@ -65,12 +65,12 @@ class TestHostStatus {
         val allDown = listOf(HostStatus.Down to 0L, HostStatus.Down to 0L, HostStatus.Down to 0L)
         val oneDownOtherUnknown = listOf(HostStatus.Down to 0L, HostStatus.Unknown to 0L, HostStatus.Unknown to 0L)
 
-        0 shouldEqual allUnknowns.selectNextHostIndex()
-        2 shouldEqual oneUp.selectNextHostIndex()
-        1 shouldEqual twoUp.selectNextHostIndex()
+        allUnknowns.selectNextHostIndex() shouldEqual 0
+        oneUp.selectNextHostIndex() shouldEqual 2
+        twoUp.selectNextHostIndex() shouldEqual 1
         // Even though the Unknown status is more recent, we still prefer an host that is Up.
-        1 shouldEqual oneUpOneUnknown.selectNextHostIndex()
-        0 shouldEqual allDown.selectNextHostIndex()
-        1 shouldEqual oneDownOtherUnknown.selectNextHostIndex()
+        oneUpOneUnknown.selectNextHostIndex() shouldEqual 1
+        allDown.selectNextHostIndex() shouldEqual 0
+        oneDownOtherUnknown.selectNextHostIndex() shouldEqual 1
     }
 }

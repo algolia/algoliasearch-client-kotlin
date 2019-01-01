@@ -16,9 +16,9 @@ internal class TestQueryType {
 
     @Test
     fun raw() {
-        KeyPrefixLast shouldEqual PrefixLast.raw
-        KeyPrefixAll shouldEqual PrefixAll.raw
-        KeyPrefixNone shouldEqual PrefixNone.raw
-        unknown shouldEqual Unknown(unknown).raw
+        PrefixLast.raw shouldEqual KeyPrefixLast
+        PrefixAll.raw shouldEqual KeyPrefixAll
+        PrefixNone.raw shouldEqual KeyPrefixNone
+        Unknown(unknown).raw shouldEqual unknown
     }
 }

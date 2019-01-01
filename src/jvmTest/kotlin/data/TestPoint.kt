@@ -15,15 +15,15 @@ internal class TestPoint {
     fun dx() {
         val point = 1f to 2f
 
-        Point(1f, 2f) shouldEqual point
+        point shouldEqual Point(1f, 2f)
     }
 
     @Test
     fun point() {
         val point = Point(1f, 2f)
 
-        listOf(1f, 2f) shouldEqual point.raw
-        point.latitude shouldEqual 1f
-        point.longitude shouldEqual 2f
+        point.raw shouldEqual listOf(1f, 2f)
+        1f shouldEqual point.latitude
+        2f shouldEqual point.longitude
     }
 }

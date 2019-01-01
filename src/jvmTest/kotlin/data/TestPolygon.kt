@@ -18,18 +18,18 @@ internal class TestPolygon {
 
     @Test
     fun points() {
-        point1 shouldEqual polygon.point1
-        point2 shouldEqual polygon.point2
-        point3 shouldEqual polygon.point3
-        listOf(1f, 2f, 3f, 4f, 5f, 6f, 7f, 8f) shouldEqual polygon.raw
+        polygon.point1 shouldEqual point1
+        polygon.point2 shouldEqual point2
+        polygon.point3 shouldEqual point3
+        polygon.raw shouldEqual listOf(1f, 2f, 3f, 4f, 5f, 6f, 7f, 8f)
     }
 
     @Test
     fun operator() {
-        point1 shouldEqual polygon[0]
-        point2 shouldEqual polygon[1]
-        point3 shouldEqual polygon[2]
-        point4 shouldEqual polygon[3]
+        polygon[0] shouldEqual point1
+        polygon[1] shouldEqual point2
+        polygon[2] shouldEqual point3
+        polygon[3] shouldEqual point4
     }
 
     @Test
@@ -40,11 +40,11 @@ internal class TestPolygon {
         } catch (exception: IndexOutOfBoundsException) {
             thrown = true
         }
-        true shouldEqual thrown
+        thrown shouldEqual true
     }
 
     @Test
     fun equality() {
-        Polygon(1f to 2f, 3f to 4f, 5f to 6f, 7f to 8f) shouldEqual polygon
+        polygon shouldEqual Polygon(1f to 2f, 3f to 4f, 5f to 6f, 7f to 8f)
     }
 }

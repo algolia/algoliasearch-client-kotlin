@@ -18,6 +18,6 @@ internal class TestAttribute {
 
     @Test
     fun raw() {
-        "raw" shouldEqual Attribute("raw").raw
+        Attribute("raw").raw shouldEqual "raw"
     }
 }

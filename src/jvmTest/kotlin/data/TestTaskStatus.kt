@@ -15,7 +15,7 @@ internal class TestTaskStatus {
 
     @Test
     fun raw() {
-        KeyPublished shouldEqual Published.raw
-        KeyNotPublished shouldEqual NotPublished.raw
+        Published.raw shouldEqual KeyPublished
+        NotPublished.raw shouldEqual KeyNotPublished
     }
 }

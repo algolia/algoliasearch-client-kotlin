@@ -54,16 +54,16 @@ class TestFilterBuilderShowcase {
         FilterBuilder {
             categories += categoryBook
             categories += categoryOffice
-            "category:book OR category:office" shouldEqual buildTest()
+            buildTest() shouldEqual "category:book OR category:office"
             colors += colorRed
             colors += colorBlue
-            "(category:book OR category:office) AND (color:red OR color:blue)" shouldEqual buildTest()
+            buildTest() shouldEqual "(category:book OR category:office) AND (color:red OR color:blue)"
             categories -= categoryBook
-            "category:office AND (color:red OR color:blue)" shouldEqual buildTest()
+            buildTest() shouldEqual "category:office AND (color:red OR color:blue)"
             categories.clear()
-            "color:red OR color:blue" shouldEqual buildTest()
+            buildTest() shouldEqual "color:red OR color:blue"
             clear()
-            "" shouldEqual buildTest()
+            buildTest() shouldEqual ""
         }
     }
 
@@ -84,13 +84,13 @@ class TestFilterBuilderShowcase {
 
         FilterBuilder {
             categories += listOf(categoryBook, categoryOffice)
-            "category:book OR category:office" shouldEqual buildTest()
+            buildTest() shouldEqual "category:book OR category:office"
             prices += comparison
-            "price != 15.0 AND (category:book OR category:office)" shouldEqual buildTest()
+            buildTest() shouldEqual "price != 15.0 AND (category:book OR category:office)"
             prices += range
-            "price != 15.0 AND price:5.0 TO 20.0 AND (category:book OR category:office)" shouldEqual buildTest()
+            buildTest() shouldEqual "price != 15.0 AND price:5.0 TO 20.0 AND (category:book OR category:office)"
             categories -= categoryBook
-            "price != 15.0 AND price:5.0 TO 20.0 AND category:office" shouldEqual buildTest()
+            buildTest() shouldEqual "price != 15.0 AND price:5.0 TO 20.0 AND category:office"
         }
     }
 
@@ -106,9 +106,9 @@ class TestFilterBuilderShowcase {
         FilterBuilder {
             currency += comparison
             currency += range
-            "euro != 15.0 AND euro:5.0 TO 20.0" shouldEqual buildTest()
+            buildTest() shouldEqual "euro != 15.0 AND euro:5.0 TO 20.0"
             currency.replaceAttribute(euro, dollar)
-            "dollar != 15.0 AND dollar:5.0 TO 20.0" shouldEqual buildTest()
+            buildTest() shouldEqual "dollar != 15.0 AND dollar:5.0 TO 20.0"
         }
     }
 
@@ -125,8 +125,8 @@ class TestFilterBuilderShowcase {
         FilterBuilder {
             groupA += comparisonPrice
             groupA += rangeLike
-            "price != 15.0 OR nbLike:100.0 TO 200.0" shouldEqual buildTest()
-            setOf(comparisonPrice) shouldEqual groupA.get(price)
+            buildTest() shouldEqual "price != 15.0 OR nbLike:100.0 TO 200.0"
+            groupA.get(price) shouldEqual setOf(comparisonPrice)
         }
 
         // In this scenario, we want to add them to different OR group

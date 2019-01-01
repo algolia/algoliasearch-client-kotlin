@@ -14,10 +14,10 @@ internal class TestBoundingBox {
     fun boundingBox() {
         val boundingBox = BoundingBox(1f, 2f, 3f, 4f)
 
-        1f shouldEqual boundingBox.point1
-        2f shouldEqual boundingBox.point2
-        3f shouldEqual boundingBox.point3
-        4f shouldEqual boundingBox.point4
-        listOf(1f, 2f, 3f, 4f) shouldEqual boundingBox.raw
+        boundingBox.point1 shouldEqual 1f
+        boundingBox.point2 shouldEqual 2f
+        boundingBox.point3 shouldEqual 3f
+        boundingBox.point4 shouldEqual 4f
+        boundingBox.raw shouldEqual listOf(1f, 2f, 3f, 4f)
     }
 }

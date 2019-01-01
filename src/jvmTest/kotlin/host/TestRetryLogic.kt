@@ -1,7 +1,8 @@
 package host
+
 import client.data.ApplicationId
-import client.host.RetryLogic
 import client.host.HostStatus
+import client.host.RetryLogic
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.MockHttpResponse
@@ -31,11 +32,11 @@ class TestRetryLogic {
 
     @Test
     fun hosts() {
-        "https://$applicationId-dsn.algolia.net" shouldEqual hosts.first()
+        hosts.first() shouldEqual "https://$applicationId-dsn.algolia.net"
         hosts.contains("https://$applicationId-1.algolianet.com").shouldBeTrue()
         hosts.contains("https://$applicationId-2.algolianet.com").shouldBeTrue()
         hosts.contains("https://$applicationId-3.algolianet.com").shouldBeTrue()
-        4 shouldEqual hosts.size
+        hosts.size shouldEqual 4
     }
 
     @Test
@@ -47,12 +48,12 @@ class TestRetryLogic {
                 retry++
                 client200.get<HttpResponse>()
             }
-            0 shouldEqual retry
+            retry shouldEqual 0
         }
-        HostStatus.Up shouldEqual statuses[0].first
-        HostStatus.Unknown shouldEqual statuses[1].first
-        HostStatus.Unknown shouldEqual statuses[2].first
-        HostStatus.Unknown shouldEqual statuses[3].first
+        statuses[0].first shouldEqual HostStatus.Up
+        statuses[1].first shouldEqual HostStatus.Unknown
+        statuses[2].first shouldEqual HostStatus.Unknown
+        statuses[3].first shouldEqual HostStatus.Unknown
     }
 
     @Test
@@ -62,15 +63,15 @@ class TestRetryLogic {
 
             retryLogic.retry(1000L, route) { path ->
                 retry++
-                hosts[retry] + route shouldEqual path
+                path shouldEqual hosts[retry] + route
                 if (retry == 0) delay(2000L)
                 client200.get<HttpResponse>()
             }
-            HostStatus.Down shouldEqual statuses[0].first
-            HostStatus.Up shouldEqual statuses[1].first
-            HostStatus.Unknown shouldEqual statuses[2].first
-            HostStatus.Unknown shouldEqual statuses[3].first
-            1 shouldEqual retry
+            statuses[0].first shouldEqual HostStatus.Down
+            statuses[1].first shouldEqual HostStatus.Up
+            statuses[2].first shouldEqual HostStatus.Unknown
+            statuses[3].first shouldEqual HostStatus.Unknown
+            retry shouldEqual 1
         }
     }
 
@@ -82,15 +83,15 @@ class TestRetryLogic {
 
             retryLogic.retry(100L, route) { path ->
                 retry++
-                hosts[retry % count] + route shouldEqual path
+                path shouldEqual hosts[retry % count] + route
                 if (retry < count) delay(150L * (retry + 1))
                 client200.get<HttpResponse>(path)
             }
-            HostStatus.Up shouldEqual statuses[0].first
-            HostStatus.Down shouldEqual statuses[1].first
-            HostStatus.Down shouldEqual statuses[2].first
-            HostStatus.Down shouldEqual statuses[3].first
-            count shouldEqual retry
+            statuses[0].first shouldEqual HostStatus.Up
+            statuses[1].first shouldEqual HostStatus.Down
+            statuses[2].first shouldEqual HostStatus.Down
+            statuses[3].first shouldEqual HostStatus.Down
+            retry shouldEqual count
         }
     }
 
@@ -109,11 +110,11 @@ class TestRetryLogic {
                 exceptionIsThrown = true
             }
             exceptionIsThrown.shouldBeTrue()
-            0 shouldEqual retry
-            HostStatus.Unknown shouldEqual statuses[0].first
-            HostStatus.Unknown shouldEqual statuses[1].first
-            HostStatus.Unknown shouldEqual statuses[2].first
-            HostStatus.Unknown shouldEqual statuses[3].first
+            retry shouldEqual 0
+            statuses[0].first shouldEqual HostStatus.Unknown
+            statuses[1].first shouldEqual HostStatus.Unknown
+            statuses[2].first shouldEqual HostStatus.Unknown
+            statuses[3].first shouldEqual HostStatus.Unknown
         }
     }
 }

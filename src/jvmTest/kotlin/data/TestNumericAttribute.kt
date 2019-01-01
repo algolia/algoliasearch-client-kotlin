@@ -14,7 +14,7 @@ internal class TestNumericAttribute {
 
     @Test
     fun raw() {
-        attributeA.raw shouldEqual NumericAttributeFilter(attributeA).raw
-        "$KeyEqualOnly($attributeA)" shouldEqual NumericAttributeFilter(attributeA, true).raw
+        NumericAttributeFilter(attributeA).raw shouldEqual attributeA.raw
+        NumericAttributeFilter(attributeA, true).raw shouldEqual "$KeyEqualOnly($attributeA)"
     }
 }

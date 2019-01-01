@@ -14,25 +14,25 @@ internal class TestResponseFields {
 
     @Test
     fun raw() {
-        KeyStar shouldEqual All.raw
-        KeyAroundLatLng shouldEqual AroundLatLng.raw
-        KeyAutomaticRadius shouldEqual AutomaticRadius.raw
-        KeyExhaustiveFacetsCount shouldEqual ExhaustiveFacetsCount.raw
-        KeyFacets shouldEqual Facets.raw
-        KeyFacetsStats shouldEqual FacetsStats.raw
-        KeyHits shouldEqual Hits.raw
-        KeyHitsPerPage shouldEqual HitsPerPage.raw
-        KeyIndex shouldEqual Index.raw
-        KeyLength shouldEqual Length.raw
-        KeyNbHits shouldEqual NbHits.raw
-        KeyNbPages shouldEqual NbPages.raw
-        KeyOffset shouldEqual Offset.raw
-        KeyPage shouldEqual Page.raw
-        KeyParams shouldEqual Params.raw
-        KeyProcessingTimeMS shouldEqual ProcessingTimeMS.raw
-        KeyQuery shouldEqual Query.raw
-        KeyQueryAfterRemoval shouldEqual QueryAfterRemoval.raw
-        KeyUserData shouldEqual UserData.raw
-        unknown shouldEqual Unknown(unknown).raw
+        All.raw shouldEqual KeyStar
+        AroundLatLng.raw shouldEqual KeyAroundLatLng
+        AutomaticRadius.raw shouldEqual KeyAutomaticRadius
+        ExhaustiveFacetsCount.raw shouldEqual KeyExhaustiveFacetsCount
+        Facets.raw shouldEqual KeyFacets
+        FacetsStats.raw shouldEqual KeyFacetsStats
+        Hits.raw shouldEqual KeyHits
+        HitsPerPage.raw shouldEqual KeyHitsPerPage
+        Index.raw shouldEqual KeyIndex
+        Length.raw shouldEqual KeyLength
+        NbHits.raw shouldEqual KeyNbHits
+        NbPages.raw shouldEqual KeyNbPages
+        Offset.raw shouldEqual KeyOffset
+        Page.raw shouldEqual KeyPage
+        Params.raw shouldEqual KeyParams
+        ProcessingTimeMS.raw shouldEqual KeyProcessingTimeMS
+        Query.raw shouldEqual KeyQuery
+        QueryAfterRemoval.raw shouldEqual KeyQueryAfterRemoval
+        UserData.raw shouldEqual KeyUserData
+        Unknown(unknown).raw shouldEqual unknown
     }
 }

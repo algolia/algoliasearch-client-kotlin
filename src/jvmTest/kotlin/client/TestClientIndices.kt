@@ -23,17 +23,17 @@ internal class TestClientIndices {
                 val delete = destination.run {
                     deleteIndex().wait()
                 }
-                Published shouldEqual delete.status
+                delete.status shouldEqual Published
             }
             val copy = index.run {
                 copyIndex(destinationName).wait()
             }
-            Published shouldEqual copy.status
+            copy.status shouldEqual Published
 
             val delete = destination.run {
                 deleteIndex().wait()
             }
-            Published shouldEqual delete.status
+            delete.status shouldEqual Published
         }
     }
 }

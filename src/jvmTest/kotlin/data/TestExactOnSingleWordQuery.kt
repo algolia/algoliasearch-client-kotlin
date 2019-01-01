@@ -16,9 +16,9 @@ internal class TestExactOnSingleWordQuery {
 
     @Test
     fun raw() {
-        KeyAttribute shouldEqual Attribute.raw
-        KeyNone shouldEqual None.raw
-        KeyWord shouldEqual Word.raw
-        unknown shouldEqual Unknown(unknown).raw
+        Attribute.raw shouldEqual KeyAttribute
+        None.raw shouldEqual KeyNone
+        Word.raw shouldEqual KeyWord
+        Unknown(unknown).raw shouldEqual unknown
     }
 }

@@ -151,6 +151,6 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
 
     @Test
     fun encodeNoNull() {
-        "{}" shouldEqual Query().encodeNoNulls().toString()
+        Query().encodeNoNulls().toString() shouldEqual "{}"
     }
 }

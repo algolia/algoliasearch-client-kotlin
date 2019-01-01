@@ -15,8 +15,8 @@ internal class TestScope {
 
     @Test
     fun raw() {
-        KeySettings shouldEqual Settings.raw
-        KeyRules shouldEqual Rules.raw
-        KeySynonyms shouldEqual Synonyms.raw
+        Settings.raw shouldEqual KeySettings
+        Rules.raw shouldEqual KeyRules
+        Synonyms.raw shouldEqual KeySynonyms
     }
 }

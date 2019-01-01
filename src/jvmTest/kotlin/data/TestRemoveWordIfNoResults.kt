@@ -17,10 +17,10 @@ internal class TestRemoveWordIfNoResults {
 
     @Test
     fun raw() {
-        KeyNone shouldEqual None.raw
-        KeyLastWords shouldEqual LastWords.raw
-        KeyFirstWords shouldEqual FirstWords.raw
-        KeyAllOptional shouldEqual AllOptional.raw
-        unknown shouldEqual Unknown(unknown).raw
+        None.raw shouldEqual KeyNone
+        LastWords.raw shouldEqual KeyLastWords
+        FirstWords.raw shouldEqual KeyFirstWords
+        AllOptional.raw shouldEqual KeyAllOptional
+        Unknown(unknown).raw shouldEqual unknown
     }
 }

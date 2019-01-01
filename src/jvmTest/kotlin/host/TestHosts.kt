@@ -1,4 +1,5 @@
 package host
+
 import client.data.ApplicationId
 import client.host.computeHosts
 import client.host.randomize
@@ -20,8 +21,8 @@ class TestHosts {
 
     @Test
     fun default() {
-        "https://$applicationId-dsn.algolia.net" shouldEqual applicationId.readHost
-        "https://$applicationId.algolia.net" shouldEqual applicationId.writeHost
+        applicationId.readHost shouldEqual "https://$applicationId-dsn.algolia.net"
+        applicationId.writeHost shouldEqual "https://$applicationId.algolia.net"
     }
 
     @Test
@@ -31,7 +32,7 @@ class TestHosts {
         hosts.contains("https://$applicationId-1.$host").shouldBeTrue()
         hosts.contains("https://$applicationId-2.$host").shouldBeTrue()
         hosts.contains("https://$applicationId-3.$host").shouldBeTrue()
-        3 shouldEqual hosts.size
+        hosts.size shouldEqual 3
     }
 
     @Test

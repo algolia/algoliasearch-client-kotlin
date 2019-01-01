@@ -26,13 +26,13 @@ class TestQueryHelper {
     fun attributesToRetrieve() {
         queryBuilder {
             setAttributesToRetrieve(attributeA, attributeB)
-            listOf(attributeA, attributeB) shouldEqual attributesToRetrieve
+            attributesToRetrieve shouldEqual listOf(attributeA, attributeB)
             setAttributesToRetrieve(attributeA, attributeB, excludeAttributes = true)
-            listOf(
+            attributesToRetrieve shouldEqual listOf(
                 Attribute("-attributeA"),
                 Attribute("-attributeB"),
                 all
-            ) shouldEqual attributesToRetrieve
+            )
             setRetrieveAllAttributes()
         }
     }
@@ -41,7 +41,7 @@ class TestQueryHelper {
     fun restrictSearchableAttributes() {
         queryBuilder {
             setRestrictSearchableAttributes(attributeA, attributeB)
-            listOf(attributeA, attributeB) shouldEqual restrictSearchableAttributes
+            restrictSearchableAttributes shouldEqual listOf(attributeA, attributeB)
         }
     }
 
@@ -49,9 +49,9 @@ class TestQueryHelper {
     fun facets() {
         queryBuilder {
             setFacets(attributeA, attributeB)
-            listOf(attributeA, attributeB) shouldEqual facets
+            facets shouldEqual listOf(attributeA, attributeB)
             setAllFacets()
-            listOf(all) shouldEqual facets
+            facets shouldEqual listOf(all)
         }
     }
 
@@ -59,9 +59,9 @@ class TestQueryHelper {
     fun attributesToHighlight() {
         queryBuilder {
             setAttributesToHighlight(attributeA, attributeB)
-            listOf(attributeA, attributeB) shouldEqual attributesToHighlight
+            attributesToHighlight shouldEqual listOf(attributeA, attributeB)
             setHighlightAllAttributes()
-            listOf(all) shouldEqual attributesToHighlight
+            attributesToHighlight shouldEqual listOf(all)
         }
     }
 
@@ -69,11 +69,11 @@ class TestQueryHelper {
     fun attributesToSnippet() {
         queryBuilder {
             setAttributesToSnippet(attributeA to 10, attributeB to null)
-            listOf("attributeA:10", "attributeB") shouldEqual attributesToSnippet?.map { it.raw }
+            attributesToSnippet?.map { it.raw } shouldEqual listOf("attributeA:10", "attributeB")
             setSnippetAllAttributes()
-            listOf("*") shouldEqual attributesToSnippet?.map { it.raw }
+            attributesToSnippet?.map { it.raw } shouldEqual listOf("*")
             setSnippetAllAttributes(10)
-            listOf("*:10") shouldEqual attributesToSnippet?.map { it.raw }
+            attributesToSnippet?.map { it.raw } shouldEqual listOf("*:10")
         }
     }
 
@@ -81,7 +81,7 @@ class TestQueryHelper {
     fun disableTypoToleranceOnAttributes() {
         queryBuilder {
             setDisableTypoToleranceOnAttributes(attributeA, attributeB)
-            listOf(attributeA, attributeB) shouldEqual disableTypoToleranceOnAttributes
+            disableTypoToleranceOnAttributes shouldEqual listOf(attributeA, attributeB)
         }
     }
 
@@ -89,7 +89,7 @@ class TestQueryHelper {
     fun queryLanguages() {
         queryBuilder {
             setQueryLanguages(QueryLanguage.Afrikaans, QueryLanguage.Albanian)
-            listOf(QueryLanguage.Afrikaans, QueryLanguage.Albanian) shouldEqual queryLanguages
+            queryLanguages shouldEqual listOf(QueryLanguage.Afrikaans, QueryLanguage.Albanian)
         }
     }
 
@@ -97,7 +97,7 @@ class TestQueryHelper {
     fun ruleContexts() {
         queryBuilder {
             setRuleContexts("mobile", "desktop")
-            listOf("mobile", "desktop") shouldEqual ruleContexts
+            ruleContexts shouldEqual listOf("mobile", "desktop")
         }
     }
 
@@ -105,7 +105,7 @@ class TestQueryHelper {
     fun optionalWords() {
         queryBuilder {
             setOptionalWords("mobile", "desktop")
-            listOf("mobile", "desktop") shouldEqual optionalWords
+            optionalWords shouldEqual listOf("mobile", "desktop")
         }
     }
 
@@ -113,7 +113,7 @@ class TestQueryHelper {
     fun disableExactOnAttributes() {
         queryBuilder {
             setDisableExactOnAttributes(attributeA, attributeB)
-            listOf(attributeA, attributeB) shouldEqual disableExactOnAttributes
+            disableExactOnAttributes shouldEqual listOf(attributeA, attributeB)
         }
     }
 
@@ -121,7 +121,7 @@ class TestQueryHelper {
     fun alternativesAsExact() {
         queryBuilder {
             setAlternativesAsExact(AlternativesAsExact.IgnorePlurals)
-            listOf(AlternativesAsExact.IgnorePlurals) shouldEqual alternativesAsExact
+            alternativesAsExact shouldEqual listOf(AlternativesAsExact.IgnorePlurals)
         }
     }
 
@@ -129,7 +129,7 @@ class TestQueryHelper {
     fun analyticsTags() {
         queryBuilder {
             setAnalyticsTags("mobile", "desktop")
-            listOf("mobile", "desktop") shouldEqual analyticsTags
+            analyticsTags shouldEqual listOf("mobile", "desktop")
         }
     }
 
@@ -137,7 +137,7 @@ class TestQueryHelper {
     fun responseFields() {
         queryBuilder {
             setResponseFields(ResponseFields.All)
-            listOf(ResponseFields.All) shouldEqual responseFields
+            responseFields shouldEqual listOf(ResponseFields.All)
         }
     }
 
@@ -148,7 +148,7 @@ class TestQueryHelper {
                 groupOrA.addAll(listOf(facetA, facetB))
             }
         }
-        "attributeA:facetA OR attributeB:false" shouldEqual query.filterBuilder.buildTest()
+        query.filterBuilder.buildTest() shouldEqual "attributeA:facetA OR attributeB:false"
     }
 
     @Test
@@ -158,6 +158,6 @@ class TestQueryHelper {
                 groupOrA.addAll(listOf(facetA, facetB))
             }
         }
-        listOf(listOf(facetA.expression, facetB.expression)) shouldEqual query.optionalFilterBuilder.build()
+        query.optionalFilterBuilder.build() shouldEqual listOf(listOf(facetA.expression, facetB.expression))
     }
 }

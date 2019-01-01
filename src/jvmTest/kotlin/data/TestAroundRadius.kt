@@ -14,8 +14,8 @@ internal class TestAroundRadius {
 
     @Test
     fun raw() {
-        KeyAll shouldEqual All.raw
-        "10" shouldEqual InMeters(10).raw
-        unknown shouldEqual Unknown(unknown).raw
+        All.raw shouldEqual KeyAll
+        InMeters(10).raw shouldEqual "10"
+        Unknown(unknown).raw shouldEqual unknown
     }
 }

@@ -12,11 +12,11 @@ class TestNumericOperator {
 
     @Test
     fun raw() {
-        "<" shouldEqual NumericOperator.Lesser.raw
-        "<=" shouldEqual NumericOperator.LesserOrEqual.raw
-        "=" shouldEqual NumericOperator.Equals.raw
-        "!=" shouldEqual NumericOperator.NotEquals.raw
-        ">=" shouldEqual NumericOperator.GreaterOrEqual.raw
-        ">" shouldEqual NumericOperator.Greater.raw
+        NumericOperator.Lesser.raw shouldEqual "<"
+        NumericOperator.LesserOrEqual.raw shouldEqual "<="
+        NumericOperator.Equals.raw shouldEqual "="
+        NumericOperator.NotEquals.raw shouldEqual "!="
+        NumericOperator.GreaterOrEqual.raw shouldEqual ">="
+        NumericOperator.Greater.raw shouldEqual ">"
     }
 }

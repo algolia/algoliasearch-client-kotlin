@@ -15,8 +15,8 @@ class TestMultipleQueriesStrategy {
 
     @Test
     fun raw() {
-        KeyNone shouldEqual None.raw
-        KeyStopIfEnoughMatches shouldEqual StopIfEnoughMatches.raw
-        unknown shouldEqual Unknown(unknown).raw
+        None.raw shouldEqual KeyNone
+        StopIfEnoughMatches.raw shouldEqual KeyStopIfEnoughMatches
+        Unknown(unknown).raw shouldEqual unknown
     }
 }

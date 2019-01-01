@@ -1,12 +1,12 @@
 import kotlin.test.*
 
 
-internal infix fun <T> T.shouldEqual(actual: T) {
-    assertEquals(this, actual)
+internal infix fun <T> T.shouldEqual(expected: T) {
+    assertEquals(expected, this)
 }
 
-internal infix fun <T> T.shouldNotEqual(actual: T) {
-    assertNotEquals(this, actual)
+internal infix fun <T> T.shouldNotEqual(expected: T) {
+    assertNotEquals(expected, this)
 }
 
 internal fun Any?.shouldBeNull() {
