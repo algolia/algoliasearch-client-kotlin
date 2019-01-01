@@ -14,7 +14,7 @@ data class Hits(
     @Optional val exhaustiveNbHits: Boolean? = null,
     @Optional val query: String? = null,
     @Optional val params: String? = null,
-    @SerialName("facets_stats") @Optional val facetStats: Map<String, Map<String, Int>>? = null,
+    @SerialName("facets_stats") @Optional val facetStats: Map<String, FacetStats>? = null,
     @Optional val cursor: String? = null,
     @Optional val hitsPerPage: Int? = null,
     @Optional val page: Int? = null,
