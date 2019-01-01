@@ -9,9 +9,13 @@ interface EndpointsIndices {
 
     suspend fun listIndexes(requestOptions: RequestOptions? = null): ListIndexes
 
-    suspend fun copyIndex(destination: IndexName, scopes: List<Scope>? = null): Task
+    suspend fun copyIndex(
+        destination: IndexName,
+        scopes: List<Scope>? = null,
+        requestOptions: RequestOptions? = null
+    ): Task
 
-    suspend fun moveIndex(destination: IndexName): Task
+    suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions? = null): Task
 
-    suspend fun deleteIndex(): TaskDelete
+    suspend fun deleteIndex(requestOptions: RequestOptions? = null): TaskDelete
 }
