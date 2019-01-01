@@ -26,11 +26,11 @@ internal fun JsonObject.urlEncode(): String {
 internal fun Decoder.readAsTree() = (this as JSON.JsonInput).readAsTree()
 
 internal fun Query.toJsonObject(): JsonObject {
-    return JsonTreeMapper().writeTree(this, Query.serializer()).jsonObject
+    return JsonTreeParser.parse(JSON.stringify(Query.serializer(), this))
 }
 
 internal fun Settings.toJsonObject(): JsonObject {
-    return JsonTreeMapper().writeTree(this, Settings.serializer()).jsonObject
+    return JsonTreeParser.parse(JSON.stringify(Settings.serializer(), this))
 }
 
 internal fun Query.encodeNoNulls(): JsonObject {
