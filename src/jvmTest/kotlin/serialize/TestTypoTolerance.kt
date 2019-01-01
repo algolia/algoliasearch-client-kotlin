@@ -12,7 +12,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestTypoTolerance : TestSerializer<TypoTolerance>(TypoTolerance, TypoTolerance) {
+internal class TestTypoTolerance : TestSerializer<TypoTolerance>(TypoTolerance) {
 
     override val item = listOf(
         Boolean(boolean) to JsonPrimitive(boolean),
@@ -20,5 +20,4 @@ internal class TestTypoTolerance : TestSerializer<TypoTolerance>(TypoTolerance, 
         Strict to JsonPrimitive(Strict.raw),
         Unknown(unknown) to JsonPrimitive(unknown)
     )
-    override val items: List<Pair<List<TypoTolerance>, JsonArray>> = listOf()
 }

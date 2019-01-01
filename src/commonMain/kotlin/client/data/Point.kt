@@ -1,11 +1,13 @@
 package client.data
 
-import client.serialize.Deserializer
-import client.serialize.RawFloatsSerializer
+import client.serialize.readAsTree
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.jsonArray
 
 
+@Serializable(Point.Companion::class)
 data class Point(
     val latitude: Float,
     val longitude: Float
@@ -13,20 +15,24 @@ data class Point(
 
     override val raw = listOf(latitude, longitude)
 
-    internal companion object : RawFloatsSerializer<Point>, Deserializer<Point> {
+    @Serializer(Point::class)
+    internal companion object : KSerializer<Point> {
 
-        override fun deserialize(element: JsonElement): Point? {
-            return when (element) {
-                is JsonArray -> {
-                    val array = element.jsonArray
+        override fun serialize(output: Encoder, obj: Point) {
+            val json = output as JSON.JsonOutput
 
-                    Point(
-                        array.getPrimitive(0).float,
-                        array.getPrimitive(1).float
-                    )
-                }
-                else -> null
-            }
+            json.writeTree(jsonArray { obj.raw.forEach { +(it as Number) } })
+        }
+
+        override fun deserialize(input: Decoder): Point {
+            val element = input.readAsTree() as JsonArray
+
+            val array = element.jsonArray
+
+            return Point(
+                array.getPrimitive(0).float,
+                array.getPrimitive(1).float
+            )
         }
     }
 }

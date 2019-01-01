@@ -2,10 +2,14 @@ package client.data
 
 import client.serialize.*
 import client.toAttribute
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.*
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(CustomRanking.Companion::class)
 sealed class CustomRanking(override val raw: String) : RawString {
 
     data class Asc(val attribute: Attribute) : CustomRanking("$KeyAsc($attribute)")
@@ -18,23 +22,25 @@ sealed class CustomRanking(override val raw: String) : RawString {
         return raw
     }
 
-    internal companion object : RawStringSerializer<CustomRanking>, Deserializer<CustomRanking> {
+    @Serializer(CustomRanking::class)
+    internal companion object : KSerializer<CustomRanking> {
 
-        override fun deserialize(element: JsonElement): CustomRanking? {
-            return when (element) {
-                is JsonPrimitive -> {
-                    element.contentOrNull?.let {
-                        val findAsc = regexAsc.find(it)
-                        val findDesc = regexDesc.find(it)
+        override fun serialize(output: Encoder, obj: CustomRanking) {
+            val json = output as JSON.JsonOutput
 
-                        when {
-                            findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
-                            findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
-                            else -> Unknown(it)
-                        }
-                    }
-                }
-                else -> null
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
+
+        override fun deserialize(input: Decoder): CustomRanking {
+            val element = input.readAsTree() as JsonLiteral
+
+            val findAsc = regexAsc.find(element.content)
+            val findDesc = regexDesc.find(element.content)
+
+            return when {
+                findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
+                findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
+                else -> Unknown(element.content)
             }
         }
     }

@@ -1,10 +1,15 @@
 package client.data
 
-import client.serialize.*
-import kotlinx.serialization.json.JsonElement
+import client.serialize.KeyAlpha
+import client.serialize.KeyCount
+import client.serialize.readAsTree
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(SortFacetValuesBy.Companion::class)
 sealed class SortFacetValuesBy(override val raw: String) : RawString {
 
     /**
@@ -25,19 +30,22 @@ sealed class SortFacetValuesBy(override val raw: String) : RawString {
         return raw
     }
 
-    internal companion object : RawStringSerializer<SortFacetValuesBy>, Deserializer<SortFacetValuesBy> {
+    @Serializer(SortFacetValuesBy::class)
+    internal companion object : KSerializer<SortFacetValuesBy> {
 
-        override fun deserialize(element: JsonElement): SortFacetValuesBy? {
-            return when (element) {
-                is JsonPrimitive -> {
-                    when (val content = element.contentOrNull) {
-                        KeyCount -> Count
-                        KeyAlpha -> Alpha
-                        null -> null
-                        else -> Unknown(content)
-                    }
-                }
-                else -> null
+        override fun serialize(output: Encoder, obj: SortFacetValuesBy) {
+            val json = output as JSON.JsonOutput
+
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
+
+        override fun deserialize(input: Decoder): SortFacetValuesBy {
+            val element = input.readAsTree() as JsonLiteral
+
+            return when (val content = element.content) {
+                KeyCount -> Count
+                KeyAlpha -> Alpha
+                else -> Unknown(content)
             }
         }
     }

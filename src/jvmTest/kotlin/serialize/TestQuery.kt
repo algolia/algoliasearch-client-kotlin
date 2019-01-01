@@ -4,23 +4,23 @@ import attributeA
 import attributes
 import boolean
 import client.data.*
-import client.data.Query
 import client.serialize.*
 import client.to
 import int
 import jsonAttributes
 import jsonNestedLists
-import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import nestedLists
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldEqual
 import string
 
 
 @RunWith(JUnit4::class)
-internal class TestQuery : TestSerializer<Query>(Query, null) {
+internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
 
     override val item = listOf(
         Query(
@@ -148,5 +148,9 @@ internal class TestQuery : TestSerializer<Query>(Query, null) {
             KeyPercentileComputation to boolean
         }
     )
-    override val items: List<Pair<List<Query>, JsonArray>> = listOf()
+
+    @Test
+    fun encodeNoNull() {
+        "{}" shouldEqual Query().encodeNoNulls().toString()
+    }
 }

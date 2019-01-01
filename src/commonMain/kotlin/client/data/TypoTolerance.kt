@@ -1,10 +1,15 @@
 package client.data
 
-import client.serialize.*
-import kotlinx.serialization.json.JsonElement
+import client.serialize.KeyMin
+import client.serialize.KeyStrict
+import client.serialize.readAsTree
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(TypoTolerance.Companion::class)
 sealed class TypoTolerance(override val raw: String) : RawString {
 
     data class Boolean(val boolean: kotlin.Boolean) : TypoTolerance(boolean.toString())
@@ -19,31 +24,31 @@ sealed class TypoTolerance(override val raw: String) : RawString {
         return raw
     }
 
-    internal companion object : Serializer<TypoTolerance>, Deserializer<TypoTolerance> {
+    @Serializer(TypoTolerance::class)
+    internal companion object : KSerializer<TypoTolerance> {
 
-        override fun serialize(input: TypoTolerance): JsonPrimitive {
-            return when (input) {
-                is Boolean -> JsonPrimitive(input.boolean)
-                else -> JsonPrimitive(input.raw)
+        override fun serialize(output: Encoder, obj: TypoTolerance) {
+            val json = output as JSON.JsonOutput
+            val element = when (obj) {
+                is Boolean -> JsonPrimitive(obj.boolean)
+                else -> JsonPrimitive(obj.raw)
             }
+
+            json.writeTree(element)
         }
 
-        override fun deserialize(element: JsonElement): TypoTolerance? {
-            return when (element) {
-                is JsonPrimitive -> {
-                    when {
-                        element.booleanOrNull != null -> Boolean(element.boolean)
-                        else -> {
-                            when (val content = element.contentOrNull) {
-                                KeyMin -> Min
-                                KeyStrict -> Strict
-                                null -> null
-                                else -> Unknown(content)
-                            }
-                        }
+        override fun deserialize(input: Decoder): TypoTolerance {
+            val element = input.readAsTree() as JsonLiteral
+
+            return when {
+                element.booleanOrNull != null -> Boolean(element.boolean)
+                else -> {
+                    when (val content = element.content) {
+                        KeyMin -> Min
+                        KeyStrict -> Strict
+                        else -> Unknown(content)
                     }
                 }
-                else -> null
             }
         }
     }

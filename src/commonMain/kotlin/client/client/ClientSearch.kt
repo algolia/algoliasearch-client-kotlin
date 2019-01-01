@@ -3,6 +3,7 @@ package client.client
 import client.data.*
 import client.serialize.KeyFacetQuery
 import client.serialize.KeyMaxFacetHits
+import client.serialize.encodeNoNulls
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
@@ -93,7 +94,7 @@ class ClientSearch(
                     }
 
                     body = if (query != null) {
-                        val serialize = Query.serialize(query)
+                        val serialize = query.encodeNoNulls()
                         val map = serialize.toMutableMap()
 
                         map.putAll(extraParams)

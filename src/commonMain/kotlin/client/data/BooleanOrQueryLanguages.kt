@@ -1,38 +1,41 @@
 package client.data
 
-import client.serialize.Deserializer
-import client.serialize.Serializer
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonPrimitive
+import client.serialize.readAsTree
+import kotlinx.serialization.*
+import kotlinx.serialization.json.*
 
 
+@Serializable(BooleanOrQueryLanguages.Companion::class)
 sealed class BooleanOrQueryLanguages {
 
     data class Boolean(val boolean: kotlin.Boolean) : BooleanOrQueryLanguages()
 
-    data class QueryLanguages(val queryLanguages: List<QueryLanguage>) : BooleanOrQueryLanguages() {
+    data class QueryLanguages(val queryLanguages: List<QueryLanguage>) :
+        BooleanOrQueryLanguages() {
 
         constructor(vararg queryLanguage: QueryLanguage) : this(queryLanguage.toList())
     }
 
-    internal companion object : Serializer<BooleanOrQueryLanguages>, Deserializer<BooleanOrQueryLanguages> {
+    @Serializer(BooleanOrQueryLanguages::class)
+    internal companion object : KSerializer<BooleanOrQueryLanguages> {
 
-        override fun serialize(input: BooleanOrQueryLanguages): JsonElement {
-            return when (input) {
-                is Boolean -> JsonPrimitive(input.boolean)
-                is QueryLanguages -> QueryLanguage.serializeList(input.queryLanguages)
+        override fun serialize(output: Encoder, obj: BooleanOrQueryLanguages) {
+            val json = output as JSON.JsonOutput
+            val element = when (obj) {
+                is Boolean -> JsonPrimitive(obj.boolean)
+                is QueryLanguages -> jsonArray { obj.queryLanguages.forEach { +it.raw } }
             }
+
+            json.writeTree(element)
         }
 
-        override fun deserialize(element: JsonElement): BooleanOrQueryLanguages? {
+        override fun deserialize(input: Decoder): BooleanOrQueryLanguages {
+            val element = input.readAsTree()
+
             return when (element) {
-                is JsonArray -> QueryLanguage.deserializeList(element)?.let(::QueryLanguages)
-                is JsonPrimitive -> when {
-                    element.booleanOrNull != null -> Boolean(element.boolean)
-                    else -> null
-                }
-                else -> null
+                is JsonArray -> QueryLanguages(element.map { QueryLanguage.convert(it.content) })
+                is JsonLiteral -> Boolean(element.boolean)
+                else -> throw Exception()
             }
         }
     }

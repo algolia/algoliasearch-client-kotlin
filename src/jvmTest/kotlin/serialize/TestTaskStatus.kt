@@ -11,12 +11,11 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestTaskStatus : TestSerializer<TaskStatus>(null, TaskStatus) {
+internal class TestTaskStatus : TestSerializer<TaskStatus>(TaskStatus) {
 
     override val item = listOf(
         TaskStatus.Published to JsonPrimitive(KeyPublished),
         TaskStatus.NotPublished to JsonPrimitive(KeyNotPublished),
         TaskStatus.Unknown(unknown) to JsonPrimitive(unknown)
     )
-    override val items: List<Pair<List<TaskStatus>, JsonArray>> = listOf()
 }

@@ -1,12 +1,14 @@
 package client.data
 
-import client.serialize.Deserializer
 import client.serialize.KeyAll
-import client.serialize.Serializer
-import kotlinx.serialization.json.JsonElement
+import client.serialize.readAsTree
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(AroundRadius.Companion::class)
 sealed class AroundRadius(override val raw: String) : RawString {
 
     object All : AroundRadius(KeyAll)
@@ -19,28 +21,28 @@ sealed class AroundRadius(override val raw: String) : RawString {
         return raw
     }
 
-    internal companion object : Serializer<AroundRadius>, Deserializer<AroundRadius> {
+    @Serializer(AroundRadius::class)
+    internal companion object : KSerializer<AroundRadius> {
 
-        override fun serialize(input: AroundRadius): JsonPrimitive {
-            return when (input) {
-                is InMeters -> JsonPrimitive(input.int)
-                else -> JsonPrimitive(input.raw)
+        override fun serialize(output: Encoder, obj: AroundRadius) {
+            val json = output as JSON.JsonOutput
+            val element = when (obj) {
+                is InMeters -> JsonPrimitive(obj.int)
+                else -> JsonPrimitive(obj.raw)
             }
+
+            json.writeTree(element)
         }
 
-        override fun deserialize(element: JsonElement): AroundRadius? {
-            return when (element) {
-                is JsonPrimitive -> {
-                    when {
-                        element.intOrNull != null -> InMeters(element.int)
-                        element.contentOrNull != null -> when (element.content) {
-                            KeyAll -> All
-                            else -> Unknown(element.content)
-                        }
-                        else -> null
-                    }
+        override fun deserialize(input: Decoder): AroundRadius {
+            val element = input.readAsTree() as JsonLiteral
+
+            return when {
+                element.intOrNull != null -> InMeters(element.int)
+                else -> when (element.content) {
+                    KeyAll -> All
+                    else -> Unknown(element.content)
                 }
-                else -> null
             }
         }
     }

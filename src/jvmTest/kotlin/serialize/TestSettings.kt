@@ -4,21 +4,21 @@ import attributeA
 import attributes
 import boolean
 import client.data.*
-import client.data.Settings
 import client.serialize.*
 import indexA
 import int
 import jsonAttributes
-import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
+import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldEqual
 import string
 
 
 @RunWith(JUnit4::class)
-internal class TestSettings : TestSerializer<Settings>(Settings, Settings) {
+internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
 
     override val item = listOf(
         Settings(
@@ -115,9 +115,11 @@ internal class TestSettings : TestSerializer<Settings>(Settings, Settings) {
             KeyIgnorePlurals to boolean
             KeyRemoveStopWords to boolean
             KeyCamelCaseAttributes to jsonAttributes
-            KeyDecompoundedAttributes to DecompoundedAttributes.serializeList(
-                listOf(DecompoundedAttributes(QueryLanguage.German, attributeA))
-            )
+            KeyDecompoundedAttributes to json {
+                QueryLanguage.German.raw to jsonArray {
+                    +attributeA.raw
+                }
+            }
             KeyKeepDiacriticsOnCharacters to string
             KeyQueryLanguages to jsonArray {
                 +QueryLanguage.Afrikaans.raw
@@ -146,5 +148,9 @@ internal class TestSettings : TestSerializer<Settings>(Settings, Settings) {
             KeyMaxFacetHits to int
         }
     )
-    override val items: List<Pair<List<Settings>, JsonArray>> = listOf()
+
+    @Test
+    fun encodeNoNull() {
+        "{}" shouldEqual Settings().encodeNoNulls().toString()
+    }
 }

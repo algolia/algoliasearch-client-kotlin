@@ -13,7 +13,7 @@ data class ListIndexes(
 
     @Serializable
     data class Item(
-        @Serializable(IndexName.Deserializable::class) @SerialName("name") val indexName: IndexName,
+        @SerialName("name") val indexName: IndexName,
         val createdAt: String,
         val updatedAt: String,
         val entries: Int,

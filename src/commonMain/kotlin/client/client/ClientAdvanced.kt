@@ -6,7 +6,6 @@ import client.data.TaskInfo
 import client.data.TaskStatus
 import io.ktor.client.request.get
 import kotlinx.coroutines.delay
-import kotlinx.serialization.json.JsonTreeParser
 
 
 class ClientAdvanced(
@@ -30,7 +29,7 @@ class ClientAdvanced(
     override suspend fun getTask(taskId: Long): TaskInfo {
         return client.run {
             read.retry(readTimeout, indexName.pathIndexes("/task/$taskId")) { path ->
-                TaskInfo.deserialize(JsonTreeParser.parse(httpClient.get(path)))!!
+                httpClient.get<TaskInfo>(path)
             }
         }
     }

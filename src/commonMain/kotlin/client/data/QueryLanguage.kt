@@ -1,10 +1,15 @@
 package client.data
 
 import client.serialize.*
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.*
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.JsonNull.content
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(QueryLanguage.Companion::class)
 sealed class QueryLanguage(override val raw: String) : RawString {
 
     object Afrikaans : QueryLanguage(KeyAfrikaans)
@@ -70,72 +75,82 @@ sealed class QueryLanguage(override val raw: String) : RawString {
         return raw
     }
 
-    internal companion object : RawStringSerializer<QueryLanguage>, Deserializer<QueryLanguage> {
 
-        override fun deserialize(element: JsonElement): QueryLanguage? {
-            return when (element) {
-                is JsonPrimitive -> when (val content = element.contentOrNull) {
-                    KeyAfrikaans -> QueryLanguage.Afrikaans
-                    KeyArabic -> QueryLanguage.Arabic
-                    KeyAzeri -> QueryLanguage.Azeri
-                    KeyBulgarian -> QueryLanguage.Bulgarian
-                    KeyBrunei -> QueryLanguage.Brunei
-                    KeyCatalan -> QueryLanguage.Catalan
-                    KeyCzech -> QueryLanguage.Czech
-                    KeyWelsh -> QueryLanguage.Welsh
-                    KeyDanish -> QueryLanguage.Danish
-                    KeyGerman -> QueryLanguage.German
-                    KeyEnglish -> QueryLanguage.English
-                    KeyEsperanto -> QueryLanguage.Esperanto
-                    KeySpanish -> QueryLanguage.Spanish
-                    KeyEstonian -> QueryLanguage.Estonian
-                    KeyBasque -> QueryLanguage.Basque
-                    KeyFinnish -> QueryLanguage.Finnish
-                    KeyFaroese -> QueryLanguage.Faroese
-                    KeyFrench -> QueryLanguage.French
-                    KeyGalician -> QueryLanguage.Galician
-                    KeyHebrew -> QueryLanguage.Hebrew
-                    KeyHindi -> QueryLanguage.Hindi
-                    KeyHungarian -> QueryLanguage.Hungarian
-                    KeyArmenian -> QueryLanguage.Armenian
-                    KeyIndonesian -> QueryLanguage.Indonesian
-                    KeyIcelandic -> QueryLanguage.Icelandic
-                    KeyItalian -> QueryLanguage.Italian
-                    KeyJapanese -> QueryLanguage.Japanese
-                    KeyGeorgian -> QueryLanguage.Georgian
-                    KeyKazakh -> QueryLanguage.Kazakh
-                    KeyKorean -> QueryLanguage.Korean
-                    KeyKyrgyz -> QueryLanguage.Kyrgyz
-                    KeyLithuanian -> QueryLanguage.Lithuanian
-                    KeyMaori -> QueryLanguage.Maori
-                    KeyMongolian -> QueryLanguage.Mongolian
-                    KeyMarathi -> QueryLanguage.Marathi
-                    KeyMalay -> QueryLanguage.Malay
-                    KeyMaltese -> QueryLanguage.Maltese
-                    KeyNorwegian -> QueryLanguage.Norwegian
-                    KeyDutch -> QueryLanguage.Dutch
-                    KeyNorthernSotho -> QueryLanguage.NorthernSotho
-                    KeyPolish -> QueryLanguage.Polish
-                    KeyPashto -> QueryLanguage.Pashto
-                    KeyPortuguese -> QueryLanguage.Portuguese
-                    KeyQuechua -> QueryLanguage.Quechua
-                    KeyRomanian -> QueryLanguage.Romanian
-                    KeyRussian -> QueryLanguage.Russian
-                    KeySlovak -> QueryLanguage.Slovak
-                    KeyAlbanian -> QueryLanguage.Albanian
-                    KeySwedish -> QueryLanguage.Swedish
-                    KeySwahili -> QueryLanguage.Swahili
-                    KeyTamil -> QueryLanguage.Tamil
-                    KeyTelugu -> QueryLanguage.Telugu
-                    KeyTagalog -> QueryLanguage.Tagalog
-                    KeyTswana -> QueryLanguage.Tswana
-                    KeyTurkish -> QueryLanguage.Turkish
-                    KeyTatar -> QueryLanguage.Tatar
-                    null -> null
-                    else -> QueryLanguage.Unknown(content)
-                }
-                else -> null
+    @Serializer(QueryLanguage::class)
+    internal companion object : KSerializer<QueryLanguage> {
+
+        override fun serialize(output: Encoder, obj: QueryLanguage) {
+            val json = output as JSON.JsonOutput
+
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
+
+        fun convert(string: String): QueryLanguage {
+            return when (string) {
+                KeyAfrikaans -> QueryLanguage.Afrikaans
+                KeyArabic -> QueryLanguage.Arabic
+                KeyAzeri -> QueryLanguage.Azeri
+                KeyBulgarian -> QueryLanguage.Bulgarian
+                KeyBrunei -> QueryLanguage.Brunei
+                KeyCatalan -> QueryLanguage.Catalan
+                KeyCzech -> QueryLanguage.Czech
+                KeyWelsh -> QueryLanguage.Welsh
+                KeyDanish -> QueryLanguage.Danish
+                KeyGerman -> QueryLanguage.German
+                KeyEnglish -> QueryLanguage.English
+                KeyEsperanto -> QueryLanguage.Esperanto
+                KeySpanish -> QueryLanguage.Spanish
+                KeyEstonian -> QueryLanguage.Estonian
+                KeyBasque -> QueryLanguage.Basque
+                KeyFinnish -> QueryLanguage.Finnish
+                KeyFaroese -> QueryLanguage.Faroese
+                KeyFrench -> QueryLanguage.French
+                KeyGalician -> QueryLanguage.Galician
+                KeyHebrew -> QueryLanguage.Hebrew
+                KeyHindi -> QueryLanguage.Hindi
+                KeyHungarian -> QueryLanguage.Hungarian
+                KeyArmenian -> QueryLanguage.Armenian
+                KeyIndonesian -> QueryLanguage.Indonesian
+                KeyIcelandic -> QueryLanguage.Icelandic
+                KeyItalian -> QueryLanguage.Italian
+                KeyJapanese -> QueryLanguage.Japanese
+                KeyGeorgian -> QueryLanguage.Georgian
+                KeyKazakh -> QueryLanguage.Kazakh
+                KeyKorean -> QueryLanguage.Korean
+                KeyKyrgyz -> QueryLanguage.Kyrgyz
+                KeyLithuanian -> QueryLanguage.Lithuanian
+                KeyMaori -> QueryLanguage.Maori
+                KeyMongolian -> QueryLanguage.Mongolian
+                KeyMarathi -> QueryLanguage.Marathi
+                KeyMalay -> QueryLanguage.Malay
+                KeyMaltese -> QueryLanguage.Maltese
+                KeyNorwegian -> QueryLanguage.Norwegian
+                KeyDutch -> QueryLanguage.Dutch
+                KeyNorthernSotho -> QueryLanguage.NorthernSotho
+                KeyPolish -> QueryLanguage.Polish
+                KeyPashto -> QueryLanguage.Pashto
+                KeyPortuguese -> QueryLanguage.Portuguese
+                KeyQuechua -> QueryLanguage.Quechua
+                KeyRomanian -> QueryLanguage.Romanian
+                KeyRussian -> QueryLanguage.Russian
+                KeySlovak -> QueryLanguage.Slovak
+                KeyAlbanian -> QueryLanguage.Albanian
+                KeySwedish -> QueryLanguage.Swedish
+                KeySwahili -> QueryLanguage.Swahili
+                KeyTamil -> QueryLanguage.Tamil
+                KeyTelugu -> QueryLanguage.Telugu
+                KeyTagalog -> QueryLanguage.Tagalog
+                KeyTswana -> QueryLanguage.Tswana
+                KeyTurkish -> QueryLanguage.Turkish
+                KeyTatar -> QueryLanguage.Tatar
+                else -> QueryLanguage.Unknown(content)
             }
+        }
+
+        override fun deserialize(input: Decoder): QueryLanguage {
+            val element = input.readAsTree() as JsonLiteral
+
+            return convert(element.content)
         }
     }
 }

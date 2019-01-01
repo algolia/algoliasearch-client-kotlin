@@ -1,10 +1,16 @@
 package client.data
 
-import client.serialize.*
-import kotlinx.serialization.json.JsonElement
+import client.serialize.KeyAttribute
+import client.serialize.KeyNone
+import client.serialize.KeyWord
+import client.serialize.readAsTree
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(ExactOnSingleWordQuery.Companion::class)
 sealed class ExactOnSingleWordQuery(override val raw: String) : RawString {
 
     /**
@@ -33,18 +39,23 @@ sealed class ExactOnSingleWordQuery(override val raw: String) : RawString {
         return raw
     }
 
-    internal companion object : RawStringSerializer<ExactOnSingleWordQuery>, Deserializer<ExactOnSingleWordQuery> {
+    @Serializer(ExactOnSingleWordQuery::class)
+    internal companion object : KSerializer<ExactOnSingleWordQuery> {
 
-        override fun deserialize(element: JsonElement): ExactOnSingleWordQuery? {
-            return when (element) {
-                is JsonPrimitive -> when (val content = element.contentOrNull) {
-                    KeyAttribute -> Attribute
-                    KeyNone -> None
-                    KeyWord -> Word
-                    null -> null
-                    else -> Unknown(content)
-                }
-                else -> null
+        override fun serialize(output: Encoder, obj: ExactOnSingleWordQuery) {
+            val json = output as JSON.JsonOutput
+
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
+
+        override fun deserialize(input: Decoder): ExactOnSingleWordQuery {
+            val element = input.readAsTree() as JsonLiteral
+
+            return when (val content = element.contentOrNull) {
+                KeyAttribute -> Attribute
+                KeyNone -> None
+                KeyWord -> Word
+                else -> Unknown(content)
             }
         }
     }

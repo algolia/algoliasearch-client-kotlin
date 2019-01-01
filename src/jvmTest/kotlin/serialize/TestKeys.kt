@@ -15,7 +15,7 @@ internal class TestKeys {
         "query" shouldEqual KeyQuery
         "searchableAttributes" shouldEqual KeySearchableAttributes
         "attributesForFaceting" shouldEqual KeyAttributesForFaceting
-        "UnretrievableAttributes" shouldEqual KeyUnretrievableAttributes
+        "unretrievableAttributes" shouldEqual KeyUnretrievableAttributes
         "attributesToRetrieve" shouldEqual KeyAttributesToRetrieve
         "restrictSearchableAttributes" shouldEqual KeyRestrictSearchableAttributes
         "ranking" shouldEqual KeyRanking

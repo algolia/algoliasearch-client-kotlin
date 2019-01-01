@@ -1,11 +1,16 @@
 package client.data
 
-import client.serialize.*
+import client.serialize.KeyEqualOnly
+import client.serialize.readAsTree
+import client.serialize.regexEqualOnly
 import client.toAttribute
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(NumericAttributeFilter.Companion::class)
 data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boolean = false) : RawString {
 
     override val raw = if (equalOnly) "$KeyEqualOnly($attribute)" else attribute.raw
@@ -14,24 +19,26 @@ data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boole
         return raw
     }
 
-    internal companion object : RawStringSerializer<NumericAttributeFilter>, Deserializer<NumericAttributeFilter> {
+    @Serializer(NumericAttributeFilter::class)
+    internal companion object : KSerializer<NumericAttributeFilter> {
 
-        override fun deserialize(element: JsonElement): NumericAttributeFilter? {
-            return when (element) {
-                is JsonPrimitive -> {
-                    element.contentOrNull?.let {
-                        val findEqualOnly = regexEqualOnly.find(it)
+        override fun serialize(output: Encoder, obj: NumericAttributeFilter) {
+            val json = output as JSON.JsonOutput
 
-                        when {
-                            findEqualOnly != null -> NumericAttributeFilter(
-                                findEqualOnly.groupValues[1].toAttribute(),
-                                true
-                            )
-                            else -> NumericAttributeFilter(it.toAttribute())
-                        }
-                    }
-                }
-                else -> null
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
+
+        override fun deserialize(input: Decoder): NumericAttributeFilter {
+            val element = input.readAsTree() as JsonLiteral
+
+            val findEqualOnly = regexEqualOnly.find(element.content)
+
+            return when {
+                findEqualOnly != null -> NumericAttributeFilter(
+                    findEqualOnly.groupValues[1].toAttribute(),
+                    true
+                )
+                else -> NumericAttributeFilter(element.content.toAttribute())
             }
         }
     }

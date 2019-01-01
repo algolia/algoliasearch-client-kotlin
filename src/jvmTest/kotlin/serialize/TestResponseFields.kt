@@ -3,14 +3,13 @@ package serialize
 import client.data.ResponseFields
 import client.data.ResponseFields.*
 import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestResponseFields : TestSerializer<ResponseFields>(ResponseFields, ResponseFields) {
+internal class TestResponseFields : TestSerializer<ResponseFields>(ResponseFields) {
 
     override val item = listOf(
         All to JsonPrimitive(All.raw),
@@ -33,50 +32,5 @@ internal class TestResponseFields : TestSerializer<ResponseFields>(ResponseField
         QueryAfterRemoval to JsonPrimitive(QueryAfterRemoval.raw),
         UserData to JsonPrimitive(UserData.raw),
         Unknown(unknown) to JsonPrimitive(unknown)
-    )
-    override val items = listOf(
-        listOf(
-            All,
-            AroundLatLng,
-            AutomaticRadius,
-            ExhaustiveFacetsCount,
-            Facets,
-            FacetsStats,
-            Hits,
-            HitsPerPage,
-            Index,
-            Length,
-            NbHits,
-            NbPages,
-            Offset,
-            Page,
-            Params,
-            ProcessingTimeMS,
-            Query,
-            QueryAfterRemoval,
-            UserData,
-            Unknown(unknown)
-        ) to jsonArray {
-            +All.raw
-            +AroundLatLng.raw
-            +AutomaticRadius.raw
-            +ExhaustiveFacetsCount.raw
-            +Facets.raw
-            +FacetsStats.raw
-            +Hits.raw
-            +HitsPerPage.raw
-            +Index.raw
-            +Length.raw
-            +NbHits.raw
-            +NbPages.raw
-            +Offset.raw
-            +Page.raw
-            +Params.raw
-            +ProcessingTimeMS.raw
-            +Query.raw
-            +QueryAfterRemoval.raw
-            +UserData.raw
-            +unknown
-        }
     )
 }

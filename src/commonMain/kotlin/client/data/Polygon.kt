@@ -1,11 +1,13 @@
 package client.data
 
-import client.serialize.Deserializer
-import client.serialize.RawFloatsSerializer
+import client.serialize.readAsTree
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.jsonArray
 
 
+@Serializable(Polygon.Companion::class)
 data class Polygon(
     val point1: Point,
     val point2: Point,
@@ -36,24 +38,27 @@ data class Polygon(
         *points.flatMap { it.raw }.toTypedArray()
     )
 
-    internal companion object : RawFloatsSerializer<Polygon>, Deserializer<Polygon> {
+    @Serializer(Polygon::class)
+    internal companion object : KSerializer<Polygon> {
 
-        override fun deserialize(element: JsonElement): Polygon? {
-            return when (element) {
-                is JsonArray -> {
-                    val array = element.jsonArray
+        override fun serialize(output: Encoder, obj: Polygon) {
+            val json = output as JSON.JsonOutput
 
-                    Polygon(
-                        Point(array.getPrimitive(0).float, array.getPrimitive(1).float),
-                        Point(array.getPrimitive(2).float, array.getPrimitive(3).float),
-                        Point(array.getPrimitive(4).float, array.getPrimitive(5).float),
-                        (6 until array.size step 2).map {
-                            Point(array.getPrimitive(it).float, array.getPrimitive(it + 1).float)
-                        }
-                    )
+            json.writeTree(jsonArray { obj.raw.forEach { +(it as Number) } })
+        }
+
+        override fun deserialize(input: Decoder): Polygon {
+            val element = input.readAsTree() as JsonArray
+            val array = element.jsonArray
+
+            return Polygon(
+                Point(array.getPrimitive(0).float, array.getPrimitive(1).float),
+                Point(array.getPrimitive(2).float, array.getPrimitive(3).float),
+                Point(array.getPrimitive(4).float, array.getPrimitive(5).float),
+                (6 until array.size step 2).map {
+                    Point(array.getPrimitive(it).float, array.getPrimitive(it + 1).float)
                 }
-                else -> null
-            }
+            )
         }
     }
 }

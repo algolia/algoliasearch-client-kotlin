@@ -1,11 +1,11 @@
 package client.serialize
 
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import kotlinx.serialization.*
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.*
 
 
+@Serializable(Primitive.Companion::class)
 internal sealed class Primitive {
 
     data class String(val raw: kotlin.String) : Primitive()
@@ -21,7 +21,7 @@ internal sealed class Primitive {
     object Null : Primitive()
 
     @Serializer(Primitive::class)
-    companion object {
+    companion object : KSerializer<Primitive> {
 
         private fun deserialize(json: JsonElement): Primitive {
             return when (json) {
@@ -56,7 +56,7 @@ internal sealed class Primitive {
         }
 
         override fun deserialize(input: Decoder): Primitive {
-            val json = (input as JSON.JsonInput).readAsTree()
+            val json = input.readAsTree()
 
             return deserialize(json)
         }

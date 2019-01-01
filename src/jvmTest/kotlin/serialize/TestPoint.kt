@@ -7,7 +7,7 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-internal class TestPoint : TestSerializer<Point>(Point, Point) {
+internal class TestPoint : TestSerializer<Point>(Point) {
 
     private val point = Point(1f, 2f)
     private val jsonArray = jsonArray {
@@ -17,14 +17,5 @@ internal class TestPoint : TestSerializer<Point>(Point, Point) {
 
     override val item = listOf(
         point to jsonArray
-    )
-    override val items = listOf(
-        listOf(
-            point,
-            point
-        ) to jsonArray {
-            +jsonArray
-            +jsonArray
-        }
     )
 }

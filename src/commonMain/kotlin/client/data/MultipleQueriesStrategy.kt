@@ -1,10 +1,15 @@
 package client.data
 
-import client.serialize.*
-import kotlinx.serialization.json.JsonElement
+import client.serialize.KeyNone
+import client.serialize.KeyStopIfEnoughMatches
+import client.serialize.readAsTree
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(MultipleQueriesStrategy.Companion::class)
 sealed class MultipleQueriesStrategy(override val raw: String) : RawString {
 
     object None : MultipleQueriesStrategy(KeyNone)
@@ -17,19 +22,22 @@ sealed class MultipleQueriesStrategy(override val raw: String) : RawString {
         return raw
     }
 
-    internal companion object : RawStringSerializer<MultipleQueriesStrategy>, Deserializer<MultipleQueriesStrategy> {
+    @Serializer(MultipleQueriesStrategy::class)
+    internal companion object : KSerializer<MultipleQueriesStrategy> {
 
-        override fun deserialize(element: JsonElement): MultipleQueriesStrategy? {
-            return when (element) {
-                is JsonPrimitive -> {
-                    when (val content = element.contentOrNull) {
-                        KeyNone -> None
-                        KeyStopIfEnoughMatches -> StopIfEnoughMatches
-                        null -> null
-                        else -> Unknown(content)
-                    }
-                }
-                else -> null
+        override fun serialize(output: Encoder, obj: MultipleQueriesStrategy) {
+            val json = output as JSON.JsonOutput
+
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
+
+        override fun deserialize(input: Decoder): MultipleQueriesStrategy {
+            val element = input.readAsTree() as JsonLiteral
+
+            return when (val content = element.content) {
+                KeyNone -> None
+                KeyStopIfEnoughMatches -> StopIfEnoughMatches
+                else -> Unknown(content)
             }
         }
     }

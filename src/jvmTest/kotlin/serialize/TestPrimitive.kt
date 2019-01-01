@@ -19,7 +19,21 @@ internal class TestPrimitive {
         @Serializable(Primitive.Companion::class) val primitive: Primitive
     )
 
+    @Serializable
+    internal data class Objs(
+        val primitives: List<Primitive>
+    )
+
     private val serializer = Obj.serializer()
+
+    @Test
+    fun stuff() {
+        val obj = Objs(listOf(Primitive.String("hello")))
+        val serialized = JSON.stringify(Objs.serializer(), obj)
+        val deserialized = JSON.parse(Objs.serializer(), serialized)
+
+        obj shouldEqual deserialized
+    }
 
     @Test
     fun number() {

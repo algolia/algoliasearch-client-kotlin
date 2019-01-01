@@ -2,10 +2,14 @@ package client.data
 
 import client.serialize.*
 import client.toAttribute
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.*
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(Ranking.Companion::class)
 sealed class Ranking(override val raw: String) : RawString {
 
     object Typo : Ranking(KeyTypo)
@@ -34,31 +38,33 @@ sealed class Ranking(override val raw: String) : RawString {
         return raw
     }
 
-    internal companion object : RawStringSerializer<Ranking>, Deserializer<Ranking> {
+    @Serializer(Ranking::class)
+    internal companion object : KSerializer<Ranking> {
 
-        override fun deserialize(element: JsonElement): Ranking? {
-            return when (element) {
-                is JsonPrimitive -> {
-                    element.contentOrNull?.let {
-                        val findAsc = regexAsc.find(it)
-                        val findDesc = regexDesc.find(it)
+        override fun serialize(output: Encoder, obj: Ranking) {
+            val json = output as JSON.JsonOutput
 
-                        when {
-                            findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
-                            findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
-                            it == KeyTypo -> Typo
-                            it == KeyGeo -> Geo
-                            it == KeyWords -> Words
-                            it == KeyFilters -> Filters
-                            it == KeyProximity -> Proximity
-                            it == KeyAttribute -> Attribute
-                            it == KeyExact -> Exact
-                            it == KeyCustom -> Custom
-                            else -> Unknown(it)
-                        }
-                    }
-                }
-                else -> null
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
+
+        override fun deserialize(input: Decoder): Ranking {
+            val element = input.readAsTree() as JsonLiteral
+
+            val findAsc = regexAsc.find(element.content)
+            val findDesc = regexDesc.find(element.content)
+
+            return when {
+                findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
+                findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
+                element.content == KeyTypo -> Typo
+                element.content == KeyGeo -> Geo
+                element.content == KeyWords -> Words
+                element.content == KeyFilters -> Filters
+                element.content == KeyProximity -> Proximity
+                element.content == KeyAttribute -> Attribute
+                element.content == KeyExact -> Exact
+                element.content == KeyCustom -> Custom
+                else -> Unknown(element.content)
             }
         }
     }

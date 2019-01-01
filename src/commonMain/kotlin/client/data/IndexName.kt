@@ -1,16 +1,15 @@
 package client.data
 
 import client.StringUTF8
-import client.serialize.Deserializer
-import client.serialize.RawStringSerializer
+import client.serialize.readAsTree
 import client.toIndex
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.KSerializer
+import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(IndexName.Companion::class)
 data class IndexName(
     override val raw: String
 ) : RawString {
@@ -27,23 +26,19 @@ data class IndexName(
         return raw
     }
 
-    @kotlinx.serialization.Serializer(forClass = IndexName::class)
-    object Deserializable : KSerializer<IndexName> {
+    @Serializer(IndexName::class)
+    companion object : KSerializer<IndexName> {
+
+        override fun serialize(output: Encoder, obj: IndexName) {
+            val json = output as JSON.JsonOutput
+
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
 
         override fun deserialize(input: Decoder): IndexName {
-            val json = input as JSON.JsonInput
+            val element = input.readAsTree() as JsonLiteral
 
-            return IndexName(json.readAsTree().toString())
-        }
-    }
-
-    companion object : RawStringSerializer<IndexName>, Deserializer<IndexName> {
-
-        override fun deserialize(element: JsonElement): IndexName? {
-            return when (element) {
-                is JsonPrimitive -> element.contentOrNull?.toIndex()
-                else -> null
-            }
+            return element.content.toIndex()
         }
     }
 }

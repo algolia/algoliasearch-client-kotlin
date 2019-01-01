@@ -1,10 +1,14 @@
 package client.data
 
 import client.serialize.*
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.*
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(ResponseFields.Companion::class)
 sealed class ResponseFields(override val raw: String) : RawString {
 
     object All : ResponseFields(KeyStar)
@@ -33,36 +37,39 @@ sealed class ResponseFields(override val raw: String) : RawString {
         return raw
     }
 
-    internal companion object : RawStringSerializer<ResponseFields>, Deserializer<ResponseFields> {
+    @Serializer(ResponseFields::class)
+    internal companion object : KSerializer<ResponseFields> {
 
-        override fun deserialize(element: JsonElement): ResponseFields? {
-            return when (element) {
-                is JsonPrimitive -> {
-                    when (val content = element.contentOrNull) {
-                        KeyStar -> All
-                        KeyAroundLatLng -> AroundLatLng
-                        KeyAutomaticRadius -> AutomaticRadius
-                        KeyExhaustiveFacetsCount -> ExhaustiveFacetsCount
-                        KeyFacets -> Facets
-                        KeyFacetsStats -> FacetsStats
-                        KeyHits -> Hits
-                        KeyHitsPerPage -> HitsPerPage
-                        KeyIndex -> Index
-                        KeyLength -> Length
-                        KeyNbHits -> NbHits
-                        KeyNbPages -> NbPages
-                        KeyOffset -> Offset
-                        KeyPage -> Page
-                        KeyParams -> Params
-                        KeyProcessingTimeMS -> ProcessingTimeMS
-                        KeyQuery -> Query
-                        KeyQueryAfterRemoval -> QueryAfterRemoval
-                        KeyUserData -> UserData
-                        null -> null
-                        else -> Unknown(content)
-                    }
-                }
-                else -> null
+        override fun serialize(output: Encoder, obj: ResponseFields) {
+            val json = output as JSON.JsonOutput
+
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
+
+        override fun deserialize(input: Decoder): ResponseFields {
+            val element = input.readAsTree() as JsonLiteral
+
+            return when (val content = element.content) {
+                KeyStar -> All
+                KeyAroundLatLng -> AroundLatLng
+                KeyAutomaticRadius -> AutomaticRadius
+                KeyExhaustiveFacetsCount -> ExhaustiveFacetsCount
+                KeyFacets -> Facets
+                KeyFacetsStats -> FacetsStats
+                KeyHits -> Hits
+                KeyHitsPerPage -> HitsPerPage
+                KeyIndex -> Index
+                KeyLength -> Length
+                KeyNbHits -> NbHits
+                KeyNbPages -> NbPages
+                KeyOffset -> Offset
+                KeyPage -> Page
+                KeyParams -> Params
+                KeyProcessingTimeMS -> ProcessingTimeMS
+                KeyQuery -> Query
+                KeyQueryAfterRemoval -> QueryAfterRemoval
+                KeyUserData -> UserData
+                else -> Unknown(content)
             }
         }
     }

@@ -1,40 +1,41 @@
 package client.data
 
-import client.serialize.Deserializer
-import client.serialize.Serializer
+import client.serialize.readAsTree
 import client.toAttribute
+import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 
+@Serializable(DecompoundedAttributes.Companion::class)
 data class DecompoundedAttributes internal constructor(val language: QueryLanguage, val attributes: List<Attribute>) {
 
     constructor(language: QueryLanguage.Finnish, vararg attributes: Attribute) : this(language, attributes.toList())
     constructor(language: QueryLanguage.German, vararg attributes: Attribute) : this(language, attributes.toList())
     constructor(language: QueryLanguage.Dutch, vararg attributes: Attribute) : this(language, attributes.toList())
 
-    internal companion object : Serializer<DecompoundedAttributes>, Deserializer<DecompoundedAttributes> {
+    @Serializer(DecompoundedAttributes::class)
+    internal companion object : KSerializer<DecompoundedAttributes> {
 
-        override fun serialize(input: DecompoundedAttributes): JsonObject {
-            return json {
-                input.language.raw to jsonArray {
-                    input.attributes.forEach { +it.raw }
+        override fun serialize(output: Encoder, obj: DecompoundedAttributes) {
+            val json = output as JSON.JsonOutput
+            val element = json {
+                obj.language.raw to jsonArray {
+                    obj.attributes.forEach { +it.raw }
                 }
             }
+
+            json.writeTree(element)
         }
 
-        override fun deserialize(element: JsonElement): DecompoundedAttributes? {
-            return when (element) {
-                is JsonObject -> {
-                    val key = element.keys.first()
-                    val attributes = element.getArrayOrNull(key)?.map { it.content.toAttribute() }
+        override fun deserialize(input: Decoder): DecompoundedAttributes {
+            val element = input.readAsTree() as JsonObject
+            val key = element.keys.first()
+            val attributes = element.getArrayOrNull(key)?.map { it.content.toAttribute() }
 
-                    DecompoundedAttributes(
-                        QueryLanguage.deserialize(JsonPrimitive(key))!!,
-                        attributes ?: listOf()
-                    )
-                }
-                else -> null
-            }
+            return DecompoundedAttributes(
+                QueryLanguage.convert(key),
+                attributes ?: listOf()
+            )
         }
     }
 }

@@ -5,12 +5,12 @@ import client.data.Settings
 import client.data.SettingsKey
 import client.data.Task
 import client.serialize.KeyForwardToReplicas
+import client.serialize.encodeNoNulls
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.put
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonTreeParser
 
 
 class ClientSettings(
@@ -21,7 +21,7 @@ class ClientSettings(
     override suspend fun getSettings(): Settings {
         return client.run {
             read.retry(readTimeout, indexName.pathIndexes("/settings")) { path ->
-                Settings.deserialize(JsonTreeParser.parse(httpClient.get(path)))!!
+                httpClient.get<Settings>(path)
             }
         }
     }
@@ -34,11 +34,14 @@ class ClientSettings(
         return client.run {
             write.retry(writeTimeout, indexName.pathIndexes("/settings")) { path ->
                 httpClient.put<Task>(path) {
-                    val map = Settings.serialize(settings).toMutableMap().apply {
-                        resetToDefault.forEach {
-                            put(it.raw, JsonNull)
+                    val map = settings
+                        .encodeNoNulls()
+                        .toMutableMap()
+                        .apply {
+                            resetToDefault.forEach {
+                                put(it.raw, JsonNull)
+                            }
                         }
-                    }
                     body = JsonObject(map).toString()
                     parameter(KeyForwardToReplicas, forwardToReplicas)
                 }

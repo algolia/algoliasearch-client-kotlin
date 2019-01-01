@@ -5,14 +5,13 @@ import attributeB
 import client.data.Ranking
 import client.data.Ranking.*
 import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestRanking : TestSerializer<Ranking>(Ranking, Ranking) {
+internal class TestRanking : TestSerializer<Ranking>(Ranking) {
 
     private val asc = Asc(attributeA)
     private val desc = Desc(attributeB)
@@ -29,32 +28,5 @@ internal class TestRanking : TestSerializer<Ranking>(Ranking, Ranking) {
         asc to JsonPrimitive(asc.raw),
         desc to JsonPrimitive(desc.raw),
         Unknown(unknown) to JsonPrimitive(unknown)
-    )
-    override val items = listOf(
-        listOf(
-            Geo,
-            Typo,
-            Words,
-            Filters,
-            Proximity,
-            Attribute,
-            Exact,
-            Custom,
-            asc,
-            desc,
-            Unknown(unknown)
-        ) to jsonArray {
-            +Geo.raw
-            +Typo.raw
-            +Words.raw
-            +Filters.raw
-            +Proximity.raw
-            +Attribute.raw
-            +Exact.raw
-            +Custom.raw
-            +asc.raw
-            +desc.raw
-            +unknown
-        }
     )
 }

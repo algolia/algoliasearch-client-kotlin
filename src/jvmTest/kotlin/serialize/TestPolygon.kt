@@ -8,7 +8,7 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-internal class TestPolygon : TestSerializer<Polygon>(Polygon, Polygon) {
+internal class TestPolygon : TestSerializer<Polygon>(Polygon) {
 
     private val polygon = Polygon(
         1f to 2f,
@@ -41,14 +41,5 @@ internal class TestPolygon : TestSerializer<Polygon>(Polygon, Polygon) {
 
     override val item = listOf(
         polygon to jsonArray
-    )
-    override val items = listOf(
-        listOf(
-            polygon,
-            polygon
-        ) to jsonArray {
-            +jsonArray
-            +jsonArray
-        }
     )
 }

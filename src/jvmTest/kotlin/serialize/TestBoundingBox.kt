@@ -7,7 +7,7 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-internal class TestBoundingBox : TestSerializer<BoundingBox>(BoundingBox, BoundingBox) {
+internal class TestBoundingBox : TestSerializer<BoundingBox>(BoundingBox) {
 
     private val boundingBox = BoundingBox(1f, 2f, 3f, 4f)
     private val jsonArray = jsonArray {
@@ -17,17 +17,7 @@ internal class TestBoundingBox : TestSerializer<BoundingBox>(BoundingBox, Boundi
         +(4f as Number)
     }
 
-    override
-    val item = listOf(
+    override val item = listOf(
         boundingBox to jsonArray
-    )
-    override val items = listOf(
-        listOf(
-            boundingBox,
-            boundingBox
-        ) to jsonArray {
-            +jsonArray
-            +jsonArray
-        }
     )
 }

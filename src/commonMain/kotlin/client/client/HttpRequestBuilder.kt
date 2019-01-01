@@ -1,10 +1,6 @@
 package client.client
 
-import client.data.ApiKey
-import client.data.ApplicationId
-import client.data.MultipleQueriesStrategy
-import client.data.IndexQuery
-import client.data.Query
+import client.data.*
 import client.serialize.*
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
@@ -32,7 +28,7 @@ fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: Mul
             queries.forEach {
                 +json {
                     KeyIndexName to it.indexName.raw
-                    KeyParams to Query.serialize(it.query).urlEncode()
+                    KeyParams to it.query.encodeNoNulls().urlEncode()
                 }
             }
         }
@@ -41,5 +37,5 @@ fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: Mul
 }
 
 fun HttpRequestBuilder.setBody(query: Query?) {
-    body = if (query != null) Query.serialize(query).toString() else "{}"
+    body = query?.encodeNoNulls() ?: "{}"
 }

@@ -1,19 +1,20 @@
 package client.data
 
+import client.serialize.readAsTree
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.JSON
 
 
 @Serializable
 data class Hit(val serialized: String) {
 
-    @Serializer(forClass = Hit::class)
+    @Serializer(Hit::class)
     companion object : KSerializer<Hit> {
         override fun deserialize(input: Decoder): Hit {
-            val json = (input as JSON.JsonInput).readAsTree()
+            val json = input.readAsTree()
+
             return Hit(json.toString())
         }
     }

@@ -5,7 +5,9 @@ import client.serialize.*
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
+import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.json
+import kotlinx.serialization.list
 
 
 class ClientIndices(
@@ -30,7 +32,7 @@ class ClientIndices(
                     body = json {
                         KeyOperation to key
                         KeyDestination to destination.raw
-                        scopes?.let { KeyScope to Scope.serializeList(it) }
+                        scopes?.let { KeyScope to JSON.stringify(Scope.list, it) }
                     }.toString()
                 }
             }

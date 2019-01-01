@@ -4,13 +4,12 @@ import client.data.QueryLanguage
 import client.data.QueryLanguage.*
 import client.serialize.*
 import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-internal class TestQueryLanguage : TestSerializer<QueryLanguage>(QueryLanguage, QueryLanguage) {
+internal class TestQueryLanguage : TestSerializer<QueryLanguage>(QueryLanguage) {
 
     override val item = listOf(
         Afrikaans to JsonPrimitive(KeyAfrikaans),
@@ -69,12 +68,5 @@ internal class TestQueryLanguage : TestSerializer<QueryLanguage>(QueryLanguage, 
         Tswana to JsonPrimitive(KeyTswana),
         Turkish to JsonPrimitive(KeyTurkish),
         Tatar to JsonPrimitive(KeyTatar)
-    )
-
-    override val items = listOf(
-        listOf(Afrikaans, Albanian) to jsonArray {
-            +Afrikaans.raw
-            +Albanian.raw
-        }
     )
 }

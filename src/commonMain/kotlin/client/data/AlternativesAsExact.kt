@@ -1,10 +1,16 @@
 package client.data
 
-import client.serialize.*
-import kotlinx.serialization.json.JsonElement
+import client.serialize.KeyIgnorePlurals
+import client.serialize.KeyMultiWordsSynonym
+import client.serialize.KeySingleWordSynonym
+import client.serialize.readAsTree
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(AlternativesAsExact.Companion::class)
 sealed class AlternativesAsExact(override val raw: String) : RawString {
 
     /**
@@ -28,18 +34,23 @@ sealed class AlternativesAsExact(override val raw: String) : RawString {
         return raw
     }
 
-    internal companion object : RawStringSerializer<AlternativesAsExact>, Deserializer<AlternativesAsExact> {
+    @Serializer(AlternativesAsExact::class)
+    internal companion object : KSerializer<AlternativesAsExact> {
 
-        override fun deserialize(element: JsonElement): AlternativesAsExact? {
-            return when (element) {
-                is JsonPrimitive -> when (val content = element.contentOrNull) {
-                    KeyIgnorePlurals -> IgnorePlurals
-                    KeySingleWordSynonym -> SingleWordSynonym
-                    KeyMultiWordsSynonym -> MultiWordsSynonym
-                    null -> null
-                    else -> Unknown(content)
-                }
-                else -> null
+        override fun serialize(output: Encoder, obj: AlternativesAsExact) {
+            val json = output as JSON.JsonOutput
+
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
+
+        override fun deserialize(input: Decoder): AlternativesAsExact {
+            val element = input.readAsTree() as JsonLiteral
+
+            return when (val content = element.content) {
+                KeyIgnorePlurals -> IgnorePlurals
+                KeySingleWordSynonym -> SingleWordSynonym
+                KeyMultiWordsSynonym -> MultiWordsSynonym
+                else -> Unknown(content)
             }
         }
     }

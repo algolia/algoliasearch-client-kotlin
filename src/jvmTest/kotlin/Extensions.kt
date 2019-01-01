@@ -3,7 +3,6 @@ import client.data.Attribute
 import client.data.IndexName
 import client.query.*
 import kotlinx.serialization.json.jsonArray
-import kotlin.test.*
 
 
 internal fun groupMap(): GroupMap<Filter> = mutableMapOf()
@@ -47,4 +46,3 @@ internal val jsonNestedLists = jsonArray {
 }
 
 internal fun FilterBuilder.buildTest() = build().replace("\"", "")
-

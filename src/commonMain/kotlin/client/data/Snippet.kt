@@ -1,13 +1,15 @@
 package client.data
 
-import client.serialize.Deserializer
-import client.serialize.RawStringSerializer
+import client.serialize.readAsTree
 import client.serialize.regexSnippet
 import client.toAttribute
-import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
 
+@Serializable(Snippet.Companion::class)
 data class Snippet(
     val attribute: Attribute,
     val count: Int? = null
@@ -19,24 +21,26 @@ data class Snippet(
         return raw
     }
 
-    internal companion object : RawStringSerializer<Snippet>, Deserializer<Snippet> {
+    @Serializer(Snippet::class)
+    internal companion object : KSerializer<Snippet> {
 
-        override fun deserialize(element: JsonElement): Snippet? {
-            return when (element) {
-                is JsonPrimitive -> {
-                    element.contentOrNull?.let {
-                        val findSnippet = regexSnippet.find(it)
+        override fun serialize(output: Encoder, obj: Snippet) {
+            val json = output as JSON.JsonOutput
 
-                        when {
-                            findSnippet != null -> Snippet(
-                                findSnippet.groupValues[1].toAttribute(),
-                                findSnippet.groupValues[2].toInt()
-                            )
-                            else -> Snippet(it.toAttribute())
-                        }
-                    }
-                }
-                else -> null
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
+
+        override fun deserialize(input: Decoder): Snippet {
+            val element = input.readAsTree() as JsonLiteral
+
+            val findSnippet = regexSnippet.find(element.content)
+
+            return when {
+                findSnippet != null -> Snippet(
+                    findSnippet.groupValues[1].toAttribute(),
+                    findSnippet.groupValues[2].toInt()
+                )
+                else -> Snippet(element.content.toAttribute())
             }
         }
     }

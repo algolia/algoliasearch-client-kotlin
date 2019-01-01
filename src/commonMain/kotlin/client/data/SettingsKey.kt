@@ -1,6 +1,7 @@
 package client.data
 
 import client.serialize.*
+import kotlinx.serialization.Serializable
 
 
 sealed class SettingsKey(override val raw: String) : RawString {

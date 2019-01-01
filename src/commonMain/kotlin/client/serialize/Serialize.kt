@@ -1,10 +1,11 @@
 package client.serialize
 
+import client.data.Query
+import client.data.Settings
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.content
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.json.*
 
 internal val regexAsc = Regex("$KeyAsc\\((.*)\\)")
 internal val regexDesc = Regex("$KeyDesc\\((.*)\\)")
@@ -20,4 +21,22 @@ internal fun JsonObject.urlEncode(): String {
             }
         }
     }.formUrlEncode()
+}
+
+internal fun Decoder.readAsTree() = (this as JSON.JsonInput).readAsTree()
+
+internal fun Query.toJsonObject(): JsonObject {
+    return JsonTreeMapper().writeTree(this, Query.serializer()).jsonObject
+}
+
+internal fun Settings.toJsonObject(): JsonObject {
+    return JsonTreeMapper().writeTree(this, Settings.serializer()).jsonObject
+}
+
+internal fun Query.encodeNoNulls(): JsonObject {
+    return JsonObject(toJsonObject().filter { it.value != JsonNull })
+}
+
+internal fun Settings.encodeNoNulls(): JsonObject {
+    return JsonObject(toJsonObject().filter { it.value != JsonNull })
 }

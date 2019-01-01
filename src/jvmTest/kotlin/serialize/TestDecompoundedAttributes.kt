@@ -11,10 +11,7 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-internal class TestDecompoundedAttributes : TestSerializer<DecompoundedAttributes>(
-    DecompoundedAttributes,
-    DecompoundedAttributes
-) {
+internal class TestDecompoundedAttributes : TestSerializer<DecompoundedAttributes>(DecompoundedAttributes) {
 
     private val decompoundedDe = DecompoundedAttributes(QueryLanguage.German, attributeA, attributeB)
     private val decompoundedFi = DecompoundedAttributes(QueryLanguage.Finnish, attributeA, attributeB)
@@ -32,14 +29,5 @@ internal class TestDecompoundedAttributes : TestSerializer<DecompoundedAttribute
     override val item = listOf(
         decompoundedDe to jsonDe,
         decompoundedFi to jsonFi
-    )
-    override val items = listOf(
-        listOf(
-            decompoundedDe,
-            decompoundedFi
-        ) to jsonArray {
-            +jsonDe
-            +jsonFi
-        }
     )
 }
