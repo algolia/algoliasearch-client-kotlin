@@ -13,22 +13,21 @@ import shouldEqual
 @RunWith(JUnit4::class)
 internal class TestClientIndices {
 
-    private val copyName = IndexName("products_android_demo_copy")
-    private val copy = client.initIndex(copyName)
-    private val destinationName = IndexName("products_android_demo_move")
+    private val copy = client.initIndex(IndexName("products_android_demo_copy"))
+    private val destination = client.initIndex(IndexName("products_android_demo_move"))
 
-    private suspend fun deleteIndex(indexName: IndexName) {
-        val task = client.deleteIndex(indexName)
-
-        client.wait(indexName, task).status shouldEqual Published
+    private suspend fun deleteIndex(index: Index) {
+        index.run {
+            index.deleteIndex().wait().status shouldEqual Published
+        }
     }
 
-    private suspend fun deleteIndexIfExists(vararg indexNames: IndexName) {
+    private suspend fun deleteIndexIfExists(vararg indexes: Index) {
         val existing = client.listIndexes().items.map { it.indexName }
 
-        indexNames.forEach {
-            if (existing.contains(it)) {
-                deleteIndex(it)
+        indexes.forEach { index ->
+            if (existing.any { index.indexName == it }) {
+                deleteIndex(index)
             }
         }
     }
@@ -48,10 +47,10 @@ internal class TestClientIndices {
     @Test
     fun test() {
         runBlocking {
-            deleteIndexIfExists(copyName, destinationName)
-            copyIndex(index, copyName)
-            moveIndex(copy, destinationName)
-            deleteIndex(destinationName)
+            deleteIndexIfExists(copy, destination)
+            copyIndex(index, copy.indexName)
+            moveIndex(copy, destination.indexName)
+            deleteIndex(destination)
         }
     }
 }
