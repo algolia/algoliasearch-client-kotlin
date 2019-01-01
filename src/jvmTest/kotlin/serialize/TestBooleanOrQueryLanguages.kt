@@ -1,11 +1,11 @@
 package serialize
 
 import boolean
-import client.data.BooleanOrQueryLanguages
-import client.data.BooleanOrQueryLanguages.Boolean
-import client.data.BooleanOrQueryLanguages.QueryLanguages
-import client.data.QueryLanguage.Afrikaans
-import client.data.QueryLanguage.Albanian
+import com.algolia.search.saas.data.BooleanOrQueryLanguages
+import com.algolia.search.saas.data.BooleanOrQueryLanguages.Boolean
+import com.algolia.search.saas.data.BooleanOrQueryLanguages.QueryLanguages
+import com.algolia.search.saas.data.QueryLanguage.Afrikaans
+import com.algolia.search.saas.data.QueryLanguage.Albanian
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith

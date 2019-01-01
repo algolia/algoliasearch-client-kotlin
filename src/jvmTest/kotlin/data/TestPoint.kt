@@ -1,7 +1,7 @@
 package data
 
-import client.data.Point
-import client.to
+import com.algolia.search.saas.data.Point
+import com.algolia.search.saas.to
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

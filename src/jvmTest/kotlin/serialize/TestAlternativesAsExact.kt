@@ -1,7 +1,7 @@
 package serialize
 
-import client.data.AlternativesAsExact
-import client.data.AlternativesAsExact.*
+import com.algolia.search.saas.data.AlternativesAsExact
+import com.algolia.search.saas.data.AlternativesAsExact.*
 import kotlinx.serialization.json.JsonPrimitive
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

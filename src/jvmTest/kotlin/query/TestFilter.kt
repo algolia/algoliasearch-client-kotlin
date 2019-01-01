@@ -1,7 +1,7 @@
 package query
 
-import client.data.Attribute
-import client.query.*
+import com.algolia.search.saas.data.Attribute
+import com.algolia.search.saas.query.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

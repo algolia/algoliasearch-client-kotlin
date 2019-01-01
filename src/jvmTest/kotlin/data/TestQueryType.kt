@@ -1,9 +1,9 @@
 package data
 
-import client.data.QueryType.*
-import client.serialize.KeyPrefixAll
-import client.serialize.KeyPrefixLast
-import client.serialize.KeyPrefixNone
+import com.algolia.search.saas.data.QueryType.*
+import com.algolia.search.saas.serialize.KeyPrefixAll
+import com.algolia.search.saas.serialize.KeyPrefixLast
+import com.algolia.search.saas.serialize.KeyPrefixNone
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

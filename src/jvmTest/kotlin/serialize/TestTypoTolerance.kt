@@ -1,10 +1,9 @@
 package serialize
 
 import boolean
-import client.data.TypoTolerance
-import client.data.TypoTolerance.*
-import client.data.TypoTolerance.Boolean
-import kotlinx.serialization.json.JsonArray
+import com.algolia.search.saas.data.TypoTolerance
+import com.algolia.search.saas.data.TypoTolerance.*
+import com.algolia.search.saas.data.TypoTolerance.Boolean
 import kotlinx.serialization.json.JsonPrimitive
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

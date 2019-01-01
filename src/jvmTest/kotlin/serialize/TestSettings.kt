@@ -3,8 +3,8 @@ package serialize
 import attributeA
 import attributes
 import boolean
-import client.data.*
-import client.serialize.*
+import com.algolia.search.saas.data.*
+import com.algolia.search.saas.serialize.*
 import indexA
 import int
 import jsonAttributes

@@ -2,8 +2,8 @@ package data
 
 import attributeA
 import attributeB
-import client.data.Ranking.*
-import client.serialize.*
+import com.algolia.search.saas.data.Ranking.*
+import com.algolia.search.saas.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

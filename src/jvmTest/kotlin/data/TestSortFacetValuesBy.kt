@@ -1,8 +1,8 @@
 package data
 
-import client.data.SortFacetValuesBy.*
-import client.serialize.KeyAlpha
-import client.serialize.KeyCount
+import com.algolia.search.saas.data.SortFacetValuesBy.*
+import com.algolia.search.saas.serialize.KeyAlpha
+import com.algolia.search.saas.serialize.KeyCount
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

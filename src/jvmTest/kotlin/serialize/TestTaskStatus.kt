@@ -1,9 +1,8 @@
 package serialize
 
-import client.data.TaskStatus
-import client.serialize.KeyNotPublished
-import client.serialize.KeyPublished
-import kotlinx.serialization.json.JsonArray
+import com.algolia.search.saas.data.TaskStatus
+import com.algolia.search.saas.serialize.KeyNotPublished
+import com.algolia.search.saas.serialize.KeyPublished
 import kotlinx.serialization.json.JsonPrimitive
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

@@ -1,9 +1,9 @@
 package data
 
-import client.data.Scope.*
-import client.serialize.KeyRules
-import client.serialize.KeySettings
-import client.serialize.KeySynonyms
+import com.algolia.search.saas.data.Scope.*
+import com.algolia.search.saas.serialize.KeyRules
+import com.algolia.search.saas.serialize.KeySettings
+import com.algolia.search.saas.serialize.KeySynonyms
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

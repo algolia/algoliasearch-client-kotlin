@@ -1,6 +1,6 @@
 package data
 
-import client.data.IndexName
+import com.algolia.search.saas.data.IndexName
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

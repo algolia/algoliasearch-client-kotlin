@@ -1,10 +1,10 @@
 package data
 
-import client.data.RemoveWordIfNoResults.*
-import client.serialize.KeyAllOptional
-import client.serialize.KeyFirstWords
-import client.serialize.KeyLastWords
-import client.serialize.KeyNone
+import com.algolia.search.saas.data.RemoveWordIfNoResults.*
+import com.algolia.search.saas.serialize.KeyAllOptional
+import com.algolia.search.saas.serialize.KeyFirstWords
+import com.algolia.search.saas.serialize.KeyLastWords
+import com.algolia.search.saas.serialize.KeyNone
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

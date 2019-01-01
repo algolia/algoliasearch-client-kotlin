@@ -1,6 +1,6 @@
 package serialize
 
-import client.serialize.*
+import com.algolia.search.saas.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

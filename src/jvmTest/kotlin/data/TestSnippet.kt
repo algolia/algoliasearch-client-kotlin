@@ -3,7 +3,7 @@ package data
 import attributeA
 import attributeAll
 import attributeB
-import client.data.Snippet
+import com.algolia.search.saas.data.Snippet
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

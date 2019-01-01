@@ -1,7 +1,7 @@
 package data
 
-import client.data.QueryLanguage.*
-import client.serialize.*
+import com.algolia.search.saas.data.QueryLanguage.*
+import com.algolia.search.saas.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

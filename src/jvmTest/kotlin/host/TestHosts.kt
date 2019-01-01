@@ -1,10 +1,10 @@
 package host
 
-import client.data.ApplicationId
-import client.host.computeHosts
-import client.host.randomize
-import client.host.readHost
-import client.host.writeHost
+import com.algolia.search.saas.data.ApplicationId
+import com.algolia.search.saas.host.computeHosts
+import com.algolia.search.saas.host.randomize
+import com.algolia.search.saas.host.readHost
+import com.algolia.search.saas.host.writeHost
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

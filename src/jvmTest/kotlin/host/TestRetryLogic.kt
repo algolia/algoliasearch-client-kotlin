@@ -1,8 +1,8 @@
 package host
 
-import client.data.ApplicationId
-import client.host.HostStatus
-import client.host.RetryLogic
+import com.algolia.search.saas.data.ApplicationId
+import com.algolia.search.saas.host.HostStatus
+import com.algolia.search.saas.host.RetryLogic
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.MockHttpResponse

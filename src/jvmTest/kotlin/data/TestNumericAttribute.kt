@@ -1,8 +1,8 @@
 package data
 
 import attributeA
-import client.data.NumericAttributeFilter
-import client.serialize.KeyEqualOnly
+import com.algolia.search.saas.data.NumericAttributeFilter
+import com.algolia.search.saas.serialize.KeyEqualOnly
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

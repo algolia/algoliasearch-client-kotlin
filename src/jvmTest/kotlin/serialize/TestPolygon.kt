@@ -1,7 +1,7 @@
 package serialize
 
-import client.data.Polygon
-import client.to
+import com.algolia.search.saas.data.Polygon
+import com.algolia.search.saas.to
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

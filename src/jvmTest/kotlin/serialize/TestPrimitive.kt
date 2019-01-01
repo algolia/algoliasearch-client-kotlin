@@ -1,6 +1,6 @@
 package serialize
 
-import client.serialize.Primitive
+import com.algolia.search.saas.serialize.Primitive
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonLiteral

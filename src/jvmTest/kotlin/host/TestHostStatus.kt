@@ -1,9 +1,9 @@
 package host
-import client.Time
-import client.host.HostStatus
-import client.host.HostStatuses
-import client.host.areStatusExpired
-import client.host.selectNextHostIndex
+import com.algolia.search.saas.Time
+import com.algolia.search.saas.host.HostStatus
+import com.algolia.search.saas.host.HostStatuses
+import com.algolia.search.saas.host.areStatusExpired
+import com.algolia.search.saas.host.selectNextHostIndex
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

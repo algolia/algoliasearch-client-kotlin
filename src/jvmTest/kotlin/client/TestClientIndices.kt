@@ -1,8 +1,8 @@
 package client
 
-import client.client.Index
-import client.data.IndexName
-import client.data.TaskStatus.Published
+import com.algolia.search.saas.client.Index
+import com.algolia.search.saas.data.IndexName
+import com.algolia.search.saas.data.TaskStatus.Published
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -1,7 +1,7 @@
 
-import client.data.Attribute
-import client.data.IndexName
-import client.query.*
+import com.algolia.search.saas.data.Attribute
+import com.algolia.search.saas.data.IndexName
+import com.algolia.search.saas.query.*
 import kotlinx.serialization.json.jsonArray
 
 

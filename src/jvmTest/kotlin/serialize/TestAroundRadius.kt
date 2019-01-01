@@ -1,7 +1,7 @@
 package serialize
 
-import client.data.AroundRadius
-import client.data.AroundRadius.*
+import com.algolia.search.saas.data.AroundRadius
+import com.algolia.search.saas.data.AroundRadius.*
 import kotlinx.serialization.json.JsonPrimitive
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

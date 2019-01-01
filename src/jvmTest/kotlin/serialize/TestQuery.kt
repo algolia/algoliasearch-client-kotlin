@@ -3,9 +3,9 @@ package serialize
 import attributeA
 import attributes
 import boolean
-import client.data.*
-import client.serialize.*
-import client.to
+import com.algolia.search.saas.data.*
+import com.algolia.search.saas.serialize.*
+import com.algolia.search.saas.to
 import int
 import jsonAttributes
 import jsonNestedLists

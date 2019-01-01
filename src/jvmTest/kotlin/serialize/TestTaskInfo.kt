@@ -1,9 +1,9 @@
 package serialize
 
-import client.data.TaskInfo
-import client.data.TaskStatus
-import client.serialize.KeyPublished
-import client.serialize.KeyStatus
+import com.algolia.search.saas.data.TaskInfo
+import com.algolia.search.saas.data.TaskStatus
+import com.algolia.search.saas.serialize.KeyPublished
+import com.algolia.search.saas.serialize.KeyStatus
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

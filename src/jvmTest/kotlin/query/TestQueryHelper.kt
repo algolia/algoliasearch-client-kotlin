@@ -1,12 +1,12 @@
 package query
 
 import buildTest
-import client.data.AlternativesAsExact
-import client.data.Attribute
-import client.data.QueryLanguage
-import client.data.ResponseFields
-import client.query.*
-import client.to
+import com.algolia.search.saas.data.AlternativesAsExact
+import com.algolia.search.saas.data.Attribute
+import com.algolia.search.saas.data.QueryLanguage
+import com.algolia.search.saas.data.ResponseFields
+import com.algolia.search.saas.query.*
+import com.algolia.search.saas.to
 import facetA
 import facetB
 import groupOrA

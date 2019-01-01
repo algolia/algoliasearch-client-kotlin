@@ -1,6 +1,6 @@
 package data
 
-import client.data.BoundingBox
+import com.algolia.search.saas.data.BoundingBox
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

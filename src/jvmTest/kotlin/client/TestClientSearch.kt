@@ -1,7 +1,8 @@
 package client
 
-import client.data.IndexQuery
-import client.data.Query
+import com.algolia.search.saas.data.Attribute
+import com.algolia.search.saas.data.IndexQuery
+import com.algolia.search.saas.data.Query
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,7 +16,7 @@ internal class TestClientSearch {
     @Test
     fun search() {
         runBlocking {
-            val search = index.search(Query(facets = listOf(client.data.Attribute("color"))))
+            val search = index.search(Query())
 
             println(search)
             println(search)
@@ -35,8 +36,8 @@ internal class TestClientSearch {
     fun multiQueries() {
         runBlocking {
             val queries = listOf(
-                IndexQuery(indexName, Query("a")),
-                IndexQuery(indexName, Query("b"))
+                IndexQuery(index.indexName, Query("a")),
+                IndexQuery(index.indexName, Query("b"))
             )
             index.multipleQueries(queries)
         }
@@ -47,7 +48,7 @@ internal class TestClientSearch {
         runBlocking {
             val maxFacetHits = 2
             val response = index.searchForFacetValue(
-                "color",
+                Attribute("color"),
                 maxFacetHits = maxFacetHits,
                 facetQuery = "co",
                 query = Query(maxFacetHits = maxFacetHits)

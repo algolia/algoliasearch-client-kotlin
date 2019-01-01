@@ -1,8 +1,7 @@
 package serialize
 
-import client.data.RemoveWordIfNoResults
-import client.data.RemoveWordIfNoResults.*
-import kotlinx.serialization.json.JsonArray
+import com.algolia.search.saas.data.RemoveWordIfNoResults
+import com.algolia.search.saas.data.RemoveWordIfNoResults.*
 import kotlinx.serialization.json.JsonPrimitive
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

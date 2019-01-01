@@ -1,7 +1,7 @@
 package serialize
 
-import client.data.ResponseFields
-import client.data.ResponseFields.*
+import com.algolia.search.saas.data.ResponseFields
+import com.algolia.search.saas.data.ResponseFields.*
 import kotlinx.serialization.json.JsonPrimitive
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

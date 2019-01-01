@@ -1,0 +1,61 @@
+package com.algolia.search.saas.data
+
+import com.algolia.search.saas.serialize.KeyPrefixAll
+import com.algolia.search.saas.serialize.KeyPrefixLast
+import com.algolia.search.saas.serialize.KeyPrefixNone
+import com.algolia.search.saas.serialize.readAsTree
+import kotlinx.serialization.*
+import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.JsonPrimitive
+
+
+@Serializable(QueryType.Companion::class)
+sealed class QueryType(override val raw: String) : RawString {
+
+    /**
+     *  Only the last word is interpreted as a prefix (default behavior).
+     */
+    object PrefixLast : QueryType(KeyPrefixLast)
+
+    /**
+     * # All query words are interpreted as prefixes.
+     * This option is not recommended, as it tends to yield counter intuitive results and has a negative impact
+     * on performance.
+     */
+    object PrefixAll : QueryType(KeyPrefixAll)
+
+    /**
+     * No query word is interpreted as a prefix.
+     * This option is not recommended, especially in an instant search setup, as the user will have to type
+     * the entire word(s) before getting any relevant results.
+     */
+    object PrefixNone : QueryType(KeyPrefixNone)
+
+    data class Unknown(override val raw: String) : QueryType(raw)
+
+    override fun toString(): String {
+        return raw
+    }
+
+    @Serializer(QueryType::class)
+    internal companion object : KSerializer<QueryType> {
+
+        override fun serialize(output: Encoder, obj: QueryType) {
+            val json = output as JSON.JsonOutput
+
+            json.writeTree(JsonPrimitive(obj.raw))
+        }
+
+        override fun deserialize(input: Decoder): QueryType {
+            val element = input.readAsTree() as JsonLiteral
+
+            return when (val content = element.content) {
+                KeyPrefixLast -> PrefixLast
+                KeyPrefixAll -> PrefixAll
+                KeyPrefixNone -> PrefixNone
+                else -> Unknown(content)
+            }
+        }
+    }
+}

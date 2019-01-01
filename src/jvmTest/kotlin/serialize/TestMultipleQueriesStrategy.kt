@@ -1,7 +1,7 @@
 package serialize
 
-import client.data.MultipleQueriesStrategy
-import client.data.MultipleQueriesStrategy.*
+import com.algolia.search.saas.data.MultipleQueriesStrategy
+import com.algolia.search.saas.data.MultipleQueriesStrategy.*
 import kotlinx.serialization.json.JsonPrimitive
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

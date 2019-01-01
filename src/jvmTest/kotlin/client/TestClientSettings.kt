@@ -1,6 +1,6 @@
 package client
 
-import client.data.Settings
+import com.algolia.search.saas.data.Settings
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith

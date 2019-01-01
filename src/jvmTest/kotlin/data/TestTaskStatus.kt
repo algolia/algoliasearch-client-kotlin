@@ -1,9 +1,9 @@
 package data
 
-import client.data.TaskStatus.NotPublished
-import client.data.TaskStatus.Published
-import client.serialize.KeyNotPublished
-import client.serialize.KeyPublished
+import com.algolia.search.saas.data.TaskStatus.NotPublished
+import com.algolia.search.saas.data.TaskStatus.Published
+import com.algolia.search.saas.serialize.KeyNotPublished
+import com.algolia.search.saas.serialize.KeyPublished
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

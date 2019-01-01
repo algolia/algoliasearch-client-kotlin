@@ -1,7 +1,7 @@
 package data
 
-import client.data.Attribute
-import client.toAttribute
+import com.algolia.search.saas.data.Attribute
+import com.algolia.search.saas.toAttribute
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

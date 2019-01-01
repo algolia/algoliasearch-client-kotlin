@@ -2,7 +2,7 @@ package serialize
 
 import attributeA
 import attributeB
-import client.data.NumericAttributeFilter
+import com.algolia.search.saas.data.NumericAttributeFilter
 import kotlinx.serialization.json.JsonPrimitive
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
