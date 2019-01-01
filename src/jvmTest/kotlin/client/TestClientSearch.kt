@@ -15,7 +15,10 @@ internal class TestClientSearch {
     @Test
     fun search() {
         runBlocking {
-            index.search()
+            val search = index.search(Query(facets = listOf(client.data.Attribute("color"))))
+
+            println(search)
+            println(search)
         }
     }
 
