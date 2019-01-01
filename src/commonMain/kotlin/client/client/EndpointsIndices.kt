@@ -1,13 +1,14 @@
 package client.client
 
-import client.data.*
+import client.data.IndexName
+import client.data.Scope
+import client.data.Task
+import client.data.TaskDelete
 
 
 interface EndpointsIndices {
 
     val indexName: IndexName
-
-    suspend fun listIndexes(requestOptions: RequestOptions? = null): ListIndexes
 
     suspend fun copyIndex(
         destination: IndexName,
