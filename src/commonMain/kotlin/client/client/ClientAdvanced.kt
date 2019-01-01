@@ -29,7 +29,7 @@ class ClientAdvanced(
 
     override suspend fun getTask(taskId: Long): TaskInfo {
         return client.run {
-            read.retry(writeTimeout, indexName.pathIndexes("/task/$taskId")) { path ->
+            read.retry(readTimeout, indexName.pathIndexes("/task/$taskId")) { path ->
                 TaskInfo.deserialize(JsonTreeParser.parse(httpClient.get(path)))!!
             }
         }

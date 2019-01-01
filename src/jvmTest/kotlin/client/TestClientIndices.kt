@@ -1,18 +1,39 @@
 package client
 
+import client.data.IndexName
+import client.data.TaskStatus.Published
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
 internal class TestClientIndices {
 
     @Test
-    fun listIndexes() {
+    fun listCopyAndDelete() {
         runBlocking {
-            index.getListIndexes()
+            val destinationName = IndexName("products_android_demo_copy")
+            val destination = apiClient.get(destinationName)
+            val list = destination.listIndexes()
+
+            if (list.items.any { it.indexName == destinationName }) {
+                val delete = destination.run {
+                    deleteIndex().wait()
+                }
+                Published shouldEqual delete.status
+            }
+            val copy = index.run {
+                copyIndex(destinationName).wait()
+            }
+            Published shouldEqual copy.status
+
+            val delete = destination.run {
+                deleteIndex().wait()
+            }
+            Published shouldEqual delete.status
         }
     }
 }

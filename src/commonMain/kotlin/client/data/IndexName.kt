@@ -4,6 +4,9 @@ import client.StringUTF8
 import client.serialize.Deserializer
 import client.serialize.RawStringSerializer
 import client.toIndex
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 
@@ -22,6 +25,16 @@ data class IndexName(
 
     override fun toString(): String {
         return raw
+    }
+
+    @kotlinx.serialization.Serializer(forClass = IndexName::class)
+    object Deserializable : KSerializer<IndexName> {
+
+        override fun deserialize(input: Decoder): IndexName {
+            val json = input as JSON.JsonInput
+
+            return IndexName(json.readAsTree().toString())
+        }
     }
 
     companion object : RawStringSerializer<IndexName>, Deserializer<IndexName> {

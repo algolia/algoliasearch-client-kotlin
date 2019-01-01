@@ -1,6 +1,7 @@
 package client.data
 
 import kotlinx.serialization.Optional
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
@@ -12,7 +13,7 @@ data class ListIndexes(
 
     @Serializable
     data class Item(
-        val name: String,
+        @Serializable(IndexName.Deserializable::class) @SerialName("name") val indexName: IndexName,
         val createdAt: String,
         val updatedAt: String,
         val entries: Int,

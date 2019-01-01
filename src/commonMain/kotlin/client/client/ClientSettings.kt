@@ -3,7 +3,7 @@ package client.client
 import client.data.IndexName
 import client.data.Settings
 import client.data.SettingsKey
-import client.data.TaskSettings
+import client.data.Task
 import client.serialize.KeyForwardToReplicas
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -30,10 +30,10 @@ class ClientSettings(
         settings: Settings,
         resetToDefault: List<SettingsKey>,
         forwardToReplicas: Boolean
-    ): TaskSettings {
+    ): Task {
         return client.run {
             write.retry(writeTimeout, indexName.pathIndexes("/settings")) { path ->
-                httpClient.put<TaskSettings>(path) {
+                httpClient.put<Task>(path) {
                     val map = Settings.serialize(settings).toMutableMap().apply {
                         resetToDefault.forEach {
                             put(it.raw, JsonNull)

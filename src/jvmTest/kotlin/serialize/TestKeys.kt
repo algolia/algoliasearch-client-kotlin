@@ -132,6 +132,13 @@ internal class TestKeys {
         "published" shouldEqual KeyPublished
         "notPublished" shouldEqual KeyNotPublished
         "status" shouldEqual KeyStatus
+        "operation" shouldEqual KeyOperation
+        "destination" shouldEqual KeyDestination
+        "copy" shouldEqual KeyCopy
+        "move" shouldEqual KeyMove
+        "rules" shouldEqual KeyRules
+        "settings" shouldEqual KeySettings
+        "scope" shouldEqual KeyScope
 
         "af" shouldEqual KeyAfrikaans
         "ar" shouldEqual KeyArabic
