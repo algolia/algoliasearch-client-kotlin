@@ -16,7 +16,7 @@ data class Hits(
     @Optional val query: String? = null,
     @Optional val params: String? = null,
     @Optional @Serializable(KSerializerFacetStats::class) @SerialName("facets_stats") val facetStats: Map<Attribute, FacetStats>? = null,
-    @Optional val cursor: String? = null,
+    @Optional val cursor: Cursor? = null,
     @Optional val hitsPerPage: Int? = null,
     @Optional val page: Int? = null,
     @Optional val nbPages: Int? = null,

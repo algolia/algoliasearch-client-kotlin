@@ -1,9 +1,6 @@
 package com.algolia.search.saas
 
-import com.algolia.search.saas.data.Attribute
-import com.algolia.search.saas.data.IndexName
-import com.algolia.search.saas.data.Point
-import com.algolia.search.saas.data.Snippet
+import com.algolia.search.saas.data.*
 
 
 fun String.toIndex(): IndexName {
@@ -12,6 +9,10 @@ fun String.toIndex(): IndexName {
 
 fun String.toAttribute(): Attribute {
     return Attribute(this)
+}
+
+fun String.toCursor(): Cursor {
+    return Cursor(this)
 }
 
 infix fun Float.to(longitude: Float): Point {

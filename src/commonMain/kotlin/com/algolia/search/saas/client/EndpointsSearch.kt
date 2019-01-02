@@ -13,7 +13,7 @@ interface EndpointsSearch {
 
     suspend fun browse(query: Query? = null, requestOptions: RequestOptions? = null): Hits
 
-    suspend fun browse(cursor: String, requestOptions: RequestOptions? = null): Hits
+    suspend fun browse(cursor: Cursor, requestOptions: RequestOptions? = null): Hits
 
     suspend fun multipleQueries(
         queries: Collection<IndexQuery>,

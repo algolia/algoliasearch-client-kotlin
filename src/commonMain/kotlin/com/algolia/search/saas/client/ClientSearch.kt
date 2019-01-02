@@ -49,7 +49,7 @@ class ClientSearch(
         }
     }
 
-    override suspend fun browse(cursor: String, requestOptions: RequestOptions?): Hits {
+    override suspend fun browse(cursor: Cursor, requestOptions: RequestOptions?): Hits {
         return client.run {
             read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
                 httpClient.get<Hits>(path) {
