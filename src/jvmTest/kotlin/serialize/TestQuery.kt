@@ -117,8 +117,20 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeyAroundRadius to AroundRadius.All.raw
             KeyAroundPrecision to int
             KeyMinimumAroundRadius to int
-            KeyInsideBoundingBox to ListNumberSerializer.serializeList(listOf(BoundingBox(1f, 2f, 3f, 4f).raw))
-            KeyInsidePolygon to ListNumberSerializer.serializeList(listOf(Polygon(1f to 2f, 3f to 4f, 5f to 6f).raw))
+            KeyInsideBoundingBox to jsonArray {
+                +(1f as Number)
+                +(1f as Number)
+                +(3f as Number)
+                +(4f as Number)
+            }
+            KeyInsidePolygon to jsonArray {
+                +(1f as Number)
+                +(1f as Number)
+                +(3f as Number)
+                +(4f as Number)
+                +(5f as Number)
+                +(6f as Number)
+            }
             KeyIgnorePlurals to boolean
             KeyRemoveStopWords to boolean
             KeyQueryLanguages to jsonArray {

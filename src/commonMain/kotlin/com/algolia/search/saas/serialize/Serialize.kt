@@ -5,6 +5,7 @@ import com.algolia.search.saas.data.Settings
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
 import kotlinx.serialization.json.*
 
 internal val regexAsc = Regex("$KeyAsc\\((.*)\\)")
@@ -24,6 +25,7 @@ internal fun JsonObject.urlEncode(): String {
 }
 
 internal fun Decoder.readAsTree() = (this as JSON.JsonInput).readAsTree()
+internal fun Encoder.asJsonOutput() = this as JSON.JsonOutput
 
 internal fun Query.toJsonObject(): JsonObject {
     return JsonTreeParser.parse(JSON.stringify(Query.serializer(), this))
