@@ -27,6 +27,7 @@ internal fun JsonObject.urlEncode(): String {
 internal fun Decoder.asJsonInput() = (this as JSON.JsonInput).readAsTree()
 internal fun Encoder.asJsonOutput() = this as JSON.JsonOutput
 
+
 internal fun Query.toJsonObject(): JsonObject {
     return JsonTreeParser.parse(JSON.stringify(Query.serializer(), this))
 }

@@ -4,13 +4,9 @@ import attributeA
 import attributes
 import boolean
 import com.algolia.search.saas.data.*
-import com.algolia.search.saas.serialize.*
+import com.algolia.search.saas.serialize.encodeNoNulls
 import com.algolia.search.saas.to
 import int
-import jsonAttributes
-import jsonNestedLists
-import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
 import nestedLists
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -22,7 +18,7 @@ import string
 @RunWith(JUnit4::class)
 internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
 
-    override val item = listOf(
+    override val items = listOf(
         Query(
             query = string,
             attributesToRetrieve = attributes,
@@ -83,82 +79,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             responseFields = listOf(ResponseFields.NbHits),
             maxFacetHits = int,
             percentileComputation = boolean
-        ) to json {
-            KeyQuery to string
-            KeyAttributesToRetrieve to jsonAttributes
-            KeyRestrictSearchableAttributes to jsonAttributes
-            KeyFilters to string
-            KeyFacetFilters to jsonNestedLists
-            KeyOptionalFilters to jsonNestedLists
-            KeyNumericFilters to jsonNestedLists
-            KeyTagFilters to jsonNestedLists
-            KeySumOrFiltersScores to boolean
-            KeyFacets to jsonAttributes
-            KeyMaxValuesPerFacet to int
-            KeyFacetingAfterDistinct to boolean
-            KeySortFacetValuesBy to SortFacetValuesBy.Count.raw
-            KeyAttributesToHighlight to jsonAttributes
-            KeyAttributesToSnippet to jsonArray { +Snippet(attributeA).raw }
-            KeyHighlightPreTag to string
-            KeyHighlightPostTag to string
-            KeySnippetEllipsisText to string
-            KeyRestrictHighlightAndSnippetArrays to boolean
-            KeyPage to int
-            KeyHitsPerPage to int
-            KeyOffset to int
-            KeyLength to int
-            KeyMinWordSizefor1Typo to int
-            KeyMinWordSizefor2Typos to int
-            KeyTypoTolerance to TypoTolerance.Min.raw
-            KeyAllowTyposOnNumericTokens to boolean
-            KeyDisableTypoToleranceOnAttributes to jsonAttributes
-            KeyAroundLatLng to string
-            KeyAroundLatLngViaIP to boolean
-            KeyAroundRadius to AroundRadius.All.raw
-            KeyAroundPrecision to int
-            KeyMinimumAroundRadius to int
-            KeyInsideBoundingBox to jsonArray {
-                +(1f as Number)
-                +(1f as Number)
-                +(3f as Number)
-                +(4f as Number)
-            }
-            KeyInsidePolygon to jsonArray {
-                +(1f as Number)
-                +(1f as Number)
-                +(3f as Number)
-                +(4f as Number)
-                +(5f as Number)
-                +(6f as Number)
-            }
-            KeyIgnorePlurals to boolean
-            KeyRemoveStopWords to boolean
-            KeyQueryLanguages to jsonArray {
-                +QueryLanguage.Afrikaans.raw
-                +QueryLanguage.Albanian.raw
-            }
-            KeyEnableRules to boolean
-            KeyRuleContexts to jsonArray { +string }
-            KeyEnablePersonalization to boolean
-            KeyQueryType to QueryType.PrefixLast.raw
-            KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.LastWords.raw
-            KeyAdvancedSyntax to boolean
-            KeyOptionalWords to jsonArray { +string }
-            KeyDisableExactOnAttributes to jsonAttributes
-            KeyExactOnSingleWordQuery to ExactOnSingleWordQuery.Word.raw
-            KeyAlternativesAsExact to jsonArray { +AlternativesAsExact.IgnorePlurals.raw }
-            KeyDistinct to int
-            KeyGetRankingInfo to boolean
-            KeyClickAnalytics to boolean
-            KeyAnalytics to boolean
-            KeyAnalyticsTags to jsonArray { +string }
-            KeySynonyms to boolean
-            KeyReplaceSynonymsInHighlight to boolean
-            KeyMinProximity to int
-            KeyResponseFields to jsonArray { +ResponseFields.NbHits.raw }
-            KeyMaxFacetHits to int
-            KeyPercentileComputation to boolean
-        }
+        )
     )
 
     @Test
