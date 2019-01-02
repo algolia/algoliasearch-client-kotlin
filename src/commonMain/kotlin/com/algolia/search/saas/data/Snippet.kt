@@ -1,10 +1,10 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.asJsonInput
+import com.algolia.search.saas.serialize.asJsonOutput
 import com.algolia.search.saas.serialize.regexSnippet
 import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
@@ -25,9 +25,7 @@ data class Snippet(
     internal companion object : KSerializer<Snippet> {
 
         override fun serialize(output: Encoder, obj: Snippet) {
-            val json = output as JSON.JsonOutput
-
-            json.writeTree(JsonPrimitive(obj.raw))
+            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
         }
 
         override fun deserialize(input: Decoder): Snippet {

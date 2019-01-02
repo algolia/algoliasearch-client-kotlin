@@ -3,8 +3,6 @@ package com.algolia.search.saas.data
 import com.algolia.search.saas.serialize.*
 import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.*
-import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
@@ -26,9 +24,7 @@ sealed class CustomRanking(override val raw: String) : RawString {
     internal companion object : KSerializer<CustomRanking> {
 
         override fun serialize(output: Encoder, obj: CustomRanking) {
-            val json = output as JSON.JsonOutput
-
-            json.writeTree(JsonPrimitive(obj.raw))
+            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
         }
 
         override fun deserialize(input: Decoder): CustomRanking {

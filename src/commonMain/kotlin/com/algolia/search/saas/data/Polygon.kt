@@ -1,8 +1,8 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.asJsonInput
+import com.algolia.search.saas.serialize.asJsonOutput
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.jsonArray
 
@@ -42,9 +42,7 @@ data class Polygon(
     internal companion object : KSerializer<Polygon> {
 
         override fun serialize(output: Encoder, obj: Polygon) {
-            val json = output as JSON.JsonOutput
-
-            json.writeTree(jsonArray { obj.raw.forEach { +(it as Number) } })
+            output.asJsonOutput().writeTree(jsonArray { obj.raw.forEach { +(it as Number) } })
         }
 
         override fun deserialize(input: Decoder): Polygon {

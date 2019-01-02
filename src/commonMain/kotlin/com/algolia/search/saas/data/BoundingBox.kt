@@ -1,8 +1,8 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.asJsonInput
+import com.algolia.search.saas.serialize.asJsonOutput
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.jsonArray
 
@@ -21,9 +21,7 @@ data class BoundingBox(
     internal companion object : KSerializer<BoundingBox> {
 
         override fun serialize(output: Encoder, obj: BoundingBox) {
-            val json = output as JSON.JsonOutput
-
-            json.writeTree(jsonArray { obj.raw.forEach { +(it as Number) } })
+            output.asJsonOutput().writeTree(jsonArray { obj.raw.forEach { +(it as Number) } })
         }
 
         override fun deserialize(input: Decoder): BoundingBox {

@@ -1,9 +1,13 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.asJsonInput
+import com.algolia.search.saas.serialize.asJsonOutput
 import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.*
-import kotlinx.serialization.json.*
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.content
+import kotlinx.serialization.json.json
+import kotlinx.serialization.json.jsonArray
 
 
 @Serializable(DecompoundedAttributes.Companion::class)
@@ -17,14 +21,13 @@ data class DecompoundedAttributes internal constructor(val language: QueryLangua
     internal companion object : KSerializer<DecompoundedAttributes> {
 
         override fun serialize(output: Encoder, obj: DecompoundedAttributes) {
-            val json = output as JSON.JsonOutput
             val element = json {
                 obj.language.raw to jsonArray {
                     obj.attributes.forEach { +it.raw }
                 }
             }
 
-            json.writeTree(element)
+            output.asJsonOutput().writeTree(element)
         }
 
         override fun deserialize(input: Decoder): DecompoundedAttributes {

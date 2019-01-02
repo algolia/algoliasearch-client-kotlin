@@ -1,11 +1,7 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.KeyAttribute
-import com.algolia.search.saas.serialize.KeyNone
-import com.algolia.search.saas.serialize.KeyWord
-import com.algolia.search.saas.serialize.asJsonInput
+import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
@@ -43,9 +39,7 @@ sealed class ExactOnSingleWordQuery(override val raw: String) : RawString {
     internal companion object : KSerializer<ExactOnSingleWordQuery> {
 
         override fun serialize(output: Encoder, obj: ExactOnSingleWordQuery) {
-            val json = output as JSON.JsonOutput
-
-            json.writeTree(JsonPrimitive(obj.raw))
+            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
         }
 
         override fun deserialize(input: Decoder): ExactOnSingleWordQuery {

@@ -1,6 +1,7 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.asJsonInput
+import com.algolia.search.saas.serialize.asJsonOutput
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
@@ -20,13 +21,12 @@ sealed class BooleanOrQueryLanguages {
     internal companion object : KSerializer<BooleanOrQueryLanguages> {
 
         override fun serialize(output: Encoder, obj: BooleanOrQueryLanguages) {
-            val json = output as JSON.JsonOutput
             val element = when (obj) {
                 is Boolean -> JsonPrimitive(obj.boolean)
                 is QueryLanguages -> jsonArray { obj.queryLanguages.forEach { +it.raw } }
             }
 
-            json.writeTree(element)
+            output.asJsonOutput().writeTree(element)
         }
 
         override fun deserialize(input: Decoder): BooleanOrQueryLanguages {

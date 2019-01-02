@@ -3,8 +3,8 @@ package com.algolia.search.saas.data
 import com.algolia.search.saas.serialize.KeyMin
 import com.algolia.search.saas.serialize.KeyStrict
 import com.algolia.search.saas.serialize.asJsonInput
+import com.algolia.search.saas.serialize.asJsonOutput
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
 
@@ -28,13 +28,12 @@ sealed class TypoTolerance(override val raw: String) : RawString {
     internal companion object : KSerializer<TypoTolerance> {
 
         override fun serialize(output: Encoder, obj: TypoTolerance) {
-            val json = output as JSON.JsonOutput
             val element = when (obj) {
                 is Boolean -> JsonPrimitive(obj.boolean)
                 else -> JsonPrimitive(obj.raw)
             }
 
-            json.writeTree(element)
+            output.asJsonOutput().writeTree(element)
         }
 
         override fun deserialize(input: Decoder): TypoTolerance {
