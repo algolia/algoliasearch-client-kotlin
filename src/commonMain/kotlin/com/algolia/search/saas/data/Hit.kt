@@ -1,14 +1,14 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.asJsonInput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
+import com.algolia.search.saas.serialize.asJsonOutput
+import kotlinx.serialization.*
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.content
 
 
-@Serializable
+@Serializable(Hit.Companion::class)
 data class Hit(
     val serialized: String,
     val element: JsonElement
@@ -16,10 +16,15 @@ data class Hit(
 
     @Serializer(Hit::class)
     companion object : KSerializer<Hit> {
+
+        override fun serialize(output: Encoder, obj: Hit) {
+            output.asJsonOutput().writeTree(JsonLiteral(obj.serialized))
+        }
+
         override fun deserialize(input: Decoder): Hit {
             val json = input.asJsonInput()
 
-            return Hit(json.toString(), json)
+            return Hit(json.content, json)
         }
     }
 }
