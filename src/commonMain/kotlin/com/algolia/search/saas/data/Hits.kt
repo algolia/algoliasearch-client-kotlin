@@ -22,6 +22,6 @@ data class Hits(
     @Optional val nbPages: Int? = null,
     @Optional val offset: Int? = null,
     @Optional val length: Int? = null,
-    @Optional @Serializable(KSerializerFacets::class) val facets: Map<Attribute, Map<String, Int>>? = null,
+    @Optional @Serializable(KSerializerFacets::class) val facets: Map<Attribute, List<Facet>>? = null,
     @Optional val exhaustiveFacetsCount: Boolean? = null
 )
