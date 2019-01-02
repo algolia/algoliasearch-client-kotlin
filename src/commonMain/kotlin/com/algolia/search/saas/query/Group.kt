@@ -10,7 +10,12 @@ sealed class Group(open val name: String) {
         OrTag
     }
 
-    internal data class Key(val name: String, val type: Type)
+    internal data class Key(val name: String, val type: Type) {
+
+        override fun toString(): String {
+            return "Group($name, type=$type)"
+        }
+    }
 }
 
 data class GroupAnd(override val name: String) : Group(name)

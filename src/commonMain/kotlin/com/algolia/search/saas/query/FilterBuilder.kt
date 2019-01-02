@@ -10,8 +10,7 @@ import com.algolia.search.saas.data.Attribute
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
  */
 @QueryHelper
-class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) :
-    FilterBuilderInterface<Filter> {
+class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInterface<Filter> {
 
     private val groups: GroupMap<Filter> = mutableMapOf()
 
@@ -133,5 +132,13 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) :
             it.value.joinToString(prefix = prefix, postfix = postfix, separator = " OR ") { it.build() }
         }
         return ands + ors
+    }
+
+    fun printDebug() {
+        println(buildString {
+            groups.keys.sortedBy { it.name }.forEach {
+                append("$it : ${groups[it]}\n")
+            }
+        })
     }
 }

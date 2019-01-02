@@ -25,11 +25,20 @@ data class FilterTag(
 ) : Filter(Attribute("_tags")) {
 
     override val expression = "$attribute:\"$value\""
+
+    override fun toString(): String {
+        return "FilterTag($expression)"
+    }
 }
 
 sealed class FilterNumeric(
     override val attribute: Attribute
-) : Filter(attribute)
+) : Filter(attribute) {
+
+    override fun toString(): String {
+        return "FilterNumeric($expression)"
+    }
+}
 
 data class FilterComparison(
     override val attribute: Attribute,
@@ -38,6 +47,10 @@ data class FilterComparison(
 ) : FilterNumeric(attribute) {
 
     override val expression = "\"$attribute\" ${operator.raw} $value"
+
+    override fun toString(): String {
+        return "FilterComparison($expression)"
+    }
 }
 
 data class FilterRange(
@@ -47,6 +60,10 @@ data class FilterRange(
 ) : FilterNumeric(attribute) {
 
     override val expression = "\"$attribute\":$lowerBound TO $upperBound"
+
+    override fun toString(): String {
+        return "FilterRange($expression)"
+    }
 }
 
 data class FilterFacet internal constructor(
@@ -74,6 +91,10 @@ data class FilterFacet internal constructor(
     )
 
     override val expression: String = "\"$attribute\":${value.escape()}" + if (score != null) "<score=$score>" else ""
+
+    override fun toString(): String {
+        return "FilterFacet($expression)"
+    }
 }
 
 sealed class FacetValue<T> {
