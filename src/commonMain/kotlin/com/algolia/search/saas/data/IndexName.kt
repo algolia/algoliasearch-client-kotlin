@@ -1,7 +1,7 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.StringUTF8
-import com.algolia.search.saas.serialize.readAsTree
+import com.algolia.search.saas.serialize.asJsonInput
 import com.algolia.search.saas.toIndex
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
@@ -36,7 +36,7 @@ data class IndexName(
         }
 
         override fun deserialize(input: Decoder): IndexName {
-            val element = input.readAsTree() as JsonLiteral
+            val element = input.asJsonInput() as JsonLiteral
 
             return element.content.toIndex()
         }

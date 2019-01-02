@@ -1,7 +1,7 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.asJsonOutput
-import com.algolia.search.saas.serialize.readAsTree
+import com.algolia.search.saas.serialize.asJsonInput
 import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
@@ -23,7 +23,7 @@ internal object KSerializerFacetStats : KSerializer<Map<Attribute, FacetStats>> 
     }
 
     override fun deserialize(input: Decoder): Map<Attribute, FacetStats> {
-        val json = input.readAsTree().jsonObject
+        val json = input.asJsonInput().jsonObject
 
         return json.map { (key, element) ->
             key.toAttribute() to JSON.parse(FacetStats.serializer(), element.toString())

@@ -1,6 +1,6 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.readAsTree
+import com.algolia.search.saas.serialize.asJsonInput
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -17,7 +17,7 @@ data class Hit(
     @Serializer(Hit::class)
     companion object : KSerializer<Hit> {
         override fun deserialize(input: Decoder): Hit {
-            val json = input.readAsTree()
+            val json = input.asJsonInput()
 
             return Hit(json.toString(), json)
         }

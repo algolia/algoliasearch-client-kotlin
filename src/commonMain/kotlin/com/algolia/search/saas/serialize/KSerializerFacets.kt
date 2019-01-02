@@ -34,7 +34,7 @@ internal object KSerializerFacets : KSerializer<Map<Attribute, Map<String, Int>>
     }
 
     override fun deserialize(input: Decoder): Map<Attribute, Map<String, Int>> {
-        val json = input.readAsTree().jsonObject
+        val json = input.asJsonInput().jsonObject
 
         return json.map { (key, element) ->
             key.toAttribute() to element.jsonObject.toMap().map { it.key to it.value.int }.toMap()

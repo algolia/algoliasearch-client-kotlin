@@ -1,6 +1,6 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.readAsTree
+import com.algolia.search.saas.serialize.asJsonInput
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
@@ -30,7 +30,7 @@ sealed class BooleanOrQueryLanguages {
         }
 
         override fun deserialize(input: Decoder): BooleanOrQueryLanguages {
-            val element = input.readAsTree()
+            val element = input.asJsonInput()
 
             return when (element) {
                 is JsonArray -> QueryLanguages(element.map { QueryLanguage.convert(it.content) })

@@ -47,7 +47,7 @@ sealed class ResponseFields(override val raw: String) : RawString {
         }
 
         override fun deserialize(input: Decoder): ResponseFields {
-            val element = input.readAsTree() as JsonLiteral
+            val element = input.asJsonInput() as JsonLiteral
 
             return when (val content = element.content) {
                 KeyStar -> All

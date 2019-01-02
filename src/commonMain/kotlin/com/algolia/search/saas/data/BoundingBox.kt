@@ -1,6 +1,6 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.readAsTree
+import com.algolia.search.saas.serialize.asJsonInput
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonArray
@@ -27,7 +27,7 @@ data class BoundingBox(
         }
 
         override fun deserialize(input: Decoder): BoundingBox {
-            val element = input.readAsTree() as JsonArray
+            val element = input.asJsonInput() as JsonArray
 
             val array = element.jsonArray
 

@@ -1,6 +1,6 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.readAsTree
+import com.algolia.search.saas.serialize.asJsonInput
 import com.algolia.search.saas.serialize.regexSnippet
 import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.*
@@ -31,7 +31,7 @@ data class Snippet(
         }
 
         override fun deserialize(input: Decoder): Snippet {
-            val element = input.readAsTree() as JsonLiteral
+            val element = input.asJsonInput() as JsonLiteral
 
             val findSnippet = regexSnippet.find(element.content)
 

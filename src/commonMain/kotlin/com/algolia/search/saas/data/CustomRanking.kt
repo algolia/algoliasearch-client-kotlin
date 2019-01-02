@@ -32,7 +32,7 @@ sealed class CustomRanking(override val raw: String) : RawString {
         }
 
         override fun deserialize(input: Decoder): CustomRanking {
-            val element = input.readAsTree() as JsonLiteral
+            val element = input.asJsonInput() as JsonLiteral
 
             val findAsc = regexAsc.find(element.content)
             val findDesc = regexDesc.find(element.content)

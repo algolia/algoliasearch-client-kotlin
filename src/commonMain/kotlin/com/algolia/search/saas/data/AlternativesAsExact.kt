@@ -3,7 +3,7 @@ package com.algolia.search.saas.data
 import com.algolia.search.saas.serialize.KeyIgnorePlurals
 import com.algolia.search.saas.serialize.KeyMultiWordsSynonym
 import com.algolia.search.saas.serialize.KeySingleWordSynonym
-import com.algolia.search.saas.serialize.readAsTree
+import com.algolia.search.saas.serialize.asJsonInput
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JSON
 import kotlinx.serialization.json.JsonLiteral
@@ -44,7 +44,7 @@ sealed class AlternativesAsExact(override val raw: String) : RawString {
         }
 
         override fun deserialize(input: Decoder): AlternativesAsExact {
-            val element = input.readAsTree() as JsonLiteral
+            val element = input.asJsonInput() as JsonLiteral
 
             return when (val content = element.content) {
                 KeyIgnorePlurals -> IgnorePlurals

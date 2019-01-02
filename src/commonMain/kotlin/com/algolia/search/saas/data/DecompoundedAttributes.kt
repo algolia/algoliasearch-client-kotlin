@@ -1,6 +1,6 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.readAsTree
+import com.algolia.search.saas.serialize.asJsonInput
 import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
@@ -28,7 +28,7 @@ data class DecompoundedAttributes internal constructor(val language: QueryLangua
         }
 
         override fun deserialize(input: Decoder): DecompoundedAttributes {
-            val element = input.readAsTree() as JsonObject
+            val element = input.asJsonInput() as JsonObject
             val key = element.keys.first()
             val attributes = element.getArrayOrNull(key)?.map { it.content.toAttribute() }
 
