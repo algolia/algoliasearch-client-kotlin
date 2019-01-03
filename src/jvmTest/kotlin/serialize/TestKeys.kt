@@ -140,6 +140,8 @@ internal class TestKeys {
         KeySettings shouldEqual "settings"
         KeyScope shouldEqual "scope"
         KeyCursor shouldEqual "cursor"
+        KeyPartial shouldEqual "partial"
+        KeyFull shouldEqual "full"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

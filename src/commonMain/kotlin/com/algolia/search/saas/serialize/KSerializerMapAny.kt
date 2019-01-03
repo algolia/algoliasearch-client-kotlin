@@ -9,7 +9,7 @@ import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.*
 
 
-object KSerializerMapAny : SerializationStrategy<Map<String, Any?>> {
+internal object KSerializerMapAny : SerializationStrategy<Map<String, Any?>> {
 
     override val descriptor: SerialDescriptor = HashMapClassDesc(
         StringSerializer.descriptor,

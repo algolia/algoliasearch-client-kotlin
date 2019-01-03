@@ -1,6 +1,7 @@
-
 import com.algolia.search.saas.data.Attribute
+import com.algolia.search.saas.data.HighlightResult
 import com.algolia.search.saas.data.IndexName
+import com.algolia.search.saas.data.MatchLevel
 import com.algolia.search.saas.query.*
 import kotlinx.serialization.json.jsonArray
 
@@ -35,6 +36,7 @@ internal val rangeB = FilterRange(attributeB, 5.0, 10.0)
 internal val tagA = FilterTag("tagA")
 internal val tagB = FilterTag("tagB")
 internal val nestedLists = listOf(listOf(string), listOf(string))
+internal val highlightResult = HighlightResult("value", MatchLevel.None, listOf("string"), true)
 
 internal val jsonAttributes = jsonArray {
     +attributeA.raw

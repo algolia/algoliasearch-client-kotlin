@@ -1,29 +1,13 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
-import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonLiteral
+import com.algolia.search.saas.serialize.KSerializerHighlights
+import kotlinx.serialization.Optional
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
-@Serializable(Hit.Companion::class)
+@Serializable
 data class Hit(
-    val serialized: String,
-    val element: JsonElement
-) {
-
-    @Serializer(Hit::class)
-    companion object : KSerializer<Hit> {
-
-        override fun serialize(output: Encoder, obj: Hit) {
-            output.asJsonOutput().writeTree(JsonLiteral(obj.serialized))
-        }
-
-        override fun deserialize(input: Decoder): Hit {
-            val json = input.asJsonInput()
-
-            return Hit(json.toString(), json)
-        }
-    }
-}
+    @Optional @SerialName("_highlightResult") @Serializable(KSerializerHighlights::class)
+    val highlightResult: Map<Attribute, HighlightResult>? = null
+)

@@ -3,8 +3,8 @@ package serialize
 import attributeA
 import attributeB
 import com.algolia.search.saas.data.*
+import highlightResult
 import indexA
-import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
@@ -12,10 +12,12 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 internal class TestHits : TestSerializer<Hits>(Hits.serializer()) {
 
+    private val highlights = mapOf(attributeA to highlightResult)
+
     override val items = listOf(
         Hits(
             index = indexA,
-            hits = listOf(Hit("serialized", JsonLiteral("serialized"))),
+            hits = listOf(Hit(highlights)),
             cursor = Cursor("cursor"),
             facets = mapOf(attributeA to listOf(Facet("facet", 0))),
             facetStats = mapOf(attributeB to FacetStats(0, 1, 2f, 3f)),

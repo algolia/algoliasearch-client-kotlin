@@ -130,6 +130,8 @@ internal const val KeyRules = "rules"
 internal const val KeySettings = "settings"
 internal const val KeyScope = "scope"
 internal const val KeyCursor = "cursor"
+internal const val KeyPartial = "partial"
+internal const val KeyFull = "full"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"
