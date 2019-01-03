@@ -5,7 +5,6 @@ import com.algolia.search.saas.serialize.asJsonOutput
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.content
 
 
 @Serializable(Hit.Companion::class)
@@ -24,7 +23,7 @@ data class Hit(
         override fun deserialize(input: Decoder): Hit {
             val json = input.asJsonInput()
 
-            return Hit(json.content, json)
+            return Hit(json.toString(), json)
         }
     }
 }
