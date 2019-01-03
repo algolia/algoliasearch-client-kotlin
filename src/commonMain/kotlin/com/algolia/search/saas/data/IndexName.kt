@@ -18,8 +18,8 @@ data class IndexName(
         return StringUTF8.encode(raw)
     }
 
-    internal fun pathIndexes(suffix: String = ""): String {
-        return "/1/indexes/${encode().string}" + suffix
+    internal fun pathIndexes(suffix: String? = null): String {
+        return "/1/indexes/${encode().string}" + (suffix ?: "")
     }
 
     override fun toString(): String {

@@ -2,8 +2,8 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.IndexName
 import com.algolia.search.saas.data.Scope
-import com.algolia.search.saas.data.Task
 import com.algolia.search.saas.data.TaskDelete
+import com.algolia.search.saas.data.TaskUpdate
 import com.algolia.search.saas.serialize.*
 import io.ktor.client.request.delete
 import io.ktor.client.request.post
@@ -22,10 +22,10 @@ class ClientIndices(
         key: String,
         scopes: List<Scope>? = null,
         requestOptions: RequestOptions?
-    ): Task {
+    ): TaskUpdate {
         return client.run {
-            write.retry(writeTimeout, indexName.pathIndexes("/operation")) { path ->
-                httpClient.post<Task>(path) {
+            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/operation")) { path ->
+                httpClient.post<TaskUpdate>(path) {
                     setRequestOptions(requestOptions)
                     body = json {
                         KeyOperation to key
@@ -41,17 +41,17 @@ class ClientIndices(
         destination: IndexName,
         scopes: List<Scope>?,
         requestOptions: RequestOptions?
-    ): Task {
+    ): TaskUpdate {
         return copyOrMove(destination, KeyCopy, scopes, requestOptions)
     }
 
-    override suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions?): Task {
+    override suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions?): TaskUpdate {
         return copyOrMove(destination, KeyMove, null, requestOptions)
     }
 
     override suspend fun deleteIndex(requestOptions: RequestOptions?): TaskDelete {
         return client.run {
-            write.retry(writeTimeout, indexName.pathIndexes()) { path ->
+            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
                 httpClient.delete<TaskDelete>(path) {
                     setRequestOptions(requestOptions)
                 }

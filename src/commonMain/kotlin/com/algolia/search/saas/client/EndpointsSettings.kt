@@ -3,7 +3,7 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.data.IndexName
 import com.algolia.search.saas.data.Settings
 import com.algolia.search.saas.data.SettingsKey
-import com.algolia.search.saas.data.Task
+import com.algolia.search.saas.data.TaskUpdate
 
 
 interface EndpointsSettings {
@@ -17,5 +17,5 @@ interface EndpointsSettings {
         resetToDefault: List<SettingsKey> = listOf(),
         forwardToReplicas: Boolean = false,
         requestOptions: RequestOptions? = null
-    ): Task
+    ): TaskUpdate
 }
