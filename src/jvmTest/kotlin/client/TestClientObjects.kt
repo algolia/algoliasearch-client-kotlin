@@ -1,5 +1,6 @@
 package client
 
+import com.algolia.search.saas.data.Attribute
 import com.algolia.search.saas.data.Object
 import com.algolia.search.saas.data.ObjectId
 import com.algolia.search.saas.data.TaskStatus
@@ -86,6 +87,28 @@ internal class TestClientObjects {
 
                 index.run {
                     getObject(Product.serializer(), objectId) shouldEqual product
+                }
+            }
+        }
+    }
+
+    @Test
+    fun getObjectSearchableAttributes() {
+        runBlocking {
+            index.run {
+                val objectId = ObjectId("442854")
+                val product = Product(
+                    brand = "Hermès",
+                    name = "Birkin 35 So Black",
+                    objectID = objectId
+                )
+
+                index.run {
+                    getObject(
+                        Product.serializer(),
+                        objectId,
+                        listOf(Attribute("brand"), Attribute("name"))
+                    ) shouldEqual product
                 }
             }
         }
