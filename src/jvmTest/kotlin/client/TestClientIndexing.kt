@@ -14,7 +14,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-internal class TestClientObjects {
+internal class TestClientIndexing {
 
     @Serializable
     private data class Data(

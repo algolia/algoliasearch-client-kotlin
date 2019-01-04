@@ -4,7 +4,7 @@ import com.algolia.search.saas.data.*
 import kotlinx.serialization.KSerializer
 
 
-interface EndpointsObjects {
+interface EndpointsIndexing {
 
     val indexName: IndexName
 

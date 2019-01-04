@@ -10,4 +10,4 @@ data class Index(
     EndpointsSettings by ClientSettings(client, indexName),
     EndpointsAdvanced by ClientAdvanced(client, indexName),
     EndpointsIndices by ClientIndices(client, indexName),
-    EndpointsObjects by ClientObjects(client, indexName)
+    EndpointsIndexing by ClientIndexing(client, indexName)

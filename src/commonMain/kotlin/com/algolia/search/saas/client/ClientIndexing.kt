@@ -8,10 +8,10 @@ import kotlinx.serialization.json.JSON
 import kotlinx.serialization.list
 
 
-class ClientObjects(
+class ClientIndexing(
     val client: Client,
     override val indexName: IndexName
-) : EndpointsObjects {
+) : EndpointsIndexing {
 
     override suspend fun <T> addObject(
         data: T,
