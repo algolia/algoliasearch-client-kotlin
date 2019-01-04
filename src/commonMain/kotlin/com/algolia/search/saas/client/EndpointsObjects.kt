@@ -21,5 +21,15 @@ interface EndpointsObjects {
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
-    suspend fun deleteObject(objectId: ObjectId, requestOptions: RequestOptions? = null): TaskDelete
+    suspend fun deleteObject(
+        objectId: ObjectId,
+        requestOptions: RequestOptions? = null
+    ): TaskDelete
+
+    suspend fun <T : Object> getObject(
+        serializer: KSerializer<T>,
+        objectId: ObjectId,
+        attributes: List<Attribute>? = null,
+        requestOptions: RequestOptions? = null
+    ): T
 }

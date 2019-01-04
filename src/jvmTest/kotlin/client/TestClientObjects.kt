@@ -1,8 +1,10 @@
 package client
 
+import com.algolia.search.saas.data.Object
 import com.algolia.search.saas.data.ObjectId
 import com.algolia.search.saas.data.TaskStatus
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,6 +21,20 @@ internal class TestClientObjects {
         val name: String
     )
 
+    @Serializable
+    private data class Product(
+        @Optional val brand: String? = null,
+        @Optional val name: String? = null,
+        @Optional val price: Int? = null,
+        @Optional val color: String? = null,
+        @Optional val material: String? = null,
+        @Optional val cotton: String? = null,
+        @Optional val nbView: Int? = null,
+        @Optional val nbLike: Int? = null,
+        @Optional val nbWish: Int? = null,
+        override val objectID: ObjectId
+    ) : Object
+
     @Test
     fun addObject() {
         runBlocking {
@@ -28,7 +44,7 @@ internal class TestClientObjects {
 
                 taskCreate.status shouldEqual TaskStatus.Published
 
-                val taskDelete = deleteObject(create.objectId).wait()
+                val taskDelete = deleteObject(create.objectID).wait()
 
                 taskDelete.status shouldEqual TaskStatus.Published
             }
@@ -47,6 +63,30 @@ internal class TestClientObjects {
                 val taskInfoDelete = deleteObject(objectId).wait()
 
                 taskInfoDelete.status shouldEqual TaskStatus.Published
+            }
+        }
+    }
+
+    @Test
+    fun getObject() {
+        runBlocking {
+            index.run {
+                val objectId = ObjectId("442854")
+                val product = Product(
+                    brand = "Hermès",
+                    name = "Birkin 35 So Black",
+                    price = 18500,
+                    color = "Black",
+                    material = "Leather",
+                    nbView = 5226,
+                    nbLike = 381,
+                    nbWish = 241,
+                    objectID = objectId
+                )
+
+                index.run {
+                    getObject(Product.serializer(), objectId) shouldEqual product
+                }
             }
         }
     }

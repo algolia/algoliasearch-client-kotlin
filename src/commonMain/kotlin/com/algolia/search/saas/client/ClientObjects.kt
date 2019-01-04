@@ -1,11 +1,11 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
-import io.ktor.client.request.delete
-import io.ktor.client.request.post
-import io.ktor.client.request.put
+import com.algolia.search.saas.serialize.KeyAttributesToRetrieve
+import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JSON
+import kotlinx.serialization.list
 
 
 class ClientObjects(
@@ -35,7 +35,7 @@ class ClientObjects(
     ): TaskUpdateObject {
         return client.run {
             write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId")) { path ->
-                httpClient.put<TaskUpdateObject> {
+                httpClient.put<TaskUpdateObject>(path) {
                     body = JSON.stringify(serializer, data)
                 }
             }
@@ -46,6 +46,23 @@ class ClientObjects(
         return client.run {
             write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId")) { path ->
                 httpClient.delete<TaskDelete>(path)
+            }
+        }
+    }
+
+    override suspend fun <T : Object> getObject(
+        serializer: KSerializer<T>,
+        objectId: ObjectId,
+        attributes: List<Attribute>?,
+        requestOptions: RequestOptions?
+    ): T {
+        return client.run {
+            read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/$objectId")) { path ->
+                httpClient.get<String>(path) {
+                    attributes?.let {
+                        parameter(KeyAttributesToRetrieve, JSON.stringify(Attribute.list, it))
+                    }
+                }.let { JSON.nonstrict.parse(serializer, it) }
             }
         }
     }
