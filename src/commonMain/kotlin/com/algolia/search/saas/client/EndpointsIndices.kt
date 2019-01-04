@@ -2,7 +2,7 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.IndexName
 import com.algolia.search.saas.data.Scope
-import com.algolia.search.saas.data.TaskUpdate
+import com.algolia.search.saas.data.TaskUpdateIndex
 import com.algolia.search.saas.data.TaskDelete
 
 
@@ -14,9 +14,9 @@ interface EndpointsIndices {
         destination: IndexName,
         scopes: List<Scope>? = null,
         requestOptions: RequestOptions? = null
-    ): TaskUpdate
+    ): TaskUpdateIndex
 
-    suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions? = null): TaskUpdate
+    suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions? = null): TaskUpdateIndex
 
     suspend fun deleteIndex(requestOptions: RequestOptions? = null): TaskDelete
 }

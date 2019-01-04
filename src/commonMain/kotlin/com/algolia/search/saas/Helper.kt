@@ -15,6 +15,10 @@ fun String.toCursor(): Cursor {
     return Cursor(this)
 }
 
+fun String.toObjectId(): ObjectId {
+    return ObjectId(this)
+}
+
 infix fun Float.to(longitude: Float): Point {
     return Point(this, longitude)
 }

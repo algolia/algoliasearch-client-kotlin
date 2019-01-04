@@ -9,4 +9,5 @@ data class Index(
 ) : EndpointsSearch by ClientSearch(client, indexName),
     EndpointsSettings by ClientSettings(client, indexName),
     EndpointsAdvanced by ClientAdvanced(client, indexName),
-    EndpointsIndices by ClientIndices(client, indexName)
+    EndpointsIndices by ClientIndices(client, indexName),
+    EndpointsObjects by ClientObjects(client, indexName)

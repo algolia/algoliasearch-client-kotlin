@@ -3,7 +3,7 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.data.IndexName
 import com.algolia.search.saas.data.Scope
 import com.algolia.search.saas.data.TaskDelete
-import com.algolia.search.saas.data.TaskUpdate
+import com.algolia.search.saas.data.TaskUpdateIndex
 import com.algolia.search.saas.serialize.*
 import io.ktor.client.request.delete
 import io.ktor.client.request.post
@@ -22,10 +22,10 @@ class ClientIndices(
         key: String,
         scopes: List<Scope>? = null,
         requestOptions: RequestOptions?
-    ): TaskUpdate {
+    ): TaskUpdateIndex {
         return client.run {
             write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/operation")) { path ->
-                httpClient.post<TaskUpdate>(path) {
+                httpClient.post<TaskUpdateIndex>(path) {
                     setRequestOptions(requestOptions)
                     body = json {
                         KeyOperation to key
@@ -41,11 +41,11 @@ class ClientIndices(
         destination: IndexName,
         scopes: List<Scope>?,
         requestOptions: RequestOptions?
-    ): TaskUpdate {
+    ): TaskUpdateIndex {
         return copyOrMove(destination, KeyCopy, scopes, requestOptions)
     }
 
-    override suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions?): TaskUpdate {
+    override suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions?): TaskUpdateIndex {
         return copyOrMove(destination, KeyMove, null, requestOptions)
     }
 

@@ -1,10 +1,11 @@
 package com.algolia.search.saas.data
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class TaskUpdate(
+data class TaskUpdateIndex(
     val updatedAt: String,
-    override val taskID: Long
+    @SerialName("taskID") override val taskId: Long
 ) : TaskId

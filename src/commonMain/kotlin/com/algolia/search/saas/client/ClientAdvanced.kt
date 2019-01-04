@@ -19,7 +19,7 @@ class ClientAdvanced(
         var attempt = 1
 
         while (true) {
-            getTask(taskID).let {
+            getTask(taskId).let {
                 if (it.status == TaskStatus.Published) return it
             }
             delay((timeToWait * attempt).coerceAtMost(maxTimeToWait))
@@ -36,6 +36,6 @@ class ClientAdvanced(
     }
 
     override suspend fun getTask(taskId: TaskId): TaskInfo {
-        return getTask(taskId.taskID)
+        return getTask(taskId.taskId)
     }
 }

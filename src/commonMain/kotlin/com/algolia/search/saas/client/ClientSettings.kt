@@ -3,7 +3,7 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.data.IndexName
 import com.algolia.search.saas.data.Settings
 import com.algolia.search.saas.data.SettingsKey
-import com.algolia.search.saas.data.TaskUpdate
+import com.algolia.search.saas.data.TaskUpdateIndex
 import com.algolia.search.saas.serialize.KeyForwardToReplicas
 import com.algolia.search.saas.serialize.encodeNoNulls
 import io.ktor.client.request.get
@@ -33,10 +33,10 @@ class ClientSettings(
         resetToDefault: List<SettingsKey>,
         forwardToReplicas: Boolean,
         requestOptions: RequestOptions?
-    ): TaskUpdate {
+    ): TaskUpdateIndex {
         return client.run {
             write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
-                httpClient.put<TaskUpdate>(path) {
+                httpClient.put<TaskUpdateIndex>(path) {
                     setRequestOptions(requestOptions)
                     val map = settings
                         .encodeNoNulls()

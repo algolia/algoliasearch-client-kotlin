@@ -1,9 +1,10 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.IndexName
-import com.algolia.search.saas.data.TaskCreate
-import com.algolia.search.saas.serialize.KSerializerMapAny
+import com.algolia.search.saas.data.*
+import io.ktor.client.request.delete
 import io.ktor.client.request.post
+import io.ktor.client.request.put
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JSON
 
 
@@ -12,18 +13,39 @@ class ClientObjects(
     override val indexName: IndexName
 ) : EndpointsObjects {
 
-    override suspend fun addObject(
-        data: Map<String, Any?>,
-        objectId: String?,
+    override suspend fun <T> addObject(
+        data: T,
+        serializer: KSerializer<T>,
         requestOptions: RequestOptions?
     ): TaskCreate {
         return client.run {
-            val suffix = if (objectId != null) "/$objectId" else null
-
-            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes(suffix)) { path ->
+            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
                 httpClient.post<TaskCreate>(path) {
-                    body = JSON.stringify(KSerializerMapAny, data)
+                    body = JSON.stringify(serializer, data)
                 }
+            }
+        }
+    }
+
+    override suspend fun <T> updateObject(
+        data: T,
+        serializer: KSerializer<T>,
+        objectId: ObjectId,
+        requestOptions: RequestOptions?
+    ): TaskUpdateObject {
+        return client.run {
+            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId")) { path ->
+                httpClient.put<TaskUpdateObject> {
+                    body = JSON.stringify(serializer, data)
+                }
+            }
+        }
+    }
+
+    override suspend fun deleteObject(objectId: ObjectId, requestOptions: RequestOptions?): TaskDelete {
+        return client.run {
+            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId")) { path ->
+                httpClient.delete<TaskDelete>(path)
             }
         }
     }
