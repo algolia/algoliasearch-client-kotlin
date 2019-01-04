@@ -1,7 +1,7 @@
 package com.algolia.search.saas.data
 
 
-interface Object {
+interface Indexable {
 
     val objectID: ObjectId
 }

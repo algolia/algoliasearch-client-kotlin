@@ -50,7 +50,7 @@ class ClientIndexing(
         }
     }
 
-    override suspend fun <T : Object> getObject(
+    override suspend fun <T : Indexable> getObject(
         serializer: KSerializer<T>,
         objectId: ObjectId,
         attributes: List<Attribute>?,

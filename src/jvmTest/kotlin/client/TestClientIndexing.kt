@@ -1,7 +1,7 @@
 package client
 
 import com.algolia.search.saas.data.Attribute
-import com.algolia.search.saas.data.Object
+import com.algolia.search.saas.data.Indexable
 import com.algolia.search.saas.data.ObjectId
 import com.algolia.search.saas.data.TaskStatus
 import kotlinx.coroutines.runBlocking
@@ -34,7 +34,7 @@ internal class TestClientIndexing {
         @Optional val nbLike: Int? = null,
         @Optional val nbWish: Int? = null,
         override val objectID: ObjectId
-    ) : Object
+    ) : Indexable
 
     @Test
     fun addObject() {

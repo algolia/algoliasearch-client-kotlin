@@ -26,7 +26,7 @@ interface EndpointsIndexing {
         requestOptions: RequestOptions? = null
     ): TaskDelete
 
-    suspend fun <T : Object> getObject(
+    suspend fun <T : Indexable> getObject(
         serializer: KSerializer<T>,
         objectId: ObjectId,
         attributes: List<Attribute>? = null,
