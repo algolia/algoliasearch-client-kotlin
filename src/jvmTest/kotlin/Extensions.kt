@@ -1,9 +1,9 @@
+
 import com.algolia.search.saas.data.Attribute
 import com.algolia.search.saas.data.HighlightResult
 import com.algolia.search.saas.data.IndexName
 import com.algolia.search.saas.data.MatchLevel
 import com.algolia.search.saas.query.*
-import kotlinx.serialization.json.jsonArray
 
 
 internal fun groupMap(): GroupMap<Filter> = mutableMapOf()
@@ -38,13 +38,5 @@ internal val tagB = FilterTag("tagB")
 internal val nestedLists = listOf(listOf(string), listOf(string))
 internal val highlightResult = HighlightResult("value", MatchLevel.None, listOf("string"), true)
 
-internal val jsonAttributes = jsonArray {
-    +attributeA.raw
-    +attributeB.raw
-}
-internal val jsonNestedLists = jsonArray {
-    +jsonArray { +string }
-    +jsonArray { +string }
-}
 
 internal fun FilterBuilder.buildTest() = build().replace("\"", "")
