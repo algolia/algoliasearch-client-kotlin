@@ -66,4 +66,14 @@ class ClientIndexing(
             }
         }
     }
+
+    override suspend fun clearObjects(requestOptions: RequestOptions?): TaskUpdateIndex {
+        return client.run {
+            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/clear")) { path ->
+                httpClient.post<TaskUpdateIndex>(path) {
+                    body = ""
+                }
+            }
+        }
+    }
 }

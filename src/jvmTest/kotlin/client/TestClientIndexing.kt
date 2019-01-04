@@ -113,4 +113,16 @@ internal class TestClientIndexing {
             }
         }
     }
+
+    @Test
+    fun clear() {
+        runBlocking {
+            index.run {
+                copyIndex(copy.indexName).wait().status shouldEqual TaskStatus.Published
+            }
+            copy.run {
+                clearObjects().wait().status shouldEqual TaskStatus.Published
+            }
+        }
+    }
 }

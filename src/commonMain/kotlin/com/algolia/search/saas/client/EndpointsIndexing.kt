@@ -32,4 +32,6 @@ interface EndpointsIndexing {
         attributes: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
     ): T
+
+    suspend fun clearObjects(requestOptions: RequestOptions? = null): TaskUpdateIndex
 }
