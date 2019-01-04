@@ -8,7 +8,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(CustomRanking.Companion::class)
-sealed class CustomRanking(override val raw: String) : RawString {
+sealed class CustomRanking(override val raw: String) : Raw<String> {
 
     data class Asc(val attribute: Attribute) : CustomRanking("$KeyAsc($attribute)")
 

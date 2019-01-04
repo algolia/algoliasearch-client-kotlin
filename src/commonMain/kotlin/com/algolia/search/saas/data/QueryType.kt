@@ -7,7 +7,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(QueryType.Companion::class)
-sealed class QueryType(override val raw: String) : RawString {
+sealed class QueryType(override val raw: String) : Raw<String> {
 
     /**
      *  Only the last word is interpreted as a prefix (default behavior).

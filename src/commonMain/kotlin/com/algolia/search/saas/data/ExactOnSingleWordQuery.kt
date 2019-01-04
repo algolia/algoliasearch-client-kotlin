@@ -7,7 +7,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(ExactOnSingleWordQuery.Companion::class)
-sealed class ExactOnSingleWordQuery(override val raw: String) : RawString {
+sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<String> {
 
     /**
      * The exact ranking criterion is set to 1 if the query matches exactly an entire attribute value (default behavior).

@@ -7,7 +7,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(AlternativesAsExact.Companion::class)
-sealed class AlternativesAsExact(override val raw: String) : RawString {
+sealed class AlternativesAsExact(override val raw: String) : Raw<String> {
 
     /**
      * Alternative words added by the [Query.ignorePlurals] feature.

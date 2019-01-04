@@ -10,7 +10,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(TaskStatus.Companion::class)
-sealed class TaskStatus(override val raw: String) : RawString {
+sealed class TaskStatus(override val raw: String) : Raw<String> {
 
     object Published : TaskStatus(KeyPublished)
 

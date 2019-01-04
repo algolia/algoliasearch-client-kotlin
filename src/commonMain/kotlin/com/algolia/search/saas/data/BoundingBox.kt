@@ -13,7 +13,7 @@ data class BoundingBox(
     val point2: Float,
     val point3: Float,
     val point4: Float
-) : RawFloats {
+) : Raw<List<Float>> {
 
     override val raw = listOf(point1, point2, point3, point4)
 

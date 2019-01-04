@@ -10,7 +10,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(TypoTolerance.Companion::class)
-sealed class TypoTolerance(override val raw: String) : RawString {
+sealed class TypoTolerance(override val raw: String) : Raw<String> {
 
     data class Boolean(val boolean: kotlin.Boolean) : TypoTolerance(boolean.toString())
 

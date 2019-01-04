@@ -10,7 +10,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(SortFacetValuesBy.Companion::class)
-sealed class SortFacetValuesBy(override val raw: String) : RawString {
+sealed class SortFacetValuesBy(override val raw: String) : Raw<String> {
 
     /**
      * FacetFilter values are sorted by decreasing count.

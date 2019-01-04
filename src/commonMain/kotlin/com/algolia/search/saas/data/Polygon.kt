@@ -13,7 +13,7 @@ data class Polygon(
     val point2: Point,
     val point3: Point,
     private val points: List<Point>
-) : RawFloats {
+) : Raw<List<Float>> {
 
     constructor(point1: Point, point2: Point, point3: Point, vararg points: Point) : this(
         point1,

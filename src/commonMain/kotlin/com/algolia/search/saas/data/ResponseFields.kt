@@ -7,7 +7,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(ResponseFields.Companion::class)
-sealed class ResponseFields(override val raw: String) : RawString {
+sealed class ResponseFields(override val raw: String) : Raw<String> {
 
     object All : ResponseFields(KeyStar)
     object AroundLatLng : ResponseFields(KeyAroundLatLng)

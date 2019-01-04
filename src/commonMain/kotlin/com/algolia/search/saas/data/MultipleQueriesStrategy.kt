@@ -10,7 +10,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(MultipleQueriesStrategy.Companion::class)
-sealed class MultipleQueriesStrategy(override val raw: String) : RawString {
+sealed class MultipleQueriesStrategy(override val raw: String) : Raw<String> {
 
     object None : MultipleQueriesStrategy(KeyNone)
 

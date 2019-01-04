@@ -19,6 +19,11 @@ fun String.toObjectId(): ObjectId {
     return ObjectId(this)
 }
 
+fun Long.toTaskId(): TaskId {
+    return TaskId(this)
+}
+
+
 infix fun Float.to(longitude: Float): Point {
     return Point(this, longitude)
 }

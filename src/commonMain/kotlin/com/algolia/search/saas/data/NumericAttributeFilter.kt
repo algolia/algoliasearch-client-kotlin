@@ -11,7 +11,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(NumericAttributeFilter.Companion::class)
-data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boolean = false) : RawString {
+data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boolean = false) : Raw<String> {
 
     override val raw = if (equalOnly) "$KeyEqualOnly($attribute)" else attribute.raw
 

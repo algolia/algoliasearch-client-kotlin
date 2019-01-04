@@ -9,7 +9,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(AroundRadius.Companion::class)
-sealed class AroundRadius(override val raw: String) : RawString {
+sealed class AroundRadius(override val raw: String) : Raw<String> {
 
     object All : AroundRadius(KeyAll)
 

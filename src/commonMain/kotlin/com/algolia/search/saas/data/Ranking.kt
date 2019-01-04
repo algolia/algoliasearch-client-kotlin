@@ -8,7 +8,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(Ranking.Companion::class)
-sealed class Ranking(override val raw: String) : RawString {
+sealed class Ranking(override val raw: String) : Raw<String> {
 
     object Typo : Ranking(KeyTypo)
 

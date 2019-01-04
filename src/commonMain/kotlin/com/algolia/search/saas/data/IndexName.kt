@@ -12,7 +12,7 @@ import kotlinx.serialization.json.JsonPrimitive
 @Serializable(IndexName.Companion::class)
 data class IndexName(
     override val raw: String
-) : RawString {
+) : Raw<String> {
 
     private fun encode(): StringUTF8 {
         return StringUTF8.encode(raw)

@@ -7,7 +7,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(RemoveWordIfNoResults.Companion::class)
-sealed class RemoveWordIfNoResults(override val raw: String) : RawString {
+sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String> {
 
     /**
      * No specific processing is done when a query does not return any results (default behavior).

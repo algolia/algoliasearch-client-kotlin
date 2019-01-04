@@ -8,7 +8,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(QueryLanguage.Companion::class)
-sealed class QueryLanguage(override val raw: String) : RawString {
+sealed class QueryLanguage(override val raw: String) : Raw<String> {
 
     object Afrikaans : QueryLanguage(KeyAfrikaans)
     object Arabic : QueryLanguage(KeyArabic)

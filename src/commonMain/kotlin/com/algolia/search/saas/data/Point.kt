@@ -11,7 +11,7 @@ import kotlinx.serialization.json.jsonArray
 data class Point(
     val latitude: Float,
     val longitude: Float
-) : RawFloats {
+) : Raw<List<Float>> {
 
     override val raw = listOf(latitude, longitude)
 

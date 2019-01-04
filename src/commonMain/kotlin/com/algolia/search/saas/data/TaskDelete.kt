@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TaskDelete(
     val deletedAt: String,
-    override val taskID: Long
-) : TaskId
+    override val taskID: TaskId
+) : Task

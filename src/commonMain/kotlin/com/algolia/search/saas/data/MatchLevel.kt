@@ -7,7 +7,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(MatchLevel.Companion::class)
-sealed class MatchLevel(override val raw: String) : RawString {
+sealed class MatchLevel(override val raw: String) : Raw<String> {
 
     object None : MatchLevel(KeyNone)
 

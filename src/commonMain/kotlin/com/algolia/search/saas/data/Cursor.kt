@@ -11,7 +11,7 @@ import kotlinx.serialization.json.JsonPrimitive
 @Serializable
 data class Cursor(
     override val raw: String
-) : RawString {
+) : Raw<String> {
 
     override fun toString(): String {
         return raw

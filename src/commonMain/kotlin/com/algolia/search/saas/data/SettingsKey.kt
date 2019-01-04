@@ -3,7 +3,7 @@ package com.algolia.search.saas.data
 import com.algolia.search.saas.serialize.*
 
 
-sealed class SettingsKey(override val raw: String) : RawString {
+sealed class SettingsKey(override val raw: String) : Raw<String> {
 
     object SearchableAttributes : SettingsKey(KeySearchableAttributes)
 

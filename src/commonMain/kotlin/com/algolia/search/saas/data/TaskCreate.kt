@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 data class TaskCreate(
     val createdAt: String,
     val objectID: ObjectId,
-    override val taskID: Long
-) : TaskId
+    override val taskID: TaskId
+) : Task

@@ -13,7 +13,7 @@ import kotlinx.serialization.json.JsonPrimitive
 data class Snippet(
     val attribute: Attribute,
     val count: Int? = null
-) : RawString {
+) : Raw<String> {
 
     override val raw = attribute.raw + if (count != null) ":$count" else ""
 

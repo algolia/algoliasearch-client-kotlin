@@ -17,7 +17,7 @@ class TestClientAdvanced {
         runBlocking {
             val task = index.setSettings(Settings())
 
-            println(index.getTask(task))
+            println(index.getTask(task.taskID))
         }
     }
 

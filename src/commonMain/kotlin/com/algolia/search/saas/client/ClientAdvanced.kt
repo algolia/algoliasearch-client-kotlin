@@ -1,9 +1,6 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.IndexName
-import com.algolia.search.saas.data.TaskId
-import com.algolia.search.saas.data.TaskInfo
-import com.algolia.search.saas.data.TaskStatus
+import com.algolia.search.saas.data.*
 import io.ktor.client.request.get
 import kotlinx.coroutines.delay
 
@@ -15,7 +12,7 @@ class ClientAdvanced(
 
     override val maxTimeToWait = 10000L
 
-    override suspend fun TaskId.wait(timeToWait: Long): TaskInfo {
+    override suspend fun Task.wait(timeToWait: Long): TaskInfo {
         var attempt = 1
 
         while (true) {
@@ -27,15 +24,11 @@ class ClientAdvanced(
         }
     }
 
-    override suspend fun getTask(taskId: Long): TaskInfo {
+    override suspend fun getTask(taskId: TaskId): TaskInfo {
         return client.run {
             read.retry(readTimeout, indexName.pathIndexes("/task/$taskId")) { path ->
                 httpClient.get<TaskInfo>(path)
             }
         }
-    }
-
-    override suspend fun getTask(taskId: TaskId): TaskInfo {
-        return getTask(taskId.taskID)
     }
 }

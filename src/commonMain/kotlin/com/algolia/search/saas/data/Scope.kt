@@ -7,7 +7,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(Scope.Companion::class)
-sealed class Scope(override val raw: String) : RawString {
+sealed class Scope(override val raw: String) : Raw<String> {
 
     object Settings : Scope(KeySettings)
 

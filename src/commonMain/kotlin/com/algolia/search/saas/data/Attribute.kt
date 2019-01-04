@@ -9,7 +9,7 @@ import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(Attribute.Companion::class)
-data class Attribute(override val raw: String) : RawString {
+data class Attribute(override val raw: String) : Raw<String> {
 
     override fun toString(): String {
         return raw
