@@ -13,12 +13,9 @@ import shouldEqual
 @RunWith(JUnit4::class)
 internal class TestClientIndices {
 
-    private val copy = client.getIndex(IndexName("products_android_demo_copy"))
-    private val destination = client.getIndex(IndexName("products_android_demo_move"))
-
     private suspend fun deleteIndex(index: Index) {
         index.run {
-            index.deleteIndex().wait().status shouldEqual Published
+            deleteIndex().wait().status shouldEqual Published
         }
     }
 
@@ -34,13 +31,13 @@ internal class TestClientIndices {
 
     private suspend fun copyIndex(index: Index, destination: IndexName) {
         index.run {
-            index.copyIndex(destination).wait().status shouldEqual Published
+            copyIndex(destination).wait().status shouldEqual Published
         }
     }
 
     private suspend fun moveIndex(index: Index, destination: IndexName) {
         index.run {
-            index.moveIndex(destination).wait().status shouldEqual Published
+            moveIndex(destination).wait().status shouldEqual Published
         }
     }
 
