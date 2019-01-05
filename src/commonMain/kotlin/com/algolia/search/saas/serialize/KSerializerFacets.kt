@@ -7,11 +7,10 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.internal.HashMapClassDesc
+import kotlinx.serialization.internal.HashMapSerializer
 import kotlinx.serialization.internal.IntSerializer
 import kotlinx.serialization.internal.StringSerializer
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.int
+import kotlinx.serialization.json.Json
 
 
 internal object KSerializerFacets : KSerializer<Map<Attribute, List<Facet>>> {
@@ -24,21 +23,17 @@ internal object KSerializerFacets : KSerializer<Map<Attribute, List<Facet>>> {
         )
     )
 
-    override fun serialize(encoder: Encoder, obj: Map<Attribute, List<Facet>>) {
-        val element = obj.map {
-            it.key.raw to JsonObject(it.value.map {
-                it.name to JsonLiteral(it.count)
-            }.toMap())
-        }.toMap()
+    private val serializer = HashMapSerializer(StringSerializer, HashMapSerializer(StringSerializer, IntSerializer))
 
-        encoder.asJsonOutput().encodeJson(JsonObject(element.toMap()))
+    override fun serialize(encoder: Encoder, obj: Map<Attribute, List<Facet>>) {
+        val element = obj.map { (key, value) -> key.raw to value.map { it.name to it.count }.toMap() }.toMap()
+
+        serializer.serialize(encoder, element)
     }
 
     override fun deserialize(decoder: Decoder): Map<Attribute, List<Facet>> {
-        val json = decoder.asJsonInput().jsonObject
+        val json = Json.nonstrict.fromJson(decoder.asJsonInput(), serializer)
 
-        return json.map { (key, element) ->
-            key.toAttribute() to element.jsonObject.map { Facet(it.key, it.value.int) }
-        }.toMap()
+        return json.map { (key, value) -> key.toAttribute() to value.map { Facet(it.key, it.value) } }.toMap()
     }
 }
