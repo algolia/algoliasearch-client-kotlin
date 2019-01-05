@@ -3,11 +3,14 @@ package client
 import com.algolia.search.saas.data.Attribute
 import com.algolia.search.saas.data.IndexQuery
 import com.algolia.search.saas.data.Query
+import com.algolia.search.saas.query.queryBuilder
+import com.algolia.search.saas.query.setFacets
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldBeTrue
+import shouldNotBeNull
 
 
 @RunWith(JUnit4::class)
@@ -16,7 +19,10 @@ internal class TestClientSearch {
     @Test
     fun search() {
         runBlocking {
-            index.search()
+            val search = index.search(queryBuilder { setFacets(Attribute("price")) })
+
+            search.facets.shouldNotBeNull()
+            search.facetStats.shouldNotBeNull()
         }
     }
 

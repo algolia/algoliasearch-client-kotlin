@@ -13,6 +13,10 @@ internal fun Any?.shouldBeNull() {
     assertNull(this)
 }
 
+internal fun Any?.shouldNotBeNull() {
+    assertNotNull(this)
+}
+
 internal fun Boolean.shouldBeTrue() {
     assertTrue(this)
 }
