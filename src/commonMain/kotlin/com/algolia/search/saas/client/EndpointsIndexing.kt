@@ -3,6 +3,7 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.data.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
 
 
 interface EndpointsIndexing {
@@ -44,6 +45,12 @@ interface EndpointsIndexing {
         attributes: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
     ): T
+
+    suspend fun getObject(
+        objectId: ObjectId,
+        attributes: List<Attribute>? = null,
+        requestOptions: RequestOptions? = null
+    ): JsonObject
 
     suspend fun clearObjects(requestOptions: RequestOptions? = null): TaskUpdateIndex
 }

@@ -6,6 +6,7 @@ import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.list
 
 
@@ -75,21 +76,37 @@ class ClientIndexing(
         }
     }
 
-    override suspend fun <T : Indexable> getObject(
-        serializer: KSerializer<T>,
+    private suspend fun getObjectInternal(
         objectId: ObjectId,
         attributes: List<Attribute>?,
         requestOptions: RequestOptions?
-    ): T {
+    ): String {
         return client.run {
             read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/$objectId")) { path ->
                 httpClient.get<String>(path) {
                     attributes?.let {
                         parameter(KeyAttributesToRetrieve, Json.stringify(Attribute.list, it))
                     }
-                }.let { Json.nonstrict.parse(serializer, it) }
+                }
             }
         }
+    }
+
+    override suspend fun getObject(
+        objectId: ObjectId,
+        attributes: List<Attribute>?,
+        requestOptions: RequestOptions?
+    ): JsonObject {
+        return getObjectInternal(objectId, attributes, requestOptions).let { Json.nonstrict.parseJson(it).jsonObject }
+    }
+
+    override suspend fun <T : Indexable> getObject(
+        serializer: KSerializer<T>,
+        objectId: ObjectId,
+        attributes: List<Attribute>?,
+        requestOptions: RequestOptions?
+    ): T {
+        return getObjectInternal(objectId, attributes, requestOptions).let { Json.nonstrict.parse(serializer, it) }
     }
 
     override suspend fun clearObjects(requestOptions: RequestOptions?): TaskUpdateIndex {

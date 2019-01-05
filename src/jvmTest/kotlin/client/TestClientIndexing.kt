@@ -8,6 +8,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.json
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -38,7 +39,7 @@ internal class TestClientIndexing {
     ) : Indexable
 
     private val data = Data("test", "test")
-    private val json = Json.nonstrict.toJson(data, Data.serializer())
+    private val dataJson = Json.nonstrict.toJson(data, Data.serializer())
 
     @Test
     fun addObject() {
@@ -60,7 +61,7 @@ internal class TestClientIndexing {
     fun addObjectJson() {
         runBlocking {
             index.run {
-                val create = addObject(json)
+                val create = addObject(dataJson)
                 val taskCreate = create.wait()
 
                 taskCreate.status shouldEqual TaskStatus.Published
@@ -93,7 +94,7 @@ internal class TestClientIndexing {
         runBlocking {
             index.run {
                 val objectId = ObjectId("test")
-                val taskCreate = updateObject(json, objectId).wait()
+                val taskCreate = updateObject(dataJson, objectId).wait()
 
                 taskCreate.status shouldEqual TaskStatus.Published
 
@@ -123,6 +124,31 @@ internal class TestClientIndexing {
 
                 index.run {
                     getObject(Product.serializer(), objectId) shouldEqual product
+                }
+            }
+        }
+    }
+
+    @Test
+    fun getObjectJson() {
+        runBlocking {
+            index.run {
+                val objectId = ObjectId("442854")
+                val product = json {
+                    "brand" to "Hermès"
+                    "name" to "Birkin 35 So Black"
+                    "price" to 18500
+                    "color" to "Black"
+                    "material" to "Leather"
+                    "nbView" to 5226
+                    "nbLike" to 381
+                    "nbWish" to 241
+                    "priceUSD" to 25010.15
+                    "objectID" to objectId.raw
+                }
+
+                index.run {
+                    getObject(objectId) shouldEqual product
                 }
             }
         }
