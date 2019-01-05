@@ -27,6 +27,12 @@ interface EndpointsIndexing {
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
+    suspend fun updateObject(
+        json: JsonElement,
+        objectId: ObjectId,
+        requestOptions: RequestOptions? = null
+    ): TaskUpdateObject
+
     suspend fun deleteObject(
         objectId: ObjectId,
         requestOptions: RequestOptions? = null

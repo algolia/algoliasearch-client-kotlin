@@ -89,6 +89,22 @@ internal class TestClientIndexing {
     }
 
     @Test
+    fun updateObjectJson() {
+        runBlocking {
+            index.run {
+                val objectId = ObjectId("test")
+                val taskCreate = updateObject(json, objectId).wait()
+
+                taskCreate.status shouldEqual TaskStatus.Published
+
+                val taskInfoDelete = deleteObject(objectId).wait()
+
+                taskInfoDelete.status shouldEqual TaskStatus.Published
+            }
+        }
+    }
+
+    @Test
     fun getObject() {
         runBlocking {
             index.run {

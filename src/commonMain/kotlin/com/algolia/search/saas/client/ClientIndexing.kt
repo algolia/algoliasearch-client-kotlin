@@ -36,19 +36,35 @@ class ClientIndexing(
         return addObject(json.toString(), requestOptions)
     }
 
-    override suspend fun <T> updateObject(
-        data: T,
-        serializer: KSerializer<T>,
+    private suspend fun updateObject(
+        payload: String,
         objectId: ObjectId,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
         return client.run {
             write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId")) { path ->
                 httpClient.put<TaskUpdateObject>(path) {
-                    body = Json.stringify(serializer, data)
+                    body = payload
                 }
             }
         }
+    }
+
+    override suspend fun <T> updateObject(
+        data: T,
+        serializer: KSerializer<T>,
+        objectId: ObjectId,
+        requestOptions: RequestOptions?
+    ): TaskUpdateObject {
+        return updateObject(Json.stringify(serializer, data), objectId, requestOptions)
+    }
+
+    override suspend fun updateObject(
+        json: JsonElement,
+        objectId: ObjectId,
+        requestOptions: RequestOptions?
+    ): TaskUpdateObject {
+        return updateObject(json.toString(), objectId, requestOptions)
     }
 
     override suspend fun deleteObject(objectId: ObjectId, requestOptions: RequestOptions?): TaskDelete {
