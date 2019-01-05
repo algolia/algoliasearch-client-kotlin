@@ -5,6 +5,7 @@ import com.algolia.search.saas.serialize.KeyAttributesToRetrieve
 import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.list
 
 
@@ -13,18 +14,26 @@ class ClientIndexing(
     override val indexName: IndexName
 ) : EndpointsIndexing {
 
+    private suspend fun addObject(payload: String, requestOptions: RequestOptions?): TaskCreate {
+        return client.run {
+            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
+                httpClient.post<TaskCreate>(path) {
+                    body = payload
+                }
+            }
+        }
+    }
+
     override suspend fun <T> addObject(
         data: T,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions?
     ): TaskCreate {
-        return client.run {
-            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
-                httpClient.post<TaskCreate>(path) {
-                    body = Json.stringify(serializer, data)
-                }
-            }
-        }
+        return addObject(Json.stringify(serializer, data), requestOptions)
+    }
+
+    override suspend fun addObject(json: JsonElement, requestOptions: RequestOptions?): TaskCreate {
+        return addObject(json.toString(), requestOptions)
     }
 
     override suspend fun <T> updateObject(

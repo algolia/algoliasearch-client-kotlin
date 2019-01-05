@@ -2,6 +2,7 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.json.JsonElement
 
 
 interface EndpointsIndexing {
@@ -11,6 +12,11 @@ interface EndpointsIndexing {
     suspend fun <T> addObject(
         data: T,
         serializer: KSerializer<T>,
+        requestOptions: RequestOptions? = null
+    ): TaskCreate
+
+    suspend fun addObject(
+        json: JsonElement,
         requestOptions: RequestOptions? = null
     ): TaskCreate
 

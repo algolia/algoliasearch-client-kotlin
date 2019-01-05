@@ -7,6 +7,7 @@ import com.algolia.search.saas.data.TaskStatus
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -36,11 +37,30 @@ internal class TestClientIndexing {
         override val objectID: ObjectId
     ) : Indexable
 
+    private val data = Data("test", "test")
+    private val json = Json.nonstrict.toJson(data, Data.serializer())
+
     @Test
     fun addObject() {
         runBlocking {
             index.run {
-                val create = addObject(Data("test", "test"), Data.serializer())
+                val create = addObject(data, Data.serializer())
+                val taskCreate = create.wait()
+
+                taskCreate.status shouldEqual TaskStatus.Published
+
+                val taskDelete = deleteObject(create.objectID).wait()
+
+                taskDelete.status shouldEqual TaskStatus.Published
+            }
+        }
+    }
+
+    @Test
+    fun addObjectJson() {
+        runBlocking {
+            index.run {
+                val create = addObject(json)
                 val taskCreate = create.wait()
 
                 taskCreate.status shouldEqual TaskStatus.Published
@@ -57,7 +77,7 @@ internal class TestClientIndexing {
         runBlocking {
             index.run {
                 val objectId = ObjectId("test")
-                val taskCreate = updateObject(Data("test", "test"), Data.serializer(), objectId).wait()
+                val taskCreate = updateObject(data, Data.serializer(), objectId).wait()
 
                 taskCreate.status shouldEqual TaskStatus.Published
 
