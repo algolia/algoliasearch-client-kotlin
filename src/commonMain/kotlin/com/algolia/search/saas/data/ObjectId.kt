@@ -14,14 +14,16 @@ data class ObjectId(@SerialName("objectID") override val raw: String) : Raw<Stri
 
     companion object : KSerializer<ObjectId> {
 
-        override val descriptor = StringSerializer.descriptor
+        private val serializer = StringSerializer
+
+        override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: ObjectId) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): ObjectId {
-            val string = StringSerializer.deserialize(decoder)
+            val string = serializer.deserialize(decoder)
 
             return string.toObjectId()
         }

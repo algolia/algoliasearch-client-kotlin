@@ -14,14 +14,16 @@ data class BoundingBox(
 
     internal companion object : KSerializer<BoundingBox> {
 
-        override val descriptor = FloatSerializer.list.descriptor
+        private val serializer = FloatSerializer
+
+        override val descriptor = serializer.list.descriptor
 
         override fun serialize(encoder: Encoder, obj: BoundingBox) {
-            FloatSerializer.list.serialize(encoder, obj.raw)
+            serializer.list.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): BoundingBox {
-            val floats = FloatSerializer.list.deserialize(decoder)
+            val floats = serializer.list.deserialize(decoder)
 
             return BoundingBox(
                 Point(

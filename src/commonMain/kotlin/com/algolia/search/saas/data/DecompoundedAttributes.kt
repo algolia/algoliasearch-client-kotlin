@@ -1,7 +1,6 @@
 package com.algolia.search.saas.data
 
 import kotlinx.serialization.*
-import kotlinx.serialization.internal.HashMapClassDesc
 import kotlinx.serialization.internal.HashMapSerializer
 
 
@@ -23,13 +22,10 @@ data class DecompoundedAttributes internal constructor(
 
         private val serializer = HashMapSerializer(QueryLanguage, Attribute.list)
 
-        override val descriptor: SerialDescriptor = HashMapClassDesc(
-            QueryLanguage.descriptor,
-            Attribute.list.descriptor
-        )
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: DecompoundedAttributes) {
-            HashMapSerializer(QueryLanguage, Attribute.list).serialize(encoder, obj.map)
+            serializer.serialize(encoder, obj.map)
         }
 
         override fun deserialize(decoder: Decoder): DecompoundedAttributes {

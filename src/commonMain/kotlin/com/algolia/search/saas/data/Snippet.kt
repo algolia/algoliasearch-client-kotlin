@@ -23,14 +23,16 @@ data class Snippet(
 
     internal companion object : KSerializer<Snippet> {
 
-        override val descriptor = StringSerializer.descriptor
+        private val serializer = StringSerializer
+
+        override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: Snippet) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): Snippet {
-            val string = StringSerializer.deserialize(decoder)
+            val string = serializer.deserialize(decoder)
 
             val findSnippet = regexSnippet.find(string)
 

@@ -24,14 +24,16 @@ sealed class MultipleQueriesStrategy(override val raw: String) : Raw<String> {
 
     internal companion object : KSerializer<MultipleQueriesStrategy> {
 
-        override val descriptor = StringSerializer.descriptor
+        private val serializer = StringSerializer
+
+        override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: MultipleQueriesStrategy) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): MultipleQueriesStrategy {
-            val string = StringSerializer.deserialize(decoder)
+            val string = serializer.deserialize(decoder)
 
             return when (string) {
                 KeyNone -> None

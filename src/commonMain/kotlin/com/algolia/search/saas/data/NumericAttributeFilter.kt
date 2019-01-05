@@ -21,14 +21,16 @@ data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boole
 
     internal companion object : KSerializer<NumericAttributeFilter> {
 
-        override val descriptor = StringSerializer.descriptor
+        private val serializer = StringSerializer
+
+        override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: NumericAttributeFilter) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): NumericAttributeFilter {
-            val string = StringSerializer.deserialize(decoder)
+            val string = serializer.deserialize(decoder)
 
             val findEqualOnly = regexEqualOnly.find(string)
 

@@ -1,7 +1,10 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.toCursor
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
@@ -16,14 +19,16 @@ data class Cursor(
 
     internal companion object : KSerializer<Cursor> {
 
-        override val descriptor = StringSerializer.descriptor
+        private val serializer = StringSerializer
+
+        override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: Cursor) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): Cursor {
-            return StringSerializer.deserialize(decoder).toCursor()
+            return serializer.deserialize(decoder).toCursor()
         }
     }
 }

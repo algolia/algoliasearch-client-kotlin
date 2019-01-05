@@ -26,14 +26,16 @@ data class IndexName(
     @Serializer(IndexName::class)
     internal companion object : KSerializer<IndexName> {
 
-        override val descriptor = StringSerializer.descriptor
+        private val serializer = StringSerializer
+
+        override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: IndexName) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): IndexName {
-            return StringSerializer.deserialize(decoder).toIndexName()
+            return serializer.deserialize(decoder).toIndexName()
         }
     }
 }

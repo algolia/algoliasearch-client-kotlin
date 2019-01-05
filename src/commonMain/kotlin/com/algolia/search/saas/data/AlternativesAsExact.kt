@@ -3,7 +3,10 @@ package com.algolia.search.saas.data
 import com.algolia.search.saas.serialize.KeyIgnorePlurals
 import com.algolia.search.saas.serialize.KeyMultiWordsSynonym
 import com.algolia.search.saas.serialize.KeySingleWordSynonym
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
@@ -33,14 +36,16 @@ sealed class AlternativesAsExact(override val raw: String) : Raw<String> {
 
     internal companion object : KSerializer<AlternativesAsExact> {
 
-        override val descriptor = StringSerializer.descriptor
+        private val serializer = StringSerializer
+
+        override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: AlternativesAsExact) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): AlternativesAsExact {
-            val string = StringSerializer.deserialize(decoder)
+            val string = serializer.deserialize(decoder)
 
             return when (string) {
                 KeyIgnorePlurals -> IgnorePlurals

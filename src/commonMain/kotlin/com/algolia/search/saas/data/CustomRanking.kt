@@ -5,7 +5,10 @@ import com.algolia.search.saas.serialize.KeyDesc
 import com.algolia.search.saas.serialize.regexAsc
 import com.algolia.search.saas.serialize.regexDesc
 import com.algolia.search.saas.toAttribute
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
@@ -24,14 +27,16 @@ sealed class CustomRanking(override val raw: String) : Raw<String> {
 
     internal companion object : KSerializer<CustomRanking> {
 
-        override val descriptor = StringSerializer.descriptor
+        private val serializer = StringSerializer
+
+        override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: CustomRanking) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): CustomRanking {
-            val string = StringSerializer.deserialize(decoder)
+            val string = serializer.deserialize(decoder)
 
             val findAsc = regexAsc.find(string)
             val findDesc = regexDesc.find(string)

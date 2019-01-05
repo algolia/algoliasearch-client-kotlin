@@ -1,7 +1,10 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.toAttribute
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
@@ -14,14 +17,16 @@ data class Attribute(override val raw: String) : Raw<String> {
 
     internal companion object : KSerializer<Attribute> {
 
-        override val descriptor = StringSerializer.descriptor
+        private val serializer = StringSerializer
+
+        override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: Attribute) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): Attribute {
-            return StringSerializer.deserialize(decoder).toAttribute()
+            return serializer.deserialize(decoder).toAttribute()
         }
     }
 }

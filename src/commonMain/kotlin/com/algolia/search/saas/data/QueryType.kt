@@ -40,14 +40,16 @@ sealed class QueryType(override val raw: String) : Raw<String> {
 
     internal companion object : KSerializer<QueryType> {
 
-        override val descriptor = StringSerializer.descriptor
+        private val serializer = StringSerializer
+
+        override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: QueryType) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): QueryType {
-            val string = StringSerializer.deserialize(decoder)
+            val string = serializer.deserialize(decoder)
 
             return when (string) {
                 KeyPrefixLast -> PrefixLast

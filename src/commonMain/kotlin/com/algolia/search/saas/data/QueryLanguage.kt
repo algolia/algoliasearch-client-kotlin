@@ -77,10 +77,12 @@ sealed class QueryLanguage(override val raw: String) : Raw<String> {
 
     internal companion object : KSerializer<QueryLanguage> {
 
-        override val descriptor = StringSerializer.descriptor
+        private val serializer = StringSerializer
+
+        override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: QueryLanguage) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         fun convert(string: String): QueryLanguage {
@@ -146,7 +148,7 @@ sealed class QueryLanguage(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): QueryLanguage {
-            val string = StringSerializer.deserialize(decoder)
+            val string = serializer.deserialize(decoder)
 
             return convert(string)
         }
