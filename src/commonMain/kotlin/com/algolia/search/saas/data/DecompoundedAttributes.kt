@@ -20,18 +20,18 @@ data class DecompoundedAttributes internal constructor(val language: QueryLangua
     @Serializer(DecompoundedAttributes::class)
     internal companion object : KSerializer<DecompoundedAttributes> {
 
-        override fun serialize(output: Encoder, obj: DecompoundedAttributes) {
+        override fun serialize(encoder: Encoder, obj: DecompoundedAttributes) {
             val element = json {
                 obj.language.raw to jsonArray {
                     obj.attributes.forEach { +it.raw }
                 }
             }
 
-            output.asJsonOutput().writeTree(element)
+            encoder.asJsonOutput().encodeJson(element)
         }
 
-        override fun deserialize(input: Decoder): DecompoundedAttributes {
-            val element = input.asJsonInput() as JsonObject
+        override fun deserialize(decoder: Decoder): DecompoundedAttributes {
+            val element = decoder.asJsonInput() as JsonObject
             val key = element.keys.first()
             val attributes = element.getArrayOrNull(key)?.map { it.content.toAttribute() }
 

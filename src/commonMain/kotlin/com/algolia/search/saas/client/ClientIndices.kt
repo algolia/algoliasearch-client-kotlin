@@ -7,7 +7,7 @@ import com.algolia.search.saas.data.TaskUpdateIndex
 import com.algolia.search.saas.serialize.*
 import io.ktor.client.request.delete
 import io.ktor.client.request.post
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
@@ -30,7 +30,7 @@ class ClientIndices(
                     body = json {
                         KeyOperation to key
                         KeyDestination to destination.raw
-                        scopes?.let { KeyScope to JSON.stringify(Scope.list, it) }
+                        scopes?.let { KeyScope to Json.stringify(Scope.list, it) }
                     }.toString()
                 }
             }

@@ -1,5 +1,6 @@
 package com.algolia.search.saas.data
 
+import com.algolia.search.saas.serialize.KSerializerFacetStats
 import com.algolia.search.saas.serialize.KSerializerFacets
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName

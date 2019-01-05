@@ -23,12 +23,12 @@ sealed class CustomRanking(override val raw: String) : Raw<String> {
     @Serializer(CustomRanking::class)
     internal companion object : KSerializer<CustomRanking> {
 
-        override fun serialize(output: Encoder, obj: CustomRanking) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: CustomRanking) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): CustomRanking {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): CustomRanking {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             val findAsc = regexAsc.find(element.content)
             val findDesc = regexDesc.find(element.content)

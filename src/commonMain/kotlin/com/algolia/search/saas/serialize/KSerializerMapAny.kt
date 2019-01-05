@@ -29,7 +29,7 @@ internal object KSerializerMapAny : SerializationStrategy<Map<String, Any?>> {
         } else +JsonNull
     }
 
-    private fun JsonBuilder.serialize(entry: Pair<String, Any?>) {
+    private fun JsonObjectBuilder.serialize(entry: Pair<String, Any?>) {
         val (key, value) = entry
         if (value != null) {
             when (value) {
@@ -45,13 +45,13 @@ internal object KSerializerMapAny : SerializationStrategy<Map<String, Any?>> {
         } else key to JsonNull
     }
 
-    override fun serialize(output: Encoder, obj: Map<String, Any?>) {
+    override fun serialize(encoder: Encoder, obj: Map<String, Any?>) {
         val json = json {
             obj.forEach { (key, value) ->
                 serialize(key to value)
             }
         }
-        output.asJsonOutput().writeTree(json)
+        encoder.asJsonOutput().encodeJson(json)
     }
 }
 

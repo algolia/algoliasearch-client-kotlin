@@ -1,7 +1,7 @@
 package serialize
 
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
 import org.junit.Test
 import shouldEqual
 
@@ -15,8 +15,8 @@ internal abstract class TestSerializer<T>(
     @Test
     fun serialize() {
         items.forEach {
-            val serialized = JSON.stringify(serializer, it)
-            val deserialized = JSON.parse(serializer, serialized)
+            val serialized = Json.stringify(serializer, it)
+            val deserialized = Json.parse(serializer, serialized)
 
             deserialized shouldEqual it
         }

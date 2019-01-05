@@ -20,12 +20,12 @@ data class Cursor(
     @Serializer(Cursor::class)
     internal companion object : KSerializer<Cursor> {
 
-        override fun serialize(output: Encoder, obj: Cursor) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: Cursor) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): Cursor {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): Cursor {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return element.content.toCursor()
         }

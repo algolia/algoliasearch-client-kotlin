@@ -438,14 +438,14 @@ data class Query(
 
     /**
      * You can modify this instance of [FilterBuilder] or assign a new one.
-     * If [filters] is null, the output of [FilterBuilder.build] will be passed to the request body of the next request.
+     * If [filters] is null, the encoder of [FilterBuilder.build] will be passed to the request body of the next request.
      */
     @Transient
     var filterBuilder: FilterBuilder = FilterBuilder()
 
     /**
      * You can modify this instance of [OptionalFilterBuilder] or assign a new one.
-     * If [optionalFilters] is null, the output of [OptionalFilterBuilder.build] will be passed to
+     * If [optionalFilters] is null, the encoder of [OptionalFilterBuilder.build] will be passed to
      * the request body of the next request.
      */
     @Transient

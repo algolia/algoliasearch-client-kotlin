@@ -20,12 +20,12 @@ data class BoundingBox(
     @Serializer(BoundingBox::class)
     internal companion object : KSerializer<BoundingBox> {
 
-        override fun serialize(output: Encoder, obj: BoundingBox) {
-            output.asJsonOutput().writeTree(jsonArray { obj.raw.forEach { +(it as Number) } })
+        override fun serialize(encoder: Encoder, obj: BoundingBox) {
+            encoder.asJsonOutput().encodeJson(jsonArray { obj.raw.forEach { +(it as Number) } })
         }
 
-        override fun deserialize(input: Decoder): BoundingBox {
-            val element = input.asJsonInput() as JsonArray
+        override fun deserialize(decoder: Decoder): BoundingBox {
+            val element = decoder.asJsonInput() as JsonArray
 
             val array = element.jsonArray
 

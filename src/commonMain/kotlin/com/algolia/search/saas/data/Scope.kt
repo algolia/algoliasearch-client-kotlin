@@ -20,12 +20,12 @@ sealed class Scope(override val raw: String) : Raw<String> {
     @Serializer(Scope::class)
     companion object : KSerializer<Scope> {
 
-        override fun serialize(output: Encoder, obj: Scope) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: Scope) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): Scope {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): Scope {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when (element.content) {
                 KeySettings -> Settings

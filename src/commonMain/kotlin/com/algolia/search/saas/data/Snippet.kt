@@ -24,12 +24,12 @@ data class Snippet(
     @Serializer(Snippet::class)
     internal companion object : KSerializer<Snippet> {
 
-        override fun serialize(output: Encoder, obj: Snippet) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: Snippet) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): Snippet {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): Snippet {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             val findSnippet = regexSnippet.find(element.content)
 

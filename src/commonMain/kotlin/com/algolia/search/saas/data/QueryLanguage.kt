@@ -77,8 +77,8 @@ sealed class QueryLanguage(override val raw: String) : Raw<String> {
     @Serializer(QueryLanguage::class)
     internal companion object : KSerializer<QueryLanguage> {
 
-        override fun serialize(output: Encoder, obj: QueryLanguage) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: QueryLanguage) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
         fun convert(string: String): QueryLanguage {
@@ -143,8 +143,8 @@ sealed class QueryLanguage(override val raw: String) : Raw<String> {
             }
         }
 
-        override fun deserialize(input: Decoder): QueryLanguage {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): QueryLanguage {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return convert(element.content)
         }

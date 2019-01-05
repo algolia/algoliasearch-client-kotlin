@@ -8,7 +8,7 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.internal.HashMapClassDesc
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.json
 
@@ -20,21 +20,21 @@ internal object KSerializerHighlights : KSerializer<Map<Attribute, HighlightResu
         HighlightResult.serializer().descriptor
     )
 
-    override fun serialize(output: Encoder, obj: Map<Attribute, HighlightResult>) {
+    override fun serialize(encoder: Encoder, obj: Map<Attribute, HighlightResult>) {
         val element = json {
             obj.forEach { (key, value) ->
-                key.raw to JSON.stringify(HighlightResult.serializer(), value)
+                key.raw to Json.stringify(HighlightResult.serializer(), value)
             }
         }
 
-        output.asJsonOutput().writeTree(element)
+        encoder.asJsonOutput().encodeJson(element)
     }
 
-    override fun deserialize(input: Decoder): Map<Attribute, HighlightResult> {
-        val json = input.asJsonInput().jsonObject
+    override fun deserialize(decoder: Decoder): Map<Attribute, HighlightResult> {
+        val json = decoder.asJsonInput().jsonObject
 
         return json.map { (key, value) ->
-            key.toAttribute() to JSON.parse(
+            key.toAttribute() to Json.parse(
                 HighlightResult.serializer(),
                 when (value) {
                     is JsonLiteral -> value.content

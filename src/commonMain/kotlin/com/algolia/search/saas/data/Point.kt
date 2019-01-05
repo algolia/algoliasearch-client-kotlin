@@ -18,13 +18,13 @@ data class Point(
     @Serializer(Point::class)
     internal companion object : KSerializer<Point> {
 
-        override fun serialize(output: Encoder, obj: Point) {
+        override fun serialize(encoder: Encoder, obj: Point) {
 
-            output.asJsonOutput().writeTree(jsonArray { obj.raw.forEach { +(it as Number) } })
+            encoder.asJsonOutput().encodeJson(jsonArray { obj.raw.forEach { +(it as Number) } })
         }
 
-        override fun deserialize(input: Decoder): Point {
-            val element = input.asJsonInput() as JsonArray
+        override fun deserialize(decoder: Decoder): Point {
+            val element = decoder.asJsonInput() as JsonArray
 
             val array = element.jsonArray
 

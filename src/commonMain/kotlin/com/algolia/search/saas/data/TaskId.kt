@@ -18,12 +18,12 @@ data class TaskId(override val raw: Long) : Raw<Long> {
     @Serializer(TaskId::class)
     companion object : KSerializer<TaskId> {
 
-        override fun serialize(output: Encoder, obj: TaskId) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: TaskId) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): TaskId {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): TaskId {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return element.long.toTaskId()
         }

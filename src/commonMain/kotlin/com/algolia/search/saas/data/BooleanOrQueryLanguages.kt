@@ -20,17 +20,17 @@ sealed class BooleanOrQueryLanguages {
     @Serializer(BooleanOrQueryLanguages::class)
     internal companion object : KSerializer<BooleanOrQueryLanguages> {
 
-        override fun serialize(output: Encoder, obj: BooleanOrQueryLanguages) {
+        override fun serialize(encoder: Encoder, obj: BooleanOrQueryLanguages) {
             val element = when (obj) {
                 is Boolean -> JsonPrimitive(obj.boolean)
                 is QueryLanguages -> jsonArray { obj.queryLanguages.forEach { +it.raw } }
             }
 
-            output.asJsonOutput().writeTree(element)
+            encoder.asJsonOutput().encodeJson(element)
         }
 
-        override fun deserialize(input: Decoder): BooleanOrQueryLanguages {
-            val element = input.asJsonInput()
+        override fun deserialize(decoder: Decoder): BooleanOrQueryLanguages {
+            val element = decoder.asJsonInput()
 
             return when (element) {
                 is JsonArray -> QueryLanguages(element.map { QueryLanguage.convert(it.content) })

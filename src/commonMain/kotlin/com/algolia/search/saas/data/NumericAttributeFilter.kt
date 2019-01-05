@@ -22,12 +22,12 @@ data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boole
     @Serializer(NumericAttributeFilter::class)
     internal companion object : KSerializer<NumericAttributeFilter> {
 
-        override fun serialize(output: Encoder, obj: NumericAttributeFilter) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: NumericAttributeFilter) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): NumericAttributeFilter {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): NumericAttributeFilter {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             val findEqualOnly = regexEqualOnly.find(element.content)
 

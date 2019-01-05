@@ -37,12 +37,12 @@ sealed class QueryType(override val raw: String) : Raw<String> {
     @Serializer(QueryType::class)
     internal companion object : KSerializer<QueryType> {
 
-        override fun serialize(output: Encoder, obj: QueryType) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: QueryType) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): QueryType {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): QueryType {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when (val content = element.content) {
                 KeyPrefixLast -> PrefixLast

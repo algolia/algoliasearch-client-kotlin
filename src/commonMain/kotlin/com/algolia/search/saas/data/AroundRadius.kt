@@ -24,17 +24,17 @@ sealed class AroundRadius(override val raw: String) : Raw<String> {
     @Serializer(AroundRadius::class)
     internal companion object : KSerializer<AroundRadius> {
 
-        override fun serialize(output: Encoder, obj: AroundRadius) {
+        override fun serialize(encoder: Encoder, obj: AroundRadius) {
             val element = when (obj) {
                 is InMeters -> JsonPrimitive(obj.int)
                 else -> JsonPrimitive(obj.raw)
             }
 
-            output.asJsonOutput().writeTree(element)
+            encoder.asJsonOutput().encodeJson(element)
         }
 
-        override fun deserialize(input: Decoder): AroundRadius {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): AroundRadius {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when {
                 element.intOrNull != null -> InMeters(element.int)

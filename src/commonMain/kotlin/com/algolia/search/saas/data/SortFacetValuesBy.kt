@@ -33,12 +33,12 @@ sealed class SortFacetValuesBy(override val raw: String) : Raw<String> {
     @Serializer(SortFacetValuesBy::class)
     internal companion object : KSerializer<SortFacetValuesBy> {
 
-        override fun serialize(output: Encoder, obj: SortFacetValuesBy) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: SortFacetValuesBy) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): SortFacetValuesBy {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): SortFacetValuesBy {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when (val content = element.content) {
                 KeyCount -> Count

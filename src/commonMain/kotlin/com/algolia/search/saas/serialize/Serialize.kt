@@ -24,16 +24,16 @@ internal fun JsonObject.urlEncode(): String {
     }.formUrlEncode()
 }
 
-internal fun Decoder.asJsonInput() = (this as JSON.JsonInput).readAsTree()
-internal fun Encoder.asJsonOutput() = this as JSON.JsonOutput
+internal fun Decoder.asJsonInput() = (this as JsonInput).decodeJson()
+internal fun Encoder.asJsonOutput() = this as JsonOutput
 
 
 internal fun Query.toJsonObject(): JsonObject {
-    return JsonTreeParser.parse(JSON.stringify(Query.serializer(), this))
+    return Json.nonstrict.toJson(this, Query.serializer()).jsonObject
 }
 
 internal fun Settings.toJsonObject(): JsonObject {
-    return JsonTreeParser.parse(JSON.stringify(Settings.serializer(), this))
+    return Json.nonstrict.toJson(this, Settings.serializer()).jsonObject
 }
 
 internal fun Query.encodeNoNulls(): JsonObject {

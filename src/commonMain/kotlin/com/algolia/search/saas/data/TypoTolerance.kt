@@ -27,17 +27,17 @@ sealed class TypoTolerance(override val raw: String) : Raw<String> {
     @Serializer(TypoTolerance::class)
     internal companion object : KSerializer<TypoTolerance> {
 
-        override fun serialize(output: Encoder, obj: TypoTolerance) {
+        override fun serialize(encoder: Encoder, obj: TypoTolerance) {
             val element = when (obj) {
                 is Boolean -> JsonPrimitive(obj.boolean)
                 else -> JsonPrimitive(obj.raw)
             }
 
-            output.asJsonOutput().writeTree(element)
+            encoder.asJsonOutput().encodeJson(element)
         }
 
-        override fun deserialize(input: Decoder): TypoTolerance {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): TypoTolerance {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when {
                 element.booleanOrNull != null -> Boolean(element.boolean)

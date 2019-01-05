@@ -33,12 +33,12 @@ sealed class AlternativesAsExact(override val raw: String) : Raw<String> {
     @Serializer(AlternativesAsExact::class)
     internal companion object : KSerializer<AlternativesAsExact> {
 
-        override fun serialize(output: Encoder, obj: AlternativesAsExact) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: AlternativesAsExact) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): AlternativesAsExact {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): AlternativesAsExact {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when (val content = element.content) {
                 KeyIgnorePlurals -> IgnorePlurals

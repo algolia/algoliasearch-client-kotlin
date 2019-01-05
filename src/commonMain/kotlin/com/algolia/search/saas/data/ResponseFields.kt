@@ -38,12 +38,12 @@ sealed class ResponseFields(override val raw: String) : Raw<String> {
     @Serializer(ResponseFields::class)
     internal companion object : KSerializer<ResponseFields> {
 
-        override fun serialize(output: Encoder, obj: ResponseFields) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: ResponseFields) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): ResponseFields {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): ResponseFields {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when (val content = element.content) {
                 KeyStar -> All

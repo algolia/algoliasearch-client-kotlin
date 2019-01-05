@@ -43,12 +43,12 @@ sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String> {
     @Serializer(RemoveWordIfNoResults::class)
     internal companion object : KSerializer<RemoveWordIfNoResults> {
 
-        override fun serialize(output: Encoder, obj: RemoveWordIfNoResults) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: RemoveWordIfNoResults) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): RemoveWordIfNoResults {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): RemoveWordIfNoResults {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when (val content = element.content) {
                 KeyNone -> None

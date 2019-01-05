@@ -18,12 +18,12 @@ data class Attribute(override val raw: String) : Raw<String> {
     @Serializer(Attribute::class)
     internal companion object : KSerializer<Attribute> {
 
-        override fun serialize(output: Encoder, obj: Attribute) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: Attribute) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): Attribute {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): Attribute {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return element.content.toAttribute()
         }

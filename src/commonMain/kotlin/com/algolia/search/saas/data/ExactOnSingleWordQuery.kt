@@ -38,12 +38,12 @@ sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<String> {
     @Serializer(ExactOnSingleWordQuery::class)
     internal companion object : KSerializer<ExactOnSingleWordQuery> {
 
-        override fun serialize(output: Encoder, obj: ExactOnSingleWordQuery) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: ExactOnSingleWordQuery) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): ExactOnSingleWordQuery {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): ExactOnSingleWordQuery {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when (val content = element.contentOrNull) {
                 KeyAttribute -> Attribute

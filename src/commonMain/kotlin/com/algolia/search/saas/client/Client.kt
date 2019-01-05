@@ -14,7 +14,7 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.get
-import kotlinx.serialization.json.JSON
+import kotlinx.serialization.json.Json
 
 
 class Client(
@@ -27,7 +27,7 @@ class Client(
 
     internal val httpClient = HttpClient {
         install(JsonFeature) {
-            serializer = KotlinxSerializer(JSON.nonstrict)
+            serializer = KotlinxSerializer(Json.nonstrict)
         }
         install(DefaultRequest) {
             setApplicationId(applicationId)

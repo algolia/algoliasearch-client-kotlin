@@ -29,12 +29,12 @@ data class IndexName(
     @Serializer(IndexName::class)
     companion object : KSerializer<IndexName> {
 
-        override fun serialize(output: Encoder, obj: IndexName) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: IndexName) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): IndexName {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): IndexName {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return element.content.toIndex()
         }

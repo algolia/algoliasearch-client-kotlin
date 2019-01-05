@@ -24,18 +24,18 @@ internal object KSerializerFacets : KSerializer<Map<Attribute, List<Facet>>> {
         )
     )
 
-    override fun serialize(output: Encoder, obj: Map<Attribute, List<Facet>>) {
+    override fun serialize(encoder: Encoder, obj: Map<Attribute, List<Facet>>) {
         val element = obj.map {
             it.key.raw to JsonObject(it.value.map {
                 it.name to JsonLiteral(it.count)
             }.toMap())
         }.toMap()
 
-        output.asJsonOutput().writeTree(JsonObject(element.toMap()))
+        encoder.asJsonOutput().encodeJson(JsonObject(element.toMap()))
     }
 
-    override fun deserialize(input: Decoder): Map<Attribute, List<Facet>> {
-        val json = input.asJsonInput().jsonObject
+    override fun deserialize(decoder: Decoder): Map<Attribute, List<Facet>> {
+        val json = decoder.asJsonInput().jsonObject
 
         return json.map { (key, element) ->
             key.toAttribute() to element.jsonObject.map { Facet(it.key, it.value.int) }

@@ -25,12 +25,12 @@ sealed class MultipleQueriesStrategy(override val raw: String) : Raw<String> {
     @Serializer(MultipleQueriesStrategy::class)
     internal companion object : KSerializer<MultipleQueriesStrategy> {
 
-        override fun serialize(output: Encoder, obj: MultipleQueriesStrategy) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: MultipleQueriesStrategy) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): MultipleQueriesStrategy {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): MultipleQueriesStrategy {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when (val content = element.content) {
                 KeyNone -> None

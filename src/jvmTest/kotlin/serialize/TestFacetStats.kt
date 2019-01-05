@@ -4,7 +4,7 @@ import attributeA
 import attributeB
 import com.algolia.search.saas.data.Attribute
 import com.algolia.search.saas.data.FacetStats
-import com.algolia.search.saas.data.KSerializerFacetStats
+import com.algolia.search.saas.serialize.KSerializerFacetStats
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 

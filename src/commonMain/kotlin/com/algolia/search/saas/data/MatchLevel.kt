@@ -20,12 +20,12 @@ sealed class MatchLevel(override val raw: String) : Raw<String> {
     @Serializer(MatchLevel::class)
     companion object : KSerializer<MatchLevel> {
 
-        override fun serialize(output: Encoder, obj: MatchLevel) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: MatchLevel) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): MatchLevel {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): MatchLevel {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when (val content = element.content) {
                 KeyNone -> None

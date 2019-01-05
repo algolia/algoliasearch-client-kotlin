@@ -6,8 +6,7 @@ import com.algolia.search.saas.data.*
 import com.algolia.search.saas.serialize.KSerializerHighlights
 import highlightResult
 import indexA
-import kotlinx.serialization.json.JSON
-import kotlinx.serialization.json.JsonTreeParser
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -18,7 +17,7 @@ internal class TestHits : TestSerializer<Hits>(Hits.serializer()) {
 
     private val highlights = mapOf(attributeA to highlightResult)
     private val json = json {
-        "_highlightResult" to JsonTreeParser.parse(JSON.stringify(KSerializerHighlights, highlights))
+        "_highlightResult" to Json.nonstrict.toJson(highlights, KSerializerHighlights)
     }
 
     override val items = listOf(

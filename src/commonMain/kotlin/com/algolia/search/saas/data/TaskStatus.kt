@@ -21,12 +21,12 @@ sealed class TaskStatus(override val raw: String) : Raw<String> {
     @Serializer(TaskStatus::class)
     companion object : KSerializer<TaskStatus> {
 
-        override fun serialize(output: Encoder, obj: TaskStatus) {
-            output.asJsonOutput().writeTree(JsonPrimitive(obj.raw))
+        override fun serialize(encoder: Encoder, obj: TaskStatus) {
+            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
         }
 
-        override fun deserialize(input: Decoder): TaskStatus {
-            val element = input.asJsonInput() as JsonLiteral
+        override fun deserialize(decoder: Decoder): TaskStatus {
+            val element = decoder.asJsonInput() as JsonLiteral
 
             return when (val content = element.content) {
                 KeyPublished -> Published
