@@ -13,6 +13,6 @@ internal class TestAlternativesAsExact : TestSerializer<AlternativesAsExact>(Alt
         IgnorePlurals,
         SingleWordSynonym,
         MultiWordsSynonym,
-        Unknown(unknown)
+        Other(unknown)
     )
 }

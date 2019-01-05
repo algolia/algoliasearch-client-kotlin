@@ -24,7 +24,7 @@ sealed class SortFacetValuesBy(override val raw: String) : Raw<String> {
      */
     object Alpha : SortFacetValuesBy(KeyAlpha)
 
-    data class Unknown(override val raw: String) : SortFacetValuesBy(raw)
+    data class Other(override val raw: String) : SortFacetValuesBy(raw)
 
     override fun toString(): String {
         return raw
@@ -46,7 +46,7 @@ sealed class SortFacetValuesBy(override val raw: String) : Raw<String> {
             return when (string) {
                 KeyCount -> Count
                 KeyAlpha -> Alpha
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

@@ -33,6 +33,6 @@ internal class TestResponseFields {
         Query.raw shouldEqual KeyQuery
         QueryAfterRemoval.raw shouldEqual KeyQueryAfterRemoval
         UserData.raw shouldEqual KeyUserData
-        Unknown(unknown).raw shouldEqual unknown
+        Other(unknown).raw shouldEqual unknown
     }
 }

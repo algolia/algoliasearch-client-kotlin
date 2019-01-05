@@ -19,6 +19,6 @@ internal class TestQueryType {
         PrefixLast.raw shouldEqual KeyPrefixLast
         PrefixAll.raw shouldEqual KeyPrefixAll
         PrefixNone.raw shouldEqual KeyPrefixNone
-        Unknown(unknown).raw shouldEqual unknown
+        Other(unknown).raw shouldEqual unknown
     }
 }

@@ -19,6 +19,6 @@ internal class TestMatchLevel {
         None.raw shouldEqual KeyNone
         Partial.raw shouldEqual KeyPartial
         Full.raw shouldEqual KeyFull
-        Unknown(unknown).raw shouldEqual unknown
+        Other(unknown).raw shouldEqual unknown
     }
 }

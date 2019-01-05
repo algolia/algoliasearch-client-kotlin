@@ -31,7 +31,7 @@ sealed class ResponseFields(override val raw: String) : Raw<String> {
     object QueryAfterRemoval : ResponseFields(KeyQueryAfterRemoval)
     object UserData : ResponseFields(KeyUserData)
 
-    data class Unknown(override val raw: String) : ResponseFields(raw)
+    data class Other(override val raw: String) : ResponseFields(raw)
 
     override fun toString(): String {
         return raw
@@ -70,7 +70,7 @@ sealed class ResponseFields(override val raw: String) : Raw<String> {
                 KeyQuery -> Query
                 KeyQueryAfterRemoval -> QueryAfterRemoval
                 KeyUserData -> UserData
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

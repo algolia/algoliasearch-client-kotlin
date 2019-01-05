@@ -13,6 +13,6 @@ internal class TestAroundRadius : TestSerializer<AroundRadius>(AroundRadius) {
     override val items = listOf(
         All,
         InMeters(10),
-        Unknown(unknown)
+        Other(unknown)
     )
 }

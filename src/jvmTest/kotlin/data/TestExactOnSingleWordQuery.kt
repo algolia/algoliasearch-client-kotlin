@@ -19,6 +19,6 @@ internal class TestExactOnSingleWordQuery {
         Attribute.raw shouldEqual KeyAttribute
         None.raw shouldEqual KeyNone
         Word.raw shouldEqual KeyWord
-        Unknown(unknown).raw shouldEqual unknown
+        Other(unknown).raw shouldEqual unknown
     }
 }

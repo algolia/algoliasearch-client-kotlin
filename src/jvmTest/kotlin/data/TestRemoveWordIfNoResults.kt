@@ -21,6 +21,6 @@ internal class TestRemoveWordIfNoResults {
         LastWords.raw shouldEqual KeyLastWords
         FirstWords.raw shouldEqual KeyFirstWords
         AllOptional.raw shouldEqual KeyAllOptional
-        Unknown(unknown).raw shouldEqual unknown
+        Other(unknown).raw shouldEqual unknown
     }
 }

@@ -13,6 +13,6 @@ internal class TestMultipleQueriesStrategy : TestSerializer<MultipleQueriesStrat
     override val items = listOf(
         None,
         StopIfEnoughMatches,
-        Unknown(unknown)
+        Other(unknown)
     )
 }

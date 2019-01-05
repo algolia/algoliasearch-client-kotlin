@@ -15,6 +15,6 @@ internal class TestCustomRanking : TestSerializer<CustomRanking>(CustomRanking) 
     override val items = listOf(
         Asc(attributeA),
         Desc(attributeB),
-        Unknown(unknown)
+        Other(unknown)
     )
 }

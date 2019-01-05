@@ -17,7 +17,7 @@ sealed class AroundRadius(override val raw: String) : Raw<String> {
 
     data class InMeters(val int: kotlin.Int) : AroundRadius(int.toString())
 
-    data class Unknown(override val raw: String) : AroundRadius(raw)
+    data class Other(override val raw: String) : AroundRadius(raw)
 
     override fun toString(): String {
         return raw
@@ -42,7 +42,7 @@ sealed class AroundRadius(override val raw: String) : Raw<String> {
                 element.intOrNull != null -> InMeters(element.int)
                 else -> when (element.content) {
                     KeyAll -> All
-                    else -> Unknown(element.content)
+                    else -> Other(element.content)
                 }
             }
         }

@@ -23,6 +23,6 @@ internal class TestRanking : TestSerializer<Ranking>(Ranking) {
         Custom,
         Asc(attributeA),
         Desc(attributeB),
-        Unknown(unknown)
+        Other(unknown)
     )
 }

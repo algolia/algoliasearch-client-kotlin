@@ -19,7 +19,7 @@ sealed class CustomRanking(override val raw: String) : Raw<String> {
 
     data class Desc(val attribute: Attribute) : CustomRanking("$KeyDesc($attribute)")
 
-    data class Unknown(override val raw: String) : CustomRanking(raw)
+    data class Other(override val raw: String) : CustomRanking(raw)
 
     override fun toString(): String {
         return raw
@@ -44,7 +44,7 @@ sealed class CustomRanking(override val raw: String) : Raw<String> {
             return when {
                 findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
                 findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

@@ -12,6 +12,6 @@ internal class TestTaskStatus : TestSerializer<TaskStatus>(TaskStatus) {
     override val items = listOf(
         TaskStatus.Published,
         TaskStatus.NotPublished,
-        TaskStatus.Unknown(unknown)
+        TaskStatus.Other(unknown)
     )
 }

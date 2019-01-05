@@ -14,7 +14,7 @@ internal class TestScope : TestSerializer<Scope>(Scope) {
         Rules,
         Settings,
         Synonyms,
-        Unknown(unknown)
+        Other(unknown)
 
     )
 }

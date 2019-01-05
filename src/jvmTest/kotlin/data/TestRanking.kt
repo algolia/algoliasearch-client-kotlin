@@ -25,6 +25,6 @@ internal class TestRanking {
         Custom.raw shouldEqual KeyCustom
         Asc(attributeA).raw shouldEqual "$KeyAsc($attributeA)"
         Desc(attributeB).raw shouldEqual "$KeyDesc($attributeB)"
-        Unknown(unknown).raw shouldEqual unknown
+        Other(unknown).raw shouldEqual unknown
     }
 }

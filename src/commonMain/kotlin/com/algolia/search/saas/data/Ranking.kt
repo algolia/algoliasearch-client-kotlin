@@ -32,7 +32,7 @@ sealed class Ranking(override val raw: String) : Raw<String> {
 
     data class Desc(val attribute: com.algolia.search.saas.data.Attribute) : Ranking("$KeyDesc($attribute)")
 
-    data class Unknown(override val raw: String) : Ranking(raw)
+    data class Other(override val raw: String) : Ranking(raw)
 
     override fun toString(): String {
         return raw
@@ -65,7 +65,7 @@ sealed class Ranking(override val raw: String) : Raw<String> {
                 string == KeyAttribute -> Attribute
                 string == KeyExact -> Exact
                 string == KeyCustom -> Custom
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

@@ -16,6 +16,6 @@ internal class TestAroundRadius {
     fun raw() {
         All.raw shouldEqual KeyAll
         InMeters(10).raw shouldEqual "10"
-        Unknown(unknown).raw shouldEqual unknown
+        Other(unknown).raw shouldEqual unknown
     }
 }

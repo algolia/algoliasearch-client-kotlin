@@ -19,7 +19,7 @@ sealed class Scope(override val raw: String) : Raw<String> {
 
     object Rules : Scope(KeyRules)
 
-    data class Unknown(override val raw: String) : Scope(raw)
+    data class Other(override val raw: String) : Scope(raw)
 
     companion object : KSerializer<Scope> {
 
@@ -38,7 +38,7 @@ sealed class Scope(override val raw: String) : Raw<String> {
                 KeySettings -> Settings
                 KeySynonyms -> Synonyms
                 KeyRules -> Rules
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

@@ -33,7 +33,7 @@ sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<String> {
      */
     object Word : ExactOnSingleWordQuery(KeyWord)
 
-    data class Unknown(override val raw: String) : ExactOnSingleWordQuery(raw)
+    data class Other(override val raw: String) : ExactOnSingleWordQuery(raw)
 
     override fun toString(): String {
         return raw
@@ -56,7 +56,7 @@ sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<String> {
                 KeyAttribute -> Attribute
                 KeyNone -> None
                 KeyWord -> Word
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

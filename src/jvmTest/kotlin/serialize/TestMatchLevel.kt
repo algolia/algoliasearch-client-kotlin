@@ -14,6 +14,6 @@ internal class TestMatchLevel : TestSerializer<MatchLevel>(MatchLevel) {
         None,
         Partial,
         Full,
-        Unknown(unknown)
+        Other(unknown)
     )
 }

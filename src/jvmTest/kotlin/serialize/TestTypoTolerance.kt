@@ -16,6 +16,6 @@ internal class TestTypoTolerance : TestSerializer<TypoTolerance>(TypoTolerance) 
         Boolean(boolean),
         Min,
         Strict,
-        Unknown(unknown)
+        Other(unknown)
     )
 }

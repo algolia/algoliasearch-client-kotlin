@@ -32,7 +32,7 @@ sealed class QueryType(override val raw: String) : Raw<String> {
      */
     object PrefixNone : QueryType(KeyPrefixNone)
 
-    data class Unknown(override val raw: String) : QueryType(raw)
+    data class Other(override val raw: String) : QueryType(raw)
 
     override fun toString(): String {
         return raw
@@ -55,7 +55,7 @@ sealed class QueryType(override val raw: String) : Raw<String> {
                 KeyPrefixLast -> PrefixLast
                 KeyPrefixAll -> PrefixAll
                 KeyPrefixNone -> PrefixNone
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

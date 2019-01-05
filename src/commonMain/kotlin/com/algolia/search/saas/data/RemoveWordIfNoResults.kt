@@ -39,7 +39,7 @@ sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String> {
      */
     object AllOptional : RemoveWordIfNoResults(KeyAllOptional)
 
-    data class Unknown(override val raw: String) : RemoveWordIfNoResults(raw)
+    data class Other(override val raw: String) : RemoveWordIfNoResults(raw)
 
     override fun toString(): String {
         return raw
@@ -63,7 +63,7 @@ sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String> {
                 KeyLastWords -> LastWords
                 KeyFirstWords -> FirstWords
                 KeyAllOptional -> AllOptional
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

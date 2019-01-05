@@ -14,6 +14,6 @@ internal class TestQueryType : TestSerializer<QueryType>(QueryType) {
         PrefixNone,
         PrefixAll,
         PrefixLast,
-        Unknown(unknown)
+        Other(unknown)
     )
 }

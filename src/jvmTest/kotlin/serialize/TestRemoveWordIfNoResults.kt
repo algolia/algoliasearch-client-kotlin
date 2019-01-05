@@ -15,6 +15,6 @@ internal class TestRemoveWordIfNoResults : TestSerializer<RemoveWordIfNoResults>
         LastWords,
         FirstWords,
         AllOptional,
-        Unknown(unknown)
+        Other(unknown)
     )
 }

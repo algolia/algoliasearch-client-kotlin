@@ -20,7 +20,7 @@ sealed class TypoTolerance(override val raw: String) : Raw<String> {
 
     object Strict : TypoTolerance(KeyStrict)
 
-    data class Unknown(override val raw: String) : TypoTolerance(raw)
+    data class Other(override val raw: String) : TypoTolerance(raw)
 
     override fun toString(): String {
         return raw
@@ -45,7 +45,7 @@ sealed class TypoTolerance(override val raw: String) : Raw<String> {
                     when (val content = element.content) {
                         KeyMin -> Min
                         KeyStrict -> Strict
-                        else -> Unknown(content)
+                        else -> Other(content)
                     }
                 }
             }

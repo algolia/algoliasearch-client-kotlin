@@ -19,7 +19,7 @@ sealed class MatchLevel(override val raw: String) : Raw<String> {
 
     object Full : MatchLevel(KeyFull)
 
-    data class Unknown(override val raw: String) : MatchLevel(raw)
+    data class Other(override val raw: String) : MatchLevel(raw)
 
     companion object : KSerializer<MatchLevel> {
 
@@ -38,7 +38,7 @@ sealed class MatchLevel(override val raw: String) : Raw<String> {
                 KeyNone -> None
                 KeyPartial -> Partial
                 KeyFull -> Full
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

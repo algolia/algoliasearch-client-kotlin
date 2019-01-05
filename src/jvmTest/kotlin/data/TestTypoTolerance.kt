@@ -20,6 +20,6 @@ internal class TestTypoTolerance {
         Boolean(boolean).raw shouldEqual "$boolean"
         Strict.raw shouldEqual KeyStrict
         Min.raw shouldEqual KeyMin
-        Unknown(unknown).raw shouldEqual unknown
+        Other(unknown).raw shouldEqual unknown
     }
 }

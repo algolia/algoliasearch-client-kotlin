@@ -16,7 +16,7 @@ sealed class TaskStatus(override val raw: String) : Raw<String> {
 
     object NotPublished : TaskStatus(KeyNotPublished)
 
-    data class Unknown(override val raw: String) : TaskStatus(raw)
+    data class Other(override val raw: String) : TaskStatus(raw)
 
     companion object : KSerializer<TaskStatus> {
 
@@ -34,7 +34,7 @@ sealed class TaskStatus(override val raw: String) : Raw<String> {
             return when (string) {
                 KeyPublished -> Published
                 KeyNotPublished -> NotPublished
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

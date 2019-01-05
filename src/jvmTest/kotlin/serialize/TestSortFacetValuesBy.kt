@@ -13,6 +13,6 @@ internal class TestSortFacetValuesBy : TestSerializer<SortFacetValuesBy>(SortFac
     override val items = listOf(
         Alpha,
         Count,
-        Unknown(unknown)
+        Other(unknown)
     )
 }

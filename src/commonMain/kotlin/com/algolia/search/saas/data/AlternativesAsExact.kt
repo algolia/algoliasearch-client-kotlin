@@ -28,7 +28,7 @@ sealed class AlternativesAsExact(override val raw: String) : Raw<String> {
      */
     object MultiWordsSynonym : AlternativesAsExact(KeyMultiWordsSynonym)
 
-    data class Unknown(override val raw: String) : AlternativesAsExact(raw)
+    data class Other(override val raw: String) : AlternativesAsExact(raw)
 
     override fun toString(): String {
         return raw
@@ -51,7 +51,7 @@ sealed class AlternativesAsExact(override val raw: String) : Raw<String> {
                 KeyIgnorePlurals -> IgnorePlurals
                 KeySingleWordSynonym -> SingleWordSynonym
                 KeyMultiWordsSynonym -> MultiWordsSynonym
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

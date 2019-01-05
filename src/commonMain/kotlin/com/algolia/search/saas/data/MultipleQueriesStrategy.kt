@@ -16,7 +16,7 @@ sealed class MultipleQueriesStrategy(override val raw: String) : Raw<String> {
 
     object StopIfEnoughMatches : MultipleQueriesStrategy(KeyStopIfEnoughMatches)
 
-    data class Unknown(override val raw: String) : MultipleQueriesStrategy(raw)
+    data class Other(override val raw: String) : MultipleQueriesStrategy(raw)
 
     override fun toString(): String {
         return raw
@@ -38,7 +38,7 @@ sealed class MultipleQueriesStrategy(override val raw: String) : Raw<String> {
             return when (string) {
                 KeyNone -> None
                 KeyStopIfEnoughMatches -> StopIfEnoughMatches
-                else -> Unknown(string)
+                else -> Other(string)
             }
         }
     }

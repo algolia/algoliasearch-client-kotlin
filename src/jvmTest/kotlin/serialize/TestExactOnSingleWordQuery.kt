@@ -14,6 +14,6 @@ internal class TestExactOnSingleWordQuery : TestSerializer<ExactOnSingleWordQuer
         Attribute,
         None,
         Word,
-        Unknown(unknown)
+        Other(unknown)
     )
 }

@@ -30,6 +30,6 @@ internal class TestResponseFields : TestSerializer<ResponseFields>(ResponseField
         Query,
         QueryAfterRemoval,
         UserData,
-        Unknown(unknown)
+        Other(unknown)
     )
 }

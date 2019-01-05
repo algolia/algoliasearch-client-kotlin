@@ -19,6 +19,6 @@ internal class TestAlternativesAsExact {
         IgnorePlurals.raw shouldEqual KeyIgnorePlurals
         SingleWordSynonym.raw shouldEqual KeySingleWordSynonym
         MultiWordsSynonym.raw shouldEqual KeyMultiWordsSynonym
-        Unknown(unknown).raw shouldEqual unknown
+        Other(unknown).raw shouldEqual unknown
     }
 }

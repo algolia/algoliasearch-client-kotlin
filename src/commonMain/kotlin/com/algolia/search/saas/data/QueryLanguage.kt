@@ -69,7 +69,7 @@ sealed class QueryLanguage(override val raw: String) : Raw<String> {
     object Turkish : QueryLanguage(KeyTurkish)
     object Tatar : QueryLanguage(KeyTatar)
 
-    data class Unknown(override val raw: String) : QueryLanguage(raw)
+    data class Other(override val raw: String) : QueryLanguage(raw)
 
     override fun toString(): String {
         return raw
@@ -145,7 +145,7 @@ sealed class QueryLanguage(override val raw: String) : Raw<String> {
                 KeyTswana -> QueryLanguage.Tswana
                 KeyTurkish -> QueryLanguage.Turkish
                 KeyTatar -> QueryLanguage.Tatar
-                else -> QueryLanguage.Unknown(content)
+                else -> QueryLanguage.Other(content)
             }
         }
     }

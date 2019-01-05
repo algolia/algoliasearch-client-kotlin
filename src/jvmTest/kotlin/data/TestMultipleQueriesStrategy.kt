@@ -17,6 +17,6 @@ internal class TestMultipleQueriesStrategy {
     fun raw() {
         None.raw shouldEqual KeyNone
         StopIfEnoughMatches.raw shouldEqual KeyStopIfEnoughMatches
-        Unknown(unknown).raw shouldEqual unknown
+        Other(unknown).raw shouldEqual unknown
     }
 }
