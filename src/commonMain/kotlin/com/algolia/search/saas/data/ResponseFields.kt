@@ -1,9 +1,11 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.*
-import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(ResponseFields.Companion::class)
@@ -35,17 +37,18 @@ sealed class ResponseFields(override val raw: String) : Raw<String> {
         return raw
     }
 
-    @Serializer(ResponseFields::class)
     internal companion object : KSerializer<ResponseFields> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: ResponseFields) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): ResponseFields {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            return when (val content = element.content) {
+            return when (string) {
                 KeyStar -> All
                 KeyAroundLatLng -> AroundLatLng
                 KeyAutomaticRadius -> AutomaticRadius
@@ -65,7 +68,7 @@ sealed class ResponseFields(override val raw: String) : Raw<String> {
                 KeyQuery -> Query
                 KeyQueryAfterRemoval -> QueryAfterRemoval
                 KeyUserData -> UserData
-                else -> Unknown(content)
+                else -> Unknown(string)
             }
         }
     }

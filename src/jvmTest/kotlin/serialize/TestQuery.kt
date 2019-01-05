@@ -53,7 +53,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             aroundRadius = AroundRadius.All,
             aroundPrecision = int,
             minimumAroundRadius = int,
-            insideBoundingBox = listOf(BoundingBox(1f, 2f, 3f, 4f)),
+            insideBoundingBox = listOf(BoundingBox(1f to 2f, 3f to 4f)),
             insidePolygon = listOf(Polygon(1f to 2f, 3f to 4f, 5f to 6f)),
             ignorePlurals = BooleanOrQueryLanguages.Boolean(boolean),
             removeStopWords = BooleanOrQueryLanguages.Boolean(boolean),

@@ -18,6 +18,7 @@ internal abstract class TestSerializer<T>(
             val serialized = Json.stringify(serializer, it)
             val deserialized = Json.parse(serializer, serialized)
 
+            println(serialized)
             deserialized shouldEqual it
         }
     }

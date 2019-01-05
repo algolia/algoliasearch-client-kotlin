@@ -1,10 +1,7 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.internal.FloatSerializer
 
 
 @Serializable(Polygon.Companion::class)
@@ -38,23 +35,25 @@ data class Polygon(
         *points.flatMap { it.raw }.toTypedArray()
     )
 
-    @Serializer(Polygon::class)
     internal companion object : KSerializer<Polygon> {
 
+        private val serializer = FloatSerializer.list
+
+        override val descriptor = serializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: Polygon) {
-            encoder.asJsonOutput().encodeJson(jsonArray { obj.raw.forEach { +(it as Number) } })
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): Polygon {
-            val element = decoder.asJsonInput() as JsonArray
-            val array = element.jsonArray
+            val floats = serializer.deserialize(decoder)
 
             return Polygon(
-                Point(array.getPrimitive(0).float, array.getPrimitive(1).float),
-                Point(array.getPrimitive(2).float, array.getPrimitive(3).float),
-                Point(array.getPrimitive(4).float, array.getPrimitive(5).float),
-                (6 until array.size step 2).map {
-                    Point(array.getPrimitive(it).float, array.getPrimitive(it + 1).float)
+                Point(floats[0], floats[1]),
+                Point(floats[2], floats[3]),
+                Point(floats[4], floats[5]),
+                (6 until floats.size step 2).map {
+                    Point(floats[it], floats[it + 1])
                 }
             )
         }

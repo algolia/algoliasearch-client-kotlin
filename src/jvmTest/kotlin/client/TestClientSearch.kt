@@ -5,6 +5,7 @@ import com.algolia.search.saas.data.IndexQuery
 import com.algolia.search.saas.data.Query
 import com.algolia.search.saas.query.queryBuilder
 import com.algolia.search.saas.query.setFacets
+import com.algolia.search.saas.toAttribute
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,10 +20,13 @@ internal class TestClientSearch {
     @Test
     fun search() {
         runBlocking {
-            val search = index.search(queryBuilder { setFacets(Attribute("price")) })
+            val price = "price".toAttribute()
+            val search = index.search(queryBuilder { setFacets(price) })
 
             search.facets.shouldNotBeNull()
+            search.facets!!.contains(price)
             search.facetStats.shouldNotBeNull()
+            search.facetStats!!.contains(price).shouldBeTrue()
         }
     }
 
@@ -42,7 +46,12 @@ internal class TestClientSearch {
                 IndexQuery(index.indexName, Query("a")),
                 IndexQuery(index.indexName, Query("b"))
             )
-            index.multipleQueries(queries)
+            val search = index.multipleQueries(queries)
+
+
+            search.results!!.forEach {
+                it.index.shouldNotBeNull()
+            }
         }
     }
 

@@ -1,10 +1,12 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.*
-import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.JsonNull.content
-import kotlinx.serialization.json.JsonPrimitive
 
 
 @Serializable(QueryLanguage.Companion::class)
@@ -73,12 +75,12 @@ sealed class QueryLanguage(override val raw: String) : Raw<String> {
         return raw
     }
 
-
-    @Serializer(QueryLanguage::class)
     internal companion object : KSerializer<QueryLanguage> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: QueryLanguage) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         fun convert(string: String): QueryLanguage {
@@ -144,9 +146,9 @@ sealed class QueryLanguage(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): QueryLanguage {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            return convert(element.content)
+            return convert(string)
         }
     }
 }

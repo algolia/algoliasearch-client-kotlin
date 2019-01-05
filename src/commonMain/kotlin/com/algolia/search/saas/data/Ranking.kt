@@ -2,9 +2,11 @@ package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.*
 import com.algolia.search.saas.toAttribute
-import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(Ranking.Companion::class)
@@ -36,31 +38,32 @@ sealed class Ranking(override val raw: String) : Raw<String> {
         return raw
     }
 
-    @Serializer(Ranking::class)
     internal companion object : KSerializer<Ranking> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: Ranking) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): Ranking {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            val findAsc = regexAsc.find(element.content)
-            val findDesc = regexDesc.find(element.content)
+            val findAsc = regexAsc.find(string)
+            val findDesc = regexDesc.find(string)
 
             return when {
                 findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
                 findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
-                element.content == KeyTypo -> Typo
-                element.content == KeyGeo -> Geo
-                element.content == KeyWords -> Words
-                element.content == KeyFilters -> Filters
-                element.content == KeyProximity -> Proximity
-                element.content == KeyAttribute -> Attribute
-                element.content == KeyExact -> Exact
-                element.content == KeyCustom -> Custom
-                else -> Unknown(element.content)
+                string == KeyTypo -> Typo
+                string == KeyGeo -> Geo
+                string == KeyWords -> Words
+                string == KeyFilters -> Filters
+                string == KeyProximity -> Proximity
+                string == KeyAttribute -> Attribute
+                string == KeyExact -> Exact
+                string == KeyCustom -> Custom
+                else -> Unknown(string)
             }
         }
     }

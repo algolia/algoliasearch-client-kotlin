@@ -2,11 +2,11 @@ package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.KeyAlpha
 import com.algolia.search.saas.serialize.KeyCount
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
-import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(SortFacetValuesBy.Companion::class)
@@ -30,20 +30,21 @@ sealed class SortFacetValuesBy(override val raw: String) : Raw<String> {
         return raw
     }
 
-    @Serializer(SortFacetValuesBy::class)
     internal companion object : KSerializer<SortFacetValuesBy> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: SortFacetValuesBy) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): SortFacetValuesBy {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            return when (val content = element.content) {
+            return when (string) {
                 KeyCount -> Count
                 KeyAlpha -> Alpha
-                else -> Unknown(content)
+                else -> Unknown(string)
             }
         }
     }

@@ -5,8 +5,10 @@ import com.algolia.search.saas.serialize.KeyStrict
 import com.algolia.search.saas.serialize.asJsonInput
 import com.algolia.search.saas.serialize.asJsonOutput
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.boolean
+import kotlinx.serialization.json.booleanOrNull
+import kotlinx.serialization.json.content
 
 
 @Serializable(TypoTolerance.Companion::class)
@@ -37,7 +39,7 @@ sealed class TypoTolerance(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): TypoTolerance {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val element = decoder.asJsonInput()
 
             return when {
                 element.booleanOrNull != null -> Boolean(element.boolean)

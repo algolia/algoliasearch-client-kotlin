@@ -1,13 +1,13 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.KeyEqualOnly
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
 import com.algolia.search.saas.serialize.regexEqualOnly
 import com.algolia.search.saas.toAttribute
-import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(NumericAttributeFilter.Companion::class)
@@ -19,24 +19,25 @@ data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boole
         return raw
     }
 
-    @Serializer(NumericAttributeFilter::class)
     internal companion object : KSerializer<NumericAttributeFilter> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: NumericAttributeFilter) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): NumericAttributeFilter {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            val findEqualOnly = regexEqualOnly.find(element.content)
+            val findEqualOnly = regexEqualOnly.find(string)
 
             return when {
                 findEqualOnly != null -> NumericAttributeFilter(
                     findEqualOnly.groupValues[1].toAttribute(),
                     true
                 )
-                else -> NumericAttributeFilter(element.content.toAttribute())
+                else -> NumericAttributeFilter(string.toAttribute())
             }
         }
     }

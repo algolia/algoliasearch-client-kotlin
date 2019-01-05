@@ -1,11 +1,8 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
 import com.algolia.search.saas.toCursor
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable
@@ -17,17 +14,16 @@ data class Cursor(
         return raw
     }
 
-    @Serializer(Cursor::class)
     internal companion object : KSerializer<Cursor> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: Cursor) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): Cursor {
-            val element = decoder.asJsonInput() as JsonLiteral
-
-            return element.content.toCursor()
+            return StringSerializer.deserialize(decoder).toCursor()
         }
     }
 }

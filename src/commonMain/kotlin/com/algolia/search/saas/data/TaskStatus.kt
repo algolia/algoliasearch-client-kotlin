@@ -2,11 +2,11 @@ package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.KeyNotPublished
 import com.algolia.search.saas.serialize.KeyPublished
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
-import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(TaskStatus.Companion::class)
@@ -18,20 +18,21 @@ sealed class TaskStatus(override val raw: String) : Raw<String> {
 
     data class Unknown(override val raw: String) : TaskStatus(raw)
 
-    @Serializer(TaskStatus::class)
     companion object : KSerializer<TaskStatus> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: TaskStatus) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): TaskStatus {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            return when (val content = element.content) {
+            return when (string) {
                 KeyPublished -> Published
                 KeyNotPublished -> NotPublished
-                else -> Unknown(content)
+                else -> Unknown(string)
             }
         }
     }

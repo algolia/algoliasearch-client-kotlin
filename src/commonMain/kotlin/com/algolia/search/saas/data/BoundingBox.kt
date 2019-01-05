@@ -1,39 +1,37 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.internal.FloatSerializer
 
 
 @Serializable(BoundingBox.Companion::class)
 data class BoundingBox(
-    val point1: Float,
-    val point2: Float,
-    val point3: Float,
-    val point4: Float
+    val point1: Point,
+    val point2: Point
 ) : Raw<List<Float>> {
 
-    override val raw = listOf(point1, point2, point3, point4)
+    override val raw = listOf(point1.latitude, point1.longitude, point2.latitude, point2.longitude)
 
-    @Serializer(BoundingBox::class)
     internal companion object : KSerializer<BoundingBox> {
 
+        override val descriptor = FloatSerializer.list.descriptor
+
         override fun serialize(encoder: Encoder, obj: BoundingBox) {
-            encoder.asJsonOutput().encodeJson(jsonArray { obj.raw.forEach { +(it as Number) } })
+            FloatSerializer.list.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): BoundingBox {
-            val element = decoder.asJsonInput() as JsonArray
-
-            val array = element.jsonArray
+            val floats = FloatSerializer.list.deserialize(decoder)
 
             return BoundingBox(
-                array.getPrimitive(0).float,
-                array.getPrimitive(1).float,
-                array.getPrimitive(2).float,
-                array.getPrimitive(3).float
+                Point(
+                    floats[0],
+                    floats[1]
+                ),
+                Point(
+                    floats[2],
+                    floats[3]
+                )
             )
         }
     }

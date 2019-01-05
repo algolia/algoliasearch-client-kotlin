@@ -4,8 +4,10 @@ import com.algolia.search.saas.serialize.KeyAll
 import com.algolia.search.saas.serialize.asJsonInput
 import com.algolia.search.saas.serialize.asJsonOutput
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.content
+import kotlinx.serialization.json.int
+import kotlinx.serialization.json.intOrNull
 
 
 @Serializable(AroundRadius.Companion::class)
@@ -34,7 +36,7 @@ sealed class AroundRadius(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): AroundRadius {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val element = decoder.asJsonInput()
 
             return when {
                 element.intOrNull != null -> InMeters(element.int)

@@ -1,11 +1,8 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
 import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(Attribute.Companion::class)
@@ -15,17 +12,16 @@ data class Attribute(override val raw: String) : Raw<String> {
         return raw
     }
 
-    @Serializer(Attribute::class)
     internal companion object : KSerializer<Attribute> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: Attribute) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): Attribute {
-            val element = decoder.asJsonInput() as JsonLiteral
-
-            return element.content.toAttribute()
+            return StringSerializer.deserialize(decoder).toAttribute()
         }
     }
 }

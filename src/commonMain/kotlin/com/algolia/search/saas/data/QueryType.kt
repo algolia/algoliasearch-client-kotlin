@@ -1,9 +1,13 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.*
-import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import com.algolia.search.saas.serialize.KeyPrefixAll
+import com.algolia.search.saas.serialize.KeyPrefixLast
+import com.algolia.search.saas.serialize.KeyPrefixNone
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(QueryType.Companion::class)
@@ -34,21 +38,22 @@ sealed class QueryType(override val raw: String) : Raw<String> {
         return raw
     }
 
-    @Serializer(QueryType::class)
     internal companion object : KSerializer<QueryType> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: QueryType) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): QueryType {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            return when (val content = element.content) {
+            return when (string) {
                 KeyPrefixLast -> PrefixLast
                 KeyPrefixAll -> PrefixAll
                 KeyPrefixNone -> PrefixNone
-                else -> Unknown(content)
+                else -> Unknown(string)
             }
         }
     }

@@ -1,44 +1,39 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
-import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.internal.HashMapClassDesc
+import kotlinx.serialization.internal.HashMapSerializer
 
 
 @Serializable(DecompoundedAttributes.Companion::class)
-data class DecompoundedAttributes internal constructor(val language: QueryLanguage, val attributes: List<Attribute>) {
+data class DecompoundedAttributes internal constructor(
+    val map: Map<QueryLanguage, List<Attribute>>
+) {
+
+    private constructor(
+        language: QueryLanguage,
+        attributes: List<Attribute>
+    ) : this(mapOf(language to attributes.toList()))
 
     constructor(language: QueryLanguage.Finnish, vararg attributes: Attribute) : this(language, attributes.toList())
     constructor(language: QueryLanguage.German, vararg attributes: Attribute) : this(language, attributes.toList())
     constructor(language: QueryLanguage.Dutch, vararg attributes: Attribute) : this(language, attributes.toList())
 
-    @Serializer(DecompoundedAttributes::class)
     internal companion object : KSerializer<DecompoundedAttributes> {
 
-        override fun serialize(encoder: Encoder, obj: DecompoundedAttributes) {
-            val element = json {
-                obj.language.raw to jsonArray {
-                    obj.attributes.forEach { +it.raw }
-                }
-            }
+        private val serializer = HashMapSerializer(QueryLanguage, Attribute.list)
 
-            encoder.asJsonOutput().encodeJson(element)
+        override val descriptor: SerialDescriptor = HashMapClassDesc(
+            QueryLanguage.descriptor,
+            Attribute.list.descriptor
+        )
+
+        override fun serialize(encoder: Encoder, obj: DecompoundedAttributes) {
+            HashMapSerializer(QueryLanguage, Attribute.list).serialize(encoder, obj.map)
         }
 
         override fun deserialize(decoder: Decoder): DecompoundedAttributes {
-            val element = decoder.asJsonInput() as JsonObject
-            val key = element.keys.first()
-            val attributes = element.getArrayOrNull(key)?.map { it.content.toAttribute() }
-
-            return DecompoundedAttributes(
-                QueryLanguage.convert(key),
-                attributes ?: listOf()
-            )
+            return DecompoundedAttributes(serializer.deserialize(decoder))
         }
     }
 }

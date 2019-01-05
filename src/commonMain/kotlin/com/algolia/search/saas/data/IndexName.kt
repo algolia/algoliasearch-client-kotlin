@@ -1,12 +1,9 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.StringUTF8
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
-import com.algolia.search.saas.toIndex
+import com.algolia.search.saas.toIndexName
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(IndexName.Companion::class)
@@ -27,16 +24,16 @@ data class IndexName(
     }
 
     @Serializer(IndexName::class)
-    companion object : KSerializer<IndexName> {
+    internal companion object : KSerializer<IndexName> {
+
+        override val descriptor = StringSerializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: IndexName) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): IndexName {
-            val element = decoder.asJsonInput() as JsonLiteral
-
-            return element.content.toIndex()
+            return StringSerializer.deserialize(decoder).toIndexName()
         }
     }
 }

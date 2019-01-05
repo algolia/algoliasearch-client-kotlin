@@ -3,7 +3,7 @@ package com.algolia.search.saas
 import com.algolia.search.saas.data.*
 
 
-fun String.toIndex(): IndexName {
+fun String.toIndexName(): IndexName {
     return IndexName(this)
 }
 

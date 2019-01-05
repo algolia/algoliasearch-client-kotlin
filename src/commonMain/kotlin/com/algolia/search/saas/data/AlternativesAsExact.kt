@@ -1,9 +1,10 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.*
+import com.algolia.search.saas.serialize.KeyIgnorePlurals
+import com.algolia.search.saas.serialize.KeyMultiWordsSynonym
+import com.algolia.search.saas.serialize.KeySingleWordSynonym
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(AlternativesAsExact.Companion::class)
@@ -30,21 +31,22 @@ sealed class AlternativesAsExact(override val raw: String) : Raw<String> {
         return raw
     }
 
-    @Serializer(AlternativesAsExact::class)
     internal companion object : KSerializer<AlternativesAsExact> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: AlternativesAsExact) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): AlternativesAsExact {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            return when (val content = element.content) {
+            return when (string) {
                 KeyIgnorePlurals -> IgnorePlurals
                 KeySingleWordSynonym -> SingleWordSynonym
                 KeyMultiWordsSynonym -> MultiWordsSynonym
-                else -> Unknown(content)
+                else -> Unknown(string)
             }
         }
     }

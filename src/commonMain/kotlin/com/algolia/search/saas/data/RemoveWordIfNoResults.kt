@@ -1,9 +1,14 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.*
-import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import com.algolia.search.saas.serialize.KeyAllOptional
+import com.algolia.search.saas.serialize.KeyFirstWords
+import com.algolia.search.saas.serialize.KeyLastWords
+import com.algolia.search.saas.serialize.KeyNone
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(RemoveWordIfNoResults.Companion::class)
@@ -40,22 +45,23 @@ sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String> {
         return raw
     }
 
-    @Serializer(RemoveWordIfNoResults::class)
     internal companion object : KSerializer<RemoveWordIfNoResults> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: RemoveWordIfNoResults) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): RemoveWordIfNoResults {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            return when (val content = element.content) {
+            return when (string) {
                 KeyNone -> None
                 KeyLastWords -> LastWords
                 KeyFirstWords -> FirstWords
                 KeyAllOptional -> AllOptional
-                else -> Unknown(content)
+                else -> Unknown(string)
             }
         }
     }

@@ -1,10 +1,12 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.*
+import com.algolia.search.saas.serialize.KeyAsc
+import com.algolia.search.saas.serialize.KeyDesc
+import com.algolia.search.saas.serialize.regexAsc
+import com.algolia.search.saas.serialize.regexDesc
 import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(CustomRanking.Companion::class)
@@ -20,23 +22,24 @@ sealed class CustomRanking(override val raw: String) : Raw<String> {
         return raw
     }
 
-    @Serializer(CustomRanking::class)
     internal companion object : KSerializer<CustomRanking> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: CustomRanking) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): CustomRanking {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            val findAsc = regexAsc.find(element.content)
-            val findDesc = regexDesc.find(element.content)
+            val findAsc = regexAsc.find(string)
+            val findDesc = regexDesc.find(string)
 
             return when {
                 findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
                 findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
-                else -> Unknown(element.content)
+                else -> Unknown(string)
             }
         }
     }

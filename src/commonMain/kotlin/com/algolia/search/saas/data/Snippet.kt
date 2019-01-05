@@ -1,12 +1,12 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
 import com.algolia.search.saas.serialize.regexSnippet
 import com.algolia.search.saas.toAttribute
-import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(Snippet.Companion::class)
@@ -21,24 +21,25 @@ data class Snippet(
         return raw
     }
 
-    @Serializer(Snippet::class)
     internal companion object : KSerializer<Snippet> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: Snippet) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): Snippet {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            val findSnippet = regexSnippet.find(element.content)
+            val findSnippet = regexSnippet.find(string)
 
             return when {
                 findSnippet != null -> Snippet(
                     findSnippet.groupValues[1].toAttribute(),
                     findSnippet.groupValues[2].toInt()
                 )
-                else -> Snippet(element.content.toAttribute())
+                else -> Snippet(string.toAttribute())
             }
         }
     }

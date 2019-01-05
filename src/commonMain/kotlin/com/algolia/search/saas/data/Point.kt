@@ -1,10 +1,7 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.internal.FloatSerializer
 
 
 @Serializable(Point.Companion::class)
@@ -15,23 +12,20 @@ data class Point(
 
     override val raw = listOf(latitude, longitude)
 
-    @Serializer(Point::class)
     internal companion object : KSerializer<Point> {
 
-        override fun serialize(encoder: Encoder, obj: Point) {
+        private val serializer = FloatSerializer.list
 
-            encoder.asJsonOutput().encodeJson(jsonArray { obj.raw.forEach { +(it as Number) } })
+        override val descriptor = serializer.descriptor
+
+        override fun serialize(encoder: Encoder, obj: Point) {
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): Point {
-            val element = decoder.asJsonInput() as JsonArray
+            val floats = serializer.deserialize(decoder)
 
-            val array = element.jsonArray
-
-            return Point(
-                array.getPrimitive(0).float,
-                array.getPrimitive(1).float
-            )
+            return Point(floats[0], floats[1])
         }
     }
 }

@@ -2,11 +2,11 @@ package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.KeyNone
 import com.algolia.search.saas.serialize.KeyStopIfEnoughMatches
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
-import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(MultipleQueriesStrategy.Companion::class)
@@ -22,20 +22,21 @@ sealed class MultipleQueriesStrategy(override val raw: String) : Raw<String> {
         return raw
     }
 
-    @Serializer(MultipleQueriesStrategy::class)
     internal companion object : KSerializer<MultipleQueriesStrategy> {
 
+        override val descriptor = StringSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: MultipleQueriesStrategy) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            StringSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): MultipleQueriesStrategy {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val string = StringSerializer.deserialize(decoder)
 
-            return when (val content = element.content) {
+            return when (string) {
                 KeyNone -> None
                 KeyStopIfEnoughMatches -> StopIfEnoughMatches
-                else -> Unknown(content)
+                else -> Unknown(string)
             }
         }
     }

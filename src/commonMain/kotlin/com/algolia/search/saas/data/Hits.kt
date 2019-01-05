@@ -1,6 +1,5 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.KSerializerFacetStats
 import com.algolia.search.saas.serialize.KSerializerFacets
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
@@ -16,7 +15,7 @@ data class Hits(
     @Optional val exhaustiveNbHits: Boolean? = null,
     @Optional val query: String? = null,
     @Optional val params: String? = null,
-    @Optional @Serializable(KSerializerFacetStats::class) @SerialName("facets_stats") val facetStats: Map<Attribute, FacetStats>? = null,
+    @Optional @SerialName("facets_stats") val facetStats: Map<Attribute, FacetStats>? = null,
     @Optional val cursor: Cursor? = null,
     @Optional val hitsPerPage: Int? = null,
     @Optional val page: Int? = null,

@@ -1,11 +1,8 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.asJsonInput
-import com.algolia.search.saas.serialize.asJsonOutput
 import com.algolia.search.saas.toTaskId
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.internal.LongSerializer
 
 
 @Serializable(TaskId.Companion::class)
@@ -19,13 +16,13 @@ data class TaskId(override val raw: Long) : Raw<Long> {
     companion object : KSerializer<TaskId> {
 
         override fun serialize(encoder: Encoder, obj: TaskId) {
-            encoder.asJsonOutput().encodeJson(JsonPrimitive(obj.raw))
+            LongSerializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): TaskId {
-            val element = decoder.asJsonInput() as JsonLiteral
+            val long = LongSerializer.deserialize(decoder)
 
-            return element.long.toTaskId()
+            return long.toTaskId()
         }
     }
 }
