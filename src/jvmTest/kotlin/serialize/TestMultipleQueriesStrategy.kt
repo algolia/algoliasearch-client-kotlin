@@ -2,6 +2,7 @@ package serialize
 
 import com.algolia.search.saas.data.MultipleQueriesStrategy
 import com.algolia.search.saas.data.MultipleQueriesStrategy.*
+import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import unknown
@@ -11,8 +12,8 @@ import unknown
 internal class TestMultipleQueriesStrategy : TestSerializer<MultipleQueriesStrategy>(MultipleQueriesStrategy) {
 
     override val items = listOf(
-        None,
-        StopIfEnoughMatches,
-        Other(unknown)
+        None to JsonLiteral(None.raw),
+        StopIfEnoughMatches to JsonLiteral(StopIfEnoughMatches.raw),
+        Other(unknown) to JsonLiteral(unknown)
     )
 }

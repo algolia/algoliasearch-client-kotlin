@@ -4,6 +4,7 @@ import boolean
 import com.algolia.search.saas.data.TypoTolerance
 import com.algolia.search.saas.data.TypoTolerance.*
 import com.algolia.search.saas.data.TypoTolerance.Boolean
+import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import unknown
@@ -13,9 +14,9 @@ import unknown
 internal class TestTypoTolerance : TestSerializer<TypoTolerance>(TypoTolerance) {
 
     override val items = listOf(
-        Boolean(boolean),
-        Min,
-        Strict,
-        Other(unknown)
+        Boolean(boolean) to JsonLiteral(boolean),
+        Min to JsonLiteral(Min.raw),
+        Strict to JsonLiteral(Strict.raw),
+        Other(unknown) to JsonLiteral(unknown)
     )
 }

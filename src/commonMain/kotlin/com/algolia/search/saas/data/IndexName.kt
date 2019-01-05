@@ -23,7 +23,6 @@ data class IndexName(
         return raw
     }
 
-    @Serializer(IndexName::class)
     internal companion object : KSerializer<IndexName> {
 
         private val serializer = StringSerializer

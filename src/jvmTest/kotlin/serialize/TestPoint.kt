@@ -1,6 +1,7 @@
 package serialize
 
 import com.algolia.search.saas.data.Point
+import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
@@ -9,6 +10,15 @@ import org.junit.runners.JUnit4
 internal class TestPoint : TestSerializer<Point>(Point) {
 
     override val items = listOf(
-        Point(1f, 2f)
+        point to json
     )
+
+    companion object {
+
+        val point = Point(1f, 2f)
+        val json = jsonArray {
+            +(1f as Number)
+            +(2f as Number)
+        }
+    }
 }

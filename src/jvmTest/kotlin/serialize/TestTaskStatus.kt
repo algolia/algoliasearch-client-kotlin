@@ -1,6 +1,7 @@
 package serialize
 
 import com.algolia.search.saas.data.TaskStatus
+import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import unknown
@@ -10,8 +11,8 @@ import unknown
 internal class TestTaskStatus : TestSerializer<TaskStatus>(TaskStatus) {
 
     override val items = listOf(
-        TaskStatus.Published,
-        TaskStatus.NotPublished,
-        TaskStatus.Other(unknown)
+        TaskStatus.Published to JsonLiteral(TaskStatus.Published.raw),
+        TaskStatus.NotPublished to JsonLiteral(TaskStatus.NotPublished.raw),
+        TaskStatus.Other(unknown) to JsonLiteral(unknown)
     )
 }

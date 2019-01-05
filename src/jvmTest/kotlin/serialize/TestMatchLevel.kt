@@ -2,6 +2,7 @@ package serialize
 
 import com.algolia.search.saas.data.MatchLevel
 import com.algolia.search.saas.data.MatchLevel.*
+import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import unknown
@@ -11,9 +12,9 @@ import unknown
 internal class TestMatchLevel : TestSerializer<MatchLevel>(MatchLevel) {
 
     override val items = listOf(
-        None,
-        Partial,
-        Full,
-        Other(unknown)
+        None to JsonLiteral(None.raw),
+        Partial to JsonLiteral(Partial.raw),
+        Full to JsonLiteral(Full.raw),
+        Other(unknown) to JsonLiteral(unknown)
     )
 }

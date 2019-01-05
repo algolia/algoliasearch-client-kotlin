@@ -3,6 +3,7 @@ package com.algolia.search.saas.data
 import com.algolia.search.saas.serialize.asJsonInput
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.BooleanSerializer
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonLiteral
 
@@ -32,7 +33,7 @@ sealed class BooleanOrQueryLanguages {
             val element = decoder.asJsonInput()
 
             return when (element) {
-                is JsonArray -> QueryLanguages(QueryLanguage.list.deserialize(decoder))
+                is JsonArray -> QueryLanguages(element.map { Json.nonstrict.fromJson(it, QueryLanguage) })
                 is JsonLiteral -> Boolean(element.boolean)
                 else -> throw Exception()
             }

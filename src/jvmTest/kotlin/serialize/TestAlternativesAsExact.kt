@@ -2,6 +2,7 @@ package serialize
 
 import com.algolia.search.saas.data.AlternativesAsExact
 import com.algolia.search.saas.data.AlternativesAsExact.*
+import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import unknown
@@ -10,9 +11,9 @@ import unknown
 internal class TestAlternativesAsExact : TestSerializer<AlternativesAsExact>(AlternativesAsExact) {
 
     override val items = listOf(
-        IgnorePlurals,
-        SingleWordSynonym,
-        MultiWordsSynonym,
-        Other(unknown)
+        IgnorePlurals to JsonLiteral(IgnorePlurals.raw),
+        SingleWordSynonym to JsonLiteral(SingleWordSynonym.raw),
+        MultiWordsSynonym to JsonLiteral(MultiWordsSynonym.raw),
+        Other(unknown) to JsonLiteral(unknown)
     )
 }

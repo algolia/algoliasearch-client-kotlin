@@ -2,6 +2,7 @@ package serialize
 
 import attributeA
 import com.algolia.search.saas.data.Attribute
+import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
@@ -10,6 +11,6 @@ import org.junit.runners.JUnit4
 internal class TestAttribute : TestSerializer<Attribute>(Attribute) {
 
     override val items = listOf(
-        attributeA
+        attributeA to JsonLiteral(attributeA.raw)
     )
 }

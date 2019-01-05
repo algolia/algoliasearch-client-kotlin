@@ -1,6 +1,7 @@
 package serialize
 
 import com.algolia.search.saas.data.Cursor
+import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
@@ -9,6 +10,6 @@ import org.junit.runners.JUnit4
 internal class TestCursor : TestSerializer<Cursor>(Cursor) {
 
     override val items = listOf(
-        Cursor("cursor")
+        Cursor("cursor") to JsonLiteral("cursor")
     )
 }

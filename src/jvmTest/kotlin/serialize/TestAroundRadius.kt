@@ -2,6 +2,7 @@ package serialize
 
 import com.algolia.search.saas.data.AroundRadius
 import com.algolia.search.saas.data.AroundRadius.*
+import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import unknown
@@ -11,8 +12,8 @@ import unknown
 internal class TestAroundRadius : TestSerializer<AroundRadius>(AroundRadius) {
 
     override val items = listOf(
-        All,
-        InMeters(10),
-        Other(unknown)
+        All to JsonLiteral(All.raw),
+        InMeters(10) to JsonLiteral(10),
+        Other(unknown) to JsonLiteral(unknown)
     )
 }

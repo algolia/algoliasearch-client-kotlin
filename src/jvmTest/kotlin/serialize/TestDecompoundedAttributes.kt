@@ -4,6 +4,8 @@ import attributeA
 import attributeB
 import com.algolia.search.saas.data.DecompoundedAttributes
 import com.algolia.search.saas.data.QueryLanguage
+import kotlinx.serialization.json.json
+import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
@@ -12,7 +14,17 @@ import org.junit.runners.JUnit4
 internal class TestDecompoundedAttributes : TestSerializer<DecompoundedAttributes>(DecompoundedAttributes) {
 
     override val items = listOf(
-        DecompoundedAttributes(QueryLanguage.German, attributeA, attributeB),
-        DecompoundedAttributes(QueryLanguage.Finnish, attributeA, attributeB)
+        item to json
     )
+
+    companion object {
+
+        val item = DecompoundedAttributes(QueryLanguage.German, attributeA, attributeB)
+        val json = json {
+            QueryLanguage.German.raw to jsonArray {
+                +attributeA.raw
+                +attributeB.raw
+            }
+        }
+    }
 }

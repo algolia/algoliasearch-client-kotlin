@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
-@Serializable
+@Serializable(Cursor.Companion::class)
 data class Cursor(
     override val raw: String
 ) : Raw<String> {

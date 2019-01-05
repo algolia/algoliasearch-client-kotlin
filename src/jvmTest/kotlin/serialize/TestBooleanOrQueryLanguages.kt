@@ -6,6 +6,8 @@ import com.algolia.search.saas.data.BooleanOrQueryLanguages.Boolean
 import com.algolia.search.saas.data.BooleanOrQueryLanguages.QueryLanguages
 import com.algolia.search.saas.data.QueryLanguage.Afrikaans
 import com.algolia.search.saas.data.QueryLanguage.Albanian
+import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
@@ -14,10 +16,13 @@ import org.junit.runners.JUnit4
 internal class TestBooleanOrQueryLanguages : TestSerializer<BooleanOrQueryLanguages>(BooleanOrQueryLanguages) {
 
     override val items = listOf(
-        Boolean(boolean),
+        Boolean(boolean) to JsonLiteral(boolean),
         QueryLanguages(
             Afrikaans,
             Albanian
-        )
+        ) to jsonArray {
+            +Afrikaans.raw
+            +Albanian.raw
+        }
     )
 }

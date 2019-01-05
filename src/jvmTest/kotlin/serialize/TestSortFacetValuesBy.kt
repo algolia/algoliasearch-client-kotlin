@@ -2,6 +2,7 @@ package serialize
 
 import com.algolia.search.saas.data.SortFacetValuesBy
 import com.algolia.search.saas.data.SortFacetValuesBy.*
+import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import unknown
@@ -11,8 +12,8 @@ import unknown
 internal class TestSortFacetValuesBy : TestSerializer<SortFacetValuesBy>(SortFacetValuesBy) {
 
     override val items = listOf(
-        Alpha,
-        Count,
-        Other(unknown)
+        Alpha to JsonLiteral(Alpha.raw),
+        Count to JsonLiteral(Count.raw),
+        Other(unknown) to JsonLiteral(unknown)
     )
 }
