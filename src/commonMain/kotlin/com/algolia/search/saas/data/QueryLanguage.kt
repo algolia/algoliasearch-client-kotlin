@@ -85,7 +85,9 @@ sealed class QueryLanguage(override val raw: String) : Raw<String> {
             serializer.serialize(encoder, obj.raw)
         }
 
-        fun convert(string: String): QueryLanguage {
+        override fun deserialize(decoder: Decoder): QueryLanguage {
+            val string = serializer.deserialize(decoder)
+
             return when (string) {
                 KeyAfrikaans -> QueryLanguage.Afrikaans
                 KeyArabic -> QueryLanguage.Arabic
@@ -145,12 +147,6 @@ sealed class QueryLanguage(override val raw: String) : Raw<String> {
                 KeyTatar -> QueryLanguage.Tatar
                 else -> QueryLanguage.Unknown(content)
             }
-        }
-
-        override fun deserialize(decoder: Decoder): QueryLanguage {
-            val string = serializer.deserialize(decoder)
-
-            return convert(string)
         }
     }
 }

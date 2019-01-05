@@ -5,7 +5,6 @@ import kotlinx.serialization.*
 import kotlinx.serialization.internal.BooleanSerializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.content
 
 
 @Serializable(BooleanOrQueryLanguages.Companion::class)
@@ -33,7 +32,7 @@ sealed class BooleanOrQueryLanguages {
             val element = decoder.asJsonInput()
 
             return when (element) {
-                is JsonArray -> QueryLanguages(element.map { QueryLanguage.convert(it.content) })
+                is JsonArray -> QueryLanguages(QueryLanguage.list.deserialize(decoder))
                 is JsonLiteral -> Boolean(element.boolean)
                 else -> throw Exception()
             }
