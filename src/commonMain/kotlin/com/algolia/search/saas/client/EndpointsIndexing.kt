@@ -2,7 +2,6 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 
 
@@ -17,20 +16,20 @@ interface EndpointsIndexing {
     ): TaskCreate
 
     suspend fun addObject(
-        json: JsonElement,
+        json: JsonObject,
         requestOptions: RequestOptions? = null
     ): TaskCreate
 
     suspend fun <T> updateObject(
-        data: T,
-        serializer: KSerializer<T>,
         objectId: ObjectId,
+        serializer: KSerializer<T>,
+        data: T,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
     suspend fun updateObject(
-        json: JsonElement,
         objectId: ObjectId,
+        json: JsonObject,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
@@ -40,17 +39,40 @@ interface EndpointsIndexing {
     ): TaskDelete
 
     suspend fun <T : Indexable> getObject(
-        serializer: KSerializer<T>,
         objectId: ObjectId,
-        attributes: List<Attribute>? = null,
+        serializer: KSerializer<T>,
+        vararg attributes: Attribute,
         requestOptions: RequestOptions? = null
     ): T
 
     suspend fun getObject(
         objectId: ObjectId,
-        attributes: List<Attribute>? = null,
+        vararg attributes: Attribute,
         requestOptions: RequestOptions? = null
     ): JsonObject
 
     suspend fun clearObjects(requestOptions: RequestOptions? = null): TaskUpdateIndex
+
+    suspend fun <T> updateObjectPartially(
+        objectId: ObjectId,
+        serializer: KSerializer<T>,
+        data: T,
+        createIfNotExists: Boolean = true,
+        requestOptions: RequestOptions? = null
+    ): TaskUpdateObject
+
+    suspend fun updateObjectPartially(
+        objectId: ObjectId,
+        json: JsonObject,
+        createIfNotExists: Boolean = true,
+        requestOptions: RequestOptions? = null
+    ): TaskUpdateObject
+
+    suspend fun updateObjectPartially(
+        objectId: ObjectId,
+        vararg updateOperations: UpdateOperation,
+        createIfNotExists: Boolean = true,
+        requestOptions: RequestOptions? = null
+    ): TaskUpdateObject
+
 }
