@@ -12,50 +12,44 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 
 
-class ClientSearch(
-    val client: Client,
+internal class ClientSearch(
+    val client: AlgoliaClient,
     override val indexName: IndexName
-) : EndpointsSearch {
+) : EndpointsSearch,
+    Configuration by client,
+    Client by client.client {
 
     override suspend fun search(requestOptions: RequestOptions?): Hits {
-        return client.run {
-            read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes()) { path ->
-                httpClient.get<Hits>(path) {
-                    setRequestOptions(requestOptions)
-                }
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes()) { path ->
+            httpClient.get<Hits>(path) {
+                setRequestOptions(requestOptions)
             }
         }
     }
 
     override suspend fun search(query: Query?, requestOptions: RequestOptions?): Hits {
-        return client.run {
-            read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/query")) { path ->
-                httpClient.post<Hits>(path) {
-                    setRequestOptions(requestOptions)
-                    setBody(query)
-                }
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/query")) { path ->
+            httpClient.post<Hits>(path) {
+                setRequestOptions(requestOptions)
+                setBody(query)
             }
         }
     }
 
     override suspend fun browse(query: Query?, requestOptions: RequestOptions?): Hits {
-        return client.run {
-            read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
-                httpClient.post<Hits>(path) {
-                    setRequestOptions(requestOptions)
-                    setBody(query)
-                }
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
+            httpClient.post<Hits>(path) {
+                setRequestOptions(requestOptions)
+                setBody(query)
             }
         }
     }
 
     override suspend fun browse(cursor: Cursor, requestOptions: RequestOptions?): Hits {
-        return client.run {
-            read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
-                httpClient.get<Hits>(path) {
-                    setRequestOptions(requestOptions)
-                    parameter(KeyCursor, cursor)
-                }
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
+            httpClient.get<Hits>(path) {
+                setRequestOptions(requestOptions)
+                parameter(KeyCursor, cursor)
             }
         }
     }
@@ -65,12 +59,10 @@ class ClientSearch(
         strategy: MultipleQueriesStrategy,
         requestOptions: RequestOptions?
     ): MultipleHits {
-        return client.run {
-            read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/queries") { path ->
-                httpClient.post<MultipleHits>(path) {
-                    setRequestOptions(requestOptions)
-                    setQueries(queries, strategy)
-                }
+        return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/queries") { path ->
+            httpClient.post<MultipleHits>(path) {
+                setRequestOptions(requestOptions)
+                setQueries(queries, strategy)
             }
         }
     }
@@ -82,28 +74,26 @@ class ClientSearch(
         maxFacetHits: Int?,
         requestOptions: RequestOptions?
     ): FacetHits {
-        return client.run {
-            read.retry(
-                requestOptions.computedReadTimeout,
-                indexName.pathIndexes("/facets/$attribute/query")
-            ) { path ->
-                httpClient.post<FacetHits>(path) {
-                    setRequestOptions(requestOptions)
-                    val extraParams = json {
-                        maxFacetHits?.let { KeyMaxFacetHits to it }
-                        facetQuery?.let { KeyFacetQuery to it }
-                    }
-
-                    body = if (query != null) {
-                        val serialize = query.encodeNoNulls()
-                        val map = serialize.toMutableMap()
-
-                        map.putAll(extraParams)
-                        JsonObject(map)
-                    } else {
-                        extraParams
-                    }.toString()
+        return read.retry(
+            requestOptions.computedReadTimeout,
+            indexName.pathIndexes("/facets/$attribute/query")
+        ) { path ->
+            httpClient.post<FacetHits>(path) {
+                setRequestOptions(requestOptions)
+                val extraParams = json {
+                    maxFacetHits?.let { KeyMaxFacetHits to it }
+                    facetQuery?.let { KeyFacetQuery to it }
                 }
+
+                body = if (query != null) {
+                    val serialize = query.encodeNoNulls()
+                    val map = serialize.toMutableMap()
+
+                    map.putAll(extraParams)
+                    JsonObject(map)
+                } else {
+                    extraParams
+                }.toString()
             }
         }
     }

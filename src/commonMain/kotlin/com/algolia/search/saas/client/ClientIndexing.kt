@@ -11,18 +11,18 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
 
-class ClientIndexing(
-    val client: Client,
+internal class ClientIndexing(
+    val client: AlgoliaClient,
     override val indexName: IndexName
-) : EndpointsIndexing {
+) : EndpointsIndexing,
+    Configuration by client,
+    Client by client.client {
 
     private suspend fun addObject(payload: String, requestOptions: RequestOptions?): TaskCreate {
-        return client.run {
-            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
-                httpClient.post<TaskCreate>(path) {
-                    setRequestOptions(requestOptions)
-                    body = payload
-                }
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
+            httpClient.post<TaskCreate>(path) {
+                setRequestOptions(requestOptions)
+                body = payload
             }
         }
     }
@@ -44,12 +44,10 @@ class ClientIndexing(
         objectId: ObjectId,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return client.run {
-            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId")) { path ->
-                httpClient.put<TaskUpdateObject>(path) {
-                    setRequestOptions(requestOptions)
-                    body = payload
-                }
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId")) { path ->
+            httpClient.put<TaskUpdateObject>(path) {
+                setRequestOptions(requestOptions)
+                body = payload
             }
         }
     }
@@ -72,10 +70,8 @@ class ClientIndexing(
     }
 
     override suspend fun deleteObject(objectId: ObjectId, requestOptions: RequestOptions?): TaskDelete {
-        return client.run {
-            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId")) { path ->
-                httpClient.delete<TaskDelete>(path)
-            }
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId")) { path ->
+            httpClient.delete<TaskDelete>(path)
         }
     }
 
@@ -84,13 +80,11 @@ class ClientIndexing(
         vararg attributes: Attribute,
         requestOptions: RequestOptions?
     ): String {
-        return client.run {
-            read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/$objectId")) { path ->
-                httpClient.get<String>(path) {
-                    setRequestOptions(requestOptions)
-                    if (attributes.isNotEmpty()) {
-                        parameter(KeyAttributesToRetrieve, Json.stringify(Attribute.list, attributes.toList()))
-                    }
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/$objectId")) { path ->
+            httpClient.get<String>(path) {
+                setRequestOptions(requestOptions)
+                if (attributes.isNotEmpty()) {
+                    parameter(KeyAttributesToRetrieve, Json.stringify(Attribute.list, attributes.toList()))
                 }
             }
         }
@@ -118,12 +112,10 @@ class ClientIndexing(
     }
 
     override suspend fun clearObjects(requestOptions: RequestOptions?): TaskUpdateIndex {
-        return client.run {
-            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/clear")) { path ->
-                httpClient.post<TaskUpdateIndex>(path) {
-                    setRequestOptions(requestOptions)
-                    body = ""
-                }
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/clear")) { path ->
+            httpClient.post<TaskUpdateIndex>(path) {
+                setRequestOptions(requestOptions)
+                body = ""
             }
         }
     }
@@ -134,13 +126,11 @@ class ClientIndexing(
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return client.run {
-            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId/partial")) { path ->
-                httpClient.post<TaskUpdateObject>(path) {
-                    setRequestOptions(requestOptions)
-                    parameter(KeyCreateIfNotExists, createIfNotExists)
-                    body = payload
-                }
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId/partial")) { path ->
+            httpClient.post<TaskUpdateObject>(path) {
+                setRequestOptions(requestOptions)
+                parameter(KeyCreateIfNotExists, createIfNotExists)
+                body = payload
             }
         }
     }

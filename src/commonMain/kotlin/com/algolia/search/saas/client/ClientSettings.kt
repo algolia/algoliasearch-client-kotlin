@@ -13,17 +13,17 @@ import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 
 
-class ClientSettings(
-    val client: Client,
+internal class ClientSettings(
+    val client: AlgoliaClient,
     override val indexName: IndexName
-) : EndpointsSettings {
+) : EndpointsSettings,
+    Configuration by client,
+    Client by client.client {
 
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
-        return client.run {
-            read.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
-                httpClient.get<Settings>(path) {
-                    setRequestOptions(requestOptions)
-                }
+        return read.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
+            httpClient.get<Settings>(path) {
+                setRequestOptions(requestOptions)
             }
         }
     }
@@ -34,21 +34,19 @@ class ClientSettings(
         forwardToReplicas: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateIndex {
-        return client.run {
-            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
-                httpClient.put<TaskUpdateIndex>(path) {
-                    setRequestOptions(requestOptions)
-                    val map = settings
-                        .encodeNoNulls()
-                        .toMutableMap()
-                        .apply {
-                            resetToDefault.forEach {
-                                put(it.raw, JsonNull)
-                            }
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
+            httpClient.put<TaskUpdateIndex>(path) {
+                setRequestOptions(requestOptions)
+                val map = settings
+                    .encodeNoNulls()
+                    .toMutableMap()
+                    .apply {
+                        resetToDefault.forEach {
+                            put(it.raw, JsonNull)
                         }
-                    body = JsonObject(map).toString()
-                    parameter(KeyForwardToReplicas, forwardToReplicas)
-                }
+                    }
+                body = JsonObject(map).toString()
+                parameter(KeyForwardToReplicas, forwardToReplicas)
             }
         }
     }

@@ -12,10 +12,12 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
 
-class ClientIndices(
-    val client: Client,
+internal class ClientIndices(
+    val client: AlgoliaClient,
     override val indexName: IndexName
-) : EndpointsIndices {
+) : EndpointsIndices,
+    Configuration by client,
+    Client by client.client {
 
     private suspend fun copyOrMove(
         destination: IndexName,
@@ -23,16 +25,14 @@ class ClientIndices(
         scopes: List<Scope>? = null,
         requestOptions: RequestOptions?
     ): TaskUpdateIndex {
-        return client.run {
-            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/operation")) { path ->
-                httpClient.post<TaskUpdateIndex>(path) {
-                    setRequestOptions(requestOptions)
-                    body = json {
-                        KeyOperation to key
-                        KeyDestination to destination.raw
-                        scopes?.let { KeyScope to Json.stringify(Scope.list, it) }
-                    }.toString()
-                }
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/operation")) { path ->
+            httpClient.post<TaskUpdateIndex>(path) {
+                setRequestOptions(requestOptions)
+                body = json {
+                    KeyOperation to key
+                    KeyDestination to destination.raw
+                    scopes?.let { KeyScope to Json.stringify(Scope.list, it) }
+                }.toString()
             }
         }
     }
@@ -50,11 +50,9 @@ class ClientIndices(
     }
 
     override suspend fun deleteIndex(requestOptions: RequestOptions?): TaskDelete {
-        return client.run {
-            write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
-                httpClient.delete<TaskDelete>(path) {
-                    setRequestOptions(requestOptions)
-                }
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
+            httpClient.delete<TaskDelete>(path) {
+                setRequestOptions(requestOptions)
             }
         }
     }

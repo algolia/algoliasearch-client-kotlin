@@ -5,10 +5,12 @@ import io.ktor.client.request.get
 import kotlinx.coroutines.delay
 
 
-class ClientAdvanced(
-    val client: Client,
+internal class ClientAdvanced(
+    val client: AlgoliaClient,
     override val indexName: IndexName
-) : EndpointsAdvanced {
+) : EndpointsAdvanced,
+    Configuration by client,
+    Client by client.client {
 
     override val maxTimeToWait = 10000L
 
@@ -25,10 +27,8 @@ class ClientAdvanced(
     }
 
     override suspend fun getTask(taskId: TaskId): TaskInfo {
-        return client.run {
-            read.retry(readTimeout, indexName.pathIndexes("/task/$taskId")) { path ->
-                httpClient.get<TaskInfo>(path)
-            }
+        return read.retry(readTimeout, indexName.pathIndexes("/task/$taskId")) { path ->
+            httpClient.get<TaskInfo>(path)
         }
     }
 }
