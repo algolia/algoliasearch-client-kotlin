@@ -70,7 +70,7 @@ interface EndpointsIndexing {
 
     suspend fun updateObjectPartially(
         objectId: ObjectId,
-        vararg updateOperations: UpdateOperation,
+        updateOperation: UpdateOperation,
         createIfNotExists: Boolean = true,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject

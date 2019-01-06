@@ -7,7 +7,6 @@ import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
 
@@ -156,15 +155,12 @@ internal class ClientIndexing(
 
     override suspend fun updateObjectPartially(
         objectId: ObjectId,
-        vararg updateOperations: UpdateOperation,
+        updateOperation: UpdateOperation,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        val json = json {
-            updateOperations.forEach {
-                it.attribute.raw to Json.plain.toJson(it, UpdateOperation)
-            }
-        }
-        return updateObjectPartially(objectId, json.toString(), createIfNotExists, requestOptions)
+        val payload = Json.plain.toJson(updateOperation, UpdateOperation).toString()
+
+        return updateObjectPartially(objectId, payload, createIfNotExists, requestOptions)
     }
 }
