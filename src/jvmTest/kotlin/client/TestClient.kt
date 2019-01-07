@@ -12,7 +12,7 @@ internal class TestClient {
 
     @Test
     fun indexCache() {
-        val initFirst = client.getIndex(indexA)
-        client.getIndex(indexA) shouldEqual initFirst
+        val initFirst = algolia.getIndex(indexA)
+        algolia.getIndex(indexA) shouldEqual initFirst
     }
 }

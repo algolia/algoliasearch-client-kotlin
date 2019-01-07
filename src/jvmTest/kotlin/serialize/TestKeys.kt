@@ -161,6 +161,8 @@ internal class TestKeys {
         KeyClear shouldEqual "clear"
         KeyAction shouldEqual "action"
         KeyBody shouldEqual "body"
+        KeyObjectIds shouldEqual "objectIDs"
+        KeyTaskId shouldEqual "taskID"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

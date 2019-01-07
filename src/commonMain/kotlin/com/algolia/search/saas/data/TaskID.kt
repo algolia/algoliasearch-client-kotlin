@@ -1,6 +1,6 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.toTaskId
+import com.algolia.search.saas.toTaskID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -28,7 +28,7 @@ data class TaskID(override val raw: Long) : Raw<Long> {
         override fun deserialize(decoder: Decoder): TaskID {
             val long = serializer.deserialize(decoder)
 
-            return long.toTaskId()
+            return long.toTaskID()
         }
     }
 }

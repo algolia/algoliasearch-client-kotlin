@@ -14,6 +14,7 @@ import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.get
 import io.ktor.client.request.post
+import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
@@ -33,7 +34,9 @@ class AlgoliaClient(
 
         override val httpClient = HttpClient {
             install(JsonFeature) {
-                serializer = KotlinxSerializer(Json.nonstrict)
+                serializer = KotlinxSerializer(Json.nonstrict).also {
+                    it.register(TaskBatchWriteIndex)
+                }
             }
             install(DefaultRequest) {
                 setApplicationId(applicationID)
@@ -81,6 +84,37 @@ class AlgoliaClient(
                     body = json.toString()
                 }.let { Json.plain.parseJson(it).jsonObject.getArray(KeyResults).map { it.jsonObject } }
             }
+        }
+    }
+
+    override suspend fun batchWrite(
+        batchWrite: BatchWriteIndex,
+        vararg additionalBatchWrites: BatchWriteIndex,
+        requestOptions: RequestOptions?
+    ): TaskBatchWriteIndex {
+        return client.run {
+            val requests = Json.plain.toJson((listOf(batchWrite) + additionalBatchWrites), BatchWriteIndex.list)
+            val json = json { KeyRequests to requests }
+
+            write.retry(requestOptions.computedWriteTimeout, "/1/indexes/*/batch") { path ->
+                httpClient.post<TaskBatchWriteIndex>(path) {
+                    setRequestOptions(requestOptions)
+                    body = json.toString()
+                }
+            }
+        }
+    }
+
+    internal suspend fun waitAll(taskIndices: List<TaskIndex>, maxTimeToWait: Long = 10000L): List<TaskInfo> {
+        var attempt = 1
+        val timeToWait = 10000L
+
+        while (true) {
+            taskIndices.map { getIndex(it.indexName).getTask(it.taskID) }.let {
+                if (it.all { it.status == TaskStatus.Published }) return it
+            }
+            delay((timeToWait * attempt).coerceAtMost(maxTimeToWait))
+            attempt++
         }
     }
 }

@@ -20,7 +20,7 @@ internal class TestClientIndices {
     }
 
     private suspend fun deleteIndexIfExists(vararg indexes: Index) {
-        val existing = client.listIndexes().items.map { it.indexName }
+        val existing = algolia.listIndexes().items.map { it.indexName }
 
         indexes.forEach { index ->
             if (existing.any { index.indexName == it }) {
@@ -44,10 +44,10 @@ internal class TestClientIndices {
     @Test
     fun test() {
         runBlocking {
-            deleteIndexIfExists(copy, destination)
-            copyIndex(index, copy.indexName)
-            moveIndex(copy, destination.indexName)
-            deleteIndex(destination)
+            deleteIndexIfExists(indexCopyA, indexCopyB)
+            copyIndex(index, indexCopyA.indexName)
+            moveIndex(indexCopyA, indexCopyB.indexName)
+            deleteIndex(indexCopyB)
         }
     }
 }

@@ -151,6 +151,8 @@ internal const val KeyDelete = "delete"
 internal const val KeyClear = "clear"
 internal const val KeyAction = "action"
 internal const val KeyBody = "body"
+internal const val KeyObjectIds = "objectIDs"
+internal const val KeyTaskId = "taskID"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"

@@ -19,8 +19,16 @@ fun String.toObjectID(): ObjectID {
     return ObjectID(this)
 }
 
-fun Long.toTaskId(): TaskID {
+fun Long.toTaskID(): TaskID {
     return TaskID(this)
+}
+
+fun String.toApplicationID(): ApplicationID {
+    return ApplicationID(this)
+}
+
+fun String.toApiKey(): ApiKey {
+    return ApiKey(this)
 }
 
 
