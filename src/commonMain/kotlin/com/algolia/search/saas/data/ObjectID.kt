@@ -1,6 +1,6 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.toObjectId
+import com.algolia.search.saas.toObjectID
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
 
@@ -25,7 +25,7 @@ data class ObjectID(@SerialName("objectID") override val raw: String) : Raw<Stri
         override fun deserialize(decoder: Decoder): ObjectID {
             val string = serializer.deserialize(decoder)
 
-            return string.toObjectId()
+            return string.toObjectID()
         }
     }
 }

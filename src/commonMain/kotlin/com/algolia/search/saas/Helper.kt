@@ -15,7 +15,7 @@ fun String.toCursor(): Cursor {
     return Cursor(this)
 }
 
-fun String.toObjectId(): ObjectID {
+fun String.toObjectID(): ObjectID {
     return ObjectID(this)
 }
 

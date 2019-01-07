@@ -24,3 +24,11 @@ internal fun Boolean.shouldBeTrue() {
 internal fun Boolean.shouldBeFalse() {
     assertFalse(this)
 }
+
+internal infix fun <T> Collection<T>?.shouldContain(element: T) {
+    (this?.contains(element) ?: false).shouldBeTrue()
+}
+
+internal infix fun <T> Collection<T>?.shouldNotContain(element: T) {
+    (this?.contains(element) ?: false).shouldBeFalse()
+}

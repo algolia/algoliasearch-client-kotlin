@@ -72,4 +72,10 @@ interface EndpointsIndexing {
         createIfNotExists: Boolean = true,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
+
+    suspend fun batchWrite(
+        batchWrite: BatchWrite,
+        vararg additionalBatchWrites: BatchWrite,
+        requestOptions: RequestOptions? = null
+    ): TaskBatchWrite
 }

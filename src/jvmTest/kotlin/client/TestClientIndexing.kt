@@ -1,10 +1,11 @@
 package client
 
 import com.algolia.search.saas.client.Index
-import com.algolia.search.saas.data.*
+import com.algolia.search.saas.data.ObjectID
+import com.algolia.search.saas.data.PartialUpdate
+import com.algolia.search.saas.data.TaskStatus
 import com.algolia.search.saas.serialize.KeyObjectId
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import org.junit.Test
@@ -15,22 +16,6 @@ import shouldEqual
 
 @RunWith(JUnit4::class)
 internal class TestClientIndexing {
-
-    @Serializable
-    private data class Data(
-        val name: String,
-        val count: Int,
-        val brands: List<String>,
-        override val objectID: ObjectID
-    ) : Indexable
-
-    private val name = Attribute("name")
-    private val count = Attribute("count")
-    private val brands = Attribute("brands")
-    private val iphone = "iPhone"
-    private val samsung = "Samsung"
-    private val dataCreate = Data("Phone", 1000, listOf(iphone), ObjectID("test_suite"))
-    private val dataUpdate = dataCreate.copy(name = "Telephone")
 
     @Test
     fun clearObjects() {
@@ -45,7 +30,7 @@ internal class TestClientIndexing {
     }
 
     @Test
-    fun suite() {
+    fun updatePartial() {
         runBlocking {
             index.run {
                 create(dataCreate)

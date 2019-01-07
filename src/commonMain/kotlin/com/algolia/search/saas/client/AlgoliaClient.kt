@@ -25,7 +25,7 @@ class AlgoliaClient(
     override val apiKey: ApiKey,
     override val writeTimeout: Long = 30000,
     override val readTimeout: Long = 2000,
-    override val logLevel: LogLevel = LogLevel.ALL
+    override val logLevel: LogLevel = LogLevel.BODY
 ) : Configuration,
     EndpointMultipleIndices {
 
@@ -72,13 +72,13 @@ class AlgoliaClient(
         requestOptions: RequestOptions?
     ): List<JsonObject> {
         return client.run {
+            val requests = Json.plain.toJson(listOf(request) + additionalRequests, RequestObjects.list)
+            val json = json { KeyRequests to requests }
+
             read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/objects") { path ->
                 httpClient.post<String>(path) {
-                    val requests = Json.plain.toJson(listOf(request) + additionalRequests, RequestObjects.list)
-                    val json = json { KeyRequests to requests }
-
-                    body = json.toString()
                     setRequestOptions(requestOptions)
+                    body = json.toString()
                 }.let { Json.plain.parseJson(it).jsonObject.getArray(KeyResults).map { it.jsonObject } }
             }
         }

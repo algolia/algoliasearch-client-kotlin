@@ -3,7 +3,7 @@ package com.algolia.search.saas.data
 import com.algolia.search.saas.serialize.*
 import com.algolia.search.saas.toAttribute
 import com.algolia.search.saas.toIndexName
-import com.algolia.search.saas.toObjectId
+import com.algolia.search.saas.toObjectID
 import kotlinx.serialization.*
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
@@ -44,7 +44,7 @@ data class RequestObjects internal constructor(
 
             return RequestObjects(
                 element.getPrimitive(KeyIndex).content.toIndexName(),
-                element.getPrimitive(KeyObjectId).content.toObjectId(),
+                element.getPrimitive(KeyObjectId).content.toObjectID(),
                 element.getArrayOrNull(KeyAttributesToRetrieve)?.map { it.content.toAttribute() }.orEmpty()
             )
         }

@@ -3,10 +3,12 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.data.*
 import com.algolia.search.saas.serialize.KeyAttributesToRetrieve
 import com.algolia.search.saas.serialize.KeyCreateIfNotExists
+import com.algolia.search.saas.serialize.KeyRequests
 import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
 
@@ -160,5 +162,21 @@ internal class ClientIndexing(
         val payload = Json.plain.toJson(partialUpdate, PartialUpdate).toString()
 
         return updateObjectPartially(payload, objectID, createIfNotExists, requestOptions)
+    }
+
+    override suspend fun batchWrite(
+        batchWrite: BatchWrite,
+        vararg additionalBatchWrites: BatchWrite,
+        requestOptions: RequestOptions?
+    ): TaskBatchWrite {
+        val requests = Json.plain.toJson((listOf(batchWrite) + additionalBatchWrites), BatchWrite.list)
+        val json = json { KeyRequests to requests }
+
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/batch")) { path ->
+            httpClient.post<TaskBatchWrite>(path) {
+                setRequestOptions(requestOptions)
+                body = json.toString()
+            }
+        }
     }
 }
