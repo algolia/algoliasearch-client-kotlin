@@ -51,18 +51,17 @@ internal class ClientIndexing(
         }
     }
 
-    override suspend fun <T> updateObject(
-        objectID: ObjectID,
-        serializer: KSerializer<T>,
+    override suspend fun <T : Indexable> updateObject(
         data: T,
+        serializer: KSerializer<T>,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return updateObject(Json.stringify(serializer, data), objectID, requestOptions)
+        return updateObject(Json.stringify(serializer, data), data.objectID, requestOptions)
     }
 
     override suspend fun updateObject(
-        objectID: ObjectID,
         json: JsonObject,
+        objectID: ObjectID,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
         return updateObject(json.toString(), objectID, requestOptions)
@@ -120,8 +119,8 @@ internal class ClientIndexing(
     }
 
     private suspend fun updateObjectPartially(
-        objectID: ObjectID,
         payload: String,
+        objectID: ObjectID,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
@@ -134,23 +133,22 @@ internal class ClientIndexing(
         }
     }
 
-    override suspend fun <T> updateObjectPartially(
-        objectID: ObjectID,
-        serializer: KSerializer<T>,
+    override suspend fun <T : Indexable> updateObjectPartially(
         data: T,
+        serializer: KSerializer<T>,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return updateObjectPartially(objectID, Json.stringify(serializer, data), createIfNotExists, requestOptions)
+        return updateObjectPartially(Json.stringify(serializer, data), data.objectID, createIfNotExists, requestOptions)
     }
 
     override suspend fun updateObjectPartially(
-        objectID: ObjectID,
         json: JsonObject,
+        objectID: ObjectID,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return updateObjectPartially(objectID, json.toString(), createIfNotExists, requestOptions)
+        return updateObjectPartially(json.toString(), objectID, createIfNotExists, requestOptions)
     }
 
     override suspend fun updateObjectPartially(
@@ -161,6 +159,6 @@ internal class ClientIndexing(
     ): TaskUpdateObject {
         val payload = Json.plain.toJson(updateOperation, UpdateOperation).toString()
 
-        return updateObjectPartially(objectID, payload, createIfNotExists, requestOptions)
+        return updateObjectPartially(payload, objectID, createIfNotExists, requestOptions)
     }
 }

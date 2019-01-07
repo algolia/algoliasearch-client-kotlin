@@ -20,16 +20,15 @@ interface EndpointsIndexing {
         requestOptions: RequestOptions? = null
     ): TaskCreate
 
-    suspend fun <T> updateObject(
-        objectID: ObjectID,
-        serializer: KSerializer<T>,
+    suspend fun <T : Indexable> updateObject(
         data: T,
+        serializer: KSerializer<T>,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
     suspend fun updateObject(
-        objectID: ObjectID,
         json: JsonObject,
+        objectID: ObjectID,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
@@ -53,17 +52,16 @@ interface EndpointsIndexing {
 
     suspend fun clearObjects(requestOptions: RequestOptions? = null): TaskUpdateIndex
 
-    suspend fun <T> updateObjectPartially(
-        objectID: ObjectID,
-        serializer: KSerializer<T>,
+    suspend fun <T : Indexable> updateObjectPartially(
         data: T,
+        serializer: KSerializer<T>,
         createIfNotExists: Boolean = true,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
     suspend fun updateObjectPartially(
-        objectID: ObjectID,
         json: JsonObject,
+        objectID: ObjectID,
         createIfNotExists: Boolean = true,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
@@ -74,5 +72,4 @@ interface EndpointsIndexing {
         createIfNotExists: Boolean = true,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
-
 }

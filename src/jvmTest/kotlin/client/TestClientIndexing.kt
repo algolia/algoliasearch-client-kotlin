@@ -68,7 +68,7 @@ internal class TestClientIndexing {
     }
 
     private suspend fun Index.update(data: Data) {
-        val update = updateObject(data.objectID, Data.serializer(), data)
+        val update = updateObject(data, Data.serializer())
 
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, name) shouldEqual json {
