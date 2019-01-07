@@ -120,7 +120,7 @@ internal class ClientIndexing(
         }
     }
 
-    private suspend fun updateObjectPartially(
+    private suspend fun updateObject(
         payload: String,
         objectID: ObjectID,
         createIfNotExists: Boolean,
@@ -135,25 +135,25 @@ internal class ClientIndexing(
         }
     }
 
-    override suspend fun <T : Indexable> updateObjectPartially(
+    override suspend fun <T : Indexable> updateObject(
         data: T,
         serializer: KSerializer<T>,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return updateObjectPartially(Json.stringify(serializer, data), data.objectID, createIfNotExists, requestOptions)
+        return updateObject(Json.stringify(serializer, data), data.objectID, createIfNotExists, requestOptions)
     }
 
-    override suspend fun updateObjectPartially(
+    override suspend fun updateObject(
         json: JsonObject,
         objectID: ObjectID,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return updateObjectPartially(json.toString(), objectID, createIfNotExists, requestOptions)
+        return updateObject(json.toString(), objectID, createIfNotExists, requestOptions)
     }
 
-    override suspend fun updateObjectPartially(
+    override suspend fun updateObject(
         objectID: ObjectID,
         partialUpdate: PartialUpdate,
         createIfNotExists: Boolean,
@@ -161,7 +161,7 @@ internal class ClientIndexing(
     ): TaskUpdateObject {
         val payload = Json.plain.toJson(partialUpdate, PartialUpdate).toString()
 
-        return updateObjectPartially(payload, objectID, createIfNotExists, requestOptions)
+        return updateObject(payload, objectID, createIfNotExists, requestOptions)
     }
 
     override suspend fun batchWrite(

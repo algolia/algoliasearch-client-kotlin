@@ -52,21 +52,21 @@ interface EndpointsIndexing {
 
     suspend fun clearObjects(requestOptions: RequestOptions? = null): TaskUpdateIndex
 
-    suspend fun <T : Indexable> updateObjectPartially(
+    suspend fun <T : Indexable> updateObject(
         data: T,
         serializer: KSerializer<T>,
         createIfNotExists: Boolean = true,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
-    suspend fun updateObjectPartially(
+    suspend fun updateObject(
         json: JsonObject,
         objectID: ObjectID,
         createIfNotExists: Boolean = true,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
-    suspend fun updateObjectPartially(
+    suspend fun updateObject(
         objectID: ObjectID,
         partialUpdate: PartialUpdate,
         createIfNotExists: Boolean = true,

@@ -30,16 +30,16 @@ internal class TestClientIndexing {
     }
 
     @Test
-    fun updatePartial() {
+    fun update() {
         runBlocking {
             index.run {
                 create(dataCreate)
                 replace(dataUpdate)
-                updatePartialIncrement(dataUpdate)
-                updatePartialDecrement(dataUpdate)
-                updatePartialAdd(dataUpdate)
-                updatePartialRemove(dataUpdate)
-                updatePartialAddUnique(dataUpdate)
+                updateIncrement(dataUpdate)
+                updateDecrement(dataUpdate)
+                updateAdd(dataUpdate)
+                updateRemove(dataUpdate)
+                updateAddUnique(dataUpdate)
                 delete(dataCreate.objectID)
             }
         }
@@ -62,8 +62,8 @@ internal class TestClientIndexing {
         }
     }
 
-    private suspend fun Index.updatePartialIncrement(data: Data) {
-        val update = updateObjectPartially(data.objectID, PartialUpdate.Increment(count, 1))
+    private suspend fun Index.updateIncrement(data: Data) {
+        val update = updateObject(data.objectID, PartialUpdate.Increment(count, 1))
 
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, count) shouldEqual json {
@@ -72,8 +72,8 @@ internal class TestClientIndexing {
         }
     }
 
-    private suspend fun Index.updatePartialDecrement(data: Data) {
-        val update = updateObjectPartially(data.objectID, PartialUpdate.Decrement(count, 1))
+    private suspend fun Index.updateDecrement(data: Data) {
+        val update = updateObject(data.objectID, PartialUpdate.Decrement(count, 1))
 
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, count) shouldEqual json {
@@ -82,8 +82,8 @@ internal class TestClientIndexing {
         }
     }
 
-    private suspend fun Index.updatePartialAdd(data: Data) {
-        val update = updateObjectPartially(data.objectID, PartialUpdate.Add(brands, samsung))
+    private suspend fun Index.updateAdd(data: Data) {
+        val update = updateObject(data.objectID, PartialUpdate.Add(brands, samsung))
 
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, brands) shouldEqual json {
@@ -95,8 +95,8 @@ internal class TestClientIndexing {
         }
     }
 
-    private suspend fun Index.updatePartialRemove(data: Data) {
-        val update = updateObjectPartially(data.objectID, PartialUpdate.Remove(brands, samsung))
+    private suspend fun Index.updateRemove(data: Data) {
+        val update = updateObject(data.objectID, PartialUpdate.Remove(brands, samsung))
 
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, brands) shouldEqual json {
@@ -105,8 +105,8 @@ internal class TestClientIndexing {
         }
     }
 
-    private suspend fun Index.updatePartialAddUnique(data: Data) {
-        val update = updateObjectPartially(data.objectID, PartialUpdate.AddUnique(brands, iphone))
+    private suspend fun Index.updateAddUnique(data: Data) {
+        val update = updateObject(data.objectID, PartialUpdate.AddUnique(brands, iphone))
 
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, brands) shouldEqual json {
