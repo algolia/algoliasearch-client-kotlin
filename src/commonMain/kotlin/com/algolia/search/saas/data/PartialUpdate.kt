@@ -21,7 +21,7 @@ internal sealed class Value<T> {
     data class Number(override val raw: kotlin.Number) : Value<kotlin.Number>()
 }
 
-sealed class UpdateOperation(
+sealed class PartialUpdate(
     open val attribute: Attribute,
     internal open val value: Value<*>
 ) {
@@ -29,7 +29,7 @@ sealed class UpdateOperation(
     data class Increment internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : UpdateOperation(attribute, value) {
+    ) : PartialUpdate(attribute, value) {
 
         constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
@@ -37,7 +37,7 @@ sealed class UpdateOperation(
     data class Decrement internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : UpdateOperation(attribute, value) {
+    ) : PartialUpdate(attribute, value) {
 
         constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
@@ -45,7 +45,7 @@ sealed class UpdateOperation(
     data class Add internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : UpdateOperation(attribute, value) {
+    ) : PartialUpdate(attribute, value) {
 
         constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 
@@ -55,7 +55,7 @@ sealed class UpdateOperation(
     data class Remove internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : UpdateOperation(attribute, value) {
+    ) : PartialUpdate(attribute, value) {
 
         constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 
@@ -65,17 +65,17 @@ sealed class UpdateOperation(
     data class AddUnique internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : UpdateOperation(attribute, value) {
+    ) : PartialUpdate(attribute, value) {
 
         constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 
         constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
 
-    @Serializer(UpdateOperation::class)
-    internal companion object : KSerializer<UpdateOperation> {
+    @Serializer(PartialUpdate::class)
+    internal companion object : KSerializer<PartialUpdate> {
 
-        override fun serialize(encoder: Encoder, obj: UpdateOperation) {
+        override fun serialize(encoder: Encoder, obj: PartialUpdate) {
             val key = when (obj) {
                 is Increment -> KeyIncrement
                 is Decrement -> KeyDecrement
@@ -95,7 +95,7 @@ sealed class UpdateOperation(
             encoder.asJsonOutput().encodeJson(json)
         }
 
-        override fun deserialize(decoder: Decoder): UpdateOperation {
+        override fun deserialize(decoder: Decoder): PartialUpdate {
             val element = decoder.asJsonInput().jsonObject
             val key = element.keys.first()
             val attribute = key.toAttribute()
@@ -106,11 +106,11 @@ sealed class UpdateOperation(
             val value = int ?: double ?: Value.String(raw.content)
 
             return when (operation) {
-                KeyIncrement -> UpdateOperation.Increment(attribute, value)
-                KeyDecrement -> UpdateOperation.Decrement(attribute, value)
-                KeyAdd -> UpdateOperation.Add(attribute, value)
-                KeyRemove -> UpdateOperation.Remove(attribute, value)
-                KeyAddUnique -> UpdateOperation.AddUnique(attribute, value)
+                KeyIncrement -> PartialUpdate.Increment(attribute, value)
+                KeyDecrement -> PartialUpdate.Decrement(attribute, value)
+                KeyAdd -> PartialUpdate.Add(attribute, value)
+                KeyRemove -> PartialUpdate.Remove(attribute, value)
+                KeyAddUnique -> PartialUpdate.AddUnique(attribute, value)
                 else -> throw Exception("Unknown operation $operation")
             }
         }

@@ -51,7 +51,7 @@ internal class ClientIndexing(
         }
     }
 
-    override suspend fun <T : Indexable> updateObject(
+    override suspend fun <T : Indexable> replaceObject(
         data: T,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions?
@@ -59,7 +59,7 @@ internal class ClientIndexing(
         return updateObject(Json.stringify(serializer, data), data.objectID, requestOptions)
     }
 
-    override suspend fun updateObject(
+    override suspend fun replaceObject(
         json: JsonObject,
         objectID: ObjectID,
         requestOptions: RequestOptions?
@@ -153,11 +153,11 @@ internal class ClientIndexing(
 
     override suspend fun updateObjectPartially(
         objectID: ObjectID,
-        updateOperation: UpdateOperation,
+        partialUpdate: PartialUpdate,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        val payload = Json.plain.toJson(updateOperation, UpdateOperation).toString()
+        val payload = Json.plain.toJson(partialUpdate, PartialUpdate).toString()
 
         return updateObjectPartially(payload, objectID, createIfNotExists, requestOptions)
     }
