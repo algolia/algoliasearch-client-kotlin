@@ -141,7 +141,7 @@ internal const val KeyAddUnique = "AddUnique"
 internal const val Key_Operation = "_operation"
 internal const val KeyValue = "value"
 internal const val KeyObjectId = "objectID"
-internal const val KeyIndex_Name = "index_name"
+internal const val KeyResults = "results"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"

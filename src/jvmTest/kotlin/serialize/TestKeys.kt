@@ -151,7 +151,7 @@ internal class TestKeys {
         Key_Operation shouldEqual "_operation"
         KeyValue shouldEqual "value"
         KeyObjectId shouldEqual "objectID"
-        KeyIndex_Name shouldEqual "index_name"
+        KeyResults shouldEqual "results"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

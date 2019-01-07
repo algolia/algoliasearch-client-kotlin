@@ -5,7 +5,7 @@ import attributeB
 import com.algolia.search.saas.data.ObjectId
 import com.algolia.search.saas.data.RequestObjects
 import com.algolia.search.saas.serialize.KeyAttributesToRetrieve
-import com.algolia.search.saas.serialize.KeyIndex_Name
+import com.algolia.search.saas.serialize.KeyIndexName
 import com.algolia.search.saas.serialize.KeyObjectId
 import indexA
 import kotlinx.serialization.json.json
@@ -21,12 +21,11 @@ internal class TestRequestObjects : TestSerializer<RequestObjects>(RequestObject
 
     override val items = listOf(
         RequestObjects(indexA, objectID) to json {
-            KeyIndex_Name to indexA.raw
+            KeyIndexName to indexA.raw
             KeyObjectId to objectID.raw
-            KeyAttributesToRetrieve to jsonArray { }
         },
         RequestObjects(indexA, objectID, attributeA, attributeB) to json {
-            KeyIndex_Name to indexA.raw
+            KeyIndexName to indexA.raw
             KeyObjectId to objectID.raw
             KeyAttributesToRetrieve to jsonArray {
                 +attributeA.raw

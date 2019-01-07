@@ -1,10 +1,9 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.ApiKey
-import com.algolia.search.saas.data.ApplicationId
-import com.algolia.search.saas.data.IndexName
-import com.algolia.search.saas.data.ListIndexes
+import com.algolia.search.saas.data.*
 import com.algolia.search.saas.host.RetryLogic
+import com.algolia.search.saas.serialize.KeyRequests
+import com.algolia.search.saas.serialize.KeyResults
 import io.ktor.client.HttpClient
 import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature
@@ -14,7 +13,11 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.get
+import io.ktor.client.request.post
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.json
+import kotlinx.serialization.list
 
 
 class AlgoliaClient(
@@ -22,8 +25,9 @@ class AlgoliaClient(
     override val apiKey: ApiKey,
     override val writeTimeout: Long = 30000,
     override val readTimeout: Long = 2000,
-    override val logLevel: LogLevel = LogLevel.BODY
-) : Configuration {
+    override val logLevel: LogLevel = LogLevel.ALL
+) : Configuration,
+    EndpointMultipleIndices {
 
     internal val client = object : Client {
 
@@ -52,12 +56,30 @@ class AlgoliaClient(
         }
     }
 
-    suspend fun listIndexes(requestOptions: RequestOptions? = null): ListIndexes {
+    override suspend fun listIndexes(requestOptions: RequestOptions?): ListIndexes {
         return client.run {
             read.retry(requestOptions.computedReadTimeout, "/1/indexes") { path ->
                 httpClient.get<ListIndexes>(path) {
                     setRequestOptions(requestOptions)
                 }
+            }
+        }
+    }
+
+    override suspend fun getObjects(
+        request: RequestObjects,
+        vararg additionalRequests: RequestObjects,
+        requestOptions: RequestOptions?
+    ): List<JsonObject> {
+        return client.run {
+            read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/objects") { path ->
+                httpClient.post<String>(path) {
+                    val requests = Json.plain.toJson(listOf(request) + additionalRequests, RequestObjects.list)
+                    val json = json { KeyRequests to requests }
+
+                    body = json.toString()
+                    setRequestOptions(requestOptions)
+                }.let { Json.plain.parseJson(it).jsonObject.getArray(KeyResults).map { it.jsonObject } }
             }
         }
     }
