@@ -1,6 +1,6 @@
 package com.algolia.search.saas.host
 
-import com.algolia.search.saas.data.ApplicationId
+import com.algolia.search.saas.data.ApplicationID
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
@@ -9,7 +9,7 @@ import kotlin.math.floor
 
 
 internal class RetryLogic(
-    applicationId: ApplicationId,
+    applicationID: ApplicationID,
     type: Type,
     private val hostStatusExpirationDelay: Long = 1000L * 60L * 5L
 ) {
@@ -20,10 +20,10 @@ internal class RetryLogic(
     }
 
     private val host = when (type) {
-        Type.Read -> applicationId.readHost
-        Type.Write -> applicationId.writeHost
+        Type.Read -> applicationID.readHost
+        Type.Write -> applicationID.writeHost
     }
-    internal val hosts = listOf(host) + applicationId.computeHosts().randomize()
+    internal val hosts = listOf(host) + applicationID.computeHosts().randomize()
     internal val statuses = hosts.initialHostStatus()
 
     private suspend fun <T> retry(

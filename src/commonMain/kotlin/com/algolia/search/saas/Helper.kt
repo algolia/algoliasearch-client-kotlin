@@ -15,12 +15,12 @@ fun String.toCursor(): Cursor {
     return Cursor(this)
 }
 
-fun String.toObjectId(): ObjectId {
-    return ObjectId(this)
+fun String.toObjectId(): ObjectID {
+    return ObjectID(this)
 }
 
-fun Long.toTaskId(): TaskId {
-    return TaskId(this)
+fun Long.toTaskId(): TaskID {
+    return TaskID(this)
 }
 
 

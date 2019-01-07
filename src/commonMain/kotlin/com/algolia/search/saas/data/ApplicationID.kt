@@ -1,7 +1,7 @@
 package com.algolia.search.saas.data
 
 
-data class ApplicationId(val name: String) {
+data class ApplicationID(val name: String) {
 
     override fun toString(): String {
         return name

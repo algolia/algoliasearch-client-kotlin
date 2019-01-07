@@ -2,7 +2,7 @@ package serialize
 
 import attributeA
 import attributeB
-import com.algolia.search.saas.data.ObjectId
+import com.algolia.search.saas.data.ObjectID
 import com.algolia.search.saas.data.RequestObjects
 import com.algolia.search.saas.serialize.KeyAttributesToRetrieve
 import com.algolia.search.saas.serialize.KeyIndexName
@@ -17,7 +17,7 @@ import org.junit.runners.JUnit4
 @RunWith(JUnit4::class)
 internal class TestRequestObjects : TestSerializer<RequestObjects>(RequestObjects) {
 
-    private val objectID = ObjectId("objectA")
+    private val objectID = ObjectID("objectA")
 
     override val items = listOf(
         RequestObjects(indexA, objectID) to json {

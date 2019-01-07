@@ -13,13 +13,13 @@ import kotlinx.serialization.json.jsonArray
 @Serializable(RequestObjects.Companion::class)
 data class RequestObjects internal constructor(
     val indexName: IndexName,
-    val objectID: ObjectId,
+    val objectID: ObjectID,
     val attributes: List<Attribute>
 ) {
 
     constructor(
         indexName: IndexName,
-        objectID: ObjectId,
+        objectID: ObjectID,
         vararg attributes: Attribute
     ) : this(indexName, objectID, attributes.toList())
 

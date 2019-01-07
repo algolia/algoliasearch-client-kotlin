@@ -1,6 +1,6 @@
 package client
 
-import com.algolia.search.saas.data.ObjectId
+import com.algolia.search.saas.data.ObjectID
 import com.algolia.search.saas.data.RequestObjects
 import com.algolia.search.saas.serialize.KeyObjectId
 import kotlinx.coroutines.runBlocking
@@ -30,11 +30,11 @@ internal class TestClientMultipleIndices {
             val objects = client.getObjects(
                 RequestObjects(
                     index.indexName,
-                    ObjectId(objectID1)
+                    ObjectID(objectID1)
                 ),
                 RequestObjects(
                     index.indexName,
-                    ObjectId(objectID2)
+                    ObjectID(objectID2)
                 )
             )
 

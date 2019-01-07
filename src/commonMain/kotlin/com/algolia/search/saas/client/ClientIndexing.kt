@@ -40,10 +40,10 @@ internal class ClientIndexing(
 
     private suspend fun updateObject(
         payload: String,
-        objectId: ObjectId,
+        objectID: ObjectID,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID")) { path ->
             httpClient.put<TaskUpdateObject>(path) {
                 setRequestOptions(requestOptions)
                 body = payload
@@ -52,34 +52,34 @@ internal class ClientIndexing(
     }
 
     override suspend fun <T> updateObject(
-        objectId: ObjectId,
+        objectID: ObjectID,
         serializer: KSerializer<T>,
         data: T,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return updateObject(Json.stringify(serializer, data), objectId, requestOptions)
+        return updateObject(Json.stringify(serializer, data), objectID, requestOptions)
     }
 
     override suspend fun updateObject(
-        objectId: ObjectId,
+        objectID: ObjectID,
         json: JsonObject,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return updateObject(json.toString(), objectId, requestOptions)
+        return updateObject(json.toString(), objectID, requestOptions)
     }
 
-    override suspend fun deleteObject(objectId: ObjectId, requestOptions: RequestOptions?): TaskDelete {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId")) { path ->
+    override suspend fun deleteObject(objectID: ObjectID, requestOptions: RequestOptions?): TaskDelete {
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID")) { path ->
             httpClient.delete<TaskDelete>(path)
         }
     }
 
     private suspend fun getObjectInternal(
-        objectId: ObjectId,
+        objectID: ObjectID,
         vararg attributes: Attribute,
         requestOptions: RequestOptions?
     ): String {
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/$objectId")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/$objectID")) { path ->
             httpClient.get<String>(path) {
                 setRequestOptions(requestOptions)
                 if (attributes.isNotEmpty()) {
@@ -90,22 +90,22 @@ internal class ClientIndexing(
     }
 
     override suspend fun getObject(
-        objectId: ObjectId,
+        objectID: ObjectID,
         vararg attributes: Attribute,
         requestOptions: RequestOptions?
     ): JsonObject {
-        return getObjectInternal(objectId, *attributes, requestOptions = requestOptions).let {
+        return getObjectInternal(objectID, *attributes, requestOptions = requestOptions).let {
             Json.nonstrict.parseJson(it).jsonObject
         }
     }
 
     override suspend fun <T : Indexable> getObject(
-        objectId: ObjectId,
+        objectID: ObjectID,
         serializer: KSerializer<T>,
         vararg attributes: Attribute,
         requestOptions: RequestOptions?
     ): T {
-        return getObjectInternal(objectId, *attributes, requestOptions = requestOptions).let {
+        return getObjectInternal(objectID, *attributes, requestOptions = requestOptions).let {
             Json.nonstrict.parse(serializer, it)
         }
     }
@@ -120,12 +120,12 @@ internal class ClientIndexing(
     }
 
     private suspend fun updateObjectPartially(
-        objectId: ObjectId,
+        objectID: ObjectID,
         payload: String,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectId/partial")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID/partial")) { path ->
             httpClient.post<TaskUpdateObject>(path) {
                 setRequestOptions(requestOptions)
                 parameter(KeyCreateIfNotExists, createIfNotExists)
@@ -135,32 +135,32 @@ internal class ClientIndexing(
     }
 
     override suspend fun <T> updateObjectPartially(
-        objectId: ObjectId,
+        objectID: ObjectID,
         serializer: KSerializer<T>,
         data: T,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return updateObjectPartially(objectId, Json.stringify(serializer, data), createIfNotExists, requestOptions)
+        return updateObjectPartially(objectID, Json.stringify(serializer, data), createIfNotExists, requestOptions)
     }
 
     override suspend fun updateObjectPartially(
-        objectId: ObjectId,
+        objectID: ObjectID,
         json: JsonObject,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return updateObjectPartially(objectId, json.toString(), createIfNotExists, requestOptions)
+        return updateObjectPartially(objectID, json.toString(), createIfNotExists, requestOptions)
     }
 
     override suspend fun updateObjectPartially(
-        objectId: ObjectId,
+        objectID: ObjectID,
         updateOperation: UpdateOperation,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
         val payload = Json.plain.toJson(updateOperation, UpdateOperation).toString()
 
-        return updateObjectPartially(objectId, payload, createIfNotExists, requestOptions)
+        return updateObjectPartially(objectID, payload, createIfNotExists, requestOptions)
     }
 }

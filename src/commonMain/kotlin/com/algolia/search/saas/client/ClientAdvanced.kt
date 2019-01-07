@@ -26,8 +26,8 @@ internal class ClientAdvanced(
         }
     }
 
-    override suspend fun getTask(taskId: TaskId): TaskInfo {
-        return read.retry(readTimeout, indexName.pathIndexes("/task/$taskId")) { path ->
+    override suspend fun getTask(taskID: TaskID): TaskInfo {
+        return read.retry(readTimeout, indexName.pathIndexes("/task/$taskID")) { path ->
             httpClient.get<TaskInfo>(path)
         }
     }

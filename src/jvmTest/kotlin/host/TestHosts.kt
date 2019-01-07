@@ -1,6 +1,6 @@
 package host
 
-import com.algolia.search.saas.data.ApplicationId
+import com.algolia.search.saas.data.ApplicationID
 import com.algolia.search.saas.host.computeHosts
 import com.algolia.search.saas.host.randomize
 import com.algolia.search.saas.host.readHost
@@ -16,7 +16,7 @@ import shouldEqual
 @RunWith(JUnit4::class)
 class TestHosts {
 
-    private val applicationId = ApplicationId("appId")
+    private val applicationId = ApplicationID("appId")
     private val host = "algolianet.com"
 
     @Test

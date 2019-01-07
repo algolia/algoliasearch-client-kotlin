@@ -3,5 +3,5 @@ package com.algolia.search.saas.data
 
 interface Indexable {
 
-    val objectID: ObjectId
+    val objectID: ObjectID
 }

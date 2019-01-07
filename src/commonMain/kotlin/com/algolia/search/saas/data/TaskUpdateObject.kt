@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class TaskUpdateObject(
     val updatedAt: String,
-    val objectID: ObjectId,
-    override val taskID: TaskId
+    val objectID: ObjectID,
+    override val taskID: TaskID
 ) : Task

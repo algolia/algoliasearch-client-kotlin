@@ -1,13 +1,13 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.ApiKey
-import com.algolia.search.saas.data.ApplicationId
+import com.algolia.search.saas.data.ApplicationID
 import io.ktor.client.features.logging.LogLevel
 
 
 interface Configuration {
 
-    val applicationId: ApplicationId
+    val applicationID: ApplicationID
     val apiKey: ApiKey
     val writeTimeout: Long
     val readTimeout: Long

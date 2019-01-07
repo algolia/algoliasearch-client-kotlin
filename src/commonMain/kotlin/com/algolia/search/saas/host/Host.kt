@@ -1,14 +1,14 @@
 package com.algolia.search.saas.host
 
 import com.algolia.search.saas.Time
-import com.algolia.search.saas.data.ApplicationId
+import com.algolia.search.saas.data.ApplicationID
 import kotlin.random.Random
 
 
 internal typealias HostStatuses = Pair<HostStatus, Long>
 
-internal val ApplicationId.readHost get() = "https://$name-dsn.algolia.net"
-internal val ApplicationId.writeHost get() = "https://$name.algolia.net"
+internal val ApplicationID.readHost get() = "https://$name-dsn.algolia.net"
+internal val ApplicationID.writeHost get() = "https://$name.algolia.net"
 
 internal fun HostStatus.getHostStatus() = this to Time.getCurrentTimeMillis()
 
@@ -38,7 +38,7 @@ internal fun List<String>.randomize(): List<String> {
 
 internal fun List<String>.initialHostStatus() = map { HostStatus.Unknown to 0L }.toMutableList()
 
-internal fun ApplicationId.computeHosts(host: String = "algolianet.com"): List<String> {
+internal fun ApplicationID.computeHosts(host: String = "algolianet.com"): List<String> {
     return listOf(
         "https://$name-1.$host",
         "https://$name-2.$host",

@@ -21,7 +21,7 @@ import kotlinx.serialization.list
 
 
 class AlgoliaClient(
-    override val applicationId: ApplicationId,
+    override val applicationID: ApplicationID,
     override val apiKey: ApiKey,
     override val writeTimeout: Long = 30000,
     override val readTimeout: Long = 2000,
@@ -36,7 +36,7 @@ class AlgoliaClient(
                 serializer = KotlinxSerializer(Json.nonstrict)
             }
             install(DefaultRequest) {
-                setApplicationId(applicationId)
+                setApplicationId(applicationID)
                 setApiKey(apiKey)
             }
             install(Logging) {
@@ -44,8 +44,8 @@ class AlgoliaClient(
                 logger = Logger.SIMPLE
             }
         }
-        override val read = RetryLogic(applicationId, RetryLogic.Type.Read)
-        override val write = RetryLogic(applicationId, RetryLogic.Type.Write)
+        override val read = RetryLogic(applicationID, RetryLogic.Type.Read)
+        override val write = RetryLogic(applicationID, RetryLogic.Type.Write)
     }
 
     private val indexes = mutableMapOf<IndexName, Index>()

@@ -1,6 +1,6 @@
 package host
 
-import com.algolia.search.saas.data.ApplicationId
+import com.algolia.search.saas.data.ApplicationID
 import com.algolia.search.saas.host.HostStatus
 import com.algolia.search.saas.host.RetryLogic
 import io.ktor.client.HttpClient
@@ -22,7 +22,7 @@ import shouldEqual
 @RunWith(JUnit4::class)
 class TestRetryLogic {
 
-    private val applicationId = ApplicationId("appId")
+    private val applicationId = ApplicationID("appId")
     private val retryLogic = RetryLogic(applicationId, RetryLogic.Type.Read)
     private val route = "/route"
     private val client200 = HttpClient(MockEngine { MockHttpResponse(call, HttpStatusCode.OK) })

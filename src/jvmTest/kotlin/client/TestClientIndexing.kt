@@ -21,7 +21,7 @@ internal class TestClientIndexing {
         val name: String,
         val count: Int,
         val brands: List<String>,
-        override val objectID: ObjectId
+        override val objectID: ObjectID
     ) : Indexable
 
     private val name = Attribute("name")
@@ -29,7 +29,7 @@ internal class TestClientIndexing {
     private val brands = Attribute("brands")
     private val iphone = "iPhone"
     private val samsung = "Samsung"
-    private val dataCreate = Data("Phone", 1000, listOf(iphone), ObjectId("test_suite"))
+    private val dataCreate = Data("Phone", 1000, listOf(iphone), ObjectID("test_suite"))
     private val dataUpdate = dataCreate.copy(name = "Telephone")
 
     @Test
@@ -130,7 +130,7 @@ internal class TestClientIndexing {
         }
     }
 
-    private suspend fun Index.delete(objectID: ObjectId) {
+    private suspend fun Index.delete(objectID: ObjectID) {
         deleteObject(objectID).wait().status shouldEqual TaskStatus.Published
     }
 }
