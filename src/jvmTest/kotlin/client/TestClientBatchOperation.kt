@@ -17,7 +17,7 @@ import shouldEqual
 internal class TestClientBatchOperation {
 
     @Test
-    fun batchWrite() {
+    fun batch() {
         runBlocking {
             index.run {
                 copyIndex(indexCopyA.indexName).wait().status shouldEqual TaskStatus.Published
@@ -35,7 +35,7 @@ internal class TestClientBatchOperation {
     }
 
     @Test
-    fun batchWriteMultiple() {
+    fun batchIndex() {
         runBlocking {
             index.run {
                 copyIndex(indexCopyA.indexName).wait().status shouldEqual TaskStatus.Published

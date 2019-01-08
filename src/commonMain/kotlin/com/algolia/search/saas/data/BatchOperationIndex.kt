@@ -31,10 +31,10 @@ data class BatchOperationIndex(
 
         override fun deserialize(decoder: Decoder): BatchOperationIndex {
             val element = decoder.asJsonInput().jsonObject
-            val batchWrite = Json.nonstrict.fromJson(element, BatchOperation)
+            val batchOperation = Json.nonstrict.fromJson(element, BatchOperation)
             val indexName = element[KeyIndexName].content.toIndexName()
 
-            return BatchOperationIndex(indexName, batchWrite)
+            return BatchOperationIndex(indexName, batchOperation)
         }
     }
 }

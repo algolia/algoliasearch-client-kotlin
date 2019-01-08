@@ -12,7 +12,7 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-internal class TestBatchOperationIndex: TestSerializer<BatchOperationIndex>(BatchOperationIndex) {
+internal class TestBatchOperationIndex : TestSerializer<BatchOperationIndex>(BatchOperationIndex) {
 
     override val items = listOf(
         BatchOperationIndex(indexA, BatchOperation.DeleteIndex) to json {
