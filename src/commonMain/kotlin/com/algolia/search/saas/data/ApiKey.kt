@@ -1,9 +1,9 @@
 package com.algolia.search.saas.data
 
 
-data class ApiKey(val name: String) {
+data class ApiKey(override val raw: String) : Raw<String> {
 
     override fun toString(): String {
-        return name
+        return raw
     }
 }

@@ -10,11 +10,11 @@ import kotlinx.serialization.json.jsonArray
 
 
 fun HttpRequestBuilder.setApplicationId(applicationID: ApplicationID) {
-    header("X-Algolia-Application-Id", applicationID.name)
+    header("X-Algolia-Application-Id", applicationID.raw)
 }
 
 fun HttpRequestBuilder.setApiKey(apiKey: ApiKey) {
-    header("X-Algolia-API-Key", apiKey.name)
+    header("X-Algolia-API-Key", apiKey.raw)
 }
 
 fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions?) {

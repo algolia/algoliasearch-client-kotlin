@@ -7,8 +7,8 @@ import kotlin.random.Random
 
 internal typealias HostStatuses = Pair<HostStatus, Long>
 
-internal val ApplicationID.readHost get() = "https://$name-dsn.algolia.net"
-internal val ApplicationID.writeHost get() = "https://$name.algolia.net"
+internal val ApplicationID.readHost get() = "https://$this-dsn.algolia.net"
+internal val ApplicationID.writeHost get() = "https://$this.algolia.net"
 
 internal fun HostStatus.getHostStatus() = this to Time.getCurrentTimeMillis()
 
@@ -40,8 +40,8 @@ internal fun List<String>.initialHostStatus() = map { HostStatus.Unknown to 0L }
 
 internal fun ApplicationID.computeHosts(host: String = "algolianet.com"): List<String> {
     return listOf(
-        "https://$name-1.$host",
-        "https://$name-2.$host",
-        "https://$name-3.$host"
+        "https://$this-1.$host",
+        "https://$this-2.$host",
+        "https://$this-3.$host"
     )
 }

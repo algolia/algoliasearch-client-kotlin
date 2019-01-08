@@ -4,9 +4,8 @@ import com.algolia.search.saas.client.AlgoliaClient
 import com.algolia.search.saas.data.*
 import kotlinx.serialization.Serializable
 
-
-internal val apiKey = ApiKey("dc8e9efcfe38f7fbfb996047af06d8c5")
-internal val applicationId = ApplicationID("latency")
+internal val apiKey = ApiKey(System.getenv("MULTIPLATFORM_API_KEY"))
+internal val applicationId = ApplicationID(System.getenv("MULTIPLATFORM_APP_ID"))
 internal val algolia = AlgoliaClient(applicationId, apiKey)
 internal val index = algolia.getIndex(IndexName("products_android_demo"))
 internal val indexCopyA = algolia.getIndex(IndexName("products_android_demo_copyA"))
