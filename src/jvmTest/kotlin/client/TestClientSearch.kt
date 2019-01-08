@@ -11,6 +11,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldBeTrue
+import shouldContainKey
 import shouldNotBeNull
 
 
@@ -24,9 +25,9 @@ internal class TestClientSearch {
             val search = index.search(queryBuilder { setFacets(price) })
 
             search.facets.shouldNotBeNull()
-            search.facets!!.contains(price)
+            search.facets shouldContainKey price
             search.facetStats.shouldNotBeNull()
-            search.facetStats!!.contains(price).shouldBeTrue()
+            search.facetStats shouldContainKey price
         }
     }
 

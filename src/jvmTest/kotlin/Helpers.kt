@@ -32,3 +32,19 @@ internal infix fun <T> Collection<T>?.shouldContain(element: T) {
 internal infix fun <T> Collection<T>?.shouldNotContain(element: T) {
     (this?.contains(element) ?: false).shouldBeFalse()
 }
+
+internal infix fun <K, V> Map<K, V>?.shouldContainKey(key: K) {
+    (this?.containsKey(key) ?: false).shouldBeTrue()
+}
+
+internal infix fun <K, V> Map<K, V>?.shouldNotContainKey(key: K) {
+    (this?.containsKey(key) ?: false).shouldBeFalse()
+}
+
+internal infix fun <K, V> Map<K, V>?.shouldContainValue(value: V) {
+    (this?.containsValue(value) ?: false).shouldBeTrue()
+}
+
+internal infix fun <K, V> Map<K, V>?.shouldNotContainValue(value: V) {
+    (this?.containsValue(value) ?: false).shouldBeFalse()
+}
