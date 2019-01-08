@@ -14,16 +14,16 @@ import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.long
 
 
-@Serializable(TaskBatchWriteIndex.Companion::class)
-data class TaskBatchWriteIndex(
+@Serializable(TaskBatchOperations.Companion::class)
+data class TaskBatchOperations(
     @SerialName(KeyTaskId) val taskIDs: List<TaskIndex>,
     @Optional val objectIDs: List<ObjectID?>? = null
 ) {
 
-    @Serializer(TaskBatchWriteIndex::class)
-    internal companion object : KSerializer<TaskBatchWriteIndex> {
+    @Serializer(TaskBatchOperations::class)
+    internal companion object : KSerializer<TaskBatchOperations> {
 
-        override fun serialize(encoder: Encoder, obj: TaskBatchWriteIndex) {
+        override fun serialize(encoder: Encoder, obj: TaskBatchOperations) {
             val json = json {
                 KeyTaskId to json { obj.taskIDs.forEach { it.indexName.raw to it.taskID.raw } }
                 KeyObjectIds to obj.objectIDs?.let { jsonArray { it.forEach { +it?.raw } } }
@@ -32,14 +32,14 @@ data class TaskBatchWriteIndex(
             encoder.asJsonOutput().encodeJson(json)
         }
 
-        override fun deserialize(decoder: Decoder): TaskBatchWriteIndex {
+        override fun deserialize(decoder: Decoder): TaskBatchOperations {
             val element = decoder.asJsonInput().jsonObject
             val taskIDs = element.getObject(KeyTaskId).map { (key, entry) ->
                 TaskIndex(key.toIndexName(), entry.long.toTaskID())
             }
             val objectIDs = element.getArrayOrNull(KeyObjectIds)?.map { it.contentOrNull?.toObjectID() }
 
-            return TaskBatchWriteIndex(taskIDs, objectIDs)
+            return TaskBatchOperations(taskIDs, objectIDs)
         }
     }
 }

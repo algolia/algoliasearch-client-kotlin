@@ -35,7 +35,7 @@ class AlgoliaClient(
         override val httpClient = HttpClient {
             install(JsonFeature) {
                 serializer = KotlinxSerializer(Json.nonstrict).also {
-                    it.register(TaskBatchWriteIndex)
+                    it.register(TaskBatchOperations)
                 }
             }
             install(DefaultRequest) {
@@ -87,17 +87,17 @@ class AlgoliaClient(
         }
     }
 
-    override suspend fun batchWrite(
-        batchWrite: BatchWriteIndex,
-        vararg additionalBatchWrites: BatchWriteIndex,
+    override suspend fun batch(
+        batchOperation: BatchOperationIndex,
+        vararg additionalBatchOperations: BatchOperationIndex,
         requestOptions: RequestOptions?
-    ): TaskBatchWriteIndex {
+    ): TaskBatchOperations {
         return client.run {
-            val requests = Json.plain.toJson((listOf(batchWrite) + additionalBatchWrites), BatchWriteIndex.list)
+            val requests = Json.plain.toJson((listOf(batchOperation) + additionalBatchOperations), BatchOperationIndex.list)
             val json = json { KeyRequests to requests }
 
             write.retry(requestOptions.computedWriteTimeout, "/1/indexes/*/batch") { path ->
-                httpClient.post<TaskBatchWriteIndex>(path) {
+                httpClient.post<TaskBatchOperations>(path) {
                     setRequestOptions(requestOptions)
                     body = json.toString()
                 }

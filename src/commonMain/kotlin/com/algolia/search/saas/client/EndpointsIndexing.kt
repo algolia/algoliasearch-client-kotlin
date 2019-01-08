@@ -73,9 +73,9 @@ interface EndpointsIndexing {
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
-    suspend fun batchWrite(
-        batchWrite: BatchWrite,
-        vararg additionalBatchWrites: BatchWrite,
+    suspend fun batch(
+        batchOperation: BatchOperation,
+        vararg additionalBatchOperations: BatchOperation,
         requestOptions: RequestOptions? = null
-    ): TaskBatchWrite
+    ): TaskBatchOperation
 }

@@ -6,12 +6,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 
-@Serializable(BatchWrite.Companion::class)
-sealed class BatchWrite(override val raw: String) : Raw<String> {
+@Serializable(BatchOperation.Companion::class)
+sealed class BatchOperation(override val raw: String) : Raw<String> {
 
     data class AddObject(
         val json: JsonObject
-    ) : BatchWrite(KeyAddObject) {
+    ) : BatchOperation(KeyAddObject) {
 
         companion object {
 
@@ -24,7 +24,7 @@ sealed class BatchWrite(override val raw: String) : Raw<String> {
     data class ReplaceObject(
         val json: JsonObject,
         val objectID: ObjectID
-    ) : BatchWrite(KeyUpdateObject) {
+    ) : BatchOperation(KeyUpdateObject) {
 
         companion object {
 
@@ -38,7 +38,7 @@ sealed class BatchWrite(override val raw: String) : Raw<String> {
         val json: JsonObject,
         val objectID: ObjectID,
         val createIfNotExists: Boolean = true
-    ) : BatchWrite(if (createIfNotExists) KeyPartialUpdateObject else KeyPartialUpdateObjectNoCreate) {
+    ) : BatchOperation(if (createIfNotExists) KeyPartialUpdateObject else KeyPartialUpdateObjectNoCreate) {
 
         companion object {
 
@@ -68,21 +68,21 @@ sealed class BatchWrite(override val raw: String) : Raw<String> {
         }
     }
 
-    data class DeleteObject(val objectID: ObjectID) : BatchWrite(KeyDeleteObject)
+    data class DeleteObject(val objectID: ObjectID) : BatchOperation(KeyDeleteObject)
 
-    object DeleteIndex : BatchWrite(KeyDelete)
+    object DeleteIndex : BatchOperation(KeyDelete)
 
-    object ClearIndex : BatchWrite(KeyClear)
+    object ClearIndex : BatchOperation(KeyClear)
 
-    @Serializer(BatchWrite::class)
-    internal companion object : KSerializer<BatchWrite> {
+    @Serializer(BatchOperation::class)
+    internal companion object : KSerializer<BatchOperation> {
 
-        private fun batchJson(obj: BatchWrite, block: JsonObjectBuilder.() -> Unit) = json {
+        private fun batchJson(obj: BatchOperation, block: JsonObjectBuilder.() -> Unit) = json {
             KeyAction to obj.raw
             block(this)
         }
 
-        override fun serialize(encoder: Encoder, obj: BatchWrite) {
+        override fun serialize(encoder: Encoder, obj: BatchOperation) {
             val json = when (obj) {
                 is AddObject -> batchJson(obj) { KeyBody to obj.json }
                 is ReplaceObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectId to obj.objectID } }
@@ -98,7 +98,7 @@ sealed class BatchWrite(override val raw: String) : Raw<String> {
         private val JsonObject.body get() = this[KeyBody].jsonObject
         private val JsonObject.objectID get() = body[KeyObjectId].content.toObjectID()
 
-        override fun deserialize(decoder: Decoder): BatchWrite {
+        override fun deserialize(decoder: Decoder): BatchOperation {
             val element = decoder.asJsonInput().jsonObject
 
             return when (val action = element[KeyAction].content) {

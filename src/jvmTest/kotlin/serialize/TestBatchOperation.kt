@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.data.BatchWrite
-import com.algolia.search.saas.data.BatchWrite.*
+import com.algolia.search.saas.data.BatchOperation
+import com.algolia.search.saas.data.BatchOperation.*
 import com.algolia.search.saas.data.ObjectID
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.json.json
@@ -10,7 +10,7 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-internal class TestBatchWrite : TestSerializer<BatchWrite>(BatchWrite) {
+internal class TestBatchOperation : TestSerializer<BatchOperation>(BatchOperation) {
 
     private val objectID = ObjectID("id")
     private val json = json {

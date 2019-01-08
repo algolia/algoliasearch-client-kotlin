@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class TaskBatchWrite(
+data class TaskBatchOperation(
     override val taskID: TaskID,
     @Optional val objectIDs: List<ObjectID?>? = null
 ) : Task

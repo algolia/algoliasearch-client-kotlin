@@ -164,16 +164,16 @@ internal class ClientIndexing(
         return updateObject(payload, objectID, createIfNotExists, requestOptions)
     }
 
-    override suspend fun batchWrite(
-        batchWrite: BatchWrite,
-        vararg additionalBatchWrites: BatchWrite,
+    override suspend fun batch(
+        batchOperation: BatchOperation,
+        vararg additionalBatchOperations: BatchOperation,
         requestOptions: RequestOptions?
-    ): TaskBatchWrite {
-        val requests = Json.plain.toJson((listOf(batchWrite) + additionalBatchWrites), BatchWrite.list)
+    ): TaskBatchOperation {
+        val requests = Json.plain.toJson((listOf(batchOperation) + additionalBatchOperations), BatchOperation.list)
         val json = json { KeyRequests to requests }
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/batch")) { path ->
-            httpClient.post<TaskBatchWrite>(path) {
+            httpClient.post<TaskBatchOperation>(path) {
                 setRequestOptions(requestOptions)
                 body = json.toString()
             }

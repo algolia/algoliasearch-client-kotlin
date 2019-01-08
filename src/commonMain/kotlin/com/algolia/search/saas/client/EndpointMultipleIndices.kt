@@ -1,9 +1,9 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.BatchWriteIndex
+import com.algolia.search.saas.data.BatchOperationIndex
 import com.algolia.search.saas.data.ListIndexes
 import com.algolia.search.saas.data.RequestObjects
-import com.algolia.search.saas.data.TaskBatchWriteIndex
+import com.algolia.search.saas.data.TaskBatchOperations
 import kotlinx.serialization.json.JsonObject
 
 
@@ -17,9 +17,9 @@ interface EndpointMultipleIndices {
         requestOptions: RequestOptions? = null
     ): List<JsonObject>
 
-    suspend fun batchWrite(
-        batchWrite: BatchWriteIndex,
-        vararg additionalBatchWrites: BatchWriteIndex,
+    suspend fun batch(
+        batchOperation: BatchOperationIndex,
+        vararg additionalBatchOperations: BatchOperationIndex,
         requestOptions: RequestOptions? = null
-    ): TaskBatchWriteIndex
+    ): TaskBatchOperations
 }

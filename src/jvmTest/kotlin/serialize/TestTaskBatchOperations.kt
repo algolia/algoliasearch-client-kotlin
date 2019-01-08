@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.saas.data.TaskBatchWriteIndex
+import com.algolia.search.saas.data.TaskBatchOperations
 import com.algolia.search.saas.data.TaskIndex
 import com.algolia.search.saas.serialize.KeyTaskId
 import com.algolia.search.saas.toTaskID
@@ -12,13 +12,13 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-internal class TestTaskBatchWriteIndex : TestSerializer<TaskBatchWriteIndex>(TaskBatchWriteIndex) {
+internal class TestTaskBatchOperations : TestSerializer<TaskBatchOperations>(TaskBatchOperations) {
 
     private val taskIndexA = TaskIndex(indexA, 0L.toTaskID())
     private val taskIndexB = TaskIndex(indexB, 1L.toTaskID())
 
     override val items = listOf(
-        TaskBatchWriteIndex(
+        TaskBatchOperations(
             listOf(taskIndexA, taskIndexB)
         ) to json {
             KeyTaskId to json {

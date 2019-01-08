@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.data.BatchWrite
-import com.algolia.search.saas.data.BatchWriteIndex
+import com.algolia.search.saas.data.BatchOperation
+import com.algolia.search.saas.data.BatchOperationIndex
 import com.algolia.search.saas.serialize.KeyAction
 import com.algolia.search.saas.serialize.KeyDelete
 import com.algolia.search.saas.serialize.KeyIndexName
@@ -12,10 +12,10 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-internal class TestBatchWriteIndex: TestSerializer<BatchWriteIndex>(BatchWriteIndex) {
+internal class TestBatchOperationIndex: TestSerializer<BatchOperationIndex>(BatchOperationIndex) {
 
     override val items = listOf(
-        BatchWriteIndex(indexA, BatchWrite.DeleteIndex) to json {
+        BatchOperationIndex(indexA, BatchOperation.DeleteIndex) to json {
             KeyAction to KeyDelete
             KeyIndexName to indexA.raw
         }

@@ -1,8 +1,8 @@
 package client
 
 import com.algolia.search.saas.client.Index
-import com.algolia.search.saas.data.BatchWrite
-import com.algolia.search.saas.data.BatchWriteIndex
+import com.algolia.search.saas.data.BatchOperation
+import com.algolia.search.saas.data.BatchOperationIndex
 import com.algolia.search.saas.data.TaskStatus
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -14,7 +14,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-internal class TestClientBatchWrite {
+internal class TestClientBatchOperation {
 
     @Test
     fun batchWrite() {
@@ -41,50 +41,50 @@ internal class TestClientBatchWrite {
                 copyIndex(indexCopyA.indexName).wait().status shouldEqual TaskStatus.Published
                 copyIndex(indexCopyB.indexName).wait().status shouldEqual TaskStatus.Published
             }
-            val batch = algolia.batchWrite(
-                BatchWriteIndex(indexCopyA.indexName, BatchWrite.DeleteIndex),
-                BatchWriteIndex(indexCopyB.indexName, BatchWrite.DeleteIndex)
+            val batch = algolia.batch(
+                BatchOperationIndex(indexCopyA.indexName, BatchOperation.DeleteIndex),
+                BatchOperationIndex(indexCopyB.indexName, BatchOperation.DeleteIndex)
             )
             algolia.waitAll(batch.taskIDs).forEach { it.status shouldEqual TaskStatus.Published }
         }
     }
 
     private suspend fun Index.create(data: Data) {
-        val create = batchWrite(BatchWrite.AddObject.from(data, Data.serializer()))
+        val create = batch(BatchOperation.AddObject.from(data, Data.serializer()))
 
         create.objectIDs shouldContain data.objectID
         create.wait().status shouldEqual TaskStatus.Published
     }
 
     private suspend fun Index.replace(data: Data) {
-        val replace = batchWrite(BatchWrite.ReplaceObject.from(data, Data.serializer()))
+        val replace = batch(BatchOperation.ReplaceObject.from(data, Data.serializer()))
 
         replace.objectIDs shouldContain data.objectID
         replace.wait().status shouldEqual TaskStatus.Published
     }
 
     private suspend fun Index.update(data: Data) {
-        val update = batchWrite(BatchWrite.PartialUpdateObject.from(data, Data.serializer()))
+        val update = batch(BatchOperation.PartialUpdateObject.from(data, Data.serializer()))
 
         update.objectIDs shouldContain data.objectID
         update.wait().status shouldEqual TaskStatus.Published
     }
 
     private suspend fun Index.delete(data: Data) {
-        val delete = batchWrite(BatchWrite.DeleteObject(data.objectID))
+        val delete = batch(BatchOperation.DeleteObject(data.objectID))
 
         delete.objectIDs shouldContain data.objectID
         delete.wait().status shouldEqual TaskStatus.Published
     }
 
     private suspend fun Index.clear() {
-        val clear = batchWrite(BatchWrite.ClearIndex)
+        val clear = batch(BatchOperation.ClearIndex)
 
         clear.wait().status shouldEqual TaskStatus.Published
     }
 
     private suspend fun Index.delete() {
-        val delete = batchWrite(BatchWrite.DeleteIndex)
+        val delete = batch(BatchOperation.DeleteIndex)
 
         delete.wait().status shouldEqual TaskStatus.Published
     }
