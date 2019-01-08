@@ -17,7 +17,7 @@ pluginManagement {
         maven { url 'https://plugins.gradle.org/m2/' }
     }
 }
-rootProject.name = 'algoliasearch-client-multiplatform'
+rootProject.name = 'algoliasearch-client-kotlin'
 
 
 enableFeaturePreview('GRADLE_METADATA')
