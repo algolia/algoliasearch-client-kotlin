@@ -34,7 +34,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
         }
     }
 
-    data class PartialUpdateObject(
+    data class UpdateObject(
         val json: JsonObject,
         val objectID: ObjectID,
         val createIfNotExists: Boolean = true
@@ -46,8 +46,8 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
                 data: T,
                 serializer: KSerializer<T>,
                 createIfNotExists: Boolean = true
-            ): PartialUpdateObject {
-                return PartialUpdateObject(
+            ): UpdateObject {
+                return UpdateObject(
                     Json.plain.toJson(data, serializer).jsonObject,
                     data.objectID,
                     createIfNotExists
@@ -58,8 +58,8 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
                 objectID: ObjectID,
                 partialUpdate: PartialUpdate,
                 createIfNotExists: Boolean
-            ): PartialUpdateObject {
-                return PartialUpdateObject(
+            ): UpdateObject {
+                return UpdateObject(
                     Json.plain.toJson(partialUpdate, PartialUpdate).jsonObject,
                     objectID,
                     createIfNotExists
@@ -86,7 +86,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
             val json = when (obj) {
                 is AddObject -> batchJson(obj) { KeyBody to obj.json }
                 is ReplaceObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectId to obj.objectID } }
-                is PartialUpdateObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectId to obj.objectID } }
+                is UpdateObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectId to obj.objectID } }
                 is DeleteObject -> batchJson(obj) { KeyBody to json { KeyObjectId to obj.objectID.raw } }
                 is DeleteIndex -> batchJson(obj) {}
                 is ClearIndex -> batchJson(obj) {}
@@ -104,8 +104,8 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
             return when (val action = element[KeyAction].content) {
                 KeyAddObject -> AddObject(element.body)
                 KeyUpdateObject -> ReplaceObject(element.body, element.objectID)
-                KeyPartialUpdateObject -> PartialUpdateObject(element.body, element.objectID)
-                KeyPartialUpdateObjectNoCreate -> PartialUpdateObject(element.body, element.objectID, false)
+                KeyPartialUpdateObject -> UpdateObject(element.body, element.objectID)
+                KeyPartialUpdateObjectNoCreate -> UpdateObject(element.body, element.objectID, false)
                 KeyDeleteObject -> DeleteObject(element.objectID)
                 KeyDelete -> DeleteIndex
                 KeyClear -> ClearIndex

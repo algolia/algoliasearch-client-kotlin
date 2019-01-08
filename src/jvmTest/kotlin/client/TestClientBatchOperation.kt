@@ -64,7 +64,7 @@ internal class TestClientBatchOperation {
     }
 
     private suspend fun Index.update(data: Data) {
-        val update = batch(BatchOperation.PartialUpdateObject.from(data, Data.serializer()))
+        val update = batch(BatchOperation.UpdateObject.from(data, Data.serializer()))
 
         update.objectIDs shouldContain data.objectID
         update.wait().status shouldEqual TaskStatus.Published
