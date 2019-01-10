@@ -26,9 +26,7 @@ apply plugin: 'maven-publish'
 
 kotlin {
     targets {
-        fromPreset(presets.jvm, 'jvm')
-//        fromPreset(presets.js, 'js')
-//        fromPreset(presets.macosX64, 'macos')
+        jvm()
     }
     sourceSets {
         all {
@@ -85,7 +83,6 @@ kotlin {
                 implementation "io.ktor:ktor-client-json-ios:$ktor"
             }
         }
-        macosTest {
-        }
+        macosTest {}
     }
 }
