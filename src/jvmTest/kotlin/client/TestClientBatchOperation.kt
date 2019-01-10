@@ -5,6 +5,7 @@ import com.algolia.search.saas.data.BatchOperation
 import com.algolia.search.saas.data.BatchOperationIndex
 import com.algolia.search.saas.data.TaskStatus
 import kotlinx.coroutines.runBlocking
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -14,6 +15,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
+@Ignore
 internal class TestClientBatchOperation {
 
     @Test

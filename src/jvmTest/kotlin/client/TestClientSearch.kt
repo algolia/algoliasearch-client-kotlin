@@ -7,6 +7,7 @@ import com.algolia.search.saas.query.queryBuilder
 import com.algolia.search.saas.query.setFacets
 import com.algolia.search.saas.toAttribute
 import kotlinx.coroutines.runBlocking
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -16,6 +17,7 @@ import shouldNotBeNull
 
 
 @RunWith(JUnit4::class)
+@Ignore
 internal class TestClientSearch {
 
     @Test

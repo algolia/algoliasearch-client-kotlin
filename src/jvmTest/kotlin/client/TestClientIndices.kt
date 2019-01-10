@@ -4,6 +4,7 @@ import com.algolia.search.saas.client.Index
 import com.algolia.search.saas.data.IndexName
 import com.algolia.search.saas.data.TaskStatus.Published
 import kotlinx.coroutines.runBlocking
+import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -11,6 +12,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
+@Ignore
 internal class TestClientIndices {
 
     private suspend fun deleteIndex(index: Index) {
