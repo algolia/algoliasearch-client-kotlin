@@ -19,10 +19,10 @@ repositories {
     maven { url "https://kotlin.bintray.com/kotlinx" }
 }
 
-version '0.0.1'
-
 apply plugin: 'maven-publish'
 
+version '0.0.1'
+group 'com.algolia.algoliasearch'
 
 kotlin {
     targets {
@@ -66,23 +66,23 @@ kotlin {
                 implementation "io.ktor:ktor-client-mock-jvm:$ktor"
             }
         }
-        jsMain {
-            dependencies {
-                implementation "org.jetbrains.kotlin:kotlin-stdlib-js"
-            }
-        }
-        jsTest {
-            dependencies {
-                implementation "org.jetbrains.kotlin:kotlin-test-js"
-            }
-        }
-        macosMain {
-            dependencies {
-                implementation "io.ktor:ktor-client-ios:$ktor"
-                implementation "io.ktor:ktor-client-core-ios:$ktor"
-                implementation "io.ktor:ktor-client-json-ios:$ktor"
-            }
-        }
-        macosTest {}
+//        jsMain {
+//            dependencies {
+//                implementation "org.jetbrains.kotlin:kotlin-stdlib-js"
+//            }
+//        }
+//        jsTest {
+//            dependencies {
+//                implementation "org.jetbrains.kotlin:kotlin-test-js"
+//            }
+//        }
+//        macosMain {
+//            dependencies {
+//                implementation "io.ktor:ktor-client-ios:$ktor"
+//                implementation "io.ktor:ktor-client-core-ios:$ktor"
+//                implementation "io.ktor:ktor-client-json-ios:$ktor"
+//            }
+//        }
+//        macosTest {}
     }
 }

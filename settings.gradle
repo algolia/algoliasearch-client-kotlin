@@ -20,4 +20,4 @@ pluginManagement {
 rootProject.name = 'algoliasearch-client-kotlin'
 
 
-enableFeaturePreview('GRADLE_METADATA')
+//enableFeaturePreview('GRADLE_METADATA')
