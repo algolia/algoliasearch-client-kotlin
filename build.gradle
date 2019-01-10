@@ -37,10 +37,10 @@ kotlin {
         commonMain {
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-stdlib-common"
-                implementation "io.ktor:ktor-client:$ktor"
-                implementation "io.ktor:ktor-client-logging:$ktor"
-                implementation "io.ktor:ktor-client-core:$ktor"
-                implementation "io.ktor:ktor-client-json:$ktor"
+                api "io.ktor:ktor-client:$ktor"
+                api "io.ktor:ktor-client-logging:$ktor"
+                api "io.ktor:ktor-client-core:$ktor"
+                api "io.ktor:ktor-client-json:$ktor"
             }
         }
         commonTest {
@@ -52,11 +52,11 @@ kotlin {
         jvmMain {
             dependencies {
                 implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-                implementation "io.ktor:ktor-client-okhttp:$ktor"
-                implementation "io.ktor:ktor-client-core-jvm:$ktor"
-                implementation "io.ktor:ktor-client-json-jvm:$ktor"
-                implementation "io.ktor:ktor-client-logging-jvm:$ktor"
-                implementation "com.squareup.okhttp3:okhttp:$okhttp"
+                api "io.ktor:ktor-client-okhttp:$ktor"
+                api "io.ktor:ktor-client-core-jvm:$ktor"
+                api "io.ktor:ktor-client-json-jvm:$ktor"
+                api "io.ktor:ktor-client-logging-jvm:$ktor"
+                api "com.squareup.okhttp3:okhttp:$okhttp"
             }
         }
         jvmTest {
