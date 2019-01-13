@@ -14,13 +14,27 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldEqual
+import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
-class TestQueryHelper {
+internal class TestQueryHelper {
 
     private val attributeA = Attribute("attributeA")
     private val attributeB = Attribute("attributeB")
+
+    @Test
+    fun testClone() {
+        val query = queryBuilder {
+            filterBuilder.apply {
+                groupOrA += facetA
+            }
+        }
+
+        assertEquals(query.clone().filters, query.filterBuilder.build())
+        query.filters = "test"
+        assertEquals(query.clone().filters, "test")
+    }
 
     @Test
     fun attributesToRetrieve() {

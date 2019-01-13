@@ -7,8 +7,6 @@ interface EndpointsSearch {
 
     val indexName: IndexName
 
-    suspend fun search(requestOptions: RequestOptions? = null): Hits
-
     suspend fun search(query: Query? = null, requestOptions: RequestOptions? = null): Hits
 
     suspend fun browse(query: Query? = null, requestOptions: RequestOptions? = null): Hits

@@ -1,6 +1,7 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
+import com.algolia.search.saas.query.clone
 import com.algolia.search.saas.serialize.KeyCursor
 import com.algolia.search.saas.serialize.KeyFacetQuery
 import com.algolia.search.saas.serialize.KeyMaxFacetHits
@@ -19,7 +20,7 @@ internal class ClientSearch(
     Configuration by client,
     Client by client.client {
 
-    override suspend fun search(requestOptions: RequestOptions?): Hits {
+    private suspend fun search(requestOptions: RequestOptions?): Hits {
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes()) { path ->
             httpClient.get<Hits>(path) {
                 setRequestOptions(requestOptions)
@@ -28,19 +29,23 @@ internal class ClientSearch(
     }
 
     override suspend fun search(query: Query?, requestOptions: RequestOptions?): Hits {
+        val copy = query?.clone()
+
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/query")) { path ->
             httpClient.post<Hits>(path) {
                 setRequestOptions(requestOptions)
-                setBody(query)
+                setBody(copy)
             }
         }
     }
 
     override suspend fun browse(query: Query?, requestOptions: RequestOptions?): Hits {
+        val copy = query?.clone()
+
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
             httpClient.post<Hits>(path) {
                 setRequestOptions(requestOptions)
-                setBody(query)
+                setBody(copy)
             }
         }
     }
@@ -59,10 +64,12 @@ internal class ClientSearch(
         strategy: MultipleQueriesStrategy,
         requestOptions: RequestOptions?
     ): MultipleHits {
+        val copies = queries.map { IndexQuery(it.indexName, it.query.clone()) }
+
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/queries") { path ->
             httpClient.post<MultipleHits>(path) {
                 setRequestOptions(requestOptions)
-                setQueries(queries, strategy)
+                setQueries(copies, strategy)
             }
         }
     }
@@ -74,6 +81,8 @@ internal class ClientSearch(
         maxFacetHits: Int?,
         requestOptions: RequestOptions?
     ): FacetHits {
+        val copy = query?.clone()
+
         return read.retry(
             requestOptions.computedReadTimeout,
             indexName.pathIndexes("/facets/$attribute/query")
@@ -85,8 +94,8 @@ internal class ClientSearch(
                     facetQuery?.let { KeyFacetQuery to it }
                 }
 
-                body = if (query != null) {
-                    val serialize = query.encodeNoNulls()
+                body = if (copy != null) {
+                    val serialize = copy.encodeNoNulls()
                     val map = serialize.toMutableMap()
 
                     map.putAll(extraParams)

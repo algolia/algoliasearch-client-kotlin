@@ -10,7 +10,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-class TestFilterBuilderShowcase {
+internal class TestFilterBuilderShowcase {
 
     @Test
     fun showcaseOneConjunctiveWidget() {

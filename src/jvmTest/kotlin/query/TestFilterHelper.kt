@@ -29,7 +29,7 @@ import tagB
 
 
 @RunWith(JUnit4::class)
-class TestFilterHelper {
+internal class TestFilterHelper {
 
     @Test
     fun keyOr() {

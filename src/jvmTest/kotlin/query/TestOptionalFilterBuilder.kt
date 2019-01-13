@@ -16,7 +16,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-class TestOptionalFilterBuilder {
+internal class TestOptionalFilterBuilder {
 
     @Test
     fun isEmpty() {

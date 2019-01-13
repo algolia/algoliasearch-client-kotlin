@@ -8,7 +8,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-class TestNumericOperator {
+internal class TestNumericOperator {
 
     @Test
     fun raw() {

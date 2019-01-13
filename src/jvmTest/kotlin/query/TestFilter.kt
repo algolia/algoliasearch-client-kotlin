@@ -9,7 +9,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-class TestFilter {
+internal class TestFilter {
 
     private val attributeA = Attribute("attributeA")
 

@@ -1,14 +1,13 @@
 package com.algolia.search.saas.query
 
 import com.algolia.search.saas.data.*
-import com.algolia.search.saas.data.Query
 
 @DslMarker
 annotation class QueryHelper
 
-internal val Collection<Attribute>.names get() = map { it.raw }
-
 internal val all = Attribute("*")
+
+internal fun Query.clone() = copy(filters = filters ?: filterBuilder.build())
 
 fun queryBuilder(init: Query.() -> Unit) = Query().apply(init)
 

@@ -19,7 +19,7 @@ import tagB
 
 
 @RunWith(JUnit4::class)
-class TestFilterBuilder {
+internal class TestFilterBuilder {
 
     @Test
     fun isEmpty() {
