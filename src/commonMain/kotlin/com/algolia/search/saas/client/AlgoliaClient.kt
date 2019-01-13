@@ -14,6 +14,8 @@ import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.get
 import io.ktor.client.request.post
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
@@ -93,7 +95,8 @@ class AlgoliaClient(
         requestOptions: RequestOptions?
     ): TaskBatchOperations {
         return client.run {
-            val requests = Json.plain.toJson((listOf(batchOperation) + additionalBatchOperations), BatchOperationIndex.list)
+            val operations = (listOf(batchOperation) + additionalBatchOperations)
+            val requests = Json.plain.toJson(operations, BatchOperationIndex.list)
             val json = json { KeyRequests to requests }
 
             write.retry(requestOptions.computedWriteTimeout, "/1/indexes/*/batch") { path ->
@@ -105,13 +108,17 @@ class AlgoliaClient(
         }
     }
 
-    internal suspend fun waitAll(taskIndices: List<TaskIndex>, maxTimeToWait: Long = 10000L): List<TaskInfo> {
+    suspend fun waitAll(taskIndices: List<TaskIndex>, maxTimeToWait: Long = 10000L): List<TaskInfo> {
         var attempt = 1
         val timeToWait = 10000L
 
         while (true) {
-            taskIndices.map { getIndex(it.indexName).getTask(it.taskID) }.let {
-                if (it.all { it.status == TaskStatus.Published }) return it
+            coroutineScope {
+                taskIndices.map { async { getIndex(it.indexName).getTask(it.taskID) } }.map { it.await() }
+            }.let {
+                if (it.all { it.status == TaskStatus.Published }) {
+                    return it
+                }
             }
             delay((timeToWait * attempt).coerceAtMost(maxTimeToWait))
             attempt++
