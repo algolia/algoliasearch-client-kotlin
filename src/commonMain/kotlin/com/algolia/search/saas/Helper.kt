@@ -27,8 +27,8 @@ fun String.toApplicationID(): ApplicationID {
     return ApplicationID(this)
 }
 
-fun String.toApiKey(): ApiKey {
-    return ApiKey(this)
+fun String.toAPIKey(): APIKey {
+    return APIKey(this)
 }
 
 

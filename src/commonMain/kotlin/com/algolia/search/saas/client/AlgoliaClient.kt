@@ -25,7 +25,7 @@ import kotlinx.serialization.list
 
 class AlgoliaClient(
     override val applicationID: ApplicationID,
-    override val apiKey: ApiKey,
+    override val apiKey: APIKey,
     override val writeTimeout: Long = 30000,
     override val readTimeout: Long = 2000,
     override val logLevel: LogLevel = LogLevel.BODY

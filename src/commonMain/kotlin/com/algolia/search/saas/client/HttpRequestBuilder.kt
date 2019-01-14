@@ -13,7 +13,7 @@ fun HttpRequestBuilder.setApplicationId(applicationID: ApplicationID) {
     header("X-Algolia-Application-Id", applicationID.raw)
 }
 
-fun HttpRequestBuilder.setApiKey(apiKey: ApiKey) {
+fun HttpRequestBuilder.setApiKey(apiKey: APIKey) {
     header("X-Algolia-API-Key", apiKey.raw)
 }
 
