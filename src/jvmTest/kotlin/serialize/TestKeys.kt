@@ -163,6 +163,13 @@ internal class TestKeys {
         KeyBody shouldEqual "body"
         KeyObjectIds shouldEqual "objectIDs"
         KeyTaskId shouldEqual "taskID"
+        KeySearch shouldEqual "search"
+        KeyBrowse shouldEqual "browse"
+        KeyDeleteIndex shouldEqual "deleteIndex"
+        KeyEditSettings shouldEqual "editSettings"
+        KeyListIndexes shouldEqual "listIndexes"
+        KeyLogs shouldEqual "logs"
+        KeySeeUnretrievableAttributes shouldEqual "seeUnretrievableAttributes"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

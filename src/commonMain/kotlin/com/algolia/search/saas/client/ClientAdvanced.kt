@@ -6,11 +6,10 @@ import kotlinx.coroutines.delay
 
 
 internal class ClientAdvanced(
-    val client: AlgoliaClient,
+    val client: Client,
     override val indexName: IndexName
 ) : EndpointsAdvanced,
-    Configuration by client,
-    Client by client.client {
+    Client by client {
 
     override val maxTimeToWait = 10000L
 

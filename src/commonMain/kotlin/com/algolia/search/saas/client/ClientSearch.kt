@@ -14,11 +14,10 @@ import kotlinx.serialization.json.json
 
 
 internal class ClientSearch(
-    val client: AlgoliaClient,
+    val client: Client,
     override val indexName: IndexName
 ) : EndpointsSearch,
-    Configuration by client,
-    Client by client.client {
+    Client by client {
 
     private suspend fun search(requestOptions: RequestOptions?): Hits {
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes()) { path ->

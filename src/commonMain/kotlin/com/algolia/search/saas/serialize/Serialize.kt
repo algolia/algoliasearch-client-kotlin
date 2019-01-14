@@ -1,11 +1,13 @@
 package com.algolia.search.saas.serialize
 
+import com.algolia.search.saas.data.APIKeyCreate
 import com.algolia.search.saas.data.Query
 import com.algolia.search.saas.data.Settings
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
+import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.json.*
 
 internal val regexAsc = Regex("$KeyAsc\\((.*)\\)")
@@ -28,18 +30,22 @@ internal fun Decoder.asJsonInput() = (this as JsonInput).decodeJson()
 internal fun Encoder.asJsonOutput() = this as JsonOutput
 
 
-internal fun Query.toJsonObject(): JsonObject {
-    return Json.nonstrict.toJson(this, Query.serializer()).jsonObject
+internal fun <T> T.toJsonObject(serializer: SerializationStrategy<T>): JsonObject {
+    return Json.nonstrict.toJson(this, serializer).jsonObject
 }
 
-internal fun Settings.toJsonObject(): JsonObject {
-    return Json.nonstrict.toJson(this, Settings.serializer()).jsonObject
+internal fun JsonObject.encodeNoNulls(): JsonObject {
+    return JsonObject(filter { it.value != JsonNull })
 }
 
 internal fun Query.encodeNoNulls(): JsonObject {
-    return JsonObject(toJsonObject().filter { it.value != JsonNull })
+    return toJsonObject(Query.serializer()).encodeNoNulls()
 }
 
 internal fun Settings.encodeNoNulls(): JsonObject {
-    return JsonObject(toJsonObject().filter { it.value != JsonNull })
+    return toJsonObject(Settings.serializer()).encodeNoNulls()
+}
+
+internal fun APIKeyCreate.encodeNoNulls(): JsonObject {
+    return toJsonObject(APIKeyCreate.serializer()).encodeNoNulls()
 }

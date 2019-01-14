@@ -14,11 +14,10 @@ import kotlinx.serialization.json.JsonObject
 
 
 internal class ClientSettings(
-    val client: AlgoliaClient,
+    val client: Client,
     override val indexName: IndexName
 ) : EndpointsSettings,
-    Configuration by client,
-    Client by client.client {
+    Client by client {
 
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
         return read.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->

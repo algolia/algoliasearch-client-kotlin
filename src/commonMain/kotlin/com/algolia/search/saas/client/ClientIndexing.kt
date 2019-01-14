@@ -13,11 +13,10 @@ import kotlinx.serialization.list
 
 
 internal class ClientIndexing(
-    val client: AlgoliaClient,
+    val client: Client,
     override val indexName: IndexName
 ) : EndpointsIndexing,
-    Configuration by client,
-    Client by client.client {
+    Client by client {
 
     private suspend fun addObject(payload: String, requestOptions: RequestOptions?): TaskCreateObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->

@@ -13,11 +13,10 @@ import kotlinx.serialization.list
 
 
 internal class ClientIndices(
-    val client: AlgoliaClient,
+    val client: Client,
     override val indexName: IndexName
 ) : EndpointsIndices,
-    Configuration by client,
-    Client by client.client {
+    Client by client {
 
     private suspend fun copyOrMove(
         destination: IndexName,
