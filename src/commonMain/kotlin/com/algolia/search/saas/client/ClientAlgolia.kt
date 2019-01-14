@@ -1,13 +1,15 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
+import com.algolia.search.saas.endpoint.EndpointAPIKey
+import com.algolia.search.saas.endpoint.EndpointMultipleIndices
 import io.ktor.client.features.logging.LogLevel
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 
 
-class AlgoliaClient private constructor(
+class ClientAlgolia private constructor(
     override val applicationID: ApplicationID,
     override val apiKey: APIKey,
     override val writeTimeout: Long = 30000,
@@ -16,7 +18,7 @@ class AlgoliaClient private constructor(
     internal val client: Client
 ) : Configuration,
     EndpointMultipleIndices by ClientMultipleIndices(client),
-    EndpointsAPIKey by ClientAPIKey(client) {
+    EndpointAPIKey by ClientAPIKey(client) {
 
     constructor(
         applicationID: ApplicationID,
@@ -30,7 +32,7 @@ class AlgoliaClient private constructor(
         writeTimeout,
         readTimeout,
         logLevel,
-        InternalClient(applicationID, apiKey, writeTimeout, readTimeout, logLevel)
+        ClientKtor(applicationID, apiKey, writeTimeout, readTimeout, logLevel)
     )
 
     private val indexes = mutableMapOf<IndexName, Index>()

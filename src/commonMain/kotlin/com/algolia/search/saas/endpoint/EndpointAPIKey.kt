@@ -1,9 +1,9 @@
-package com.algolia.search.saas.client
+package com.algolia.search.saas.endpoint
 
 import com.algolia.search.saas.data.*
 
 
-interface EndpointsAPIKey {
+interface EndpointAPIKey {
 
     suspend fun addAPIKey(
         rights: List<ACL>? = null,

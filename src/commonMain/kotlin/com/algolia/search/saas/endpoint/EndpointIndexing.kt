@@ -1,11 +1,12 @@
-package com.algolia.search.saas.client
+package com.algolia.search.saas.endpoint
 
+import com.algolia.search.saas.client.RequestOptions
 import com.algolia.search.saas.data.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JsonObject
 
 
-interface EndpointsIndexing {
+interface EndpointIndexing {
 
     val indexName: IndexName
 

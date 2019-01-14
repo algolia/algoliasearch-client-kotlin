@@ -1,12 +1,13 @@
-package com.algolia.search.saas.client
+package com.algolia.search.saas.endpoint
 
+import com.algolia.search.saas.client.RequestOptions
 import com.algolia.search.saas.data.IndexName
 import com.algolia.search.saas.data.Scope
-import com.algolia.search.saas.data.TaskUpdateIndex
 import com.algolia.search.saas.data.TaskDelete
+import com.algolia.search.saas.data.TaskUpdateIndex
 
 
-interface EndpointsIndices {
+interface EndpointIndices {
 
     val indexName: IndexName
 

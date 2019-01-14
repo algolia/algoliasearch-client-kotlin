@@ -4,6 +4,7 @@ import com.algolia.search.saas.data.IndexName
 import com.algolia.search.saas.data.Settings
 import com.algolia.search.saas.data.SettingsKey
 import com.algolia.search.saas.data.TaskUpdateIndex
+import com.algolia.search.saas.endpoint.EndpointSettings
 import com.algolia.search.saas.serialize.KeyForwardToReplicas
 import com.algolia.search.saas.serialize.encodeNoNulls
 import io.ktor.client.request.get
@@ -16,7 +17,7 @@ import kotlinx.serialization.json.JsonObject
 internal class ClientSettings(
     val client: Client,
     override val indexName: IndexName
-) : EndpointsSettings,
+) : EndpointSettings,
     Client by client {
 
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {

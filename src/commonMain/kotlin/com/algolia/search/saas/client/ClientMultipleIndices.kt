@@ -4,6 +4,7 @@ import com.algolia.search.saas.data.BatchOperationIndex
 import com.algolia.search.saas.data.ListIndexes
 import com.algolia.search.saas.data.RequestObjects
 import com.algolia.search.saas.data.TaskBatchOperations
+import com.algolia.search.saas.endpoint.EndpointMultipleIndices
 import com.algolia.search.saas.serialize.KeyRequests
 import com.algolia.search.saas.serialize.KeyResults
 import io.ktor.client.request.get

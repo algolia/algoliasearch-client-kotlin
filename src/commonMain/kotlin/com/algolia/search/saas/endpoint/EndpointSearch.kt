@@ -1,9 +1,10 @@
-package com.algolia.search.saas.client
+package com.algolia.search.saas.endpoint
 
+import com.algolia.search.saas.client.RequestOptions
 import com.algolia.search.saas.data.*
 
 
-interface EndpointsSearch {
+interface EndpointSearch {
 
     val indexName: IndexName
 

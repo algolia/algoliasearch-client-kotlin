@@ -15,7 +15,7 @@ import io.ktor.client.features.logging.SIMPLE
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.internal.JsonObjectSerializer
 
-internal class InternalClient(configuration: Configuration) : Client, Configuration by configuration {
+internal class ClientKtor(configuration: Configuration) : Client, Configuration by configuration {
 
     constructor(
         applicationID: ApplicationID,

@@ -1,6 +1,7 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
+import com.algolia.search.saas.endpoint.EndpointAPIKey
 import com.algolia.search.saas.serialize.encodeNoNulls
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -10,7 +11,7 @@ import io.ktor.client.request.put
 
 internal class ClientAPIKey(
     val client: Client
-) : EndpointsAPIKey,
+) : EndpointAPIKey,
     Client by client {
 
     override suspend fun addAPIKey(

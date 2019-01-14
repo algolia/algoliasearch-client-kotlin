@@ -1,5 +1,6 @@
-package com.algolia.search.saas.client
+package com.algolia.search.saas.endpoint
 
+import com.algolia.search.saas.client.RequestOptions
 import com.algolia.search.saas.data.BatchOperationIndex
 import com.algolia.search.saas.data.ListIndexes
 import com.algolia.search.saas.data.RequestObjects

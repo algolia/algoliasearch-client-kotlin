@@ -1,6 +1,7 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
+import com.algolia.search.saas.endpoint.EndpointSearch
 import com.algolia.search.saas.query.clone
 import com.algolia.search.saas.serialize.KeyCursor
 import com.algolia.search.saas.serialize.KeyFacetQuery
@@ -16,7 +17,7 @@ import kotlinx.serialization.json.json
 internal class ClientSearch(
     val client: Client,
     override val indexName: IndexName
-) : EndpointsSearch,
+) : EndpointSearch,
     Client by client {
 
     private suspend fun search(requestOptions: RequestOptions?): Hits {

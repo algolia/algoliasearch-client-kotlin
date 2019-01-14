@@ -49,7 +49,6 @@ internal class TestClientSearch {
             )
             val search = index.multipleQueries(queries)
 
-
             search.results!!.forEach {
                 it.index.shouldNotBeNull()
             }
