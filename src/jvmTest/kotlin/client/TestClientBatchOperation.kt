@@ -5,7 +5,6 @@ import com.algolia.search.saas.data.BatchOperation
 import com.algolia.search.saas.data.BatchOperationIndex
 import com.algolia.search.saas.data.TaskStatus
 import kotlinx.coroutines.runBlocking
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -15,37 +14,40 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-@Ignore
 internal class TestClientBatchOperation {
 
     @Test
     fun batch() {
         runBlocking {
             index.run {
-                copyIndex(indexCopyA.indexName).wait().status shouldEqual TaskStatus.Published
-            }
-            indexCopyA.run {
                 create(dataCreate)
                 replace(dataUpdate)
                 update(dataUpdate)
                 delete(dataUpdate)
-                clear()
-                delete()
             }
             algolia.listIndexes().items.any { it.indexName == indexCopyA.indexName }.shouldBeFalse()
         }
     }
 
     @Test
-    fun batchIndex() {
+    fun batchDelete() {
         runBlocking {
             index.run {
                 copyIndex(indexCopyA.indexName).wait().status shouldEqual TaskStatus.Published
-                copyIndex(indexCopyB.indexName).wait().status shouldEqual TaskStatus.Published
             }
+            indexCopyA.run {
+                clear()
+                delete()
+            }
+        }
+    }
+
+    @Test
+    fun batchIndex() {
+        runBlocking {
             val batch = algolia.batch(
-                BatchOperationIndex(indexCopyA.indexName, BatchOperation.DeleteIndex),
-                BatchOperationIndex(indexCopyB.indexName, BatchOperation.DeleteIndex)
+                BatchOperationIndex(index.indexName, BatchOperation.AddObject.from(dataCreate, Data.serializer())),
+                BatchOperationIndex(index.indexName, BatchOperation.DeleteObject(dataCreate.objectID))
             )
             algolia.waitAll(batch.taskIDs).forEach { it.status shouldEqual TaskStatus.Published }
         }

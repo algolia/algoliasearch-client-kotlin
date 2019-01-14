@@ -11,7 +11,6 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-@Ignore
 class TestClientAdvanced {
 
     @Test

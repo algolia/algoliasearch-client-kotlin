@@ -5,7 +5,6 @@ import com.algolia.search.saas.data.RequestObjects
 import com.algolia.search.saas.serialize.KeyObjectId
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.content
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -13,7 +12,6 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-@Ignore
 internal class TestClientMultipleIndices {
 
 

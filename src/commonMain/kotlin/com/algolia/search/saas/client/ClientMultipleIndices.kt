@@ -39,7 +39,9 @@ internal class ClientMultipleIndices(
             httpClient.post<String>(path) {
                 setRequestOptions(requestOptions)
                 body = json.toString()
-            }.let { Json.plain.parseJson(it).jsonObject.getArray(KeyResults).map { it.jsonObject } }
+            }.let {
+                Json.plain.parseJson(it).jsonObject.getArray(KeyResults).filter { !it.isNull }.map { it.jsonObject }
+            }
         }
     }
 
@@ -52,7 +54,7 @@ internal class ClientMultipleIndices(
         val requests = Json.plain.toJson(operations, BatchOperationIndex.list)
         val json = json { KeyRequests to requests }
 
-        return  write.retry(requestOptions.computedWriteTimeout, "/1/indexes/*/batch") { path ->
+        return write.retry(requestOptions.computedWriteTimeout, "/1/indexes/*/batch") { path ->
             httpClient.post<TaskBatchOperations>(path) {
                 setRequestOptions(requestOptions)
                 body = json.toString()

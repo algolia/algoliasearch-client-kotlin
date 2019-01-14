@@ -1,7 +1,6 @@
 package client
 
 import indexA
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -10,7 +9,6 @@ import shouldNotBeNull
 
 
 @RunWith(JUnit4::class)
-@Ignore
 internal class TestClient {
 
     @Test
