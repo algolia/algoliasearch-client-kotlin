@@ -170,6 +170,10 @@ internal class TestKeys {
         KeyListIndexes shouldEqual "listIndexes"
         KeyLogs shouldEqual "logs"
         KeySeeUnretrievableAttributes shouldEqual "seeUnretrievableAttributes"
+        KeyType shouldEqual "type"
+        KeySynonym shouldEqual "synonym"
+        KeyOneWaySynonym shouldEqual "onewaysynonym"
+        KeyInput shouldEqual "input"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"
