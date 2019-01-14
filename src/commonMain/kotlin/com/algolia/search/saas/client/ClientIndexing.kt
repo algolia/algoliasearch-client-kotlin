@@ -1,9 +1,8 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
-import com.algolia.search.saas.serialize.KeyAttributesToRetrieve
-import com.algolia.search.saas.serialize.KeyCreateIfNotExists
-import com.algolia.search.saas.serialize.KeyRequests
+import com.algolia.search.saas.query.clone
+import com.algolia.search.saas.serialize.*
 import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
@@ -70,7 +69,20 @@ internal class ClientIndexing(
 
     override suspend fun deleteObject(objectID: ObjectID, requestOptions: RequestOptions?): TaskDelete {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID")) { path ->
-            httpClient.delete<TaskDelete>(path)
+            httpClient.delete<TaskDelete>(path) {
+                setRequestOptions(requestOptions)
+            }
+        }
+    }
+
+    override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): TaskUpdateIndex {
+        val copy = query.clone()
+
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/deleteByQuery")) { path ->
+            httpClient.post<TaskUpdateIndex>(path) {
+                setRequestOptions(requestOptions)
+                body = json { KeyParams to copy.encodeNoNulls().urlEncode() }.toString()
+            }
         }
     }
 
@@ -102,7 +114,7 @@ internal class ClientIndexing(
         serializer: KSerializer<T>,
         vararg attributes: Attribute,
         requestOptions: RequestOptions?
-    ): T {
+    ): T? {
         return getObjectInternal(objectID, *attributes, requestOptions = requestOptions).let {
             Json.nonstrict.fromJson(it, serializer)
         }

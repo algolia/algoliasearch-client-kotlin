@@ -15,7 +15,7 @@ interface EndpointMultipleIndices {
         request: RequestObjects,
         vararg additionalRequests: RequestObjects,
         requestOptions: RequestOptions? = null
-    ): List<JsonObject>
+    ): List<JsonObject?>
 
     suspend fun batch(
         batchOperation: BatchOperationIndex,

@@ -37,12 +37,17 @@ interface EndpointsIndexing {
         requestOptions: RequestOptions? = null
     ): TaskDelete
 
+    suspend fun deleteObjectBy(
+        query: Query,
+        requestOptions: RequestOptions? = null
+    ): TaskUpdateIndex
+
     suspend fun <T : Indexable> getObject(
         objectID: ObjectID,
         serializer: KSerializer<T>,
         vararg attributes: Attribute,
         requestOptions: RequestOptions? = null
-    ): T
+    ): T?
 
     suspend fun getObject(
         objectID: ObjectID,

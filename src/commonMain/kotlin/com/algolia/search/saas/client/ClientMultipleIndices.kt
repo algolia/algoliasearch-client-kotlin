@@ -31,7 +31,7 @@ internal class ClientMultipleIndices(
         request: RequestObjects,
         vararg additionalRequests: RequestObjects,
         requestOptions: RequestOptions?
-    ): List<JsonObject> {
+    ): List<JsonObject?> {
         val requests = Json.plain.toJson(listOf(request) + additionalRequests, RequestObjects.list)
         val json = json { KeyRequests to requests }
 
@@ -40,7 +40,7 @@ internal class ClientMultipleIndices(
                 setRequestOptions(requestOptions)
                 body = json.toString()
             }.let {
-                it.jsonObject.getArray(KeyResults).filter { !it.isNull }.map { it.jsonObject }
+                it.jsonObject.getArray(KeyResults).map { if (!it.isNull) it.jsonObject else null }
             }
         }
     }

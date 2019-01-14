@@ -27,6 +27,7 @@ internal class TestClientMultipleIndices {
         runBlocking {
             val objectID1 = "442854"
             val objectID2 = "322601"
+            val objectID3 = "404"
             val objects = algolia.getObjects(
                 RequestObjects(
                     index.indexName,
@@ -35,11 +36,16 @@ internal class TestClientMultipleIndices {
                 RequestObjects(
                     index.indexName,
                     ObjectID(objectID2)
+                ),
+                RequestObjects(
+                    index.indexName,
+                    ObjectID(objectID3)
                 )
             )
 
-            objects[0].jsonObject[KeyObjectId].content shouldEqual objectID1
-            objects[1].jsonObject[KeyObjectId].content shouldEqual objectID2
+            objects[0]!!.jsonObject[KeyObjectId].content shouldEqual objectID1
+            objects[1]!!.jsonObject[KeyObjectId].content shouldEqual objectID2
+            objects[2] shouldEqual null
         }
     }
 }

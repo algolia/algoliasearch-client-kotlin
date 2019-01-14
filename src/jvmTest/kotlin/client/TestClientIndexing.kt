@@ -4,7 +4,14 @@ import com.algolia.search.saas.client.Index
 import com.algolia.search.saas.data.ObjectID
 import com.algolia.search.saas.data.PartialUpdate
 import com.algolia.search.saas.data.TaskStatus
+import com.algolia.search.saas.query.FilterFacet
+import com.algolia.search.saas.query.GroupAnd
+import com.algolia.search.saas.query.queryBuilder
 import com.algolia.search.saas.serialize.KeyObjectId
+import com.algolia.search.saas.toAttribute
+import com.algolia.search.saas.toObjectID
+import io.ktor.client.features.BadResponseStatusException
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
@@ -40,7 +47,27 @@ internal class TestClientIndexing {
                 updateAdd(dataUpdate)
                 updateRemove(dataUpdate)
                 updateAddUnique(dataUpdate)
-                delete(dataCreate.objectID)
+                delete(dataCreate)
+            }
+        }
+    }
+
+    @Test
+    fun getNotResult() {
+        runBlocking {
+            index.run {
+                getNoResult("404".toObjectID())
+            }
+        }
+    }
+
+    @Test
+    fun deleteBy() {
+        runBlocking {
+            index.run {
+                create(dataCreate)
+                deleteBy(dataCreate)
+                getNoResult(dataCreate.objectID)
             }
         }
     }
@@ -83,11 +110,11 @@ internal class TestClientIndexing {
     }
 
     private suspend fun Index.updateAdd(data: Data) {
-        val update = updateObject(data.objectID, PartialUpdate.Add(brands, samsung))
+        val update = updateObject(data.objectID, PartialUpdate.Add(brand, samsung))
 
         update.wait().status shouldEqual TaskStatus.Published
-        getObject(update.objectID, brands) shouldEqual json {
-            brands.raw to jsonArray {
+        getObject(update.objectID, brand) shouldEqual json {
+            brand.raw to jsonArray {
                 +iphone
                 +samsung
             }
@@ -96,26 +123,47 @@ internal class TestClientIndexing {
     }
 
     private suspend fun Index.updateRemove(data: Data) {
-        val update = updateObject(data.objectID, PartialUpdate.Remove(brands, samsung))
+        val update = updateObject(data.objectID, PartialUpdate.Remove(brand, samsung))
 
         update.wait().status shouldEqual TaskStatus.Published
-        getObject(update.objectID, brands) shouldEqual json {
-            brands.raw to jsonArray { +iphone }
+        getObject(update.objectID, brand) shouldEqual json {
+            brand.raw to jsonArray { +iphone }
             KeyObjectId to data.objectID.raw
         }
     }
 
     private suspend fun Index.updateAddUnique(data: Data) {
-        val update = updateObject(data.objectID, PartialUpdate.AddUnique(brands, iphone))
+        val update = updateObject(data.objectID, PartialUpdate.AddUnique(brand, iphone))
 
         update.wait().status shouldEqual TaskStatus.Published
-        getObject(update.objectID, brands) shouldEqual json {
-            brands.raw to jsonArray { +iphone }
+        getObject(update.objectID, brand) shouldEqual json {
+            brand.raw to jsonArray { +iphone }
             KeyObjectId to data.objectID.raw
         }
     }
 
-    private suspend fun Index.delete(objectID: ObjectID) {
-        deleteObject(objectID).wait().status shouldEqual TaskStatus.Published
+    private suspend fun Index.delete(data: Data) {
+        deleteObject(data.objectID).wait().status shouldEqual TaskStatus.Published
+    }
+
+    private suspend fun Index.deleteBy(data: Data) {
+        val facet = FilterFacet("objectID".toAttribute(), data.objectID.raw)
+        val query = queryBuilder {
+            filterBuilder.apply { GroupAnd("group") += facet }
+        }
+        val deleteBy = deleteObjectBy(query)
+
+        deleteBy.wait().status shouldEqual TaskStatus.Published
+    }
+
+    private suspend fun Index.getNoResult(objectID: ObjectID) {
+        var notFound = false
+        try {
+            getObject(objectID) shouldEqual null
+
+        } catch (exception: BadResponseStatusException) {
+            notFound = exception.statusCode == HttpStatusCode.NotFound
+        }
+        notFound shouldEqual true
     }
 }

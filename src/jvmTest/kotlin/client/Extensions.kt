@@ -22,7 +22,7 @@ internal data class Data(
 
 internal val name = Attribute("name")
 internal val count = Attribute("count")
-internal val brands = Attribute("brands")
+internal val brand = Attribute("brand")
 internal val iphone = "iPhone"
 internal val samsung = "Samsung"
 internal val dataCreate = Data("Phone", 1000, listOf(iphone), ObjectID("test_suite"))
