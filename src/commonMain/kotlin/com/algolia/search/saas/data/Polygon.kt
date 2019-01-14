@@ -1,7 +1,10 @@
 package com.algolia.search.saas.data
 
-import kotlinx.serialization.*
-import kotlinx.serialization.internal.FloatSerializer
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(Polygon.Companion::class)
@@ -35,18 +38,22 @@ data class Polygon(
         *points.flatMap { it.raw }.toTypedArray()
     )
 
+    override fun toString(): String {
+        return raw.joinToString(",") { it.toString() }
+    }
+
     internal companion object : KSerializer<Polygon> {
 
-        private val serializer = FloatSerializer.list
+        private val serializer = StringSerializer
 
         override val descriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: Polygon) {
-            serializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.toString())
         }
 
         override fun deserialize(decoder: Decoder): Polygon {
-            val floats = serializer.deserialize(decoder)
+            val floats = serializer.deserialize(decoder).split(",").map { it.toFloat() }
 
             return Polygon(
                 Point(floats[0], floats[1]),

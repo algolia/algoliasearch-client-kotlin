@@ -2,7 +2,7 @@ package serialize
 
 import com.algolia.search.saas.data.BoundingBox
 import com.algolia.search.saas.to
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
@@ -17,11 +17,6 @@ internal class TestBoundingBox : TestSerializer<BoundingBox>(BoundingBox) {
     companion object {
 
         val boundingBox = BoundingBox(1f to 2f, 3f to 4f)
-        val json = jsonArray {
-            +(1f as Number)
-            +(2f as Number)
-            +(3f as Number)
-            +(4f as Number)
-        }
+        val json = JsonLiteral((1..4).joinToString(",") { "$it.0" })
     }
 }
