@@ -14,7 +14,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-class TestHosts {
+internal class TestHosts {
 
     private val applicationId = ApplicationID("appId")
     private val host = "algolianet.com"

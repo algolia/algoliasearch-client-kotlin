@@ -7,7 +7,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-class TestRequestOptions {
+internal class TestRequestOptions {
 
     @Test
     fun headers() {

@@ -20,7 +20,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-class TestRetryLogic {
+internal class TestRetryLogic {
 
     private val applicationId = ApplicationID("appId")
     private val retryLogic = RetryLogic(applicationId, RetryLogic.Type.Read)

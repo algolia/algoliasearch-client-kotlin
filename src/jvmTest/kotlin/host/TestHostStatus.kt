@@ -13,7 +13,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-class TestHostStatus {
+internal class TestHostStatus {
 
     @Test
     fun initialState() {
