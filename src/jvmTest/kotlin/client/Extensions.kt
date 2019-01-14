@@ -4,12 +4,13 @@ import com.algolia.search.saas.client.AlgoliaClient
 import com.algolia.search.saas.data.*
 import kotlinx.serialization.Serializable
 
-internal val apiKey = ApiKey(System.getenv("MULTIPLATFORM_API_KEY"))
-internal val applicationId = ApplicationID(System.getenv("MULTIPLATFORM_APP_ID"))
+internal val adminKey = APIKey(System.getenv("KOTLIN_CLIENT_ADMIN_KEY"))
+internal val apiKey = APIKey(System.getenv("KOTLIN_CLIENT_API_KEY"))
+internal val applicationId = ApplicationID(System.getenv("KOTLIN_CLIENT_APP_ID"))
 internal val algolia = AlgoliaClient(applicationId, apiKey)
-internal val index = algolia.getIndex(IndexName("products_android_demo"))
-internal val indexCopyA = algolia.getIndex(IndexName("products_android_demo_copyA"))
-internal val indexCopyB = algolia.getIndex(IndexName("products_android_demo_copyB"))
+internal val index = algolia.getIndex(IndexName(System.getenv("KOTLIN_CLIENT_INDEX")))
+internal val indexCopyA = algolia.getIndex(IndexName("${index.indexName}_copyA"))
+internal val indexCopyB = algolia.getIndex(IndexName("${index.indexName}_copyB"))
 
 @Serializable
 internal data class Data(

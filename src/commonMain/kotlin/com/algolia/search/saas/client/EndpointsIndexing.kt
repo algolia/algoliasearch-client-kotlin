@@ -13,12 +13,12 @@ interface EndpointsIndexing {
         data: T,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions? = null
-    ): TaskCreate
+    ): TaskCreateObject
 
     suspend fun addObject(
         json: JsonObject,
         requestOptions: RequestOptions? = null
-    ): TaskCreate
+    ): TaskCreateObject
 
     suspend fun <T : Indexable> replaceObject(
         data: T,

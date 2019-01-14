@@ -19,9 +19,9 @@ internal class ClientIndexing(
     Configuration by client,
     Client by client.client {
 
-    private suspend fun addObject(payload: String, requestOptions: RequestOptions?): TaskCreate {
+    private suspend fun addObject(payload: String, requestOptions: RequestOptions?): TaskCreateObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
-            httpClient.post<TaskCreate>(path) {
+            httpClient.post<TaskCreateObject>(path) {
                 setRequestOptions(requestOptions)
                 body = payload
             }
@@ -32,11 +32,11 @@ internal class ClientIndexing(
         data: T,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions?
-    ): TaskCreate {
+    ): TaskCreateObject {
         return addObject(Json.stringify(serializer, data), requestOptions)
     }
 
-    override suspend fun addObject(json: JsonObject, requestOptions: RequestOptions?): TaskCreate {
+    override suspend fun addObject(json: JsonObject, requestOptions: RequestOptions?): TaskCreateObject {
         return addObject(json.toString(), requestOptions)
     }
 
