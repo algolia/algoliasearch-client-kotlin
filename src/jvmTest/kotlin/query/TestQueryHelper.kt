@@ -1,10 +1,7 @@
 package query
 
 import buildTest
-import com.algolia.search.saas.data.AlternativesAsExact
-import com.algolia.search.saas.data.Attribute
-import com.algolia.search.saas.data.QueryLanguage
-import com.algolia.search.saas.data.ResponseFields
+import com.algolia.search.saas.data.*
 import com.algolia.search.saas.query.*
 import com.algolia.search.saas.to
 import facetA
@@ -14,7 +11,6 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldEqual
-import kotlin.test.assertEquals
 
 
 @RunWith(JUnit4::class)
@@ -25,15 +21,15 @@ internal class TestQueryHelper {
 
     @Test
     fun testClone() {
-        val query = queryBuilder {
-            filterBuilder.apply {
-                groupOrA += facetA
-            }
-        }
+        val query = Query()
 
-        assertEquals(query.clone().filters, query.filterBuilder.build())
+        query.clone().filters shouldEqual null
+        query.filterBuilder.apply {
+            groupOrA += facetA
+        }
+        query.clone().filters shouldEqual query.filterBuilder.build()
         query.filters = "test"
-        assertEquals(query.clone().filters, "test")
+        query.clone().filters shouldEqual  "test"
     }
 
     @Test

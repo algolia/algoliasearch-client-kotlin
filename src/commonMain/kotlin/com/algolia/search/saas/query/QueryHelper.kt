@@ -7,7 +7,7 @@ annotation class QueryHelper
 
 internal val all = Attribute("*")
 
-internal fun Query.clone() = copy(filters = filters ?: filterBuilder.build())
+internal fun Query.clone() = copy(filters = filters ?: filterBuilder.build().let { if (it.isEmpty()) null else it })
 
 fun queryBuilder(init: Query.() -> Unit) = Query().apply(init)
 
