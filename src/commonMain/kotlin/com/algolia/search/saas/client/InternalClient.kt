@@ -13,6 +13,7 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.internal.JsonObjectSerializer
 
 internal class InternalClient(configuration: Configuration) : Client, Configuration by configuration {
 
@@ -36,6 +37,7 @@ internal class InternalClient(configuration: Configuration) : Client, Configurat
                 KotlinxSerializer(Json.nonstrict)
                     .also {
                         it.register(TaskBatchOperations)
+                        it.register(JsonObjectSerializer)
                     }
         }
         install(DefaultRequest) {

@@ -78,9 +78,9 @@ internal class ClientIndexing(
         objectID: ObjectID,
         vararg attributes: Attribute,
         requestOptions: RequestOptions?
-    ): String {
+    ): JsonObject {
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/$objectID")) { path ->
-            httpClient.get<String>(path) {
+            httpClient.get<JsonObject>(path) {
                 setRequestOptions(requestOptions)
                 if (attributes.isNotEmpty()) {
                     parameter(KeyAttributesToRetrieve, Json.stringify(Attribute.list, attributes.toList()))
@@ -94,9 +94,7 @@ internal class ClientIndexing(
         vararg attributes: Attribute,
         requestOptions: RequestOptions?
     ): JsonObject {
-        return getObjectInternal(objectID, *attributes, requestOptions = requestOptions).let {
-            Json.nonstrict.parseJson(it).jsonObject
-        }
+        return getObjectInternal(objectID, *attributes, requestOptions = requestOptions)
     }
 
     override suspend fun <T : Indexable> getObject(
@@ -106,7 +104,7 @@ internal class ClientIndexing(
         requestOptions: RequestOptions?
     ): T {
         return getObjectInternal(objectID, *attributes, requestOptions = requestOptions).let {
-            Json.nonstrict.parse(serializer, it)
+            Json.nonstrict.fromJson(it, serializer)
         }
     }
 

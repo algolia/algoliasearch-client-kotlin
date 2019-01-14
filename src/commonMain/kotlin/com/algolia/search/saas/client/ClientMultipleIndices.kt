@@ -36,11 +36,11 @@ internal class ClientMultipleIndices(
         val json = json { KeyRequests to requests }
 
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/objects") { path ->
-            httpClient.post<String>(path) {
+            httpClient.post<JsonObject>(path) {
                 setRequestOptions(requestOptions)
                 body = json.toString()
             }.let {
-                Json.plain.parseJson(it).jsonObject.getArray(KeyResults).filter { !it.isNull }.map { it.jsonObject }
+                it.jsonObject.getArray(KeyResults).filter { !it.isNull }.map { it.jsonObject }
             }
         }
     }
