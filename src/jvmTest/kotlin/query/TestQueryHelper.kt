@@ -23,13 +23,26 @@ internal class TestQueryHelper {
     fun testClone() {
         val query = Query()
 
-        query.clone().filters shouldEqual null
+        query.clone().also {
+            it.filters shouldEqual null
+            it.optionalFilters shouldEqual null
+        }
         query.filterBuilder.apply {
             groupOrA += facetA
         }
-        query.clone().filters shouldEqual query.filterBuilder.build()
+        query.optionalFilterBuilder.apply {
+            groupOrA += facetA
+        }
+        query.clone().also {
+            it.filters shouldEqual query.filterBuilder.build()
+            it.optionalFilters shouldEqual query.optionalFilterBuilder.build()
+        }
         query.filters = "test"
-        query.clone().filters shouldEqual  "test"
+        query.optionalFilters = listOf()
+        query.clone().also {
+            it.filters shouldEqual "test"
+            it.optionalFilters shouldEqual listOf()
+        }
     }
 
     @Test
