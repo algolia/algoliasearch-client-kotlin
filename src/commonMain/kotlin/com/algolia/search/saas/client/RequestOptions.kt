@@ -1,7 +1,7 @@
 package com.algolia.search.saas.client
 
 
-fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {
+internal fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {
     return RequestOptions().apply(init)
 }
 

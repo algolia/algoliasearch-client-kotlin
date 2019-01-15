@@ -9,20 +9,20 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
 
-fun HttpRequestBuilder.setApplicationId(applicationID: ApplicationID) {
+internal fun HttpRequestBuilder.setApplicationId(applicationID: ApplicationID) {
     header("X-Algolia-Application-Id", applicationID.raw)
 }
 
-fun HttpRequestBuilder.setApiKey(apiKey: APIKey) {
+internal fun HttpRequestBuilder.setApiKey(apiKey: APIKey) {
     header("X-Algolia-API-Key", apiKey.raw)
 }
 
-fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions?) {
+internal fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions?) {
     requestOptions?.headers?.forEach { header(it.key, it.value) }
     requestOptions?.urlParameters?.forEach { parameter(it.key, it.value) }
 }
 
-fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: MultipleQueriesStrategy) {
+internal fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: MultipleQueriesStrategy) {
     body = json {
         KeyRequests to jsonArray {
             queries.forEach {
@@ -36,6 +36,6 @@ fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: Mul
     }.toString()
 }
 
-fun HttpRequestBuilder.setBody(query: Query?) {
+internal fun HttpRequestBuilder.setBody(query: Query?) {
     body = query?.encodeNoNulls()?.toString() ?: "{}"
 }
