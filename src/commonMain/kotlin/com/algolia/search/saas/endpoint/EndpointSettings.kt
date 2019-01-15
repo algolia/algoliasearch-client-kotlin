@@ -16,7 +16,7 @@ interface EndpointSettings {
     suspend fun setSettings(
         settings: Settings,
         resetToDefault: List<SettingsKey> = listOf(),
-        forwardToReplicas: Boolean = false,
+        forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): TaskUpdateIndex
 }

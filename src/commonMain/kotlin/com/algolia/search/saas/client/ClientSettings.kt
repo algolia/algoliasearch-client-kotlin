@@ -31,7 +31,7 @@ internal class ClientSettings(
     override suspend fun setSettings(
         settings: Settings,
         resetToDefault: List<SettingsKey>,
-        forwardToReplicas: Boolean,
+        forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
     ): TaskUpdateIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
@@ -46,7 +46,9 @@ internal class ClientSettings(
                         }
                     }
                 body = JsonObject(map).toString()
-                parameter(KeyForwardToReplicas, forwardToReplicas)
+                forwardToReplicas?.let {
+                    parameter(KeyForwardToReplicas, it)
+                }
             }
         }
     }
