@@ -1,10 +1,7 @@
 package com.algolia.search.saas.data
 
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.*
+import kotlinx.serialization.internal.FloatSerializer
 
 
 @Serializable(BoundingBox.Companion::class)
@@ -15,22 +12,18 @@ data class BoundingBox(
 
     override val raw = listOf(point1.latitude, point1.longitude, point2.latitude, point2.longitude)
 
-    override fun toString(): String {
-        return raw.joinToString(",") { it.toString() }
-    }
-
     internal companion object : KSerializer<BoundingBox> {
 
-        private val serializer = StringSerializer
+        private val serializer = FloatSerializer
 
-        override val descriptor = serializer.descriptor
+        override val descriptor = serializer.list.descriptor
 
         override fun serialize(encoder: Encoder, obj: BoundingBox) {
-            serializer.serialize(encoder, obj.toString())
+            serializer.list.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): BoundingBox {
-            val floats = serializer.deserialize(decoder).split(",").map { it.toFloat() }
+            val floats = serializer.list.deserialize(decoder)
 
             return BoundingBox(
                 Point(
