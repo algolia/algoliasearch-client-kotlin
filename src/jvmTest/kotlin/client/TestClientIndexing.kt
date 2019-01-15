@@ -115,7 +115,6 @@ internal class TestClientIndexing {
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, brand) shouldEqual json {
             brand.raw to jsonArray {
-                +iphone
                 +samsung
             }
             KeyObjectId to data.objectID.raw
@@ -127,7 +126,7 @@ internal class TestClientIndexing {
 
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, brand) shouldEqual json {
-            brand.raw to jsonArray { +iphone }
+            brand.raw to jsonArray { }
             KeyObjectId to data.objectID.raw
         }
     }
