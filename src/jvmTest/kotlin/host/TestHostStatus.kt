@@ -33,7 +33,6 @@ internal class TestHostStatus {
     @Test
     fun lastRequestAfterExpirationDelay() {
         val sixSecondsAgo = Time.getCurrentTimeMillis() - 6000L
-        val initial = listOf(HostStatus.Unknown to 0L, HostStatus.Unknown to 0L)
         val statuses = listOf(HostStatus.Up to sixSecondsAgo, HostStatus.Unknown to 0L)
 
         // The last request was made 6 seconds ago, expiration is 5 seconds. Host statuses have expired
