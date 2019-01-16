@@ -12,23 +12,24 @@ internal class ClientAdvanced(
 ) : EndpointAdvanced,
     Client by client {
 
-    override val maxTimeToWait = 10000L
+    override suspend fun Task.wait(requestOptions: RequestOptions?): TaskInfo {
+        return waitTask(taskID)
+    }
 
-    override suspend fun Task.wait(timeToWait: Long): TaskInfo {
-        var attempt = 1
-
+    override suspend fun waitTask(taskID: TaskID, requestOptions: RequestOptions?): TaskInfo {
         while (true) {
-            getTask(taskID).let {
+            getTask(taskID, requestOptions).let {
                 if (it.status == TaskStatus.Published) return it
             }
-            delay((timeToWait * attempt).coerceAtMost(maxTimeToWait))
-            attempt++
+            delay(2000L)
         }
     }
 
-    override suspend fun getTask(taskID: TaskID): TaskInfo {
+    override suspend fun getTask(taskID: TaskID, requestOptions: RequestOptions?): TaskInfo {
         return read.retry(readTimeout, indexName.pathIndexes("/task/$taskID")) { path ->
-            httpClient.get<TaskInfo>(path)
+            httpClient.get<TaskInfo>(path) {
+                setRequestOptions(requestOptions)
+            }
         }
     }
 }

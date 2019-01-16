@@ -29,4 +29,13 @@ internal class TestClientAdvanced {
             }
         }
     }
+
+    @Test
+    fun waitTask() {
+        runBlocking {
+            val task = index.setSettings(Settings())
+
+            index.waitTask(task.taskID).status shouldEqual TaskStatus.Published
+        }
+    }
 }
