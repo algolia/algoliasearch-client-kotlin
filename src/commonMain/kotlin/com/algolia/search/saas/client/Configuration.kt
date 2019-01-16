@@ -5,14 +5,10 @@ import com.algolia.search.saas.data.ApplicationID
 import io.ktor.client.features.logging.LogLevel
 
 
-interface Configuration {
-
-    val applicationID: ApplicationID
-    val apiKey: APIKey
-    val writeTimeout: Long
-    val readTimeout: Long
-    val logLevel: LogLevel
-
-    val RequestOptions?.computedWriteTimeout get() = this?.writeTimeout ?: writeTimeout
-    val RequestOptions?.computedReadTimeout get() = this?.readTimeout ?: readTimeout
-}
+data class Configuration(
+    override val applicationID: ApplicationID,
+    override val apiKey: APIKey,
+    override val writeTimeout: Long = 30000,
+    override val readTimeout: Long = 2000,
+    override val logLevel: LogLevel = LogLevel.ALL
+) : ConfigurationInterface

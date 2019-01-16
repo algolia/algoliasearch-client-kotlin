@@ -3,43 +3,32 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.data.*
 import com.algolia.search.saas.endpoint.EndpointAPIKey
 import com.algolia.search.saas.endpoint.EndpointMultipleIndices
-import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.engine.HttpClientEngine
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 
 
 class ClientAlgolia private constructor(
-    override val applicationID: ApplicationID,
-    override val apiKey: APIKey,
-    override val writeTimeout: Long = 30000,
-    override val readTimeout: Long = 2000,
-    override val logLevel: LogLevel = LogLevel.ALL,
-    internal val client: Client
-) : Configuration,
-    EndpointMultipleIndices by ClientMultipleIndices(client),
-    EndpointAPIKey by ClientAPIKey(client) {
+    private val apiWrapper: APIWrapper
+) :
+    EndpointMultipleIndices by ClientMultipleIndices(apiWrapper),
+    EndpointAPIKey by ClientAPIKey(apiWrapper) {
 
     constructor(
         applicationID: ApplicationID,
-        apiKey: APIKey,
-        writeTimeout: Long = 30000,
-        readTimeout: Long = 2000,
-        logLevel: LogLevel = LogLevel.BODY
-    ) : this(
-        applicationID,
-        apiKey,
-        writeTimeout,
-        readTimeout,
-        logLevel,
-        ClientKtor(applicationID, apiKey, writeTimeout, readTimeout, logLevel)
-    )
+        apiKey: APIKey
+    ) : this(APIWrapper(Configuration(applicationID, apiKey)))
+
+    constructor(configuration: Configuration) : this(APIWrapper(configuration))
+
+    constructor(configuration: Configuration, engine: HttpClientEngine?) : this(APIWrapper(configuration, engine))
 
     private val indexes = mutableMapOf<IndexName, Index>()
 
     fun getIndex(indexName: IndexName): Index {
         return indexes.getOrPut(indexName) {
-            Index(this, indexName)
+            Index(apiWrapper, indexName)
         }
     }
 
