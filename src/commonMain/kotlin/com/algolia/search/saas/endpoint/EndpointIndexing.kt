@@ -83,8 +83,6 @@ interface EndpointIndexing {
         requestOptions: RequestOptions? = null
     ): JsonObject
 
-    suspend fun clearObjects(requestOptions: RequestOptions? = null): TaskUpdateIndex
-
     suspend fun <T : Indexable> updateObject(
         data: T,
         serializer: KSerializer<T>,

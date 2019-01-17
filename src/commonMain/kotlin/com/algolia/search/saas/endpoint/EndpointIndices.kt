@@ -20,4 +20,6 @@ interface EndpointIndices {
     suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions? = null): TaskUpdateIndex
 
     suspend fun deleteIndex(requestOptions: RequestOptions? = null): TaskDelete
+
+    suspend fun clear(requestOptions: RequestOptions? = null): TaskUpdateIndex
 }

@@ -25,18 +25,6 @@ import shouldEqual
 internal class TestClientIndexing {
 
     @Test
-    fun clearObjects() {
-        runBlocking {
-            index.run {
-                copyIndex(indexCopyA.indexName).wait().status shouldEqual TaskStatus.Published
-            }
-            indexCopyA.run {
-                clearObjects().wait().status shouldEqual TaskStatus.Published
-            }
-        }
-    }
-
-    @Test
     fun suite() {
         runBlocking {
             index.run {

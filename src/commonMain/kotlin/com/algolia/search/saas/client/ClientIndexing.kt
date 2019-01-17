@@ -162,15 +162,6 @@ internal class ClientIndexing(
         }
     }
 
-    override suspend fun clearObjects(requestOptions: RequestOptions?): TaskUpdateIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/clear")) { path ->
-            httpClient.post<TaskUpdateIndex>(path) {
-                setRequestOptions(requestOptions)
-                body = ""
-            }
-        }
-    }
-
     private suspend fun updateObject(
         payload: String,
         objectID: ObjectID,

@@ -2,6 +2,7 @@ package client
 
 import com.algolia.search.saas.client.Index
 import com.algolia.search.saas.data.IndexName
+import com.algolia.search.saas.data.TaskStatus
 import com.algolia.search.saas.data.TaskStatus.Published
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -48,6 +49,18 @@ internal class TestClientIndices {
             copyIndex(index, indexCopyA.indexName)
             moveIndex(indexCopyA, indexCopyB.indexName)
             deleteIndex(indexCopyB)
+        }
+    }
+
+    @Test
+    fun clear() {
+        runBlocking {
+            index.run {
+                copyIndex(indexCopyA.indexName).wait().status shouldEqual TaskStatus.Published
+            }
+            indexCopyA.run {
+                clear().wait().status shouldEqual TaskStatus.Published
+            }
         }
     }
 }
