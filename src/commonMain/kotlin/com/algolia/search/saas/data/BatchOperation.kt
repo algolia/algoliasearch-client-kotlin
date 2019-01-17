@@ -55,8 +55,8 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
             }
 
             fun from(
-                objectID: ObjectID,
                 partialUpdate: PartialUpdate,
+                objectID: ObjectID,
                 createIfNotExists: Boolean
             ): UpdateObject {
                 return UpdateObject(

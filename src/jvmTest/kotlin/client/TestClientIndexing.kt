@@ -83,37 +83,37 @@ internal class TestClientIndexing {
         val update = replaceObject(data, Data.serializer())
 
         update.wait().status shouldEqual TaskStatus.Published
-        getObject(update.objectID, name) shouldEqual json {
+        getObject(update.objectID, listOf(name)) shouldEqual json {
             name.raw to data.name
             KeyObjectId to data.objectID.raw
         }
     }
 
     private suspend fun Index.updateIncrement(data: Data) {
-        val update = updateObject(data.objectID, PartialUpdate.Increment(count, 1))
+        val update = partialUpdateObject(PartialUpdate.Increment(count, 1), data.objectID)
 
         update.wait().status shouldEqual TaskStatus.Published
-        getObject(update.objectID, count) shouldEqual json {
+        getObject(update.objectID, listOf(count)) shouldEqual json {
             count.raw to (data.count + 1)
             KeyObjectId to data.objectID.raw
         }
     }
 
     private suspend fun Index.updateDecrement(data: Data) {
-        val update = updateObject(data.objectID, PartialUpdate.Decrement(count, 1))
+        val update = partialUpdateObject(PartialUpdate.Decrement(count, 1), data.objectID)
 
         update.wait().status shouldEqual TaskStatus.Published
-        getObject(update.objectID, count) shouldEqual json {
+        getObject(update.objectID, listOf(count)) shouldEqual json {
             count.raw to data.count
             KeyObjectId to data.objectID.raw
         }
     }
 
     private suspend fun Index.updateAdd(data: Data) {
-        val update = updateObject(data.objectID, PartialUpdate.Add(brand, samsung))
+        val update = partialUpdateObject(PartialUpdate.Add(brand, samsung), data.objectID)
 
         update.wait().status shouldEqual TaskStatus.Published
-        getObject(update.objectID, brand) shouldEqual json {
+        getObject(update.objectID, listOf(brand)) shouldEqual json {
             brand.raw to jsonArray {
                 +samsung
             }
@@ -122,20 +122,20 @@ internal class TestClientIndexing {
     }
 
     private suspend fun Index.updateRemove(data: Data) {
-        val update = updateObject(data.objectID, PartialUpdate.Remove(brand, samsung))
+        val update = partialUpdateObject(PartialUpdate.Remove(brand, samsung), data.objectID)
 
         update.wait().status shouldEqual TaskStatus.Published
-        getObject(update.objectID, brand) shouldEqual json {
+        getObject(update.objectID, listOf(brand)) shouldEqual json {
             brand.raw to jsonArray { }
             KeyObjectId to data.objectID.raw
         }
     }
 
     private suspend fun Index.updateAddUnique(data: Data) {
-        val update = updateObject(data.objectID, PartialUpdate.AddUnique(brand, iphone))
+        val update = partialUpdateObject(PartialUpdate.AddUnique(brand, iphone), data.objectID)
 
         update.wait().status shouldEqual TaskStatus.Published
-        getObject(update.objectID, brand) shouldEqual json {
+        getObject(update.objectID, listOf(brand)) shouldEqual json {
             brand.raw to jsonArray { +iphone }
             KeyObjectId to data.objectID.raw
         }

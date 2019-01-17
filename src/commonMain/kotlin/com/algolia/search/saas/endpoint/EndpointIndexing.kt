@@ -16,10 +16,21 @@ interface EndpointIndexing {
         requestOptions: RequestOptions? = null
     ): TaskCreateObject
 
+    suspend fun <T> addObjects(
+        data: List<T>,
+        serializer: KSerializer<T>,
+        requestOptions: RequestOptions? = null
+    ): TaskBatchOperation
+
     suspend fun addObject(
-        json: JsonObject,
+        data: JsonObject,
         requestOptions: RequestOptions? = null
     ): TaskCreateObject
+
+    suspend fun addObjects(
+        data: List<JsonObject>,
+        requestOptions: RequestOptions? = null
+    ): TaskBatchOperation
 
     suspend fun <T : Indexable> replaceObject(
         data: T,
@@ -27,16 +38,32 @@ interface EndpointIndexing {
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
+    suspend fun <T : Indexable> replaceObjects(
+        data: List<T>,
+        serializer: KSerializer<T>,
+        requestOptions: RequestOptions? = null
+    ): TaskBatchOperation
+
     suspend fun replaceObject(
-        json: JsonObject,
+        data: JsonObject,
         objectID: ObjectID,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
+
+    suspend fun replaceObjects(
+        data: List<Pair<JsonObject, ObjectID>>,
+        requestOptions: RequestOptions? = null
+    ): TaskBatchOperation
 
     suspend fun deleteObject(
         objectID: ObjectID,
         requestOptions: RequestOptions? = null
     ): TaskDelete
+
+    suspend fun deleteObjects(
+        objectIDs: List<ObjectID>,
+        requestOptions: RequestOptions? = null
+    ): TaskBatchOperation
 
     suspend fun deleteObjectBy(
         query: Query,
@@ -46,13 +73,13 @@ interface EndpointIndexing {
     suspend fun <T : Indexable> getObject(
         objectID: ObjectID,
         serializer: KSerializer<T>,
-        vararg attributes: Attribute,
+        attributes: List<Attribute> = listOf(),
         requestOptions: RequestOptions? = null
     ): T?
 
     suspend fun getObject(
         objectID: ObjectID,
-        vararg attributes: Attribute,
+        attributes: List<Attribute> = listOf(),
         requestOptions: RequestOptions? = null
     ): JsonObject
 
@@ -61,27 +88,45 @@ interface EndpointIndexing {
     suspend fun <T : Indexable> updateObject(
         data: T,
         serializer: KSerializer<T>,
-        createIfNotExists: Boolean = true,
+        createIfNotExists: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
-    suspend fun updateObject(
-        json: JsonObject,
-        objectID: ObjectID,
+    suspend fun <T : Indexable> updateObjects(
+        data: List<T>,
+        serializer: KSerializer<T>,
         createIfNotExists: Boolean = true,
+        requestOptions: RequestOptions? = null
+    ): TaskBatchOperation
+
+    suspend fun updateObject(
+        data: JsonObject,
+        objectID: ObjectID,
+        createIfNotExists: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
 
-    suspend fun updateObject(
-        objectID: ObjectID,
+    suspend fun updateObjects(
+        data: List<Pair<JsonObject, ObjectID>>,
+        createIfNotExists: Boolean = true,
+        requestOptions: RequestOptions? = null
+    ): TaskBatchOperation
+
+    suspend fun partialUpdateObject(
         partialUpdate: PartialUpdate,
-        createIfNotExists: Boolean = true,
+        objectID: ObjectID,
+        createIfNotExists: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): TaskUpdateObject
+
+    suspend fun partialUpdateObjects(
+        data: List<Pair<PartialUpdate, ObjectID>>,
+        createIfNotExists: Boolean = true,
+        requestOptions: RequestOptions? = null
+    ): TaskBatchOperation
 
     suspend fun batch(
-        batchOperation: BatchOperation,
-        vararg additionalBatchOperations: BatchOperation,
+        batchOperations: List<BatchOperation>,
         requestOptions: RequestOptions? = null
     ): TaskBatchOperation
 }

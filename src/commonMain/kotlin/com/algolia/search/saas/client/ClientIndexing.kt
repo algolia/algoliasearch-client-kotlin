@@ -35,11 +35,27 @@ internal class ClientIndexing(
         return addObject(Json.stringify(serializer, data), requestOptions)
     }
 
-    override suspend fun addObject(json: JsonObject, requestOptions: RequestOptions?): TaskCreateObject {
-        return addObject(json.toString(), requestOptions)
+    override suspend fun <T> addObjects(
+        data: List<T>,
+        serializer: KSerializer<T>,
+        requestOptions: RequestOptions?
+    ): TaskBatchOperation {
+        val operations = data.map { BatchOperation.AddObject.from(it, serializer) }
+
+        return batch(operations, requestOptions)
     }
 
-    private suspend fun updateObject(
+    override suspend fun addObject(data: JsonObject, requestOptions: RequestOptions?): TaskCreateObject {
+        return addObject(data.toString(), requestOptions)
+    }
+
+    override suspend fun addObjects(data: List<JsonObject>, requestOptions: RequestOptions?): TaskBatchOperation {
+        val operations = data.map { BatchOperation.AddObject(it) }
+
+        return batch(operations, requestOptions)
+    }
+
+    private suspend fun replaceObject(
         payload: String,
         objectID: ObjectID,
         requestOptions: RequestOptions?
@@ -57,15 +73,34 @@ internal class ClientIndexing(
         serializer: KSerializer<T>,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return updateObject(Json.stringify(serializer, data), data.objectID, requestOptions)
+        return replaceObject(Json.stringify(serializer, data), data.objectID, requestOptions)
+    }
+
+    override suspend fun <T : Indexable> replaceObjects(
+        data: List<T>,
+        serializer: KSerializer<T>,
+        requestOptions: RequestOptions?
+    ): TaskBatchOperation {
+        val operations = data.map { BatchOperation.ReplaceObject.from(it, serializer) }
+
+        return batch(operations, requestOptions)
     }
 
     override suspend fun replaceObject(
-        json: JsonObject,
+        data: JsonObject,
         objectID: ObjectID,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        return updateObject(json.toString(), objectID, requestOptions)
+        return replaceObject(data.toString(), objectID, requestOptions)
+    }
+
+    override suspend fun replaceObjects(
+        data: List<Pair<JsonObject, ObjectID>>,
+        requestOptions: RequestOptions?
+    ): TaskBatchOperation {
+        val operations = data.map { BatchOperation.ReplaceObject(it.first, it.second) }
+
+        return batch(operations, requestOptions)
     }
 
     override suspend fun deleteObject(objectID: ObjectID, requestOptions: RequestOptions?): TaskDelete {
@@ -74,6 +109,12 @@ internal class ClientIndexing(
                 setRequestOptions(requestOptions)
             }
         }
+    }
+
+    override suspend fun deleteObjects(objectIDs: List<ObjectID>, requestOptions: RequestOptions?): TaskBatchOperation {
+        val operations = objectIDs.map { BatchOperation.DeleteObject(it) }
+
+        return batch(operations, requestOptions)
     }
 
     override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): TaskUpdateIndex {
@@ -89,7 +130,7 @@ internal class ClientIndexing(
 
     private suspend fun getObjectInternal(
         objectID: ObjectID,
-        vararg attributes: Attribute,
+        attributes: List<Attribute>,
         requestOptions: RequestOptions?
     ): JsonObject {
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/$objectID")) { path ->
@@ -104,19 +145,19 @@ internal class ClientIndexing(
 
     override suspend fun getObject(
         objectID: ObjectID,
-        vararg attributes: Attribute,
+        attributes: List<Attribute>,
         requestOptions: RequestOptions?
     ): JsonObject {
-        return getObjectInternal(objectID, *attributes, requestOptions = requestOptions)
+        return getObjectInternal(objectID, attributes, requestOptions = requestOptions)
     }
 
     override suspend fun <T : Indexable> getObject(
         objectID: ObjectID,
         serializer: KSerializer<T>,
-        vararg attributes: Attribute,
+        attributes: List<Attribute>,
         requestOptions: RequestOptions?
     ): T? {
-        return getObjectInternal(objectID, *attributes, requestOptions = requestOptions).let {
+        return getObjectInternal(objectID, attributes, requestOptions = requestOptions).let {
             Json.nonstrict.fromJson(it, serializer)
         }
     }
@@ -133,13 +174,13 @@ internal class ClientIndexing(
     private suspend fun updateObject(
         payload: String,
         objectID: ObjectID,
-        createIfNotExists: Boolean,
+        createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID/partial")) { path ->
             httpClient.post<TaskUpdateObject>(path) {
                 setRequestOptions(requestOptions)
-                parameter(KeyCreateIfNotExists, createIfNotExists)
+                createIfNotExists?.let { parameter(KeyCreateIfNotExists, createIfNotExists) }
                 body = payload
             }
         }
@@ -148,25 +189,46 @@ internal class ClientIndexing(
     override suspend fun <T : Indexable> updateObject(
         data: T,
         serializer: KSerializer<T>,
-        createIfNotExists: Boolean,
+        createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
         return updateObject(Json.stringify(serializer, data), data.objectID, createIfNotExists, requestOptions)
     }
 
-    override suspend fun updateObject(
-        json: JsonObject,
-        objectID: ObjectID,
+    override suspend fun <T : Indexable> updateObjects(
+        data: List<T>,
+        serializer: KSerializer<T>,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
-    ): TaskUpdateObject {
-        return updateObject(json.toString(), objectID, createIfNotExists, requestOptions)
+    ): TaskBatchOperation {
+        val operations = data.map { BatchOperation.UpdateObject.from(it, serializer, createIfNotExists) }
+
+        return batch(operations, requestOptions)
     }
 
     override suspend fun updateObject(
+        data: JsonObject,
         objectID: ObjectID,
-        partialUpdate: PartialUpdate,
+        createIfNotExists: Boolean?,
+        requestOptions: RequestOptions?
+    ): TaskUpdateObject {
+        return updateObject(data.toString(), objectID, createIfNotExists, requestOptions)
+    }
+
+    override suspend fun updateObjects(
+        data: List<Pair<JsonObject, ObjectID>>,
         createIfNotExists: Boolean,
+        requestOptions: RequestOptions?
+    ): TaskBatchOperation {
+        val operations = data.map { BatchOperation.UpdateObject(it.first, it.second, createIfNotExists) }
+
+        return batch(operations, requestOptions)
+    }
+
+    override suspend fun partialUpdateObject(
+        partialUpdate: PartialUpdate,
+        objectID: ObjectID,
+        createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
         val payload = Json.plain.toJson(partialUpdate, PartialUpdate).toString()
@@ -174,12 +236,21 @@ internal class ClientIndexing(
         return updateObject(payload, objectID, createIfNotExists, requestOptions)
     }
 
-    override suspend fun batch(
-        batchOperation: BatchOperation,
-        vararg additionalBatchOperations: BatchOperation,
+    override suspend fun partialUpdateObjects(
+        data: List<Pair<PartialUpdate, ObjectID>>,
+        createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): TaskBatchOperation {
-        val requests = Json.plain.toJson((listOf(batchOperation) + additionalBatchOperations), BatchOperation.list)
+        val operations = data.map { BatchOperation.UpdateObject.from(it.first, it.second, createIfNotExists) }
+
+        return batch(operations, requestOptions)
+    }
+
+    override suspend fun batch(
+        batchOperations: List<BatchOperation>,
+        requestOptions: RequestOptions?
+    ): TaskBatchOperation {
+        val requests = Json.plain.toJson(batchOperations, BatchOperation.list)
         val json = json { KeyRequests to requests }
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/batch")) { path ->
