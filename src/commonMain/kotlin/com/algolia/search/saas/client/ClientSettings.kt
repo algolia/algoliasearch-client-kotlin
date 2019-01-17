@@ -28,11 +28,12 @@ internal class ClientSettings(
         }
     }
 
-    override suspend fun setSettings(
+    private suspend fun setSettings(
         settings: Settings,
         resetToDefault: List<SettingsKey>,
         forwardToReplicas: Boolean?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
+        indexName: IndexName
     ): TaskUpdateIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
             httpClient.put<TaskUpdateIndex>(path) {
@@ -51,5 +52,20 @@ internal class ClientSettings(
                 }
             }
         }
+    }
+
+    override suspend fun setSettings(
+        settings: Settings,
+        resetToDefault: List<SettingsKey>,
+        forwardToReplicas: Boolean?,
+        requestOptions: RequestOptions?
+    ): TaskUpdateIndex {
+        return setSettings(settings, resetToDefault, forwardToReplicas, requestOptions, indexName)
+    }
+
+    override suspend fun copySettings(destination: IndexName, requestOptions: RequestOptions?): TaskUpdateIndex {
+        val settings = getSettings(requestOptions)
+
+        return setSettings(settings, requestOptions = requestOptions)
     }
 }

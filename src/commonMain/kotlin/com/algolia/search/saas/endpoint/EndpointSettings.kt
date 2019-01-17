@@ -19,4 +19,6 @@ interface EndpointSettings {
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): TaskUpdateIndex
+
+    suspend fun copySettings(destination: IndexName, requestOptions: RequestOptions? = null): TaskUpdateIndex
 }
