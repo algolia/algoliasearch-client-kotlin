@@ -8,5 +8,6 @@ data class ConfigurableEndpoints(
     val indexing: EndpointIndexing? = null,
     val multipleIndex: EndpointMultipleIndex? = null,
     val search: EndpointSearch? = null,
-    val settings: EndpointSettings? = null
+    val settings: EndpointSettings? = null,
+    val synonym: EndpointSynonym? = null
 )

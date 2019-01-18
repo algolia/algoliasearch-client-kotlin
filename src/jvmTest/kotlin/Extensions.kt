@@ -1,5 +1,6 @@
 import com.algolia.search.saas.data.Attribute
 import com.algolia.search.saas.data.IndexName
+import com.algolia.search.saas.data.ObjectID
 import com.algolia.search.saas.query.*
 import kotlinx.serialization.json.jsonArray
 
@@ -33,6 +34,8 @@ internal val rangeA = FilterRange(attributeA, 0.0, 5.0)
 internal val rangeB = FilterRange(attributeB, 5.0, 10.0)
 internal val tagA = FilterTag("tagA")
 internal val tagB = FilterTag("tagB")
+internal val objectIDA = ObjectID("442854")
+internal val objectIDB = ObjectID("322601")
 internal val nestedLists = listOf(listOf(string), listOf(string))
 
 internal val nestedListsJson = jsonArray {

@@ -1,33 +1,50 @@
 package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.*
-import com.algolia.search.saas.toObjectID
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.*
 
 
 @Serializable(Synonym.Companion::class)
 sealed class Synonym {
 
-    data class MultiWay(val objectID: ObjectID, val synonyms: List<String>) : Synonym() {
-
-        constructor(objectID: ObjectID, vararg synonyms: String) : this(objectID, synonyms.toList())
+    enum class Typo {
+        One,
+        Two
     }
 
-    data class OneWay(val objectID: ObjectID, val input: String, val synonyms: List<String>) : Synonym() {
+    data class MultiWay(
+        val synonyms: List<String>
+    ) : Synonym()
 
-        constructor(objectID: ObjectID, input: String, vararg synonyms: String) : this(
-            objectID,
-            input,
-            synonyms.toList()
-        )
+    data class OneWay(
+        val input: String,
+        val synonyms: List<String>
+    ) : Synonym()
+
+    data class AlternativeCorrections(
+        val word: String,
+        val corrections: List<String>,
+        val typo: Typo
+    ) : Synonym()
+
+    data class Placeholder(
+        val placeholder: String,
+        val replacements: List<String>
+    ) : Synonym()
+
+    data class Other(
+        val json: JsonObject
+    ) : Synonym()
+
+    internal fun addObjectId(objectID: ObjectID): JsonObject {
+        val jsonObject = Json.plain.toJson(this, Synonym).jsonObject
+        val map = jsonObject.toMutableMap().apply {
+            put(KeyObjectID, JsonLiteral(objectID.raw))
+        }
+        return JsonObject(map)
     }
-
-    data class Other(val json: JsonObject) : Synonym()
 
     @Serializer(Synonym::class)
     companion object : KSerializer<Synonym> {
@@ -36,14 +53,25 @@ sealed class Synonym {
             val json = when (obj) {
                 is MultiWay -> json {
                     KeyType to KeySynonym
-                    KeyObjectID to obj.objectID.raw
                     KeySynonyms to Json.plain.toJson(obj.synonyms, StringSerializer.list)
                 }
                 is OneWay -> json {
                     KeyType to KeyOneWaySynonym
-                    KeyObjectID to obj.objectID.raw
                     KeySynonyms to Json.plain.toJson(obj.synonyms, StringSerializer.list)
                     KeyInput to obj.input
+                }
+                is AlternativeCorrections -> json {
+                    KeyType to when (obj.typo) {
+                        Typo.One -> KeyAlternativeCorrection1
+                        Typo.Two -> KeyAlternativeCorrection2
+                    }
+                    KeyWord to obj.word
+                    KeyCorrections to Json.plain.toJson(obj.corrections, StringSerializer.list)
+                }
+                is Placeholder -> json {
+                    KeyType to KeyPlaceholder
+                    KeyPlaceholder to obj.placeholder
+                    KeyReplacements to Json.plain.toJson(obj.replacements, StringSerializer.list)
                 }
                 is Other -> obj.json
             }
@@ -56,13 +84,25 @@ sealed class Synonym {
             return if (element.containsKey(KeyType)) {
                 when (element[KeyType].content) {
                     KeySynonym -> MultiWay(
-                        element[KeyObjectID].content.toObjectID(),
                         element[KeySynonyms].jsonArray.map { it.content }
                     )
                     KeyOneWaySynonym -> OneWay(
-                        element[KeyObjectID].content.toObjectID(),
                         element[KeyInput].content,
                         element[KeySynonyms].jsonArray.map { it.content }
+                    )
+                    KeyAlternativeCorrection1 -> AlternativeCorrections(
+                        element[KeyWord].content,
+                        element[KeyCorrections].jsonArray.map { it.content },
+                        Typo.One
+                    )
+                    KeyAlternativeCorrection2 -> AlternativeCorrections(
+                        element[KeyWord].content,
+                        element[KeyCorrections].jsonArray.map { it.content },
+                        Typo.Two
+                    )
+                    KeyPlaceholder -> Placeholder(
+                        element[KeyPlaceholder].content,
+                        element[KeyReplacements].jsonArray.map { it.content }
                     )
                     else -> Other(element)
                 }

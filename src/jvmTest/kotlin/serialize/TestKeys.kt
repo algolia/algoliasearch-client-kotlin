@@ -174,6 +174,11 @@ internal class TestKeys {
         KeySynonym shouldEqual "synonym"
         KeyOneWaySynonym shouldEqual "onewaysynonym"
         KeyInput shouldEqual "input"
+        KeyCorrections shouldEqual "corrections"
+        KeyReplacements shouldEqual "replacements"
+        KeyPlaceholder shouldEqual "placeholder"
+        KeyAlternativeCorrection1 shouldEqual "altcorrection1"
+        KeyAlternativeCorrection2 shouldEqual "altcorrection2"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"
