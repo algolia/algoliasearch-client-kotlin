@@ -7,8 +7,8 @@ import com.algolia.search.saas.endpoint.*
 data class Index internal constructor(
     private val client: Client,
     override val indexName: IndexName
-) : EndpointSearch by ClientSearch(client, indexName),
-    EndpointSettings by ClientSettings(client, indexName),
-    EndpointAdvanced by ClientAdvanced(client, indexName),
-    EndpointIndex by ClientIndices(client, indexName),
-    EndpointIndexing by ClientIndexing(client, indexName)
+) : EndpointSearch by client.endpoints.search ?: ClientSearch(client, indexName),
+    EndpointSettings by client.endpoints.settings ?: ClientSettings(client, indexName),
+    EndpointAdvanced by client.endpoints.advanced ?: ClientAdvanced(client, indexName),
+    EndpointIndex by client.endpoints.index ?: ClientIndex(client, indexName),
+    EndpointIndexing by client.endpoints.indexing ?: ClientIndexing(client, indexName)

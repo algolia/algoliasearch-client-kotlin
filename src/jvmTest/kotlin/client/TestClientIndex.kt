@@ -12,7 +12,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-internal class TestClientIndices {
+internal class TestClientIndex {
 
     private suspend fun deleteIndex(index: Index) {
         index.run {

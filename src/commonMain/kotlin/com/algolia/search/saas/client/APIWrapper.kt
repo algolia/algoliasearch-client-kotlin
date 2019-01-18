@@ -1,6 +1,7 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.TaskBatchOperations
+import com.algolia.search.saas.endpoint.ConfigurableEndpoints
 import com.algolia.search.saas.host.RetryLogic
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
@@ -16,7 +17,8 @@ import kotlinx.serialization.json.internal.JsonObjectSerializer
 
 internal class APIWrapper(
     configuration: Configuration,
-    engine: HttpClientEngine? = null
+    engine: HttpClientEngine? = null,
+    override val endpoints: ConfigurableEndpoints
 ) : Client,
     ConfigurationInterface by configuration {
 

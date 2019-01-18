@@ -13,7 +13,7 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
 
-internal class ClientIndices(
+internal class ClientIndex(
     val client: Client,
     override val indexName: IndexName
 ) : EndpointIndex,
