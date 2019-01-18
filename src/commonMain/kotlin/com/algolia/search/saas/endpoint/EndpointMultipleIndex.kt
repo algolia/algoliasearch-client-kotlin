@@ -5,7 +5,7 @@ import com.algolia.search.saas.data.*
 import kotlinx.serialization.json.JsonObject
 
 
-interface EndpointMultipleIndices {
+interface EndpointMultipleIndex {
 
     suspend fun listIndexes(requestOptions: RequestOptions? = null): ListIndexes
 

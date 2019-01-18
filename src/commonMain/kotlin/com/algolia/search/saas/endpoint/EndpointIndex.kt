@@ -7,7 +7,7 @@ import com.algolia.search.saas.data.TaskDelete
 import com.algolia.search.saas.data.TaskUpdateIndex
 
 
-interface EndpointIndices {
+interface EndpointIndex {
 
     val indexName: IndexName
 

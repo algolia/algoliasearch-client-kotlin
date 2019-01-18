@@ -1,7 +1,7 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
-import com.algolia.search.saas.endpoint.EndpointMultipleIndices
+import com.algolia.search.saas.endpoint.EndpointMultipleIndex
 import com.algolia.search.saas.query.clone
 import com.algolia.search.saas.serialize.KeyRequests
 import com.algolia.search.saas.serialize.KeyResults
@@ -13,9 +13,9 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
 
-internal class ClientMultipleIndices(
+internal class ClientMultipleIndex(
     client: Client
-) : EndpointMultipleIndices,
+) : EndpointMultipleIndex,
     Client by client {
 
     override suspend fun listIndexes(requestOptions: RequestOptions?): ListIndexes {

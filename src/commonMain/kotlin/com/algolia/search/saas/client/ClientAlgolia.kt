@@ -2,7 +2,7 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
 import com.algolia.search.saas.endpoint.EndpointAPIKey
-import com.algolia.search.saas.endpoint.EndpointMultipleIndices
+import com.algolia.search.saas.endpoint.EndpointMultipleIndex
 import io.ktor.client.engine.HttpClientEngine
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -12,7 +12,7 @@ import kotlinx.coroutines.delay
 class ClientAlgolia private constructor(
     private val apiWrapper: APIWrapper
 ) :
-    EndpointMultipleIndices by ClientMultipleIndices(apiWrapper),
+    EndpointMultipleIndex by ClientMultipleIndex(apiWrapper),
     EndpointAPIKey by ClientAPIKey(apiWrapper) {
 
     constructor(

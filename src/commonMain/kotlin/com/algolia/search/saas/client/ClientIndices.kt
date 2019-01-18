@@ -4,7 +4,7 @@ import com.algolia.search.saas.data.IndexName
 import com.algolia.search.saas.data.Scope
 import com.algolia.search.saas.data.TaskDelete
 import com.algolia.search.saas.data.TaskUpdateIndex
-import com.algolia.search.saas.endpoint.EndpointIndices
+import com.algolia.search.saas.endpoint.EndpointIndex
 import com.algolia.search.saas.serialize.*
 import io.ktor.client.request.delete
 import io.ktor.client.request.post
@@ -16,7 +16,7 @@ import kotlinx.serialization.list
 internal class ClientIndices(
     val client: Client,
     override val indexName: IndexName
-) : EndpointIndices,
+) : EndpointIndex,
     Client by client {
 
     private suspend fun copyOrMove(

@@ -10,5 +10,5 @@ data class Index internal constructor(
 ) : EndpointSearch by ClientSearch(client, indexName),
     EndpointSettings by ClientSettings(client, indexName),
     EndpointAdvanced by ClientAdvanced(client, indexName),
-    EndpointIndices by ClientIndices(client, indexName),
+    EndpointIndex by ClientIndices(client, indexName),
     EndpointIndexing by ClientIndexing(client, indexName)
