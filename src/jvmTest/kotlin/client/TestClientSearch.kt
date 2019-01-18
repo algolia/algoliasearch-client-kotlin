@@ -1,7 +1,6 @@
 package client
 
 import com.algolia.search.saas.data.Attribute
-import com.algolia.search.saas.data.IndexQuery
 import com.algolia.search.saas.data.Query
 import com.algolia.search.saas.query.queryBuilder
 import com.algolia.search.saas.query.setFacets
@@ -37,21 +36,6 @@ internal class TestClientSearch {
             val responseA = index.browse()
 
             responseA.cursor?.let { index.browse(it) }
-        }
-    }
-
-    @Test
-    fun multiQueries() {
-        runBlocking {
-            val queries = listOf(
-                IndexQuery(index.indexName, Query("a")),
-                IndexQuery(index.indexName, Query("b"))
-            )
-            val search = index.multipleQueries(queries)
-
-            search.results!!.forEach {
-                it.index.shouldNotBeNull()
-            }
         }
     }
 

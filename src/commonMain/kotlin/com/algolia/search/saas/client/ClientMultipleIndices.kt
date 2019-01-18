@@ -1,10 +1,8 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.BatchOperationIndex
-import com.algolia.search.saas.data.ListIndexes
-import com.algolia.search.saas.data.RequestObjects
-import com.algolia.search.saas.data.TaskBatchOperations
+import com.algolia.search.saas.data.*
 import com.algolia.search.saas.endpoint.EndpointMultipleIndices
+import com.algolia.search.saas.query.clone
 import com.algolia.search.saas.serialize.KeyRequests
 import com.algolia.search.saas.serialize.KeyResults
 import io.ktor.client.request.get
@@ -28,13 +26,26 @@ internal class ClientMultipleIndices(
         }
     }
 
-    override suspend fun getObjects(
-        request: RequestObjects,
-        vararg additionalRequests: RequestObjects,
+    override suspend fun multipleQueries(
+        queries: Collection<IndexQuery>,
+        strategy: MultipleQueriesStrategy,
+        requestOptions: RequestOptions?
+    ): MultipleHits {
+        val copies = queries.map { IndexQuery(it.indexName, it.query.clone()) }
+
+        return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/queries") { path ->
+            httpClient.post<MultipleHits>(path) {
+                setRequestOptions(requestOptions)
+                setQueries(copies, strategy)
+            }
+        }
+    }
+
+    override suspend fun multipleGetObjects(
+        requests: List<RequestObjects>,
         requestOptions: RequestOptions?
     ): List<JsonObject?> {
-        val requests = Json.plain.toJson(listOf(request) + additionalRequests, RequestObjects.list)
-        val json = json { KeyRequests to requests }
+        val json = json { KeyRequests to Json.plain.toJson(requests, RequestObjects.list) }
 
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/objects") { path ->
             httpClient.post<JsonObject>(path) {
@@ -46,12 +57,10 @@ internal class ClientMultipleIndices(
         }
     }
 
-    override suspend fun batch(
-        batchOperation: BatchOperationIndex,
-        vararg additionalBatchOperations: BatchOperationIndex,
+    override suspend fun multipleBatchObjects(
+        operations: List<BatchOperationIndex>,
         requestOptions: RequestOptions?
     ): TaskBatchOperations {
-        val operations = (listOf(batchOperation) + additionalBatchOperations)
         val requests = Json.plain.toJson(operations, BatchOperationIndex.list)
         val json = json { KeyRequests to requests }
 

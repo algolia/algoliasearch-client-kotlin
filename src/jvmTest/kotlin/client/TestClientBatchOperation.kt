@@ -45,10 +45,11 @@ internal class TestClientBatchOperation {
     @Test
     fun batchIndex() {
         runBlocking {
-            val batch = algolia.batch(
+            val operations = listOf(
                 BatchOperationIndex(index.indexName, BatchOperation.AddObject.from(dataCreate, Data.serializer())),
                 BatchOperationIndex(index.indexName, BatchOperation.DeleteObject(dataCreate.objectID))
             )
+            val batch = algolia.multipleBatchObjects(operations)
             algolia.waitAll(batch.taskIDs).forEach { it.status shouldEqual TaskStatus.Published }
         }
     }

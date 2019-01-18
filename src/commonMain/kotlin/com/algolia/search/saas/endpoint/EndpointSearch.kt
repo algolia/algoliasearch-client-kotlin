@@ -14,12 +14,6 @@ interface EndpointSearch {
 
     suspend fun browse(cursor: Cursor, requestOptions: RequestOptions? = null): Hits
 
-    suspend fun multipleQueries(
-        queries: Collection<IndexQuery>,
-        strategy: MultipleQueriesStrategy = MultipleQueriesStrategy.None,
-        requestOptions: RequestOptions? = null
-    ): MultipleHits
-
     suspend fun searchForFacetValue(
         attribute: Attribute,
         query: Query? = null,

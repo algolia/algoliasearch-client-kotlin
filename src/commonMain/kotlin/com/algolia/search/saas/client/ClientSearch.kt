@@ -59,21 +59,6 @@ internal class ClientSearch(
         }
     }
 
-    override suspend fun multipleQueries(
-        queries: Collection<IndexQuery>,
-        strategy: MultipleQueriesStrategy,
-        requestOptions: RequestOptions?
-    ): MultipleHits {
-        val copies = queries.map { IndexQuery(it.indexName, it.query.clone()) }
-
-        return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/queries") { path ->
-            httpClient.post<MultipleHits>(path) {
-                setRequestOptions(requestOptions)
-                setQueries(copies, strategy)
-            }
-        }
-    }
-
     override suspend fun searchForFacetValue(
         attribute: Attribute,
         query: Query?,
