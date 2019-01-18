@@ -12,7 +12,7 @@ data class ObjectID(@SerialName("objectID") override val raw: String) : Raw<Stri
         return raw
     }
 
-    internal companion object : KSerializer<ObjectID> {
+    companion object : KSerializer<ObjectID> {
 
         private val serializer = StringSerializer
 

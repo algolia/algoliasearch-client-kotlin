@@ -21,7 +21,7 @@ sealed class MatchLevel(override val raw: String) : Raw<String> {
 
     data class Other(override val raw: String) : MatchLevel(raw)
 
-    internal companion object : KSerializer<MatchLevel> {
+    companion object : KSerializer<MatchLevel> {
 
         private val serializer = StringSerializer
 

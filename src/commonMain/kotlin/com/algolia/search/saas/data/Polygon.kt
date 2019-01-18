@@ -35,7 +35,7 @@ data class Polygon(
         *points.flatMap { it.raw }.toTypedArray()
     )
 
-    internal companion object : KSerializer<Polygon> {
+    companion object : KSerializer<Polygon> {
 
         private val serializer = FloatSerializer.list
 

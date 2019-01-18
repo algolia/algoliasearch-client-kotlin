@@ -12,7 +12,7 @@ data class BoundingBox(
 
     override val raw = listOf(point1.latitude, point1.longitude, point2.latitude, point2.longitude)
 
-    internal companion object : KSerializer<BoundingBox> {
+    companion object : KSerializer<BoundingBox> {
 
         private val serializer = FloatSerializer
 

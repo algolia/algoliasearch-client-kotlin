@@ -75,7 +75,7 @@ sealed class QueryLanguage(override val raw: String) : Raw<String> {
         return raw
     }
 
-    internal companion object : KSerializer<QueryLanguage> {
+    companion object : KSerializer<QueryLanguage> {
 
         private val serializer = StringSerializer
 

@@ -17,7 +17,7 @@ data class Hit(
 ) {
 
     @Serializer(Hit::class)
-    internal companion object : KSerializer<Hit> {
+    companion object : KSerializer<Hit> {
 
         override fun deserialize(decoder: Decoder): Hit {
             val element = decoder.asJsonInput()

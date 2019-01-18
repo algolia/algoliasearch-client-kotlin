@@ -19,7 +19,7 @@ data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boole
         return raw
     }
 
-    internal companion object : KSerializer<NumericAttributeFilter> {
+    companion object : KSerializer<NumericAttributeFilter> {
 
         private val serializer = StringSerializer
 

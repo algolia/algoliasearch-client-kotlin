@@ -17,7 +17,7 @@ data class Cursor(
         return raw
     }
 
-    internal companion object : KSerializer<Cursor> {
+    companion object : KSerializer<Cursor> {
 
         private val serializer = StringSerializer
 

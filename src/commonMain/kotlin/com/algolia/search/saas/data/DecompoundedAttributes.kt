@@ -18,7 +18,7 @@ data class DecompoundedAttributes internal constructor(
     constructor(language: QueryLanguage.German, vararg attributes: Attribute) : this(language, attributes.toList())
     constructor(language: QueryLanguage.Dutch, vararg attributes: Attribute) : this(language, attributes.toList())
 
-    internal companion object : KSerializer<DecompoundedAttributes> {
+    companion object : KSerializer<DecompoundedAttributes> {
 
         private val serializer = HashMapSerializer(QueryLanguage, Attribute.list)
 

@@ -27,7 +27,7 @@ sealed class TypoTolerance(override val raw: String) : Raw<String> {
     }
 
     @Serializer(TypoTolerance::class)
-    internal companion object : KSerializer<TypoTolerance> {
+    companion object : KSerializer<TypoTolerance> {
 
         override fun serialize(encoder: Encoder, obj: TypoTolerance) {
             when (obj) {

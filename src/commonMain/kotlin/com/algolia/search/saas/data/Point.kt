@@ -12,7 +12,7 @@ data class Point(
 
     override val raw = listOf(latitude, longitude)
 
-    internal companion object : KSerializer<Point> {
+    companion object : KSerializer<Point> {
 
         private val serializer = FloatSerializer.list
 

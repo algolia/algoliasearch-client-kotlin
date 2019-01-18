@@ -30,7 +30,7 @@ sealed class Synonym {
     data class Other(val json: JsonObject) : Synonym()
 
     @Serializer(Synonym::class)
-    internal companion object : KSerializer<Synonym> {
+    companion object : KSerializer<Synonym> {
 
         override fun serialize(encoder: Encoder, obj: Synonym) {
             val json = when (obj) {

@@ -73,7 +73,7 @@ sealed class PartialUpdate(
     }
 
     @Serializer(PartialUpdate::class)
-    internal companion object : KSerializer<PartialUpdate> {
+    companion object : KSerializer<PartialUpdate> {
 
         override fun serialize(encoder: Encoder, obj: PartialUpdate) {
             val key = when (obj) {

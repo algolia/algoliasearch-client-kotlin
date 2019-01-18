@@ -21,7 +21,7 @@ data class TaskBatchOperations(
 ) {
 
     @Serializer(TaskBatchOperations::class)
-    internal companion object : KSerializer<TaskBatchOperations> {
+    companion object : KSerializer<TaskBatchOperations> {
 
         override fun serialize(encoder: Encoder, obj: TaskBatchOperations) {
             val json = json {

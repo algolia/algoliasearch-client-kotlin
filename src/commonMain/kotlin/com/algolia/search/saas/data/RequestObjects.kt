@@ -24,7 +24,7 @@ data class RequestObjects internal constructor(
     ) : this(indexName, objectID, attributes.toList())
 
     @Serializer(RequestObjects::class)
-    internal companion object : KSerializer<RequestObjects> {
+    companion object : KSerializer<RequestObjects> {
 
         override fun serialize(encoder: Encoder, obj: RequestObjects) {
             val json = json {

@@ -39,7 +39,7 @@ sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<String> {
         return raw
     }
 
-    internal companion object : KSerializer<ExactOnSingleWordQuery> {
+    companion object : KSerializer<ExactOnSingleWordQuery> {
 
         private val serializer = StringSerializer
 

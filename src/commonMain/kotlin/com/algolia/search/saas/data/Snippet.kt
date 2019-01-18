@@ -21,7 +21,7 @@ data class Snippet(
         return raw
     }
 
-    internal companion object : KSerializer<Snippet> {
+    companion object : KSerializer<Snippet> {
 
         private val serializer = StringSerializer
 

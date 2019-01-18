@@ -20,7 +20,7 @@ sealed class BooleanOrQueryLanguages {
     }
 
     @Serializer(BooleanOrQueryLanguages::class)
-    internal companion object : KSerializer<BooleanOrQueryLanguages> {
+    companion object : KSerializer<BooleanOrQueryLanguages> {
 
         override fun serialize(encoder: Encoder, obj: BooleanOrQueryLanguages) {
             when (obj) {

@@ -30,7 +30,7 @@ sealed class SortFacetValuesBy(override val raw: String) : Raw<String> {
         return raw
     }
 
-    internal companion object : KSerializer<SortFacetValuesBy> {
+    companion object : KSerializer<SortFacetValuesBy> {
 
         private val serializer = StringSerializer
 

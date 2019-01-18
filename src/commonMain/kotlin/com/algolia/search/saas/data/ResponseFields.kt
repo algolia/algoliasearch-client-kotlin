@@ -37,7 +37,7 @@ sealed class ResponseFields(override val raw: String) : Raw<String> {
         return raw
     }
 
-    internal companion object : KSerializer<ResponseFields> {
+    companion object : KSerializer<ResponseFields> {
 
         private val serializer = StringSerializer
 

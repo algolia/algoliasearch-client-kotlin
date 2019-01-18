@@ -75,7 +75,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
     object ClearIndex : BatchOperation(KeyClear)
 
     @Serializer(BatchOperation::class)
-    internal companion object : KSerializer<BatchOperation> {
+    companion object : KSerializer<BatchOperation> {
 
         private fun batchJson(obj: BatchOperation, block: JsonObjectBuilder.() -> Unit) = json {
             KeyAction to obj.raw
