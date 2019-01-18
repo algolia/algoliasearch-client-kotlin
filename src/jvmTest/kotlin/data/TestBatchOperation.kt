@@ -8,13 +8,14 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldEqual
+import unknown
 
 
 @RunWith(JUnit4::class)
 internal class TestBatchOperation {
 
     private val json = json {}
-    private val objectID = ObjectID("")
+    private val objectID = ObjectID(unknown)
 
     @Test
     fun raw() {

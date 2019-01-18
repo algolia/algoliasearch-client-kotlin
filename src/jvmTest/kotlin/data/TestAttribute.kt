@@ -1,23 +1,24 @@
 package data
 
 import com.algolia.search.saas.data.Attribute
-import com.algolia.search.saas.toAttribute
+import com.algolia.search.saas.exception.EmptyStringException
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import shouldEqual
+import shouldBeTrue
 
 
 @RunWith(JUnit4::class)
 internal class TestAttribute {
 
     @Test
-    fun dx() {
-        Attribute("attributeA") shouldEqual "attributeA".toAttribute()
-    }
-
-    @Test
-    fun raw() {
-        Attribute("raw").raw shouldEqual "raw"
+    fun empty() {
+        var isThrown = false
+        try {
+            Attribute("")
+        } catch (exception: EmptyStringException) {
+            isThrown = true
+        }
+        isThrown.shouldBeTrue()
     }
 }
