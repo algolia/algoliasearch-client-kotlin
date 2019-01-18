@@ -1,5 +1,6 @@
 package serialize
 
+import com.algolia.search.saas.data.ObjectID
 import com.algolia.search.saas.data.Synonym
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.internal.StringSerializer
@@ -14,35 +15,41 @@ import unknown
 @RunWith(JUnit4::class)
 internal class TestSynonym : TestSerializer<Synonym>(Synonym) {
 
-    private val json = json {}
+    private val objectID = ObjectID("objectID")
+    private val json = json { KeyObjectID to objectID.raw }
     private val strings = listOf("iPhone", "samsung")
     private val array = Json.plain.toJson(strings, StringSerializer.list)
 
     override val items = listOf(
-        Synonym.OneWay(unknown, strings) to json {
+        Synonym.OneWay(objectID, unknown, strings) to json {
+            KeyObjectID to objectID.raw
             KeyType to KeyOneWaySynonym
             KeyInput to unknown
             KeySynonyms to array
         },
-        Synonym.MultiWay(strings) to json {
+        Synonym.MultiWay(objectID, strings) to json {
+            KeyObjectID to objectID.raw
             KeyType to KeySynonym
             KeySynonyms to array
         },
-        Synonym.AlternativeCorrections(unknown, strings, Synonym.Typo.One) to json {
+        Synonym.AlternativeCorrections(objectID, unknown, strings, Synonym.Typo.One) to json {
+            KeyObjectID to objectID.raw
             KeyType to KeyAlternativeCorrection1
             KeyWord to unknown
             KeyCorrections to array
         },
-        Synonym.AlternativeCorrections(unknown, strings, Synonym.Typo.Two) to json {
+        Synonym.AlternativeCorrections(objectID, unknown, strings, Synonym.Typo.Two) to json {
+            KeyObjectID to objectID.raw
             KeyType to KeyAlternativeCorrection2
             KeyWord to unknown
             KeyCorrections to array
         },
-        Synonym.Placeholder(unknown, strings) to kotlinx.serialization.json.json {
+        Synonym.Placeholder(objectID, unknown, strings) to kotlinx.serialization.json.json {
+            KeyObjectID to objectID.raw
             KeyType to KeyPlaceholder
             KeyPlaceholder to unknown
             KeyReplacements to array
         },
-        Synonym.Other(json) to json
+        Synonym.Other(json, objectID) to json
     )
 }

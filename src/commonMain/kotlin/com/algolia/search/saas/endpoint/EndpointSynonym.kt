@@ -10,10 +10,11 @@ interface EndpointSynonym {
 
     suspend fun saveSynonym(
         synonym: Synonym,
-        objectID: ObjectID,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): TaskUpdateSynonym
+
+    suspend fun getSynonym(objectID: ObjectID, requestOptions: RequestOptions? = null): Synonym
 
     suspend fun deleteSynonym(
         objectID: ObjectID,

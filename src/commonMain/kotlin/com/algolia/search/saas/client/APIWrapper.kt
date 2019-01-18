@@ -1,5 +1,6 @@
 package com.algolia.search.saas.client
 
+import com.algolia.search.saas.data.Synonym
 import com.algolia.search.saas.data.TaskBatchOperations
 import com.algolia.search.saas.endpoint.ConfigurableEndpoints
 import com.algolia.search.saas.host.RetryLogic
@@ -29,6 +30,7 @@ internal class APIWrapper(
             serializer = KotlinxSerializer(Json.nonstrict)
                 .also {
                     it.register(TaskBatchOperations)
+                    it.register(Synonym)
                     it.register(JsonObjectSerializer)
                 }
         }

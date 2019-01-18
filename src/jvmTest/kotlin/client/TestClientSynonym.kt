@@ -15,12 +15,18 @@ import unknown
 internal class TestClientSynonym {
 
     private val synonyms = listOf("synonym1", "synonym2")
+    private val oneWay = Synonym.OneWay(objectIDA, unknown, synonyms)
+    private val multiWay = Synonym.MultiWay(objectIDA, synonyms)
+    private val alternativeOne = Synonym.AlternativeCorrections(objectIDA, unknown, synonyms, Synonym.Typo.One)
+    private val alternativeTwo = Synonym.AlternativeCorrections(objectIDA, unknown, synonyms, Synonym.Typo.Two)
+    private val placeholder = Synonym.Placeholder(objectIDA, "<placeholder>", synonyms)
 
     @Test
     fun oneWay() {
         runBlocking {
             index.apply {
-                saveSynonym(Synonym.OneWay(unknown, synonyms), objectIDA).wait().status shouldEqual TaskStatus.Published
+                saveSynonym(oneWay).wait().status shouldEqual TaskStatus.Published
+                getSynonym(objectIDA) shouldEqual oneWay
                 deleteSynonym(objectIDA).wait().status shouldEqual TaskStatus.Published
             }
         }
@@ -30,7 +36,8 @@ internal class TestClientSynonym {
     fun multiWay() {
         runBlocking {
             index.apply {
-                saveSynonym(Synonym.MultiWay(synonyms), objectIDA).wait().status shouldEqual TaskStatus.Published
+                saveSynonym(multiWay).wait().status shouldEqual TaskStatus.Published
+                getSynonym(objectIDA) shouldEqual multiWay
                 deleteSynonym(objectIDA).wait().status shouldEqual TaskStatus.Published
             }
         }
@@ -38,21 +45,19 @@ internal class TestClientSynonym {
 
     @Test
     fun alternativeOne() {
-        alternative(Synonym.Typo.Two)
+        alternative(alternativeOne)
     }
 
     @Test
     fun alternativeTwo() {
-        alternative(Synonym.Typo.One)
+        alternative(alternativeTwo)
     }
 
-    private fun alternative(typo: Synonym.Typo) {
+    private fun alternative(alternative: Synonym.AlternativeCorrections) {
         runBlocking {
             index.apply {
-                saveSynonym(
-                    Synonym.AlternativeCorrections(unknown, synonyms, typo),
-                    objectIDA
-                ).wait().status shouldEqual TaskStatus.Published
+                saveSynonym(alternative).wait().status shouldEqual TaskStatus.Published
+                getSynonym(objectIDA) shouldEqual alternative
                 deleteSynonym(objectIDA).wait().status shouldEqual TaskStatus.Published
             }
         }
@@ -62,10 +67,10 @@ internal class TestClientSynonym {
     fun placeholder() {
         runBlocking {
             index.apply {
-                saveSynonym(
-                    Synonym.Placeholder("<placeholder>", synonyms),
-                    objectIDA
-                ).wait().status shouldEqual TaskStatus.Published
+                val save = saveSynonym(placeholder)
+
+                save.wait().status shouldEqual TaskStatus.Published
+                getSynonym(objectIDA) shouldEqual placeholder
                 deleteSynonym(objectIDA).wait().status shouldEqual TaskStatus.Published
             }
         }
