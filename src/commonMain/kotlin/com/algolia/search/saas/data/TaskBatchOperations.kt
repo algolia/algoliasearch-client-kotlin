@@ -1,6 +1,6 @@
 package com.algolia.search.saas.data
 
-import com.algolia.search.saas.serialize.KeyObjectIds
+import com.algolia.search.saas.serialize.KeyObjectIDs
 import com.algolia.search.saas.serialize.KeyTaskId
 import com.algolia.search.saas.serialize.asJsonInput
 import com.algolia.search.saas.serialize.asJsonOutput
@@ -26,7 +26,7 @@ data class TaskBatchOperations(
         override fun serialize(encoder: Encoder, obj: TaskBatchOperations) {
             val json = json {
                 KeyTaskId to json { obj.taskIDs.forEach { it.indexName.raw to it.taskID.raw } }
-                KeyObjectIds to obj.objectIDs?.let { jsonArray { it.forEach { +it?.raw } } }
+                KeyObjectIDs to obj.objectIDs?.let { jsonArray { it.forEach { +it?.raw } } }
             }
 
             encoder.asJsonOutput().encodeJson(json)
@@ -37,7 +37,7 @@ data class TaskBatchOperations(
             val taskIDs = element.getObject(KeyTaskId).map { (key, entry) ->
                 TaskIndex(key.toIndexName(), entry.long.toTaskID())
             }
-            val objectIDs = element.getArrayOrNull(KeyObjectIds)?.map { it.contentOrNull?.toObjectID() }
+            val objectIDs = element.getArrayOrNull(KeyObjectIDs)?.map { it.contentOrNull?.toObjectID() }
 
             return TaskBatchOperations(taskIDs, objectIDs)
         }

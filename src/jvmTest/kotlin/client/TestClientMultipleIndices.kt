@@ -4,7 +4,7 @@ import com.algolia.search.saas.data.IndexQuery
 import com.algolia.search.saas.data.ObjectID
 import com.algolia.search.saas.data.Query
 import com.algolia.search.saas.data.RequestObjects
-import com.algolia.search.saas.serialize.KeyObjectId
+import com.algolia.search.saas.serialize.KeyObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.content
 import org.junit.Test
@@ -47,8 +47,8 @@ internal class TestClientMultipleIndices {
             )
             val objects = algolia.multipleGetObjects(requests)
 
-            objects[0]!!.jsonObject[KeyObjectId].content shouldEqual objectID1
-            objects[1]!!.jsonObject[KeyObjectId].content shouldEqual objectID2
+            objects[0]!!.jsonObject[KeyObjectID].content shouldEqual objectID1
+            objects[1]!!.jsonObject[KeyObjectID].content shouldEqual objectID2
             objects[2] shouldEqual null
         }
     }

@@ -7,7 +7,7 @@ import com.algolia.search.saas.data.TaskStatus
 import com.algolia.search.saas.query.FilterFacet
 import com.algolia.search.saas.query.GroupAnd
 import com.algolia.search.saas.query.queryBuilder
-import com.algolia.search.saas.serialize.KeyObjectId
+import com.algolia.search.saas.serialize.KeyObjectID
 import com.algolia.search.saas.toAttribute
 import com.algolia.search.saas.toObjectID
 import io.ktor.client.features.BadResponseStatusException
@@ -73,7 +73,7 @@ internal class TestClientIndexing {
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, listOf(name)) shouldEqual json {
             name.raw to data.name
-            KeyObjectId to data.objectID.raw
+            KeyObjectID to data.objectID.raw
         }
     }
 
@@ -83,7 +83,7 @@ internal class TestClientIndexing {
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, listOf(count)) shouldEqual json {
             count.raw to (data.count + 1)
-            KeyObjectId to data.objectID.raw
+            KeyObjectID to data.objectID.raw
         }
     }
 
@@ -93,7 +93,7 @@ internal class TestClientIndexing {
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, listOf(count)) shouldEqual json {
             count.raw to data.count
-            KeyObjectId to data.objectID.raw
+            KeyObjectID to data.objectID.raw
         }
     }
 
@@ -105,7 +105,7 @@ internal class TestClientIndexing {
             brand.raw to jsonArray {
                 +samsung
             }
-            KeyObjectId to data.objectID.raw
+            KeyObjectID to data.objectID.raw
         }
     }
 
@@ -115,7 +115,7 @@ internal class TestClientIndexing {
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, listOf(brand)) shouldEqual json {
             brand.raw to jsonArray { }
-            KeyObjectId to data.objectID.raw
+            KeyObjectID to data.objectID.raw
         }
     }
 
@@ -125,7 +125,7 @@ internal class TestClientIndexing {
         update.wait().status shouldEqual TaskStatus.Published
         getObject(update.objectID, listOf(brand)) shouldEqual json {
             brand.raw to jsonArray { +iphone }
-            KeyObjectId to data.objectID.raw
+            KeyObjectID to data.objectID.raw
         }
     }
 

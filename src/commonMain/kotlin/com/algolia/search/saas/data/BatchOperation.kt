@@ -85,9 +85,9 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
         override fun serialize(encoder: Encoder, obj: BatchOperation) {
             val json = when (obj) {
                 is AddObject -> batchJson(obj) { KeyBody to obj.json }
-                is ReplaceObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectId to obj.objectID } }
-                is UpdateObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectId to obj.objectID } }
-                is DeleteObject -> batchJson(obj) { KeyBody to json { KeyObjectId to obj.objectID.raw } }
+                is ReplaceObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectID to obj.objectID } }
+                is UpdateObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectID to obj.objectID } }
+                is DeleteObject -> batchJson(obj) { KeyBody to json { KeyObjectID to obj.objectID.raw } }
                 is DeleteIndex -> batchJson(obj) {}
                 is ClearIndex -> batchJson(obj) {}
             }
@@ -96,7 +96,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
         }
 
         private val JsonObject.body get() = this[KeyBody].jsonObject
-        private val JsonObject.objectID get() = body[KeyObjectId].content.toObjectID()
+        private val JsonObject.objectID get() = body[KeyObjectID].content.toObjectID()
 
         override fun deserialize(decoder: Decoder): BatchOperation {
             val element = decoder.asJsonInput().jsonObject

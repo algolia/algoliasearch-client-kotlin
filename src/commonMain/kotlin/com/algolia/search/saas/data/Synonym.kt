@@ -36,12 +36,12 @@ sealed class Synonym {
             val json = when (obj) {
                 is MultiWay -> json {
                     KeyType to KeySynonym
-                    KeyObjectId to obj.objectID.raw
+                    KeyObjectID to obj.objectID.raw
                     KeySynonyms to Json.plain.toJson(obj.synonyms, StringSerializer.list)
                 }
                 is OneWay -> json {
                     KeyType to KeyOneWaySynonym
-                    KeyObjectId to obj.objectID.raw
+                    KeyObjectID to obj.objectID.raw
                     KeySynonyms to Json.plain.toJson(obj.synonyms, StringSerializer.list)
                     KeyInput to obj.input
                 }
@@ -56,11 +56,11 @@ sealed class Synonym {
             return if (element.containsKey(KeyType)) {
                 when (element[KeyType].content) {
                     KeySynonym -> MultiWay(
-                        element[KeyObjectId].content.toObjectID(),
+                        element[KeyObjectID].content.toObjectID(),
                         element[KeySynonyms].jsonArray.map { it.content }
                     )
                     KeyOneWaySynonym -> OneWay(
-                        element[KeyObjectId].content.toObjectID(),
+                        element[KeyObjectID].content.toObjectID(),
                         element[KeyInput].content,
                         element[KeySynonyms].jsonArray.map { it.content }
                     )

@@ -29,7 +29,7 @@ data class RequestObjects internal constructor(
         override fun serialize(encoder: Encoder, obj: RequestObjects) {
             val json = json {
                 KeyIndex to obj.indexName.raw
-                KeyObjectId to obj.objectID.raw
+                KeyObjectID to obj.objectID.raw
                 if (obj.attributes.isNotEmpty()) {
                     KeyAttributesToRetrieve to jsonArray { obj.attributes.forEach { +it.raw } }
                 }
@@ -44,7 +44,7 @@ data class RequestObjects internal constructor(
 
             return RequestObjects(
                 element.getPrimitive(KeyIndex).content.toIndexName(),
-                element.getPrimitive(KeyObjectId).content.toObjectID(),
+                element.getPrimitive(KeyObjectID).content.toObjectID(),
                 element.getArrayOrNull(KeyAttributesToRetrieve)?.map { it.content.toAttribute() }.orEmpty()
             )
         }

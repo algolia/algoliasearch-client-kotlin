@@ -22,13 +22,13 @@ internal class TestSynonym : TestSerializer<Synonym>(Synonym) {
     override val items = listOf(
         Synonym.OneWay(objectID, input, words) to json {
             KeyType to KeyOneWaySynonym
-            KeyObjectId to objectID.raw
+            KeyObjectID to objectID.raw
             KeyInput to input
             KeySynonyms to Json.plain.toJson(words, StringSerializer.list)
         },
         Synonym.MultiWay(objectID, words) to json {
             KeyType to KeySynonym
-            KeyObjectId to objectID.raw
+            KeyObjectID to objectID.raw
             KeySynonyms to Json.plain.toJson(words, StringSerializer.list)
         },
         Synonym.Other(json) to json
