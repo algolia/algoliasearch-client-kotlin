@@ -2,6 +2,7 @@ package serialize
 
 import com.algolia.search.saas.data.ObjectID
 import com.algolia.search.saas.data.Synonym
+import com.algolia.search.saas.data.SynonymType
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.Json
@@ -32,13 +33,13 @@ internal class TestSynonym : TestSerializer<Synonym>(Synonym) {
             KeyType to KeySynonym
             KeySynonyms to array
         },
-        Synonym.AlternativeCorrections(objectID, unknown, strings, Synonym.Typo.One) to json {
+        Synonym.AlternativeCorrections(objectID, unknown, strings, SynonymType.Typo.One) to json {
             KeyObjectID to objectID.raw
             KeyType to KeyAlternativeCorrection1
             KeyWord to unknown
             KeyCorrections to array
         },
-        Synonym.AlternativeCorrections(objectID, unknown, strings, Synonym.Typo.Two) to json {
+        Synonym.AlternativeCorrections(objectID, unknown, strings, SynonymType.Typo.Two) to json {
             KeyObjectID to objectID.raw
             KeyType to KeyAlternativeCorrection2
             KeyWord to unknown

@@ -21,4 +21,12 @@ interface EndpointSynonym {
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): TaskDelete
+
+    suspend fun searchSynonym(
+        query: String? = null,
+        synonymType: SynonymType,
+        page: Int? = null,
+        hitsPerPage: Int? = null,
+        requestOptions: RequestOptions? = null
+    ): String
 }

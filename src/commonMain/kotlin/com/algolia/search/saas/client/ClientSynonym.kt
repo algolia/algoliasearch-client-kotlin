@@ -53,4 +53,14 @@ internal class ClientSynonym(
             }
         }
     }
+
+    override suspend fun searchSynonym(
+        query: String?,
+        synonymType: SynonymType,
+        page: Int?,
+        hitsPerPage: Int?,
+        requestOptions: RequestOptions?
+    ): String {
+        return ""
+    }
 }

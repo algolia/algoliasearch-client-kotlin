@@ -13,19 +13,14 @@ import kotlinx.serialization.json.json
 @Serializable(Synonym.Companion::class)
 sealed class Synonym(open val objectID: ObjectID) {
 
-    enum class Typo {
-        One,
-        Two
-    }
-
-    data class MultiWay(
-        override val objectID: ObjectID,
-        val synonyms: List<String>
-    ) : Synonym(objectID)
-
     data class OneWay(
         override val objectID: ObjectID,
         val input: String,
+        val synonyms: List<String>
+    ) : Synonym(objectID)
+
+    data class MultiWay(
+        override val objectID: ObjectID,
         val synonyms: List<String>
     ) : Synonym(objectID)
 
@@ -33,7 +28,7 @@ sealed class Synonym(open val objectID: ObjectID) {
         override val objectID: ObjectID,
         val word: String,
         val corrections: List<String>,
-        val typo: Typo
+        val typo: SynonymType.Typo
     ) : Synonym(objectID)
 
     data class Placeholder(
@@ -66,8 +61,8 @@ sealed class Synonym(open val objectID: ObjectID) {
                 is AlternativeCorrections -> json {
                     KeyObjectID to obj.objectID.raw
                     KeyType to when (obj.typo) {
-                        Typo.One -> KeyAlternativeCorrection1
-                        Typo.Two -> KeyAlternativeCorrection2
+                        SynonymType.Typo.One -> KeyAlternativeCorrection1
+                        SynonymType.Typo.Two -> KeyAlternativeCorrection2
                     }
                     KeyWord to obj.word
                     KeyCorrections to Json.plain.toJson(obj.corrections, StringSerializer.list)
@@ -102,13 +97,13 @@ sealed class Synonym(open val objectID: ObjectID) {
                         objectID,
                         element[KeyWord].content,
                         element[KeyCorrections].jsonArray.map { it.content },
-                        Typo.One
+                        SynonymType.Typo.One
                     )
                     KeyAlternativeCorrection2 -> AlternativeCorrections(
                         objectID,
                         element[KeyWord].content,
                         element[KeyCorrections].jsonArray.map { it.content },
-                        Typo.Two
+                        SynonymType.Typo.Two
                     )
                     KeyPlaceholder -> Placeholder(
                         objectID,
