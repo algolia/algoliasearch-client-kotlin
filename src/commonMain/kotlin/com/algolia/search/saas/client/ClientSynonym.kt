@@ -2,12 +2,10 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
 import com.algolia.search.saas.endpoint.EndpointSynonym
-import com.algolia.search.saas.serialize.KeyForwardToReplicas
-import io.ktor.client.request.delete
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.request.put
+import com.algolia.search.saas.serialize.*
+import io.ktor.client.request.*
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.json
 
 
 internal class ClientSynonym(
@@ -56,11 +54,21 @@ internal class ClientSynonym(
 
     override suspend fun searchSynonym(
         query: String?,
-        synonymType: SynonymType,
         page: Int?,
         hitsPerPage: Int?,
+        synonymType: List<SynonymType>?,
         requestOptions: RequestOptions?
-    ): String {
-        return ""
+    ): SynonymHits {
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/synonyms/search")) { path ->
+            httpClient.post<SynonymHits>(path) {
+                setRequestOptions(requestOptions)
+                body = json {
+                    query?.let { KeyQuery to it }
+                    page?.let { KeyPage to it }
+                    hitsPerPage?.let { KeyHitsPerPage to it }
+                    synonymType?.let { KeyType to it.joinToString(",") { it.raw } }
+                }.toString()
+            }
+        }
     }
 }

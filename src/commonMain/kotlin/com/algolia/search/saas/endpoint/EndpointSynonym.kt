@@ -24,9 +24,9 @@ interface EndpointSynonym {
 
     suspend fun searchSynonym(
         query: String? = null,
-        synonymType: SynonymType,
         page: Int? = null,
         hitsPerPage: Int? = null,
+        synonymType: List<SynonymType>? = null,
         requestOptions: RequestOptions? = null
-    ): String
+    ): SynonymHits
 }

@@ -5,9 +5,11 @@ import com.algolia.search.saas.data.SynonymType
 import com.algolia.search.saas.data.TaskStatus
 import kotlinx.coroutines.runBlocking
 import objectIDA
+import objectIDB
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldContain
 import shouldEqual
 import unknown
 
@@ -18,17 +20,18 @@ internal class TestClientSynonym {
     private val synonyms = listOf("synonym1", "synonym2")
     private val oneWay = Synonym.OneWay(objectIDA, unknown, synonyms)
     private val multiWay = Synonym.MultiWay(objectIDA, synonyms)
-    private val alternativeOne = Synonym.AlternativeCorrections(objectIDA, unknown, synonyms, SynonymType.Typo.One)
-    private val alternativeTwo = Synonym.AlternativeCorrections(objectIDA, unknown, synonyms, SynonymType.Typo.Two)
-    private val placeholder = Synonym.Placeholder(objectIDA, "<placeholder>", synonyms)
+    private val alternativeOne = Synonym.AlternativeCorrections(objectIDB, unknown, synonyms, SynonymType.Typo.One)
+    private val alternativeTwo = Synonym.AlternativeCorrections(objectIDB, unknown, synonyms, SynonymType.Typo.Two)
+    private val placeholder = Synonym.Placeholder(objectIDB, "<placeholder>", synonyms)
 
     @Test
     fun oneWay() {
         runBlocking {
             index.apply {
                 saveSynonym(oneWay).wait().status shouldEqual TaskStatus.Published
-                getSynonym(objectIDA) shouldEqual oneWay
-                deleteSynonym(objectIDA).wait().status shouldEqual TaskStatus.Published
+                getSynonym(oneWay.objectID) shouldEqual oneWay
+                searchSynonym().hits shouldContain oneWay
+                deleteSynonym(oneWay.objectID).wait().status shouldEqual TaskStatus.Published
             }
         }
     }
@@ -38,8 +41,9 @@ internal class TestClientSynonym {
         runBlocking {
             index.apply {
                 saveSynonym(multiWay).wait().status shouldEqual TaskStatus.Published
-                getSynonym(objectIDA) shouldEqual multiWay
-                deleteSynonym(objectIDA).wait().status shouldEqual TaskStatus.Published
+                getSynonym(multiWay.objectID) shouldEqual multiWay
+                searchSynonym().hits shouldContain multiWay
+                deleteSynonym(multiWay.objectID).wait().status shouldEqual TaskStatus.Published
             }
         }
     }
@@ -58,8 +62,9 @@ internal class TestClientSynonym {
         runBlocking {
             index.apply {
                 saveSynonym(alternative).wait().status shouldEqual TaskStatus.Published
-                getSynonym(objectIDA) shouldEqual alternative
-                deleteSynonym(objectIDA).wait().status shouldEqual TaskStatus.Published
+                getSynonym(alternative.objectID) shouldEqual alternative
+                searchSynonym().hits shouldContain alternative
+                deleteSynonym(alternative.objectID).wait().status shouldEqual TaskStatus.Published
             }
         }
     }
@@ -71,8 +76,9 @@ internal class TestClientSynonym {
                 val save = saveSynonym(placeholder)
 
                 save.wait().status shouldEqual TaskStatus.Published
-                getSynonym(objectIDA) shouldEqual placeholder
-                deleteSynonym(objectIDA).wait().status shouldEqual TaskStatus.Published
+                getSynonym(placeholder.objectID) shouldEqual placeholder
+                searchSynonym().hits shouldContain placeholder
+                deleteSynonym(placeholder.objectID).wait().status shouldEqual TaskStatus.Published
             }
         }
     }
