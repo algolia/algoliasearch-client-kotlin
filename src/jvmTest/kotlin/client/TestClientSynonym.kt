@@ -9,6 +9,7 @@ import objectIDB
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldBeEmpty
 import shouldContain
 import shouldEqual
 import unknown
@@ -79,6 +80,18 @@ internal class TestClientSynonym {
                 getSynonym(placeholder.objectID) shouldEqual placeholder
                 searchSynonym().hits shouldContain placeholder
                 deleteSynonym(placeholder.objectID).wait().status shouldEqual TaskStatus.Published
+            }
+        }
+    }
+
+    @Test
+    fun delete() {
+        runBlocking {
+            index.apply {
+                saveSynonym(oneWay).wait().status shouldEqual TaskStatus.Published
+                saveSynonym(placeholder).wait().status shouldEqual TaskStatus.Published
+                clearSynonyms().wait().status shouldEqual TaskStatus.Published
+                searchSynonym().hits.shouldBeEmpty()
             }
         }
     }

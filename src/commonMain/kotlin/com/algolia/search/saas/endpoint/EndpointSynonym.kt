@@ -29,4 +29,9 @@ interface EndpointSynonym {
         synonymType: List<SynonymType>? = null,
         requestOptions: RequestOptions? = null
     ): SynonymHits
+
+    suspend fun clearSynonyms(
+        forwardToReplicas: Boolean? = null,
+        requestOptions: RequestOptions? = null
+    ): TaskUpdateIndex
 }

@@ -71,4 +71,18 @@ internal class ClientSynonym(
             }
         }
     }
+
+    override suspend fun clearSynonyms(
+        forwardToReplicas: Boolean?,
+        requestOptions: RequestOptions?
+    ): TaskUpdateIndex {
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/synonyms/clear")) { path ->
+            httpClient.post<TaskUpdateIndex>(path) {
+                setRequestOptions(requestOptions)
+                body = json {
+                    forwardToReplicas?.let { KeyForwardToReplicas to it }
+                }.toString()
+            }
+        }
+    }
 }
