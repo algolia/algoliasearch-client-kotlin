@@ -2,12 +2,10 @@ package com.algolia.search.saas.data
 
 import com.algolia.search.saas.serialize.*
 import com.algolia.search.saas.toAttribute
+import com.algolia.search.saas.toObjectID
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.*
 
 
 @Serializable
@@ -87,12 +85,37 @@ data class QueryRule(
         }
     }
 
-    @Serializable
+    @Serializable(Condition.Companion::class)
     data class Condition(
         val pattern: Pattern,
         val anchoring: Anchoring,
         @Optional val context: String? = null
-    )
+    ) {
+
+        @Serializer(Condition::class)
+        companion object : KSerializer<Condition> {
+
+            override fun serialize(encoder: Encoder, obj: Condition) {
+                val json = json {
+                    KeyPattern to obj.pattern.raw
+                    KeyAnchoring to obj.anchoring.raw
+                    obj.context?.let { KeyContext to it }
+                }
+
+                encoder.asJsonOutput().encodeJson(json)
+            }
+
+            override fun deserialize(decoder: Decoder): Condition {
+                val json = decoder.asJsonInput().jsonObject
+
+                return Condition(
+                    Json.plain.fromJson(json[KeyPattern], Pattern),
+                    Json.plain.fromJson(json[KeyAnchoring], Anchoring),
+                    json.getPrimitiveOrNull(KeyContext)?.contentOrNull
+                )
+            }
+        }
+    }
 
     @Serializable(Consequence.Companion::class)
     data class Consequence(
@@ -119,6 +142,10 @@ data class QueryRule(
         @Serializer(Consequence::class)
         companion object : KSerializer<Consequence> {
 
+            private fun List<ObjectID>.toJsonObject(): JsonArray {
+                return JsonArray(map { json { KeyObjectID to JsonLiteral(it.raw) } })
+            }
+
             override fun serialize(encoder: Encoder, obj: Consequence) {
                 val serializer = AutomaticFacetFilters.serializer().list
                 val map = obj.params.encodeNoNulls().toMutableMap().apply {
@@ -134,7 +161,7 @@ data class QueryRule(
                 val json = json {
                     KeyParams to JsonObject(map)
                     obj.promote?.let { KeyPromote to Json.plain.toJson(it, Promotion.serializer().list) }
-                    obj.hide?.let { KeyHide to Json.plain.toJson(it, ObjectID.list) }
+                    obj.hide?.let { KeyHide to it.toJsonObject() }
                     obj.userData?.let { KeyUserData to it }
                 }
 
@@ -154,7 +181,7 @@ data class QueryRule(
                 return Consequence(
                     params = Json.nonstrict.fromJson(params, Query.serializer()),
                     promote = promote?.let { Json.plain.fromJson(it, Promotion.serializer().list) },
-                    hide = hide?.let { Json.plain.fromJson(it, ObjectID.list) },
+                    hide = hide?.let { it.map { it.jsonObject[KeyObjectID].content.toObjectID() } },
                     edits = edits?.let { Json.plain.fromJson(it, Edit.list) },
                     userData = json.getObjectOrNull(KeyUserData),
                     automaticFacetFilters = filters?.let { Json.plain.fromJson(it, facetSerializer) },

@@ -4,8 +4,9 @@ import com.algolia.search.saas.data.IndexName
 import com.algolia.search.saas.data.QueryRule
 import com.algolia.search.saas.data.TaskUpdateIndex
 import com.algolia.search.saas.endpoint.EndpointQueryRule
-import io.ktor.client.request.post
-import kotlinx.serialization.json.Json
+import com.algolia.search.saas.serialize.encodeNoNulls
+import com.algolia.search.saas.serialize.toJsonObject
+import io.ktor.client.request.put
 
 
 internal class ClientQueryRule(
@@ -23,10 +24,10 @@ internal class ClientQueryRule(
             requestOptions.computedReadTimeout,
             indexName.pathIndexes("/rules/${queryRule.objectID}")
         ) { path ->
-            httpClient.post<TaskUpdateIndex>(path) {
+            httpClient.put<TaskUpdateIndex>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
-                body = Json.stringify(QueryRule.serializer(), queryRule)
+                body = queryRule.toJsonObject(QueryRule.serializer()).encodeNoNulls().toString()
             }
         }
     }

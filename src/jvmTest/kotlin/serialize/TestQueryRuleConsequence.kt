@@ -1,13 +1,13 @@
 package serialize
 
 import attributeA
-import com.algolia.search.saas.data.ObjectID
 import com.algolia.search.saas.data.Query
 import com.algolia.search.saas.data.QueryRule
 import com.algolia.search.saas.data.QueryRule.Consequence
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
+import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.list
 import objectIDA
 import objectIDB
@@ -25,7 +25,6 @@ internal class TestQueryRuleConsequence : TestSerializer<QueryRule.Consequence>(
     private val filters = listOf(Consequence.AutomaticFacetFilters(attributeA, 1, true))
     private val filtersSerialized = Json.plain.toJson(filters, Consequence.AutomaticFacetFilters.serializer().list)
     private val objectIDs = listOf(objectIDA, objectIDB)
-    private val objectIDsSerialized = Json.plain.toJson(objectIDs, ObjectID.list)
     private val promotions = listOf(Consequence.Promotion(objectIDA, 0))
     private val promotionsSerialized = Json.plain.toJson(promotions, Consequence.Promotion.serializer().list)
 
@@ -37,7 +36,7 @@ internal class TestQueryRuleConsequence : TestSerializer<QueryRule.Consequence>(
         },
         Consequence(
             params = query,
-            hide = listOf(objectIDA, objectIDB),
+            hide = objectIDs,
             edits = edits,
             promote = promotions,
             automaticOptionalFacetFilters = filters,
@@ -49,7 +48,10 @@ internal class TestQueryRuleConsequence : TestSerializer<QueryRule.Consequence>(
                 KeyAutomaticFacetFilters to filtersSerialized
                 KeyAutomaticOptionalFacetFilters to filtersSerialized
             }
-            KeyHide to objectIDsSerialized
+            KeyHide to jsonArray {
+                +json { KeyObjectID to objectIDA.raw }
+                +json { KeyObjectID to objectIDB.raw }
+            }
             KeyPromote to promotionsSerialized
         }
     )
