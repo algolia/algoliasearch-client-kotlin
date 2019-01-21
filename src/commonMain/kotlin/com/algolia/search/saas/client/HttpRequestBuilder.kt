@@ -22,6 +22,10 @@ internal fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions
     requestOptions?.urlParameters?.forEach { parameter(it.key, it.value) }
 }
 
+internal fun HttpRequestBuilder.setForwardToReplicas(forwardToReplicas: Boolean?) {
+    forwardToReplicas?.let { parameter(KeyForwardToReplicas, it) }
+}
+
 internal fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: MultipleQueriesStrategy) {
     body = json {
         KeyRequests to jsonArray {

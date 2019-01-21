@@ -12,4 +12,5 @@ data class Index internal constructor(
     EndpointAdvanced by client.endpoints.advanced ?: ClientAdvanced(client, indexName),
     EndpointIndex by client.endpoints.index ?: ClientIndex(client, indexName),
     EndpointIndexing by client.endpoints.indexing ?: ClientIndexing(client, indexName),
-    EndpointSynonym by client.endpoints.synonym ?: ClientSynonym(client, indexName)
+    EndpointSynonym by client.endpoints.synonym ?: ClientSynonym(client, indexName),
+    EndpointQueryRule by client.endpoints.queryRule ?: ClientQueryRule(client, indexName)

@@ -26,7 +26,7 @@ internal class ClientSynonym(
         ) { path ->
             httpClient.put<TaskUpdateSynonym>(path) {
                 setRequestOptions(requestOptions)
-                forwardToReplicas?.let { parameter(KeyForwardToReplicas, it) }
+                setForwardToReplicas(forwardToReplicas)
                 body = Json.stringify(Synonym, synonym)
             }
         }
@@ -41,7 +41,7 @@ internal class ClientSynonym(
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/synonyms/batch")) { path ->
             httpClient.post<TaskUpdateIndex>(path) {
                 setRequestOptions(requestOptions)
-                forwardToReplicas?.let { parameter(KeyForwardToReplicas, it) }
+                setForwardToReplicas(forwardToReplicas)
                 replaceExistingSynonyms?.let { parameter(KeyReplaceExistingSynonyms, it) }
                 body = Json.stringify(Synonym.list, synonyms)
             }
@@ -64,7 +64,7 @@ internal class ClientSynonym(
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/synonyms/$objectID")) { path ->
             httpClient.delete<TaskDelete>(path) {
                 setRequestOptions(requestOptions)
-                forwardToReplicas?.let { parameter(KeyForwardToReplicas, it) }
+                setForwardToReplicas(forwardToReplicas)
             }
         }
     }
@@ -96,9 +96,8 @@ internal class ClientSynonym(
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/synonyms/clear")) { path ->
             httpClient.post<TaskUpdateIndex>(path) {
                 setRequestOptions(requestOptions)
-                body = json {
-                    forwardToReplicas?.let { KeyForwardToReplicas to it }
-                }.toString()
+                setForwardToReplicas(forwardToReplicas)
+                body = ""
             }
         }
     }

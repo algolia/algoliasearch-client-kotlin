@@ -21,7 +21,7 @@ internal abstract class TestSerializer<T>(
             val element = Json.nonstrict.parseJson(serialized)
 
             deserialized shouldEqual it.first
-            it.second shouldEqual element
+            element shouldEqual it.second
         }
     }
 }
