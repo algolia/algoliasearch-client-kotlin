@@ -34,11 +34,11 @@ internal class TestClientSettings {
     fun copySettings() {
         runBlocking {
             index.apply {
-                copyIndex(indexCopyA.indexName).wait().status shouldEqual TaskStatus.Published
-                copySettings(indexCopyA.indexName).wait().status shouldEqual TaskStatus.Published
+                copyIndex(indexCopyA.indexName).wait() shouldEqual TaskStatus.Published
+                copySettings(indexCopyA.indexName).wait() shouldEqual TaskStatus.Published
                 getSettings() shouldEqual indexCopyA.getSettings()
                 indexCopyA.apply {
-                    deleteIndex().wait().status shouldEqual TaskStatus.Published
+                    deleteIndex().wait() shouldEqual TaskStatus.Published
                 }
             }
         }

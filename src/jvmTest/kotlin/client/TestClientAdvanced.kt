@@ -25,7 +25,7 @@ internal class TestClientAdvanced {
     fun waits() {
         runBlocking {
             index.apply {
-                setSettings(Settings()).wait().status shouldEqual TaskStatus.Published
+                setSettings(Settings()).wait() shouldEqual TaskStatus.Published
             }
         }
     }
@@ -35,7 +35,7 @@ internal class TestClientAdvanced {
         runBlocking {
             val task = index.setSettings(Settings())
 
-            index.waitTask(task.taskID).status shouldEqual TaskStatus.Published
+            index.waitTask(task.taskID) shouldEqual TaskStatus.Published
         }
     }
 }

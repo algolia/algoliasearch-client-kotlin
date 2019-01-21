@@ -29,10 +29,10 @@ internal class TestClientSynonym {
     fun oneWay() {
         runBlocking {
             index.apply {
-                saveSynonym(oneWay).wait().status shouldEqual TaskStatus.Published
+                saveSynonym(oneWay).wait() shouldEqual TaskStatus.Published
                 getSynonym(oneWay.objectID) shouldEqual oneWay
                 searchSynonym().hits shouldContain oneWay
-                deleteSynonym(oneWay.objectID).wait().status shouldEqual TaskStatus.Published
+                deleteSynonym(oneWay.objectID).wait() shouldEqual TaskStatus.Published
             }
         }
     }
@@ -41,10 +41,10 @@ internal class TestClientSynonym {
     fun multiWay() {
         runBlocking {
             index.apply {
-                saveSynonym(multiWay).wait().status shouldEqual TaskStatus.Published
+                saveSynonym(multiWay).wait() shouldEqual TaskStatus.Published
                 getSynonym(multiWay.objectID) shouldEqual multiWay
                 searchSynonym().hits shouldContain multiWay
-                deleteSynonym(multiWay.objectID).wait().status shouldEqual TaskStatus.Published
+                deleteSynonym(multiWay.objectID).wait() shouldEqual TaskStatus.Published
             }
         }
     }
@@ -62,10 +62,10 @@ internal class TestClientSynonym {
     private fun alternative(alternative: Synonym.AlternativeCorrections) {
         runBlocking {
             index.apply {
-                saveSynonym(alternative).wait().status shouldEqual TaskStatus.Published
+                saveSynonym(alternative).wait() shouldEqual TaskStatus.Published
                 getSynonym(alternative.objectID) shouldEqual alternative
                 searchSynonym().hits shouldContain alternative
-                deleteSynonym(alternative.objectID).wait().status shouldEqual TaskStatus.Published
+                deleteSynonym(alternative.objectID).wait() shouldEqual TaskStatus.Published
             }
         }
     }
@@ -76,10 +76,10 @@ internal class TestClientSynonym {
             index.apply {
                 val save = saveSynonym(placeholder)
 
-                save.wait().status shouldEqual TaskStatus.Published
+                save.wait() shouldEqual TaskStatus.Published
                 getSynonym(placeholder.objectID) shouldEqual placeholder
                 searchSynonym().hits shouldContain placeholder
-                deleteSynonym(placeholder.objectID).wait().status shouldEqual TaskStatus.Published
+                deleteSynonym(placeholder.objectID).wait() shouldEqual TaskStatus.Published
             }
         }
     }
@@ -88,9 +88,9 @@ internal class TestClientSynonym {
     fun suite() {
         runBlocking {
             index.apply {
-                saveSynonyms(listOf(oneWay, placeholder)).wait().status shouldEqual TaskStatus.Published
+                saveSynonyms(listOf(oneWay, placeholder)).wait() shouldEqual TaskStatus.Published
                 searchSynonym().hits.size shouldEqual 2
-                clearSynonyms().wait().status shouldEqual TaskStatus.Published
+                clearSynonyms().wait() shouldEqual TaskStatus.Published
                 searchSynonym().hits.shouldBeEmpty()
             }
         }

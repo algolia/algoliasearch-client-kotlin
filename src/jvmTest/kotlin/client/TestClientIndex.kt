@@ -16,7 +16,7 @@ internal class TestClientIndex {
 
     private suspend fun deleteIndex(index: Index) {
         index.run {
-            deleteIndex().wait().status shouldEqual Published
+            deleteIndex().wait() shouldEqual Published
         }
     }
 
@@ -32,13 +32,13 @@ internal class TestClientIndex {
 
     private suspend fun copyIndex(index: Index, destination: IndexName) {
         index.run {
-            copyIndex(destination).wait().status shouldEqual Published
+            copyIndex(destination).wait() shouldEqual Published
         }
     }
 
     private suspend fun moveIndex(index: Index, destination: IndexName) {
         index.run {
-            moveIndex(destination).wait().status shouldEqual Published
+            moveIndex(destination).wait() shouldEqual Published
         }
     }
 
@@ -56,10 +56,10 @@ internal class TestClientIndex {
     fun clear() {
         runBlocking {
             index.run {
-                copyIndex(indexCopyA.indexName).wait().status shouldEqual TaskStatus.Published
+                copyIndex(indexCopyA.indexName).wait() shouldEqual TaskStatus.Published
             }
             indexCopyA.run {
-                clear().wait().status shouldEqual TaskStatus.Published
+                clear().wait() shouldEqual TaskStatus.Published
             }
         }
     }

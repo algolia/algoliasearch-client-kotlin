@@ -41,7 +41,7 @@ class ClientAlgolia private constructor(
         }
     }
 
-    suspend fun waitAll(taskIndices: List<TaskIndex>, maxTimeToWait: Long = 10000L): List<TaskInfo> {
+    suspend fun waitAll(taskIndices: List<TaskIndex>, maxTimeToWait: Long = 10000L): List<TaskStatus> {
         var attempt = 1
         val timeToWait = 10000L
 
@@ -49,7 +49,7 @@ class ClientAlgolia private constructor(
             coroutineScope {
                 taskIndices.map { async { getIndex(it.indexName).getTask(it.taskID) } }.map { it.await() }
             }.let {
-                if (it.all { it.status == TaskStatus.Published }) {
+                if (it.all { it == TaskStatus.Published }) {
                     return it
                 }
             }
