@@ -179,6 +179,7 @@ internal class TestKeys {
         KeyPlaceholder shouldEqual "placeholder"
         KeyAlternativeCorrection1 shouldEqual "altcorrection1"
         KeyAlternativeCorrection2 shouldEqual "altcorrection2"
+        KeyReplaceExistingSynonyms shouldEqual "replaceExistingSynonyms"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

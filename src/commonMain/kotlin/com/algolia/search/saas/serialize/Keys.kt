@@ -169,6 +169,7 @@ internal const val KeyReplacements = "replacements"
 internal const val KeyPlaceholder = "placeholder"
 internal const val KeyAlternativeCorrection1 = "altcorrection1"
 internal const val KeyAlternativeCorrection2 = "altcorrection2"
+internal const val KeyReplaceExistingSynonyms = "replaceExistingSynonyms"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"

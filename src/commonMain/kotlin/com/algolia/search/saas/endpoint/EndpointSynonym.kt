@@ -14,6 +14,13 @@ interface EndpointSynonym {
         requestOptions: RequestOptions? = null
     ): TaskUpdateSynonym
 
+    suspend fun saveSynonyms(
+        synonyms: List<Synonym>,
+        forwardToReplicas: Boolean? = null,
+        replaceExistingSynonyms: Boolean? = null,
+        requestOptions: RequestOptions? = null
+    ): TaskUpdateIndex
+
     suspend fun getSynonym(objectID: ObjectID, requestOptions: RequestOptions? = null): Synonym
 
     suspend fun deleteSynonym(

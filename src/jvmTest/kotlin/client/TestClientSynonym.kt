@@ -85,11 +85,11 @@ internal class TestClientSynonym {
     }
 
     @Test
-    fun delete() {
+    fun suite() {
         runBlocking {
             index.apply {
-                saveSynonym(oneWay).wait().status shouldEqual TaskStatus.Published
-                saveSynonym(placeholder).wait().status shouldEqual TaskStatus.Published
+                saveSynonyms(listOf(oneWay, placeholder)).wait().status shouldEqual TaskStatus.Published
+                searchSynonym().hits.size shouldEqual 2
                 clearSynonyms().wait().status shouldEqual TaskStatus.Published
                 searchSynonym().hits.shouldBeEmpty()
             }

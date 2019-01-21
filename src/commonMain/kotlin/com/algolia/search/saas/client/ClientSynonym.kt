@@ -6,6 +6,7 @@ import com.algolia.search.saas.serialize.*
 import io.ktor.client.request.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
+import kotlinx.serialization.list
 
 
 internal class ClientSynonym(
@@ -27,6 +28,22 @@ internal class ClientSynonym(
                 setRequestOptions(requestOptions)
                 forwardToReplicas?.let { parameter(KeyForwardToReplicas, it) }
                 body = Json.stringify(Synonym, synonym)
+            }
+        }
+    }
+
+    override suspend fun saveSynonyms(
+        synonyms: List<Synonym>,
+        forwardToReplicas: Boolean?,
+        replaceExistingSynonyms: Boolean?,
+        requestOptions: RequestOptions?
+    ): TaskUpdateIndex {
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/synonyms/batch")) { path ->
+            httpClient.post<TaskUpdateIndex>(path) {
+                setRequestOptions(requestOptions)
+                forwardToReplicas?.let { parameter(KeyForwardToReplicas, it) }
+                replaceExistingSynonyms?.let { parameter(KeyReplaceExistingSynonyms, it) }
+                body = Json.stringify(Synonym.list, synonyms)
             }
         }
     }
