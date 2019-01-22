@@ -149,7 +149,7 @@ data class QueryRule(
             override fun serialize(encoder: Encoder, obj: Consequence) {
                 val serializer = AutomaticFacetFilters.serializer().list
                 val map = obj.params.encodeNoNulls().toMutableMap().apply {
-                    obj.edits?.let { put(KeyEdit, Json.plain.toJson(it, Edit.list)) }
+                    obj.edits?.let { put(KeyQuery, json { KeyEdits to Json.plain.toJson(it, Edit.list) }) }
                     obj.automaticFacetFilters?.let {
                         put(KeyAutomaticFacetFilters, Json.plain.toJson(it, serializer))
                     }
@@ -173,7 +173,7 @@ data class QueryRule(
                 val params = json.getObject(KeyParams)
                 val promote = json.getArrayOrNull(KeyPromote)
                 val hide = json.getArrayOrNull(KeyHide)
-                val edits = params.getOrNull(KeyEdit)
+                val edits = params.getOrNull(KeyEdits)
                 val filters = params.getOrNull(KeyAutomaticFacetFilters)
                 val optionalFilters = params.getOrNull(KeyAutomaticOptionalFacetFilters)
                 val facetSerializer = AutomaticFacetFilters.serializer().list
@@ -203,7 +203,7 @@ data class QueryRule(
             override fun serialize(encoder: Encoder, obj: Edit) {
                 val type = if (obj.insert != null) KeyReplace else KeyRemove
                 val json = json {
-                    KeyType to type
+                    KeyType to type.toLowerCase()
                     KeyDelete to obj.delete
                     obj.insert?.let { KeyInsert to it }
                 }

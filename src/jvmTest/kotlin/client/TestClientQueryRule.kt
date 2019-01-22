@@ -10,6 +10,8 @@ import objectIDB
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldBeEmpty
+import shouldContain
 import shouldEqual
 
 
@@ -20,19 +22,29 @@ internal class TestClientQueryRule {
         QueryRule.Pattern.Facet(attributeA),
         QueryRule.Anchoring.Is
     )
-    private val consequence = QueryRule.Consequence(
+    private val consequenceA = QueryRule.Consequence(
         params = Query(query = "query"),
         promote = listOf(QueryRule.Consequence.Promotion(objectIDA, 0)),
         hide = listOf(objectIDB)
     )
+    private val consequenceB = QueryRule.Consequence(
+        params = Query("blue sky"),
+        edits = listOf(QueryRule.Edit("blue"))
+    )
+    private val queryRuleA = QueryRule(objectIDA, condition, consequenceA)
+    private val queryRuleB = QueryRule(objectIDB, condition, consequenceB)
 
     @Test
     fun save() {
         runBlocking {
-            val queryRule = QueryRule(objectIDA, condition, consequence)
-
             index.apply {
-                saveRule(queryRule).wait() shouldEqual TaskStatus.Published
+                saveRule(queryRuleA).wait() shouldEqual TaskStatus.Published
+                getRule(objectIDA) shouldEqual queryRuleA
+                searchRules().hits shouldContain queryRuleA
+                deleteRule(objectIDA).wait() shouldEqual TaskStatus.Published
+                saveRules(listOf(queryRuleA, queryRuleB)).wait() shouldEqual TaskStatus.Published
+                clearRules().wait() shouldEqual TaskStatus.Published
+                searchRules().hits.shouldBeEmpty()
             }
         }
     }

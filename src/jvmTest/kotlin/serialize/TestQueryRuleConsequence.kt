@@ -32,7 +32,7 @@ internal class TestQueryRuleConsequence : TestSerializer<QueryRule.Consequence>(
         Consequence() to json { KeyParams to json { } },
         Consequence(query) to json { KeyParams to json { KeyQuery to unknown } },
         Consequence(edits = edits) to json {
-            KeyParams to json { KeyEdit to editsSerialized }
+            KeyParams to json { KeyEdits to editsSerialized }
         },
         Consequence(
             params = query,
@@ -44,7 +44,7 @@ internal class TestQueryRuleConsequence : TestSerializer<QueryRule.Consequence>(
         ) to json {
             KeyParams to json {
                 KeyQuery to unknown
-                KeyEdit to editsSerialized
+                KeyEdits to editsSerialized
                 KeyAutomaticFacetFilters to filtersSerialized
                 KeyAutomaticOptionalFacetFilters to filtersSerialized
             }

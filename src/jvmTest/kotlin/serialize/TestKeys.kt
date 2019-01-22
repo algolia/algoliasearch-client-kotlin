@@ -193,11 +193,12 @@ internal class TestKeys {
         KeyDisjunctive shouldEqual "disjunctive"
         KeyScore shouldEqual "score"
         KeyInsert shouldEqual "insert"
-        KeyEdit shouldEqual "edit"
+        KeyEdits shouldEqual "edits"
         KeyAutomaticFacetFilters shouldEqual "automaticFacetFilters"
         KeyAutomaticOptionalFacetFilters shouldEqual "automaticOptionalFacetFilters"
         KeyPromote shouldEqual "promote"
         KeyHide shouldEqual "hide"
+        KeyClearExistingRules shouldEqual "clearExistingRules"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

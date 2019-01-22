@@ -31,7 +31,7 @@ internal class TestClientSynonym {
             index.apply {
                 saveSynonym(oneWay).wait() shouldEqual TaskStatus.Published
                 getSynonym(oneWay.objectID) shouldEqual oneWay
-                searchSynonym().hits shouldContain oneWay
+                searchSynonyms().hits shouldContain oneWay
                 deleteSynonym(oneWay.objectID).wait() shouldEqual TaskStatus.Published
             }
         }
@@ -43,7 +43,7 @@ internal class TestClientSynonym {
             index.apply {
                 saveSynonym(multiWay).wait() shouldEqual TaskStatus.Published
                 getSynonym(multiWay.objectID) shouldEqual multiWay
-                searchSynonym().hits shouldContain multiWay
+                searchSynonyms().hits shouldContain multiWay
                 deleteSynonym(multiWay.objectID).wait() shouldEqual TaskStatus.Published
             }
         }
@@ -64,7 +64,7 @@ internal class TestClientSynonym {
             index.apply {
                 saveSynonym(alternative).wait() shouldEqual TaskStatus.Published
                 getSynonym(alternative.objectID) shouldEqual alternative
-                searchSynonym().hits shouldContain alternative
+                searchSynonyms().hits shouldContain alternative
                 deleteSynonym(alternative.objectID).wait() shouldEqual TaskStatus.Published
             }
         }
@@ -78,7 +78,7 @@ internal class TestClientSynonym {
 
                 save.wait() shouldEqual TaskStatus.Published
                 getSynonym(placeholder.objectID) shouldEqual placeholder
-                searchSynonym().hits shouldContain placeholder
+                searchSynonyms().hits shouldContain placeholder
                 deleteSynonym(placeholder.objectID).wait() shouldEqual TaskStatus.Published
             }
         }
@@ -89,9 +89,9 @@ internal class TestClientSynonym {
         runBlocking {
             index.apply {
                 saveSynonyms(listOf(oneWay, placeholder)).wait() shouldEqual TaskStatus.Published
-                searchSynonym().hits.size shouldEqual 2
+                searchSynonyms().hits.size shouldEqual 2
                 clearSynonyms().wait() shouldEqual TaskStatus.Published
-                searchSynonym().hits.shouldBeEmpty()
+                searchSynonyms().hits.shouldBeEmpty()
             }
         }
     }

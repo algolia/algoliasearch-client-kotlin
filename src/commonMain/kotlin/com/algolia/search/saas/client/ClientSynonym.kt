@@ -69,7 +69,7 @@ internal class ClientSynonym(
         }
     }
 
-    override suspend fun searchSynonym(
+    override suspend fun searchSynonyms(
         query: String?,
         page: Int?,
         hitsPerPage: Int?,

@@ -29,7 +29,7 @@ interface EndpointSynonym {
         requestOptions: RequestOptions? = null
     ): TaskDelete
 
-    suspend fun searchSynonym(
+    suspend fun searchSynonyms(
         query: String? = null,
         page: Int? = null,
         hitsPerPage: Int? = null,
