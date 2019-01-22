@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.QueryRule.Anchoring.*
+import com.algolia.search.saas.data.Anchoring.*
 import com.algolia.search.saas.serialize.KeyContains
 import com.algolia.search.saas.serialize.KeyEndsWith
 import com.algolia.search.saas.serialize.KeyIs
@@ -13,7 +13,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestQueryRuleAnchoring {
+internal class TestAnchoring {
 
     @Test
     fun raw() {

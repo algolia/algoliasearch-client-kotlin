@@ -1,6 +1,7 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
+import com.algolia.search.saas.data.QueryRule
 import com.algolia.search.saas.endpoint.EndpointQueryRule
 import com.algolia.search.saas.serialize.KeyClearExistingRules
 import com.algolia.search.saas.serialize.KeyQuery

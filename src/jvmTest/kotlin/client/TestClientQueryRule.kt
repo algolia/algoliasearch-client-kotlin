@@ -1,9 +1,7 @@
 package client
 
 import attributeA
-import com.algolia.search.saas.data.Query
-import com.algolia.search.saas.data.QueryRule
-import com.algolia.search.saas.data.TaskStatus
+import com.algolia.search.saas.data.*
 import kotlinx.coroutines.runBlocking
 import objectIDA
 import objectIDB
@@ -18,18 +16,23 @@ import shouldEqual
 @RunWith(JUnit4::class)
 internal class TestClientQueryRule {
 
-    private val condition = QueryRule.Condition(
-        QueryRule.Pattern.Facet(attributeA),
-        QueryRule.Anchoring.Is
+    private val condition = Condition(
+        Pattern.Facet(attributeA),
+        Anchoring.Is
     )
-    private val consequenceA = QueryRule.Consequence(
-        params = Query(query = "query"),
-        promote = listOf(QueryRule.Consequence.Promotion(objectIDA, 0)),
+    private val consequenceA = Consequence(
+        params = Params(query = QueryOrEdits.Query("query")),
+        promote = listOf(Promotion(objectIDA, 0)),
         hide = listOf(objectIDB)
     )
-    private val consequenceB = QueryRule.Consequence(
-        params = Query("blue sky"),
-        edits = listOf(QueryRule.Edit("blue"))
+    private val consequenceB = Consequence(
+        params = Params(
+            query = QueryOrEdits.Edits(
+                listOf(
+                    Edit("blue")
+                )
+            )
+        )
     )
     private val queryRuleA = QueryRule(objectIDA, condition, consequenceA)
     private val queryRuleB = QueryRule(objectIDB, condition, consequenceB)
@@ -43,6 +46,7 @@ internal class TestClientQueryRule {
                 searchRules().hits shouldContain queryRuleA
                 deleteRule(objectIDA).wait() shouldEqual TaskStatus.Published
                 saveRules(listOf(queryRuleA, queryRuleB)).wait() shouldEqual TaskStatus.Published
+                searchRules().hits shouldEqual listOf(queryRuleA, queryRuleB)
                 clearRules().wait() shouldEqual TaskStatus.Published
                 searchRules().hits.shouldBeEmpty()
             }

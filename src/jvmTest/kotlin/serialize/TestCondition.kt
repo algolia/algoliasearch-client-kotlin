@@ -1,7 +1,9 @@
 package serialize
 
 import attributeA
-import com.algolia.search.saas.data.QueryRule
+import com.algolia.search.saas.data.Anchoring
+import com.algolia.search.saas.data.Condition
+import com.algolia.search.saas.data.Pattern
 import com.algolia.search.saas.serialize.KeyAnchoring
 import com.algolia.search.saas.serialize.KeyIs
 import com.algolia.search.saas.serialize.KeyPattern
@@ -12,19 +14,19 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestQueryRuleCondition : TestSerializer<QueryRule.Condition>(QueryRule.Condition) {
+internal class TestCondition : TestSerializer<Condition>(Condition) {
 
     override val items = listOf(
-        QueryRule.Condition(
-            anchoring = QueryRule.Anchoring.Is,
-            pattern = QueryRule.Pattern.Facet(attributeA)
+        Condition(
+            anchoring = Anchoring.Is,
+            pattern = Pattern.Facet(attributeA)
         ) to json {
             KeyAnchoring to KeyIs
             KeyPattern to "{facet:$attributeA}"
         },
-        QueryRule.Condition(
-            anchoring = QueryRule.Anchoring.Is,
-            pattern = QueryRule.Pattern.Literal(unknown)
+        Condition(
+            anchoring = Anchoring.Is,
+            pattern = Pattern.Literal(unknown)
         ) to json {
             KeyAnchoring to KeyIs
             KeyPattern to unknown
