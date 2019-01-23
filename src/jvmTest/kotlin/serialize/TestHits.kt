@@ -17,8 +17,8 @@ internal class TestHits : TestSerializer<Hits>(Hits.serializer()) {
 
     private val highlights = mapOf(attributeA to TestHighlightResult.highlightResult)
     private val highlightsJson = Json.nonstrict.toJson(
-        highlights,
-        HashMapSerializer(Attribute, HighlightResult.serializer())
+        HashMapSerializer(Attribute, HighlightResult.serializer()),
+        highlights
     )
     private val hitsJson = json {
         "_highlightResult" to highlightsJson

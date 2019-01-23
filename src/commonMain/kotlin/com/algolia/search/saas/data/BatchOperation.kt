@@ -16,7 +16,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
         companion object {
 
             fun <T> from(data: T, serializer: KSerializer<T>): AddObject {
-                return AddObject(Json.plain.toJson(data, serializer).jsonObject)
+                return AddObject(Json.plain.toJson(serializer, data).jsonObject)
             }
         }
     }
@@ -29,7 +29,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
         companion object {
 
             fun <T : Indexable> from(data: T, serializer: KSerializer<T>): ReplaceObject {
-                return ReplaceObject(Json.plain.toJson(data, serializer).jsonObject, data.objectID)
+                return ReplaceObject(Json.plain.toJson(serializer, data).jsonObject, data.objectID)
             }
         }
     }
@@ -48,7 +48,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
                 createIfNotExists: Boolean = true
             ): UpdateObject {
                 return UpdateObject(
-                    Json.plain.toJson(data, serializer).jsonObject,
+                    Json.plain.toJson(serializer, data).jsonObject,
                     data.objectID,
                     createIfNotExists
                 )
@@ -60,7 +60,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
                 createIfNotExists: Boolean
             ): UpdateObject {
                 return UpdateObject(
-                    Json.plain.toJson(partialUpdate, PartialUpdate).jsonObject,
+                    Json.plain.toJson(PartialUpdate, partialUpdate).jsonObject,
                     objectID,
                     createIfNotExists
                 )

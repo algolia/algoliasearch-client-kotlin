@@ -158,7 +158,7 @@ internal class ClientIndexing(
         requestOptions: RequestOptions?
     ): T? {
         return getObjectInternal(objectID, attributes, requestOptions = requestOptions).let {
-            Json.nonstrict.fromJson(it, serializer)
+            Json.nonstrict.fromJson(serializer, it)
         }
     }
 
@@ -222,7 +222,7 @@ internal class ClientIndexing(
         createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
     ): TaskUpdateObject {
-        val payload = Json.plain.toJson(partialUpdate, PartialUpdate).toString()
+        val payload = Json.plain.toJson(PartialUpdate, partialUpdate).toString()
 
         return updateObject(payload, objectID, createIfNotExists, requestOptions)
     }
@@ -241,7 +241,7 @@ internal class ClientIndexing(
         batchOperations: List<BatchOperation>,
         requestOptions: RequestOptions?
     ): TaskBatchOperation {
-        val requests = Json.plain.toJson(batchOperations, BatchOperation.list)
+        val requests = Json.plain.toJson(BatchOperation.list, batchOperations)
         val json = json { KeyRequests to requests }
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/batch")) { path ->

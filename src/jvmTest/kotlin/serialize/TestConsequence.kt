@@ -25,7 +25,7 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence) {
     private val filters = listOf(AutomaticFacetFilters(attributeA, 1, true))
     private val objectIDs = listOf(objectIDA, objectIDB)
     private val promotions = listOf(Promotion(objectIDA, 0))
-    private val promotionsSerialized = Json.plain.toJson(promotions, Promotion.serializer().list)
+    private val promotionsSerialized = Json.plain.toJson(Promotion.serializer().list, promotions)
     private val params = paramsEdits.copy(automaticFacetFilters = filters, automaticOptionalFacetFilters = filters)
     private val paramsSerialized = params.toJsonObject(Params.serializer()).encodeNoNulls()
     private val userData = json { KeyUserData to unknown }

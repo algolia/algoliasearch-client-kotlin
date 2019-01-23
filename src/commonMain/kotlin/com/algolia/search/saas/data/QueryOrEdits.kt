@@ -20,7 +20,7 @@ sealed class QueryOrEdits {
         override fun serialize(encoder: Encoder, obj: QueryOrEdits) {
             val json = when (obj) {
                 is Query -> JsonLiteral(obj.query)
-                is Edits -> json { KeyEdits to Json.plain.toJson(obj.edits, Edit.list) }
+                is Edits -> json { KeyEdits to Json.plain.toJson(Edit.list, obj.edits) }
             }
 
             encoder.asJsonOutput().encodeJson(json)
@@ -32,7 +32,7 @@ sealed class QueryOrEdits {
             return try {
                 Query(json.content)
             } catch (exception: JsonElementTypeMismatchException) {
-                Edits(Json.plain.fromJson(json.jsonObject[KeyEdits], Edit.list))
+                Edits(Json.plain.fromJson(Edit.list, json.jsonObject[KeyEdits]))
             }
         }
     }

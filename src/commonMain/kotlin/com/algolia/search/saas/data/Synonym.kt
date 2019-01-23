@@ -50,12 +50,12 @@ sealed class Synonym(open val objectID: ObjectID) {
                 is MultiWay -> json {
                     KeyObjectID to obj.objectID.raw
                     KeyType to KeySynonym
-                    KeySynonyms to Json.plain.toJson(obj.synonyms, StringSerializer.list)
+                    KeySynonyms to Json.plain.toJson(StringSerializer.list, obj.synonyms)
                 }
                 is OneWay -> json {
                     KeyObjectID to obj.objectID.raw
                     KeyType to KeyOneWaySynonym
-                    KeySynonyms to Json.plain.toJson(obj.synonyms, StringSerializer.list)
+                    KeySynonyms to Json.plain.toJson(StringSerializer.list, obj.synonyms)
                     KeyInput to obj.input
                 }
                 is AlternativeCorrections -> json {
@@ -65,13 +65,13 @@ sealed class Synonym(open val objectID: ObjectID) {
                         SynonymType.Typo.Two -> KeyAlternativeCorrection2
                     }
                     KeyWord to obj.word
-                    KeyCorrections to Json.plain.toJson(obj.corrections, StringSerializer.list)
+                    KeyCorrections to Json.plain.toJson(StringSerializer.list, obj.corrections)
                 }
                 is Placeholder -> json {
                     KeyObjectID to obj.objectID.raw
                     KeyType to KeyPlaceholder
                     KeyPlaceholder to obj.placeholder
-                    KeyReplacements to Json.plain.toJson(obj.replacements, StringSerializer.list)
+                    KeyReplacements to Json.plain.toJson(StringSerializer.list, obj.replacements)
                 }
                 is Other -> obj.json
             }

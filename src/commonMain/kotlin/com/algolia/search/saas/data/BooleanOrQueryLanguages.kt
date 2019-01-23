@@ -33,7 +33,7 @@ sealed class BooleanOrQueryLanguages {
             val element = decoder.asJsonInput()
 
             return when (element) {
-                is JsonArray -> QueryLanguages(element.map { Json.nonstrict.fromJson(it, QueryLanguage) })
+                is JsonArray -> QueryLanguages(element.map { Json.nonstrict.fromJson(QueryLanguage, it) })
                 is JsonLiteral -> Boolean(element.boolean)
                 else -> throw Exception()
             }

@@ -32,7 +32,7 @@ internal object KSerializerFacets : KSerializer<Map<Attribute, List<Facet>>> {
     }
 
     override fun deserialize(decoder: Decoder): Map<Attribute, List<Facet>> {
-        val json = Json.nonstrict.fromJson(decoder.asJsonInput(), serializer)
+        val json = Json.nonstrict.fromJson(serializer, decoder.asJsonInput())
 
         return json.map { (key, value) -> key.toAttribute() to value.map { Facet(it.key, it.value) } }.toMap()
     }

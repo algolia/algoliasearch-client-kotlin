@@ -31,7 +31,7 @@ internal fun Encoder.asJsonOutput() = this as JsonOutput
 
 
 internal fun <T> T.toJsonObject(serializer: SerializationStrategy<T>): JsonObject {
-    return Json.nonstrict.toJson(this, serializer).jsonObject
+    return Json.nonstrict.toJson(serializer, this).jsonObject
 }
 
 internal fun JsonObject.encodeNoNulls(): JsonObject {

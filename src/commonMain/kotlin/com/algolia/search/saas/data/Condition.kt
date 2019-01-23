@@ -30,14 +30,8 @@ data class Condition(
             val json = decoder.asJsonInput().jsonObject
 
             return Condition(
-                Json.plain.fromJson(
-                    json[KeyPattern],
-                    Pattern
-                ),
-                Json.plain.fromJson(
-                    json[KeyAnchoring],
-                    Anchoring
-                ),
+                Json.plain.fromJson(Pattern, json[KeyPattern]),
+                Json.plain.fromJson(Anchoring, json[KeyAnchoring]),
                 json.getPrimitiveOrNull(KeyContext)?.contentOrNull
             )
         }

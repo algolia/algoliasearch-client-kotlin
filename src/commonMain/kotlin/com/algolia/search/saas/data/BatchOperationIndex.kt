@@ -22,7 +22,7 @@ data class BatchOperationIndex(
 
         override fun serialize(encoder: Encoder, obj: BatchOperationIndex) {
             val elements =
-                Json.plain.toJson(obj.batchOperation, BatchOperation).jsonObject.content.toMutableMap().also {
+                Json.plain.toJson(BatchOperation, obj.batchOperation).jsonObject.content.toMutableMap().also {
                     it[KeyIndexName] = JsonLiteral(obj.indexName.raw)
                 }
 
@@ -31,7 +31,7 @@ data class BatchOperationIndex(
 
         override fun deserialize(decoder: Decoder): BatchOperationIndex {
             val element = decoder.asJsonInput().jsonObject
-            val batchOperation = Json.nonstrict.fromJson(element, BatchOperation)
+            val batchOperation = Json.nonstrict.fromJson(BatchOperation, element)
             val indexName = element[KeyIndexName].content.toIndexName()
 
             return BatchOperationIndex(indexName, batchOperation)

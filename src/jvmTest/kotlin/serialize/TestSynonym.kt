@@ -19,7 +19,7 @@ internal class TestSynonym : TestSerializer<Synonym>(Synonym) {
     private val objectID = ObjectID("objectID")
     private val json = json { KeyObjectID to objectID.raw }
     private val strings = listOf("iPhone", "samsung")
-    private val array = Json.plain.toJson(strings, StringSerializer.list)
+    private val array = Json.plain.toJson(StringSerializer.list, strings)
 
     override val items = listOf(
         Synonym.OneWay(objectID, unknown, strings) to json {

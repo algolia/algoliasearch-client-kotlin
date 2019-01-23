@@ -21,7 +21,7 @@ internal class TestQueryOrEdits : TestSerializer<QueryOrEdits>(QueryOrEdits) {
     )
 
     override val items = listOf(
-        QueryOrEdits.Edits(edits) to json { KeyEdits to Json.plain.toJson(edits, Edit.list) },
+        QueryOrEdits.Edits(edits) to json { KeyEdits to Json.plain.toJson(Edit.list, edits) },
         QueryOrEdits.Query(unknown) to JsonLiteral(unknown)
     )
 }
