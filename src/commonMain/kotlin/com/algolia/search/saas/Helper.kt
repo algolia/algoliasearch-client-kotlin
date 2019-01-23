@@ -23,6 +23,10 @@ fun Long.toTaskID(): TaskID {
     return TaskID(this)
 }
 
+fun Long.toUserID(): UserID {
+    return UserID(this)
+}
+
 fun String.toApplicationID(): ApplicationID {
     return ApplicationID(this)
 }

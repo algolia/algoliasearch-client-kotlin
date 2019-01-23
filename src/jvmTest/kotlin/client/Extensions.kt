@@ -2,6 +2,8 @@ package client
 
 import com.algolia.search.saas.client.ClientAlgolia
 import com.algolia.search.saas.data.*
+import com.algolia.search.saas.toAPIKey
+import com.algolia.search.saas.toApplicationID
 import kotlinx.serialization.Serializable
 
 internal val adminKey = APIKey(System.getenv("KOTLIN_CLIENT_ADMIN_KEY"))
@@ -11,6 +13,10 @@ internal val algolia = ClientAlgolia(applicationId, apiKey)
 internal val index = algolia.getIndex(IndexName(System.getenv("KOTLIN_CLIENT_INDEX")))
 internal val indexCopyA = algolia.getIndex(IndexName("${index.indexName}_copyA"))
 internal val indexCopyB = algolia.getIndex(IndexName("${index.indexName}_copyB"))
+internal val multiCluster = ClientAlgolia(
+    System.getenv("ALGOLIA_ADMIN_ID_MCM").toApplicationID(),
+    System.getenv("ALGOLIA_ADMIN_KEY_MCM").toAPIKey()
+)
 
 @Serializable
 internal data class Data(

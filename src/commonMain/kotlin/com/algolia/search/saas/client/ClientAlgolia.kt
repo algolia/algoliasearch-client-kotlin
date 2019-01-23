@@ -3,6 +3,7 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.data.*
 import com.algolia.search.saas.endpoint.ConfigurableEndpoints
 import com.algolia.search.saas.endpoint.EndpointAPIKey
+import com.algolia.search.saas.endpoint.EndpointMultiCluster
 import com.algolia.search.saas.endpoint.EndpointMultipleIndex
 import io.ktor.client.engine.HttpClientEngine
 import kotlinx.coroutines.async
@@ -14,7 +15,8 @@ class ClientAlgolia private constructor(
     private val apiWrapper: APIWrapper
 ) :
     EndpointMultipleIndex by apiWrapper.endpoints.multipleIndex ?: ClientMultipleIndex(apiWrapper),
-    EndpointAPIKey by apiWrapper.endpoints.apiKey ?: ClientAPIKey(apiWrapper) {
+    EndpointAPIKey by apiWrapper.endpoints.apiKey ?: ClientAPIKey(apiWrapper),
+    EndpointMultiCluster by apiWrapper.endpoints.multiCluster ?: ClientMultiCluster(apiWrapper) {
 
     constructor(
         applicationID: ApplicationID,

@@ -10,5 +10,6 @@ data class ConfigurableEndpoints(
     val search: EndpointSearch? = null,
     val settings: EndpointSettings? = null,
     val synonym: EndpointSynonym? = null,
-    val queryRule: EndpointQueryRule? = null
+    val queryRule: EndpointQueryRule? = null,
+    val multiCluster: EndpointMultiCluster? = null
 )
