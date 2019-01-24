@@ -11,7 +11,7 @@ import kotlinx.serialization.Transient
 @Serializable
 data class Query(
     /**
-     * The text to search in the indexName.
+     * The text to search in the index.
      * Engine default: "" (empty name)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/query/]
      */
@@ -384,7 +384,7 @@ data class Query(
     @Optional var analyticsTags: List<String>? = null,
 
     /**
-     * Whether to take into account an indexName’s synonyms for a particular search.
+     * Whether to take into account an index’s synonyms for a particular search.
      * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/synonyms/]
      */
