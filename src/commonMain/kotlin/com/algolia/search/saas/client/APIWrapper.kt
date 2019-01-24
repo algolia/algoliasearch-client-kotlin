@@ -15,7 +15,7 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.internal.JsonObjectSerializer
+import kotlinx.serialization.json.JsonObjectSerializer
 
 
 internal class APIWrapper(
