@@ -25,15 +25,15 @@ internal class TestFilterBuilderShowcase {
             groupA += categoryBook
             groupA += categoryOffice
             groupA += categoryGift
-            "category:book AND category:office AND category:gift" shouldEqual buildTest()
+            buildTest() shouldEqual "category:book AND category:office AND category:gift"
         }
 
         FilterBuilder {
             groupA += categoryBook
             groupA += categoryOffice
             groupB += categoryGift
-            "(category:book AND category:office) AND category:gift" shouldEqual buildTest()
-            setOf(categoryBook, categoryOffice) shouldEqual groupA.get()
+            buildTest() shouldEqual "(category:book AND category:office) AND category:gift"
+            groupA.get() shouldEqual setOf(categoryBook, categoryOffice)
         }
     }
 
@@ -133,7 +133,7 @@ internal class TestFilterBuilderShowcase {
         FilterBuilder {
             groupA += comparisonPrice
             groupB += rangeLike
-            "price != 15.0 AND nbLike:100.0 TO 200.0" shouldEqual buildTest()
+            buildTest() shouldEqual "price != 15.0 AND nbLike:100.0 TO 200.0"
         }
     }
 }
