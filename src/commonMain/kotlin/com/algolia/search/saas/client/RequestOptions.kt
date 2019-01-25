@@ -1,5 +1,9 @@
 package com.algolia.search.saas.client
 
+import com.algolia.search.saas.data.UserID
+import com.algolia.search.saas.serialize.KeyAlgoliaUserID
+import com.algolia.search.saas.serialize.KeyForwardedFor
+
 
 internal fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {
     return RequestOptions().apply(init)
@@ -20,12 +24,12 @@ data class RequestOptions(
     }
 
     fun headerForwardedFor(ipAddress: String): RequestOptions {
-        headers["X-Forwarded-For"] = ipAddress
+        headers[KeyForwardedFor] = ipAddress
         return this
     }
 
-    fun headerAlgoliaUserId(userId: String): RequestOptions {
-        headers["X-Algolia-UserID"] = userId
+    fun headerAlgoliaUserId(userId: UserID): RequestOptions {
+        headers[KeyAlgoliaUserID] = userId.raw
         return this
     }
 

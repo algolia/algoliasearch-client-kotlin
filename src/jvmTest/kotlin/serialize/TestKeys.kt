@@ -199,6 +199,9 @@ internal class TestKeys {
         KeyPromote shouldEqual "promote"
         KeyHide shouldEqual "hide"
         KeyClearExistingRules shouldEqual "clearExistingRules"
+        KeyCluster shouldEqual "cluster"
+        KeyAlgoliaUserID shouldEqual "X-Algolia-User-ID"
+        KeyForwardedFor shouldEqual "X-Forwarded-For"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

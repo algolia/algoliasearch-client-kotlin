@@ -4,7 +4,6 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class TaskCreate(
-    val createdAt: String,
-    override val taskID: TaskID
-) : Task
+data class Deleted(
+    val deletedAt: String
+)

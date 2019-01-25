@@ -23,7 +23,7 @@ fun Long.toTaskID(): TaskID {
     return TaskID(this)
 }
 
-fun Long.toUserID(): UserID {
+fun String.toUserID(): UserID {
     return UserID(this)
 }
 
@@ -33,6 +33,10 @@ fun String.toApplicationID(): ApplicationID {
 
 fun String.toAPIKey(): APIKey {
     return APIKey(this)
+}
+
+fun String.toClusterName(): ClusterName {
+    return ClusterName(this)
 }
 
 

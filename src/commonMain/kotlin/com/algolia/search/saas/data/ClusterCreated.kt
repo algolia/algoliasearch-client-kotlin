@@ -4,6 +4,6 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Clusters(
-    val clusters: List<Cluster>
+data class ClusterCreated(
+    val createdAt: String
 )

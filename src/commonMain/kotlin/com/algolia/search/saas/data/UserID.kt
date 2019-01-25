@@ -5,19 +5,19 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.LongSerializer
+import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(UserID.Companion::class)
-data class UserID(override val raw: Long) : Raw<Long> {
+data class UserID(override val raw: String) : Raw<String> {
 
     override fun toString(): String {
-        return raw.toString()
+        return raw
     }
 
     companion object : KSerializer<UserID> {
 
-        private val serializer = LongSerializer
+        private val serializer = StringSerializer
 
         override val descriptor = serializer.descriptor
 
@@ -26,9 +26,9 @@ data class UserID(override val raw: Long) : Raw<Long> {
         }
 
         override fun deserialize(decoder: Decoder): UserID {
-            val long = serializer.deserialize(decoder)
+            val string = serializer.deserialize(decoder)
 
-            return long.toUserID()
+            return string.toUserID()
         }
     }
 }

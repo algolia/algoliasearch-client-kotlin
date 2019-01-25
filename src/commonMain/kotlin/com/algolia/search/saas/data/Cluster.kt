@@ -1,13 +1,14 @@
 package com.algolia.search.saas.data
 
+import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 data class Cluster(
-    val clusterName: String,
-    val nbRecords: Int,
-    val nbUserIDs: UserID,
-    val dataSize: Long
+    @Optional val clusterName: ClusterName? = null,
+    val userID: UserID,
+    val nbRecords: Long,
+    val dataSize: Long,
+    @Optional val objectID: ObjectID? = null
 )
-

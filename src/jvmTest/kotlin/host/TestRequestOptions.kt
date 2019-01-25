@@ -1,5 +1,6 @@
 package host
 import com.algolia.search.saas.client.requestOptions
+import com.algolia.search.saas.toUserID
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -32,7 +33,7 @@ internal class TestRequestOptions {
     @Test
     fun userId() {
         val requestOptions = requestOptions {
-            headerAlgoliaUserId("value")
+            headerAlgoliaUserId("value".toUserID())
         }
         requestOptions.headers shouldEqual mutableMapOf("X-Algolia-UserID" to "value")
     }

@@ -189,6 +189,9 @@ internal const val KeyAutomaticOptionalFacetFilters = "automaticOptionalFacetFil
 internal const val KeyPromote = "promote"
 internal const val KeyHide = "hide"
 internal const val KeyClearExistingRules = "clearExistingRules"
+internal const val KeyCluster = "cluster"
+internal const val KeyAlgoliaUserID = "X-Algolia-User-ID"
+internal const val KeyForwardedFor = "X-Forwarded-For"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"
