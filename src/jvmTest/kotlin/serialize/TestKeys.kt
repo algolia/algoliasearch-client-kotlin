@@ -202,6 +202,13 @@ internal class TestKeys {
         KeyCluster shouldEqual "cluster"
         KeyAlgoliaUserID shouldEqual "X-Algolia-User-ID"
         KeyForwardedFor shouldEqual "X-Forwarded-For"
+        KeyDeletedAt shouldEqual "deletedAt"
+        KeyCreatedAt shouldEqual "createdAt"
+        KeyUpdatedAt shouldEqual "updatedAt"
+        KeyKey shouldEqual "key"
+        KeyUserIDs shouldEqual "userIDs"
+        KeyTopUsers shouldEqual "topUsers"
+        KeyKeys shouldEqual "keys"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"
