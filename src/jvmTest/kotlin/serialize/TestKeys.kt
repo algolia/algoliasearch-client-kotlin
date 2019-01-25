@@ -209,6 +209,8 @@ internal class TestKeys {
         KeyUserIDs shouldEqual "userIDs"
         KeyTopUsers shouldEqual "topUsers"
         KeyKeys shouldEqual "keys"
+        KeyHighlightResult shouldEqual "_highlightResult"
+        KeySnippetResult shouldEqual "_snippetResult"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

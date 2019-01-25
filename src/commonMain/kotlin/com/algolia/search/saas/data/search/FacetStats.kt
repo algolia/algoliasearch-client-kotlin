@@ -1,4 +1,4 @@
-package com.algolia.search.saas.data
+package com.algolia.search.saas.data.search
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

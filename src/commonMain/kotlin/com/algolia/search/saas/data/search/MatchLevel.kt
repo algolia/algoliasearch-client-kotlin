@@ -1,5 +1,6 @@
-package com.algolia.search.saas.data
+package com.algolia.search.saas.data.search
 
+import com.algolia.search.saas.data.Raw
 import com.algolia.search.saas.serialize.KeyFull
 import com.algolia.search.saas.serialize.KeyNone
 import com.algolia.search.saas.serialize.KeyPartial

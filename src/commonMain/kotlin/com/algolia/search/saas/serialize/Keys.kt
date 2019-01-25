@@ -199,6 +199,8 @@ internal const val KeyKey = "key"
 internal const val KeyUserIDs = "userIDs"
 internal const val KeyTopUsers = "topUsers"
 internal const val KeyKeys = "keys"
+internal const val KeyHighlightResult = "_highlightResult"
+internal const val KeySnippetResult = "_snippetResult"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"

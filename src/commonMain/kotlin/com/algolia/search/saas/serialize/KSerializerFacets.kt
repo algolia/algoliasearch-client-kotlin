@@ -1,7 +1,7 @@
 package com.algolia.search.saas.serialize
 
 import com.algolia.search.saas.data.Attribute
-import com.algolia.search.saas.data.Facet
+import com.algolia.search.saas.data.search.Facet
 import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder

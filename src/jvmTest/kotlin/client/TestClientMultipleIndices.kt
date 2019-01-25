@@ -11,6 +11,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldEqual
+import shouldNotBeEmpty
 import shouldNotBeNull
 
 
@@ -62,7 +63,8 @@ internal class TestClientMultipleIndices {
             )
             val search = algolia.multipleQueries(queries)
 
-            search.results!!.forEach {
+            search.shouldNotBeEmpty()
+            search.forEach {
                 it.index.shouldNotBeNull()
             }
         }

@@ -2,6 +2,7 @@ package com.algolia.search.saas.endpoint
 
 import com.algolia.search.saas.client.RequestOptions
 import com.algolia.search.saas.data.*
+import com.algolia.search.saas.data.search.SearchResponse
 import kotlinx.serialization.json.JsonObject
 
 
@@ -13,7 +14,7 @@ interface EndpointMultipleIndex {
         queries: Collection<IndexQuery>,
         strategy: MultipleQueriesStrategy = MultipleQueriesStrategy.None,
         requestOptions: RequestOptions? = null
-    ): MultipleHits
+    ): List<SearchResponse>
 
     suspend fun multipleGetObjects(
         requests: List<RequestObjects>,

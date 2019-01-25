@@ -1,6 +1,7 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
+import com.algolia.search.saas.data.search.SearchResponse
 import com.algolia.search.saas.endpoint.EndpointSearch
 import com.algolia.search.saas.query.clone
 import com.algolia.search.saas.serialize.KeyCursor
@@ -20,39 +21,39 @@ internal class ClientSearch(
 ) : EndpointSearch,
     Client by client {
 
-    private suspend fun search(requestOptions: RequestOptions?): Hits {
+    private suspend fun search(requestOptions: RequestOptions?): SearchResponse {
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes()) { path ->
-            httpClient.get<Hits>(path) {
+            httpClient.get<SearchResponse>(path) {
                 setRequestOptions(requestOptions)
             }
         }
     }
 
-    override suspend fun search(query: Query?, requestOptions: RequestOptions?): Hits {
+    override suspend fun search(query: Query?, requestOptions: RequestOptions?): SearchResponse {
         val copy = query?.clone()
 
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/query")) { path ->
-            httpClient.post<Hits>(path) {
+            httpClient.post<SearchResponse>(path) {
                 setRequestOptions(requestOptions)
                 setBody(copy)
             }
         }
     }
 
-    override suspend fun browse(query: Query?, requestOptions: RequestOptions?): Hits {
+    override suspend fun browse(query: Query?, requestOptions: RequestOptions?): SearchResponse {
         val copy = query?.clone()
 
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
-            httpClient.post<Hits>(path) {
+            httpClient.post<SearchResponse>(path) {
                 setRequestOptions(requestOptions)
                 setBody(copy)
             }
         }
     }
 
-    override suspend fun browse(cursor: Cursor, requestOptions: RequestOptions?): Hits {
+    override suspend fun browse(cursor: Cursor, requestOptions: RequestOptions?): SearchResponse {
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
-            httpClient.get<Hits>(path) {
+            httpClient.get<SearchResponse>(path) {
                 setRequestOptions(requestOptions)
                 parameter(KeyCursor, cursor)
             }
