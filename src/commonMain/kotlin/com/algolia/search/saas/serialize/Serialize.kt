@@ -1,6 +1,6 @@
 package com.algolia.search.saas.serialize
 
-import com.algolia.search.saas.model.api_key.APIKeyCreateBody
+import com.algolia.search.saas.model.apiKey.APIKeyCreateBody
 import com.algolia.search.saas.model.search.Query
 import com.algolia.search.saas.model.settings.Settings
 import com.algolia.search.saas.model.search.RankingInfo

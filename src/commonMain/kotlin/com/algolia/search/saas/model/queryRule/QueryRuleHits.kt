@@ -1,4 +1,4 @@
-package com.algolia.search.saas.model.query_rule
+package com.algolia.search.saas.model.queryRule
 
 import kotlinx.serialization.Serializable
 

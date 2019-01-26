@@ -1,4 +1,4 @@
-package com.algolia.search.saas.model.query_rule
+package com.algolia.search.saas.model.queryRule
 
 import com.algolia.search.saas.model.Attribute
 import com.algolia.search.saas.model.Raw

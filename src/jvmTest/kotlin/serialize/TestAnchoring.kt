@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.model.query_rule.Anchoring
-import com.algolia.search.saas.model.query_rule.Anchoring.*
+import com.algolia.search.saas.model.queryRule.Anchoring
+import com.algolia.search.saas.model.queryRule.Anchoring.*
 import com.algolia.search.saas.serialize.KeyContains
 import com.algolia.search.saas.serialize.KeyEndsWith
 import com.algolia.search.saas.serialize.KeyIs

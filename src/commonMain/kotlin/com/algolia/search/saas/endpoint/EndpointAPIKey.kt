@@ -2,7 +2,7 @@ package com.algolia.search.saas.endpoint
 
 import com.algolia.search.saas.model.APIKey
 import com.algolia.search.saas.model.IndexName
-import com.algolia.search.saas.model.api_key.*
+import com.algolia.search.saas.model.apiKey.*
 import com.algolia.search.saas.model.indexing.TaskUpdateObject
 import com.algolia.search.saas.model.search.Query
 

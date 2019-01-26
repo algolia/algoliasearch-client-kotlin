@@ -1,4 +1,4 @@
-package com.algolia.search.saas.model.api_key
+package com.algolia.search.saas.model.apiKey
 
 import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.*
