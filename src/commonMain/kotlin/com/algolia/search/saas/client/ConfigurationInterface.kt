@@ -1,6 +1,6 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.model.api_key.APIKey
+import com.algolia.search.saas.model.APIKey
 import com.algolia.search.saas.model.ApplicationID
 import io.ktor.client.features.logging.LogLevel
 

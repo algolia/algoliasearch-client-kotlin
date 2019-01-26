@@ -1,7 +1,6 @@
-package com.algolia.search.saas.model.api_key
+package com.algolia.search.saas.model
 
 import com.algolia.search.saas.exception.EmptyStringException
-import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.toAPIKey
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer

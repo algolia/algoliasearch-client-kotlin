@@ -6,7 +6,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
 
 
-@Serializable(ACL::class)
+@Serializable(ACL.Companion::class)
 sealed class ACL(override val raw: String) : Raw<String> {
 
     object Search : ACL(KeySearch)

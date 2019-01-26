@@ -35,36 +35,36 @@ internal class TestClientAPIKey {
     @Test
     fun list() {
         runBlocking {
-            val get = admin.listAPIKeys()
+            val response = admin.listAPIKeys()
 
-            get.isNotEmpty().shouldBeTrue()
+            response.keys.isNotEmpty().shouldBeTrue()
         }
     }
 
     @Test
     fun listIndex() {
         runBlocking {
-            val get = admin.listIndexAPIKeys(indexName)
+            val response = admin.listIndexAPIKeys(indexName)
 
-            get.isEmpty().shouldBeTrue()
+            response.keys.isEmpty().shouldBeTrue()
         }
     }
 
     @Test
     fun listIndexes() {
         runBlocking {
-            val get = admin.listIndexAPIKeys()
+            val response = admin.listIndexAPIKeys()
 
-            get.isNotEmpty().shouldBeTrue()
+            response.keys.isNotEmpty().shouldBeTrue()
         }
     }
 
     @Test
     fun getPermission() {
         runBlocking {
-            val get = admin.getAPIKeyPermission(apiKey)
+            val response = admin.getAPIKeyPermission(apiKey)
 
-            get.rights.isNotEmpty().shouldBeTrue()
+            response.rights.isNotEmpty().shouldBeTrue()
         }
     }
 

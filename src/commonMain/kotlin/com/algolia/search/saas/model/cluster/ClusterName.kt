@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
-@Serializable(ClusterName::class)
+@Serializable(ClusterName.Companion::class)
 data class ClusterName(override val raw: String) : Raw<String> {
 
     init {

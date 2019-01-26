@@ -1,7 +1,7 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.model.*
-import com.algolia.search.saas.model.api_key.APIKey
+import com.algolia.search.saas.model.APIKey
 import com.algolia.search.saas.model.multiple_index.IndexQuery
 import com.algolia.search.saas.model.multiple_index.MultipleQueriesStrategy
 import com.algolia.search.saas.model.search.Query

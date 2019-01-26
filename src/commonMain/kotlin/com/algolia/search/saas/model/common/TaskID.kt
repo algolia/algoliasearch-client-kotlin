@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.LongSerializer
 
 
-@Serializable(TaskID::class)
+@Serializable(TaskID.Companion::class)
 data class TaskID(override val raw: Long) : Raw<Long> {
 
     override fun toString(): String {

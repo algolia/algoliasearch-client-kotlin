@@ -2,7 +2,6 @@ package serialize
 
 import attributeA
 import com.algolia.search.saas.model.indexing.PartialUpdate
-import com.algolia.search.saas.model.indexing.Value
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.json
@@ -39,8 +38,8 @@ internal class TestPartialUpdate : TestSerializer<PartialUpdate>(PartialUpdate) 
             partialUpdate.attribute.raw to json {
                 Key_Operation to key
                 when (val value = partialUpdate.value) {
-                    is Value.String -> KeyValue to value.raw
-                    is Value.Number -> KeyValue to value.raw
+                    is PartialUpdate.Value.String -> KeyValue to value.raw
+                    is PartialUpdate.Value.Number -> KeyValue to value.raw
                 }
             }
         }

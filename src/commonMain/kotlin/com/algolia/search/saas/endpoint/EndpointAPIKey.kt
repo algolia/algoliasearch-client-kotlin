@@ -1,8 +1,9 @@
 package com.algolia.search.saas.endpoint
 
+import com.algolia.search.saas.model.APIKey
 import com.algolia.search.saas.model.IndexName
-import com.algolia.search.saas.model.indexing.TaskUpdateObject
 import com.algolia.search.saas.model.api_key.*
+import com.algolia.search.saas.model.indexing.TaskUpdateObject
 import com.algolia.search.saas.model.search.Query
 
 
@@ -17,7 +18,7 @@ interface EndpointAPIKey {
         validity: Long? = null,
         query: Query? = null,
         referers: List<String>? = null
-    ): CreateAPIKey
+    ): SaveAPIKeyResponse
 
     suspend fun updateAPIKey(
         apiKey: APIKey,
@@ -29,13 +30,13 @@ interface EndpointAPIKey {
         validity: Long? = null,
         query: Query? = null,
         referers: List<String>? = null
-    ): CreateAPIKey
+    ): SaveAPIKeyResponse
 
-    suspend fun deleteAPIKey(apiKey: APIKey): DeleteAPIKey
+    suspend fun deleteAPIKey(apiKey: APIKey): DeleteAPIKeyResponse
 
-    suspend fun listAPIKeys(): List<GetAPIKey>
+    suspend fun listAPIKeys(): ListAPiKeysResponse
 
-    suspend fun getAPIKeyPermission(apiKey: APIKey): GetAPIKey
+    suspend fun getAPIKeyPermission(apiKey: APIKey): APIKeyResponse
 
     suspend fun addIndexAPIKey(
         indexName: IndexName,
@@ -46,7 +47,7 @@ interface EndpointAPIKey {
         validity: Long? = null,
         query: Query? = null,
         referers: List<String>? = null
-    ): CreateAPIKey
+    ): SaveAPIKeyResponse
 
     suspend fun updateIndexAPIKey(
         indexName: IndexName,
@@ -59,11 +60,11 @@ interface EndpointAPIKey {
         referers: List<String>? = null
     ): TaskUpdateObject
 
-    suspend fun deleteIndexAPIKey(indexName: IndexName, apiKey: APIKey): DeleteAPIKey
+    suspend fun deleteIndexAPIKey(indexName: IndexName, apiKey: APIKey): DeleteAPIKeyResponse
 
-    suspend fun getIndexAPIKey(indexName: IndexName, apiKey: APIKey): GetAPIKey
+    suspend fun getIndexAPIKey(indexName: IndexName, apiKey: APIKey): APIKeyResponse
 
-    suspend fun listIndexAPIKeys(indexName: IndexName): List<GetAPIKey>
+    suspend fun listIndexAPIKeys(indexName: IndexName): ListAPiKeysResponse
 
-    suspend fun listIndexAPIKeys(): List<GetAPIKey>
+    suspend fun listIndexAPIKeys(): ListAPiKeysResponse
 }

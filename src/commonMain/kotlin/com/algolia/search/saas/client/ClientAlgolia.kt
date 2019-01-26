@@ -5,7 +5,7 @@ import com.algolia.search.saas.endpoint.ConfigurableEndpoints
 import com.algolia.search.saas.endpoint.EndpointAPIKey
 import com.algolia.search.saas.endpoint.EndpointMultiCluster
 import com.algolia.search.saas.endpoint.EndpointMultipleIndex
-import com.algolia.search.saas.model.api_key.APIKey
+import com.algolia.search.saas.model.APIKey
 import com.algolia.search.saas.model.common.TaskIndex
 import com.algolia.search.saas.model.common.TaskStatus
 import io.ktor.client.engine.HttpClientEngine
