@@ -1,6 +1,7 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
+import com.algolia.search.saas.data.search.Query
 import com.algolia.search.saas.endpoint.EndpointAPIKey
 import com.algolia.search.saas.serialize.encodeNoNulls
 import io.ktor.client.request.delete

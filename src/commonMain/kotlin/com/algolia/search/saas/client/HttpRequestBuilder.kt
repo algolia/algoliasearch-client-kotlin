@@ -1,6 +1,7 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.data.*
+import com.algolia.search.saas.data.search.Query
 import com.algolia.search.saas.serialize.*
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header

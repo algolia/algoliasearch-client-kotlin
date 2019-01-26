@@ -1,7 +1,7 @@
 package client
 
 import com.algolia.search.saas.data.Attribute
-import com.algolia.search.saas.data.Query
+import com.algolia.search.saas.data.search.Query
 import com.algolia.search.saas.query.queryBuilder
 import com.algolia.search.saas.query.setFacets
 import com.algolia.search.saas.toAttribute

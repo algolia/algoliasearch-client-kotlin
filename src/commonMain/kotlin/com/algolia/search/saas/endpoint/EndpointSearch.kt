@@ -4,7 +4,7 @@ import com.algolia.search.saas.client.RequestOptions
 import com.algolia.search.saas.data.Attribute
 import com.algolia.search.saas.data.Cursor
 import com.algolia.search.saas.data.IndexName
-import com.algolia.search.saas.data.Query
+import com.algolia.search.saas.data.search.Query
 import com.algolia.search.saas.data.search.FacetHits
 import com.algolia.search.saas.data.search.SearchResponse
 

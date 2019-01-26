@@ -1,11 +1,13 @@
-package com.algolia.search.saas.data
+package com.algolia.search.saas.data.search
 
+import com.algolia.search.saas.data.*
 import com.algolia.search.saas.query.FilterBuilder
 import com.algolia.search.saas.query.OptionalFilterBuilder
 import com.algolia.search.saas.query.QueryHelper
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+
 
 @QueryHelper
 @Serializable

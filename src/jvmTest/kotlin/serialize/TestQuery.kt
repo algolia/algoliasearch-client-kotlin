@@ -4,6 +4,7 @@ import attributes
 import attributesJson
 import boolean
 import com.algolia.search.saas.data.*
+import com.algolia.search.saas.data.search.Query
 import com.algolia.search.saas.serialize.*
 import int
 import kotlinx.serialization.json.json

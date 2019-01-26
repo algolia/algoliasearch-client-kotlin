@@ -1,7 +1,7 @@
 package com.algolia.search.saas.serialize
 
 import com.algolia.search.saas.data.APIKeyCreate
-import com.algolia.search.saas.data.Query
+import com.algolia.search.saas.data.search.Query
 import com.algolia.search.saas.data.Settings
 import com.algolia.search.saas.data.search.RankingInfo
 import io.ktor.http.Parameters
