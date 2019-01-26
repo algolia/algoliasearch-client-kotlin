@@ -3,6 +3,7 @@ package com.algolia.search.saas.serialize
 import com.algolia.search.saas.data.APIKeyCreate
 import com.algolia.search.saas.data.Query
 import com.algolia.search.saas.data.Settings
+import com.algolia.search.saas.data.search.RankingInfo
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.Decoder
@@ -49,3 +50,9 @@ internal fun Settings.encodeNoNulls(): JsonObject {
 internal fun APIKeyCreate.encodeNoNulls(): JsonObject {
     return toJsonObject(APIKeyCreate.serializer()).encodeNoNulls()
 }
+
+internal fun JsonObject.toHighlights() = Json.plain.fromJson(KSerializerHighlights, this)
+
+internal fun JsonObject.toSnippets() = Json.plain.fromJson(KSerializerSnippets, this)
+
+internal fun JsonObject.toRankingInfo() = Json.plain.fromJson(RankingInfo.serializer(), this)

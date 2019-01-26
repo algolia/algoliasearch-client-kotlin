@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class HighlightResult(
+data class Highlight(
     val value: String,
     val matchLevel: MatchLevel,
     val matchedWords: List<String>,

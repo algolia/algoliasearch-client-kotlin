@@ -11,7 +11,7 @@ import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
 
 
-internal object KSerializerSnippets : KSerializer<Map<Attribute, String>> {
+object KSerializerSnippets : KSerializer<Map<Attribute, String>> {
 
     override val descriptor = HashMapClassDesc(
         Attribute.descriptor,
