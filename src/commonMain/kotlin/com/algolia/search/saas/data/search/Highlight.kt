@@ -1,13 +1,18 @@
 package com.algolia.search.saas.data.search
 
+import com.algolia.search.saas.serialize.KeyFullyHighlighted
+import com.algolia.search.saas.serialize.KeyMatchLevel
+import com.algolia.search.saas.serialize.KeyMatchedWords
+import com.algolia.search.saas.serialize.KeyValue
 import kotlinx.serialization.Optional
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 data class Highlight(
-    val value: String,
-    val matchLevel: MatchLevel,
-    val matchedWords: List<String>,
-    @Optional val fullyHighlighted: Boolean? = null
+    @SerialName(KeyValue) val value: String,
+    @SerialName(KeyMatchLevel) val matchLevel: MatchLevel,
+    @SerialName(KeyMatchedWords) val matchedWords: List<String>,
+    @Optional @SerialName(KeyFullyHighlighted) val fullyHighlighted: Boolean? = null
 )
