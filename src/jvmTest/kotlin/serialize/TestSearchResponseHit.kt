@@ -2,12 +2,12 @@ package serialize
 
 import attributeA
 import attributeB
-import com.algolia.search.saas.model.Attribute
-import com.algolia.search.saas.model.search.Highlight
-import com.algolia.search.saas.model.search.SearchResponse
-import com.algolia.search.saas.serialize.KSerializerSnippets
-import com.algolia.search.saas.serialize.KeyHighlightResult
-import com.algolia.search.saas.serialize.KeySnippetResult
+import com.algolia.search.model.Attribute
+import com.algolia.search.model.search.Highlight
+import com.algolia.search.model.search.SearchResponse
+import com.algolia.search.serialize.KSerializerSnippets
+import com.algolia.search.serialize.KeyHighlightResult
+import com.algolia.search.serialize.KeySnippetResult
 import kotlinx.serialization.internal.HashMapSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json

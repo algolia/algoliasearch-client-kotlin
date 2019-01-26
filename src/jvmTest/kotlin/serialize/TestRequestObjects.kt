@@ -2,11 +2,11 @@ package serialize
 
 import attributeA
 import attributeB
-import com.algolia.search.saas.model.ObjectID
-import com.algolia.search.saas.model.multiple_index.RequestObjects
-import com.algolia.search.saas.serialize.KeyAttributesToRetrieve
-import com.algolia.search.saas.serialize.KeyIndexName
-import com.algolia.search.saas.serialize.KeyObjectID
+import com.algolia.search.model.ObjectID
+import com.algolia.search.model.multiple_index.RequestObjects
+import com.algolia.search.serialize.KeyAttributesToRetrieve
+import com.algolia.search.serialize.KeyIndexName
+import com.algolia.search.serialize.KeyObjectID
 import indexA
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray

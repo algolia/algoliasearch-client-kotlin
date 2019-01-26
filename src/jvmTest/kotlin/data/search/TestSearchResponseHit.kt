@@ -2,7 +2,7 @@ package data.search
 
 import attributeA
 import attributeB
-import com.algolia.search.saas.model.search.SearchResponse
+import com.algolia.search.model.search.SearchResponse
 import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.json
 import org.junit.Test

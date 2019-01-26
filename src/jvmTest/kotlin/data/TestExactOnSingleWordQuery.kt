@@ -1,9 +1,9 @@
 package data
 
-import com.algolia.search.saas.model.enums.ExactOnSingleWordQuery.*
-import com.algolia.search.saas.serialize.KeyAttribute
-import com.algolia.search.saas.serialize.KeyNone
-import com.algolia.search.saas.serialize.KeyWord
+import com.algolia.search.model.enums.ExactOnSingleWordQuery.*
+import com.algolia.search.serialize.KeyAttribute
+import com.algolia.search.serialize.KeyNone
+import com.algolia.search.serialize.KeyWord
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

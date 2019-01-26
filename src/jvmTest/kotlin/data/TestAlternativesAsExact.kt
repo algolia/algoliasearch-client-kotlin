@@ -1,9 +1,9 @@
 package data
 
-import com.algolia.search.saas.model.enums.AlternativesAsExact.*
-import com.algolia.search.saas.serialize.KeyIgnorePlurals
-import com.algolia.search.saas.serialize.KeyMultiWordsSynonym
-import com.algolia.search.saas.serialize.KeySingleWordSynonym
+import com.algolia.search.model.enums.AlternativesAsExact.*
+import com.algolia.search.serialize.KeyIgnorePlurals
+import com.algolia.search.serialize.KeyMultiWordsSynonym
+import com.algolia.search.serialize.KeySingleWordSynonym
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

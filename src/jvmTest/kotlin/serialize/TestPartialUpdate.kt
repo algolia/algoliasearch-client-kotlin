@@ -1,8 +1,8 @@
 package serialize
 
 import attributeA
-import com.algolia.search.saas.model.indexing.PartialUpdate
-import com.algolia.search.saas.serialize.*
+import com.algolia.search.model.indexing.PartialUpdate
+import com.algolia.search.serialize.*
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith

@@ -1,11 +1,11 @@
 package serialize
 
 import boolean
-import com.algolia.search.saas.model.enums.BooleanOrQueryLanguages
-import com.algolia.search.saas.model.enums.BooleanOrQueryLanguages.Boolean
-import com.algolia.search.saas.model.enums.BooleanOrQueryLanguages.QueryLanguages
-import com.algolia.search.saas.model.enums.QueryLanguage.Afrikaans
-import com.algolia.search.saas.model.enums.QueryLanguage.Albanian
+import com.algolia.search.model.enums.BooleanOrQueryLanguages
+import com.algolia.search.model.enums.BooleanOrQueryLanguages.Boolean
+import com.algolia.search.model.enums.BooleanOrQueryLanguages.QueryLanguages
+import com.algolia.search.model.enums.QueryLanguage.Afrikaans
+import com.algolia.search.model.enums.QueryLanguage.Albanian
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith

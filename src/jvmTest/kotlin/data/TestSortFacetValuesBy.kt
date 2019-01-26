@@ -1,8 +1,8 @@
 package data
 
-import com.algolia.search.saas.model.enums.SortFacetValuesBy.*
-import com.algolia.search.saas.serialize.KeyAlpha
-import com.algolia.search.saas.serialize.KeyCount
+import com.algolia.search.model.enums.SortFacetValuesBy.*
+import com.algolia.search.serialize.KeyAlpha
+import com.algolia.search.serialize.KeyCount
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

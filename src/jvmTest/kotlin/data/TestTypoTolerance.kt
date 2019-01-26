@@ -1,10 +1,10 @@
 package data
 
 import boolean
-import com.algolia.search.saas.model.enums.TypoTolerance.*
-import com.algolia.search.saas.model.enums.TypoTolerance.Boolean
-import com.algolia.search.saas.serialize.KeyMin
-import com.algolia.search.saas.serialize.KeyStrict
+import com.algolia.search.model.enums.TypoTolerance.*
+import com.algolia.search.model.enums.TypoTolerance.Boolean
+import com.algolia.search.serialize.KeyMin
+import com.algolia.search.serialize.KeyStrict
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

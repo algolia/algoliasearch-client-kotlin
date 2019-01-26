@@ -1,10 +1,10 @@
 package data
 
-import com.algolia.search.saas.model.enums.RemoveWordIfNoResults.*
-import com.algolia.search.saas.serialize.KeyAllOptional
-import com.algolia.search.saas.serialize.KeyFirstWords
-import com.algolia.search.saas.serialize.KeyLastWords
-import com.algolia.search.saas.serialize.KeyNone
+import com.algolia.search.model.enums.RemoveWordIfNoResults.*
+import com.algolia.search.serialize.KeyAllOptional
+import com.algolia.search.serialize.KeyFirstWords
+import com.algolia.search.serialize.KeyLastWords
+import com.algolia.search.serialize.KeyNone
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

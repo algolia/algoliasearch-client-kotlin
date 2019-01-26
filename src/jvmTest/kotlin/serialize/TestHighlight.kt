@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.model.search.Highlight
-import com.algolia.search.saas.model.search.MatchLevel
+import com.algolia.search.model.search.Highlight
+import com.algolia.search.model.search.MatchLevel
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith

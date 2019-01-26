@@ -1,10 +1,10 @@
 package serialize
 
-import com.algolia.search.saas.model.indexing.BatchOperation
-import com.algolia.search.saas.model.multiple_index.BatchOperationIndex
-import com.algolia.search.saas.serialize.KeyAction
-import com.algolia.search.saas.serialize.KeyDelete
-import com.algolia.search.saas.serialize.KeyIndexName
+import com.algolia.search.model.indexing.BatchOperation
+import com.algolia.search.model.multiple_index.BatchOperationIndex
+import com.algolia.search.serialize.KeyAction
+import com.algolia.search.serialize.KeyDelete
+import com.algolia.search.serialize.KeyIndexName
 import indexA
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith

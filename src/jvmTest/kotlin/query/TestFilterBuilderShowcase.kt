@@ -1,8 +1,8 @@
 package query
 
 import buildTest
-import com.algolia.search.saas.model.Attribute
-import com.algolia.search.saas.query.*
+import com.algolia.search.model.Attribute
+import com.algolia.search.query.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

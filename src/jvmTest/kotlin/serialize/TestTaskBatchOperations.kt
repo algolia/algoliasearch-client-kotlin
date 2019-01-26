@@ -1,9 +1,9 @@
 package serialize
 
-import com.algolia.search.saas.model.indexing.TaskBatchOperations
-import com.algolia.search.saas.model.common.TaskIndex
-import com.algolia.search.saas.serialize.KeyTaskID
-import com.algolia.search.saas.toTaskID
+import com.algolia.search.model.indexing.TaskBatchOperations
+import com.algolia.search.model.common.TaskIndex
+import com.algolia.search.serialize.KeyTaskID
+import com.algolia.search.toTaskID
 import indexA
 import indexB
 import kotlinx.serialization.json.json

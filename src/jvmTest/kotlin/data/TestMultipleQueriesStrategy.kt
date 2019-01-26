@@ -1,8 +1,8 @@
 package data
 
-import com.algolia.search.saas.model.multiple_index.MultipleQueriesStrategy.*
-import com.algolia.search.saas.serialize.KeyNone
-import com.algolia.search.saas.serialize.KeyStopIfEnoughMatches
+import com.algolia.search.model.multiple_index.MultipleQueriesStrategy.*
+import com.algolia.search.serialize.KeyNone
+import com.algolia.search.serialize.KeyStopIfEnoughMatches
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.model.enums.AroundRadius
-import com.algolia.search.saas.model.enums.AroundRadius.*
+import com.algolia.search.model.enums.AroundRadius
+import com.algolia.search.model.enums.AroundRadius.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

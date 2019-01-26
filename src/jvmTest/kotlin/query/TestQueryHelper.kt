@@ -1,13 +1,13 @@
 package query
 
 import buildTest
-import com.algolia.search.saas.model.*
-import com.algolia.search.saas.model.enums.AlternativesAsExact
-import com.algolia.search.saas.model.enums.QueryLanguage
-import com.algolia.search.saas.model.enums.ResponseFields
-import com.algolia.search.saas.model.search.Query
-import com.algolia.search.saas.query.*
-import com.algolia.search.saas.to
+import com.algolia.search.model.*
+import com.algolia.search.model.enums.AlternativesAsExact
+import com.algolia.search.model.enums.QueryLanguage
+import com.algolia.search.model.enums.ResponseFields
+import com.algolia.search.model.search.Query
+import com.algolia.search.query.*
+import com.algolia.search.to
 import facetA
 import facetB
 import groupOrA

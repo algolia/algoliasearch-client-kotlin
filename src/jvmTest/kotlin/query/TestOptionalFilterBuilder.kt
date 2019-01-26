@@ -1,6 +1,6 @@
 package query
 
-import com.algolia.search.saas.query.OptionalFilterBuilder
+import com.algolia.search.query.OptionalFilterBuilder
 import facetA
 import facetB
 import groupAndA

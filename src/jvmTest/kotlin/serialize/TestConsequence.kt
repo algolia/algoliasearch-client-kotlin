@@ -1,8 +1,8 @@
 package serialize
 
 import attributeA
-import com.algolia.search.saas.model.queryRule.*
-import com.algolia.search.saas.serialize.*
+import com.algolia.search.model.queryRule.*
+import com.algolia.search.serialize.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray

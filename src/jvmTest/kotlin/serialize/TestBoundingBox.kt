@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.model.enums.BoundingBox
-import com.algolia.search.saas.to
+import com.algolia.search.model.enums.BoundingBox
+import com.algolia.search.to
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

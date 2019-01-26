@@ -1,12 +1,12 @@
 package serialize
 
 import attributeA
-import com.algolia.search.saas.model.queryRule.Anchoring
-import com.algolia.search.saas.model.queryRule.Condition
-import com.algolia.search.saas.model.queryRule.Pattern
-import com.algolia.search.saas.serialize.KeyAnchoring
-import com.algolia.search.saas.serialize.KeyIs
-import com.algolia.search.saas.serialize.KeyPattern
+import com.algolia.search.model.queryRule.Anchoring
+import com.algolia.search.model.queryRule.Condition
+import com.algolia.search.model.queryRule.Pattern
+import com.algolia.search.serialize.KeyAnchoring
+import com.algolia.search.serialize.KeyIs
+import com.algolia.search.serialize.KeyPattern
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

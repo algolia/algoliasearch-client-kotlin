@@ -1,15 +1,15 @@
 package client
 
-import com.algolia.search.saas.client.Index
-import com.algolia.search.saas.model.ObjectID
-import com.algolia.search.saas.model.indexing.PartialUpdate
-import com.algolia.search.saas.model.common.TaskStatus
-import com.algolia.search.saas.query.FilterFacet
-import com.algolia.search.saas.query.GroupAnd
-import com.algolia.search.saas.query.queryBuilder
-import com.algolia.search.saas.serialize.KeyObjectID
-import com.algolia.search.saas.toAttribute
-import com.algolia.search.saas.toObjectID
+import com.algolia.search.client.Index
+import com.algolia.search.model.ObjectID
+import com.algolia.search.model.indexing.PartialUpdate
+import com.algolia.search.model.common.TaskStatus
+import com.algolia.search.query.FilterFacet
+import com.algolia.search.query.GroupAnd
+import com.algolia.search.query.queryBuilder
+import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.toAttribute
+import com.algolia.search.toObjectID
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking

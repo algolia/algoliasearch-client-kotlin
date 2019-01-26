@@ -1,7 +1,7 @@
 package data
 
-import com.algolia.search.saas.model.enums.AroundRadius.*
-import com.algolia.search.saas.serialize.KeyAll
+import com.algolia.search.model.enums.AroundRadius.*
+import com.algolia.search.serialize.KeyAll
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

@@ -1,7 +1,7 @@
 package data
 
-import com.algolia.search.saas.model.enums.Polygon
-import com.algolia.search.saas.to
+import com.algolia.search.model.enums.Polygon
+import com.algolia.search.to
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

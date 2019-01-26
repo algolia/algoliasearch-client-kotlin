@@ -1,9 +1,9 @@
 package data
 
-import com.algolia.search.saas.model.search.MatchLevel.*
-import com.algolia.search.saas.serialize.KeyFull
-import com.algolia.search.saas.serialize.KeyNone
-import com.algolia.search.saas.serialize.KeyPartial
+import com.algolia.search.model.search.MatchLevel.*
+import com.algolia.search.serialize.KeyFull
+import com.algolia.search.serialize.KeyNone
+import com.algolia.search.serialize.KeyPartial
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

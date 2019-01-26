@@ -1,7 +1,7 @@
 package data
 
-import com.algolia.search.saas.model.Attribute
-import com.algolia.search.saas.exception.EmptyStringException
+import com.algolia.search.model.Attribute
+import com.algolia.search.exception.EmptyStringException
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

@@ -1,10 +1,10 @@
 package client
 
-import com.algolia.search.saas.model.Attribute
-import com.algolia.search.saas.model.search.Query
-import com.algolia.search.saas.query.queryBuilder
-import com.algolia.search.saas.query.setFacets
-import com.algolia.search.saas.toAttribute
+import com.algolia.search.model.Attribute
+import com.algolia.search.model.search.Query
+import com.algolia.search.query.queryBuilder
+import com.algolia.search.query.setFacets
+import com.algolia.search.toAttribute
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith

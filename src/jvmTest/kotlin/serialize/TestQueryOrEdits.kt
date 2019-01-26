@@ -1,8 +1,8 @@
 package serialize
 
-import com.algolia.search.saas.model.queryRule.Edit
-import com.algolia.search.saas.model.queryRule.QueryOrEdits
-import com.algolia.search.saas.serialize.KeyEdits
+import com.algolia.search.model.queryRule.Edit
+import com.algolia.search.model.queryRule.QueryOrEdits
+import com.algolia.search.serialize.KeyEdits
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.json

@@ -1,7 +1,7 @@
-import com.algolia.search.saas.model.Attribute
-import com.algolia.search.saas.model.IndexName
-import com.algolia.search.saas.model.ObjectID
-import com.algolia.search.saas.query.*
+import com.algolia.search.model.Attribute
+import com.algolia.search.model.IndexName
+import com.algolia.search.model.ObjectID
+import com.algolia.search.query.*
 import kotlinx.serialization.json.jsonArray
 
 

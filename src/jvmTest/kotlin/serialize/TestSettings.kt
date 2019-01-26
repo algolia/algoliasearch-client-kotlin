@@ -4,9 +4,9 @@ import attributeA
 import attributes
 import attributesJson
 import boolean
-import com.algolia.search.saas.model.enums.*
-import com.algolia.search.saas.model.settings.Settings
-import com.algolia.search.saas.serialize.*
+import com.algolia.search.model.enums.*
+import com.algolia.search.model.settings.Settings
+import com.algolia.search.serialize.*
 import indexA
 import int
 import kotlinx.serialization.json.json

@@ -1,6 +1,6 @@
 package host
-import com.algolia.search.saas.client.requestOptions
-import com.algolia.search.saas.toUserID
+import com.algolia.search.client.requestOptions
+import com.algolia.search.toUserID
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

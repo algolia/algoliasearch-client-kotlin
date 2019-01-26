@@ -1,8 +1,8 @@
 package client
 
 import attributeA
-import com.algolia.search.saas.model.common.TaskStatus
-import com.algolia.search.saas.model.queryRule.*
+import com.algolia.search.model.common.TaskStatus
+import com.algolia.search.model.queryRule.*
 import kotlinx.coroutines.runBlocking
 import objectIDA
 import objectIDB

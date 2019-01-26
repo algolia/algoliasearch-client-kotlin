@@ -1,9 +1,9 @@
 package serialize
 
 import attributeB
-import com.algolia.search.saas.model.Attribute
-import com.algolia.search.saas.model.search.Facet
-import com.algolia.search.saas.serialize.KSerializerFacets
+import com.algolia.search.model.Attribute
+import com.algolia.search.model.search.Facet
+import com.algolia.search.serialize.KSerializerFacets
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

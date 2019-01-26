@@ -3,7 +3,7 @@ package query
 import attributeA
 import attributeB
 import attributeC
-import com.algolia.search.saas.query.*
+import com.algolia.search.query.*
 import comparisonA
 import comparisonB
 import facetA

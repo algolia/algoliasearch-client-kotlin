@@ -1,7 +1,7 @@
 package data
 
-import com.algolia.search.saas.model.enums.QueryLanguage.*
-import com.algolia.search.saas.serialize.*
+import com.algolia.search.model.enums.QueryLanguage.*
+import com.algolia.search.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

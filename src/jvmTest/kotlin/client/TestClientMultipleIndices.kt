@@ -1,10 +1,10 @@
 package client
 
-import com.algolia.search.saas.model.multiple_index.IndexQuery
-import com.algolia.search.saas.model.ObjectID
-import com.algolia.search.saas.model.search.Query
-import com.algolia.search.saas.model.multiple_index.RequestObjects
-import com.algolia.search.saas.serialize.KeyObjectID
+import com.algolia.search.model.multiple_index.IndexQuery
+import com.algolia.search.model.ObjectID
+import com.algolia.search.model.search.Query
+import com.algolia.search.model.multiple_index.RequestObjects
+import com.algolia.search.serialize.KeyObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.content
 import org.junit.Test

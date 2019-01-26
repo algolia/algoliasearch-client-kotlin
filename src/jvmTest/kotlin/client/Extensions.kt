@@ -1,11 +1,11 @@
 package client
 
-import com.algolia.search.saas.client.ClientAlgolia
-import com.algolia.search.saas.model.*
-import com.algolia.search.saas.model.APIKey
-import com.algolia.search.saas.model.indexing.Indexable
-import com.algolia.search.saas.toAPIKey
-import com.algolia.search.saas.toApplicationID
+import com.algolia.search.client.ClientAlgolia
+import com.algolia.search.model.*
+import com.algolia.search.model.APIKey
+import com.algolia.search.model.indexing.Indexable
+import com.algolia.search.toAPIKey
+import com.algolia.search.toApplicationID
 import kotlinx.serialization.Serializable
 
 internal val adminKey = APIKey(System.getenv("KOTLIN_CLIENT_ADMIN_KEY"))

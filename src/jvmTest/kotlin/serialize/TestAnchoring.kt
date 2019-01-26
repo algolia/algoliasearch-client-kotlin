@@ -1,11 +1,11 @@
 package serialize
 
-import com.algolia.search.saas.model.queryRule.Anchoring
-import com.algolia.search.saas.model.queryRule.Anchoring.*
-import com.algolia.search.saas.serialize.KeyContains
-import com.algolia.search.saas.serialize.KeyEndsWith
-import com.algolia.search.saas.serialize.KeyIs
-import com.algolia.search.saas.serialize.KeyStartsWith
+import com.algolia.search.model.queryRule.Anchoring
+import com.algolia.search.model.queryRule.Anchoring.*
+import com.algolia.search.serialize.KeyContains
+import com.algolia.search.serialize.KeyEndsWith
+import com.algolia.search.serialize.KeyIs
+import com.algolia.search.serialize.KeyStartsWith
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

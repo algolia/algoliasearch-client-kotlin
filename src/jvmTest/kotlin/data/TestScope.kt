@@ -1,9 +1,9 @@
 package data
 
-import com.algolia.search.saas.model.index.Scope.*
-import com.algolia.search.saas.serialize.KeyRules
-import com.algolia.search.saas.serialize.KeySettings
-import com.algolia.search.saas.serialize.KeySynonyms
+import com.algolia.search.model.index.Scope.*
+import com.algolia.search.serialize.KeyRules
+import com.algolia.search.serialize.KeySettings
+import com.algolia.search.serialize.KeySynonyms
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

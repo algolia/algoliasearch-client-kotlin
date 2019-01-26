@@ -1,6 +1,6 @@
 package query
 
-import com.algolia.search.saas.query.NumericOperator
+import com.algolia.search.query.NumericOperator
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
