@@ -2,6 +2,7 @@ package client
 
 import com.algolia.search.saas.client.ClientAlgolia
 import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.api_key.APIKey
 import com.algolia.search.saas.toAPIKey
 import com.algolia.search.saas.toApplicationID
 import kotlinx.serialization.Serializable

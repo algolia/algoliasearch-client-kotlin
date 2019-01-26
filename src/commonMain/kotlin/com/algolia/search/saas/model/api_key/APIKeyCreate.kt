@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.api_key
 
+import com.algolia.search.saas.model.IndexName
 import com.algolia.search.saas.model.search.Query
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName

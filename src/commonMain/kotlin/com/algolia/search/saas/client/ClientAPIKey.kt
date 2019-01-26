@@ -3,6 +3,7 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.model.*
 import com.algolia.search.saas.model.search.Query
 import com.algolia.search.saas.endpoint.EndpointAPIKey
+import com.algolia.search.saas.model.api_key.*
 import com.algolia.search.saas.serialize.encodeNoNulls
 import io.ktor.client.request.delete
 import io.ktor.client.request.get

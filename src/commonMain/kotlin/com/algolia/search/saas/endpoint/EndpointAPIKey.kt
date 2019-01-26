@@ -1,6 +1,8 @@
 package com.algolia.search.saas.endpoint
 
-import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.IndexName
+import com.algolia.search.saas.model.TaskUpdateObject
+import com.algolia.search.saas.model.api_key.*
 import com.algolia.search.saas.model.search.Query
 
 

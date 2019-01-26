@@ -1,11 +1,12 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.api_key
 
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
 
 
-@Serializable(ACL.Companion::class)
+@Serializable(ACL::class)
 sealed class ACL(override val raw: String) : Raw<String> {
 
     object Search : ACL(KeySearch)
