@@ -2,6 +2,7 @@ package com.algolia.search.saas.endpoint
 
 import com.algolia.search.saas.client.RequestOptions
 import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.indexing.*
 import com.algolia.search.saas.model.search.Query
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JsonObject

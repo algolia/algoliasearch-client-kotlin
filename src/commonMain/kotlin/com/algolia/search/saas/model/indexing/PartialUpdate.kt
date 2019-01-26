@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.indexing
 
+import com.algolia.search.saas.model.Attribute
 import com.algolia.search.saas.serialize.*
 import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.Decoder
@@ -12,19 +13,19 @@ import kotlinx.serialization.json.intOrNull
 import kotlinx.serialization.json.json
 
 
-internal sealed class Value<T> {
-
-    abstract val raw: T
-
-    data class String(override val raw: kotlin.String) : Value<kotlin.String>()
-
-    data class Number(override val raw: kotlin.Number) : Value<kotlin.Number>()
-}
-
 sealed class PartialUpdate(
     open val attribute: Attribute,
     internal open val value: Value<*>
 ) {
+
+    internal sealed class Value<T> {
+
+        abstract val raw: T
+
+        data class String(override val raw: kotlin.String) : Value<kotlin.String>()
+
+        data class Number(override val raw: kotlin.Number) : Value<kotlin.Number>()
+    }
 
     data class Increment internal constructor(
         override val attribute: Attribute,
@@ -106,11 +107,11 @@ sealed class PartialUpdate(
             val value = int ?: double ?: Value.String(raw.content)
 
             return when (operation) {
-                KeyIncrement -> PartialUpdate.Increment(attribute, value)
-                KeyDecrement -> PartialUpdate.Decrement(attribute, value)
-                KeyAdd -> PartialUpdate.Add(attribute, value)
-                KeyRemove -> PartialUpdate.Remove(attribute, value)
-                KeyAddUnique -> PartialUpdate.AddUnique(attribute, value)
+                KeyIncrement -> Increment(attribute, value)
+                KeyDecrement -> Decrement(attribute, value)
+                KeyAdd -> Add(attribute, value)
+                KeyRemove -> Remove(attribute, value)
+                KeyAddUnique -> AddUnique(attribute, value)
                 else -> throw Exception("Unknown operation $operation")
             }
         }

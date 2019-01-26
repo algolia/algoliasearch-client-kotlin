@@ -2,7 +2,7 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.model.QueryRule
 import com.algolia.search.saas.model.Synonym
-import com.algolia.search.saas.model.TaskBatchOperations
+import com.algolia.search.saas.model.indexing.TaskBatchOperations
 import com.algolia.search.saas.model.TaskUpdateIndex
 import com.algolia.search.saas.endpoint.ConfigurableEndpoints
 import com.algolia.search.saas.host.RetryLogic

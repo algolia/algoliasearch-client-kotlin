@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.model.BatchOperation.*
+import com.algolia.search.saas.model.indexing.BatchOperation.*
 import com.algolia.search.saas.model.ObjectID
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.json.json

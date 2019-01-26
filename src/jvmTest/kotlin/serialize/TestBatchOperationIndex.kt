@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.saas.model.BatchOperation
+import com.algolia.search.saas.model.indexing.BatchOperation
 import com.algolia.search.saas.model.BatchOperationIndex
 import com.algolia.search.saas.serialize.KeyAction
 import com.algolia.search.saas.serialize.KeyDelete

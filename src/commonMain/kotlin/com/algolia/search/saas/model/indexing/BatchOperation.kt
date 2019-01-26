@@ -1,5 +1,8 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.indexing
 
+import com.algolia.search.saas.model.Indexable
+import com.algolia.search.saas.model.ObjectID
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.*
 import com.algolia.search.saas.toObjectID
 import kotlinx.serialization.*
@@ -16,7 +19,12 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
         companion object {
 
             fun <T> from(data: T, serializer: KSerializer<T>): AddObject {
-                return AddObject(Json.plain.toJson(serializer, data).jsonObject)
+                return AddObject(
+                    Json.plain.toJson(
+                        serializer,
+                        data
+                    ).jsonObject
+                )
             }
         }
     }
@@ -29,7 +37,12 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
         companion object {
 
             fun <T : Indexable> from(data: T, serializer: KSerializer<T>): ReplaceObject {
-                return ReplaceObject(Json.plain.toJson(serializer, data).jsonObject, data.objectID)
+                return ReplaceObject(
+                    Json.plain.toJson(
+                        serializer,
+                        data
+                    ).jsonObject, data.objectID
+                )
             }
         }
     }
@@ -84,12 +97,24 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
 
         override fun serialize(encoder: Encoder, obj: BatchOperation) {
             val json = when (obj) {
-                is AddObject -> batchJson(obj) { KeyBody to obj.json }
-                is ReplaceObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectID to obj.objectID } }
-                is UpdateObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectID to obj.objectID } }
-                is DeleteObject -> batchJson(obj) { KeyBody to json { KeyObjectID to obj.objectID.raw } }
-                is DeleteIndex -> batchJson(obj) {}
-                is ClearIndex -> batchJson(obj) {}
+                is AddObject -> batchJson(
+                    obj
+                ) { KeyBody to obj.json }
+                is ReplaceObject -> batchJson(
+                    obj
+                ) { KeyBody to obj.json.apply { KeyObjectID to obj.objectID } }
+                is UpdateObject -> batchJson(
+                    obj
+                ) { KeyBody to obj.json.apply { KeyObjectID to obj.objectID } }
+                is DeleteObject -> batchJson(
+                    obj
+                ) { KeyBody to json { KeyObjectID to obj.objectID.raw } }
+                is DeleteIndex -> batchJson(
+                    obj
+                ) {}
+                is ClearIndex -> batchJson(
+                    obj
+                ) {}
             }
 
             encoder.asJsonOutput().encodeJson(json)
@@ -103,9 +128,19 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
 
             return when (val action = element[KeyAction].content) {
                 KeyAddObject -> AddObject(element.body)
-                KeyUpdateObject -> ReplaceObject(element.body, element.objectID)
-                KeyPartialUpdateObject -> UpdateObject(element.body, element.objectID)
-                KeyPartialUpdateObjectNoCreate -> UpdateObject(element.body, element.objectID, false)
+                KeyUpdateObject -> ReplaceObject(
+                    element.body,
+                    element.objectID
+                )
+                KeyPartialUpdateObject -> UpdateObject(
+                    element.body,
+                    element.objectID
+                )
+                KeyPartialUpdateObjectNoCreate -> UpdateObject(
+                    element.body,
+                    element.objectID,
+                    false
+                )
                 KeyDeleteObject -> DeleteObject(element.objectID)
                 KeyDelete -> DeleteIndex
                 KeyClear -> ClearIndex

@@ -1,5 +1,6 @@
 package com.algolia.search.saas.model
 
+import com.algolia.search.saas.model.indexing.BatchOperation
 import com.algolia.search.saas.serialize.KeyIndexName
 import com.algolia.search.saas.serialize.asJsonInput
 import com.algolia.search.saas.serialize.asJsonOutput

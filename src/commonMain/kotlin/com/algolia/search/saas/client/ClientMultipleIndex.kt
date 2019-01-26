@@ -3,6 +3,7 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.model.*
 import com.algolia.search.saas.model.search.SearchResponse
 import com.algolia.search.saas.endpoint.EndpointMultipleIndex
+import com.algolia.search.saas.model.indexing.TaskBatchOperations
 import com.algolia.search.saas.query.clone
 import com.algolia.search.saas.serialize.KeyRequests
 import com.algolia.search.saas.serialize.KeyResults

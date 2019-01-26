@@ -1,5 +1,7 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.indexing
 
+import com.algolia.search.saas.model.ObjectID
+import com.algolia.search.saas.model.TaskIndex
 import com.algolia.search.saas.serialize.KeyObjectIDs
 import com.algolia.search.saas.serialize.KeyTaskId
 import com.algolia.search.saas.serialize.asJsonInput
