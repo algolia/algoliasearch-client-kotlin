@@ -1,4 +1,4 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.query_rule
 
 import com.algolia.search.saas.serialize.KeyEdits
 import com.algolia.search.saas.serialize.asJsonInput
@@ -20,7 +20,8 @@ sealed class QueryOrEdits {
         override fun serialize(encoder: Encoder, obj: QueryOrEdits) {
             val json = when (obj) {
                 is Query -> JsonLiteral(obj.query)
-                is Edits -> json { KeyEdits to Json.plain.toJson(Edit.list, obj.edits) }
+                is Edits -> json { KeyEdits to Json.plain.toJson(
+                    Edit.list, obj.edits) }
             }
 
             encoder.asJsonOutput().encodeJson(json)
@@ -32,7 +33,12 @@ sealed class QueryOrEdits {
             return try {
                 Query(json.content)
             } catch (exception: JsonElementTypeMismatchException) {
-                Edits(Json.plain.fromJson(Edit.list, json.jsonObject[KeyEdits]))
+                Edits(
+                    Json.plain.fromJson(
+                        Edit.list,
+                        json.jsonObject[KeyEdits]
+                    )
+                )
             }
         }
     }

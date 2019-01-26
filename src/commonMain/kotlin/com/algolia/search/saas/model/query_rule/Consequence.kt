@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.query_rule
 
+import com.algolia.search.saas.model.ObjectID
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*

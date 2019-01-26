@@ -1,7 +1,7 @@
 package serialize
 
 import attributeA
-import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.query_rule.*
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
@@ -18,9 +18,13 @@ import unknown
 internal class TestConsequence : TestSerializer<Consequence>(Consequence) {
 
     private val edits = listOf(Edit(unknown))
-    private val paramsQuery = Params(query = QueryOrEdits.Query(unknown))
+    private val paramsQuery = Params(
+        query = QueryOrEdits.Query(unknown)
+    )
     private val paramsQuerySerialized = paramsQuery.toJsonObject(Params.serializer()).encodeNoNulls()
-    private val paramsEdits = Params(query = QueryOrEdits.Edits(edits))
+    private val paramsEdits = Params(
+        query = QueryOrEdits.Edits(edits)
+    )
     private val paramsEditsSerialized = paramsEdits.toJsonObject(Params.serializer()).encodeNoNulls()
     private val filters = listOf(AutomaticFacetFilters(attributeA, 1, true))
     private val objectIDs = listOf(objectIDA, objectIDB)

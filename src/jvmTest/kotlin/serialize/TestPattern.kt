@@ -1,9 +1,9 @@
 package serialize
 
 import attributeA
-import com.algolia.search.saas.model.Pattern
-import com.algolia.search.saas.model.Pattern.Facet
-import com.algolia.search.saas.model.Pattern.Literal
+import com.algolia.search.saas.model.query_rule.Pattern
+import com.algolia.search.saas.model.query_rule.Pattern.Facet
+import com.algolia.search.saas.model.query_rule.Pattern.Literal
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

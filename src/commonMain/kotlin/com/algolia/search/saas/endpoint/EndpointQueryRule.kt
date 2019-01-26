@@ -3,9 +3,9 @@ package com.algolia.search.saas.endpoint
 import com.algolia.search.saas.client.RequestOptions
 import com.algolia.search.saas.model.IndexName
 import com.algolia.search.saas.model.ObjectID
-import com.algolia.search.saas.model.QueryRuleHits
+import com.algolia.search.saas.model.query_rule.QueryRuleHits
 import com.algolia.search.saas.model.TaskUpdateIndex
-import com.algolia.search.saas.model.QueryRule
+import com.algolia.search.saas.model.query_rule.QueryRule
 
 
 interface EndpointQueryRule {

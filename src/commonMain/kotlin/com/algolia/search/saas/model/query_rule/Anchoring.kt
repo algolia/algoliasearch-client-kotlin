@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.query_rule
 
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.KeyContains
 import com.algolia.search.saas.serialize.KeyEndsWith
 import com.algolia.search.saas.serialize.KeyIs

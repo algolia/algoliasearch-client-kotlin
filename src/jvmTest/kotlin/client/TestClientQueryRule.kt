@@ -2,6 +2,7 @@ package client
 
 import attributeA
 import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.query_rule.*
 import kotlinx.coroutines.runBlocking
 import objectIDA
 import objectIDB
@@ -21,7 +22,11 @@ internal class TestClientQueryRule {
         Anchoring.Is
     )
     private val consequenceA = Consequence(
-        params = Params(query = QueryOrEdits.Query("query")),
+        params = Params(
+            query = QueryOrEdits.Query(
+                "query"
+            )
+        ),
         promote = listOf(Promotion(objectIDA, 0)),
         hide = listOf(objectIDB)
     )

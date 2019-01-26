@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.query_rule
 
+import com.algolia.search.saas.model.Attribute
 import com.algolia.search.saas.model.enums.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable

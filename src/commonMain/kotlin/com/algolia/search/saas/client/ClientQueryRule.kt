@@ -1,8 +1,9 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.model.*
-import com.algolia.search.saas.model.QueryRule
+import com.algolia.search.saas.model.query_rule.QueryRule
 import com.algolia.search.saas.endpoint.EndpointQueryRule
+import com.algolia.search.saas.model.query_rule.QueryRuleHits
 import com.algolia.search.saas.serialize.KeyClearExistingRules
 import com.algolia.search.saas.serialize.KeyQuery
 import com.algolia.search.saas.serialize.encodeNoNulls

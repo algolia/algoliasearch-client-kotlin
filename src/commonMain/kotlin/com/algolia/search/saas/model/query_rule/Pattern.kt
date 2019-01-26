@@ -1,5 +1,7 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.query_rule
 
+import com.algolia.search.saas.model.Attribute
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
