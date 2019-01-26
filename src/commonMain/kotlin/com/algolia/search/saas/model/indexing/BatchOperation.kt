@@ -1,6 +1,5 @@
 package com.algolia.search.saas.model.indexing
 
-import com.algolia.search.saas.model.Indexable
 import com.algolia.search.saas.model.ObjectID
 import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.*

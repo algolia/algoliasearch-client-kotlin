@@ -1,7 +1,7 @@
 package com.algolia.search.saas.client
 
 import com.algolia.search.saas.model.IndexName
-import com.algolia.search.saas.model.Scope
+import com.algolia.search.saas.model.index.Scope
 import com.algolia.search.saas.model.TaskDelete
 import com.algolia.search.saas.model.TaskUpdateIndex
 import com.algolia.search.saas.endpoint.EndpointIndex

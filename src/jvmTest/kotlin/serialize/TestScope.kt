@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.model.Scope
-import com.algolia.search.saas.model.Scope.*
+import com.algolia.search.saas.model.index.Scope
+import com.algolia.search.saas.model.index.Scope.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.model.Scope.*
+import com.algolia.search.saas.model.index.Scope.*
 import com.algolia.search.saas.serialize.KeyRules
 import com.algolia.search.saas.serialize.KeySettings
 import com.algolia.search.saas.serialize.KeySynonyms
