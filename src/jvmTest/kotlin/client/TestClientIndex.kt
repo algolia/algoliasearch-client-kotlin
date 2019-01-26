@@ -2,8 +2,8 @@ package client
 
 import com.algolia.search.saas.client.Index
 import com.algolia.search.saas.model.IndexName
-import com.algolia.search.saas.model.TaskStatus
-import com.algolia.search.saas.model.TaskStatus.Published
+import com.algolia.search.saas.model.common.TaskStatus
+import com.algolia.search.saas.model.common.TaskStatus.Published
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -3,7 +3,7 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.model.IndexName
 import com.algolia.search.saas.model.settings.Settings
 import com.algolia.search.saas.model.settings.SettingsKey
-import com.algolia.search.saas.model.TaskUpdateIndex
+import com.algolia.search.saas.model.common.TaskUpdate
 import com.algolia.search.saas.endpoint.EndpointSettings
 import com.algolia.search.saas.serialize.KeyForwardToReplicas
 import com.algolia.search.saas.serialize.encodeNoNulls
@@ -34,9 +34,9 @@ internal class ClientSettings(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?,
         indexName: IndexName
-    ): TaskUpdateIndex {
+    ): TaskUpdate {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
-            httpClient.put<TaskUpdateIndex>(path) {
+            httpClient.put<TaskUpdate>(path) {
                 setRequestOptions(requestOptions)
                 val map = settings
                     .encodeNoNulls()
@@ -59,11 +59,11 @@ internal class ClientSettings(
         resetToDefault: List<SettingsKey>,
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdateIndex {
+    ): TaskUpdate {
         return setSettings(settings, resetToDefault, forwardToReplicas, requestOptions, indexName)
     }
 
-    override suspend fun copySettings(destination: IndexName, requestOptions: RequestOptions?): TaskUpdateIndex {
+    override suspend fun copySettings(destination: IndexName, requestOptions: RequestOptions?): TaskUpdate {
         val settings = getSettings(requestOptions)
 
         return setSettings(settings, requestOptions = requestOptions)

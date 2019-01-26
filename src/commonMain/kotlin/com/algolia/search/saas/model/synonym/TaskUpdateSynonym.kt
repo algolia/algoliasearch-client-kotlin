@@ -1,8 +1,8 @@
 package com.algolia.search.saas.model.synonym
 
 import com.algolia.search.saas.model.ObjectID
-import com.algolia.search.saas.model.Task
-import com.algolia.search.saas.model.TaskID
+import com.algolia.search.saas.model.common.Task
+import com.algolia.search.saas.model.common.TaskID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

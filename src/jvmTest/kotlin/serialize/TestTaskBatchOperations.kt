@@ -1,7 +1,7 @@
 package serialize
 
 import com.algolia.search.saas.model.indexing.TaskBatchOperations
-import com.algolia.search.saas.model.TaskIndex
+import com.algolia.search.saas.model.common.TaskIndex
 import com.algolia.search.saas.serialize.KeyTaskId
 import com.algolia.search.saas.toTaskID
 import indexA

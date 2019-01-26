@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.model.TaskInfo
-import com.algolia.search.saas.model.TaskStatus
+import com.algolia.search.saas.model.common.TaskInfo
+import com.algolia.search.saas.model.common.TaskStatus
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.common
 
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.KeyNotPublished
 import com.algolia.search.saas.serialize.KeyPublished
 import kotlinx.serialization.Decoder

@@ -2,6 +2,10 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.model.*
 import com.algolia.search.saas.endpoint.EndpointAdvanced
+import com.algolia.search.saas.model.common.Task
+import com.algolia.search.saas.model.common.TaskID
+import com.algolia.search.saas.model.common.TaskInfo
+import com.algolia.search.saas.model.common.TaskStatus
 import io.ktor.client.request.get
 import kotlinx.coroutines.delay
 

@@ -2,6 +2,8 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.model.*
 import com.algolia.search.saas.endpoint.EndpointSynonym
+import com.algolia.search.saas.model.common.TaskDelete
+import com.algolia.search.saas.model.common.TaskUpdate
 import com.algolia.search.saas.model.synonym.Synonym
 import com.algolia.search.saas.model.synonym.SynonymHits
 import com.algolia.search.saas.model.synonym.SynonymType
@@ -41,9 +43,9 @@ internal class ClientSynonym(
         forwardToReplicas: Boolean?,
         replaceExistingSynonyms: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdateIndex {
+    ): TaskUpdate {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/synonyms/batch")) { path ->
-            httpClient.post<TaskUpdateIndex>(path) {
+            httpClient.post<TaskUpdate>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
                 replaceExistingSynonyms?.let { parameter(KeyReplaceExistingSynonyms, it) }
@@ -96,9 +98,9 @@ internal class ClientSynonym(
     override suspend fun clearSynonyms(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdateIndex {
+    ): TaskUpdate {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/synonyms/clear")) { path ->
-            httpClient.post<TaskUpdateIndex>(path) {
+            httpClient.post<TaskUpdate>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
                 body = ""

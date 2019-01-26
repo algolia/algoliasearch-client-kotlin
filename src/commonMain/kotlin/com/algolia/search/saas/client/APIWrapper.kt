@@ -3,7 +3,7 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.model.query_rule.QueryRule
 import com.algolia.search.saas.model.synonym.Synonym
 import com.algolia.search.saas.model.indexing.TaskBatchOperations
-import com.algolia.search.saas.model.TaskUpdateIndex
+import com.algolia.search.saas.model.common.TaskUpdate
 import com.algolia.search.saas.endpoint.ConfigurableEndpoints
 import com.algolia.search.saas.host.RetryLogic
 import io.ktor.client.HttpClient
@@ -31,7 +31,7 @@ internal class APIWrapper(
         install(JsonFeature) {
             serializer = KotlinxSerializer(Json.nonstrict)
                 .also {
-                    it.register(TaskUpdateIndex.serializer())
+                    it.register(TaskUpdate.serializer())
                     it.register(TaskBatchOperations)
                     it.register(Synonym)
                     it.register(JsonObjectSerializer)

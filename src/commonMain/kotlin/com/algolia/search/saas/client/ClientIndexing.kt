@@ -3,6 +3,8 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.model.*
 import com.algolia.search.saas.model.search.Query
 import com.algolia.search.saas.endpoint.EndpointIndexing
+import com.algolia.search.saas.model.common.TaskDelete
+import com.algolia.search.saas.model.common.TaskUpdate
 import com.algolia.search.saas.model.indexing.*
 import com.algolia.search.saas.query.clone
 import com.algolia.search.saas.serialize.*
@@ -119,11 +121,11 @@ internal class ClientIndexing(
         return batch(operations, requestOptions)
     }
 
-    override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): TaskUpdateIndex {
+    override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): TaskUpdate {
         val copy = query.clone()
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/deleteByQuery")) { path ->
-            httpClient.post<TaskUpdateIndex>(path) {
+            httpClient.post<TaskUpdate>(path) {
                 setRequestOptions(requestOptions)
                 body = json { KeyParams to copy.encodeNoNulls().urlEncode() }.toString()
             }

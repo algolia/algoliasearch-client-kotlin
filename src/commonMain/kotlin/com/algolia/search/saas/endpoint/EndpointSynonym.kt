@@ -2,6 +2,8 @@ package com.algolia.search.saas.endpoint
 
 import com.algolia.search.saas.client.RequestOptions
 import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.common.TaskDelete
+import com.algolia.search.saas.model.common.TaskUpdate
 import com.algolia.search.saas.model.synonym.Synonym
 import com.algolia.search.saas.model.synonym.SynonymHits
 import com.algolia.search.saas.model.synonym.SynonymType
@@ -23,7 +25,7 @@ interface EndpointSynonym {
         forwardToReplicas: Boolean? = null,
         replaceExistingSynonyms: Boolean? = null,
         requestOptions: RequestOptions? = null
-    ): TaskUpdateIndex
+    ): TaskUpdate
 
     suspend fun getSynonym(objectID: ObjectID, requestOptions: RequestOptions? = null): Synonym
 
@@ -44,5 +46,5 @@ interface EndpointSynonym {
     suspend fun clearSynonyms(
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
-    ): TaskUpdateIndex
+    ): TaskUpdate
 }

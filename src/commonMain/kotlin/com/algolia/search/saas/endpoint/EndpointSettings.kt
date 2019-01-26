@@ -4,7 +4,7 @@ import com.algolia.search.saas.client.RequestOptions
 import com.algolia.search.saas.model.IndexName
 import com.algolia.search.saas.model.settings.Settings
 import com.algolia.search.saas.model.settings.SettingsKey
-import com.algolia.search.saas.model.TaskUpdateIndex
+import com.algolia.search.saas.model.common.TaskUpdate
 
 
 interface EndpointSettings {
@@ -18,7 +18,7 @@ interface EndpointSettings {
         resetToDefault: List<SettingsKey> = listOf(),
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
-    ): TaskUpdateIndex
+    ): TaskUpdate
 
-    suspend fun copySettings(destination: IndexName, requestOptions: RequestOptions? = null): TaskUpdateIndex
+    suspend fun copySettings(destination: IndexName, requestOptions: RequestOptions? = null): TaskUpdate
 }

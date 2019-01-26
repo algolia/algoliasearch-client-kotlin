@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.common
 
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.toTaskID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
@@ -8,7 +9,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.LongSerializer
 
 
-@Serializable(TaskID.Companion::class)
+@Serializable(TaskID::class)
 data class TaskID(override val raw: Long) : Raw<Long> {
 
     override fun toString(): String {

@@ -3,6 +3,7 @@ package com.algolia.search.saas.client
 import com.algolia.search.saas.model.*
 import com.algolia.search.saas.model.query_rule.QueryRule
 import com.algolia.search.saas.endpoint.EndpointQueryRule
+import com.algolia.search.saas.model.common.TaskUpdate
 import com.algolia.search.saas.model.query_rule.QueryRuleHits
 import com.algolia.search.saas.serialize.KeyClearExistingRules
 import com.algolia.search.saas.serialize.KeyQuery
@@ -23,12 +24,12 @@ internal class ClientQueryRule(
         queryRule: QueryRule,
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdateIndex {
+    ): TaskUpdate {
         return write.retry(
             requestOptions.computedReadTimeout,
             indexName.pathIndexes("/rules/${queryRule.objectID}")
         ) { path ->
-            httpClient.put<TaskUpdateIndex>(path) {
+            httpClient.put<TaskUpdate>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
                 body = queryRule.toJsonObject(QueryRule.serializer()).encodeNoNulls().toString()
@@ -48,9 +49,9 @@ internal class ClientQueryRule(
         objectID: ObjectID,
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdateIndex {
+    ): TaskUpdate {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/rules/$objectID")) { path ->
-            httpClient.delete<TaskUpdateIndex>(path) {
+            httpClient.delete<TaskUpdate>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
             }
@@ -66,9 +67,9 @@ internal class ClientQueryRule(
         }
     }
 
-    override suspend fun clearRules(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): TaskUpdateIndex {
+    override suspend fun clearRules(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): TaskUpdate {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/rules/clear")) { path ->
-            httpClient.post<TaskUpdateIndex>(path) {
+            httpClient.post<TaskUpdate>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
                 body = ""
@@ -81,9 +82,9 @@ internal class ClientQueryRule(
         forwardToReplicas: Boolean?,
         clearExistingRules: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdateIndex {
+    ): TaskUpdate {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/rules/batch")) { path ->
-            httpClient.post<TaskUpdateIndex>(path) {
+            httpClient.post<TaskUpdate>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
                 clearExistingRules?.let { parameter(KeyClearExistingRules, it) }

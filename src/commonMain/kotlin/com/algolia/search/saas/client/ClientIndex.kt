@@ -2,8 +2,8 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.model.IndexName
 import com.algolia.search.saas.model.index.Scope
-import com.algolia.search.saas.model.TaskDelete
-import com.algolia.search.saas.model.TaskUpdateIndex
+import com.algolia.search.saas.model.common.TaskDelete
+import com.algolia.search.saas.model.common.TaskUpdate
 import com.algolia.search.saas.endpoint.EndpointIndex
 import com.algolia.search.saas.serialize.*
 import io.ktor.client.request.delete
@@ -24,9 +24,9 @@ internal class ClientIndex(
         key: String,
         scopes: List<Scope>? = null,
         requestOptions: RequestOptions?
-    ): TaskUpdateIndex {
+    ): TaskUpdate {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/operation")) { path ->
-            httpClient.post<TaskUpdateIndex>(path) {
+            httpClient.post<TaskUpdate>(path) {
                 setRequestOptions(requestOptions)
                 body = json {
                     KeyOperation to key
@@ -41,11 +41,11 @@ internal class ClientIndex(
         destination: IndexName,
         scopes: List<Scope>?,
         requestOptions: RequestOptions?
-    ): TaskUpdateIndex {
+    ): TaskUpdate {
         return copyOrMove(destination, KeyCopy, scopes, requestOptions)
     }
 
-    override suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions?): TaskUpdateIndex {
+    override suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions?): TaskUpdate {
         return copyOrMove(destination, KeyMove, null, requestOptions)
     }
 
@@ -57,9 +57,9 @@ internal class ClientIndex(
         }
     }
 
-    override suspend fun clear(requestOptions: RequestOptions?): TaskUpdateIndex {
+    override suspend fun clear(requestOptions: RequestOptions?): TaskUpdate {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/clear")) { path ->
-            httpClient.post<TaskUpdateIndex>(path) {
+            httpClient.post<TaskUpdate>(path) {
                 setRequestOptions(requestOptions)
                 body = ""
             }

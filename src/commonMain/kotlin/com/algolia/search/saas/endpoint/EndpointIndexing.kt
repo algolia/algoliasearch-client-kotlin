@@ -2,6 +2,8 @@ package com.algolia.search.saas.endpoint
 
 import com.algolia.search.saas.client.RequestOptions
 import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.common.TaskDelete
+import com.algolia.search.saas.model.common.TaskUpdate
 import com.algolia.search.saas.model.indexing.*
 import com.algolia.search.saas.model.search.Query
 import kotlinx.serialization.KSerializer
@@ -70,7 +72,7 @@ interface EndpointIndexing {
     suspend fun deleteObjectBy(
         query: Query,
         requestOptions: RequestOptions? = null
-    ): TaskUpdateIndex
+    ): TaskUpdate
 
     suspend fun <T : Indexable> getObject(
         objectID: ObjectID,

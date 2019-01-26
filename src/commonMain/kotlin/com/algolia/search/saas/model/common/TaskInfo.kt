@@ -1,4 +1,4 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.common
 
 import kotlinx.serialization.Serializable
 
