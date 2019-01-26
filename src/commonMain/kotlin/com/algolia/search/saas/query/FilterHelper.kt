@@ -1,6 +1,6 @@
 package com.algolia.search.saas.query
 
-import com.algolia.search.saas.data.Attribute
+import com.algolia.search.saas.model.Attribute
 
 internal fun Group.key(filter: Filter): Group.Key {
     val key = when (this) {

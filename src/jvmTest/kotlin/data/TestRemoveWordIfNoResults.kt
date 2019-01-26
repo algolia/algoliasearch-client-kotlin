@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.RemoveWordIfNoResults.*
+import com.algolia.search.saas.model.RemoveWordIfNoResults.*
 import com.algolia.search.saas.serialize.KeyAllOptional
 import com.algolia.search.saas.serialize.KeyFirstWords
 import com.algolia.search.saas.serialize.KeyLastWords

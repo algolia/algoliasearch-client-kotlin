@@ -1,6 +1,6 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.IndexName
+import com.algolia.search.saas.model.IndexName
 import com.algolia.search.saas.endpoint.*
 
 

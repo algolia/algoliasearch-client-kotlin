@@ -2,8 +2,8 @@ package serialize
 
 import attributeA
 import attributeB
-import com.algolia.search.saas.data.ObjectID
-import com.algolia.search.saas.data.RequestObjects
+import com.algolia.search.saas.model.ObjectID
+import com.algolia.search.saas.model.RequestObjects
 import com.algolia.search.saas.serialize.KeyAttributesToRetrieve
 import com.algolia.search.saas.serialize.KeyIndexName
 import com.algolia.search.saas.serialize.KeyObjectID

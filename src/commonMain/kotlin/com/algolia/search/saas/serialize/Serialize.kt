@@ -1,9 +1,9 @@
 package com.algolia.search.saas.serialize
 
-import com.algolia.search.saas.data.APIKeyCreate
-import com.algolia.search.saas.data.search.Query
-import com.algolia.search.saas.data.Settings
-import com.algolia.search.saas.data.search.RankingInfo
+import com.algolia.search.saas.model.APIKeyCreate
+import com.algolia.search.saas.model.search.Query
+import com.algolia.search.saas.model.Settings
+import com.algolia.search.saas.model.search.RankingInfo
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.Decoder

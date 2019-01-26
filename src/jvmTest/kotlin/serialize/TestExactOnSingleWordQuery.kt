@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.data.ExactOnSingleWordQuery
-import com.algolia.search.saas.data.ExactOnSingleWordQuery.*
+import com.algolia.search.saas.model.ExactOnSingleWordQuery
+import com.algolia.search.saas.model.ExactOnSingleWordQuery.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

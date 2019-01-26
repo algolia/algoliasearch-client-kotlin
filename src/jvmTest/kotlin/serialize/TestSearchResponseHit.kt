@@ -2,9 +2,9 @@ package serialize
 
 import attributeA
 import attributeB
-import com.algolia.search.saas.data.Attribute
-import com.algolia.search.saas.data.search.Highlight
-import com.algolia.search.saas.data.search.SearchResponse
+import com.algolia.search.saas.model.Attribute
+import com.algolia.search.saas.model.search.Highlight
+import com.algolia.search.saas.model.search.SearchResponse
 import com.algolia.search.saas.serialize.KSerializerSnippets
 import com.algolia.search.saas.serialize.KeyHighlightResult
 import com.algolia.search.saas.serialize.KeySnippetResult

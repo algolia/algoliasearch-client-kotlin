@@ -1,8 +1,8 @@
 package serialize
 
-import com.algolia.search.saas.data.BatchOperation
-import com.algolia.search.saas.data.BatchOperation.*
-import com.algolia.search.saas.data.ObjectID
+import com.algolia.search.saas.model.BatchOperation
+import com.algolia.search.saas.model.BatchOperation.*
+import com.algolia.search.saas.model.ObjectID
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith

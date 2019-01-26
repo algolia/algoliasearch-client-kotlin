@@ -1,12 +1,12 @@
 package com.algolia.search.saas.endpoint
 
 import com.algolia.search.saas.client.RequestOptions
-import com.algolia.search.saas.data.Attribute
-import com.algolia.search.saas.data.Cursor
-import com.algolia.search.saas.data.IndexName
-import com.algolia.search.saas.data.search.Query
-import com.algolia.search.saas.data.search.FacetHits
-import com.algolia.search.saas.data.search.SearchResponse
+import com.algolia.search.saas.model.Attribute
+import com.algolia.search.saas.model.Cursor
+import com.algolia.search.saas.model.IndexName
+import com.algolia.search.saas.model.search.Query
+import com.algolia.search.saas.model.search.FacetHits
+import com.algolia.search.saas.model.search.SearchResponse
 
 
 interface EndpointSearch {

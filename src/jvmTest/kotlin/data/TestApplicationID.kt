@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.ApplicationID
+import com.algolia.search.saas.model.ApplicationID
 import com.algolia.search.saas.exception.EmptyStringException
 import org.junit.Test
 import org.junit.runner.RunWith

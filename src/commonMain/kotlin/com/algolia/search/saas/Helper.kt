@@ -1,6 +1,6 @@
 package com.algolia.search.saas
 
-import com.algolia.search.saas.data.*
+import com.algolia.search.saas.model.*
 
 
 fun String.toIndexName(): IndexName {

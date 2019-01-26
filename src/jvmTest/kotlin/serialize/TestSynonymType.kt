@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.saas.data.SynonymType
+import com.algolia.search.saas.model.SynonymType
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith

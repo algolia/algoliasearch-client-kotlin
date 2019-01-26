@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.Polygon
+import com.algolia.search.saas.model.Polygon
 import com.algolia.search.saas.to
 import org.junit.Test
 import org.junit.runner.RunWith

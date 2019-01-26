@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.APIKey
+import com.algolia.search.saas.model.APIKey
 import com.algolia.search.saas.exception.EmptyStringException
 import org.junit.Test
 import org.junit.runner.RunWith

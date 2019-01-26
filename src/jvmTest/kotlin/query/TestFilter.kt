@@ -1,6 +1,6 @@
 package query
 
-import com.algolia.search.saas.data.Attribute
+import com.algolia.search.saas.model.Attribute
 import com.algolia.search.saas.query.*
 import org.junit.Test
 import org.junit.runner.RunWith

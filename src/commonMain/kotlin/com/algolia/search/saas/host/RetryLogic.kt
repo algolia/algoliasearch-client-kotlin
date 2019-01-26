@@ -1,6 +1,6 @@
 package com.algolia.search.saas.host
 
-import com.algolia.search.saas.data.ApplicationID
+import com.algolia.search.saas.model.ApplicationID
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout

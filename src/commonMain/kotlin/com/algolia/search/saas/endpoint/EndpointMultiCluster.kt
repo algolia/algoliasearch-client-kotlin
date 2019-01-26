@@ -1,7 +1,7 @@
 package com.algolia.search.saas.endpoint
 
 import com.algolia.search.saas.client.RequestOptions
-import com.algolia.search.saas.data.*
+import com.algolia.search.saas.model.*
 
 
 interface EndpointMultiCluster {

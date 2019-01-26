@@ -1,9 +1,9 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.IndexName
-import com.algolia.search.saas.data.Settings
-import com.algolia.search.saas.data.SettingsKey
-import com.algolia.search.saas.data.TaskUpdateIndex
+import com.algolia.search.saas.model.IndexName
+import com.algolia.search.saas.model.Settings
+import com.algolia.search.saas.model.SettingsKey
+import com.algolia.search.saas.model.TaskUpdateIndex
 import com.algolia.search.saas.endpoint.EndpointSettings
 import com.algolia.search.saas.serialize.KeyForwardToReplicas
 import com.algolia.search.saas.serialize.encodeNoNulls

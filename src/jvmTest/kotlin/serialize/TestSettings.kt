@@ -4,7 +4,7 @@ import attributeA
 import attributes
 import attributesJson
 import boolean
-import com.algolia.search.saas.data.*
+import com.algolia.search.saas.model.*
 import com.algolia.search.saas.serialize.*
 import indexA
 import int

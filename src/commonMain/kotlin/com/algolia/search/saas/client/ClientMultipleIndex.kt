@@ -1,7 +1,7 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.*
-import com.algolia.search.saas.data.search.SearchResponse
+import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.search.SearchResponse
 import com.algolia.search.saas.endpoint.EndpointMultipleIndex
 import com.algolia.search.saas.query.clone
 import com.algolia.search.saas.serialize.KeyRequests

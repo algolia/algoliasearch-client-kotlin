@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.QueryType.*
+import com.algolia.search.saas.model.QueryType.*
 import com.algolia.search.saas.serialize.KeyPrefixAll
 import com.algolia.search.saas.serialize.KeyPrefixLast
 import com.algolia.search.saas.serialize.KeyPrefixNone

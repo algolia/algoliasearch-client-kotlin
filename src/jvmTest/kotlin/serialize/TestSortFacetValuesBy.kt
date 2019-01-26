@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.data.SortFacetValuesBy
-import com.algolia.search.saas.data.SortFacetValuesBy.*
+import com.algolia.search.saas.model.SortFacetValuesBy
+import com.algolia.search.saas.model.SortFacetValuesBy.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

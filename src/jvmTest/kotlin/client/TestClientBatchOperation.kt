@@ -1,9 +1,9 @@
 package client
 
 import com.algolia.search.saas.client.Index
-import com.algolia.search.saas.data.BatchOperation
-import com.algolia.search.saas.data.BatchOperationIndex
-import com.algolia.search.saas.data.TaskStatus
+import com.algolia.search.saas.model.BatchOperation
+import com.algolia.search.saas.model.BatchOperationIndex
+import com.algolia.search.saas.model.TaskStatus
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith

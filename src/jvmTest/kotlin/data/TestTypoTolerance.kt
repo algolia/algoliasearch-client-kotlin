@@ -1,8 +1,8 @@
 package data
 
 import boolean
-import com.algolia.search.saas.data.TypoTolerance.*
-import com.algolia.search.saas.data.TypoTolerance.Boolean
+import com.algolia.search.saas.model.TypoTolerance.*
+import com.algolia.search.saas.model.TypoTolerance.Boolean
 import com.algolia.search.saas.serialize.KeyMin
 import com.algolia.search.saas.serialize.KeyStrict
 import org.junit.Test

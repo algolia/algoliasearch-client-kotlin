@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.ACL.*
+import com.algolia.search.saas.model.ACL.*
 import com.algolia.search.saas.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith

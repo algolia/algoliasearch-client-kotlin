@@ -1,7 +1,7 @@
 package com.algolia.search.saas.query
 
-import com.algolia.search.saas.data.*
-import com.algolia.search.saas.data.search.Query
+import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.search.Query
 
 @DslMarker
 annotation class QueryHelper

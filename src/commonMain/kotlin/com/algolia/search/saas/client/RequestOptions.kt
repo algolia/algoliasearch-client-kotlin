@@ -1,6 +1,6 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.UserID
+import com.algolia.search.saas.model.UserID
 import com.algolia.search.saas.serialize.KeyAlgoliaUserID
 import com.algolia.search.saas.serialize.KeyForwardedFor
 

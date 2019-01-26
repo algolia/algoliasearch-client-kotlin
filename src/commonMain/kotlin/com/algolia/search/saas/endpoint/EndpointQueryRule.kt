@@ -1,11 +1,11 @@
 package com.algolia.search.saas.endpoint
 
 import com.algolia.search.saas.client.RequestOptions
-import com.algolia.search.saas.data.IndexName
-import com.algolia.search.saas.data.ObjectID
-import com.algolia.search.saas.data.QueryRuleHits
-import com.algolia.search.saas.data.TaskUpdateIndex
-import com.algolia.search.saas.data.QueryRule
+import com.algolia.search.saas.model.IndexName
+import com.algolia.search.saas.model.ObjectID
+import com.algolia.search.saas.model.QueryRuleHits
+import com.algolia.search.saas.model.TaskUpdateIndex
+import com.algolia.search.saas.model.QueryRule
 
 
 interface EndpointQueryRule {

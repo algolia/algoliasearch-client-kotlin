@@ -1,9 +1,9 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.QueryRule
-import com.algolia.search.saas.data.Synonym
-import com.algolia.search.saas.data.TaskBatchOperations
-import com.algolia.search.saas.data.TaskUpdateIndex
+import com.algolia.search.saas.model.QueryRule
+import com.algolia.search.saas.model.Synonym
+import com.algolia.search.saas.model.TaskBatchOperations
+import com.algolia.search.saas.model.TaskUpdateIndex
 import com.algolia.search.saas.endpoint.ConfigurableEndpoints
 import com.algolia.search.saas.host.RetryLogic
 import io.ktor.client.HttpClient

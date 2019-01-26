@@ -1,6 +1,6 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.*
+import com.algolia.search.saas.model.*
 import com.algolia.search.saas.endpoint.ConfigurableEndpoints
 import com.algolia.search.saas.endpoint.EndpointAPIKey
 import com.algolia.search.saas.endpoint.EndpointMultiCluster

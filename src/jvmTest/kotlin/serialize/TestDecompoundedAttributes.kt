@@ -2,8 +2,8 @@ package serialize
 
 import attributeA
 import attributeB
-import com.algolia.search.saas.data.DecompoundedAttributes
-import com.algolia.search.saas.data.QueryLanguage
+import com.algolia.search.saas.model.DecompoundedAttributes
+import com.algolia.search.saas.model.QueryLanguage
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith

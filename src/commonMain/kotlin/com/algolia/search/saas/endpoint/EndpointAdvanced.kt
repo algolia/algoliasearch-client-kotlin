@@ -1,10 +1,10 @@
 package com.algolia.search.saas.endpoint
 
 import com.algolia.search.saas.client.RequestOptions
-import com.algolia.search.saas.data.IndexName
-import com.algolia.search.saas.data.Task
-import com.algolia.search.saas.data.TaskID
-import com.algolia.search.saas.data.TaskStatus
+import com.algolia.search.saas.model.IndexName
+import com.algolia.search.saas.model.Task
+import com.algolia.search.saas.model.TaskID
+import com.algolia.search.saas.model.TaskStatus
 
 
 interface EndpointAdvanced {

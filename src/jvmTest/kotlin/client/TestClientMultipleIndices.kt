@@ -1,9 +1,9 @@
 package client
 
-import com.algolia.search.saas.data.IndexQuery
-import com.algolia.search.saas.data.ObjectID
-import com.algolia.search.saas.data.search.Query
-import com.algolia.search.saas.data.RequestObjects
+import com.algolia.search.saas.model.IndexQuery
+import com.algolia.search.saas.model.ObjectID
+import com.algolia.search.saas.model.search.Query
+import com.algolia.search.saas.model.RequestObjects
 import com.algolia.search.saas.serialize.KeyObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.content

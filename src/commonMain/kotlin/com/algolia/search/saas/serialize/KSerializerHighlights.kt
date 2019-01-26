@@ -1,7 +1,7 @@
 package com.algolia.search.saas.serialize
 
-import com.algolia.search.saas.data.Attribute
-import com.algolia.search.saas.data.search.Highlight
+import com.algolia.search.saas.model.Attribute
+import com.algolia.search.saas.model.search.Highlight
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.internal.HashMapSerializer
 import kotlinx.serialization.json.Json

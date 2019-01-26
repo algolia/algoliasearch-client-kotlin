@@ -1,7 +1,7 @@
 package client
 
 import attributeA
-import com.algolia.search.saas.data.*
+import com.algolia.search.saas.model.*
 import kotlinx.coroutines.runBlocking
 import objectIDA
 import objectIDB

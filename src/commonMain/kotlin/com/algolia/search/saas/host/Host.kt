@@ -1,7 +1,7 @@
 package com.algolia.search.saas.host
 
 import com.algolia.search.saas.Time
-import com.algolia.search.saas.data.ApplicationID
+import com.algolia.search.saas.model.ApplicationID
 import kotlin.random.Random
 
 

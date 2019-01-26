@@ -1,6 +1,6 @@
 package host
 
-import com.algolia.search.saas.data.ApplicationID
+import com.algolia.search.saas.model.ApplicationID
 import com.algolia.search.saas.host.computeHosts
 import com.algolia.search.saas.host.randomize
 import com.algolia.search.saas.host.readHost

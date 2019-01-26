@@ -1,6 +1,6 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.*
+import com.algolia.search.saas.model.*
 import com.algolia.search.saas.endpoint.EndpointAdvanced
 import io.ktor.client.request.get
 import kotlinx.coroutines.delay

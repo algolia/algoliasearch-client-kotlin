@@ -2,8 +2,8 @@ package data
 
 import attributeA
 import attributeB
-import com.algolia.search.saas.data.CustomRanking.Asc
-import com.algolia.search.saas.data.CustomRanking.Desc
+import com.algolia.search.saas.model.CustomRanking.Asc
+import com.algolia.search.saas.model.CustomRanking.Desc
 import com.algolia.search.saas.serialize.KeyAsc
 import com.algolia.search.saas.serialize.KeyDesc
 import org.junit.Test

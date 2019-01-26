@@ -1,9 +1,9 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.data.IndexName
-import com.algolia.search.saas.data.Scope
-import com.algolia.search.saas.data.TaskDelete
-import com.algolia.search.saas.data.TaskUpdateIndex
+import com.algolia.search.saas.model.IndexName
+import com.algolia.search.saas.model.Scope
+import com.algolia.search.saas.model.TaskDelete
+import com.algolia.search.saas.model.TaskUpdateIndex
 import com.algolia.search.saas.endpoint.EndpointIndex
 import com.algolia.search.saas.serialize.*
 import io.ktor.client.request.delete

@@ -2,7 +2,7 @@ package serialize
 
 import attributeA
 import attributeB
-import com.algolia.search.saas.data.Snippet
+import com.algolia.search.saas.model.Snippet
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

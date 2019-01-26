@@ -1,6 +1,6 @@
 package com.algolia.search.saas.query
 
-import com.algolia.search.saas.data.Attribute
+import com.algolia.search.saas.model.Attribute
 
 
 interface FilterBuilderInterface<T : Filter> {

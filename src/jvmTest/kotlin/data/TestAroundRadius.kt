@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.AroundRadius.*
+import com.algolia.search.saas.model.AroundRadius.*
 import com.algolia.search.saas.serialize.KeyAll
 import org.junit.Test
 import org.junit.runner.RunWith

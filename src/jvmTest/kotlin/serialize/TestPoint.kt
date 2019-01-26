@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.saas.data.Point
+import com.algolia.search.saas.model.Point
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

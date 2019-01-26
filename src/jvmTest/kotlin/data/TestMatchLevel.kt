@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.search.MatchLevel.*
+import com.algolia.search.saas.model.search.MatchLevel.*
 import com.algolia.search.saas.serialize.KeyFull
 import com.algolia.search.saas.serialize.KeyNone
 import com.algolia.search.saas.serialize.KeyPartial

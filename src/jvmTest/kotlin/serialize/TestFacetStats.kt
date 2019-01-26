@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.saas.data.search.FacetStats
+import com.algolia.search.saas.model.search.FacetStats
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

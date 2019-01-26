@@ -1,8 +1,8 @@
 package serialize
 
 import attributeB
-import com.algolia.search.saas.data.Cursor
-import com.algolia.search.saas.data.search.SearchResponse
+import com.algolia.search.saas.model.Cursor
+import com.algolia.search.saas.model.search.SearchResponse
 import com.algolia.search.saas.serialize.*
 import indexA
 import kotlinx.serialization.json.json

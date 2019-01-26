@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.saas.data.BoundingBox
+import com.algolia.search.saas.model.BoundingBox
 import com.algolia.search.saas.to
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith

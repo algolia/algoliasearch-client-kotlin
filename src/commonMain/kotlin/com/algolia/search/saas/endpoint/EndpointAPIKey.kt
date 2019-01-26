@@ -1,7 +1,7 @@
 package com.algolia.search.saas.endpoint
 
-import com.algolia.search.saas.data.*
-import com.algolia.search.saas.data.search.Query
+import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.search.Query
 
 
 interface EndpointAPIKey {

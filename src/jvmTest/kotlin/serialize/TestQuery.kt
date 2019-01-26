@@ -3,8 +3,8 @@ package serialize
 import attributes
 import attributesJson
 import boolean
-import com.algolia.search.saas.data.*
-import com.algolia.search.saas.data.search.Query
+import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.search.Query
 import com.algolia.search.saas.serialize.*
 import int
 import kotlinx.serialization.json.json

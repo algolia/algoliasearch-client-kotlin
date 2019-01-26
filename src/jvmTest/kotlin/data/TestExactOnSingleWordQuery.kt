@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.ExactOnSingleWordQuery.*
+import com.algolia.search.saas.model.ExactOnSingleWordQuery.*
 import com.algolia.search.saas.serialize.KeyAttribute
 import com.algolia.search.saas.serialize.KeyNone
 import com.algolia.search.saas.serialize.KeyWord

@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.Point
+import com.algolia.search.saas.model.Point
 import com.algolia.search.saas.to
 import org.junit.Test
 import org.junit.runner.RunWith

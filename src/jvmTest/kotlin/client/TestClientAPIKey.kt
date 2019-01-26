@@ -1,7 +1,7 @@
 package client
 
 import com.algolia.search.saas.client.ClientAlgolia
-import com.algolia.search.saas.data.ACL
+import com.algolia.search.saas.model.ACL
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking

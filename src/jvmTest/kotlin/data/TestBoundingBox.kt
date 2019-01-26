@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.data.BoundingBox
+import com.algolia.search.saas.model.BoundingBox
 import com.algolia.search.saas.to
 import org.junit.Test
 import org.junit.runner.RunWith

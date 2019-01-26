@@ -1,7 +1,7 @@
 package data
 
 import attributeA
-import com.algolia.search.saas.data.NumericAttributeFilter
+import com.algolia.search.saas.model.NumericAttributeFilter
 import com.algolia.search.saas.serialize.KeyEqualOnly
 import org.junit.Test
 import org.junit.runner.RunWith
