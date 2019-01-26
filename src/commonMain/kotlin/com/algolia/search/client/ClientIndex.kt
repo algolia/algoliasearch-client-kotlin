@@ -1,10 +1,9 @@
 package com.algolia.search.client
 
-import com.algolia.search.model.IndexName
-import com.algolia.search.model.index.Scope
-import com.algolia.search.model.common.TaskDelete
-import com.algolia.search.model.common.TaskUpdate
 import com.algolia.search.endpoint.EndpointIndex
+import com.algolia.search.model.IndexName
+import com.algolia.search.model.index.ResponseIndex
+import com.algolia.search.model.index.Scope
 import com.algolia.search.serialize.*
 import io.ktor.client.request.delete
 import io.ktor.client.request.post
@@ -24,9 +23,9 @@ internal class ClientIndex(
         key: String,
         scopes: List<Scope>? = null,
         requestOptions: RequestOptions?
-    ): TaskUpdate {
+    ): ResponseIndex.Update {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/operation")) { path ->
-            httpClient.post<TaskUpdate>(path) {
+            httpClient.post<ResponseIndex.Update>(path) {
                 setRequestOptions(requestOptions)
                 body = json {
                     KeyOperation to key
@@ -41,25 +40,25 @@ internal class ClientIndex(
         destination: IndexName,
         scopes: List<Scope>?,
         requestOptions: RequestOptions?
-    ): TaskUpdate {
+    ): ResponseIndex.Update {
         return copyOrMove(destination, KeyCopy, scopes, requestOptions)
     }
 
-    override suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions?): TaskUpdate {
+    override suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions?): ResponseIndex.Update {
         return copyOrMove(destination, KeyMove, null, requestOptions)
     }
 
-    override suspend fun deleteIndex(requestOptions: RequestOptions?): TaskDelete {
+    override suspend fun deleteIndex(requestOptions: RequestOptions?): ResponseIndex.Delete {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
-            httpClient.delete<TaskDelete>(path) {
+            httpClient.delete<ResponseIndex.Delete>(path) {
                 setRequestOptions(requestOptions)
             }
         }
     }
 
-    override suspend fun clear(requestOptions: RequestOptions?): TaskUpdate {
+    override suspend fun clear(requestOptions: RequestOptions?): ResponseIndex.Update {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/clear")) { path ->
-            httpClient.post<TaskUpdate>(path) {
+            httpClient.post<ResponseIndex.Update>(path) {
                 setRequestOptions(requestOptions)
                 body = ""
             }

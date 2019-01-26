@@ -2,9 +2,8 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.index.ResponseIndex
 import com.algolia.search.model.index.Scope
-import com.algolia.search.model.common.TaskDelete
-import com.algolia.search.model.common.TaskUpdate
 
 
 interface EndpointIndex {
@@ -15,11 +14,11 @@ interface EndpointIndex {
         destination: IndexName,
         scopes: List<Scope>? = null,
         requestOptions: RequestOptions? = null
-    ): TaskUpdate
+    ): ResponseIndex.Update
 
-    suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions? = null): TaskUpdate
+    suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions? = null): ResponseIndex.Update
 
-    suspend fun deleteIndex(requestOptions: RequestOptions? = null): TaskDelete
+    suspend fun deleteIndex(requestOptions: RequestOptions? = null): ResponseIndex.Delete
 
-    suspend fun clear(requestOptions: RequestOptions? = null): TaskUpdate
+    suspend fun clear(requestOptions: RequestOptions? = null): ResponseIndex.Update
 }
