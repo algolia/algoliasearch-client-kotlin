@@ -2,6 +2,7 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.model.*
 import com.algolia.search.saas.endpoint.EndpointMultiCluster
+import com.algolia.search.saas.model.cluster.*
 import com.algolia.search.saas.serialize.*
 import io.ktor.client.request.*
 import kotlinx.serialization.json.json

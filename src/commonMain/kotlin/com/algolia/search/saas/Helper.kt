@@ -2,6 +2,7 @@ package com.algolia.search.saas
 
 import com.algolia.search.saas.model.*
 import com.algolia.search.saas.model.api_key.APIKey
+import com.algolia.search.saas.model.cluster.ClusterName
 import com.algolia.search.saas.model.enums.Point
 import com.algolia.search.saas.model.enums.Snippet
 import com.algolia.search.saas.model.search.Cursor

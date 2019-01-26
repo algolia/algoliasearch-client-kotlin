@@ -1,6 +1,7 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.cluster
 
 import com.algolia.search.saas.exception.EmptyStringException
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.toClusterName
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
@@ -9,7 +10,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
-@Serializable(ClusterName.Companion::class)
+@Serializable(ClusterName::class)
 data class ClusterName(override val raw: String) : Raw<String> {
 
     init {
