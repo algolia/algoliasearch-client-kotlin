@@ -1,8 +1,8 @@
 package com.algolia.search.saas.endpoint
 
 import com.algolia.search.saas.client.RequestOptions
-import com.algolia.search.saas.model.*
 import com.algolia.search.saas.model.indexing.TaskBatchOperations
+import com.algolia.search.saas.model.multiple_index.*
 import com.algolia.search.saas.model.search.SearchResponse
 import kotlinx.serialization.json.JsonObject
 

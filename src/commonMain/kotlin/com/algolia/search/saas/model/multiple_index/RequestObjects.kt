@@ -1,5 +1,8 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.multiple_index
 
+import com.algolia.search.saas.model.Attribute
+import com.algolia.search.saas.model.IndexName
+import com.algolia.search.saas.model.ObjectID
 import com.algolia.search.saas.serialize.*
 import com.algolia.search.saas.toAttribute
 import com.algolia.search.saas.toIndexName

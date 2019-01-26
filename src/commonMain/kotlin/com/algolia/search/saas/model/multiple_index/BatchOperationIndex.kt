@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.multiple_index
 
+import com.algolia.search.saas.model.IndexName
 import com.algolia.search.saas.model.indexing.BatchOperation
 import com.algolia.search.saas.serialize.KeyIndexName
 import com.algolia.search.saas.serialize.asJsonInput

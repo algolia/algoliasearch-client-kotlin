@@ -1,9 +1,9 @@
 package com.algolia.search.saas.client
 
-import com.algolia.search.saas.model.*
 import com.algolia.search.saas.model.search.SearchResponse
 import com.algolia.search.saas.endpoint.EndpointMultipleIndex
 import com.algolia.search.saas.model.indexing.TaskBatchOperations
+import com.algolia.search.saas.model.multiple_index.*
 import com.algolia.search.saas.query.clone
 import com.algolia.search.saas.serialize.KeyRequests
 import com.algolia.search.saas.serialize.KeyResults
@@ -33,7 +33,12 @@ internal class ClientMultipleIndex(
         strategy: MultipleQueriesStrategy,
         requestOptions: RequestOptions?
     ): List<SearchResponse> {
-        val copies = queries.map { IndexQuery(it.indexName, it.query.clone()) }
+        val copies = queries.map {
+            IndexQuery(
+                it.indexName,
+                it.query.clone()
+            )
+        }
 
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/queries") { path ->
             httpClient.post<JsonObject>(path) {

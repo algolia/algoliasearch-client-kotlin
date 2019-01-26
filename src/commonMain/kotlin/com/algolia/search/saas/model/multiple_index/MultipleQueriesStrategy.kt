@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.multiple_index
 
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.KeyNone
 import com.algolia.search.saas.serialize.KeyStopIfEnoughMatches
 import kotlinx.serialization.Decoder

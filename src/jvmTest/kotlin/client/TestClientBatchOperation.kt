@@ -2,7 +2,7 @@ package client
 
 import com.algolia.search.saas.client.Index
 import com.algolia.search.saas.model.indexing.BatchOperation
-import com.algolia.search.saas.model.BatchOperationIndex
+import com.algolia.search.saas.model.multiple_index.BatchOperationIndex
 import com.algolia.search.saas.model.TaskStatus
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -46,8 +46,14 @@ internal class TestClientBatchOperation {
     fun batchIndex() {
         runBlocking {
             val operations = listOf(
-                BatchOperationIndex(index.indexName, BatchOperation.AddObject.from(dataCreate, Data.serializer())),
-                BatchOperationIndex(index.indexName, BatchOperation.DeleteObject(dataCreate.objectID))
+                BatchOperationIndex(
+                    index.indexName,
+                    BatchOperation.AddObject.from(dataCreate, Data.serializer())
+                ),
+                BatchOperationIndex(
+                    index.indexName,
+                    BatchOperation.DeleteObject(dataCreate.objectID)
+                )
             )
             val batch = algolia.multipleBatchObjects(operations)
             algolia.waitAll(batch.taskIDs).forEach { it shouldEqual TaskStatus.Published }
