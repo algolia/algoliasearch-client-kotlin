@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class SearchClusterResponse(
-    @SerialName(KeyHits) val hits: List<Cluster>,
+    @SerialName(KeyHits) val hits: List<ClusterResponse>,
     @SerialName(KeyNbHits) val nbHits: Int,
     @SerialName(KeyPage) val page: Int,
     @SerialName(KeyHitsPerPage) val hitsPerPage: Int,

@@ -2,7 +2,6 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.ClusterName
-import com.algolia.search.model.Deleted
 import com.algolia.search.model.UserID
 import com.algolia.search.model.cluster.*
 
@@ -23,11 +22,11 @@ interface EndpointMultiCluster {
         requestOptions: RequestOptions? = null
     ): CreateClusterResponse
 
-    suspend fun getUserID(userID: UserID, requestOptions: RequestOptions? = null): Cluster
+    suspend fun getUserID(userID: UserID, requestOptions: RequestOptions? = null): ClusterResponse
 
     suspend fun getTopUserID(requestOptions: RequestOptions? = null): ListTopUsersResponse
 
-    suspend fun removeUserID(userID: UserID, requestOptions: RequestOptions? = null): Deleted
+    suspend fun removeUserID(userID: UserID, requestOptions: RequestOptions? = null): DeleteClusterResponse
 
     suspend fun searchUserID(
         query: String? = null,

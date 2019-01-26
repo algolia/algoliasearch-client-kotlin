@@ -2,7 +2,6 @@ package com.algolia.search.client
 
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.model.ClusterName
-import com.algolia.search.model.Deleted
 import com.algolia.search.model.UserID
 import com.algolia.search.model.cluster.*
 import com.algolia.search.serialize.*
@@ -37,9 +36,9 @@ internal class ClientMultiCluster(
         }
     }
 
-    override suspend fun getUserID(userID: UserID, requestOptions: RequestOptions?): Cluster {
+    override suspend fun getUserID(userID: UserID, requestOptions: RequestOptions?): ClusterResponse {
         return read.retry(requestOptions.computedReadTimeout, "/1/clusters/mapping/$userID") { path ->
-            httpClient.get<Cluster>(path) {
+            httpClient.get<ClusterResponse>(path) {
                 setRequestOptions(requestOptions)
             }
         }
@@ -67,9 +66,9 @@ internal class ClientMultiCluster(
         }
     }
 
-    override suspend fun removeUserID(userID: UserID, requestOptions: RequestOptions?): Deleted {
+    override suspend fun removeUserID(userID: UserID, requestOptions: RequestOptions?): DeleteClusterResponse {
         return write.retry(requestOptions.computedWriteTimeout, "/1/clusters/mapping") { path ->
-            httpClient.delete<Deleted>(path) {
+            httpClient.delete<DeleteClusterResponse>(path) {
                 header(KeyAlgoliaUserID, userID)
                 setRequestOptions(requestOptions)
             }

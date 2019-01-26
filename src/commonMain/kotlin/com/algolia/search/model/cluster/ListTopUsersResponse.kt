@@ -8,5 +8,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ListTopUsersResponse(
-    @SerialName(KeyTopUsers) val topUsers: Map<ClusterName, List<Cluster>>
+    @SerialName(KeyTopUsers) val topUsers: Map<ClusterName, List<ClusterResponse>>
 )

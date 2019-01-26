@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ListUserIDsResponse(
-    @SerialName(KeyUserIDs) val userIDs: List<Cluster>
+    @SerialName(KeyUserIDs) val userIDs: List<ClusterResponse>
 )
