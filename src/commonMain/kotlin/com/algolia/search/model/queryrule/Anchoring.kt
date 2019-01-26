@@ -1,4 +1,4 @@
-package com.algolia.search.model.queryRule
+package com.algolia.search.model.queryrule
 
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyContains

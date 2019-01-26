@@ -1,6 +1,6 @@
 package com.algolia.search.client
 
-import com.algolia.search.model.queryRule.QueryRule
+import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.indexing.TaskBatchOperations
 import com.algolia.search.model.common.TaskUpdate

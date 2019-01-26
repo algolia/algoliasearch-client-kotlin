@@ -2,7 +2,7 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.indexing.TaskBatchOperations
-import com.algolia.search.model.multiple_index.*
+import com.algolia.search.model.multipleindex.*
 import com.algolia.search.model.search.SearchResponse
 import kotlinx.serialization.json.JsonObject
 

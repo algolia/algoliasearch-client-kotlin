@@ -1,7 +1,7 @@
 package serialize
 
 import com.algolia.search.model.indexing.BatchOperation
-import com.algolia.search.model.multiple_index.BatchOperationIndex
+import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.serialize.KeyAction
 import com.algolia.search.serialize.KeyDelete
 import com.algolia.search.serialize.KeyIndexName

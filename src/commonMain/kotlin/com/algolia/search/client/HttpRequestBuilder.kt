@@ -2,8 +2,8 @@ package com.algolia.search.client
 
 import com.algolia.search.model.*
 import com.algolia.search.model.APIKey
-import com.algolia.search.model.multiple_index.IndexQuery
-import com.algolia.search.model.multiple_index.MultipleQueriesStrategy
+import com.algolia.search.model.multipleindex.IndexQuery
+import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import io.ktor.client.request.HttpRequestBuilder

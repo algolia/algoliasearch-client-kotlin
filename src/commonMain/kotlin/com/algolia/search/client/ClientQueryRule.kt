@@ -1,10 +1,10 @@
 package com.algolia.search.client
 
 import com.algolia.search.model.*
-import com.algolia.search.model.queryRule.QueryRule
+import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.endpoint.EndpointQueryRule
 import com.algolia.search.model.common.TaskUpdate
-import com.algolia.search.model.queryRule.QueryRuleHits
+import com.algolia.search.model.queryrule.QueryRuleHits
 import com.algolia.search.serialize.KeyClearExistingRules
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.encodeNoNulls

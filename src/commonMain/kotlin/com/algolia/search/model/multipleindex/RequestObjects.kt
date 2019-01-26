@@ -1,4 +1,4 @@
-package com.algolia.search.model.multiple_index
+package com.algolia.search.model.multipleindex
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName

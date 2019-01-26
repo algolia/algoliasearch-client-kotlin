@@ -2,7 +2,7 @@ package client
 
 import attributeA
 import com.algolia.search.model.common.TaskStatus
-import com.algolia.search.model.queryRule.*
+import com.algolia.search.model.queryrule.*
 import kotlinx.coroutines.runBlocking
 import objectIDA
 import objectIDB

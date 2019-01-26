@@ -1,9 +1,9 @@
 package client
 
-import com.algolia.search.model.multiple_index.IndexQuery
+import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.search.Query
-import com.algolia.search.model.multiple_index.RequestObjects
+import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.serialize.KeyObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.content

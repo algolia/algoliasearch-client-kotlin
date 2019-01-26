@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.model.multiple_index.MultipleQueriesStrategy.*
+import com.algolia.search.model.multipleindex.MultipleQueriesStrategy.*
 import com.algolia.search.serialize.KeyNone
 import com.algolia.search.serialize.KeyStopIfEnoughMatches
 import org.junit.Test

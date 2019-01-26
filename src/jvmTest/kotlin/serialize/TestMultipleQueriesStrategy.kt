@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.model.multiple_index.MultipleQueriesStrategy
-import com.algolia.search.model.multiple_index.MultipleQueriesStrategy.*
+import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
+import com.algolia.search.model.multipleindex.MultipleQueriesStrategy.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
