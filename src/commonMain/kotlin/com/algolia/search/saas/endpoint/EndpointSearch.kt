@@ -17,8 +17,8 @@ interface EndpointSearch {
 
     suspend fun searchForFacetValue(
         attribute: Attribute,
-        query: Query? = null,
         facetQuery: String? = null,
+        query: Query? = null,
         maxFacetHits: Int? = null,
         requestOptions: RequestOptions? = null
     ): FacetHits

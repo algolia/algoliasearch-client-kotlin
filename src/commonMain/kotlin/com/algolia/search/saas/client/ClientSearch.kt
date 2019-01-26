@@ -62,8 +62,8 @@ internal class ClientSearch(
 
     override suspend fun searchForFacetValue(
         attribute: Attribute,
-        query: Query?,
         facetQuery: String?,
+        query: Query?,
         maxFacetHits: Int?,
         requestOptions: RequestOptions?
     ): FacetHits {
