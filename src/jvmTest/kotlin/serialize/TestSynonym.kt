@@ -1,8 +1,8 @@
 package serialize
 
 import com.algolia.search.saas.model.ObjectID
-import com.algolia.search.saas.model.Synonym
-import com.algolia.search.saas.model.SynonymType
+import com.algolia.search.saas.model.synonym.Synonym
+import com.algolia.search.saas.model.synonym.SynonymType
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.Json

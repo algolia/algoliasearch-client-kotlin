@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.synonym
 
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
@@ -47,8 +48,12 @@ sealed class SynonymType(override val raw: String) : Raw<String> {
             return when (string) {
                 KeyOneWaySynonym -> OneWay
                 KeySynonym -> MultiWay
-                KeyAlternativeCorrection1 -> AlternativeCorrections(Typo.One)
-                KeyAlternativeCorrection2 -> AlternativeCorrections(Typo.Two)
+                KeyAlternativeCorrection1 -> AlternativeCorrections(
+                    Typo.One
+                )
+                KeyAlternativeCorrection2 -> AlternativeCorrections(
+                    Typo.Two
+                )
                 KeyPlaceholder -> Placeholder
                 else -> Other(string)
             }

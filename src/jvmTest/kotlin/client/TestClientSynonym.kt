@@ -1,7 +1,7 @@
 package client
 
-import com.algolia.search.saas.model.Synonym
-import com.algolia.search.saas.model.SynonymType
+import com.algolia.search.saas.model.synonym.Synonym
+import com.algolia.search.saas.model.synonym.SynonymType
 import com.algolia.search.saas.model.TaskStatus
 import kotlinx.coroutines.runBlocking
 import objectIDA

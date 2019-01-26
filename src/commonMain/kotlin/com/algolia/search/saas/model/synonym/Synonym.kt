@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.synonym
 
+import com.algolia.search.saas.model.ObjectID
 import com.algolia.search.saas.serialize.*
 import com.algolia.search.saas.toObjectID
 import kotlinx.serialization.*

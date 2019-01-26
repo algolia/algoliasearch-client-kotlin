@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.model.SynonymType
+import com.algolia.search.saas.model.synonym.SynonymType
 import com.algolia.search.saas.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith

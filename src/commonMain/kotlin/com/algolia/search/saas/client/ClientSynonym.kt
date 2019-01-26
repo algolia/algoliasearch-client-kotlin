@@ -2,6 +2,10 @@ package com.algolia.search.saas.client
 
 import com.algolia.search.saas.model.*
 import com.algolia.search.saas.endpoint.EndpointSynonym
+import com.algolia.search.saas.model.synonym.Synonym
+import com.algolia.search.saas.model.synonym.SynonymHits
+import com.algolia.search.saas.model.synonym.SynonymType
+import com.algolia.search.saas.model.synonym.TaskUpdateSynonym
 import com.algolia.search.saas.serialize.*
 import io.ktor.client.request.*
 import kotlinx.serialization.json.Json
