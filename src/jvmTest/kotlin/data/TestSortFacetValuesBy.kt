@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.model.SortFacetValuesBy.*
+import com.algolia.search.saas.model.enums.SortFacetValuesBy.*
 import com.algolia.search.saas.serialize.KeyAlpha
 import com.algolia.search.saas.serialize.KeyCount
 import org.junit.Test

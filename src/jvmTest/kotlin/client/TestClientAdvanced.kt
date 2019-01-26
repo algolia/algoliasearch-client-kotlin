@@ -1,6 +1,6 @@
 package client
 
-import com.algolia.search.saas.model.Settings
+import com.algolia.search.saas.model.settings.Settings
 import com.algolia.search.saas.model.TaskStatus
 import kotlinx.coroutines.runBlocking
 import org.junit.Test

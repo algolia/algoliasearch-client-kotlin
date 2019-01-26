@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.saas.model.AlternativesAsExact.*
+import com.algolia.search.saas.model.enums.AlternativesAsExact.*
 import com.algolia.search.saas.serialize.KeyIgnorePlurals
 import com.algolia.search.saas.serialize.KeyMultiWordsSynonym
 import com.algolia.search.saas.serialize.KeySingleWordSynonym

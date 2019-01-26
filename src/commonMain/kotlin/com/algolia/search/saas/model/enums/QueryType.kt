@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.enums
 
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.KeyPrefixAll
 import com.algolia.search.saas.serialize.KeyPrefixLast
 import com.algolia.search.saas.serialize.KeyPrefixNone

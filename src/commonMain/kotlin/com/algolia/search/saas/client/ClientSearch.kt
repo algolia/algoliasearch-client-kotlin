@@ -5,6 +5,7 @@ import com.algolia.search.saas.model.search.FacetHits
 import com.algolia.search.saas.model.search.Query
 import com.algolia.search.saas.model.search.SearchResponse
 import com.algolia.search.saas.endpoint.EndpointSearch
+import com.algolia.search.saas.model.search.Cursor
 import com.algolia.search.saas.query.clone
 import com.algolia.search.saas.serialize.KeyCursor
 import com.algolia.search.saas.serialize.KeyFacetQuery

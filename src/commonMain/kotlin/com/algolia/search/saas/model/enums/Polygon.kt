@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.enums
 
+import com.algolia.search.saas.model.Raw
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.FloatSerializer
 

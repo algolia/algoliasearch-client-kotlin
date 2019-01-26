@@ -1,4 +1,4 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.enums
 
 import com.algolia.search.saas.serialize.asJsonInput
 import kotlinx.serialization.*
@@ -32,7 +32,12 @@ sealed class BooleanOrQueryLanguages {
             val element = decoder.asJsonInput()
 
             return when (element) {
-                is JsonArray -> QueryLanguages(element.map { Json.nonstrict.fromJson(QueryLanguage, it) })
+                is JsonArray -> QueryLanguages(element.map {
+                    Json.nonstrict.fromJson(
+                        QueryLanguage,
+                        it
+                    )
+                })
                 is JsonLiteral -> Boolean(element.boolean)
                 else -> throw Exception()
             }

@@ -1,5 +1,6 @@
 package com.algolia.search.saas.model
 
+import com.algolia.search.saas.model.enums.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 

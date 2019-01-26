@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.enums
 
+import com.algolia.search.saas.model.Attribute
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.HashMapSerializer
 
@@ -29,7 +30,11 @@ data class DecompoundedAttributes internal constructor(
         }
 
         override fun deserialize(decoder: Decoder): DecompoundedAttributes {
-            return DecompoundedAttributes(serializer.deserialize(decoder))
+            return DecompoundedAttributes(
+                serializer.deserialize(
+                    decoder
+                )
+            )
         }
     }
 }

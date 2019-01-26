@@ -3,7 +3,7 @@ package serialize
 import attributes
 import attributesJson
 import boolean
-import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.enums.*
 import com.algolia.search.saas.model.search.Query
 import com.algolia.search.saas.serialize.*
 import int

@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.settings
 
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.*
 
 
@@ -99,5 +100,5 @@ sealed class SettingsKey(override val raw: String) : Raw<String> {
 
     object MaxFacetHits : SettingsKey(KeyMaxFacetHits)
 
-    data class Custom(override val raw: String) : SettingsKey(raw)
+    data class Other(override val raw: String) : SettingsKey(raw)
 }

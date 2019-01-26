@@ -1,5 +1,9 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.settings
 
+import com.algolia.search.saas.model.Attribute
+import com.algolia.search.saas.model.IndexName
+import com.algolia.search.saas.model.Ranking
+import com.algolia.search.saas.model.enums.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.Serializable
 

@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.model.ExactOnSingleWordQuery
-import com.algolia.search.saas.model.ExactOnSingleWordQuery.*
+import com.algolia.search.saas.model.enums.ExactOnSingleWordQuery
+import com.algolia.search.saas.model.enums.ExactOnSingleWordQuery.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -9,7 +9,9 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestExactOnSingleWordQuery : TestSerializer<ExactOnSingleWordQuery>(ExactOnSingleWordQuery) {
+internal class TestExactOnSingleWordQuery : TestSerializer<ExactOnSingleWordQuery>(
+    ExactOnSingleWordQuery
+) {
 
     override val items = listOf(
         Attribute to JsonLiteral(Attribute.raw),

@@ -1,6 +1,7 @@
 package com.algolia.search.saas.model.search
 
 import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.enums.*
 import com.algolia.search.saas.query.FilterBuilder
 import com.algolia.search.saas.query.OptionalFilterBuilder
 import com.algolia.search.saas.query.QueryHelper

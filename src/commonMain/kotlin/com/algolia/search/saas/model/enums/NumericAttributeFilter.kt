@@ -1,5 +1,7 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.enums
 
+import com.algolia.search.saas.model.Attribute
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.KeyEqualOnly
 import com.algolia.search.saas.serialize.regexEqualOnly
 import com.algolia.search.saas.toAttribute
@@ -11,7 +13,8 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(NumericAttributeFilter.Companion::class)
-data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boolean = false) : Raw<String> {
+data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boolean = false) :
+    Raw<String> {
 
     override val raw = if (equalOnly) "$KeyEqualOnly($attribute)" else attribute.raw
 

@@ -2,6 +2,9 @@ package query
 
 import buildTest
 import com.algolia.search.saas.model.*
+import com.algolia.search.saas.model.enums.AlternativesAsExact
+import com.algolia.search.saas.model.enums.QueryLanguage
+import com.algolia.search.saas.model.enums.ResponseFields
 import com.algolia.search.saas.model.search.Query
 import com.algolia.search.saas.query.*
 import com.algolia.search.saas.to

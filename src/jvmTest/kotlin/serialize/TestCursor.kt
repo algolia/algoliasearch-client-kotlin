@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.saas.model.Cursor
+import com.algolia.search.saas.model.search.Cursor
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

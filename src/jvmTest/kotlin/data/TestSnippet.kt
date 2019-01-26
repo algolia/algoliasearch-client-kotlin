@@ -3,7 +3,7 @@ package data
 import attributeA
 import attributeAll
 import attributeB
-import com.algolia.search.saas.model.Snippet
+import com.algolia.search.saas.model.enums.Snippet
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

@@ -2,7 +2,7 @@ package serialize
 
 import attributeA
 import attributeB
-import com.algolia.search.saas.model.Snippet
+import com.algolia.search.saas.model.enums.Snippet
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -12,7 +12,10 @@ import org.junit.runners.JUnit4
 internal class TestSnippet : TestSerializer<Snippet>(Snippet) {
 
     override val items = listOf(
-        Snippet(attributeA) to JsonLiteral(Snippet(attributeA).raw),
+        Snippet(attributeA) to JsonLiteral(
+            Snippet(
+                attributeA
+            ).raw),
         snippet to json
     )
 

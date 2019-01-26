@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.enums
 
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.serialize.KeyMin
 import com.algolia.search.saas.serialize.KeyStrict
 import com.algolia.search.saas.serialize.asJsonInput

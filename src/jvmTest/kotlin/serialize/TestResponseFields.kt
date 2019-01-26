@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.saas.model.ResponseFields
-import com.algolia.search.saas.model.ResponseFields.*
+import com.algolia.search.saas.model.enums.ResponseFields
+import com.algolia.search.saas.model.enums.ResponseFields.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

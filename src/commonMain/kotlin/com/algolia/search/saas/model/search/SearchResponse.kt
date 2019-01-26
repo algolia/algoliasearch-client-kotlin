@@ -1,7 +1,6 @@
 package com.algolia.search.saas.model.search
 
 import com.algolia.search.saas.model.Attribute
-import com.algolia.search.saas.model.Cursor
 import com.algolia.search.saas.model.IndexName
 import com.algolia.search.saas.serialize.*
 import kotlinx.serialization.*

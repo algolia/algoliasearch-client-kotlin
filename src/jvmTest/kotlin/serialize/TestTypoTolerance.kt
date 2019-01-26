@@ -1,9 +1,9 @@
 package serialize
 
 import boolean
-import com.algolia.search.saas.model.TypoTolerance
-import com.algolia.search.saas.model.TypoTolerance.*
-import com.algolia.search.saas.model.TypoTolerance.Boolean
+import com.algolia.search.saas.model.enums.TypoTolerance
+import com.algolia.search.saas.model.enums.TypoTolerance.*
+import com.algolia.search.saas.model.enums.TypoTolerance.Boolean
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

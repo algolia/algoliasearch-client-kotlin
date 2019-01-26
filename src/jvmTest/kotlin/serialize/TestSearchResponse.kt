@@ -1,7 +1,7 @@
 package serialize
 
 import attributeB
-import com.algolia.search.saas.model.Cursor
+import com.algolia.search.saas.model.search.Cursor
 import com.algolia.search.saas.model.search.SearchResponse
 import com.algolia.search.saas.serialize.*
 import indexA

@@ -2,7 +2,7 @@ package com.algolia.search.saas.serialize
 
 import com.algolia.search.saas.model.APIKeyCreate
 import com.algolia.search.saas.model.search.Query
-import com.algolia.search.saas.model.Settings
+import com.algolia.search.saas.model.settings.Settings
 import com.algolia.search.saas.model.search.RankingInfo
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode

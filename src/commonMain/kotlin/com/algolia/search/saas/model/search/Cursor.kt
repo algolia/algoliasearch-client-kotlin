@@ -1,5 +1,6 @@
-package com.algolia.search.saas.model
+package com.algolia.search.saas.model.search
 
+import com.algolia.search.saas.model.Raw
 import com.algolia.search.saas.toCursor
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
