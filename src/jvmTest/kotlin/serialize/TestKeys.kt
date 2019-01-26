@@ -162,7 +162,7 @@ internal class TestKeys {
         KeyAction shouldEqual "action"
         KeyBody shouldEqual "body"
         KeyObjectIDs shouldEqual "objectIDs"
-        KeyTaskId shouldEqual "taskID"
+        KeyTaskID shouldEqual "taskID"
         KeySearch shouldEqual "search"
         KeyBrowse shouldEqual "browse"
         KeyDeleteIndex shouldEqual "deleteIndex"

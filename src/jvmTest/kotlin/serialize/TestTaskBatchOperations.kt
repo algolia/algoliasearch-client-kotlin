@@ -2,7 +2,7 @@ package serialize
 
 import com.algolia.search.saas.model.indexing.TaskBatchOperations
 import com.algolia.search.saas.model.common.TaskIndex
-import com.algolia.search.saas.serialize.KeyTaskId
+import com.algolia.search.saas.serialize.KeyTaskID
 import com.algolia.search.saas.toTaskID
 import indexA
 import indexB
@@ -21,7 +21,7 @@ internal class TestTaskBatchOperations : TestSerializer<TaskBatchOperations>(Tas
         TaskBatchOperations(
             listOf(taskIndexA, taskIndexB)
         ) to json {
-            KeyTaskId to json {
+            KeyTaskID to json {
                 taskIndexA.indexName.raw to taskIndexA.taskID.raw
                 taskIndexB.indexName.raw to taskIndexB.taskID.raw
             }
