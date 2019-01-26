@@ -28,26 +28,26 @@ internal class TestClientMultiCluster {
     @Test
     fun list() {
         runBlocking {
-            val clusters = multiCluster.listClusters()
+            val clusters = clientMcm.listClusters()
 
             (clusters.size >= 2).shouldBeTrue()
-            multiCluster.assignUserID(userID, clusters.first().clusterName)
+            clientMcm.assignUserID(userID, clusters.first().clusterName)
             while (isActive) {
                 try {
-                    multiCluster.getUserID(userID)
+                    clientMcm.getUserID(userID)
                     break
                 } catch (exception: BadResponseStatusException) {
                     exception.statusCode shouldEqual HttpStatusCode.NotFound
                 }
                 delay(1000L)
             }
-            multiCluster.searchUserID(userID.raw).hits.any { it.userID == userID }.shouldBeTrue()
-            multiCluster.listUserIDs().shouldNotBeEmpty()
-            multiCluster.getTopUserID().shouldNotBeEmpty()
+            clientMcm.searchUserID(userID.raw).hits.any { it.userID == userID }.shouldBeTrue()
+            clientMcm.listUserIDs().shouldNotBeEmpty()
+            clientMcm.getTopUserID().shouldNotBeEmpty()
 
             loop@ while (isActive) {
                 try {
-                    multiCluster.removeUserID(userID)
+                    clientMcm.removeUserID(userID)
                 } catch (exception: BadResponseStatusException) {
                     when (exception.statusCode) {
                         HttpStatusCode.NotFound -> break@loop
@@ -57,16 +57,16 @@ internal class TestClientMultiCluster {
             }
             while (isActive) {
                 try {
-                    multiCluster.getUserID(userID)
+                    clientMcm.getUserID(userID)
                 } catch (exception: BadResponseStatusException) {
                     exception.statusCode shouldEqual HttpStatusCode.NotFound
                     break
                 }
                 delay(1000L)
             }
-            multiCluster.listUserIDs().filter { it.userID.raw.startsWith(prefix) }.forEach {
+            clientMcm.listUserIDs().filter { it.userID.raw.startsWith(prefix) }.forEach {
                 println(it.userID)
-                multiCluster.removeUserID(it.userID)
+                clientMcm.removeUserID(it.userID)
             }
         }
     }
