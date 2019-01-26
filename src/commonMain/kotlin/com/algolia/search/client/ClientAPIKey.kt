@@ -3,8 +3,9 @@ package com.algolia.search.client
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.apiKey.*
-import com.algolia.search.model.indexing.TaskUpdateObject
+import com.algolia.search.model.apikey.ACL
+import com.algolia.search.model.apikey.RequestAPIKey
+import com.algolia.search.model.apikey.ResponseAPIKey
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.encodeNoNulls
 import io.ktor.client.request.delete
@@ -27,10 +28,10 @@ internal class ClientAPIKey(
         validity: Long?,
         query: Query?,
         referers: List<String>?
-    ): SaveAPIKeyResponse {
+    ): ResponseAPIKey.Save {
         return write.retry(writeTimeout, "/1/keys") { path ->
-            httpClient.post<SaveAPIKeyResponse>(path) {
-                body = APIKeyCreateBody(
+            httpClient.post<ResponseAPIKey.Save>(path) {
+                body = RequestAPIKey(
                     rights = rights,
                     indexes = indexes,
                     description = description,
@@ -54,10 +55,10 @@ internal class ClientAPIKey(
         validity: Long?,
         query: Query?,
         referers: List<String>?
-    ): SaveAPIKeyResponse {
+    ): ResponseAPIKey.Save {
         return write.retry(writeTimeout, "/1/keys/$apiKey") { path ->
-            httpClient.put<SaveAPIKeyResponse>(path) {
-                body = APIKeyCreateBody(
+            httpClient.put<ResponseAPIKey.Save>(path) {
+                body = RequestAPIKey(
                     rights = rights,
                     indexes = indexes,
                     description = description,
@@ -71,27 +72,27 @@ internal class ClientAPIKey(
         }
     }
 
-    override suspend fun deleteAPIKey(apiKey: APIKey): DeleteAPIKeyResponse {
+    override suspend fun deleteAPIKey(apiKey: APIKey): ResponseAPIKey.Delete {
         return write.retry(writeTimeout, "/1/keys/$apiKey") { path ->
-            httpClient.delete<DeleteAPIKeyResponse>(path)
+            httpClient.delete<ResponseAPIKey.Delete>(path)
         }
     }
 
-    override suspend fun listAPIKeys(): ListAPiKeysResponse {
+    override suspend fun listAPIKeys(): ResponseAPIKey.GetList {
         return read.retry(readTimeout, "/1/keys") { path ->
-            httpClient.get<ListAPiKeysResponse>(path)
+            httpClient.get<ResponseAPIKey.GetList>(path)
         }
     }
 
-    override suspend fun getAPIKeyPermission(apiKey: APIKey): APIKeyResponse {
+    override suspend fun getAPIKeyPermission(apiKey: APIKey): ResponseAPIKey.Get {
         return read.retry(readTimeout, "/1/keys/$apiKey") { path ->
-            httpClient.get<APIKeyResponse>(path)
+            httpClient.get<ResponseAPIKey.Get>(path)
         }
     }
 
-    override suspend fun getIndexAPIKey(indexName: IndexName, apiKey: APIKey): APIKeyResponse {
+    override suspend fun getIndexAPIKey(indexName: IndexName, apiKey: APIKey): ResponseAPIKey.Get {
         return read.retry(readTimeout, indexName.pathIndexes("/keys/$apiKey")) { path ->
-            httpClient.get<APIKeyResponse>(path)
+            httpClient.get<ResponseAPIKey.Get>(path)
         }
     }
 
@@ -104,10 +105,10 @@ internal class ClientAPIKey(
         validity: Long?,
         query: Query?,
         referers: List<String>?
-    ): SaveAPIKeyResponse {
+    ): ResponseAPIKey.Save {
         return write.retry(writeTimeout, indexName.pathIndexes("/keys")) { path ->
-            httpClient.post<SaveAPIKeyResponse>(path) {
-                body = APIKeyCreateBody(
+            httpClient.post<ResponseAPIKey.Save>(path) {
+                body = RequestAPIKey(
                     rights = rights,
                     description = description,
                     maxHitsPerQuery = maxHitsPerQuery,
@@ -129,10 +130,10 @@ internal class ClientAPIKey(
         validity: Long?,
         query: Query?,
         referers: List<String>?
-    ): TaskUpdateObject {
+    ): ResponseAPIKey.Update {
         return write.retry(writeTimeout, indexName.pathIndexes("/keys")) { path ->
-            httpClient.put<TaskUpdateObject>(path) {
-                body = APIKeyCreateBody(
+            httpClient.put<ResponseAPIKey.Update>(path) {
+                body = RequestAPIKey(
                     rights = rights,
                     description = description,
                     maxHitsPerQuery = maxHitsPerQuery,
@@ -145,21 +146,21 @@ internal class ClientAPIKey(
         }
     }
 
-    override suspend fun deleteIndexAPIKey(indexName: IndexName, apiKey: APIKey): DeleteAPIKeyResponse {
+    override suspend fun deleteIndexAPIKey(indexName: IndexName, apiKey: APIKey): ResponseAPIKey.Delete {
         return write.retry(writeTimeout, indexName.pathIndexes("/keys/$apiKey")) { path ->
-            httpClient.delete<DeleteAPIKeyResponse>(path)
+            httpClient.delete<ResponseAPIKey.Delete>(path)
         }
     }
 
-    override suspend fun listIndexAPIKeys(indexName: IndexName): ListAPiKeysResponse {
+    override suspend fun listIndexAPIKeys(indexName: IndexName): ResponseAPIKey.GetList {
         return read.retry(readTimeout, indexName.pathIndexes("/keys")) { path ->
-            httpClient.get<ListAPiKeysResponse>(path)
+            httpClient.get<ResponseAPIKey.GetList>(path)
         }
     }
 
-    override suspend fun listIndexAPIKeys(): ListAPiKeysResponse {
+    override suspend fun listIndexAPIKeys(): ResponseAPIKey.GetList {
         return read.retry(readTimeout, "/1/indexes/*/keys") { path ->
-            httpClient.get<ListAPiKeysResponse>(path)
+            httpClient.get<ResponseAPIKey.GetList>(path)
         }
     }
 }

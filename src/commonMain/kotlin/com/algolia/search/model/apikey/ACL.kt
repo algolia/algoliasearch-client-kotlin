@@ -1,4 +1,4 @@
-package com.algolia.search.model.apiKey
+package com.algolia.search.model.apikey
 
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*

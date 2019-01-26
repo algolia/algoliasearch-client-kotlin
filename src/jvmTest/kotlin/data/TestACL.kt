@@ -1,6 +1,6 @@
 package data
 
-import com.algolia.search.model.apiKey.ACL.*
+import com.algolia.search.model.apikey.ACL.*
 import com.algolia.search.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith

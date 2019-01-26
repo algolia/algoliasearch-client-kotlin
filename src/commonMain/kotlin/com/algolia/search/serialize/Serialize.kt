@@ -1,6 +1,6 @@
 package com.algolia.search.serialize
 
-import com.algolia.search.model.apiKey.APIKeyCreateBody
+import com.algolia.search.model.apikey.RequestAPIKey
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.search.RankingInfo
@@ -47,8 +47,8 @@ internal fun Settings.encodeNoNulls(): JsonObject {
     return toJsonObject(Settings.serializer()).encodeNoNulls()
 }
 
-internal fun APIKeyCreateBody.encodeNoNulls(): JsonObject {
-    return toJsonObject(APIKeyCreateBody.serializer()).encodeNoNulls()
+internal fun RequestAPIKey.encodeNoNulls(): JsonObject {
+    return toJsonObject(RequestAPIKey.serializer()).encodeNoNulls()
 }
 
 internal fun JsonObject.toHighlights() = Json.plain.fromJson(KSerializerHighlights, this)
