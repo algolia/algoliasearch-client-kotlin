@@ -2,7 +2,7 @@ package data
 
 import attributeA
 import attributeB
-import com.algolia.search.saas.model.Ranking.*
+import com.algolia.search.saas.model.enums.Ranking.*
 import com.algolia.search.saas.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith

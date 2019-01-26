@@ -4,7 +4,6 @@ import attributeA
 import attributes
 import attributesJson
 import boolean
-import com.algolia.search.saas.model.*
 import com.algolia.search.saas.model.enums.*
 import com.algolia.search.saas.model.settings.Settings
 import com.algolia.search.saas.serialize.*
