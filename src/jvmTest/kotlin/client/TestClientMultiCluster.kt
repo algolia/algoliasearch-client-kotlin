@@ -20,7 +20,9 @@ import java.util.*
 @RunWith(JUnit4::class)
 internal class TestClientMultiCluster {
 
-    private val date = SimpleDateFormat("YYYY-MM-DD-HH-mm-ss").format(Date())
+    private val date = SimpleDateFormat("YYYY-MM-DD-HH-mm-ss").also {
+        it.timeZone = TimeZone.getTimeZone("UTC")
+    }.format(Date())
 
     private val prefix = "kotlin-$date"
     private val userID = "$prefix-unknown".toUserID()
