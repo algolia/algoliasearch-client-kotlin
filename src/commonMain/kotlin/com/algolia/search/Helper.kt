@@ -2,7 +2,7 @@ package com.algolia.search
 
 import com.algolia.search.model.*
 import com.algolia.search.model.APIKey
-import com.algolia.search.model.cluster.ClusterName
+import com.algolia.search.model.ClusterName
 import com.algolia.search.model.common.TaskID
 import com.algolia.search.model.enums.Point
 import com.algolia.search.model.enums.Snippet

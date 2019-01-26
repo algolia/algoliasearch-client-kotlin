@@ -1,7 +1,9 @@
 package com.algolia.search.client
 
-import com.algolia.search.model.*
 import com.algolia.search.endpoint.EndpointMultiCluster
+import com.algolia.search.model.ClusterName
+import com.algolia.search.model.Deleted
+import com.algolia.search.model.UserID
 import com.algolia.search.model.cluster.*
 import com.algolia.search.serialize.*
 import io.ktor.client.request.*
@@ -13,11 +15,11 @@ internal class ClientMultiCluster(
 ) : EndpointMultiCluster,
     Client by client {
 
-    override suspend fun listClusters(requestOptions: RequestOptions?): List<ClusterInfo> {
+    override suspend fun listClusters(requestOptions: RequestOptions?): ListClustersResponse {
         return read.retry(requestOptions.computedReadTimeout, "/1/clusters") { path ->
-            httpClient.get<ClusterInfos>(path) {
+            httpClient.get<ListClustersResponse>(path) {
                 setRequestOptions(requestOptions)
-            }.clusterInfos
+            }
         }
     }
 
@@ -25,9 +27,9 @@ internal class ClientMultiCluster(
         userID: UserID,
         clusterName: ClusterName,
         requestOptions: RequestOptions?
-    ): ClusterCreated {
+    ): CreateClusterResponse {
         return write.retry(requestOptions.computedWriteTimeout, "/1/clusters/mapping") { path ->
-            httpClient.post<ClusterCreated>(path) {
+            httpClient.post<CreateClusterResponse>(path) {
                 setRequestOptions(requestOptions)
                 header(KeyAlgoliaUserID, userID.raw)
                 body = json { KeyCluster to clusterName.raw }.toString()
@@ -43,21 +45,25 @@ internal class ClientMultiCluster(
         }
     }
 
-    override suspend fun getTopUserID(requestOptions: RequestOptions?): List<Cluster> {
+    override suspend fun getTopUserID(requestOptions: RequestOptions?): ListTopUsersResponse {
         return read.retry(requestOptions.computedReadTimeout, "/1/clusters/mapping/top") { path ->
-            httpClient.get<TopUsers>(path) {
+            httpClient.get<ListTopUsersResponse>(path) {
                 setRequestOptions(requestOptions)
-            }.topUsers.flatMap { entry -> entry.value.map { it.copy(clusterName = entry.key) } }
+            }
         }
     }
 
-    override suspend fun listUserIDs(page: Int?, hitsPerPage: Int?, requestOptions: RequestOptions?): List<Cluster> {
+    override suspend fun listUserIDs(
+        page: Int?,
+        hitsPerPage: Int?,
+        requestOptions: RequestOptions?
+    ): ListUserIDsResponse {
         return read.retry(requestOptions.computedReadTimeout, "/1/clusters/mapping") { path ->
-            httpClient.get<UserIDs>(path) {
+            httpClient.get<ListUserIDsResponse>(path) {
                 setRequestOptions(requestOptions)
-                page?.let { parameter(KeyPage, it) }
-                hitsPerPage?.let { parameter(KeyHitsPerPage, it) }
-            }.userIDs
+                parameter(KeyPage, page)
+                parameter(KeyHitsPerPage, hitsPerPage)
+            }
         }
     }
 
@@ -76,9 +82,9 @@ internal class ClientMultiCluster(
         page: Int?,
         hitsPerPage: Int?,
         requestOptions: RequestOptions?
-    ): ClusterHits {
+    ): SearchClusterResponse {
         return read.retry(requestOptions.computedReadTimeout, "/1/clusters/mapping/search") { path ->
-            httpClient.post<ClusterHits>(path) {
+            httpClient.post<SearchClusterResponse>(path) {
                 setRequestOptions(requestOptions)
                 body = json {
                     query?.let { KeyQuery to it }

@@ -30,7 +30,7 @@ internal class TestClientMultiCluster {
     @Test
     fun list() {
         runBlocking {
-            val clusters = clientMcm.listClusters()
+            val clusters = clientMcm.listClusters().clusterResponses
 
             (clusters.size >= 2).shouldBeTrue()
             clientMcm.assignUserID(userID, clusters.first().clusterName)
@@ -44,8 +44,8 @@ internal class TestClientMultiCluster {
                 delay(1000L)
             }
             clientMcm.searchUserID(userID.raw).hits.any { it.userID == userID }.shouldBeTrue()
-            clientMcm.listUserIDs().shouldNotBeEmpty()
-            clientMcm.getTopUserID().shouldNotBeEmpty()
+            clientMcm.listUserIDs().userIDs.shouldNotBeEmpty()
+            clientMcm.getTopUserID().topUsers.shouldNotBeEmpty()
 
             loop@ while (isActive) {
                 try {
@@ -66,7 +66,7 @@ internal class TestClientMultiCluster {
                 }
                 delay(1000L)
             }
-            clientMcm.listUserIDs().filter { it.userID.raw.startsWith(prefix) }.forEach {
+            clientMcm.listUserIDs().userIDs.filter { it.userID.raw.startsWith(prefix) }.forEach {
                 println(it.userID)
                 clientMcm.removeUserID(it.userID)
             }

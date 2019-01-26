@@ -247,6 +247,10 @@ internal class TestKeys {
         KeyValidity shouldEqual "validity"
         KeyQueryParameters shouldEqual "queryParameters"
         KeyReferers shouldEqual "referers"
+        KeyClusterName shouldEqual "clusterName"
+        KeyUserID shouldEqual "userID"
+        KeyNbRecords shouldEqual "nbRecords"
+        KeyDataSize shouldEqual "dataSize"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"
