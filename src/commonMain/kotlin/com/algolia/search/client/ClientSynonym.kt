@@ -1,13 +1,11 @@
 package com.algolia.search.client
 
-import com.algolia.search.model.*
 import com.algolia.search.endpoint.EndpointSynonym
-import com.algolia.search.model.common.TaskDelete
-import com.algolia.search.model.common.TaskUpdate
+import com.algolia.search.model.IndexName
+import com.algolia.search.model.ObjectID
 import com.algolia.search.model.synonym.Synonym
-import com.algolia.search.model.synonym.SynonymHits
+import com.algolia.search.model.synonym.SynonymResponse
 import com.algolia.search.model.synonym.SynonymType
-import com.algolia.search.model.synonym.TaskUpdateSynonym
 import com.algolia.search.serialize.*
 import io.ktor.client.request.*
 import kotlinx.serialization.json.Json
@@ -25,12 +23,12 @@ internal class ClientSynonym(
         synonym: Synonym,
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdateSynonym {
+    ): SynonymResponse.UpdateObject {
         return write.retry(
             requestOptions.computedWriteTimeout,
             indexName.pathIndexes("/synonyms/${synonym.objectID}")
         ) { path ->
-            httpClient.put<TaskUpdateSynonym>(path) {
+            httpClient.put<SynonymResponse.UpdateObject>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
                 body = Json.stringify(Synonym, synonym)
@@ -43,9 +41,9 @@ internal class ClientSynonym(
         forwardToReplicas: Boolean?,
         replaceExistingSynonyms: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdate {
+    ): SynonymResponse.Update {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/synonyms/batch")) { path ->
-            httpClient.post<TaskUpdate>(path) {
+            httpClient.post<SynonymResponse.Update>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
                 replaceExistingSynonyms?.let { parameter(KeyReplaceExistingSynonyms, it) }
@@ -66,9 +64,9 @@ internal class ClientSynonym(
         objectID: ObjectID,
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskDelete {
+    ): SynonymResponse.Delete {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/synonyms/$objectID")) { path ->
-            httpClient.delete<TaskDelete>(path) {
+            httpClient.delete<SynonymResponse.Delete>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
             }
@@ -81,9 +79,9 @@ internal class ClientSynonym(
         hitsPerPage: Int?,
         synonymType: List<SynonymType>?,
         requestOptions: RequestOptions?
-    ): SynonymHits {
+    ): SynonymResponse.Search {
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/synonyms/search")) { path ->
-            httpClient.post<SynonymHits>(path) {
+            httpClient.post<SynonymResponse.Search>(path) {
                 setRequestOptions(requestOptions)
                 body = json {
                     query?.let { KeyQuery to it }
@@ -98,9 +96,9 @@ internal class ClientSynonym(
     override suspend fun clearSynonyms(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdate {
+    ): SynonymResponse.Update {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/synonyms/clear")) { path ->
-            httpClient.post<TaskUpdate>(path) {
+            httpClient.post<SynonymResponse.Update>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
                 body = ""
