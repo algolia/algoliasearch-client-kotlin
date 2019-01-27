@@ -1,9 +1,15 @@
-package com.algolia.search.apikey
+package com.algolia.search.client
 
-import com.algolia.search.client.Client
+import com.algolia.search.model.ACL
+import com.algolia.search.request.RequestAPIKey
+import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
+import com.algolia.search.response.ResponseAPIKeyPermission
+import com.algolia.search.response.ResponseListAPIKey
+import com.algolia.search.response.creation.CreationAPIKey
+import com.algolia.search.response.deletion.Deletion
 import com.algolia.search.serialize.encodeNoNulls
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -11,9 +17,9 @@ import io.ktor.client.request.post
 import io.ktor.client.request.put
 
 
-internal class APIKeyClient(
+internal class ClientAPIKey(
     val client: Client
-) : APIKeyEndpoint,
+) : EndpointAPIKey,
     Client by client {
 
     override suspend fun addAPIKey(
@@ -25,10 +31,10 @@ internal class APIKeyClient(
         validity: Long?,
         query: Query?,
         referers: List<String>?
-    ): APIKeyResponse.Save {
+    ): CreationAPIKey {
         return write.retry(writeTimeout, "/1/keys") { path ->
-            httpClient.post<APIKeyResponse.Save>(path) {
-                body = APIKeyRequest(
+            httpClient.post<CreationAPIKey>(path) {
+                body = RequestAPIKey(
                     rights = rights,
                     indexes = indexes,
                     description = description,
@@ -52,10 +58,10 @@ internal class APIKeyClient(
         validity: Long?,
         query: Query?,
         referers: List<String>?
-    ): APIKeyResponse.Save {
+    ): CreationAPIKey {
         return write.retry(writeTimeout, "/1/keys/$apiKey") { path ->
-            httpClient.put<APIKeyResponse.Save>(path) {
-                body = APIKeyRequest(
+            httpClient.put<CreationAPIKey>(path) {
+                body = RequestAPIKey(
                     rights = rights,
                     indexes = indexes,
                     description = description,
@@ -69,21 +75,21 @@ internal class APIKeyClient(
         }
     }
 
-    override suspend fun deleteAPIKey(apiKey: APIKey): APIKeyResponse.Delete {
+    override suspend fun deleteAPIKey(apiKey: APIKey): Deletion {
         return write.retry(writeTimeout, "/1/keys/$apiKey") { path ->
-            httpClient.delete<APIKeyResponse.Delete>(path)
+            httpClient.delete<Deletion>(path)
         }
     }
 
-    override suspend fun listAPIKeys(): APIKeyResponse.GetList {
+    override suspend fun listAPIKeys(): ResponseListAPIKey {
         return read.retry(readTimeout, "/1/keys") { path ->
-            httpClient.get<APIKeyResponse.GetList>(path)
+            httpClient.get<ResponseListAPIKey>(path)
         }
     }
 
-    override suspend fun getAPIKeyPermission(apiKey: APIKey): APIKeyResponse.Get {
+    override suspend fun getAPIKeyPermission(apiKey: APIKey): ResponseAPIKeyPermission {
         return read.retry(readTimeout, "/1/keys/$apiKey") { path ->
-            httpClient.get<APIKeyResponse.Get>(path)
+            httpClient.get<ResponseAPIKeyPermission>(path)
         }
     }
 }

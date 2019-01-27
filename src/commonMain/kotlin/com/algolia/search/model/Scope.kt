@@ -1,6 +1,5 @@
-package com.algolia.search.model.index
+package com.algolia.search.model
 
-import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyRules
 import com.algolia.search.serialize.KeySettings
 import com.algolia.search.serialize.KeySynonyms

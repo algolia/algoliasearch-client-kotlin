@@ -1,11 +1,16 @@
-package com.algolia.search.apikey
+package com.algolia.search.endpoint
 
+import com.algolia.search.model.ACL
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
+import com.algolia.search.response.ResponseAPIKeyPermission
+import com.algolia.search.response.ResponseListAPIKey
+import com.algolia.search.response.creation.CreationAPIKey
+import com.algolia.search.response.deletion.Deletion
 
 
-interface APIKeyEndpoint {
+interface EndpointAPIKey {
 
     suspend fun addAPIKey(
         rights: List<ACL>? = null,
@@ -16,7 +21,7 @@ interface APIKeyEndpoint {
         validity: Long? = null,
         query: Query? = null,
         referers: List<String>? = null
-    ): APIKeyResponse.Save
+    ): CreationAPIKey
 
     suspend fun updateAPIKey(
         apiKey: APIKey,
@@ -28,11 +33,11 @@ interface APIKeyEndpoint {
         validity: Long? = null,
         query: Query? = null,
         referers: List<String>? = null
-    ): APIKeyResponse.Save
+    ): CreationAPIKey
 
-    suspend fun deleteAPIKey(apiKey: APIKey): APIKeyResponse.Delete
+    suspend fun deleteAPIKey(apiKey: APIKey): Deletion
 
-    suspend fun getAPIKeyPermission(apiKey: APIKey): APIKeyResponse.Get
+    suspend fun getAPIKeyPermission(apiKey: APIKey): ResponseAPIKeyPermission
 
-    suspend fun listAPIKeys(): APIKeyResponse.GetList
+    suspend fun listAPIKeys(): ResponseListAPIKey
 }

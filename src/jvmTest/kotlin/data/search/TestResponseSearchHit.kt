@@ -2,7 +2,7 @@ package data.search
 
 import attributeA
 import attributeB
-import com.algolia.search.model.search.SearchResponse
+import com.algolia.search.response.ResponseSearch
 import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.json
 import org.junit.Test
@@ -12,7 +12,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-internal class TestSearchResponseHit {
+internal class TestResponseSearchHit {
 
     @Test
     fun dx() {
@@ -20,7 +20,7 @@ internal class TestSearchResponseHit {
             attributeA.raw to "valueA"
             attributeB.raw to "valueB"
         }
-        val hit = SearchResponse.Search.Hit(json)
+        val hit = ResponseSearch.Hit(json)
 
         hit.get(StringSerializer, attributeA) shouldEqual "valueA"
         hit.get(StringSerializer, attributeB) shouldEqual "valueB"

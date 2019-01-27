@@ -2,8 +2,9 @@ package com.algolia.search.client
 
 import com.algolia.search.endpoint.EndpointIndex
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.index.ResponseIndex
-import com.algolia.search.model.index.Scope
+import com.algolia.search.model.Scope
+import com.algolia.search.response.deletion.DeletionIndex
+import com.algolia.search.response.revision.RevisionIndex
 import com.algolia.search.serialize.*
 import io.ktor.client.request.delete
 import io.ktor.client.request.post
@@ -23,9 +24,9 @@ internal class ClientIndex(
         key: String,
         scopes: List<Scope>? = null,
         requestOptions: RequestOptions?
-    ): ResponseIndex.Update {
+    ): RevisionIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/operation")) { path ->
-            httpClient.post<ResponseIndex.Update>(path) {
+            httpClient.post<RevisionIndex>(path) {
                 setRequestOptions(requestOptions)
                 body = json {
                     KeyOperation to key
@@ -40,25 +41,25 @@ internal class ClientIndex(
         destination: IndexName,
         scopes: List<Scope>?,
         requestOptions: RequestOptions?
-    ): ResponseIndex.Update {
+    ): RevisionIndex {
         return copyOrMove(destination, KeyCopy, scopes, requestOptions)
     }
 
-    override suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions?): ResponseIndex.Update {
+    override suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions?): RevisionIndex {
         return copyOrMove(destination, KeyMove, null, requestOptions)
     }
 
-    override suspend fun deleteIndex(requestOptions: RequestOptions?): ResponseIndex.Delete {
+    override suspend fun deleteIndex(requestOptions: RequestOptions?): DeletionIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
-            httpClient.delete<ResponseIndex.Delete>(path) {
+            httpClient.delete<DeletionIndex>(path) {
                 setRequestOptions(requestOptions)
             }
         }
     }
 
-    override suspend fun clear(requestOptions: RequestOptions?): ResponseIndex.Update {
+    override suspend fun clear(requestOptions: RequestOptions?): RevisionIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/clear")) { path ->
-            httpClient.post<ResponseIndex.Update>(path) {
+            httpClient.post<RevisionIndex>(path) {
                 setRequestOptions(requestOptions)
                 body = ""
             }

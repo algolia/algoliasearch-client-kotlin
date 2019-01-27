@@ -1,11 +1,16 @@
-package com.algolia.search.apikey
+package com.algolia.search.endpoint
 
+import com.algolia.search.model.ACL
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
+import com.algolia.search.response.ResponseAPIKeyPermission
+import com.algolia.search.response.ResponseListAPIKey
+import com.algolia.search.response.creation.CreationAPIKey
+import com.algolia.search.response.deletion.Deletion
 
 
-interface APIKeyEndpointIndex {
+interface EndpointAPIKeyIndex {
 
     val indexName: IndexName
 
@@ -17,7 +22,7 @@ interface APIKeyEndpointIndex {
         validity: Long? = null,
         query: Query? = null,
         referers: List<String>? = null
-    ): APIKeyResponse.Save
+    ): CreationAPIKey
 
     suspend fun updateIndexAPIKey(
         rights: List<ACL>? = null,
@@ -27,11 +32,11 @@ interface APIKeyEndpointIndex {
         validity: Long? = null,
         query: Query? = null,
         referers: List<String>? = null
-    ): APIKeyResponse.Update
+    ): CreationAPIKey
 
-    suspend fun deleteIndexAPIKey(apiKey: APIKey): APIKeyResponse.Delete
+    suspend fun deleteIndexAPIKey(apiKey: APIKey): Deletion
 
-    suspend fun getIndexAPIKey(apiKey: APIKey): APIKeyResponse.Get
+    suspend fun getIndexAPIKey(apiKey: APIKey): ResponseAPIKeyPermission
 
-    suspend fun listIndexAPIKeys(): APIKeyResponse.GetList
+    suspend fun listIndexAPIKeys(): ResponseListAPIKey
 }

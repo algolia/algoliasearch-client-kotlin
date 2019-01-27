@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.apikey.ACL
+import com.algolia.search.model.ACL
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

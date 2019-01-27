@@ -2,7 +2,7 @@ package serialize
 
 import attributeB
 import com.algolia.search.model.search.Cursor
-import com.algolia.search.model.search.SearchResponse
+import com.algolia.search.response.ResponseSearch
 import com.algolia.search.serialize.*
 import indexA
 import kotlinx.serialization.json.json
@@ -13,12 +13,12 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestSearchResponse : TestSerializer<SearchResponse.Search>(SearchResponse.Search.serializer()) {
+internal class TestSearchResponse : TestSerializer<ResponseSearch>(ResponseSearch.serializer()) {
 
     override val items = listOf(
-        SearchResponse.Search(
+        ResponseSearch(
             indexName = indexA,
-            hits = listOf(TestSearchResponseHit.hit),
+            hits = listOf(TestResponseSearchHit.hit),
             cursor = Cursor(unknown),
             facets = TestFacets.facets,
             facetStats = mapOf(attributeB to TestFacetStats.facetStats),
@@ -32,7 +32,7 @@ internal class TestSearchResponse : TestSerializer<SearchResponse.Search>(Search
             params = unknown
         ) to json {
             KeyIndex to indexA.raw
-            KeyHits to jsonArray { +TestSearchResponseHit.json }
+            KeyHits to jsonArray { +TestResponseSearchHit.json }
             KeyNbHits to 0
             KeyProcessingTimeMS to 0
             KeyQuery to unknown

@@ -1,9 +1,15 @@
 package com.algolia.search.client
 
-import com.algolia.search.apikey.APIKeyResponse
 import com.algolia.search.endpoint.EndpointMultipleIndex
-import com.algolia.search.model.multipleindex.*
+import com.algolia.search.model.multipleindex.BatchOperationIndex
+import com.algolia.search.model.multipleindex.IndexQuery
+import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
+import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.query.clone
+import com.algolia.search.response.ResponseBatches
+import com.algolia.search.response.ResponseListAPIKey
+import com.algolia.search.response.ResponseListIndexes
+import com.algolia.search.response.ResponseSearches
 import com.algolia.search.serialize.KeyRequests
 import com.algolia.search.serialize.KeyResults
 import io.ktor.client.request.get
@@ -19,9 +25,9 @@ internal class ClientMultipleIndex(
 ) : EndpointMultipleIndex,
     Client by client {
 
-    override suspend fun listIndexes(requestOptions: RequestOptions?): MultipleIndexResponse.GetList {
+    override suspend fun listIndexes(requestOptions: RequestOptions?): ResponseListIndexes {
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes") { path ->
-            httpClient.get<MultipleIndexResponse.GetList>(path) {
+            httpClient.get<ResponseListIndexes>(path) {
                 setRequestOptions(requestOptions)
             }
         }
@@ -31,7 +37,7 @@ internal class ClientMultipleIndex(
         queries: Collection<IndexQuery>,
         strategy: MultipleQueriesStrategy,
         requestOptions: RequestOptions?
-    ): MultipleIndexResponse.Search {
+    ): ResponseSearches {
         val copies = queries.map {
             IndexQuery(
                 it.indexName,
@@ -40,7 +46,7 @@ internal class ClientMultipleIndex(
         }
 
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/queries") { path ->
-            httpClient.post<MultipleIndexResponse.Search>(path) {
+            httpClient.post<ResponseSearches>(path) {
                 setRequestOptions(requestOptions)
                 setQueries(copies, strategy)
             }
@@ -66,21 +72,21 @@ internal class ClientMultipleIndex(
     override suspend fun multipleBatchObjects(
         operations: List<BatchOperationIndex>,
         requestOptions: RequestOptions?
-    ): MultipleIndexResponse.Batch {
+    ): ResponseBatches {
         val requests = Json.plain.toJson(BatchOperationIndex.list, operations)
         val json = json { KeyRequests to requests }
 
         return write.retry(requestOptions.computedWriteTimeout, "/1/indexes/*/batch") { path ->
-            httpClient.post<MultipleIndexResponse.Batch>(path) {
+            httpClient.post<ResponseBatches>(path) {
                 setRequestOptions(requestOptions)
                 body = json.toString()
             }
         }
     }
 
-    override suspend fun listIndexAPIKeys(): APIKeyResponse.GetList {
+    override suspend fun listIndexAPIKeys(): ResponseListAPIKey {
         return read.retry(readTimeout, "/1/indexes/*/keys") { path ->
-            httpClient.get<APIKeyResponse.GetList>(path)
+            httpClient.get<ResponseListAPIKey>(path)
         }
     }
 }

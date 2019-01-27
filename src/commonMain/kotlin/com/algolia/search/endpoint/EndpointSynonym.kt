@@ -4,8 +4,11 @@ import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.synonym.Synonym
-import com.algolia.search.model.synonym.SynonymResponse
 import com.algolia.search.model.synonym.SynonymType
+import com.algolia.search.response.ResponseSearchSynonyms
+import com.algolia.search.response.deletion.DeletionIndex
+import com.algolia.search.response.revision.RevisionIndex
+import com.algolia.search.response.revision.RevisionObject
 
 
 interface EndpointSynonym {
@@ -16,14 +19,14 @@ interface EndpointSynonym {
         synonym: Synonym,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
-    ): SynonymResponse.UpdateObject
+    ): RevisionObject
 
     suspend fun saveSynonyms(
         synonyms: List<Synonym>,
         forwardToReplicas: Boolean? = null,
         replaceExistingSynonyms: Boolean? = null,
         requestOptions: RequestOptions? = null
-    ): SynonymResponse.Update
+    ): RevisionIndex
 
     suspend fun getSynonym(objectID: ObjectID, requestOptions: RequestOptions? = null): Synonym
 
@@ -31,7 +34,7 @@ interface EndpointSynonym {
         objectID: ObjectID,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
-    ): SynonymResponse.Delete
+    ): DeletionIndex
 
     suspend fun searchSynonyms(
         query: String? = null,
@@ -39,10 +42,10 @@ interface EndpointSynonym {
         hitsPerPage: Int? = null,
         synonymType: List<SynonymType>? = null,
         requestOptions: RequestOptions? = null
-    ): SynonymResponse.Search
+    ): ResponseSearchSynonyms
 
     suspend fun clearSynonyms(
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
-    ): SynonymResponse.Update
+    ): RevisionIndex
 }

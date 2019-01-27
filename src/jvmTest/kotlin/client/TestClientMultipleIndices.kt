@@ -63,8 +63,8 @@ internal class TestClientMultipleIndices {
             )
             val search = algolia.multipleQueries(queries)
 
-            search.responses.shouldNotBeEmpty()
-            search.responses.forEach {
+            search.results.shouldNotBeEmpty()
+            search.results.forEach {
                 println(it.indexName)
                 it.indexName.shouldNotBeNull()
             }

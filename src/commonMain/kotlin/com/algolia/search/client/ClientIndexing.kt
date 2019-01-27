@@ -6,10 +6,14 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
-import com.algolia.search.model.indexing.IndexingResponse
 import com.algolia.search.model.indexing.PartialUpdate
 import com.algolia.search.model.search.Query
 import com.algolia.search.query.clone
+import com.algolia.search.response.ResponseBatch
+import com.algolia.search.response.creation.CreationObject
+import com.algolia.search.response.deletion.DeletionIndex
+import com.algolia.search.response.revision.RevisionIndex
+import com.algolia.search.response.revision.RevisionObject
 import com.algolia.search.serialize.*
 import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
@@ -25,9 +29,9 @@ internal class ClientIndexing(
 ) : EndpointIndexing,
     Client by client {
 
-    private suspend fun addObject(payload: String, requestOptions: RequestOptions?): IndexingResponse.CreateObject {
+    private suspend fun addObject(payload: String, requestOptions: RequestOptions?): CreationObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
-            httpClient.post<IndexingResponse.CreateObject>(path) {
+            httpClient.post<CreationObject>(path) {
                 setRequestOptions(requestOptions)
                 body = payload
             }
@@ -38,7 +42,7 @@ internal class ClientIndexing(
         data: T,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions?
-    ): IndexingResponse.CreateObject {
+    ): CreationObject {
         return addObject(Json.stringify(serializer, data), requestOptions)
     }
 
@@ -46,17 +50,17 @@ internal class ClientIndexing(
         data: List<T>,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions?
-    ): IndexingResponse.Batch {
+    ): ResponseBatch {
         val operations = data.map { BatchOperation.AddObject.from(it, serializer) }
 
         return batch(operations, requestOptions)
     }
 
-    override suspend fun addObject(data: JsonObject, requestOptions: RequestOptions?): IndexingResponse.CreateObject {
+    override suspend fun addObject(data: JsonObject, requestOptions: RequestOptions?): CreationObject {
         return addObject(data.toString(), requestOptions)
     }
 
-    override suspend fun addObjects(data: List<JsonObject>, requestOptions: RequestOptions?): IndexingResponse.Batch {
+    override suspend fun addObjects(data: List<JsonObject>, requestOptions: RequestOptions?): ResponseBatch {
         val operations = data.map { BatchOperation.AddObject(it) }
 
         return batch(operations, requestOptions)
@@ -66,9 +70,9 @@ internal class ClientIndexing(
         payload: String,
         objectID: ObjectID,
         requestOptions: RequestOptions?
-    ): IndexingResponse.UpdateObject {
+    ): RevisionObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID")) { path ->
-            httpClient.put<IndexingResponse.UpdateObject>(path) {
+            httpClient.put<RevisionObject>(path) {
                 setRequestOptions(requestOptions)
                 body = payload
             }
@@ -79,7 +83,7 @@ internal class ClientIndexing(
         data: T,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions?
-    ): IndexingResponse.UpdateObject {
+    ): RevisionObject {
         return replaceObject(Json.stringify(serializer, data), data.objectID, requestOptions)
     }
 
@@ -87,7 +91,7 @@ internal class ClientIndexing(
         data: List<T>,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions?
-    ): IndexingResponse.Batch {
+    ): ResponseBatch {
         val operations = data.map { BatchOperation.ReplaceObject.from(it, serializer) }
 
         return batch(operations, requestOptions)
@@ -97,38 +101,38 @@ internal class ClientIndexing(
         data: JsonObject,
         objectID: ObjectID,
         requestOptions: RequestOptions?
-    ): IndexingResponse.UpdateObject {
+    ): RevisionObject {
         return replaceObject(data.toString(), objectID, requestOptions)
     }
 
     override suspend fun replaceObjects(
         data: List<Pair<JsonObject, ObjectID>>,
         requestOptions: RequestOptions?
-    ): IndexingResponse.Batch {
+    ): ResponseBatch {
         val operations = data.map { BatchOperation.ReplaceObject(it.first, it.second) }
 
         return batch(operations, requestOptions)
     }
 
-    override suspend fun deleteObject(objectID: ObjectID, requestOptions: RequestOptions?): IndexingResponse.Delete {
+    override suspend fun deleteObject(objectID: ObjectID, requestOptions: RequestOptions?): DeletionIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID")) { path ->
-            httpClient.delete<IndexingResponse.Delete>(path) {
+            httpClient.delete<DeletionIndex>(path) {
                 setRequestOptions(requestOptions)
             }
         }
     }
 
-    override suspend fun deleteObjects(objectIDs: List<ObjectID>, requestOptions: RequestOptions?): IndexingResponse.Batch {
+    override suspend fun deleteObjects(objectIDs: List<ObjectID>, requestOptions: RequestOptions?): ResponseBatch {
         val operations = objectIDs.map { BatchOperation.DeleteObject(it) }
 
         return batch(operations, requestOptions)
     }
 
-    override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): IndexingResponse.Update {
+    override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): RevisionIndex {
         val copy = query.clone()
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/deleteByQuery")) { path ->
-            httpClient.post<IndexingResponse.Update>(path) {
+            httpClient.post<RevisionIndex>(path) {
                 setRequestOptions(requestOptions)
                 body = json { KeyParams to copy.encodeNoNulls().urlEncode() }.toString()
             }
@@ -174,9 +178,9 @@ internal class ClientIndexing(
         objectID: ObjectID,
         createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
-    ): IndexingResponse.UpdateObject {
+    ): RevisionObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID/partial")) { path ->
-            httpClient.post<IndexingResponse.UpdateObject>(path) {
+            httpClient.post<RevisionObject>(path) {
                 setRequestOptions(requestOptions)
                 createIfNotExists?.let { parameter(KeyCreateIfNotExists, createIfNotExists) }
                 body = payload
@@ -189,7 +193,7 @@ internal class ClientIndexing(
         serializer: KSerializer<T>,
         createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
-    ): IndexingResponse.UpdateObject {
+    ): RevisionObject {
         return updateObject(Json.stringify(serializer, data), data.objectID, createIfNotExists, requestOptions)
     }
 
@@ -198,7 +202,7 @@ internal class ClientIndexing(
         serializer: KSerializer<T>,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
-    ): IndexingResponse.Batch {
+    ): ResponseBatch {
         val operations = data.map { BatchOperation.UpdateObject.from(it, serializer, createIfNotExists) }
 
         return batch(operations, requestOptions)
@@ -209,7 +213,7 @@ internal class ClientIndexing(
         objectID: ObjectID,
         createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
-    ): IndexingResponse.UpdateObject {
+    ): RevisionObject {
         return updateObject(data.toString(), objectID, createIfNotExists, requestOptions)
     }
 
@@ -217,7 +221,7 @@ internal class ClientIndexing(
         data: List<Pair<JsonObject, ObjectID>>,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
-    ): IndexingResponse.Batch {
+    ): ResponseBatch {
         val operations = data.map { BatchOperation.UpdateObject(it.first, it.second, createIfNotExists) }
 
         return batch(operations, requestOptions)
@@ -228,7 +232,7 @@ internal class ClientIndexing(
         objectID: ObjectID,
         createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
-    ): IndexingResponse.UpdateObject {
+    ): RevisionObject{
         val payload = Json.plain.toJson(PartialUpdate, partialUpdate).toString()
 
         return updateObject(payload, objectID, createIfNotExists, requestOptions)
@@ -238,7 +242,7 @@ internal class ClientIndexing(
         data: List<Pair<PartialUpdate, ObjectID>>,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
-    ): IndexingResponse.Batch {
+    ): ResponseBatch {
         val operations = data.map { BatchOperation.UpdateObject.from(it.first, it.second, createIfNotExists) }
 
         return batch(operations, requestOptions)
@@ -247,12 +251,12 @@ internal class ClientIndexing(
     override suspend fun batch(
         batchOperations: List<BatchOperation>,
         requestOptions: RequestOptions?
-    ): IndexingResponse.Batch {
+    ): ResponseBatch {
         val requests = Json.plain.toJson(BatchOperation.list, batchOperations)
         val json = json { KeyRequests to requests }
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/batch")) { path ->
-            httpClient.post<IndexingResponse.Batch>(path) {
+            httpClient.post<ResponseBatch>(path) {
                 setRequestOptions(requestOptions)
                 body = json.toString()
             }

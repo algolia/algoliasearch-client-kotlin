@@ -3,7 +3,9 @@ package com.algolia.search.client
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.model.ClusterName
 import com.algolia.search.model.UserID
-import com.algolia.search.model.cluster.ResponseCluster
+import com.algolia.search.response.*
+import com.algolia.search.response.creation.Creation
+import com.algolia.search.response.deletion.Deletion
 import com.algolia.search.serialize.*
 import io.ktor.client.request.*
 import kotlinx.serialization.json.json
@@ -14,9 +16,9 @@ internal class ClientMultiCluster(
 ) : EndpointMultiCluster,
     Client by client {
 
-    override suspend fun listClusters(requestOptions: RequestOptions?): ResponseCluster.Infos {
+    override suspend fun listClusters(requestOptions: RequestOptions?): ResponseListClusters {
         return read.retry(requestOptions.computedReadTimeout, "/1/clusters") { path ->
-            httpClient.get<ResponseCluster.Infos>(path) {
+            httpClient.get<ResponseListClusters>(path) {
                 setRequestOptions(requestOptions)
             }
         }
@@ -26,9 +28,9 @@ internal class ClientMultiCluster(
         userID: UserID,
         clusterName: ClusterName,
         requestOptions: RequestOptions?
-    ): ResponseCluster.Create {
+    ): Creation {
         return write.retry(requestOptions.computedWriteTimeout, "/1/clusters/mapping") { path ->
-            httpClient.post<ResponseCluster.Create>(path) {
+            httpClient.post<Creation>(path) {
                 setRequestOptions(requestOptions)
                 header(KeyAlgoliaUserID, userID.raw)
                 body = json { KeyCluster to clusterName.raw }.toString()
@@ -36,17 +38,17 @@ internal class ClientMultiCluster(
         }
     }
 
-    override suspend fun getUserID(userID: UserID, requestOptions: RequestOptions?): ResponseCluster.Get {
+    override suspend fun getUserID(userID: UserID, requestOptions: RequestOptions?): ResponseUserID {
         return read.retry(requestOptions.computedReadTimeout, "/1/clusters/mapping/$userID") { path ->
-            httpClient.get<ResponseCluster.Get>(path) {
+            httpClient.get<ResponseUserID>(path) {
                 setRequestOptions(requestOptions)
             }
         }
     }
 
-    override suspend fun getTopUserID(requestOptions: RequestOptions?): ResponseCluster.TopUsers {
+    override suspend fun getTopUserID(requestOptions: RequestOptions?): ResponseTopUserID {
         return read.retry(requestOptions.computedReadTimeout, "/1/clusters/mapping/top") { path ->
-            httpClient.get<ResponseCluster.TopUsers>(path) {
+            httpClient.get<ResponseTopUserID>(path) {
                 setRequestOptions(requestOptions)
             }
         }
@@ -56,9 +58,9 @@ internal class ClientMultiCluster(
         page: Int?,
         hitsPerPage: Int?,
         requestOptions: RequestOptions?
-    ): ResponseCluster.GetList {
+    ): ResponseListUserIDs {
         return read.retry(requestOptions.computedReadTimeout, "/1/clusters/mapping") { path ->
-            httpClient.get<ResponseCluster.GetList>(path) {
+            httpClient.get<ResponseListUserIDs>(path) {
                 setRequestOptions(requestOptions)
                 parameter(KeyPage, page)
                 parameter(KeyHitsPerPage, hitsPerPage)
@@ -66,9 +68,9 @@ internal class ClientMultiCluster(
         }
     }
 
-    override suspend fun removeUserID(userID: UserID, requestOptions: RequestOptions?): ResponseCluster.Delete {
+    override suspend fun removeUserID(userID: UserID, requestOptions: RequestOptions?): Deletion {
         return write.retry(requestOptions.computedWriteTimeout, "/1/clusters/mapping") { path ->
-            httpClient.delete<ResponseCluster.Delete>(path) {
+            httpClient.delete<Deletion>(path) {
                 header(KeyAlgoliaUserID, userID)
                 setRequestOptions(requestOptions)
             }
@@ -81,9 +83,9 @@ internal class ClientMultiCluster(
         page: Int?,
         hitsPerPage: Int?,
         requestOptions: RequestOptions?
-    ): ResponseCluster.Search {
+    ): ResponseSearchUserID {
         return read.retry(requestOptions.computedReadTimeout, "/1/clusters/mapping/search") { path ->
-            httpClient.post<ResponseCluster.Search>(path) {
+            httpClient.post<ResponseSearchUserID>(path) {
                 setRequestOptions(requestOptions)
                 body = json {
                     query?.let { KeyQuery to it }

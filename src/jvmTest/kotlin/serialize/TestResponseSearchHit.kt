@@ -4,7 +4,7 @@ import attributeA
 import attributeB
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Highlight
-import com.algolia.search.model.search.SearchResponse
+import com.algolia.search.response.ResponseSearch
 import com.algolia.search.serialize.KSerializerSnippets
 import com.algolia.search.serialize.KeyHighlightResult
 import com.algolia.search.serialize.KeySnippetResult
@@ -17,7 +17,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestSearchResponseHit : TestSerializer<SearchResponse.Search.Hit>(SearchResponse.Search.Hit) {
+internal class TestResponseSearchHit : TestSerializer<ResponseSearch.Hit>(ResponseSearch.Hit) {
 
     override val items = listOf(
         hit to json
@@ -36,6 +36,6 @@ internal class TestSearchResponseHit : TestSerializer<SearchResponse.Search.Hit>
             attributeA to unknown
             attributeB to unknown
         }
-        val hit = SearchResponse.Search.Hit(json)
+        val hit = ResponseSearch.Hit(json)
     }
 }

@@ -264,6 +264,7 @@ internal class TestKeys {
         KeyEnabled shouldEqual "enabled"
         KeyFacetHits shouldEqual "facetHits"
         KeyId shouldEqual "id"
+        KeyHighlighted shouldEqual "highlighted"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

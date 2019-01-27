@@ -1,11 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.apikey.APIKeyEndpoint
-
 
 data class ConfigurableEndpoints(
     val advanced: EndpointAdvanced? = null,
-    val apiKey: APIKeyEndpoint? = null,
+    val apiKey: EndpointAPIKey? = null,
     val index: EndpointIndex? = null,
     val indexing: EndpointIndexing? = null,
     val multipleIndex: EndpointMultipleIndex? = null,

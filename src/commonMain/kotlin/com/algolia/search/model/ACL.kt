@@ -1,6 +1,5 @@
-package com.algolia.search.apikey
+package com.algolia.search.model
 
-import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer

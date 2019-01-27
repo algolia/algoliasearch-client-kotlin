@@ -2,10 +2,9 @@ package com.algolia.search.client
 
 import com.algolia.search.endpoint.ConfigurableEndpoints
 import com.algolia.search.host.RetryLogic
-import com.algolia.search.model.multipleindex.MultipleIndexResponse
 import com.algolia.search.model.queryrule.QueryRule
-import com.algolia.search.model.queryrule.QueryRuleResponse
 import com.algolia.search.model.synonym.Synonym
+import com.algolia.search.response.ResponseBatches
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.DefaultRequest
@@ -31,8 +30,7 @@ internal class APIWrapper(
         install(JsonFeature) {
             serializer = KotlinxSerializer(Json.nonstrict)
                 .also {
-                    it.register(QueryRuleResponse.Update.serializer())
-                    it.register(MultipleIndexResponse.Batch)
+                    it.register(ResponseBatches)
                     it.register(Synonym)
                     it.register(JsonObjectSerializer)
                     it.register(QueryRule.serializer())

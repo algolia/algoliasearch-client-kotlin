@@ -1,6 +1,6 @@
 package client
 
-import com.algolia.search.apikey.ACL
+import com.algolia.search.model.ACL
 import com.algolia.search.client.ClientAlgolia
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.delay
@@ -13,7 +13,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-internal class TestAPIKeyClient {
+internal class TestClientAPIKey {
 
     private val indexName = index.indexName
     private val admin = ClientAlgolia(applicationId, adminKey)
