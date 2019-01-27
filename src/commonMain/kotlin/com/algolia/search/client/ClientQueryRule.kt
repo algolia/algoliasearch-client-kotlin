@@ -1,10 +1,10 @@
 package com.algolia.search.client
 
-import com.algolia.search.model.*
-import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.endpoint.EndpointQueryRule
-import com.algolia.search.model.common.TaskUpdate
-import com.algolia.search.model.queryrule.QueryRuleHits
+import com.algolia.search.model.IndexName
+import com.algolia.search.model.ObjectID
+import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.queryrule.QueryRuleResponse
 import com.algolia.search.serialize.KeyClearExistingRules
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.encodeNoNulls
@@ -24,12 +24,12 @@ internal class ClientQueryRule(
         queryRule: QueryRule,
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdate {
+    ): QueryRuleResponse.Update {
         return write.retry(
             requestOptions.computedReadTimeout,
             indexName.pathIndexes("/rules/${queryRule.objectID}")
         ) { path ->
-            httpClient.put<TaskUpdate>(path) {
+            httpClient.put<QueryRuleResponse.Update>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
                 body = queryRule.toJsonObject(QueryRule.serializer()).encodeNoNulls().toString()
@@ -49,27 +49,27 @@ internal class ClientQueryRule(
         objectID: ObjectID,
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdate {
+    ): QueryRuleResponse.Update {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/rules/$objectID")) { path ->
-            httpClient.delete<TaskUpdate>(path) {
+            httpClient.delete<QueryRuleResponse.Update>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
             }
         }
     }
 
-    override suspend fun searchRules(query: String?, requestOptions: RequestOptions?): QueryRuleHits {
+    override suspend fun searchRules(query: String?, requestOptions: RequestOptions?): QueryRuleResponse.Search {
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/rules/search")) { path ->
-            httpClient.post<QueryRuleHits>(path) {
+            httpClient.post<QueryRuleResponse.Search>(path) {
                 setRequestOptions(requestOptions)
                 body = json { query?.let { KeyQuery to it } }.toString()
             }
         }
     }
 
-    override suspend fun clearRules(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): TaskUpdate {
+    override suspend fun clearRules(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): QueryRuleResponse.Update {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/rules/clear")) { path ->
-            httpClient.post<TaskUpdate>(path) {
+            httpClient.post<QueryRuleResponse.Update>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
                 body = ""
@@ -82,9 +82,9 @@ internal class ClientQueryRule(
         forwardToReplicas: Boolean?,
         clearExistingRules: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdate {
+    ): QueryRuleResponse.Update {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/rules/batch")) { path ->
-            httpClient.post<TaskUpdate>(path) {
+            httpClient.post<QueryRuleResponse.Update>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
                 clearExistingRules?.let { parameter(KeyClearExistingRules, it) }

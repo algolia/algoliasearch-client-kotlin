@@ -3,9 +3,8 @@ package com.algolia.search.endpoint
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.queryrule.QueryRuleHits
-import com.algolia.search.model.common.TaskUpdate
 import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.queryrule.QueryRuleResponse
 
 
 interface EndpointQueryRule {
@@ -16,14 +15,14 @@ interface EndpointQueryRule {
         queryRule: QueryRule,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
-    ): TaskUpdate
+    ): QueryRuleResponse.Update
 
     suspend fun saveRules(
         queryRules: List<QueryRule>,
         forwardToReplicas: Boolean? = null,
         clearExistingRules: Boolean? = null,
         requestOptions: RequestOptions? = null
-    ): TaskUpdate
+    ): QueryRuleResponse.Update
 
     suspend fun getRule(
         objectID: ObjectID,
@@ -34,15 +33,15 @@ interface EndpointQueryRule {
         objectID: ObjectID,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
-    ): TaskUpdate
+    ): QueryRuleResponse.Update
 
     suspend fun searchRules(
         query: String? = null,
         requestOptions: RequestOptions? = null
-    ): QueryRuleHits
+    ): QueryRuleResponse.Search
 
     suspend fun clearRules(
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
-    ): TaskUpdate
+    ): QueryRuleResponse.Update
 }

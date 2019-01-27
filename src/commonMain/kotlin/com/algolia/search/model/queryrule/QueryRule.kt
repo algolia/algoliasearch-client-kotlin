@@ -1,16 +1,18 @@
 package com.algolia.search.model.queryrule
 
 import com.algolia.search.model.ObjectID
+import com.algolia.search.serialize.*
 import kotlinx.serialization.Optional
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
 @Serializable
 data class QueryRule(
-    val objectID: ObjectID,
-    val condition: Condition,
-    val consequence: Consequence,
-    @Optional val description: String? = null,
-    @Optional val enabled: Boolean? = null,
-    @Optional val validity: List<TimeRange>? = null
+    @SerialName(KeyObjectID) val objectID: ObjectID,
+    @SerialName(KeyCondition) val condition: Condition,
+    @SerialName(KeyConsequence) val consequence: Consequence,
+    @Optional @SerialName(KeyDescription) val description: String? = null,
+    @Optional @SerialName(KeyEnabled) val enabled: Boolean? = null,
+    @Optional @SerialName(KeyValidity) val validity: List<TimeRange>? = null
 )

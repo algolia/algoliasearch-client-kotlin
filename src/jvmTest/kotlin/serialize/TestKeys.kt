@@ -259,6 +259,9 @@ internal class TestKeys {
         KeyLastBuildTimeS shouldEqual "lastBuildTimeS"
         KeyNumberOfPendingTasks shouldEqual "numberOfPendingTasks"
         KeyPendingTask shouldEqual "pendingTask"
+        KeyCondition shouldEqual "condition"
+        KeyConsequence shouldEqual "consequence"
+        KeyEnabled shouldEqual "enabled"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"
