@@ -11,7 +11,7 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.query.clone
 import com.algolia.search.response.ResponseBatch
 import com.algolia.search.response.creation.CreationObject
-import com.algolia.search.response.deletion.DeletionIndex
+import com.algolia.search.response.deletion.DeletionObject
 import com.algolia.search.response.revision.RevisionIndex
 import com.algolia.search.response.revision.RevisionObject
 import com.algolia.search.serialize.*
@@ -114,9 +114,9 @@ internal class ClientIndexing(
         return batch(operations, requestOptions)
     }
 
-    override suspend fun deleteObject(objectID: ObjectID, requestOptions: RequestOptions?): DeletionIndex {
+    override suspend fun deleteObject(objectID: ObjectID, requestOptions: RequestOptions?): DeletionObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID")) { path ->
-            httpClient.delete<DeletionIndex>(path) {
+            httpClient.delete<DeletionObject>(path) {
                 setRequestOptions(requestOptions)
             }
         }

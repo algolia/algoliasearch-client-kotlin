@@ -10,7 +10,7 @@ import com.algolia.search.model.indexing.PartialUpdate
 import com.algolia.search.model.search.Query
 import com.algolia.search.response.ResponseBatch
 import com.algolia.search.response.creation.CreationObject
-import com.algolia.search.response.deletion.DeletionIndex
+import com.algolia.search.response.deletion.DeletionObject
 import com.algolia.search.response.revision.RevisionIndex
 import com.algolia.search.response.revision.RevisionObject
 import kotlinx.serialization.KSerializer
@@ -69,7 +69,7 @@ interface EndpointIndexing {
     suspend fun deleteObject(
         objectID: ObjectID,
         requestOptions: RequestOptions? = null
-    ): DeletionIndex
+    ): DeletionObject
 
     suspend fun deleteObjects(
         objectIDs: List<ObjectID>,
