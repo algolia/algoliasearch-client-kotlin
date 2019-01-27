@@ -3,7 +3,7 @@ package client
 import com.algolia.search.client.Index
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.PartialUpdate
-import com.algolia.search.model.common.TaskStatus
+import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.query.FilterFacet
 import com.algolia.search.query.GroupAnd
 import com.algolia.search.query.queryBuilder

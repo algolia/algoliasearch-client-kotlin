@@ -1,4 +1,4 @@
-package com.algolia.search.model.common
+package com.algolia.search.model.task
 
 import com.algolia.search.model.Raw
 import com.algolia.search.toTaskID

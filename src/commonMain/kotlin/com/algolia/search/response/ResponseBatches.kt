@@ -1,7 +1,7 @@
 package com.algolia.search.response
 
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.common.TaskIndex
+import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.serialize.KeyObjectIDs
 import com.algolia.search.serialize.KeyTaskID
 import com.algolia.search.serialize.asJsonInput

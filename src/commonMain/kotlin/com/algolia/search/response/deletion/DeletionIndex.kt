@@ -1,8 +1,8 @@
 package com.algolia.search.response.deletion
 
-import com.algolia.search.model.common.Datable
-import com.algolia.search.model.common.Waitable
-import com.algolia.search.model.common.TaskID
+import com.algolia.search.model.Datable
+import com.algolia.search.model.Waitable
+import com.algolia.search.model.task.TaskID
 import com.algolia.search.serialize.KeyDeletedAt
 import com.algolia.search.serialize.KeyTaskID
 import kotlinx.serialization.SerialName

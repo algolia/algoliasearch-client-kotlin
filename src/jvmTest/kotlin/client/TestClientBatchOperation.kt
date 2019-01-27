@@ -3,7 +3,7 @@ package client
 import com.algolia.search.client.Index
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.multipleindex.BatchOperationIndex
-import com.algolia.search.model.common.TaskStatus
+import com.algolia.search.model.task.TaskStatus
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -7,8 +7,8 @@ import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.common.TaskIndex
-import com.algolia.search.model.common.TaskStatus
+import com.algolia.search.model.task.TaskIndex
+import com.algolia.search.model.task.TaskStatus
 import io.ktor.client.engine.HttpClientEngine
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope

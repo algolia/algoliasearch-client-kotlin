@@ -2,7 +2,7 @@ package client
 
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
-import com.algolia.search.model.common.TaskStatus
+import com.algolia.search.model.task.TaskStatus
 import kotlinx.coroutines.runBlocking
 import objectIDA
 import objectIDB

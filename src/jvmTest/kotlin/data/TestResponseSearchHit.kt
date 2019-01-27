@@ -1,4 +1,4 @@
-package data.search
+package data
 
 import attributeA
 import attributeB

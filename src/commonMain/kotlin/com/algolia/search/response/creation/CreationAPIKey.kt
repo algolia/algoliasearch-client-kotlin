@@ -1,7 +1,7 @@
 package com.algolia.search.response.creation
 
 import com.algolia.search.model.APIKey
-import com.algolia.search.model.common.Datable
+import com.algolia.search.model.Datable
 import com.algolia.search.serialize.KeyCreatedAt
 import com.algolia.search.serialize.KeyKey
 import kotlinx.serialization.SerialName

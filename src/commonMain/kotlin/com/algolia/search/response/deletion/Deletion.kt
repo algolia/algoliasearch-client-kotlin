@@ -1,6 +1,6 @@
 package com.algolia.search.response.deletion
 
-import com.algolia.search.model.common.Datable
+import com.algolia.search.model.Datable
 import com.algolia.search.serialize.KeyDeletedAt
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -1,4 +1,4 @@
-package com.algolia.search.model.common
+package com.algolia.search.model.task
 
 import kotlinx.serialization.Serializable
 

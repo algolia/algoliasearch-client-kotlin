@@ -1,7 +1,7 @@
 package data
 
-import com.algolia.search.model.common.TaskStatus.NotPublished
-import com.algolia.search.model.common.TaskStatus.Published
+import com.algolia.search.model.task.TaskStatus.NotPublished
+import com.algolia.search.model.task.TaskStatus.Published
 import com.algolia.search.serialize.KeyNotPublished
 import com.algolia.search.serialize.KeyPublished
 import org.junit.Test

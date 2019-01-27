@@ -1,9 +1,9 @@
 package com.algolia.search.response.creation
 
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.common.Datable
-import com.algolia.search.model.common.Waitable
-import com.algolia.search.model.common.TaskID
+import com.algolia.search.model.Datable
+import com.algolia.search.model.Waitable
+import com.algolia.search.model.task.TaskID
 import com.algolia.search.serialize.KeyCreatedAt
 import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.KeyTaskID

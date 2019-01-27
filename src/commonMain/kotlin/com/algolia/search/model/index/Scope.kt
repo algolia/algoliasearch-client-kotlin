@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
-@Serializable(Scope::class)
+@Serializable(Scope.Companion::class)
 sealed class Scope(override val raw: String) : Raw<String> {
 
     object Settings : Scope(KeySettings)

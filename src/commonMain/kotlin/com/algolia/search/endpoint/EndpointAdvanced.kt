@@ -2,9 +2,9 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.common.Waitable
-import com.algolia.search.model.common.TaskID
-import com.algolia.search.model.common.TaskStatus
+import com.algolia.search.model.Waitable
+import com.algolia.search.model.task.TaskID
+import com.algolia.search.model.task.TaskStatus
 
 
 interface EndpointAdvanced {

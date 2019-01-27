@@ -1,6 +1,6 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.model.*
+import com.algolia.search.model.Attribute
 import com.algolia.search.model.enums.*
 import com.algolia.search.query.FilterBuilder
 import com.algolia.search.query.OptionalFilterBuilder
@@ -10,8 +10,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 
-@QueryHelper
 @Serializable
+@QueryHelper
 data class Query(
     /**
      * The text to search in the index.
@@ -266,7 +266,7 @@ data class Query(
     @Optional var ignorePlurals: BooleanOrQueryLanguages? = null,
 
     /**
-     * Removes stop (common) words from the query before executing it.
+     * Removes stop (task) words from the query before executing it.
      * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/removeStopWords/]
      */
