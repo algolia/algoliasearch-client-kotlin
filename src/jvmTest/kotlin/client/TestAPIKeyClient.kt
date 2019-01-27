@@ -1,7 +1,7 @@
 package client
 
+import com.algolia.search.apikey.ACL
 import com.algolia.search.client.ClientAlgolia
-import com.algolia.search.model.apikey.ACL
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -13,7 +13,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-internal class TestClientAPIKey {
+internal class TestAPIKeyClient {
 
     private val indexName = index.indexName
     private val admin = ClientAlgolia(applicationId, adminKey)
@@ -44,7 +44,7 @@ internal class TestClientAPIKey {
     @Test
     fun listIndex() {
         runBlocking {
-            val response = admin.listIndexAPIKeys(indexName)
+            val response = admin.getIndex(indexName).listIndexAPIKeys()
 
             response.keys.isEmpty().shouldBeTrue()
         }
@@ -71,26 +71,28 @@ internal class TestClientAPIKey {
     @Test
     fun suiteIndex() {
         runBlocking {
-            val create = admin.addIndexAPIKey(indexName, description = description)
-            val maxWait = 10000L
-            var time = 0L
-            val increment = 1000L
+            admin.getIndex(indexName).apply {
+                val create = addIndexAPIKey(description = description)
+                val maxWait = 10000L
+                var time = 0L
+                val increment = 1000L
 
-            while (time < maxWait) {
-                try {
-                    val get = admin.getIndexAPIKey(indexName, create.apiKey)
+                while (time < maxWait) {
+                    try {
+                        val get = getIndexAPIKey(create.apiKey)
 
-                    get.apiKey shouldEqual create.apiKey
-                    break
-                } catch (exception: BadResponseStatusException) {
-                    println(exception.localizedMessage)
+                        get.apiKey shouldEqual create.apiKey
+                        break
+                    } catch (exception: BadResponseStatusException) {
+                        println(exception.localizedMessage)
+                    }
+                    delay(increment)
+                    time += increment
                 }
-                delay(increment)
-                time += increment
-            }
 
-            admin.updateIndexAPIKey(indexName, rights = listOf(ACL.Search))
-            admin.deleteIndexAPIKey(indexName, create.apiKey)
+                updateIndexAPIKey(rights = listOf(ACL.Search))
+                deleteIndexAPIKey(create.apiKey)
+            }
         }
     }
 }

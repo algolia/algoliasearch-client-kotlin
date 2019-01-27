@@ -1,5 +1,6 @@
 package com.algolia.search.client
 
+import com.algolia.search.apikey.APIKeyResponse
 import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.model.multipleindex.*
 import com.algolia.search.query.clone
@@ -74,6 +75,12 @@ internal class ClientMultipleIndex(
                 setRequestOptions(requestOptions)
                 body = json.toString()
             }
+        }
+    }
+
+    override suspend fun listIndexAPIKeys(): APIKeyResponse.GetList {
+        return read.retry(readTimeout, "/1/indexes/*/keys") { path ->
+            httpClient.get<APIKeyResponse.GetList>(path)
         }
     }
 }

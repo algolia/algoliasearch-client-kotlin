@@ -1,5 +1,6 @@
 package com.algolia.search.endpoint
 
+import com.algolia.search.apikey.APIKeyResponse
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.multipleindex.*
 import kotlinx.serialization.json.JsonObject
@@ -24,4 +25,6 @@ interface EndpointMultipleIndex {
         operations: List<BatchOperationIndex>,
         requestOptions: RequestOptions? = null
     ): MultipleIndexResponse.Batch
+
+    suspend fun listIndexAPIKeys(): APIKeyResponse.GetList
 }

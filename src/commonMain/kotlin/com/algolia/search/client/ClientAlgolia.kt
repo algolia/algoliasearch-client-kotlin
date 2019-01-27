@@ -1,11 +1,13 @@
 package com.algolia.search.client
 
-import com.algolia.search.model.*
+import com.algolia.search.apikey.APIKeyClient
+import com.algolia.search.apikey.APIKeyEndpoint
 import com.algolia.search.endpoint.ConfigurableEndpoints
-import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.model.APIKey
+import com.algolia.search.model.ApplicationID
+import com.algolia.search.model.IndexName
 import com.algolia.search.model.common.TaskIndex
 import com.algolia.search.model.common.TaskStatus
 import io.ktor.client.engine.HttpClientEngine
@@ -18,7 +20,7 @@ class ClientAlgolia private constructor(
     private val apiWrapper: APIWrapper
 ) :
     EndpointMultipleIndex by apiWrapper.endpoints.multipleIndex ?: ClientMultipleIndex(apiWrapper),
-    EndpointAPIKey by apiWrapper.endpoints.apiKey ?: ClientAPIKey(apiWrapper),
+    APIKeyEndpoint by apiWrapper.endpoints.apiKey ?: APIKeyClient(apiWrapper),
     EndpointMultiCluster by apiWrapper.endpoints.multiCluster ?: ClientMultiCluster(apiWrapper) {
 
     constructor(

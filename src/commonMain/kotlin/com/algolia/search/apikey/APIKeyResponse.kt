@@ -1,4 +1,4 @@
-package com.algolia.search.model.apikey
+package com.algolia.search.apikey
 
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
@@ -12,7 +12,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
-sealed class ResponseAPIKey {
+sealed class APIKeyResponse {
 
     @Serializable
     data class Get(

@@ -1,4 +1,4 @@
-package com.algolia.search.model.apikey
+package com.algolia.search.apikey
 
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-internal data class RequestAPIKey(
+internal data class APIKeyRequest(
     @Optional @SerialName(KeyAcl) val rights: List<ACL>? = null,
     @Optional @SerialName(KeyIndexes) val indexes: List<IndexName>? = null,
     @Optional @SerialName(KeyDescription) val description: String? = null,
