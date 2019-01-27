@@ -43,7 +43,7 @@ internal class TestClientIndex {
     }
 
     @Test
-    fun test() {
+    fun suite() {
         runBlocking {
             deleteIndexIfExists(indexCopyA, indexCopyB)
             copyIndex(index, indexCopyA.indexName)
