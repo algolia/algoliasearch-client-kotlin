@@ -20,7 +20,7 @@ internal class TestSearchResponseHit {
             attributeA.raw to "valueA"
             attributeB.raw to "valueB"
         }
-        val hit = SearchResponse.Hit(json)
+        val hit = SearchResponse.Search.Hit(json)
 
         hit.get(StringSerializer, attributeA) shouldEqual "valueA"
         hit.get(StringSerializer, attributeB) shouldEqual "valueB"

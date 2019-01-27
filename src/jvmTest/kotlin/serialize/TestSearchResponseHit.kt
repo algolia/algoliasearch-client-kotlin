@@ -17,7 +17,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestSearchResponseHit : TestSerializer<SearchResponse.Hit>(SearchResponse.Hit) {
+internal class TestSearchResponseHit : TestSerializer<SearchResponse.Search.Hit>(SearchResponse.Search.Hit) {
 
     override val items = listOf(
         hit to json
@@ -36,6 +36,6 @@ internal class TestSearchResponseHit : TestSerializer<SearchResponse.Hit>(Search
             attributeA to unknown
             attributeB to unknown
         }
-        val hit = SearchResponse.Hit(json)
+        val hit = SearchResponse.Search.Hit(json)
     }
 }

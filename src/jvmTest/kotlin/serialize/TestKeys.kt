@@ -262,6 +262,7 @@ internal class TestKeys {
         KeyCondition shouldEqual "condition"
         KeyConsequence shouldEqual "consequence"
         KeyEnabled shouldEqual "enabled"
+        KeyFacetHits shouldEqual "facetHits"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

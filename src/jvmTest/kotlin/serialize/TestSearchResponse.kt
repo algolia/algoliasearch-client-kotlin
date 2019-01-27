@@ -13,10 +13,10 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestSearchResponse : TestSerializer<SearchResponse>(SearchResponse.serializer()) {
+internal class TestSearchResponse : TestSerializer<SearchResponse.Search>(SearchResponse.Search.serializer()) {
 
     override val items = listOf(
-        SearchResponse(
+        SearchResponse.Search(
             indexName = indexA,
             hits = listOf(TestSearchResponseHit.hit),
             cursor = Cursor(unknown),

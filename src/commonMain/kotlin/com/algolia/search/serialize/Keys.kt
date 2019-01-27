@@ -252,6 +252,7 @@ internal const val KeyPendingTask = "pendingTask"
 internal const val KeyCondition = "condition"
 internal const val KeyConsequence = "consequence"
 internal const val KeyEnabled = "enabled"
+internal const val KeyFacetHits = "facetHits"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"

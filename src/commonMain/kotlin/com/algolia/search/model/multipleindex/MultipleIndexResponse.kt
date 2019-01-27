@@ -40,7 +40,7 @@ sealed class MultipleIndexResponse {
 
     @Serializable
     data class Search(
-        @SerialName(KeyResults) val responses: List<SearchResponse>
+        @SerialName(KeyResults) val responses: List<SearchResponse.Search>
     )
 
     @Serializable(Batch.Companion::class)
