@@ -1,10 +1,10 @@
 package com.algolia.search.client
 
+import com.algolia.search.endpoint.EndpointSettings
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
-import com.algolia.search.model.common.TaskUpdate
-import com.algolia.search.endpoint.EndpointSettings
+import com.algolia.search.model.settings.SettingsResponse
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.encodeNoNulls
 import io.ktor.client.request.get
@@ -34,9 +34,9 @@ internal class ClientSettings(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?,
         indexName: IndexName
-    ): TaskUpdate {
+    ): SettingsResponse.Update {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
-            httpClient.put<TaskUpdate>(path) {
+            httpClient.put<SettingsResponse.Update>(path) {
                 setRequestOptions(requestOptions)
                 val map = settings
                     .encodeNoNulls()
@@ -59,11 +59,14 @@ internal class ClientSettings(
         resetToDefault: List<SettingsKey>,
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
-    ): TaskUpdate {
+    ): SettingsResponse.Update {
         return setSettings(settings, resetToDefault, forwardToReplicas, requestOptions, indexName)
     }
 
-    override suspend fun copySettings(destination: IndexName, requestOptions: RequestOptions?): TaskUpdate {
+    override suspend fun copySettings(
+        destination: IndexName,
+        requestOptions: RequestOptions?
+    ): SettingsResponse.Update {
         val settings = getSettings(requestOptions)
 
         return setSettings(settings, requestOptions = requestOptions)
