@@ -11,4 +11,4 @@ import kotlinx.serialization.Serializable
 data class TaskIndex(
     @SerialName(KeyIndexName) val indexName: IndexName,
     @SerialName(KeyTaskID) override val taskID: TaskID
-) : Task
+) : Waitable

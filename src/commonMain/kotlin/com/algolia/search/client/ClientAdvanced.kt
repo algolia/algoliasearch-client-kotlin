@@ -2,7 +2,7 @@ package com.algolia.search.client
 
 import com.algolia.search.model.*
 import com.algolia.search.endpoint.EndpointAdvanced
-import com.algolia.search.model.common.Task
+import com.algolia.search.model.common.Waitable
 import com.algolia.search.model.common.TaskID
 import com.algolia.search.model.common.TaskInfo
 import com.algolia.search.model.common.TaskStatus
@@ -16,7 +16,7 @@ internal class ClientAdvanced(
 ) : EndpointAdvanced,
     Client by client {
 
-    override suspend fun Task.wait(requestOptions: RequestOptions?): TaskStatus {
+    override suspend fun Waitable.wait(requestOptions: RequestOptions?): TaskStatus {
         return waitTask(taskID)
     }
 

@@ -1,7 +1,7 @@
 package com.algolia.search.model.common
 
 
-interface Task {
+interface Waitable {
 
     val taskID: TaskID
 }
