@@ -1,15 +1,17 @@
 package com.algolia.search.client
 
-import com.algolia.search.model.apikey.ACL
-import com.algolia.search.request.RequestAPIKey
 import com.algolia.search.endpoint.EndpointAPIKeyIndex
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.search.Query
+import com.algolia.search.request.RequestAPIKey
 import com.algolia.search.response.ResponseAPIKeyPermission
 import com.algolia.search.response.ResponseListAPIKey
 import com.algolia.search.response.creation.CreationAPIKey
 import com.algolia.search.response.deletion.Deletion
+import com.algolia.search.response.revision.RevisionAPIKey
+import com.algolia.search.response.revision.RevisionObject
 import com.algolia.search.serialize.encodeNoNulls
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
@@ -55,9 +57,9 @@ internal class ClientAPIKeyIndex(
         validity: Long?,
         query: Query?,
         referers: List<String>?
-    ): CreationAPIKey {
+    ): RevisionAPIKey {
         return write.retry(writeTimeout, indexName.pathIndexes("/keys")) { path ->
-            httpClient.put<CreationAPIKey>(path) {
+            httpClient.put<RevisionAPIKey>(path) {
                 body = RequestAPIKey(
                     rights = rights,
                     description = description,

@@ -1,7 +1,7 @@
 package client
 
-import com.algolia.search.model.apikey.ACL
 import com.algolia.search.client.ClientAlgolia
+import com.algolia.search.model.apikey.ACL
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
@@ -46,7 +46,7 @@ internal class TestClientAPIKey {
         runBlocking {
             val response = admin.getIndex(indexName).listIndexAPIKeys()
 
-            response.keys.isEmpty().shouldBeTrue()
+            response.keys.isNotEmpty().shouldBeTrue()
         }
     }
 

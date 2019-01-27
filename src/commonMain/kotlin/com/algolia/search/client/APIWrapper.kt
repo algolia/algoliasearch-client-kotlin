@@ -5,6 +5,7 @@ import com.algolia.search.host.RetryLogic
 import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.response.ResponseBatches
+import com.algolia.search.response.creation.CreationAPIKey
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.DefaultRequest
@@ -34,6 +35,7 @@ internal class APIWrapper(
                     it.register(Synonym)
                     it.register(JsonObjectSerializer)
                     it.register(QueryRule.serializer())
+                    it.register(CreationAPIKey.serializer())
                 }
         }
         install(DefaultRequest) {
