@@ -2,7 +2,7 @@ package com.algolia.search.client
 
 import com.algolia.search.model.search.SearchResponse
 import com.algolia.search.endpoint.EndpointMultipleIndex
-import com.algolia.search.model.indexing.TaskBatchOperations
+import com.algolia.search.model.multipleindex.TaskBatchOperations
 import com.algolia.search.model.multipleindex.*
 import com.algolia.search.query.clone
 import com.algolia.search.serialize.KeyRequests

@@ -1,4 +1,4 @@
-package com.algolia.search.model.indexing
+package com.algolia.search.model.multipleindex
 
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.common.TaskIndex

@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.model.indexing.TaskBatchOperations
+import com.algolia.search.model.multipleindex.TaskBatchOperations
 import com.algolia.search.model.common.TaskIndex
 import com.algolia.search.serialize.KeyTaskID
 import com.algolia.search.toTaskID

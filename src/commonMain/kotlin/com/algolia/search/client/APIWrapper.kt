@@ -2,7 +2,7 @@ package com.algolia.search.client
 
 import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.model.synonym.Synonym
-import com.algolia.search.model.indexing.TaskBatchOperations
+import com.algolia.search.model.multipleindex.TaskBatchOperations
 import com.algolia.search.model.common.TaskUpdate
 import com.algolia.search.endpoint.ConfigurableEndpoints
 import com.algolia.search.host.RetryLogic
