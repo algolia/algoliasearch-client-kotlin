@@ -4,6 +4,7 @@ package com.algolia.search.endpoint
 data class ConfigurableEndpoints(
     val advanced: EndpointAdvanced? = null,
     val apiKey: EndpointAPIKey? = null,
+    val apiKeyIndex: EndpointAPIKeyIndex? = null,
     val index: EndpointIndex? = null,
     val indexing: EndpointIndexing? = null,
     val multipleIndex: EndpointMultipleIndex? = null,
