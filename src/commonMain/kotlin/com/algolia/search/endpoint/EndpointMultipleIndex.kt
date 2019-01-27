@@ -2,19 +2,18 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.multipleindex.*
-import com.algolia.search.model.search.SearchResponse
 import kotlinx.serialization.json.JsonObject
 
 
 interface EndpointMultipleIndex {
 
-    suspend fun listIndexes(requestOptions: RequestOptions? = null): ListIndexes
+    suspend fun listIndexes(requestOptions: RequestOptions? = null): MultipleIndexResponse.GetList
 
     suspend fun multipleQueries(
         queries: Collection<IndexQuery>,
         strategy: MultipleQueriesStrategy = MultipleQueriesStrategy.None,
         requestOptions: RequestOptions? = null
-    ): List<SearchResponse>
+    ): MultipleIndexResponse.Search
 
     suspend fun multipleGetObjects(
         requests: List<RequestObjects>,
@@ -24,5 +23,5 @@ interface EndpointMultipleIndex {
     suspend fun multipleBatchObjects(
         operations: List<BatchOperationIndex>,
         requestOptions: RequestOptions? = null
-    ): TaskBatchOperations
+    ): MultipleIndexResponse.Batch
 }

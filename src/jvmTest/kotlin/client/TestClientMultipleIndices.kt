@@ -1,9 +1,9 @@
 package client
 
-import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.search.Query
+import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.RequestObjects
+import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.KeyObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.content
@@ -63,9 +63,10 @@ internal class TestClientMultipleIndices {
             )
             val search = algolia.multipleQueries(queries)
 
-            search.shouldNotBeEmpty()
-            search.forEach {
-                it.index.shouldNotBeNull()
+            search.responses.shouldNotBeEmpty()
+            search.responses.forEach {
+                println(it.indexName)
+                it.indexName.shouldNotBeNull()
             }
         }
     }

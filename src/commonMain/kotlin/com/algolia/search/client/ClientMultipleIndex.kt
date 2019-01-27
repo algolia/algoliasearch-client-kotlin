@@ -1,8 +1,6 @@
 package com.algolia.search.client
 
-import com.algolia.search.model.search.SearchResponse
 import com.algolia.search.endpoint.EndpointMultipleIndex
-import com.algolia.search.model.multipleindex.TaskBatchOperations
 import com.algolia.search.model.multipleindex.*
 import com.algolia.search.query.clone
 import com.algolia.search.serialize.KeyRequests
@@ -20,9 +18,9 @@ internal class ClientMultipleIndex(
 ) : EndpointMultipleIndex,
     Client by client {
 
-    override suspend fun listIndexes(requestOptions: RequestOptions?): ListIndexes {
+    override suspend fun listIndexes(requestOptions: RequestOptions?): MultipleIndexResponse.GetList {
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes") { path ->
-            httpClient.get<ListIndexes>(path) {
+            httpClient.get<MultipleIndexResponse.GetList>(path) {
                 setRequestOptions(requestOptions)
             }
         }
@@ -32,7 +30,7 @@ internal class ClientMultipleIndex(
         queries: Collection<IndexQuery>,
         strategy: MultipleQueriesStrategy,
         requestOptions: RequestOptions?
-    ): List<SearchResponse> {
+    ): MultipleIndexResponse.Search {
         val copies = queries.map {
             IndexQuery(
                 it.indexName,
@@ -41,11 +39,11 @@ internal class ClientMultipleIndex(
         }
 
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/queries") { path ->
-            httpClient.post<JsonObject>(path) {
+            httpClient.post<MultipleIndexResponse.Search>(path) {
                 setRequestOptions(requestOptions)
                 setQueries(copies, strategy)
             }
-        }.getArrayOrNull(KeyResults)?.let { Json.plain.fromJson(SearchResponse.serializer().list, it) } ?: listOf()
+        }
     }
 
     override suspend fun multipleGetObjects(
@@ -67,12 +65,12 @@ internal class ClientMultipleIndex(
     override suspend fun multipleBatchObjects(
         operations: List<BatchOperationIndex>,
         requestOptions: RequestOptions?
-    ): TaskBatchOperations {
+    ): MultipleIndexResponse.Batch {
         val requests = Json.plain.toJson(BatchOperationIndex.list, operations)
         val json = json { KeyRequests to requests }
 
         return write.retry(requestOptions.computedWriteTimeout, "/1/indexes/*/batch") { path ->
-            httpClient.post<TaskBatchOperations>(path) {
+            httpClient.post<MultipleIndexResponse.Batch>(path) {
                 setRequestOptions(requestOptions)
                 body = json.toString()
             }

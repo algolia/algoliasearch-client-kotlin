@@ -32,7 +32,7 @@ data class SearchResponse(
     @Optional @SerialName(KeyFacets) @Serializable(KSerializerFacets::class) val facets: Map<Attribute, List<Facet>>? = null,
     @Optional @SerialName(KeyFacetsStats) val facetStats: Map<Attribute, FacetStats>? = null,
     @Optional @SerialName(KeyCursor) val cursor: Cursor? = null,
-    @Optional @SerialName(KeyIndex) val index: IndexName? = null,
+    @Optional @SerialName(KeyIndex) val indexName: IndexName? = null,
     @Optional @SerialName(KeyProcessed) val processed: Boolean? = null
 ) {
 

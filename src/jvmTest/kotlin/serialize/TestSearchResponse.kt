@@ -17,7 +17,7 @@ internal class TestSearchResponse : TestSerializer<SearchResponse>(SearchRespons
 
     override val items = listOf(
         SearchResponse(
-            index = indexA,
+            indexName = indexA,
             hits = listOf(TestSearchResponseHit.hit),
             cursor = Cursor(unknown),
             facets = TestFacets.facets,
