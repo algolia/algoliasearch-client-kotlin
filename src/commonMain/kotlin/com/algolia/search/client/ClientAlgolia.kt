@@ -1,7 +1,7 @@
 package com.algolia.search.client
 
-import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.endpoint.ConfigurableEndpoints
+import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.model.APIKey
@@ -53,11 +53,9 @@ class ClientAlgolia private constructor(
 
         while (true) {
             coroutineScope {
-                taskIndices.map { async { getIndex(it.indexName).getTask(it.taskID) } }.map { it.await() }
+                taskIndices.map { async { getIndex(it.indexName).getTask(it.taskID) } }.map { it.await().status }
             }.let {
-                if (it.all { it == TaskStatus.Published }) {
-                    return it
-                }
+                if (it.all { it == TaskStatus.Published }) return it
             }
             delay((timeToWait * attempt).coerceAtMost(maxTimeToWait))
             attempt++
