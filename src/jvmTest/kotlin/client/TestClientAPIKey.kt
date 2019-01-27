@@ -1,6 +1,6 @@
 package client
 
-import com.algolia.search.model.ACL
+import com.algolia.search.model.apikey.ACL
 import com.algolia.search.client.ClientAlgolia
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.delay

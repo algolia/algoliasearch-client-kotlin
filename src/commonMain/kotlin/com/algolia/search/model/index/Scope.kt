@@ -1,5 +1,6 @@
-package com.algolia.search.model
+package com.algolia.search.model.index
 
+import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyRules
 import com.algolia.search.serialize.KeySettings
 import com.algolia.search.serialize.KeySynonyms
@@ -10,7 +11,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
-@Serializable(Scope.Companion::class)
+@Serializable(Scope::class)
 sealed class Scope(override val raw: String) : Raw<String> {
 
     object Settings : Scope(KeySettings)

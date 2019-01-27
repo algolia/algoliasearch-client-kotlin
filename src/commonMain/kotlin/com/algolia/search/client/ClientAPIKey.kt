@@ -1,6 +1,6 @@
 package com.algolia.search.client
 
-import com.algolia.search.model.ACL
+import com.algolia.search.model.apikey.ACL
 import com.algolia.search.request.RequestAPIKey
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.model.APIKey

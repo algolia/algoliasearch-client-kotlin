@@ -1,6 +1,6 @@
 package com.algolia.search.request
 
-import com.algolia.search.model.ACL
+import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*

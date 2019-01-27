@@ -2,7 +2,7 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.Scope
+import com.algolia.search.model.index.Scope
 import com.algolia.search.response.deletion.DeletionIndex
 import com.algolia.search.response.revision.RevisionIndex
 
