@@ -1,12 +1,13 @@
 package serialize
 
+import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.BatchOperation.*
-import com.algolia.search.model.ObjectID
 import com.algolia.search.serialize.*
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import unknown
 
 
 @RunWith(JUnit4::class)
@@ -39,6 +40,10 @@ internal class TestBatchOperation : TestSerializer<BatchOperation>(BatchOperatio
             KeyBody to json
         },
         DeleteIndex to json { KeyAction to KeyDelete },
-        ClearIndex to json { KeyAction to KeyClear }
+        ClearIndex to json { KeyAction to KeyClear },
+        Other(unknown, json) to json {
+            KeyAction to unknown
+            KeyBody to json
+        }
     )
 }

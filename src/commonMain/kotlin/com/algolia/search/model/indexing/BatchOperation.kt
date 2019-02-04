@@ -72,6 +72,8 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
 
     object ClearIndex : BatchOperation(KeyClear)
 
+    data class Other(val key: String, val json: JsonObject) : BatchOperation(key)
+
     @Serializer(BatchOperation::class)
     companion object : KSerializer<BatchOperation> {
 
@@ -88,6 +90,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
                 is DeleteObject -> batchJson(obj) { KeyBody to json { KeyObjectID to obj.objectID.raw } }
                 is DeleteIndex -> batchJson(obj) {}
                 is ClearIndex -> batchJson(obj) {}
+                is Other -> batchJson(obj) { KeyBody to obj.json }
             }
 
             encoder.asJsonOutput().encodeJson(json)
@@ -107,7 +110,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
                 KeyDeleteObject -> DeleteObject(element.objectID)
                 KeyDelete -> DeleteIndex
                 KeyClear -> ClearIndex
-                else -> throw Exception("Unknown batch write operation $action")
+                else -> Other(action, element.body)
             }
         }
     }
