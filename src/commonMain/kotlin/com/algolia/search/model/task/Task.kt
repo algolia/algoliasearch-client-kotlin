@@ -1,9 +1,9 @@
-package com.algolia.search.model
+package com.algolia.search.model.task
 
 import com.algolia.search.model.task.TaskID
 
 
-interface Waitable {
+interface Task {
 
     val taskID: TaskID
 }

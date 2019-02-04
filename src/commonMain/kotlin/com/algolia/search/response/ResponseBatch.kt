@@ -1,7 +1,7 @@
 package com.algolia.search.response
 
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.Waitable
+import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskID
 import com.algolia.search.serialize.KeyObjectIDs
 import com.algolia.search.serialize.KeyTaskID
@@ -13,4 +13,4 @@ import kotlinx.serialization.Serializable
 data class ResponseBatch(
     @SerialName(KeyTaskID) override val taskID: TaskID,
     @SerialName(KeyObjectIDs) val objectIDs: List<ObjectID?>
-) : Waitable
+) : Task

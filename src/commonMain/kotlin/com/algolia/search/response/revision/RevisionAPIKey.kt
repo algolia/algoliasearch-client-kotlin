@@ -2,7 +2,7 @@ package com.algolia.search.response.revision
 
 import com.algolia.search.model.Datable
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.Waitable
+import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskID
 import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.KeyTaskID
@@ -16,4 +16,4 @@ data class RevisionAPIKey(
     @SerialName(KeyUpdatedAt) override val date: String,
     @SerialName(KeyObjectID) val objectID: ObjectID,
     @SerialName(KeyTaskID) override val taskID: TaskID
-) : Waitable, Datable
+) : Task, Datable
