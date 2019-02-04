@@ -1,16 +1,16 @@
 package com.algolia.search.client
 
-import com.algolia.search.model.apikey.ACL
-import com.algolia.search.request.RequestAPIKey
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.search.Query
+import com.algolia.search.request.RequestAPIKey
 import com.algolia.search.response.ResponseAPIKeyPermission
 import com.algolia.search.response.ResponseListAPIKey
 import com.algolia.search.response.creation.CreationAPIKey
 import com.algolia.search.response.deletion.Deletion
-import com.algolia.search.serialize.encodeNoNulls
+import com.algolia.search.serialize.stringify
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
@@ -43,7 +43,7 @@ internal class ClientAPIKey(
                     validity = validity,
                     query = query,
                     referers = referers
-                ).encodeNoNulls().toString()
+                ).stringify()
             }
         }
     }
@@ -70,7 +70,7 @@ internal class ClientAPIKey(
                     validity = validity,
                     query = query,
                     referers = referers
-                ).encodeNoNulls().toString()
+                ).stringify()
             }
         }
     }

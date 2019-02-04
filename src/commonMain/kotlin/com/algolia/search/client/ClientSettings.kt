@@ -6,12 +6,13 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
 import com.algolia.search.response.revision.RevisionIndex
 import com.algolia.search.serialize.KeyForwardToReplicas
-import com.algolia.search.serialize.encodeNoNulls
+import com.algolia.search.serialize.merge
+import com.algolia.search.serialize.toJsonNoDefaults
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.put
 import kotlinx.serialization.json.JsonNull
-import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.json
 
 
 internal class ClientSettings(
@@ -38,18 +39,15 @@ internal class ClientSettings(
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
             httpClient.put<RevisionIndex>(path) {
                 setRequestOptions(requestOptions)
-                val map = settings
-                    .encodeNoNulls()
-                    .toMutableMap()
-                    .apply {
-                        resetToDefault.forEach {
-                            put(it.raw, JsonNull)
-                        }
+                val resets = json {
+                    resetToDefault.forEach {
+                        it.raw to JsonNull
                     }
-                body = JsonObject(map).toString()
-                forwardToReplicas?.let {
-                    parameter(KeyForwardToReplicas, it)
                 }
+                body = settings
+                    .toJsonNoDefaults()
+                    .merge(resets).toString()
+                parameter(KeyForwardToReplicas, forwardToReplicas)
             }
         }
     }

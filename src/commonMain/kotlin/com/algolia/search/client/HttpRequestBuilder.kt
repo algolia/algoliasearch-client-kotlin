@@ -1,7 +1,7 @@
 package com.algolia.search.client
 
-import com.algolia.search.model.*
 import com.algolia.search.model.APIKey
+import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.search.Query
@@ -36,7 +36,7 @@ internal fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, stra
             queries.forEach {
                 +json {
                     KeyIndexName to it.indexName.raw
-                    KeyParams to it.query.encodeNoNulls().urlEncode()
+                    KeyParams to it.query.toJsonNoDefaults().urlEncode()
                 }
             }
         }
@@ -45,5 +45,5 @@ internal fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, stra
 }
 
 internal fun HttpRequestBuilder.setBody(query: Query?) {
-    body = query?.encodeNoNulls()?.toString() ?: "{}"
+    body = query?.let { JsonNoNulls.stringify(Query.serializer(), it) } ?: "{}"
 }

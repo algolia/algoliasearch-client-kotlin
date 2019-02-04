@@ -8,14 +8,10 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.query.clone
 import com.algolia.search.response.ResponseSearch
 import com.algolia.search.response.ResponseSearchFacetValue
-import com.algolia.search.serialize.KeyCursor
-import com.algolia.search.serialize.KeyFacetQuery
-import com.algolia.search.serialize.KeyMaxFacetHits
-import com.algolia.search.serialize.encodeNoNulls
+import com.algolia.search.serialize.*
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
-import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 
 
@@ -84,15 +80,7 @@ internal class ClientSearch(
                     facetQuery?.let { KeyFacetQuery to it }
                 }
 
-                body = if (copy != null) {
-                    val serialize = copy.encodeNoNulls()
-                    val map = serialize.toMutableMap()
-
-                    map.putAll(extraParams)
-                    JsonObject(map)
-                } else {
-                    extraParams
-                }.toString()
+                body = (copy?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
             }
         }
     }

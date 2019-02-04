@@ -16,6 +16,13 @@ internal val regexDesc = Regex("$KeyDesc\\((.*)\\)")
 internal val regexEqualOnly = Regex("$KeyEqualOnly\\((.*)\\)")
 internal val regexSnippet = Regex("(.*):(\\d+)")
 
+internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
+    return toMutableMap().run {
+        putAll(jsonObject.content)
+        JsonObject(this)
+    }
+}
+
 internal fun JsonObject.urlEncode(): String {
     return Parameters.build {
         entries.forEach { (key, element) ->
@@ -30,7 +37,6 @@ internal fun JsonObject.urlEncode(): String {
 internal fun Decoder.asJsonInput() = (this as JsonInput).decodeJson()
 internal fun Encoder.asJsonOutput() = this as JsonOutput
 
-
 internal fun <T> T.toJsonObject(serializer: SerializationStrategy<T>): JsonObject {
     return Json.nonstrict.toJson(serializer, this).jsonObject
 }
@@ -39,16 +45,16 @@ internal fun JsonObject.encodeNoNulls(): JsonObject {
     return JsonObject(filter { it.value != JsonNull })
 }
 
-internal fun Query.encodeNoNulls(): JsonObject {
-    return toJsonObject(Query.serializer()).encodeNoNulls()
+internal fun Query.toJsonNoDefaults(): JsonObject {
+    return JsonNoNulls.toJson(Query.serializer(), this).jsonObject
 }
 
-internal fun Settings.encodeNoNulls(): JsonObject {
-    return toJsonObject(Settings.serializer()).encodeNoNulls()
+internal fun Settings.toJsonNoDefaults(): JsonObject {
+    return JsonNoNulls.toJson(Settings.serializer(), this).jsonObject
 }
 
-internal fun RequestAPIKey.encodeNoNulls(): JsonObject {
-    return toJsonObject(RequestAPIKey.serializer()).encodeNoNulls()
+internal fun RequestAPIKey.stringify(): String {
+    return JsonNoNulls.stringify(RequestAPIKey.serializer(), this)
 }
 
 internal fun JsonObject.toHighlights() = Json.plain.fromJson(KSerializerHighlights, this)
@@ -57,4 +63,4 @@ internal fun JsonObject.toSnippets() = Json.plain.fromJson(KSerializerSnippets, 
 
 internal fun JsonObject.toRankingInfo() = Json.plain.fromJson(RankingInfo.serializer(), this)
 
-val JsonNoNulls = Json(encodeDefaults = false)
+internal val JsonNoNulls = Json(encodeDefaults = false)

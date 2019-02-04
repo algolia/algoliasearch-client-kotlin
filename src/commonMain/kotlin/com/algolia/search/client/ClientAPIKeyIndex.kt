@@ -11,8 +11,7 @@ import com.algolia.search.response.ResponseListAPIKey
 import com.algolia.search.response.creation.CreationAPIKey
 import com.algolia.search.response.deletion.Deletion
 import com.algolia.search.response.revision.RevisionAPIKey
-import com.algolia.search.response.revision.RevisionObject
-import com.algolia.search.serialize.encodeNoNulls
+import com.algolia.search.serialize.stringify
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
@@ -44,7 +43,7 @@ internal class ClientAPIKeyIndex(
                     validity = validity,
                     query = query,
                     referers = referers
-                ).encodeNoNulls().toString()
+                ).stringify()
             }
         }
     }
@@ -68,7 +67,7 @@ internal class ClientAPIKeyIndex(
                     validity = validity,
                     query = query,
                     referers = referers
-                ).encodeNoNulls().toString()
+                ).stringify()
             }
         }
     }

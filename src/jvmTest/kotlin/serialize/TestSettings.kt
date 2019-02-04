@@ -148,6 +148,6 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
 
     @Test
     fun encodeNoNull() {
-        Settings().encodeNoNulls().toString() shouldEqual "{}"
+        Settings().toJsonNoDefaults().toString() shouldEqual "{}"
     }
 }

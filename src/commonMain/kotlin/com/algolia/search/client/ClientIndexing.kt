@@ -134,7 +134,7 @@ internal class ClientIndexing(
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/deleteByQuery")) { path ->
             httpClient.post<RevisionIndex>(path) {
                 setRequestOptions(requestOptions)
-                body = json { KeyParams to copy.encodeNoNulls().urlEncode() }.toString()
+                body = json { KeyParams to copy.toJsonNoDefaults().urlEncode() }.toString()
             }
         }
     }
