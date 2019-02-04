@@ -2,10 +2,7 @@ package client
 
 import com.algolia.search.client.ClientAlgolia
 import com.algolia.search.model.*
-import com.algolia.search.model.APIKey
 import com.algolia.search.model.indexing.Indexable
-import com.algolia.search.toAPIKey
-import com.algolia.search.toApplicationID
 import kotlinx.serialization.Serializable
 
 internal val adminKey = APIKey(System.getenv("KOTLIN_CLIENT_ADMIN_KEY"))
@@ -15,23 +12,6 @@ internal val algolia = ClientAlgolia(applicationId, apiKey)
 internal val index = algolia.getIndex(IndexName(System.getenv("KOTLIN_CLIENT_INDEX")))
 internal val indexCopyA = algolia.getIndex(IndexName("${index.indexName}_copyA"))
 internal val indexCopyB = algolia.getIndex(IndexName("${index.indexName}_copyB"))
-internal val clientSearch = ClientAlgolia(
-    System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
-    System.getenv("ALGOLIA_SEARCH_KEY_1").toAPIKey()
-)
-internal val clientAdmin1 = ClientAlgolia(
-    System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
-    System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
-)
-internal val clientAdmin2 = ClientAlgolia(
-    System.getenv("ALGOLIA_APPLICATION_ID_2").toApplicationID(),
-    System.getenv("ALGOLIA_ADMIN_KEY_2").toAPIKey()
-)
-
-internal val clientMcm = ClientAlgolia(
-    System.getenv("ALGOLIA_ADMIN_ID_MCM").toApplicationID(),
-    System.getenv("ALGOLIA_ADMIN_KEY_MCM").toAPIKey()
-)
 
 @Serializable
 internal data class Data(

@@ -1,4 +1,4 @@
-package client
+package suite
 
 import com.algolia.search.toUserID
 import io.ktor.client.features.BadResponseStatusException
@@ -13,17 +13,13 @@ import org.junit.runners.JUnit4
 import shouldBeTrue
 import shouldEqual
 import shouldNotBeEmpty
-import java.text.SimpleDateFormat
 import java.util.*
 
 
 @RunWith(JUnit4::class)
 internal class TestClientMultiCluster {
 
-    private val date = SimpleDateFormat("YYYY-MM-DD-HH-mm-ss").also {
-        it.timeZone = TimeZone.getTimeZone("UTC")
-    }.format(Date())
-
+    private val date = dateFormat.format(Date())
     private val prefix = "kotlin-$date"
     private val userID = "$prefix-unknown".toUserID()
 
