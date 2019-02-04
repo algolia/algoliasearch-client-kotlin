@@ -15,7 +15,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestConsequence : TestSerializer<Consequence>(Consequence) {
+internal class TestConsequence : TestSerializer<Consequence>(Consequence.serializer(), JsonNoNulls) {
 
     private val edits = listOf(Edit(unknown))
     private val paramsQuery = Params(

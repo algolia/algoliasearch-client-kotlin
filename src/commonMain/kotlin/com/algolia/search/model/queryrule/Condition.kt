@@ -1,39 +1,16 @@
 package com.algolia.search.model.queryrule
 
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.json
+import com.algolia.search.serialize.KeyAnchoring
+import com.algolia.search.serialize.KeyContext
+import com.algolia.search.serialize.KeyPattern
+import kotlinx.serialization.Optional
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
-@Serializable(Condition.Companion::class)
+@Serializable
 data class Condition(
-    val pattern: Pattern,
-    val anchoring: Anchoring,
-    @Optional val context: String? = null
-) {
-
-    @Serializer(Condition::class)
-    companion object : KSerializer<Condition> {
-
-        override fun serialize(encoder: Encoder, obj: Condition) {
-            val json = json {
-                KeyPattern to obj.pattern.raw
-                KeyAnchoring to obj.anchoring.raw
-                obj.context?.let { KeyContext to it }
-            }
-
-            encoder.asJsonOutput().encodeJson(json)
-        }
-
-        override fun deserialize(decoder: Decoder): Condition {
-            val json = decoder.asJsonInput().jsonObject
-
-            return Condition(
-                Json.plain.fromJson(Pattern, json[KeyPattern]),
-                Json.plain.fromJson(Anchoring, json[KeyAnchoring]),
-                json.getPrimitiveOrNull(KeyContext)?.contentOrNull
-            )
-        }
-    }
-}
+    @SerialName(KeyPattern) val pattern: Pattern,
+    @SerialName(KeyAnchoring) val anchoring: Anchoring,
+    @Optional @SerialName(KeyContext) val context: String? = null
+)

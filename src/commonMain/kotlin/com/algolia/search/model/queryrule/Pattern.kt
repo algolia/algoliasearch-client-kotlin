@@ -24,11 +24,11 @@ sealed class Pattern(override val raw: String) : Raw<String> {
         override val descriptor = StringSerializer.descriptor
 
         override fun serialize(encoder: Encoder, obj: Pattern) {
-            StringSerializer.serialize(encoder, obj.raw)
+            serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): Pattern {
-            val string = StringSerializer.deserialize(decoder)
+            val string = serializer.deserialize(decoder)
             val regex = Regex("\\{facet:(.*)}")
             val match = regex.find(string)
 

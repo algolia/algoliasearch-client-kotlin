@@ -6,10 +6,9 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.response.ResponseRules
 import com.algolia.search.response.revision.RevisionIndex
+import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyClearExistingRules
 import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.encodeNoNulls
-import com.algolia.search.serialize.toJsonObject
 import io.ktor.client.request.*
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
@@ -33,7 +32,7 @@ internal class ClientQueryRule(
             httpClient.put<RevisionIndex>(path) {
                 setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
-                body = queryRule.toJsonObject(QueryRule.serializer()).encodeNoNulls().toString()
+                body = JsonNoNulls.stringify(QueryRule.serializer(), queryRule)
             }
         }
     }
@@ -90,7 +89,7 @@ internal class ClientQueryRule(
                 setForwardToReplicas(forwardToReplicas)
                 clearExistingRules?.let { parameter(KeyClearExistingRules, it) }
                 body = jsonArray {
-                    queryRules.forEach { +it.toJsonObject(QueryRule.serializer()).encodeNoNulls() }
+                    queryRules.forEach { +JsonNoNulls.toJson(QueryRule.serializer(), it) }
                 }.toString()
             }
         }

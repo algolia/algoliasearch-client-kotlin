@@ -20,8 +20,7 @@ sealed class QueryOrEdits {
         override fun serialize(encoder: Encoder, obj: QueryOrEdits) {
             val json = when (obj) {
                 is Query -> JsonLiteral(obj.query)
-                is Edits -> json { KeyEdits to Json.plain.toJson(
-                    Edit.list, obj.edits) }
+                is Edits -> json { KeyEdits to Json.plain.toJson(Edit.list, obj.edits) }
             }
 
             encoder.asJsonOutput().encodeJson(json)
