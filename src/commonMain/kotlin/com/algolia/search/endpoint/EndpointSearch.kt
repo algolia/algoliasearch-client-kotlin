@@ -5,8 +5,8 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Query
-import com.algolia.search.response.ResponseSearch
-import com.algolia.search.response.ResponseSearchFacetValue
+import com.algolia.search.model.response.ResponseSearch
+import com.algolia.search.model.response.ResponseSearchFacetValue
 
 
 interface EndpointSearch {

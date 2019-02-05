@@ -5,9 +5,9 @@ import com.algolia.search.host.readHosts
 import com.algolia.search.host.writeHosts
 import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.model.synonym.Synonym
-import com.algolia.search.response.ResponseBatches
-import com.algolia.search.response.creation.CreationAPIKey
-import com.algolia.search.response.revision.RevisionIndex
+import com.algolia.search.model.response.ResponseBatches
+import com.algolia.search.model.response.creation.CreationAPIKey
+import com.algolia.search.model.response.revision.RevisionIndex
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.DefaultRequest

@@ -1,7 +1,7 @@
 package serialize
 
 import com.algolia.search.model.task.TaskIndex
-import com.algolia.search.response.ResponseBatches
+import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.serialize.KeyTaskID
 import com.algolia.search.toTaskID
 import indexA

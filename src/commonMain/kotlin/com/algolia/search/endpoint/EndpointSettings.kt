@@ -4,7 +4,7 @@ import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
-import com.algolia.search.response.revision.RevisionIndex
+import com.algolia.search.model.response.revision.RevisionIndex
 
 
 interface EndpointSettings {

@@ -5,10 +5,10 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
-import com.algolia.search.response.ResponseSearchSynonyms
-import com.algolia.search.response.deletion.DeletionIndex
-import com.algolia.search.response.revision.RevisionIndex
-import com.algolia.search.response.revision.RevisionObject
+import com.algolia.search.model.response.ResponseSearchSynonyms
+import com.algolia.search.model.response.deletion.DeletionIndex
+import com.algolia.search.model.response.revision.RevisionIndex
+import com.algolia.search.model.response.revision.RevisionObject
 
 
 interface EndpointSynonym {

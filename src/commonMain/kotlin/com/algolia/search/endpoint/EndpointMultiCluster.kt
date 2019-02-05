@@ -3,9 +3,9 @@ package com.algolia.search.endpoint
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.ClusterName
 import com.algolia.search.model.UserID
-import com.algolia.search.response.*
-import com.algolia.search.response.creation.Creation
-import com.algolia.search.response.deletion.Deletion
+import com.algolia.search.model.response.*
+import com.algolia.search.model.response.creation.Creation
+import com.algolia.search.model.response.deletion.Deletion
 
 
 interface EndpointMultiCluster {

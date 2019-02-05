@@ -9,11 +9,11 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.PartialUpdate
 import com.algolia.search.model.search.Query
 import com.algolia.search.query.clone
-import com.algolia.search.response.ResponseBatch
-import com.algolia.search.response.creation.CreationObject
-import com.algolia.search.response.deletion.DeletionObject
-import com.algolia.search.response.revision.RevisionIndex
-import com.algolia.search.response.revision.RevisionObject
+import com.algolia.search.model.response.ResponseBatch
+import com.algolia.search.model.response.creation.CreationObject
+import com.algolia.search.model.response.deletion.DeletionObject
+import com.algolia.search.model.response.revision.RevisionIndex
+import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.serialize.*
 import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer

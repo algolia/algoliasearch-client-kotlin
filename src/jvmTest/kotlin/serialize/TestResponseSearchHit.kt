@@ -4,7 +4,7 @@ import attributeA
 import attributeB
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Highlight
-import com.algolia.search.response.ResponseSearch
+import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.serialize.KSerializerSnippets
 import com.algolia.search.serialize.KeyHighlightResult
 import com.algolia.search.serialize.KeySnippetResult

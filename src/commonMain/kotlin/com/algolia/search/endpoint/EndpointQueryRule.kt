@@ -4,8 +4,8 @@ import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.queryrule.QueryRule
-import com.algolia.search.response.ResponseRules
-import com.algolia.search.response.revision.RevisionIndex
+import com.algolia.search.model.response.ResponseRules
+import com.algolia.search.model.response.revision.RevisionIndex
 
 
 interface EndpointQueryRule {

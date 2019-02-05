@@ -3,9 +3,9 @@ package com.algolia.search.client
 import com.algolia.search.endpoint.EndpointIndex
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.index.Scope
-import com.algolia.search.request.RequestCopyOrMove
-import com.algolia.search.response.deletion.DeletionIndex
-import com.algolia.search.response.revision.RevisionIndex
+import com.algolia.search.model.request.RequestCopyOrMove
+import com.algolia.search.model.response.deletion.DeletionIndex
+import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyCopy
 import com.algolia.search.serialize.KeyMove

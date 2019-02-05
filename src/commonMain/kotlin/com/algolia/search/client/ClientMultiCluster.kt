@@ -3,10 +3,10 @@ package com.algolia.search.client
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.model.ClusterName
 import com.algolia.search.model.UserID
-import com.algolia.search.request.RequestSearchUserID
-import com.algolia.search.response.*
-import com.algolia.search.response.creation.Creation
-import com.algolia.search.response.deletion.Deletion
+import com.algolia.search.model.request.RequestSearchUserID
+import com.algolia.search.model.response.*
+import com.algolia.search.model.response.creation.Creation
+import com.algolia.search.model.response.deletion.Deletion
 import com.algolia.search.serialize.*
 import io.ktor.client.request.*
 import kotlinx.serialization.json.json

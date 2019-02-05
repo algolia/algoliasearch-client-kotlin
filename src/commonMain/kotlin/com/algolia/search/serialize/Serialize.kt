@@ -3,7 +3,7 @@ package com.algolia.search.serialize
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.request.RequestAPIKey
+import com.algolia.search.model.request.RequestAPIKey
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.Decoder

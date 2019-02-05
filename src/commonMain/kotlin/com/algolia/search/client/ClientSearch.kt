@@ -6,8 +6,8 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Query
 import com.algolia.search.query.clone
-import com.algolia.search.response.ResponseSearch
-import com.algolia.search.response.ResponseSearchFacetValue
+import com.algolia.search.model.response.ResponseSearch
+import com.algolia.search.model.response.ResponseSearchFacetValue
 import com.algolia.search.serialize.*
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter

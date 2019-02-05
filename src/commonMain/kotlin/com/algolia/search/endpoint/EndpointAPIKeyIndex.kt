@@ -5,11 +5,11 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.search.Query
-import com.algolia.search.response.ResponseAPIKeyPermission
-import com.algolia.search.response.ResponseListAPIKey
-import com.algolia.search.response.creation.CreationAPIKey
-import com.algolia.search.response.deletion.Deletion
-import com.algolia.search.response.revision.RevisionAPIKey
+import com.algolia.search.model.response.ResponseAPIKeyPermission
+import com.algolia.search.model.response.ResponseListAPIKey
+import com.algolia.search.model.response.creation.CreationAPIKey
+import com.algolia.search.model.response.deletion.Deletion
+import com.algolia.search.model.response.revision.RevisionAPIKey
 
 
 interface EndpointAPIKeyIndex {
