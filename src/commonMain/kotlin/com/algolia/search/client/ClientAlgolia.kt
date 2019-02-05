@@ -1,6 +1,5 @@
 package com.algolia.search.client
 
-import com.algolia.search.endpoint.ConfigurableEndpoints
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMultipleIndex
@@ -18,26 +17,23 @@ import kotlinx.coroutines.delay
 class ClientAlgolia private constructor(
     private val apiWrapper: APIWrapper
 ) :
-    EndpointMultipleIndex by apiWrapper.endpoints.multipleIndex ?: ClientMultipleIndex(apiWrapper),
-    EndpointAPIKey by apiWrapper.endpoints.apiKey ?: ClientAPIKey(apiWrapper),
-    EndpointMultiCluster by apiWrapper.endpoints.multiCluster ?: ClientMultiCluster(apiWrapper) {
+    EndpointMultipleIndex by ClientMultipleIndex(apiWrapper),
+    EndpointAPIKey by ClientAPIKey(apiWrapper),
+    EndpointMultiCluster by ClientMultiCluster(apiWrapper) {
 
     constructor(
         applicationID: ApplicationID,
-        apiKey: APIKey,
-        endpoints: ConfigurableEndpoints = ConfigurableEndpoints()
-    ) : this(APIWrapper(Configuration(applicationID, apiKey), endpoints = endpoints))
+        apiKey: APIKey
+    ) : this(APIWrapper(Configuration(applicationID, apiKey)))
+
+    constructor(
+        configuration: Configuration
+    ) : this(APIWrapper(configuration))
 
     constructor(
         configuration: Configuration,
-        endpoints: ConfigurableEndpoints = ConfigurableEndpoints()
-    ) : this(APIWrapper(configuration, endpoints = endpoints))
-
-    constructor(
-        configuration: Configuration,
-        engine: HttpClientEngine?,
-        endpoints: ConfigurableEndpoints = ConfigurableEndpoints()
-    ) : this(APIWrapper(configuration, engine, endpoints))
+        engine: HttpClientEngine?
+    ) : this(APIWrapper(configuration, engine))
 
     private val indexes = mutableMapOf<IndexName, Index>()
 

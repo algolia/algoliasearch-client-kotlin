@@ -1,6 +1,5 @@
 package com.algolia.search.client
 
-import com.algolia.search.endpoint.ConfigurableEndpoints
 import com.algolia.search.host.RetryLogic
 import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.model.synonym.Synonym
@@ -20,8 +19,7 @@ import kotlinx.serialization.json.JsonObjectSerializer
 
 internal class APIWrapper(
     configuration: Configuration,
-    engine: HttpClientEngine? = null,
-    override val endpoints: ConfigurableEndpoints
+    engine: HttpClientEngine? = null
 ) : Client,
     ConfigurationInterface by configuration {
 
