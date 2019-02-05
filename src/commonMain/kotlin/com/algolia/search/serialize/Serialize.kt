@@ -8,7 +8,6 @@ import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
-import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.json.*
 
 internal val regexAsc = Regex("$KeyAsc\\((.*)\\)")
@@ -37,13 +36,6 @@ internal fun JsonObject.urlEncode(): String {
 internal fun Decoder.asJsonInput() = (this as JsonInput).decodeJson()
 internal fun Encoder.asJsonOutput() = this as JsonOutput
 
-internal fun <T> T.toJsonObject(serializer: SerializationStrategy<T>): JsonObject {
-    return Json.nonstrict.toJson(serializer, this).jsonObject
-}
-
-internal fun JsonObject.encodeNoNulls(): JsonObject {
-    return JsonObject(filter { it.value != JsonNull })
-}
 
 internal fun Query.toJsonNoDefaults(): JsonObject {
     return JsonNoNulls.toJson(Query.serializer(), this).jsonObject

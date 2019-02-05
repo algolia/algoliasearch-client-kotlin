@@ -21,17 +21,17 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
     private val paramsQuery = Params(
         query = QueryOrEdits.Query(unknown)
     )
-    private val paramsQuerySerialized = paramsQuery.toJsonObject(Params.serializer()).encodeNoNulls()
+    private val paramsQuerySerialized = JsonNoNulls.toJson(Params.serializer(), paramsQuery)
     private val paramsEdits = Params(
         query = QueryOrEdits.Edits(edits)
     )
-    private val paramsEditsSerialized = paramsEdits.toJsonObject(Params.serializer()).encodeNoNulls()
+    private val paramsEditsSerialized = JsonNoNulls.toJson(Params.serializer(), paramsEdits)
     private val filters = listOf(AutomaticFacetFilters(attributeA, 1, true))
     private val objectIDs = listOf(objectIDA, objectIDB)
     private val promotions = listOf(Promotion(objectIDA, 0))
     private val promotionsSerialized = Json.plain.toJson(Promotion.serializer().list, promotions)
     private val params = paramsEdits.copy(automaticFacetFilters = filters, automaticOptionalFacetFilters = filters)
-    private val paramsSerialized = params.toJsonObject(Params.serializer()).encodeNoNulls()
+    private val paramsSerialized = JsonNoNulls.toJson(Params.serializer(), params)
     private val userData = json { KeyUserData to unknown }
 
     override val items = listOf(
