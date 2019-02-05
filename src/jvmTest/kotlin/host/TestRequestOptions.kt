@@ -15,8 +15,8 @@ internal class TestRequestOptions {
     @Test
     fun headers() {
         val requestOptions = requestOptions {
-            header("keyA", "valueA")
-            header("keyB", "valueB")
+            headers["keyA"] = "valueA"
+            headers["keyB"] = "valueB"
         }
 
         requestOptions.headers shouldEqual mutableMapOf("keyA" to "valueA", "keyB" to "valueB")
@@ -25,8 +25,8 @@ internal class TestRequestOptions {
     @Test
     fun parameters() {
         val requestOptions = requestOptions {
-            urlParameter("keyA", "valueA")
-            urlParameter("keyB", "valueB")
+            urlParameters["keyA"] = "valueA"
+            urlParameters["keyB"] = "valueB"
         }
 
         requestOptions.urlParameters shouldEqual mutableMapOf("keyA" to "valueA", "keyB" to "valueB")

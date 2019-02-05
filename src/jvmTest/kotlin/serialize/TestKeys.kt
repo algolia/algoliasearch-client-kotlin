@@ -265,6 +265,8 @@ internal class TestKeys {
         KeyFacetHits shouldEqual "facetHits"
         KeyId shouldEqual "id"
         KeyHighlighted shouldEqual "highlighted"
+        KeyAlgoliaApplicationID shouldEqual "X-Algolia-Application-Id"
+        KeyAlgoliaAPIKey shouldEqual "X-Algolia-API-Key"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

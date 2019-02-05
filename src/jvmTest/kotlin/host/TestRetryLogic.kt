@@ -1,8 +1,9 @@
 package host
 
-import com.algolia.search.model.ApplicationID
 import com.algolia.search.host.HostStatus
 import com.algolia.search.host.RetryLogic
+import com.algolia.search.host.readHosts
+import com.algolia.search.model.ApplicationID
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.MockHttpResponse
@@ -23,7 +24,7 @@ import shouldEqual
 internal class TestRetryLogic {
 
     private val applicationId = ApplicationID("appId")
-    private val retryLogic = RetryLogic(applicationId, RetryLogic.Type.Read)
+    private val retryLogic = RetryLogic(applicationId.readHosts())
     private val route = "/route"
     private val client200 = HttpClient(MockEngine { MockHttpResponse(call, HttpStatusCode.OK) })
     private val client404 = HttpClient(MockEngine { MockHttpResponse(call, HttpStatusCode.NotFound) })

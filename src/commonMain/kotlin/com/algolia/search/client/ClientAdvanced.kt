@@ -17,7 +17,7 @@ internal class ClientAdvanced(
     Client by client {
 
     override suspend fun Task.wait(requestOptions: RequestOptions?): TaskStatus {
-        return waitTask(taskID)
+        return waitTask(taskID, requestOptions)
     }
 
     override suspend fun waitTask(taskID: TaskID, requestOptions: RequestOptions?): TaskStatus {
@@ -30,7 +30,7 @@ internal class ClientAdvanced(
     }
 
     override suspend fun getTask(taskID: TaskID, requestOptions: RequestOptions?): TaskInfo {
-        return read.retry(readTimeout, indexName.pathIndexes("/task/$taskID")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/task/$taskID")) { path ->
             httpClient.get<TaskInfo>(path) {
                 setRequestOptions(requestOptions)
             }

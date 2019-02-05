@@ -46,7 +46,7 @@ internal class TestClientMultipleIndices {
                     ObjectID(objectID3)
                 )
             )
-            val objects = algolia.multipleGetObjects(requests)
+            val objects = algolia.multipleGetObjects(requests).results
 
             objects[0]!!.jsonObject[KeyObjectID].content shouldEqual objectID1
             objects[1]!!.jsonObject[KeyObjectID].content shouldEqual objectID2

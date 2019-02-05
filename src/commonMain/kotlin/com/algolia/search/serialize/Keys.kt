@@ -255,6 +255,8 @@ internal const val KeyEnabled = "enabled"
 internal const val KeyFacetHits = "facetHits"
 internal const val KeyId = "id"
 internal const val KeyHighlighted = "highlighted"
+internal const val KeyAlgoliaApplicationID = "X-Algolia-Application-Id"
+internal const val KeyAlgoliaAPIKey = "X-Algolia-API-Key"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"

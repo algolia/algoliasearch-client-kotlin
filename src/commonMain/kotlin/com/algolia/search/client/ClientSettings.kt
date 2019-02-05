@@ -21,8 +21,10 @@ internal class ClientSettings(
 ) : EndpointSettings,
     Client by client {
 
+    private val route = "/settings"
+
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
-        return read.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
+        return read.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes(route)) { path ->
             httpClient.get<Settings>(path) {
                 setRequestOptions(requestOptions)
             }
@@ -36,18 +38,14 @@ internal class ClientSettings(
         requestOptions: RequestOptions?,
         indexName: IndexName
     ): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/settings")) { path ->
+        val resets = json { resetToDefault.forEach { it.raw to JsonNull } }
+        val bodyString = settings.toJsonNoDefaults().merge(resets).toString()
+
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes(route)) { path ->
             httpClient.put<RevisionIndex>(path) {
-                setRequestOptions(requestOptions)
-                val resets = json {
-                    resetToDefault.forEach {
-                        it.raw to JsonNull
-                    }
-                }
-                body = settings
-                    .toJsonNoDefaults()
-                    .merge(resets).toString()
+                body = bodyString
                 parameter(KeyForwardToReplicas, forwardToReplicas)
+                setRequestOptions(requestOptions)
             }
         }
     }

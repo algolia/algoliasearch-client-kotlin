@@ -5,11 +5,7 @@ import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
-import com.algolia.search.response.ResponseBatches
-import com.algolia.search.response.ResponseListAPIKey
-import com.algolia.search.response.ResponseListIndexes
-import com.algolia.search.response.ResponseSearches
-import kotlinx.serialization.json.JsonObject
+import com.algolia.search.response.*
 
 
 interface EndpointMultipleIndex {
@@ -25,12 +21,12 @@ interface EndpointMultipleIndex {
     suspend fun multipleGetObjects(
         requests: List<RequestObjects>,
         requestOptions: RequestOptions? = null
-    ): List<JsonObject?>
+    ): ResponseObjects
 
     suspend fun multipleBatchObjects(
         operations: List<BatchOperationIndex>,
         requestOptions: RequestOptions? = null
     ): ResponseBatches
 
-    suspend fun listIndexAPIKeys(): ResponseListAPIKey
+    suspend fun listIndexAPIKeys(requestOptions: RequestOptions? = null): ResponseListAPIKey
 }

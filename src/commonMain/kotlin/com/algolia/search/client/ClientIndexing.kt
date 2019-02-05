@@ -32,8 +32,8 @@ internal class ClientIndexing(
     private suspend fun addObject(payload: String, requestOptions: RequestOptions?): CreationObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
             httpClient.post<CreationObject>(path) {
-                setRequestOptions(requestOptions)
                 body = payload
+                setRequestOptions(requestOptions)
             }
         }
     }
@@ -73,8 +73,8 @@ internal class ClientIndexing(
     ): RevisionObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID")) { path ->
             httpClient.put<RevisionObject>(path) {
-                setRequestOptions(requestOptions)
                 body = payload
+                setRequestOptions(requestOptions)
             }
         }
     }
@@ -130,11 +130,12 @@ internal class ClientIndexing(
 
     override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): RevisionIndex {
         val copy = query.clone()
+        val bodyString = json { KeyParams to copy.toJsonNoDefaults().urlEncode() }.toString()
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/deleteByQuery")) { path ->
             httpClient.post<RevisionIndex>(path) {
+                body = bodyString
                 setRequestOptions(requestOptions)
-                body = json { KeyParams to copy.toJsonNoDefaults().urlEncode() }.toString()
             }
         }
     }
@@ -144,12 +145,11 @@ internal class ClientIndexing(
         attributes: List<Attribute>,
         requestOptions: RequestOptions?
     ): JsonObject {
+        val attributesToRetrieve = Json.stringify(Attribute.list, attributes.toList())
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/$objectID")) { path ->
             httpClient.get<JsonObject>(path) {
+                parameter(KeyAttributesToRetrieve, attributesToRetrieve)
                 setRequestOptions(requestOptions)
-                if (attributes.isNotEmpty()) {
-                    parameter(KeyAttributesToRetrieve, Json.stringify(Attribute.list, attributes.toList()))
-                }
             }
         }
     }
@@ -181,9 +181,9 @@ internal class ClientIndexing(
     ): RevisionObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID/partial")) { path ->
             httpClient.post<RevisionObject>(path) {
-                setRequestOptions(requestOptions)
-                createIfNotExists?.let { parameter(KeyCreateIfNotExists, createIfNotExists) }
                 body = payload
+                parameter(KeyCreateIfNotExists, createIfNotExists)
+                setRequestOptions(requestOptions)
             }
         }
     }
@@ -232,7 +232,7 @@ internal class ClientIndexing(
         objectID: ObjectID,
         createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
-    ): RevisionObject{
+    ): RevisionObject {
         val payload = Json.plain.toJson(PartialUpdate, partialUpdate).toString()
 
         return updateObject(payload, objectID, createIfNotExists, requestOptions)
@@ -253,12 +253,12 @@ internal class ClientIndexing(
         requestOptions: RequestOptions?
     ): ResponseBatch {
         val requests = Json.plain.toJson(BatchOperation.list, batchOperations)
-        val json = json { KeyRequests to requests }
+        val bodyString = json { KeyRequests to requests }.toString()
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/batch")) { path ->
             httpClient.post<ResponseBatch>(path) {
+                body = bodyString
                 setRequestOptions(requestOptions)
-                body = json.toString()
             }
         }
     }

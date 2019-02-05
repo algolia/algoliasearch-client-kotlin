@@ -1,6 +1,7 @@
 package com.algolia.search.host
 
 import com.algolia.search.Time
+import com.algolia.search.client.Configuration
 import com.algolia.search.model.ApplicationID
 import kotlin.random.Random
 
@@ -38,10 +39,26 @@ internal fun List<String>.randomize(): List<String> {
 
 internal fun List<String>.initialHostStatus() = map { HostStatus.Unknown to 0L }.toMutableList()
 
-internal fun ApplicationID.computeHosts(host: String = "algolianet.com"): List<String> {
+internal fun ApplicationID.buildFallbackHosts(): List<String> {
     return listOf(
-        "https://$this-1.$host",
-        "https://$this-2.$host",
-        "https://$this-3.$host"
+        "https://$this-1.algolianet.com",
+        "https://$this-2.algolianet.com",
+        "https://$this-3.algolianet.com"
     )
+}
+
+internal fun ApplicationID.readHosts(): List<String> {
+    return listOf(readHost) + buildFallbackHosts().randomize()
+}
+
+internal fun ApplicationID.writeHosts(): List<String> {
+    return listOf(writeHost) + buildFallbackHosts().randomize()
+}
+
+internal fun Configuration.readHosts(): List<String> {
+    return hosts ?: applicationID.readHosts()
+}
+
+internal fun Configuration.writeHosts(): List<String> {
+    return hosts ?: applicationID.writeHosts()
 }

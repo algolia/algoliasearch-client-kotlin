@@ -1,5 +1,6 @@
 package com.algolia.search.endpoint
 
+import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
@@ -22,7 +23,8 @@ interface EndpointAPIKeyIndex {
         maxQueriesPerIPPerHour: Int? = null,
         validity: Long? = null,
         query: Query? = null,
-        referers: List<String>? = null
+        referers: List<String>? = null,
+        requestOptions: RequestOptions? = null
     ): CreationAPIKey
 
     suspend fun updateIndexAPIKey(
@@ -32,12 +34,13 @@ interface EndpointAPIKeyIndex {
         maxQueriesPerIPPerHour: Int? = null,
         validity: Long? = null,
         query: Query? = null,
-        referers: List<String>? = null
+        referers: List<String>? = null,
+        requestOptions: RequestOptions? = null
     ): RevisionAPIKey
 
-    suspend fun deleteIndexAPIKey(apiKey: APIKey): Deletion
+    suspend fun deleteIndexAPIKey(apiKey: APIKey, requestOptions: RequestOptions? = null): Deletion
 
-    suspend fun getIndexAPIKey(apiKey: APIKey): ResponseAPIKeyPermission
+    suspend fun getIndexAPIKey(apiKey: APIKey, requestOptions: RequestOptions? = null): ResponseAPIKeyPermission
 
-    suspend fun listIndexAPIKeys(): ResponseListAPIKey
+    suspend fun listIndexAPIKeys(requestOptions: RequestOptions? = null): ResponseListAPIKey
 }

@@ -12,6 +12,7 @@ interface ConfigurationInterface {
     val writeTimeout: Long
     val readTimeout: Long
     val logLevel: LogLevel
+    val hosts: List<String>?
 
     val RequestOptions?.computedWriteTimeout get() = this?.writeTimeout ?: writeTimeout
     val RequestOptions?.computedReadTimeout get() = this?.readTimeout ?: readTimeout

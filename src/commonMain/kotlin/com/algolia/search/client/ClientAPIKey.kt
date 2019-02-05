@@ -22,6 +22,8 @@ internal class ClientAPIKey(
 ) : EndpointAPIKey,
     Client by client {
 
+    private val route = "/1/keys"
+
     override suspend fun addAPIKey(
         rights: List<ACL>?,
         indexes: List<IndexName>?,
@@ -30,20 +32,24 @@ internal class ClientAPIKey(
         maxQueriesPerIPPerHour: Int?,
         validity: Long?,
         query: Query?,
-        referers: List<String>?
+        referers: List<String>?,
+        requestOptions: RequestOptions?
     ): CreationAPIKey {
-        return write.retry(writeTimeout, "/1/keys") { path ->
+        val bodyString = RequestAPIKey(
+            rights = rights,
+            indexes = indexes,
+            description = description,
+            maxHitsPerQuery = maxHitsPerQuery,
+            maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
+            validity = validity,
+            query = query,
+            referers = referers
+        ).stringify()
+
+        return write.retry(requestOptions.computedWriteTimeout, route) { path ->
             httpClient.post<CreationAPIKey>(path) {
-                body = RequestAPIKey(
-                    rights = rights,
-                    indexes = indexes,
-                    description = description,
-                    maxHitsPerQuery = maxHitsPerQuery,
-                    maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
-                    validity = validity,
-                    query = query,
-                    referers = referers
-                ).stringify()
+                body = bodyString
+                setRequestOptions(requestOptions)
             }
         }
     }
@@ -57,39 +63,52 @@ internal class ClientAPIKey(
         maxQueriesPerIPPerHour: Int?,
         validity: Long?,
         query: Query?,
-        referers: List<String>?
+        referers: List<String>?,
+        requestOptions: RequestOptions?
     ): CreationAPIKey {
-        return write.retry(writeTimeout, "/1/keys/$apiKey") { path ->
+        val bodyString = RequestAPIKey(
+            rights = rights,
+            indexes = indexes,
+            description = description,
+            maxHitsPerQuery = maxHitsPerQuery,
+            maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
+            validity = validity,
+            query = query,
+            referers = referers
+        ).stringify()
+
+        return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { path ->
             httpClient.put<CreationAPIKey>(path) {
-                body = RequestAPIKey(
-                    rights = rights,
-                    indexes = indexes,
-                    description = description,
-                    maxHitsPerQuery = maxHitsPerQuery,
-                    maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
-                    validity = validity,
-                    query = query,
-                    referers = referers
-                ).stringify()
+                body = bodyString
+                setRequestOptions(requestOptions)
             }
         }
     }
 
-    override suspend fun deleteAPIKey(apiKey: APIKey): Deletion {
-        return write.retry(writeTimeout, "/1/keys/$apiKey") { path ->
-            httpClient.delete<Deletion>(path)
+    override suspend fun deleteAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): Deletion {
+        return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { path ->
+            httpClient.delete<Deletion>(path) {
+                setRequestOptions(requestOptions)
+            }
         }
     }
 
-    override suspend fun listAPIKeys(): ResponseListAPIKey {
-        return read.retry(readTimeout, "/1/keys") { path ->
-            httpClient.get<ResponseListAPIKey>(path)
+    override suspend fun listAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
+        return read.retry(requestOptions.computedReadTimeout, route) { path ->
+            httpClient.get<ResponseListAPIKey>(path) {
+                setRequestOptions(requestOptions)
+            }
         }
     }
 
-    override suspend fun getAPIKeyPermission(apiKey: APIKey): ResponseAPIKeyPermission {
-        return read.retry(readTimeout, "/1/keys/$apiKey") { path ->
-            httpClient.get<ResponseAPIKeyPermission>(path)
+    override suspend fun getAPIKeyPermission(
+        apiKey: APIKey,
+        requestOptions: RequestOptions?
+    ): ResponseAPIKeyPermission {
+        return read.retry(requestOptions.computedReadTimeout, "$route/$apiKey") { path ->
+            httpClient.get<ResponseAPIKeyPermission>(path) {
+                setRequestOptions(requestOptions)
+            }
         }
     }
 }

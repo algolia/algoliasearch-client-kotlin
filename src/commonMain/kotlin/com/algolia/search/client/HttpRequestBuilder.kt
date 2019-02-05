@@ -14,16 +14,17 @@ import kotlinx.serialization.json.jsonArray
 
 
 internal fun HttpRequestBuilder.setApplicationId(applicationID: ApplicationID) {
-    header("X-Algolia-Application-Id", applicationID.raw)
+    header(KeyAlgoliaApplicationID, applicationID.raw)
 }
 
 internal fun HttpRequestBuilder.setApiKey(apiKey: APIKey) {
-    header("X-Algolia-API-Key", apiKey.raw)
+    header(KeyAlgoliaAPIKey, apiKey.raw)
 }
 
 internal fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions?) {
     requestOptions?.headers?.forEach { header(it.key, it.value) }
     requestOptions?.urlParameters?.forEach { parameter(it.key, it.value) }
+    requestOptions?.body?.let { body = it }
 }
 
 internal fun HttpRequestBuilder.setForwardToReplicas(forwardToReplicas: Boolean?) {

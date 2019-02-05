@@ -11,7 +11,7 @@ import com.algolia.search.serialize.KeyClearExistingRules
 import com.algolia.search.serialize.KeyQuery
 import io.ktor.client.request.*
 import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.list
 
 
 internal class ClientQueryRule(
@@ -20,25 +20,29 @@ internal class ClientQueryRule(
 ) : EndpointQueryRule,
     Client by client {
 
+    private val route = "/rules"
+
     override suspend fun saveRule(
         queryRule: QueryRule,
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
+        val bodyString = JsonNoNulls.stringify(QueryRule.serializer(), queryRule)
+
         return write.retry(
             requestOptions.computedReadTimeout,
-            indexName.pathIndexes("/rules/${queryRule.objectID}")
+            indexName.pathIndexes("$route/${queryRule.objectID}")
         ) { path ->
             httpClient.put<RevisionIndex>(path) {
-                setRequestOptions(requestOptions)
+                body = bodyString
                 setForwardToReplicas(forwardToReplicas)
-                body = JsonNoNulls.stringify(QueryRule.serializer(), queryRule)
+                setRequestOptions(requestOptions)
             }
         }
     }
 
     override suspend fun getRule(objectID: ObjectID, requestOptions: RequestOptions?): QueryRule {
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/rules/$objectID")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("$route/$objectID")) { path ->
             httpClient.get<QueryRule>(path) {
                 setRequestOptions(requestOptions)
             }
@@ -50,29 +54,31 @@ internal class ClientQueryRule(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/rules/$objectID")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("$route/$objectID")) { path ->
             httpClient.delete<RevisionIndex>(path) {
-                setRequestOptions(requestOptions)
                 setForwardToReplicas(forwardToReplicas)
+                setRequestOptions(requestOptions)
             }
         }
     }
 
     override suspend fun searchRules(query: String?, requestOptions: RequestOptions?): ResponseRules {
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/rules/search")) { path ->
+        val bodyString = json { query?.let { KeyQuery to it } }.toString()
+
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("$route/search")) { path ->
             httpClient.post<ResponseRules>(path) {
+                body = bodyString
                 setRequestOptions(requestOptions)
-                body = json { query?.let { KeyQuery to it } }.toString()
             }
         }
     }
 
     override suspend fun clearRules(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/rules/clear")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("$route/clear")) { path ->
             httpClient.post<RevisionIndex>(path) {
-                setRequestOptions(requestOptions)
-                setForwardToReplicas(forwardToReplicas)
                 body = ""
+                setForwardToReplicas(forwardToReplicas)
+                setRequestOptions(requestOptions)
             }
         }
     }
@@ -83,14 +89,14 @@ internal class ClientQueryRule(
         clearExistingRules: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/rules/batch")) { path ->
+        val bodyString = JsonNoNulls.stringify(QueryRule.serializer().list, queryRules)
+
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("$route/batch")) { path ->
             httpClient.post<RevisionIndex>(path) {
-                setRequestOptions(requestOptions)
+                body = bodyString
                 setForwardToReplicas(forwardToReplicas)
-                clearExistingRules?.let { parameter(KeyClearExistingRules, it) }
-                body = jsonArray {
-                    queryRules.forEach { +JsonNoNulls.toJson(QueryRule.serializer(), it) }
-                }.toString()
+                parameter(KeyClearExistingRules, clearExistingRules)
+                setRequestOptions(requestOptions)
             }
         }
     }

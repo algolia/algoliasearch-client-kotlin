@@ -24,7 +24,7 @@ class ClientAlgolia private constructor(
     constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
-    ) : this(APIWrapper(Configuration(applicationID, apiKey)))
+    ) : this(APIWrapper(Configuration(applicationID, apiKey, hosts = null)))
 
     constructor(
         configuration: Configuration

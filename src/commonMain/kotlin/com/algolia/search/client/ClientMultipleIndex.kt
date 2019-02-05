@@ -6,16 +6,11 @@ import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.query.clone
-import com.algolia.search.response.ResponseBatches
-import com.algolia.search.response.ResponseListAPIKey
-import com.algolia.search.response.ResponseListIndexes
-import com.algolia.search.response.ResponseSearches
+import com.algolia.search.response.*
 import com.algolia.search.serialize.KeyRequests
-import com.algolia.search.serialize.KeyResults
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
@@ -25,8 +20,10 @@ internal class ClientMultipleIndex(
 ) : EndpointMultipleIndex,
     Client by client {
 
+    private val route = "/1/indexes"
+
     override suspend fun listIndexes(requestOptions: RequestOptions?): ResponseListIndexes {
-        return read.retry(requestOptions.computedReadTimeout, "/1/indexes") { path ->
+        return read.retry(requestOptions.computedReadTimeout, route) { path ->
             httpClient.get<ResponseListIndexes>(path) {
                 setRequestOptions(requestOptions)
             }
@@ -38,17 +35,12 @@ internal class ClientMultipleIndex(
         strategy: MultipleQueriesStrategy,
         requestOptions: RequestOptions?
     ): ResponseSearches {
-        val copies = queries.map {
-            IndexQuery(
-                it.indexName,
-                it.query.clone()
-            )
-        }
+        val copies = queries.map { IndexQuery(it.indexName, it.query.clone()) }
 
-        return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/queries") { path ->
+        return read.retry(requestOptions.computedReadTimeout, "$route/*/queries") { path ->
             httpClient.post<ResponseSearches>(path) {
-                setRequestOptions(requestOptions)
                 setQueries(copies, strategy)
+                setRequestOptions(requestOptions)
             }
         }
     }
@@ -56,15 +48,13 @@ internal class ClientMultipleIndex(
     override suspend fun multipleGetObjects(
         requests: List<RequestObjects>,
         requestOptions: RequestOptions?
-    ): List<JsonObject?> {
-        val json = json { KeyRequests to Json.plain.toJson(RequestObjects.list, requests) }
+    ): ResponseObjects {
+        val bodyString = json { KeyRequests to Json.plain.toJson(RequestObjects.list, requests) }.toString()
 
-        return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/objects") { path ->
-            httpClient.post<JsonObject>(path) {
+        return read.retry(requestOptions.computedReadTimeout, "$route/*/objects") { path ->
+            httpClient.post<ResponseObjects>(path) {
+                body = bodyString
                 setRequestOptions(requestOptions)
-                body = json.toString()
-            }.let {
-                it.jsonObject.getArray(KeyResults).map { if (!it.isNull) it.jsonObject else null }
             }
         }
     }
@@ -74,19 +64,21 @@ internal class ClientMultipleIndex(
         requestOptions: RequestOptions?
     ): ResponseBatches {
         val requests = Json.plain.toJson(BatchOperationIndex.list, operations)
-        val json = json { KeyRequests to requests }
+        val bodyString = json { KeyRequests to requests }.toString()
 
-        return write.retry(requestOptions.computedWriteTimeout, "/1/indexes/*/batch") { path ->
+        return write.retry(requestOptions.computedWriteTimeout, "$route/*/batch") { path ->
             httpClient.post<ResponseBatches>(path) {
+                body = bodyString
                 setRequestOptions(requestOptions)
-                body = json.toString()
             }
         }
     }
 
-    override suspend fun listIndexAPIKeys(): ResponseListAPIKey {
-        return read.retry(readTimeout, "/1/indexes/*/keys") { path ->
-            httpClient.get<ResponseListAPIKey>(path)
+    override suspend fun listIndexAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
+        return read.retry(readTimeout, "$route/*/keys") { path ->
+            httpClient.get<ResponseListAPIKey>(path) {
+                setRequestOptions(requestOptions)
+            }
         }
     }
 }

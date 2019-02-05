@@ -34,8 +34,8 @@ internal class ClientSearch(
 
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/query")) { path ->
             httpClient.post<ResponseSearch>(path) {
-                setRequestOptions(requestOptions)
                 setBody(copy)
+                setRequestOptions(requestOptions)
             }
         }
     }
@@ -45,8 +45,8 @@ internal class ClientSearch(
 
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
             httpClient.post<ResponseSearch>(path) {
-                setRequestOptions(requestOptions)
                 setBody(copy)
+                setRequestOptions(requestOptions)
             }
         }
     }
@@ -54,8 +54,8 @@ internal class ClientSearch(
     override suspend fun browse(cursor: Cursor, requestOptions: RequestOptions?): ResponseSearch {
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
             httpClient.get<ResponseSearch>(path) {
-                setRequestOptions(requestOptions)
                 parameter(KeyCursor, cursor)
+                setRequestOptions(requestOptions)
             }
         }
     }
@@ -68,19 +68,19 @@ internal class ClientSearch(
         requestOptions: RequestOptions?
     ): ResponseSearchFacetValue {
         val copy = query?.clone()
+        val extraParams = json {
+            maxFacetHits?.let { KeyMaxFacetHits to it }
+            facetQuery?.let { KeyFacetQuery to it }
+        }
+        val bodyString = (copy?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
 
         return read.retry(
             requestOptions.computedReadTimeout,
             indexName.pathIndexes("/facets/$attribute/query")
         ) { path ->
             httpClient.post<ResponseSearchFacetValue>(path) {
+                body = bodyString
                 setRequestOptions(requestOptions)
-                val extraParams = json {
-                    maxFacetHits?.let { KeyMaxFacetHits to it }
-                    facetQuery?.let { KeyFacetQuery to it }
-                }
-
-                body = (copy?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
             }
         }
     }

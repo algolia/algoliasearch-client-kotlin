@@ -24,6 +24,8 @@ internal class ClientAPIKeyIndex(
 ) : EndpointAPIKeyIndex,
     Client by client {
 
+    private val route = "/keys"
+
     override suspend fun addIndexAPIKey(
         rights: List<ACL>?,
         description: String?,
@@ -31,19 +33,23 @@ internal class ClientAPIKeyIndex(
         maxQueriesPerIPPerHour: Int?,
         validity: Long?,
         query: Query?,
-        referers: List<String>?
+        referers: List<String>?,
+        requestOptions: RequestOptions?
     ): CreationAPIKey {
-        return write.retry(writeTimeout, indexName.pathIndexes("/keys")) { path ->
+        val bodyString = RequestAPIKey(
+            rights = rights,
+            description = description,
+            maxHitsPerQuery = maxHitsPerQuery,
+            maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
+            validity = validity,
+            query = query,
+            referers = referers
+        ).stringify()
+
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes(route)) { path ->
             httpClient.post<CreationAPIKey>(path) {
-                body = RequestAPIKey(
-                    rights = rights,
-                    description = description,
-                    maxHitsPerQuery = maxHitsPerQuery,
-                    maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
-                    validity = validity,
-                    query = query,
-                    referers = referers
-                ).stringify()
+                body = bodyString
+                setRequestOptions(requestOptions)
             }
         }
     }
@@ -55,38 +61,48 @@ internal class ClientAPIKeyIndex(
         maxQueriesPerIPPerHour: Int?,
         validity: Long?,
         query: Query?,
-        referers: List<String>?
+        referers: List<String>?,
+        requestOptions: RequestOptions?
     ): RevisionAPIKey {
-        return write.retry(writeTimeout, indexName.pathIndexes("/keys")) { path ->
+        val bodyString = RequestAPIKey(
+            rights = rights,
+            description = description,
+            maxHitsPerQuery = maxHitsPerQuery,
+            maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
+            validity = validity,
+            query = query,
+            referers = referers
+        ).stringify()
+
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes(route)) { path ->
             httpClient.put<RevisionAPIKey>(path) {
-                body = RequestAPIKey(
-                    rights = rights,
-                    description = description,
-                    maxHitsPerQuery = maxHitsPerQuery,
-                    maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
-                    validity = validity,
-                    query = query,
-                    referers = referers
-                ).stringify()
+                body = bodyString
+                setRequestOptions(requestOptions)
             }
         }
     }
 
-    override suspend fun deleteIndexAPIKey(apiKey: APIKey): Deletion {
-        return write.retry(writeTimeout, indexName.pathIndexes("/keys/$apiKey")) { path ->
-            httpClient.delete<Deletion>(path)
+    override suspend fun deleteIndexAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): Deletion {
+        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("$route/$apiKey")) { path ->
+            httpClient.delete<Deletion>(path) {
+                setRequestOptions(requestOptions)
+            }
         }
     }
 
-    override suspend fun getIndexAPIKey(apiKey: APIKey): ResponseAPIKeyPermission {
-        return read.retry(readTimeout, indexName.pathIndexes("/keys/$apiKey")) { path ->
-            httpClient.get<ResponseAPIKeyPermission>(path)
+    override suspend fun getIndexAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): ResponseAPIKeyPermission {
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("$route/$apiKey")) { path ->
+            httpClient.get<ResponseAPIKeyPermission>(path) {
+                setRequestOptions(requestOptions)
+            }
         }
     }
 
-    override suspend fun listIndexAPIKeys(): ResponseListAPIKey {
-        return read.retry(readTimeout, indexName.pathIndexes("/keys")) { path ->
-            httpClient.get<ResponseListAPIKey>(path)
+    override suspend fun listIndexAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
+        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes(route)) { path ->
+            httpClient.get<ResponseListAPIKey>(path) {
+                setRequestOptions(requestOptions)
+            }
         }
     }
 }

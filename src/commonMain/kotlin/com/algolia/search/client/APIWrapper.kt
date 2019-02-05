@@ -1,6 +1,8 @@
 package com.algolia.search.client
 
 import com.algolia.search.host.RetryLogic
+import com.algolia.search.host.readHosts
+import com.algolia.search.host.writeHosts
 import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.response.ResponseBatches
@@ -47,6 +49,6 @@ internal class APIWrapper(
         }
     }
 
-    override val read = RetryLogic(configuration.applicationID, RetryLogic.Type.Read)
-    override val write = RetryLogic(configuration.applicationID, RetryLogic.Type.Write)
+    override val read = RetryLogic(configuration.readHosts())
+    override val write = RetryLogic(configuration.writeHosts())
 }

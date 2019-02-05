@@ -1,7 +1,7 @@
 package host
 
 import com.algolia.search.model.ApplicationID
-import com.algolia.search.host.computeHosts
+import com.algolia.search.host.buildFallbackHosts
 import com.algolia.search.host.randomize
 import com.algolia.search.host.readHost
 import com.algolia.search.host.writeHost
@@ -27,7 +27,7 @@ internal class TestHosts {
 
     @Test
     fun computeHosts() {
-        val hosts = applicationId.computeHosts()
+        val hosts = applicationId.buildFallbackHosts()
 
         hosts.contains("https://$applicationId-1.$host").shouldBeTrue()
         hosts.contains("https://$applicationId-2.$host").shouldBeTrue()
@@ -38,7 +38,7 @@ internal class TestHosts {
     @Test
     fun random() {
         val result = (0 until 1000).map {
-            val hosts = applicationId.computeHosts()
+            val hosts = applicationId.buildFallbackHosts()
             val randomized = hosts.randomize()
 
             randomized[0] == "$applicationId-1.$host"
