@@ -7,12 +7,13 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.PartialUpdate
-import com.algolia.search.model.search.Query
 import com.algolia.search.model.response.ResponseBatch
+import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.creation.CreationObject
 import com.algolia.search.model.response.deletion.DeletionObject
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
+import com.algolia.search.model.search.Query
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JsonObject
 
@@ -84,15 +85,21 @@ interface EndpointIndexing {
     suspend fun <T : Indexable> getObject(
         objectID: ObjectID,
         serializer: KSerializer<T>,
-        attributes: List<Attribute> = listOf(),
+        attributes: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
     ): T?
 
     suspend fun getObject(
         objectID: ObjectID,
-        attributes: List<Attribute> = listOf(),
+        attributes: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
     ): JsonObject
+
+    suspend fun getObjects(
+        objectIDs: List<ObjectID>,
+        attributes: List<Attribute>? = null,
+        requestOptions: RequestOptions? = null
+    ): ResponseObjects
 
     suspend fun <T : Indexable> updateObject(
         data: T,

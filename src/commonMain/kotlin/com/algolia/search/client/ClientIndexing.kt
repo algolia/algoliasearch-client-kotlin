@@ -7,13 +7,15 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.PartialUpdate
-import com.algolia.search.model.search.Query
-import com.algolia.search.query.clone
+import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.response.ResponseBatch
+import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.creation.CreationObject
 import com.algolia.search.model.response.deletion.DeletionObject
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
+import com.algolia.search.model.search.Query
+import com.algolia.search.query.clone
 import com.algolia.search.serialize.*
 import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
@@ -142,10 +144,11 @@ internal class ClientIndexing(
 
     private suspend fun getObjectInternal(
         objectID: ObjectID,
-        attributes: List<Attribute>,
+        attributes: List<Attribute>?,
         requestOptions: RequestOptions?
     ): JsonObject {
-        val attributesToRetrieve = Json.stringify(Attribute.list, attributes.toList())
+        val attributesToRetrieve = attributes?.let { Json.stringify(Attribute.list, it.toList()) }
+
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/$objectID")) { path ->
             httpClient.get<JsonObject>(path) {
                 parameter(KeyAttributesToRetrieve, attributesToRetrieve)
@@ -156,7 +159,7 @@ internal class ClientIndexing(
 
     override suspend fun getObject(
         objectID: ObjectID,
-        attributes: List<Attribute>,
+        attributes: List<Attribute>?,
         requestOptions: RequestOptions?
     ): JsonObject {
         return getObjectInternal(objectID, attributes, requestOptions = requestOptions)
@@ -165,11 +168,27 @@ internal class ClientIndexing(
     override suspend fun <T : Indexable> getObject(
         objectID: ObjectID,
         serializer: KSerializer<T>,
-        attributes: List<Attribute>,
+        attributes: List<Attribute>?,
         requestOptions: RequestOptions?
     ): T? {
         return getObjectInternal(objectID, attributes, requestOptions = requestOptions).let {
             Json.nonstrict.fromJson(serializer, it)
+        }
+    }
+
+    override suspend fun getObjects(
+        objectIDs: List<ObjectID>,
+        attributes: List<Attribute>?,
+        requestOptions: RequestOptions?
+    ): ResponseObjects {
+        val requests = objectIDs.map { RequestObjects(indexName, it, attributes) }
+        val bodyString = json { KeyRequests to Json.plain.toJson(RequestObjects.list, requests) }.toString()
+
+        return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/objects") { path ->
+            httpClient.post<ResponseObjects>(path) {
+                body = bodyString
+                setRequestOptions(requestOptions)
+            }
         }
     }
 
