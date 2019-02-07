@@ -3,11 +3,11 @@ package com.algolia.search.client
 import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.response.ResponseSearch
+import com.algolia.search.model.response.ResponseSearchFacetValue
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Query
 import com.algolia.search.query.clone
-import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.model.response.ResponseSearchFacetValue
 import com.algolia.search.serialize.*
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -42,10 +42,16 @@ internal class ClientSearch(
 
     override suspend fun browse(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
         val copy = query?.clone()
+        val bodyString =
+            copy?.let {
+                json {
+                    KeyParams to JsonNoNulls.toJson(Query.serializer(), it).jsonObject.urlEncode()
+                }.toString()
+            } ?: "{}"
 
         return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
             httpClient.post<ResponseSearch>(path) {
-                setBody(copy)
+                body = bodyString
                 setRequestOptions(requestOptions)
             }
         }
