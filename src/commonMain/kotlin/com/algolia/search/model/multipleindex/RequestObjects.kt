@@ -17,7 +17,7 @@ import kotlinx.serialization.json.jsonArray
 data class RequestObjects internal constructor(
     val indexName: IndexName,
     val objectID: ObjectID,
-    val attributes: List<Attribute>
+    val attributes: List<Attribute>?
 ) {
 
     constructor(
@@ -33,10 +33,9 @@ data class RequestObjects internal constructor(
             val json = json {
                 KeyIndexName to obj.indexName.raw
                 KeyObjectID to obj.objectID.raw
-                if (obj.attributes.isNotEmpty()) {
+                if (obj.attributes != null) {
                     KeyAttributesToRetrieve to jsonArray { obj.attributes.forEach { +it.raw } }
                 }
-
             }
 
             encoder.asJsonOutput().encodeJson(json)
