@@ -85,8 +85,8 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
         override fun serialize(encoder: Encoder, obj: BatchOperation) {
             val json = when (obj) {
                 is AddObject -> batchJson(obj) { KeyBody to obj.json }
-                is ReplaceObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectID to obj.objectID } }
-                is UpdateObject -> batchJson(obj) { KeyBody to obj.json.apply { KeyObjectID to obj.objectID } }
+                is ReplaceObject -> batchJson(obj) { KeyBody to obj.json.merge(json { KeyObjectID to obj.objectID.raw }) }
+                is UpdateObject -> batchJson(obj) { KeyBody to obj.json.merge(json { KeyObjectID to obj.objectID.raw }) }
                 is DeleteObject -> batchJson(obj) { KeyBody to json { KeyObjectID to obj.objectID.raw } }
                 is DeleteIndex -> batchJson(obj) {}
                 is ClearIndex -> batchJson(obj) {}
