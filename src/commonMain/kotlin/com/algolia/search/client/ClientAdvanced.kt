@@ -7,6 +7,8 @@ import com.algolia.search.model.task.TaskID
 import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
 import io.ktor.client.request.get
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 
 
@@ -15,6 +17,12 @@ internal class ClientAdvanced(
     override val indexName: IndexName
 ) : EndpointAdvanced,
     Client by client {
+
+    override suspend fun List<Task>.wait(requestOptions: RequestOptions?): List<TaskStatus> {
+        return coroutineScope {
+            map { async { it.wait(requestOptions) } }.map { it.await() }
+        }
+    }
 
     override suspend fun Task.wait(requestOptions: RequestOptions?): TaskStatus {
         return waitTask(taskID, requestOptions)
