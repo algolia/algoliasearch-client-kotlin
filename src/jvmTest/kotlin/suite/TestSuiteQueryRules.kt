@@ -27,13 +27,14 @@ internal class TestSuiteQueryRules {
     private val indexName = testSuiteIndexName(suffix)
     private val json = Json(indented = true, indent = "  ", encodeDefaults = false)
     private val brand = "brand".toAttribute()
+    private val index = clientAdmin1.getIndex(indexName)
 
     lateinit var queryRule: QueryRule
     lateinit var queryRules: List<QueryRule>
 
     @Before
     fun clean() {
-        cleanIndex(suffix)
+        cleanIndex(clientAdmin1, suffix)
     }
 
     @Before
@@ -57,7 +58,6 @@ internal class TestSuiteQueryRules {
     @Test
     fun suite() {
         runBlocking {
-            val index = clientAdmin1.getIndex(indexName)
             val objects = loadScratch("iphones.json").readText().let {
                 Json.plain.parseJson(it).jsonArray.map { it.jsonObject }
             }

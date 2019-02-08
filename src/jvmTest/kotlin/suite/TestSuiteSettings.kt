@@ -21,10 +21,11 @@ internal class TestSuiteSettings {
     private val suffix = "settings"
     private val indexName = testSuiteIndexName(suffix)
     private val languages = BooleanOrQueryLanguages.QueryLanguages(QueryLanguage.English, QueryLanguage.French)
+    private val index =  clientAdmin1.getIndex(indexName)
 
     @Before
     fun clean() {
-        cleanIndex(suffix)
+        cleanIndex(clientAdmin1, suffix)
     }
 
     lateinit var settings : Settings
@@ -42,8 +43,6 @@ internal class TestSuiteSettings {
     @Test
     fun suite() {
         runBlocking {
-            val index = clientAdmin1.getIndex(indexName)
-
             index.apply {
                 setSettings(settings).wait() shouldEqual TaskStatus.Published
                 getSettings() shouldEqual settings

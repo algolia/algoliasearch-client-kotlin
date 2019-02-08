@@ -41,10 +41,12 @@ internal class TestSuiteSynonyms {
         Synonym.AlternativeCorrections(psone, "psone", listOf("playstationone"), SynonymType.Typo.Two)
     private val synonyms =
         listOf(synonymMultiWay, synonymOneWay, synonymPlaceholder, synonymAlternative1, synonymAlternative2)
+    private val index = clientAdmin1.getIndex(indexName)
+
 
     @Before
     fun clean() {
-        cleanIndex(suffix)
+        cleanIndex(clientAdmin1, suffix)
     }
 
     @Test
@@ -53,7 +55,6 @@ internal class TestSuiteSynonyms {
             val string = loadScratch("console.json").readText()
             val objects = Json.plain.parseJson(string).jsonArray.map { it.jsonObject }
             val tasks = mutableListOf<Task>()
-            val index = clientAdmin1.getIndex(indexName)
 
             index.apply {
                 tasks += addObjects(objects)

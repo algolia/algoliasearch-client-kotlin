@@ -26,10 +26,11 @@ internal class TestSuiteSearch {
     private val indexName = testSuiteIndexName(suffix)
     private val company = "company".toAttribute()
     private val allFacets = listOf("*".toAttribute())
+    private val index = clientAdmin1.getIndex(indexName)
 
     @Before
     fun clean() {
-        cleanIndex(suffix)
+        cleanIndex(clientAdmin1, suffix)
     }
 
     @Test
@@ -37,7 +38,6 @@ internal class TestSuiteSearch {
         runBlocking {
             val string = loadScratch("suite_search.json").readText()
             val objects = Json.plain.parseJson(string).jsonArray.map { it.jsonObject }
-            val index = clientAdmin1.getIndex(indexName)
             val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Searchable(company)))
             val tasks = mutableListOf<Task>()
 

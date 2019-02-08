@@ -43,6 +43,8 @@ internal class TestSuiteIndexing {
     private val updateC = dataC.copy(value = 1)
     private val updateD = dataD.copy(value = 1)
     private val indexName = testSuiteIndexName(suffix)
+    private val index = clientAdmin1.getIndex(indexName)
+
 
     private fun batchAddObject(): List<List<BatchOperation.AddObject>> {
         return (0 until 10)
@@ -55,14 +57,12 @@ internal class TestSuiteIndexing {
 
     @Before
     fun clean() {
-        cleanIndex(suffix)
+        cleanIndex(clientAdmin1, suffix)
     }
 
     @Test
     fun suite() {
         runBlocking {
-            val index = clientAdmin1.getIndex(indexName)
-
             index.apply {
                 val creations = mutableListOf<Task>()
                 val revisions = mutableListOf<Task>()

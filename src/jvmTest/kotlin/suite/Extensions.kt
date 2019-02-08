@@ -44,9 +44,9 @@ internal fun loadScratch(name: String): File {
     return File("/Users/quentinlitzler/Library/Preferences/IntelliJIdea2018.3/scratches/$name")
 }
 
-internal fun cleanIndex(name: String) {
+internal fun cleanIndex(client: ClientAlgolia, name: String) {
     runBlocking {
-        clientAdmin1.listIndexes().items.forEach {
+        client.listIndexes().items.forEach {
             val indexName = it.indexName.raw
 
             if (indexName.contains("kotlin")) {
@@ -58,7 +58,7 @@ internal fun cleanIndex(name: String) {
                     val difference = Date().time - dateFormat.parse(date).time
 
                     if (difference >= dayInMillis) {
-                        clientAdmin1.getIndex(it.indexName).deleteIndex()
+                        client.getIndex(it.indexName).deleteIndex()
                     }
                 }
             }
