@@ -14,6 +14,8 @@ internal class RetryLogic(
 
     internal val statuses = hosts.initialHostStatus()
 
+    private val maxAttempts = 5
+
     private suspend fun <T> retry(
         timeout: Long,
         path: String,
@@ -36,6 +38,7 @@ internal class RetryLogic(
             }
         } catch (exception: TimeoutCancellationException) {
             statuses[index] = HostStatus.Down.getHostStatus()
+            if (attempt > maxAttempts) throw exception
             retry(timeout, path, attempt + 1, request)
         } catch (exception: BadResponseStatusException) {
             val code = exception.response.status.value
@@ -44,11 +47,13 @@ internal class RetryLogic(
 
             if (isRetryable) {
                 statuses[index] = HostStatus.Down.getHostStatus()
-                retry(timeout, path, attempt, request)
+                if (attempt > maxAttempts) throw exception
+                retry(timeout, path, attempt + 1, request)
             } else throw exception
         } catch (exception: IOException) {
             statuses[index] = HostStatus.Down.getHostStatus()
-            retry(timeout, path, attempt, request)
+            if (attempt > maxAttempts) throw exception
+            retry(timeout, path, attempt + 1, request)
         }
     }
 
