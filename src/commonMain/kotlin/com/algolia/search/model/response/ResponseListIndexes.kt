@@ -5,6 +5,7 @@ import com.algolia.search.serialize.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
 
 
 @Serializable
@@ -24,6 +25,9 @@ data class ResponseListIndexes(
         @SerialName(KeyLastBuildTimeS) val lastBuildTimeS: Int,
         @SerialName(KeyNumberOfPendingTasks) val numberOfPendingTasks: Int,
         @SerialName(KeyPendingTask) val pendingTask: Boolean,
-        @SerialName(KeyReplicas) @Optional val replicas: List<String>? = null
+        @Optional @SerialName(KeyReplicas) val replicas: List<String>? = null,
+        @Optional @SerialName(KeyPrimary) val primary: String? = null,
+        @Optional @SerialName(KeySourceABTest) val sourceABTest: String? = null,
+        @Optional @SerialName(KeyABTest) val ABTest: JsonObject? = null
     )
 }
