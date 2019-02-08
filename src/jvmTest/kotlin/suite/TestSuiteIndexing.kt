@@ -29,6 +29,7 @@ internal class TestSuiteIndexing {
         val value: Int = 0
     ) : Indexable
 
+    private val suffix = "indexing"
     private val attributeValue = "value".toAttribute()
     private val dataA = Data("A".toObjectID())
     private val dataB = Data("B".toObjectID())
@@ -41,7 +42,7 @@ internal class TestSuiteIndexing {
     private val updateB = dataB.copy(value = 1)
     private val updateC = dataC.copy(value = 1)
     private val updateD = dataD.copy(value = 1)
-    private val indexName = testSuiteIndexName("indexing")
+    private val indexName = testSuiteIndexName(suffix)
 
     private fun batchAddObject(): List<List<BatchOperation.AddObject>> {
         return (0 until 10)
@@ -54,7 +55,7 @@ internal class TestSuiteIndexing {
 
     @Before
     fun clean() {
-        cleanIndex("indexing")
+        cleanIndex(suffix)
     }
 
     @Test
