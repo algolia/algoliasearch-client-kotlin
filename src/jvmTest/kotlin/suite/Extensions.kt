@@ -1,10 +1,15 @@
 package suite
 
 import com.algolia.search.client.ClientAlgolia
+import com.algolia.search.model.IndexName
 import com.algolia.search.toAPIKey
 import com.algolia.search.toApplicationID
+import com.algolia.search.toIndexName
+import kotlinx.coroutines.runBlocking
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 internal val clientSearch = ClientAlgolia(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
@@ -26,4 +31,38 @@ internal val clientMcm = ClientAlgolia(
 
 internal val dateFormat = SimpleDateFormat("YYYY-MM-DD-HH-mm-ss").also {
     it.timeZone = TimeZone.getTimeZone("UTC")
+}
+
+internal fun testSuiteIndexName(name: String): IndexName {
+    val date = dateFormat.format(Date())
+    val prefix = "kotlin-$date"
+
+    return "$prefix-qlitzler-$name".toIndexName()
+}
+
+internal fun loadScratch(name: String): File {
+    return File("/Users/quentinlitzler/Library/Preferences/IntelliJIdea2018.3/scratches/$name")
+}
+
+internal fun cleanIndex(name: String) {
+    runBlocking {
+        clientAdmin1.listIndexes().items.forEach {
+            val name = it.indexName.raw
+
+            if (name.contains("kotlin")) {
+                val result = Regex("kotlin-(.*)-qlitzler-$name").find(name)
+                val date = result?.groupValues?.get(1)
+
+                if (date != null) {
+                    val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
+                    val difference = Date().time - dateFormat.parse(date).time
+
+                    println("$dayInMillis $difference")
+                    if (difference >= dayInMillis) {
+                        clientAdmin1.getIndex(it.indexName).deleteIndex()
+                    }
+                }
+            }
+        }
+    }
 }

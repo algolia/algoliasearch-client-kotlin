@@ -7,26 +7,21 @@ import com.algolia.search.model.indexing.PartialUpdate
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.toAttribute
-import com.algolia.search.toIndexName
 import com.algolia.search.toObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldBeTrue
 import shouldEqual
-import java.util.*
 
 
 @RunWith(JUnit4::class)
 internal class TestSuiteIndexing {
-
-    private val date = dateFormat.format(Date())
-    private val prefix = "kotlin-$date"
-    private val indexName = "$prefix-qlitzler-indexing".toIndexName()
 
     @Serializable
     data class Data(
@@ -46,6 +41,7 @@ internal class TestSuiteIndexing {
     private val updateB = dataB.copy(value = 1)
     private val updateC = dataC.copy(value = 1)
     private val updateD = dataD.copy(value = 1)
+    private val indexName = testSuiteIndexName("indexing")
 
     private fun batchAddObject(): List<List<BatchOperation.AddObject>> {
         return (0 until 10)
@@ -56,12 +52,17 @@ internal class TestSuiteIndexing {
             }
     }
 
+    @Before
+    fun clean() {
+        cleanIndex("indexing")
+    }
+
     @Test
     fun suite() {
         runBlocking {
             val index = clientAdmin1.getIndex(indexName)
 
-            index.run {
+            index.apply {
                 val creations = mutableListOf<Task>()
                 val revisions = mutableListOf<Task>()
                 val deletions = mutableListOf<Task>()
