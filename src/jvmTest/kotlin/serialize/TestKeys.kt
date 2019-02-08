@@ -267,6 +267,13 @@ internal class TestKeys {
         KeyHighlighted shouldEqual "highlighted"
         KeyAlgoliaApplicationID shouldEqual "X-Algolia-Application-Id"
         KeyAlgoliaAPIKey shouldEqual "X-Algolia-API-Key"
+        KeyPrimary shouldEqual "primary"
+        KeySourceABTest shouldEqual "sourceABTest"
+        KeyABTest shouldEqual "abTest"
+        KeyOrdered shouldEqual "ordered"
+        KeyUnordered shouldEqual "unordered"
+        KeyFilterOnly shouldEqual "filterOnly"
+        KeySearchable shouldEqual "searchable"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

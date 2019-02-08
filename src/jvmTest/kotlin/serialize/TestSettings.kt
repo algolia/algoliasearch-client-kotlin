@@ -4,6 +4,7 @@ import attributeA
 import attributes
 import attributesJson
 import boolean
+import com.algolia.search.model.SearchableAttribute
 import com.algolia.search.model.enums.*
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.*
@@ -24,7 +25,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
     override val items = listOf(
         Settings(
             // Attributes
-            searchableAttributes = attributes,
+            searchableAttributes = attributes.map { SearchableAttribute.Default(it) },
             attributesForFaceting = attributes,
             unretrievableAttributes = attributes,
             attributesToRetrieve = attributes,

@@ -1,19 +1,23 @@
 package com.algolia.search.serialize
 
+import com.algolia.search.model.request.RequestAPIKey
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.model.request.RequestAPIKey
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.json.*
 
-internal val regexAsc = Regex("$KeyAsc\\((.*)\\)")
-internal val regexDesc = Regex("$KeyDesc\\((.*)\\)")
-internal val regexEqualOnly = Regex("$KeyEqualOnly\\((.*)\\)")
-internal val regexSnippet = Regex("(.*):(\\d+)")
+internal val regexAsc = Regex("^$KeyAsc\\((.*)\\)$")
+internal val regexDesc = Regex("^$KeyDesc\\((.*)\\)$")
+internal val regexEqualOnly = Regex("^$KeyEqualOnly\\((.*)\\)$")
+internal val regexSnippet = Regex("^(.*):(\\d+)$")
+internal val regexOrdered = Regex("^$KeyOrdered\\((.*)\\)$")
+internal val regexUnordered = Regex("^$KeyUnordered\\((.*)\\)$")
+internal val regexFilterOnly = Regex("^$KeyFilterOnly\\((.*)\\)$")
+internal val regexSearchable = Regex("^$KeySearchable\\((.*)\\)$")
 
 internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     return toMutableMap().run {
