@@ -53,9 +53,10 @@ data class Settings(
     @Optional var numericAttributesForFiltering: List<NumericAttributeFilter>? = null,
     @Optional var allowCompressionOfIntegerArray: Boolean? = null,
     @Optional var attributeForDistinct: Attribute? = null,
-    @Optional var distinct: Int? = null,
+    @Optional var distinct: Distinct? = null,
     @Optional var replaceSynonymsInHighlight: Boolean? = null,
     @Optional var minProximity: Int? = null,
     @Optional var responseFields: List<ResponseFields>? = null,
-    @Optional var maxFacetHits: Int? = null
+    @Optional var maxFacetHits: Int? = null,
+    @Optional var version: Int? = null
 )

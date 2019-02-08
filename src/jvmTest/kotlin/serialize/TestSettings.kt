@@ -7,6 +7,7 @@ import boolean
 import com.algolia.search.model.AttributeForFaceting
 import com.algolia.search.model.SearchableAttribute
 import com.algolia.search.model.enums.*
+import com.algolia.search.model.settings.Distinct
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.*
 import indexA
@@ -78,7 +79,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             allowCompressionOfIntegerArray = boolean,
             // Advanced
             attributeForDistinct = attributeA,
-            distinct = int,
+            distinct = Distinct.True,
             replaceSynonymsInHighlight = boolean,
             minProximity = int,
             responseFields = listOf(ResponseFields.NbHits),
@@ -140,7 +141,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyAllowCompressionOfIntegerArray to boolean
             // Advanced
             KeyAttributeForDistinct to attributeA.raw
-            KeyDistinct to int
+            KeyDistinct to true
             KeyReplaceSynonymsInHighlight to boolean
             KeyMinProximity to int
             KeyResponseFields to jsonArray { +ResponseFields.NbHits.raw }
