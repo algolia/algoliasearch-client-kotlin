@@ -37,7 +37,8 @@ data class ResponseSearch(
     @Optional @SerialName(KeyFacetsStats) val facetStats: Map<Attribute, FacetStats>? = null,
     @Optional @SerialName(KeyCursor) val cursor: Cursor? = null,
     @Optional @SerialName(KeyIndex) val indexName: IndexName? = null,
-    @Optional @SerialName(KeyProcessed) val processed: Boolean? = null
+    @Optional @SerialName(KeyProcessed) val processed: Boolean? = null,
+    @Optional @SerialName(KeyQueryID) val queryID: String? = null
 ) {
 
     @Serializable(Hit.Companion::class)

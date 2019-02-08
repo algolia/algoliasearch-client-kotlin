@@ -264,6 +264,7 @@ internal const val KeyOrdered = "ordered"
 internal const val KeyUnordered = "unordered"
 internal const val KeyFilterOnly = "filterOnly"
 internal const val KeySearchable = "searchable"
+internal const val KeyQueryID = "queryID"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"
