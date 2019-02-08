@@ -1,6 +1,7 @@
 package com.algolia.search.model.settings
 
 import com.algolia.search.model.Attribute
+import com.algolia.search.model.AttributeForFaceting
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.SearchableAttribute
 import com.algolia.search.model.enums.*
@@ -11,7 +12,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Settings(
     @Optional var searchableAttributes: List<SearchableAttribute>? = null,
-    @Optional var attributesForFaceting: List<Attribute>? = null,
+    @Optional var attributesForFaceting: List<AttributeForFaceting>? = null,
     @Optional var unretrievableAttributes: List<Attribute>? = null,
     @Optional var attributesToRetrieve: List<Attribute>? = null,
     @Optional var ranking: List<Ranking>? = null,

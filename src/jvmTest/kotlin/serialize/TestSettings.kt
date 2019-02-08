@@ -4,6 +4,7 @@ import attributeA
 import attributes
 import attributesJson
 import boolean
+import com.algolia.search.model.AttributeForFaceting
 import com.algolia.search.model.SearchableAttribute
 import com.algolia.search.model.enums.*
 import com.algolia.search.model.settings.Settings
@@ -26,7 +27,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
         Settings(
             // Attributes
             searchableAttributes = attributes.map { SearchableAttribute.Default(it) },
-            attributesForFaceting = attributes,
+            attributesForFaceting = attributes.map { AttributeForFaceting.Default(it) },
             unretrievableAttributes = attributes,
             attributesToRetrieve = attributes,
             // Ranking

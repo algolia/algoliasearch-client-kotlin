@@ -18,7 +18,6 @@ sealed class SearchableAttribute(open val attribute: Attribute) {
 
     data class Unordered(override val attribute: Attribute) : SearchableAttribute(attribute)
 
-
     @Serializer(SearchableAttribute::class)
     companion object : KSerializer<SearchableAttribute> {
 
