@@ -57,7 +57,6 @@ internal fun cleanIndex(name: String) {
                     val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
                     val difference = Date().time - dateFormat.parse(date).time
 
-                    println("$dayInMillis $difference")
                     if (difference >= dayInMillis) {
                         clientAdmin1.getIndex(it.indexName).deleteIndex()
                     }
