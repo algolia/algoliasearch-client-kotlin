@@ -47,10 +47,10 @@ internal fun loadScratch(name: String): File {
 internal fun cleanIndex(name: String) {
     runBlocking {
         clientAdmin1.listIndexes().items.forEach {
-            val name = it.indexName.raw
+            val indexName = it.indexName.raw
 
-            if (name.contains("kotlin")) {
-                val result = Regex("kotlin-(.*)-qlitzler-$name").find(name)
+            if (indexName.contains("kotlin")) {
+                val result = Regex("kotlin-(.*)-qlitzler-$name").find(indexName)
                 val date = result?.groupValues?.get(1)
 
                 if (date != null) {
