@@ -30,7 +30,7 @@ internal class TestSuiteSettings {
 
     private fun loadSettings(): Settings {
         val json = Json(encodeDefaults = false, indented = true, indent = "  ")
-        val string = loadScratch("suite_settings.json").readText()
+        val string = loadScratch("settings.json").readText()
         val settings = json.parse(Settings.serializer(), string)
         val serialized = json.stringify(Settings.serializer(), settings)
 
