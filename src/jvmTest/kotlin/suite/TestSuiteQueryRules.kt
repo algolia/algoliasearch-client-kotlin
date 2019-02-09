@@ -55,9 +55,7 @@ internal class TestSuiteQueryRules {
     @Test
     fun suite() {
         runBlocking {
-            val objects = loadScratch("iphones.json").readText().let {
-                Json.plain.parseJson(it).jsonArray.map { it.jsonObject }
-            }
+            val objects = loadFileAsObjects("iphones.json")
             val queryRule = loadQueryRule()
             val queryRules = loadQueryRules()
             val tasks = mutableListOf<Task>()

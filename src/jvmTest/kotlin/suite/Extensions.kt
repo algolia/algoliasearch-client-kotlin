@@ -6,6 +6,8 @@ import com.algolia.search.toAPIKey
 import com.algolia.search.toApplicationID
 import com.algolia.search.toIndexName
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -64,4 +66,10 @@ internal fun cleanIndex(client: ClientSearch, suffix: String) {
             }
         }
     }
+}
+
+internal fun loadFileAsObjects(fileName: String): List<JsonObject> {
+    val string = loadScratch(fileName).readText()
+
+    return Json.plain.parseJson(string).jsonArray.map { it.jsonObject }
 }

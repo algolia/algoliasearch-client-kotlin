@@ -7,7 +7,6 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.toAttribute
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -36,8 +35,7 @@ internal class TestSuiteSearch {
     @Test
     fun suite() {
         runBlocking {
-            val string = loadScratch("companies.json").readText()
-            val objects = Json.plain.parseJson(string).jsonArray.map { it.jsonObject }
+            val objects = loadFileAsObjects("companies.json")
             val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Searchable(company)))
             val tasks = mutableListOf<Task>()
 

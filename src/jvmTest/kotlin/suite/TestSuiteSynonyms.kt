@@ -8,7 +8,6 @@ import com.algolia.search.toObjectID
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -52,8 +51,7 @@ internal class TestSuiteSynonyms {
     @Test
     fun suite() {
         runBlocking {
-            val string = loadScratch("console.json").readText()
-            val objects = Json.plain.parseJson(string).jsonArray.map { it.jsonObject }
+            val objects = loadFileAsObjects("console.json")
             val tasks = mutableListOf<Task>()
 
             index.apply {
