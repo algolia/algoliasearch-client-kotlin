@@ -83,7 +83,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             replaceSynonymsInHighlight = boolean,
             minProximity = int,
             responseFields = listOf(ResponseFields.NbHits),
-            maxFacetHits = int
+            maxFacetHits = int,
+            version = int
         ) to json {
             // Attributes
             KeySearchableAttributes to attributesJson
@@ -146,6 +147,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyMinProximity to int
             KeyResponseFields to jsonArray { +ResponseFields.NbHits.raw }
             KeyMaxFacetHits to int
+            KeyVersion to int
         }
     )
 
