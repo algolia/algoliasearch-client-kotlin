@@ -2,6 +2,7 @@ package com.algolia.search.model.queryrule
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.Raw
+import com.algolia.search.serialize.regexFacet
 import com.algolia.search.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
@@ -29,8 +30,7 @@ sealed class Pattern(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): Pattern {
             val string = serializer.deserialize(decoder)
-            val regex = Regex("\\{facet:(.*)}")
-            val match = regex.find(string)
+            val match = regexFacet.find(string)
 
             return when {
                 match != null -> Facet(match.groupValues[1].toAttribute())

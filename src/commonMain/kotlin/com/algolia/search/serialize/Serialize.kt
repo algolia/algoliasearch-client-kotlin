@@ -18,6 +18,7 @@ internal val regexOrdered = Regex("^$KeyOrdered\\((.*)\\)$")
 internal val regexUnordered = Regex("^$KeyUnordered\\((.*)\\)$")
 internal val regexFilterOnly = Regex("^$KeyFilterOnly\\((.*)\\)$")
 internal val regexSearchable = Regex("^$KeySearchable\\((.*)\\)$")
+internal val regexFacet = Regex("^\\{facet:(.*)}$")
 
 internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     return toMutableMap().run {
