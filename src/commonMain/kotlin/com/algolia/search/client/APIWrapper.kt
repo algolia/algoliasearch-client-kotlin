@@ -4,10 +4,10 @@ import com.algolia.search.host.RetryLogic
 import com.algolia.search.host.readHosts
 import com.algolia.search.host.writeHosts
 import com.algolia.search.model.queryrule.QueryRule
-import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.revision.RevisionIndex
+import com.algolia.search.model.synonym.Synonym
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.DefaultRequest
@@ -29,7 +29,7 @@ internal class APIWrapper(
 
     override val httpClient = selected.config {
         install(JsonFeature) {
-            serializer = KotlinxSerializer()
+            serializer = KotlinxSerializer() // TODO Non strict json
                 .also {
                     it.register(ResponseBatches)
                     it.register(Synonym)
