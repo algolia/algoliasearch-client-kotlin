@@ -33,24 +33,24 @@ internal val dateFormat = SimpleDateFormat("YYYY-MM-DD-HH-mm-ss").also {
     it.timeZone = TimeZone.getTimeZone("UTC")
 }
 
-internal fun testSuiteIndexName(name: String): IndexName {
+internal fun testSuiteIndexName(suffix: String): IndexName {
     val date = dateFormat.format(Date())
     val prefix = "kotlin-$date"
 
-    return "$prefix-qlitzler-$name".toIndexName()
+    return "$prefix-qlitzler-$suffix".toIndexName()
 }
 
 internal fun loadScratch(name: String): File {
     return File("/Users/quentinlitzler/Library/Preferences/IntelliJIdea2018.3/scratches/$name")
 }
 
-internal fun cleanIndex(client: ClientAlgolia, name: String) {
+internal fun cleanIndex(client: ClientAlgolia, suffix: String) {
     runBlocking {
         client.listIndexes().items.forEach {
             val indexName = it.indexName.raw
 
             if (indexName.contains("kotlin")) {
-                val result = Regex("kotlin-(.*)-qlitzler-$name").find(indexName)
+                val result = Regex("kotlin-(.*)-qlitzler-$suffix").find(indexName)
                 val date = result?.groupValues?.get(1)
 
                 if (date != null) {
