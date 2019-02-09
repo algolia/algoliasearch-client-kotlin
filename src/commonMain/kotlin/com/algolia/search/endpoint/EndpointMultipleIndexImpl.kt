@@ -8,6 +8,7 @@ import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
+import com.algolia.search.model.request.RequestRequestObjects
 import com.algolia.search.model.response.*
 import com.algolia.search.query.clone
 import com.algolia.search.serialize.JsonNoNulls
@@ -53,7 +54,7 @@ internal class EndpointMultipleIndexImpl(
         requests: List<RequestObjects>,
         requestOptions: RequestOptions?
     ): ResponseObjects {
-        val bodyString = json { KeyRequests to JsonNoNulls.toJson(RequestObjects.serializer().list, requests) }.toString()
+        val bodyString = JsonNoNulls.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
         return read.retry(requestOptions.computedReadTimeout, "$route/*/objects") { path ->
             httpClient.post<ResponseObjects>(path) {

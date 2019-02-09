@@ -10,6 +10,7 @@ import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.PartialUpdate
 import com.algolia.search.model.multipleindex.RequestObjects
+import com.algolia.search.model.request.RequestRequestObjects
 import com.algolia.search.model.response.ResponseBatch
 import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.creation.CreationObject
@@ -184,7 +185,7 @@ internal class EndpointIndexingImpl(
         requestOptions: RequestOptions?
     ): ResponseObjects {
         val requests = objectIDs.map { RequestObjects(indexName, it, attributes) }
-        val bodyString = json { KeyRequests to JsonNoNulls.toJson(RequestObjects.serializer().list, requests) }.toString()
+        val bodyString = JsonNoNulls.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/objects") { path ->
             httpClient.post<ResponseObjects>(path) {
