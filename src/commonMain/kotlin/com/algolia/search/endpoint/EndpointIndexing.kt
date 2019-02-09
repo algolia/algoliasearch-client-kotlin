@@ -145,4 +145,8 @@ interface EndpointIndexing {
         batchOperations: List<BatchOperation>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
+
+    suspend fun clearObjects(
+        requestOptions: RequestOptions? = null
+    ): RevisionIndex
 }

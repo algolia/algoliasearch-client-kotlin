@@ -57,13 +57,4 @@ internal class EndpointIndexImpl(
             }
         }
     }
-
-    override suspend fun clear(requestOptions: RequestOptions?): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/clear")) { path ->
-            httpClient.post<RevisionIndex>(path) {
-                body = ""
-                setRequestOptions(requestOptions)
-            }
-        }
-    }
 }

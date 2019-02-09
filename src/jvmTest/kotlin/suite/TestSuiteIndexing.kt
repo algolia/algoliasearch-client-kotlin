@@ -95,7 +95,7 @@ internal class TestSuiteIndexing {
                 revisions.wait().all { it is TaskStatus.Published }.shouldBeTrue()
                 datas.forEach { getObject(it.objectID, Data.serializer()) shouldEqual it.copy(value = 1) }
                 deletions += datas.map { deleteObject(it.objectID) }
-                deletions += deleteObjects(batches.map { it.objectID })
+                deletions += clearObjects()
                 deletions.wait().all { it is TaskStatus.Published }.shouldBeTrue()
                 browse().nbHits shouldEqual 0
             }

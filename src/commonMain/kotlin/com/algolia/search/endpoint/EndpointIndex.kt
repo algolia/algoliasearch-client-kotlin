@@ -20,6 +20,4 @@ interface EndpointIndex {
     suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions? = null): RevisionIndex
 
     suspend fun deleteIndex(requestOptions: RequestOptions? = null): DeletionIndex
-
-    suspend fun clear(requestOptions: RequestOptions? = null): RevisionIndex
 }
