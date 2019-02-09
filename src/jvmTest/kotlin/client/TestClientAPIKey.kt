@@ -1,6 +1,6 @@
 package client
 
-import com.algolia.search.client.ClientAlgolia
+import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.apikey.ACL
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.delay
@@ -16,7 +16,7 @@ import shouldEqual
 internal class TestClientAPIKey {
 
     private val indexName = index.indexName
-    private val admin = ClientAlgolia(applicationId, adminKey)
+    private val admin = ClientSearch(applicationId, adminKey)
     private val description = "kotlin api key"
 
     @Test

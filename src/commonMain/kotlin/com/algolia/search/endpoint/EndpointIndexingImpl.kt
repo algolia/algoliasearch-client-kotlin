@@ -1,6 +1,8 @@
-package com.algolia.search.client
+package com.algolia.search.endpoint
 
-import com.algolia.search.endpoint.EndpointIndexing
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
@@ -25,11 +27,11 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
 
-internal class ClientIndexing(
-    val client: Client,
+internal class EndpointIndexingImpl(
+    val api: APIWrapper,
     override val indexName: IndexName
 ) : EndpointIndexing,
-    Client by client {
+    APIWrapper by api {
 
     private suspend fun addObject(payload: String, requestOptions: RequestOptions?): CreationObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->

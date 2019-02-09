@@ -1,6 +1,9 @@
-package com.algolia.search.client
+package com.algolia.search.endpoint
 
-import com.algolia.search.endpoint.EndpointMultipleIndex
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setQueries
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
@@ -15,10 +18,10 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
 
-internal class ClientMultipleIndex(
-    client: Client
+internal class EndpointMultipleIndexImpl(
+    api: APIWrapper
 ) : EndpointMultipleIndex,
-    Client by client {
+    APIWrapper by api {
 
     private val route = "/1/indexes"
 

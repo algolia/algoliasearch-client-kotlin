@@ -1,6 +1,9 @@
-package com.algolia.search.client
+package com.algolia.search.endpoint
 
-import com.algolia.search.endpoint.EndpointSynonym
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setForwardToReplicas
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.request.RequestSearchSynonyms
@@ -17,11 +20,11 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 
 
-internal class ClientSynonym(
-    val client: Client,
+internal class EndpointSynonymImpl(
+    val api: APIWrapper,
     override val indexName: IndexName
 ) : EndpointSynonym,
-    Client by client {
+    APIWrapper by api {
 
     private val route = "synonyms"
 

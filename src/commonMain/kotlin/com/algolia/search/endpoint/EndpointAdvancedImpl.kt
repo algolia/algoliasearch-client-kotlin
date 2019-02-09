@@ -1,6 +1,8 @@
-package com.algolia.search.client
+package com.algolia.search.endpoint
 
-import com.algolia.search.endpoint.EndpointAdvanced
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskID
@@ -12,11 +14,11 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 
 
-internal class ClientAdvanced(
-    val client: Client,
+internal class EndpointAdvancedImpl(
+    val api: APIWrapper,
     override val indexName: IndexName
 ) : EndpointAdvanced,
-    Client by client {
+    APIWrapper by api {
 
     override suspend fun List<Task>.wait(requestOptions: RequestOptions?): List<TaskStatus> {
         return coroutineScope {

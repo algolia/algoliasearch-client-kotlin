@@ -1,6 +1,8 @@
-package com.algolia.search.client
+package com.algolia.search.endpoint
 
-import com.algolia.search.endpoint.EndpointIndex
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.index.Scope
 import com.algolia.search.model.request.RequestCopyOrMove
@@ -13,11 +15,11 @@ import io.ktor.client.request.delete
 import io.ktor.client.request.post
 
 
-internal class ClientIndex(
-    val client: Client,
+internal class EndpointIndexImpl(
+    val api: APIWrapper,
     override val indexName: IndexName
 ) : EndpointIndex,
-    Client by client {
+    APIWrapper by api {
 
     private suspend fun copyOrMove(
         destination: IndexName,

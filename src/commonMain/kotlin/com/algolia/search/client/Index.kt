@@ -5,13 +5,13 @@ import com.algolia.search.model.IndexName
 
 
 data class Index internal constructor(
-    private val client: Client,
+    private val api: APIWrapper,
     override val indexName: IndexName
-) : EndpointSearch by ClientSearch(client, indexName),
-    EndpointSettings by ClientSettings(client, indexName),
-    EndpointAdvanced by ClientAdvanced(client, indexName),
-    EndpointIndex by ClientIndex(client, indexName),
-    EndpointIndexing by ClientIndexing(client, indexName),
-    EndpointSynonym by ClientSynonym(client, indexName),
-    EndpointQueryRule by ClientQueryRule(client, indexName),
-    EndpointAPIKeyIndex by ClientAPIKeyIndex(client, indexName)
+) : EndpointSearch by EndpointSearchImpl(api, indexName),
+    EndpointSettings by EndpointSettingsImpl(api, indexName),
+    EndpointAdvanced by EndpointAdvancedImpl(api, indexName),
+    EndpointIndex by EndpointIndexImpl(api, indexName),
+    EndpointIndexing by EndpointIndexingImpl(api, indexName),
+    EndpointSynonym by EndpointSynonymImpl(api, indexName),
+    EndpointQueryRule by EndpointQueryRuleImpl(api, indexName),
+    EndpointAPIKeyIndex by EndpointAPIKeyIndexImpl(api, indexName)

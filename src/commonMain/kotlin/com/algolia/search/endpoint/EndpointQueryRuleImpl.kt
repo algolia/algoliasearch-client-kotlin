@@ -1,6 +1,9 @@
-package com.algolia.search.client
+package com.algolia.search.endpoint
 
-import com.algolia.search.endpoint.EndpointQueryRule
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setForwardToReplicas
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.queryrule.QueryRule
@@ -14,11 +17,11 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
 
-internal class ClientQueryRule(
-    val client: Client,
+internal class EndpointQueryRuleImpl(
+    val api: APIWrapper,
     override val indexName: IndexName
 ) : EndpointQueryRule,
-    Client by client {
+    APIWrapper by api {
 
     private val route = "/rules"
 

@@ -1,6 +1,6 @@
 package client
 
-import com.algolia.search.client.ClientAlgolia
+import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.*
 import com.algolia.search.model.indexing.Indexable
 import kotlinx.serialization.Serializable
@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 internal val adminKey = APIKey(System.getenv("KOTLIN_CLIENT_ADMIN_KEY"))
 internal val apiKey = APIKey(System.getenv("KOTLIN_CLIENT_API_KEY"))
 internal val applicationId = ApplicationID(System.getenv("KOTLIN_CLIENT_APP_ID"))
-internal val algolia = ClientAlgolia(applicationId, apiKey)
+internal val algolia = ClientSearch(applicationId, apiKey)
 internal val index = algolia.getIndex(IndexName(System.getenv("KOTLIN_CLIENT_INDEX")))
 internal val indexCopyA = algolia.getIndex(IndexName("${index.indexName}_copyA"))
 internal val indexCopyB = algolia.getIndex(IndexName("${index.indexName}_copyB"))

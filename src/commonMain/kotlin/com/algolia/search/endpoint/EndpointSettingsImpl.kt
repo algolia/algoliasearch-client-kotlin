@@ -1,6 +1,8 @@
-package com.algolia.search.client
+package com.algolia.search.endpoint
 
-import com.algolia.search.endpoint.EndpointSettings
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
@@ -15,11 +17,11 @@ import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.json
 
 
-internal class ClientSettings(
-    val client: Client,
+internal class EndpointSettingsImpl(
+    val api: APIWrapper,
     override val indexName: IndexName
 ) : EndpointSettings,
-    Client by client {
+    APIWrapper by api {
 
     private val route = "/settings"
 

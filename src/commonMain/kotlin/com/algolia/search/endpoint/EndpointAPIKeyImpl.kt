@@ -1,6 +1,8 @@
-package com.algolia.search.client
+package com.algolia.search.endpoint
 
-import com.algolia.search.endpoint.EndpointAPIKey
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
@@ -17,10 +19,10 @@ import io.ktor.client.request.post
 import io.ktor.client.request.put
 
 
-internal class ClientAPIKey(
-    val client: Client
+internal class EndpointAPIKeyImpl(
+    val api: APIWrapper
 ) : EndpointAPIKey,
-    Client by client {
+    APIWrapper by api {
 
     private val route = "/1/keys"
 

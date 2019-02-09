@@ -1,93 +1,58 @@
 package com.algolia.search.client
 
-import com.algolia.search.endpoint.EndpointSearch
-import com.algolia.search.model.Attribute
+import com.algolia.search.endpoint.*
+import com.algolia.search.model.APIKey
+import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.model.response.ResponseSearchFacetValue
-import com.algolia.search.model.search.Cursor
-import com.algolia.search.model.search.Query
-import com.algolia.search.query.clone
-import com.algolia.search.serialize.*
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.request.post
-import kotlinx.serialization.json.json
+import com.algolia.search.model.task.TaskIndex
+import com.algolia.search.model.task.TaskStatus
+import io.ktor.client.engine.HttpClientEngine
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 
 
-internal class ClientSearch(
-    val client: Client,
-    override val indexName: IndexName
-) : EndpointSearch,
-    Client by client {
+class ClientSearch private constructor(
+    private val apiWrapper: APIWrapperImpl
+) :
+    EndpointMultipleIndex by EndpointMultipleIndexImpl(apiWrapper),
+    EndpointAPIKey by EndpointAPIKeyImpl(apiWrapper),
+    EndpointMultiCluster by EndpointMulticlusterImpl(apiWrapper) {
 
-    private suspend fun search(requestOptions: RequestOptions?): ResponseSearch {
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes()) { path ->
-            httpClient.get<ResponseSearch>(path) {
-                setRequestOptions(requestOptions)
-            }
+    constructor(
+        applicationID: ApplicationID,
+        apiKey: APIKey
+    ) : this(APIWrapperImpl(Configuration(applicationID, apiKey, hosts = null)))
+
+    constructor(
+        configuration: Configuration
+    ) : this(APIWrapperImpl(configuration))
+
+    constructor(
+        configuration: Configuration,
+        engine: HttpClientEngine?
+    ) : this(APIWrapperImpl(configuration, engine))
+
+    private val indexes = mutableMapOf<IndexName, Index>()
+
+    fun getIndex(indexName: IndexName): Index {
+        return indexes.getOrPut(indexName) {
+            Index(apiWrapper, indexName)
         }
     }
 
-    override suspend fun search(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
-        val copy = query?.clone()
+    suspend fun waitAll(taskIndices: List<TaskIndex>, maxTimeToWait: Long = 10000L): List<TaskStatus> {
+        var attempt = 1
+        val timeToWait = 10000L
 
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/query")) { path ->
-            httpClient.post<ResponseSearch>(path) {
-                setBody(copy)
-                setRequestOptions(requestOptions)
+        while (true) {
+            coroutineScope {
+                taskIndices.map { async { getIndex(it.indexName).getTask(it.taskID) } }.map { it.await().status }
+            }.let {
+                if (it.all { it == TaskStatus.Published }) return it
             }
-        }
-    }
-
-    override suspend fun browse(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
-        val copy = query?.clone()
-        val bodyString =
-            copy?.let {
-                json {
-                    KeyParams to JsonNoNulls.toJson(Query.serializer(), it).jsonObject.urlEncode()
-                }.toString()
-            } ?: "{}"
-
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
-            httpClient.post<ResponseSearch>(path) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
-    }
-
-    override suspend fun browse(cursor: Cursor, requestOptions: RequestOptions?): ResponseSearch {
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
-            httpClient.get<ResponseSearch>(path) {
-                parameter(KeyCursor, cursor)
-                setRequestOptions(requestOptions)
-            }
-        }
-    }
-
-    override suspend fun searchForFacetValue(
-        attribute: Attribute,
-        facetQuery: String?,
-        query: Query?,
-        maxFacetHits: Int?,
-        requestOptions: RequestOptions?
-    ): ResponseSearchFacetValue {
-        val copy = query?.clone()
-        val extraParams = json {
-            maxFacetHits?.let { KeyMaxFacetHits to it }
-            facetQuery?.let { KeyFacetQuery to it }
-        }
-        val bodyString = (copy?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
-
-        return read.retry(
-            requestOptions.computedReadTimeout,
-            indexName.pathIndexes("/facets/$attribute/query")
-        ) { path ->
-            httpClient.post<ResponseSearchFacetValue>(path) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
+            delay((timeToWait * attempt).coerceAtMost(maxTimeToWait))
+            attempt++
         }
     }
 }

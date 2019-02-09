@@ -1,54 +1,12 @@
 package com.algolia.search.client
 
 import com.algolia.search.host.RetryLogic
-import com.algolia.search.host.readHosts
-import com.algolia.search.host.writeHosts
-import com.algolia.search.model.queryrule.QueryRule
-import com.algolia.search.model.response.ResponseBatches
-import com.algolia.search.model.response.creation.CreationAPIKey
-import com.algolia.search.model.response.revision.RevisionIndex
-import com.algolia.search.model.synonym.Synonym
 import io.ktor.client.HttpClient
-import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.features.DefaultRequest
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
-import io.ktor.client.features.logging.SIMPLE
-import kotlinx.serialization.json.JsonObjectSerializer
 
 
-internal class APIWrapper(
-    configuration: Configuration,
-    engine: HttpClientEngine? = null
-) : Client,
-    ConfigurationInterface by configuration {
+internal interface APIWrapper : ConfigurationInterface {
 
-    private val selected = engine?.let { HttpClient(it) } ?: HttpClient()
-
-    override val httpClient = selected.config {
-        install(JsonFeature) {
-            serializer = KotlinxSerializer() // TODO Non strict json
-                .also {
-                    it.register(ResponseBatches)
-                    it.register(Synonym)
-                    it.register(JsonObjectSerializer)
-                    it.register(QueryRule.serializer())
-                    it.register(CreationAPIKey.serializer())
-                    it.register(RevisionIndex.serializer())
-                }
-        }
-        install(DefaultRequest) {
-            setApplicationId(applicationID)
-            setApiKey(apiKey)
-        }
-        install(Logging) {
-            level = logLevel
-            logger = Logger.SIMPLE
-        }
-    }
-
-    override val read = RetryLogic(configuration.readHosts())
-    override val write = RetryLogic(configuration.writeHosts())
+    val httpClient: HttpClient
+    val read: RetryLogic
+    val write: RetryLogic
 }

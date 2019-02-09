@@ -1,6 +1,8 @@
-package com.algolia.search.client
+package com.algolia.search.endpoint
 
-import com.algolia.search.endpoint.EndpointMultiCluster
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.ClusterName
 import com.algolia.search.model.UserID
 import com.algolia.search.model.request.RequestSearchUserID
@@ -12,10 +14,10 @@ import io.ktor.client.request.*
 import kotlinx.serialization.json.json
 
 
-internal class ClientMultiCluster(
-    val client: Client
+internal class EndpointMulticlusterImpl(
+    val api: APIWrapper
 ) : EndpointMultiCluster,
-    Client by client {
+    APIWrapper by api {
 
     private val route = "/1/clusters"
 
