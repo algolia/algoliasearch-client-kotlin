@@ -36,7 +36,7 @@ internal class TestSuiteSearch {
     @Test
     fun suite() {
         runBlocking {
-            val string = loadScratch("suite_search.json").readText()
+            val string = loadScratch("companies.json").readText()
             val objects = Json.plain.parseJson(string).jsonArray.map { it.jsonObject }
             val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Searchable(company)))
             val tasks = mutableListOf<Task>()
