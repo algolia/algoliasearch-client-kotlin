@@ -439,7 +439,7 @@ data class Query(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalWords/#doing-an-or-between-all-words-of-a-query]
      */
     @Transient
-    var isEveryWordInQueryOptional: Boolean = false
+    var isEveryWordInQueryOptional: Boolean = false // Todo
 
     /**
      * You can modify this instance of [FilterBuilder] or assign a new one.
