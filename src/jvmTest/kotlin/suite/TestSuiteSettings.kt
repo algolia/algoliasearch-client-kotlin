@@ -21,28 +21,28 @@ internal class TestSuiteSettings {
     private val suffix = "settings"
     private val indexName = testSuiteIndexName(suffix)
     private val languages = BooleanOrQueryLanguages.QueryLanguages(QueryLanguage.English, QueryLanguage.French)
-    private val index =  clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.getIndex(indexName)
 
     @Before
     fun clean() {
         cleanIndex(clientAdmin1, suffix)
     }
 
-    lateinit var settings : Settings
-
-    @Before
-    fun loadSettings() {
+    private fun loadSettings(): Settings {
         val json = Json(encodeDefaults = false, indented = true, indent = "  ")
         val string = loadScratch("suite_settings.json").readText()
-        settings = json.parse(Settings.serializer(), string)
+        val settings = json.parse(Settings.serializer(), string)
         val serialized = json.stringify(Settings.serializer(), settings)
 
         serialized shouldEqual string
+        return settings
     }
 
     @Test
     fun suite() {
         runBlocking {
+            val settings = loadSettings()
+
             index.apply {
                 setSettings(settings).wait() shouldEqual TaskStatus.Published
                 getSettings() shouldEqual settings

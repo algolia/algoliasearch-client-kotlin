@@ -29,30 +29,27 @@ internal class TestSuiteQueryRules {
     private val brand = "brand".toAttribute()
     private val index = clientAdmin1.getIndex(indexName)
 
-    lateinit var queryRule: QueryRule
-    lateinit var queryRules: List<QueryRule>
-
     @Before
     fun clean() {
         cleanIndex(clientAdmin1, suffix)
     }
 
-    @Before
-    fun queryRule() {
+    private fun loadQueryRule(): QueryRule {
         val string = loadScratch("suite_query_rule_1.json").readText()
-        queryRule = json.parse(QueryRule.serializer(), string)
+        val queryRule = json.parse(QueryRule.serializer(), string)
         val serialized = json.stringify(QueryRule.serializer(), queryRule)
 
         serialized shouldEqual string
+        return queryRule
     }
 
-    @Before
-    fun queryRules() {
+    private fun loadQueryRules(): List<QueryRule> {
         val string = loadScratch("suite_query_rule_2.json").readText()
-        queryRules = json.parse(QueryRule.serializer().list, string)
+        val queryRules = json.parse(QueryRule.serializer().list, string)
         val serialized = json.stringify(QueryRule.serializer().list, queryRules)
 
         serialized shouldEqual string
+        return queryRules
     }
 
     @Test
@@ -61,6 +58,8 @@ internal class TestSuiteQueryRules {
             val objects = loadScratch("iphones.json").readText().let {
                 Json.plain.parseJson(it).jsonArray.map { it.jsonObject }
             }
+            val queryRule = loadQueryRule()
+            val queryRules = loadQueryRules()
             val tasks = mutableListOf<Task>()
 
             index.apply {
