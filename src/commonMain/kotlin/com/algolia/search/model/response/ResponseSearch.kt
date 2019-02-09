@@ -32,8 +32,7 @@ data class ResponseSearch(
     @Optional @SerialName(KeyIndexUsed) val indexUsed: String? = null,
     @Optional @SerialName(KeyAbTestVariantID) val abTestVariantID: Int? = null,
     @Optional @SerialName(KeyParsedQuery) val parsedQuery: String? = null,
-    @Optional @SerialName(KeyFacets) @Serializable(
-        KSerializerFacets::class) val facets: Map<Attribute, List<Facet>>? = null,
+    @Optional @SerialName(KeyFacets) @Serializable(KSerializerFacets::class) val facets: Map<Attribute, List<Facet>>? = null,
     @Optional @SerialName(KeyFacetsStats) val facetStats: Map<Attribute, FacetStats>? = null,
     @Optional @SerialName(KeyCursor) val cursor: Cursor? = null,
     @Optional @SerialName(KeyIndex) val indexName: IndexName? = null,

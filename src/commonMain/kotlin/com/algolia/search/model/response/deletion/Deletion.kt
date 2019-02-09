@@ -7,4 +7,6 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Deletion(@SerialName(KeyDeletedAt) override val date: String) : Datable
+data class Deletion(
+    @SerialName(KeyDeletedAt) override val date: String
+) : Datable
