@@ -1,21 +1,21 @@
 package serialize
 
-import attributeA
-import attributeB
+import attributes
+import attributesJson
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.multipleindex.RequestObjects
+import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyObjectID
 import indexA
 import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-internal class TestRequestObjects : TestSerializer<RequestObjects>(RequestObjects) {
+internal class TestRequestObjects : TestSerializer<RequestObjects>(RequestObjects.serializer(), JsonNoNulls) {
 
     private val objectID = ObjectID("objectA")
 
@@ -24,13 +24,10 @@ internal class TestRequestObjects : TestSerializer<RequestObjects>(RequestObject
             KeyIndexName to indexA.raw
             KeyObjectID to objectID.raw
         },
-        RequestObjects(indexA, objectID, attributeA, attributeB) to json {
+        RequestObjects(indexA, objectID, attributes) to json {
             KeyIndexName to indexA.raw
             KeyObjectID to objectID.raw
-            KeyAttributesToRetrieve to jsonArray {
-                +attributeA.raw
-                +attributeB.raw
-            }
+            KeyAttributesToRetrieve to attributesJson
         }
     )
 }

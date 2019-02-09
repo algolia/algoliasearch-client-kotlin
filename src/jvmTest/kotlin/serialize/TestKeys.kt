@@ -275,6 +275,7 @@ internal class TestKeys {
         KeyFilterOnly shouldEqual "filterOnly"
         KeySearchable shouldEqual "searchable"
         KeyQueryID shouldEqual "queryID"
+        KeyVersion shouldEqual "version"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"
