@@ -35,7 +35,7 @@ internal class TestSuiteQueryRules {
     }
 
     private fun loadQueryRule(): QueryRule {
-        val string = loadScratch("suite_query_rule_1.json").readText()
+        val string = loadScratch("query_rule_brand.json").readText()
         val queryRule = json.parse(QueryRule.serializer(), string)
         val serialized = json.stringify(QueryRule.serializer(), queryRule)
 
@@ -44,7 +44,7 @@ internal class TestSuiteQueryRules {
     }
 
     private fun loadQueryRules(): List<QueryRule> {
-        val string = loadScratch("suite_query_rule_2.json").readText()
+        val string = loadScratch("query_rule_edits.json").readText()
         val queryRules = json.parse(QueryRule.serializer().list, string)
         val serialized = json.stringify(QueryRule.serializer().list, queryRules)
 
