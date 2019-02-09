@@ -276,6 +276,9 @@ internal class TestKeys {
         KeySearchable shouldEqual "searchable"
         KeyQueryID shouldEqual "queryID"
         KeyVersion shouldEqual "version"
+        KeyPosition shouldEqual "position"
+        KeyFrom shouldEqual "from"
+        KeyUntil shouldEqual "until"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"
