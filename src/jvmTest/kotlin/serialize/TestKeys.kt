@@ -279,6 +279,9 @@ internal class TestKeys {
         KeyPosition shouldEqual "position"
         KeyFrom shouldEqual "from"
         KeyUntil shouldEqual "until"
+        KeyAttributesToIndex shouldEqual "attributesToIndex"
+        KeyNumericAttributesToIndex shouldEqual "numericAttributesToIndex"
+        KeySlaves shouldEqual "slaves"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"
