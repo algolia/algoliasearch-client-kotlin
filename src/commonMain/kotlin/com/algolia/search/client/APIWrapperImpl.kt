@@ -16,6 +16,9 @@ import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
+import io.ktor.client.request.accept
+import io.ktor.http.ContentType
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObjectSerializer
 
 
@@ -29,8 +32,9 @@ internal class APIWrapperImpl(
 
     override val httpClient = selected.config {
         install(JsonFeature) {
-            serializer = KotlinxSerializer() // TODO Non strict json
+            serializer = KotlinxSerializer(Json.nonstrict) // TODO Non strict json
                 .also {
+                    it.register(RevisionIndex.serializer())
                     it.register(ResponseBatches)
                     it.register(Synonym)
                     it.register(JsonObjectSerializer)

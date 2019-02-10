@@ -20,4 +20,10 @@ interface EndpointIndex {
     suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions? = null): RevisionIndex
 
     suspend fun deleteIndex(requestOptions: RequestOptions? = null): DeletionIndex
+
+    suspend fun copyRule(destination: IndexName, requestOptions: RequestOptions? = null): RevisionIndex
+
+    suspend fun copySettings(destination: IndexName, requestOptions: RequestOptions? = null): RevisionIndex
+
+    suspend fun copySynonyms(destination: IndexName, requestOptions: RequestOptions? = null): RevisionIndex
 }

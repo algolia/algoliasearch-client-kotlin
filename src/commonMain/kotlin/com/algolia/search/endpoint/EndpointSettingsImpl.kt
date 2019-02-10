@@ -4,9 +4,9 @@ import com.algolia.search.client.APIWrapper
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
-import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.merge
 import com.algolia.search.serialize.toJsonNoDefaults
@@ -59,14 +59,5 @@ internal class EndpointSettingsImpl(
         requestOptions: RequestOptions?
     ): RevisionIndex {
         return setSettings(settings, resetToDefault, forwardToReplicas, requestOptions, indexName)
-    }
-
-    override suspend fun copySettings(
-        destination: IndexName,
-        requestOptions: RequestOptions?
-    ): RevisionIndex {
-        val settings = getSettings(requestOptions)
-
-        return setSettings(settings, requestOptions = requestOptions)
     }
 }

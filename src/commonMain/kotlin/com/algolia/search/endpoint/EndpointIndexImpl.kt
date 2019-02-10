@@ -57,4 +57,16 @@ internal class EndpointIndexImpl(
             }
         }
     }
+
+    override suspend fun copyRule(destination: IndexName, requestOptions: RequestOptions?): RevisionIndex {
+        return copyIndex(destination, listOf(Scope.Rules), requestOptions)
+    }
+
+    override suspend fun copySettings(destination: IndexName, requestOptions: RequestOptions?): RevisionIndex {
+        return copyIndex(destination, listOf(Scope.Settings), requestOptions)
+    }
+
+    override suspend fun copySynonyms(destination: IndexName, requestOptions: RequestOptions?): RevisionIndex {
+        return copyIndex(destination, listOf(Scope.Synonyms), requestOptions)
+    }
 }
