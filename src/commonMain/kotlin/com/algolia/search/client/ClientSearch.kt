@@ -4,13 +4,21 @@ import com.algolia.search.endpoint.*
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.enums.LogType
 import com.algolia.search.model.response.ResponseAPIKey
+import com.algolia.search.model.response.ResponseLogs
 import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.model.task.TaskStatus
+import com.algolia.search.serialize.KeyIndexName
+import com.algolia.search.serialize.KeyLength
+import com.algolia.search.serialize.KeyOffset
+import com.algolia.search.serialize.KeyType
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -80,6 +88,26 @@ class ClientSearch private constructor(
                 if (exception.statusCode == HttpStatusCode.NotFound) return true else throw exception
             }
             delay(1000L)
+        }
+    }
+
+    suspend fun getLogs(
+        offset: Int? = null,
+        length: Int? = null,
+        indexName: IndexName? = null,
+        logType: LogType? = null,
+        requestOptions: RequestOptions? = null
+    ): ResponseLogs {
+        return apiWrapper.run {
+            read.retry(requestOptions.computedReadTimeout, "/1/logs") { path ->
+                httpClient.get<ResponseLogs>(path) {
+                    parameter(KeyOffset, offset)
+                    parameter(KeyLength, length)
+                    parameter(KeyIndexName, indexName?.raw)
+                    parameter(KeyType, logType?.raw)
+                    setRequestOptions(requestOptions)
+                }
+            }
         }
     }
 }
