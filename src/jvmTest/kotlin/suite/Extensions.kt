@@ -11,7 +11,6 @@ import kotlinx.serialization.json.JsonObject
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
 internal val clientSearch = ClientSearch(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
@@ -31,7 +30,7 @@ internal val clientMcm = ClientSearch(
     System.getenv("ALGOLIA_ADMIN_KEY_MCM").toAPIKey()
 )
 
-internal val dateFormat = SimpleDateFormat("YYYY-MM-DD-HH-mm-ss").also {
+internal val dateFormat = SimpleDateFormat("YYYY-MM-dd-HH-mm-ss").also {
     it.timeZone = TimeZone.getTimeZone("UTC")
 }
 
@@ -48,6 +47,7 @@ internal fun loadScratch(name: String): File {
 
 internal fun cleanIndex(client: ClientSearch, suffix: String) {
     runBlocking {
+        val indexToDelete = mutableListOf<IndexName>()
         client.listIndexes().items.forEach {
             val indexName = it.indexName.raw
 
@@ -56,14 +56,17 @@ internal fun cleanIndex(client: ClientSearch, suffix: String) {
                 val date = result?.groupValues?.get(1)
 
                 if (date != null) {
-                    val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
-                    val difference = Date().time - dateFormat.parse(date).time
-
-                    if (difference >= dayInMillis) {
-                        client.getIndex(it.indexName).deleteIndex()
-                    }
+//                    val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
+//                    val difference = Date().time - dateFormat.parse(date).time
+//                    if (difference >= dayInMillis) {
+//                    }
+                    indexToDelete += it.indexName
+                    println("Deleted ${it.indexName}")
                 }
             }
+        }
+        indexToDelete.forEach {
+            client.getIndex(it).deleteIndex()
         }
     }
 }
