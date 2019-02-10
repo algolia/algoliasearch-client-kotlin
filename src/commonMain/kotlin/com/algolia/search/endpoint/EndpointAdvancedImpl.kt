@@ -12,6 +12,7 @@ import io.ktor.client.request.get
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withTimeout
 
 
 internal class EndpointAdvancedImpl(
@@ -20,14 +21,16 @@ internal class EndpointAdvancedImpl(
 ) : EndpointAdvanced,
     APIWrapper by api {
 
-    override suspend fun List<Task>.wait(requestOptions: RequestOptions?): List<TaskStatus> {
+    override suspend fun List<Task>.wait(timeout: Long, requestOptions: RequestOptions?): List<TaskStatus> {
         return coroutineScope {
-            map { async { it.wait(requestOptions) } }.map { it.await() }
+            map { async { it.wait(timeout, requestOptions) } }.map { it.await() }
         }
     }
 
-    override suspend fun Task.wait(requestOptions: RequestOptions?): TaskStatus {
-        return waitTask(taskID, requestOptions)
+    override suspend fun Task.wait(timeout: Long, requestOptions: RequestOptions?): TaskStatus {
+        return withTimeout(timeout) {
+            waitTask(taskID, requestOptions)
+        }
     }
 
     override suspend fun waitTask(taskID: TaskID, requestOptions: RequestOptions?): TaskStatus {
