@@ -243,7 +243,7 @@ internal class TestKeys {
         KeyIndexes shouldEqual "indexes"
         KeyDescription shouldEqual "description"
         KeyMaxHitsPerQuery shouldEqual "maxHitsPerQuery"
-        KeyMaxQueriesPerIpPerHour shouldEqual "maxQueriesPerIpPerHour"
+        KeyMaxQueriesPerIPPerHour shouldEqual "maxQueriesPerIPPerHour"
         KeyValidity shouldEqual "validity"
         KeyQueryParameters shouldEqual "queryParameters"
         KeyReferers shouldEqual "referers"
@@ -282,6 +282,7 @@ internal class TestKeys {
         KeyAttributesToIndex shouldEqual "attributesToIndex"
         KeyNumericAttributesToIndex shouldEqual "numericAttributesToIndex"
         KeySlaves shouldEqual "slaves"
+        KeyRestrictSources shouldEqual "restrictSources"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

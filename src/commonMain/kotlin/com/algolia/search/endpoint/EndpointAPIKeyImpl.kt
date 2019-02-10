@@ -6,13 +6,17 @@ import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
-import com.algolia.search.model.search.Query
 import com.algolia.search.model.request.RequestAPIKey
-import com.algolia.search.model.response.ResponseAPIKeyPermission
+import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseListAPIKey
 import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.Deletion
+import com.algolia.search.model.response.deletion.DeletionAPIKey
+import com.algolia.search.model.response.revision.RevisionAPIKey
+import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.stringify
+import com.algolia.search.serialize.toJsonNoDefaults
+import com.algolia.search.serialize.urlEncode
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.post
@@ -35,6 +39,7 @@ internal class EndpointAPIKeyImpl(
         validity: Long?,
         query: Query?,
         referers: List<String>?,
+        restrictSources: String?,
         requestOptions: RequestOptions?
     ): CreationAPIKey {
         val bodyString = RequestAPIKey(
@@ -44,8 +49,9 @@ internal class EndpointAPIKeyImpl(
             maxHitsPerQuery = maxHitsPerQuery,
             maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
             validity = validity,
-            query = query,
-            referers = referers
+            query = query?.toJsonNoDefaults()?.urlEncode(),
+            referers = referers,
+            restrictSources = restrictSources
         ).stringify()
 
         return write.retry(requestOptions.computedWriteTimeout, route) { path ->
@@ -67,7 +73,7 @@ internal class EndpointAPIKeyImpl(
         query: Query?,
         referers: List<String>?,
         requestOptions: RequestOptions?
-    ): CreationAPIKey {
+    ): RevisionAPIKey {
         val bodyString = RequestAPIKey(
             rights = rights,
             indexes = indexes,
@@ -75,23 +81,23 @@ internal class EndpointAPIKeyImpl(
             maxHitsPerQuery = maxHitsPerQuery,
             maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
             validity = validity,
-            query = query,
+            query = query?.toJsonNoDefaults()?.urlEncode(),
             referers = referers
         ).stringify()
 
         return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { path ->
-            httpClient.put<CreationAPIKey>(path) {
+            httpClient.put<RevisionAPIKey>(path) {
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
         }
     }
 
-    override suspend fun deleteAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): Deletion {
+    override suspend fun deleteAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): DeletionAPIKey {
         return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { path ->
             httpClient.delete<Deletion>(path) {
                 setRequestOptions(requestOptions)
-            }
+            }.let { DeletionAPIKey(it.date, apiKey) }
         }
     }
 
@@ -103,12 +109,12 @@ internal class EndpointAPIKeyImpl(
         }
     }
 
-    override suspend fun getAPIKeyPermission(
+    override suspend fun getAPIKey(
         apiKey: APIKey,
         requestOptions: RequestOptions?
-    ): ResponseAPIKeyPermission {
+    ): ResponseAPIKey {
         return read.retry(requestOptions.computedReadTimeout, "$route/$apiKey") { path ->
-            httpClient.get<ResponseAPIKeyPermission>(path) {
+            httpClient.get<ResponseAPIKey>(path) {
                 setRequestOptions(requestOptions)
             }
         }

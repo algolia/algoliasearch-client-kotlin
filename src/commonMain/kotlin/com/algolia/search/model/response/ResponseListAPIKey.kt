@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResponseListAPIKey(
-    @SerialName(KeyKeys) val keys: List<ResponseAPIKeyPermission>
+    @SerialName(KeyKeys) val keys: List<ResponseAPIKey>
 )

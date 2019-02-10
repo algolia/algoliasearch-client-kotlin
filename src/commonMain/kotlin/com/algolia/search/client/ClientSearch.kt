@@ -4,9 +4,14 @@ import com.algolia.search.endpoint.*
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.response.ResponseAPIKey
+import com.algolia.search.model.response.creation.CreationAPIKey
+import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.model.task.TaskStatus
 import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.features.BadResponseStatusException
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -53,6 +58,28 @@ class ClientSearch private constructor(
             }
             delay((timeToWait * attempt).coerceAtMost(maxTimeToWait))
             attempt++
+        }
+    }
+
+    suspend fun CreationAPIKey.wait(): ResponseAPIKey {
+        while (true) {
+            try {
+                return getAPIKey(apiKey)
+            } catch (exception: BadResponseStatusException) {
+                if (exception.statusCode != HttpStatusCode.NotFound) throw exception
+            }
+            delay(1000L)
+        }
+    }
+
+    suspend fun DeletionAPIKey.wait(): Boolean {
+        while (true) {
+            try {
+                getAPIKey(apiKey)
+            } catch (exception: BadResponseStatusException) {
+                if (exception.statusCode == HttpStatusCode.NotFound) return true else throw exception
+            }
+            delay(1000L)
         }
     }
 }

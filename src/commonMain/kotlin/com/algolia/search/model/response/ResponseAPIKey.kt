@@ -10,12 +10,16 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class ResponseAPIKeyPermission(
+data class ResponseAPIKey(
     @SerialName(KeyValue) val apiKey: APIKey,
     @SerialName(KeyValidity) val validity: Long,
     @SerialName(KeyAcl) val rights: List<ACL>,
+    @Optional @SerialName(KeyMaxQueriesPerIPPerHour) val maxQueriesPerIPPerHour: Int? = null,
+    @Optional @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQuery: Int? = null,
     @Optional @SerialName(KeyCreatedAt) val createdAt: Long? = null,
     @Optional @SerialName(KeyDescription) val description: String? = null,
     @Optional @SerialName(KeyIndex) val index: IndexName? = null,
-    @Optional @SerialName(KeyIndexes) val indexes: List<IndexName>? = null
+    @Optional @SerialName(KeyIndexes) val indexes: List<IndexName>? = null,
+    @Optional @SerialName(KeyReferers) val referers: List<String>? = null,
+    @Optional @SerialName(KeyQueryParameters) val query: String? = null
 )
