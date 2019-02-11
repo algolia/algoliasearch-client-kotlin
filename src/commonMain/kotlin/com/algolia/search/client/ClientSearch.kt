@@ -6,6 +6,7 @@ import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.enums.LogType
 import com.algolia.search.model.response.ResponseAPIKey
+import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.ResponseLogs
 import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.DeletionAPIKey
@@ -54,19 +55,19 @@ class ClientSearch private constructor(
         }
     }
 
-    suspend fun waitAll(taskIndices: List<TaskIndex>, maxTimeToWait: Long = 10000L): List<TaskStatus> {
-        var attempt = 1
-        val timeToWait = 10000L
-
+    suspend fun List<TaskIndex>.waitAll(): List<TaskStatus> {
         while (true) {
             coroutineScope {
-                taskIndices.map { async { getIndex(it.indexName).getTask(it.taskID) } }.map { it.await().status }
+                map { async { getIndex(it.indexName).getTask(it.taskID) } }.map { it.await().status }
             }.let {
                 if (it.all { it == TaskStatus.Published }) return it
             }
-            delay((timeToWait * attempt).coerceAtMost(maxTimeToWait))
-            attempt++
+            delay(2000L)
         }
+    }
+
+    suspend fun ResponseBatches.waitAll(): List<TaskStatus> {
+        return tasks.waitAll()
     }
 
     suspend fun CreationAPIKey.wait(): ResponseAPIKey {
