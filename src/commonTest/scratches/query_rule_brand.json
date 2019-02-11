@@ -1,0 +1,30 @@
+{
+  "objectID": "brand_automatic_faceting",
+  "condition": {
+    "pattern": "{facet:brand}",
+    "anchoring": "is"
+  },
+  "consequence": {
+    "params": {
+      "automaticFacetFilters": [
+        {
+          "facet": "brand",
+          "score": 42,
+          "disjunctive": true
+        }
+      ]
+    }
+  },
+  "description": "Automatic apply the faceting on `brand` if a brand value is found in the query",
+  "enabled": false,
+  "validity": [
+    {
+      "from": 1532439300,
+      "until": 1532525700
+    },
+    {
+      "from": 1532612100,
+      "until": 1532698500
+    }
+  ]
+}

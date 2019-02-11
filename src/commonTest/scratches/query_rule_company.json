@@ -1,0 +1,16 @@
+{
+  "objectID": "company_auto_faceting",
+  "condition": {
+    "pattern": "{facet:company}",
+    "anchoring": "contains"
+  },
+  "consequence": {
+    "params": {
+      "automaticFacetFilters": [
+        {
+          "facet": "company"
+        }
+      ]
+    }
+  }
+}

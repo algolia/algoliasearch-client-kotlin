@@ -1,0 +1,105 @@
+{
+  "searchableAttributes": [
+    "attribute1",
+    "attribute2",
+    "attribute3",
+    "ordered('attribute4')",
+    "unordered('attribute5"
+  ],
+  "attributesForFaceting": [
+    "attribute1",
+    "filterOnly(attribute2)",
+    "searchable(attribute3)"
+  ],
+  "unretrievableAttributes": [
+    "attribute1",
+    "attribute2"
+  ],
+  "attributesToRetrieve": [
+    "attribute3",
+    "attribute4"
+  ],
+  "ranking": [
+    "asc(attribute1)",
+    "desc(attribute2)",
+    "attribute",
+    "custom",
+    "exact",
+    "filters",
+    "geo",
+    "proximity",
+    "typo",
+    "words"
+  ],
+  "customRanking": [
+    "asc(attribute1)",
+    "desc(attribute1)"
+  ],
+  "maxValuesPerFacet": 100,
+  "sortFacetValuesBy": "count",
+  "attributesToHighlight": [
+    "attribute1",
+    "attribute2"
+  ],
+  "attributesToSnippet": [
+    "attribute1:10",
+    "attribute2:8"
+  ],
+  "highlightPreTag": "<strong>",
+  "highlightPostTag": "</strong>",
+  "snippetEllipsisText": ", and so on.",
+  "restrictHighlightAndSnippetArrays": true,
+  "hitsPerPage": 42,
+  "paginationLimitedTo": 43,
+  "minWordSizefor1Typo": 2,
+  "minWordSizefor2Typos": 6,
+  "typoTolerance": false,
+  "allowTyposOnNumericTokens": false,
+  "disableTypoToleranceOnAttributes": [
+    "attribute1",
+    "attribute2"
+  ],
+  "disableTypoToleranceOnWords": [
+    "word1",
+    "word2"
+  ],
+  "separatorsToIndex": "()[]",
+  "ignorePlurals": true,
+  "removeStopWords": true,
+  "camelCaseAttributes": [
+    "attribute1",
+    "attribute2"
+  ],
+  "enableRules": false,
+  "queryType": "prefixNone",
+  "removeWordsIfNoResults": "allOptional",
+  "advancedSyntax": true,
+  "optionalWords": [
+    "word1",
+    "word2"
+  ],
+  "disablePrefixOnAttributes": [
+    "attribute1",
+    "attribute2"
+  ],
+  "disableExactOnAttributes": [
+    "attribute1",
+    "attribute2"
+  ],
+  "exactOnSingleWordQuery": "word",
+  "numericAttributesForFiltering": [
+    "attribute1",
+    "attribute2"
+  ],
+  "allowCompressionOfIntegerArray": true,
+  "attributeForDistinct": "attribute1",
+  "distinct": 2,
+  "replaceSynonymsInHighlight": false,
+  "minProximity": 7,
+  "responseFields": [
+    "hits",
+    "hitsPerPage"
+  ],
+  "maxFacetHits": 100,
+  "version": 1
+}

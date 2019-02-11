@@ -1,0 +1,22 @@
+[
+  {
+    "objectID": "one",
+    "key": "value"
+  },
+  {
+    "objectID": "two",
+    "key": "value"
+  },
+  {
+    "objectID": "three",
+    "key": "value"
+  },
+  {
+    "objectID": "four",
+    "key": "value"
+  },
+  {
+    "objectID": "five",
+    "key": "value"
+  }
+]
