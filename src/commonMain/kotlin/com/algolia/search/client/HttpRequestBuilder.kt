@@ -35,7 +35,7 @@ internal fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions
 }
 
 internal fun HttpRequestBuilder.setForwardToReplicas(forwardToReplicas: Boolean?) {
-    forwardToReplicas?.let { parameter(KeyForwardToReplicas, it) }
+    parameter(KeyForwardToReplicas, forwardToReplicas)
 }
 
 internal fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: MultipleQueriesStrategy) {
