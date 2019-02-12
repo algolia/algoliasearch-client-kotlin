@@ -195,60 +195,6 @@ internal class EndpointIndexingImpl(
         }
     }
 
-    private suspend fun updateObject(
-        payload: String,
-        objectID: ObjectID,
-        createIfNotExists: Boolean?,
-        requestOptions: RequestOptions?
-    ): RevisionObject {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$objectID/partial")) { url ->
-            httpClient.post<RevisionObject>(url) {
-                body = payload
-                parameter(KeyCreateIfNotExists, createIfNotExists)
-                setRequestOptions(requestOptions)
-            }
-        }
-    }
-
-    override suspend fun <T : Indexable> updateObject(
-        data: T,
-        serializer: KSerializer<T>,
-        createIfNotExists: Boolean?,
-        requestOptions: RequestOptions?
-    ): RevisionObject {
-        return updateObject(Json.stringify(serializer, data), data.objectID, createIfNotExists, requestOptions)
-    }
-
-    override suspend fun <T : Indexable> updateObjects(
-        data: List<T>,
-        serializer: KSerializer<T>,
-        createIfNotExists: Boolean,
-        requestOptions: RequestOptions?
-    ): ResponseBatch {
-        val operations = data.map { BatchOperation.UpdateObject.from(it, serializer, createIfNotExists) }
-
-        return batch(operations, requestOptions)
-    }
-
-    override suspend fun updateObject(
-        data: JsonObject,
-        objectID: ObjectID,
-        createIfNotExists: Boolean?,
-        requestOptions: RequestOptions?
-    ): RevisionObject {
-        return updateObject(data.toString(), objectID, createIfNotExists, requestOptions)
-    }
-
-    override suspend fun updateObjects(
-        data: List<Pair<JsonObject, ObjectID>>,
-        createIfNotExists: Boolean,
-        requestOptions: RequestOptions?
-    ): ResponseBatch {
-        val operations = data.map { BatchOperation.UpdateObject(it.first, it.second, createIfNotExists) }
-
-        return batch(operations, requestOptions)
-    }
-
     override suspend fun partialUpdateObject(
         partialUpdate: PartialUpdate,
         objectID: ObjectID,
@@ -257,7 +203,13 @@ internal class EndpointIndexingImpl(
     ): RevisionObject {
         val payload = Json.plain.toJson(PartialUpdate, partialUpdate).toString()
 
-        return updateObject(payload, objectID, createIfNotExists, requestOptions)
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$objectID/partial")) { url ->
+            httpClient.post<RevisionObject>(url) {
+                body = payload
+                parameter(KeyCreateIfNotExists, createIfNotExists)
+                setRequestOptions(requestOptions)
+            }
+        }
     }
 
     override suspend fun partialUpdateObjects(

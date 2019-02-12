@@ -101,33 +101,6 @@ interface EndpointIndexing {
         requestOptions: RequestOptions? = null
     ): ResponseObjects
 
-    suspend fun <T : Indexable> updateObject(
-        data: T,
-        serializer: KSerializer<T>,
-        createIfNotExists: Boolean? = null,
-        requestOptions: RequestOptions? = null
-    ): RevisionObject
-
-    suspend fun <T : Indexable> updateObjects(
-        data: List<T>,
-        serializer: KSerializer<T>,
-        createIfNotExists: Boolean = true,
-        requestOptions: RequestOptions? = null
-    ): ResponseBatch
-
-    suspend fun updateObject(
-        data: JsonObject,
-        objectID: ObjectID,
-        createIfNotExists: Boolean? = null,
-        requestOptions: RequestOptions? = null
-    ): RevisionObject
-
-    suspend fun updateObjects(
-        data: List<Pair<JsonObject, ObjectID>>,
-        createIfNotExists: Boolean = true,
-        requestOptions: RequestOptions? = null
-    ): ResponseBatch
-
     suspend fun partialUpdateObject(
         partialUpdate: PartialUpdate,
         objectID: ObjectID,

@@ -83,9 +83,9 @@ internal class TestSuiteIndexing {
                     .filterNotNull()
                     .map { Json.plain.fromJson(Data.serializer(), it) } shouldEqual batches
                 browse().nbHits shouldEqual 1007
-                revisions += updateObject(updateA, Data.serializer())
+                revisions += replaceObject(updateA, Data.serializer())
                 revisions += partialUpdateObject(PartialUpdate.Increment(attributeValue, 1), dataE.objectID)
-                revisions += updateObjects(listOf(updateB, updateC, updateD), Data.serializer())
+                revisions += replaceObjects(listOf(updateB, updateC, updateD), Data.serializer())
                 revisions += partialUpdateObjects(
                     listOf(
                         PartialUpdate.Increment(attributeValue, 1) to dataF.objectID,
