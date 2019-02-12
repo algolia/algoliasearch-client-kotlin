@@ -16,7 +16,7 @@ sealed class AroundRadius(override val raw: String) : Raw<String> {
 
     object All : AroundRadius(KeyAll)
 
-    data class InMeters(val int: kotlin.Int) : AroundRadius(int.toString())
+    data class InMeters(val radius: Int) : AroundRadius(radius.toString())
 
     data class Other(override val raw: String) : AroundRadius(raw)
 
@@ -29,7 +29,7 @@ sealed class AroundRadius(override val raw: String) : Raw<String> {
 
         override fun serialize(encoder: Encoder, obj: AroundRadius) {
             val element = when (obj) {
-                is InMeters -> JsonPrimitive(obj.int)
+                is InMeters -> JsonPrimitive(obj.radius)
                 else -> JsonPrimitive(obj.raw)
             }
 
