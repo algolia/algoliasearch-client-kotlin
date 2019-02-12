@@ -87,7 +87,7 @@ interface EndpointIndexing {
         serializer: KSerializer<T>,
         attributes: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
-    ): T?
+    ): T
 
     suspend fun getObject(
         objectID: ObjectID,

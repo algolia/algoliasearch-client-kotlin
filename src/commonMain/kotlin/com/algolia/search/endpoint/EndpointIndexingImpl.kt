@@ -179,7 +179,7 @@ internal class EndpointIndexingImpl(
         serializer: KSerializer<T>,
         attributes: List<Attribute>?,
         requestOptions: RequestOptions?
-    ): T? {
+    ): T {
         return getObjectInternal(objectID, attributes, requestOptions = requestOptions).let {
             Json.nonstrict.fromJson(serializer, it)
         }
