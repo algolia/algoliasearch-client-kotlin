@@ -17,7 +17,7 @@ sealed class ResponseFields(override val raw: String) : Raw<String> {
     object AutomaticRadius : ResponseFields(KeyAutomaticRadius)
     object ExhaustiveFacetsCount : ResponseFields(KeyExhaustiveFacetsCount)
     object Facets : ResponseFields(KeyFacets)
-    object FacetsStats : ResponseFields(KeyFacetsStats)
+    object FacetsStats : ResponseFields(KeyFacets_Stats)
     object Hits : ResponseFields(KeyHits)
     object HitsPerPage : ResponseFields(KeyHitsPerPage)
     object Index : ResponseFields(KeyIndex)
@@ -57,7 +57,7 @@ sealed class ResponseFields(override val raw: String) : Raw<String> {
                 KeyAutomaticRadius -> AutomaticRadius
                 KeyExhaustiveFacetsCount -> ExhaustiveFacetsCount
                 KeyFacets -> Facets
-                KeyFacetsStats -> FacetsStats
+                KeyFacets_Stats -> FacetsStats
                 KeyHits -> Hits
                 KeyHitsPerPage -> HitsPerPage
                 KeyIndex -> Index

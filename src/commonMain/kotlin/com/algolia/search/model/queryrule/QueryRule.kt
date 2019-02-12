@@ -16,5 +16,5 @@ data class QueryRule(
     @Optional @SerialName(KeyDescription) val description: String? = null,
     @Optional @SerialName(KeyEnabled) val enabled: Boolean? = null,
     @Optional @SerialName(KeyValidity) val validity: List<TimeRange>? = null,
-    @Optional @SerialName(KeyHighlightResult) val highlight: JsonObject? = null
+    @Optional @SerialName(Key_HighlightResult) val highlight: JsonObject? = null
 )

@@ -17,5 +17,5 @@ data class ResponseUserID(
     @SerialName(KeyDataSize) val dataSize: Long,
     @Optional @SerialName(KeyClusterName) val clusterName: ClusterName? = null,
     @Optional @SerialName(KeyObjectID) val objectID: ObjectID? = null,
-    @Optional @SerialName(KeyHighlightResult) val highlight: JsonObject? = null
+    @Optional @SerialName(Key_HighlightResult) val highlight: JsonObject? = null
 )

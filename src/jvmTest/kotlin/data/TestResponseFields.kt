@@ -19,7 +19,7 @@ internal class TestResponseFields {
         AutomaticRadius.raw shouldEqual KeyAutomaticRadius
         ExhaustiveFacetsCount.raw shouldEqual KeyExhaustiveFacetsCount
         Facets.raw shouldEqual KeyFacets
-        FacetsStats.raw shouldEqual KeyFacetsStats
+        FacetsStats.raw shouldEqual KeyFacets_Stats
         Hits.raw shouldEqual KeyHits
         HitsPerPage.raw shouldEqual KeyHitsPerPage
         Index.raw shouldEqual KeyIndex

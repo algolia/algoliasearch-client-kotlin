@@ -33,7 +33,7 @@ data class ResponseSearch(
     @Optional @SerialName(KeyAbTestVariantID) val abTestVariantID: Int? = null,
     @Optional @SerialName(KeyParsedQuery) val parsedQuery: String? = null,
     @Optional @SerialName(KeyFacets) @Serializable(KSerializerFacets::class) val facets: Map<Attribute, List<Facet>>? = null,
-    @Optional @SerialName(KeyFacetsStats) val facetStats: Map<Attribute, FacetStats>? = null,
+    @Optional @SerialName(KeyFacets_Stats) val facetStats: Map<Attribute, FacetStats>? = null,
     @Optional @SerialName(KeyCursor) val cursor: Cursor? = null,
     @Optional @SerialName(KeyIndex) val indexName: IndexName? = null,
     @Optional @SerialName(KeyProcessed) val processed: Boolean? = null,
@@ -45,10 +45,10 @@ data class ResponseSearch(
         val json: JsonObject
     ) {
 
-        val highlights = json.getObjectOrNull(KeyHighlightResult)?.toHighlights()
-        val snippets = json.getObjectOrNull(KeySnippetResult)?.toSnippets()
-        val rankingInfo = json.getObjectOrNull(KeyRankingInfo)?.toRankingInfo()
-        val distinctSequentialID = json.getPrimitiveOrNull(KeyDistinctSeqID)?.int
+        val highlights = json.getObjectOrNull(Key_HighlightResult)?.toHighlights()
+        val snippets = json.getObjectOrNull(Key_SnippetResult)?.toSnippets()
+        val rankingInfo = json.getObjectOrNull(Key_RankingInfo)?.toRankingInfo()
+        val distinctSequentialID = json.getPrimitiveOrNull(Key_DistinctSeqID)?.int
 
         fun <T> get(serializer: KSerializer<T>, attribute: Attribute): T {
             return Json.plain.fromJson(serializer, json[attribute.raw])
