@@ -29,7 +29,7 @@ internal class TestSuiteMultiCluster {
             val clusters = clientMcm.listClusters().clusters
 
             (clusters.size >= 2).shouldBeTrue()
-            clientMcm.assignUserID(userID, clusters.first().clusterName)
+            clientMcm.assignUserID(userID, clusters.first().name)
             while (isActive) {
                 try {
                     clientMcm.getUserID(userID)

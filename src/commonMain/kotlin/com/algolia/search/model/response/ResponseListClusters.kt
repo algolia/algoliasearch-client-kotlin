@@ -12,7 +12,7 @@ data class ResponseListClusters(
 ) {
     @Serializable
     data class Cluster(
-        @SerialName(KeyClusterName) val clusterName: ClusterName,
+        @SerialName(KeyClusterName) val name: ClusterName,
         @SerialName(KeyNbRecords) val nbRecords: Int,
         @SerialName(KeyNbUserIDs) val nbUserIDs: Long,
         @SerialName(KeyDataSize) val dataSize: Long
