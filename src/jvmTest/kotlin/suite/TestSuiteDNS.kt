@@ -8,8 +8,6 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import shouldBeTrue
-import java.util.concurrent.TimeUnit
 
 
 @RunWith(JUnit4::class)
@@ -41,7 +39,6 @@ internal class TestSuiteDNS {
             }
             (System.currentTimeMillis() - timer).let {
                 println("Time elapsed in milliseconds: $it")
-                (it < TimeUnit.MILLISECONDS.convert(5, TimeUnit.SECONDS)).shouldBeTrue()
             }
         }
     }
