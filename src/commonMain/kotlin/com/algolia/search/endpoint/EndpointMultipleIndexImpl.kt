@@ -35,6 +35,14 @@ internal class EndpointMultipleIndexImpl(
         }
     }
 
+    override suspend fun listIndexAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
+        return read.retry(readTimeout, "$route/*/keys") { url ->
+            httpClient.get<ResponseListAPIKey>(url) {
+                setRequestOptions(requestOptions)
+            }
+        }
+    }
+
     override suspend fun multipleQueries(
         queries: Collection<IndexQuery>,
         strategy: MultipleQueriesStrategy,
@@ -74,14 +82,6 @@ internal class EndpointMultipleIndexImpl(
         return write.retry(requestOptions.computedWriteTimeout, "$route/*/batch") { url ->
             httpClient.post<ResponseBatches>(url) {
                 body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
-    }
-
-    override suspend fun listIndexAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
-        return read.retry(readTimeout, "$route/*/keys") { url ->
-            httpClient.get<ResponseListAPIKey>(url) {
                 setRequestOptions(requestOptions)
             }
         }

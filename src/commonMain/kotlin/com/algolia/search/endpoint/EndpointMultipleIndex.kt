@@ -12,6 +12,8 @@ interface EndpointMultipleIndex {
 
     suspend fun listIndexes(requestOptions: RequestOptions? = null): ResponseListIndexes
 
+    suspend fun listIndexAPIKeys(requestOptions: RequestOptions? = null): ResponseListAPIKey
+
     suspend fun multipleQueries(
         queries: Collection<IndexQuery>,
         strategy: MultipleQueriesStrategy = MultipleQueriesStrategy.None,
@@ -27,6 +29,4 @@ interface EndpointMultipleIndex {
         operations: List<BatchOperationIndex>,
         requestOptions: RequestOptions? = null
     ): ResponseBatches
-
-    suspend fun listIndexAPIKeys(requestOptions: RequestOptions? = null): ResponseListAPIKey
 }
