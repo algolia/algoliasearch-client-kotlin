@@ -2,6 +2,7 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.APIWrapper
 import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setConfiguration
 import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.index.Scope
@@ -32,6 +33,7 @@ internal class EndpointIndexImpl(
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/operation")) { url ->
             httpClient.post<RevisionIndex>(url) {
+                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -53,6 +55,7 @@ internal class EndpointIndexImpl(
     override suspend fun deleteIndex(requestOptions: RequestOptions?): DeletionIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath()) { url ->
             httpClient.delete<DeletionIndex>(url) {
+                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }

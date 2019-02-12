@@ -2,6 +2,7 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.APIWrapper
 import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setConfiguration
 import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.ClusterName
 import com.algolia.search.model.UserID
@@ -24,6 +25,7 @@ internal class EndpointMulticlusterImpl(
     override suspend fun listClusters(requestOptions: RequestOptions?): ResponseListClusters {
         return read.retry(requestOptions.computedReadTimeout, route) { url ->
             httpClient.get<ResponseListClusters>(url) {
+                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }
@@ -38,6 +40,7 @@ internal class EndpointMulticlusterImpl(
 
         return write.retry(requestOptions.computedWriteTimeout, "$route/mapping") { url ->
             httpClient.post<Creation>(url) {
+                setConfiguration(api)
                 body = bodyString
                 header(KeyAlgoliaUserID, userID.raw)
                 setRequestOptions(requestOptions)
@@ -48,6 +51,7 @@ internal class EndpointMulticlusterImpl(
     override suspend fun getUserID(userID: UserID, requestOptions: RequestOptions?): ResponseUserID {
         return read.retry(requestOptions.computedReadTimeout, "$route/mapping/$userID") { url ->
             httpClient.get<ResponseUserID>(url) {
+                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }
@@ -56,6 +60,7 @@ internal class EndpointMulticlusterImpl(
     override suspend fun getTopUserID(requestOptions: RequestOptions?): ResponseTopUserID {
         return read.retry(requestOptions.computedReadTimeout, "$route/mapping/top") { url ->
             httpClient.get<ResponseTopUserID>(url) {
+                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }
@@ -68,6 +73,7 @@ internal class EndpointMulticlusterImpl(
     ): ResponseListUserIDs {
         return read.retry(requestOptions.computedReadTimeout, "$route/mapping") { url ->
             httpClient.get<ResponseListUserIDs>(url) {
+                setConfiguration(api)
                 parameter(KeyPage, page)
                 parameter(KeyHitsPerPage, hitsPerPage)
                 setRequestOptions(requestOptions)
@@ -78,6 +84,7 @@ internal class EndpointMulticlusterImpl(
     override suspend fun removeUserID(userID: UserID, requestOptions: RequestOptions?): Deletion {
         return write.retry(requestOptions.computedWriteTimeout, "$route/mapping") { url ->
             httpClient.delete<Deletion>(url) {
+                setConfiguration(api)
                 header(KeyAlgoliaUserID, userID)
                 setRequestOptions(requestOptions)
             }
@@ -96,6 +103,7 @@ internal class EndpointMulticlusterImpl(
 
         return read.retry(requestOptions.computedReadTimeout, "$route/mapping/search") { url ->
             httpClient.post<ResponseSearchUserID>(url) {
+                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }

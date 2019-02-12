@@ -2,6 +2,7 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.APIWrapper
 import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setConfiguration
 import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
@@ -56,6 +57,7 @@ internal class EndpointAPIKeyImpl(
 
         return write.retry(requestOptions.computedWriteTimeout, route) { url ->
             httpClient.post<CreationAPIKey>(url) {
+                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -87,6 +89,7 @@ internal class EndpointAPIKeyImpl(
 
         return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { url ->
             httpClient.put<RevisionAPIKey>(url) {
+                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -96,6 +99,7 @@ internal class EndpointAPIKeyImpl(
     override suspend fun deleteAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): DeletionAPIKey {
         return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { url ->
             httpClient.delete<Deletion>(url) {
+                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }.let { DeletionAPIKey(it.date, apiKey) }
         }
@@ -104,6 +108,7 @@ internal class EndpointAPIKeyImpl(
     override suspend fun listAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
         return read.retry(requestOptions.computedReadTimeout, route) { url ->
             httpClient.get<ResponseListAPIKey>(url) {
+                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }
@@ -115,6 +120,7 @@ internal class EndpointAPIKeyImpl(
     ): ResponseAPIKey {
         return read.retry(requestOptions.computedReadTimeout, "$route/$apiKey") { url ->
             httpClient.get<ResponseAPIKey>(url) {
+                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }
