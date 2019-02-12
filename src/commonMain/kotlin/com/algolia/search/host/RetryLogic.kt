@@ -36,23 +36,21 @@ internal class RetryLogic(
                 statuses[index] = HostStatus.Up.getHostStatus()
                 response
             }
-        } catch (exception: TimeoutCancellationException) {
-            statuses[index] = HostStatus.Down.getHostStatus()
+        } catch (exception: Exception) {
             if (attempt > maxAttempts) throw exception
-            retry(timeout, path, attempt + 1, request)
-        } catch (exception: BadResponseStatusException) {
-            val code = exception.response.status.value
-            val isSuccessful = floor(code / 100f) == 2f
-            val isRetryable = floor(code / 100f) != 4f && !isSuccessful
+            when (exception) {
+                is BadResponseStatusException -> {
+                    val code = exception.response.status.value
+                    val isSuccessful = floor(code / 100f) == 2f
+                    val isRetryable = floor(code / 100f) != 4f && !isSuccessful
 
-            if (isRetryable) {
-                statuses[index] = HostStatus.Down.getHostStatus()
-                if (attempt > maxAttempts) throw exception
-                retry(timeout, path, attempt + 1, request)
-            } else throw exception
-        } catch (exception: IOException) {
-            statuses[index] = HostStatus.Down.getHostStatus()
-            if (attempt > maxAttempts) throw exception
+                    if (isRetryable) {
+                        statuses[index] = HostStatus.Down.getHostStatus()
+                    } else throw exception
+                }
+                is IOException, is TimeoutCancellationException -> statuses[index] = HostStatus.Down.getHostStatus()
+                else -> throw exception
+            }
             retry(timeout, path, attempt + 1, request)
         }
     }
