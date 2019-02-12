@@ -33,7 +33,6 @@ sealed class ACL(override val raw: String) : Raw<String> {
 
     data class Other(override val raw: String) : ACL(raw)
 
-
     @Serializer(ACL::class)
     companion object : KSerializer<ACL> {
 
