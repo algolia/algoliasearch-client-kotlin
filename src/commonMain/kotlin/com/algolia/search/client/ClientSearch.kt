@@ -12,7 +12,6 @@ import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyLength
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyType
@@ -101,7 +100,6 @@ class ClientSearch private constructor(
         return apiWrapper.run {
             read.retry(requestOptions.computedReadTimeout, "/1/logs") { url ->
                 httpClient.get<ResponseLogs>(url) {
-                    setConfiguration(apiWrapper)
                     parameter(KeyOffset, offset)
                     parameter(KeyLength, length)
                     parameter(KeyType, logType?.raw)
