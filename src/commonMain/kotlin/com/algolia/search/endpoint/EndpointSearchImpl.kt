@@ -7,7 +7,7 @@ import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.model.response.ResponseSearchFacetValue
+import com.algolia.search.model.response.ResponseSearchForFacetValue
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Query
 import com.algolia.search.query.clone
@@ -75,7 +75,7 @@ internal class EndpointSearchImpl(
         query: Query?,
         maxFacetHits: Int?,
         requestOptions: RequestOptions?
-    ): ResponseSearchFacetValue {
+    ): ResponseSearchForFacetValue {
         val copy = query?.clone()
         val extraParams = json {
             maxFacetHits?.let { KeyMaxFacetHits to it }
@@ -87,7 +87,7 @@ internal class EndpointSearchImpl(
             requestOptions.computedReadTimeout,
             indexName.toPath("/facets/$attribute/query")
         ) { url ->
-            httpClient.post<ResponseSearchFacetValue>(url) {
+            httpClient.post<ResponseSearchForFacetValue>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
             }

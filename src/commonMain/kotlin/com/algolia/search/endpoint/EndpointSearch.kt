@@ -6,7 +6,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.model.response.ResponseSearchFacetValue
+import com.algolia.search.model.response.ResponseSearchForFacetValue
 
 
 interface EndpointSearch {
@@ -25,5 +25,5 @@ interface EndpointSearch {
         query: Query? = null,
         maxFacetHits: Int? = null,
         requestOptions: RequestOptions? = null
-    ): ResponseSearchFacetValue
+    ): ResponseSearchForFacetValue
 }
