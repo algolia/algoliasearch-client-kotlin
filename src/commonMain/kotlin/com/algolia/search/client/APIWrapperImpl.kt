@@ -10,6 +10,7 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.synonym.Synonym
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.Logger
@@ -38,6 +39,10 @@ internal class APIWrapperImpl(
                     it.register(CreationAPIKey.serializer())
                     it.register(RevisionIndex.serializer())
                 }
+        }
+        install(DefaultRequest) {
+            setApplicationId(applicationID)
+            setApiKey(apiKey)
         }
         install(Logging) {
             level = logLevel

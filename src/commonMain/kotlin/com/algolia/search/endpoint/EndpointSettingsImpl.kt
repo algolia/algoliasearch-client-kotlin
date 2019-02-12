@@ -2,7 +2,6 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.APIWrapper
 import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.setConfiguration
 import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.SearchableAttribute
@@ -32,7 +31,6 @@ internal class EndpointSettingsImpl(
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
         return read.retry(requestOptions.computedWriteTimeout, indexName.toPath(route)) { url ->
             val json = httpClient.get<JsonObject>(url) {
-                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
             val settings = Json.nonstrict.fromJson(Settings.serializer(), json)
@@ -66,7 +64,6 @@ internal class EndpointSettingsImpl(
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath(route)) { url ->
             httpClient.put<RevisionIndex>(url) {
-                setConfiguration(api)
                 body = bodyString
                 parameter(KeyForwardToReplicas, forwardToReplicas)
                 setRequestOptions(requestOptions)

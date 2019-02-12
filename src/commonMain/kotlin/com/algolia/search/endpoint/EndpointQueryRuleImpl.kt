@@ -1,6 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setForwardToReplicas
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.queryrule.QueryRule
@@ -34,7 +37,6 @@ internal class EndpointQueryRuleImpl(
             indexName.toPath("$route/${queryRule.objectID}")
         ) { url ->
             httpClient.put<RevisionIndex>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setForwardToReplicas(forwardToReplicas)
                 setRequestOptions(requestOptions)
@@ -45,7 +47,6 @@ internal class EndpointQueryRuleImpl(
     override suspend fun getRule(objectID: ObjectID, requestOptions: RequestOptions?): QueryRule {
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath("$route/$objectID")) { url ->
             httpClient.get<QueryRule>(url) {
-                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }
@@ -58,7 +59,6 @@ internal class EndpointQueryRuleImpl(
     ): RevisionIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("$route/$objectID")) { url ->
             httpClient.delete<RevisionIndex>(url) {
-                setConfiguration(api)
                 setForwardToReplicas(forwardToReplicas)
                 setRequestOptions(requestOptions)
             }
@@ -70,7 +70,6 @@ internal class EndpointQueryRuleImpl(
 
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath("$route/search")) { url ->
             httpClient.post<ResponseRules>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -80,7 +79,6 @@ internal class EndpointQueryRuleImpl(
     override suspend fun clearRules(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): RevisionIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("$route/clear")) { url ->
             httpClient.post<RevisionIndex>(url) {
-                setConfiguration(api)
                 body = ""
                 setForwardToReplicas(forwardToReplicas)
                 setRequestOptions(requestOptions)
@@ -98,7 +96,6 @@ internal class EndpointQueryRuleImpl(
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("$route/batch")) { url ->
             httpClient.post<RevisionIndex>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setForwardToReplicas(forwardToReplicas)
                 parameter(KeyClearExistingRules, clearExistingRules)

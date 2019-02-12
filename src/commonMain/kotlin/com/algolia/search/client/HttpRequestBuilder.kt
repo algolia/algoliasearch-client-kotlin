@@ -21,17 +21,10 @@ internal fun HttpRequestBuilder.setApiKey(apiKey: APIKey) {
     header(KeyAlgoliaAPIKey, apiKey.raw)
 }
 
-internal fun HttpRequestBuilder.setConfiguration(configuration: ConfigurationInterface) {
-    setApplicationId(configuration.applicationID)
-    setApiKey(configuration.apiKey)
-}
-
 internal fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions?) {
-    requestOptions?.let {
-        it.headers.forEach { header(it.key, it.value) }
-        it.urlParameters.forEach { parameter(it.key, it.value) }
-        it.body?.let { body = it }
-    }
+    requestOptions?.headers?.forEach { header(it.key, it.value) }
+    requestOptions?.urlParameters?.forEach { parameter(it.key, it.value) }
+    requestOptions?.body?.let { body = it }
 }
 
 internal fun HttpRequestBuilder.setForwardToReplicas(forwardToReplicas: Boolean?) {

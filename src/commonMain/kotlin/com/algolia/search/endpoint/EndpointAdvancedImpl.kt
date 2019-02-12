@@ -2,7 +2,6 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.APIWrapper
 import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.setConfiguration
 import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.enums.LogType
@@ -53,7 +52,6 @@ internal class EndpointAdvancedImpl(
     override suspend fun getTask(taskID: TaskID, requestOptions: RequestOptions?): TaskInfo {
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/task/$taskID")) { url ->
             httpClient.get<TaskInfo>(url) {
-                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }
@@ -67,7 +65,6 @@ internal class EndpointAdvancedImpl(
     ): ResponseLogs {
         return read.retry(requestOptions.computedReadTimeout, "/1/logs") { url ->
             httpClient.get<ResponseLogs>(url) {
-                setConfiguration(api)
                 parameter(KeyIndexName, indexName.raw)
                 parameter(KeyOffset, offset)
                 parameter(KeyLength, length)

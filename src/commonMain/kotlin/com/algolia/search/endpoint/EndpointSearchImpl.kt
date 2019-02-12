@@ -1,6 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setBody
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
@@ -24,7 +27,6 @@ internal class EndpointSearchImpl(
     private suspend fun search(requestOptions: RequestOptions?): ResponseSearch {
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath()) { url ->
             httpClient.get<ResponseSearch>(url) {
-                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }
@@ -35,7 +37,6 @@ internal class EndpointSearchImpl(
 
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/query")) { url ->
             httpClient.post<ResponseSearch>(url) {
-                setConfiguration(api)
                 setBody(copy)
                 setRequestOptions(requestOptions)
             }
@@ -53,7 +54,6 @@ internal class EndpointSearchImpl(
 
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/browse")) { url ->
             httpClient.post<ResponseSearch>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -63,7 +63,6 @@ internal class EndpointSearchImpl(
     override suspend fun browse(cursor: Cursor, requestOptions: RequestOptions?): ResponseSearch {
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/browse")) { url ->
             httpClient.get<ResponseSearch>(url) {
-                setConfiguration(api)
                 parameter(KeyCursor, cursor)
                 setRequestOptions(requestOptions)
             }
@@ -89,7 +88,6 @@ internal class EndpointSearchImpl(
             indexName.toPath("/facets/$attribute/query")
         ) { url ->
             httpClient.post<ResponseSearchFacetValue>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }

@@ -2,7 +2,6 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.APIWrapper
 import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.setConfiguration
 import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
@@ -38,7 +37,6 @@ internal class EndpointIndexingImpl(
     private suspend fun addObject(payload: String, requestOptions: RequestOptions?): CreationObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath()) { url ->
             httpClient.post<CreationObject>(url) {
-                setConfiguration(api)
                 body = payload
                 setRequestOptions(requestOptions)
             }
@@ -80,7 +78,6 @@ internal class EndpointIndexingImpl(
     ): RevisionObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$objectID")) { url ->
             httpClient.put<RevisionObject>(url) {
-                setConfiguration(api)
                 body = payload
                 setRequestOptions(requestOptions)
             }
@@ -125,7 +122,6 @@ internal class EndpointIndexingImpl(
     override suspend fun deleteObject(objectID: ObjectID, requestOptions: RequestOptions?): DeletionObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$objectID")) { url ->
             httpClient.delete<DeletionObject>(url) {
-                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }
@@ -143,7 +139,6 @@ internal class EndpointIndexingImpl(
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/deleteByQuery")) { url ->
             httpClient.post<RevisionIndex>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -159,7 +154,6 @@ internal class EndpointIndexingImpl(
 
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/$objectID")) { url ->
             httpClient.get<JsonObject>(url) {
-                setConfiguration(api)
                 parameter(KeyAttributesToRetrieve, attributesToRetrieve)
                 setRequestOptions(requestOptions)
             }
@@ -195,7 +189,6 @@ internal class EndpointIndexingImpl(
 
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/objects") { url ->
             httpClient.post<ResponseObjects>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -210,7 +203,6 @@ internal class EndpointIndexingImpl(
     ): RevisionObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$objectID/partial")) { url ->
             httpClient.post<RevisionObject>(url) {
-                setConfiguration(api)
                 body = payload
                 parameter(KeyCreateIfNotExists, createIfNotExists)
                 setRequestOptions(requestOptions)
@@ -287,7 +279,6 @@ internal class EndpointIndexingImpl(
 
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/batch")) { url ->
             httpClient.post<ResponseBatch>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -297,7 +288,6 @@ internal class EndpointIndexingImpl(
     override suspend fun clearObjects(requestOptions: RequestOptions?): RevisionIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/clear")) { url ->
             httpClient.post<RevisionIndex>(url) {
-                setConfiguration(api)
                 body = ""
                 setRequestOptions(requestOptions)
             }

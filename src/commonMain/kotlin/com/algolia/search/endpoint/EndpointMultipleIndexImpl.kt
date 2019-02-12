@@ -1,6 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setQueries
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
@@ -18,7 +21,7 @@ import kotlinx.serialization.list
 
 
 internal class EndpointMultipleIndexImpl(
-    val api: APIWrapper
+    api: APIWrapper
 ) : EndpointMultipleIndex,
     APIWrapper by api {
 
@@ -27,7 +30,6 @@ internal class EndpointMultipleIndexImpl(
     override suspend fun listIndexes(requestOptions: RequestOptions?): ResponseListIndexes {
         return read.retry(requestOptions.computedReadTimeout, route) { url ->
             httpClient.get<ResponseListIndexes>(url) {
-                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }
@@ -42,7 +44,6 @@ internal class EndpointMultipleIndexImpl(
 
         return read.retry(requestOptions.computedReadTimeout, "$route/*/queries") { url ->
             httpClient.post<ResponseSearches>(url) {
-                setConfiguration(api)
                 setQueries(copies, strategy)
                 setRequestOptions(requestOptions)
             }
@@ -57,7 +58,6 @@ internal class EndpointMultipleIndexImpl(
 
         return read.retry(requestOptions.computedReadTimeout, "$route/*/objects") { url ->
             httpClient.post<ResponseObjects>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -73,7 +73,6 @@ internal class EndpointMultipleIndexImpl(
 
         return write.retry(requestOptions.computedWriteTimeout, "$route/*/batch") { url ->
             httpClient.post<ResponseBatches>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -83,7 +82,6 @@ internal class EndpointMultipleIndexImpl(
     override suspend fun listIndexAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
         return read.retry(readTimeout, "$route/*/keys") { url ->
             httpClient.get<ResponseListAPIKey>(url) {
-                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }

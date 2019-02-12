@@ -1,6 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.setForwardToReplicas
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.request.RequestSearchSynonyms
@@ -37,7 +40,6 @@ internal class EndpointSynonymImpl(
             indexName.toPath("/$route/${synonym.objectID}")
         ) { url ->
             httpClient.put<RevisionSynonym>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setForwardToReplicas(forwardToReplicas)
                 setRequestOptions(requestOptions)
@@ -54,7 +56,6 @@ internal class EndpointSynonymImpl(
         val bodyString = Json.stringify(Synonym.list, synonyms)
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$route/batch")) { url ->
             httpClient.post<RevisionIndex>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setForwardToReplicas(forwardToReplicas)
                 parameter(KeyReplaceExistingSynonyms, replaceExistingSynonyms)
@@ -66,7 +67,6 @@ internal class EndpointSynonymImpl(
     override suspend fun getSynonym(objectID: ObjectID, requestOptions: RequestOptions?): Synonym {
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/$route/$objectID")) { url ->
             httpClient.get<Synonym>(url) {
-                setConfiguration(api)
                 setRequestOptions(requestOptions)
             }
         }
@@ -79,7 +79,6 @@ internal class EndpointSynonymImpl(
     ): DeletionIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$route/$objectID")) { url ->
             httpClient.delete<DeletionIndex>(url) {
-                setConfiguration(api)
                 setForwardToReplicas(forwardToReplicas)
                 setRequestOptions(requestOptions)
             }
@@ -98,7 +97,6 @@ internal class EndpointSynonymImpl(
 
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/$route/search")) { url ->
             httpClient.post<ResponseSearchSynonyms>(url) {
-                setConfiguration(api)
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -108,7 +106,6 @@ internal class EndpointSynonymImpl(
     override suspend fun clearSynonyms(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): RevisionIndex {
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$route/clear")) { url ->
             httpClient.post<RevisionIndex>(url) {
-                setConfiguration(api)
                 body = ""
                 setForwardToReplicas(forwardToReplicas)
                 setRequestOptions(requestOptions)
