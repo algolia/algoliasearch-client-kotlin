@@ -95,16 +95,15 @@ class ClientSearch private constructor(
     suspend fun getLogs(
         offset: Int? = null,
         length: Int? = null,
-        indexName: IndexName? = null,
         logType: LogType? = null,
         requestOptions: RequestOptions? = null
     ): ResponseLogs {
         return apiWrapper.run {
             read.retry(requestOptions.computedReadTimeout, "/1/logs") { url ->
                 httpClient.get<ResponseLogs>(url) {
+                    setConfiguration(apiWrapper)
                     parameter(KeyOffset, offset)
                     parameter(KeyLength, length)
-                    parameter(KeyIndexName, indexName?.raw)
                     parameter(KeyType, logType?.raw)
                     setRequestOptions(requestOptions)
                 }
