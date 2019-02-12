@@ -28,8 +28,8 @@ internal class EndpointMultipleIndexImpl(
     private val route = "/1/indexes"
 
     override suspend fun listIndexes(requestOptions: RequestOptions?): ResponseListIndexes {
-        return read.retry(requestOptions.computedReadTimeout, route) { path ->
-            httpClient.get<ResponseListIndexes>(path) {
+        return read.retry(requestOptions.computedReadTimeout, route) { url ->
+            httpClient.get<ResponseListIndexes>(url) {
                 setRequestOptions(requestOptions)
             }
         }
@@ -42,8 +42,8 @@ internal class EndpointMultipleIndexImpl(
     ): ResponseSearches {
         val copies = queries.map { IndexQuery(it.indexName, it.query.clone()) }
 
-        return read.retry(requestOptions.computedReadTimeout, "$route/*/queries") { path ->
-            httpClient.post<ResponseSearches>(path) {
+        return read.retry(requestOptions.computedReadTimeout, "$route/*/queries") { url ->
+            httpClient.post<ResponseSearches>(url) {
                 setQueries(copies, strategy)
                 setRequestOptions(requestOptions)
             }
@@ -56,8 +56,8 @@ internal class EndpointMultipleIndexImpl(
     ): ResponseObjects {
         val bodyString = JsonNoNulls.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
-        return read.retry(requestOptions.computedReadTimeout, "$route/*/objects") { path ->
-            httpClient.post<ResponseObjects>(path) {
+        return read.retry(requestOptions.computedReadTimeout, "$route/*/objects") { url ->
+            httpClient.post<ResponseObjects>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -71,8 +71,8 @@ internal class EndpointMultipleIndexImpl(
         val requests = Json.plain.toJson(BatchOperationIndex.list, operations)
         val bodyString = json { KeyRequests to requests }.toString()
 
-        return write.retry(requestOptions.computedWriteTimeout, "$route/*/batch") { path ->
-            httpClient.post<ResponseBatches>(path) {
+        return write.retry(requestOptions.computedWriteTimeout, "$route/*/batch") { url ->
+            httpClient.post<ResponseBatches>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -80,8 +80,8 @@ internal class EndpointMultipleIndexImpl(
     }
 
     override suspend fun listIndexAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
-        return read.retry(readTimeout, "$route/*/keys") { path ->
-            httpClient.get<ResponseListAPIKey>(path) {
+        return read.retry(readTimeout, "$route/*/keys") { url ->
+            httpClient.get<ResponseListAPIKey>(url) {
                 setRequestOptions(requestOptions)
             }
         }

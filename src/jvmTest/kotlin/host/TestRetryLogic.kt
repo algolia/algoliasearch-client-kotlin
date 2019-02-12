@@ -62,9 +62,9 @@ internal class TestRetryLogic {
         runBlocking {
             var retry = -1
 
-            retryLogic.retry(1000L, route) { path ->
+            retryLogic.retry(1000L, route) { url ->
                 retry++
-                path shouldEqual hosts[retry] + route
+                url shouldEqual hosts[retry] + route
                 if (retry == 0) delay(2000L)
                 client200.get<HttpResponse>()
             }
@@ -82,11 +82,11 @@ internal class TestRetryLogic {
             val count = 4
             var retry = -1
 
-            retryLogic.retry(100L, route) { path ->
+            retryLogic.retry(100L, route) { url ->
                 retry++
-                path shouldEqual hosts[retry % count] + route
+                url shouldEqual hosts[retry % count] + route
                 if (retry < count) delay(150L * (retry + 1))
-                client200.get<HttpResponse>(path)
+                client200.get<HttpResponse>(url)
             }
             statuses[0].first shouldEqual HostStatus.Up
             statuses[1].first shouldEqual HostStatus.Down
@@ -103,9 +103,9 @@ internal class TestRetryLogic {
             var exceptionIsThrown = false
 
             try {
-                retryLogic.retry(1000L, route) { path ->
+                retryLogic.retry(1000L, route) { url ->
                     retry++
-                    client404.get<String>(path)
+                    client404.get<String>(url)
                 }
             } catch (exception: BadResponseStatusException) {
                 exceptionIsThrown = true

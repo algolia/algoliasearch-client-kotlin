@@ -100,8 +100,8 @@ class ClientSearch private constructor(
         requestOptions: RequestOptions? = null
     ): ResponseLogs {
         return apiWrapper.run {
-            read.retry(requestOptions.computedReadTimeout, "/1/logs") { path ->
-                httpClient.get<ResponseLogs>(path) {
+            read.retry(requestOptions.computedReadTimeout, "/1/logs") { url ->
+                httpClient.get<ResponseLogs>(url) {
                     parameter(KeyOffset, offset)
                     parameter(KeyLength, length)
                     parameter(KeyIndexName, indexName?.raw)

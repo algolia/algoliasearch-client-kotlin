@@ -22,8 +22,8 @@ internal class EndpointMulticlusterImpl(
     private val route = "/1/clusters"
 
     override suspend fun listClusters(requestOptions: RequestOptions?): ResponseListClusters {
-        return read.retry(requestOptions.computedReadTimeout, route) { path ->
-            httpClient.get<ResponseListClusters>(path) {
+        return read.retry(requestOptions.computedReadTimeout, route) { url ->
+            httpClient.get<ResponseListClusters>(url) {
                 setRequestOptions(requestOptions)
             }
         }
@@ -36,8 +36,8 @@ internal class EndpointMulticlusterImpl(
     ): Creation {
         val bodyString = json { KeyCluster to clusterName.raw }.toString()
 
-        return write.retry(requestOptions.computedWriteTimeout, "$route/mapping") { path ->
-            httpClient.post<Creation>(path) {
+        return write.retry(requestOptions.computedWriteTimeout, "$route/mapping") { url ->
+            httpClient.post<Creation>(url) {
                 body = bodyString
                 header(KeyAlgoliaUserID, userID.raw)
                 setRequestOptions(requestOptions)
@@ -46,16 +46,16 @@ internal class EndpointMulticlusterImpl(
     }
 
     override suspend fun getUserID(userID: UserID, requestOptions: RequestOptions?): ResponseUserID {
-        return read.retry(requestOptions.computedReadTimeout, "$route/mapping/$userID") { path ->
-            httpClient.get<ResponseUserID>(path) {
+        return read.retry(requestOptions.computedReadTimeout, "$route/mapping/$userID") { url ->
+            httpClient.get<ResponseUserID>(url) {
                 setRequestOptions(requestOptions)
             }
         }
     }
 
     override suspend fun getTopUserID(requestOptions: RequestOptions?): ResponseTopUserID {
-        return read.retry(requestOptions.computedReadTimeout, "$route/mapping/top") { path ->
-            httpClient.get<ResponseTopUserID>(path) {
+        return read.retry(requestOptions.computedReadTimeout, "$route/mapping/top") { url ->
+            httpClient.get<ResponseTopUserID>(url) {
                 setRequestOptions(requestOptions)
             }
         }
@@ -66,8 +66,8 @@ internal class EndpointMulticlusterImpl(
         hitsPerPage: Int?,
         requestOptions: RequestOptions?
     ): ResponseListUserIDs {
-        return read.retry(requestOptions.computedReadTimeout, "$route/mapping") { path ->
-            httpClient.get<ResponseListUserIDs>(path) {
+        return read.retry(requestOptions.computedReadTimeout, "$route/mapping") { url ->
+            httpClient.get<ResponseListUserIDs>(url) {
                 parameter(KeyPage, page)
                 parameter(KeyHitsPerPage, hitsPerPage)
                 setRequestOptions(requestOptions)
@@ -76,8 +76,8 @@ internal class EndpointMulticlusterImpl(
     }
 
     override suspend fun removeUserID(userID: UserID, requestOptions: RequestOptions?): Deletion {
-        return write.retry(requestOptions.computedWriteTimeout, "$route/mapping") { path ->
-            httpClient.delete<Deletion>(path) {
+        return write.retry(requestOptions.computedWriteTimeout, "$route/mapping") { url ->
+            httpClient.delete<Deletion>(url) {
                 header(KeyAlgoliaUserID, userID)
                 setRequestOptions(requestOptions)
             }
@@ -94,8 +94,8 @@ internal class EndpointMulticlusterImpl(
         val request = RequestSearchUserID(query, clusterName, page, hitsPerPage)
         val bodyString = JsonNoNulls.stringify(RequestSearchUserID.serializer(), request)
 
-        return read.retry(requestOptions.computedReadTimeout, "$route/mapping/search") { path ->
-            httpClient.post<ResponseSearchUserID>(path) {
+        return read.retry(requestOptions.computedReadTimeout, "$route/mapping/search") { url ->
+            httpClient.post<ResponseSearchUserID>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
             }

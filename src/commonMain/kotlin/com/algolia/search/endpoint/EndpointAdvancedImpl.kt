@@ -50,8 +50,8 @@ internal class EndpointAdvancedImpl(
     }
 
     override suspend fun getTask(taskID: TaskID, requestOptions: RequestOptions?): TaskInfo {
-        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/task/$taskID")) { path ->
-            httpClient.get<TaskInfo>(path) {
+        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/task/$taskID")) { url ->
+            httpClient.get<TaskInfo>(url) {
                 setRequestOptions(requestOptions)
             }
         }
@@ -63,8 +63,8 @@ internal class EndpointAdvancedImpl(
         logType: LogType?,
         requestOptions: RequestOptions?
     ): ResponseLogs {
-        return read.retry(requestOptions.computedReadTimeout, "/1/logs") { path ->
-            httpClient.get<ResponseLogs>(path) {
+        return read.retry(requestOptions.computedReadTimeout, "/1/logs") { url ->
+            httpClient.get<ResponseLogs>(url) {
                 parameter(KeyIndexName, indexName.raw)
                 parameter(KeyOffset, offset)
                 parameter(KeyLength, length)

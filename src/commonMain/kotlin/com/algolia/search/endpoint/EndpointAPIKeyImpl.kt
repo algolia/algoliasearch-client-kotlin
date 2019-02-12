@@ -54,8 +54,8 @@ internal class EndpointAPIKeyImpl(
             restrictSources = restrictSources
         ).stringify()
 
-        return write.retry(requestOptions.computedWriteTimeout, route) { path ->
-            httpClient.post<CreationAPIKey>(path) {
+        return write.retry(requestOptions.computedWriteTimeout, route) { url ->
+            httpClient.post<CreationAPIKey>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -85,8 +85,8 @@ internal class EndpointAPIKeyImpl(
             referers = referers
         ).stringify()
 
-        return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { path ->
-            httpClient.put<RevisionAPIKey>(path) {
+        return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { url ->
+            httpClient.put<RevisionAPIKey>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
             }
@@ -94,16 +94,16 @@ internal class EndpointAPIKeyImpl(
     }
 
     override suspend fun deleteAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): DeletionAPIKey {
-        return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { path ->
-            httpClient.delete<Deletion>(path) {
+        return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { url ->
+            httpClient.delete<Deletion>(url) {
                 setRequestOptions(requestOptions)
             }.let { DeletionAPIKey(it.date, apiKey) }
         }
     }
 
     override suspend fun listAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
-        return read.retry(requestOptions.computedReadTimeout, route) { path ->
-            httpClient.get<ResponseListAPIKey>(path) {
+        return read.retry(requestOptions.computedReadTimeout, route) { url ->
+            httpClient.get<ResponseListAPIKey>(url) {
                 setRequestOptions(requestOptions)
             }
         }
@@ -113,8 +113,8 @@ internal class EndpointAPIKeyImpl(
         apiKey: APIKey,
         requestOptions: RequestOptions?
     ): ResponseAPIKey {
-        return read.retry(requestOptions.computedReadTimeout, "$route/$apiKey") { path ->
-            httpClient.get<ResponseAPIKey>(path) {
+        return read.retry(requestOptions.computedReadTimeout, "$route/$apiKey") { url ->
+            httpClient.get<ResponseAPIKey>(url) {
                 setRequestOptions(requestOptions)
             }
         }
