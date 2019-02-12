@@ -85,19 +85,19 @@ interface EndpointIndexing {
     suspend fun <T : Indexable> getObject(
         objectID: ObjectID,
         serializer: KSerializer<T>,
-        attributes: List<Attribute>? = null,
+        attributesToRetrieve: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
     ): T
 
     suspend fun getObject(
         objectID: ObjectID,
-        attributes: List<Attribute>? = null,
+        attributesToRetrieve: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
     ): JsonObject
 
     suspend fun getObjects(
         objectIDs: List<ObjectID>,
-        attributes: List<Attribute>? = null,
+        attributesToRetrieve: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
     ): ResponseObjects
 

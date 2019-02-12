@@ -162,29 +162,29 @@ internal class EndpointIndexingImpl(
 
     override suspend fun getObject(
         objectID: ObjectID,
-        attributes: List<Attribute>?,
+        attributesToRetrieve: List<Attribute>?,
         requestOptions: RequestOptions?
     ): JsonObject {
-        return getObjectInternal(objectID, attributes, requestOptions = requestOptions)
+        return getObjectInternal(objectID, attributesToRetrieve, requestOptions = requestOptions)
     }
 
     override suspend fun <T : Indexable> getObject(
         objectID: ObjectID,
         serializer: KSerializer<T>,
-        attributes: List<Attribute>?,
+        attributesToRetrieve: List<Attribute>?,
         requestOptions: RequestOptions?
     ): T {
-        return getObjectInternal(objectID, attributes, requestOptions = requestOptions).let {
+        return getObjectInternal(objectID, attributesToRetrieve, requestOptions = requestOptions).let {
             Json.nonstrict.fromJson(serializer, it)
         }
     }
 
     override suspend fun getObjects(
         objectIDs: List<ObjectID>,
-        attributes: List<Attribute>?,
+        attributesToRetrieve: List<Attribute>?,
         requestOptions: RequestOptions?
     ): ResponseObjects {
-        val requests = objectIDs.map { RequestObjects(indexName, it, attributes) }
+        val requests = objectIDs.map { RequestObjects(indexName, it, attributesToRetrieve) }
         val bodyString = JsonNoNulls.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
         return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/objects") { url ->
