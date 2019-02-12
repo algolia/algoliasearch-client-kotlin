@@ -41,7 +41,7 @@ internal class TestSuiteSearch {
 
             index.apply {
                 tasks += setSettings(settings)
-                tasks += addObjects(objects)
+                tasks += saveObjects(objects)
 
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
                 search(Query("algolia")).nbHits shouldEqual 2

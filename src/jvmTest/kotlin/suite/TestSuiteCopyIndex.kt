@@ -77,7 +77,7 @@ internal class TestSuiteCopyIndex {
                 val synonym = loadSynonym()
                 val queryRule = loadQueryRule()
 
-                tasks += addObjects(objects)
+                tasks += saveObjects(objects)
                 tasks += setSettings(settings)
                 tasks += saveSynonym(synonym)
                 tasks += saveRule(queryRule)

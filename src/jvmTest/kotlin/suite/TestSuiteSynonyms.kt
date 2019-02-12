@@ -55,7 +55,7 @@ internal class TestSuiteSynonyms {
             val tasks = mutableListOf<Task>()
 
             index.apply {
-                tasks += addObjects(objects)
+                tasks += saveObjects(objects)
                 tasks += saveSynonym(synonymOneWay)
                 tasks += saveSynonyms(synonyms)
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()

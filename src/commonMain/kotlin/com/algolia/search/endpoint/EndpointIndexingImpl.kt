@@ -34,7 +34,7 @@ internal class EndpointIndexingImpl(
 ) : EndpointIndexing,
     APIWrapper by api {
 
-    private suspend fun addObject(payload: String, requestOptions: RequestOptions?): CreationObject {
+    private suspend fun saveObject(payload: String, requestOptions: RequestOptions?): CreationObject {
         return write.retry(requestOptions.computedWriteTimeout, indexName.toPath()) { url ->
             httpClient.post<CreationObject>(url) {
                 body = payload
@@ -43,15 +43,15 @@ internal class EndpointIndexingImpl(
         }
     }
 
-    override suspend fun <T> addObject(
+    override suspend fun <T> saveObject(
         data: T,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions?
     ): CreationObject {
-        return addObject(Json.stringify(serializer, data), requestOptions)
+        return saveObject(Json.stringify(serializer, data), requestOptions)
     }
 
-    override suspend fun <T> addObjects(
+    override suspend fun <T> saveObjects(
         data: List<T>,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions?
@@ -61,11 +61,11 @@ internal class EndpointIndexingImpl(
         return batch(operations, requestOptions)
     }
 
-    override suspend fun addObject(data: JsonObject, requestOptions: RequestOptions?): CreationObject {
-        return addObject(data.toString(), requestOptions)
+    override suspend fun saveObject(data: JsonObject, requestOptions: RequestOptions?): CreationObject {
+        return saveObject(data.toString(), requestOptions)
     }
 
-    override suspend fun addObjects(data: List<JsonObject>, requestOptions: RequestOptions?): ResponseBatch {
+    override suspend fun saveObjects(data: List<JsonObject>, requestOptions: RequestOptions?): ResponseBatch {
         val operations = data.map { BatchOperation.AddObject(it) }
 
         return batch(operations, requestOptions)

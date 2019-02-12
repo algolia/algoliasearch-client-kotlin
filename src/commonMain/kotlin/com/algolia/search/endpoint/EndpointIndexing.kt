@@ -22,24 +22,24 @@ interface EndpointIndexing {
 
     val indexName: IndexName
 
-    suspend fun <T> addObject(
+    suspend fun <T> saveObject(
         data: T,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions? = null
     ): CreationObject
 
-    suspend fun <T> addObjects(
+    suspend fun <T> saveObjects(
         data: List<T>,
         serializer: KSerializer<T>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
 
-    suspend fun addObject(
+    suspend fun saveObject(
         data: JsonObject,
         requestOptions: RequestOptions? = null
     ): CreationObject
 
-    suspend fun addObjects(
+    suspend fun saveObjects(
         data: List<JsonObject>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch

@@ -43,7 +43,7 @@ internal class TestSuiteBatching {
             val batches = loadBatches()
 
             index.apply {
-                addObjects(objects).wait() shouldEqual TaskStatus.Published
+                saveObjects(objects).wait() shouldEqual TaskStatus.Published
                 batch(batches).wait() shouldEqual TaskStatus.Published
                 val hits = browse().hits!!.map { it.json }
 

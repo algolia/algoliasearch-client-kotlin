@@ -61,7 +61,7 @@ internal class TestSuiteQueryRules {
             val tasks = mutableListOf<Task>()
 
             index.apply {
-                tasks += addObjects(objects)
+                tasks += saveObjects(objects)
                 tasks += setSettings(Settings(attributesForFaceting = listOf(AttributeForFaceting.Default(brand))))
                 tasks += saveRule(queryRule)
                 tasks += saveRules(queryRules)
