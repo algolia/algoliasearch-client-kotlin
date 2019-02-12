@@ -25,13 +25,13 @@ internal class APIWrapperImpl(
 ) : APIWrapper,
     ConfigurationInterface by configuration {
 
+    // TODO test with proguard
     private val selected = engine?.let { HttpClient(it) } ?: HttpClient()
 
     override val httpClient = selected.config {
         install(JsonFeature) {
             serializer = KotlinxSerializer() // TODO Non strict json
                 .also {
-                    it.register(RevisionIndex.serializer())
                     it.register(ResponseBatches)
                     it.register(Synonym)
                     it.register(JsonObjectSerializer)
