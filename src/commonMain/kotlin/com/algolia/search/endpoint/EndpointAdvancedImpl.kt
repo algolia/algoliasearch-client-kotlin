@@ -50,7 +50,7 @@ internal class EndpointAdvancedImpl(
     }
 
     override suspend fun getTask(taskID: TaskID, requestOptions: RequestOptions?): TaskInfo {
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/task/$taskID")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/task/$taskID")) { path ->
             httpClient.get<TaskInfo>(path) {
                 setRequestOptions(requestOptions)
             }

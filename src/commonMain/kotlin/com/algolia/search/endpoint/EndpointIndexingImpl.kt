@@ -35,7 +35,7 @@ internal class EndpointIndexingImpl(
     APIWrapper by api {
 
     private suspend fun addObject(payload: String, requestOptions: RequestOptions?): CreationObject {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath()) { path ->
             httpClient.post<CreationObject>(path) {
                 body = payload
                 setRequestOptions(requestOptions)
@@ -76,7 +76,7 @@ internal class EndpointIndexingImpl(
         objectID: ObjectID,
         requestOptions: RequestOptions?
     ): RevisionObject {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$objectID")) { path ->
             httpClient.put<RevisionObject>(path) {
                 body = payload
                 setRequestOptions(requestOptions)
@@ -120,7 +120,7 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun deleteObject(objectID: ObjectID, requestOptions: RequestOptions?): DeletionObject {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$objectID")) { path ->
             httpClient.delete<DeletionObject>(path) {
                 setRequestOptions(requestOptions)
             }
@@ -137,7 +137,7 @@ internal class EndpointIndexingImpl(
         val copy = query.clone()
         val bodyString = json { KeyParams to copy.toJsonNoDefaults().urlEncode() }.toString()
 
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/deleteByQuery")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/deleteByQuery")) { path ->
             httpClient.post<RevisionIndex>(path) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -152,7 +152,7 @@ internal class EndpointIndexingImpl(
     ): JsonObject {
         val attributesToRetrieve = attributes?.let { Json.stringify(Attribute.list, it.toList()) }
 
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/$objectID")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/$objectID")) { path ->
             httpClient.get<JsonObject>(path) {
                 parameter(KeyAttributesToRetrieve, attributesToRetrieve)
                 setRequestOptions(requestOptions)
@@ -201,7 +201,7 @@ internal class EndpointIndexingImpl(
         createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionObject {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/$objectID/partial")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$objectID/partial")) { path ->
             httpClient.post<RevisionObject>(path) {
                 body = payload
                 parameter(KeyCreateIfNotExists, createIfNotExists)
@@ -277,7 +277,7 @@ internal class EndpointIndexingImpl(
         val requests = Json.plain.toJson(BatchOperation.list, batchOperations)
         val bodyString = json { KeyRequests to requests }.toString()
 
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/batch")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/batch")) { path ->
             httpClient.post<ResponseBatch>(path) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -286,7 +286,7 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun clearObjects(requestOptions: RequestOptions?): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/clear")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/clear")) { path ->
             httpClient.post<RevisionIndex>(path) {
                 body = ""
                 setRequestOptions(requestOptions)

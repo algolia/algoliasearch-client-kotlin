@@ -25,7 +25,7 @@ data class IndexName(
         return StringUTF8.encode(raw)
     }
 
-    internal fun pathIndexes(suffix: String? = null): String {
+    internal fun toPath(suffix: String? = null): String {
         return "/1/indexes/${encode().string}" + (suffix ?: "")
     }
 

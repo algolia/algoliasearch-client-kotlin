@@ -27,7 +27,7 @@ internal class TestIndexName {
     fun pathIndexes() {
         val index = IndexName("somePath")
 
-        index.pathIndexes() shouldEqual "/1/indexes/somePath"
-        index.pathIndexes("/someSuffix") shouldEqual "/1/indexes/somePath/someSuffix"
+        index.toPath() shouldEqual "/1/indexes/somePath"
+        index.toPath("/someSuffix") shouldEqual "/1/indexes/somePath/someSuffix"
     }
 }

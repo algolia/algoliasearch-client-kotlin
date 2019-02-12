@@ -30,7 +30,7 @@ internal class EndpointIndexImpl(
         val request = RequestCopyOrMove(key, destination, scopes)
         val bodyString = JsonNoNulls.stringify(RequestCopyOrMove.serializer(), request)
 
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("/operation")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/operation")) { path ->
             httpClient.post<RevisionIndex>(path) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -51,7 +51,7 @@ internal class EndpointIndexImpl(
     }
 
     override suspend fun deleteIndex(requestOptions: RequestOptions?): DeletionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes()) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath()) { path ->
             httpClient.delete<DeletionIndex>(path) {
                 setRequestOptions(requestOptions)
             }

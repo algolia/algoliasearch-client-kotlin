@@ -25,7 +25,7 @@ internal class EndpointSearchImpl(
     APIWrapper by api {
 
     private suspend fun search(requestOptions: RequestOptions?): ResponseSearch {
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes()) { path ->
+        return read.retry(requestOptions.computedReadTimeout, indexName.toPath()) { path ->
             httpClient.get<ResponseSearch>(path) {
                 setRequestOptions(requestOptions)
             }
@@ -35,7 +35,7 @@ internal class EndpointSearchImpl(
     override suspend fun search(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
         val copy = query?.clone()
 
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/query")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/query")) { path ->
             httpClient.post<ResponseSearch>(path) {
                 setBody(copy)
                 setRequestOptions(requestOptions)
@@ -52,7 +52,7 @@ internal class EndpointSearchImpl(
                 }.toString()
             } ?: "{}"
 
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/browse")) { path ->
             httpClient.post<ResponseSearch>(path) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -61,7 +61,7 @@ internal class EndpointSearchImpl(
     }
 
     override suspend fun browse(cursor: Cursor, requestOptions: RequestOptions?): ResponseSearch {
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("/browse")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/browse")) { path ->
             httpClient.get<ResponseSearch>(path) {
                 parameter(KeyCursor, cursor)
                 setRequestOptions(requestOptions)
@@ -85,7 +85,7 @@ internal class EndpointSearchImpl(
 
         return read.retry(
             requestOptions.computedReadTimeout,
-            indexName.pathIndexes("/facets/$attribute/query")
+            indexName.toPath("/facets/$attribute/query")
         ) { path ->
             httpClient.post<ResponseSearchFacetValue>(path) {
                 body = bodyString

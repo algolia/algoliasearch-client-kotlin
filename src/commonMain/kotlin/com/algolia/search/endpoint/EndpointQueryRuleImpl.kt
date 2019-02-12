@@ -34,7 +34,7 @@ internal class EndpointQueryRuleImpl(
 
         return write.retry(
             requestOptions.computedReadTimeout,
-            indexName.pathIndexes("$route/${queryRule.objectID}")
+            indexName.toPath("$route/${queryRule.objectID}")
         ) { path ->
             httpClient.put<RevisionIndex>(path) {
                 body = bodyString
@@ -45,7 +45,7 @@ internal class EndpointQueryRuleImpl(
     }
 
     override suspend fun getRule(objectID: ObjectID, requestOptions: RequestOptions?): QueryRule {
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("$route/$objectID")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("$route/$objectID")) { path ->
             httpClient.get<QueryRule>(path) {
                 setRequestOptions(requestOptions)
             }
@@ -57,7 +57,7 @@ internal class EndpointQueryRuleImpl(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("$route/$objectID")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("$route/$objectID")) { path ->
             httpClient.delete<RevisionIndex>(path) {
                 setForwardToReplicas(forwardToReplicas)
                 setRequestOptions(requestOptions)
@@ -68,7 +68,7 @@ internal class EndpointQueryRuleImpl(
     override suspend fun searchRules(query: String?, requestOptions: RequestOptions?): ResponseRules {
         val bodyString = json { query?.let { KeyQuery to it } }.toString()
 
-        return read.retry(requestOptions.computedReadTimeout, indexName.pathIndexes("$route/search")) { path ->
+        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("$route/search")) { path ->
             httpClient.post<ResponseRules>(path) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -77,7 +77,7 @@ internal class EndpointQueryRuleImpl(
     }
 
     override suspend fun clearRules(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("$route/clear")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("$route/clear")) { path ->
             httpClient.post<RevisionIndex>(path) {
                 body = ""
                 setForwardToReplicas(forwardToReplicas)
@@ -94,7 +94,7 @@ internal class EndpointQueryRuleImpl(
     ): RevisionIndex {
         val bodyString = JsonNoNulls.stringify(QueryRule.serializer().list, queryRules)
 
-        return write.retry(requestOptions.computedWriteTimeout, indexName.pathIndexes("$route/batch")) { path ->
+        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("$route/batch")) { path ->
             httpClient.post<RevisionIndex>(path) {
                 body = bodyString
                 setForwardToReplicas(forwardToReplicas)
