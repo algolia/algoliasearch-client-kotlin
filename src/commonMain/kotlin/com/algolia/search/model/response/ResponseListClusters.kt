@@ -8,10 +8,10 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResponseListClusters(
-    @SerialName(KeyClusters) val infos: List<Info>
+    @SerialName(KeyClusters) val clusters: List<Cluster>
 ) {
     @Serializable
-    data class Info(
+    data class Cluster(
         @SerialName(KeyClusterName) val clusterName: ClusterName,
         @SerialName(KeyNbRecords) val nbRecords: Int,
         @SerialName(KeyNbUserIDs) val nbUserIDs: Long,

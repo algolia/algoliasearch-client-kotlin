@@ -26,7 +26,7 @@ internal class TestSuiteMultiCluster {
     @Test
     fun test() {
         runBlocking {
-            val clusters = clientMcm.listClusters().infos
+            val clusters = clientMcm.listClusters().clusters
 
             (clusters.size >= 2).shouldBeTrue()
             clientMcm.assignUserID(userID, clusters.first().clusterName)

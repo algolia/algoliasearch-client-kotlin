@@ -10,7 +10,7 @@ import org.junit.runners.JUnit4
 
 
 @RunWith(JUnit4::class)
-internal class TestTaskInfo : TestSerializer<TaskInfo>(TaskInfo.serializer()) {
+internal class TestTaskCluster : TestSerializer<TaskInfo>(TaskInfo.serializer()) {
 
     override val items = listOf(
         TaskInfo(TaskStatus.Published, false) to json {
