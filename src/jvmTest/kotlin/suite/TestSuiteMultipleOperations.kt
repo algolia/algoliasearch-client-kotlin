@@ -34,7 +34,7 @@ internal class TestSuiteMultipleOperations {
     }
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             val operations = listOf(
                 BatchOperationIndex(indexName1, BatchOperation.AddObject(json)),

@@ -24,7 +24,7 @@ internal class TestSuiteMultiCluster {
     private val userID = "$prefix-unknown".toUserID()
 
     @Test
-    fun list() {
+    fun test() {
         runBlocking {
             val clusters = clientMcm.listClusters().infos
 

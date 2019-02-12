@@ -53,7 +53,7 @@ internal class TestSuiteQueryRules {
     }
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             val objects = loadFileAsObjects("iphones.json")
             val queryRule = loadQueryRule()

@@ -70,7 +70,7 @@ internal class TestSuiteCopyIndex {
     }
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             index.apply {
                 val tasks = mutableListOf<Task>()

@@ -39,7 +39,7 @@ internal class TestSuiteSettings {
     }
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             val settings = loadSettings()
 

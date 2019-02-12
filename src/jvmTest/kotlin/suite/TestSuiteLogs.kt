@@ -13,7 +13,7 @@ import shouldEqual
 internal class TestSuiteLogs {
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             clientAdmin1.apply {
                 listIndexes()

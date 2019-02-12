@@ -49,7 +49,7 @@ internal class TestSuiteSynonyms {
     }
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             val objects = loadFileAsObjects("console.json")
             val tasks = mutableListOf<Task>()

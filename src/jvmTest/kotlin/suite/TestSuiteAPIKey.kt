@@ -34,7 +34,7 @@ internal class TestSuiteAPIKey {
     private val referers = listOf("referer")
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             clientAdmin1.apply {
                 val response = addAPIKey(

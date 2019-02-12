@@ -61,7 +61,7 @@ internal class TestSuiteIndexing {
     }
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             index.apply {
                 val creations = mutableListOf<Task>()

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit
 internal class TestSuiteDNS {
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             val applicationID = System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID()
             val timer = System.currentTimeMillis()

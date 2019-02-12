@@ -33,7 +33,7 @@ internal class TestSuiteSearch {
     }
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             val objects = loadFileAsObjects("companies.json")
             val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Searchable(company)))

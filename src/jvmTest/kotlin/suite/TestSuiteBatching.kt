@@ -36,7 +36,7 @@ internal class TestSuiteBatching {
     }
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             val objects = loadFileAsObjects("numbers.json")
             val expected = loadScratch("batches_result.json").readText()
