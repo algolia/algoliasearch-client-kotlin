@@ -26,11 +26,11 @@ import kotlinx.coroutines.delay
 
 
 class ClientSearch private constructor(
-    private val apiWrapper: APIWrapperImpl
+    private val api: APIWrapperImpl
 ) :
-    EndpointMultipleIndex by EndpointMultipleIndexImpl(apiWrapper),
-    EndpointAPIKey by EndpointAPIKeyImpl(apiWrapper),
-    EndpointMultiCluster by EndpointMulticlusterImpl(apiWrapper) {
+    EndpointMultipleIndex by EndpointMultipleIndexImpl(api),
+    EndpointAPIKey by EndpointAPIKeyImpl(api),
+    EndpointMultiCluster by EndpointMulticlusterImpl(api) {
 
     constructor(
         applicationID: ApplicationID,
@@ -50,7 +50,7 @@ class ClientSearch private constructor(
 
     fun getIndex(indexName: IndexName): Index {
         return indexes.getOrPut(indexName) {
-            Index(apiWrapper, indexName)
+            Index(api, indexName)
         }
     }
 
@@ -97,7 +97,7 @@ class ClientSearch private constructor(
         logType: LogType? = null,
         requestOptions: RequestOptions? = null
     ): ResponseLogs {
-        return apiWrapper.run {
+        return api.run {
             read.retry(requestOptions.computedReadTimeout, "/1/logs") { url ->
                 httpClient.get<ResponseLogs>(url) {
                     parameter(KeyOffset, offset)
