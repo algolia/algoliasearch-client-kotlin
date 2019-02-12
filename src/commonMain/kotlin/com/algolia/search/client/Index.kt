@@ -5,7 +5,7 @@ import com.algolia.search.model.IndexName
 
 
 data class Index internal constructor(
-    private val api: APIWrapper,
+    internal val api: APIWrapper,
     override val indexName: IndexName
 ) : EndpointSearch by EndpointSearchImpl(api, indexName),
     EndpointSettings by EndpointSettingsImpl(api, indexName),
