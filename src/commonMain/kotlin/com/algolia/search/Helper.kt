@@ -43,7 +43,6 @@ fun String.toClusterName(): ClusterName {
     return ClusterName(this)
 }
 
-// Todo find non conflicting name
 infix fun Float.and(longitude: Float): Point {
     return Point(this, longitude)
 }
