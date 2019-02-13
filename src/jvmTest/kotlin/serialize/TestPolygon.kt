@@ -1,7 +1,7 @@
 package serialize
 
 import com.algolia.search.model.enums.Polygon
-import com.algolia.search.to
+import com.algolia.search.and
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -17,14 +17,14 @@ internal class TestPolygon : TestSerializer<Polygon>(Polygon) {
     companion object {
 
         val polygon = Polygon(
-            1f to 2f,
-            3f to 4f,
-            5f to 6f,
-            7f to 8f,
-            9f to 10f,
-            11f to 12f,
-            13f to 14f,
-            15f to 16f
+            1f and 2f,
+            3f and 4f,
+            5f and 6f,
+            7f and 8f,
+            9f and 10f,
+            11f and 12f,
+            13f and 14f,
+            15f and 16f
         )
         val json = jsonArray {
             +(1f as Number)

@@ -1,13 +1,13 @@
 package query
 
 import buildTest
-import com.algolia.search.model.*
+import com.algolia.search.limit
+import com.algolia.search.model.Attribute
 import com.algolia.search.model.enums.AlternativesAsExact
 import com.algolia.search.model.enums.QueryLanguage
 import com.algolia.search.model.enums.ResponseFields
 import com.algolia.search.model.search.Query
 import com.algolia.search.query.*
-import com.algolia.search.to
 import facetA
 import facetB
 import groupOrA
@@ -95,7 +95,7 @@ internal class TestQueryHelper {
     @Test
     fun attributesToSnippet() {
         queryBuilder {
-            setAttributesToSnippet(attributeA to 10, attributeB to null)
+            setAttributesToSnippet(attributeA limit 10, attributeB limit null)
             attributesToSnippet?.map { it.raw } shouldEqual listOf("attributeA:10", "attributeB")
             setSnippetAllAttributes()
             attributesToSnippet?.map { it.raw } shouldEqual listOf("*")

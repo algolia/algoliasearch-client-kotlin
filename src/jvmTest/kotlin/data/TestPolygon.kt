@@ -1,7 +1,7 @@
 package data
 
 import com.algolia.search.model.enums.Polygon
-import com.algolia.search.to
+import com.algolia.search.and
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -10,10 +10,10 @@ import shouldEqual
 @RunWith(JUnit4::class)
 internal class TestPolygon {
 
-    private val point1 = 1f to 2f
-    private val point2 = 3f to 4f
-    private val point3 = 5f to 6f
-    private val point4 = 7f to 8f
+    private val point1 = 1f and 2f
+    private val point2 = 3f and 4f
+    private val point3 = 5f and 6f
+    private val point4 = 7f and 8f
     private val polygon = Polygon(point1, point2, point3, point4)
 
     @Test
@@ -45,6 +45,6 @@ internal class TestPolygon {
 
     @Test
     fun equality() {
-        polygon shouldEqual Polygon(1f to 2f, 3f to 4f, 5f to 6f, 7f to 8f)
+        polygon shouldEqual Polygon(1f and 2f, 3f and 4f, 5f and 6f, 7f and 8f)
     }
 }

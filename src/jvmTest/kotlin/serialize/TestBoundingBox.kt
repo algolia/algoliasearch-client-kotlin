@@ -1,7 +1,7 @@
 package serialize
 
 import com.algolia.search.model.enums.BoundingBox
-import com.algolia.search.to
+import com.algolia.search.and
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -16,7 +16,7 @@ internal class TestBoundingBox : TestSerializer<BoundingBox>(BoundingBox) {
 
     companion object {
 
-        val boundingBox = BoundingBox(1f to 2f, 3f to 4f)
+        val boundingBox = BoundingBox(1f and 2f, 3f and 4f)
         val json = jsonArray {
             +(1f as Number)
             +(2f as Number)

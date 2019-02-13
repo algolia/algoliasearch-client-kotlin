@@ -1,12 +1,10 @@
 package com.algolia.search
 
 import com.algolia.search.model.*
-import com.algolia.search.model.APIKey
-import com.algolia.search.model.ClusterName
-import com.algolia.search.model.task.TaskID
 import com.algolia.search.model.enums.Point
 import com.algolia.search.model.enums.Snippet
 import com.algolia.search.model.search.Cursor
+import com.algolia.search.model.task.TaskID
 
 
 fun String.toIndexName(): IndexName {
@@ -45,11 +43,11 @@ fun String.toClusterName(): ClusterName {
     return ClusterName(this)
 }
 
-
-infix fun Float.to(longitude: Float): Point {
+// Todo find non conflicting name
+infix fun Float.and(longitude: Float): Point {
     return Point(this, longitude)
 }
 
-infix fun Attribute.to(numberOfWords: Int?): Snippet {
+infix fun Attribute.limit(numberOfWords: Int?): Snippet {
     return Snippet(this, numberOfWords)
 }
