@@ -61,7 +61,7 @@ class ClientSearch private constructor(
             }.let {
                 if (it.all { it == TaskStatus.Published }) return it
             }
-            delay(2000L)
+            delay(1000L)
         }
     }
 

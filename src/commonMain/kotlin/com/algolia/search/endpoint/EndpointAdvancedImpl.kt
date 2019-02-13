@@ -45,7 +45,7 @@ internal class EndpointAdvancedImpl(
             getTask(taskID, requestOptions).status.let {
                 if (it == TaskStatus.Published) return it
             }
-            delay(2000L)
+            delay(1000L)
         }
     }
 
