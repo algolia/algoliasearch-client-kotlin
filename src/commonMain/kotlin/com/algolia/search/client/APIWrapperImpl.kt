@@ -46,7 +46,7 @@ internal class APIWrapperImpl(
         }
         install(Logging) {
             level = logLevel
-            logger = Logger.SIMPLE
+            logger = Logger.SIMPLE // Todo define production (and configurable) Logger
         }
     }
 

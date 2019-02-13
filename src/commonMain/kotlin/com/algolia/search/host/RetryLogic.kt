@@ -37,7 +37,7 @@ internal class RetryLogic(
                 response
             }
         } catch (exception: Exception) {
-            if (attempt > maxAttempts) throw exception
+            if (attempt > maxAttempts) throw exception // Todo Unreachable host attempt and exceptions - stack of
             when (exception) {
                 is BadResponseStatusException -> {
                     val code = exception.response.status.value
