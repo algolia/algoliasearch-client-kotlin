@@ -42,7 +42,7 @@ internal fun testSuiteIndexName(suffix: String): IndexName {
 }
 
 internal fun loadScratch(name: String): File {
-    return File("/Users/quentinlitzler/IdeaProjects/algoliasearch-client-kotlin/src/commonTest/scratches/$name")
+    return File("src/commonTest/scratches/$name")
 }
 
 internal fun cleanIndex(client: ClientSearch, suffix: String) {
