@@ -6,9 +6,7 @@ import com.algolia.search.exception.EmptyStringException
 data class ApplicationID(override val raw: String) : Raw<String> {
 
     init {
-        if (raw.isBlank()) {
-            throw EmptyStringException("ApplicationID")
-        }
+        if (raw.isEmpty()) throw EmptyStringException("ApplicationID")
     }
 
     override fun toString(): String {

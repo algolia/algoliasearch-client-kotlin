@@ -13,9 +13,7 @@ import kotlinx.serialization.internal.StringSerializer
 data class Attribute(override val raw: String) : Raw<String> {
 
     init {
-        if (raw.isBlank()) {
-            throw EmptyStringException("Attribute")
-        }
+        if (raw.isEmpty()) throw EmptyStringException("Attribute")
     }
 
     override fun toString(): String {

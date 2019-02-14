@@ -10,9 +10,7 @@ import kotlinx.serialization.internal.StringSerializer
 data class APIKey(override val raw: String) : Raw<String> {
 
     init {
-        if (raw.isBlank()) {
-            throw EmptyStringException("APIKey")
-        }
+        if (raw.isEmpty()) throw EmptyStringException("APIKey")
     }
 
     override fun toString(): String {
