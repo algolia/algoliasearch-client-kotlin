@@ -1,6 +1,5 @@
 package com.algolia.search.model.response
 
-import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.serialize.KeyHits
 import com.algolia.search.serialize.KeyNbHits
 import com.algolia.search.serialize.KeyNbPages
@@ -11,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ResponseRules(
-    @SerialName(KeyHits) val hits: List<QueryRule>,
+    @SerialName(KeyHits) val hits: List<ResponseQueryRule>,
     @SerialName(KeyNbHits) val nbHits: Int,
     @SerialName(KeyPage) val page: Int,
     @SerialName(KeyNbPages) val nbPages: Int

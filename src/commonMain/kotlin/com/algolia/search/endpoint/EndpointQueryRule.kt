@@ -5,6 +5,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.queryrule.Anchoring
 import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.response.ResponseQueryRule
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.revision.RevisionIndex
 
@@ -29,7 +30,7 @@ interface EndpointQueryRule {
     suspend fun getRule(
         objectID: ObjectID,
         requestOptions: RequestOptions? = null
-    ): QueryRule
+    ): ResponseQueryRule
 
     suspend fun deleteRule(
         objectID: ObjectID,

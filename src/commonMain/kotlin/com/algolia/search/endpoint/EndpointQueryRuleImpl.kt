@@ -9,6 +9,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.queryrule.Anchoring
 import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.model.request.RequestSearchRules
+import com.algolia.search.model.response.ResponseQueryRule
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.serialize.JsonNoNulls
@@ -44,9 +45,9 @@ internal class EndpointQueryRuleImpl(
         }
     }
 
-    override suspend fun getRule(objectID: ObjectID, requestOptions: RequestOptions?): QueryRule {
+    override suspend fun getRule(objectID: ObjectID, requestOptions: RequestOptions?): ResponseQueryRule {
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath("$route/$objectID")) { url ->
-            httpClient.get<QueryRule>(url) {
+            httpClient.get<ResponseQueryRule>(url) {
                 setRequestOptions(requestOptions)
             }
         }

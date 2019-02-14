@@ -1,7 +1,7 @@
 package suite
 
-import com.algolia.search.model.AttributeForFaceting
 import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
@@ -70,7 +70,7 @@ internal class TestSuiteQueryRules {
 
                 getRule(queryRule.objectID) shouldEqual queryRule
                 queryRules.forEach { getRule(it.objectID) shouldEqual it }
-                val searches = searchRules().hits
+                val searches = searchRules().hits.map { it.queryRule }
 
                 searches.find { it.objectID == queryRule.objectID }.shouldNotBeNull()
                 searches.find { it.objectID == queryRules.first().objectID }.shouldNotBeNull()
