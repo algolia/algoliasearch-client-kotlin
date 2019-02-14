@@ -24,7 +24,7 @@ internal class TestSuiteDNS {
                     applicationID,
                     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey(),
                     hosts = listOf(
-                        "https://Algolia.biz",
+                        "https://algolia.biz",
                         "https://$applicationID-1.algolianet.com",
                         "https://$applicationID-2.algolianet.com",
                         "https://$applicationID-3.algolianet.com"
