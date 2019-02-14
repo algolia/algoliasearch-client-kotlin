@@ -6,14 +6,14 @@ import com.algolia.search.client.setForwardToReplicas
 import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
+import com.algolia.search.model.queryrule.Anchoring
 import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.request.RequestSearchRules
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyClearExistingRules
-import com.algolia.search.serialize.KeyQuery
 import io.ktor.client.request.*
-import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
 
@@ -65,8 +65,17 @@ internal class EndpointQueryRuleImpl(
         }
     }
 
-    override suspend fun searchRules(query: String?, requestOptions: RequestOptions?): ResponseRules {
-        val bodyString = json { query?.let { KeyQuery to it } }.toString()
+    override suspend fun searchRules(
+        query: String?,
+        anchoring: Anchoring?,
+        context: String?,
+        page: Int?,
+        hitsPerPage: Int?,
+        enabled: Boolean?,
+        requestOptions: RequestOptions?
+    ): ResponseRules {
+        val request = RequestSearchRules(query, anchoring, context, page, hitsPerPage, enabled)
+        val bodyString = JsonNoNulls.stringify(RequestSearchRules.serializer(), request)
 
         return read.retry(requestOptions.computedReadTimeout, indexName.toPath("$route/search")) { url ->
             httpClient.post<ResponseRules>(url) {

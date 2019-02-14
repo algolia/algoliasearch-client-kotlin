@@ -3,6 +3,7 @@ package com.algolia.search.endpoint
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
+import com.algolia.search.model.queryrule.Anchoring
 import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.revision.RevisionIndex
@@ -38,6 +39,11 @@ interface EndpointQueryRule {
 
     suspend fun searchRules(
         query: String? = null,
+        anchoring: Anchoring? = null,
+        context: String? = null,
+        page: Int? = null,
+        hitsPerPage: Int? = null,
+        enabled: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): ResponseRules
 
