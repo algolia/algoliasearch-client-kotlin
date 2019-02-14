@@ -1,5 +1,6 @@
-package com.algolia.search.model
+package com.algolia.search.model.settings
 
+import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeySearchable
 import com.algolia.search.serialize.regexFilterOnly
@@ -23,9 +24,9 @@ sealed class AttributeForFaceting(open val attribute: Attribute) {
 
         override fun serialize(encoder: Encoder, obj: AttributeForFaceting) {
             val string = when (obj) {
-                is AttributeForFaceting.Default -> obj.attribute.raw
-                is AttributeForFaceting.FilterOnly -> "$KeyFilterOnly(${obj.attribute.raw})"
-                is AttributeForFaceting.Searchable -> "$KeySearchable(${obj.attribute.raw})"
+                is Default -> obj.attribute.raw
+                is FilterOnly -> "$KeyFilterOnly(${obj.attribute.raw})"
+                is Searchable -> "$KeySearchable(${obj.attribute.raw})"
             }
             StringSerializer.serialize(encoder, string)
         }

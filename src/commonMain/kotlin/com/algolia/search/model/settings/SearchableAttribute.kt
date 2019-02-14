@@ -1,5 +1,6 @@
-package com.algolia.search.model
+package com.algolia.search.model.settings
 
+import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyOrdered
 import com.algolia.search.serialize.KeyUnordered
 import com.algolia.search.serialize.regexOrdered

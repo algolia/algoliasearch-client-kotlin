@@ -1,8 +1,8 @@
 package serialize
 
 import attributeA
-import com.algolia.search.model.AttributeForFaceting
-import com.algolia.search.model.AttributeForFaceting.*
+import com.algolia.search.model.settings.AttributeForFaceting
+import com.algolia.search.model.settings.AttributeForFaceting.*
 import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeySearchable
 import kotlinx.serialization.json.JsonLiteral

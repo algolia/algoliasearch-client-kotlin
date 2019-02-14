@@ -1,8 +1,8 @@
 package serialize
 
 import attributeA
-import com.algolia.search.model.SearchableAttribute
-import com.algolia.search.model.SearchableAttribute.*
+import com.algolia.search.model.settings.SearchableAttribute
+import com.algolia.search.model.settings.SearchableAttribute.*
 import com.algolia.search.serialize.KeyOrdered
 import com.algolia.search.serialize.KeyUnordered
 import kotlinx.serialization.json.JsonLiteral

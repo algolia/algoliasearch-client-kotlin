@@ -4,7 +4,7 @@ import com.algolia.search.client.APIWrapper
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.SearchableAttribute
+import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.enums.NumericAttributeFilter
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.settings.Settings
