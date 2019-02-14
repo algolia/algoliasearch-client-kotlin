@@ -31,7 +31,7 @@ internal class TestSuiteSynonyms {
     private val synonymOneWay = Synonym.OneWay(wiiToWiiU, "wii", listOf("wii U"))
     private val synonymPlaceholder = Synonym.Placeholder(
         playstation,
-        "<PLAYSTATIONVERSION>",
+        Synonym.Placeholder.Token("PLAYSTATIONVERSION"),
         listOf("1", "One", "2", "3", "4", "4 pro")
     )
     private val synonymAlternative1 =

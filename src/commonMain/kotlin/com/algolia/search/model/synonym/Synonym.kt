@@ -1,6 +1,9 @@
 package com.algolia.search.model.synonym
 
+import com.algolia.search.exception.EmptyListException
+import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.ObjectID
+import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*
 import com.algolia.search.toObjectID
 import kotlinx.serialization.*
@@ -18,25 +21,57 @@ sealed class Synonym(open val objectID: ObjectID) {
         override val objectID: ObjectID,
         val input: String,
         val synonyms: List<String>
-    ) : Synonym(objectID)
+    ) : Synonym(objectID) {
+
+        init {
+            if (input.isEmpty()) throw EmptyStringException("Input")
+            if (synonyms.isEmpty()) throw EmptyListException("Synonyms")
+        }
+    }
 
     data class MultiWay(
         override val objectID: ObjectID,
         val synonyms: List<String>
-    ) : Synonym(objectID)
+    ) : Synonym(objectID) {
+
+        init {
+            if (synonyms.isEmpty()) throw EmptyListException("Synonyms")
+        }
+    }
 
     data class AlternativeCorrections(
         override val objectID: ObjectID,
         val word: String,
         val corrections: List<String>,
         val typo: SynonymType.Typo
-    ) : Synonym(objectID)
+    ) : Synonym(objectID) {
+
+        init {
+            if (word.isEmpty()) throw EmptyStringException("Word")
+            if (corrections.isEmpty()) throw EmptyListException("Corrections")
+        }
+
+    }
 
     data class Placeholder(
         override val objectID: ObjectID,
-        val placeholder: String,
+        val placeholder: Token,
         val replacements: List<String>
-    ) : Synonym(objectID)
+    ) : Synonym(objectID) {
+
+        init {
+            if (replacements.isEmpty()) throw EmptyListException("Replacements")
+        }
+
+        data class Token(val token: String) : Raw<String> {
+
+            override val raw = "<$token>"
+
+            init {
+                if (token.isEmpty()) throw EmptyStringException("Token")
+            }
+        }
+    }
 
     data class Other(
         val json: JsonObject,
@@ -71,7 +106,7 @@ sealed class Synonym(open val objectID: ObjectID) {
                 is Placeholder -> json {
                     KeyObjectID to obj.objectID.raw
                     KeyType to KeyPlaceholder
-                    KeyPlaceholder to obj.placeholder
+                    KeyPlaceholder to obj.placeholder.raw
                     KeyReplacements to Json.plain.toJson(StringSerializer.list, obj.replacements)
                 }
                 is Other -> obj.json
@@ -108,7 +143,7 @@ sealed class Synonym(open val objectID: ObjectID) {
                     )
                     KeyPlaceholder -> Placeholder(
                         objectID,
-                        element[KeyPlaceholder].content,
+                        Placeholder.Token(element[KeyPlaceholder].content),
                         element[KeyReplacements].jsonArray.map { it.content }
                     )
                     else -> Other(element, objectID)
