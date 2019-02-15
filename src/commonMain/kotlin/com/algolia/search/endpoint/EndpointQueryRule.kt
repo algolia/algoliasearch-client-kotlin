@@ -52,4 +52,10 @@ interface EndpointQueryRule {
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
+
+    suspend fun replaceAllRules(
+        queryRules: List<QueryRule>,
+        forwardToReplicas: Boolean? = null,
+        requestOptions: RequestOptions? = null
+    ): RevisionIndex
 }

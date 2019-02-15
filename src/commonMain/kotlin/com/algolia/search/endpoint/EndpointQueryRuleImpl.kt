@@ -110,4 +110,12 @@ internal class EndpointQueryRuleImpl(
             }
         }
     }
+
+    override suspend fun replaceAllRules(
+        queryRules: List<QueryRule>,
+        forwardToReplicas: Boolean?,
+        requestOptions: RequestOptions?
+    ): RevisionIndex {
+        return saveRules(queryRules, forwardToReplicas, true, requestOptions)
+    }
 }
