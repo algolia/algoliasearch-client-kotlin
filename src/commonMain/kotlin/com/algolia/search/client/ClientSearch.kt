@@ -23,7 +23,6 @@ import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.withTimeout
 
 
 class ClientSearch private constructor(
@@ -66,10 +65,8 @@ class ClientSearch private constructor(
         }
     }
 
-    suspend fun ResponseBatches.waitAll(timeout: Long = 20000L): List<TaskStatus> {
-        return withTimeout(timeout) {
-            tasks.waitAll()
-        }
+    suspend fun ResponseBatches.waitAll(): List<TaskStatus> {
+        return tasks.waitAll()
     }
 
     suspend fun CreationAPIKey.wait(): ResponseAPIKey {
