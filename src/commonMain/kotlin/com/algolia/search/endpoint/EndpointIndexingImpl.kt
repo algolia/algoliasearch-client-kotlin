@@ -4,6 +4,7 @@ import com.algolia.search.client.*
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
+import com.algolia.search.model.index.Scope
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.PartialUpdate
@@ -16,14 +17,17 @@ import com.algolia.search.model.response.deletion.DeletionObject
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.task.Task
 import com.algolia.search.query.clone
 import com.algolia.search.serialize.*
+import com.algolia.search.toIndexName
 import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 import kotlinx.serialization.list
+import kotlin.random.Random
 
 
 internal class EndpointIndexingImpl(
@@ -241,6 +245,35 @@ internal class EndpointIndexingImpl(
                 body = ""
                 setRequestOptions(requestOptions)
             }
+        }
+    }
+
+    override suspend fun replaceAllObjects(
+        data: List<JsonObject>
+    ): List<Task> {
+        val operations = data.map { BatchOperation.AddObject(it) }
+
+        return replaceAllObjectsInternal(operations)
+    }
+
+    override suspend fun <T : Indexable> replaceAllObjects(
+        serializer: KSerializer<T>,
+        data: List<T>
+    ): List<Task> {
+        val operations = data.map { BatchOperation.AddObject.from(serializer, it) }
+
+        return replaceAllObjectsInternal(operations)
+    }
+
+    private suspend fun replaceAllObjectsInternal(batchOperations: List<BatchOperation>): List<Task> {
+        val indexSource = Index(api, indexName)
+        val indexDestination = Index(api, "${indexName}_tmp_{$Random.nextInt()}".toIndexName())
+        val scopes = listOf(Scope.Settings, Scope.Rules, Scope.Synonyms)
+
+        return mutableListOf<Task>().also {
+            it += indexSource.copyIndex(indexDestination.indexName, scopes)
+            it += indexDestination.batch(batchOperations)
+            it += indexDestination.moveIndex(indexName)
         }
     }
 }

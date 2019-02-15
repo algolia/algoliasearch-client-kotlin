@@ -14,6 +14,7 @@ import com.algolia.search.model.response.deletion.DeletionObject
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.task.Task
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JsonObject
 
@@ -66,6 +67,15 @@ interface EndpointIndexing {
         data: List<Pair<ObjectID, JsonObject>>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
+
+    suspend fun replaceAllObjects(
+        data: List<JsonObject>
+    ): List<Task>
+
+    suspend fun <T : Indexable> replaceAllObjects(
+        serializer: KSerializer<T>,
+        data: List<T>
+    ): List<Task>
 
     suspend fun deleteObject(
         objectID: ObjectID,
