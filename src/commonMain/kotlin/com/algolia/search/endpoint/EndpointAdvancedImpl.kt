@@ -19,6 +19,7 @@ import io.ktor.client.request.parameter
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withTimeout
 
 
 internal class EndpointAdvancedImpl(
@@ -27,23 +28,33 @@ internal class EndpointAdvancedImpl(
 ) : EndpointAdvanced,
     APIWrapper by api {
 
-    override suspend fun List<Task>.wait(requestOptions: RequestOptions?): List<TaskStatus> {
-        return coroutineScope {
-            map { async { it.wait(requestOptions) } }.map { it.await() }
-        }
-    }
+    override suspend fun List<Task>.wait(timeout: Long?, requestOptions: RequestOptions?): List<TaskStatus> {
 
-    override suspend fun Task.wait(requestOptions: RequestOptions?): TaskStatus {
-        return waitTask(taskID, requestOptions)
-    }
-
-    override suspend fun waitTask(taskID: TaskID, requestOptions: RequestOptions?): TaskStatus {
-        while (true) {
-            getTask(taskID, requestOptions).status.let {
-                if (it == TaskStatus.Published) return it
+        suspend fun loop(): List<TaskStatus> {
+            return coroutineScope {
+                map { async { it.wait(requestOptions = requestOptions) } }.map { it.await() }
             }
-            delay(1000L)
         }
+
+        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
+    }
+
+    override suspend fun Task.wait(timeout: Long?, requestOptions: RequestOptions?): TaskStatus {
+        return waitTask(taskID, timeout, requestOptions)
+    }
+
+    override suspend fun waitTask(taskID: TaskID, timeout: Long?, requestOptions: RequestOptions?): TaskStatus {
+
+        suspend fun loop(): TaskStatus {
+            while (true) {
+                getTask(taskID, requestOptions).status.let {
+                    if (it == TaskStatus.Published) return it
+                }
+                delay(1000L)
+            }
+        }
+
+        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
     override suspend fun getTask(taskID: TaskID, requestOptions: RequestOptions?): TaskInfo {

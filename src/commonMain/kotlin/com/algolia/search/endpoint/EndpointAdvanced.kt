@@ -16,11 +16,11 @@ interface EndpointAdvanced {
 
     suspend fun getTask(taskID: TaskID, requestOptions: RequestOptions? = null): TaskInfo
 
-    suspend fun waitTask(taskID: TaskID, requestOptions: RequestOptions? = null): TaskStatus
+    suspend fun waitTask(taskID: TaskID, timeout: Long? = null, requestOptions: RequestOptions? = null): TaskStatus
 
-    suspend fun Task.wait(requestOptions: RequestOptions? = null): TaskStatus
+    suspend fun Task.wait(timeout: Long? = null, requestOptions: RequestOptions? = null): TaskStatus
 
-    suspend fun List<Task>.wait(requestOptions: RequestOptions? = null): List<TaskStatus>
+    suspend fun List<Task>.wait(timeout: Long? = null, requestOptions: RequestOptions? = null): List<TaskStatus>
 
     suspend fun getLogs(
         offset: Int? = null,

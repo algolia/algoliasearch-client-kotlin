@@ -23,6 +23,7 @@ import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withTimeout
 
 
 class ClientSearch private constructor(
@@ -54,41 +55,56 @@ class ClientSearch private constructor(
         }
     }
 
-    suspend fun List<TaskIndex>.waitAll(): List<TaskStatus> {
-        while (true) {
-            coroutineScope {
-                map { async { getIndex(it.indexName).getTask(it.taskID) } }.map { it.await().status }
-            }.let {
-                if (it.all { it == TaskStatus.Published }) return it
+    suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus> {
+
+        suspend fun loop(): List<TaskStatus> {
+            while (true) {
+                coroutineScope {
+                    map { async { getIndex(it.indexName).getTask(it.taskID) } }.map { it.await().status }
+                }.let {
+                    if (it.all { it == TaskStatus.Published }) return it
+                }
+                delay(1000L)
             }
-            delay(1000L)
         }
+
+        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
     suspend fun ResponseBatches.waitAll(): List<TaskStatus> {
         return tasks.waitAll()
     }
 
-    suspend fun CreationAPIKey.wait(): ResponseAPIKey {
-        while (true) {
-            try {
-                return getAPIKey(apiKey)
-            } catch (exception: BadResponseStatusException) {
-                if (exception.statusCode != HttpStatusCode.NotFound) throw exception
+    suspend fun CreationAPIKey.wait(timeout: Long? = null): ResponseAPIKey {
+
+        suspend fun loop(): ResponseAPIKey {
+            while (true) {
+                try {
+                    return getAPIKey(apiKey)
+                } catch (exception: BadResponseStatusException) {
+                    if (exception.statusCode != HttpStatusCode.NotFound) throw exception
+                }
+                delay(1000L)
             }
-            delay(1000L)
         }
+
+        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
-    suspend fun DeletionAPIKey.wait(): Boolean {
-        while (true) {
-            try {
-                getAPIKey(apiKey)
-            } catch (exception: BadResponseStatusException) {
-                if (exception.statusCode == HttpStatusCode.NotFound) return true else throw exception
+    suspend fun DeletionAPIKey.wait(timeout: Long? = null): Boolean {
+
+        suspend fun loop(): Boolean {
+            while (true) {
+                try {
+                    getAPIKey(apiKey)
+                } catch (exception: BadResponseStatusException) {
+                    if (exception.statusCode == HttpStatusCode.NotFound) return true else throw exception
+                }
+                delay(1000L)
             }
-            delay(1000L)
         }
+
+        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
     suspend fun getLogs(
