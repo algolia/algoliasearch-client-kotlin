@@ -109,4 +109,12 @@ internal class EndpointSynonymImpl(
             }
         }
     }
+
+    override suspend fun replaceAllSynonyms(
+        synonyms: List<Synonym>,
+        forwardToReplicas: Boolean?,
+        requestOptions: RequestOptions?
+    ): RevisionIndex {
+        return saveSynonyms(synonyms, forwardToReplicas, true, requestOptions)
+    }
 }
