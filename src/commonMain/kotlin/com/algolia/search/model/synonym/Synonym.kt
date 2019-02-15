@@ -74,8 +74,8 @@ sealed class Synonym(open val objectID: ObjectID) {
     }
 
     data class Other(
-        val json: JsonObject,
-        override val objectID: ObjectID
+        override val objectID: ObjectID,
+        val json: JsonObject
     ) : Synonym(objectID)
 
     @Serializer(Synonym::class)
@@ -146,9 +146,9 @@ sealed class Synonym(open val objectID: ObjectID) {
                         Placeholder.Token(element[KeyPlaceholder].content),
                         element[KeyReplacements].jsonArray.map { it.content }
                     )
-                    else -> Other(element, objectID)
+                    else -> Other(objectID, element)
                 }
-            } else Other(element, objectID)
+            } else Other(objectID, element)
         }
     }
 }

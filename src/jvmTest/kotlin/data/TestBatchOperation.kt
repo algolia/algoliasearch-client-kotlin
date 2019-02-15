@@ -20,10 +20,10 @@ internal class TestBatchOperation {
     @Test
     fun raw() {
         AddObject(json).raw shouldEqual KeyAddObject
-        ReplaceObject(json, objectID).raw shouldEqual KeyUpdateObject
+        ReplaceObject(objectID, json).raw shouldEqual KeyUpdateObject
         DeleteObject(objectID).raw shouldEqual KeyDeleteObject
-        UpdateObject(json, objectID).raw shouldEqual KeyPartialUpdateObject
-        UpdateObject(json, objectID, false).raw shouldEqual KeyPartialUpdateObjectNoCreate
+        UpdateObject(objectID, json).raw shouldEqual KeyPartialUpdateObject
+        UpdateObject(objectID, json, false).raw shouldEqual KeyPartialUpdateObjectNoCreate
         ClearIndex.raw shouldEqual KeyClear
         DeleteIndex.raw shouldEqual KeyDelete
         Other(unknown, json).raw shouldEqual unknown

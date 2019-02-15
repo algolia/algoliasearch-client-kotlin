@@ -23,14 +23,14 @@ interface EndpointIndexing {
     val indexName: IndexName
 
     suspend fun <T> saveObject(
-        data: T,
         serializer: KSerializer<T>,
+        data: T,
         requestOptions: RequestOptions? = null
     ): CreationObject
 
     suspend fun <T> saveObjects(
-        data: List<T>,
         serializer: KSerializer<T>,
+        data: List<T>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
 
@@ -45,25 +45,25 @@ interface EndpointIndexing {
     ): ResponseBatch
 
     suspend fun <T : Indexable> replaceObject(
-        data: T,
         serializer: KSerializer<T>,
+        data: T,
         requestOptions: RequestOptions? = null
     ): RevisionObject
 
     suspend fun <T : Indexable> replaceObjects(
-        data: List<T>,
         serializer: KSerializer<T>,
+        data: List<T>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
 
     suspend fun replaceObject(
-        data: JsonObject,
         objectID: ObjectID,
+        data: JsonObject,
         requestOptions: RequestOptions? = null
     ): RevisionObject
 
     suspend fun replaceObjects(
-        data: List<Pair<JsonObject, ObjectID>>,
+        data: List<Pair<ObjectID, JsonObject>>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
 
@@ -83,8 +83,8 @@ interface EndpointIndexing {
     ): RevisionIndex
 
     suspend fun <T : Indexable> getObject(
-        objectID: ObjectID,
         serializer: KSerializer<T>,
+        objectID: ObjectID,
         attributesToRetrieve: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
     ): T
@@ -102,14 +102,14 @@ interface EndpointIndexing {
     ): ResponseObjects
 
     suspend fun partialUpdateObject(
-        partialUpdate: PartialUpdate,
         objectID: ObjectID,
+        partialUpdate: PartialUpdate,
         createIfNotExists: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): RevisionObject
 
     suspend fun partialUpdateObjects(
-        data: List<Pair<PartialUpdate, ObjectID>>,
+        data: List<Pair<ObjectID, PartialUpdate>>,
         createIfNotExists: Boolean = true,
         requestOptions: RequestOptions? = null
     ): ResponseBatch

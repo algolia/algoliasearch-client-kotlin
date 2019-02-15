@@ -42,19 +42,19 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun <T> saveObject(
-        data: T,
         serializer: KSerializer<T>,
+        data: T,
         requestOptions: RequestOptions?
     ): CreationObject {
         return saveObject(Json.stringify(serializer, data), requestOptions)
     }
 
     override suspend fun <T> saveObjects(
-        data: List<T>,
         serializer: KSerializer<T>,
+        data: List<T>,
         requestOptions: RequestOptions?
     ): ResponseBatch {
-        val operations = data.map { BatchOperation.AddObject.from(it, serializer) }
+        val operations = data.map { BatchOperation.AddObject.from(serializer, it) }
 
         return batch(operations, requestOptions)
     }
@@ -83,33 +83,33 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun <T : Indexable> replaceObject(
-        data: T,
         serializer: KSerializer<T>,
+        data: T,
         requestOptions: RequestOptions?
     ): RevisionObject {
         return replaceObject(Json.stringify(serializer, data), data.objectID, requestOptions)
     }
 
     override suspend fun <T : Indexable> replaceObjects(
-        data: List<T>,
         serializer: KSerializer<T>,
+        data: List<T>,
         requestOptions: RequestOptions?
     ): ResponseBatch {
-        val operations = data.map { BatchOperation.ReplaceObject.from(it, serializer) }
+        val operations = data.map { BatchOperation.ReplaceObject.from(serializer, it) }
 
         return batch(operations, requestOptions)
     }
 
     override suspend fun replaceObject(
-        data: JsonObject,
         objectID: ObjectID,
+        data: JsonObject,
         requestOptions: RequestOptions?
     ): RevisionObject {
         return replaceObject(data.toString(), objectID, requestOptions)
     }
 
     override suspend fun replaceObjects(
-        data: List<Pair<JsonObject, ObjectID>>,
+        data: List<Pair<ObjectID, JsonObject>>,
         requestOptions: RequestOptions?
     ): ResponseBatch {
         val operations = data.map { BatchOperation.ReplaceObject(it.first, it.second) }
@@ -167,8 +167,8 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun <T : Indexable> getObject(
-        objectID: ObjectID,
         serializer: KSerializer<T>,
+        objectID: ObjectID,
         attributesToRetrieve: List<Attribute>?,
         requestOptions: RequestOptions?
     ): T {
@@ -194,8 +194,8 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun partialUpdateObject(
-        partialUpdate: PartialUpdate,
         objectID: ObjectID,
+        partialUpdate: PartialUpdate,
         createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionObject {
@@ -211,7 +211,7 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun partialUpdateObjects(
-        data: List<Pair<PartialUpdate, ObjectID>>,
+        data: List<Pair<ObjectID, PartialUpdate>>,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): ResponseBatch {

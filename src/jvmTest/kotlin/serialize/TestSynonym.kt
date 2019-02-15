@@ -51,6 +51,6 @@ internal class TestSynonym : TestSerializer<Synonym>(Synonym) {
             KeyPlaceholder to unknown
             KeyReplacements to array
         },
-        Synonym.Other(json, objectID) to json
+        Synonym.Other(objectID, json) to json
     )
 }
