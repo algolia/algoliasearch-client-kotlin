@@ -59,6 +59,10 @@ infix fun Attribute.limit(numberOfWords: Int?): Snippet {
     return Snippet(this, numberOfWords)
 }
 
+fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {
+    return RequestOptions().apply(init)
+}
+
 suspend fun Index.browseAllRules(
     query: String? = null,
     anchoring: Anchoring? = null,
