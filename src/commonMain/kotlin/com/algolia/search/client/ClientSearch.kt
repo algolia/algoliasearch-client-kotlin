@@ -114,7 +114,7 @@ class ClientSearch private constructor(
         requestOptions: RequestOptions? = null
     ): ResponseLogs {
         return api.run {
-            read.retry(requestOptions.computedReadTimeout, "/1/logs") { url ->
+            retryRead(requestOptions, "/1/logs") { url ->
                 httpClient.get<ResponseLogs>(url) {
                     parameter(KeyOffset, offset)
                     parameter(KeyLength, length)

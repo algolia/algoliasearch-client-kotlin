@@ -1,8 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.APIWrapper
-import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.setRequestOptions
+import com.algolia.search.client.*
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
@@ -35,7 +33,7 @@ internal class EndpointIndexingImpl(
     APIWrapper by api {
 
     private suspend fun saveObject(payload: String, requestOptions: RequestOptions?): CreationObject {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath()) { url ->
+        return retryWrite(requestOptions, indexName.toPath()) { url ->
             httpClient.post<CreationObject>(url) {
                 body = payload
                 setRequestOptions(requestOptions)
@@ -76,7 +74,7 @@ internal class EndpointIndexingImpl(
         objectID: ObjectID,
         requestOptions: RequestOptions?
     ): RevisionObject {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$objectID")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("/$objectID")) { url ->
             httpClient.put<RevisionObject>(url) {
                 body = payload
                 setRequestOptions(requestOptions)
@@ -120,7 +118,7 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun deleteObject(objectID: ObjectID, requestOptions: RequestOptions?): DeletionObject {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$objectID")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("/$objectID")) { url ->
             httpClient.delete<DeletionObject>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -137,7 +135,7 @@ internal class EndpointIndexingImpl(
         val copy = query.clone()
         val bodyString = json { KeyParams to copy.toJsonNoDefaults().urlEncode() }.toString()
 
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/deleteByQuery")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("/deleteByQuery")) { url ->
             httpClient.post<RevisionIndex>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -152,7 +150,7 @@ internal class EndpointIndexingImpl(
     ): JsonObject {
         val attributesToRetrieve = attributes?.let { Json.stringify(Attribute.list, it.toList()) }
 
-        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/$objectID")) { url ->
+        return retryRead(requestOptions, indexName.toPath("/$objectID")) { url ->
             httpClient.get<JsonObject>(url) {
                 parameter(KeyAttributesToRetrieve, attributesToRetrieve)
                 setRequestOptions(requestOptions)
@@ -187,7 +185,7 @@ internal class EndpointIndexingImpl(
         val requests = objectIDs.map { RequestObjects(indexName, it, attributesToRetrieve) }
         val bodyString = JsonNoNulls.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
-        return read.retry(requestOptions.computedReadTimeout, "/1/indexes/*/objects") { url ->
+        return retryRead(requestOptions, "/1/indexes/*/objects") { url ->
             httpClient.post<ResponseObjects>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -203,7 +201,7 @@ internal class EndpointIndexingImpl(
     ): RevisionObject {
         val payload = Json.plain.toJson(PartialUpdate, partialUpdate).toString()
 
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$objectID/partial")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("/$objectID/partial")) { url ->
             httpClient.post<RevisionObject>(url) {
                 body = payload
                 parameter(KeyCreateIfNotExists, createIfNotExists)
@@ -229,7 +227,7 @@ internal class EndpointIndexingImpl(
         val requests = Json.plain.toJson(BatchOperation.list, batchOperations)
         val bodyString = json { KeyRequests to requests }.toString()
 
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/batch")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("/batch")) { url ->
             httpClient.post<ResponseBatch>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -238,7 +236,7 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun clearObjects(requestOptions: RequestOptions?): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/clear")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("/clear")) { url ->
             httpClient.post<RevisionIndex>(url) {
                 body = ""
                 setRequestOptions(requestOptions)

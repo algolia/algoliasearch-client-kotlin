@@ -1,9 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.APIWrapper
-import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.setQueries
-import com.algolia.search.client.setRequestOptions
+import com.algolia.search.client.*
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
@@ -28,7 +25,7 @@ internal class EndpointMultipleIndexImpl(
     private val route = "/1/indexes"
 
     override suspend fun listIndexes(requestOptions: RequestOptions?): ResponseListIndexes {
-        return read.retry(requestOptions.computedReadTimeout, route) { url ->
+        return retryRead(requestOptions, route) { url ->
             httpClient.get<ResponseListIndexes>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -36,7 +33,7 @@ internal class EndpointMultipleIndexImpl(
     }
 
     override suspend fun listIndexAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
-        return read.retry(readTimeout, "$route/*/keys") { url ->
+        return retryRead(requestOptions, "$route/*/keys") { url ->
             httpClient.get<ResponseListAPIKey>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -50,7 +47,7 @@ internal class EndpointMultipleIndexImpl(
     ): ResponseSearches {
         val copies = queries.map { IndexQuery(it.indexName, it.query.clone()) }
 
-        return read.retry(requestOptions.computedReadTimeout, "$route/*/queries") { url ->
+        return retryRead(requestOptions, "$route/*/queries") { url ->
             httpClient.post<ResponseSearches>(url) {
                 setQueries(copies, strategy)
                 setRequestOptions(requestOptions)
@@ -64,7 +61,7 @@ internal class EndpointMultipleIndexImpl(
     ): ResponseObjects {
         val bodyString = JsonNoNulls.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
-        return read.retry(requestOptions.computedReadTimeout, "$route/*/objects") { url ->
+        return retryRead(requestOptions, "$route/*/objects") { url ->
             httpClient.post<ResponseObjects>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -79,7 +76,7 @@ internal class EndpointMultipleIndexImpl(
         val requests = Json.plain.toJson(BatchOperationIndex.list, operations)
         val bodyString = json { KeyRequests to requests }.toString()
 
-        return write.retry(requestOptions.computedWriteTimeout, "$route/*/batch") { url ->
+        return retryWrite(requestOptions, "$route/*/batch") { url ->
             httpClient.post<ResponseBatches>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)

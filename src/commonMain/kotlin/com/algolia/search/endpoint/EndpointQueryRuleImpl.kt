@@ -1,9 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.APIWrapper
-import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.setForwardToReplicas
-import com.algolia.search.client.setRequestOptions
+import com.algolia.search.client.*
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.queryrule.Anchoring
@@ -33,8 +30,8 @@ internal class EndpointQueryRuleImpl(
     ): RevisionIndex {
         val bodyString = JsonNoNulls.stringify(QueryRule.serializer(), queryRule)
 
-        return write.retry(
-            requestOptions.computedReadTimeout,
+        return retryWrite(
+            requestOptions,
             indexName.toPath("$route/${queryRule.objectID}")
         ) { url ->
             httpClient.put<RevisionIndex>(url) {
@@ -46,7 +43,7 @@ internal class EndpointQueryRuleImpl(
     }
 
     override suspend fun getRule(objectID: ObjectID, requestOptions: RequestOptions?): ResponseQueryRule {
-        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("$route/$objectID")) { url ->
+        return retryRead(requestOptions, indexName.toPath("$route/$objectID")) { url ->
             httpClient.get<ResponseQueryRule>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -58,7 +55,7 @@ internal class EndpointQueryRuleImpl(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("$route/$objectID")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("$route/$objectID")) { url ->
             httpClient.delete<RevisionIndex>(url) {
                 setForwardToReplicas(forwardToReplicas)
                 setRequestOptions(requestOptions)
@@ -78,7 +75,7 @@ internal class EndpointQueryRuleImpl(
         val request = RequestSearchRules(query, anchoring, context, page, hitsPerPage, enabled)
         val bodyString = JsonNoNulls.stringify(RequestSearchRules.serializer(), request)
 
-        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("$route/search")) { url ->
+        return retryRead(requestOptions, indexName.toPath("$route/search")) { url ->
             httpClient.post<ResponseRules>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -87,7 +84,7 @@ internal class EndpointQueryRuleImpl(
     }
 
     override suspend fun clearRules(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("$route/clear")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("$route/clear")) { url ->
             httpClient.post<RevisionIndex>(url) {
                 body = ""
                 setForwardToReplicas(forwardToReplicas)
@@ -104,7 +101,7 @@ internal class EndpointQueryRuleImpl(
     ): RevisionIndex {
         val bodyString = JsonNoNulls.stringify(QueryRule.serializer().list, queryRules)
 
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("$route/batch")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("$route/batch")) { url ->
             httpClient.post<RevisionIndex>(url) {
                 body = bodyString
                 setForwardToReplicas(forwardToReplicas)
