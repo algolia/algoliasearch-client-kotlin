@@ -7,7 +7,6 @@ import com.algolia.search.model.settings.Distinct
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.TaskStatus
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -28,20 +27,10 @@ internal class TestSuiteSettings {
         cleanIndex(clientAdmin1, suffix)
     }
 
-    private fun loadSettings(): Settings {
-        val json = Json(encodeDefaults = false, indented = true, indent = "  ")
-        val string = loadScratch("settings.json").readText()
-        val settings = json.parse(Settings.serializer(), string)
-        val serialized = json.stringify(Settings.serializer(), settings)
-
-        serialized shouldEqual string
-        return settings
-    }
-
     @Test
     fun test() {
         runBlocking {
-            val settings = loadSettings()
+            val settings = load(Settings.serializer(), "settings.json")
 
             index.apply {
                 setSettings(settings).wait() shouldEqual TaskStatus.Published

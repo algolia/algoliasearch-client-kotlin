@@ -26,21 +26,12 @@ internal class TestSuiteBatching {
         cleanIndex(clientAdmin1, suffix)
     }
 
-    private fun loadBatches(): List<BatchOperation> {
-        val string = loadScratch("batches.json").readText()
-        val batches = json.parse(BatchOperation.list, string)
-        val serialized = json.stringify(BatchOperation.list, batches)
-
-        serialized shouldEqual string
-        return batches
-    }
-
     @Test
     fun test() {
         runBlocking {
-            val objects = loadFileAsObjects("numbers.json")
+            val objects = load(JsonObjectSerializer.list, "numbers.json")
             val expected = loadScratch("batches_result.json").readText()
-            val batches = loadBatches()
+            val batches = load(BatchOperation.list, "batches.json")
 
             index.apply {
                 saveObjects(objects).wait() shouldEqual TaskStatus.Published

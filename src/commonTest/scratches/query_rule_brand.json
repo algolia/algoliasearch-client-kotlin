@@ -15,7 +15,6 @@
       ]
     }
   },
-  "description": "Automatic apply the faceting on `brand` if a brand value is found in the query",
   "enabled": false,
   "validity": [
     {
@@ -26,5 +25,6 @@
       "from": 1532612100,
       "until": 1532698500
     }
-  ]
+  ],
+  "description": "Automatic apply the faceting on `brand` if a brand value is found in the query"
 }

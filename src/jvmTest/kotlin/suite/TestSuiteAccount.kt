@@ -11,7 +11,6 @@ import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.toAttribute
 import com.algolia.search.toObjectID
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import org.junit.Before
 import org.junit.Test
@@ -32,20 +31,11 @@ internal class TestSuiteAccount {
     private val index2 = clientAdmin1.getIndex(indexName2)
     private val index3 = clientAdmin2.getIndex(indexName2)
     private val objectID = "one".toObjectID()
-    private val json = Json(indented = true, indent = "  ", encodeDefaults = false)
     private val data = json { KeyObjectID to objectID.raw }
     private val synonym = Synonym.MultiWay(objectID, synonyms = listOf("one", "two"))
     private val settings =
         Settings(searchableAttributes = listOf(SearchableAttribute.Default("objectID".toAttribute())))
 
-    private fun loadQueryRule(): QueryRule {
-        val string = loadScratch("query_rule_one.json").readText()
-        val queryRule = json.parse(QueryRule.serializer(), string)
-        val serialized = json.stringify(QueryRule.serializer(), queryRule)
-
-        serialized shouldEqual string
-        return queryRule
-    }
 
     @Before
     fun clean() {
@@ -56,7 +46,7 @@ internal class TestSuiteAccount {
     @Test
     fun test() {
         runBlocking {
-            val rule = loadQueryRule()
+            val rule = load(QueryRule.serializer(), "query_rule_one.json")
             var hasThrown = false
             try {
                 ClientAccount.copyIndex(index1, index2)

@@ -1,7 +1,7 @@
 package suite
 
-import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
@@ -10,7 +10,6 @@ import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.toAttribute
 import com.algolia.search.toObjectID
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import org.junit.Before
 import org.junit.Test
@@ -27,7 +26,6 @@ internal class TestSuiteCopyIndex {
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.getIndex(indexName)
     private val company = "company".toAttribute()
-    private val json = Json(encodeDefaults = false, indented = true, indent = "  ")
     private val indexNameSettings = indexName.copy(indexName.raw + "_settings")
     private val indexNameRules = indexName.copy(indexName.raw + "_rules")
     private val indexNameSynonyms = indexName.copy(indexName.raw + "_synonyms")
@@ -46,24 +44,6 @@ internal class TestSuiteCopyIndex {
     )
     private val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Default(company)))
 
-    private fun loadSynonym(): Synonym {
-        val string = loadScratch("synonym_placeholder.json").readText()
-        val synonym = json.parse(Synonym, string)
-        val serialized = json.stringify(Synonym, synonym)
-
-        serialized shouldEqual string
-        return synonym
-    }
-
-    private fun loadQueryRule(): QueryRule {
-        val string = loadScratch("query_rule_company.json").readText()
-        val queryRule = json.parse(QueryRule.serializer(), string)
-        val serialized = json.stringify(QueryRule.serializer(), queryRule)
-
-        serialized shouldEqual string
-        return queryRule
-    }
-
     @Before
     fun clean() {
         cleanIndex(clientAdmin1, suffix)
@@ -74,8 +54,8 @@ internal class TestSuiteCopyIndex {
         runBlocking {
             index.apply {
                 val tasks = mutableListOf<Task>()
-                val synonym = loadSynonym()
-                val queryRule = loadQueryRule()
+                val synonym = load(Synonym, "synonym_placeholder.json")
+                val queryRule = load(QueryRule.serializer(), "query_rule_company.json")
 
                 tasks += saveObjects(objects)
                 tasks += setSettings(settings)

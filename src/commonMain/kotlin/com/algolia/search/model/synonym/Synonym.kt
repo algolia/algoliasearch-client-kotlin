@@ -141,11 +141,15 @@ sealed class Synonym(open val objectID: ObjectID) {
                         element[KeyCorrections].jsonArray.map { it.content },
                         SynonymType.Typo.Two
                     )
-                    KeyPlaceholder -> Placeholder(
-                        objectID,
-                        Placeholder.Token(element[KeyPlaceholder].content),
-                        element[KeyReplacements].jsonArray.map { it.content }
-                    )
+                    KeyPlaceholder -> {
+                        val find = regexPlaceholder.find(element[KeyPlaceholder].content)!!
+
+                        Placeholder(
+                            objectID,
+                            Placeholder.Token(find.groupValues[1]),
+                            element[KeyReplacements].jsonArray.map { it.content }
+                        )
+                    }
                     else -> Other(objectID, element)
                 }
             } else Other(objectID, element)

@@ -6,7 +6,6 @@ import com.algolia.search.model.queryrule.QueryRule
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.toObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.json
@@ -18,18 +17,11 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-internal class TestSuiteBrowse {
+internal class TestSuiteBrowseAll {
 
     private val suffix = "helper"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.getIndex(indexName)
-
-    private fun loadQueryRule(name: String): QueryRule {
-        val string = loadScratch(name).readText()
-
-        println(string)
-        return JsonNoNulls.parse(QueryRule.serializer(), string)
-    }
 
     @Before
     fun clean() {
@@ -39,8 +31,8 @@ internal class TestSuiteBrowse {
     @Test
     fun rules() {
         runBlocking {
-            val ruleA = loadQueryRule("query_rule_brand.json")
-            val ruleB = loadQueryRule("query_rule_company.json")
+            val ruleA = load(QueryRule.serializer(), "query_rule_brand.json")
+            val ruleB = load(QueryRule.serializer(), "query_rule_company.json")
             var count = 0
 
             index.apply {

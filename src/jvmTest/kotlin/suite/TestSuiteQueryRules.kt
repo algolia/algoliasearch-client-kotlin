@@ -9,7 +9,7 @@ import com.algolia.search.toAttribute
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.list
 import org.junit.Before
 import org.junit.Test
@@ -25,7 +25,6 @@ internal class TestSuiteQueryRules {
 
     private val suffix = "rules"
     private val indexName = testSuiteIndexName(suffix)
-    private val json = Json(indented = true, indent = "  ", encodeDefaults = false)
     private val brand = "brand".toAttribute()
     private val index = clientAdmin1.getIndex(indexName)
 
@@ -34,30 +33,12 @@ internal class TestSuiteQueryRules {
         cleanIndex(clientAdmin1, suffix)
     }
 
-    private fun loadQueryRule(): QueryRule {
-        val string = loadScratch("query_rule_brand.json").readText()
-        val queryRule = json.parse(QueryRule.serializer(), string)
-        val serialized = json.stringify(QueryRule.serializer(), queryRule)
-
-        serialized shouldEqual string
-        return queryRule
-    }
-
-    private fun loadQueryRules(): List<QueryRule> {
-        val string = loadScratch("query_rule_edits.json").readText()
-        val queryRules = json.parse(QueryRule.serializer().list, string)
-        val serialized = json.stringify(QueryRule.serializer().list, queryRules)
-
-        serialized shouldEqual string
-        return queryRules
-    }
-
     @Test
     fun test() {
         runBlocking {
-            val objects = loadFileAsObjects("iphones.json")
-            val queryRule = loadQueryRule()
-            val queryRules = loadQueryRules()
+            val objects = load(JsonObjectSerializer.list, "iphones.json")
+            val queryRule = load(QueryRule.serializer(), "query_rule_brand.json")
+            val queryRules = load(QueryRule.serializer().list, "query_rule_edits.json")
             val tasks = mutableListOf<Task>()
 
             index.apply {
@@ -68,8 +49,8 @@ internal class TestSuiteQueryRules {
 
                 tasks.wait().all { it is TaskStatus.Published }
 
-                getRule(queryRule.objectID) shouldEqual queryRule
-                queryRules.forEach { getRule(it.objectID) shouldEqual it }
+                getRule(queryRule.objectID).queryRule shouldEqual queryRule
+                queryRules.forEach { getRule(it.objectID).queryRule shouldEqual it }
                 val searches = searchRules().hits.map { it.queryRule }
 
                 searches.find { it.objectID == queryRule.objectID }.shouldNotBeNull()

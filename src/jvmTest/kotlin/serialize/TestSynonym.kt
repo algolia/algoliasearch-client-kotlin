@@ -48,7 +48,7 @@ internal class TestSynonym : TestSerializer<Synonym>(Synonym) {
         Synonym.Placeholder(objectID, Synonym.Placeholder.Token(unknown), strings) to kotlinx.serialization.json.json {
             KeyObjectID to objectID.raw
             KeyType to KeyPlaceholder
-            KeyPlaceholder to unknown
+            KeyPlaceholder to "<$unknown>"
             KeyReplacements to array
         },
         Synonym.Other(objectID, json) to json

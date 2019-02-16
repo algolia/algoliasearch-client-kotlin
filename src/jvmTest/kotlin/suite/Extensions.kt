@@ -11,7 +11,6 @@ import com.algolia.search.toIndexName
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonObject
 import shouldEqual
 import java.io.File
 import java.text.SimpleDateFormat
@@ -54,10 +53,6 @@ internal fun testSuiteIndexName(suffix: String): IndexName {
     return "$prefix-qlitzler-$suffix".toIndexName()
 }
 
-internal fun loadScratch(name: String): File {
-    return File("src/commonTest/scratches/$name")
-}
-
 internal fun cleanABTest() {
     runBlocking {
         clientAnalytics.browseAllABTests {
@@ -91,6 +86,10 @@ internal fun cleanIndex(client: ClientSearch, suffix: String) {
     }
 }
 
+internal fun loadScratch(name: String): File {
+    return File("src/commonTest/scratches/$name")
+}
+
 internal fun <T> load(serializer: KSerializer<T>, name: String): T {
     val json = Json(indented = true, indent = "  ", encodeDefaults = false)
     val string = loadScratch(name).readText()
@@ -99,10 +98,4 @@ internal fun <T> load(serializer: KSerializer<T>, name: String): T {
 
     serialized shouldEqual string
     return data
-}
-
-internal fun loadFileAsObjects(fileName: String): List<JsonObject> {
-    val string = loadScratch(fileName).readText()
-
-    return Json.plain.parseJson(string).jsonArray.map { it.jsonObject }
 }
