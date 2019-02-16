@@ -9,6 +9,7 @@ import com.algolia.search.toAPIKey
 import com.algolia.search.toApplicationID
 import com.algolia.search.toIndexName
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import shouldEqual
@@ -88,6 +89,16 @@ internal fun cleanIndex(client: ClientSearch, suffix: String) {
             client.getIndex(it).deleteIndex()
         }
     }
+}
+
+internal fun <T> load(serializer: KSerializer<T>, name: String): T {
+    val json = Json(indented = true, indent = "  ", encodeDefaults = false)
+    val string = loadScratch(name).readText()
+    val data = json.parse(serializer, string)
+    val serialized = json.stringify(serializer, data)
+
+    serialized shouldEqual string
+    return data
 }
 
 internal fun loadFileAsObjects(fileName: String): List<JsonObject> {

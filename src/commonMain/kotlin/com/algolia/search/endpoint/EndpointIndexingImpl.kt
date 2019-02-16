@@ -267,7 +267,7 @@ internal class EndpointIndexingImpl(
 
     private suspend fun replaceAllObjectsInternal(batchOperations: List<BatchOperation>): List<Task> {
         val indexSource = Index(api, indexName)
-        val indexDestination = Index(api, "${indexName}_tmp_{$Random.nextInt()}".toIndexName())
+        val indexDestination = Index(api, "${indexName}_tmp_${Random.nextInt()}".toIndexName())
         val scopes = listOf(Scope.Settings, Scope.Rules, Scope.Synonyms)
 
         return mutableListOf<Task>().also {
