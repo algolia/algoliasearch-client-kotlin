@@ -1,6 +1,7 @@
 package com.algolia.search.model.queryrule
 
 import com.algolia.search.serialize.KeyEdits
+import com.algolia.search.serialize.KeyRemoveLowercase
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
 import kotlinx.serialization.*
@@ -29,15 +30,18 @@ sealed class QueryOrEdits {
         override fun deserialize(decoder: Decoder): QueryOrEdits {
             val json = decoder.asJsonInput()
 
-            return try {
-                Query(json.content)
-            } catch (exception: JsonElementTypeMismatchException) {
-                Edits(
-                    Json.plain.fromJson(
-                        Edit.list,
-                        json.jsonObject[KeyEdits]
-                    )
-                )
+            return when (json) {
+                is JsonPrimitive -> Query(json.content)
+                is JsonObject -> {
+                    val edits = if (json.containsKey(KeyEdits)) {
+                        Json.plain.fromJson(
+                            Edit.list,
+                            json.jsonObject[KeyEdits]
+                        )
+                    } else json[KeyRemoveLowercase].jsonArray.map { Edit(it.content) }
+                    Edits(edits)
+                }
+                else -> throw Exception("Unable to deserialize QueryRule.")
             }
         }
     }

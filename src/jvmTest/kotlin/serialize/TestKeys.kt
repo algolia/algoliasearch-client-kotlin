@@ -147,6 +147,7 @@ internal class TestKeys {
         KeyDecrement shouldEqual "Decrement"
         KeyAdd shouldEqual "Add"
         KeyRemove shouldEqual "Remove"
+        KeyRemoveLowercase shouldEqual "RemoveLowercase"
         KeyAddUnique shouldEqual "AddUnique"
         Key_Operation shouldEqual "_operation"
         KeyValue shouldEqual "value"

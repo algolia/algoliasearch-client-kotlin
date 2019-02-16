@@ -13,7 +13,7 @@ data class Edit(val delete: String, val insert: String? = null) {
     companion object : KSerializer<Edit> {
 
         override fun serialize(encoder: Encoder, obj: Edit) {
-            val type = if (obj.insert != null) KeyReplace else KeyRemove
+            val type = if (obj.insert != null) KeyReplace else KeyRemoveLowercase
             val json = json {
                 KeyType to type.toLowerCase()
                 KeyDelete to obj.delete
