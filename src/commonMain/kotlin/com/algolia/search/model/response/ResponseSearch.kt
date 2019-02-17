@@ -50,9 +50,12 @@ data class ResponseSearch(
         val rankingInfo = json.getObjectOrNull(Key_RankingInfo)?.toRankingInfo()
         val distinctSequentialID = json.getPrimitiveOrNull(Key_DistinctSeqID)?.int
 
-        // Todo improve DX
         fun <T> get(serializer: KSerializer<T>, attribute: Attribute): T {
             return Json.plain.fromJson(serializer, json[attribute.raw])
+        }
+
+        fun <T> parse(serializer: KSerializer<T>): T {
+            return Json.nonstrict.fromJson(serializer, json)
         }
 
         @Serializer(Hit::class)
