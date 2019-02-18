@@ -1,11 +1,14 @@
 package com.algolia.search
 
+import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.client.Index
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.*
+import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.enums.Point
 import com.algolia.search.model.enums.Snippet
 import com.algolia.search.model.queryrule.Anchoring
+import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchSynonyms
@@ -49,6 +52,10 @@ fun String.toAPIKey(): APIKey {
 
 fun String.toClusterName(): ClusterName {
     return ClusterName(this)
+}
+
+fun Long.toABTestID(): ABTestID {
+    return ABTestID(this)
 }
 
 infix fun Float.and(longitude: Float): Point {
@@ -114,5 +121,20 @@ suspend fun Index.browseAllObjects(
 
         block(response, page++)
         cursor = response.cursor
+    }
+}
+
+suspend fun ClientAnalytics.browseAllABTests(
+    hitsPerPage: Int? = null,
+    requestOptions: RequestOptions? = null,
+    block: suspend ResponseABTests.(Int) -> Unit
+) {
+    var page = 0
+
+    while (true) {
+        val response = listABTests(page, hitsPerPage, requestOptions)
+
+        if (response.count == 0) break
+        block(response, page++)
     }
 }
