@@ -18,7 +18,7 @@ internal class TestSuiteBatching {
 
     private val suffix = "index_batching"
     private val indexName = testSuiteIndexName(suffix)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
     private val json = Json(encodeDefaults = false, indented = true, indent = "  ")
 
     @Before

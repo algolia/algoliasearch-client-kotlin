@@ -24,7 +24,7 @@ internal class TestSuiteAATest {
 
     private val suffix = "aa_testing"
     private val indexName = testSuiteIndexName(suffix)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
     private val data = json { KeyObjectID to "one" }
     private val tomorrow = Date(Date().time + TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS))
     private val abTest = ABTest(

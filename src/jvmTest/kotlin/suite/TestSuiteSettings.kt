@@ -20,7 +20,7 @@ internal class TestSuiteSettings {
     private val suffix = "settings"
     private val indexName = testSuiteIndexName(suffix)
     private val languages = BooleanOrQueryLanguages.QueryLanguages(QueryLanguage.English, QueryLanguage.French)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
 
     @Before
     fun clean() {

@@ -27,9 +27,9 @@ internal class TestSuiteAccount {
     private val suffix2 = "copy_index_2"
     private val indexName1 = testSuiteIndexName(suffix1)
     private val indexName2 = testSuiteIndexName(suffix2)
-    private val index1 = clientAdmin1.getIndex(indexName1)
-    private val index2 = clientAdmin1.getIndex(indexName2)
-    private val index3 = clientAdmin2.getIndex(indexName2)
+    private val index1 = clientAdmin1.initIndex(indexName1)
+    private val index2 = clientAdmin1.initIndex(indexName2)
+    private val index3 = clientAdmin2.initIndex(indexName2)
     private val objectID = "one".toObjectID()
     private val data = json { KeyObjectID to objectID.raw }
     private val synonym = Synonym.MultiWay(objectID, synonyms = listOf("one", "two"))

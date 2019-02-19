@@ -58,7 +58,7 @@ internal fun cleanABTest() {
         clientAnalytics.browseAllABTests {
             abTests?.forEach {
                 if (it.name.contains("kotlin")) {
-                    clientAdmin1.getIndex(it.variantA.indexName).apply {
+                    clientAdmin1.initIndex(it.variantA.indexName).apply {
                         clientAnalytics.deleteABTest(it.abTestID).wait() shouldEqual TaskStatus.Published
                     }
                 }
@@ -81,7 +81,7 @@ internal fun cleanIndex(client: ClientSearch, suffix: String) {
             }
         }
         indexToDelete.forEach {
-            client.getIndex(it).deleteIndex()
+            client.initIndex(it).deleteIndex()
         }
     }
 }

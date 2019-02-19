@@ -26,7 +26,7 @@ internal class TestSuiteRules {
     private val suffix = "rules"
     private val indexName = testSuiteIndexName(suffix)
     private val brand = "brand".toAttribute()
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
 
     @Before
     fun clean() {

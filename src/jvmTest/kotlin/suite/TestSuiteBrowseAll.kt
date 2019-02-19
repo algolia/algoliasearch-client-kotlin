@@ -21,7 +21,7 @@ internal class TestSuiteBrowseAll {
 
     private val suffix = "helper"
     private val indexName = testSuiteIndexName(suffix)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
 
     @Before
     fun clean() {

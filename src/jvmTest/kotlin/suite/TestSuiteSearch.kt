@@ -27,7 +27,7 @@ internal class TestSuiteSearch {
     private val indexName = testSuiteIndexName(suffix)
     private val company = "company".toAttribute()
     private val allFacets = listOf("*".toAttribute())
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
 
     @Before
     fun clean() {

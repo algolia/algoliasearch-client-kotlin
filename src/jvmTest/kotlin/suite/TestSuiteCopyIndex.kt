@@ -24,7 +24,7 @@ internal class TestSuiteCopyIndex {
 
     private val suffix = "copy_index"
     private val indexName = testSuiteIndexName(suffix)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
     private val company = "company".toAttribute()
     private val indexNameSettings = indexName.copy(indexName.raw + "_settings")
     private val indexNameRules = indexName.copy(indexName.raw + "_rules")
@@ -72,10 +72,10 @@ internal class TestSuiteCopyIndex {
 
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
 
-                clientAdmin1.getIndex(indexNameSettings).getSettings() shouldEqual getSettings()
-                clientAdmin1.getIndex(indexNameRules).getRule(ruleID) shouldEqual getRule(ruleID)
-                clientAdmin1.getIndex(indexNameSynonyms).getSynonym(synonym.objectID) shouldEqual getSynonym(synonym.objectID)
-                clientAdmin1.getIndex(indexNameFullCopy).also {
+                clientAdmin1.initIndex(indexNameSettings).getSettings() shouldEqual getSettings()
+                clientAdmin1.initIndex(indexNameRules).getRule(ruleID) shouldEqual getRule(ruleID)
+                clientAdmin1.initIndex(indexNameSynonyms).getSynonym(synonym.objectID) shouldEqual getSynonym(synonym.objectID)
+                clientAdmin1.initIndex(indexNameFullCopy).also {
                     it.getSettings() shouldEqual getSettings()
                     it.getRule(ruleID) shouldEqual getRule(ruleID)
                     it.getSynonym(synonym.objectID) shouldEqual getSynonym(synonym.objectID)

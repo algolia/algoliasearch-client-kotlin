@@ -42,7 +42,7 @@ internal class TestSuiteSynonyms {
         Synonym.AlternativeCorrections(psone, "psone", listOf("playstationone"), SynonymType.Typo.Two)
     private val synonyms =
         listOf(synonymMultiWay, synonymOneWay, synonymPlaceholder, synonymAlternative1, synonymAlternative2)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
 
 
     @Before

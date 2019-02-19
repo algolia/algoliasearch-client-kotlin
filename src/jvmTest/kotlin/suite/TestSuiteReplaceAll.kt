@@ -24,7 +24,7 @@ class TestSuiteReplaceAll {
 
     private val suffix = "replacing"
     private val indexName = testSuiteIndexName(suffix)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
     private val objectIDOne = "one".toObjectID()
     private val objectIDTwo = "two".toObjectID()
 

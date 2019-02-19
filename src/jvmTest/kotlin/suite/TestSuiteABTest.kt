@@ -28,8 +28,8 @@ internal class TestSuiteABTest {
     private val indexNameA = testSuiteIndexName(suffix)
     private val indexNameB = indexNameA.copy(raw = indexNameA.raw + "_dev")
     private val tomorrow = Date(Date().time + TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS))
-    private val indexA = clientAdmin1.getIndex(indexNameA)
-    private val indexB = clientAdmin1.getIndex(indexNameB)
+    private val indexA = clientAdmin1.initIndex(indexNameA)
+    private val indexB = clientAdmin1.initIndex(indexNameB)
     private val data = json { KeyObjectID to "one" }
 
     private val abTest = ABTest(
