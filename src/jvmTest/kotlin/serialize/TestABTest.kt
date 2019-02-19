@@ -2,6 +2,7 @@ package serialize
 
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.Variant
+import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyEndAt
 import com.algolia.search.serialize.KeyName
@@ -16,19 +17,19 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestABTest : TestSerializer<ABTest>(ABTest) {
+internal class TestABTest : TestSerializer<ABTest>(ABTest, JsonNoNulls) {
 
     private val abTest = ABTest(
-        unknown,
-        unknown,
-        Variant(indexA, 40),
-        Variant(indexB, 60, unknown)
+        name = unknown,
+        endAt = unknown,
+        variantA = Variant(indexA, 40),
+        variantB = Variant(indexB, 60, unknown, Query())
     )
 
     override val items = listOf(
         abTest to json {
-            KeyEndAt to unknown
             KeyName to unknown
+            KeyEndAt to unknown
             KeyVariants to jsonArray {
                 +JsonNoNulls.toJson(Variant.serializer(), abTest.variantA)
                 +JsonNoNulls.toJson(Variant.serializer(), abTest.variantB)
