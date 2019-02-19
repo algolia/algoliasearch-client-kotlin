@@ -7,7 +7,6 @@ import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.features.BadResponseStatusException
-import io.ktor.client.response.readText
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.json
@@ -52,42 +51,37 @@ internal class TestSuiteABTest {
     @Test
     fun test() {
         runBlocking {
-            try {
-                indexA.apply { saveObject(data).wait() shouldEqual TaskStatus.Published }
-                indexB.apply { saveObject(data).wait() shouldEqual TaskStatus.Published }
-                indexA.apply {
-                    val response = clientAnalytics.addABTest(abTest)
+            indexA.apply { saveObject(data).wait() shouldEqual TaskStatus.Published }
+            indexB.apply { saveObject(data).wait() shouldEqual TaskStatus.Published }
+            indexA.apply {
+                val response = clientAnalytics.addABTest(abTest)
 
-                    response.wait() shouldEqual TaskStatus.Published
-                    clientAnalytics.getABTest(response.abTestID).let {
-                        it.name shouldEqual abTest.name
-                        it.endAt shouldEqual abTest.endAt
-                        it.status shouldNotEqual ABTestStatus.Stopped
-                        it.variantA.let {
-                            it.indexName shouldEqual abTest.variantA.indexName
-                            it.trafficPercentage shouldEqual abTest.variantA.trafficPercentage
-                            it.description shouldEqual abTest.variantA.description
-                        }
-                        it.variantB.let {
-                            it.indexName shouldEqual abTest.variantB.indexName
-                            it.trafficPercentage shouldEqual abTest.variantB.trafficPercentage
-                            it.description shouldEqual abTest.variantB.description
-                        }
+                response.wait() shouldEqual TaskStatus.Published
+                clientAnalytics.getABTest(response.abTestID).let {
+                    it.name shouldEqual abTest.name
+                    it.endAt shouldEqual abTest.endAt
+                    it.status shouldNotEqual ABTestStatus.Stopped
+                    it.variantA.let {
+                        it.indexName shouldEqual abTest.variantA.indexName
+                        it.trafficPercentage shouldEqual abTest.variantA.trafficPercentage
+                        it.description shouldEqual abTest.variantA.description
                     }
-                    clientAnalytics.listABTests().abTests.find { it.abTestID == response.abTestID }.shouldNotBeNull()
-                    clientAnalytics.stopABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
-                    clientAnalytics.deleteABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
-                    var hasThrown = false
-                    try {
-                        clientAnalytics.getABTest(response.abTestID)
-                    } catch (exception: BadResponseStatusException) {
-                        hasThrown = exception.statusCode.value == HttpStatusCode.NotFound.value
+                    it.variantB.let {
+                        it.indexName shouldEqual abTest.variantB.indexName
+                        it.trafficPercentage shouldEqual abTest.variantB.trafficPercentage
+                        it.description shouldEqual abTest.variantB.description
                     }
-                    hasThrown.shouldBeTrue()
                 }
-            } catch (exception: BadResponseStatusException) {
-                exception.response.readText().let { println(it) }
-                throw exception
+                clientAnalytics.listABTests().abTests.find { it.abTestID == response.abTestID }.shouldNotBeNull()
+                clientAnalytics.stopABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
+                clientAnalytics.deleteABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
+                var hasThrown = false
+                try {
+                    clientAnalytics.getABTest(response.abTestID)
+                } catch (exception: BadResponseStatusException) {
+                    hasThrown = exception.statusCode.value == HttpStatusCode.NotFound.value
+                }
+                hasThrown.shouldBeTrue()
             }
         }
     }
