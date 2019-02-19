@@ -22,16 +22,16 @@ data class ResponseSearch(
     @Optional @SerialName(KeyProcessingTimeMS) val processingTimeMSOrNull: Long? = null,
     @Optional @SerialName(KeyExhaustiveNbHits) val exhaustiveNbHitsOrNull: Boolean? = null,
     @Optional @SerialName(KeyExhaustiveFacetsCount) val exhaustiveFacetsCountOrNull: Boolean? = null,
-    @Optional @SerialName(KeyQuery) val queryOrNull: String? = null, // TODO check if possible Query
+    @Optional @SerialName(KeyQuery) val queryOrNull: String? = null,
     @Optional @SerialName(KeyQueryAfterRemoval) val queryAfterRemovalOrNull: String? = null,
-    @Optional @SerialName(KeyParams) val paramsOrNull: String? = null, // TODO check if possible Query
+    @Optional @SerialName(KeyParams) val paramsOrNull: String? = null,
     @Optional @SerialName(KeyMessage) val messageOrNull: String? = null,
     @Optional @SerialName(KeyAroundLatLng) val aroundLatLngOrNull: String? = null,
     @Optional @SerialName(KeyAutomaticRadius) val automaticRadiusOrNull: Float? = null,
     @Optional @SerialName(KeyServerUsed) val serverUsedOrNull: String? = null,
-    @Optional @SerialName(KeyIndexUsed) val indexUsedOrNull: String? = null, // TODO Check if possible IndexName
-    @Optional @SerialName(KeyAbTestVariantID) val abTestVariantIDOrNull: Int? = null, // TODO Check if ABTestID
-    @Optional @SerialName(KeyParsedQuery) val parsedQueryOrNull: String? = null, // TODO Check if possible Query
+    @Optional @SerialName(KeyIndexUsed) val indexUsedOrNull: IndexName? = null,
+    @Optional @SerialName(KeyAbTestVariantID) val abTestVariantIDOrNull: Int? = null,
+    @Optional @SerialName(KeyParsedQuery) val parsedQueryOrNull: String? = null,
     @Optional @SerialName(KeyFacets) @Serializable(KSerializerFacets::class) val facetsOrNull: Map<Attribute, List<Facet>>? = null,
     @Optional @SerialName(KeyFacets_Stats) val facetStatsOrNull: Map<Attribute, FacetStats>? = null,
     @Optional @SerialName(KeyCursor) val cursorOrNull: Cursor? = null,
@@ -105,7 +105,7 @@ data class ResponseSearch(
         get() = serverUsedOrNull!!
 
     @Transient
-    val indexUsed: String
+    val indexUsed: IndexName
         get() = indexUsedOrNull!!
 
     @Transient
