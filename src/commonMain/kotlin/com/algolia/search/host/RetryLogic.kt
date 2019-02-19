@@ -9,13 +9,12 @@ import kotlin.math.floor
 
 
 internal class RetryLogic(
+    private val maxRetryAttempts: Int,
     val hosts: List<String>,
     private val hostStatusExpirationDelay: Long = 1000L * 60L * 5L
 ) {
 
     internal val statuses = hosts.initialHostStatus()
-
-    private val maxAttempts = 5
 
     private suspend fun <T> retry(
         timeout: Long,
@@ -39,7 +38,7 @@ internal class RetryLogic(
                 response
             }
         } catch (exception: Exception) {
-            if (attempt >= maxAttempts) throw RetryableException(attempt, exceptions)
+            if (attempt >= maxRetryAttempts) throw RetryableException(attempt, exceptions)
             when (exception) {
                 is BadResponseStatusException -> {
                     val code = exception.response.status.value

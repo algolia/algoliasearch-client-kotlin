@@ -28,7 +28,8 @@ internal class TestSuiteDNS {
                         "https://$applicationID-1.algolianet.com",
                         "https://$applicationID-2.algolianet.com",
                         "https://$applicationID-3.algolianet.com"
-                    )
+                    ),
+                    maxRetryAttempts = 1000
                 )
             )
 
