@@ -4,6 +4,7 @@ import com.algolia.search.host.RetryLogic
 import com.algolia.search.host.readHosts
 import com.algolia.search.host.writeHosts
 import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.response.ResponseABTest
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.revision.RevisionIndex
@@ -38,6 +39,7 @@ internal class APIWrapperImpl(
                     it.register(QueryRule.serializer())
                     it.register(CreationAPIKey.serializer())
                     it.register(RevisionIndex.serializer())
+                    it.register(ResponseABTest)
                 }
         }
         install(DefaultRequest) {
