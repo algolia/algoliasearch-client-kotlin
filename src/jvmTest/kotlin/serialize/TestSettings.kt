@@ -45,8 +45,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             // Pagination
             hitsPerPage = int,
             paginationLimitedTo = int,
-            minWordSizefor1Typo = int,
-            minWordSizefor2Typos = int,
+            minWordSizeFor1Typo = int,
+            minWordSizeFor2Typos = int,
             // Typos
             typoTolerance = TypoTolerance.Min,
             allowTyposOnNumericTokens = boolean,
