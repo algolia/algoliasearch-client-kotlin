@@ -74,6 +74,7 @@ internal class TestSuiteABTest {
                 }
                 clientAnalytics.listABTests().abTests.find { it.abTestID == response.abTestID }.shouldNotBeNull()
                 clientAnalytics.stopABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
+                clientAnalytics.getABTest(response.abTestID).status shouldEqual ABTestStatus.Stopped
                 clientAnalytics.deleteABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
                 var hasThrown = false
                 try {
