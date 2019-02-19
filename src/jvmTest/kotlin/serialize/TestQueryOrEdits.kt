@@ -30,9 +30,9 @@ internal class TestQueryOrEdits : TestSerializer<QueryOrEdits>(QueryOrEdits) {
 
     @Test
     fun backwardCompatibility() {
-        val queryRule = Json.parse(QueryRule.serializer(), loadScratch("query_rule_v1.json").readText())
+        val rule = Json.parse(Rule.serializer(), loadScratch("rule_v1.json").readText())
 
-        queryRule shouldEqual QueryRule(
+        rule shouldEqual Rule(
             "query_edits".toObjectID(),
             Condition(
                 Pattern.Literal("mobile phone"),

@@ -31,7 +31,7 @@ object ClientAccount {
 
         destination.apply {
             tasks += setSettings(source.getSettings())
-            source.browseAllRules { tasks += saveRules(hits.map { it.queryRule }) }
+            source.browseAllRules { tasks += saveRules(hits.map { it.rule }) }
             source.browseAllSynonyms { tasks += saveSynonyms(hits) }
             source.browseAllObjects { hits?.let { tasks += saveObjects(it.map { it.json }) } }
         }

@@ -1,6 +1,6 @@
 package com.algolia.search.model.response
 
-import com.algolia.search.model.rule.QueryRule
+import com.algolia.search.model.rule.Rule
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.asJsonInput
 import kotlinx.serialization.Decoder
@@ -12,20 +12,20 @@ import kotlinx.serialization.json.JsonObject
 
 
 @Serializable
-data class ResponseQueryRule(
-    val queryRule: QueryRule,
+data class ResponseRule(
+    val rule: Rule,
     val highlight: JsonObject? = null
 ) {
 
-    @Serializer(ResponseQueryRule::class)
-    companion object : DeserializationStrategy<ResponseQueryRule> {
+    @Serializer(ResponseRule::class)
+    companion object : DeserializationStrategy<ResponseRule> {
 
-        override fun deserialize(decoder: Decoder): ResponseQueryRule {
+        override fun deserialize(decoder: Decoder): ResponseRule {
             val json = decoder.asJsonInput().jsonObject
-            val queryRule = Json.nonstrict.fromJson(QueryRule.serializer(), json)
+            val rule = Json.nonstrict.fromJson(Rule.serializer(), json)
             val highlight = json.getObjectOrNull(Key_HighlightResult)
 
-            return ResponseQueryRule(queryRule, highlight)
+            return ResponseRule(rule, highlight)
         }
     }
 }

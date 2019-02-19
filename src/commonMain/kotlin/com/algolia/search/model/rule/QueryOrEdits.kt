@@ -41,7 +41,7 @@ sealed class QueryOrEdits {
                     } else json[KeyRemoveLowercase].jsonArray.map { Edit(it.content) }
                     Edits(edits)
                 }
-                else -> throw Exception("Unable to deserialize QueryRule.")
+                else -> throw Exception("Unable to deserialize Rule.")
             }
         }
     }

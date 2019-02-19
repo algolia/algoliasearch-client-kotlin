@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.model.rule.QueryRule
+import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
@@ -21,7 +21,7 @@ import shouldNotBeNull
 
 
 @RunWith(JUnit4::class)
-internal class TestSuiteQueryRules {
+internal class TestSuiteRules {
 
     private val suffix = "rules"
     private val indexName = testSuiteIndexName(suffix)
@@ -37,28 +37,28 @@ internal class TestSuiteQueryRules {
     fun test() {
         runBlocking {
             val objects = load(JsonObjectSerializer.list, "iphones.json")
-            val queryRule = load(QueryRule.serializer(), "query_rule_brand.json")
-            val queryRules = load(QueryRule.serializer().list, "query_rule_edits.json")
+            val rule = load(Rule.serializer(), "rule_brand.json")
+            val rules = load(Rule.serializer().list, "rule_edits.json")
             val tasks = mutableListOf<Task>()
 
             index.apply {
                 tasks += saveObjects(objects)
                 tasks += setSettings(Settings(attributesForFaceting = listOf(AttributeForFaceting.Default(brand))))
-                tasks += saveRule(queryRule)
-                tasks += saveRules(queryRules)
+                tasks += saveRule(rule)
+                tasks += saveRules(rules)
 
                 tasks.wait().all { it is TaskStatus.Published }
 
-                getRule(queryRule.objectID).queryRule shouldEqual queryRule
-                queryRules.forEach { getRule(it.objectID).queryRule shouldEqual it }
-                val searches = searchRules().hits.map { it.queryRule }
+                getRule(rule.objectID).rule shouldEqual rule
+                rules.forEach { getRule(it.objectID).rule shouldEqual it }
+                val searches = searchRules().hits.map { it.rule }
 
-                searches.find { it.objectID == queryRule.objectID }.shouldNotBeNull()
-                searches.find { it.objectID == queryRules.first().objectID }.shouldNotBeNull()
-                deleteRule(queryRule.objectID).wait() shouldEqual TaskStatus.Published
+                searches.find { it.objectID == rule.objectID }.shouldNotBeNull()
+                searches.find { it.objectID == rules.first().objectID }.shouldNotBeNull()
+                deleteRule(rule.objectID).wait() shouldEqual TaskStatus.Published
                 var isNotfound = false
                 try {
-                    getRule(queryRule.objectID)
+                    getRule(rule.objectID)
                 } catch (exception: BadResponseStatusException) {
                     isNotfound = exception.statusCode == HttpStatusCode.NotFound
                 }

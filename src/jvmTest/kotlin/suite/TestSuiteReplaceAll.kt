@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.model.rule.QueryRule
+import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
@@ -36,7 +36,7 @@ class TestSuiteReplaceAll {
     @Test
     fun test() {
         runBlocking {
-            val rule = load(QueryRule.serializer(), "query_rule_one.json")
+            val rule = load(Rule.serializer(), "rule_one.json")
             val synonym = load(Synonym, "synonym_one.json") as Synonym.MultiWay
             val data = json { KeyObjectID to objectIDOne }
 
@@ -57,7 +57,7 @@ class TestSuiteReplaceAll {
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
 
                 getObject(objectIDTwo)[KeyObjectID].content shouldEqual objectIDTwo.raw
-                getRule(objectIDTwo).queryRule.objectID shouldEqual objectIDTwo
+                getRule(objectIDTwo).rule.objectID shouldEqual objectIDTwo
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
                 var notFound = false

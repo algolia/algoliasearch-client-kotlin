@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.model.rule.QueryRule
+import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.synonym.Synonym
@@ -30,7 +30,7 @@ internal class TestSuiteCopyIndex {
     private val indexNameRules = indexName.copy(indexName.raw + "_rules")
     private val indexNameSynonyms = indexName.copy(indexName.raw + "_synonyms")
     private val indexNameFullCopy = indexName.copy(indexName.raw + "_full_copy")
-    private val queryRuleID = "company_auto_faceting".toObjectID()
+    private val ruleID = "company_auto_faceting".toObjectID()
 
     private val objects = listOf(
         json {
@@ -55,12 +55,12 @@ internal class TestSuiteCopyIndex {
             index.apply {
                 val tasks = mutableListOf<Task>()
                 val synonym = load(Synonym, "synonym_placeholder.json")
-                val queryRule = load(QueryRule.serializer(), "query_rule_company.json")
+                val rule = load(Rule.serializer(), "rule_company.json")
 
                 tasks += saveObjects(objects)
                 tasks += setSettings(settings)
                 tasks += saveSynonym(synonym)
-                tasks += saveRule(queryRule)
+                tasks += saveRule(rule)
 
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
                 tasks.clear()
@@ -73,11 +73,11 @@ internal class TestSuiteCopyIndex {
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
 
                 clientAdmin1.getIndex(indexNameSettings).getSettings() shouldEqual getSettings()
-                clientAdmin1.getIndex(indexNameRules).getRule(queryRuleID) shouldEqual getRule(queryRuleID)
+                clientAdmin1.getIndex(indexNameRules).getRule(ruleID) shouldEqual getRule(ruleID)
                 clientAdmin1.getIndex(indexNameSynonyms).getSynonym(synonym.objectID) shouldEqual getSynonym(synonym.objectID)
                 clientAdmin1.getIndex(indexNameFullCopy).also {
                     it.getSettings() shouldEqual getSettings()
-                    it.getRule(queryRuleID) shouldEqual getRule(queryRuleID)
+                    it.getRule(ruleID) shouldEqual getRule(ruleID)
                     it.getSynonym(synonym.objectID) shouldEqual getSynonym(synonym.objectID)
                 }
             }

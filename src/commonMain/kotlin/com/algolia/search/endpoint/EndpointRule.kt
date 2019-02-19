@@ -3,25 +3,25 @@ package com.algolia.search.endpoint
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.rule.Anchoring
-import com.algolia.search.model.rule.QueryRule
-import com.algolia.search.model.response.ResponseQueryRule
+import com.algolia.search.model.response.ResponseRule
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.revision.RevisionIndex
+import com.algolia.search.model.rule.Anchoring
+import com.algolia.search.model.rule.Rule
 
 
-interface EndpointQueryRule {
+interface EndpointRule {
 
     val indexName: IndexName
 
     suspend fun saveRule(
-        queryRule: QueryRule,
+        rule: Rule,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
 
     suspend fun saveRules(
-        queryRules: List<QueryRule>,
+        rules: List<Rule>,
         forwardToReplicas: Boolean? = null,
         clearExistingRules: Boolean? = null,
         requestOptions: RequestOptions? = null
@@ -30,7 +30,7 @@ interface EndpointQueryRule {
     suspend fun getRule(
         objectID: ObjectID,
         requestOptions: RequestOptions? = null
-    ): ResponseQueryRule
+    ): ResponseRule
 
     suspend fun deleteRule(
         objectID: ObjectID,
@@ -54,7 +54,7 @@ interface EndpointQueryRule {
     ): RevisionIndex
 
     suspend fun replaceAllRules(
-        queryRules: List<QueryRule>,
+        rules: List<Rule>,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): RevisionIndex

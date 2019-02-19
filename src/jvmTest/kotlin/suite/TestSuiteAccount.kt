@@ -1,7 +1,7 @@
 package suite
 
 import com.algolia.search.client.ClientAccount
-import com.algolia.search.model.rule.QueryRule
+import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.synonym.Synonym
@@ -46,7 +46,7 @@ internal class TestSuiteAccount {
     @Test
     fun test() {
         runBlocking {
-            val rule = load(QueryRule.serializer(), "query_rule_one.json")
+            val rule = load(Rule.serializer(), "rule_one.json")
             var hasThrown = false
             try {
                 ClientAccount.copyIndex(index1, index2)
@@ -68,7 +68,7 @@ internal class TestSuiteAccount {
 
                 getObject(objectID) shouldEqual data
                 getSynonym(objectID) shouldEqual synonym
-                getRule(objectID).queryRule shouldEqual rule
+                getRule(objectID).rule shouldEqual rule
                 getSettings().searchableAttributes shouldEqual settings.searchableAttributes
             }
         }

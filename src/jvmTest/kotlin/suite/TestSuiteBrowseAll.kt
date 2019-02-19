@@ -2,7 +2,7 @@ package suite
 import com.algolia.search.browseAllObjects
 import com.algolia.search.browseAllRules
 import com.algolia.search.browseAllSynonyms
-import com.algolia.search.model.rule.QueryRule
+import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.TaskStatus
@@ -31,8 +31,8 @@ internal class TestSuiteBrowseAll {
     @Test
     fun rules() {
         runBlocking {
-            val ruleA = load(QueryRule.serializer(), "query_rule_brand.json")
-            val ruleB = load(QueryRule.serializer(), "query_rule_company.json")
+            val ruleA = load(Rule.serializer(), "rule_brand.json")
+            val ruleB = load(Rule.serializer(), "rule_company.json")
             var count = 0
 
             index.apply {
