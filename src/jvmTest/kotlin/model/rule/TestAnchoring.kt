@@ -1,6 +1,6 @@
 package model.rule
 
-import com.algolia.search.model.queryrule.Anchoring.*
+import com.algolia.search.model.rule.Anchoring.*
 import com.algolia.search.serialize.KeyContains
 import com.algolia.search.serialize.KeyEndsWith
 import com.algolia.search.serialize.KeyIs

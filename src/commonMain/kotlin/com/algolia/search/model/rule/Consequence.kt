@@ -1,4 +1,4 @@
-package com.algolia.search.model.queryrule
+package com.algolia.search.model.rule
 
 import com.algolia.search.model.ObjectID
 import com.algolia.search.serialize.*

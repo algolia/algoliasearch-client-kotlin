@@ -1,9 +1,9 @@
 package serialize
 
 import attributeA
-import com.algolia.search.model.queryrule.Anchoring
-import com.algolia.search.model.queryrule.Condition
-import com.algolia.search.model.queryrule.Pattern
+import com.algolia.search.model.rule.Anchoring
+import com.algolia.search.model.rule.Condition
+import com.algolia.search.model.rule.Pattern
 import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyAnchoring
 import com.algolia.search.serialize.KeyIs

@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.model.queryrule.Edit
+import com.algolia.search.model.rule.Edit
 import com.algolia.search.serialize.*
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith

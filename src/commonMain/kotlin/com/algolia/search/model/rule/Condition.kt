@@ -1,4 +1,4 @@
-package com.algolia.search.model.queryrule
+package com.algolia.search.model.rule
 
 import com.algolia.search.serialize.KeyAnchoring
 import com.algolia.search.serialize.KeyContext

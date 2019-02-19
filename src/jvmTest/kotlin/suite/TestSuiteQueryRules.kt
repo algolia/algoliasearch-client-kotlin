@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.rule.QueryRule
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task

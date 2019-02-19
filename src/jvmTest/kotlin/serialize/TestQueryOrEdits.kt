@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.model.queryrule.*
+import com.algolia.search.model.rule.*
 import com.algolia.search.serialize.KeyEdits
 import com.algolia.search.toObjectID
 import kotlinx.serialization.json.Json

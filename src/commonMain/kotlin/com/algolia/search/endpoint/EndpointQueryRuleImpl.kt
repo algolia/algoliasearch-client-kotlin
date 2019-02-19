@@ -3,8 +3,8 @@ package com.algolia.search.endpoint
 import com.algolia.search.client.*
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.queryrule.Anchoring
-import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.rule.Anchoring
+import com.algolia.search.model.rule.QueryRule
 import com.algolia.search.model.request.RequestSearchRules
 import com.algolia.search.model.response.ResponseQueryRule
 import com.algolia.search.model.response.ResponseRules

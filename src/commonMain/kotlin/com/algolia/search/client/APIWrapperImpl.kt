@@ -3,7 +3,7 @@ package com.algolia.search.client
 import com.algolia.search.host.RetryLogic
 import com.algolia.search.host.readHosts
 import com.algolia.search.host.writeHosts
-import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.rule.QueryRule
 import com.algolia.search.model.response.ResponseABTest
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.creation.CreationAPIKey

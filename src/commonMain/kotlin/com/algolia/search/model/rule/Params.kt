@@ -1,4 +1,4 @@
-package com.algolia.search.model.queryrule
+package com.algolia.search.model.rule
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.enums.*

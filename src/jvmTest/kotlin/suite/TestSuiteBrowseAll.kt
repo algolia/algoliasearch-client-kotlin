@@ -2,7 +2,7 @@ package suite
 import com.algolia.search.browseAllObjects
 import com.algolia.search.browseAllRules
 import com.algolia.search.browseAllSynonyms
-import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.rule.QueryRule
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.TaskStatus

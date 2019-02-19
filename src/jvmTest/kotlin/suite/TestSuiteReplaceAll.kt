@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.rule.QueryRule
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus

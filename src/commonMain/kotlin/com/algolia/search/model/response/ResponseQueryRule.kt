@@ -1,6 +1,6 @@
 package com.algolia.search.model.response
 
-import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.rule.QueryRule
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.asJsonInput
 import kotlinx.serialization.Decoder

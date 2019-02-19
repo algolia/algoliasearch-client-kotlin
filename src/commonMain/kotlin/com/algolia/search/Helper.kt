@@ -7,7 +7,7 @@ import com.algolia.search.model.*
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.enums.Point
 import com.algolia.search.model.enums.Snippet
-import com.algolia.search.model.queryrule.Anchoring
+import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.ResponseSearch

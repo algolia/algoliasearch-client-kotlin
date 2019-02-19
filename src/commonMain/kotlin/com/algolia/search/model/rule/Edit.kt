@@ -1,4 +1,4 @@
-package com.algolia.search.model.queryrule
+package com.algolia.search.model.rule
 
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
