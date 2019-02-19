@@ -77,11 +77,13 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String) {
         if (indexName.contains("kotlin")) {
             val result = Regex("kotlin-(.*)-qlitzler-$suffix").find(indexName)
             val date = result?.groupValues?.get(1)
-            val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
-            val difference = Date().time - dateFormat.parse(date).time
+            if (date != null) {
+                val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
+                val difference = Date().time - dateFormat.parse(date).time
 
-            if (date != null && difference >= dayInMillis) {
-                indexToDelete += it.indexName
+                if (difference >= dayInMillis) {
+                    indexToDelete += it.indexName
+                }
             }
         }
     }
