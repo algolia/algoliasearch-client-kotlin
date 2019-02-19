@@ -51,7 +51,7 @@ internal fun testSuiteIndexName(suffix: String): IndexName {
 
 internal suspend fun cleanABTest(suffix: String) {
     clientAnalytics.browseAllABTests {
-        abTests?.forEach {
+        abTests.forEach {
             val result = Regex("kotlin-(.*)-qlitzler-$suffix").find(it.name)
             val date = result?.groupValues?.get(1)
 

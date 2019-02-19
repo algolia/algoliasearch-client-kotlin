@@ -38,7 +38,7 @@ internal class TestSuiteBatching {
             index.apply {
                 saveObjects(objects).wait() shouldEqual TaskStatus.Published
                 batch(batches).wait() shouldEqual TaskStatus.Published
-                val hits = browse().hits!!.map { it.json }
+                val hits = browse().hits.map { it.json }
 
                 json.stringify(JsonObjectSerializer.list, hits) shouldEqual expected
             }

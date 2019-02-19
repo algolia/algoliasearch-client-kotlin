@@ -17,9 +17,17 @@ data class ResponseABTest(
     val status: ABTestStatus,
     val variantA: ResponseVariant,
     val variantB: ResponseVariant,
-    @Optional val clickSignificance: Float? = null,
-    @Optional val conversionSignificance: Float? = null
+    @Optional val clickSignificanceOrNull: Float? = null,
+    @Optional val conversionSignificanceOrNull: Float? = null
 ) {
+
+    @Transient
+    val clickSignificance: Float
+        get() = clickSignificanceOrNull!!
+
+    @Transient
+    val conversionSignificance: Float
+        get() = conversionSignificanceOrNull!!
 
     @Serializer(ResponseABTest::class)
     companion object : KSerializer<ResponseABTest> {
@@ -31,8 +39,8 @@ data class ResponseABTest(
                 KeyEndAt to obj.endAt
                 KeyName to obj.name
                 KeyStatus to obj.status.raw
-                obj.conversionSignificance?.let { KeyConversionSignificance to it }
-                obj.clickSignificance?.let { KeyClickSignificance to it }
+                obj.conversionSignificanceOrNull?.let { KeyConversionSignificance to it }
+                obj.clickSignificanceOrNull?.let { KeyClickSignificance to it }
                 KeyVariants to jsonArray {
                     +JsonNoNulls.toJson(ResponseVariant.serializer(), obj.variantA)
                     +JsonNoNulls.toJson(ResponseVariant.serializer(), obj.variantB)
@@ -52,8 +60,8 @@ data class ResponseABTest(
                 endAt = element[KeyEndAt].content,
                 name = element[KeyName].content,
                 status = Json.parse(ABTestStatus, element[KeyStatus].content),
-                conversionSignificance = element[KeyConversionSignificance].floatOrNull,
-                clickSignificance = element[KeyClickSignificance].floatOrNull,
+                conversionSignificanceOrNull = element[KeyConversionSignificance].floatOrNull,
+                clickSignificanceOrNull = element[KeyClickSignificance].floatOrNull,
                 variantA = Json.plain.fromJson(ResponseVariant.serializer(), variants[0]),
                 variantB = Json.plain.fromJson(ResponseVariant.serializer(), variants[1])
             )

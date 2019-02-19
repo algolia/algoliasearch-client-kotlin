@@ -74,7 +74,7 @@ internal class TestSuiteABTest {
                             it.description shouldEqual abTest.variantB.description
                         }
                     }
-                    clientAnalytics.listABTests().abTests!!.find { it.abTestID == response.abTestID }.shouldNotBeNull()
+                    clientAnalytics.listABTests().abTests.find { it.abTestID == response.abTestID }.shouldNotBeNull()
                     clientAnalytics.stopABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
                     clientAnalytics.deleteABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
                     var hasThrown = false

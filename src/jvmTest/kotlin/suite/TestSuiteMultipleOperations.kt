@@ -50,7 +50,7 @@ internal class TestSuiteMultipleOperations {
 
                 response.waitAll().all { it is TaskStatus.Published }.shouldBeTrue()
                 val requests = operations.mapIndexed { index, request ->
-                    RequestObjects(request.indexName, response.objectIDs!![index]!!)
+                    RequestObjects(request.indexName, response.objectIDs[index]!!)
                 }
 
                 multipleGetObjects(requests).let {
@@ -66,14 +66,14 @@ internal class TestSuiteMultipleOperations {
                 )
                 multipleQueries(indexQueries).let {
                     it.results.size shouldEqual 2
-                    it.results[0].hits?.size shouldEqual 2
-                    it.results[1].hits?.size shouldEqual 2
+                    it.results[0].hits.size shouldEqual 2
+                    it.results[1].hits.size shouldEqual 2
                 }
 
                 multipleQueries(indexQueries, MultipleQueriesStrategy.StopIfEnoughMatches).let {
                     it.results.size shouldEqual 2
-                    it.results[0].hits?.size shouldEqual 2
-                    it.results[1].hits?.size shouldEqual 0
+                    it.results[0].hits.size shouldEqual 2
+                    it.results[1].hits.size shouldEqual 0
                 }
             }
         }
