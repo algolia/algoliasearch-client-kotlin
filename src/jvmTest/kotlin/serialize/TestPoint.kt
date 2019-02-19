@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.model.enums.Point
+import com.algolia.search.model.search.Point
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

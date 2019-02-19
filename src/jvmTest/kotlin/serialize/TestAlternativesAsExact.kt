@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.model.enums.AlternativesAsExact
-import com.algolia.search.model.enums.AlternativesAsExact.*
+import com.algolia.search.model.search.AlternativesAsExact
+import com.algolia.search.model.search.AlternativesAsExact.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

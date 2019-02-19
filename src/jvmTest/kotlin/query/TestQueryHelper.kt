@@ -3,9 +3,9 @@ package query
 import buildTest
 import com.algolia.search.limit
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.enums.AlternativesAsExact
-import com.algolia.search.model.enums.QueryLanguage
-import com.algolia.search.model.enums.ResponseFields
+import com.algolia.search.model.search.AlternativesAsExact
+import com.algolia.search.model.search.QueryLanguage
+import com.algolia.search.model.search.ResponseFields
 import com.algolia.search.model.search.Query
 import com.algolia.search.query.*
 import facetA

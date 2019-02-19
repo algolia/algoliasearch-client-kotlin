@@ -2,7 +2,7 @@ package suite
 
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.apikey.ACL
-import com.algolia.search.model.enums.TypoTolerance
+import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.serialize.urlEncode

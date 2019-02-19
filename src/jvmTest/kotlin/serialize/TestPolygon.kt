@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.model.enums.Polygon
+import com.algolia.search.model.search.Polygon
 import com.algolia.search.and
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith

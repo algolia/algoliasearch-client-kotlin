@@ -5,8 +5,8 @@ import com.algolia.search.client.Index
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.*
 import com.algolia.search.model.analytics.ABTestID
-import com.algolia.search.model.enums.Point
-import com.algolia.search.model.enums.Snippet
+import com.algolia.search.model.search.Point
+import com.algolia.search.model.search.Snippet
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.ResponseRules

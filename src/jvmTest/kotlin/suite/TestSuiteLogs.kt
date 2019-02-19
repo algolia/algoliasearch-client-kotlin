@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.model.enums.LogType
+import com.algolia.search.model.LogType
 import com.algolia.search.toIndexName
 import kotlinx.coroutines.runBlocking
 import org.junit.Test

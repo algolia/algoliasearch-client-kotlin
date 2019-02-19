@@ -3,7 +3,7 @@ package suite
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
-import com.algolia.search.model.enums.BooleanOrQueryLanguages
+import com.algolia.search.model.search.BooleanOrQueryLanguages
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID

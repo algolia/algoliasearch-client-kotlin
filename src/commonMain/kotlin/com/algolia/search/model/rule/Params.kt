@@ -2,6 +2,7 @@ package com.algolia.search.model.rule
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.enums.*
+import com.algolia.search.model.search.*
 import com.algolia.search.query.FilterBuilder
 import com.algolia.search.query.OptionalFilterBuilder
 import com.algolia.search.serialize.*

@@ -1,8 +1,8 @@
 package suite
 
-import com.algolia.search.model.enums.BooleanOrQueryLanguages
-import com.algolia.search.model.enums.QueryLanguage
-import com.algolia.search.model.enums.TypoTolerance
+import com.algolia.search.model.search.BooleanOrQueryLanguages
+import com.algolia.search.model.search.QueryLanguage
+import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.TaskStatus

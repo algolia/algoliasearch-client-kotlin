@@ -3,8 +3,7 @@ package serialize
 import attributes
 import attributesJson
 import boolean
-import com.algolia.search.model.enums.*
-import com.algolia.search.model.search.Query
+import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import int
 import kotlinx.serialization.json.json

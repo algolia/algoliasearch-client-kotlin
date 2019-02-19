@@ -4,7 +4,7 @@ import com.algolia.search.endpoint.*
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.enums.LogType
+import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.ResponseLogs

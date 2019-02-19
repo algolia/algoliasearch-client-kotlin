@@ -1,7 +1,7 @@
 package serialize
 
-import com.algolia.search.model.enums.QueryType
-import com.algolia.search.model.enums.QueryType.*
+import com.algolia.search.model.search.QueryType
+import com.algolia.search.model.search.QueryType.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

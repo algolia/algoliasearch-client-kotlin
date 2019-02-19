@@ -2,8 +2,8 @@ package serialize
 
 import attributeA
 import attributeB
-import com.algolia.search.model.enums.DecompoundedAttributes
-import com.algolia.search.model.enums.QueryLanguage
+import com.algolia.search.model.search.DecompoundedAttributes
+import com.algolia.search.model.search.QueryLanguage
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
@@ -22,7 +22,11 @@ internal class TestDecompoundedAttributes : TestSerializer<DecompoundedAttribute
     companion object {
 
         val item =
-            DecompoundedAttributes(QueryLanguage.German, attributeA, attributeB)
+            DecompoundedAttributes(
+                QueryLanguage.German,
+                attributeA,
+                attributeB
+            )
         val json = json {
             QueryLanguage.German.raw to jsonArray {
                 +attributeA.raw
