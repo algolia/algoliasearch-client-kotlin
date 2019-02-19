@@ -1,14 +1,17 @@
 package suite
 
+import com.algolia.search.browseAllABTests
 import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.toAPIKey
 import com.algolia.search.toApplicationID
 import com.algolia.search.toIndexName
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
+import shouldEqual
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
@@ -54,6 +57,20 @@ internal fun loadScratch(name: String): File {
     return File("src/commonTest/scratches/$name")
 }
 
+internal fun cleanABTest() {
+    runBlocking {
+        clientAnalytics.browseAllABTests {
+            abTests?.forEach {
+                if (it.name.contains("kotlin")) {
+                    clientAdmin1.getIndex(it.variantA.indexName).apply {
+                        clientAnalytics.deleteABTest(it.abTestID).wait() shouldEqual TaskStatus.Published
+                    }
+                }
+            }
+        }
+    }
+}
+
 internal fun cleanIndex(client: ClientSearch, suffix: String) {
     runBlocking {
         val indexToDelete = mutableListOf<IndexName>()
@@ -64,14 +81,7 @@ internal fun cleanIndex(client: ClientSearch, suffix: String) {
                 val result = Regex("kotlin-(.*)-qlitzler-$suffix").find(indexName)
                 val date = result?.groupValues?.get(1)
 
-                if (date != null) {
-//                    val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
-//                    val difference = Date().time - dateFormat.parse(date).time
-//                    if (difference >= dayInMillis) {
-//                    }
-                    indexToDelete += it.indexName
-                    println("Deleted ${it.indexName}")
-                }
+                if (date != null) indexToDelete += it.indexName
             }
         }
         indexToDelete.forEach {
