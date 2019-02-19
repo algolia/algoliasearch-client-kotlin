@@ -13,7 +13,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Variant(
-    @SerialName(KeyIndex) val index: IndexName,
+    @SerialName(KeyIndex) val indexName: IndexName,
     @SerialName(KeyTrafficPercentage) val trafficPercentage: Int,
     @SerialName(KeyDescription) val description: String = "",
     @Optional @SerialName(KeyCustomSearchParameters) val customSearchParameters: Query? = null

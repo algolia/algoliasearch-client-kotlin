@@ -68,10 +68,10 @@ class TestSuiteABTest {
                 clientAnalytics.getABTest(response.abTestID).let {
                     it.name shouldEqual abTest.name
                     it.endAt shouldEqual abTest.endAt
-                    it.variantA.indexName shouldEqual abTest.variantA.index
+                    it.variantA.indexName shouldEqual abTest.variantA.indexName
                     it.variantA.trafficPercentage shouldEqual abTest.variantA.trafficPercentage
                     it.variantA.description shouldEqual abTest.variantA.description
-                    it.variantB.indexName shouldEqual abTest.variantB.index
+                    it.variantB.indexName shouldEqual abTest.variantB.indexName
                     it.variantB.trafficPercentage shouldEqual abTest.variantB.trafficPercentage
                     it.variantB.description shouldEqual abTest.variantB.description
                     it.status shouldNotEqual ABTestStatus.Stopped
