@@ -1,5 +1,6 @@
 package suite
 
+import com.algolia.search.dateISO8601
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
@@ -40,12 +41,14 @@ internal class TestSuiteAATest {
 
     @Before
     fun clean() {
-        cleanABTest()
-        cleanIndex(clientAdmin1, suffix)
+        runBlocking {
+            cleanABTest(suffix)
+            cleanIndex(clientAdmin1, suffix)
+        }
     }
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             index.apply {
                 saveObject(data).wait() shouldEqual TaskStatus.Published
