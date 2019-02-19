@@ -2,7 +2,7 @@ package model.search
 
 import attributeA
 import attributeB
-import com.algolia.search.model.search.Ranking.*
+import com.algolia.search.model.settings.Ranking.*
 import com.algolia.search.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith

@@ -1,7 +1,7 @@
 package model.search
 
 import attributeA
-import com.algolia.search.model.search.NumericAttributeFilter
+import com.algolia.search.model.settings.NumericAttributeFilter
 import com.algolia.search.serialize.KeyEqualOnly
 import org.junit.Test
 import org.junit.runner.RunWith

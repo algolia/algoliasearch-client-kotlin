@@ -2,7 +2,7 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.*
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.search.NumericAttributeFilter
+import com.algolia.search.model.settings.NumericAttributeFilter
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings

@@ -1,4 +1,4 @@
-package com.algolia.search.model.search
+package com.algolia.search.model.settings
 
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*

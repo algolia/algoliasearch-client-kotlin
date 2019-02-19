@@ -4,11 +4,8 @@ import attributeA
 import attributes
 import attributesJson
 import boolean
-import com.algolia.search.model.settings.AttributeForFaceting
-import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.search.*
-import com.algolia.search.model.settings.Distinct
-import com.algolia.search.model.settings.Settings
+import com.algolia.search.model.settings.*
 import com.algolia.search.serialize.*
 import indexA
 import int

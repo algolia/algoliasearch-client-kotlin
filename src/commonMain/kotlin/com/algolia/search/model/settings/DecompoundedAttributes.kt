@@ -1,6 +1,7 @@
-package com.algolia.search.model.search
+package com.algolia.search.model.settings
 
 import com.algolia.search.model.Attribute
+import com.algolia.search.model.search.QueryLanguage
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.HashMapSerializer
 

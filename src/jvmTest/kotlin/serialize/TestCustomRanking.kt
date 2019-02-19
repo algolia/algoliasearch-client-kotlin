@@ -2,8 +2,8 @@ package serialize
 
 import attributeA
 import attributeB
-import com.algolia.search.model.search.CustomRanking
-import com.algolia.search.model.search.CustomRanking.*
+import com.algolia.search.model.settings.CustomRanking
+import com.algolia.search.model.settings.CustomRanking.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

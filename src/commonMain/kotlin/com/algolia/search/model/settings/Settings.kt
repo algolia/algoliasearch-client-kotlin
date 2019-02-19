@@ -2,7 +2,6 @@ package com.algolia.search.model.settings
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.enums.*
 import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Optional
