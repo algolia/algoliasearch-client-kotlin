@@ -2,9 +2,7 @@ package com.algolia.search.model.response
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.search.Cursor
-import com.algolia.search.model.search.Facet
-import com.algolia.search.model.search.FacetStats
+import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
@@ -146,16 +144,16 @@ data class ResponseSearch(
     ) {
 
         @Transient
-        val highlights = json.getObjectOrNull(Key_HighlightResult)?.toHighlights()
+        val highlights: Map<Attribute, Highlight>? = json.getObjectOrNull(Key_HighlightResult)?.toHighlights()
 
         @Transient
-        val snippets = json.getObjectOrNull(Key_SnippetResult)?.toSnippets()
+        val snippets: Map<Attribute, SnippetResult>? = json.getObjectOrNull(Key_SnippetResult)?.toSnippets()
 
         @Transient
-        val rankingInfo = json.getObjectOrNull(Key_RankingInfo)?.toRankingInfo()
+        val rankingInfo: RankingInfo? = json.getObjectOrNull(Key_RankingInfo)?.toRankingInfo()
 
         @Transient
-        val distinctSequentialID = json.getPrimitiveOrNull(Key_DistinctSeqID)?.int
+        val distinctSequentialID: Int? = json.getPrimitiveOrNull(Key_DistinctSeqID)?.int
 
 
         fun <T> get(serializer: KSerializer<T>, attribute: Attribute): T {
