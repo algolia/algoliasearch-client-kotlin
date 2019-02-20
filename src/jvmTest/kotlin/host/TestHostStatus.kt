@@ -1,13 +1,11 @@
 package host
 import com.algolia.search.Time
-import com.algolia.search.host.HostStatus
-import com.algolia.search.host.HostStatuses
-import com.algolia.search.host.areStatusExpired
-import com.algolia.search.host.selectNextHostIndex
+import com.algolia.search.host.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldBeFalse
+import shouldBeNull
 import shouldBeTrue
 import shouldEqual
 
@@ -69,7 +67,24 @@ internal class TestHostStatus {
         twoUp.selectNextHostIndex() shouldEqual 1
         // Even though the Unknown status is more recent, we still prefer an host that is Up.
         oneUpOneUnknown.selectNextHostIndex() shouldEqual 1
-        allDown.selectNextHostIndex() shouldEqual 0
+        allDown.selectNextHostIndex().shouldBeNull()
         oneDownOtherUnknown.selectNextHostIndex() shouldEqual 1
+    }
+
+    @Test
+    fun selectNextIndex() {
+        val allDown = listOf(HostStatus.Down to 0L, HostStatus.Down to 0L, HostStatus.Down to 0L)
+        var index = -1
+
+        index = allDown.nextIndex(index)
+        index shouldEqual 0
+        index = allDown.nextIndex(index)
+        index shouldEqual 1
+        index = allDown.nextIndex(index)
+        index shouldEqual 2
+        index = allDown.nextIndex(index)
+        index shouldEqual 0
+        index = allDown.nextIndex(index)
+        index shouldEqual 1
     }
 }

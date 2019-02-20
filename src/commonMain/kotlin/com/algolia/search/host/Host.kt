@@ -20,11 +20,11 @@ internal fun List<HostStatuses>.areStatusExpired(hostStatusExpirationDelay: Long
     return lastRequestTimestamp <= someTimeAgo
 }
 
-internal fun List<HostStatuses>.selectNextHostIndex(): Int {
+internal fun List<HostStatuses>.selectNextHostIndex(): Int? {
     val hasUp = firstOrNull { it.first == HostStatus.Up }
     val hasUnknown = hasUp ?: firstOrNull { it.first == HostStatus.Unknown }
 
-    return indexOf(hasUnknown).coerceAtLeast(0)
+    return hasUnknown?.let(::indexOf)
 }
 
 internal fun List<String>.randomize(): List<String> {
@@ -35,6 +35,10 @@ internal fun List<String>.randomize(): List<String> {
         destination += source.removeAt(Random.nextInt(0, source.size))
     }
     return destination
+}
+
+internal fun List<HostStatuses>.nextIndex(index: Int): Int {
+    return if (index + 1 > lastIndex) 0 else index + 1
 }
 
 internal fun List<String>.initialHostStatus() = map { HostStatus.Unknown to 0L }.toMutableList()

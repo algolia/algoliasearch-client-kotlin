@@ -15,6 +15,7 @@ internal class RetryLogic(
 ) {
 
     internal val statuses = hosts.initialHostStatus()
+    internal var index: Int = -1
 
     private suspend fun <T> retry(
         timeout: Long,
@@ -28,11 +29,11 @@ internal class RetryLogic(
                 statuses[index] = HostStatus.Unknown to 0L
             }
         }
-        val index = statuses.selectNextHostIndex()
+        index = statuses.selectNextHostIndex() ?: statuses.nextIndex(index)
         val host = hosts[index]
 
         return try {
-            withTimeout(timeout * attempt + 1) {
+            withTimeout(timeout * (attempt + 1)) {
                 val response = request("$host$path")
                 statuses[index] = HostStatus.Up.getHostStatus()
                 response

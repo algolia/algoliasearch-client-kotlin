@@ -4,6 +4,7 @@ import com.algolia.search.client.ClientSearch
 import com.algolia.search.client.Configuration
 import com.algolia.search.toAPIKey
 import com.algolia.search.toApplicationID
+import io.ktor.client.features.logging.LogLevel
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,12 +30,12 @@ internal class TestSuiteDNS {
                         "https://$applicationID-2.algolianet.com",
                         "https://$applicationID-3.algolianet.com"
                     ),
-                    maxRetryAttempts = 1000
+                    logLevel = LogLevel.INFO
                 )
             )
 
             client.apply {
-                repeat(10) {
+                repeat(10) { index ->
                     listIndexes()
                 }
             }
