@@ -5,7 +5,7 @@ import attributeB
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.MatchLevel
 import com.algolia.search.model.search.SnippetResult
-import com.algolia.search.serialize.KSerializerSnippets
+import com.algolia.search.serialize.KSerializerSnippetResults
 import com.algolia.search.serialize.KeyMatchLevel
 import com.algolia.search.serialize.KeyValue
 import kotlinx.serialization.json.json
@@ -16,7 +16,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestKSerializerSnippets : TestSerializer<Map<Attribute, SnippetResult>>(KSerializerSnippets) {
+internal class TestKSerializerSnippetResults : TestSerializer<Map<Attribute, SnippetResult>>(KSerializerSnippetResults) {
 
     override val items = listOf(
         mapOf(

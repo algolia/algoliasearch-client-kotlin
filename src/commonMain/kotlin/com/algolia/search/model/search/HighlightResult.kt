@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Highlight(
+data class HighlightResult(
     @SerialName(KeyValue) val value: String,
     @SerialName(KeyMatchLevel) val matchLevel: MatchLevel,
     @SerialName(KeyMatchedWords) val matchedWords: List<String>,

@@ -1,6 +1,6 @@
 package serialize.search
 
-import com.algolia.search.model.search.Highlight
+import com.algolia.search.model.search.HighlightResult
 import com.algolia.search.model.search.MatchLevel
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
@@ -10,7 +10,7 @@ import serialize.TestSerializer
 
 
 @RunWith(JUnit4::class)
-internal class TestHighlight : TestSerializer<Highlight>(Highlight.serializer()) {
+internal class TestHighlightResult : TestSerializer<HighlightResult>(HighlightResult.serializer()) {
 
     override val items = listOf(
         highlightResult to json
@@ -18,7 +18,7 @@ internal class TestHighlight : TestSerializer<Highlight>(Highlight.serializer())
 
     companion object {
 
-        val highlightResult = Highlight(
+        val highlightResult = HighlightResult(
             "value",
             MatchLevel.None,
             listOf("string"),

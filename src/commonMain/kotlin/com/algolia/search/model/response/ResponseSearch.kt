@@ -144,10 +144,10 @@ data class ResponseSearch(
     ) {
 
         @Transient
-        val highlights: Map<Attribute, Highlight>? = json.getObjectOrNull(Key_HighlightResult)?.toHighlights()
+        val highlights: Map<Attribute, HighlightResult>? = json.getObjectOrNull(Key_HighlightResult)?.toHighlightResults()
 
         @Transient
-        val snippets: Map<Attribute, SnippetResult>? = json.getObjectOrNull(Key_SnippetResult)?.toSnippets()
+        val snippets: Map<Attribute, SnippetResult>? = json.getObjectOrNull(Key_SnippetResult)?.toSnippetResults()
 
         @Transient
         val rankingInfo: RankingInfo? = json.getObjectOrNull(Key_RankingInfo)?.toRankingInfo()
