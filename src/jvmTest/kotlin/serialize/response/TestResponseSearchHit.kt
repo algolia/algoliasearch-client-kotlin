@@ -3,8 +3,10 @@ package serialize.response
 import attributeA
 import attributeB
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.search.Highlight
 import com.algolia.search.model.response.ResponseSearch
+import com.algolia.search.model.search.Highlight
+import com.algolia.search.model.search.MatchLevel
+import com.algolia.search.model.search.SnippetResult
 import com.algolia.search.serialize.KSerializerSnippets
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.Key_SnippetResult
@@ -28,15 +30,16 @@ internal class TestResponseSearchHit : TestSerializer<ResponseSearch.Hit>(Respon
     companion object {
 
         val highlights = mapOf(attributeA to TestHighlight.highlightResult)
-        val snippets = mapOf(attributeA to unknown, attributeB to unknown)
+        val snippets = mapOf(
+            attributeA to SnippetResult(unknown, MatchLevel.None),
+            attributeB to SnippetResult(unknown, MatchLevel.None)
+        )
         val json = json {
             Key_HighlightResult to Json.plain.toJson(
                 HashMapSerializer(Attribute, Highlight.serializer()),
                 highlights
             )
-            Key_SnippetResult to Json.plain.toJson(KSerializerSnippets,
-                snippets
-            )
+            Key_SnippetResult to Json.plain.toJson(KSerializerSnippets, snippets)
             attributeA to unknown
             attributeB to unknown
         }
