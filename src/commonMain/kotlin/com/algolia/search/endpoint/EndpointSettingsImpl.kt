@@ -2,8 +2,8 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.*
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.settings.NumericAttributeFilter
 import com.algolia.search.model.response.revision.RevisionIndex
+import com.algolia.search.model.settings.NumericAttributeFilter
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
@@ -26,6 +26,7 @@ internal class EndpointSettingsImpl(
 
     private val route = "/settings"
 
+    // TODO Specify why v1 / v2 in kdoc
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
         return retryRead(requestOptions, indexName.toPath(route)) { url ->
             val json = httpClient.get<JsonObject>(url) {
