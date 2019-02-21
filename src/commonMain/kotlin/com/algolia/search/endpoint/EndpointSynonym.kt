@@ -40,7 +40,7 @@ interface EndpointSynonym {
         query: String? = null,
         page: Int? = null,
         hitsPerPage: Int? = null,
-        synonymType: List<SynonymType>? = null,
+        synonymTypes: List<SynonymType>? = null,
         requestOptions: RequestOptions? = null
     ): ResponseSearchSynonyms
 

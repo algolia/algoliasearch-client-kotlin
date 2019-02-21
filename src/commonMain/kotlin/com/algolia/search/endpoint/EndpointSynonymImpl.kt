@@ -86,10 +86,10 @@ internal class EndpointSynonymImpl(
         query: String?,
         page: Int?,
         hitsPerPage: Int?,
-        synonymType: List<SynonymType>?,
+        synonymTypes: List<SynonymType>?,
         requestOptions: RequestOptions?
     ): ResponseSearchSynonyms {
-        val request = RequestSearchSynonyms(query, page, hitsPerPage, synonymType?.joinToString(",") { it.raw })
+        val request = RequestSearchSynonyms(query, page, hitsPerPage, synonymTypes?.joinToString(",") { it.raw })
         val bodyString = JsonNoNulls.stringify(RequestSearchSynonyms.serializer(), request)
 
         return retryRead(requestOptions, indexName.toPath("/$route/search")) { url ->
