@@ -12,7 +12,7 @@ object ClientAccount {
 
     suspend fun copyIndex(source: Index, destination: Index): List<Task> {
         if (source.api.applicationID == destination.api.applicationID) {
-            throw Exception("Source and Destination indices should not be on the same application.")
+            throw IllegalArgumentException("Source and Destination indices should not be on the same application.")
         }
         var hasThrown404 = false
         try {
@@ -22,7 +22,7 @@ object ClientAccount {
             if (!hasThrown404) throw exception
         }
         if (!hasThrown404) {
-            throw Exception("Destination index already exists. Please delete it before copying index across applications.")
+            throw IllegalStateException("Destination index already exists. Please delete it before copying index across applications.")
         }
 
         val tasks = mutableListOf<Task>()
