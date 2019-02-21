@@ -11,8 +11,6 @@ import io.ktor.http.HttpStatusCode
 object ClientAccount {
 
     suspend fun copyIndex(source: Index, destination: Index): List<Task> {
-        println(source.api.applicationID)
-        println(destination.api.applicationID)
         if (source.api.applicationID == destination.api.applicationID) {
             throw Exception("Source and Destination indices should not be on the same application.")
         }
