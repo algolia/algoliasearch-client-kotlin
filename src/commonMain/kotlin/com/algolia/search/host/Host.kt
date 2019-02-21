@@ -20,9 +20,9 @@ internal fun HostState.getHostStatus() = this to Time.getCurrentTimeMillis()
 
 internal fun List<HostStatus>.areStatusExpired(hostStatusExpirationDelay: Long): Boolean {
     val lastRequestTimestamp = maxBy { it.timestamp }?.timestamp ?: 0L
-    val someTimeAgo = Time.getCurrentTimeMillis() - hostStatusExpirationDelay
+    val timeDelayExpired = Time.getCurrentTimeMillis() - hostStatusExpirationDelay
 
-    return lastRequestTimestamp <= someTimeAgo
+    return lastRequestTimestamp <= timeDelayExpired
 }
 
 internal fun List<HostStatus>.selectNextHostIndex(): Int? {
