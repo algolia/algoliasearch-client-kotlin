@@ -42,6 +42,7 @@ class ClientSearch private constructor(
         configuration: Configuration
     ) : this(APIWrapperImpl(configuration))
 
+    @Suppress("unused")
     constructor(
         configuration: Configuration,
         engine: HttpClientEngine?
@@ -55,6 +56,7 @@ class ClientSearch private constructor(
         }
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus> {
 
         suspend fun loop(): List<TaskStatus> {
