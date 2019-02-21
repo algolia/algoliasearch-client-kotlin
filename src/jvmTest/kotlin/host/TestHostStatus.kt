@@ -16,7 +16,7 @@ internal class TestHostStatus {
 
     @Test
     fun initialState() {
-        val expected = listOf(HostStatus.Unknown to 0L, HostStatus.Unknown to 0L, HostStatus.Unknown to 0L)
+        val expected = listOf(HostState.Unknown to 0L, HostState.Unknown to 0L, HostState.Unknown to 0L)
         val actual = expected.areStatusExpired(5000L)
 
         actual.shouldBeTrue()
@@ -24,7 +24,7 @@ internal class TestHostStatus {
 
     @Test
     fun invalid() {
-        val initial = listOf<HostStatuses>()
+        val initial = listOf<HostStatus>()
 
         initial.areStatusExpired(5000).shouldBeTrue()
     }
@@ -32,7 +32,7 @@ internal class TestHostStatus {
     @Test
     fun lastRequestAfterExpirationDelay() {
         val sixSecondsAgo = Time.getCurrentTimeMillis() - 6000L
-        val statuses = listOf(HostStatus.Up to sixSecondsAgo, HostStatus.Unknown to 0L)
+        val statuses = listOf(HostState.Up to sixSecondsAgo, HostState.Unknown to 0L)
 
         // The last request was made 6 seconds ago, expiration is 5 seconds. Host statuses have expired
         statuses.areStatusExpired(5000L).shouldBeTrue()
@@ -48,7 +48,7 @@ internal class TestHostStatus {
         val hostStatusExpirationDelay = 5000L
 
         val statuses =
-            listOf(HostStatus.Unknown to 0L, HostStatus.Up to fourSecondsAgo, HostStatus.Down to sixSecondsAgo)
+            listOf(HostState.Unknown to 0L, HostState.Up to fourSecondsAgo, HostState.Down to sixSecondsAgo)
 
         // The last request was made 4 seconds ago. Even though one request was made 6 seconds ago, which is greater
         // than our expiration delay, our statuses should not be invalidated.
@@ -57,12 +57,12 @@ internal class TestHostStatus {
 
     @Test
     fun selectNextHostIndex() {
-        val allUnknowns = listOf(HostStatus.Unknown to 0L, HostStatus.Unknown to 0L, HostStatus.Unknown to 0L)
-        val oneUp = listOf(HostStatus.Unknown to 0L, HostStatus.Unknown to 0L, HostStatus.Up to 5000L)
-        val twoUp = listOf(HostStatus.Unknown to 0L, HostStatus.Up to 5000L, HostStatus.Up to 4000L)
-        val oneUpOneUnknown = listOf(HostStatus.Unknown to 0L, HostStatus.Up to 4000L, HostStatus.Unknown to 5000L)
-        val allDown = listOf(HostStatus.Down to 0L, HostStatus.Down to 0L, HostStatus.Down to 0L)
-        val oneDownOtherUnknown = listOf(HostStatus.Down to 0L, HostStatus.Unknown to 0L, HostStatus.Unknown to 0L)
+        val allUnknowns = listOf(HostState.Unknown to 0L, HostState.Unknown to 0L, HostState.Unknown to 0L)
+        val oneUp = listOf(HostState.Unknown to 0L, HostState.Unknown to 0L, HostState.Up to 5000L)
+        val twoUp = listOf(HostState.Unknown to 0L, HostState.Up to 5000L, HostState.Up to 4000L)
+        val oneUpOneUnknown = listOf(HostState.Unknown to 0L, HostState.Up to 4000L, HostState.Unknown to 5000L)
+        val allDown = listOf(HostState.Down to 0L, HostState.Down to 0L, HostState.Down to 0L)
+        val oneDownOtherUnknown = listOf(HostState.Down to 0L, HostState.Unknown to 0L, HostState.Unknown to 0L)
 
         allUnknowns.selectNextHostIndex() shouldEqual 0
         oneUp.selectNextHostIndex() shouldEqual 2
@@ -75,7 +75,7 @@ internal class TestHostStatus {
 
     @Test
     fun selectNextIndex() {
-        val allDown = listOf(HostStatus.Down to 0L, HostStatus.Down to 0L, HostStatus.Down to 0L)
+        val allDown = listOf(HostState.Down to 0L, HostState.Down to 0L, HostState.Down to 0L)
         var index = -1
 
         index = allDown.nextIndex(index)

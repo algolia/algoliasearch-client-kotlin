@@ -6,23 +6,28 @@ import com.algolia.search.model.ApplicationID
 import kotlin.random.Random
 
 
-internal typealias HostStatuses = Pair<HostStatus, Long>
+internal data class HostStatus(
+    val state: HostState,
+    val timestamp: Long
+)
 
 internal val ApplicationID.readHost get() = "https://$this-dsn.algolia.net"
 internal val ApplicationID.writeHost get() = "https://$this.algolia.net"
 
-internal fun HostStatus.getHostStatus() = this to Time.getCurrentTimeMillis()
+internal infix fun HostState.to(timestamp: Long) = HostStatus(this, timestamp)
 
-internal fun List<HostStatuses>.areStatusExpired(hostStatusExpirationDelay: Long): Boolean {
-    val lastRequestTimestamp = maxBy { it.second }?.second ?: 0L
+internal fun HostState.getHostStatus() = this to Time.getCurrentTimeMillis()
+
+internal fun List<HostStatus>.areStatusExpired(hostStatusExpirationDelay: Long): Boolean {
+    val lastRequestTimestamp = maxBy { it.timestamp }?.timestamp ?: 0L
     val someTimeAgo = Time.getCurrentTimeMillis() - hostStatusExpirationDelay
 
     return lastRequestTimestamp <= someTimeAgo
 }
 
-internal fun List<HostStatuses>.selectNextHostIndex(): Int? {
-    val hasUp = firstOrNull { it.first == HostStatus.Up }
-    val hasUnknown = hasUp ?: firstOrNull { it.first == HostStatus.Unknown }
+internal fun List<HostStatus>.selectNextHostIndex(): Int? {
+    val hasUp = firstOrNull { it.state == HostState.Up }
+    val hasUnknown = hasUp ?: firstOrNull { it.state == HostState.Unknown }
 
     return hasUnknown?.let(::indexOf)
 }
@@ -37,11 +42,11 @@ internal fun List<String>.randomize(): List<String> {
     return destination
 }
 
-internal fun List<HostStatuses>.nextIndex(index: Int): Int {
+internal fun List<HostStatus>.nextIndex(index: Int): Int {
     return if (index + 1 > lastIndex) 0 else index + 1
 }
 
-internal fun List<String>.initialHostStatus() = map { HostStatus.Unknown to 0L }.toMutableList()
+internal fun List<String>.initialHostStatus() = map { HostStatus(HostState.Unknown, 0L) }.toMutableList()
 
 internal fun ApplicationID.buildFallbackHosts(): List<String> {
     return listOf(

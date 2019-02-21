@@ -1,7 +1,7 @@
 package host
 
 import com.algolia.search.exception.RetryableException
-import com.algolia.search.host.HostStatus
+import com.algolia.search.host.HostState
 import com.algolia.search.host.RetryLogic
 import com.algolia.search.host.readHosts
 import com.algolia.search.model.ApplicationID
@@ -54,10 +54,10 @@ internal class TestRetryLogic {
             }
             retry shouldEqual 0
         }
-        statuses[0].first shouldEqual HostStatus.Up
-        statuses[1].first shouldEqual HostStatus.Unknown
-        statuses[2].first shouldEqual HostStatus.Unknown
-        statuses[3].first shouldEqual HostStatus.Unknown
+        statuses[0].state shouldEqual HostState.Up
+        statuses[1].state shouldEqual HostState.Unknown
+        statuses[2].state shouldEqual HostState.Unknown
+        statuses[3].state shouldEqual HostState.Unknown
     }
 
     @Test
@@ -71,10 +71,10 @@ internal class TestRetryLogic {
                 if (retry == 0) delay(2000L)
                 client200.get<HttpResponse>()
             }
-            statuses[0].first shouldEqual HostStatus.Down
-            statuses[1].first shouldEqual HostStatus.Up
-            statuses[2].first shouldEqual HostStatus.Unknown
-            statuses[3].first shouldEqual HostStatus.Unknown
+            statuses[0].state shouldEqual HostState.Down
+            statuses[1].state shouldEqual HostState.Up
+            statuses[2].state shouldEqual HostState.Unknown
+            statuses[3].state shouldEqual HostState.Unknown
             retry shouldEqual 1
         }
     }
@@ -91,10 +91,10 @@ internal class TestRetryLogic {
                 if (retry < count) delay(150L * (retry + 1))
                 client200.get<HttpResponse>(url)
             }
-            statuses[0].first shouldEqual HostStatus.Up
-            statuses[1].first shouldEqual HostStatus.Down
-            statuses[2].first shouldEqual HostStatus.Down
-            statuses[3].first shouldEqual HostStatus.Down
+            statuses[0].state shouldEqual HostState.Up
+            statuses[1].state shouldEqual HostState.Down
+            statuses[2].state shouldEqual HostState.Down
+            statuses[3].state shouldEqual HostState.Down
             retry shouldEqual count
         }
     }
@@ -115,10 +115,10 @@ internal class TestRetryLogic {
             }
             exceptionIsThrown.shouldBeTrue()
             retry shouldEqual 0
-            statuses[0].first shouldEqual HostStatus.Unknown
-            statuses[1].first shouldEqual HostStatus.Unknown
-            statuses[2].first shouldEqual HostStatus.Unknown
-            statuses[3].first shouldEqual HostStatus.Unknown
+            statuses[0].state shouldEqual HostState.Unknown
+            statuses[1].state shouldEqual HostState.Unknown
+            statuses[2].state shouldEqual HostState.Unknown
+            statuses[3].state shouldEqual HostState.Unknown
         }
     }
 

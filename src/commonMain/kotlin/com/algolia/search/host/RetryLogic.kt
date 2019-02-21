@@ -26,7 +26,7 @@ internal class RetryLogic(
     ): T {
         if (statuses.areStatusExpired(hostStatusExpirationDelay)) {
             for (index in statuses.indices) {
-                statuses[index] = HostStatus.Unknown to 0L
+                statuses[index] = HostStatus(HostState.Unknown, 0L)
             }
         }
         index = statuses.selectNextHostIndex() ?: statuses.nextIndex(index)
@@ -35,7 +35,7 @@ internal class RetryLogic(
         return try {
             withTimeout(timeout * (attempt + 1)) {
                 val response = request("$host$path")
-                statuses[index] = HostStatus.Up.getHostStatus()
+                statuses[index] = HostState.Up.getHostStatus()
                 response
             }
         } catch (exception: Exception) {
@@ -47,11 +47,11 @@ internal class RetryLogic(
                     val isRetryable = floor(code / 100f) != 4f && !isSuccessful
 
                     if (isRetryable) {
-                        statuses[index] = HostStatus.Down.getHostStatus()
+                        statuses[index] = HostState.Down.getHostStatus()
                     } else throw exception
                 }
                 is IOException, is TimeoutCancellationException -> {
-                    statuses[index] = HostStatus.Down.getHostStatus()
+                    statuses[index] = HostState.Down.getHostStatus()
                 }
                 else -> throw exception
             }

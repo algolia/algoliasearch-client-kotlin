@@ -1,7 +1,7 @@
 package com.algolia.search.host
 
 
-enum class HostStatus {
+enum class HostState {
     Unknown,
     Down,
     Up
