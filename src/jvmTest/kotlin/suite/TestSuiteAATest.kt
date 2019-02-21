@@ -61,16 +61,8 @@ internal class TestSuiteAATest {
                     it.name shouldEqual abTest.name
                     it.endAt shouldEqual abTest.endAt
                     it.status shouldNotEqual ABTestStatus.Stopped
-                    it.variantA.let {
-                        it.indexName shouldEqual abTest.variantA.indexName
-                        it.trafficPercentage shouldEqual abTest.variantA.trafficPercentage
-                        it.description shouldEqual abTest.variantA.description
-                    }
-                    it.variantB.let {
-                        it.indexName shouldEqual abTest.variantB.indexName
-                        it.trafficPercentage shouldEqual abTest.variantB.trafficPercentage
-                        it.description shouldEqual abTest.variantB.description
-                    }
+                    compareVariant(it.variantA, abTest.variantA)
+                    compareVariant(it.variantB, abTest.variantB)
                 }
             }
         }

@@ -100,8 +100,8 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) :
      */
     fun build(): List<List<String>> {
         val (andEntries, orEntries) = groups.entries.partition { it.key.type == Group.Type.And }
-        val ands = andEntries.flatMap { it.value.map { listOf(it.expression) } }
-        val ors = orEntries.map { it.value.map { it.expression } }
+        val ands = andEntries.flatMap { (_, value) -> value.map { listOf(it.expression) } }
+        val ors = orEntries.map { (_, value) -> value.map { it.expression } }
 
         return ands + ors
     }

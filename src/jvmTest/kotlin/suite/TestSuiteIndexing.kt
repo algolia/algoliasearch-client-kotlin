@@ -48,9 +48,9 @@ internal class TestSuiteIndexing {
 
     private fun batchAddObject(): List<List<BatchOperation.AddObject>> {
         return (0 until 10)
-            .map {
+            .map { index ->
                 batches
-                    .subList(it * 100, it * 100 + 100)
+                    .subList(index * 100, index * 100 + 100)
                     .map { BatchOperation.AddObject.from(Data.serializer(), it) }
             }
     }

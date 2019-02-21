@@ -6,7 +6,6 @@ import com.algolia.search.serialize.KeyForwardedFor
 import kotlinx.serialization.json.JsonObject
 
 
-
 data class RequestOptions(
     val writeTimeout: Long? = null,
     val readTimeout: Long? = null

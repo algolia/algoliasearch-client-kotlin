@@ -1,4 +1,5 @@
 package suite
+
 import com.algolia.search.browseAllObjects
 import com.algolia.search.browseAllRules
 import com.algolia.search.browseAllSynonyms

@@ -49,13 +49,13 @@ internal fun <T : Filter> GroupMap<T>.contains(filter: Filter): Boolean {
 }
 
 internal fun <T : Filter> GroupMap<T>.clear(group: Group, attribute: Attribute?) {
-    filterKeys { it.name == group.name }.forEach {
+    filterKeys { it.name == group.name }.forEach { (key, value) ->
         if (attribute != null) {
-            it.value.removeAll { it.attribute == attribute }
+            value.removeAll { it.attribute == attribute }
         } else {
-            it.value.clear()
+            value.clear()
         }
-        if (it.value.isEmpty()) remove(it.key)
+        if (value.isEmpty()) remove(key)
     }
 }
 
@@ -81,11 +81,11 @@ internal inline fun <reified T : Filter> GroupMap<T>.replaceAttribute(
     attribute: Attribute,
     replacement: Attribute
 ) {
-    filterKeys { it.name == group.name }.forEach {
-        val found = it.value.filter { it.attribute == attribute }
+    filterKeys { it.name == group.name }.forEach { (_, value) ->
+        val found = value.filter { it.attribute == attribute }
 
-        it.value -= found
-        it.value += found.map { it.modifyAttribute<T>(replacement) }
+        value -= found
+        value += found.map { it.modifyAttribute<T>(replacement) }
     }
 }
 
@@ -101,7 +101,7 @@ internal fun <T : Filter> GroupMap<T>.get(group: Group, attribute: Attribute?): 
 
 internal fun <T : Filter> GroupMap<T>.get(attribute: Attribute?): Set<T> {
     return if (attribute != null) {
-        values.flatMap { it.filter { it.attribute == attribute } }
+        values.flatMap { set -> set.filter { it.attribute == attribute } }
     } else {
         values.flatten()
     }.toSet()

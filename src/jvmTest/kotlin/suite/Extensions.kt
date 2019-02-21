@@ -4,6 +4,8 @@ import com.algolia.search.browseAllABTests
 import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.analytics.Variant
+import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.toAPIKey
 import com.algolia.search.toApplicationID
@@ -47,6 +49,14 @@ internal fun testSuiteIndexName(suffix: String): IndexName {
     val prefix = "kotlin-$date"
 
     return "$prefix-qlitzler-$suffix".toIndexName()
+}
+
+internal fun compareVariant(actual: ResponseVariant, expected: Variant) {
+    actual.let {
+        it.indexName shouldEqual expected.indexName
+        it.trafficPercentage shouldEqual expected.trafficPercentage
+        it.description shouldEqual expected.description
+    }
 }
 
 internal suspend fun cleanABTest(suffix: String) {

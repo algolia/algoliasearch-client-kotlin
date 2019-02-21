@@ -141,8 +141,8 @@ internal class TestRetryLogic {
             thrown!!.let {
                 it.exceptions.size shouldEqual it.attempts
                 it.attempts shouldEqual 5
-                it.exceptions.forEach {
-                    (it is TimeoutCancellationException).shouldBeTrue()
+                it.exceptions.forEach { exception ->
+                    (exception is TimeoutCancellationException).shouldBeTrue()
                 }
             }
         }

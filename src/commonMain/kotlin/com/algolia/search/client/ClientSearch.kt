@@ -62,7 +62,7 @@ class ClientSearch private constructor(
                 coroutineScope {
                     map { async { initIndex(it.indexName).getTask(it.taskID) } }.map { it.await().status }
                 }.let {
-                    if (it.all { it == TaskStatus.Published }) return it
+                    if (it.all { status -> status == TaskStatus.Published }) return it
                 }
                 delay(1000L)
             }

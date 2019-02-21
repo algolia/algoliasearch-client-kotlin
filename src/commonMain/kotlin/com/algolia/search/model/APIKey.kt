@@ -18,7 +18,7 @@ data class APIKey(override val raw: String) : Raw<String> {
     }
 
     @Serializer(APIKey::class)
-    companion object: KSerializer<APIKey> {
+    companion object : KSerializer<APIKey> {
 
         private val serializer = StringSerializer
 

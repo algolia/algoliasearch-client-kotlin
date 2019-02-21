@@ -1,4 +1,5 @@
 package host
+
 import com.algolia.search.requestOptions
 import com.algolia.search.serialize.KeyAlgoliaUserID
 import com.algolia.search.serialize.KeyForwardedFor

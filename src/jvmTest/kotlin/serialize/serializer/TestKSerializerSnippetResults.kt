@@ -16,7 +16,8 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestKSerializerSnippetResults : TestSerializer<Map<Attribute, SnippetResult>>(KSerializerSnippetResults) {
+internal class TestKSerializerSnippetResults :
+    TestSerializer<Map<Attribute, SnippetResult>>(KSerializerSnippetResults) {
 
     override val items = listOf(
         mapOf(

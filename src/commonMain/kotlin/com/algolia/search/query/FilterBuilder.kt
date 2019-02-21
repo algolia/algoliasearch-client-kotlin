@@ -118,18 +118,18 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
      */
     fun build(): String {
         val (andEntries, orEntries) = groups.entries.partition { it.key.type == Group.Type.And }
-        val ands = andEntries.joinToString(separator = " AND ") {
-            val condition = andEntries.size > 1 && it.value.size > 1
+        val ands = andEntries.joinToString(separator = " AND ") { (_, value) ->
+            val condition = andEntries.size > 1 && value.size > 1
             val prefix = if (condition) "(" else ""
             val postfix = if (condition) ")" else ""
-            it.value.joinToString(prefix = prefix, postfix = postfix, separator = " AND ") { it.build() }
+            value.joinToString(prefix = prefix, postfix = postfix, separator = " AND ") { it.build() }
         }
         val begin = if (andEntries.isNotEmpty() && orEntries.isNotEmpty()) " AND " else ""
-        val ors = orEntries.joinToString(prefix = begin, separator = " AND ") {
-            val condition = it.value.size > 1 && (orEntries.size > 1 || andEntries.isNotEmpty())
+        val ors = orEntries.joinToString(prefix = begin, separator = " AND ") { (_, value) ->
+            val condition = value.size > 1 && (orEntries.size > 1 || andEntries.isNotEmpty())
             val prefix = if (condition) "(" else ""
             val postfix = if (condition) ")" else ""
-            it.value.joinToString(prefix = prefix, postfix = postfix, separator = " OR ") { it.build() }
+            value.joinToString(prefix = prefix, postfix = postfix, separator = " OR ") { it.build() }
         }
         return ands + ors
     }
