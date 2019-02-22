@@ -23,7 +23,7 @@ internal class TestHostStatus {
     }
 
     @Test
-    fun invalid() {
+    fun emptyHostStatusList() {
         val initial = listOf<HostStatus>()
 
         initial.areStatusExpired(5000).shouldBeTrue()
