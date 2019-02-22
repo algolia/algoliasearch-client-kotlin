@@ -11,6 +11,5 @@ data class Configuration(
     override val writeTimeout: Long = 30000,
     override val readTimeout: Long = 2000,
     override val logLevel: LogLevel = LogLevel.ALL,
-    override val hosts: List<String>?,
-    override val maxRetryAttempts: Int = 5
+    override val hosts: List<String>?
 ) : ConfigurationInterface

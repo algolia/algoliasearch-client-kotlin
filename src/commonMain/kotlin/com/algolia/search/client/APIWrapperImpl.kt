@@ -52,6 +52,6 @@ internal class APIWrapperImpl(
         }
     }
 
-    override val read = RetryLogic(configuration.maxRetryAttempts, configuration.readHosts())
-    override val write = RetryLogic(configuration.maxRetryAttempts, configuration.writeHosts())
+    override val read = RetryLogic(configuration.readHosts())
+    override val write = RetryLogic(configuration.writeHosts())
 }

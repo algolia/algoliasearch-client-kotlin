@@ -9,10 +9,10 @@ import kotlin.math.floor
 
 
 internal class RetryLogic(
-    private val maxRetryAttempts: Int,
     val hosts: List<String>,
     private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
 ) {
+    private val maxRetryAttempts: Int = 5
 
     internal val statuses = hosts.initialHostStatus()
     internal var index: Int = -1

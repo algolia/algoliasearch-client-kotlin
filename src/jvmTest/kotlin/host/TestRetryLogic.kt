@@ -27,7 +27,7 @@ import shouldNotBeNull
 internal class TestRetryLogic {
 
     private val applicationId = ApplicationID("appId")
-    private val retryLogic = RetryLogic(5, applicationId.readHosts())
+    private val retryLogic = RetryLogic(applicationId.readHosts())
     private val route = "/route"
     private val client200 = HttpClient(MockEngine { MockHttpResponse(call, HttpStatusCode.OK) })
     private val client404 = HttpClient(MockEngine { MockHttpResponse(call, HttpStatusCode.NotFound) })
