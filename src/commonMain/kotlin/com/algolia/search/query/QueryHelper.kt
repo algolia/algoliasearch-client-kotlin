@@ -1,11 +1,7 @@
 package com.algolia.search.query
 
-import com.algolia.search.model.*
-import com.algolia.search.model.search.AlternativesAsExact
-import com.algolia.search.model.search.QueryLanguage
-import com.algolia.search.model.search.ResponseFields
-import com.algolia.search.model.search.Snippet
-import com.algolia.search.model.search.Query
+import com.algolia.search.model.Attribute
+import com.algolia.search.model.search.*
 
 @DslMarker
 annotation class QueryHelper
@@ -27,7 +23,7 @@ fun Query.setAttributesToRetrieve(vararg attributes: Attribute, excludeAttribute
     } else attributes.toList()
 }
 
-fun Query.setRetrieveAllAttributes() {
+fun Query.setAllAttributesToRetrieve() {
     attributesToRetrieve = listOf(all)
 }
 
@@ -47,7 +43,7 @@ fun Query.setAttributesToHighlight(vararg attributes: Attribute) {
     attributesToHighlight = attributes.toList()
 }
 
-fun Query.setHighlightAllAttributes() {
+fun Query.setAllAttributesToHighlight() {
     attributesToHighlight = listOf(all)
 }
 
@@ -55,8 +51,8 @@ fun Query.setAttributesToSnippet(vararg snippets: Snippet) {
     attributesToSnippet = snippets.toList()
 }
 
-fun Query.setSnippetAllAttributes(numberOfWords: Int? = null) {
-    attributesToSnippet = listOf(Snippet(Attribute("*"), numberOfWords))
+fun Query.setAllAttributesToSnippet(numberOfWords: Int? = null) {
+    attributesToSnippet = listOf(Snippet(all, numberOfWords))
 }
 
 fun Query.setDisableTypoToleranceOnAttributes(vararg attributes: Attribute) {

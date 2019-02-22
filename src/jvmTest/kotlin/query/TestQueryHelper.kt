@@ -4,9 +4,9 @@ import buildTest
 import com.algolia.search.limit
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.AlternativesAsExact
+import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.QueryLanguage
 import com.algolia.search.model.search.ResponseFields
-import com.algolia.search.model.search.Query
 import com.algolia.search.query.*
 import facetA
 import facetB
@@ -60,7 +60,7 @@ internal class TestQueryHelper {
                 Attribute("-attributeB"),
                 all
             )
-            setRetrieveAllAttributes()
+            setAllAttributesToRetrieve()
         }
     }
 
@@ -87,7 +87,7 @@ internal class TestQueryHelper {
         queryBuilder {
             setAttributesToHighlight(attributeA, attributeB)
             attributesToHighlight shouldEqual listOf(attributeA, attributeB)
-            setHighlightAllAttributes()
+            setAllAttributesToHighlight()
             attributesToHighlight shouldEqual listOf(all)
         }
     }
@@ -97,9 +97,9 @@ internal class TestQueryHelper {
         queryBuilder {
             setAttributesToSnippet(attributeA limit 10, attributeB limit null)
             attributesToSnippet?.map { it.raw } shouldEqual listOf("attributeA:10", "attributeB")
-            setSnippetAllAttributes()
+            setAllAttributesToSnippet()
             attributesToSnippet?.map { it.raw } shouldEqual listOf("*")
-            setSnippetAllAttributes(10)
+            setAllAttributesToSnippet(10)
             attributesToSnippet?.map { it.raw } shouldEqual listOf("*:10")
         }
     }
