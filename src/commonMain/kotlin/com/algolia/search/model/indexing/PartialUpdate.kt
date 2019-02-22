@@ -50,6 +50,7 @@ sealed class PartialUpdate(
 
         constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 
+        // Todo add test
         constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
 
@@ -60,6 +61,7 @@ sealed class PartialUpdate(
 
         constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 
+        // Todo add test
         constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
 
@@ -70,6 +72,7 @@ sealed class PartialUpdate(
 
         constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 
+        // Todo add test
         constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
 
