@@ -210,6 +210,7 @@ data class Query(
      */
     @Optional @SerialName(KeyDisableTypoToleranceOnAttributes) var disableTypoToleranceOnAttributes: List<Attribute>? = null,
 
+    // TODO Type this !
     /**
      * Search for entries around a central geolocation, enabling a geo search within a circular area.
      * Engine default: null
