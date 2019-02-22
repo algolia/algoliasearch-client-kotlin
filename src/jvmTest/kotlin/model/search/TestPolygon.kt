@@ -1,11 +1,12 @@
 package model.search
 
-import com.algolia.search.model.search.Polygon
 import com.algolia.search.and
+import com.algolia.search.model.search.Polygon
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldEqual
+import shouldFailWith
 
 @RunWith(JUnit4::class)
 internal class TestPolygon {
@@ -34,13 +35,7 @@ internal class TestPolygon {
 
     @Test
     fun operatorThrow() {
-        var thrown = false
-        try {
-            polygon[4]
-        } catch (exception: IndexOutOfBoundsException) {
-            thrown = true
-        }
-        thrown shouldEqual true
+        IndexOutOfBoundsException::class shouldFailWith { polygon[4] }
     }
 
     @Test

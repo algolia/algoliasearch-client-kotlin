@@ -18,6 +18,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldBeTrue
 import shouldEqual
+import shouldFailWith
 
 
 @RunWith(JUnit4::class)
@@ -49,13 +50,10 @@ internal class TestSuiteAccount {
     fun test() {
         runBlocking {
             val rule = load(Rule.serializer(), "rule_one.json")
-            var hasThrown = false
-            try {
+
+            IllegalArgumentException::class shouldFailWith {
                 ClientAccount.copyIndex(index1, index2)
-            } catch (exception: IllegalArgumentException) {
-                hasThrown = true
             }
-            hasThrown.shouldBeTrue()
             val tasks = mutableListOf<Task>()
 
             index1.apply {
@@ -72,13 +70,10 @@ internal class TestSuiteAccount {
                 getSynonym(objectID) shouldEqual synonym
                 getRule(objectID).rule shouldEqual rule
                 getSettings().searchableAttributes shouldEqual settings.searchableAttributes
-                hasThrown = false
-                try {
+
+                IllegalStateException::class shouldFailWith {
                     ClientAccount.copyIndex(index1, this)
-                } catch (exception: IllegalStateException) {
-                    hasThrown = true
                 }
-                hasThrown.shouldBeTrue()
             }
         }
     }

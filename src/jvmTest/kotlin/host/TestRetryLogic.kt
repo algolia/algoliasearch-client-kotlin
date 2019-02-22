@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldBeTrue
 import shouldEqual
-import shouldNotBeNull
+import shouldFailWith
 
 
 @RunWith(JUnit4::class)
@@ -111,17 +111,13 @@ internal class TestRetryLogic {
     fun test404() {
         runBlocking {
             var retry = -1
-            var exceptionIsThrown = false
 
-            try {
+            BadResponseStatusException::class shouldFailWith {
                 retryLogic.retry(1000L, route) { url ->
                     retry++
                     client404.get<String>(url)
                 }
-            } catch (exception: BadResponseStatusException) {
-                exceptionIsThrown = true
             }
-            exceptionIsThrown.shouldBeTrue()
             retry shouldEqual 0
             statuses[0].state shouldEqual HostState.Unknown
             statuses[1].state shouldEqual HostState.Unknown
@@ -133,20 +129,16 @@ internal class TestRetryLogic {
     @Test
     fun retryMaxAttempt() {
         var retry = -1
-        var thrown: MaxRequestAttemptsException? = null
 
         runBlocking {
-            try {
+            val exception = MaxRequestAttemptsException::class shouldFailWith {
                 retryLogic.retry(100L, route) { url ->
                     retry++
                     delay(150L * (retry + 1))
                     client200.get<HttpResponse>(url)
                 }
-            } catch (exception: MaxRequestAttemptsException) {
-                thrown = exception
             }
-            thrown.shouldNotBeNull()
-            thrown!!.let {
+            exception.let {
                 it.exceptions.size shouldEqual it.attempts
                 it.attempts shouldEqual 5
                 it.exceptions.forEach { exception ->

@@ -14,8 +14,8 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import shouldBeTrue
 import shouldEqual
+import shouldFailWith
 import shouldNotBeNull
 import shouldNotEqual
 import java.util.*
@@ -68,13 +68,12 @@ internal class TestSuiteABTest {
                 clientAnalytics.stopABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
                 clientAnalytics.getABTest(response.abTestID).status shouldEqual ABTestStatus.Stopped
                 clientAnalytics.deleteABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
-                var hasThrown = false
-                try {
+
+                val result = BadResponseStatusException::class shouldFailWith {
                     clientAnalytics.getABTest(response.abTestID)
-                } catch (exception: BadResponseStatusException) {
-                    hasThrown = exception.statusCode.value == HttpStatusCode.NotFound.value
                 }
-                hasThrown.shouldBeTrue()
+
+                result.statusCode.value shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }

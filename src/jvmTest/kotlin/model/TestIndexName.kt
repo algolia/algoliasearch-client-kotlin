@@ -1,12 +1,12 @@
 package model
 
-import com.algolia.search.model.IndexName
 import com.algolia.search.exception.EmptyStringException
+import com.algolia.search.model.IndexName
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import shouldBeTrue
 import shouldEqual
+import shouldFailWith
 
 
 @RunWith(JUnit4::class)
@@ -14,13 +14,7 @@ internal class TestIndexName {
 
     @Test
     fun empty() {
-        var isThrown = false
-        try {
-            IndexName("")
-        } catch (exception: EmptyStringException) {
-            isThrown = true
-        }
-        isThrown.shouldBeTrue()
+        EmptyStringException::class shouldFailWith { IndexName("") }
     }
 
     @Test
