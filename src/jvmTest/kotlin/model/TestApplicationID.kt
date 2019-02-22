@@ -12,7 +12,7 @@ import shouldFailWith
 internal class TestApplicationID {
 
     @Test
-    fun empty() {
+    fun rawShouldNotBeEmpty() {
         EmptyStringException::class shouldFailWith { ApplicationID("") }
     }
 }

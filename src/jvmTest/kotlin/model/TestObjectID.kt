@@ -5,7 +5,6 @@ import com.algolia.search.model.ObjectID
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import shouldBeTrue
 import shouldFailWith
 
 
@@ -13,7 +12,7 @@ import shouldFailWith
 internal class TestObjectID {
 
     @Test
-    fun empty() {
+    fun rawShouldNotBeEmpty() {
         EmptyStringException::class shouldFailWith { ObjectID("") }
     }
 }

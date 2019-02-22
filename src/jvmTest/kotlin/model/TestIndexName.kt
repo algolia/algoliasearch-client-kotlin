@@ -13,7 +13,7 @@ import shouldFailWith
 internal class TestIndexName {
 
     @Test
-    fun empty() {
+    fun rawShouldNotBeEmpty() {
         EmptyStringException::class shouldFailWith { IndexName("") }
     }
 

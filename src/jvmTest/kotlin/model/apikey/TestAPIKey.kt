@@ -12,7 +12,7 @@ import shouldFailWith
 internal class TestAPIKey {
 
     @Test
-    fun empty() {
+    fun rawShouldNotBeEmpty() {
         EmptyStringException::class shouldFailWith { APIKey("") }
     }
 }
