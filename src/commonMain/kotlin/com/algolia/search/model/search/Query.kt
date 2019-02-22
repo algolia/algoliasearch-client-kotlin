@@ -11,6 +11,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 
+// Todo give an abstract class a chance.
 @Serializable
 @QueryHelper
 data class Query(
