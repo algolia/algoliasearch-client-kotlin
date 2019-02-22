@@ -56,7 +56,7 @@ class ClientSearch private constructor(
         }
     }
 
-    @Suppress("MemberVisibilityCanBePrivate")
+    // Todo test this
     suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus> {
 
         suspend fun loop(): List<TaskStatus> {
