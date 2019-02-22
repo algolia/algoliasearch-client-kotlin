@@ -77,7 +77,7 @@ class ClientSearch private constructor(
         return tasks.waitAll()
     }
 
-    // TODO Specify why there is no taskID in the kdoc
+    // TODO Specify why there is no taskID in a comment
     suspend fun CreationAPIKey.wait(timeout: Long? = null): ResponseAPIKey {
 
         suspend fun loop(): ResponseAPIKey {
@@ -94,7 +94,7 @@ class ClientSearch private constructor(
         return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
-    // TODO Specify why there is no taskID in the kdoc
+    // TODO Specify why there is no taskID in a comment
     suspend fun DeletionAPIKey.wait(timeout: Long? = null): Boolean {
 
         suspend fun loop(): Boolean {
