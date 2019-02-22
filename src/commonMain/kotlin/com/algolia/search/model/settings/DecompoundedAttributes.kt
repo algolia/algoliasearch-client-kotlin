@@ -16,8 +16,8 @@ data class DecompoundedAttributes internal constructor(
         attributes: List<Attribute>
     ) : this(mapOf(language to attributes.toList()))
 
-    constructor(language: QueryLanguage.Finnish, vararg attributes: Attribute) : this(language, attributes.toList())
     constructor(language: QueryLanguage.German, vararg attributes: Attribute) : this(language, attributes.toList())
+    constructor(language: QueryLanguage.Finnish, vararg attributes: Attribute) : this(language, attributes.toList())
     constructor(language: QueryLanguage.Dutch, vararg attributes: Attribute) : this(language, attributes.toList())
 
     companion object : KSerializer<DecompoundedAttributes> {
