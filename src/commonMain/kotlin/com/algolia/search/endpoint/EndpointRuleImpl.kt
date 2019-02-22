@@ -9,9 +9,10 @@ import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Rule
-import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyClearExistingRules
+import com.algolia.search.serialize.noDefaults
 import io.ktor.client.request.*
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 
 
@@ -28,7 +29,7 @@ internal class EndpointRuleImpl(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
-        val bodyString = JsonNoNulls.stringify(Rule.serializer(), rule)
+        val bodyString = Json.noDefaults.stringify(Rule.serializer(), rule)
 
         return retryWrite(
             requestOptions,
@@ -73,7 +74,7 @@ internal class EndpointRuleImpl(
         requestOptions: RequestOptions?
     ): ResponseRules {
         val request = RequestSearchRules(query, anchoring, context, page, hitsPerPage, enabled)
-        val bodyString = JsonNoNulls.stringify(RequestSearchRules.serializer(), request)
+        val bodyString = Json.noDefaults.stringify(RequestSearchRules.serializer(), request)
 
         return retryRead(requestOptions, indexName.toPath("$route/search")) { url ->
             httpClient.post<ResponseRules>(url) {
@@ -99,7 +100,7 @@ internal class EndpointRuleImpl(
         clearExistingRules: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
-        val bodyString = JsonNoNulls.stringify(Rule.serializer().list, rules)
+        val bodyString = Json.noDefaults.stringify(Rule.serializer().list, rules)
 
         return retryWrite(requestOptions, indexName.toPath("$route/batch")) { url ->
             httpClient.post<RevisionIndex>(url) {

@@ -9,11 +9,12 @@ import com.algolia.search.model.index.Scope
 import com.algolia.search.model.request.RequestCopyOrMove
 import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
-import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyCopy
 import com.algolia.search.serialize.KeyMove
+import com.algolia.search.serialize.noDefaults
 import io.ktor.client.request.delete
 import io.ktor.client.request.post
+import kotlinx.serialization.json.Json
 
 
 internal class EndpointIndexImpl(
@@ -29,7 +30,7 @@ internal class EndpointIndexImpl(
         requestOptions: RequestOptions?
     ): RevisionIndex {
         val request = RequestCopyOrMove(key, destination, scopes)
-        val bodyString = JsonNoNulls.stringify(RequestCopyOrMove.serializer(), request)
+        val bodyString = Json.noDefaults.stringify(RequestCopyOrMove.serializer(), request)
 
         return retryWrite(requestOptions, indexName.toPath("/operation")) { url ->
             httpClient.post<RevisionIndex>(url) {

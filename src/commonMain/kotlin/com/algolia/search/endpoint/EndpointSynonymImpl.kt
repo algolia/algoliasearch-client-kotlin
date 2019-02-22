@@ -10,8 +10,8 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionSynonym
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
-import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyReplaceExistingSynonyms
+import com.algolia.search.serialize.noDefaults
 import io.ktor.client.request.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
@@ -90,7 +90,7 @@ internal class EndpointSynonymImpl(
         requestOptions: RequestOptions?
     ): ResponseSearchSynonyms {
         val request = RequestSearchSynonyms(query, page, hitsPerPage, synonymTypes?.joinToString(",") { it.raw })
-        val bodyString = JsonNoNulls.stringify(RequestSearchSynonyms.serializer(), request)
+        val bodyString = Json.noDefaults.stringify(RequestSearchSynonyms.serializer(), request)
 
         return retryRead(requestOptions, indexName.toPath("/$route/search")) { url ->
             httpClient.post<ResponseSearchSynonyms>(url) {

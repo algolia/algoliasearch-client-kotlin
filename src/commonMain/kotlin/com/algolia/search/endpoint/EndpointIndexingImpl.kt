@@ -187,7 +187,7 @@ internal class EndpointIndexingImpl(
         requestOptions: RequestOptions?
     ): ResponseObjects {
         val requests = objectIDs.map { RequestObjects(indexName, it, attributesToRetrieve) }
-        val bodyString = JsonNoNulls.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
+        val bodyString = Json.noDefaults.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
         return retryRead(requestOptions, "/1/indexes/*/objects") { url ->
             httpClient.post<ResponseObjects>(url) {

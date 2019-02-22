@@ -9,6 +9,7 @@ import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.deletion.Deletion
 import com.algolia.search.serialize.*
 import io.ktor.client.request.*
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 
 
@@ -90,7 +91,7 @@ internal class EndpointMulticlusterImpl(
         requestOptions: RequestOptions?
     ): ResponseSearchUserID {
         val request = RequestSearchUserID(query, clusterName, page, hitsPerPage)
-        val bodyString = JsonNoNulls.stringify(RequestSearchUserID.serializer(), request)
+        val bodyString = Json.noDefaults.stringify(RequestSearchUserID.serializer(), request)
 
         return retryRead(requestOptions, "$route/mapping/search") { url ->
             httpClient.post<ResponseSearchUserID>(url) {

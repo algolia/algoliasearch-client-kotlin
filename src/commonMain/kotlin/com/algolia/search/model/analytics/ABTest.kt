@@ -2,6 +2,7 @@ package com.algolia.search.model.analytics
 
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
@@ -23,8 +24,8 @@ data class ABTest(
                 KeyName to obj.name
                 KeyEndAt to obj.endAt
                 KeyVariants to jsonArray {
-                    +JsonNoNulls.toJson(Variant.serializer(), obj.variantA)
-                    +JsonNoNulls.toJson(Variant.serializer(), obj.variantB)
+                    +Json.noDefaults.toJson(Variant.serializer(), obj.variantA)
+                    +Json.noDefaults.toJson(Variant.serializer(), obj.variantB)
                 }
             }
 
@@ -38,8 +39,8 @@ data class ABTest(
             return ABTest(
                 name = json[KeyName].content,
                 endAt = json[KeyEndAt].content,
-                variantA = JsonNoNulls.fromJson(Variant.serializer(), variants[0]),
-                variantB = JsonNoNulls.fromJson(Variant.serializer(), variants[1])
+                variantA = Json.noDefaults.fromJson(Variant.serializer(), variants[0]),
+                variantB = Json.noDefaults.fromJson(Variant.serializer(), variants[1])
             )
         }
     }

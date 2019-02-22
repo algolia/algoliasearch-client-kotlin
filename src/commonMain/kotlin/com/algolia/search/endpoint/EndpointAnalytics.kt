@@ -16,7 +16,7 @@ interface EndpointAnalytics {
 
     suspend fun getABTest(abTestID: ABTestID, requestOptions: RequestOptions? = null): ResponseABTest
 
-    suspend fun stopABTest(abTestID: ABTestID, requestOptions: RequestOptions?? = null): RevisionABTest
+    suspend fun stopABTest(abTestID: ABTestID, requestOptions: RequestOptions? = null): RevisionABTest
 
     suspend fun deleteABTest(abTestID: ABTestID, requestOptions: RequestOptions? = null): DeletionABTest
 

@@ -8,8 +8,8 @@ import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.request.RequestRequestObjects
 import com.algolia.search.model.response.*
 import com.algolia.search.query.copyAndBuildFilters
-import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyRequests
+import com.algolia.search.serialize.noDefaults
 import io.ktor.client.request.get
 import io.ktor.client.request.post
 import kotlinx.serialization.json.Json
@@ -59,7 +59,7 @@ internal class EndpointMultipleIndexImpl(
         requests: List<RequestObjects>,
         requestOptions: RequestOptions?
     ): ResponseObjects {
-        val bodyString = JsonNoNulls.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
+        val bodyString = Json.noDefaults.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
         return retryRead(requestOptions, "$route/*/objects") { url ->
             httpClient.post<ResponseObjects>(url) {

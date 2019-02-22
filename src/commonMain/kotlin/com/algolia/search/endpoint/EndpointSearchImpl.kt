@@ -12,6 +12,7 @@ import com.algolia.search.serialize.*
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 
 
@@ -45,7 +46,7 @@ internal class EndpointSearchImpl(
         val bodyString =
             copy?.let {
                 json {
-                    KeyParams to JsonNoNulls.toJson(Query.serializer(), it).jsonObject.urlEncode()
+                    KeyParams to Json.noDefaults.toJson(Query.serializer(), it).jsonObject.urlEncode()
                 }.toString()
             } ?: "{}"
 

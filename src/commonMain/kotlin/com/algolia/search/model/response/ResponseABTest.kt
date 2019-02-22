@@ -42,8 +42,8 @@ data class ResponseABTest(
                 obj.conversionSignificanceOrNull?.let { KeyConversionSignificance to it }
                 obj.clickSignificanceOrNull?.let { KeyClickSignificance to it }
                 KeyVariants to jsonArray {
-                    +JsonNoNulls.toJson(ResponseVariant.serializer(), obj.variantA)
-                    +JsonNoNulls.toJson(ResponseVariant.serializer(), obj.variantB)
+                    +Json.noDefaults.toJson(ResponseVariant.serializer(), obj.variantA)
+                    +Json.noDefaults.toJson(ResponseVariant.serializer(), obj.variantB)
                 }
             }
 

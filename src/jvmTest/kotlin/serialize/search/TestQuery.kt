@@ -6,6 +6,7 @@ import boolean
 import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import int
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import nestedLists
@@ -150,6 +151,6 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
 
     @Test
     fun encodeNoNull() {
-        JsonNoNulls.stringify(Query.serializer(), Query()) shouldEqual "{}"
+        Json.noDefaults.stringify(Query.serializer(), Query()) shouldEqual "{}"
     }
 }
