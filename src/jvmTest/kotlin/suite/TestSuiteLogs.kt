@@ -6,6 +6,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldBeEmpty
 import shouldEqual
 
 
@@ -19,7 +20,7 @@ internal class TestSuiteLogs {
                 listIndexes()
                 listIndexes()
                 getLogs(length = 2, offset = 0, logType = LogType.All).logs.size shouldEqual 2
-                initIndex("products_android_demo".toIndexName()).getLogs()
+                initIndex("products_android_demo".toIndexName()).getLogs().logs.shouldBeEmpty()
             }
         }
     }
