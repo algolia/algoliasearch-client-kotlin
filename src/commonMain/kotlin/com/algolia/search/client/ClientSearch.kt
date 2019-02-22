@@ -42,7 +42,7 @@ class ClientSearch private constructor(
         configuration: Configuration
     ) : this(APIWrapperImpl(configuration))
 
-    @Suppress("unused")
+    // Todo test this
     constructor(
         configuration: Configuration,
         engine: HttpClientEngine?
