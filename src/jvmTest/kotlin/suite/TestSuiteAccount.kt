@@ -52,7 +52,7 @@ internal class TestSuiteAccount {
             var hasThrown = false
             try {
                 ClientAccount.copyIndex(index1, index2)
-            } catch (exception: Exception) {
+            } catch (exception: IllegalArgumentException) {
                 hasThrown = true
             }
             hasThrown.shouldBeTrue()
@@ -72,6 +72,13 @@ internal class TestSuiteAccount {
                 getSynonym(objectID) shouldEqual synonym
                 getRule(objectID).rule shouldEqual rule
                 getSettings().searchableAttributes shouldEqual settings.searchableAttributes
+                hasThrown = false
+                try {
+                    ClientAccount.copyIndex(index1, this)
+                } catch (exception: IllegalStateException) {
+                    hasThrown = true
+                }
+                hasThrown.shouldBeTrue()
             }
         }
     }
