@@ -31,11 +31,7 @@ data class DecompoundedAttributes internal constructor(
         }
 
         override fun deserialize(decoder: Decoder): DecompoundedAttributes {
-            return DecompoundedAttributes(
-                serializer.deserialize(
-                    decoder
-                )
-            )
+            return DecompoundedAttributes(serializer.deserialize(decoder))
         }
     }
 }
