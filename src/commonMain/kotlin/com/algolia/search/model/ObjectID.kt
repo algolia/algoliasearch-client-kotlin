@@ -29,9 +29,7 @@ data class ObjectID(@SerialName(KeyObjectID) override val raw: String) : Raw<Str
         }
 
         override fun deserialize(decoder: Decoder): ObjectID {
-            val string = serializer.deserialize(decoder)
-
-            return string.toObjectID()
+            return serializer.deserialize(decoder).toObjectID()
         }
     }
 }
