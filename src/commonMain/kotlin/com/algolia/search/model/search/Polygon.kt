@@ -1,5 +1,6 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.and
 import com.algolia.search.model.Raw
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.FloatSerializer
@@ -50,11 +51,11 @@ data class Polygon(
             val floats = serializer.deserialize(decoder)
 
             return Polygon(
-                Point(floats[0], floats[1]),
-                Point(floats[2], floats[3]),
-                Point(floats[4], floats[5]),
+                floats[0] and floats[1],
+                floats[2] and floats[3],
+                floats[4] and floats[5],
                 (6 until floats.size step 2).map {
-                    Point(floats[it], floats[it + 1])
+                    floats[it] and floats[it + 1]
                 }
             )
         }
