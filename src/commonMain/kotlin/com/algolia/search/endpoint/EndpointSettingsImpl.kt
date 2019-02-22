@@ -26,7 +26,7 @@ internal class EndpointSettingsImpl(
 
     private val route = "/settings"
 
-    // TODO Specify why v1 / v2 in kdoc
+    // TODO Specify why v1 / v2 in comment
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
         return retryRead(requestOptions, indexName.toPath(route)) { url ->
             val json = httpClient.get<JsonObject>(url) {
