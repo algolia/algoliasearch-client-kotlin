@@ -44,7 +44,7 @@ internal class RetryLogic(
                 is BadResponseStatusException -> {
                     val code = exception.response.status.value
                     val isSuccessful = floor(code / 100f) == 2f
-                    val isRetryable = floor(code / 100f) != 4f && !isSuccessful
+                    val isRetryable = !isSuccessful && floor(code / 100f) != 4f
 
                     if (isRetryable) {
                         statuses[index] = HostState.Down.getHostStatus()
