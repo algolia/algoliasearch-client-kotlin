@@ -11,7 +11,7 @@ import kotlin.math.floor
 internal class RetryLogic(
     private val maxRetryAttempts: Int,
     val hosts: List<String>,
-    private val hostStatusExpirationDelay: Long = 1000L * 60L * 5L
+    private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
 ) {
 
     internal val statuses = hosts.initialHostStatus()
@@ -24,7 +24,7 @@ internal class RetryLogic(
         request: suspend (String) -> T,
         exceptions: List<Exception>
     ): T {
-        if (statuses.areStatusExpired(hostStatusExpirationDelay)) {
+        if (statuses.areStatusExpired(hostStatusExpirationDelayMS)) {
             for (index in statuses.indices) {
                 statuses[index] = HostStatus(HostState.Unknown, 0L)
             }
