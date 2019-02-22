@@ -17,7 +17,7 @@ internal class TestCustomRankingCriteria {
 
     @Test
     fun raw() {
-        "$KeyAsc($attributeA)" shouldEqual Asc(attributeA).raw
-        "$KeyDesc($attributeB)" shouldEqual Desc(attributeB).raw
+        Asc(attributeA).raw shouldEqual "$KeyAsc($attributeA)"
+        Desc(attributeB).raw shouldEqual "$KeyDesc($attributeB)"
     }
 }
