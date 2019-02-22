@@ -2,7 +2,7 @@ package model.search
 
 import attributeA
 import attributeB
-import com.algolia.search.model.settings.Ranking.*
+import com.algolia.search.model.settings.RankingCriteria.*
 import com.algolia.search.serialize.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -12,7 +12,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestRanking {
+internal class TestRankingCriteria {
 
     @Test
     fun raw() {

@@ -12,7 +12,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestCustomRanking : TestSerializer<CustomRanking>(CustomRanking) {
+internal class TestCustomRankingCriteria : TestSerializer<CustomRanking>(CustomRanking) {
 
     override val items = listOf(
         Asc(attributeA) to JsonLiteral(Asc(attributeA).raw),

@@ -30,8 +30,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             attributesForFaceting = attributes.map { AttributeForFaceting.Default(it) },
             unretrievableAttributes = attributes,
             attributesToRetrieve = attributes,
-            // Ranking
-            ranking = listOf(Ranking.Geo),
+            // RankingCriteria
+            ranking = listOf(RankingCriteria.Geo),
             customRanking = listOf(CustomRanking.Asc(attributeA)),
             replicas = listOf(indexA),
             // Faceting
@@ -90,8 +90,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyAttributesForFaceting to attributesJson
             KeyUnretrievableAttributes to attributesJson
             KeyAttributesToRetrieve to attributesJson
-            // Ranking
-            KeyRanking to jsonArray { +Ranking.Geo.raw }
+            // RankingCriteria
+            KeyRanking to jsonArray { +RankingCriteria.Geo.raw }
             KeyCustomRanking to jsonArray { +CustomRanking.Asc(attributeA).raw }
             KeyReplicas to jsonArray { +indexA.raw }
             // Faceting

@@ -2,8 +2,8 @@ package serialize.settings
 
 import attributeA
 import attributeB
-import com.algolia.search.model.settings.Ranking
-import com.algolia.search.model.settings.Ranking.*
+import com.algolia.search.model.settings.RankingCriteria
+import com.algolia.search.model.settings.RankingCriteria.*
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -12,7 +12,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestRanking : TestSerializer<Ranking>(Ranking) {
+internal class TestRankingCriteria : TestSerializer<RankingCriteria>(RankingCriteria) {
 
     override val items = listOf(
         Geo to JsonLiteral(Geo.raw),

@@ -13,7 +13,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-internal class TestCustomRanking {
+internal class TestCustomRankingCriteria {
 
     @Test
     fun raw() {

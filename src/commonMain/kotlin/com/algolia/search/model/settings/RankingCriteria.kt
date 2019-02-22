@@ -10,46 +10,46 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
-@Serializable(Ranking.Companion::class)
-sealed class Ranking(override val raw: String) : Raw<String> {
+@Serializable(RankingCriteria.Companion::class)
+sealed class RankingCriteria(override val raw: String) : Raw<String> {
 
-    object Typo : Ranking(KeyTypo)
+    object Typo : RankingCriteria(KeyTypo)
 
-    object Geo : Ranking(KeyGeo)
+    object Geo : RankingCriteria(KeyGeo)
 
-    object Words : Ranking(KeyWords)
+    object Words : RankingCriteria(KeyWords)
 
-    object Filters : Ranking(KeyFilters)
+    object Filters : RankingCriteria(KeyFilters)
 
-    object Proximity : Ranking(KeyProximity)
+    object Proximity : RankingCriteria(KeyProximity)
 
-    object Attribute : Ranking(KeyAttribute)
+    object Attribute : RankingCriteria(KeyAttribute)
 
-    object Exact : Ranking(KeyExact)
+    object Exact : RankingCriteria(KeyExact)
 
-    object Custom : Ranking(KeyCustom)
+    object Custom : RankingCriteria(KeyCustom)
 
-    data class Asc(val attribute: com.algolia.search.model.Attribute) : Ranking("$KeyAsc($attribute)")
+    data class Asc(val attribute: com.algolia.search.model.Attribute) : RankingCriteria("$KeyAsc($attribute)")
 
-    data class Desc(val attribute: com.algolia.search.model.Attribute) : Ranking("$KeyDesc($attribute)")
+    data class Desc(val attribute: com.algolia.search.model.Attribute) : RankingCriteria("$KeyDesc($attribute)")
 
-    data class Other(override val raw: String) : Ranking(raw)
+    data class Other(override val raw: String) : RankingCriteria(raw)
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<Ranking> {
+    companion object : KSerializer<RankingCriteria> {
 
         private val serializer = StringSerializer
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: Ranking) {
+        override fun serialize(encoder: Encoder, obj: RankingCriteria) {
             serializer.serialize(encoder, obj.raw)
         }
 
-        override fun deserialize(decoder: Decoder): Ranking {
+        override fun deserialize(decoder: Decoder): RankingCriteria {
             val string = serializer.deserialize(decoder)
 
             val findAsc = regexAsc.find(string)
