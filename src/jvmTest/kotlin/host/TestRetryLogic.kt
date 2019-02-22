@@ -60,6 +60,10 @@ internal class TestRetryLogic {
         statuses[3].state shouldEqual HostState.Unknown
     }
 
+    /**
+     * In this test, we make the first attempt fail by delaying it by 2 seconds, when the max timeout is 1 seconds.
+     * Second attempt should succeed.
+     */
     @Test
     fun retryOnce() {
         runBlocking {
@@ -79,6 +83,10 @@ internal class TestRetryLogic {
         }
     }
 
+    /**
+     * In this test, the first four attempts are delayed by a greater timeout than the 100 milliseconds exponential timeout.
+     * The fifth attempt should succeed.
+     */
     @Test
     fun retryFour() {
         runBlocking {
