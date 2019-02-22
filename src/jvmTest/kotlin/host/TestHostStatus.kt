@@ -46,9 +46,7 @@ internal class TestHostStatus {
         val fourSecondsAgo = now - 4000L
         val sixSecondsAgo = now - 6000L
         val hostStatusExpirationDelay = 5000L
-
-        val statuses =
-            listOf(HostState.Unknown to 0L, HostState.Up to fourSecondsAgo, HostState.Down to sixSecondsAgo)
+        val statuses = listOf(HostState.Unknown to 0L, HostState.Up to fourSecondsAgo, HostState.Down to sixSecondsAgo)
 
         // The last request was made 4 seconds ago. Even though one request was made 6 seconds ago, which is greater
         // than our expiration delay, our statuses should not be invalidated.
