@@ -20,7 +20,6 @@ data class ResponseAPIKey(
     @Optional @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQueryOrNull: Int? = null,
     @Optional @SerialName(KeyCreatedAt) val createdAtOrNull: ClientDate? = null,
     @Optional @SerialName(KeyDescription) val descriptionOrNull: String? = null,
-    @Optional @SerialName(KeyIndex) val indexOrNull: IndexName? = null,
     @Optional @SerialName(KeyIndexes) val indexesOrNull: List<IndexName>? = null,
     @Optional @SerialName(KeyReferers) val referersOrNull: List<String>? = null,
     @Optional @SerialName(KeyQueryParameters) val queryOrNull: String? = null
@@ -41,10 +40,6 @@ data class ResponseAPIKey(
     @Transient
     val description: String
         get() = descriptionOrNull!!
-
-    @Transient
-    val index: IndexName
-        get() = indexOrNull!!
 
     @Transient
     val indexes: List<IndexName>
