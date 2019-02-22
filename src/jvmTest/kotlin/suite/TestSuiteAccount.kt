@@ -60,9 +60,9 @@ internal class TestSuiteAccount {
 
             index1.apply {
                 tasks += saveObject(data)
+                tasks += saveRule(rule)
                 tasks += saveSynonym(synonym)
                 tasks += setSettings(settings)
-                tasks += saveRule(rule)
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
             }
             index3.apply {
