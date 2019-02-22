@@ -41,7 +41,7 @@ internal class TestSuiteSynonyms {
     private val synonymAlternative2 =
         Synonym.AlternativeCorrections(psone, "psone", listOf("playstationone"), SynonymType.Typo.Two)
     private val synonyms =
-        listOf(synonymMultiWay, synonymOneWay, synonymPlaceholder, synonymAlternative1, synonymAlternative2)
+        listOf(synonymOneWay, synonymPlaceholder, synonymAlternative1, synonymAlternative2)
     private val index = clientAdmin1.initIndex(indexName)
 
 
@@ -60,9 +60,10 @@ internal class TestSuiteSynonyms {
 
             index.apply {
                 tasks += saveObjects(objects)
-                tasks += saveSynonym(synonymOneWay)
+                tasks += saveSynonym(synonymMultiWay)
                 tasks += saveSynonyms(synonyms)
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
+                getSynonym(synonymMultiWay.objectID) shouldEqual synonymMultiWay
                 synonyms.forEach { getSynonym(it.objectID) shouldEqual it }
                 searchSynonyms().let {
                     it.nbHits shouldEqual 5
