@@ -1,6 +1,6 @@
 package com.algolia.search.host
 
-import com.algolia.search.exception.RetryableException
+import com.algolia.search.exception.MaxRequestAttemptsException
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
@@ -39,7 +39,7 @@ internal class RetryLogic(
                 response
             }
         } catch (exception: Exception) {
-            if (attempt >= maxRetryAttempts) throw RetryableException(attempt, exceptions)
+            if (attempt >= maxRetryAttempts) throw MaxRequestAttemptsException(attempt, exceptions)
             when (exception) {
                 is BadResponseStatusException -> {
                     val code = exception.response.status.value

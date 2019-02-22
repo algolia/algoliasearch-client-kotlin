@@ -1,6 +1,6 @@
 package host
 
-import com.algolia.search.exception.RetryableException
+import com.algolia.search.exception.MaxRequestAttemptsException
 import com.algolia.search.host.HostState
 import com.algolia.search.host.RetryLogic
 import com.algolia.search.host.readHosts
@@ -125,7 +125,7 @@ internal class TestRetryLogic {
     @Test
     fun retryMaxAttempt() {
         var retry = -1
-        var thrown: RetryableException? = null
+        var thrown: MaxRequestAttemptsException? = null
 
         runBlocking {
             try {
@@ -134,7 +134,7 @@ internal class TestRetryLogic {
                     delay(150L * (retry + 1))
                     client200.get<HttpResponse>(url)
                 }
-            } catch (exception: RetryableException) {
+            } catch (exception: MaxRequestAttemptsException) {
                 thrown = exception
             }
             thrown.shouldNotBeNull()
