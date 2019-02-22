@@ -16,7 +16,7 @@ sealed class Distinct {
     data class Other(val count: Int) : Distinct() {
 
         init {
-            if (count < 0) throw Exception("Distinct must be a positive integer")
+            if (count < 0) throw IllegalArgumentException("Distinct must be a positive integer")
         }
     }
 
