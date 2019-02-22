@@ -39,7 +39,7 @@ internal class TestSuiteMultiCluster {
                 }
                 delay(1000L)
             }
-            clientMcm.searchUserID(userID.raw).hits.any { it.userID == userID }.shouldBeTrue()
+            clientMcm.searchUserID(userID.raw).hits.shouldNotBeEmpty()
             clientMcm.listUserIDs().userIDs.shouldNotBeEmpty()
             clientMcm.getTopUserID().topUsers.shouldNotBeEmpty()
 
