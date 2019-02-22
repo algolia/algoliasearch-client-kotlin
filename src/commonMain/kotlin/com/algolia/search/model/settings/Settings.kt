@@ -16,7 +16,7 @@ data class Settings(
     @Optional @SerialName(KeyUnretrievableAttributes) var unretrievableAttributes: List<Attribute>? = null,
     @Optional @SerialName(KeyAttributesToRetrieve) var attributesToRetrieve: List<Attribute>? = null,
     @Optional @SerialName(KeyRanking) var ranking: List<RankingCriteria>? = null,
-    @Optional @SerialName(KeyCustomRanking) var customRanking: List<CustomRanking>? = null,
+    @Optional @SerialName(KeyCustomRanking) var customRanking: List<CustomRankingCriteria>? = null,
     @Optional @SerialName(KeyReplicas) var replicas: List<IndexName>? = null,
     @Optional @SerialName(KeyMaxValuesPerFacet) var maxValuesPerFacet: Int? = null,
     @Optional @SerialName(KeySortFacetValuesBy) var sortFacetValuesBy: SortFacetValuesBy? = null,

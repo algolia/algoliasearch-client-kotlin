@@ -14,30 +14,30 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
-@Serializable(CustomRanking.Companion::class)
-sealed class CustomRanking(override val raw: String) : Raw<String> {
+@Serializable(CustomRankingCriteria.Companion::class)
+sealed class CustomRankingCriteria(override val raw: String) : Raw<String> {
 
-    data class Asc(val attribute: Attribute) : CustomRanking("$KeyAsc($attribute)")
+    data class Asc(val attribute: Attribute) : CustomRankingCriteria("$KeyAsc($attribute)")
 
-    data class Desc(val attribute: Attribute) : CustomRanking("$KeyDesc($attribute)")
+    data class Desc(val attribute: Attribute) : CustomRankingCriteria("$KeyDesc($attribute)")
 
-    data class Other(override val raw: String) : CustomRanking(raw)
+    data class Other(override val raw: String) : CustomRankingCriteria(raw)
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<CustomRanking> {
+    companion object : KSerializer<CustomRankingCriteria> {
 
         private val serializer = StringSerializer
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: CustomRanking) {
+        override fun serialize(encoder: Encoder, obj: CustomRankingCriteria) {
             serializer.serialize(encoder, obj.raw)
         }
 
-        override fun deserialize(decoder: Decoder): CustomRanking {
+        override fun deserialize(decoder: Decoder): CustomRankingCriteria {
             val string = serializer.deserialize(decoder)
 
             val findAsc = regexAsc.find(string)

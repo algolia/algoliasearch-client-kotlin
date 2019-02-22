@@ -2,8 +2,8 @@ package model.search
 
 import attributeA
 import attributeB
-import com.algolia.search.model.settings.CustomRanking.Asc
-import com.algolia.search.model.settings.CustomRanking.Desc
+import com.algolia.search.model.settings.CustomRankingCriteria.Asc
+import com.algolia.search.model.settings.CustomRankingCriteria.Desc
 import com.algolia.search.serialize.KeyAsc
 import com.algolia.search.serialize.KeyDesc
 import org.junit.Test
