@@ -60,7 +60,7 @@ internal fun <T : Filter> GroupMap<T>.clear(group: Group, attribute: Attribute?)
 }
 
 internal fun <T : Filter> GroupMap<T>.replace(group: Group, filter: T, replacement: T): Boolean {
-    if (filter::class != replacement::class) throw Exception("Can't replace filters of different types. [$filter, $replacement]")
+    if (filter::class != replacement::class) throw IllegalArgumentException("Can't replace filters of different types. [$filter, $replacement]")
     return get(group.key(filter))?.let {
         if (it.remove(filter)) {
             it += replacement
