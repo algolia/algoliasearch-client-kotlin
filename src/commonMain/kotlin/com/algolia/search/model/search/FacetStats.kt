@@ -8,6 +8,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
+// TODO check C-sharp client if Double or float or whatever
 @Serializable
 data class FacetStats(
     @SerialName(KeyMin) val min: Int,
