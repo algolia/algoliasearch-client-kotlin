@@ -79,7 +79,7 @@ internal suspend fun cleanABTest(suffix: String) {
                 val difference = Date().time - dateFormat.parse(date).time
 
                 if (difference >= dayInMillis) {
-                    clientAdmin1.initIndex(it.name.toIndexName()).apply {
+                    clientAdmin1.initIndex(it.variantA.indexName).apply {
                         clientAnalytics.deleteABTest(it.abTestID).wait() shouldEqual TaskStatus.Published
                     }
                 }
