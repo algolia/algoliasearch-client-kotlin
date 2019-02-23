@@ -29,6 +29,7 @@ internal class TestSuiteIndexing {
         val value: Int = 0
     ) : Indexable
 
+    // Todo, see if we can make this more readable.
     private val suffix = "indexing"
     private val attributeValue = "value".toAttribute()
     private val dataA = Data("A".toObjectID())
