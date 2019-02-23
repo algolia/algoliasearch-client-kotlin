@@ -18,7 +18,6 @@ internal class TestSuiteDNS {
     fun test() {
         runBlocking {
             val applicationID = System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID()
-            val timer = System.currentTimeMillis()
 
             val client = ClientSearch(
                 Configuration(
@@ -33,6 +32,7 @@ internal class TestSuiteDNS {
                     logLevel = LogLevel.INFO
                 )
             )
+            val timer = System.currentTimeMillis()
 
             client.apply {
                 repeat(10) { index ->
