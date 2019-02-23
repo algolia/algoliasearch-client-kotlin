@@ -16,7 +16,7 @@ internal class TestFacetStats : TestSerializer<FacetStats>(FacetStats.serializer
 
     companion object {
 
-        val facetStats = FacetStats(0, 1, 2f, 3f)
+        val facetStats = FacetStats(0f, 1f, 2f, 3f)
         val json = json {
             "min" to 0
             "max" to 1
