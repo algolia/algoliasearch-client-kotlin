@@ -5,6 +5,8 @@ import com.algolia.search.client.Index
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.*
 import com.algolia.search.model.analytics.ABTestID
+import com.algolia.search.model.insights.EventName
+import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.ResponseSearch
@@ -40,6 +42,18 @@ fun Long.toTaskID(): TaskID {
 
 fun String.toUserID(): UserID {
     return UserID(this)
+}
+
+fun String.toQueryID(): QueryID {
+    return QueryID(this)
+}
+
+fun String.toEventName(): EventName {
+    return EventName(this)
+}
+
+fun String.toUserToken(): UserToken {
+    return UserToken(this)
 }
 
 fun String.toApplicationID(): ApplicationID {

@@ -2,6 +2,7 @@ package com.algolia.search.model.response
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.QueryID
 import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
@@ -35,7 +36,7 @@ data class ResponseSearch(
     @Optional @SerialName(KeyCursor) val cursorOrNull: Cursor? = null,
     @Optional @SerialName(KeyIndex) val indexNameOrNull: IndexName? = null,
     @Optional @SerialName(KeyProcessed) val processedOrNull: Boolean? = null,
-    @Optional @SerialName(KeyQueryID) val queryIDOrNull: String? = null
+    @Optional @SerialName(KeyQueryID) val queryIDOrNull: QueryID? = null
 ) {
 
     @Transient
@@ -135,7 +136,7 @@ data class ResponseSearch(
         get() = processedOrNull!!
 
     @Transient
-    val queryID: String
+    val queryID: QueryID
         get() = queryIDOrNull!!
 
     @Serializable(Hit.Companion::class)

@@ -2,6 +2,7 @@ package suite
 
 import com.algolia.search.browseAllABTests
 import com.algolia.search.client.ClientAnalytics
+import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.analytics.Variant
@@ -30,12 +31,15 @@ internal val clientAdmin2 = ClientSearch(
     System.getenv("ALGOLIA_APPLICATION_ID_2").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_2").toAPIKey()
 )
-
 internal val clientMcm = ClientSearch(
     System.getenv("ALGOLIA_ADMIN_ID_MCM").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_MCM").toAPIKey()
 )
 internal val clientAnalytics = ClientAnalytics(
+    System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
+    System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
+)
+internal val clientInsights = ClientInsights(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
 )
