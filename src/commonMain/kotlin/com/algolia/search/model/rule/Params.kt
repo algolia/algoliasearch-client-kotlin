@@ -210,7 +210,7 @@ data class Params(
      * Engine default: null
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundLatLng/]
      */
-    @Optional @SerialName(KeyAroundLatLng) var aroundLatLng: String? = null,
+    @Optional @SerialName(KeyAroundLatLng) @Serializable(KSerializerPoint::class) var aroundLatLng: Point? = null,
 
     /**
      * Whether to search entries around a given location automatically computed from the requester’s IP address.

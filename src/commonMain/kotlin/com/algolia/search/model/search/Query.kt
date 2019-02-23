@@ -211,13 +211,12 @@ data class Query(
      */
     @Optional @SerialName(KeyDisableTypoToleranceOnAttributes) var disableTypoToleranceOnAttributes: List<Attribute>? = null,
 
-    // TODO Type this !
     /**
      * Search for entries around a central geolocation, enabling a geo search within a circular area.
      * Engine default: null
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundLatLng/]
      */
-    @Optional @SerialName(KeyAroundLatLng) var aroundLatLng: String? = null,
+    @Optional @SerialName(KeyAroundLatLng) @Serializable(KSerializerPoint::class) var aroundLatLng: Point? = null,
 
     /**
      * Whether to search entries around a given location automatically computed from the requester’s IP address.

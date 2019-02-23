@@ -20,6 +20,7 @@ internal val regexFilterOnly = Regex("^$KeyFilterOnly\\((.*)\\)$")
 internal val regexSearchable = Regex("^$KeySearchable\\((.*)\\)$")
 internal val regexFacet = Regex("^\\{facet:(.*)}$")
 internal val regexPlaceholder = Regex("^<(.*)>$")
+internal val regexPoint = Regex("^(.*),(.*)$")
 
 internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     return toMutableMap().run {

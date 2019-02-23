@@ -3,6 +3,7 @@ package serialize.search
 import attributes
 import attributesJson
 import boolean
+import com.algolia.search.and
 import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import int
@@ -52,7 +53,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             typoTolerance = TypoTolerance.Min,
             allowTyposOnNumericTokens = boolean,
             disableTypoToleranceOnAttributes = attributes,
-            aroundLatLng = string,
+            aroundLatLng = 0.0f and 0.0f,
             aroundLatLngViaIP = boolean,
             aroundRadius = AroundRadius.All,
             aroundPrecision = int,
@@ -112,7 +113,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeyTypoTolerance to TypoTolerance.Min.raw
             KeyAllowTyposOnNumericTokens to boolean
             KeyDisableTypoToleranceOnAttributes to attributesJson
-            KeyAroundLatLng to string
+            KeyAroundLatLng to "0.0,0.0"
             KeyAroundLatLngViaIP to boolean
             KeyAroundRadius to AroundRadius.All.raw
             KeyAroundPrecision to int

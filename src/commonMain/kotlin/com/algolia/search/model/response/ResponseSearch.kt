@@ -24,7 +24,7 @@ data class ResponseSearch(
     @Optional @SerialName(KeyQueryAfterRemoval) val queryAfterRemovalOrNull: String? = null,
     @Optional @SerialName(KeyParams) val paramsOrNull: String? = null,
     @Optional @SerialName(KeyMessage) val messageOrNull: String? = null,
-    @Optional @SerialName(KeyAroundLatLng) val aroundLatLngOrNull: String? = null,
+    @Optional @SerialName(KeyAroundLatLng) @Serializable(KSerializerPoint::class) val aroundLatLngOrNull: Point? = null,
     @Optional @SerialName(KeyAutomaticRadius) val automaticRadiusOrNull: Float? = null,
     @Optional @SerialName(KeyServerUsed) val serverUsedOrNull: String? = null,
     @Optional @SerialName(KeyIndexUsed) val indexUsedOrNull: IndexName? = null,
@@ -91,7 +91,7 @@ data class ResponseSearch(
         get() = messageOrNull!!
 
     @Transient
-    val aroundLatLng: String
+    val aroundLatLng: Point
         get() = aroundLatLngOrNull!!
 
     @Transient
