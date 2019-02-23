@@ -8,9 +8,10 @@ annotation class QueryHelper
 
 internal val all = Attribute("*")
 
-internal fun Query.copyAndBuildFilters() = copy(
+internal fun Query.build() = copy(
     filters = filters ?: filterBuilder.build().let { if (it.isNotEmpty()) it else null },
-    optionalFilters = optionalFilters ?: optionalFilterBuilder.build().let { if (it.isNotEmpty()) it else null }
+    optionalFilters = optionalFilters ?: optionalFilterBuilder.build().let { if (it.isNotEmpty()) it else null },
+    optionalWords = query?.let { if (isEveryWordInQueryOptional) listOf(it) else optionalWords }
 )
 
 fun queryBuilder(init: Query.() -> Unit) = Query().apply(init)

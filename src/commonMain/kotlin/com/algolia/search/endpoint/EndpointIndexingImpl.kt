@@ -18,7 +18,7 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.Task
-import com.algolia.search.query.copyAndBuildFilters
+import com.algolia.search.query.build
 import com.algolia.search.serialize.*
 import com.algolia.search.toIndexName
 import io.ktor.client.request.*
@@ -136,7 +136,7 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): RevisionIndex {
-        val copy = query.copyAndBuildFilters()
+        val copy = query.build()
         val bodyString = json { KeyParams to copy.toJsonNoDefaults().urlEncode() }.toString()
 
         return retryWrite(requestOptions, indexName.toPath("/deleteByQuery")) { url ->

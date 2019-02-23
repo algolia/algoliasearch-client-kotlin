@@ -4,7 +4,6 @@ import buildTest
 import com.algolia.search.limit
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.AlternativesAsExact
-import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.QueryLanguage
 import com.algolia.search.model.search.ResponseFields
 import com.algolia.search.query.*
@@ -22,32 +21,6 @@ internal class TestQueryHelper {
 
     private val attributeA = Attribute("attributeA")
     private val attributeB = Attribute("attributeB")
-
-    @Test
-    fun testClone() {
-        val query = Query()
-
-        query.copyAndBuildFilters().also {
-            it.filters shouldEqual null
-            it.optionalFilters shouldEqual null
-        }
-        query.filterBuilder.apply {
-            groupOrA += facetA
-        }
-        query.optionalFilterBuilder.apply {
-            groupOrA += facetA
-        }
-        query.copyAndBuildFilters().also {
-            it.filters shouldEqual query.filterBuilder.build()
-            it.optionalFilters shouldEqual query.optionalFilterBuilder.build()
-        }
-        query.filters = "test"
-        query.optionalFilters = listOf()
-        query.copyAndBuildFilters().also {
-            it.filters shouldEqual "test"
-            it.optionalFilters shouldEqual listOf()
-        }
-    }
 
     @Test
     fun attributesToRetrieve() {
