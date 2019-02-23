@@ -7,7 +7,7 @@ import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacetValue
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Query
-import com.algolia.search.query.clone
+import com.algolia.search.query.copyAndBuildFilters
 import com.algolia.search.serialize.*
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
@@ -30,7 +30,7 @@ internal class EndpointSearchImpl(
     }
 
     override suspend fun search(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
-        val copy = query?.clone()
+        val copy = query?.copyAndBuildFilters()
 
         return retryRead(requestOptions, indexName.toPath("/query")) { url ->
             httpClient.post<ResponseSearch>(url) {
@@ -41,7 +41,7 @@ internal class EndpointSearchImpl(
     }
 
     override suspend fun browse(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
-        val copy = query?.clone()
+        val copy = query?.copyAndBuildFilters()
         val bodyString =
             copy?.let {
                 json {
@@ -73,7 +73,7 @@ internal class EndpointSearchImpl(
         maxFacetHits: Int?,
         requestOptions: RequestOptions?
     ): ResponseSearchForFacetValue {
-        val copy = query?.clone()
+        val copy = query?.copyAndBuildFilters()
         val extraParams = json {
             maxFacetHits?.let { KeyMaxFacetHits to it }
             facetQuery?.let { KeyFacetQuery to it }

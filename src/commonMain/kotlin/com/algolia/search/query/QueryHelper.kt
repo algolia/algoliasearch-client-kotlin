@@ -8,7 +8,7 @@ annotation class QueryHelper
 
 internal val all = Attribute("*")
 
-internal fun Query.clone() = copy(
+internal fun Query.copyAndBuildFilters() = copy(
     filters = filters ?: filterBuilder.build().let { if (it.isNotEmpty()) it else null },
     optionalFilters = optionalFilters ?: optionalFilterBuilder.build().let { if (it.isNotEmpty()) it else null }
 )

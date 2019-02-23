@@ -7,7 +7,7 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.request.RequestRequestObjects
 import com.algolia.search.model.response.*
-import com.algolia.search.query.clone
+import com.algolia.search.query.copyAndBuildFilters
 import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyRequests
 import io.ktor.client.request.get
@@ -45,7 +45,7 @@ internal class EndpointMultipleIndexImpl(
         strategy: MultipleQueriesStrategy,
         requestOptions: RequestOptions?
     ): ResponseSearches {
-        val copies = queries.map { IndexQuery(it.indexName, it.query.clone()) }
+        val copies = queries.map { IndexQuery(it.indexName, it.query.copyAndBuildFilters()) }
 
         return retryRead(requestOptions, "$route/*/queries") { url ->
             httpClient.post<ResponseSearches>(url) {
