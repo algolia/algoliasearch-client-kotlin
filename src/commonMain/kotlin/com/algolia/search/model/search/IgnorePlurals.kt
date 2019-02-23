@@ -8,27 +8,27 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonLiteral
 
 
-@Serializable(BooleanOrQueryLanguages.Companion::class)
-sealed class BooleanOrQueryLanguages {
+@Serializable(IgnorePlurals.Companion::class)
+sealed class IgnorePlurals {
 
-    data class Boolean(val boolean: kotlin.Boolean) : BooleanOrQueryLanguages()
+    data class Boolean(val boolean: kotlin.Boolean) : IgnorePlurals()
 
-    data class QueryLanguages(val queryLanguages: List<QueryLanguage>) : BooleanOrQueryLanguages() {
+    data class QueryLanguages(val queryLanguages: List<QueryLanguage>) : IgnorePlurals() {
 
         constructor(vararg queryLanguage: QueryLanguage) : this(queryLanguage.toList())
     }
 
-    @Serializer(BooleanOrQueryLanguages::class)
-    companion object : KSerializer<BooleanOrQueryLanguages> {
+    @Serializer(IgnorePlurals::class)
+    companion object : KSerializer<IgnorePlurals> {
 
-        override fun serialize(encoder: Encoder, obj: BooleanOrQueryLanguages) {
+        override fun serialize(encoder: Encoder, obj: IgnorePlurals) {
             when (obj) {
                 is Boolean -> BooleanSerializer.serialize(encoder, obj.boolean)
                 is QueryLanguages -> QueryLanguage.list.serialize(encoder, obj.queryLanguages)
             }
         }
 
-        override fun deserialize(decoder: Decoder): BooleanOrQueryLanguages {
+        override fun deserialize(decoder: Decoder): IgnorePlurals {
             val element = decoder.asJsonInput()
 
             return when (element) {

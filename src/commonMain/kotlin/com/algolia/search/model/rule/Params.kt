@@ -259,14 +259,14 @@ data class Params(
      * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/ignorePlurals/]
      */
-    @Optional @SerialName(KeyIgnorePlurals) var ignorePlurals: BooleanOrQueryLanguages? = null,
+    @Optional @SerialName(KeyIgnorePlurals) var ignorePlurals: IgnorePlurals? = null,
 
     /**
      * Removes stop (task) words from the query before executing it.
      * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/removeStopWords/]
      */
-    @Optional @SerialName(KeyRemoveStopWords) var removeStopWords: BooleanOrQueryLanguages? = null,
+    @Optional @SerialName(KeyRemoveStopWords) var removeStopWords: RemoveStopWords? = null,
 
     /**
      * Sets the queryLanguage to be used by language-specific settings and functionalities such as
