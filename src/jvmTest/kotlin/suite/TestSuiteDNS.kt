@@ -35,7 +35,7 @@ internal class TestSuiteDNS {
             val timer = System.currentTimeMillis()
 
             client.apply {
-                repeat(10) { index ->
+                repeat(10) {
                     listIndexes()
                 }
             }
