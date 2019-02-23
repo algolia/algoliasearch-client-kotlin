@@ -44,11 +44,20 @@ internal val dateFormat = SimpleDateFormat("YYYY-MM-dd-HH-mm-ss").also {
     it.timeZone = TimeZone.getTimeZone("UTC")
 }
 
+internal val username: String
+    get() {
+        return try {
+            System.getProperty("user.name")
+        } catch (exception: Exception) {
+            "unknown"
+        }
+    }
+
 internal fun testSuiteIndexName(suffix: String): IndexName {
     val date = dateFormat.format(Date())
     val prefix = "kotlin-$date"
 
-    return "$prefix-qlitzler-$suffix".toIndexName()
+    return "$prefix-$username-$suffix".toIndexName()
 }
 
 internal fun compareVariant(actual: ResponseVariant, expected: Variant) {
@@ -62,7 +71,7 @@ internal fun compareVariant(actual: ResponseVariant, expected: Variant) {
 internal suspend fun cleanABTest(suffix: String) {
     clientAnalytics.browseAllABTests {
         abTests.forEach {
-            val result = Regex("kotlin-(.*)-qlitzler-$suffix").find(it.name)
+            val result = Regex("kotlin-(.*)-$username-$suffix").find(it.name)
             val date = result?.groupValues?.get(1)
 
             if (date != null) {
@@ -81,11 +90,12 @@ internal suspend fun cleanABTest(suffix: String) {
 
 internal suspend fun cleanIndex(client: ClientSearch, suffix: String) {
     val indexToDelete = mutableListOf<IndexName>()
+
     client.listIndexes().items.forEach {
         val indexName = it.indexName.raw
 
         if (indexName.contains("kotlin")) {
-            val result = Regex("kotlin-(.*)-qlitzler-$suffix").find(indexName)
+            val result = Regex("kotlin-(.*)-$username-$suffix").find(indexName)
             val date = result?.groupValues?.get(1)
             if (date != null) {
                 val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
