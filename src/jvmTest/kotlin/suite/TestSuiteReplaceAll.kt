@@ -9,7 +9,6 @@ import com.algolia.search.toObjectID
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
 import org.junit.Before
 import org.junit.Test
@@ -58,7 +57,7 @@ class TestSuiteReplaceAll {
 
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
 
-                getObject(objectIDTwo)[KeyObjectID].content shouldEqual objectIDTwo.raw
+                getObject(objectIDTwo).getPrimitive(KeyObjectID).content shouldEqual objectIDTwo.raw
                 getRule(objectIDTwo).rule.objectID shouldEqual objectIDTwo
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 

@@ -3,7 +3,6 @@ package com.algolia.search.model.analytics
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
@@ -34,11 +33,11 @@ data class ABTest(
 
         override fun deserialize(decoder: Decoder): ABTest {
             val json = decoder.asJsonInput().jsonObject
-            val variants = json[KeyVariants].jsonArray
+            val variants = json.getArray(KeyVariants)
 
             return ABTest(
-                name = json[KeyName].content,
-                endAt = json[KeyEndAt].content,
+                name = json.getPrimitive(KeyName).content,
+                endAt = json.getPrimitive(KeyEndAt).content,
                 variantA = Json.noDefaults.fromJson(Variant.serializer(), variants[0]),
                 variantB = Json.noDefaults.fromJson(Variant.serializer(), variants[1])
             )

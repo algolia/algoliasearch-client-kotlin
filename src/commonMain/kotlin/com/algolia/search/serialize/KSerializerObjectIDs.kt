@@ -6,7 +6,6 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.internal.ArrayListClassDesc
-import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
@@ -25,6 +24,6 @@ internal object KSerializerObjectIDs : KSerializer<List<ObjectID>> {
     }
 
     override fun deserialize(decoder: Decoder): List<ObjectID> {
-        return decoder.asJsonInput().jsonArray.map { it.jsonObject[KeyObjectID].content.toObjectID() }
+        return decoder.asJsonInput().jsonArray.map { it.jsonObject.getPrimitive(KeyObjectID).content.toObjectID() }
     }
 }

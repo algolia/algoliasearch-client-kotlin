@@ -27,8 +27,8 @@ data class Edit(val delete: String, val insert: String? = null) {
             val json = decoder.asJsonInput().jsonObject
 
             return Edit(
-                json[KeyDelete].content,
-                json.getOrNull(KeyInsert)?.content
+                json.getPrimitive(KeyDelete).content,
+                json[KeyInsert]?.content
             )
         }
     }

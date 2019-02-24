@@ -159,7 +159,7 @@ data class ResponseSearch(
 
 
         fun <T> get(serializer: KSerializer<T>, attribute: Attribute): T {
-            return Json.plain.fromJson(serializer, json[attribute.raw])
+            return Json.plain.fromJson(serializer, json.getAs(attribute.raw))
         }
 
         fun <T> parse(serializer: KSerializer<T>): T {

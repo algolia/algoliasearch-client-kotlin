@@ -8,8 +8,6 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.internal.SerialClassDescImpl
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.int
 import kotlinx.serialization.json.json
 
 
@@ -33,8 +31,8 @@ internal object KSerializerVariant : KSerializer<Variant> {
         val customSearchParameters = json.getObjectOrNull(KeyCustomSearchParameters)
 
         return Variant(
-            indexName = json[KeyIndexName].content.toIndexName(),
-            trafficPercentage = json[KeyPercentage].int,
+            indexName = json.getPrimitive(KeyIndexName).content.toIndexName(),
+            trafficPercentage = json.getPrimitive(KeyPercentage).int,
             customSearchParameters = customSearchParameters?.let { Json.noDefaults.fromJson(Query.serializer(), it) }
         )
     }

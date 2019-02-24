@@ -36,9 +36,9 @@ sealed class QueryOrEdits {
                     val edits = if (json.containsKey(KeyEdits)) {
                         Json.plain.fromJson(
                             Edit.list,
-                            json.jsonObject[KeyEdits]
+                            json.jsonObject.getAs(KeyEdits)
                         )
-                    } else json[KeyRemoveLowercase].jsonArray.map { Edit(it.content) }
+                    } else json.getArray(KeyRemoveLowercase).jsonArray.map { Edit(it.content) }
                     Edits(edits)
                 }
                 else -> throw Exception("Unable to deserialize Rule.")

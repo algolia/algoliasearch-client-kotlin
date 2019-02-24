@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        ktor = '1.1.2'
+        ktor = '1.2.0-SNAPSHOT'
         okhttp = '3.11.0'
     }
 }

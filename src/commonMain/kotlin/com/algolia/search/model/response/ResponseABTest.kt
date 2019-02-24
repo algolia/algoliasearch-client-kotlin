@@ -5,7 +5,9 @@ import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.serialize.*
 import com.algolia.search.toABTestID
 import kotlinx.serialization.*
-import kotlinx.serialization.json.*
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.json
+import kotlinx.serialization.json.jsonArray
 
 
 @Serializable(ResponseABTest.Companion::class)
@@ -52,16 +54,16 @@ data class ResponseABTest(
 
         override fun deserialize(decoder: Decoder): ResponseABTest {
             val element = decoder.asJsonInput().jsonObject
-            val variants = element[KeyVariants].jsonArray
+            val variants = element.getArray(KeyVariants)
 
             return ResponseABTest(
-                abTestID = element[KeyABTestID].long.toABTestID(),
-                createdAt = element[KeyCreatedAt].content,
-                endAt = element[KeyEndAt].content,
-                name = element[KeyName].content,
-                status = Json.parse(ABTestStatus, element[KeyStatus].content),
-                conversionSignificanceOrNull = element[KeyConversionSignificance].floatOrNull,
-                clickSignificanceOrNull = element[KeyClickSignificance].floatOrNull,
+                abTestID = element.getPrimitive(KeyABTestID).long.toABTestID(),
+                createdAt = element.getPrimitive(KeyCreatedAt).content,
+                endAt = element.getPrimitive(KeyEndAt).content,
+                name = element.getPrimitive(KeyName).content,
+                status = Json.parse(ABTestStatus, element.getPrimitive(KeyStatus).content),
+                conversionSignificanceOrNull = element.getPrimitive(KeyConversionSignificance).floatOrNull,
+                clickSignificanceOrNull = element.getPrimitive(KeyClickSignificance).floatOrNull,
                 variantA = Json.plain.fromJson(ResponseVariant.serializer(), variants[0]),
                 variantB = Json.plain.fromJson(ResponseVariant.serializer(), variants[1])
             )

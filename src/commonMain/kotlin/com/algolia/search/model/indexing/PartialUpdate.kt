@@ -7,9 +7,6 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.doubleOrNull
-import kotlinx.serialization.json.intOrNull
 import kotlinx.serialization.json.json
 
 
@@ -100,8 +97,8 @@ sealed class PartialUpdate(
             val element = decoder.asJsonInput().jsonObject
             val key = element.keys.first()
             val attribute = key.toAttribute()
-            val operation = element.getObject(key)[Key_Operation].content
-            val raw = element.getObject(key)[KeyValue]
+            val operation = element.getObject(key).getPrimitive(Key_Operation).content
+            val raw = element.getObject(key).getPrimitive(KeyValue)
             val int = raw.intOrNull?.let { Value.Number(it) }
             val double = raw.doubleOrNull?.let { Value.Number(it) }
             val value = int ?: double ?: Value.String(raw.content)

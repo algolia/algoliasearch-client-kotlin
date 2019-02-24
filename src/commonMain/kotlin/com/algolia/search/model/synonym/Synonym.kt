@@ -116,38 +116,38 @@ sealed class Synonym(open val objectID: ObjectID) {
 
         override fun deserialize(decoder: Decoder): Synonym {
             val element = decoder.asJsonInput().jsonObject
-            val objectID = element[KeyObjectID].content.toObjectID()
+            val objectID = element.getPrimitive(KeyObjectID).content.toObjectID()
 
             return if (element.containsKey(KeyType)) {
-                when (element[KeyType].content) {
+                when (element.getPrimitive(KeyType).content) {
                     KeySynonym -> MultiWay(
                         objectID,
-                        element[KeySynonyms].jsonArray.map { it.content }
+                        element.getArray(KeySynonyms).map { it.content }
                     )
                     KeyOneWaySynonym -> OneWay(
                         objectID,
-                        element[KeyInput].content,
-                        element[KeySynonyms].jsonArray.map { it.content }
+                        element.getPrimitive(KeyInput).content,
+                        element.getArray(KeySynonyms).map { it.content }
                     )
                     KeyAlternativeCorrection1 -> AlternativeCorrections(
                         objectID,
-                        element[KeyWord].content,
-                        element[KeyCorrections].jsonArray.map { it.content },
+                        element.getPrimitive(KeyWord).content,
+                        element.getArray(KeyCorrections).map { it.content },
                         SynonymType.Typo.One
                     )
                     KeyAlternativeCorrection2 -> AlternativeCorrections(
                         objectID,
-                        element[KeyWord].content,
-                        element[KeyCorrections].jsonArray.map { it.content },
+                        element.getPrimitive(KeyWord).content,
+                        element.getArray(KeyCorrections).map { it.content },
                         SynonymType.Typo.Two
                     )
                     KeyPlaceholder -> {
-                        val find = regexPlaceholder.find(element[KeyPlaceholder].content)!!
+                        val find = regexPlaceholder.find(element.getPrimitive(KeyPlaceholder).content)!!
 
                         Placeholder(
                             objectID,
                             Placeholder.Token(find.groupValues[1]),
-                            element[KeyReplacements].jsonArray.map { it.content }
+                            element.getArray(KeyReplacements).map { it.content }
                         )
                     }
                     else -> Other(objectID, element)

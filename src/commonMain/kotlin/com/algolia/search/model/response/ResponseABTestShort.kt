@@ -8,7 +8,6 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.long
 
 @Serializable(ResponseABTestShort.Companion::class)
 data class ResponseABTestShort(
@@ -41,10 +40,10 @@ data class ResponseABTestShort(
 
         override fun deserialize(decoder: Decoder): ResponseABTestShort {
             val json = decoder.asJsonInput().jsonObject
-            val variants = json[KeyVariants].jsonArray
+            val variants = json.getArray(KeyVariants)
 
             return ResponseABTestShort(
-                abTestId = json[KeyId].long.toABTestID(),
+                abTestId = json.getPrimitive(KeyId).long.toABTestID(),
                 variantA = Json.noDefaults.fromJson(
                     KSerializerVariant,
                     variants[0]

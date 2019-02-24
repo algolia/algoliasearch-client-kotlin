@@ -5,7 +5,10 @@ import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*
 import com.algolia.search.toObjectID
 import kotlinx.serialization.*
-import kotlinx.serialization.json.*
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonObjectBuilder
+import kotlinx.serialization.json.json
 
 
 @Serializable(BatchOperation.Companion::class)
@@ -96,13 +99,13 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
             encoder.asJsonOutput().encodeJson(json)
         }
 
-        private val JsonObject.body get() = this[KeyBody].jsonObject
-        private val JsonObject.objectID get() = body[KeyObjectID].content.toObjectID()
+        private val JsonObject.body get() = this.getObject(KeyBody)
+        private val JsonObject.objectID get() = body.getPrimitive(KeyObjectID).content.toObjectID()
 
         override fun deserialize(decoder: Decoder): BatchOperation {
             val element = decoder.asJsonInput().jsonObject
 
-            return when (val action = element[KeyAction].content) {
+            return when (val action = element.getPrimitive(KeyAction).content) {
                 KeyAddObject -> AddObject(element.body)
                 KeyUpdateObject -> ReplaceObject(element.objectID, element.body)
                 KeyPartialUpdateObject -> UpdateObject(element.objectID, element.body)
