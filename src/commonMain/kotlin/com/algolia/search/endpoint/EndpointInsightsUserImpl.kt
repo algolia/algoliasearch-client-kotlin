@@ -19,7 +19,7 @@ class EndpointInsightsUserImpl(
         indexName: IndexName,
         eventName: EventName,
         filters: List<FilterFacet>,
-        timestamp: Long
+        timestamp: Long?
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.View(
@@ -36,7 +36,7 @@ class EndpointInsightsUserImpl(
         indexName: IndexName,
         eventName: EventName,
         objectIDs: List<ObjectID>,
-        timestamp: Long
+        timestamp: Long?
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.View(
@@ -53,7 +53,7 @@ class EndpointInsightsUserImpl(
         indexName: IndexName,
         eventName: EventName,
         filters: List<FilterFacet>,
-        timestamp: Long
+        timestamp: Long?
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Click(
@@ -70,7 +70,7 @@ class EndpointInsightsUserImpl(
         indexName: IndexName,
         eventName: EventName,
         objectIDs: List<ObjectID>,
-        timestamp: Long
+        timestamp: Long?
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Click(
@@ -89,7 +89,7 @@ class EndpointInsightsUserImpl(
         queryId: QueryID,
         objectIDs: List<ObjectID>,
         positions: List<Int>,
-        timestamp: Long
+        timestamp: Long?
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Click(
@@ -108,7 +108,7 @@ class EndpointInsightsUserImpl(
         indexName: IndexName,
         eventName: EventName,
         filters: List<FilterFacet>,
-        timestamp: Long
+        timestamp: Long?
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Conversion(
@@ -125,7 +125,7 @@ class EndpointInsightsUserImpl(
         indexName: IndexName,
         eventName: EventName,
         objectIDs: List<ObjectID>,
-        timestamp: Long
+        timestamp: Long?
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Conversion(
@@ -143,7 +143,7 @@ class EndpointInsightsUserImpl(
         eventName: EventName,
         queryId: QueryID,
         objectIDs: List<ObjectID>,
-        timestamp: Long
+        timestamp: Long?
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Conversion(
