@@ -1,10 +1,12 @@
 package com.algolia.search.client
 
+import com.algolia.search.encodeBase64
 import com.algolia.search.endpoint.*
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
+import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.ResponseLogs
@@ -15,6 +17,8 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyLength
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyType
+import com.algolia.search.sha256
+import com.algolia.search.toAPIKey
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.request.get
@@ -126,6 +130,18 @@ class ClientSearch private constructor(
                     setRequestOptions(requestOptions)
                 }
             }
+        }
+    }
+
+    companion object {
+
+        fun generateAPIKey(parentAPIKey: APIKey, restriction: SecuredAPIKeyRestriction): APIKey {
+            val restrictionString = restriction.buildRestrictionString()
+            val hash = parentAPIKey.raw.sha256(restrictionString)
+
+            println(restrictionString)
+            println(hash)
+            return "$hash$restrictionString".encodeBase64().toAPIKey()
         }
     }
 }

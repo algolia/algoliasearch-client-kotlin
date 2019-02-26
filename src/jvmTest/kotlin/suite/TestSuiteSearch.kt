@@ -28,6 +28,7 @@ internal class TestSuiteSearch {
     private val company = "company".toAttribute()
     private val allFacets = listOf("*".toAttribute())
     private val index = clientAdmin1.initIndex(indexName)
+    private val search = clientSearch.initIndex(indexName)
 
     @Before
     fun clean() {
@@ -53,7 +54,8 @@ internal class TestSuiteSearch {
 
                 hits.shouldNotBeNull()
                 hits.shouldNotBeEmpty()
-
+            }
+            search.apply {
                 search(Query(facets = allFacets, filters = "company:tesla")).nbHits shouldEqual 1
                 search(Query(facets = allFacets, filters = "(company:tesla OR company:spacex)")).nbHits shouldEqual 2
                 val facetHits = searchForFacetValue(company, "a").facetHits.map { it.value }
