@@ -1,6 +1,6 @@
 package com.algolia.search.model.response.deletion
 
-import com.algolia.search.ClientDate
+import com.algolia.search.model.ClientDate
 import com.algolia.search.model.APIKey
 
 

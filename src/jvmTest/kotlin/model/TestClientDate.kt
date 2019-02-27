@@ -1,12 +1,11 @@
 package model
 
-import com.algolia.search.ClientDate
+import com.algolia.search.model.ClientDate
 import com.algolia.search.dateISO8601
 import com.algolia.search.dateISO8601Millis
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import shouldEqual
 import java.util.*
 
 

@@ -1,6 +1,6 @@
 package serialize.serializer
 
-import com.algolia.search.ClientDate
+import com.algolia.search.model.ClientDate
 import com.algolia.search.dateISO8601
 import com.algolia.search.dateISO8601Millis
 import com.algolia.search.serialize.KSerializerClientDate

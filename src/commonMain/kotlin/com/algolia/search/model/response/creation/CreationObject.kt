@@ -1,6 +1,6 @@
 package com.algolia.search.model.response.creation
 
-import com.algolia.search.ClientDate
+import com.algolia.search.model.ClientDate
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskID

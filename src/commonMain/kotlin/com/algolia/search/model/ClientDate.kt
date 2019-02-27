@@ -1,6 +1,5 @@
-package com.algolia.search
+package com.algolia.search.model
 
-import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KSerializerClientDate
 import kotlinx.serialization.Serializable
 

@@ -1,6 +1,6 @@
 package com.algolia.search.model.response.revision
 
-import com.algolia.search.ClientDate
+import com.algolia.search.model.ClientDate
 import com.algolia.search.model.APIKey
 import com.algolia.search.serialize.KeyKey
 import com.algolia.search.serialize.KeyUpdatedAt
