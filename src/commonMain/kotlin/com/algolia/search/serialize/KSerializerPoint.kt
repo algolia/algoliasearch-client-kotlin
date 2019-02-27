@@ -1,6 +1,6 @@
 package com.algolia.search.serialize
 
-import com.algolia.search.and
+import com.algolia.search.helper.and
 import com.algolia.search.model.search.Point
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder

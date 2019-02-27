@@ -1,6 +1,6 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.and
+import com.algolia.search.helper.and
 import com.algolia.search.model.Raw
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.FloatSerializer

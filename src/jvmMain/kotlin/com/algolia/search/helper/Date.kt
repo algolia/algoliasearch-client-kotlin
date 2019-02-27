@@ -1,4 +1,4 @@
-package com.algolia.search
+package com.algolia.search.helper
 
 import java.text.SimpleDateFormat
 import java.util.*

@@ -5,7 +5,7 @@ import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.toIndexName
+import com.algolia.search.helper.toIndexName
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonLiteral

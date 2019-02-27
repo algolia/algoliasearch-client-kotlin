@@ -5,7 +5,7 @@ import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeySearchable
 import com.algolia.search.serialize.regexFilterOnly
 import com.algolia.search.serialize.regexSearchable
-import com.algolia.search.toAttribute
+import com.algolia.search.helper.toAttribute
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
 

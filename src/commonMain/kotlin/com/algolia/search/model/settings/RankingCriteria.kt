@@ -2,7 +2,7 @@ package com.algolia.search.model.settings
 
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*
-import com.algolia.search.toAttribute
+import com.algolia.search.helper.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

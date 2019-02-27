@@ -1,4 +1,4 @@
-package com.algolia.search
+package com.algolia.search.helper
 
 
 expect fun String.sha256(key: String): String

@@ -5,7 +5,7 @@ import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*
-import com.algolia.search.toObjectID
+import com.algolia.search.helper.toObjectID
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.Json

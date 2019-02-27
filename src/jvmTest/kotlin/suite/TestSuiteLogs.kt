@@ -1,7 +1,7 @@
 package suite
 
 import com.algolia.search.model.LogType
-import com.algolia.search.toIndexName
+import com.algolia.search.helper.toIndexName
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith

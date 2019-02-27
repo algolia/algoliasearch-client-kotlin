@@ -3,7 +3,7 @@ package com.algolia.search.model.response
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.serialize.*
-import com.algolia.search.toABTestID
+import com.algolia.search.helper.toABTestID
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json

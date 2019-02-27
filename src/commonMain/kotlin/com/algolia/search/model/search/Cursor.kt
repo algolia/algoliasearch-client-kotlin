@@ -1,7 +1,7 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.model.Raw
-import com.algolia.search.toCursor
+import com.algolia.search.helper.toCursor
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

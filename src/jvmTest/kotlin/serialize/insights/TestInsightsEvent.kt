@@ -1,6 +1,6 @@
 package serialize.insights
 
-import com.algolia.search.*
+import com.algolia.search.helper.*
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.request.RequestInsightsEvents
 import com.algolia.search.query.FilterFacet

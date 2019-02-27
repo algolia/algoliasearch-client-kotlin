@@ -6,9 +6,9 @@ import com.algolia.search.serialize.KeyObjectIDs
 import com.algolia.search.serialize.KeyTaskID
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.toIndexName
-import com.algolia.search.toObjectID
-import com.algolia.search.toTaskID
+import com.algolia.search.helper.toIndexName
+import com.algolia.search.helper.toObjectID
+import com.algolia.search.helper.toTaskID
 import kotlinx.serialization.*
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.json

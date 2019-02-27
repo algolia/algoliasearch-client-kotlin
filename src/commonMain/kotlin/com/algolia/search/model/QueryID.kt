@@ -1,7 +1,7 @@
 package com.algolia.search.model
 
 import com.algolia.search.exception.EmptyStringException
-import com.algolia.search.toQueryID
+import com.algolia.search.helper.toQueryID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

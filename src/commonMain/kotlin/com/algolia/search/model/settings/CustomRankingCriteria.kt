@@ -6,7 +6,7 @@ import com.algolia.search.serialize.KeyAsc
 import com.algolia.search.serialize.KeyDesc
 import com.algolia.search.serialize.regexAsc
 import com.algolia.search.serialize.regexDesc
-import com.algolia.search.toAttribute
+import com.algolia.search.helper.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

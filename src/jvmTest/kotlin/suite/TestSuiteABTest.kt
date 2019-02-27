@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.dateISO8601
+import com.algolia.search.helper.dateISO8601
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant

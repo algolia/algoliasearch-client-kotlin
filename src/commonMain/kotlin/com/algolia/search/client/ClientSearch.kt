@@ -1,6 +1,6 @@
 package com.algolia.search.client
 
-import com.algolia.search.encodeBase64
+import com.algolia.search.helper.encodeBase64
 import com.algolia.search.endpoint.*
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
@@ -17,8 +17,8 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyLength
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyType
-import com.algolia.search.sha256
-import com.algolia.search.toAPIKey
+import com.algolia.search.helper.sha256
+import com.algolia.search.helper.toAPIKey
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.request.get

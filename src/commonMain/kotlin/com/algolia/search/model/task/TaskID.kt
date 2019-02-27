@@ -1,7 +1,7 @@
 package com.algolia.search.model.task
 
 import com.algolia.search.model.Raw
-import com.algolia.search.toTaskID
+import com.algolia.search.helper.toTaskID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

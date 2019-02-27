@@ -5,7 +5,7 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.toAttribute
+import com.algolia.search.helper.toAttribute
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.list

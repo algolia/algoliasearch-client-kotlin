@@ -2,7 +2,7 @@ package com.algolia.search.model.insights
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.Raw
-import com.algolia.search.toEventName
+import com.algolia.search.helper.toEventName
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

@@ -1,7 +1,7 @@
 package com.algolia.search.model
 
 import com.algolia.search.exception.EmptyStringException
-import com.algolia.search.toAPIKey
+import com.algolia.search.helper.toAPIKey
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
 

@@ -20,7 +20,7 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.Task
 import com.algolia.search.query.build
 import com.algolia.search.serialize.*
-import com.algolia.search.toIndexName
+import com.algolia.search.helper.toIndexName
 import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json

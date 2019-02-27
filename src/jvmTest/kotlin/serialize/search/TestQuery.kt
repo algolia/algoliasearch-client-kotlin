@@ -3,7 +3,7 @@ package serialize.search
 import attributes
 import attributesJson
 import boolean
-import com.algolia.search.and
+import com.algolia.search.helper.and
 import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import int

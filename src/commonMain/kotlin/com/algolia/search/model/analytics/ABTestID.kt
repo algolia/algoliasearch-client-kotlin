@@ -1,7 +1,7 @@
 package com.algolia.search.model.analytics
 
 import com.algolia.search.model.Raw
-import com.algolia.search.toABTestID
+import com.algolia.search.helper.toABTestID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

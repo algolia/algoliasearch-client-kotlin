@@ -1,6 +1,6 @@
 package com.algolia.search.model
 
-import com.algolia.search.toUserID
+import com.algolia.search.helper.toUserID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

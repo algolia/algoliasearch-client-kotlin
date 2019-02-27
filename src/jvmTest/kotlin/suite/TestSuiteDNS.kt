@@ -2,8 +2,8 @@ package suite
 
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.client.Configuration
-import com.algolia.search.toAPIKey
-import com.algolia.search.toApplicationID
+import com.algolia.search.helper.toAPIKey
+import com.algolia.search.helper.toApplicationID
 import io.ktor.client.features.logging.LogLevel
 import kotlinx.coroutines.runBlocking
 import org.junit.Test

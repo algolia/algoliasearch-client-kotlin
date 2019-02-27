@@ -5,7 +5,7 @@ import com.algolia.search.serialize.KeyOrdered
 import com.algolia.search.serialize.KeyUnordered
 import com.algolia.search.serialize.regexOrdered
 import com.algolia.search.serialize.regexUnordered
-import com.algolia.search.toAttribute
+import com.algolia.search.helper.toAttribute
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
 

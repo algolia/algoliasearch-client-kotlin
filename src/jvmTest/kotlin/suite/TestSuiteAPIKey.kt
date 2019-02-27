@@ -6,7 +6,7 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.serialize.urlEncode
-import com.algolia.search.toIndexName
+import com.algolia.search.helper.toIndexName
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.delay

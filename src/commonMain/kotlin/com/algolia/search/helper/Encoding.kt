@@ -1,4 +1,4 @@
-package com.algolia.search
+package com.algolia.search.helper
 
 
 class StringUTF8 private constructor(val string: String) {

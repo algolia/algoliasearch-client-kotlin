@@ -1,7 +1,7 @@
 package query
 
 import buildTest
-import com.algolia.search.limit
+import com.algolia.search.helper.limit
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.AlternativesAsExact
 import com.algolia.search.model.search.Query
