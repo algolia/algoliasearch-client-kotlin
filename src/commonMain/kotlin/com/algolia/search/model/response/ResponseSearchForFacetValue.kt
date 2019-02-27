@@ -6,14 +6,14 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class ResponseSearchForFacetValue(
+public data class ResponseSearchForFacetValue(
     @SerialName(KeyFacetHits) val facetHits: List<Hit>,
     @SerialName(KeyExhaustiveFacetsCount) val exhaustiveFacetsCount: Boolean,
     @SerialName(KeyProcessingTimeMS) val processingTimeMS: Long
 ) {
 
     @Serializable
-    data class Hit(
+    public data class Hit(
         @SerialName(KeyValue) val value: String,
         @SerialName(KeyHighlighted) val highlighted: String,
         @SerialName(KeyCount) val count: Int

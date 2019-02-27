@@ -10,12 +10,12 @@ import kotlinx.serialization.Transient
 
 
 @Serializable
-data class ResponseLogs(
+public data class ResponseLogs(
     @SerialName(KeyLogs) val logs: List<Log>
 ) {
 
     @Serializable
-    data class Log(
+    public data class Log(
         @SerialName(KeyTimestamp) val timestamp: ClientDate,
         @SerialName(KeyMethod) val method: String,
         @SerialName(KeyAnswer_Code) val answerCode: String,
@@ -33,11 +33,11 @@ data class ResponseLogs(
     ) {
 
         @Transient
-        val queryParams: String
+        public val queryParams: String
             get() = queryParamsOrNull!!
 
         @Transient
-        val queryNbHits: Int
+        public val queryNbHits: Int
             get() = queryNbHitsOrNull!!
     }
 }

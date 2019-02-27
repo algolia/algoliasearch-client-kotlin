@@ -1,14 +1,14 @@
 package com.algolia.search.model
 
 import com.algolia.search.exception.EmptyStringException
-import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.helper.toObjectID
+import com.algolia.search.serialize.KeyObjectID
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(ObjectID.Companion::class)
-data class ObjectID(@SerialName(KeyObjectID) override val raw: String) : Raw<String> {
+public data class ObjectID(@SerialName(KeyObjectID) override val raw: String) : Raw<String> {
 
     init {
         if (raw.isEmpty()) throw EmptyStringException(KeyObjectID)
@@ -18,7 +18,7 @@ data class ObjectID(@SerialName(KeyObjectID) override val raw: String) : Raw<Str
         return raw
     }
 
-    companion object : KSerializer<ObjectID> {
+    internal companion object : KSerializer<ObjectID> {
 
         private val serializer = StringSerializer
 

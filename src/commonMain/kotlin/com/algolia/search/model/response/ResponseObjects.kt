@@ -10,12 +10,12 @@ import kotlinx.serialization.json.JsonObject
 
 
 @Serializable
-data class ResponseObjects(
+public data class ResponseObjects(
     @SerialName(KeyResults) val results: List<JsonObject?>,
     @Optional @SerialName(KeyMessage) val messageOrNull: String? = null
 ) {
 
     @Transient
-    val message: String
+    public val message: String
         get() = messageOrNull!!
 }

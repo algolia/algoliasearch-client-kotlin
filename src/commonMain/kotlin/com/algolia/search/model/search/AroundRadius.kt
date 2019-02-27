@@ -12,20 +12,20 @@ import kotlinx.serialization.json.intOrNull
 
 
 @Serializable(AroundRadius.Companion::class)
-sealed class AroundRadius(override val raw: String) : Raw<String> {
+public sealed class AroundRadius(override val raw: String) : Raw<String> {
 
-    object All : AroundRadius(KeyAll)
+    public object All : AroundRadius(KeyAll)
 
-    data class InMeters(val radius: Int) : AroundRadius(radius.toString())
+    internal data class InMeters(val radius: Int) : AroundRadius(radius.toString())
 
-    data class Other(override val raw: String) : AroundRadius(raw)
+    internal data class Other(override val raw: String) : AroundRadius(raw)
 
     override fun toString(): String {
         return raw
     }
 
     @Serializer(AroundRadius::class)
-    companion object : KSerializer<AroundRadius> {
+    internal companion object : KSerializer<AroundRadius> {
 
         override fun serialize(encoder: Encoder, obj: AroundRadius) {
             val element = when (obj) {

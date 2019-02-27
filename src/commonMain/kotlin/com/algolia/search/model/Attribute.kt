@@ -10,7 +10,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(Attribute.Companion::class)
-data class Attribute(override val raw: String) : Raw<String> {
+public data class Attribute(override val raw: String) : Raw<String> {
 
     init {
         if (raw.isEmpty()) throw EmptyStringException("Attribute")
@@ -20,7 +20,7 @@ data class Attribute(override val raw: String) : Raw<String> {
         return raw
     }
 
-    companion object : KSerializer<Attribute> {
+    internal companion object : KSerializer<Attribute> {
 
         private val serializer = StringSerializer
 

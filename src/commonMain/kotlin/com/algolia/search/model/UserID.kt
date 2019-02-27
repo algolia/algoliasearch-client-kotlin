@@ -9,13 +9,13 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(UserID.Companion::class)
-data class UserID(override val raw: String) : Raw<String> {
+public data class UserID(override val raw: String) : Raw<String> {
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<UserID> {
+    internal companion object : KSerializer<UserID> {
 
         private val serializer = StringSerializer
 

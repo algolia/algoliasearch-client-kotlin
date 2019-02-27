@@ -1,9 +1,9 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.regexSnippet
-import com.algolia.search.helper.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -12,7 +12,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(Snippet.Companion::class)
-data class Snippet(
+public data class Snippet(
     val attribute: Attribute,
     val count: Int? = null
 ) : Raw<String> {
@@ -23,7 +23,7 @@ data class Snippet(
         return raw
     }
 
-    companion object : KSerializer<Snippet> {
+    internal companion object : KSerializer<Snippet> {
 
         private val serializer = StringSerializer
 

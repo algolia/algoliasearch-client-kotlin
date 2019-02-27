@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class ResponseListUserIDs(
+public data class ResponseListUserIDs(
     @SerialName(KeyUserIDs) val userIDs: List<ResponseUserID>,
     @SerialName(KeyPage) val pageOrNull: Int,
     @SerialName(KeyHitsPerPage) val hitsPerPageOrNull: Int

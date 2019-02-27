@@ -1,7 +1,7 @@
 package com.algolia.search.query
 
 
-enum class NumericOperator(val raw: String) {
+public enum class NumericOperator(val raw: String) {
     Lesser("<"),
     LesserOrEqual("<="),
     Equals("="),

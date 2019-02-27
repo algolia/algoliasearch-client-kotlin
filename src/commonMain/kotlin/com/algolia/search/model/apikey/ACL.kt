@@ -7,34 +7,34 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(ACL.Companion::class)
-sealed class ACL(override val raw: String) : Raw<String> {
+public sealed class ACL(override val raw: String) : Raw<String> {
 
-    object Search : ACL(KeySearch)
+    public object Search : ACL(KeySearch)
 
-    object Browse : ACL(KeyBrowse)
+    public object Browse : ACL(KeyBrowse)
 
-    object AddObject : ACL(KeyAddObject)
+    public object AddObject : ACL(KeyAddObject)
 
-    object DeleteObject : ACL(KeyDeleteObject)
+    public object DeleteObject : ACL(KeyDeleteObject)
 
-    object DeleteIndex : ACL(KeyDeleteIndex)
+    public object DeleteIndex : ACL(KeyDeleteIndex)
 
-    object Settings : ACL(KeySettings)
+    public object Settings : ACL(KeySettings)
 
-    object EditSettings : ACL(KeyEditSettings)
+    public object EditSettings : ACL(KeyEditSettings)
 
-    object Analytics : ACL(KeyAnalytics)
+    public object Analytics : ACL(KeyAnalytics)
 
-    object ListIndices : ACL(KeyListIndexes)
+    public object ListIndices : ACL(KeyListIndexes)
 
-    object Logs : ACL(KeyLogs)
+    public object Logs : ACL(KeyLogs)
 
-    object SeeUnretrievableAttributes : ACL(KeySeeUnretrievableAttributes)
+    public object SeeUnretrievableAttributes : ACL(KeySeeUnretrievableAttributes)
 
-    data class Other(override val raw: String) : ACL(raw)
+    public data class Other(override val raw: String) : ACL(raw)
 
     @Serializer(ACL::class)
-    companion object : KSerializer<ACL> {
+    internal companion object : KSerializer<ACL> {
 
         private val serializer = StringSerializer
 

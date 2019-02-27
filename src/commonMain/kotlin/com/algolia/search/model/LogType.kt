@@ -12,19 +12,19 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(LogType.Companion::class)
-sealed class LogType(override val raw: String) : Raw<String> {
+public sealed class LogType(override val raw: String) : Raw<String> {
 
-    object All : LogType(KeyAll)
+    public object All : LogType(KeyAll)
 
-    object Query : LogType(KeyQuery)
+    public object Query : LogType(KeyQuery)
 
-    object Build : LogType(KeyBuild)
+    public object Build : LogType(KeyBuild)
 
-    object Error : LogType(KeyError)
+    public object Error : LogType(KeyError)
 
-    data class Other(override val raw: String) : LogType(raw)
+    public data class Other(override val raw: String) : LogType(raw)
 
-    companion object : KSerializer<LogType> {
+    internal companion object : KSerializer<LogType> {
 
         private val serializer = StringSerializer
 

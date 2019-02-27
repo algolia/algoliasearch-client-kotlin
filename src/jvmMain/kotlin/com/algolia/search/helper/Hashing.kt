@@ -7,7 +7,7 @@ import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
 
-actual fun String.sha256(key: String): String {
+internal actual fun String.sha256(key: String): String {
     return Mac.getInstance("HmacSHA256").run {
         val secretKey = SecretKeySpec(this@sha256.toByteArray(), "HmacSHA256")
 
@@ -17,6 +17,6 @@ actual fun String.sha256(key: String): String {
     }
 }
 
-actual fun String.encodeBase64(): String {
+internal actual fun String.encodeBase64(): String {
     return String(Base64.getEncoder().encode(toByteArray()))
 }

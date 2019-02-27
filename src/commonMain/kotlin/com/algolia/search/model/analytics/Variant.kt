@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Variant(
+public data class Variant(
     @SerialName(KeyIndex) val indexName: IndexName,
     @SerialName(KeyTrafficPercentage) val trafficPercentage: Int,
     @SerialName(KeyDescription) val description: String = "",

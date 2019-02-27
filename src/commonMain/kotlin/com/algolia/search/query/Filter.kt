@@ -3,14 +3,14 @@ package com.algolia.search.query
 import com.algolia.search.model.Attribute
 
 
-sealed class Filter(
+public sealed class Filter(
     open val attribute: Attribute
 ) {
 
     var not = false
         private set
 
-    abstract val expression: String
+    internal abstract val expression: String
 
     fun build() = if (not) "NOT $expression" else expression
 
@@ -20,7 +20,7 @@ sealed class Filter(
     }
 }
 
-data class FilterTag(
+public data class FilterTag(
     val value: String
 ) : Filter(Attribute("_tags")) {
 
@@ -31,7 +31,7 @@ data class FilterTag(
     }
 }
 
-sealed class FilterNumeric(
+public sealed class FilterNumeric(
     override val attribute: Attribute
 ) : Filter(attribute) {
 
@@ -40,7 +40,7 @@ sealed class FilterNumeric(
     }
 }
 
-data class FilterComparison(
+public data class FilterComparison(
     override val attribute: Attribute,
     val operator: NumericOperator,
     val value: Double
@@ -53,7 +53,7 @@ data class FilterComparison(
     }
 }
 
-data class FilterRange(
+public data class FilterRange(
     override val attribute: Attribute,
     val lowerBound: Double,
     val upperBound: Double
@@ -66,25 +66,25 @@ data class FilterRange(
     }
 }
 
-data class FilterFacet internal constructor(
+public data class FilterFacet internal constructor(
     override val attribute: Attribute,
     private val value: FacetValue<*>,
     private val score: Int? = null
 ) : Filter(attribute) {
 
-    constructor(attribute: Attribute, value: String, score: Int? = null) : this(
+    public constructor(attribute: Attribute, value: String, score: Int? = null) : this(
         attribute,
         FacetValue.String(value),
         score
     )
 
-    constructor(attribute: Attribute, value: Boolean, score: Int? = null) : this(
+    public constructor(attribute: Attribute, value: Boolean, score: Int? = null) : this(
         attribute,
         FacetValue.Boolean(value),
         score
     )
 
-    constructor(attribute: Attribute, value: Number, score: Int? = null) : this(
+    public constructor(attribute: Attribute, value: Number, score: Int? = null) : this(
         attribute,
         FacetValue.Number(value),
         score
@@ -97,9 +97,9 @@ data class FilterFacet internal constructor(
     }
 }
 
-sealed class FacetValue<T> {
+public sealed class FacetValue<T> {
 
-    abstract val value: T
+    public abstract val value: T
 
     internal fun escape(): Any {
         return when (this) {
@@ -116,8 +116,8 @@ sealed class FacetValue<T> {
     data class Number(override val value: kotlin.Number) : FacetValue<kotlin.Number>()
 }
 
-fun String.toFacetValue() = FacetValue.String(this)
+public fun String.toFacetValue() = FacetValue.String(this)
 
-fun Boolean.toFacetValue() = FacetValue.Boolean(this)
+public fun Boolean.toFacetValue() = FacetValue.Boolean(this)
 
-fun Number.toFacetValue() = FacetValue.Number(this)
+public fun Number.toFacetValue() = FacetValue.Number(this)

@@ -1,9 +1,9 @@
 package com.algolia.search.model.rule
 
+import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.regexFacet
-import com.algolia.search.helper.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -12,13 +12,13 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(Pattern.Companion::class)
-sealed class Pattern(override val raw: String) : Raw<String> {
+public sealed class Pattern(override val raw: String) : Raw<String> {
 
-    data class Facet(val attribute: Attribute) : Pattern("{facet:$attribute}")
+    public data class Facet(val attribute: Attribute) : Pattern("{facet:$attribute}")
 
-    data class Literal(override val raw: String) : Pattern(raw)
+    public data class Literal(override val raw: String) : Pattern(raw)
 
-    companion object : KSerializer<Pattern> {
+    internal companion object : KSerializer<Pattern> {
 
         private val serializer = StringSerializer
 

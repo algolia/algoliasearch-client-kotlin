@@ -30,38 +30,38 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeout
 
 
-class ClientSearch private constructor(
+public class ClientSearch private constructor(
     internal val api: APIWrapperImpl
 ) :
     EndpointMultipleIndex by EndpointMultipleIndexImpl(api),
     EndpointAPIKey by EndpointAPIKeyImpl(api),
     EndpointMultiCluster by EndpointMulticlusterImpl(api) {
 
-    constructor(
+    public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
     ) : this(APIWrapperImpl(Configuration(applicationID, apiKey, hosts = null)))
 
-    constructor(
+    public constructor(
         configuration: Configuration
     ) : this(APIWrapperImpl(configuration))
 
     // Todo test this
-    constructor(
+    public constructor(
         configuration: Configuration,
         engine: HttpClientEngine?
     ) : this(APIWrapperImpl(configuration, engine))
 
     private val indices = mutableMapOf<IndexName, Index>()
 
-    fun initIndex(indexName: IndexName): Index {
+    public fun initIndex(indexName: IndexName): Index {
         return indices.getOrPut(indexName) {
             Index(api, indexName)
         }
     }
 
     // Todo test this
-    suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus> {
+    public suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus> {
 
         suspend fun loop(): List<TaskStatus> {
             while (true) {
@@ -77,12 +77,12 @@ class ClientSearch private constructor(
         return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
-    suspend fun ResponseBatches.waitAll(): List<TaskStatus> {
+    public suspend fun ResponseBatches.waitAll(): List<TaskStatus> {
         return tasks.waitAll()
     }
 
     // TODO Specify why there is no taskID in a comment
-    suspend fun CreationAPIKey.wait(timeout: Long? = null): ResponseAPIKey {
+    public suspend fun CreationAPIKey.wait(timeout: Long? = null): ResponseAPIKey {
 
         suspend fun loop(): ResponseAPIKey {
             while (true) {
@@ -99,7 +99,7 @@ class ClientSearch private constructor(
     }
 
     // TODO Specify why there is no taskID in a comment
-    suspend fun DeletionAPIKey.wait(timeout: Long? = null): Boolean {
+    public suspend fun DeletionAPIKey.wait(timeout: Long? = null): Boolean {
 
         suspend fun loop(): Boolean {
             while (true) {
@@ -115,7 +115,7 @@ class ClientSearch private constructor(
         return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
-    suspend fun getLogs(
+    public suspend fun getLogs(
         offset: Int? = null,
         length: Int? = null,
         logType: LogType? = null,
@@ -135,7 +135,7 @@ class ClientSearch private constructor(
 
     companion object {
 
-        fun generateAPIKey(parentAPIKey: APIKey, restriction: SecuredAPIKeyRestriction): APIKey {
+        public fun generateAPIKey(parentAPIKey: APIKey, restriction: SecuredAPIKeyRestriction): APIKey {
             val restrictionString = restriction.buildRestrictionString()
             val hash = parentAPIKey.raw.sha256(restrictionString)
 

@@ -1,8 +1,8 @@
 package com.algolia.search.model.settings
 
+import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*
-import com.algolia.search.helper.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -11,35 +11,35 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(RankingCriteria.Companion::class)
-sealed class RankingCriteria(override val raw: String) : Raw<String> {
+public sealed class RankingCriteria(override val raw: String) : Raw<String> {
 
-    object Typo : RankingCriteria(KeyTypo)
+    public object Typo : RankingCriteria(KeyTypo)
 
-    object Geo : RankingCriteria(KeyGeo)
+    public object Geo : RankingCriteria(KeyGeo)
 
-    object Words : RankingCriteria(KeyWords)
+    public object Words : RankingCriteria(KeyWords)
 
-    object Filters : RankingCriteria(KeyFilters)
+    public object Filters : RankingCriteria(KeyFilters)
 
-    object Proximity : RankingCriteria(KeyProximity)
+    public object Proximity : RankingCriteria(KeyProximity)
 
-    object Attribute : RankingCriteria(KeyAttribute)
+    public object Attribute : RankingCriteria(KeyAttribute)
 
-    object Exact : RankingCriteria(KeyExact)
+    public object Exact : RankingCriteria(KeyExact)
 
-    object Custom : RankingCriteria(KeyCustom)
+    public object Custom : RankingCriteria(KeyCustom)
 
-    data class Asc(val attribute: com.algolia.search.model.Attribute) : RankingCriteria("$KeyAsc($attribute)")
+    public data class Asc(val attribute: com.algolia.search.model.Attribute) : RankingCriteria("$KeyAsc($attribute)")
 
-    data class Desc(val attribute: com.algolia.search.model.Attribute) : RankingCriteria("$KeyDesc($attribute)")
+    public data class Desc(val attribute: com.algolia.search.model.Attribute) : RankingCriteria("$KeyDesc($attribute)")
 
-    data class Other(override val raw: String) : RankingCriteria(raw)
+    public data class Other(override val raw: String) : RankingCriteria(raw)
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<RankingCriteria> {
+    internal companion object : KSerializer<RankingCriteria> {
 
         private val serializer = StringSerializer
 

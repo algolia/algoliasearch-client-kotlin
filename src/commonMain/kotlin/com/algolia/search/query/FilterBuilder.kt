@@ -10,7 +10,7 @@ import com.algolia.search.model.Attribute
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
  */
 @QueryHelper
-class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInterface<Filter> {
+public class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInterface<Filter> {
 
     private val groups: GroupMap<Filter> = mutableMapOf()
 
@@ -66,7 +66,7 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
      * Replace in this [Group] a [filter] by its [replacement].
      * @return True if the [filter] was found and successfully replaced.
      */
-    fun Group.replace(filter: FilterFacet, replacement: FilterFacet): Boolean {
+    public fun Group.replace(filter: FilterFacet, replacement: FilterFacet): Boolean {
         return groups.replace(this, filter, replacement)
     }
 
@@ -74,7 +74,7 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
      * Replace in this [Group] a [filter] by its [replacement].
      * @return True if the [filter] was found and successfully replaced.
      */
-    fun Group.replace(filter: FilterNumeric, replacement: FilterNumeric): Boolean {
+    public fun Group.replace(filter: FilterNumeric, replacement: FilterNumeric): Boolean {
         return groups.replace(this, filter, replacement)
     }
 
@@ -82,7 +82,7 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
      * Replace in this [Group] a [filter] by its [replacement].
      * @return True if the [filter] was found and successfully replaced.
      */
-    fun Group.replace(filter: FilterTag, replacement: FilterTag): Boolean {
+    public fun Group.replace(filter: FilterTag, replacement: FilterTag): Boolean {
         return groups.replace(this, filter, replacement)
     }
 
@@ -116,7 +116,7 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
      * filters.
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
      */
-    fun build(): String {
+    public fun build(): String {
         val (andEntries, orEntries) = groups.entries.partition { it.key.type == Group.Type.And }
         val ands = andEntries.joinToString(separator = " AND ") { (_, value) ->
             val condition = andEntries.size > 1 && value.size > 1
@@ -134,7 +134,7 @@ class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInt
         return ands + ors
     }
 
-    fun printDebug() {
+    internal fun printDebug() {
         println(buildString {
             groups.keys.sortedBy { it.name }.forEach {
                 append("$it : ${groups[it]}\n")

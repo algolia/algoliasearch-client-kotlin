@@ -12,7 +12,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(IndexName.Companion::class)
-data class IndexName(
+public data class IndexName(
     override val raw: String
 ) : Raw<String> {
 
@@ -32,7 +32,7 @@ data class IndexName(
         return raw
     }
 
-    companion object : KSerializer<IndexName> {
+    internal companion object : KSerializer<IndexName> {
 
         private val serializer = StringSerializer
 

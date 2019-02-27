@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Creation(
+public data class Creation(
     @SerialName(KeyCreatedAt) val createdAt: ClientDate
 )

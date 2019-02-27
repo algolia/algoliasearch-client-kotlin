@@ -11,27 +11,27 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(SortFacetValuesBy.Companion::class)
-sealed class SortFacetValuesBy(override val raw: String) : Raw<String> {
+public sealed class SortFacetValuesBy(override val raw: String) : Raw<String> {
 
     /**
      * FacetFilter values are sorted by decreasing count.
      * The count is the number of records containing this facet value in the results of the query.
      */
-    object Count : SortFacetValuesBy(KeyCount)
+    public object Count : SortFacetValuesBy(KeyCount)
 
     /**
      * FacetFilter values are sorted in alphabetical order, ascending from A to Z.
      * The count is the number of records containing this facet value in the results of the query.
      */
-    object Alpha : SortFacetValuesBy(KeyAlpha)
+    public object Alpha : SortFacetValuesBy(KeyAlpha)
 
-    data class Other(override val raw: String) : SortFacetValuesBy(raw)
+    public data class Other(override val raw: String) : SortFacetValuesBy(raw)
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<SortFacetValuesBy> {
+    internal companion object : KSerializer<SortFacetValuesBy> {
 
         private val serializer = StringSerializer
 

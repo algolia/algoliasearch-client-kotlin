@@ -8,7 +8,7 @@ import com.algolia.search.query.FilterFacet
 import io.ktor.client.response.HttpResponse
 
 
-interface EndpointInsightsUser {
+public interface EndpointInsightsUser {
 
     suspend fun viewedFilters(
         indexName: IndexName,

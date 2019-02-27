@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Condition(
+public data class Condition(
     @SerialName(KeyPattern) val pattern: Pattern,
     @SerialName(KeyAnchoring) val anchoring: Anchoring,
     @Optional @SerialName(KeyContext) val context: String? = null

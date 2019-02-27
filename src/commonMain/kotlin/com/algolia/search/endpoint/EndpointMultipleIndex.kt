@@ -8,7 +8,7 @@ import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.response.*
 
 
-interface EndpointMultipleIndex {
+public interface EndpointMultipleIndex {
 
     suspend fun listIndices(requestOptions: RequestOptions? = null): ResponseListIndices
 

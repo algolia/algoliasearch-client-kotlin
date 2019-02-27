@@ -10,7 +10,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(ClusterName.Companion::class)
-data class ClusterName(override val raw: String) : Raw<String> {
+public data class ClusterName(override val raw: String) : Raw<String> {
 
     init {
         if (raw.isEmpty()) throw EmptyStringException("ClusterName")
@@ -20,7 +20,7 @@ data class ClusterName(override val raw: String) : Raw<String> {
         return raw
     }
 
-    companion object : KSerializer<ClusterName> {
+    internal companion object : KSerializer<ClusterName> {
 
         private val serializer = StringSerializer
 

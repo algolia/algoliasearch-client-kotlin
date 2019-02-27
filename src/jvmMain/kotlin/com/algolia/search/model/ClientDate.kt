@@ -8,7 +8,7 @@ import java.util.*
 
 
 @Serializable(KSerializerClientDate::class)
-actual data class ClientDate actual constructor(override val raw: String) : Raw<String> {
+public actual data class ClientDate actual constructor(override val raw: String) : Raw<String> {
 
     actual constructor(timestamp: Long) : this(dateISO8601.format(Date(timestamp)))
 

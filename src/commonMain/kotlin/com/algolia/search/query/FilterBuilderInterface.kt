@@ -3,7 +3,7 @@ package com.algolia.search.query
 import com.algolia.search.model.Attribute
 
 
-interface FilterBuilderInterface<T : Filter> {
+public interface FilterBuilderInterface<T : Filter> {
 
     /**
      * Add a [filter] to this [Group]. If the [Group] does not exists, it will be created.

@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Deletion(
+public data class Deletion(
     @SerialName(KeyDeletedAt) val deletedAt: ClientDate
 )

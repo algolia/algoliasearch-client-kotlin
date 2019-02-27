@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Facet(
+public data class Facet(
     @SerialName(KeyName) val name: String,
     @SerialName(KeyCount) val count: Int
 )

@@ -12,7 +12,7 @@ import kotlinx.serialization.Transient
 
 
 @Serializable
-data class ResponseAPIKey(
+public data class ResponseAPIKey(
     @SerialName(KeyValue) val apiKey: APIKey,
     @SerialName(KeyValidity) val validity: Long,
     @SerialName(KeyAcl) val rights: List<ACL>,
@@ -26,30 +26,30 @@ data class ResponseAPIKey(
 ) {
 
     @Transient
-    val maxQueriesPerIPPerHour: Int
+    public val maxQueriesPerIPPerHour: Int
         get() = maxQueriesPerIPPerHourOrNull!!
 
     @Transient
-    val maxHitsPerQuery: Int
+    public val maxHitsPerQuery: Int
         get() = maxHitsPerQueryOrNull!!
 
     @Transient
-    val createdAt: ClientDate
+    public val createdAt: ClientDate
         get() = createdAtOrNull!!
 
     @Transient
-    val description: String
+    public val description: String
         get() = descriptionOrNull!!
 
     @Transient
-    val indices: List<IndexName>
+    public val indices: List<IndexName>
         get() = indicesOrNull!!
 
     @Transient
-    val referers: List<String>
+    public val referers: List<String>
         get() = referersOrNull!!
 
     @Transient
-    val query: String
+    public val query: String
         get() = queryOrNull!!
 }

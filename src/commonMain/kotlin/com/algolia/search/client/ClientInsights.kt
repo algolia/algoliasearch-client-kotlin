@@ -9,18 +9,18 @@ import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.insights.UserToken
 
 
-class ClientInsights private constructor(
+public class ClientInsights private constructor(
     private val api: APIWrapperImpl
 ) : EndpointInsights by EndpointInsightsImpl(api) {
 
-    constructor(
+    public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
     ) : this(APIWrapperImpl(Configuration(applicationID, apiKey, hosts = listOf("https://insights.algolia.io"))))
 
-    constructor(
+    public constructor(
         configuration: Configuration
     ) : this(APIWrapperImpl(configuration))
 
-    inner class User(val userToken: UserToken) : EndpointInsightsUser by EndpointInsightsUserImpl(this, userToken)
+    public inner class User(val userToken: UserToken) : EndpointInsightsUser by EndpointInsightsUserImpl(this, userToken)
 }

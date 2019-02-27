@@ -9,7 +9,7 @@ import com.algolia.search.model.Attribute
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
  */
 @QueryHelper
-class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) :
+public class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) :
     FilterBuilderInterface<FilterFacet> {
 
     private val groups: GroupMap<FilterFacet> = mutableMapOf()
@@ -66,7 +66,7 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) :
      * Replace in this [Group] a [filter] by its [replacement].
      * @return True if the [filter] was found and successfully replaced.
      */
-    fun Group.replace(filter: FilterFacet, replacement: FilterFacet): Boolean {
+    public fun Group.replace(filter: FilterFacet, replacement: FilterFacet): Boolean {
         return groups.replace(this, filter, replacement)
     }
 
@@ -98,7 +98,7 @@ class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) :
      * Express every [Group] and [Filter] present in [groups] into a nested list of [String].
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
      */
-    fun build(): List<List<String>> {
+    public fun build(): List<List<String>> {
         val (andEntries, orEntries) = groups.entries.partition { it.key.type == Group.Type.And }
         val ands = andEntries.flatMap { (_, value) -> value.map { listOf(it.expression) } }
         val ors = orEntries.map { (_, value) -> value.map { it.expression } }
