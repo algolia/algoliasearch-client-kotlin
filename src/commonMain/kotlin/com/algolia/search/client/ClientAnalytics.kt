@@ -8,7 +8,8 @@ import com.algolia.search.model.ApplicationID
 
 public class ClientAnalytics private constructor(
     private val api: APIWrapperImpl
-) : EndpointAnalytics by EndpointAnalyticsImpl(api) {
+) : EndpointAnalytics by EndpointAnalyticsImpl(api),
+    ConfigurationInterface by api {
 
     public constructor(
         applicationID: ApplicationID,

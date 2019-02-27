@@ -31,11 +31,12 @@ import kotlinx.coroutines.withTimeout
 
 
 public class ClientSearch private constructor(
-    internal val api: APIWrapperImpl
+    private val api: APIWrapperImpl
 ) :
     EndpointMultipleIndex by EndpointMultipleIndexImpl(api),
     EndpointAPIKey by EndpointAPIKeyImpl(api),
-    EndpointMultiCluster by EndpointMulticlusterImpl(api) {
+    EndpointMultiCluster by EndpointMulticlusterImpl(api),
+    ConfigurationInterface by api {
 
     public constructor(
         applicationID: ApplicationID,

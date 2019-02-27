@@ -11,7 +11,8 @@ import com.algolia.search.model.insights.UserToken
 
 public class ClientInsights private constructor(
     private val api: APIWrapperImpl
-) : EndpointInsights by EndpointInsightsImpl(api) {
+) : EndpointInsights by EndpointInsightsImpl(api),
+    ConfigurationInterface by api {
 
     public constructor(
         applicationID: ApplicationID,
@@ -22,5 +23,7 @@ public class ClientInsights private constructor(
         configuration: Configuration
     ) : this(APIWrapperImpl(configuration))
 
-    public inner class User(val userToken: UserToken) : EndpointInsightsUser by EndpointInsightsUserImpl(this, userToken)
+    public inner class User(
+        val userToken: UserToken
+    ) : EndpointInsightsUser by EndpointInsightsUserImpl(this, userToken)
 }
