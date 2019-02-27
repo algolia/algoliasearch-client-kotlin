@@ -12,8 +12,8 @@ import kotlinx.serialization.json.content
 
 data class SecuredAPIKeyRestriction(
     val query: Query? = null,
-    val indexNames: List<IndexName>? = null,
-    val sources: List<String>? = null,
+    val restrictIndices: List<IndexName>? = null,
+    val restrictSources: List<String>? = null,
     val validUntil: Long? = null,
     val userToken: UserToken? = null
 ) {
@@ -28,8 +28,8 @@ data class SecuredAPIKeyRestriction(
                     }
                 }
             }
-            indexNames?.let { append("restrictIndices", it.joinToString(";") { indexName -> indexName.raw }) }
-            sources?.let { append("restrictSources", it.joinToString(";")) }
+            restrictIndices?.let { append("restrictIndices", it.joinToString(";") { indexName -> indexName.raw }) }
+            restrictSources?.let { append("restrictSources", it.joinToString(";")) }
             userToken?.let { append("userToken", it.raw) }
             validUntil?.let { append("validUntil", it.toString()) }
         }.formUrlEncode()

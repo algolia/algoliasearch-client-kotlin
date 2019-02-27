@@ -18,8 +18,8 @@ internal class TestSecuredAPIKeyRestriction {
     @Test
     fun test() {
         val restriction = SecuredAPIKeyRestriction(
-            indexNames = listOf(indexA, indexB),
-            sources = listOf("valueA", "valueB"),
+            restrictIndices = listOf(indexA, indexB),
+            restrictSources = listOf("valueA", "valueB"),
             query = Query(query = "hello"),
             validUntil = 0,
             userToken = UserToken(unknown)
