@@ -57,13 +57,12 @@ internal class TestSuiteMultiCluster {
                 try {
                     clientMcm.getUserID(userID)
                 } catch (exception: BadResponseStatusException) {
-                    exception.statusCode shouldEqual HttpStatusCode.NotFound
+                    exception.statusCode.value shouldEqual HttpStatusCode.NotFound.value
                     break
                 }
                 delay(1000L)
             }
             clientMcm.listUserIDs().userIDs.filter { it.userID.raw.startsWith(prefix) }.forEach {
-                println(it.userID)
                 clientMcm.removeUserID(it.userID)
             }
         }

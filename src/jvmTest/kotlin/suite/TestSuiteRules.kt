@@ -15,8 +15,8 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import shouldBeTrue
 import shouldEqual
+import shouldFailWith
 import shouldNotBeNull
 
 
@@ -58,13 +58,10 @@ internal class TestSuiteRules {
                 searches.find { it.objectID == rule.objectID }.shouldNotBeNull()
                 searches.find { it.objectID == rules.first().objectID }.shouldNotBeNull()
                 deleteRule(rule.objectID).wait() shouldEqual TaskStatus.Published
-                var isNotfound = false
-                try {
+
+                (BadResponseStatusException::class shouldFailWith {
                     getRule(rule.objectID)
-                } catch (exception: BadResponseStatusException) {
-                    isNotfound = exception.statusCode == HttpStatusCode.NotFound
-                }
-                isNotfound.shouldBeTrue()
+                }).statusCode.value shouldEqual HttpStatusCode.NotFound.value
                 clearRules().wait() shouldEqual TaskStatus.Published
                 searchRules().nbHits shouldEqual 0
             }

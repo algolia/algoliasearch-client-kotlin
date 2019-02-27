@@ -16,6 +16,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldBeTrue
 import shouldEqual
+import shouldFailWith
 
 
 @RunWith(JUnit4::class)
@@ -61,27 +62,17 @@ class TestSuiteReplaceAll {
                 getRule(objectIDTwo).rule.objectID shouldEqual objectIDTwo
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
-                var notFound = false
-                try {
+                (BadResponseStatusException::class shouldFailWith {
                     getObject(objectIDOne)
-                } catch (exception: BadResponseStatusException) {
-                    notFound = exception.statusCode == HttpStatusCode.NotFound
-                }
-                notFound.shouldBeTrue()
-                notFound = false
-                try {
+                }).statusCode.value shouldEqual HttpStatusCode.NotFound.value
+
+                (BadResponseStatusException::class shouldFailWith {
                     getSynonym(objectIDOne)
-                } catch (exception: BadResponseStatusException) {
-                    notFound = exception.statusCode == HttpStatusCode.NotFound
-                }
-                notFound.shouldBeTrue()
-                notFound = false
-                try {
+                }).statusCode.value shouldEqual HttpStatusCode.NotFound.value
+
+                (BadResponseStatusException::class shouldFailWith {
                     getRule(objectIDOne)
-                } catch (exception: BadResponseStatusException) {
-                    notFound = exception.statusCode == HttpStatusCode.NotFound
-                }
-                notFound.shouldBeTrue()
+                }).statusCode.value shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }

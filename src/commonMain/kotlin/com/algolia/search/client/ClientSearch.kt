@@ -89,7 +89,7 @@ class ClientSearch private constructor(
                 try {
                     return getAPIKey(apiKey)
                 } catch (exception: BadResponseStatusException) {
-                    if (exception.statusCode != HttpStatusCode.NotFound) throw exception
+                    if (exception.statusCode.value != HttpStatusCode.NotFound.value) throw exception
                 }
                 delay(1000L)
             }
@@ -106,7 +106,7 @@ class ClientSearch private constructor(
                 try {
                     getAPIKey(apiKey)
                 } catch (exception: BadResponseStatusException) {
-                    if (exception.statusCode == HttpStatusCode.NotFound) return true else throw exception
+                    if (exception.statusCode.value == HttpStatusCode.NotFound.value) return true else throw exception
                 }
                 delay(1000L)
             }

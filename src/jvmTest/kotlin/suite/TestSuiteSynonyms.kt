@@ -17,6 +17,7 @@ import org.junit.runners.JUnit4
 import shouldBeTrue
 import shouldContain
 import shouldEqual
+import shouldFailWith
 
 
 @RunWith(JUnit4::class)
@@ -74,13 +75,10 @@ internal class TestSuiteSynonyms {
                     it.hits shouldContain synonymAlternative2
                 }
                 deleteSynonym(gba).wait() shouldEqual TaskStatus.Published
-                var isNotFound = false
-                try {
+                (BadResponseStatusException::class shouldFailWith {
                     getSynonym(gba)
-                } catch (exception: BadResponseStatusException) {
-                    isNotFound = exception.statusCode == HttpStatusCode.NotFound
-                }
-                isNotFound shouldEqual true
+                }).statusCode.value shouldEqual HttpStatusCode.NotFound.value
+
                 clearSynonyms().wait() shouldEqual TaskStatus.Published
                 searchSynonyms(page = 0, hitsPerPage = 10).nbHits shouldEqual 0
             }
