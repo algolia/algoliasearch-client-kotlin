@@ -4,10 +4,11 @@ import com.algolia.search.endpoint.EndpointAnalytics
 import com.algolia.search.endpoint.EndpointAnalyticsImpl
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
+import io.ktor.client.engine.HttpClientEngine
 
 
 public class ClientAnalytics private constructor(
-    private val api: APIWrapperImpl
+    internal val api: APIWrapperImpl
 ) : EndpointAnalytics by EndpointAnalyticsImpl(api),
     ConfigurationInterface by api {
 
@@ -19,4 +20,9 @@ public class ClientAnalytics private constructor(
     public constructor(
         configuration: Configuration
     ) : this(APIWrapperImpl(configuration))
+
+    public constructor(
+        configuration: Configuration,
+        engine: HttpClientEngine?
+    ) : this(APIWrapperImpl(configuration, engine))
 }
