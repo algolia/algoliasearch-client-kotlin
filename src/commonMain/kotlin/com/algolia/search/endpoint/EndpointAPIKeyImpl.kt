@@ -12,6 +12,7 @@ import com.algolia.search.model.response.deletion.Deletion
 import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.response.revision.RevisionAPIKey
 import com.algolia.search.model.search.Query
+import com.algolia.search.serialize.RouteKeysV1
 import com.algolia.search.serialize.stringify
 import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.serialize.urlEncode
@@ -25,8 +26,6 @@ internal class EndpointAPIKeyImpl(
     val api: APIWrapper
 ) : EndpointAPIKey,
     APIWrapper by api {
-
-    private val route = "/1/keys"
 
     override suspend fun addAPIKey(
         rights: List<ACL>?,
@@ -52,7 +51,7 @@ internal class EndpointAPIKeyImpl(
             restrictSources = restrictSources
         ).stringify()
 
-        return retryWrite(requestOptions, route) { url ->
+        return retryWrite(requestOptions, RouteKeysV1) { url ->
             httpClient.post<CreationAPIKey>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -83,7 +82,7 @@ internal class EndpointAPIKeyImpl(
             referers = referers
         ).stringify()
 
-        return retryWrite(requestOptions, "$route/$apiKey") { url ->
+        return retryWrite(requestOptions, "$RouteKeysV1/$apiKey") { url ->
             httpClient.put<RevisionAPIKey>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -92,7 +91,7 @@ internal class EndpointAPIKeyImpl(
     }
 
     override suspend fun deleteAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): DeletionAPIKey {
-        return retryWrite(requestOptions, "$route/$apiKey") { url ->
+        return retryWrite(requestOptions, "$RouteKeysV1/$apiKey") { url ->
             httpClient.delete<Deletion>(url) {
                 setRequestOptions(requestOptions)
             }.let { DeletionAPIKey(it.deletedAt, apiKey) }
@@ -100,7 +99,7 @@ internal class EndpointAPIKeyImpl(
     }
 
     override suspend fun listAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
-        return retryRead(requestOptions, route) { url ->
+        return retryRead(requestOptions, RouteKeysV1) { url ->
             httpClient.get<ResponseListAPIKey>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -111,7 +110,7 @@ internal class EndpointAPIKeyImpl(
         apiKey: APIKey,
         requestOptions: RequestOptions?
     ): ResponseAPIKey {
-        return retryRead(requestOptions, "$route/$apiKey") { url ->
+        return retryRead(requestOptions, "$RouteKeysV1/$apiKey") { url ->
             httpClient.get<ResponseAPIKey>(url) {
                 setRequestOptions(requestOptions)
             }
