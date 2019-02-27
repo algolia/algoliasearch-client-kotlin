@@ -25,11 +25,11 @@ internal class TestSecuredAPIKeyRestriction {
             userToken = UserToken(unknown)
         ).buildRestrictionString()
         val query = "query=hello"
-        val restrictSources = "restrictSources=valueA;valueB"
-        val restrictIndices = "restrictIndices=indexA;indexB"
+        val restrictSources = "restrictSources=valueA%3BvalueB"
+        val restrictIndices = "restrictIndices=indexA%3BindexB"
         val validUntil = "validUntil=0"
         val userToken = "userToken=unknown"
 
-        restriction shouldEqual "$query&$restrictIndices&$restrictSources&$validUntil&$userToken"
+        restriction shouldEqual "$query&$restrictIndices&$restrictSources&$userToken&$validUntil"
     }
 }
