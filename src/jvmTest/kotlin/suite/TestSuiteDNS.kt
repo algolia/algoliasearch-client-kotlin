@@ -36,7 +36,7 @@ internal class TestSuiteDNS {
 
             client.apply {
                 repeat(10) {
-                    listIndexes()
+                    listIndices()
                 }
             }
             println("Time elapsed in milliseconds: ${(System.currentTimeMillis() - timer)}")

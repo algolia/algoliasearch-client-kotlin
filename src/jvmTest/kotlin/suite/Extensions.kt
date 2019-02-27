@@ -95,7 +95,7 @@ internal suspend fun cleanABTest(suffix: String) {
 internal suspend fun cleanIndex(client: ClientSearch, suffix: String) {
     val indexToDelete = mutableListOf<IndexName>()
 
-    client.listIndexes().items.forEach {
+    client.listIndices().items.forEach {
         val indexName = it.indexName.raw
 
         if (indexName.contains("kotlin")) {

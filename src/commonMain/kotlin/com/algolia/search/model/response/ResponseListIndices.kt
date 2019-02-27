@@ -10,7 +10,7 @@ import kotlinx.serialization.Transient
 
 
 @Serializable
-data class ResponseListIndexes(
+data class ResponseListIndices(
     @SerialName(KeyItems) val items: List<Item>,
     @SerialName(KeyNbPages) val nbPages: Int
 ) {

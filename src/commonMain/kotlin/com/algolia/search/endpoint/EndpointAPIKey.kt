@@ -16,7 +16,7 @@ interface EndpointAPIKey {
 
     suspend fun addAPIKey(
         rights: List<ACL>? = null,
-        indexes: List<IndexName>? = null,
+        indices: List<IndexName>? = null,
         description: String? = null,
         maxHitsPerQuery: Int? = null,
         maxQueriesPerIPPerHour: Int? = null,
@@ -30,7 +30,7 @@ interface EndpointAPIKey {
     suspend fun updateAPIKey(
         apiKey: APIKey,
         rights: List<ACL>? = null,
-        indexes: List<IndexName>? = null,
+        indices: List<IndexName>? = null,
         description: String? = null,
         maxHitsPerQuery: Int? = null,
         maxQueriesPerIPPerHour: Int? = null,

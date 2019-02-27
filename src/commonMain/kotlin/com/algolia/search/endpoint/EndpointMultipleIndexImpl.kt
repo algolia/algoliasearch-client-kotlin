@@ -24,9 +24,9 @@ internal class EndpointMultipleIndexImpl(
 
     private val route = "/1/indexes"
 
-    override suspend fun listIndexes(requestOptions: RequestOptions?): ResponseListIndexes {
+    override suspend fun listIndices(requestOptions: RequestOptions?): ResponseListIndices {
         return retryRead(requestOptions, route) { url ->
-            httpClient.get<ResponseListIndexes>(url) {
+            httpClient.get<ResponseListIndices>(url) {
                 setRequestOptions(requestOptions)
             }
         }

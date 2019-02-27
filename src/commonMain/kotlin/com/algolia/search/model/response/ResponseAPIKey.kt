@@ -1,7 +1,7 @@
 package com.algolia.search.model.response
 
-import com.algolia.search.model.ClientDate
 import com.algolia.search.model.APIKey
+import com.algolia.search.model.ClientDate
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
 import com.algolia.search.serialize.*
@@ -20,7 +20,7 @@ data class ResponseAPIKey(
     @Optional @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQueryOrNull: Int? = null,
     @Optional @SerialName(KeyCreatedAt) val createdAtOrNull: ClientDate? = null,
     @Optional @SerialName(KeyDescription) val descriptionOrNull: String? = null,
-    @Optional @SerialName(KeyIndexes) val indexesOrNull: List<IndexName>? = null,
+    @Optional @SerialName(KeyIndexes) val indicesOrNull: List<IndexName>? = null,
     @Optional @SerialName(KeyReferers) val referersOrNull: List<String>? = null,
     @Optional @SerialName(KeyQueryParameters) val queryOrNull: String? = null
 ) {
@@ -42,8 +42,8 @@ data class ResponseAPIKey(
         get() = descriptionOrNull!!
 
     @Transient
-    val indexes: List<IndexName>
-        get() = indexesOrNull!!
+    val indices: List<IndexName>
+        get() = indicesOrNull!!
 
     @Transient
     val referers: List<String>

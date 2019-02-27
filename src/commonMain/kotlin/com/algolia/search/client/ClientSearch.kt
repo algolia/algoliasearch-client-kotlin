@@ -1,7 +1,9 @@
 package com.algolia.search.client
 
-import com.algolia.search.helper.encodeBase64
 import com.algolia.search.endpoint.*
+import com.algolia.search.helper.encodeBase64
+import com.algolia.search.helper.sha256
+import com.algolia.search.helper.toAPIKey
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
@@ -17,8 +19,6 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyLength
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyType
-import com.algolia.search.helper.sha256
-import com.algolia.search.helper.toAPIKey
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.request.get
@@ -52,10 +52,10 @@ class ClientSearch private constructor(
         engine: HttpClientEngine?
     ) : this(APIWrapperImpl(configuration, engine))
 
-    private val indexes = mutableMapOf<IndexName, Index>()
+    private val indices = mutableMapOf<IndexName, Index>()
 
     fun initIndex(indexName: IndexName): Index {
-        return indexes.getOrPut(indexName) {
+        return indices.getOrPut(indexName) {
             Index(api, indexName)
         }
     }

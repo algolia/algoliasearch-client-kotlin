@@ -25,7 +25,7 @@ sealed class ACL(override val raw: String) : Raw<String> {
 
     object Analytics : ACL(KeyAnalytics)
 
-    object ListIndexes : ACL(KeyListIndexes)
+    object ListIndices : ACL(KeyListIndexes)
 
     object Logs : ACL(KeyLogs)
 
@@ -54,7 +54,7 @@ sealed class ACL(override val raw: String) : Raw<String> {
                 KeySettings -> Settings
                 KeyEditSettings -> EditSettings
                 KeyAnalytics -> Analytics
-                KeyListIndexes -> ListIndexes
+                KeyListIndexes -> ListIndices
                 KeyLogs -> Logs
                 KeySeeUnretrievableAttributes -> SeeUnretrievableAttributes
                 else -> Other(string)

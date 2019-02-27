@@ -10,7 +10,7 @@ import com.algolia.search.model.response.*
 
 interface EndpointMultipleIndex {
 
-    suspend fun listIndexes(requestOptions: RequestOptions? = null): ResponseListIndexes
+    suspend fun listIndices(requestOptions: RequestOptions? = null): ResponseListIndices
 
     suspend fun listIndexAPIKeys(requestOptions: RequestOptions? = null): ResponseListAPIKey
 

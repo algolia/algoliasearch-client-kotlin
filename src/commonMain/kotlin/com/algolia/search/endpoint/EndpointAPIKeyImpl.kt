@@ -30,7 +30,7 @@ internal class EndpointAPIKeyImpl(
 
     override suspend fun addAPIKey(
         rights: List<ACL>?,
-        indexes: List<IndexName>?,
+        indices: List<IndexName>?,
         description: String?,
         maxHitsPerQuery: Int?,
         maxQueriesPerIPPerHour: Int?,
@@ -42,7 +42,7 @@ internal class EndpointAPIKeyImpl(
     ): CreationAPIKey {
         val bodyString = RequestAPIKey(
             rights = rights,
-            indexes = indexes,
+            indices = indices,
             description = description,
             maxHitsPerQuery = maxHitsPerQuery,
             maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
@@ -63,7 +63,7 @@ internal class EndpointAPIKeyImpl(
     override suspend fun updateAPIKey(
         apiKey: APIKey,
         rights: List<ACL>?,
-        indexes: List<IndexName>?,
+        indices: List<IndexName>?,
         description: String?,
         maxHitsPerQuery: Int?,
         maxQueriesPerIPPerHour: Int?,
@@ -74,7 +74,7 @@ internal class EndpointAPIKeyImpl(
     ): RevisionAPIKey {
         val bodyString = RequestAPIKey(
             rights = rights,
-            indexes = indexes,
+            indices = indices,
             description = description,
             maxHitsPerQuery = maxHitsPerQuery,
             maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,

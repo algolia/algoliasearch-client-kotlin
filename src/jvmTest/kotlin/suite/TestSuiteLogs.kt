@@ -17,8 +17,8 @@ internal class TestSuiteLogs {
     fun test() {
         runBlocking {
             clientAdmin1.apply {
-                listIndexes()
-                listIndexes()
+                listIndices()
+                listIndices()
                 getLogs(length = 2, offset = 0, logType = LogType.All).logs.size shouldEqual 2
                 initIndex("products_android_demo".toIndexName()).getLogs().logs.shouldBeEmpty()
             }
