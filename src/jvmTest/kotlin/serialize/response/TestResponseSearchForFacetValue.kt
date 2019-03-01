@@ -1,14 +1,14 @@
 package serialize.response
 
 import com.algolia.search.model.response.ResponseSearchForFacetValue
-import com.algolia.search.serialize.KeyExhaustiveFacetsCount
-import com.algolia.search.serialize.KeyFacetHits
-import com.algolia.search.serialize.KeyProcessingTimeMS
+import com.algolia.search.model.search.Facet
+import com.algolia.search.serialize.*
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import serialize.TestSerializer
+import unknown
 
 
 @RunWith(JUnit4::class)
@@ -18,11 +18,18 @@ internal class TestResponseSearchForFacetValue : TestSerializer<ResponseSearchFo
 
     override val items = listOf(
         ResponseSearchForFacetValue(
-            facetHits = listOf(),
+            facets = listOf(
+                Facet(unknown, 0)
+            ),
             exhaustiveFacetsCount = true,
             processingTimeMS = 0
         ) to json {
-            KeyFacetHits to jsonArray { }
+            KeyFacetHits to jsonArray {
+                +json {
+                    KeyValue to unknown
+                    KeyCount to 0
+                }
+            }
             KeyExhaustiveFacetsCount to true
             KeyProcessingTimeMS to 0
         }
