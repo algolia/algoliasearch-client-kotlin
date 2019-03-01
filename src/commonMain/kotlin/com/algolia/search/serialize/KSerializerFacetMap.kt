@@ -1,8 +1,8 @@
 package com.algolia.search.serialize
 
+import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Facet
-import com.algolia.search.helper.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -13,7 +13,7 @@ import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.Json
 
 
-internal object KSerializerFacets : KSerializer<Map<Attribute, List<Facet>>> {
+internal object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
 
     override val descriptor = HashMapClassDesc(
         Attribute.descriptor,
