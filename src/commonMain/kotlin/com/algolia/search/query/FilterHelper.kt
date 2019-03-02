@@ -76,6 +76,12 @@ internal fun <T : Filter> GroupMap<T>.move(origin: Group, destination: Group, fi
     } else false
 }
 
+internal fun <T : Filter> GroupMap<T>.addOrRemove(group: Group, filter: T): Boolean {
+    val contains = contains(filter)
+    if (contains) remove(group, filter) else add(group, filter)
+    return contains
+}
+
 internal inline fun <reified T : Filter> GroupMap<T>.replaceAttribute(
     group: Group,
     attribute: Attribute,

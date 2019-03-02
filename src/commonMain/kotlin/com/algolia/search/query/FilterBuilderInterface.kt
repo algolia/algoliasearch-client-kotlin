@@ -46,6 +46,12 @@ public interface FilterBuilderInterface<T : Filter> {
     fun Group.removeAll(filters: Collection<T>)
 
     /**
+     * Add the filter [filter] to this [Group], or remove it if it is already present.
+     * @return true if a filter was removed, false if it was added.
+     */
+    fun Group.addOrRemove(filter: T): Boolean
+
+    /**
      * Check whether this [Group] contains the [filter].
      */
     fun Group.contains(filter: T): Boolean

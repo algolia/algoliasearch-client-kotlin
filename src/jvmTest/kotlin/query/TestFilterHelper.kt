@@ -91,6 +91,16 @@ internal class TestFilterHelper {
     }
 
     @Test
+    fun addOrRemove() {
+        groupMap().apply {
+            addOrRemove(groupOrA, facetA).shouldBeFalse()
+            this shouldEqual mutableMapOf(Group.Key(nameA, Group.Type.OrFacet) to set(facetA))
+            addOrRemove(groupOrA, facetA).shouldBeTrue()
+            this shouldEqual mutableMapOf()
+        }
+    }
+
+    @Test
     fun contains() {
         groupMap().apply {
             add(groupAndA, facetA)

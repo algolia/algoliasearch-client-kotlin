@@ -50,6 +50,10 @@ public class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = n
         groups.remove(this, *filters.toTypedArray())
     }
 
+    override fun Group.addOrRemove(filter: FilterFacet): Boolean {
+        return groups.addOrRemove(this, filter)
+    }
+
     override fun Group.contains(filter: FilterFacet): Boolean {
         return groups.contains(this, filter)
     }
