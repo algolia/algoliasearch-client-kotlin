@@ -4,8 +4,7 @@ import com.algolia.search.model.Attribute
 
 
 /**
- * For a better understanding of Filters, please read the documentation linked below:
- *
+ * @see FilterBuilderInterface
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
  */
 @QueryHelper
