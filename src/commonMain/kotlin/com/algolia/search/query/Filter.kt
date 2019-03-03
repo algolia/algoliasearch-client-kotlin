@@ -89,7 +89,7 @@ public data class FilterFacet internal constructor(
         score
     )
 
-    override val expression: String = "\"$attribute\":${value.escape()}" + if (score != null) "<score=$score>" else ""
+    override val expression: String = "\"$attribute\":${value.build()}" + if (score != null) "<score=$score>" else ""
 
     override fun toString(): String {
         return "FilterFacet($expression)"
@@ -100,11 +100,11 @@ public sealed class FacetValue<T> {
 
     public abstract val value: T
 
-    internal fun escape(): Any {
+    internal fun build(): kotlin.String {
         return when (this) {
             is String -> "\"$value\""
-            is Boolean -> value
-            is Number -> value
+            is Boolean -> value.toString()
+            is Number -> value.toString()
         }
     }
 
