@@ -42,7 +42,7 @@ public sealed class FilterNumeric : Filter() {
 public data class FilterComparison(
     override val attribute: Attribute,
     val operator: NumericOperator,
-    val value: Double
+    val value: Number
 ) : FilterNumeric() {
 
     override val expression = "${attribute.escape()} ${operator.raw} $value"
@@ -54,8 +54,8 @@ public data class FilterComparison(
 
 public data class FilterRange(
     override val attribute: Attribute,
-    val lowerBound: Double,
-    val upperBound: Double
+    val lowerBound: Number,
+    val upperBound: Number
 ) : FilterNumeric() {
 
     override val expression = "${attribute.escape()}:$lowerBound TO $upperBound"
