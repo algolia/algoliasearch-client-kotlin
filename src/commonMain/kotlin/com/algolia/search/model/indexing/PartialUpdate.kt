@@ -10,10 +10,10 @@ import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.json
 
 
-public sealed class PartialUpdate(
-    open val attribute: Attribute,
-    internal open val value: Value<*>
-) {
+public sealed class PartialUpdate {
+
+    abstract val attribute: Attribute
+    internal abstract val value: Value<*>
 
     internal sealed class Value<T> {
 
@@ -27,7 +27,7 @@ public sealed class PartialUpdate(
     public data class Increment internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : PartialUpdate(attribute, value) {
+    ) : PartialUpdate() {
 
         public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
@@ -35,7 +35,7 @@ public sealed class PartialUpdate(
     public data class Decrement internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : PartialUpdate(attribute, value) {
+    ) : PartialUpdate() {
 
         public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
@@ -43,7 +43,7 @@ public sealed class PartialUpdate(
     public data class Add internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : PartialUpdate(attribute, value) {
+    ) : PartialUpdate() {
 
         public constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 
@@ -53,7 +53,7 @@ public sealed class PartialUpdate(
     public data class Remove internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : PartialUpdate(attribute, value) {
+    ) : PartialUpdate() {
 
         public constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 
@@ -63,7 +63,7 @@ public sealed class PartialUpdate(
     public data class AddUnique internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : PartialUpdate(attribute, value) {
+    ) : PartialUpdate() {
 
         public constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 

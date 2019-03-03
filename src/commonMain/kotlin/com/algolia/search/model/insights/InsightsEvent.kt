@@ -15,14 +15,14 @@ import kotlinx.serialization.json.jsonArray
 
 
 @Serializable(InsightsEvent.Companion::class)
-public sealed class InsightsEvent(
-    open val eventName: EventName,
-    open val indexName: IndexName,
-    open val userToken: UserToken?,
-    open val timestamp: Long?,
-    open val queryID: QueryID?,
-    open val resources: Resources?
-) {
+public sealed class InsightsEvent {
+
+    abstract val eventName: EventName
+    abstract val indexName: IndexName
+    abstract val userToken: UserToken?
+    abstract val timestamp: Long?
+    abstract val queryID: QueryID?
+    abstract val resources: Resources?
 
     public data class View(
         override val eventName: EventName,
@@ -31,7 +31,7 @@ public sealed class InsightsEvent(
         override val timestamp: Long? = null,
         override val queryID: QueryID? = null,
         override val resources: Resources? = null
-    ) : InsightsEvent(eventName, indexName, userToken, timestamp, queryID, resources)
+    ) : InsightsEvent()
 
     public data class Click(
         override val eventName: EventName,
@@ -41,7 +41,7 @@ public sealed class InsightsEvent(
         override val queryID: QueryID? = null,
         override val resources: Resources? = null,
         val positions: List<Int>? = null
-    ) : InsightsEvent(eventName, indexName, userToken, timestamp, queryID, resources) {
+    ) : InsightsEvent() {
 
         init {
             if (queryID != null && positions == null)
@@ -56,7 +56,7 @@ public sealed class InsightsEvent(
         override val timestamp: Long? = null,
         override val queryID: QueryID? = null,
         override val resources: Resources? = null
-    ) : InsightsEvent(eventName, indexName, userToken, timestamp, queryID, resources)
+    ) : InsightsEvent()
 
     public sealed class Resources {
 

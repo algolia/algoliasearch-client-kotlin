@@ -3,9 +3,9 @@ package com.algolia.search.query
 import com.algolia.search.model.Attribute
 
 
-public sealed class Filter(
-    open val attribute: Attribute
-) {
+public sealed class Filter {
+
+    abstract val attribute: Attribute
 
     var not = false
         private set
@@ -22,8 +22,9 @@ public sealed class Filter(
 
 public data class FilterTag(
     val value: String
-) : Filter(Attribute("_tags")) {
+) : Filter() {
 
+    override val attribute = Attribute("_tags")
     override val expression = "$attribute:\"$value\""
 
     override fun toString(): String {
@@ -31,9 +32,7 @@ public data class FilterTag(
     }
 }
 
-public sealed class FilterNumeric(
-    override val attribute: Attribute
-) : Filter(attribute) {
+public sealed class FilterNumeric : Filter() {
 
     override fun toString(): String {
         return "FilterNumeric($expression)"
@@ -44,7 +43,7 @@ public data class FilterComparison(
     override val attribute: Attribute,
     val operator: NumericOperator,
     val value: Double
-) : FilterNumeric(attribute) {
+) : FilterNumeric() {
 
     override val expression = "\"$attribute\" ${operator.raw} $value"
 
@@ -57,7 +56,7 @@ public data class FilterRange(
     override val attribute: Attribute,
     val lowerBound: Double,
     val upperBound: Double
-) : FilterNumeric(attribute) {
+) : FilterNumeric() {
 
     override val expression = "\"$attribute\":$lowerBound TO $upperBound"
 
@@ -70,7 +69,7 @@ public data class FilterFacet internal constructor(
     override val attribute: Attribute,
     private val value: FacetValue<*>,
     private val score: Int? = null
-) : Filter(attribute) {
+) : Filter() {
 
     public constructor(attribute: Attribute, value: String, score: Int? = null) : this(
         attribute,
