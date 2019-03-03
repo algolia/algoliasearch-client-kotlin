@@ -3,7 +3,7 @@ package com.algolia.search.model.insights
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
-import com.algolia.search.query.FilterFacet
+import com.algolia.search.filter.FilterFacet
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.Serializable

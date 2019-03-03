@@ -1,9 +1,9 @@
-package query
+package filter
 
 import attributeA
 import attributeB
 import attributeC
-import com.algolia.search.query.*
+import com.algolia.search.filter.*
 import comparisonA
 import comparisonB
 import facetA

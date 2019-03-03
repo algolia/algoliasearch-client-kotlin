@@ -1,4 +1,4 @@
-package com.algolia.search.query
+package com.algolia.search.filter
 
 
 public sealed class Group {
