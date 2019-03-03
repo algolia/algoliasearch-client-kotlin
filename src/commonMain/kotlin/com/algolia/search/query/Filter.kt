@@ -45,7 +45,7 @@ public data class FilterComparison(
     val value: Double
 ) : FilterNumeric() {
 
-    override val expression = "\"$attribute\" ${operator.raw} $value"
+    override val expression = "${attribute.escape()} ${operator.raw} $value"
 
     override fun toString(): String {
         return "FilterComparison($expression)"
@@ -58,7 +58,7 @@ public data class FilterRange(
     val upperBound: Double
 ) : FilterNumeric() {
 
-    override val expression = "\"$attribute\":$lowerBound TO $upperBound"
+    override val expression = "${attribute.escape()}:$lowerBound TO $upperBound"
 
     override fun toString(): String {
         return "FilterRange($expression)"
@@ -89,7 +89,7 @@ public data class FilterFacet internal constructor(
         score
     )
 
-    override val expression: String = "\"$attribute\":${value.escape()}" + if (score != null) "<score=$score>" else ""
+    override val expression: String = "${attribute.escape()}:${value.escape()}" + if (score != null) "<score=$score>" else ""
 
     override fun toString(): String {
         return "FilterFacet($expression)"
@@ -114,3 +114,5 @@ internal sealed class FacetValue<T> {
 
     data class Number(override val value: kotlin.Number) : FacetValue<kotlin.Number>()
 }
+
+internal fun Attribute.escape() = "\"$raw\""
