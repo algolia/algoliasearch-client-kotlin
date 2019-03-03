@@ -7,17 +7,17 @@ public sealed class Filter {
 
     abstract val attribute: Attribute
 
-    var not = false
-        private set
-
     internal abstract val expression: String
 
-    fun build() = if (not) "NOT $expression" else expression
+    var not = false
+        private set
 
     fun not(value: Boolean = true): Filter {
         not = value
         return this
     }
+
+    fun build() = if (not) "NOT $expression" else expression
 }
 
 public data class FilterTag(
