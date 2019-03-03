@@ -74,6 +74,19 @@ internal class TestFilterHelper {
     }
 
     @Test
+    fun addTwice() {
+        groupMap().apply {
+            val filters = arrayOf(facetA, facetA, comparisonA, comparisonA, rangeA, rangeA, tagA, tagA)
+
+            add(groupAndA, *filters)
+
+            this shouldEqual mutableMapOf(
+                Group.Key(nameA, Group.Type.And) to set(facetA, comparisonA, rangeA, tagA)
+            )
+        }
+    }
+
+    @Test
     fun remove() {
         groupMap().apply {
             add(groupOrA, facetA, facetB)
