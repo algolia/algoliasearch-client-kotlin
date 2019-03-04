@@ -16,9 +16,9 @@ public sealed class AroundRadius(override val raw: String) : Raw<String> {
 
     public object All : AroundRadius(KeyAll)
 
-    internal data class InMeters(val radius: Int) : AroundRadius(radius.toString())
+    public data class InMeters(val radius: Int) : AroundRadius(radius.toString())
 
-    internal data class Other(override val raw: String) : AroundRadius(raw)
+    public data class Other(override val raw: String) : AroundRadius(raw)
 
     override fun toString(): String {
         return raw
