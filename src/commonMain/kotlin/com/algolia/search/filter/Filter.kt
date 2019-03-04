@@ -9,15 +9,25 @@ public sealed class Filter {
 
     internal abstract val expression: String
 
-    var not = false
+    var isNegated = false
         private set
 
-    fun not(value: Boolean = true): Filter {
-        not = value
+    operator fun not(): Filter {
+        isNegated = !isNegated
         return this
     }
 
-    fun build() = if (not) "NOT $expression" else expression
+    operator fun unaryPlus(): Filter {
+        isNegated = false
+        return this
+    }
+
+    operator fun unaryMinus(): Filter {
+        isNegated = true
+        return this
+    }
+
+    fun build() = if (isNegated) "NOT $expression" else expression
 }
 
 public data class FilterTag(
