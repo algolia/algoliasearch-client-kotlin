@@ -14,6 +14,7 @@ import groupOrA
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import shouldBeNull
 import shouldEqual
 
 
@@ -24,33 +25,36 @@ internal class TestQueryHelper {
     private val attributeB = Attribute("attributeB")
 
     @Test
-    fun testBuild() {
-        val query = Query(
-            query = "hello there"
-        ).apply {
-            isEveryWordInQueryOptional = true
-        }
+    fun buildEveryWordInQueryOptional() {
+        val query = Query(query = "hello there")
 
-        query.build().also {
-            it.filters shouldEqual null
-            it.optionalFilters shouldEqual null
-            it.optionalWords shouldEqual listOf(query.query)
+        query.build().optionalWords.shouldBeNull()
+        query.isEveryWordInQueryOptional = true
+        query.build().optionalWords shouldEqual listOf(query.query)
+
+    }
+
+    @Test
+    fun buildFilterBuilder() {
+        Query().apply {
+            filterBuilder.apply {
+                groupOrA += facetA
+            }
+            build().filters shouldEqual filterBuilder.build()
+            filters = "test"
+            build().filters shouldEqual "test"
         }
-        query.filterBuilder.apply {
-            groupOrA += facetA
-        }
-        query.optionalFilterBuilder.apply {
-            groupOrA += facetA
-        }
-        query.build().also {
-            it.filters shouldEqual query.filterBuilder.build()
-            it.optionalFilters shouldEqual query.optionalFilterBuilder.build()
-        }
-        query.filters = "test"
-        query.optionalFilters = listOf()
-        query.build().also {
-            it.filters shouldEqual "test"
-            it.optionalFilters shouldEqual listOf()
+    }
+
+    @Test
+    fun buildOptionalFilterBuilder() {
+        Query().apply {
+            optionalFilterBuilder.apply {
+                groupOrA += facetA
+            }
+            build().optionalFilters shouldEqual optionalFilterBuilder.build()
+            optionalFilters = listOf()
+            build().optionalFilters shouldEqual listOf()
         }
     }
 
