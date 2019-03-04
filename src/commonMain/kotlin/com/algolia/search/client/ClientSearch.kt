@@ -139,8 +139,6 @@ class ClientSearch private constructor(
             val restrictionString = restriction.buildRestrictionString()
             val hash = parentAPIKey.raw.sha256(restrictionString)
 
-            println(restrictionString)
-            println(hash)
             return "$hash$restrictionString".encodeBase64().toAPIKey()
         }
     }
