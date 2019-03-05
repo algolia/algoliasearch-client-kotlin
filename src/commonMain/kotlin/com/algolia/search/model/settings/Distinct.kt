@@ -7,27 +7,27 @@ import kotlinx.serialization.json.JsonLiteral
 
 
 @Serializable(Distinct.Companion::class)
-sealed class Distinct {
+public sealed class Distinct {
 
-    object True : Distinct()
+    public object True : Distinct()
 
-    object False : Distinct()
+    public object False : Distinct()
 
-    data class Other(val count: Int) : Distinct() {
+    public data class Value(val count: Int) : Distinct() {
 
         init {
-            if (count < 0) throw Exception("Distinct must be a positive integer")
+            if (count < 0) throw IllegalArgumentException("Distinct must be a positive integer")
         }
     }
 
     @Serializer(Distinct::class)
-    companion object : KSerializer<Distinct> {
+    internal companion object : KSerializer<Distinct> {
 
         override fun serialize(encoder: Encoder, obj: Distinct) {
             val json = when (obj) {
                 is True -> JsonLiteral(true)
                 is False -> JsonLiteral(false)
-                is Other -> JsonLiteral(obj.count)
+                is Value -> JsonLiteral(obj.count)
             }
             encoder.asJsonOutput().encodeJson(json)
         }
@@ -40,7 +40,7 @@ sealed class Distinct {
                 return when (int) {
                     0 -> False
                     1 -> True
-                    else -> Other(int)
+                    else -> Value(int)
                 }
             }
             return json.primitive.boolean.let { if (it) True else False }

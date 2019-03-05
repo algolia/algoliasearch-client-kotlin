@@ -1,0 +1,42 @@
+{
+  "events": [
+    {
+      "eventType": "view",
+      "eventName": "landing after a marketing campaign",
+      "timestamp": 1529055974,
+      "index": "products",
+      "userToken": "ab6b88197c7941ee",
+      "filters": [
+        "\"brand\":\"apple\""
+      ]
+    },
+    {
+      "eventType": "click",
+      "eventName": "add to cart from search",
+      "timestamp": 1521710906,
+      "index": "products",
+      "userToken": "67e91a90983a4cd3",
+      "queryID": "43b15df305339e827f0ac0bdc5ebcaa7",
+      "objectIDs": [
+        "12345",
+        "67890"
+      ],
+      "positions": [
+        17,
+        19
+      ]
+    },
+    {
+      "eventType": "conversion",
+      "eventName": "search",
+      "timestamp": 1528364634,
+      "index": "products",
+      "userToken": "1b9e25dc454f4916",
+      "queryID": "43b15df305339e827f0ac0bdc5ebcaa7",
+      "objectIDs": [
+        "12345",
+        "7890a"
+      ]
+    }
+  ]
+}

@@ -1,3 +1,5 @@
+import kotlinx.coroutines.runBlocking
+import kotlin.reflect.KClass
 import kotlin.test.*
 
 
@@ -63,4 +65,12 @@ internal fun <K, V> Map<K, V>.shouldBeEmpty() {
 
 internal fun <K, V> Map<K, V>.shouldNotBeEmpty() {
     this.isNotEmpty().shouldBeTrue()
+}
+
+internal infix fun <T : Throwable> KClass<T>.shouldFailWith(block: suspend () -> Unit): T {
+    return assertFailsWith(this, null) {
+        runBlocking {
+            block()
+        }
+    }
 }

@@ -6,8 +6,8 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.PartialUpdate
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.toAttribute
-import com.algolia.search.toObjectID
+import com.algolia.search.helper.toAttribute
+import com.algolia.search.helper.toObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -29,6 +29,7 @@ internal class TestSuiteIndexing {
         val value: Int = 0
     ) : Indexable
 
+    // Todo, see if we can make this more readable.
     private val suffix = "indexing"
     private val attributeValue = "value".toAttribute()
     private val dataA = Data("A".toObjectID())
@@ -43,21 +44,23 @@ internal class TestSuiteIndexing {
     private val updateC = dataC.copy(value = 1)
     private val updateD = dataD.copy(value = 1)
     private val indexName = testSuiteIndexName(suffix)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
 
 
     private fun batchAddObject(): List<List<BatchOperation.AddObject>> {
         return (0 until 10)
-            .map {
+            .map { index ->
                 batches
-                    .subList(it * 100, it * 100 + 100)
-                    .map { BatchOperation.AddObject.from(it, Data.serializer()) }
+                    .subList(index * 100, index * 100 + 100)
+                    .map { BatchOperation.AddObject.from(Data.serializer(), it) }
             }
     }
 
     @Before
     fun clean() {
-        cleanIndex(clientAdmin1, suffix)
+        runBlocking {
+            cleanIndex(clientAdmin1, suffix)
+        }
     }
 
     @Test
@@ -74,26 +77,26 @@ internal class TestSuiteIndexing {
                 val dataG = Data(results.objectIDs[1]!!)
                 val datas = listOf(dataA, dataB, dataC, dataD, dataE, dataF, dataG)
 
-                saveObject(dataA, Data.serializer()).also { creations += it }
-                saveObjects(listOf(dataB, dataC, dataD), Data.serializer()).also { creations += it }
+                saveObject(Data.serializer(), dataA).also { creations += it }
+                saveObjects(Data.serializer(), listOf(dataB, dataC, dataD)).also { creations += it }
                 creations += batchAddObject().map { batch(it) }
                 creations.wait().all { it is TaskStatus.Published }.shouldBeTrue()
-                datas.forEach { getObject(it.objectID, Data.serializer()) shouldEqual it }
+                datas.forEach { getObject(Data.serializer(), it.objectID) shouldEqual it }
                 getObjects(objectIDs).results
                     .filterNotNull()
                     .map { Json.plain.fromJson(Data.serializer(), it) } shouldEqual batches
                 browse().nbHits shouldEqual 1007
-                revisions += replaceObject(updateA, Data.serializer())
-                revisions += partialUpdateObject(PartialUpdate.Increment(attributeValue, 1), dataE.objectID)
-                revisions += replaceObjects(listOf(updateB, updateC, updateD), Data.serializer())
+                revisions += replaceObject(Data.serializer(), updateA)
+                revisions += partialUpdateObject(dataE.objectID, PartialUpdate.Increment(attributeValue, 1))
+                revisions += replaceObjects(Data.serializer(), listOf(updateB, updateC, updateD))
                 revisions += partialUpdateObjects(
                     listOf(
-                        PartialUpdate.Increment(attributeValue, 1) to dataF.objectID,
-                        PartialUpdate.Increment(attributeValue, 1) to dataG.objectID
+                        dataF.objectID to PartialUpdate.Increment(attributeValue, 1),
+                        dataG.objectID to PartialUpdate.Increment(attributeValue, 1)
                     )
                 )
                 revisions.wait().all { it is TaskStatus.Published }.shouldBeTrue()
-                datas.forEach { getObject(it.objectID, Data.serializer()) shouldEqual it.copy(value = 1) }
+                datas.forEach { getObject(Data.serializer(), it.objectID) shouldEqual it.copy(value = 1) }
                 deletions += datas.map { deleteObject(it.objectID) }
                 deletions += clearObjects()
                 deletions.wait().all { it is TaskStatus.Published }.shouldBeTrue()

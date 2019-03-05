@@ -1,4 +1,5 @@
 pluginManagement {
+    // TODO Track this issue and act accordingly when resolved: https://youtrack.jetbrains.com/issue/KT-27612
     resolutionStrategy {
         eachPlugin {
             if (requested.id.id == "kotlin-multiplatform") {

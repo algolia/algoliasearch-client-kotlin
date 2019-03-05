@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class TaskInfo(
+public data class TaskInfo(
     @SerialName(KeyStatus) val status: TaskStatus,
     @SerialName(KeyPendingTask) val pendingTask: Boolean
 )

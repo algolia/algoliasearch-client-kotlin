@@ -2,8 +2,9 @@ package suite
 
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.client.Configuration
-import com.algolia.search.toAPIKey
-import com.algolia.search.toApplicationID
+import com.algolia.search.helper.toAPIKey
+import com.algolia.search.helper.toApplicationID
+import io.ktor.client.features.logging.LogLevel
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,7 +18,6 @@ internal class TestSuiteDNS {
     fun test() {
         runBlocking {
             val applicationID = System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID()
-            val timer = System.currentTimeMillis()
 
             val client = ClientSearch(
                 Configuration(
@@ -28,18 +28,18 @@ internal class TestSuiteDNS {
                         "https://$applicationID-1.algolianet.com",
                         "https://$applicationID-2.algolianet.com",
                         "https://$applicationID-3.algolianet.com"
-                    )
+                    ),
+                    logLevel = LogLevel.INFO
                 )
             )
+            val timer = System.currentTimeMillis()
 
             client.apply {
                 repeat(10) {
-                    listIndexes()
+                    listIndices()
                 }
             }
-            (System.currentTimeMillis() - timer).let {
-                println("Time elapsed in milliseconds: $it")
-            }
+            println("Time elapsed in milliseconds: ${(System.currentTimeMillis() - timer)}")
         }
     }
 }

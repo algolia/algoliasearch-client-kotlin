@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.toUserID
+import com.algolia.search.helper.toUserID
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.response.readText
 import io.ktor.http.HttpStatusCode
@@ -21,7 +21,7 @@ internal class TestSuiteMultiCluster {
 
     private val date = dateFormat.format(Date())
     private val prefix = "kotlin-$date"
-    private val userID = "$prefix-unknown".toUserID()
+    private val userID = "$prefix-$username".toUserID()
 
     @Test
     fun test() {
@@ -39,7 +39,7 @@ internal class TestSuiteMultiCluster {
                 }
                 delay(1000L)
             }
-            clientMcm.searchUserID(userID.raw).hits.any { it.userID == userID }.shouldBeTrue()
+            clientMcm.searchUserID(userID.raw).hits.shouldNotBeEmpty()
             clientMcm.listUserIDs().userIDs.shouldNotBeEmpty()
             clientMcm.getTopUserID().topUsers.shouldNotBeEmpty()
 
@@ -57,13 +57,12 @@ internal class TestSuiteMultiCluster {
                 try {
                     clientMcm.getUserID(userID)
                 } catch (exception: BadResponseStatusException) {
-                    exception.statusCode shouldEqual HttpStatusCode.NotFound
+                    exception.statusCode.value shouldEqual HttpStatusCode.NotFound.value
                     break
                 }
                 delay(1000L)
             }
             clientMcm.listUserIDs().userIDs.filter { it.userID.raw.startsWith(prefix) }.forEach {
-                println(it.userID)
                 clientMcm.removeUserID(it.userID)
             }
         }

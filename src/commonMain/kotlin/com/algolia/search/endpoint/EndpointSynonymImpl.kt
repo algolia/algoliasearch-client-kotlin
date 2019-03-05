@@ -1,9 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.APIWrapper
-import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.setForwardToReplicas
-import com.algolia.search.client.setRequestOptions
+import com.algolia.search.client.*
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.request.RequestSearchSynonyms
@@ -13,8 +10,9 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionSynonym
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
-import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyReplaceExistingSynonyms
+import com.algolia.search.serialize.RouteSynonyms
+import com.algolia.search.serialize.noDefaults
 import io.ktor.client.request.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
@@ -26,8 +24,6 @@ internal class EndpointSynonymImpl(
 ) : EndpointSynonym,
     APIWrapper by api {
 
-    private val route = "synonyms"
-
     override suspend fun saveSynonym(
         synonym: Synonym,
         forwardToReplicas: Boolean?,
@@ -35,9 +31,9 @@ internal class EndpointSynonymImpl(
     ): RevisionSynonym {
         val bodyString = Json.stringify(Synonym, synonym)
 
-        return write.retry(
-            requestOptions.computedWriteTimeout,
-            indexName.toPath("/$route/${synonym.objectID}")
+        return retryWrite(
+            requestOptions,
+            indexName.toPath("$RouteSynonyms/${synonym.objectID}")
         ) { url ->
             httpClient.put<RevisionSynonym>(url) {
                 body = bodyString
@@ -54,7 +50,7 @@ internal class EndpointSynonymImpl(
         requestOptions: RequestOptions?
     ): RevisionIndex {
         val bodyString = Json.stringify(Synonym.list, synonyms)
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$route/batch")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("$RouteSynonyms/batch")) { url ->
             httpClient.post<RevisionIndex>(url) {
                 body = bodyString
                 setForwardToReplicas(forwardToReplicas)
@@ -65,7 +61,7 @@ internal class EndpointSynonymImpl(
     }
 
     override suspend fun getSynonym(objectID: ObjectID, requestOptions: RequestOptions?): Synonym {
-        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/$route/$objectID")) { url ->
+        return retryRead(requestOptions, indexName.toPath("$RouteSynonyms/$objectID")) { url ->
             httpClient.get<Synonym>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -77,7 +73,7 @@ internal class EndpointSynonymImpl(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
     ): DeletionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$route/$objectID")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("$RouteSynonyms/$objectID")) { url ->
             httpClient.delete<DeletionIndex>(url) {
                 setForwardToReplicas(forwardToReplicas)
                 setRequestOptions(requestOptions)
@@ -89,13 +85,13 @@ internal class EndpointSynonymImpl(
         query: String?,
         page: Int?,
         hitsPerPage: Int?,
-        synonymType: List<SynonymType>?,
+        synonymTypes: List<SynonymType>?,
         requestOptions: RequestOptions?
     ): ResponseSearchSynonyms {
-        val request = RequestSearchSynonyms(query, page, hitsPerPage, synonymType?.joinToString(",") { it.raw })
-        val bodyString = JsonNoNulls.stringify(RequestSearchSynonyms.serializer(), request)
+        val request = RequestSearchSynonyms(query, page, hitsPerPage, synonymTypes?.joinToString(",") { it.raw })
+        val bodyString = Json.noDefaults.stringify(RequestSearchSynonyms.serializer(), request)
 
-        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/$route/search")) { url ->
+        return retryRead(requestOptions, indexName.toPath("$RouteSynonyms/search")) { url ->
             httpClient.post<ResponseSearchSynonyms>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -104,12 +100,20 @@ internal class EndpointSynonymImpl(
     }
 
     override suspend fun clearSynonyms(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): RevisionIndex {
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath("/$route/clear")) { url ->
+        return retryWrite(requestOptions, indexName.toPath("$RouteSynonyms/clear")) { url ->
             httpClient.post<RevisionIndex>(url) {
                 body = ""
                 setForwardToReplicas(forwardToReplicas)
                 setRequestOptions(requestOptions)
             }
         }
+    }
+
+    override suspend fun replaceAllSynonyms(
+        synonyms: List<Synonym>,
+        forwardToReplicas: Boolean?,
+        requestOptions: RequestOptions?
+    ): RevisionIndex {
+        return saveSynonyms(synonyms, forwardToReplicas, true, requestOptions)
     }
 }

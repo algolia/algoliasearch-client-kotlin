@@ -9,8 +9,8 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class ResponseRules(
-    @SerialName(KeyHits) val hits: List<ResponseQueryRule>,
+public data class ResponseRules(
+    @SerialName(KeyHits) val hits: List<ResponseRule>,
     @SerialName(KeyNbHits) val nbHits: Int,
     @SerialName(KeyPage) val page: Int,
     @SerialName(KeyNbPages) val nbPages: Int

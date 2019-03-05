@@ -1,8 +1,9 @@
 package host
-import com.algolia.search.client.requestOptions
+
+import com.algolia.search.helper.requestOptions
 import com.algolia.search.serialize.KeyAlgoliaUserID
 import com.algolia.search.serialize.KeyForwardedFor
-import com.algolia.search.toUserID
+import com.algolia.search.helper.toUserID
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

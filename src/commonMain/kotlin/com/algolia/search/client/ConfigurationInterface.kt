@@ -5,7 +5,7 @@ import com.algolia.search.model.ApplicationID
 import io.ktor.client.features.logging.LogLevel
 
 
-interface ConfigurationInterface {
+public interface ConfigurationInterface {
 
     val applicationID: ApplicationID
     val apiKey: APIKey

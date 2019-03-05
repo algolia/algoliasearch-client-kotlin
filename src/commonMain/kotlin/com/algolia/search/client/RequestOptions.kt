@@ -6,26 +6,22 @@ import com.algolia.search.serialize.KeyForwardedFor
 import kotlinx.serialization.json.JsonObject
 
 
-internal fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {
-    return RequestOptions().apply(init)
-}
-
-data class RequestOptions(
+public data class RequestOptions(
     val writeTimeout: Long? = null,
     val readTimeout: Long? = null
 ) {
 
-    val headers = mutableMapOf<String, String>()
+    public val headers = mutableMapOf<String, String>()
 
-    val urlParameters = mutableMapOf<String, String>()
+    public val urlParameters = mutableMapOf<String, String>()
 
-    val body: JsonObject? = null
+    public val body: JsonObject? = null
 
-    fun headerForwardedFor(ipAddress: String) {
+    public fun headerForwardedFor(ipAddress: String) {
         headers[KeyForwardedFor] = ipAddress
     }
 
-    fun headerAlgoliaUserId(userId: UserID) {
+    public fun headerAlgoliaUserId(userId: UserID) {
         headers[KeyAlgoliaUserID] = userId.raw
     }
 }

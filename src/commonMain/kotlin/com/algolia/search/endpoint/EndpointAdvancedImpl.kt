@@ -2,9 +2,10 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.APIWrapper
 import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.retryRead
 import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.enums.LogType
+import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseLogs
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskID
@@ -28,29 +29,37 @@ internal class EndpointAdvancedImpl(
 ) : EndpointAdvanced,
     APIWrapper by api {
 
-    override suspend fun List<Task>.wait(timeout: Long, requestOptions: RequestOptions?): List<TaskStatus> {
-        return coroutineScope {
-            map { async { it.wait(timeout, requestOptions) } }.map { it.await() }
-        }
-    }
+    override suspend fun List<Task>.wait(timeout: Long?, requestOptions: RequestOptions?): List<TaskStatus> {
 
-    override suspend fun Task.wait(timeout: Long, requestOptions: RequestOptions?): TaskStatus {
-        return withTimeout(timeout) {
-            waitTask(taskID, requestOptions)
-        }
-    }
-
-    override suspend fun waitTask(taskID: TaskID, requestOptions: RequestOptions?): TaskStatus {
-        while (true) {
-            getTask(taskID, requestOptions).status.let {
-                if (it == TaskStatus.Published) return it
+        suspend fun loop(): List<TaskStatus> {
+            return coroutineScope {
+                map { async { it.wait(requestOptions = requestOptions) } }.map { it.await() }
             }
-            delay(1000L)
         }
+
+        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
+    }
+
+    override suspend fun Task.wait(timeout: Long?, requestOptions: RequestOptions?): TaskStatus {
+        return waitTask(taskID, timeout, requestOptions)
+    }
+
+    override suspend fun waitTask(taskID: TaskID, timeout: Long?, requestOptions: RequestOptions?): TaskStatus {
+
+        suspend fun loop(): TaskStatus {
+            while (true) {
+                getTask(taskID, requestOptions).status.let {
+                    if (it == TaskStatus.Published) return it
+                }
+                delay(1000L)
+            }
+        }
+
+        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
     override suspend fun getTask(taskID: TaskID, requestOptions: RequestOptions?): TaskInfo {
-        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/task/$taskID")) { url ->
+        return retryRead(requestOptions, indexName.toPath("/task/$taskID")) { url ->
             httpClient.get<TaskInfo>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -63,7 +72,7 @@ internal class EndpointAdvancedImpl(
         logType: LogType?,
         requestOptions: RequestOptions?
     ): ResponseLogs {
-        return read.retry(requestOptions.computedReadTimeout, "/1/logs") { url ->
+        return retryRead(requestOptions, "/1/logs") { url ->
             httpClient.get<ResponseLogs>(url) {
                 parameter(KeyIndexName, indexName.raw)
                 parameter(KeyOffset, offset)

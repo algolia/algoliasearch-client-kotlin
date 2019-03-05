@@ -2,11 +2,11 @@ package suite
 
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.apikey.ACL
-import com.algolia.search.model.enums.TypoTolerance
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.serialize.urlEncode
-import com.algolia.search.toIndexName
+import com.algolia.search.helper.toIndexName
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.delay
@@ -23,11 +23,11 @@ import shouldEqual
 @RunWith(JUnit4::class)
 internal class TestSuiteAPIKey {
 
-    lateinit var key: APIKey
+    private lateinit var key: APIKey
 
     private val rights = listOf(ACL.Search)
     private val description = "A description"
-    private val indexes = listOf("index".toIndexName())
+    private val indices = listOf("index".toIndexName())
     private val maxHitsPerQuery = 1000
     private val maxQueriesPerIPPerHour = 1000
     private val query = Query(typoTolerance = TypoTolerance.Strict)
@@ -40,7 +40,7 @@ internal class TestSuiteAPIKey {
                 val response = addAPIKey(
                     rights = rights,
                     description = description,
-                    indexes = indexes,
+                    indices = indices,
                     maxHitsPerQuery = maxHitsPerQuery,
                     maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
                     query = query,
@@ -54,7 +54,7 @@ internal class TestSuiteAPIKey {
                     getAPIKey(key).let {
                         it.apiKey shouldEqual key
                         it.description shouldEqual description
-                        it.indexes shouldEqual indexes
+                        it.indices shouldEqual indices
                         it.rights shouldEqual rights
                         it.maxHitsPerQuery shouldEqual maxHitsPerQuery
                         it.maxQueriesPerIPPerHour shouldEqual maxQueriesPerIPPerHour

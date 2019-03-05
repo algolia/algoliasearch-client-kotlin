@@ -5,7 +5,7 @@ import com.algolia.search.model.ApplicationID
 import io.ktor.client.features.logging.LogLevel
 
 
-data class Configuration(
+public data class Configuration(
     override val applicationID: ApplicationID,
     override val apiKey: APIKey,
     override val writeTimeout: Long = 30000,
