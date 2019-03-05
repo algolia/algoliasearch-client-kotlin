@@ -1,7 +1,8 @@
 package suite
 
-import com.algolia.search.model.search.BooleanOrQueryLanguages
+import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.QueryLanguage
+import com.algolia.search.model.search.RemoveStopWords
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.model.settings.Settings
@@ -19,7 +20,6 @@ internal class TestSuiteSettings {
 
     private val suffix = "settings"
     private val indexName = testSuiteIndexName(suffix)
-    private val languages = BooleanOrQueryLanguages.QueryLanguages(QueryLanguage.English, QueryLanguage.French)
     private val index = clientAdmin1.initIndex(indexName)
 
     @Before
@@ -40,8 +40,8 @@ internal class TestSuiteSettings {
 
                 val copy = settings.copy(
                     typoTolerance = TypoTolerance.Min,
-                    ignorePlurals = languages,
-                    removeStopWords = languages,
+                    ignorePlurals = IgnorePlurals.QueryLanguages(QueryLanguage.English, QueryLanguage.French),
+                    removeStopWords = RemoveStopWords.QueryLanguages(QueryLanguage.English, QueryLanguage.French),
                     distinct = Distinct.True
                 )
                 setSettings(copy).wait() shouldEqual TaskStatus.Published

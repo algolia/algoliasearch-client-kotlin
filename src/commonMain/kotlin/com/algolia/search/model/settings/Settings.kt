@@ -10,13 +10,13 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Settings(
+public data class Settings(
     @Optional @SerialName(KeySearchableAttributes) var searchableAttributes: List<SearchableAttribute>? = null,
     @Optional @SerialName(KeyAttributesForFaceting) var attributesForFaceting: List<AttributeForFaceting>? = null,
     @Optional @SerialName(KeyUnretrievableAttributes) var unretrievableAttributes: List<Attribute>? = null,
     @Optional @SerialName(KeyAttributesToRetrieve) var attributesToRetrieve: List<Attribute>? = null,
-    @Optional @SerialName(KeyRanking) var ranking: List<Ranking>? = null,
-    @Optional @SerialName(KeyCustomRanking) var customRanking: List<CustomRanking>? = null,
+    @Optional @SerialName(KeyRanking) var ranking: List<RankingCriteria>? = null,
+    @Optional @SerialName(KeyCustomRanking) var customRanking: List<CustomRankingCriteria>? = null,
     @Optional @SerialName(KeyReplicas) var replicas: List<IndexName>? = null,
     @Optional @SerialName(KeyMaxValuesPerFacet) var maxValuesPerFacet: Int? = null,
     @Optional @SerialName(KeySortFacetValuesBy) var sortFacetValuesBy: SortFacetValuesBy? = null,
@@ -35,8 +35,8 @@ data class Settings(
     @Optional @SerialName(KeyDisableTypoToleranceOnAttributes) var disableTypoToleranceOnAttributes: List<Attribute>? = null,
     @Optional @SerialName(KeyDisableTypoToleranceOnWords) var disableTypoToleranceOnWords: List<String>? = null,
     @Optional @SerialName(KeySeparatorsToIndex) var separatorsToIndex: String? = null,
-    @Optional @SerialName(KeyIgnorePlurals) var ignorePlurals: BooleanOrQueryLanguages? = null,
-    @Optional @SerialName(KeyRemoveStopWords) var removeStopWords: BooleanOrQueryLanguages? = null,
+    @Optional @SerialName(KeyIgnorePlurals) var ignorePlurals: IgnorePlurals? = null,
+    @Optional @SerialName(KeyRemoveStopWords) var removeStopWords: RemoveStopWords? = null,
     @Optional @SerialName(KeyCamelCaseAttributes) var camelCaseAttributes: List<Attribute>? = null,
     @Optional @SerialName(KeyDecompoundedAttributes) var decompoundedAttributes: List<DecompoundedAttributes>? = null,
     @Optional @SerialName(KeyKeepDiacriticsOnCharacters) var keepDiacriticsOnCharacters: String? = null,

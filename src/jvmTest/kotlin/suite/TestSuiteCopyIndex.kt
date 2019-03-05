@@ -7,8 +7,8 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.toAttribute
-import com.algolia.search.toObjectID
+import com.algolia.search.helper.toAttribute
+import com.algolia.search.helper.toObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.json
 import org.junit.Before

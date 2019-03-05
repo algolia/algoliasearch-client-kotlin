@@ -1,9 +1,9 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.filter.FilterBuilder
+import com.algolia.search.filter.OptionalFilterBuilder
+import com.algolia.search.filter.QueryHelper
 import com.algolia.search.model.Attribute
-import com.algolia.search.query.FilterBuilder
-import com.algolia.search.query.OptionalFilterBuilder
-import com.algolia.search.query.QueryHelper
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
@@ -13,7 +13,7 @@ import kotlinx.serialization.Transient
 
 @Serializable
 @QueryHelper
-data class Query(
+public data class Query(
     /**
      * The text to search in the index.
      * Engine default: "" (empty name)
@@ -23,7 +23,7 @@ data class Query(
 
     /**
      * Gives control over which attributes to retrieve and which not to retrieve.
-     * Engine default: [*]
+     * Engine default: `[*]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToRetrieve/]
      */
     @Optional @SerialName(KeyAttributesToRetrieve) var attributesToRetrieve: List<Attribute>? = null,
@@ -44,28 +44,28 @@ data class Query(
 
     /**
      * Filter hits by facet value.
-     * Engine default: []
+     * Engine default: `[]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/facetFilters/]
      */
     @Optional @SerialName(KeyFacetFilters) var facetFilters: List<List<String>>? = null,
 
     /**
      * Create filters for ranking purposes, where records that match the filter are ranked highest.
-     * Engine default: []
+     * Engine default: `[]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
      */
     @Optional @SerialName(KeyOptionalFilters) var optionalFilters: List<List<String>>? = null,
 
     /**
      * Filter on numeric attributes.
-     * Engine default: []
+     * Engine default: `[]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/numericFilters/]
      */
     @Optional @SerialName(KeyNumericFilters) var numericFilters: List<List<String>>? = null,
 
     /**
      * Filter hits by tags.
-     * Engine default: []
+     * Engine default: `[]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/tagFilters/]
      */
     @Optional @SerialName(KeyTagFilters) var tagFilters: List<List<String>>? = null,
@@ -79,7 +79,7 @@ data class Query(
 
     /**
      * Facets to retrieve.
-     * Engine default: [] (no facets retrieved)
+     * Engine default: `[]` (no facets retrieved)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/facets/]
      */
     @Optional @SerialName(KeyFacets) var facets: List<Attribute>? = null,
@@ -114,7 +114,7 @@ data class Query(
 
     /**
      * List of attributes to snippet, with an optional maximum number of words to snippet.
-     * Engine default: [] (no attribute is snippeted)
+     * Engine default: `[]` (no attribute is snippeted)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToSnippet/]
      */
     @Optional @SerialName(KeyAttributesToSnippet) var attributesToSnippet: List<Snippet>? = null,
@@ -205,7 +205,7 @@ data class Query(
 
     /**
      * List of attributes on which you want to disable typo tolerance.
-     * Engine default: []
+     * Engine default: `[]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/disableTypoToleranceOnAttributes/]
      */
     @Optional @SerialName(KeyDisableTypoToleranceOnAttributes) var disableTypoToleranceOnAttributes: List<Attribute>? = null,
@@ -215,7 +215,7 @@ data class Query(
      * Engine default: null
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundLatLng/]
      */
-    @Optional @SerialName(KeyAroundLatLng) var aroundLatLng: String? = null,
+    @Optional @SerialName(KeyAroundLatLng) @Serializable(KSerializerPoint::class) var aroundLatLng: Point? = null,
 
     /**
      * Whether to search entries around a given location automatically computed from the requester’s IP address.
@@ -264,20 +264,20 @@ data class Query(
      * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/ignorePlurals/]
      */
-    @Optional @SerialName(KeyIgnorePlurals) var ignorePlurals: BooleanOrQueryLanguages? = null,
+    @Optional @SerialName(KeyIgnorePlurals) var ignorePlurals: IgnorePlurals? = null,
 
     /**
      * Removes stop (task) words from the query before executing it.
      * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/removeStopWords/]
      */
-    @Optional @SerialName(KeyRemoveStopWords) var removeStopWords: BooleanOrQueryLanguages? = null,
+    @Optional @SerialName(KeyRemoveStopWords) var removeStopWords: RemoveStopWords? = null,
 
     /**
      * Sets the queryLanguage to be used by language-specific settings and functionalities such as
      * [ignorePlurals], [removeStopWords], and
      * [CJK word-detection][https://www.algolia.com/doc/guides/textual-relevance/queryLanguage/#using-a-language-specific-dictionary-for-cjk-words].
-     * Engine default: []
+     * Engine default: `[]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryLanguages/]
      */
     @Optional @SerialName(KeyQueryLanguages) var queryLanguages: List<QueryLanguage>? = null,
@@ -291,7 +291,7 @@ data class Query(
 
     /**
      * Enables contextual rules.
-     * Engine default: []
+     * Engine default: `[]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/ruleContexts/]
      */
     @Optional @SerialName(KeyRuleContexts) var ruleContexts: List<String>? = null,
@@ -326,14 +326,14 @@ data class Query(
 
     /**
      * A list of words that should be considered as optional when found in the query.
-     * Engine default: []
+     * Engine default: `[]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalWords/]
      */
     @Optional @SerialName(KeyOptionalWords) var optionalWords: List<String>? = null,
 
     /**
      * List of attributes on which you want to disable the exact ranking criterion.
-     * Engine default: []
+     * Engine default: `[]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/disableExactOnAttributes/]
      */
     @Optional @SerialName(KeyDisableExactOnAttributes) var disableExactOnAttributes: List<Attribute>? = null,
@@ -347,7 +347,7 @@ data class Query(
 
     /**
      * List of alternatives that should be considered an exact match by the exact ranking criterion.
-     * Engine default: [[AlternativesAsExact.IgnorePlurals], [AlternativesAsExact.SingleWordSynonym]]
+     * Engine default: `[[AlternativesAsExact.IgnorePlurals], [AlternativesAsExact.SingleWordSynonym]]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/alternativesAsExact/]
      */
     @Optional @SerialName(KeyAlternativesAsExact) var alternativesAsExact: List<AlternativesAsExact>? = null,
@@ -382,7 +382,7 @@ data class Query(
 
     /**
      * List of tags to apply to the query in the analytics.
-     * Engine default: []
+     * Engine default: `[]`
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/]
      */
     @Optional @SerialName(KeyAnalyticsTags) var analyticsTags: List<String>? = null,
@@ -438,14 +438,14 @@ data class Query(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalWords/#doing-an-or-between-all-words-of-a-query]
      */
     @Transient
-    var isEveryWordInQueryOptional: Boolean = false // Todo
+    public var isEveryWordInQueryOptional: Boolean = false
 
     /**
      * You can modify this instance of [FilterBuilder] or assign a new one.
      * If [filters] is null, the encoder of [FilterBuilder.build] will be passed to the request body of the next request.
      */
     @Transient
-    var filterBuilder: FilterBuilder = FilterBuilder()
+    public var filterBuilder: FilterBuilder = FilterBuilder()
 
     /**
      * You can modify this instance of [OptionalFilterBuilder] or assign a new one.
@@ -453,5 +453,5 @@ data class Query(
      * the request body of the next request.
      */
     @Transient
-    var optionalFilterBuilder: OptionalFilterBuilder = OptionalFilterBuilder()
+    public var optionalFilterBuilder: OptionalFilterBuilder = OptionalFilterBuilder()
 }

@@ -1,10 +1,10 @@
 package suite
 
-import com.algolia.search.dateISO8601
+import com.algolia.search.helper.dateISO8601
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
-import com.algolia.search.model.search.BooleanOrQueryLanguages
+import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
@@ -35,7 +35,7 @@ internal class TestSuiteAATest {
         variantB = Variant(
             indexName,
             10,
-            customSearchParameters = Query(ignorePlurals = BooleanOrQueryLanguages.Boolean(true))
+            customSearchParameters = Query(ignorePlurals = IgnorePlurals.Boolean(true))
         )
     )
 
@@ -61,16 +61,8 @@ internal class TestSuiteAATest {
                     it.name shouldEqual abTest.name
                     it.endAt shouldEqual abTest.endAt
                     it.status shouldNotEqual ABTestStatus.Stopped
-                    it.variantA.let {
-                        it.indexName shouldEqual abTest.variantA.indexName
-                        it.trafficPercentage shouldEqual abTest.variantA.trafficPercentage
-                        it.description shouldEqual abTest.variantA.description
-                    }
-                    it.variantB.let {
-                        it.indexName shouldEqual abTest.variantB.indexName
-                        it.trafficPercentage shouldEqual abTest.variantB.trafficPercentage
-                        it.description shouldEqual abTest.variantB.description
-                    }
+                    compareVariant(it.variantA, abTest.variantA)
+                    compareVariant(it.variantB, abTest.variantB)
                 }
             }
         }

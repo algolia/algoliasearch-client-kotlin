@@ -1,7 +1,7 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.helper.toCursor
 import com.algolia.search.model.Raw
-import com.algolia.search.toCursor
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -10,7 +10,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(Cursor.Companion::class)
-data class Cursor(
+public data class Cursor(
     override val raw: String
 ) : Raw<String> {
 
@@ -18,7 +18,7 @@ data class Cursor(
         return raw
     }
 
-    companion object : KSerializer<Cursor> {
+    internal companion object : KSerializer<Cursor> {
 
         private val serializer = StringSerializer
 

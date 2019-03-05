@@ -1,6 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.client.APIWrapper
+import com.algolia.search.client.RequestOptions
+import com.algolia.search.client.retryRead
+import com.algolia.search.client.setRequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseLogs
@@ -69,7 +72,7 @@ internal class EndpointAdvancedImpl(
         logType: LogType?,
         requestOptions: RequestOptions?
     ): ResponseLogs {
-        return retryWrite(requestOptions, "/1/logs") { url ->
+        return retryRead(requestOptions, "/1/logs") { url ->
             httpClient.get<ResponseLogs>(url) {
                 parameter(KeyIndexName, indexName.raw)
                 parameter(KeyOffset, offset)

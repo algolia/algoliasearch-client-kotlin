@@ -26,7 +26,6 @@ internal class APIWrapperImpl(
 ) : APIWrapper,
     ConfigurationInterface by configuration {
 
-    // TODO test with proguard
     private val selected = engine?.let { HttpClient(it) } ?: HttpClient()
 
     override val httpClient = selected.config {
@@ -52,6 +51,6 @@ internal class APIWrapperImpl(
         }
     }
 
-    override val read = RetryLogic(configuration.maxRetryAttempts, configuration.readHosts())
-    override val write = RetryLogic(configuration.maxRetryAttempts, configuration.writeHosts())
+    override val read = RetryLogic(configuration.readHosts())
+    override val write = RetryLogic(configuration.writeHosts())
 }

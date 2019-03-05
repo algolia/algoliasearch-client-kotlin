@@ -8,8 +8,8 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.toAttribute
-import com.algolia.search.toObjectID
+import com.algolia.search.helper.toAttribute
+import com.algolia.search.helper.toObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.json
 import org.junit.Before
@@ -18,6 +18,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldBeTrue
 import shouldEqual
+import shouldFailWith
 
 
 @RunWith(JUnit4::class)
@@ -49,20 +50,17 @@ internal class TestSuiteAccount {
     fun test() {
         runBlocking {
             val rule = load(Rule.serializer(), "rule_one.json")
-            var hasThrown = false
-            try {
+
+            IllegalArgumentException::class shouldFailWith {
                 ClientAccount.copyIndex(index1, index2)
-            } catch (exception: Exception) {
-                hasThrown = true
             }
-            hasThrown.shouldBeTrue()
             val tasks = mutableListOf<Task>()
 
             index1.apply {
                 tasks += saveObject(data)
+                tasks += saveRule(rule)
                 tasks += saveSynonym(synonym)
                 tasks += setSettings(settings)
-                tasks += saveRule(rule)
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
             }
             index3.apply {
@@ -72,6 +70,10 @@ internal class TestSuiteAccount {
                 getSynonym(objectID) shouldEqual synonym
                 getRule(objectID).rule shouldEqual rule
                 getSettings().searchableAttributes shouldEqual settings.searchableAttributes
+
+                IllegalStateException::class shouldFailWith {
+                    ClientAccount.copyIndex(index1, this)
+                }
             }
         }
     }

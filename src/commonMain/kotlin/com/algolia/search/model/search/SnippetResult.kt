@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class SnippetResult(
+public data class SnippetResult(
     @SerialName(KeyValue) val value: String,
     @SerialName(KeyMatchLevel) val matchLevel: MatchLevel
 )

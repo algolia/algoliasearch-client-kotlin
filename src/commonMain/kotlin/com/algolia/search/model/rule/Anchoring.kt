@@ -13,19 +13,19 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(Anchoring.Companion::class)
-sealed class Anchoring(override val raw: String) : Raw<String> {
+public sealed class Anchoring(override val raw: String) : Raw<String> {
 
-    object Is : Anchoring(KeyIs)
+    public object Is : Anchoring(KeyIs)
 
-    object StartsWith : Anchoring(KeyStartsWith)
+    public object StartsWith : Anchoring(KeyStartsWith)
 
-    object EndsWith : Anchoring(KeyEndsWith)
+    public object EndsWith : Anchoring(KeyEndsWith)
 
-    object Contains : Anchoring(KeyContains)
+    public object Contains : Anchoring(KeyContains)
 
-    data class Other(override val raw: String) : Anchoring(raw)
+    public data class Other(override val raw: String) : Anchoring(raw)
 
-    companion object : KSerializer<Anchoring> {
+    internal companion object : KSerializer<Anchoring> {
 
         private val serializer = StringSerializer
 
