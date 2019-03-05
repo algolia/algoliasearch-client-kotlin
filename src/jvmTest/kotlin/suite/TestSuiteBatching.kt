@@ -18,12 +18,14 @@ internal class TestSuiteBatching {
 
     private val suffix = "index_batching"
     private val indexName = testSuiteIndexName(suffix)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
     private val json = Json(encodeDefaults = false, indented = true, indent = "  ")
 
     @Before
     fun clean() {
-        cleanIndex(clientAdmin1, suffix)
+        runBlocking {
+            cleanIndex(clientAdmin1, suffix)
+        }
     }
 
     @Test
@@ -36,7 +38,7 @@ internal class TestSuiteBatching {
             index.apply {
                 saveObjects(objects).wait() shouldEqual TaskStatus.Published
                 batch(batches).wait() shouldEqual TaskStatus.Published
-                val hits = browse().hits!!.map { it.json }
+                val hits = browse().hits.map { it.json }
 
                 json.stringify(JsonObjectSerializer.list, hits) shouldEqual expected
             }

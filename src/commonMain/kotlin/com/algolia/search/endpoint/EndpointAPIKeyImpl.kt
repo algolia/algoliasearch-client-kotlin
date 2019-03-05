@@ -95,7 +95,7 @@ internal class EndpointAPIKeyImpl(
         return retryWrite(requestOptions, "$route/$apiKey") { url ->
             httpClient.delete<Deletion>(url) {
                 setRequestOptions(requestOptions)
-            }.let { DeletionAPIKey(it.date, apiKey) }
+            }.let { DeletionAPIKey(it.deletedAt, apiKey) }
         }
     }
 

@@ -27,11 +27,13 @@ internal class TestSuiteSearch {
     private val indexName = testSuiteIndexName(suffix)
     private val company = "company".toAttribute()
     private val allFacets = listOf("*".toAttribute())
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
 
     @Before
     fun clean() {
-        cleanIndex(clientAdmin1, suffix)
+        runBlocking {
+            cleanIndex(clientAdmin1, suffix)
+        }
     }
 
     @Test
@@ -50,7 +52,7 @@ internal class TestSuiteSearch {
                 val hits = search(Query("elon", clickAnalytics = true)).hits
 
                 hits.shouldNotBeNull()
-                hits!!.shouldNotBeEmpty()
+                hits.shouldNotBeEmpty()
 
                 search(Query(facets = allFacets, filters = "company:tesla")).nbHits shouldEqual 1
                 search(Query(facets = allFacets, filters = "(company:tesla OR company:spacex)")).nbHits shouldEqual 2

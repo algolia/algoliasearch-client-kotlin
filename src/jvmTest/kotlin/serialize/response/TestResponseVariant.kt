@@ -26,14 +26,14 @@ internal class TestResponseVariant : TestSerializer<ResponseVariant>(ResponseVar
             description = unknown,
             indexName = indexA,
             trafficPercentage = 2,
-            conversionRate = 3f,
-            noResultCount = 4,
-            averageClickPosition = 5,
-            searchCount = 6,
-            trackedSearchCount = 7,
-            userCount = 8,
-            clickThroughRate = 9f,
-            customSearchParameters = Query()
+            conversionRateOrNull = 3f,
+            noResultCountOrNull = 4,
+            averageClickPositionOrNull = 5,
+            searchCountOrNull = 6,
+            trackedSearchCountOrNull = 7,
+            userCountOrNull = 8,
+            clickThroughRateOrNull = 9f,
+            customSearchParametersOrNull = Query()
         )
 
         val json = json {

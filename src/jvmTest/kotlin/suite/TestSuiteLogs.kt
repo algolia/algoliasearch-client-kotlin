@@ -19,7 +19,7 @@ internal class TestSuiteLogs {
                 listIndexes()
                 listIndexes()
                 getLogs(length = 2, offset = 0, logType = LogType.All).logs.size shouldEqual 2
-                getIndex("products_android_demo".toIndexName()).getLogs()
+                initIndex("products_android_demo".toIndexName()).getLogs()
             }
         }
     }

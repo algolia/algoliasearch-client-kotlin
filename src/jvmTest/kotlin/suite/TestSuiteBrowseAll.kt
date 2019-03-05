@@ -21,11 +21,13 @@ internal class TestSuiteBrowseAll {
 
     private val suffix = "helper"
     private val indexName = testSuiteIndexName(suffix)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
 
     @Before
     fun clean() {
-        cleanIndex(clientAdmin1, suffix)
+        runBlocking {
+            cleanIndex(clientAdmin1, suffix)
+        }
     }
 
     @Test
@@ -81,7 +83,7 @@ internal class TestSuiteBrowseAll {
 
                 browseAllObjects(Query(hitsPerPage = 1)) { page ->
                     nbHits shouldEqual 10
-                    hits!!.size shouldEqual 1
+                    hits.size shouldEqual 1
                     page shouldEqual count
                     count++
                 }
