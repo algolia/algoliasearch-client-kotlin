@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.toUserID
+import com.algolia.search.helper.toUserID
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.response.readText
 import io.ktor.http.HttpStatusCode

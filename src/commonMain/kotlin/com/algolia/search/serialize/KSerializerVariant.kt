@@ -2,7 +2,7 @@ package com.algolia.search.serialize
 
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.search.Query
-import com.algolia.search.toIndexName
+import com.algolia.search.helper.toIndexName
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

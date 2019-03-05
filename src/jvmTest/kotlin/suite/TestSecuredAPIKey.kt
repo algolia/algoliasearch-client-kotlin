@@ -29,8 +29,8 @@ internal class TestSecuredAPIKey {
         restrictIndices = listOf(indexName),
         validUntil = Date(Date().time + TimeUnit.MILLISECONDS.convert(10, TimeUnit.MINUTES)).time
     )
-    private val apiKey = ClientSearch.generateAPIKey(clientSearch.api.apiKey, restriction)
-    private val client = ClientSearch(clientAdmin1.api.applicationID, apiKey)
+    private val apiKey = ClientSearch.generateAPIKey(clientSearch.apiKey, restriction)
+    private val client = ClientSearch(clientAdmin1.applicationID, apiKey)
     private val data = json { KeyObjectID to "one" }
 
     @Before

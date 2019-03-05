@@ -1,11 +1,11 @@
 package suite
 
+import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.toAttribute
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.list
@@ -58,7 +58,7 @@ internal class TestSuiteSearch {
             search.apply {
                 search(Query(facets = allFacets, filters = "company:tesla")).nbHits shouldEqual 1
                 search(Query(facets = allFacets, filters = "(company:tesla OR company:spacex)")).nbHits shouldEqual 2
-                val facetHits = searchForFacetValue(company, "a").facetHits.map { it.value }
+                val facetHits = searchForFacetValue(company, "a").facets.map { it.name }
 
                 facetHits shouldContain "Algolia"
                 facetHits shouldContain "Amazon"

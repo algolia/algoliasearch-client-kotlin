@@ -1,9 +1,9 @@
 package com.algolia.search.serialize
 
+import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.MatchLevel
 import com.algolia.search.model.search.SnippetResult
-import com.algolia.search.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -13,7 +13,7 @@ import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.json.json
 
 
-object KSerializerSnippetResults : KSerializer<Map<Attribute, SnippetResult>> {
+internal object KSerializerSnippetResults : KSerializer<Map<Attribute, SnippetResult>> {
 
     override val descriptor = HashMapClassDesc(
         Attribute.descriptor,

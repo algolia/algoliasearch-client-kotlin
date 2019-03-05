@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class TaskIndex(
+public data class TaskIndex(
     @SerialName(KeyIndexName) val indexName: IndexName,
     @SerialName(KeyTaskID) override val taskID: TaskID
 ) : Task

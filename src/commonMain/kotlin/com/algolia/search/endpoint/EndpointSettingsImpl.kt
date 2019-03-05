@@ -24,10 +24,9 @@ internal class EndpointSettingsImpl(
 ) : EndpointSettings,
     APIWrapper by api {
 
-    private val route = "/settings"
 
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
-        return retryRead(requestOptions, indexName.toPath(route)) { url ->
+        return retryRead(requestOptions, indexName.toPath(RouteSettings)) { url ->
             val json = httpClient.get<JsonObject>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -61,7 +60,7 @@ internal class EndpointSettingsImpl(
         val resets = json { resetToDefault.forEach { it.raw to JsonNull } }
         val bodyString = settings.toJsonNoDefaults().merge(resets).toString()
 
-        return retryWrite(requestOptions, indexName.toPath(route)) { url ->
+        return retryWrite(requestOptions, indexName.toPath(RouteSettings)) { url ->
             httpClient.put<RevisionIndex>(url) {
                 body = bodyString
                 parameter(KeyForwardToReplicas, forwardToReplicas)

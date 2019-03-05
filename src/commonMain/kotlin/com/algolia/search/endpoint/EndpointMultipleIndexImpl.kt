@@ -7,8 +7,9 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.request.RequestRequestObjects
 import com.algolia.search.model.response.*
-import com.algolia.search.query.build
+import com.algolia.search.filter.build
 import com.algolia.search.serialize.KeyRequests
+import com.algolia.search.serialize.RouteIndexesV1
 import com.algolia.search.serialize.noDefaults
 import io.ktor.client.request.get
 import io.ktor.client.request.post
@@ -22,18 +23,16 @@ internal class EndpointMultipleIndexImpl(
 ) : EndpointMultipleIndex,
     APIWrapper by api {
 
-    private val route = "/1/indexes"
-
-    override suspend fun listIndexes(requestOptions: RequestOptions?): ResponseListIndexes {
-        return retryRead(requestOptions, route) { url ->
-            httpClient.get<ResponseListIndexes>(url) {
+    override suspend fun listIndices(requestOptions: RequestOptions?): ResponseListIndices {
+        return retryRead(requestOptions, RouteIndexesV1) { url ->
+            httpClient.get<ResponseListIndices>(url) {
                 setRequestOptions(requestOptions)
             }
         }
     }
 
     override suspend fun listIndexAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
-        return retryRead(requestOptions, "$route/*/keys") { url ->
+        return retryRead(requestOptions, "$RouteIndexesV1/*/keys") { url ->
             httpClient.get<ResponseListAPIKey>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -47,7 +46,7 @@ internal class EndpointMultipleIndexImpl(
     ): ResponseSearches {
         val copies = queries.map { IndexQuery(it.indexName, it.query.build()) }
 
-        return retryRead(requestOptions, "$route/*/queries") { url ->
+        return retryRead(requestOptions, "$RouteIndexesV1/*/queries") { url ->
             httpClient.post<ResponseSearches>(url) {
                 setQueries(copies, strategy)
                 setRequestOptions(requestOptions)
@@ -61,7 +60,7 @@ internal class EndpointMultipleIndexImpl(
     ): ResponseObjects {
         val bodyString = Json.noDefaults.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
-        return retryRead(requestOptions, "$route/*/objects") { url ->
+        return retryRead(requestOptions, "$RouteIndexesV1/*/objects") { url ->
             httpClient.post<ResponseObjects>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -76,7 +75,7 @@ internal class EndpointMultipleIndexImpl(
         val requests = Json.plain.toJson(BatchOperationIndex.list, operations)
         val bodyString = json { KeyRequests to requests }.toString()
 
-        return retryWrite(requestOptions, "$route/*/batch") { url ->
+        return retryWrite(requestOptions, "$RouteIndexesV1/*/batch") { url ->
             httpClient.post<ResponseBatches>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)

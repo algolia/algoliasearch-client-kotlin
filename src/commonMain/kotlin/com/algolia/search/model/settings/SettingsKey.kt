@@ -4,101 +4,101 @@ import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*
 
 
-sealed class SettingsKey(override val raw: String) : Raw<String> {
+public sealed class SettingsKey(override val raw: String) : Raw<String> {
 
-    object SearchableAttributes : SettingsKey(KeySearchableAttributes)
+    public object SearchableAttributes : SettingsKey(KeySearchableAttributes)
 
-    object AttributesForFaceting : SettingsKey(KeyAttributesForFaceting)
+    public object AttributesForFaceting : SettingsKey(KeyAttributesForFaceting)
 
-    object UnretrievableAttributes : SettingsKey(KeyUnretrievableAttributes)
+    public object UnretrievableAttributes : SettingsKey(KeyUnretrievableAttributes)
 
-    object AttributesToRetrieve : SettingsKey(KeyAttributesToRetrieve)
+    public object AttributesToRetrieve : SettingsKey(KeyAttributesToRetrieve)
 
-    object Ranking : SettingsKey(KeyRanking)
+    public object Ranking : SettingsKey(KeyRanking)
 
-    object CustomRanking : SettingsKey(KeyCustomRanking)
+    public object CustomRanking : SettingsKey(KeyCustomRanking)
 
-    object Replicas : SettingsKey(KeyReplicas)
+    public object Replicas : SettingsKey(KeyReplicas)
 
-    object MaxValuesPerFacet : SettingsKey(KeyMaxValuesPerFacet)
+    public object MaxValuesPerFacet : SettingsKey(KeyMaxValuesPerFacet)
 
-    object SortFacetValuesBy : SettingsKey(KeySortFacetValuesBy)
+    public object SortFacetValuesBy : SettingsKey(KeySortFacetValuesBy)
 
-    object AttributesToHighlight : SettingsKey(KeyAttributesToHighlight)
+    public object AttributesToHighlight : SettingsKey(KeyAttributesToHighlight)
 
-    object AttributesToSnippet : SettingsKey(KeyAttributesToSnippet)
+    public object AttributesToSnippet : SettingsKey(KeyAttributesToSnippet)
 
-    object HighlightPreTag : SettingsKey(KeyHighlightPreTag)
+    public object HighlightPreTag : SettingsKey(KeyHighlightPreTag)
 
-    object HighlightPostTag : SettingsKey(KeyHighlightPostTag)
+    public object HighlightPostTag : SettingsKey(KeyHighlightPostTag)
 
-    object SnippetEllipsisText : SettingsKey(KeySnippetEllipsisText)
+    public object SnippetEllipsisText : SettingsKey(KeySnippetEllipsisText)
 
-    object RestrictHighlightAndSnippetArrays : SettingsKey(KeyRestrictHighlightAndSnippetArrays)
+    public object RestrictHighlightAndSnippetArrays : SettingsKey(KeyRestrictHighlightAndSnippetArrays)
 
-    object HitsPerPage : SettingsKey(KeyHitsPerPage)
+    public object HitsPerPage : SettingsKey(KeyHitsPerPage)
 
-    object PaginationLimitedTo : SettingsKey(KeyPaginationLimitedTo)
+    public object PaginationLimitedTo : SettingsKey(KeyPaginationLimitedTo)
 
-    object MinWordSizefor1Typo : SettingsKey(KeyMinWordSizefor1Typo)
+    public object MinWordSizefor1Typo : SettingsKey(KeyMinWordSizefor1Typo)
 
-    object MinWordSizefor2Typos : SettingsKey(KeyMinWordSizefor2Typos)
+    public object MinWordSizefor2Typos : SettingsKey(KeyMinWordSizefor2Typos)
 
-    object TypoTolerance : SettingsKey(KeyTypoTolerance)
+    public object TypoTolerance : SettingsKey(KeyTypoTolerance)
 
-    object AllowTyposOnNumericTokens : SettingsKey(KeyAllowTyposOnNumericTokens)
+    public object AllowTyposOnNumericTokens : SettingsKey(KeyAllowTyposOnNumericTokens)
 
-    object DisableTypoToleranceOnAttributes : SettingsKey(KeyDisableTypoToleranceOnAttributes)
+    public object DisableTypoToleranceOnAttributes : SettingsKey(KeyDisableTypoToleranceOnAttributes)
 
-    object DisableTypoToleranceOnWords : SettingsKey(KeyDisableTypoToleranceOnWords)
+    public object DisableTypoToleranceOnWords : SettingsKey(KeyDisableTypoToleranceOnWords)
 
-    object SeparatorsToIndex : SettingsKey(KeySeparatorsToIndex)
+    public object SeparatorsToIndex : SettingsKey(KeySeparatorsToIndex)
 
-    object IgnorePlurals : SettingsKey(KeyIgnorePlurals)
+    public object IgnorePlurals : SettingsKey(KeyIgnorePlurals)
 
-    object RemoveStopWords : SettingsKey(KeyRemoveStopWords)
+    public object RemoveStopWords : SettingsKey(KeyRemoveStopWords)
 
-    object CamelCaseAttributes : SettingsKey(KeyCamelCaseAttributes)
+    public object CamelCaseAttributes : SettingsKey(KeyCamelCaseAttributes)
 
-    object DecompoundedAttributes : SettingsKey(KeyDecompoundedAttributes)
+    public object DecompoundedAttributes : SettingsKey(KeyDecompoundedAttributes)
 
-    object KeepDiacriticsOnCharacters : SettingsKey(KeyKeepDiacriticsOnCharacters)
+    public object KeepDiacriticsOnCharacters : SettingsKey(KeyKeepDiacriticsOnCharacters)
 
-    object QueryLanguages : SettingsKey(KeyQueryLanguages)
+    public object QueryLanguages : SettingsKey(KeyQueryLanguages)
 
-    object EnableRules : SettingsKey(KeyEnableRules)
+    public object EnableRules : SettingsKey(KeyEnableRules)
 
-    object QueryType : SettingsKey(KeyQueryType)
+    public object QueryType : SettingsKey(KeyQueryType)
 
-    object RemoveWordsIfNoResults : SettingsKey(KeyRemoveWordsIfNoResults)
+    public object RemoveWordsIfNoResults : SettingsKey(KeyRemoveWordsIfNoResults)
 
-    object AdvancedSyntax : SettingsKey(KeyAdvancedSyntax)
+    public object AdvancedSyntax : SettingsKey(KeyAdvancedSyntax)
 
-    object OptionalWords : SettingsKey(KeyOptionalWords)
+    public object OptionalWords : SettingsKey(KeyOptionalWords)
 
-    object DisablePrefixOnAttributes : SettingsKey(KeyDisablePrefixOnAttributes)
+    public object DisablePrefixOnAttributes : SettingsKey(KeyDisablePrefixOnAttributes)
 
-    object DisableExactOnAttributes : SettingsKey(KeyDisableExactOnAttributes)
+    public object DisableExactOnAttributes : SettingsKey(KeyDisableExactOnAttributes)
 
-    object ExactOnSingleWordQuery : SettingsKey(KeyExactOnSingleWordQuery)
+    public object ExactOnSingleWordQuery : SettingsKey(KeyExactOnSingleWordQuery)
 
-    object AlternativesAsExact : SettingsKey(KeyAlternativesAsExact)
+    public object AlternativesAsExact : SettingsKey(KeyAlternativesAsExact)
 
-    object NumericAttributesForFiltering : SettingsKey(KeyNumericAttributesForFiltering)
+    public object NumericAttributesForFiltering : SettingsKey(KeyNumericAttributesForFiltering)
 
-    object AllowCompressionOfIntegerArray : SettingsKey(KeyAllowCompressionOfIntegerArray)
+    public object AllowCompressionOfIntegerArray : SettingsKey(KeyAllowCompressionOfIntegerArray)
 
-    object AttributeForDistinct : SettingsKey(KeyAttributeForDistinct)
+    public object AttributeForDistinct : SettingsKey(KeyAttributeForDistinct)
 
-    object Distinct : SettingsKey(KeyDistinct)
+    public object Distinct : SettingsKey(KeyDistinct)
 
-    object ReplaceSynonymsInHighlight : SettingsKey(KeyReplaceSynonymsInHighlight)
+    public object ReplaceSynonymsInHighlight : SettingsKey(KeyReplaceSynonymsInHighlight)
 
-    object MinProximity : SettingsKey(KeyMinProximity)
+    public object MinProximity : SettingsKey(KeyMinProximity)
 
-    object ResponseFields : SettingsKey(KeyResponseFields)
+    public object ResponseFields : SettingsKey(KeyResponseFields)
 
-    object MaxFacetHits : SettingsKey(KeyMaxFacetHits)
+    public object MaxFacetHits : SettingsKey(KeyMaxFacetHits)
 
-    data class Other(override val raw: String) : SettingsKey(raw)
+    public data class Other(override val raw: String) : SettingsKey(raw)
 }

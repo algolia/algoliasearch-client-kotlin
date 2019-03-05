@@ -1,8 +1,9 @@
 package com.algolia.search.model
 
-import com.algolia.search.StringUTF8
 import com.algolia.search.exception.EmptyStringException
-import com.algolia.search.toIndexName
+import com.algolia.search.helper.StringUTF8
+import com.algolia.search.helper.toIndexName
+import com.algolia.search.serialize.RouteIndexesV1
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -11,7 +12,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(IndexName.Companion::class)
-data class IndexName(
+public data class IndexName(
     override val raw: String
 ) : Raw<String> {
 
@@ -24,14 +25,14 @@ data class IndexName(
     }
 
     internal fun toPath(suffix: String? = null): String {
-        return "/1/indexes/${encode().string}" + (suffix ?: "")
+        return "$RouteIndexesV1/${encode().string}" + (suffix ?: "")
     }
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<IndexName> {
+    internal companion object : KSerializer<IndexName> {
 
         private val serializer = StringSerializer
 

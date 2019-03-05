@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class RequestInsightsEvents(
+internal data class RequestInsightsEvents(
     @SerialName(KeyEvents) val events: List<InsightsEvent>
 )
