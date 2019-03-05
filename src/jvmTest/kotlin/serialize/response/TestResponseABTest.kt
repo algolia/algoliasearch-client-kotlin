@@ -24,8 +24,8 @@ internal class TestResponseABTest : TestSerializer<ResponseABTest>(ResponseABTes
             status = ABTestStatus.Failed,
             variantA = TestResponseVariant.item,
             variantB = TestResponseVariant.item,
-            clickSignificance = 1f,
-            conversionSignificance = 2f
+            clickSignificanceOrNull = 1f,
+            conversionSignificanceOrNull = 2f
         ) to json {
             KeyABTestID to 0L
             KeyCreatedAt to unknown

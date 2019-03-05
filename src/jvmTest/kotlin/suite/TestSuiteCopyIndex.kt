@@ -46,7 +46,9 @@ internal class TestSuiteCopyIndex {
 
     @Before
     fun clean() {
-        cleanIndex(clientAdmin1, suffix)
+        runBlocking {
+            cleanIndex(clientAdmin1, suffix)
+        }
     }
 
     @Test

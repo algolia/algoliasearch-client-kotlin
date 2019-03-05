@@ -25,7 +25,9 @@ internal class TestSuiteBrowseAll {
 
     @Before
     fun clean() {
-        cleanIndex(clientAdmin1, suffix)
+        runBlocking {
+            cleanIndex(clientAdmin1, suffix)
+        }
     }
 
     @Test
@@ -81,7 +83,7 @@ internal class TestSuiteBrowseAll {
 
                 browseAllObjects(Query(hitsPerPage = 1)) { page ->
                     nbHits shouldEqual 10
-                    hits!!.size shouldEqual 1
+                    hits.size shouldEqual 1
                     page shouldEqual count
                     count++
                 }

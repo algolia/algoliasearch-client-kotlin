@@ -39,8 +39,10 @@ internal class TestSuiteAccount {
 
     @Before
     fun clean() {
-        cleanIndex(clientAdmin1, suffix1)
-        cleanIndex(clientAdmin2, suffix2)
+        runBlocking {
+            cleanIndex(clientAdmin1, suffix1)
+            cleanIndex(clientAdmin2, suffix2)
+        }
     }
 
     @Test
