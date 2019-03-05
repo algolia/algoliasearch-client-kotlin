@@ -4,6 +4,7 @@ import com.algolia.search.client.*
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
+import com.algolia.search.model.index.Scope
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.PartialUpdate
@@ -16,14 +17,17 @@ import com.algolia.search.model.response.deletion.DeletionObject
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.task.Task
 import com.algolia.search.query.clone
 import com.algolia.search.serialize.*
+import com.algolia.search.toIndexName
 import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 import kotlinx.serialization.list
+import kotlin.random.Random
 
 
 internal class EndpointIndexingImpl(
@@ -42,19 +46,19 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun <T> saveObject(
-        data: T,
         serializer: KSerializer<T>,
+        data: T,
         requestOptions: RequestOptions?
     ): CreationObject {
         return saveObject(Json.stringify(serializer, data), requestOptions)
     }
 
     override suspend fun <T> saveObjects(
-        data: List<T>,
         serializer: KSerializer<T>,
+        data: List<T>,
         requestOptions: RequestOptions?
     ): ResponseBatch {
-        val operations = data.map { BatchOperation.AddObject.from(it, serializer) }
+        val operations = data.map { BatchOperation.AddObject.from(serializer, it) }
 
         return batch(operations, requestOptions)
     }
@@ -83,33 +87,33 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun <T : Indexable> replaceObject(
-        data: T,
         serializer: KSerializer<T>,
+        data: T,
         requestOptions: RequestOptions?
     ): RevisionObject {
         return replaceObject(Json.stringify(serializer, data), data.objectID, requestOptions)
     }
 
     override suspend fun <T : Indexable> replaceObjects(
-        data: List<T>,
         serializer: KSerializer<T>,
+        data: List<T>,
         requestOptions: RequestOptions?
     ): ResponseBatch {
-        val operations = data.map { BatchOperation.ReplaceObject.from(it, serializer) }
+        val operations = data.map { BatchOperation.ReplaceObject.from(serializer, it) }
 
         return batch(operations, requestOptions)
     }
 
     override suspend fun replaceObject(
-        data: JsonObject,
         objectID: ObjectID,
+        data: JsonObject,
         requestOptions: RequestOptions?
     ): RevisionObject {
         return replaceObject(data.toString(), objectID, requestOptions)
     }
 
     override suspend fun replaceObjects(
-        data: List<Pair<JsonObject, ObjectID>>,
+        data: List<Pair<ObjectID, JsonObject>>,
         requestOptions: RequestOptions?
     ): ResponseBatch {
         val operations = data.map { BatchOperation.ReplaceObject(it.first, it.second) }
@@ -167,8 +171,8 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun <T : Indexable> getObject(
-        objectID: ObjectID,
         serializer: KSerializer<T>,
+        objectID: ObjectID,
         attributesToRetrieve: List<Attribute>?,
         requestOptions: RequestOptions?
     ): T {
@@ -194,8 +198,8 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun partialUpdateObject(
-        partialUpdate: PartialUpdate,
         objectID: ObjectID,
+        partialUpdate: PartialUpdate,
         createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionObject {
@@ -211,7 +215,7 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun partialUpdateObjects(
-        data: List<Pair<PartialUpdate, ObjectID>>,
+        data: List<Pair<ObjectID, PartialUpdate>>,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): ResponseBatch {
@@ -241,6 +245,35 @@ internal class EndpointIndexingImpl(
                 body = ""
                 setRequestOptions(requestOptions)
             }
+        }
+    }
+
+    override suspend fun replaceAllObjects(
+        data: List<JsonObject>
+    ): List<Task> {
+        val operations = data.map { BatchOperation.AddObject(it) }
+
+        return replaceAllObjectsInternal(operations)
+    }
+
+    override suspend fun <T : Indexable> replaceAllObjects(
+        serializer: KSerializer<T>,
+        data: List<T>
+    ): List<Task> {
+        val operations = data.map { BatchOperation.AddObject.from(serializer, it) }
+
+        return replaceAllObjectsInternal(operations)
+    }
+
+    private suspend fun replaceAllObjectsInternal(batchOperations: List<BatchOperation>): List<Task> {
+        val indexSource = Index(api, indexName)
+        val indexDestination = Index(api, "${indexName}_tmp_${Random.nextInt()}".toIndexName())
+        val scopes = listOf(Scope.Settings, Scope.Rules, Scope.Synonyms)
+
+        return mutableListOf<Task>().also {
+            it += indexSource.copyIndex(indexDestination.indexName, scopes)
+            it += indexDestination.batch(batchOperations)
+            it += indexDestination.moveIndex(indexName)
         }
     }
 }

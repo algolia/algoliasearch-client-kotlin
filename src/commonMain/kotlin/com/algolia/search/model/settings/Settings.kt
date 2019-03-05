@@ -2,7 +2,7 @@ package com.algolia.search.model.settings
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.enums.*
+import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
@@ -28,8 +28,8 @@ data class Settings(
     @Optional @SerialName(KeyRestrictHighlightAndSnippetArrays) var restrictHighlightAndSnippetArrays: Boolean? = null,
     @Optional @SerialName(KeyHitsPerPage) var hitsPerPage: Int? = null,
     @Optional @SerialName(KeyPaginationLimitedTo) var paginationLimitedTo: Int? = null,
-    @Optional @SerialName(KeyMinWordSizefor1Typo) var minWordSizefor1Typo: Int? = null,
-    @Optional @SerialName(KeyMinWordSizefor2Typos) var minWordSizefor2Typos: Int? = null,
+    @Optional @SerialName(KeyMinWordSizefor1Typo) var minWordSizeFor1Typo: Int? = null,
+    @Optional @SerialName(KeyMinWordSizefor2Typos) var minWordSizeFor2Typos: Int? = null,
     @Optional @SerialName(KeyTypoTolerance) var typoTolerance: TypoTolerance? = null,
     @Optional @SerialName(KeyAllowTyposOnNumericTokens) var allowTyposOnNumericTokens: Boolean? = null,
     @Optional @SerialName(KeyDisableTypoToleranceOnAttributes) var disableTypoToleranceOnAttributes: List<Attribute>? = null,

@@ -4,7 +4,7 @@ import com.algolia.search.endpoint.*
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.enums.LogType
+import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.ResponseLogs
@@ -49,7 +49,7 @@ class ClientSearch private constructor(
 
     private val indexes = mutableMapOf<IndexName, Index>()
 
-    fun getIndex(indexName: IndexName): Index {
+    fun initIndex(indexName: IndexName): Index {
         return indexes.getOrPut(indexName) {
             Index(api, indexName)
         }
@@ -60,7 +60,7 @@ class ClientSearch private constructor(
         suspend fun loop(): List<TaskStatus> {
             while (true) {
                 coroutineScope {
-                    map { async { getIndex(it.indexName).getTask(it.taskID) } }.map { it.await().status }
+                    map { async { initIndex(it.indexName).getTask(it.taskID) } }.map { it.await().status }
                 }.let {
                     if (it.all { it == TaskStatus.Published }) return it
                 }

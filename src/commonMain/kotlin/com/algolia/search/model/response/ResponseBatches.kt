@@ -19,8 +19,12 @@ import kotlinx.serialization.json.long
 @Serializable(ResponseBatches.Companion::class)
 data class ResponseBatches(
     @SerialName(KeyTaskID) val tasks: List<TaskIndex>,
-    @Optional @SerialName(KeyObjectIDs) val objectIDs: List<ObjectID?>? = null
+    @Optional @SerialName(KeyObjectIDs) val objectIDsOrNull: List<ObjectID?>? = null
 ) {
+
+    @Transient
+    val objectIDs: List<ObjectID?>
+        get() = objectIDsOrNull!!
 
     @Serializer(ResponseBatches::class)
     companion object : KSerializer<ResponseBatches> {
@@ -28,7 +32,7 @@ data class ResponseBatches(
         override fun serialize(encoder: Encoder, obj: ResponseBatches) {
             val json = json {
                 KeyTaskID to json { obj.tasks.forEach { it.indexName.raw to it.taskID.raw } }
-                KeyObjectIDs to obj.objectIDs?.let { jsonArray { it.forEach { +it?.raw } } }
+                KeyObjectIDs to obj.objectIDsOrNull?.let { jsonArray { it.forEach { +it?.raw } } }
             }
 
             encoder.asJsonOutput().encodeJson(json)
