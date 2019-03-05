@@ -9,17 +9,17 @@ import kotlinx.serialization.json.JsonObject
 
 
 @Serializable
-data class ResponseRule(
+public data class ResponseRule(
     val rule: Rule,
     val highlightsOrNull: JsonObject? = null
 ) {
 
     @Transient
-    val highlights: JsonObject
+    public val highlights: JsonObject
         get() = highlightsOrNull!!
 
     @Serializer(ResponseRule::class)
-    companion object : DeserializationStrategy<ResponseRule> {
+    internal companion object : DeserializationStrategy<ResponseRule> {
 
         override fun deserialize(decoder: Decoder): ResponseRule {
             val json = decoder.asJsonInput().jsonObject

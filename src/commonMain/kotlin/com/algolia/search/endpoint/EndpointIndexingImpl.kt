@@ -19,7 +19,7 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.Task
-import com.algolia.search.query.build
+import com.algolia.search.filter.build
 import com.algolia.search.serialize.*
 import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer

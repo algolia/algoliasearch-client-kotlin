@@ -1,7 +1,7 @@
 package com.algolia.search.helper
 
 
-class StringUTF8 private constructor(val string: String) {
+internal class StringUTF8 private constructor(val string: String) {
 
     companion object {
 
@@ -9,4 +9,4 @@ class StringUTF8 private constructor(val string: String) {
     }
 }
 
-expect fun String.encodeUTF8(): String
+internal expect fun String.encodeUTF8(): String

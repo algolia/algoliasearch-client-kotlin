@@ -12,7 +12,7 @@ import com.algolia.search.model.response.revision.RevisionAPIKey
 import com.algolia.search.model.search.Query
 
 
-interface EndpointAPIKey {
+public interface EndpointAPIKey {
 
     suspend fun addAPIKey(
         rights: List<ACL>? = null,

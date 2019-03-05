@@ -1,7 +1,7 @@
 package com.algolia.search.model
 
 
-expect object Time {
+internal expect object Time {
 
     fun getCurrentTimeMillis(): Long
 

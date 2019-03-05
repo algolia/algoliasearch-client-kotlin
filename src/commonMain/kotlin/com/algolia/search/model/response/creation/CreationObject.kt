@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class CreationObject(
+public data class CreationObject(
     @SerialName(KeyCreatedAt) val createdAt: ClientDate,
     @SerialName(KeyTaskID) override val taskID: TaskID,
     @SerialName(KeyObjectID) val objectID: ObjectID

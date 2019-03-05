@@ -8,7 +8,7 @@ import kotlinx.serialization.json.jsonArray
 
 
 @Serializable(ABTest.Companion::class)
-data class ABTest(
+public data class ABTest(
     @SerialName(KeyName) val name: String,
     @SerialName(KeyEndAt) val endAt: String,
     val variantA: Variant,
@@ -16,7 +16,7 @@ data class ABTest(
 ) {
 
     @Serializer(ABTest::class)
-    companion object : KSerializer<ABTest> {
+    internal companion object : KSerializer<ABTest> {
 
         override fun serialize(encoder: Encoder, obj: ABTest) {
             val json = json {

@@ -10,7 +10,7 @@ import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.content
 
 
-data class SecuredAPIKeyRestriction(
+public data class SecuredAPIKeyRestriction(
     val query: Query? = null,
     val restrictIndices: List<IndexName>? = null,
     val restrictSources: List<String>? = null,

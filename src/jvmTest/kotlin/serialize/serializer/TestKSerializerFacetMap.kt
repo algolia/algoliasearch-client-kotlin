@@ -3,7 +3,7 @@ package serialize.serializer
 import attributeB
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Facet
-import com.algolia.search.serialize.KSerializerFacets
+import com.algolia.search.serialize.KSerializerFacetMap
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -11,7 +11,7 @@ import serialize.TestSerializer
 
 
 @RunWith(JUnit4::class)
-internal class TestKSerializerFacets : TestSerializer<Map<Attribute, List<Facet>>>(KSerializerFacets) {
+internal class TestKSerializerFacetMap : TestSerializer<Map<Attribute, List<Facet>>>(KSerializerFacetMap) {
 
     override val items = listOf(
         facets to json

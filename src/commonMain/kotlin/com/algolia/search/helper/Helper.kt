@@ -20,71 +20,71 @@ import com.algolia.search.model.synonym.SynonymType
 import com.algolia.search.model.task.TaskID
 
 
-fun String.toIndexName(): IndexName {
+public fun String.toIndexName(): IndexName {
     return IndexName(this)
 }
 
-fun String.toAttribute(): Attribute {
+public fun String.toAttribute(): Attribute {
     return Attribute(this)
 }
 
-fun String.toCursor(): Cursor {
+public fun String.toCursor(): Cursor {
     return Cursor(this)
 }
 
-fun String.toObjectID(): ObjectID {
+public fun String.toObjectID(): ObjectID {
     return ObjectID(this)
 }
 
-fun Long.toTaskID(): TaskID {
+public fun Long.toTaskID(): TaskID {
     return TaskID(this)
 }
 
-fun String.toUserID(): UserID {
+public fun String.toUserID(): UserID {
     return UserID(this)
 }
 
-fun String.toQueryID(): QueryID {
+public fun String.toQueryID(): QueryID {
     return QueryID(this)
 }
 
-fun String.toEventName(): EventName {
+public fun String.toEventName(): EventName {
     return EventName(this)
 }
 
-fun String.toUserToken(): UserToken {
+public fun String.toUserToken(): UserToken {
     return UserToken(this)
 }
 
-fun String.toApplicationID(): ApplicationID {
+public fun String.toApplicationID(): ApplicationID {
     return ApplicationID(this)
 }
 
-fun String.toAPIKey(): APIKey {
+public fun String.toAPIKey(): APIKey {
     return APIKey(this)
 }
 
-fun String.toClusterName(): ClusterName {
+public fun String.toClusterName(): ClusterName {
     return ClusterName(this)
 }
 
-fun Long.toABTestID(): ABTestID {
+public fun Long.toABTestID(): ABTestID {
     return ABTestID(this)
 }
 
-infix fun Float.and(longitude: Float): Point {
+public infix fun Float.and(longitude: Float): Point {
     return Point(this, longitude)
 }
 
-infix fun Attribute.limit(numberOfWords: Int?): Snippet {
+public infix fun Attribute.limit(numberOfWords: Int?): Snippet {
     return Snippet(this, numberOfWords)
 }
 
-fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {
+public fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {
     return RequestOptions().apply(init)
 }
 
-suspend fun Index.browseAllRules(
+public suspend fun Index.browseAllRules(
     query: String? = null,
     anchoring: Anchoring? = null,
     context: String? = null,
@@ -103,7 +103,7 @@ suspend fun Index.browseAllRules(
     }
 }
 
-suspend fun Index.browseAllSynonyms(
+public suspend fun Index.browseAllSynonyms(
     query: String? = null,
     hitsPerPage: Int? = null,
     synonymType: List<SynonymType>? = null,
@@ -120,7 +120,7 @@ suspend fun Index.browseAllSynonyms(
     }
 }
 
-suspend fun Index.browseAllObjects(
+public suspend fun Index.browseAllObjects(
     query: Query? = null,
     requestOptions: RequestOptions? = null,
     block: suspend ResponseSearch.(Int) -> Unit
@@ -138,7 +138,7 @@ suspend fun Index.browseAllObjects(
     }
 }
 
-suspend fun ClientAnalytics.browseAllABTests(
+public suspend fun ClientAnalytics.browseAllABTests(
     hitsPerPage: Int? = null,
     requestOptions: RequestOptions? = null,
     block: suspend ResponseABTests.(Int) -> Unit

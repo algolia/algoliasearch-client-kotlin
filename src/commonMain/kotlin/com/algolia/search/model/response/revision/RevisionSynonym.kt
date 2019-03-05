@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class RevisionSynonym(
+public data class RevisionSynonym(
     @SerialName(KeyUpdatedAt) val updatedAt: ClientDate,
     @SerialName(KeyId) val objectID: ObjectID,
     @SerialName(KeyTaskID) override val taskID: TaskID

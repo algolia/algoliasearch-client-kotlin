@@ -1,10 +1,10 @@
 package com.algolia.search.model.settings
 
+import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyEqualOnly
 import com.algolia.search.serialize.regexEqualOnly
-import com.algolia.search.helper.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -13,7 +13,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(NumericAttributeFilter.Companion::class)
-data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boolean = false) :
+public data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boolean = false) :
     Raw<String> {
 
     override val raw = if (equalOnly) "$KeyEqualOnly($attribute)" else attribute.raw
@@ -22,7 +22,7 @@ data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boole
         return raw
     }
 
-    companion object : KSerializer<NumericAttributeFilter> {
+    internal companion object : KSerializer<NumericAttributeFilter> {
 
         private val serializer = StringSerializer
 

@@ -7,14 +7,14 @@ import kotlinx.serialization.internal.FloatSerializer
 
 
 @Serializable(BoundingBox.Companion::class)
-data class BoundingBox(
+public data class BoundingBox(
     val point1: Point,
     val point2: Point
 ) : Raw<List<Float>> {
 
     override val raw = listOf(point1.latitude, point1.longitude, point2.latitude, point2.longitude)
 
-    companion object : KSerializer<BoundingBox> {
+    internal companion object : KSerializer<BoundingBox> {
 
         private val serializer = FloatSerializer
 

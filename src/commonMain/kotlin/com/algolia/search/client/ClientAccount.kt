@@ -8,9 +8,9 @@ import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode
 
 
-object ClientAccount {
+public object ClientAccount {
 
-    suspend fun copyIndex(source: Index, destination: Index): List<Task> {
+    public suspend fun copyIndex(source: Index, destination: Index): List<Task> {
         if (source.api.applicationID == destination.api.applicationID) {
             throw IllegalArgumentException("Source and Destination indices should not be on the same application.")
         }

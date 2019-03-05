@@ -10,13 +10,13 @@ import kotlinx.serialization.Transient
 
 
 @Serializable
-data class ResponseListIndices(
+public data class ResponseListIndices(
     @SerialName(KeyItems) val items: List<Item>,
     @SerialName(KeyNbPages) val nbPages: Int
 ) {
 
     @Serializable
-    data class Item(
+    public data class Item(
         @SerialName(KeyName) val indexName: IndexName,
         @SerialName(KeyCreatedAt) val createdAt: ClientDate,
         @SerialName(KeyUpdatedAt) val updatedAt: ClientDate,
@@ -33,19 +33,19 @@ data class ResponseListIndices(
     ) {
 
         @Transient
-        val replicas: List<IndexName>
+        public val replicas: List<IndexName>
             get() = replicasOrNull!!
 
         @Transient
-        val primary: IndexName
+        public val primary: IndexName
             get() = primaryOrNull!!
 
         @Transient
-        val sourceABTest: IndexName
+        public val sourceABTest: IndexName
             get() = sourceABTestOrNull!!
 
         @Transient
-        val abTest: ResponseABTestShort
+        public val abTest: ResponseABTestShort
             get() = abTestOrNull!!
 
     }

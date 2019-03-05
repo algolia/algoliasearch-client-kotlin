@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class DeletionIndex(
+public data class DeletionIndex(
     @SerialName(KeyDeletedAt) val deletedAt: ClientDate,
     @SerialName(KeyTaskID) override val taskID: TaskID
 ) : Task

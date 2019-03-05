@@ -10,29 +10,29 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(SynonymType.Companion::class)
-sealed class SynonymType(override val raw: String) : Raw<String> {
+public sealed class SynonymType(override val raw: String) : Raw<String> {
 
-    enum class Typo {
+    public enum class Typo {
         One,
         Two
     }
 
-    object OneWay : SynonymType(KeyOneWaySynonym)
+    public object OneWay : SynonymType(KeyOneWaySynonym)
 
-    object MultiWay : SynonymType(KeySynonym)
+    public object MultiWay : SynonymType(KeySynonym)
 
-    data class AlternativeCorrections(val typo: Typo) : SynonymType(
+    public data class AlternativeCorrections(val typo: Typo) : SynonymType(
         when (typo) {
             Typo.One -> KeyAlternativeCorrection1
             Typo.Two -> KeyAlternativeCorrection2
         }
     )
 
-    object Placeholder : SynonymType(KeyPlaceholder)
+    public object Placeholder : SynonymType(KeyPlaceholder)
 
-    data class Other(override val raw: String) : SynonymType(raw)
+    public data class Other(override val raw: String) : SynonymType(raw)
 
-    companion object : KSerializer<SynonymType> {
+    internal companion object : KSerializer<SynonymType> {
 
         private val serializer = StringSerializer
 

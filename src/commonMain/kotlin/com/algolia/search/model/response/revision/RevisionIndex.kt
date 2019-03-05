@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class RevisionIndex(
+public data class RevisionIndex(
     @SerialName(KeyUpdatedAt) val updatedAt: ClientDate,
     @SerialName(KeyTaskID) override val taskID: TaskID
 ) : Task

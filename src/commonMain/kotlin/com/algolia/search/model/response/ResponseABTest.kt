@@ -1,9 +1,9 @@
 package com.algolia.search.model.response
 
+import com.algolia.search.helper.toABTestID
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.serialize.*
-import com.algolia.search.helper.toABTestID
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
@@ -11,7 +11,7 @@ import kotlinx.serialization.json.jsonArray
 
 
 @Serializable(ResponseABTest.Companion::class)
-data class ResponseABTest(
+public data class ResponseABTest(
     val abTestID: ABTestID,
     val createdAt: String,
     val endAt: String,
@@ -24,15 +24,15 @@ data class ResponseABTest(
 ) {
 
     @Transient
-    val clickSignificance: Float
+    public val clickSignificance: Float
         get() = clickSignificanceOrNull!!
 
     @Transient
-    val conversionSignificance: Float
+    public val conversionSignificance: Float
         get() = conversionSignificanceOrNull!!
 
     @Serializer(ResponseABTest::class)
-    companion object : KSerializer<ResponseABTest> {
+    internal companion object : KSerializer<ResponseABTest> {
 
         override fun serialize(encoder: Encoder, obj: ResponseABTest) {
             val json = json {

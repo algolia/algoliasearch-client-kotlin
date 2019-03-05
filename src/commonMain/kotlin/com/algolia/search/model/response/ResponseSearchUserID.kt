@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class ResponseSearchUserID(
+public data class ResponseSearchUserID(
     @SerialName(KeyHits) val hits: List<ResponseUserID>,
     @SerialName(KeyNbHits) val nbHits: Int,
     @SerialName(KeyPage) val page: Int,

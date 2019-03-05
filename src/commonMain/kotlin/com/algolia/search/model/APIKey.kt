@@ -7,7 +7,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(APIKey.Companion::class)
-data class APIKey(override val raw: String) : Raw<String> {
+public data class APIKey(override val raw: String) : Raw<String> {
 
     init {
         if (raw.isEmpty()) throw EmptyStringException("APIKey")
@@ -18,7 +18,7 @@ data class APIKey(override val raw: String) : Raw<String> {
     }
 
     @Serializer(APIKey::class)
-    companion object : KSerializer<APIKey> {
+    internal companion object : KSerializer<APIKey> {
 
         private val serializer = StringSerializer
 

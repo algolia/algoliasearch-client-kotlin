@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class ResponseTopUserID(
+public data class ResponseTopUserID(
     @SerialName(KeyTopUsers) val topUsers: Map<ClusterName, List<ResponseUserID>>
 )
