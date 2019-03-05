@@ -1,14 +1,14 @@
 package com.algolia.search.model.response
 
+import com.algolia.search.helper.toIndexName
+import com.algolia.search.helper.toObjectID
+import com.algolia.search.helper.toTaskID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.serialize.KeyObjectIDs
 import com.algolia.search.serialize.KeyTaskID
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.toIndexName
-import com.algolia.search.toObjectID
-import com.algolia.search.toTaskID
 import kotlinx.serialization.*
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.json
@@ -17,13 +17,13 @@ import kotlinx.serialization.json.long
 
 
 @Serializable(ResponseBatches.Companion::class)
-data class ResponseBatches(
+public data class ResponseBatches(
     @SerialName(KeyTaskID) val tasks: List<TaskIndex>,
     @Optional @SerialName(KeyObjectIDs) val objectIDsOrNull: List<ObjectID?>? = null
 ) {
 
     @Transient
-    val objectIDs: List<ObjectID?>
+    public val objectIDs: List<ObjectID?>
         get() = objectIDsOrNull!!
 
     @Serializer(ResponseBatches::class)

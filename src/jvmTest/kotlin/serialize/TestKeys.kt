@@ -311,6 +311,14 @@ internal class TestKeys {
         KeyExpired shouldEqual "expired"
         KeyFailed shouldEqual "failed"
         KeyPercentage shouldEqual "percentage"
+        KeyEventName shouldEqual "eventName"
+        KeyUserToken shouldEqual "userToken"
+        KeyPositions shouldEqual "positions"
+        KeyEventType shouldEqual "eventType"
+        KeyClick shouldEqual "click"
+        KeyView shouldEqual "view"
+        KeyConversion shouldEqual "conversion"
+        KeyEvents shouldEqual "events"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"
@@ -368,5 +376,14 @@ internal class TestKeys {
         KeyTswana shouldEqual "tn"
         KeyTurkish shouldEqual "tr"
         KeyTatar shouldEqual "tt"
+
+        RouteIndexesV1 shouldEqual "/1/indexes"
+        RouteSettings shouldEqual "/settings"
+        RouteClustersV1 shouldEqual "/1/clusters"
+        RouteSynonyms shouldEqual "/synonyms"
+        RouteEventsV1 shouldEqual "/1/events"
+        RouteABTestsV2 shouldEqual "/2/abtests"
+        RouteRules shouldEqual "/rules"
+        RouteKeysV1 shouldEqual "/1/keys"
     }
 }

@@ -1,8 +1,8 @@
 package model
 
-import com.algolia.search.ClientDate
-import com.algolia.search.dateISO8601
-import com.algolia.search.dateISO8601Millis
+import com.algolia.search.helper.dateISO8601
+import com.algolia.search.helper.dateISO8601Millis
+import com.algolia.search.model.ClientDate
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

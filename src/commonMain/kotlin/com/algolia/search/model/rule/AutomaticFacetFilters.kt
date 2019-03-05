@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class AutomaticFacetFilters(
+public data class AutomaticFacetFilters(
     @SerialName(KeyFacet) val attribute: Attribute,
     @Optional @SerialName(KeyScore) val score: Int? = null,
     @Optional @SerialName(KeyDisjunctive) val disjunctive: Boolean? = null

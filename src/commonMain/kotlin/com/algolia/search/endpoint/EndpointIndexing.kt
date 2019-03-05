@@ -19,7 +19,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JsonObject
 
 
-interface EndpointIndexing {
+public interface EndpointIndexing {
 
     val indexName: IndexName
 

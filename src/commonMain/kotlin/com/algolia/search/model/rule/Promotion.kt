@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Promotion(
+public data class Promotion(
     @SerialName(KeyObjectID) val objectID: ObjectID,
     @SerialName(KeyPosition) val position: Int
 )

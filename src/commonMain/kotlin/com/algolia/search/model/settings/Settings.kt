@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Settings(
+public data class Settings(
     @Optional @SerialName(KeySearchableAttributes) var searchableAttributes: List<SearchableAttribute>? = null,
     @Optional @SerialName(KeyAttributesForFaceting) var attributesForFaceting: List<AttributeForFaceting>? = null,
     @Optional @SerialName(KeyUnretrievableAttributes) var unretrievableAttributes: List<Attribute>? = null,

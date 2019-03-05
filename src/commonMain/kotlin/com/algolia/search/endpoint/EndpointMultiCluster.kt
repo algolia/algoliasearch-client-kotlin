@@ -8,7 +8,7 @@ import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.deletion.Deletion
 
 
-interface EndpointMultiCluster {
+public interface EndpointMultiCluster {
 
     suspend fun listClusters(requestOptions: RequestOptions? = null): ResponseListClusters
 

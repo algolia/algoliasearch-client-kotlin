@@ -1,7 +1,7 @@
 package com.algolia.search.model.response
 
-import com.algolia.search.ClientDate
 import com.algolia.search.model.APIKey
+import com.algolia.search.model.ClientDate
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
 import com.algolia.search.serialize.*
@@ -12,7 +12,7 @@ import kotlinx.serialization.Transient
 
 
 @Serializable
-data class ResponseAPIKey(
+public data class ResponseAPIKey(
     @SerialName(KeyValue) val apiKey: APIKey,
     @SerialName(KeyValidity) val validity: Long,
     @SerialName(KeyAcl) val rights: List<ACL>,
@@ -20,36 +20,36 @@ data class ResponseAPIKey(
     @Optional @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQueryOrNull: Int? = null,
     @Optional @SerialName(KeyCreatedAt) val createdAtOrNull: ClientDate? = null,
     @Optional @SerialName(KeyDescription) val descriptionOrNull: String? = null,
-    @Optional @SerialName(KeyIndexes) val indexesOrNull: List<IndexName>? = null,
+    @Optional @SerialName(KeyIndexes) val indicesOrNull: List<IndexName>? = null,
     @Optional @SerialName(KeyReferers) val referersOrNull: List<String>? = null,
     @Optional @SerialName(KeyQueryParameters) val queryOrNull: String? = null
 ) {
 
     @Transient
-    val maxQueriesPerIPPerHour: Int
+    public val maxQueriesPerIPPerHour: Int
         get() = maxQueriesPerIPPerHourOrNull!!
 
     @Transient
-    val maxHitsPerQuery: Int
+    public val maxHitsPerQuery: Int
         get() = maxHitsPerQueryOrNull!!
 
     @Transient
-    val createdAt: ClientDate
+    public val createdAt: ClientDate
         get() = createdAtOrNull!!
 
     @Transient
-    val description: String
+    public val description: String
         get() = descriptionOrNull!!
 
     @Transient
-    val indexes: List<IndexName>
-        get() = indexesOrNull!!
+    public val indices: List<IndexName>
+        get() = indicesOrNull!!
 
     @Transient
-    val referers: List<String>
+    public val referers: List<String>
         get() = referersOrNull!!
 
     @Transient
-    val query: String
+    public val query: String
         get() = queryOrNull!!
 }

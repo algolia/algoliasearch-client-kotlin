@@ -1,9 +1,9 @@
 package com.algolia.search.model.rule
 
+import com.algolia.search.filter.FilterBuilder
+import com.algolia.search.filter.OptionalFilterBuilder
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.*
-import com.algolia.search.query.FilterBuilder
-import com.algolia.search.query.OptionalFilterBuilder
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
@@ -12,7 +12,7 @@ import kotlinx.serialization.Transient
 
 
 @Serializable
-data class Params(
+public data class Params(
     @Optional @SerialName(KeyAutomaticFacetFilters) var automaticFacetFilters: List<AutomaticFacetFilters>? = null,
     @Optional @SerialName(KeyAutomaticOptionalFacetFilters) var automaticOptionalFacetFilters: List<AutomaticFacetFilters>? = null,
     @Optional @SerialName(KeyQuery) var query: QueryOrEdits? = null,
@@ -210,7 +210,7 @@ data class Params(
      * Engine default: null
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundLatLng/]
      */
-    @Optional @SerialName(KeyAroundLatLng) var aroundLatLng: String? = null,
+    @Optional @SerialName(KeyAroundLatLng) @Serializable(KSerializerPoint::class) var aroundLatLng: Point? = null,
 
     /**
      * Whether to search entries around a given location automatically computed from the requester’s IP address.
@@ -433,14 +433,14 @@ data class Params(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalWords/#doing-an-or-between-all-words-of-a-query]
      */
     @Transient
-    var isEveryWordInQueryOptional: Boolean = false
+    public var isEveryWordInQueryOptional: Boolean = false
 
     /**
      * You can modify this instance of [FilterBuilder] or assign a new one.
      * If [filters] is null, the encoder of [FilterBuilder.build] will be passed to the request body of the next request.
      */
     @Transient
-    var filterBuilder: FilterBuilder = FilterBuilder()
+    public var filterBuilder: FilterBuilder = FilterBuilder()
 
     /**
      * You can modify this instance of [OptionalFilterBuilder] or assign a new one.
@@ -448,5 +448,5 @@ data class Params(
      * the request body of the next request.
      */
     @Transient
-    var optionalFilterBuilder: OptionalFilterBuilder = OptionalFilterBuilder()
+    public var optionalFilterBuilder: OptionalFilterBuilder = OptionalFilterBuilder()
 }

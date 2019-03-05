@@ -1,7 +1,7 @@
 package host
 
-import com.algolia.search.Time
 import com.algolia.search.host.*
+import com.algolia.search.model.Time
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

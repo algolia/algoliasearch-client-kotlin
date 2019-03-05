@@ -10,7 +10,7 @@ import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
 
 
-interface EndpointAdvanced {
+public interface EndpointAdvanced {
 
     val indexName: IndexName
 

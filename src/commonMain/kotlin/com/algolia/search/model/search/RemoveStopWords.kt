@@ -9,17 +9,17 @@ import kotlinx.serialization.json.JsonLiteral
 
 
 @Serializable(RemoveStopWords.Companion::class)
-sealed class RemoveStopWords {
+public sealed class RemoveStopWords {
 
-    data class Boolean(val boolean: kotlin.Boolean) : RemoveStopWords()
+    public data class Boolean(val boolean: kotlin.Boolean) : RemoveStopWords()
 
-    data class QueryLanguages(val queryLanguages: List<QueryLanguage>) : RemoveStopWords() {
+    public data class QueryLanguages(val queryLanguages: List<QueryLanguage>) : RemoveStopWords() {
 
         constructor(vararg queryLanguage: QueryLanguage) : this(queryLanguage.toList())
     }
 
     @Serializer(RemoveStopWords::class)
-    companion object : KSerializer<RemoveStopWords> {
+    internal companion object : KSerializer<RemoveStopWords> {
 
         override fun serialize(encoder: Encoder, obj: RemoveStopWords) {
             when (obj) {

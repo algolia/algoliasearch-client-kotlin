@@ -1,6 +1,6 @@
 package model.search
 
-import com.algolia.search.and
+import com.algolia.search.helper.and
 import com.algolia.search.model.search.Polygon
 import org.junit.Test
 import org.junit.runner.RunWith

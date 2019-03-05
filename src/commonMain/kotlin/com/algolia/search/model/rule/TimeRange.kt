@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class TimeRange(
+public data class TimeRange(
     @SerialName(KeyFrom) val from: Long,
     @SerialName(KeyUntil) val until: Long
 )
