@@ -1,7 +1,7 @@
 package host
 
-import com.algolia.search.exception.RetryableException
-import com.algolia.search.host.HostStatus
+import com.algolia.search.exception.MaxRequestAttemptsException
+import com.algolia.search.host.HostState
 import com.algolia.search.host.RetryLogic
 import com.algolia.search.host.readHosts
 import com.algolia.search.model.ApplicationID
@@ -20,14 +20,14 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldBeTrue
 import shouldEqual
-import shouldNotBeNull
+import shouldFailWith
 
 
 @RunWith(JUnit4::class)
 internal class TestRetryLogic {
 
     private val applicationId = ApplicationID("appId")
-    private val retryLogic = RetryLogic(5, applicationId.readHosts())
+    private val retryLogic = RetryLogic(applicationId.readHosts())
     private val route = "/route"
     private val client200 = HttpClient(MockEngine { MockHttpResponse(call, HttpStatusCode.OK) })
     private val client404 = HttpClient(MockEngine { MockHttpResponse(call, HttpStatusCode.NotFound) })
@@ -54,12 +54,16 @@ internal class TestRetryLogic {
             }
             retry shouldEqual 0
         }
-        statuses[0].first shouldEqual HostStatus.Up
-        statuses[1].first shouldEqual HostStatus.Unknown
-        statuses[2].first shouldEqual HostStatus.Unknown
-        statuses[3].first shouldEqual HostStatus.Unknown
+        statuses[0].state shouldEqual HostState.Up
+        statuses[1].state shouldEqual HostState.Unknown
+        statuses[2].state shouldEqual HostState.Unknown
+        statuses[3].state shouldEqual HostState.Unknown
     }
 
+    /**
+     * In this test, we make the first attempt fail by delaying it by 2 seconds, when the max timeout is 1 seconds.
+     * Second attempt should succeed.
+     */
     @Test
     fun retryOnce() {
         runBlocking {
@@ -71,14 +75,18 @@ internal class TestRetryLogic {
                 if (retry == 0) delay(2000L)
                 client200.get<HttpResponse>()
             }
-            statuses[0].first shouldEqual HostStatus.Down
-            statuses[1].first shouldEqual HostStatus.Up
-            statuses[2].first shouldEqual HostStatus.Unknown
-            statuses[3].first shouldEqual HostStatus.Unknown
+            statuses[0].state shouldEqual HostState.Down
+            statuses[1].state shouldEqual HostState.Up
+            statuses[2].state shouldEqual HostState.Unknown
+            statuses[3].state shouldEqual HostState.Unknown
             retry shouldEqual 1
         }
     }
 
+    /**
+     * In this test, the first four attempts are delayed by a greater timeout than the 100 milliseconds exponential timeout.
+     * The fifth attempt should succeed.
+     */
     @Test
     fun retryFour() {
         runBlocking {
@@ -91,10 +99,10 @@ internal class TestRetryLogic {
                 if (retry < count) delay(150L * (retry + 1))
                 client200.get<HttpResponse>(url)
             }
-            statuses[0].first shouldEqual HostStatus.Up
-            statuses[1].first shouldEqual HostStatus.Down
-            statuses[2].first shouldEqual HostStatus.Down
-            statuses[3].first shouldEqual HostStatus.Down
+            statuses[0].state shouldEqual HostState.Up
+            statuses[1].state shouldEqual HostState.Down
+            statuses[2].state shouldEqual HostState.Down
+            statuses[3].state shouldEqual HostState.Down
             retry shouldEqual count
         }
     }
@@ -103,46 +111,38 @@ internal class TestRetryLogic {
     fun test404() {
         runBlocking {
             var retry = -1
-            var exceptionIsThrown = false
 
-            try {
+            BadResponseStatusException::class shouldFailWith {
                 retryLogic.retry(1000L, route) { url ->
                     retry++
                     client404.get<String>(url)
                 }
-            } catch (exception: BadResponseStatusException) {
-                exceptionIsThrown = true
             }
-            exceptionIsThrown.shouldBeTrue()
             retry shouldEqual 0
-            statuses[0].first shouldEqual HostStatus.Unknown
-            statuses[1].first shouldEqual HostStatus.Unknown
-            statuses[2].first shouldEqual HostStatus.Unknown
-            statuses[3].first shouldEqual HostStatus.Unknown
+            statuses[0].state shouldEqual HostState.Unknown
+            statuses[1].state shouldEqual HostState.Unknown
+            statuses[2].state shouldEqual HostState.Unknown
+            statuses[3].state shouldEqual HostState.Unknown
         }
     }
 
     @Test
     fun retryMaxAttempt() {
         var retry = -1
-        var thrown: RetryableException? = null
 
         runBlocking {
-            try {
+            val exception = MaxRequestAttemptsException::class shouldFailWith {
                 retryLogic.retry(100L, route) { url ->
                     retry++
                     delay(150L * (retry + 1))
                     client200.get<HttpResponse>(url)
                 }
-            } catch (exception: RetryableException) {
-                thrown = exception
             }
-            thrown.shouldNotBeNull()
-            thrown!!.let {
+            exception.let {
                 it.exceptions.size shouldEqual it.attempts
                 it.attempts shouldEqual 5
-                it.exceptions.forEach {
-                    (it is TimeoutCancellationException).shouldBeTrue()
+                it.exceptions.forEach { exception ->
+                    (exception is TimeoutCancellationException).shouldBeTrue()
                 }
             }
         }

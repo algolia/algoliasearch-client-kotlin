@@ -19,10 +19,10 @@ internal abstract class TestSerializer<T>(
         items.forEach {
             val serialized = json.stringify(serializer, it.first)
             val deserialized = json.parse(serializer, serialized)
-            val element = json.parseJson(serialized)
+            val deserializedJson = json.parseJson(serialized)
 
             deserialized shouldEqual it.first
-            element shouldEqual it.second
+            deserializedJson shouldEqual it.second
         }
     }
 }

@@ -1,6 +1,6 @@
 package com.algolia.search.host
 
-import com.algolia.search.exception.RetryableException
+import com.algolia.search.exception.MaxRequestAttemptsException
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
@@ -9,10 +9,10 @@ import kotlin.math.floor
 
 
 internal class RetryLogic(
-    private val maxRetryAttempts: Int,
     val hosts: List<String>,
-    private val hostStatusExpirationDelay: Long = 1000L * 60L * 5L
+    private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
 ) {
+    private val maxRetryAttempts: Int = 5
 
     internal val statuses = hosts.initialHostStatus()
     internal var index: Int = -1
@@ -24,9 +24,9 @@ internal class RetryLogic(
         request: suspend (String) -> T,
         exceptions: List<Exception>
     ): T {
-        if (statuses.areStatusExpired(hostStatusExpirationDelay)) {
+        if (statuses.areStatusExpired(hostStatusExpirationDelayMS)) {
             for (index in statuses.indices) {
-                statuses[index] = HostStatus.Unknown to 0L
+                statuses[index] = HostStatus(HostState.Unknown, 0L)
             }
         }
         index = statuses.selectNextHostIndex() ?: statuses.nextIndex(index)
@@ -35,23 +35,23 @@ internal class RetryLogic(
         return try {
             withTimeout(timeout * (attempt + 1)) {
                 val response = request("$host$path")
-                statuses[index] = HostStatus.Up.getHostStatus()
+                statuses[index] = HostState.Up.getHostStatus()
                 response
             }
         } catch (exception: Exception) {
-            if (attempt >= maxRetryAttempts) throw RetryableException(attempt, exceptions)
+            if (attempt >= maxRetryAttempts) throw MaxRequestAttemptsException(attempt, exceptions)
             when (exception) {
                 is BadResponseStatusException -> {
                     val code = exception.response.status.value
                     val isSuccessful = floor(code / 100f) == 2f
-                    val isRetryable = floor(code / 100f) != 4f && !isSuccessful
+                    val isRetryable = !isSuccessful && floor(code / 100f) != 4f
 
                     if (isRetryable) {
-                        statuses[index] = HostStatus.Down.getHostStatus()
+                        statuses[index] = HostState.Down.getHostStatus()
                     } else throw exception
                 }
                 is IOException, is TimeoutCancellationException -> {
-                    statuses[index] = HostStatus.Down.getHostStatus()
+                    statuses[index] = HostState.Down.getHostStatus()
                 }
                 else -> throw exception
             }

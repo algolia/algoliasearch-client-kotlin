@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.dateISO8601
+import com.algolia.search.helper.dateISO8601
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
@@ -14,8 +14,8 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import shouldBeTrue
 import shouldEqual
+import shouldFailWith
 import shouldNotBeNull
 import shouldNotEqual
 import java.util.*
@@ -61,28 +61,19 @@ internal class TestSuiteABTest {
                     it.name shouldEqual abTest.name
                     it.endAt shouldEqual abTest.endAt
                     it.status shouldNotEqual ABTestStatus.Stopped
-                    it.variantA.let {
-                        it.indexName shouldEqual abTest.variantA.indexName
-                        it.trafficPercentage shouldEqual abTest.variantA.trafficPercentage
-                        it.description shouldEqual abTest.variantA.description
-                    }
-                    it.variantB.let {
-                        it.indexName shouldEqual abTest.variantB.indexName
-                        it.trafficPercentage shouldEqual abTest.variantB.trafficPercentage
-                        it.description shouldEqual abTest.variantB.description
-                    }
+                    compareVariant(it.variantA, abTest.variantA)
+                    compareVariant(it.variantB, abTest.variantB)
                 }
                 clientAnalytics.listABTests().abTests.find { it.abTestID == response.abTestID }.shouldNotBeNull()
                 clientAnalytics.stopABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
                 clientAnalytics.getABTest(response.abTestID).status shouldEqual ABTestStatus.Stopped
                 clientAnalytics.deleteABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
-                var hasThrown = false
-                try {
+
+                val result = BadResponseStatusException::class shouldFailWith {
                     clientAnalytics.getABTest(response.abTestID)
-                } catch (exception: BadResponseStatusException) {
-                    hasThrown = exception.statusCode.value == HttpStatusCode.NotFound.value
                 }
-                hasThrown.shouldBeTrue()
+
+                result.statusCode.value shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }

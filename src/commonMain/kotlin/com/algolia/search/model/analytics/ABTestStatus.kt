@@ -13,19 +13,19 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(ABTestStatus.Companion::class)
-sealed class ABTestStatus(override val raw: String) : Raw<String> {
+public sealed class ABTestStatus(override val raw: String) : Raw<String> {
 
-    object Active : ABTestStatus(KeyActive)
+    public object Active : ABTestStatus(KeyActive)
 
-    object Stopped : ABTestStatus(KeyStopped)
+    public object Stopped : ABTestStatus(KeyStopped)
 
-    object Expired : ABTestStatus(KeyExpired)
+    public object Expired : ABTestStatus(KeyExpired)
 
-    object Failed : ABTestStatus(KeyFailed)
+    public object Failed : ABTestStatus(KeyFailed)
 
-    data class Other(override val raw: String) : ABTestStatus(raw)
+    public data class Other(override val raw: String) : ABTestStatus(raw)
 
-    companion object : KSerializer<ABTestStatus> {
+    internal companion object : KSerializer<ABTestStatus> {
 
         private val serializer = StringSerializer
 

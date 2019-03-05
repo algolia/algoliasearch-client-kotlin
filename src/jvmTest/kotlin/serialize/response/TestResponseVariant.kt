@@ -4,6 +4,7 @@ import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import indexA
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -12,7 +13,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestResponseVariant : TestSerializer<ResponseVariant>(ResponseVariant.serializer(), JsonNoNulls) {
+internal class TestResponseVariant : TestSerializer<ResponseVariant>(ResponseVariant.serializer(), Json.noDefaults) {
 
     override val items = listOf(
         item to json

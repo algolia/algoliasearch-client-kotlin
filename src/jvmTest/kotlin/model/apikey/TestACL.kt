@@ -22,7 +22,7 @@ internal class TestACL {
         Settings.raw shouldEqual KeySettings
         EditSettings.raw shouldEqual KeyEditSettings
         Analytics.raw shouldEqual KeyAnalytics
-        ListIndexes.raw shouldEqual KeyListIndexes
+        ListIndices.raw shouldEqual KeyListIndexes
         Logs.raw shouldEqual KeyLogs
         SeeUnretrievableAttributes.raw shouldEqual KeySeeUnretrievableAttributes
         Other(unknown).raw shouldEqual unknown

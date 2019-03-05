@@ -6,8 +6,8 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.PartialUpdate
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.toAttribute
-import com.algolia.search.toObjectID
+import com.algolia.search.helper.toAttribute
+import com.algolia.search.helper.toObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -29,6 +29,7 @@ internal class TestSuiteIndexing {
         val value: Int = 0
     ) : Indexable
 
+    // Todo, see if we can make this more readable.
     private val suffix = "indexing"
     private val attributeValue = "value".toAttribute()
     private val dataA = Data("A".toObjectID())
@@ -48,9 +49,9 @@ internal class TestSuiteIndexing {
 
     private fun batchAddObject(): List<List<BatchOperation.AddObject>> {
         return (0 until 10)
-            .map {
+            .map { index ->
                 batches
-                    .subList(it * 100, it * 100 + 100)
+                    .subList(index * 100, index * 100 + 100)
                     .map { BatchOperation.AddObject.from(Data.serializer(), it) }
             }
     }

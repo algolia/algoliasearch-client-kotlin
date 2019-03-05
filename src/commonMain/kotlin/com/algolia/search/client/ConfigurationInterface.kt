@@ -5,7 +5,7 @@ import com.algolia.search.model.ApplicationID
 import io.ktor.client.features.logging.LogLevel
 
 
-interface ConfigurationInterface {
+public interface ConfigurationInterface {
 
     val applicationID: ApplicationID
     val apiKey: APIKey
@@ -13,7 +13,6 @@ interface ConfigurationInterface {
     val readTimeout: Long
     val logLevel: LogLevel
     val hosts: List<String>?
-    val maxRetryAttempts: Int
 
     val RequestOptions?.computedWriteTimeout get() = this?.writeTimeout ?: writeTimeout
     val RequestOptions?.computedReadTimeout get() = this?.readTimeout ?: readTimeout

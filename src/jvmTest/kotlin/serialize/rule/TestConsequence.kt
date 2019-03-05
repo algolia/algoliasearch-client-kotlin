@@ -16,23 +16,23 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestConsequence : TestSerializer<Consequence>(Consequence.serializer(), JsonNoNulls) {
+internal class TestConsequence : TestSerializer<Consequence>(Consequence.serializer(), Json.noDefaults) {
 
     private val edits = listOf(Edit(unknown))
     private val paramsQuery = Params(
         query = QueryOrEdits.Query(unknown)
     )
-    private val paramsQuerySerialized = JsonNoNulls.toJson(Params.serializer(), paramsQuery)
+    private val paramsQuerySerialized = Json.noDefaults.toJson(Params.serializer(), paramsQuery)
     private val paramsEdits = Params(
         query = QueryOrEdits.Edits(edits)
     )
-    private val paramsEditsSerialized = JsonNoNulls.toJson(Params.serializer(), paramsEdits)
+    private val paramsEditsSerialized = Json.noDefaults.toJson(Params.serializer(), paramsEdits)
     private val filters = listOf(AutomaticFacetFilters(attributeA, 1, true))
     private val objectIDs = listOf(objectIDA, objectIDB)
     private val promotions = listOf(Promotion(objectIDA, 0))
     private val promotionsSerialized = Json.plain.toJson(Promotion.serializer().list, promotions)
     private val params = paramsEdits.copy(automaticFacetFilters = filters, automaticOptionalFacetFilters = filters)
-    private val paramsSerialized = JsonNoNulls.toJson(Params.serializer(), params)
+    private val paramsSerialized = Json.noDefaults.toJson(Params.serializer(), params)
     private val userData = json { KeyUserData to unknown }
 
     override val items = listOf(

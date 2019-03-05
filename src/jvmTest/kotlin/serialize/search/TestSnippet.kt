@@ -16,7 +16,8 @@ internal class TestSnippet : TestSerializer<Snippet>(Snippet) {
         Snippet(attributeA) to JsonLiteral(
             Snippet(
                 attributeA
-            ).raw),
+            ).raw
+        ),
         snippet to json
     )
 

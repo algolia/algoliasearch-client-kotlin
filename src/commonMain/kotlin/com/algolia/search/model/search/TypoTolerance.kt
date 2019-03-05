@@ -13,22 +13,22 @@ import kotlinx.serialization.json.content
 
 
 @Serializable(TypoTolerance.Companion::class)
-sealed class TypoTolerance(override val raw: String) : Raw<String> {
+public sealed class TypoTolerance(override val raw: String) : Raw<String> {
 
-    data class Boolean(val boolean: kotlin.Boolean) : TypoTolerance(boolean.toString())
+    public data class Boolean(val boolean: kotlin.Boolean) : TypoTolerance(boolean.toString())
 
-    object Min : TypoTolerance(KeyMin)
+    public object Min : TypoTolerance(KeyMin)
 
-    object Strict : TypoTolerance(KeyStrict)
+    public object Strict : TypoTolerance(KeyStrict)
 
-    data class Other(override val raw: String) : TypoTolerance(raw)
+    public data class Other(override val raw: String) : TypoTolerance(raw)
 
     override fun toString(): String {
         return raw
     }
 
     @Serializer(TypoTolerance::class)
-    companion object : KSerializer<TypoTolerance> {
+    internal companion object : KSerializer<TypoTolerance> {
 
         override fun serialize(encoder: Encoder, obj: TypoTolerance) {
             when (obj) {

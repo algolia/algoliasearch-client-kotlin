@@ -6,14 +6,14 @@ import kotlinx.serialization.internal.FloatSerializer
 
 
 @Serializable(Point.Companion::class)
-data class Point(
+public data class Point(
     val latitude: Float,
     val longitude: Float
 ) : Raw<List<Float>> {
 
     override val raw = listOf(latitude, longitude)
 
-    companion object : KSerializer<Point> {
+    internal companion object : KSerializer<Point> {
 
         private val serializer = FloatSerializer.list
 

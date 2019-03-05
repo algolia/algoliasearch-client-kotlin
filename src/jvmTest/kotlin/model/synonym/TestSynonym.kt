@@ -8,8 +8,8 @@ import objectIDA
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import shouldBeTrue
 import shouldEqual
+import shouldFailWith
 
 
 @RunWith(JUnit4::class)
@@ -18,13 +18,7 @@ internal class TestSynonym {
 
     @Test
     fun tokenShouldNotBeEmpty() {
-        var hasThrown = false
-        try {
-            Synonym.Placeholder.Token("")
-        } catch (exception: EmptyStringException) {
-            hasThrown = true
-        }
-        hasThrown.shouldBeTrue()
+        EmptyStringException::class shouldFailWith { Synonym.Placeholder.Token("") }
     }
 
     @Test
@@ -34,69 +28,39 @@ internal class TestSynonym {
 
     @Test
     fun oneWayInputShouldNotBeEmpty() {
-        var hasThrown = false
-        try {
-            Synonym.OneWay(objectIDA, "", listOf())
-        } catch (exception: EmptyStringException) {
-            hasThrown = true
-        }
-        hasThrown.shouldBeTrue()
+        EmptyStringException::class shouldFailWith { Synonym.OneWay(objectIDA, "", listOf()) }
     }
 
     @Test
     fun oneWaySynonymsShouldNotBeEmpty() {
-        var hasThrown = false
-        try {
-            Synonym.OneWay(objectIDA, "input", listOf())
-        } catch (exception: EmptyListException) {
-            hasThrown = true
-        }
-        hasThrown.shouldBeTrue()
+        EmptyListException::class shouldFailWith { Synonym.OneWay(objectIDA, "input", listOf()) }
     }
 
     @Test
     fun multiWaySynonymsShouldNotBeEmpty() {
-        var hasThrown = false
-        try {
-            Synonym.MultiWay(objectIDA, listOf())
-        } catch (exception: EmptyListException) {
-            hasThrown = true
-        }
-        hasThrown.shouldBeTrue()
+        EmptyListException::class shouldFailWith { Synonym.MultiWay(objectIDA, listOf()) }
     }
 
     @Test
     fun alternativeWordShouldNotBeEmpty() {
-        var hasThrown = false
-        try {
+        EmptyStringException::class shouldFailWith {
             Synonym.AlternativeCorrections(objectIDA, "", listOf(), SynonymType.Typo.One)
-        } catch (exception: EmptyStringException) {
-            hasThrown = true
         }
-        hasThrown.shouldBeTrue()
     }
 
     @Test
     fun alternativeCorrectionsShouldNotBeEmpty() {
-        var hasThrown = false
-        try {
+        EmptyListException::class shouldFailWith {
             Synonym.AlternativeCorrections(objectIDA, "word", listOf(), SynonymType.Typo.One)
-        } catch (exception: EmptyListException) {
-            hasThrown = true
         }
-        hasThrown.shouldBeTrue()
     }
 
     @Test
     fun placeholderReplacementsShouldNotBeEmpty() {
         val token = Synonym.Placeholder.Token("token")
-        var hasThrown = false
 
-        try {
+        EmptyListException::class shouldFailWith {
             Synonym.Placeholder(objectIDA, token, listOf())
-        } catch (exception: EmptyListException) {
-            hasThrown = true
         }
-        hasThrown.shouldBeTrue()
     }
 }

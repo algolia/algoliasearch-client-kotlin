@@ -3,7 +3,7 @@ package serialize.response
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.serialize.KeyTaskID
-import com.algolia.search.toTaskID
+import com.algolia.search.helper.toTaskID
 import indexA
 import indexB
 import kotlinx.serialization.json.json
