@@ -6,7 +6,7 @@ import com.algolia.search.model.QueryID
 import com.algolia.search.model.insights.EventName
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.insights.UserToken
-import com.algolia.search.query.FilterFacet
+import com.algolia.search.filter.FilterFacet
 import io.ktor.client.response.HttpResponse
 
 

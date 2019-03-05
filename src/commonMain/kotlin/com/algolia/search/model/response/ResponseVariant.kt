@@ -10,7 +10,7 @@ import kotlinx.serialization.Transient
 
 
 @Serializable
-data class ResponseVariant(
+public data class ResponseVariant(
     @SerialName(KeyClickCount) val clickCount: Int,
     @SerialName(KeyConversionCount) val conversionCount: Int,
     @SerialName(KeyDescription) val description: String,
@@ -27,34 +27,34 @@ data class ResponseVariant(
 ) {
 
     @Transient
-    val conversionRate: Float
+    public val conversionRate: Float
         get() = conversionRateOrNull!!
 
     @Transient
-    val noResultCount: Int
+    public val noResultCount: Int
         get() = noResultCountOrNull!!
 
     @Transient
-    val averageClickPosition: Int
+    public val averageClickPosition: Int
         get() = averageClickPositionOrNull!!
 
     @Transient
-    val searchCount: Long
+    public val searchCount: Long
         get() = searchCountOrNull!!
 
     @Transient
-    val trackedSearchCount: Long
+    public val trackedSearchCount: Long
         get() = trackedSearchCountOrNull!!
 
     @Transient
-    val userCount: Long
+    public val userCount: Long
         get() = userCountOrNull!!
 
     @Transient
-    val clickThroughRate: Float
+    public val clickThroughRate: Float
         get() = clickThroughRateOrNull!!
 
     @Transient
-    val customSearchParameters: Query
+    public val customSearchParameters: Query
         get() = customSearchParametersOrNull!!
 }

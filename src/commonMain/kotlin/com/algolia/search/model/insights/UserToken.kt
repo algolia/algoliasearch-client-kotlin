@@ -1,9 +1,9 @@
 package com.algolia.search.model.insights
 
 import com.algolia.search.exception.EmptyStringException
+import com.algolia.search.helper.toUserToken
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.regexUserToken
-import com.algolia.search.toUserToken
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -12,7 +12,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(UserToken.Companion::class)
-data class UserToken(override val raw: String) : Raw<String> {
+public data class UserToken(override val raw: String) : Raw<String> {
 
     init {
         if (raw.isEmpty()) throw EmptyStringException("UserToken")
@@ -20,7 +20,7 @@ data class UserToken(override val raw: String) : Raw<String> {
         if (!regexUserToken.matches(raw)) throw IllegalArgumentException("UserToken allows only characters of type [a-zA-Z0-9_-]")
     }
 
-    companion object : KSerializer<UserToken> {
+    internal companion object : KSerializer<UserToken> {
 
         private val serializer = StringSerializer
 

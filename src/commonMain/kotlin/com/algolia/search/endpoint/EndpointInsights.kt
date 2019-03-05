@@ -5,7 +5,7 @@ import com.algolia.search.model.insights.InsightsEvent
 import io.ktor.client.response.HttpResponse
 
 
-interface EndpointInsights {
+public interface EndpointInsights {
 
     suspend fun sendEvent(event: InsightsEvent, requestOptions: RequestOptions? = null): HttpResponse
 

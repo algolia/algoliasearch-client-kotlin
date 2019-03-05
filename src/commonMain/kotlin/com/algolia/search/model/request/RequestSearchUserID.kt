@@ -11,7 +11,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class RequestSearchUserID(
+internal data class RequestSearchUserID(
     @Optional @SerialName(KeyQuery) val query: String? = null,
     @Optional @SerialName(KeyCluster) val clusterName: ClusterName? = null,
     @Optional @SerialName(KeyParams) val page: Int? = null,

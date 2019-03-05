@@ -3,7 +3,7 @@ package com.algolia.search.model.insights
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
-import com.algolia.search.query.FilterFacet
+import com.algolia.search.filter.FilterFacet
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.Serializable
@@ -15,25 +15,25 @@ import kotlinx.serialization.json.jsonArray
 
 
 @Serializable(InsightsEvent.Companion::class)
-sealed class InsightsEvent(
-    open val eventName: EventName,
-    open val indexName: IndexName,
-    open val userToken: UserToken?,
-    open val timestamp: Long?,
-    open val queryID: QueryID?,
-    open val resources: Resources?
-) {
+public sealed class InsightsEvent {
 
-    data class View(
+    abstract val eventName: EventName
+    abstract val indexName: IndexName
+    abstract val userToken: UserToken?
+    abstract val timestamp: Long?
+    abstract val queryID: QueryID?
+    abstract val resources: Resources?
+
+    public data class View(
         override val eventName: EventName,
         override val indexName: IndexName,
         override val userToken: UserToken? = null,
         override val timestamp: Long? = null,
         override val queryID: QueryID? = null,
         override val resources: Resources? = null
-    ) : InsightsEvent(eventName, indexName, userToken, timestamp, queryID, resources)
+    ) : InsightsEvent()
 
-    data class Click(
+    public data class Click(
         override val eventName: EventName,
         override val indexName: IndexName,
         override val userToken: UserToken? = null,
@@ -41,7 +41,7 @@ sealed class InsightsEvent(
         override val queryID: QueryID? = null,
         override val resources: Resources? = null,
         val positions: List<Int>? = null
-    ) : InsightsEvent(eventName, indexName, userToken, timestamp, queryID, resources) {
+    ) : InsightsEvent() {
 
         init {
             if (queryID != null && positions == null)
@@ -49,18 +49,18 @@ sealed class InsightsEvent(
         }
     }
 
-    data class Conversion(
+    public data class Conversion(
         override val eventName: EventName,
         override val indexName: IndexName,
         override val userToken: UserToken? = null,
         override val timestamp: Long? = null,
         override val queryID: QueryID? = null,
         override val resources: Resources? = null
-    ) : InsightsEvent(eventName, indexName, userToken, timestamp, queryID, resources)
+    ) : InsightsEvent()
 
-    sealed class Resources {
+    public sealed class Resources {
 
-        data class ObjectIDs(val objectIDs: List<ObjectID>) : Resources() {
+        public data class ObjectIDs(val objectIDs: List<ObjectID>) : Resources() {
 
             init {
                 if (objectIDs.size > 20)
@@ -69,7 +69,7 @@ sealed class InsightsEvent(
             }
         }
 
-        data class Filters(val filters: List<FilterFacet>) : Resources() {
+        public data class Filters(val filters: List<FilterFacet>) : Resources() {
 
             init {
                 if (filters.size > 10)
@@ -79,7 +79,7 @@ sealed class InsightsEvent(
     }
 
     @Serializer(InsightsEvent::class)
-    companion object : SerializationStrategy<InsightsEvent> {
+    internal companion object : SerializationStrategy<InsightsEvent> {
 
         private infix fun JsonObjectBuilder.stringify(resources: Resources?) {
             when (resources) {
