@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class ResponseSearchSynonyms(
+public data class ResponseSearchSynonyms(
     @SerialName(KeyHits) val hits: List<Synonym>,
     @SerialName(KeyNbHits) val nbHits: Int
 )

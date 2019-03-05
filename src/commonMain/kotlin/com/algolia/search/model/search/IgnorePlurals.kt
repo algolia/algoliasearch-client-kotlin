@@ -9,17 +9,17 @@ import kotlinx.serialization.json.JsonLiteral
 
 
 @Serializable(IgnorePlurals.Companion::class)
-sealed class IgnorePlurals {
+public sealed class IgnorePlurals {
 
-    data class Boolean(val boolean: kotlin.Boolean) : IgnorePlurals()
+    public data class Boolean(val boolean: kotlin.Boolean) : IgnorePlurals()
 
-    data class QueryLanguages(val queryLanguages: List<QueryLanguage>) : IgnorePlurals() {
+    public data class QueryLanguages(val queryLanguages: List<QueryLanguage>) : IgnorePlurals() {
 
-        constructor(vararg queryLanguage: QueryLanguage) : this(queryLanguage.toList())
+        public constructor(vararg queryLanguage: QueryLanguage) : this(queryLanguage.toList())
     }
 
     @Serializer(IgnorePlurals::class)
-    companion object : KSerializer<IgnorePlurals> {
+    internal companion object : KSerializer<IgnorePlurals> {
 
         override fun serialize(encoder: Encoder, obj: IgnorePlurals) {
             when (obj) {

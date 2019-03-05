@@ -1,15 +1,16 @@
 package suite
 
-import com.algolia.search.browseAllABTests
+import com.algolia.search.helper.browseAllABTests
 import com.algolia.search.client.ClientAnalytics
+import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.toAPIKey
-import com.algolia.search.toApplicationID
-import com.algolia.search.toIndexName
+import com.algolia.search.helper.toAPIKey
+import com.algolia.search.helper.toApplicationID
+import com.algolia.search.helper.toIndexName
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import shouldEqual
@@ -30,12 +31,15 @@ internal val clientAdmin2 = ClientSearch(
     System.getenv("ALGOLIA_APPLICATION_ID_2").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_2").toAPIKey()
 )
-
 internal val clientMcm = ClientSearch(
     System.getenv("ALGOLIA_ADMIN_ID_MCM").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_MCM").toAPIKey()
 )
 internal val clientAnalytics = ClientAnalytics(
+    System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
+    System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
+)
+internal val clientInsights = ClientInsights(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
 )
@@ -91,7 +95,7 @@ internal suspend fun cleanABTest(suffix: String) {
 internal suspend fun cleanIndex(client: ClientSearch, suffix: String) {
     val indexToDelete = mutableListOf<IndexName>()
 
-    client.listIndexes().items.forEach {
+    client.listIndices().items.forEach {
         val indexName = it.indexName.raw
 
         if (indexName.contains("kotlin")) {

@@ -24,14 +24,13 @@ internal class EndpointSettingsImpl(
 ) : EndpointSettings,
     APIWrapper by api {
 
-    private val route = "/settings"
 
-    // TODO Specify why v1 / v2 in comment
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
-        return retryRead(requestOptions, indexName.toPath(route)) { url ->
+        return retryRead(requestOptions, indexName.toPath(RouteSettings)) { url ->
             val json = httpClient.get<JsonObject>(url) {
                 setRequestOptions(requestOptions)
             }
+            // The following lines handle the old names of attributes, thus providing backward compatibility.
             val settings = Json.nonstrict.fromJson(Settings.serializer(), json)
             val attributesToIndex = json.getArrayOrNull(KeyAttributesToIndex)?.let {
                 Json.plain.fromJson(SearchableAttribute.list, it)
@@ -61,7 +60,7 @@ internal class EndpointSettingsImpl(
         val resets = json { resetToDefault.forEach { it.raw to JsonNull } }
         val bodyString = settings.toJsonNoDefaults().merge(resets).toString()
 
-        return retryWrite(requestOptions, indexName.toPath(route)) { url ->
+        return retryWrite(requestOptions, indexName.toPath(RouteSettings)) { url ->
             httpClient.put<RevisionIndex>(url) {
                 body = bodyString
                 parameter(KeyForwardToReplicas, forwardToReplicas)

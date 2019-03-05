@@ -1,6 +1,6 @@
 package com.algolia.search.model
 
-import com.algolia.search.toUserID
+import com.algolia.search.helper.toUserID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -9,13 +9,13 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(UserID.Companion::class)
-data class UserID(override val raw: String) : Raw<String> {
+public data class UserID(override val raw: String) : Raw<String> {
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<UserID> {
+    internal companion object : KSerializer<UserID> {
 
         private val serializer = StringSerializer
 

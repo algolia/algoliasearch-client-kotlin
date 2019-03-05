@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        ktor = '1.1.2'
+        ktor = '1.2.0-SNAPSHOT'
         okhttp = '3.11.0'
     }
 }
@@ -21,7 +21,7 @@ repositories {
 
 apply plugin: 'maven-publish'
 
-version '0.0.1'
+version '1.0.0'
 group 'com.algolia.algoliasearch'
 
 kotlin {

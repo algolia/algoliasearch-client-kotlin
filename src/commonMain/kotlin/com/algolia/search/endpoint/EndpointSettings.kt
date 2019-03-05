@@ -7,7 +7,7 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
 
 
-interface EndpointSettings {
+public interface EndpointSettings {
 
     val indexName: IndexName
 

@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class ResponseBatch(
+public data class ResponseBatch(
     @SerialName(KeyTaskID) override val taskID: TaskID,
     @SerialName(KeyObjectIDs) val objectIDs: List<ObjectID?>
 ) : Task

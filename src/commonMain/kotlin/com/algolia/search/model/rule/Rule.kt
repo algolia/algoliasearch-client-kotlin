@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class Rule(
+public data class Rule(
     @SerialName(KeyObjectID) val objectID: ObjectID,
     @SerialName(KeyCondition) val condition: Condition,
     @SerialName(KeyConsequence) val consequence: Consequence,

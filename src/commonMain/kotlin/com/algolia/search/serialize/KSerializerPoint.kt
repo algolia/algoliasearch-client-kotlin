@@ -1,6 +1,6 @@
 package com.algolia.search.serialize
 
-import com.algolia.search.and
+import com.algolia.search.helper.and
 import com.algolia.search.model.search.Point
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
@@ -8,7 +8,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.internal.StringSerializer
 
 
-object KSerializerPoint : KSerializer<Point> {
+internal object KSerializerPoint : KSerializer<Point> {
 
     private val serializer = StringSerializer
 

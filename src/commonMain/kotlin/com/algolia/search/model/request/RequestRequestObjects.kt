@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class RequestRequestObjects(
+internal data class RequestRequestObjects(
     @SerialName(KeyRequests) val requests: List<RequestObjects>
 )
