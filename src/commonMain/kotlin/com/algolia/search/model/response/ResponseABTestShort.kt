@@ -1,24 +1,23 @@
 package com.algolia.search.model.response
 
+import com.algolia.search.helper.toABTestID
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.serialize.*
-import com.algolia.search.toABTestID
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.long
 
 @Serializable(ResponseABTestShort.Companion::class)
-data class ResponseABTestShort(
+public data class ResponseABTestShort(
     val abTestId: ABTestID,
     val variantA: Variant,
     val variantB: Variant
 ) {
 
     @Serializer(ResponseABTestShort::class)
-    companion object :
+    internal companion object :
         KSerializer<ResponseABTestShort> {
 
         override fun serialize(encoder: Encoder, obj: ResponseABTestShort) {
@@ -41,10 +40,10 @@ data class ResponseABTestShort(
 
         override fun deserialize(decoder: Decoder): ResponseABTestShort {
             val json = decoder.asJsonInput().jsonObject
-            val variants = json[KeyVariants].jsonArray
+            val variants = json.getArray(KeyVariants)
 
             return ResponseABTestShort(
-                abTestId = json[KeyId].long.toABTestID(),
+                abTestId = json.getPrimitive(KeyId).long.toABTestID(),
                 variantA = Json.noDefaults.fromJson(
                     KSerializerVariant,
                     variants[0]

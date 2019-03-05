@@ -19,7 +19,7 @@ internal class TestACL : TestSerializer<ACL>(ACL) {
         ACL.DeleteIndex to JsonLiteral(ACL.DeleteIndex.raw),
         ACL.Settings to JsonLiteral(ACL.Settings.raw),
         ACL.EditSettings to JsonLiteral(ACL.EditSettings.raw),
-        ACL.ListIndexes to JsonLiteral(ACL.ListIndexes.raw),
+        ACL.ListIndices to JsonLiteral(ACL.ListIndices.raw),
         ACL.Logs to JsonLiteral(ACL.Logs.raw),
         ACL.Analytics to JsonLiteral(ACL.Analytics.raw),
         ACL.SeeUnretrievableAttributes to JsonLiteral(ACL.SeeUnretrievableAttributes.raw),

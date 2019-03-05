@@ -12,17 +12,17 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(Scope.Companion::class)
-sealed class Scope(override val raw: String) : Raw<String> {
+public sealed class Scope(override val raw: String) : Raw<String> {
 
-    object Settings : Scope(KeySettings)
+    public object Settings : Scope(KeySettings)
 
-    object Synonyms : Scope(KeySynonyms)
+    public object Synonyms : Scope(KeySynonyms)
 
-    object Rules : Scope(KeyRules)
+    public object Rules : Scope(KeyRules)
 
-    data class Other(override val raw: String) : Scope(raw)
+    public data class Other(override val raw: String) : Scope(raw)
 
-    companion object : KSerializer<Scope> {
+    internal companion object : KSerializer<Scope> {
 
         private val serializer = StringSerializer
 

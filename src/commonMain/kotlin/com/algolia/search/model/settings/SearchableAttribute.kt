@@ -1,26 +1,28 @@
 package com.algolia.search.model.settings
 
+import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyOrdered
 import com.algolia.search.serialize.KeyUnordered
 import com.algolia.search.serialize.regexOrdered
 import com.algolia.search.serialize.regexUnordered
-import com.algolia.search.toAttribute
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(SearchableAttribute.Companion::class)
-sealed class SearchableAttribute(open val attribute: Attribute) {
+public sealed class SearchableAttribute {
 
-    data class Default(override val attribute: Attribute) : SearchableAttribute(attribute)
+    abstract val attribute: Attribute
 
-    data class Ordered(override val attribute: Attribute) : SearchableAttribute(attribute)
+    public data class Default(override val attribute: Attribute) : SearchableAttribute()
 
-    data class Unordered(override val attribute: Attribute) : SearchableAttribute(attribute)
+    public data class Ordered(override val attribute: Attribute) : SearchableAttribute()
+
+    public data class Unordered(override val attribute: Attribute) : SearchableAttribute()
 
     @Serializer(SearchableAttribute::class)
-    companion object : KSerializer<SearchableAttribute> {
+    internal companion object : KSerializer<SearchableAttribute> {
 
         override fun serialize(encoder: Encoder, obj: SearchableAttribute) {
             val string = when (obj) {

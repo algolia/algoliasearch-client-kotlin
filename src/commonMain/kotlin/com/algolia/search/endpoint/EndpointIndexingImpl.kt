@@ -1,6 +1,7 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.client.*
+import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
@@ -18,9 +19,8 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.Task
-import com.algolia.search.query.copyAndBuildFilters
+import com.algolia.search.filter.build
 import com.algolia.search.serialize.*
-import com.algolia.search.toIndexName
 import io.ktor.client.request.*
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
@@ -136,7 +136,7 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): RevisionIndex {
-        val copy = query.copyAndBuildFilters()
+        val copy = query.build()
         val bodyString = json { KeyParams to copy.toJsonNoDefaults().urlEncode() }.toString()
 
         return retryWrite(requestOptions, indexName.toPath("/deleteByQuery")) { url ->
@@ -189,7 +189,7 @@ internal class EndpointIndexingImpl(
         val requests = objectIDs.map { RequestObjects(indexName, it, attributesToRetrieve) }
         val bodyString = Json.noDefaults.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
-        return retryRead(requestOptions, "/1/indexes/*/objects") { url ->
+        return retryRead(requestOptions, "$RouteIndexesV1/*/objects") { url ->
             httpClient.post<ResponseObjects>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)

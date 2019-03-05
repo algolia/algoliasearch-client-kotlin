@@ -12,7 +12,7 @@ import kotlinx.serialization.json.JsonObject
 
 
 @Serializable
-data class ResponseUserID(
+public data class ResponseUserID(
     @SerialName(KeyUserID) val userID: UserID,
     @SerialName(KeyNbRecords) val nbRecords: Long,
     @SerialName(KeyDataSize) val dataSize: Long,
@@ -22,14 +22,14 @@ data class ResponseUserID(
 ) {
 
     @Transient
-    val clusterName: ClusterName
+    public val clusterName: ClusterName
         get() = clusterNameOrNull!!
 
     @Transient
-    val objectID: ObjectID
+    public val objectID: ObjectID
         get() = objectIDOrNull!!
 
     @Transient
-    val highlight: JsonObject
+    public val highlight: JsonObject
         get() = highlightOrNull!!
 }

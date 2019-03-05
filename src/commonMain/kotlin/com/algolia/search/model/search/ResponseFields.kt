@@ -10,35 +10,35 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(ResponseFields.Companion::class)
-sealed class ResponseFields(override val raw: String) : Raw<String> {
+public sealed class ResponseFields(override val raw: String) : Raw<String> {
 
-    object All : ResponseFields(KeyStar)
-    object AroundLatLng : ResponseFields(KeyAroundLatLng)
-    object AutomaticRadius : ResponseFields(KeyAutomaticRadius)
-    object ExhaustiveFacetsCount : ResponseFields(KeyExhaustiveFacetsCount)
-    object Facets : ResponseFields(KeyFacets)
-    object FacetsStats : ResponseFields(KeyFacets_Stats)
-    object Hits : ResponseFields(KeyHits)
-    object HitsPerPage : ResponseFields(KeyHitsPerPage)
-    object Index : ResponseFields(KeyIndex)
-    object Length : ResponseFields(KeyLength)
-    object NbHits : ResponseFields(KeyNbHits)
-    object NbPages : ResponseFields(KeyNbPages)
-    object Offset : ResponseFields(KeyOffset)
-    object Page : ResponseFields(KeyPage)
-    object Params : ResponseFields(KeyParams)
-    object ProcessingTimeMS : ResponseFields(KeyProcessingTimeMS)
-    object Query : ResponseFields(KeyQuery)
-    object QueryAfterRemoval : ResponseFields(KeyQueryAfterRemoval)
-    object UserData : ResponseFields(KeyUserData)
+    public object All : ResponseFields(KeyStar)
+    public object AroundLatLng : ResponseFields(KeyAroundLatLng)
+    public object AutomaticRadius : ResponseFields(KeyAutomaticRadius)
+    public object ExhaustiveFacetsCount : ResponseFields(KeyExhaustiveFacetsCount)
+    public object Facets : ResponseFields(KeyFacets)
+    public object FacetsStats : ResponseFields(KeyFacets_Stats)
+    public object Hits : ResponseFields(KeyHits)
+    public object HitsPerPage : ResponseFields(KeyHitsPerPage)
+    public object Index : ResponseFields(KeyIndex)
+    public object Length : ResponseFields(KeyLength)
+    public object NbHits : ResponseFields(KeyNbHits)
+    public object NbPages : ResponseFields(KeyNbPages)
+    public object Offset : ResponseFields(KeyOffset)
+    public object Page : ResponseFields(KeyPage)
+    public object Params : ResponseFields(KeyParams)
+    public object ProcessingTimeMS : ResponseFields(KeyProcessingTimeMS)
+    public object Query : ResponseFields(KeyQuery)
+    public object QueryAfterRemoval : ResponseFields(KeyQueryAfterRemoval)
+    public object UserData : ResponseFields(KeyUserData)
 
-    data class Other(override val raw: String) : ResponseFields(raw)
+    public data class Other(override val raw: String) : ResponseFields(raw)
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<ResponseFields> {
+    internal companion object : KSerializer<ResponseFields> {
 
         private val serializer = StringSerializer
 
