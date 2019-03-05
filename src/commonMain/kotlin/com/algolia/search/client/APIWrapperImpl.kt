@@ -3,7 +3,8 @@ package com.algolia.search.client
 import com.algolia.search.host.RetryLogic
 import com.algolia.search.host.readHosts
 import com.algolia.search.host.writeHosts
-import com.algolia.search.model.queryrule.QueryRule
+import com.algolia.search.model.rule.Rule
+import com.algolia.search.model.response.ResponseABTest
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.revision.RevisionIndex
@@ -35,9 +36,10 @@ internal class APIWrapperImpl(
                     it.register(ResponseBatches)
                     it.register(Synonym)
                     it.register(JsonObjectSerializer)
-                    it.register(QueryRule.serializer())
+                    it.register(Rule.serializer())
                     it.register(CreationAPIKey.serializer())
                     it.register(RevisionIndex.serializer())
+                    it.register(ResponseABTest)
                 }
         }
         install(DefaultRequest) {

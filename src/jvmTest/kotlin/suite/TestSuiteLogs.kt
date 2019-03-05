@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.model.enums.LogType
+import com.algolia.search.model.LogType
 import com.algolia.search.toIndexName
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -19,7 +19,7 @@ internal class TestSuiteLogs {
                 listIndexes()
                 listIndexes()
                 getLogs(length = 2, offset = 0, logType = LogType.All).logs.size shouldEqual 2
-                getIndex("products_android_demo".toIndexName()).getLogs()
+                initIndex("products_android_demo".toIndexName()).getLogs()
             }
         }
     }

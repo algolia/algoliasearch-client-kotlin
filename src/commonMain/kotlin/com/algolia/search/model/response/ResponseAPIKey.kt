@@ -1,5 +1,6 @@
 package com.algolia.search.model.response
 
+import com.algolia.search.ClientDate
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
@@ -7,6 +8,7 @@ import com.algolia.search.serialize.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 
 @Serializable
@@ -14,12 +16,45 @@ data class ResponseAPIKey(
     @SerialName(KeyValue) val apiKey: APIKey,
     @SerialName(KeyValidity) val validity: Long,
     @SerialName(KeyAcl) val rights: List<ACL>,
-    @Optional @SerialName(KeyMaxQueriesPerIPPerHour) val maxQueriesPerIPPerHour: Int? = null,
-    @Optional @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQuery: Int? = null,
-    @Optional @SerialName(KeyCreatedAt) val createdAt: Long? = null,
-    @Optional @SerialName(KeyDescription) val description: String? = null,
-    @Optional @SerialName(KeyIndex) val index: IndexName? = null,
-    @Optional @SerialName(KeyIndexes) val indexes: List<IndexName>? = null,
-    @Optional @SerialName(KeyReferers) val referers: List<String>? = null,
-    @Optional @SerialName(KeyQueryParameters) val query: String? = null
-)
+    @Optional @SerialName(KeyMaxQueriesPerIPPerHour) val maxQueriesPerIPPerHourOrNull: Int? = null,
+    @Optional @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQueryOrNull: Int? = null,
+    @Optional @SerialName(KeyCreatedAt) val createdAtOrNull: ClientDate? = null,
+    @Optional @SerialName(KeyDescription) val descriptionOrNull: String? = null,
+    @Optional @SerialName(KeyIndex) val indexOrNull: IndexName? = null,
+    @Optional @SerialName(KeyIndexes) val indexesOrNull: List<IndexName>? = null,
+    @Optional @SerialName(KeyReferers) val referersOrNull: List<String>? = null,
+    @Optional @SerialName(KeyQueryParameters) val queryOrNull: String? = null
+) {
+
+    @Transient
+    val maxQueriesPerIPPerHour: Int
+        get() = maxQueriesPerIPPerHourOrNull!!
+
+    @Transient
+    val maxHitsPerQuery: Int
+        get() = maxHitsPerQueryOrNull!!
+
+    @Transient
+    val createdAt: ClientDate
+        get() = createdAtOrNull!!
+
+    @Transient
+    val description: String
+        get() = descriptionOrNull!!
+
+    @Transient
+    val index: IndexName
+        get() = indexOrNull!!
+
+    @Transient
+    val indexes: List<IndexName>
+        get() = indexesOrNull!!
+
+    @Transient
+    val referers: List<String>
+        get() = referersOrNull!!
+
+    @Transient
+    val query: String
+        get() = queryOrNull!!
+}
