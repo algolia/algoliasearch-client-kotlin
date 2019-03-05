@@ -1,26 +1,27 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.helper.and
 import com.algolia.search.model.Raw
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.FloatSerializer
 
 
 @Serializable(Polygon.Companion::class)
-data class Polygon(
+public data class Polygon(
     val point1: Point,
     val point2: Point,
     val point3: Point,
     private val points: List<Point>
 ) : Raw<List<Float>> {
 
-    constructor(point1: Point, point2: Point, point3: Point, vararg points: Point) : this(
+    public constructor(point1: Point, point2: Point, point3: Point, vararg points: Point) : this(
         point1,
         point2,
         point3,
         points.toList()
     )
 
-    operator fun get(index: Int): Point {
+    public operator fun get(index: Int): Point {
         return when (index) {
             0 -> point1
             1 -> point2
@@ -36,7 +37,7 @@ data class Polygon(
         *points.flatMap { it.raw }.toTypedArray()
     )
 
-    companion object : KSerializer<Polygon> {
+    internal companion object : KSerializer<Polygon> {
 
         private val serializer = FloatSerializer.list
 
@@ -50,11 +51,11 @@ data class Polygon(
             val floats = serializer.deserialize(decoder)
 
             return Polygon(
-                Point(floats[0], floats[1]),
-                Point(floats[2], floats[3]),
-                Point(floats[4], floats[5]),
+                floats[0] and floats[1],
+                floats[2] and floats[3],
+                floats[4] and floats[5],
                 (6 until floats.size step 2).map {
-                    Point(floats[it], floats[it + 1])
+                    floats[it] and floats[it + 1]
                 }
             )
         }

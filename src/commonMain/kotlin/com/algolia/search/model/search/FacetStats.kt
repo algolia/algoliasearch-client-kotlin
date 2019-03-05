@@ -9,9 +9,9 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class FacetStats(
-    @SerialName(KeyMin) val min: Int,
-    @SerialName(KeyMax) val max: Int,
+public data class FacetStats(
+    @SerialName(KeyMin) val min: Float,
+    @SerialName(KeyMax) val max: Float,
     @SerialName(KeyAvg) val average: Float,
     @SerialName(KeySum) val sum: Float
 )

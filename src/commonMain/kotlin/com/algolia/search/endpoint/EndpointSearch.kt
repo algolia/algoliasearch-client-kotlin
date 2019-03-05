@@ -3,13 +3,13 @@ package com.algolia.search.endpoint
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.search.Cursor
-import com.algolia.search.model.search.Query
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacetValue
+import com.algolia.search.model.search.Cursor
+import com.algolia.search.model.search.Query
 
 
-interface EndpointSearch {
+public interface EndpointSearch {
 
     val indexName: IndexName
 

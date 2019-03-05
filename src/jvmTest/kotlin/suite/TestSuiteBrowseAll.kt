@@ -1,12 +1,13 @@
 package suite
-import com.algolia.search.browseAllObjects
-import com.algolia.search.browseAllRules
-import com.algolia.search.browseAllSynonyms
+
+import com.algolia.search.helper.browseAllObjects
+import com.algolia.search.helper.browseAllRules
+import com.algolia.search.helper.browseAllSynonyms
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.toObjectID
+import com.algolia.search.helper.toObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.json
 import org.junit.Before

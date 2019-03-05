@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class RequestSearchRules(
+internal data class RequestSearchRules(
     @Optional @SerialName(KeyQuery) val query: String? = null,
     @Optional @SerialName(KeyAnchoring) val anchoring: Anchoring? = null,
     @Optional @SerialName(KeyContext) val context: String? = null,

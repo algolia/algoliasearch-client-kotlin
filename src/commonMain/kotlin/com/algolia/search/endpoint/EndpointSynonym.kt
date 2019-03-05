@@ -11,7 +11,7 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
 
 
-interface EndpointSynonym {
+public interface EndpointSynonym {
 
     val indexName: IndexName
 
@@ -40,7 +40,7 @@ interface EndpointSynonym {
         query: String? = null,
         page: Int? = null,
         hitsPerPage: Int? = null,
-        synonymType: List<SynonymType>? = null,
+        synonymTypes: List<SynonymType>? = null,
         requestOptions: RequestOptions? = null
     ): ResponseSearchSynonyms
 

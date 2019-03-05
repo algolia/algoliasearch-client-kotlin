@@ -1,30 +1,35 @@
 package com.algolia.search.host
 
-import com.algolia.search.Time
 import com.algolia.search.client.Configuration
 import com.algolia.search.model.ApplicationID
+import com.algolia.search.model.Time
 import kotlin.random.Random
 
 
-internal typealias HostStatuses = Pair<HostStatus, Long>
+internal data class HostStatus(
+    val state: HostState,
+    val timestamp: Long
+)
 
 internal val ApplicationID.readHost get() = "https://$this-dsn.algolia.net"
 internal val ApplicationID.writeHost get() = "https://$this.algolia.net"
 
-internal fun HostStatus.getHostStatus() = this to Time.getCurrentTimeMillis()
+internal infix fun HostState.to(timestamp: Long) = HostStatus(this, timestamp)
 
-internal fun List<HostStatuses>.areStatusExpired(hostStatusExpirationDelay: Long): Boolean {
-    val lastRequestTimestamp = maxBy { it.second }?.second ?: 0L
-    val someTimeAgo = Time.getCurrentTimeMillis() - hostStatusExpirationDelay
+internal fun HostState.getHostStatus() = this to Time.getCurrentTimeMillis()
 
-    return lastRequestTimestamp <= someTimeAgo
+internal fun List<HostStatus>.areStatusExpired(hostStatusExpirationDelay: Long): Boolean {
+    val lastRequestTimestamp = maxBy { it.timestamp }?.timestamp ?: 0L
+    val timeDelayExpired = Time.getCurrentTimeMillis() - hostStatusExpirationDelay
+
+    return lastRequestTimestamp <= timeDelayExpired
 }
 
-internal fun List<HostStatuses>.selectNextHostIndex(): Int {
-    val hasUp = firstOrNull { it.first == HostStatus.Up }
-    val hasUnknown = hasUp ?: firstOrNull { it.first == HostStatus.Unknown }
+internal fun List<HostStatus>.selectNextHostIndex(): Int? {
+    val hasUp = firstOrNull { it.state == HostState.Up }
+    val hasUnknown = hasUp ?: firstOrNull { it.state == HostState.Unknown }
 
-    return indexOf(hasUnknown).coerceAtLeast(0)
+    return hasUnknown?.let(::indexOf)
 }
 
 internal fun List<String>.randomize(): List<String> {
@@ -37,7 +42,11 @@ internal fun List<String>.randomize(): List<String> {
     return destination
 }
 
-internal fun List<String>.initialHostStatus() = map { HostStatus.Unknown to 0L }.toMutableList()
+internal fun List<HostStatus>.nextIndex(index: Int): Int {
+    return if (index + 1 > lastIndex) 0 else index + 1
+}
+
+internal fun List<String>.initialHostStatus() = map { HostStatus(HostState.Unknown, 0L) }.toMutableList()
 
 internal fun ApplicationID.buildFallbackHosts(): List<String> {
     return listOf(

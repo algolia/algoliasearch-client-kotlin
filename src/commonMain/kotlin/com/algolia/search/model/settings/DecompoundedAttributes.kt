@@ -7,7 +7,7 @@ import kotlinx.serialization.internal.HashMapSerializer
 
 
 @Serializable(DecompoundedAttributes.Companion::class)
-data class DecompoundedAttributes internal constructor(
+public data class DecompoundedAttributes internal constructor(
     val map: Map<QueryLanguage, List<Attribute>>
 ) {
 
@@ -16,11 +16,22 @@ data class DecompoundedAttributes internal constructor(
         attributes: List<Attribute>
     ) : this(mapOf(language to attributes.toList()))
 
-    constructor(language: QueryLanguage.Finnish, vararg attributes: Attribute) : this(language, attributes.toList())
-    constructor(language: QueryLanguage.German, vararg attributes: Attribute) : this(language, attributes.toList())
-    constructor(language: QueryLanguage.Dutch, vararg attributes: Attribute) : this(language, attributes.toList())
+    public constructor(
+        language: QueryLanguage.German,
+        vararg attributes: Attribute
+    ) : this(language, attributes.toList())
 
-    companion object : KSerializer<DecompoundedAttributes> {
+    public constructor(
+        language: QueryLanguage.Finnish,
+        vararg attributes: Attribute
+    ) : this(language, attributes.toList())
+
+    public constructor(
+        language: QueryLanguage.Dutch,
+        vararg attributes: Attribute
+    ) : this(language, attributes.toList())
+
+    internal companion object : KSerializer<DecompoundedAttributes> {
 
         private val serializer = HashMapSerializer(QueryLanguage, Attribute.list)
 
@@ -31,11 +42,7 @@ data class DecompoundedAttributes internal constructor(
         }
 
         override fun deserialize(decoder: Decoder): DecompoundedAttributes {
-            return DecompoundedAttributes(
-                serializer.deserialize(
-                    decoder
-                )
-            )
+            return DecompoundedAttributes(serializer.deserialize(decoder))
         }
     }
 }

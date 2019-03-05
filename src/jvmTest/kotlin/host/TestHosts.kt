@@ -1,14 +1,12 @@
 package host
 
-import com.algolia.search.model.ApplicationID
 import com.algolia.search.host.buildFallbackHosts
-import com.algolia.search.host.randomize
 import com.algolia.search.host.readHost
 import com.algolia.search.host.writeHost
+import com.algolia.search.model.ApplicationID
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import shouldBeFalse
 import shouldBeTrue
 import shouldEqual
 
@@ -33,16 +31,5 @@ internal class TestHosts {
         hosts.contains("https://$applicationId-2.$host").shouldBeTrue()
         hosts.contains("https://$applicationId-3.$host").shouldBeTrue()
         hosts.size shouldEqual 3
-    }
-
-    @Test
-    fun random() {
-        val result = (0 until 1000).map {
-            val hosts = applicationId.buildFallbackHosts()
-            val randomized = hosts.randomize()
-
-            randomized[0] == "$applicationId-1.$host"
-        }
-        result.all { it }.shouldBeFalse()
     }
 }

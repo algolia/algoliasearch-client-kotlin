@@ -30,9 +30,9 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             attributesForFaceting = attributes.map { AttributeForFaceting.Default(it) },
             unretrievableAttributes = attributes,
             attributesToRetrieve = attributes,
-            // Ranking
-            ranking = listOf(Ranking.Geo),
-            customRanking = listOf(CustomRanking.Asc(attributeA)),
+            // RankingCriteria
+            ranking = listOf(RankingCriteria.Geo),
+            customRanking = listOf(CustomRankingCriteria.Asc(attributeA)),
             replicas = listOf(indexA),
             // Faceting
             maxValuesPerFacet = int,
@@ -56,8 +56,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             disableTypoToleranceOnWords = listOf(string),
             separatorsToIndex = string,
             // Languages
-            ignorePlurals = BooleanOrQueryLanguages.Boolean(boolean),
-            removeStopWords = BooleanOrQueryLanguages.Boolean(boolean),
+            ignorePlurals = IgnorePlurals.Boolean(boolean),
+            removeStopWords = RemoveStopWords.Boolean(boolean),
             camelCaseAttributes = attributes,
             decompoundedAttributes = listOf(TestDecompoundedAttributes.item),
             keepDiacriticsOnCharacters = string,
@@ -90,9 +90,9 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyAttributesForFaceting to attributesJson
             KeyUnretrievableAttributes to attributesJson
             KeyAttributesToRetrieve to attributesJson
-            // Ranking
-            KeyRanking to jsonArray { +Ranking.Geo.raw }
-            KeyCustomRanking to jsonArray { +CustomRanking.Asc(attributeA).raw }
+            // RankingCriteria
+            KeyRanking to jsonArray { +RankingCriteria.Geo.raw }
+            KeyCustomRanking to jsonArray { +CustomRankingCriteria.Asc(attributeA).raw }
             KeyReplicas to jsonArray { +indexA.raw }
             // Faceting
             KeyMaxValuesPerFacet to int

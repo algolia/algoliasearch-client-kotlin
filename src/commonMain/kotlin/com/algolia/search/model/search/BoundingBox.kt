@@ -1,19 +1,20 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.helper.and
 import com.algolia.search.model.Raw
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.FloatSerializer
 
 
 @Serializable(BoundingBox.Companion::class)
-data class BoundingBox(
+public data class BoundingBox(
     val point1: Point,
     val point2: Point
 ) : Raw<List<Float>> {
 
     override val raw = listOf(point1.latitude, point1.longitude, point2.latitude, point2.longitude)
 
-    companion object : KSerializer<BoundingBox> {
+    internal companion object : KSerializer<BoundingBox> {
 
         private val serializer = FloatSerializer
 
@@ -27,14 +28,8 @@ data class BoundingBox(
             val floats = serializer.list.deserialize(decoder)
 
             return BoundingBox(
-                Point(
-                    floats[0],
-                    floats[1]
-                ),
-                Point(
-                    floats[2],
-                    floats[3]
-                )
+                floats[0] and floats[1],
+                floats[2] and floats[3]
             )
         }
     }

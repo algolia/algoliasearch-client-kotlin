@@ -20,6 +20,8 @@ internal val regexFilterOnly = Regex("^$KeyFilterOnly\\((.*)\\)$")
 internal val regexSearchable = Regex("^$KeySearchable\\((.*)\\)$")
 internal val regexFacet = Regex("^\\{facet:(.*)}$")
 internal val regexPlaceholder = Regex("^<(.*)>$")
+internal val regexPoint = Regex("^(.*),(.*)$")
+internal val regexUserToken = Regex("^[a-zA-Z0-9_-]*$")
 
 internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     return toMutableMap().run {
@@ -44,21 +46,21 @@ internal fun Encoder.asJsonOutput() = this as JsonOutput
 
 
 internal fun Query.toJsonNoDefaults(): JsonObject {
-    return JsonNoNulls.toJson(Query.serializer(), this).jsonObject
+    return Json.noDefaults.toJson(Query.serializer(), this).jsonObject
 }
 
 internal fun Settings.toJsonNoDefaults(): JsonObject {
-    return JsonNoNulls.toJson(Settings.serializer(), this).jsonObject
+    return Json.noDefaults.toJson(Settings.serializer(), this).jsonObject
 }
 
 internal fun RequestAPIKey.stringify(): String {
-    return JsonNoNulls.stringify(RequestAPIKey.serializer(), this)
+    return Json.noDefaults.stringify(RequestAPIKey.serializer(), this)
 }
 
-internal fun JsonObject.toHighlights() = Json.plain.fromJson(KSerializerHighlights, this)
+internal fun JsonObject.toHighlightResults() = Json.plain.fromJson(KSerializerHighlightResults, this)
 
-internal fun JsonObject.toSnippets() = Json.plain.fromJson(KSerializerSnippets, this)
+internal fun JsonObject.toSnippetResults() = Json.plain.fromJson(KSerializerSnippetResults, this)
 
 internal fun JsonObject.toRankingInfo() = Json.plain.fromJson(RankingInfo.serializer(), this)
 
-internal val JsonNoNulls = Json(encodeDefaults = false)
+internal val Json.Companion.noDefaults get() = Json(encodeDefaults = false)
