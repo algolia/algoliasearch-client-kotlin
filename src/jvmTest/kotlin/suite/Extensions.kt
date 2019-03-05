@@ -51,7 +51,7 @@ internal fun testSuiteIndexName(suffix: String): IndexName {
 
 internal suspend fun cleanABTest(suffix: String) {
     clientAnalytics.browseAllABTests {
-        abTests?.forEach {
+        abTests.forEach {
             val result = Regex("kotlin-(.*)-qlitzler-$suffix").find(it.name)
             val date = result?.groupValues?.get(1)
 
@@ -60,7 +60,7 @@ internal suspend fun cleanABTest(suffix: String) {
                 val difference = Date().time - dateFormat.parse(date).time
 
                 if (difference >= dayInMillis) {
-                    clientAdmin1.initIndex(it.variantA.indexName).apply {
+                    clientAdmin1.initIndex(it.name.toIndexName()).apply {
                         clientAnalytics.deleteABTest(it.abTestID).wait() shouldEqual TaskStatus.Published
                     }
                 }

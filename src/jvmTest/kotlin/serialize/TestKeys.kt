@@ -310,6 +310,7 @@ internal class TestKeys {
         KeyStopped shouldEqual "stopped"
         KeyExpired shouldEqual "expired"
         KeyFailed shouldEqual "failed"
+        KeyPercentage shouldEqual "percentage"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

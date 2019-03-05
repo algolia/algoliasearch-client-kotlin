@@ -52,7 +52,7 @@ internal class TestSuiteSearch {
                 val hits = search(Query("elon", clickAnalytics = true)).hits
 
                 hits.shouldNotBeNull()
-                hits!!.shouldNotBeEmpty()
+                hits.shouldNotBeEmpty()
 
                 search(Query(facets = allFacets, filters = "company:tesla")).nbHits shouldEqual 1
                 search(Query(facets = allFacets, filters = "(company:tesla OR company:spacex)")).nbHits shouldEqual 2
