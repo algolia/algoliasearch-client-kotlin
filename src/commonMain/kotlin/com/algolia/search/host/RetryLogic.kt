@@ -1,5 +1,6 @@
 package com.algolia.search.host
 
+import com.algolia.search.exception.RetryableException
 import io.ktor.client.features.BadResponseStatusException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.withTimeout
@@ -20,7 +21,8 @@ internal class RetryLogic(
         timeout: Long,
         path: String,
         attempt: Int,
-        request: suspend (String) -> T
+        request: suspend (String) -> T,
+        exceptions: List<Exception>
     ): T {
         if (statuses.areStatusExpired(hostStatusExpirationDelay)) {
             for (index in statuses.indices) {
@@ -31,13 +33,13 @@ internal class RetryLogic(
         val host = hosts[index]
 
         return try {
-            withTimeout(timeout * attempt) {
+            withTimeout(timeout * attempt + 1) {
                 val response = request("$host$path")
                 statuses[index] = HostStatus.Up.getHostStatus()
                 response
             }
         } catch (exception: Exception) {
-            if (attempt > maxAttempts) throw exception // Todo Unreachable host attempt and exceptions - stack of
+            if (attempt >= maxAttempts) throw RetryableException(attempt, exceptions)
             when (exception) {
                 is BadResponseStatusException -> {
                     val code = exception.response.status.value
@@ -48,10 +50,12 @@ internal class RetryLogic(
                         statuses[index] = HostStatus.Down.getHostStatus()
                     } else throw exception
                 }
-                is IOException, is TimeoutCancellationException -> statuses[index] = HostStatus.Down.getHostStatus()
+                is IOException, is TimeoutCancellationException -> {
+                    statuses[index] = HostStatus.Down.getHostStatus()
+                }
                 else -> throw exception
             }
-            retry(timeout, path, attempt + 1, request)
+            retry(timeout, path, attempt + 1, request, exceptions.plus(exception))
         }
     }
 
@@ -60,6 +64,6 @@ internal class RetryLogic(
         path: String,
         request: suspend (String) -> T
     ): T {
-        return retry(timeout, path, 1, request)
+        return retry(timeout, path, 0, request, listOf())
     }
 }

@@ -1,5 +1,6 @@
 package host
 
+import com.algolia.search.exception.RetryableException
 import com.algolia.search.host.HostStatus
 import com.algolia.search.host.RetryLogic
 import com.algolia.search.host.readHosts
@@ -11,6 +12,7 @@ import io.ktor.client.features.BadResponseStatusException
 import io.ktor.client.request.get
 import io.ktor.client.response.HttpResponse
 import io.ktor.http.HttpStatusCode
+import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -18,6 +20,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldBeTrue
 import shouldEqual
+import shouldNotBeNull
 
 
 @RunWith(JUnit4::class)
@@ -116,6 +119,32 @@ internal class TestRetryLogic {
             statuses[1].first shouldEqual HostStatus.Unknown
             statuses[2].first shouldEqual HostStatus.Unknown
             statuses[3].first shouldEqual HostStatus.Unknown
+        }
+    }
+
+    @Test
+    fun retryMaxAttempt() {
+        var retry = -1
+        var thrown: RetryableException? = null
+
+        runBlocking {
+            try {
+                retryLogic.retry(100L, route) { url ->
+                    retry++
+                    delay(150L * (retry + 1))
+                    client200.get<HttpResponse>(url)
+                }
+            } catch (exception: RetryableException) {
+                thrown = exception
+            }
+            thrown.shouldNotBeNull()
+            thrown!!.let {
+                it.exceptions.size shouldEqual it.attempts
+                it.attempts shouldEqual 5
+                it.exceptions.forEach {
+                    (it is TimeoutCancellationException).shouldBeTrue()
+                }
+            }
         }
     }
 }
