@@ -7,7 +7,7 @@ import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
 
 
-interface EndpointIndex {
+public interface EndpointIndex {
 
     val indexName: IndexName
 

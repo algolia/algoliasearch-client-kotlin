@@ -11,19 +11,19 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(MultipleQueriesStrategy.Companion::class)
-sealed class MultipleQueriesStrategy(override val raw: String) : Raw<String> {
+public sealed class MultipleQueriesStrategy(override val raw: String) : Raw<String> {
 
-    object None : MultipleQueriesStrategy(KeyNone)
+    public object None : MultipleQueriesStrategy(KeyNone)
 
-    object StopIfEnoughMatches : MultipleQueriesStrategy(KeyStopIfEnoughMatches)
+    public object StopIfEnoughMatches : MultipleQueriesStrategy(KeyStopIfEnoughMatches)
 
-    data class Other(override val raw: String) : MultipleQueriesStrategy(raw)
+    public data class Other(override val raw: String) : MultipleQueriesStrategy(raw)
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<MultipleQueriesStrategy> {
+    internal companion object : KSerializer<MultipleQueriesStrategy> {
 
         private val serializer = StringSerializer
 

@@ -10,7 +10,7 @@ import com.algolia.search.model.response.deletion.DeletionABTest
 import com.algolia.search.model.response.revision.RevisionABTest
 
 
-interface EndpointAnalytics {
+public interface EndpointAnalytics {
 
     suspend fun addABTest(abTest: ABTest, requestOptions: RequestOptions? = null): CreationABTest
 

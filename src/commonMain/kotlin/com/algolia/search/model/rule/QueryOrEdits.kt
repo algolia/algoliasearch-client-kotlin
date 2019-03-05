@@ -9,14 +9,14 @@ import kotlinx.serialization.json.*
 
 
 @Serializable(QueryOrEdits.Companion::class)
-sealed class QueryOrEdits {
+public sealed class QueryOrEdits {
 
-    data class Query(val query: String) : QueryOrEdits()
+    public data class Query(val query: String) : QueryOrEdits()
 
-    data class Edits(val edits: List<Edit>) : QueryOrEdits()
+    public data class Edits(val edits: List<Edit>) : QueryOrEdits()
 
     @Serializer(QueryOrEdits::class)
-    companion object : KSerializer<QueryOrEdits> {
+    internal companion object : KSerializer<QueryOrEdits> {
 
         override fun serialize(encoder: Encoder, obj: QueryOrEdits) {
             val json = when (obj) {
@@ -36,9 +36,9 @@ sealed class QueryOrEdits {
                     val edits = if (json.containsKey(KeyEdits)) {
                         Json.plain.fromJson(
                             Edit.list,
-                            json.jsonObject[KeyEdits]
+                            json.jsonObject.getAs(KeyEdits)
                         )
-                    } else json[KeyRemoveLowercase].jsonArray.map { Edit(it.content) }
+                    } else json.getArray(KeyRemoveLowercase).jsonArray.map { Edit(it.content) }
                     Edits(edits)
                 }
                 else -> throw Exception("Unable to deserialize Rule.")

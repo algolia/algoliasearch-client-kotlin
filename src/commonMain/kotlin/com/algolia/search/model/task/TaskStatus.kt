@@ -11,15 +11,15 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(TaskStatus.Companion::class)
-sealed class TaskStatus(override val raw: String) : Raw<String> {
+public sealed class TaskStatus(override val raw: String) : Raw<String> {
 
-    object Published : TaskStatus(KeyPublished)
+    public object Published : TaskStatus(KeyPublished)
 
-    object NotPublished : TaskStatus(KeyNotPublished)
+    public object NotPublished : TaskStatus(KeyNotPublished)
 
-    data class Other(override val raw: String) : TaskStatus(raw)
+    public data class Other(override val raw: String) : TaskStatus(raw)
 
-    companion object : KSerializer<TaskStatus> {
+    internal companion object : KSerializer<TaskStatus> {
 
         private val serializer = StringSerializer
 

@@ -1,8 +1,8 @@
 package com.algolia.search.host
 
-import com.algolia.search.Time
 import com.algolia.search.client.Configuration
 import com.algolia.search.model.ApplicationID
+import com.algolia.search.model.Time
 import kotlin.random.Random
 
 

@@ -26,7 +26,6 @@ internal class APIWrapperImpl(
 ) : APIWrapper,
     ConfigurationInterface by configuration {
 
-    // TODO test with proguard
     private val selected = engine?.let { HttpClient(it) } ?: HttpClient()
 
     override val httpClient = selected.config {

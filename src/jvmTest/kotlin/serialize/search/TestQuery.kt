@@ -3,6 +3,7 @@ package serialize.search
 import attributes
 import attributesJson
 import boolean
+import com.algolia.search.helper.and
 import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import int
@@ -52,15 +53,15 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             typoTolerance = TypoTolerance.Min,
             allowTyposOnNumericTokens = boolean,
             disableTypoToleranceOnAttributes = attributes,
-            aroundLatLng = string,
+            aroundLatLng = 0.0f and 0.0f,
             aroundLatLngViaIP = boolean,
             aroundRadius = AroundRadius.All,
             aroundPrecision = int,
             minimumAroundRadius = int,
             insideBoundingBox = listOf(TestBoundingBox.boundingBox),
             insidePolygon = listOf(TestPolygon.polygon),
-            ignorePlurals = BooleanOrQueryLanguages.Boolean(boolean),
-            removeStopWords = BooleanOrQueryLanguages.Boolean(boolean),
+            ignorePlurals = IgnorePlurals.Boolean(boolean),
+            removeStopWords = RemoveStopWords.Boolean(boolean),
             queryLanguages = listOf(QueryLanguage.Afrikaans, QueryLanguage.Albanian),
             enableRules = boolean,
             ruleContexts = listOf(string),
@@ -112,7 +113,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeyTypoTolerance to TypoTolerance.Min.raw
             KeyAllowTyposOnNumericTokens to boolean
             KeyDisableTypoToleranceOnAttributes to attributesJson
-            KeyAroundLatLng to string
+            KeyAroundLatLng to "0.0,0.0"
             KeyAroundLatLngViaIP to boolean
             KeyAroundRadius to AroundRadius.All.raw
             KeyAroundPrecision to int

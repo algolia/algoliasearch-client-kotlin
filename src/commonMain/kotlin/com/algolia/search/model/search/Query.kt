@@ -1,9 +1,9 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.filter.FilterBuilder
+import com.algolia.search.filter.OptionalFilterBuilder
+import com.algolia.search.filter.QueryHelper
 import com.algolia.search.model.Attribute
-import com.algolia.search.query.FilterBuilder
-import com.algolia.search.query.OptionalFilterBuilder
-import com.algolia.search.query.QueryHelper
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
@@ -11,10 +11,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 
-// Todo give an abstract class a chance.
 @Serializable
 @QueryHelper
-data class Query(
+public data class Query(
     /**
      * The text to search in the index.
      * Engine default: "" (empty name)
@@ -211,13 +210,12 @@ data class Query(
      */
     @Optional @SerialName(KeyDisableTypoToleranceOnAttributes) var disableTypoToleranceOnAttributes: List<Attribute>? = null,
 
-    // TODO Type this !
     /**
      * Search for entries around a central geolocation, enabling a geo search within a circular area.
      * Engine default: null
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundLatLng/]
      */
-    @Optional @SerialName(KeyAroundLatLng) var aroundLatLng: String? = null,
+    @Optional @SerialName(KeyAroundLatLng) @Serializable(KSerializerPoint::class) var aroundLatLng: Point? = null,
 
     /**
      * Whether to search entries around a given location automatically computed from the requester’s IP address.
@@ -266,14 +264,14 @@ data class Query(
      * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/ignorePlurals/]
      */
-    @Optional @SerialName(KeyIgnorePlurals) var ignorePlurals: BooleanOrQueryLanguages? = null,
+    @Optional @SerialName(KeyIgnorePlurals) var ignorePlurals: IgnorePlurals? = null,
 
     /**
      * Removes stop (task) words from the query before executing it.
      * Engine default: false
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/removeStopWords/]
      */
-    @Optional @SerialName(KeyRemoveStopWords) var removeStopWords: BooleanOrQueryLanguages? = null,
+    @Optional @SerialName(KeyRemoveStopWords) var removeStopWords: RemoveStopWords? = null,
 
     /**
      * Sets the queryLanguage to be used by language-specific settings and functionalities such as
@@ -440,14 +438,14 @@ data class Query(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalWords/#doing-an-or-between-all-words-of-a-query]
      */
     @Transient
-    var isEveryWordInQueryOptional: Boolean = false // Todo
+    public var isEveryWordInQueryOptional: Boolean = false
 
     /**
      * You can modify this instance of [FilterBuilder] or assign a new one.
      * If [filters] is null, the encoder of [FilterBuilder.build] will be passed to the request body of the next request.
      */
     @Transient
-    var filterBuilder: FilterBuilder = FilterBuilder()
+    public var filterBuilder: FilterBuilder = FilterBuilder()
 
     /**
      * You can modify this instance of [OptionalFilterBuilder] or assign a new one.
@@ -455,5 +453,5 @@ data class Query(
      * the request body of the next request.
      */
     @Transient
-    var optionalFilterBuilder: OptionalFilterBuilder = OptionalFilterBuilder()
+    public var optionalFilterBuilder: OptionalFilterBuilder = OptionalFilterBuilder()
 }

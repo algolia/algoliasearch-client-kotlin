@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class ResponseSearches(
+public data class ResponseSearches(
     @SerialName(KeyResults) val results: List<ResponseSearch>
 )
