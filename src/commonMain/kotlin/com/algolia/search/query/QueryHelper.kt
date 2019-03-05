@@ -1,10 +1,10 @@
 package com.algolia.search.query
 
 import com.algolia.search.model.*
-import com.algolia.search.model.enums.AlternativesAsExact
-import com.algolia.search.model.enums.QueryLanguage
-import com.algolia.search.model.enums.ResponseFields
-import com.algolia.search.model.enums.Snippet
+import com.algolia.search.model.search.AlternativesAsExact
+import com.algolia.search.model.search.QueryLanguage
+import com.algolia.search.model.search.ResponseFields
+import com.algolia.search.model.search.Snippet
 import com.algolia.search.model.search.Query
 
 @DslMarker

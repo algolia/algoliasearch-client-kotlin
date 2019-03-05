@@ -13,4 +13,4 @@ data class Index internal constructor(
     EndpointIndex by EndpointIndexImpl(api, indexName),
     EndpointIndexing by EndpointIndexingImpl(api, indexName),
     EndpointSynonym by EndpointSynonymImpl(api, indexName),
-    EndpointQueryRule by EndpointQueryRuleImpl(api, indexName)
+    EndpointRule by EndpointRuleImpl(api, indexName)
