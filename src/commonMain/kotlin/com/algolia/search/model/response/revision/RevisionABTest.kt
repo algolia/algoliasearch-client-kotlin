@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class RevisionABTest(
+public data class RevisionABTest(
     @SerialName(KeyABTestID) val abTestID: ABTestID,
     @SerialName(KeyTaskID) override val taskID: TaskID,
     @SerialName(KeyIndex) val indexName: IndexName

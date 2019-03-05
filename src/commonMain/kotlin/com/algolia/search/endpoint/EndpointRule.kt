@@ -10,7 +10,7 @@ import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Rule
 
 
-interface EndpointRule {
+public interface EndpointRule {
 
     val indexName: IndexName
 

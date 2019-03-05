@@ -1,7 +1,7 @@
 package com.algolia.search.model
 
 import com.algolia.search.exception.EmptyStringException
-import com.algolia.search.toQueryID
+import com.algolia.search.helper.toQueryID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -10,7 +10,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(QueryID.Companion::class)
-data class QueryID(override val raw: String) : Raw<String> {
+public data class QueryID(override val raw: String) : Raw<String> {
 
     init {
         if (raw.isEmpty()) throw EmptyStringException("QueryID")
@@ -20,7 +20,7 @@ data class QueryID(override val raw: String) : Raw<String> {
         return raw
     }
 
-    companion object : KSerializer<QueryID> {
+    internal companion object : KSerializer<QueryID> {
 
         private val serializer = StringSerializer
 

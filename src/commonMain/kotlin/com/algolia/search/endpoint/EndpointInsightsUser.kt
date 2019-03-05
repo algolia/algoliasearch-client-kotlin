@@ -4,11 +4,11 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.insights.EventName
-import com.algolia.search.query.FilterFacet
+import com.algolia.search.filter.FilterFacet
 import io.ktor.client.response.HttpResponse
 
 
-interface EndpointInsightsUser {
+public interface EndpointInsightsUser {
 
     suspend fun viewedFilters(
         indexName: IndexName,

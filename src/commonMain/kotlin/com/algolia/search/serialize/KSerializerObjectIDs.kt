@@ -1,7 +1,7 @@
 package com.algolia.search.serialize
 
 import com.algolia.search.model.ObjectID
-import com.algolia.search.toObjectID
+import com.algolia.search.helper.toObjectID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

@@ -1,10 +1,10 @@
 package com.algolia.search.model.response.deletion
 
-import com.algolia.search.ClientDate
 import com.algolia.search.model.APIKey
+import com.algolia.search.model.ClientDate
 
 
-data class DeletionAPIKey(
+public data class DeletionAPIKey(
     val deletedAt: ClientDate,
     val apiKey: APIKey
 )
