@@ -31,7 +31,7 @@ import kotlinx.coroutines.withTimeout
 
 
 public class ClientSearch private constructor(
-    private val api: APIWrapperImpl
+    internal val api: APIWrapperImpl
 ) :
     EndpointMultipleIndex by EndpointMultipleIndexImpl(api),
     EndpointAPIKey by EndpointAPIKeyImpl(api),
@@ -47,7 +47,6 @@ public class ClientSearch private constructor(
         configuration: Configuration
     ) : this(APIWrapperImpl(configuration))
 
-    // Todo test this
     public constructor(
         configuration: Configuration,
         engine: HttpClientEngine?

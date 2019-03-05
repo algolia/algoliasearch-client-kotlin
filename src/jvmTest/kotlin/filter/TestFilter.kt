@@ -1,7 +1,7 @@
-package query
+package filter
 
+import com.algolia.search.filter.*
 import com.algolia.search.model.Attribute
-import com.algolia.search.query.*
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -16,7 +16,7 @@ internal class TestFilter {
     @Test
     fun facetString() {
         val filter = FilterFacet(attributeA, "valueA")
-        val filterNegate = FilterFacet(attributeA, "valueA").not()
+        val filterNegate = !FilterFacet(attributeA, "valueA")
         val filterSpace = FilterFacet(attributeA, "value with space")
         val filterScore = FilterFacet(attributeA, "valueA", 1)
 
@@ -30,8 +30,8 @@ internal class TestFilter {
     fun facetBoolean() {
         val filterTrue = FilterFacet(attributeA, true)
         val filterFalse = FilterFacet(attributeA, false)
-        val filterTrueNegate = FilterFacet(attributeA, true).not()
-        val filterFalseNegate = FilterFacet(attributeA, false).not()
+        val filterTrueNegate = !FilterFacet(attributeA, true)
+        val filterFalseNegate = !FilterFacet(attributeA, false)
         val filterScore = FilterFacet(attributeA, true, 4)
 
         filterTrue.build() shouldEqual "\"attributeA\":true"
@@ -46,7 +46,7 @@ internal class TestFilter {
         val filterInt = FilterFacet(attributeA, 1)
         val filterLong = FilterFacet(attributeA, 1L)
         val filterFloat = FilterFacet(attributeA, 1f)
-        val filterDouble = FilterFacet(attributeA, 1.0).not()
+        val filterDouble = !FilterFacet(attributeA, 1.0)
         val filterScore = FilterFacet(attributeA, 1, 2)
 
         filterInt.build() shouldEqual "\"attributeA\":1"
@@ -59,7 +59,7 @@ internal class TestFilter {
     @Test
     fun range() {
         val filter = FilterRange(attributeA, 5.0, 6.0)
-        val filterNegate = FilterRange(attributeA, 5.0, 6.0).not()
+        val filterNegate = !FilterRange(attributeA, 5.0, 6.0)
 
         filter.build() shouldEqual "\"attributeA\":5.0 TO 6.0"
         filterNegate.build() shouldEqual "NOT \"attributeA\":5.0 TO 6.0"
@@ -68,7 +68,7 @@ internal class TestFilter {
     @Test
     fun tag() {
         val filter = FilterTag("valueA")
-        val filterNegate = FilterTag("valueA").not()
+        val filterNegate = !FilterTag("valueA")
 
         filter.build() shouldEqual "_tags:\"valueA\""
         filterNegate.build() shouldEqual "NOT _tags:\"valueA\""
@@ -77,9 +77,35 @@ internal class TestFilter {
     @Test
     fun comparison() {
         val filter = FilterComparison(attributeA, NumericOperator.Greater, 5.0)
-        val filterNegate = FilterComparison(attributeA, NumericOperator.Greater, 5.0).not()
+        val filterNegate = !FilterComparison(attributeA, NumericOperator.Greater, 5.0)
 
         filter.build() shouldEqual "\"attributeA\" > 5.0"
         filterNegate.build() shouldEqual "NOT \"attributeA\" > 5.0"
+    }
+
+    @Test
+    fun negation() {
+        val filter = FilterFacet(attributeA, true)
+
+        filter.let {
+            it.isNegated shouldEqual false
+            it.build() shouldEqual "\"attributeA\":true"
+        }
+        (!filter).let {
+            it.isNegated shouldEqual true
+            it.build() shouldEqual "NOT \"attributeA\":true"
+        }
+        (!filter).let {
+            it.isNegated shouldEqual false
+            it.build() shouldEqual "\"attributeA\":true"
+        }
+        (-filter).let {
+            it.isNegated shouldEqual true
+            it.build() shouldEqual "NOT \"attributeA\":true"
+        }
+        (+filter).let {
+            it.isNegated shouldEqual false
+            it.build() shouldEqual "\"attributeA\":true"
+        }
     }
 }

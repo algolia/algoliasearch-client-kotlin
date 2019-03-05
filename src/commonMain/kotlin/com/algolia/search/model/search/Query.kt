@@ -1,9 +1,9 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.filter.FilterBuilder
+import com.algolia.search.filter.OptionalFilterBuilder
+import com.algolia.search.filter.QueryHelper
 import com.algolia.search.model.Attribute
-import com.algolia.search.query.FilterBuilder
-import com.algolia.search.query.OptionalFilterBuilder
-import com.algolia.search.query.QueryHelper
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
@@ -11,7 +11,6 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
 
-// Todo give an abstract class a chance.
 @Serializable
 @QueryHelper
 public data class Query(

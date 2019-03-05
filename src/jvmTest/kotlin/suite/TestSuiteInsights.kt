@@ -3,7 +3,7 @@ package suite
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.query.FilterFacet
+import com.algolia.search.filter.FilterFacet
 import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.helper.toEventName

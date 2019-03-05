@@ -25,12 +25,16 @@ public data class ResponseLogs(
         @SerialName(KeyIp) val ip: String,
         @SerialName(KeyQuery_Headers) val queryHeaders: String,
         @SerialName(KeySha1) val sha1: String,
-        @SerialName(KeyNb_Api_Calls) val nbApiCalls: Long,
         @SerialName(KeyProcessing_Time_Ms) val processingTimeMS: Long,
-        @SerialName(KeyIndex) val indexName: IndexName,
+        @Optional @SerialName(KeyNb_Api_Calls) val nbApiCallsOrNull: Long? = null,
+        @Optional @SerialName(KeyIndex) val indexNameOrNull: IndexName? = null,
         @Optional @SerialName(KeyQuery_Params) val queryParamsOrNull: String? = null,
         @Optional @SerialName(KeyQuery_Nb_Hits) val queryNbHitsOrNull: Int? = null
     ) {
+
+        @Transient
+        public val indexName: IndexName
+            get() = indexNameOrNull!!
 
         @Transient
         public val queryParams: String
@@ -39,5 +43,9 @@ public data class ResponseLogs(
         @Transient
         public val queryNbHits: Int
             get() = queryNbHitsOrNull!!
+
+        @Transient
+        public val nbApiCalls: Long
+            get() = nbApiCallsOrNull!!
     }
 }

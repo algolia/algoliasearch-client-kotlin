@@ -11,13 +11,15 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(SearchableAttribute.Companion::class)
-public sealed class SearchableAttribute(open val attribute: Attribute) {
+public sealed class SearchableAttribute {
 
-    public data class Default(override val attribute: Attribute) : SearchableAttribute(attribute)
+    abstract val attribute: Attribute
 
-    public data class Ordered(override val attribute: Attribute) : SearchableAttribute(attribute)
+    public data class Default(override val attribute: Attribute) : SearchableAttribute()
 
-    public data class Unordered(override val attribute: Attribute) : SearchableAttribute(attribute)
+    public data class Ordered(override val attribute: Attribute) : SearchableAttribute()
+
+    public data class Unordered(override val attribute: Attribute) : SearchableAttribute()
 
     @Serializer(SearchableAttribute::class)
     internal companion object : KSerializer<SearchableAttribute> {

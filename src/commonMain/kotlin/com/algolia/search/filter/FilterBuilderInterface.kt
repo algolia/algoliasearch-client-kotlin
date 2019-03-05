@@ -1,4 +1,4 @@
-package com.algolia.search.query
+package com.algolia.search.filter
 
 import com.algolia.search.model.Attribute
 
@@ -44,6 +44,12 @@ public interface FilterBuilderInterface<T : Filter> {
      * Remove the [filters] from this [Group]. If the [Group] is empty, it will be deleted.
      */
     fun Group.removeAll(filters: Collection<T>)
+
+    /**
+     * Add the filter [filter] to this [Group], or remove it if it is already present.
+     * @return true if a filter was removed, false if it was added.
+     */
+    fun Group.addOrRemove(filter: T): Boolean
 
     /**
      * Check whether this [Group] contains the [filter].

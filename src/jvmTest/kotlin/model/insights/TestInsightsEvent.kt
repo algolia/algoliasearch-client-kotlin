@@ -2,7 +2,7 @@ package model.insights
 
 import attributeA
 import com.algolia.search.model.insights.InsightsEvent
-import com.algolia.search.query.FilterFacet
+import com.algolia.search.filter.FilterFacet
 import com.algolia.search.helper.toEventName
 import com.algolia.search.helper.toQueryID
 import indexA

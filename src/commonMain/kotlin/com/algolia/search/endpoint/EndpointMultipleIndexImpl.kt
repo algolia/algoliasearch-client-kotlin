@@ -7,7 +7,7 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.request.RequestRequestObjects
 import com.algolia.search.model.response.*
-import com.algolia.search.query.build
+import com.algolia.search.filter.build
 import com.algolia.search.serialize.KeyRequests
 import com.algolia.search.serialize.RouteIndexesV1
 import com.algolia.search.serialize.noDefaults
