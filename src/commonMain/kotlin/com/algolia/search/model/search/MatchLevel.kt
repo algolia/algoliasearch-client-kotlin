@@ -12,17 +12,17 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(MatchLevel.Companion::class)
-sealed class MatchLevel(override val raw: String) : Raw<String> {
+public sealed class MatchLevel(override val raw: String) : Raw<String> {
 
-    object None : MatchLevel(KeyNone)
+    public object None : MatchLevel(KeyNone)
 
-    object Partial : MatchLevel(KeyPartial)
+    public object Partial : MatchLevel(KeyPartial)
 
-    object Full : MatchLevel(KeyFull)
+    public object Full : MatchLevel(KeyFull)
 
-    data class Other(override val raw: String) : MatchLevel(raw)
+    public data class Other(override val raw: String) : MatchLevel(raw)
 
-    companion object : KSerializer<MatchLevel> {
+    internal companion object : KSerializer<MatchLevel> {
 
         private val serializer = StringSerializer
 

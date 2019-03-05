@@ -12,30 +12,30 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(AlternativesAsExact.Companion::class)
-sealed class AlternativesAsExact(override val raw: String) : Raw<String> {
+public sealed class AlternativesAsExact(override val raw: String) : Raw<String> {
 
     /**
      * Alternative words added by the [Query.ignorePlurals] feature.
      */
-    object IgnorePlurals : AlternativesAsExact(KeyIgnorePlurals)
+    public object IgnorePlurals : AlternativesAsExact(KeyIgnorePlurals)
 
     /**
      * Single-word synonyms (example: “NY” = “NYC”).
      */
-    object SingleWordSynonym : AlternativesAsExact(KeySingleWordSynonym)
+    public object SingleWordSynonym : AlternativesAsExact(KeySingleWordSynonym)
 
     /**
      * Multiple-words synonyms (example: “NY” = “New York”).
      */
-    object MultiWordsSynonym : AlternativesAsExact(KeyMultiWordsSynonym)
+    public object MultiWordsSynonym : AlternativesAsExact(KeyMultiWordsSynonym)
 
-    data class Other(override val raw: String) : AlternativesAsExact(raw)
+    public data class Other(override val raw: String) : AlternativesAsExact(raw)
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<AlternativesAsExact> {
+    internal companion object : KSerializer<AlternativesAsExact> {
 
         private val serializer = StringSerializer
 

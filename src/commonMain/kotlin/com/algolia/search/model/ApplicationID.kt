@@ -3,7 +3,7 @@ package com.algolia.search.model
 import com.algolia.search.exception.EmptyStringException
 
 
-data class ApplicationID(override val raw: String) : Raw<String> {
+public data class ApplicationID(override val raw: String) : Raw<String> {
 
     init {
         if (raw.isEmpty()) throw EmptyStringException("ApplicationID")

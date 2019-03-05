@@ -8,7 +8,7 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 
 
-object KSerializerHighlightResults :
+internal object KSerializerHighlightResults :
     KSerializer<Map<Attribute, HighlightResult>> by HashMapSerializer(Attribute, HighlightResult.serializer()) {
 
     fun fromJson(jsonObject: JsonObject): Map<Attribute, HighlightResult> {
