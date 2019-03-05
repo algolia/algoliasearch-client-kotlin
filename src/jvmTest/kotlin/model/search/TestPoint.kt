@@ -1,7 +1,7 @@
 package model.search
 
 import com.algolia.search.model.search.Point
-import com.algolia.search.and
+import com.algolia.search.helper.and
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

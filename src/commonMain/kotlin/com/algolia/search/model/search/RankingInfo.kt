@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class RankingInfo(
+public data class RankingInfo(
     @SerialName(KeyPromoted) val promoted: Boolean,
     @SerialName(KeyNbTypos) val nbTypos: Int,
     @SerialName(KeyFirstMatchedWord) val firstMatchedWord: Int,
@@ -18,12 +18,5 @@ data class RankingInfo(
     @SerialName(KeyNbExactWords) val nbExactWords: Int,
     @SerialName(KeyWords) val words: Int,
     @SerialName(KeyFilters) val filters: Int,
-    @Optional @SerialName(KeyMatchedGeoLocation) val matchedGeoLocation: Int? = null
-) {
-
-    data class MatchedGeoLocation(
-        @SerialName(KeyLat) val latitude: Double,
-        @SerialName(KeyLng) val longitude: Double,
-        @SerialName(KeyDistance) val distance: Long
-    )
-}
+    @Optional @SerialName(KeyMatchedGeoLocation) val matchedGeoLocation: MatchedGeoLocation? = null
+)

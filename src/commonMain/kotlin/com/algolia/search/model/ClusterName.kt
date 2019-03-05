@@ -1,7 +1,7 @@
 package com.algolia.search.model
 
 import com.algolia.search.exception.EmptyStringException
-import com.algolia.search.toClusterName
+import com.algolia.search.helper.toClusterName
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -10,7 +10,7 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(ClusterName.Companion::class)
-data class ClusterName(override val raw: String) : Raw<String> {
+public data class ClusterName(override val raw: String) : Raw<String> {
 
     init {
         if (raw.isEmpty()) throw EmptyStringException("ClusterName")
@@ -20,7 +20,7 @@ data class ClusterName(override val raw: String) : Raw<String> {
         return raw
     }
 
-    companion object : KSerializer<ClusterName> {
+    internal companion object : KSerializer<ClusterName> {
 
         private val serializer = StringSerializer
 

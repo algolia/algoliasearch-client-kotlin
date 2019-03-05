@@ -7,11 +7,12 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class ResponseListClusters(
+public data class ResponseListClusters(
     @SerialName(KeyClusters) val clusters: List<Cluster>
 ) {
+
     @Serializable
-    data class Cluster(
+    public data class Cluster(
         @SerialName(KeyClusterName) val name: ClusterName,
         @SerialName(KeyNbRecords) val nbRecords: Int,
         @SerialName(KeyNbUserIDs) val nbUserIDs: Long,
