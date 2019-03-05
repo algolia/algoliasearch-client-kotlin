@@ -37,9 +37,7 @@ internal class TestSuiteDNS {
                     listIndexes()
                 }
             }
-            (System.currentTimeMillis() - timer).let {
-                println("Time elapsed in milliseconds: $it")
-            }
+            println("Time elapsed in milliseconds: ${(System.currentTimeMillis() - timer)}")
         }
     }
 }

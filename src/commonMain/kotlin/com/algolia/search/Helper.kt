@@ -5,15 +5,15 @@ import com.algolia.search.client.Index
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.*
 import com.algolia.search.model.analytics.ABTestID
-import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.Snippet
-import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchSynonyms
+import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.search.Cursor
+import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.search.Snippet
 import com.algolia.search.model.synonym.SynonymType
 import com.algolia.search.model.task.TaskID
 
@@ -112,7 +112,7 @@ suspend fun Index.browseAllObjects(
     block: suspend ResponseSearch.(Int) -> Unit
 ) {
     val initial = browse(query, requestOptions)
-    var cursor = initial.cursor
+    var cursor = initial.cursorOrNull
     var page = 0
 
     block(initial, page++)
@@ -120,7 +120,7 @@ suspend fun Index.browseAllObjects(
         val response = browse(cursor)
 
         block(response, page++)
-        cursor = response.cursor
+        cursor = response.cursorOrNull
     }
 }
 

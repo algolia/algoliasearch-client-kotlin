@@ -14,6 +14,7 @@ import shouldEqual
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 internal val clientSearch = ClientSearch(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
@@ -48,12 +49,20 @@ internal fun testSuiteIndexName(suffix: String): IndexName {
     return "$prefix-qlitzler-$suffix".toIndexName()
 }
 
-internal suspend fun cleanABTest() {
+internal suspend fun cleanABTest(suffix: String) {
     clientAnalytics.browseAllABTests {
-        abTests?.forEach {
-            if (it.name.contains("kotlin")) {
-                clientAdmin1.initIndex(it.variantA.indexName).apply {
-                    clientAnalytics.deleteABTest(it.abTestID).wait() shouldEqual TaskStatus.Published
+        abTests.forEach {
+            val result = Regex("kotlin-(.*)-qlitzler-$suffix").find(it.name)
+            val date = result?.groupValues?.get(1)
+
+            if (date != null) {
+                val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
+                val difference = Date().time - dateFormat.parse(date).time
+
+                if (difference >= dayInMillis) {
+                    clientAdmin1.initIndex(it.name.toIndexName()).apply {
+                        clientAnalytics.deleteABTest(it.abTestID).wait() shouldEqual TaskStatus.Published
+                    }
                 }
             }
         }
@@ -68,8 +77,14 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String) {
         if (indexName.contains("kotlin")) {
             val result = Regex("kotlin-(.*)-qlitzler-$suffix").find(indexName)
             val date = result?.groupValues?.get(1)
+            if (date != null) {
+                val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
+                val difference = Date().time - dateFormat.parse(date).time
 
-            if (date != null) indexToDelete += it.indexName
+                if (difference >= dayInMillis) {
+                    indexToDelete += it.indexName
+                }
+            }
         }
     }
     indexToDelete.forEach {

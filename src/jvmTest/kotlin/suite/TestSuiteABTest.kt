@@ -1,5 +1,6 @@
 package suite
 
+import com.algolia.search.dateISO8601
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
@@ -42,7 +43,7 @@ internal class TestSuiteABTest {
     @Before
     fun clean() {
         runBlocking {
-            cleanABTest()
+            cleanABTest(suffix)
             cleanIndex(clientAdmin1, suffix)
         }
     }
@@ -71,8 +72,9 @@ internal class TestSuiteABTest {
                         it.description shouldEqual abTest.variantB.description
                     }
                 }
-                clientAnalytics.listABTests().abTests!!.find { it.abTestID == response.abTestID }.shouldNotBeNull()
+                clientAnalytics.listABTests().abTests.find { it.abTestID == response.abTestID }.shouldNotBeNull()
                 clientAnalytics.stopABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
+                clientAnalytics.getABTest(response.abTestID).status shouldEqual ABTestStatus.Stopped
                 clientAnalytics.deleteABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
                 var hasThrown = false
                 try {

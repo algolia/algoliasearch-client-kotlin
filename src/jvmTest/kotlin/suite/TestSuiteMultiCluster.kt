@@ -21,7 +21,7 @@ internal class TestSuiteMultiCluster {
 
     private val date = dateFormat.format(Date())
     private val prefix = "kotlin-$date"
-    private val userID = "$prefix-unknown".toUserID()
+    private val userID = "$prefix-qlitzler".toUserID()
 
     @Test
     fun test() {
