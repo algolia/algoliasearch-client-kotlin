@@ -1,7 +1,7 @@
 package com.algolia.search.model.task
 
+import com.algolia.search.helper.toTaskID
 import com.algolia.search.model.Raw
-import com.algolia.search.toTaskID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -10,13 +10,13 @@ import kotlinx.serialization.internal.LongSerializer
 
 
 @Serializable(TaskID.Companion::class)
-data class TaskID(override val raw: Long) : Raw<Long> {
+public data class TaskID(override val raw: Long) : Raw<Long> {
 
     override fun toString(): String {
         return raw.toString()
     }
 
-    companion object : KSerializer<TaskID> {
+    internal companion object : KSerializer<TaskID> {
 
         private val serializer = LongSerializer
 

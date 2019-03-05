@@ -10,13 +10,13 @@ import kotlinx.serialization.Transient
 
 
 @Serializable
-data class ResponseABTests(
+public data class ResponseABTests(
     @Optional @SerialName(KeyABTests) val abTestsOrNull: List<ResponseABTest>? = null,
     @SerialName(KeyCount) val count: Int,
     @SerialName(KeyTotal) val total: Int
 ) {
 
     @Transient
-    val abTests: List<ResponseABTest>
+    public val abTests: List<ResponseABTest>
         get() = abTestsOrNull!!
 }

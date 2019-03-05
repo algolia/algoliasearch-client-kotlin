@@ -8,6 +8,7 @@ import org.junit.runners.JUnit4
 import serialize.TestSerializer
 import unknown
 
+
 @RunWith(JUnit4::class)
 internal class TestAlternativesAsExact : TestSerializer<AlternativesAsExact>(AlternativesAsExact) {
 

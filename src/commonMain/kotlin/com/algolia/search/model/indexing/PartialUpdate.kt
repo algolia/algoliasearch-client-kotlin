@@ -1,22 +1,19 @@
 package com.algolia.search.model.indexing
 
+import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.*
-import com.algolia.search.toAttribute
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.doubleOrNull
-import kotlinx.serialization.json.intOrNull
 import kotlinx.serialization.json.json
 
 
-sealed class PartialUpdate(
-    open val attribute: Attribute,
-    internal open val value: Value<*>
-) {
+public sealed class PartialUpdate {
+
+    abstract val attribute: Attribute
+    internal abstract val value: Value<*>
 
     internal sealed class Value<T> {
 
@@ -27,57 +24,54 @@ sealed class PartialUpdate(
         data class Number(override val raw: kotlin.Number) : Value<kotlin.Number>()
     }
 
-    data class Increment internal constructor(
+    public data class Increment internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : PartialUpdate(attribute, value) {
+    ) : PartialUpdate() {
 
-        constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
+        public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
 
-    data class Decrement internal constructor(
+    public data class Decrement internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : PartialUpdate(attribute, value) {
+    ) : PartialUpdate() {
 
-        constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
+        public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
 
-    data class Add internal constructor(
+    public data class Add internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : PartialUpdate(attribute, value) {
+    ) : PartialUpdate() {
 
-        constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
+        public constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 
-        // Todo add test
-        constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
+        public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
 
-    data class Remove internal constructor(
+    public data class Remove internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : PartialUpdate(attribute, value) {
+    ) : PartialUpdate() {
 
-        constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
+        public constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 
-        // Todo add test
-        constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
+        public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
 
-    data class AddUnique internal constructor(
+    public data class AddUnique internal constructor(
         override val attribute: Attribute,
         override val value: Value<*>
-    ) : PartialUpdate(attribute, value) {
+    ) : PartialUpdate() {
 
-        constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
+        public constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
 
-        // Todo add test
-        constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
+        public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
     }
 
     @Serializer(PartialUpdate::class)
-    companion object : KSerializer<PartialUpdate> {
+    internal companion object : KSerializer<PartialUpdate> {
 
         override fun serialize(encoder: Encoder, obj: PartialUpdate) {
             val key = when (obj) {
@@ -103,8 +97,8 @@ sealed class PartialUpdate(
             val element = decoder.asJsonInput().jsonObject
             val key = element.keys.first()
             val attribute = key.toAttribute()
-            val operation = element.getObject(key)[Key_Operation].content
-            val raw = element.getObject(key)[KeyValue]
+            val operation = element.getObject(key).getPrimitive(Key_Operation).content
+            val raw = element.getObject(key).getPrimitive(KeyValue)
             val int = raw.intOrNull?.let { Value.Number(it) }
             val double = raw.doubleOrNull?.let { Value.Number(it) }
             val value = int ?: double ?: Value.String(raw.content)

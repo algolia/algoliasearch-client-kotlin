@@ -1,6 +1,6 @@
 package com.algolia.search.serialize
 
-import com.algolia.search.ClientDate
+import com.algolia.search.model.ClientDate
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -9,7 +9,7 @@ import kotlinx.serialization.json.content
 import kotlinx.serialization.json.longOrNull
 
 
-object KSerializerClientDate : KSerializer<ClientDate> {
+internal object KSerializerClientDate : KSerializer<ClientDate> {
 
     private val serializer = StringSerializer
 

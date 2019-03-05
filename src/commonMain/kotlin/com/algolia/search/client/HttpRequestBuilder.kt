@@ -9,6 +9,7 @@ import com.algolia.search.serialize.*
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
@@ -46,7 +47,7 @@ internal fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, stra
 }
 
 internal fun HttpRequestBuilder.setBody(query: Query?) {
-    body = query?.let { JsonNoNulls.stringify(Query.serializer(), it) } ?: "{}"
+    body = query?.let { Json.noDefaults.stringify(Query.serializer(), it) } ?: "{}"
 }
 
 internal suspend fun <T> APIWrapper.retryRead(

@@ -1,10 +1,10 @@
 package suite
 
-import com.algolia.search.dateISO8601
+import com.algolia.search.helper.dateISO8601
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
-import com.algolia.search.model.search.BooleanOrQueryLanguages
+import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
@@ -35,7 +35,7 @@ internal class TestSuiteAATest {
         variantB = Variant(
             indexName,
             10,
-            customSearchParameters = Query(ignorePlurals = BooleanOrQueryLanguages.Boolean(true))
+            customSearchParameters = Query(ignorePlurals = IgnorePlurals.Boolean(true))
         )
     )
 

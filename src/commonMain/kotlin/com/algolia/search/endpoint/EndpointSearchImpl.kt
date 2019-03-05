@@ -1,17 +1,18 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.client.*
+import com.algolia.search.filter.build
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacetValue
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Query
-import com.algolia.search.query.copyAndBuildFilters
 import com.algolia.search.serialize.*
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.client.request.post
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 
 
@@ -30,7 +31,7 @@ internal class EndpointSearchImpl(
     }
 
     override suspend fun search(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
-        val copy = query?.copyAndBuildFilters()
+        val copy = query?.build()
 
         return retryRead(requestOptions, indexName.toPath("/query")) { url ->
             httpClient.post<ResponseSearch>(url) {
@@ -41,11 +42,11 @@ internal class EndpointSearchImpl(
     }
 
     override suspend fun browse(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
-        val copy = query?.copyAndBuildFilters()
+        val copy = query?.build()
         val bodyString =
             copy?.let {
                 json {
-                    KeyParams to JsonNoNulls.toJson(Query.serializer(), it).jsonObject.urlEncode()
+                    KeyParams to Json.noDefaults.toJson(Query.serializer(), it).jsonObject.urlEncode()
                 }.toString()
             } ?: "{}"
 
@@ -73,7 +74,7 @@ internal class EndpointSearchImpl(
         maxFacetHits: Int?,
         requestOptions: RequestOptions?
     ): ResponseSearchForFacetValue {
-        val copy = query?.copyAndBuildFilters()
+        val copy = query?.build()
         val extraParams = json {
             maxFacetHits?.let { KeyMaxFacetHits to it }
             facetQuery?.let { KeyFacetQuery to it }

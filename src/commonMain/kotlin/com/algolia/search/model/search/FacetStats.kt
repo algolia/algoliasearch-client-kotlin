@@ -8,11 +8,10 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 
-// TODO check C-sharp client if Double or float or whatever
 @Serializable
-data class FacetStats(
-    @SerialName(KeyMin) val min: Int,
-    @SerialName(KeyMax) val max: Int,
+public data class FacetStats(
+    @SerialName(KeyMin) val min: Float,
+    @SerialName(KeyMax) val max: Float,
     @SerialName(KeyAvg) val average: Float,
     @SerialName(KeySum) val sum: Float
 )

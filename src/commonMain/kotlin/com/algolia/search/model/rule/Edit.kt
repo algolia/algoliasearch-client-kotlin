@@ -7,10 +7,10 @@ import kotlinx.serialization.json.json
 
 
 @Serializable(Edit.Companion::class)
-data class Edit(val delete: String, val insert: String? = null) {
+public data class Edit(val delete: String, val insert: String? = null) {
 
     @Serializer(Edit::class)
-    companion object : KSerializer<Edit> {
+    internal companion object : KSerializer<Edit> {
 
         override fun serialize(encoder: Encoder, obj: Edit) {
             val type = if (obj.insert != null) KeyReplace else KeyRemoveLowercase
@@ -27,8 +27,8 @@ data class Edit(val delete: String, val insert: String? = null) {
             val json = decoder.asJsonInput().jsonObject
 
             return Edit(
-                json[KeyDelete].content,
-                json.getOrNull(KeyInsert)?.content
+                json.getPrimitive(KeyDelete).content,
+                json[KeyInsert]?.content
             )
         }
     }

@@ -11,7 +11,7 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
 
 
-interface EndpointSynonym {
+public interface EndpointSynonym {
 
     val indexName: IndexName
 

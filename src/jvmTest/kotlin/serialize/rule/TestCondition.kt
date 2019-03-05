@@ -4,10 +4,11 @@ import attributeA
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Pattern
-import com.algolia.search.serialize.JsonNoNulls
 import com.algolia.search.serialize.KeyAnchoring
 import com.algolia.search.serialize.KeyIs
 import com.algolia.search.serialize.KeyPattern
+import com.algolia.search.serialize.noDefaults
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -16,7 +17,7 @@ import unknown
 
 
 @RunWith(JUnit4::class)
-internal class TestCondition : TestSerializer<Condition>(Condition.serializer(), JsonNoNulls) {
+internal class TestCondition : TestSerializer<Condition>(Condition.serializer(), Json.noDefaults) {
 
     override val items = listOf(
         Condition(

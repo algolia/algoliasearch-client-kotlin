@@ -4,7 +4,7 @@ import com.algolia.search.endpoint.*
 import com.algolia.search.model.IndexName
 
 
-data class Index internal constructor(
+public data class Index internal constructor(
     internal val api: APIWrapper,
     override val indexName: IndexName
 ) : EndpointSearch by EndpointSearchImpl(api, indexName),
