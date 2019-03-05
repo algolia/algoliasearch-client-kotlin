@@ -1,4 +1,4 @@
-package com.algolia.search.query
+package com.algolia.search.filter
 
 import com.algolia.search.model.Attribute
 
@@ -74,6 +74,12 @@ internal fun <T : Filter> GroupMap<T>.move(origin: Group, destination: Group, fi
         add(destination, filter)
         true
     } else false
+}
+
+internal fun <T : Filter> GroupMap<T>.addOrRemove(group: Group, filter: T): Boolean {
+    val contains = contains(filter)
+    if (contains) remove(group, filter) else add(group, filter)
+    return contains
 }
 
 internal inline fun <reified T : Filter> GroupMap<T>.replaceAttribute(

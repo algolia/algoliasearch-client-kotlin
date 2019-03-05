@@ -11,13 +11,15 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(AttributeForFaceting.Companion::class)
-public sealed class AttributeForFaceting(open val attribute: Attribute) {
+public sealed class AttributeForFaceting {
 
-    public data class Default(override val attribute: Attribute) : AttributeForFaceting(attribute)
+    abstract val attribute: Attribute
 
-    public data class FilterOnly(override val attribute: Attribute) : AttributeForFaceting(attribute)
+    public data class Default(override val attribute: Attribute) : AttributeForFaceting()
 
-    public data class Searchable(override val attribute: Attribute) : AttributeForFaceting(attribute)
+    public data class FilterOnly(override val attribute: Attribute) : AttributeForFaceting()
+
+    public data class Searchable(override val attribute: Attribute) : AttributeForFaceting()
 
     @Serializer(AttributeForFaceting::class)
     internal companion object : KSerializer<AttributeForFaceting> {

@@ -1,13 +1,13 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.client.*
+import com.algolia.search.filter.build
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacetValue
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Query
-import com.algolia.search.query.build
 import com.algolia.search.serialize.*
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter

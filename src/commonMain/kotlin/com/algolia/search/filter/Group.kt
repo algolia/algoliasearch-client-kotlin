@@ -1,7 +1,9 @@
-package com.algolia.search.query
+package com.algolia.search.filter
 
 
-public sealed class Group(open val name: String) {
+public sealed class Group {
+
+    abstract val name: String
 
     internal enum class Type {
         And,
@@ -18,6 +20,6 @@ public sealed class Group(open val name: String) {
     }
 }
 
-public data class GroupAnd(override val name: String) : Group(name)
+public data class GroupAnd(override val name: String) : Group()
 
-public data class GroupOr(override val name: String) : Group(name)
+public data class GroupOr(override val name: String) : Group()

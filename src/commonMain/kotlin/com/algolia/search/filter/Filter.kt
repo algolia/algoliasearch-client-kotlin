@@ -1,29 +1,40 @@
-package com.algolia.search.query
+package com.algolia.search.filter
 
 import com.algolia.search.model.Attribute
 
 
-public sealed class Filter(
-    open val attribute: Attribute
-) {
+public sealed class Filter {
 
-    var not = false
-        private set
+    abstract val attribute: Attribute
 
     internal abstract val expression: String
 
-    fun build() = if (not) "NOT $expression" else expression
+    var isNegated = false
+        private set
 
-    fun not(value: Boolean = true): Filter {
-        not = value
+    operator fun not(): Filter {
+        isNegated = !isNegated
         return this
     }
+
+    operator fun unaryPlus(): Filter {
+        isNegated = false
+        return this
+    }
+
+    operator fun unaryMinus(): Filter {
+        isNegated = true
+        return this
+    }
+
+    fun build() = if (isNegated) "NOT $expression" else expression
 }
 
 public data class FilterTag(
     val value: String
-) : Filter(Attribute("_tags")) {
+) : Filter() {
 
+    override val attribute = Attribute("_tags")
     override val expression = "$attribute:\"$value\""
 
     override fun toString(): String {
@@ -31,9 +42,7 @@ public data class FilterTag(
     }
 }
 
-public sealed class FilterNumeric(
-    override val attribute: Attribute
-) : Filter(attribute) {
+public sealed class FilterNumeric : Filter() {
 
     override fun toString(): String {
         return "FilterNumeric($expression)"
@@ -43,10 +52,10 @@ public sealed class FilterNumeric(
 public data class FilterComparison(
     override val attribute: Attribute,
     val operator: NumericOperator,
-    val value: Double
-) : FilterNumeric(attribute) {
+    val value: Number
+) : FilterNumeric() {
 
-    override val expression = "\"$attribute\" ${operator.raw} $value"
+    override val expression = "${attribute.escape()} ${operator.raw} $value"
 
     override fun toString(): String {
         return "FilterComparison($expression)"
@@ -55,11 +64,11 @@ public data class FilterComparison(
 
 public data class FilterRange(
     override val attribute: Attribute,
-    val lowerBound: Double,
-    val upperBound: Double
-) : FilterNumeric(attribute) {
+    val lowerBound: Number,
+    val upperBound: Number
+) : FilterNumeric() {
 
-    override val expression = "\"$attribute\":$lowerBound TO $upperBound"
+    override val expression = "${attribute.escape()}:$lowerBound TO $upperBound"
 
     override fun toString(): String {
         return "FilterRange($expression)"
@@ -70,7 +79,7 @@ public data class FilterFacet internal constructor(
     override val attribute: Attribute,
     private val value: FacetValue<*>,
     private val score: Int? = null
-) : Filter(attribute) {
+) : Filter() {
 
     public constructor(attribute: Attribute, value: String, score: Int? = null) : this(
         attribute,
@@ -90,22 +99,22 @@ public data class FilterFacet internal constructor(
         score
     )
 
-    override val expression: String = "\"$attribute\":${value.escape()}" + if (score != null) "<score=$score>" else ""
+    override val expression: String = "${attribute.escape()}:${value.escape()}" + if (score != null) "<score=$score>" else ""
 
     override fun toString(): String {
         return "FilterFacet($expression)"
     }
 }
 
-public sealed class FacetValue<T> {
+internal sealed class FacetValue<T> {
 
-    public abstract val value: T
+    abstract val value: T
 
-    internal fun escape(): Any {
+    fun escape(): kotlin.String {
         return when (this) {
             is String -> "\"$value\""
-            is Boolean -> value
-            is Number -> value
+            is Boolean -> value.toString()
+            is Number -> value.toString()
         }
     }
 
@@ -116,8 +125,4 @@ public sealed class FacetValue<T> {
     data class Number(override val value: kotlin.Number) : FacetValue<kotlin.Number>()
 }
 
-public fun String.toFacetValue() = FacetValue.String(this)
-
-public fun Boolean.toFacetValue() = FacetValue.Boolean(this)
-
-public fun Number.toFacetValue() = FacetValue.Number(this)
+internal fun Attribute.escape() = "\"$raw\""

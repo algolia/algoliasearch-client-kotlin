@@ -1,11 +1,10 @@
-package com.algolia.search.query
+package com.algolia.search.filter
 
 import com.algolia.search.model.Attribute
 
 
 /**
- * For a better understanding of Filters, please read the documentation linked below:
- *
+ * @see FilterBuilderInterface
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
  */
 @QueryHelper
@@ -48,6 +47,10 @@ public class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = n
 
     override fun Group.removeAll(filters: Collection<FilterFacet>) {
         groups.remove(this, *filters.toTypedArray())
+    }
+
+    override fun Group.addOrRemove(filter: FilterFacet): Boolean {
+        return groups.addOrRemove(this, filter)
     }
 
     override fun Group.contains(filter: FilterFacet): Boolean {

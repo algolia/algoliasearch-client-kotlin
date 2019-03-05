@@ -1,9 +1,9 @@
-package query
+package filter
 
 import attributeA
 import attributeB
 import attributeC
-import com.algolia.search.query.*
+import com.algolia.search.filter.*
 import comparisonA
 import comparisonB
 import facetA
@@ -74,6 +74,19 @@ internal class TestFilterHelper {
     }
 
     @Test
+    fun addTwice() {
+        groupMap().apply {
+            val filters = arrayOf(facetA, facetA, comparisonA, comparisonA, rangeA, rangeA, tagA, tagA)
+
+            add(groupAndA, *filters)
+
+            this shouldEqual mutableMapOf(
+                Group.Key(nameA, Group.Type.And) to set(facetA, comparisonA, rangeA, tagA)
+            )
+        }
+    }
+
+    @Test
     fun remove() {
         groupMap().apply {
             add(groupOrA, facetA, facetB)
@@ -87,6 +100,16 @@ internal class TestFilterHelper {
             this shouldEqual mutableMapOf(
                 Group.Key(nameB, Group.Type.OrFacet) to set(facetA, facetB)
             )
+        }
+    }
+
+    @Test
+    fun addOrRemove() {
+        groupMap().apply {
+            addOrRemove(groupOrA, facetA).shouldBeFalse()
+            this shouldEqual mutableMapOf(Group.Key(nameA, Group.Type.OrFacet) to set(facetA))
+            addOrRemove(groupOrA, facetA).shouldBeTrue()
+            this shouldEqual mutableMapOf()
         }
     }
 

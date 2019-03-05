@@ -1,8 +1,6 @@
-package query
+package filter
 
-import com.algolia.search.query.FilterBuilder
-import comparisonA
-import comparisonB
+import com.algolia.search.filter.OptionalFilterBuilder
 import facetA
 import facetB
 import groupAndA
@@ -14,16 +12,15 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldBeFalse
 import shouldBeTrue
-import tagA
-import tagB
+import shouldEqual
 
 
 @RunWith(JUnit4::class)
-internal class TestFilterBuilder {
+internal class TestOptionalFilterBuilder {
 
     @Test
     fun isEmpty() {
-        FilterBuilder {
+        OptionalFilterBuilder {
             isEmpty().shouldBeTrue()
             groupAndA += facetA
             isEmpty().shouldBeFalse()
@@ -32,7 +29,7 @@ internal class TestFilterBuilder {
 
     @Test
     fun clear() {
-        FilterBuilder {
+        OptionalFilterBuilder {
             groupAndA += facetA
             groupAndB += facetB
             clear()
@@ -41,24 +38,20 @@ internal class TestFilterBuilder {
     }
 
     @Test
-    fun print() {
-        FilterBuilder {
+    fun build() {
+        OptionalFilterBuilder {
             groupAndA += facetA
             groupAndA += facetB
-            groupAndB += facetA
-            groupAndB += facetB
             groupOrA += facetA
             groupOrA += facetB
             groupOrB += facetA
-            groupOrB += facetB
-            groupOrA += comparisonA
-            groupOrA += comparisonB
-            groupOrB += comparisonA
-            groupOrB += comparisonB
-            groupOrA += tagA
-            groupOrA += tagB
-            groupOrB += tagA
-            groupOrB += tagB
-        }.printDebug()
+
+            build() shouldEqual listOf(
+                listOf(facetA.expression),
+                listOf(facetB.expression),
+                listOf(facetA.expression, facetB.expression),
+                listOf(facetA.expression)
+            )
+        }
     }
 }

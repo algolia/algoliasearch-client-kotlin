@@ -1,4 +1,4 @@
-package query
+package filter
 
 import buildTest
 import com.algolia.search.helper.limit
@@ -7,7 +7,7 @@ import com.algolia.search.model.search.AlternativesAsExact
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.QueryLanguage
 import com.algolia.search.model.search.ResponseFields
-import com.algolia.search.query.*
+import com.algolia.search.filter.*
 import facetA
 import facetB
 import groupOrA
