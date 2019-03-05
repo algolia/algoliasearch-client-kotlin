@@ -312,6 +312,7 @@ internal const val KeyActive = "active"
 internal const val KeyStopped = "stopped"
 internal const val KeyExpired = "expired"
 internal const val KeyFailed = "failed"
+internal const val KeyPercentage = "percentage"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"

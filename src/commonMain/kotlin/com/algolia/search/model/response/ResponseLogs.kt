@@ -1,11 +1,12 @@
 package com.algolia.search.model.response
 
-import com.algolia.search.model.Datable
+import com.algolia.search.ClientDate
 import com.algolia.search.model.IndexName
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 
 @Serializable
@@ -15,7 +16,7 @@ data class ResponseLogs(
 
     @Serializable
     data class Log(
-        @SerialName(KeyTimestamp) override val date: String,
+        @SerialName(KeyTimestamp) val timestamp: ClientDate,
         @SerialName(KeyMethod) val method: String,
         @SerialName(KeyAnswer_Code) val answerCode: String,
         @SerialName(KeyQuery_Body) val queryBody: String,
@@ -27,7 +28,16 @@ data class ResponseLogs(
         @SerialName(KeyNb_Api_Calls) val nbApiCalls: Long,
         @SerialName(KeyProcessing_Time_Ms) val processingTimeMS: Long,
         @SerialName(KeyIndex) val indexName: IndexName,
-        @Optional @SerialName(KeyQuery_Params) val queryParams: String? = null,
-        @Optional @SerialName(KeyQuery_Nb_Hits) val queryNbHits: Int? = null
-    ) : Datable
+        @Optional @SerialName(KeyQuery_Params) val queryParamsOrNull: String? = null,
+        @Optional @SerialName(KeyQuery_Nb_Hits) val queryNbHitsOrNull: Int? = null
+    ) {
+
+        @Transient
+        val queryParams: String
+            get() = queryParamsOrNull!!
+
+        @Transient
+        val queryNbHits: Int
+            get() = queryNbHitsOrNull!!
+    }
 }

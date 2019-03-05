@@ -1,5 +1,6 @@
 package suite
 
+import com.algolia.search.dateISO8601
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
@@ -28,8 +29,8 @@ internal class TestSuiteABTest {
     private val indexNameA = testSuiteIndexName(suffix)
     private val indexNameB = indexNameA.copy(raw = indexNameA.raw + "_dev")
     private val tomorrow = Date(Date().time + TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS))
-    private val indexA = clientAdmin1.getIndex(indexNameA)
-    private val indexB = clientAdmin1.getIndex(indexNameB)
+    private val indexA = clientAdmin1.initIndex(indexNameA)
+    private val indexB = clientAdmin1.initIndex(indexNameB)
     private val data = json { KeyObjectID to "one" }
 
     private val abTest = ABTest(
@@ -42,7 +43,7 @@ internal class TestSuiteABTest {
     @Before
     fun clean() {
         runBlocking {
-            cleanABTest()
+            cleanABTest(suffix)
             cleanIndex(clientAdmin1, suffix)
         }
     }
@@ -71,8 +72,9 @@ internal class TestSuiteABTest {
                         it.description shouldEqual abTest.variantB.description
                     }
                 }
-                clientAnalytics.listABTests().abTests!!.find { it.abTestID == response.abTestID }.shouldNotBeNull()
+                clientAnalytics.listABTests().abTests.find { it.abTestID == response.abTestID }.shouldNotBeNull()
                 clientAnalytics.stopABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
+                clientAnalytics.getABTest(response.abTestID).status shouldEqual ABTestStatus.Stopped
                 clientAnalytics.deleteABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
                 var hasThrown = false
                 try {

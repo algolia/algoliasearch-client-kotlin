@@ -17,49 +17,49 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
 
         companion object {
 
-            fun <T> from(data: T, serializer: KSerializer<T>): AddObject {
+            fun <T> from(serializer: KSerializer<T>, data: T): AddObject {
                 return AddObject(Json.plain.toJson(serializer, data).jsonObject)
             }
         }
     }
 
     data class ReplaceObject(
-        val json: JsonObject,
-        val objectID: ObjectID
+        val objectID: ObjectID,
+        val json: JsonObject
     ) : BatchOperation(KeyUpdateObject) {
 
         companion object {
 
-            fun <T : Indexable> from(data: T, serializer: KSerializer<T>): ReplaceObject {
-                return ReplaceObject(Json.plain.toJson(serializer, data).jsonObject, data.objectID)
+            fun <T : Indexable> from(serializer: KSerializer<T>, data: T): ReplaceObject {
+                return ReplaceObject(data.objectID, Json.plain.toJson(serializer, data).jsonObject)
             }
         }
     }
 
     data class UpdateObject(
-        val json: JsonObject,
         val objectID: ObjectID,
+        val json: JsonObject,
         val createIfNotExists: Boolean = true
     ) : BatchOperation(if (createIfNotExists) KeyPartialUpdateObject else KeyPartialUpdateObjectNoCreate) {
 
         companion object {
 
             fun <T : Indexable> from(
-                data: T,
                 serializer: KSerializer<T>,
+                data: T,
                 createIfNotExists: Boolean = true
             ): UpdateObject {
-                return UpdateObject(Json.plain.toJson(serializer, data).jsonObject, data.objectID, createIfNotExists)
+                return UpdateObject(data.objectID, Json.plain.toJson(serializer, data).jsonObject, createIfNotExists)
             }
 
             fun from(
-                partialUpdate: PartialUpdate,
                 objectID: ObjectID,
+                partialUpdate: PartialUpdate,
                 createIfNotExists: Boolean
             ): UpdateObject {
                 return UpdateObject(
-                    Json.plain.toJson(PartialUpdate, partialUpdate).jsonObject,
                     objectID,
+                    Json.plain.toJson(PartialUpdate, partialUpdate).jsonObject,
                     createIfNotExists
                 )
             }
@@ -104,9 +104,9 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
 
             return when (val action = element[KeyAction].content) {
                 KeyAddObject -> AddObject(element.body)
-                KeyUpdateObject -> ReplaceObject(element.body, element.objectID)
-                KeyPartialUpdateObject -> UpdateObject(element.body, element.objectID)
-                KeyPartialUpdateObjectNoCreate -> UpdateObject(element.body, element.objectID, false)
+                KeyUpdateObject -> ReplaceObject(element.objectID, element.body)
+                KeyPartialUpdateObject -> UpdateObject(element.objectID, element.body)
+                KeyPartialUpdateObjectNoCreate -> UpdateObject(element.objectID, element.body, false)
                 KeyDeleteObject -> DeleteObject(element.objectID)
                 KeyDelete -> DeleteIndex
                 KeyClear -> ClearIndex

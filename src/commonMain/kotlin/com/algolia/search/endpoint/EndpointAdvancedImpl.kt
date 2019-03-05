@@ -2,7 +2,7 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.*
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.enums.LogType
+import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseLogs
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskID

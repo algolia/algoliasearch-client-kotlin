@@ -6,11 +6,17 @@ import com.algolia.search.serialize.KeyTotal
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 
 @Serializable
 data class ResponseABTests(
-    @Optional @SerialName(KeyABTests) val abTests: List<ResponseABTest>? = null,
+    @Optional @SerialName(KeyABTests) val abTestsOrNull: List<ResponseABTest>? = null,
     @SerialName(KeyCount) val count: Int,
     @SerialName(KeyTotal) val total: Int
-)
+) {
+
+    @Transient
+    val abTests: List<ResponseABTest>
+        get() = abTestsOrNull!!
+}

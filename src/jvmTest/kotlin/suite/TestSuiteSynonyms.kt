@@ -8,6 +8,8 @@ import com.algolia.search.toObjectID
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.JsonObjectSerializer
+import kotlinx.serialization.list
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -40,18 +42,20 @@ internal class TestSuiteSynonyms {
         Synonym.AlternativeCorrections(psone, "psone", listOf("playstationone"), SynonymType.Typo.Two)
     private val synonyms =
         listOf(synonymMultiWay, synonymOneWay, synonymPlaceholder, synonymAlternative1, synonymAlternative2)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
 
 
     @Before
     fun clean() {
-        cleanIndex(clientAdmin1, suffix)
+        runBlocking {
+            cleanIndex(clientAdmin1, suffix)
+        }
     }
 
     @Test
     fun test() {
         runBlocking {
-            val objects = loadFileAsObjects("console.json")
+            val objects = load(JsonObjectSerializer.list, "console.json")
             val tasks = mutableListOf<Task>()
 
             index.apply {

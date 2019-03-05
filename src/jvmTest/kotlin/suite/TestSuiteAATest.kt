@@ -1,9 +1,10 @@
 package suite
 
+import com.algolia.search.dateISO8601
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
-import com.algolia.search.model.enums.BooleanOrQueryLanguages
+import com.algolia.search.model.search.BooleanOrQueryLanguages
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
@@ -24,7 +25,7 @@ internal class TestSuiteAATest {
 
     private val suffix = "aa_testing"
     private val indexName = testSuiteIndexName(suffix)
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
     private val data = json { KeyObjectID to "one" }
     private val tomorrow = Date(Date().time + TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS))
     private val abTest = ABTest(
@@ -40,12 +41,14 @@ internal class TestSuiteAATest {
 
     @Before
     fun clean() {
-        cleanABTest()
-        cleanIndex(clientAdmin1, suffix)
+        runBlocking {
+            cleanABTest(suffix)
+            cleanIndex(clientAdmin1, suffix)
+        }
     }
 
     @Test
-    fun suite() {
+    fun test() {
         runBlocking {
             index.apply {
                 saveObject(data).wait() shouldEqual TaskStatus.Published

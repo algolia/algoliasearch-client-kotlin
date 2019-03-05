@@ -1,7 +1,27 @@
 [
-  {"objectID": "iphone_7", "brand": "Apple", "model": "7"},
-  {"objectID": "iphone_8", "brand": "Apple", "model": "8"},
-  {"objectID": "iphone_x", "brand": "Apple", "model": "X"},
-  {"objectID": "one_plus_one", "brand": "OnePlus", "model": "One"},
-  {"objectID": "one_plus_two", "brand": "OnePlus", "model": "Two"},
+  {
+    "objectID": "iphone_7",
+    "brand": "Apple",
+    "model": "7"
+  },
+  {
+    "objectID": "iphone_8",
+    "brand": "Apple",
+    "model": "8"
+  },
+  {
+    "objectID": "iphone_x",
+    "brand": "Apple",
+    "model": "X"
+  },
+  {
+    "objectID": "one_plus_one",
+    "brand": "OnePlus",
+    "model": "One"
+  },
+  {
+    "objectID": "one_plus_two",
+    "brand": "OnePlus",
+    "model": "Two"
+  }
 ]

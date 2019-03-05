@@ -48,4 +48,10 @@ interface EndpointSynonym {
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
+
+    suspend fun replaceAllSynonyms(
+        synonyms: List<Synonym>,
+        forwardToReplicas: Boolean? = null,
+        requestOptions: RequestOptions? = null
+    ): RevisionIndex
 }
