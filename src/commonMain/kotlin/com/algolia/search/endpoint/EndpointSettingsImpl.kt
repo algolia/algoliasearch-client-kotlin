@@ -1,12 +1,10 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.APIWrapper
-import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.setRequestOptions
+import com.algolia.search.client.*
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.settings.SearchableAttribute
-import com.algolia.search.model.enums.NumericAttributeFilter
+import com.algolia.search.model.settings.NumericAttributeFilter
 import com.algolia.search.model.response.revision.RevisionIndex
+import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
 import com.algolia.search.serialize.*
@@ -29,7 +27,7 @@ internal class EndpointSettingsImpl(
     private val route = "/settings"
 
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
-        return read.retry(requestOptions.computedWriteTimeout, indexName.toPath(route)) { url ->
+        return retryRead(requestOptions, indexName.toPath(route)) { url ->
             val json = httpClient.get<JsonObject>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -62,7 +60,7 @@ internal class EndpointSettingsImpl(
         val resets = json { resetToDefault.forEach { it.raw to JsonNull } }
         val bodyString = settings.toJsonNoDefaults().merge(resets).toString()
 
-        return write.retry(requestOptions.computedWriteTimeout, indexName.toPath(route)) { url ->
+        return retryWrite(requestOptions, indexName.toPath(route)) { url ->
             httpClient.put<RevisionIndex>(url) {
                 body = bodyString
                 parameter(KeyForwardToReplicas, forwardToReplicas)

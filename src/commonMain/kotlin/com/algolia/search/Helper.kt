@@ -1,16 +1,19 @@
 package com.algolia.search
 
+import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.client.Index
 import com.algolia.search.client.RequestOptions
 import com.algolia.search.model.*
-import com.algolia.search.model.enums.Point
-import com.algolia.search.model.enums.Snippet
-import com.algolia.search.model.queryrule.Anchoring
+import com.algolia.search.model.analytics.ABTestID
+import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchSynonyms
+import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.search.Cursor
+import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.search.Snippet
 import com.algolia.search.model.synonym.SynonymType
 import com.algolia.search.model.task.TaskID
 
@@ -51,12 +54,20 @@ fun String.toClusterName(): ClusterName {
     return ClusterName(this)
 }
 
+fun Long.toABTestID(): ABTestID {
+    return ABTestID(this)
+}
+
 infix fun Float.and(longitude: Float): Point {
     return Point(this, longitude)
 }
 
 infix fun Attribute.limit(numberOfWords: Int?): Snippet {
     return Snippet(this, numberOfWords)
+}
+
+fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {
+    return RequestOptions().apply(init)
 }
 
 suspend fun Index.browseAllRules(
@@ -101,7 +112,7 @@ suspend fun Index.browseAllObjects(
     block: suspend ResponseSearch.(Int) -> Unit
 ) {
     val initial = browse(query, requestOptions)
-    var cursor = initial.cursor
+    var cursor = initial.cursorOrNull
     var page = 0
 
     block(initial, page++)
@@ -109,6 +120,21 @@ suspend fun Index.browseAllObjects(
         val response = browse(cursor)
 
         block(response, page++)
-        cursor = response.cursor
+        cursor = response.cursorOrNull
+    }
+}
+
+suspend fun ClientAnalytics.browseAllABTests(
+    hitsPerPage: Int? = null,
+    requestOptions: RequestOptions? = null,
+    block: suspend ResponseABTests.(Int) -> Unit
+) {
+    var page = 0
+
+    while (true) {
+        val response = listABTests(page, hitsPerPage, requestOptions)
+
+        if (response.count == 0) break
+        block(response, page++)
     }
 }

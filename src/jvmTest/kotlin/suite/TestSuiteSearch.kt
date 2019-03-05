@@ -1,12 +1,14 @@
 package suite
 
-import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.toAttribute
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.json.JsonObjectSerializer
+import kotlinx.serialization.list
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -25,17 +27,19 @@ internal class TestSuiteSearch {
     private val indexName = testSuiteIndexName(suffix)
     private val company = "company".toAttribute()
     private val allFacets = listOf("*".toAttribute())
-    private val index = clientAdmin1.getIndex(indexName)
+    private val index = clientAdmin1.initIndex(indexName)
 
     @Before
     fun clean() {
-        cleanIndex(clientAdmin1, suffix)
+        runBlocking {
+            cleanIndex(clientAdmin1, suffix)
+        }
     }
 
     @Test
     fun test() {
         runBlocking {
-            val objects = loadFileAsObjects("companies.json")
+            val objects = load(JsonObjectSerializer.list, "companies.json")
             val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Searchable(company)))
             val tasks = mutableListOf<Task>()
 
@@ -48,7 +52,7 @@ internal class TestSuiteSearch {
                 val hits = search(Query("elon", clickAnalytics = true)).hits
 
                 hits.shouldNotBeNull()
-                hits!!.shouldNotBeEmpty()
+                hits.shouldNotBeEmpty()
 
                 search(Query(facets = allFacets, filters = "company:tesla")).nbHits shouldEqual 1
                 search(Query(facets = allFacets, filters = "(company:tesla OR company:spacex)")).nbHits shouldEqual 2

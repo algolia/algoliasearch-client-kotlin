@@ -1,9 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.APIWrapper
-import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.setBody
-import com.algolia.search.client.setRequestOptions
+import com.algolia.search.client.*
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
@@ -25,7 +22,7 @@ internal class EndpointSearchImpl(
     APIWrapper by api {
 
     private suspend fun search(requestOptions: RequestOptions?): ResponseSearch {
-        return read.retry(requestOptions.computedReadTimeout, indexName.toPath()) { url ->
+        return retryRead(requestOptions, indexName.toPath()) { url ->
             httpClient.get<ResponseSearch>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -35,7 +32,7 @@ internal class EndpointSearchImpl(
     override suspend fun search(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
         val copy = query?.clone()
 
-        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/query")) { url ->
+        return retryRead(requestOptions, indexName.toPath("/query")) { url ->
             httpClient.post<ResponseSearch>(url) {
                 setBody(copy)
                 setRequestOptions(requestOptions)
@@ -52,7 +49,7 @@ internal class EndpointSearchImpl(
                 }.toString()
             } ?: "{}"
 
-        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/browse")) { url ->
+        return retryRead(requestOptions, indexName.toPath("/browse")) { url ->
             httpClient.post<ResponseSearch>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -61,7 +58,7 @@ internal class EndpointSearchImpl(
     }
 
     override suspend fun browse(cursor: Cursor, requestOptions: RequestOptions?): ResponseSearch {
-        return read.retry(requestOptions.computedReadTimeout, indexName.toPath("/browse")) { url ->
+        return retryRead(requestOptions, indexName.toPath("/browse")) { url ->
             httpClient.get<ResponseSearch>(url) {
                 parameter(KeyCursor, cursor)
                 setRequestOptions(requestOptions)
@@ -83,8 +80,8 @@ internal class EndpointSearchImpl(
         }
         val bodyString = (copy?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
 
-        return read.retry(
-            requestOptions.computedReadTimeout,
+        return retryRead(
+            requestOptions,
             indexName.toPath("/facets/$attribute/query")
         ) { url ->
             httpClient.post<ResponseSearchForFacetValue>(url) {

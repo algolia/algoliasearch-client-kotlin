@@ -1,8 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.APIWrapper
-import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.setRequestOptions
+import com.algolia.search.client.*
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
@@ -54,7 +52,7 @@ internal class EndpointAPIKeyImpl(
             restrictSources = restrictSources
         ).stringify()
 
-        return write.retry(requestOptions.computedWriteTimeout, route) { url ->
+        return retryWrite(requestOptions, route) { url ->
             httpClient.post<CreationAPIKey>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -85,7 +83,7 @@ internal class EndpointAPIKeyImpl(
             referers = referers
         ).stringify()
 
-        return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { url ->
+        return retryWrite(requestOptions, "$route/$apiKey") { url ->
             httpClient.put<RevisionAPIKey>(url) {
                 body = bodyString
                 setRequestOptions(requestOptions)
@@ -94,15 +92,15 @@ internal class EndpointAPIKeyImpl(
     }
 
     override suspend fun deleteAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): DeletionAPIKey {
-        return write.retry(requestOptions.computedWriteTimeout, "$route/$apiKey") { url ->
+        return retryWrite(requestOptions, "$route/$apiKey") { url ->
             httpClient.delete<Deletion>(url) {
                 setRequestOptions(requestOptions)
-            }.let { DeletionAPIKey(it.date, apiKey) }
+            }.let { DeletionAPIKey(it.deletedAt, apiKey) }
         }
     }
 
     override suspend fun listAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
-        return read.retry(requestOptions.computedReadTimeout, route) { url ->
+        return retryRead(requestOptions, route) { url ->
             httpClient.get<ResponseListAPIKey>(url) {
                 setRequestOptions(requestOptions)
             }
@@ -113,7 +111,7 @@ internal class EndpointAPIKeyImpl(
         apiKey: APIKey,
         requestOptions: RequestOptions?
     ): ResponseAPIKey {
-        return read.retry(requestOptions.computedReadTimeout, "$route/$apiKey") { url ->
+        return retryRead(requestOptions, "$route/$apiKey") { url ->
             httpClient.get<ResponseAPIKey>(url) {
                 setRequestOptions(requestOptions)
             }

@@ -2,8 +2,8 @@ package suite
 
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.apikey.ACL
-import com.algolia.search.model.enums.TypoTolerance
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.serialize.urlEncode
 import com.algolia.search.toIndexName
@@ -23,7 +23,7 @@ import shouldEqual
 @RunWith(JUnit4::class)
 internal class TestSuiteAPIKey {
 
-    lateinit var key: APIKey
+    private lateinit var key: APIKey
 
     private val rights = listOf(ACL.Search)
     private val description = "A description"

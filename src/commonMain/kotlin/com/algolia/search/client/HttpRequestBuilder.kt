@@ -48,3 +48,19 @@ internal fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, stra
 internal fun HttpRequestBuilder.setBody(query: Query?) {
     body = query?.let { JsonNoNulls.stringify(Query.serializer(), it) } ?: "{}"
 }
+
+internal suspend fun <T> APIWrapper.retryRead(
+    requestOptions: RequestOptions?,
+    path: String,
+    request: suspend (String) -> T
+): T {
+    return read.retry(requestOptions.computedReadTimeout, path, request)
+}
+
+internal suspend fun <T> APIWrapper.retryWrite(
+    requestOptions: RequestOptions?,
+    path: String,
+    request: suspend (String) -> T
+): T {
+    return write.retry(requestOptions.computedWriteTimeout, path, request)
+}
