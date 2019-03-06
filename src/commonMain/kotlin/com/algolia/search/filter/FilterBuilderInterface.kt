@@ -49,7 +49,7 @@ public interface FilterBuilderInterface<T : Filter> {
      * Add the filter [filter] to this [Group], or remove it if it is already present.
      * @return true if a filter was removed, false if it was added.
      */
-    fun Group.addOrRemove(filter: T): Boolean
+    fun Group.toggle(filter: T): Boolean
 
     /**
      * Check whether this [Group] contains the [filter].

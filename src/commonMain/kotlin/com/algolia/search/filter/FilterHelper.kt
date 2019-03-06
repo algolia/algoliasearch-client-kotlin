@@ -76,7 +76,7 @@ internal fun <T : Filter> GroupMap<T>.move(origin: Group, destination: Group, fi
     } else false
 }
 
-internal fun <T : Filter> GroupMap<T>.addOrRemove(group: Group, filter: T): Boolean {
+internal fun <T : Filter> GroupMap<T>.toggle(group: Group, filter: T): Boolean {
     val contains = contains(filter)
     if (contains) remove(group, filter) else add(group, filter)
     return contains

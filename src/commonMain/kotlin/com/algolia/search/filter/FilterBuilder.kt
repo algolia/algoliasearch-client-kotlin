@@ -48,8 +48,8 @@ public class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBui
         groups.remove(this, *filters.toTypedArray())
     }
 
-    override fun Group.addOrRemove(filter: Filter): Boolean {
-        return groups.addOrRemove(this, filter)
+    override fun Group.toggle(filter: Filter): Boolean {
+        return groups.toggle(this, filter)
     }
 
     override fun Group.contains(filter: Filter): Boolean {
