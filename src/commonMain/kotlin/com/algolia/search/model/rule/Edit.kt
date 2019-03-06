@@ -2,7 +2,6 @@ package com.algolia.search.model.rule
 
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
-import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
 
 
@@ -28,7 +27,7 @@ public data class Edit(val delete: String, val insert: String? = null) {
 
             return Edit(
                 json.getPrimitive(KeyDelete).content,
-                json[KeyInsert]?.content
+                json.getPrimitiveOrNull(KeyInsert)?.content
             )
         }
     }
