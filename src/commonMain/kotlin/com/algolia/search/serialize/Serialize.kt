@@ -8,7 +8,9 @@ import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
+import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.*
+import kotlinx.serialization.list
 
 internal val regexAsc = Regex("^$KeyAsc\\((.*)\\)$")
 internal val regexDesc = Regex("^$KeyDesc\\((.*)\\)$")
@@ -34,7 +36,7 @@ internal fun JsonObject.urlEncode(): String {
     return Parameters.build {
         entries.forEach { (key, element) ->
             when (element) {
-                is JsonArray -> appendAll(key, element.content.map { it.content })
+                is JsonArray -> append(key, Json.stringify(StringSerializer.list, element.content.map { it.content }))
                 else -> append(key, element.content)
             }
         }
