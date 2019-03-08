@@ -4,14 +4,16 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
+import com.algolia.search.model.request.RequestMultipleQueries
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAlgoliaAPIKey
+import com.algolia.search.serialize.KeyAlgoliaApplicationID
+import com.algolia.search.serialize.KeyForwardToReplicas
+import com.algolia.search.serialize.noDefaults
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
 
 
 internal fun HttpRequestBuilder.setApplicationId(applicationID: ApplicationID) {
@@ -32,18 +34,8 @@ internal fun HttpRequestBuilder.setForwardToReplicas(forwardToReplicas: Boolean?
     parameter(KeyForwardToReplicas, forwardToReplicas)
 }
 
-internal fun HttpRequestBuilder.setQueries(queries: Collection<IndexQuery>, strategy: MultipleQueriesStrategy) {
-    body = json {
-        KeyRequests to jsonArray {
-            queries.forEach {
-                +json {
-                    KeyIndexName to it.indexName.raw
-                    KeyParams to it.query.toJsonNoDefaults().urlEncode()
-                }
-            }
-        }
-        KeyStrategy to strategy.raw
-    }.toString()
+internal fun HttpRequestBuilder.setQueries(indexQueries: List<IndexQuery>, strategy: MultipleQueriesStrategy) {
+    body = Json.noDefaults.stringify(RequestMultipleQueries, RequestMultipleQueries(indexQueries, strategy))
 }
 
 internal fun HttpRequestBuilder.setBody(query: Query?) {

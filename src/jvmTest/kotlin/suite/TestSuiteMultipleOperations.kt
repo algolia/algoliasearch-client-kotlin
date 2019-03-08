@@ -1,5 +1,6 @@
 package suite
 
+import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
@@ -60,9 +61,11 @@ internal class TestSuiteMultipleOperations {
                     it.results[0]?.get(firstname)?.content shouldEqual jimmie
                     it.results[0]?.get(firstname)?.content shouldEqual jimmie
                 }
+                val query =
+                    Query(query = "", hitsPerPage = 2, facets = listOf("color".toAttribute(), "brand".toAttribute()))
                 val indexQueries = listOf(
-                    IndexQuery(indexName1, Query(query = "", hitsPerPage = 2)),
-                    IndexQuery(indexName2, Query(query = "", hitsPerPage = 2))
+                    IndexQuery(indexName1, query),
+                    IndexQuery(indexName2, query)
                 )
                 multipleQueries(indexQueries).let {
                     it.results.size shouldEqual 2
