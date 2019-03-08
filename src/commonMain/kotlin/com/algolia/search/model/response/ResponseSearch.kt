@@ -166,6 +166,10 @@ public data class ResponseSearch(
             return Json.nonstrict.fromJson(serializer, json)
         }
 
+        public fun getAsHierarchy(attribute: Attribute): Hierarchy {
+            return Json.plain.fromJson(KSerializerHierarchy, json.getAs(attribute.raw))
+        }
+
         @Serializer(Hit::class)
         internal companion object : KSerializer<Hit> {
 
