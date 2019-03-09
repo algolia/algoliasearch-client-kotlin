@@ -12,10 +12,7 @@ import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchSynonyms
 import com.algolia.search.model.rule.Anchoring
-import com.algolia.search.model.search.Cursor
-import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.Query
-import com.algolia.search.model.search.Snippet
+import com.algolia.search.model.search.*
 import com.algolia.search.model.synonym.SynonymType
 import com.algolia.search.model.task.TaskID
 
@@ -151,4 +148,12 @@ public suspend fun ClientAnalytics.browseAllABTests(
         if (response.count == 0) break
         block(response, page++)
     }
+}
+
+public operator fun List<Facet>.get(name: String): Int {
+    return find { it.name == name }!!.count
+}
+
+public operator fun Map<Attribute, List<Facet>>.get(attribute: Attribute, name: String): Int {
+    return getValue(attribute).find { it.name == name }!!.count
 }

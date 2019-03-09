@@ -29,7 +29,7 @@ internal class TestResponseSearchHit : TestSerializer<ResponseSearch.Hit>(Respon
 
     companion object {
 
-        val highlights = mapOf(attributeA to TestHighlightResult.highlightResult)
+        val highlights = mapOf(attributeA to TestHighlightResult.item)
         val snippets = mapOf(
             attributeA to listOf(SnippetResult(unknown, MatchLevel.None)),
             attributeB to listOf(SnippetResult(unknown, MatchLevel.None))

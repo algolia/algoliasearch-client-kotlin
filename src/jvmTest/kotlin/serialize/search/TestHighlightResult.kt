@@ -13,12 +13,12 @@ import serialize.TestSerializer
 internal class TestHighlightResult : TestSerializer<HighlightResult>(HighlightResult.serializer()) {
 
     override val items = listOf(
-        highlightResult to json
+        item to json
     )
 
     companion object {
 
-        val highlightResult = HighlightResult(
+        val item = HighlightResult(
             "value",
             MatchLevel.None,
             listOf("string"),

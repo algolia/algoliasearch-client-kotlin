@@ -1,0 +1,56 @@
+[
+  {
+    "name": "iPhone 6",
+    "brand": "Apple",
+    "category": "device",
+    "stars": 4
+  },
+  {
+    "name": "iPhone 6 Plus",
+    "brand": "Apple",
+    "category": "device",
+    "stars": 5
+  },
+  {
+    "name": "iPhone cover",
+    "brand": "Apple",
+    "category": "accessory",
+    "stars": 3
+  },
+  {
+    "name": "Galaxy S5",
+    "brand": "Samsung",
+    "category": "device",
+    "stars": 4
+  },
+  {
+    "name": "Wonder Phone",
+    "brand": "Samsung",
+    "category": "device",
+    "stars": 5
+  },
+  {
+    "name": "Platinum Phone Cover",
+    "brand": "Samsung",
+    "category": "accessory",
+    "stars": 2
+  },
+  {
+    "name": "Lame Phone",
+    "brand": "Whatever",
+    "category": "device",
+    "stars": 1
+  },
+  {
+    "name": "Lame Phone cover",
+    "brand": "Whatever",
+    "category": "accessory",
+    "stars": 1
+  },
+  {
+    "name": "Symbols Phone",
+    "brand": "Commas' voice, Ltd",
+    "category": "device",
+    "stars": 2
+  }
+]

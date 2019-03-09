@@ -319,6 +319,7 @@ internal class TestKeys {
         KeyView shouldEqual "view"
         KeyConversion shouldEqual "conversion"
         KeyEvents shouldEqual "events"
+        KeyDisjunctiveFacets shouldEqual "disjunctiveFacets"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

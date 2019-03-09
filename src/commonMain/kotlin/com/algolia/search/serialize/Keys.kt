@@ -321,6 +321,7 @@ internal const val KeyClick = "click"
 internal const val KeyView = "view"
 internal const val KeyConversion = "conversion"
 internal const val KeyEvents = "events"
+internal const val KeyDisjunctiveFacets = "disjunctiveFacets"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"

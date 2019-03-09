@@ -1,6 +1,7 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.client.*
+import com.algolia.search.filter.FilterFacet
 import com.algolia.search.filter.build
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
@@ -90,5 +91,25 @@ internal class EndpointSearchImpl(
                 setRequestOptions(requestOptions)
             }
         }
+    }
+
+    override suspend fun searchDisjunctiveFacets(
+        query: Query,
+        disjunctiveFacets: List<Attribute>,
+        filters: List<FilterFacet>,
+        requestOptions: RequestOptions?
+    ): ResponseSearch {
+        val (orFilters, andFilters) = filters.partition { disjunctiveFacets.contains(it.attribute) }
+        val queryAnd = buildAndQueries(query, andFilters, orFilters)
+        val queryOr = buildOrQueries(disjunctiveFacets, query, andFilters, orFilters)
+        val results = EndpointMultipleIndexImpl(api).multipleQueries(queryAnd.plus(queryOr)).results
+        val resultAnd = results.first()
+        val resultsOr = results.subList(1, results.size)
+        val facets = resultsOr.map { it.facets.toMutableMap() }.reduce { acc, map -> acc.apply { this += map } }
+
+        return resultAnd.copy(
+            disjunctiveFacetsOrNull = facets,
+            exhaustiveFacetsCountOrNull = resultsOr.any { it.exhaustiveFacetsCountOrNull == true }
+        )
     }
 }

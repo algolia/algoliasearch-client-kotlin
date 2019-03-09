@@ -1,0 +1,44 @@
+[
+  {
+    "name": "Hotel A",
+    "stars": 1,
+    "facilities": [
+      "wifi",
+      "bath",
+      "spa"
+    ],
+    "city": "Paris"
+  },
+  {
+    "name": "Hotel B",
+    "stars": 1,
+    "facilities": [
+      "wifi"
+    ],
+    "city": "Paris"
+  },
+  {
+    "name": "Hotel C",
+    "stars": 2,
+    "facilities": [
+      "bath"
+    ],
+    "city": "San Francisco"
+  },
+  {
+    "name": "Hotel D",
+    "stars": 4,
+    "facilities": [
+      "spa"
+    ],
+    "city": "Paris"
+  },
+  {
+    "name": "Hotel E",
+    "stars": 4,
+    "facilities": [
+      "spa"
+    ],
+    "city": "New York"
+  }
+]

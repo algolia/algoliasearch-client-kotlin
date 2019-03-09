@@ -1,6 +1,7 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.client.RequestOptions
+import com.algolia.search.filter.FilterFacet
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
@@ -26,4 +27,11 @@ public interface EndpointSearch {
         maxFacetHits: Int? = null,
         requestOptions: RequestOptions? = null
     ): ResponseSearchForFacetValue
+
+    suspend fun searchDisjunctiveFacets(
+        query: Query,
+        disjunctiveFacets: List<Attribute>,
+        filters: List<FilterFacet>,
+        requestOptions: RequestOptions? = null
+    ): ResponseSearch
 }
