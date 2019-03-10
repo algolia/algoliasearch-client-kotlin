@@ -17,12 +17,12 @@ import unknown
 
 @RunWith(JUnit4::class)
 internal class TestKSerializerSnippetResults :
-    TestSerializer<Map<Attribute, SnippetResult>>(KSerializerSnippetResults) {
+    TestSerializer<Map<Attribute, List<SnippetResult>>>(KSerializerSnippetResults) {
 
     override val items = listOf(
         mapOf(
-            attributeA to SnippetResult(unknown, MatchLevel.Full),
-            attributeB to SnippetResult(unknown, MatchLevel.None)
+            attributeA to listOf(SnippetResult(unknown, MatchLevel.Full)),
+            attributeB to listOf(SnippetResult(unknown, MatchLevel.None))
         ) to json {
             attributeA.raw to json {
                 KeyValue to unknown

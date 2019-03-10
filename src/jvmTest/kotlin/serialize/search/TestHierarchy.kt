@@ -17,6 +17,6 @@ internal class TestHierarchy {
     fun hierarchy() {
         val hit = ResponseSearch.Hit(json { attributeA.raw to TestKSerializerHierarchy.json })
 
-        hit.getAsHierarchy(attributeA) shouldEqual TestKSerializerHierarchy.item
+        hit.getHierarchy(attributeA) shouldEqual TestKSerializerHierarchy.item
     }
 }

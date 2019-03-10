@@ -144,20 +144,6 @@ public data class ResponseSearch(
         val json: JsonObject
     ) {
 
-        @Transient
-        public val highlights: Map<Attribute, HighlightResult>? =
-            json.getObjectOrNull(Key_HighlightResult)?.toHighlightResults()
-
-        @Transient
-        val snippets: Map<Attribute, SnippetResult>? = json.getObjectOrNull(Key_SnippetResult)?.toSnippetResults()
-
-        @Transient
-        val rankingInfo: RankingInfo? = json.getObjectOrNull(Key_RankingInfo)?.toRankingInfo()
-
-        @Transient
-        val distinctSequentialID: Int? = json.getPrimitiveOrNull(Key_DistinctSeqID)?.int
-
-
         public fun <T> get(serializer: KSerializer<T>, attribute: Attribute): T {
             return Json.plain.fromJson(serializer, json.getAs(attribute.raw))
         }
@@ -166,8 +152,48 @@ public data class ResponseSearch(
             return Json.nonstrict.fromJson(serializer, json)
         }
 
-        public fun getAsHierarchy(attribute: Attribute): Hierarchy {
+        public fun getDistinctSequentialID(): Int {
+            return json.getPrimitive(Key_DistinctSeqID).int
+        }
+
+        public fun getHierarchy(attribute: Attribute): Hierarchy {
             return Json.plain.fromJson(KSerializerHierarchy, json.getAs(attribute.raw))
+        }
+
+        public fun getRankingInfo(): RankingInfo {
+            return Json.plain.fromJson(RankingInfo.serializer(), json.getAs(Key_RankingInfo))
+        }
+
+        public fun getHighlightResult(attribute: Attribute): HighlightResult {
+            return getHighlightResult(HighlightResult.serializer(), attribute)
+        }
+
+        public fun getHighlightResults(attribute: Attribute): List<HighlightResult> {
+            return getHighlightResult(HighlightResult.serializer().list, attribute)
+        }
+
+        public fun getHighlightResultMap(attribute: Attribute): Map<Attribute, List<HighlightResult>> {
+            return getHighlightResult(KSerializerHighlightResults, attribute)
+        }
+
+        public fun getSnippetResult(attribute: Attribute): SnippetResult {
+            return getSnippetResult(SnippetResult.serializer(), attribute)
+        }
+
+        public fun getSnippetResults(attribute: Attribute): List<SnippetResult> {
+            return getSnippetResult(SnippetResult.serializer().list, attribute)
+        }
+
+        public fun getSnippetResultMap(attribute: Attribute): Map<Attribute, List<SnippetResult>> {
+            return getSnippetResult(KSerializerSnippetResults, attribute)
+        }
+
+        private fun <T> getHighlightResult(serializer: KSerializer<T>, attribute: Attribute): T {
+            return Json.plain.fromJson(serializer, json.getObject(Key_HighlightResult).getAs(attribute.raw))
+        }
+
+        private fun <T> getSnippetResult(serializer: KSerializer<T>, attribute: Attribute): T {
+            return Json.plain.fromJson(serializer, json.getObject(Key_SnippetResult).getAs(attribute.raw))
         }
 
         @Serializer(Hit::class)

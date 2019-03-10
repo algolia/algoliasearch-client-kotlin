@@ -31,8 +31,8 @@ internal class TestResponseSearchHit : TestSerializer<ResponseSearch.Hit>(Respon
 
         val highlights = mapOf(attributeA to TestHighlightResult.highlightResult)
         val snippets = mapOf(
-            attributeA to SnippetResult(unknown, MatchLevel.None),
-            attributeB to SnippetResult(unknown, MatchLevel.None)
+            attributeA to listOf(SnippetResult(unknown, MatchLevel.None)),
+            attributeB to listOf(SnippetResult(unknown, MatchLevel.None))
         )
         val json = json {
             Key_HighlightResult to Json.plain.toJson(
