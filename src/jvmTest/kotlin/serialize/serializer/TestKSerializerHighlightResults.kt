@@ -2,27 +2,24 @@ package serialize.serializer
 
 import attributeA
 import attributeB
+import com.algolia.search.model.Attribute
+import com.algolia.search.model.search.HighlightResult
 import com.algolia.search.serialize.KSerializerHighlightResults
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import serialize.TestSerializer
 import serialize.search.TestHighlightResult
-import shouldEqual
 
 
 @RunWith(JUnit4::class)
-internal class TestKSerializerHighlightResults {
+internal class TestKSerializerHighlightResults :
+    TestSerializer<Map<Attribute, List<HighlightResult>>>(KSerializerHighlightResults) {
 
-    @Test
-    fun test() {
-        val serialized = Json.plain.stringify(KSerializerHighlightResults, item)
-        val deserialized = Json.plain.parse(KSerializerHighlightResults, serialized)
-
-        deserialized shouldEqual item
-    }
+    override val items = listOf(
+        item to json
+    )
 
     companion object {
 
