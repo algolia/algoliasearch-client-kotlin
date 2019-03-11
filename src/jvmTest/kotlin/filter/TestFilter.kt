@@ -6,6 +6,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldEqual
+import shouldFailWith
 
 
 @RunWith(JUnit4::class)
@@ -58,11 +59,23 @@ internal class TestFilter {
 
     @Test
     fun range() {
-        val filter = FilterRange(attributeA, 5.0, 6.0)
-        val filterNegate = !FilterRange(attributeA, 5.0, 6.0)
+        val filterInt = FilterRange(attributeA, 0, 6)
+        val filterLong = FilterRange(attributeA, 0L, 6L)
+        val filterFloat = FilterRange(attributeA, 0f, 6f)
+        val filterDouble = FilterRange(attributeA, 0f, 6f)
+        val filterRangeInt = FilterRange(attributeA, 0 until 6)
+        val filterRangeLong = FilterRange(attributeA, 0L..6L)
+        val filterNegate = !FilterRange(attributeA, 0.0, 6.0)
 
-        filter.build() shouldEqual "\"attributeA\":5.0 TO 6.0"
-        filterNegate.build() shouldEqual "NOT \"attributeA\":5.0 TO 6.0"
+        filterInt.build() shouldEqual "\"attributeA\":0 TO 6"
+        filterLong.build() shouldEqual "\"attributeA\":0 TO 6"
+        filterFloat.build() shouldEqual "\"attributeA\":0.0 TO 6.0"
+        filterDouble.build() shouldEqual "\"attributeA\":0.0 TO 6.0"
+        filterRangeInt.build() shouldEqual "\"attributeA\":0 TO 5"
+        filterRangeLong.build() shouldEqual "\"attributeA\":0 TO 6"
+        filterNegate.build() shouldEqual "NOT \"attributeA\":0.0 TO 6.0"
+
+        IllegalArgumentException::class shouldFailWith { FilterRange(attributeA, 1, 0) }
     }
 
     @Test
