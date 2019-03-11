@@ -101,8 +101,8 @@ internal class EndpointSearchImpl(
     ): ResponseSearch {
         val (orFilters, andFilters) = filters.partition { disjunctiveFacets.contains(it.attribute) }
         val queryAnd = buildAndQueries(query, andFilters, orFilters)
-        val queryOr = buildOrQueries(disjunctiveFacets, query, andFilters, orFilters)
-        val results = EndpointMultipleIndexImpl(api).multipleQueries(queryAnd.plus(queryOr)).results
+        val queriesOr = buildOrQueries(disjunctiveFacets, query, andFilters, orFilters)
+        val results = EndpointMultipleIndexImpl(api).multipleQueries(queryAnd.plus(queriesOr)).results
         val resultAnd = results.first()
         val resultsOr = results.subList(1, results.size)
         val facets = resultsOr.map { it.facets.toMutableMap() }.reduce { acc, map -> acc.apply { this += map } }
