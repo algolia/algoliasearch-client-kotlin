@@ -1,10 +1,10 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.client.*
-import com.algolia.search.filter.FilterFacet
-import com.algolia.search.filter.build
+import com.algolia.search.filter.*
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacetValue
 import com.algolia.search.model.search.Cursor
@@ -22,14 +22,6 @@ internal class EndpointSearchImpl(
     override val indexName: IndexName
 ) : EndpointSearch,
     APIWrapper by api {
-
-    private suspend fun search(requestOptions: RequestOptions?): ResponseSearch {
-        return retryRead(requestOptions, indexName.toPath()) { url ->
-            httpClient.get<ResponseSearch>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
-    }
 
     override suspend fun search(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
         val copy = query?.build()
@@ -111,5 +103,42 @@ internal class EndpointSearchImpl(
             disjunctiveFacetsOrNull = facets,
             exhaustiveFacetsCountOrNull = resultsOr.any { it.exhaustiveFacetsCountOrNull == true }
         )
+    }
+
+    private val groupAnd = GroupAnd("conjunctive")
+    private val groupOr = GroupOr("disjunctive")
+
+    private fun buildAndQueries(
+        query: Query,
+        andFilters: List<FilterFacet>,
+        orFilters: List<FilterFacet>
+    ): List<IndexQuery> {
+        return query.copy().apply {
+            filterBuilder {
+                groupAnd += andFilters
+                groupOr += orFilters
+            }
+        }.let { listOf(IndexQuery(indexName, it)) }
+    }
+
+    private fun buildOrQueries(
+        disjunctiveFacets: List<Attribute>,
+        query: Query,
+        andFilters: List<FilterFacet>,
+        orFilters: List<FilterFacet>
+    ): List<IndexQuery> {
+        return disjunctiveFacets.map { attribute ->
+            query.copy().apply {
+                setFacets(attribute)
+                setAttributesToRetrieve()
+                setAttributesToHighlight()
+                filterBuilder {
+                    groupAnd += andFilters
+                    groupOr += orFilters.filter { it.attribute != attribute }
+                }
+                hitsPerPage = 0
+                analytics = false
+            }
+        }.map { IndexQuery(indexName, it) }
     }
 }
