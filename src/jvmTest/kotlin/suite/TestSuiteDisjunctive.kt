@@ -1,9 +1,9 @@
 package suite
 
 import com.algolia.search.filter.FilterFacet
-import com.algolia.search.helper.get
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.search.get
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task

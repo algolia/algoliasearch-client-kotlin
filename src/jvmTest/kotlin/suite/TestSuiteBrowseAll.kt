@@ -1,8 +1,5 @@
 package suite
 
-import com.algolia.search.helper.browseAllObjects
-import com.algolia.search.helper.browseAllRules
-import com.algolia.search.helper.browseAllSynonyms
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.Synonym

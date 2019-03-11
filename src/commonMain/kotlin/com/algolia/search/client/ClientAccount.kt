@@ -1,8 +1,5 @@
 package com.algolia.search.client
 
-import com.algolia.search.helper.browseAllObjects
-import com.algolia.search.helper.browseAllRules
-import com.algolia.search.helper.browseAllSynonyms
 import com.algolia.search.model.task.Task
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode

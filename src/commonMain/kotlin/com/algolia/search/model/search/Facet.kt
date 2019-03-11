@@ -1,5 +1,6 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyCount
 import com.algolia.search.serialize.KeyHighlighted
 import com.algolia.search.serialize.KeyName
@@ -18,4 +19,13 @@ public data class Facet(
     @Transient
     val highlighted: String
         get() = highlightedOrNull!!
+}
+
+public operator fun List<Facet>.get(name: String): Int {
+    return find { it.name == name }!!.count
+}
+
+
+public operator fun Map<Attribute, List<Facet>>.get(attribute: Attribute, name: String): Int {
+    return getValue(attribute).find { it.name == name }!!.count
 }

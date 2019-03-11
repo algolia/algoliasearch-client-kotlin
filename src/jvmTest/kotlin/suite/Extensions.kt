@@ -1,16 +1,15 @@
 package suite
 
-import com.algolia.search.helper.browseAllABTests
 import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientSearch
+import com.algolia.search.helper.toAPIKey
+import com.algolia.search.helper.toApplicationID
+import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.helper.toAPIKey
-import com.algolia.search.helper.toApplicationID
-import com.algolia.search.helper.toIndexName
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import shouldEqual
