@@ -13,10 +13,10 @@ internal class TestNumericOperator {
     @Test
     fun raw() {
         NumericOperator.Lesser.raw shouldEqual "<"
-        NumericOperator.LesserOrEqual.raw shouldEqual "<="
+        NumericOperator.LesserOrEquals.raw shouldEqual "<="
         NumericOperator.Equals.raw shouldEqual "="
         NumericOperator.NotEquals.raw shouldEqual "!="
-        NumericOperator.GreaterOrEqual.raw shouldEqual ">="
+        NumericOperator.GreaterOrEquals.raw shouldEqual ">="
         NumericOperator.Greater.raw shouldEqual ">"
     }
 }
