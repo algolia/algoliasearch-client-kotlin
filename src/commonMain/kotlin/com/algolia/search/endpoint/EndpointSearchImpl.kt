@@ -8,6 +8,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacetValue
 import com.algolia.search.model.search.Cursor
+import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import io.ktor.client.request.get
@@ -106,10 +107,20 @@ internal class EndpointSearchImpl(
         val resultAnd = results.first()
         val resultsOr = results.subList(1, results.size)
         val facets = resultsOr.map { it.facets.toMutableMap() }.reduce { acc, map -> acc.apply { this += map } }
+        val facetStats = mutableMapOf<Attribute, FacetStats>()
 
+        resultAnd.facetStatsOrNull?.let {
+            facetStats += it
+        }
+        resultsOr.forEach {
+            it.facetStatsOrNull?.let {
+                facetStats += it
+            }
+        }
         return resultAnd.copy(
             disjunctiveFacetsOrNull = facets,
-            exhaustiveFacetsCountOrNull = resultsOr.any { it.exhaustiveFacetsCountOrNull == true }
+            exhaustiveFacetsCountOrNull = resultsOr.any { it.exhaustiveFacetsCountOrNull == true },
+            facetStatsOrNull = if (facetStats.isEmpty()) null else facetStats
         )
     }
 }

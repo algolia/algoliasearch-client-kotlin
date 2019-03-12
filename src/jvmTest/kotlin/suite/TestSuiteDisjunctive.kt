@@ -3,6 +3,7 @@ package suite
 import com.algolia.search.filter.FilterFacet
 import com.algolia.search.helper.get
 import com.algolia.search.helper.toAttribute
+import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
@@ -40,13 +41,14 @@ internal class TestSuiteDisjunctive {
             val brand = "brand".toAttribute()
             val category = "category".toAttribute()
             val stars = "stars".toAttribute()
+            val facets = listOf(brand, category, stars)
             val settings = Settings(
-                attributesForFaceting = listOf(brand, category).map { AttributeForFaceting.Default(it) }
+                attributesForFaceting = facets.map { AttributeForFaceting.Default(it) }
             )
             val objects = load(JsonObjectSerializer.list, "disjunctive_A.json")
             val query = Query(
                 query = "phone",
-                facets = listOf(brand, category, stars)
+                facets = facets
             )
             val disjunctiveFacets = listOf(brand)
             val filters = listOf(
@@ -72,6 +74,8 @@ internal class TestSuiteDisjunctive {
                 it.disjunctiveFacets[brand, "Whatever"] shouldEqual 1
                 it.disjunctiveFacets[brand, "Commas' voice, Ltd"] shouldEqual 1
                 it.exhaustiveFacetsCount.shouldBeTrue()
+                it.facetStats.size shouldEqual 1
+                it.facetStats[stars] shouldEqual FacetStats(2f, 5f, 4f, 16f)
             }
         }
     }
@@ -116,6 +120,8 @@ internal class TestSuiteDisjunctive {
                     this[facilities, "bath"] shouldEqual 2
                     this[facilities, "wifi"] shouldEqual 2
                 }
+                it.facetStats.size shouldEqual 1
+                it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 12f)
             }
             filters += FilterFacet(stars, "1")
             index.searchDisjunctiveFacets(query, disjunctiveFacets, filters).let {
@@ -133,6 +139,8 @@ internal class TestSuiteDisjunctive {
                     this[facilities, "wifi"] shouldEqual 2
                 }
                 it.exhaustiveFacetsCount.shouldBeTrue()
+                it.facetStats.size shouldEqual 1
+                it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 12f)
             }
             filters += FilterFacet(city, "Paris")
             index.searchDisjunctiveFacets(query, disjunctiveFacets, filters).let {
@@ -148,6 +156,8 @@ internal class TestSuiteDisjunctive {
                     this[facilities, "bath"] shouldEqual 1
                     this[facilities, "wifi"] shouldEqual 2
                 }
+                it.facetStats.size shouldEqual 1
+                it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 6f)
             }
             filters += FilterFacet(stars, "4")
             index.searchDisjunctiveFacets(query, disjunctiveFacets, filters).let {
@@ -163,6 +173,8 @@ internal class TestSuiteDisjunctive {
                     this[facilities, "bath"] shouldEqual 1
                     this[facilities, "wifi"] shouldEqual 2
                 }
+                it.facetStats.size shouldEqual 1
+                it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 6f)
             }
         }
     }
