@@ -36,19 +36,19 @@ public class ClientSearch private constructor(
     EndpointMultipleIndex by EndpointMultipleIndexImpl(api),
     EndpointAPIKey by EndpointAPIKeyImpl(api),
     EndpointMultiCluster by EndpointMulticlusterImpl(api),
-    ConfigurationInterface by api {
+    Configuration by api {
 
     public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
-    ) : this(APIWrapperImpl(Configuration(applicationID, apiKey, hosts = null)))
+    ) : this(APIWrapperImpl(ConfigurationImpl(applicationID, apiKey, hosts = null)))
 
     public constructor(
-        configuration: Configuration
+        configuration: ConfigurationImpl
     ) : this(APIWrapperImpl(configuration))
 
     public constructor(
-        configuration: Configuration,
+        configuration: ConfigurationImpl,
         engine: HttpClientEngine?
     ) : this(APIWrapperImpl(configuration, engine))
 

@@ -1,6 +1,6 @@
 package com.algolia.search.host
 
-import com.algolia.search.client.Configuration
+import com.algolia.search.client.ConfigurationImpl
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.Time
 import kotlin.random.Random
@@ -64,10 +64,10 @@ internal fun ApplicationID.writeHosts(): List<String> {
     return listOf(writeHost) + buildFallbackHosts().randomize()
 }
 
-internal fun Configuration.readHosts(): List<String> {
+internal fun ConfigurationImpl.readHosts(): List<String> {
     return hosts ?: applicationID.readHosts()
 }
 
-internal fun Configuration.writeHosts(): List<String> {
+internal fun ConfigurationImpl.writeHosts(): List<String> {
     return hosts ?: applicationID.writeHosts()
 }

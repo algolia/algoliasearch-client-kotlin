@@ -4,7 +4,7 @@ import com.algolia.search.host.RetryLogic
 import io.ktor.client.HttpClient
 
 
-internal interface APIWrapper : ConfigurationInterface {
+internal interface APIWrapper : Configuration {
 
     val httpClient: HttpClient
     val read: RetryLogic

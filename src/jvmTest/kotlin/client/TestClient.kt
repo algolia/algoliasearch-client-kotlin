@@ -13,7 +13,7 @@ import shouldEqual
 @RunWith(JUnit4::class)
 internal class TestClient {
 
-    private val configuration = Configuration(
+    private val configuration = ConfigurationImpl(
         apiKey = "apiKey".toAPIKey(),
         applicationID = "appID".toApplicationID(),
         hosts = listOf("host")
@@ -38,7 +38,7 @@ internal class TestClient {
         ClientAnalytics(configuration, engine) shouldEqual configuration
     }
 
-    private infix fun ConfigurationInterface.shouldEqual(expected: Configuration) {
+    private infix fun Configuration.shouldEqual(expected: ConfigurationImpl) {
         expected.let {
             apiKey shouldEqual it.apiKey
             applicationID shouldEqual it.applicationID

@@ -1,7 +1,7 @@
 package suite
 
 import com.algolia.search.client.ClientSearch
-import com.algolia.search.client.Configuration
+import com.algolia.search.client.ConfigurationImpl
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
 import io.ktor.client.features.logging.LogLevel
@@ -20,7 +20,7 @@ internal class TestSuiteDNS {
             val applicationID = System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID()
 
             val client = ClientSearch(
-                Configuration(
+                ConfigurationImpl(
                     applicationID,
                     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey(),
                     hosts = listOf(

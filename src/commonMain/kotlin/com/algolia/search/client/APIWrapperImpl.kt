@@ -21,10 +21,10 @@ import kotlinx.serialization.json.JsonObjectSerializer
 
 
 internal class APIWrapperImpl(
-    configuration: Configuration,
+    configuration: ConfigurationImpl,
     engine: HttpClientEngine? = null
 ) : APIWrapper,
-    ConfigurationInterface by configuration {
+    Configuration by configuration {
 
     private val selected = engine?.let { HttpClient(it) } ?: HttpClient()
 

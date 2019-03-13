@@ -42,13 +42,9 @@ public sealed class TypoTolerance(override val raw: String) : Raw<String> {
 
             return when {
                 element.booleanOrNull != null -> Boolean(element.boolean)
-                else -> {
-                    when (val content = element.content) {
-                        KeyMin -> Min
-                        KeyStrict -> Strict
-                        else -> Other(content)
-                    }
-                }
+                element.content == KeyMin -> Min
+                element.content == KeyStrict -> Min
+                else -> Other(element.content)
             }
         }
     }

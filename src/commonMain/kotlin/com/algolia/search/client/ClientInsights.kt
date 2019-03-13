@@ -13,19 +13,19 @@ import io.ktor.client.engine.HttpClientEngine
 public class ClientInsights private constructor(
     internal val api: APIWrapperImpl
 ) : EndpointInsights by EndpointInsightsImpl(api),
-    ConfigurationInterface by api {
+    Configuration by api {
 
     public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
-    ) : this(APIWrapperImpl(Configuration(applicationID, apiKey, hosts = listOf("https://insights.algolia.io"))))
+    ) : this(APIWrapperImpl(ConfigurationImpl(applicationID, apiKey, hosts = listOf("https://insights.algolia.io"))))
 
     public constructor(
-        configuration: Configuration
+        configuration: ConfigurationImpl
     ) : this(APIWrapperImpl(configuration))
 
     public constructor(
-        configuration: Configuration,
+        configuration: ConfigurationImpl,
         engine: HttpClientEngine?
     ) : this(APIWrapperImpl(configuration, engine))
 
