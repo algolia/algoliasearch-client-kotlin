@@ -26,7 +26,7 @@ public sealed class Synonym {
     ) : Synonym() {
 
         init {
-            if (input.isEmpty()) throw EmptyStringException("Input")
+            if (input.isBlank()) throw EmptyStringException("Input")
             if (synonyms.isEmpty()) throw EmptyListException("Synonyms")
         }
     }
@@ -49,7 +49,7 @@ public sealed class Synonym {
     ) : Synonym() {
 
         init {
-            if (word.isEmpty()) throw EmptyStringException("Word")
+            if (word.isBlank()) throw EmptyStringException("Word")
             if (corrections.isEmpty()) throw EmptyListException("Corrections")
         }
 
@@ -70,7 +70,7 @@ public sealed class Synonym {
             override val raw = "<$token>"
 
             init {
-                if (token.isEmpty()) throw EmptyStringException("Token")
+                if (token.isBlank()) throw EmptyStringException("Token")
             }
         }
     }

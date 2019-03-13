@@ -18,6 +18,11 @@ internal class TestIndexName {
     }
 
     @Test
+    fun rawShouldNotBeBlank() {
+        EmptyStringException::class shouldFailWith { IndexName(" ") }
+    }
+
+    @Test
     fun pathIndexes() {
         val index = IndexName("somePath")
 

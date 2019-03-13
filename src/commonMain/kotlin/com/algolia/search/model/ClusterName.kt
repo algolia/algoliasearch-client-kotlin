@@ -13,7 +13,7 @@ import kotlinx.serialization.internal.StringSerializer
 public data class ClusterName(override val raw: String) : Raw<String> {
 
     init {
-        if (raw.isEmpty()) throw EmptyStringException("ClusterName")
+        if (raw.isBlank()) throw EmptyStringException("ClusterName")
     }
 
     override fun toString(): String {

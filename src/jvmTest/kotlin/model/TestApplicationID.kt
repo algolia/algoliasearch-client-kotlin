@@ -15,4 +15,9 @@ internal class TestApplicationID {
     fun rawShouldNotBeEmpty() {
         EmptyStringException::class shouldFailWith { ApplicationID("") }
     }
+
+    @Test
+    fun rawShouldNotBeBlank() {
+        EmptyStringException::class shouldFailWith { ApplicationID(" ") }
+    }
 }

@@ -13,7 +13,7 @@ import kotlinx.serialization.internal.StringSerializer
 public data class QueryID(override val raw: String) : Raw<String> {
 
     init {
-        if (raw.isEmpty()) throw EmptyStringException("QueryID")
+        if (raw.isBlank()) throw EmptyStringException("QueryID")
     }
 
     override fun toString(): String {

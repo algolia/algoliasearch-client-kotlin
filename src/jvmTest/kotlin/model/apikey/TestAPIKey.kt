@@ -15,4 +15,9 @@ internal class TestAPIKey {
     fun rawShouldNotBeEmpty() {
         EmptyStringException::class shouldFailWith { APIKey("") }
     }
+
+    @Test
+    fun rawShouldNotBeBlank() {
+        EmptyStringException::class shouldFailWith { APIKey(" ") }
+    }
 }

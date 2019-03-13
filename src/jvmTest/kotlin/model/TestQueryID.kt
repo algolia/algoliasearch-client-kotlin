@@ -15,4 +15,9 @@ internal class TestQueryID {
     fun rawShouldNotBeEmpty() {
         EmptyStringException::class shouldFailWith { QueryID("") }
     }
+
+    @Test
+    fun rawShouldNotBeBlank() {
+        EmptyStringException::class shouldFailWith { QueryID(" ") }
+    }
 }

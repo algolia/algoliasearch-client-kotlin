@@ -15,7 +15,7 @@ import kotlinx.serialization.internal.StringSerializer
 public data class UserToken(override val raw: String) : Raw<String> {
 
     init {
-        if (raw.isEmpty()) throw EmptyStringException("UserToken")
+        if (raw.isBlank()) throw EmptyStringException("UserToken")
         if (raw.length > 64) throw IllegalArgumentException("UserToken length can't be superior to 64 characters.")
         if (!regexUserToken.matches(raw)) throw IllegalArgumentException("UserToken allows only characters of type [a-zA-Z0-9_-]")
     }

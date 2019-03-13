@@ -14,7 +14,7 @@ import kotlinx.serialization.internal.StringSerializer
 public data class EventName(override val raw: String) : Raw<String> {
 
     init {
-        if (raw.isEmpty()) throw EmptyStringException("EventName")
+        if (raw.isBlank()) throw EmptyStringException("EventName")
         if (raw.length > 64) throw IllegalArgumentException("EventName length can't be superior to 64 characters.")
     }
 

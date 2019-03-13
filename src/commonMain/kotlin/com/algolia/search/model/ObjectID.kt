@@ -11,7 +11,7 @@ import kotlinx.serialization.internal.StringSerializer
 public data class ObjectID(@SerialName(KeyObjectID) override val raw: String) : Raw<String> {
 
     init {
-        if (raw.isEmpty()) throw EmptyStringException(KeyObjectID)
+        if (raw.isBlank()) throw EmptyStringException(KeyObjectID)
     }
 
     override fun toString(): String {

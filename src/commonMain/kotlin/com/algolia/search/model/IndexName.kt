@@ -17,7 +17,7 @@ public data class IndexName(
 ) : Raw<String> {
 
     init {
-        if (raw.isEmpty()) throw EmptyStringException("IndexName")
+        if (raw.isBlank()) throw EmptyStringException("IndexName")
     }
 
     private fun encode(): StringUTF8 {

@@ -18,6 +18,11 @@ internal class TestUserToken {
     }
 
     @Test
+    fun rawShouldNotBeBlank() {
+        EmptyStringException::class shouldFailWith { UserToken(" ") }
+    }
+
+    @Test
     fun rawShouldNotBeLongerThan64() {
         val stringShorterThan64 = buildString {
             repeat(63) { append("a") }

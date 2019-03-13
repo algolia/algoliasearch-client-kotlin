@@ -15,4 +15,9 @@ internal class TestAttribute {
     fun rawShouldNotBeEmpty() {
         EmptyStringException::class shouldFailWith { Attribute("") }
     }
+
+    @Test
+    fun rawShouldNotBeBlank() {
+        EmptyStringException::class shouldFailWith { Attribute(" ") }
+    }
 }

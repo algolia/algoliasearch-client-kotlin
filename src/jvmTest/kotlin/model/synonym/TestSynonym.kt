@@ -19,6 +19,7 @@ internal class TestSynonym {
     @Test
     fun tokenShouldNotBeEmpty() {
         EmptyStringException::class shouldFailWith { Synonym.Placeholder.Token("") }
+        EmptyStringException::class shouldFailWith { Synonym.Placeholder.Token(" ") }
     }
 
     @Test
@@ -29,6 +30,7 @@ internal class TestSynonym {
     @Test
     fun oneWayInputShouldNotBeEmpty() {
         EmptyStringException::class shouldFailWith { Synonym.OneWay(objectIDA, "", listOf()) }
+        EmptyStringException::class shouldFailWith { Synonym.OneWay(objectIDA, " ", listOf()) }
     }
 
     @Test
@@ -45,6 +47,7 @@ internal class TestSynonym {
     fun alternativeWordShouldNotBeEmpty() {
         EmptyStringException::class shouldFailWith {
             Synonym.AlternativeCorrections(objectIDA, "", listOf(), SynonymType.Typo.One)
+            Synonym.AlternativeCorrections(objectIDA, " ", listOf(), SynonymType.Typo.One)
         }
     }
 
