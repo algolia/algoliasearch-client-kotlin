@@ -52,12 +52,8 @@ public class ClientSearch private constructor(
         engine: HttpClientEngine?
     ) : this(APIWrapperImpl(configuration, engine))
 
-    private val indices = mutableMapOf<IndexName, Index>()
-
     public fun initIndex(indexName: IndexName): Index {
-        return indices.getOrPut(indexName) {
-            Index(api, indexName)
-        }
+        return Index(api, indexName)
     }
 
     // Todo test this
