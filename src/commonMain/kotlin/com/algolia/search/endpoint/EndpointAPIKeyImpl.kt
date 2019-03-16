@@ -1,6 +1,8 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.configuration.CallType
+import com.algolia.search.transport.Transport
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
@@ -16,16 +18,12 @@ import com.algolia.search.serialize.RouteKeysV1
 import com.algolia.search.serialize.stringify
 import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.serialize.urlEncode
-import io.ktor.client.request.delete
-import io.ktor.client.request.get
-import io.ktor.client.request.post
-import io.ktor.client.request.put
+import io.ktor.http.HttpMethod
 
 
 internal class EndpointAPIKeyImpl(
-    val api: APIWrapper
-) : EndpointAPIKey,
-    APIWrapper by api {
+    private val transport: Transport
+) : EndpointAPIKey {
 
     override suspend fun addAPIKey(
         rights: List<ACL>?,
@@ -39,7 +37,7 @@ internal class EndpointAPIKeyImpl(
         restrictSources: String?,
         requestOptions: RequestOptions?
     ): CreationAPIKey {
-        val bodyString = RequestAPIKey(
+        val body = RequestAPIKey(
             rights = rights,
             indices = indices,
             description = description,
@@ -51,12 +49,7 @@ internal class EndpointAPIKeyImpl(
             restrictSources = restrictSources
         ).stringify()
 
-        return retryWrite(requestOptions, RouteKeysV1) { url ->
-            httpClient.post<CreationAPIKey>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Write, RouteKeysV1, requestOptions, body)
     }
 
     override suspend fun updateAPIKey(
@@ -71,7 +64,7 @@ internal class EndpointAPIKeyImpl(
         referers: List<String>?,
         requestOptions: RequestOptions?
     ): RevisionAPIKey {
-        val bodyString = RequestAPIKey(
+        val body = RequestAPIKey(
             rights = rights,
             indices = indices,
             description = description,
@@ -82,38 +75,28 @@ internal class EndpointAPIKeyImpl(
             referers = referers
         ).stringify()
 
-        return retryWrite(requestOptions, "$RouteKeysV1/$apiKey") { url ->
-            httpClient.put<RevisionAPIKey>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Put, CallType.Write, "$RouteKeysV1/$apiKey", requestOptions, body)
     }
 
     override suspend fun deleteAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): DeletionAPIKey {
-        return retryWrite(requestOptions, "$RouteKeysV1/$apiKey") { url ->
-            httpClient.delete<Deletion>(url) {
-                setRequestOptions(requestOptions)
-            }.let { DeletionAPIKey(it.deletedAt, apiKey) }
-        }
+        return DeletionAPIKey(
+            transport.request<Deletion>(
+                HttpMethod.Delete,
+                CallType.Write,
+                "$RouteKeysV1/$apiKey",
+                requestOptions
+            ).deletedAt, apiKey
+        )
     }
 
     override suspend fun listAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
-        return retryRead(requestOptions, RouteKeysV1) { url ->
-            httpClient.get<ResponseListAPIKey>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Get, CallType.Read, RouteKeysV1, requestOptions)
     }
 
     override suspend fun getAPIKey(
         apiKey: APIKey,
         requestOptions: RequestOptions?
     ): ResponseAPIKey {
-        return retryRead(requestOptions, "$RouteKeysV1/$apiKey") { url ->
-            httpClient.get<ResponseAPIKey>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Get, CallType.Read, "$RouteKeysV1/$apiKey", requestOptions)
     }
 }

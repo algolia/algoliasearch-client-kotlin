@@ -1,7 +1,12 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.client.Index
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.filter.build
+import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.helper.toIndexName
+import com.algolia.search.configuration.CallType
+import com.algolia.search.transport.Transport
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
@@ -19,9 +24,8 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.Task
-import com.algolia.search.filter.build
 import com.algolia.search.serialize.*
-import io.ktor.client.request.*
+import io.ktor.http.HttpMethod
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
@@ -31,18 +35,12 @@ import kotlin.random.Random
 
 
 internal class EndpointIndexingImpl(
-    val api: APIWrapper,
+    private val transport: Transport,
     override val indexName: IndexName
-) : EndpointIndexing,
-    APIWrapper by api {
+) : EndpointIndexing {
 
-    private suspend fun saveObject(payload: String, requestOptions: RequestOptions?): CreationObject {
-        return retryWrite(requestOptions, indexName.toPath()) { url ->
-            httpClient.post<CreationObject>(url) {
-                body = payload
-                setRequestOptions(requestOptions)
-            }
-        }
+    private suspend fun saveObject(body: String, requestOptions: RequestOptions?): CreationObject {
+        return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath(), requestOptions, body)
     }
 
     override suspend fun <T> saveObject(
@@ -74,16 +72,11 @@ internal class EndpointIndexingImpl(
     }
 
     private suspend fun replaceObject(
-        payload: String,
+        body: String,
         objectID: ObjectID,
         requestOptions: RequestOptions?
     ): RevisionObject {
-        return retryWrite(requestOptions, indexName.toPath("/$objectID")) { url ->
-            httpClient.put<RevisionObject>(url) {
-                body = payload
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Put, CallType.Write, indexName.toPath("/$objectID"), requestOptions, body)
     }
 
     override suspend fun <T : Indexable> replaceObject(
@@ -122,11 +115,7 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun deleteObject(objectID: ObjectID, requestOptions: RequestOptions?): DeletionObject {
-        return retryWrite(requestOptions, indexName.toPath("/$objectID")) { url ->
-            httpClient.delete<DeletionObject>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Delete, CallType.Write, indexName.toPath("/$objectID"), requestOptions)
     }
 
     override suspend fun deleteObjects(objectIDs: List<ObjectID>, requestOptions: RequestOptions?): ResponseBatch {
@@ -136,15 +125,10 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): RevisionIndex {
-        val copy = query.build()
-        val bodyString = json { KeyParams to copy.toJsonNoDefaults().urlEncode() }.toString()
+        val path = indexName.toPath("/deleteByQuery")
+        val body = json { KeyParams to query.build().toJsonNoDefaults().urlEncode() }.toString()
 
-        return retryWrite(requestOptions, indexName.toPath("/deleteByQuery")) { url ->
-            httpClient.post<RevisionIndex>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
 
     private suspend fun getObjectInternal(
@@ -153,13 +137,11 @@ internal class EndpointIndexingImpl(
         requestOptions: RequestOptions?
     ): JsonObject {
         val attributesToRetrieve = attributes?.let { Json.stringify(Attribute.list, it.toList()) }
-
-        return retryRead(requestOptions, indexName.toPath("/$objectID")) { url ->
-            httpClient.get<JsonObject>(url) {
-                parameter(KeyAttributesToRetrieve, attributesToRetrieve)
-                setRequestOptions(requestOptions)
-            }
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyAttributesToRetrieve, attributesToRetrieve)
         }
+
+        return transport.request(HttpMethod.Get, CallType.Read, indexName.toPath("/$objectID"), options)
     }
 
     override suspend fun getObject(
@@ -187,14 +169,9 @@ internal class EndpointIndexingImpl(
         requestOptions: RequestOptions?
     ): ResponseObjects {
         val requests = objectIDs.map { RequestObjects(indexName, it, attributesToRetrieve) }
-        val bodyString = Json.noDefaults.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
+        val body = Json.noDefaults.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
-        return retryRead(requestOptions, "$RouteIndexesV1/*/objects") { url ->
-            httpClient.post<ResponseObjects>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/objects", requestOptions, body)
     }
 
     override suspend fun partialUpdateObject(
@@ -203,15 +180,13 @@ internal class EndpointIndexingImpl(
         createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionObject {
-        val payload = Json.plain.toJson(PartialUpdate, partialUpdate).toString()
-
-        return retryWrite(requestOptions, indexName.toPath("/$objectID/partial")) { url ->
-            httpClient.post<RevisionObject>(url) {
-                body = payload
-                parameter(KeyCreateIfNotExists, createIfNotExists)
-                setRequestOptions(requestOptions)
-            }
+        val path = indexName.toPath("/$objectID/partial")
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyCreateIfNotExists, createIfNotExists)
         }
+        val body = Json.plain.toJson(PartialUpdate, partialUpdate).toString()
+
+        return transport.request(HttpMethod.Post, CallType.Write, path, options, body)
     }
 
     override suspend fun partialUpdateObjects(
@@ -229,23 +204,13 @@ internal class EndpointIndexingImpl(
         requestOptions: RequestOptions?
     ): ResponseBatch {
         val requests = Json.plain.toJson(BatchOperation.list, batchOperations)
-        val bodyString = json { KeyRequests to requests }.toString()
+        val body = json { KeyRequests to requests }.toString()
 
-        return retryWrite(requestOptions, indexName.toPath("/batch")) { url ->
-            httpClient.post<ResponseBatch>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/batch"), requestOptions, body)
     }
 
     override suspend fun clearObjects(requestOptions: RequestOptions?): RevisionIndex {
-        return retryWrite(requestOptions, indexName.toPath("/clear")) { url ->
-            httpClient.post<RevisionIndex>(url) {
-                body = ""
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/clear"), requestOptions, "")
     }
 
     override suspend fun replaceAllObjects(
@@ -266,8 +231,8 @@ internal class EndpointIndexingImpl(
     }
 
     private suspend fun replaceAllObjectsInternal(batchOperations: List<BatchOperation>): List<Task> {
-        val indexSource = Index(api, indexName)
-        val indexDestination = Index(api, "${indexName}_tmp_${Random.nextInt()}".toIndexName())
+        val indexSource = Index(transport, indexName)
+        val indexDestination = Index(transport, "${indexName}_tmp_${Random.nextInt()}".toIndexName())
         val scopes = listOf(Scope.Settings, Scope.Rules, Scope.Synonyms)
 
         return mutableListOf<Task>().also {

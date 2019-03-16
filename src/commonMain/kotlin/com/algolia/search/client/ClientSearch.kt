@@ -1,7 +1,11 @@
 package com.algolia.search.client
 
+import com.algolia.search.configuration.CallType
+import com.algolia.search.configuration.Configuration
+import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.endpoint.*
 import com.algolia.search.helper.encodeBase64
+import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.helper.sha256
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.model.APIKey
@@ -19,10 +23,11 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyLength
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyType
-import io.ktor.client.engine.HttpClientEngine
+import com.algolia.search.serialize.RouteLogs
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.transport.Transport
 import io.ktor.client.features.BadResponseStatusException
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
+import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
@@ -31,7 +36,7 @@ import kotlinx.coroutines.withTimeout
 
 
 public class ClientSearch private constructor(
-    internal val api: APIWrapperImpl
+    private val api: Transport
 ) :
     EndpointMultipleIndex by EndpointMultipleIndexImpl(api),
     EndpointAPIKey by EndpointAPIKeyImpl(api),
@@ -41,16 +46,11 @@ public class ClientSearch private constructor(
     public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
-    ) : this(APIWrapperImpl(ConfigurationImpl(applicationID, apiKey, hosts = null)))
+    ) : this(Transport(ConfigurationSearch(applicationID, apiKey)))
 
     public constructor(
-        configuration: ConfigurationImpl
-    ) : this(APIWrapperImpl(configuration))
-
-    public constructor(
-        configuration: ConfigurationImpl,
-        engine: HttpClientEngine?
-    ) : this(APIWrapperImpl(configuration, engine))
+        configuration: ConfigurationSearch
+    ) : this(Transport(configuration))
 
     public fun initIndex(indexName: IndexName): Index {
         return Index(api, indexName)
@@ -117,16 +117,13 @@ public class ClientSearch private constructor(
         logType: LogType? = null,
         requestOptions: RequestOptions? = null
     ): ResponseLogs {
-        return api.run {
-            retryRead(requestOptions, "/1/logs") { url ->
-                httpClient.get<ResponseLogs>(url) {
-                    parameter(KeyOffset, offset)
-                    parameter(KeyLength, length)
-                    parameter(KeyType, logType?.raw)
-                    setRequestOptions(requestOptions)
-                }
-            }
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyOffset, offset)
+            parameter(KeyLength, length)
+            parameter(KeyType, logType?.raw)
         }
+
+        return api.request(HttpMethod.Get, CallType.Read, RouteLogs, options)
     }
 
     companion object {

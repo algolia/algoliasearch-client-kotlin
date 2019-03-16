@@ -1,6 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.helper.requestOptionsBuilder
+import com.algolia.search.configuration.CallType
+import com.algolia.search.transport.Transport
 import com.algolia.search.model.ClusterName
 import com.algolia.search.model.UserID
 import com.algolia.search.model.request.RequestSearchUserID
@@ -8,22 +11,18 @@ import com.algolia.search.model.response.*
 import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.deletion.Deletion
 import com.algolia.search.serialize.*
-import io.ktor.client.request.*
+import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 
 
 internal class EndpointMulticlusterImpl(
-    val api: APIWrapper
-) : EndpointMultiCluster,
-    APIWrapper by api {
-    
+    private val transport: Transport
+) : EndpointMultiCluster {
+
     override suspend fun listClusters(requestOptions: RequestOptions?): ResponseListClusters {
-        return retryRead(requestOptions, RouteClustersV1) { url ->
-            httpClient.get<ResponseListClusters>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+
+        return transport.request(HttpMethod.Get, CallType.Read, RouteClustersV1, requestOptions)
     }
 
     override suspend fun assignUserID(
@@ -31,31 +30,20 @@ internal class EndpointMulticlusterImpl(
         clusterName: ClusterName,
         requestOptions: RequestOptions?
     ): Creation {
-        val bodyString = json { KeyCluster to clusterName.raw }.toString()
-
-        return retryWrite(requestOptions, "$RouteClustersV1/mapping") { url ->
-            httpClient.post<Creation>(url) {
-                body = bodyString
-                header(KeyAlgoliaUserID, userID.raw)
-                setRequestOptions(requestOptions)
-            }
+        val body = json { KeyCluster to clusterName.raw }.toString()
+        val options = requestOptionsBuilder(requestOptions) {
+            header(KeyAlgoliaUserID, userID.raw)
         }
+
+        return transport.request(HttpMethod.Post, CallType.Write, "$RouteClustersV1/mapping", options, body)
     }
 
     override suspend fun getUserID(userID: UserID, requestOptions: RequestOptions?): ResponseUserID {
-        return retryRead(requestOptions, "$RouteClustersV1/mapping/$userID") { url ->
-            httpClient.get<ResponseUserID>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Get, CallType.Read, "$RouteClustersV1/mapping/$userID", requestOptions)
     }
 
     override suspend fun getTopUserID(requestOptions: RequestOptions?): ResponseTopUserID {
-        return retryRead(requestOptions, "$RouteClustersV1/mapping/top") { url ->
-            httpClient.get<ResponseTopUserID>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Get, CallType.Read, "$RouteClustersV1/mapping/top", requestOptions)
     }
 
     override suspend fun listUserIDs(
@@ -63,22 +51,19 @@ internal class EndpointMulticlusterImpl(
         hitsPerPage: Int?,
         requestOptions: RequestOptions?
     ): ResponseListUserIDs {
-        return retryRead(requestOptions, "$RouteClustersV1/mapping") { url ->
-            httpClient.get<ResponseListUserIDs>(url) {
-                parameter(KeyPage, page)
-                parameter(KeyHitsPerPage, hitsPerPage)
-                setRequestOptions(requestOptions)
-            }
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyPage, page)
+            parameter(KeyHitsPerPage, hitsPerPage)
         }
+
+        return transport.request(HttpMethod.Get, CallType.Read, "$RouteClustersV1/mapping", options)
     }
 
     override suspend fun removeUserID(userID: UserID, requestOptions: RequestOptions?): Deletion {
-        return retryWrite(requestOptions, "$RouteClustersV1/mapping") { url ->
-            httpClient.delete<Deletion>(url) {
-                header(KeyAlgoliaUserID, userID)
-                setRequestOptions(requestOptions)
-            }
+        val options = requestOptionsBuilder(requestOptions) {
+            header(KeyAlgoliaUserID, userID)
         }
+        return transport.request(HttpMethod.Delete, CallType.Write, "$RouteClustersV1/mapping", options)
     }
 
     override suspend fun searchUserID(
@@ -88,14 +73,10 @@ internal class EndpointMulticlusterImpl(
         hitsPerPage: Int?,
         requestOptions: RequestOptions?
     ): ResponseSearchUserID {
+        val path = "$RouteClustersV1/mapping/search"
         val request = RequestSearchUserID(query, clusterName, page, hitsPerPage)
-        val bodyString = Json.noDefaults.stringify(RequestSearchUserID.serializer(), request)
+        val body = Json.noDefaults.stringify(RequestSearchUserID.serializer(), request)
 
-        return retryRead(requestOptions, "$RouteClustersV1/mapping/search") { url ->
-            httpClient.post<ResponseSearchUserID>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }
 }

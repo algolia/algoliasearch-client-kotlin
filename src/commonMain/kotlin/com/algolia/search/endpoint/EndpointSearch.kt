@@ -1,6 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.RequestOptions
+import com.algolia.search.transport.RequestOptions
 import com.algolia.search.filter.FilterFacet
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName

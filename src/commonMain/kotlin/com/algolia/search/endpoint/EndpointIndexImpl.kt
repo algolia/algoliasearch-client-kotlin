@@ -1,9 +1,8 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.APIWrapper
-import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.retryWrite
-import com.algolia.search.client.setRequestOptions
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.configuration.CallType
+import com.algolia.search.transport.Transport
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.index.Scope
 import com.algolia.search.model.request.RequestCopyOrMove
@@ -12,16 +11,14 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.serialize.KeyCopy
 import com.algolia.search.serialize.KeyMove
 import com.algolia.search.serialize.noDefaults
-import io.ktor.client.request.delete
-import io.ktor.client.request.post
+import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
 
 
 internal class EndpointIndexImpl(
-    val api: APIWrapper,
+    private val transport: Transport,
     override val indexName: IndexName
-) : EndpointIndex,
-    APIWrapper by api {
+) : EndpointIndex {
 
     private suspend fun copyOrMove(
         destination: IndexName,
@@ -30,14 +27,9 @@ internal class EndpointIndexImpl(
         requestOptions: RequestOptions?
     ): RevisionIndex {
         val request = RequestCopyOrMove(key, destination, scopes)
-        val bodyString = Json.noDefaults.stringify(RequestCopyOrMove.serializer(), request)
+        val body = Json.noDefaults.stringify(RequestCopyOrMove.serializer(), request)
 
-        return retryWrite(requestOptions, indexName.toPath("/operation")) { url ->
-            httpClient.post<RevisionIndex>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/operation"), requestOptions, body)
     }
 
     override suspend fun copyIndex(
@@ -53,11 +45,7 @@ internal class EndpointIndexImpl(
     }
 
     override suspend fun deleteIndex(requestOptions: RequestOptions?): DeletionIndex {
-        return retryWrite(requestOptions, indexName.toPath()) { url ->
-            httpClient.delete<DeletionIndex>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Delete, CallType.Write, indexName.toPath(), requestOptions)
     }
 
     override suspend fun copyRule(destination: IndexName, requestOptions: RequestOptions?): RevisionIndex {

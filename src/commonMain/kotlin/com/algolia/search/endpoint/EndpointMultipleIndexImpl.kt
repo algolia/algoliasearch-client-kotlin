@@ -1,42 +1,35 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.filter.build
+import com.algolia.search.configuration.CallType
+import com.algolia.search.transport.Transport
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.request.RequestRequestObjects
 import com.algolia.search.model.response.*
-import com.algolia.search.filter.build
 import com.algolia.search.serialize.KeyRequests
 import com.algolia.search.serialize.RouteIndexesV1
 import com.algolia.search.serialize.noDefaults
-import io.ktor.client.request.get
-import io.ktor.client.request.post
+import com.algolia.search.serialize.toBody
+import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
 
 internal class EndpointMultipleIndexImpl(
-    api: APIWrapper
-) : EndpointMultipleIndex,
-    APIWrapper by api {
+    private val transport: Transport
+) : EndpointMultipleIndex {
 
     override suspend fun listIndices(requestOptions: RequestOptions?): ResponseListIndices {
-        return retryRead(requestOptions, RouteIndexesV1) { url ->
-            httpClient.get<ResponseListIndices>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Get, CallType.Read, RouteIndexesV1, requestOptions)
     }
 
     override suspend fun listIndexAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
-        return retryRead(requestOptions, "$RouteIndexesV1/*/keys") { url ->
-            httpClient.get<ResponseListAPIKey>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Get, CallType.Read, "$RouteIndexesV1/*/keys", requestOptions)
     }
 
     override suspend fun multipleQueries(
@@ -44,28 +37,18 @@ internal class EndpointMultipleIndexImpl(
         strategy: MultipleQueriesStrategy,
         requestOptions: RequestOptions?
     ): ResponseSearches {
-        val copies = queries.map { IndexQuery(it.indexName, it.query.build()) }
+        val body = queries.map { IndexQuery(it.indexName, it.query.build()) }.toBody(strategy)
 
-        return retryRead(requestOptions, "$RouteIndexesV1/*/queries") { url ->
-            httpClient.post<ResponseSearches>(url) {
-                setQueries(copies, strategy)
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/queries", requestOptions, body)
     }
 
     override suspend fun multipleGetObjects(
         requests: List<RequestObjects>,
         requestOptions: RequestOptions?
     ): ResponseObjects {
-        val bodyString = Json.noDefaults.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
+        val body = Json.noDefaults.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
-        return retryRead(requestOptions, "$RouteIndexesV1/*/objects") { url ->
-            httpClient.post<ResponseObjects>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/objects", requestOptions, body)
     }
 
     override suspend fun multipleBatchObjects(
@@ -73,13 +56,8 @@ internal class EndpointMultipleIndexImpl(
         requestOptions: RequestOptions?
     ): ResponseBatches {
         val requests = Json.plain.toJson(BatchOperationIndex.list, operations)
-        val bodyString = json { KeyRequests to requests }.toString()
+        val body = json { KeyRequests to requests }.toString()
 
-        return retryWrite(requestOptions, "$RouteIndexesV1/*/batch") { url ->
-            httpClient.post<ResponseBatches>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Write, "$RouteIndexesV1/*/batch", requestOptions, body)
     }
 }

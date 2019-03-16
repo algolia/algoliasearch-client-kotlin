@@ -1,4 +1,4 @@
-package com.algolia.search.client
+package com.algolia.search.transport
 
 import com.algolia.search.model.UserID
 import com.algolia.search.serialize.KeyAlgoliaUserID
@@ -11,11 +11,11 @@ public data class RequestOptions(
     val readTimeout: Long? = null
 ) {
 
-    public val headers = mutableMapOf<String, String>()
+    internal val headers = mutableMapOf<String, Any>()
 
-    public val urlParameters = mutableMapOf<String, String>()
+    internal val urlParameters = mutableMapOf<String, Any>()
 
-    public val body: JsonObject? = null
+    public var body: JsonObject? = null
 
     public fun headerForwardedFor(ipAddress: String) {
         headers[KeyForwardedFor] = ipAddress
@@ -23,5 +23,13 @@ public data class RequestOptions(
 
     public fun headerAlgoliaUserId(userId: UserID) {
         headers[KeyAlgoliaUserID] = userId.raw
+    }
+
+    public fun parameter(key: String, value: Any?) {
+        value?.let { urlParameters[key] = it }
+    }
+
+    public fun header(key: String, value: Any?) {
+        value?.let { headers[key] = it }
     }
 }
