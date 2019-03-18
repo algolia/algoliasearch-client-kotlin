@@ -32,7 +32,7 @@ internal fun RetryableHost.hasFailed() {
     lastUpdated = Time.getCurrentTimeMillis()
 }
 
-internal fun List<RetryableHost>.expiration(hostStatusExpirationDelayMS: Long) {
+internal fun List<RetryableHost>.expireHostsOlderThan(hostStatusExpirationDelayMS: Long) {
     forEach {
         val timeDelayExpired = Time.getCurrentTimeMillis() - it.lastUpdated
         if (timeDelayExpired > hostStatusExpirationDelayMS) {

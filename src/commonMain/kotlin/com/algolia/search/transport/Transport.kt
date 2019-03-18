@@ -25,7 +25,7 @@ internal class Transport(
 
     suspend fun callableHosts(callType: CallType): List<RetryableHost> {
         return mutex.withLock {
-            hosts.expiration(hostStatusExpirationDelayMS)
+            hosts.expireHostsOlderThan(hostStatusExpirationDelayMS)
             val hostsCallType = hosts.filterCallType(callType)
             val hostsCallTypeAreUp = hostsCallType.filter { it.isUp }
 
@@ -68,7 +68,7 @@ internal class Transport(
             try {
                 return withTimeout((host.retryCount + 1) * timeout) {
                     val response = httpClient.request<T>(requestBuilder)
-                    mutex.withLock {  host.reset() }
+                    mutex.withLock { host.reset() }
                     response
                 }
             } catch (exception: TimeoutCancellationException) {
