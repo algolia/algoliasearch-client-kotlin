@@ -1,6 +1,5 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.filter.FilterFacet
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
@@ -8,6 +7,7 @@ import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacetValue
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Query
+import com.algolia.search.transport.RequestOptions
 
 
 public interface EndpointSearch {
@@ -24,7 +24,6 @@ public interface EndpointSearch {
         attribute: Attribute,
         facetQuery: String? = null,
         query: Query? = null,
-        maxFacetHits: Int? = null,
         requestOptions: RequestOptions? = null
     ): ResponseSearchForFacetValue
 

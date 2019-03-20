@@ -1,7 +1,6 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.filter.*
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute
@@ -13,6 +12,7 @@ import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
+import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
@@ -54,13 +54,11 @@ internal class EndpointSearchImpl(
         attribute: Attribute,
         facetQuery: String?,
         query: Query?,
-        maxFacetHits: Int?,
         requestOptions: RequestOptions?
     ): ResponseSearchForFacetValue {
         val copy = query?.build()
         val path = indexName.toPath("/facets/$attribute/query")
         val extraParams = json {
-            maxFacetHits?.let { KeyMaxFacetHits to it }
             facetQuery?.let { KeyFacetQuery to it }
         }
         val body = (copy?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
