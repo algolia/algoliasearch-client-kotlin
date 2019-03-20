@@ -7,6 +7,7 @@ import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 
 
@@ -147,7 +148,7 @@ public data class ResponseSearch(
     @Serializable(Hit.Companion::class)
     public data class Hit(
         val json: JsonObject
-    ) {
+    ) : Map<String, JsonElement> by json {
 
         public fun <T> get(serializer: KSerializer<T>, attribute: Attribute): T {
             return Json.plain.fromJson(serializer, json.getAs(attribute.raw))
