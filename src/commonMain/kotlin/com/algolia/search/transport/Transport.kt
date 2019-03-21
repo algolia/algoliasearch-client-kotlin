@@ -64,7 +64,7 @@ internal class Transport(
         val requestBuilder = httpRequestBuilder(httpMethod, path, requestOptions, body)
 
         for (host in hosts) {
-            requestBuilder.url { this.host = host.url }
+            requestBuilder.url.host = host.url
             try {
                 return withTimeout((host.retryCount + 1) * timeout) {
                     val response = httpClient.request<T>(requestBuilder)
