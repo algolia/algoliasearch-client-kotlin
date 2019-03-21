@@ -1,11 +1,11 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.response.*
+import com.algolia.search.transport.RequestOptions
 
 
 public interface EndpointMultipleIndex {
@@ -15,7 +15,7 @@ public interface EndpointMultipleIndex {
     suspend fun listIndexAPIKeys(requestOptions: RequestOptions? = null): ResponseListAPIKey
 
     suspend fun multipleQueries(
-        queries: Collection<IndexQuery>,
+        queries: List<IndexQuery>,
         strategy: MultipleQueriesStrategy = MultipleQueriesStrategy.None,
         requestOptions: RequestOptions? = null
     ): ResponseSearches

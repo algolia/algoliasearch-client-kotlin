@@ -1,9 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
-import com.algolia.search.filter.build
 import com.algolia.search.configuration.CallType
-import com.algolia.search.transport.Transport
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
@@ -14,6 +11,8 @@ import com.algolia.search.serialize.KeyRequests
 import com.algolia.search.serialize.RouteIndexesV1
 import com.algolia.search.serialize.noDefaults
 import com.algolia.search.serialize.toBody
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
@@ -33,11 +32,11 @@ internal class EndpointMultipleIndexImpl(
     }
 
     override suspend fun multipleQueries(
-        queries: Collection<IndexQuery>,
+        queries: List<IndexQuery>,
         strategy: MultipleQueriesStrategy,
         requestOptions: RequestOptions?
     ): ResponseSearches {
-        val body = queries.map { IndexQuery(it.indexName, it.query.build()) }.toBody(strategy)
+        val body = queries.toBody(strategy)
 
         return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/queries", requestOptions, body)
     }

@@ -1,20 +1,14 @@
 package filter
 
-import buildTest
+import com.algolia.search.filter.*
 import com.algolia.search.helper.limit
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.AlternativesAsExact
-import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.QueryLanguage
 import com.algolia.search.model.search.ResponseFields
-import com.algolia.search.filter.*
-import facetA
-import facetB
-import groupOrA
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import shouldBeNull
 import shouldEqual
 
 
@@ -23,40 +17,6 @@ internal class TestQueryHelper {
 
     private val attributeA = Attribute("attributeA")
     private val attributeB = Attribute("attributeB")
-
-    @Test
-    fun buildEveryWordInQueryOptional() {
-        val query = Query(query = "hello there")
-
-        query.build().optionalWords.shouldBeNull()
-        query.isEveryWordInQueryOptional = true
-        query.build().optionalWords shouldEqual listOf(query.query)
-
-    }
-
-    @Test
-    fun buildFilterBuilder() {
-        Query().apply {
-            filterBuilder.apply {
-                groupOrA += facetA
-            }
-            build().filters shouldEqual filterBuilder.build()
-            filters = "test"
-            build().filters shouldEqual "test"
-        }
-    }
-
-    @Test
-    fun buildOptionalFilterBuilder() {
-        Query().apply {
-            optionalFilterBuilder.apply {
-                groupOrA += facetA
-            }
-            build().optionalFilters shouldEqual optionalFilterBuilder.build()
-            optionalFilters = listOf()
-            build().optionalFilters shouldEqual listOf()
-        }
-    }
 
     @Test
     fun attributesToRetrieve() {
@@ -175,25 +135,5 @@ internal class TestQueryHelper {
             setResponseFields(ResponseFields.All)
             responseFields shouldEqual listOf(ResponseFields.All)
         }
-    }
-
-    @Test
-    fun filterBuilder() {
-        val query = queryBuilder {
-            filterBuilder {
-                groupOrA.addAll(listOf(facetA, facetB))
-            }
-        }
-        query.filterBuilder.buildTest() shouldEqual "attributeA:facetA OR attributeB:false"
-    }
-
-    @Test
-    fun optionalFilterBuilder() {
-        val query = queryBuilder {
-            optionalFilterBuilder {
-                groupOrA.addAll(listOf(facetA, facetB))
-            }
-        }
-        query.optionalFilterBuilder.build() shouldEqual listOf(listOf(facetA.expression, facetB.expression))
     }
 }

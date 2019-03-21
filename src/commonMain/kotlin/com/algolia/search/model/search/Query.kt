@@ -1,14 +1,11 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.filter.FilterBuilder
-import com.algolia.search.filter.OptionalFilterBuilder
 import com.algolia.search.filter.QueryHelper
 import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 
 @Serializable
@@ -428,30 +425,4 @@ public data class Query(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/percentileComputation/]
      */
     @Optional @SerialName(KeyPercentileComputation) var percentileComputation: Boolean? = null
-) {
-
-    /**
-     * When this attribute is set to true, the list of words in [optionalWords] will be replaced by all the words
-     * found in the current [query].
-     * This will trigger the engine to return records containing any word matching the query (OR operation).
-     * Otherwise, the engine return records containing all the word matching the query (AND operation).
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalWords/#doing-an-or-between-all-words-of-a-query]
-     */
-    @Transient
-    public var isEveryWordInQueryOptional: Boolean = false
-
-    /**
-     * You can modify this instance of [FilterBuilder] or assign a new one.
-     * If [filters] is null, the encoder of [FilterBuilder.build] will be passed to the request body of the next request.
-     */
-    @Transient
-    public var filterBuilder: FilterBuilder = FilterBuilder()
-
-    /**
-     * You can modify this instance of [OptionalFilterBuilder] or assign a new one.
-     * If [optionalFilters] is null, the encoder of [OptionalFilterBuilder.build] will be passed to
-     * the request body of the next request.
-     */
-    @Transient
-    public var optionalFilterBuilder: OptionalFilterBuilder = OptionalFilterBuilder()
-}
+)

@@ -2,7 +2,6 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.client.Index
 import com.algolia.search.transport.RequestOptions
-import com.algolia.search.filter.build
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.configuration.CallType
@@ -126,7 +125,7 @@ internal class EndpointIndexingImpl(
 
     override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): RevisionIndex {
         val path = indexName.toPath("/deleteByQuery")
-        val body = json { KeyParams to query.build().toJsonNoDefaults().urlEncode() }.toString()
+        val body = json { KeyParams to query.toJsonNoDefaults().urlEncode() }.toString()
 
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
