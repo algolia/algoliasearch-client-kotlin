@@ -1,7 +1,6 @@
 package com.algolia.search.client
 
 import com.algolia.search.endpoint.*
-import com.algolia.search.transport.Transport
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.ResponseSearch
@@ -10,18 +9,19 @@ import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.SynonymType
 import com.algolia.search.transport.RequestOptions
+import com.algolia.search.transport.Transport
 
 
 public data class Index internal constructor(
-    internal val api: Transport,
+    internal val transport: Transport,
     override val indexName: IndexName
-) : EndpointSearch by EndpointSearchImpl(api, indexName),
-    EndpointSettings by EndpointSettingsImpl(api, indexName),
-    EndpointAdvanced by EndpointAdvancedImpl(api, indexName),
-    EndpointIndex by EndpointIndexImpl(api, indexName),
-    EndpointIndexing by EndpointIndexingImpl(api, indexName),
-    EndpointSynonym by EndpointSynonymImpl(api, indexName),
-    EndpointRule by EndpointRuleImpl(api, indexName) {
+) : EndpointSearch by EndpointSearchImpl(transport, indexName),
+    EndpointSettings by EndpointSettingsImpl(transport, indexName),
+    EndpointAdvanced by EndpointAdvancedImpl(transport, indexName),
+    EndpointIndex by EndpointIndexImpl(transport, indexName),
+    EndpointIndexing by EndpointIndexingImpl(transport, indexName),
+    EndpointSynonym by EndpointSynonymImpl(transport, indexName),
+    EndpointRule by EndpointRuleImpl(transport, indexName) {
 
     public suspend fun browseAllRules(
         query: String? = null,

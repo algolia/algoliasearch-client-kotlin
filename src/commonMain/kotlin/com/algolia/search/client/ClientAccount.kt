@@ -8,7 +8,7 @@ import io.ktor.http.HttpStatusCode
 public object ClientAccount {
 
     public suspend fun copyIndex(source: Index, destination: Index): List<Task> {
-        if (source.api.applicationID == destination.api.applicationID) {
+        if (source.transport.applicationID == destination.transport.applicationID) {
             throw IllegalArgumentException("Source and Destination indices should not be on the same application.")
         }
         var hasThrown404 = false
