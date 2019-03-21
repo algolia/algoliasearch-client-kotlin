@@ -6,7 +6,7 @@ import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.json
@@ -69,11 +69,11 @@ internal class TestSuiteABTest {
                 clientAnalytics.getABTest(response.abTestID).status shouldEqual ABTestStatus.Stopped
                 clientAnalytics.deleteABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
 
-                val result = BadResponseStatusException::class shouldFailWith {
+                val result = ResponseException::class shouldFailWith {
                     clientAnalytics.getABTest(response.abTestID)
                 }
 
-                result.statusCode.value shouldEqual HttpStatusCode.NotFound.value
+                result.response.status.value shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }

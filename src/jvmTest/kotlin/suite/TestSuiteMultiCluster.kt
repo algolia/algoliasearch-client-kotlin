@@ -1,7 +1,7 @@
 package suite
 
 import com.algolia.search.helper.toUserID
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.client.response.readText
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.delay
@@ -34,8 +34,8 @@ internal class TestSuiteMultiCluster {
                 try {
                     clientMcm.getUserID(userID)
                     break
-                } catch (exception: BadResponseStatusException) {
-                    exception.statusCode shouldEqual HttpStatusCode.NotFound
+                } catch (exception: ResponseException) {
+                    exception.response.status shouldEqual HttpStatusCode.NotFound
                 }
                 delay(1000L)
             }
@@ -46,8 +46,8 @@ internal class TestSuiteMultiCluster {
             loop@ while (isActive) {
                 try {
                     clientMcm.removeUserID(userID)
-                } catch (exception: BadResponseStatusException) {
-                    when (exception.statusCode) {
+                } catch (exception: ResponseException) {
+                    when (exception.response.status) {
                         HttpStatusCode.NotFound -> break@loop
                         HttpStatusCode.BadRequest -> println(exception.response.readText())
                     }
@@ -56,8 +56,8 @@ internal class TestSuiteMultiCluster {
             while (isActive) {
                 try {
                     clientMcm.getUserID(userID)
-                } catch (exception: BadResponseStatusException) {
-                    exception.statusCode.value shouldEqual HttpStatusCode.NotFound.value
+                } catch (exception: ResponseException) {
+                    exception.response.status.value shouldEqual HttpStatusCode.NotFound.value
                     break
                 }
                 delay(1000L)

@@ -1,12 +1,12 @@
 package suite
 
+import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.helper.toObjectID
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.json
@@ -62,17 +62,17 @@ class TestSuiteReplaceAll {
                 getRule(objectIDTwo).rule.objectID shouldEqual objectIDTwo
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
-                (BadResponseStatusException::class shouldFailWith {
+                (ResponseException::class shouldFailWith {
                     getObject(objectIDOne)
-                }).statusCode.value shouldEqual HttpStatusCode.NotFound.value
+                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
-                (BadResponseStatusException::class shouldFailWith {
+                (ResponseException::class shouldFailWith {
                     getSynonym(objectIDOne)
-                }).statusCode.value shouldEqual HttpStatusCode.NotFound.value
+                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
-                (BadResponseStatusException::class shouldFailWith {
+                (ResponseException::class shouldFailWith {
                     getRule(objectIDOne)
-                }).statusCode.value shouldEqual HttpStatusCode.NotFound.value
+                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }

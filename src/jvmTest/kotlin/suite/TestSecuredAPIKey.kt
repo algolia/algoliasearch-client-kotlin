@@ -4,7 +4,7 @@ import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.json
 import org.junit.Before
@@ -51,7 +51,7 @@ internal class TestSecuredAPIKey {
             }
             client.apply {
                 initIndex(indexName).search()
-                BadResponseStatusException::class shouldFailWith { initIndex(indexNameDev).search() }
+                ResponseException::class shouldFailWith { initIndex(indexNameDev).search() }
             }
         }
     }

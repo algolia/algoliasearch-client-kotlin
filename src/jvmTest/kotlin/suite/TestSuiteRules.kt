@@ -1,12 +1,12 @@
 package suite
 
+import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.helper.toAttribute
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.JsonObjectSerializer
@@ -59,9 +59,9 @@ internal class TestSuiteRules {
                 searches.find { it.objectID == rules.first().objectID }.shouldNotBeNull()
                 deleteRule(rule.objectID).wait() shouldEqual TaskStatus.Published
 
-                (BadResponseStatusException::class shouldFailWith {
+                (ResponseException::class shouldFailWith {
                     getRule(rule.objectID)
-                }).statusCode.value shouldEqual HttpStatusCode.NotFound.value
+                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
                 clearRules().wait() shouldEqual TaskStatus.Published
                 searchRules().nbHits shouldEqual 0
             }

@@ -1,13 +1,13 @@
 package suite
 
+import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.serialize.urlEncode
-import com.algolia.search.helper.toIndexName
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -70,8 +70,8 @@ internal class TestSuiteAPIKey {
                 while (isActive) {
                     try {
                         if (getAPIKey(key).maxHitsPerQuery == 42) break
-                    } catch (exception: BadResponseStatusException) {
-                        exception.statusCode shouldEqual HttpStatusCode.NotFound
+                    } catch (exception: ResponseException) {
+                        exception.response.status.value shouldEqual HttpStatusCode.NotFound
                     }
                     delay(1000L)
                 }
