@@ -5,7 +5,6 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.request.RequestAPIKey
 import com.algolia.search.model.request.RequestMultipleQueries
 import com.algolia.search.model.search.Query
-import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.model.settings.Settings
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
@@ -61,8 +60,6 @@ internal fun Settings.toJsonNoDefaults(): JsonObject {
 internal fun RequestAPIKey.stringify(): String {
     return Json.noDefaults.stringify(RequestAPIKey.serializer(), this)
 }
-
-internal fun JsonObject.toRankingInfo() = Json.plain.fromJson(RankingInfo.serializer(), this)
 
 internal val Json.Companion.noDefaults get() = Json(encodeDefaults = false)
 
