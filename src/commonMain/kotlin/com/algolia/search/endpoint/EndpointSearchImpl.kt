@@ -48,7 +48,7 @@ internal class EndpointSearchImpl(
         return transport.request(HttpMethod.Get, CallType.Read, indexName.toPath("/browse"), options)
     }
 
-    override suspend fun searchForFacetValue(
+    override suspend fun searchForFacetValues(
         attribute: Attribute,
         facetQuery: String?,
         query: Query?,
