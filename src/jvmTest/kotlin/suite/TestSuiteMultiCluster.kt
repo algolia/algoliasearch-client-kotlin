@@ -2,7 +2,7 @@ package suite
 
 import com.algolia.search.helper.toUserID
 import io.ktor.client.features.ResponseException
-import io.ktor.client.response.readText
+import io.ktor.client.response.readBytes
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -49,7 +49,7 @@ internal class TestSuiteMultiCluster {
                 } catch (exception: ResponseException) {
                     when (exception.response.status) {
                         HttpStatusCode.NotFound -> break@loop
-                        HttpStatusCode.BadRequest -> println(exception.response.readText())
+                        HttpStatusCode.BadRequest -> println(String(exception.response.readBytes()))
                     }
                 }
             }
