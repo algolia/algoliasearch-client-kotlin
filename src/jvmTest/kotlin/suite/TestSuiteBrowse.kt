@@ -15,7 +15,7 @@ import shouldEqual
 
 
 @RunWith(JUnit4::class)
-internal class TestSuiteBrowseAll {
+internal class TestSuiteBrowse {
 
     private val suffix = "helper"
     private val indexName = testSuiteIndexName(suffix)
@@ -38,7 +38,7 @@ internal class TestSuiteBrowseAll {
             index.apply {
                 saveRules(listOf(ruleA, ruleB)).wait() shouldEqual TaskStatus.Published
 
-                browseAllRules(hitsPerPage = 1) {
+                browseRules(hitsPerPage = 1) {
                     it.nbHits shouldEqual 2
                     it.hits.size shouldEqual 1
                     count++
@@ -58,7 +58,7 @@ internal class TestSuiteBrowseAll {
             index.apply {
                 saveSynonyms(listOf(synonymA, synonymB)).wait() shouldEqual TaskStatus.Published
 
-                browseAllSynonyms(hitsPerPage = 1) {
+                browseSynonyms(hitsPerPage = 1) {
                     it.nbHits shouldEqual 2
                     it.hits.size shouldEqual 1
                     count++
@@ -77,7 +77,7 @@ internal class TestSuiteBrowseAll {
                 saveObjects(objects).wait() shouldEqual TaskStatus.Published
                 var count = 0
 
-                browseAllObjects(Query(hitsPerPage = 1)) {
+                browseObjects(Query(hitsPerPage = 1)) {
                     it.nbHits shouldEqual 10
                     it.hits.size shouldEqual 1
                     it.page shouldEqual count

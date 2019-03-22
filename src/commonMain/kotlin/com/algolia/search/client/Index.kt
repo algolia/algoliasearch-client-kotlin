@@ -23,7 +23,7 @@ public data class Index internal constructor(
     EndpointSynonym by EndpointSynonymImpl(transport, indexName),
     EndpointRule by EndpointRuleImpl(transport, indexName) {
 
-    public suspend fun browseAllRules(
+    public suspend fun browseRules(
         query: String? = null,
         anchoring: Anchoring? = null,
         context: String? = null,
@@ -42,7 +42,7 @@ public data class Index internal constructor(
         }
     }
 
-    public suspend fun browseAllSynonyms(
+    public suspend fun browseSynonyms(
         query: String? = null,
         hitsPerPage: Int? = null,
         synonymType: List<SynonymType>? = null,
@@ -59,7 +59,7 @@ public data class Index internal constructor(
         }
     }
 
-    public suspend fun browseAllObjects(
+    public suspend fun browseObjects(
         query: Query? = null,
         requestOptions: RequestOptions? = null,
         block: suspend (ResponseSearch) -> Unit
