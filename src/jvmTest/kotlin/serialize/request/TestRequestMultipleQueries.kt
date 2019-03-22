@@ -48,4 +48,12 @@ internal class TestRequestMultipleQueries {
             KeyStrategy to MultipleQueriesStrategy.StopIfEnoughMatches.raw
         }
     }
+
+    @Test
+    fun testNoStrategy() {
+        val request = RequestMultipleQueries(indexQueries = listOf())
+        val serialized = Json.plain.toJson(RequestMultipleQueries, request)
+
+        serialized shouldEqual json { KeyRequests to jsonArray {} }
+    }
 }

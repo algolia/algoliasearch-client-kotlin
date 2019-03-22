@@ -16,7 +16,7 @@ public interface EndpointMultipleIndex {
 
     suspend fun multipleQueries(
         queries: List<IndexQuery>,
-        strategy: MultipleQueriesStrategy = MultipleQueriesStrategy.None,
+        strategy: MultipleQueriesStrategy? = null,
         requestOptions: RequestOptions? = null
     ): ResponseSearches
 

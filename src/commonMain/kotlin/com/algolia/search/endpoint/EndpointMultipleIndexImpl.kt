@@ -33,7 +33,7 @@ internal class EndpointMultipleIndexImpl(
 
     override suspend fun multipleQueries(
         queries: List<IndexQuery>,
-        strategy: MultipleQueriesStrategy,
+        strategy: MultipleQueriesStrategy?,
         requestOptions: RequestOptions?
     ): ResponseSearches {
         val body = queries.toBody(strategy)

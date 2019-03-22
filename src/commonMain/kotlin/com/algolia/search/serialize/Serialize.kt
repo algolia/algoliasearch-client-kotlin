@@ -63,8 +63,11 @@ internal fun RequestAPIKey.stringify(): String {
 
 internal val Json.Companion.noDefaults get() = Json(encodeDefaults = false)
 
-internal fun List<IndexQuery>.toBody(strategy: MultipleQueriesStrategy): String {
-    return Json.noDefaults.stringify(RequestMultipleQueries, RequestMultipleQueries(this, strategy))
+internal fun List<IndexQuery>.toBody(strategy: MultipleQueriesStrategy?): String {
+    return Json.noDefaults.stringify(
+        RequestMultipleQueries,
+        RequestMultipleQueries(this, strategy)
+    )
 }
 
 internal fun Query?.toBody(): String {
