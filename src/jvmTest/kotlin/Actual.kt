@@ -3,12 +3,19 @@ import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
+import com.algolia.search.helper.toIndexName
 import kotlinx.coroutines.CoroutineScope
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.coroutines.CoroutineContext
 
 
+internal actual val clientLatency
+    get() = ClientSearch(
+        System.getenv("ALGOLIA_KOTLIN_CLIENT_APP_ID").toApplicationID(),
+        System.getenv("ALGOLIA_KOTLIN_CLIENT_ADMIN_KEY").toAPIKey()
+    )
 internal actual val clientSearch = ClientSearch(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
     System.getenv("ALGOLIA_SEARCH_KEY_1").toAPIKey()
@@ -34,6 +41,8 @@ internal actual val clientInsights = ClientInsights(
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
 )
 
+internal actual val indexName = System.getenv("ALGOLIA_KOTLIN_CLIENT_INDEX").toIndexName()
+
 internal actual val username: String
     get() {
         return try {
@@ -43,8 +52,8 @@ internal actual val username: String
         }
     }
 
-internal actual fun runBlocking(block: suspend CoroutineScope.() -> Unit) {
-    kotlinx.coroutines.runBlocking(block = block)
+internal actual fun runBlocking(coroutineContext: CoroutineContext, block: suspend CoroutineScope.() -> Unit) {
+    kotlinx.coroutines.runBlocking(coroutineContext, block = block)
 }
 
 internal actual object DateFormat {
