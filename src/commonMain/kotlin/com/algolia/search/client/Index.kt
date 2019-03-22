@@ -59,6 +59,17 @@ public data class Index internal constructor(
         }
     }
 
+    /**
+     * Iterate over all objects in the index.
+     *
+     * @see [browse]
+     *
+     * @param query The [Query] used to search.
+     * @param requestOptions [RequestOptions] sent along with the query.
+     * @param block This function is called for each [ResponseSearch].
+     *
+     * @return [ResponseSearch]
+     */
     public suspend fun browseObjects(
         query: Query? = null,
         requestOptions: RequestOptions? = null,

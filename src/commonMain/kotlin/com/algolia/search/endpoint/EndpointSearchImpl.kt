@@ -76,13 +76,9 @@ internal class EndpointSearchImpl(
         val facets = resultsOr.map { it.facets.toMutableMap() }.reduce { acc, map -> acc.apply { this += map } }
         val facetStats = mutableMapOf<Attribute, FacetStats>()
 
-        resultAnd.facetStatsOrNull?.let {
-            facetStats += it
-        }
+        resultAnd.facetStatsOrNull?.let { facetStats += it }
         resultsOr.forEach { result ->
-            result.facetStatsOrNull?.let {
-                facetStats += it
-            }
+            result.facetStatsOrNull?.let { facetStats += it }
         }
         return resultAnd.copy(
             disjunctiveFacetsOrNull = facets,
