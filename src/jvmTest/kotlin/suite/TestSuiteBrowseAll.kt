@@ -1,10 +1,10 @@
 package suite
 
+import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.helper.toObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.json
 import org.junit.Before
@@ -38,10 +38,9 @@ internal class TestSuiteBrowseAll {
             index.apply {
                 saveRules(listOf(ruleA, ruleB)).wait() shouldEqual TaskStatus.Published
 
-                browseAllRules(hitsPerPage = 1) { page ->
-                    nbHits shouldEqual 2
-                    hits.size shouldEqual 1
-                    page shouldEqual count
+                browseAllRules(hitsPerPage = 1) {
+                    it.nbHits shouldEqual 2
+                    it.hits.size shouldEqual 1
                     count++
                 }
                 count shouldEqual 2
@@ -59,10 +58,9 @@ internal class TestSuiteBrowseAll {
             index.apply {
                 saveSynonyms(listOf(synonymA, synonymB)).wait() shouldEqual TaskStatus.Published
 
-                browseAllSynonyms(hitsPerPage = 1) { page ->
-                    nbHits shouldEqual 2
-                    hits.size shouldEqual 1
-                    page shouldEqual count
+                browseAllSynonyms(hitsPerPage = 1) {
+                    it.nbHits shouldEqual 2
+                    it.hits.size shouldEqual 1
                     count++
                 }
                 count shouldEqual 2
@@ -79,10 +77,10 @@ internal class TestSuiteBrowseAll {
                 saveObjects(objects).wait() shouldEqual TaskStatus.Published
                 var count = 0
 
-                browseAllObjects(Query(hitsPerPage = 1)) { page ->
-                    nbHits shouldEqual 10
-                    hits.size shouldEqual 1
-                    page shouldEqual count
+                browseAllObjects(Query(hitsPerPage = 1)) {
+                    it.nbHits shouldEqual 10
+                    it.hits.size shouldEqual 1
+                    it.page shouldEqual count
                     count++
                 }
                 count shouldEqual 10

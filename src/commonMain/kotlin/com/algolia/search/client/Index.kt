@@ -30,15 +30,15 @@ public data class Index internal constructor(
         hitsPerPage: Int? = null,
         enabled: Boolean? = null,
         requestOptions: RequestOptions? = null,
-        block: suspend ResponseRules.(Int) -> Unit
+        block: suspend (ResponseRules) -> Unit
     ) {
         var page = 0
 
         while (true) {
-            val response = searchRules(query, anchoring, context, page, hitsPerPage, enabled, requestOptions)
+            val response = searchRules(query, anchoring, context, page++, hitsPerPage, enabled, requestOptions)
 
             if (response.hits.isEmpty()) break
-            block(response, page++)
+            block(response)
         }
     }
 
@@ -47,32 +47,31 @@ public data class Index internal constructor(
         hitsPerPage: Int? = null,
         synonymType: List<SynonymType>? = null,
         requestOptions: RequestOptions? = null,
-        block: suspend ResponseSearchSynonyms.(Int) -> Unit
+        block: suspend (ResponseSearchSynonyms) -> Unit
     ) {
         var page = 0
 
         while (true) {
-            val response = searchSynonyms(query, page, hitsPerPage, synonymType, requestOptions)
+            val response = searchSynonyms(query, page++, hitsPerPage, synonymType, requestOptions)
 
             if (response.hits.isEmpty()) break
-            block(response, page++)
+            block(response)
         }
     }
 
     public suspend fun browseAllObjects(
         query: Query? = null,
         requestOptions: RequestOptions? = null,
-        block: suspend ResponseSearch.(Int) -> Unit
+        block: suspend (ResponseSearch) -> Unit
     ) {
         val initial = browse(query, requestOptions)
         var cursor = initial.cursorOrNull
-        var page = 0
 
-        block(initial, page++)
+        block(initial)
         while (cursor != null) {
             val response = browse(cursor)
 
-            block(response, page++)
+            block(response)
             cursor = response.cursorOrNull
         }
     }
