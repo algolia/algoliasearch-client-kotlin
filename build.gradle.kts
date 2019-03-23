@@ -34,11 +34,15 @@ kotlin {
             }
         }
     }
+    targets {
+        findByName("metadata")?.mavenPublication {
+            artifactId = "algoliasearch-client-kotlin-common"
+        }
+    }
     sourceSets {
         all {
             languageSettings.progressiveMode = true
         }
-
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
