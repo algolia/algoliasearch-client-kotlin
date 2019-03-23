@@ -36,12 +36,12 @@ import kotlinx.coroutines.withTimeout
 
 
 public class ClientSearch private constructor(
-    private val api: Transport
+    private val transport: Transport
 ) :
-    EndpointMultipleIndex by EndpointMultipleIndexImpl(api),
-    EndpointAPIKey by EndpointAPIKeyImpl(api),
-    EndpointMultiCluster by EndpointMulticlusterImpl(api),
-    Configuration by api {
+    EndpointMultipleIndex by EndpointMultipleIndexImpl(transport),
+    EndpointAPIKey by EndpointAPIKeyImpl(transport),
+    EndpointMultiCluster by EndpointMulticlusterImpl(transport),
+    Configuration by transport {
 
     public constructor(
         applicationID: ApplicationID,
@@ -53,7 +53,7 @@ public class ClientSearch private constructor(
     ) : this(Transport(configuration))
 
     public fun initIndex(indexName: IndexName): Index {
-        return Index(api, indexName)
+        return Index(transport, indexName)
     }
 
     public suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus> {
@@ -120,7 +120,7 @@ public class ClientSearch private constructor(
             parameter(KeyType, logType?.raw)
         }
 
-        return api.request(HttpMethod.Get, CallType.Read, RouteLogs, options)
+        return transport.request(HttpMethod.Get, CallType.Read, RouteLogs, options)
     }
 
     companion object {
