@@ -1,5 +1,13 @@
+import java.net.URI
+
 pluginManagement {
-    // TODO Track this issue and act accordingly when resolved: https://youtrack.jetbrains.com/issue/KT-27612
+    repositories {
+        google()
+        gradlePluginPortal()
+        mavenCentral()
+        maven { url = URI("https://dl.bintray.com/kotlin/kotlin-eap") }
+        maven { url = URI("https://plugins.gradle.org/m2/") }
+    }
     resolutionStrategy {
         eachPlugin {
             if (requested.id.id == "kotlin-multiplatform") {
@@ -10,15 +18,8 @@ pluginManagement {
             }
         }
     }
-    repositories {
-        mavenLocal()
-        jcenter()
-        mavenCentral()
-        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
-        maven { url 'https://plugins.gradle.org/m2/' }
-    }
 }
-rootProject.name = 'algoliasearch-client-kotlin'
 
+enableFeaturePreview("GRADLE_METADATA")
 
-//enableFeaturePreview('GRADLE_METADATA')
+rootProject.name = "algoliasearch-client-kotlin"
