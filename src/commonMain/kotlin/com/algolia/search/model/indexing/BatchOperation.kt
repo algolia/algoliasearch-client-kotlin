@@ -57,12 +57,12 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
 
             public fun from(
                 objectID: ObjectID,
-                partialUpdate: PartialUpdate,
+                partial: Partial,
                 createIfNotExists: Boolean
             ): UpdateObject {
                 return UpdateObject(
                     objectID,
-                    Json.plain.toJson(PartialUpdate, partialUpdate).jsonObject,
+                    Json.plain.toJson(Partial, partial).jsonObject,
                     createIfNotExists
                 )
             }

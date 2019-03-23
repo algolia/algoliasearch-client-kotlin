@@ -10,7 +10,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.index.Scope
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
-import com.algolia.search.model.indexing.PartialUpdate
+import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.request.RequestRequestObjects
 import com.algolia.search.model.response.ResponseBatch
@@ -175,7 +175,7 @@ internal class EndpointIndexingImpl(
 
     override suspend fun partialUpdateObject(
         objectID: ObjectID,
-        partialUpdate: PartialUpdate,
+        partial: Partial,
         createIfNotExists: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionObject {
@@ -183,13 +183,13 @@ internal class EndpointIndexingImpl(
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyCreateIfNotExists, createIfNotExists)
         }
-        val body = Json.plain.toJson(PartialUpdate, partialUpdate).toString()
+        val body = Json.plain.toJson(Partial, partial).toString()
 
         return transport.request(HttpMethod.Post, CallType.Write, path, options, body)
     }
 
     override suspend fun partialUpdateObjects(
-        data: List<Pair<ObjectID, PartialUpdate>>,
+        data: List<Pair<ObjectID, Partial>>,
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): ResponseBatch {

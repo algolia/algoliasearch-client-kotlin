@@ -6,7 +6,7 @@ import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
-import com.algolia.search.model.indexing.PartialUpdate
+import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import kotlinx.serialization.Serializable
@@ -85,12 +85,12 @@ internal class TestSuiteIndexing {
                     .map { Json.plain.fromJson(Data.serializer(), it) } shouldEqual batches
                 browse().nbHits shouldEqual 1007
                 revisions += replaceObject(Data.serializer(), updateA)
-                revisions += partialUpdateObject(dataE.objectID, PartialUpdate.Increment(attributeValue, 1))
+                revisions += partialUpdateObject(dataE.objectID, Partial.Increment(attributeValue, 1))
                 revisions += replaceObjects(Data.serializer(), listOf(updateB, updateC, updateD))
                 revisions += partialUpdateObjects(
                     listOf(
-                        dataF.objectID to PartialUpdate.Increment(attributeValue, 1),
-                        dataG.objectID to PartialUpdate.Increment(attributeValue, 1)
+                        dataF.objectID to Partial.Increment(attributeValue, 1),
+                        dataG.objectID to Partial.Increment(attributeValue, 1)
                     )
                 )
                 revisions.wait().all { it is TaskStatus.Published }.shouldBeTrue()

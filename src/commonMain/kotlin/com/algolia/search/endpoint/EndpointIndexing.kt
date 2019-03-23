@@ -5,7 +5,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
-import com.algolia.search.model.indexing.PartialUpdate
+import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.response.ResponseBatch
 import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.creation.CreationObject
@@ -113,13 +113,13 @@ public interface EndpointIndexing {
 
     suspend fun partialUpdateObject(
         objectID: ObjectID,
-        partialUpdate: PartialUpdate,
+        partial: Partial,
         createIfNotExists: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): RevisionObject
 
     suspend fun partialUpdateObjects(
-        data: List<Pair<ObjectID, PartialUpdate>>,
+        data: List<Pair<ObjectID, Partial>>,
         createIfNotExists: Boolean = true,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
