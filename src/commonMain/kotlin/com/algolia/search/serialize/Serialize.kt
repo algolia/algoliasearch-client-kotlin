@@ -38,8 +38,8 @@ internal fun JsonObject.urlEncode(): String {
     return Parameters.build {
         entries.forEach { (key, element) ->
             when (element) {
-                is JsonArray -> append(key, Json.stringify(StringSerializer.list, element.content.map { it.content }))
-                else -> append(key, element.content)
+                is JsonPrimitive -> append(key, element.content)
+                else -> append(key, Json.unquoted.stringify(JsonElementSerializer, element))
             }
         }
     }.formUrlEncode()

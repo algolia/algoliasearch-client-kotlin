@@ -12,12 +12,14 @@ internal class TestHelper {
     @Test
     fun urlEncode() {
         val json = json {
+            "Hello" to "A"
             "Key" to jsonArray {
                 +"A"
                 +"B"
+                +jsonArray { +"C" }
             }
         }.urlEncode()
 
-        json shouldEqual "Key=%5B%22A%22%2C%22B%22%5D"
+        json shouldEqual "Hello=A&Key=%5BA%2CB%2C%5BC%5D%5D"
     }
 }
