@@ -26,10 +26,10 @@ public data class ResponseListIndices(
         @SerialName(KeyLastBuildTimeS) val lastBuildTimeS: Int,
         @SerialName(KeyNumberOfPendingTasks) val numberOfPendingTasks: Int,
         @SerialName(KeyPendingTask) val pendingTask: Boolean,
-        @Optional @SerialName(KeyReplicas) val replicasOrNull: List<IndexName>? = null,
-        @Optional @SerialName(KeyPrimary) val primaryOrNull: IndexName? = null,
-        @Optional @SerialName(KeySourceABTest) val sourceABTestOrNull: IndexName? = null,
-        @Optional @SerialName(KeyABTest) val abTestOrNull: ResponseABTestShort? = null
+        @SerialName(KeyReplicas) val replicasOrNull: List<IndexName>? = null,
+        @SerialName(KeyPrimary) val primaryOrNull: IndexName? = null,
+        @SerialName(KeySourceABTest) val sourceABTestOrNull: IndexName? = null,
+        @SerialName(KeyABTest) val abTestOrNull: ResponseABTestShort? = null
     ) {
 
         @Transient

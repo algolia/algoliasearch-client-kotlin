@@ -14,5 +14,5 @@ import kotlinx.serialization.Serializable
 internal data class RequestCopyOrMove(
     @SerialName(KeyOperation) val operation: String,
     @SerialName(KeyDestination) val destination: IndexName,
-    @Optional @SerialName(KeyScope) val scopes: List<Scope>? = null
+    @SerialName(KeyScope) val scopes: List<Scope>? = null
 )

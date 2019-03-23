@@ -18,5 +18,5 @@ public data class RankingInfo(
     @SerialName(KeyNbExactWords) val nbExactWords: Int,
     @SerialName(KeyWords) val words: Int,
     @SerialName(KeyFilters) val filters: Int,
-    @Optional @SerialName(KeyMatchedGeoLocation) val matchedGeoLocation: MatchedGeoLocation? = null
+    @SerialName(KeyMatchedGeoLocation) val matchedGeoLocation: MatchedGeoLocation? = null
 )

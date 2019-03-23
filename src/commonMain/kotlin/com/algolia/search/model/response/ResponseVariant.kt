@@ -16,14 +16,14 @@ public data class ResponseVariant(
     @SerialName(KeyDescription) val description: String,
     @SerialName(KeyIndex) val indexName: IndexName,
     @SerialName(KeyTrafficPercentage) val trafficPercentage: Int,
-    @Optional @SerialName(KeyConversionRate) val conversionRateOrNull: Float? = null,
-    @Optional @SerialName(KeyNoResultCount) val noResultCountOrNull: Int? = null,
-    @Optional @SerialName(KeyAverageClickPosition) val averageClickPositionOrNull: Int? = null,
-    @Optional @SerialName(KeySearchCount) val searchCountOrNull: Long? = null,
-    @Optional @SerialName(KeyTrackedSearchCount) val trackedSearchCountOrNull: Long? = null,
-    @Optional @SerialName(KeyUserCount) val userCountOrNull: Long? = null,
-    @Optional @SerialName(KeyClickThroughRate) val clickThroughRateOrNull: Float? = null,
-    @Optional @SerialName(KeyCustomSearchParameters) val customSearchParametersOrNull: Query? = null
+    @SerialName(KeyConversionRate) val conversionRateOrNull: Float? = null,
+    @SerialName(KeyNoResultCount) val noResultCountOrNull: Int? = null,
+    @SerialName(KeyAverageClickPosition) val averageClickPositionOrNull: Int? = null,
+    @SerialName(KeySearchCount) val searchCountOrNull: Long? = null,
+    @SerialName(KeyTrackedSearchCount) val trackedSearchCountOrNull: Long? = null,
+    @SerialName(KeyUserCount) val userCountOrNull: Long? = null,
+    @SerialName(KeyClickThroughRate) val clickThroughRateOrNull: Float? = null,
+    @SerialName(KeyCustomSearchParameters) val customSearchParametersOrNull: Query? = null
 ) {
 
     @Transient

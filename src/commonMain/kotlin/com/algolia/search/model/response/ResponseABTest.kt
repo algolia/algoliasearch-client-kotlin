@@ -19,8 +19,8 @@ public data class ResponseABTest(
     val status: ABTestStatus,
     val variantA: ResponseVariant,
     val variantB: ResponseVariant,
-    @Optional val clickSignificanceOrNull: Float? = null,
-    @Optional val conversionSignificanceOrNull: Float? = null
+    val clickSignificanceOrNull: Float? = null,
+    val conversionSignificanceOrNull: Float? = null
 ) {
 
     @Transient

@@ -15,5 +15,5 @@ import kotlinx.serialization.Serializable
 public data class RequestObjects(
     @SerialName(KeyIndexName) val indexName: IndexName,
     @SerialName(KeyObjectID) val objectID: ObjectID,
-    @Optional @SerialName(KeyAttributesToRetrieve) val attributes: List<Attribute>? = null
+    @SerialName(KeyAttributesToRetrieve) val attributes: List<Attribute>? = null
 )

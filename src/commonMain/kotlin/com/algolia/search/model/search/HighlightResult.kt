@@ -14,5 +14,5 @@ public data class HighlightResult(
     @SerialName(KeyValue) val value: String,
     @SerialName(KeyMatchLevel) val matchLevel: MatchLevel,
     @SerialName(KeyMatchedWords) val matchedWords: List<String>,
-    @Optional @SerialName(KeyFullyHighlighted) val fullyHighlighted: Boolean? = null
+    @SerialName(KeyFullyHighlighted) val fullyHighlighted: Boolean? = null
 )

@@ -11,7 +11,7 @@ import kotlinx.serialization.json.jsonArray
 @Serializable(RequestMultipleQueries.Companion::class)
 internal class RequestMultipleQueries(
     @SerialName(KeyRequests) val indexQueries: List<IndexQuery>,
-    @Optional @SerialName(KeyStrategy) val strategy: MultipleQueriesStrategy? = null
+    @SerialName(KeyStrategy) val strategy: MultipleQueriesStrategy? = null
 ) {
 
     @Serializer(RequestMultipleQueries::class)

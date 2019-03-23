@@ -12,7 +12,7 @@ import kotlinx.serialization.json.JsonObject
 @Serializable
 public data class ResponseObjects(
     @SerialName(KeyResults) val results: List<JsonObject?>,
-    @Optional @SerialName(KeyMessage) val messageOrNull: String? = null
+    @SerialName(KeyMessage) val messageOrNull: String? = null
 ) {
 
     @Transient

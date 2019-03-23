@@ -12,6 +12,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class AutomaticFacetFilters(
     @SerialName(KeyFacet) val attribute: Attribute,
-    @Optional @SerialName(KeyScore) val score: Int? = null,
-    @Optional @SerialName(KeyDisjunctive) val disjunctive: Boolean? = null
+    @SerialName(KeyScore) val score: Int? = null,
+    @SerialName(KeyDisjunctive) val disjunctive: Boolean? = null
 )

@@ -11,8 +11,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class RequestSearchSynonyms(
-    @Optional @SerialName(KeyQuery) val query: String? = null,
-    @Optional @SerialName(KeyPage) val page: Int? = null,
-    @Optional @SerialName(KeyHitsPerPage) val hitsPerPage: Int? = null,
-    @Optional @SerialName(KeyType) val type: String? = null
+    @SerialName(KeyQuery) val query: String? = null,
+    @SerialName(KeyPage) val page: Int? = null,
+    @SerialName(KeyHitsPerPage) val hitsPerPage: Int? = null,
+    @SerialName(KeyType) val type: String? = null
 )

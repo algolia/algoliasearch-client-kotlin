@@ -12,5 +12,5 @@ import kotlinx.serialization.Serializable
 public data class Condition(
     @SerialName(KeyPattern) val pattern: Pattern,
     @SerialName(KeyAnchoring) val anchoring: Anchoring,
-    @Optional @SerialName(KeyContext) val context: String? = null
+    @SerialName(KeyContext) val context: String? = null
 )

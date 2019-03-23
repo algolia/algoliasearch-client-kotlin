@@ -10,8 +10,8 @@ import kotlinx.serialization.json.JsonObject
 
 @Serializable
 public data class Consequence(
-    @Optional @SerialName(KeyParams) val params: Params? = null,
-    @Optional @SerialName(KeyPromote) val promote: List<Promotion>? = null,
-    @Optional @SerialName(KeyHide) @Serializable(KSerializerObjectIDs::class) val hide: List<ObjectID>? = null,
-    @Optional @SerialName(KeyUserData) val userData: JsonObject? = null
+    @SerialName(KeyParams) val params: Params? = null,
+    @SerialName(KeyPromote) val promote: List<Promotion>? = null,
+    @SerialName(KeyHide) @Serializable(KSerializerObjectIDs::class) val hide: List<ObjectID>? = null,
+    @SerialName(KeyUserData) val userData: JsonObject? = null
 )

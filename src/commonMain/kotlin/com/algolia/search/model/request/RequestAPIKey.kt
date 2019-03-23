@@ -10,13 +10,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class RequestAPIKey(
-    @Optional @SerialName(KeyAcl) val rights: List<ACL>? = null,
-    @Optional @SerialName(KeyIndexes) val indices: List<IndexName>? = null,
-    @Optional @SerialName(KeyDescription) val description: String? = null,
-    @Optional @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQuery: Int? = null,
-    @Optional @SerialName(KeyMaxQueriesPerIPPerHour) val maxQueriesPerIPPerHour: Int? = null,
-    @Optional @SerialName(KeyValidity) val validity: Long? = null,
-    @Optional @SerialName(KeyQueryParameters) val query: String? = null,
-    @Optional @SerialName(KeyReferers) val referers: List<String>? = null,
-    @Optional @SerialName(KeyRestrictSources) val restrictSources: String? = null
+    @SerialName(KeyAcl) val rights: List<ACL>? = null,
+    @SerialName(KeyIndexes) val indices: List<IndexName>? = null,
+    @SerialName(KeyDescription) val description: String? = null,
+    @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQuery: Int? = null,
+    @SerialName(KeyMaxQueriesPerIPPerHour) val maxQueriesPerIPPerHour: Int? = null,
+    @SerialName(KeyValidity) val validity: Long? = null,
+    @SerialName(KeyQueryParameters) val query: String? = null,
+    @SerialName(KeyReferers) val referers: List<String>? = null,
+    @SerialName(KeyRestrictSources) val restrictSources: String? = null
 )

@@ -11,7 +11,7 @@ import kotlinx.serialization.Transient
 
 @Serializable
 public data class ResponseABTests(
-    @Optional @SerialName(KeyABTests) val abTestsOrNull: List<ResponseABTest>? = null,
+    @SerialName(KeyABTests) val abTestsOrNull: List<ResponseABTest>? = null,
     @SerialName(KeyCount) val count: Int,
     @SerialName(KeyTotal) val total: Int
 ) {
