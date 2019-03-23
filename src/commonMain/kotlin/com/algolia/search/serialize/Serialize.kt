@@ -1,5 +1,6 @@
 package com.algolia.search.serialize
 
+import com.algolia.search.model.indexing.DeleteByQuery
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.request.RequestAPIKey
@@ -53,6 +54,10 @@ internal fun Encoder.asJsonOutput() = this as JsonOutput
 
 internal fun Query.toJsonNoDefaults(): JsonObject {
     return Json.noDefaults.toJson(Query.serializer(), this).jsonObject
+}
+
+internal fun DeleteByQuery.toJsonNoDefaults(): JsonObject {
+    return Json.noDefaults.toJson(DeleteByQuery.serializer(), this).jsonObject
 }
 
 internal fun Settings.toJsonNoDefaults(): JsonObject {

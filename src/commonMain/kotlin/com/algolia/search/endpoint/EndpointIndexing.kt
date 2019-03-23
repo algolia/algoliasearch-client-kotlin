@@ -4,6 +4,7 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
+import com.algolia.search.model.indexing.DeleteByQuery
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.response.ResponseBatch
@@ -89,7 +90,7 @@ public interface EndpointIndexing {
     ): ResponseBatch
 
     suspend fun deleteObjectBy(
-        query: Query,
+        query: DeleteByQuery,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
 
