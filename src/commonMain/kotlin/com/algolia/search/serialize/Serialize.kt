@@ -34,15 +34,17 @@ internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     }
 }
 
-internal fun JsonObject.urlEncode(): String {
-    return Parameters.build {
-        entries.forEach { (key, element) ->
-            when (element) {
-                is JsonPrimitive -> append(key, element.content)
-                else -> append(key, Json.unquoted.stringify(JsonElementSerializer, element))
+internal fun JsonObject.urlEncode(): String? {
+    return if (isNotEmpty()) {
+        Parameters.build {
+            entries.forEach { (key, element) ->
+                when (element) {
+                    is JsonPrimitive -> append(key, element.content)
+                    else -> append(key, Json.unquoted.stringify(JsonElementSerializer, element))
+                }
             }
-        }
-    }.formUrlEncode()
+        }.formUrlEncode()
+    } else null
 }
 
 internal fun Decoder.asJsonInput() = (this as JsonInput).decodeJson()

@@ -6,6 +6,7 @@ import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.multipleindex.IndexQuery
+import com.algolia.search.model.request.RequestParams
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacetValue
 import com.algolia.search.model.search.Cursor
@@ -31,11 +32,8 @@ internal class EndpointSearchImpl(
     }
 
     override suspend fun browse(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
-        val body = query?.let {
-            json {
-                KeyParams to Json.noDefaults.toJson(Query.serializer(), it).jsonObject.urlEncode()
-            }.toString()
-        } ?: "{}"
+        val params = RequestParams(query?.toJsonNoDefaults()?.urlEncode())
+        val body = Json.noDefaults.stringify(RequestParams.serializer(), params)
 
         return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/browse"), requestOptions, body)
     }

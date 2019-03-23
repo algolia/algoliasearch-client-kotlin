@@ -12,6 +12,7 @@ import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.multipleindex.RequestObjects
+import com.algolia.search.model.request.RequestParams
 import com.algolia.search.model.request.RequestRequestObjects
 import com.algolia.search.model.response.ResponseBatch
 import com.algolia.search.model.response.ResponseObjects
@@ -125,7 +126,8 @@ internal class EndpointIndexingImpl(
 
     override suspend fun deleteObjectBy(query: Query, requestOptions: RequestOptions?): RevisionIndex {
         val path = indexName.toPath("/deleteByQuery")
-        val body = json { KeyParams to query.toJsonNoDefaults().urlEncode() }.toString()
+        val params = RequestParams(query.toJsonNoDefaults().urlEncode())
+        val body = Json.noDefaults.stringify(RequestParams.serializer(), params)
 
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
