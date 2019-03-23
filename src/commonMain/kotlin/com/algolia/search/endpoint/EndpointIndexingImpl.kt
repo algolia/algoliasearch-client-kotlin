@@ -20,7 +20,7 @@ import com.algolia.search.model.response.deletion.DeletionObject
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.search.Query
-import com.algolia.search.model.task.Task
+import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.serialize.*
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
@@ -214,7 +214,7 @@ internal class EndpointIndexingImpl(
 
     override suspend fun replaceAllObjects(
         data: List<JsonObject>
-    ): List<Task> {
+    ): List<TaskIndex> {
         val operations = data.map { BatchOperation.AddObject(it) }
 
         return replaceAllObjectsInternal(operations)
@@ -223,21 +223,21 @@ internal class EndpointIndexingImpl(
     override suspend fun <T : Indexable> replaceAllObjects(
         serializer: KSerializer<T>,
         data: List<T>
-    ): List<Task> {
+    ): List<TaskIndex> {
         val operations = data.map { BatchOperation.AddObject.from(serializer, it) }
 
         return replaceAllObjectsInternal(operations)
     }
 
-    private suspend fun replaceAllObjectsInternal(batchOperations: List<BatchOperation>): List<Task> {
+    private suspend fun replaceAllObjectsInternal(batchOperations: List<BatchOperation>): List<TaskIndex> {
         val indexSource = Index(transport, indexName)
         val indexDestination = Index(transport, "${indexName}_tmp_${Random.nextInt()}".toIndexName())
         val scopes = listOf(Scope.Settings, Scope.Rules, Scope.Synonyms)
 
-        return mutableListOf<Task>().also {
-            it += indexSource.copyIndex(indexDestination.indexName, scopes)
-            it += indexDestination.batch(batchOperations)
-            it += indexDestination.moveIndex(indexName)
+        return mutableListOf<TaskIndex>().also {
+            it += TaskIndex(indexName, indexSource.copyIndex(indexDestination.indexName, scopes).taskID)
+            it += TaskIndex(indexDestination.indexName, indexDestination.batch(batchOperations).taskID)
+            it += TaskIndex(indexDestination.indexName, indexDestination.moveIndex(indexName).taskID)
         }
     }
 }
