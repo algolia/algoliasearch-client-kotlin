@@ -87,6 +87,10 @@
     "attribute2"
   ],
   "exactOnSingleWordQuery": "word",
+  "alternativesAsExact": [
+    "ignorePlurals",
+    "singleWordSynonym"
+  ],
   "numericAttributesForFiltering": [
     "attribute1",
     "attribute2"

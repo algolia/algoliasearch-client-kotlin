@@ -7,37 +7,38 @@ import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 
 
 @Serializable
 public data class ResponseSearch(
-    @Optional @SerialName(KeyHits) val hitsOrNull: List<Hit>? = null,
-    @Optional @SerialName(KeyNbHits) val nbHitsOrNull: Int? = null,
-    @Optional @SerialName(KeyPage) val pageOrNull: Int? = null,
-    @Optional @SerialName(KeyHitsPerPage) val hitsPerPageOrNull: Int? = null,
-    @Optional @SerialName(KeyUserData) val userDataOrNull: List<JsonObject>? = null,
-    @Optional @SerialName(KeyNbPages) val nbPagesOrNull: Int? = null,
-    @Optional @SerialName(KeyProcessingTimeMS) val processingTimeMSOrNull: Long? = null,
-    @Optional @SerialName(KeyExhaustiveNbHits) val exhaustiveNbHitsOrNull: Boolean? = null,
-    @Optional @SerialName(KeyExhaustiveFacetsCount) val exhaustiveFacetsCountOrNull: Boolean? = null,
-    @Optional @SerialName(KeyQuery) val queryOrNull: String? = null,
-    @Optional @SerialName(KeyQueryAfterRemoval) val queryAfterRemovalOrNull: String? = null,
-    @Optional @SerialName(KeyParams) val paramsOrNull: String? = null,
-    @Optional @SerialName(KeyMessage) val messageOrNull: String? = null,
-    @Optional @SerialName(KeyAroundLatLng) @Serializable(KSerializerPoint::class) val aroundLatLngOrNull: Point? = null,
-    @Optional @SerialName(KeyAutomaticRadius) val automaticRadiusOrNull: Float? = null,
-    @Optional @SerialName(KeyServerUsed) val serverUsedOrNull: String? = null,
-    @Optional @SerialName(KeyIndexUsed) val indexUsedOrNull: IndexName? = null,
-    @Optional @SerialName(KeyAbTestVariantID) val abTestVariantIDOrNull: Int? = null,
-    @Optional @SerialName(KeyParsedQuery) val parsedQueryOrNull: String? = null,
-    @Optional @SerialName(KeyFacets) @Serializable(KSerializerFacetMap::class) val facetsOrNull: Map<Attribute, List<Facet>>? = null,
-    @Optional @SerialName(KeyDisjunctiveFacets) @Serializable(KSerializerFacetMap::class) val disjunctiveFacetsOrNull: Map<Attribute, List<Facet>>? = null,
-    @Optional @SerialName(KeyFacets_Stats) val facetStatsOrNull: Map<Attribute, FacetStats>? = null,
-    @Optional @SerialName(KeyCursor) val cursorOrNull: Cursor? = null,
-    @Optional @SerialName(KeyIndex) val indexNameOrNull: IndexName? = null,
-    @Optional @SerialName(KeyProcessed) val processedOrNull: Boolean? = null,
-    @Optional @SerialName(KeyQueryID) val queryIDOrNull: QueryID? = null
+    @SerialName(KeyHits) val hitsOrNull: List<Hit>? = null,
+    @SerialName(KeyNbHits) val nbHitsOrNull: Int? = null,
+    @SerialName(KeyPage) val pageOrNull: Int? = null,
+    @SerialName(KeyHitsPerPage) val hitsPerPageOrNull: Int? = null,
+    @SerialName(KeyUserData) val userDataOrNull: List<JsonObject>? = null,
+    @SerialName(KeyNbPages) val nbPagesOrNull: Int? = null,
+    @SerialName(KeyProcessingTimeMS) val processingTimeMSOrNull: Long? = null,
+    @SerialName(KeyExhaustiveNbHits) val exhaustiveNbHitsOrNull: Boolean? = null,
+    @SerialName(KeyExhaustiveFacetsCount) val exhaustiveFacetsCountOrNull: Boolean? = null,
+    @SerialName(KeyQuery) val queryOrNull: String? = null,
+    @SerialName(KeyQueryAfterRemoval) val queryAfterRemovalOrNull: String? = null,
+    @SerialName(KeyParams) val paramsOrNull: String? = null,
+    @SerialName(KeyMessage) val messageOrNull: String? = null,
+    @SerialName(KeyAroundLatLng) @Serializable(KSerializerPoint::class) val aroundLatLngOrNull: Point? = null,
+    @SerialName(KeyAutomaticRadius) val automaticRadiusOrNull: Float? = null,
+    @SerialName(KeyServerUsed) val serverUsedOrNull: String? = null,
+    @SerialName(KeyIndexUsed) val indexUsedOrNull: IndexName? = null,
+    @SerialName(KeyAbTestVariantID) val abTestVariantIDOrNull: Int? = null,
+    @SerialName(KeyParsedQuery) val parsedQueryOrNull: String? = null,
+    @SerialName(KeyFacets) @Serializable(KSerializerFacetMap::class) val facetsOrNull: Map<Attribute, List<Facet>>? = null,
+    @SerialName(KeyDisjunctiveFacets) @Serializable(KSerializerFacetMap::class) val disjunctiveFacetsOrNull: Map<Attribute, List<Facet>>? = null,
+    @SerialName(KeyFacets_Stats) val facetStatsOrNull: Map<Attribute, FacetStats>? = null,
+    @SerialName(KeyCursor) val cursorOrNull: Cursor? = null,
+    @SerialName(KeyIndex) val indexNameOrNull: IndexName? = null,
+    @SerialName(KeyProcessed) val processedOrNull: Boolean? = null,
+    @SerialName(KeyQueryID) val queryIDOrNull: QueryID? = null
 ) {
 
     @Transient
@@ -147,7 +148,7 @@ public data class ResponseSearch(
     @Serializable(Hit.Companion::class)
     public data class Hit(
         val json: JsonObject
-    ) {
+    ) : Map<String, JsonElement> by json {
 
         public fun <T> get(serializer: KSerializer<T>, attribute: Attribute): T {
             return Json.plain.fromJson(serializer, json.getAs(attribute.raw))

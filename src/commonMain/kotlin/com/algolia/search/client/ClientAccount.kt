@@ -1,21 +1,21 @@
 package com.algolia.search.client
 
 import com.algolia.search.model.task.Task
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 
 
 public object ClientAccount {
 
     public suspend fun copyIndex(source: Index, destination: Index): List<Task> {
-        if (source.api.applicationID == destination.api.applicationID) {
+        if (source.transport.applicationID == destination.transport.applicationID) {
             throw IllegalArgumentException("Source and Destination indices should not be on the same application.")
         }
         var hasThrown404 = false
         try {
             destination.getSettings()
-        } catch (exception: BadResponseStatusException) {
-            hasThrown404 = exception.statusCode == HttpStatusCode.NotFound
+        } catch (exception: ResponseException) {
+            hasThrown404 = exception.response.status.value == HttpStatusCode.NotFound.value
             if (!hasThrown404) throw exception
         }
         if (!hasThrown404) {
@@ -26,9 +26,9 @@ public object ClientAccount {
 
         destination.apply {
             tasks += setSettings(source.getSettings())
-            source.browseAllRules { tasks += saveRules(hits.map { it.rule }) }
-            source.browseAllSynonyms { tasks += saveSynonyms(hits) }
-            source.browseAllObjects { tasks += saveObjects(hits.map { it.json }) }
+            source.browseRules { tasks += saveRules(it.hits.map { it.rule }) }
+            source.browseSynonyms { tasks += saveSynonyms(it.hits) }
+            source.browseObjects { tasks += saveObjects(it.hits.map { it.json }) }
         }
         return tasks
     }

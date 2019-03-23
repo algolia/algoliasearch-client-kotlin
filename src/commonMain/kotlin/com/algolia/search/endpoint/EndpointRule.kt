@@ -1,6 +1,5 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseRule
@@ -8,6 +7,7 @@ import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Rule
+import com.algolia.search.transport.RequestOptions
 
 
 public interface EndpointRule {

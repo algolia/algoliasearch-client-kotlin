@@ -1,9 +1,7 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
-import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.configuration.CallType
-import com.algolia.search.transport.Transport
+import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.ClusterName
 import com.algolia.search.model.UserID
 import com.algolia.search.model.request.RequestSearchUserID
@@ -11,6 +9,8 @@ import com.algolia.search.model.response.*
 import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.deletion.Deletion
 import com.algolia.search.serialize.*
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json

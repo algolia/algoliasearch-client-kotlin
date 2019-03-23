@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable(KSerializerClientDate::class)
-public expect class ClientDate(raw: String) : Raw<String> {
+expect class ClientDate(raw: String) : Raw<String> {
 
-    public constructor(timestamp: Long)
+    constructor(timestamp: Long)
 }

@@ -1,7 +1,6 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.filter.*
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute
@@ -13,6 +12,7 @@ import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
+import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
@@ -25,19 +25,17 @@ internal class EndpointSearchImpl(
 ) : EndpointSearch {
 
     override suspend fun search(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
-        val body = query?.build().toBody()
+        val body = query.toBody()
 
         return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/query"), requestOptions, body)
     }
 
     override suspend fun browse(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
-        val copy = query?.build()
-        val body =
-            copy?.let {
-                json {
-                    KeyParams to Json.noDefaults.toJson(Query.serializer(), it).jsonObject.urlEncode()
-                }.toString()
-            } ?: "{}"
+        val body = query?.let {
+            json {
+                KeyParams to Json.noDefaults.toJson(Query.serializer(), it).jsonObject.urlEncode()
+            }.toString()
+        } ?: "{}"
 
         return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/browse"), requestOptions, body)
     }
@@ -50,20 +48,17 @@ internal class EndpointSearchImpl(
         return transport.request(HttpMethod.Get, CallType.Read, indexName.toPath("/browse"), options)
     }
 
-    override suspend fun searchForFacetValue(
+    override suspend fun searchForFacetValues(
         attribute: Attribute,
         facetQuery: String?,
         query: Query?,
-        maxFacetHits: Int?,
         requestOptions: RequestOptions?
     ): ResponseSearchForFacetValue {
-        val copy = query?.build()
         val path = indexName.toPath("/facets/$attribute/query")
         val extraParams = json {
-            maxFacetHits?.let { KeyMaxFacetHits to it }
             facetQuery?.let { KeyFacetQuery to it }
         }
-        val body = (copy?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
+        val body = (query?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }
@@ -107,10 +102,10 @@ internal class EndpointSearchImpl(
         orFilters: List<FilterFacet>
     ): List<IndexQuery> {
         return query.copy().apply {
-            filterBuilder {
+            filters = FilterBuilder {
                 groupAnd += andFilters
                 groupOr += orFilters
-            }
+            }.build()
         }.let { listOf(IndexQuery(indexName, it)) }
     }
 
@@ -125,10 +120,10 @@ internal class EndpointSearchImpl(
                 setFacets(attribute)
                 setAttributesToRetrieve()
                 setAttributesToHighlight()
-                filterBuilder {
+                filters = FilterBuilder {
                     groupAnd += andFilters
                     groupOr += orFilters.filter { it.attribute != attribute }
-                }
+                }.build()
                 hitsPerPage = 0
                 analytics = false
             }

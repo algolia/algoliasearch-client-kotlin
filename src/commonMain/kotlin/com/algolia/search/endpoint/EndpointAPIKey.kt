@@ -1,6 +1,5 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
@@ -10,6 +9,7 @@ import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.response.revision.RevisionAPIKey
 import com.algolia.search.model.search.Query
+import com.algolia.search.transport.RequestOptions
 
 
 public interface EndpointAPIKey {

@@ -19,7 +19,7 @@ import kotlinx.serialization.json.long
 @Serializable(ResponseBatches.Companion::class)
 public data class ResponseBatches(
     @SerialName(KeyTaskID) val tasks: List<TaskIndex>,
-    @Optional @SerialName(KeyObjectIDs) val objectIDsOrNull: List<ObjectID?>? = null
+    @SerialName(KeyObjectIDs) val objectIDsOrNull: List<ObjectID?>? = null
 ) {
 
     @Transient

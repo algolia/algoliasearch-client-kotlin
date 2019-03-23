@@ -6,15 +6,13 @@ import com.algolia.search.serialize.KeyForwardedFor
 import kotlinx.serialization.json.JsonObject
 
 
-public data class RequestOptions(
-    val writeTimeout: Long? = null,
-    val readTimeout: Long? = null
-) {
+public class RequestOptions {
 
-    internal val headers = mutableMapOf<String, Any>()
+    public val headers = mutableMapOf<String, Any>()
+    public val urlParameters = mutableMapOf<String, Any>()
 
-    internal val urlParameters = mutableMapOf<String, Any>()
-
+    public var writeTimeout: Long? = null
+    public var readTimeout: Long? = null
     public var body: JsonObject? = null
 
     public fun headerForwardedFor(ipAddress: String) {

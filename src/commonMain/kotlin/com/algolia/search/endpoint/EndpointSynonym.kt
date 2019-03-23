@@ -1,6 +1,5 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseSearchSynonyms
@@ -9,6 +8,7 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionSynonym
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
+import com.algolia.search.transport.RequestOptions
 
 
 public interface EndpointSynonym {
