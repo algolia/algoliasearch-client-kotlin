@@ -6,7 +6,7 @@ import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.Time
 
 
-val ApplicationID.hosts
+internal val ApplicationID.searchHosts
     get() = listOf(
         RetryableHost("$this-dsn.algolia.net", CallType.Read),
         RetryableHost("$this.algolia.net", CallType.Write),
@@ -14,6 +14,9 @@ val ApplicationID.hosts
         RetryableHost("$this-2.algolianet.com"),
         RetryableHost("$this-3.algolianet.com")
     )
+
+internal val insightHost = RetryableHost("insights.algolia.io")
+internal val analyticsHost = RetryableHost("analytics.algolia.com")
 
 internal fun RetryableHost.reset() {
     lastUpdated = Time.getCurrentTimeMillis()

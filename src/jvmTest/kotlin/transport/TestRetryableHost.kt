@@ -5,8 +5,8 @@ import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.helper.toApplicationID
 import com.algolia.search.transport.hasFailed
 import com.algolia.search.transport.hasTimedOut
-import com.algolia.search.transport.hosts
 import com.algolia.search.transport.reset
+import com.algolia.search.transport.searchHosts
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -21,7 +21,7 @@ internal class TestRetryableHost {
 
     @Test
     fun searchHosts() {
-        applicationID.hosts shouldEqual listOf(
+        applicationID.searchHosts shouldEqual listOf(
             RetryableHost("$applicationID-dsn.algolia.net", CallType.Read),
             RetryableHost("$applicationID.algolia.net", CallType.Write),
             RetryableHost("$applicationID-1.algolianet.com"),
