@@ -9,11 +9,10 @@ import runBlocking
 import suite.cleanIndex
 import suite.testSuiteIndexName
 import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 
-class SnippetAddObjects {
+internal class SnippetAddObjects {
 
 //    suspend fun <T> saveObject(
 //        serializer: __KSerializer<T>__,
@@ -34,29 +33,6 @@ class SnippetAddObjects {
 //
 //    suspend fun saveObjects(
 //        data: __List<JsonObject>__,
-//        #{requestOptions}: __RequestOptions?__ = null
-//    ): ResponseBatch
-//
-//    suspend fun <T : Indexable> replaceObject(
-//        serializer: __KSerializer<T>__,
-//        data: __T__,
-//        #{requestOptions}: __RequestOptions?__ = null
-//    ): RevisionObject
-//
-//    suspend fun <T : Indexable> replaceObjects(
-//        serializer: __KSerializer<T>__,
-//        data: __List<T>__,
-//        #{requestOptions}: __RequestOptions?__ = null
-//    ): ResponseBatch
-//
-//    suspend fun replaceObject(
-//        objectID: __ObjectID__,
-//        data: __JsonObject__,
-//        #{requestOptions}: __RequestOptions?__ = null
-//    ): RevisionObject
-//
-//    suspend fun replaceObjects(
-//        data: __List<Pair<ObjectID, JsonObject>>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
 
@@ -86,7 +62,7 @@ class SnippetAddObjects {
 
             index.saveObjects(json)
 
-            // With class
+            // With serializable class
             @Serializable
             data class Person(val firstname: String, val lastname: String)
 
@@ -100,22 +76,25 @@ class SnippetAddObjects {
     }
 
     @Test
-    fun withObjectId() {
+    fun saveObjectsWithID() {
         runBlocking {
             // With JsonObject
             val json = listOf(
-                ObjectID("myID1") to json {
+                json {
+                    "objectID" to ObjectID("myID1")
                     "firstname" to "Jimmie"
                     "lastname" to "Barninger"
                 },
-                ObjectID("myID1") to json {
+                json {
+                    "objectID" to ObjectID("myID2")
                     "firstname" to "Warren"
                     "lastname" to "Speach"
                 }
             )
 
-            index.replaceObjects(json)
+            index.saveObjects(json)
 
+            // With serializable class
             @Serializable
             data class Person(
                 val firstname: String,
@@ -128,14 +107,14 @@ class SnippetAddObjects {
                 Person("Jimmie", "Barninger", ObjectID("myID"))
             )
 
-            index.replaceObjects(Person.serializer(), persons)
+            index.saveObjects(Person.serializer(), persons)
         }
     }
 
     @Test
     fun saveObject() {
         runBlocking {
-            // With JsonObject without ObjectID
+            // With JsonObject
             val json = json {
                 "firstname" to "Jimmie"
                 "lastname" to "Barninger"
@@ -144,7 +123,7 @@ class SnippetAddObjects {
 
             index.saveObject(json)
 
-            // With class
+            /// With serializable class
             @Serializable
             data class Person(
                 val firstname: String,
