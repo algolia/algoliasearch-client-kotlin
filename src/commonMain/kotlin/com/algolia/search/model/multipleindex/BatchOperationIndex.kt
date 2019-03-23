@@ -15,7 +15,7 @@ import kotlinx.serialization.json.JsonObject
 @Serializable(BatchOperationIndex.Companion::class)
 public data class BatchOperationIndex(
     val indexName: IndexName,
-    val batchOperation: BatchOperation
+    val operation: BatchOperation
 ) {
 
     @Serializer(BatchOperationIndex::class)
@@ -23,7 +23,7 @@ public data class BatchOperationIndex(
 
         override fun serialize(encoder: Encoder, obj: BatchOperationIndex) {
             val elements =
-                Json.plain.toJson(BatchOperation, obj.batchOperation).jsonObject.content.toMutableMap().also {
+                Json.plain.toJson(BatchOperation, obj.operation).jsonObject.content.toMutableMap().also {
                     it[KeyIndexName] = JsonLiteral(obj.indexName.raw)
                 }
 
