@@ -1,9 +1,9 @@
 package suite
 
+import com.algolia.search.configuration.CallType
 import com.algolia.search.client.ClientSearch
-import com.algolia.search.client.ConfigurationImpl
-import com.algolia.search.helper.toAPIKey
-import com.algolia.search.helper.toApplicationID
+import com.algolia.search.configuration.ConfigurationSearch
+import com.algolia.search.configuration.RetryableHost
 import io.ktor.client.features.logging.LogLevel
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -17,17 +17,17 @@ internal class TestSuiteDNS {
     @Test
     fun test() {
         runBlocking {
-            val applicationID = System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID()
+            val applicationID = clientAdmin1.applicationID
 
             val client = ClientSearch(
-                ConfigurationImpl(
+                ConfigurationSearch(
                     applicationID,
-                    System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey(),
+                    clientAdmin1.apiKey,
                     hosts = listOf(
-                        "https://algolia.biz",
-                        "https://$applicationID-1.algolianet.com",
-                        "https://$applicationID-2.algolianet.com",
-                        "https://$applicationID-3.algolianet.com"
+                        RetryableHost("algolia.biz", CallType.Read),
+                        RetryableHost("$applicationID-1.algolianet.com"),
+                        RetryableHost("$applicationID-2.algolianet.com"),
+                        RetryableHost("$applicationID-3.algolianet.com")
                     ),
                     logLevel = LogLevel.INFO
                 )

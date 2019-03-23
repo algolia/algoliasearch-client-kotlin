@@ -1,6 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.RequestOptions
+import com.algolia.search.transport.RequestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseSearchSynonyms

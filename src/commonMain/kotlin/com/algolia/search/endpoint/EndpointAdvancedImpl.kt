@@ -1,9 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.APIWrapper
-import com.algolia.search.client.RequestOptions
-import com.algolia.search.client.retryRead
-import com.algolia.search.client.setRequestOptions
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.helper.requestOptionsBuilder
+import com.algolia.search.configuration.CallType
+import com.algolia.search.transport.Transport
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseLogs
@@ -11,12 +11,8 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskID
 import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyIndexName
-import com.algolia.search.serialize.KeyLength
-import com.algolia.search.serialize.KeyOffset
-import com.algolia.search.serialize.KeyType
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
+import com.algolia.search.serialize.*
+import io.ktor.http.HttpMethod
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
@@ -24,10 +20,9 @@ import kotlinx.coroutines.withTimeout
 
 
 internal class EndpointAdvancedImpl(
-    val api: APIWrapper,
+    private val transport: Transport,
     override val indexName: IndexName
-) : EndpointAdvanced,
-    APIWrapper by api {
+) : EndpointAdvanced {
 
     override suspend fun List<Task>.wait(timeout: Long?, requestOptions: RequestOptions?): List<TaskStatus> {
 
@@ -59,11 +54,7 @@ internal class EndpointAdvancedImpl(
     }
 
     override suspend fun getTask(taskID: TaskID, requestOptions: RequestOptions?): TaskInfo {
-        return retryRead(requestOptions, indexName.toPath("/task/$taskID")) { url ->
-            httpClient.get<TaskInfo>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Get, CallType.Read, indexName.toPath("/task/$taskID"), requestOptions)
     }
 
     override suspend fun getLogs(
@@ -72,14 +63,12 @@ internal class EndpointAdvancedImpl(
         logType: LogType?,
         requestOptions: RequestOptions?
     ): ResponseLogs {
-        return retryRead(requestOptions, "/1/logs") { url ->
-            httpClient.get<ResponseLogs>(url) {
-                parameter(KeyIndexName, indexName.raw)
-                parameter(KeyOffset, offset)
-                parameter(KeyLength, length)
-                parameter(KeyType, logType?.raw)
-                setRequestOptions(requestOptions)
-            }
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyIndexName, indexName.raw)
+            parameter(KeyOffset, offset)
+            parameter(KeyLength, length)
+            parameter(KeyType, logType?.raw)
         }
+        return transport.request(HttpMethod.Get, CallType.Read, RouteLogs, options)
     }
 }

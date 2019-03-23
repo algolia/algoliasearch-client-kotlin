@@ -1,6 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.helper.requestOptionsBuilder
+import com.algolia.search.configuration.CallType
+import com.algolia.search.transport.Transport
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.response.ResponseABTest
@@ -11,61 +14,37 @@ import com.algolia.search.model.response.revision.RevisionABTest
 import com.algolia.search.serialize.KeyLimit
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.RouteABTestsV2
-import io.ktor.client.request.delete
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.request.post
+import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
 
 
 internal class EndpointAnalyticsImpl(
-    val api: APIWrapper
-) : EndpointAnalytics,
-    APIWrapper by api {
+    private val transport: Transport
+) : EndpointAnalytics {
 
     override suspend fun addABTest(abTest: ABTest, requestOptions: RequestOptions?): CreationABTest {
         val bodyString = Json.stringify(ABTest, abTest)
 
-        return retryWrite(requestOptions, RouteABTestsV2) { url ->
-            httpClient.post<CreationABTest>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Write, RouteABTestsV2, requestOptions, bodyString)
     }
 
     override suspend fun getABTest(abTestID: ABTestID, requestOptions: RequestOptions?): ResponseABTest {
-        return retryRead(requestOptions, "$RouteABTestsV2/$abTestID") { url ->
-            httpClient.get<ResponseABTest>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Get, CallType.Read, "$RouteABTestsV2/$abTestID", requestOptions)
     }
 
     override suspend fun stopABTest(abTestID: ABTestID, requestOptions: RequestOptions?): RevisionABTest {
-        return retryWrite(requestOptions, "$RouteABTestsV2/$abTestID/stop") { url ->
-            httpClient.post<RevisionABTest>(url) {
-                body = ""
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Write, "$RouteABTestsV2/$abTestID/stop", requestOptions, "")
     }
 
     override suspend fun deleteABTest(abTestID: ABTestID, requestOptions: RequestOptions?): DeletionABTest {
-        return retryWrite(requestOptions, "$RouteABTestsV2/$abTestID") { url ->
-            httpClient.delete<DeletionABTest>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Delete, CallType.Write, "$RouteABTestsV2/$abTestID", requestOptions)
     }
 
     override suspend fun listABTests(page: Int?, hitsPerPage: Int?, requestOptions: RequestOptions?): ResponseABTests {
-        return retryRead(requestOptions, RouteABTestsV2) { url ->
-            httpClient.get<ResponseABTests>(url) {
-                setRequestOptions(requestOptions)
-                parameter(KeyOffset, page)
-                parameter(KeyLimit, hitsPerPage)
-            }
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyOffset, page)
+            parameter(KeyLimit, hitsPerPage)
         }
+        return transport.request(HttpMethod.Get, CallType.Read, RouteABTestsV2, options)
     }
 }

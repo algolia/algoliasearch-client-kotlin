@@ -378,13 +378,14 @@ internal class TestKeys {
         KeyTurkish shouldEqual "tr"
         KeyTatar shouldEqual "tt"
 
-        RouteIndexesV1 shouldEqual "/1/indexes"
-        RouteSettings shouldEqual "/settings"
-        RouteClustersV1 shouldEqual "/1/clusters"
-        RouteSynonyms shouldEqual "/synonyms"
-        RouteEventsV1 shouldEqual "/1/events"
-        RouteABTestsV2 shouldEqual "/2/abtests"
-        RouteRules shouldEqual "/rules"
-        RouteKeysV1 shouldEqual "/1/keys"
+        RouteIndexesV1 shouldEqual "1/indexes"
+        RouteSettings shouldEqual "settings"
+        RouteClustersV1 shouldEqual "1/clusters"
+        RouteSynonyms shouldEqual "synonyms"
+        RouteEventsV1 shouldEqual "1/events"
+        RouteABTestsV2 shouldEqual "2/abtests"
+        RouteRules shouldEqual "rules"
+        RouteKeysV1 shouldEqual "1/keys"
+        RouteLogs shouldEqual "1/logs"
     }
 }

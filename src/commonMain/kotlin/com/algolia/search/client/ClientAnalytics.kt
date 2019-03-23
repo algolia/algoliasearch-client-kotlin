@@ -1,32 +1,30 @@
 package com.algolia.search.client
 
+import com.algolia.search.configuration.Configuration
+import com.algolia.search.configuration.ConfigurationAnalytics
 import com.algolia.search.endpoint.EndpointAnalytics
 import com.algolia.search.endpoint.EndpointAnalyticsImpl
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.response.ResponseABTests
-import io.ktor.client.engine.HttpClientEngine
-
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.transport.Transport
 
 public class ClientAnalytics private constructor(
-    internal val api: APIWrapperImpl
+    private val api: Transport
 ) : EndpointAnalytics by EndpointAnalyticsImpl(api),
     Configuration by api {
 
     public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
-    ) : this(APIWrapperImpl(ConfigurationImpl(applicationID, apiKey, hosts = listOf("https://analytics.algolia.com"))))
+    ) : this(
+        Transport(ConfigurationAnalytics(applicationID, apiKey))
+    )
 
     public constructor(
-        configuration: ConfigurationImpl
-    ) : this(APIWrapperImpl(configuration))
-
-    public constructor(
-        configuration: ConfigurationImpl,
-        engine: HttpClientEngine?
-    ) : this(APIWrapperImpl(configuration, engine))
-
+        configuration: ConfigurationAnalytics
+    ) : this(Transport(configuration))
 
     public suspend fun browseAllABTests(
         hitsPerPage: Int? = null,

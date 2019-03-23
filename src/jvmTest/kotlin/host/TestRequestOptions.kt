@@ -1,9 +1,9 @@
 package host
 
-import com.algolia.search.helper.requestOptions
+import com.algolia.search.helper.requestOptionsBuilder
+import com.algolia.search.helper.toUserID
 import com.algolia.search.serialize.KeyAlgoliaUserID
 import com.algolia.search.serialize.KeyForwardedFor
-import com.algolia.search.helper.toUserID
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
@@ -15,7 +15,7 @@ internal class TestRequestOptions {
 
     @Test
     fun headers() {
-        val requestOptions = requestOptions {
+        val requestOptions = requestOptionsBuilder {
             headers["keyA"] = "valueA"
             headers["keyB"] = "valueB"
         }
@@ -25,7 +25,7 @@ internal class TestRequestOptions {
 
     @Test
     fun parameters() {
-        val requestOptions = requestOptions {
+        val requestOptions = requestOptionsBuilder {
             urlParameters["keyA"] = "valueA"
             urlParameters["keyB"] = "valueB"
         }
@@ -35,7 +35,7 @@ internal class TestRequestOptions {
 
     @Test
     fun userId() {
-        val requestOptions = requestOptions {
+        val requestOptions = requestOptionsBuilder {
             headerAlgoliaUserId("value".toUserID())
         }
         requestOptions.headers shouldEqual mutableMapOf(KeyAlgoliaUserID to "value")
@@ -43,7 +43,7 @@ internal class TestRequestOptions {
 
     @Test
     fun forwarded() {
-        val requestOptions = requestOptions {
+        val requestOptions = requestOptionsBuilder {
             headerForwardedFor("value")
         }
 

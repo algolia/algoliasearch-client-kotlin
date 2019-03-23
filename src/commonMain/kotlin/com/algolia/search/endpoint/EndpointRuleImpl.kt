@@ -1,6 +1,8 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.configuration.CallType
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.request.RequestSearchRules
@@ -10,44 +12,38 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.serialize.KeyClearExistingRules
+import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.RouteRules
 import com.algolia.search.serialize.noDefaults
-import io.ktor.client.request.*
+import com.algolia.search.transport.Transport
+import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 
 
 internal class EndpointRuleImpl(
-    val api: APIWrapper,
+    private val transport: Transport,
     override val indexName: IndexName
-) : EndpointRule,
-    APIWrapper by api {
+) : EndpointRule {
 
     override suspend fun saveRule(
         rule: Rule,
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
-        val bodyString = Json.noDefaults.stringify(Rule.serializer(), rule)
-
-        return retryWrite(
-            requestOptions,
-            indexName.toPath("$RouteRules/${rule.objectID}")
-        ) { url ->
-            httpClient.put<RevisionIndex>(url) {
-                body = bodyString
-                setForwardToReplicas(forwardToReplicas)
-                setRequestOptions(requestOptions)
-            }
+        val path = indexName.toPath("/$RouteRules/${rule.objectID}")
+        val body = Json.noDefaults.stringify(Rule.serializer(), rule)
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyForwardToReplicas, forwardToReplicas)
         }
+
+        return transport.request(HttpMethod.Put, CallType.Write, path, options, body)
     }
 
     override suspend fun getRule(objectID: ObjectID, requestOptions: RequestOptions?): ResponseRule {
-        return retryRead(requestOptions, indexName.toPath("$RouteRules/$objectID")) { url ->
-            httpClient.get<ResponseRule>(url) {
-                setRequestOptions(requestOptions)
-            }
-        }
+        val path = indexName.toPath("/$RouteRules/$objectID")
+
+        return transport.request(HttpMethod.Get, CallType.Read, path, requestOptions)
     }
 
     override suspend fun deleteRule(
@@ -55,12 +51,11 @@ internal class EndpointRuleImpl(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
-        return retryWrite(requestOptions, indexName.toPath("$RouteRules/$objectID")) { url ->
-            httpClient.delete<RevisionIndex>(url) {
-                setForwardToReplicas(forwardToReplicas)
-                setRequestOptions(requestOptions)
-            }
+        val path = indexName.toPath("/$RouteRules/$objectID")
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyForwardToReplicas, forwardToReplicas)
         }
+        return transport.request(HttpMethod.Delete, CallType.Write, path, options)
     }
 
     override suspend fun searchRules(
@@ -72,25 +67,19 @@ internal class EndpointRuleImpl(
         enabled: Boolean?,
         requestOptions: RequestOptions?
     ): ResponseRules {
+        val path = indexName.toPath("/$RouteRules/search")
         val request = RequestSearchRules(query, anchoring, context, page, hitsPerPage, enabled)
-        val bodyString = Json.noDefaults.stringify(RequestSearchRules.serializer(), request)
+        val body = Json.noDefaults.stringify(RequestSearchRules.serializer(), request)
 
-        return retryRead(requestOptions, indexName.toPath("$RouteRules/search")) { url ->
-            httpClient.post<ResponseRules>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }
 
     override suspend fun clearRules(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): RevisionIndex {
-        return retryWrite(requestOptions, indexName.toPath("$RouteRules/clear")) { url ->
-            httpClient.post<RevisionIndex>(url) {
-                body = ""
-                setForwardToReplicas(forwardToReplicas)
-                setRequestOptions(requestOptions)
-            }
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyForwardToReplicas, forwardToReplicas)
         }
+
+        return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/$RouteRules/clear"), options, "")
     }
 
     override suspend fun saveRules(
@@ -99,16 +88,13 @@ internal class EndpointRuleImpl(
         clearExistingRules: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
-        val bodyString = Json.noDefaults.stringify(Rule.serializer().list, rules)
-
-        return retryWrite(requestOptions, indexName.toPath("$RouteRules/batch")) { url ->
-            httpClient.post<RevisionIndex>(url) {
-                body = bodyString
-                setForwardToReplicas(forwardToReplicas)
-                parameter(KeyClearExistingRules, clearExistingRules)
-                setRequestOptions(requestOptions)
-            }
+        val body = Json.noDefaults.stringify(Rule.serializer().list, rules)
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyForwardToReplicas, forwardToReplicas)
+            parameter(KeyClearExistingRules, clearExistingRules)
         }
+
+        return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/$RouteRules/batch"), options, body)
     }
 
     override suspend fun replaceAllRules(

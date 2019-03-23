@@ -1,6 +1,7 @@
 package com.algolia.search.client
 
 import com.algolia.search.endpoint.*
+import com.algolia.search.transport.Transport
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.ResponseSearch
@@ -8,10 +9,11 @@ import com.algolia.search.model.response.ResponseSearchSynonyms
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.SynonymType
+import com.algolia.search.transport.RequestOptions
 
 
 public data class Index internal constructor(
-    internal val api: APIWrapper,
+    internal val api: Transport,
     override val indexName: IndexName
 ) : EndpointSearch by EndpointSearchImpl(api, indexName),
     EndpointSettings by EndpointSettingsImpl(api, indexName),

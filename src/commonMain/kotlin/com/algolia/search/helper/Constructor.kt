@@ -1,6 +1,6 @@
 package com.algolia.search.helper
 
-import com.algolia.search.client.RequestOptions
+import com.algolia.search.transport.RequestOptions
 import com.algolia.search.model.*
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.insights.EventName
@@ -71,6 +71,9 @@ public infix fun Attribute.limit(numberOfWords: Int?): Snippet {
     return Snippet(this, numberOfWords)
 }
 
-public fun requestOptions(init: RequestOptions.() -> Unit): RequestOptions {
-    return RequestOptions().apply(init)
+public fun requestOptionsBuilder(
+    requestOptions: RequestOptions? = null,
+    init: RequestOptions.() -> Unit
+): RequestOptions {
+    return (requestOptions ?: RequestOptions()).apply(init)
 }

@@ -1,6 +1,9 @@
 package com.algolia.search.serialize
 
+import com.algolia.search.model.multipleindex.IndexQuery
+import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.request.RequestAPIKey
+import com.algolia.search.model.request.RequestMultipleQueries
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.model.settings.Settings
@@ -62,3 +65,11 @@ internal fun RequestAPIKey.stringify(): String {
 internal fun JsonObject.toRankingInfo() = Json.plain.fromJson(RankingInfo.serializer(), this)
 
 internal val Json.Companion.noDefaults get() = Json(encodeDefaults = false)
+
+internal fun List<IndexQuery>.toBody(strategy: MultipleQueriesStrategy): String {
+    return Json.noDefaults.stringify(RequestMultipleQueries, RequestMultipleQueries(this, strategy))
+}
+
+internal fun Query?.toBody(): String {
+    return this?.let { Json.noDefaults.stringify(Query.serializer(), it) } ?: "{}"
+}

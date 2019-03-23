@@ -1,7 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.client.*
+import com.algolia.search.configuration.CallType
+import com.algolia.search.transport.RequestOptions
 import com.algolia.search.filter.*
+import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.multipleindex.IndexQuery
@@ -11,54 +13,41 @@ import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
-import io.ktor.client.request.get
-import io.ktor.client.request.parameter
-import io.ktor.client.request.post
+import com.algolia.search.transport.Transport
+import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 
 
 internal class EndpointSearchImpl(
-    val api: APIWrapper,
+    private val transport: Transport,
     override val indexName: IndexName
-) : EndpointSearch,
-    APIWrapper by api {
+) : EndpointSearch {
 
     override suspend fun search(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
-        val copy = query?.build()
+        val body = query?.build().toBody()
 
-        return retryRead(requestOptions, indexName.toPath("/query")) { url ->
-            httpClient.post<ResponseSearch>(url) {
-                setBody(copy)
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/query"), requestOptions, body)
     }
 
     override suspend fun browse(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
         val copy = query?.build()
-        val bodyString =
+        val body =
             copy?.let {
                 json {
                     KeyParams to Json.noDefaults.toJson(Query.serializer(), it).jsonObject.urlEncode()
                 }.toString()
             } ?: "{}"
 
-        return retryRead(requestOptions, indexName.toPath("/browse")) { url ->
-            httpClient.post<ResponseSearch>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/browse"), requestOptions, body)
     }
 
     override suspend fun browse(cursor: Cursor, requestOptions: RequestOptions?): ResponseSearch {
-        return retryRead(requestOptions, indexName.toPath("/browse")) { url ->
-            httpClient.get<ResponseSearch>(url) {
-                parameter(KeyCursor, cursor)
-                setRequestOptions(requestOptions)
-            }
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyCursor, cursor)
         }
+
+        return transport.request(HttpMethod.Get, CallType.Read, indexName.toPath("/browse"), options)
     }
 
     override suspend fun searchForFacetValue(
@@ -69,21 +58,14 @@ internal class EndpointSearchImpl(
         requestOptions: RequestOptions?
     ): ResponseSearchForFacetValue {
         val copy = query?.build()
+        val path = indexName.toPath("/facets/$attribute/query")
         val extraParams = json {
             maxFacetHits?.let { KeyMaxFacetHits to it }
             facetQuery?.let { KeyFacetQuery to it }
         }
-        val bodyString = (copy?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
+        val body = (copy?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
 
-        return retryRead(
-            requestOptions,
-            indexName.toPath("/facets/$attribute/query")
-        ) { url ->
-            httpClient.post<ResponseSearchForFacetValue>(url) {
-                body = bodyString
-                setRequestOptions(requestOptions)
-            }
-        }
+        return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }
 
     override suspend fun searchDisjunctiveFacets(
@@ -95,7 +77,7 @@ internal class EndpointSearchImpl(
         val (orFilters, andFilters) = filters.partition { disjunctiveFacets.contains(it.attribute) }
         val queryAnd = buildAndQueries(query, andFilters, orFilters)
         val queriesOr = buildOrQueries(disjunctiveFacets, query, andFilters, orFilters)
-        val results = EndpointMultipleIndexImpl(api).multipleQueries(queryAnd.plus(queriesOr)).results
+        val results = EndpointMultipleIndexImpl(transport).multipleQueries(queryAnd.plus(queriesOr)).results
         val resultAnd = results.first()
         val resultsOr = results.subList(1, results.size)
         val facets = resultsOr.map { it.facets.toMutableMap() }.reduce { acc, map -> acc.apply { this += map } }
@@ -104,8 +86,8 @@ internal class EndpointSearchImpl(
         resultAnd.facetStatsOrNull?.let {
             facetStats += it
         }
-        resultsOr.forEach {
-            it.facetStatsOrNull?.let {
+        resultsOr.forEach { result ->
+            result.facetStatsOrNull?.let {
                 facetStats += it
             }
         }
