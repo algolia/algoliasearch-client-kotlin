@@ -2,13 +2,10 @@ package snippets.indexing
 
 import clientAdmin1
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.response.ResponseBatch
-import com.algolia.search.model.response.deletion.DeletionObject
-import com.algolia.search.transport.RequestOptions
 import runBlocking
 import suite.cleanIndex
 import suite.testSuiteIndexName
-import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 
@@ -28,7 +25,7 @@ internal class SnippetDeleteObject {
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
 
-    @AfterTest
+    @BeforeTest
     fun clean() {
         runBlocking { cleanIndex(clientAdmin1, suffix) }
     }

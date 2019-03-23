@@ -7,6 +7,7 @@ import runBlocking
 import suite.cleanIndex
 import suite.testSuiteIndexName
 import kotlin.test.AfterTest
+import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 
@@ -26,7 +27,7 @@ internal class SnippetReplaceAllObjects {
     private val client = clientAdmin1
     private val index = client.initIndex(indexName)
 
-    @AfterTest
+    @BeforeTest
     fun clean() {
         runBlocking { cleanIndex(client, suffix) }
     }
