@@ -220,7 +220,7 @@ internal class EndpointIndexingImpl(
         return replaceAllObjectsInternal(operations)
     }
 
-    override suspend fun <T : Indexable> replaceAllObjects(
+    override suspend fun <T> replaceAllObjects(
         serializer: KSerializer<T>,
         data: List<T>
     ): List<TaskIndex> {

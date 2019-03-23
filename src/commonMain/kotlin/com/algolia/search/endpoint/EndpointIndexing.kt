@@ -73,7 +73,7 @@ public interface EndpointIndexing {
         data: List<JsonObject>
     ): List<TaskIndex>
 
-    suspend fun <T : Indexable> replaceAllObjects(
+    suspend fun <T> replaceAllObjects(
         serializer: KSerializer<T>,
         data: List<T>
     ): List<TaskIndex>
