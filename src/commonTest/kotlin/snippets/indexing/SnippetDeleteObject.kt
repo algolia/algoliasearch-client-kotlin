@@ -12,12 +12,12 @@ import kotlin.test.Test
 internal class SnippetDeleteObject {
 
 //    suspend fun deleteObject(
-//        objectID: __ObjectID__,
+//        #{objectID}: __ObjectID__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): DeletionObject
 //
 //    suspend fun deleteObjects(
-//        objectIDs: __List<ObjectID>__,
+//        #{objectIDs}: __List<ObjectID>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
 

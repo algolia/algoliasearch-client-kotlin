@@ -17,23 +17,23 @@ internal class SnippetAddObjects {
 
 //    suspend fun <T> saveObject(
 //        serializer: __KSerializer<T>__,
-//        data: __T__,
+//        [data](#method-param-objects): __T__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): CreationObject
 //
 //    suspend fun <T> saveObjects(
 //        serializer: __KSerializer<T>__,
-//        data: __List<T>__,
+//        [data](#method-param-objects): __T__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
 //
 //    suspend fun saveObject(
-//        data: __JsonObject__,
+//        [data](#method-param-objects): __JsonObject__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): CreationObject
 //
 //    suspend fun saveObjects(
-//        data: __List<JsonObject>__,
+//        [data](#method-param-objects): __List<JsonObject>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
 

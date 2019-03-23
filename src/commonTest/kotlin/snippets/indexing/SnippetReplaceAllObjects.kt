@@ -14,12 +14,12 @@ import kotlin.test.Test
 internal class SnippetReplaceAllObjects {
 
 //    suspend fun replaceAllObjects(
-//        data: __List<JsonObject>__
+//        [data](#method-param-objects): __List<JsonObject>__
 //    ): List<Task>
 //
 //    suspend fun <T : Indexable> replaceAllObjects(
 //        serializer: KSerializer<T>,
-//        data: List<T>
+//        [data](#method-param-objects): List<T>
 //    ): List<Task>
 
     private val suffix = "snippet"

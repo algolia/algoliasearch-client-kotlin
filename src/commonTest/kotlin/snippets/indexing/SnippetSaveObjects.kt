@@ -17,24 +17,24 @@ internal class SnippetSaveObjects {
 
 //    suspend fun <T : Indexable> replaceObject(
 //        serializer: __KSerializer<T>__,
-//        data: __T__,
+//        [data](#method-param-objects): __T__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): RevisionObject
 //
 //    suspend fun <T : Indexable> replaceObjects(
 //        serializer: __KSerializer<T>__,
-//        data: __List<T>__,
+//        [data](#method-param-objects): __List<T>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
 //
 //    suspend fun replaceObject(
-//        objectID: __ObjectID__,
-//        data: __JsonObject__,
+//        [objectID](#method-param-objectidkey): __ObjectID__,
+//        [data](#method-param-objects): __JsonObject__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): RevisionObject
 //
 //    suspend fun replaceObjects(
-//        data: __List<Pair<ObjectID, JsonObject>>__,
+//        [data](#method-param-objects): __List<Pair<ObjectID, JsonObject>>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
 

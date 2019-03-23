@@ -22,7 +22,7 @@ import kotlin.test.Test
 internal class SnippetDeleteBy {
 
 //    suspend fun deleteObjectBy(
-//        query: __DeleteByQuery__,
+//        [query](#method-param-filterParameters): __DeleteByQuery__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): RevisionIndex
 

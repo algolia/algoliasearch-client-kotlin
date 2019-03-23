@@ -17,22 +17,22 @@ import kotlin.test.Test
 internal class SnippetGetObjects {
 
 //    suspend fun <T : Indexable> getObject(
-//        serializer: KSerializer<T>,
-//        objectID: ObjectID,
-//        attributesToRetrieve: List<Attribute>? = null,
-//        requestOptions: RequestOptions? = null
+//        serializer: __KSerializer<T>__,
+//        #{objectID}: __ObjectID__,
+//        #{attributesToRetrieve}: __List<Attribute>?__ = null,
+//        #{requestOptions}: __RequestOptions?__ = null
 //    ): T
 //
 //    suspend fun getObject(
-//        objectID: ObjectID,
-//        attributesToRetrieve: List<Attribute>? = null,
-//        requestOptions: RequestOptions? = null
+//        #{objectID}: __ObjectID__,
+//        #{attributesToRetrieve}: __List<Attribute>?__ = null,
+//        #{requestOptions}: __RequestOptions?__ = null
 //    ): JsonObject
 //
 //    suspend fun getObjects(
-//        objectIDs: List<ObjectID>,
-//        attributesToRetrieve: List<Attribute>? = null,
-//        requestOptions: RequestOptions? = null
+//        #{objectIDs}: __List<ObjectID>__,
+//        #{attributesToRetrieve}: __List<Attribute>?__ = null,
+//        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseObjects
 
     private val suffix = "snippet"
