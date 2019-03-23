@@ -41,6 +41,6 @@ internal fun HttpClientConfig<*>.configure(logLevel: LogLevel) {
     }
     install(Logging) {
         level = logLevel
-        logger = Logger.SIMPLE // Todo define production (and configurable) Logger
+        logger = Logger.SIMPLE
     }
 }

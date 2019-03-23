@@ -56,7 +56,6 @@ public class ClientSearch private constructor(
         return Index(api, indexName)
     }
 
-    // Todo test this
     public suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus> {
 
         suspend fun loop(): List<TaskStatus> {
@@ -77,7 +76,6 @@ public class ClientSearch private constructor(
         return tasks.waitAll()
     }
 
-    // TODO Specify why there is no taskID in a comment
     public suspend fun CreationAPIKey.wait(timeout: Long? = null): ResponseAPIKey {
 
         suspend fun loop(): ResponseAPIKey {
@@ -94,7 +92,6 @@ public class ClientSearch private constructor(
         return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
-    // TODO Specify why there is no taskID in a comment
     public suspend fun DeletionAPIKey.wait(timeout: Long? = null): Boolean {
 
         suspend fun loop(): Boolean {
