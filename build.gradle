@@ -15,7 +15,7 @@ repositories {
     jcenter()
     mavenCentral()
     maven { url "https://dl.bintray.com/kotlin/ktor" }
-    maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+    maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     maven { url "https://kotlin.bintray.com/kotlinx" }
 }
 
