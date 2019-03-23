@@ -50,7 +50,7 @@ internal class TestSuiteAccount {
         runBlocking {
             val rule = load(Rule.serializer(), "rule_one.json")
 
-            IllegalArgumentException::class shouldFailWith {
+            shouldFailWith<IllegalArgumentException> {
                 ClientAccount.copyIndex(index1, index2)
             }
             val tasks = mutableListOf<Task>()
@@ -70,9 +70,7 @@ internal class TestSuiteAccount {
                 getRule(objectID).rule shouldEqual rule
                 getSettings().searchableAttributes shouldEqual settings.searchableAttributes
 
-                IllegalStateException::class shouldFailWith {
-                    ClientAccount.copyIndex(index1, this)
-                }
+                shouldFailWith<IllegalStateException> { ClientAccount.copyIndex(index1, this) }
             }
         }
     }

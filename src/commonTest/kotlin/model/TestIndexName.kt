@@ -11,12 +11,12 @@ internal class TestIndexName {
 
     @Test
     fun rawShouldNotBeEmpty() {
-        EmptyStringException::class shouldFailWith { IndexName("") }
+        shouldFailWith<EmptyStringException> { IndexName("") }
     }
 
     @Test
     fun rawShouldNotBeBlank() {
-        EmptyStringException::class shouldFailWith { IndexName(" ") }
+        shouldFailWith<EmptyStringException> { IndexName(" ") }
     }
 
     @Test

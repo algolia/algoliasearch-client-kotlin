@@ -67,7 +67,7 @@ internal class TestSuiteABTest {
                 clientAnalytics.getABTest(response.abTestID).status shouldEqual ABTestStatus.Stopped
                 clientAnalytics.deleteABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
 
-                val result = ResponseException::class shouldFailWith {
+                val result = shouldFailWith<ResponseException> {
                     clientAnalytics.getABTest(response.abTestID)
                 }
 

@@ -66,8 +66,8 @@ internal fun <K, V> Map<K, V>.shouldNotBeEmpty() {
     this.isNotEmpty().shouldBeTrue()
 }
 
-internal infix fun <T : Throwable> KClass<T>.shouldFailWith(block: suspend () -> Unit): T {
-    return assertFailsWith(this, null) {
+internal inline fun <reified T : Throwable> shouldFailWith(noinline block: suspend () -> Unit): T {
+    return assertFailsWith(T::class, null) {
         runBlocking {
             block()
         }

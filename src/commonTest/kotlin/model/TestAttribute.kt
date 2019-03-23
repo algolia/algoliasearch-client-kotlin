@@ -10,11 +10,11 @@ internal class TestAttribute {
 
     @Test
     fun rawShouldNotBeEmpty() {
-        EmptyStringException::class shouldFailWith { Attribute("") }
+        shouldFailWith<EmptyStringException> { Attribute("") }
     }
 
     @Test
     fun rawShouldNotBeBlank() {
-        EmptyStringException::class shouldFailWith { Attribute(" ") }
+        shouldFailWith<EmptyStringException> { Attribute(" ") }
     }
 }

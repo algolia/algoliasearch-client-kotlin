@@ -10,11 +10,11 @@ internal class TestQueryID {
 
     @Test
     fun rawShouldNotBeEmpty() {
-        EmptyStringException::class shouldFailWith { QueryID("") }
+        shouldFailWith<EmptyStringException> { QueryID("") }
     }
 
     @Test
     fun rawShouldNotBeBlank() {
-        EmptyStringException::class shouldFailWith { QueryID(" ") }
+        shouldFailWith<EmptyStringException> { QueryID(" ") }
     }
 }

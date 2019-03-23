@@ -15,8 +15,8 @@ internal class TestSynonym {
 
     @Test
     fun tokenShouldNotBeEmpty() {
-        EmptyStringException::class shouldFailWith { Synonym.Placeholder.Token("") }
-        EmptyStringException::class shouldFailWith { Synonym.Placeholder.Token(" ") }
+        shouldFailWith<EmptyStringException> { Synonym.Placeholder.Token("") }
+        shouldFailWith<EmptyStringException> { Synonym.Placeholder.Token(" ") }
     }
 
     @Test
@@ -26,23 +26,23 @@ internal class TestSynonym {
 
     @Test
     fun oneWayInputShouldNotBeEmpty() {
-        EmptyStringException::class shouldFailWith { Synonym.OneWay(objectIDA, "", listOf()) }
-        EmptyStringException::class shouldFailWith { Synonym.OneWay(objectIDA, " ", listOf()) }
+        shouldFailWith<EmptyStringException> { Synonym.OneWay(objectIDA, "", listOf()) }
+        shouldFailWith<EmptyStringException> { Synonym.OneWay(objectIDA, " ", listOf()) }
     }
 
     @Test
     fun oneWaySynonymsShouldNotBeEmpty() {
-        EmptyListException::class shouldFailWith { Synonym.OneWay(objectIDA, "input", listOf()) }
+        shouldFailWith<EmptyListException> { Synonym.OneWay(objectIDA, "input", listOf()) }
     }
 
     @Test
     fun multiWaySynonymsShouldNotBeEmpty() {
-        EmptyListException::class shouldFailWith { Synonym.MultiWay(objectIDA, listOf()) }
+        shouldFailWith<EmptyListException> { Synonym.MultiWay(objectIDA, listOf()) }
     }
 
     @Test
     fun alternativeWordShouldNotBeEmpty() {
-        EmptyStringException::class shouldFailWith {
+        shouldFailWith<EmptyStringException> {
             Synonym.AlternativeCorrections(objectIDA, "", listOf(), SynonymType.Typo.One)
             Synonym.AlternativeCorrections(objectIDA, " ", listOf(), SynonymType.Typo.One)
         }
@@ -50,7 +50,7 @@ internal class TestSynonym {
 
     @Test
     fun alternativeCorrectionsShouldNotBeEmpty() {
-        EmptyListException::class shouldFailWith {
+        shouldFailWith<EmptyListException> {
             Synonym.AlternativeCorrections(objectIDA, "word", listOf(), SynonymType.Typo.One)
         }
     }
@@ -59,7 +59,7 @@ internal class TestSynonym {
     fun placeholderReplacementsShouldNotBeEmpty() {
         val token = Synonym.Placeholder.Token("token")
 
-        EmptyListException::class shouldFailWith {
+        shouldFailWith<EmptyListException> {
             Synonym.Placeholder(objectIDA, token, listOf())
         }
     }

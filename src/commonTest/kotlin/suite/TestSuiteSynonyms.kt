@@ -73,7 +73,7 @@ internal class TestSuiteSynonyms {
                     it.hits shouldContain synonymAlternative2
                 }
                 deleteSynonym(gba).wait() shouldEqual TaskStatus.Published
-                (ResponseException::class shouldFailWith {
+                (shouldFailWith<ResponseException> {
                     getSynonym(gba)
                 }).response.status.value shouldEqual HttpStatusCode.NotFound.value
 

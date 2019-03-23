@@ -10,11 +10,11 @@ internal class TestApplicationID {
 
     @Test
     fun rawShouldNotBeEmpty() {
-        EmptyStringException::class shouldFailWith { ApplicationID("") }
+        shouldFailWith<EmptyStringException> { ApplicationID("") }
     }
 
     @Test
     fun rawShouldNotBeBlank() {
-        EmptyStringException::class shouldFailWith { ApplicationID(" ") }
+        shouldFailWith<EmptyStringException> { ApplicationID(" ") }
     }
 }

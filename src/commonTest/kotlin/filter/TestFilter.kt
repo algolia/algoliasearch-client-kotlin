@@ -72,7 +72,7 @@ internal class TestFilter {
         filterRangeLong.build() shouldEqual "\"attributeA\":0 TO 6"
         filterNegate.build() shouldEqual "NOT \"attributeA\":0.0 TO 6.0"
 
-        IllegalArgumentException::class shouldFailWith { FilterRange(attributeA, 1, 0) }
+        shouldFailWith<IllegalArgumentException> { FilterRange(attributeA, 1, 0) }
     }
 
     @Test

@@ -60,15 +60,15 @@ class TestSuiteReplaceAll {
                 getRule(objectIDTwo).rule.objectID shouldEqual objectIDTwo
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
-                (ResponseException::class shouldFailWith {
+                (shouldFailWith<ResponseException> {
                     getObject(objectIDOne)
                 }).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
-                (ResponseException::class shouldFailWith {
+                (shouldFailWith<ResponseException> {
                     getSynonym(objectIDOne)
                 }).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
-                (ResponseException::class shouldFailWith {
+                (shouldFailWith<ResponseException> {
                     getRule(objectIDOne)
                 }).response.status.value shouldEqual HttpStatusCode.NotFound.value
             }

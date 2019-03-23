@@ -10,11 +10,11 @@ internal class TestObjectID {
 
     @Test
     fun rawShouldNotBeEmpty() {
-        EmptyStringException::class shouldFailWith { ObjectID("") }
+        shouldFailWith<EmptyStringException> { ObjectID("") }
     }
 
     @Test
     fun rawShouldNotBeBlank() {
-        EmptyStringException::class shouldFailWith { ObjectID(" ") }
+        shouldFailWith<EmptyStringException> { ObjectID(" ") }
     }
 }

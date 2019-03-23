@@ -33,7 +33,7 @@ internal class TestPolygon {
 
     @Test
     fun operatorThrow() {
-        IndexOutOfBoundsException::class shouldFailWith { polygon[4] }
+        shouldFailWith<IndexOutOfBoundsException> { polygon[4] }
     }
 
     @Test

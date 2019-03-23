@@ -19,7 +19,7 @@ internal class TestInsightsEvent {
 
     @Test
     fun positionsAreRequired() {
-        IllegalArgumentException::class shouldFailWith {
+        shouldFailWith<IllegalArgumentException> {
             InsightsEvent.Click(
                 eventName = eventName,
                 indexName = indexA,
@@ -36,7 +36,7 @@ internal class TestInsightsEvent {
 
         InsightsEvent.Resources.ObjectIDs(underTheSizeLimit).objectIDs shouldEqual underTheSizeLimit
         InsightsEvent.Resources.ObjectIDs(equalToTheSizeLimit).objectIDs shouldEqual equalToTheSizeLimit
-        IllegalArgumentException::class shouldFailWith { InsightsEvent.Resources.ObjectIDs(overTheSizeLimit) }
+        shouldFailWith<IllegalArgumentException> { InsightsEvent.Resources.ObjectIDs(overTheSizeLimit) }
     }
 
     @Test
@@ -47,6 +47,6 @@ internal class TestInsightsEvent {
 
         InsightsEvent.Resources.Filters(underTheSizeLimit).filters shouldEqual underTheSizeLimit
         InsightsEvent.Resources.Filters(equalToTheSizeLimit).filters shouldEqual equalToTheSizeLimit
-        IllegalArgumentException::class shouldFailWith { InsightsEvent.Resources.Filters(overTheSizeLimit) }
+        shouldFailWith<IllegalArgumentException> { InsightsEvent.Resources.Filters(overTheSizeLimit) }
     }
 }

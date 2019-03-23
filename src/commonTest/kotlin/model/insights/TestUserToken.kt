@@ -11,12 +11,12 @@ internal class TestUserToken {
 
     @Test
     fun rawShouldNotBeEmpty() {
-        EmptyStringException::class shouldFailWith { UserToken("") }
+        shouldFailWith<EmptyStringException> { UserToken("") }
     }
 
     @Test
     fun rawShouldNotBeBlank() {
-        EmptyStringException::class shouldFailWith { UserToken(" ") }
+        shouldFailWith<EmptyStringException> { UserToken(" ") }
     }
 
     @Test
@@ -33,7 +33,7 @@ internal class TestUserToken {
 
         UserToken(stringShorterThan64).raw.length shouldEqual 63
         UserToken(stringEqualTo64).raw.length shouldEqual 64
-        IllegalArgumentException::class shouldFailWith { UserToken(stringLongerThan64) }
+        shouldFailWith<IllegalArgumentException> { UserToken(stringLongerThan64) }
     }
 
     @Test
@@ -54,7 +54,7 @@ internal class TestUserToken {
         )
 
         illegals.forEach {
-            IllegalArgumentException::class shouldFailWith { UserToken(it) }
+            shouldFailWith<IllegalArgumentException> { UserToken(it) }
         }
         legals.forEachIndexed { index, s -> UserToken(s).raw shouldEqual legals[index] }
     }

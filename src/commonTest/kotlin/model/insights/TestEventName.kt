@@ -11,7 +11,7 @@ internal class TestEventName {
 
     @Test
     fun rawShouldNotBeEmpty() {
-        EmptyStringException::class shouldFailWith { EventName("") }
+        shouldFailWith<EmptyStringException> { EventName("") }
     }
 
     @Test
@@ -25,7 +25,7 @@ internal class TestEventName {
         val stringShorterThan64 = buildString {
             repeat(63) { append("a") }
         }
-        IllegalArgumentException::class shouldFailWith { EventName(stringLongerThan64) }
+        shouldFailWith<IllegalArgumentException> { EventName(stringLongerThan64) }
 
         EventName(stringEqualTo64).raw.length shouldEqual 64
         EventName(stringShorterThan64).raw.length shouldEqual 63

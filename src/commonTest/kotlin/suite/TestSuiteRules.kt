@@ -57,7 +57,7 @@ internal class TestSuiteRules {
                 searches.find { it.objectID == rules.first().objectID }.shouldNotBeNull()
                 deleteRule(rule.objectID).wait() shouldEqual TaskStatus.Published
 
-                (ResponseException::class shouldFailWith {
+                (shouldFailWith<ResponseException> {
                     getRule(rule.objectID)
                 }).response.status.value shouldEqual HttpStatusCode.NotFound.value
                 clearRules().wait() shouldEqual TaskStatus.Published

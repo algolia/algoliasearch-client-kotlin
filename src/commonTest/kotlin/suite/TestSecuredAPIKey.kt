@@ -49,7 +49,7 @@ internal class TestSecuredAPIKey {
             }
             client.apply {
                 initIndex(indexName).search()
-                ResponseException::class shouldFailWith { initIndex(indexNameDev).search() }
+                shouldFailWith<ResponseException> { initIndex(indexNameDev).search() }
             }
         }
     }
