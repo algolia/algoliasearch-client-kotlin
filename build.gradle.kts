@@ -2,7 +2,7 @@ import java.net.URI
 
 object Version {
 
-    const val kotlin = "1.3.30-eap-45"
+    const val kotlin = "1.3.30-eap-42"
     const val ktor = "1.2.0-alpha-2"
     const val okHttp = "3.11.0"
     const val serialization = "0.11.0-1.3.30-eap-42"
@@ -22,6 +22,7 @@ repositories {
     mavenCentral()
     maven { url = URI("https://dl.bintray.com/kotlin/ktor") }
     maven { url = URI("https://dl.bintray.com/kotlin/kotlin-eap") }
+    maven { url = URI("https://dl.bintray.com/kotlin/kotlin-dev") }
     maven { url = URI("https://kotlin.bintray.com/kotlinx") }
 }
 
@@ -52,6 +53,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
+                implementation("io.ktor:ktor-client-mock:${Version.ktor}")
             }
         }
         val jvmMain by getting {

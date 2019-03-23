@@ -12,10 +12,15 @@ internal expect val clientInsights: ClientInsights
 
 internal expect fun runBlocking(block: suspend CoroutineScope.() -> Unit)
 
-internal expect fun getCurrentDateFormat(timestamp: Long? = null): String
-
-internal expect fun parseDateFormat(date: String): Long
-
 internal expect fun loadScratch(name: String): String
 
+internal expect val username: String
+
 internal const val dayInMillis = 24 * 60 * 60 * 1000
+
+internal expect object DateFormat {
+
+    fun format(timestamp: Long? = null): String
+
+    fun parse(date: String): Long
+}

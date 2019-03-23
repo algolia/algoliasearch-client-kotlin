@@ -34,20 +34,32 @@ internal actual val clientInsights = ClientInsights(
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
 )
 
+internal actual val username: String
+    get() {
+        return try {
+            System.getProperty("user.name")
+        } catch (exception: Exception) {
+            "unknown"
+        }
+    }
+
 internal actual fun runBlocking(block: suspend CoroutineScope.() -> Unit) {
     kotlinx.coroutines.runBlocking(block = block)
 }
 
-internal val dateFormat = SimpleDateFormat("YYYY-MM-dd-HH-mm-ss").also {
-    it.timeZone = TimeZone.getTimeZone("UTC")
-}
+internal actual object DateFormat {
 
-internal actual fun getCurrentDateFormat(timestamp: Long?): String {
-    return dateFormat.format(if (timestamp != null) Date(timestamp) else Date())
-}
+    internal val dateFormat = SimpleDateFormat("YYYY-MM-dd-HH-mm-ss").also {
+        it.timeZone = TimeZone.getTimeZone("UTC")
+    }
 
-internal actual fun parseDateFormat(date: String): Long {
-    return dateFormat.parse(date).time
+    actual fun format(timestamp: Long?): String {
+        return dateFormat.format(if (timestamp != null) Date(timestamp) else Date())
+    }
+
+    actual fun parse(date: String): Long {
+        return dateFormat.parse(date).time
+    }
 }
 
 internal actual fun loadScratch(name: String): String {

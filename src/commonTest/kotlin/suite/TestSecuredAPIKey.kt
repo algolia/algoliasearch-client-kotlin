@@ -1,0 +1,56 @@
+package suite
+
+import clientAdmin1
+import clientSearch
+import com.algolia.search.client.ClientSearch
+import com.algolia.search.model.Time
+import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
+import com.algolia.search.model.task.TaskStatus
+import com.algolia.search.serialize.KeyObjectID
+import io.ktor.client.features.ResponseException
+import kotlinx.serialization.json.json
+import runBlocking
+import shouldEqual
+import shouldFailWith
+import kotlin.test.BeforeTest
+import kotlin.test.Test
+
+
+internal class TestSecuredAPIKey {
+
+    private val suffix = "secured_api_keys"
+    private val indexName = testSuiteIndexName(suffix)
+    private val indexNameDev = indexName.copy(raw = indexName.raw + "_dev")
+    private val index = clientAdmin1.initIndex(indexName)
+    private val indexDev = clientAdmin1.initIndex(indexNameDev)
+    private val restriction = SecuredAPIKeyRestriction(
+        restrictIndices = listOf(indexName),
+        validUntil = Time.getCurrentTimeMillis() + 10 * 60 * 1000
+    )
+    private val apiKey = ClientSearch.generateAPIKey(clientSearch.apiKey, restriction)
+    private val client = ClientSearch(clientAdmin1.applicationID, apiKey)
+    private val data = json { KeyObjectID to "one" }
+
+    @BeforeTest
+    fun clean() {
+        runBlocking {
+            cleanIndex(clientAdmin1, suffix)
+        }
+    }
+
+    @Test
+    fun test() {
+        runBlocking {
+            index.apply {
+                saveObject(data).wait() shouldEqual TaskStatus.Published
+            }
+            indexDev.apply {
+                saveObject(data).wait() shouldEqual TaskStatus.Published
+            }
+            client.apply {
+                initIndex(indexName).search()
+                ResponseException::class shouldFailWith { initIndex(indexNameDev).search() }
+            }
+        }
+    }
+}
