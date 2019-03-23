@@ -3,7 +3,6 @@ package com.algolia.search.model.response
 import com.algolia.search.model.ClientDate
 import com.algolia.search.model.IndexName
 import com.algolia.search.serialize.*
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient

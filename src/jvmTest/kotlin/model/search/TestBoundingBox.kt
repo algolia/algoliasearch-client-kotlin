@@ -1,7 +1,7 @@
 package model.search
 
-import com.algolia.search.model.search.BoundingBox
 import com.algolia.search.helper.and
+import com.algolia.search.model.search.BoundingBox
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

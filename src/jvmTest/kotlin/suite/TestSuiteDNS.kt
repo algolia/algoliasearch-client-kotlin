@@ -1,7 +1,7 @@
 package suite
 
-import com.algolia.search.configuration.CallType
 import com.algolia.search.client.ClientSearch
+import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.RetryableHost
 import io.ktor.client.features.logging.LogLevel

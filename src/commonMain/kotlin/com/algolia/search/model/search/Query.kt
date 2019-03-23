@@ -3,7 +3,6 @@ package com.algolia.search.model.search
 import com.algolia.search.filter.QueryHelper
 import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.*
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

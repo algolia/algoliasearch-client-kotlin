@@ -1,7 +1,6 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
@@ -15,6 +14,7 @@ import com.algolia.search.serialize.KeyClearExistingRules
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.RouteRules
 import com.algolia.search.serialize.noDefaults
+import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json

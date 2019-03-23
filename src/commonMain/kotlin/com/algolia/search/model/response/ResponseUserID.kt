@@ -4,7 +4,6 @@ import com.algolia.search.model.ClusterName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.UserID
 import com.algolia.search.serialize.*
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient

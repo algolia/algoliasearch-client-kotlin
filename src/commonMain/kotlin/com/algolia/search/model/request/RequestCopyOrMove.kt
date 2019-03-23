@@ -5,7 +5,6 @@ import com.algolia.search.model.index.Scope
 import com.algolia.search.serialize.KeyDestination
 import com.algolia.search.serialize.KeyOperation
 import com.algolia.search.serialize.KeyScope
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

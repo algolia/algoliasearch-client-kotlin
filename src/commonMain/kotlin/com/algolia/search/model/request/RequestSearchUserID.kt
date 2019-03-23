@@ -5,7 +5,6 @@ import com.algolia.search.serialize.KeyCluster
 import com.algolia.search.serialize.KeyHitsPerPage
 import com.algolia.search.serialize.KeyParams
 import com.algolia.search.serialize.KeyQuery
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

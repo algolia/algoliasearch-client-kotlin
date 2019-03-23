@@ -1,7 +1,7 @@
 package serialize.search
 
-import com.algolia.search.model.search.BoundingBox
 import com.algolia.search.helper.and
+import com.algolia.search.model.search.BoundingBox
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

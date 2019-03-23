@@ -1,6 +1,5 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
@@ -15,6 +14,7 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.Task
+import com.algolia.search.transport.RequestOptions
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JsonObject
 

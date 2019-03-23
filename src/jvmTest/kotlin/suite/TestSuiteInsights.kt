@@ -1,14 +1,14 @@
 package suite
 
-import com.algolia.search.model.insights.InsightsEvent
-import com.algolia.search.model.search.Query
-import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.filter.FilterFacet
-import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.helper.toEventName
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.helper.toUserToken
+import com.algolia.search.model.insights.InsightsEvent
+import com.algolia.search.model.search.Query
+import com.algolia.search.model.task.TaskStatus
+import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.response.HttpResponse
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking

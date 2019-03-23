@@ -1,8 +1,8 @@
 package serialize.serializer
 
-import com.algolia.search.model.ClientDate
 import com.algolia.search.helper.dateISO8601
 import com.algolia.search.helper.dateISO8601Millis
+import com.algolia.search.model.ClientDate
 import com.algolia.search.serialize.KSerializerClientDate
 import kotlinx.serialization.json.JsonLiteral
 import org.junit.runner.RunWith

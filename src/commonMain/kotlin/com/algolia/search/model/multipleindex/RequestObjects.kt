@@ -6,7 +6,6 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyObjectID
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

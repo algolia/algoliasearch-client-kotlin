@@ -1,8 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.configuration.CallType
-import com.algolia.search.transport.Transport
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.index.Scope
 import com.algolia.search.model.request.RequestCopyOrMove
@@ -11,6 +9,8 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.serialize.KeyCopy
 import com.algolia.search.serialize.KeyMove
 import com.algolia.search.serialize.noDefaults
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
 

@@ -1,8 +1,8 @@
 package serialize.rule
 
+import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.rule.*
 import com.algolia.search.serialize.KeyEdits
-import com.algolia.search.helper.toObjectID
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.json

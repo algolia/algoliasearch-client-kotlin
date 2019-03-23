@@ -2,7 +2,6 @@ package com.algolia.search.model.response
 
 import com.algolia.search.serialize.KeyMessage
 import com.algolia.search.serialize.KeyResults
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient

@@ -1,10 +1,10 @@
 package model.insights
 
 import attributeA
-import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.filter.FilterFacet
 import com.algolia.search.helper.toEventName
 import com.algolia.search.helper.toQueryID
+import com.algolia.search.model.insights.InsightsEvent
 import indexA
 import objectIDA
 import org.junit.Test

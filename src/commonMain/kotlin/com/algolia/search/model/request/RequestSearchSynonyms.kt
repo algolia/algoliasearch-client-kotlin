@@ -4,7 +4,6 @@ import com.algolia.search.serialize.KeyHitsPerPage
 import com.algolia.search.serialize.KeyPage
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyType
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

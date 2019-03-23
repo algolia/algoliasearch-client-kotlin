@@ -1,6 +1,5 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.response.ResponseABTest
@@ -8,6 +7,7 @@ import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.creation.CreationABTest
 import com.algolia.search.model.response.deletion.DeletionABTest
 import com.algolia.search.model.response.revision.RevisionABTest
+import com.algolia.search.transport.RequestOptions
 
 
 public interface EndpointAnalytics {

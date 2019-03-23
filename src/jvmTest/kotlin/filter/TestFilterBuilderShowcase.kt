@@ -1,8 +1,8 @@
 package filter
 
 import buildTest
-import com.algolia.search.model.Attribute
 import com.algolia.search.filter.*
+import com.algolia.search.model.Attribute
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4

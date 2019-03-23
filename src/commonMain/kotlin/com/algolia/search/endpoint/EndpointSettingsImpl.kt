@@ -1,9 +1,7 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
-import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.configuration.CallType
-import com.algolia.search.transport.Transport
+import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.settings.NumericAttributeFilter
@@ -11,6 +9,8 @@ import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
 import com.algolia.search.serialize.*
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNull

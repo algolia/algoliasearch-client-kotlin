@@ -1,9 +1,9 @@
 package serialize.response
 
+import com.algolia.search.helper.toABTestID
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.response.ResponseABTest
 import com.algolia.search.serialize.*
-import com.algolia.search.helper.toABTestID
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import org.junit.runner.RunWith

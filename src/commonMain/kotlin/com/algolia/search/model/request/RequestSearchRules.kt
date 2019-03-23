@@ -2,7 +2,6 @@ package com.algolia.search.model.request
 
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.serialize.*
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

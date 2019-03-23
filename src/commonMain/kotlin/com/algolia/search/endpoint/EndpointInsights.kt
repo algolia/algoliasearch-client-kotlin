@@ -1,7 +1,7 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.model.insights.InsightsEvent
+import com.algolia.search.transport.RequestOptions
 import io.ktor.client.response.HttpResponse
 
 

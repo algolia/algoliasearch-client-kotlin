@@ -6,7 +6,6 @@ import com.algolia.search.serialize.KeyCustomSearchParameters
 import com.algolia.search.serialize.KeyDescription
 import com.algolia.search.serialize.KeyIndex
 import com.algolia.search.serialize.KeyTrafficPercentage
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

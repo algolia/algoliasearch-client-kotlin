@@ -3,7 +3,6 @@ package com.algolia.search.model.response
 import com.algolia.search.serialize.KeyABTests
 import com.algolia.search.serialize.KeyCount
 import com.algolia.search.serialize.KeyTotal
-import kotlinx.serialization.Optional
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient

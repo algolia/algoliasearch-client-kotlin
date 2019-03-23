@@ -1,7 +1,5 @@
 package com.algolia.search.model
 
-import java.util.concurrent.TimeUnit
-
 
 internal actual object Time {
 

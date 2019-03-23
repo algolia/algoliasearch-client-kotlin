@@ -1,13 +1,13 @@
 package suite
 
+import com.algolia.search.helper.toAttribute
+import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.PartialUpdate
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.helper.toAttribute
-import com.algolia.search.helper.toObjectID
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json

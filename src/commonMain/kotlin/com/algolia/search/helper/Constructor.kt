@@ -1,6 +1,5 @@
 package com.algolia.search.helper
 
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.model.*
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.insights.EventName
@@ -9,6 +8,7 @@ import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.Snippet
 import com.algolia.search.model.task.TaskID
+import com.algolia.search.transport.RequestOptions
 
 
 public fun String.toIndexName(): IndexName {

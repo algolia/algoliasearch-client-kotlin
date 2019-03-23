@@ -1,9 +1,7 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.transport.RequestOptions
-import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.configuration.CallType
-import com.algolia.search.transport.Transport
+import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseLogs
@@ -12,6 +10,8 @@ import com.algolia.search.model.task.TaskID
 import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.*
+import com.algolia.search.transport.RequestOptions
+import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
