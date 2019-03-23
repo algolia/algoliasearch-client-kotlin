@@ -1,6 +1,6 @@
 package suite
 
-import com.algolia.search.helper.dateISO8601
+import com.algolia.search.model.Time
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
@@ -8,6 +8,8 @@ import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
+import dayInMillis
+import getCurrentDateFormat
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.json
 import org.junit.Before
@@ -16,8 +18,6 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import shouldEqual
 import shouldNotEqual
-import java.util.*
-import java.util.concurrent.TimeUnit
 
 
 @RunWith(JUnit4::class)
@@ -27,10 +27,9 @@ internal class TestSuiteAATest {
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
     private val data = json { KeyObjectID to "one" }
-    private val tomorrow = Date(Date().time + TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS))
     private val abTest = ABTest(
         name = indexName.raw,
-        endAt = dateISO8601.format(tomorrow),
+        endAt = getCurrentDateFormat(Time.getCurrentTimeMillis() + dayInMillis),
         variantA = Variant(indexName, 90),
         variantB = Variant(
             indexName,

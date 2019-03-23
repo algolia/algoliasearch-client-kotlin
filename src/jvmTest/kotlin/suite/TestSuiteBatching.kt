@@ -6,6 +6,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.list
+import loadScratch
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -32,7 +33,7 @@ internal class TestSuiteBatching {
     fun test() {
         runBlocking {
             val objects = load(JsonObjectSerializer.list, "numbers.json")
-            val expected = loadScratch("batches_result.json").readText()
+            val expected = loadScratch("batches_result.json")
             val batches = load(BatchOperation.list, "batches.json")
 
             index.apply {

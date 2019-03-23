@@ -7,16 +7,18 @@ import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.Time
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.model.task.TaskStatus
+import dayInMillis
+import getCurrentDateFormat
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
+import loadScratch
+import parseDateFormat
 import shouldEqual
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.*
-import java.util.concurrent.TimeUnit
+
 
 internal val clientSearch = ClientSearch(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
@@ -43,10 +45,6 @@ internal val clientInsights = ClientInsights(
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
 )
 
-internal val dateFormat = SimpleDateFormat("YYYY-MM-dd-HH-mm-ss").also {
-    it.timeZone = TimeZone.getTimeZone("UTC")
-}
-
 internal val username: String
     get() {
         return try {
@@ -57,7 +55,7 @@ internal val username: String
     }
 
 internal fun testSuiteIndexName(suffix: String): IndexName {
-    val date = dateFormat.format(Date())
+    val date = getCurrentDateFormat()
     val prefix = "kotlin-$date"
 
     return "$prefix-$username-$suffix".toIndexName()
@@ -78,8 +76,7 @@ internal suspend fun cleanABTest(suffix: String) {
             val date = result?.groupValues?.get(1)
 
             if (date != null) {
-                val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
-                val difference = Date().time - dateFormat.parse(date).time
+                val difference = Time.getCurrentTimeMillis() - parseDateFormat(date)
 
                 if (difference >= dayInMillis) {
                     clientAdmin1.initIndex(it.variantA.indexName).apply {
@@ -101,8 +98,7 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String) {
             val result = Regex("kotlin-(.*)-$username-$suffix").find(indexName)
             val date = result?.groupValues?.get(1)
             if (date != null) {
-                val dayInMillis = TimeUnit.MILLISECONDS.convert(1, TimeUnit.DAYS)
-                val difference = Date().time - dateFormat.parse(date).time
+                val difference = Time.getCurrentTimeMillis() - parseDateFormat(date)
 
                 if (difference >= dayInMillis) {
                     indexToDelete += it.indexName
@@ -115,13 +111,10 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String) {
     }
 }
 
-internal fun loadScratch(name: String): File {
-    return File("src/commonTest/scratches/$name")
-}
 
 internal fun <T> load(serializer: KSerializer<T>, name: String): T {
     val json = Json(indented = true, indent = "  ", encodeDefaults = false)
-    val string = loadScratch(name).readText()
+    val string = loadScratch(name)
     val data = json.parse(serializer, string)
     val serialized = json.stringify(serializer, data)
 

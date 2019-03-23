@@ -1,6 +1,7 @@
 package suite
 
 import com.algolia.search.helper.toUserID
+import getCurrentDateFormat
 import io.ktor.client.features.ResponseException
 import io.ktor.client.response.readBytes
 import io.ktor.http.HttpStatusCode
@@ -19,7 +20,7 @@ import java.util.*
 @RunWith(JUnit4::class)
 internal class TestSuiteMultiCluster {
 
-    private val date = dateFormat.format(Date())
+    private val date = getCurrentDateFormat()
     private val prefix = "kotlin-$date"
     private val userID = "$prefix-$username".toUserID()
 
