@@ -41,6 +41,7 @@ public class ClientSearch private constructor(
     EndpointMultipleIndex by EndpointMultipleIndexImpl(transport),
     EndpointAPIKey by EndpointAPIKeyImpl(transport),
     EndpointMultiCluster by EndpointMulticlusterImpl(transport),
+    EndpointPersonalization by EndpointPersonalizationImpl(transport),
     Configuration by transport {
 
     public constructor(
