@@ -2,7 +2,7 @@ package suite
 
 import clientAdmin1
 import clientAnalytics
-import com.algolia.search.helper.DateISO8601
+import com.algolia.search.model.ClientDate
 import com.algolia.search.model.Time
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
@@ -35,7 +35,7 @@ internal class TestSuiteABTest {
         name = indexNameA.raw,
         variantA = Variant(indexNameA, 60, "a description"),
         variantB = Variant(indexNameB, 40),
-        endAt = DateISO8601.format(Time.getCurrentTimeMillis() + dayInMillis)
+        endAt = ClientDate(Time.getCurrentTimeMillis() + dayInMillis)
     )
 
     @BeforeTest

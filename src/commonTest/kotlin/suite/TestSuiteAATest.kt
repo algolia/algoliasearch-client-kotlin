@@ -2,7 +2,7 @@ package suite
 
 import clientAdmin1
 import clientAnalytics
-import com.algolia.search.helper.DateISO8601
+import com.algolia.search.model.ClientDate
 import com.algolia.search.model.Time
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
@@ -28,7 +28,7 @@ internal class TestSuiteAATest {
     private val data = json { KeyObjectID to "one" }
     private val abTest = ABTest(
         name = indexName.raw,
-        endAt = DateISO8601.format(Time.getCurrentTimeMillis() + dayInMillis),
+        endAt = ClientDate(Time.getCurrentTimeMillis() + dayInMillis),
         variantA = Variant(indexName, 90),
         variantB = Variant(
             indexName,

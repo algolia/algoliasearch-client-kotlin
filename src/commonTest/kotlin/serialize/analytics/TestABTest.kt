@@ -1,5 +1,7 @@
 package serialize.analytics
 
+import com.algolia.search.helper.DateISO8601
+import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.search.Query
@@ -18,9 +20,10 @@ import unknown
 
 internal class TestABTest : TestSerializer<ABTest>(ABTest, Json.noDefaults) {
 
+    private val date = DateISO8601.format(0)
     private val abTest = ABTest(
         name = unknown,
-        endAt = unknown,
+        endAt = ClientDate(date),
         variantA = Variant(indexA, 40),
         variantB = Variant(indexB, 60, unknown, Query())
     )
@@ -28,7 +31,7 @@ internal class TestABTest : TestSerializer<ABTest>(ABTest, Json.noDefaults) {
     override val items = listOf(
         abTest to json {
             KeyName to unknown
-            KeyEndAt to unknown
+            KeyEndAt to date
             KeyVariants to jsonArray {
                 +Json.noDefaults.toJson(Variant.serializer(), abTest.variantA)
                 +Json.noDefaults.toJson(Variant.serializer(), abTest.variantB)
