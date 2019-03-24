@@ -1,17 +1,13 @@
 package snippets.indexing
 
-import clientAdmin1
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking
-import suite.cleanIndex
-import suite.testSuiteIndexName
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
+import snippets.TestSnippets
 import kotlin.test.Test
 
 
-internal class SnippetReplaceAllObjects {
+internal class SnippetReplaceAllObjects: TestSnippets() {
 
 //    suspend fun Index.replaceAllObjects(
 //        [data](#method-param-objects): __List<JsonObject>__
@@ -21,16 +17,6 @@ internal class SnippetReplaceAllObjects {
 //        serializer: KSerializer<T>,
 //        [data](#method-param-objects): List<T>
 //    ): List<Task>
-
-    private val suffix = "snippet"
-    private val indexName = testSuiteIndexName(suffix)
-    private val client = clientAdmin1
-    private val index = client.initIndex(indexName)
-
-    @BeforeTest
-    fun clean() {
-        runBlocking { cleanIndex(client, suffix) }
-    }
 
     @Test
     fun replaceAllObjects() {

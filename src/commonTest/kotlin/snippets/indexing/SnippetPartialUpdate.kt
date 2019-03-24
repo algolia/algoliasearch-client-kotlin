@@ -1,18 +1,14 @@
 package snippets.indexing
 
-import clientAdmin1
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Partial
 import runBlocking
-import suite.cleanIndex
-import suite.testSuiteIndexName
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
+import snippets.TestSnippets
 import kotlin.test.Test
 
 
-internal class SnippetPartialUpdate {
+internal class SnippetPartialUpdate: TestSnippets() {
 
 //    suspend fun Index.partialUpdateObject(
 //        objectID: __ObjectID__,
@@ -26,15 +22,6 @@ internal class SnippetPartialUpdate {
 //        #{createIfNotExists}: __Boolean__ = true,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
-
-    private val suffix = "snippet"
-    private val indexName = testSuiteIndexName(suffix)
-    private val index = clientAdmin1.initIndex(indexName)
-
-    @BeforeTest
-    fun clean() {
-        runBlocking { cleanIndex(clientAdmin1, suffix) }
-    }
 
     @Test
     fun partialUpdates() {

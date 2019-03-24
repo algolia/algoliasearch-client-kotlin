@@ -1,19 +1,15 @@
 package snippets.indexing
 
-import clientAdmin1
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking
-import suite.cleanIndex
-import suite.testSuiteIndexName
-import kotlin.test.AfterTest
-import kotlin.test.BeforeTest
+import snippets.TestSnippets
 import kotlin.test.Test
 
 
-internal class SnippetSaveObjects {
+internal class SnippetSaveObjects: TestSnippets() {
 
 //    suspend fun <T : Indexable> Index.replaceObject(
 //        serializer: __KSerializer<T>__,
@@ -37,15 +33,6 @@ internal class SnippetSaveObjects {
 //        [data](#method-param-objects): __List<Pair<ObjectID, JsonObject>>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
-
-    private val suffix = "snippet"
-    private val indexName = testSuiteIndexName(suffix)
-    private val index = clientAdmin1.initIndex(indexName)
-
-    @BeforeTest
-    fun clean() {
-        runBlocking { cleanIndex(clientAdmin1, suffix) }
-    }
 
     @Test
     fun replaceObjects() {

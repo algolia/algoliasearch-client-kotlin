@@ -1,39 +1,27 @@
 package snippets.indexing
 
-import clientAdmin1
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.multipleindex.BatchOperationIndex
-import com.algolia.search.model.response.ResponseBatches
-import com.algolia.search.transport.RequestOptions
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking
-import suite.cleanIndex
-import suite.testSuiteIndexName
-import kotlin.test.BeforeTest
+import snippets.TestSnippets
 import kotlin.test.Test
 
 
-internal class SnippetCustomBatch {
+internal class SnippetCustomBatch : TestSnippets() {
 
 //    suspend fun ClientSearch.multipleBatchObjects(
 //        #{operations}: __List<BatchOperationIndex>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatches
 
-    private val suffix = "snippet"
-    private val index1 = testSuiteIndexName(suffix)
-    private val client = clientAdmin1
-
-    @BeforeTest
-    fun clean() {
-        runBlocking { cleanIndex(client, suffix) }
-    }
+    private val indexName1 = indexName
+    private val indexName2 = indexName
 
     @Test
     fun deleteObjectBy() {
@@ -47,7 +35,7 @@ internal class SnippetCustomBatch {
 
             val operations = listOf(
                 BatchOperationIndex(
-                    indexName = index1,
+                    indexName = indexName1,
                     operation = BatchOperation.AddObject(
                         json {
                             "firstname" to "Jimmie"
@@ -56,28 +44,28 @@ internal class SnippetCustomBatch {
                     )
                 ),
                 BatchOperationIndex(
-                    indexName = index1,
+                    indexName = indexName1,
                     operation = BatchOperation.AddObject.from(
                         serializer = Person.serializer(),
                         data = Person("Jimmie", "Barninger", ObjectID("myID1"))
                     )
                 ),
                 BatchOperationIndex(
-                    indexName = index1,
+                    indexName = indexName1,
                     operation = BatchOperation.UpdateObject.from(
                         serializer = Person.serializer(),
                         data = Person("Max", "Barninger", ObjectID("myID2"))
                     )
                 ),
                 BatchOperationIndex(
-                    indexName = index1,
+                    indexName = indexName1,
                     operation = BatchOperation.UpdateObject.from(
                         objectID = ObjectID("myID3"),
                         partial = Partial.Update(Attribute("firstname"), "McFarway")
                     )
                 ),
                 BatchOperationIndex(
-                    indexName = index1,
+                    indexName = indexName1,
                     operation = BatchOperation.UpdateObject.from(
                         objectID = ObjectID("myID4"),
                         partial = Partial.Update(Attribute("firstname"), "Warren"),
@@ -85,7 +73,7 @@ internal class SnippetCustomBatch {
                     )
                 ),
                 BatchOperationIndex(
-                    indexName = index1,
+                    indexName = indexName2,
                     operation = BatchOperation.DeleteObject(ObjectID("myID5"))
                 )
             )
