@@ -4,6 +4,7 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
+import com.algolia.search.model.apikey.APIKeyParams
 import com.algolia.search.model.request.RequestAPIKey
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseListAPIKey
@@ -26,26 +27,19 @@ internal class EndpointAPIKeyImpl(
 ) : EndpointAPIKey {
 
     override suspend fun addAPIKey(
-        rights: List<ACL>?,
-        indices: List<IndexName>?,
-        description: String?,
-        maxHitsPerQuery: Int?,
-        maxQueriesPerIPPerHour: Int?,
-        validity: Long?,
-        query: Query?,
-        referers: List<String>?,
+        params: APIKeyParams,
         restrictSources: String?,
         requestOptions: RequestOptions?
     ): CreationAPIKey {
         val body = RequestAPIKey(
-            rights = rights,
-            indices = indices,
-            description = description,
-            maxHitsPerQuery = maxHitsPerQuery,
-            maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
-            validity = validity,
-            query = query?.toJsonNoDefaults()?.urlEncode(),
-            referers = referers,
+            ACLs = params.ACLs,
+            indices = params.indices,
+            description = params.description,
+            maxHitsPerQuery = params.maxHitsPerQuery,
+            maxQueriesPerIPPerHour = params.maxQueriesPerIPPerHour,
+            validity = params.validity,
+            query = params.query?.toJsonNoDefaults()?.urlEncode(),
+            referers = params.referers,
             restrictSources = restrictSources
         ).stringify()
 
@@ -54,25 +48,18 @@ internal class EndpointAPIKeyImpl(
 
     override suspend fun updateAPIKey(
         apiKey: APIKey,
-        rights: List<ACL>?,
-        indices: List<IndexName>?,
-        description: String?,
-        maxHitsPerQuery: Int?,
-        maxQueriesPerIPPerHour: Int?,
-        validity: Long?,
-        query: Query?,
-        referers: List<String>?,
+        params: APIKeyParams,
         requestOptions: RequestOptions?
     ): RevisionAPIKey {
         val body = RequestAPIKey(
-            rights = rights,
-            indices = indices,
-            description = description,
-            maxHitsPerQuery = maxHitsPerQuery,
-            maxQueriesPerIPPerHour = maxQueriesPerIPPerHour,
-            validity = validity,
-            query = query?.toJsonNoDefaults()?.urlEncode(),
-            referers = referers
+            ACLs = params.ACLs,
+            indices = params.indices,
+            description = params.description,
+            maxHitsPerQuery = params.maxHitsPerQuery,
+            maxQueriesPerIPPerHour = params.maxQueriesPerIPPerHour,
+            validity = params.validity,
+            query = params.query?.toJsonNoDefaults()?.urlEncode(),
+            referers = params.referers
         ).stringify()
 
         return transport.request(HttpMethod.Put, CallType.Write, "$RouteKeysV1/$apiKey", requestOptions, body)
