@@ -41,7 +41,7 @@ internal fun JsonObject.urlEncode(): String? {
             entries.forEach { (key, element) ->
                 when (element) {
                     is JsonPrimitive -> append(key, element.content)
-                    else -> append(key, Json.unquoted.stringify(JsonElementSerializer, element))
+                    else -> append(key, Json.plain.stringify(JsonElementSerializer, element))
                 }
             }
         }.formUrlEncode()

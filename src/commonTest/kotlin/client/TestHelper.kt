@@ -20,6 +20,6 @@ internal class TestHelper {
             }
         }.urlEncode()
 
-        json shouldEqual "Hello=A&Key=%5BA%2CB%2C%5BC%5D%5D"
+        json shouldEqual "Hello=A&Key=%5B%22A%22%2C%22B%22%2C%5B%22C%22%5D%5D"
     }
 }
