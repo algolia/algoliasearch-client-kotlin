@@ -8,7 +8,7 @@ import shouldFailWith
 import kotlin.test.Test
 
 
-class SnippetDeleteABTest {
+internal class SnippetDeleteABTest {
 
 //    suspend fun ClientAnalytics.deleteABTest(
 //        #{abTestID}: __ABTestID__,

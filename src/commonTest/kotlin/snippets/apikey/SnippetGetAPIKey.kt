@@ -8,7 +8,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetGetAPIKey : TestSnippets() {
+internal class SnippetGetAPIKey : TestSnippets() {
 
 //    suspend fun ClientSearch.getAPIKey(
 //        #{apiKey}: __APIKey__,

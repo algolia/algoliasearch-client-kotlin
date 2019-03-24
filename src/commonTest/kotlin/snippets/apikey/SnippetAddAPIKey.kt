@@ -13,7 +13,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetAddAPIKey : TestSnippets() {
+internal class SnippetAddAPIKey : TestSnippets() {
 
 //    suspend fun ClientSearch.addAPIKey(
 //        params: __APIKeyParams__,

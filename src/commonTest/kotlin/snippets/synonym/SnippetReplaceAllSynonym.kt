@@ -6,7 +6,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetReplaceAllSynonym : TestSnippets() {
+internal class SnippetReplaceAllSynonym : TestSnippets() {
 
 //    suspend fun Index.replaceAllSynonyms(
 //        #{synonyms}: __List<Synonym>__,

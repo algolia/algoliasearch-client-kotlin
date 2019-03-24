@@ -19,7 +19,7 @@ import kotlin.test.BeforeTest
 import kotlin.test.Test
 
 
-class SnippetAddABTest {
+internal class SnippetAddABTest {
 
 //    suspend fun ClientAnalytics.addABTest(
 //        #{abTest}: __ABTest__,
