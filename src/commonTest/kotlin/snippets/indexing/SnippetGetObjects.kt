@@ -16,20 +16,20 @@ import kotlin.test.Test
 
 internal class SnippetGetObjects {
 
-//    suspend fun <T : Indexable> getObject(
+//    suspend fun <T : Indexable> Index.getObject(
 //        serializer: __KSerializer<T>__,
 //        #{objectID}: __ObjectID__,
 //        #{attributesToRetrieve}: __List<Attribute>?__ = null,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): T
 //
-//    suspend fun getObject(
+//    suspend fun Index.getObject(
 //        #{objectID}: __ObjectID__,
 //        #{attributesToRetrieve}: __List<Attribute>?__ = null,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): JsonObject
 //
-//    suspend fun getObjects(
+//    suspend fun Index.getObjects(
 //        #{objectIDs}: __List<ObjectID>__,
 //        #{attributesToRetrieve}: __List<Attribute>?__ = null,
 //        #{requestOptions}: __RequestOptions?__ = null

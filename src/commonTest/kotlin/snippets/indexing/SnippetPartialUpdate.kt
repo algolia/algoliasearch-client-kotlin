@@ -14,14 +14,14 @@ import kotlin.test.Test
 
 internal class SnippetPartialUpdate {
 
-//    suspend fun partialUpdateObject(
+//    suspend fun Index.partialUpdateObject(
 //        objectID: __ObjectID__,
 //        partial: __Partial__,
 //        #{createIfNotExists}: __Boolean?__ = null,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): RevisionObject
 //
-//    suspend fun partialUpdateObjects(
+//    suspend fun Index.partialUpdateObjects(
 //        data: __List<Pair<ObjectID, Partial>>__,
 //        #{createIfNotExists}: __Boolean__ = true,
 //        #{requestOptions}: __RequestOptions?__ = null

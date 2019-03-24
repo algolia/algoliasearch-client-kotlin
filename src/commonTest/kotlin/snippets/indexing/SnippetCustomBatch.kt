@@ -21,7 +21,7 @@ import kotlin.test.Test
 
 internal class SnippetCustomBatch {
 
-//    suspend fun multipleBatchObjects(
+//    suspend fun ClientSearch.multipleBatchObjects(
 //        #{operations}: __List<BatchOperationIndex>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatches

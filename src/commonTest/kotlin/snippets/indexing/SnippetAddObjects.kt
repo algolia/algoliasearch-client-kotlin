@@ -15,24 +15,24 @@ import kotlin.test.Test
 
 internal class SnippetAddObjects {
 
-//    suspend fun <T> saveObject(
+//    suspend fun <T> Index.saveObject(
 //        serializer: __KSerializer<T>__,
 //        [data](#method-param-objects): __T__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): CreationObject
 //
-//    suspend fun <T> saveObjects(
+//    suspend fun <T> Index.saveObjects(
 //        serializer: __KSerializer<T>__,
 //        [data](#method-param-objects): __T__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
 //
-//    suspend fun saveObject(
+//    suspend fun Index.saveObject(
 //        [data](#method-param-objects): __JsonObject__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): CreationObject
 //
-//    suspend fun saveObjects(
+//    suspend fun Index.saveObjects(
 //        [data](#method-param-objects): __List<JsonObject>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch

@@ -13,7 +13,7 @@ import kotlin.test.Test
 
 internal class SnippetClearObjects {
 
-//    suspend fun clearObjects(
+//    suspend fun Index.clearObjects(
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): RevisionIndex
 
