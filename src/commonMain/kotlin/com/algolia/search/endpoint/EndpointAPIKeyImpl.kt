@@ -2,17 +2,15 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.model.APIKey
-import com.algolia.search.model.IndexName
-import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.apikey.APIKeyParams
 import com.algolia.search.model.request.RequestAPIKey
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseListAPIKey
+import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.Deletion
 import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.response.revision.RevisionAPIKey
-import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.RouteKeysV1
 import com.algolia.search.serialize.stringify
 import com.algolia.search.serialize.toJsonNoDefaults
@@ -73,6 +71,19 @@ internal class EndpointAPIKeyImpl(
                 "$RouteKeysV1/$apiKey",
                 requestOptions
             ).deletedAt, apiKey
+        )
+    }
+
+    override suspend fun restoreAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): CreationAPIKey {
+        return CreationAPIKey(
+            transport.request<Creation>(
+                HttpMethod.Post,
+                CallType.Write,
+                "$RouteKeysV1/$apiKey/restore",
+                requestOptions,
+                ""
+            ).createdAt,
+            apiKey
         )
     }
 

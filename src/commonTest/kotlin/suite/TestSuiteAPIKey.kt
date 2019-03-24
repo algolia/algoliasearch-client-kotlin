@@ -68,7 +68,8 @@ internal class TestSuiteAPIKey {
                     }
                     delay(1000L)
                 }
-
+                deleteAPIKey(key).wait().shouldBeTrue()
+                restoreAPIKey(key).wait()
                 deleteAPIKey(key).wait().shouldBeTrue()
             }
         }
