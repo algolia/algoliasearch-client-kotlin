@@ -12,7 +12,7 @@ import kotlin.test.Test
 
 internal class SnippetSearchForFacetValues {
 
-//    suspend fun searchForFacetValues(
+//    suspend fun Index.searchForFacetValues(
 //        #{attribute}: __Attribute__,
 //        #{facetQuery}: __String__? = null,
 //        #{query}: __Query?__ = null,

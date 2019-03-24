@@ -13,7 +13,7 @@ import kotlin.test.Test
 
 internal class SnippetMultipleQueries {
 
-//    suspend fun multipleQueries(
+//    suspend fun ClientSearch.multipleQueries(
 //        #{queries}: __List<IndexQuery>__,
 //        #{strategy}: __MultipleQueriesStrategy?__ = null,
 //        #{requestOptions}: __RequestOptions?__ = null

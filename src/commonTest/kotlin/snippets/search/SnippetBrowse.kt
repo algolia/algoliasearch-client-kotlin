@@ -12,7 +12,7 @@ import kotlin.test.Test
 
 internal class SnippetBrowse {
 
-//    suspend fun browseObjects(
+//    suspend fun Index.browseObjects(
 //         #{query}: __Query?__ = null,
 //         #{requestOptions}: __RequestOptions?__ = null,
 //         block: __suspend (ResponseSearch) -> Unit)__
