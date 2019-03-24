@@ -7,7 +7,7 @@ import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionSynonym
 import com.algolia.search.model.synonym.Synonym
-import com.algolia.search.model.synonym.SynonymType
+import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.transport.RequestOptions
 
 
@@ -28,7 +28,10 @@ public interface EndpointSynonym {
         requestOptions: RequestOptions? = null
     ): RevisionIndex
 
-    suspend fun getSynonym(objectID: ObjectID, requestOptions: RequestOptions? = null): Synonym
+    suspend fun getSynonym(
+        objectID: ObjectID,
+        requestOptions: RequestOptions? = null
+    ): Synonym
 
     suspend fun deleteSynonym(
         objectID: ObjectID,
@@ -37,10 +40,7 @@ public interface EndpointSynonym {
     ): DeletionIndex
 
     suspend fun searchSynonyms(
-        query: String? = null,
-        page: Int? = null,
-        hitsPerPage: Int? = null,
-        synonymTypes: List<SynonymType>? = null,
+        query: SynonymQuery = SynonymQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchSynonyms
 

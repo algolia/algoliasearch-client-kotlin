@@ -4,13 +4,12 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.request.RequestSearchSynonyms
 import com.algolia.search.model.response.ResponseSearchSynonyms
 import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionSynonym
 import com.algolia.search.model.synonym.Synonym
-import com.algolia.search.model.synonym.SynonymType
+import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.KeyReplaceExistingSynonyms
 import com.algolia.search.serialize.RouteSynonyms
@@ -77,15 +76,11 @@ internal class EndpointSynonymImpl(
     }
 
     override suspend fun searchSynonyms(
-        query: String?,
-        page: Int?,
-        hitsPerPage: Int?,
-        synonymTypes: List<SynonymType>?,
+        query: SynonymQuery,
         requestOptions: RequestOptions?
     ): ResponseSearchSynonyms {
         val path = indexName.toPath("/$RouteSynonyms/search")
-        val request = RequestSearchSynonyms(query, page, hitsPerPage, synonymTypes?.joinToString(",") { it.raw })
-        val body = Json.noDefaults.stringify(RequestSearchSynonyms.serializer(), request)
+        val body = Json.noDefaults.stringify(SynonymQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }

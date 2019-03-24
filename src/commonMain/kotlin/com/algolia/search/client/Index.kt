@@ -7,7 +7,7 @@ import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchSynonyms
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.search.Query
-import com.algolia.search.model.synonym.SynonymType
+import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 
@@ -43,16 +43,14 @@ public data class Index internal constructor(
     }
 
     public suspend fun browseSynonyms(
-        query: String? = null,
-        hitsPerPage: Int? = null,
-        synonymType: List<SynonymType>? = null,
+        query: SynonymQuery = SynonymQuery(),
         requestOptions: RequestOptions? = null,
         block: suspend (ResponseSearchSynonyms) -> Unit
     ) {
         var page = 0
 
         while (true) {
-            val response = searchSynonyms(query, page++, hitsPerPage, synonymType, requestOptions)
+            val response = searchSynonyms(query.copy(page = page++), requestOptions)
 
             if (response.hits.isEmpty()) break
             block(response)

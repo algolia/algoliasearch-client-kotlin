@@ -48,12 +48,8 @@ public sealed class SynonymType(override val raw: String) : Raw<String> {
             return when (string) {
                 KeyOneWaySynonym -> OneWay
                 KeySynonym -> MultiWay
-                KeyAlternativeCorrection1 -> AlternativeCorrections(
-                    Typo.One
-                )
-                KeyAlternativeCorrection2 -> AlternativeCorrections(
-                    Typo.Two
-                )
+                KeyAlternativeCorrection1 -> AlternativeCorrections(Typo.One)
+                KeyAlternativeCorrection2 -> AlternativeCorrections(Typo.Two)
                 KeyPlaceholder -> Placeholder
                 else -> Other(string)
             }
