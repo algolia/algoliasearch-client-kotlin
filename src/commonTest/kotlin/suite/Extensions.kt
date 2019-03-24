@@ -1,6 +1,6 @@
 package suite
 
-import clientAdmin1
+import DateFormat
 import clientAnalytics
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.helper.toIndexName
@@ -8,7 +8,6 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.Time
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.response.ResponseVariant
-import com.algolia.search.model.task.TaskStatus
 import dayInMillis
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
@@ -31,26 +30,26 @@ internal fun compareVariant(actual: ResponseVariant, expected: Variant) {
     }
 }
 
-internal suspend fun cleanABTest(suffix: String) {
-    clientAnalytics.browseAllABTests {
-        abTests.forEach {
-            val result = Regex("kotlin-(.*)-$username-$suffix").find(it.name)
+internal suspend fun cleanABTest(suffix: String, now: Boolean = false) {
+    val regex = Regex("kotlin-(.*)-$username-$suffix")
+
+    clientAnalytics.browseAllABTests() {
+        it.abTests.forEach { abTest ->
+            val result = regex.find(abTest.variantA.indexName.raw)
             val date = result?.groupValues?.get(1)
 
             if (date != null) {
                 val difference = Time.getCurrentTimeMillis() - DateFormat.parse(date)
 
-                if (difference >= dayInMillis) {
-                    clientAdmin1.initIndex(it.variantA.indexName).apply {
-                        clientAnalytics.deleteABTest(it.abTestID).wait() shouldEqual TaskStatus.Published
-                    }
+                if (difference >= dayInMillis || now) {
+                    clientAnalytics.deleteABTest(abTest.abTestID)
                 }
             }
         }
     }
 }
 
-internal suspend fun cleanIndex(client: ClientSearch, suffix: String) {
+internal suspend fun cleanIndex(client: ClientSearch, suffix: String, now: Boolean = false) {
     val indexToDelete = mutableListOf<IndexName>()
 
     client.listIndices().items.forEach {
@@ -62,14 +61,16 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String) {
             if (date != null) {
                 val difference = Time.getCurrentTimeMillis() - DateFormat.parse(date)
 
-                if (difference >= dayInMillis) {
+                if (difference >= dayInMillis || now) {
                     indexToDelete += it.indexName
                 }
             }
         }
     }
     indexToDelete.forEach {
-        client.initIndex(it).deleteIndex()
+        client.initIndex(it).apply {
+            deleteIndex().wait()
+        }
     }
 }
 
