@@ -3,6 +3,7 @@ package suite
 import clientAdmin1
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.rule.Rule
+import com.algolia.search.model.rule.RuleQuery
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
@@ -37,7 +38,7 @@ internal class TestSuiteBrowse {
             index.apply {
                 saveRules(listOf(ruleA, ruleB)).wait() shouldEqual TaskStatus.Published
 
-                browseRules(hitsPerPage = 1) {
+                browseRules(RuleQuery(hitsPerPage = 1)) {
                     it.nbHits shouldEqual 2
                     it.hits.size shouldEqual 1
                     count++

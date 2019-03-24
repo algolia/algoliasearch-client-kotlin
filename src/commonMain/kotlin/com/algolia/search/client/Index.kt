@@ -5,7 +5,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchSynonyms
-import com.algolia.search.model.rule.Anchoring
+import com.algolia.search.model.rule.RuleQuery
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.transport.RequestOptions
@@ -24,18 +24,14 @@ public data class Index internal constructor(
     EndpointRule by EndpointRuleImpl(transport, indexName) {
 
     public suspend fun browseRules(
-        query: String? = null,
-        anchoring: Anchoring? = null,
-        context: String? = null,
-        hitsPerPage: Int? = null,
-        enabled: Boolean? = null,
+        query: RuleQuery = RuleQuery(),
         requestOptions: RequestOptions? = null,
         block: suspend (ResponseRules) -> Unit
     ) {
         var page = 0
 
         while (true) {
-            val response = searchRules(query, anchoring, context, page++, hitsPerPage, enabled, requestOptions)
+            val response = searchRules(query.copy(page = page++), requestOptions)
 
             if (response.hits.isEmpty()) break
             block(response)
