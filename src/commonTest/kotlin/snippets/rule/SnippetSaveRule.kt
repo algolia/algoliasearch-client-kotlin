@@ -7,7 +7,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetSaveRule : TestSnippets() {
+internal class SnippetSaveRule : TestSnippets() {
 
 //    suspend fun Index.saveRule(
 //        [rule](#method-param-queryrule): __Rule__,

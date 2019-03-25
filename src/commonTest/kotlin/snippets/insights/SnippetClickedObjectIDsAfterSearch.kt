@@ -11,7 +11,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetClickedObjectIDsAfterSearch : TestSnippets() {
+internal class SnippetClickedObjectIDsAfterSearch : TestSnippets() {
 
 //    suspend fun ClientInsights.User.clickedObjectIDsAfterSearch(
 //        #{indexName}: __IndexName__,

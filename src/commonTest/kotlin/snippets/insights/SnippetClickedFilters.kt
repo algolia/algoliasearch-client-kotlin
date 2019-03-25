@@ -10,7 +10,7 @@ import runBlocking
 import kotlin.test.Test
 
 
-class SnippetClickedFilters {
+internal class SnippetClickedFilters {
 
 //    suspend fun ClientInsights.User.clickedFilters(
 //        #{indexName}: __IndexName__,

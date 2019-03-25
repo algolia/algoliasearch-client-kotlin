@@ -5,7 +5,7 @@ import snippets.client
 import kotlin.test.Test
 
 
-class SnippetListIndices {
+internal class SnippetListIndices {
 
 //    suspend fun ClientSearch.listIndices(
 //        requestOptions: __RequestOptions?__ = null

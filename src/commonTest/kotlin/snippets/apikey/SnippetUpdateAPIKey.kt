@@ -11,7 +11,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetUpdateAPIKey : TestSnippets() {
+internal class SnippetUpdateAPIKey : TestSnippets() {
 
 //    suspend fun ClientSearch.updateAPIKey(
 //        #{apiKey}: __APIKey__,

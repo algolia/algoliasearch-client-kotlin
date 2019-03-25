@@ -7,7 +7,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetBatchSynonyms : TestSnippets() {
+internal class SnippetBatchSynonyms : TestSnippets() {
 
 //    suspend fun Index.saveSynonyms(
 //        #{synonyms}: __List<Synonym>__,

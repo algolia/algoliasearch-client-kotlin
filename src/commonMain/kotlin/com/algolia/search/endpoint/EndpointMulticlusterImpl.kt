@@ -2,9 +2,9 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.helper.requestOptionsBuilder
-import com.algolia.search.model.ClusterName
-import com.algolia.search.model.UserID
-import com.algolia.search.model.request.RequestSearchUserID
+import com.algolia.search.model.multicluster.ClusterName
+import com.algolia.search.model.multicluster.UserID
+import com.algolia.search.model.multicluster.UserIDQuery
 import com.algolia.search.model.response.*
 import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.deletion.Deletion
@@ -67,15 +67,11 @@ internal class EndpointMulticlusterImpl(
     }
 
     override suspend fun searchUserID(
-        query: String?,
-        clusterName: ClusterName?,
-        page: Int?,
-        hitsPerPage: Int?,
+        query: UserIDQuery,
         requestOptions: RequestOptions?
     ): ResponseSearchUserID {
         val path = "$RouteClustersV1/mapping/search"
-        val request = RequestSearchUserID(query, clusterName, page, hitsPerPage)
-        val body = Json.noDefaults.stringify(RequestSearchUserID.serializer(), request)
+        val body = Json.noDefaults.stringify(UserIDQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }

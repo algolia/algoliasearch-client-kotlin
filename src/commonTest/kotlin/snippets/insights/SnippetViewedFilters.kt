@@ -10,7 +10,7 @@ import runBlocking
 import kotlin.test.Test
 
 
-class SnippetViewedFilters {
+internal class SnippetViewedFilters {
 
 //    suspend fun ClientInsights.User.viewedFilters(
 //        #{indexName}: __IndexName__,
