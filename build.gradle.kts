@@ -15,7 +15,7 @@ plugins {
 }
 
 version = "1.0.0"
-group = "com.algolia.algoliasearch"
+group = "com.algolia"
 
 repositories {
     jcenter()
