@@ -20,9 +20,6 @@ internal class SnippetCustomBatch : TestSnippets() {
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatches
 
-    private val indexName1 = indexName
-    private val indexName2 = indexName
-
     @Test
     fun deleteObjectBy() {
         runBlocking {

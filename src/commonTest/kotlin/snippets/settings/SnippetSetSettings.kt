@@ -9,7 +9,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetSetSettings : TestSnippets() {
+internal class SnippetSetSettings : TestSnippets() {
 
 //    suspend fun Index.setSettings(
 //        #{settings}: __Settings__,

@@ -7,7 +7,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetSearchRules : TestSnippets() {
+internal class SnippetSearchRules : TestSnippets() {
 
 //    suspend fun Index.searchRules(
 //        query: __RuleQuery__ = RuleQuery(),

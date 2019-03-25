@@ -5,7 +5,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetListAPIKey : TestSnippets() {
+internal class SnippetListAPIKey : TestSnippets() {
 
 //    suspend fun ClientSearch.listAPIKeys(
 //        requestOptions: __RequestOptions?__ = null

@@ -1,6 +1,7 @@
 package com.algolia.search.model.response
 
 import com.algolia.search.helper.toABTestID
+import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.serialize.*
@@ -14,7 +15,7 @@ import kotlinx.serialization.json.jsonArray
 public data class ResponseABTest(
     val abTestID: ABTestID,
     val createdAt: String,
-    val endAt: String,
+    val endAt: ClientDate,
     val name: String,
     val status: ABTestStatus,
     val variantA: ResponseVariant,
@@ -38,7 +39,7 @@ public data class ResponseABTest(
             val json = json {
                 KeyABTestID to obj.abTestID.raw
                 KeyCreatedAt to obj.createdAt
-                KeyEndAt to obj.endAt
+                KeyEndAt to obj.endAt.raw
                 KeyName to obj.name
                 KeyStatus to obj.status.raw
                 obj.conversionSignificanceOrNull?.let { KeyConversionSignificance to it }
@@ -59,7 +60,7 @@ public data class ResponseABTest(
             return ResponseABTest(
                 abTestID = element.getPrimitive(KeyABTestID).long.toABTestID(),
                 createdAt = element.getPrimitive(KeyCreatedAt).content,
-                endAt = element.getPrimitive(KeyEndAt).content,
+                endAt = ClientDate(element.getPrimitive(KeyEndAt).content),
                 name = element.getPrimitive(KeyName).content,
                 status = Json.parse(ABTestStatus, element.getPrimitive(KeyStatus).content),
                 conversionSignificanceOrNull = element.getPrimitive(KeyConversionSignificance).floatOrNull,

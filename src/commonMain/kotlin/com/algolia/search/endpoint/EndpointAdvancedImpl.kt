@@ -58,15 +58,15 @@ internal class EndpointAdvancedImpl(
     }
 
     override suspend fun getLogs(
-        offset: Int?,
-        length: Int?,
+        page: Int?,
+        hitsPerPage: Int?,
         logType: LogType?,
         requestOptions: RequestOptions?
     ): ResponseLogs {
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyIndexName, indexName.raw)
-            parameter(KeyOffset, offset)
-            parameter(KeyLength, length)
+            parameter(KeyOffset, page)
+            parameter(KeyLength, hitsPerPage)
             parameter(KeyType, logType?.raw)
         }
         return transport.request(HttpMethod.Get, CallType.Read, RouteLogs, options)

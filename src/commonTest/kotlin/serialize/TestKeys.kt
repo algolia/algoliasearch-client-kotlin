@@ -317,6 +317,8 @@ internal class TestKeys {
         KeyConversion shouldEqual "conversion"
         KeyEvents shouldEqual "events"
         KeyDisjunctiveFacets shouldEqual "disjunctiveFacets"
+        KeyEventsScoring shouldEqual "eventsScoring"
+        KeyFacetsScoring shouldEqual "facetsScoring"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

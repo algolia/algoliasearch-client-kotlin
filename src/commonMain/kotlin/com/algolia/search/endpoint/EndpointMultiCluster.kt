@@ -1,7 +1,8 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.model.ClusterName
-import com.algolia.search.model.UserID
+import com.algolia.search.model.multicluster.ClusterName
+import com.algolia.search.model.multicluster.UserID
+import com.algolia.search.model.multicluster.UserIDQuery
 import com.algolia.search.model.response.*
 import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.deletion.Deletion
@@ -31,10 +32,7 @@ public interface EndpointMultiCluster {
     suspend fun removeUserID(userID: UserID, requestOptions: RequestOptions? = null): Deletion
 
     suspend fun searchUserID(
-        query: String? = null,
-        clusterName: ClusterName? = null,
-        page: Int? = null,
-        hitsPerPage: Int? = null,
+        query: UserIDQuery = UserIDQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchUserID
 }

@@ -29,15 +29,15 @@ public class ClientAnalytics private constructor(
     public suspend fun browseAllABTests(
         hitsPerPage: Int? = null,
         requestOptions: RequestOptions? = null,
-        block: suspend ResponseABTests.(Int) -> Unit
+        block: suspend (ResponseABTests) -> Unit
     ) {
         var page = 0
 
         while (true) {
-            val response = listABTests(page, hitsPerPage, requestOptions)
+            val response = listABTests(page++, hitsPerPage, requestOptions)
 
             if (response.count == 0) break
-            block(response, page++)
+            block(response)
         }
     }
 }

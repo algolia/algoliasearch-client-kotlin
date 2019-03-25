@@ -8,7 +8,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetGetSynonym : TestSnippets() {
+internal class SnippetGetSynonym : TestSnippets() {
 
 //    suspend fun Index.getSynonym(
 //        #{objectID}: __ObjectID__,
