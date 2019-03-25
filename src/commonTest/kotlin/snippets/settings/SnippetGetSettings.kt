@@ -5,7 +5,7 @@ import snippets.index
 import kotlin.test.Test
 
 
-class SnippetGetSettings {
+internal class SnippetGetSettings {
 
 //    suspend fun Index.getSettings(
 //        requestOptions: __RequestOptions?__ = null

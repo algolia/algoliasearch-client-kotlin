@@ -5,7 +5,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetClearSynonyms : TestSnippets() {
+internal class SnippetClearSynonyms : TestSnippets() {
 
 //    suspend fun Index.clearSynonyms(
 //        #{forwardToReplicas}: __Boolean?__ = null,

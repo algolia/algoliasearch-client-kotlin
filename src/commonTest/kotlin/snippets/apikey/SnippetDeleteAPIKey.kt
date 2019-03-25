@@ -6,7 +6,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetDeleteAPIKey : TestSnippets() {
+internal class SnippetDeleteAPIKey : TestSnippets() {
 
 //    suspend fun ClientSearch.deleteAPIKey(
 //        #{apiKey}: __APIKey__,

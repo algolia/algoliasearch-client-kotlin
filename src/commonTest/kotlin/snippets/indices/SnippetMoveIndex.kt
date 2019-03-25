@@ -7,7 +7,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetMoveIndex : TestSnippets() {
+internal class SnippetMoveIndex : TestSnippets() {
 
 //    suspend fun [Index](#method-param-src).moveIndex(
 //        [destination](#method-param-dest): __IndexName__,

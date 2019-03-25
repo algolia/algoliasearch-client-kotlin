@@ -8,7 +8,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetSaveSynonym : TestSnippets() {
+internal class SnippetSaveSynonym : TestSnippets() {
 
 //    suspend fun Index.saveSynonym(
 //        #{synonym}: __Synonym__,

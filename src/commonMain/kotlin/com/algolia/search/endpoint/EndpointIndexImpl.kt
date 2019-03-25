@@ -48,7 +48,7 @@ internal class EndpointIndexImpl(
         return transport.request(HttpMethod.Delete, CallType.Write, indexName.toPath(), requestOptions)
     }
 
-    override suspend fun copyRule(destination: IndexName, requestOptions: RequestOptions?): RevisionIndex {
+    override suspend fun copyRules(destination: IndexName, requestOptions: RequestOptions?): RevisionIndex {
         return copyIndex(destination, listOf(Scope.Rules), requestOptions)
     }
 

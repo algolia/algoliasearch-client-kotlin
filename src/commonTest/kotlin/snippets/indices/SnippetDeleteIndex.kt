@@ -5,7 +5,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetDeleteIndex : TestSnippets() {
+internal class SnippetDeleteIndex : TestSnippets() {
 
 //    suspend fun Index.deleteIndex(
 //        requestOptions: __RequestOptions?__ = null

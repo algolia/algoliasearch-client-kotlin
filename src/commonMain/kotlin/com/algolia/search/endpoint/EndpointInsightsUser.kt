@@ -41,7 +41,7 @@ public interface EndpointInsightsUser {
     suspend fun clickedObjectIDsAfterSearch(
         indexName: IndexName,
         eventName: EventName,
-        queryId: QueryID,
+        queryID: QueryID,
         objectIDs: List<ObjectID>,
         positions: List<Int>,
         timestamp: Long? = null
@@ -64,7 +64,7 @@ public interface EndpointInsightsUser {
     suspend fun convertedObjectIDsAfterSearch(
         indexName: IndexName,
         eventName: EventName,
-        queryId: QueryID,
+        queryID: QueryID,
         objectIDs: List<ObjectID>,
         timestamp: Long? = null
     ): HttpResponse

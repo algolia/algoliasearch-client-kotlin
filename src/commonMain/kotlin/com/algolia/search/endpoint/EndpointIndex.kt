@@ -21,7 +21,7 @@ public interface EndpointIndex {
 
     suspend fun deleteIndex(requestOptions: RequestOptions? = null): DeletionIndex
 
-    suspend fun copyRule(destination: IndexName, requestOptions: RequestOptions? = null): RevisionIndex
+    suspend fun copyRules(destination: IndexName, requestOptions: RequestOptions? = null): RevisionIndex
 
     suspend fun copySettings(destination: IndexName, requestOptions: RequestOptions? = null): RevisionIndex
 

@@ -4,12 +4,11 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.request.RequestSearchRules
 import com.algolia.search.model.response.ResponseRule
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.revision.RevisionIndex
-import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Rule
+import com.algolia.search.model.rule.RuleQuery
 import com.algolia.search.serialize.KeyClearExistingRules
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.RouteRules
@@ -59,17 +58,11 @@ internal class EndpointRuleImpl(
     }
 
     override suspend fun searchRules(
-        query: String?,
-        anchoring: Anchoring?,
-        context: String?,
-        page: Int?,
-        hitsPerPage: Int?,
-        enabled: Boolean?,
+        query: RuleQuery,
         requestOptions: RequestOptions?
     ): ResponseRules {
         val path = indexName.toPath("/$RouteRules/search")
-        val request = RequestSearchRules(query, anchoring, context, page, hitsPerPage, enabled)
-        val body = Json.noDefaults.stringify(RequestSearchRules.serializer(), request)
+        val body = Json.noDefaults.stringify(RuleQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }

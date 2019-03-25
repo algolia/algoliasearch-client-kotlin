@@ -86,7 +86,7 @@ class EndpointInsightsUserImpl(
     override suspend fun clickedObjectIDsAfterSearch(
         indexName: IndexName,
         eventName: EventName,
-        queryId: QueryID,
+        queryID: QueryID,
         objectIDs: List<ObjectID>,
         positions: List<Int>,
         timestamp: Long?
@@ -99,7 +99,7 @@ class EndpointInsightsUserImpl(
                 timestamp = timestamp,
                 userToken = userToken,
                 positions = positions,
-                queryID = queryId
+                queryID = queryID
             )
         )
     }
@@ -141,7 +141,7 @@ class EndpointInsightsUserImpl(
     override suspend fun convertedObjectIDsAfterSearch(
         indexName: IndexName,
         eventName: EventName,
-        queryId: QueryID,
+        queryID: QueryID,
         objectIDs: List<ObjectID>,
         timestamp: Long?
     ): HttpResponse {
@@ -152,7 +152,7 @@ class EndpointInsightsUserImpl(
                 resources = InsightsEvent.Resources.ObjectIDs(objectIDs),
                 timestamp = timestamp,
                 userToken = userToken,
-                queryID = queryId
+                queryID = queryID
             )
         )
     }

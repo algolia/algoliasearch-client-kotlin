@@ -66,7 +66,7 @@ internal class TestSuiteCopyIndex {
                 tasks.clear()
 
                 tasks += copySettings(indexNameSettings)
-                tasks += copyRule(indexNameRules)
+                tasks += copyRules(indexNameRules)
                 tasks += copySynonyms(indexNameSynonyms)
                 tasks += copyIndex(indexNameFullCopy)
 

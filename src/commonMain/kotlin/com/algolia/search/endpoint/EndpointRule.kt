@@ -5,8 +5,8 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseRule
 import com.algolia.search.model.response.ResponseRules
 import com.algolia.search.model.response.revision.RevisionIndex
-import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Rule
+import com.algolia.search.model.rule.RuleQuery
 import com.algolia.search.transport.RequestOptions
 
 
@@ -39,12 +39,7 @@ public interface EndpointRule {
     ): RevisionIndex
 
     suspend fun searchRules(
-        query: String? = null,
-        anchoring: Anchoring? = null,
-        context: String? = null,
-        page: Int? = null,
-        hitsPerPage: Int? = null,
-        enabled: Boolean? = null,
+        query: RuleQuery = RuleQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseRules
 

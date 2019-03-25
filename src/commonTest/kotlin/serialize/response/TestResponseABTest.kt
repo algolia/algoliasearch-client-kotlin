@@ -1,6 +1,8 @@
 package serialize.response
 
+import com.algolia.search.helper.DateISO8601
 import com.algolia.search.helper.toABTestID
+import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.response.ResponseABTest
 import com.algolia.search.serialize.*
@@ -12,11 +14,13 @@ import unknown
 
 internal class TestResponseABTest : TestSerializer<ResponseABTest>(ResponseABTest) {
 
+    private val date = DateISO8601.format(0)
+
     override val items = listOf(
         ResponseABTest(
             abTestID = 0L.toABTestID(),
             createdAt = unknown,
-            endAt = unknown,
+            endAt = ClientDate(date),
             name = unknown,
             status = ABTestStatus.Failed,
             variantA = TestResponseVariant.item,
@@ -26,7 +30,7 @@ internal class TestResponseABTest : TestSerializer<ResponseABTest>(ResponseABTes
         ) to json {
             KeyABTestID to 0L
             KeyCreatedAt to unknown
-            KeyEndAt to unknown
+            KeyEndAt to date
             KeyName to unknown
             KeyStatus to ABTestStatus.Failed.raw
             KeyVariants to jsonArray {

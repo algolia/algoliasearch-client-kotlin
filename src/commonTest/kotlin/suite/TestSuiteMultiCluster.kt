@@ -3,6 +3,7 @@ package suite
 import clientMcm
 import com.algolia.search.helper.toUserID
 import com.algolia.search.model.Time
+import com.algolia.search.model.multicluster.UserIDQuery
 import io.ktor.client.features.ResponseException
 import io.ktor.client.response.readBytes
 import io.ktor.http.HttpStatusCode
@@ -39,7 +40,7 @@ internal class TestSuiteMultiCluster {
                 }
                 delay(1000L)
             }
-            clientMcm.searchUserID(userID.raw).hits.shouldNotBeEmpty()
+            clientMcm.searchUserID(UserIDQuery(query = userID.raw)).hits.shouldNotBeEmpty()
             clientMcm.listUserIDs().userIDs.shouldNotBeEmpty()
             clientMcm.getTopUserID().topUsers.shouldNotBeEmpty()
 

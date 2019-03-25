@@ -14,7 +14,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetCopyIndex : TestSnippets() {
+internal class SnippetCopyIndex : TestSnippets() {
 
 //    suspend fun [Index](#method-param-src)copyIndex(
 //        [destination](#method-param-dst): __IndexName__,
