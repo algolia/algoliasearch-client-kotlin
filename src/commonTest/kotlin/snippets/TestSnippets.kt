@@ -7,7 +7,7 @@ import suite.testSuiteIndexName
 import kotlin.test.AfterTest
 
 
-abstract class TestSnippets {
+internal abstract class TestSnippets {
 
     protected val suffix = "snippet"
     protected val indexName = testSuiteIndexName(suffix)

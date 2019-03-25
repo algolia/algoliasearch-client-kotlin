@@ -5,7 +5,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetBrowseSynonyms : TestSnippets() {
+internal class SnippetBrowseSynonyms : TestSnippets() {
 
 //    suspend fun Index.browseSynonyms(
 //        query: __SynonymQuery__ = SynonymQuery(),

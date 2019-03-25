@@ -90,9 +90,9 @@ public sealed class InsightsEvent {
 
         private infix fun JsonObjectBuilder.eventType(event: InsightsEvent) {
             KeyEventType to when (event) {
-                is InsightsEvent.Click -> KeyClick
-                is InsightsEvent.View -> KeyView
-                is InsightsEvent.Conversion -> KeyConversion
+                is Click -> KeyClick
+                is View -> KeyView
+                is Conversion -> KeyConversion
             }
         }
 

@@ -6,7 +6,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetDeleteRule : TestSnippets() {
+internal class SnippetDeleteRule : TestSnippets() {
 
 //    suspend fun Index.deleteRule(
 //        #{objectID}: __ObjectID__,

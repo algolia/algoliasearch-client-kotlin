@@ -18,6 +18,7 @@ public interface Configuration {
     val hosts: List<RetryableHost>
     val engine: HttpClientEngine?
     val httpClient: HttpClient
+    val defaultHeaders: Map<String, String>?
 
     fun RequestOptions?.getTimeout(callType: CallType): Long {
         return when (callType) {

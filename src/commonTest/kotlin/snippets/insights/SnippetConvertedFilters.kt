@@ -10,7 +10,7 @@ import runBlocking
 import kotlin.test.Test
 
 
-class SnippetConvertedFilters {
+internal class SnippetConvertedFilters {
 
 //    suspend fun ClientInsights.User.convertedFilters(
 //        #{indexName}: __IndexName__,

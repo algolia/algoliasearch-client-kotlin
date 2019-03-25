@@ -6,7 +6,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetReplaceRules: TestSnippets() {
+internal class SnippetReplaceRules: TestSnippets() {
 
 //    suspend fun Index.replaceAllRules(
 //        #{rules}: __List<Rule>__,

@@ -9,7 +9,7 @@ import runBlocking
 import kotlin.test.Test
 
 
-class SnippetConvertedObjectIDs {
+internal class SnippetConvertedObjectIDs {
 
 //    suspend fun ClientInsights.User.convertedObjectIDs(
 //        #{indexName}: __IndexName__,

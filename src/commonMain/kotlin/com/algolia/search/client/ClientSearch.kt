@@ -41,6 +41,7 @@ public class ClientSearch private constructor(
     EndpointMultipleIndex by EndpointMultipleIndexImpl(transport),
     EndpointAPIKey by EndpointAPIKeyImpl(transport),
     EndpointMultiCluster by EndpointMulticlusterImpl(transport),
+    EndpointPersonalization by EndpointPersonalizationImpl(transport),
     Configuration by transport {
 
     public constructor(
@@ -109,14 +110,14 @@ public class ClientSearch private constructor(
     }
 
     public suspend fun getLogs(
-        offset: Int? = null,
-        length: Int? = null,
+        page: Int? = null,
+        hitsPerPage: Int? = null,
         logType: LogType? = null,
         requestOptions: RequestOptions? = null
     ): ResponseLogs {
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyOffset, offset)
-            parameter(KeyLength, length)
+            parameter(KeyOffset, page)
+            parameter(KeyLength, hitsPerPage)
             parameter(KeyType, logType?.raw)
         }
 

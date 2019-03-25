@@ -6,7 +6,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetBatchRules : TestSnippets() {
+internal class SnippetBatchRules : TestSnippets() {
 
 //    suspend fun Index.saveRules(
 //        #{rules}: __List<Rule>__,
