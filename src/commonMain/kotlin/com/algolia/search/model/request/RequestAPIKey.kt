@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class RequestAPIKey(
-    @SerialName(KeyAcl) val rights: List<ACL>? = null,
+    @SerialName(KeyAcl) val ACLs: List<ACL>? = null,
     @SerialName(KeyIndexes) val indices: List<IndexName>? = null,
     @SerialName(KeyDescription) val description: String? = null,
     @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQuery: Int? = null,

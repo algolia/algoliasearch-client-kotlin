@@ -14,7 +14,7 @@ import kotlinx.serialization.Transient
 public data class ResponseAPIKey(
     @SerialName(KeyValue) val apiKey: APIKey,
     @SerialName(KeyValidity) val validity: Long,
-    @SerialName(KeyAcl) val rights: List<ACL>,
+    @SerialName(KeyAcl) val ACLs: List<ACL>,
     @SerialName(KeyMaxQueriesPerIPPerHour) val maxQueriesPerIPPerHourOrNull: Int? = null,
     @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQueryOrNull: Int? = null,
     @SerialName(KeyCreatedAt) val createdAtOrNull: ClientDate? = null,
