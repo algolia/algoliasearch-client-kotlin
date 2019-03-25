@@ -4,6 +4,8 @@ import com.algolia.search.model.*
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.insights.EventName
 import com.algolia.search.model.insights.UserToken
+import com.algolia.search.model.multicluster.ClusterName
+import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.Snippet

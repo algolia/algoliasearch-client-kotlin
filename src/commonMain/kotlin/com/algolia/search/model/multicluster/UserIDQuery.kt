@@ -1,6 +1,5 @@
-package com.algolia.search.model.request
+package com.algolia.search.model.multicluster
 
-import com.algolia.search.model.ClusterName
 import com.algolia.search.serialize.KeyCluster
 import com.algolia.search.serialize.KeyHitsPerPage
 import com.algolia.search.serialize.KeyParams
@@ -10,7 +9,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-internal data class RequestSearchUserID(
+data class UserIDQuery(
     @SerialName(KeyQuery) val query: String? = null,
     @SerialName(KeyCluster) val clusterName: ClusterName? = null,
     @SerialName(KeyParams) val page: Int? = null,

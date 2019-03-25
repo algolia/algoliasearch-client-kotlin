@@ -1,6 +1,7 @@
-package com.algolia.search.model
+package com.algolia.search.model.multicluster
 
 import com.algolia.search.helper.toUserID
+import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
