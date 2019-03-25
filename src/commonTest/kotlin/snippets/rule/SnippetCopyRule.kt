@@ -7,7 +7,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetCopyRule : TestSnippets() {
+internal class SnippetCopyRule : TestSnippets() {
 
 //    suspend fun [Index](#method-param-indexnamesrc).copyRules(
 //        [destination](#method-param-indexnamedest): __IndexName__,

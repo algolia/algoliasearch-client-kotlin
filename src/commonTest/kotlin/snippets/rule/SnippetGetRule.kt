@@ -8,7 +8,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetGetRule : TestSnippets() {
+internal class SnippetGetRule : TestSnippets() {
 
 //    suspend fun Index.getRule(
 //        #{objectID}: __ObjectID__,

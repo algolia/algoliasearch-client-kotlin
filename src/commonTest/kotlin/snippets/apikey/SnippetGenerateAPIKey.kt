@@ -12,7 +12,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetGenerateAPIKey : TestSnippets() {
+internal class SnippetGenerateAPIKey : TestSnippets() {
 
 //    fun ClientSearch.generateAPIKey(
 //        [parentAPIKey](#method-param-apikey): __APIKey__,

@@ -1,6 +1,6 @@
 package com.algolia.search.model.response
 
-import com.algolia.search.model.ClusterName
+import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.serialize.KeyTopUsers
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

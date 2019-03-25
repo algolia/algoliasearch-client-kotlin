@@ -5,7 +5,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetClearRules : TestSnippets() {
+internal class SnippetClearRules : TestSnippets() {
 
 //    suspend fun Index.clearRules(
 //        #{forwardToReplicas}: __Boolean?__ = null,

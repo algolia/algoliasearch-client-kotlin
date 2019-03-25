@@ -7,7 +7,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetCopySynonyms : TestSnippets() {
+internal class SnippetCopySynonyms : TestSnippets() {
 
 //    suspend fun [Index](#method-param-indexnamesrc).copySynonyms(
 //        [destination](#method-param-indexnamedest) __IndexName__,

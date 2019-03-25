@@ -6,7 +6,7 @@ import snippets.TestSnippets
 import kotlin.test.Test
 
 
-class SnippetDeleteSynonym : TestSnippets() {
+internal class SnippetDeleteSynonym : TestSnippets() {
 
 //    suspend fun Index.deleteSynonym(
 //        #{objectID}: __ObjectID__,

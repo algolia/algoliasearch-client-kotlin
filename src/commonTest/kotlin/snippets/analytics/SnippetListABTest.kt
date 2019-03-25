@@ -5,7 +5,7 @@ import runBlocking
 import kotlin.test.Test
 
 
-class SnippetListABTest {
+internal class SnippetListABTest {
 
 //    suspend fun ClientAnalytics.listABTests(
 //        [page](#method-param-offset): __Int?__ = null,

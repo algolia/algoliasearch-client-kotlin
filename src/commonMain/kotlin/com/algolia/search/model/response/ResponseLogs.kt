@@ -28,7 +28,8 @@ public data class ResponseLogs(
         @SerialName(KeyNb_Api_Calls) val nbApiCallsOrNull: Long? = null,
         @SerialName(KeyIndex) val indexNameOrNull: IndexName? = null,
         @SerialName(KeyQuery_Params) val queryParamsOrNull: String? = null,
-        @SerialName(KeyQuery_Nb_Hits) val queryNbHitsOrNull: Int? = null
+        @SerialName(KeyQuery_Nb_Hits) val queryNbHitsOrNull: Int? = null,
+        @SerialName(Key_Exhaustive_Nb_Hits) val exhaustiveNbHits: Boolean? = null
     ) {
 
         @Transient

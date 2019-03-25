@@ -1,6 +1,6 @@
 package com.algolia.search.transport
 
-import com.algolia.search.model.UserID
+import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.serialize.KeyAlgoliaUserID
 import com.algolia.search.serialize.KeyForwardedFor
 import kotlinx.serialization.json.JsonObject
