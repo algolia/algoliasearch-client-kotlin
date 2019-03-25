@@ -1,7 +1,8 @@
-package com.algolia.search.model
+package com.algolia.search.model.multicluster
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toClusterName
+import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
