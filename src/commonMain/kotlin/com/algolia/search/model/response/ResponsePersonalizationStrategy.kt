@@ -1,5 +1,6 @@
 package com.algolia.search.model.response
 
+import com.algolia.search.model.Attribute
 import com.algolia.search.model.insights.EventName
 import com.algolia.search.model.personalization.EventScoring
 import com.algolia.search.model.personalization.FacetScoring
@@ -15,6 +16,6 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class ResponsePersonalizationStrategy(
     @SerialName(KeyEventsScoring) val eventsScoring: Map<EventName, EventScoring>,
-    @SerialName(KeyFacetsScoring) val facetsScoring: Map<EventName, FacetScoring>,
+    @SerialName(KeyFacetsScoring) val facetsScoring: Map<Attribute, FacetScoring>,
     @SerialName(KeyTaskID) override val taskID: TaskID
 ) : Task
