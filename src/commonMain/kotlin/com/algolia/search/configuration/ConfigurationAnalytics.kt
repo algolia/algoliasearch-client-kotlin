@@ -16,5 +16,6 @@ data class ConfigurationAnalytics(
     override val logLevel: LogLevel = defaultLogLevel,
     override val hosts: List<RetryableHost> = listOf(analyticsHost),
     override val engine: HttpClientEngine? = null,
-    override val httpClient: HttpClient = engine.httpClient(logLevel)
+    override val defaultHeaders: Map<String, String>? = null,
+    override val httpClient: HttpClient = engine.httpClient(logLevel, defaultHeaders)
 ) : Configuration
