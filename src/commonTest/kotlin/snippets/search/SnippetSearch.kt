@@ -25,23 +25,25 @@ internal class SnippetSearch {
 
     @Test
     fun example() {
-        runBlocking {
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String
-            )
+        shouldFailWith<ResponseException> {
+            runBlocking {
+                @Serializable
+                data class Contact(
+                    val firstname: String,
+                    val lastname: String
+                )
 
-            val indexName = IndexName("products_android_demo")
-            val index = client.initIndex(indexName)
-            val query = queryBuilder {
-                query = "query string"
-                hitsPerPage = 50
-                setAttributesToRetrieve(Attribute("firstname"), Attribute("lastname"))
+                val indexName = IndexName("contacts")
+                val index = client.initIndex(indexName)
+                val query = queryBuilder {
+                    query = "query string"
+                    hitsPerPage = 50
+                    setAttributesToRetrieve(Attribute("firstname"), Attribute("lastname"))
+                }
+                val response = index.search(query)
+
+                response.hits.map { it.parse(Contact.serializer()) }
             }
-            val response = index.search(query)
-
-            response.hits.map { it.parse(Contact.serializer()) }
         }
     }
 

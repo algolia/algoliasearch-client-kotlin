@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class DeleteByQuery(
+public data class DeleteByQuery(
     /**
      * Filter the query with numeric, facet and/or tag filters.
      * Engine default: "" (no filters)

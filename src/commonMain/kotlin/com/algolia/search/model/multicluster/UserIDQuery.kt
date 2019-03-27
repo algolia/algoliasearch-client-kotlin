@@ -9,9 +9,9 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class UserIDQuery(
-    @SerialName(KeyQuery) val query: String? = null,
-    @SerialName(KeyCluster) val clusterName: ClusterName? = null,
-    @SerialName(KeyParams) val page: Int? = null,
-    @SerialName(KeyHitsPerPage) val hitsPerPage: Int? = null
+public data class UserIDQuery(
+    @SerialName(KeyQuery) var query: String? = null,
+    @SerialName(KeyCluster) var clusterName: ClusterName? = null,
+    @SerialName(KeyParams) var page: Int? = null,
+    @SerialName(KeyHitsPerPage) var hitsPerPage: Int? = null
 )

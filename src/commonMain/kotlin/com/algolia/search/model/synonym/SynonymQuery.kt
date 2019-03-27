@@ -10,10 +10,10 @@ import kotlinx.serialization.json.json
 
 @Serializable(SynonymQuery.Companion::class)
 data class SynonymQuery(
-    val query: String? = null,
-    val page: Int? = null,
-    val hitsPerPage: Int? = null,
-    val types: List<SynonymType>? = null
+    var query: String? = null,
+    var page: Int? = null,
+    var hitsPerPage: Int? = null,
+    var types: List<SynonymType>? = null
 ) {
 
     @Serializer(SynonymQuery::class)
