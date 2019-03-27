@@ -19,7 +19,7 @@ internal class SnippetGenerateAPIKey : TestSnippets() {
 //        restriction: __SecuredAPIKeyRestriction__
 //    ): APIKey
 //
-//    public data class SecuredAPIKeyRestriction(
+//    data class SecuredAPIKeyRestriction(
 //        val [query](#method-param-searchparameter): __Query?__ = null,
 //        val #{restrictIndices}: __List<IndexName>?__ = null,
 //        val #{restrictSources}: __List<String>?__ = null,

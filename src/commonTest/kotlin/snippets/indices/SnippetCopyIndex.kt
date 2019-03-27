@@ -20,7 +20,7 @@ internal class SnippetCopyIndex : TestSnippets() {
 //        [scopes](#method-param-scope): __List<Scope>?__ = null,
 //        requestOptions: __RequestOptions?__ = null
 //    ): RevisionIndex
-
+//
 //    suspend fun ClientAccount.copyIndex(
 //        [source](#method-param-indexnamesrc): __Index__,
 //        [destination](#method-param-indexnamedest): __Index__

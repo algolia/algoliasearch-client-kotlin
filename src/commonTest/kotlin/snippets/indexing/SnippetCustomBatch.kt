@@ -21,7 +21,7 @@ internal class SnippetCustomBatch : TestSnippets() {
 //    ): ResponseBatches
 
     @Test
-    fun deleteObjectBy() {
+    fun batch() {
         runBlocking {
             @Serializable
             data class Person(

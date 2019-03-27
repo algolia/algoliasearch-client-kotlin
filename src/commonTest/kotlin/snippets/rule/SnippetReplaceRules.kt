@@ -16,6 +16,7 @@ internal class SnippetReplaceRules: TestSnippets() {
 
     @Test
     fun replaceRules() {
+        // Fetch your rules
         runBlocking {
             val rules = listOf<Rule>()
 

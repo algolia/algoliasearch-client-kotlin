@@ -9,11 +9,9 @@ import kotlin.test.Test
 
 internal class SnippetListCluster {
 
-//    suspend fun ClientSearch.listUserIDs(
-//        #{page}: __Int?__ = null,
-//        #{hitsPerPage}: __Int?__ = null,
-//        requestOptions: __RequestOptions?__ = null
-//    ): ResponseListUserIDs
+//    suspend fun listClusters(
+//        requestOptions: RequestOptions? = null
+//    ): ResponseListClusters
 
     @Test
     fun listCluster() {

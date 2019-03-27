@@ -33,6 +33,32 @@ internal class SnippetGetObjects: TestSnippets() {
 //    ): ResponseObjects
 
     @Test
+    fun getObject() {
+        runBlocking {
+            index.getObject(ObjectID("myID1"))
+        }
+    }
+
+    @Test
+    fun getObjectSerializer() {
+        shouldFailWith<ResponseException> {
+            runBlocking {
+                @Serializable
+                data class Person(
+                    val firstname: String,
+                    val lastname: String,
+                    override val objectID: ObjectID
+                ) : Indexable
+
+                val objectID = ObjectID("myID1")
+
+                index.getObject(objectID)
+                index.getObject(Person.serializer(), objectID)
+            }
+        }
+    }
+
+    @Test
     fun getObjects() {
         runBlocking {
             index.getObjects(listOf(ObjectID("myID1"), ObjectID("myID2")))
@@ -46,26 +72,6 @@ internal class SnippetGetObjects: TestSnippets() {
             val attributes = listOf(Attribute("firstname"), Attribute("lastname"))
 
             index.getObjects(objectIDs, attributes)
-        }
-    }
-
-    @Test
-    fun getObject() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                @Serializable
-                data class Person(
-                    val firstname: String,
-                    val lastname: String,
-                    override val objectID: ObjectID
-                ) : Indexable
-
-                val objectID = ObjectID("myID1")
-                val attributes = listOf(Attribute("firstname"), Attribute("lastname"))
-
-                index.getObject(objectID, attributes)
-                index.getObject(Person.serializer(), objectID, attributes)
-            }
         }
     }
 }

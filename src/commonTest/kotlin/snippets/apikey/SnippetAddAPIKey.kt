@@ -50,7 +50,6 @@ internal class SnippetAddAPIKey : TestSnippets() {
     fun addAPIKeyAdvanced() {
         shouldFailWith<ResponseException> {
             runBlocking {
-
                 val params = APIKeyParams(
                     ACLs = listOf(ACL.Search),
                     description = "Limited search only API key for algolia.com",

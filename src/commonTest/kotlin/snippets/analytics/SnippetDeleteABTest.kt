@@ -19,7 +19,7 @@ internal class SnippetDeleteABTest {
     fun deleteABTest() {
         shouldFailWith<ResponseException> {
             runBlocking {
-                clientAnalytics.stopABTest(ABTestID(42))
+                clientAnalytics.deleteABTest(ABTestID(42))
             }
         }
     }
