@@ -15,10 +15,14 @@ internal class SnippetSearchForFacetValues {
 
 //    suspend fun Index.searchForFacetValues(
 //        #{attribute}: __Attribute__,
-//        #{facetQuery}: __String__? = null,
-//        #{query}: __Query?__ = null,
+//        #{query}: __FacetValuesQuery?__ = null,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseSearchForFacetValue
+//
+//    data class FacetValuesQuery(
+//        var #{facetQuery}: __String__? = null,
+//        var #{query}: __Query?__ = null,
+//    )
 //
 //    // any #{searchParameters} can be set on the Query object
 

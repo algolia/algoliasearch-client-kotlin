@@ -49,14 +49,14 @@ internal class EndpointSearchImpl(
 
     override suspend fun searchForFacetValues(
         attribute: Attribute,
-        query: FacetValuesQuery,
+        query: FacetValuesQuery?,
         requestOptions: RequestOptions?
     ): ResponseSearchForFacetValue {
         val path = indexName.toPath("/facets/$attribute/query")
         val extraParams = json {
-            query.facetQuery?.let { KeyFacetQuery to it }
+            query?.facetQuery?.let { KeyFacetQuery to it }
         }
-        val body = (query.query?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
+        val body = (query?.query?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }

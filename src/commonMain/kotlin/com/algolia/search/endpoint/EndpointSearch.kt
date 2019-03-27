@@ -101,7 +101,7 @@ public interface EndpointSearch {
      */
     suspend fun searchForFacetValues(
         attribute: Attribute,
-        query: FacetValuesQuery,
+        query: FacetValuesQuery? = null,
         requestOptions: RequestOptions? = null
     ): ResponseSearchForFacetValue
 
