@@ -39,9 +39,9 @@ internal class SnippetSearch {
                 hitsPerPage = 50
                 setAttributesToRetrieve(Attribute("firstname"), Attribute("lastname"))
             }
-            val result = index.search(query)
+            val response = index.search(query)
 
-            result.hits.map { it.parse(Contact.serializer()) }
+            response.hits.map { it.parse(Contact.serializer()) }
         }
     }
 

@@ -67,11 +67,11 @@ internal class TestSuiteIndexing {
                 val creations = mutableListOf<Task>()
                 val revisions = mutableListOf<Task>()
                 val deletions = mutableListOf<Task>()
-                val result = saveObject(data).also { creations += it }
-                val results = saveObjects(listOf(data, data)).also { creations += it }
-                val dataE = Data(result.objectID)
-                val dataF = Data(results.objectIDs[0]!!)
-                val dataG = Data(results.objectIDs[1]!!)
+                val response = saveObject(data).also { creations += it }
+                val responses = saveObjects(listOf(data, data)).also { creations += it }
+                val dataE = Data(response.objectID)
+                val dataF = Data(responses.objectIDs[0]!!)
+                val dataG = Data(responses.objectIDs[1]!!)
                 val datas = listOf(dataA, dataB, dataC, dataD, dataE, dataF, dataG)
 
                 saveObject(Data.serializer(), dataA).also { creations += it }

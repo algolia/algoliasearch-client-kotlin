@@ -52,26 +52,26 @@ internal class TestSuiteABTest {
             indexA.apply { saveObject(data).wait() shouldEqual TaskStatus.Published }
             indexB.apply { saveObject(data).wait() shouldEqual TaskStatus.Published }
             indexA.apply {
-                val response = clientAnalytics.addABTest(abTest)
+                val responseA = clientAnalytics.addABTest(abTest)
 
-                response.wait() shouldEqual TaskStatus.Published
-                clientAnalytics.getABTest(response.abTestID).let {
+                responseA.wait() shouldEqual TaskStatus.Published
+                clientAnalytics.getABTest(responseA.abTestID).let {
                     it.name shouldEqual abTest.name
                     it.endAt shouldEqual abTest.endAt
                     it.status shouldNotEqual ABTestStatus.Stopped
                     compareVariant(it.variantA, abTest.variantA)
                     compareVariant(it.variantB, abTest.variantB)
                 }
-                clientAnalytics.listABTests().abTests.find { it.abTestID == response.abTestID }.shouldNotBeNull()
-                clientAnalytics.stopABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
-                clientAnalytics.getABTest(response.abTestID).status shouldEqual ABTestStatus.Stopped
-                clientAnalytics.deleteABTest(response.abTestID).wait() shouldEqual TaskStatus.Published
+                clientAnalytics.listABTests().abTests.find { it.abTestID == responseA.abTestID }.shouldNotBeNull()
+                clientAnalytics.stopABTest(responseA.abTestID).wait() shouldEqual TaskStatus.Published
+                clientAnalytics.getABTest(responseA.abTestID).status shouldEqual ABTestStatus.Stopped
+                clientAnalytics.deleteABTest(responseA.abTestID).wait() shouldEqual TaskStatus.Published
 
-                val result = shouldFailWith<ResponseException> {
-                    clientAnalytics.getABTest(response.abTestID)
+                val responseB = shouldFailWith<ResponseException> {
+                    clientAnalytics.getABTest(responseA.abTestID)
                 }
 
-                result.response.status.value shouldEqual HttpStatusCode.NotFound.value
+                responseB.response.status.value shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }
