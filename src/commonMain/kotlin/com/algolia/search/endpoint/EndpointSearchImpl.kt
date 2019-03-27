@@ -11,6 +11,7 @@ import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacetValue
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.FacetStats
+import com.algolia.search.model.search.FacetValuesQuery
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import com.algolia.search.transport.RequestOptions
@@ -48,15 +49,14 @@ internal class EndpointSearchImpl(
 
     override suspend fun searchForFacetValues(
         attribute: Attribute,
-        facetQuery: String?,
-        query: Query?,
+        query: FacetValuesQuery,
         requestOptions: RequestOptions?
     ): ResponseSearchForFacetValue {
         val path = indexName.toPath("/facets/$attribute/query")
         val extraParams = json {
-            facetQuery?.let { KeyFacetQuery to it }
+            query.facetQuery?.let { KeyFacetQuery to it }
         }
-        val body = (query?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
+        val body = (query.query?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }

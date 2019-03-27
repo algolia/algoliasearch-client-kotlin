@@ -3,6 +3,7 @@ package suite
 import clientAdmin1
 import clientSearch
 import com.algolia.search.helper.toAttribute
+import com.algolia.search.model.search.FacetValuesQuery
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
@@ -57,7 +58,8 @@ internal class TestSuiteSearch {
             search.apply {
                 search(Query(facets = allFacets, filters = "company:tesla")).nbHits shouldEqual 1
                 search(Query(facets = allFacets, filters = "(company:tesla OR company:spacex)")).nbHits shouldEqual 2
-                val facetHits = searchForFacetValues(company, "a").facets.map { it.name }
+                val query = FacetValuesQuery("a")
+                val facetHits = searchForFacetValues(company, query).facets.map { it.name }
 
                 facetHits shouldContain "Algolia"
                 facetHits shouldContain "Amazon"

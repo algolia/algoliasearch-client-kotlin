@@ -6,6 +6,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacetValue
 import com.algolia.search.model.search.Cursor
+import com.algolia.search.model.search.FacetValuesQuery
 import com.algolia.search.model.search.Query
 import com.algolia.search.transport.RequestOptions
 
@@ -94,16 +95,13 @@ public interface EndpointSearch {
      * users can more easily drill down into the results. See more here.
      *
      * @param attribute The [Attribute] to facet on.
-     * @param facetQuery The search query used to search the facet attribute.
-     * Follows the same rules for an index query: a single character, a partial word, a word, or a phrase.
-     * @param query The [Query] used to search.
+     * @param query The [FacetValuesQuery] used to search.
      * @param requestOptions [RequestOptions] sent along with the query.
      * @return [ResponseSearchForFacetValue].
      */
     suspend fun searchForFacetValues(
         attribute: Attribute,
-        facetQuery: String? = null,
-        query: Query? = null,
+        query: FacetValuesQuery,
         requestOptions: RequestOptions? = null
     ): ResponseSearchForFacetValue
 

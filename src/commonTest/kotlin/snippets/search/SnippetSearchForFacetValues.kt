@@ -2,6 +2,7 @@ package snippets.search
 
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute
+import com.algolia.search.model.search.FacetValuesQuery
 import com.algolia.search.model.search.Query
 import io.ktor.client.features.ResponseException
 import runBlocking
@@ -26,8 +27,9 @@ internal class SnippetSearchForFacetValues {
         shouldFailWith<ResponseException> {
             runBlocking {
                 val attribute = Attribute("category")
+                val query = FacetValuesQuery(facetQuery = "phone")
 
-                index.searchForFacetValues(attribute, "phone")
+                index.searchForFacetValues(attribute, query)
             }
         }
     }
@@ -37,9 +39,12 @@ internal class SnippetSearchForFacetValues {
         shouldFailWith<ResponseException> {
             runBlocking {
                 val attribute = Attribute("category")
-                val query = Query(filters = "brand:Apple")
+                val query = FacetValuesQuery(
+                    facetQuery = "phone",
+                    query = Query(filters = "brand:Apple")
+                )
 
-                index.searchForFacetValues(attribute, "phone", query)
+                index.searchForFacetValues(attribute, query)
             }
         }
     }
@@ -49,12 +54,15 @@ internal class SnippetSearchForFacetValues {
         shouldFailWith<ResponseException> {
             runBlocking {
                 val attribute = Attribute("category")
-                val query = Query(filters = "brand:Apple")
+                val query = FacetValuesQuery(
+                    facetQuery = "phone",
+                    query = Query(filters = "brand:Apple")
+                )
                 val requestOptions = requestOptionsBuilder {
                     header("X-Algolia-User-ID", "user123")
                 }
 
-                index.searchForFacetValues(attribute, "phone", query, requestOptions)
+                index.searchForFacetValues(attribute, query, requestOptions)
             }
         }
     }
