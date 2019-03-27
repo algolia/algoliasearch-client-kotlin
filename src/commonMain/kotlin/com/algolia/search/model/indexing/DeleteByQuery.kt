@@ -5,11 +5,6 @@ import com.algolia.search.model.search.BoundingBox
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.Polygon
 import com.algolia.search.serialize.*
-import com.algolia.search.serialize.KeyFacetFilters
-import com.algolia.search.serialize.KeyFilters
-import com.algolia.search.serialize.KeyNumericFilters
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyTagFilters
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

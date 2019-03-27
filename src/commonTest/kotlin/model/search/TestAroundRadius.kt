@@ -2,9 +2,9 @@ package model.search
 
 import com.algolia.search.model.search.AroundRadius.*
 import com.algolia.search.serialize.KeyAll
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 
 internal class TestAroundRadius {

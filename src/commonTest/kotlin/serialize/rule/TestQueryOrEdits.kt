@@ -8,10 +8,10 @@ import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 import loadScratch
-import kotlin.test.Test
 import serialize.TestSerializer
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 
 internal class TestQueryOrEdits : TestSerializer<QueryOrEdits>(QueryOrEdits) {

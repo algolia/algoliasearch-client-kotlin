@@ -3,9 +3,9 @@ package serialize.search
 import attributeA
 import com.algolia.search.model.response.ResponseSearch
 import kotlinx.serialization.json.json
-import kotlin.test.Test
 import serialize.serializer.TestKSerializerHierarchy
 import shouldEqual
+import kotlin.test.Test
 
 
 internal class TestHierarchy {

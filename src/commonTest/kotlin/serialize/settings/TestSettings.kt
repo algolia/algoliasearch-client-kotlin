@@ -11,11 +11,11 @@ import indexA
 import int
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-import kotlin.test.Test
 import serialize.TestSerializer
 import serialize.search.TestSnippet
 import shouldEqual
 import string
+import kotlin.test.Test
 
 
 internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {

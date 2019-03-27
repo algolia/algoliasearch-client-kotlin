@@ -3,8 +3,8 @@ package model.search
 import attributeA
 import com.algolia.search.model.settings.NumericAttributeFilter
 import com.algolia.search.serialize.KeyEqualOnly
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 
 internal class TestNumericAttribute {

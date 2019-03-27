@@ -4,9 +4,9 @@ import com.algolia.search.model.search.ExactOnSingleWordQuery.*
 import com.algolia.search.serialize.KeyAttribute
 import com.algolia.search.serialize.KeyNone
 import com.algolia.search.serialize.KeyWord
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 
 internal class TestExactOnSingleWordQuery {

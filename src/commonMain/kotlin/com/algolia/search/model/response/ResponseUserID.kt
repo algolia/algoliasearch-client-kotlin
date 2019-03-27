@@ -1,7 +1,7 @@
 package com.algolia.search.model.response
 
-import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.ObjectID
+import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName

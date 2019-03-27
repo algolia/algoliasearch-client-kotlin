@@ -4,9 +4,9 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.json.json
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 
 internal class TestBatchOperation {

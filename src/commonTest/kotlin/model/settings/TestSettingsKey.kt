@@ -2,8 +2,8 @@ package model.settings
 
 import com.algolia.search.model.settings.SettingsKey.*
 import com.algolia.search.serialize.*
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 
 internal class TestSettingsKey {

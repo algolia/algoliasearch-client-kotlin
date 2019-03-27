@@ -12,10 +12,10 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import nestedLists
 import nestedListsJson
-import kotlin.test.Test
 import serialize.TestSerializer
 import shouldEqual
 import string
+import kotlin.test.Test
 
 
 internal class TestQuery : TestSerializer<Query>(Query.serializer()) {

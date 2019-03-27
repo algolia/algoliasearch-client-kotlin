@@ -4,9 +4,9 @@ import attributeA
 import attributeB
 import com.algolia.search.model.settings.RankingCriteria.*
 import com.algolia.search.serialize.*
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 
 internal class TestRankingCriteria {

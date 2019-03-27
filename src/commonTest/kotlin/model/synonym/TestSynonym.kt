@@ -5,9 +5,9 @@ import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
 import objectIDA
-import kotlin.test.Test
 import shouldEqual
 import shouldFailWith
+import kotlin.test.Test
 
 
 internal class TestSynonym {

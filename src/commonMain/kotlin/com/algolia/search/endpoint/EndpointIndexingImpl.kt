@@ -21,7 +21,6 @@ import com.algolia.search.model.response.creation.CreationObject
 import com.algolia.search.model.response.deletion.DeletionObject
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
-import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.serialize.*
 import com.algolia.search.transport.RequestOptions

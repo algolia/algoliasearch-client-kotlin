@@ -4,8 +4,8 @@ import com.algolia.search.serialize.KSerializerHierarchy
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 
 internal class TestKSerializerHierarchy {

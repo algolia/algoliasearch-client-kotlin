@@ -4,9 +4,9 @@ import boolean
 import com.algolia.search.model.search.TypoTolerance.*
 import com.algolia.search.serialize.KeyMin
 import com.algolia.search.serialize.KeyStrict
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 
 internal class TestTypoTolerance {

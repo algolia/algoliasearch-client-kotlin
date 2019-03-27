@@ -3,8 +3,8 @@ package serialize
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 
 internal abstract class TestSerializer<T>(

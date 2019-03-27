@@ -6,8 +6,8 @@ import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.request.RequestInsightsEvents
 import kotlinx.serialization.json.Json
 import loadScratch
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 
 internal class TestInsightsEvent {

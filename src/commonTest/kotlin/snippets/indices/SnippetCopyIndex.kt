@@ -1,6 +1,5 @@
 package snippets.indices
 
-import clientAdmin1
 import com.algolia.search.client.ClientAccount
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.APIKey

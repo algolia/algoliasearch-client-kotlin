@@ -1,7 +1,8 @@
 package com.algolia.search.model.request
 
 import com.algolia.search.serialize.KeyParams
-import kotlinx.serialization.*
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 
 @Serializable

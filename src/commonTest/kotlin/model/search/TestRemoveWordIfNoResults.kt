@@ -5,9 +5,9 @@ import com.algolia.search.serialize.KeyAllOptional
 import com.algolia.search.serialize.KeyFirstWords
 import com.algolia.search.serialize.KeyLastWords
 import com.algolia.search.serialize.KeyNone
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 
 internal class TestRemoveWordIfNoResults {

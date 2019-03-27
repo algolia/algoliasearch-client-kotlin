@@ -6,8 +6,8 @@ import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.transport.Transport
 import runBlocking
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 
 internal class TestCallableHosts {

@@ -4,8 +4,8 @@ import attributeA
 import attributeAll
 import attributeB
 import com.algolia.search.model.search.Snippet
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 
 internal class TestSnippet {

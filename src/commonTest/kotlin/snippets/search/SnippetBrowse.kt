@@ -3,7 +3,6 @@ package snippets.search
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.search.Query
 import io.ktor.client.features.ResponseException
-import kotlinx.coroutines.CoroutineExceptionHandler
 import runBlocking
 import shouldFailWith
 import snippets.index

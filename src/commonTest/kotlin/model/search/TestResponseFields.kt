@@ -2,9 +2,9 @@ package model.search
 
 import com.algolia.search.model.search.ResponseFields.*
 import com.algolia.search.serialize.*
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 
 internal class TestResponseFields {

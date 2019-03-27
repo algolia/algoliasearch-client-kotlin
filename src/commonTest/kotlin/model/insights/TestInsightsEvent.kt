@@ -7,9 +7,9 @@ import com.algolia.search.helper.toQueryID
 import com.algolia.search.model.insights.InsightsEvent
 import indexA
 import objectIDA
-import kotlin.test.Test
 import shouldEqual
 import shouldFailWith
+import kotlin.test.Test
 
 
 internal class TestInsightsEvent {

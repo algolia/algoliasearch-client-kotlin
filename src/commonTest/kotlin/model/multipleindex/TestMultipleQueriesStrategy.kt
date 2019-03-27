@@ -3,9 +3,9 @@ package model.multipleindex
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy.*
 import com.algolia.search.serialize.KeyNone
 import com.algolia.search.serialize.KeyStopIfEnoughMatches
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 
 internal class TestMultipleQueriesStrategy {

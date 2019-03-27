@@ -2,8 +2,8 @@ package model
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.Attribute
-import kotlin.test.Test
 import shouldFailWith
+import kotlin.test.Test
 
 
 internal class TestAttribute {
