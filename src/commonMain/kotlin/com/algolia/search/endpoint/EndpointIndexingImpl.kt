@@ -124,7 +124,7 @@ internal class EndpointIndexingImpl(
         return batch(operations, requestOptions)
     }
 
-    override suspend fun deleteObjectBy(query: DeleteByQuery, requestOptions: RequestOptions?): RevisionIndex {
+    override suspend fun deleteObjectsBy(query: DeleteByQuery, requestOptions: RequestOptions?): RevisionIndex {
         val path = indexName.toPath("/deleteByQuery")
         val params = RequestParams(query.toJsonNoDefaults().urlEncode())
         val body = Json.noDefaults.stringify(RequestParams.serializer(), params)

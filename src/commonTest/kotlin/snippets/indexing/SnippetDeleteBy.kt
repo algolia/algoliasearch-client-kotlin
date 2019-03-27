@@ -10,20 +10,21 @@ import kotlin.test.Test
 
 internal class SnippetDeleteBy : TestSnippets() {
 
-//    suspend fun Index.deleteObjectBy(
+//    suspend fun Index.deleteObjectsBy(
 //        [query](#method-param-filterParameters): __DeleteByQuery__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): RevisionIndex
 
     @Test
-    fun deleteObjectBy() {
+    fun deleteObjectsBy() {
         runBlocking {
             val query = DeleteByQuery(
                 filters = "category:car",
                 aroundLatLng = Point(40.71f, -74.01f),
                 aroundRadius = AroundRadius.InMeters(40)
             )
-            index.deleteObjectBy(query)
+
+            index.deleteObjectsBy(query)
         }
     }
 }

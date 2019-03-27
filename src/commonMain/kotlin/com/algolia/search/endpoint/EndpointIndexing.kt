@@ -87,7 +87,7 @@ public interface EndpointIndexing {
         requestOptions: RequestOptions? = null
     ): ResponseBatch
 
-    suspend fun deleteObjectBy(
+    suspend fun deleteObjectsBy(
         query: DeleteByQuery,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
