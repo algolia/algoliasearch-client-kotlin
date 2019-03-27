@@ -17,10 +17,10 @@ internal class SnippetSearchUserID {
 //    ): ResponseSearchUserID
 //
 //    data class UserIDQuery(
-//        val #{query}: __String?__ = null,
-//        val #{clusterName}: __ClusterName?__ = null,
-//        val #{page}: __Int?__ = null,
-//        val #{hitsPerPage}: __Int?__ = null
+//        var #{query}: __String?__ = null,
+//        var #{clusterName}: __ClusterName?__ = null,
+//        var #{page}: __Int?__ = null,
+//        var #{hitsPerPage}: __Int?__ = null
 //    )
 
     @Test

@@ -15,10 +15,10 @@ internal class SnippetSearchSynonyms : TestSnippets() {
 //    ): ResponseSearchSynonyms
 //
 //    data class SynonymQuery(
-//        #{query}: __String?__ = null,
-//        #{page}: __Int?__ = null,
-//        #{hitsPerPage}: __Int?__ = null,
-//        [types](#method-param-type): __List<SynonymType>?__ = null,
+//        var #{query}: __String?__ = null,
+//        var #{page}: __Int?__ = null,
+//        var #{hitsPerPage}: __Int?__ = null,
+//        var [types](#method-param-type): __List<SynonymType>?__ = null,
 //    )
 
     @Test
