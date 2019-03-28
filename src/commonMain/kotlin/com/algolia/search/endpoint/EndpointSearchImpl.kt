@@ -26,14 +26,14 @@ internal class EndpointSearchImpl(
     override val indexName: IndexName
 ) : EndpointSearch {
 
-    override suspend fun search(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
+    override suspend fun search(query: Query, requestOptions: RequestOptions?): ResponseSearch {
         val body = query.toBody()
 
         return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/query"), requestOptions, body)
     }
 
-    override suspend fun browse(query: Query?, requestOptions: RequestOptions?): ResponseSearch {
-        val params = RequestParams(query?.toJsonNoDefaults()?.urlEncode())
+    override suspend fun browse(query: Query, requestOptions: RequestOptions?): ResponseSearch {
+        val params = RequestParams(query.toJsonNoDefaults().urlEncode())
         val body = Json.noDefaults.stringify(RequestParams.serializer(), params)
 
         return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/browse"), requestOptions, body)
@@ -49,14 +49,14 @@ internal class EndpointSearchImpl(
 
     override suspend fun searchForFacetValues(
         attribute: Attribute,
-        query: FacetValuesQuery?,
+        query: FacetValuesQuery,
         requestOptions: RequestOptions?
     ): ResponseSearchForFacetValues {
         val path = indexName.toPath("/facets/$attribute/query")
         val extraParams = json {
-            query?.facetQuery?.let { KeyFacetQuery to it }
+            query.facetQuery?.let { KeyFacetQuery to it }
         }
-        val body = (query?.query?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
+        val body = (query.query?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }

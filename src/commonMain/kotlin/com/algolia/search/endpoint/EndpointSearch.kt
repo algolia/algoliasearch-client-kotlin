@@ -26,7 +26,7 @@ public interface EndpointSearch {
      * @param requestOptions [RequestOptions] sent along with the query.
      * @return [ResponseSearch].
      */
-    suspend fun search(query: Query? = null, requestOptions: RequestOptions? = null): ResponseSearch
+    suspend fun search(query: Query = Query(), requestOptions: RequestOptions? = null): ResponseSearch
 
     /**
      * Get all index content without any record limit. Can be used for backups.
@@ -52,7 +52,7 @@ public interface EndpointSearch {
      * @param requestOptions [RequestOptions] sent along with the query.
      * @return [ResponseSearch].
      */
-    suspend fun browse(query: Query? = null, requestOptions: RequestOptions? = null): ResponseSearch
+    suspend fun browse(query: Query = Query(), requestOptions: RequestOptions? = null): ResponseSearch
 
     /**
      * @param cursor [Cursor] indicating the location to resume browsing from.
@@ -101,7 +101,7 @@ public interface EndpointSearch {
      */
     suspend fun searchForFacetValues(
         attribute: Attribute,
-        query: FacetValuesQuery? = null,
+        query: FacetValuesQuery = FacetValuesQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchForFacetValues
 

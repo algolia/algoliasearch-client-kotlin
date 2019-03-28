@@ -75,6 +75,6 @@ internal fun List<IndexQuery>.toBody(strategy: MultipleQueriesStrategy?): String
     )
 }
 
-internal fun Query?.toBody(): String {
-    return this?.let { Json.noDefaults.stringify(Query.serializer(), it) } ?: "{}"
+internal fun Query.toBody(): String {
+    return Json.noDefaults.stringify(Query.serializer(), this)
 }

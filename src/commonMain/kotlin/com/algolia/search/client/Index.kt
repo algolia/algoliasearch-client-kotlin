@@ -65,7 +65,7 @@ public data class Index internal constructor(
      * @return [ResponseSearch]
      */
     public suspend fun browseObjects(
-        query: Query? = null,
+        query: Query = Query(),
         requestOptions: RequestOptions? = null,
         block: suspend (ResponseSearch) -> Unit
     ) {
