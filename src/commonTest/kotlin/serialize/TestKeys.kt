@@ -319,6 +319,7 @@ internal class TestKeys {
         KeyDisjunctiveFacets shouldEqual "disjunctiveFacets"
         KeyEventsScoring shouldEqual "eventsScoring"
         KeyFacetsScoring shouldEqual "facetsScoring"
+        Key_Exhaustive_Faceting shouldEqual "exhaustive_faceting"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

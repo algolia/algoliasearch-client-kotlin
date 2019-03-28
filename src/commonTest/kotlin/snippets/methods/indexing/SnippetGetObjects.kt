@@ -34,8 +34,10 @@ internal class SnippetGetObjects: TestSnippets() {
 
     @Test
     fun getObject() {
-        runBlocking {
-            index.getObject(ObjectID("myID1"))
+        shouldFailWith<ResponseException> {
+            runBlocking {
+                index.getObject(ObjectID("myID1"))
+            }
         }
     }
 

@@ -325,6 +325,7 @@ internal const val KeyEvents = "events"
 internal const val KeyDisjunctiveFacets = "disjunctiveFacets"
 internal const val KeyEventsScoring = "eventsScoring"
 internal const val KeyFacetsScoring = "facetsScoring"
+internal const val Key_Exhaustive_Faceting = "exhaustive_faceting"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"
