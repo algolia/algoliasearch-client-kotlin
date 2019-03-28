@@ -17,7 +17,7 @@ internal class SnippetSearchForFacetValues {
 //        #{attribute}: __Attribute__,
 //        #{query}: __FacetValuesQuery?__ = null,
 //        #{requestOptions}: __RequestOptions?__ = null
-//    ): ResponseSearchForFacetValue
+//    ): ResponseSearchForFacetValues
 //
 //    data class FacetValuesQuery(
 //        var #{facetQuery}: __String__? = null,

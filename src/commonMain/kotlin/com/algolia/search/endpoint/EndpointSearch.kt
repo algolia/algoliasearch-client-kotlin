@@ -4,7 +4,7 @@ import com.algolia.search.filter.FilterFacet
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.model.response.ResponseSearchForFacetValue
+import com.algolia.search.model.response.ResponseSearchForFacetValues
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.FacetValuesQuery
 import com.algolia.search.model.search.Query
@@ -97,13 +97,13 @@ public interface EndpointSearch {
      * @param attribute The [Attribute] to facet on.
      * @param query The [FacetValuesQuery] used to search.
      * @param requestOptions [RequestOptions] sent along with the query.
-     * @return [ResponseSearchForFacetValue].
+     * @return [ResponseSearchForFacetValues].
      */
     suspend fun searchForFacetValues(
         attribute: Attribute,
         query: FacetValuesQuery? = null,
         requestOptions: RequestOptions? = null
-    ): ResponseSearchForFacetValue
+    ): ResponseSearchForFacetValues
 
     /**
      * Perform a [EndpointMultipleIndex.multipleQueries] and aggregate the results into a single [ResponseSearch].

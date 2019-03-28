@@ -8,7 +8,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.request.RequestParams
 import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.model.response.ResponseSearchForFacetValue
+import com.algolia.search.model.response.ResponseSearchForFacetValues
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.FacetValuesQuery
@@ -51,7 +51,7 @@ internal class EndpointSearchImpl(
         attribute: Attribute,
         query: FacetValuesQuery?,
         requestOptions: RequestOptions?
-    ): ResponseSearchForFacetValue {
+    ): ResponseSearchForFacetValues {
         val path = indexName.toPath("/facets/$attribute/query")
         val extraParams = json {
             query?.facetQuery?.let { KeyFacetQuery to it }
