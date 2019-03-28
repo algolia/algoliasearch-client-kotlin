@@ -16,12 +16,12 @@ internal class SnippetSearchRules : TestSnippets() {
 //
 //    @Serializable
 //    data class RuleQuery(
-//        val #{query}: __String?__ = null,
-//        val #{anchoring}: __Anchoring?__ = null,
-//        val #{context}: __String?__ = null,
-//        val #{page}: __Int?__ = null,
-//        val #{hitsPerPage}: __Int?__ = null,
-//        val #{enabled}: __Boolean?__ = null
+//        var #{query}: __String?__ = null,
+//        var #{anchoring}: __Anchoring?__ = null,
+//        var #{context}: __String?__ = null,
+//        var #{page}: __Int?__ = null,
+//        var #{hitsPerPage}: __Int?__ = null,
+//        var #{enabled}: __Boolean?__ = null
 //    )
 
     @Test

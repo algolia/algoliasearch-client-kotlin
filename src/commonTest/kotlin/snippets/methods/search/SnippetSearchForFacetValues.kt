@@ -15,7 +15,7 @@ internal class SnippetSearchForFacetValues {
 
 //    suspend fun Index.searchForFacetValues(
 //        #{attribute}: __Attribute__,
-//        #{query}: __FacetValuesQuery?__ = null,
+//        #{query}: __FacetValuesQuery__ = FacetValuesQuery(),
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseSearchForFacetValues
 //

@@ -17,7 +17,7 @@ import kotlin.test.Test
 internal class SnippetSearch {
 
 //     suspend fun Index.search(
-//        #{query}: __Query?__ = null,
+//        #{query}: __Query__ = Query(),
 //        #{requestOptions}: __RequestOptions?__ = null
 //     ): ResponseSearch
 //
