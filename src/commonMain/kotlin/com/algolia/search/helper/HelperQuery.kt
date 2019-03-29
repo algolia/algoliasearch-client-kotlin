@@ -1,21 +1,15 @@
-package com.algolia.search.filter
+package com.algolia.search.helper
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.*
 
 @DslMarker
-annotation class QueryHelper
-
-internal val all = Attribute("*")
+annotation class HelperQuery
 
 public fun queryBuilder(init: Query.() -> Unit) = Query().apply(init)
 
 public fun Query.setAttributesToRetrieve(vararg attributes: Attribute, excludeAttributes: Boolean = false) {
-    attributesToRetrieve = if (excludeAttributes) {
-        if (attributes.isNotEmpty()) {
-            attributes.map { Attribute("-$it") }.plus(all)
-        } else listOf()
-    } else attributes.toList()
+    attributesToRetrieve = buildAttributesToRetrieve(*attributes, excludeAttributes = excludeAttributes)
 }
 
 public fun Query.setAllAttributesToRetrieve() {
@@ -80,15 +74,4 @@ public fun Query.setAnalyticsTags(vararg tags: String) {
 
 public fun Query.setResponseFields(vararg responseFields: ResponseFields) {
     this.responseFields = responseFields.toList()
-}
-
-/**
- * When this attribute is set to true, the list of words in [optionalWords] will be replaced by all the words
- * found in the current [query].
- * This will trigger the engine to return records containing any word matching the query (OR operation).
- * Otherwise, the engine return records containing all the word matching the query (AND operation).
- * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalWords/#doing-an-or-between-all-words-of-a-query]
- */
-public fun Query.setIsEveryWordInQueryOptional() {
-    query?.let { optionalWords = listOf() }
 }

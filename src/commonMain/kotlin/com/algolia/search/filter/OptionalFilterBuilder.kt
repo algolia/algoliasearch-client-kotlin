@@ -7,7 +7,6 @@ import com.algolia.search.model.Attribute
  * @see FilterBuilderInterface
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/optionalFilters/]
  */
-@QueryHelper
 public class OptionalFilterBuilder(init: (OptionalFilterBuilder.() -> Unit)? = null) :
     FilterBuilderInterface<FilterFacet> {
 

@@ -7,7 +7,6 @@ import com.algolia.search.model.Attribute
  * @see FilterBuilderInterface
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
  */
-@QueryHelper
 public class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInterface<Filter> {
 
     private val groups: GroupMap<Filter> = mutableMapOf()

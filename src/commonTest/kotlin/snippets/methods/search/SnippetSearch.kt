@@ -1,7 +1,7 @@
 package snippets.methods.search
 
-import com.algolia.search.filter.queryBuilder
-import com.algolia.search.filter.setAttributesToRetrieve
+import com.algolia.search.helper.queryBuilder
+import com.algolia.search.helper.setAttributesToRetrieve
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName

@@ -1,7 +1,6 @@
-package filter
+package helper
 
-import com.algolia.search.filter.*
-import com.algolia.search.helper.limit
+import com.algolia.search.helper.*
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.AlternativesAsExact
 import com.algolia.search.model.search.QueryLanguage
@@ -27,6 +26,7 @@ internal class TestQueryHelper {
                 all
             )
             setAllAttributesToRetrieve()
+            attributesToRetrieve shouldEqual listOf(all)
         }
     }
 
