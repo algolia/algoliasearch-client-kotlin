@@ -1,9 +1,8 @@
 package snippets.methods.search
 
-import com.algolia.search.helper.queryBuilder
-import com.algolia.search.helper.setAttributesToRetrieve
+import com.algolia.search.dsl.attributesToRetrieve
+import com.algolia.search.dsl.query
 import com.algolia.search.helper.requestOptionsBuilder
-import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
 import io.ktor.client.features.ResponseException
@@ -35,10 +34,13 @@ internal class SnippetSearch {
 
                 val indexName = IndexName("contacts")
                 val index = client.initIndex(indexName)
-                val query = queryBuilder {
+                val query = query {
                     query = "query string"
                     hitsPerPage = 50
-                    setAttributesToRetrieve(Attribute("firstname"), Attribute("lastname"))
+                    attributesToRetrieve {
+                        +"firstname"
+                        +"lastname"
+                    }
                 }
                 val response = index.search(query)
 

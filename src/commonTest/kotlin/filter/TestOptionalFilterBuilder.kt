@@ -17,7 +17,7 @@ internal class TestOptionalFilterBuilder {
 
     @Test
     fun isEmpty() {
-        OptionalFilterBuilder {
+        OptionalFilterBuilder().apply {
             isEmpty().shouldBeTrue()
             groupAndA += facetA
             isEmpty().shouldBeFalse()
@@ -26,7 +26,7 @@ internal class TestOptionalFilterBuilder {
 
     @Test
     fun clear() {
-        OptionalFilterBuilder {
+        OptionalFilterBuilder().apply {
             groupAndA += facetA
             groupAndB += facetB
             clear()
@@ -36,7 +36,7 @@ internal class TestOptionalFilterBuilder {
 
     @Test
     fun build() {
-        OptionalFilterBuilder {
+        OptionalFilterBuilder().apply {
             groupAndA += facetA
             groupAndA += facetB
             groupOrA += facetA

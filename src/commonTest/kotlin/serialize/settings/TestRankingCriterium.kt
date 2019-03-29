@@ -2,14 +2,14 @@ package serialize.settings
 
 import attributeA
 import attributeB
-import com.algolia.search.model.settings.RankingCriteria
-import com.algolia.search.model.settings.RankingCriteria.*
+import com.algolia.search.model.settings.RankingCriterium
+import com.algolia.search.model.settings.RankingCriterium.*
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 import unknown
 
 
-internal class TestRankingCriteria : TestSerializer<RankingCriteria>(RankingCriteria) {
+internal class TestRankingCriterium : TestSerializer<RankingCriterium>(RankingCriterium) {
 
     override val items = listOf(
         Geo to JsonLiteral(Geo.raw),

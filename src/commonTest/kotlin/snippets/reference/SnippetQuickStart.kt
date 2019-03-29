@@ -4,7 +4,7 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.search.Query
-import com.algolia.search.model.settings.CustomRankingCriteria
+import com.algolia.search.model.settings.CustomRankingCriterium
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
 import io.ktor.client.features.ResponseException
@@ -41,7 +41,7 @@ internal class SnippetQuickStart : TestSnippets() {
         runBlocking {
             val followers = Attribute("followers")
             val settings = Settings(
-                customRanking = listOf(CustomRankingCriteria.Desc(followers))
+                customRanking = listOf(CustomRankingCriterium.Desc(followers))
             )
 
             index.setSettings(settings)

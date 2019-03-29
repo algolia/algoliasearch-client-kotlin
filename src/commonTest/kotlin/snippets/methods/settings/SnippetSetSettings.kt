@@ -1,7 +1,7 @@
 package snippets.methods.settings
 
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.settings.CustomRankingCriteria
+import com.algolia.search.model.settings.CustomRankingCriterium
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
 import runBlocking
@@ -30,7 +30,7 @@ internal class SnippetSetSettings : TestSnippets() {
                     SearchableAttribute.Default(address)
                 ),
                 customRanking = listOf(
-                    CustomRankingCriteria.Desc(followers)
+                    CustomRankingCriterium.Desc(followers)
                 )
             )
 

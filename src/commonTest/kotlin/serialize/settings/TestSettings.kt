@@ -27,9 +27,9 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             attributesForFaceting = attributes.map { AttributeForFaceting.Default(it) },
             unretrievableAttributes = attributes,
             attributesToRetrieve = attributes,
-            // RankingCriteria
-            ranking = listOf(RankingCriteria.Geo),
-            customRanking = listOf(CustomRankingCriteria.Asc(attributeA)),
+            // RankingCriterium
+            ranking = listOf(RankingCriterium.Geo),
+            customRanking = listOf(CustomRankingCriterium.Asc(attributeA)),
             replicas = listOf(indexA),
             // Faceting
             maxValuesPerFacet = int,
@@ -88,9 +88,9 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyAttributesForFaceting to attributesJson
             KeyUnretrievableAttributes to attributesJson
             KeyAttributesToRetrieve to attributesJson
-            // RankingCriteria
-            KeyRanking to jsonArray { +RankingCriteria.Geo.raw }
-            KeyCustomRanking to jsonArray { +CustomRankingCriteria.Asc(attributeA).raw }
+            // RankingCriterium
+            KeyRanking to jsonArray { +RankingCriterium.Geo.raw }
+            KeyCustomRanking to jsonArray { +CustomRankingCriterium.Asc(attributeA).raw }
             KeyReplicas to jsonArray { +indexA.raw }
             // Faceting
             KeyMaxValuesPerFacet to int

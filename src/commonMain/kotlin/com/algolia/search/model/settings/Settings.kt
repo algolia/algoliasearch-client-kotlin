@@ -1,5 +1,6 @@
 package com.algolia.search.model.settings
 
+import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.*
@@ -9,13 +10,14 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
+@DSLParameters
 public data class Settings(
     @SerialName(KeySearchableAttributes) var searchableAttributes: List<SearchableAttribute>? = null,
     @SerialName(KeyAttributesForFaceting) var attributesForFaceting: List<AttributeForFaceting>? = null,
     @SerialName(KeyUnretrievableAttributes) var unretrievableAttributes: List<Attribute>? = null,
     @SerialName(KeyAttributesToRetrieve) var attributesToRetrieve: List<Attribute>? = null,
-    @SerialName(KeyRanking) var ranking: List<RankingCriteria>? = null,
-    @SerialName(KeyCustomRanking) var customRanking: List<CustomRankingCriteria>? = null,
+    @SerialName(KeyRanking) var ranking: List<RankingCriterium>? = null,
+    @SerialName(KeyCustomRanking) var customRanking: List<CustomRankingCriterium>? = null,
     @SerialName(KeyReplicas) var replicas: List<IndexName>? = null,
     @SerialName(KeyMaxValuesPerFacet) var maxValuesPerFacet: Int? = null,
     @SerialName(KeySortFacetValuesBy) var sortFacetValuesBy: SortFacetValuesBy? = null,

@@ -18,14 +18,14 @@ internal class TestFilterBuilderShowcase {
         val groupA = GroupAnd("groupA")
         val groupB = GroupAnd("groupB")
 
-        FilterBuilder {
+        FilterBuilder().apply {
             groupA += categoryBook
             groupA += categoryOffice
             groupA += categoryGift
             buildTest() shouldEqual "category:book AND category:office AND category:gift"
         }
 
-        FilterBuilder {
+        FilterBuilder().apply {
             groupA += categoryBook
             groupA += categoryOffice
             groupB += categoryGift
@@ -48,7 +48,7 @@ internal class TestFilterBuilderShowcase {
         val categories = GroupOr("categories")
         val colors = GroupOr("colors")
 
-        FilterBuilder {
+        FilterBuilder().apply {
             categories += categoryBook
             categories += categoryOffice
             buildTest() shouldEqual "category:book OR category:office"
@@ -79,7 +79,7 @@ internal class TestFilterBuilderShowcase {
         val categories = GroupOr("categories")
         val prices = GroupAnd("prices")
 
-        FilterBuilder {
+        FilterBuilder().apply {
             categories += listOf(categoryBook, categoryOffice)
             buildTest() shouldEqual "category:book OR category:office"
             prices += comparison
@@ -100,7 +100,7 @@ internal class TestFilterBuilderShowcase {
         val range = FilterRange(euro, 5.0, 20.0)
         val currency = GroupAnd("currency")
 
-        FilterBuilder {
+        FilterBuilder().apply {
             currency += comparison
             currency += range
             buildTest() shouldEqual "euro != 15.0 AND euro:5.0 TO 20.0"
@@ -119,7 +119,7 @@ internal class TestFilterBuilderShowcase {
         val groupB = GroupOr("groupB")
 
         // In this scenario, we want to add them to the same OR group
-        FilterBuilder {
+        FilterBuilder().apply {
             groupA += comparisonPrice
             groupA += rangeLike
             buildTest() shouldEqual "price != 15.0 OR nbLike:100.0 TO 200.0"
@@ -127,7 +127,7 @@ internal class TestFilterBuilderShowcase {
         }
 
         // In this scenario, we want to add them to different OR group
-        FilterBuilder {
+        FilterBuilder().apply {
             groupA += comparisonPrice
             groupB += rangeLike
             buildTest() shouldEqual "price != 15.0 AND nbLike:100.0 TO 200.0"

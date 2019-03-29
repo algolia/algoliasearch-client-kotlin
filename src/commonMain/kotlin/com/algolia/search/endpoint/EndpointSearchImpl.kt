@@ -1,11 +1,11 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.filter.*
+import com.algolia.search.dsl.filters
+import com.algolia.search.filter.FilterFacet
+import com.algolia.search.filter.GroupAnd
+import com.algolia.search.filter.GroupOr
 import com.algolia.search.helper.requestOptionsBuilder
-import com.algolia.search.helper.setAttributesToHighlight
-import com.algolia.search.helper.setAttributesToRetrieve
-import com.algolia.search.helper.setFacets
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.multipleindex.IndexQuery
@@ -99,10 +99,10 @@ internal class EndpointSearchImpl(
         orFilters: List<FilterFacet>
     ): List<IndexQuery> {
         return query.copy().apply {
-            filters = FilterBuilder {
+            filters {
                 groupAnd += andFilters
                 groupOr += orFilters
-            }.build()
+            }
         }.let { listOf(IndexQuery(indexName, it)) }
     }
 
@@ -114,15 +114,15 @@ internal class EndpointSearchImpl(
     ): List<IndexQuery> {
         return disjunctiveFacets.map { attribute ->
             query.copy().apply {
-                setFacets(attribute)
-                setAttributesToRetrieve()
-                setAttributesToHighlight()
-                filters = FilterBuilder {
-                    groupAnd += andFilters
-                    groupOr += orFilters.filter { it.attribute != attribute }
-                }.build()
+                facets = listOf(attribute)
+                attributesToRetrieve = listOf()
+                attributesToHighlight = listOf()
                 hitsPerPage = 0
                 analytics = false
+                filters {
+                    groupAnd += andFilters
+                    groupOr += orFilters.filter { it.attribute != attribute }
+                }
             }
         }.map { IndexQuery(indexName, it) }
     }

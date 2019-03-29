@@ -20,7 +20,7 @@ internal class TestFilterBuilder {
 
     @Test
     fun isEmpty() {
-        FilterBuilder {
+        FilterBuilder().apply {
             isEmpty().shouldBeTrue()
             groupAndA += facetA
             isEmpty().shouldBeFalse()
@@ -29,7 +29,7 @@ internal class TestFilterBuilder {
 
     @Test
     fun clear() {
-        FilterBuilder {
+        FilterBuilder().apply {
             groupAndA += facetA
             groupAndB += facetB
             clear()
@@ -39,7 +39,7 @@ internal class TestFilterBuilder {
 
     @Test
     fun print() {
-        FilterBuilder {
+        FilterBuilder().apply {
             groupAndA += facetA
             groupAndA += facetB
             groupAndB += facetA

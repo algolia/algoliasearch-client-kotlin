@@ -1,5 +1,6 @@
 package com.algolia.search.filter
 
+import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 
 
@@ -7,13 +8,10 @@ import com.algolia.search.model.Attribute
  * @see FilterBuilderInterface
  * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/filters/]
  */
-public class FilterBuilder(init: (FilterBuilder.() -> Unit)? = null) : FilterBuilderInterface<Filter> {
+@DSLParameters
+public class FilterBuilder : FilterBuilderInterface<Filter> {
 
     private val groups: GroupMap<Filter> = mutableMapOf()
-
-    init {
-        init?.invoke(this)
-    }
 
     override operator fun Group.plusAssign(filter: Filter) {
         groups.add(this, filter)
