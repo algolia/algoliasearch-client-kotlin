@@ -70,6 +70,10 @@
     "attribute1",
     "attribute2"
   ],
+  "queryLanguages": [
+    "fr",
+    "en"
+  ],
   "enableRules": false,
   "queryType": "prefixNone",
   "removeWordsIfNoResults": "allOptional",
