@@ -2,6 +2,7 @@ package snippets.methods.rule
 
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.rule.*
+import com.algolia.search.model.search.Query
 import runBlocking
 import snippets.TestSnippets
 import kotlin.test.Test
@@ -26,7 +27,7 @@ internal class SnippetSaveRule : TestSnippets() {
                     anchoring = Anchoring.Contains
                 ),
                 consequence = Consequence(
-                    params = Params(filters = "category = 1")
+                    query = Query(filters = "category = 1")
                 ),
                 validity = listOf(TimeRange(0, 10))
             )

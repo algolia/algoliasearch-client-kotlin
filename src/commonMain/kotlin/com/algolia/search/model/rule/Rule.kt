@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 public data class Rule(
     @SerialName(KeyObjectID) val objectID: ObjectID,
     @SerialName(KeyCondition) val condition: Condition,
-    @SerialName(KeyConsequence) val consequence: Consequence,
+    @SerialName(KeyConsequence) @Serializable(Consequence.Companion::class) val consequence: Consequence,
     @SerialName(KeyEnabled) val enabled: Boolean? = null,
     @SerialName(KeyValidity) val validity: List<TimeRange>? = null,
     @SerialName(KeyDescription) val description: String? = null
