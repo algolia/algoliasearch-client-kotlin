@@ -78,6 +78,10 @@
   "queryType": "prefixNone",
   "removeWordsIfNoResults": "allOptional",
   "advancedSyntax": true,
+  "advancedSyntaxFeatures": [
+    "exactPhrase",
+    "excludeWords"
+  ],
   "optionalWords": [
     "word1",
     "word2"

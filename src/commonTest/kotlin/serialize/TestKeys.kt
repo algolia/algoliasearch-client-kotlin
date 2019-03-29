@@ -320,6 +320,9 @@ internal class TestKeys {
         KeyEventsScoring shouldEqual "eventsScoring"
         KeyFacetsScoring shouldEqual "facetsScoring"
         Key_Exhaustive_Faceting shouldEqual "exhaustive_faceting"
+        KeyExactPhrase shouldEqual "exactPhrase"
+        KeyExcludeWords shouldEqual "excludeWords"
+        KeyAdvancedSyntaxFeatures shouldEqual "advancedSyntaxFeatures"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

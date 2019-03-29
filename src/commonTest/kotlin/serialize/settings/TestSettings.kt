@@ -80,7 +80,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             minProximity = int,
             responseFields = listOf(ResponseFields.NbHits),
             maxFacetHits = int,
-            version = int
+            version = int,
+            advancedSyntaxFeatures = listOf(AdvancedSyntaxFeatures.ExcludeWords, AdvancedSyntaxFeatures.ExactPhrase)
         ) to json {
             // Attributes
             KeySearchableAttributes to attributesJson
@@ -144,6 +145,10 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyResponseFields to jsonArray { +ResponseFields.NbHits.raw }
             KeyMaxFacetHits to int
             KeyVersion to int
+            KeyAdvancedSyntaxFeatures to jsonArray {
+                +KeyExcludeWords
+                +KeyExactPhrase
+            }
         }
     )
 

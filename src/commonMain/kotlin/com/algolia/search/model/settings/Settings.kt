@@ -44,6 +44,7 @@ public data class Settings(
     @SerialName(KeyQueryType) var queryType: QueryType? = null,
     @SerialName(KeyRemoveWordsIfNoResults) var removeWordsIfNoResults: RemoveWordIfNoResults? = null,
     @SerialName(KeyAdvancedSyntax) var advancedSyntax: Boolean? = null,
+    @SerialName(KeyAdvancedSyntaxFeatures) var advancedSyntaxFeatures: List<AdvancedSyntaxFeatures>? = null,
     @SerialName(KeyOptionalWords) var optionalWords: List<String>? = null,
     @SerialName(KeyDisablePrefixOnAttributes) var disablePrefixOnAttributes: List<Attribute>? = null,
     @SerialName(KeyDisableExactOnAttributes) var disableExactOnAttributes: List<Attribute>? = null,
