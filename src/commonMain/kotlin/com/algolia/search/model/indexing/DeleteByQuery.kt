@@ -1,9 +1,6 @@
 package com.algolia.search.model.indexing
 
-import com.algolia.search.model.search.AroundRadius
-import com.algolia.search.model.search.BoundingBox
-import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.Polygon
+import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -58,7 +55,7 @@ public data class DeleteByQuery(
      * Engine default: 1
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundPrecision/]
      */
-    @SerialName(KeyAroundPrecision) var aroundPrecision: Int? = null,
+    @SerialName(KeyAroundPrecision) var aroundPrecision: AroundPrecision? = null,
 
     /**
      * Search inside a rectangular area (in geo coordinates).
