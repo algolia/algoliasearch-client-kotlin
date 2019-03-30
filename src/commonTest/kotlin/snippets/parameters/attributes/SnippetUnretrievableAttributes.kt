@@ -9,14 +9,9 @@ import kotlin.test.Test
 
 internal class SnippetUnretrievableAttributes : TestSnippets() {
 
-    @Test
-    fun parameter() {
-        settings {
-            unretrieveableAttributes {
-                +"attribute"
-            }
-        }
-    }
+//    unretrieveableAttributes {
+//        +"attribute"
+//    }
 
     @Test
     fun snippet() {

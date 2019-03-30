@@ -9,15 +9,10 @@ import kotlin.test.Test
 
 internal class SnippetReplicas : TestSnippets() {
 
-    @Test
-    fun parameter() {
-        settings {
-            replicas {
-                +"replica_index1"
-                +"replica_index2"
-            }
-        }
-    }
+//    replicas {
+//        +"replica_index1"
+//        +"replica_index2"
+//    }
 
     @Test
     fun snippet() {

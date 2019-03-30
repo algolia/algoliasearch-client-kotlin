@@ -9,12 +9,7 @@ import kotlin.test.Test
 
 internal class SnippetMaxValuesPerFacet : TestSnippets() {
 
-    @Test
-    fun parameter() {
-        query {
-            maxValuesPerFacet = 10
-        }
-    }
+//    maxValuesPerFacet: Int = maxValue
 
     @Test
     fun snippetSettings() {

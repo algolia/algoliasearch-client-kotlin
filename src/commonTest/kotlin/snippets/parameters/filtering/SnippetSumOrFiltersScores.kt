@@ -8,12 +8,7 @@ import kotlin.test.Test
 
 internal class SnippetSumOrFiltersScores {
 
-    @Test
-    fun parameter() {
-        query {
-            sumOrFiltersScores = true
-        }
-    }
+//     sumOrFiltersScores: Boolean = true|false
 
     @Test
     fun snippet() {

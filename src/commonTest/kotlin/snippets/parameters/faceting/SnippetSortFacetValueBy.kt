@@ -10,11 +10,7 @@ import kotlin.test.Test
 
 internal class SnippetSortFacetValueBy : TestSnippets() {
 
-    @Test
-    fun parameter() {
-        SortFacetValuesBy.Count
-        SortFacetValuesBy.Alpha
-    }
+//    sortFacetValuesBy = [SortFacetValuesBy.Alpha](#parameter-option-alpha) | [SortFacetValuesBy.Count](#parameter-option-count)
 
     @Test
     fun snippetSettings() {

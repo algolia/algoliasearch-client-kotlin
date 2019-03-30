@@ -9,15 +9,10 @@ import kotlin.test.Test
 
 internal class SnippetCustomRanking : TestSnippets() {
 
-    @Test
-    fun parameter() {
-        settings {
-            customRanking {
-                +("attribute1" modify Asc)
-                +("attribute2" modify Desc)
-            }
-        }
-    }
+//    customRanking {
+//        +("attribute1" modify [Asc](#parameter-option-asc))
+//        +("attribute2" modify [Desc](#parameter-option-desc))
+//    }
 
     @Test
     fun snippet() {

@@ -11,48 +11,43 @@ import kotlin.test.Test
 
 internal class SnippetFilters {
 
-    @Test
-    fun parameter() {
-        query {
-            filters {
-                // Declare an [OR](#boolean-operators) group for facet filters.
-                orFacet {
-                    // "[facetName:facetValue](#facet-filters)"
-                    +facet("attribute", "value")
-                    +facet("attribute", 0)
-                    +facet("attribute", true)
-                }
-                // Declare an [OR](#boolean-operators) group for tag filters.
-                orTag {
-                    // "[_tags](#tag-filters):value"
-                    +tag("value")
-                }
-                // Declare an [OR](#boolean-operators) group for numeric filters.
-                orNumeric {
-                    // "attribute:lowerBound [TO](#numeric-range) upperBound"
-                    +range("attribute", 0..10)
-                    +range("attribute", 0f, 10f)
-                    // "numeric_attribute [= | != | > | >= | < | <=](#numeric-comparisons) numeric_value"
-                    +comparison("attribute", Lesser, 0f)
-                    +comparison("attribute", LesserOrEquals, 0f)
-                    +comparison("attribute", Equals, 0f)
-                    +comparison("attribute", NotEquals, 0f)
-                    +comparison("attribute", Greater, 0f)
-                    +comparison("attribute", GreaterOrEquals, 0f)
-                }
-                // Declare an [AND](#boolean-operators) group for any type of filters.
-                and {
-                    // "[facetName:facetValue](#facet-filters)"
-                    +facet("attribute", "value")
-                    +facet("attribute", true)
-                    +facet("attribute", 0)
-                    +tag("value")
-                    +range("attribute", 0..10)
-                    +comparison("attribute", Lesser, 0f)
-                }
-            }
-        }
-    }
+//    filters {
+//        // Declare an [OR](#boolean-operators) group for facet filters.
+//        orFacet {
+//            // "[facetName:facetValue](#facet-filters)"
+//            +facet("attribute", "value")
+//            +facet("attribute", 0)
+//            +facet("attribute", true)
+//        }
+//        // Declare an [OR](#boolean-operators) group for tag filters.
+//        orTag {
+//            // "[_tags](#tag-filters):value"
+//            +tag("value")
+//        }
+//        // Declare an [OR](#boolean-operators) group for numeric filters.
+//        orNumeric {
+//            // "attribute:lowerBound [TO](#numeric-range) upperBound"
+//            +range("attribute", 0..10)
+//            +range("attribute", 0f, 10f)
+//            // "numeric_attribute [= | != | > | >= | < | <=](#numeric-comparisons) numeric_value"
+//            +comparison("attribute", Lesser, 0f)
+//            +comparison("attribute", LesserOrEquals, 0f)
+//            +comparison("attribute", Equals, 0f)
+//            +comparison("attribute", NotEquals, 0f)
+//            +comparison("attribute", Greater, 0f)
+//            +comparison("attribute", GreaterOrEquals, 0f)
+//        }
+//        // Declare an [AND](#boolean-operators) group for any type of filters.
+//        and {
+//            // "[facetName:facetValue](#facet-filters)"
+//            +facet("attribute", "value")
+//            +facet("attribute", true)
+//            +facet("attribute", 0)
+//            +tag("value")
+//            +range("attribute", 0..10)
+//            +comparison("attribute", NumericOperator.Lesser, 0f)
+//        }
+//    }
 
     @Test
     fun searchQuery() {

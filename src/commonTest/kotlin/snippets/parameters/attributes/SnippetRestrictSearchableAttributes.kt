@@ -11,14 +11,9 @@ import kotlin.test.Test
 
 internal class SnippetRestrictSearchableAttributes {
 
-    @Test
-    fun parameter() {
-        query {
-            restrictSearchableAttributes {
-                +"attribute"
-            }
-        }
-    }
+//    restrictSearchableAttributes {
+//        +"attribute"
+//    }
 
     @Test
     fun snippet() {

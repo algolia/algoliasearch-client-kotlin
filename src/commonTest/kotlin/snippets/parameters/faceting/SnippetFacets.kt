@@ -9,14 +9,9 @@ import kotlin.test.Test
 
 internal class SnippetFacets {
 
-    @Test
-    fun parameter() {
-        query {
-            facets {
-                +"attribute"
-            }
-        }
-    }
+//    facets {
+//        +"attribute"
+//    }
 
     @Test
     fun snippet() {

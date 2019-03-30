@@ -8,10 +8,12 @@ import kotlin.test.Test
 
 internal class SnippetQuery {
 
+//    index.search(Query("my query"))
+
     @Test
     fun query() {
         runBlocking {
-            index.search(Query("my query"))
+            index.search(Query(""))
         }
     }
 }

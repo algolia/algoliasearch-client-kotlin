@@ -9,27 +9,22 @@ import kotlin.test.Test
 
 internal class SnippetNumericFilters {
 
-    @Test
-    fun parameter() {
-        query {
-            numericFilters {
-                and {
-                    // "numeric_attribute [= | != | > | >= | < | <=](#numeric-comparisons) numeric_value"
-                    +comparison("attribute", Lesser, 0f)
-                    +comparison("attribute", LesserOrEquals, 0f)
-                    +comparison("attribute", Equals, 0f)
-                    +comparison("attribute", NotEquals, 0f)
-                    +comparison("attribute", Greater, 0f)
-                    +comparison("attribute", GreaterOrEquals, 0f)
-                }
-                or {
-                    // "attribute:lowerBound [TO](#numeric-range) upperBound"
-                    +range("attribute", 0..10)
-                    +range("attribute", 0f, 10f)
-                }
-            }
-        }
-    }
+//    numericFilters {
+//        and {
+//            // "numeric_attribute [= | != | > | >= | < | <=](#numeric-comparisons) numeric_value"
+//            +comparison("attribute", NumericOperator.Lesser, 0f)
+//            +comparison("attribute", NumericOperator.LesserOrEquals, 0f)
+//            +comparison("attribute", NumericOperator.Equals, 0f)
+//            +comparison("attribute", NotEquals, 0f)
+//            +comparison("attribute", Greater, 0f)
+//            +comparison("attribute", GreaterOrEquals, 0f)
+//        }
+//        or {
+//            // "attribute:lowerBound [TO](#numeric-range) upperBound"
+//            +range("attribute", 0..10)
+//            +range("attribute", 0f, 10f)
+//        }
+//    }
 
     @Test
     fun snippet() {

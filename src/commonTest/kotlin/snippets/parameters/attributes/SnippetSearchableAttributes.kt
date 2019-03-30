@@ -9,17 +9,12 @@ import kotlin.test.Test
 
 internal class SnippetSearchableAttributes : TestSnippets() {
 
-    @Test
-    fun parameter() {
-        settings {
-            searchableAttributes {
-                +"attribute1"
-                +("attribute2" and "attribute3")
-                +("attribute4" modify Ordered)
-                +("attribute5" modify Unordered)
-            }
-        }
-    }
+//    searchableAttributes {
+//        +"attribute1"
+//        +("attribute2" and "attribute3") // both attributes have the same priority
+//        +("attribute4" modify [Ordered](#parameter-option-ordered))
+//        +("attribute5" modify [Unordered](#parameter-option-unordered))
+//    }
 
     @Test
     fun snippet() {

@@ -9,25 +9,20 @@ import kotlin.test.Test
 
 internal class SnippetOptionalFilters {
 
-    @Test
-    fun parameter() {
-        query {
-            optionalFilters {
-                // Declare an OR group for optional facet filters.
-                or {
-                    +facet("attribute", "value")
-                    +facet("attribute", 0)
-                    +facet("attribute", true)
-                }
-                // Declare an AND group for optional facet filters.
-                and {
-                    +facet("attribute", "value")
-                    +facet("attribute", true)
-                    +facet("attribute", 0)
-                }
-            }
-        }
-    }
+//    optionalFilters {
+//        // Declare an OR group for optional facet filters.
+//        or {
+//            +facet("attribute", "value")
+//            +facet("attribute", 0)
+//            +facet("attribute", true)
+//        }
+//        // Declare an AND group for optional facet filters.
+//        and {
+//            +facet("attribute", "value")
+//            +facet("attribute", true)
+//            +facet("attribute", 0)
+//        }
+//    }
 
     @Test
     fun snippet() {

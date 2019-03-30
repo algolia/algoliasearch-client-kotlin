@@ -9,16 +9,11 @@ import kotlin.test.Test
 
 internal class SnippetAttributesForFaceting : TestSnippets() {
 
-    @Test
-    fun parameter() {
-        settings {
-            attributesForFaceting {
-                +"attribute1"
-                +("attribute2" modify FilterOnly)
-                +("attribute3" modify Searchable)
-            }
-        }
-    }
+//    attributesForFaceting {
+//        +"attribute1"
+//        +("attribute2" modify [FilterOnly](#parameter-option-filteronly))
+//        +("attribute3" modify [Searchable](#parameter-option-searchable))
+//    }
 
     @Test
     fun snippet() {

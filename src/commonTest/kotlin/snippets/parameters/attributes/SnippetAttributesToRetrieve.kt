@@ -10,27 +10,25 @@ import kotlin.test.Test
 
 internal class SnippetAttributesToRetrieve : TestSnippets() {
 
-
-    @Test
-    fun parameter() {
-        // list of attributes to retrieve
-        settings {
-            attributesToRetrieve {
-                +"attribute1"
-                +"attribute2"
-            }
-        }
-        // retrieves all attributes
-        settings { attributesToRetrieve { +"*" } }
-        // retrieves all attributes except the attributes starting with a "-"
-        settings {
-            attributesToRetrieve {
-                +"attribute1"
-                +"attribute2"
-                excludeAttributes = true
-            }
-        }
-    }
+//    // list of attributes to retrieve
+//    settings {
+//        attributesToRetrieve {
+//            +"attribute1"
+//            +"attribute2"
+//        }
+//    }
+//
+//    // retrieves all attributes
+//    settings { attributesToRetrieve { +"*" } }
+//
+//    // retrieves all attributes except the attributes starting with a "-"
+//    settings {
+//        attributesToRetrieve {
+//            +"attribute1"
+//            +"attribute2"
+//            excludeAttributes = true
+//        }
+//    }
 
     @Test
     fun defaultList() {

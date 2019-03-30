@@ -8,12 +8,7 @@ import kotlin.test.Test
 
 internal class SnippetFacetingAfterDistinct {
 
-    @Test
-    fun parameter() {
-        query {
-            facetingAfterDistinct = true
-        }
-    }
+//    facetingAfterDistinct: Boolean = true|false
 
     @Test
     fun snippet() {
