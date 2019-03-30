@@ -38,3 +38,7 @@ public fun Query.numericFilters(block: DSLNumericFilters.() -> Unit) {
 public fun Query.tagFilters(block: DSLTagFilters.() -> Unit) {
     tagFilters = DSLTagFilters().apply(block).build()
 }
+
+public fun Query.facets(block: DSLAttributes.() -> Unit) {
+    facets = DSLAttributes().apply(block).build()
+}

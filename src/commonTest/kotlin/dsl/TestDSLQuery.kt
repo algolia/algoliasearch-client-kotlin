@@ -21,9 +21,7 @@ internal class TestDSLQuery {
     @Test
     fun restrictSearchableAttributes() {
         val query = query {
-            restrictSearchableAttributes {
-                +attributeA
-            }
+            restrictSearchableAttributes { +attributeA }
         }
 
         query.restrictSearchableAttributes!!.shouldNotBeEmpty()
@@ -82,5 +80,14 @@ internal class TestDSLQuery {
         }
 
         query.optionalFilters!!.isNotEmpty()
+    }
+
+    @Test
+    fun facets() {
+        val query = query {
+            facets { +attributeA }
+        }
+
+        query.facets!!.isNotEmpty()
     }
 }
