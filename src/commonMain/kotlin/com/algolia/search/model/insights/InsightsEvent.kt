@@ -1,6 +1,6 @@
 package com.algolia.search.model.insights
 
-import com.algolia.search.filter.FilterFacet
+import com.algolia.search.dsl.filter.FilterFacet
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID

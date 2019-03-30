@@ -1,7 +1,7 @@
 package snippets.methods.insights
 
 import clientInsights
-import com.algolia.search.filter.FilterFacet
+import com.algolia.search.dsl.filter.FilterFacet
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.insights.EventName

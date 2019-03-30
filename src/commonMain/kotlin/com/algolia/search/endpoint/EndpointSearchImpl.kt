@@ -1,10 +1,8 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
+import com.algolia.search.dsl.filter.FilterFacet
 import com.algolia.search.dsl.filters
-import com.algolia.search.filter.FilterFacet
-import com.algolia.search.filter.GroupAnd
-import com.algolia.search.filter.GroupOr
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
@@ -90,9 +88,6 @@ internal class EndpointSearchImpl(
         )
     }
 
-    private val groupAnd = GroupAnd("conjunctive")
-    private val groupOr = GroupOr("disjunctive")
-
     private fun buildAndQueries(
         query: Query,
         andFilters: List<FilterFacet>,
@@ -100,8 +95,8 @@ internal class EndpointSearchImpl(
     ): List<IndexQuery> {
         return query.copy().apply {
             filters {
-                groupAnd += andFilters
-                groupOr += orFilters
+                and { +andFilters }
+                orFacet { +orFilters }
             }
         }.let { listOf(IndexQuery(indexName, it)) }
     }
@@ -120,8 +115,8 @@ internal class EndpointSearchImpl(
                 hitsPerPage = 0
                 analytics = false
                 filters {
-                    groupAnd += andFilters
-                    groupOr += orFilters.filter { it.attribute != attribute }
+                    and { +andFilters }
+                    orFacet { +orFilters.filter { it.attribute != attribute } }
                 }
             }
         }.map { IndexQuery(indexName, it) }

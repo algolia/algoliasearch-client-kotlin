@@ -1,6 +1,6 @@
-package filter
+package dsl.filter
 
-import com.algolia.search.filter.*
+import com.algolia.search.dsl.filter.*
 import com.algolia.search.model.Attribute
 import shouldEqual
 import shouldFailWith
@@ -56,23 +56,19 @@ internal class TestFilter {
 
     @Test
     fun range() {
-        val filterInt = FilterRange(attributeA, 0, 6)
-        val filterLong = FilterRange(attributeA, 0L, 6L)
-        val filterFloat = FilterRange(attributeA, 0f, 6f)
-        val filterDouble = FilterRange(attributeA, 0f, 6f)
         val filterRangeInt = FilterRange(attributeA, 0 until 6)
         val filterRangeLong = FilterRange(attributeA, 0L..6L)
+        val filterFloat = FilterRange(attributeA, 0f, 6f)
+        val filterDouble = FilterRange(attributeA, 0f, 6f)
         val filterNegate = !FilterRange(attributeA, 0.0, 6.0)
 
-        filterInt.build() shouldEqual "\"attributeA\":0 TO 6"
-        filterLong.build() shouldEqual "\"attributeA\":0 TO 6"
-        filterFloat.build() shouldEqual "\"attributeA\":0.0 TO 6.0"
-        filterDouble.build() shouldEqual "\"attributeA\":0.0 TO 6.0"
         filterRangeInt.build() shouldEqual "\"attributeA\":0 TO 5"
         filterRangeLong.build() shouldEqual "\"attributeA\":0 TO 6"
+        filterFloat.build() shouldEqual "\"attributeA\":0.0 TO 6.0"
+        filterDouble.build() shouldEqual "\"attributeA\":0.0 TO 6.0"
         filterNegate.build() shouldEqual "NOT \"attributeA\":0.0 TO 6.0"
 
-        shouldFailWith<IllegalArgumentException> { FilterRange(attributeA, 1, 0) }
+        shouldFailWith<IllegalArgumentException> { FilterRange(attributeA, 1 until 0) }
     }
 
     @Test
@@ -106,14 +102,6 @@ internal class TestFilter {
             it.build() shouldEqual "NOT \"attributeA\":true"
         }
         (!filter).let {
-            it.isNegated shouldEqual false
-            it.build() shouldEqual "\"attributeA\":true"
-        }
-        (-filter).let {
-            it.isNegated shouldEqual true
-            it.build() shouldEqual "NOT \"attributeA\":true"
-        }
-        (+filter).let {
             it.isNegated shouldEqual false
             it.build() shouldEqual "\"attributeA\":true"
         }

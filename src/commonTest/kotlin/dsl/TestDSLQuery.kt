@@ -2,8 +2,6 @@ package dsl
 
 import attributeA
 import com.algolia.search.dsl.*
-import com.algolia.search.filter.FilterFacet
-import com.algolia.search.filter.GroupAnd
 import shouldNotBeEmpty
 import kotlin.test.Test
 
@@ -34,7 +32,7 @@ internal class TestDSLQuery {
     fun filters() {
         val query = query {
             filters {
-                GroupAnd("and") += FilterFacet(attributeA, 0)
+                and { +facet(attributeA, 0) }
             }
         }
 
@@ -45,7 +43,7 @@ internal class TestDSLQuery {
     fun optionalFilters() {
         val query = query {
             optionalFilters {
-                GroupAnd("and") += FilterFacet(attributeA, 0)
+                and { +facet(attributeA, 0) }
             }
         }
 
