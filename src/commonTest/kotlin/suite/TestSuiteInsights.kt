@@ -2,7 +2,7 @@ package suite
 
 import clientAdmin1
 import clientInsights
-import com.algolia.search.dsl.filter.FilterFacet
+import com.algolia.search.dsl.filtering.FilterFacet
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.helper.toEventName
 import com.algolia.search.helper.toObjectID
@@ -35,7 +35,7 @@ internal class TestSuiteInsights {
         resources = InsightsEvent.Resources.ObjectIDs(objectIDs)
     )
     private val user = clientInsights.User(userToken)
-    private val attribute = "dsl/filter".toAttribute()
+    private val attribute = "dsl/filtering".toAttribute()
     private val filters = listOf(
         FilterFacet(attribute, "foo"),
         FilterFacet(attribute, "bar")

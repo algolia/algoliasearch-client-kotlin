@@ -1,7 +1,7 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.dsl.filter.FilterFacet
+import com.algolia.search.dsl.filtering.FilterFacet
 import com.algolia.search.dsl.filters
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute

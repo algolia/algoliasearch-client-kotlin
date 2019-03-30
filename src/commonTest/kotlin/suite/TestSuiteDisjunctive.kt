@@ -1,7 +1,7 @@
 package suite
 
 import clientAdmin1
-import com.algolia.search.dsl.filter.FilterFacet
+import com.algolia.search.dsl.filtering.FilterFacet
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query

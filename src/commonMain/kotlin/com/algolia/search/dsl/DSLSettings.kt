@@ -1,5 +1,12 @@
 package com.algolia.search.dsl
 
+import com.algolia.search.dsl.attributes.DSLAttributes
+import com.algolia.search.dsl.attributes.DSLAttributesForFaceting
+import com.algolia.search.dsl.attributes.DSLAttributesToRetrieve
+import com.algolia.search.dsl.attributes.DSLSearchableAttributes
+import com.algolia.search.dsl.ranking.DSLCustomRanking
+import com.algolia.search.dsl.ranking.DSLRanking
+import com.algolia.search.dsl.ranking.DSLReplicas
 import com.algolia.search.model.settings.Settings
 
 
