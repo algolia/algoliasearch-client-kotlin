@@ -4,9 +4,9 @@ import com.algolia.search.dsl.DSLParameters
 
 
 @DSLParameters
-public class DSLFacetFilters {
-
-    private val groups = mutableListOf<Group<FilterFacet>>()
+public class DSLFacetFilters(
+    private val groups: MutableList<Group<FilterFacet>> = mutableListOf()
+) {
 
     private fun put(group: Group<FilterFacet>) {
         if (group.filters.isNotEmpty()) groups += group

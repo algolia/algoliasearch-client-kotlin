@@ -6,7 +6,7 @@ import com.algolia.search.dsl.DSLParameters
 @DSLParameters
 public sealed class DSLGroup<T : Filter> {
 
-    private val filters: MutableSet<T> = mutableSetOf()
+    abstract val filters: MutableSet<T>
 
     public operator fun T.unaryPlus() {
         filters += this
@@ -25,10 +25,18 @@ public sealed class DSLGroup<T : Filter> {
     }
 }
 
-public class DSLGroupFacet : DSLGroup<FilterFacet>(), DSLFacet
+public class DSLGroupFacet(
+    override val filters: MutableSet<FilterFacet> = mutableSetOf()
+) : DSLGroup<FilterFacet>(), DSLFacet
 
-public class DSLGroupTag : DSLGroup<FilterTag>(), DSLTag
+public class DSLGroupTag(
+    override val filters: MutableSet<FilterTag> = mutableSetOf()
+) : DSLGroup<FilterTag>(), DSLTag
 
-public class DSLGroupNumeric : DSLGroup<FilterNumeric>(), DSLNumeric
+public class DSLGroupNumeric(
+    override val filters: MutableSet<FilterNumeric> = mutableSetOf()
+) : DSLGroup<FilterNumeric>(), DSLNumeric
 
-public class DSLGroupFilter : DSLGroup<Filter>(), DSLFacet, DSLTag, DSLNumeric
+public class DSLGroupFilter(
+    override val filters: MutableSet<Filter> = mutableSetOf()
+) : DSLGroup<Filter>(), DSLFacet, DSLTag, DSLNumeric

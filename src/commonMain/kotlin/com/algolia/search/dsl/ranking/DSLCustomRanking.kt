@@ -7,9 +7,9 @@ import com.algolia.search.model.settings.CustomRankingCriterium
 
 @Suppress("PropertyName")
 @DSLParameters
-public class DSLCustomRanking {
-
+public class DSLCustomRanking(
     private val customRankingCriteria: MutableList<CustomRankingCriterium> = mutableListOf()
+) {
 
     public enum class Modifier {
         Asc,

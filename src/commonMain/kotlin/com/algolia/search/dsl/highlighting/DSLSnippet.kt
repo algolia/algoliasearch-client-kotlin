@@ -6,9 +6,9 @@ import com.algolia.search.model.search.Snippet
 
 
 @DSLParameters
-public class DSLSnippet {
-
-    private val snippets = mutableListOf<Snippet>()
+public class DSLSnippet(
+    private val snippets: MutableList<Snippet> = mutableListOf()
+) {
 
     public operator fun String.unaryPlus() {
         +Attribute(this)

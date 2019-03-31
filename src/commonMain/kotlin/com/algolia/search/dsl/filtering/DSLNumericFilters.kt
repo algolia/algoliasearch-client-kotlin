@@ -4,9 +4,9 @@ import com.algolia.search.dsl.DSLParameters
 
 
 @DSLParameters
-public class DSLNumericFilters {
-
-    private val groups = mutableListOf<Group<FilterNumeric>>()
+public class DSLNumericFilters(
+    private val groups: MutableList<Group<FilterNumeric>> = mutableListOf()
+) {
 
     private fun put(group: Group<FilterNumeric>) {
         if (group.filters.isNotEmpty()) groups += group

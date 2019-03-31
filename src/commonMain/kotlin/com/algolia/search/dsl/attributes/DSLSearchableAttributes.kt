@@ -7,9 +7,9 @@ import com.algolia.search.model.settings.SearchableAttribute
 
 @Suppress("PropertyName")
 @DSLParameters
-public class DSLSearchableAttributes {
-
+public class DSLSearchableAttributes(
     private val searchableAttributes: MutableList<SearchableAttribute> = mutableListOf()
+) {
 
     public enum class Modifier {
         Ordered,

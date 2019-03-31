@@ -6,11 +6,11 @@ import com.algolia.search.model.Attribute
 
 
 @DSLParameters
-public class DSLAttributesToRetrieve {
-
+public class DSLAttributesToRetrieve(
     private val attributes: MutableList<Attribute> = mutableListOf()
+) {
 
-    var excludeAttributes: Boolean = false
+    public var excludeAttributes: Boolean = false
 
     public operator fun String.unaryPlus() {
         +Attribute(this)

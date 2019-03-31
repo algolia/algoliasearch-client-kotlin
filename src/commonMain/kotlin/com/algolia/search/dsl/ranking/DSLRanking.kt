@@ -7,9 +7,9 @@ import com.algolia.search.model.settings.RankingCriterium
 
 @Suppress("PropertyName")
 @DSLParameters
-public class DSLRanking {
-
+public class DSLRanking(
     private val rankingCriteria: MutableList<RankingCriterium> = mutableListOf()
+) {
 
     public enum class Modifier {
         Asc,

@@ -1,17 +1,17 @@
 package dsl.ranking
 
-import com.algolia.search.dsl.ranking.DSLReplicas
+import com.algolia.search.dsl.ranking.DSLIndexName
 import indexA
 import indexB
 import shouldEqual
 import kotlin.test.Test
 
 
-internal class TestDSLReplicas {
+internal class TestDSLIndexName {
 
     @Test
     fun default() {
-        val dsl = DSLReplicas().apply {
+        val dsl = DSLIndexName().apply {
             +"indexA"
             +indexB
         }

@@ -7,7 +7,7 @@ import com.algolia.search.dsl.attributes.DSLSearchableAttributes
 import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.dsl.ranking.DSLCustomRanking
 import com.algolia.search.dsl.ranking.DSLRanking
-import com.algolia.search.dsl.ranking.DSLReplicas
+import com.algolia.search.dsl.ranking.DSLIndexName
 import com.algolia.search.model.settings.Settings
 
 
@@ -37,8 +37,8 @@ public fun Settings.customRanking(block: DSLCustomRanking.() -> Unit) {
     customRanking = DSLCustomRanking().apply(block).build()
 }
 
-public fun Settings.replicas(block: DSLReplicas.() -> Unit) {
-    replicas = DSLReplicas().apply(block).build()
+public fun Settings.replicas(block: DSLIndexName.() -> Unit) {
+    replicas = DSLIndexName().apply(block).build()
 }
 
 public fun Settings.attributesToHighlight(block: DSLAttributes.() -> Unit) {

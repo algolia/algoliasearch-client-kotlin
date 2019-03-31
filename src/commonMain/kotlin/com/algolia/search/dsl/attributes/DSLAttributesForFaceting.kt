@@ -7,9 +7,9 @@ import com.algolia.search.model.settings.AttributeForFaceting
 
 @Suppress("PropertyName")
 @DSLParameters
-public class DSLAttributesForFaceting {
-
+public class DSLAttributesForFaceting(
     private val attributesForFaceting: MutableList<AttributeForFaceting> = mutableListOf()
+) {
 
     public enum class Modifier {
         FilterOnly,
