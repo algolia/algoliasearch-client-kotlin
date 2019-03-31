@@ -105,8 +105,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             // Pagination
             KeyHitsPerPage to int
             KeyPaginationLimitedTo to int
-            KeyMinWordSizefor1Typo to int
-            KeyMinWordSizefor2Typos to int
+            KeyMinWordSizeFor1Typo to int
+            KeyMinWordSizeFor2Typos to int
             // Typos
             KeyTypoTolerance to TypoTolerance.Min.raw
             KeyAllowTyposOnNumericTokens to boolean

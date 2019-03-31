@@ -9,7 +9,7 @@ import kotlin.test.Test
 
 internal class DocHitsPerPage : TestDocumentation() {
 
-//    hitsPerPage = number_of_hits
+//    hitsPerPage: Int = number_of_hits
 
     @Test
     fun settings() {

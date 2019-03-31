@@ -4,6 +4,7 @@ import attributeA
 import com.algolia.search.dsl.*
 import indexA
 import shouldNotBeEmpty
+import unknown
 import kotlin.test.Test
 
 
@@ -88,5 +89,23 @@ internal class TestDSLSettings {
         }
 
         settings.attributesToSnippet!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun disableTypoToleranceOnAttributes() {
+        val settings = settings {
+            disableTypoToleranceOnAttributes { +attributeA }
+        }
+
+        settings.disableTypoToleranceOnAttributes!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun disableTypoToleranceOnWords() {
+        val settings = settings {
+            disableTypoToleranceOnWords { +unknown }
+        }
+
+        settings.disableTypoToleranceOnWords!!.shouldNotBeEmpty()
     }
 }

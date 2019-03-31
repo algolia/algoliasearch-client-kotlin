@@ -8,7 +8,7 @@ import kotlin.test.Test
 
 internal class DocOffset {
 
-//    offset = record_number
+//    offset: Int = record_number
 
     @Test
     fun query() {

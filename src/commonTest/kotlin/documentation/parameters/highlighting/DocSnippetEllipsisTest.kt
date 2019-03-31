@@ -9,7 +9,7 @@ import kotlin.test.Test
 
 internal class DocSnippetEllipsisTest : TestDocumentation() {
 
-//    snippetEllipsisText = "text"
+//    snippetEllipsisText: String = "text"
 
     @Test
     fun settings() {

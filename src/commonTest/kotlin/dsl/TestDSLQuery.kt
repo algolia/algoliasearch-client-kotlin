@@ -108,4 +108,13 @@ internal class TestDSLQuery {
 
         query.attributesToSnippet!!.shouldNotBeEmpty()
     }
+
+    @Test
+    fun disableTypoToleranceOnAttributes() {
+        val query = query {
+            disableTypoToleranceOnAttributes { +attributeA }
+        }
+
+        query.disableTypoToleranceOnAttributes!!.shouldNotBeEmpty()
+    }
 }

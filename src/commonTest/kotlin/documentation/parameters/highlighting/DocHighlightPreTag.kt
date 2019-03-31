@@ -9,7 +9,7 @@ import kotlin.test.Test
 
 internal class DocHighlightPreTag : TestDocumentation() {
 
-//    highlightPostTag = "opening_tag"
+//    highlightPostTag: String = "opening_tag"
 
     @Test
     fun settings() {

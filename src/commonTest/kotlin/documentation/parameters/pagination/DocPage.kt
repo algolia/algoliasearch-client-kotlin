@@ -8,7 +8,7 @@ import kotlin.test.Test
 
 internal class DocPage {
 
-//    page = page_number
+//    page: Int = page_number
 
     @Test
     fun query() {

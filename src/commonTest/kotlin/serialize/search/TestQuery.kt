@@ -45,8 +45,8 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             hitsPerPage = int,
             offset = int,
             length = int,
-            minWordSizefor1Typo = int,
-            minWordSizefor2Typos = int,
+            minWordSizeFor1Typo = int,
+            minWordSizeFor2Typos = int,
             typoTolerance = TypoTolerance.Min,
             allowTyposOnNumericTokens = boolean,
             disableTypoToleranceOnAttributes = attributes,
@@ -105,8 +105,8 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeyHitsPerPage to int
             KeyOffset to int
             KeyLength to int
-            KeyMinWordSizefor1Typo to int
-            KeyMinWordSizefor2Typos to int
+            KeyMinWordSizeFor1Typo to int
+            KeyMinWordSizeFor2Typos to int
             KeyTypoTolerance to TypoTolerance.Min.raw
             KeyAllowTyposOnNumericTokens to boolean
             KeyDisableTypoToleranceOnAttributes to attributesJson

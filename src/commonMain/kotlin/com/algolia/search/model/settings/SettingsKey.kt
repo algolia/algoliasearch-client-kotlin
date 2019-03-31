@@ -40,9 +40,9 @@ public sealed class SettingsKey(override val raw: String) : Raw<String> {
 
     public object PaginationLimitedTo : SettingsKey(KeyPaginationLimitedTo)
 
-    public object MinWordSizefor1Typo : SettingsKey(KeyMinWordSizefor1Typo)
+    public object MinWordSizefor1Typo : SettingsKey(KeyMinWordSizeFor1Typo)
 
-    public object MinWordSizefor2Typos : SettingsKey(KeyMinWordSizefor2Typos)
+    public object MinWordSizefor2Typos : SettingsKey(KeyMinWordSizeFor2Typos)
 
     public object TypoTolerance : SettingsKey(KeyTypoTolerance)
 

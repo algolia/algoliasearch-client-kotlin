@@ -8,7 +8,7 @@ import kotlin.test.Test
 
 internal class DocLength {
 
-    //    length = number_of_records
+    //    length: Int = number_of_records
 
     @Test
     fun query() {

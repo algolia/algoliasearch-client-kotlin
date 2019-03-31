@@ -48,3 +48,11 @@ public fun Settings.attributesToHighlight(block: DSLAttributes.() -> Unit) {
 public fun Settings.attributesToSnippet(block: DSLSnippet.() -> Unit) {
     attributesToSnippet = DSLSnippet().apply(block).build()
 }
+
+public fun Settings.disableTypoToleranceOnAttributes(block: DSLAttributes.() -> Unit) {
+    disableTypoToleranceOnAttributes = DSLAttributes().apply(block).build()
+}
+
+public fun Settings.disableTypoToleranceOnWords(block: DSLStrings.() -> Unit) {
+    disableTypoToleranceOnWords = DSLStrings().apply(block).build()
+}

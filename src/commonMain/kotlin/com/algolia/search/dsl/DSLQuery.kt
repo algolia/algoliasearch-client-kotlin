@@ -51,3 +51,7 @@ public fun Query.attributesToHighlight(block: DSLAttributes.() -> Unit) {
 public fun Query.attributesToSnippet(block: DSLSnippet.() -> Unit) {
     attributesToSnippet = DSLSnippet().apply(block).build()
 }
+
+public fun Query.disableTypoToleranceOnAttributes(block: DSLAttributes.() -> Unit) {
+    disableTypoToleranceOnAttributes = DSLAttributes().apply(block).build()
+}

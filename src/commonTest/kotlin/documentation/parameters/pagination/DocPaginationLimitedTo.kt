@@ -8,7 +8,7 @@ import kotlin.test.Test
 
 internal class DocPaginationLimitedTo : TestDocumentation() {
 
-//   paginationLimitedTo = number_of_records
+//   paginationLimitedTo: Int = number_of_records
 
     @Test
     fun settings() {

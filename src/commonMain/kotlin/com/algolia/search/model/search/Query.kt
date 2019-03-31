@@ -176,14 +176,14 @@ public data class Query(
      * Engine default: 4
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minWordSizefor1Typo/]
      */
-    @SerialName(KeyMinWordSizefor1Typo) var minWordSizefor1Typo: Int? = null,
+    @SerialName(KeyMinWordSizeFor1Typo) var minWordSizeFor1Typo: Int? = null,
 
     /**
      * Minimum number of characters a word in the query name must contain to accept matches with 2 typos.
      * Engine default: 8
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/minWordSizefor2Typos/]
      */
-    @SerialName(KeyMinWordSizefor2Typos) var minWordSizefor2Typos: Int? = null,
+    @SerialName(KeyMinWordSizeFor2Typos) var minWordSizeFor2Typos: Int? = null,
 
     /**
      * Controls whether typo tolerance is enabled and how it is applied.

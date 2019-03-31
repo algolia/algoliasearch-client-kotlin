@@ -27,8 +27,8 @@ internal class TestSettingsKey {
         RestrictHighlightAndSnippetArrays.raw shouldEqual KeyRestrictHighlightAndSnippetArrays
         HitsPerPage.raw shouldEqual KeyHitsPerPage
         PaginationLimitedTo.raw shouldEqual KeyPaginationLimitedTo
-        MinWordSizefor1Typo.raw shouldEqual KeyMinWordSizefor1Typo
-        MinWordSizefor2Typos.raw shouldEqual KeyMinWordSizefor2Typos
+        MinWordSizefor1Typo.raw shouldEqual KeyMinWordSizeFor1Typo
+        MinWordSizefor2Typos.raw shouldEqual KeyMinWordSizeFor2Typos
         TypoTolerance.raw shouldEqual KeyTypoTolerance
         AllowTyposOnNumericTokens.raw shouldEqual KeyAllowTyposOnNumericTokens
         DisableTypoToleranceOnAttributes.raw shouldEqual KeyDisableTypoToleranceOnAttributes

@@ -9,7 +9,7 @@ import kotlin.test.Test
 
 internal class DocRestrictHighlight : TestDocumentation() {
 
-//    restrictHighlightAndSnippetArrays = true|false
+//    restrictHighlightAndSnippetArrays: Boolean = true|false
 
     @Test
     fun settings() {

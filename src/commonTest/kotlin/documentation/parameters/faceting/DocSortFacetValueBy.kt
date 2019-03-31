@@ -10,7 +10,9 @@ import kotlin.test.Test
 
 internal class DocSortFacetValueBy : TestDocumentation() {
 
-//    sortFacetValuesBy = [SortFacetValuesBy.Alpha](#parameter-option-alpha) | [SortFacetValuesBy.Count](#parameter-option-count)
+//    sortFacetValuesBy: SortFacetValuesBy =
+//    [SortFacetValuesBy.Alpha](#parameter-option-alpha)
+//    | [SortFacetValuesBy.Count](#parameter-option-count)
 
     @Test
     fun settings() {
