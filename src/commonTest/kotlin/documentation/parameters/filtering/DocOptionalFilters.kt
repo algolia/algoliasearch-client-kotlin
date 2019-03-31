@@ -27,7 +27,7 @@ internal class DocOptionalFilters {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 optionalFilters {
                     and {
                         +facet("category", "Book")

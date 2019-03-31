@@ -10,7 +10,7 @@ import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.model.search.Query
 
 
-public fun query(init: Query.() -> Unit) = Query().apply(init)
+public fun query(query: String? = null, init: Query.() -> Unit) = Query(query = query).apply(init)
 
 public fun Query.attributesToRetrieve(block: DSLAttributesToRetrieve.() -> Unit) {
     attributesToRetrieve = DSLAttributesToRetrieve().apply(block).build()

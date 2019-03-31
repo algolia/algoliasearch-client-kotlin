@@ -3,8 +3,8 @@ package documentation.parameters.attributes
 import com.algolia.search.dsl.attributesToRetrieve
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
-import runBlocking
 import documentation.TestDocumentation
+import runBlocking
 import kotlin.test.Test
 
 
@@ -59,8 +59,7 @@ internal class DocAttributesToRetrieve : TestDocumentation() {
     @Test
     fun currentSearch() {
         runBlocking {
-            val query = query {
-                query = "query"
+            val query = query("query") {
                 attributesToRetrieve {
                     +"title"
                     +"content"

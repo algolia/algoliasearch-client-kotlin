@@ -3,8 +3,8 @@ package documentation.parameters.highlighting
 import com.algolia.search.dsl.attributesToSnippet
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
-import runBlocking
 import documentation.TestDocumentation
+import runBlocking
 import kotlin.test.Test
 
 
@@ -45,7 +45,7 @@ internal class DocAttributesToSnippet : TestDocumentation() {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 attributesToSnippet {
                     +"title"
                     +("content" limit 80)

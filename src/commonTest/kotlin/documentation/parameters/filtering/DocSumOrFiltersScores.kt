@@ -13,7 +13,7 @@ internal class DocSumOrFiltersScores {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 sumOrFiltersScores = true
             }
 

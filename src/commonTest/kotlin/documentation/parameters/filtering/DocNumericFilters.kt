@@ -29,7 +29,7 @@ internal class DocNumericFilters {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 numericFilters {
                     or {
                         +comparison("inStock", Equals, 0f)

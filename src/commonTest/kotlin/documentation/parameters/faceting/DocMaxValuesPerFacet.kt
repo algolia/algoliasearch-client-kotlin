@@ -25,7 +25,7 @@ internal class DocMaxValuesPerFacet : TestDocumentation() {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 maxValuesPerFacet = 50
             }
 

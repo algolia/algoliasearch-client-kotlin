@@ -13,7 +13,7 @@ internal class DocLength {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 length = 4
             }
 

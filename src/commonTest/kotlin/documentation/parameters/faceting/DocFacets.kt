@@ -16,8 +16,7 @@ internal class DocFacets {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
-                query = "query"
+            val query = query("query") {
                 facets {
                     +"category"
                     +"author"

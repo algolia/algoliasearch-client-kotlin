@@ -33,7 +33,7 @@ internal class DocAttributesToHighlight : TestDocumentation() {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 attributesToHighlight {
                     +"*"
                 }

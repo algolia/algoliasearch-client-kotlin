@@ -1,8 +1,9 @@
 package documentation.parameters.highlighting
 
+import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
-import runBlocking
 import documentation.TestDocumentation
+import runBlocking
 import kotlin.test.Test
 
 
@@ -24,7 +25,7 @@ internal class DocHighlightPreTag : TestDocumentation() {
     @Test
     fun query() {
         runBlocking {
-            val query = com.algolia.search.dsl.query {
+            val query = query("query") {
                 highlightPreTag = "<strong>"
             }
 

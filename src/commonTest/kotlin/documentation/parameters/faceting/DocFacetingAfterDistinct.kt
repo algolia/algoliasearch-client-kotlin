@@ -13,7 +13,7 @@ internal class DocFacetingAfterDistinct {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 facetingAfterDistinct = true
             }
 

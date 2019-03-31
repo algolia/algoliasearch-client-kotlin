@@ -19,7 +19,7 @@ internal class DocRestrictSearchableAttributes {
     fun query() {
         shouldFailWith<ResponseException> {
             runBlocking {
-                val query = query {
+                val query = query("query") {
                     restrictSearchableAttributes {
                         +"title"
                         +"author"

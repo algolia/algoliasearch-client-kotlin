@@ -13,7 +13,7 @@ internal class DocPage {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 page = 0
             }
 

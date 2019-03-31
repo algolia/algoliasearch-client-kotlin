@@ -26,7 +26,7 @@ internal class DocSortFacetValueBy : TestDocumentation() {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 sortFacetValuesBy = SortFacetValuesBy.Count
 
             }

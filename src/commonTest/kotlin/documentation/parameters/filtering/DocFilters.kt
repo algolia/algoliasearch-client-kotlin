@@ -4,8 +4,8 @@ import com.algolia.search.dsl.filtering.NumericOperator
 import com.algolia.search.dsl.filtering.not
 import com.algolia.search.dsl.filters
 import com.algolia.search.dsl.query
-import runBlocking
 import documentation.index
+import runBlocking
 import kotlin.test.Test
 
 
@@ -53,8 +53,7 @@ internal class DocFilters {
     fun searchQuery() {
         runBlocking {
             // "(category:Book OR category:Ebook) AND _tags:published"
-            val query = query {
-                query = "query"
+            val query = query("query") {
                 filters {
                     orFacet {
                         +facet("category", "Book")
@@ -79,8 +78,7 @@ internal class DocFilters {
             //  AND publication_date:1441745506 TO 1441755506
             //  AND inStock > 0
             //  AND author:\"John Doe\"";
-            val query = query {
-                query = ""
+            val query = query("query") {
                 filters {
                     and {
                         +comparison("available", Equals, 1)
@@ -104,8 +102,7 @@ internal class DocFilters {
     fun handleSpaces() {
         runBlocking {
             // "\"category\":\"Books and Comics\""
-            val query = query {
-                query = "query"
+            val query = query("query") {
                 filters {
                     and {
                         +facet("category", "Books and Comics")
@@ -121,8 +118,7 @@ internal class DocFilters {
     fun conflictingKeyword() {
         runBlocking {
             // "\"keyword\":\"OR\""
-            val query = query {
-                query = "query"
+            val query = query("query") {
                 filters {
                     and {
                         +facet("keyword", "OR")
@@ -138,8 +134,7 @@ internal class DocFilters {
     fun singleQuotes() {
         runBlocking {
             // "\"content\":\"It's a wonderful day\""
-            val query = query {
-                query = "query"
+            val query = query("query") {
                 filters {
                     and {
                         +facet("content", "It's a wonderful day")
@@ -155,8 +150,7 @@ internal class DocFilters {
     fun doubleQuotes() {
         runBlocking {
             // "\"content\":\"She said Hello World\""
-            val query = query {
-                query = "query"
+            val query = query("query") {
                 filters {
                     and {
                         +facet("content", "She said Hello World")
