@@ -5,9 +5,10 @@ import com.algolia.search.dsl.attributes.DSLAttributesForFaceting
 import com.algolia.search.dsl.attributes.DSLAttributesToRetrieve
 import com.algolia.search.dsl.attributes.DSLSearchableAttributes
 import com.algolia.search.dsl.highlighting.DSLSnippet
+import com.algolia.search.dsl.languages.DSLQueryLanguages
 import com.algolia.search.dsl.ranking.DSLCustomRanking
-import com.algolia.search.dsl.ranking.DSLRanking
 import com.algolia.search.dsl.ranking.DSLIndexName
+import com.algolia.search.dsl.ranking.DSLRanking
 import com.algolia.search.model.settings.Settings
 
 
@@ -55,4 +56,8 @@ public fun Settings.disableTypoToleranceOnAttributes(block: DSLAttributes.() -> 
 
 public fun Settings.disableTypoToleranceOnWords(block: DSLStrings.() -> Unit) {
     disableTypoToleranceOnWords = DSLStrings().apply(block).build()
+}
+
+public fun Settings.queryLanguages(block: DSLQueryLanguages.() -> Unit) {
+    queryLanguages = DSLQueryLanguages().apply(block).build()
 }

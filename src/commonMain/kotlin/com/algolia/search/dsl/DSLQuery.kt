@@ -7,7 +7,9 @@ import com.algolia.search.dsl.filtering.DSLFilters
 import com.algolia.search.dsl.filtering.DSLNumericFilters
 import com.algolia.search.dsl.filtering.DSLTagFilters
 import com.algolia.search.dsl.geosearch.DSLBoundingBoxes
+import com.algolia.search.dsl.geosearch.DSLPolygons
 import com.algolia.search.dsl.highlighting.DSLSnippet
+import com.algolia.search.dsl.languages.DSLQueryLanguages
 import com.algolia.search.model.search.Query
 
 
@@ -63,4 +65,8 @@ public fun Query.insideBoundingBox(block: DSLBoundingBoxes.() -> Unit) {
 
 public fun Query.insidePolygon(block: DSLPolygons.() -> Unit) {
     insidePolygon = DSLPolygons().apply(block).build()
+}
+
+public fun Query.queryLanguages(block: DSLQueryLanguages.() -> Unit) {
+    queryLanguages = DSLQueryLanguages().apply(block).build()
 }

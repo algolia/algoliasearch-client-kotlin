@@ -108,4 +108,13 @@ internal class TestDSLSettings {
 
         settings.disableTypoToleranceOnWords!!.shouldNotBeEmpty()
     }
+
+    @Test
+    fun queryLanguages() {
+        val settings = settings {
+            queryLanguages { +English }
+        }
+
+        settings.queryLanguages!!.shouldNotBeEmpty()
+    }
 }

@@ -142,4 +142,13 @@ internal class TestDSLQuery {
 
         query.insidePolygon!!.shouldNotBeEmpty()
     }
+
+    @Test
+    fun queryLanguages() {
+        val query = query {
+            queryLanguages { +English }
+        }
+
+        query.queryLanguages!!.shouldNotBeEmpty()
+    }
 }
