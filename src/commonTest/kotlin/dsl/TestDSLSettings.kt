@@ -7,7 +7,7 @@ import shouldNotBeEmpty
 import kotlin.test.Test
 
 
-internal class TestSettings {
+internal class TestDSLSettings {
 
     @Test
     fun searchableAttributes() {
@@ -70,5 +70,23 @@ internal class TestSettings {
         }
 
         settings.replicas!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun attributesToHighlight() {
+        val settings = settings {
+            attributesToHighlight { +attributeA }
+        }
+
+        settings.attributesToHighlight!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun attributesToSnippet() {
+        val settings = settings {
+            attributesToSnippet { +attributeA }
+        }
+
+        settings.attributesToSnippet!!.shouldNotBeEmpty()
     }
 }

@@ -90,4 +90,22 @@ internal class TestDSLQuery {
 
         query.facets!!.isNotEmpty()
     }
+
+    @Test
+    fun attributesToHighlight() {
+        val query = query {
+            attributesToHighlight { +attributeA }
+        }
+
+        query.attributesToHighlight!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun attributesToSnippet() {
+        val query = query {
+            attributesToSnippet { +attributeA }
+        }
+
+        query.attributesToSnippet!!.shouldNotBeEmpty()
+    }
 }

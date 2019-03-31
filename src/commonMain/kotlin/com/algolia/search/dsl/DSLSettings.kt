@@ -4,6 +4,7 @@ import com.algolia.search.dsl.attributes.DSLAttributes
 import com.algolia.search.dsl.attributes.DSLAttributesForFaceting
 import com.algolia.search.dsl.attributes.DSLAttributesToRetrieve
 import com.algolia.search.dsl.attributes.DSLSearchableAttributes
+import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.dsl.ranking.DSLCustomRanking
 import com.algolia.search.dsl.ranking.DSLRanking
 import com.algolia.search.dsl.ranking.DSLReplicas
@@ -38,4 +39,12 @@ public fun Settings.customRanking(block: DSLCustomRanking.() -> Unit) {
 
 public fun Settings.replicas(block: DSLReplicas.() -> Unit) {
     replicas = DSLReplicas().apply(block).build()
+}
+
+public fun Settings.attributesToHighlight(block: DSLAttributes.() -> Unit) {
+    attributesToHighlight = DSLAttributes().apply(block).build()
+}
+
+public fun Settings.attributesToSnippet(block: DSLSnippet.() -> Unit) {
+    attributesToSnippet = DSLSnippet().apply(block).build()
 }

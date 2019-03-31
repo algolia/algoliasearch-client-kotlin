@@ -6,6 +6,7 @@ import com.algolia.search.dsl.filtering.DSLFacetFilters
 import com.algolia.search.dsl.filtering.DSLFilters
 import com.algolia.search.dsl.filtering.DSLNumericFilters
 import com.algolia.search.dsl.filtering.DSLTagFilters
+import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.model.search.Query
 
 
@@ -41,4 +42,12 @@ public fun Query.tagFilters(block: DSLTagFilters.() -> Unit) {
 
 public fun Query.facets(block: DSLAttributes.() -> Unit) {
     facets = DSLAttributes().apply(block).build()
+}
+
+public fun Query.attributesToHighlight(block: DSLAttributes.() -> Unit) {
+    attributesToHighlight = DSLAttributes().apply(block).build()
+}
+
+public fun Query.attributesToSnippet(block: DSLSnippet.() -> Unit) {
+    attributesToSnippet = DSLSnippet().apply(block).build()
 }
