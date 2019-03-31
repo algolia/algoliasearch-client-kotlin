@@ -2,6 +2,9 @@ package dsl
 
 import attributeA
 import com.algolia.search.dsl.*
+import com.algolia.search.helper.and
+import com.algolia.search.model.search.BoundingBox
+import com.algolia.search.model.search.Polygon
 import shouldNotBeEmpty
 import unknown
 import kotlin.test.Test
@@ -116,5 +119,27 @@ internal class TestDSLQuery {
         }
 
         query.disableTypoToleranceOnAttributes!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun insideBoundingBox() {
+        val query = query {
+            insideBoundingBox {
+                +BoundingBox(0f and 1f, 2f and 3f)
+            }
+        }
+
+        query.insideBoundingBox!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun insidePolygon() {
+        val query = query {
+            insidePolygon {
+                +Polygon(0f and 1f, 2f and 3f, 4f and 5f)
+            }
+        }
+
+        query.insidePolygon!!.shouldNotBeEmpty()
     }
 }

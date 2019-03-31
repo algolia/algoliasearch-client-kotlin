@@ -6,6 +6,7 @@ import com.algolia.search.dsl.filtering.DSLFacetFilters
 import com.algolia.search.dsl.filtering.DSLFilters
 import com.algolia.search.dsl.filtering.DSLNumericFilters
 import com.algolia.search.dsl.filtering.DSLTagFilters
+import com.algolia.search.dsl.geosearch.DSLBoundingBoxes
 import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.model.search.Query
 
@@ -54,4 +55,12 @@ public fun Query.attributesToSnippet(block: DSLSnippet.() -> Unit) {
 
 public fun Query.disableTypoToleranceOnAttributes(block: DSLAttributes.() -> Unit) {
     disableTypoToleranceOnAttributes = DSLAttributes().apply(block).build()
+}
+
+public fun Query.insideBoundingBox(block: DSLBoundingBoxes.() -> Unit) {
+    insideBoundingBox = DSLBoundingBoxes().apply(block).build()
+}
+
+public fun Query.insidePolygon(block: DSLPolygons.() -> Unit) {
+    insidePolygon = DSLPolygons().apply(block).build()
 }
