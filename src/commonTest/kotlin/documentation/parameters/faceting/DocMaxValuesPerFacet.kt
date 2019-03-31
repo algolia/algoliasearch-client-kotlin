@@ -2,8 +2,8 @@ package documentation.parameters.faceting
 
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
-import runBlocking
 import documentation.TestDocumentation
+import runBlocking
 import kotlin.test.Test
 
 
@@ -12,7 +12,7 @@ internal class DocMaxValuesPerFacet : TestDocumentation() {
 //    maxValuesPerFacet: Int = maxValue
 
     @Test
-    fun snippetSettings() {
+    fun settings() {
         runBlocking {
             val settings = settings {
                 maxValuesPerFacet = 100
@@ -23,7 +23,7 @@ internal class DocMaxValuesPerFacet : TestDocumentation() {
     }
 
     @Test
-    fun snippetQuery() {
+    fun query() {
         runBlocking {
             val query = query {
                 maxValuesPerFacet = 50

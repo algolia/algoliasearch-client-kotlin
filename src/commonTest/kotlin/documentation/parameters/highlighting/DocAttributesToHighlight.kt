@@ -3,8 +3,8 @@ package documentation.parameters.highlighting
 import com.algolia.search.dsl.attributesToHighlight
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
-import runBlocking
 import documentation.TestDocumentation
+import runBlocking
 import kotlin.test.Test
 
 
@@ -16,7 +16,7 @@ internal class DocAttributesToHighlight : TestDocumentation() {
 //    }
 
     @Test
-    fun snippetSettings() {
+    fun sSettings() {
         runBlocking {
             val settings = settings {
                 attributesToHighlight {
@@ -31,7 +31,7 @@ internal class DocAttributesToHighlight : TestDocumentation() {
     }
 
     @Test
-    fun snippetQuery() {
+    fun query() {
         runBlocking {
             val query = query {
                 attributesToHighlight {

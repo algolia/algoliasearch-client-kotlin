@@ -2,8 +2,8 @@ package documentation.parameters.attributes
 
 import com.algolia.search.dsl.settings
 import com.algolia.search.dsl.unretrieveableAttributes
-import runBlocking
 import documentation.TestDocumentation
+import runBlocking
 import kotlin.test.Test
 
 
@@ -14,7 +14,7 @@ internal class DocUnretrievableAttributes : TestDocumentation() {
 //    }
 
     @Test
-    fun snippet() {
+    fun settings() {
         runBlocking {
             val settings = settings {
                 unretrieveableAttributes {

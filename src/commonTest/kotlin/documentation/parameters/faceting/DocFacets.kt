@@ -2,8 +2,8 @@ package documentation.parameters.faceting
 
 import com.algolia.search.dsl.facets
 import com.algolia.search.dsl.query
-import runBlocking
 import documentation.index
+import runBlocking
 import kotlin.test.Test
 
 
@@ -14,7 +14,7 @@ internal class DocFacets {
 //    }
 
     @Test
-    fun snippet() {
+    fun query() {
         runBlocking {
             val query = query {
                 query = "query"

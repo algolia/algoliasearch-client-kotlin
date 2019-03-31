@@ -2,8 +2,8 @@ package documentation.parameters.ranking
 
 import com.algolia.search.dsl.replicas
 import com.algolia.search.dsl.settings
-import runBlocking
 import documentation.TestDocumentation
+import runBlocking
 import kotlin.test.Test
 
 
@@ -15,7 +15,7 @@ internal class DocReplicas : TestDocumentation() {
 //    }
 
     @Test
-    fun snippet() {
+    fun settings() {
         runBlocking {
             val settings = settings {
                 replicas {

@@ -2,8 +2,8 @@ package documentation.parameters.attributes
 
 import com.algolia.search.dsl.attributesForFaceting
 import com.algolia.search.dsl.settings
-import runBlocking
 import documentation.TestDocumentation
+import runBlocking
 import kotlin.test.Test
 
 
@@ -16,7 +16,7 @@ internal class DocAttributesForFaceting : TestDocumentation() {
 //    }
 
     @Test
-    fun snippet() {
+    fun settings() {
         runBlocking {
             val settings = settings {
                 attributesForFaceting {
