@@ -83,3 +83,7 @@ public fun Query.disableExactOnAttributes(block: DSLAttributes.() -> Unit) {
 public fun Query.alternativesAsExact(block: DSLAlternativesAsExact.() -> Unit) {
     alternativesAsExact = DSLAlternativesAsExact().apply(block).build()
 }
+
+public fun Query.ruleContexts(block: DSLStrings.() -> Unit) {
+    ruleContexts = DSLStrings().apply(block).build()
+}

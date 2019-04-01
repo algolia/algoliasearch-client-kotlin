@@ -178,4 +178,13 @@ internal class TestDSLQuery {
 
         query.alternativesAsExact!!.shouldNotBeEmpty()
     }
+
+    @Test
+    fun ruleContexts() {
+        val query = query {
+            ruleContexts { +unknown }
+        }
+
+        query.ruleContexts!!.shouldNotBeEmpty()
+    }
 }
