@@ -17,7 +17,7 @@ object KSerializerFacetList : KSerializer<List<Facet>> {
         val json = jsonArray {
             obj.map {
                 +json {
-                    KeyValue to it.name
+                    KeyValue to it.value
                     KeyCount to it.count
                 }
             }

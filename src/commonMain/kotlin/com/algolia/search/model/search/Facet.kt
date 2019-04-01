@@ -11,7 +11,7 @@ import kotlinx.serialization.Transient
 
 @Serializable
 public data class Facet(
-    @SerialName(KeyName) val name: String,
+    @SerialName(KeyName) val value: String,
     @SerialName(KeyCount) val count: Int,
     @SerialName(KeyHighlighted) val highlightedOrNull: String? = null
 ) {
@@ -21,11 +21,11 @@ public data class Facet(
         get() = highlightedOrNull!!
 }
 
-public operator fun List<Facet>.get(name: String): Int {
-    return find { it.name == name }!!.count
+public operator fun List<Facet>.get(value: String): Int {
+    return find { it.value == value }!!.count
 }
 
 
-public operator fun Map<Attribute, List<Facet>>.get(attribute: Attribute, name: String): Int {
-    return getValue(attribute).find { it.name == name }!!.count
+public operator fun Map<Attribute, List<Facet>>.get(attribute: Attribute, value: String): Int {
+    return getValue(attribute).find { it.value == value }!!.count
 }
