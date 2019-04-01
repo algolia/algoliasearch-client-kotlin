@@ -11,7 +11,7 @@ public data class DecompoundedAttributes internal constructor(
     val map: Map<QueryLanguage, List<Attribute>>
 ) {
 
-    private constructor(
+    internal constructor(
         language: QueryLanguage,
         attributes: List<Attribute>
     ) : this(mapOf(language to attributes.toList()))

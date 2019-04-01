@@ -117,4 +117,22 @@ internal class TestDSLSettings {
 
         settings.queryLanguages!!.shouldNotBeEmpty()
     }
+
+    @Test
+    fun camelCaseAttributes() {
+        val settings = settings {
+            camelCaseAttributes { +attributeA }
+        }
+
+        settings.camelCaseAttributes!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun decompoundedAttributes() {
+        val settings = settings {
+            decompoundedAttributes { +dutch { +attributeA } }
+        }
+
+        settings.decompoundedAttributes!!.shouldNotBeEmpty()
+    }
 }

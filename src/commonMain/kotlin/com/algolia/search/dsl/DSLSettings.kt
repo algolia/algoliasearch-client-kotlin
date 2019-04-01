@@ -5,6 +5,7 @@ import com.algolia.search.dsl.attributes.DSLAttributesForFaceting
 import com.algolia.search.dsl.attributes.DSLAttributesToRetrieve
 import com.algolia.search.dsl.attributes.DSLSearchableAttributes
 import com.algolia.search.dsl.highlighting.DSLSnippet
+import com.algolia.search.dsl.languages.DSLDecompoundedAttributes
 import com.algolia.search.dsl.languages.DSLQueryLanguages
 import com.algolia.search.dsl.ranking.DSLCustomRanking
 import com.algolia.search.dsl.ranking.DSLIndexName
@@ -60,4 +61,12 @@ public fun Settings.disableTypoToleranceOnWords(block: DSLStrings.() -> Unit) {
 
 public fun Settings.queryLanguages(block: DSLQueryLanguages.() -> Unit) {
     queryLanguages = DSLQueryLanguages().apply(block).build()
+}
+
+public fun Settings.camelCaseAttributes(block: DSLAttributes.() -> Unit) {
+    camelCaseAttributes = DSLAttributes().apply(block).build()
+}
+
+public fun Settings.decompoundedAttributes(block: DSLDecompoundedAttributes.() -> Unit) {
+    decompoundedAttributes = DSLDecompoundedAttributes().apply(block).build()
 }

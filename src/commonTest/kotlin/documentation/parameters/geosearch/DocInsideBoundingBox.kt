@@ -21,7 +21,7 @@ internal class DocInsideBoundingBox {
     @Test
     fun query() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 insideBoundingBox {
                     +BoundingBox(
                         Point(46.650828100116044f, 7.123046875f),
@@ -37,7 +37,7 @@ internal class DocInsideBoundingBox {
     @Test
     fun queryMultiple() {
         runBlocking {
-            val query = query {
+            val query = query("query") {
                 insideBoundingBox {
                     +BoundingBox(
                         Point(latitude = 46.650828100116044f, longitude = 7.123046875f),

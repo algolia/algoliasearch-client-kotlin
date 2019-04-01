@@ -5,11 +5,11 @@ import com.algolia.search.dsl.query
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
+import documentation.client
 import io.ktor.client.features.ResponseException
 import kotlinx.serialization.Serializable
 import runBlocking
 import shouldFailWith
-import documentation.client
 import kotlin.test.Test
 
 
@@ -34,8 +34,7 @@ internal class DocSearch {
 
                 val indexName = IndexName("contacts")
                 val index = client.initIndex(indexName)
-                val query = query {
-                    query = "query string"
+                val query = query("query") {
                     hitsPerPage = 50
                     attributesToRetrieve {
                         +"firstname"
