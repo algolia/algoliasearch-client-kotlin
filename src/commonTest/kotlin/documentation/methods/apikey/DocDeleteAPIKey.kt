@@ -1,11 +1,13 @@
 package documentation.methods.apikey
 
 import com.algolia.search.model.APIKey
-import runBlocking
 import documentation.TestDocumentation
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocDeleteAPIKey : TestDocumentation() {
 
 //    suspend fun ClientSearch.deleteAPIKey(

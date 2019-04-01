@@ -2,13 +2,13 @@ package documentation.methods.multicluster
 
 import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
-import io.ktor.client.features.ResponseException
-import runBlocking
-import shouldFailWith
 import documentation.client
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocAssignUserID {
 
 //    suspend fun ClientSearch.assignUserID(
@@ -18,10 +18,8 @@ internal class DocAssignUserID {
 
     @Test
     fun assignUserID() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                client.assignUserID(UserID("myUserID1"), ClusterName("c1-test"))
-            }
+        runBlocking {
+            client.assignUserID(UserID("myUserID1"), ClusterName("c1-test"))
         }
     }
 }

@@ -1,13 +1,15 @@
 package documentation.methods.indexing
 
+import documentation.TestDocumentation
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocReplaceAllObjects: TestDocumentation() {
+@Ignore
+internal class DocReplaceAllObjects : TestDocumentation() {
 
 //    suspend fun Index.replaceAllObjects(
 //        [data](#method-param-objects): __List<JsonObject>__

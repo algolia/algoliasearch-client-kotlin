@@ -26,7 +26,7 @@ internal object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
     private val serializer = HashMapSerializer(StringSerializer, HashMapSerializer(StringSerializer, IntSerializer))
 
     override fun serialize(encoder: Encoder, obj: Map<Attribute, List<Facet>>) {
-        val element = obj.map { (key, value) -> key.raw to value.map { it.name to it.count }.toMap() }.toMap()
+        val element = obj.map { (key, value) -> key.raw to value.map { it.value to it.count }.toMap() }.toMap()
 
         serializer.serialize(encoder, element)
     }

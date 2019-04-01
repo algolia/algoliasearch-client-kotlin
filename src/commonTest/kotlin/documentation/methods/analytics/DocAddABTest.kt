@@ -16,9 +16,11 @@ import suite.cleanIndex
 import suite.testSuiteIndexName
 import kotlin.test.AfterTest
 import kotlin.test.BeforeTest
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocAddABTest {
 
 //    suspend fun ClientAnalytics.addABTest(

@@ -2,12 +2,14 @@ package documentation.parameters.ranking
 
 import com.algolia.search.dsl.ranking
 import com.algolia.search.dsl.settings
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocRanking : TestDocumentation() {
+@Ignore
+internal class DocRanking {
 
 //    ranking {
 //        // the `asc` and `desc` modifiers must be placed at the top

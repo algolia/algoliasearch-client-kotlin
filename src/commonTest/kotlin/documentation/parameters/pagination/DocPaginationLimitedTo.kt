@@ -1,12 +1,14 @@
 package documentation.parameters.pagination
 
 import com.algolia.search.dsl.settings
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocPaginationLimitedTo : TestDocumentation() {
+@Ignore
+internal class DocPaginationLimitedTo {
 
 //   paginationLimitedTo: Int = number_of_records
 

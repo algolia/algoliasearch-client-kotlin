@@ -7,11 +7,12 @@ import com.algolia.search.model.QueryID
 import com.algolia.search.model.insights.EventName
 import com.algolia.search.model.insights.UserToken
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocClickedObjectIDsAfterSearch : TestDocumentation() {
+@Ignore
+internal class DocClickedObjectIDsAfterSearch {
 
 //    suspend fun ClientInsights.User.clickedObjectIDsAfterSearch(
 //        #{indexName}: __IndexName__,

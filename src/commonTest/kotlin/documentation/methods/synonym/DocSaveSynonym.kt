@@ -3,12 +3,14 @@ package documentation.methods.synonym
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocSaveSynonym : TestDocumentation() {
+@Ignore
+internal class DocSaveSynonym {
 
 //    suspend fun Index.saveSynonym(
 //        #{synonym}: __Synonym__,

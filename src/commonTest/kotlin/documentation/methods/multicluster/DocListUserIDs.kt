@@ -1,12 +1,12 @@
 package documentation.methods.multicluster
 
-import io.ktor.client.features.ResponseException
-import runBlocking
-import shouldFailWith
 import documentation.client
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocListUserIDs {
 
 //    suspend fun ClientSearch.listUserIDs(
@@ -17,10 +17,8 @@ internal class DocListUserIDs {
 
     @Test
     fun listCluster() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                client.listUserIDs()
-            }
+        runBlocking {
+            client.listUserIDs()
         }
     }
 }

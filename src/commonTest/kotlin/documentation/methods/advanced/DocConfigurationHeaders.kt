@@ -4,9 +4,11 @@ import com.algolia.search.client.ClientSearch
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocConfigurationHeaders {
 
 //    data class ConfigurationSearch(

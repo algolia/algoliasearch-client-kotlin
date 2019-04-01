@@ -3,12 +3,14 @@ package documentation.methods.indexing
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Partial
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocPartialUpdate: TestDocumentation() {
+@Ignore
+internal class DocPartialUpdate {
 
 //    suspend fun Index.partialUpdateObject(
 //        objectID: __ObjectID__,

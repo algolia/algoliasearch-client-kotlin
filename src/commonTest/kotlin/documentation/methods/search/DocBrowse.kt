@@ -2,13 +2,13 @@ package documentation.methods.search
 
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.search.Query
-import io.ktor.client.features.ResponseException
-import runBlocking
-import shouldFailWith
 import documentation.index
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocBrowse {
 
 //    suspend fun Index.browseObjects(
@@ -30,16 +30,14 @@ internal class DocBrowse {
 
     @Test
     fun extraHttpHeaders() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                val query = Query(query = "")
-                val requestOptions = requestOptionsBuilder {
-                    header("X-Algolia-User-ID", "user123")
-                }
+        runBlocking {
+            val query = Query(query = "")
+            val requestOptions = requestOptionsBuilder {
+                header("X-Algolia-User-ID", "user123")
+            }
 
-                index.browseObjects(query, requestOptions) { responseSearch ->
-                    println(responseSearch.hits)
-                }
+            index.browseObjects(query, requestOptions) { responseSearch ->
+                println(responseSearch.hits)
             }
         }
     }

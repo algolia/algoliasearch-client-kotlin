@@ -5,12 +5,14 @@ import com.algolia.search.dsl.queryLanguages
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.QueryLanguage
 import com.algolia.search.model.search.RemoveStopWords
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocRemoveStopWords : TestDocumentation() {
+@Ignore
+internal class DocRemoveStopWords {
 
 //    removeStopWords: RemoveStopWords = RemoveStopWords.Boolean|RemoveStopWords.QueryLanguages
 

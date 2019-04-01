@@ -6,13 +6,13 @@ import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
 import documentation.client
-import io.ktor.client.features.ResponseException
 import kotlinx.serialization.Serializable
 import runBlocking
-import shouldFailWith
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocSearch {
 
 //     suspend fun Index.search(
@@ -24,43 +24,39 @@ internal class DocSearch {
 
     @Test
     fun example() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                @Serializable
-                data class Contact(
-                    val firstname: String,
-                    val lastname: String
-                )
+        runBlocking {
+            @Serializable
+            data class Contact(
+                val firstname: String,
+                val lastname: String
+            )
 
-                val indexName = IndexName("contacts")
-                val index = client.initIndex(indexName)
-                val query = query("query") {
-                    hitsPerPage = 50
-                    attributesToRetrieve {
-                        +"firstname"
-                        +"lastname"
-                    }
+            val indexName = IndexName("contacts")
+            val index = client.initIndex(indexName)
+            val query = query("query") {
+                hitsPerPage = 50
+                attributesToRetrieve {
+                    +"firstname"
+                    +"lastname"
                 }
-                val response = index.search(query)
-
-                response.hits.map { it.parse(Contact.serializer()) }
             }
+            val response = index.search(query)
+
+            response.hits.map { it.parse(Contact.serializer()) }
         }
     }
 
     @Test
     fun exampleExtraHeaders() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                val indexName = IndexName("contacts")
-                val index = client.initIndex(indexName)
-                val query = Query("query")
-                val requestOptions = requestOptionsBuilder {
-                    header("X-Algolia-User-ID", "user123")
-                }
-
-                index.search(query, requestOptions)
+        runBlocking {
+            val indexName = IndexName("contacts")
+            val index = client.initIndex(indexName)
+            val query = Query("query")
+            val requestOptions = requestOptionsBuilder {
+                header("X-Algolia-User-ID", "user123")
             }
+
+            index.search(query, requestOptions)
         }
     }
 }

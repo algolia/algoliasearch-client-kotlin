@@ -1,10 +1,12 @@
 package documentation.methods.settings
 
-import runBlocking
 import documentation.index
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocGetSettings {
 
 //    suspend fun Index.getSettings(

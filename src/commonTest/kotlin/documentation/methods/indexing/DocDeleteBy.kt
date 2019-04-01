@@ -3,12 +3,14 @@ package documentation.methods.indexing
 import com.algolia.search.model.indexing.DeleteByQuery
 import com.algolia.search.model.search.AroundRadius
 import com.algolia.search.model.search.Point
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocDeleteBy : TestDocumentation() {
+@Ignore
+internal class DocDeleteBy {
 
 //    suspend fun Index.deleteObjectsBy(
 //        [query](#method-param-filterParameters): __DeleteByQuery__,

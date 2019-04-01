@@ -7,15 +7,17 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.CustomRankingCriterium
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
+import documentation.TestDocumentation
 import io.ktor.client.features.ResponseException
 import kotlinx.serialization.Serializable
 import runBlocking
 import shouldFailWith
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
 @Suppress("RemoveExplicitTypeArguments")
+@Ignore
 internal class DocQuickStart : TestDocumentation() {
 
     @Test

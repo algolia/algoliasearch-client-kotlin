@@ -1,13 +1,14 @@
 package documentation.methods.settings
 
-import io.ktor.client.features.ResponseException
+import documentation.index
+import indexName
 import runBlocking
-import shouldFailWith
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocCopySettings : TestDocumentation() {
+@Ignore
+internal class DocCopySettings {
 
 //    suspend fun [Index](#method-param-indexnamesrc).copySettings(
 //        [destination](#method-param-indexnamedest): __IndexName__,
@@ -16,10 +17,8 @@ internal class DocCopySettings : TestDocumentation() {
 
     @Test
     fun copySettings() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                index.copySettings(indexName)
-            }
+        runBlocking {
+            index.copySettings(indexName)
         }
     }
 }

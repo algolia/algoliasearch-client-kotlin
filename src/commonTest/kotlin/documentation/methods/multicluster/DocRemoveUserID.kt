@@ -1,13 +1,13 @@
 package documentation.methods.multicluster
 
 import com.algolia.search.model.multicluster.UserID
-import io.ktor.client.features.ResponseException
-import runBlocking
-import shouldFailWith
 import documentation.client
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocRemoveUserID {
 
 //    suspend fun ClientSearch.removeUserID(
@@ -17,10 +17,8 @@ internal class DocRemoveUserID {
 
     @Test
     fun removeUserID() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                client.removeUserID(UserID("myUserID1"))
-            }
+        runBlocking {
+            client.removeUserID(UserID("myUserID1"))
         }
     }
 }

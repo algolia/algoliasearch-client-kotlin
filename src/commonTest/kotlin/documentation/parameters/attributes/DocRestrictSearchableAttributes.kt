@@ -6,9 +6,11 @@ import documentation.index
 import io.ktor.client.features.ResponseException
 import runBlocking
 import shouldFailWith
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocRestrictSearchableAttributes {
 
 //    restrictSearchableAttributes {

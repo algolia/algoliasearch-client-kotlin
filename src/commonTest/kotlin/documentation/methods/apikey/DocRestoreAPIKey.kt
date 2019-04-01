@@ -1,13 +1,13 @@
 package documentation.methods.apikey
 
 import com.algolia.search.model.APIKey
-import io.ktor.client.features.ResponseException
-import runBlocking
-import shouldFailWith
 import documentation.TestDocumentation
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocRestoreAPIKey : TestDocumentation() {
 
 //    suspend fun ClientSearch.restoreAPIKey(
@@ -17,10 +17,8 @@ internal class DocRestoreAPIKey : TestDocumentation() {
 
     @Test
     fun restoreAPIKey() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                client.restoreAPIKey(APIKey("107da8d0afc2d225ff9a7548caaf599f"))
-            }
+        runBlocking {
+            client.restoreAPIKey(APIKey("107da8d0afc2d225ff9a7548caaf599f"))
         }
     }
 }

@@ -5,12 +5,12 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.apikey.APIKeyParams
 import documentation.TestDocumentation
-import io.ktor.client.features.ResponseException
 import runBlocking
-import shouldFailWith
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocUpdateAPIKey : TestDocumentation() {
 
 //    suspend fun ClientSearch.updateAPIKey(
@@ -21,35 +21,31 @@ internal class DocUpdateAPIKey : TestDocumentation() {
 
     @Test
     fun updateAPIKey() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                // Update an existing API key that is valid for 300 seconds
-                val apiKey = APIKeyParams(
-                    ACLs = listOf(ACL.Search),
-                    validity = 300
-                )
+        runBlocking {
+            // Update an existing API key that is valid for 300 seconds
+            val apiKey = APIKeyParams(
+                ACLs = listOf(ACL.Search),
+                validity = 300
+            )
 
-                client.updateAPIKey(APIKey("myAPIKey"), apiKey)
-            }
+            client.updateAPIKey(APIKey("myAPIKey"), apiKey)
         }
     }
 
     @Test
     fun updateAPIKeyAdvanced() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                // Update an existing index specific API key valid for 300 seconds,
-                // with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
-                val apiKey = APIKeyParams(
-                    ACLs = listOf(ACL.Search),
-                    indices = listOf(IndexName("dev_*")),
-                    maxHitsPerQuery = 20,
-                    maxQueriesPerIPPerHour = 100,
-                    validity = 300
-                )
+        runBlocking {
+            // Update an existing index specific API key valid for 300 seconds,
+            // with a rate limit of 100 calls per hour per IP and a maximum of 20 hits
+            val apiKey = APIKeyParams(
+                ACLs = listOf(ACL.Search),
+                indices = listOf(IndexName("dev_*")),
+                maxHitsPerQuery = 20,
+                maxQueriesPerIPPerHour = 100,
+                validity = 300
+            )
 
-                client.updateAPIKey(APIKey("myAPIKey"), apiKey)
-            }
+            client.updateAPIKey(APIKey("myAPIKey"), apiKey)
         }
     }
 }

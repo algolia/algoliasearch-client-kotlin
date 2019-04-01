@@ -2,9 +2,11 @@ package documentation.methods.indexing
 
 import documentation.TestDocumentation
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocClearObjects : TestDocumentation() {
 
 //    suspend fun Index.clearObjects(

@@ -1,12 +1,14 @@
 package documentation.methods.synonym
 
 import com.algolia.search.model.ObjectID
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocDeleteSynonym : TestDocumentation() {
+@Ignore
+internal class DocDeleteSynonym {
 
 //    suspend fun Index.deleteSynonym(
 //        #{objectID}: __ObjectID__,

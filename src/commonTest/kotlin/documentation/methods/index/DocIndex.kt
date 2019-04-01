@@ -4,9 +4,11 @@ import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocIndex {
 
     @Test

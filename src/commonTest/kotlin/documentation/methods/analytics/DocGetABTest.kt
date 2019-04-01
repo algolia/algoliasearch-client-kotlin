@@ -2,12 +2,12 @@ package documentation.methods.analytics
 
 import clientAnalytics
 import com.algolia.search.model.analytics.ABTestID
-import io.ktor.client.features.ResponseException
 import runBlocking
-import shouldFailWith
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocGetABTest {
 
 //    suspend fun ClientAnalytics.getABTest(
@@ -17,10 +17,8 @@ internal class DocGetABTest {
 
     @Test
     fun getABTest() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                clientAnalytics.getABTest(ABTestID(42))
-            }
+        runBlocking {
+            clientAnalytics.getABTest(ABTestID(42))
         }
     }
 }

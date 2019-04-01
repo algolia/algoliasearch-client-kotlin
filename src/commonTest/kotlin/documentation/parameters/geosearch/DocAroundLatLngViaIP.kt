@@ -7,9 +7,11 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocAroundLatLngViaIP {
 
 //    aroundLatLngViaIP: Boolean = true|false

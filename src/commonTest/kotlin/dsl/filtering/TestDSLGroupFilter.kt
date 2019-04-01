@@ -1,7 +1,9 @@
 package dsl.filtering
 
 import attributeA
-import com.algolia.search.dsl.filtering.*
+import com.algolia.search.dsl.filtering.DSLGroupFilter
+import com.algolia.search.dsl.filtering.Filter
+import com.algolia.search.dsl.filtering.NumericOperator
 import shouldEqual
 import unknown
 import kotlin.test.Test

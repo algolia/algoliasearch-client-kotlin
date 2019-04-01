@@ -2,12 +2,14 @@ package documentation.parameters.languages
 
 import com.algolia.search.dsl.camelCaseAttributes
 import com.algolia.search.dsl.settings
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocCamelCaseAttributes : TestDocumentation() {
+@Ignore
+internal class DocCamelCaseAttributes {
 
 //    camelCaseAttributes {
 //        +"attribute"

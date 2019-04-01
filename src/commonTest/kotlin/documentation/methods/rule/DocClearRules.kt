@@ -1,11 +1,13 @@
 package documentation.methods.rule
 
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocClearRules : TestDocumentation() {
+@Ignore
+internal class DocClearRules {
 
 //    suspend fun Index.clearRules(
 //        #{forwardToReplicas}: __Boolean?__ = null,

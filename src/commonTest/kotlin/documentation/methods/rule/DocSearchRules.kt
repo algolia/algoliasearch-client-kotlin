@@ -2,12 +2,14 @@ package documentation.methods.rule
 
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.RuleQuery
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocSearchRules : TestDocumentation() {
+@Ignore
+internal class DocSearchRules {
 
 //    suspend fun Index.searchRules(
 //        query: __RuleQuery__ = RuleQuery(),

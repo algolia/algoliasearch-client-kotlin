@@ -3,12 +3,14 @@ package documentation.parameters.strategy
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.RemoveWordIfNoResults
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocRemoveWordsIfNoResults: TestDocumentation() {
+@Ignore
+internal class DocRemoveWordsIfNoResults {
 
 //    removeWordsIfNoResults: RemoveWordsIfNoResults = [RemoveWordsIfNoResults.None](#parameter-option-none)
 //    |  [RemoveWordsIfNoResults.LastWords](#parameter-option-lastwords)

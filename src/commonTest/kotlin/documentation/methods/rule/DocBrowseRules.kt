@@ -1,11 +1,13 @@
 package documentation.methods.rule
 
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocBrowseRules : TestDocumentation() {
+@Ignore
+internal class DocBrowseRules {
 
 //    suspend fun Index.browseRules(
 //        query: __RuleQuery__ = RuleQuery(),

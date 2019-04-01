@@ -1,11 +1,13 @@
 package documentation.methods.indices
 
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocDeleteIndex : TestDocumentation() {
+@Ignore
+internal class DocDeleteIndex {
 
 //    suspend fun Index.deleteIndex(
 //        requestOptions: __RequestOptions?__ = null

@@ -3,12 +3,14 @@ package documentation.parameters.strategy
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.ExactOnSingleWordQuery
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocExactOnSingleWordQuery : TestDocumentation() {
+@Ignore
+internal class DocExactOnSingleWordQuery {
 
 //    exactOnSingleWordQuery: ExactOnSingleWordQuery = [ExactOnSingleWordQuery.Attribute](#parameter-option-attribute)
 //    | [ExactOnSingleWordQuery.None](#parameter-option-none)

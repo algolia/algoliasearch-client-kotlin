@@ -3,12 +3,14 @@ package documentation.parameters.faceting
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.SortFacetValuesBy
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocSortFacetValueBy : TestDocumentation() {
+@Ignore
+internal class DocSortFacetValueBy {
 
 //    sortFacetValuesBy: SortFacetValuesBy = [SortFacetValuesBy.Alpha](#parameter-option-alpha)
 //    | [SortFacetValuesBy.Count](#parameter-option-count)

@@ -2,12 +2,14 @@ package documentation.methods.synonym
 
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.synonym.Synonym
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocBatchSynonyms : TestDocumentation() {
+@Ignore
+internal class DocBatchSynonyms {
 
 //    suspend fun Index.saveSynonyms(
 //        #{synonyms}: __List<Synonym>__,

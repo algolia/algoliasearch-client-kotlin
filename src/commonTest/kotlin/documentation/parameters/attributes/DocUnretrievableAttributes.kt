@@ -2,12 +2,14 @@ package documentation.parameters.attributes
 
 import com.algolia.search.dsl.settings
 import com.algolia.search.dsl.unretrieveableAttributes
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocUnretrievableAttributes : TestDocumentation() {
+@Ignore
+internal class DocUnretrievableAttributes {
 
 //    unretrieveableAttributes {
 //        +"attribute"

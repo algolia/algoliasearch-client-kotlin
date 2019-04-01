@@ -3,12 +3,14 @@ package documentation.parameters.strategy
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.QueryType
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocQueryType : TestDocumentation() {
+@Ignore
+internal class DocQueryType {
 
 //    queryType: QueryType = [QueryType.PrefixLast](#parameter-option-prefixlast)
 //    | [QueryType.PrefixAll](#parameter-option-prefixall)

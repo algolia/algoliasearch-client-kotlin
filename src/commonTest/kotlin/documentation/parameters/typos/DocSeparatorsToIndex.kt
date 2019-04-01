@@ -1,12 +1,14 @@
 package documentation.parameters.typos
 
 import com.algolia.search.dsl.settings
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocSeparatorsToIndex : TestDocumentation() {
+@Ignore
+internal class DocSeparatorsToIndex {
 
 //    separatorsToIndex: String = "separator"
 

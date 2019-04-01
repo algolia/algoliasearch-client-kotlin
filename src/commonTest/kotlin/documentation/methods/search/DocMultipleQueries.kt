@@ -4,13 +4,13 @@ import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.search.Query
-import io.ktor.client.features.ResponseException
-import runBlocking
-import shouldFailWith
 import documentation.client
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocMultipleQueries {
 
 //    suspend fun ClientSearch.multipleQueries(
@@ -43,28 +43,26 @@ internal class DocMultipleQueries {
 
     @Test
     fun exampleExtraHeaders() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                val queries = listOf(
-                    IndexQuery(
-                        IndexName("categories"),
-                        Query(query = "query string", hitsPerPage = 3)
-                    ),
-                    IndexQuery(
-                        IndexName("products"),
-                        Query(query = "query string", hitsPerPage = 3, filters = "_tags:promotion")
-                    ),
-                    IndexQuery(
-                        IndexName("products"),
-                        Query(query = "query string", hitsPerPage = 10)
-                    )
+        runBlocking {
+            val queries = listOf(
+                IndexQuery(
+                    IndexName("categories"),
+                    Query(query = "query string", hitsPerPage = 3)
+                ),
+                IndexQuery(
+                    IndexName("products"),
+                    Query(query = "query string", hitsPerPage = 3, filters = "_tags:promotion")
+                ),
+                IndexQuery(
+                    IndexName("products"),
+                    Query(query = "query string", hitsPerPage = 10)
                 )
-                val requestOptions = requestOptionsBuilder {
-                    header("X-Algolia-User-ID", "user123")
-                }
-
-                client.multipleQueries(queries, requestOptions = requestOptions)
+            )
+            val requestOptions = requestOptionsBuilder {
+                header("X-Algolia-User-ID", "user123")
             }
+
+            client.multipleQueries(queries, requestOptions = requestOptions)
         }
     }
 }

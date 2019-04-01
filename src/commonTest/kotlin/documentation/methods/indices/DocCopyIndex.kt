@@ -6,14 +6,15 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.index.Scope
-import io.ktor.client.features.ResponseException
+import documentation.index
+import indexName
 import runBlocking
-import shouldFailWith
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocCopyIndex : TestDocumentation() {
+@Ignore
+internal class DocCopyIndex {
 
 //    suspend fun [Index](#method-param-src)copyIndex(
 //        [destination](#method-param-dst): __IndexName__,
@@ -28,42 +29,36 @@ internal class DocCopyIndex : TestDocumentation() {
 
     @Test
     fun copyIndex() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                index.copyIndex(indexName)
-            }
+        runBlocking {
+            index.copyIndex(indexName)
         }
     }
 
     @Test
     fun copyIndexScope() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                val scopes = listOf(
-                    Scope.Settings,
-                    Scope.Synonyms
-                )
-                index.copyIndex(indexName, scopes)
-            }
+        runBlocking {
+            val scopes = listOf(
+                Scope.Settings,
+                Scope.Synonyms
+            )
+            index.copyIndex(indexName, scopes)
         }
     }
 
     @Test
     fun copyAccount() {
-        shouldFailWith<Exception> {
-            runBlocking {
-                val index1 = ClientSearch(
-                    applicationID = ApplicationID("APP_ID_1"),
-                    apiKey = APIKey("API_KEY_1")
-                ).initIndex(IndexName("index1"))
+        runBlocking {
+            val index1 = ClientSearch(
+                applicationID = ApplicationID("APP_ID_1"),
+                apiKey = APIKey("API_KEY_1")
+            ).initIndex(IndexName("index1"))
 
-                val index2 = ClientSearch(
-                    applicationID = ApplicationID("APP_ID_2"),
-                    apiKey = APIKey("API_KEY_2")
-                ).initIndex(IndexName("index2"))
+            val index2 = ClientSearch(
+                applicationID = ApplicationID("APP_ID_2"),
+                apiKey = APIKey("API_KEY_2")
+            ).initIndex(IndexName("index2"))
 
-                ClientAccount.copyIndex(index1, index2)
-            }
+            ClientAccount.copyIndex(index1, index2)
         }
     }
 }

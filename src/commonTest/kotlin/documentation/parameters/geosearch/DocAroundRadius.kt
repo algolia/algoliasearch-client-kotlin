@@ -4,9 +4,11 @@ import com.algolia.search.dsl.query
 import com.algolia.search.model.search.AroundRadius
 import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocAroundRadius {
 
 //    aroundRadius: AroundRadius = [AroundRadius.InMeters](#parameter-option-radius-in-meters)

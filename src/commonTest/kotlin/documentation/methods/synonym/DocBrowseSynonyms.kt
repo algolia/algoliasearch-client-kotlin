@@ -1,11 +1,13 @@
 package documentation.methods.synonym
 
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocBrowseSynonyms : TestDocumentation() {
+@Ignore
+internal class DocBrowseSynonyms {
 
 //    suspend fun Index.browseSynonyms(
 //        query: __SynonymQuery__ = SynonymQuery(),

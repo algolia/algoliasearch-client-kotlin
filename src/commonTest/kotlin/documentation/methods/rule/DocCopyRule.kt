@@ -1,13 +1,14 @@
 package documentation.methods.rule
 
-import io.ktor.client.features.ResponseException
+import documentation.index
+import indexName
 import runBlocking
-import shouldFailWith
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocCopyRule : TestDocumentation() {
+@Ignore
+internal class DocCopyRule {
 
 //    suspend fun [Index](#method-param-indexnamesrc).copyRules(
 //        [destination](#method-param-indexnamedest): __IndexName__,
@@ -16,10 +17,8 @@ internal class DocCopyRule : TestDocumentation() {
 
     @Test
     fun copyRule() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                index.copyRules(indexName)
-            }
+        runBlocking {
+            index.copyRules(indexName)
         }
     }
 }

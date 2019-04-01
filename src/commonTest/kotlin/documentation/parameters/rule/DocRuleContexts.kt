@@ -2,12 +2,14 @@ package documentation.parameters.rule
 
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.ruleContexts
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocRuleContexts: TestDocumentation() {
+@Ignore
+internal class DocRuleContexts {
 
 //    ruleContexts {
 //        +"context_value"

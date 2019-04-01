@@ -1,10 +1,12 @@
 package documentation.methods.indices
 
-import runBlocking
 import documentation.client
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocListIndices {
 
 //    suspend fun ClientSearch.listIndices(

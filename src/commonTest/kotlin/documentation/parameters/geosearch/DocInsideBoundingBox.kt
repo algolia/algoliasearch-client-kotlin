@@ -6,9 +6,11 @@ import com.algolia.search.model.search.BoundingBox
 import com.algolia.search.model.search.Point
 import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocInsideBoundingBox {
 
 //    insideBoundingBox {

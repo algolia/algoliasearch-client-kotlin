@@ -6,9 +6,11 @@ import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.Polygon
 import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocInsidePolygon {
 
 //    insidePolygon {

@@ -1,12 +1,14 @@
 package documentation.methods.synonym
 
 import com.algolia.search.model.synonym.Synonym
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocReplaceAllSynonym : TestDocumentation() {
+@Ignore
+internal class DocReplaceAllSynonym {
 
 //    suspend fun Index.replaceAllSynonyms(
 //        #{synonyms}: __List<Synonym>__,

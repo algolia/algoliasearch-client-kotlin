@@ -1,12 +1,14 @@
 package documentation.methods.rule
 
 import com.algolia.search.model.rule.Rule
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocReplaceRules: TestDocumentation() {
+@Ignore
+internal class DocReplaceRules {
 
 //    suspend fun Index.replaceAllRules(
 //        #{rules}: __List<Rule>__,

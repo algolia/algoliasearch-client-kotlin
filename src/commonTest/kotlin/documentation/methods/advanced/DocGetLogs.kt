@@ -1,10 +1,12 @@
 package documentation.methods.advanced
 
-import runBlocking
 import documentation.client
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocGetLogs {
 
 //    suspend fun getLogs(

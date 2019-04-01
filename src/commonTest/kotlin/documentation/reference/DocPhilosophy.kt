@@ -9,6 +9,7 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.SortFacetValuesBy
+import documentation.index
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.*
@@ -19,11 +20,12 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldFailWith
-import documentation.index
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
 @Suppress("UNUSED_VARIABLE", "unused")
+@Ignore
 internal class DocPhilosophy {
 
     @Test

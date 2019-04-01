@@ -2,12 +2,14 @@ package documentation.parameters.typos
 
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocMinWordSizeFor1Typo : TestDocumentation() {
+@Ignore
+internal class DocMinWordSizeFor1Typo {
 
 //    minWordSizeFor1Typo: Int = min_word_size
 

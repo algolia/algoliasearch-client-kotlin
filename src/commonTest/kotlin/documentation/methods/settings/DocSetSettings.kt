@@ -4,12 +4,14 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.CustomRankingCriterium
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocSetSettings : TestDocumentation() {
+@Ignore
+internal class DocSetSettings {
 
 //    suspend fun Index.setSettings(
 //        #{settings}: __Settings__,

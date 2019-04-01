@@ -3,12 +3,14 @@ package documentation.parameters.advanced
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.settings.Distinct
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocDistinct : TestDocumentation() {
+@Ignore
+internal class DocDistinct {
 
 //    distinct: Distinct = Distinct.Value(0|1|2|3)
 

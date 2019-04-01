@@ -7,9 +7,11 @@ import com.algolia.search.model.QueryID
 import com.algolia.search.model.insights.EventName
 import com.algolia.search.model.insights.UserToken
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocConvertedObjectIDsAfterSearch {
 
 //    suspend fun ClientInsights.User.convertedObjectIDsAfterSearch(

@@ -5,12 +5,14 @@ import com.algolia.search.dsl.queryLanguages
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.QueryLanguage
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocIgnorePlurals : TestDocumentation() {
+@Ignore
+internal class DocIgnorePlurals {
 
 //    ignorePlurals: IgnorePlurals = IgnorePlurals.Boolean|IgnorePlurals.QueryLanguages
 

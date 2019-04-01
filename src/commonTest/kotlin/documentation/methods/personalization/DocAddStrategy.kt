@@ -6,11 +6,13 @@ import com.algolia.search.model.personalization.EventScoring
 import com.algolia.search.model.personalization.EventType
 import com.algolia.search.model.personalization.FacetScoring
 import com.algolia.search.model.personalization.PersonalizationStrategy
-import runBlocking
 import documentation.TestDocumentation
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocAddStrategy : TestDocumentation() {
 
 //    suspend fun ClientSearch.setPersonalizationStrategy(

@@ -2,14 +2,16 @@ package documentation.methods.indexing
 
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
-import documentation.TestDocumentation
+import documentation.index
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocAddObjects : TestDocumentation() {
+@Ignore
+internal class DocAddObjects {
 
 //    suspend fun <T> Index.saveObject(
 //        serializer: __KSerializer<T>__,

@@ -2,12 +2,14 @@ package documentation.methods.synonym
 
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.model.synonym.SynonymType
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocSearchSynonyms : TestDocumentation() {
+@Ignore
+internal class DocSearchSynonyms {
 
 //    suspend fun Index.searchSynonyms(
 //        query: __SynonymQuery__ = SynonymQuery()

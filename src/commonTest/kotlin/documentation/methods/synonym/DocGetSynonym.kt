@@ -1,14 +1,14 @@
 package documentation.methods.synonym
 
 import com.algolia.search.model.ObjectID
-import io.ktor.client.features.ResponseException
+import documentation.index
 import runBlocking
-import shouldFailWith
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocGetSynonym : TestDocumentation() {
+@Ignore
+internal class DocGetSynonym {
 
 //    suspend fun Index.getSynonym(
 //        #{objectID}: __ObjectID__,
@@ -17,10 +17,8 @@ internal class DocGetSynonym : TestDocumentation() {
 
     @Test
     fun getSynonyms() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                index.getSynonym(ObjectID("myID"))
-            }
+        runBlocking {
+            index.getSynonym(ObjectID("myID"))
         }
     }
 }

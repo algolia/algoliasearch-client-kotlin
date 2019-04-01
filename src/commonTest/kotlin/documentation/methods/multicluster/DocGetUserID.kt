@@ -1,13 +1,13 @@
 package documentation.methods.multicluster
 
 import com.algolia.search.model.multicluster.UserID
-import io.ktor.client.features.ResponseException
-import runBlocking
-import shouldFailWith
 import documentation.client
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocGetUserID {
 
 //    suspend fun ClientSearch.getUserID(
@@ -17,10 +17,8 @@ internal class DocGetUserID {
 
     @Test
     fun getUserID() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                client.getUserID(UserID("myUserID1"))
-            }
+        runBlocking {
+            client.getUserID(UserID("myUserID1"))
         }
     }
 }

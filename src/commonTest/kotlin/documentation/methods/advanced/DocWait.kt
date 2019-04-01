@@ -1,12 +1,14 @@
 package documentation.methods.advanced
 
+import documentation.index
 import kotlinx.serialization.json.json
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocWait : TestDocumentation() {
+@Ignore
+internal class DocWait {
 
 //    suspend fun waitTask(
 //        #{taskID}: __TaskID__,

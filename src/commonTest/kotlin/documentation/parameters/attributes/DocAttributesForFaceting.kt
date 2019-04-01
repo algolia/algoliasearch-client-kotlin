@@ -2,12 +2,14 @@ package documentation.parameters.attributes
 
 import com.algolia.search.dsl.attributesForFaceting
 import com.algolia.search.dsl.settings
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocAttributesForFaceting : TestDocumentation() {
+@Ignore
+internal class DocAttributesForFaceting {
 
 //    attributesForFaceting {
 //        +"attribute1"

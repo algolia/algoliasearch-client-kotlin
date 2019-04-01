@@ -3,12 +3,14 @@ package documentation.methods.rule
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.rule.*
 import com.algolia.search.model.search.Query
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocSaveRule : TestDocumentation() {
+@Ignore
+internal class DocSaveRule {
 
 //    suspend fun Index.saveRule(
 //        [rule](#method-param-queryrule): __Rule__,

@@ -6,13 +6,15 @@ import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.multipleindex.BatchOperationIndex
+import documentation.TestDocumentation
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocCustomBatch : TestDocumentation() {
 
 //    suspend fun ClientSearch.multipleBatchObjects(

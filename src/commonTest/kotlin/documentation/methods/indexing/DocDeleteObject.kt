@@ -1,12 +1,14 @@
 package documentation.methods.indexing
 
 import com.algolia.search.model.ObjectID
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocDeleteObject : TestDocumentation() {
+@Ignore
+internal class DocDeleteObject {
 
 //    suspend fun Index.deleteObject(
 //        #{objectID}: __ObjectID__,

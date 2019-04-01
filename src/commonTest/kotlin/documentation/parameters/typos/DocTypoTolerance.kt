@@ -3,12 +3,14 @@ package documentation.parameters.typos
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.TypoTolerance
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocTypoTolerance : TestDocumentation() {
+@Ignore
+internal class DocTypoTolerance {
 
 //    typoTolerance: TypoTolerance =
 //    [TypoTolerance.Boolean(true)](#parameter-option-true)

@@ -7,12 +7,11 @@ import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.TypoTolerance
 import documentation.TestDocumentation
-import io.ktor.client.features.ResponseException
 import runBlocking
-import shouldFailWith
+import kotlin.test.Ignore
 import kotlin.test.Test
 
-
+@Ignore
 internal class DocAddAPIKey : TestDocumentation() {
 
 //    suspend fun ClientSearch.addAPIKey(
@@ -48,26 +47,24 @@ internal class DocAddAPIKey : TestDocumentation() {
 
     @Test
     fun addAPIKeyAdvanced() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                val params = APIKeyParams(
-                    ACLs = listOf(ACL.Search),
-                    description = "Limited search only API key for algolia.com",
-                    indices = listOf(IndexName("dev_*")),
-                    maxHitsPerQuery = 20,
-                    maxQueriesPerIPPerHour = 100,
-                    query = Query(
-                        typoTolerance = TypoTolerance.Strict,
-                        ignorePlurals = IgnorePlurals.Boolean(false)
-                    ),
-                    referers = listOf("algolia.com/*"),
-                    validity = 300
-                )
-                client.apply {
-                    val response = client.addAPIKey(params, restrictSources = "169.254.0.0/16").wait()
+        runBlocking {
+            val params = APIKeyParams(
+                ACLs = listOf(ACL.Search),
+                description = "Limited search only API key for algolia.com",
+                indices = listOf(IndexName("dev_*")),
+                maxHitsPerQuery = 20,
+                maxQueriesPerIPPerHour = 100,
+                query = Query(
+                    typoTolerance = TypoTolerance.Strict,
+                    ignorePlurals = IgnorePlurals.Boolean(false)
+                ),
+                referers = listOf("algolia.com/*"),
+                validity = 300
+            )
+            client.apply {
+                val response = client.addAPIKey(params, restrictSources = "169.254.0.0/16").wait()
 
-                    client.deleteAPIKey(response.apiKey)
-                }
+                client.deleteAPIKey(response.apiKey)
             }
         }
     }

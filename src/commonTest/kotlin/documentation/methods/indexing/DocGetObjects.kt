@@ -3,15 +3,15 @@ package documentation.methods.indexing
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
-import io.ktor.client.features.ResponseException
+import documentation.index
 import kotlinx.serialization.Serializable
 import runBlocking
-import shouldFailWith
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocGetObjects: TestDocumentation() {
+@Ignore
+internal class DocGetObjects {
 
 //    suspend fun <T : Indexable> Index.getObject(
 //        serializer: __KSerializer<T>__,
@@ -34,29 +34,25 @@ internal class DocGetObjects: TestDocumentation() {
 
     @Test
     fun getObject() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                index.getObject(ObjectID("myID1"))
-            }
+        runBlocking {
+            index.getObject(ObjectID("myID1"))
         }
     }
 
     @Test
     fun getObjectSerializer() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                @Serializable
-                data class Person(
-                    val firstname: String,
-                    val lastname: String,
-                    override val objectID: ObjectID
-                ) : Indexable
+        runBlocking {
+            @Serializable
+            data class Person(
+                val firstname: String,
+                val lastname: String,
+                override val objectID: ObjectID
+            ) : Indexable
 
-                val objectID = ObjectID("myID1")
+            val objectID = ObjectID("myID1")
 
-                index.getObject(objectID)
-                index.getObject(Person.serializer(), objectID)
-            }
+            index.getObject(objectID)
+            index.getObject(Person.serializer(), objectID)
         }
     }
 

@@ -1,13 +1,14 @@
 package documentation.methods.indices
 
-import io.ktor.client.features.ResponseException
+import documentation.index
+import indexName
 import runBlocking
-import shouldFailWith
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocMoveIndex : TestDocumentation() {
+@Ignore
+internal class DocMoveIndex {
 
 //    suspend fun [Index](#method-param-src).moveIndex(
 //        [destination](#method-param-dest): __IndexName__,
@@ -16,10 +17,8 @@ internal class DocMoveIndex : TestDocumentation() {
 
     @Test
     fun moveIndex() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                index.moveIndex(indexName)
-            }
+        runBlocking {
+            index.moveIndex(indexName)
         }
     }
 }

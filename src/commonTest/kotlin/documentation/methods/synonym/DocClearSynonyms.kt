@@ -1,11 +1,13 @@
 package documentation.methods.synonym
 
+import documentation.index
 import runBlocking
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocClearSynonyms : TestDocumentation() {
+@Ignore
+internal class DocClearSynonyms {
 
 //    suspend fun Index.clearSynonyms(
 //        #{forwardToReplicas}: __Boolean?__ = null,

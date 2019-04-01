@@ -1,12 +1,12 @@
 package documentation.methods.multicluster
 
-import io.ktor.client.features.ResponseException
-import runBlocking
-import shouldFailWith
 import documentation.client
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocGetTopUserID {
 
 //    suspend fun ClientSearch.getTopUserID(
@@ -15,10 +15,8 @@ internal class DocGetTopUserID {
 
     @Test
     fun getTopUserID() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                client.getTopUserID()
-            }
+        runBlocking {
+            client.getTopUserID()
         }
     }
 }

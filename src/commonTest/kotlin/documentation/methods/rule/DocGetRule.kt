@@ -1,14 +1,14 @@
 package documentation.methods.rule
 
 import com.algolia.search.model.ObjectID
-import io.ktor.client.features.ResponseException
+import documentation.index
 import runBlocking
-import shouldFailWith
-import documentation.TestDocumentation
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocGetRule : TestDocumentation() {
+@Ignore
+internal class DocGetRule {
 
 //    suspend fun Index.getRule(
 //        #{objectID}: __ObjectID__,
@@ -17,10 +17,8 @@ internal class DocGetRule : TestDocumentation() {
 
     @Test
     fun getRule() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                index.getRule(ObjectID("myID"))
-            }
+        runBlocking {
+            index.getRule(ObjectID("myID"))
         }
     }
 }

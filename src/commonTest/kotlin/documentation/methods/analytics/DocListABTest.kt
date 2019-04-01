@@ -2,9 +2,11 @@ package documentation.methods.analytics
 
 import clientAnalytics
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocListABTest {
 
 //    suspend fun ClientAnalytics.listABTests(

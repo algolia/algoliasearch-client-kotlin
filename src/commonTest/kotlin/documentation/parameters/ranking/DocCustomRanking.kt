@@ -2,12 +2,14 @@ package documentation.parameters.ranking
 
 import com.algolia.search.dsl.customRanking
 import com.algolia.search.dsl.settings
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocCustomRanking : TestDocumentation() {
+@Ignore
+internal class DocCustomRanking {
 
 //    customRanking {
 //        +("attribute1" modify [Asc](#parameter-option-asc))

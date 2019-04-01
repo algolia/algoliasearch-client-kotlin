@@ -4,13 +4,13 @@ import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.FacetValuesQuery
 import com.algolia.search.model.search.Query
-import io.ktor.client.features.ResponseException
-import runBlocking
-import shouldFailWith
 import documentation.index
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocSearchForFacetValues {
 
 //    suspend fun Index.searchForFacets(
@@ -28,46 +28,40 @@ internal class DocSearchForFacetValues {
 
     @Test
     fun example() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                val attribute = Attribute("category")
-                val query = FacetValuesQuery(facetQuery = "phone")
+        runBlocking {
+            val attribute = Attribute("category")
+            val query = FacetValuesQuery(facetQuery = "phone")
 
-                index.searchForFacets(attribute, query)
-            }
+            index.searchForFacets(attribute, query)
         }
     }
 
     @Test
     fun exampleAdditional() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                val attribute = Attribute("category")
-                val query = FacetValuesQuery(
-                    facetQuery = "phone",
-                    query = Query(filters = "brand:Apple")
-                )
+        runBlocking {
+            val attribute = Attribute("category")
+            val query = FacetValuesQuery(
+                facetQuery = "phone",
+                query = Query(filters = "brand:Apple")
+            )
 
-                index.searchForFacets(attribute, query)
-            }
+            index.searchForFacets(attribute, query)
         }
     }
 
     @Test
     fun exampleExtraHeader() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                val attribute = Attribute("category")
-                val query = FacetValuesQuery(
-                    facetQuery = "phone",
-                    query = Query(filters = "brand:Apple")
-                )
-                val requestOptions = requestOptionsBuilder {
-                    header("X-Algolia-User-ID", "user123")
-                }
-
-                index.searchForFacets(attribute, query, requestOptions)
+        runBlocking {
+            val attribute = Attribute("category")
+            val query = FacetValuesQuery(
+                facetQuery = "phone",
+                query = Query(filters = "brand:Apple")
+            )
+            val requestOptions = requestOptionsBuilder {
+                header("X-Algolia-User-ID", "user123")
             }
+
+            index.searchForFacets(attribute, query, requestOptions)
         }
     }
 }

@@ -2,12 +2,14 @@ package documentation.parameters.performance
 
 import com.algolia.search.dsl.numericAttributesForFiltering
 import com.algolia.search.dsl.settings
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocNumericAttributesForFiltering : TestDocumentation() {
+@Ignore
+internal class DocNumericAttributesForFiltering {
 
 //    numericAttributesForFiltering {
 //        +"attribute1"

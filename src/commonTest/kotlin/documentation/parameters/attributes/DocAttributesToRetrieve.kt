@@ -3,12 +3,14 @@ package documentation.parameters.attributes
 import com.algolia.search.dsl.attributesToRetrieve
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
-internal class DocAttributesToRetrieve : TestDocumentation() {
+@Ignore
+internal class DocAttributesToRetrieve {
 
 //    // list of attributes to retrieve
 //    settings {

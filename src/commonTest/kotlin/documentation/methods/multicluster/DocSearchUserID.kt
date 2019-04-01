@@ -2,13 +2,13 @@ package documentation.methods.multicluster
 
 import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserIDQuery
-import io.ktor.client.features.ResponseException
-import runBlocking
-import shouldFailWith
 import documentation.client
+import runBlocking
+import kotlin.test.Ignore
 import kotlin.test.Test
 
 
+@Ignore
 internal class DocSearchUserID {
 
 //    suspend fun ClientSearch.searchUserID(
@@ -25,16 +25,14 @@ internal class DocSearchUserID {
 
     @Test
     fun searchUserID() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                val query = UserIDQuery(
-                    query = "query",
-                    clusterName = ClusterName("c1-test"),
-                    hitsPerPage = 12,
-                    page = 0
-                )
-                client.searchUserID(query)
-            }
+        runBlocking {
+            val query = UserIDQuery(
+                query = "query",
+                clusterName = ClusterName("c1-test"),
+                hitsPerPage = 12,
+                page = 0
+            )
+            client.searchUserID(query)
         }
     }
 }
