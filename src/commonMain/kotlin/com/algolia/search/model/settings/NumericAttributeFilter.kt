@@ -13,8 +13,10 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 @Serializable(NumericAttributeFilter.Companion::class)
-public data class NumericAttributeFilter(val attribute: Attribute, val equalOnly: Boolean = false) :
-    Raw<String> {
+public data class NumericAttributeFilter(
+    val attribute: Attribute,
+    val equalOnly: Boolean = false
+) : Raw<String> {
 
     override val raw = if (equalOnly) "$KeyEqualOnly($attribute)" else attribute.raw
 

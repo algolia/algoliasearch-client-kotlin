@@ -7,6 +7,7 @@ import com.algolia.search.dsl.attributes.DSLSearchableAttributes
 import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.dsl.languages.DSLDecompoundedAttributes
 import com.algolia.search.dsl.languages.DSLQueryLanguage
+import com.algolia.search.dsl.performance.DSLNumericAttributeFilter
 import com.algolia.search.dsl.ranking.DSLCustomRanking
 import com.algolia.search.dsl.ranking.DSLIndexName
 import com.algolia.search.dsl.ranking.DSLRanking
@@ -86,4 +87,8 @@ public fun Settings.disableExactOnAttributes(block: DSLAttributes.() -> Unit) {
 
 public fun Settings.alternativesAsExact(block: DSLAlternativesAsExact.() -> Unit) {
     alternativesAsExact = DSLAlternativesAsExact().apply(block).build()
+}
+
+public fun Settings.numericAttributesForFiltering(block: DSLNumericAttributeFilter.() -> Unit) {
+    numericAttributesForFiltering = DSLNumericAttributeFilter().apply(block).build()
 }

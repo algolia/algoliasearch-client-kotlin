@@ -171,4 +171,13 @@ internal class TestDSLSettings {
 
         settings.alternativesAsExact!!.shouldNotBeEmpty()
     }
+
+    @Test
+    fun numericAttributesForFiltering() {
+        val settings = settings {
+            numericAttributesForFiltering { +attributeA }
+        }
+
+        settings.numericAttributesForFiltering!!.shouldNotBeEmpty()
+    }
 }
