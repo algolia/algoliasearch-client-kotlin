@@ -13,7 +13,7 @@ import kotlin.test.Test
 
 internal class DocSearchForFacetValues {
 
-//    suspend fun Index.searchForFacetValues(
+//    suspend fun Index.searchForFacets(
 //        #{attribute}: __Attribute__,
 //        #{query}: __FacetValuesQuery__ = FacetValuesQuery(),
 //        #{requestOptions}: __RequestOptions?__ = null
@@ -33,7 +33,7 @@ internal class DocSearchForFacetValues {
                 val attribute = Attribute("category")
                 val query = FacetValuesQuery(facetQuery = "phone")
 
-                index.searchForFacetValues(attribute, query)
+                index.searchForFacets(attribute, query)
             }
         }
     }
@@ -48,7 +48,7 @@ internal class DocSearchForFacetValues {
                     query = Query(filters = "brand:Apple")
                 )
 
-                index.searchForFacetValues(attribute, query)
+                index.searchForFacets(attribute, query)
             }
         }
     }
@@ -66,7 +66,7 @@ internal class DocSearchForFacetValues {
                     header("X-Algolia-User-ID", "user123")
                 }
 
-                index.searchForFacetValues(attribute, query, requestOptions)
+                index.searchForFacets(attribute, query, requestOptions)
             }
         }
     }

@@ -99,7 +99,7 @@ public interface EndpointSearch {
      * @param requestOptions [RequestOptions] sent along with the query.
      * @return [ResponseSearchForFacetValues].
      */
-    suspend fun searchForFacetValues(
+    suspend fun searchForFacets(
         attribute: Attribute,
         query: FacetValuesQuery = FacetValuesQuery(),
         requestOptions: RequestOptions? = null
