@@ -10,7 +10,7 @@ import kotlin.test.Test
 internal class DocDecompoundedAttributes : TestDocumentation() {
 
 //    decompoundedAttributes {
-//        language { +"attribute" }
+//        +language { +"attribute" }
 //        +...
 //    }
 
@@ -19,7 +19,7 @@ internal class DocDecompoundedAttributes : TestDocumentation() {
         runBlocking {
             val settings = settings {
                 decompoundedAttributes {
-                    german { +"name" }
+                    +german { +"name" }
                 }
             }
 
