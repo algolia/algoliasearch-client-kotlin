@@ -233,7 +233,7 @@ public data class Query(
      * Engine default: 1
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/aroundPrecision/]
      */
-    @SerialName(KeyAroundPrecision) var aroundPrecision: Int? = null,
+    @SerialName(KeyAroundPrecision) var aroundPrecision: AroundPrecision? = null,
 
     /**
      * Minimum radius (in meters) used for a geo search when [aroundRadius] is not set.

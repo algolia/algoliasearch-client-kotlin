@@ -54,7 +54,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             aroundLatLng = 0.0f and 0.0f,
             aroundLatLngViaIP = boolean,
             aroundRadius = AroundRadius.All,
-            aroundPrecision = int,
+            aroundPrecision = AroundPrecision.Int(int),
             minimumAroundRadius = int,
             insideBoundingBox = listOf(TestBoundingBox.boundingBox),
             insidePolygon = listOf(TestPolygon.polygon),
