@@ -3,7 +3,7 @@ package dsl
 import attributeA
 import com.algolia.search.dsl.*
 import indexA
-import shouldNotBeEmpty
+import shouldNotBeNull
 import unknown
 import kotlin.test.Test
 
@@ -16,7 +16,7 @@ internal class TestDSLSettings {
             searchableAttributes { +attributeA }
         }
 
-        settings.searchableAttributes!!.shouldNotBeEmpty()
+        settings.searchableAttributes.shouldNotBeNull()
     }
 
     @Test
@@ -25,7 +25,7 @@ internal class TestDSLSettings {
             attributesForFaceting { +attributeA }
         }
 
-        settings.attributesForFaceting!!.shouldNotBeEmpty()
+        settings.attributesForFaceting.shouldNotBeNull()
     }
 
     @Test
@@ -34,7 +34,7 @@ internal class TestDSLSettings {
             unretrieveableAttributes { +attributeA }
         }
 
-        settings.unretrievableAttributes!!.shouldNotBeEmpty()
+        settings.unretrievableAttributes.shouldNotBeNull()
     }
 
     @Test
@@ -43,7 +43,7 @@ internal class TestDSLSettings {
             attributesToRetrieve { +attributeA }
         }
 
-        settings.attributesToRetrieve!!.shouldNotBeEmpty()
+        settings.attributesToRetrieve.shouldNotBeNull()
     }
 
     @Test
@@ -52,7 +52,7 @@ internal class TestDSLSettings {
             ranking { +Typo }
         }
 
-        settings.ranking!!.shouldNotBeEmpty()
+        settings.ranking.shouldNotBeNull()
     }
 
     @Test
@@ -61,7 +61,7 @@ internal class TestDSLSettings {
             customRanking { +(attributeA modify Asc) }
         }
 
-        settings.customRanking!!.shouldNotBeEmpty()
+        settings.customRanking.shouldNotBeNull()
     }
 
     @Test
@@ -70,7 +70,7 @@ internal class TestDSLSettings {
             replicas { +indexA }
         }
 
-        settings.replicas!!.shouldNotBeEmpty()
+        settings.replicas.shouldNotBeNull()
     }
 
     @Test
@@ -79,7 +79,7 @@ internal class TestDSLSettings {
             attributesToHighlight { +attributeA }
         }
 
-        settings.attributesToHighlight!!.shouldNotBeEmpty()
+        settings.attributesToHighlight.shouldNotBeNull()
     }
 
     @Test
@@ -88,7 +88,7 @@ internal class TestDSLSettings {
             attributesToSnippet { +attributeA }
         }
 
-        settings.attributesToSnippet!!.shouldNotBeEmpty()
+        settings.attributesToSnippet.shouldNotBeNull()
     }
 
     @Test
@@ -97,7 +97,7 @@ internal class TestDSLSettings {
             disableTypoToleranceOnAttributes { +attributeA }
         }
 
-        settings.disableTypoToleranceOnAttributes!!.shouldNotBeEmpty()
+        settings.disableTypoToleranceOnAttributes.shouldNotBeNull()
     }
 
     @Test
@@ -106,7 +106,7 @@ internal class TestDSLSettings {
             disableTypoToleranceOnWords { +unknown }
         }
 
-        settings.disableTypoToleranceOnWords!!.shouldNotBeEmpty()
+        settings.disableTypoToleranceOnWords.shouldNotBeNull()
     }
 
     @Test
@@ -115,7 +115,7 @@ internal class TestDSLSettings {
             queryLanguages { +English }
         }
 
-        settings.queryLanguages!!.shouldNotBeEmpty()
+        settings.queryLanguages.shouldNotBeNull()
     }
 
     @Test
@@ -124,7 +124,7 @@ internal class TestDSLSettings {
             camelCaseAttributes { +attributeA }
         }
 
-        settings.camelCaseAttributes!!.shouldNotBeEmpty()
+        settings.camelCaseAttributes.shouldNotBeNull()
     }
 
     @Test
@@ -133,7 +133,7 @@ internal class TestDSLSettings {
             decompoundedAttributes { +dutch { +attributeA } }
         }
 
-        settings.decompoundedAttributes!!.shouldNotBeEmpty()
+        settings.decompoundedAttributes.shouldNotBeNull()
     }
 
     @Test
@@ -142,7 +142,7 @@ internal class TestDSLSettings {
             optionalWords { +unknown }
         }
 
-        settings.optionalWords!!.shouldNotBeEmpty()
+        settings.optionalWords.shouldNotBeNull()
     }
 
     @Test
@@ -151,7 +151,7 @@ internal class TestDSLSettings {
             disablePrefixOnAttributes { +attributeA }
         }
 
-        settings.disablePrefixOnAttributes!!.shouldNotBeEmpty()
+        settings.disablePrefixOnAttributes.shouldNotBeNull()
     }
 
     @Test
@@ -160,7 +160,7 @@ internal class TestDSLSettings {
             disableExactOnAttributes { +attributeA }
         }
 
-        settings.disableExactOnAttributes!!.shouldNotBeEmpty()
+        settings.disableExactOnAttributes.shouldNotBeNull()
     }
 
     @Test
@@ -169,7 +169,7 @@ internal class TestDSLSettings {
             alternativesAsExact { +MultiWordsSynonym }
         }
 
-        settings.alternativesAsExact!!.shouldNotBeEmpty()
+        settings.alternativesAsExact.shouldNotBeNull()
     }
 
     @Test
@@ -178,7 +178,7 @@ internal class TestDSLSettings {
             numericAttributesForFiltering { +attributeA }
         }
 
-        settings.numericAttributesForFiltering!!.shouldNotBeEmpty()
+        settings.numericAttributesForFiltering.shouldNotBeNull()
     }
 
     @Test
@@ -187,6 +187,6 @@ internal class TestDSLSettings {
             responseFields { +All }
         }
 
-        settings.responseFields!!.shouldNotBeEmpty()
+        settings.responseFields.shouldNotBeNull()
     }
 }

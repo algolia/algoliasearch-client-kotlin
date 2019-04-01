@@ -9,11 +9,11 @@ import kotlinx.serialization.json.json
 
 
 @Serializable(SynonymQuery.Companion::class)
-data class SynonymQuery(
+public data class SynonymQuery(
     var query: String? = null,
     var page: Int? = null,
     var hitsPerPage: Int? = null,
-    var types: List<SynonymType>? = null
+    var synonymTypes: List<SynonymType>? = null
 ) {
 
     @Serializer(SynonymQuery::class)
@@ -24,7 +24,7 @@ data class SynonymQuery(
                 obj.query?.let { KeyQuery to it }
                 obj.page?.let { KeyPage to it }
                 obj.hitsPerPage?.let { KeyHitsPerPage to it }
-                obj.types?.let { types -> KeyType to types.joinToString(",") { it.raw } }
+                obj.synonymTypes?.let { types -> KeyType to types.joinToString(",") { it.raw } }
             }
 
             encoder.asJsonOutput().encodeJson(json)

@@ -18,7 +18,7 @@ internal class DocSearchSynonyms : TestDocumentation() {
 //        var #{query}: __String?__ = null,
 //        var #{page}: __Int?__ = null,
 //        var #{hitsPerPage}: __Int?__ = null,
-//        var [types](#method-param-type): __List<SynonymType>?__ = null,
+//        var [synonymTypes](#method-param-type): __List<SynonymType>?__ = null,
 //    )
 
     @Test
@@ -28,7 +28,7 @@ internal class DocSearchSynonyms : TestDocumentation() {
                 query = "street",
                 hitsPerPage = 10,
                 page = 1,
-                types = listOf(SynonymType.MultiWay, SynonymType.OneWay)
+                synonymTypes = listOf(SynonymType.MultiWay, SynonymType.OneWay)
             )
 
             index.searchSynonyms(query)

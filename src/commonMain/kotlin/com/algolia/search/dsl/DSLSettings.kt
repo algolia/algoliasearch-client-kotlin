@@ -16,7 +16,9 @@ import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
 import com.algolia.search.model.settings.Settings
 
 
-public fun settings(init: Settings.() -> Unit) = Settings().apply(init)
+public fun settings(init: Settings.() -> Unit): Settings {
+    return Settings().apply(init)
+}
 
 public fun Settings.attributesToRetrieve(block: DSLAttributesToRetrieve.() -> Unit) {
     attributesToRetrieve = DSLAttributesToRetrieve().apply(block).build()

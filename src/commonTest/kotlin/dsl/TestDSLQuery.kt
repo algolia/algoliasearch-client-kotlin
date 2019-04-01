@@ -5,7 +5,7 @@ import com.algolia.search.dsl.*
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.BoundingBox
 import com.algolia.search.model.search.Polygon
-import shouldNotBeEmpty
+import shouldNotBeNull
 import unknown
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class TestDSLQuery {
             attributesToRetrieve { +attributeA }
         }
 
-        query.attributesToRetrieve!!.shouldNotBeEmpty()
+        query.attributesToRetrieve.shouldNotBeNull()
     }
 
     @Test
@@ -27,7 +27,7 @@ internal class TestDSLQuery {
             restrictSearchableAttributes { +attributeA }
         }
 
-        query.restrictSearchableAttributes!!.shouldNotBeEmpty()
+        query.restrictSearchableAttributes.shouldNotBeNull()
     }
 
     @Test
@@ -100,7 +100,7 @@ internal class TestDSLQuery {
             attributesToHighlight { +attributeA }
         }
 
-        query.attributesToHighlight!!.shouldNotBeEmpty()
+        query.attributesToHighlight.shouldNotBeNull()
     }
 
     @Test
@@ -109,7 +109,7 @@ internal class TestDSLQuery {
             attributesToSnippet { +attributeA }
         }
 
-        query.attributesToSnippet!!.shouldNotBeEmpty()
+        query.attributesToSnippet.shouldNotBeNull()
     }
 
     @Test
@@ -118,7 +118,7 @@ internal class TestDSLQuery {
             disableTypoToleranceOnAttributes { +attributeA }
         }
 
-        query.disableTypoToleranceOnAttributes!!.shouldNotBeEmpty()
+        query.disableTypoToleranceOnAttributes.shouldNotBeNull()
     }
 
     @Test
@@ -129,7 +129,7 @@ internal class TestDSLQuery {
             }
         }
 
-        query.insideBoundingBox!!.shouldNotBeEmpty()
+        query.insideBoundingBox.shouldNotBeNull()
     }
 
     @Test
@@ -140,7 +140,7 @@ internal class TestDSLQuery {
             }
         }
 
-        query.insidePolygon!!.shouldNotBeEmpty()
+        query.insidePolygon.shouldNotBeNull()
     }
 
     @Test
@@ -149,7 +149,7 @@ internal class TestDSLQuery {
             queryLanguages { +English }
         }
 
-        query.queryLanguages!!.shouldNotBeEmpty()
+        query.queryLanguages.shouldNotBeNull()
     }
 
     @Test
@@ -158,7 +158,7 @@ internal class TestDSLQuery {
             optionalWords { +unknown }
         }
 
-        query.optionalWords!!.shouldNotBeEmpty()
+        query.optionalWords.shouldNotBeNull()
     }
 
     @Test
@@ -167,7 +167,7 @@ internal class TestDSLQuery {
             disableExactOnAttributes { +unknown }
         }
 
-        query.disableExactOnAttributes!!.shouldNotBeEmpty()
+        query.disableExactOnAttributes.shouldNotBeNull()
     }
 
     @Test
@@ -176,7 +176,7 @@ internal class TestDSLQuery {
             alternativesAsExact { +MultiWordsSynonym }
         }
 
-        query.alternativesAsExact!!.shouldNotBeEmpty()
+        query.alternativesAsExact.shouldNotBeNull()
     }
 
     @Test
@@ -185,7 +185,7 @@ internal class TestDSLQuery {
             ruleContexts { +unknown }
         }
 
-        query.ruleContexts!!.shouldNotBeEmpty()
+        query.ruleContexts.shouldNotBeNull()
     }
 
     @Test
@@ -194,7 +194,7 @@ internal class TestDSLQuery {
             analyticsTags { +unknown }
         }
 
-        query.analyticsTags!!.shouldNotBeEmpty()
+        query.analyticsTags.shouldNotBeNull()
     }
 
     @Test
@@ -203,6 +203,6 @@ internal class TestDSLQuery {
             responseFields { +All }
         }
 
-        query.responseFields!!.shouldNotBeEmpty()
+        query.responseFields.shouldNotBeNull()
     }
 }

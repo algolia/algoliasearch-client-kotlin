@@ -1,4 +1,4 @@
-package dsl
+package dsl.geosearch
 
 import com.algolia.search.dsl.geosearch.DSLPolygon
 import com.algolia.search.helper.and
@@ -7,7 +7,7 @@ import shouldEqual
 import kotlin.test.Test
 
 
-internal class TestDSLPolygons {
+internal class TestDSLPolygon {
 
     @Test
     fun default() {

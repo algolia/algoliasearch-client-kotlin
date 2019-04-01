@@ -15,7 +15,9 @@ import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
 import com.algolia.search.model.search.Query
 
 
-public fun query(query: String? = null, init: Query.() -> Unit) = Query(query = query).apply(init)
+public fun query(query: String? = null, init: Query.() -> Unit): Query {
+    return Query(query = query).apply(init)
+}
 
 public fun Query.attributesToRetrieve(block: DSLAttributesToRetrieve.() -> Unit) {
     attributesToRetrieve = DSLAttributesToRetrieve().apply(block).build()
