@@ -71,7 +71,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             disableExactOnAttributes = attributes,
             exactOnSingleWordQuery = ExactOnSingleWordQuery.Word,
             alternativesAsExact = listOf(AlternativesAsExact.IgnorePlurals),
-            distinct = Distinct.Value(1),
+            distinct = Distinct(int),
             getRankingInfo = boolean,
             clickAnalytics = boolean,
             analytics = boolean,

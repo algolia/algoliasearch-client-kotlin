@@ -2,34 +2,27 @@ package com.algolia.search.model.settings
 
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.internal.IntSerializer
 import kotlinx.serialization.json.JsonLiteral
 
 
 @Serializable(Distinct.Companion::class)
-public sealed class Distinct {
+public data class Distinct(val count: Int) {
 
-    public object True : Distinct()
-
-    public object False : Distinct()
-
-    public data class Value(val count: Int) : Distinct() {
-
-        init {
-            if (count < 0) throw IllegalArgumentException("Distinct must be a positive integer")
-        }
+    init {
+        if (count < 0) throw IllegalArgumentException("Distinct must be a positive integer")
     }
 
-    @Serializer(Distinct::class)
     internal companion object : KSerializer<Distinct> {
 
+        override val descriptor = IntSerializer.descriptor
+
         override fun serialize(encoder: Encoder, obj: Distinct) {
-            val json = when (obj) {
-                is True -> JsonLiteral(true)
-                is False -> JsonLiteral(false)
-                is Value -> JsonLiteral(obj.count)
-            }
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJson(JsonLiteral(obj.count))
         }
 
         override fun deserialize(decoder: Decoder): Distinct {
@@ -37,13 +30,9 @@ public sealed class Distinct {
             val int = json.primitive.intOrNull
 
             if (int != null) {
-                return when (int) {
-                    0 -> False
-                    1 -> True
-                    else -> Value(int)
-                }
+                return Distinct(int)
             }
-            return json.primitive.boolean.let { if (it) True else False }
+            return json.primitive.boolean.let { if (it) Distinct(1) else Distinct(0) }
         }
     }
 }

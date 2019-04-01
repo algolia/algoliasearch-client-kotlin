@@ -75,7 +75,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             allowCompressionOfIntegerArray = boolean,
             // Advanced
             attributeForDistinct = attributeA,
-            distinct = Distinct.True,
+            distinct = Distinct(int),
             replaceSynonymsInHighlight = boolean,
             minProximity = int,
             responseFields = listOf(ResponseFields.NbHits),
@@ -139,7 +139,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyAllowCompressionOfIntegerArray to boolean
             // Advanced
             KeyAttributeForDistinct to attributeA.raw
-            KeyDistinct to true
+            KeyDistinct to int
             KeyReplaceSynonymsInHighlight to boolean
             KeyMinProximity to int
             KeyResponseFields to jsonArray { +ResponseFields.NbHits.raw }

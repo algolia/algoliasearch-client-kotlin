@@ -40,7 +40,7 @@ internal class TestSuiteSettings {
                     typoTolerance = TypoTolerance.Min,
                     ignorePlurals = IgnorePlurals.QueryLanguages(QueryLanguage.English, QueryLanguage.French),
                     removeStopWords = RemoveStopWords.QueryLanguages(QueryLanguage.English, QueryLanguage.French),
-                    distinct = Distinct.True
+                    distinct = Distinct(1)
                 )
                 setSettings(copy).wait() shouldEqual TaskStatus.Published
                 getSettings() shouldEqual copy

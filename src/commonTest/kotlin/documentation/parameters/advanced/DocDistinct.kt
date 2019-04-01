@@ -12,15 +12,15 @@ import kotlin.test.Test
 @Ignore
 internal class DocDistinct {
 
-//    distinct: Distinct = Distinct.Value(0|1|2|3)
+//    distinct: Distinct = Distinct(0|1|2|3)
 
     @Test
     fun settings() {
         runBlocking {
             val query = settings {
-                distinct = Distinct.Value(0)
-                // distinct = Distinct.Value(1)
-                // distinct = Distinct.Value(2)
+                distinct = Distinct(0)
+                // distinct = Distinct(1)
+                // distinct = Distinct(2)
             }
 
             index.setSettings(query)
@@ -31,9 +31,9 @@ internal class DocDistinct {
     fun query() {
         runBlocking {
             val query = query("query") {
-                distinct = Distinct.Value(1)
-                // distinct = Distinct.Value(0)
-                // distinct = Distinct.Value(2)
+                distinct = Distinct(1)
+                // distinct = Distinct(0)
+                // distinct = Distinct(2)
             }
 
             index.search(query)
