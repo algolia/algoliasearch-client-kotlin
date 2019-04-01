@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.filtering
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 
 
@@ -8,23 +9,22 @@ public class DSLNumericFilters(
     private val groups: MutableList<Group<FilterNumeric>> = mutableListOf()
 ) {
 
-    private fun put(group: Group<FilterNumeric>) {
-        if (group.isNotEmpty()) groups += group
+    public operator fun Group<FilterNumeric>.unaryPlus() {
+        if (isNotEmpty()) groups += this
     }
 
     public fun and(block: DSLGroupNumeric.() -> Unit) {
-        put(GroupAnd.Numeric(DSLGroupNumeric().apply(block).filters))
+        +GroupAnd.Numeric(DSLGroupNumeric(block))
     }
 
     public fun or(block: DSLGroupNumeric.() -> Unit) {
-        put(GroupOr.Numeric(DSLGroupNumeric().apply(block).filters))
+        +GroupOr.Numeric(DSLGroupNumeric(block))
     }
 
-    public fun build(): List<List<String>> {
-        val (andEntries, orEntries) = groups.partition { it is GroupAnd.Numeric }
-        val ands = andEntries.flatMap { group -> group.map { listOf(it.expression) } }
-        val ors = orEntries.map { group -> group.map { it.expression } }
+    public companion object : DSL<DSLNumericFilters, List<Group<FilterNumeric>>> {
 
-        return ands + ors
+        override operator fun invoke(block: DSLNumericFilters.() -> Unit): List<Group<FilterNumeric>> {
+            return DSLNumericFilters().apply(block).groups.toList()
+        }
     }
 }

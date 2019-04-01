@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.attributes
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.SearchableAttribute
@@ -54,7 +55,10 @@ public class DSLSearchableAttributes(
         }
     }
 
-    public fun build(): List<SearchableAttribute> {
-        return searchableAttributes.toList()
+    public companion object : DSL<DSLSearchableAttributes, List<SearchableAttribute>> {
+
+        override operator fun invoke(block: DSLSearchableAttributes.() -> Unit): List<SearchableAttribute> {
+            return DSLSearchableAttributes().apply(block).searchableAttributes
+        }
     }
 }

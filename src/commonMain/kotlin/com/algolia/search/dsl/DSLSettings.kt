@@ -21,81 +21,81 @@ public fun settings(init: Settings.() -> Unit): Settings {
 }
 
 public fun Settings.attributesToRetrieve(block: DSLAttributesToRetrieve.() -> Unit) {
-    attributesToRetrieve = DSLAttributesToRetrieve().apply(block).build()
+    attributesToRetrieve = DSLAttributesToRetrieve(block)
 }
 
 public fun Settings.searchableAttributes(block: DSLSearchableAttributes.() -> Unit) {
-    searchableAttributes = DSLSearchableAttributes().apply(block).build()
+    searchableAttributes = DSLSearchableAttributes(block)
 }
 
 public fun Settings.attributesForFaceting(block: DSLAttributesForFaceting.() -> Unit) {
-    attributesForFaceting = DSLAttributesForFaceting().apply(block).build()
+    attributesForFaceting = DSLAttributesForFaceting(block)
 }
 
 public fun Settings.unretrieveableAttributes(block: DSLAttributes.() -> Unit) {
-    unretrievableAttributes = DSLAttributes().apply(block).build()
+    unretrievableAttributes = DSLAttributes(block)
 }
 
 public fun Settings.ranking(block: DSLRanking.() -> Unit) {
-    ranking = DSLRanking().apply(block).build()
+    ranking = DSLRanking(block)
 }
 
 public fun Settings.customRanking(block: DSLCustomRanking.() -> Unit) {
-    customRanking = DSLCustomRanking().apply(block).build()
+    customRanking = DSLCustomRanking(block)
 }
 
 public fun Settings.replicas(block: DSLIndexName.() -> Unit) {
-    replicas = DSLIndexName().apply(block).build()
+    replicas = DSLIndexName(block)
 }
 
 public fun Settings.attributesToHighlight(block: DSLAttributes.() -> Unit) {
-    attributesToHighlight = DSLAttributes().apply(block).build()
+    attributesToHighlight = DSLAttributes(block)
 }
 
 public fun Settings.attributesToSnippet(block: DSLSnippet.() -> Unit) {
-    attributesToSnippet = DSLSnippet().apply(block).build()
+    attributesToSnippet = DSLSnippet(block)
 }
 
 public fun Settings.disableTypoToleranceOnAttributes(block: DSLAttributes.() -> Unit) {
-    disableTypoToleranceOnAttributes = DSLAttributes().apply(block).build()
+    disableTypoToleranceOnAttributes = DSLAttributes(block)
 }
 
 public fun Settings.disableTypoToleranceOnWords(block: DSLStrings.() -> Unit) {
-    disableTypoToleranceOnWords = DSLStrings().apply(block).build()
+    disableTypoToleranceOnWords = DSLStrings(block)
 }
 
 public fun Settings.queryLanguages(block: DSLQueryLanguage.() -> Unit) {
-    queryLanguages = DSLQueryLanguage().apply(block).build()
+    queryLanguages = DSLQueryLanguage(block)
 }
 
 public fun Settings.camelCaseAttributes(block: DSLAttributes.() -> Unit) {
-    camelCaseAttributes = DSLAttributes().apply(block).build()
+    camelCaseAttributes = DSLAttributes(block)
 }
 
 public fun Settings.decompoundedAttributes(block: DSLDecompoundedAttributes.() -> Unit) {
-    decompoundedAttributes = DSLDecompoundedAttributes().apply(block).build()
+    decompoundedAttributes = DSLDecompoundedAttributes(block)
 }
 
 public fun Settings.optionalWords(block: DSLStrings.() -> Unit) {
-    optionalWords = DSLStrings().apply(block).build()
+    optionalWords = DSLStrings(block)
 }
 
 public fun Settings.disablePrefixOnAttributes(block: DSLAttributes.() -> Unit) {
-    disablePrefixOnAttributes = DSLAttributes().apply(block).build()
+    disablePrefixOnAttributes = DSLAttributes(block)
 }
 
 public fun Settings.disableExactOnAttributes(block: DSLAttributes.() -> Unit) {
-    disableExactOnAttributes = DSLAttributes().apply(block).build()
+    disableExactOnAttributes = DSLAttributes(block)
 }
 
 public fun Settings.alternativesAsExact(block: DSLAlternativesAsExact.() -> Unit) {
-    alternativesAsExact = DSLAlternativesAsExact().apply(block).build()
+    alternativesAsExact = DSLAlternativesAsExact(block)
 }
 
 public fun Settings.numericAttributesForFiltering(block: DSLNumericAttributeFilter.() -> Unit) {
-    numericAttributesForFiltering = DSLNumericAttributeFilter().apply(block).build()
+    numericAttributesForFiltering = DSLNumericAttributeFilter(block)
 }
 
 public fun Settings.responseFields(block: DSLResponseFields.() -> Unit) {
-    responseFields = DSLResponseFields().apply(block).build()
+    responseFields = DSLResponseFields(block)
 }

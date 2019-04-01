@@ -12,13 +12,13 @@ internal class TestDSLGroupFacet {
 
     @Test
     fun string() {
-        val dsl = DSLGroupFacet().apply {
+        val dsl = DSLGroupFacet {
             +facet(attributeA.raw, 0)
             +facet(attributeA.raw, unknown)
             +facet(attributeA.raw, true, 0)
         }
 
-        dsl.filters shouldEqual setOf(
+        dsl shouldEqual setOf(
             FilterFacet(attributeA, 0),
             FilterFacet(attributeA, unknown),
             FilterFacet(attributeA, true, 0)
@@ -27,13 +27,13 @@ internal class TestDSLGroupFacet {
 
     @Test
     fun attribute() {
-        val dsl = DSLGroupFacet().apply {
+        val dsl = DSLGroupFacet {
             +facet(attributeA, 0)
             +facet(attributeA, unknown)
             +facet(attributeA, true, 0)
         }
 
-        dsl.filters shouldEqual setOf(
+        dsl shouldEqual setOf(
             FilterFacet(attributeA, 0),
             FilterFacet(attributeA, unknown),
             FilterFacet(attributeA, true, 0)

@@ -12,12 +12,12 @@ internal class TestDSLCustomRanking {
 
     @Test
     fun modifier() {
-        val dsl = DSLCustomRanking().apply {
+        val dsl = DSLCustomRanking {
             +("attributeA" modify Asc)
             +(attributeB modify Desc)
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             CustomRankingCriterium.Asc(attributeA),
             CustomRankingCriterium.Desc(attributeB)
         )

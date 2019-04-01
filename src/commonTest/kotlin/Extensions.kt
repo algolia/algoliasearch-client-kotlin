@@ -1,5 +1,4 @@
 
-import com.algolia.search.dsl.filtering.DSLFilters
 import com.algolia.search.dsl.filtering.Filter
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
@@ -31,6 +30,3 @@ internal val attributesJson = jsonArray {
     +attributeA.raw
     +attributeB.raw
 }
-
-
-internal fun DSLFilters.buildTest() = build().replace("\"", "")

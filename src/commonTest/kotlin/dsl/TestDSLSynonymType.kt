@@ -10,7 +10,7 @@ internal class TestDSLSynonymType {
 
     @Test
     fun defaults() {
-        val dsl = DSLSynonymType().apply {
+        val dsl = DSLSynonymType {
             +OneWay
             +MultiWay
             +Placeholder
@@ -18,7 +18,7 @@ internal class TestDSLSynonymType {
             +alternativeCorrections(TypoTwo)
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             SynonymType.OneWay,
             SynonymType.MultiWay,
             SynonymType.Placeholder,

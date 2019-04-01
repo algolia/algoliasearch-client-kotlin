@@ -11,11 +11,11 @@ internal class TestDSLAttributes {
 
     @Test
     fun default() {
-        val dsl = DSLAttributes().apply {
+        val dsl = DSLAttributes {
             +"attributeA"
             +attributeB
         }
 
-        dsl.build() shouldEqual listOf(attributeA, attributeB)
+        dsl shouldEqual listOf(attributeA, attributeB)
     }
 }

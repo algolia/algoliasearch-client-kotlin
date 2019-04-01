@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.languages
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.QueryLanguage
 
@@ -70,7 +71,10 @@ public class DSLQueryLanguage(
         queryLanguages += this
     }
 
-    public fun build(): List<QueryLanguage> {
-        return queryLanguages.toList()
+    public companion object : DSL<DSLQueryLanguage, List<QueryLanguage>> {
+
+        override operator fun invoke(block: DSLQueryLanguage.() -> Unit): List<QueryLanguage> {
+            return DSLQueryLanguage().apply(block).queryLanguages
+        }
     }
 }

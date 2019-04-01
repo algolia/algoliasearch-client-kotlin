@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.languages
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.dsl.attributes.DSLAttributes
 import com.algolia.search.model.search.QueryLanguage
@@ -12,7 +13,7 @@ public class DSLDecompoundedAttributes(
 ) {
 
     private infix fun QueryLanguage.decompounded(block: DSLAttributes.() -> Unit): DecompoundedAttributes {
-        return DecompoundedAttributes(this, DSLAttributes().apply(block).build())
+        return DecompoundedAttributes(this, DSLAttributes(block))
     }
 
     public infix fun german(block: DSLAttributes.() -> Unit): DecompoundedAttributes {
@@ -31,7 +32,10 @@ public class DSLDecompoundedAttributes(
         decompoundedAttributes += this
     }
 
-    public fun build(): List<DecompoundedAttributes> {
-        return decompoundedAttributes.toList()
+    public companion object : DSL<DSLDecompoundedAttributes, List<DecompoundedAttributes>> {
+
+        override operator fun invoke(block: DSLDecompoundedAttributes.() -> Unit): List<DecompoundedAttributes> {
+            return DSLDecompoundedAttributes().apply(block).decompoundedAttributes
+        }
     }
 }

@@ -6,3 +6,5 @@ public val all = Attribute("*")
 
 @DslMarker
 public annotation class DSLParameters
+
+interface DSL<T, S> : (T.() -> Unit) -> S

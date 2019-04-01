@@ -12,7 +12,7 @@ internal class TestDSLRanking {
 
     @Test
     fun default() {
-        val dsl = DSLRanking().apply {
+        val dsl = DSLRanking {
             +Typo
             +Geo
             +Words
@@ -23,7 +23,7 @@ internal class TestDSLRanking {
             +Custom
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             RankingCriterium.Typo,
             RankingCriterium.Geo,
             RankingCriterium.Words,
@@ -37,12 +37,12 @@ internal class TestDSLRanking {
 
     @Test
     fun modifier() {
-        val dsl = DSLRanking().apply {
+        val dsl = DSLRanking {
             +("attributeA" modify Asc)
             +(attributeB modify Desc)
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             RankingCriterium.Asc(attributeA),
             RankingCriterium.Desc(attributeB)
         )

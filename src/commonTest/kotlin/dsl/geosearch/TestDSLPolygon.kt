@@ -11,11 +11,11 @@ internal class TestDSLPolygon {
 
     @Test
     fun default() {
-        val dsl = DSLPolygon().apply {
+        val dsl = DSLPolygon {
             +Polygon(0f and 1f, 2f and 3f, 4f and 5f)
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             Polygon(0f and 1f, 2f and 3f, 4f and 5f)
         )
     }

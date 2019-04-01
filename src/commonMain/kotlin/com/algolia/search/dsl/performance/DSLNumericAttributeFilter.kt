@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.performance
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.NumericAttributeFilter
@@ -30,7 +31,10 @@ public class DSLNumericAttributeFilter(
         numericAttributeFilters += this
     }
 
-    public fun build(): List<NumericAttributeFilter> {
-        return numericAttributeFilters.toList()
+    public companion object : DSL<DSLNumericAttributeFilter, List<NumericAttributeFilter>> {
+
+        override operator fun invoke(block: DSLNumericAttributeFilter.() -> Unit): List<NumericAttributeFilter> {
+            return DSLNumericAttributeFilter().apply(block).numericAttributeFilters
+        }
     }
 }

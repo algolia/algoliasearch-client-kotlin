@@ -10,11 +10,11 @@ internal class TestDSLQueryLanguage {
 
     @Test
     fun default() {
-        val dsl = DSLQueryLanguage().apply {
+        val dsl = DSLQueryLanguage {
             +English
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             QueryLanguage.English
         )
     }

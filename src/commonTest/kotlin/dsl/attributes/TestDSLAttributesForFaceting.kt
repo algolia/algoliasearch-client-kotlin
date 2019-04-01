@@ -12,12 +12,12 @@ internal class TestDSLAttributesForFaceting {
 
     @Test
     fun default() {
-        val dsl = DSLAttributesForFaceting().apply {
+        val dsl = DSLAttributesForFaceting {
             +"attributeA"
             +attributeB
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             AttributeForFaceting.Default(attributeA),
             AttributeForFaceting.Default(attributeB)
         )
@@ -25,12 +25,12 @@ internal class TestDSLAttributesForFaceting {
 
     @Test
     fun modifier() {
-        val dsl = DSLAttributesForFaceting().apply {
+        val dsl = DSLAttributesForFaceting {
             +("attributeA" modify FilterOnly)
             +(attributeB modify Searchable)
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             AttributeForFaceting.FilterOnly(attributeA),
             AttributeForFaceting.Searchable(attributeB)
         )

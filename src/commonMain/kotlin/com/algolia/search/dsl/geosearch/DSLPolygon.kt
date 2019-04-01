@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.geosearch
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.Polygon
 
@@ -13,7 +14,10 @@ public class DSLPolygon(
         polygons += this
     }
 
-    public fun build(): List<Polygon> {
-        return polygons.toList()
+    public companion object : DSL<DSLPolygon, List<Polygon>> {
+
+        override operator fun invoke(block: DSLPolygon.() -> Unit): List<Polygon> {
+            return DSLPolygon().apply(block).polygons
+        }
     }
 }

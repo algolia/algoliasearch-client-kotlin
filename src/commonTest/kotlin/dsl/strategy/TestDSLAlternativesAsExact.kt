@@ -10,13 +10,13 @@ internal class TestDSLAlternativesAsExact {
 
     @Test
     fun default() {
-        val dsl = DSLAlternativesAsExact().apply {
+        val dsl = DSLAlternativesAsExact {
             +SingleWordSynonym
             +MultiWordsSynonym
             +IgnorePlurals
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             AlternativesAsExact.SingleWordSynonym,
             AlternativesAsExact.MultiWordsSynonym,
             AlternativesAsExact.IgnorePlurals

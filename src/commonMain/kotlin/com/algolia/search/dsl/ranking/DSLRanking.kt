@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.ranking
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.RankingCriterium
@@ -42,7 +43,10 @@ public class DSLRanking(
         }
     }
 
-    public fun build(): List<RankingCriterium> {
-        return rankingCriteria.toList()
+    public companion object : DSL<DSLRanking, List<RankingCriterium>> {
+
+        override operator fun invoke(block: DSLRanking.() -> Unit): List<RankingCriterium> {
+            return DSLRanking().apply(block).rankingCriteria
+        }
     }
 }

@@ -11,11 +11,11 @@ internal class TestDSLIndexName {
 
     @Test
     fun default() {
-        val dsl = DSLIndexName().apply {
+        val dsl = DSLIndexName {
             +"indexA"
             +indexB
         }
 
-        dsl.build() shouldEqual listOf(indexA, indexB)
+        dsl shouldEqual listOf(indexA, indexB)
     }
 }

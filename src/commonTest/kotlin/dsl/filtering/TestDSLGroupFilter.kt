@@ -11,14 +11,14 @@ internal class TestDSLGroupFilter {
 
     @Test
     fun dx() {
-        val dsl = DSLGroupFilter().apply {
+        val dsl = DSLGroupFilter {
             +tag(unknown)
             +facet(attributeA, 0)
             +range(attributeA, 0 until 2)
             +comparison(attributeA, LesserOrEquals, 0)
         }
 
-        dsl.filters shouldEqual setOf(
+        dsl shouldEqual setOf(
             FilterTag(unknown),
             FilterFacet(attributeA, 0),
             FilterRange(attributeA, 0 until 2),

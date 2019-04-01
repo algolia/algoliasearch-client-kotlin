@@ -3,10 +3,7 @@ package com.algolia.search.dsl
 import com.algolia.search.dsl.advanced.DSLResponseFields
 import com.algolia.search.dsl.attributes.DSLAttributes
 import com.algolia.search.dsl.attributes.DSLAttributesToRetrieve
-import com.algolia.search.dsl.filtering.DSLFacetFilters
-import com.algolia.search.dsl.filtering.DSLFilters
-import com.algolia.search.dsl.filtering.DSLNumericFilters
-import com.algolia.search.dsl.filtering.DSLTagFilters
+import com.algolia.search.dsl.filtering.*
 import com.algolia.search.dsl.geosearch.DSLBoundingBox
 import com.algolia.search.dsl.geosearch.DSLPolygon
 import com.algolia.search.dsl.highlighting.DSLSnippet
@@ -20,81 +17,81 @@ public fun query(query: String? = null, init: Query.() -> Unit): Query {
 }
 
 public fun Query.attributesToRetrieve(block: DSLAttributesToRetrieve.() -> Unit) {
-    attributesToRetrieve = DSLAttributesToRetrieve().apply(block).build()
+    attributesToRetrieve = DSLAttributesToRetrieve(block)
 }
 
 public fun Query.restrictSearchableAttributes(block: DSLAttributes.() -> Unit) {
-    restrictSearchableAttributes = DSLAttributes().apply(block).build()
+    restrictSearchableAttributes = DSLAttributes(block)
 }
 
 public fun Query.filters(block: DSLFilters.() -> Unit) {
-    filters = DSLFilters().apply(block).build()
+    filters = FilterBuilder.SQL(DSLFilters(block))
 }
 
 public fun Query.optionalFilters(block: DSLFacetFilters.() -> Unit) {
-    optionalFilters = DSLFacetFilters().apply(block).build()
+    optionalFilters = FilterBuilder.Legacy(DSLFacetFilters(block))
 }
 
 public fun Query.facetFilters(block: DSLFacetFilters.() -> Unit) {
-    facetFilters = DSLFacetFilters().apply(block).build()
+    facetFilters = FilterBuilder.Legacy(DSLFacetFilters(block))
 }
 
 public fun Query.numericFilters(block: DSLNumericFilters.() -> Unit) {
-    numericFilters = DSLNumericFilters().apply(block).build()
+    numericFilters = FilterBuilder.Legacy(DSLNumericFilters(block))
 }
 
 public fun Query.tagFilters(block: DSLTagFilters.() -> Unit) {
-    tagFilters = DSLTagFilters().apply(block).build()
+    tagFilters = FilterBuilder.Legacy(DSLTagFilters(block))
 }
 
 public fun Query.facets(block: DSLAttributes.() -> Unit) {
-    facets = DSLAttributes().apply(block).build()
+    facets = DSLAttributes(block)
 }
 
 public fun Query.attributesToHighlight(block: DSLAttributes.() -> Unit) {
-    attributesToHighlight = DSLAttributes().apply(block).build()
+    attributesToHighlight = DSLAttributes(block)
 }
 
 public fun Query.attributesToSnippet(block: DSLSnippet.() -> Unit) {
-    attributesToSnippet = DSLSnippet().apply(block).build()
+    attributesToSnippet = DSLSnippet(block)
 }
 
 public fun Query.disableTypoToleranceOnAttributes(block: DSLAttributes.() -> Unit) {
-    disableTypoToleranceOnAttributes = DSLAttributes().apply(block).build()
+    disableTypoToleranceOnAttributes = DSLAttributes(block)
 }
 
 public fun Query.insideBoundingBox(block: DSLBoundingBox.() -> Unit) {
-    insideBoundingBox = DSLBoundingBox().apply(block).build()
+    insideBoundingBox = DSLBoundingBox(block)
 }
 
 public fun Query.insidePolygon(block: DSLPolygon.() -> Unit) {
-    insidePolygon = DSLPolygon().apply(block).build()
+    insidePolygon = DSLPolygon(block)
 }
 
 public fun Query.queryLanguages(block: DSLQueryLanguage.() -> Unit) {
-    queryLanguages = DSLQueryLanguage().apply(block).build()
+    queryLanguages = DSLQueryLanguage(block)
 }
 
 public fun Query.optionalWords(block: DSLStrings.() -> Unit) {
-    optionalWords = DSLStrings().apply(block).build()
+    optionalWords = DSLStrings(block)
 }
 
 public fun Query.disableExactOnAttributes(block: DSLAttributes.() -> Unit) {
-    disableExactOnAttributes = DSLAttributes().apply(block).build()
+    disableExactOnAttributes = DSLAttributes(block)
 }
 
 public fun Query.alternativesAsExact(block: DSLAlternativesAsExact.() -> Unit) {
-    alternativesAsExact = DSLAlternativesAsExact().apply(block).build()
+    alternativesAsExact = DSLAlternativesAsExact(block)
 }
 
 public fun Query.ruleContexts(block: DSLStrings.() -> Unit) {
-    ruleContexts = DSLStrings().apply(block).build()
+    ruleContexts = DSLStrings(block)
 }
 
 public fun Query.analyticsTags(block: DSLStrings.() -> Unit) {
-    analyticsTags = DSLStrings().apply(block).build()
+    analyticsTags = DSLStrings(block)
 }
 
 public fun Query.responseFields(block: DSLResponseFields.() -> Unit) {
-    responseFields = DSLResponseFields().apply(block).build()
+    responseFields = DSLResponseFields(block)
 }

@@ -11,10 +11,10 @@ internal class TestDSLGroupTag {
 
     @Test
     fun tag() {
-        val dsl = DSLGroupTag().apply {
+        val dsl = DSLGroupTag {
             +tag(unknown)
         }
 
-        dsl.filters shouldEqual setOf(FilterTag(unknown))
+        dsl shouldEqual setOf(FilterTag(unknown))
     }
 }

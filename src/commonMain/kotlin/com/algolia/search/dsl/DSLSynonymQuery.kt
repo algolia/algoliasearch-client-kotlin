@@ -8,5 +8,5 @@ public fun synonymQuery(init: SynonymQuery.() -> Unit): SynonymQuery {
 }
 
 public fun SynonymQuery.synonymTypes(block: DSLSynonymType.() -> Unit) {
-    synonymTypes = DSLSynonymType().apply(block).build()
+    synonymTypes = DSLSynonymType(block)
 }

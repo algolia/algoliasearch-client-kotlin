@@ -13,23 +13,23 @@ internal class TestDSLAttributesToRetrieve {
 
     @Test
     fun default() {
-        val dsl = DSLAttributesToRetrieve().apply {
+        val dsl = DSLAttributesToRetrieve {
             +"attributeA"
             +attributeB
         }
 
-        dsl.build() shouldEqual listOf(attributeA, attributeB)
+        dsl shouldEqual listOf(attributeA, attributeB)
     }
 
     @Test
     fun exclude() {
-        val dsl = DSLAttributesToRetrieve().apply {
+        val dsl = DSLAttributesToRetrieve {
             +attributeA
             +attributeB
             excludeAttributes = true
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             Attribute("-attributeA"),
             Attribute("-attributeB"),
             all

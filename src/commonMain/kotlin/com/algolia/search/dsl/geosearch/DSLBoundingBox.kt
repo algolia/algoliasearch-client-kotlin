@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.geosearch
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.BoundingBox
 
@@ -13,7 +14,10 @@ public class DSLBoundingBox(
         boundingBoxes += this
     }
 
-    public fun build(): List<BoundingBox> {
-        return boundingBoxes.toList()
+    public companion object : DSL<DSLBoundingBox, List<BoundingBox>> {
+
+        override operator fun invoke(block: DSLBoundingBox.() -> Unit): List<BoundingBox> {
+            return DSLBoundingBox().apply(block).boundingBoxes
+        }
     }
 }

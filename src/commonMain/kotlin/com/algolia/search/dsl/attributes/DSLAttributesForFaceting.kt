@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.attributes
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.AttributeForFaceting
@@ -42,7 +43,10 @@ public class DSLAttributesForFaceting(
         }
     }
 
-    public fun build(): List<AttributeForFaceting> {
-        return attributesForFaceting.toList()
+    public companion object : DSL<DSLAttributesForFaceting, List<AttributeForFaceting>> {
+
+        override operator fun invoke(block: DSLAttributesForFaceting.() -> Unit): List<AttributeForFaceting> {
+            return DSLAttributesForFaceting().apply(block).attributesForFaceting
+        }
     }
 }

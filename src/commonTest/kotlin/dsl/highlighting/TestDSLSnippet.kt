@@ -12,13 +12,13 @@ internal class TestDSLSnippet {
 
     @Test
     fun default() {
-        val dsl = DSLSnippet().apply {
+        val dsl = DSLSnippet {
             +"attributeA"
             +attributeB
             +Snippet(attributeA)
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             Snippet(attributeA),
             Snippet(attributeB),
             Snippet(attributeA)
@@ -27,12 +27,12 @@ internal class TestDSLSnippet {
 
     @Test
     fun limit() {
-        val dsl = DSLSnippet().apply {
+        val dsl = DSLSnippet {
             +("attributeA" limit 10)
             +(attributeB limit 20)
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             Snippet(attributeA, 10),
             Snippet(attributeB, 20)
         )

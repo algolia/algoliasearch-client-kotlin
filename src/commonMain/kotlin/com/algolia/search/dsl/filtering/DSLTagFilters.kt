@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.filtering
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 
 
@@ -8,23 +9,22 @@ public class DSLTagFilters(
     private val groups: MutableList<Group<FilterTag>> = mutableListOf()
 ) {
 
-    private fun put(group: Group<FilterTag>) {
-        if (group.isNotEmpty()) groups += group
+    public operator fun Group<FilterTag>.unaryPlus() {
+        if (isNotEmpty()) groups += this
     }
 
     public fun and(block: DSLGroupTag.() -> Unit) {
-        put(GroupAnd.Tag(DSLGroupTag().apply(block).filters))
+        +GroupAnd.Tag(DSLGroupTag(block))
     }
 
     public fun or(block: DSLGroupTag.() -> Unit) {
-        put(GroupOr.Tag(DSLGroupTag().apply(block).filters))
+        +GroupOr.Tag(DSLGroupTag(block))
     }
 
-    public fun build(): List<List<String>> {
-        val (andEntries, orEntries) = groups.partition { it is GroupAnd.Tag }
-        val ands = andEntries.flatMap { group -> group.map { listOf(it.expression) } }
-        val ors = orEntries.map { group -> group.map { it.expression } }
+    public companion object : DSL<DSLTagFilters, List<Group<FilterTag>>> {
 
-        return ands + ors
+        override operator fun invoke(block: DSLTagFilters.() -> Unit): List<Group<FilterTag>> {
+            return DSLTagFilters().apply(block).groups.toList()
+        }
     }
 }

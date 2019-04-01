@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.ranking
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.CustomRankingCriterium
@@ -34,7 +35,10 @@ public class DSLCustomRanking(
         }
     }
 
-    public fun build(): List<CustomRankingCriterium> {
-        return customRankingCriteria.toList()
+    public companion object : DSL<DSLCustomRanking, List<CustomRankingCriterium>> {
+
+        override operator fun invoke(block: DSLCustomRanking.() -> Unit): List<CustomRankingCriterium> {
+            return DSLCustomRanking().apply(block).customRankingCriteria
+        }
     }
 }

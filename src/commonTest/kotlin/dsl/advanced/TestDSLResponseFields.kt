@@ -10,12 +10,12 @@ internal class TestDSLResponseFields {
 
     @Test
     fun default() {
-        val dsl = DSLResponseFields().apply {
+        val dsl = DSLResponseFields {
             +All
             +AroundLatLng
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             ResponseFields.All,
             ResponseFields.AroundLatLng
         )
@@ -23,7 +23,7 @@ internal class TestDSLResponseFields {
 
     @Test
     fun responseFields() {
-        DSLResponseFields().apply {
+        DSLResponseFields {
             All shouldEqual ResponseFields.All
             AroundLatLng shouldEqual ResponseFields.AroundLatLng
             AutomaticRadius shouldEqual ResponseFields.AutomaticRadius

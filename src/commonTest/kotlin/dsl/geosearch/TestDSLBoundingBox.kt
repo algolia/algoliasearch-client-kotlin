@@ -11,11 +11,11 @@ internal class TestDSLBoundingBox {
 
     @Test
     fun default() {
-        val dsl = DSLBoundingBox().apply {
+        val dsl = DSLBoundingBox {
             +BoundingBox(0f and 1f, 2f and 3f)
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             BoundingBox(0f and 1f, 2f and 3f)
         )
     }

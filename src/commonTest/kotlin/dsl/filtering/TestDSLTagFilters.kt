@@ -3,6 +3,9 @@ package dsl.filtering
 import attributeA
 import attributeB
 import com.algolia.search.dsl.filtering.DSLTagFilters
+import com.algolia.search.dsl.filtering.FilterTag
+import com.algolia.search.dsl.filtering.GroupAnd
+import com.algolia.search.dsl.filtering.GroupOr
 import shouldEqual
 import kotlin.test.Test
 
@@ -11,19 +14,21 @@ internal class TestDSLTagFilters {
 
     @Test
     fun and() {
-        val dsl = DSLTagFilters().apply {
+        val dsl = DSLTagFilters {
             and {
                 +tag(attributeA.raw)
                 +tag(attributeB.raw)
             }
         }
 
-        dsl.build() shouldEqual listOf(listOf("_tags:\"attributeA\""), listOf("_tags:\"attributeB\""))
+        dsl shouldEqual listOf(
+            GroupAnd.Tag(FilterTag(attributeA.raw), FilterTag(attributeB.raw))
+        )
     }
 
     @Test
     fun or() {
-        val dsl = DSLTagFilters().apply {
+        val dsl = DSLTagFilters {
             or {
                 +tag(attributeA.raw)
                 +tag(attributeB.raw)
@@ -33,19 +38,19 @@ internal class TestDSLTagFilters {
             }
         }
 
-        dsl.build() shouldEqual listOf(
-            listOf("_tags:\"attributeA\"", "_tags:\"attributeB\""),
-            listOf("_tags:\"attributeA\"")
+        dsl shouldEqual listOf(
+            GroupOr.Tag(FilterTag(attributeA.raw), FilterTag(attributeB.raw)),
+            GroupOr.Tag(FilterTag(attributeA.raw))
         )
     }
 
     @Test
     fun emptyGroups() {
-        val dsl = DSLTagFilters().apply {
+        val dsl = DSLTagFilters {
             and { }
             or { }
         }
 
-        dsl.build() shouldEqual listOf()
+        dsl shouldEqual listOf()
     }
 }

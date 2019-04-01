@@ -10,10 +10,10 @@ internal class TestDSLStrings {
 
     @Test
     fun default() {
-        val dsl = DSLStrings().apply {
+        val dsl = DSLStrings {
             +unknown
         }
 
-        dsl.build() shouldEqual listOf(unknown)
+        dsl shouldEqual listOf(unknown)
     }
 }

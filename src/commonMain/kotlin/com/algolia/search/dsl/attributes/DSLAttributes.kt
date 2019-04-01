@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.attributes
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 
@@ -17,7 +18,10 @@ public class DSLAttributes(
         attributes += this
     }
 
-    public fun build(): List<Attribute> {
-        return attributes.toList()
+    public companion object : DSL<DSLAttributes, List<Attribute>> {
+
+        override operator fun invoke(block: DSLAttributes.() -> Unit): List<Attribute> {
+            return DSLAttributes().apply(block).attributes
+        }
     }
 }

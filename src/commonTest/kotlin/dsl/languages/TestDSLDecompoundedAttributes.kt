@@ -12,13 +12,13 @@ internal class TestDSLDecompoundedAttributes {
 
     @Test
     fun default() {
-        val dsl = DSLDecompoundedAttributes().apply {
+        val dsl = DSLDecompoundedAttributes {
             +german { +attributeA }
             +dutch { +attributeA }
             +finnish { +attributeA }
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             DecompoundedAttributes(QueryLanguage.German, attributeA),
             DecompoundedAttributes(QueryLanguage.Dutch, attributeA),
             DecompoundedAttributes(QueryLanguage.Finnish, attributeA)

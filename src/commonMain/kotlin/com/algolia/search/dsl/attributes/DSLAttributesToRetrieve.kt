@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.attributes
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.dsl.all
 import com.algolia.search.model.Attribute
@@ -20,11 +21,16 @@ public class DSLAttributesToRetrieve(
         attributes += this
     }
 
-    public fun build(): List<Attribute> {
-        return if (excludeAttributes) {
-            if (attributes.isNotEmpty()) {
-                attributes.map { Attribute("-$it") }.plus(all)
-            } else listOf()
-        } else attributes.toList()
+    public companion object : DSL<DSLAttributesToRetrieve, List<Attribute>> {
+
+        override operator fun invoke(block: DSLAttributesToRetrieve.() -> Unit): List<Attribute> {
+            return DSLAttributesToRetrieve().apply(block).run {
+                if (excludeAttributes) {
+                    if (attributes.isNotEmpty()) {
+                        attributes.map { Attribute("-$it") }.plus(all)
+                    } else listOf()
+                } else attributes.toList()
+            }
+        }
     }
 }

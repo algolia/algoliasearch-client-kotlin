@@ -11,14 +11,14 @@ internal class TestDSLNumericAttributeFilter {
 
     @Test
     fun default() {
-        val dsl = DSLNumericAttributeFilter().apply {
+        val dsl = DSLNumericAttributeFilter {
             +attributeA.raw
             +attributeA
             +(attributeA.raw equalsOnly true)
             +(attributeA equalsOnly true)
         }
 
-        dsl.build() shouldEqual listOf(
+        dsl shouldEqual listOf(
             NumericAttributeFilter(attributeA),
             NumericAttributeFilter(attributeA),
             NumericAttributeFilter(attributeA, true),

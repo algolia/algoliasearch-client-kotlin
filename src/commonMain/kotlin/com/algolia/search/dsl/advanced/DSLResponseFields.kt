@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.advanced
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.ResponseFields
 
@@ -34,7 +35,10 @@ public class DSLResponseFields(
         responseFields += this
     }
 
-    public fun build(): List<ResponseFields> {
-        return responseFields.toList()
+    public companion object : DSL<DSLResponseFields, List<ResponseFields>> {
+
+        override operator fun invoke(block: DSLResponseFields.() -> Unit): List<ResponseFields> {
+            return DSLResponseFields().apply(block).responseFields
+        }
     }
 }

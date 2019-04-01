@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.strategy
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.AlternativesAsExact
 
@@ -18,7 +19,10 @@ public class DSLAlternativesAsExact(
         alternativesAsExacts += this
     }
 
-    public fun build(): List<AlternativesAsExact> {
-        return alternativesAsExacts.toList()
+    public companion object : DSL<DSLAlternativesAsExact, List<AlternativesAsExact>> {
+
+        override operator fun invoke(block: DSLAlternativesAsExact.() -> Unit): List<AlternativesAsExact> {
+            return DSLAlternativesAsExact().apply(block).alternativesAsExacts
+        }
     }
 }

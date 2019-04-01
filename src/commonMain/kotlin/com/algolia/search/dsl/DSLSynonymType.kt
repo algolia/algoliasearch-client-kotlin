@@ -23,7 +23,10 @@ public class DSLSynonymType(
         synonymTypes += this
     }
 
-    public fun build(): List<SynonymType> {
-        return synonymTypes.toList()
+    public companion object : DSL<DSLSynonymType, List<SynonymType>> {
+
+        override operator fun invoke(block: DSLSynonymType.() -> Unit): List<SynonymType> {
+            return DSLSynonymType().apply(block).synonymTypes
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.algolia.search.dsl.highlighting
 
+import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Snippet
@@ -32,5 +33,12 @@ public class DSLSnippet(
 
     public fun build(): List<Snippet> {
         return snippets.toList()
+    }
+
+    public companion object : DSL<DSLSnippet, List<Snippet>> {
+
+        override operator fun invoke(block: DSLSnippet.() -> Unit): List<Snippet> {
+            return DSLSnippet().apply(block).snippets
+        }
     }
 }
