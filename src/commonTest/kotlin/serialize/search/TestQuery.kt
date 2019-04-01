@@ -5,6 +5,7 @@ import attributesJson
 import boolean
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.*
+import com.algolia.search.model.settings.Distinct
 import com.algolia.search.serialize.*
 import int
 import kotlinx.serialization.json.Json
@@ -70,7 +71,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             disableExactOnAttributes = attributes,
             exactOnSingleWordQuery = ExactOnSingleWordQuery.Word,
             alternativesAsExact = listOf(AlternativesAsExact.IgnorePlurals),
-            distinct = int,
+            distinct = Distinct.Value(1),
             getRankingInfo = boolean,
             clickAnalytics = boolean,
             analytics = boolean,

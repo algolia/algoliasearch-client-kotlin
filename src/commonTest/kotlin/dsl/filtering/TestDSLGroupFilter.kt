@@ -18,7 +18,7 @@ internal class TestDSLGroupFilter {
             +comparison(attributeA, LesserOrEquals, 0)
         }
 
-        dsl.build() shouldEqual setOf(
+        dsl.filters shouldEqual setOf(
             FilterTag(unknown),
             FilterFacet(attributeA, 0),
             FilterRange(attributeA, 0 until 2),

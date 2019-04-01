@@ -9,21 +9,21 @@ public class DSLNumericFilters(
 ) {
 
     private fun put(group: Group<FilterNumeric>) {
-        if (group.filters.isNotEmpty()) groups += group
+        if (group.isNotEmpty()) groups += group
     }
 
     public fun and(block: DSLGroupNumeric.() -> Unit) {
-        put(GroupAnd.Numeric(DSLGroupNumeric().apply(block).build()))
+        put(GroupAnd.Numeric(DSLGroupNumeric().apply(block).filters))
     }
 
     public fun or(block: DSLGroupNumeric.() -> Unit) {
-        put(GroupOr.Numeric(DSLGroupNumeric().apply(block).build()))
+        put(GroupOr.Numeric(DSLGroupNumeric().apply(block).filters))
     }
 
     public fun build(): List<List<String>> {
         val (andEntries, orEntries) = groups.partition { it is GroupAnd.Numeric }
-        val ands = andEntries.flatMap { group -> group.filters.map { listOf(it.expression) } }
-        val ors = orEntries.map { group -> group.filters.map { it.expression } }
+        val ands = andEntries.flatMap { group -> group.map { listOf(it.expression) } }
+        val ors = orEntries.map { group -> group.map { it.expression } }
 
         return ands + ors
     }

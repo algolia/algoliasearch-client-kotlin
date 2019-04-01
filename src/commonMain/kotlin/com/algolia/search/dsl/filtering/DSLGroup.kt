@@ -19,10 +19,6 @@ public sealed class DSLGroup<T : Filter> {
     public operator fun contains(filter: T): Boolean {
         return filters.contains(filter)
     }
-
-    public fun build(): Set<T> {
-        return filters.toSet()
-    }
 }
 
 public class DSLGroupFacet(

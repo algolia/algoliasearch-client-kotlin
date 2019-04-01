@@ -20,7 +20,7 @@ internal class TestDSLGroupNumeric {
             +range(attributeA.raw, 0.0, 1.0)
         }
 
-        dsl.build() shouldEqual setOf(
+        dsl.filters shouldEqual setOf(
             FilterRange(attributeA, 0 until 2),
             FilterRange(attributeA, 0L until 2L),
             FilterRange(attributeA, 0f, 1f),
@@ -37,7 +37,7 @@ internal class TestDSLGroupNumeric {
             +range(attributeA, 0.0, 1.0)
         }
 
-        dsl.build() shouldEqual setOf(
+        dsl.filters shouldEqual setOf(
             FilterRange(attributeA, 0 until 2),
             FilterRange(attributeA, 0L until 2L),
             FilterRange(attributeA, 0f, 1f),
@@ -52,7 +52,7 @@ internal class TestDSLGroupNumeric {
             +comparison(attributeA, Greater, 0)
         }
 
-        dsl.build() shouldEqual setOf(
+        dsl.filters shouldEqual setOf(
             FilterComparison(attributeA, NumericOperator.Lesser, 0),
             FilterComparison(attributeA, NumericOperator.Greater, 0)
         )

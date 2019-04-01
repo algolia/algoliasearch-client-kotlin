@@ -18,7 +18,7 @@ internal class TestDSLGroupFacet {
             +facet(attributeA.raw, true, 0)
         }
 
-        dsl.build() shouldEqual setOf(
+        dsl.filters shouldEqual setOf(
             FilterFacet(attributeA, 0),
             FilterFacet(attributeA, unknown),
             FilterFacet(attributeA, true, 0)
@@ -33,7 +33,7 @@ internal class TestDSLGroupFacet {
             +facet(attributeA, true, 0)
         }
 
-        dsl.build() shouldEqual setOf(
+        dsl.filters shouldEqual setOf(
             FilterFacet(attributeA, 0),
             FilterFacet(attributeA, unknown),
             FilterFacet(attributeA, true, 0)

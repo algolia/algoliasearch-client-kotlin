@@ -15,6 +15,6 @@ internal class TestDSLGroupTag {
             +tag(unknown)
         }
 
-        dsl.build() shouldEqual setOf(FilterTag(unknown))
+        dsl.filters shouldEqual setOf(FilterTag(unknown))
     }
 }
