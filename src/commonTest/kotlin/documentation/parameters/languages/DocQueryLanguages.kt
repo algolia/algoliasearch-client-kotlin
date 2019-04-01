@@ -14,6 +14,7 @@ internal class DocQueryLanguages : TestDocumentation() {
 
 //    queryLanguages {
 //        +QueryLanguage
+//        +...
 //    }
 
     @Test

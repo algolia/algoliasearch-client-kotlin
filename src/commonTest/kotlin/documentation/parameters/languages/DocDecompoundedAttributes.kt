@@ -11,6 +11,7 @@ internal class DocDecompoundedAttributes : TestDocumentation() {
 
 //    decompoundedAttributes {
 //        language { +"attribute" }
+//        +...
 //    }
 
     @Test

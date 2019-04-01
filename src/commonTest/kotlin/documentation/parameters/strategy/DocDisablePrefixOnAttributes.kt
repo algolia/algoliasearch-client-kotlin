@@ -9,7 +9,10 @@ import kotlin.test.Test
 
 internal class DocDisablePrefixOnAttributes : TestDocumentation() {
 
-//    disablePrefixOnAttributes { +"attribute" }
+//    disablePrefixOnAttributes {
+//        +"attribute"
+//        +...
+//    }
 
     @Test
     fun settings() {

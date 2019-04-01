@@ -18,7 +18,7 @@ internal class DocInsidePolygon {
 //            Point(49.62625916704081f, 4.6181640625f),
 //            ...](#parameter-option-a-polyhgon)
 //        )
-//        // you can search in [multiple polygon](#parameter-option-multiple-polygons)
+//        +... // you can search in [multiple polygon](#parameter-option-multiple-polygons)
 //    }
 
     @Test

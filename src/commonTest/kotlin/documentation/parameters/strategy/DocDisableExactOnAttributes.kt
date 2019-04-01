@@ -10,7 +10,10 @@ import kotlin.test.Test
 
 internal class DocDisableExactOnAttributes : TestDocumentation() {
 
-//    disableExactOnAttributes { +"attribute" }
+//    disableExactOnAttributes {
+//        +"attribute"
+//        +...
+//    }
 
     @Test
     fun settings() {

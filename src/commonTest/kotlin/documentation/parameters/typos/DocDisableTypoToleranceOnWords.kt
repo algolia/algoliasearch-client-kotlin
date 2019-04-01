@@ -11,6 +11,7 @@ internal class DocDisableTypoToleranceOnWords : TestDocumentation() {
 
 //    disableTypoToleranceOnWords {
 //        +"word"
+//        +...
 //    }
 
     @Test

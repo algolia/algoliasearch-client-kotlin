@@ -12,6 +12,7 @@ internal class DocDisableTypoToleranceOnAttributes : TestDocumentation() {
 
 //    disableTypoToleranceOnAttributes {
 //        +"attribute"
+//        +...
 //    }
 
     @Test

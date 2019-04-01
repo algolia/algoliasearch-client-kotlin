@@ -11,6 +11,7 @@ internal class DocUnretrievableAttributes : TestDocumentation() {
 
 //    unretrieveableAttributes {
 //        +"attribute"
+//        +...
 //    }
 
     @Test

@@ -11,6 +11,7 @@ internal class DocFacets {
 
 //    facets {
 //        +"attribute"
+//        +...
 //    }
 
     @Test

@@ -13,6 +13,7 @@ internal class DocRestrictSearchableAttributes {
 
 //    restrictSearchableAttributes {
 //        +"attribute"
+//        +...
 //    }
 
     @Test

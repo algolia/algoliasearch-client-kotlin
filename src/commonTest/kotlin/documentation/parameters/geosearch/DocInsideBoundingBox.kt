@@ -16,6 +16,7 @@ internal class DocInsideBoundingBox {
 //            Point(latitude, longitude),
 //            Point(latitude, longitude)
 //        )
+//        +...
 //    }
 
     @Test

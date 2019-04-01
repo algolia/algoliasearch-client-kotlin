@@ -9,7 +9,10 @@ import kotlin.test.Test
 
 internal class DocCamelCaseAttributes : TestDocumentation() {
 
-//    camelCaseAttributes { +"attribute" }
+//    camelCaseAttributes {
+//        +"attribute"
+//        +...
+//    }
 
     @Test
     fun settings() {
