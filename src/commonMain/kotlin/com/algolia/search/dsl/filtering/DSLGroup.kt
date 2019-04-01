@@ -19,36 +19,36 @@ public sealed class DSLGroup<T : Filter> {
 }
 
 public class DSLGroupFacet(
-    override val filters: MutableSet<FilterFacet> = mutableSetOf()
-) : DSLGroup<FilterFacet>(), DSLFacet {
+    override val filters: MutableSet<Filter.Facet> = mutableSetOf()
+) : DSLGroup<Filter.Facet>(), DSLFacet {
 
-    public companion object : DSL<DSLGroupFacet, MutableSet<FilterFacet>> {
+    public companion object : DSL<DSLGroupFacet, MutableSet<Filter.Facet>> {
 
-        override fun invoke(block: DSLGroupFacet.() -> Unit): MutableSet<FilterFacet> {
+        override fun invoke(block: DSLGroupFacet.() -> Unit): MutableSet<Filter.Facet> {
             return DSLGroupFacet().apply(block).filters
         }
     }
 }
 
 public class DSLGroupTag(
-    override val filters: MutableSet<FilterTag> = mutableSetOf()
-) : DSLGroup<FilterTag>(), DSLTag {
+    override val filters: MutableSet<Filter.Tag> = mutableSetOf()
+) : DSLGroup<Filter.Tag>(), DSLTag {
 
-    public companion object : DSL<DSLGroupTag, MutableSet<FilterTag>> {
+    public companion object : DSL<DSLGroupTag, MutableSet<Filter.Tag>> {
 
-        override fun invoke(block: DSLGroupTag.() -> Unit): MutableSet<FilterTag> {
+        override fun invoke(block: DSLGroupTag.() -> Unit): MutableSet<Filter.Tag> {
             return DSLGroupTag().apply(block).filters
         }
     }
 }
 
 public class DSLGroupNumeric(
-    override val filters: MutableSet<FilterNumeric> = mutableSetOf()
-) : DSLGroup<FilterNumeric>(), DSLNumeric {
+    override val filters: MutableSet<Filter.Numeric> = mutableSetOf()
+) : DSLGroup<Filter.Numeric>(), DSLNumeric {
 
-    public companion object : DSL<DSLGroupNumeric, MutableSet<FilterNumeric>> {
+    public companion object : DSL<DSLGroupNumeric, MutableSet<Filter.Numeric>> {
 
-        override fun invoke(block: DSLGroupNumeric.() -> Unit): MutableSet<FilterNumeric> {
+        override fun invoke(block: DSLGroupNumeric.() -> Unit): MutableSet<Filter.Numeric> {
             return DSLGroupNumeric().apply(block).filters
         }
     }

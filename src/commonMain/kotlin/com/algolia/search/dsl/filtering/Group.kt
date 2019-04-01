@@ -17,53 +17,53 @@ public sealed class GroupAnd<T : Filter> : Group<T>() {
     }
 
     public data class Facet(
-        override val filters: MutableSet<FilterFacet>
-    ) : GroupAnd<FilterFacet>(),
-        MutableSet<FilterFacet> by filters {
+        override val filters: MutableSet<Filter.Facet>
+    ) : GroupAnd<Filter.Facet>(),
+        MutableSet<Filter.Facet> by filters {
 
-        public constructor(vararg filters: FilterFacet) : this(filters.toMutableSet())
+        public constructor(vararg filters: Filter.Facet) : this(filters.toMutableSet())
     }
 
     public data class Tag(
-        override val filters: MutableSet<FilterTag>
-    ) : GroupAnd<FilterTag>(),
-        MutableSet<FilterTag> by filters {
+        override val filters: MutableSet<Filter.Tag>
+    ) : GroupAnd<Filter.Tag>(),
+        MutableSet<Filter.Tag> by filters {
 
-        public constructor(vararg filters: FilterTag) : this(filters.toMutableSet())
+        public constructor(vararg filters: Filter.Tag) : this(filters.toMutableSet())
     }
 
     public data class Numeric(
-        override val filters: MutableSet<FilterNumeric>
-    ) : GroupAnd<FilterNumeric>(),
-        MutableSet<FilterNumeric> by filters {
+        override val filters: MutableSet<Filter.Numeric>
+    ) : GroupAnd<Filter.Numeric>(),
+        MutableSet<Filter.Numeric> by filters {
 
-        public constructor(vararg filters: FilterNumeric) : this(filters.toMutableSet())
+        public constructor(vararg filters: Filter.Numeric) : this(filters.toMutableSet())
     }
 }
 
 public sealed class GroupOr<T : Filter> : Group<T>() {
 
     public data class Facet(
-        override val filters: MutableSet<FilterFacet>
-    ) : GroupOr<FilterFacet>(),
-        MutableSet<FilterFacet> by filters {
+        override val filters: MutableSet<Filter.Facet>
+    ) : GroupOr<Filter.Facet>(),
+        MutableSet<Filter.Facet> by filters {
 
-        public constructor(vararg filters: FilterFacet) : this(filters.toMutableSet())
+        public constructor(vararg filters: Filter.Facet) : this(filters.toMutableSet())
     }
 
     public data class Tag(
-        override val filters: MutableSet<FilterTag>
-    ) : GroupOr<FilterTag>(),
-        MutableSet<FilterTag> by filters {
+        override val filters: MutableSet<Filter.Tag>
+    ) : GroupOr<Filter.Tag>(),
+        MutableSet<Filter.Tag> by filters {
 
-        public constructor(vararg filters: FilterTag) : this(filters.toMutableSet())
+        public constructor(vararg filters: Filter.Tag) : this(filters.toMutableSet())
     }
 
     public data class Numeric(
-        override val filters: MutableSet<FilterNumeric>
-    ) : GroupOr<FilterNumeric>(),
-        MutableSet<FilterNumeric> by filters {
+        override val filters: MutableSet<Filter.Numeric>
+    ) : GroupOr<Filter.Numeric>(),
+        MutableSet<Filter.Numeric> by filters {
 
-        public constructor(vararg filters: FilterNumeric) : this(filters.toMutableSet())
+        public constructor(vararg filters: Filter.Numeric) : this(filters.toMutableSet())
     }
 }

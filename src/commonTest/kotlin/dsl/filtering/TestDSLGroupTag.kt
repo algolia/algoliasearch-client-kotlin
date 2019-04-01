@@ -1,7 +1,7 @@
 package dsl.filtering
 
 import com.algolia.search.dsl.filtering.DSLGroupTag
-import com.algolia.search.dsl.filtering.FilterTag
+import com.algolia.search.dsl.filtering.Filter
 import shouldEqual
 import unknown
 import kotlin.test.Test
@@ -15,6 +15,6 @@ internal class TestDSLGroupTag {
             +tag(unknown)
         }
 
-        dsl shouldEqual setOf(FilterTag(unknown))
+        dsl shouldEqual setOf(Filter.Tag(unknown))
     }
 }

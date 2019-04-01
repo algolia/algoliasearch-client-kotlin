@@ -6,10 +6,10 @@ import com.algolia.search.dsl.DSLParameters
 
 @DSLParameters
 public class DSLTagFilters(
-    private val groups: MutableList<Group<FilterTag>> = mutableListOf()
+    private val groups: MutableList<Group<Filter.Tag>> = mutableListOf()
 ) {
 
-    public operator fun Group<FilterTag>.unaryPlus() {
+    public operator fun Group<Filter.Tag>.unaryPlus() {
         if (isNotEmpty()) groups += this
     }
 
@@ -21,9 +21,9 @@ public class DSLTagFilters(
         +GroupOr.Tag(DSLGroupTag(block))
     }
 
-    public companion object : DSL<DSLTagFilters, List<Group<FilterTag>>> {
+    public companion object : DSL<DSLTagFilters, List<Group<Filter.Tag>>> {
 
-        override operator fun invoke(block: DSLTagFilters.() -> Unit): List<Group<FilterTag>> {
+        override operator fun invoke(block: DSLTagFilters.() -> Unit): List<Group<Filter.Tag>> {
             return DSLTagFilters().apply(block).groups.toList()
         }
     }

@@ -19,10 +19,10 @@ internal class TestDSLGroupFilter {
         }
 
         dsl shouldEqual setOf(
-            FilterTag(unknown),
-            FilterFacet(attributeA, 0),
-            FilterRange(attributeA, 0 until 2),
-            FilterComparison(attributeA, NumericOperator.LesserOrEquals, 0)
+            Filter.Tag(unknown),
+            Filter.Facet(attributeA, 0),
+            Filter.Numeric(attributeA, 0 until 2),
+            Filter.Numeric(attributeA, NumericOperator.LesserOrEquals, 0)
         )
     }
 }

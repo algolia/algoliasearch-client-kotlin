@@ -1,7 +1,7 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.dsl.filtering.FilterFacet
+import com.algolia.search.dsl.filtering.Filter
 import com.algolia.search.dsl.filters
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute
@@ -65,7 +65,7 @@ internal class EndpointSearchImpl(
     override suspend fun searchDisjunctiveFacets(
         query: Query,
         disjunctiveFacets: List<Attribute>,
-        filters: List<FilterFacet>,
+        filters: List<Filter.Facet>,
         requestOptions: RequestOptions?
     ): ResponseSearch {
         val (orFilters, andFilters) = filters.partition { disjunctiveFacets.contains(it.attribute) }
@@ -90,8 +90,8 @@ internal class EndpointSearchImpl(
 
     private fun buildAndQueries(
         query: Query,
-        andFilters: List<FilterFacet>,
-        orFilters: List<FilterFacet>
+        andFilters: List<Filter.Facet>,
+        orFilters: List<Filter.Facet>
     ): List<IndexQuery> {
         return query.copy().apply {
             filters {
@@ -104,8 +104,8 @@ internal class EndpointSearchImpl(
     private fun buildOrQueries(
         disjunctiveFacets: List<Attribute>,
         query: Query,
-        andFilters: List<FilterFacet>,
-        orFilters: List<FilterFacet>
+        andFilters: List<Filter.Facet>,
+        orFilters: List<Filter.Facet>
     ): List<IndexQuery> {
         return disjunctiveFacets.map { attribute ->
             query.copy().apply {

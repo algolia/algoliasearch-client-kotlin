@@ -1,6 +1,6 @@
 package com.algolia.search.model.insights
 
-import com.algolia.search.dsl.filtering.FilterFacet
+import com.algolia.search.dsl.filtering.Filter
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
@@ -69,7 +69,7 @@ public sealed class InsightsEvent {
             }
         }
 
-        public data class Filters(val filters: List<FilterFacet>) : Resources() {
+        public data class Filters(val filters: List<Filter.Facet>) : Resources() {
 
             init {
                 if (filters.size > 10)

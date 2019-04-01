@@ -1,7 +1,7 @@
 package model.insights
 
 import attributeA
-import com.algolia.search.dsl.filtering.FilterFacet
+import com.algolia.search.dsl.filtering.Filter
 import com.algolia.search.helper.toEventName
 import com.algolia.search.helper.toQueryID
 import com.algolia.search.model.insights.InsightsEvent
@@ -15,7 +15,7 @@ import kotlin.test.Test
 internal class TestInsightsEvent {
 
     private val eventName = "eventName".toEventName()
-    private val filter = FilterFacet(attributeA, "value")
+    private val filter = Filter.Facet(attributeA, "value")
 
     @Test
     fun positionsAreRequired() {

@@ -3,7 +3,7 @@ package dsl.filtering
 import attributeA
 import attributeB
 import com.algolia.search.dsl.filtering.DSLTagFilters
-import com.algolia.search.dsl.filtering.FilterTag
+import com.algolia.search.dsl.filtering.Filter
 import com.algolia.search.dsl.filtering.GroupAnd
 import com.algolia.search.dsl.filtering.GroupOr
 import shouldEqual
@@ -22,7 +22,7 @@ internal class TestDSLTagFilters {
         }
 
         dsl shouldEqual listOf(
-            GroupAnd.Tag(FilterTag(attributeA.raw), FilterTag(attributeB.raw))
+            GroupAnd.Tag(Filter.Tag(attributeA.raw), Filter.Tag(attributeB.raw))
         )
     }
 
@@ -39,8 +39,8 @@ internal class TestDSLTagFilters {
         }
 
         dsl shouldEqual listOf(
-            GroupOr.Tag(FilterTag(attributeA.raw), FilterTag(attributeB.raw)),
-            GroupOr.Tag(FilterTag(attributeA.raw))
+            GroupOr.Tag(Filter.Tag(attributeA.raw), Filter.Tag(attributeB.raw)),
+            GroupOr.Tag(Filter.Tag(attributeA.raw))
         )
     }
 

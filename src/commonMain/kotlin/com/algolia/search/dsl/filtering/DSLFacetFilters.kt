@@ -6,10 +6,10 @@ import com.algolia.search.dsl.DSLParameters
 
 @DSLParameters
 public class DSLFacetFilters(
-    private val groups: MutableList<Group<FilterFacet>> = mutableListOf()
+    private val groups: MutableList<Group<Filter.Facet>> = mutableListOf()
 ) {
 
-    public operator fun Group<FilterFacet>.unaryPlus() {
+    public operator fun Group<Filter.Facet>.unaryPlus() {
         if (isNotEmpty()) groups += this
     }
 
@@ -21,9 +21,9 @@ public class DSLFacetFilters(
         +GroupOr.Facet(DSLGroupFacet(block))
     }
 
-    public companion object : DSL<DSLFacetFilters, List<Group<FilterFacet>>> {
+    public companion object : DSL<DSLFacetFilters, List<Group<Filter.Facet>>> {
 
-        override operator fun invoke(block: DSLFacetFilters.() -> Unit): List<Group<FilterFacet>> {
+        override operator fun invoke(block: DSLFacetFilters.() -> Unit): List<Group<Filter.Facet>> {
             return DSLFacetFilters().apply(block).groups.toList()
         }
     }

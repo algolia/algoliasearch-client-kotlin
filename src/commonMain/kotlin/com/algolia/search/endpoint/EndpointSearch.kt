@@ -1,6 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.dsl.filtering.FilterFacet
+import com.algolia.search.dsl.filtering.Filter
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
@@ -112,14 +112,14 @@ public interface EndpointSearch {
      *
      * @param query The [Query] used to search.
      * @param disjunctiveFacet List of [Attribute] that are marked as disjunctive facets.
-     * @param filters The [FilterFacet] to be applied
+     * @param filters The [Filter.Facet] to be applied
      * @param requestOptions [RequestOptions] sent along with the query.
      * @return [ResponseSearch]
      */
     suspend fun searchDisjunctiveFacets(
         query: Query,
         disjunctiveFacets: List<Attribute>,
-        filters: List<FilterFacet>,
+        filters: List<Filter.Facet>,
         requestOptions: RequestOptions? = null
     ): ResponseSearch
 }

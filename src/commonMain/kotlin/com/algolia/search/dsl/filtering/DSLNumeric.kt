@@ -13,43 +13,43 @@ public interface DSLNumeric {
     val Greater get() = NumericOperator.Greater
     val GreaterOrEquals get() = NumericOperator.GreaterOrEquals
 
-    fun range(name: String, range: IntRange): FilterRange {
+    fun range(name: String, range: IntRange): Filter.Numeric {
         return range(Attribute(name), range)
     }
 
-    fun range(attribute: Attribute, range: IntRange): FilterRange {
-        return FilterRange(attribute, range)
+    fun range(attribute: Attribute, range: IntRange): Filter.Numeric {
+        return Filter.Numeric(attribute, range)
     }
 
-    fun range(name: String, range: LongRange): FilterRange {
+    fun range(name: String, range: LongRange): Filter.Numeric {
         return range(Attribute(name), range)
     }
 
-    fun range(attribute: Attribute, range: LongRange): FilterRange {
-        return FilterRange(attribute, range)
+    fun range(attribute: Attribute, range: LongRange): Filter.Numeric {
+        return Filter.Numeric(attribute, range)
     }
 
-    fun range(name: String, lowerBound: Float, upperBound: Float): FilterRange {
+    fun range(name: String, lowerBound: Float, upperBound: Float): Filter.Numeric {
         return range(Attribute(name), lowerBound, upperBound)
     }
 
-    fun range(attribute: Attribute, lowerBound: Float, upperBound: Float): FilterRange {
-        return FilterRange(attribute, lowerBound, upperBound)
+    fun range(attribute: Attribute, lowerBound: Float, upperBound: Float): Filter.Numeric {
+        return Filter.Numeric(attribute, lowerBound, upperBound)
     }
 
-    fun range(name: String, lowerBound: Double, upperBound: Double): FilterRange {
+    fun range(name: String, lowerBound: Double, upperBound: Double): Filter.Numeric {
         return range(Attribute(name), lowerBound, upperBound)
     }
 
-    fun range(attribute: Attribute, lowerBound: Double, upperBound: Double): FilterRange {
-        return FilterRange(attribute, lowerBound, upperBound)
+    fun range(attribute: Attribute, lowerBound: Double, upperBound: Double): Filter.Numeric {
+        return Filter.Numeric(attribute, lowerBound, upperBound)
     }
 
-    fun comparison(name: String, operator: NumericOperator, value: Number): FilterComparison {
+    fun comparison(name: String, operator: NumericOperator, value: Number): Filter.Numeric {
         return comparison(Attribute(name), operator, value)
     }
 
-    fun comparison(attribute: Attribute, operator: NumericOperator, value: Number): FilterComparison {
-        return FilterComparison(attribute, operator, value)
+    fun comparison(attribute: Attribute, operator: NumericOperator, value: Number): Filter.Numeric {
+        return Filter.Numeric(attribute, operator, value)
     }
 }

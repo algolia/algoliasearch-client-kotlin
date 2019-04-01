@@ -1,6 +1,6 @@
 package serialize.insights
 
-import com.algolia.search.dsl.filtering.FilterFacet
+import com.algolia.search.dsl.filtering.Filter
 import com.algolia.search.helper.*
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.request.RequestInsightsEvents
@@ -17,7 +17,7 @@ internal class TestInsightsEvent {
         indexName = "products".toIndexName(),
         timestamp = 1529055974,
         userToken = "ab6b88197c7941ee".toUserToken(),
-        resources = InsightsEvent.Resources.Filters(listOf(FilterFacet("brand".toAttribute(), "apple")))
+        resources = InsightsEvent.Resources.Filters(listOf(Filter.Facet("brand".toAttribute(), "apple")))
     )
     private val eventClick = InsightsEvent.Click(
         eventName = "add to cart from search".toEventName(),

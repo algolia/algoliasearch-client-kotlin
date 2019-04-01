@@ -1,7 +1,7 @@
 package suite
 
 import clientAdmin1
-import com.algolia.search.dsl.filtering.FilterFacet
+import com.algolia.search.dsl.filtering.Filter
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
@@ -50,10 +50,10 @@ internal class TestSuiteDisjunctive {
             )
             val disjunctiveFacets = listOf(brand)
             val filters = listOf(
-                FilterFacet(brand, "Apple"),
-                FilterFacet(brand, "Samsung"),
-                FilterFacet(brand, "Commas' voice, Ltd"),
-                FilterFacet(category, "device")
+                Filter.Facet(brand, "Apple"),
+                Filter.Facet(brand, "Samsung"),
+                Filter.Facet(brand, "Commas' voice, Ltd"),
+                Filter.Facet(category, "device")
             )
 
             index.apply {
@@ -93,7 +93,7 @@ internal class TestSuiteDisjunctive {
                 facets = listOf(city)
             )
             val disjunctiveFacets = listOf(stars, facilities)
-            val filters = mutableListOf<FilterFacet>()
+            val filters = mutableListOf<Filter.Facet>()
 
             index.apply {
                 val tasks = mutableListOf<Task>()
@@ -121,7 +121,7 @@ internal class TestSuiteDisjunctive {
                 it.facetStats.size shouldEqual 1
                 it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 12f)
             }
-            filters += FilterFacet(stars, "1")
+            filters += Filter.Facet(stars, "1")
             index.searchDisjunctiveFacets(query, disjunctiveFacets, filters).let {
                 it.nbHits shouldEqual 2
                 it.facets.size shouldEqual 1
@@ -140,7 +140,7 @@ internal class TestSuiteDisjunctive {
                 it.facetStats.size shouldEqual 1
                 it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 12f)
             }
-            filters += FilterFacet(city, "Paris")
+            filters += Filter.Facet(city, "Paris")
             index.searchDisjunctiveFacets(query, disjunctiveFacets, filters).let {
                 it.nbHits shouldEqual 2
                 it.facets.size shouldEqual 1
@@ -157,7 +157,7 @@ internal class TestSuiteDisjunctive {
                 it.facetStats.size shouldEqual 1
                 it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 6f)
             }
-            filters += FilterFacet(stars, "4")
+            filters += Filter.Facet(stars, "4")
             index.searchDisjunctiveFacets(query, disjunctiveFacets, filters).let {
                 it.nbHits shouldEqual 3
                 it.facets.size shouldEqual 1

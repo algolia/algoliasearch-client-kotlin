@@ -2,8 +2,7 @@ package dsl.filtering
 
 import attributeA
 import com.algolia.search.dsl.filtering.DSLGroupNumeric
-import com.algolia.search.dsl.filtering.FilterComparison
-import com.algolia.search.dsl.filtering.FilterRange
+import com.algolia.search.dsl.filtering.Filter
 import com.algolia.search.dsl.filtering.NumericOperator
 import shouldEqual
 import kotlin.test.Test
@@ -21,10 +20,10 @@ internal class TestDSLGroupNumeric {
         }
 
         dsl shouldEqual setOf(
-            FilterRange(attributeA, 0 until 2),
-            FilterRange(attributeA, 0L until 2L),
-            FilterRange(attributeA, 0f, 1f),
-            FilterRange(attributeA, 0.0, 1.0)
+            Filter.Numeric(attributeA, 0 until 2),
+            Filter.Numeric(attributeA, 0L until 2L),
+            Filter.Numeric(attributeA, 0f, 1f),
+            Filter.Numeric(attributeA, 0.0, 1.0)
         )
     }
 
@@ -38,10 +37,10 @@ internal class TestDSLGroupNumeric {
         }
 
         dsl shouldEqual setOf(
-            FilterRange(attributeA, 0 until 2),
-            FilterRange(attributeA, 0L until 2L),
-            FilterRange(attributeA, 0f, 1f),
-            FilterRange(attributeA, 0.0, 1.0)
+            Filter.Numeric(attributeA, 0 until 2),
+            Filter.Numeric(attributeA, 0L until 2L),
+            Filter.Numeric(attributeA, 0f, 1f),
+            Filter.Numeric(attributeA, 0.0, 1.0)
         )
     }
 
@@ -53,8 +52,8 @@ internal class TestDSLGroupNumeric {
         }
 
         dsl shouldEqual setOf(
-            FilterComparison(attributeA, NumericOperator.Lesser, 0),
-            FilterComparison(attributeA, NumericOperator.Greater, 0)
+            Filter.Numeric(attributeA, NumericOperator.Lesser, 0),
+            Filter.Numeric(attributeA, NumericOperator.Greater, 0)
         )
     }
 

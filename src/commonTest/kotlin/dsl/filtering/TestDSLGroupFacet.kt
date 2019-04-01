@@ -2,7 +2,7 @@ package dsl.filtering
 
 import attributeA
 import com.algolia.search.dsl.filtering.DSLGroupFacet
-import com.algolia.search.dsl.filtering.FilterFacet
+import com.algolia.search.dsl.filtering.Filter
 import shouldEqual
 import unknown
 import kotlin.test.Test
@@ -19,9 +19,9 @@ internal class TestDSLGroupFacet {
         }
 
         dsl shouldEqual setOf(
-            FilterFacet(attributeA, 0),
-            FilterFacet(attributeA, unknown),
-            FilterFacet(attributeA, true, 0)
+            Filter.Facet(attributeA, 0),
+            Filter.Facet(attributeA, unknown),
+            Filter.Facet(attributeA, true, 0)
         )
     }
 
@@ -34,9 +34,9 @@ internal class TestDSLGroupFacet {
         }
 
         dsl shouldEqual setOf(
-            FilterFacet(attributeA, 0),
-            FilterFacet(attributeA, unknown),
-            FilterFacet(attributeA, true, 0)
+            Filter.Facet(attributeA, 0),
+            Filter.Facet(attributeA, unknown),
+            Filter.Facet(attributeA, true, 0)
         )
     }
 }

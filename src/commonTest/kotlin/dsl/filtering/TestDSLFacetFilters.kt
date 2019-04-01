@@ -3,7 +3,7 @@ package dsl.filtering
 import attributeA
 import attributeB
 import com.algolia.search.dsl.filtering.DSLFacetFilters
-import com.algolia.search.dsl.filtering.FilterFacet
+import com.algolia.search.dsl.filtering.Filter
 import com.algolia.search.dsl.filtering.GroupAnd
 import com.algolia.search.dsl.filtering.GroupOr
 import shouldEqual
@@ -22,7 +22,7 @@ internal class TestDSLFacetFilters {
         }
 
         dsl shouldEqual listOf(
-            GroupAnd.Facet(FilterFacet(attributeA, 0), FilterFacet(attributeA, 1))
+            GroupAnd.Facet(Filter.Facet(attributeA, 0), Filter.Facet(attributeA, 1))
         )
     }
 
@@ -39,8 +39,8 @@ internal class TestDSLFacetFilters {
         }
 
         dsl shouldEqual listOf(
-            GroupOr.Facet(FilterFacet(attributeA, 0), FilterFacet(attributeB, 1)),
-            GroupOr.Facet(FilterFacet(attributeA, 0))
+            GroupOr.Facet(Filter.Facet(attributeA, 0), Filter.Facet(attributeB, 1)),
+            GroupOr.Facet(Filter.Facet(attributeA, 0))
         )
     }
 

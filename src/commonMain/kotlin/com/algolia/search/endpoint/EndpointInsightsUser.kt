@@ -1,6 +1,6 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.dsl.filtering.FilterFacet
+import com.algolia.search.dsl.filtering.Filter
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
@@ -13,7 +13,7 @@ public interface EndpointInsightsUser {
     suspend fun viewedFilters(
         indexName: IndexName,
         eventName: EventName,
-        filters: List<FilterFacet>,
+        filters: List<Filter.Facet>,
         timestamp: Long? = null
     ): HttpResponse
 
@@ -27,7 +27,7 @@ public interface EndpointInsightsUser {
     suspend fun clickedFilters(
         indexName: IndexName,
         eventName: EventName,
-        filters: List<FilterFacet>,
+        filters: List<Filter.Facet>,
         timestamp: Long? = null
     ): HttpResponse
 
@@ -50,7 +50,7 @@ public interface EndpointInsightsUser {
     suspend fun convertedFilters(
         indexName: IndexName,
         eventName: EventName,
-        filters: List<FilterFacet>,
+        filters: List<Filter.Facet>,
         timestamp: Long? = null
     ): HttpResponse
 
