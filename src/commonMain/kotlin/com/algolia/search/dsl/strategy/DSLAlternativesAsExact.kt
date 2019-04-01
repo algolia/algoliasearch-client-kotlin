@@ -4,6 +4,7 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.AlternativesAsExact
 
 
+@Suppress("PropertyName")
 @DSLParameters
 public class DSLAlternativesAsExact(
     private val alternativesAsExacts: MutableList<AlternativesAsExact> = mutableListOf()

@@ -1,5 +1,6 @@
 package com.algolia.search.dsl
 
+import com.algolia.search.dsl.advanced.DSLResponseFields
 import com.algolia.search.dsl.attributes.DSLAttributes
 import com.algolia.search.dsl.attributes.DSLAttributesForFaceting
 import com.algolia.search.dsl.attributes.DSLAttributesToRetrieve
@@ -91,4 +92,8 @@ public fun Settings.alternativesAsExact(block: DSLAlternativesAsExact.() -> Unit
 
 public fun Settings.numericAttributesForFiltering(block: DSLNumericAttributeFilter.() -> Unit) {
     numericAttributesForFiltering = DSLNumericAttributeFilter().apply(block).build()
+}
+
+public fun Settings.responseFields(block: DSLResponseFields.() -> Unit) {
+    responseFields = DSLResponseFields().apply(block).build()
 }

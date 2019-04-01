@@ -187,4 +187,22 @@ internal class TestDSLQuery {
 
         query.ruleContexts!!.shouldNotBeEmpty()
     }
+
+    @Test
+    fun analyticsTags() {
+        val query = query {
+            analyticsTags { +unknown }
+        }
+
+        query.analyticsTags!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun responseFields() {
+        val query = query {
+            responseFields { +All }
+        }
+
+        query.responseFields!!.shouldNotBeEmpty()
+    }
 }

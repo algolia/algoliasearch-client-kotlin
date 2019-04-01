@@ -180,4 +180,13 @@ internal class TestDSLSettings {
 
         settings.numericAttributesForFiltering!!.shouldNotBeEmpty()
     }
+
+    @Test
+    fun responseFields() {
+        val settings = settings {
+            responseFields { +All }
+        }
+
+        settings.responseFields!!.shouldNotBeEmpty()
+    }
 }

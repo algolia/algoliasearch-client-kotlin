@@ -1,5 +1,6 @@
 package com.algolia.search.dsl
 
+import com.algolia.search.dsl.advanced.DSLResponseFields
 import com.algolia.search.dsl.attributes.DSLAttributes
 import com.algolia.search.dsl.attributes.DSLAttributesToRetrieve
 import com.algolia.search.dsl.filtering.DSLFacetFilters
@@ -86,4 +87,12 @@ public fun Query.alternativesAsExact(block: DSLAlternativesAsExact.() -> Unit) {
 
 public fun Query.ruleContexts(block: DSLStrings.() -> Unit) {
     ruleContexts = DSLStrings().apply(block).build()
+}
+
+public fun Query.analyticsTags(block: DSLStrings.() -> Unit) {
+    analyticsTags = DSLStrings().apply(block).build()
+}
+
+public fun Query.responseFields(block: DSLResponseFields.() -> Unit) {
+    responseFields = DSLResponseFields().apply(block).build()
 }

@@ -1,4 +1,4 @@
-package documentation.parameters.personalization
+package documentation.parameters.advanced
 
 import com.algolia.search.dsl.query
 import documentation.index
@@ -6,15 +6,15 @@ import runBlocking
 import kotlin.test.Test
 
 
-internal class DocEnablePersonalization {
+internal class DocGetRankingInfo {
 
-//    enablePersonalization: Boolean = true|false
+//    getRankingInfo: Boolean = true|false
 
     @Test
     fun query() {
         runBlocking {
             val query = query("query") {
-                enablePersonalization = true
+                getRankingInfo = true
             }
 
             index.search(query)

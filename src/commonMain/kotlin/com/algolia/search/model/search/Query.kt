@@ -2,6 +2,7 @@ package com.algolia.search.model.search
 
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
+import com.algolia.search.model.settings.Distinct
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -353,7 +354,7 @@ public data class Query(
      * Engine default: 0
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/distinct/]
      */
-    @SerialName(KeyDistinct) var distinct: Int? = null,
+    @SerialName(KeyDistinct) var distinct: Distinct? = null,
 
     /**
      * Retrieve detailed ranking information.
