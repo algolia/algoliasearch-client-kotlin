@@ -1,17 +1,17 @@
 package dsl.geosearch
 
-import com.algolia.search.dsl.geosearch.DSLBoundingBoxes
+import com.algolia.search.dsl.geosearch.DSLBoundingBox
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.BoundingBox
 import shouldEqual
 import kotlin.test.Test
 
 
-internal class TestDSLBoundingBoxes {
+internal class TestDSLBoundingBox {
 
     @Test
     fun default() {
-        val dsl = DSLBoundingBoxes().apply {
+        val dsl = DSLBoundingBox().apply {
             +BoundingBox(0f and 1f, 2f and 3f)
         }
 

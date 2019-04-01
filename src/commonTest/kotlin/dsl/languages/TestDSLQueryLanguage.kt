@@ -1,16 +1,16 @@
 package dsl.languages
 
-import com.algolia.search.dsl.languages.DSLQueryLanguages
+import com.algolia.search.dsl.languages.DSLQueryLanguage
 import com.algolia.search.model.search.QueryLanguage
 import shouldEqual
 import kotlin.test.Test
 
 
-internal class TestDSLQueryLanguages {
+internal class TestDSLQueryLanguage {
 
     @Test
     fun default() {
-        val dsl = DSLQueryLanguages().apply {
+        val dsl = DSLQueryLanguage().apply {
             +English
         }
 
@@ -21,7 +21,7 @@ internal class TestDSLQueryLanguages {
 
     @Test
     fun languages() {
-        DSLQueryLanguages().apply {
+        DSLQueryLanguage().apply {
             Afrikaans shouldEqual QueryLanguage.Afrikaans
             Arabic shouldEqual QueryLanguage.Arabic
             Azeri shouldEqual QueryLanguage.Azeri

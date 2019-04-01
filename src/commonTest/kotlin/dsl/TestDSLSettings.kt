@@ -135,4 +135,40 @@ internal class TestDSLSettings {
 
         settings.decompoundedAttributes!!.shouldNotBeEmpty()
     }
+
+    @Test
+    fun optionalWords() {
+        val settings = settings {
+            optionalWords { +unknown }
+        }
+
+        settings.optionalWords!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun disablePrefixOnAttributes() {
+        val settings = settings {
+            disablePrefixOnAttributes { +attributeA }
+        }
+
+        settings.disablePrefixOnAttributes!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun disableExactOnAttributes() {
+        val settings = settings {
+            disableExactOnAttributes { +attributeA }
+        }
+
+        settings.disableExactOnAttributes!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun alternativesAsExact() {
+        val settings = settings {
+            alternativesAsExact { +MultiWordsSynonym }
+        }
+
+        settings.alternativesAsExact!!.shouldNotBeEmpty()
+    }
 }

@@ -151,4 +151,31 @@ internal class TestDSLQuery {
 
         query.queryLanguages!!.shouldNotBeEmpty()
     }
+
+    @Test
+    fun optionalWords() {
+        val query = query {
+            optionalWords { +unknown }
+        }
+
+        query.optionalWords!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun disableExactOnAttributes() {
+        val query = query {
+            disableExactOnAttributes { +unknown }
+        }
+
+        query.disableExactOnAttributes!!.shouldNotBeEmpty()
+    }
+
+    @Test
+    fun alternativesAsExact() {
+        val query = query {
+            alternativesAsExact { +MultiWordsSynonym }
+        }
+
+        query.alternativesAsExact!!.shouldNotBeEmpty()
+    }
 }

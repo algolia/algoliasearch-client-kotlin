@@ -5,7 +5,7 @@ import com.algolia.search.model.search.BoundingBox
 
 
 @DSLParameters
-public class DSLBoundingBoxes(
+public class DSLBoundingBox(
     private val boundingBoxes: MutableList<BoundingBox> = mutableListOf()
 ) {
 

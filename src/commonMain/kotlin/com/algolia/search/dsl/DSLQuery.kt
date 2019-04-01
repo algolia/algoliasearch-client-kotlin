@@ -6,10 +6,11 @@ import com.algolia.search.dsl.filtering.DSLFacetFilters
 import com.algolia.search.dsl.filtering.DSLFilters
 import com.algolia.search.dsl.filtering.DSLNumericFilters
 import com.algolia.search.dsl.filtering.DSLTagFilters
-import com.algolia.search.dsl.geosearch.DSLBoundingBoxes
-import com.algolia.search.dsl.geosearch.DSLPolygons
+import com.algolia.search.dsl.geosearch.DSLBoundingBox
+import com.algolia.search.dsl.geosearch.DSLPolygon
 import com.algolia.search.dsl.highlighting.DSLSnippet
-import com.algolia.search.dsl.languages.DSLQueryLanguages
+import com.algolia.search.dsl.languages.DSLQueryLanguage
+import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
 import com.algolia.search.model.search.Query
 
 
@@ -59,14 +60,26 @@ public fun Query.disableTypoToleranceOnAttributes(block: DSLAttributes.() -> Uni
     disableTypoToleranceOnAttributes = DSLAttributes().apply(block).build()
 }
 
-public fun Query.insideBoundingBox(block: DSLBoundingBoxes.() -> Unit) {
-    insideBoundingBox = DSLBoundingBoxes().apply(block).build()
+public fun Query.insideBoundingBox(block: DSLBoundingBox.() -> Unit) {
+    insideBoundingBox = DSLBoundingBox().apply(block).build()
 }
 
-public fun Query.insidePolygon(block: DSLPolygons.() -> Unit) {
-    insidePolygon = DSLPolygons().apply(block).build()
+public fun Query.insidePolygon(block: DSLPolygon.() -> Unit) {
+    insidePolygon = DSLPolygon().apply(block).build()
 }
 
-public fun Query.queryLanguages(block: DSLQueryLanguages.() -> Unit) {
-    queryLanguages = DSLQueryLanguages().apply(block).build()
+public fun Query.queryLanguages(block: DSLQueryLanguage.() -> Unit) {
+    queryLanguages = DSLQueryLanguage().apply(block).build()
+}
+
+public fun Query.optionalWords(block: DSLStrings.() -> Unit) {
+    optionalWords = DSLStrings().apply(block).build()
+}
+
+public fun Query.disableExactOnAttributes(block: DSLAttributes.() -> Unit) {
+    disableExactOnAttributes = DSLAttributes().apply(block).build()
+}
+
+public fun Query.alternativesAsExact(block: DSLAlternativesAsExact.() -> Unit) {
+    alternativesAsExact = DSLAlternativesAsExact().apply(block).build()
 }

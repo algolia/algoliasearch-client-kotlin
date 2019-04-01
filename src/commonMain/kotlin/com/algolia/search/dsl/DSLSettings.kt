@@ -6,10 +6,11 @@ import com.algolia.search.dsl.attributes.DSLAttributesToRetrieve
 import com.algolia.search.dsl.attributes.DSLSearchableAttributes
 import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.dsl.languages.DSLDecompoundedAttributes
-import com.algolia.search.dsl.languages.DSLQueryLanguages
+import com.algolia.search.dsl.languages.DSLQueryLanguage
 import com.algolia.search.dsl.ranking.DSLCustomRanking
 import com.algolia.search.dsl.ranking.DSLIndexName
 import com.algolia.search.dsl.ranking.DSLRanking
+import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
 import com.algolia.search.model.settings.Settings
 
 
@@ -59,8 +60,8 @@ public fun Settings.disableTypoToleranceOnWords(block: DSLStrings.() -> Unit) {
     disableTypoToleranceOnWords = DSLStrings().apply(block).build()
 }
 
-public fun Settings.queryLanguages(block: DSLQueryLanguages.() -> Unit) {
-    queryLanguages = DSLQueryLanguages().apply(block).build()
+public fun Settings.queryLanguages(block: DSLQueryLanguage.() -> Unit) {
+    queryLanguages = DSLQueryLanguage().apply(block).build()
 }
 
 public fun Settings.camelCaseAttributes(block: DSLAttributes.() -> Unit) {
@@ -69,4 +70,20 @@ public fun Settings.camelCaseAttributes(block: DSLAttributes.() -> Unit) {
 
 public fun Settings.decompoundedAttributes(block: DSLDecompoundedAttributes.() -> Unit) {
     decompoundedAttributes = DSLDecompoundedAttributes().apply(block).build()
+}
+
+public fun Settings.optionalWords(block: DSLStrings.() -> Unit) {
+    optionalWords = DSLStrings().apply(block).build()
+}
+
+public fun Settings.disablePrefixOnAttributes(block: DSLAttributes.() -> Unit) {
+    disablePrefixOnAttributes = DSLAttributes().apply(block).build()
+}
+
+public fun Settings.disableExactOnAttributes(block: DSLAttributes.() -> Unit) {
+    disableExactOnAttributes = DSLAttributes().apply(block).build()
+}
+
+public fun Settings.alternativesAsExact(block: DSLAlternativesAsExact.() -> Unit) {
+    alternativesAsExact = DSLAlternativesAsExact().apply(block).build()
 }

@@ -5,7 +5,7 @@ import com.algolia.search.model.search.Polygon
 
 
 @DSLParameters
-public class DSLPolygons(
+public class DSLPolygon(
     private val polygons: MutableList<Polygon> = mutableListOf()
 ) {
 

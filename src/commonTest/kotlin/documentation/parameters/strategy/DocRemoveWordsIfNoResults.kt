@@ -1,0 +1,45 @@
+package documentation.parameters.strategy
+
+import com.algolia.search.dsl.query
+import com.algolia.search.dsl.settings
+import com.algolia.search.model.search.RemoveWordIfNoResults
+import documentation.TestDocumentation
+import runBlocking
+import kotlin.test.Test
+
+
+internal class DocRemoveWordsIfNoResults: TestDocumentation() {
+
+//    removeWordsIfNoResults: RemoveWordsIfNoResults = [RemoveWordsIfNoResults.None](#parameter-option-none)
+//    |  [RemoveWordsIfNoResults.LastWords](#parameter-option-lastwords)
+//    |  [RemoveWordsIfNoResults.FirstWords](#parameter-option-firstwords)
+//    |  [RemoveWordsIfNoResults.AllOptional](#parameter-option-alloptional)
+
+    @Test
+    fun settings () {
+        runBlocking {
+            val settings = settings {
+                removeWordsIfNoResults = RemoveWordIfNoResults.None
+                // removeWordsIfNoResults = RemoveWordIfNoResults.LastWords
+                // removeWordsIfNoResults = RemoveWordIfNoResults.FirstWords
+                // removeWordsIfNoResults = RemoveWordIfNoResults.AllOptional
+            }
+
+            index.setSettings(settings)
+        }
+    }
+
+    @Test
+    fun query () {
+        runBlocking {
+            val query = query("query") {
+                removeWordsIfNoResults = RemoveWordIfNoResults.LastWords
+                // removeWordsIfNoResults = RemoveWordIfNoResults.None
+                // removeWordsIfNoResults = RemoveWordIfNoResults.FirstWords
+                // removeWordsIfNoResults = RemoveWordIfNoResults.AllOptional
+            }
+
+            index.search(query)
+        }
+    }
+}

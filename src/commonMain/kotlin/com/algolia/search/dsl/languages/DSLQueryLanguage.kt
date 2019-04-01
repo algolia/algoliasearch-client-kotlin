@@ -5,7 +5,7 @@ import com.algolia.search.model.search.QueryLanguage
 
 
 @DSLParameters
-public class DSLQueryLanguages(
+public class DSLQueryLanguage(
     private val queryLanguages: MutableList<QueryLanguage> = mutableListOf()
 ) {
 
