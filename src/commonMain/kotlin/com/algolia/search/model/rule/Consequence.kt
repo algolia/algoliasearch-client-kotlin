@@ -24,11 +24,11 @@ public data class Consequence(
         private val serializer = AutomaticFacetFilters.serializer().list
 
         private fun MutableMap<String, JsonElement>.putFilters(key: String, filters: List<AutomaticFacetFilters>?) {
-            filters?.let { put(key, Json.plain.toJson(serializer, it)) }
+            filters?.let { put(key, Json.noDefaults.toJson(serializer, it)) }
         }
 
         private fun JsonObject.getFilters(key: String): List<AutomaticFacetFilters>? {
-            return getArrayOrNull(key)?.let { Json.plain.fromJson(serializer, it) }
+            return getArrayOrNull(key)?.let { Json.noDefaults.fromJson(serializer, it) }
         }
 
         private fun JsonObject.getPromotions(): List<Promotion>? {
@@ -52,7 +52,7 @@ public data class Consequence(
                 remove(KeyAutomaticFacetFilters)
                 remove(KeyAutomaticOptionalFacetFilters)
             }
-            return if (modified.isNotEmpty()) Json.plain.fromJson(Query.serializer(), JsonObject(modified)) else null
+            return if (modified.isNotEmpty()) Json.noDefaults.fromJson(Query.serializer(), JsonObject(modified)) else null
         }
 
         override fun serialize(encoder: Encoder, obj: Consequence) {
@@ -60,12 +60,12 @@ public data class Consequence(
                 putFilters(KeyAutomaticFacetFilters, obj.automaticFacetFilters)
                 putFilters(KeyAutomaticOptionalFacetFilters, obj.automaticOptionalFacetFilters)
                 obj.query?.toJsonNoDefaults()?.let { putAll(it.content) }
-                if (obj.edits != null) put(KeyQuery, json { KeyEdits to Json.plain.toJson(Edit.list, obj.edits) })
+                if (obj.edits != null) put(KeyQuery, json { KeyEdits to Json.noDefaults.toJson(Edit.list, obj.edits) })
             }
             val json = json {
                 if (params.isNotEmpty()) KeyParams to JsonObject(params)
-                obj.promote?.let { KeyPromote to Json.plain.toJson(Promotion.serializer().list, it) }
-                obj.hide?.let { KeyHide to Json.plain.toJson(KSerializerObjectIDs, it) }
+                obj.promote?.let { KeyPromote to Json.noDefaults.toJson(Promotion.serializer().list, it) }
+                obj.hide?.let { KeyHide to Json.noDefaults.toJson(KSerializerObjectIDs, it) }
                 obj.userData?.let { KeyUserData to it }
             }
 
