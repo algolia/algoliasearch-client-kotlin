@@ -15,7 +15,7 @@ internal class TestDSLTagFilters {
     @Test
     fun and() {
         val dsl = DSLTagFilters {
-            and {
+            +and {
                 +tag(attributeA.raw)
                 +tag(attributeB.raw)
             }
@@ -29,11 +29,11 @@ internal class TestDSLTagFilters {
     @Test
     fun or() {
         val dsl = DSLTagFilters {
-            or {
+            +or {
                 +tag(attributeA.raw)
                 +tag(attributeB.raw)
             }
-            or {
+            +or {
                 +tag(attributeA.raw)
             }
         }

@@ -15,7 +15,7 @@ internal class TestDSLNumericFilters {
     @Test
     fun and() {
         val dsl = DSLNumericFilters {
-            and {
+            +and {
                 +range(attributeA, 0..2)
                 +range(attributeA, 1..2)
             }
@@ -29,11 +29,11 @@ internal class TestDSLNumericFilters {
     @Test
     fun or() {
         val dsl = DSLNumericFilters {
-            or {
+            +or {
                 +range(attributeA, 0..2)
                 +range(attributeB, 1..2)
             }
-            or {
+            +or {
                 +range(attributeA, 0..2)
             }
         }
@@ -47,8 +47,8 @@ internal class TestDSLNumericFilters {
     @Test
     fun emptyGroups() {
         val dsl = DSLNumericFilters {
-            and { }
-            or { }
+            +and { }
+            +or { }
         }
 
         dsl shouldEqual listOf()

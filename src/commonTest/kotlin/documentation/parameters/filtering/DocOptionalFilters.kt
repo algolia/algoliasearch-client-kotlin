@@ -31,7 +31,7 @@ internal class DocOptionalFilters {
         runBlocking {
             val query = query("query") {
                 optionalFilters {
-                    and {
+                    +and {
                         +facet("category", "Book")
                         +facet("author", "John Doe")
                     }

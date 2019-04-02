@@ -31,7 +31,7 @@ internal class DocFacetFilters {
         runBlocking {
             val query = query("query") {
                 facetFilters {
-                    and { +facet("category", "Book") }
+                    +and { +facet("category", "Book") }
                 }
             }
 
@@ -44,7 +44,7 @@ internal class DocFacetFilters {
         runBlocking {
             val query = query("query") {
                 facetFilters {
-                    and {
+                    +and {
                         +facet("category", "Book")
                         +facet("author", "John Doe")
                     }
@@ -60,7 +60,7 @@ internal class DocFacetFilters {
         runBlocking {
             val query = query("query") {
                 facetFilters {
-                    or {
+                    +or {
                         +facet("category", "Book")
                         +facet("category", "Movie")
                     }
@@ -76,11 +76,11 @@ internal class DocFacetFilters {
         runBlocking {
             val query = query("query") {
                 facetFilters {
-                    or {
+                    +or {
                         +facet("category", "Book")
                         +facet("category", "Movie")
                     }
-                    and {
+                    +and {
                         +facet("author", "John Doe")
                     }
                 }

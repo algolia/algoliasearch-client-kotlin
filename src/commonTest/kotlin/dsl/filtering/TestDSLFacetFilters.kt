@@ -15,7 +15,7 @@ internal class TestDSLFacetFilters {
     @Test
     fun and() {
         val dsl = DSLFacetFilters {
-            and {
+            +and {
                 +facet(attributeA, 0)
                 +facet(attributeA, 1)
             }
@@ -29,11 +29,11 @@ internal class TestDSLFacetFilters {
     @Test
     fun or() {
         val dsl = DSLFacetFilters {
-            or {
+            +or {
                 +facet(attributeA, 0)
                 +facet(attributeB, 1)
             }
-            or {
+            +or {
                 +facet(attributeA, 0)
             }
         }
@@ -47,8 +47,8 @@ internal class TestDSLFacetFilters {
     @Test
     fun emptyGroups() {
         val dsl = DSLFacetFilters {
-            and { }
-            or { }
+            +and { }
+            +or { }
         }
 
         dsl shouldEqual listOf()
