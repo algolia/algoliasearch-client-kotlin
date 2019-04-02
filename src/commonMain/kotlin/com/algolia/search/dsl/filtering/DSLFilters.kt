@@ -13,20 +13,20 @@ public class DSLFilters(
         if (isNotEmpty()) groups += this
     }
 
-    public fun and(block: DSLGroupFilter.() -> Unit) {
-        +GroupAnd.All(DSLGroupFilter(block))
+    public fun and(block: DSLGroupFilter.() -> Unit): GroupAnd.All {
+        return GroupAnd.All(DSLGroupFilter(block))
     }
 
-    public fun orFacet(block: DSLGroupFacet.() -> Unit) {
-        +GroupOr.Facet(DSLGroupFacet(block))
+    public fun orFacet(block: DSLGroupFacet.() -> Unit) : GroupOr.Facet {
+        return GroupOr.Facet(DSLGroupFacet(block))
     }
 
-    public fun orNumeric(block: DSLGroupNumeric.() -> Unit) {
-        +GroupOr.Numeric(DSLGroupNumeric(block))
+    public fun orNumeric(block: DSLGroupNumeric.() -> Unit): GroupOr.Numeric {
+        return GroupOr.Numeric(DSLGroupNumeric(block))
     }
 
-    public fun orTag(block: DSLGroupTag.() -> Unit) {
-        +GroupOr.Tag(DSLGroupTag(block))
+    public fun orTag(block: DSLGroupTag.() -> Unit): GroupOr.Tag {
+        return GroupOr.Tag(DSLGroupTag(block))
     }
 
     public companion object : DSL<DSLFilters, List<Group<*>>> {

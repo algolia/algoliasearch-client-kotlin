@@ -15,19 +15,19 @@ internal class DocFilters {
 
 //    filters {
 //        // Declare an [OR](#boolean-operators) group for facet filters.
-//        orFacet {
+//        +orFacet {
 //            // "[facetName:facetValue](#facet-filters)"
 //            +facet("attribute", "value")
 //            +facet("attribute", 0)
 //            +facet("attribute", true)
 //        }
 //        // Declare an [OR](#boolean-operators) group for tag filters.
-//        orTag {
+//        +orTag {
 //            // "[_tags](#tag-filters):value"
 //            +tag("value")
 //        }
 //        // Declare an [OR](#boolean-operators) group for numeric filters.
-//        orNumeric {
+//        +orNumeric {
 //            // "attribute:lowerBound [TO](#numeric-range) upperBound"
 //            +range("attribute", 0..10)
 //            +range("attribute", 0f, 10f)
@@ -40,7 +40,7 @@ internal class DocFilters {
 //            +comparison("attribute", GreaterOrEquals, 0f)
 //        }
 //        // Declare an [AND](#boolean-operators) group for any type of filters.
-//        and {
+//        +and {
 //            // "[facetName:facetValue](#facet-filters)"
 //            +facet("attribute", "value")
 //            +facet("attribute", true)
@@ -57,11 +57,11 @@ internal class DocFilters {
             // "(category:Book OR category:Ebook) AND _tags:published"
             val query = query("query") {
                 filters {
-                    orFacet {
+                    +orFacet {
                         +facet("category", "Book")
                         +facet("category", "Ebook")
                     }
-                    and {
+                    +and {
                         +tag("published")
                     }
                 }
@@ -82,14 +82,14 @@ internal class DocFilters {
             //  AND author:\"John Doe\"";
             val query = query("query") {
                 filters {
-                    and {
+                    +and {
                         +comparison("available", Equals, 1)
                         +tag("published")
                         +range("publication_date", 1441745506..1441755506)
                         +comparison("inStock", NumericOperator.Greater, 0)
                         +facet("author", "John Doe")
                     }
-                    orFacet {
+                    +orFacet {
                         +facet("category", "Book")
                         +!facet("category", "EBook")
                     }
@@ -106,7 +106,7 @@ internal class DocFilters {
             // "\"category\":\"Books and Comics\""
             val query = query("query") {
                 filters {
-                    and {
+                    +and {
                         +facet("category", "Books and Comics")
                     }
                 }
@@ -122,7 +122,7 @@ internal class DocFilters {
             // "\"keyword\":\"OR\""
             val query = query("query") {
                 filters {
-                    and {
+                    +and {
                         +facet("keyword", "OR")
                     }
                 }
@@ -138,7 +138,7 @@ internal class DocFilters {
             // "\"content\":\"It's a wonderful day\""
             val query = query("query") {
                 filters {
-                    and {
+                    +and {
                         +facet("content", "It's a wonderful day")
                     }
                 }
@@ -154,7 +154,7 @@ internal class DocFilters {
             // "\"content\":\"She said Hello World\""
             val query = query("query") {
                 filters {
-                    and {
+                    +and {
                         +facet("content", "She said Hello World")
                     }
                 }
