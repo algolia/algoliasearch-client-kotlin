@@ -72,5 +72,5 @@ internal actual object DateFormat {
 }
 
 internal actual fun loadScratch(name: String): String {
-    return File("src/commonTest/scratches/$name").readText()
+    return File("src/commonTest/resources/$name").readText()
 }
