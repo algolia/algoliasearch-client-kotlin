@@ -4,8 +4,7 @@ import attributeA
 import attributeB
 import com.algolia.search.dsl.filtering.DSLNumericFilters
 import com.algolia.search.dsl.filtering.Filter
-import com.algolia.search.dsl.filtering.GroupAnd
-import com.algolia.search.dsl.filtering.GroupOr
+import com.algolia.search.dsl.filtering.Group
 import shouldEqual
 import kotlin.test.Test
 
@@ -22,7 +21,7 @@ internal class TestDSLNumericFilters {
         }
 
         dsl shouldEqual listOf(
-            GroupAnd.Numeric(Filter.Numeric(attributeA, 0..2), Filter.Numeric(attributeA, 1..2))
+            Group.And(Filter.Numeric(attributeA, 0..2), Filter.Numeric(attributeA, 1..2))
         )
     }
 
@@ -39,8 +38,8 @@ internal class TestDSLNumericFilters {
         }
 
         dsl shouldEqual listOf(
-            GroupOr.Numeric(Filter.Numeric(attributeA, 0..2), Filter.Numeric(attributeB, 1..2)),
-            GroupOr.Numeric(Filter.Numeric(attributeA, 0..2))
+            Group.Or(Filter.Numeric(attributeA, 0..2), Filter.Numeric(attributeB, 1..2)),
+            Group.Or(Filter.Numeric(attributeA, 0..2))
         )
     }
 

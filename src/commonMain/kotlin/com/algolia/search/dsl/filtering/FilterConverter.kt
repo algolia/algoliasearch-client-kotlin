@@ -6,7 +6,7 @@ public sealed class FilterConverter<I, O> : (I) -> O {
     public object SQL : FilterConverter<List<Group<*>>, String>() {
 
         override fun invoke(groups: List<Group<*>>): String {
-            val (andEntries, orEntries) = groups.partition { it is GroupAnd }
+            val (andEntries, orEntries) = groups.partition { it is Group.And }
             val ands = andEntries.joinToString(separator = " AND ") { group ->
                 val condition = andEntries.size > 1 && group.size > 1
                 val prefix = if (condition) "(" else ""
@@ -27,7 +27,7 @@ public sealed class FilterConverter<I, O> : (I) -> O {
     public object Legacy : FilterConverter<List<Group<*>>, List<List<String>>>() {
 
         override fun invoke(groups: List<Group<*>>): List<List<String>> {
-            val (andEntries, orEntries) = groups.partition { it is GroupAnd }
+            val (andEntries, orEntries) = groups.partition { it is Group.And }
             val ands = andEntries.flatMap { group -> group.map { listOf(it.expression) } }
             val ors = orEntries.map { group -> group.map { it.expression } }
 

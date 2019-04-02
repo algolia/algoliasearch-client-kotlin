@@ -14,11 +14,11 @@ public class DSLTagFilters(
     }
 
     public fun and(block: DSLGroupTag.() -> Unit) {
-        +GroupAnd.Tag(DSLGroupTag(block))
+        +Group.And(DSLGroupTag(block))
     }
 
     public fun or(block: DSLGroupTag.() -> Unit) {
-        +GroupOr.Tag(DSLGroupTag(block))
+        +Group.Or(DSLGroupTag(block))
     }
 
     public companion object : DSL<DSLTagFilters, List<Group<Filter.Tag>>> {

@@ -14,19 +14,19 @@ public class DSLFilters(
     }
 
     public fun and(block: DSLGroupFilter.() -> Unit) {
-        +GroupAnd.All(DSLGroupFilter(block))
+        +Group.And(DSLGroupFilter(block))
     }
 
     public fun orFacet(block: DSLGroupFacet.() -> Unit) {
-        +GroupOr.Facet(DSLGroupFacet(block))
+        +Group.Or(DSLGroupFacet(block))
     }
 
     public fun orNumeric(block: DSLGroupNumeric.() -> Unit) {
-        +GroupOr.Numeric(DSLGroupNumeric(block))
+        +Group.Or(DSLGroupNumeric(block))
     }
 
     public fun orTag(block: DSLGroupTag.() -> Unit) {
-        +GroupOr.Tag(DSLGroupTag(block))
+        +Group.Or(DSLGroupTag(block))
     }
 
     public companion object : DSL<DSLFilters, List<Group<*>>> {
