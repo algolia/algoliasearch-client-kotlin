@@ -42,7 +42,7 @@ internal class TestDSLQueryLanguage {
             French shouldEqual QueryLanguage.French
             Galician shouldEqual QueryLanguage.Galician
             Hebrew shouldEqual QueryLanguage.Hebrew
-            QueryLanguage.Hindi shouldEqual QueryLanguage.Hindi
+            Hindi shouldEqual QueryLanguage.Hindi
             Hungarian shouldEqual QueryLanguage.Hungarian
             Armenian shouldEqual QueryLanguage.Armenian
             Indonesian shouldEqual QueryLanguage.Indonesian

@@ -5,6 +5,7 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.QueryLanguage
 
 
+@Suppress("PropertyName")
 @DSLParameters
 public class DSLQueryLanguage(
     private val queryLanguages: MutableList<QueryLanguage> = mutableListOf()
