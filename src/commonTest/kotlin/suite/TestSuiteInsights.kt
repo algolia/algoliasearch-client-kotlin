@@ -2,7 +2,7 @@ package suite
 
 import clientAdmin1
 import clientInsights
-import com.algolia.search.dsl.filtering.Filter
+import com.algolia.search.model.filter.Filter
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.helper.toEventName
 import com.algolia.search.helper.toObjectID

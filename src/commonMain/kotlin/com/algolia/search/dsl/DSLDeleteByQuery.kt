@@ -3,6 +3,7 @@ package com.algolia.search.dsl
 import com.algolia.search.dsl.filtering.*
 import com.algolia.search.dsl.geosearch.DSLBoundingBox
 import com.algolia.search.dsl.geosearch.DSLPolygon
+import com.algolia.search.model.filter.FilterConverter
 import com.algolia.search.model.indexing.DeleteByQuery
 
 

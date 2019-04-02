@@ -2,13 +2,13 @@ package dsl.filtering
 
 import attributeA
 import com.algolia.search.dsl.filtering.DSLGroupNumeric
-import com.algolia.search.dsl.filtering.Filter
-import com.algolia.search.dsl.filtering.NumericOperator
+import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.filter.NumericOperator
 import shouldEqual
 import kotlin.test.Test
 
 
-internal class TestDSLGroupNumeric {
+internal class TestDSLFilterGroupNumeric {
 
     @Test
     fun rangeString() {

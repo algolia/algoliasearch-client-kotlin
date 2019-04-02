@@ -2,36 +2,37 @@ package com.algolia.search.dsl.filtering
 
 import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
+import com.algolia.search.model.filter.FilterGroup
 
 
 @DSLParameters
 public class DSLFilters(
-    private val groups: MutableList<Group<*>> = mutableListOf()
+    private val groups: MutableList<FilterGroup<*>> = mutableListOf()
 ) {
 
-    public operator fun Group<*>.unaryPlus() {
+    public operator fun FilterGroup<*>.unaryPlus() {
         if (isNotEmpty()) groups += this
     }
 
     public fun and(block: DSLGroupFilter.() -> Unit) {
-        +Group.And(DSLGroupFilter(block))
+        +FilterGroup.And(DSLGroupFilter(block))
     }
 
     public fun orFacet(block: DSLGroupFacet.() -> Unit) {
-        +Group.Or(DSLGroupFacet(block))
+        +FilterGroup.Or(DSLGroupFacet(block))
     }
 
     public fun orNumeric(block: DSLGroupNumeric.() -> Unit) {
-        +Group.Or(DSLGroupNumeric(block))
+        +FilterGroup.Or(DSLGroupNumeric(block))
     }
 
     public fun orTag(block: DSLGroupTag.() -> Unit) {
-        +Group.Or(DSLGroupTag(block))
+        +FilterGroup.Or(DSLGroupTag(block))
     }
 
-    public companion object : DSL<DSLFilters, List<Group<*>>> {
+    public companion object : DSL<DSLFilters, List<FilterGroup<*>>> {
 
-        override operator fun invoke(block: DSLFilters.() -> Unit): List<Group<*>> {
+        override operator fun invoke(block: DSLFilters.() -> Unit): List<FilterGroup<*>> {
             return DSLFilters().apply(block).groups.toList()
         }
     }

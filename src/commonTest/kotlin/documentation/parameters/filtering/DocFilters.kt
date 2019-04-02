@@ -1,7 +1,7 @@
 package documentation.parameters.filtering
 
-import com.algolia.search.dsl.filtering.NumericOperator
-import com.algolia.search.dsl.filtering.not
+import com.algolia.search.model.filter.NumericOperator
+import com.algolia.search.model.filter.not
 import com.algolia.search.dsl.filters
 import com.algolia.search.dsl.query
 import documentation.index

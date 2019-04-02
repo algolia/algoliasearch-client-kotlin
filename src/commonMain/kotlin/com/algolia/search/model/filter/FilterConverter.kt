@@ -1,12 +1,12 @@
-package com.algolia.search.dsl.filtering
+package com.algolia.search.model.filter
 
 
 public sealed class FilterConverter<I, O> : (I) -> O {
 
-    public object SQL : FilterConverter<List<Group<*>>, String>() {
+    public object SQL : FilterConverter<List<FilterGroup<*>>, String>() {
 
-        override fun invoke(groups: List<Group<*>>): String {
-            val (andEntries, orEntries) = groups.partition { it is Group.And }
+        override fun invoke(groups: List<FilterGroup<*>>): String {
+            val (andEntries, orEntries) = groups.partition { it is FilterGroup.And }
             val ands = andEntries.joinToString(separator = " AND ") { group ->
                 val condition = andEntries.size > 1 && group.size > 1
                 val prefix = if (condition) "(" else ""
@@ -24,10 +24,10 @@ public sealed class FilterConverter<I, O> : (I) -> O {
         }
     }
 
-    public object Legacy : FilterConverter<List<Group<*>>, List<List<String>>>() {
+    public object Legacy : FilterConverter<List<FilterGroup<*>>, List<List<String>>>() {
 
-        override fun invoke(groups: List<Group<*>>): List<List<String>> {
-            val (andEntries, orEntries) = groups.partition { it is Group.And }
+        override fun invoke(groups: List<FilterGroup<*>>): List<List<String>> {
+            val (andEntries, orEntries) = groups.partition { it is FilterGroup.And }
             val ands = andEntries.flatMap { group -> group.map { listOf(it.expression) } }
             val ors = orEntries.map { group -> group.map { it.expression } }
 
@@ -35,9 +35,9 @@ public sealed class FilterConverter<I, O> : (I) -> O {
         }
     }
 
-    internal object SQLUnquoted : FilterConverter<List<Group<*>>, String>() {
+    internal object SQLUnquoted : FilterConverter<List<FilterGroup<*>>, String>() {
 
-        override fun invoke(groups: List<Group<*>>): String {
+        override fun invoke(groups: List<FilterGroup<*>>): String {
             return SQL(groups).replace("\"", "")
         }
     }

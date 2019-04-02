@@ -1,5 +1,7 @@
 package com.algolia.search.dsl.filtering
 
+import com.algolia.search.model.filter.Filter
+
 
 public interface DSLTag {
 

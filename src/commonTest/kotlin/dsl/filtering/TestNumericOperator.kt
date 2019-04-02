@@ -1,6 +1,6 @@
 package dsl.filtering
 
-import com.algolia.search.dsl.filtering.NumericOperator
+import com.algolia.search.model.filter.NumericOperator
 import shouldEqual
 import kotlin.test.Test
 

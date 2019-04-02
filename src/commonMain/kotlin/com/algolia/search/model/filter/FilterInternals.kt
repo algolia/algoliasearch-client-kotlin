@@ -1,4 +1,4 @@
-package com.algolia.search.dsl.filtering
+package com.algolia.search.model.filter
 
 import com.algolia.search.model.Attribute
 

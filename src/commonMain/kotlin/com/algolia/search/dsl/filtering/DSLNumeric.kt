@@ -1,5 +1,7 @@
 package com.algolia.search.dsl.filtering
 
+import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.filter.NumericOperator
 import com.algolia.search.model.Attribute
 
 

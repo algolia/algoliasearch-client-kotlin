@@ -1,4 +1,4 @@
-package com.algolia.search.dsl.filtering
+package com.algolia.search.model.filter
 
 
 public enum class NumericOperator(val raw: String) {

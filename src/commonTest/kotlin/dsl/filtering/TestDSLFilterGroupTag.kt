@@ -1,13 +1,13 @@
 package dsl.filtering
 
 import com.algolia.search.dsl.filtering.DSLGroupTag
-import com.algolia.search.dsl.filtering.Filter
+import com.algolia.search.model.filter.Filter
 import shouldEqual
 import unknown
 import kotlin.test.Test
 
 
-internal class TestDSLGroupTag {
+internal class TestDSLFilterGroupTag {
 
     @Test
     fun tag() {

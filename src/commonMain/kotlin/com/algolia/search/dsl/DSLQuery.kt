@@ -9,6 +9,7 @@ import com.algolia.search.dsl.geosearch.DSLPolygon
 import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.dsl.languages.DSLQueryLanguage
 import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
+import com.algolia.search.model.filter.FilterConverter
 import com.algolia.search.model.search.Query
 
 

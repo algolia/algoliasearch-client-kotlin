@@ -2,28 +2,30 @@ package com.algolia.search.dsl.filtering
 
 import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
+import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.filter.FilterGroup
 
 
 @DSLParameters
 public class DSLNumericFilters(
-    private val groups: MutableList<Group<Filter.Numeric>> = mutableListOf()
+    private val groups: MutableList<FilterGroup<Filter.Numeric>> = mutableListOf()
 ) {
 
-    public operator fun Group<Filter.Numeric>.unaryPlus() {
+    public operator fun FilterGroup<Filter.Numeric>.unaryPlus() {
         if (isNotEmpty()) groups += this
     }
 
     public fun and(block: DSLGroupNumeric.() -> Unit) {
-        +Group.And(DSLGroupNumeric(block))
+        +FilterGroup.And(DSLGroupNumeric(block))
     }
 
     public fun or(block: DSLGroupNumeric.() -> Unit) {
-        +Group.Or(DSLGroupNumeric(block))
+        +FilterGroup.Or(DSLGroupNumeric(block))
     }
 
-    public companion object : DSL<DSLNumericFilters, List<Group<Filter.Numeric>>> {
+    public companion object : DSL<DSLNumericFilters, List<FilterGroup<Filter.Numeric>>> {
 
-        override operator fun invoke(block: DSLNumericFilters.() -> Unit): List<Group<Filter.Numeric>> {
+        override operator fun invoke(block: DSLNumericFilters.() -> Unit): List<FilterGroup<Filter.Numeric>> {
             return DSLNumericFilters().apply(block).groups.toList()
         }
     }

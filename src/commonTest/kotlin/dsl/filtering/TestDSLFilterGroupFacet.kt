@@ -2,13 +2,13 @@ package dsl.filtering
 
 import attributeA
 import com.algolia.search.dsl.filtering.DSLGroupFacet
-import com.algolia.search.dsl.filtering.Filter
+import com.algolia.search.model.filter.Filter
 import shouldEqual
 import unknown
 import kotlin.test.Test
 
 
-internal class TestDSLGroupFacet {
+internal class TestDSLFilterGroupFacet {
 
     @Test
     fun string() {
