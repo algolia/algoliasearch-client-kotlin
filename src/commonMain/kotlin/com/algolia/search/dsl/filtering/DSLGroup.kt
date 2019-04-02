@@ -22,9 +22,9 @@ public class DSLGroupFacet(
     override val filters: MutableSet<Filter.Facet> = mutableSetOf()
 ) : DSLGroup<Filter.Facet>(), DSLFacet {
 
-    public companion object : DSL<DSLGroupFacet, MutableSet<Filter.Facet>> {
+    public companion object : DSL<DSLGroupFacet, Set<Filter.Facet>> {
 
-        override fun invoke(block: DSLGroupFacet.() -> Unit): MutableSet<Filter.Facet> {
+        override fun invoke(block: DSLGroupFacet.() -> Unit): Set<Filter.Facet> {
             return DSLGroupFacet().apply(block).filters
         }
     }
@@ -34,9 +34,9 @@ public class DSLGroupTag(
     override val filters: MutableSet<Filter.Tag> = mutableSetOf()
 ) : DSLGroup<Filter.Tag>(), DSLTag {
 
-    public companion object : DSL<DSLGroupTag, MutableSet<Filter.Tag>> {
+    public companion object : DSL<DSLGroupTag, Set<Filter.Tag>> {
 
-        override fun invoke(block: DSLGroupTag.() -> Unit): MutableSet<Filter.Tag> {
+        override fun invoke(block: DSLGroupTag.() -> Unit): Set<Filter.Tag> {
             return DSLGroupTag().apply(block).filters
         }
     }
@@ -46,9 +46,9 @@ public class DSLGroupNumeric(
     override val filters: MutableSet<Filter.Numeric> = mutableSetOf()
 ) : DSLGroup<Filter.Numeric>(), DSLNumeric {
 
-    public companion object : DSL<DSLGroupNumeric, MutableSet<Filter.Numeric>> {
+    public companion object : DSL<DSLGroupNumeric, Set<Filter.Numeric>> {
 
-        override fun invoke(block: DSLGroupNumeric.() -> Unit): MutableSet<Filter.Numeric> {
+        override fun invoke(block: DSLGroupNumeric.() -> Unit): Set<Filter.Numeric> {
             return DSLGroupNumeric().apply(block).filters
         }
     }
@@ -58,9 +58,9 @@ public class DSLGroupFilter(
     override val filters: MutableSet<Filter> = mutableSetOf()
 ) : DSLGroup<Filter>(), DSLFacet, DSLTag, DSLNumeric {
 
-    public companion object : DSL<DSLGroupFilter, MutableSet<Filter>> {
+    public companion object : DSL<DSLGroupFilter, Set<Filter>> {
 
-        override fun invoke(block: DSLGroupFilter.() -> Unit): MutableSet<Filter> {
+        override fun invoke(block: DSLGroupFilter.() -> Unit): Set<Filter> {
             return DSLGroupFilter().apply(block).filters
         }
     }
