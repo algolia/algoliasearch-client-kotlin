@@ -11,19 +11,19 @@ public fun deleteByQuery(init: DeleteByQuery.() -> Unit): DeleteByQuery {
 }
 
 public fun DeleteByQuery.filters(block: DSLFilters.() -> Unit) {
-    filters = FilterBuilder.SQL(DSLFilters(block))
+    filters = FilterConverter.SQL(DSLFilters(block))
 }
 
 public fun DeleteByQuery.facetFilters(block: DSLFacetFilters.() -> Unit) {
-    facetFilters = FilterBuilder.Legacy(DSLFacetFilters(block))
+    facetFilters = FilterConverter.Legacy(DSLFacetFilters(block))
 }
 
 public fun DeleteByQuery.numericFilters(block: DSLNumericFilters.() -> Unit) {
-    numericFilters = FilterBuilder.Legacy(DSLNumericFilters(block))
+    numericFilters = FilterConverter.Legacy(DSLNumericFilters(block))
 }
 
 public fun DeleteByQuery.tagFilters(block: DSLTagFilters.() -> Unit) {
-    tagFilters = FilterBuilder.Legacy(DSLTagFilters(block))
+    tagFilters = FilterConverter.Legacy(DSLTagFilters(block))
 }
 
 public fun DeleteByQuery.insideBoundingBox(block: DSLBoundingBox.() -> Unit) {

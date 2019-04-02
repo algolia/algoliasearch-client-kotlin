@@ -25,23 +25,23 @@ public fun Query.restrictSearchableAttributes(block: DSLAttributes.() -> Unit) {
 }
 
 public fun Query.filters(block: DSLFilters.() -> Unit) {
-    filters = FilterBuilder.SQL(DSLFilters(block))
+    filters = FilterConverter.SQL(DSLFilters(block))
 }
 
 public fun Query.optionalFilters(block: DSLFacetFilters.() -> Unit) {
-    optionalFilters = FilterBuilder.Legacy(DSLFacetFilters(block))
+    optionalFilters = FilterConverter.Legacy(DSLFacetFilters(block))
 }
 
 public fun Query.facetFilters(block: DSLFacetFilters.() -> Unit) {
-    facetFilters = FilterBuilder.Legacy(DSLFacetFilters(block))
+    facetFilters = FilterConverter.Legacy(DSLFacetFilters(block))
 }
 
 public fun Query.numericFilters(block: DSLNumericFilters.() -> Unit) {
-    numericFilters = FilterBuilder.Legacy(DSLNumericFilters(block))
+    numericFilters = FilterConverter.Legacy(DSLNumericFilters(block))
 }
 
 public fun Query.tagFilters(block: DSLTagFilters.() -> Unit) {
-    tagFilters = FilterBuilder.Legacy(DSLTagFilters(block))
+    tagFilters = FilterConverter.Legacy(DSLTagFilters(block))
 }
 
 public fun Query.facets(block: DSLAttributes.() -> Unit) {

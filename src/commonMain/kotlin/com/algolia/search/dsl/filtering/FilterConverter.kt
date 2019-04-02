@@ -1,9 +1,9 @@
 package com.algolia.search.dsl.filtering
 
 
-public sealed class FilterBuilder<T> : (List<Group<*>>) -> T {
+public sealed class FilterConverter<I, O> : (I) -> O {
 
-    public object SQL : FilterBuilder<String>() {
+    public object SQL : FilterConverter<List<Group<*>>, String>() {
 
         override fun invoke(groups: List<Group<*>>): String {
             val (andEntries, orEntries) = groups.partition { it is GroupAnd }
@@ -24,7 +24,7 @@ public sealed class FilterBuilder<T> : (List<Group<*>>) -> T {
         }
     }
 
-    public object Legacy : FilterBuilder<List<List<String>>>() {
+    public object Legacy : FilterConverter<List<Group<*>>, List<List<String>>>() {
 
         override fun invoke(groups: List<Group<*>>): List<List<String>> {
             val (andEntries, orEntries) = groups.partition { it is GroupAnd }
@@ -35,7 +35,7 @@ public sealed class FilterBuilder<T> : (List<Group<*>>) -> T {
         }
     }
 
-    internal object SQLUnquoted : FilterBuilder<String>() {
+    internal object SQLUnquoted : FilterConverter<List<Group<*>>, String>() {
 
         override fun invoke(groups: List<Group<*>>): String {
             return SQL(groups).replace("\"", "")
