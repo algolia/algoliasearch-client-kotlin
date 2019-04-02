@@ -12,7 +12,7 @@ import kotlin.test.Test
 internal class DocNumericFilters {
 
 //    numericFilters {
-//        +and {
+//        and {
 //            // "numeric_attribute [= | != | > | >= | < | <=](#numeric-comparisons) numeric_value"
 //            +comparison("attribute", NumericOperator.Lesser, 0f)
 //            +comparison("attribute", NumericOperator.LesserOrEquals, 0f)
@@ -21,7 +21,7 @@ internal class DocNumericFilters {
 //            +comparison("attribute", Greater, 0f)
 //            +comparison("attribute", GreaterOrEquals, 0f)
 //        }
-//        +or {
+//        or {
 //            // "attribute:lowerBound [TO](#numeric-range) upperBound"
 //            +range("attribute", 0..10)
 //            +range("attribute", 0f, 10f)
@@ -33,11 +33,11 @@ internal class DocNumericFilters {
         runBlocking {
             val query = query("query") {
                 numericFilters {
-                    +or {
+                    or {
                         +comparison("inStock", Equals, 0f)
                         +comparison("deliveryDate", Lesser, 1441755506)
                     }
-                    +and {
+                    and {
                         +comparison("price", Lesser, 1000)
                     }
                 }

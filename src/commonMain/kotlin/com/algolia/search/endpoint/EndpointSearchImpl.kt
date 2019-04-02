@@ -95,8 +95,8 @@ internal class EndpointSearchImpl(
     ): List<IndexQuery> {
         return query.copy().apply {
             filters {
-                +and { +andFilters }
-                +orFacet { +orFilters }
+                and { +andFilters }
+                orFacet { +orFilters }
             }
         }.let { listOf(IndexQuery(indexName, it)) }
     }
@@ -115,8 +115,8 @@ internal class EndpointSearchImpl(
                 hitsPerPage = 0
                 analytics = false
                 filters {
-                    +and { +andFilters }
-                    +orFacet { +orFilters.filter { it.attribute != attribute } }
+                    and { +andFilters }
+                    orFacet { orFilters.filter { it.attribute != attribute } }
                 }
             }
         }.map { IndexQuery(indexName, it) }

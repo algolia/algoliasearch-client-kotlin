@@ -13,12 +13,12 @@ public class DSLFacetFilters(
         if (isNotEmpty()) groups += this
     }
 
-    public fun and(block: DSLGroupFacet.() -> Unit): GroupAnd.Facet {
-        return GroupAnd.Facet(DSLGroupFacet(block))
+    public fun and(block: DSLGroupFacet.() -> Unit) {
+        +GroupAnd.Facet(DSLGroupFacet(block))
     }
 
-    public fun or(block: DSLGroupFacet.() -> Unit): GroupOr.Facet {
-        return GroupOr.Facet(DSLGroupFacet(block))
+    public fun or(block: DSLGroupFacet.() -> Unit) {
+        +GroupOr.Facet(DSLGroupFacet(block))
     }
 
     public companion object : DSL<DSLFacetFilters, List<Group<Filter.Facet>>> {
