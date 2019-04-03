@@ -5,102 +5,119 @@ import com.algolia.search.model.Attribute
 
 public sealed class Filter {
 
-    abstract val attribute: Attribute
+    public abstract val attribute: Attribute
 
-    internal abstract val expression: String
-
-    var isNegated = false
-
-    fun build() = if (isNegated) "NOT $expression" else expression
-
-    public data class Tag(
-        val value: String
-    ) : Filter() {
-
-        override val attribute = Attribute("_tags")
-        override val expression = "$attribute:\"$value\""
-
-        override fun toString(): String {
-            return "FilterTag($expression)"
-        }
-    }
-
-    public data class Numeric internal constructor(
-        override val attribute: Attribute,
-        override val expression: String
-    ) : Filter() {
-
-        constructor(attribute: Attribute, range: IntRange) : this(
-            attribute,
-            expression(attribute, range.start, range.endInclusive)
-        )
-
-        constructor(attribute: Attribute, range: LongRange) : this(
-            attribute,
-            expression(attribute, range.start, range.endInclusive)
-        )
-
-        constructor(attribute: Attribute, lowerBound: Float, upperBound: Float) : this(
-            attribute,
-            expression(attribute, lowerBound, upperBound)
-        )
-
-        constructor(attribute: Attribute, lowerBound: Double, upperBound: Double) : this(
-            attribute,
-            expression(attribute, lowerBound, upperBound)
-        )
-
-        constructor(attribute: Attribute, operator: NumericOperator, value: Number) : this(
-            attribute,
-            "${attribute.escape()} ${operator.raw} $value"
-        )
-
-        override fun toString(): String {
-            return "FilterNumeric($expression)"
-        }
-
-        companion object {
-
-            private fun expression(attribute: Attribute, lowerBound: Number, upperBound: Number): String {
-                return "${attribute.escape()}:$lowerBound TO $upperBound"
-            }
-        }
-    }
+    public abstract val isNegated: Boolean
 
     public data class Facet internal constructor(
         override val attribute: Attribute,
-        private val value: FacetValue<*>,
-        private val score: Int? = null
+        override val isNegated: Boolean,
+        val value: Value<*>,
+        val score: Int? = null
     ) : Filter() {
 
-        public constructor(attribute: Attribute, value: String, score: Int? = null) : this(
-            attribute,
-            FacetValue.String(value),
-            score
-        )
+        sealed class Value<T> {
 
-        public constructor(attribute: Attribute, value: Boolean, score: Int? = null) : this(
-            attribute,
-            FacetValue.Boolean(value),
-            score
-        )
+            abstract val raw: T
 
-        public constructor(attribute: Attribute, value: Number, score: Int? = null) : this(
-            attribute,
-            FacetValue.Number(value),
-            score
-        )
+            data class String(override val raw: kotlin.String) : Value<kotlin.String>()
 
-        override val expression: String =
-            "${attribute.escape()}:${value.escape()}" + if (score != null) "<score=$score>" else ""
+            data class Boolean(override val raw: kotlin.Boolean) : Value<kotlin.Boolean>()
 
-        override fun toString(): String {
-            return "FilterFacet($expression)"
+            data class Number(override val raw: kotlin.Number) : Value<kotlin.Number>()
+        }
+
+        public constructor(
+            attribute: Attribute,
+            value: String,
+            score: Int? = null,
+            isNegated: Boolean = false
+        ) : this(attribute, isNegated, Value.String(value), score)
+
+        public constructor(
+            attribute: Attribute,
+            value: Boolean,
+            score: Int? = null,
+            isNegated: Boolean = false
+        ) : this(attribute, isNegated, Value.Boolean(value), score)
+
+        public constructor(
+            attribute: Attribute,
+            value: Number,
+            score: Int? = null,
+            isNegated: Boolean = false
+        ) : this(attribute, isNegated, Value.Number(value), score)
+
+        public operator fun not(): Facet {
+            return Facet(attribute, true, value, score)
         }
     }
-}
 
-public operator fun <T : Filter> T.not(): T {
-    isNegated = !isNegated
-    return this
+    public data class Tag internal constructor(
+        override val attribute: Attribute,
+        override val isNegated: Boolean,
+        val value: String
+    ) : Filter() {
+
+        public constructor(
+            value: String,
+            isNegated: Boolean = false
+        ) : this(Attribute("_tags"), isNegated, value.escape())
+
+        public operator fun not(): Tag {
+            return Tag(attribute, true, value)
+        }
+    }
+
+    public data class Numeric(
+        override val attribute: Attribute,
+        override val isNegated: Boolean,
+        val value: Value
+    ) : Filter() {
+
+        sealed class Value {
+
+            data class Comparison(val operator: NumericOperator, val number: Number) : Value()
+
+            data class Range(val lowerBound: Number, val upperBound: Number) : Value()
+        }
+
+        public constructor(
+            attribute: Attribute,
+            operator: NumericOperator,
+            value: Number,
+            isNegated: Boolean = false
+        ) : this(attribute, isNegated, Value.Comparison(operator, value))
+
+        public constructor(
+            attribute: Attribute,
+            range: IntRange,
+            isNegated: Boolean = false
+        ) : this(attribute, isNegated, Value.Range(range.start, range.endInclusive))
+
+        public constructor(
+            attribute: Attribute,
+            range: LongRange,
+            isNegated: Boolean = false
+        ) : this(attribute, isNegated, Value.Range(range.start, range.endInclusive))
+
+        public constructor(
+            attribute: Attribute,
+            lowerBound: Float,
+            upperBound: Float,
+            isNegated: Boolean = false
+        ) : this(attribute, isNegated, Value.Range(lowerBound, upperBound))
+
+        public constructor(
+            attribute: Attribute,
+            lowerBound: Double,
+            upperBound: Double,
+            isNegated: Boolean = false
+        ) : this(attribute, isNegated, Value.Range(lowerBound, upperBound))
+
+
+        public operator fun not(): Numeric {
+            return Numeric(attribute, true, value)
+        }
+    }
 }

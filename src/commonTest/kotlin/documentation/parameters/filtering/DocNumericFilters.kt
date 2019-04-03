@@ -20,6 +20,8 @@ internal class DocNumericFilters {
 //            +comparison("attribute", NotEquals, 0f)
 //            +comparison("attribute", Greater, 0f)
 //            +comparison("attribute", GreaterOrEquals, 0f)
+//
+//            +!comparison("attribute", GreaterOrEquals, 0f) // Negate a numeric filter
 //        }
 //        or {
 //            // "attribute:lowerBound [TO](#numeric-range) upperBound"

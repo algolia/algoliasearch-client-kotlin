@@ -35,7 +35,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             facets = attributes,
             maxValuesPerFacet = int,
             facetingAfterDistinct = boolean,
-            sortFacetValuesBy = SortFacetValuesBy.Count,
+            sortFacetsBy = SortFacetsBy.Count,
             attributesToHighlight = attributes,
             attributesToSnippet = listOf(TestSnippet.snippet),
             highlightPreTag = string,
@@ -95,7 +95,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeyFacets to attributesJson
             KeyMaxValuesPerFacet to int
             KeyFacetingAfterDistinct to boolean
-            KeySortFacetValuesBy to SortFacetValuesBy.Count.raw
+            KeySortFacetValuesBy to SortFacetsBy.Count.raw
             KeyAttributesToHighlight to attributesJson
             KeyAttributesToSnippet to jsonArray { +TestSnippet.json }
             KeyHighlightPreTag to string

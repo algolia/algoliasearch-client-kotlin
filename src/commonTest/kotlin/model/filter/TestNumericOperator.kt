@@ -1,4 +1,4 @@
-package dsl.filtering
+package model.filter
 
 import com.algolia.search.model.filter.NumericOperator
 import shouldEqual

@@ -17,6 +17,8 @@ internal class DocFacetFilters {
 //            +facet("attribute", "value")
 //            +facet("attribute", 0)
 //            +facet("attribute", true)
+//
+//            +!facet("attribute", "value") // Negate a facet filter
 //        }
 //        // Declare an AND group for facet filters.
 //        and {

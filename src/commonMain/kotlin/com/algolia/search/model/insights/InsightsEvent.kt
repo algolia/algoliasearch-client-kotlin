@@ -1,9 +1,10 @@
 package com.algolia.search.model.insights
 
-import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
+import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.filter.FilterConverter
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.Serializable
@@ -84,7 +85,11 @@ public sealed class InsightsEvent {
         private infix fun JsonObjectBuilder.stringify(resources: Resources?) {
             when (resources) {
                 is Resources.ObjectIDs -> KeyObjectIDs to jsonArray { resources.objectIDs.forEach { +it.raw } }
-                is Resources.Filters -> KeyFilters to jsonArray { resources.filters.forEach { +it.expression } }
+                is Resources.Filters -> KeyFilters to jsonArray {
+                    resources.filters.forEach { filter ->
+                        FilterConverter.Legacy(filter).forEach { +it }
+                    }
+                }
             }
         }
 

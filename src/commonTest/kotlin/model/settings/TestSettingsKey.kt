@@ -18,7 +18,7 @@ internal class TestSettingsKey {
         CustomRanking.raw shouldEqual KeyCustomRanking
         Replicas.raw shouldEqual KeyReplicas
         MaxValuesPerFacet.raw shouldEqual KeyMaxValuesPerFacet
-        SortFacetValuesBy.raw shouldEqual KeySortFacetValuesBy
+        SortFacetsBy.raw shouldEqual KeySortFacetValuesBy
         AttributesToHighlight.raw shouldEqual KeyAttributesToHighlight
         AttributesToSnippet.raw shouldEqual KeyAttributesToSnippet
         HighlightPreTag.raw shouldEqual KeyHighlightPreTag

@@ -1,9 +1,8 @@
 package documentation.parameters.filtering
 
-import com.algolia.search.model.filter.NumericOperator
-import com.algolia.search.model.filter.not
 import com.algolia.search.dsl.filters
 import com.algolia.search.dsl.query
+import com.algolia.search.model.filter.NumericOperator
 import documentation.index
 import runBlocking
 import kotlin.test.Ignore
@@ -16,10 +15,12 @@ internal class DocFilters {
 //    filters {
 //        // Declare an [OR](#boolean-operators) group for facet filters.
 //        orFacet {
-//            // "[facetName:facetValue](#facet-filters)"
+//            // "[attribute:value](#facet-filters)"
 //            +facet("attribute", "value")
 //            +facet("attribute", 0)
 //            +facet("attribute", true)
+//
+//            +!facet("attribute", "value") // Negate a filter
 //        }
 //        // Declare an [OR](#boolean-operators) group for tag filters.
 //        orTag {
@@ -41,7 +42,7 @@ internal class DocFilters {
 //        }
 //        // Declare an [AND](#boolean-operators) group for any type of filters.
 //        and {
-//            // "[facetName:facetValue](#facet-filters)"
+//            // "[attribute:value](#facet-filters)"
 //            +facet("attribute", "value")
 //            +facet("attribute", true)
 //            +facet("attribute", 0)

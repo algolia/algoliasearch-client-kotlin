@@ -1,12 +1,12 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.model.response.ResponseSearchForFacetValues
+import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.search.Cursor
-import com.algolia.search.model.search.FacetValuesQuery
+import com.algolia.search.model.search.FacetQuery
 import com.algolia.search.model.search.Query
 import com.algolia.search.transport.RequestOptions
 
@@ -95,15 +95,15 @@ public interface EndpointSearch {
      * users can more easily drill down into the results. See more here.
      *
      * @param attribute The [Attribute] to facet on.
-     * @param query The [FacetValuesQuery] used to search.
+     * @param query The [FacetQuery] used to search.
      * @param requestOptions [RequestOptions] sent along with the query.
-     * @return [ResponseSearchForFacetValues].
+     * @return [ResponseSearchForFacets].
      */
     suspend fun searchForFacets(
         attribute: Attribute,
-        query: FacetValuesQuery = FacetValuesQuery(),
+        query: FacetQuery = FacetQuery(),
         requestOptions: RequestOptions? = null
-    ): ResponseSearchForFacetValues
+    ): ResponseSearchForFacets
 
     /**
      * Perform a [EndpointMultipleIndex.multipleQueries] and aggregate the results into a single [ResponseSearch].

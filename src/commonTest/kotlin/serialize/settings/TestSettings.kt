@@ -33,7 +33,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             replicas = listOf(indexA),
             // Faceting
             maxValuesPerFacet = int,
-            sortFacetValuesBy = SortFacetValuesBy.Count,
+            sortFacetsBy = SortFacetsBy.Count,
             // Highlighting
             attributesToHighlight = attributes,
             attributesToSnippet = listOf(TestSnippet.snippet),
@@ -94,7 +94,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyReplicas to jsonArray { +indexA.raw }
             // Faceting
             KeyMaxValuesPerFacet to int
-            KeySortFacetValuesBy to SortFacetValuesBy.Count.raw
+            KeySortFacetValuesBy to SortFacetsBy.Count.raw
             // Highlighting
             KeyAttributesToHighlight to attributesJson
             KeyAttributesToSnippet to jsonArray { +TestSnippet.json }

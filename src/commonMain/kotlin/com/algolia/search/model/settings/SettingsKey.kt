@@ -22,7 +22,7 @@ public sealed class SettingsKey(override val raw: String) : Raw<String> {
 
     public object MaxValuesPerFacet : SettingsKey(KeyMaxValuesPerFacet)
 
-    public object SortFacetValuesBy : SettingsKey(KeySortFacetValuesBy)
+    public object SortFacetsBy : SettingsKey(KeySortFacetValuesBy)
 
     public object AttributesToHighlight : SettingsKey(KeyAttributesToHighlight)
 

@@ -3,7 +3,7 @@ package com.algolia.search.dsl
 import com.algolia.search.dsl.filtering.*
 import com.algolia.search.dsl.geosearch.DSLBoundingBox
 import com.algolia.search.dsl.geosearch.DSLPolygon
-import com.algolia.search.model.filter.FilterConverter
+import com.algolia.search.model.filter.FilterGroupConverter
 import com.algolia.search.model.indexing.DeleteByQuery
 
 
@@ -12,19 +12,19 @@ public fun deleteByQuery(init: DeleteByQuery.() -> Unit): DeleteByQuery {
 }
 
 public fun DeleteByQuery.filters(block: DSLFilters.() -> Unit) {
-    filters = FilterConverter.SQL(DSLFilters(block))
+    filters = FilterGroupConverter.SQL(DSLFilters(block))
 }
 
 public fun DeleteByQuery.facetFilters(block: DSLFacetFilters.() -> Unit) {
-    facetFilters = FilterConverter.Legacy(DSLFacetFilters(block))
+    facetFilters = FilterGroupConverter.Legacy(DSLFacetFilters(block))
 }
 
 public fun DeleteByQuery.numericFilters(block: DSLNumericFilters.() -> Unit) {
-    numericFilters = FilterConverter.Legacy(DSLNumericFilters(block))
+    numericFilters = FilterGroupConverter.Legacy(DSLNumericFilters(block))
 }
 
 public fun DeleteByQuery.tagFilters(block: DSLTagFilters.() -> Unit) {
-    tagFilters = FilterConverter.Legacy(DSLTagFilters(block))
+    tagFilters = FilterGroupConverter.Legacy(DSLTagFilters(block))
 }
 
 public fun DeleteByQuery.insideBoundingBox(block: DSLBoundingBox.() -> Unit) {

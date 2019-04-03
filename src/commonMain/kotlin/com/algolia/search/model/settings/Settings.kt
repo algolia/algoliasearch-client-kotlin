@@ -20,7 +20,7 @@ public data class Settings(
     @SerialName(KeyCustomRanking) var customRanking: List<CustomRankingCriterium>? = null,
     @SerialName(KeyReplicas) var replicas: List<IndexName>? = null,
     @SerialName(KeyMaxValuesPerFacet) var maxValuesPerFacet: Int? = null,
-    @SerialName(KeySortFacetValuesBy) var sortFacetValuesBy: SortFacetValuesBy? = null,
+    @SerialName(KeySortFacetValuesBy) var sortFacetsBy: SortFacetsBy? = null,
     @SerialName(KeyAttributesToHighlight) var attributesToHighlight: List<Attribute>? = null,
     @SerialName(KeyAttributesToSnippet) var attributesToSnippet: List<Snippet>? = null,
     @SerialName(KeyHighlightPreTag) var highlightPreTag: String? = null,

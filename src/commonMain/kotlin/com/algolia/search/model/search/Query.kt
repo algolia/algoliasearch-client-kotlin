@@ -97,10 +97,10 @@ public data class Query(
 
     /**
      * Controls how facet values are sorted.
-     * Engine default: [SortFacetValuesBy.Count]
+     * Engine default: [SortFacetsBy.Count]
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/sortFacetValuesBy/]
      */
-    @SerialName(KeySortFacetValuesBy) var sortFacetValuesBy: SortFacetValuesBy? = null,
+    @SerialName(KeySortFacetValuesBy) var sortFacetsBy: SortFacetsBy? = null,
 
     /**
      * List of attributes to highlight.

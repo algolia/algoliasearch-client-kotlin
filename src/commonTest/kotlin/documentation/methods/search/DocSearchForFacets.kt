@@ -2,7 +2,7 @@ package documentation.methods.search
 
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.search.FacetValuesQuery
+import com.algolia.search.model.search.FacetQuery
 import com.algolia.search.model.search.Query
 import documentation.index
 import runBlocking
@@ -11,15 +11,15 @@ import kotlin.test.Test
 
 
 @Ignore
-internal class DocSearchForFacetValues {
+internal class DocSearchForFacets {
 
 //    suspend fun Index.searchForFacets(
 //        #{attribute}: __Attribute__,
-//        #{query}: __FacetValuesQuery__ = FacetValuesQuery(),
+//        #{query}: __FacetQuery__ = FacetQuery(),
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseSearchForFacetValues
 //
-//    data class FacetValuesQuery(
+//    data class FacetQuery(
 //        var #{facetQuery}: __String__? = null,
 //        var #{query}: __Query?__ = null,
 //    )
@@ -30,7 +30,7 @@ internal class DocSearchForFacetValues {
     fun example() {
         runBlocking {
             val attribute = Attribute("category")
-            val query = FacetValuesQuery(facetQuery = "phone")
+            val query = FacetQuery(facetQuery = "phone")
 
             index.searchForFacets(attribute, query)
         }
@@ -40,7 +40,7 @@ internal class DocSearchForFacetValues {
     fun exampleAdditional() {
         runBlocking {
             val attribute = Attribute("category")
-            val query = FacetValuesQuery(
+            val query = FacetQuery(
                 facetQuery = "phone",
                 query = Query(filters = "brand:Apple")
             )
@@ -53,7 +53,7 @@ internal class DocSearchForFacetValues {
     fun exampleExtraHeader() {
         runBlocking {
             val attribute = Attribute("category")
-            val query = FacetValuesQuery(
+            val query = FacetQuery(
                 facetQuery = "phone",
                 query = Query(filters = "brand:Apple")
             )

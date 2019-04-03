@@ -1,7 +1,7 @@
 package com.algolia.search.model.search
 
 
-public data class FacetValuesQuery(
+public data class FacetQuery(
     var facetQuery: String? = null,
     var query: Query? = null
 )

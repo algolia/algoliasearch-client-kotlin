@@ -1,6 +1,6 @@
 package serialize.response
 
-import com.algolia.search.model.response.ResponseSearchForFacetValues
+import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.search.Facet
 import com.algolia.search.serialize.*
 import kotlinx.serialization.json.json
@@ -9,12 +9,12 @@ import serialize.TestSerializer
 import unknown
 
 
-internal class TestResponseSearchForFacetValues : TestSerializer<ResponseSearchForFacetValues>(
-    ResponseSearchForFacetValues.serializer()
+internal class TestResponseSearchForFacets : TestSerializer<ResponseSearchForFacets>(
+    ResponseSearchForFacets.serializer()
 ) {
 
     override val items = listOf(
-        ResponseSearchForFacetValues(
+        ResponseSearchForFacets(
             facets = listOf(
                 Facet(unknown, 0)
             ),

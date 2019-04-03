@@ -1,13 +1,13 @@
 package serialize.search
 
-import com.algolia.search.model.search.SortFacetValuesBy
-import com.algolia.search.model.search.SortFacetValuesBy.*
+import com.algolia.search.model.search.SortFacetsBy
+import com.algolia.search.model.search.SortFacetsBy.*
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 import unknown
 
 
-internal class TestSortFacetValuesBy : TestSerializer<SortFacetValuesBy>(SortFacetValuesBy) {
+internal class TestSortFacetsBy : TestSerializer<SortFacetsBy>(SortFacetsBy) {
 
     override val items = listOf(
         Alpha to JsonLiteral(Alpha.raw),

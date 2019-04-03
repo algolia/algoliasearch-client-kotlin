@@ -8,7 +8,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
-import com.algolia.search.model.search.SortFacetValuesBy
+import com.algolia.search.model.search.SortFacetsBy
 import documentation.index
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
@@ -118,12 +118,12 @@ internal class DocPhilosophy {
     @Test
     fun strongTypingSealedClass() {
         val query = Query()
-        val sortFacetValuesBy = query.sortFacetValuesBy
+        val sortFacetValuesBy = query.sortFacetsBy
 
         when (sortFacetValuesBy) {
-            is SortFacetValuesBy.Count -> TODO()
-            is SortFacetValuesBy.Other -> TODO()
-            is SortFacetValuesBy.Alpha -> TODO()
+            is SortFacetsBy.Count -> TODO()
+            is SortFacetsBy.Other -> TODO()
+            is SortFacetsBy.Alpha -> TODO()
             // No need for an `else ->` branch
         }
     }

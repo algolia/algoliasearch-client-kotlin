@@ -2,7 +2,7 @@ package documentation.parameters.faceting
 
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
-import com.algolia.search.model.search.SortFacetValuesBy
+import com.algolia.search.model.search.SortFacetsBy
 import documentation.index
 import runBlocking
 import kotlin.test.Ignore
@@ -19,7 +19,7 @@ internal class DocSortFacetValueBy {
     fun settings() {
         runBlocking {
             val settings = settings {
-                sortFacetValuesBy = SortFacetValuesBy.Alpha
+                sortFacetsBy = SortFacetsBy.Alpha
             }
 
             index.setSettings(settings)
@@ -30,7 +30,7 @@ internal class DocSortFacetValueBy {
     fun query() {
         runBlocking {
             val query = query("query") {
-                sortFacetValuesBy = SortFacetValuesBy.Count
+                sortFacetsBy = SortFacetsBy.Count
 
             }
             index.search(query)
