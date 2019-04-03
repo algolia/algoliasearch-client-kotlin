@@ -40,9 +40,7 @@ public sealed class AroundPrecision {
         }
 
         override fun deserialize(decoder: Decoder): AroundPrecision {
-            val json = decoder.asJsonInput()
-
-            return when (json) {
+            return when (val json = decoder.asJsonInput()) {
                 is JsonArray -> Ranges(json.map {
                     val pair = it.jsonObject
 
