@@ -1,18 +1,18 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.model.filter.Filter
 import com.algolia.search.dsl.filters
 import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.request.RequestParams
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.search.Cursor
-import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.FacetQuery
+import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import com.algolia.search.transport.RequestOptions
@@ -116,7 +116,7 @@ internal class EndpointSearchImpl(
                 analytics = false
                 filters {
                     and { +andFilters }
-                    orFacet { orFilters.filter { it.attribute != attribute } }
+                    orFacet { +orFilters.filter { it.attribute != attribute } }
                 }
             }
         }.map { IndexQuery(indexName, it) }
