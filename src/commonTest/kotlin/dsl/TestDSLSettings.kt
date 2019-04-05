@@ -119,6 +119,15 @@ internal class TestDSLSettings {
     }
 
     @Test
+    fun advancedSyntaxFeatures() {
+        val settings = settings {
+            advancedSyntaxFeatures { +ExactPhrase }
+        }
+
+        settings.advancedSyntaxFeatures.shouldNotBeNull()
+    }
+
+    @Test
     fun camelCaseAttributes() {
         val settings = settings {
             camelCaseAttributes { +attributeA }

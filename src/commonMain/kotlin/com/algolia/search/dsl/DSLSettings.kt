@@ -9,6 +9,7 @@ import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.dsl.languages.DSLDecompoundedAttributes
 import com.algolia.search.dsl.languages.DSLQueryLanguage
 import com.algolia.search.dsl.performance.DSLNumericAttributeFilter
+import com.algolia.search.dsl.strategy.DSLAdvancedSyntaxFeatures
 import com.algolia.search.dsl.ranking.DSLCustomRanking
 import com.algolia.search.dsl.ranking.DSLIndexName
 import com.algolia.search.dsl.ranking.DSLRanking
@@ -66,6 +67,10 @@ public fun Settings.disableTypoToleranceOnWords(block: DSLStrings.() -> Unit) {
 
 public fun Settings.queryLanguages(block: DSLQueryLanguage.() -> Unit) {
     queryLanguages = DSLQueryLanguage(block)
+}
+
+public fun Settings.advancedSyntaxFeatures(block: DSLAdvancedSyntaxFeatures.() -> Unit) {
+    advancedSyntaxFeatures = DSLAdvancedSyntaxFeatures(block)
 }
 
 public fun Settings.camelCaseAttributes(block: DSLAttributes.() -> Unit) {
