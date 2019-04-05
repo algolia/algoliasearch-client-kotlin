@@ -11,7 +11,7 @@ import kotlin.test.Test
 @Ignore
 internal class DocHighlightPreTag {
 
-//    highlightPostTag: String = "opening_tag"
+//    highlightPreTag: String = "opening_tag"
 
     @Test
     fun settings() {
