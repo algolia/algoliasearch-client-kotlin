@@ -11,11 +11,11 @@ public class DSLNumericAttributeFilter(
     private val numericAttributeFilters: MutableList<NumericAttributeFilter> = mutableListOf()
 ) {
 
-    public infix fun String.equalsOnly(boolean: Boolean): NumericAttributeFilter {
-        return Attribute(this) equalsOnly boolean
+    public infix fun String.equalOnly(boolean: Boolean): NumericAttributeFilter {
+        return Attribute(this) equalOnly boolean
     }
 
-    public infix fun Attribute.equalsOnly(boolean: Boolean): NumericAttributeFilter {
+    public infix fun Attribute.equalOnly(boolean: Boolean): NumericAttributeFilter {
         return NumericAttributeFilter(this, boolean)
     }
 
