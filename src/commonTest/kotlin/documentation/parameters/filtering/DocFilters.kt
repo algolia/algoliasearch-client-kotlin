@@ -108,6 +108,7 @@ internal class DocFilters {
             val query = query("query") {
                 filters {
                     and {
+                        // You don't have to escape strings, it is done for you.
                         +facet("category", "Books and Comics")
                     }
                 }
@@ -124,6 +125,7 @@ internal class DocFilters {
             val query = query("query") {
                 filters {
                     and {
+                        // You don't have to escape keywords, it is done for you.
                         +facet("keyword", "OR")
                     }
                 }
@@ -140,6 +142,7 @@ internal class DocFilters {
             val query = query("query") {
                 filters {
                     and {
+                        // You don't have to escape single quotes, it is done for you.
                         +facet("content", "It's a wonderful day")
                     }
                 }
@@ -156,7 +159,7 @@ internal class DocFilters {
             val query = query("query") {
                 filters {
                     and {
-                        +facet("content", "She said Hello World")
+                        +facet("content", "She said \"Hello World\"")
                     }
                 }
             }
