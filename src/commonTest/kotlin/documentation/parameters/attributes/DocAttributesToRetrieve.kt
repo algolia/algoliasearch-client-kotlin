@@ -23,7 +23,7 @@ internal class DocAttributesToRetrieve {
 //    // retrieves all attributes
 //    settings { attributesToRetrieve { +"*" } }
 //
-//    // retrieves all attributes except the attributes starting with a "-"
+//    // retrieves all attributes except the one listed.
 //    settings {
 //        attributesToRetrieve {
 //            +"attribute1"
