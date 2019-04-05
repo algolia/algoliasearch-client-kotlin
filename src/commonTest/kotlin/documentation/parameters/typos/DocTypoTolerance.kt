@@ -23,9 +23,9 @@ internal class DocTypoTolerance {
         runBlocking {
             val settings = settings {
                 typoTolerance = TypoTolerance.Boolean(true)
-//                typoTolerance = TypoTolerance.Boolean(false)
-//                typoTolerance = TypoTolerance.Min
-//                typoTolerance = TypoTolerance.Strict
+                // typoTolerance = TypoTolerance.Boolean(false)
+                // typoTolerance = TypoTolerance.Min
+                // typoTolerance = TypoTolerance.Strict
             }
 
             index.setSettings(settings)
@@ -37,9 +37,9 @@ internal class DocTypoTolerance {
         runBlocking {
             val query = query("query") {
                 typoTolerance = TypoTolerance.Boolean(true)
-//                typoTolerance = TypoTolerance.Boolean(false)
-//                typoTolerance = TypoTolerance.Min
-//                typoTolerance = TypoTolerance.Strict
+                // typoTolerance = TypoTolerance.Boolean(false)
+                // typoTolerance = TypoTolerance.Min
+                // typoTolerance = TypoTolerance.Strict
             }
 
             index.search(query)
