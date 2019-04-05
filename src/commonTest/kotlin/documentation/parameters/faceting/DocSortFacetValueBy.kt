@@ -31,8 +31,8 @@ internal class DocSortFacetValueBy {
         runBlocking {
             val query = query("query") {
                 sortFacetsBy = SortFacetsBy.Count
-
             }
+
             index.search(query)
         }
     }
