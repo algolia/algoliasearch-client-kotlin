@@ -13,9 +13,9 @@ internal class DocSearchableAttributes {
 
 //    searchableAttributes {
 //        +"attribute1"
-//        +("attribute2" and "attribute3") // both attributes have the same priority
-//        +("attribute4" modify [Ordered](#parameter-option-ordered))
-//        +("attribute5" modify [Unordered](#parameter-option-unordered))
+//        +"attribute2, attribute3" // both attributes have the same priority
+//        +[Ordered](#parameter-option-ordered)("attribute4")
+//        +[Unordered](#parameter-option-unordered)("attribute5")
 //    }
 
     @Test
@@ -25,7 +25,7 @@ internal class DocSearchableAttributes {
                 searchableAttributes {
                     +"title,alternativeTitle"
                     +"author"
-                    +("text" modify Unordered)
+                    +Unordered("text")
                     +"emails.personal"
                 }
             }

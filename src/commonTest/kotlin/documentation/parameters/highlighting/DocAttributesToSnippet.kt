@@ -14,7 +14,7 @@ internal class DocAttributesToSnippet {
 
 //    attributesToSnippet {
 //        +"attribute1"
-//        +("attribute2" limit 10) // limits the number of words of the snippet
+//        +"attribute2"(10) // limits the number of words of the snippet
 //    }
 
     @Test
@@ -22,7 +22,7 @@ internal class DocAttributesToSnippet {
         runBlocking {
             val settings = settings {
                 attributesToSnippet {
-                    +("content" limit 80)
+                    +"content"(80)
                     +"description"
                 }
             }
@@ -36,7 +36,7 @@ internal class DocAttributesToSnippet {
         runBlocking {
             val settings = settings {
                 attributesToSnippet {
-                    +("*" limit 80)
+                    +"*"(80)
                 }
             }
 
@@ -50,7 +50,7 @@ internal class DocAttributesToSnippet {
             val query = query("query") {
                 attributesToSnippet {
                     +"title"
-                    +("content" limit 80)
+                    +"content"(80)
                 }
             }
 

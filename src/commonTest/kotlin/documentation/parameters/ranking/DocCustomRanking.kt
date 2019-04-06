@@ -12,8 +12,8 @@ import kotlin.test.Test
 internal class DocCustomRanking {
 
 //    customRanking {
-//        +("attribute1" modify [Asc](#parameter-option-asc))
-//        +("attribute2" modify [Desc](#parameter-option-desc))
+//        +[Asc](#parameter-option-asc)("attribute1")
+//        +[Desc](#parameter-option-desc)("attribute2")
 //    }
 
     @Test
@@ -21,8 +21,8 @@ internal class DocCustomRanking {
         runBlocking {
             val settings = settings {
                 customRanking {
-                    +("popularity" modify Desc)
-                    +("price" modify Asc)
+                    +Desc("popularity")
+                    +Asc("price")
                 }
             }
 

@@ -38,8 +38,8 @@ internal class TestDSLRanking {
     @Test
     fun modifier() {
         val dsl = DSLRanking {
-            +("attributeA" modify Asc)
-            +(attributeB modify Desc)
+            +Asc("attributeA")
+            +Desc(attributeB)
         }
 
         dsl shouldEqual listOf(

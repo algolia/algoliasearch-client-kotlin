@@ -16,7 +16,7 @@ internal class GuideCustomRanking {
         runBlocking {
             val settings = settings {
                 customRanking {
-                    +("boosted" modify Desc)
+                    +Desc("boosted")
                 }
             }
 
@@ -29,8 +29,8 @@ internal class GuideCustomRanking {
         runBlocking {
             val settings = settings {
                 customRanking {
-                    +("retweets" modify Desc)
-                    +("likes" modify Desc)
+                    +Desc("retweets")
+                    +Desc("likes")
                 }
             }
 
@@ -43,8 +43,8 @@ internal class GuideCustomRanking {
         runBlocking {
             val settings = settings {
                 customRanking {
-                    +("pageviews" modify Desc)
-                    +("comments" modify Desc)
+                    +Desc("pageviews")
+                    +Desc("comments")
                 }
             }
 
@@ -57,8 +57,8 @@ internal class GuideCustomRanking {
         runBlocking {
             val settings = settings {
                 customRanking {
-                    +("rounded_pageviews" modify Desc)
-                    +("comments" modify Desc)
+                    +Desc("rounded_pageviews")
+                    +Desc("comments")
                 }
             }
 

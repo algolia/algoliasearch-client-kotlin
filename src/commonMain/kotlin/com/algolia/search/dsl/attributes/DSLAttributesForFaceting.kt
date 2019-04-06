@@ -32,14 +32,14 @@ public class DSLAttributesForFaceting(
         attributesForFaceting += this
     }
 
-    public infix fun String.modify(modifier: Modifier): AttributeForFaceting {
-        return Attribute(this) modify modifier
+    operator fun Modifier.invoke(attribute: String): AttributeForFaceting {
+        return invoke(Attribute(attribute))
     }
 
-    public infix fun Attribute.modify(modifier: Modifier): AttributeForFaceting {
-        return when (modifier) {
-            Modifier.Searchable -> AttributeForFaceting.Searchable(this)
-            Modifier.FilterOnly -> AttributeForFaceting.FilterOnly(this)
+    operator fun Modifier.invoke(attribute: Attribute): AttributeForFaceting {
+        return when (this) {
+            Modifier.Searchable -> AttributeForFaceting.Searchable(attribute)
+            Modifier.FilterOnly -> AttributeForFaceting.FilterOnly(attribute)
         }
     }
 

@@ -32,14 +32,14 @@ public class DSLRanking(
         rankingCriteria += this
     }
 
-    public infix fun String.modify(modifier: Modifier): RankingCriterium {
-        return Attribute(this) modify modifier
+    operator fun Modifier.invoke(attribute: String): RankingCriterium {
+        return invoke(Attribute(attribute))
     }
 
-    public infix fun Attribute.modify(modifier: Modifier): RankingCriterium {
-        return when (modifier) {
-            Modifier.Asc -> RankingCriterium.Asc(this)
-            Modifier.Desc -> RankingCriterium.Desc(this)
+    operator fun Modifier.invoke(attribute: Attribute): RankingCriterium {
+        return when (this) {
+            Modifier.Asc -> RankingCriterium.Asc(attribute)
+            Modifier.Desc -> RankingCriterium.Desc(attribute)
         }
     }
 

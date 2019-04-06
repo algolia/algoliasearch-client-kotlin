@@ -69,7 +69,7 @@ internal class DocPhilosophy {
     fun dslSettings() {
         val settings = settings {
             attributesToSnippet {
-                "content" limit 10
+                +"content"(10)
             }
         }
     }

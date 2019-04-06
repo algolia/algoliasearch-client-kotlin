@@ -14,8 +14,8 @@ internal class DocRanking {
 //    ranking {
 //        // the `asc` and `desc` modifiers must be placed at the top
 //        // if you are configuring an index for sorting purposes only
-//        +("attribute1" modify [Asc](#parameter-option-asc))
-//        +("attribute2" modify [Desc](#parameter-option-desc))
+//        +[Asc](#parameter-option-asc)("attribute1")
+//        +[Desc](#parameter-option-desc)("attribute2")
 //        +[Typo](#parameter-option-typo)
 //        +[Geo](#parameter-option-geo)
 //        +[Words](#parameter-option-words)
@@ -51,7 +51,7 @@ internal class DocRanking {
         runBlocking {
             val settings = settings {
                 ranking {
-                    +("price" modify Asc)
+                    +Asc("price")
                     +Typo
                     +Geo
                     +Words
@@ -72,7 +72,7 @@ internal class DocRanking {
         runBlocking {
             val settings = settings {
                 ranking {
-                    +("price" modify Desc)
+                    +Desc("price")
                     +Typo
                     +Geo
                     +Words

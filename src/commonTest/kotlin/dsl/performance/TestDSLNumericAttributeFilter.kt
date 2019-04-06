@@ -14,8 +14,8 @@ internal class TestDSLNumericAttributeFilter {
         val dsl = DSLNumericAttributeFilter {
             +attributeA.raw
             +attributeA
-            +(attributeA.raw equalOnly true)
-            +(attributeA equalOnly true)
+            +attributeA.raw(true)
+            +attributeA(true)
         }
 
         dsl shouldEqual listOf(

@@ -13,8 +13,8 @@ internal class DocAttributesForFaceting {
 
 //    attributesForFaceting {
 //        +"attribute1"
-//        +("attribute2" modify [FilterOnly](#parameter-option-filteronly))
-//        +("attribute3" modify [Searchable](#parameter-option-searchable))
+//        +[FilterOnly](#parameter-option-filteronly)"attribute2")
+//        +[Searchable](#parameter-option-searchable)("attribute3")
 //    }
 
     @Test
@@ -23,8 +23,8 @@ internal class DocAttributesForFaceting {
             val settings = settings {
                 attributesForFaceting {
                     +"author"
-                    +("category" modify FilterOnly)
-                    +("publisher" modify Searchable)
+                    +FilterOnly("category")
+                    +Searchable("publisher")
                 }
             }
 

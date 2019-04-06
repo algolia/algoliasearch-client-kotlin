@@ -58,7 +58,7 @@ internal class TestDSLSettings {
     @Test
     fun customRanking() {
         val settings = settings {
-            customRanking { +(attributeA modify Asc) }
+            customRanking { +Asc(attributeA) }
         }
 
         settings.customRanking.shouldNotBeNull()

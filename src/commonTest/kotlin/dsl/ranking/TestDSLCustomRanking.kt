@@ -13,8 +13,8 @@ internal class TestDSLCustomRanking {
     @Test
     fun modifier() {
         val dsl = DSLCustomRanking {
-            +("attributeA" modify Asc)
-            +(attributeB modify Desc)
+            +Asc("attributeA")
+            +Desc(attributeB)
         }
 
         dsl shouldEqual listOf(

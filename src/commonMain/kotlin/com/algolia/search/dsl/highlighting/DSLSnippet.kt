@@ -23,16 +23,12 @@ public class DSLSnippet(
         snippets += this
     }
 
-    public infix fun String.limit(count: Int): Snippet {
-        return Attribute(this) limit count
+    public operator fun String.invoke(count: Int): Snippet {
+        return Attribute(this).invoke(count)
     }
 
-    public infix fun Attribute.limit(count: Int): Snippet {
+    public operator fun Attribute.invoke(count: Int): Snippet {
         return Snippet(this, count)
-    }
-
-    public fun build(): List<Snippet> {
-        return snippets.toList()
     }
 
     public companion object : DSL<DSLSnippet, List<Snippet>> {

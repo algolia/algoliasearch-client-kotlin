@@ -26,8 +26,8 @@ internal class TestDSLAttributesForFaceting {
     @Test
     fun modifier() {
         val dsl = DSLAttributesForFaceting {
-            +("attributeA" modify FilterOnly)
-            +(attributeB modify Searchable)
+            +FilterOnly("attributeA")
+            +Searchable(attributeB)
         }
 
         dsl shouldEqual listOf(

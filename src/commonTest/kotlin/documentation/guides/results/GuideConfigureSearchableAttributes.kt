@@ -46,8 +46,8 @@ internal class GuideConfigureSearchableAttributes {
         runBlocking {
             val settings = settings {
                 searchableAttributes {
-                    +("title" modify Unordered)
-                    +("cast" modify Ordered)
+                    +Unordered("title")
+                    +Ordered("cast")
                 }
             }
 

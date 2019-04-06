@@ -32,14 +32,14 @@ public class DSLSearchableAttributes(
         searchableAttributes += this
     }
 
-    public infix fun String.modify(modifier: Modifier): SearchableAttribute {
-        return Attribute(this) modify modifier
+    operator fun Modifier.invoke(attribute: String): SearchableAttribute {
+        return invoke(Attribute(attribute))
     }
 
-    public infix fun Attribute.modify(modifier: Modifier): SearchableAttribute {
-        return when (modifier) {
-            Modifier.Ordered -> SearchableAttribute.Ordered(this)
-            Modifier.Unordered -> SearchableAttribute.Unordered(this)
+    operator fun Modifier.invoke(attribute: Attribute): SearchableAttribute {
+        return when (this) {
+            Modifier.Ordered -> SearchableAttribute.Ordered(attribute)
+            Modifier.Unordered -> SearchableAttribute.Unordered(attribute)
         }
     }
 

@@ -28,8 +28,8 @@ internal class TestDSLSnippet {
     @Test
     fun limit() {
         val dsl = DSLSnippet {
-            +("attributeA" limit 10)
-            +(attributeB limit 20)
+            +"attributeA"(10)
+            +attributeB(20)
         }
 
         dsl shouldEqual listOf(

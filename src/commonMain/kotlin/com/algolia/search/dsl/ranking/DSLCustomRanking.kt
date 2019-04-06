@@ -24,14 +24,14 @@ public class DSLCustomRanking(
         customRankingCriteria += this
     }
 
-    public infix fun String.modify(modifier: Modifier): CustomRankingCriterium {
-        return Attribute(this) modify modifier
+    operator fun Modifier.invoke(attribute: String): CustomRankingCriterium {
+        return invoke(Attribute(attribute))
     }
 
-    public infix fun Attribute.modify(modifier: Modifier): CustomRankingCriterium {
-        return when (modifier) {
-            Modifier.Asc -> CustomRankingCriterium.Asc(this)
-            Modifier.Desc -> CustomRankingCriterium.Desc(this)
+    operator fun Modifier.invoke(attribute: Attribute): CustomRankingCriterium {
+        return when (this) {
+            Modifier.Asc -> CustomRankingCriterium.Asc(attribute)
+            Modifier.Desc -> CustomRankingCriterium.Desc(attribute)
         }
     }
 
