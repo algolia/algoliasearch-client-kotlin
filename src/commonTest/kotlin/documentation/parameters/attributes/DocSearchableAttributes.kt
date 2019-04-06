@@ -23,7 +23,7 @@ internal class DocSearchableAttributes {
         runBlocking {
             val settings = settings {
                 searchableAttributes {
-                    +("title" and "alternativeTitle")
+                    +"title,alternativeTitle"
                     +"author"
                     +("text" modify Unordered)
                     +"emails.personal"

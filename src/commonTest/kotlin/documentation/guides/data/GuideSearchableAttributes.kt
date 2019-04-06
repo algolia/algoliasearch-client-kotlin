@@ -18,7 +18,7 @@ internal class GuideSearchableAttributes {
             // "title" and "comments" have the same priority
             var settings = settings {
                 searchableAttributes {
-                    +("title" and "comments")
+                    +"title,comments"
                     +"ingredients"
                 }
             }

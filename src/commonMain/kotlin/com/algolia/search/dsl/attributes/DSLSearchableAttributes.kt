@@ -32,18 +32,6 @@ public class DSLSearchableAttributes(
         searchableAttributes += this
     }
 
-    public operator fun List<Attribute>.unaryPlus() {
-        searchableAttributes += SearchableAttribute.Default(this)
-    }
-
-    public infix fun String.and(attribute: String): SearchableAttribute {
-        return Attribute(this) and Attribute(attribute)
-    }
-
-    public infix fun Attribute.and(attribute: Attribute): SearchableAttribute {
-        return SearchableAttribute.Default(this, attribute)
-    }
-
     public infix fun String.modify(modifier: Modifier): SearchableAttribute {
         return Attribute(this) modify modifier
     }

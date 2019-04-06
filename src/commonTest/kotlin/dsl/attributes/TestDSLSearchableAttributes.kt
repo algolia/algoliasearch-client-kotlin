@@ -24,19 +24,6 @@ internal class TestDSLSearchableAttributes {
     }
 
     @Test
-    fun multiple() {
-        val dsl = DSLSearchableAttributes {
-            +("attributeA" and "attributeB")
-            +(attributeA and attributeB)
-        }
-
-        dsl shouldEqual listOf(
-            SearchableAttribute.Default(attributeA, attributeB),
-            SearchableAttribute.Default(attributeA, attributeB)
-        )
-    }
-
-    @Test
     fun modifier() {
         val dsl = DSLSearchableAttributes {
             +("attributeA" modify Ordered)
