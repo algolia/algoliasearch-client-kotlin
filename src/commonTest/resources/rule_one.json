@@ -1,8 +1,8 @@
 {
   "objectID": "one",
   "condition": {
-    "pattern": "pattern",
-    "anchoring": "is"
+    "anchoring": "is",
+    "pattern": "pattern"
   },
   "consequence": {
     "params": {

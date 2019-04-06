@@ -2,8 +2,8 @@
   {
     "objectID": "query_edits",
     "condition": {
-      "pattern": "mobile phone",
-      "anchoring": "is"
+      "anchoring": "is",
+      "pattern": "mobile phone"
     },
     "consequence": {
       "params": {

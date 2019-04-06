@@ -1,8 +1,8 @@
 {
   "objectID": "company_auto_faceting",
   "condition": {
-    "pattern": "{facet:company}",
-    "anchoring": "contains"
+    "anchoring": "contains",
+    "pattern": "{facet:company}"
   },
   "consequence": {
     "params": {

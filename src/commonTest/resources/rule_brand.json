@@ -1,8 +1,8 @@
 {
   "objectID": "brand_automatic_faceting",
   "condition": {
-    "pattern": "{facet:brand}",
-    "anchoring": "is"
+    "anchoring": "is",
+    "pattern": "{facet:brand}"
   },
   "consequence": {
     "params": {
