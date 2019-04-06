@@ -65,8 +65,8 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
         rule shouldEqual Rule(
             "query_edits".toObjectID(),
             Condition(
-                Pattern.Literal("mobile phone"),
-                Anchoring.Is
+                Anchoring.Is,
+                Pattern.Literal("mobile phone")
             ),
             Consequence(
                 edits = listOf(Edit("mobile"), Edit("phone"))
