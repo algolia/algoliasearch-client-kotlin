@@ -1,9 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
+import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.EventName
 import io.ktor.client.response.HttpResponse
 

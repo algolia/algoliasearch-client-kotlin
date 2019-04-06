@@ -1,7 +1,7 @@
 package serialize.insights
 
-import com.algolia.search.model.filter.Filter
 import com.algolia.search.helper.*
+import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.request.RequestInsightsEvents
 import kotlinx.serialization.json.Json

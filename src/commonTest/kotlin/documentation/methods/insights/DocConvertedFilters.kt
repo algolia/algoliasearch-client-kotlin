@@ -1,9 +1,9 @@
 package documentation.methods.insights
 
 import clientInsights
-import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.EventName
 import com.algolia.search.model.insights.UserToken
 import runBlocking

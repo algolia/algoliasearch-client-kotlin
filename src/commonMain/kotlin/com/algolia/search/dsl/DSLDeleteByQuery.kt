@@ -1,6 +1,9 @@
 package com.algolia.search.dsl
 
-import com.algolia.search.dsl.filtering.*
+import com.algolia.search.dsl.filtering.DSLFacetFilters
+import com.algolia.search.dsl.filtering.DSLFilters
+import com.algolia.search.dsl.filtering.DSLNumericFilters
+import com.algolia.search.dsl.filtering.DSLTagFilters
 import com.algolia.search.dsl.geosearch.DSLBoundingBox
 import com.algolia.search.dsl.geosearch.DSLPolygon
 import com.algolia.search.model.filter.FilterGroupConverter

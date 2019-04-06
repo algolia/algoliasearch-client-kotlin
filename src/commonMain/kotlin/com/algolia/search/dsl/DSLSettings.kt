@@ -9,10 +9,10 @@ import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.dsl.languages.DSLDecompoundedAttributes
 import com.algolia.search.dsl.languages.DSLQueryLanguage
 import com.algolia.search.dsl.performance.DSLNumericAttributeFilter
-import com.algolia.search.dsl.strategy.DSLAdvancedSyntaxFeatures
 import com.algolia.search.dsl.ranking.DSLCustomRanking
 import com.algolia.search.dsl.ranking.DSLIndexName
 import com.algolia.search.dsl.ranking.DSLRanking
+import com.algolia.search.dsl.strategy.DSLAdvancedSyntaxFeatures
 import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
 import com.algolia.search.model.settings.Settings
 

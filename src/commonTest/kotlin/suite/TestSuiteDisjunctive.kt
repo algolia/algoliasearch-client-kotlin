@@ -1,8 +1,8 @@
 package suite
 
 import clientAdmin1
-import com.algolia.search.model.filter.Filter
 import com.algolia.search.helper.toAttribute
+import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.get
