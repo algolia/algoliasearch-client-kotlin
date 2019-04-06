@@ -9,23 +9,18 @@ public class DSLSynonymType(
     private val synonymTypes: MutableList<SynonymType> = mutableListOf()
 ) {
 
-    public enum class AlternativeCorrections(val typo: SynonymType.Typo) {
-        One(SynonymType.Typo.One),
-        Two(SynonymType.Typo.Two)
-    }
-
     public val OneWay = SynonymType.OneWay
     public val MultiWay = SynonymType.MultiWay
     public val Placeholder = SynonymType.Placeholder
-    public val AlternativeCorrectionsOneTypo = AlternativeCorrections.One
-    public val AlternativeCorrectionsTwoTypos = AlternativeCorrections.Two
+    public val AlternativeCorrectionsOneTypo = SynonymType.Typo.One
+    public val AlternativeCorrectionsTwoTypos = SynonymType.Typo.Two
 
     public operator fun SynonymType.unaryPlus() {
         synonymTypes += this
     }
 
-    public operator fun AlternativeCorrections.unaryPlus() {
-        +SynonymType.AlternativeCorrections(typo)
+    public operator fun SynonymType.Typo.unaryPlus() {
+        +SynonymType.AlternativeCorrections(this)
     }
 
     public companion object : DSL<DSLSynonymType, List<SynonymType>> {
