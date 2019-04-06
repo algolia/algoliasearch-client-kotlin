@@ -10,8 +10,8 @@ import com.algolia.search.model.filter.FilterGroupConverter
 import com.algolia.search.model.indexing.DeleteByQuery
 
 
-public fun deleteByQuery(init: DeleteByQuery.() -> Unit): DeleteByQuery {
-    return DeleteByQuery().apply(init)
+public fun deleteByQuery(block: DeleteByQuery.() -> Unit): DeleteByQuery {
+    return DeleteByQuery().apply(block)
 }
 
 public fun DeleteByQuery.filters(block: DSLFilters.() -> Unit) {

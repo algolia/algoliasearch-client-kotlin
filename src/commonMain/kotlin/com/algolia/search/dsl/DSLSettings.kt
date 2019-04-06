@@ -15,10 +15,15 @@ import com.algolia.search.dsl.ranking.DSLRanking
 import com.algolia.search.dsl.strategy.DSLAdvancedSyntaxFeatures
 import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
 import com.algolia.search.model.settings.Settings
+import com.algolia.search.model.settings.SettingsKey
 
 
-public fun settings(init: Settings.() -> Unit): Settings {
-    return Settings().apply(init)
+public fun settings(block: Settings.() -> Unit): Settings {
+    return Settings().apply(block)
+}
+
+public fun settingsKey(block: DSLSettingsKey.() -> Unit): List<SettingsKey> {
+    return DSLSettingsKey(block)
 }
 
 public fun Settings.attributesToRetrieve(block: DSLAttributesToRetrieve.() -> Unit) {

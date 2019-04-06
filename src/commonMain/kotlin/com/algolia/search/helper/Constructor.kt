@@ -8,7 +8,6 @@ import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.Snippet
 import com.algolia.search.model.task.TaskID
 import com.algolia.search.transport.RequestOptions
 
@@ -69,13 +68,9 @@ public infix fun Float.and(longitude: Float): Point {
     return Point(this, longitude)
 }
 
-public infix fun Attribute.limit(numberOfWords: Int?): Snippet {
-    return Snippet(this, numberOfWords)
-}
-
 public fun requestOptionsBuilder(
     requestOptions: RequestOptions? = null,
-    init: RequestOptions.() -> Unit
+    block: RequestOptions.() -> Unit
 ): RequestOptions {
-    return (requestOptions ?: RequestOptions()).apply(init)
+    return (requestOptions ?: RequestOptions()).apply(block)
 }

@@ -16,8 +16,8 @@ import com.algolia.search.model.filter.FilterGroupConverter
 import com.algolia.search.model.search.Query
 
 
-public fun query(query: String? = null, init: Query.() -> Unit): Query {
-    return Query(query = query).apply(init)
+public fun query(query: String? = null, block: Query.() -> Unit): Query {
+    return Query(query = query).apply(block)
 }
 
 public fun Query.attributesToRetrieve(block: DSLAttributesToRetrieve.() -> Unit) {
