@@ -1,10 +1,11 @@
 package documentation.guides.results.promoting
 
 import com.algolia.search.dsl.attributesForFaceting
+import com.algolia.search.dsl.rule.rules
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.ObjectID
-import com.algolia.search.model.rule.*
+import com.algolia.search.model.rule.Condition
+import com.algolia.search.model.rule.Consequence
 import documentation.index
 import runBlocking
 import kotlin.test.Ignore
@@ -31,16 +32,18 @@ internal class GuideConsequences {
     fun snippet2() {
         runBlocking {
             val director = Attribute("director")
-            val rule = Rule(
-                objectID = ObjectID("director-rule"),
-                condition = Condition(Anchoring.Contains, Pattern.Facet(director)),
-                consequence = Consequence(
-                    automaticFacetFilters = listOf(AutomaticFacetFilters(director)),
-                    edits = listOf(Edit("director"))
+            val rules = rules {
+                +rule(
+                    "director_rule",
+                    Condition(Contains, Facet(director)),
+                    Consequence(
+                        automaticFacetFilters { +director },
+                        edits = edits { +"director" }
+                    )
                 )
-            )
+            }
 
-            index.saveRule(rule)
+            index.saveRules(rules)
         }
     }
 }

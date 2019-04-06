@@ -1,7 +1,9 @@
 package documentation.guides.results.promoting
 
+import com.algolia.search.dsl.rule.rules
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.rule.*
+import com.algolia.search.model.rule.Condition
+import com.algolia.search.model.rule.Consequence
 import documentation.index
 import runBlocking
 import kotlin.test.Ignore
@@ -14,17 +16,15 @@ internal class GuidePromoteHits {
     @Test
     fun snippet() {
         runBlocking {
-            val rule = Rule(
-                objectID = ObjectID("Promote Harry Potter Box Set"),
-                condition = Condition(Anchoring.Contains, Pattern.Literal("Harry Potter")),
-                consequence = Consequence(
-                    promote = listOf(
-                        Promotion(objectID = ObjectID("HP-12345"), position = 0)
-                    )
+            val rules = rules {
+                +rule(
+                    "Promote Harry Potter Box Set",
+                    Condition(Contains, Literal("Harry Potter")),
+                    Consequence(promote = promotions { +ObjectID("HP-12345")(0) })
                 )
-            )
+            }
 
-            index.saveRule(rule)
+            index.saveRules(rules)
         }
     }
 }

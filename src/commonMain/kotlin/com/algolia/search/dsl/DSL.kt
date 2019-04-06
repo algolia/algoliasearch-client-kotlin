@@ -1,6 +1,7 @@
 package com.algolia.search.dsl
 
 import com.algolia.search.model.Attribute
+import com.algolia.search.model.ObjectID
 import com.algolia.search.transport.RequestOptions
 
 public val all = Attribute("*")
@@ -21,3 +22,7 @@ internal fun requestOptionsBuilder(
     requestOptions: RequestOptions? = null,
     block: RequestOptions.() -> Unit
 ) = requestOptions(requestOptions, block)
+
+internal fun objectIDs(block: DSLObjectIDs.() -> Unit): List<ObjectID> {
+    return DSLObjectIDs(block)
+}
