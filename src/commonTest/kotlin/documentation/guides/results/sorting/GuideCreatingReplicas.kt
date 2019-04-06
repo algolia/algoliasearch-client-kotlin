@@ -1,4 +1,4 @@
-package documentation.guides.results
+package documentation.guides.results.sorting
 
 import com.algolia.search.dsl.ranking
 import com.algolia.search.dsl.replicas

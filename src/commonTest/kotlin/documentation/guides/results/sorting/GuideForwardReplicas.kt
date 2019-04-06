@@ -1,4 +1,4 @@
-package documentation.guides.results
+package documentation.guides.results.sorting
 
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.TypoTolerance

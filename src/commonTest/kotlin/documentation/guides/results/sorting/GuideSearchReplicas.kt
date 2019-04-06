@@ -1,4 +1,4 @@
-package documentation.guides.results
+package documentation.guides.results.sorting
 
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
