@@ -8,33 +8,20 @@ import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.synonym.Synonym
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
-import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.engine.HttpClientEngineConfig
 import io.ktor.client.features.DefaultRequest
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.header
 import kotlinx.serialization.json.JsonObjectSerializer
 
-internal fun HttpClientEngine?.httpClient(
-    logLevel: LogLevel,
-    defaultHeaders: Map<String, String>?
-): HttpClient {
-    return if (this != null) {
-        val config = HttpClientConfig<HttpClientEngineConfig>().apply { configure(logLevel, defaultHeaders) }
+internal fun Configuration.getHttpClient() = engine?.let {
+    HttpClient(it) { configure(this@getHttpClient) }
+} ?: HttpClient { configure(this@getHttpClient) }
 
-        HttpClient(this, config)
-    } else HttpClient { configure(logLevel, defaultHeaders) }
-}
-
-internal fun HttpClientConfig<*>.configure(
-    logLevel: LogLevel,
-    defaultHeaders: Map<String, String>?
-) {
+internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
     install(JsonFeature) {
         serializer = KotlinxSerializer() // TODO Non strict json
             .also {
@@ -48,11 +35,12 @@ internal fun HttpClientConfig<*>.configure(
             }
     }
     install(Logging) {
-        level = logLevel
+        level = configuration.logLevel
         logger = Logger.SIMPLE
     }
-    if (defaultHeaders != null)
+    configuration.defaultHeaders?.let {
         install(DefaultRequest) {
-            defaultHeaders.forEach { (key, value) -> header(key, value) }
+            it.forEach { (key, value) -> header(key, value) }
         }
+    }
 }

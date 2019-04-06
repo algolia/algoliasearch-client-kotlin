@@ -46,7 +46,6 @@ internal class TestClient {
             apiKey shouldEqual it.apiKey
             applicationID shouldEqual it.applicationID
             hosts shouldEqual it.hosts
-            engine shouldEqual it.engine
             logLevel shouldEqual it.logLevel
             readTimeout shouldEqual it.readTimeout
             writeTimeout shouldEqual it.writeTimeout
