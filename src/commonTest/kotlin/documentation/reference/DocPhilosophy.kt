@@ -1,6 +1,7 @@
 package documentation.reference
 
 import com.algolia.search.client.ClientSearch
+import com.algolia.search.dsl.*
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.Attribute
@@ -19,7 +20,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 import runBlocking
-import shouldFailWith
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -29,37 +29,95 @@ import kotlin.test.Test
 internal class DocPhilosophy {
 
     @Test
-    fun unwrappingHits() {
-        shouldFailWith<Exception> {
-            runBlocking {
-                @Serializable
-                data class Contact(
-                    val firstname: String,
-                    val lastname: String
-                )
+    fun typeSafetyClient() {
+        val appID = ApplicationID("YourApplicationID")
+        val apiKey = APIKey("YourAPIKey")
 
-                val response = index.search()
+        val client = ClientSearch(appID, apiKey)
+    }
 
-                val contacts: List<Contact> = response.hits.map { it.parse(Contact.serializer()) }
+    @Test
+    fun typeSafetyAttributes() {
+        val color = Attribute("color")
+        val category = Attribute("category")
+
+        Query(
+            attributesToRetrieve = listOf(color, category)
+        )
+    }
+
+    @Test
+    fun typeSafety() {
+        val query = Query()
+
+        query.sortFacetsBy = SortFacetsBy.Count
+//        query.sortFacetsBy = SortFacetsBy.Alpha
+//        query.sortFacetsBy = SortFacetsBy.Other("unhandled value")
+    }
+
+    @Test
+    fun dslQuery() {
+        val query = query {
+            attributesToRetrieve {
+                +"color"
+                +"category"
             }
         }
     }
 
     @Test
-    fun unwrappingObject() {
-        shouldFailWith<ResponseException> {
-            runBlocking {
-                @Serializable
-                data class Contact(
-                    val firstname: String,
-                    val lastname: String,
-                    override val objectID: ObjectID
-                ) : Indexable
-
-                val objectID = ObjectID("myID1")
-
-                val contact: Contact = index.getObject(Contact.serializer(), objectID)
+    fun dslSettings() {
+        val settings = settings {
+            attributesToSnippet {
+                "content" limit 10
             }
+        }
+    }
+
+    @Test
+    fun dslFilters() {
+        val query = query {
+            filters {
+                and {
+                    facet("color", "red")
+                    facet("category", "shirt")
+                }
+                orNumeric {
+                    range("price", 0 until 10)
+                    comparison("price", Equals, 15)
+                }
+            }
+        }
+    }
+
+    @Test
+    fun unwrappingHits() {
+        runBlocking {
+            @Serializable
+            data class Contact(
+                val firstname: String,
+                val lastname: String
+            )
+
+            val response = index.search()
+
+            val contacts: List<Contact> = response.hits.map { it.parse(Contact.serializer()) }
+        }
+    }
+
+    @Test
+    fun unwrappingObject() {
+        runBlocking {
+            @Serializable
+            data class Contact(
+                val firstname: String,
+                val lastname: String,
+                override val objectID: ObjectID
+            ) : Indexable
+
+            val objectID = ObjectID("myID1")
+
+            val contact: Contact = index.getObject(Contact.serializer(), objectID)
         }
     }
 
@@ -94,37 +152,6 @@ internal class DocPhilosophy {
                     val response = withContext(Dispatchers.Default) { index.search() }
                 }
             }
-        }
-    }
-
-    @Test
-    fun strongTypingClient() {
-        val appID = ApplicationID("YourApplicationID")
-        val apiKey = APIKey("YourAPIKey")
-
-        val client = ClientSearch(appID, apiKey)
-    }
-
-    @Test
-    fun strongTypingAttributes() {
-        val color = Attribute("color")
-        val category = Attribute("category")
-
-        Query(
-            attributesToRetrieve = listOf(color, category)
-        )
-    }
-
-    @Test
-    fun strongTypingSealedClass() {
-        val query = Query()
-        val sortFacetValuesBy = query.sortFacetsBy
-
-        when (sortFacetValuesBy) {
-            is SortFacetsBy.Count -> TODO()
-            is SortFacetsBy.Other -> TODO()
-            is SortFacetsBy.Alpha -> TODO()
-            // No need for an `else ->` branch
         }
     }
 
