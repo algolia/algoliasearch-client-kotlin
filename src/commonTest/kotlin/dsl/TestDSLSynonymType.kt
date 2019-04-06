@@ -14,8 +14,8 @@ internal class TestDSLSynonymType {
             +OneWay
             +MultiWay
             +Placeholder
-            +alternativeCorrections(TypoOne)
-            +alternativeCorrections(TypoTwo)
+            +AlternativeCorrectionsOneTypo
+            +AlternativeCorrectionsTwoTypos
         }
 
         dsl shouldEqual listOf(
@@ -30,8 +30,8 @@ internal class TestDSLSynonymType {
     @Test
     fun typos() {
         DSLSynonymType().apply {
-            TypoOne shouldEqual SynonymType.Typo.One
-            TypoTwo shouldEqual SynonymType.Typo.Two
+            AlternativeCorrectionsOneTypo shouldEqual SynonymType.Typo.One
+            AlternativeCorrectionsTwoTypos shouldEqual SynonymType.Typo.Two
         }
     }
 
