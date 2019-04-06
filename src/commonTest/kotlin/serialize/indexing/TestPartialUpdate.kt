@@ -5,6 +5,7 @@ import com.algolia.search.model.indexing.Partial
 import com.algolia.search.serialize.*
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.json
+import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 
 
@@ -12,6 +13,8 @@ internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
 
     private val updateString = Partial.Update(attributeA, "value")
     private val updateNumber = Partial.Update(attributeA, 0)
+    private val updateArray = Partial.Update(attributeA, jsonArray { +0 })
+    private val updateObject = Partial.Update(attributeA, json { "key" to "value" })
     private val increment = Partial.Increment(attributeA, 0)
     private val decrement = Partial.Decrement(attributeA, 0)
     private val addString = Partial.Add(attributeA, "value")
@@ -24,6 +27,8 @@ internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
     override val items = listOf(
         updateString to toJson(updateString),
         updateNumber to toJson(updateNumber),
+        updateObject to toJson(updateObject),
+        updateArray to toJson(updateArray),
         increment to toJson(increment),
         decrement to toJson(decrement),
         addString to toJson(addString),
@@ -46,10 +51,7 @@ internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
         return json {
             partial.attribute.raw to json {
                 key?.let { Key_Operation to key }
-                when (val value = partial.value) {
-                    is Partial.Value.String -> KeyValue to value.raw
-                    is Partial.Value.Number -> KeyValue to value.raw
-                }
+                KeyValue to partial.value
             }
         }
     }

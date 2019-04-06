@@ -7,77 +7,75 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.*
 
 
 public sealed class Partial {
 
-    abstract val attribute: Attribute
-    internal abstract val value: Value<*>
+    public abstract val attribute: Attribute
 
-    internal sealed class Value<T> {
-
-        abstract val raw: T
-
-        data class String(override val raw: kotlin.String) : Value<kotlin.String>()
-
-        data class Number(override val raw: kotlin.Number) : Value<kotlin.Number>()
-    }
+    internal abstract val value: JsonElement
 
     public data class Update internal constructor(
         override val attribute: Attribute,
-        override val value: Value<*>
+        override val value: JsonElement
     ) : Partial() {
 
-        public constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
+        public constructor(attribute: Attribute, value: String) : this(attribute, JsonLiteral(value))
 
-        public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
+        public constructor(attribute: Attribute, value: Boolean) : this(attribute, JsonLiteral(value))
+
+        public constructor(attribute: Attribute, value: Number) : this(attribute, JsonLiteral(value))
+
+        public constructor(attribute: Attribute, value: JsonArray) : this(attribute, value as JsonElement)
+
+        public constructor(attribute: Attribute, value: JsonObject) : this(attribute, value as JsonElement)
     }
 
     public data class Increment internal constructor(
         override val attribute: Attribute,
-        override val value: Value<*>
+        override val value: JsonElement
     ) : Partial() {
 
-        public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
+        public constructor(attribute: Attribute, value: Number) : this(attribute, JsonLiteral(value))
     }
 
     public data class Decrement internal constructor(
         override val attribute: Attribute,
-        override val value: Value<*>
+        override val value: JsonElement
     ) : Partial() {
 
-        public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
+        public constructor(attribute: Attribute, value: Number) : this(attribute, JsonLiteral(value))
     }
 
     public data class Add internal constructor(
         override val attribute: Attribute,
-        override val value: Value<*>
+        override val value: JsonElement
     ) : Partial() {
 
-        public constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
+        public constructor(attribute: Attribute, value: String) : this(attribute, JsonLiteral(value))
 
-        public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
+        public constructor(attribute: Attribute, value: Number) : this(attribute, JsonLiteral(value))
     }
 
     public data class Remove internal constructor(
         override val attribute: Attribute,
-        override val value: Value<*>
+        override val value: JsonElement
     ) : Partial() {
 
-        public constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
+        public constructor(attribute: Attribute, value: String) : this(attribute, JsonLiteral(value))
 
-        public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
+        public constructor(attribute: Attribute, value: Number) : this(attribute, JsonLiteral(value))
     }
 
     public data class AddUnique internal constructor(
         override val attribute: Attribute,
-        override val value: Value<*>
+        override val value: JsonElement
     ) : Partial() {
 
-        public constructor(attribute: Attribute, value: String) : this(attribute, Value.String(value))
+        public constructor(attribute: Attribute, value: String) : this(attribute, JsonLiteral(value))
 
-        public constructor(attribute: Attribute, value: Number) : this(attribute, Value.Number(value))
+        public constructor(attribute: Attribute, value: Number) : this(attribute, JsonLiteral(value))
     }
 
     @Serializer(Partial::class)
@@ -95,10 +93,7 @@ public sealed class Partial {
             val json = json {
                 obj.attribute.raw to json {
                     key?.let { Key_Operation to key }
-                    when (val value = obj.value) {
-                        is Value.String -> KeyValue to value.raw
-                        is Value.Number -> KeyValue to value.raw
-                    }
+                    KeyValue to obj.value
                 }
             }
             encoder.asJsonOutput().encodeJson(json)
@@ -109,18 +104,15 @@ public sealed class Partial {
             val key = element.keys.first()
             val attribute = key.toAttribute()
             val operation = element.getObject(key).getPrimitiveOrNull(Key_Operation)?.content
-            val raw = element.getObject(key).getPrimitive(KeyValue)
-            val int = raw.intOrNull?.let { Value.Number(it) }
-            val double = raw.doubleOrNull?.let { Value.Number(it) }
-            val value = int ?: double ?: Value.String(raw.content)
+            val jsonElement = element.getObject(key).getValue(KeyValue)
 
             return when (operation) {
-                null -> Update(attribute, value)
-                KeyIncrement -> Increment(attribute, value)
-                KeyDecrement -> Decrement(attribute, value)
-                KeyAdd -> Add(attribute, value)
-                KeyRemove -> Remove(attribute, value)
-                KeyAddUnique -> AddUnique(attribute, value)
+                null -> Update(attribute, jsonElement)
+                KeyIncrement -> Increment(attribute, jsonElement)
+                KeyDecrement -> Decrement(attribute, jsonElement)
+                KeyAdd -> Add(attribute, jsonElement)
+                KeyRemove -> Remove(attribute, jsonElement)
+                KeyAddUnique -> AddUnique(attribute, jsonElement)
                 else -> throw Exception("Unknown operation $operation")
             }
         }
