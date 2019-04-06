@@ -1,7 +1,7 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.helper.requestOptionsBuilder
+import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.settings.NumericAttributeFilter

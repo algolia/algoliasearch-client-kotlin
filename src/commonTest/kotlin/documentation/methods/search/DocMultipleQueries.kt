@@ -1,6 +1,6 @@
 package documentation.methods.search
 
-import com.algolia.search.helper.requestOptionsBuilder
+import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.search.Query
@@ -58,7 +58,7 @@ internal class DocMultipleQueries {
                     Query(query = "query string", hitsPerPage = 10)
                 )
             )
-            val requestOptions = requestOptionsBuilder {
+            val requestOptions = requestOptions {
                 header("X-Algolia-User-ID", "user123")
             }
 

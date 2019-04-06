@@ -9,7 +9,6 @@ import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.task.TaskID
-import com.algolia.search.transport.RequestOptions
 
 
 public fun String.toIndexName(): IndexName {
@@ -66,11 +65,4 @@ public fun Long.toABTestID(): ABTestID {
 
 public infix fun Float.and(longitude: Float): Point {
     return Point(this, longitude)
-}
-
-public fun requestOptionsBuilder(
-    requestOptions: RequestOptions? = null,
-    block: RequestOptions.() -> Unit
-): RequestOptions {
-    return (requestOptions ?: RequestOptions()).apply(block)
 }

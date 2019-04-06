@@ -2,7 +2,7 @@ package documentation.methods.search
 
 import com.algolia.search.dsl.attributesToRetrieve
 import com.algolia.search.dsl.query
-import com.algolia.search.helper.requestOptionsBuilder
+import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
 import documentation.client
@@ -52,7 +52,7 @@ internal class DocSearch {
             val indexName = IndexName("contacts")
             val index = client.initIndex(indexName)
             val query = Query("query")
-            val requestOptions = requestOptionsBuilder {
+            val requestOptions = requestOptions {
                 header("X-Algolia-User-ID", "user123")
             }
 

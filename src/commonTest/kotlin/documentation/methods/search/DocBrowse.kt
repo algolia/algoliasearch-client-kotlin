@@ -1,6 +1,6 @@
 package documentation.methods.search
 
-import com.algolia.search.helper.requestOptionsBuilder
+import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.search.Query
 import documentation.index
 import runBlocking
@@ -32,7 +32,7 @@ internal class DocBrowse {
     fun extraHttpHeaders() {
         runBlocking {
             val query = Query(query = "")
-            val requestOptions = requestOptionsBuilder {
+            val requestOptions = requestOptions {
                 header("X-Algolia-User-ID", "user123")
             }
 

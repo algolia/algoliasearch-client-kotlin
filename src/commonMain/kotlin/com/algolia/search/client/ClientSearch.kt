@@ -3,9 +3,9 @@ package com.algolia.search.client
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationSearch
+import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.endpoint.*
 import com.algolia.search.helper.encodeBase64
-import com.algolia.search.helper.requestOptionsBuilder
 import com.algolia.search.helper.sha256
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.model.APIKey

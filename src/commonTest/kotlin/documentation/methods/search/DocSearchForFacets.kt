@@ -1,6 +1,6 @@
 package documentation.methods.search
 
-import com.algolia.search.helper.requestOptionsBuilder
+import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.FacetQuery
 import com.algolia.search.model.search.Query
@@ -57,7 +57,7 @@ internal class DocSearchForFacets {
                 facetQuery = "phone",
                 query = Query(filters = "brand:Apple")
             )
-            val requestOptions = requestOptionsBuilder {
+            val requestOptions = requestOptions {
                 header("X-Algolia-User-ID", "user123")
             }
 
