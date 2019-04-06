@@ -1,4 +1,4 @@
-package documentation.guides.prepare
+package documentation.guides.data
 
 import com.algolia.search.dsl.searchableAttributes
 import com.algolia.search.dsl.settings

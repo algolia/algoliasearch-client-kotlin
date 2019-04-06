@@ -1,4 +1,4 @@
-package documentation.guides.send
+package documentation.guides.data
 
 import documentation.index
 import kotlinx.serialization.json.JsonObject

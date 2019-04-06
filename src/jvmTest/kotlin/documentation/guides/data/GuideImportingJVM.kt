@@ -1,4 +1,4 @@
-package documentation.guides.send
+package documentation.guides.data
 
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.APIKey
