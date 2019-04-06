@@ -9,8 +9,8 @@ internal class TestNumericOperator {
 
     @Test
     fun raw() {
-        NumericOperator.Lesser.raw shouldEqual "<"
-        NumericOperator.LesserOrEquals.raw shouldEqual "<="
+        NumericOperator.Less.raw shouldEqual "<"
+        NumericOperator.LessOrEquals.raw shouldEqual "<="
         NumericOperator.Equals.raw shouldEqual "="
         NumericOperator.NotEquals.raw shouldEqual "!="
         NumericOperator.GreaterOrEquals.raw shouldEqual ">="

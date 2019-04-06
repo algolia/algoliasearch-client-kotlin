@@ -17,7 +17,7 @@ internal class GuideFilterNumeric {
             val query = query("query") {
                 filters {
                     and {
-                        +comparison("price", Lesser, 100)
+                        +comparison("price", Less, 100)
                     }
                 }
             }

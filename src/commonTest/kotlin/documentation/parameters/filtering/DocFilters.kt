@@ -33,8 +33,8 @@ internal class DocFilters {
 //            +range("attribute", 0..10)
 //            +range("attribute", 0f, 10f)
 //            // "numeric_attribute [= | != | > | >= | < | <=](#numeric-comparisons) numeric_value"
-//            +comparison("attribute", Lesser, 0f)
-//            +comparison("attribute", LesserOrEquals, 0f)
+//            +comparison("attribute", Less, 0f)
+//            +comparison("attribute", LessOrEquals, 0f)
 //            +comparison("attribute", Equals, 0f)
 //            +comparison("attribute", NotEquals, 0f)
 //            +comparison("attribute", Greater, 0f)
@@ -48,7 +48,7 @@ internal class DocFilters {
 //            +facet("attribute", 0)
 //            +tag("value")
 //            +range("attribute", 0..10)
-//            +comparison("attribute", NumericOperator.Lesser, 0f)
+//            +comparison("attribute", NumericOperator.Less, 0f)
 //        }
 //    }
 

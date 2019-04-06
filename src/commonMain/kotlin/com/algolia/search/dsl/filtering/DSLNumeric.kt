@@ -8,8 +8,8 @@ import com.algolia.search.model.filter.NumericOperator
 @Suppress("PropertyName")
 public interface DSLNumeric {
 
-    val Lesser get() = NumericOperator.Lesser
-    val LesserOrEquals get() = NumericOperator.LesserOrEquals
+    val Less get() = NumericOperator.Less
+    val LessOrEquals get() = NumericOperator.LessOrEquals
     val NotEquals get() = NumericOperator.NotEquals
     val Equals get() = NumericOperator.Equals
     val Greater get() = NumericOperator.Greater

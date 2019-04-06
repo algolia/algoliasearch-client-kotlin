@@ -52,12 +52,12 @@ internal fun Filter.Numeric.toSQL(): String {
 internal fun Filter.Numeric.Value.Comparison.toLegacy(attribute: Attribute, isNegated: Boolean): List<String> {
     val operator = if (isNegated) {
         when (operator) {
-            NumericOperator.Lesser -> NumericOperator.GreaterOrEquals
-            NumericOperator.LesserOrEquals -> NumericOperator.Greater
+            NumericOperator.Less -> NumericOperator.GreaterOrEquals
+            NumericOperator.LessOrEquals -> NumericOperator.Greater
             NumericOperator.Equals -> NumericOperator.NotEquals
             NumericOperator.NotEquals -> NumericOperator.Equals
-            NumericOperator.Greater -> NumericOperator.LesserOrEquals
-            NumericOperator.GreaterOrEquals -> NumericOperator.Lesser
+            NumericOperator.Greater -> NumericOperator.LessOrEquals
+            NumericOperator.GreaterOrEquals -> NumericOperator.Less
         }
     } else operator
 

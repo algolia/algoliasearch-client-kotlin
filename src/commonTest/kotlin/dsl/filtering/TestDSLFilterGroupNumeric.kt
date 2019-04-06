@@ -47,12 +47,12 @@ internal class TestDSLFilterGroupNumeric {
     @Test
     fun comparison() {
         val dsl = DSLGroupNumeric {
-            +comparison(attributeA.raw, Lesser, 0)
+            +comparison(attributeA.raw, Less, 0)
             +comparison(attributeA, Greater, 0)
         }
 
         dsl shouldEqual setOf(
-            Filter.Numeric(attributeA, NumericOperator.Lesser, 0),
+            Filter.Numeric(attributeA, NumericOperator.Less, 0),
             Filter.Numeric(attributeA, NumericOperator.Greater, 0)
         )
     }
@@ -60,8 +60,8 @@ internal class TestDSLFilterGroupNumeric {
     @Test
     fun operator() {
         DSLGroupNumeric {
-            Lesser shouldEqual NumericOperator.Lesser
-            LesserOrEquals shouldEqual NumericOperator.LesserOrEquals
+            Less shouldEqual NumericOperator.Less
+            LessOrEquals shouldEqual NumericOperator.LessOrEquals
             Equals shouldEqual NumericOperator.Equals
             NotEquals shouldEqual NumericOperator.NotEquals
             Greater shouldEqual NumericOperator.Greater

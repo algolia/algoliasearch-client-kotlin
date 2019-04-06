@@ -14,8 +14,8 @@ internal class DocNumericFilters {
 //    numericFilters {
 //        and {
 //            // "numeric_attribute [= | != | > | >= | < | <=](#numeric-comparisons) numeric_value"
-//            +comparison("attribute", NumericOperator.Lesser, 0f)
-//            +comparison("attribute", NumericOperator.LesserOrEquals, 0f)
+//            +comparison("attribute", NumericOperator.Less, 0f)
+//            +comparison("attribute", NumericOperator.LessOrEquals, 0f)
 //            +comparison("attribute", NumericOperator.Equals, 0f)
 //            +comparison("attribute", NotEquals, 0f)
 //            +comparison("attribute", Greater, 0f)
@@ -37,10 +37,10 @@ internal class DocNumericFilters {
                 numericFilters {
                     or {
                         +comparison("inStock", Equals, 0f)
-                        +comparison("deliveryDate", Lesser, 1441755506)
+                        +comparison("deliveryDate", Less, 1441755506)
                     }
                     and {
-                        +comparison("price", Lesser, 1000)
+                        +comparison("price", Less, 1000)
                     }
                 }
             }
