@@ -13,16 +13,15 @@ internal class DocBrowse {
 
 //    suspend fun Index.browseObjects(
 //         #{query}: __Query__ = Query(),
-//         #{requestOptions}: __RequestOptions?__ = null,
-//         block: __suspend (ResponseSearch) -> Unit)__
-//    )
+//         #{requestOptions}: __RequestOptions?__ = null
+//    ): List<ResponseSearch>
 
     @Test
     fun example() {
         runBlocking {
             val query = Query()
 
-            index.browseObjects(query) { responseSearch ->
+            index.browseObjects(query).forEach { responseSearch ->
                 println(responseSearch.hits)
             }
         }
@@ -36,7 +35,7 @@ internal class DocBrowse {
                 header("X-Algolia-User-ID", "user123")
             }
 
-            index.browseObjects(query, requestOptions) { responseSearch ->
+            index.browseObjects(query, requestOptions).forEach { responseSearch ->
                 println(responseSearch.hits)
             }
         }

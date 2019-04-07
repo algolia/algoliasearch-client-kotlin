@@ -11,14 +11,13 @@ internal class DocBrowseSynonyms {
 
 //    suspend fun Index.browseSynonyms(
 //        query: __SynonymQuery__ = SynonymQuery(),
-//        requestOptions: __RequestOptions?__ = null,
-//        block: __suspend (ResponseSearchSynonyms) -> Unit__
-//    )
+//        requestOptions: __RequestOptions?__ = null
+//    ): List<ResponseSearchSynonyms>
 
     @Test
     fun browseSynonyms() {
         runBlocking {
-            index.browseSynonyms {
+            index.browseSynonyms().forEach {
                 println(it)
             }
         }

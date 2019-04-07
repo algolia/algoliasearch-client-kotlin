@@ -5,7 +5,7 @@ import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseRule
-import com.algolia.search.model.response.ResponseRules
+import com.algolia.search.model.response.ResponseSearchRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.RuleQuery
@@ -60,7 +60,7 @@ internal class EndpointRuleImpl(
     override suspend fun searchRules(
         query: RuleQuery,
         requestOptions: RequestOptions?
-    ): ResponseRules {
+    ): ResponseSearchRules {
         val path = indexName.toPath("/$RouteRules/search")
         val body = Json.noDefaults.stringify(RuleQuery.serializer(), query)
 

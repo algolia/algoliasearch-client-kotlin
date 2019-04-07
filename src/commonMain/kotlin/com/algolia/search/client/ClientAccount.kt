@@ -26,9 +26,9 @@ public object ClientAccount {
 
         destination.apply {
             tasks += setSettings(source.getSettings())
-            source.browseRules { tasks += saveRules(it.hits.map { hit -> hit.rule }) }
-            source.browseSynonyms { tasks += saveSynonyms(it.hits) }
-            source.browseObjects { tasks += saveObjects(it.hits.map { hit -> hit.json }) }
+            source.browseRules().forEach { tasks += saveRules(it.hits.map { hit -> hit.rule }) }
+            source.browseSynonyms().forEach { tasks += saveSynonyms(it.hits) }
+            source.browseObjects().forEach { tasks += saveObjects(it.hits.map { hit -> hit.json }) }
         }
         return tasks
     }

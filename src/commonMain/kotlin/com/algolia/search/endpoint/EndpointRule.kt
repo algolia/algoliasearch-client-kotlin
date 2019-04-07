@@ -3,7 +3,7 @@ package com.algolia.search.endpoint
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseRule
-import com.algolia.search.model.response.ResponseRules
+import com.algolia.search.model.response.ResponseSearchRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.RuleQuery
@@ -41,7 +41,7 @@ public interface EndpointRule {
     suspend fun searchRules(
         query: RuleQuery = RuleQuery(),
         requestOptions: RequestOptions? = null
-    ): ResponseRules
+    ): ResponseSearchRules
 
     suspend fun clearRules(
         forwardToReplicas: Boolean? = null,

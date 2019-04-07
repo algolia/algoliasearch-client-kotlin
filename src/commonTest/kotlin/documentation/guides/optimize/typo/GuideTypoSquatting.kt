@@ -37,10 +37,8 @@ internal class GuideTypoSquatting {
     @Test
     fun snippet2() {
         runBlocking {
-            val records = mutableListOf<JsonObject>()
-
-            index.browseObjects { response ->
-                records += response.hits.map {
+            val records = index.browseObjects().flatMap { response ->
+                response.hits.map {
                     val map = it.toMutableMap()
                     val nbFollowers = it.getValue("nb_followers").primitive.long
 
@@ -48,6 +46,7 @@ internal class GuideTypoSquatting {
                     JsonObject(map)
                 }
             }
+
             index.saveObjects(records)
         }
     }
