@@ -1,7 +1,9 @@
 package documentation.methods.indexing
 
+import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
+import com.algolia.search.model.multicluster.UserID
 import documentation.index
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
@@ -55,18 +57,18 @@ internal class DocSaveObjects {
 
             // With serializable class
             @Serializable
-            data class Person(
+            data class Contact(
                 val firstname: String,
                 val lastname: String,
                 override val objectID: ObjectID
             ) : Indexable
 
-            val persons = listOf(
-                Person("Jimmie", "Barninger", ObjectID("myID")),
-                Person("Jimmie", "Barninger", ObjectID("myID"))
+            val contacts = listOf(
+                Contact("Jimmie", "Barninger", ObjectID("myID")),
+                Contact("Jimmie", "Barninger", ObjectID("myID"))
             )
 
-            index.replaceObjects(Person.serializer(), persons)
+            index.replaceObjects(Contact.serializer(), contacts)
         }
     }
 
@@ -84,16 +86,37 @@ internal class DocSaveObjects {
 
             // With serializable class
             @Serializable
-            data class Person(
+            data class Contact(
                 val firstname: String,
                 val lastname: String,
                 val city: String,
                 override val objectID: ObjectID
             ) : Indexable
 
-            val person = Person("Jimmie", "Barninger", "New York", ObjectID("myID"))
+            val contact = Contact("Jimmie", "Barninger", "New York", ObjectID("myID"))
 
-            index.replaceObject(Person.serializer(), person)
+            index.replaceObject(Contact.serializer(), contact)
+        }
+    }
+
+    @Test
+    fun replaceExtraHeader() {
+        runBlocking {
+            val json = listOf(
+                ObjectID("myID1") to json {
+                    "firstname" to "Jimmie"
+                    "lastname" to "Barninger"
+                },
+                ObjectID("myID1") to json {
+                    "firstname" to "Warren"
+                    "lastname" to "Speach"
+                }
+            )
+            val requestOptions = requestOptions {
+                headerAlgoliaUserId(UserID("user123"))
+            }
+
+            index.replaceObjects(json, requestOptions)
         }
     }
 }
