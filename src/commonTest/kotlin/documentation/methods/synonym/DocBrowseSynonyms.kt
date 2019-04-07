@@ -15,7 +15,7 @@ internal class DocBrowseSynonyms {
 //    ): List<ResponseSearchSynonyms>
 
     @Test
-    fun browseSynonyms() {
+    fun snippet1() {
         runBlocking {
             index.browseSynonyms().forEach {
                 println(it)

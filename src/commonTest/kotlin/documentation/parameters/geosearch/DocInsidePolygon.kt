@@ -24,7 +24,7 @@ internal class DocInsidePolygon {
 //    }
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 insidePolygon {
@@ -41,7 +41,7 @@ internal class DocInsidePolygon {
     }
 
     @Test
-    fun queryMultiple() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 insidePolygon {

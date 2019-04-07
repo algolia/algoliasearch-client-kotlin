@@ -38,7 +38,7 @@ internal class DocAddObjects {
 //    ): ResponseBatch
 
     @Test
-    fun saveObjects() {
+    fun snippet1() {
         runBlocking {
             // With JsonObject
             val json = listOf(
@@ -68,7 +68,7 @@ internal class DocAddObjects {
     }
 
     @Test
-    fun saveObjectsWithID() {
+    fun snippet2() {
         runBlocking {
             // With JsonObject
             val json = listOf(
@@ -104,7 +104,7 @@ internal class DocAddObjects {
     }
 
     @Test
-    fun saveObject() {
+    fun snippet3() {
         runBlocking {
             // With JsonObject
             val json = json {
@@ -130,7 +130,7 @@ internal class DocAddObjects {
     }
 
     @Test
-    fun saveObjectExtraHeader() {
+    fun snippet4() {
         runBlocking {
             val json = listOf(
                 json {

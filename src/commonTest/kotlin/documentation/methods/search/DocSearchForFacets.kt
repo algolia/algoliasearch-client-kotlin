@@ -27,7 +27,7 @@ internal class DocSearchForFacets {
 //    // any #{searchParameters} can be set on the Query object
 
     @Test
-    fun example() {
+    fun snippet1() {
         runBlocking {
             val attribute = Attribute("category")
             val query = FacetQuery(facetQuery = "phone")
@@ -37,7 +37,7 @@ internal class DocSearchForFacets {
     }
 
     @Test
-    fun exampleAdditional() {
+    fun snippet2() {
         runBlocking {
             val attribute = Attribute("category")
             val query = FacetQuery(
@@ -50,7 +50,7 @@ internal class DocSearchForFacets {
     }
 
     @Test
-    fun exampleExtraHeader() {
+    fun snippet3() {
         runBlocking {
             val attribute = Attribute("category")
             val query = FacetQuery(

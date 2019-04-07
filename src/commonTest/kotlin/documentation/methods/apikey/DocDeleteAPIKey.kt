@@ -1,14 +1,14 @@
 package documentation.methods.apikey
 
 import com.algolia.search.model.APIKey
-import documentation.TestDocumentation
+import documentation.client
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
 
 @Ignore
-internal class DocDeleteAPIKey : TestDocumentation() {
+internal class DocDeleteAPIKey {
 
 //    suspend fun ClientSearch.deleteAPIKey(
 //        #{apiKey}: __APIKey__,
@@ -27,7 +27,7 @@ internal class DocDeleteAPIKey : TestDocumentation() {
 //    )
 
     @Test
-    fun deleteAPIKey() {
+    fun snippet1() {
         runBlocking {
             client.deleteAPIKey(APIKey("f420238212c54dcfad07ea0aa6d5c45f"))
         }

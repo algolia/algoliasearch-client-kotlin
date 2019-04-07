@@ -27,7 +27,7 @@ internal class DocRanking {
 //    }
 
     @Test
-    fun defaultRanking() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 ranking {
@@ -47,7 +47,7 @@ internal class DocRanking {
     }
 
     @Test
-    fun ascending() {
+    fun snippet2() {
         runBlocking {
             val settings = settings {
                 ranking {
@@ -68,7 +68,7 @@ internal class DocRanking {
     }
 
     @Test
-    fun descending() {
+    fun snippet3() {
         runBlocking {
             val settings = settings {
                 ranking {

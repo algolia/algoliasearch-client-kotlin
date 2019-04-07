@@ -15,7 +15,7 @@ internal class DocClearSynonyms {
 //    ): RevisionIndex
 
     @Test
-    fun clearSynonyms() {
+    fun snippet1() {
         runBlocking {
             index.clearSynonyms(forwardToReplicas = true)
         }

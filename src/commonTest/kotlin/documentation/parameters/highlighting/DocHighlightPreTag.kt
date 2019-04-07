@@ -14,7 +14,7 @@ internal class DocHighlightPreTag {
 //    highlightPreTag: String = "opening_tag"
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 highlightPreTag = "<em>"
@@ -25,7 +25,7 @@ internal class DocHighlightPreTag {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 highlightPreTag = "<strong>"

@@ -18,7 +18,7 @@ internal class DocOptionalWords {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 optionalWords {
@@ -32,7 +32,7 @@ internal class DocOptionalWords {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 optionalWords {
@@ -46,7 +46,7 @@ internal class DocOptionalWords {
     }
 
     @Test
-    fun allOptionals() {
+    fun snippet3() {
         runBlocking {
             val queryString = "query"
             val query = query(queryString) {

@@ -14,7 +14,7 @@ internal class DocListCluster {
 //    ): ResponseListClusters
 
     @Test
-    fun listCluster() {
+    fun snippet1() {
         runBlocking {
             client.listClusters()
         }

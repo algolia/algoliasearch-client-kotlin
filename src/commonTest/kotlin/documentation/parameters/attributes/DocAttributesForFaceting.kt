@@ -18,7 +18,7 @@ internal class DocAttributesForFaceting {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 attributesForFaceting {

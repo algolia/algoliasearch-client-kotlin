@@ -14,7 +14,7 @@ internal class DocMinWordSizeFor2Typos {
 //    minWordSizeFor2Typo: Int = min_word_size
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 minWordSizeFor2Typos = 4
@@ -25,7 +25,7 @@ internal class DocMinWordSizeFor2Typos {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 minWordSizeFor2Typos = 2

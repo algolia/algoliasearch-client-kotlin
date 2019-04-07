@@ -14,7 +14,7 @@ internal class DocGetTopUserID {
 //    ): ResponseTopUserID
 
     @Test
-    fun getTopUserID() {
+    fun snippet1() {
         runBlocking {
             client.getTopUserID()
         }

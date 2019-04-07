@@ -31,7 +31,7 @@ internal class GuideImportingJVM {
     ) : Indexable
 
     @Test
-    fun batching() {
+    fun snippet1() {
         runBlocking {
             val client = ClientSearch(ApplicationID("YourApplicationID"), APIKey("YourAdminAPIKey"))
             val index = client.initIndex(IndexName("actors"))
@@ -48,7 +48,7 @@ internal class GuideImportingJVM {
     }
 
     @Test
-    fun readFile() {
+    fun snippet2() {
         @Serializable
         data class Actor(
             val name: String,
@@ -63,7 +63,7 @@ internal class GuideImportingJVM {
     }
 
     @Test
-    fun fetchFromDatabase() {
+    fun snippet3() {
         fun fetchFromDatabase(): List<Actor> {
             val actors: List<Actor> = listOf() // Fetch data from your database
 
@@ -74,7 +74,7 @@ internal class GuideImportingJVM {
     }
 
     @Test
-    fun fetchDataFromSource() {
+    fun snippet4() {
         val records = listOf(
             json { "name" to "Tom Cruise" },
             json { "name" to "Scarlett Johansson" }

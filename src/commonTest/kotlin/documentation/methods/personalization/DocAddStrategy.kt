@@ -6,14 +6,14 @@ import com.algolia.search.model.personalization.EventScoring
 import com.algolia.search.model.personalization.EventType
 import com.algolia.search.model.personalization.FacetScoring
 import com.algolia.search.model.personalization.PersonalizationStrategy
-import documentation.TestDocumentation
+import documentation.client
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
 
 @Ignore
-internal class DocAddStrategy : TestDocumentation() {
+internal class DocAddStrategy {
 
 //    suspend fun ClientSearch.setPersonalizationStrategy(
 //        #{strategy}: __PersonalizationStrategy__,
@@ -21,7 +21,7 @@ internal class DocAddStrategy : TestDocumentation() {
 //    ): Revision
 
     @Test
-    fun addStrategy() {
+    fun snippet1() {
         runBlocking {
             val strategy = PersonalizationStrategy(
                 facetsScoring = mapOf(

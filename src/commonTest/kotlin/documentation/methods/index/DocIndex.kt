@@ -12,7 +12,7 @@ import kotlin.test.Test
 internal class DocIndex {
 
     @Test
-    fun index() {
+    fun snippet1() {
         val client = ClientSearch(
             applicationID = ApplicationID("latency"),
             apiKey = APIKey("YourAPIKey")

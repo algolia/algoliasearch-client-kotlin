@@ -16,7 +16,7 @@ internal class DocSortFacetValueBy {
 //    | [SortFacetValuesBy.Count](#parameter-option-count)
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 sortFacetsBy = SortFacetsBy.Alpha
@@ -27,7 +27,7 @@ internal class DocSortFacetValueBy {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 sortFacetsBy = SortFacetsBy.Count

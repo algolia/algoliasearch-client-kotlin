@@ -17,7 +17,7 @@ internal class DocCustomRanking {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 customRanking {

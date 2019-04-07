@@ -35,14 +35,14 @@ internal class DocGetObjects {
 //    ): ResponseObjects
 
     @Test
-    fun getObject() {
+    fun snippet1() {
         runBlocking {
             index.getObject(ObjectID("myID1"))
         }
     }
 
     @Test
-    fun getObjectSerializer() {
+    fun snippet2() {
         runBlocking {
             @Serializable
             data class Contact(
@@ -59,14 +59,14 @@ internal class DocGetObjects {
     }
 
     @Test
-    fun getObjects() {
+    fun snippet3() {
         runBlocking {
             index.getObjects(listOf(ObjectID("myID1"), ObjectID("myID2")))
         }
     }
 
     @Test
-    fun getObjectAttribute() {
+    fun snippet4() {
         runBlocking {
             val objectIDs = listOf(ObjectID("myID1"), ObjectID("myID2"))
             val attributes = listOf(Attribute("firstname"), Attribute("lastname"))
@@ -76,7 +76,7 @@ internal class DocGetObjects {
     }
 
     @Test
-    fun getObjectsExtraHeader() {
+    fun snippet5() {
         runBlocking {
             val requestOptions = requestOptions {
                 headerAlgoliaUserId(UserID("user123"))

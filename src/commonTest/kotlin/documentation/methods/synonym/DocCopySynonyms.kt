@@ -18,7 +18,7 @@ internal class DocCopySynonyms {
 //    ): RevisionIndex
 
     @Test
-    fun copySynonyms() {
+    fun snippet1() {
         shouldFailWith<ResponseException> {
             runBlocking {
                 index.copySynonyms(indexName)

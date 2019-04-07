@@ -17,7 +17,7 @@ internal class DocGetLogs {
 //    ): ResponseLogs
 
     @Test
-    fun getLogs() {
+    fun snippet1() {
         runBlocking {
             client.getLogs(page = 0, hitsPerPage = 100)
         }

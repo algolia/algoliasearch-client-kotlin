@@ -17,7 +17,7 @@ internal class DocNumericAttributesForFiltering {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 numericAttributesForFiltering {

@@ -19,7 +19,7 @@ internal class DocAlternativesAsExact {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 alternativesAsExact {
@@ -33,7 +33,7 @@ internal class DocAlternativesAsExact {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 alternativesAsExact {

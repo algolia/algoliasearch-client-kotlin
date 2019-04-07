@@ -18,7 +18,7 @@ internal class DocResponseFields {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 responseFields {
@@ -34,7 +34,7 @@ internal class DocResponseFields {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 responseFields {

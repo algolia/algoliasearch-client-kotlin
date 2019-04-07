@@ -23,7 +23,7 @@ internal class DocSearch {
 //     // any #{searchParameters} can be set on the Query object
 
     @Test
-    fun example() {
+    fun snippet1() {
         runBlocking {
             @Serializable
             data class Contact(
@@ -47,7 +47,7 @@ internal class DocSearch {
     }
 
     @Test
-    fun exampleExtraHeaders() {
+    fun snippet2() {
         runBlocking {
             val indexName = IndexName("contacts")
             val index = client.initIndex(indexName)

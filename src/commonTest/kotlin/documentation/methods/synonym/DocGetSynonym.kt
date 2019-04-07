@@ -16,7 +16,7 @@ internal class DocGetSynonym {
 //    ): Synonym
 
     @Test
-    fun getSynonyms() {
+    fun snippet1() {
         runBlocking {
             index.getSynonym(ObjectID("myID"))
         }

@@ -17,7 +17,7 @@ internal class DocQueryType {
 //    | [QueryType.PrefixNone](#parameter-option-prefixnone)
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 queryType = QueryType.PrefixLast
@@ -30,7 +30,7 @@ internal class DocQueryType {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 queryType = QueryType.PrefixLast

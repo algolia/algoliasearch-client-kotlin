@@ -13,7 +13,7 @@ import org.junit.Test
 internal class DocHttpClient {
 
     @Test
-    fun default() {
+    fun snippet1() {
         ClientSearch(
             applicationID = ApplicationID("Your Application ID"),
             apiKey = APIKey("Your API key")
@@ -21,7 +21,7 @@ internal class DocHttpClient {
     }
 
     @Test
-    fun apache() {
+    fun snippet2() {
         ClientSearch(
             ConfigurationSearch(
                 applicationID = ApplicationID("Your Application ID"),
@@ -34,7 +34,7 @@ internal class DocHttpClient {
     }
 
     @Test
-    fun okHttp() {
+    fun snippet3() {
         ClientSearch(
             ConfigurationSearch(
                 applicationID = ApplicationID("Your Application ID"),
@@ -47,7 +47,7 @@ internal class DocHttpClient {
     }
 
     @Test
-    fun android() {
+    fun snippet4() {
         ClientSearch(
             ConfigurationSearch(
                 applicationID = ApplicationID("Your Application ID"),

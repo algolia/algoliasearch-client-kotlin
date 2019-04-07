@@ -16,7 +16,7 @@ internal class DocGetUserID {
 //    ): ResponseUserID
 
     @Test
-    fun getUserID() {
+    fun snippet1() {
         runBlocking {
             client.getUserID(UserID("myUserID1"))
         }

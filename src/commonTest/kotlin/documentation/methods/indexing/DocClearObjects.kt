@@ -1,20 +1,20 @@
 package documentation.methods.indexing
 
-import documentation.TestDocumentation
+import documentation.index
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
 
 @Ignore
-internal class DocClearObjects : TestDocumentation() {
+internal class DocClearObjects {
 
 //    suspend fun Index.clearObjects(
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): RevisionIndex
 
     @Test
-    fun deleteObjectBy() {
+    fun snippet1() {
         runBlocking {
             index.clearObjects()
         }

@@ -17,7 +17,7 @@ internal class DocRemoveStopWords {
 //    removeStopWords: RemoveStopWords = RemoveStopWords.Boolean|RemoveStopWords.QueryLanguages
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 queryLanguages {
@@ -31,7 +31,7 @@ internal class DocRemoveStopWords {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 removeStopWords = RemoveStopWords.QueryLanguages(QueryLanguage.English)

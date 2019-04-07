@@ -18,7 +18,7 @@ internal class DocRemoveWordsIfNoResults {
 //    |  [RemoveWordsIfNoResults.AllOptional](#parameter-option-alloptional)
 
     @Test
-    fun settings () {
+    fun snippet1 () {
         runBlocking {
             val settings = settings {
                 removeWordsIfNoResults = RemoveWordIfNoResults.None
@@ -32,7 +32,7 @@ internal class DocRemoveWordsIfNoResults {
     }
 
     @Test
-    fun query () {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 removeWordsIfNoResults = RemoveWordIfNoResults.LastWords

@@ -14,7 +14,7 @@ internal class DocMaxValuesPerFacet {
 //    maxValuesPerFacet: Int = maxValue
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 maxValuesPerFacet = 100
@@ -25,7 +25,7 @@ internal class DocMaxValuesPerFacet {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 maxValuesPerFacet = 50

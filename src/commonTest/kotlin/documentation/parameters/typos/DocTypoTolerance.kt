@@ -19,7 +19,7 @@ internal class DocTypoTolerance {
 //    | [TypoTolerance.Strict](#parameter-option-strict)
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 typoTolerance = TypoTolerance.Boolean(true)
@@ -33,7 +33,7 @@ internal class DocTypoTolerance {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 typoTolerance = TypoTolerance.Boolean(true)

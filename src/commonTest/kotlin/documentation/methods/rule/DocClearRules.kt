@@ -15,7 +15,7 @@ internal class DocClearRules {
 //    ): RevisionIndex
 
     @Test
-    fun clearRules() {
+    fun snippet1() {
         runBlocking {
             index.clearRules(forwardToReplicas = true)
         }

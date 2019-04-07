@@ -23,7 +23,7 @@ internal class DocDeleteObject {
 //    ): ResponseBatch
 
     @Test
-    fun deletes() {
+    fun snippet1() {
         runBlocking {
             val objectIDS = listOf(ObjectID("myID1"), ObjectID("myID2"))
 
@@ -32,7 +32,7 @@ internal class DocDeleteObject {
     }
 
     @Test
-    fun delete() {
+    fun snippet2() {
         runBlocking {
             val objectID = ObjectID("myID1")
 
@@ -41,7 +41,7 @@ internal class DocDeleteObject {
     }
 
     @Test
-    fun deletesExtraHeader() {
+    fun snippet3() {
         runBlocking {
             val objectIDS = listOf(ObjectID("myID1"), ObjectID("myID2"))
             val requestOptions = requestOptions {

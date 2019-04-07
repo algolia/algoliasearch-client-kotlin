@@ -19,7 +19,7 @@ internal class DocSaveSynonym {
 //    ): RevisionSynonym
 
     @Test
-    fun saveSynonymMultiWay() {
+    fun snippet1() {
         runBlocking {
             val synonym = Synonym.MultiWay(
                 objectID = ObjectID("myID"),
@@ -31,7 +31,7 @@ internal class DocSaveSynonym {
     }
 
     @Test
-    fun saveSynonymOneWay() {
+    fun snippet2() {
         runBlocking {
             val synonym = Synonym.OneWay(
                 objectID = ObjectID("myID"),
@@ -44,7 +44,7 @@ internal class DocSaveSynonym {
     }
 
     @Test
-    fun saveSynonymAlternative() {
+    fun snippet3() {
         runBlocking {
             val synonym = Synonym.AlternativeCorrections(
                 objectID = ObjectID("myID"),
@@ -58,7 +58,7 @@ internal class DocSaveSynonym {
     }
 
     @Test
-    fun saveSynonymPlaceholder() {
+    fun snippet4() {
         runBlocking {
             val synonym = Synonym.Placeholder(
                 objectID = ObjectID("myID"),

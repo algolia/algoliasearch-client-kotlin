@@ -14,7 +14,7 @@ internal class DocEnableRules {
 //    enableRules: Boolean = true|false
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 enableRules = true
@@ -25,7 +25,7 @@ internal class DocEnableRules {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 enableRules = true

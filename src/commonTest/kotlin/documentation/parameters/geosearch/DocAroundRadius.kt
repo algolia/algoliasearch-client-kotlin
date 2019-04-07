@@ -15,7 +15,7 @@ internal class DocAroundRadius {
 //    | [AroundRadius.All](#parameter-option-all)
 
     @Test
-    fun queryInMeters() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 aroundRadius = AroundRadius.InMeters(1000)
@@ -26,7 +26,7 @@ internal class DocAroundRadius {
     }
 
     @Test
-    fun queryAll() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 aroundRadius = AroundRadius.All

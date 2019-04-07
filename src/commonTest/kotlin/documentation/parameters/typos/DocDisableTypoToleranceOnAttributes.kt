@@ -18,7 +18,7 @@ internal class DocDisableTypoToleranceOnAttributes {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 disableTypoToleranceOnAttributes {
@@ -31,7 +31,7 @@ internal class DocDisableTypoToleranceOnAttributes {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 disableTypoToleranceOnAttributes {

@@ -16,7 +16,7 @@ internal class DocStopABTest {
 //    ): RevisionABTest
 
     @Test
-    fun stopABTest() {
+    fun snippet1() {
         runBlocking {
             clientAnalytics.stopABTest(ABTestID(42))
         }

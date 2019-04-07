@@ -17,7 +17,7 @@ internal class DocDeleteRule {
 //    ): RevisionIndex
 
     @Test
-    fun deleteRule() {
+    fun snippet1() {
         runBlocking {
             index.deleteRule(ObjectID("nyID"), forwardToReplicas = true)
         }

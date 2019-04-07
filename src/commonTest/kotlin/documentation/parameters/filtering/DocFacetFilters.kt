@@ -29,7 +29,7 @@ internal class DocFacetFilters {
 //    }
 
     @Test
-    fun singleFacet() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 facetFilters {
@@ -42,7 +42,7 @@ internal class DocFacetFilters {
     }
 
     @Test
-    fun andFilter() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 facetFilters {
@@ -58,7 +58,7 @@ internal class DocFacetFilters {
     }
 
     @Test
-    fun orFilter() {
+    fun snippet3() {
         runBlocking {
             val query = query("query") {
                 facetFilters {
@@ -74,7 +74,7 @@ internal class DocFacetFilters {
     }
 
     @Test
-    fun combination() {
+    fun snippet4() {
         runBlocking {
             val query = query("query") {
                 facetFilters {

@@ -22,7 +22,7 @@ internal class DocInsideBoundingBox {
 //    }
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 insideBoundingBox {
@@ -38,7 +38,7 @@ internal class DocInsideBoundingBox {
     }
 
     @Test
-    fun queryMultiple() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 insideBoundingBox {

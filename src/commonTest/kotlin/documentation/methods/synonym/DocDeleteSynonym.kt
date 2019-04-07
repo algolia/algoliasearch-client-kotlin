@@ -17,7 +17,7 @@ internal class DocDeleteSynonym {
 //    ): DeletionIndex
 
     @Test
-    fun deleteSynonym() {
+    fun snippet1() {
         runBlocking {
             index.deleteSynonym(ObjectID("myID"), forwardToReplicas = true)
         }

@@ -17,7 +17,7 @@ internal class DocAssignUserID {
 //    ): Creation
 
     @Test
-    fun assignUserID() {
+    fun snippet1() {
         runBlocking {
             client.assignUserID(UserID("myUserID1"), ClusterName("c1-test"))
         }

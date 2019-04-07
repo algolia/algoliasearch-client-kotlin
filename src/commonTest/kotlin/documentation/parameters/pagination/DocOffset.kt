@@ -13,7 +13,7 @@ internal class DocOffset {
 //    offset: Int = record_number
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 offset = 4

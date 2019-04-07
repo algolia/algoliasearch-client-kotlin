@@ -19,7 +19,7 @@ internal class DocBatchSynonyms {
 //    ): RevisionIndex
 
     @Test
-    fun saveSynonyms() {
+    fun snippet1() {
         runBlocking {
             val synonyms = listOf(
                 Synonym.MultiWay(

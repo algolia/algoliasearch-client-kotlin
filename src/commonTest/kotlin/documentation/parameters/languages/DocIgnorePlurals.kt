@@ -17,7 +17,7 @@ internal class DocIgnorePlurals {
 //    ignorePlurals: IgnorePlurals = IgnorePlurals.Boolean|IgnorePlurals.QueryLanguages
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 queryLanguages {
@@ -31,7 +31,7 @@ internal class DocIgnorePlurals {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 ignorePlurals = IgnorePlurals.QueryLanguages(

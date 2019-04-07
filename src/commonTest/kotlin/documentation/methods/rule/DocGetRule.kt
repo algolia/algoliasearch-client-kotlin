@@ -16,7 +16,7 @@ internal class DocGetRule {
 //    ): ResponseRule
 
     @Test
-    fun getRule() {
+    fun snippet1() {
         runBlocking {
             index.getRule(ObjectID("myID"))
         }

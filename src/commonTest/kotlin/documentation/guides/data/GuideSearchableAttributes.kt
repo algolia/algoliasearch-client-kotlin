@@ -13,7 +13,7 @@ import kotlin.test.Test
 internal class GuideSearchableAttributes {
 
     @Test
-    fun snippet() {
+    fun snippet1() {
         runBlocking {
             // "title" and "comments" have the same priority
             var settings = settings {

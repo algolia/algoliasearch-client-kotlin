@@ -14,7 +14,7 @@ internal class DocMaxFacetHits {
 //    maxFacetHits: Int = number_of_facet_hits
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 maxFacetHits = 10
@@ -25,7 +25,7 @@ internal class DocMaxFacetHits {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 maxFacetHits = 5

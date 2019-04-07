@@ -21,7 +21,7 @@ internal class DocClickedObjectIDs {
 //    ): HttpResponse
 
     @Test
-    fun clickObjectIDs() {
+    fun snippet1() {
         runBlocking {
             val userToken = UserToken("user-id")
 

@@ -1,6 +1,7 @@
 package documentation.methods.indexing
 
-import documentation.TestDocumentation
+import documentation.client
+import documentation.index
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking
@@ -9,7 +10,7 @@ import kotlin.test.Test
 
 
 @Ignore
-internal class DocReplaceAllObjects : TestDocumentation() {
+internal class DocReplaceAllObjects {
 
 //    suspend fun Index.replaceAllObjects(
 //        [data](#method-param-objects): __List<JsonObject>__
@@ -21,7 +22,7 @@ internal class DocReplaceAllObjects : TestDocumentation() {
 //    ): List<Task>
 
     @Test
-    fun replaceAllObjects() {
+    fun snippet1() {
         runBlocking {
             // With JsonObject
             val json = listOf(
@@ -51,7 +52,7 @@ internal class DocReplaceAllObjects : TestDocumentation() {
     }
 
     @Test
-    fun replaceAllObjectsWait() {
+    fun snippet2() {
         runBlocking {
             client.apply {
                 val json = listOf(

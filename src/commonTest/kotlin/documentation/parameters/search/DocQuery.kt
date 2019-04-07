@@ -13,7 +13,7 @@ internal class DocQuery {
 //    index.search(Query("my query"))
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             index.search(Query(""))
         }

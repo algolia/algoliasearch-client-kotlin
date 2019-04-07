@@ -12,7 +12,7 @@ import kotlin.test.Test
 internal class GuideFilterBoolean {
 
     @Test
-    fun snippet() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 filters {

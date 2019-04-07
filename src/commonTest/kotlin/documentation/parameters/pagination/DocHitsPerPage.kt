@@ -14,7 +14,7 @@ internal class DocHitsPerPage {
 //    hitsPerPage: Int = number_of_hits
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 hitsPerPage = 20
@@ -25,7 +25,7 @@ internal class DocHitsPerPage {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 hitsPerPage = 10

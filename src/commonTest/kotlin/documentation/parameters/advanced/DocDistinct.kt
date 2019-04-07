@@ -15,7 +15,7 @@ internal class DocDistinct {
 //    distinct: Distinct = Distinct(0|1|2|3)
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val query = settings {
                 distinct = Distinct(0)
@@ -28,7 +28,7 @@ internal class DocDistinct {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 distinct = Distinct(1)

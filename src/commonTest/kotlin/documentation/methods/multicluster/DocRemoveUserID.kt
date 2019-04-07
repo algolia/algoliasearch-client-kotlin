@@ -16,7 +16,7 @@ internal class DocRemoveUserID {
 //    ): Deletion
 
     @Test
-    fun removeUserID() {
+    fun snippet1() {
         runBlocking {
             client.removeUserID(UserID("myUserID1"))
         }

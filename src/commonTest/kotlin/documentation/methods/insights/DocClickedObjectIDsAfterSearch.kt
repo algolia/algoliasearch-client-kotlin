@@ -24,7 +24,7 @@ internal class DocClickedObjectIDsAfterSearch {
 //    ): HttpResponse
 
     @Test
-    fun clickedObjectIDsAfterSearch() {
+    fun snippet1() {
         runBlocking {
             val userToken = UserToken("user-id")
 

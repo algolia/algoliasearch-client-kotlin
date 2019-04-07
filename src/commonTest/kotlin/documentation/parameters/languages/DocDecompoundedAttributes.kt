@@ -17,7 +17,7 @@ internal class DocDecompoundedAttributes {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet2() {
         runBlocking {
             val settings = settings {
                 decompoundedAttributes {

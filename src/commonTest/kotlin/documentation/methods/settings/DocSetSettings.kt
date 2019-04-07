@@ -21,7 +21,7 @@ internal class DocSetSettings {
 //    ): RevisionIndex
 
     @Test
-    fun setSettings() {
+    fun snippet1() {
         runBlocking {
             val name = Attribute("name")
             val address = Attribute("address")

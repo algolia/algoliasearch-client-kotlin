@@ -7,7 +7,8 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.CustomRankingCriterium
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
-import documentation.TestDocumentation
+import documentation.client
+import documentation.index
 import io.ktor.client.features.ResponseException
 import kotlinx.serialization.Serializable
 import runBlocking
@@ -18,10 +19,10 @@ import kotlin.test.Test
 
 @Suppress("RemoveExplicitTypeArguments")
 @Ignore
-internal class DocQuickStart : TestDocumentation() {
+internal class DocQuickStart {
 
     @Test
-    fun attributesOrder() {
+    fun snippet1() {
         runBlocking {
             val lastname = Attribute("lastname")
             val firstname = Attribute("firstname")

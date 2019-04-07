@@ -17,7 +17,7 @@ internal class DocAroundLatLngViaIP {
 //    aroundLatLngViaIP: Boolean = true|false
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             val configuration = ConfigurationSearch(
                 ApplicationID("YourApplicationID"),

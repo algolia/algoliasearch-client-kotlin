@@ -23,7 +23,7 @@ internal class DocConvertedObjectIDsAfterSearch {
 //    ): HttpResponse
 
     @Test
-    fun convertedObjectIDsAfterSearch() {
+    fun snippet1() {
         runBlocking {
             val userToken = UserToken("user-id")
 

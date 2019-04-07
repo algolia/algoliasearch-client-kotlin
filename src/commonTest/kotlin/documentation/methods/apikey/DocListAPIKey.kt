@@ -1,20 +1,20 @@
 package documentation.methods.apikey
 
-import documentation.TestDocumentation
+import documentation.client
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
 
 @Ignore
-internal class DocListAPIKey : TestDocumentation() {
+internal class DocListAPIKey {
 
 //    suspend fun ClientSearch.listAPIKeys(
 //        requestOptions: __RequestOptions?__ = null
 //    ): ResponseListAPIKey
 
     @Test
-    fun listAPIKey() {
+    fun snippet1() {
         runBlocking {
             client.listAPIKeys()
         }

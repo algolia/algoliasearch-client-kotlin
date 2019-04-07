@@ -16,7 +16,7 @@ internal class DocGetABTest {
 //    ): ResponseABTest
 
     @Test
-    fun getABTest() {
+    fun snippet1() {
         runBlocking {
             clientAnalytics.getABTest(ABTestID(42))
         }

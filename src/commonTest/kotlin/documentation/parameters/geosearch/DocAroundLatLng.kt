@@ -13,7 +13,7 @@ internal class DocAroundLatLng {
 //    aroundLatLng: Point = Point(latitude, longitude)
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             query("query") {
                 aroundLatLng = Point(latitude = 40.71f, longitude = -74.01f)

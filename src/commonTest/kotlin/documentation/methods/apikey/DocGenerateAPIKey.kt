@@ -7,14 +7,13 @@ import com.algolia.search.model.Time
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.search.Query
-import documentation.TestDocumentation
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
 
 @Ignore
-internal class DocGenerateAPIKey : TestDocumentation() {
+internal class DocGenerateAPIKey {
 
 //    fun ClientSearch.generateAPIKey(
 //        [parentAPIKey](#method-param-apikey): __APIKey__,
@@ -30,7 +29,7 @@ internal class DocGenerateAPIKey : TestDocumentation() {
 //    )
 
     @Test
-    fun generateAPIKeyQuery() {
+    fun snippet1() {
         runBlocking {
             val parentAPIKey = APIKey("SearchOnlyApiKeyKeptPrivate")
             val restriction = SecuredAPIKeyRestriction(
@@ -42,7 +41,7 @@ internal class DocGenerateAPIKey : TestDocumentation() {
     }
 
     @Test
-    fun generateAPIKeyValidUntil() {
+    fun snippet2() {
         val parentAPIKey = APIKey("SearchOnlyApiKeyKeptPrivate")
         val dayInMilliseconds = 60 * 60 * 24 * 1000
         val restriction = SecuredAPIKeyRestriction(
@@ -53,7 +52,7 @@ internal class DocGenerateAPIKey : TestDocumentation() {
     }
 
     @Test
-    fun generateAPIKeyRestrictIndices() {
+    fun snippet3() {
         val parentAPIKey = APIKey("SearchOnlyApiKeyKeptPrivate")
         val restriction = SecuredAPIKeyRestriction(
             restrictIndices = listOf(
@@ -66,7 +65,7 @@ internal class DocGenerateAPIKey : TestDocumentation() {
     }
 
     @Test
-    fun generateAPIKeyRestrictSources() {
+    fun snippet4() {
         val parentAPIKey = APIKey("SearchOnlyApiKeyKeptPrivate")
         val restriction = SecuredAPIKeyRestriction(
             restrictSources = listOf("192.168.1.0/24")
@@ -76,7 +75,7 @@ internal class DocGenerateAPIKey : TestDocumentation() {
     }
 
     @Test
-    fun generateAPIKeyUserToken() {
+    fun snippet5() {
         val parentAPIKey = APIKey("SearchOnlyApiKeyKeptPrivate")
         val restriction = SecuredAPIKeyRestriction(
             query = Query(filters = "_tags:user_42"),

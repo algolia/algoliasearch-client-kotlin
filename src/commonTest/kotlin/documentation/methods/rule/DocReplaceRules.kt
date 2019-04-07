@@ -17,7 +17,7 @@ internal class DocReplaceRules {
 //    ): RevisionIndex
 
     @Test
-    fun replaceRules() {
+    fun snippet1() {
         // Fetch your rules
         runBlocking {
             val rules = listOf<Rule>()

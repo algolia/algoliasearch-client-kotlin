@@ -28,7 +28,7 @@ internal class DocPartialUpdate {
 //    ): ResponseBatch
 
     @Test
-    fun partialUpdate() {
+    fun snippet1() {
         runBlocking {
             val partial = Partial.Update(Attribute("city"), "San Francisco")
 
@@ -37,7 +37,7 @@ internal class DocPartialUpdate {
     }
 
     @Test
-    fun partialUpdateAdd() {
+    fun snippet2() {
         runBlocking {
             val partial = Partial.Update(Attribute("state"), "California")
 
@@ -46,7 +46,7 @@ internal class DocPartialUpdate {
     }
 
     @Test
-    fun partialUpdates() {
+    fun snippet3() {
         runBlocking {
             val firstname = Attribute("firstname")
             val partials = listOf(
@@ -59,7 +59,7 @@ internal class DocPartialUpdate {
     }
 
     @Test
-    fun partialUpdatesExtraHeader() {
+    fun snippet4() {
         runBlocking {
             val firstname = Attribute("firstname")
             val partials = listOf(

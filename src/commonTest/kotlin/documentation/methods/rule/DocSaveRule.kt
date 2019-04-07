@@ -19,7 +19,7 @@ internal class DocSaveRule {
 //    ): RevisionIndex
 
     @Test
-    fun saveRule() {
+    fun snippet1() {
         runBlocking {
             val rule = Rule(
                 objectID = ObjectID("myID"),

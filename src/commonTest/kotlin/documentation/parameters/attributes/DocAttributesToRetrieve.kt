@@ -33,7 +33,7 @@ internal class DocAttributesToRetrieve {
 //    }
 
     @Test
-    fun defaultList() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 attributesToRetrieve {
@@ -48,7 +48,7 @@ internal class DocAttributesToRetrieve {
     }
 
     @Test
-    fun allAttributes() {
+    fun snippet2() {
         runBlocking {
             val settings = settings {
                 attributesToRetrieve { +"*" }
@@ -59,7 +59,7 @@ internal class DocAttributesToRetrieve {
     }
 
     @Test
-    fun currentSearch() {
+    fun snippet3() {
         runBlocking {
             val query = query("query") {
                 attributesToRetrieve {
@@ -73,7 +73,7 @@ internal class DocAttributesToRetrieve {
     }
 
     @Test
-    fun doNotRetrieve() {
+    fun snippet4() {
         runBlocking {
             val settings = settings {
                 attributesToRetrieve {

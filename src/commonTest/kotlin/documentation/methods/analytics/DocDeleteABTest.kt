@@ -16,7 +16,7 @@ internal class DocDeleteABTest {
 //    ): DeletionABTest
 
     @Test
-    fun deleteABTest() {
+    fun snippet1() {
         runBlocking {
             clientAnalytics.deleteABTest(ABTestID(42))
         }

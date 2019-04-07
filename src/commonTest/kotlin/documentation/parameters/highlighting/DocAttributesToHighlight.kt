@@ -18,7 +18,7 @@ internal class DocAttributesToHighlight {
 //    }
 
     @Test
-    fun sSettings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 attributesToHighlight {
@@ -33,7 +33,7 @@ internal class DocAttributesToHighlight {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 attributesToHighlight {

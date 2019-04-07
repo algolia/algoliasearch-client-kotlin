@@ -12,7 +12,7 @@ import kotlin.test.Test
 internal class GuideMultilingualSearch {
 
     @Test
-    fun snippet() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 searchableAttributes {

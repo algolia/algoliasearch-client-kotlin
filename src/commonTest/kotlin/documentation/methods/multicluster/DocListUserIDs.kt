@@ -16,7 +16,7 @@ internal class DocListUserIDs {
 //    ): ResponseListUserIDs
 
     @Test
-    fun listCluster() {
+    fun snippet1() {
         runBlocking {
             client.listUserIDs()
         }

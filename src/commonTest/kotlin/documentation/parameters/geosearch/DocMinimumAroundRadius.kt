@@ -13,7 +13,7 @@ internal class DocMinimumAroundRadius {
 //    minimumAroundRadius: Int = radius
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 minimumAroundRadius = 1000 // 1km

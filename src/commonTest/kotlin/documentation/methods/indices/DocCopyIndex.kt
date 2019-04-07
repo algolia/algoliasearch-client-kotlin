@@ -28,14 +28,14 @@ internal class DocCopyIndex {
 //    ): List<Task>
 
     @Test
-    fun copyIndex() {
+    fun snippet1() {
         runBlocking {
             index.copyIndex(indexName)
         }
     }
 
     @Test
-    fun copyIndexScope() {
+    fun snippet2() {
         runBlocking {
             val scopes = listOf(
                 Scope.Settings,
@@ -46,7 +46,7 @@ internal class DocCopyIndex {
     }
 
     @Test
-    fun copyAccount() {
+    fun snippet3() {
         runBlocking {
             val index1 = ClientSearch(
                 applicationID = ApplicationID("APP_ID_1"),

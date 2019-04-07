@@ -31,7 +31,7 @@ internal class DocNumericFilters {
 //    }
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 numericFilters {

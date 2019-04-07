@@ -13,7 +13,7 @@ internal class GuideForwardReplicas {
 
 
     @Test
-    fun snippet() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 typoTolerance = TypoTolerance.Strict

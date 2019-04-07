@@ -22,7 +22,7 @@ internal class DocClickedFilters {
 //    ): HttpResponse
 
     @Test
-    fun clickedFilters() {
+    fun snippet1() {
         runBlocking {
             val userToken = UserToken("user-id")
 

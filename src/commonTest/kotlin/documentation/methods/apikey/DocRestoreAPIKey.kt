@@ -1,14 +1,14 @@
 package documentation.methods.apikey
 
 import com.algolia.search.model.APIKey
-import documentation.TestDocumentation
+import documentation.client
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
 
 @Ignore
-internal class DocRestoreAPIKey : TestDocumentation() {
+internal class DocRestoreAPIKey {
 
 //    suspend fun ClientSearch.restoreAPIKey(
 //        #{apiKey}: __APIKey__,
@@ -16,7 +16,7 @@ internal class DocRestoreAPIKey : TestDocumentation() {
 //    ): CreationAPIKey
 
     @Test
-    fun restoreAPIKey() {
+    fun snippet1() {
         runBlocking {
             client.restoreAPIKey(APIKey("107da8d0afc2d225ff9a7548caaf599f"))
         }

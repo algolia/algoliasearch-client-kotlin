@@ -18,7 +18,7 @@ internal class DocAnalytics {
 //    analytics: Boolean = true|false
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 analytics = true
@@ -29,7 +29,7 @@ internal class DocAnalytics {
     }
 
     @Test
-    fun forwardIP() {
+    fun snippet2() {
         runBlocking {
             // "94.228.178.246" should be replaced with your end user IP.
             // Depending on your stack there are multiple ways to get this information.

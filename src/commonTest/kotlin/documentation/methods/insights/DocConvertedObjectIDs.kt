@@ -21,7 +21,7 @@ internal class DocConvertedObjectIDs {
 //    ): HttpResponse
 
     @Test
-    fun convertedObjectIDs() {
+    fun snippet1() {
         runBlocking {
             val userToken = UserToken("user-id")
 

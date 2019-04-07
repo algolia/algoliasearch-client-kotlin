@@ -53,7 +53,7 @@ internal class DocFilters {
 //    }
 
     @Test
-    fun searchQuery() {
+    fun snippet1() {
         runBlocking {
             // "(category:Book OR category:Ebook) AND _tags:published"
             val query = query("query") {
@@ -73,7 +73,7 @@ internal class DocFilters {
     }
 
     @Test
-    fun complexFilters() {
+    fun snippet2() {
         runBlocking {
             //  available = 1
             //  AND (category:Book OR NOT category:Ebook)
@@ -102,7 +102,7 @@ internal class DocFilters {
     }
 
     @Test
-    fun handleSpaces() {
+    fun snippet3() {
         runBlocking {
             // "\"category\":\"Books and Comics\""
             val query = query("query") {
@@ -119,7 +119,7 @@ internal class DocFilters {
     }
 
     @Test
-    fun conflictingKeyword() {
+    fun snippet4() {
         runBlocking {
             // "\"keyword\":\"OR\""
             val query = query("query") {
@@ -136,7 +136,7 @@ internal class DocFilters {
     }
 
     @Test
-    fun singleQuotes() {
+    fun snippet5() {
         runBlocking {
             // "\"content\":\"It's a wonderful day\""
             val query = query("query") {
@@ -153,7 +153,7 @@ internal class DocFilters {
     }
 
     @Test
-    fun doubleQuotes() {
+    fun snippet6() {
         runBlocking {
             // "\"content\":\"She said Hello World\""
             val query = query("query") {

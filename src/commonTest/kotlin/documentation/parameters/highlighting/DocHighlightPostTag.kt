@@ -14,7 +14,7 @@ internal class DocHighlightPostTag {
 //    highlightPostTag: String = "closing_tag"
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 highlightPostTag = "</em>"
@@ -25,7 +25,7 @@ internal class DocHighlightPostTag {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 highlightPostTag = "</strong>"

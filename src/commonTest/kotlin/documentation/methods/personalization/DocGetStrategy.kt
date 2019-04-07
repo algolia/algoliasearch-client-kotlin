@@ -1,20 +1,20 @@
 package documentation.methods.personalization
 
-import documentation.TestDocumentation
+import documentation.client
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
 
 @Ignore
-internal class DocGetStrategy : TestDocumentation() {
+internal class DocGetStrategy {
 
 //    suspend fun ClientSearch.getPersonalizationStrategy(
 //        requestOptions: __RequestOptions?__ = null
 //    ): ResponsePersonalizationStrategy
 
     @Test
-    fun getStrategy() {
+    fun snippet1() {
         runBlocking {
             client.getPersonalizationStrategy()
         }

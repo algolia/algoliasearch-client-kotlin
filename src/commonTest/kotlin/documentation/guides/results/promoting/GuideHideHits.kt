@@ -14,7 +14,7 @@ import kotlin.test.Test
 internal class GuideHideHits {
 
     @Test
-    fun snippet() {
+    fun snippet1() {
         runBlocking {
             val rules = rules {
                 +rule(

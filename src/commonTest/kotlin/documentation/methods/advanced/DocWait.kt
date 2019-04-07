@@ -27,7 +27,7 @@ internal class DocWait {
 //    ): List<TaskStatus>
 
     @Test
-    fun waitOperation() {
+    fun snippet1() {
         runBlocking {
             val json = json {
                 "Firstname" to "Jimmie"

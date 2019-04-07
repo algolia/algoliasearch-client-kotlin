@@ -24,7 +24,7 @@ internal class DocSearchSynonyms {
 //    )
 
     @Test
-    fun searchSynonyms() {
+    fun snippet1() {
         runBlocking {
             val query = SynonymQuery(
                 query = "street",

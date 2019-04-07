@@ -24,7 +24,7 @@ internal class DocSearchUserID {
 //    )
 
     @Test
-    fun searchUserID() {
+    fun snippet1() {
         runBlocking {
             val query = UserIDQuery(
                 query = "query",

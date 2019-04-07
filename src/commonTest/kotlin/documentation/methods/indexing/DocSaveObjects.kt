@@ -39,7 +39,7 @@ internal class DocSaveObjects {
 //    ): ResponseBatch
 
     @Test
-    fun replaceObjects() {
+    fun snippet1() {
         runBlocking {
             // With JsonObject
             val json = listOf(
@@ -73,7 +73,7 @@ internal class DocSaveObjects {
     }
 
     @Test
-    fun replaceObject() {
+    fun snippet2() {
         runBlocking {
             // With JsonObject
             val json = json {
@@ -100,7 +100,7 @@ internal class DocSaveObjects {
     }
 
     @Test
-    fun replaceExtraHeader() {
+    fun snippet3() {
         runBlocking {
             val json = listOf(
                 ObjectID("myID1") to json {

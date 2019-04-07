@@ -20,7 +20,7 @@ internal class DocQueryLanguages {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 queryLanguages {
@@ -35,7 +35,7 @@ internal class DocQueryLanguages {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 queryLanguages {
@@ -49,7 +49,7 @@ internal class DocQueryLanguages {
     }
 
     @Test
-    fun queryDetection() {
+    fun snippet3() {
         runBlocking {
             val query = query("query") {
                 queryLanguages {

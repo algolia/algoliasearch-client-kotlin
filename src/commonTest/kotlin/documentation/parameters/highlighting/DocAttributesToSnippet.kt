@@ -18,7 +18,7 @@ internal class DocAttributesToSnippet {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 attributesToSnippet {
@@ -32,7 +32,7 @@ internal class DocAttributesToSnippet {
     }
 
     @Test
-    fun settingsAll() {
+    fun snippet2() {
         runBlocking {
             val settings = settings {
                 attributesToSnippet {
@@ -45,7 +45,7 @@ internal class DocAttributesToSnippet {
     }
 
     @Test
-    fun query() {
+    fun snippet3() {
         runBlocking {
             val query = query("query") {
                 attributesToSnippet {

@@ -17,7 +17,7 @@ internal class DocExactOnSingleWordQuery {
 //    | [ExactOnSingleWordQuery.Word](#parameter-option-word)
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 exactOnSingleWordQuery = ExactOnSingleWordQuery.Attribute
@@ -30,7 +30,7 @@ internal class DocExactOnSingleWordQuery {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 exactOnSingleWordQuery = ExactOnSingleWordQuery.None

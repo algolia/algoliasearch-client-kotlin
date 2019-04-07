@@ -14,7 +14,7 @@ internal class DocSnippetEllipsisTest {
 //    snippetEllipsisText: String = "text"
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 snippetEllipsisText = "…"
@@ -25,7 +25,7 @@ internal class DocSnippetEllipsisTest {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 snippetEllipsisText = ""

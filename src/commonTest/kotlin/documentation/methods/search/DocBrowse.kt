@@ -17,7 +17,7 @@ internal class DocBrowse {
 //    ): List<ResponseSearch>
 
     @Test
-    fun example() {
+    fun snippet1() {
         runBlocking {
             val query = Query()
 
@@ -28,7 +28,7 @@ internal class DocBrowse {
     }
 
     @Test
-    fun extraHttpHeaders() {
+    fun snippet2() {
         runBlocking {
             val query = Query(query = "")
             val requestOptions = requestOptions {

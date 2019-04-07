@@ -19,7 +19,7 @@ internal class DocConfigurationTimeout {
 //    ) : Configuration
 
     @Test
-    fun configurationTimeout() {
+    fun snippet1() {
         val configuration = ConfigurationSearch(
             apiKey = APIKey("YourApplicationId"),
             applicationID = ApplicationID("YourAPIKey"),

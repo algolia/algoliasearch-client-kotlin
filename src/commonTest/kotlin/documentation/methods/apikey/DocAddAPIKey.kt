@@ -6,13 +6,13 @@ import com.algolia.search.model.apikey.APIKeyParams
 import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.TypoTolerance
-import documentation.TestDocumentation
+import documentation.client
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
 @Ignore
-internal class DocAddAPIKey : TestDocumentation() {
+internal class DocAddAPIKey {
 
 //    suspend fun ClientSearch.addAPIKey(
 //        params: __APIKeyParams__,
@@ -32,7 +32,7 @@ internal class DocAddAPIKey : TestDocumentation() {
 //    )
 
     @Test
-    fun addAPIKey() {
+    fun snippet1() {
         runBlocking {
             val params = APIKeyParams(
                 ACLs = listOf(ACL.Search)
@@ -46,7 +46,7 @@ internal class DocAddAPIKey : TestDocumentation() {
     }
 
     @Test
-    fun addAPIKeyAdvanced() {
+    fun snippet2() {
         runBlocking {
             val params = APIKeyParams(
                 ACLs = listOf(ACL.Search),

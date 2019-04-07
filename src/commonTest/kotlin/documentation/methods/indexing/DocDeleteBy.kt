@@ -19,7 +19,7 @@ internal class DocDeleteBy {
 //    ): RevisionIndex
 
     @Test
-    fun deleteObjectsBy() {
+    fun snippet1() {
         runBlocking {
             val query = DeleteByQuery(
                 filters = "category:car",
@@ -31,7 +31,7 @@ internal class DocDeleteBy {
     }
 
     @Test
-    fun deleteObjectsByExtraHeaders() {
+    fun snippet2() {
         runBlocking {
             val query = DeleteByQuery(
                 filters = "category:car",

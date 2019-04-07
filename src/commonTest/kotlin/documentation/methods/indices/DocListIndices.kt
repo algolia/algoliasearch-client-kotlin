@@ -14,7 +14,7 @@ internal class DocListIndices {
 //    ): ResponseListIndices
 
     @Test
-    fun listIndices() {
+    fun snippet1() {
         runBlocking {
             val indices = client.listIndices()
 

@@ -16,7 +16,7 @@ internal class DocListABTest {
 //    ): ResponseABTests
 
     @Test
-    fun listABTest() {
+    fun snippet1() {
         runBlocking {
             clientAnalytics.listABTests(10, 20)
         }

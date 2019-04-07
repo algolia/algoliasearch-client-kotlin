@@ -15,7 +15,7 @@ internal class DocBrowseRules {
 //    ): List<ResponseSearchRules>
 
     @Test
-    fun browseRules() {
+    fun snippet1() {
         runBlocking {
             index.browseRules().forEach {
                 println(it)

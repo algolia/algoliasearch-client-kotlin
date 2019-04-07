@@ -13,7 +13,7 @@ internal class DocSynonyms {
 //    synonyms: Boolean = true|false
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 synonyms = true

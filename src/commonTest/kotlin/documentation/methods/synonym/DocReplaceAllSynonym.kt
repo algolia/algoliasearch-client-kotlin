@@ -17,7 +17,7 @@ internal class DocReplaceAllSynonym {
 //    ): RevisionIndex
 
     @Test
-    fun synonyms() {
+    fun snippet1() {
         runBlocking {
             // Fetch your synonyms
             val synonyms = listOf<Synonym>()

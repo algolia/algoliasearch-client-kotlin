@@ -14,7 +14,7 @@ internal class DocGetSettings {
 //    ): Settings
 
     @Test
-    fun getSettings() {
+    fun snippet1() {
         runBlocking {
             val settings = index.getSettings()
 

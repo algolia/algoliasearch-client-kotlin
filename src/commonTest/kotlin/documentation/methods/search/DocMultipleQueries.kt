@@ -20,7 +20,7 @@ internal class DocMultipleQueries {
 //    ): ResponseSearches
 
     @Test
-    fun example() {
+    fun snippet1() {
         runBlocking {
             val queries = listOf(
                 IndexQuery(
@@ -42,7 +42,7 @@ internal class DocMultipleQueries {
     }
 
     @Test
-    fun exampleExtraHeaders() {
+    fun snippet2() {
         runBlocking {
             val queries = listOf(
                 IndexQuery(

@@ -16,7 +16,7 @@ internal class DocCopySettings {
 //    ): RevisionIndex
 
     @Test
-    fun copySettings() {
+    fun snippet1() {
         runBlocking {
             index.copySettings(indexName)
         }

@@ -13,7 +13,7 @@ import kotlin.test.Test
 internal class GuideIndexingLongDocument {
 
     @Test
-    fun snippet() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 attributeForDistinct = Attribute("section")

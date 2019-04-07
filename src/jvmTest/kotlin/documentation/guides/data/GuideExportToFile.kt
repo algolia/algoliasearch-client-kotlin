@@ -14,7 +14,7 @@ import java.io.File
 internal class GuideExportToFile {
 
     @Test
-    fun snippet() {
+    fun snippet1() {
         runBlocking {
             val records = index.browseObjects().flatMap { response ->
                 response.hits.map { it.json }

@@ -17,7 +17,7 @@ internal class DocRuleContexts {
 //    }
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 ruleContexts {

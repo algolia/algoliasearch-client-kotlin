@@ -18,7 +18,7 @@ internal class DocDisableExactOnAttributes {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 disableExactOnAttributes { +"keywords" }
@@ -29,7 +29,7 @@ internal class DocDisableExactOnAttributes {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 disableExactOnAttributes { +"keywords" }

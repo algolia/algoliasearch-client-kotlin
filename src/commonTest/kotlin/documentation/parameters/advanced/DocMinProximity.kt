@@ -14,7 +14,7 @@ internal class DocMinProximity {
 //    minProximity: Int = integer // from 1 to 7
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 minProximity = 1
@@ -25,7 +25,7 @@ internal class DocMinProximity {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 minProximity = 2

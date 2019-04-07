@@ -13,7 +13,7 @@ import kotlin.test.Test
 internal class GuideSearchReplicas {
 
     @Test
-    fun snippet() {
+    fun snippet1() {
         runBlocking {
             val sortByPrice = false
             val indexName = if (sortByPrice) "products_price_desc" else "products"

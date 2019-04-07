@@ -18,7 +18,7 @@ internal class DocConfigurationHeaders {
 //    ) : Configuration
 
     @Test
-    fun configurationHeaders() {
+    fun snippet1() {
         val configuration = ConfigurationSearch(
             apiKey = APIKey("YourApplicationId"),
             applicationID = ApplicationID("YourAPIKey"),

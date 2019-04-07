@@ -14,7 +14,7 @@ internal class DocAttributeForDistinct {
 //  attributeForDistinct: Attribute = Attribute("attribute")
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 attributeForDistinct = Attribute("url")

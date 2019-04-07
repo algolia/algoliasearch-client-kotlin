@@ -22,7 +22,7 @@ internal class DocConvertedFilters {
 //    ): HttpResponse
 
     @Test
-    fun convertedFilters() {
+    fun snippet1() {
         runBlocking {
             val userToken = UserToken("user-id")
 

@@ -13,7 +13,7 @@ internal class DocPaginationLimitedTo {
 //   paginationLimitedTo: Int = number_of_records
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 paginationLimitedTo = 1000

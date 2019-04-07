@@ -14,7 +14,7 @@ internal class DocAllowTyposOnNumericToken {
 //    allowTyposOnNumericTokens: Boolean = true|false
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 allowTyposOnNumericTokens = false
@@ -25,7 +25,7 @@ internal class DocAllowTyposOnNumericToken {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 allowTyposOnNumericTokens = false

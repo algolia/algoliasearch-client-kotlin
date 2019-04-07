@@ -13,7 +13,7 @@ internal class DocPage {
 //    page: Int = page_number
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 page = 0

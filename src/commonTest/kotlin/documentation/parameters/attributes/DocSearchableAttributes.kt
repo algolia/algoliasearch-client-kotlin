@@ -19,7 +19,7 @@ internal class DocSearchableAttributes {
 //    }
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 searchableAttributes {

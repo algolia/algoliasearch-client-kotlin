@@ -15,7 +15,7 @@ import kotlin.test.Test
 internal class GuideDetectingKeywords {
 
     @Test
-    fun snippet() {
+    fun snippet1() {
         runBlocking {
             val rules = rules {
                 +rule(

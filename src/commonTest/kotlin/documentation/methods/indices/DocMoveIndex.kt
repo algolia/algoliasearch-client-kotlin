@@ -16,7 +16,7 @@ internal class DocMoveIndex {
 //    ): RevisionIndex
 
     @Test
-    fun moveIndex() {
+    fun snippet1() {
         runBlocking {
             index.moveIndex(indexName)
         }

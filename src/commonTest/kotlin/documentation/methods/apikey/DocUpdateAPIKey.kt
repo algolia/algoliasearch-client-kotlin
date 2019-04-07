@@ -4,14 +4,14 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.apikey.APIKeyParams
-import documentation.TestDocumentation
+import documentation.client
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
 
 @Ignore
-internal class DocUpdateAPIKey : TestDocumentation() {
+internal class DocUpdateAPIKey {
 
 //    suspend fun ClientSearch.updateAPIKey(
 //        #{apiKey}: __APIKey__,
@@ -20,7 +20,7 @@ internal class DocUpdateAPIKey : TestDocumentation() {
 //    ): RevisionAPIKey
 
     @Test
-    fun updateAPIKey() {
+    fun snippet1() {
         runBlocking {
             // Update an existing API key that is valid for 300 seconds
             val apiKey = APIKeyParams(
@@ -33,7 +33,7 @@ internal class DocUpdateAPIKey : TestDocumentation() {
     }
 
     @Test
-    fun updateAPIKeyAdvanced() {
+    fun snippet2() {
         runBlocking {
             // Update an existing index specific API key valid for 300 seconds,
             // with a rate limit of 100 calls per hour per IP and a maximum of 20 hits

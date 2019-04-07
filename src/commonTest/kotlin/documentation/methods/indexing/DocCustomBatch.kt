@@ -8,7 +8,8 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multipleindex.BatchOperationIndex
-import documentation.TestDocumentation
+import documentation.client
+import indexName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking
@@ -17,15 +18,18 @@ import kotlin.test.Test
 
 
 @Ignore
-internal class DocCustomBatch : TestDocumentation() {
+internal class DocCustomBatch {
 
 //    suspend fun ClientSearch.multipleBatchObjects(
 //        #{operations}: __List<BatchOperationIndex>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatches
 
+    private val indexName1 = indexName
+    private val indexName2 = indexName
+
     @Test
-    fun batch() {
+    fun snippet1() {
         runBlocking {
             @Serializable
             data class Contact(
@@ -83,7 +87,7 @@ internal class DocCustomBatch : TestDocumentation() {
     }
 
     @Test
-    fun batchExtraHeaders() {
+    fun snippet2() {
         runBlocking {
             @Serializable
             data class Contact(

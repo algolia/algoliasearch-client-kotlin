@@ -13,7 +13,7 @@ internal class DocEnablePersonalization {
 //    enablePersonalization: Boolean = true|false
 
     @Test
-    fun query() {
+    fun snippet1() {
         runBlocking {
             val query = query("query") {
                 enablePersonalization = true

@@ -27,7 +27,7 @@ internal class DocSearchRules {
 //    )
 
     @Test
-    fun searchRules() {
+    fun snippet1() {
         runBlocking {
             val rule = RuleQuery(
                 anchoring = Anchoring.Is,

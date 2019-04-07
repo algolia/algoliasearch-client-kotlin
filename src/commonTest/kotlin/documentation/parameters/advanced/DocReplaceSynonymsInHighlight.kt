@@ -14,7 +14,7 @@ internal class DocReplaceSynonymsInHighlight {
 //    replaceSynonymsInHighlight: Boolean = true|false
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 replaceSynonymsInHighlight = true
@@ -25,7 +25,7 @@ internal class DocReplaceSynonymsInHighlight {
     }
 
     @Test
-    fun query() {
+    fun snippet2() {
         runBlocking {
             val query = query("query") {
                 replaceSynonymsInHighlight = true

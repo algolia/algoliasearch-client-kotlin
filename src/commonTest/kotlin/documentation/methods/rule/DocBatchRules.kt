@@ -18,7 +18,7 @@ internal class DocBatchRules {
 //    ): RevisionIndex
 
     @Test
-    fun batchRules() {
+    fun snippet1() {
         runBlocking {
             val rules = listOf<Rule>()
 

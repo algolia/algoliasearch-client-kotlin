@@ -14,7 +14,7 @@ internal class DocDeleteIndex {
 //    ): DeletionIndex
 
     @Test
-    fun deleteIndex() {
+    fun snippet1() {
         runBlocking {
             index.deleteIndex()
         }

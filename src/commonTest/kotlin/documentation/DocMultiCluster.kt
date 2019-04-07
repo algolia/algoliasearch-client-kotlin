@@ -15,7 +15,7 @@ import kotlin.test.Test
 internal class DocMultiCluster {
 
     @Test
-    fun snippet() {
+    fun snippet1() {
         runBlocking {
             val client = ClientSearch(
                 ConfigurationSearch(

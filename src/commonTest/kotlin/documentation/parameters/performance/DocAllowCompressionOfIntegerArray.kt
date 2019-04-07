@@ -13,7 +13,7 @@ internal class DocAllowCompressionOfIntegerArray {
 //    allowCompressionOfIntegerArray: Boolean = true|false
 
     @Test
-    fun settings() {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 allowCompressionOfIntegerArray = true

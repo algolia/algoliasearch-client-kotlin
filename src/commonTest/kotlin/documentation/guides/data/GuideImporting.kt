@@ -11,7 +11,7 @@ import kotlin.test.Test
 internal class GuideImporting {
 
     @Test
-    fun snippet() {
+    fun snippet1() {
         runBlocking {
             val records = listOf<JsonObject>()
 
