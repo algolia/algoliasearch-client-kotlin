@@ -1,8 +1,10 @@
 package documentation.methods.indexing
 
+import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Partial
+import com.algolia.search.model.multicluster.UserID
 import documentation.index
 import runBlocking
 import kotlin.test.Ignore
@@ -26,19 +28,6 @@ internal class DocPartialUpdate {
 //    ): ResponseBatch
 
     @Test
-    fun partialUpdates() {
-        runBlocking {
-            val firstname = Attribute("firstname")
-            val partials = listOf(
-                ObjectID("myID1") to Partial.Update(firstname, "Jimmie"),
-                ObjectID("myID2") to Partial.Update(firstname, "Warren")
-            )
-
-            index.partialUpdateObjects(partials)
-        }
-    }
-
-    @Test
     fun partialUpdate() {
         runBlocking {
             val partial = Partial.Update(Attribute("city"), "San Francisco")
@@ -53,6 +42,35 @@ internal class DocPartialUpdate {
             val partial = Partial.Update(Attribute("state"), "California")
 
             index.partialUpdateObject(ObjectID("myID"), partial)
+        }
+    }
+
+    @Test
+    fun partialUpdates() {
+        runBlocking {
+            val firstname = Attribute("firstname")
+            val partials = listOf(
+                ObjectID("myID1") to Partial.Update(firstname, "Jimmie"),
+                ObjectID("myID2") to Partial.Update(firstname, "Warren")
+            )
+
+            index.partialUpdateObjects(partials)
+        }
+    }
+
+    @Test
+    fun partialUpdatesExtraHeader() {
+        runBlocking {
+            val firstname = Attribute("firstname")
+            val partials = listOf(
+                ObjectID("myID1") to Partial.Update(firstname, "Jimmie"),
+                ObjectID("myID2") to Partial.Update(firstname, "Warren")
+            )
+            val requestOptions = requestOptions {
+                headerAlgoliaUserId(UserID("user123"))
+            }
+
+            index.partialUpdateObjects(partials, requestOptions = requestOptions)
         }
     }
 }
