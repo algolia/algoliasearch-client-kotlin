@@ -39,14 +39,14 @@ internal class DocReplaceAllObjects : TestDocumentation() {
 
             // With serializable class
             @Serializable
-            data class Person(val firstname: String, val lastname: String)
+            data class Contact(val firstname: String, val lastname: String)
 
-            val persons = listOf(
-                Person("Jimmie", "Barninger"),
-                Person("Warren", "Speach")
+            val contacts = listOf(
+                Contact("Jimmie", "Barninger"),
+                Contact("Warren", "Speach")
             )
 
-            index.replaceAllObjects(Person.serializer(), persons)
+            index.replaceAllObjects(Contact.serializer(), contacts)
         }
     }
 

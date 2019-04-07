@@ -1,10 +1,12 @@
 package documentation.methods.indexing
 
+import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
+import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import documentation.TestDocumentation
 import kotlinx.serialization.Serializable
@@ -26,7 +28,7 @@ internal class DocCustomBatch : TestDocumentation() {
     fun batch() {
         runBlocking {
             @Serializable
-            data class Person(
+            data class Contact(
                 val firstname: String,
                 val lastname: String,
                 override val objectID: ObjectID
@@ -45,15 +47,15 @@ internal class DocCustomBatch : TestDocumentation() {
                 BatchOperationIndex(
                     indexName = indexName1,
                     operation = BatchOperation.AddObject.from(
-                        serializer = Person.serializer(),
-                        data = Person("Jimmie", "Barninger", ObjectID("myID1"))
+                        serializer = Contact.serializer(),
+                        data = Contact("Jimmie", "Barninger", ObjectID("myID1"))
                     )
                 ),
                 BatchOperationIndex(
                     indexName = indexName1,
                     operation = BatchOperation.UpdateObject.from(
-                        serializer = Person.serializer(),
-                        data = Person("Max", "Barninger", ObjectID("myID2"))
+                        serializer = Contact.serializer(),
+                        data = Contact("Max", "Barninger", ObjectID("myID2"))
                     )
                 ),
                 BatchOperationIndex(
@@ -77,6 +79,68 @@ internal class DocCustomBatch : TestDocumentation() {
                 )
             )
             client.multipleBatchObjects(operations)
+        }
+    }
+
+    @Test
+    fun batchExtraHeaders() {
+        runBlocking {
+            @Serializable
+            data class Contact(
+                val firstname: String,
+                val lastname: String,
+                override val objectID: ObjectID
+            ) : Indexable
+
+            val operations = listOf(
+                BatchOperationIndex(
+                    indexName = indexName1,
+                    operation = BatchOperation.AddObject(
+                        json {
+                            "firstname" to "Jimmie"
+                            "lastname" to "Barninger"
+                        }
+                    )
+                ),
+                BatchOperationIndex(
+                    indexName = indexName1,
+                    operation = BatchOperation.AddObject.from(
+                        serializer = Contact.serializer(),
+                        data = Contact("Jimmie", "Barninger", ObjectID("myID1"))
+                    )
+                ),
+                BatchOperationIndex(
+                    indexName = indexName1,
+                    operation = BatchOperation.UpdateObject.from(
+                        serializer = Contact.serializer(),
+                        data = Contact("Max", "Barninger", ObjectID("myID2"))
+                    )
+                ),
+                BatchOperationIndex(
+                    indexName = indexName1,
+                    operation = BatchOperation.UpdateObject.from(
+                        objectID = ObjectID("myID3"),
+                        partial = Partial.Update(Attribute("firstname"), "McFarway")
+                    )
+                ),
+                BatchOperationIndex(
+                    indexName = indexName1,
+                    operation = BatchOperation.UpdateObject.from(
+                        objectID = ObjectID("myID4"),
+                        partial = Partial.Update(Attribute("firstname"), "Warren"),
+                        createIfNotExists = false
+                    )
+                ),
+                BatchOperationIndex(
+                    indexName = indexName2,
+                    operation = BatchOperation.DeleteObject(ObjectID("myID5"))
+                )
+            )
+            val requestOptions = requestOptions {
+                headerAlgoliaUserId(UserID("user123"))
+            }
+
+            client.multipleBatchObjects(operations, requestOptions)
         }
     }
 }

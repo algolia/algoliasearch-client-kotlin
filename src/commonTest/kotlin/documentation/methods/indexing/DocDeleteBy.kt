@@ -1,7 +1,8 @@
 package documentation.methods.indexing
 
+import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.indexing.DeleteByQuery
-import com.algolia.search.model.search.AroundRadius
+import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.search.Point
 import documentation.index
 import runBlocking
@@ -22,11 +23,25 @@ internal class DocDeleteBy {
         runBlocking {
             val query = DeleteByQuery(
                 filters = "category:car",
-                aroundLatLng = Point(40.71f, -74.01f),
-                aroundRadius = AroundRadius.InMeters(40)
+                aroundLatLng = Point(40.71f, -74.01f)
             )
 
             index.deleteObjectsBy(query)
+        }
+    }
+
+    @Test
+    fun deleteObjectsByExtraHeaders() {
+        runBlocking {
+            val query = DeleteByQuery(
+                filters = "category:car",
+                aroundLatLng = Point(40.71f, -74.01f)
+            )
+            val requestOptions = requestOptions {
+                headerAlgoliaUserId(UserID("user123"))
+            }
+
+            index.deleteObjectsBy(query, requestOptions)
         }
     }
 }

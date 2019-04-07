@@ -1,6 +1,8 @@
 package documentation.methods.indexing
 
+import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.ObjectID
+import com.algolia.search.model.multicluster.UserID
 import documentation.index
 import runBlocking
 import kotlin.test.Ignore
@@ -35,6 +37,18 @@ internal class DocDeleteObject {
             val objectID = ObjectID("myID1")
 
             index.deleteObject(objectID)
+        }
+    }
+
+    @Test
+    fun deletesExtraHeader() {
+        runBlocking {
+            val objectIDS = listOf(ObjectID("myID1"), ObjectID("myID2"))
+            val requestOptions = requestOptions {
+                headerAlgoliaUserId(UserID("user123"))
+            }
+
+            index.deleteObjects(objectIDS, requestOptions)
         }
     }
 }

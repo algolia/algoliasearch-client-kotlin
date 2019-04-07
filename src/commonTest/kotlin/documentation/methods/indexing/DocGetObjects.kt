@@ -1,8 +1,10 @@
 package documentation.methods.indexing
 
+import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
+import com.algolia.search.model.multicluster.UserID
 import documentation.index
 import kotlinx.serialization.Serializable
 import runBlocking
@@ -43,7 +45,7 @@ internal class DocGetObjects {
     fun getObjectSerializer() {
         runBlocking {
             @Serializable
-            data class Person(
+            data class Contact(
                 val firstname: String,
                 val lastname: String,
                 override val objectID: ObjectID
@@ -52,7 +54,7 @@ internal class DocGetObjects {
             val objectID = ObjectID("myID1")
 
             index.getObject(objectID)
-            index.getObject(Person.serializer(), objectID)
+            index.getObject(Contact.serializer(), objectID)
         }
     }
 
@@ -70,6 +72,17 @@ internal class DocGetObjects {
             val attributes = listOf(Attribute("firstname"), Attribute("lastname"))
 
             index.getObjects(objectIDs, attributes)
+        }
+    }
+
+    @Test
+    fun getObjectsExtraHeader() {
+        runBlocking {
+            val requestOptions = requestOptions {
+                headerAlgoliaUserId(UserID("user123"))
+            }
+
+            index.getObjects(listOf(ObjectID("myID1"), ObjectID("myID2")), requestOptions = requestOptions)
         }
     }
 }
