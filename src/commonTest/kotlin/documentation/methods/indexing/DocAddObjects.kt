@@ -1,7 +1,9 @@
 package documentation.methods.indexing
 
+import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
+import com.algolia.search.model.multicluster.UserID
 import documentation.index
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
@@ -54,14 +56,14 @@ internal class DocAddObjects {
 
             // With serializable class
             @Serializable
-            data class Person(val firstname: String, val lastname: String)
+            data class Contact(val firstname: String, val lastname: String)
 
-            val persons = listOf(
-                Person("Jimmie", "Barninger"),
-                Person("Warren", "Speach")
+            val contacts = listOf(
+                Contact("Jimmie", "Barninger"),
+                Contact("Warren", "Speach")
             )
 
-            index.saveObjects(Person.serializer(), persons)
+            index.saveObjects(Contact.serializer(), contacts)
         }
     }
 
@@ -86,18 +88,18 @@ internal class DocAddObjects {
 
             // With serializable class
             @Serializable
-            data class Person(
+            data class Contact(
                 val firstname: String,
                 val lastname: String,
                 override val objectID: ObjectID
             ) : Indexable
 
-            val persons = listOf(
-                Person("Jimmie", "Barninger", ObjectID("myID")),
-                Person("Jimmie", "Barninger", ObjectID("myID"))
+            val contacts = listOf(
+                Contact("Jimmie", "Barninger", ObjectID("myID")),
+                Contact("Jimmie", "Barninger", ObjectID("myID"))
             )
 
-            index.saveObjects(Person.serializer(), persons)
+            index.saveObjects(Contact.serializer(), contacts)
         }
     }
 
@@ -115,15 +117,38 @@ internal class DocAddObjects {
 
             /// With serializable class
             @Serializable
-            data class Person(
+            data class Contact(
                 val firstname: String,
                 val lastname: String,
                 override val objectID: ObjectID
             ) : Indexable
 
-            val person = Person("Jimmie", "Barninger", ObjectID("myID"))
+            val contact = Contact("Jimmie", "Barninger", ObjectID("myID"))
 
-            index.saveObject(Person.serializer(), person)
+            index.saveObject(Contact.serializer(), contact)
+        }
+    }
+
+    @Test
+    fun saveObjectExtraHeader() {
+        runBlocking {
+            val json = listOf(
+                json {
+                    "objectID" to ObjectID("myID1")
+                    "firstname" to "Jimmie"
+                    "lastname" to "Barninger"
+                },
+                json {
+                    "objectID" to ObjectID("myID2")
+                    "firstname" to "Warren"
+                    "lastname" to "Speach"
+                }
+            )
+            val requestOptions = requestOptions {
+                headerAlgoliaUserId(UserID("user123"))
+            }
+
+            index.saveObjects(json, requestOptions)
         }
     }
 }
