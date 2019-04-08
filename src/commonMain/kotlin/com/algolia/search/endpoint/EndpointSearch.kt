@@ -111,7 +111,7 @@ public interface EndpointSearch {
      * marked as disjunctive.
      *
      * @param query The [Query] used to search.
-     * @param disjunctiveFacet List of [Attribute] that are marked as disjunctive facets.
+     * @param disjunctiveFacets List of [Attribute] that are marked as disjunctive facets.
      * @param filters The [Filter.Facet] to be applied
      * @param requestOptions [RequestOptions] sent along with the query.
      * @return [ResponseSearch]
