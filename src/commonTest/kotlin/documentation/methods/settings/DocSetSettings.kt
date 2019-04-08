@@ -1,9 +1,8 @@
 package documentation.methods.settings
 
-import com.algolia.search.model.Attribute
-import com.algolia.search.model.settings.CustomRankingCriterium
-import com.algolia.search.model.settings.SearchableAttribute
-import com.algolia.search.model.settings.Settings
+import com.algolia.search.dsl.customRanking
+import com.algolia.search.dsl.searchableAttributes
+import com.algolia.search.dsl.settings
 import documentation.index
 import runBlocking
 import kotlin.test.Ignore
@@ -23,18 +22,32 @@ internal class DocSetSettings {
     @Test
     fun snippet1() {
         runBlocking {
-            val name = Attribute("name")
-            val address = Attribute("address")
-            val followers = Attribute("followers")
-            val settings = Settings(
-                searchableAttributes = listOf(
-                    SearchableAttribute.Default(name),
-                    SearchableAttribute.Default(address)
-                ),
-                customRanking = listOf(
-                    CustomRankingCriterium.Desc(followers)
-                )
-            )
+            val settings = settings {
+                searchableAttributes {
+                    +"name"
+                    +"address"
+                }
+                customRanking {
+                    +Desc("followers")
+                }
+            }
+
+            index.setSettings(settings)
+        }
+    }
+
+    @Test
+    fun snippet2() {
+        runBlocking {
+            val settings = settings {
+                searchableAttributes {
+                    +"name"
+                    +"address"
+                }
+                customRanking {
+                    +Desc("followers")
+                }
+            }
 
             index.setSettings(settings, forwardToReplicas = true)
         }
