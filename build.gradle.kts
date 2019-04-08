@@ -7,8 +7,8 @@ plugins {
     id("maven-publish")
 }
 
-version = "1.0.0"
-group = "com.algolia"
+version = Library.version
+group = Library.group
 
 repositories {
     jcenter()
