@@ -58,7 +58,7 @@ internal actual fun runBlocking(coroutineContext: CoroutineContext, block: suspe
 
 internal actual object DateFormat {
 
-    internal val dateFormat = SimpleDateFormat("YYYY-MM-dd-HH-mm-ss").also {
+    private val dateFormat = SimpleDateFormat("YYYY-MM-dd-HH-mm-ss").also {
         it.timeZone = TimeZone.getTimeZone("UTC")
     }
 
