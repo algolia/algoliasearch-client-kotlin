@@ -43,9 +43,7 @@ public sealed class ACL(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): ACL {
-            val string = StringSerializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = StringSerializer.deserialize(decoder)) {
                 KeySearch -> Search
                 KeyBrowse -> Browse
                 KeyAddObject -> AddObject

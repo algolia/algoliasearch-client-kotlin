@@ -57,9 +57,7 @@ public sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String
         }
 
         override fun deserialize(decoder: Decoder): RemoveWordIfNoResults {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyNone -> None
                 KeyLastWords -> LastWords
                 KeyFirstWords -> FirstWords

@@ -46,9 +46,7 @@ public sealed class AlternativesAsExact(override val raw: String) : Raw<String> 
         }
 
         override fun deserialize(decoder: Decoder): AlternativesAsExact {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyIgnorePlurals -> IgnorePlurals
                 KeySingleWordSynonym -> SingleWordSynonym
                 KeyMultiWordsSynonym -> MultiWordsSynonym

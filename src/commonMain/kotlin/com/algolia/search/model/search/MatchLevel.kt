@@ -33,9 +33,7 @@ public sealed class MatchLevel(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): MatchLevel {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyNone -> None
                 KeyPartial -> Partial
                 KeyFull -> Full

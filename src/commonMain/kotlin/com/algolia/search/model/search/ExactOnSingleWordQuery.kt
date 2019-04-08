@@ -51,9 +51,7 @@ public sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<Strin
         }
 
         override fun deserialize(decoder: Decoder): ExactOnSingleWordQuery {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyAttribute -> Attribute
                 KeyNone -> None
                 KeyWord -> Word

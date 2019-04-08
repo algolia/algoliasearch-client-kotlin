@@ -36,9 +36,7 @@ public sealed class ABTestStatus(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): ABTestStatus {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyActive -> Active
                 KeyStopped -> Stopped
                 KeyExpired -> Expired

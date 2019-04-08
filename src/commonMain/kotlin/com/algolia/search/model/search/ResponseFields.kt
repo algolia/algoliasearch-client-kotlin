@@ -49,9 +49,7 @@ public sealed class ResponseFields(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): ResponseFields {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyStar -> All
                 KeyAroundLatLng -> AroundLatLng
                 KeyAutomaticRadius -> AutomaticRadius

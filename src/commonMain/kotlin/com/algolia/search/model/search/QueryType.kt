@@ -50,9 +50,7 @@ public sealed class QueryType(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): QueryType {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyPrefixLast -> PrefixLast
                 KeyPrefixAll -> PrefixAll
                 KeyPrefixNone -> PrefixNone

@@ -36,9 +36,7 @@ public sealed class Anchoring(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): Anchoring {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyIs -> Is
                 KeyEndsWith -> EndsWith
                 KeyStartsWith -> StartsWith

@@ -33,9 +33,7 @@ public sealed class Scope(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): Scope {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeySettings -> Settings
                 KeySynonyms -> Synonyms
                 KeyRules -> Rules

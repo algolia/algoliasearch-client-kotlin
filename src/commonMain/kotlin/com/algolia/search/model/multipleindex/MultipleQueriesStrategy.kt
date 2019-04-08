@@ -34,9 +34,7 @@ public sealed class MultipleQueriesStrategy(override val raw: String) : Raw<Stri
         }
 
         override fun deserialize(decoder: Decoder): MultipleQueriesStrategy {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyNone -> None
                 KeyStopIfEnoughMatches -> StopIfEnoughMatches
                 else -> Other(string)

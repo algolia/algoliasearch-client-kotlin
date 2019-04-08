@@ -35,9 +35,7 @@ public sealed class LogType(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): LogType {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyAll -> All
                 KeyQuery -> Query
                 KeyBuild -> Build

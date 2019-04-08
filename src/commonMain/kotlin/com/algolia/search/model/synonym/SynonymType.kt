@@ -43,9 +43,7 @@ public sealed class SynonymType(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): SynonymType {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyOneWaySynonym -> OneWay
                 KeySynonym -> MultiWay
                 KeyAlternativeCorrection1 -> AlternativeCorrections(Typo.One)

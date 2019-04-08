@@ -30,9 +30,7 @@ public sealed class TaskStatus(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): TaskStatus {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyPublished -> Published
                 KeyNotPublished -> NotPublished
                 else -> Other(string)

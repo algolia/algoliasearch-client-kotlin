@@ -31,9 +31,7 @@ public sealed class EventType(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): EventType {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyView -> View
                 KeyClick -> Click
                 KeyConversion -> Conversion

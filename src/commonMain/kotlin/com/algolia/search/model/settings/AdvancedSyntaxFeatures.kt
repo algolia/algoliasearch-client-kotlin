@@ -28,9 +28,7 @@ public sealed class AdvancedSyntaxFeatures(override val raw: String) : Raw<Strin
         }
 
         override fun deserialize(decoder: Decoder): AdvancedSyntaxFeatures {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyExactPhrase -> ExactPhrase
                 KeyExcludeWords -> ExcludeWords
                 else -> Other(string)

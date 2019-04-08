@@ -42,9 +42,7 @@ public sealed class SortFacetsBy(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): SortFacetsBy {
-            val string = serializer.deserialize(decoder)
-
-            return when (string) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyCount -> Count
                 KeyAlpha -> Alpha
                 else -> Other(string)

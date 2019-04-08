@@ -29,9 +29,7 @@ public sealed class IgnorePlurals {
         }
 
         override fun deserialize(decoder: Decoder): IgnorePlurals {
-            val element = decoder.asJsonInput()
-
-            return when (element) {
+            return when (val element = decoder.asJsonInput()) {
                 is JsonArray -> QueryLanguages(element.map {
                     Json.nonstrict.fromJson(
                         QueryLanguage,
