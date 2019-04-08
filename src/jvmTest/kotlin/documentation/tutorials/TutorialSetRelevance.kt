@@ -11,9 +11,11 @@ import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import com.algolia.search.model.search.AlternativesAsExact
 import kotlinx.coroutines.runBlocking
+import org.junit.Ignore
 import org.junit.Test
 
 
+@Ignore
 internal class TutorialSetRelevance {
 
     @Test
