@@ -10,6 +10,8 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.SortFacetsBy
+import com.algolia.search.model.settings.Settings
+import documentation.client
 import documentation.index
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
@@ -187,6 +189,18 @@ internal class DocPhilosophy {
                 TODO()
             } catch (exception: Exception) {
                 TODO()
+            }
+        }
+    }
+
+    @Test
+    fun waitAll() {
+        runBlocking {
+            index.apply {
+                setSettings(Settings()).wait()
+            }
+            client.run {
+                multipleBatchObjects(listOf()).waitAll()
             }
         }
     }
