@@ -9,6 +9,7 @@ import com.algolia.search.model.synonym.Synonym
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.features.DefaultRequest
+import io.ktor.client.features.UserAgent
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
 import io.ktor.client.features.logging.Logger
@@ -38,6 +39,9 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
     install(Logging) {
         level = configuration.logLevel
         logger = Logger.SIMPLE
+    }
+    install(UserAgent) {
+        this.agent = "Algolia for Kotlin (1.0.0)"
     }
     configuration.defaultHeaders?.let {
         install(DefaultRequest) {
