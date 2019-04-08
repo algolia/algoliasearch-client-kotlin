@@ -1,3 +1,5 @@
+@file:Suppress("RegExpRedundantEscape")
+
 package com.algolia.search.serialize
 
 import com.algolia.search.model.indexing.DeleteByQuery

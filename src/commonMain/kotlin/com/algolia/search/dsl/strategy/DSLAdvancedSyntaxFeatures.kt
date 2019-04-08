@@ -5,6 +5,7 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 
 
+@Suppress("PropertyName")
 @DSLParameters
 public class DSLAdvancedSyntaxFeatures(
     private val advancedSyntaxFeatures: MutableList<AdvancedSyntaxFeatures> = mutableListOf()

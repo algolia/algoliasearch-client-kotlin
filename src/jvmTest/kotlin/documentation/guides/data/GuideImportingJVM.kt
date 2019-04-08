@@ -17,7 +17,7 @@ import org.junit.Test
 import java.io.File
 
 
-@Suppress("UNUSED_VARIABLE")
+@Suppress("UNUSED_VARIABLE", "UnnecessaryVariable")
 @Ignore
 internal class GuideImportingJVM {
 
