@@ -15,6 +15,7 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.header
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObjectSerializer
 
 internal fun Configuration.getHttpClient() = engine?.let {
@@ -23,7 +24,7 @@ internal fun Configuration.getHttpClient() = engine?.let {
 
 internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
     install(JsonFeature) {
-        serializer = KotlinxSerializer() // TODO Non strict json
+        serializer = KotlinxSerializer(Json.nonstrict)
             .also {
                 it.register(ResponseBatches)
                 it.register(Synonym)
