@@ -39,36 +39,36 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-common"))
-                implementation("org.jetbrains.kotlinx:kotlinx-serialization-runtime:${Version.serialization}")
-                api("io.ktor:ktor-client:${Version.ktor}")
-                api("io.ktor:ktor-client-logging:${Version.ktor}")
-                api("io.ktor:ktor-client-core:${Version.ktor}")
-                api("io.ktor:ktor-client-json:${Version.ktor}")
+                implementation(Serialization("runtime"))
+                api(Ktor("client"))
+                api(Ktor("client-logging"))
+                api(Ktor("client-core"))
+                api(Ktor("client-json"))
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation("io.ktor:ktor-client-mock:${Version.ktor}")
+                api(Ktor("client-mock"))
             }
         }
         val jvmMain by getting {
             dependencies {
                 implementation(kotlin("stdlib-jdk8"))
-                api("io.ktor:ktor-client-core-jvm:${Version.ktor}")
-                api("io.ktor:ktor-client-json-jvm:${Version.ktor}")
-                api("io.ktor:ktor-client-logging-jvm:${Version.ktor}")
+                api(Ktor("client-core-jvm"))
+                api(Ktor("client-json-jvm"))
+                api(Ktor("client-logging-jvm"))
             }
         }
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
-                implementation("io.ktor:ktor-client-mock-jvm:${Version.ktor}")
-                implementation("io.ktor:ktor-client-apache:${Version.ktor}")
-                implementation("io.ktor:ktor-client-okhttp:${Version.ktor}")
-                implementation("io.ktor:ktor-client-android:${Version.ktor}")
+                api(Ktor("client-mock-jvm"))
+                api(Ktor("client-apache"))
+                api(Ktor("client-okhttp"))
+                api(Ktor("client-android"))
             }
         }
     }
