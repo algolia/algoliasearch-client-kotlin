@@ -8,9 +8,13 @@ Install the Kotlin client by adding the following dependency to your `Gradle` bu
 
   ```gradle
   dependencies {
-      // [...]
-      implementation 'com.algolia:algoliasearch-android:3.+'
-      // This will automatically update to the latest v3 release when you build your project
+     implementation "com.algolia:algoliasearch-client-kotlin-jvm:$kotlin_client_version"
+     // Choose one of the following http client
+     implementation "io.ktor:ktor-client-apache:$ktor_version"
+     implementation "io.ktor:ktor-client-okhttp:$ktor_version"
+     implementation "io.ktor:ktor-client-android:$ktor_version"
+     implementation "io.ktor:ktor-client-cio:$ktor_version"
+     implementation "io.ktor:ktor-client-jetty:$ktor_version"
   }
   ```
 
