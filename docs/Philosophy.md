@@ -44,48 +44,6 @@ query.sortFacetsBy = SortFacetsBy.Count
 // query.sortFacetsBy = SortFacetsBy.Other("unforeseen value")
 ```
 
-## DSL
-
-Extensive DSL coverage is provided to encourage a declarative style which retains the benefits of compile time safety while being more lightweight.
-
-Example for query parameters:
-
-```kotlin
-val query = query { 
-   attributesToRetrieve { 
-       +"color"
-       +"category"
-   }
-}
-```
-
-Example for settings:
-
-```kotlin
-val settings = settings {
-   attributesToSnippet {
-       +"content"(10)
-   }
-}
-```
-
-Example for filters:
-
-```kotlin
-val query = query {
-   filters {
-       and {
-           facet("color", "red")
-           facet("category", "shirt")
-       }
-       orNumeric {
-           range("price", 0 until 10)
-           comparison("price", Equals, 15)
-       }
-   }
-}
-```
-
 ## Json serialization
 
 The class `JsonObject` is used by default to represent a record. It is schemaless.
