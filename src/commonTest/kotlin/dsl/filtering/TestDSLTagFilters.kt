@@ -21,7 +21,7 @@ internal class TestDSLTagFilters {
         }
 
         dsl shouldEqual listOf(
-            FilterGroup.And(Filter.Tag(attributeA.raw), Filter.Tag(attributeB.raw))
+            FilterGroup.And.Tag(Filter.Tag(attributeA.raw), Filter.Tag(attributeB.raw))
         )
     }
 
@@ -38,8 +38,8 @@ internal class TestDSLTagFilters {
         }
 
         dsl shouldEqual listOf(
-            FilterGroup.Or(Filter.Tag(attributeA.raw), Filter.Tag(attributeB.raw)),
-            FilterGroup.Or(Filter.Tag(attributeA.raw))
+            FilterGroup.Or.Tag(Filter.Tag(attributeA.raw), Filter.Tag(attributeB.raw)),
+            FilterGroup.Or.Tag(Filter.Tag(attributeA.raw))
         )
     }
 

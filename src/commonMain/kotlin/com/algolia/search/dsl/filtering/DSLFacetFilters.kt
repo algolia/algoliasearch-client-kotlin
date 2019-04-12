@@ -16,11 +16,11 @@ public class DSLFacetFilters(
     }
 
     public fun and(block: DSLGroupFacet.() -> Unit) {
-        +FilterGroup.And(DSLGroupFacet(block))
+        +FilterGroup.And.Facet(DSLGroupFacet(block))
     }
 
     public fun or(block: DSLGroupFacet.() -> Unit) {
-        +FilterGroup.Or(DSLGroupFacet(block))
+        +FilterGroup.Or.Facet(DSLGroupFacet(block))
     }
 
     public companion object : DSL<DSLFacetFilters, List<FilterGroup<Filter.Facet>>> {

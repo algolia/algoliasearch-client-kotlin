@@ -16,11 +16,11 @@ public class DSLNumericFilters(
     }
 
     public fun and(block: DSLGroupNumeric.() -> Unit) {
-        +FilterGroup.And(DSLGroupNumeric(block))
+        +FilterGroup.And.Numeric(DSLGroupNumeric(block))
     }
 
     public fun or(block: DSLGroupNumeric.() -> Unit) {
-        +FilterGroup.Or(DSLGroupNumeric(block))
+        +FilterGroup.Or.Numeric(DSLGroupNumeric(block))
     }
 
     public companion object : DSL<DSLNumericFilters, List<FilterGroup<Filter.Numeric>>> {

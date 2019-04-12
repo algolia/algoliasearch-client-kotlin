@@ -21,7 +21,7 @@ internal class TestDSLNumericFilters {
         }
 
         dsl shouldEqual listOf(
-            FilterGroup.And(Filter.Numeric(attributeA, 0..2), Filter.Numeric(attributeA, 1..2))
+            FilterGroup.And.Numeric(Filter.Numeric(attributeA, 0..2), Filter.Numeric(attributeA, 1..2))
         )
     }
 
@@ -38,8 +38,8 @@ internal class TestDSLNumericFilters {
         }
 
         dsl shouldEqual listOf(
-            FilterGroup.Or(Filter.Numeric(attributeA, 0..2), Filter.Numeric(attributeB, 1..2)),
-            FilterGroup.Or(Filter.Numeric(attributeA, 0..2))
+            FilterGroup.Or.Numeric(Filter.Numeric(attributeA, 0..2), Filter.Numeric(attributeB, 1..2)),
+            FilterGroup.Or.Numeric(Filter.Numeric(attributeA, 0..2))
         )
     }
 
