@@ -2,8 +2,8 @@ import java.net.URI
 
 
 plugins {
-    id("kotlin-multiplatform") version "1.3.30-eap-45"
-    id("kotlinx-serialization") version "1.3.30-eap-45"
+    id("kotlin-multiplatform") version "1.3.30"
+    id("kotlinx-serialization") version "1.3.30"
     id("maven-publish")
 }
 
