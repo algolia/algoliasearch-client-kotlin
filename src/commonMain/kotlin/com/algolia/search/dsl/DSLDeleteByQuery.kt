@@ -19,15 +19,15 @@ public fun DeleteByQuery.filters(block: DSLFilters.() -> Unit) {
 }
 
 public fun DeleteByQuery.facetFilters(block: DSLFacetFilters.() -> Unit) {
-    facetFilters = FilterGroupConverter.Legacy(DSLFacetFilters(block))
+    facetFilters = FilterGroupConverter.Legacy.Facet(DSLFacetFilters(block))
 }
 
 public fun DeleteByQuery.numericFilters(block: DSLNumericFilters.() -> Unit) {
-    numericFilters = FilterGroupConverter.Legacy(DSLNumericFilters(block))
+    numericFilters = FilterGroupConverter.Legacy.Numeric(DSLNumericFilters(block))
 }
 
 public fun DeleteByQuery.tagFilters(block: DSLTagFilters.() -> Unit) {
-    tagFilters = FilterGroupConverter.Legacy(DSLTagFilters(block))
+    tagFilters = FilterGroupConverter.Legacy.Tag(DSLTagFilters(block))
 }
 
 public fun DeleteByQuery.insideBoundingBox(block: DSLBoundingBox.() -> Unit) {

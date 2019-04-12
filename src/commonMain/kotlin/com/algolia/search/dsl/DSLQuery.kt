@@ -33,19 +33,19 @@ public fun Query.filters(block: DSLFilters.() -> Unit) {
 }
 
 public fun Query.optionalFilters(block: DSLFacetFilters.() -> Unit) {
-    optionalFilters = FilterGroupConverter.Legacy(DSLFacetFilters(block))
+    optionalFilters = FilterGroupConverter.Legacy.Facet(DSLFacetFilters(block))
 }
 
 public fun Query.facetFilters(block: DSLFacetFilters.() -> Unit) {
-    facetFilters = FilterGroupConverter.Legacy(DSLFacetFilters(block))
+    facetFilters = FilterGroupConverter.Legacy.Facet(DSLFacetFilters(block))
 }
 
 public fun Query.numericFilters(block: DSLNumericFilters.() -> Unit) {
-    numericFilters = FilterGroupConverter.Legacy(DSLNumericFilters(block))
+    numericFilters = FilterGroupConverter.Legacy.Numeric(DSLNumericFilters(block))
 }
 
 public fun Query.tagFilters(block: DSLTagFilters.() -> Unit) {
-    tagFilters = FilterGroupConverter.Legacy(DSLTagFilters(block))
+    tagFilters = FilterGroupConverter.Legacy.Tag(DSLTagFilters(block))
 }
 
 public fun Query.facets(block: DSLAttributes.() -> Unit) {
