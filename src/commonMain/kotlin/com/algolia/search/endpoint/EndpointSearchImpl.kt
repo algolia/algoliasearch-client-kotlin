@@ -57,7 +57,7 @@ internal class EndpointSearchImpl(
         val extraParams = json {
             query.facetQuery?.let { KeyFacetQuery to it }
         }
-        val body = (query.query?.toJsonNoDefaults()?.merge(extraParams) ?: extraParams).toString()
+        val body = query.query.toJsonNoDefaults().merge(extraParams).toString()
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }
