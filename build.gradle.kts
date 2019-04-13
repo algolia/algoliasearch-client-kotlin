@@ -26,11 +26,6 @@ kotlin {
             }
         }
     }
-    targets {
-        findByName("metadata")?.mavenPublication {
-            artifactId = "algoliasearch-client-kotlin-common"
-        }
-    }
     sourceSets {
         all {
             languageSettings.progressiveMode = true
