@@ -8,19 +8,11 @@ public sealed class FilterGroupConverter<I, O> : (I) -> O {
         override fun invoke(groups: List<FilterGroup<*>>): String {
             val (andEntries, orEntries) = groups.partition { it is FilterGroup.And }
             val ands = andEntries.joinToString(separator = " AND ") { group ->
-                val condition = andEntries.size > 1 && group.size > 1
-                val prefix = if (condition) "(" else ""
-                val postfix = if (condition) ")" else ""
-
-                group.joinToString(prefix = prefix, postfix = postfix, separator = " AND ") { FilterConverter.SQL(it) }
+                group.joinToString(prefix = "(", postfix = ")", separator = " AND ") { FilterConverter.SQL(it) }
             }
             val begin = if (andEntries.isNotEmpty() && orEntries.isNotEmpty()) " AND " else ""
             val ors = orEntries.joinToString(prefix = begin, separator = " AND ") { group ->
-                val condition = group.size > 1 && (orEntries.size > 1 || andEntries.isNotEmpty())
-                val prefix = if (condition) "(" else ""
-                val postfix = if (condition) ")" else ""
-
-                group.joinToString(prefix = prefix, postfix = postfix, separator = " OR ") { FilterConverter.SQL(it) }
+                group.joinToString(prefix = "(", postfix = ")", separator = " OR ") { FilterConverter.SQL(it) }
             }
             return ands + ors
         }
