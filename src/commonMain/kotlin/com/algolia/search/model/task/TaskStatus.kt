@@ -19,7 +19,7 @@ public sealed class TaskStatus(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : TaskStatus(raw)
 
-    internal companion object : KSerializer<TaskStatus> {
+    companion object : KSerializer<TaskStatus> {
 
         private val serializer = StringSerializer
 

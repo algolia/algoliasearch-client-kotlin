@@ -19,7 +19,7 @@ public data class ResponseRule(
         get() = highlightsOrNull!!
 
     @Serializer(ResponseRule::class)
-    internal companion object : DeserializationStrategy<ResponseRule> {
+    companion object : DeserializationStrategy<ResponseRule> {
 
         override fun deserialize(decoder: Decoder): ResponseRule {
             val json = decoder.asJsonInput().jsonObject

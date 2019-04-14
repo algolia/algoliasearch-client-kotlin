@@ -27,7 +27,7 @@ public sealed class CustomRankingCriterion(override val raw: String) : Raw<Strin
         return raw
     }
 
-    internal companion object : KSerializer<CustomRankingCriterion> {
+    companion object : KSerializer<CustomRankingCriterion> {
 
         private val serializer = StringSerializer
 

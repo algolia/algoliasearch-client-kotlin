@@ -39,7 +39,7 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
         return raw
     }
 
-    internal companion object : KSerializer<RankingCriterion> {
+    companion object : KSerializer<RankingCriterion> {
 
         private val serializer = StringSerializer
 

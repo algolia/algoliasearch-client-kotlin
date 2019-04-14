@@ -25,7 +25,7 @@ public sealed class ABTestStatus(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : ABTestStatus(raw)
 
-    internal companion object : KSerializer<ABTestStatus> {
+    companion object : KSerializer<ABTestStatus> {
 
         private val serializer = StringSerializer
 

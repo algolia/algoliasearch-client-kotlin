@@ -19,7 +19,7 @@ public sealed class RemoveStopWords {
     }
 
     @Serializer(RemoveStopWords::class)
-    internal companion object : KSerializer<RemoveStopWords> {
+    companion object : KSerializer<RemoveStopWords> {
 
         override fun serialize(encoder: Encoder, obj: RemoveStopWords) {
             when (obj) {

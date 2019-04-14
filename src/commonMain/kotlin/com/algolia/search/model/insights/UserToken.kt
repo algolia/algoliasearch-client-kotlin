@@ -20,7 +20,7 @@ public data class UserToken(override val raw: String) : Raw<String> {
         if (!regexUserToken.matches(raw)) throw IllegalArgumentException("UserToken allows only characters of type [a-zA-Z0-9_-]")
     }
 
-    internal companion object : KSerializer<UserToken> {
+    companion object : KSerializer<UserToken> {
 
         private val serializer = StringSerializer
 

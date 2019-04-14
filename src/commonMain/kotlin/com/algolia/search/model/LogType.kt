@@ -24,7 +24,7 @@ public sealed class LogType(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : LogType(raw)
 
-    internal companion object : KSerializer<LogType> {
+    companion object : KSerializer<LogType> {
 
         private val serializer = StringSerializer
 

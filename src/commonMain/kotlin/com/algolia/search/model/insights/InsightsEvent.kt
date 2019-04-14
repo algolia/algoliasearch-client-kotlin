@@ -80,7 +80,7 @@ public sealed class InsightsEvent {
     }
 
     @Serializer(InsightsEvent::class)
-    internal companion object : SerializationStrategy<InsightsEvent> {
+    companion object : SerializationStrategy<InsightsEvent> {
 
         private infix fun JsonObjectBuilder.stringify(resources: Resources?) {
             when (resources) {

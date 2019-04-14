@@ -22,7 +22,7 @@ public sealed class AttributeForFaceting {
     public data class Searchable(override val attribute: Attribute) : AttributeForFaceting()
 
     @Serializer(AttributeForFaceting::class)
-    internal companion object : KSerializer<AttributeForFaceting> {
+    companion object : KSerializer<AttributeForFaceting> {
 
         override fun serialize(encoder: Encoder, obj: AttributeForFaceting) {
             val string = when (obj) {

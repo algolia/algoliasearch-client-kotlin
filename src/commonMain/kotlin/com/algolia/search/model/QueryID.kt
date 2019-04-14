@@ -20,7 +20,7 @@ public data class QueryID(override val raw: String) : Raw<String> {
         return raw
     }
 
-    internal companion object : KSerializer<QueryID> {
+    companion object : KSerializer<QueryID> {
 
         private val serializer = StringSerializer
 

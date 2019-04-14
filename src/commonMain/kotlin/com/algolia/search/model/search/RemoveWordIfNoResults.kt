@@ -46,7 +46,7 @@ public sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String
         return raw
     }
 
-    internal companion object : KSerializer<RemoveWordIfNoResults> {
+    companion object : KSerializer<RemoveWordIfNoResults> {
 
         private val serializer = StringSerializer
 

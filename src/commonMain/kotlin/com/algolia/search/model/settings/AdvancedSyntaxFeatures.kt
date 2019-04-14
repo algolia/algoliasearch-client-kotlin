@@ -17,7 +17,7 @@ public sealed class AdvancedSyntaxFeatures(override val raw: String) : Raw<Strin
     public data class Other(override val raw: String) : AdvancedSyntaxFeatures(raw)
 
     @Serializer(AdvancedSyntaxFeatures::class)
-    internal companion object : KSerializer<AdvancedSyntaxFeatures> {
+    companion object : KSerializer<AdvancedSyntaxFeatures> {
 
         private val serializer = StringSerializer
 

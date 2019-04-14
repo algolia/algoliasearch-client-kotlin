@@ -21,7 +21,7 @@ public data class ClusterName(override val raw: String) : Raw<String> {
         return raw
     }
 
-    internal companion object : KSerializer<ClusterName> {
+    companion object : KSerializer<ClusterName> {
 
         private val serializer = StringSerializer
 

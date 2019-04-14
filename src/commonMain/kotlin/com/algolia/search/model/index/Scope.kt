@@ -22,7 +22,7 @@ public sealed class Scope(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : Scope(raw)
 
-    internal companion object : KSerializer<Scope> {
+    companion object : KSerializer<Scope> {
 
         private val serializer = StringSerializer
 

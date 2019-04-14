@@ -17,7 +17,7 @@ public data class SynonymQuery(
 ) {
 
     @Serializer(SynonymQuery::class)
-    internal companion object : SerializationStrategy<SynonymQuery> {
+    companion object : SerializationStrategy<SynonymQuery> {
 
         override fun serialize(encoder: Encoder, obj: SynonymQuery) {
             val json = json {

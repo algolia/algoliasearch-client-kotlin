@@ -19,7 +19,7 @@ public sealed class IgnorePlurals {
     }
 
     @Serializer(IgnorePlurals::class)
-    internal companion object : KSerializer<IgnorePlurals> {
+    companion object : KSerializer<IgnorePlurals> {
 
         override fun serialize(encoder: Encoder, obj: IgnorePlurals) {
             when (obj) {

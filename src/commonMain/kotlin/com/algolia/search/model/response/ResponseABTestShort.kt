@@ -17,7 +17,7 @@ public data class ResponseABTestShort(
 ) {
 
     @Serializer(ResponseABTestShort::class)
-    internal companion object :
+    companion object :
         KSerializer<ResponseABTestShort> {
 
         override fun serialize(encoder: Encoder, obj: ResponseABTestShort) {

@@ -35,7 +35,7 @@ public sealed class AlternativesAsExact(override val raw: String) : Raw<String> 
         return raw
     }
 
-    internal companion object : KSerializer<AlternativesAsExact> {
+    companion object : KSerializer<AlternativesAsExact> {
 
         private val serializer = StringSerializer
 

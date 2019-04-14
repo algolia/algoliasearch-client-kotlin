@@ -9,7 +9,7 @@ import kotlinx.serialization.json.json
 public data class Edit(val delete: String, val insert: String? = null) {
 
     @Serializer(Edit::class)
-    internal companion object : KSerializer<Edit> {
+    companion object : KSerializer<Edit> {
 
         override fun serialize(encoder: Encoder, obj: Edit) {
             val type = if (obj.insert != null) KeyReplace else KeyRemoveLowercase

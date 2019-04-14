@@ -18,7 +18,7 @@ public sealed class Pattern(override val raw: String) : Raw<String> {
 
     public data class Literal(override val raw: String) : Pattern(raw)
 
-    internal companion object : KSerializer<Pattern> {
+    companion object : KSerializer<Pattern> {
 
         private val serializer = StringSerializer
 

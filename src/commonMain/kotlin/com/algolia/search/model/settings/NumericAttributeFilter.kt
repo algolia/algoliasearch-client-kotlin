@@ -24,7 +24,7 @@ public data class NumericAttributeFilter(
         return raw
     }
 
-    internal companion object : KSerializer<NumericAttributeFilter> {
+    companion object : KSerializer<NumericAttributeFilter> {
 
         private val serializer = StringSerializer
 

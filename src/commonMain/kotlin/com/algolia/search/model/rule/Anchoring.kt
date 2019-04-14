@@ -25,7 +25,7 @@ public sealed class Anchoring(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : Anchoring(raw)
 
-    internal companion object : KSerializer<Anchoring> {
+    companion object : KSerializer<Anchoring> {
 
         private val serializer = StringSerializer
 

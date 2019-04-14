@@ -32,7 +32,7 @@ public data class IndexName(
         return raw
     }
 
-    internal companion object : KSerializer<IndexName> {
+    companion object : KSerializer<IndexName> {
 
         private val serializer = StringSerializer
 

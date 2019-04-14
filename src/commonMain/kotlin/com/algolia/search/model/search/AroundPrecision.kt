@@ -21,7 +21,7 @@ public sealed class AroundPrecision {
     public data class Other(val raw: JsonElement) : AroundPrecision()
 
     @Serializer(AroundPrecision::class)
-    internal companion object : KSerializer<AroundPrecision> {
+    companion object : KSerializer<AroundPrecision> {
 
         override fun serialize(encoder: Encoder, obj: AroundPrecision) {
             val json = when (obj) {

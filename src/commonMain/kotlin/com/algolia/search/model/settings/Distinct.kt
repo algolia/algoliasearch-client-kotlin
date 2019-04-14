@@ -17,7 +17,7 @@ public data class Distinct(val count: Int) {
         if (count < 0) throw IllegalArgumentException("Distinct must be a positive integer")
     }
 
-    internal companion object : KSerializer<Distinct> {
+    companion object : KSerializer<Distinct> {
 
         override val descriptor = IntSerializer.descriptor
 

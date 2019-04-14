@@ -32,7 +32,7 @@ public sealed class SynonymType(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : SynonymType(raw)
 
-    internal companion object : KSerializer<SynonymType> {
+    companion object : KSerializer<SynonymType> {
 
         private val serializer = StringSerializer
 

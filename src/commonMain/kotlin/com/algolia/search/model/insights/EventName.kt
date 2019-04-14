@@ -18,7 +18,7 @@ public data class EventName(override val raw: String) : Raw<String> {
         if (raw.length > 64) throw IllegalArgumentException("EventName length can't be superior to 64 characters.")
     }
 
-    internal companion object : KSerializer<EventName> {
+    companion object : KSerializer<EventName> {
 
         private val serializer = StringSerializer
 

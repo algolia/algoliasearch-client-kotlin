@@ -16,7 +16,7 @@ public data class TaskID(override val raw: Long) : Raw<Long> {
         return raw.toString()
     }
 
-    internal companion object : KSerializer<TaskID> {
+    companion object : KSerializer<TaskID> {
 
         private val serializer = LongSerializer
 

@@ -16,7 +16,7 @@ public data class UserID(override val raw: String) : Raw<String> {
         return raw
     }
 
-    internal companion object : KSerializer<UserID> {
+    companion object : KSerializer<UserID> {
 
         private val serializer = StringSerializer
 

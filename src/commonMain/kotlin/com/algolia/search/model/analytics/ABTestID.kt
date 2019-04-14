@@ -16,7 +16,7 @@ public data class ABTestID(override val raw: Long) : Raw<Long> {
         return raw.toString()
     }
 
-    internal companion object : KSerializer<ABTestID> {
+    companion object : KSerializer<ABTestID> {
 
         private val serializer = LongSerializer
 

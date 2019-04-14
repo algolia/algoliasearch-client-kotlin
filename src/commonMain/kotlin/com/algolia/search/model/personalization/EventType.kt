@@ -20,7 +20,7 @@ public sealed class EventType(override val raw: String) : Raw<String> {
     public data class Other(override val raw: String) : EventType(raw)
 
     @Serializer(EventType::class)
-    internal companion object : KSerializer<EventType> {
+    companion object : KSerializer<EventType> {
 
         private val serializer = StringSerializer
 

@@ -20,7 +20,7 @@ public data class Attribute(override val raw: String) : Raw<String> {
         return raw
     }
 
-    internal companion object : KSerializer<Attribute> {
+    companion object : KSerializer<Attribute> {
 
         private val serializer = StringSerializer
 

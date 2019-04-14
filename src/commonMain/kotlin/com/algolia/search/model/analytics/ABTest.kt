@@ -17,7 +17,7 @@ public data class ABTest(
 ) {
 
     @Serializer(ABTest::class)
-    internal companion object : KSerializer<ABTest> {
+    companion object : KSerializer<ABTest> {
 
         override fun serialize(encoder: Encoder, obj: ABTest) {
             val json = json {

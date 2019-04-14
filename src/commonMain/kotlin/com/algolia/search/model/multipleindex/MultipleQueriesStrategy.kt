@@ -23,7 +23,7 @@ public sealed class MultipleQueriesStrategy(override val raw: String) : Raw<Stri
         return raw
     }
 
-    internal companion object : KSerializer<MultipleQueriesStrategy> {
+    companion object : KSerializer<MultipleQueriesStrategy> {
 
         private val serializer = StringSerializer
 

@@ -81,7 +81,7 @@ public sealed class Synonym {
     ) : Synonym()
 
     @Serializer(Synonym::class)
-    internal companion object : KSerializer<Synonym> {
+    companion object : KSerializer<Synonym> {
 
         override fun serialize(encoder: Encoder, obj: Synonym) {
             val json = when (obj) {

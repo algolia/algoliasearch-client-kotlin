@@ -39,7 +39,7 @@ public sealed class QueryType(override val raw: String) : Raw<String> {
         return raw
     }
 
-    internal companion object : KSerializer<QueryType> {
+    companion object : KSerializer<QueryType> {
 
         private val serializer = StringSerializer
 
