@@ -3,7 +3,7 @@ package dsl.ranking
 import attributeA
 import attributeB
 import com.algolia.search.dsl.ranking.DSLRanking
-import com.algolia.search.model.settings.RankingCriterium
+import com.algolia.search.model.settings.RankingCriterion
 import shouldEqual
 import kotlin.test.Test
 
@@ -24,14 +24,14 @@ internal class TestDSLRanking {
         }
 
         dsl shouldEqual listOf(
-            RankingCriterium.Typo,
-            RankingCriterium.Geo,
-            RankingCriterium.Words,
-            RankingCriterium.Filters,
-            RankingCriterium.Proximity,
-            RankingCriterium.Attribute,
-            RankingCriterium.Exact,
-            RankingCriterium.Custom
+            RankingCriterion.Typo,
+            RankingCriterion.Geo,
+            RankingCriterion.Words,
+            RankingCriterion.Filters,
+            RankingCriterion.Proximity,
+            RankingCriterion.Attribute,
+            RankingCriterion.Exact,
+            RankingCriterion.Custom
         )
     }
 
@@ -43,8 +43,8 @@ internal class TestDSLRanking {
         }
 
         dsl shouldEqual listOf(
-            RankingCriterium.Asc(attributeA),
-            RankingCriterium.Desc(attributeB)
+            RankingCriterion.Asc(attributeA),
+            RankingCriterion.Desc(attributeB)
         )
     }
 }

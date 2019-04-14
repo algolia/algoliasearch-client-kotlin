@@ -10,46 +10,46 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
-@Serializable(RankingCriterium.Companion::class)
-public sealed class RankingCriterium(override val raw: String) : Raw<String> {
+@Serializable(RankingCriterion.Companion::class)
+public sealed class RankingCriterion(override val raw: String) : Raw<String> {
 
-    public object Typo : RankingCriterium(KeyTypo)
+    public object Typo : RankingCriterion(KeyTypo)
 
-    public object Geo : RankingCriterium(KeyGeo)
+    public object Geo : RankingCriterion(KeyGeo)
 
-    public object Words : RankingCriterium(KeyWords)
+    public object Words : RankingCriterion(KeyWords)
 
-    public object Filters : RankingCriterium(KeyFilters)
+    public object Filters : RankingCriterion(KeyFilters)
 
-    public object Proximity : RankingCriterium(KeyProximity)
+    public object Proximity : RankingCriterion(KeyProximity)
 
-    public object Attribute : RankingCriterium(KeyAttribute)
+    public object Attribute : RankingCriterion(KeyAttribute)
 
-    public object Exact : RankingCriterium(KeyExact)
+    public object Exact : RankingCriterion(KeyExact)
 
-    public object Custom : RankingCriterium(KeyCustom)
+    public object Custom : RankingCriterion(KeyCustom)
 
-    public data class Asc(val attribute: com.algolia.search.model.Attribute) : RankingCriterium("$KeyAsc($attribute)")
+    public data class Asc(val attribute: com.algolia.search.model.Attribute) : RankingCriterion("$KeyAsc($attribute)")
 
-    public data class Desc(val attribute: com.algolia.search.model.Attribute) : RankingCriterium("$KeyDesc($attribute)")
+    public data class Desc(val attribute: com.algolia.search.model.Attribute) : RankingCriterion("$KeyDesc($attribute)")
 
-    public data class Other(override val raw: String) : RankingCriterium(raw)
+    public data class Other(override val raw: String) : RankingCriterion(raw)
 
     override fun toString(): String {
         return raw
     }
 
-    internal companion object : KSerializer<RankingCriterium> {
+    internal companion object : KSerializer<RankingCriterion> {
 
         private val serializer = StringSerializer
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: RankingCriterium) {
+        override fun serialize(encoder: Encoder, obj: RankingCriterion) {
             serializer.serialize(encoder, obj.raw)
         }
 
-        override fun deserialize(decoder: Decoder): RankingCriterium {
+        override fun deserialize(decoder: Decoder): RankingCriterion {
             val string = serializer.deserialize(decoder)
 
             val findAsc = regexAsc.find(string)

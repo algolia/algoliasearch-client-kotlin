@@ -2,14 +2,14 @@ package model.search
 
 import attributeA
 import attributeB
-import com.algolia.search.model.settings.RankingCriterium.*
+import com.algolia.search.model.settings.RankingCriterion.*
 import com.algolia.search.serialize.*
 import shouldEqual
 import unknown
 import kotlin.test.Test
 
 
-internal class TestRankingCriterium {
+internal class TestRankingCriterion {
 
     @Test
     fun raw() {

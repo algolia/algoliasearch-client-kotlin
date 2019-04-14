@@ -2,15 +2,15 @@ package model.search
 
 import attributeA
 import attributeB
-import com.algolia.search.model.settings.CustomRankingCriterium.Asc
-import com.algolia.search.model.settings.CustomRankingCriterium.Desc
+import com.algolia.search.model.settings.CustomRankingCriterion.Asc
+import com.algolia.search.model.settings.CustomRankingCriterion.Desc
 import com.algolia.search.serialize.KeyAsc
 import com.algolia.search.serialize.KeyDesc
 import shouldEqual
 import kotlin.test.Test
 
 
-internal class TestCustomRankingCriterium {
+internal class TestCustomRankingCriterion {
 
     @Test
     fun raw() {
