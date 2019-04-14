@@ -43,7 +43,7 @@ public sealed class FilterGroupConverter<I, O> : (I) -> O {
         object Numeric: Legacy<Filter.Numeric>()
     }
 
-    internal object SQLUnquoted : FilterGroupConverter<List<FilterGroup<*>>, String>() {
+    public object SQLUnquoted : FilterGroupConverter<List<FilterGroup<*>>, String>() {
 
         override fun invoke(groups: List<FilterGroup<*>>): String {
             return SQL(groups).replace("\"", "")
