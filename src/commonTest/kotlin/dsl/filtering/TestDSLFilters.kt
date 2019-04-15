@@ -3,7 +3,7 @@ package dsl.filtering
 import attributeA
 import attributeB
 import com.algolia.search.dsl.filtering.DSLFilters
-import com.algolia.search.model.filter.FilterGroupConverter
+import com.algolia.search.model.filter.FilterGroupsConverter
 import shouldEqual
 import unknown
 import kotlin.test.Test
@@ -20,7 +20,7 @@ internal class TestDSLFilters {
             }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0 AND attributeA:1"
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0 AND attributeA:1"
     }
 
     @Test
@@ -32,7 +32,7 @@ internal class TestDSLFilters {
             }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0 OR attributeA:1"
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0 OR attributeA:1"
     }
 
     @Test
@@ -44,7 +44,7 @@ internal class TestDSLFilters {
             }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual "_tags:a OR _tags:b"
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual "_tags:a OR _tags:b"
     }
 
     @Test
@@ -56,7 +56,7 @@ internal class TestDSLFilters {
             }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0 TO 1 OR attributeA != 0"
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0 TO 1 OR attributeA != 0"
     }
 
     @Test
@@ -66,7 +66,7 @@ internal class TestDSLFilters {
             orFacet { }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual ""
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual ""
     }
 
     @Test
@@ -75,7 +75,7 @@ internal class TestDSLFilters {
             and { +facet(attributeA, 0) }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0"
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0"
     }
 
     @Test
@@ -87,7 +87,7 @@ internal class TestDSLFilters {
             orNumeric { +range(attributeA, 0..1) }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0 AND attributeA:0 AND _tags:unknown AND attributeA:0 TO 1"
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0 AND attributeA:0 AND _tags:unknown AND attributeA:0 TO 1"
     }
 
     @Test
@@ -111,7 +111,7 @@ internal class TestDSLFilters {
             }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual
                 "attributeA:0 AND attributeB:0 AND " +
                 "(attributeA:0 OR attributeB:0) AND " +
                 "(_tags:attributeA OR _tags:attributeB) AND " +
@@ -127,7 +127,7 @@ internal class TestDSLFilters {
             }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0 AND _tags:unknown"
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual "attributeA:0 AND _tags:unknown"
     }
 
     @Test
@@ -143,7 +143,7 @@ internal class TestDSLFilters {
             }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual "(_tags:attributeA OR _tags:attributeB) AND (_tags:attributeA OR _tags:attributeB)"
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual "(_tags:attributeA OR _tags:attributeB) AND (_tags:attributeA OR _tags:attributeB)"
     }
 
     @Test
@@ -159,7 +159,7 @@ internal class TestDSLFilters {
             }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual "(_tags:attributeA OR _tags:attributeB) AND (attributeA:0 TO 1 OR attributeB:0 TO 1)"
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual "(_tags:attributeA OR _tags:attributeB) AND (attributeA:0 TO 1 OR attributeB:0 TO 1)"
     }
 
     @Test
@@ -174,7 +174,7 @@ internal class TestDSLFilters {
             }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual "_tags:attributeA AND (_tags:attributeA OR _tags:attributeB)"
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual "_tags:attributeA AND (_tags:attributeA OR _tags:attributeB)"
     }
 
     @Test
@@ -189,6 +189,6 @@ internal class TestDSLFilters {
             }
         }
 
-        FilterGroupConverter.SQLUnquoted(dsl) shouldEqual "(_tags:attributeA OR _tags:attributeB) AND attributeA:0 TO 1"
+        FilterGroupsConverter.SQLUnquoted(dsl) shouldEqual "(_tags:attributeA OR _tags:attributeB) AND attributeA:0 TO 1"
     }
 }

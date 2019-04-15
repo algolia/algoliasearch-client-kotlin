@@ -8,7 +8,7 @@ import shouldEqual
 import kotlin.test.Test
 
 
-internal class TestFilterGroupConverter {
+internal class TestFilterGroupsConverter {
 
     @Test
     fun sql() {

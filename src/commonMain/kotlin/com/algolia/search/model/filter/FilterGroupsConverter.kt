@@ -1,9 +1,9 @@
 package com.algolia.search.model.filter
 
 
-public sealed class FilterGroupConverter<I, O> : (I) -> O {
+public sealed class FilterGroupsConverter<I, O> : (I) -> O {
 
-    public object SQL : FilterGroupConverter<List<FilterGroup<*>>, String>() {
+    public object SQL : FilterGroupsConverter<List<FilterGroup<*>>, String>() {
 
         override fun invoke(groups: List<FilterGroup<*>>): String {
             val (andEntries, orEntries) = groups.partition { it is FilterGroup.And }
@@ -18,7 +18,7 @@ public sealed class FilterGroupConverter<I, O> : (I) -> O {
         }
     }
 
-    public sealed class Legacy<T: Filter> : FilterGroupConverter<List<FilterGroup<T>>, List<List<String>>>() {
+    public sealed class Legacy<T: Filter> : FilterGroupsConverter<List<FilterGroup<T>>, List<List<String>>>() {
 
         override fun invoke(groups: List<FilterGroup<T>>): List<List<String>> {
             val (andEntries, orEntries) = groups.partition { it is FilterGroup.And }
@@ -35,7 +35,7 @@ public sealed class FilterGroupConverter<I, O> : (I) -> O {
         object Numeric: Legacy<Filter.Numeric>()
     }
 
-    public object SQLUnquoted : FilterGroupConverter<List<FilterGroup<*>>, String>() {
+    public object SQLUnquoted : FilterGroupsConverter<List<FilterGroup<*>>, String>() {
 
         override fun invoke(groups: List<FilterGroup<*>>): String {
             return SQL(groups).replace("\"", "")

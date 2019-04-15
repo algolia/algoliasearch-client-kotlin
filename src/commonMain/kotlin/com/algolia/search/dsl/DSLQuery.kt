@@ -12,7 +12,7 @@ import com.algolia.search.dsl.geosearch.DSLPolygon
 import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.dsl.languages.DSLQueryLanguage
 import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
-import com.algolia.search.model.filter.FilterGroupConverter
+import com.algolia.search.model.filter.FilterGroupsConverter
 import com.algolia.search.model.search.Query
 
 
@@ -29,23 +29,23 @@ public fun Query.restrictSearchableAttributes(block: DSLAttributes.() -> Unit) {
 }
 
 public fun Query.filters(block: DSLFilters.() -> Unit) {
-    filters = FilterGroupConverter.SQL(DSLFilters(block))
+    filters = FilterGroupsConverter.SQL(DSLFilters(block))
 }
 
 public fun Query.optionalFilters(block: DSLFacetFilters.() -> Unit) {
-    optionalFilters = FilterGroupConverter.Legacy.Facet(DSLFacetFilters(block))
+    optionalFilters = FilterGroupsConverter.Legacy.Facet(DSLFacetFilters(block))
 }
 
 public fun Query.facetFilters(block: DSLFacetFilters.() -> Unit) {
-    facetFilters = FilterGroupConverter.Legacy.Facet(DSLFacetFilters(block))
+    facetFilters = FilterGroupsConverter.Legacy.Facet(DSLFacetFilters(block))
 }
 
 public fun Query.numericFilters(block: DSLNumericFilters.() -> Unit) {
-    numericFilters = FilterGroupConverter.Legacy.Numeric(DSLNumericFilters(block))
+    numericFilters = FilterGroupsConverter.Legacy.Numeric(DSLNumericFilters(block))
 }
 
 public fun Query.tagFilters(block: DSLTagFilters.() -> Unit) {
-    tagFilters = FilterGroupConverter.Legacy.Tag(DSLTagFilters(block))
+    tagFilters = FilterGroupsConverter.Legacy.Tag(DSLTagFilters(block))
 }
 
 public fun Query.facets(block: DSLAttributes.() -> Unit) {
