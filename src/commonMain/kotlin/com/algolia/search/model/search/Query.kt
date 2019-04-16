@@ -2,6 +2,7 @@ package com.algolia.search.model.search
 
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
+import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
@@ -299,6 +300,13 @@ public data class Query(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/enablePersonalization/]
      */
     @SerialName(KeyEnablePersonalization) var enablePersonalization: Boolean? = null,
+
+    /**
+     * Associates a certain user token with the current search.
+     * Engine default: User ip address
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/userToken/]
+     */
+    @SerialName(KeyUserToken) var userToken: UserToken? = null,
 
     /**
      * Controls if and how query words are interpreted as [prefixes][https://www.algolia.com/doc/guides/textual-relevance/prefix-search/].

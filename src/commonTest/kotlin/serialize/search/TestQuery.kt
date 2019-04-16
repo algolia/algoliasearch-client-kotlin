@@ -4,6 +4,7 @@ import attributes
 import attributesJson
 import boolean
 import com.algolia.search.helper.and
+import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.search.*
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.serialize.*
@@ -16,6 +17,7 @@ import nestedListsJson
 import serialize.TestSerializer
 import shouldEqual
 import string
+import unknown
 import kotlin.test.Test
 
 
@@ -64,6 +66,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             enableRules = boolean,
             ruleContexts = listOf(string),
             enablePersonalization = boolean,
+            userToken = UserToken(unknown),
             queryType = QueryType.PrefixLast,
             removeWordsIfNoResults = RemoveWordIfNoResults.LastWords,
             advancedSyntax = boolean,
@@ -127,6 +130,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeyEnableRules to boolean
             KeyRuleContexts to jsonArray { +string }
             KeyEnablePersonalization to boolean
+            KeyUserToken to unknown
             KeyQueryType to QueryType.PrefixLast.raw
             KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.LastWords.raw
             KeyAdvancedSyntax to boolean
