@@ -5,42 +5,72 @@ public sealed class FilterGroup<T : Filter> : Set<T> {
 
     protected abstract val filters: Set<T>
 
-    public sealed class And<T : Filter>(override val filters: Set<T>) : FilterGroup<T>(), Set<T> by filters {
+    public abstract val name: String?
 
-        data class Any(override val filters: Set<Filter>) : And<Filter>(filters) {
+    public sealed class And<T : Filter>(
+        override val filters: Set<T>,
+        override val name: String?
+    ) : FilterGroup<T>(),
+        Set<T> by filters {
+
+        public data class Any(
+            override val filters: Set<Filter>,
+            override val name: String? = null
+        ) : And<Filter>(filters, name) {
 
             constructor(vararg filters: Filter) : this(filters.toSet())
         }
 
-        data class Facet(override val filters: Set<Filter.Facet>) : And<Filter.Facet>(filters) {
+        public data class Facet(
+            override val filters: Set<Filter.Facet>,
+            override val name: String? = null
+        ) : And<Filter.Facet>(filters, name) {
 
             constructor(vararg filters: Filter.Facet) : this(filters.toSet())
         }
 
-        data class Tag(override val filters: Set<Filter.Tag>) : And<Filter.Tag>(filters) {
+        public data class Tag(
+            override val filters: Set<Filter.Tag>,
+            override val name: String? = null
+        ) : And<Filter.Tag>(filters, name) {
 
             constructor(vararg filters: Filter.Tag) : this(filters.toSet())
         }
 
-        data class Numeric(override val filters: Set<Filter.Numeric>) : And<Filter.Numeric>(filters) {
+        public data class Numeric(
+            override val filters: Set<Filter.Numeric>,
+            override val name: String? = null
+        ) : And<Filter.Numeric>(filters, name) {
 
             constructor(vararg filters: Filter.Numeric) : this(filters.toSet())
         }
     }
 
-    public sealed class Or<T : Filter>(override val filters: Set<T>) : FilterGroup<T>(), Set<T> by filters {
+    public sealed class Or<T : Filter>(
+        override val filters: Set<T>,
+        override val name: String?
+    ) : FilterGroup<T>(), Set<T> by filters {
 
-        data class Facet(override val filters: Set<Filter.Facet>) : Or<Filter.Facet>(filters) {
+        public data class Facet(
+            override val filters: Set<Filter.Facet>,
+            override val name: String? = null
+        ) : Or<Filter.Facet>(filters, name) {
 
             constructor(vararg filters: Filter.Facet) : this(filters.toSet())
         }
 
-        data class Tag(override val filters: Set<Filter.Tag>) : Or<Filter.Tag>(filters) {
+        public data class Tag(
+            override val filters: Set<Filter.Tag>,
+            override val name: String? = null
+        ) : Or<Filter.Tag>(filters, name) {
 
             constructor(vararg filters: Filter.Tag) : this(filters.toSet())
         }
 
-        data class Numeric(override val filters: Set<Filter.Numeric>) : Or<Filter.Numeric>(filters) {
+        public data class Numeric(
+            override val filters: Set<Filter.Numeric>,
+            override val name: String? = null
+        ) : Or<Filter.Numeric>(filters, name) {
 
             constructor(vararg filters: Filter.Numeric) : this(filters.toSet())
         }
