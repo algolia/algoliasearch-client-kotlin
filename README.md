@@ -1,5 +1,9 @@
 # AlgoliaSearch Client Kotlin
 
+## Compatibility
+
+The Kotlin client is compatible with Kotlin `1.3.30` and higher.
+
 ## Installation
 
 Install the Kotlin client by adding the following dependency to your `gradle.build` file:

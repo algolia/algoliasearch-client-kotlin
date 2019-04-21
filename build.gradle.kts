@@ -60,8 +60,8 @@ kotlin {
                 implementation(kotlin("test-junit"))
                 implementation(Ktor("client-mock-jvm"))
                 implementation(Ktor("client-okhttp"))
-//                implementation(Ktor("client-apache"))
-//                implementation(Ktor("client-android"))
+                implementation(Ktor("client-apache"))
+                implementation(Ktor("client-android"))
             }
         }
     }
