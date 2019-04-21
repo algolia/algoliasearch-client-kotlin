@@ -3,6 +3,7 @@ package documentation.methods.search
 import com.algolia.search.dsl.attributesToRetrieve
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.requestOptions
+import com.algolia.search.helper.deserialize
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
 import documentation.client
@@ -42,7 +43,7 @@ internal class DocSearch {
             }
             val response = index.search(query)
 
-            response.hits.map { it.parse(Contact.serializer()) }
+            response.hits.deserialize(Contact.serializer())
         }
     }
 

@@ -150,11 +150,11 @@ public data class ResponseSearch(
         val json: JsonObject
     ) : Map<String, JsonElement> by json {
 
-        public fun <T> get(serializer: KSerializer<T>, attribute: Attribute): T {
+        public fun <T> getValue(serializer: KSerializer<T>, attribute: Attribute): T {
             return Json.plain.fromJson(serializer, json.getAs(attribute.raw))
         }
 
-        public fun <T> parse(serializer: KSerializer<T>): T {
+        public fun <T> deserialize(serializer: KSerializer<T>): T {
             return Json.nonstrict.fromJson(serializer, json)
         }
 

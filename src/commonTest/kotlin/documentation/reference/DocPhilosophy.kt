@@ -103,7 +103,7 @@ internal class DocPhilosophy {
 
             val response = index.search()
 
-            val contacts: List<Contact> = response.hits.map { it.parse(Contact.serializer()) }
+            val contacts: List<Contact> = response.hits.map { it.deserialize(Contact.serializer()) }
         }
     }
 

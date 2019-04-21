@@ -26,8 +26,8 @@ internal class TestResponseSearchHit {
         }
         val hit = ResponseSearch.Hit(json)
 
-        hit.get(StringSerializer, attributeA) shouldEqual "valueA"
-        hit.get(StringSerializer, attributeB) shouldEqual "valueB"
-        hit.parse(Sample.serializer()) shouldEqual Sample("valueA", "valueB")
+        hit.getValue(StringSerializer, attributeA) shouldEqual "valueA"
+        hit.getValue(StringSerializer, attributeB) shouldEqual "valueB"
+        hit.deserialize(Sample.serializer()) shouldEqual Sample("valueA", "valueB")
     }
 }
