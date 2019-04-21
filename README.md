@@ -2,7 +2,7 @@
 
 ## Installation
 
-Install the Kotlin client by adding the following dependency to your `Gradle` build file:
+Install the Kotlin client by adding the following dependency to your `gradle.build` file:
 
   ```gradle
   dependencies {
