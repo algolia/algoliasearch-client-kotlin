@@ -57,9 +57,7 @@ Learn more about [coroutines](https://kotlinlang.org/docs/reference/coroutines/c
 
 Waiting for an asynchronous server task is made available via a [function literal with receiver](https://kotlinlang.org/docs/reference/lambdas.html#function-literals-with-receiver).
 
-Use the [apply](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/apply.html) or [run](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/run.html) functions on your index or client:
-
-Example:
+Use the [apply](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/apply.html) or [run](https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/run.html) functions on your index or client.
 
 ```kotlin
 index.apply {
@@ -69,6 +67,8 @@ client.run {
     multipleBatchObjects(listOf<BatchOperationIndex>()).waitAll()
 }
 ```
+
+The `wait` functions are suspending, and should only be called from a coroutine.
 
 ## Multithreading
 
@@ -81,3 +81,4 @@ The client is designed to be thread-safe. You can use `SearchClient`, `Analytics
 - [DSL](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/DSL.md)
 - [Serialization](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/Serialization.md)
 - [ExceptionHandling](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/ExceptionHandling.md)
+- [Configure the HTTP client](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/HTTPClient.md)
