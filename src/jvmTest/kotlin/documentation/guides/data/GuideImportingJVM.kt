@@ -6,9 +6,9 @@ import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
+import com.algolia.search.serialize.Json
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.json.json
 import kotlinx.serialization.list
@@ -36,7 +36,7 @@ internal class GuideImportingJVM {
             val client = ClientSearch(ApplicationID("YourApplicationID"), APIKey("YourAdminAPIKey"))
             val index = client.initIndex(IndexName("actors"))
             val string = File("actors.json").readText()
-            val actors = Json.plain.parse(JsonObjectSerializer.list, string)
+            val actors = Json.parse(JsonObjectSerializer.list, string)
 
             index.apply {
                 actors
@@ -59,7 +59,7 @@ internal class GuideImportingJVM {
         ) : Indexable
 
         val string = File("actors.json").readText()
-        val actors: List<Actor> = Json.plain.parse(Actor.serializer().list, string)
+        val actors: List<Actor> = Json.parse(Actor.serializer().list, string)
     }
 
     @Test

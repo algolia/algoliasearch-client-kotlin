@@ -18,7 +18,6 @@ import com.algolia.search.serialize.*
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 
 
@@ -35,7 +34,7 @@ internal class EndpointSearchImpl(
 
     override suspend fun browse(query: Query, requestOptions: RequestOptions?): ResponseSearch {
         val params = RequestParams(query.toJsonNoDefaults().urlEncode())
-        val body = Json.noDefaults.stringify(RequestParams.serializer(), params)
+        val body = JsonNoDefaults.stringify(RequestParams.serializer(), params)
 
         return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/browse"), requestOptions, body)
     }

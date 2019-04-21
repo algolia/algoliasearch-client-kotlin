@@ -5,7 +5,6 @@ import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
@@ -24,11 +23,11 @@ public data class ResponseABTestShort(
             val json = json {
                 KeyId to obj.abTestId
                 KeyVariants to jsonArray {
-                    +Json.noDefaults.toJson(
+                    +JsonNoDefaults.toJson(
                         KSerializerVariant,
                         obj.variantA
                     )
-                    +Json.noDefaults.toJson(
+                    +JsonNoDefaults.toJson(
                         KSerializerVariant,
                         obj.variantB
                     )
@@ -44,11 +43,11 @@ public data class ResponseABTestShort(
 
             return ResponseABTestShort(
                 abTestId = json.getPrimitive(KeyId).long.toABTestID(),
-                variantA = Json.noDefaults.fromJson(
+                variantA = JsonNoDefaults.fromJson(
                     KSerializerVariant,
                     variants[0]
                 ),
-                variantB = Json.noDefaults.fromJson(
+                variantB = JsonNoDefaults.fromJson(
                     KSerializerVariant,
                     variants[1]
                 )

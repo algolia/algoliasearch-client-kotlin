@@ -1,5 +1,6 @@
 package serialize
 
+import com.algolia.search.serialize.Json
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
@@ -9,7 +10,7 @@ import kotlin.test.Test
 
 internal abstract class TestSerializer<T>(
     private val serializer: KSerializer<T>,
-    private val json: Json = Json.plain
+    private val json: Json = Json
 ) {
 
     abstract val items: List<Pair<T, JsonElement>>

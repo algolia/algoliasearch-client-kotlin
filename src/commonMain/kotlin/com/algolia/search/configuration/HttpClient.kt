@@ -6,6 +6,7 @@ import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.synonym.Synonym
+import com.algolia.search.serialize.JsonNonStrict
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.features.DefaultRequest
@@ -16,7 +17,6 @@ import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
 import io.ktor.client.request.header
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObjectSerializer
 
 internal fun Configuration.getHttpClient() = engine?.let {
@@ -25,7 +25,7 @@ internal fun Configuration.getHttpClient() = engine?.let {
 
 internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
     install(JsonFeature) {
-        serializer = KotlinxSerializer(Json.nonstrict)
+        serializer = KotlinxSerializer(JsonNonStrict)
             .also {
                 it.register(ResponseBatches)
                 it.register(Synonym)

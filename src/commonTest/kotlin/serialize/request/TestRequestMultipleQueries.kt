@@ -6,13 +6,9 @@ import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.request.RequestMultipleQueries
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.KeyIndexName
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyRequests
-import com.algolia.search.serialize.KeyStrategy
+import com.algolia.search.serialize.*
 import indexA
 import indexB
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import shouldEqual
@@ -30,7 +26,7 @@ internal class TestRequestMultipleQueries {
             ),
             strategy = MultipleQueriesStrategy.StopIfEnoughMatches
         )
-        val serialized = Json.plain.toJson(RequestMultipleQueries, request)
+        val serialized = Json.toJson(RequestMultipleQueries, request)
 
         serialized shouldEqual json {
             KeyRequests to jsonArray {
@@ -50,7 +46,7 @@ internal class TestRequestMultipleQueries {
     @Test
     fun testNoStrategy() {
         val request = RequestMultipleQueries(indexQueries = listOf())
-        val serialized = Json.plain.toJson(RequestMultipleQueries, request)
+        val serialized = Json.toJson(RequestMultipleQueries, request)
 
         serialized shouldEqual json { KeyRequests to jsonArray {} }
     }

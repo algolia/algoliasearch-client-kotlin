@@ -1,7 +1,7 @@
 package serialize.settings
 
 import com.algolia.search.model.settings.Distinct
-import kotlinx.serialization.json.Json
+import com.algolia.search.serialize.Json
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 import shouldEqual
@@ -19,7 +19,7 @@ internal class TestDistinct : TestSerializer<Distinct>(Distinct) {
 
     @Test
     fun boolean() {
-        Json.plain.fromJson(Distinct, JsonLiteral(false)) shouldEqual Distinct(0)
-        Json.plain.fromJson(Distinct, JsonLiteral(true)) shouldEqual Distinct(1)
+        Json.fromJson(Distinct, JsonLiteral(false)) shouldEqual Distinct(0)
+        Json.fromJson(Distinct, JsonLiteral(true)) shouldEqual Distinct(1)
     }
 }

@@ -4,13 +4,12 @@ import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import indexA
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
 import unknown
 
 
-internal class TestResponseVariant : TestSerializer<ResponseVariant>(ResponseVariant.serializer(), Json.noDefaults) {
+internal class TestResponseVariant : TestSerializer<ResponseVariant>(ResponseVariant.serializer(), JsonNoDefaults) {
 
     override val items = listOf(
         item to json

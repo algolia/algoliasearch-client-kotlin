@@ -3,7 +3,7 @@ package suite
 import clientAdmin1
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.task.TaskStatus
-import kotlinx.serialization.json.Json
+import com.algolia.search.serialize.JsonDebug
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.list
 import loadScratch
@@ -18,7 +18,6 @@ internal class TestSuiteBatching {
     private val suffix = "index_batching"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
-    private val json = Json(encodeDefaults = false, indented = true, indent = "  ")
 
     @BeforeTest
     fun clean() {
@@ -39,7 +38,7 @@ internal class TestSuiteBatching {
                 batch(batches).wait() shouldEqual TaskStatus.Published
                 val hits = browse().hits.map { it.json }
 
-                json.stringify(JsonObjectSerializer.list, hits) shouldEqual expected
+                JsonDebug.stringify(JsonObjectSerializer.list, hits) shouldEqual expected
             }
         }
     }

@@ -5,7 +5,6 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.json
@@ -21,7 +20,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
         companion object {
 
             public fun <T> from(serializer: KSerializer<T>, data: T): AddObject {
-                return AddObject(Json.plain.toJson(serializer, data).jsonObject)
+                return AddObject(Json.toJson(serializer, data).jsonObject)
             }
         }
     }
@@ -34,7 +33,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
         companion object {
 
             public fun <T : Indexable> from(serializer: KSerializer<T>, data: T): ReplaceObject {
-                return ReplaceObject(data.objectID, Json.plain.toJson(serializer, data).jsonObject)
+                return ReplaceObject(data.objectID, Json.toJson(serializer, data).jsonObject)
             }
         }
     }
@@ -52,7 +51,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
                 data: T,
                 createIfNotExists: Boolean = true
             ): UpdateObject {
-                return UpdateObject(data.objectID, Json.plain.toJson(serializer, data).jsonObject, createIfNotExists)
+                return UpdateObject(data.objectID, Json.toJson(serializer, data).jsonObject, createIfNotExists)
             }
 
             public fun from(
@@ -62,7 +61,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
             ): UpdateObject {
                 return UpdateObject(
                     objectID,
-                    Json.plain.toJson(Partial, partial).jsonObject,
+                    Json.toJson(Partial, partial).jsonObject,
                     createIfNotExists
                 )
             }

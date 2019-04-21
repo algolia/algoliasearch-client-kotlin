@@ -9,14 +9,13 @@ import com.algolia.search.model.response.ResponseSearchRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.RuleQuery
+import com.algolia.search.serialize.JsonNoDefaults
 import com.algolia.search.serialize.KeyClearExistingRules
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.RouteRules
-import com.algolia.search.serialize.noDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.list
 
 
@@ -31,7 +30,7 @@ internal class EndpointRuleImpl(
         requestOptions: RequestOptions?
     ): RevisionIndex {
         val path = indexName.toPath("/$RouteRules/${rule.objectID}")
-        val body = Json.noDefaults.stringify(Rule.serializer(), rule)
+        val body = JsonNoDefaults.stringify(Rule.serializer(), rule)
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)
         }
@@ -62,7 +61,7 @@ internal class EndpointRuleImpl(
         requestOptions: RequestOptions?
     ): ResponseSearchRules {
         val path = indexName.toPath("/$RouteRules/search")
-        val body = Json.noDefaults.stringify(RuleQuery.serializer(), query)
+        val body = JsonNoDefaults.stringify(RuleQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }
@@ -81,7 +80,7 @@ internal class EndpointRuleImpl(
         clearExistingRules: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
-        val body = Json.noDefaults.stringify(Rule.serializer().list, rules)
+        val body = JsonNoDefaults.stringify(Rule.serializer().list, rules)
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)
             parameter(KeyClearExistingRules, clearExistingRules)

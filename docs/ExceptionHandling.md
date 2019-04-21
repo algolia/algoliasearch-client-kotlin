@@ -15,7 +15,7 @@ However, an HTTP exception can occur. Handle it with a try / catch block.
 ```kotlin
 try {
     val response = index.search()
-} catch (exception: ResponseException) {
+} catch (exception: BadResponseStatusException) {
     when (exception.response.status) {
         HttpStatusCode.NotFound -> TODO()
         HttpStatusCode.BadRequest -> TODO()
@@ -30,7 +30,7 @@ Other kinds of exceptions can occur. Handle them appropriately.
 ```kotlin
 try {
     val response = index.search()
-} catch (exception: ResponseException) {
+} catch (exception: BadResponseStatusException) {
     TODO()
 } catch (exception: IOException) {
     TODO()

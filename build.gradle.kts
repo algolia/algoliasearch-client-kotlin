@@ -14,7 +14,6 @@ repositories {
     jcenter()
     mavenCentral()
     maven { url = URI("https://dl.bintray.com/kotlin/ktor") }
-    maven { url = URI("https://dl.bintray.com/kotlin/kotlin-eap") }
     maven { url = URI("https://kotlin.bintray.com/kotlinx") }
 }
 
@@ -59,10 +58,10 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
-                api(Ktor("client-mock-jvm"))
-                api(Ktor("client-apache"))
-                api(Ktor("client-okhttp"))
-                api(Ktor("client-android"))
+                implementation(Ktor("client-mock-jvm"))
+                implementation(Ktor("client-okhttp"))
+//                implementation(Ktor("client-apache"))
+//                implementation(Ktor("client-android"))
             }
         }
     }

@@ -4,7 +4,6 @@ import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import indexA
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
@@ -21,7 +20,7 @@ internal class TestKSerializerVariant : TestSerializer<Variant>(KSerializerVaria
         ) to json {
             KeyIndexName to indexA.raw
             KeyPercentage to 10
-            KeyCustomSearchParameters to Json.noDefaults.toJson(Query.serializer(), query)
+            KeyCustomSearchParameters to JsonNoDefaults.toJson(Query.serializer(), query)
         }
     )
 }

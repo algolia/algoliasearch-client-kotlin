@@ -9,13 +9,13 @@ import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.creation.CreationABTest
 import com.algolia.search.model.response.deletion.DeletionABTest
 import com.algolia.search.model.response.revision.RevisionABTest
+import com.algolia.search.serialize.Json
 import com.algolia.search.serialize.KeyLimit
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.RouteABTestsV2
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.json.Json
 
 
 internal class EndpointAnalyticsImpl(

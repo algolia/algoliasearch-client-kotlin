@@ -9,8 +9,8 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
+import com.algolia.search.serialize.Json
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldBeTrue
@@ -81,7 +81,7 @@ internal class TestSuiteIndexing {
                 datas.forEach { getObject(Data.serializer(), it.objectID) shouldEqual it }
                 getObjects(objectIDs).results
                     .filterNotNull()
-                    .map { Json.plain.fromJson(Data.serializer(), it) } shouldEqual batches
+                    .map { Json.fromJson(Data.serializer(), it) } shouldEqual batches
                 browse().nbHits shouldEqual 1007
                 revisions += replaceObject(Data.serializer(), updateA)
                 revisions += partialUpdateObject(dataE.objectID, Partial.Increment(attributeValue, 1))

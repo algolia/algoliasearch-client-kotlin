@@ -26,7 +26,7 @@ import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.RouteLogs
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
-import io.ktor.client.features.ResponseException
+import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.async
@@ -83,7 +83,7 @@ public class ClientSearch private constructor(
             while (true) {
                 try {
                     return getAPIKey(apiKey)
-                } catch (exception: ResponseException) {
+                } catch (exception: BadResponseStatusException) {
                     if (exception.response.status.value != HttpStatusCode.NotFound.value) throw exception
                 }
                 delay(1000L)
@@ -99,7 +99,7 @@ public class ClientSearch private constructor(
             while (true) {
                 try {
                     getAPIKey(apiKey)
-                } catch (exception: ResponseException) {
+                } catch (exception: BadResponseStatusException) {
                     if (exception.response.status.value == HttpStatusCode.NotFound.value) return true else throw exception
                 }
                 delay(1000L)

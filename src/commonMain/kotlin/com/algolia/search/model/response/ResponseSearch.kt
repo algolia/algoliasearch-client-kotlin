@@ -6,7 +6,6 @@ import com.algolia.search.model.QueryID
 import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 
@@ -151,11 +150,11 @@ public data class ResponseSearch(
     ) : Map<String, JsonElement> by json {
 
         public fun <T> getValue(serializer: KSerializer<T>, attribute: Attribute): T {
-            return Json.plain.fromJson(serializer, json.getAs(attribute.raw))
+            return Json.fromJson(serializer, json.getAs(attribute.raw))
         }
 
         public fun <T> deserialize(serializer: KSerializer<T>): T {
-            return Json.nonstrict.fromJson(serializer, json)
+            return JsonNonStrict.fromJson(serializer, json)
         }
 
         public fun getDistinctSequentialID(): Int {
@@ -163,11 +162,11 @@ public data class ResponseSearch(
         }
 
         public fun getHierarchy(attribute: Attribute): Hierarchy {
-            return Json.plain.fromJson(KSerializerHierarchy, json.getAs(attribute.raw))
+            return Json.fromJson(KSerializerHierarchy, json.getAs(attribute.raw))
         }
 
         public fun getRankingInfo(): RankingInfo {
-            return Json.plain.fromJson(RankingInfo.serializer(), json.getAs(Key_RankingInfo))
+            return Json.fromJson(RankingInfo.serializer(), json.getAs(Key_RankingInfo))
         }
 
         public fun getHighlightResult(attribute: Attribute): HighlightResult {
@@ -195,11 +194,11 @@ public data class ResponseSearch(
         }
 
         private fun <T> getHighlightResult(serializer: KSerializer<T>, attribute: Attribute): T {
-            return Json.plain.fromJson(serializer, json.getObject(Key_HighlightResult).getAs(attribute.raw))
+            return Json.fromJson(serializer, json.getObject(Key_HighlightResult).getAs(attribute.raw))
         }
 
         private fun <T> getSnippetResult(serializer: KSerializer<T>, attribute: Attribute): T {
-            return Json.plain.fromJson(serializer, json.getObject(Key_SnippetResult).getAs(attribute.raw))
+            return Json.fromJson(serializer, json.getObject(Key_SnippetResult).getAs(attribute.raw))
         }
 
         @Serializer(Hit::class)

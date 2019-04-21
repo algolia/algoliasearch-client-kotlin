@@ -8,7 +8,6 @@ import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
@@ -88,12 +87,12 @@ public sealed class Synonym {
                 is MultiWay -> json {
                     KeyObjectID to obj.objectID.raw
                     KeyType to KeySynonym
-                    KeySynonyms to Json.plain.toJson(StringSerializer.list, obj.synonyms)
+                    KeySynonyms to Json.toJson(StringSerializer.list, obj.synonyms)
                 }
                 is OneWay -> json {
                     KeyObjectID to obj.objectID.raw
                     KeyType to KeyOneWaySynonym
-                    KeySynonyms to Json.plain.toJson(StringSerializer.list, obj.synonyms)
+                    KeySynonyms to Json.toJson(StringSerializer.list, obj.synonyms)
                     KeyInput to obj.input
                 }
                 is AlternativeCorrections -> json {
@@ -103,13 +102,13 @@ public sealed class Synonym {
                         SynonymType.Typo.Two -> KeyAlternativeCorrection2
                     }
                     KeyWord to obj.word
-                    KeyCorrections to Json.plain.toJson(StringSerializer.list, obj.corrections)
+                    KeyCorrections to Json.toJson(StringSerializer.list, obj.corrections)
                 }
                 is Placeholder -> json {
                     KeyObjectID to obj.objectID.raw
                     KeyType to KeyPlaceholder
                     KeyPlaceholder to obj.placeholder.raw
-                    KeyReplacements to Json.plain.toJson(StringSerializer.list, obj.replacements)
+                    KeyReplacements to Json.toJson(StringSerializer.list, obj.replacements)
                 }
                 is Other -> obj.json
             }

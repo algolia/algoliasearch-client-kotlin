@@ -7,14 +7,10 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.request.RequestRequestObjects
 import com.algolia.search.model.response.*
-import com.algolia.search.serialize.KeyRequests
-import com.algolia.search.serialize.RouteIndexesV1
-import com.algolia.search.serialize.noDefaults
-import com.algolia.search.serialize.toBody
+import com.algolia.search.serialize.*
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 
@@ -45,7 +41,7 @@ internal class EndpointMultipleIndexImpl(
         requests: List<RequestObjects>,
         requestOptions: RequestOptions?
     ): ResponseObjects {
-        val body = Json.noDefaults.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
+        val body = JsonNoDefaults.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
         return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/objects", requestOptions, body)
     }
@@ -54,7 +50,7 @@ internal class EndpointMultipleIndexImpl(
         operations: List<BatchOperationIndex>,
         requestOptions: RequestOptions?
     ): ResponseBatches {
-        val requests = Json.plain.toJson(BatchOperationIndex.list, operations)
+        val requests = Json.toJson(BatchOperationIndex.list, operations)
         val body = json { KeyRequests to requests }.toString()
 
         return transport.request(HttpMethod.Post, CallType.Write, "$RouteIndexesV1/*/batch", requestOptions, body)

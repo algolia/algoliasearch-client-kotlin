@@ -9,7 +9,7 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.serialize.urlEncode
-import io.ktor.client.features.ResponseException
+import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -63,7 +63,7 @@ internal class TestSuiteAPIKey {
                 while (isActive) {
                     try {
                         if (getAPIKey(key).maxHitsPerQuery == 42) break
-                    } catch (exception: ResponseException) {
+                    } catch (exception: BadResponseStatusException) {
                         exception.response.status.value shouldEqual HttpStatusCode.NotFound
                     }
                     delay(1000L)

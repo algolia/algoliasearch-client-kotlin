@@ -7,7 +7,7 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
-import io.ktor.client.features.ResponseException
+import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.json
 import runBlocking
@@ -60,15 +60,15 @@ class TestSuiteReplaceAll {
                 getRule(objectIDTwo).rule.objectID shouldEqual objectIDTwo
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
-                (shouldFailWith<ResponseException> {
+                (shouldFailWith<BadResponseStatusException> {
                     getObject(objectIDOne)
                 }).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
-                (shouldFailWith<ResponseException> {
+                (shouldFailWith<BadResponseStatusException> {
                     getSynonym(objectIDOne)
                 }).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
-                (shouldFailWith<ResponseException> {
+                (shouldFailWith<BadResponseStatusException> {
                     getRule(objectIDOne)
                 }).response.status.value shouldEqual HttpStatusCode.NotFound.value
             }

@@ -1,10 +1,10 @@
 package com.algolia.search.model.response
 
 import com.algolia.search.model.rule.Rule
+import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.asJsonInput
 import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 
 
@@ -23,7 +23,7 @@ public data class ResponseRule(
 
         override fun deserialize(decoder: Decoder): ResponseRule {
             val json = decoder.asJsonInput().jsonObject
-            val rule = Json.nonstrict.fromJson(Rule.serializer(), json)
+            val rule = JsonNonStrict.fromJson(Rule.serializer(), json)
             val highlights = json.getObjectOrNull(Key_HighlightResult)
 
             return ResponseRule(rule, highlights)

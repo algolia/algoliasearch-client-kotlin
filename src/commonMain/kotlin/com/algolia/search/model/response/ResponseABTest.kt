@@ -6,7 +6,6 @@ import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
@@ -45,8 +44,8 @@ public data class ResponseABTest(
                 obj.conversionSignificanceOrNull?.let { KeyConversionSignificance to it }
                 obj.clickSignificanceOrNull?.let { KeyClickSignificance to it }
                 KeyVariants to jsonArray {
-                    +Json.noDefaults.toJson(ResponseVariant.serializer(), obj.variantA)
-                    +Json.noDefaults.toJson(ResponseVariant.serializer(), obj.variantB)
+                    +JsonNoDefaults.toJson(ResponseVariant.serializer(), obj.variantA)
+                    +JsonNoDefaults.toJson(ResponseVariant.serializer(), obj.variantB)
                 }
             }
 
@@ -65,8 +64,8 @@ public data class ResponseABTest(
                 status = Json.parse(ABTestStatus, element.getPrimitive(KeyStatus).content),
                 conversionSignificanceOrNull = element.getPrimitive(KeyConversionSignificance).floatOrNull,
                 clickSignificanceOrNull = element.getPrimitive(KeyClickSignificance).floatOrNull,
-                variantA = Json.plain.fromJson(ResponseVariant.serializer(), variants[0]),
-                variantB = Json.plain.fromJson(ResponseVariant.serializer(), variants[1])
+                variantA = Json.fromJson(ResponseVariant.serializer(), variants[0]),
+                variantB = Json.fromJson(ResponseVariant.serializer(), variants[1])
             )
         }
     }

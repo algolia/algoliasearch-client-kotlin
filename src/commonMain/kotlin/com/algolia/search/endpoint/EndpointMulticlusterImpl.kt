@@ -12,7 +12,6 @@ import com.algolia.search.serialize.*
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 
 
@@ -71,7 +70,7 @@ internal class EndpointMulticlusterImpl(
         requestOptions: RequestOptions?
     ): ResponseSearchUserID {
         val path = "$RouteClustersV1/mapping/search"
-        val body = Json.noDefaults.stringify(UserIDQuery.serializer(), query)
+        val body = JsonNoDefaults.stringify(UserIDQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }

@@ -7,7 +7,6 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.internal.HashMapClassDesc
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
@@ -27,9 +26,9 @@ internal object KSerializerSnippetResults : KSerializer<Map<Attribute, List<Snip
         val json = json {
             obj.forEach { (key, value) ->
                 key.raw to if (value.size == 1) {
-                    Json.plain.toJson(serializer, value.first())
+                    Json.toJson(serializer, value.first())
                 } else {
-                    Json.plain.toJson(serializer.list, value)
+                    Json.toJson(serializer.list, value)
                 }
             }
         }
@@ -41,8 +40,8 @@ internal object KSerializerSnippetResults : KSerializer<Map<Attribute, List<Snip
 
         return json.map { (key, value) ->
             key.toAttribute() to when (value) {
-                is JsonObject -> listOf(Json.plain.fromJson(serializer, value))
-                is JsonArray -> Json.plain.fromJson(serializer.list, value)
+                is JsonObject -> listOf(Json.fromJson(serializer, value))
+                is JsonArray -> Json.fromJson(serializer.list, value)
                 else -> throw Exception("Unknown type")
             }
         }.toMap()

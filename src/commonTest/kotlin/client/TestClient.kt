@@ -19,7 +19,7 @@ internal class TestClient {
     private val appID = "appID".toApplicationID()
     private val hosts = listOf(RetryableHost("host"))
 
-    private val engine = MockEngine { MockHttpResponse(it.call, HttpStatusCode.OK) }
+    private val engine = MockEngine { MockHttpResponse(call, HttpStatusCode.OK) }
     private val configurationSearch = ConfigurationSearch(appID, apiKey, engine = engine, hosts = hosts)
     private val configurationInsights = ConfigurationInsights(appID, apiKey, engine = engine, hosts = hosts)
     private val configurationAnalytics = ConfigurationAnalytics(appID, apiKey, engine = engine, hosts = hosts)

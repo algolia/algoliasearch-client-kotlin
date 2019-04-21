@@ -1,9 +1,9 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.asJsonInput
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.BooleanSerializer
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonLiteral
 
@@ -31,10 +31,7 @@ public sealed class IgnorePlurals {
         override fun deserialize(decoder: Decoder): IgnorePlurals {
             return when (val element = decoder.asJsonInput()) {
                 is JsonArray -> QueryLanguages(element.map {
-                    Json.nonstrict.fromJson(
-                        QueryLanguage,
-                        it
-                    )
+                    JsonNonStrict.fromJson(QueryLanguage, it)
                 })
                 is JsonLiteral -> Boolean(element.boolean)
                 else -> throw Exception()

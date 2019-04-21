@@ -12,7 +12,6 @@ import com.algolia.search.serialize.*
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
@@ -28,15 +27,15 @@ internal class EndpointSettingsImpl(
         val path = indexName.toPath("/$RouteSettings")
         val json = transport.request<JsonObject>(HttpMethod.Get, CallType.Read, path, requestOptions)
         // The following lines handle the old names of attributes, thus providing backward compatibility.
-        val settings = Json.nonstrict.fromJson(Settings.serializer(), json)
+        val settings = JsonNonStrict.fromJson(Settings.serializer(), json)
         val attributesToIndex = json.getArrayOrNull(KeyAttributesToIndex)?.let {
-            Json.plain.fromJson(SearchableAttribute.list, it)
+            Json.fromJson(SearchableAttribute.list, it)
         }
         val numericAttributesToIndex = json.getArrayOrNull(KeyNumericAttributesToIndex)?.let {
-            Json.plain.fromJson(NumericAttributeFilter.list, it)
+            Json.fromJson(NumericAttributeFilter.list, it)
         }
         val slaves = json.getArrayOrNull(KeySlaves)?.let {
-            Json.plain.fromJson(IndexName.list, it)
+            Json.fromJson(IndexName.list, it)
         }
 
         return settings.copy(

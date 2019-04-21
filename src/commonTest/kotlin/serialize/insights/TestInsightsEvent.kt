@@ -4,7 +4,7 @@ import com.algolia.search.helper.*
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.request.RequestInsightsEvents
-import kotlinx.serialization.json.Json
+import com.algolia.search.serialize.JsonDebug
 import loadScratch
 import shouldEqual
 import kotlin.test.Test
@@ -45,9 +45,8 @@ internal class TestInsightsEvent {
     @Test
     fun serialize() {
         val expected = loadScratch("events.json")
-        val json = Json(indent = "  ", indented = true, encodeDefaults = false)
         val actual = RequestInsightsEvents(listOf(eventView, eventClick, eventConversion))
-        val events = json.stringify(RequestInsightsEvents.serializer(), actual)
+        val events = JsonDebug.stringify(RequestInsightsEvents.serializer(), actual)
 
         events shouldEqual expected
     }

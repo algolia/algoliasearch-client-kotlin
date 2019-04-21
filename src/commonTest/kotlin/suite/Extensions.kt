@@ -8,9 +8,9 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.Time
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.response.ResponseVariant
+import com.algolia.search.serialize.JsonDebug
 import dayInMillis
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.json.Json
 import loadScratch
 import shouldEqual
 import username
@@ -76,10 +76,9 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String, now: Boole
 
 
 internal fun <T> load(serializer: KSerializer<T>, name: String): T {
-    val json = Json(indented = true, indent = "  ", encodeDefaults = false)
     val string = loadScratch(name)
-    val data = json.parse(serializer, string)
-    val serialized = json.stringify(serializer, data)
+    val data = JsonDebug.parse(serializer, string)
+    val serialized = JsonDebug.stringify(serializer, data)
 
     serialized shouldEqual string
     return data

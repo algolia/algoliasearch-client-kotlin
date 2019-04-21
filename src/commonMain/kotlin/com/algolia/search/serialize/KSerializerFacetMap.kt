@@ -10,7 +10,6 @@ import kotlinx.serialization.internal.HashMapClassDesc
 import kotlinx.serialization.internal.HashMapSerializer
 import kotlinx.serialization.internal.IntSerializer
 import kotlinx.serialization.internal.StringSerializer
-import kotlinx.serialization.json.Json
 
 
 internal object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
@@ -32,7 +31,7 @@ internal object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
     }
 
     override fun deserialize(decoder: Decoder): Map<Attribute, List<Facet>> {
-        val json = Json.nonstrict.fromJson(serializer, decoder.asJsonInput())
+        val json = JsonNonStrict.fromJson(serializer, decoder.asJsonInput())
 
         return json.map { (key, value) -> key.toAttribute() to value.map { Facet(it.key, it.value) } }.toMap()
     }

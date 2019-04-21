@@ -11,14 +11,15 @@ import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.SortFacetsBy
 import com.algolia.search.model.settings.Settings
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.JsonNonStrict
 import documentation.client
 import documentation.index
-import io.ktor.client.features.ResponseException
+import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.*
 import kotlinx.io.IOException
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 import runBlocking
@@ -137,9 +138,9 @@ internal class DocPhilosophy {
                 "lastname" to "Barninger"
             }
 
-            val contact: Contact = Json.plain.fromJson(Contact.serializer(), json)
+            val contact: Contact = Json.fromJson(Contact.serializer(), json)
             // Or with Json.nonstrict
-            val contactNonStrict: Contact = Json.nonstrict.fromJson(Contact.serializer(), json)
+            val contactNonStrict: Contact = JsonNonStrict.fromJson(Contact.serializer(), json)
         }
     }
 
@@ -169,7 +170,7 @@ internal class DocPhilosophy {
         runBlocking {
             try {
                 val response = index.search()
-            } catch (exception: ResponseException) {
+            } catch (exception: BadResponseStatusException) {
                 when (exception.response.status) {
                     HttpStatusCode.NotFound -> TODO()
                     HttpStatusCode.BadRequest -> TODO()
@@ -183,7 +184,7 @@ internal class DocPhilosophy {
         runBlocking {
             try {
                 val response = index.search()
-            } catch (exception: ResponseException) {
+            } catch (exception: BadResponseStatusException) {
                 TODO()
             } catch (exception: IOException) {
                 TODO()

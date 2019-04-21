@@ -9,7 +9,6 @@ import com.algolia.search.model.search.*
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.serialize.*
 import int
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import nestedLists
@@ -154,6 +153,6 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
 
     @Test
     fun encodeNoNull() {
-        Json.noDefaults.stringify(Query.serializer(), Query()) shouldEqual "{}"
+        JsonNoDefaults.stringify(Query.serializer(), Query()) shouldEqual "{}"
     }
 }

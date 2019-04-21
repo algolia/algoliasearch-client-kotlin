@@ -5,7 +5,6 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
 import com.algolia.search.serialize.*
 import kotlinx.serialization.internal.StringSerializer
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 import serialize.TestSerializer
@@ -17,7 +16,7 @@ internal class TestSynonym : TestSerializer<Synonym>(Synonym) {
     private val objectID = ObjectID("objectID")
     private val json = json { KeyObjectID to objectID.raw }
     private val strings = listOf("iPhone", "samsung")
-    private val array = Json.plain.toJson(StringSerializer.list, strings)
+    private val array = Json.toJson(StringSerializer.list, strings)
 
     override val items = listOf(
         Synonym.OneWay(objectID, unknown, strings) to json {
@@ -43,7 +42,7 @@ internal class TestSynonym : TestSerializer<Synonym>(Synonym) {
             KeyWord to unknown
             KeyCorrections to array
         },
-        Synonym.Placeholder(objectID, Synonym.Placeholder.Token(unknown), strings) to kotlinx.serialization.json.json {
+        Synonym.Placeholder(objectID, Synonym.Placeholder.Token(unknown), strings) to json {
             KeyObjectID to objectID.raw
             KeyType to KeyPlaceholder
             KeyPlaceholder to "<$unknown>"

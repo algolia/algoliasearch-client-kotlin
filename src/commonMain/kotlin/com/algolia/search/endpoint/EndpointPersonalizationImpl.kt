@@ -4,11 +4,11 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.model.personalization.PersonalizationStrategy
 import com.algolia.search.model.response.ResponsePersonalizationStrategy
 import com.algolia.search.model.response.revision.Revision
+import com.algolia.search.serialize.Json
 import com.algolia.search.serialize.RouteRecommendation
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.json.Json
 
 
 internal class EndpointPersonalizationImpl(

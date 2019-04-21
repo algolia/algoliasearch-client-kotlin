@@ -41,7 +41,7 @@ internal fun JsonObject.urlEncode(): String? {
             entries.forEach { (key, element) ->
                 when (element) {
                     is JsonPrimitive -> append(key, element.content)
-                    else -> append(key, Json.plain.stringify(JsonElementSerializer, element))
+                    else -> append(key, Json.stringify(JsonElementSerializer, element))
                 }
             }
         }.formUrlEncode()
@@ -53,30 +53,33 @@ internal fun Encoder.asJsonOutput() = this as JsonOutput
 
 
 internal fun Query.toJsonNoDefaults(): JsonObject {
-    return Json.noDefaults.toJson(Query.serializer(), this).jsonObject
+    return JsonNoDefaults.toJson(Query.serializer(), this).jsonObject
 }
 
 internal fun DeleteByQuery.toJsonNoDefaults(): JsonObject {
-    return Json.noDefaults.toJson(DeleteByQuery.serializer(), this).jsonObject
+    return JsonNoDefaults.toJson(DeleteByQuery.serializer(), this).jsonObject
 }
 
 internal fun Settings.toJsonNoDefaults(): JsonObject {
-    return Json.noDefaults.toJson(Settings.serializer(), this).jsonObject
+    return JsonNoDefaults.toJson(Settings.serializer(), this).jsonObject
 }
 
 internal fun RequestAPIKey.stringify(): String {
-    return Json.noDefaults.stringify(RequestAPIKey.serializer(), this)
+    return JsonNoDefaults.stringify(RequestAPIKey.serializer(), this)
 }
 
-internal val Json.Companion.noDefaults get() = Json(encodeDefaults = false)
+internal val Json = Json(JsonConfiguration.Stable.copy())
+internal val JsonNoDefaults = Json(JsonConfiguration.Stable.copy(encodeDefaults = false))
+internal val JsonNonStrict = Json(JsonConfiguration.Stable.copy(strictMode = false))
+internal val JsonDebug = Json(JsonConfiguration.Stable.copy(prettyPrint = true, indent = "  ", encodeDefaults = false))
 
 internal fun List<IndexQuery>.toBody(strategy: MultipleQueriesStrategy?): String {
-    return Json.noDefaults.stringify(
+    return JsonNoDefaults.stringify(
         RequestMultipleQueries,
         RequestMultipleQueries(this, strategy)
     )
 }
 
 internal fun Query.toBody(): String {
-    return Json.noDefaults.stringify(Query.serializer(), this)
+    return JsonNoDefaults.stringify(Query.serializer(), this)
 }

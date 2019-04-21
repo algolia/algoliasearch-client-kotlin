@@ -1,7 +1,7 @@
 package serialize.serializer
 
+import com.algolia.search.serialize.Json
 import com.algolia.search.serialize.KSerializerHierarchy
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import shouldEqual
@@ -12,8 +12,8 @@ internal class TestKSerializerHierarchy {
 
     @Test
     fun test() {
-        val serialized = Json.plain.stringify(KSerializerHierarchy, item)
-        val deserialized = Json.plain.parse(KSerializerHierarchy, serialized)
+        val serialized = Json.stringify(KSerializerHierarchy, item)
+        val deserialized = Json.parse(KSerializerHierarchy, serialized)
 
         deserialized shouldEqual item
     }
