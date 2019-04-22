@@ -1,5 +1,6 @@
 package com.algolia.search.model.index
 
+import com.algolia.search.endpoint.EndpointIndex
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyRules
 import com.algolia.search.serialize.KeySettings
@@ -11,13 +12,25 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
+/**
+ * Possible [Scope] to copy for a [EndpointIndex.copyIndex] operation.
+ */
 @Serializable(Scope.Companion::class)
 public sealed class Scope(override val raw: String) : Raw<String> {
 
+    /**
+     * Scope for [com.algolia.search.model.settings.Settings]
+     */
     public object Settings : Scope(KeySettings)
 
+    /**
+     * Scope for [com.algolia.search.model.synonym.Synonym]
+     */
     public object Synonyms : Scope(KeySynonyms)
 
+    /**
+     * Scope for [com.algolia.search.model.rule.Rule]
+     */
     public object Rules : Scope(KeyRules)
 
     public data class Other(override val raw: String) : Scope(raw)
