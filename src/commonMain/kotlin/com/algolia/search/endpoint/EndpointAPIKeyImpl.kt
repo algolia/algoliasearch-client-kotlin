@@ -76,14 +76,14 @@ internal class EndpointAPIKeyImpl(
 
     override suspend fun restoreAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): CreationAPIKey {
         return CreationAPIKey(
+            apiKey,
             transport.request<Creation>(
                 HttpMethod.Post,
                 CallType.Write,
                 "$RouteKeysV1/$apiKey/restore",
                 requestOptions,
                 ""
-            ).createdAt,
-            apiKey
+            ).createdAt
         )
     }
 

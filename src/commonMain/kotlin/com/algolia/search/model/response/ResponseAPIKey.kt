@@ -12,14 +12,32 @@ import kotlinx.serialization.Transient
 
 @Serializable
 public data class ResponseAPIKey(
+    /**
+     * The [APIKey] value.
+     */
     @SerialName(KeyValue) val apiKey: APIKey,
-    @SerialName(KeyValidity) val validity: Long,
+    /**
+     * The date at which the [APIKey] has been created.
+     */
+    @SerialName(KeyCreatedAt) val createdAtOrNull: ClientDate? = null,
+    /**
+     * List of permissions [ACL] the key contains.
+     */
     @SerialName(KeyAcl) val ACLs: List<ACL>,
+    /**
+     * Timestamp of the date at which the [APIKey] expires. (0 means it will not expire automatically).
+     */
+    @SerialName(KeyValidity) val validity: Long,
+    /**
+     * The list of targeted indices, if any.
+     */
+    @SerialName(KeyIndexes) val indicesOrNull: List<IndexName>? = null,
+    /**
+     * Description of the key, if set.
+     */
+    @SerialName(KeyDescription) val descriptionOrNull: String? = null,
     @SerialName(KeyMaxQueriesPerIPPerHour) val maxQueriesPerIPPerHourOrNull: Int? = null,
     @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQueryOrNull: Int? = null,
-    @SerialName(KeyCreatedAt) val createdAtOrNull: ClientDate? = null,
-    @SerialName(KeyDescription) val descriptionOrNull: String? = null,
-    @SerialName(KeyIndexes) val indicesOrNull: List<IndexName>? = null,
     @SerialName(KeyReferers) val referersOrNull: List<String>? = null,
     @SerialName(KeyQueryParameters) val queryOrNull: String? = null
 ) {

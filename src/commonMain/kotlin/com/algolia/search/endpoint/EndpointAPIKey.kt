@@ -12,33 +12,78 @@ import com.algolia.search.transport.RequestOptions
 
 public interface EndpointAPIKey {
 
+    /**
+     * Add a new [APIKey].
+     *
+     * @param params permissions/restrictions specified by [APIKeyParams]
+     * @param restrictSources  You can also add a restriction on the IPv4 network allowed to use the generated key.
+     * This is used for more protection against [APIKey] leaking and reuse.
+     * For security reasons, the creation of the key will fail if the server from which the key is created is not in the
+     * restricted network. Example: "restrictSources=223.139.41".
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     */
     suspend fun addAPIKey(
         params: APIKeyParams,
         restrictSources: String? = null,
         requestOptions: RequestOptions? = null
     ): CreationAPIKey
 
+    /**
+     * Update the permissions of an existing [APIKey].
+     *
+     * @param apiKey [APIKey] to update
+     * @param params permissions/restrictions specified by [APIKeyParams]
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     */
     suspend fun updateAPIKey(
         apiKey: APIKey,
         params: APIKeyParams,
         requestOptions: RequestOptions? = null
     ): RevisionAPIKey
 
+    /**
+     * Delete an existing [APIKey].
+     * Be careful not to accidentally revoke a user’s access to the Dashboard by deleting any key that grants
+     * such access. More generally: always be aware of a key’s privileges before deleting it, to avoid any unexpected
+     * consequences.
+     *
+     * @param apiKey [APIKey] to delete
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     */
     suspend fun deleteAPIKey(
         apiKey: APIKey,
         requestOptions: RequestOptions? = null
     ): DeletionAPIKey
 
+    /**
+     * [APIKey] to restore.
+     *
+     * @param apiKey [APIKey] to restore
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     */
     suspend fun restoreAPIKey(
         apiKey: APIKey,
         requestOptions: RequestOptions? = null
     ): CreationAPIKey
 
+    /**
+     * Get the permissions of an [APIKey]. When initializing the client using the Admin [APIKey], you can request
+     * information on any of your application’s API keys.
+     * When using a non-admin [APIKey], you can only retrieve information on this specific [APIKey].
+     *
+     * @param apiKey [APIKey] to retrieve permissions for.
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     */
     suspend fun getAPIKey(
         apiKey: APIKey,
         requestOptions: RequestOptions? = null
     ): ResponseAPIKey
 
+    /**
+     * Get the full list of API Keys.
+     *
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     */
     suspend fun listAPIKeys(
         requestOptions: RequestOptions? = null
     ): ResponseListAPIKey

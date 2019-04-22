@@ -10,6 +10,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class RevisionAPIKey(
-    @SerialName(KeyUpdatedAt) val updatedAt: ClientDate,
-    @SerialName(KeyKey) val apiKey: APIKey
+    /**
+     * The updated [APIKey].
+     */
+    @SerialName(KeyKey) val apiKey: APIKey,
+    /**
+     * The date at which the [APIKey] was updated.
+     */
+    @SerialName(KeyUpdatedAt) val updatedAt: ClientDate
 )

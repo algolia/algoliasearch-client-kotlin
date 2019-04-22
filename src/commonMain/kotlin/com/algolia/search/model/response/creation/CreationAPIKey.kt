@@ -10,6 +10,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class CreationAPIKey(
-    @SerialName(KeyCreatedAt) val createdAt: ClientDate,
-    @SerialName(KeyKey) val apiKey: APIKey
+    /**
+     * The created or restored [APIKey].
+     */
+    @SerialName(KeyKey) val apiKey: APIKey,
+    /**
+     * The date at which the [APIKey] has been created or restored.
+     */
+    @SerialName(KeyCreatedAt) val createdAt: ClientDate
 )
