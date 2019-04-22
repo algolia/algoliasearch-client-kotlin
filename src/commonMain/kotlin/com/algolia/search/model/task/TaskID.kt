@@ -9,6 +9,10 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.LongSerializer
 
 
+/**
+ * This is a numeric value (up to 64bits) used to identify a [Task].
+ * It can be used to perform a [com.algolia.search.endpoint.EndpointAdvanced.waitTask] operation.
+ */
 @Serializable(TaskID.Companion::class)
 public data class TaskID(override val raw: Long) : Raw<Long> {
 
