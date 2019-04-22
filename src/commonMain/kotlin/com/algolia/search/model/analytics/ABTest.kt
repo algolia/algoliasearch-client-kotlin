@@ -9,9 +9,21 @@ import kotlinx.serialization.json.jsonArray
 
 @Serializable(ABTest.Companion::class)
 public data class ABTest(
+    /**
+     * Name of the [ABTest].
+     */
     @SerialName(KeyName) val name: String,
+    /**
+     * A date to automatically end an [ABTest] at a specific time.
+     */
     @SerialName(KeyEndAt) val endAt: ClientDate,
+    /**
+     * The base index [Variant].
+     */
     val variantA: Variant,
+    /**
+     * The index [Variant] to test against.
+     */
     val variantB: Variant
 ) {
 

@@ -2,6 +2,7 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
+import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.response.ResponseABTest
 import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.creation.CreationABTest
@@ -12,14 +13,69 @@ import com.algolia.search.transport.RequestOptions
 
 public interface EndpointAnalytics {
 
-    suspend fun addABTest(abTest: ABTest, requestOptions: RequestOptions? = null): CreationABTest
+    /**
+     * Create an [ABTest].
+     * You can set an [ABTest] on two different indices with different settings,
+     * or on the same index with different search parameters by providing a
+     * [Variant.customSearchParameters] setting on one of the
+     * [ABTest.variantA] [ABTest.variantB].
+     *
+     * @param abTest The definition of the [ABTest].
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     */
+    suspend fun addABTest(
+        abTest: ABTest,
+        requestOptions: RequestOptions? = null
+    ): CreationABTest
 
-    suspend fun getABTest(abTestID: ABTestID, requestOptions: RequestOptions? = null): ResponseABTest
+    /**
+     * Get an [ABTest] information and results.
+     *
+     * @param abTestID The [ABTestID] that was sent back in the response of the [addABTest] method.
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     */
+    suspend fun getABTest(
+        abTestID: ABTestID,
+        requestOptions: RequestOptions? = null
+    ): ResponseABTest
 
-    suspend fun stopABTest(abTestID: ABTestID, requestOptions: RequestOptions? = null): RevisionABTest
+    /**
+     * Stop an [ABTest]. Marks the [ABTest] as stopped.
+     * At this point, the test is over and cannot be restarted.
+     * Additionally, your application is back to normal:
+     * index A will perform as usual, receiving 100% of all search requests.
+     * Note that stopping is different from deleting: When you stop a test,
+     * all associated metadata and metrics are stored and remain accessible.
+     *
+     * @param abTestID The [ABTestID] that was sent back in the response of the [addABTest] method.
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     */
+    suspend fun stopABTest(
+        abTestID: ABTestID,
+        requestOptions: RequestOptions? = null
+    ): RevisionABTest
 
-    suspend fun deleteABTest(abTestID: ABTestID, requestOptions: RequestOptions? = null): DeletionABTest
+    /**
+     * Delete an [ABTest].
+     * Deletes the [ABTest] from your application and removes all associated metadata & metrics.
+     * You will therefore no longer be able to view or access the results.
+     * Note that deleting a test is different from stopping: When you delete a test,
+     * all associated metadata and metrics are deleted.
+     *
+     * @param abTestID The [ABTestID] that was sent back in the response of the [addABTest] method.
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     */
+    suspend fun deleteABTest(
+        abTestID: ABTestID,
+        requestOptions: RequestOptions? = null
+    ): DeletionABTest
 
+    /**
+     * List [ABTest] information and results.
+     *
+     * @param page Specify the first entry to retrieve (0-based, 0 is the most recent entry).
+     * @param hitsPerPage Specify the maximum number of entries to retrieve starting at the [page].
+     */
     suspend fun listABTests(
         page: Int? = null,
         hitsPerPage: Int? = null,

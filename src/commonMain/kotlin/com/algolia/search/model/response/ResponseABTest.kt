@@ -2,6 +2,7 @@ package com.algolia.search.model.response
 
 import com.algolia.search.helper.toABTestID
 import com.algolia.search.model.ClientDate
+import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.serialize.*
@@ -12,15 +13,44 @@ import kotlinx.serialization.json.jsonArray
 
 @Serializable(ResponseABTest.Companion::class)
 public data class ResponseABTest(
+    /**
+     * [ABTestID] of the [ABTest] test.
+     */
     val abTestID: ABTestID,
-    val createdAt: String,
-    val endAt: ClientDate,
-    val name: String,
-    val status: ABTestStatus,
-    val variantA: ResponseVariant,
-    val variantB: ResponseVariant,
+    /**
+     * [ABTest] significance based on click data.
+     * Should be > 0.95 to be considered significant (no matter which variant is winning).
+     */
     val clickSignificanceOrNull: Float? = null,
-    val conversionSignificanceOrNull: Float? = null
+    /**
+     * [ABTest] significance based on conversion data.
+     * Should be > 0.95 to be considered significant (no matter which variant is winning)
+     */
+    val conversionSignificanceOrNull: Float? = null,
+    /**
+     * Time at which the [ABTest] has been created.
+     */
+    val createdAt: String,
+    /**
+     * Time at which the [ABTest] will automatically stop.
+     */
+    val endAt: ClientDate,
+    /**
+     * Name of the [ABTest].
+     */
+    val name: String,
+    /**
+     * Current [ABTestStatus] of the [ABTest].
+     */
+    val status: ABTestStatus,
+    /**
+     * The base index [ResponseVariant].
+     */
+    val variantA: ResponseVariant,
+    /**
+     * The index [ResponseVariant] to test against.
+     */
+    val variantB: ResponseVariant
 ) {
 
     @Transient
