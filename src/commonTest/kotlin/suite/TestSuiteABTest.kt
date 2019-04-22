@@ -33,7 +33,7 @@ internal class TestSuiteABTest {
 
     private val abTest = ABTest(
         name = indexNameA.raw,
-        variantA = Variant(indexNameA, 60, "a description"),
+        variantA = Variant(indexNameA, 60, description = "a description"),
         variantB = Variant(indexNameB, 40),
         endAt = ClientDate(Time.getCurrentTimeMillis() + dayInMillis)
     )

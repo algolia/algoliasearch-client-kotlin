@@ -20,7 +20,7 @@ public data class CreationABTest(
      */
     @SerialName(KeyABTestID) val abTestID: ABTestID,
     /**
-     * The [TaskID] used with the [EndpointAdvanced.waitTask] method.
+     * The [TaskID] which can be used with the [EndpointAdvanced.waitTask] method.
      */
     @SerialName(KeyTaskID) override val taskID: TaskID,
     /**

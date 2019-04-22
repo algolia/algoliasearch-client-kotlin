@@ -1,5 +1,6 @@
 package com.algolia.search.endpoint
 
+import com.algolia.search.client.Index
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseLogs
@@ -12,6 +13,9 @@ import com.algolia.search.transport.RequestOptions
 
 public interface EndpointAdvanced {
 
+    /**
+     * The [IndexName] used by [Index] to perform operations on.
+     */
     val indexName: IndexName
 
     /**
@@ -58,6 +62,8 @@ public interface EndpointAdvanced {
      * @see wait
      *
      * Wait for several [Task] in parallel to complete.
+     *
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
      */
     suspend fun List<Task>.wait(
         timeout: Long? = null,

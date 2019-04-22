@@ -24,7 +24,7 @@ internal class TestABTest : TestSerializer<ABTest>(ABTest, JsonNoDefaults) {
         name = unknown,
         endAt = ClientDate(date),
         variantA = Variant(indexA, 40),
-        variantB = Variant(indexB, 60, unknown, Query())
+        variantB = Variant(indexB, 60, Query(), unknown)
     )
 
     override val items = listOf(
