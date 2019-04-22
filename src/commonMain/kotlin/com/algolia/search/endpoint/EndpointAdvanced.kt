@@ -74,6 +74,7 @@ public interface EndpointAdvanced {
      * @param hitsPerPage Specify the maximum number of entries to retrieve starting at the [page].
      * Maximum allowed value: 1,000.
      * @param logType Type of logs to retrieve.
+     * @param requestOptions A list of [RequestOptions] to send along with the query.
      */
     suspend fun getLogs(
         page: Int? = null,
