@@ -1,5 +1,6 @@
 package com.algolia.search.model.task
 
+import com.algolia.search.endpoint.EndpointAdvanced
 import com.algolia.search.helper.toTaskID
 import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
@@ -11,7 +12,7 @@ import kotlinx.serialization.internal.LongSerializer
 
 /**
  * This is a numeric value (up to 64bits) used to identify a [Task].
- * It can be used to perform a [com.algolia.search.endpoint.EndpointAdvanced.waitTask] operation.
+ * It can be used to perform a [EndpointAdvanced.waitTask] operation.
  */
 @Serializable(TaskID.Companion::class)
 public data class TaskID(override val raw: Long) : Raw<Long> {

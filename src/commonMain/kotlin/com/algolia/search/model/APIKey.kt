@@ -6,6 +6,9 @@ import kotlinx.serialization.*
 import kotlinx.serialization.internal.StringSerializer
 
 
+/**
+ * [APIKey] can't be a blank or empty string.
+ */
 @Serializable(APIKey.Companion::class)
 public data class APIKey(override val raw: String) : Raw<String> {
 
