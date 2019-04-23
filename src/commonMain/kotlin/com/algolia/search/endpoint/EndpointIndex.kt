@@ -34,7 +34,7 @@ public interface EndpointIndex {
      *
      * @param destination [IndexName] of the destination [Index].
      * @param scopes List of [Scope]. If omitted, then all objects and all [Scope] are copied.
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun copyIndex(
         destination: IndexName,
@@ -55,7 +55,7 @@ public interface EndpointIndex {
      * - Moving an index will have no impact on Analytics data because you cannot move an index’s Analytics data.
      *
      * @param destination [IndexName] of the destination [Index].
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun moveIndex(
         destination: IndexName,
@@ -72,7 +72,7 @@ public interface EndpointIndex {
      * Deleting an index will have no impact on Analytics data because you cannot delete an index’s Analytics data.
      * When deleting an inexistent index, the engine ignores the operation but does not send back an error.
      *
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun deleteIndex(
         requestOptions: RequestOptions? = null
@@ -84,7 +84,7 @@ public interface EndpointIndex {
      * @see copyIndex
      *
      * @param destination [IndexName] of the destination [Index].
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun copyRules(
         destination: IndexName,
@@ -97,7 +97,7 @@ public interface EndpointIndex {
      * @see copyIndex
      *
      * @param destination [IndexName] of the destination [Index].
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun copySettings(
         destination: IndexName,
@@ -110,7 +110,7 @@ public interface EndpointIndex {
      * @see copyIndex
      *
      * @param destination [IndexName] of the destination [Index].
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun copySynonyms(
         destination: IndexName,

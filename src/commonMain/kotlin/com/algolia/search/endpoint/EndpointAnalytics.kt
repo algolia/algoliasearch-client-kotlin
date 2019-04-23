@@ -21,7 +21,7 @@ public interface EndpointAnalytics {
      * [ABTest.variantA] [ABTest.variantB].
      *
      * @param abTest The definition of the [ABTest].
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun addABTest(
         abTest: ABTest,
@@ -32,7 +32,7 @@ public interface EndpointAnalytics {
      * Get an [ABTest] information and results.
      *
      * @param abTestID The [ABTestID] that was sent back in the response of the [addABTest] method.
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun getABTest(
         abTestID: ABTestID,
@@ -48,7 +48,7 @@ public interface EndpointAnalytics {
      * all associated metadata and metrics are stored and remain accessible.
      *
      * @param abTestID The [ABTestID] that was sent back in the response of the [addABTest] method.
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun stopABTest(
         abTestID: ABTestID,
@@ -63,7 +63,7 @@ public interface EndpointAnalytics {
      * all associated metadata and metrics are deleted.
      *
      * @param abTestID The [ABTestID] that was sent back in the response of the [addABTest] method.
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun deleteABTest(
         abTestID: ABTestID,

@@ -61,7 +61,7 @@ public data class Index internal constructor(
      * @see [browse]
      *
      * @param query The [Query] used to search.
-     * @param requestOptions [RequestOptions] sent along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      *
      * @return [List<ResponseSearch>]
      */

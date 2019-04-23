@@ -20,7 +20,7 @@ public interface EndpointAPIKey {
      * This is used for more protection against [APIKey] leaking and reuse.
      * For security reasons, the creation of the key will fail if the server from which the key is created is not in the
      * restricted network. Example: "restrictSources=223.139.41".
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun addAPIKey(
         params: APIKeyParams,
@@ -33,7 +33,7 @@ public interface EndpointAPIKey {
      *
      * @param apiKey [APIKey] to update
      * @param params permissions/restrictions specified by [APIKeyParams]
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun updateAPIKey(
         apiKey: APIKey,
@@ -48,7 +48,7 @@ public interface EndpointAPIKey {
      * consequences.
      *
      * @param apiKey [APIKey] to delete
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun deleteAPIKey(
         apiKey: APIKey,
@@ -59,7 +59,7 @@ public interface EndpointAPIKey {
      * [APIKey] to restore.
      *
      * @param apiKey [APIKey] to restore
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun restoreAPIKey(
         apiKey: APIKey,
@@ -72,7 +72,7 @@ public interface EndpointAPIKey {
      * When using a non-admin [APIKey], you can only retrieve information on this specific [APIKey].
      *
      * @param apiKey [APIKey] to retrieve permissions for.
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun getAPIKey(
         apiKey: APIKey,
@@ -82,7 +82,7 @@ public interface EndpointAPIKey {
     /**
      * Get the full list of API Keys.
      *
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun listAPIKeys(
         requestOptions: RequestOptions? = null

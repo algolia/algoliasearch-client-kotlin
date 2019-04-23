@@ -22,7 +22,7 @@ public interface EndpointAdvanced {
      * Check the current [TaskStatus] of a given [Task].
      *
      * @param taskID of the indexing [Task].
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun getTask(
         taskID: TaskID,
@@ -38,7 +38,7 @@ public interface EndpointAdvanced {
      * You can wait for a task to complete by using the [taskID] and this method.
      *
      * @param taskID of the indexing task to wait for.
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun waitTask(
         taskID: TaskID,
@@ -51,7 +51,7 @@ public interface EndpointAdvanced {
      *
      * @param timeout If specified, the method will throw a [kotlinx.coroutines.TimeoutCancellationException] after the
      * timeout value in milliseconds is elapsed.
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun Task.wait(
         timeout: Long? = null,
@@ -63,7 +63,7 @@ public interface EndpointAdvanced {
      *
      * Wait for several [Task] in parallel to complete.
      *
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun List<Task>.wait(
         timeout: Long? = null,
@@ -80,7 +80,7 @@ public interface EndpointAdvanced {
      * @param hitsPerPage Specify the maximum number of entries to retrieve starting at the [page].
      * Maximum allowed value: 1,000.
      * @param logType Type of logs to retrieve.
-     * @param requestOptions A list of [RequestOptions] to send along with the query.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun getLogs(
         page: Int? = null,
