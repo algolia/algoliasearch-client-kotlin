@@ -13,12 +13,12 @@ import kotlin.test.Test
 internal class DocReplaceAllObjects {
 
 //    suspend fun Index.replaceAllObjects(
-//        [data](#method-param-objects): __List<JsonObject>__
+//        [records](#method-param-objects): __List<JsonObject>__
 //    ): List<Task>
 //
 //    suspend fun <T : Indexable> Index.replaceAllObjects(
 //        serializer: KSerializer<T>,
-//        [data](#method-param-objects): List<T>
+//        [records](#method-param-objects): List<T>
 //    ): List<Task>
 
     @Test

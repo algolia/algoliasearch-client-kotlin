@@ -22,7 +22,7 @@ internal class DocPartialUpdate {
 //    ): RevisionObject
 //
 //    suspend fun Index.partialUpdateObjects(
-//        data: __List<Pair<ObjectID, Partial>>__,
+//        partials: __List<Pair<ObjectID, Partial>>__,
 //        #{createIfNotExists}: __Boolean__ = true,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch

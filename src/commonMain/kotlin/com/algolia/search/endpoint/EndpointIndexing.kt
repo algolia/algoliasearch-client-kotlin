@@ -24,7 +24,7 @@ public interface EndpointIndexing {
     val indexName: IndexName
 
     /**
-     * Add new objects to an index.
+     * Add a new record to an index.
      * This method allows you to create records on your index by sending one or more objects.
      * Each object contains a set of attributes and values, which represents a full record on an index.
      * There is no limit to the number of objects that can be passed, but a size limit of 1 GB on the total request.
@@ -36,12 +36,12 @@ public interface EndpointIndexing {
      * This can only be resolved if you wait before sending any further indexing operations.
      *
      * @param serializer [KSerializer] of type [T] for serialization.
-     * @param data The record [T] to save.
+     * @param record The record [T] to save.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun <T> saveObject(
         serializer: KSerializer<T>,
-        data: T,
+        record: T,
         requestOptions: RequestOptions? = null
     ): CreationObject
 
@@ -51,12 +51,12 @@ public interface EndpointIndexing {
      * @see saveObject
      *
      * @param serializer [KSerializer] of type [T] for serialization.
-     * @param data The objects [T] to save.
+     * @param records The records [T] to save.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun <T> saveObjects(
         serializer: KSerializer<T>,
-        data: List<T>,
+        records: List<T>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
 
@@ -65,11 +65,11 @@ public interface EndpointIndexing {
      *
      * @see saveObject
      *
-     * @param data The object [JsonObject] to save.
+     * @param record The record [JsonObject] to save.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun saveObject(
-        data: JsonObject,
+        record: JsonObject,
         requestOptions: RequestOptions? = null
     ): CreationObject
 
@@ -78,11 +78,11 @@ public interface EndpointIndexing {
      *
      * @see saveObject
      *
-     * @param data The list of objects [JsonObject] to save.
+     * @param records The list of records [JsonObject] to save.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun saveObjects(
-        data: List<JsonObject>,
+        records: List<JsonObject>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
 
@@ -102,12 +102,12 @@ public interface EndpointIndexing {
      * This can only be resolved if you wait before sending any further indexing operations.
      *
      * @param serializer [KSerializer] of type [T] for serialization.
-     * @param data The object [T] to replace.
+     * @param record The record [T] to replace.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
     suspend fun <T : Indexable> replaceObject(
         serializer: KSerializer<T>,
-        data: T,
+        record: T,
         requestOptions: RequestOptions? = null
     ): RevisionObject
 
@@ -117,12 +117,12 @@ public interface EndpointIndexing {
      * @see replaceObject
      *
      * @param serializer [KSerializer] of type [T] for serialization.
-     * @param data The objects [T] to replace.
+     * @param records The records [T] to replace.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun <T : Indexable> replaceObjects(
         serializer: KSerializer<T>,
-        data: List<T>,
+        records: List<T>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
 
@@ -132,12 +132,12 @@ public interface EndpointIndexing {
      * @see replaceObject
      *
      * @param objectID The [ObjectID] to identify the object.
-     * @param data The object [JsonObject] to replace.
+     * @param record The record [JsonObject] to replace.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun replaceObject(
         objectID: ObjectID,
-        data: JsonObject,
+        record: JsonObject,
         requestOptions: RequestOptions? = null
     ): RevisionObject
 
@@ -146,11 +146,11 @@ public interface EndpointIndexing {
      *
      * @see replaceObject
      *
-     * @param data The list of objects to replace.
+     * @param records The list of records to replace.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun replaceObjects(
-        data: List<Pair<ObjectID, JsonObject>>,
+        records: List<Pair<ObjectID, JsonObject>>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
 
@@ -161,11 +161,11 @@ public interface EndpointIndexing {
      * passed objects. Finally, the existing index is replaced by the temporary one.
      *
      * @param serializer [KSerializer] of type [T] for serialization.
-     * @param data The list of objects to replace.
+     * @param records The list of records to replace.
      */
     suspend fun <T> replaceAllObjects(
         serializer: KSerializer<T>,
-        data: List<T>
+        records: List<T>
     ): List<TaskIndex>
 
     /**
@@ -174,13 +174,13 @@ public interface EndpointIndexing {
      * @see replaceAllObjects
      */
     suspend fun replaceAllObjects(
-        data: List<JsonObject>
+        records: List<JsonObject>
     ): List<TaskIndex>
 
     /**
      * Remove an object from an index using its [ObjectID].
      *
-     * @param objectID The [ObjectID] to identify the object.
+     * @param objectID The [ObjectID] to identify the record.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun deleteObject(
@@ -191,7 +191,7 @@ public interface EndpointIndexing {
     /**
      * Remove multiple objects from an index using their [ObjectID].
      *
-     * @param objectIDs The [ObjectID] to identify the object.
+     * @param objectIDs The [ObjectID] to identify the record.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun deleteObjects(
@@ -211,7 +211,7 @@ public interface EndpointIndexing {
      * the rate limit when you start receiving errors on your indexing operations. This can only be resolved if you wait
      * before sending any further indexing operations.
      *
-     * @param query Objects matching [DeleteByQuery] will be deleted.
+     * @param query Records [DeleteByQuery] will be deleted.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun deleteObjectsBy(
@@ -220,11 +220,11 @@ public interface EndpointIndexing {
     ): RevisionIndex
 
     /**
-     * Get one object using its [ObjectID].
+     * Get one record using its [ObjectID].
      *
      * @param serializer [KSerializer] of type [T] for deserialization.
-     * @param objectID The [ObjectID] to identify the object.
-     * @param attributesToRetrieve Specify a list of [Attribute] to retrieve. This list will apply to all objects.
+     * @param objectID The [ObjectID] to identify the record.
+     * @param attributesToRetrieve Specify a list of [Attribute] to retrieve. This list will apply to all records.
      * If you don’t specify any attributes, every attribute will be returned.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
@@ -236,11 +236,11 @@ public interface EndpointIndexing {
     ): T
 
     /**
-     * Schemaless version of [getObject]. Use this method if you don't know the expected schema of the object you want
+     * Schemaless version of [getObject]. Use this method if you don't know the expected schema of the record you want
      * to retrieve.
      *
-     * @param objectID The [ObjectID] to identify the object.
-     * @param attributesToRetrieve Specify a list of [Attribute] to retrieve. This list will apply to all objects.
+     * @param objectID The [ObjectID] to identify the record.
+     * @param attributesToRetrieve Specify a list of [Attribute] to retrieve. This list will apply to all records.
      * If you don’t specify any attributes, every attribute will be returned.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
@@ -251,7 +251,7 @@ public interface EndpointIndexing {
     ): JsonObject
 
     /**
-     * Get multiple objects using their [ObjectID].
+     * Get multiple records using their [ObjectID].
      *
      * @see getObject
      */
@@ -262,7 +262,7 @@ public interface EndpointIndexing {
     ): ResponseObjects
 
     /**
-     * Update one or more attributes of an existing object.
+     * Update one or more attributes of an existing record.
      * This method enables you to update only a part of an object by singling out one or more attributes of an existing
      * object and performing the following actions:
      * - add new attributes
@@ -282,11 +282,11 @@ public interface EndpointIndexing {
      * You’ll know you’ve reached the rate limit when you start receiving errors on your indexing operations.
      * This can only be resolved if you wait before sending any further indexing operations.
      *
-     * @param objectID The [ObjectID] identifying the object to partially update.
+     * @param objectID The [ObjectID] identifying the record to partially update.
      * @param partial [Partial]
-     * @param createIfNotExists When true, a partial update on a nonexistent object will create the object
-     * (generating the objectID and using the attributes as defined in the object). When false, a partial
-     * update on a nonexistent object will be ignored (but no error will be sent back).
+     * @param createIfNotExists When true, a partial update on a nonexistent record will create the record
+     * (generating the objectID and using the attributes as defined in the record). When false, a partial
+     * update on a nonexistent record will be ignored (but no error will be sent back).
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun partialUpdateObject(
@@ -297,21 +297,21 @@ public interface EndpointIndexing {
     ): RevisionObject
 
     /**
-     * Update one or more attributes of existing objects.
+     * Update one or more attributes of existing records.
      *
-     * @param data A List of [Pair] of [ObjectID] and [Partial] to partially update each object.
+     * @param partials A list of records to partially update each record.
      * @param createIfNotExists
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun partialUpdateObjects(
-        data: List<Pair<ObjectID, Partial>>,
+        partials: List<Pair<ObjectID, Partial>>,
         createIfNotExists: Boolean = true,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
 
     /**
      * Perform several indexing operations in one API call.
-     * This method enables you to batch multiple different indexing operations in one API, like add or delete objects
+     * This method enables you to batch multiple different indexing operations in one API, like add or delete records
      * potentially targeting multiple indices.
      *
      * You would use this method to:

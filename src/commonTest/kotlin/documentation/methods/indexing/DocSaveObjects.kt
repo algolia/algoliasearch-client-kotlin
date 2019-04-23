@@ -17,24 +17,24 @@ internal class DocSaveObjects {
 
 //    suspend fun <T : Indexable> Index.replaceObject(
 //        serializer: __KSerializer<T>__,
-//        [data](#method-param-objects): __T__,
+//        [record](#method-param-objects): __T__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): RevisionObject
 //
 //    suspend fun <T : Indexable> Index.replaceObjects(
 //        serializer: __KSerializer<T>__,
-//        [data](#method-param-objects): __List<T>__,
+//        [records](#method-param-objects): __List<T>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
 //
 //    suspend fun Index.replaceObject(
 //        [objectID](#method-param-objectidkey): __ObjectID__,
-//        [data](#method-param-objects): __JsonObject__,
+//        [record](#method-param-objects): __JsonObject__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): RevisionObject
 //
 //    suspend fun Index.replaceObjects(
-//        [data](#method-param-objects): __List<Pair<ObjectID, JsonObject>>__,
+//        [records](#method-param-objects): __List<Pair<ObjectID, JsonObject>>__,
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
 
