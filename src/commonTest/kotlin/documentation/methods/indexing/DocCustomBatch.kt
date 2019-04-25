@@ -57,21 +57,21 @@ internal class DocCustomBatch {
                 ),
                 BatchOperationIndex(
                     indexName = indexName1,
-                    operation = BatchOperation.UpdateObject.from(
+                    operation = BatchOperation.PartialUpdateObject.from(
                         serializer = Contact.serializer(),
                         data = Contact("Max", "Barninger", ObjectID("myID2"))
                     )
                 ),
                 BatchOperationIndex(
                     indexName = indexName1,
-                    operation = BatchOperation.UpdateObject.from(
+                    operation = BatchOperation.PartialUpdateObject.from(
                         objectID = ObjectID("myID3"),
                         partial = Partial.Update(Attribute("firstname"), "McFarway")
                     )
                 ),
                 BatchOperationIndex(
                     indexName = indexName1,
-                    operation = BatchOperation.UpdateObject.from(
+                    operation = BatchOperation.PartialUpdateObject.from(
                         objectID = ObjectID("myID4"),
                         partial = Partial.Update(Attribute("firstname"), "Warren"),
                         createIfNotExists = false
@@ -115,21 +115,21 @@ internal class DocCustomBatch {
                 ),
                 BatchOperationIndex(
                     indexName = indexName1,
-                    operation = BatchOperation.UpdateObject.from(
+                    operation = BatchOperation.PartialUpdateObject.from(
                         serializer = Contact.serializer(),
                         data = Contact("Max", "Barninger", ObjectID("myID2"))
                     )
                 ),
                 BatchOperationIndex(
                     indexName = indexName1,
-                    operation = BatchOperation.UpdateObject.from(
+                    operation = BatchOperation.PartialUpdateObject.from(
                         objectID = ObjectID("myID3"),
                         partial = Partial.Update(Attribute("firstname"), "McFarway")
                     )
                 ),
                 BatchOperationIndex(
                     indexName = indexName1,
-                    operation = BatchOperation.UpdateObject.from(
+                    operation = BatchOperation.PartialUpdateObject.from(
                         objectID = ObjectID("myID4"),
                         partial = Partial.Update(Attribute("firstname"), "Warren"),
                         createIfNotExists = false

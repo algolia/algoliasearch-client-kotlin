@@ -19,8 +19,8 @@ internal class TestBatchOperation {
         AddObject(json).raw shouldEqual KeyAddObject
         ReplaceObject(objectID, json).raw shouldEqual KeyUpdateObject
         DeleteObject(objectID).raw shouldEqual KeyDeleteObject
-        UpdateObject(objectID, json).raw shouldEqual KeyPartialUpdateObject
-        UpdateObject(objectID, json, false).raw shouldEqual KeyPartialUpdateObjectNoCreate
+        PartialUpdateObject(objectID, json).raw shouldEqual KeyPartialUpdateObject
+        PartialUpdateObject(objectID, json, false).raw shouldEqual KeyPartialUpdateObjectNoCreate
         ClearIndex.raw shouldEqual KeyClear
         DeleteIndex.raw shouldEqual KeyDelete
         Other(unknown, json).raw shouldEqual unknown

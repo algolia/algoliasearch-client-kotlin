@@ -25,11 +25,11 @@ internal class TestBatchOperation : TestSerializer<BatchOperation>(BatchOperatio
             KeyAction to KeyUpdateObject
             KeyBody to json
         },
-        UpdateObject(objectID, json, true) to json {
+        PartialUpdateObject(objectID, json, true) to json {
             KeyAction to KeyPartialUpdateObject
             KeyBody to json
         },
-        UpdateObject(objectID, json, false) to json {
+        PartialUpdateObject(objectID, json, false) to json {
             KeyAction to KeyPartialUpdateObjectNoCreate
             KeyBody to json
         },

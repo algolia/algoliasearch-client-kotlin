@@ -194,7 +194,7 @@ internal class EndpointIndexingImpl(
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): ResponseBatch {
-        val operations = partials.map { BatchOperation.UpdateObject.from(it.first, it.second, createIfNotExists) }
+        val operations = partials.map { BatchOperation.PartialUpdateObject.from(it.first, it.second, createIfNotExists) }
 
         return batch(operations, requestOptions)
     }
