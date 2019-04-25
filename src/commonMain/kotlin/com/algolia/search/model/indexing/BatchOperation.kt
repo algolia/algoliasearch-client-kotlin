@@ -1,5 +1,7 @@
 package com.algolia.search.model.indexing
 
+import com.algolia.search.endpoint.EndpointIndex
+import com.algolia.search.endpoint.EndpointIndexing
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.Raw
@@ -10,9 +12,15 @@ import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.json
 
 
+/**
+ * Operation that can be batched using [EndpointIndexing.batch]
+ */
 @Serializable(BatchOperation.Companion::class)
 public sealed class BatchOperation(override val raw: String) : Raw<String> {
 
+    /**
+     *  Equivalent to [EndpointIndexing.saveObject] without an ID
+     */
     public data class AddObject(
         val json: JsonObject
     ) : BatchOperation(KeyAddObject) {
@@ -25,6 +33,9 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
         }
     }
 
+    /**
+     *  Equivalent to [EndpointIndexing.replaceObject]
+     */
     public data class ReplaceObject(
         val objectID: ObjectID,
         val json: JsonObject
@@ -38,6 +49,9 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
         }
     }
 
+    /**
+     * Equivalent to [EndpointIndexing.partialUpdateObject]
+     */
     public data class UpdateObject(
         val objectID: ObjectID,
         val json: JsonObject,
@@ -68,10 +82,19 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
         }
     }
 
+    /**
+     * Equivalent to [EndpointIndexing.deleteObject]
+     */
     public data class DeleteObject(val objectID: ObjectID) : BatchOperation(KeyDeleteObject)
 
+    /**
+     * Equivalent to [EndpointIndex.deleteIndex]
+     */
     public object DeleteIndex : BatchOperation(KeyDelete)
 
+    /**
+     * Equivalent to [EndpointIndexing.clearObjects]
+     */
     public object ClearIndex : BatchOperation(KeyClear)
 
     public data class Other(val key: String, val json: JsonObject) : BatchOperation(key)

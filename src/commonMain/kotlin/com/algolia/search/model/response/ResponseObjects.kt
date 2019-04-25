@@ -10,7 +10,13 @@ import kotlinx.serialization.json.JsonObject
 
 @Serializable
 public data class ResponseObjects(
+    /**
+     * List of requested records. If a record is not found, it will be marked as null in the list.
+     */
     @SerialName(KeyResults) val results: List<JsonObject?>,
+    /**
+     * Optional error message in case of failure to retrieve a requested record.
+     */
     @SerialName(KeyMessage) val messageOrNull: String? = null
 ) {
 

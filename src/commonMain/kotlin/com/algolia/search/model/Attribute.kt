@@ -9,6 +9,18 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
+/**
+ * An attribute is a key in the json definition of a record.
+ * Example:
+ *
+ * ```
+ * {
+ *  "color": "red"
+ * }
+ * ```
+ *
+ * This record has an attribute "color", and its value is "red".
+ */
 @Serializable(Attribute.Companion::class)
 public data class Attribute(override val raw: String) : Raw<String> {
 
