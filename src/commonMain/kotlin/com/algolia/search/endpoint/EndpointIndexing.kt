@@ -211,7 +211,7 @@ public interface EndpointIndexing {
      * the rate limit when you start receiving errors on your indexing operations. This can only be resolved if you wait
      * before sending any further indexing operations.
      *
-     * @param query Records [DeleteByQuery] will be deleted.
+     * @param query [DeleteByQuery] to match records for deletion.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun deleteObjectsBy(
