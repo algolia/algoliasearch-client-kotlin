@@ -1,5 +1,6 @@
 package com.algolia.search.model.insights
 
+import com.algolia.search.endpoint.EndpointInsights
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
@@ -15,6 +16,9 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
 
+/**
+ * Event that can be send with [EndpointInsights]
+ */
 @Serializable(InsightsEvent.Companion::class)
 public sealed class InsightsEvent {
 
