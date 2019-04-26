@@ -8,5 +8,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class ResponseTopUserID(
+    /**
+     * Mapping of [ClusterName] to top users.
+     */
     @SerialName(KeyTopUsers) val topUsers: Map<ClusterName, List<ResponseUserID>>
 )

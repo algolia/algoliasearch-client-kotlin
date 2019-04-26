@@ -8,5 +8,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class Creation(
+    /**
+     * The date at which the creation happened.
+     */
     @SerialName(KeyCreatedAt) val createdAt: ClientDate
 )

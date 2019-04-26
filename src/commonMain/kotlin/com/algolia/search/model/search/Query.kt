@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 public data class Query(
     /**
      * The text to search in the index.
-     * Engine default: "" (empty name)
+     * Engine default: "" (empty string)
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/query/]
      */
     @SerialName(KeyQuery) var query: String? = null,

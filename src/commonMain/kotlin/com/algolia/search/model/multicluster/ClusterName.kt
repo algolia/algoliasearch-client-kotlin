@@ -10,6 +10,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
+/**
+ * [ClusterName] of a cluster. Can't be a blank or empty string.
+ */
 @Serializable(ClusterName.Companion::class)
 public data class ClusterName(override val raw: String) : Raw<String> {
 
