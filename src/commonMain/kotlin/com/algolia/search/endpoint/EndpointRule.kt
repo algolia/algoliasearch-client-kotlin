@@ -10,6 +10,9 @@ import com.algolia.search.model.rule.RuleQuery
 import com.algolia.search.transport.RequestOptions
 
 
+/**
+ * [Documentation][https://www.algolia.com/doc/api-client/methods/query-rules/?language=kotlin]
+ */
 public interface EndpointRule {
 
     val indexName: IndexName
