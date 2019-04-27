@@ -10,9 +10,25 @@ import kotlinx.serialization.json.json
 
 @Serializable(SynonymQuery.Companion::class)
 public data class SynonymQuery(
+    /**
+     * Engine default: "" (empty string)
+     * The search query to find synonyms. Use an empty query to browse all the [Synonym] of an index.
+     */
     var query: String? = null,
+    /**
+     * Engine default: 0
+     * The page to fetch when browsing through several pages of results. This value is zero-based.
+     */
     var page: Int? = null,
+    /**
+     * Engine default: 100
+     * The number of synonyms to return for each call.
+     */
     var hitsPerPage: Int? = null,
+    /**
+     * Engine default: [] (empty list)
+     * Restrict the search to a specific [SynonymType].
+     */
     var synonymTypes: List<SynonymType>? = null
 ) {
 

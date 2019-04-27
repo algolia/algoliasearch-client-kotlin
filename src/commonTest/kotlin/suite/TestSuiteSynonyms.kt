@@ -67,11 +67,13 @@ internal class TestSuiteSynonyms {
                 synonyms.forEach { getSynonym(it.objectID) shouldEqual it }
                 searchSynonyms().let {
                     it.nbHits shouldEqual 5
-                    it.hits shouldContain synonymOneWay
-                    it.hits shouldContain synonymMultiWay
-                    it.hits shouldContain synonymPlaceholder
-                    it.hits shouldContain synonymAlternative1
-                    it.hits shouldContain synonymAlternative2
+                    val synonyms = it.hits.map { hit -> hit.synonym }
+
+                    synonyms shouldContain synonymOneWay
+                    synonyms shouldContain synonymMultiWay
+                    synonyms shouldContain synonymPlaceholder
+                    synonyms shouldContain synonymAlternative1
+                    synonyms shouldContain synonymAlternative2
                 }
                 deleteSynonym(gba).wait() shouldEqual TaskStatus.Published
                 (shouldFailWith<BadResponseStatusException> {

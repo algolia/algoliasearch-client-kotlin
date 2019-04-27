@@ -26,7 +26,7 @@ public interface EndpointSearch {
      * the [paginationLimitedTo][https://www.algolia.com/doc/api-reference/api-parameters/paginationLimitedTo/] parameter.
      *
      * @param query The [Query] used to search.
-     * @param requestOptions Configure request locally with [RequestOptions]
+     * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun search(query: Query = Query(), requestOptions: RequestOptions? = null): ResponseSearch
 
@@ -51,7 +51,7 @@ public interface EndpointSearch {
      * If more records are available, [ResponseSearch.cursorOrNull] will not be null.
      *
      * @param query The [Query] used to search.
-     * @param requestOptions Configure request locally with [RequestOptions]
+     * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun browse(query: Query = Query(), requestOptions: RequestOptions? = null): ResponseSearch
 
@@ -96,7 +96,7 @@ public interface EndpointSearch {
      *
      * @param attribute The [Attribute] to facet on.
      * @param query The [FacetQuery] used to search.
-     * @param requestOptions Configure request locally with [RequestOptions]
+     * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun searchForFacets(
         attribute: Attribute,
@@ -112,7 +112,7 @@ public interface EndpointSearch {
      * @param query The [Query] used to search.
      * @param disjunctiveFacets List of [Attribute] that are marked as disjunctive facets.
      * @param filters The [Filter.Facet] to be applied
-     * @param requestOptions Configure request locally with [RequestOptions]
+     * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun searchDisjunctiveFacets(
         query: Query,

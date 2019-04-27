@@ -16,34 +16,61 @@ import kotlinx.serialization.json.json
 @Serializable(Synonym.Companion::class)
 public sealed class Synonym {
 
+    /**
+     * Must be unique. It can contain any character, and be of unlimited length.
+     * With this method, you either create a new synonym or update an existing one.
+     * In both cases, you must specify an [ObjectID]. When the [ObjectID] is not found in the index, it will create a new
+     * synonym; otherwise, it will be an update.
+     * Note that for some languages, this parameter is duplicated in the synonym object.
+     */
     abstract val objectID: ObjectID
 
     public data class OneWay(
         override val objectID: ObjectID,
+        /**
+         * Defines the synonym. A word or expression, used as the basis for the [synonyms].
+         */
         val input: String,
+        /**
+         * A list of synonyms (up to 100).
+         */
         val synonyms: List<String>
     ) : Synonym() {
 
         init {
             if (input.isBlank()) throw EmptyStringException("Input")
             if (synonyms.isEmpty()) throw EmptyListException("Synonyms")
+            if (synonyms.size > 100) throw IllegalArgumentException("OneWay synonym have a maximum of 100 synonyms")
         }
     }
 
     public data class MultiWay(
         override val objectID: ObjectID,
+        /**
+         * A list of synonyms (up to 20).
+         */
         val synonyms: List<String>
     ) : Synonym() {
 
         init {
             if (synonyms.isEmpty()) throw EmptyListException("Synonyms")
+            if (synonyms.size > 20) throw IllegalArgumentException("OneWay synonym have a maximum of 100 synonyms")
         }
     }
 
     public data class AlternativeCorrections(
         override val objectID: ObjectID,
+        /**
+         * A single word, used as the basis for the [corrections].
+         */
         val word: String,
+        /**
+         * An list of corrections of the [word].
+         */
         val corrections: List<String>,
+        /**
+         * [SynonymType.Typo] indicating the number of alternative corrections.
+         */
         val typo: SynonymType.Typo
     ) : Synonym() {
 
@@ -56,7 +83,13 @@ public sealed class Synonym {
 
     public data class Placeholder(
         override val objectID: ObjectID,
+        /**
+         * A single word, used as the basis for the [replacements].
+         */
         val placeholder: Token,
+        /**
+         * An list of replacements of the [placeholder].
+         */
         val replacements: List<String>
     ) : Synonym() {
 
@@ -64,6 +97,9 @@ public sealed class Synonym {
             if (replacements.isEmpty()) throw EmptyListException("Replacements")
         }
 
+        /**
+         * Creates the [Placeholder.placeholder] pattern for you.
+         */
         public data class Token(val token: String) : Raw<String> {
 
             override val raw = "<$token>"

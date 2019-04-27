@@ -37,6 +37,7 @@ internal object KSerializerHighlightResults : KSerializer<Map<Attribute, List<Hi
         val json = decoder.asJsonInput().jsonObject
 
         return json.map { (key, value) ->
+            println("$key $value")
             key.toAttribute() to when (value) {
                 is JsonObject -> listOf(Json.fromJson(serializer, value))
                 is JsonArray -> Json.fromJson(serializer.list, value)

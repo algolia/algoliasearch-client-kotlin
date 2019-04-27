@@ -17,10 +17,19 @@ public sealed class SynonymType(override val raw: String) : Raw<String> {
         Two
     }
 
+    /**
+     * Matches [Synonym.OneWay].
+     */
     public object OneWay : SynonymType(KeyOneWaySynonym)
 
+    /**
+     * Matches [Synonym.MultiWay].
+     */
     public object MultiWay : SynonymType(KeySynonym)
 
+    /**
+     * Matches [Synonym.AlternativeCorrections].
+     */
     public data class AlternativeCorrections(val typo: Typo) : SynonymType(
         when (typo) {
             Typo.One -> KeyAlternativeCorrection1
@@ -28,6 +37,9 @@ public sealed class SynonymType(override val raw: String) : Raw<String> {
         }
     )
 
+    /**
+     * Matches [Synonym.Placeholder]
+     */
     public object Placeholder : SynonymType(KeyPlaceholder)
 
     public data class Other(override val raw: String) : SynonymType(raw)
