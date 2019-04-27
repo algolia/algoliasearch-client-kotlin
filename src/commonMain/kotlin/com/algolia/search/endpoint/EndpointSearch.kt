@@ -11,6 +11,9 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.transport.RequestOptions
 
 
+/**
+ * [Documentation][https://www.algolia.com/doc/api-client/methods/search/?language=kotlin]
+ */
 public interface EndpointSearch {
 
     val indexName: IndexName
@@ -24,7 +27,6 @@ public interface EndpointSearch {
      *
      * @param query The [Query] used to search.
      * @param requestOptions Configure request locally with [RequestOptions]
-     * @return [ResponseSearch].
      */
     suspend fun search(query: Query = Query(), requestOptions: RequestOptions? = null): ResponseSearch
 
@@ -50,7 +52,6 @@ public interface EndpointSearch {
      *
      * @param query The [Query] used to search.
      * @param requestOptions Configure request locally with [RequestOptions]
-     * @return [ResponseSearch].
      */
     suspend fun browse(query: Query = Query(), requestOptions: RequestOptions? = null): ResponseSearch
 
@@ -58,7 +59,6 @@ public interface EndpointSearch {
      * @param cursor [Cursor] indicating the location to resume browsing from.
      * Must match the value returned by the previous call to [browse] [ResponseSearch.cursorOrNull]
      * @param requestOptions Configure request locally with [RequestOptions]
-     * @return [ResponseSearch].
      */
     suspend fun browse(cursor: Cursor, requestOptions: RequestOptions? = null): ResponseSearch
 
@@ -97,7 +97,6 @@ public interface EndpointSearch {
      * @param attribute The [Attribute] to facet on.
      * @param query The [FacetQuery] used to search.
      * @param requestOptions Configure request locally with [RequestOptions]
-     * @return [ResponseSearchForFacets].
      */
     suspend fun searchForFacets(
         attribute: Attribute,
@@ -114,7 +113,6 @@ public interface EndpointSearch {
      * @param disjunctiveFacets List of [Attribute] that are marked as disjunctive facets.
      * @param filters The [Filter.Facet] to be applied
      * @param requestOptions Configure request locally with [RequestOptions]
-     * @return [ResponseSearch]
      */
     suspend fun searchDisjunctiveFacets(
         query: Query,
