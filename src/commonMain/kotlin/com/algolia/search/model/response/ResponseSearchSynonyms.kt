@@ -1,11 +1,13 @@
 package com.algolia.search.model.response
 
-import com.algolia.search.model.Attribute
 import com.algolia.search.model.response.ResponseSearchSynonyms.Hit
-import com.algolia.search.model.search.HighlightResult
 import com.algolia.search.model.synonym.Synonym
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.JsonNonStrict
+import com.algolia.search.serialize.KeyHits
+import com.algolia.search.serialize.KeyNbHits
+import com.algolia.search.serialize.asJsonInput
 import kotlinx.serialization.*
+import kotlinx.serialization.json.JsonObject
 
 
 @Serializable
@@ -26,27 +28,18 @@ public data class ResponseSearchSynonyms(
          * The [Synonym].
          */
         val synonym: Synonym,
-        /**
-         *  Contains the highlighted [Synonym].
-         */
-        val highlightResultOrNull: Map<Attribute, List<HighlightResult>>? = null
+        private val json: JsonObject
     ) {
 
-        @Transient
-        public val highlights: Map<Attribute, List<HighlightResult>>
-            get() = highlightResultOrNull!!
 
         @Serializer(Hit::class)
         companion object : DeserializationStrategy<Hit> {
 
             override fun deserialize(decoder: Decoder): Hit {
                 val json = decoder.asJsonInput().jsonObject
-                val synonym = Json.fromJson(Synonym.serializer(), json)
-                val highlights = json.getObjectOrNull(Key_HighlightResult)?.let {
-                    Json.fromJson(KSerializerHighlightResults, it)
-                }
+                val synonym = JsonNonStrict.fromJson(Synonym.serializer(), json)
 
-                return Hit(synonym, highlights)
+                return Hit(synonym, json)
             }
         }
     }

@@ -57,7 +57,7 @@ class TestSuiteReplaceAll {
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
 
                 getObject(objectIDTwo).getPrimitive(KeyObjectID).content shouldEqual objectIDTwo.raw
-                getRule(objectIDTwo).rule.objectID shouldEqual objectIDTwo
+                getRule(objectIDTwo).objectID shouldEqual objectIDTwo
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
                 (shouldFailWith<BadResponseStatusException> {

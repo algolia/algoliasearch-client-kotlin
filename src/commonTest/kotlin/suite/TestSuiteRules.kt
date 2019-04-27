@@ -49,8 +49,8 @@ internal class TestSuiteRules {
 
                 tasks.wait().all { it is TaskStatus.Published }
 
-                getRule(rule.objectID).rule shouldEqual rule
-                rules.forEach { getRule(it.objectID).rule shouldEqual it }
+                getRule(rule.objectID) shouldEqual rule
+                rules.forEach { getRule(it.objectID) shouldEqual it }
                 val searches = searchRules().hits.map { it.rule }
 
                 searches.find { it.objectID == rule.objectID }.shouldNotBeNull()

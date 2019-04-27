@@ -67,7 +67,7 @@ internal class TestSuiteAccount {
 
                 getObject(objectID) shouldEqual data
                 getSynonym(objectID) shouldEqual synonym
-                getRule(objectID).rule shouldEqual rule
+                getRule(objectID) shouldEqual rule
                 getSettings().searchableAttributes shouldEqual settings.searchableAttributes
 
                 shouldFailWith<IllegalStateException> { ClientAccount.copyIndex(index1, this) }

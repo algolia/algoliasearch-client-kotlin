@@ -2,7 +2,6 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.response.ResponseRule
 import com.algolia.search.model.response.ResponseSearchRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Rule
@@ -57,7 +56,7 @@ public interface EndpointRule {
     suspend fun getRule(
         objectID: ObjectID,
         requestOptions: RequestOptions? = null
-    ): ResponseRule
+    ): Rule
 
     /**
      * Delete a specific [Rule] using its [ObjectID].

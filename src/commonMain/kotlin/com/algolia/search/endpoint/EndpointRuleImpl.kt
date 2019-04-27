@@ -4,7 +4,6 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.response.ResponseRule
 import com.algolia.search.model.response.ResponseSearchRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Rule
@@ -38,7 +37,7 @@ internal class EndpointRuleImpl(
         return transport.request(HttpMethod.Put, CallType.Write, path, options, body)
     }
 
-    override suspend fun getRule(objectID: ObjectID, requestOptions: RequestOptions?): ResponseRule {
+    override suspend fun getRule(objectID: ObjectID, requestOptions: RequestOptions?): Rule {
         val path = indexName.toPath("/$RouteRules/$objectID")
 
         return transport.request(HttpMethod.Get, CallType.Read, path, requestOptions)
