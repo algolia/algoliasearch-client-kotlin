@@ -10,8 +10,20 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class ResponseSearchRules(
+    /**
+     * A list of [Hit].
+     */
     @SerialName(KeyHits) val hits: List<ResponseRule>,
+    /**
+     *  Number of hits.
+     */
     @SerialName(KeyNbHits) val nbHits: Int,
+    /**
+     * Returned page number.
+     */
     @SerialName(KeyPage) val page: Int,
+    /**
+     * Total number of pages.
+     */
     @SerialName(KeyNbPages) val nbPages: Int
 )

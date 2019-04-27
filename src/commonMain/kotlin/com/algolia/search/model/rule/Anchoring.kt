@@ -1,6 +1,7 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.model.Raw
+import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.KeyContains
 import com.algolia.search.serialize.KeyEndsWith
 import com.algolia.search.serialize.KeyIs
@@ -15,12 +16,24 @@ import kotlinx.serialization.internal.StringSerializer
 @Serializable(Anchoring.Companion::class)
 public sealed class Anchoring(override val raw: String) : Raw<String> {
 
+    /**
+     * The [Pattern] matches the [Query.query].
+     */
     public object Is : Anchoring(KeyIs)
 
+    /**
+     * The [Pattern] matches the beginning of the [Query.query].
+     */
     public object StartsWith : Anchoring(KeyStartsWith)
 
+    /**
+     * The [Pattern] matches the beginning of the [Query.query].
+     */
     public object EndsWith : Anchoring(KeyEndsWith)
 
+    /**
+     * The [Pattern] is contained by the [Query.query].
+     */
     public object Contains : Anchoring(KeyContains)
 
     public data class Other(override val raw: String) : Anchoring(raw)

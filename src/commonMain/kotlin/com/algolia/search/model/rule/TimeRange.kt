@@ -8,6 +8,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class TimeRange(
+    /**
+     * Lower bound of the time range (Unix timestamp).
+     */
     @SerialName(KeyFrom) val from: Long,
+    /**
+     * Upper bound of the time range (Unix timestamp).
+     */
     @SerialName(KeyUntil) val until: Long
 )

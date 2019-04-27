@@ -1,6 +1,7 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.model.ObjectID
+import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
@@ -12,12 +13,38 @@ import kotlinx.serialization.json.json
 
 @Serializable(Consequence.Companion::class)
 public data class Consequence(
+    /**
+     * Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value
+     * placeholder in the query pattern.
+     * Ex. facetName1, facetName2. You can specify a score: facetName1<score=5>, facetName2<score=1>.
+     */
     val automaticFacetFilters: List<AutomaticFacetFilters>? = null,
+    /**
+     * Same as [automaticFacetFilters], but the engine treats the filters as optional.
+     * Behaves like [Query.optionalFilters].
+     */
     val automaticOptionalFacetFilters: List<AutomaticFacetFilters>? = null,
+    /**
+     * Describes incremental edits to be made to the query string. You can't do both this and [edits] at the same time.
+     */
     val edits: List<Edit>? = null,
+    /**
+     * When providing a [Query.query], it replaces the entire query string. You can't do both this and [edits] at the
+     * same time.
+     */
     val query: Query? = null,
+    /**
+     * Objects to promote as hits.
+     */
     val promote: List<Promotion>? = null,
+    /**
+     * Objects to hide from hits.
+     */
     val hide: List<ObjectID>? = null,
+    /**
+     * Custom JSON object that will be appended to the [ResponseSearch.userData].
+     * This object is not interpreted by the API. It is limited to 1kB of minified JSON.
+     */
     val userData: JsonObject? = null
 ) {
 

@@ -1,12 +1,22 @@
 package com.algolia.search.model.rule
 
+import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.json
 
 
 @Serializable(Edit.Companion::class)
-public data class Edit(val delete: String, val insert: String? = null) {
+public data class Edit(
+    /**
+     * Text or patterns to remove from the [Query.query].
+     */
+    val delete: String,
+    /**
+     * Text that should be inserted in place of the removed text inside the [Query.query].
+     */
+    val insert: String? = null
+) {
 
     @Serializer(Edit::class)
     companion object : KSerializer<Edit> {

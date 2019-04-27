@@ -9,6 +9,12 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class Promotion(
+    /**
+     * Unique identifier of the object to promote.
+     */
     @SerialName(KeyObjectID) val objectID: ObjectID,
+    /**
+     * Promoted rank for the object.
+     */
     @SerialName(KeyPosition) val position: Int
 )

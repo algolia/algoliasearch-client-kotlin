@@ -9,11 +9,35 @@ import kotlinx.serialization.Transient
 @Suppress("PropertyName")
 @Serializable
 public data class RuleQuery(
+    /**
+     * Engine default: "" (empty string)
+     * Full text query.
+     */
     @SerialName(KeyQuery) var query: String? = null,
+    /**
+     * Engine default: null
+     * When not null, restricts matches to rules with a specific [Anchoring]. Otherwise all [Anchoring] may match.
+     */
     @SerialName(KeyAnchoring) var anchoring: Anchoring? = null,
+    /**
+     * Restricts matches to contextual rules with a specific context (exact match).
+     */
     @SerialName(KeyContext) var context: String? = null,
+    /**
+     * Engine default: 0
+     * Requested page.
+     */
     @SerialName(KeyPage) var page: Int? = null,
+    /**
+     * Engine default: 20
+     * Maximum number of hits in a page. Minimum is 1, maximum is 1000.
+     */
     @SerialName(KeyHitsPerPage) var hitsPerPage: Int? = null,
+    /**
+     * Engine default: null
+     * When specified, restricts matches to [Rule] with a specific [Rule.enabled].
+     * When absent (default), all [Rule] are retrieved, regardless of their [Rule.enabled].
+     */
     @SerialName(KeyEnabled) var enabled: Boolean? = null
 ) {
 
