@@ -19,6 +19,9 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JsonObject
 
 
+/**
+ * [Documentation][https://www.algolia.com/doc/api-client/methods/indexing/?language=kotlin]
+ */
 public interface EndpointIndexing {
 
     val indexName: IndexName

@@ -5,6 +5,9 @@ import com.algolia.search.transport.RequestOptions
 import io.ktor.client.response.HttpResponse
 
 
+/**
+ * [Documentation][https://www.algolia.com/doc/api-client/methods/insights/?language=kotlin]
+ */
 public interface EndpointInsights {
 
     /**

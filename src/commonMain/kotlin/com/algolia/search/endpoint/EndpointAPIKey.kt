@@ -10,6 +10,9 @@ import com.algolia.search.model.response.revision.RevisionAPIKey
 import com.algolia.search.transport.RequestOptions
 
 
+/**
+ * [Documentation][https://www.algolia.com/doc/api-client/methods/api-keys/?language=kotlin]
+ */
 public interface EndpointAPIKey {
 
     /**

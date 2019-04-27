@@ -11,6 +11,9 @@ import com.algolia.search.model.response.deletion.Deletion
 import com.algolia.search.transport.RequestOptions
 
 
+/**
+ * [Documentation][https://www.algolia.com/doc/api-client/methods/multi-cluster/?language=kotlin]
+ */
 public interface EndpointMultiCluster {
 
     /**
