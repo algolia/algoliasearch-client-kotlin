@@ -12,8 +12,8 @@ internal class TestTypoTolerance {
 
     @Test
     fun raw() {
-        True shouldEqual "true"
-        False shouldEqual "true"
+        True.raw shouldEqual "true"
+        False.raw shouldEqual "false"
         Strict.raw shouldEqual KeyStrict
         Min.raw shouldEqual KeyMin
         Other(unknown).raw shouldEqual unknown

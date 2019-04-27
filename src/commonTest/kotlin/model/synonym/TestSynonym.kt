@@ -37,7 +37,7 @@ internal class TestSynonym {
 
     @Test
     fun oneWaySynonymsShouldNotBeMoreThan100() {
-        shouldFailWith<EmptyListException> { Synonym.OneWay(objectIDA, "input", (0 .. 101).map { "" }) }
+        shouldFailWith<IllegalArgumentException> { Synonym.OneWay(objectIDA, "input", (0 .. 101).map { "" }) }
     }
 
     @Test
@@ -47,7 +47,7 @@ internal class TestSynonym {
 
     @Test
     fun multiWaySynonymsShouldNotBeMoreThan100() {
-        shouldFailWith<EmptyListException> { Synonym.MultiWay(objectIDA, (0 .. 101).map { "" }) }
+        shouldFailWith<IllegalArgumentException> { Synonym.MultiWay(objectIDA, (0 .. 101).map { "" }) }
     }
 
     @Test

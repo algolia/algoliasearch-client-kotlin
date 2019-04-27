@@ -6,7 +6,6 @@ import com.algolia.search.model.search.HighlightResult
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
-import kotlinx.serialization.json.Json
 
 
 @Serializable
@@ -42,9 +41,9 @@ public data class ResponseSearchSynonyms(
 
             override fun deserialize(decoder: Decoder): Hit {
                 val json = decoder.asJsonInput().jsonObject
-                val synonym = Json.plain.fromJson(Synonym.serializer(), json)
+                val synonym = Json.fromJson(Synonym.serializer(), json)
                 val highlights = json.getObjectOrNull(Key_HighlightResult)?.let {
-                    Json.plain.fromJson(KSerializerHighlightResults, it)
+                    Json.fromJson(KSerializerHighlightResults, it)
                 }
 
                 return Hit(synonym, highlights)
