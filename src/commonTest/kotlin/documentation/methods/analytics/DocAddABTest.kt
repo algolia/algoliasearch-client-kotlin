@@ -64,7 +64,7 @@ internal class DocAddABTest {
                     indexName = indexName1,
                     trafficPercentage = 10,
                     description = "a description",
-                    customSearchParameters = Query(ignorePlurals = IgnorePlurals.Boolean(true))
+                    customSearchParameters = Query(ignorePlurals = IgnorePlurals.True)
                 ),
                 endAt = ClientDate(Time.getCurrentTimeMillis() + dayInMilliseconds)
             )

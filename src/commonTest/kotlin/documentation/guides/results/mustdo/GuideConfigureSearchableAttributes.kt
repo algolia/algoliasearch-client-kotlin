@@ -47,7 +47,7 @@ internal class GuideConfigureSearchableAttributes {
             val settings = settings {
                 searchableAttributes {
                     +Unordered("title")
-                    +Ordered("cast")
+                    +"cast"
                 }
             }
 

@@ -14,7 +14,14 @@ import kotlinx.serialization.internal.StringSerializer
 
 @Serializable(NumericAttributeFilter.Companion::class)
 public data class NumericAttributeFilter(
+    /**
+     * Numeric attribute that can be used as numerical filters.
+     */
     val attribute: Attribute,
+    /**
+     * If you only need to filter on a numeric value based on equality (i.e. with the operators = or !=)
+     * you can use this modifier. All other operators will be disabled.
+     */
     val equalOnly: Boolean = false
 ) : Raw<String> {
 

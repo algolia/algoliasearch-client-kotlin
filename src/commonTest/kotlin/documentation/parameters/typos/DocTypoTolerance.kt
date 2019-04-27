@@ -13,8 +13,8 @@ import kotlin.test.Test
 internal class DocTypoTolerance {
 
 //    typoTolerance: TypoTolerance =
-//    [TypoTolerance.Boolean(true)](#parameter-option-true)
-//    | [TypoTolerance.Boolean(false)](#parameter-option-false)
+//    [TypoTolerance.True](#parameter-option-true)
+//    | [TypoTolerance.False](#parameter-option-false)
 //    | [TypoTolerance.Min](#parameter-option-min)
 //    | [TypoTolerance.Strict](#parameter-option-strict)
 
@@ -22,8 +22,8 @@ internal class DocTypoTolerance {
     fun snippet1() {
         runBlocking {
             val settings = settings {
-                typoTolerance = TypoTolerance.Boolean(true)
-                // typoTolerance = TypoTolerance.Boolean(false)
+                typoTolerance = TypoTolerance.True
+                // typoTolerance = TypoTolerance.False
                 // typoTolerance = TypoTolerance.Min
                 // typoTolerance = TypoTolerance.Strict
             }
@@ -36,8 +36,8 @@ internal class DocTypoTolerance {
     fun snippet2() {
         runBlocking {
             val query = query("query") {
-                typoTolerance = TypoTolerance.Boolean(true)
-                // typoTolerance = TypoTolerance.Boolean(false)
+                typoTolerance = TypoTolerance.True
+                // typoTolerance = TypoTolerance.False
                 // typoTolerance = TypoTolerance.Min
                 // typoTolerance = TypoTolerance.Strict
             }

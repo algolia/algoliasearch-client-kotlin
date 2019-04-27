@@ -23,7 +23,7 @@ internal class DocIgnorePlurals {
                 queryLanguages {
                     +Spanish
                 }
-                ignorePlurals = IgnorePlurals.Boolean(true)
+                ignorePlurals = IgnorePlurals.True
             }
 
             index.setSettings(settings)

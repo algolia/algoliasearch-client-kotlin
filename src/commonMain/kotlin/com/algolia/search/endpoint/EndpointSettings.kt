@@ -14,8 +14,23 @@ public interface EndpointSettings {
 
     val indexName: IndexName
 
+    /**
+     * Get the [Settings] of an index.
+     *
+     * @param requestOptions Configure request locally with [RequestOptions].
+     */
     suspend fun getSettings(requestOptions: RequestOptions? = null): Settings
 
+    /**
+     * Create or change an index’s [Settings].
+     * Only non-null settings are overridden; null settings are left unchanged
+     * Performance wise, it’s better to [setSettings] before pushing the data.
+     *
+     * @param settings The [Settings] to be set.
+     * @param resetToDefault Reset a settings to its default value.
+     * @param forwardToReplicas Whether to forward the same settings to the replica indices.
+     * @param requestOptions Configure request locally with [RequestOptions].
+     */
     suspend fun setSettings(
         settings: Settings,
         resetToDefault: List<SettingsKey> = listOf(),

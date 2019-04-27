@@ -1,6 +1,5 @@
 package serialize.search
 
-import boolean
 import com.algolia.search.model.search.QueryLanguage.Afrikaans
 import com.algolia.search.model.search.QueryLanguage.Albanian
 import com.algolia.search.model.search.RemoveStopWords
@@ -12,7 +11,8 @@ import serialize.TestSerializer
 internal class TestRemoveStopWords : TestSerializer<RemoveStopWords>(RemoveStopWords) {
 
     override val items = listOf(
-        RemoveStopWords.Boolean(boolean) to JsonLiteral(boolean),
+        RemoveStopWords.True to JsonLiteral(true),
+        RemoveStopWords.False to JsonLiteral(false),
         RemoveStopWords.QueryLanguages(
             Afrikaans,
             Albanian

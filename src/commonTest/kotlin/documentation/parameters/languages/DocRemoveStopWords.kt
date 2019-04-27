@@ -23,7 +23,7 @@ internal class DocRemoveStopWords {
                 queryLanguages {
                     +English
                 }
-                removeStopWords = RemoveStopWords.Boolean(true)
+                removeStopWords = RemoveStopWords.True
             }
 
             index.setSettings(settings)

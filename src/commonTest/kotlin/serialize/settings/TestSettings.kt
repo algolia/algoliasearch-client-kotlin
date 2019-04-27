@@ -53,8 +53,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             disableTypoToleranceOnWords = listOf(string),
             separatorsToIndex = string,
             // Languages
-            ignorePlurals = IgnorePlurals.Boolean(boolean),
-            removeStopWords = RemoveStopWords.Boolean(boolean),
+            ignorePlurals = IgnorePlurals.True,
+            removeStopWords = RemoveStopWords.True,
             camelCaseAttributes = attributes,
             decompoundedAttributes = listOf(TestDecompoundedAttributes.item),
             keepDiacriticsOnCharacters = string,

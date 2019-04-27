@@ -13,7 +13,15 @@ import kotlinx.serialization.internal.StringSerializer
 
 @Serializable(Snippet.Companion::class)
 public data class Snippet(
+    /**
+     * Attribute to snippet.
+     * Use "*" to snippet all attributes.
+     */
     val attribute: Attribute,
+    /**
+     * Optional word count.
+     * Engine default: 10
+     */
     val count: Int? = null
 ) : Raw<String> {
 

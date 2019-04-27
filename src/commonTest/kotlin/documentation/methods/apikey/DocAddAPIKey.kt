@@ -56,7 +56,7 @@ internal class DocAddAPIKey {
                 maxQueriesPerIPPerHour = 100,
                 query = Query(
                     typoTolerance = TypoTolerance.Strict,
-                    ignorePlurals = IgnorePlurals.Boolean(false)
+                    ignorePlurals = IgnorePlurals.False
                 ),
                 referers = listOf("algolia.com/*"),
                 validity = 300

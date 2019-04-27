@@ -14,14 +14,14 @@ import kotlinx.serialization.internal.StringSerializer
 public sealed class SortFacetsBy(override val raw: String) : Raw<String> {
 
     /**
-     * FacetFilter values are sorted by decreasing count.
-     * The count is the number of records containing this facet value in the results of the query.
+     * [Facet.value] are sorted by decreasing [Facet.count].
+     * The [Facet.count] is the number of records containing this [Facet.value] in the results of the [Query].
      */
     public object Count : SortFacetsBy(KeyCount)
 
     /**
-     * FacetFilter values are sorted in alphabetical order, ascending from A to Z.
-     * The count is the number of records containing this facet value in the results of the query.
+     * [Facet.value] are sorted in alphabetical order, ascending from A to Z.
+     * The [Facet.count] is the number of records containing this [Facet.value] in the results of the [Query].
      */
     public object Alpha : SortFacetsBy(KeyAlpha)
 

@@ -10,7 +10,7 @@ import kotlinx.serialization.Transient
 @Serializable
 public data class RuleQuery(
     /**
-     * Engine default: "" (empty string)
+     * Engine default: ""
      * Full text query.
      */
     @SerialName(KeyQuery) var query: String? = null,

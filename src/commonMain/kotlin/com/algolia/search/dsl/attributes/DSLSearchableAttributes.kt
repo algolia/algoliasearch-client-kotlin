@@ -13,11 +13,9 @@ public class DSLSearchableAttributes(
 ) {
 
     public enum class Modifier {
-        Ordered,
         Unordered
     }
 
-    public val Ordered = Modifier.Ordered
     public val Unordered = Modifier.Unordered
 
     public operator fun String.unaryPlus() {
@@ -38,7 +36,6 @@ public class DSLSearchableAttributes(
 
     operator fun Modifier.invoke(attribute: Attribute): SearchableAttribute {
         return when (this) {
-            Modifier.Ordered -> SearchableAttribute.Ordered(attribute)
             Modifier.Unordered -> SearchableAttribute.Unordered(attribute)
         }
     }

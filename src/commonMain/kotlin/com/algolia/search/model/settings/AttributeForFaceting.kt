@@ -17,8 +17,20 @@ public sealed class AttributeForFaceting {
 
     public data class Default(override val attribute: Attribute) : AttributeForFaceting()
 
+    /**
+     * Defines an [Attribute] as filterable only and not facetable.
+     * If you only need the filtering feature, you can take advantage of filterOnly which will reduce the index size
+     * and improve the speed of the search.
+     * You cannot define an attribute as both [FilterOnly] and [Searchable].
+     */
     public data class FilterOnly(override val attribute: Attribute) : AttributeForFaceting()
 
+    /**
+     * Defines an attribute as searchable.
+     * If you want to search for values of a given facet (using the Search for facet values method
+     * you need to specify [Searchable].
+     * You cannot define an attribute as both [Searchable] and [FilterOnly].
+     */
     public data class Searchable(override val attribute: Attribute) : AttributeForFaceting()
 
     @Serializer(AttributeForFaceting::class)

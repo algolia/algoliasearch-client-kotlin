@@ -34,7 +34,7 @@ internal class TestSuiteAATest {
         variantB = Variant(
             indexName,
             10,
-            customSearchParameters = Query(ignorePlurals = IgnorePlurals.Boolean(true))
+            customSearchParameters = Query(ignorePlurals = IgnorePlurals.True)
         )
     )
 

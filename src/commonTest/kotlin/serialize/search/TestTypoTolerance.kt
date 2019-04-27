@@ -1,6 +1,5 @@
 package serialize.search
 
-import boolean
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.search.TypoTolerance.*
 import kotlinx.serialization.json.JsonLiteral
@@ -11,7 +10,8 @@ import unknown
 internal class TestTypoTolerance : TestSerializer<TypoTolerance>(TypoTolerance) {
 
     override val items = listOf(
-        Boolean(boolean) to JsonLiteral(boolean),
+        True to JsonLiteral(true),
+        False to JsonLiteral(false),
         Min to JsonLiteral(Min.raw),
         Strict to JsonLiteral(Strict.raw),
         Other(unknown) to JsonLiteral(unknown)

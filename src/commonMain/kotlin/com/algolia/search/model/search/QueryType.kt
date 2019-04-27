@@ -20,7 +20,7 @@ public sealed class QueryType(override val raw: String) : Raw<String> {
     public object PrefixLast : QueryType(KeyPrefixLast)
 
     /**
-     * # All query words are interpreted as prefixes.
+     * All query words are interpreted as prefixes.
      * This option is not recommended, as it tends to yield counter intuitive results and has a negative impact
      * on performance.
      */

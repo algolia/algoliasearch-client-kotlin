@@ -26,8 +26,8 @@ internal class DocQueryLanguages {
                 queryLanguages {
                     +Spanish
                 }
-                ignorePlurals = IgnorePlurals.Boolean(true)
-                removeStopWords = RemoveStopWords.Boolean(true)
+                ignorePlurals = IgnorePlurals.True
+                removeStopWords = RemoveStopWords.True
             }
 
             index.setSettings(settings)

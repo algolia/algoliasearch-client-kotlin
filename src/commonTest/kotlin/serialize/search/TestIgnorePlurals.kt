@@ -1,6 +1,5 @@
 package serialize.search
 
-import boolean
 import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.QueryLanguage
 import kotlinx.serialization.json.JsonLiteral
@@ -11,7 +10,8 @@ import serialize.TestSerializer
 internal class TestIgnorePlurals : TestSerializer<IgnorePlurals>(IgnorePlurals) {
 
     override val items = listOf(
-        IgnorePlurals.Boolean(boolean) to JsonLiteral(boolean),
+        IgnorePlurals.True to JsonLiteral(true),
+        IgnorePlurals.False to JsonLiteral(false),
         IgnorePlurals.QueryLanguages(
             QueryLanguage.Afrikaans,
             QueryLanguage.Albanian

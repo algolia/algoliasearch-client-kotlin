@@ -26,12 +26,12 @@ internal class TestDSLSearchableAttributes {
     @Test
     fun modifier() {
         val dsl = DSLSearchableAttributes {
-            +Ordered("attributeA")
+            +"attributeA"
             +Unordered(attributeB)
         }
 
         dsl shouldEqual listOf(
-            SearchableAttribute.Ordered(attributeA),
+            SearchableAttribute.Default(attributeA),
             SearchableAttribute.Unordered(attributeB)
         )
     }

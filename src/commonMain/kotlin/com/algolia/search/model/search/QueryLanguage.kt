@@ -10,6 +10,9 @@ import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.JsonNull.content
 
 
+/**
+ * List of supported languages with their associated language ISO code.
+ */
 @Serializable(QueryLanguage.Companion::class)
 public sealed class QueryLanguage(override val raw: String) : Raw<String> {
 
