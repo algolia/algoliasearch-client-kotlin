@@ -11,7 +11,13 @@ import kotlinx.serialization.json.JsonObject
 
 @Serializable(BatchOperationIndex.Companion::class)
 public data class BatchOperationIndex(
+    /**
+     * [IndexName] targeted by this operation
+     */
     val indexName: IndexName,
+    /**
+     * Type of [BatchOperation] to execute.
+     */
     val operation: BatchOperation
 ) {
 

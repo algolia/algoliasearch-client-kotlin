@@ -11,8 +11,17 @@ import kotlinx.serialization.Transient
 
 @Serializable
 public data class Facet(
+    /**
+     * Name of the facet. Is equal to the value associated to an [Attribute].
+     */
     @SerialName(KeyName) val value: String,
+    /**
+     * Number of times this [value] occurs for a given [Attribute].
+     */
     @SerialName(KeyCount) val count: Int,
+    /**
+     * Highlighted value.
+     */
     @SerialName(KeyHighlighted) val highlightedOrNull: String? = null
 ) {
 

@@ -6,6 +6,9 @@ import kotlinx.serialization.Serializable
 import java.util.*
 
 
+/**
+ * JVM implementation converting a [String] or a [Long] into a [Date] format. Relies on ISO8601.
+ */
 @Serializable(KSerializerClientDate::class)
 public actual data class ClientDate actual constructor(override val raw: String) : Raw<String> {
 

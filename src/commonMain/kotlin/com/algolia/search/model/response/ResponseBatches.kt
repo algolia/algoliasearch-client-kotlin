@@ -1,5 +1,7 @@
 package com.algolia.search.model.response
 
+import com.algolia.search.client.ClientSearch
+import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.helper.toTaskID
@@ -18,7 +20,13 @@ import kotlinx.serialization.json.long
 
 @Serializable(ResponseBatches.Companion::class)
 public data class ResponseBatches(
+    /**
+     * A list of [TaskIndex] to use with [ClientSearch.waitAll].
+     */
     @SerialName(KeyTaskID) val tasks: List<TaskIndex>,
+    /**
+     * List of [ObjectID] affected by [EndpointMultipleIndex.multipleBatchObjects].
+     */
     @SerialName(KeyObjectIDs) val objectIDsOrNull: List<ObjectID?>? = null
 ) {
 

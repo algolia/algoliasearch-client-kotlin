@@ -2,6 +2,7 @@ package com.algolia.search.model.indexing
 
 import com.algolia.search.endpoint.EndpointIndex
 import com.algolia.search.endpoint.EndpointIndexing
+import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.Raw
@@ -13,7 +14,7 @@ import kotlinx.serialization.json.json
 
 
 /**
- * Operation that can be batched using [EndpointIndexing.batch]
+ * Operation that can be batched using [EndpointIndexing.batch] or [EndpointMultipleIndex.multipleBatchObjects]
  */
 @Serializable(BatchOperation.Companion::class)
 public sealed class BatchOperation(override val raw: String) : Raw<String> {

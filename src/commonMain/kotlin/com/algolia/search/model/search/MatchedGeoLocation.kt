@@ -8,8 +8,14 @@ import kotlinx.serialization.json.json
 
 @Serializable
 public data class MatchedGeoLocation(
+    /**
+     * Latitude and Longitude of the matched location
+     */
     val point: Point,
-    val distance: Long
+    /**
+     * Only returned if [Query.aroundRadius] is used.
+     */
+    val distance: Long? = null
 ) {
 
     @Serializer(MatchedGeoLocation::class)

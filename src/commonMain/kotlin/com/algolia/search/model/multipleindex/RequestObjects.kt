@@ -12,7 +12,16 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class RequestObjects(
+    /**
+     * [IndexName] containing the object.
+     */
     @SerialName(KeyIndexName) val indexName: IndexName,
+    /**
+     * The [ObjectID] of the object within that index.
+     */
     @SerialName(KeyObjectID) val objectID: ObjectID,
+    /**
+     *  List of attributes to retrieve. By default, all retrievable attributes are returned.
+     */
     @SerialName(KeyAttributesToRetrieve) val attributes: List<Attribute>? = null
 )

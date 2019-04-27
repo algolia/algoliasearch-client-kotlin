@@ -1,6 +1,7 @@
 package com.algolia.search.model.response
 
 import com.algolia.search.helper.toABTestID
+import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.serialize.*
@@ -8,10 +9,23 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
+
+/**
+ * Short version of [ResponseABTest].
+ */
 @Serializable(ResponseABTestShort.Companion::class)
 public data class ResponseABTestShort(
+    /**
+     * [ABTestID] of the [ABTest] test.
+     */
     val abTestId: ABTestID,
+    /**
+     * The base index [Variant].
+     */
     val variantA: Variant,
+    /**
+     * The index [Variant] to test against.
+     */
     val variantB: Variant
 ) {
 
