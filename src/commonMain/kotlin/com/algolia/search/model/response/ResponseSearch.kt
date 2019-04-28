@@ -256,6 +256,28 @@ public data class ResponseSearch(
         val json: JsonObject
     ) : Map<String, JsonElement> by json {
 
+        public val distinctSeqIDOrNull: Int? = json.getPrimitiveOrNull(Key_DistinctSeqID)?.int
+
+        public val rankingInfoOrNull: RankingInfo? = json.getObjectOrNull(Key_RankingInfo)?.let {
+            Json.fromJson(RankingInfo.serializer(), it)
+        }
+
+        public val highlightResultOrNull: JsonObject? = json.getObjectOrNull(Key_HighlightResult)
+
+        public val snippetResultOrNull: JsonObject? = json.getObjectOrNull(Key_SnippetResult)
+
+        public val rankingInfo: RankingInfo
+            get() = rankingInfoOrNull!!
+
+        public val distinctSeqID: Int
+            get() = distinctSeqIDOrNull!!
+
+        public val highlightResult: JsonObject
+            get() = highlightResultOrNull!!
+
+        public val snippetResult: JsonObject
+            get() = snippetResultOrNull!!
+
         /**
          * Deserialize the value of an [Attribute] to [T].
          */

@@ -2,10 +2,7 @@ package com.algolia.search.model.response
 
 import com.algolia.search.model.response.ResponseSearchSynonyms.Hit
 import com.algolia.search.model.synonym.Synonym
-import com.algolia.search.serialize.JsonNonStrict
-import com.algolia.search.serialize.KeyHits
-import com.algolia.search.serialize.KeyNbHits
-import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JsonObject
 
@@ -23,14 +20,14 @@ public data class ResponseSearchSynonyms(
 ) {
 
     @Serializable(Hit.Companion::class)
-    data class Hit(
-        /**
-         * The [Synonym].
-         */
+    public data class Hit(
         val synonym: Synonym,
-        private val json: JsonObject
+        val highlightResultOrNull: JsonObject? = null
     ) {
 
+        @Transient
+        public val highlightResult: JsonObject
+            get() = highlightResultOrNull!!
 
         @Serializer(Hit::class)
         companion object : DeserializationStrategy<Hit> {
@@ -38,8 +35,9 @@ public data class ResponseSearchSynonyms(
             override fun deserialize(decoder: Decoder): Hit {
                 val json = decoder.asJsonInput().jsonObject
                 val synonym = JsonNonStrict.fromJson(Synonym.serializer(), json)
+                val highlightResult = json.getObjectOrNull(Key_HighlightResult)
 
-                return Hit(synonym, json)
+                return Hit(synonym, highlightResult)
             }
         }
     }

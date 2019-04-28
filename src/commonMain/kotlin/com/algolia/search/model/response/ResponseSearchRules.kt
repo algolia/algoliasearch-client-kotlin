@@ -28,10 +28,14 @@ public data class ResponseSearchRules(
 ) {
 
     @Serializable(Hit.Companion::class)
-    data class Hit(
+    public data class Hit(
         val rule: Rule,
-        private val json : JsonObject
+        val highlightResultOrNull: JsonObject? = null
     ) {
+
+        @Transient
+        public val highlightResult: JsonObject
+            get() = highlightResultOrNull!!
 
         @Serializer(Hit::class)
         companion object : DeserializationStrategy<Hit> {
@@ -39,8 +43,9 @@ public data class ResponseSearchRules(
             override fun deserialize(decoder: Decoder): Hit {
                 val json = decoder.asJsonInput().jsonObject
                 val rule = JsonNonStrict.fromJson(Rule.serializer(), json)
+                val highlightResult = json.getObjectOrNull(Key_HighlightResult)
 
-                return Hit(rule, json)
+                return Hit(rule, highlightResult)
             }
         }
     }
