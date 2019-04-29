@@ -21,8 +21,8 @@ internal class TestRequestMultipleQueries {
     fun test() {
         val request = RequestMultipleQueries(
             indexQueries = listOf(
-                IndexQuery(indexName = indexA, query = Query(facets = listOf(attributeA))),
-                IndexQuery(indexName = indexB, query = Query(facets = listOf(attributeA, attributeB)))
+                IndexQuery(indexName = indexA, query = Query(facets = setOf(attributeA))),
+                IndexQuery(indexName = indexB, query = Query(facets = setOf(attributeA, attributeB)))
             ),
             strategy = MultipleQueriesStrategy.StopIfEnoughMatches
         )

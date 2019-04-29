@@ -2,6 +2,7 @@ package com.algolia.search.dsl
 
 import com.algolia.search.dsl.advanced.DSLResponseFields
 import com.algolia.search.dsl.attributes.DSLAttributes
+import com.algolia.search.dsl.attributes.DSLAttributesSet
 import com.algolia.search.dsl.attributes.DSLAttributesToRetrieve
 import com.algolia.search.dsl.filtering.DSLFacetFilters
 import com.algolia.search.dsl.filtering.DSLFilters
@@ -48,8 +49,8 @@ public fun Query.tagFilters(block: DSLTagFilters.() -> Unit) {
     tagFilters = FilterGroupsConverter.Legacy.Tag(DSLTagFilters(block))
 }
 
-public fun Query.facets(block: DSLAttributes.() -> Unit) {
-    facets = DSLAttributes(block)
+public fun Query.facets(block: DSLAttributesSet.() -> Unit) {
+    facets = DSLAttributesSet(block)
 }
 
 public fun Query.attributesToHighlight(block: DSLAttributes.() -> Unit) {

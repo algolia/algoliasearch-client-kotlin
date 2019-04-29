@@ -60,7 +60,7 @@ internal class TestSuiteMultipleOperations {
                     it.results[0]?.get(firstname)?.content shouldEqual jimmie
                 }
                 val query =
-                    Query(query = "", hitsPerPage = 2, facets = listOf("color".toAttribute(), "brand".toAttribute()))
+                    Query(query = "", hitsPerPage = 2, facets = setOf("color".toAttribute(), "brand".toAttribute()))
                 val indexQueries = listOf(
                     IndexQuery(indexName1, query),
                     IndexQuery(indexName2, query)

@@ -33,7 +33,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             numericFilters = nestedLists,
             tagFilters = nestedLists,
             sumOrFiltersScores = boolean,
-            facets = attributes,
+            facets = attributes.toSet(),
             maxValuesPerFacet = int,
             facetingAfterDistinct = boolean,
             sortFacetsBy = SortFacetsBy.Count,

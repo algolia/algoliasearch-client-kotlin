@@ -26,7 +26,7 @@ internal class TestSuiteSearch {
     private val suffix = "search"
     private val indexName = testSuiteIndexName(suffix)
     private val company = "company".toAttribute()
-    private val allFacets = listOf("*".toAttribute())
+    private val allFacets = setOf("*".toAttribute())
     private val index = clientAdmin1.initIndex(indexName)
     private val search = clientSearch.initIndex(indexName)
 

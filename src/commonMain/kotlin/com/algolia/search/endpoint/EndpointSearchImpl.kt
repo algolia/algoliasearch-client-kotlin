@@ -108,7 +108,7 @@ internal class EndpointSearchImpl(
     ): List<IndexQuery> {
         return disjunctiveFacets.map { attribute ->
             query.copy().apply {
-                facets = listOf(attribute)
+                facets = setOf(attribute)
                 attributesToRetrieve = listOf()
                 attributesToHighlight = listOf()
                 hitsPerPage = 0

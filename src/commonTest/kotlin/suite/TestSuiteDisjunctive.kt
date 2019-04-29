@@ -39,7 +39,7 @@ internal class TestSuiteDisjunctive {
             val brand = "brand".toAttribute()
             val category = "category".toAttribute()
             val stars = "stars".toAttribute()
-            val facets = listOf(brand, category, stars)
+            val facets = setOf(brand, category, stars)
             val settings = Settings(
                 attributesForFaceting = facets.map { AttributeForFaceting.Default(it) }
             )
@@ -90,7 +90,7 @@ internal class TestSuiteDisjunctive {
             val objects = load(JsonObjectSerializer.list, "disjunctive_B.json")
             val query = Query(
                 query = "h",
-                facets = listOf(city)
+                facets = setOf(city)
             )
             val disjunctiveFacets = listOf(stars, facilities)
             val filters = mutableListOf<Filter.Facet>()

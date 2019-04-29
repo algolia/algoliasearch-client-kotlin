@@ -81,7 +81,7 @@ public data class Query(
      * Engine default: []
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/facets/?language=kotlin]
      */
-    @SerialName(KeyFacets) var facets: List<Attribute>? = null,
+    @SerialName(KeyFacets) var facets: Set<Attribute>? = null,
 
     /**
      * Maximum number of facet values to return for each facet during a regular search.
