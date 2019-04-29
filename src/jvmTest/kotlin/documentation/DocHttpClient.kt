@@ -7,9 +7,11 @@ import com.algolia.search.model.ApplicationID
 import io.ktor.client.engine.android.Android
 import io.ktor.client.engine.apache.Apache
 import io.ktor.client.engine.okhttp.OkHttp
+import org.junit.Ignore
 import org.junit.Test
 
 
+@Ignore
 internal class DocHttpClient {
 
     @Test
