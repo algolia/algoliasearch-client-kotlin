@@ -38,8 +38,8 @@ internal class GuideRestrictSubset {
                 Partial.Update(
                     Attribute("viewable_bly"),
                     jsonArray {
-                        +1
-                        +2
+                        +(1 as Number)
+                        +(2 as Number)
                     }
                 )
             )
