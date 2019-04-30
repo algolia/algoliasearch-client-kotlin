@@ -7,7 +7,7 @@ internal fun String.escape() = "\"$this\""
 
 internal fun Attribute.escape() = raw.escape()
 
-internal fun Filter.Facet.Value<*>.toSQL(): String {
+internal fun Filter.Facet.Value.toSQL(): String {
     return when (this) {
         is Filter.Facet.Value.String -> raw.escape()
         is Filter.Facet.Value.Number -> raw.toString()
@@ -81,7 +81,7 @@ internal fun Filter.Numeric.toLegacy(): List<String> {
     }
 }
 
-internal fun Filter.Facet.Value<*>.toLegacy(isNegated: Boolean): String {
+internal fun Filter.Facet.Value.toLegacy(isNegated: Boolean): String {
     val value = when (this) {
         is Filter.Facet.Value.String -> raw.escape()
         is Filter.Facet.Value.Number -> raw.toString()

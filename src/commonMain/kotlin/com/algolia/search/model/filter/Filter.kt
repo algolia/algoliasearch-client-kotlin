@@ -12,19 +12,17 @@ public sealed class Filter {
     public data class Facet internal constructor(
         override val attribute: Attribute,
         override val isNegated: Boolean,
-        val value: Value<*>,
+        val value: Value,
         val score: Int? = null
     ) : Filter() {
 
-        sealed class Value<T> {
+        sealed class Value {
 
-            abstract val raw: T
+            data class String(val raw: kotlin.String) : Value()
 
-            data class String(override val raw: kotlin.String) : Value<kotlin.String>()
+            data class Boolean(val raw: kotlin.Boolean) : Value()
 
-            data class Boolean(override val raw: kotlin.Boolean) : Value<kotlin.Boolean>()
-
-            data class Number(override val raw: kotlin.Number) : Value<kotlin.Number>()
+            data class Number(val raw: kotlin.Number) : Value()
         }
 
         public constructor(
