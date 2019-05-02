@@ -8,10 +8,14 @@ import com.algolia.search.endpoint.EndpointInsightsUser
 import com.algolia.search.endpoint.EndpointInsightsUserImpl
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
+import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.insights.UserToken
 import com.algolia.search.transport.Transport
 
 
+/**
+ * Client to manage [InsightsEvent].
+ */
 public class ClientInsights private constructor(
     private val api: Transport
 ) : EndpointInsights by EndpointInsightsImpl(api),

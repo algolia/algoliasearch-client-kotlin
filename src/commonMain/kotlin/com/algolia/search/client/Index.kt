@@ -5,13 +5,18 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchRules
 import com.algolia.search.model.response.ResponseSearchSynonyms
+import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.RuleQuery
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 
 
+/**
+ * The main entry point for performing operations on a single index.
+ */
 public data class Index internal constructor(
     internal val transport: Transport,
     override val indexName: IndexName
@@ -23,6 +28,14 @@ public data class Index internal constructor(
     EndpointSynonym by EndpointSynonymImpl(transport, indexName),
     EndpointRule by EndpointRuleImpl(transport, indexName) {
 
+    /**
+     * Iterate over all [Rule] in the index.
+     *
+     * @see [searchRules]
+     *
+     * @param query The [RuleQuery] used to search.
+     * @param requestOptions Configure request locally with [RequestOptions]
+     */
     public suspend fun browseRules(
         query: RuleQuery = RuleQuery(),
         requestOptions: RequestOptions? = null
@@ -39,6 +52,14 @@ public data class Index internal constructor(
         return responses
     }
 
+    /**
+     * Iterate over all [Synonym] in the index.
+     *
+     * @see [searchSynonyms]
+     *
+     * @param query The [SynonymQuery] used to search.
+     * @param requestOptions Configure request locally with [RequestOptions]
+     */
     public suspend fun browseSynonyms(
         query: SynonymQuery = SynonymQuery(),
         requestOptions: RequestOptions? = null
@@ -62,8 +83,6 @@ public data class Index internal constructor(
      *
      * @param query The [Query] used to search.
      * @param requestOptions Configure request locally with [RequestOptions]
-     *
-     * @return [List<ResponseSearch>]
      */
     public suspend fun browseObjects(
         query: Query = Query(),

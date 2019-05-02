@@ -29,12 +29,12 @@ import com.algolia.search.transport.Transport
 import io.ktor.client.features.BadResponseStatusException
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withTimeout
+import kotlinx.coroutines.*
 
 
+/**
+ * Client to perform operations on indices.
+ */
 public class ClientSearch private constructor(
     private val transport: Transport
 ) :
@@ -53,10 +53,19 @@ public class ClientSearch private constructor(
         configuration: ConfigurationSearch
     ) : this(Transport(configuration))
 
+    /**
+     *  Initialize an [Index] configured with [ConfigurationSearch].
+     */
     public fun initIndex(indexName: IndexName): Index {
         return Index(transport, indexName)
     }
 
+    /**
+     * Wait on multiple [TaskIndex] operations. To be used with [multipleBatchObjects].
+     *
+     * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
+     * the allotted time in milliseconds.
+     */
     public suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus> {
 
         suspend fun loop(): List<TaskStatus> {
@@ -73,10 +82,19 @@ public class ClientSearch private constructor(
         return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
-    public suspend fun ResponseBatches.waitAll(): List<TaskStatus> {
-        return tasks.waitAll()
+    /**
+     * Convenience method similar to [waitAll] but with a [ResponseBatches] as receiver.
+     */
+    public suspend fun ResponseBatches.waitAll(timeout: Long? = null): List<TaskStatus> {
+        return tasks.waitAll(timeout)
     }
 
+    /**
+     * Wait on a [CreationAPIKey] operation.
+     *
+     * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
+     * the allotted time in milliseconds.
+     */
     public suspend fun CreationAPIKey.wait(timeout: Long? = null): ResponseAPIKey {
 
         suspend fun loop(): ResponseAPIKey {
@@ -93,6 +111,12 @@ public class ClientSearch private constructor(
         return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
+    /**
+     * Wait on a [DeletionAPIKey] operation.
+     *
+     * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
+     * the allotted time in milliseconds.
+     */
     public suspend fun DeletionAPIKey.wait(timeout: Long? = null): Boolean {
 
         suspend fun loop(): Boolean {
@@ -109,6 +133,11 @@ public class ClientSearch private constructor(
         return timeout?.let { withTimeout(it) { loop() } } ?: loop()
     }
 
+    /**
+     * Convenience methods to get the logs directly from the [ClientSearch] without instantiating an [Index].
+     *
+     * @see EndpointAdvanced.getLogs
+     */
     public suspend fun getLogs(
         page: Int? = null,
         hitsPerPage: Int? = null,
@@ -126,6 +155,12 @@ public class ClientSearch private constructor(
 
     companion object {
 
+        /**
+         * Generate a virtual [APIKey] without any call to the server.
+         * Use [SecuredAPIKeyRestriction] to restrict [APIKey] usage.
+         * You can generate a Secured APIKey from any [APIKey].
+         * Learn more about secured [API keys][https://www.algolia.com/doc/guides/security/api-keys/#secured-api-keys].
+         */
         public fun generateAPIKey(parentAPIKey: APIKey, restriction: SecuredAPIKeyRestriction): APIKey {
             val restrictionString = restriction.buildRestrictionString()
             val hash = parentAPIKey.raw.sha256(restrictionString)

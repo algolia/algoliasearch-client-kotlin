@@ -6,6 +6,9 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.SearchableAttribute
 
 
+/**
+ * DSL builder for a list of [SearchableAttribute].
+ */
 @Suppress("PropertyName")
 @DSLParameters
 public class DSLSearchableAttributes(
@@ -18,22 +21,40 @@ public class DSLSearchableAttributes(
 
     public val Unordered = Modifier.Unordered
 
+    /**
+     * Convenience method.
+     * Add [this] to the list of [SearchableAttribute].
+     */
     public operator fun String.unaryPlus() {
         +Attribute(this)
     }
 
+    /**
+     * Convenience method.
+     * Add [this] to the list of [SearchableAttribute].
+     */
     public operator fun Attribute.unaryPlus() {
         +SearchableAttribute.Default(this)
     }
 
+    /**
+     * Add [this] to the list of [SearchableAttribute].
+     */
     public operator fun SearchableAttribute.unaryPlus() {
         searchableAttributes += this
     }
 
+    /**
+     * Convenience method.
+     * Create an [SearchableAttribute] using [this] [Modifier] to be applied on [attribute].
+     */
     operator fun Modifier.invoke(attribute: String): SearchableAttribute {
         return invoke(Attribute(attribute))
     }
 
+    /**
+     * Create an [SearchableAttribute] using [this] [Modifier] to be applied on [attribute].
+     */
     operator fun Modifier.invoke(attribute: Attribute): SearchableAttribute {
         return when (this) {
             Modifier.Unordered -> SearchableAttribute.Unordered(attribute)

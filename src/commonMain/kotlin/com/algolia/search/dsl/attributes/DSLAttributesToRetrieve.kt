@@ -6,17 +6,31 @@ import com.algolia.search.dsl.all
 import com.algolia.search.model.Attribute
 
 
+/**
+ * DSL builder for a list of [Attribute] to retrieve.
+ */
 @DSLParameters
 public class DSLAttributesToRetrieve(
     private val attributes: MutableList<Attribute> = mutableListOf()
 ) {
 
+    /**
+     * True will retrieve all attributes, except the one contained in [attributes].
+     * False will retrieve only the attributes contained in [attributes].
+     */
     public var excludeAttributes: Boolean = false
 
+    /**
+     * Convenience method.
+     * Add [this] to the list of [Attribute].
+     */
     public operator fun String.unaryPlus() {
         +Attribute(this)
     }
 
+    /**
+     * Add [this] to the list of [Attribute].
+     */
     public operator fun Attribute.unaryPlus() {
         attributes += this
     }

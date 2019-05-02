@@ -6,6 +6,9 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.AttributeForFaceting
 
 
+/**
+ * DSL builder for a list of [AttributeForFaceting].
+ */
 @Suppress("PropertyName")
 @DSLParameters
 public class DSLAttributesForFaceting(
@@ -20,22 +23,40 @@ public class DSLAttributesForFaceting(
     public val FilterOnly = Modifier.FilterOnly
     public val Searchable = Modifier.Searchable
 
+    /**
+     * Convenience method.
+     * Add [this] to the list of [AttributeForFaceting].
+     */
     public operator fun String.unaryPlus() {
         +Attribute(this)
     }
 
+    /**
+     * Convenience method.
+     * Add [this] to the list of [AttributeForFaceting].
+     */
     public operator fun Attribute.unaryPlus() {
         +AttributeForFaceting.Default(this)
     }
 
+    /**
+     * Add [this] to the list of [AttributeForFaceting].
+     */
     public operator fun AttributeForFaceting.unaryPlus() {
         attributesForFaceting += this
     }
 
+    /**
+     * Convenience method.
+     * Create an [AttributeForFaceting] using [this] [Modifier] to be applied on [attribute].
+     */
     operator fun Modifier.invoke(attribute: String): AttributeForFaceting {
         return invoke(Attribute(attribute))
     }
 
+    /**
+     * Create an [AttributeForFaceting] using [this] [Modifier] to be applied on [attribute].
+     */
     operator fun Modifier.invoke(attribute: Attribute): AttributeForFaceting {
         return when (this) {
             Modifier.Searchable -> AttributeForFaceting.Searchable(attribute)
