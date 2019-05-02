@@ -27,7 +27,6 @@ internal class TestSuitePersonalization {
                     Attribute("categories") to FacetScoring(10)
                 )
             )
-            clientAdmin1.setPersonalizationStrategy(strategy)
             clientAdmin1.getPersonalizationStrategy().let {
                 it.eventsScoring shouldEqual strategy.eventsScoring
                 it.facetsScoring shouldEqual strategy.facetsScoring
