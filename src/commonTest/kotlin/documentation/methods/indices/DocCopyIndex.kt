@@ -7,7 +7,7 @@ import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.index.Scope
 import documentation.index
-import indexName
+import documentation.indexName
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test

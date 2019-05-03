@@ -1,7 +1,7 @@
 package documentation.methods.rule
 
 import documentation.index
-import indexName
+import documentation.indexName
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test

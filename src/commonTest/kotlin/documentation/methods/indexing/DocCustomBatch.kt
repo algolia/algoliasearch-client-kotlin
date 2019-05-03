@@ -9,7 +9,7 @@ import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import documentation.client
-import indexName
+import documentation.indexName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking

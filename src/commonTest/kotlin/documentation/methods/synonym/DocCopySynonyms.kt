@@ -1,7 +1,7 @@
 package documentation.methods.synonym
 
 import documentation.index
-import indexName
+import documentation.indexName
 import io.ktor.client.features.BadResponseStatusException
 import runBlocking
 import shouldFailWith
