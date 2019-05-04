@@ -1,5 +1,7 @@
 # AlgoliaSearch Client Kotlin
 
+[ ![Download](https://api.bintray.com/packages/algolia/maven/algoliasearch-client-kotlin/images/download.svg) ](https://bintray.com/algolia/maven/algoliasearch-client-kotlin/_latestVersion)
+
 ## Compatibility
 
 The Kotlin client is compatible with Kotlin `1.3.30` and higher.
