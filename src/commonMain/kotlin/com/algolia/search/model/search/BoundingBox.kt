@@ -6,6 +6,10 @@ import kotlinx.serialization.*
 import kotlinx.serialization.internal.FloatSerializer
 
 
+/**
+ * Search inside a rectangular area (in geo coordinates).
+ * The rectangle is defined by two diagonally opposite points (hereafter [point1] and [point2]).
+ */
 @Serializable(BoundingBox.Companion::class)
 public data class BoundingBox(
     val point1: Point,

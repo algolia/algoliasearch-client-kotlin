@@ -1,9 +1,13 @@
 package com.algolia.search.model.settings
 
+import com.algolia.search.endpoint.EndpointSettings
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*
 
 
+/**
+ * Used to mark which settings should be reset to its default value by [EndpointSettings.setSettings].
+ */
 public sealed class SettingsKey(override val raw: String) : Raw<String> {
 
     public object SearchableAttributes : SettingsKey(KeySearchableAttributes)

@@ -7,5 +7,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class FacetScoring(
+    /**
+     * The score to associate with a facet.
+     */
     @SerialName(KeyScore) val score: Int
 )

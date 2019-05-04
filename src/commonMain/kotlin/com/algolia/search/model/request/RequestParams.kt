@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class RequestParams(
+internal data class RequestParams(
     @SerialName(KeyParams) val params: String? = null
 )

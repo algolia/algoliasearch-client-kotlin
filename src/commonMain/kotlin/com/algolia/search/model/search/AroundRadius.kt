@@ -11,11 +11,23 @@ import kotlinx.serialization.json.int
 import kotlinx.serialization.json.intOrNull
 
 
+/**
+ * Define the maximum radius for a geo search (in meters).
+ * This setting only works within the context of a radial (circuler) geo search, enabled by aroundLatLngViaIP or
+ * aroundLatLng.
+ */
 @Serializable(AroundRadius.Companion::class)
 public sealed class AroundRadius(override val raw: String) : Raw<String> {
 
+    /**
+     *  Disables the radius logic, allowing all results to be returned, regardless of distance. =
+     *  Ranking is still based on proximity to the central axis point. This option is faster than specifying a high integer value.
+     */
     public object All : AroundRadius(KeyAll)
 
+    /**
+     * Integer value (in meters) representing the radius around the coordinates specified during the query.
+     */
     public data class InMeters(val radius: Int) : AroundRadius(radius.toString())
 
     public data class Other(override val raw: String) : AroundRadius(raw)

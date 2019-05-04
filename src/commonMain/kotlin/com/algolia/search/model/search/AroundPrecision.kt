@@ -8,6 +8,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 
+/**
+ * Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
+ * When ranking hits, geo distances are grouped into ranges of aroundPrecision size.
+ * All hits within the same range are considered equal with respect to the geo ranking parameter.
+ * For example, if you set aroundPrecision to 100, any two objects lying in the range [0, 99m] from the searched
+ * location will be considered equal; same for [100, 199], [200, 299], etc.
+ */
 @Serializable(AroundPrecision.Companion::class)
 public sealed class AroundPrecision {
 

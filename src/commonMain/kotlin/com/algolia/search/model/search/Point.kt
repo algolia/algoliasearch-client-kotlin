@@ -5,6 +5,9 @@ import kotlinx.serialization.*
 import kotlinx.serialization.internal.FloatSerializer
 
 
+/**
+ * A set of geo-coordinates [latitude] and [longitude].
+ */
 @Serializable(Point.Companion::class)
 public data class Point(
     val latitude: Float,

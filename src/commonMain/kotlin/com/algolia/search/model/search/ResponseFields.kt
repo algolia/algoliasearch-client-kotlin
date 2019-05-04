@@ -1,5 +1,6 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Decoder
@@ -9,6 +10,11 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
+/**
+ * Choose which fields the response will contain. Applies to [EndpointSearch.search] and [EndpointSearch.browse].
+ * This parameter is mainly intended to limit the response size. For example, in complex queries, echoing of request
+ * parameters in the response’s params field can be undesirable.
+ */
 @Serializable(ResponseFields.Companion::class)
 public sealed class ResponseFields(override val raw: String) : Raw<String> {
 

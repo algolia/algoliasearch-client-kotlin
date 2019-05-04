@@ -1,5 +1,6 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.helper.toCursor
 import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
@@ -9,6 +10,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
+/**
+ * A cursor used to browse an index with [EndpointSearch.browse].
+ */
 @Serializable(Cursor.Companion::class)
 public data class Cursor(
     override val raw: String

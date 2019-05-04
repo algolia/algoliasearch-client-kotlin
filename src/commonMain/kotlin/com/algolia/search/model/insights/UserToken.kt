@@ -11,6 +11,9 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
 
+/**
+ * A user identifier for analytics and security purposes.
+ */
 @Serializable(UserToken.Companion::class)
 public data class UserToken(override val raw: String) : Raw<String> {
 

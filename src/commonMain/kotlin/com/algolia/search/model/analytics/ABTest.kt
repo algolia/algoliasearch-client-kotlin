@@ -7,6 +7,9 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
 
+/**
+ * [ABTest] applied to compare analytics performance between two indices.
+ */
 @Serializable(ABTest.Companion::class)
 public data class ABTest(
     /**

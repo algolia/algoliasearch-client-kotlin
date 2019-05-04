@@ -139,7 +139,7 @@ internal class TestDSLSettings {
     @Test
     fun decompoundedAttributes() {
         val settings = settings {
-            decompoundedAttributes { +dutch { +attributeA } }
+            decompoundedAttributes { dutch { +attributeA } }
         }
 
         settings.decompoundedAttributes.shouldNotBeNull()

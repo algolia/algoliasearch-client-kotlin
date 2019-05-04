@@ -1,8 +1,15 @@
 package com.algolia.search.model.filter
 
 
+/**
+ * Converts a [List] of [FilterGroup] to a type [O].
+ */
 public sealed class FilterGroupsConverter<I, O> : (I) -> O {
 
+    /**
+     * Converts a [List] of [FilterGroup] to its SQL-like [String] representation.
+     * Returns null if the list is empty.
+     */
     public object SQL : FilterGroupsConverter<List<FilterGroup<*>>, String?>() {
 
         override fun invoke(groups: List<FilterGroup<*>>): String? {
@@ -17,6 +24,9 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
             } else null
         }
 
+        /**
+         * Same as [SQL], but removes quotes for readability purposes.
+         */
         public object Unquoted : FilterGroupsConverter<List<FilterGroup<*>>, String?>() {
 
             override fun invoke(groups: List<FilterGroup<*>>): String? {
@@ -25,6 +35,9 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
         }
     }
 
+    /**
+     * Converts a [List] of [FilterGroup] to its legacy representation.
+     */
     public sealed class Legacy<T : Filter> : FilterGroupsConverter<List<FilterGroup<T>>, List<List<String>>>() {
 
         override fun invoke(groups: List<FilterGroup<T>>): List<List<String>> {

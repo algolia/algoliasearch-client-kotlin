@@ -17,7 +17,7 @@ import kotlinx.serialization.json.jsonArray
 
 
 /**
- * Event that can be send with [EndpointInsights]
+ * Event that can be send with [EndpointInsights].
  */
 @Serializable(InsightsEvent.Companion::class)
 public sealed class InsightsEvent {

@@ -6,6 +6,9 @@ import kotlinx.serialization.*
 import kotlinx.serialization.internal.FloatSerializer
 
 
+/**
+ * A polygon with a minimum of 3 [Point].
+ */
 @Serializable(Polygon.Companion::class)
 public data class Polygon(
     val point1: Point,
