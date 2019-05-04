@@ -7,7 +7,7 @@ import com.algolia.search.model.Attribute
 
 
 /**
- * DSL builder for a list of [Attribute] to retrieve.
+ * DSL for building a [List] of [Attribute] to retrieve.
  */
 @DSLParameters
 public class DSLAttributesToRetrieve(
@@ -22,14 +22,13 @@ public class DSLAttributesToRetrieve(
 
     /**
      * Convenience method.
-     * Add [this] to the list of [Attribute].
      */
     public operator fun String.unaryPlus() {
         +Attribute(this)
     }
 
     /**
-     * Add [this] to the list of [Attribute].
+     * Add [this] to [attributes].
      */
     public operator fun Attribute.unaryPlus() {
         attributes += this

@@ -1,9 +1,12 @@
 package com.algolia.search.helper
 
 import com.algolia.search.model.response.ResponseSearch
-import kotlinx.serialization.KSerializer
+import kotlinx.serialization.DeserializationStrategy
 
 
-fun <T> List<ResponseSearch.Hit>.deserialize(serializer: KSerializer<T>): List<T> {
-    return map { it.deserialize(serializer) }
+/**
+ * Convenience method to transform all [ResponseSearch.Hit.json] to a typed object [T] with [serializer].
+ */
+fun <T> List<ResponseSearch.Hit>.deserialize(deserializer: DeserializationStrategy<T>): List<T> {
+    return map { it.deserialize(deserializer) }
 }

@@ -6,7 +6,7 @@ import com.algolia.search.model.Attribute
 
 
 /**
- * DSL builder for a set of [Attribute].
+ * DSL for building a [Set] of [Attribute].
  */
 @DSLParameters
 public class DSLAttributesSet(
@@ -15,14 +15,13 @@ public class DSLAttributesSet(
 
     /**
      * Convenience method.
-     * Add [this] to the set of [Attribute].
      */
     public operator fun String.unaryPlus() {
         +Attribute(this)
     }
 
     /**
-     * Add [this] to the set of [Attribute].
+     * Add [this] to [attributes].
      */
     public operator fun Attribute.unaryPlus() {
         attributes += this

@@ -6,6 +6,9 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.CustomRankingCriterion
 
 
+/**
+ * DSL for building a [List] of [CustomRankingCriterion].
+ */
 @Suppress("PropertyName")
 @DSLParameters
 public class DSLCustomRanking(
@@ -20,14 +23,23 @@ public class DSLCustomRanking(
     public val Asc = Modifier.Asc
     public val Desc = Modifier.Desc
 
+    /**
+     * Add [this] to [customRankingCriteria].
+     */
     public operator fun CustomRankingCriterion.unaryPlus() {
         customRankingCriteria += this
     }
 
+    /**
+     * Convenience method.
+     */
     operator fun Modifier.invoke(attribute: String): CustomRankingCriterion {
         return invoke(Attribute(attribute))
     }
 
+    /**
+     * Create a [CustomRankingCriterion] using [this] [Modifier] to be applied on [attribute].
+     */
     operator fun Modifier.invoke(attribute: Attribute): CustomRankingCriterion {
         return when (this) {
             Modifier.Asc -> CustomRankingCriterion.Asc(attribute)

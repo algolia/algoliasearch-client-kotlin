@@ -5,11 +5,17 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.Polygon
 
 
+/**
+ * DSL for building a [List] of [Polygon].
+ */
 @DSLParameters
 public class DSLPolygon(
     private val polygons: MutableList<Polygon> = mutableListOf()
 ) {
 
+    /**
+     * Add [this] to [polygons].
+     */
     public operator fun Polygon.unaryPlus() {
         polygons += this
     }

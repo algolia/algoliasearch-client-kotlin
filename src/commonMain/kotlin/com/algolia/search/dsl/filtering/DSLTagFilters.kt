@@ -6,19 +6,31 @@ import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
 
 
+/**
+ * DSL for building a [List] of [FilterGroup] of [Filter.Tag].
+ */
 @DSLParameters
 public class DSLTagFilters(
     private val groups: MutableList<FilterGroup<Filter.Tag>> = mutableListOf()
 ) {
 
+    /**
+     * Add [this] to [groups] if it is not empty.
+     */
     public operator fun FilterGroup<Filter.Tag>.unaryPlus() {
         if (isNotEmpty()) groups += this
     }
 
+    /**
+     * Create and add a [FilterGroup.And.Tag] which can only contain [Filter.Tag] to [groups].
+     */
     public fun and(block: DSLGroupTag.() -> Unit) {
         +FilterGroup.And.Tag(DSLGroupTag(block))
     }
 
+    /**
+     * Create and add a [FilterGroup.Or.Tag] which can only contain [Filter.Tag] to [groups].
+     */
     public fun or(block: DSLGroupTag.() -> Unit) {
         +FilterGroup.Or.Tag(DSLGroupTag(block))
     }

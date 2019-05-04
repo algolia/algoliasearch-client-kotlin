@@ -5,6 +5,9 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.QueryLanguage
 
 
+/**
+ * DSL for building a [List] of [QueryLanguage].
+ */
 @Suppress("PropertyName")
 @DSLParameters
 public class DSLQueryLanguage(
@@ -68,6 +71,9 @@ public class DSLQueryLanguage(
     public val Turkish = QueryLanguage.Turkish
     public val Tatar = QueryLanguage.Tatar
 
+    /**
+     * Add [this] to [queryLanguages].
+     */
     public operator fun QueryLanguage.unaryPlus() {
         queryLanguages += this
     }

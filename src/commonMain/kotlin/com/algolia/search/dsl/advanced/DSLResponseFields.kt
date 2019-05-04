@@ -6,7 +6,7 @@ import com.algolia.search.model.search.ResponseFields
 
 
 /**
- * DSL builder for a list of [ResponseFields].
+ * DSL for building a [List] of [ResponseFields].
  */
 @Suppress("PropertyName")
 @DSLParameters
@@ -35,7 +35,7 @@ public class DSLResponseFields(
     public val UserData = ResponseFields.UserData
 
     /**
-     * Add [this] to to the list of [ResponseFields].
+     * Add [this] to [responseFields].
      */
     public operator fun ResponseFields.unaryPlus() {
         responseFields += this

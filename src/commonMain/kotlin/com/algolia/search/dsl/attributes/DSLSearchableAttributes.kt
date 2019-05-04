@@ -7,7 +7,7 @@ import com.algolia.search.model.settings.SearchableAttribute
 
 
 /**
- * DSL builder for a list of [SearchableAttribute].
+ * DSL for building a [List] of [SearchableAttribute].
  */
 @Suppress("PropertyName")
 @DSLParameters
@@ -23,7 +23,6 @@ public class DSLSearchableAttributes(
 
     /**
      * Convenience method.
-     * Add [this] to the list of [SearchableAttribute].
      */
     public operator fun String.unaryPlus() {
         +Attribute(this)
@@ -31,14 +30,13 @@ public class DSLSearchableAttributes(
 
     /**
      * Convenience method.
-     * Add [this] to the list of [SearchableAttribute].
      */
     public operator fun Attribute.unaryPlus() {
         +SearchableAttribute.Default(this)
     }
 
     /**
-     * Add [this] to the list of [SearchableAttribute].
+     * Add [this] to [searchableAttributes].
      */
     public operator fun SearchableAttribute.unaryPlus() {
         searchableAttributes += this
@@ -46,7 +44,6 @@ public class DSLSearchableAttributes(
 
     /**
      * Convenience method.
-     * Create an [SearchableAttribute] using [this] [Modifier] to be applied on [attribute].
      */
     operator fun Modifier.invoke(attribute: String): SearchableAttribute {
         return invoke(Attribute(attribute))

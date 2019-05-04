@@ -11,6 +11,9 @@ public annotation class DSLParameters
 
 interface DSL<T, S> : (T.() -> Unit) -> S
 
+/**
+ * Create a [RequestOptions] with [block]. Can take an optional [requestOptions] to be modified.
+ */
 public fun requestOptions(
     requestOptions: RequestOptions? = null,
     block: RequestOptions.() -> Unit
@@ -18,11 +21,14 @@ public fun requestOptions(
     return (requestOptions ?: RequestOptions()).apply(block)
 }
 
+/**
+ * Create a [List] of [ObjectID] with [DSLObjectIDs].
+ */
+fun objectIDs(block: DSLObjectIDs.() -> Unit): List<ObjectID> {
+    return DSLObjectIDs(block)
+}
+
 internal fun requestOptionsBuilder(
     requestOptions: RequestOptions? = null,
     block: RequestOptions.() -> Unit
 ) = requestOptions(requestOptions, block)
-
-internal fun objectIDs(block: DSLObjectIDs.() -> Unit): List<ObjectID> {
-    return DSLObjectIDs(block)
-}

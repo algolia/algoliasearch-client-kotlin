@@ -7,7 +7,7 @@ import com.algolia.search.model.settings.AttributeForFaceting
 
 
 /**
- * DSL builder for a list of [AttributeForFaceting].
+ * DSL for building a [List] of [AttributeForFaceting].
  */
 @Suppress("PropertyName")
 @DSLParameters
@@ -25,7 +25,6 @@ public class DSLAttributesForFaceting(
 
     /**
      * Convenience method.
-     * Add [this] to the list of [AttributeForFaceting].
      */
     public operator fun String.unaryPlus() {
         +Attribute(this)
@@ -33,14 +32,13 @@ public class DSLAttributesForFaceting(
 
     /**
      * Convenience method.
-     * Add [this] to the list of [AttributeForFaceting].
      */
     public operator fun Attribute.unaryPlus() {
         +AttributeForFaceting.Default(this)
     }
 
     /**
-     * Add [this] to the list of [AttributeForFaceting].
+     * Add [this] to [attributesForFaceting].
      */
     public operator fun AttributeForFaceting.unaryPlus() {
         attributesForFaceting += this
@@ -48,7 +46,6 @@ public class DSLAttributesForFaceting(
 
     /**
      * Convenience method.
-     * Create an [AttributeForFaceting] using [this] [Modifier] to be applied on [attribute].
      */
     operator fun Modifier.invoke(attribute: String): AttributeForFaceting {
         return invoke(Attribute(attribute))

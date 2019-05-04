@@ -6,6 +6,9 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.RankingCriterion
 
 
+/**
+ * DSL for building a [List] of [RankingCriterion].
+ */
 @Suppress("PropertyName")
 @DSLParameters
 public class DSLRanking(
@@ -28,14 +31,23 @@ public class DSLRanking(
     public val Exact = RankingCriterion.Exact
     public val Custom = RankingCriterion.Custom
 
+    /**
+     * Add [this] to [rankingCriteria].
+     */
     public operator fun RankingCriterion.unaryPlus() {
         rankingCriteria += this
     }
 
+    /**
+     * Convenience method.
+     */
     operator fun Modifier.invoke(attribute: String): RankingCriterion {
         return invoke(Attribute(attribute))
     }
 
+    /**
+     * Create a [RankingCriterion] with [this] [Modifier] to be applied on [attribute].
+     */
     operator fun Modifier.invoke(attribute: Attribute): RankingCriterion {
         return when (this) {
             Modifier.Asc -> RankingCriterion.Asc(attribute)

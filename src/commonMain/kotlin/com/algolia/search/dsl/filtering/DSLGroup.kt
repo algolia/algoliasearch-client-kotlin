@@ -5,6 +5,9 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.filter.Filter
 
 
+/**
+ * Abstract DSL for building a [Set] [T] [Filter].
+ */
 @DSLParameters
 public sealed class DSLGroup<T : Filter> {
 
@@ -19,6 +22,9 @@ public sealed class DSLGroup<T : Filter> {
     }
 }
 
+/**
+ * DSL for building a [Set] of [Filter.Facet].
+ */
 public class DSLGroupFacet(
     override val filters: MutableSet<Filter.Facet> = mutableSetOf()
 ) : DSLGroup<Filter.Facet>(), DSLFacet {
@@ -31,6 +37,9 @@ public class DSLGroupFacet(
     }
 }
 
+/**
+ * DSL for building a [Set] of [Filter.Tag].
+ */
 public class DSLGroupTag(
     override val filters: MutableSet<Filter.Tag> = mutableSetOf()
 ) : DSLGroup<Filter.Tag>(), DSLTag {
@@ -43,6 +52,9 @@ public class DSLGroupTag(
     }
 }
 
+/**
+ * DSL for building a [Set] of [Filter.Numeric].
+ */
 public class DSLGroupNumeric(
     override val filters: MutableSet<Filter.Numeric> = mutableSetOf()
 ) : DSLGroup<Filter.Numeric>(), DSLNumeric {
@@ -55,6 +67,9 @@ public class DSLGroupNumeric(
     }
 }
 
+/**
+ * DSL for building a [Set] of [Filter].
+ */
 public class DSLGroupFilter(
     override val filters: MutableSet<Filter> = mutableSetOf()
 ) : DSLGroup<Filter>(), DSLFacet, DSLTag, DSLNumeric {

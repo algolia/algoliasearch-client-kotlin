@@ -5,11 +5,17 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.BoundingBox
 
 
+/**
+ * DSL for building a [List] of [BoundingBox].
+ */
 @DSLParameters
 public class DSLBoundingBox(
     private val boundingBoxes: MutableList<BoundingBox> = mutableListOf()
 ) {
 
+    /**
+     * Add [this] to [boundingBoxes].
+     */
     public operator fun BoundingBox.unaryPlus() {
         boundingBoxes += this
     }

@@ -13,9 +13,9 @@ internal class TestDSLDecompoundedAttributes {
     @Test
     fun default() {
         val dsl = DSLDecompoundedAttributes {
-            +german { +attributeA }
-            +dutch { +attributeA }
-            +finnish { +attributeA }
+            german { +attributeA }
+            dutch { +attributeA }
+            finnish { +attributeA }
         }
 
         dsl shouldEqual listOf(

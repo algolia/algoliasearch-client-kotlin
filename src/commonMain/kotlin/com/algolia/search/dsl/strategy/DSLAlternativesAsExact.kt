@@ -5,6 +5,9 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.AlternativesAsExact
 
 
+/**
+ * DSL for building a [List] of [AlternativesAsExact].
+ */
 @Suppress("PropertyName")
 @DSLParameters
 public class DSLAlternativesAsExact(
@@ -15,6 +18,9 @@ public class DSLAlternativesAsExact(
     public val SingleWordSynonym = AlternativesAsExact.SingleWordSynonym
     public val MultiWordsSynonym = AlternativesAsExact.MultiWordsSynonym
 
+    /**
+     * Add [this] to [alternativesAsExacts].
+     */
     public operator fun AlternativesAsExact.unaryPlus() {
         alternativesAsExacts += this
     }

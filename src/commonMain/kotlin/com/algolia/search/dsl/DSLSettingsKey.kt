@@ -3,6 +3,9 @@ package com.algolia.search.dsl
 import com.algolia.search.model.settings.SettingsKey
 
 
+/**
+ * DSL for building a [List] of [SettingsKey].
+ */
 @Suppress("PropertyName")
 public class DSLSettingsKey(
     private val settingsKeys: MutableList<SettingsKey> = mutableListOf()
@@ -55,6 +58,9 @@ public class DSLSettingsKey(
     public val ResponseFields = SettingsKey.ResponseFields
     public val MaxFacetHits = SettingsKey.MaxFacetHits
 
+    /**
+     * Add [this] to [settingsKeys].
+     */
     public operator fun SettingsKey.unaryPlus() {
         settingsKeys += this
     }

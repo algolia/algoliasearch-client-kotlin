@@ -1,11 +1,17 @@
 package com.algolia.search.dsl
 
 
+/**
+ * DSL for building a [List] of [String].
+ */
 @DSLParameters
 public class DSLStrings(
     private val strings: MutableList<String> = mutableListOf()
 ) {
 
+    /**
+     * Add [this] to [strings].
+     */
     public operator fun String.unaryPlus() {
         strings += this
     }

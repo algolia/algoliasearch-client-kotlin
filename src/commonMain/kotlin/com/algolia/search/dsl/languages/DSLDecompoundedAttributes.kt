@@ -7,6 +7,9 @@ import com.algolia.search.model.search.QueryLanguage
 import com.algolia.search.model.settings.DecompoundedAttributes
 
 
+/**
+ * DSL for building a [List] of [DecompoundedAttributes].
+ */
 @DSLParameters
 public class DSLDecompoundedAttributes(
     private val decompoundedAttributes: MutableList<DecompoundedAttributes> = mutableListOf()
@@ -16,18 +19,30 @@ public class DSLDecompoundedAttributes(
         return DecompoundedAttributes(this, DSLAttributes(block))
     }
 
-    public infix fun german(block: DSLAttributes.() -> Unit): DecompoundedAttributes {
-        return QueryLanguage.German.decompounded(block)
+    /**
+     * Create and add a [DecompoundedAttributes] for the [QueryLanguage.German] using [block] to [decompoundedAttributes].
+     */
+    public infix fun german(block: DSLAttributes.() -> Unit) {
+        +QueryLanguage.German.decompounded(block)
     }
 
-    public infix fun finnish(block: DSLAttributes.() -> Unit): DecompoundedAttributes {
-        return QueryLanguage.Finnish.decompounded(block)
+    /**
+     * Create and add a [DecompoundedAttributes] for the [QueryLanguage.Finnish] using [block] to [decompoundedAttributes].
+     */
+    public infix fun finnish(block: DSLAttributes.() -> Unit) {
+        +QueryLanguage.Finnish.decompounded(block)
     }
 
-    public infix fun dutch(block: DSLAttributes.() -> Unit): DecompoundedAttributes {
-        return QueryLanguage.Dutch.decompounded(block)
+    /**
+     * Create and add a [DecompoundedAttributes] for the [QueryLanguage.Dutch] using [block] to [decompoundedAttributes].
+     */
+    public infix fun dutch(block: DSLAttributes.() -> Unit) {
+        +QueryLanguage.Dutch.decompounded(block)
     }
 
+    /**
+     * Add [this] to [decompoundedAttributes].
+     */
     public operator fun DecompoundedAttributes.unaryPlus() {
         decompoundedAttributes += this
     }

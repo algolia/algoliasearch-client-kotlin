@@ -5,6 +5,9 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 
 
+/**
+ * DSL for building a [List] of [AdvancedSyntaxFeatures].
+ */
 @Suppress("PropertyName")
 @DSLParameters
 public class DSLAdvancedSyntaxFeatures(
@@ -14,6 +17,9 @@ public class DSLAdvancedSyntaxFeatures(
     public val ExactPhrase = AdvancedSyntaxFeatures.ExactPhrase
     public val ExcludeWords = AdvancedSyntaxFeatures.ExcludeWords
 
+    /**
+     * Add [this] to [advancedSyntaxFeatures].
+     */
     public operator fun AdvancedSyntaxFeatures.unaryPlus() {
         advancedSyntaxFeatures += this
     }

@@ -288,8 +288,8 @@ public data class ResponseSearch(
         /**
          * Deserialize the entire [json] to [T].
          */
-        public fun <T> deserialize(serializer: KSerializer<T>): T {
-            return JsonNonStrict.fromJson(serializer, json)
+        public fun <T> deserialize(deserializer: DeserializationStrategy<T>): T {
+            return JsonNonStrict.fromJson(deserializer, json)
         }
 
         @Serializer(Hit::class)

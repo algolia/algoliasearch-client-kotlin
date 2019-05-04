@@ -21,7 +21,7 @@ internal class DocDecompoundedAttributes {
         runBlocking {
             val settings = settings {
                 decompoundedAttributes {
-                    +german { +"name" }
+                    german { +"name" }
                 }
             }
 

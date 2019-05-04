@@ -3,15 +3,24 @@ package com.algolia.search.dsl
 import com.algolia.search.model.ObjectID
 
 
+/**
+ * DSL for building a [List] of [ObjectID].
+ */
 @DSLParameters
 public class DSLObjectIDs(
     private val objectIDs: MutableList<ObjectID> = mutableListOf()
 ) {
 
+    /**
+     * Convenience method.
+     */
     public operator fun String.unaryPlus() {
         +ObjectID(this)
     }
 
+    /**
+     * Add [this] to [objectIDs].
+     */
     public operator fun ObjectID.unaryPlus() {
         objectIDs += this
     }
