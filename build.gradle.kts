@@ -1,3 +1,4 @@
+import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import java.net.URI
 
 
@@ -5,6 +6,7 @@ plugins {
     id("kotlin-multiplatform") version "1.3.31"
     id("kotlinx-serialization") version "1.3.31"
     id("maven-publish")
+    id("com.jfrog.bintray") version "1.8.4"
 }
 
 version = Library.version
@@ -63,6 +65,85 @@ kotlin {
                 implementation(Ktor("client-apache"))
                 implementation(Ktor("client-android"))
             }
+        }
+    }
+}
+
+val sourcesJar by tasks.creating(Jar::class) {
+    archiveClassifier.value("sources")
+}
+
+val javadocJar by tasks.creating(Jar::class) {
+    archiveClassifier.value("javadoc")
+}
+
+publishing {
+    repositories {
+        maven {
+            url = uri("https://dl.bintray.com/algolia/maven")
+        }
+    }
+    publications.withType<MavenPublication>().all {
+        groupId = Library.group
+        version = Library.version
+        artifactId = when (name) {
+            "kotlinMultiplatform" -> Library.artifact
+            "metadata" -> "${Library.artifact}-common"
+            else -> "${Library.artifact}-$name"
+        }
+
+        pom.withXml {
+            asNode().apply {
+                appendNode("description", "Kotlin client for Algolia Search API.")
+                appendNode("url", "https://github.com/algolia/algoliasearch-client-kotlin")
+                appendNode("licenses").appendNode("license").apply {
+                    appendNode("name", "MIT")
+                    appendNode("url", "http://www.opensource.org/licenses/mit-license.php")
+                    appendNode("distribution", "repo")
+                }
+                appendNode("developers").appendNode("developer").apply {
+                    appendNode("id", "algolia")
+                    appendNode("name", "The Algolia Team")
+                    appendNode("email", "hey@algolia.com")
+                }
+                appendNode("scm").apply {
+                    appendNode("url", "https://github.com/algolia/algoliasearch-client-kotlin.git")
+                }
+            }
+        }
+    }
+
+    kotlin.targets.forEach { target ->
+        val targetPublication = publications.withType<MavenPublication>().findByName(target.name)
+
+        targetPublication?.artifact(javadocJar)
+    }
+}
+
+bintray {
+    user = System.getenv("BINTRAY_USER")
+    key = System.getenv("BINTRAY_KEY")
+    publish = true
+    override = true
+
+    pkg.apply {
+        repo = "maven"
+        name = Library.artifact
+        setLicenses("MIT")
+        setLabels("Kotlin")
+        vcsUrl = "https://github.com/algolia/algoliasearch-client-kotlin.git"
+        version.apply {
+            name = Library.version
+            vcsTag = Library.version
+        }
+    }
+}
+
+tasks {
+    val bintrayUpload by getting(BintrayUploadTask::class) {
+        dependsOn(publishToMavenLocal)
+        doFirst {
+            setPublications("jvm", "metadata")
         }
     }
 }
