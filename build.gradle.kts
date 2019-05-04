@@ -127,10 +127,15 @@ bintray {
     override = true
 
     pkg.apply {
+        desc = "Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries," +
+                "and pre-built integrations. Algolia API Client for Kotlin lets you easily use the Algolia Search" +
+                "REST API from your JVM project, such as Android or backend implementations."
         repo = "maven"
         name = Library.artifact
+        websiteUrl = "https://www.algolia.com/"
+        issueTrackerUrl =  "https://github.com/algolia/algoliasearch-client-kotlin/issues"
         setLicenses("MIT")
-        setLabels("Kotlin")
+        setLabels("Kotlin", "Algolia")
         vcsUrl = "https://github.com/algolia/algoliasearch-client-kotlin.git"
         version.apply {
             name = Library.version
