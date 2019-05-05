@@ -11,13 +11,13 @@ import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.Deletion
 import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.response.revision.RevisionAPIKey
-import com.algolia.search.serialize.RouteKeysV1
-import com.algolia.search.serialize.stringify
-import com.algolia.search.serialize.toJsonNoDefaults
-import com.algolia.search.serialize.urlEncode
+import com.algolia.search.serialize.*
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.JsonObject
 
 
 internal class EndpointAPIKeyImpl(
@@ -29,6 +29,11 @@ internal class EndpointAPIKeyImpl(
         restrictSources: String?,
         requestOptions: RequestOptions?
     ): CreationAPIKey {
+        val query = mutableMapOf<String, JsonElement>().run {
+            restrictSources?.let { put(KeyRestrictSources, JsonLiteral(it)) }
+            params.query?.toJsonNoDefaults()?.let { putAll(it.content) }
+            JsonObject(this)
+        }
         val body = RequestAPIKey(
             ACLs = params.ACLs,
             indices = params.indices,
@@ -36,9 +41,8 @@ internal class EndpointAPIKeyImpl(
             maxHitsPerQuery = params.maxHitsPerQuery,
             maxQueriesPerIPPerHour = params.maxQueriesPerIPPerHour,
             validity = params.validity,
-            query = params.query?.toJsonNoDefaults()?.urlEncode(),
-            referers = params.referers,
-            restrictSources = restrictSources
+            query = if (query.isNotEmpty()) query.urlEncode() else null,
+            referers = params.referers
         ).stringify()
 
         return transport.request(HttpMethod.Post, CallType.Write, RouteKeysV1, requestOptions, body)

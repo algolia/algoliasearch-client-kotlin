@@ -16,6 +16,5 @@ internal data class RequestAPIKey(
     @SerialName(KeyMaxQueriesPerIPPerHour) val maxQueriesPerIPPerHour: Int? = null,
     @SerialName(KeyValidity) val validity: Long? = null,
     @SerialName(KeyQueryParameters) val query: String? = null,
-    @SerialName(KeyReferers) val referers: List<String>? = null,
-    @SerialName(KeyRestrictSources) val restrictSources: String? = null
+    @SerialName(KeyReferers) val referers: List<String>? = null
 )
