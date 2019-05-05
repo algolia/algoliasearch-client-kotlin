@@ -34,7 +34,7 @@ internal class DocPhilosophy {
     @Test
     fun typeSafetyClient() {
         val appID = ApplicationID("YourApplicationID")
-        val apiKey = APIKey("YourAPIKey")
+        val apiKey = APIKey("YourAdminAPIKey")
 
         val client = ClientSearch(appID, apiKey)
     }

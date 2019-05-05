@@ -9,7 +9,6 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
-import com.algolia.search.model.search.AlternativesAsExact
 import kotlinx.coroutines.runBlocking
 import org.junit.Ignore
 import org.junit.Test
@@ -136,8 +135,6 @@ internal class TutorialSetRelevance {
                     +"country"
                 }
             }
-
-            AlternativesAsExact
 
             val queryRules = rules {
                 rule(

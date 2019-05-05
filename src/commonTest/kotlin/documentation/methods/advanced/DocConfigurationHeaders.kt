@@ -20,8 +20,8 @@ internal class DocConfigurationHeaders {
     @Test
     fun snippet1() {
         val configuration = ConfigurationSearch(
-            apiKey = APIKey("YourApplicationId"),
-            applicationID = ApplicationID("YourAPIKey"),
+            applicationID = ApplicationID("YourApplicationId"),
+            apiKey = APIKey("YourAdminAPIKey"),
             defaultHeaders = mapOf("NAME-OF-HEADER" to "value-of-header")
         )
         ClientSearch(configuration)

@@ -15,7 +15,7 @@ internal class DocIndex {
     fun snippet1() {
         val client = ClientSearch(
             applicationID = ApplicationID("latency"),
-            apiKey = APIKey("YourAPIKey")
+            apiKey = APIKey("YourAdminAPIKey")
         )
         val indexName = IndexName("your_index_name")
 

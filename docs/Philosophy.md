@@ -17,7 +17,7 @@ Example for creating a Client instance without mixing the application ID and the
 
 ```kotlin
 val appID = ApplicationID("YourApplicationID")
-val apiKey = APIKey("YourAPIKey")
+val apiKey = APIKey("YourAdminAPIKey")
 
 val client = ClientSearch(appID, apiKey)
 ```

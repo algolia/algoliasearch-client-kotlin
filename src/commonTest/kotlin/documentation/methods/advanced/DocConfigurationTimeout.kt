@@ -21,8 +21,8 @@ internal class DocConfigurationTimeout {
     @Test
     fun snippet1() {
         val configuration = ConfigurationSearch(
-            apiKey = APIKey("YourApplicationId"),
-            applicationID = ApplicationID("YourAPIKey"),
+            applicationID = ApplicationID("YourApplicationId"),
+            apiKey = APIKey("YourAdminAPIKey"),
             readTimeout = 30,
             writeTimeout = 30
         )
