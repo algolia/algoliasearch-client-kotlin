@@ -25,15 +25,23 @@ public data class ResponseSearch(
      */
     @SerialName(KeyNbHits) val nbHitsOrNull: Int? = null,
     /**
-     * Index of the current page (zero-based). See the page search parameter.
+     * Index of the current page (zero-based). See the [Query.page] search parameter.
      * Not returned if you use offset/length for pagination.
      */
     @SerialName(KeyPage) val pageOrNull: Int? = null,
     /**
-     * The maximum number of hits returned per page. See the hitsPerPage search parameter.
+     * The maximum number of hits returned per page. See the [Query.hitsPerPage] search parameter.
      * Not returned if you use offset & length for pagination.
      */
     @SerialName(KeyHitsPerPage) val hitsPerPageOrNull: Int? = null,
+    /**
+     * Alternative to [page] (zero-based). Is returned only when [Query.offset] [Query.length] is specified.
+     */
+    @SerialName(KeyOffset) val offsetOrNull: Int? = null,
+    /**
+     * Alternative to [hitsPerPageOrNull] (zero-based). Is returned only when [Query.offset] [Query.length] is specified.
+     */
+    @SerialName(KeyLength) val lengthOrNull: Int? = null,
     /**
      * Array of userData object. Only returned if at least one query rule containing a custom userData
      * consequence was applied.
@@ -159,6 +167,14 @@ public data class ResponseSearch(
     @Transient
     public val hitsPerPage: Int
         get() = hitsPerPageOrNull!!
+
+    @Transient
+    public val length: Int
+        get() = lengthOrNull!!
+
+    @Transient
+    public val offset: Int
+        get() = offsetOrNull!!
 
     @Transient
     public val userData: List<JsonObject>
