@@ -303,6 +303,22 @@ public data class Query(
     @SerialName(KeyEnablePersonalization) var enablePersonalization: Boolean? = null,
 
     /**
+     *  The `personalizationImpact` parameter sets the percentage of the impact that personalization has on ranking
+     *  records.
+     *  This is set at query time and therefore overrides any impact value you had set on your index.
+     *  The higher the `personalizationImpact`, the more the results are personalized for the user, and the less the
+     *  custom ranking is taken into account in ranking records.
+     *
+     *  Usage note:
+     *
+     *  - The value must be between 0 and 100 (inclusive).
+     *  - This parameter isn't taken into account if `enablePersonalization` is `false`.
+     *  - Setting `personalizationImpact` to `0` disables the Personalization feature, as if `enablePersonalization`
+     *    were `false`.
+     */
+    @SerialName(KeyPersonalizationImpact) var personalizationImpact: Int? = null,
+
+    /**
      * Associates a certain user token with the current search.
      * Engine default: User ip address
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/userToken/?language=kotlin]

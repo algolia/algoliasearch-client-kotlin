@@ -323,6 +323,7 @@ internal class TestKeys {
         KeyExactPhrase shouldEqual "exactPhrase"
         KeyExcludeWords shouldEqual "excludeWords"
         KeyAdvancedSyntaxFeatures shouldEqual "advancedSyntaxFeatures"
+        KeyPersonalizationImpact shouldEqual "personalizationImpact"
 
         KeyAfrikaans shouldEqual "af"
         KeyArabic shouldEqual "ar"

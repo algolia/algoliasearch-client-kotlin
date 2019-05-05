@@ -65,6 +65,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             enableRules = boolean,
             ruleContexts = listOf(string),
             enablePersonalization = boolean,
+            personalizationImpact = 1,
             userToken = UserToken(unknown),
             queryType = QueryType.PrefixLast,
             removeWordsIfNoResults = RemoveWordIfNoResults.LastWords,
@@ -129,6 +130,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeyEnableRules to boolean
             KeyRuleContexts to jsonArray { +string }
             KeyEnablePersonalization to boolean
+            KeyPersonalizationImpact to 1
             KeyUserToken to unknown
             KeyQueryType to QueryType.PrefixLast.raw
             KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.LastWords.raw

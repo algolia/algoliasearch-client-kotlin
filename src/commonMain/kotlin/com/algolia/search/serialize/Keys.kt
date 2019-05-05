@@ -329,6 +329,7 @@ internal const val Key_Exhaustive_Faceting = "exhaustive_faceting"
 internal const val KeyExactPhrase = "exactPhrase"
 internal const val KeyExcludeWords = "excludeWords"
 internal const val KeyAdvancedSyntaxFeatures = "advancedSyntaxFeatures"
+internal const val KeyPersonalizationImpact = "personalizationImpact"
 
 internal const val KeyAfrikaans = "af"
 internal const val KeyArabic = "ar"
