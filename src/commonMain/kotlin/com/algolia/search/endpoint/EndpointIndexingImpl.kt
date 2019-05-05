@@ -3,6 +3,7 @@ package com.algolia.search.endpoint
 import com.algolia.search.client.Index
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.exception.EmptyListException
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
@@ -203,6 +204,7 @@ internal class EndpointIndexingImpl(
         batchOperations: List<BatchOperation>,
         requestOptions: RequestOptions?
     ): ResponseBatch {
+        if (batchOperations.isEmpty()) throw EmptyListException("batchOperations")
         val requests = Json.toJson(BatchOperation.list, batchOperations)
         val body = json { KeyRequests to requests }.toString()
 
@@ -231,6 +233,7 @@ internal class EndpointIndexingImpl(
     }
 
     private suspend fun replaceAllObjectsInternal(batchOperations: List<BatchOperation>): List<TaskIndex> {
+        if (batchOperations.isEmpty()) throw EmptyListException("batchOperations")
         val indexSource = Index(transport, indexName)
         val indexDestination = Index(transport, "${indexName}_tmp_${Random.nextInt()}".toIndexName())
         val scopes = listOf(Scope.Settings, Scope.Rules, Scope.Synonyms)

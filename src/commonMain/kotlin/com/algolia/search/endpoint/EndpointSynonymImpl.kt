@@ -2,6 +2,7 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.exception.EmptyListException
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseSearchSynonyms
@@ -42,6 +43,7 @@ internal class EndpointSynonymImpl(
         replaceExistingSynonyms: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
+        if (synonyms.isEmpty()) throw EmptyListException("synonyms")
         val path = indexName.toPath("/$RouteSynonyms/batch")
         val body = Json.stringify(Synonym.list, synonyms)
         val options = requestOptionsBuilder(requestOptions) {

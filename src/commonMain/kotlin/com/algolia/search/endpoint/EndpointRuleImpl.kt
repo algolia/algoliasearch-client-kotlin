@@ -2,6 +2,7 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.exception.EmptyListException
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseSearchRules
@@ -79,6 +80,7 @@ internal class EndpointRuleImpl(
         clearExistingRules: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
+        if (rules.isEmpty()) throw EmptyListException("rules")
         val body = JsonNoDefaults.stringify(Rule.serializer().list, rules)
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)

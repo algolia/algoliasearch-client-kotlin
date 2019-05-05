@@ -1,6 +1,7 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
+import com.algolia.search.exception.EmptyListException
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
@@ -50,6 +51,7 @@ internal class EndpointMultipleIndexImpl(
         operations: List<BatchOperationIndex>,
         requestOptions: RequestOptions?
     ): ResponseBatches {
+        if (operations.isEmpty()) throw EmptyListException("operations")
         val requests = Json.toJson(BatchOperationIndex.list, operations)
         val body = json { KeyRequests to requests }.toString()
 
