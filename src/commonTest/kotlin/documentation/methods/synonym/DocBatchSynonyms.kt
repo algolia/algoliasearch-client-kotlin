@@ -31,7 +31,7 @@ internal class DocBatchSynonyms {
                     synonyms = listOf("street", "st")
                 )
             )
-            index.saveSynonyms(synonyms, forwardToReplicas = true, replaceExistingSynonyms = true)
+            index.saveSynonyms(synonyms, forwardToReplicas = true, clearExistingSynonyms = true)
         }
     }
 }

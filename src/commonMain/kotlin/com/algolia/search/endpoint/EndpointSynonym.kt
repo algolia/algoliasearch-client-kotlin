@@ -39,17 +39,17 @@ public interface EndpointSynonym {
      *
      * Create or update multiple [Synonym].
      * This method enables you to create or update one or more [Synonym] in a single call.
-     * You can also recreate your entire set of [Synonym] by using the [replaceExistingSynonyms] parameter.
+     * You can also recreate your entire set of [Synonym] by using the [clearExistingSynonyms] parameter.
      * Note that each [Synonym] object counts as a single indexing operation.
 
      * @param synonyms List of [Synonym] to save.
      * @param forwardToReplicas By default, this method applies only to the specified index. By making this true,
      * the method will also send the synonym to all replicas. Thus, if you want to forward your synonyms to replicas
      * you will need to specify that.
-     * @param replaceExistingSynonyms Forces the engine to replace all synonyms, using an atomic save.
+     * @param clearExistingSynonyms Forces the engine to replace all synonyms, using an atomic save.
      * Normally, to replace all synonyms on an index, you would first clear the synonyms, using clearAllSynonyms,
      * and then create a new list. However, between the clear and the add, your index will have no synonyms.
-     * This is where replaceExistingSynonyms comes into play.
+     * This is where clearExistingSynonyms comes into play.
      * By adding this parameter, you do not need to use [clearSynonyms], it’s done for you.
      * This parameter tells the engine to delete all existing synonyms before recreating a new list from the synonyms
      * listed in the current call. This is the only way to avoid having no synonyms, ensuring that your index will
@@ -59,7 +59,7 @@ public interface EndpointSynonym {
     suspend fun saveSynonyms(
         synonyms: List<Synonym>,
         forwardToReplicas: Boolean? = null,
-        replaceExistingSynonyms: Boolean? = null,
+        clearExistingSynonyms: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
 

@@ -40,7 +40,7 @@ internal class EndpointSynonymImpl(
     override suspend fun saveSynonyms(
         synonyms: List<Synonym>,
         forwardToReplicas: Boolean?,
-        replaceExistingSynonyms: Boolean?,
+        clearExistingSynonyms: Boolean?,
         requestOptions: RequestOptions?
     ): RevisionIndex {
         if (synonyms.isEmpty()) throw EmptyListException("synonyms")
@@ -48,7 +48,7 @@ internal class EndpointSynonymImpl(
         val body = Json.stringify(Synonym.list, synonyms)
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)
-            parameter(KeyReplaceExistingSynonyms, replaceExistingSynonyms)
+            parameter(KeyReplaceExistingSynonyms, clearExistingSynonyms)
         }
 
         return transport.request(HttpMethod.Post, CallType.Write, path, options, body)
