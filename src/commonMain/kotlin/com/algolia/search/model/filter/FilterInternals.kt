@@ -25,7 +25,7 @@ internal fun Filter.Facet.toSQL(): String {
 }
 
 internal fun Filter.Tag.toSQL(): String {
-    val expression = "$attribute:$value"
+    val expression = "$attribute:${value.escape()}"
 
     return if (isNegated) "NOT $expression" else expression
 }
@@ -99,7 +99,7 @@ internal fun Filter.Facet.toLegacy(): List<String> {
 }
 
 internal fun Filter.Tag.toLegacy(): List<String> {
-    val value = if (isNegated) "-$value" else value
+    val value = if (isNegated) "-${value.escape()}" else value.escape()
 
     return listOf("$attribute:$value")
 }

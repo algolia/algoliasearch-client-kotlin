@@ -90,7 +90,7 @@ public sealed class Filter {
         public constructor(
             value: String,
             isNegated: Boolean = false
-        ) : this(Attribute("_tags"), isNegated, value.escape())
+        ) : this(Attribute("_tags"), isNegated, value)
 
         /**
          * Operator to negates a [Filter.Tag].
