@@ -30,6 +30,15 @@ The Kotlin client is compatible with the JVM. It is recommended for the followin
 The Kotlin client architecture is designed with [Kotlin multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html) in mind.
 However, we don't support Kotlin native and Kotlin js targets just yet.
 
+## Stack
+
+This client provides a Kotlin implentation for using AlgoliaSearch.
+This client is built using the official Kotlin stack:
+  - [Kotlin multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html).
+  - [Kotlinx serialization](https://github.com/Kotlin/kotlinx.serialization) for json parsing.
+  - [Kotlinx coroutines](https://github.com/Kotlin/kotlinx.coroutines) for asynchronous operations.
+  - [Ktor](https://github.com/ktorio/ktor) HTTP client.
+
 ## Coroutines
 
 All methods performing HTTP calls in the Kotlin client are [suspending functions](https://kotlinlang.org/docs/reference/coroutines/composing-suspending-functions.html#composing-suspending-functions). 
@@ -77,6 +86,41 @@ The `wait` functions are suspending, and should only be called from a coroutine.
 ## Multithreading
 
 The client is designed to be thread-safe. You can use `SearchClient`, `AnalyticsClient`, and `InsightsClient` in a multithreaded environment.
+
+## Type safety
+
+Response and parameters objects are typed to provide extensive compile time safety coverage.
+
+Example for creating a Client instance without mixing the application ID and the API key.
+
+```kotlin
+val appID = ApplicationID("YourApplicationID")
+val apiKey = APIKey("YourAPIKey")
+
+val client = ClientSearch(appID, apiKey)
+```
+
+Example for attributes:
+
+```kotlin
+val color = Attribute("color")
+val category = Attribute("category")
+
+Query(
+  attributesToRetrieve = listOf(color, category)
+)
+```
+
+Sealed class are used to represent enumerated types. It allows to quickly discover possible values for each type thanks to IDE autocomplete support.
+All sealed class have an `Other` class case for avoiding runtime crashes in case of unforeseen value.
+
+```kotlin
+val query = Query()
+
+query.sortFacetsBy = SortFacetsBy.Count
+// query.sortFacetsBy = SortFacetsBy.Alpha
+// query.sortFacetsBy = SortFacetsBy.Other("unforeseen value")
+```
 
 
 ## Guides
