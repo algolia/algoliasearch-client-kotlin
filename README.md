@@ -32,7 +32,7 @@ However, we don't support Kotlin native and Kotlin js targets just yet.
 
 ## Stack
 
-This client provides a Kotlin implentation for using AlgoliaSearch.
+This client provides a Kotlin implementation for using AlgoliaSearch.
 This client is built using the official Kotlin stack:
   - [Kotlin multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html).
   - [Kotlinx serialization](https://github.com/Kotlin/kotlinx.serialization) for json parsing.
