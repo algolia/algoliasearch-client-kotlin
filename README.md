@@ -130,7 +130,6 @@ query.sortFacetsBy = SortFacetsBy.Count
 
 ## Guides
 
-- [Philosophy](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/Philosophy.md)
 - [DSL](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/DSL.md)
 - [Serialization](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/Serialization.md)
 - [ExceptionHandling](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/ExceptionHandling.md)
