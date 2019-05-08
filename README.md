@@ -11,6 +11,10 @@ The Kotlin client is compatible with Kotlin `1.3.30` and higher.
 Install the Kotlin client by adding the following dependency to your `gradle.build` file:
 
   ```gradle
+  repositories {
+     maven { url "https://dl.bintray.com/algolia/maven" }
+  }
+  
   dependencies {
      implementation "com.algolia:algoliasearch-client-kotlin-jvm:$kotlin_client_version"
      // Choose one of the following http client
