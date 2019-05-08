@@ -130,10 +130,11 @@ query.sortFacetsBy = SortFacetsBy.Count
 
 ## Guides
 
-- [DSL](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/DSL.md)
-- [Serialization](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/Serialization.md)
-- [ExceptionHandling](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/ExceptionHandling.md)
-- [Configure the HTTP client](https://github.com/algolia/algoliasearch-client-kotlin/tree/develop/docs/HTTPClient.md)
+- [Getting started](https://github.com/algolia/algoliasearch-client-kotlin/tree/master/docs/GettingStarted.md)
+- [DSL](https://github.com/algolia/algoliasearch-client-kotlin/tree/master/docs/DSL.md)
+- [Serialization](https://github.com/algolia/algoliasearch-client-kotlin/tree/master/docs/Serialization.md)
+- [ExceptionHandling](https://github.com/algolia/algoliasearch-client-kotlin/tree/master/docs/ExceptionHandling.md)
+- [Configure the HTTP client](https://github.com/algolia/algoliasearch-client-kotlin/tree/master/docs/HTTPClient.md)
 
 ## List of available methods
 
