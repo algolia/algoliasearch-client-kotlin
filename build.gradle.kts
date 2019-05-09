@@ -32,6 +32,7 @@ kotlin {
             languageSettings.progressiveMode = true
         }
         val commonMain by getting {
+            kotlin.srcDirs("build/generated")
             dependencies {
                 implementation(kotlin("stdlib-common"))
                 implementation(Serialization("runtime"))
@@ -145,6 +146,21 @@ bintray {
 }
 
 tasks {
+    this["assemble"].doFirst {
+        val directory = File("build/generated").apply {
+            if (!exists()) mkdir()
+        }
+        val file = File("${directory.path}/Library.kt").apply {
+            if (!exists()) createNewFile()
+        }
+
+        file.bufferedWriter().use {
+            it.write("package com.algolia.search.build\n\n")
+            it.write("object Library {\n\n")
+            it.write("\tval version: String = \"${Library.version}\"\n")
+            it.write("}")
+        }
+    }
     val bintrayUpload by getting(BintrayUploadTask::class) {
         dependsOn(publishToMavenLocal)
         doFirst {
