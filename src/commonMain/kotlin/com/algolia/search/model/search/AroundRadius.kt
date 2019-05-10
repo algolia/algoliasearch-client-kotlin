@@ -13,7 +13,7 @@ import kotlinx.serialization.json.intOrNull
 
 /**
  * Define the maximum radius for a geo search (in meters).
- * This setting only works within the context of a radial (circuler) geo search, enabled by aroundLatLngViaIP or
+ * This setting only works within the context of a radial (circular) geo search, enabled by aroundLatLngViaIP or
  * aroundLatLng.
  */
 @Serializable(AroundRadius.Companion::class)
