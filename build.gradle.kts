@@ -70,10 +70,6 @@ kotlin {
     }
 }
 
-val sourcesJar by tasks.creating(Jar::class) {
-    archiveClassifier.value("sources")
-}
-
 val javadocJar by tasks.creating(Jar::class) {
     archiveClassifier.value("javadoc")
 }
@@ -125,7 +121,6 @@ bintray {
     user = System.getenv("BINTRAY_USER")
     key = System.getenv("BINTRAY_KEY")
     publish = true
-    override = true
 
     pkg.apply {
         desc = "Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries," +
@@ -145,22 +140,24 @@ bintray {
     }
 }
 
-tasks {
-    this["assemble"].doFirst {
-        val directory = File("build/generated").apply {
-            if (!exists()) mkdir()
-        }
-        val file = File("${directory.path}/Library.kt").apply {
-            if (!exists()) createNewFile()
-        }
-
-        file.bufferedWriter().use {
-            it.write("package com.algolia.search.build\n\n")
-            it.write("object Library {\n\n")
-            it.write("\tval version: String = \"${Library.version}\"\n")
-            it.write("}")
-        }
+val generate by tasks.registering {
+    val directory = File("build/generated").apply {
+        if (!exists()) mkdir()
     }
+    val file = File("${directory.path}/Library.kt").apply {
+        if (!exists()) createNewFile()
+    }
+
+    file.bufferedWriter().use {
+        it.write("package com.algolia.search.build\n\n")
+        it.write("object Library {\n\n")
+        it.write("\tval version: String = \"${Library.version}\"\n")
+        it.write("}")
+    }
+}
+
+tasks {
+    this["assemble"].dependsOn(generate)
     val bintrayUpload by getting(BintrayUploadTask::class) {
         dependsOn(publishToMavenLocal)
         doFirst {
