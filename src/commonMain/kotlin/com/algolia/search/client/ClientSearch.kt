@@ -3,6 +3,7 @@ package com.algolia.search.client
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationSearch
+import com.algolia.search.configuration.defaultLogLevel
 import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.endpoint.*
 import com.algolia.search.helper.encodeBase64
@@ -27,6 +28,7 @@ import com.algolia.search.serialize.RouteLogs
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.logging.LogLevel
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.*
@@ -46,8 +48,9 @@ public class ClientSearch private constructor(
 
     public constructor(
         applicationID: ApplicationID,
-        apiKey: APIKey
-    ) : this(Transport(ConfigurationSearch(applicationID, apiKey)))
+        apiKey: APIKey,
+        logLevel: LogLevel = defaultLogLevel
+    ) : this(Transport(ConfigurationSearch(applicationID, apiKey, logLevel = logLevel)))
 
     public constructor(
         configuration: ConfigurationSearch
