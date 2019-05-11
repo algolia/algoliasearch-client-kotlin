@@ -49,7 +49,7 @@ internal class TestSuiteDisjunctive {
                 facets = facets
             )
             val disjunctiveFacets = listOf(brand)
-            val filters = listOf(
+            val filters = setOf(
                 Filter.Facet(brand, "Apple"),
                 Filter.Facet(brand, "Samsung"),
                 Filter.Facet(brand, "Commas' voice, Ltd"),
@@ -93,7 +93,7 @@ internal class TestSuiteDisjunctive {
                 facets = setOf(city)
             )
             val disjunctiveFacets = listOf(stars, facilities)
-            val filters = mutableListOf<Filter.Facet>()
+            val filters = mutableSetOf<Filter.Facet>()
 
             index.apply {
                 val tasks = mutableListOf<Task>()

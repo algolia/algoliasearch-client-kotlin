@@ -111,13 +111,13 @@ public interface EndpointSearch {
      *
      * @param query The [Query] used to search.
      * @param disjunctiveFacets List of [Attribute] that are marked as disjunctive facets.
-     * @param filters The [Filter.Facet] to be applied
+     * @param filters The [Filter] to be applied.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun searchDisjunctiveFacets(
         query: Query,
         disjunctiveFacets: List<Attribute>,
-        filters: List<Filter.Facet>,
+        filters: Set<Filter>,
         requestOptions: RequestOptions? = null
     ): ResponseSearch
 }

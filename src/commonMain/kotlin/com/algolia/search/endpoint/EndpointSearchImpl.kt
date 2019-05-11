@@ -64,12 +64,12 @@ internal class EndpointSearchImpl(
     override suspend fun searchDisjunctiveFacets(
         query: Query,
         disjunctiveFacets: List<Attribute>,
-        filters: List<Filter.Facet>,
+        filters: Set<Filter>,
         requestOptions: RequestOptions?
     ): ResponseSearch {
-        val (orFilters, andFilters) = filters.partition { disjunctiveFacets.contains(it.attribute) }
-        val queryAnd = buildAndQueries(query, andFilters, orFilters)
-        val queriesOr = buildOrQueries(disjunctiveFacets, query, andFilters, orFilters)
+        val (filtersOr, filtersAnd) = filters.partition { disjunctiveFacets.contains(it.attribute) }
+        val queryAnd = buildAndQueries(query, filtersAnd, filtersOr)
+        val queriesOr = buildOrQueries(query, filtersAnd, filtersOr, disjunctiveFacets)
         val results = EndpointMultipleIndexImpl(transport).multipleQueries(queryAnd.plus(queriesOr)).results
         val resultAnd = results.first()
         val resultsOr = results.subList(1, results.size)
@@ -89,22 +89,24 @@ internal class EndpointSearchImpl(
 
     private fun buildAndQueries(
         query: Query,
-        andFilters: List<Filter.Facet>,
-        orFilters: List<Filter.Facet>
+        filtersAnd: List<Filter>,
+        filtersOr: List<Filter>
     ): List<IndexQuery> {
         return query.copy().apply {
             filters {
-                and { +andFilters }
-                orFacet { +orFilters }
+                and { +filtersAnd }
+                orFacet { +filtersOr.filterIsInstance<Filter.Facet>() }
+                orTag { +filtersOr.filterIsInstance<Filter.Tag>() }
+                orNumeric { +filtersOr.filterIsInstance<Filter.Numeric>() }
             }
         }.let { listOf(IndexQuery(indexName, it)) }
     }
 
     private fun buildOrQueries(
-        disjunctiveFacets: List<Attribute>,
         query: Query,
-        andFilters: List<Filter.Facet>,
-        orFilters: List<Filter.Facet>
+        filtersAnd: List<Filter>,
+        filtersOr: List<Filter>,
+        disjunctiveFacets: List<Attribute>
     ): List<IndexQuery> {
         return disjunctiveFacets.map { attribute ->
             query.copy().apply {
@@ -114,8 +116,10 @@ internal class EndpointSearchImpl(
                 hitsPerPage = 0
                 analytics = false
                 filters {
-                    and { +andFilters }
-                    orFacet { +orFilters.filter { it.attribute != attribute } }
+                    and { +filtersAnd }
+                    orFacet { +filtersOr.filterIsInstance<Filter.Facet>().filter { it.attribute != attribute } }
+                    orTag { +filtersOr.filterIsInstance<Filter.Tag>() }
+                    orNumeric { +filtersOr.filterIsInstance<Filter.Numeric>() }
                 }
             }
         }.map { IndexQuery(indexName, it) }
