@@ -16,7 +16,7 @@ internal class TestResponseSearchForFacets : TestSerializer<ResponseSearchForFac
     override val items = listOf(
         ResponseSearchForFacets(
             facets = listOf(
-                Facet(unknown, 0)
+                Facet(unknown, 0, "hello")
             ),
             exhaustiveFacetsCount = true,
             processingTimeMS = 0
@@ -25,6 +25,7 @@ internal class TestResponseSearchForFacets : TestSerializer<ResponseSearchForFac
                 +json {
                     KeyValue to unknown
                     KeyCount to 0
+                    KeyHighlighted to "hello"
                 }
             }
             KeyExhaustiveFacetsCount to true

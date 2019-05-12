@@ -19,6 +19,7 @@ object KSerializerFacetList : KSerializer<List<Facet>> {
                 +json {
                     KeyValue to it.value
                     KeyCount to it.count
+                    it.highlightedOrNull?.let { KeyHighlighted to it }
                 }
             }
         }
@@ -31,7 +32,8 @@ object KSerializerFacetList : KSerializer<List<Facet>> {
         return json.map {
             Facet(
                 it.jsonObject.getPrimitive(KeyValue).content,
-                it.jsonObject.getPrimitive(KeyCount).int
+                it.jsonObject.getPrimitive(KeyCount).int,
+                it.jsonObject.getPrimitiveOrNull(KeyHighlighted)?.content
             )
         }
     }
