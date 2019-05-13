@@ -6,7 +6,6 @@ import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.search.Cursor
-import com.algolia.search.model.search.FacetQuery
 import com.algolia.search.model.search.Query
 import com.algolia.search.transport.RequestOptions
 
@@ -95,12 +94,14 @@ public interface EndpointSearch {
      * users can more easily drill down into the results. See more here.
      *
      * @param attribute The [Attribute] to facet on.
-     * @param query The [FacetQuery] used to search.
+     * @param facetQuery The facetQuery used to search for facets.
+     * @param query: The [Query] to filter results.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun searchForFacets(
         attribute: Attribute,
-        query: FacetQuery = FacetQuery(),
+        facetQuery: String? = null,
+        query: Query = Query(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchForFacets
 
