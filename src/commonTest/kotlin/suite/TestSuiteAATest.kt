@@ -12,7 +12,6 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import dayInMillis
-import kotlinx.coroutines.delay
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
@@ -41,7 +40,7 @@ internal class TestSuiteAATest {
     @BeforeTest
     fun clean() {
         runBlocking {
-            cleanABTest(suffix)
+            cleanABTest(clientAdmin1, suffix)
             cleanIndex(clientAdmin1, suffix)
         }
     }
@@ -54,7 +53,6 @@ internal class TestSuiteAATest {
                 val response = clientAnalytics.addABTest(abTest)
 
                 response.wait() shouldEqual TaskStatus.Published
-                delay(2000L)
                 clientAnalytics.getABTest(response.abTestID).let {
                     it.name shouldEqual abTest.name
                     it.endAt shouldEqual abTest.endAt

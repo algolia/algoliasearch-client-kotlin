@@ -30,7 +30,7 @@ internal fun compareVariant(actual: ResponseVariant, expected: Variant) {
     }
 }
 
-internal suspend fun cleanABTest(suffix: String, now: Boolean = false) {
+internal suspend fun cleanABTest(clientSearch: ClientSearch, suffix: String, now: Boolean = false) {
     val regex = Regex("kotlin-(.*)-$username-$suffix")
 
     clientAnalytics.browseAllABTests().forEach {
@@ -42,7 +42,11 @@ internal suspend fun cleanABTest(suffix: String, now: Boolean = false) {
                 val difference = Time.getCurrentTimeMillis() - DateFormat.parse(date)
 
                 if (difference >= dayInMillis || now) {
-                    clientAnalytics.deleteABTest(abTest.abTestID)
+                    val deletion = clientAnalytics.deleteABTest(abTest.abTestID)
+
+                    clientSearch.initIndex(deletion.indexName).apply {
+                        deletion.wait()
+                    }
                 }
             }
         }
