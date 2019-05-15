@@ -7,7 +7,7 @@ import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.model.synonym.SynonymType
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.list
@@ -76,7 +76,7 @@ internal class TestSuiteSynonyms {
                     synonyms shouldContain synonymAlternative2
                 }
                 deleteSynonym(gba).wait() shouldEqual TaskStatus.Published
-                (shouldFailWith<BadResponseStatusException> {
+                (shouldFailWith<ResponseException> {
                     getSynonym(gba)
                 }).response.status.value shouldEqual HttpStatusCode.NotFound.value
 

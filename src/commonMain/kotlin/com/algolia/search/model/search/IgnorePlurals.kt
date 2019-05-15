@@ -1,7 +1,7 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.model.settings.Settings
+import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.asJsonInput
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.BooleanSerializer

@@ -40,6 +40,7 @@ kotlin {
                 api(Ktor("client-logging"))
                 api(Ktor("client-core"))
                 api(Ktor("client-json"))
+                api(Ktor("client-serialization"))
             }
         }
         val commonTest by getting {
@@ -55,6 +56,7 @@ kotlin {
                 api(Ktor("client-core-jvm"))
                 api(Ktor("client-json-jvm"))
                 api(Ktor("client-logging-jvm"))
+                api(Ktor("client-serialization-jvm"))
             }
         }
         val jvmTest by getting {

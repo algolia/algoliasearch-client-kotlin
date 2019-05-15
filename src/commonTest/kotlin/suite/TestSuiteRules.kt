@@ -7,7 +7,7 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.list
@@ -57,7 +57,7 @@ internal class TestSuiteRules {
                 searches.find { it.objectID == rules.first().objectID }.shouldNotBeNull()
                 deleteRule(rule.objectID).wait() shouldEqual TaskStatus.Published
 
-                (shouldFailWith<BadResponseStatusException> {
+                (shouldFailWith<ResponseException> {
                     getRule(rule.objectID)
                 }).response.status.value shouldEqual HttpStatusCode.NotFound.value
                 clearRules().wait() shouldEqual TaskStatus.Published

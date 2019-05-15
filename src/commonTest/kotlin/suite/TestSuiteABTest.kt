@@ -10,7 +10,7 @@ import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import dayInMillis
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.json
 import runBlocking
@@ -67,7 +67,7 @@ internal class TestSuiteABTest {
                 clientAnalytics.getABTest(responseA.abTestID).status shouldEqual ABTestStatus.Stopped
                 clientAnalytics.deleteABTest(responseA.abTestID).wait() shouldEqual TaskStatus.Published
 
-                val responseB = shouldFailWith<BadResponseStatusException> {
+                val responseB = shouldFailWith<ResponseException> {
                     clientAnalytics.getABTest(responseA.abTestID)
                 }
 

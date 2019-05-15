@@ -7,8 +7,7 @@ import com.algolia.search.configuration.*
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
 import io.ktor.client.engine.mock.MockEngine
-import io.ktor.client.engine.mock.MockHttpResponse
-import io.ktor.http.HttpStatusCode
+import io.ktor.client.engine.mock.respondOk
 import shouldEqual
 import kotlin.test.Test
 
@@ -19,7 +18,7 @@ internal class TestClient {
     private val appID = "appID".toApplicationID()
     private val hosts = listOf(RetryableHost("host"))
 
-    private val engine = MockEngine { MockHttpResponse(call, HttpStatusCode.OK) }
+    private val engine = MockEngine { respondOk() }
     private val configurationSearch = ConfigurationSearch(appID, apiKey, engine = engine, hosts = hosts)
     private val configurationInsights = ConfigurationInsights(appID, apiKey, engine = engine, hosts = hosts)
     private val configurationAnalytics = ConfigurationAnalytics(appID, apiKey, engine = engine, hosts = hosts)

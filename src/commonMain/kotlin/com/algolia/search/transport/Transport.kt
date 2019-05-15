@@ -3,7 +3,7 @@ package com.algolia.search.transport
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.RetryableHost
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.http.HttpMethod
@@ -75,7 +75,7 @@ internal class Transport(
                 mutex.withLock { host.hasTimedOut() }
             } catch (exception: IOException) {
                 mutex.withLock { host.hasFailed() }
-            } catch (exception: BadResponseStatusException) {
+            } catch (exception: ResponseException) {
                 val isRetryable = floor(exception.response.status.value / 100f) != 4f
 
                 if (isRetryable) mutex.withLock { host.hasFailed() } else throw exception

@@ -15,7 +15,7 @@ import com.algolia.search.serialize.Json
 import com.algolia.search.serialize.JsonNonStrict
 import documentation.client
 import documentation.index
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.*
 import kotlinx.io.IOException
@@ -170,7 +170,7 @@ internal class DocPhilosophy {
         runBlocking {
             try {
                 val response = index.search()
-            } catch (exception: BadResponseStatusException) {
+            } catch (exception: ResponseException) {
                 when (exception.response.status) {
                     HttpStatusCode.NotFound -> TODO()
                     HttpStatusCode.BadRequest -> TODO()
@@ -184,7 +184,7 @@ internal class DocPhilosophy {
         runBlocking {
             try {
                 val response = index.search()
-            } catch (exception: BadResponseStatusException) {
+            } catch (exception: ResponseException) {
                 TODO()
             } catch (exception: IOException) {
                 TODO()

@@ -2,7 +2,7 @@ package com.algolia.search.client
 
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.task.Task
-import io.ktor.client.features.BadResponseStatusException
+import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 
 
@@ -23,7 +23,7 @@ public object ClientAccount {
         var hasThrown404 = false
         try {
             destination.getSettings()
-        } catch (exception: BadResponseStatusException) {
+        } catch (exception: ResponseException) {
             hasThrown404 = exception.response.status.value == HttpStatusCode.NotFound.value
             if (!hasThrown404) throw exception
         }
