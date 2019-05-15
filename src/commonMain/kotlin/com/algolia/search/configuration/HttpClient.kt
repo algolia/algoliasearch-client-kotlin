@@ -1,6 +1,6 @@
 package com.algolia.search.configuration
 
-import com.algolia.search.build.Library
+import BuildConfig
 import com.algolia.search.model.response.ResponseABTest
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.creation.CreationAPIKey
@@ -42,7 +42,7 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
         logger = Logger.SIMPLE
     }
     install(UserAgent) {
-        this.agent = "Algolia for Kotlin (${Library.version})"
+        this.agent = "Algolia for Kotlin (${BuildConfig.version})"
     }
     configuration.defaultHeaders?.let {
         install(DefaultRequest) {

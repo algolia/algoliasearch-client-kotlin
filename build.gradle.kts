@@ -7,6 +7,7 @@ plugins {
     id("kotlinx-serialization") version "1.3.31"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
+    id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.5"
 }
 
 version = Library.version
@@ -17,6 +18,12 @@ repositories {
     mavenCentral()
     maven { url = URI("https://dl.bintray.com/kotlin/ktor") }
     maven { url = URI("https://kotlin.bintray.com/kotlinx") }
+}
+
+buildConfigKotlin {
+    sourceSet("metadata") {
+        buildConfig(name = "version", value = Library.version)
+    }
 }
 
 kotlin {
@@ -142,24 +149,7 @@ bintray {
     }
 }
 
-val generate by tasks.registering {
-    val directory = File("build/generated").apply {
-        if (!exists()) mkdir()
-    }
-    val file = File("${directory.path}/Library.kt").apply {
-        if (!exists()) createNewFile()
-    }
-
-    file.bufferedWriter().use {
-        it.write("package com.algolia.search.build\n\n")
-        it.write("object Library {\n\n")
-        it.write("\tval version: String = \"${Library.version}\"\n")
-        it.write("}")
-    }
-}
-
 tasks {
-    this["assemble"].dependsOn(generate)
     val bintrayUpload by getting(BintrayUploadTask::class) {
         dependsOn(publishToMavenLocal)
         doFirst {
