@@ -39,12 +39,12 @@ Example for the [filters](https://www.algolia.com/doc/api-reference/api-paramete
 val query = query {
    filters {
        and {
-           facet("color", "red")
-           facet("category", "shirt")
+           +facet("color", "red")
+           +facet("category", "shirt")
        }
        orNumeric {
-           range("price", 0 until 10)
-           comparison("price", Equals, 15)
+           +range("price", 0 until 10)
+           +comparison("price", Equals, 15)
        }
    }
 }
