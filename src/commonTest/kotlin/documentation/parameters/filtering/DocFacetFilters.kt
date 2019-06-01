@@ -14,17 +14,17 @@ internal class DocFacetFilters {
 //    facetFilters {
 //        // Declare an OR group for facet filters.
 //        or {
-//            +facet("attribute", "value")
-//            +facet("attribute", 0)
-//            +facet("attribute", true)
+//            facet("attribute", "value")
+//            facet("attribute", 0)
+//            facet("attribute", true)
 //
-//            +!facet("attribute", "value") // Negate a facet filter
+//            facet("attribute", "value", , isNegated = true) // Negate a facet filter
 //        }
 //        // Declare an AND group for facet filters.
 //        and {
-//            +facet("attribute", "value")
-//            +facet("attribute", true)
-//            +facet("attribute", 0)
+//            facet("attribute", "value")
+//            facet("attribute", true)
+//            facet("attribute", 0)
 //        }
 //    }
 
@@ -33,7 +33,7 @@ internal class DocFacetFilters {
         runBlocking {
             val query = query("query") {
                 facetFilters {
-                    and { +facet("category", "Book") }
+                    and { facet("category", "Book") }
                 }
             }
 
@@ -47,8 +47,8 @@ internal class DocFacetFilters {
             val query = query("query") {
                 facetFilters {
                     and {
-                        +facet("category", "Book")
-                        +facet("author", "John Doe")
+                        facet("category", "Book")
+                        facet("author", "John Doe")
                     }
                 }
             }
@@ -63,8 +63,8 @@ internal class DocFacetFilters {
             val query = query("query") {
                 facetFilters {
                     or {
-                        +facet("category", "Book")
-                        +facet("category", "Movie")
+                        facet("category", "Book")
+                        facet("category", "Movie")
                     }
                 }
             }
@@ -79,11 +79,11 @@ internal class DocFacetFilters {
             val query = query("query") {
                 facetFilters {
                     or {
-                        +facet("category", "Book")
-                        +facet("category", "Movie")
+                        facet("category", "Book")
+                        facet("category", "Movie")
                     }
                     and {
-                        +facet("author", "John Doe")
+                        facet("author", "John Doe")
                     }
                 }
             }

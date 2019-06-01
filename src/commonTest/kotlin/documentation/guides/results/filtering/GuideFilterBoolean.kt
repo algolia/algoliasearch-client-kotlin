@@ -17,7 +17,7 @@ internal class GuideFilterBoolean {
             val query = query("query") {
                 filters {
                     and {
-                        +facet("is_available", true)
+                        facet("is_available", true)
                     }
                 }
             }

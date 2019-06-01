@@ -17,7 +17,7 @@ internal class GuideFilterDate {
             val query = query("query") {
                 filters {
                     and {
-                        +comparison("date_timestamp", Greater, 1538352000000)
+                        comparison("date_timestamp", Greater, 1538352000000)
                     }
                 }
             }
@@ -32,7 +32,7 @@ internal class GuideFilterDate {
             val query = query("query") {
                 filters {
                     and {
-                        +range("date_timestamp", 1538352000000..1540944000000)
+                        range("date_timestamp", 1538352000000..1540944000000)
                     }
                 }
             }

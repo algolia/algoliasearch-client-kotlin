@@ -36,7 +36,7 @@ internal class GuideDynamicFiltering {
                     Consequence(
                         edits = edits { +"gluten-free" },
                         query = query {
-                            filters { and { +!facet("allergens", "gluten") } }
+                            filters { and { facet("allergens", "gluten", isNegated = true) } }
                         }
                     )
                 )
@@ -58,8 +58,8 @@ internal class GuideDynamicFiltering {
                         query = query {
                             filters {
                                 orTag {
-                                    +tag("low-carb")
-                                    +tag("low-fat")
+                                    tag("low-carb")
+                                    tag("low-fat")
                                 }
                             }
                         }
@@ -96,7 +96,7 @@ internal class GuideDynamicFiltering {
                         query = query {
                             optionalFilters {
                                 and {
-                                    +facet("can_deliver_quickly", "true")
+                                    facet("can_deliver_quickly", "true")
                                 }
                             }
                         }

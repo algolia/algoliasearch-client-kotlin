@@ -33,7 +33,7 @@ internal class GuideFilterString {
             index.search(query("smartphone") {
                 filters {
                     and {
-                        +facet("brand", "Motorola")
+                        facet("brand", "Motorola")
                     }
                 }
             })
@@ -42,8 +42,8 @@ internal class GuideFilterString {
             index.search(query("smartphone") {
                 filters {
                     orFacet {
-                        +facet("brand", "Motorola")
-                        +facet("brand", "Samsung")
+                        facet("brand", "Motorola")
+                        facet("brand", "Samsung")
                     }
                 }
             })
@@ -52,7 +52,7 @@ internal class GuideFilterString {
             index.search(query("smartphone") {
                 filters {
                     and {
-                        +!facet("brand", "Apple")
+                        facet("brand", "Apple", isNegated = true)
                     }
                 }
             })

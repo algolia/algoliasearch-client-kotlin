@@ -14,17 +14,17 @@ internal class DocOptionalFilters {
 //    optionalFilters {
 //        // Declare an OR group for optional facet filters.
 //        or {
-//            +facet("attribute", "value")
-//            +facet("attribute", 0)
-//            +facet("attribute", true)
+//            facet("attribute", "value")
+//            facet("attribute", 0)
+//            facet("attribute", true)
 //
-//            +!facet("attribute", "value") // Negate a facet filter
+//            facet("attribute", "value", isNegated = true) // Negate a facet filter
 //        }
 //        // Declare an AND group for optional facet filters.
 //        and {
-//            +facet("attribute", "value")
-//            +facet("attribute", true)
-//            +facet("attribute", 0)
+//            facet("attribute", "value")
+//            facet("attribute", true)
+//            facet("attribute", 0)
 //        }
 //    }
 
@@ -34,8 +34,8 @@ internal class DocOptionalFilters {
             val query = query("query") {
                 optionalFilters {
                     and {
-                        +facet("category", "Book")
-                        +facet("author", "John Doe")
+                        facet("category", "Book")
+                        facet("author", "John Doe")
                     }
                 }
             }

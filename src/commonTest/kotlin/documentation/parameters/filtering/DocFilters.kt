@@ -16,39 +16,39 @@ internal class DocFilters {
 //        // Declare an [OR](#boolean-operators) group for facet filters.
 //        orFacet {
 //            // "[attribute:value](#facet-filters)"
-//            +facet("attribute", "value")
-//            +facet("attribute", 0)
-//            +facet("attribute", true)
+//            facet("attribute", "value")
+//            facet("attribute", 0)
+//            facet("attribute", true)
 //
-//            +!facet("attribute", "value") // Negate a filter
+//            facet("attribute", "value", isNegated = true) // Negate a filter
 //        }
 //        // Declare an [OR](#boolean-operators) group for tag filters.
 //        orTag {
 //            // "[_tags](#tag-filters):value"
-//            +tag("value")
+//            tag("value")
 //        }
 //        // Declare an [OR](#boolean-operators) group for numeric filters.
 //        orNumeric {
 //            // "attribute:lowerBound [TO](#numeric-range) upperBound"
-//            +range("attribute", 0..10)
-//            +range("attribute", 0f, 10f)
+//            range("attribute", 0..10)
+//            range("attribute", 0f, 10f)
 //            // "numeric_attribute [= | != | > | >= | < | <=](#numeric-comparisons) numeric_value"
-//            +comparison("attribute", Less, 0f)
-//            +comparison("attribute", LessOrEquals, 0f)
-//            +comparison("attribute", Equals, 0f)
-//            +comparison("attribute", NotEquals, 0f)
-//            +comparison("attribute", Greater, 0f)
-//            +comparison("attribute", GreaterOrEquals, 0f)
+//            comparison("attribute", Less, 0f)
+//            comparison("attribute", LessOrEquals, 0f)
+//            comparison("attribute", Equals, 0f)
+//            comparison("attribute", NotEquals, 0f)
+//            comparison("attribute", Greater, 0f)
+//            comparison("attribute", GreaterOrEquals, 0f)
 //        }
 //        // Declare an [AND](#boolean-operators) group for any type of filters.
 //        and {
 //            // "[attribute:value](#facet-filters)"
-//            +facet("attribute", "value")
-//            +facet("attribute", true)
-//            +facet("attribute", 0)
-//            +tag("value")
-//            +range("attribute", 0..10)
-//            +comparison("attribute", NumericOperator.Less, 0f)
+//            facet("attribute", "value")
+//            facet("attribute", true)
+//            facet("attribute", 0)
+//            tag("value")
+//            range("attribute", 0..10)
+//            comparison("attribute", NumericOperator.Less, 0f)
 //        }
 //    }
 
@@ -59,11 +59,11 @@ internal class DocFilters {
             val query = query("query") {
                 filters {
                     orFacet {
-                        +facet("category", "Book")
-                        +facet("category", "Ebook")
+                        facet("category", "Book")
+                        facet("category", "Ebook")
                     }
                     and {
-                        +tag("published")
+                        tag("published")
                     }
                 }
             }
@@ -84,15 +84,15 @@ internal class DocFilters {
             val query = query("query") {
                 filters {
                     and {
-                        +comparison("available", Equals, 1)
-                        +tag("published")
-                        +range("publication_date", 1441745506..1441755506)
-                        +comparison("inStock", NumericOperator.Greater, 0)
-                        +facet("author", "John Doe")
+                        comparison("available", Equals, 1)
+                        tag("published")
+                        range("publication_date", 1441745506..1441755506)
+                        comparison("inStock", NumericOperator.Greater, 0)
+                        facet("author", "John Doe")
                     }
                     orFacet {
-                        +facet("category", "Book")
-                        +!facet("category", "EBook")
+                        facet("category", "Book")
+                        facet("category", "EBook", isNegated = true)
                     }
                 }
             }
@@ -109,7 +109,7 @@ internal class DocFilters {
                 filters {
                     and {
                         // You don't have to escape strings, it is done for you.
-                        +facet("category", "Books and Comics")
+                        facet("category", "Books and Comics")
                     }
                 }
             }
@@ -126,7 +126,7 @@ internal class DocFilters {
                 filters {
                     and {
                         // You don't have to escape keywords, it is done for you.
-                        +facet("keyword", "OR")
+                        facet("keyword", "OR")
                     }
                 }
             }
@@ -143,7 +143,7 @@ internal class DocFilters {
                 filters {
                     and {
                         // You don't have to escape single quotes, it is done for you.
-                        +facet("content", "It's a wonderful day")
+                        facet("content", "It's a wonderful day")
                     }
                 }
             }
@@ -159,7 +159,7 @@ internal class DocFilters {
             val query = query("query") {
                 filters {
                     and {
-                        +facet("content", "She said \"Hello World\"")
+                        facet("content", "She said \"Hello World\"")
                     }
                 }
             }

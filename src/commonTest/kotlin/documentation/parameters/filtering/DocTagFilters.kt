@@ -14,13 +14,13 @@ internal class DocTagFilters {
 //    tagFilters {
 //        // Declare an OR group for tag filters.
 //        or {
-//            +tag("value")
+//            tag("value")
 //
-//            +!tag("value") // Negate a tag filter
+//            tag("value", isNegated = true) // Negate a tag filter
 //        }
 //        // Declare an AND group for tag filters.
 //        and {
-//            +tag("value")
+//            tag("value")
 //        }
 //    }
 
@@ -30,11 +30,11 @@ internal class DocTagFilters {
             val query = query("query") {
                 tagFilters {
                     or {
-                        +tag("book")
-                        +tag("movie")
+                        tag("book")
+                        tag("movie")
                     }
                     and {
-                        +tag("SciFi")
+                        tag("SciFi")
                     }
                 }
             }

@@ -33,8 +33,8 @@ internal class GuideFilterArray {
             val query = query("harry") {
                 filters {
                     and {
-                        +facet("categories", "politics")
-                        +facet("store", "Gibert Joseph Saint-Michel")
+                        facet("categories", "politics")
+                        facet("store", "Gibert Joseph Saint-Michel")
                     }
                 }
             }

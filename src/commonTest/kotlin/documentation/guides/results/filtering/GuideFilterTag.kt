@@ -17,7 +17,7 @@ internal class GuideFilterTag {
             val query = query("harry") {
                 filters {
                     and {
-                        +tag("politics")
+                        tag("politics")
                     }
                 }
             }
