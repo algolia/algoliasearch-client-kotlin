@@ -9,10 +9,12 @@ import com.algolia.search.model.filter.Filter
  */
 public interface DSLTag {
 
+    public operator fun Filter.Tag.unaryPlus()
+
     /**
      * Create a [Filter.Tag] with an [value].
      */
-    fun tag(value: String): Filter.Tag {
-        return Filter.Tag(value)
+    fun tag(value: String, isNegated: Boolean = false) {
+        +Filter.Tag(value, isNegated)
     }
 }

@@ -17,7 +17,7 @@ internal class TestFilterGroupsConverter {
     fun notInRangeSQL() {
         val query = query {
             filters {
-                and { +!range(attributeA, 0..10) }
+                and { range(attributeA, 0..10, isNegated = true) }
             }
         }
         query.filters shouldEqual "(NOT \"attributeA\":0 TO 10)"
@@ -27,7 +27,7 @@ internal class TestFilterGroupsConverter {
     fun notIntRangeLegacy() {
         val query = query {
             numericFilters {
-                and { +!range(attributeA, 0..10) }
+                and { range(attributeA, 0..10, isNegated = true) }
             }
         }
         query.numericFilters shouldEqual listOf(listOf("\"attributeA\" < 0"), listOf("\"attributeA\" > 10"))
@@ -38,12 +38,12 @@ internal class TestFilterGroupsConverter {
         val query = query {
             facetFilters {
                 and {
-                    +facet(attributeA, unknown)
-                    +facet(attributeB, unknown)
+                    facet(attributeA, unknown)
+                    facet(attributeB, unknown)
                 }
                 or {
-                    +facet(attributeA, unknown)
-                    +facet(attributeB, unknown)
+                    facet(attributeA, unknown)
+                    facet(attributeB, unknown)
                 }
             }
         }

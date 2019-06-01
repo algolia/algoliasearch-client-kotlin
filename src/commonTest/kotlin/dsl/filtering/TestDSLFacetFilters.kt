@@ -15,8 +15,8 @@ internal class TestDSLFacetFilters {
     fun and() {
         val dsl = DSLFacetFilters {
             and {
-                +facet(attributeA, 0)
-                +facet(attributeA, 1)
+                facet(attributeA, 0)
+                facet(attributeA, 1)
             }
         }
 
@@ -29,11 +29,11 @@ internal class TestDSLFacetFilters {
     fun or() {
         val dsl = DSLFacetFilters {
             or {
-                +facet(attributeA, 0)
-                +facet(attributeB, 1)
+                facet(attributeA, 0)
+                facet(attributeB, 1)
             }
             or {
-                +facet(attributeA, 0)
+                facet(attributeA, 0)
             }
         }
 

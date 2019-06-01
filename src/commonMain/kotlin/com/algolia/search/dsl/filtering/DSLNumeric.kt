@@ -19,73 +19,75 @@ public interface DSLNumeric {
     val Greater get() = NumericOperator.Greater
     val GreaterOrEquals get() = NumericOperator.GreaterOrEquals
 
+    public operator fun Filter.Numeric.unaryPlus()
+
     /**
      * Convenience method.
      */
-    fun range(name: String, range: IntRange): Filter.Numeric {
-        return range(Attribute(name), range)
+    fun range(name: String, range: IntRange, isNegated: Boolean = false) {
+        range(Attribute(name), range, isNegated)
     }
 
     /**
      * Create a [Filter.Numeric] with an [attribute] and a [range] of [IntRange].
      */
-    fun range(attribute: Attribute, range: IntRange): Filter.Numeric {
-        return Filter.Numeric(attribute, range)
+    fun range(attribute: Attribute, range: IntRange, isNegated: Boolean = false) {
+        +Filter.Numeric(attribute, range, isNegated)
     }
 
     /**
      * Convenience method.
      */
-    fun range(name: String, range: LongRange): Filter.Numeric {
-        return range(Attribute(name), range)
+    fun range(name: String, range: LongRange, isNegated: Boolean = false) {
+        range(Attribute(name), range, isNegated)
     }
 
     /**
      * Create a [Filter.Numeric] with an [attribute] and a [range] of [LongRange].
      */
-    fun range(attribute: Attribute, range: LongRange): Filter.Numeric {
-        return Filter.Numeric(attribute, range)
+    fun range(attribute: Attribute, range: LongRange, isNegated: Boolean = false) {
+        +Filter.Numeric(attribute, range, isNegated)
     }
 
     /**
      * Convenience method.
      */
-    fun range(name: String, lowerBound: Float, upperBound: Float): Filter.Numeric {
-        return range(Attribute(name), lowerBound, upperBound)
+    fun range(name: String, lowerBound: Float, upperBound: Float, isNegated: Boolean = false) {
+        range(Attribute(name), lowerBound, upperBound, isNegated)
     }
 
     /**
      * Create a [Filter.Numeric] with an [attribute] and a [lowerBound] and [upperBound] of [Float].
      */
-    fun range(attribute: Attribute, lowerBound: Float, upperBound: Float): Filter.Numeric {
-        return Filter.Numeric(attribute, lowerBound, upperBound)
+    fun range(attribute: Attribute, lowerBound: Float, upperBound: Float, isNegated: Boolean = false) {
+        +Filter.Numeric(attribute, lowerBound, upperBound, isNegated)
     }
 
     /**
      * Convenience method.
      */
-    fun range(name: String, lowerBound: Double, upperBound: Double): Filter.Numeric {
-        return range(Attribute(name), lowerBound, upperBound)
+    fun range(name: String, lowerBound: Double, upperBound: Double, isNegated: Boolean = false) {
+        range(Attribute(name), lowerBound, upperBound, isNegated)
     }
 
     /**
      * Create a [Filter.Numeric] with an [attribute] and a [lowerBound] and [upperBound] of [Double].
      */
-    fun range(attribute: Attribute, lowerBound: Double, upperBound: Double): Filter.Numeric {
-        return Filter.Numeric(attribute, lowerBound, upperBound)
+    fun range(attribute: Attribute, lowerBound: Double, upperBound: Double, isNegated: Boolean = false) {
+        +Filter.Numeric(attribute, lowerBound, upperBound, isNegated)
     }
 
     /**
      * Convenience method.
      */
-    fun comparison(name: String, operator: NumericOperator, value: Number): Filter.Numeric {
-        return comparison(Attribute(name), operator, value)
+    fun comparison(name: String, operator: NumericOperator, value: Number, isNegated: Boolean = false) {
+        comparison(Attribute(name), operator, value, isNegated)
     }
 
     /**
      * Create a [Filter.Numeric] with an [attribute], an [operator] and a [value].
      */
-    fun comparison(attribute: Attribute, operator: NumericOperator, value: Number): Filter.Numeric {
-        return Filter.Numeric(attribute, operator, value)
+    fun comparison(attribute: Attribute, operator: NumericOperator, value: Number, isNegated: Boolean = false) {
+        +Filter.Numeric(attribute, operator, value, isNegated)
     }
 }

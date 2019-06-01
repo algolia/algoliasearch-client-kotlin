@@ -15,8 +15,8 @@ internal class TestDSLNumericFilters {
     fun and() {
         val dsl = DSLNumericFilters {
             and {
-                +range(attributeA, 0..2)
-                +range(attributeA, 1..2)
+                range(attributeA, 0..2)
+                range(attributeA, 1..2)
             }
         }
 
@@ -29,11 +29,11 @@ internal class TestDSLNumericFilters {
     fun or() {
         val dsl = DSLNumericFilters {
             or {
-                +range(attributeA, 0..2)
-                +range(attributeB, 1..2)
+                range(attributeA, 0..2)
+                range(attributeB, 1..2)
             }
             or {
-                +range(attributeA, 0..2)
+                range(attributeA, 0..2)
             }
         }
 

@@ -12,7 +12,7 @@ internal class TestDSLFilterGroupTag {
     @Test
     fun tag() {
         val dsl = DSLGroupTag {
-            +tag(unknown)
+            tag(unknown)
         }
 
         dsl shouldEqual setOf(Filter.Tag(unknown))

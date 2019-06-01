@@ -16,8 +16,8 @@ internal class TestDSLFilters {
     fun and() {
         val dsl = DSLFilters {
             and {
-                +facet(attributeA, 0)
-                +facet(attributeA, 1)
+                facet(attributeA, 0)
+                facet(attributeA, 1)
             }
         }
 
@@ -28,8 +28,8 @@ internal class TestDSLFilters {
     fun orFacet() {
         val dsl = DSLFilters {
             orFacet {
-                +facet(attributeA, 0)
-                +facet(attributeA, 1)
+                facet(attributeA, 0)
+                facet(attributeA, 1)
             }
         }
 
@@ -40,8 +40,8 @@ internal class TestDSLFilters {
     fun orTag() {
         val dsl = DSLFilters {
             orTag {
-                +tag("a")
-                +tag("b")
+                tag("a")
+                tag("b")
             }
         }
 
@@ -52,8 +52,8 @@ internal class TestDSLFilters {
     fun orNumeric() {
         val dsl = DSLFilters {
             orNumeric {
-                +range(attributeA, 0..1)
-                +comparison(attributeA, NotEquals, 0)
+                range(attributeA, 0..1)
+                comparison(attributeA, NotEquals, 0)
             }
         }
 
@@ -73,7 +73,7 @@ internal class TestDSLFilters {
     @Test
     fun singleFilter() {
         val dsl = DSLFilters {
-            and { +facet(attributeA, 0) }
+            and { facet(attributeA, 0) }
         }
 
         FilterGroupsConverter.SQL.Unquoted(dsl) shouldEqual "(attributeA:0)"
@@ -82,10 +82,10 @@ internal class TestDSLFilters {
     @Test
     fun oneOfEveryType() {
         val dsl = DSLFilters {
-            and { +facet(attributeA, 0) }
-            orFacet { +facet(attributeA, 0) }
-            orTag { +tag(unknown) }
-            orNumeric { +range(attributeA, 0..1) }
+            and { facet(attributeA, 0) }
+            orFacet { facet(attributeA, 0) }
+            orTag { tag(unknown) }
+            orNumeric { range(attributeA, 0..1) }
         }
 
         FilterGroupsConverter.SQL.Unquoted(dsl) shouldEqual "(attributeA:0) AND (attributeA:0) AND (_tags:unknown) AND (attributeA:0 TO 1)"
@@ -95,20 +95,20 @@ internal class TestDSLFilters {
     fun twoOfEveryType() {
         val dsl = DSLFilters {
             and {
-                +facet(attributeA, 0)
-                +facet(attributeB, 0)
+                facet(attributeA, 0)
+                facet(attributeB, 0)
             }
             orFacet {
-                +facet(attributeA, 0)
-                +facet(attributeB, 0)
+                facet(attributeA, 0)
+                facet(attributeB, 0)
             }
             orTag {
-                +tag(attributeA.raw)
-                +tag(attributeB.raw)
+                tag(attributeA.raw)
+                tag(attributeB.raw)
             }
             orNumeric {
-                +range(attributeA, 0..1)
-                +comparison(attributeB, Greater, 0)
+                range(attributeA, 0..1)
+                comparison(attributeB, Greater, 0)
             }
         }
 
@@ -123,8 +123,8 @@ internal class TestDSLFilters {
     fun singleAndGroups_differentTypes() {
         val dsl = DSLFilters {
             and {
-                +facet(attributeA, 0)
-                +tag(unknown)
+                facet(attributeA, 0)
+                tag(unknown)
             }
         }
 
@@ -135,12 +135,12 @@ internal class TestDSLFilters {
     fun twoAndGroups_OfTheSameType_balanced() {
         val dsl = DSLFilters {
             orTag {
-                +tag(attributeA.raw)
-                +tag(attributeB.raw)
+                tag(attributeA.raw)
+                tag(attributeB.raw)
             }
             orTag {
-                +tag(attributeA.raw)
-                +tag(attributeB.raw)
+                tag(attributeA.raw)
+                tag(attributeB.raw)
             }
         }
 
@@ -151,12 +151,12 @@ internal class TestDSLFilters {
     fun twoAndGroups_OfDifferentTypes_balanced() {
         val dsl = DSLFilters {
             orTag {
-                +tag(attributeA.raw)
-                +tag(attributeB.raw)
+                tag(attributeA.raw)
+                tag(attributeB.raw)
             }
             orNumeric {
-                +range(attributeA.raw, 0..1)
-                +range(attributeB.raw, 0..1)
+                range(attributeA.raw, 0..1)
+                range(attributeB.raw, 0..1)
             }
         }
 
@@ -167,11 +167,11 @@ internal class TestDSLFilters {
     fun twoAndGroups_OfTheSameType_unbalanced() {
         val dsl = DSLFilters {
             orTag {
-                +tag(attributeA.raw)
+                tag(attributeA.raw)
             }
             orTag {
-                +tag(attributeA.raw)
-                +tag(attributeB.raw)
+                tag(attributeA.raw)
+                tag(attributeB.raw)
             }
         }
 
@@ -182,11 +182,11 @@ internal class TestDSLFilters {
     fun twoAndGroups_OfDifferentTypes_unbalanced() {
         val dsl = DSLFilters {
             orTag {
-                +tag(attributeA.raw)
-                +tag(attributeB.raw)
+                tag(attributeA.raw)
+                tag(attributeB.raw)
             }
             orNumeric {
-                +range(attributeA.raw, 0..1)
+                range(attributeA.raw, 0..1)
             }
         }
 

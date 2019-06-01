@@ -11,45 +11,47 @@ import com.algolia.search.model.filter.Filter
  */
 public interface DSLFacet {
 
+    public operator fun Filter.Facet.unaryPlus()
+
     /**
      * Convenience method.
      */
-    fun facet(name: String, value: Number, score: Int? = null): Filter.Facet {
-        return facet(Attribute(name), value, score)
+    fun facet(name: String, value: Number, score: Int? = null, isNegated: Boolean = false) {
+        facet(Attribute(name), value, score, isNegated)
     }
 
     /**
      * Build a [Filter.Facet] using [attribute], a numeric [value] and an optional [score].
      */
-    fun facet(attribute: Attribute, value: Number, score: Int? = null): Filter.Facet {
-        return Filter.Facet(attribute, value, score)
+    fun facet(attribute: Attribute, value: Number, score: Int? = null, isNegated: Boolean = false) {
+        +Filter.Facet(attribute, value, score, isNegated)
     }
 
     /**
      * Convenience method.
      */
-    fun facet(name: String, value: String, score: Int? = null): Filter.Facet {
-        return facet(Attribute(name), value, score)
+    fun facet(name: String, value: String, score: Int? = null, isNegated: Boolean = false) {
+        facet(Attribute(name), value, score, isNegated)
     }
 
     /**
      * Build a [Filter.Facet] using [attribute], a [String] [value] and an optional [score].
      */
-    fun facet(attribute: Attribute, value: String, score: Int? = null): Filter.Facet {
-        return Filter.Facet(attribute, value, score)
+    fun facet(attribute: Attribute, value: String, score: Int? = null, isNegated: Boolean = false) {
+        +Filter.Facet(attribute, value, score, isNegated)
     }
 
     /**
      * Convenience method.
      */
-    fun facet(name: String, value: Boolean, score: Int? = null): Filter.Facet {
-        return facet(Attribute(name), value, score)
+    fun facet(name: String, value: Boolean, score: Int? = null, isNegated: Boolean = false) {
+        facet(Attribute(name), value, score, isNegated)
     }
 
     /**
      * Build a [Filter.Facet] using [attribute], a [Boolean] [value] and an optional [score].
      */
-    fun facet(attribute: Attribute, value: Boolean, score: Int? = null): Filter.Facet {
-        return Filter.Facet(attribute, value, score)
+    fun facet(attribute: Attribute, value: Boolean, score: Int? = null, isNegated: Boolean = false) {
+        +Filter.Facet(attribute, value, score, isNegated)
     }
 }

@@ -13,10 +13,10 @@ internal class TestDSLFilterGroupNumeric {
     @Test
     fun rangeString() {
         val dsl = DSLGroupNumeric {
-            +range(attributeA.raw, 0 until 2)
-            +range(attributeA.raw, 0L until 2L)
-            +range(attributeA.raw, 0f, 1f)
-            +range(attributeA.raw, 0.0, 1.0)
+            range(attributeA.raw, 0 until 2)
+            range(attributeA.raw, 0L until 2L)
+            range(attributeA.raw, 0f, 1f)
+            range(attributeA.raw, 0.0, 1.0)
         }
 
         dsl shouldEqual setOf(
@@ -30,10 +30,10 @@ internal class TestDSLFilterGroupNumeric {
     @Test
     fun rangeAttribute() {
         val dsl = DSLGroupNumeric {
-            +range(attributeA, 0 until 2)
-            +range(attributeA, 0L until 2L)
-            +range(attributeA, 0f, 1f)
-            +range(attributeA, 0.0, 1.0)
+            range(attributeA, 0 until 2)
+            range(attributeA, 0L until 2L)
+            range(attributeA, 0f, 1f)
+            range(attributeA, 0.0, 1.0)
         }
 
         dsl shouldEqual setOf(
@@ -47,8 +47,8 @@ internal class TestDSLFilterGroupNumeric {
     @Test
     fun comparison() {
         val dsl = DSLGroupNumeric {
-            +comparison(attributeA.raw, Less, 0)
-            +comparison(attributeA, Greater, 0)
+            comparison(attributeA.raw, Less, 0)
+            comparison(attributeA, Greater, 0)
         }
 
         dsl shouldEqual setOf(

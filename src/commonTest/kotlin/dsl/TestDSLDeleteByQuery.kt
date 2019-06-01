@@ -16,7 +16,7 @@ internal class TestDSLDeleteByQuery {
     fun filters() {
         val deleteByQuery = deleteByQuery {
             filters {
-                and { +facet(attributeA, 0) }
+                and { facet(attributeA, 0) }
             }
         }
 
@@ -27,7 +27,7 @@ internal class TestDSLDeleteByQuery {
     fun facetFilters() {
         val deleteByQuery = deleteByQuery {
             facetFilters {
-                and { +facet(attributeA, 0) }
+                and { facet(attributeA, 0) }
             }
         }
 
@@ -38,7 +38,7 @@ internal class TestDSLDeleteByQuery {
     fun numericFilters() {
         val deleteByQuery = deleteByQuery {
             numericFilters {
-                and { +range(attributeA, 0..1) }
+                and { range(attributeA, 0..1) }
             }
         }
 
@@ -49,7 +49,7 @@ internal class TestDSLDeleteByQuery {
     fun tagFilters() {
         val deleteByQuery = deleteByQuery {
             tagFilters {
-                and { +tag(unknown) }
+                and { tag(unknown) }
             }
         }
 

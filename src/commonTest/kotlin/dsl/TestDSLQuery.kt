@@ -34,7 +34,7 @@ internal class TestDSLQuery {
     fun filters() {
         val query = query {
             filters {
-                and { +facet(attributeA, 0) }
+                and { facet(attributeA, 0) }
             }
         }
 
@@ -45,7 +45,7 @@ internal class TestDSLQuery {
     fun facetFilters() {
         val query = query {
             facetFilters {
-                and { +facet(attributeA, 0) }
+                and { facet(attributeA, 0) }
             }
         }
 
@@ -56,7 +56,7 @@ internal class TestDSLQuery {
     fun numericFilters() {
         val query = query {
             numericFilters {
-                and { +range(attributeA, 0..1) }
+                and { range(attributeA, 0..1) }
             }
         }
 
@@ -67,7 +67,7 @@ internal class TestDSLQuery {
     fun tagFilters() {
         val query = query {
             tagFilters {
-                and { +tag(unknown) }
+                and { tag(unknown) }
             }
         }
 
@@ -78,7 +78,7 @@ internal class TestDSLQuery {
     fun optionalFilters() {
         val query = query {
             optionalFilters {
-                and { +facet(attributeA, 0) }
+                and { facet(attributeA, 0) }
             }
         }
 

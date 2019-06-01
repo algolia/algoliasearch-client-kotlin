@@ -74,6 +74,18 @@ public class DSLGroupFilter(
     override val filters: MutableSet<Filter> = mutableSetOf()
 ) : DSLGroup<Filter>(), DSLFacet, DSLTag, DSLNumeric {
 
+    override fun Filter.Facet.unaryPlus() {
+        filters += this
+    }
+
+    override fun Filter.Tag.unaryPlus() {
+        filters += this
+    }
+
+    override fun Filter.Numeric.unaryPlus() {
+        filters += this
+    }
+
     public companion object : DSL<DSLGroupFilter, Set<Filter>> {
 
         override fun invoke(block: DSLGroupFilter.() -> Unit): Set<Filter> {
