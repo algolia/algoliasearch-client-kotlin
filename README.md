@@ -142,4 +142,4 @@ query.sortFacetsBy = SortFacetsBy.Count
 
 ## 📄 License
 
-Algolia {PROJECT} API Client is an open-sourced software licensed under the [MIT license](LICENSE.md).
+Algolia Kotlin API Client is an open-sourced software licensed under the [MIT license](LICENSE.md).
