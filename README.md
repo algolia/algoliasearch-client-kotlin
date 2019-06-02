@@ -51,7 +51,7 @@ Install the Kotlin client by adding the following dependency to your `gradle.bui
   }
   ```
 
-For full documentation, visit the **[Algolia {Kotlin} API Client](https://www.algolia.com/doc/api-client/getting-started/install/kotlin/)**.
+For full documentation, visit the **[Algolia Kotlin API Client](https://www.algolia.com/doc/api-client/getting-started/install/kotlin/)**.
 
 ### Coroutines
 
