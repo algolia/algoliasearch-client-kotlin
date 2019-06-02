@@ -121,7 +121,7 @@ public class DSLRules(
         validity: List<TimeRange>? = null,
         description: String? = null
     ) {
-        Rule(ObjectID(objectID), condition, consequence, enabled, validity, description)
+        +Rule(ObjectID(objectID), condition, consequence, enabled, validity, description)
     }
 
     /**
@@ -135,7 +135,7 @@ public class DSLRules(
         validity: List<TimeRange>? = null,
         description: String? = null
     ) {
-        Rule(objectID, condition, consequence, enabled, validity, description)
+        +Rule(objectID, condition, consequence, enabled, validity, description)
     }
 
     public companion object : DSL<DSLRules, List<Rule>> {
