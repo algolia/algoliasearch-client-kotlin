@@ -17,7 +17,7 @@ internal class GuideAddBanners {
     fun snippet1() {
         runBlocking {
             val rules = rules {
-                +rule(
+                rule(
                     "a-rule-id",
                     Condition(Contains, Literal("harry potter")),
                     Consequence(userData = json { "promo_content" to "20% OFF on all Harry Potter books!" }),

@@ -40,12 +40,12 @@ internal class GuideAttributesForFaceting {
             val country = Attribute("country")
             val city = Attribute("city")
             val rules = rules {
-                +rule(
+                rule(
                     "country",
                     Condition(Contains, Facet(country)),
                     Consequence(query = Query(aroundLatLngViaIP = false))
                 )
-                +rule(
+                rule(
                     "city",
                     Condition(Contains, Facet(city)),
                     Consequence(query = Query(aroundLatLngViaIP = false))

@@ -18,7 +18,7 @@ internal class GuideDetectingKeywords {
     fun snippet1() {
         runBlocking {
             val rules = rules {
-                +rule(
+                rule(
                     "rule",
                     Condition(StartsWith, Literal("article")),
                     Consequence(

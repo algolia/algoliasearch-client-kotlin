@@ -17,7 +17,7 @@ internal class GuidePromoteHits {
     fun snippet1() {
         runBlocking {
             val rules = rules {
-                +rule(
+                rule(
                     "Promote Harry Potter Box Set",
                     Condition(Contains, Literal("Harry Potter")),
                     Consequence(promote = promotions { +ObjectID("HP-12345")(0) })

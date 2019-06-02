@@ -30,7 +30,7 @@ internal class GuideDynamicFiltering {
     fun snippet2() {
         runBlocking {
             val rules = rules {
-                +rule(
+                rule(
                     "gluten-free-rule",
                     Condition(Contains, Literal("gluten-free")),
                     Consequence(
@@ -50,7 +50,7 @@ internal class GuideDynamicFiltering {
     fun snippet3() {
         runBlocking {
             val rules = rules {
-                +rule(
+                rule(
                     "diet-rule",
                     Condition(Contains, Literal("diet")),
                     Consequence(
@@ -88,7 +88,7 @@ internal class GuideDynamicFiltering {
     fun snippet5() {
         runBlocking {
             val rules = rules {
-                +rule(
+                rule(
                     "asap-rule",
                     Condition(Contains, Literal("asap")),
                     Consequence(

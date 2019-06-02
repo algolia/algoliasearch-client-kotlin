@@ -19,7 +19,7 @@ internal class TestDSLRules {
     @Test
     fun default() {
         val dsl = DSLRules {
-            +rule(
+            rule(
                 objectID = objectIDA,
                 condition = condition(Contains, Literal("value")),
                 consequence = consequence(

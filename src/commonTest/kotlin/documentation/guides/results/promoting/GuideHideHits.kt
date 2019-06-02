@@ -17,7 +17,7 @@ internal class GuideHideHits {
     fun snippet1() {
         runBlocking {
             val rules = rules {
-                +rule(
+                rule(
                     "hide-12345",
                     Condition(Contains, Literal("harry potter")),
                     Consequence(hide = objectIDs { +"HP-12345" })

@@ -33,7 +33,7 @@ internal class GuideConsequences {
         runBlocking {
             val director = Attribute("director")
             val rules = rules {
-                +rule(
+                rule(
                     "director_rule",
                     Condition(Contains, Facet(director)),
                     Consequence(
