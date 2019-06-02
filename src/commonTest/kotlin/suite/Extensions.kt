@@ -3,6 +3,7 @@ package suite
 import DateFormat
 import clientAnalytics
 import com.algolia.search.client.ClientSearch
+import com.algolia.search.helper.readContent
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.Time
@@ -10,6 +11,7 @@ import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.serialize.JsonDebug
 import dayInMillis
+import io.ktor.client.features.ResponseException
 import kotlinx.serialization.KSerializer
 import loadScratch
 import shouldEqual
@@ -42,10 +44,14 @@ internal suspend fun cleanABTest(clientSearch: ClientSearch, suffix: String, now
                 val difference = Time.getCurrentTimeMillis() - DateFormat.parse(date)
 
                 if (difference >= dayInMillis || now) {
-                    val deletion = clientAnalytics.deleteABTest(abTest.abTestID)
+                    try {
+                        val deletion = clientAnalytics.deleteABTest(abTest.abTestID)
 
-                    clientSearch.initIndex(deletion.indexName).apply {
-                        deletion.wait()
+                        clientSearch.initIndex(deletion.indexName).apply {
+                            deletion.wait()
+                        }
+                    } catch (exception : ResponseException) {
+                        println(exception.readContent())
                     }
                 }
             }
