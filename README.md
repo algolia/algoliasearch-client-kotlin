@@ -53,7 +53,7 @@ Install the Kotlin client by adding the following dependency to your `gradle.bui
 
 For full documentation, visit the **[Algolia {PROJECT} API Client](https://www.algolia.com/doc/api-client/getting-started/install/kotlin/)**.
 
-## Coroutines
+### Coroutines
 
 All methods performing HTTP calls in the Kotlin client are [suspending functions](https://kotlinlang.org/docs/reference/coroutines/composing-suspending-functions.html#composing-suspending-functions). 
 This means these functions can only be called from a coroutine.
@@ -80,7 +80,7 @@ The Kotlin client doesn't execute HTTP calls on any particular thread, it is up 
 Learn more about [coroutines](https://kotlinlang.org/docs/reference/coroutines/coroutines-guide.html).
 
 
-## Waiting for operations
+### Waiting for operations
 
 Waiting for an asynchronous server task is made available via a [function literal with receiver](https://kotlinlang.org/docs/reference/lambdas.html#function-literals-with-receiver).
 
@@ -97,7 +97,7 @@ client.run {
 
 The `wait` functions are suspending, and should only be called from a coroutine.
 
-## Type safety
+### Type safety
 
 Response and parameters objects are typed to provide extensive compile time safety coverage.
 
@@ -132,7 +132,7 @@ query.sortFacetsBy = SortFacetsBy.Count
 // query.sortFacetsBy = SortFacetsBy.Other("unforeseen value")
 ```
 
-## Guides
+### Guides
 
 - [Getting started](https://github.com/algolia/algoliasearch-client-kotlin/tree/master/docs/GettingStarted.md)
 - [DSL](https://github.com/algolia/algoliasearch-client-kotlin/tree/master/docs/DSL.md)
