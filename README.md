@@ -7,7 +7,7 @@
 
   <p align="center">
     <a href="https://bintray.com/algolia/maven/algoliasearch-client-kotlin/_latestVersion"><img src="https://api.bintray.com/packages/algolia/maven/algoliasearch-client-kotlin/images/download.svg" alt="Latest version"></img></a>
-    <a href="https://packagist.org/packages/algolia/scout-extended"><img src="https://poser.pugx.org/algolia/scout-extended/license.svg" alt="License"></a>
+    <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="Licence"></img></a>
   </p>
 </p>
 
