@@ -3,6 +3,7 @@ package com.algolia.search.model.search
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.insights.UserToken
+import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.*
@@ -345,6 +346,11 @@ public data class Query(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/advancedSyntax/?language=kotlin]
      */
     @SerialName(KeyAdvancedSyntax) var advancedSyntax: Boolean? = null,
+
+    /**
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters//?language=kotlin]
+     */
+    @SerialName(KeyAdvancedSyntaxFeatures) var advancedSyntaxFeatures: List<AdvancedSyntaxFeatures>? = null,
 
     /**
      * A list of words that should be considered as optional when found in the query.

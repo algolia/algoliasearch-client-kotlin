@@ -6,6 +6,7 @@ import boolean
 import com.algolia.search.helper.and
 import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.search.*
+import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.serialize.*
 import int
@@ -70,6 +71,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             queryType = QueryType.PrefixLast,
             removeWordsIfNoResults = RemoveWordIfNoResults.LastWords,
             advancedSyntax = boolean,
+            advancedSyntaxFeatures = listOf(AdvancedSyntaxFeatures.ExcludeWords),
             optionalWords = listOf(string),
             disableExactOnAttributes = attributes,
             exactOnSingleWordQuery = ExactOnSingleWordQuery.Word,
@@ -135,6 +137,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeyQueryType to QueryType.PrefixLast.raw
             KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.LastWords.raw
             KeyAdvancedSyntax to boolean
+            KeyAdvancedSyntaxFeatures to jsonArray { +AdvancedSyntaxFeatures.ExcludeWords.raw }
             KeyOptionalWords to jsonArray { +string }
             KeyDisableExactOnAttributes to attributesJson
             KeyExactOnSingleWordQuery to ExactOnSingleWordQuery.Word.raw
