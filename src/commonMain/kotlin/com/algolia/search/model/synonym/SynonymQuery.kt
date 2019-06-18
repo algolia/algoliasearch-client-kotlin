@@ -1,5 +1,6 @@
 package com.algolia.search.model.synonym
 
+import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.Serializable
@@ -8,6 +9,7 @@ import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.json
 
 
+@DSLParameters
 @Serializable(SynonymQuery.Companion::class)
 public data class SynonymQuery(
     /**
