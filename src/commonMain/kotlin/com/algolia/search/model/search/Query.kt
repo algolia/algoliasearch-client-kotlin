@@ -280,7 +280,7 @@ public data class Query(
      * Engine default: []
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryLanguages/?language=kotlin]
      */
-    @SerialName(KeyQueryLanguages) var queryLanguages: List<QueryLanguage>? = null,
+    @SerialName(KeyQueryLanguages) var queryLanguages: List<Language>? = null,
 
     /**
      * Whether rules should be globally enabled.

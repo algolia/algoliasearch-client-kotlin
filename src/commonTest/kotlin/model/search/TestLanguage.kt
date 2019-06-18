@@ -1,12 +1,12 @@
 package model.search
 
-import com.algolia.search.model.search.QueryLanguage.*
+import com.algolia.search.model.search.Language.*
 import com.algolia.search.serialize.*
 import shouldEqual
 import kotlin.test.Test
 
 
-internal class TestQueryLanguage {
+internal class TestLanguage {
 
     @Test
     fun raw() {

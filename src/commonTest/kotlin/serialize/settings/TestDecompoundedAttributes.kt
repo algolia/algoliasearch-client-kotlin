@@ -2,7 +2,7 @@ package serialize.settings
 
 import attributeA
 import attributeB
-import com.algolia.search.model.search.QueryLanguage
+import com.algolia.search.model.search.Language
 import com.algolia.search.model.settings.DecompoundedAttributes
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
@@ -16,21 +16,21 @@ internal class TestDecompoundedAttributes : TestSerializer<DecompoundedAttribute
     override val items = listOf(
         item to json,
         DecompoundedAttributes(
-            QueryLanguage.Dutch,
+            Language.Dutch,
             attributeA,
             attributeB
         ) to json {
-            QueryLanguage.Dutch.raw to jsonArray {
+            Language.Dutch.raw to jsonArray {
                 +attributeA.raw
                 +attributeB.raw
             }
         },
         DecompoundedAttributes(
-            QueryLanguage.Finnish,
+            Language.Finnish,
             attributeA,
             attributeB
         ) to json {
-            QueryLanguage.Finnish.raw to jsonArray {
+            Language.Finnish.raw to jsonArray {
                 +attributeA.raw
                 +attributeB.raw
             }
@@ -41,12 +41,12 @@ internal class TestDecompoundedAttributes : TestSerializer<DecompoundedAttribute
 
         val item =
             DecompoundedAttributes(
-                QueryLanguage.German,
+                Language.German,
                 attributeA,
                 attributeB
             )
         val json = json {
-            QueryLanguage.German.raw to jsonArray {
+            Language.German.raw to jsonArray {
                 +attributeA.raw
                 +attributeB.raw
             }

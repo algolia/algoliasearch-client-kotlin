@@ -1,7 +1,7 @@
 package com.algolia.search.model.settings
 
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.search.QueryLanguage
+import com.algolia.search.model.search.Language
 import kotlinx.serialization.*
 import kotlinx.serialization.internal.HashMapSerializer
 
@@ -16,32 +16,32 @@ import kotlinx.serialization.internal.HashMapSerializer
  */
 @Serializable(DecompoundedAttributes.Companion::class)
 public data class DecompoundedAttributes internal constructor(
-    val map: Map<QueryLanguage, List<Attribute>>
+    val map: Map<Language, List<Attribute>>
 ) {
 
     internal constructor(
-        language: QueryLanguage,
+        language: Language,
         attributes: List<Attribute>
     ) : this(mapOf(language to attributes.toList()))
 
     public constructor(
-        language: QueryLanguage.German,
+        language: Language.German,
         vararg attributes: Attribute
     ) : this(language, attributes.toList())
 
     public constructor(
-        language: QueryLanguage.Finnish,
+        language: Language.Finnish,
         vararg attributes: Attribute
     ) : this(language, attributes.toList())
 
     public constructor(
-        language: QueryLanguage.Dutch,
+        language: Language.Dutch,
         vararg attributes: Attribute
     ) : this(language, attributes.toList())
 
     companion object : KSerializer<DecompoundedAttributes> {
 
-        private val serializer = HashMapSerializer(QueryLanguage, Attribute.list)
+        private val serializer = HashMapSerializer(Language, Attribute.list)
 
         override val descriptor: SerialDescriptor = serializer.descriptor
 

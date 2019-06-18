@@ -1,8 +1,8 @@
 package com.algolia.search.model.places
 
 import com.algolia.search.model.ObjectID
+import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.QueryLanguage
 import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
@@ -13,10 +13,10 @@ import kotlinx.serialization.json.JsonObject
 
 @Serializable
 data class PlaceMulti(
-    @SerialName(KeyCountry) val countryOrNull: Map<QueryLanguage, String>? = null,
-    @SerialName(KeyCounty) val countyOrNull: Map<QueryLanguage, List<String>>? = null,
-    @SerialName(KeyCity) val cityOrNull: Map<QueryLanguage, List<String>>? = null,
-    @SerialName(KeyLocaleNames) val localNamesOrNull: Map<QueryLanguage, List<String>>? = null,
+    @SerialName(KeyCountry) val countryOrNull: Map<Language, String>? = null,
+    @SerialName(KeyCounty) val countyOrNull: Map<Language, List<String>>? = null,
+    @SerialName(KeyCity) val cityOrNull: Map<Language, List<String>>? = null,
+    @SerialName(KeyLocaleNames) val localNamesOrNull: Map<Language, List<String>>? = null,
     @SerialName(KeyObjectID) override val objectIDOrNull: ObjectID? = null,
     @SerialName(KeyAdministrative) override val administrativeOrNull: List<String>? = null,
     @SerialName(KeyCountryCode) override val countryCodeOrNull: Country? = null,
@@ -39,18 +39,18 @@ data class PlaceMulti(
 ) : Place {
 
     @Transient
-    val country: Map<QueryLanguage, String>
+    val country: Map<Language, String>
         get() = countryOrNull!!
 
     @Transient
-    val county: Map<QueryLanguage, List<String>>
+    val county: Map<Language, List<String>>
         get() = countyOrNull!!
 
     @Transient
-    val city: Map<QueryLanguage, List<String>>
+    val city: Map<Language, List<String>>
         get () = cityOrNull!!
 
     @Transient
-    val localNames: Map<QueryLanguage, List<String>>
+    val localNames: Map<Language, List<String>>
         get() = localNamesOrNull!!
 }

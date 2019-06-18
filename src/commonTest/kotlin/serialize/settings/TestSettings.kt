@@ -58,7 +58,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             camelCaseAttributes = attributes,
             decompoundedAttributes = listOf(TestDecompoundedAttributes.item),
             keepDiacriticsOnCharacters = string,
-            queryLanguages = listOf(QueryLanguage.Afrikaans, QueryLanguage.Albanian),
+            queryLanguages = listOf(Language.Afrikaans, Language.Albanian),
             // Query-rules
             enableRules = boolean,
             // Query-strategy
@@ -120,8 +120,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyDecompoundedAttributes to jsonArray { +TestDecompoundedAttributes.json }
             KeyKeepDiacriticsOnCharacters to string
             KeyQueryLanguages to jsonArray {
-                +QueryLanguage.Afrikaans.raw
-                +QueryLanguage.Albanian.raw
+                +Language.Afrikaans.raw
+                +Language.Albanian.raw
             }
             // Query-rules
             KeyEnableRules to boolean
