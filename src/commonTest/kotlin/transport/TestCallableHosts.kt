@@ -13,7 +13,7 @@ import kotlin.test.Test
 internal class TestCallableHosts {
 
     private val configuration = ConfigurationSearch(clientAdmin1.applicationID, clientAdmin1.apiKey)
-    private val transport = Transport(configuration)
+    private val transport = Transport(configuration, null)
     private val hostRead = RetryableHost("${configuration.applicationID}-dsn.algolia.net", CallType.Read)
     private val hostWrite = RetryableHost("${configuration.applicationID}.algolia.net", CallType.Write)
     private val hostFallback1 = RetryableHost("${configuration.applicationID}-1.algolianet.com")

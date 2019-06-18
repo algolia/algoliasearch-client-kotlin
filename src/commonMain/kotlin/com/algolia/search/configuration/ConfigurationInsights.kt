@@ -20,7 +20,7 @@ public data class ConfigurationInsights(
     override val hosts: List<RetryableHost> = listOf(insightHost),
     override val defaultHeaders: Map<String, String>? = null,
     override val engine: HttpClientEngine? = null
-) : Configuration {
+) : Configuration, Authentication {
 
     override val httpClient = getHttpClient()
 }

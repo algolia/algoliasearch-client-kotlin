@@ -17,7 +17,7 @@ public object ClientAccount {
      *  @throws IllegalStateException if [destination] index already exists.
      */
     public suspend fun copyIndex(source: Index, destination: Index): List<Task> {
-        if (source.transport.applicationID == destination.transport.applicationID) {
+        if (source.transport.authentication.applicationID == destination.transport.authentication.applicationID) {
             throw IllegalArgumentException("Source and Destination indices should not be on the same application.")
         }
         var hasThrown404 = false

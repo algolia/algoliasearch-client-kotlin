@@ -17,6 +17,12 @@ internal val ApplicationID.searchHosts
 
 internal val insightHost = RetryableHost("insights.algolia.io")
 internal val analyticsHost = RetryableHost("analytics.algolia.com")
+internal val placesHost = listOf(
+    RetryableHost("places-dsn.algolia.net"),
+    RetryableHost("places-1.algolianet.com"),
+    RetryableHost("places-2.algolianet.com"),
+    RetryableHost("places-3.algolianet.com")
+)
 
 internal fun RetryableHost.reset() {
     lastUpdated = Time.getCurrentTimeMillis()
