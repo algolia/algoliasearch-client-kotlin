@@ -28,7 +28,7 @@ data class PlacesQuery(
     /**
      * Force to first search around a specific latitude longitude.
      */
-    @SerialName(KeyAroundLatLng) var aroundLatLag: Point? = null,
+    @SerialName(KeyAroundLatLng) var aroundLatLng: Point? = null,
     /**
      * Engine default: true
      * Whether or not to first search around the geolocation of the user found via his IP address.
