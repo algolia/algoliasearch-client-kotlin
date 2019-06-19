@@ -35,7 +35,7 @@ internal fun compareVariant(actual: ResponseVariant, expected: Variant) {
 internal suspend fun cleanABTest(clientSearch: ClientSearch, suffix: String, now: Boolean = false) {
     val regex = Regex("kotlin-(.*)-$username-$suffix")
 
-    clientAnalytics.browseAllABTests().forEach {
+    clientAnalytics.browseAllABTests(hitsPerPage = 100).forEach {
         it.abTests.forEach { abTest ->
             val result = regex.find(abTest.variantA.indexName.raw)
             val date = result?.groupValues?.get(1)

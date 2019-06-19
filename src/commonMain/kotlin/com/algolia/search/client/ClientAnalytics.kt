@@ -45,9 +45,10 @@ public class ClientAnalytics private constructor(
         var page = 0
 
         while (true) {
-            val response = listABTests(page++, hitsPerPage, requestOptions)
+            val response = listABTests(page, hitsPerPage, requestOptions)
 
-            if (response.count == 0) break
+            if (response.count == response.total || response.count == 0) break
+            page += response.count
             responses += response
         }
         return responses
