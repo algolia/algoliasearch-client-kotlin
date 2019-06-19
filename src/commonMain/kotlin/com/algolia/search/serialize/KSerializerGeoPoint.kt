@@ -8,7 +8,7 @@ import kotlinx.serialization.internal.SerialClassDescImpl
 import kotlinx.serialization.json.json
 
 
-internal object KSerializerGeoPoint : KSerializer<Point> {
+public object KSerializerGeoPoint : KSerializer<Point> {
 
     override val descriptor = SerialClassDescImpl("point")
 
