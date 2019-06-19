@@ -77,7 +77,7 @@ internal class TestSuitePlaces {
         runBlocking {
             clientPlaces.searchPlaces(PlacesQuery(aroundRadius = AroundRadius.All)).hits.shouldNotBeEmpty()
             clientPlaces.searchPlaces(PlacesQuery(aroundRadius = AroundRadius.InMeters(1000000))).hits.shouldNotBeEmpty()
-            clientPlaces.searchPlaces(PlacesQuery(aroundLatLag = Point(0f, 0f))).hits.shouldNotBeEmpty()
+            clientPlaces.searchPlaces(PlacesQuery(aroundLatLng = Point(0f, 0f))).hits.shouldNotBeEmpty()
             clientPlaces.searchPlaces(PlacesQuery(aroundLatLngViaIP = true)).hits.shouldNotBeEmpty()
         }
     }
@@ -90,7 +90,7 @@ internal class TestSuitePlaces {
                 type = PlaceType.City,
                 hitsPerPage = 10,
                 aroundLatLngViaIP = false,
-                aroundLatLag = Point(32.7767f, -96.7970f),
+                aroundLatLng = Point(32.7767f, -96.7970f),
                 countries = listOf(Country.France, Country.UnitedStates)
             )
             clientPlaces.searchPlaces(QueryLanguage.English, query).hits.shouldNotBeEmpty()
@@ -117,10 +117,17 @@ internal class TestSuitePlaces {
     fun reverseGeocodingLanguage() {
         runBlocking {
             clientPlaces.reverseGeocoding(
-                Point(48.880379f, 2.327007f),
                 QueryLanguage.French,
+                Point(48.880379f, 2.327007f),
                 hitsPerPage = 5
             ).hits.size shouldEqual 5
+        }
+    }
+
+    @Test
+    fun hitsPerPage() {
+        runBlocking {
+            clientPlaces.searchPlaces(PlacesQuery(hitsPerPage = 5)).hits.size shouldEqual 5
         }
     }
 }
