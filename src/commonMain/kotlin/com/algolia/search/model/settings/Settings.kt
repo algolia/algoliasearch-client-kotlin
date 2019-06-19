@@ -358,4 +358,10 @@ public data class Settings(
      *  Lets you store custom data in your indices.
      */
     @SerialName(KeyUserData) var userData: JsonObject? = null
-)
+) {
+
+    /**
+     *  This parameter keeps track of which primary index (if any) a replica is connected to.
+     */
+    @SerialName(KeyPrimary) val primary: IndexName? = null
+}
