@@ -7,6 +7,7 @@ import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
 
 
 @Serializable
@@ -352,5 +353,9 @@ public data class Settings(
     /**
      * Settings version.
      */
-    @SerialName(KeyVersion) var version: Int? = null
+    @SerialName(KeyVersion) var version: Int? = null,
+    /**
+     *  Lets you store custom data in your indices.
+     */
+    @SerialName(KeyUserData) var userData: JsonObject? = null
 )
