@@ -7,7 +7,6 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
-import kotlinx.serialization.json.JsonNull.content
 
 
 @Deprecated(
@@ -97,7 +96,7 @@ public sealed class Language(override val raw: String) : Raw<String> {
         }
 
         override fun deserialize(decoder: Decoder): Language {
-            return when (serializer.deserialize(decoder)) {
+            return when (val string = serializer.deserialize(decoder)) {
                 KeyAfrikaans -> Afrikaans
                 KeyArabic -> Arabic
                 KeyAzeri -> Azeri
@@ -154,7 +153,7 @@ public sealed class Language(override val raw: String) : Raw<String> {
                 KeyTswana -> Tswana
                 KeyTurkish -> Turkish
                 KeyTatar -> Tatar
-                else -> Other(content)
+                else -> Other(string)
             }
         }
     }
