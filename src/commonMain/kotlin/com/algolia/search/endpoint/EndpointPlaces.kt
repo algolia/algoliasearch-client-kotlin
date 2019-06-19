@@ -35,8 +35,8 @@ public interface EndpointPlaces {
     ): ResponseSearchPlacesMulti
 
     suspend fun reverseGeocoding(
-        geolocation: Point,
         language: QueryLanguage,
+        geolocation: Point,
         hitsPerPage: Int? = null,
         requestOptions: RequestOptions? = null
     ): ResponseSearchPlacesMono

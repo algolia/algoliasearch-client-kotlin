@@ -57,8 +57,8 @@ internal class EndpointPlacesImpl(
     }
 
     override suspend fun reverseGeocoding(
-        geolocation: Point,
         language: QueryLanguage,
+        geolocation: Point,
         hitsPerPage: Int?,
         requestOptions: RequestOptions?
     ): ResponseSearchPlacesMono {
