@@ -8,8 +8,8 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.places.PlacesQuery
+import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.QueryLanguage
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -43,7 +43,7 @@ internal class DocPlaces {
         runBlocking {
             val response = client.searchPlaces(PlacesQuery("Paris"))
 
-            response.hits.first().city.getValue(QueryLanguage.English)
+            response.hits.first().city.getValue(Language.English)
         }
     }
 
@@ -52,7 +52,7 @@ internal class DocPlaces {
         runBlocking {
             val response = client.searchPlaces(
                 query = PlacesQuery("New-York"),
-                language = QueryLanguage.English
+                language = Language.English
             )
 
             response.hits.first().city

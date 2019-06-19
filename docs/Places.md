@@ -48,7 +48,7 @@ By default, the response of `searchPlaces` contains translations in all language
 ```kotlin
 val response = client.searchPlaces(PlacesQuery("Paris"))
 
-response.hits.first().city.getValue(QueryLanguage.English)
+response.hits.first().city.getValue(Language.English)
 ```
 
 #### Search places for one language
@@ -58,7 +58,7 @@ However, it is possible to restrict the search results to a single language.
 ```kotlin
 val response = client.searchPlaces(
     query = PlacesQuery("New-York"),
-    language = QueryLanguage.English
+    language = Language.English
 )
 
 response.hits.first().city
