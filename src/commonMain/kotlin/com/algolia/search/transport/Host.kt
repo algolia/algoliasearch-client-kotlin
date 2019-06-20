@@ -17,7 +17,7 @@ internal val ApplicationID.searchHosts
 
 internal val insightHost = RetryableHost("insights.algolia.io")
 internal val analyticsHost = RetryableHost("analytics.algolia.com")
-internal val placesHost = listOf(
+internal val placesHosts = listOf(
     RetryableHost("places-dsn.algolia.net"),
     RetryableHost("places-1.algolianet.com"),
     RetryableHost("places-2.algolianet.com"),
