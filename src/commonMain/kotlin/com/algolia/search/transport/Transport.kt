@@ -1,8 +1,8 @@
 package com.algolia.search.transport
 
-import com.algolia.search.configuration.Authentication
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Configuration
+import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.RetryableHost
 import io.ktor.client.features.ResponseException
 import io.ktor.client.request.HttpRequestBuilder
@@ -19,13 +19,13 @@ import kotlin.math.floor
 
 internal class Transport(
     configuration: Configuration,
-    val authenticationOrNull: Authentication?
+    val credentialsOrNull: Credentials?
 ) : Configuration by configuration {
 
     private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
     private val mutex = Mutex()
 
-    val authentication get() = authenticationOrNull!!
+    val credentials get() = credentialsOrNull!!
 
     suspend fun callableHosts(callType: CallType): List<RetryableHost> {
         return mutex.withLock {
@@ -50,7 +50,7 @@ internal class Transport(
             url.protocol = URLProtocol.HTTPS
             method = httpMethod
             body?.let { this.body = it }
-            authenticationOrNull?.let {
+            credentialsOrNull?.let {
                 setApplicationId(it.applicationID)
                 setApiKey(it.apiKey)
             }

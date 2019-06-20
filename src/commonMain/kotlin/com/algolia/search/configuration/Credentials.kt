@@ -7,7 +7,7 @@ import com.algolia.search.model.ApplicationID
 /**
  * Configuration used by a client for authenticated request.
  */
-public interface Authentication {
+public interface Credentials {
 
     /**
      * [ApplicationID] to target. Is passed as a HTTP header.

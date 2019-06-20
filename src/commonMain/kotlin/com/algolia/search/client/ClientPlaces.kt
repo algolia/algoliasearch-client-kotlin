@@ -1,6 +1,6 @@
 package com.algolia.search.client
 
-import com.algolia.search.configuration.AuthenticationImpl
+import com.algolia.search.configuration.CredentialsImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationPlaces
 import com.algolia.search.endpoint.EndpointPlaces
@@ -19,7 +19,7 @@ public class ClientPlaces private constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
     ) : this(
-        Transport(ConfigurationPlaces(), AuthenticationImpl(applicationID, apiKey))
+        Transport(ConfigurationPlaces(), CredentialsImpl(applicationID, apiKey))
     )
 
     public constructor(

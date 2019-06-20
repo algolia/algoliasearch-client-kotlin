@@ -42,7 +42,7 @@ public class ClientSearch private constructor(
     EndpointMultiCluster by EndpointMulticlusterImpl(transport),
     EndpointPersonalization by EndpointPersonalizationImpl(transport),
     Configuration by transport,
-    Authentication by transport.authentication {
+    Credentials by transport.credentials {
 
     public constructor(
         applicationID: ApplicationID,
@@ -51,7 +51,7 @@ public class ClientSearch private constructor(
     ) : this(
         Transport(
             ConfigurationSearch(applicationID, apiKey, logLevel = logLevel),
-            AuthenticationImpl(applicationID, apiKey)
+            CredentialsImpl(applicationID, apiKey)
         )
     )
 

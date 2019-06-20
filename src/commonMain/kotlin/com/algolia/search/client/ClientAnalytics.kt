@@ -1,7 +1,7 @@
 package com.algolia.search.client
 
-import com.algolia.search.configuration.Authentication
-import com.algolia.search.configuration.AuthenticationImpl
+import com.algolia.search.configuration.Credentials
+import com.algolia.search.configuration.CredentialsImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationAnalytics
 import com.algolia.search.endpoint.EndpointAnalytics
@@ -21,7 +21,7 @@ public class ClientAnalytics private constructor(
     private val transport: Transport
 ) : EndpointAnalytics by EndpointAnalyticsImpl(transport),
     Configuration by transport,
-    Authentication by transport.authentication {
+    Credentials by transport.credentials {
 
     public constructor(
         applicationID: ApplicationID,
@@ -29,7 +29,7 @@ public class ClientAnalytics private constructor(
     ) : this(
         Transport(
             ConfigurationAnalytics(applicationID, apiKey),
-            AuthenticationImpl(applicationID, apiKey)
+            CredentialsImpl(applicationID, apiKey)
         )
     )
 

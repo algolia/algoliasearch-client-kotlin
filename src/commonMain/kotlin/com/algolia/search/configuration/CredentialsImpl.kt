@@ -4,7 +4,7 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 
 
-internal data class AuthenticationImpl(
+internal data class CredentialsImpl(
     override val applicationID: ApplicationID,
     override val apiKey: APIKey
-): Authentication
+): Credentials
