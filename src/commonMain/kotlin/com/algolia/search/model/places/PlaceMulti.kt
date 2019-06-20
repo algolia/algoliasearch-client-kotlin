@@ -13,9 +13,9 @@ import kotlinx.serialization.json.JsonObject
 
 @Serializable
 data class PlaceMulti(
-    @SerialName(KeyCity) val cityOrNull: Map<QueryLanguage, List<String>>? = null,
-    @SerialName(KeyCounty) val countyOrNull: Map<QueryLanguage, List<String>>? = null,
     @SerialName(KeyCountry) val countryOrNull: Map<QueryLanguage, String>? = null,
+    @SerialName(KeyCounty) val countyOrNull: Map<QueryLanguage, List<String>>? = null,
+    @SerialName(KeyCity) val cityOrNull: Map<QueryLanguage, List<String>>? = null,
     @SerialName(KeyLocaleNames) val localNamesOrNull: Map<QueryLanguage, List<String>>? = null,
     @SerialName(KeyObjectID) override val objectIDOrNull: ObjectID? = null,
     @SerialName(KeyAdministrative) override val administrativeOrNull: List<String>? = null,
@@ -39,18 +39,18 @@ data class PlaceMulti(
 ) : Place {
 
     @Transient
-    val localNames: Map<QueryLanguage, List<String>>
-        get() = localNamesOrNull!!
-
-    @Transient
-    val city: Map<QueryLanguage, List<String>>
-        get () = cityOrNull!!
+    val country: Map<QueryLanguage, String>
+        get() = countryOrNull!!
 
     @Transient
     val county: Map<QueryLanguage, List<String>>
         get() = countyOrNull!!
 
     @Transient
-    val country: Map<QueryLanguage, String>
-        get() = countryOrNull!!
+    val city: Map<QueryLanguage, List<String>>
+        get () = cityOrNull!!
+
+    @Transient
+    val localNames: Map<QueryLanguage, List<String>>
+        get() = localNamesOrNull!!
 }
