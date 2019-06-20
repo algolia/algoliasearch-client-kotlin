@@ -1,7 +1,6 @@
 package suite
 
 import clientPlaces
-import com.algolia.search.client.ClientPlaces
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.places.Country
 import com.algolia.search.model.places.PlaceType
@@ -17,12 +16,6 @@ import kotlin.test.Test
 
 internal class TestSuitePlaces {
 
-    @Test
-    fun anonymous() {
-        runBlocking {
-            ClientPlaces().searchPlaces()
-        }
-    }
 
     @Test
     fun withoutParameters() {
