@@ -23,7 +23,7 @@ internal class RequestMultipleQueries(
                     obj.indexQueries.forEach {
                         +json {
                             KeyIndexName to it.indexName.raw
-                            KeyParams to it.query.toJsonNoDefaults().urlEncode()
+                            it.query.toJsonNoDefaults().urlEncode()?.let { KeyParams to it }
                         }
                     }
                 }
