@@ -15,6 +15,7 @@ import serialize.TestSerializer
 import serialize.search.TestSnippet
 import shouldEqual
 import string
+import unknown
 import kotlin.test.Test
 
 
@@ -81,7 +82,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             responseFields = listOf(ResponseFields.NbHits),
             maxFacetHits = int,
             version = int,
-            advancedSyntaxFeatures = listOf(AdvancedSyntaxFeatures.ExcludeWords, AdvancedSyntaxFeatures.ExactPhrase)
+            advancedSyntaxFeatures = listOf(AdvancedSyntaxFeatures.ExcludeWords, AdvancedSyntaxFeatures.ExactPhrase),
+            userData = json { unknown to unknown }
         ) to json {
             // Attributes
             KeySearchableAttributes to attributesJson
@@ -149,6 +151,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
                 +KeyExcludeWords
                 +KeyExactPhrase
             }
+            KeyUserData to json { unknown to unknown }
         }
     )
 
