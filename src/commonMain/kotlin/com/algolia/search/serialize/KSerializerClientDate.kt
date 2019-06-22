@@ -9,7 +9,7 @@ import kotlinx.serialization.json.content
 import kotlinx.serialization.json.longOrNull
 
 
-internal object KSerializerClientDate : KSerializer<ClientDate> {
+public object KSerializerClientDate : KSerializer<ClientDate> {
 
     private val serializer = StringSerializer
 
