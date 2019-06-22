@@ -3,7 +3,7 @@ package com.algolia.search.model.places
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.AroundRadius
 import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.QueryLanguage
+import com.algolia.search.model.search.Language
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -52,5 +52,5 @@ data class PlacesQuery(
 ) {
 
     @SerialName(KeyLanguage)
-    internal var language: QueryLanguage? = null
+    internal var language: Language? = null
 }

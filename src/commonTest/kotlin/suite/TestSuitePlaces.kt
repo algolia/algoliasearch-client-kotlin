@@ -6,8 +6,8 @@ import com.algolia.search.model.places.Country
 import com.algolia.search.model.places.PlaceType
 import com.algolia.search.model.places.PlacesQuery
 import com.algolia.search.model.search.AroundRadius
+import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.QueryLanguage
 import runBlocking
 import shouldEqual
 import shouldNotBeEmpty
@@ -27,7 +27,7 @@ internal class TestSuitePlaces {
     @Test
     fun withLanguage() {
         runBlocking {
-            clientPlaces.searchPlaces(QueryLanguage.English).hits.shouldNotBeEmpty()
+            clientPlaces.searchPlaces(Language.English).hits.shouldNotBeEmpty()
         }
     }
 
@@ -86,7 +86,7 @@ internal class TestSuitePlaces {
                 aroundLatLng = Point(32.7767f, -96.7970f),
                 countries = listOf(Country.France, Country.UnitedStates)
             )
-            clientPlaces.searchPlaces(QueryLanguage.English, query).hits.shouldNotBeEmpty()
+            clientPlaces.searchPlaces(Language.English, query).hits.shouldNotBeEmpty()
         }
     }
 
@@ -110,7 +110,7 @@ internal class TestSuitePlaces {
     fun reverseGeocodingLanguage() {
         runBlocking {
             clientPlaces.reverseGeocoding(
-                QueryLanguage.French,
+                Language.French,
                 Point(48.880379f, 2.327007f),
                 hitsPerPage = 5
             ).hits.size shouldEqual 5

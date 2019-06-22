@@ -6,7 +6,7 @@ import com.algolia.search.model.places.PlacesQuery
 import com.algolia.search.model.response.ResponseSearchPlacesMono
 import com.algolia.search.model.response.ResponseSearchPlacesMulti
 import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.QueryLanguage
+import com.algolia.search.model.search.Language
 import com.algolia.search.transport.RequestOptions
 
 
@@ -18,7 +18,7 @@ public interface EndpointPlaces {
     ): ResponseSearchPlacesMulti
 
     suspend fun searchPlaces(
-        language: QueryLanguage,
+        language: Language,
         query: PlacesQuery = PlacesQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchPlacesMono
@@ -35,7 +35,7 @@ public interface EndpointPlaces {
     ): ResponseSearchPlacesMulti
 
     suspend fun reverseGeocoding(
-        language: QueryLanguage,
+        language: Language,
         geolocation: Point,
         hitsPerPage: Int? = null,
         requestOptions: RequestOptions? = null

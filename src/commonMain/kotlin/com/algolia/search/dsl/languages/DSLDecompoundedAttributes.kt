@@ -3,7 +3,7 @@ package com.algolia.search.dsl.languages
 import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.dsl.attributes.DSLAttributes
-import com.algolia.search.model.search.QueryLanguage
+import com.algolia.search.model.search.Language
 import com.algolia.search.model.settings.DecompoundedAttributes
 
 
@@ -15,29 +15,29 @@ public class DSLDecompoundedAttributes(
     private val decompoundedAttributes: MutableList<DecompoundedAttributes> = mutableListOf()
 ) {
 
-    private infix fun QueryLanguage.decompounded(block: DSLAttributes.() -> Unit): DecompoundedAttributes {
+    private infix fun Language.decompounded(block: DSLAttributes.() -> Unit): DecompoundedAttributes {
         return DecompoundedAttributes(this, DSLAttributes(block))
     }
 
     /**
-     * Create and add a [DecompoundedAttributes] for the [QueryLanguage.German] using [block] to [decompoundedAttributes].
+     * Create and add a [DecompoundedAttributes] for the [Language.German] using [block] to [decompoundedAttributes].
      */
     public infix fun german(block: DSLAttributes.() -> Unit) {
-        +QueryLanguage.German.decompounded(block)
+        +Language.German.decompounded(block)
     }
 
     /**
-     * Create and add a [DecompoundedAttributes] for the [QueryLanguage.Finnish] using [block] to [decompoundedAttributes].
+     * Create and add a [DecompoundedAttributes] for the [Language.Finnish] using [block] to [decompoundedAttributes].
      */
     public infix fun finnish(block: DSLAttributes.() -> Unit) {
-        +QueryLanguage.Finnish.decompounded(block)
+        +Language.Finnish.decompounded(block)
     }
 
     /**
-     * Create and add a [DecompoundedAttributes] for the [QueryLanguage.Dutch] using [block] to [decompoundedAttributes].
+     * Create and add a [DecompoundedAttributes] for the [Language.Dutch] using [block] to [decompoundedAttributes].
      */
     public infix fun dutch(block: DSLAttributes.() -> Unit) {
-        +QueryLanguage.Dutch.decompounded(block)
+        +Language.Dutch.decompounded(block)
     }
 
     /**

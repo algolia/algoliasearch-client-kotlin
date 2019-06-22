@@ -1,7 +1,7 @@
 package serialize.search
 
 import com.algolia.search.model.search.IgnorePlurals
-import com.algolia.search.model.search.QueryLanguage
+import com.algolia.search.model.search.Language
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
@@ -13,11 +13,11 @@ internal class TestIgnorePlurals : TestSerializer<IgnorePlurals>(IgnorePlurals) 
         IgnorePlurals.True to JsonLiteral(true),
         IgnorePlurals.False to JsonLiteral(false),
         IgnorePlurals.QueryLanguages(
-            QueryLanguage.Afrikaans,
-            QueryLanguage.Albanian
+            Language.Afrikaans,
+            Language.Albanian
         ) to jsonArray {
-            +QueryLanguage.Afrikaans.raw
-            +QueryLanguage.Albanian.raw
+            +Language.Afrikaans.raw
+            +Language.Albanian.raw
         }
     )
 }

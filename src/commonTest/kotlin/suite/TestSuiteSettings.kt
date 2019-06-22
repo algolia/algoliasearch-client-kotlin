@@ -2,7 +2,7 @@ package suite
 
 import clientAdmin1
 import com.algolia.search.model.search.IgnorePlurals
-import com.algolia.search.model.search.QueryLanguage
+import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.RemoveStopWords
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.Distinct
@@ -38,8 +38,8 @@ internal class TestSuiteSettings {
 
                 val copy = settings.copy(
                     typoTolerance = TypoTolerance.Min,
-                    ignorePlurals = IgnorePlurals.QueryLanguages(QueryLanguage.English, QueryLanguage.French),
-                    removeStopWords = RemoveStopWords.QueryLanguages(QueryLanguage.English, QueryLanguage.French),
+                    ignorePlurals = IgnorePlurals.QueryLanguages(Language.English, Language.French),
+                    removeStopWords = RemoveStopWords.QueryLanguages(Language.English, Language.French),
                     distinct = Distinct(1)
                 )
                 setSettings(copy).wait() shouldEqual TaskStatus.Published

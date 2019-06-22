@@ -62,7 +62,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             insidePolygon = listOf(TestPolygon.polygon),
             ignorePlurals = IgnorePlurals.True,
             removeStopWords = RemoveStopWords.True,
-            queryLanguages = listOf(QueryLanguage.Afrikaans, QueryLanguage.Albanian),
+            queryLanguages = listOf(Language.Afrikaans, Language.Albanian),
             enableRules = boolean,
             ruleContexts = listOf(string),
             enablePersonalization = boolean,
@@ -126,8 +126,8 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeyIgnorePlurals to boolean
             KeyRemoveStopWords to boolean
             KeyQueryLanguages to jsonArray {
-                +QueryLanguage.Afrikaans.raw
-                +QueryLanguage.Albanian.raw
+                +Language.Afrikaans.raw
+                +Language.Albanian.raw
             }
             KeyEnableRules to boolean
             KeyRuleContexts to jsonArray { +string }

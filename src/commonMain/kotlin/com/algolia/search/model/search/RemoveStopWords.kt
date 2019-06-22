@@ -14,7 +14,7 @@ public sealed class RemoveStopWords {
 
     /**
      * Enables the stop word functionality, ensuring that stop words are removed from consideration in a search.
-     * The languages supported here are either every language (this is the default, see list of [QueryLanguage]),
+     * The languages supported here are either every language (this is the default, see list of [Language]),
      * or those set by queryLanguages. See queryLanguages example below.
      */
     public object True: RemoveStopWords()
@@ -25,12 +25,12 @@ public sealed class RemoveStopWords {
     public object False: RemoveStopWords()
 
     /**
-     * A list of [QueryLanguage] for which ignoring plurals should be enabled.
+     * A list of [Language] for which ignoring plurals should be enabled.
      * This list of [queryLanguages] will override any values that you may have set in [Settings.queryLanguages].
      */
-    public data class QueryLanguages(val queryLanguages: List<QueryLanguage>) : RemoveStopWords() {
+    public data class QueryLanguages(val queryLanguages: List<Language>) : RemoveStopWords() {
 
-        constructor(vararg queryLanguage: QueryLanguage) : this(queryLanguage.toList())
+        constructor(vararg queryLanguage: Language) : this(queryLanguage.toList())
     }
 
     @Serializer(RemoveStopWords::class)
@@ -40,14 +40,14 @@ public sealed class RemoveStopWords {
             when (obj) {
                 is True -> BooleanSerializer.serialize(encoder, true)
                 is False -> BooleanSerializer.serialize(encoder, false)
-                is QueryLanguages -> QueryLanguage.list.serialize(encoder, obj.queryLanguages)
+                is QueryLanguages -> Language.list.serialize(encoder, obj.queryLanguages)
             }
         }
 
         override fun deserialize(decoder: Decoder): RemoveStopWords {
             return when (val element = decoder.asJsonInput()) {
                 is JsonArray -> QueryLanguages(element.map {
-                    JsonNonStrict.fromJson(QueryLanguage, it)
+                    JsonNonStrict.fromJson(Language, it)
                 })
                 is JsonLiteral -> if (element.boolean) True else False
                 else -> throw Exception()

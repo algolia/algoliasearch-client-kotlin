@@ -11,7 +11,7 @@ import com.algolia.search.dsl.filtering.DSLTagFilters
 import com.algolia.search.dsl.geosearch.DSLBoundingBox
 import com.algolia.search.dsl.geosearch.DSLPolygon
 import com.algolia.search.dsl.highlighting.DSLSnippet
-import com.algolia.search.dsl.languages.DSLQueryLanguage
+import com.algolia.search.dsl.languages.DSLLanguage
 import com.algolia.search.dsl.strategy.DSLAdvancedSyntaxFeatures
 import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
 import com.algolia.search.model.filter.FilterGroupsConverter
@@ -119,8 +119,8 @@ public fun Query.insidePolygon(block: DSLPolygon.() -> Unit) {
 /**
  * Assign the output of [block] to [Query.queryLanguages].
  */
-public fun Query.queryLanguages(block: DSLQueryLanguage.() -> Unit) {
-    queryLanguages = DSLQueryLanguage(block)
+public fun Query.queryLanguages(block: DSLLanguage.() -> Unit) {
+    queryLanguages = DSLLanguage(block)
 }
 
 /**
