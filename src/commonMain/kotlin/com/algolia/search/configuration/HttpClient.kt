@@ -42,7 +42,7 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
         logger = Logger.SIMPLE
     }
     install(UserAgent) {
-        this.agent = "Algolia for Kotlin (${BuildConfig.version})"
+        agent = "Algolia for Kotlin (${BuildConfig.version})"
     }
     configuration.defaultHeaders?.let {
         install(DefaultRequest) {

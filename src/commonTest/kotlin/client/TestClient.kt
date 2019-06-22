@@ -42,8 +42,6 @@ internal class TestClient {
 
     private infix fun Configuration.shouldEqual(expected: Configuration) {
         expected.let {
-            apiKey shouldEqual it.apiKey
-            applicationID shouldEqual it.applicationID
             hosts shouldEqual it.hosts
             logLevel shouldEqual it.logLevel
             readTimeout shouldEqual it.readTimeout

@@ -1,5 +1,6 @@
 package com.algolia.search.model.search
 
+import com.algolia.search.endpoint.EndpointPlaces
 import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.*
@@ -12,7 +13,7 @@ public data class RankingInfo(
     /**
      * Present and set to true if a query rule promoted the hit.
      */
-    @SerialName(KeyPromoted) val promoted: Boolean,
+    @SerialName(KeyPromoted) val promoted: Boolean? = null,
     /**
      * Number of typos encountered when matching the record.
      * Corresponds to the [RankingCriterion.Typo] in the ranking formula.
@@ -60,5 +61,13 @@ public data class RankingInfo(
     /**
      * Geo location that matched the query. Only returned if [Query.aroundRadius] is used.
      */
-    @SerialName(KeyMatchedGeoLocation) val matchedGeoLocation: MatchedGeoLocation? = null
+    @SerialName(KeyMatchedGeoLocation) val matchedGeoLocation: MatchedGeoLocation? = null,
+    /**
+     * Only returned for [EndpointPlaces.searchPlaces].
+     */
+    @SerialName(KeyGeoPoint) @Serializable(KSerializerGeoPoint::class) val geoPoint: Point? = null,
+    /**
+     * Only returned for [EndpointPlaces.searchPlaces].
+     */
+    @SerialName(KeyQuery) val query: String? = null
 )

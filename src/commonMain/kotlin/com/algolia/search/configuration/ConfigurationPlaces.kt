@@ -1,26 +1,22 @@
 package com.algolia.search.configuration
 
-import com.algolia.search.client.ClientInsights
-import com.algolia.search.model.APIKey
-import com.algolia.search.model.ApplicationID
-import com.algolia.search.transport.insightHost
+import com.algolia.search.client.ClientPlaces
+import com.algolia.search.transport.placesHosts
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
 
 
 /**
- * Configuration used by [ClientInsights].
+ * Configuration used by [ClientPlaces].
  */
-public data class ConfigurationInsights(
-    override val applicationID: ApplicationID,
-    override val apiKey: APIKey,
+public data class ConfigurationPlaces(
     override val writeTimeout: Long = defaultWriteTimeout,
     override val readTimeout: Long = defaultReadTimeout,
     override val logLevel: LogLevel = defaultLogLevel,
-    override val hosts: List<RetryableHost> = listOf(insightHost),
+    override val hosts: List<RetryableHost> = placesHosts,
     override val defaultHeaders: Map<String, String>? = null,
     override val engine: HttpClientEngine? = null
-) : Configuration, Credentials {
+) : Configuration {
 
     override val httpClient = getHttpClient()
 }

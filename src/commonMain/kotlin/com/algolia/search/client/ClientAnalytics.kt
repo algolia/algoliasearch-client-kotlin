@@ -1,5 +1,7 @@
 package com.algolia.search.client
 
+import com.algolia.search.configuration.Credentials
+import com.algolia.search.configuration.CredentialsImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationAnalytics
 import com.algolia.search.endpoint.EndpointAnalytics
@@ -16,20 +18,24 @@ import com.algolia.search.transport.Transport
  * Client to manage [ABTest] for analytics purposes.
  */
 public class ClientAnalytics private constructor(
-    private val api: Transport
-) : EndpointAnalytics by EndpointAnalyticsImpl(api),
-    Configuration by api {
+    private val transport: Transport
+) : EndpointAnalytics by EndpointAnalyticsImpl(transport),
+    Configuration by transport,
+    Credentials by transport.credentials {
 
     public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
     ) : this(
-        Transport(ConfigurationAnalytics(applicationID, apiKey))
+        Transport(
+            ConfigurationAnalytics(applicationID, apiKey),
+            CredentialsImpl(applicationID, apiKey)
+        )
     )
 
     public constructor(
         configuration: ConfigurationAnalytics
-    ) : this(Transport(configuration))
+    ) : this(Transport(configuration, configuration))
 
     /**
      * Browse every [ABTest] on the index and return them as a list.
