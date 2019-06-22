@@ -1,7 +1,7 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.places.PlaceMulti
+import com.algolia.search.model.places.PlaceLanguages
 import com.algolia.search.model.places.PlacesQuery
 import com.algolia.search.model.response.ResponseSearchPlacesMono
 import com.algolia.search.model.response.ResponseSearchPlacesMulti
@@ -26,7 +26,7 @@ public interface EndpointPlaces {
     suspend fun getByObjectID(
         objectID: ObjectID,
         requestOptions: RequestOptions? = null
-    ): PlaceMulti
+    ): PlaceLanguages
 
     suspend fun reverseGeocoding(
         geolocation: Point,

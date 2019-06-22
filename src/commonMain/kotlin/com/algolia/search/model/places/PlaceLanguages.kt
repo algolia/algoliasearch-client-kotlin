@@ -1,6 +1,7 @@
 package com.algolia.search.model.places
 
 import com.algolia.search.model.ObjectID
+import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.serialize.*
@@ -11,11 +12,11 @@ import kotlinx.serialization.json.JsonObject
 
 
 @Serializable
-data class PlaceMono(
-    @SerialName(KeyCountry) val countryOrNull: String? = null,
-    @SerialName(KeyCounty) val countyOrNull: List<String>? = null,
-    @SerialName(KeyCity) val cityOrNull: List<String>? = null,
-    @SerialName(KeyLocaleNames) val localNamesOrNull: List<String>? = null,
+data class PlaceLanguages(
+    @SerialName(KeyCountry) val countryOrNull: Map<Language, String>? = null,
+    @SerialName(KeyCounty) val countyOrNull: Map<Language, List<String>>? = null,
+    @SerialName(KeyCity) val cityOrNull: Map<Language, List<String>>? = null,
+    @SerialName(KeyLocaleNames) val localNamesOrNull: Map<Language, List<String>>? = null,
     @SerialName(KeyObjectID) override val objectIDOrNull: ObjectID? = null,
     @SerialName(KeyAdministrative) override val administrativeOrNull: List<String>? = null,
     @SerialName(KeyCountryCode) override val countryCodeOrNull: Country? = null,
@@ -38,18 +39,18 @@ data class PlaceMono(
 ) : Place {
 
     @Transient
-    val country: String
+    val country: Map<Language, String>
         get() = countryOrNull!!
 
     @Transient
-    val county: List<String>
+    val county: Map<Language, List<String>>
         get() = countyOrNull!!
 
     @Transient
-    val city: List<String>
+    val city: Map<Language, List<String>>
         get () = cityOrNull!!
 
     @Transient
-    val localNames: List<String>
+    val localNames: Map<Language, List<String>>
         get() = localNamesOrNull!!
 }

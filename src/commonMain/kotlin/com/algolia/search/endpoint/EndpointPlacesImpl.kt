@@ -3,7 +3,7 @@ package com.algolia.search.endpoint
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.places.PlaceMulti
+import com.algolia.search.model.places.PlaceLanguages
 import com.algolia.search.model.places.PlacesQuery
 import com.algolia.search.model.response.ResponseSearchPlacesMono
 import com.algolia.search.model.response.ResponseSearchPlacesMulti
@@ -39,7 +39,7 @@ internal class EndpointPlacesImpl(
         return transport.request(HttpMethod.Post, CallType.Read, "$RoutePlaces/query", requestOptions, body)
     }
 
-    override suspend fun getByObjectID(objectID: ObjectID, requestOptions: RequestOptions?): PlaceMulti {
+    override suspend fun getByObjectID(objectID: ObjectID, requestOptions: RequestOptions?): PlaceLanguages {
         return transport.request(HttpMethod.Get, CallType.Read, "$RoutePlaces/$objectID", requestOptions)
     }
 
