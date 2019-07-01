@@ -9,6 +9,7 @@ import com.algolia.search.model.settings.*
 import com.algolia.search.serialize.*
 import indexA
 import int
+import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
@@ -131,9 +132,13 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyQueryType to QueryType.PrefixLast.raw
             KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.LastWords.raw
             KeyAdvancedSyntax to boolean
+            KeyAdvancedSyntaxFeatures to jsonArray {
+                +KeyExcludeWords
+                +KeyExactPhrase
+            }
             KeyOptionalWords to jsonArray { +string }
-            KeyDisablePrefixOnAttributes to attributesJson
             KeyDisableExactOnAttributes to attributesJson
+            KeyDisablePrefixOnAttributes to attributesJson
             KeyExactOnSingleWordQuery to ExactOnSingleWordQuery.Word.raw
             KeyAlternativesAsExact to jsonArray { +AlternativesAsExact.IgnorePlurals.raw }
             // Performance
@@ -147,11 +152,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyResponseFields to jsonArray { +ResponseFields.NbHits.raw }
             KeyMaxFacetHits to int
             KeyVersion to int
-            KeyAdvancedSyntaxFeatures to jsonArray {
-                +KeyExcludeWords
-                +KeyExactPhrase
-            }
             KeyUserData to json { unknown to unknown }
+            KeyPrimary to JsonNull
         }
     )
 
