@@ -26,7 +26,7 @@ internal fun Configuration.getHttpClient() = engine?.let {
 } ?: HttpClient { configure(this@getHttpClient) }
 
 internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
-    configuration.configuration?.invoke(this)
+    configuration.httpClientConfig?.invoke(this)
     install(JsonFeature) {
         serializer = KotlinxSerializer(JsonNonStrict)
             .also {

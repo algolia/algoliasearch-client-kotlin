@@ -29,9 +29,9 @@ public interface Configuration {
      */
     val hosts: List<RetryableHost>
     /**
-     * An optional [HttpClientConfig<*>] used by Ktor for advanced HttpClient configuration.
+     * An optional [HttpClientConfig<*>] used by Ktor for advanced HttpClient httpClientConfig.
      */
-    val configuration: ((HttpClientConfig<*>) -> Unit)?
+    val httpClientConfig: ((HttpClientConfig<*>) -> Unit)?
     /**
      * An optional [HttpClientEngine] to specify which HttpEngine should be used by Ktor.
      */

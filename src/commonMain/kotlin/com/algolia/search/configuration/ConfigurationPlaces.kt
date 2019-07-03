@@ -17,7 +17,7 @@ public data class ConfigurationPlaces(
     override val hosts: List<RetryableHost> = placesHosts,
     override val defaultHeaders: Map<String, String>? = null,
     override val engine: HttpClientEngine? = null,
-    override val configuration: (HttpClientConfig<*>.() -> Unit)? = null
+    override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null
 ) : Configuration {
 
     override val httpClient = getHttpClient()

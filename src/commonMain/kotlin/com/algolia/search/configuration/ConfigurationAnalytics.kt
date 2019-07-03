@@ -21,7 +21,7 @@ public data class ConfigurationAnalytics(
     override val hosts: List<RetryableHost> = listOf(analyticsHost),
     override val defaultHeaders: Map<String, String>? = null,
     override val engine: HttpClientEngine? = null,
-    override val configuration: (HttpClientConfig<*>.() -> Unit)? = null
+    override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null
 ) : Configuration, Credentials {
 
     override val httpClient = getHttpClient()
