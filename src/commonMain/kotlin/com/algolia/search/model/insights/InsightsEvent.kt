@@ -114,8 +114,8 @@ public sealed class InsightsEvent {
                 obj.userToken?.let { KeyUserToken to it.raw }
                 obj.queryID?.let { KeyQueryID to it.raw }
                 this stringify obj.resources
-                when (obj) {
-                    is Click -> obj.positions?.let { KeyPositions to jsonArray { it.forEach { +(it as Number) } } }
+                if (obj is Click) {
+                    obj.positions?.let { KeyPositions to jsonArray { it.forEach { +(it as Number) } } }
                 }
             }
             encoder.asJsonOutput().encodeJson(json)
