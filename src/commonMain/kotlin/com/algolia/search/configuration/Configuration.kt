@@ -2,6 +2,7 @@ package com.algolia.search.configuration
 
 import com.algolia.search.transport.RequestOptions
 import io.ktor.client.HttpClient
+import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
 
@@ -28,7 +29,11 @@ public interface Configuration {
      */
     val hosts: List<RetryableHost>
     /**
-     * An optional [HttpClientEngine] used by Ktor that can be configured.
+     * An optional [HttpClientConfig<*>] used by Ktor for advanced HttpClient httpClientConfig.
+     */
+    val httpClientConfig: ((HttpClientConfig<*>) -> Unit)?
+    /**
+     * An optional [HttpClientEngine] to specify which HttpEngine should be used by Ktor.
      */
     val engine: HttpClientEngine?
     /**
