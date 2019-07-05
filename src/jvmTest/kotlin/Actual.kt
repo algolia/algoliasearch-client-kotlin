@@ -69,5 +69,9 @@ internal actual object DateFormat {
 }
 
 internal actual fun loadScratch(name: String): String {
-    return File("src/commonTest/resources/$name").readText()
+    return if (File("src/commonTest/resources").exists()) {
+        File("src/commonTest/resources/$name").readText()
+    } else {
+        File("../../src/commonTest/resources/$name").readText()
+    }
 }
