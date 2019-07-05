@@ -1,4 +1,5 @@
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 
 
@@ -155,5 +156,8 @@ tasks {
         doFirst {
             setPublications("jvm", "metadata")
         }
+    }
+    withType<KotlinCompile> {
+        dependsOn("generateMetadataBuildConfigKotlin")
     }
 }
