@@ -24,5 +24,6 @@ public data class ConfigurationInsights(
     override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null
 ) : Configuration, Credentials {
 
+    override val compression: Compression = Compression.None
     override val httpClient = getHttpClient()
 }

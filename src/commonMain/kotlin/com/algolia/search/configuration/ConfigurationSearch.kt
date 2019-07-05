@@ -21,7 +21,8 @@ public data class ConfigurationSearch(
     override val hosts: List<RetryableHost> = applicationID.searchHosts,
     override val defaultHeaders: Map<String, String>? = null,
     override val engine: HttpClientEngine? = null,
-    override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null
+    override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
+    override val compression: Compression = Compression.Gzip
 ) : Configuration, Credentials {
 
     override val httpClient = getHttpClient()
