@@ -12,6 +12,7 @@ import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.serialize.JsonDebug
 import dayInMillis
 import io.ktor.client.features.ResponseException
+import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.KSerializer
 import loadScratch
 import shouldEqual
@@ -60,8 +61,6 @@ internal suspend fun cleanABTest(clientSearch: ClientSearch, suffix: String, now
 }
 
 internal suspend fun cleanIndex(client: ClientSearch, suffix: String, now: Boolean = false) {
-    val indexToDelete = mutableListOf<IndexName>()
-
     client.listIndices().items.forEach {
         val indexName = it.indexName.raw
 
@@ -72,14 +71,15 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String, now: Boole
                 val difference = Time.getCurrentTimeMillis() - DateFormat.parse(date)
 
                 if (difference >= dayInMillis || now) {
-                    indexToDelete += it.indexName
+                    val index =  client.initIndex(it.indexName)
+                    if (it.abTestOrNull != null) {
+                        index.apply {
+                            clientAnalytics.deleteABTest(it.abTest.abTestId).wait()
+                        }
+                    }
+                    index.apply { deleteIndex().wait() }
                 }
             }
-        }
-    }
-    indexToDelete.forEach {
-        client.initIndex(it).apply {
-            deleteIndex().wait()
         }
     }
 }

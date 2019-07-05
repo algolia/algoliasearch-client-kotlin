@@ -40,7 +40,6 @@ internal class TestSuiteAATest {
     @BeforeTest
     fun clean() {
         runBlocking {
-            cleanABTest(clientAdmin1, suffix)
             cleanIndex(clientAdmin1, suffix)
         }
     }
