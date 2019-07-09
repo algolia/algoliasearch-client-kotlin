@@ -6,6 +6,7 @@ import com.algolia.search.model.index.Scope
 import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.transport.RequestOptions
+import com.algolia.search.model.settings.Settings
 
 
 /**
@@ -119,4 +120,10 @@ public interface EndpointIndex {
         destination: IndexName,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
+
+    /**
+     * @return true if the index exists on the remote server. An index exists if at least one object has been saved, or
+     * if [Settings] have been saved.
+     */
+    suspend fun exists(): Boolean
 }
