@@ -15,7 +15,7 @@ import runBlocking
 import shouldEqual
 import shouldFailWith
 import shouldNotBeNull
-import kotlin.test.BeforeTest
+import kotlin.test.AfterTest
 import kotlin.test.Test
 
 
@@ -26,7 +26,7 @@ internal class TestSuiteRules {
     private val brand = "brand".toAttribute()
     private val index = clientAdmin1.initIndex(indexName)
 
-    @BeforeTest
+    @AfterTest
     fun clean() {
         runBlocking {
             cleanIndex(clientAdmin1, suffix)

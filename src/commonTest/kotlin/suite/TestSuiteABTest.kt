@@ -18,7 +18,7 @@ import shouldEqual
 import shouldFailWith
 import shouldNotBeNull
 import shouldNotEqual
-import kotlin.test.BeforeTest
+import kotlin.test.AfterTest
 import kotlin.test.Test
 
 
@@ -38,7 +38,7 @@ internal class TestSuiteABTest {
         endAt = ClientDate(Time.getCurrentTimeMillis() + dayInMillis)
     )
 
-    @BeforeTest
+    @AfterTest
     fun clean() {
         runBlocking {
             cleanIndex(clientAdmin1, suffix)
