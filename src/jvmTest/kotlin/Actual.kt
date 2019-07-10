@@ -2,8 +2,11 @@ import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientPlaces
 import com.algolia.search.client.ClientSearch
+import com.algolia.search.configuration.Compression
+import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
+import com.algolia.search.transport.Gzip
 import kotlinx.coroutines.CoroutineScope
 import java.io.File
 import java.text.SimpleDateFormat
@@ -20,8 +23,11 @@ internal actual val clientAdmin1 = ClientSearch(
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
 )
 internal actual val clientAdmin2 = ClientSearch(
-    System.getenv("ALGOLIA_APPLICATION_ID_2").toApplicationID(),
-    System.getenv("ALGOLIA_ADMIN_KEY_2").toAPIKey()
+    ConfigurationSearch(
+        System.getenv("ALGOLIA_APPLICATION_ID_2").toApplicationID(),
+        System.getenv("ALGOLIA_ADMIN_KEY_2").toAPIKey(),
+        compression = Compression.None
+    )
 )
 internal actual val clientMcm = ClientSearch(
     System.getenv("ALGOLIA_ADMIN_ID_MCM").toApplicationID(),

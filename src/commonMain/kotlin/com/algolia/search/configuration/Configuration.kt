@@ -44,6 +44,10 @@ public interface Configuration {
      * Default headers that should be applied to every request.
      */
     val defaultHeaders: Map<String, String>?
+    /**
+     * The type of [Compression] to use for POST or PUT requests.
+     */
+    val compression: Compression
 
     /**
      * @return The timeout that should be applied depending on the [CallType] and if a custom value has been
