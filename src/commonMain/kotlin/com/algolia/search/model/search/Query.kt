@@ -455,5 +455,10 @@ public data class Query(
      * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/percentileComputation/?language=kotlin]
      */
-    @SerialName(KeyPercentileComputation) var percentileComputation: Boolean? = null
+    @SerialName(KeyPercentileComputation) var percentileComputation: Boolean? = null,
+    /**
+     *  Overrides the query parameter and performs a more generic search that can be used to find "similar" results.
+     *  [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/similarQuery/?language=kotlin]
+     */
+    @SerialName(KeySimilarQuery) var similarQuery: String? = null
 )

@@ -351,5 +351,6 @@ internal class TestKeys {
         KeyDegradedQuery shouldEqual "degradedQuery"
         KeyGeoPoint shouldEqual "geoPoint"
         KeyVillage shouldEqual "village"
+        KeySimilarQuery shouldEqual "similarQuery"
     }
 }
