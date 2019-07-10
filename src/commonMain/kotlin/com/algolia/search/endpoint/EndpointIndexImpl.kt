@@ -6,12 +6,15 @@ import com.algolia.search.model.index.Scope
 import com.algolia.search.model.request.RequestCopyOrMove
 import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
+import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.JsonNoDefaults
 import com.algolia.search.serialize.KeyCopy
 import com.algolia.search.serialize.KeyMove
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
+import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
 
 
 internal class EndpointIndexImpl(
@@ -57,5 +60,14 @@ internal class EndpointIndexImpl(
 
     override suspend fun copySynonyms(destination: IndexName, requestOptions: RequestOptions?): RevisionIndex {
         return copyIndex(destination, listOf(Scope.Synonyms), requestOptions)
+    }
+
+    override suspend fun exists(): Boolean {
+        try {
+            EndpointSearchImpl(transport, indexName).search(Query(responseFields = emptyList()))
+        } catch (exception: ResponseException) {
+            if (exception.response.status == HttpStatusCode.NotFound) return false
+        }
+        return true
     }
 }
