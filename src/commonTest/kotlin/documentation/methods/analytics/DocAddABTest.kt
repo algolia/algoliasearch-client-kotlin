@@ -2,13 +2,13 @@ package documentation.methods.analytics
 
 import clientAnalytics
 import com.algolia.search.model.ClientDate
+import com.algolia.search.model.IndexName
 import com.algolia.search.model.Time
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Query
 import runBlocking
-import suite.testSuiteIndexName
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -21,10 +21,8 @@ internal class DocAddABTest {
 //        requestOptions: __RequestOptions?__ = null
 //    ): CreationABTest
 
-    private val suffix = "snippet"
-    private val indexName = testSuiteIndexName(suffix)
-    private val indexName1 = indexName
-    private val indexName2 = indexName.copy(indexName.raw + "_copy")
+    private val indexName1 = IndexName("index1")
+    private val indexName2 = IndexName("index2")
 
     @Test
     fun snippet1() {

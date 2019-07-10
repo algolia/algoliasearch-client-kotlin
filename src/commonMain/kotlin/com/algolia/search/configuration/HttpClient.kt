@@ -1,12 +1,5 @@
 package com.algolia.search.configuration
 
-import BuildConfig
-import com.algolia.search.model.response.ResponseABTest
-import com.algolia.search.model.response.ResponseBatches
-import com.algolia.search.model.response.creation.CreationAPIKey
-import com.algolia.search.model.response.revision.RevisionIndex
-import com.algolia.search.model.rule.Rule
-import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.serialize.JsonNonStrict
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
@@ -32,22 +25,13 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
     configuration.httpClientConfig?.invoke(this)
     install(JsonFeature) {
         serializer = KotlinxSerializer(JsonNonStrict)
-            .also {
-                it.register(ResponseBatches)
-                it.register(Synonym)
-                it.register(JsonObjectSerializer)
-                it.register(Rule.serializer())
-                it.register(CreationAPIKey.serializer())
-                it.register(RevisionIndex.serializer())
-                it.register(ResponseABTest)
-            }
     }
     install(Logging) {
         level = configuration.logLevel
         logger = Logger.SIMPLE
     }
     install(UserAgent) {
-        agent =  "Algolia for Kotlin (${BuildConfig.version})"
+        agent = clientUserAgent(AlgoliaSearchClient.version)
     }
     defaultRequest {
         configuration.defaultHeaders?.let {

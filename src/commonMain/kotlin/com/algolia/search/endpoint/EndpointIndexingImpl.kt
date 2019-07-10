@@ -14,6 +14,7 @@ import com.algolia.search.model.indexing.DeleteByQuery
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.multipleindex.RequestObjects
+import com.algolia.search.model.request.EmptyBody
 import com.algolia.search.model.request.RequestParams
 import com.algolia.search.model.request.RequestRequestObjects
 import com.algolia.search.model.response.ResponseBatch
@@ -195,7 +196,8 @@ internal class EndpointIndexingImpl(
         createIfNotExists: Boolean,
         requestOptions: RequestOptions?
     ): ResponseBatch {
-        val operations = partials.map { BatchOperation.PartialUpdateObject.from(it.first, it.second, createIfNotExists) }
+        val operations =
+            partials.map { BatchOperation.PartialUpdateObject.from(it.first, it.second, createIfNotExists) }
 
         return batch(operations, requestOptions)
     }
@@ -212,7 +214,7 @@ internal class EndpointIndexingImpl(
     }
 
     override suspend fun clearObjects(requestOptions: RequestOptions?): RevisionIndex {
-        return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/clear"), requestOptions, "")
+        return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/clear"), requestOptions, EmptyBody)
     }
 
     override suspend fun replaceAllObjects(
