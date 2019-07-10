@@ -86,7 +86,8 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             minProximity = int,
             responseFields = listOf(ResponseFields.NbHits),
             maxFacetHits = int,
-            percentileComputation = boolean
+            percentileComputation = boolean,
+            similarQuery = string
         ) to json {
             KeyQuery to string
             KeyAttributesToRetrieve to attributesJson
@@ -153,6 +154,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeyResponseFields to jsonArray { +ResponseFields.NbHits.raw }
             KeyMaxFacetHits to int
             KeyPercentileComputation to boolean
+            KeySimilarQuery to string
         }
     )
 
