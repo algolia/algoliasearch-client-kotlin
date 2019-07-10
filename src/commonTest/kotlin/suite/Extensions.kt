@@ -12,7 +12,6 @@ import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.serialize.JsonDebug
 import dayInMillis
 import io.ktor.client.features.ResponseException
-import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.KSerializer
 import loadScratch
 import shouldEqual
@@ -30,33 +29,6 @@ internal fun compareVariant(actual: ResponseVariant, expected: Variant) {
         it.indexName shouldEqual expected.indexName
         it.trafficPercentage shouldEqual expected.trafficPercentage
         it.description shouldEqual expected.description
-    }
-}
-
-internal suspend fun cleanABTest(clientSearch: ClientSearch, suffix: String, now: Boolean = false) {
-    val regex = Regex("kotlin-(.*)-$username-$suffix")
-
-    clientAnalytics.browseAllABTests(hitsPerPage = 100).forEach {
-        it.abTests.forEach { abTest ->
-            val result = regex.find(abTest.variantA.indexName.raw)
-            val date = result?.groupValues?.get(1)
-
-            if (date != null) {
-                val difference = Time.getCurrentTimeMillis() - DateFormat.parse(date)
-
-                if (difference >= dayInMillis || now) {
-                    try {
-                        val deletion = clientAnalytics.deleteABTest(abTest.abTestID)
-
-                        clientSearch.initIndex(deletion.indexName).apply {
-                            deletion.wait()
-                        }
-                    } catch (exception : ResponseException) {
-                        println(exception.readContent())
-                    }
-                }
-            }
-        }
     }
 }
 

@@ -15,7 +15,7 @@ import kotlinx.serialization.json.json
 import runBlocking
 import shouldBeTrue
 import shouldEqual
-import kotlin.test.BeforeTest
+import kotlin.test.AfterTest
 import kotlin.test.Test
 
 
@@ -53,7 +53,7 @@ internal class TestSuiteIndexing {
             }
     }
 
-    @BeforeTest
+    @AfterTest
     fun clean() {
         runBlocking {
             cleanIndex(clientAdmin1, suffix)

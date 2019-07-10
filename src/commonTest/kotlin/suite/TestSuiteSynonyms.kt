@@ -16,7 +16,7 @@ import shouldBeTrue
 import shouldContain
 import shouldEqual
 import shouldFailWith
-import kotlin.test.BeforeTest
+import kotlin.test.AfterTest
 import kotlin.test.Test
 
 
@@ -45,7 +45,7 @@ internal class TestSuiteSynonyms {
     private val index = clientAdmin1.initIndex(indexName)
 
 
-    @BeforeTest
+    @AfterTest
     fun clean() {
         runBlocking {
             cleanIndex(clientAdmin1, suffix)
