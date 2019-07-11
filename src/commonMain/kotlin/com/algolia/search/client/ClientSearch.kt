@@ -35,7 +35,7 @@ import kotlinx.coroutines.*
  * Client to perform operations on indices.
  */
 public class ClientSearch private constructor(
-    private val transport: Transport
+    internal val transport: Transport
 ) :
     EndpointMultipleIndex by EndpointMultipleIndexImpl(transport),
     EndpointAPIKey by EndpointAPIKeyImpl(transport),
