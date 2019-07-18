@@ -97,7 +97,7 @@ public data class ResponseSearch(
      * The automatically computed radius. For legacy reasons, this parameter is a string and not an integer.
      * Only returned for geo queries without an explicitly specified [Query.aroundRadius].
      */
-    @SerialName(KeyAutomaticRadius) val automaticRadiusOrNull: Float? = null,
+    @SerialName(KeyAutomaticRadius) val automaticRadiusOrNull: String? = null,
     /**
      * Actual host name of the server that processed the request. Our DNS supports automatic failover and load
      * balancing, so this may differ from the host name used in the request.
@@ -217,7 +217,7 @@ public data class ResponseSearch(
         get() = aroundLatLngOrNull!!
 
     @Transient
-    public val automaticRadius: Float
+    public val automaticRadius: String
         get() = automaticRadiusOrNull!!
 
     @Transient
