@@ -16,6 +16,8 @@ import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
+import java.time.LocalDateTime
+import java.time.ZoneId
 import kotlin.test.AfterTest
 import kotlin.test.Test
 
@@ -27,12 +29,13 @@ internal class TestSuiteInsights {
     private val index = clientAdmin1.initIndex(indexName)
     private val userToken = "bar".toUserToken()
     private val eventName = "eventName".toEventName()
-    private val objectIDs = listOf("obj1".toObjectID(), "obj2".toObjectID())
+    private val objectIDs = listOf("one".toObjectID(), "two".toObjectID())
     private val eventClick = InsightsEvent.Click(
         eventName = "foo".toEventName(),
         userToken = userToken,
         indexName = indexName,
-        resources = InsightsEvent.Resources.ObjectIDs(objectIDs)
+        resources = InsightsEvent.Resources.ObjectIDs(objectIDs),
+        timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).minusDays(2).toInstant().toEpochMilli()
     )
     private val user = clientInsights.User(userToken)
     private val attribute = "dsl/filtering".toAttribute()
