@@ -45,7 +45,9 @@ internal class TestSuiteSettings {
                     userData = json { "customUserData" to 42.0 }
                 )
                 setSettings(copy).wait() shouldEqual TaskStatus.Published
-                getSettings() shouldEqual copy
+                getSettings() shouldEqual copy.copy(
+                    userData = json { "customUserData" to 42 } // Round value expected to deserialize as int
+                )
             }
         }
     }
