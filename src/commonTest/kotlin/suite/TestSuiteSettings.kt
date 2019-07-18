@@ -34,6 +34,7 @@ internal class TestSuiteSettings {
             val settings = load(Settings.serializer(), "settings.json")
 
             index.apply {
+                saveObject(json { "value" to 42 })
                 setSettings(settings).wait() shouldEqual TaskStatus.Published
                 getSettings() shouldEqual settings
 
