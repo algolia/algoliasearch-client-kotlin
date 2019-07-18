@@ -6,6 +6,7 @@ import com.algolia.search.helper.toAttribute
 import com.algolia.search.helper.toEventName
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.helper.toUserToken
+import com.algolia.search.model.Time
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.search.Query
@@ -16,14 +17,13 @@ import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
-import java.time.LocalDateTime
-import java.time.ZoneId
 import kotlin.test.AfterTest
 import kotlin.test.Test
 
 
 internal class TestSuiteInsights {
 
+    private val twoDaysInMillis = 172800000
     private val suffix = "insights"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
@@ -35,7 +35,7 @@ internal class TestSuiteInsights {
         userToken = userToken,
         indexName = indexName,
         resources = InsightsEvent.Resources.ObjectIDs(objectIDs),
-        timestamp = LocalDateTime.now().atZone(ZoneId.systemDefault()).minusDays(2).toInstant().toEpochMilli()
+        timestamp = Time.getCurrentTimeMillis() - twoDaysInMillis
     )
     private val user = clientInsights.User(userToken)
     private val attribute = "dsl/filtering".toAttribute()
