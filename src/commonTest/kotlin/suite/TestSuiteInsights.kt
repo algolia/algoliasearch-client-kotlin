@@ -6,6 +6,7 @@ import com.algolia.search.helper.toAttribute
 import com.algolia.search.helper.toEventName
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.helper.toUserToken
+import com.algolia.search.model.Time
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.search.Query
@@ -22,17 +23,19 @@ import kotlin.test.Test
 
 internal class TestSuiteInsights {
 
+    private val twoDaysInMillis = 172800000
     private val suffix = "insights"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
     private val userToken = "bar".toUserToken()
     private val eventName = "eventName".toEventName()
-    private val objectIDs = listOf("obj1".toObjectID(), "obj2".toObjectID())
+    private val objectIDs = listOf("one".toObjectID(), "two".toObjectID())
     private val eventClick = InsightsEvent.Click(
         eventName = "foo".toEventName(),
         userToken = userToken,
         indexName = indexName,
-        resources = InsightsEvent.Resources.ObjectIDs(objectIDs)
+        resources = InsightsEvent.Resources.ObjectIDs(objectIDs),
+        timestamp = Time.getCurrentTimeMillis() - twoDaysInMillis
     )
     private val user = clientInsights.User(userToken)
     private val attribute = "dsl/filtering".toAttribute()
