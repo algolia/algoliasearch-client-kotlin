@@ -101,7 +101,7 @@ client.reverseGeocoding(Point(40.7128f, -74.0060f)) // New-York
 
 #### Get By ObjectID
 
-Use a Places `objectID` To get an Algolia Places record.
+Use a Places `objectID` to get an Algolia Places record.
 
 ```kotlin
  clientPlaces.getByObjectID(ObjectID("201316654_7340078")) // New-York
