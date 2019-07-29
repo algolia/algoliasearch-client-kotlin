@@ -7,7 +7,7 @@ import com.algolia.search.dsl.attributes.DSLAttributesToRetrieve
 import com.algolia.search.dsl.attributes.DSLSearchableAttributes
 import com.algolia.search.dsl.highlighting.DSLSnippet
 import com.algolia.search.dsl.languages.DSLDecompoundedAttributes
-import com.algolia.search.dsl.languages.DSLQueryLanguage
+import com.algolia.search.dsl.languages.DSLLanguage
 import com.algolia.search.dsl.performance.DSLNumericAttributeFilter
 import com.algolia.search.dsl.ranking.DSLCustomRanking
 import com.algolia.search.dsl.ranking.DSLIndexName
@@ -112,8 +112,8 @@ public fun Settings.disableTypoToleranceOnWords(block: DSLStrings.() -> Unit) {
 /**
  * Assign the output of [block] to [Settings.queryLanguages].
  */
-public fun Settings.queryLanguages(block: DSLQueryLanguage.() -> Unit) {
-    queryLanguages = DSLQueryLanguage(block)
+public fun Settings.queryLanguages(block: DSLLanguage.() -> Unit) {
+    queryLanguages = DSLLanguage(block)
 }
 
 /**

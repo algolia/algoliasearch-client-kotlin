@@ -14,7 +14,7 @@ import runBlocking
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
-import kotlin.test.BeforeTest
+import kotlin.test.AfterTest
 import kotlin.test.Test
 
 
@@ -26,7 +26,7 @@ class TestSuiteReplaceAll {
     private val objectIDOne = "one".toObjectID()
     private val objectIDTwo = "two".toObjectID()
 
-    @BeforeTest
+    @AfterTest
     fun clean() {
         runBlocking {
             cleanIndex(clientAdmin1, suffix)

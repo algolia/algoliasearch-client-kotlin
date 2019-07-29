@@ -17,7 +17,7 @@ import runBlocking
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
-import kotlin.test.BeforeTest
+import kotlin.test.AfterTest
 import kotlin.test.Test
 
 
@@ -37,7 +37,7 @@ internal class TestSuiteAccount {
         Settings(searchableAttributes = listOf(SearchableAttribute.Default("objectID".toAttribute())))
 
 
-    @BeforeTest
+    @AfterTest
     fun clean() {
         runBlocking {
             cleanIndex(clientAdmin1, suffix1)

@@ -32,36 +32,7 @@ internal fun compareVariant(actual: ResponseVariant, expected: Variant) {
     }
 }
 
-internal suspend fun cleanABTest(clientSearch: ClientSearch, suffix: String, now: Boolean = false) {
-    val regex = Regex("kotlin-(.*)-$username-$suffix")
-
-    clientAnalytics.browseAllABTests().forEach {
-        it.abTests.forEach { abTest ->
-            val result = regex.find(abTest.variantA.indexName.raw)
-            val date = result?.groupValues?.get(1)
-
-            if (date != null) {
-                val difference = Time.getCurrentTimeMillis() - DateFormat.parse(date)
-
-                if (difference >= dayInMillis || now) {
-                    try {
-                        val deletion = clientAnalytics.deleteABTest(abTest.abTestID)
-
-                        clientSearch.initIndex(deletion.indexName).apply {
-                            deletion.wait()
-                        }
-                    } catch (exception : ResponseException) {
-                        println(exception.readContent())
-                    }
-                }
-            }
-        }
-    }
-}
-
 internal suspend fun cleanIndex(client: ClientSearch, suffix: String, now: Boolean = false) {
-    val indexToDelete = mutableListOf<IndexName>()
-
     client.listIndices().items.forEach {
         val indexName = it.indexName.raw
 
@@ -72,14 +43,15 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String, now: Boole
                 val difference = Time.getCurrentTimeMillis() - DateFormat.parse(date)
 
                 if (difference >= dayInMillis || now) {
-                    indexToDelete += it.indexName
+                    val index =  client.initIndex(it.indexName)
+                    if (it.abTestOrNull != null) {
+                        index.apply {
+                            clientAnalytics.deleteABTest(it.abTest.abTestId).wait()
+                        }
+                    }
+                    index.apply { deleteIndex().wait() }
                 }
             }
-        }
-    }
-    indexToDelete.forEach {
-        client.initIndex(it).apply {
-            deleteIndex().wait()
         }
     }
 }

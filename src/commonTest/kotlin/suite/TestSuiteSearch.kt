@@ -16,7 +16,7 @@ import shouldContain
 import shouldEqual
 import shouldNotBeEmpty
 import shouldNotBeNull
-import kotlin.test.BeforeTest
+import kotlin.test.AfterTest
 import kotlin.test.Test
 
 
@@ -29,7 +29,7 @@ internal class TestSuiteSearch {
     private val index = clientAdmin1.initIndex(indexName)
     private val search = clientSearch.initIndex(indexName)
 
-    @BeforeTest
+    @AfterTest
     fun clean() {
         runBlocking {
             cleanIndex(clientAdmin1, suffix)

@@ -1,10 +1,11 @@
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 
 
 plugins {
-    id("kotlin-multiplatform") version "1.3.31"
-    id("kotlinx-serialization") version "1.3.31"
+    id("kotlin-multiplatform") version "1.3.41"
+    id("kotlinx-serialization") version "1.3.41"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
     id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.5"
@@ -155,5 +156,8 @@ tasks {
         doFirst {
             setPublications("jvm", "metadata")
         }
+    }
+    withType<KotlinCompile> {
+        dependsOn("generateMetadataBuildConfigKotlin")
     }
 }

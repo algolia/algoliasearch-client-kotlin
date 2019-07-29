@@ -1,5 +1,6 @@
 package com.algolia.search.model.indexing
 
+import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
@@ -7,6 +8,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
+@DSLParameters
 public data class DeleteByQuery(
     /**
      * Filter the query with numeric, facet and/or tag filters.

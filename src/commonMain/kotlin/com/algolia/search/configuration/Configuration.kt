@@ -1,9 +1,8 @@
 package com.algolia.search.configuration
 
-import com.algolia.search.model.APIKey
-import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.RequestOptions
 import io.ktor.client.HttpClient
+import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
 
@@ -13,16 +12,6 @@ import io.ktor.client.features.logging.LogLevel
  */
 public interface Configuration {
 
-    /**
-     * [ApplicationID] to target. Is passed as a HTTP header.
-     */
-    val applicationID: ApplicationID
-    /**
-     * [APIKey] for a given [ApplicationID]. Is passed as a HTTP header.
-     * To maintain security, never use your Admin [APIKey] on your front end or share it with anyone.
-     * In your front end, use the Search-only [APIKey] or any other key that has search-only rights.
-     */
-    val apiKey: APIKey
     /**
      * The timeout for each request when performing write operations (POST, PUT ..).
      */
@@ -40,7 +29,11 @@ public interface Configuration {
      */
     val hosts: List<RetryableHost>
     /**
-     * An optional [HttpClientEngine] used by Ktor that can be configured.
+     * An optional [HttpClientConfig<*>] used by Ktor for advanced HttpClient httpClientConfig.
+     */
+    val httpClientConfig: ((HttpClientConfig<*>) -> Unit)?
+    /**
+     * An optional [HttpClientEngine] to specify which HttpEngine should be used by Ktor.
      */
     val engine: HttpClientEngine?
     /**
@@ -51,6 +44,10 @@ public interface Configuration {
      * Default headers that should be applied to every request.
      */
     val defaultHeaders: Map<String, String>?
+    /**
+     * The type of [Compression] to use for POST or PUT requests.
+     */
+    val compression: Compression
 
     /**
      * @return The timeout that should be applied depending on the [CallType] and if a custom value has been

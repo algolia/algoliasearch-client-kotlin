@@ -1,9 +1,6 @@
 package com.algolia.search.client
 
-import com.algolia.search.configuration.CallType
-import com.algolia.search.configuration.Configuration
-import com.algolia.search.configuration.ConfigurationSearch
-import com.algolia.search.configuration.defaultLogLevel
+import com.algolia.search.configuration.*
 import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.endpoint.*
 import com.algolia.search.helper.encodeBase64
@@ -38,23 +35,29 @@ import kotlinx.coroutines.*
  * Client to perform operations on indices.
  */
 public class ClientSearch private constructor(
-    private val transport: Transport
+    internal val transport: Transport
 ) :
     EndpointMultipleIndex by EndpointMultipleIndexImpl(transport),
     EndpointAPIKey by EndpointAPIKeyImpl(transport),
     EndpointMultiCluster by EndpointMulticlusterImpl(transport),
     EndpointPersonalization by EndpointPersonalizationImpl(transport),
-    Configuration by transport {
+    Configuration by transport,
+    Credentials by transport.credentials {
 
     public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey,
         logLevel: LogLevel = defaultLogLevel
-    ) : this(Transport(ConfigurationSearch(applicationID, apiKey, logLevel = logLevel)))
+    ) : this(
+        Transport(
+            ConfigurationSearch(applicationID, apiKey, logLevel = logLevel),
+            CredentialsImpl(applicationID, apiKey)
+        )
+    )
 
     public constructor(
         configuration: ConfigurationSearch
-    ) : this(Transport(configuration))
+    ) : this(Transport(configuration, configuration))
 
     /**
      *  Initialize an [Index] configured with [ConfigurationSearch].

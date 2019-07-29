@@ -9,12 +9,12 @@ import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 
 
-internal fun HttpRequestBuilder.setApplicationId(applicationID: ApplicationID) {
-    header(KeyAlgoliaApplicationID, applicationID.raw)
+internal fun HttpRequestBuilder.setApplicationId(applicationID: ApplicationID?) {
+    header(KeyAlgoliaApplicationID, applicationID?.raw)
 }
 
-internal fun HttpRequestBuilder.setApiKey(apiKey: APIKey) {
-    header(KeyAlgoliaAPIKey, apiKey.raw)
+internal fun HttpRequestBuilder.setApiKey(apiKey: APIKey?) {
+    header(KeyAlgoliaAPIKey, apiKey?.raw)
 }
 
 internal fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions?) {

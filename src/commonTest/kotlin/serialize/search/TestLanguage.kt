@@ -1,12 +1,12 @@
 package serialize.search
 
-import com.algolia.search.model.search.QueryLanguage
-import com.algolia.search.model.search.QueryLanguage.*
+import com.algolia.search.model.search.Language
+import com.algolia.search.model.search.Language.*
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 
 
-internal class TestQueryLanguage : TestSerializer<QueryLanguage>(QueryLanguage) {
+internal class TestLanguage : TestSerializer<Language>(Language) {
 
     override val items = listOf(
         Afrikaans to JsonLiteral(Afrikaans.raw),

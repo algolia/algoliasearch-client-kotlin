@@ -1,5 +1,7 @@
 package com.algolia.search.client
 
+import com.algolia.search.configuration.Credentials
+import com.algolia.search.configuration.CredentialsImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationInsights
 import com.algolia.search.endpoint.EndpointInsights
@@ -17,18 +19,19 @@ import com.algolia.search.transport.Transport
  * Client to manage [InsightsEvent].
  */
 public class ClientInsights private constructor(
-    private val api: Transport
-) : EndpointInsights by EndpointInsightsImpl(api),
-    Configuration by api {
+    private val transport: Transport
+) : EndpointInsights by EndpointInsightsImpl(transport),
+    Configuration by transport,
+    Credentials by transport.credentials {
 
     public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
-    ) : this(Transport(ConfigurationInsights(applicationID, apiKey)))
+    ) : this(Transport(ConfigurationInsights(applicationID, apiKey), CredentialsImpl(applicationID, apiKey)))
 
     public constructor(
         configuration: ConfigurationInsights
-    ) : this(Transport(configuration))
+    ) : this(Transport(configuration, configuration))
 
     public inner class User(
         val userToken: UserToken

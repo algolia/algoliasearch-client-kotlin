@@ -9,12 +9,14 @@ import com.algolia.search.model.settings.*
 import com.algolia.search.serialize.*
 import indexA
 import int
+import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 import serialize.search.TestSnippet
 import shouldEqual
 import string
+import unknown
 import kotlin.test.Test
 
 
@@ -58,7 +60,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             camelCaseAttributes = attributes,
             decompoundedAttributes = listOf(TestDecompoundedAttributes.item),
             keepDiacriticsOnCharacters = string,
-            queryLanguages = listOf(QueryLanguage.Afrikaans, QueryLanguage.Albanian),
+            queryLanguages = listOf(Language.Afrikaans, Language.Albanian),
             // Query-rules
             enableRules = boolean,
             // Query-strategy
@@ -81,7 +83,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             responseFields = listOf(ResponseFields.NbHits),
             maxFacetHits = int,
             version = int,
-            advancedSyntaxFeatures = listOf(AdvancedSyntaxFeatures.ExcludeWords, AdvancedSyntaxFeatures.ExactPhrase)
+            advancedSyntaxFeatures = listOf(AdvancedSyntaxFeatures.ExcludeWords, AdvancedSyntaxFeatures.ExactPhrase),
+            userData = json { unknown to unknown }
         ) to json {
             // Attributes
             KeySearchableAttributes to attributesJson
@@ -120,8 +123,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyDecompoundedAttributes to jsonArray { +TestDecompoundedAttributes.json }
             KeyKeepDiacriticsOnCharacters to string
             KeyQueryLanguages to jsonArray {
-                +QueryLanguage.Afrikaans.raw
-                +QueryLanguage.Albanian.raw
+                +Language.Afrikaans.raw
+                +Language.Albanian.raw
             }
             // Query-rules
             KeyEnableRules to boolean
@@ -129,9 +132,13 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyQueryType to QueryType.PrefixLast.raw
             KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.LastWords.raw
             KeyAdvancedSyntax to boolean
+            KeyAdvancedSyntaxFeatures to jsonArray {
+                +KeyExcludeWords
+                +KeyExactPhrase
+            }
             KeyOptionalWords to jsonArray { +string }
-            KeyDisablePrefixOnAttributes to attributesJson
             KeyDisableExactOnAttributes to attributesJson
+            KeyDisablePrefixOnAttributes to attributesJson
             KeyExactOnSingleWordQuery to ExactOnSingleWordQuery.Word.raw
             KeyAlternativesAsExact to jsonArray { +AlternativesAsExact.IgnorePlurals.raw }
             // Performance
@@ -145,10 +152,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyResponseFields to jsonArray { +ResponseFields.NbHits.raw }
             KeyMaxFacetHits to int
             KeyVersion to int
-            KeyAdvancedSyntaxFeatures to jsonArray {
-                +KeyExcludeWords
-                +KeyExactPhrase
-            }
+            KeyUserData to json { unknown to unknown }
+            KeyPrimary to JsonNull
         }
     )
 

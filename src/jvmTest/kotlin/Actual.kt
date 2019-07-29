@@ -1,8 +1,12 @@
 import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.client.ClientInsights
+import com.algolia.search.client.ClientPlaces
 import com.algolia.search.client.ClientSearch
+import com.algolia.search.configuration.Compression
+import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
+import com.algolia.search.transport.Gzip
 import kotlinx.coroutines.CoroutineScope
 import java.io.File
 import java.text.SimpleDateFormat
@@ -19,8 +23,11 @@ internal actual val clientAdmin1 = ClientSearch(
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
 )
 internal actual val clientAdmin2 = ClientSearch(
-    System.getenv("ALGOLIA_APPLICATION_ID_2").toApplicationID(),
-    System.getenv("ALGOLIA_ADMIN_KEY_2").toAPIKey()
+    ConfigurationSearch(
+        System.getenv("ALGOLIA_APPLICATION_ID_2").toApplicationID(),
+        System.getenv("ALGOLIA_ADMIN_KEY_2").toAPIKey(),
+        compression = Compression.None
+    )
 )
 internal actual val clientMcm = ClientSearch(
     System.getenv("ALGOLIA_ADMIN_ID_MCM").toApplicationID(),
@@ -33,6 +40,10 @@ internal actual val clientAnalytics = ClientAnalytics(
 internal actual val clientInsights = ClientInsights(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
+)
+internal actual val clientPlaces = ClientPlaces(
+    System.getenv("ALGOLIA_PLACES_APP_ID").toApplicationID(),
+    System.getenv("ALGOLIA_PLACES_KEY").toAPIKey()
 )
 
 internal actual val username: String
@@ -64,5 +75,9 @@ internal actual object DateFormat {
 }
 
 internal actual fun loadScratch(name: String): String {
-    return File("src/commonTest/resources/$name").readText()
+    return if (File("src/commonTest/resources").exists()) {
+        File("src/commonTest/resources/$name").readText()
+    } else {
+        File("../../src/commonTest/resources/$name").readText()
+    }
 }

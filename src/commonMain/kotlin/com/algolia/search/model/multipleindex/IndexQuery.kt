@@ -12,5 +12,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 public data class IndexQuery(
     val indexName: IndexName,
-    val query: Query
+    val query: Query = Query()
 )

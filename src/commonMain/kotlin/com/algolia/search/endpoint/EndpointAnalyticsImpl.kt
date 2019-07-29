@@ -4,6 +4,7 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
+import com.algolia.search.model.request.EmptyBody
 import com.algolia.search.model.response.ResponseABTest
 import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.creation.CreationABTest
@@ -33,7 +34,13 @@ internal class EndpointAnalyticsImpl(
     }
 
     override suspend fun stopABTest(abTestID: ABTestID, requestOptions: RequestOptions?): RevisionABTest {
-        return transport.request(HttpMethod.Post, CallType.Write, "$RouteABTestsV2/$abTestID/stop", requestOptions, "")
+        return transport.request(
+            HttpMethod.Post,
+            CallType.Write,
+            "$RouteABTestsV2/$abTestID/stop",
+            requestOptions,
+            EmptyBody
+        )
     }
 
     override suspend fun deleteABTest(abTestID: ABTestID, requestOptions: RequestOptions?): DeletionABTest {

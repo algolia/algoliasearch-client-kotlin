@@ -16,7 +16,7 @@ import runBlocking
 import shouldBeTrue
 import shouldEqual
 import shouldNotBeNull
-import kotlin.test.BeforeTest
+import kotlin.test.AfterTest
 import kotlin.test.Test
 
 
@@ -26,7 +26,7 @@ internal class TestSuiteDisjunctive {
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
 
-    @BeforeTest
+    @AfterTest
     fun clean() {
         runBlocking {
             cleanIndex(clientAdmin1, suffix)

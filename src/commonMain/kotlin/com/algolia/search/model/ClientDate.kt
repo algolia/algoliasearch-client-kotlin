@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
  * Convert a [String] or [Long] date format into a platform specific Date object.
  */
 @Serializable(KSerializerClientDate::class)
-public expect class ClientDate(raw: String) : Raw<String> {
+public expect class ClientDate internal constructor(raw: String) : Raw<String> {
 
-    constructor(timestamp: Long)
+    internal constructor(timestamp: Long)
 }
