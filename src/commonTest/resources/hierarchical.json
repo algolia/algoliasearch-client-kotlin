@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Item 9",
+    "hierarchicalCategories": {
+      "lvl0": "Category3",
+      "lvl1": "Category3 > SubCategory2",
+      "lvl2": "Category3 > SubCategory2 > SubSubCategory2",
+      "lvl3": "Category3 > SubCategory2 > SubSubCategory2 > SubSubSubCategory2"
+    }
+  },
+  {
+    "name": "Item 8",
+    "hierarchicalCategories": {
+      "lvl0": "Category3",
+      "lvl1": "Category3 > SubCategory2",
+      "lvl2": "Category3 > SubCategory2 > SubSubCategory2",
+      "lvl3": "Category3 > SubCategory2 > SubSubCategory2 > SubSubSubCategory1"
+    }
+  },
+  {
+    "name": "Item 7",
+    "hierarchicalCategories": {
+      "lvl0": "Category3",
+      "lvl1": "Category3 > SubCategory2",
+      "lvl2": "Category3 > SubCategory2 > SubSubCategory2"
+    }
+  },
+  {
+    "name": "Item 6",
+    "hierarchicalCategories": {
+      "lvl0": "Category3",
+      "lvl1": "Category3 > SubCategory2",
+      "lvl2": "Category3 > SubCategory2 > SubSubCategory1"
+    }
+  },
+  {
+    "name": "Item 5",
+    "hierarchicalCategories": {
+      "lvl0": "Category3",
+      "lvl1": "Category3 > SubCategory1",
+      "lvl2": "Category3 > SubCategory1 > SubSubCategory2"
+    }
+  },
+  {
+    "name": "Item 4",
+    "hierarchicalCategories": {
+      "lvl0": "Category3",
+      "lvl1": "Category3 > SubCategory1",
+      "lvl2": "Category3 > SubCategory1 > SubSubCategory1"
+    }
+  },
+  {
+    "name": "Item 3",
+    "hierarchicalCategories": {
+      "lvl0": "Category2",
+      "lvl1": "Category2 > SubCategory2"
+    }
+  },
+  {
+    "name": "Item 2",
+    "hierarchicalCategories": {
+      "lvl0": "Category2",
+      "lvl1": "Category2 > SubCategory1"
+    }
+  },
+  {
+    "name": "Item 1",
+    "hierarchicalCategories": {
+      "lvl0": "Category1"
+    }
+  }
+]
