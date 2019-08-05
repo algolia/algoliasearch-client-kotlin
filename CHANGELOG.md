@@ -1,3 +1,8 @@
+# 1.1.2
+
+- Ktor version 1.2.3
+- Minimum version of Kotlin is now 1.3.41
+
 # 1.1.1
 
 - `Compression` is `None` by default
