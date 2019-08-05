@@ -80,9 +80,9 @@ internal class Transport(
             requestBuilder.url.host = host.url
             try {
                 return withTimeout((host.retryCount + 1) * timeout) {
-                    val response = httpClient.request<T>(requestBuilder)
-                    mutex.withLock { host.reset() }
-                    response
+                    httpClient.request<T>(requestBuilder).apply {
+                        mutex.withLock { host.reset() }
+                    }
                 }
             } catch (exception: TimeoutCancellationException) {
                 mutex.withLock { host.hasTimedOut() }

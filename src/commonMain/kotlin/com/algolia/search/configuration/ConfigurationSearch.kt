@@ -22,7 +22,7 @@ public data class ConfigurationSearch(
     override val defaultHeaders: Map<String, String>? = null,
     override val engine: HttpClientEngine? = null,
     override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
-    override val compression: Compression = Compression.Gzip
+    override val compression: Compression = Compression.None
 ) : Configuration, Credentials {
 
     override val httpClient = getHttpClient()

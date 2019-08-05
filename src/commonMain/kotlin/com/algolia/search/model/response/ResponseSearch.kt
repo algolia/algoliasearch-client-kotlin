@@ -149,7 +149,11 @@ public data class ResponseSearch(
     /**
      * Identifies the query uniquely. Can be used by [InsightsEvent].
      */
-    @SerialName(KeyQueryID) val queryIDOrNull: QueryID? = null
+    @SerialName(KeyQueryID) val queryIDOrNull: QueryID? = null,
+    /**
+     *
+     */
+    @SerialName(KeyHierarchicalFacets) val hierarchicalFacetsOrNull: Map<Attribute, List<Facet>>? = null
 ) {
 
     @Transient
@@ -263,6 +267,10 @@ public data class ResponseSearch(
     @Transient
     public val queryID: QueryID
         get() = queryIDOrNull!!
+
+    @Transient
+    public val hierarchicalFacets: Map<Attribute, List<Facet>>
+        get() = hierarchicalFacetsOrNull!!
 
     /**
      * A Hit returned by the search.
