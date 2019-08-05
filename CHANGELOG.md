@@ -1,3 +1,8 @@
+# 1.1.1
+
+- `Compression` is `None` by default
+- Added new `searchHierarchical method`
+
 # 1.1.0
 
 - Kotlin version 1.3.41
