@@ -42,8 +42,7 @@ kotlin {
         val commonMain by getting {
             kotlin.srcDirs("build/generated")
             dependencies {
-                implementation(kotlin("stdlib-common"))
-                implementation(Serialization("runtime"))
+                api(kotlin("stdlib-common"))
                 api(Ktor("client"))
                 api(Ktor("client-logging"))
                 api(Ktor("client-core"))
@@ -60,7 +59,7 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-jdk8"))
+                api(kotlin("stdlib-jdk8"))
                 api(Ktor("client-core-jvm"))
                 api(Ktor("client-json-jvm"))
                 api(Ktor("client-logging-jvm"))
