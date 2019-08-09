@@ -114,7 +114,8 @@ public data class Index internal constructor(
         disjunctiveFacets: List<Attribute> = listOf(),
         filters: Set<Filter> = setOf(),
         hierarchicalAttributes: List<Attribute> = listOf(),
-        hierarchicalFilters: List<Filter.Facet> = listOf()
+        hierarchicalFilters: List<Filter.Facet> = listOf(),
+        requestOptions: RequestOptions? = null
     ): ResponseSearch {
         val (filtersOr, filtersAnd) = filters.partition { disjunctiveFacets.contains(it.attribute) }
         val filtersOrFacet = filtersOr.filterIsInstance<Filter.Facet>()
@@ -145,7 +146,7 @@ public data class Index internal constructor(
                     .optimize()
             }
         val queries = listOf(queryForResults) + queriesForDisjunctiveFacets + queriesForHierarchicalFacets
-        val response = EndpointMultipleIndexImpl(transport).multipleQueries(queries)
+        val response = EndpointMultipleIndexImpl(transport).multipleQueries(queries, requestOptions = requestOptions)
 
         return response.aggregateResult(disjunctiveFacets.size)
     }

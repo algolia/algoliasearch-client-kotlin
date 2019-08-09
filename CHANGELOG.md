@@ -1,3 +1,13 @@
+# 1.1.2
+
+- Ktor version 1.2.3
+- Minimum version of Kotlin is now 1.3.41
+
+# 1.1.1
+
+- `Compression` is `None` by default
+- Added new `searchHierarchical method`
+
 # 1.1.0
 
 - Kotlin version 1.3.41
