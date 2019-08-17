@@ -5,6 +5,7 @@ import com.algolia.search.endpoint.*
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchRules
@@ -109,15 +110,14 @@ public data class Index internal constructor(
         return responses
     }
 
-    suspend fun searchHierarchical(
+    suspend fun advancedSearch(
         query: Query = Query(),
-        disjunctiveFacets: List<Attribute> = listOf(),
-        filters: Set<Filter> = setOf(),
-        hierarchicalAttributes: List<Attribute> = listOf(),
-        hierarchicalFilters: List<Filter.Facet> = listOf(),
+        filterGroups: Set<FilterGroup<*>> = setOf(),
         requestOptions: RequestOptions? = null
     ): ResponseSearch {
-        val (filtersOr, filtersAnd) = filters.partition { disjunctiveFacets.contains(it.attribute) }
+        val filtersAnd = filterGroups.filterIsInstance<FilterGroup.And<*>>().flatten()
+        val filtersOr = filterGroups.filterIsInstance<FilterGroup.Or<*>>().flatten()
+        val disjunctiveFacets = filtersOr.map { it.attribute }.toSet()
         val filtersOrFacet = filtersOr.filterIsInstance<Filter.Facet>()
         val filtersOrTag = filtersOr.filterIsInstance<Filter.Tag>()
         val filtersOrNumeric = filtersOr.filterIsInstance<Filter.Numeric>()
@@ -136,15 +136,22 @@ public data class Index internal constructor(
                 .setFacets(attribute)
                 .optimize()
         }
-        val queriesForHierarchicalFacets = hierarchicalAttributes
-            .take(hierarchicalFilters.size + 1)
-            .mapIndexed { index, attribute ->
-                query
-                    .toIndexQuery()
-                    .filters(filtersAnd.combine(hierarchicalFilters.getOrNull(index - 1)).minus(hierarchicalFilters.last()), filtersOrFacet, filtersOrTag, filtersOrNumeric)
-                    .setFacets(attribute)
-                    .optimize()
-            }
+        val queriesForHierarchicalFacets = filterGroups.filterIsInstance<FilterGroup.And.Hierarchical>().flatMap {
+            it.attributes
+                .take(it.path.size + 1)
+                .mapIndexed { index, attribute ->
+                    query
+                        .toIndexQuery()
+                        .filters(
+                            filtersAnd.combine(it.path.getOrNull(index - 1)).minus(it.path.last()),
+                            filtersOrFacet,
+                            filtersOrTag,
+                            filtersOrNumeric
+                        )
+                        .setFacets(attribute)
+                        .optimize()
+                }
+        }
         val queries = listOf(queryForResults) + queriesForDisjunctiveFacets + queriesForHierarchicalFacets
         val response = EndpointMultipleIndexImpl(transport).multipleQueries(queries, requestOptions = requestOptions)
 

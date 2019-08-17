@@ -20,7 +20,7 @@ internal class TestDSLTagFilters {
             }
         }
 
-        dsl shouldEqual listOf(
+        dsl shouldEqual setOf(
             FilterGroup.And.Tag(Filter.Tag(attributeA.raw), Filter.Tag(attributeB.raw))
         )
     }
@@ -37,7 +37,7 @@ internal class TestDSLTagFilters {
             }
         }
 
-        dsl shouldEqual listOf(
+        dsl shouldEqual setOf(
             FilterGroup.Or.Tag(Filter.Tag(attributeA.raw), Filter.Tag(attributeB.raw)),
             FilterGroup.Or.Tag(Filter.Tag(attributeA.raw))
         )
@@ -50,6 +50,6 @@ internal class TestDSLTagFilters {
             or { }
         }
 
-        dsl shouldEqual listOf()
+        dsl shouldEqual setOf()
     }
 }

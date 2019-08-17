@@ -1,5 +1,7 @@
 package com.algolia.search.model.filter
 
+import com.algolia.search.model.Attribute
+
 
 /**
  * Contains a [Set] of [Filter] that should be evaluated together.
@@ -62,6 +64,13 @@ public sealed class FilterGroup<T : Filter> : Set<T> {
 
             constructor(vararg filters: Filter.Numeric, name: String? = null) : this(filters.toSet(), name)
         }
+
+        public data class Hierarchical(
+            override val filters: Set<Filter.Facet>,
+            val path: List<Filter.Facet>,
+            val attributes: List<Attribute>,
+            override val name: String? = null
+        ) : And<Filter.Facet>(filters, name)
     }
 
     /**
