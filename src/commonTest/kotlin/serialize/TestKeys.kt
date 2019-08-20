@@ -353,5 +353,6 @@ internal class TestKeys {
         KeyVillage shouldEqual "village"
         KeySimilarQuery shouldEqual "similarQuery"
         KeyEnableABTest shouldEqual "enableABTest"
+        KeyAlternatives shouldEqual "alternatives"
     }
 }

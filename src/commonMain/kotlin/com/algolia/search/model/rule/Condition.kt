@@ -1,5 +1,6 @@
 package com.algolia.search.model.rule
 
+import com.algolia.search.serialize.KeyAlternatives
 import com.algolia.search.serialize.KeyAnchoring
 import com.algolia.search.serialize.KeyContext
 import com.algolia.search.serialize.KeyPattern
@@ -16,5 +17,9 @@ public data class Condition(
      * same context is specified at query time (using the ruleContexts parameter). When absent, the rule is generic
      * and always applies (provided that its other conditions are met, of course).
      */
-    @SerialName(KeyContext) val context: String? = null
+    @SerialName(KeyContext) val context: String? = null,
+    /**
+     *  Indicates if the rule can be applied with alternatives.
+     */
+    @SerialName(KeyAlternatives) val alternative: Alternatives? = null
 )
