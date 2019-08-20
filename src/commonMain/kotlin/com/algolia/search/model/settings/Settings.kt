@@ -357,11 +357,18 @@ public data class Settings(
     /**
      *  Lets you store custom data in your indices.
      */
-    @SerialName(KeyUserData) var userData: JsonObject? = null
+    @SerialName(KeyUserData) var userData: JsonObject? = null,
+    /**
+     * This parameter configures the segmentation of Japanese text at indexing time.
+     * Accepted value: [Language.Japanese]
+     * Input data to index is treated as Japanese text.
+     */
+    @SerialName(KeyIndexLanguages) var indexLanguages: List<Language>? = null
 ) {
 
     /**
      *  This parameter keeps track of which primary index (if any) a replica is connected to.
      */
-    @SerialName(KeyPrimary) val primary: IndexName? = null
+    @SerialName(KeyPrimary)
+    val primary: IndexName? = null
 }
