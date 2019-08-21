@@ -361,7 +361,7 @@ public data class Settings(
     /**
      * This parameter configures the segmentation of text at indexing time.
      * Accepted value: [Language.Japanese]
-     * Input data to index is treated as Japanese text.
+     * Input data to index is treated as the given language(s) for segmentation.
      */
     @SerialName(KeyIndexLanguages) var indexLanguages: List<Language>? = null
 ) {
