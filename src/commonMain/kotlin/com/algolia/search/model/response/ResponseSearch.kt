@@ -11,7 +11,6 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonObject
 
 
@@ -274,6 +273,10 @@ public data class ResponseSearch(
     public val hierarchicalFacets: Map<Attribute, List<Facet>>
         get() = hierarchicalFacetsOrNull!!
 
+    /**
+     * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].
+     * If the [objectID] is not found, -1 is returned.
+     */
     public fun getObjectIDPosition(objectID: ObjectID): Int {
         return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }
     }
