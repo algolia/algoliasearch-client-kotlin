@@ -3,7 +3,8 @@
     "objectID": "query_edits",
     "condition": {
       "anchoring": "is",
-      "pattern": "mobile phone"
+      "pattern": "mobile phone",
+      "alternatives": true
     },
     "consequence": {
       "params": {
