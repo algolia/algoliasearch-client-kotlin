@@ -359,7 +359,7 @@ public data class Settings(
      */
     @SerialName(KeyUserData) var userData: JsonObject? = null,
     /**
-     * This parameter configures the segmentation of Japanese text at indexing time.
+     * This parameter configures the segmentation of text at indexing time.
      * Accepted value: [Language.Japanese]
      * Input data to index is treated as Japanese text.
      */
