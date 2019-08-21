@@ -4,6 +4,7 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
+import com.algolia.search.model.response.ResponseHitsWithPosition
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.search.Cursor
@@ -121,4 +122,11 @@ public interface EndpointSearch {
         filterGroups: Set<FilterGroup<*>> = setOf(),
         requestOptions: RequestOptions? = null
     ): ResponseSearch
+
+    tailrec suspend fun findFirstObject(
+        match: (ResponseSearch.Hit) -> Boolean,
+        query: Query = Query(),
+        doNotPaginate: Boolean = false,
+        requestOptions: RequestOptions? = null
+    ): ResponseHitsWithPosition?
 }

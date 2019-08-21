@@ -3,6 +3,7 @@ package com.algolia.search.model.response
 import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.search.*
@@ -10,6 +11,7 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonObject
 
 
@@ -271,6 +273,10 @@ public data class ResponseSearch(
     @Transient
     public val hierarchicalFacets: Map<Attribute, List<Facet>>
         get() = hierarchicalFacetsOrNull!!
+
+    public fun getObjectIDPosition(objectID: ObjectID): Int {
+        return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }
+    }
 
     /**
      * A Hit returned by the search.
