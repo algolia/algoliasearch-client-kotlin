@@ -354,5 +354,6 @@ internal class TestKeys {
         KeySimilarQuery shouldEqual "similarQuery"
         KeyEnableABTest shouldEqual "enableABTest"
         KeyAlternatives shouldEqual "alternatives"
+        KeyIndexLanguages shouldEqual "indexLanguages"
     }
 }
