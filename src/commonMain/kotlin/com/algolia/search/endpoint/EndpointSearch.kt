@@ -3,6 +3,7 @@ package com.algolia.search.endpoint
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.search.Cursor
@@ -108,17 +109,16 @@ public interface EndpointSearch {
     /**
      * Perform a [EndpointMultipleIndex.multipleQueries] and aggregate the results into a single [ResponseSearch].
      * The aggregated result will have a correct [com.algolia.search.model.search.Facet.count] for [Attribute] that are
-     * marked as disjunctive.
+     * marked as disjunctive, and will populate [ResponseSearch.hierarchicalFacets] if a [FilterGroup.And.Hierarchical]
+     * is present in [filterGroups]
      *
      * @param query The [Query] used to search.
-     * @param disjunctiveFacets List of [Attribute] that are marked as disjunctive facets.
-     * @param filters The [Filter] to be applied.
+     * @param filterGroups List of [FilterGroup] to apply to the query.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun searchDisjunctiveFacets(
-        query: Query,
-        disjunctiveFacets: List<Attribute>,
-        filters: Set<Filter>,
+    suspend fun advancedSearch(
+        query: Query = Query(),
+        filterGroups: Set<FilterGroup<*>> = setOf(),
         requestOptions: RequestOptions? = null
     ): ResponseSearch
 }
