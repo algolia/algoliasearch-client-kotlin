@@ -128,7 +128,7 @@ public interface EndpointSearch {
      *  would match against the given [match] function.
      *  If no object has been found within the first result set, the function
      *  will perform a new search operation on the next page of results, if any,
-     *  until a matching object is found or the end of results, whichever
+     *  until a matching object is found or the end of results is reached, whichever
      *  happens first.
      *  [doNotPaginate] will stop the function at the end of the first page of search results even if no object does
      *  match.
