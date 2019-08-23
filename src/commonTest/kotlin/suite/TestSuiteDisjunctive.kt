@@ -3,6 +3,7 @@ package suite
 import clientAdmin1
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.get
@@ -48,12 +49,14 @@ internal class TestSuiteDisjunctive {
                 query = "phone",
                 facets = facets
             )
-            val disjunctiveFacets = listOf(brand)
             val filters = setOf(
                 Filter.Facet(brand, "Apple"),
                 Filter.Facet(brand, "Samsung"),
-                Filter.Facet(brand, "Commas' voice, Ltd"),
-                Filter.Facet(category, "device")
+                Filter.Facet(brand, "Commas' voice, Ltd")
+            )
+            val filterGroups = setOf(
+                FilterGroup.Or.Facet(filters),
+                FilterGroup.And.Facet( Filter.Facet(category, "device"))
             )
 
             index.apply {
@@ -64,7 +67,7 @@ internal class TestSuiteDisjunctive {
 
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
             }
-            index.searchDisjunctiveFacets(query, disjunctiveFacets, filters).let {
+            index.advancedSearch(query, filterGroups).let {
                 it.nbHits shouldEqual 4
                 it.disjunctiveFacetsOrNull.shouldNotBeNull()
                 it.disjunctiveFacets[brand, "Apple"] shouldEqual 2
@@ -92,8 +95,8 @@ internal class TestSuiteDisjunctive {
                 query = "h",
                 facets = setOf(city)
             )
-            val disjunctiveFacets = listOf(stars, facilities)
             val filters = mutableSetOf<Filter.Facet>()
+            val filterCity = FilterGroup.And.Facet(Filter.Facet(city, "Paris"))
 
             index.apply {
                 val tasks = mutableListOf<Task>()
@@ -103,73 +106,44 @@ internal class TestSuiteDisjunctive {
 
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
             }
-            index.searchDisjunctiveFacets(query, disjunctiveFacets, filters).let {
+            index.advancedSearch(query).let {
                 it.nbHits shouldEqual 5
                 it.facets.size shouldEqual 1
-                it.disjunctiveFacets.size shouldEqual 2
                 it.exhaustiveFacetsCount.shouldBeTrue()
-                it.disjunctiveFacets.apply {
-                    this[stars, "1"] shouldEqual 2
-                    this[stars, "2"] shouldEqual 1
-                    this[stars, "4"] shouldEqual 2
-                }
-                it.disjunctiveFacets.apply {
-                    this[facilities, "spa"] shouldEqual 3
-                    this[facilities, "bath"] shouldEqual 2
-                    this[facilities, "wifi"] shouldEqual 2
-                }
-                it.facetStats.size shouldEqual 1
-                it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 12f)
             }
             filters += Filter.Facet(stars, "1")
-            index.searchDisjunctiveFacets(query, disjunctiveFacets, filters).let {
+            index.advancedSearch(query, setOf(FilterGroup.Or.Facet(filters))).let {
                 it.nbHits shouldEqual 2
                 it.facets.size shouldEqual 1
-                it.disjunctiveFacets.size shouldEqual 2
+                it.disjunctiveFacets.size shouldEqual 1
                 it.disjunctiveFacets.apply {
                     this[stars, "1"] shouldEqual 2
                     this[stars, "2"] shouldEqual 1
                     this[stars, "4"] shouldEqual 2
                 }
-                it.disjunctiveFacets.apply {
-                    this[facilities, "spa"] shouldEqual 1
-                    this[facilities, "bath"] shouldEqual 1
-                    this[facilities, "wifi"] shouldEqual 2
-                }
                 it.exhaustiveFacetsCount.shouldBeTrue()
                 it.facetStats.size shouldEqual 1
                 it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 12f)
             }
-            filters += Filter.Facet(city, "Paris")
-            index.searchDisjunctiveFacets(query, disjunctiveFacets, filters).let {
+            index.advancedSearch(query, setOf(FilterGroup.Or.Facet(filters), filterCity)).let {
                 it.nbHits shouldEqual 2
                 it.facets.size shouldEqual 1
-                it.disjunctiveFacets.size shouldEqual 2
+                it.disjunctiveFacets.size shouldEqual 1
                 it.disjunctiveFacets.apply {
                     this[stars, "1"] shouldEqual 2
                     this[stars, "4"] shouldEqual 1
-                }
-                it.disjunctiveFacets.apply {
-                    this[facilities, "spa"] shouldEqual 1
-                    this[facilities, "bath"] shouldEqual 1
-                    this[facilities, "wifi"] shouldEqual 2
                 }
                 it.facetStats.size shouldEqual 1
                 it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 6f)
             }
             filters += Filter.Facet(stars, "4")
-            index.searchDisjunctiveFacets(query, disjunctiveFacets, filters).let {
+            index.advancedSearch(query, setOf(FilterGroup.Or.Facet(filters), filterCity)).let {
                 it.nbHits shouldEqual 3
                 it.facets.size shouldEqual 1
-                it.disjunctiveFacets.size shouldEqual 2
+                it.disjunctiveFacets.size shouldEqual 1
                 it.disjunctiveFacets.apply {
                     this[stars, "1"] shouldEqual 2
                     this[stars, "4"] shouldEqual 1
-                }
-                it.disjunctiveFacets.apply {
-                    this[facilities, "spa"] shouldEqual 2
-                    this[facilities, "bath"] shouldEqual 1
-                    this[facilities, "wifi"] shouldEqual 2
                 }
                 it.facetStats.size shouldEqual 1
                 it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 6f)
