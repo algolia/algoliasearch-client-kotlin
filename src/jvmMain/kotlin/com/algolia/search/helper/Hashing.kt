@@ -20,3 +20,7 @@ internal actual fun String.sha256(key: String): String {
 internal actual fun String.encodeBase64(): String {
     return String(Base64.getEncoder().encode(toByteArray()))
 }
+
+internal actual fun String.decodeBase64(): String {
+    return String(Base64.getDecoder().decode(this))
+}
