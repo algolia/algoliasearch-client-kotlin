@@ -3,6 +3,7 @@ package com.algolia.search.model.response
 import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.search.*
@@ -271,6 +272,14 @@ public data class ResponseSearch(
     @Transient
     public val hierarchicalFacets: Map<Attribute, List<Facet>>
         get() = hierarchicalFacetsOrNull!!
+
+    /**
+     * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].
+     * If the [objectID] is not found, -1 is returned.
+     */
+    public fun getObjectIDPosition(objectID: ObjectID): Int {
+        return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }
+    }
 
     /**
      * A Hit returned by the search.

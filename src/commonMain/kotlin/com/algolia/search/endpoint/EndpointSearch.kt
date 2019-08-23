@@ -2,8 +2,8 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
+import com.algolia.search.model.response.ResponseHitWithPosition
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.search.Cursor
@@ -121,4 +121,26 @@ public interface EndpointSearch {
         filterGroups: Set<FilterGroup<*>> = setOf(),
         requestOptions: RequestOptions? = null
     ): ResponseSearch
+
+    /**
+     *  Search iteratively through the search response [ResponseSearch.hits] field to find the first response hit that
+     *  would match against the given [match] function.
+     *  If no object has been found within the first result set, the function
+     *  will perform a new search operation on the next page of results, if any,
+     *  until a matching object is found or the end of results is reached, whichever
+     *  happens first.
+     *  [doNotPaginate] will stop the function at the end of the first page of search results even if no object does
+     *  match.
+     *
+     *  @param match Predicate to match a given [ResponseSearch.Hit]
+     *  @param query The [Query] used to search.
+     *  @param doNotPaginate To prevent the iteration through pages of results.
+     *  @param requestOptions Configure request locally with [RequestOptions].
+     */
+    tailrec suspend fun findFirstObject(
+        match: (ResponseSearch.Hit) -> Boolean,
+        query: Query = Query(),
+        doNotPaginate: Boolean = false,
+        requestOptions: RequestOptions? = null
+    ): ResponseHitWithPosition?
 }

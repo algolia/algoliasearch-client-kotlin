@@ -9,6 +9,7 @@ import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.request.RequestParams
+import com.algolia.search.model.response.ResponseHitWithPosition
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.response.ResponseSearches
@@ -32,6 +33,23 @@ internal class EndpointSearchImpl(
         val body = query.toBody()
 
         return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/query"), requestOptions, body)
+    }
+
+    override tailrec suspend fun findFirstObject(
+        match: (ResponseSearch.Hit) -> Boolean,
+        query: Query,
+        doNotPaginate: Boolean,
+        requestOptions: RequestOptions?
+    ): ResponseHitWithPosition? {
+        val response = search(query, requestOptions)
+        val hit = response.hits.find(match)
+        val hasNextPage = response.page + 1 < response.nbPages
+
+        return if (hit != null) {
+            ResponseHitWithPosition(hit, response.hits.indexOf(hit), response.page)
+        } else if (!doNotPaginate && hasNextPage) {
+            findFirstObject(match, query.copy(page = (query.page ?: 0) + 1), doNotPaginate, requestOptions)
+        } else null
     }
 
     override suspend fun browse(query: Query, requestOptions: RequestOptions?): ResponseSearch {
