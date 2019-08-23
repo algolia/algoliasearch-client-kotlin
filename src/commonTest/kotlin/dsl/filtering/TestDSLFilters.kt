@@ -144,7 +144,7 @@ internal class TestDSLFilters {
             }
         }
 
-        FilterGroupsConverter.SQL.Unquoted(dsl) shouldEqual "(_tags:attributeA OR _tags:attributeB) AND (_tags:attributeA OR _tags:attributeB)"
+        FilterGroupsConverter.SQL.Unquoted(dsl) shouldEqual "(_tags:attributeA OR _tags:attributeB)"
     }
 
     @Test
