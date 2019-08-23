@@ -124,7 +124,7 @@ public interface EndpointSearch {
     ): ResponseSearch
 
     /**
-     *  Search iteratively through the search response [ResponseSearch.hits] field to find the first response hit tha
+     *  Search iteratively through the search response [ResponseSearch.hits] field to find the first response hit that
      *  would match against the give [match] function.
      *  If no object has been found within the first result set, the function
      *  will perform a new search operation on the next page of results, if any,
