@@ -11,7 +11,7 @@ import com.algolia.search.model.filter.FilterGroup
  */
 @DSLParameters
 public class DSLFacetFilters(
-    private val groups: MutableList<FilterGroup<Filter.Facet>> = mutableListOf()
+    private val groups: MutableSet<FilterGroup<Filter.Facet>> = mutableSetOf()
 ) {
 
     /**
@@ -35,10 +35,10 @@ public class DSLFacetFilters(
         +FilterGroup.Or.Facet(DSLGroupFacet(block))
     }
 
-    public companion object : DSL<DSLFacetFilters, List<FilterGroup<Filter.Facet>>> {
+    public companion object : DSL<DSLFacetFilters, Set<FilterGroup<Filter.Facet>>> {
 
-        override operator fun invoke(block: DSLFacetFilters.() -> Unit): List<FilterGroup<Filter.Facet>> {
-            return DSLFacetFilters().apply(block).groups.toList()
+        override operator fun invoke(block: DSLFacetFilters.() -> Unit): Set<FilterGroup<Filter.Facet>> {
+            return DSLFacetFilters().apply(block).groups
         }
     }
 }

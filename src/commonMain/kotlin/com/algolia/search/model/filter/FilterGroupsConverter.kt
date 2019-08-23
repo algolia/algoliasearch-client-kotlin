@@ -10,9 +10,9 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
      * Converts a [List] of [FilterGroup] to its SQL-like [String] representation.
      * Returns null if the list is empty.
      */
-    public object SQL : FilterGroupsConverter<List<FilterGroup<*>>, String?>() {
+    public object SQL : FilterGroupsConverter<Set<FilterGroup<*>>, String?>() {
 
-        override fun invoke(groups: List<FilterGroup<*>>): String? {
+        override fun invoke(groups: Set<FilterGroup<*>>): String? {
             return if (groups.isNotEmpty()) {
                 groups.joinToString(separator = " AND ") { group ->
                     val separator = when (group) {
@@ -27,9 +27,9 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
         /**
          * Same as [SQL], but removes quotes for readability purposes.
          */
-        public object Unquoted : FilterGroupsConverter<List<FilterGroup<*>>, String?>() {
+        public object Unquoted : FilterGroupsConverter<Set<FilterGroup<*>>, String?>() {
 
-            override fun invoke(groups: List<FilterGroup<*>>): String? {
+            override fun invoke(groups: Set<FilterGroup<*>>): String? {
                 return SQL(groups)?.replace("\"", "")
             }
         }
@@ -38,12 +38,11 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
     /**
      * Converts a [List] of [FilterGroup] to its legacy representation.
      */
-    public sealed class Legacy<T : Filter> : FilterGroupsConverter<List<FilterGroup<T>>, List<List<String>>>() {
+    public sealed class Legacy<T : Filter> : FilterGroupsConverter<Set<FilterGroup<T>>, List<List<String>>>() {
 
-        override fun invoke(groups: List<FilterGroup<T>>): List<List<String>> {
+        override fun invoke(groups: Set<FilterGroup<T>>): List<List<String>> {
             val (andEntries, orEntries) = groups.partition { it is FilterGroup.And }
-            val ands =
-                andEntries.flatMap { group -> group.flatMap { FilterConverter.Legacy(it) } }.map { listOf(it) }
+            val ands = andEntries.flatMap { group -> group.flatMap { FilterConverter.Legacy(it) } }.map { listOf(it) }
             val ors = orEntries.map { group -> group.flatMap { FilterConverter.Legacy(it) } }
 
             return ands + ors

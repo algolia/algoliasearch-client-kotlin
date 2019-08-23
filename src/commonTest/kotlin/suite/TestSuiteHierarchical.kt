@@ -3,6 +3,7 @@ package suite
 import clientAdmin1
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.search.Facet
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
@@ -67,24 +68,29 @@ internal class TestSuiteHierarchical {
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
             }
 
-            val hierarchicalAttributes = listOf(
+            val attributes = listOf(
                 hierarchicalCategoryLvl0,
                 hierarchicalCategoryLvl1,
                 hierarchicalCategoryLvl2,
                 hierarchicalCategoryLvl3
             )
-            val hierarchicalFilters = listOf(
+            val path = listOf(
                 Filter.Facet(hierarchicalCategoryLvl0, category3),
                 Filter.Facet(hierarchicalCategoryLvl1, category3Sub2),
                 Filter.Facet(hierarchicalCategoryLvl2, category3Sub2Sub2)
             )
-
-            val response = index.searchHierarchical(
-                disjunctiveFacets = listOf(color),
-                filters = setOf(Filter.Facet(hierarchicalCategoryLvl2, category3Sub2Sub2), Filter.Facet(color, "red")),
-                hierarchicalAttributes = hierarchicalAttributes,
-                hierarchicalFilters = hierarchicalFilters
+            val filterGroups = setOf(
+                FilterGroup.Or.Facet(
+                    Filter.Facet(color, "red")
+                ),
+                FilterGroup.And.Hierarchical(
+                    filters = setOf(Filter.Facet(hierarchicalCategoryLvl2, category3Sub2Sub2)),
+                    path = path,
+                    attributes = attributes
+                )
             )
+
+            val response = index.advancedSearch(filterGroups = filterGroups)
 
             response.hierarchicalFacets shouldEqual mapOf(
                 hierarchicalCategoryLvl0 to listOf(Facet(category3, 4), Facet(category2, 1)),
@@ -120,22 +126,25 @@ internal class TestSuiteHierarchical {
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
             }
 
-            val hierarchicalAttributes = listOf(
+            val attributes = listOf(
                 hierarchicalCategoryLvl0,
                 hierarchicalCategoryLvl1,
                 hierarchicalCategoryLvl2,
                 hierarchicalCategoryLvl3
             )
-            val hierarchicalFilters = listOf(
+            val path = listOf(
                 Filter.Facet(hierarchicalCategoryLvl0, category3),
                 Filter.Facet(hierarchicalCategoryLvl1, category3Sub2),
                 Filter.Facet(hierarchicalCategoryLvl2, category3Sub2Sub2)
             )
-            val response = index.searchHierarchical(
-                filters = setOf(Filter.Facet(hierarchicalCategoryLvl2, category3Sub2Sub2)),
-                hierarchicalAttributes = hierarchicalAttributes,
-                hierarchicalFilters = hierarchicalFilters
+            val filterGroups = setOf(
+                FilterGroup.And.Hierarchical(
+                    filters = setOf(Filter.Facet(hierarchicalCategoryLvl2, category3Sub2Sub2)),
+                    path = path,
+                    attributes = attributes
+                )
             )
+            val response = index.advancedSearch(filterGroups = filterGroups)
 
             response.hierarchicalFacets shouldEqual mapOf(
                 hierarchicalCategoryLvl0 to listOf(Facet(category3, 6), Facet(category2, 2), Facet(category1, 1)),
@@ -165,21 +174,24 @@ internal class TestSuiteHierarchical {
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
             }
 
-            val hierarchicalAttributes = listOf(
+            val attributes = listOf(
                 hierarchicalCategoryLvl0,
                 hierarchicalCategoryLvl1,
                 hierarchicalCategoryLvl2,
                 hierarchicalCategoryLvl3
             )
-            val hierarchicalFilters = listOf(
+            val path = listOf(
                 Filter.Facet(hierarchicalCategoryLvl0, category3)
             )
-
-            val response = index.searchHierarchical(
-                filters = setOf(Filter.Facet(hierarchicalCategoryLvl0, category3)),
-                hierarchicalAttributes = hierarchicalAttributes,
-                hierarchicalFilters = hierarchicalFilters
+            val filterGroups = setOf(
+                FilterGroup.And.Hierarchical(
+                    filters = setOf(Filter.Facet(hierarchicalCategoryLvl0, category3)),
+                    attributes = attributes,
+                    path = path
+                )
             )
+
+            val response = index.advancedSearch(filterGroups = filterGroups)
 
             response.hierarchicalFacets shouldEqual mapOf(
                 hierarchicalCategoryLvl0 to listOf(Facet(category3, 8), Facet(category2, 3), Facet(category1, 1)),
@@ -207,7 +219,7 @@ internal class TestSuiteHierarchical {
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
             }
 
-            index.searchHierarchical()
+            index.advancedSearch()
         }
     }
 }
