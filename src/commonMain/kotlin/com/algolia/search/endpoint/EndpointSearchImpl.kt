@@ -9,7 +9,7 @@ import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.request.RequestParams
-import com.algolia.search.model.response.ResponseHitsWithPosition
+import com.algolia.search.model.response.ResponseHitWithPosition
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.response.ResponseSearches
@@ -40,13 +40,13 @@ internal class EndpointSearchImpl(
         query: Query,
         doNotPaginate: Boolean,
         requestOptions: RequestOptions?
-    ): ResponseHitsWithPosition? {
+    ): ResponseHitWithPosition? {
         val response = search(query, requestOptions)
         val hit = response.hits.find(match)
         val hasNextPage = response.page + 1 < response.nbPages
 
         return if (hit != null) {
-            ResponseHitsWithPosition(hit, response.hits.indexOf(hit), response.page)
+            ResponseHitWithPosition(hit, response.hits.indexOf(hit), response.page)
         } else if (!doNotPaginate && hasNextPage) {
             findFirstObject(match, query.copy(page = (query.page ?: 0) + 1), doNotPaginate, requestOptions)
         } else null

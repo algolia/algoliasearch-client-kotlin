@@ -2,9 +2,8 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
-import com.algolia.search.model.response.ResponseHitsWithPosition
+import com.algolia.search.model.response.ResponseHitWithPosition
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.search.Cursor
@@ -143,5 +142,5 @@ public interface EndpointSearch {
         query: Query = Query(),
         doNotPaginate: Boolean = false,
         requestOptions: RequestOptions? = null
-    ): ResponseHitsWithPosition?
+    ): ResponseHitWithPosition?
 }

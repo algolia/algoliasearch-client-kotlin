@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-public data class ResponseHitsWithPosition(
+public data class ResponseHitWithPosition(
     val hit: ResponseSearch.Hit,
     val position: Int,
     val page: Int
