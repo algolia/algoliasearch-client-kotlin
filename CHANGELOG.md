@@ -1,3 +1,14 @@
+# 1.1.3
+
+- Removed `Index.searchDisjunctiveFacets` method
+- New `Index.advancedSearch` for both disjunctive and hierarchical search
+- New `FilterGroup.And.Hierarchical` class
+- New `getSecuredApiKeyRemainingValidity` method on `APIKey`
+- New `indexLanguages` field in `Settings`
+- New `alternative` field in `Rule.condition`
+- New `ResponseSearch.Hit.getObjectIDPosition` method
+- New `findFirstObject` method
+
 # 1.1.2
 
 - Ktor version 1.2.3

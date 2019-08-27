@@ -6,11 +6,15 @@ import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.request.RequestParams
+import com.algolia.search.model.response.ResponseHitWithPosition
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets
+import com.algolia.search.model.response.ResponseSearches
 import com.algolia.search.model.search.Cursor
+import com.algolia.search.model.search.Facet
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
@@ -29,6 +33,23 @@ internal class EndpointSearchImpl(
         val body = query.toBody()
 
         return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/query"), requestOptions, body)
+    }
+
+    override tailrec suspend fun findFirstObject(
+        match: (ResponseSearch.Hit) -> Boolean,
+        query: Query,
+        doNotPaginate: Boolean,
+        requestOptions: RequestOptions?
+    ): ResponseHitWithPosition? {
+        val response = search(query, requestOptions)
+        val hit = response.hits.find(match)
+        val hasNextPage = response.page + 1 < response.nbPages
+
+        return if (hit != null) {
+            ResponseHitWithPosition(hit, response.hits.indexOf(hit), response.page)
+        } else if (!doNotPaginate && hasNextPage) {
+            findFirstObject(match, query.copy(page = (query.page ?: 0) + 1), doNotPaginate, requestOptions)
+        } else null
     }
 
     override suspend fun browse(query: Query, requestOptions: RequestOptions?): ResponseSearch {
@@ -61,67 +82,118 @@ internal class EndpointSearchImpl(
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }
 
-    override suspend fun searchDisjunctiveFacets(
+    override suspend fun advancedSearch(
         query: Query,
-        disjunctiveFacets: List<Attribute>,
-        filters: Set<Filter>,
+        filterGroups: Set<FilterGroup<*>>,
         requestOptions: RequestOptions?
     ): ResponseSearch {
-        val (filtersOr, filtersAnd) = filters.partition { disjunctiveFacets.contains(it.attribute) }
-        val queryAnd = buildAndQueries(query, filtersAnd, filtersOr)
-        val queriesOr = buildOrQueries(query, filtersAnd, filtersOr, disjunctiveFacets)
-        val results = EndpointMultipleIndexImpl(transport).multipleQueries(queryAnd.plus(queriesOr)).results
-        val resultAnd = results.first()
-        val resultsOr = results.subList(1, results.size)
-        val facets = resultsOr.map { it.facets.toMutableMap() }.reduce { acc, map -> acc.apply { this += map } }
-        val facetStats = mutableMapOf<Attribute, FacetStats>()
-
-        resultAnd.facetStatsOrNull?.let { facetStats += it }
-        resultsOr.forEach { result ->
-            result.facetStatsOrNull?.let { facetStats += it }
+        val filtersAnd = filterGroups.filterIsInstance<FilterGroup.And<*>>().flatten()
+        val filtersOr = filterGroups.filterIsInstance<FilterGroup.Or<*>>().flatten()
+        val disjunctiveFacets = filtersOr.map { it.attribute }.toSet()
+        val filtersOrFacet = filtersOr.filterIsInstance<Filter.Facet>()
+        val filtersOrTag = filtersOr.filterIsInstance<Filter.Tag>()
+        val filtersOrNumeric = filtersOr.filterIsInstance<Filter.Numeric>()
+        val queryForResults = query
+            .toIndexQuery()
+            .filters(filtersAnd, filtersOrFacet, filtersOrTag, filtersOrNumeric)
+        val queriesForDisjunctiveFacets = disjunctiveFacets.map { attribute ->
+            query
+                .toIndexQuery()
+                .filters(
+                    filtersAnd,
+                    filtersOrFacet.filter { it.attribute != attribute },
+                    filtersOrTag,
+                    filtersOrNumeric
+                )
+                .setFacets(attribute)
+                .optimize()
         }
-        return resultAnd.copy(
+        val queriesForHierarchicalFacets = filterGroups.filterIsInstance<FilterGroup.And.Hierarchical>().flatMap {
+            it.attributes
+                .take(it.path.size + 1)
+                .mapIndexed { index, attribute ->
+                    query
+                        .toIndexQuery()
+                        .filters(
+                            filtersAnd.combine(it.path.getOrNull(index - 1)).minus(it.path.last()),
+                            filtersOrFacet,
+                            filtersOrTag,
+                            filtersOrNumeric
+                        )
+                        .setFacets(attribute)
+                        .optimize()
+                }
+        }
+        val queries = listOf(queryForResults) + queriesForDisjunctiveFacets + queriesForHierarchicalFacets
+        val response = EndpointMultipleIndexImpl(transport).multipleQueries(queries, requestOptions = requestOptions)
+
+        return response.aggregateResult(disjunctiveFacets.size)
+    }
+
+    private fun List<ResponseSearch>.aggregateFacets(): Map<Attribute, List<Facet>> {
+        return fold(mapOf()) { acc, result ->
+            result.facetsOrNull?.let { acc + it } ?: acc
+        }
+    }
+
+    private fun List<ResponseSearch>.aggregateFacetStats(): Map<Attribute, FacetStats> {
+        return fold(mapOf()) { acc, result ->
+            result.facetStatsOrNull?.let { acc + it } ?: acc
+        }
+    }
+
+    private fun List<Filter>.combine(hierarchicalFilter: Filter.Facet?): List<Filter> {
+        return hierarchicalFilter?.let { this + it } ?: this
+    }
+
+    private fun ResponseSearches.aggregateResult(disjunctiveFacetCount: Int): ResponseSearch {
+        val resultsDisjunctiveFacets = results.subList(1, 1 + disjunctiveFacetCount)
+        val resultHierarchicalFacets = results.subList(1 + disjunctiveFacetCount, results.size)
+        val facets = resultsDisjunctiveFacets.aggregateFacets()
+        val facetStats = results.aggregateFacetStats()
+        val hierarchicalFacets = resultHierarchicalFacets.aggregateFacets()
+
+        return results.first().copy(
+            facetStatsOrNull = if (facetStats.isEmpty()) null else facetStats,
             disjunctiveFacetsOrNull = facets,
-            exhaustiveFacetsCountOrNull = resultsOr.any { it.exhaustiveFacetsCountOrNull == true },
-            facetStatsOrNull = if (facetStats.isEmpty()) null else facetStats
+            hierarchicalFacetsOrNull = if (hierarchicalFacets.isEmpty()) null else hierarchicalFacets,
+            exhaustiveFacetsCountOrNull = resultsDisjunctiveFacets.all { it.exhaustiveFacetsCountOrNull == true }
         )
     }
 
-    private fun buildAndQueries(
-        query: Query,
-        filtersAnd: List<Filter>,
-        filtersOr: List<Filter>
-    ): List<IndexQuery> {
-        return query.copy().apply {
-            filters {
-                and { +filtersAnd }
-                orFacet { +filtersOr.filterIsInstance<Filter.Facet>() }
-                orTag { +filtersOr.filterIsInstance<Filter.Tag>() }
-                orNumeric { +filtersOr.filterIsInstance<Filter.Numeric>() }
-            }
-        }.let { listOf(IndexQuery(indexName, it)) }
+    private fun IndexQuery.optimize(): IndexQuery {
+        query.apply {
+            attributesToRetrieve = listOf()
+            attributesToHighlight = listOf()
+            hitsPerPage = 0
+            analytics = false
+        }
+        return this
     }
 
-    private fun buildOrQueries(
-        query: Query,
+    private fun Query.toIndexQuery(): IndexQuery {
+        return IndexQuery(indexName, copy())
+    }
+
+    private fun IndexQuery.filters(
         filtersAnd: List<Filter>,
-        filtersOr: List<Filter>,
-        disjunctiveFacets: List<Attribute>
-    ): List<IndexQuery> {
-        return disjunctiveFacets.map { attribute ->
-            query.copy().apply {
-                facets = setOf(attribute)
-                attributesToRetrieve = listOf()
-                attributesToHighlight = listOf()
-                hitsPerPage = 0
-                analytics = false
-                filters {
-                    and { +filtersAnd }
-                    orFacet { +filtersOr.filterIsInstance<Filter.Facet>().filter { it.attribute != attribute } }
-                    orTag { +filtersOr.filterIsInstance<Filter.Tag>() }
-                    orNumeric { +filtersOr.filterIsInstance<Filter.Numeric>() }
-                }
+        filtersOrFacet: List<Filter.Facet>,
+        filtersOrTag: List<Filter.Tag>,
+        filtersOrNumeric: List<Filter.Numeric>
+    ): IndexQuery {
+        query.apply {
+            filters {
+                and { +filtersAnd }
+                orFacet { +filtersOrFacet }
+                orTag { +filtersOrTag }
+                orNumeric { +filtersOrNumeric }
             }
-        }.map { IndexQuery(indexName, it) }
+        }
+        return this
+    }
+
+    private fun IndexQuery.setFacets(facet: Attribute?): IndexQuery {
+        if (facet != null) query.facets = setOf(facet)
+        return this
     }
 }

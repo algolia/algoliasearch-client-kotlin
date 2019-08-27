@@ -104,5 +104,9 @@ public sealed class SettingsKey(override val raw: String) : Raw<String> {
 
     public object MaxFacetHits : SettingsKey(KeyMaxFacetHits)
 
+    public object UserData: SettingsKey(KeyUserData)
+
+    public object IndexLanguages: SettingsKey(KeyIndexLanguages)
+
     public data class Other(override val raw: String) : SettingsKey(raw)
 }

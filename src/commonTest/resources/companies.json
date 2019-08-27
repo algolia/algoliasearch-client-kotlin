@@ -1,11 +1,13 @@
 [
   {
     "company": "Algolia",
-    "name": "Julien Lemoine"
+    "name": "Julien Lemoine",
+    "objectID": "julien-lemoine"
   },
   {
     "company": "Algolia",
-    "name": "Nicolas Dessaigne"
+    "name": "Nicolas Dessaigne",
+    "objectID": "nicolas-dessaigne"
   },
   {
     "company": "Amazon",

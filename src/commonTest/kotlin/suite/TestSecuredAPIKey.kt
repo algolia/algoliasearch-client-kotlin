@@ -3,13 +3,18 @@ package suite
 import clientAdmin1
 import clientSearch
 import com.algolia.search.client.ClientSearch
+import com.algolia.search.model.APIKey
+import com.algolia.search.model.IndexName
 import com.algolia.search.model.Time
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
+import com.algolia.search.model.apikey.generateSecuredAPIKey
+import com.algolia.search.model.apikey.getSecuredApiKeyRemainingValidity
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.features.ResponseException
 import kotlinx.serialization.json.json
 import runBlocking
+import shouldBeTrue
 import shouldEqual
 import shouldFailWith
 import kotlin.test.BeforeTest
@@ -52,5 +57,37 @@ internal class TestSecuredAPIKey {
                 shouldFailWith<ResponseException> { initIndex(indexNameDev).search() }
             }
         }
+    }
+
+    @Test
+    fun expiredKey() {
+        val restrictions = SecuredAPIKeyRestriction(
+            validUntil = Time.getCurrentTimeMillis() - 600,
+            restrictIndices = listOf(IndexName("index"))
+        )
+        val key = APIKey("parentKey").generateSecuredAPIKey(restrictions)
+
+        (key.getSecuredApiKeyRemainingValidity() < 0).shouldBeTrue()
+    }
+
+    @Test
+    fun validKey() {
+        val restrictions = SecuredAPIKeyRestriction(
+            validUntil = Time.getCurrentTimeMillis() + 600,
+            restrictIndices = listOf(IndexName("index"))
+        )
+        val key = APIKey("parentKey").generateSecuredAPIKey(restrictions)
+
+        (key.getSecuredApiKeyRemainingValidity() > 0).shouldBeTrue()
+    }
+
+    @Test
+    fun remainingValidityParameter() {
+        val restrictions = SecuredAPIKeyRestriction(
+            restrictIndices = listOf(IndexName("index"))
+        )
+        val key = APIKey("parentKey").generateSecuredAPIKey(restrictions)
+
+        shouldFailWith<IllegalArgumentException> { key.getSecuredApiKeyRemainingValidity() }
     }
 }

@@ -20,7 +20,7 @@ internal class TestDSLFacetFilters {
             }
         }
 
-        dsl shouldEqual listOf(
+        dsl shouldEqual setOf(
             FilterGroup.And.Facet(Filter.Facet(attributeA, 0), Filter.Facet(attributeA, 1))
         )
     }
@@ -37,7 +37,7 @@ internal class TestDSLFacetFilters {
             }
         }
 
-        dsl shouldEqual listOf(
+        dsl shouldEqual setOf(
             FilterGroup.Or.Facet(Filter.Facet(attributeA, 0), Filter.Facet(attributeB, 1)),
             FilterGroup.Or.Facet(Filter.Facet(attributeA, 0))
         )
@@ -50,6 +50,6 @@ internal class TestDSLFacetFilters {
             or { }
         }
 
-        dsl shouldEqual listOf()
+        dsl shouldEqual setOf()
     }
 }

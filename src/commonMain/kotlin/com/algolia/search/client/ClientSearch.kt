@@ -3,13 +3,11 @@ package com.algolia.search.client
 import com.algolia.search.configuration.*
 import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.endpoint.*
+import com.algolia.search.helper.decodeBase64
 import com.algolia.search.helper.encodeBase64
 import com.algolia.search.helper.sha256
 import com.algolia.search.helper.toAPIKey
-import com.algolia.search.model.APIKey
-import com.algolia.search.model.ApplicationID
-import com.algolia.search.model.IndexName
-import com.algolia.search.model.LogType
+import com.algolia.search.model.*
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
@@ -172,6 +170,27 @@ public class ClientSearch private constructor(
             val hash = parentAPIKey.raw.sha256(restrictionString)
 
             return "$hash$restrictionString".encodeBase64().toAPIKey()
+        }
+
+        /**
+         * Gets how many milliseconds are left before the secured API key expires.
+         *
+         * @param apiKey The secured API Key to check.
+         * @return Milliseconds left before the secured API key expires.
+         * @throws IllegalArgumentException if [apiKey] doesn't have a [SecuredAPIKeyRestriction.validUntil].
+         */
+        public fun getSecuredApiKeyRemainingValidity(apiKey: APIKey): Long {
+            val decoded = apiKey.raw.decodeBase64()
+            val pattern = Regex("validUntil=(\\d+)")
+            val match = pattern.find(decoded)
+
+            return if (match != null) {
+                val timestamp = match.groupValues[1].toLong()
+
+                timestamp - Time.getCurrentTimeMillis()
+            } else {
+                throw IllegalArgumentException("The Secured API Key doesn't have a validUntil parameter.");
+            }
         }
     }
 }

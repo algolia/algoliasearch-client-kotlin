@@ -57,5 +57,7 @@ internal class TestSettingsKey {
         MinProximity.raw shouldEqual KeyMinProximity
         ResponseFields.raw shouldEqual KeyResponseFields
         MaxFacetHits.raw shouldEqual KeyMaxFacetHits
+        IndexLanguages.raw shouldEqual KeyIndexLanguages
+        UserData.raw shouldEqual KeyUserData
     }
 }
