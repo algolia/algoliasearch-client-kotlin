@@ -22,11 +22,12 @@ internal class DocSaveRule {
     fun snippet1() {
         runBlocking {
             val rule = Rule(
-                objectID = ObjectID("myID"),
+                objectID = ObjectID("a-rule-id"),
                 enabled = false,
                 condition = Condition(
                     pattern = Pattern.Literal("smartphone"),
-                    anchoring = Anchoring.Contains
+                    anchoring = Anchoring.Contains,
+                    alternative = Alternatives.True
                 ),
                 consequence = Consequence(
                     query = Query(filters = "category = 1")
