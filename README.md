@@ -134,9 +134,11 @@ query.sortFacetsBy = SortFacetsBy.Count
 
 ### Proguard rules
 
-When `minifyEnabled true`, you might get this error:
+When proguard `minifyEnabled` option is set to `true` , you might get this error:
 
-```Can't locate argument-less serializer for class e.a.b.g.n.c (Kotlin reflection is not available). For generic classes, such as lists, please provide serializer explicitly.```
+```
+Can't locate argument-less serializer for class e.a.b.g.n.c (Kotlin reflection is not available). For generic classes, such as lists, please provide serializer explicitly.
+```
 
 Add this proguard rule to solve it.
 
