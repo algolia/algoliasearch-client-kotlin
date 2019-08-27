@@ -119,6 +119,15 @@ internal class TestDSLSettings {
     }
 
     @Test
+    fun indexLanguages() {
+        val settings = settings {
+            indexLanguages { +Japanese }
+        }
+
+        settings.indexLanguages.shouldNotBeNull()
+    }
+
+    @Test
     fun advancedSyntaxFeatures() {
         val settings = settings {
             advancedSyntaxFeatures { +ExactPhrase }
