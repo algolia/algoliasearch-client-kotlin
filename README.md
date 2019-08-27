@@ -132,6 +132,18 @@ query.sortFacetsBy = SortFacetsBy.Count
 // query.sortFacetsBy = SortFacetsBy.Other("unforeseen value")
 ```
 
+### Proguard rules
+
+When `minifyEnabled true`, you might get this error:
+
+```Can't locate argument-less serializer for class e.a.b.g.n.c (Kotlin reflection is not available). For generic classes, such as lists, please provide serializer explicitly.```
+
+Add this proguard rule to solve it.
+
+```
+-keep class com.algolia.search.model.** { *; }
+```
+
 ### Guides
 
 - [Getting started](https://github.com/algolia/algoliasearch-client-kotlin/tree/master/docs/GettingStarted.md)
