@@ -35,10 +35,19 @@ internal class EndpointSearchImpl(
         return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/query"), requestOptions, body)
     }
 
-    override tailrec suspend fun findFirstObject(
+    override suspend fun findFirstObject(
         match: (ResponseSearch.Hit) -> Boolean,
         query: Query,
         doNotPaginate: Boolean,
+        requestOptions: RequestOptions?
+    ): ResponseHitWithPosition? {
+        return findObject(match, query, doNotPaginate, requestOptions)
+    }
+
+    override tailrec suspend fun findObject(
+        match: (ResponseSearch.Hit) -> Boolean,
+        query: Query,
+        paginate: Boolean,
         requestOptions: RequestOptions?
     ): ResponseHitWithPosition? {
         val response = search(query, requestOptions)
@@ -47,8 +56,8 @@ internal class EndpointSearchImpl(
 
         return if (hit != null) {
             ResponseHitWithPosition(hit, response.hits.indexOf(hit), response.page)
-        } else if (!doNotPaginate && hasNextPage) {
-            findFirstObject(match, query.copy(page = (query.page ?: 0) + 1), doNotPaginate, requestOptions)
+        } else if (paginate && hasNextPage) {
+            findObject(match, query.copy(page = (query.page ?: 0) + 1), paginate, requestOptions)
         } else null
     }
 
@@ -191,6 +200,7 @@ internal class EndpointSearchImpl(
         }
         return this
     }
+
 
     private fun IndexQuery.setFacets(facet: Attribute?): IndexQuery {
         if (facet != null) query.facets = setOf(facet)

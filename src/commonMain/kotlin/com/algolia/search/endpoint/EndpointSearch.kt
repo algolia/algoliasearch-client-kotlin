@@ -122,6 +122,18 @@ public interface EndpointSearch {
         requestOptions: RequestOptions? = null
     ): ResponseSearch
 
+    @Deprecated(
+        message = "Use findObject instead.",
+        replaceWith = ReplaceWith("findObject(match, query, doNotPaginate, requestOptions)"),
+        level = DeprecationLevel.ERROR
+    )
+    suspend fun findFirstObject(
+        match: (ResponseSearch.Hit) -> Boolean,
+        query: Query = Query(),
+        doNotPaginate: Boolean = false,
+        requestOptions: RequestOptions? = null
+    ): ResponseHitWithPosition?
+
     /**
      *  Search iteratively through the search response [ResponseSearch.hits] field to find the first response hit that
      *  would match against the given [match] function.
@@ -129,18 +141,18 @@ public interface EndpointSearch {
      *  will perform a new search operation on the next page of results, if any,
      *  until a matching object is found or the end of results is reached, whichever
      *  happens first.
-     *  [doNotPaginate] will stop the function at the end of the first page of search results even if no object does
+     *  [paginate] will stop the function at the end of the first page of search results even if no object does
      *  match.
      *
      *  @param match Predicate to match a given [ResponseSearch.Hit]
      *  @param query The [Query] used to search.
-     *  @param doNotPaginate To prevent the iteration through pages of results.
+     *  @param paginate To prevent the iteration through pages of results.
      *  @param requestOptions Configure request locally with [RequestOptions].
      */
-    tailrec suspend fun findFirstObject(
+    tailrec suspend fun findObject(
         match: (ResponseSearch.Hit) -> Boolean,
         query: Query = Query(),
-        doNotPaginate: Boolean = false,
+        paginate: Boolean = true,
         requestOptions: RequestOptions? = null
     ): ResponseHitWithPosition?
 }
