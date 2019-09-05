@@ -247,7 +247,7 @@ public data class ResponseSearch(
     @Deprecated(
         message = "Use getObjectPosition instead.",
         replaceWith = ReplaceWith("getObjectPosition(objectID)"),
-        level = DeprecationLevel.ERROR
+        level = DeprecationLevel.WARNING
     )
     public fun getObjectIDPosition(objectID: ObjectID): Int {
         return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }

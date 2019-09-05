@@ -125,7 +125,7 @@ public interface EndpointSearch {
     @Deprecated(
         message = "Use findObject instead.",
         replaceWith = ReplaceWith("findObject(match, query, doNotPaginate, requestOptions)"),
-        level = DeprecationLevel.ERROR
+        level = DeprecationLevel.WARNING
     )
     suspend fun findFirstObject(
         match: (ResponseSearch.Hit) -> Boolean,
