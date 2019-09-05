@@ -41,7 +41,7 @@ internal class EndpointSearchImpl(
         doNotPaginate: Boolean,
         requestOptions: RequestOptions?
     ): ResponseHitWithPosition? {
-        return findObject(match, query, doNotPaginate, requestOptions)
+        return findObject(match, query, !doNotPaginate, requestOptions)
     }
 
     override tailrec suspend fun findObject(
