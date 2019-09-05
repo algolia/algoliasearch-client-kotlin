@@ -160,3 +160,7 @@ tasks {
         dependsOn("generateMetadataBuildConfigKotlin")
     }
 }
+
+tasks.withType<Test> {
+    maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
+}
