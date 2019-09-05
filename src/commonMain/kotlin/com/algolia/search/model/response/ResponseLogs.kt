@@ -6,7 +6,6 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 
 @Serializable
@@ -73,19 +72,15 @@ public data class ResponseLogs(
         @SerialName(KeyQuery_Params) val queryParamsOrNull: String? = null
     ) {
 
-        @Transient
         public val indexName: IndexName
             get() = indexNameOrNull!!
 
-        @Transient
         public val queryParams: String
             get() = queryParamsOrNull!!
 
-        @Transient
         public val queryNbHits: Int
             get() = queryNbHitsOrNull!!
 
-        @Transient
         public val nbApiCalls: Long
             get() = nbApiCallsOrNull!!
     }

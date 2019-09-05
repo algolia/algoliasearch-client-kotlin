@@ -6,7 +6,6 @@ import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import kotlinx.serialization.json.JsonObject
 
 
@@ -37,19 +36,15 @@ data class PlaceLanguage(
     @SerialName(Key_RankingInfo) override val rankingInfoOrNull: RankingInfo? = null
 ) : Place {
 
-    @Transient
     val country: String
         get() = countryOrNull!!
 
-    @Transient
     val county: List<String>
         get() = countyOrNull!!
 
-    @Transient
     val city: List<String>
         get () = cityOrNull!!
 
-    @Transient
     val localNames: List<String>
         get() = localNamesOrNull!!
 }

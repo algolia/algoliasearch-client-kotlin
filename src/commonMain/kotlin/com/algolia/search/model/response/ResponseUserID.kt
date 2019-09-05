@@ -6,7 +6,6 @@ import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import kotlinx.serialization.json.JsonObject
 
 
@@ -39,15 +38,12 @@ public data class ResponseUserID(
     val highlightResultsOrNull:  JsonObject? = null
 ) {
 
-    @Transient
     public val clusterName: ClusterName
         get() = clusterNameOrNull!!
 
-    @Transient
     public val objectID: ObjectID
         get() = objectIDOrNull!!
 
-    @Transient
     public val highlightResults:  JsonObject
         get() = highlightResultsOrNull!!
 }

@@ -25,7 +25,6 @@ public data class ResponseSearchSynonyms(
         val highlightResultOrNull: JsonObject? = null
     ) {
 
-        @Transient
         public val highlightResult: JsonObject
             get() = highlightResultOrNull!!
 

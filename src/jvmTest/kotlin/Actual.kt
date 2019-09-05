@@ -6,7 +6,6 @@ import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
-import com.algolia.search.transport.Gzip
 import kotlinx.coroutines.CoroutineScope
 import java.io.File
 import java.text.SimpleDateFormat

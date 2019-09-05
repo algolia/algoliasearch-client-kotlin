@@ -6,7 +6,6 @@ import com.algolia.search.serialize.KeyHighlighted
 import com.algolia.search.serialize.KeyName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 
 @Serializable
@@ -25,7 +24,6 @@ public data class Facet(
     @SerialName(KeyHighlighted) val highlightedOrNull: String? = null
 ) {
 
-    @Transient
     val highlighted: String
         get() = highlightedOrNull!!
 }

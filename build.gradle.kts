@@ -4,8 +4,8 @@ import java.net.URI
 
 
 plugins {
-    id("kotlin-multiplatform") version "1.3.41"
-    id("kotlinx-serialization") version "1.3.41"
+    id("kotlin-multiplatform") version "1.3.50"
+    id("kotlinx-serialization") version "1.3.50"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
     id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.5"

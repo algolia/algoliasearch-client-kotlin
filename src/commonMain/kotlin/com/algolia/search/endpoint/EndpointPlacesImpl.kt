@@ -7,8 +7,8 @@ import com.algolia.search.model.places.PlaceLanguages
 import com.algolia.search.model.places.PlacesQuery
 import com.algolia.search.model.response.ResponseSearchPlacesMono
 import com.algolia.search.model.response.ResponseSearchPlacesMulti
-import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.Language
+import com.algolia.search.model.search.Point
 import com.algolia.search.serialize.*
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport

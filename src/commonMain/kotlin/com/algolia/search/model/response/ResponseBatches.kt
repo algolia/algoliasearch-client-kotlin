@@ -30,7 +30,6 @@ public data class ResponseBatches(
     @SerialName(KeyObjectIDs) val objectIDsOrNull: List<ObjectID?>? = null
 ) {
 
-    @Transient
     public val objectIDs: List<ObjectID?>
         get() = objectIDsOrNull!!
 
