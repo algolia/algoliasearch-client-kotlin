@@ -15,7 +15,7 @@ public data class Rule(
     /**
      * Condition of the rule.
      */
-    @SerialName(KeyCondition) val condition: Condition,
+    @SerialName(KeyCondition) val condition: Condition? = null,
     /**
      * Consequence of the rule.
      */
