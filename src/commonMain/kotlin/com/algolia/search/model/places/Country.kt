@@ -1,6 +1,7 @@
 package com.algolia.search.model.places
 
 import com.algolia.search.model.Raw
+import com.algolia.search.model.places.Country.Other
 import com.algolia.search.serialize.*
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder

@@ -14,7 +14,6 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.json.JsonObjectSerializer
 
 
 internal fun Configuration.getHttpClient() = engine?.let {

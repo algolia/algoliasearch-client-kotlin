@@ -1,9 +1,9 @@
 package com.algolia.search.client
 
-import com.algolia.search.configuration.Credentials
-import com.algolia.search.configuration.CredentialsImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationInsights
+import com.algolia.search.configuration.Credentials
+import com.algolia.search.configuration.CredentialsImpl
 import com.algolia.search.endpoint.EndpointInsights
 import com.algolia.search.endpoint.EndpointInsightsImpl
 import com.algolia.search.endpoint.EndpointInsightsUser

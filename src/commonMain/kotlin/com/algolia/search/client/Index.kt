@@ -1,20 +1,12 @@
 package com.algolia.search.client
 
-import com.algolia.search.dsl.filters
 import com.algolia.search.endpoint.*
-import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.filter.Filter
-import com.algolia.search.model.filter.FilterGroup
-import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchRules
 import com.algolia.search.model.response.ResponseSearchSynonyms
-import com.algolia.search.model.response.ResponseSearches
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.RuleQuery
-import com.algolia.search.model.search.Facet
-import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
