@@ -33,7 +33,6 @@ public data class ResponseSearchRules(
         val highlightResultOrNull: JsonObject? = null
     ) {
 
-        @Transient
         public val highlightResult: JsonObject
             get() = highlightResultOrNull!!
 

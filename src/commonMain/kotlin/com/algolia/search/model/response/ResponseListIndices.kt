@@ -5,7 +5,6 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 
 @Serializable
@@ -62,19 +61,15 @@ public data class ResponseListIndices(
         @SerialName(KeyABTest) val abTestOrNull: ResponseABTestShort? = null
     ) {
 
-        @Transient
         public val replicas: List<IndexName>
             get() = replicasOrNull!!
 
-        @Transient
         public val primary: IndexName
             get() = primaryOrNull!!
 
-        @Transient
         public val sourceABTest: IndexName
             get() = sourceABTestOrNull!!
 
-        @Transient
         public val abTest: ResponseABTestShort
             get() = abTestOrNull!!
     }

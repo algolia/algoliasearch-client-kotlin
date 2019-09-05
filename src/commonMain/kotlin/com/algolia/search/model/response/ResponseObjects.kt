@@ -4,7 +4,6 @@ import com.algolia.search.serialize.KeyMessage
 import com.algolia.search.serialize.KeyResults
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import kotlinx.serialization.json.JsonObject
 
 
@@ -20,7 +19,6 @@ public data class ResponseObjects(
     @SerialName(KeyMessage) val messageOrNull: String? = null
 ) {
 
-    @Transient
     public val message: String
         get() = messageOrNull!!
 }
