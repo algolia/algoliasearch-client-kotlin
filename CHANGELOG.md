@@ -1,3 +1,13 @@
+# 1.1.4
+
+- Updated Kotlin to `1.3.50`
+- Updated Ktor to `1.2.4` (Including serialization `0.12.0`)
+- Renamed `findFirstObject` to `findObject`
+- Renamed `getObjectIDPosition` to `getObjectPosition`
+- Added `indexLanguages` DSL
+- Added DSL for `Language`
+- Fix serialization error in `PartialUpdateObject.from` method
+
 # 1.1.3
 
 - Removed `Index.searchDisjunctiveFacets` method
