@@ -244,11 +244,20 @@ public data class ResponseSearch(
     public val hierarchicalFacets: Map<Attribute, List<Facet>>
         get() = hierarchicalFacetsOrNull!!
 
+    @Deprecated(
+        message = "Use getObjectPosition instead.",
+        replaceWith = ReplaceWith("getObjectPosition(objectID)"),
+        level = DeprecationLevel.WARNING
+    )
+    public fun getObjectIDPosition(objectID: ObjectID): Int {
+        return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }
+    }
+
     /**
      * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].
      * If the [objectID] is not found, -1 is returned.
      */
-    public fun getObjectIDPosition(objectID: ObjectID): Int {
+    public fun getObjectPosition(objectID: ObjectID): Int {
         return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }
     }
 
