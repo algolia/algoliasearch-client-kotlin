@@ -117,6 +117,13 @@ public fun Settings.queryLanguages(block: DSLLanguage.() -> Unit) {
 }
 
 /**
+ * Assign the output of [block] to [Settings.queryLanguages].
+ */
+public fun Settings.indexLanguages(block: DSLLanguage.() -> Unit) {
+    indexLanguages = DSLLanguage(block)
+}
+
+/**
  * Assign the output of [block] to [Settings.advancedSyntaxFeatures].
  */
 public fun Settings.advancedSyntaxFeatures(block: DSLAdvancedSyntaxFeatures.() -> Unit) {
