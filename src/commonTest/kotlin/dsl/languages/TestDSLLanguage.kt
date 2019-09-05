@@ -6,7 +6,7 @@ import shouldEqual
 import kotlin.test.Test
 
 
-internal class TestDSLQueryLanguage {
+internal class TestDSLLanguage {
 
     @Test
     fun default() {
@@ -17,6 +17,11 @@ internal class TestDSLQueryLanguage {
         dsl shouldEqual listOf(
             Language.English
         )
+    }
+
+    @Test
+    fun dsl() {
+        com.algolia.search.dsl.languages.languages { +Language.Japanese } shouldEqual listOf(Language.Japanese)
     }
 
     @Test

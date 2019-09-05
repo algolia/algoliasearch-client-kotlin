@@ -14,8 +14,6 @@ import io.ktor.http.headersOf
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.io.ByteReadChannel
 import runBlocking
-import shouldBeFalse
-import shouldBeTrue
 import shouldEqual
 import kotlin.test.Test
 

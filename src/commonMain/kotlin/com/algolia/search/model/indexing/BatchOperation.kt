@@ -76,7 +76,10 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
             ): PartialUpdateObject {
                 return PartialUpdateObject(
                     objectID,
-                    Json.toJson(Partial, partial).jsonObject,
+                    json {
+                        partial.attribute.raw to partial.value
+                        KeyObjectID to objectID.raw
+                    },
                     createIfNotExists
                 )
             }

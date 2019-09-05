@@ -53,29 +53,29 @@ internal class TestSuiteSearch {
 
                 search(Query("algolia")).apply {
                     nbHits shouldEqual 2
-                    getObjectIDPosition(ObjectID("nicolas-dessaigne")) shouldEqual 0
-                    getObjectIDPosition(ObjectID("julien-lemoine")) shouldEqual 1
-                    getObjectIDPosition(ObjectID("unknown")) shouldEqual -1
+                    getObjectPosition(ObjectID("nicolas-dessaigne")) shouldEqual 0
+                    getObjectPosition(ObjectID("julien-lemoine")) shouldEqual 1
+                    getObjectPosition(ObjectID("unknown")) shouldEqual -1
                 }
 
-                findFirstObject({ false }, Query(""), false).shouldBeNull()
-                findFirstObject({ true }, Query(""), false)!!.apply {
+                findObject({ false }, Query(""), paginate = true).shouldBeNull()
+                findObject({ true }, Query(""), paginate = true)!!.apply {
                     page shouldEqual 0
                     position shouldEqual 0
                 }
                 val predicate = { hit: ResponseSearch.Hit -> hit.json.getPrimitive("company").content == "Apple" }
 
-                findFirstObject(predicate, Query("Algolia"), false).shouldBeNull()
-                findFirstObject(predicate, Query(hitsPerPage = 5), true).shouldBeNull()
-                findFirstObject(predicate, Query(hitsPerPage = 5), false)!!.apply {
+                findObject(predicate, Query("Algolia"), paginate = true).shouldBeNull()
+                findObject(predicate, Query(hitsPerPage = 5), paginate = false).shouldBeNull()
+                findObject(predicate, Query(hitsPerPage = 5), paginate = true)!!.apply {
                     position shouldEqual 0
                     page shouldEqual 2
                 }
 
-               search(Query("elon", clickAnalytics = true)).apply {
-                   hits.shouldNotBeNull()
-                   hits.shouldNotBeEmpty()
-               }
+                search(Query("elon", clickAnalytics = true)).apply {
+                    hits.shouldNotBeNull()
+                    hits.shouldNotBeEmpty()
+                }
             }
             search.apply {
                 search(Query(facets = allFacets, filters = "company:tesla")).nbHits shouldEqual 1

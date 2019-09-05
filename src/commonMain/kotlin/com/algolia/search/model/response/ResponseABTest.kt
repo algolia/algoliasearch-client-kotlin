@@ -53,11 +53,9 @@ public data class ResponseABTest(
     val variantB: ResponseVariant
 ) {
 
-    @Transient
     public val clickSignificance: Float
         get() = clickSignificanceOrNull!!
 
-    @Transient
     public val conversionSignificance: Float
         get() = conversionSignificanceOrNull!!
 

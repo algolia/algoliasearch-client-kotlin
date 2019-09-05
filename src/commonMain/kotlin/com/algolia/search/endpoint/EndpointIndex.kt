@@ -5,8 +5,8 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.index.Scope
 import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
-import com.algolia.search.transport.RequestOptions
 import com.algolia.search.model.settings.Settings
+import com.algolia.search.transport.RequestOptions
 
 
 /**

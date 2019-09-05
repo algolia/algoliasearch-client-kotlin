@@ -1,12 +1,16 @@
 package serialize.indexing
 
+import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.BatchOperation.*
+import com.algolia.search.model.indexing.Partial
 import com.algolia.search.serialize.*
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
+import shouldEqual
 import unknown
+import kotlin.test.Test
 
 
 internal class TestBatchOperation : TestSerializer<BatchOperation>(BatchOperation) {
@@ -33,6 +37,18 @@ internal class TestBatchOperation : TestSerializer<BatchOperation>(BatchOperatio
             KeyAction to KeyPartialUpdateObjectNoCreate
             KeyBody to json
         },
+        PartialUpdateObject.from(
+            ObjectID(unknown),
+            Partial.Update(
+                Attribute("key"), "value"
+            )
+        ) to json {
+            KeyAction to KeyPartialUpdateObject
+            KeyBody to json {
+                KeyObjectID to unknown
+                "key" to "value"
+            }
+        },
         DeleteObject(objectID) to json {
             KeyAction to KeyDeleteObject
             KeyBody to json
@@ -44,4 +60,12 @@ internal class TestBatchOperation : TestSerializer<BatchOperation>(BatchOperatio
             KeyBody to json
         }
     )
+
+    @Test
+    fun fromPartialUpdate() {
+        val fromPartialUpdate = PartialUpdateObject.from(ObjectID(unknown), Partial.Update(Attribute("key"), "value"))
+        val partialUpdateObject = PartialUpdateObject(ObjectID(unknown), json { "key" to "value" })
+
+        Json.toJson(BatchOperation, fromPartialUpdate) shouldEqual Json.toJson(BatchOperation, partialUpdateObject)
+    }
 }

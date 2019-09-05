@@ -157,127 +157,107 @@ public data class ResponseSearch(
     @SerialName(KeyHierarchicalFacets) val hierarchicalFacetsOrNull: Map<Attribute, List<Facet>>? = null
 ) {
 
-    @Transient
     public val hits: List<Hit>
         get() = hitsOrNull!!
 
-    @Transient
     public val nbHits: Int
         get() = nbHitsOrNull!!
 
-    @Transient
     public val page: Int
         get() = pageOrNull!!
 
-    @Transient
     public val hitsPerPage: Int
         get() = hitsPerPageOrNull!!
 
-    @Transient
     public val length: Int
         get() = lengthOrNull!!
 
-    @Transient
     public val offset: Int
         get() = offsetOrNull!!
 
-    @Transient
     public val userData: List<JsonObject>
         get() = userDataOrNull!!
 
-    @Transient
     public val nbPages: Int
         get() = nbPagesOrNull!!
 
-    @Transient
     public val processingTimeMS: Long
         get() = processingTimeMSOrNull!!
 
-    @Transient
     public val exhaustiveNbHits: Boolean
         get() = exhaustiveNbHitsOrNull!!
 
-    @Transient
     public val exhaustiveFacetsCount: Boolean
         get() = exhaustiveFacetsCountOrNull!!
 
-    @Transient
     public val query: String
         get() = queryOrNull!!
 
-    @Transient
     public val queryAfterRemoval: String
         get() = queryAfterRemovalOrNull!!
 
-    @Transient
     public val params: String
         get() = paramsOrNull!!
 
-    @Transient
     public val message: String
         get() = messageOrNull!!
 
-    @Transient
     public val aroundLatLng: Point
         get() = aroundLatLngOrNull!!
 
-    @Transient
     public val automaticRadius: Float
         get() = automaticRadiusOrNull!!
 
-    @Transient
     public val serverUsed: String
         get() = serverUsedOrNull!!
 
-    @Transient
     public val indexUsed: IndexName
         get() = indexUsedOrNull!!
 
-    @Transient
     public val abTestVariantID: Int
         get() = abTestVariantIDOrNull!!
 
-    @Transient
     public val parsedQuery: String
         get() = parsedQueryOrNull!!
 
-    @Transient
     public val facets: Map<Attribute, List<Facet>>
         get() = facetsOrNull!!
 
-    @Transient
     public val disjunctiveFacets: Map<Attribute, List<Facet>>
         get() = disjunctiveFacetsOrNull!!
 
-    @Transient
     public val facetStats: Map<Attribute, FacetStats>
         get() = facetStatsOrNull!!
 
-    @Transient
     public val cursor: Cursor
         get() = cursorOrNull!!
 
-    @Transient
     public val indexName: IndexName
         get() = indexNameOrNull!!
 
-    @Transient
     public val processed: Boolean
         get() = processedOrNull!!
 
-    @Transient
     public val queryID: QueryID
         get() = queryIDOrNull!!
 
-    @Transient
     public val hierarchicalFacets: Map<Attribute, List<Facet>>
         get() = hierarchicalFacetsOrNull!!
+
+    @Deprecated(
+        message = "Use getObjectPosition instead.",
+        replaceWith = ReplaceWith("getObjectPosition(objectID)"),
+        level = DeprecationLevel.WARNING
+    )
+    public fun getObjectIDPosition(objectID: ObjectID): Int {
+        return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }
+    }
 
     /**
      * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].
      * If the [objectID] is not found, -1 is returned.
      */
-    public fun getObjectIDPosition(objectID: ObjectID): Int {
+    public fun getObjectPosition(objectID: ObjectID): Int {
         return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }
     }
 
