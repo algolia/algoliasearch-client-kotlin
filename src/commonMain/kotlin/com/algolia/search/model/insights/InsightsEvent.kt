@@ -33,20 +33,20 @@ public sealed class InsightsEvent {
     public data class View @JvmOverloads constructor(
         override val eventName: EventName,
         override val indexName: IndexName,
+        override val resources: Resources? = null,
         override val userToken: UserToken? = null,
         override val timestamp: Long? = null,
-        override val queryID: QueryID? = null,
-        override val resources: Resources? = null
+        override val queryID: QueryID? = null
     ) : InsightsEvent()
 
     public data class Click @JvmOverloads constructor(
         override val eventName: EventName,
         override val indexName: IndexName,
+        val positions: List<Int>? = null,
         override val userToken: UserToken? = null,
         override val timestamp: Long? = null,
         override val queryID: QueryID? = null,
-        override val resources: Resources? = null,
-        val positions: List<Int>? = null
+        override val resources: Resources? = null
     ) : InsightsEvent() {
 
         init {
@@ -58,10 +58,10 @@ public sealed class InsightsEvent {
     public data class Conversion @JvmOverloads constructor(
         override val eventName: EventName,
         override val indexName: IndexName,
+        override val resources: Resources? = null,
         override val userToken: UserToken? = null,
         override val timestamp: Long? = null,
-        override val queryID: QueryID? = null,
-        override val resources: Resources? = null
+        override val queryID: QueryID? = null
     ) : InsightsEvent()
 
     public sealed class Resources {
