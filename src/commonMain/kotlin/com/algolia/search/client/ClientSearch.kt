@@ -27,6 +27,7 @@ import io.ktor.client.features.logging.LogLevel
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.*
+import kotlin.jvm.JvmOverloads
 
 
 /**
@@ -42,7 +43,7 @@ public class ClientSearch private constructor(
     Configuration by transport,
     Credentials by transport.credentials {
 
-    public constructor(
+    public @JvmOverloads constructor(
         applicationID: ApplicationID,
         apiKey: APIKey,
         logLevel: LogLevel = defaultLogLevel

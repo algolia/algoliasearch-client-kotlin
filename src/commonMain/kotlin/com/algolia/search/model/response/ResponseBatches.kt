@@ -16,10 +16,11 @@ import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.long
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable(ResponseBatches.Companion::class)
-public data class ResponseBatches(
+public data class ResponseBatches @JvmOverloads constructor(
     /**
      * A list of [TaskIndex] to use with [ClientSearch.waitAll].
      */

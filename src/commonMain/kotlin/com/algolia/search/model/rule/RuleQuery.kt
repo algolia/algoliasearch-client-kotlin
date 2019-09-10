@@ -5,12 +5,13 @@ import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
+import kotlin.jvm.JvmOverloads
 
 
 @Suppress("PropertyName")
 @DSLParameters
 @Serializable
-public data class RuleQuery(
+public data class RuleQuery @JvmOverloads constructor(
     /**
      * Engine default: ""
      * Full text query.

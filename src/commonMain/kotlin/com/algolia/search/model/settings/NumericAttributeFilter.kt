@@ -10,10 +10,11 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable(NumericAttributeFilter.Companion::class)
-public data class NumericAttributeFilter(
+public data class NumericAttributeFilter @JvmOverloads constructor(
     /**
      * Numeric attribute that can be used as numerical filters.
      */

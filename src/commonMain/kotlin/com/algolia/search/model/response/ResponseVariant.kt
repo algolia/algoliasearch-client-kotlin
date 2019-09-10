@@ -5,10 +5,11 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class ResponseVariant(
+public data class ResponseVariant @JvmOverloads constructor(
     /**
      * Distinct click count for the variant.
      */

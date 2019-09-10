@@ -9,10 +9,11 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable(Consequence.Companion::class)
-public data class Consequence(
+public data class Consequence @JvmOverloads constructor(
     /**
      * Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value
      * placeholder in the query pattern.

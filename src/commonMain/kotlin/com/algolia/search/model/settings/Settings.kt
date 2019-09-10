@@ -8,11 +8,12 @@ import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
 @DSLParameters
-public data class Settings(
+public data class Settings @JvmOverloads constructor(
     /**
      * The complete list of attributes that will be used for searching.
      * Engine default: []

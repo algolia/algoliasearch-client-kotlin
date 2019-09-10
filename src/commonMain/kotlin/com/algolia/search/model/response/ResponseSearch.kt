@@ -12,10 +12,11 @@ import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class ResponseSearch(
+public data class ResponseSearch @JvmOverloads constructor(
     /**
      * The hits returned by the search. Hits are ordered according to the ranking or sorting of the index being queried.
      * Hits are made of the schemaless JSON objects that you stored in the index.

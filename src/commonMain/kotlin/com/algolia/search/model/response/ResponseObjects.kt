@@ -5,10 +5,11 @@ import com.algolia.search.serialize.KeyResults
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class ResponseObjects(
+public data class ResponseObjects @JvmOverloads constructor(
     /**
      * List of requested records. If a record is not found, it will be marked as null in the list.
      */

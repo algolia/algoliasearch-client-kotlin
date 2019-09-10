@@ -6,10 +6,11 @@ import com.algolia.search.serialize.KeyFacet
 import com.algolia.search.serialize.KeyScore
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class AutomaticFacetFilters(
+public data class AutomaticFacetFilters @JvmOverloads constructor(
     /**
      * [Attribute] to filter on. This must match [Pattern.Facet.attribute].
      */

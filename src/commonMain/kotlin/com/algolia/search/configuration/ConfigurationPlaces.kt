@@ -5,12 +5,13 @@ import com.algolia.search.transport.placesHosts
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
+import kotlin.jvm.JvmOverloads
 
 
 /**
  * Configuration used by [ClientPlaces].
  */
-public data class ConfigurationPlaces(
+public data class ConfigurationPlaces @JvmOverloads constructor(
     override val writeTimeout: Long = defaultWriteTimeout,
     override val readTimeout: Long = defaultReadTimeout,
     override val logLevel: LogLevel = defaultLogLevel,

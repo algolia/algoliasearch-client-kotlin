@@ -1,6 +1,7 @@
 package com.algolia.search.model.filter
 
 import com.algolia.search.model.Attribute
+import kotlin.jvm.JvmOverloads
 
 
 /**
@@ -24,48 +25,52 @@ public sealed class FilterGroup<T : Filter> : Set<T> {
         /**
          * Contains any type of [Filter].
          */
-        public data class Any(
+        public data class Any @JvmOverloads constructor(
             override val filters: Set<Filter>,
             override val name: String? = null
         ) : And<Filter>(filters, name) {
 
+            @JvmOverloads
             constructor(vararg filters: Filter, name: String? = null) : this(filters.toSet(), name)
         }
 
         /**
          * Contains only [Filter.Facet].
          */
-        public data class Facet(
+        public data class Facet @JvmOverloads constructor(
             override val filters: Set<Filter.Facet>,
             override val name: String? = null
         ) : And<Filter.Facet>(filters, name) {
 
+            @JvmOverloads
             constructor(vararg filters: Filter.Facet, name: String? = null) : this(filters.toSet(), name)
         }
 
         /**
          * Contains only [Filter.Tag].
          */
-        public data class Tag(
+        public data class Tag @JvmOverloads constructor(
             override val filters: Set<Filter.Tag>,
             override val name: String? = null
         ) : And<Filter.Tag>(filters, name) {
 
+            @JvmOverloads
             constructor(vararg filters: Filter.Tag, name: String? = null) : this(filters.toSet(), name)
         }
 
         /**
          * Contains only [Filter.Numeric].
          */
-        public data class Numeric(
+        public data class Numeric @JvmOverloads constructor(
             override val filters: Set<Filter.Numeric>,
             override val name: String? = null
         ) : And<Filter.Numeric>(filters, name) {
 
+            @JvmOverloads
             constructor(vararg filters: Filter.Numeric, name: String? = null) : this(filters.toSet(), name)
         }
 
-        public data class Hierarchical(
+        public data class Hierarchical @JvmOverloads constructor(
             override val filters: Set<Filter.Facet>,
             val path: List<Filter.Facet>,
             val attributes: List<Attribute>,
@@ -84,33 +89,36 @@ public sealed class FilterGroup<T : Filter> : Set<T> {
         /**
          * Contains only [Filter.Facet].
          */
-        public data class Facet(
+        public data class Facet @JvmOverloads constructor(
             override val filters: Set<Filter.Facet>,
             override val name: String? = null
         ) : Or<Filter.Facet>(filters, name) {
 
+            @JvmOverloads
             constructor(vararg filters: Filter.Facet, name: String? = null) : this(filters.toSet(), name)
         }
 
         /**
          * Contains only [Filter.Tag].
          */
-        public data class Tag(
+        public data class Tag @JvmOverloads constructor(
             override val filters: Set<Filter.Tag>,
             override val name: String? = null
         ) : Or<Filter.Tag>(filters, name) {
 
+            @JvmOverloads
             constructor(vararg filters: Filter.Tag, name: String? = null) : this(filters.toSet(), name)
         }
 
         /**
          * Contains only [Filter.Numeric].
          */
-        public data class Numeric(
+        public data class Numeric @JvmOverloads constructor(
             override val filters: Set<Filter.Numeric>,
             override val name: String? = null
         ) : Or<Filter.Numeric>(filters, name) {
 
+            @JvmOverloads
             constructor(vararg filters: Filter.Numeric, name: String? = null) : this(filters.toSet(), name)
         }
     }

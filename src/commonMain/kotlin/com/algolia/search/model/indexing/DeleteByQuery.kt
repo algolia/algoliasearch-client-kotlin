@@ -5,11 +5,12 @@ import com.algolia.search.model.search.*
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
 @DSLParameters
-public data class DeleteByQuery(
+public data class DeleteByQuery @JvmOverloads constructor(
     /**
      * Filter the query with numeric, facet and/or tag filters.
      * Engine default: "" (no filters)

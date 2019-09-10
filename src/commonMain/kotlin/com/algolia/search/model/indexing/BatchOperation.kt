@@ -11,6 +11,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.json
+import kotlin.jvm.JvmOverloads
 
 
 /**
@@ -53,7 +54,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
     /**
      * Equivalent to [EndpointIndexing.partialUpdateObject]
      */
-    public data class PartialUpdateObject(
+    public data class PartialUpdateObject @JvmOverloads constructor(
         val objectID: ObjectID,
         val json: JsonObject,
         val createIfNotExists: Boolean = true

@@ -9,10 +9,11 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable(Snippet.Companion::class)
-public data class Snippet(
+public data class Snippet @JvmOverloads constructor(
     /**
      * Attribute to snippet.
      * Use "*" to snippet all attributes.

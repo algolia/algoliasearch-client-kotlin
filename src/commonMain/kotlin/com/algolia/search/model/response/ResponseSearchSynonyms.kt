@@ -5,6 +5,7 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JsonObject
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
@@ -20,7 +21,7 @@ public data class ResponseSearchSynonyms(
 ) {
 
     @Serializable(Hit.Companion::class)
-    public data class Hit(
+    public data class Hit @JvmOverloads constructor(
         val synonym: Synonym,
         val highlightResultOrNull: JsonObject? = null
     ) {

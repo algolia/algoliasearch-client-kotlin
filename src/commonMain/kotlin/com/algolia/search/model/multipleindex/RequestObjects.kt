@@ -8,10 +8,11 @@ import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyObjectID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class RequestObjects(
+public data class RequestObjects @JvmOverloads constructor(
     /**
      * [IndexName] containing the object.
      */

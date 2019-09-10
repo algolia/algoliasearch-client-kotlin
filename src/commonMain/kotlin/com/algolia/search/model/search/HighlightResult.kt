@@ -6,10 +6,11 @@ import com.algolia.search.serialize.KeyMatchedWords
 import com.algolia.search.serialize.KeyValue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class HighlightResult(
+public data class HighlightResult @JvmOverloads constructor(
     /**
      * Markup text with occurrences highlighted. The tags used for highlighting are specified via [Query.highlightPreTag]
      * and [Query.highlightPostTag]

@@ -3,12 +3,13 @@ package com.algolia.search.model.apikey
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
+import kotlin.jvm.JvmOverloads
 
 
 /**
  * Parameters and functionality of an [APIKey].
  */
-public data class APIKeyParams(
+public data class APIKeyParams @JvmOverloads constructor(
     /**
      * Set of permissions [ACL] associated to an [APIKey].
      */

@@ -4,10 +4,11 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class Rule(
+public data class Rule @JvmOverloads constructor(
     /**
      * Unique identifier for the rule.
      */

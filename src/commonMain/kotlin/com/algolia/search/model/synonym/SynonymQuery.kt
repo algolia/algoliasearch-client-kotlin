@@ -7,11 +7,12 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.json
+import kotlin.jvm.JvmOverloads
 
 
 @DSLParameters
 @Serializable(SynonymQuery.Companion::class)
-public data class SynonymQuery(
+public data class SynonymQuery @JvmOverloads constructor(
     /**
      * Engine default: ""
      * The search query to find synonyms. Use an empty query to browse all the [Synonym] of an index.

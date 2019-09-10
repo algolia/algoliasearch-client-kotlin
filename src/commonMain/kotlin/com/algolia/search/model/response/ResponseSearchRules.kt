@@ -5,6 +5,7 @@ import com.algolia.search.model.rule.Rule
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.JsonObject
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
@@ -28,7 +29,7 @@ public data class ResponseSearchRules(
 ) {
 
     @Serializable(Hit.Companion::class)
-    public data class Hit(
+    public data class Hit @JvmOverloads constructor(
         val rule: Rule,
         val highlightResultOrNull: JsonObject? = null
     ) {

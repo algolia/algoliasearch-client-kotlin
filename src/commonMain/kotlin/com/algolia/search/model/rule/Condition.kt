@@ -6,10 +6,11 @@ import com.algolia.search.serialize.KeyContext
 import com.algolia.search.serialize.KeyPattern
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class Condition(
+public data class Condition @JvmOverloads constructor(
     @SerialName(KeyAnchoring) val anchoring: Anchoring,
     @SerialName(KeyPattern) val pattern: Pattern,
     /**

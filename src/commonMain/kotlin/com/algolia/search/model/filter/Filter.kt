@@ -1,6 +1,7 @@
 package com.algolia.search.model.filter
 
 import com.algolia.search.model.Attribute
+import kotlin.jvm.JvmOverloads
 
 
 /**
@@ -24,7 +25,7 @@ public sealed class Filter {
      * [FilterGroup].
      * [Read further on scoring][https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#filters-scoring]
      */
-    public data class Facet internal constructor(
+    public data class Facet @JvmOverloads internal constructor(
         override val attribute: Attribute,
         override val isNegated: Boolean,
         val value: Value,
@@ -49,21 +50,24 @@ public sealed class Filter {
             public data class Number(val raw: kotlin.Number) : Value()
         }
 
-        public constructor(
+        public @JvmOverloads
+        constructor(
             attribute: Attribute,
             value: String,
             score: Int? = null,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.String(value), score)
 
-        public constructor(
+        public @JvmOverloads
+        constructor(
             attribute: Attribute,
             value: Boolean,
             score: Int? = null,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Boolean(value), score)
 
-        public constructor(
+        public @JvmOverloads
+        constructor(
             attribute: Attribute,
             value: Number,
             score: Int? = null,
@@ -87,7 +91,8 @@ public sealed class Filter {
         val value: String
     ) : Filter() {
 
-        public constructor(
+        public @JvmOverloads
+        constructor(
             value: String,
             isNegated: Boolean = false
         ) : this(Attribute("_tags"), isNegated, value)
@@ -122,33 +127,38 @@ public sealed class Filter {
             data class Range(val lowerBound: Number, val upperBound: Number) : Value()
         }
 
-        public constructor(
+        public @JvmOverloads
+        constructor(
             attribute: Attribute,
             operator: NumericOperator,
             value: Number,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Comparison(operator, value))
 
-        public constructor(
+        public @JvmOverloads
+        constructor(
             attribute: Attribute,
             range: IntRange,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Range(range.start, range.endInclusive))
 
-        public constructor(
+        public @JvmOverloads
+        constructor(
             attribute: Attribute,
             range: LongRange,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Range(range.start, range.endInclusive))
 
-        public constructor(
+        public @JvmOverloads
+        constructor(
             attribute: Attribute,
             lowerBound: Float,
             upperBound: Float,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Range(lowerBound, upperBound))
 
-        public constructor(
+        public @JvmOverloads
+        constructor(
             attribute: Attribute,
             lowerBound: Double,
             upperBound: Double,

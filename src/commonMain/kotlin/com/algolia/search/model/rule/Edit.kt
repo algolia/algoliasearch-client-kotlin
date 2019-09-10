@@ -4,10 +4,11 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.json
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable(Edit.Companion::class)
-public data class Edit(
+public data class Edit @JvmOverloads constructor(
     /**
      * Text or patterns to remove from the [Query.query].
      */

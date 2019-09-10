@@ -7,12 +7,13 @@ import com.algolia.search.transport.analyticsHosts
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
+import kotlin.jvm.JvmOverloads
 
 
 /**
  * Configuration used by [ClientAnalytics].
  */
-public data class ConfigurationAnalytics(
+public data class ConfigurationAnalytics @JvmOverloads constructor(
     override val applicationID: ApplicationID,
     override val apiKey: APIKey,
     override val writeTimeout: Long = defaultWriteTimeout,

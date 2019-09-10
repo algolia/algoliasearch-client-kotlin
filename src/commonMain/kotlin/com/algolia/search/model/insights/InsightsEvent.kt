@@ -14,6 +14,7 @@ import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
+import kotlin.jvm.JvmOverloads
 
 
 /**
@@ -29,7 +30,7 @@ public sealed class InsightsEvent {
     abstract val queryID: QueryID?
     abstract val resources: Resources?
 
-    public data class View(
+    public data class View @JvmOverloads constructor(
         override val eventName: EventName,
         override val indexName: IndexName,
         override val userToken: UserToken? = null,
@@ -38,7 +39,7 @@ public sealed class InsightsEvent {
         override val resources: Resources? = null
     ) : InsightsEvent()
 
-    public data class Click(
+    public data class Click @JvmOverloads constructor(
         override val eventName: EventName,
         override val indexName: IndexName,
         override val userToken: UserToken? = null,
@@ -54,7 +55,7 @@ public sealed class InsightsEvent {
         }
     }
 
-    public data class Conversion(
+    public data class Conversion @JvmOverloads constructor(
         override val eventName: EventName,
         override val indexName: IndexName,
         override val userToken: UserToken? = null,

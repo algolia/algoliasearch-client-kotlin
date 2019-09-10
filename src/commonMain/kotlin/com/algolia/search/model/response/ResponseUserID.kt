@@ -7,10 +7,11 @@ import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class ResponseUserID(
+public data class ResponseUserID @JvmOverloads constructor(
     /**
      * [UserID] of the user.
      */

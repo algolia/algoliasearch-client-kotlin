@@ -9,10 +9,11 @@ import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable(ResponseABTest.Companion::class)
-public data class ResponseABTest(
+public data class ResponseABTest @JvmOverloads constructor(
     /**
      * [ABTestID] of the [ABTest] test.
      */

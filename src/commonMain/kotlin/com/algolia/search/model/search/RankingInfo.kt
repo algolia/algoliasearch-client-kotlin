@@ -6,10 +6,11 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class RankingInfo(
+public data class RankingInfo @JvmOverloads constructor(
     /**
      * Present and set to true if a query rule promoted the hit.
      */

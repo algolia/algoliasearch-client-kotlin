@@ -7,10 +7,11 @@ import com.algolia.search.model.apikey.ACL
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class ResponseAPIKey(
+public data class ResponseAPIKey @JvmOverloads constructor(
     /**
      * The [APIKey] value.
      */

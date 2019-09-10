@@ -6,10 +6,11 @@ import com.algolia.search.serialize.KeyCount
 import com.algolia.search.serialize.KeyTotal
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class ResponseABTests(
+public data class ResponseABTests @JvmOverloads constructor(
     /**
      * Number of [ABTest] returned.
      */

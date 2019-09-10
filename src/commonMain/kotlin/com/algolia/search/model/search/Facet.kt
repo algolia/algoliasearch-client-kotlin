@@ -6,10 +6,11 @@ import com.algolia.search.serialize.KeyHighlighted
 import com.algolia.search.serialize.KeyName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class Facet(
+public data class Facet @JvmOverloads constructor(
     /**
      * Name of the facet. Is equal to the value associated to an [Attribute].
      */

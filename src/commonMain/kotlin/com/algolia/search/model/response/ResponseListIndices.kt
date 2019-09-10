@@ -5,6 +5,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
@@ -18,7 +19,7 @@ public data class ResponseListIndices(
 ) {
 
     @Serializable
-    public data class Item(
+    public data class Item @JvmOverloads constructor(
         /**
          * Index name.
          */

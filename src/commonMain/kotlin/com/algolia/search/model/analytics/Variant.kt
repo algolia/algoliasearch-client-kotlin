@@ -8,13 +8,14 @@ import com.algolia.search.serialize.KeyIndex
 import com.algolia.search.serialize.KeyTrafficPercentage
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 /**
  * Variant of an [ABTest]
  */
 @Serializable
-public data class Variant(
+public data class Variant @JvmOverloads constructor(
     /**
      * Index name.
      */

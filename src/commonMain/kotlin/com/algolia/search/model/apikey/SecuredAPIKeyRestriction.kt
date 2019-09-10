@@ -9,6 +9,7 @@ import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.content
+import kotlin.jvm.JvmOverloads
 
 
 /**
@@ -25,7 +26,7 @@ import kotlinx.serialization.json.content
  * instead of only by his IP. This allows you to restrict a single user to performing a maximum of N API calls per hour,
  * even if he shares his IP with another user.
  */
-public data class SecuredAPIKeyRestriction(
+public data class SecuredAPIKeyRestriction @JvmOverloads constructor(
     val query: Query? = null,
     val restrictIndices: List<IndexName>? = null,
     val restrictSources: List<String>? = null,

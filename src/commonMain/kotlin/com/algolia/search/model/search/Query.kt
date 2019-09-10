@@ -9,11 +9,12 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
 @DSLParameters
-public data class Query(
+public data class Query @JvmOverloads constructor(
     /**
      * The text to search in the index.
      * Engine default: ""

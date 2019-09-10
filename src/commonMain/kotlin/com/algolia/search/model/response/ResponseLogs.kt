@@ -6,15 +6,16 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class ResponseLogs(
+public data class ResponseLogs @JvmOverloads constructor(
     @SerialName(KeyLogs) val logs: List<Log>
 ) {
 
     @Serializable
-    public data class Log(
+    public data class Log @JvmOverloads constructor(
         /**
          * Date in ISO-8601 format.
          */

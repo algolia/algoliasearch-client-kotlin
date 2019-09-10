@@ -4,10 +4,11 @@ import com.algolia.search.helper.and
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
 import kotlinx.serialization.json.json
+import kotlin.jvm.JvmOverloads
 
 
 @Serializable
-public data class MatchedGeoLocation(
+public data class MatchedGeoLocation @JvmOverloads constructor(
     /**
      * Latitude and Longitude of the matched location
      */
