@@ -4,7 +4,9 @@ interface Dependency {
     val artifact: String
     val version: String
 
-    operator fun invoke(module: String): String {
-        return "$group:$artifact-$module:$version"
+    operator fun invoke(module: String? = null): String {
+        val optionalModule = if (module != null) "-$module" else ""
+
+        return "$group:$artifact$optionalModule:$version"
     }
 }
