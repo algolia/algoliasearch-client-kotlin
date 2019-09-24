@@ -44,17 +44,6 @@ extensions.getByType(LibraryExtension::class.java).apply {
 
     testOptions.unitTests.isIncludeAndroidResources = true
 
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
-        }
-    }
-
-    lintOptions {
-        isAbortOnError = false
-    }
-
     sourceSets {
         getByName("main") {
             manifest.srcFile("src/androidMain/AndroidManifest.xml")
@@ -234,9 +223,8 @@ bintray {
 
 tasks {
     val bintrayUpload by getting(BintrayUploadTask::class) {
-        dependsOn(publishToMavenLocal)
         doFirst {
-            setPublications("jvm", "metadata", "android")
+            setPublications("jvm", "metadata", "androidRelease")
         }
     }
     withType<KotlinCompile> {
