@@ -5,10 +5,7 @@ import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.*
 import kotlinx.serialization.*
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.*
 
 
 @Serializable(Consequence.Companion::class)
@@ -37,6 +34,10 @@ public data class Consequence(
      * Objects to promote as hits.
      */
     val promote: List<Promotion>? = null,
+    /**
+     * Whether promoted results should match the filters of the current search.
+     */
+    val filterPromotes: Boolean? = null,
     /**
      * Objects to hide from hits.
      */
@@ -97,6 +98,7 @@ public data class Consequence(
                 obj.promote?.let { KeyPromote to JsonNoDefaults.toJson(Promotion.serializer().list, it) }
                 obj.hide?.let { KeyHide to JsonNoDefaults.toJson(KSerializerObjectIDs, it) }
                 obj.userData?.let { KeyUserData to it }
+                obj.filterPromotes?.let { KeyFilterPromotes to it }
             }
 
             encoder.asJsonOutput().encodeJson(json)
@@ -112,6 +114,7 @@ public data class Consequence(
             val userData = json.getObjectOrNull(KeyUserData)
             val edits = params?.getEdits()
             val query = params?.extractQuery(edits)
+            val filterPromotes = json.getPrimitiveOrNull(KeyFilterPromotes)?.booleanOrNull
 
             return Consequence(
                 automaticFacetFilters = automaticFacetFilters,
@@ -120,7 +123,8 @@ public data class Consequence(
                 promote = promote,
                 hide = hide,
                 userData = userData,
-                edits = edits
+                edits = edits,
+                filterPromotes = filterPromotes
             )
         }
     }
