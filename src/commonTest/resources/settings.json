@@ -114,6 +114,9 @@
   ],
   "maxFacetHits": 100,
   "version": 1,
+  "userData": {
+    "customUserData": 42
+  },
   "indexLanguages": [
     "ja"
   ]
