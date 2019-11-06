@@ -363,7 +363,11 @@ public data class Settings(
      * Accepted value: [Language.Japanese]
      * Input data to index is treated as the given language(s) for segmentation.
      */
-    @SerialName(KeyIndexLanguages) var indexLanguages: List<Language>? = null
+    @SerialName(KeyIndexLanguages) var indexLanguages: List<Language>? = null,
+    /**
+     * Override the custom normalization handled by the engine.
+     */
+    @SerialName(KeyCustomNormalization) var customNormalization: Map<String, Map<String, String>>? = null
 ) {
 
     /**
