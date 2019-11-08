@@ -356,5 +356,7 @@ internal class TestKeys {
         KeyAlternatives shouldEqual "alternatives"
         KeyIndexLanguages shouldEqual "indexLanguages"
         KeyCustomNormalization shouldEqual "customNormalization"
+        KeyFilterPromotes shouldEqual "filterPromotes"
+        KeyUsers shouldEqual "users"
     }
 }
