@@ -88,7 +88,8 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             maxFacetHits = int,
             percentileComputation = boolean,
             similarQuery = string,
-            enableABTest = boolean
+            enableABTest = boolean,
+            explainModules = listOf(ExplainModule.MatchAlternatives)
         ) to json {
             KeyQuery to string
             KeyAttributesToRetrieve to attributesJson
@@ -157,6 +158,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeyPercentileComputation to boolean
             KeySimilarQuery to string
             KeyEnableABTest to boolean
+            KeyExplain to jsonArray { +ExplainModule.MatchAlternatives.raw }
         }
     )
 

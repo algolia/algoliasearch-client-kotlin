@@ -1,5 +1,6 @@
 package com.algolia.search.dsl
 
+import com.algolia.search.dsl.advanced.DSLExplainModules
 import com.algolia.search.dsl.advanced.DSLResponseFields
 import com.algolia.search.dsl.attributes.DSLAttributes
 import com.algolia.search.dsl.attributes.DSLAttributesSet
@@ -170,4 +171,11 @@ public fun Query.analyticsTags(block: DSLStrings.() -> Unit) {
  */
 public fun Query.responseFields(block: DSLResponseFields.() -> Unit) {
     responseFields = DSLResponseFields(block)
+}
+
+/**
+ * Assign the output of [block] to [Query.explainModules].
+ */
+public fun Query.explainModules(block: DSLExplainModules.() -> Unit) {
+    explainModules = DSLExplainModules(block)
 }
