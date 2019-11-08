@@ -355,6 +355,7 @@ internal class TestKeys {
         KeyEnableABTest shouldEqual "enableABTest"
         KeyAlternatives shouldEqual "alternatives"
         KeyIndexLanguages shouldEqual "indexLanguages"
+        KeyFilterPromotes shouldEqual "filterPromotes"
         KeyUsers shouldEqual "users"
     }
 }

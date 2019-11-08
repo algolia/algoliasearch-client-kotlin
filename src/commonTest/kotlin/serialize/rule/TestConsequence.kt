@@ -39,7 +39,7 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
                 }
             }
         },
-        Consequence(query = query, promote = promotions, hide = objectIDs, userData = userData) to json {
+        Consequence(query = query, promote = promotions, hide = objectIDs, userData = userData, filterPromotes = true) to json {
             KeyParams to queryJson
             KeyPromote to promotionsSerialized
             KeyHide to jsonArray {
@@ -47,6 +47,7 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
                 +json { KeyObjectID to objectIDB.raw }
             }
             KeyUserData to userData
+            KeyFilterPromotes to true
         },
         Consequence(automaticFacetFilters = filters, automaticOptionalFacetFilters = filters, query = query) to json {
             KeyParams to json {

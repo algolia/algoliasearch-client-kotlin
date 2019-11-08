@@ -88,6 +88,7 @@ public class DSLRules(
         automaticOptionalFacetFilters: List<AutomaticFacetFilters>? = null,
         edits: List<Edit>? = null,
         promote: List<Promotion>? = null,
+        filterPromotes: Boolean? = null,
         userData: JsonObject? = null,
         hide: List<ObjectID>? = null,
         query: Query? = null
@@ -99,7 +100,8 @@ public class DSLRules(
             promote = promote,
             userData = userData,
             hide = hide,
-            query = query
+            query = query,
+            filterPromotes = filterPromotes
         )
     }
 
