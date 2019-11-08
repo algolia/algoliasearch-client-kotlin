@@ -116,5 +116,11 @@
   "version": 1,
   "indexLanguages": [
     "ja"
-  ]
+  ],
+  "customNormalization": {
+    "default": {
+      "ä": "ae",
+      "ü": "ue"
+    }
+  }
 }

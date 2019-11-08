@@ -85,7 +85,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             version = int,
             advancedSyntaxFeatures = listOf(AdvancedSyntaxFeatures.ExcludeWords, AdvancedSyntaxFeatures.ExactPhrase),
             userData = json { unknown to unknown },
-            indexLanguages = listOf(Language.Japanese)
+            indexLanguages = listOf(Language.Japanese),
+            customNormalization = mapOf(unknown to mapOf(unknown to unknown))
         ) to json {
             // Attributes
             KeySearchableAttributes to attributesJson
@@ -156,6 +157,9 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyUserData to json { unknown to unknown }
             KeyPrimary to JsonNull
             KeyIndexLanguages to jsonArray { +Language.Japanese.raw }
+            KeyCustomNormalization to json {
+                unknown to json { unknown to unknown }
+            }
         }
     )
 
