@@ -13,6 +13,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.io.core.String
 import runBlocking
+import shouldBeFalse
 import shouldBeTrue
 import shouldEqual
 import shouldNotBeEmpty
@@ -87,6 +88,7 @@ internal class TestSuiteMultiCluster {
             clientMcm.listUserIDs().userIDs.filter { it.userID.raw.startsWith(prefix) }.forEach {
                 clientMcm.removeUserID(it.userID)
             }
+            clientMcm.hasPendingMapping(true).clusters.isNullOrEmpty().shouldBeFalse()
         }
     }
 }
