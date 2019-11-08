@@ -5,10 +5,13 @@ import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multicluster.UserIDQuery
+import com.algolia.search.model.request.RequestAssignUserIDs
 import com.algolia.search.model.response.*
+import com.algolia.search.serialize.*
 import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.deletion.Deletion
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.RouteClustersV1
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
@@ -73,5 +76,17 @@ internal class EndpointMulticlusterImpl(
         val body = JsonNoDefaults.stringify(UserIDQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
+    }
+
+    override suspend fun assignUserIds(
+        userIDs: List<UserID>,
+        clusterName: ClusterName,
+        requestOptions: RequestOptions?
+    ): Creation {
+        val path = "$RouteClustersV1/mapping/batch"
+        val request = RequestAssignUserIDs(clusterName, userIDs)
+        val body = JsonNoDefaults.stringify(RequestAssignUserIDs.serializer(), request)
+
+        return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
 }

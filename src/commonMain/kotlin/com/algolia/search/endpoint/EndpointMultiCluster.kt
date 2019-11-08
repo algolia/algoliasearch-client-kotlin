@@ -99,4 +99,19 @@ public interface EndpointMultiCluster {
         query: UserIDQuery = UserIDQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchUserID
+
+
+    /**
+     * Assign or move [userIDs] to a [clusterName].
+     * The time it takes to migrate (move) a user is proportional to the amount of data linked to each [UserID].
+     *
+     * @param userIDs List of [UserID] to save
+     * @param clusterName The [ClusterName]
+     * @param requestOptions Configure request locally with [RequestOptions].
+     */
+    suspend fun assignUserIds(
+        userIDs: List<UserID>,
+        clusterName: ClusterName,
+        requestOptions: RequestOptions? = null
+    ): Creation
 }
