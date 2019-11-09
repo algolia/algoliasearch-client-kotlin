@@ -3,7 +3,7 @@ package com.algolia.search.model.settings
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Language
 import kotlinx.serialization.*
-import kotlinx.serialization.internal.HashMapSerializer
+import kotlinx.serialization.internal.PairSerializer
 
 
 /**
@@ -14,15 +14,11 @@ import kotlinx.serialization.internal.HashMapSerializer
  * The goal of decompounding, regarding the previous example, is to index both Baum and Haus separately,
  * nstead of as a single word.
  */
-@Serializable(DecompoundedAttributes.Companion::class)
+@Serializable
 public data class DecompoundedAttributes internal constructor(
-    val map: Map<Language, List<Attribute>>
+    val language: Language,
+    val attributes: List<Attribute>
 ) {
-
-    internal constructor(
-        language: Language,
-        attributes: List<Attribute>
-    ) : this(mapOf(language to attributes.toList()))
 
     public constructor(
         language: Language.German,
@@ -38,19 +34,4 @@ public data class DecompoundedAttributes internal constructor(
         language: Language.Dutch,
         vararg attributes: Attribute
     ) : this(language, attributes.toList())
-
-    companion object : KSerializer<DecompoundedAttributes> {
-
-        private val serializer = HashMapSerializer(Language, Attribute.list)
-
-        override val descriptor: SerialDescriptor = serializer.descriptor
-
-        override fun serialize(encoder: Encoder, obj: DecompoundedAttributes) {
-            serializer.serialize(encoder, obj.map)
-        }
-
-        override fun deserialize(decoder: Decoder): DecompoundedAttributes {
-            return DecompoundedAttributes(serializer.deserialize(decoder))
-        }
-    }
 }
