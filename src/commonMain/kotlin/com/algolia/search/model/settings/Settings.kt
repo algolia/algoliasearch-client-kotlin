@@ -210,7 +210,7 @@ public data class Settings(
      * Engine default: []
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/decompoundedAttributes/?language=kotlin]
      */
-    @SerialName(KeyDecompoundedAttributes) var decompoundedAttributes: List<DecompoundedAttributes>? = null,
+    @SerialName(KeyDecompoundedAttributes) @Serializable(KSerializerDecompoundedAttributes::class) var decompoundedAttributes: List<DecompoundedAttributes>? = null,
 
     /**
      * Characters that should not be automatically normalized by the search engine.

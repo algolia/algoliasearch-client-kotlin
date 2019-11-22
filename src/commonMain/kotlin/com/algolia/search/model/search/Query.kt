@@ -456,16 +456,26 @@ public data class Query(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/percentileComputation/?language=kotlin]
      */
     @SerialName(KeyPercentileComputation) var percentileComputation: Boolean? = null,
+
     /**
      *  Overrides the query parameter and performs a more generic search that can be used to find "similar" results.
      *  Engine default: ""
      *  [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/similarQuery/?language=kotlin]
      */
     @SerialName(KeySimilarQuery) var similarQuery: String? = null,
+
     /**
      * Whether this query should be taken into consideration by currently active ABTests.
      * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/enableABTest/?language=kotlin]
      */
-    @SerialName(KeyEnableABTest) var enableABTest: Boolean? = null
+    @SerialName(KeyEnableABTest) var enableABTest: Boolean? = null,
+
+    /**
+     * Enriches the API’s response with meta-information as to how the query was processed.
+     * It is possible to enable several [ExplainModule] independently.
+     * Engine default: null
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/decompoundedAttributes/?language=kotlin]
+     */
+    @SerialName(KeyExplain) var explainModules: List<ExplainModule>? = null
 )

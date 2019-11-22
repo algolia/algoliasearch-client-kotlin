@@ -1,6 +1,7 @@
 package serialize.settings
 
 import attributeA
+import attributeB
 import attributes
 import attributesJson
 import boolean
@@ -58,7 +59,13 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             ignorePlurals = IgnorePlurals.True,
             removeStopWords = RemoveStopWords.True,
             camelCaseAttributes = attributes,
-            decompoundedAttributes = listOf(TestDecompoundedAttributes.item),
+            decompoundedAttributes = listOf(
+                DecompoundedAttributes(
+                    Language.German,
+                    attributeA,
+                    attributeB
+                )
+            ),
             keepDiacriticsOnCharacters = string,
             queryLanguages = listOf(Language.Afrikaans, Language.Albanian),
             // Query-rules
@@ -122,7 +129,12 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyIgnorePlurals to boolean
             KeyRemoveStopWords to boolean
             KeyCamelCaseAttributes to attributesJson
-            KeyDecompoundedAttributes to jsonArray { +TestDecompoundedAttributes.json }
+            KeyDecompoundedAttributes to json {
+                Language.German.raw to jsonArray {
+                    +attributeA.raw
+                    +attributeB.raw
+                }
+            }
             KeyKeepDiacriticsOnCharacters to string
             KeyQueryLanguages to jsonArray {
                 +Language.Afrikaans.raw

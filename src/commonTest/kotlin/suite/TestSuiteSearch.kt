@@ -2,14 +2,21 @@ package suite
 
 import clientAdmin1
 import clientSearch
+import com.algolia.search.dsl.*
+import com.algolia.search.helper.readContent
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.ObjectID
+import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.response.ResponseSearch
+import com.algolia.search.model.search.ExplainModule
+import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
+import io.ktor.client.features.ResponseException
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.list
 import runBlocking
@@ -88,6 +95,56 @@ internal class TestSuiteSearch {
                 facetHits shouldContain "Apple"
                 facetHits shouldContain "Arista Networks"
             }
+        }
+    }
+
+    @Test
+    fun explain() {
+
+        @Serializable
+        data class DecompoundingObject(
+            override val objectID: ObjectID,
+            val type: String,
+            val category: String? = null
+        ): Indexable
+
+        runBlocking {
+            val settings = settings {
+                decompoundedAttributes {
+                    german {
+                        +"category"
+                        +"type"
+                        +"desc"
+                    }
+                }
+                queryLanguages {
+                    +German
+                }
+                ignorePlurals = IgnorePlurals.True
+            }
+            val data = listOf(
+                DecompoundingObject(ObjectID("A...B"), "Hütte", "Hunde"),
+                DecompoundingObject(ObjectID("AB"), "Ich will ein schöne Hundehütte"),
+                DecompoundingObject(ObjectID("BA"), "Hüttehunde, Es ist eine lustige Verbindung!"),
+                DecompoundingObject(ObjectID("B...A"), "Eine Hütte für Hunde"),
+                DecompoundingObject(ObjectID("A"), "Hunde"),
+                DecompoundingObject(ObjectID("B"), "Hütte")
+            )
+
+            index.apply {
+                saveObjects(DecompoundingObject.serializer(), data).wait()
+                setSettings(settings).wait()
+            }
+
+            val search = index.search(
+                query("Hundehütte") {
+                    ignorePlurals = IgnorePlurals.True
+                    explainModules { +ExplainModule.MatchAlternatives }
+                }
+            )
+
+            search.explainOrNull.shouldNotBeNull()
+            search.explain.match.alternatives.size shouldEqual 11
         }
     }
 }
