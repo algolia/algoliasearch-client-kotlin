@@ -114,4 +114,13 @@ public interface EndpointMultiCluster {
         clusterName: ClusterName,
         requestOptions: RequestOptions? = null
     ): Creation
+
+    /**
+     * @param retrieveMapping If set to true, retrieves [ResponseHasPendingMapping.clusters].
+     * @param requestOptions Configure request locally with [RequestOptions].
+     */
+    suspend fun hasPendingMapping(
+        retrieveMapping: Boolean = false,
+        requestOptions: RequestOptions? = null
+    ): ResponseHasPendingMapping
 }

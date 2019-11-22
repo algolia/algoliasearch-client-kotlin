@@ -372,5 +372,7 @@ internal class TestKeys {
         KeyTypos shouldEqual "typos"
         KeyMatchAlternatives shouldEqual "match.alternatives"
         KeyTypes shouldEqual "types"
+        KeyPending shouldEqual "pending"
+        KeyGetClusters shouldEqual "getClusters"
     }
 }
