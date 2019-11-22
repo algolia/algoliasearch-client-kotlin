@@ -358,5 +358,7 @@ internal class TestKeys {
         KeyCustomNormalization shouldEqual "customNormalization"
         KeyFilterPromotes shouldEqual "filterPromotes"
         KeyUsers shouldEqual "users"
+        KeyPending shouldEqual "pending"
+        KeyGetClusters shouldEqual "getClusters"
     }
 }

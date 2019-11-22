@@ -89,4 +89,16 @@ internal class EndpointMulticlusterImpl(
 
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
+
+    override suspend fun hasPendingMapping(
+        retrieveMapping: Boolean,
+        requestOptions: RequestOptions?
+    ): ResponseHasPendingMapping {
+        val path = "$RouteClustersV1/mapping/pending"
+        val options = requestOptionsBuilder(requestOptions) {
+            parameter(KeyGetClusters, retrieveMapping)
+        }
+
+        return transport.request(HttpMethod.Get, CallType.Read, path, options)
+    }
 }
