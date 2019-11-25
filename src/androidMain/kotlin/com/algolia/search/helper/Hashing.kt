@@ -18,9 +18,9 @@ internal actual fun String.sha256(key: String): String {
 }
 
 internal actual fun String.encodeBase64(): String {
-    return String(Base64.encode(toByteArray(), Base64.NO_WRAP))
+    return Base64.encodeToString(toByteArray(), Base64.DEFAULT)
 }
 
 internal actual fun String.decodeBase64(): String {
-    return String(Base64.decode(this, Base64.NO_WRAP))
+    return String(Base64.decode(this, Base64.DEFAULT))
 }

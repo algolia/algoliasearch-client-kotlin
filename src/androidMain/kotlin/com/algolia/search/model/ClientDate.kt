@@ -15,11 +15,11 @@ public actual data class ClientDate internal actual constructor(override val raw
     internal actual constructor(timestamp: Long) : this(DateISO8601.format(timestamp))
 
     /**
-     * In the eventuality of the Date format being wrong, we create an empty [Date] object instead of throwing an exception.
+     * In the eventuality of the Date format being wrong, we return null.
      */
-    val date: Date = when {
+    val date: Date? = when {
         raw.length == 20 -> DateISO8601.dateISO8601.parse(raw)
         raw.length == 24 -> DateISO8601.dateISO8601Millis.parse(raw)
-        else -> Date()
+        else -> null
     }
 }
