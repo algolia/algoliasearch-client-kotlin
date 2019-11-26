@@ -5,6 +5,7 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
+import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.search.*
 import com.algolia.search.model.settings.Settings
@@ -132,7 +133,7 @@ public data class ResponseSearch(
     @SerialName(KeyFacets) @Serializable(KSerializerFacetMap::class) val facetsOrNull: Map<Attribute, List<Facet>>? = null,
     /**
      * A mapping of each facet name to the corresponding facet counts for disjunctive facets.
-     * Returned only by the [EndpointSearch.searchDisjunctiveFacets] method.
+     * Returned only by the [EndpointSearch.advancedSearch] method.
      * [Documentation][https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/how-to/faceting/?language=kotlin#conjunctive-and-disjunctive-faceting]
      */
     @SerialName(KeyDisjunctiveFacets) @Serializable(KSerializerFacetMap::class) val disjunctiveFacetsOrNull: Map<Attribute, List<Facet>>? = null,
@@ -152,9 +153,14 @@ public data class ResponseSearch(
      */
     @SerialName(KeyQueryID) val queryIDOrNull: QueryID? = null,
     /**
-     *
+     * A mapping of each facet name to the corresponding facet counts for hierarchical facets.
+     * Returned only by the [EndpointSearch.advancedSearch] method, only if a [FilterGroup.And.Hierarchical] is used.
      */
-    @SerialName(KeyHierarchicalFacets) val hierarchicalFacetsOrNull: Map<Attribute, List<Facet>>? = null
+    @SerialName(KeyHierarchicalFacets) val hierarchicalFacetsOrNull: Map<Attribute, List<Facet>>? = null,
+    /**
+     * Meta-information as to how the query was processed.
+     */
+    @SerialName(KeyExplain) val explainOrNull: Explain? = null
 ) {
 
     public val hits: List<Hit>
@@ -243,6 +249,9 @@ public data class ResponseSearch(
 
     public val hierarchicalFacets: Map<Attribute, List<Facet>>
         get() = hierarchicalFacetsOrNull!!
+
+    public val explain: Explain
+        get() = explainOrNull!!
 
     @Deprecated(
         message = "Use getObjectPosition instead.",

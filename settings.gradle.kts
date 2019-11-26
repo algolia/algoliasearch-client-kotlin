@@ -1,9 +1,9 @@
-import java.net.URI
-
 pluginManagement {
     repositories {
+        google()
         mavenCentral()
-        maven { url = URI("https://plugins.gradle.org/m2/") }
+        jcenter()
+        maven { url = java.net.URI("https://plugins.gradle.org/m2/") }
     }
     resolutionStrategy {
         eachPlugin {

@@ -1,3 +1,13 @@
+# 1.2.0
+
+- Updated Kotlin `1.3.60`
+- Ktor `1.2.6`
+- Add `hasPendingMapping` method to multi cluster management #149
+- Add `assignUserIDs` method to multi cluster management #144
+- Add `explain decompouding` feature #147
+- Add `filterPromotes` parameter to `Rule.Consequence` #142
+- Add Android multiplatform artifact (`com.algolia:algoliasearch-client-kotlin-android`), targeting SDK 29 #132
+
 # 1.1.4
 
 - Updated Kotlin to `1.3.50`

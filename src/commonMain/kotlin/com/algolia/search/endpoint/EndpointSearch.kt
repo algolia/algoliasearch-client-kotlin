@@ -149,7 +149,7 @@ public interface EndpointSearch {
      *  @param paginate To prevent the iteration through pages of results.
      *  @param requestOptions Configure request locally with [RequestOptions].
      */
-    tailrec suspend fun findObject(
+    suspend fun findObject(
         match: (ResponseSearch.Hit) -> Boolean,
         query: Query = Query(),
         paginate: Boolean = true,

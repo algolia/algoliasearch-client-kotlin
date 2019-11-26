@@ -17,13 +17,13 @@ import runBlocking
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
-import kotlin.test.BeforeTest
-import kotlin.test.Test
+import kotlin.test.Ignore
 
 
-internal class TestSecuredAPIKey {
+@Ignore
+internal class TestSecuredAPIKeyTools {
 
-    private val suffix = "secured_api_keys"
+    val suffix = "secured_api_keys"
     private val indexName = testSuiteIndexName(suffix)
     private val indexNameDev = indexName.copy(raw = indexName.raw + "_dev")
     private val index = clientAdmin1.initIndex(indexName)
@@ -36,14 +36,6 @@ internal class TestSecuredAPIKey {
     private val client = ClientSearch(clientAdmin1.applicationID, apiKey)
     private val data = json { KeyObjectID to "one" }
 
-    @BeforeTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
-
-    @Test
     fun test() {
         runBlocking {
             index.apply {
@@ -59,7 +51,6 @@ internal class TestSecuredAPIKey {
         }
     }
 
-    @Test
     fun expiredKey() {
         val restrictions = SecuredAPIKeyRestriction(
             validUntil = Time.getCurrentTimeMillis() - 600,
@@ -70,7 +61,6 @@ internal class TestSecuredAPIKey {
         (key.getSecuredApiKeyRemainingValidity() < 0).shouldBeTrue()
     }
 
-    @Test
     fun validKey() {
         val restrictions = SecuredAPIKeyRestriction(
             validUntil = Time.getCurrentTimeMillis() + 600,
@@ -81,7 +71,6 @@ internal class TestSecuredAPIKey {
         (key.getSecuredApiKeyRemainingValidity() > 0).shouldBeTrue()
     }
 
-    @Test
     fun remainingValidityParameter() {
         val restrictions = SecuredAPIKeyRestriction(
             restrictIndices = listOf(IndexName("index"))

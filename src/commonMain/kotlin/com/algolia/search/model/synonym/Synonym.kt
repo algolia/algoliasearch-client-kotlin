@@ -40,7 +40,12 @@ public sealed class Synonym {
         init {
             if (input.isBlank()) throw EmptyStringException("Input")
             if (synonyms.isEmpty()) throw EmptyListException("Synonyms")
-            if (synonyms.size > 100) throw IllegalArgumentException("OneWay synonym have a maximum of 100 synonyms")
+            require(synonyms.size <= limit) { "OneWay synonym have a maximum of $limit synonyms" }
+        }
+
+        companion object {
+
+            private const val limit = 100
         }
     }
 
@@ -54,7 +59,12 @@ public sealed class Synonym {
 
         init {
             if (synonyms.isEmpty()) throw EmptyListException("Synonyms")
-            if (synonyms.size > 20) throw IllegalArgumentException("OneWay synonym have a maximum of 100 synonyms")
+            require(synonyms.size <= limit) { "OneWay synonym have a maximum of $limit synonyms" }
+        }
+
+        companion object {
+
+            private const val limit = 20
         }
     }
 

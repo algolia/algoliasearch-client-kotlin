@@ -23,5 +23,24 @@
         }
       }
     }
+  },
+  {
+    "objectID": "query_promo",
+    "consequence": {
+      "params": {
+        "filters": "brand:OnePlus"
+      }
+    }
+  },
+  {
+    "objectID": "query_promo_summer",
+    "condition": {
+      "context": "summer"
+    },
+    "consequence": {
+      "params": {
+        "filters": "model:One"
+      }
+    }
   }
 ]

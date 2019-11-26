@@ -1,6 +1,7 @@
 package serialize.settings
 
 import attributeA
+import attributeB
 import attributes
 import attributesJson
 import boolean
@@ -58,7 +59,13 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             ignorePlurals = IgnorePlurals.True,
             removeStopWords = RemoveStopWords.True,
             camelCaseAttributes = attributes,
-            decompoundedAttributes = listOf(TestDecompoundedAttributes.item),
+            decompoundedAttributes = listOf(
+                DecompoundedAttributes(
+                    Language.German,
+                    attributeA,
+                    attributeB
+                )
+            ),
             keepDiacriticsOnCharacters = string,
             queryLanguages = listOf(Language.Afrikaans, Language.Albanian),
             // Query-rules
@@ -85,7 +92,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             version = int,
             advancedSyntaxFeatures = listOf(AdvancedSyntaxFeatures.ExcludeWords, AdvancedSyntaxFeatures.ExactPhrase),
             userData = json { unknown to unknown },
-            indexLanguages = listOf(Language.Japanese)
+            indexLanguages = listOf(Language.Japanese),
+            customNormalization = mapOf(unknown to mapOf(unknown to unknown))
         ) to json {
             // Attributes
             KeySearchableAttributes to attributesJson
@@ -121,7 +129,12 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyIgnorePlurals to boolean
             KeyRemoveStopWords to boolean
             KeyCamelCaseAttributes to attributesJson
-            KeyDecompoundedAttributes to jsonArray { +TestDecompoundedAttributes.json }
+            KeyDecompoundedAttributes to json {
+                Language.German.raw to jsonArray {
+                    +attributeA.raw
+                    +attributeB.raw
+                }
+            }
             KeyKeepDiacriticsOnCharacters to string
             KeyQueryLanguages to jsonArray {
                 +Language.Afrikaans.raw
@@ -156,6 +169,9 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyUserData to json { unknown to unknown }
             KeyPrimary to JsonNull
             KeyIndexLanguages to jsonArray { +Language.Japanese.raw }
+            KeyCustomNormalization to json {
+                unknown to json { unknown to unknown }
+            }
         }
     )
 

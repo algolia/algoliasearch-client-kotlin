@@ -1,24 +1,66 @@
+import com.android.build.gradle.LibraryExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 
+buildscript {
+    repositories {
+        google()
+    }
+    dependencies {
+        classpath("com.android.tools.build:gradle:3.5.2")
+    }
+}
 
 plugins {
-    id("kotlin-multiplatform") version "1.3.50"
-    id("kotlinx-serialization") version "1.3.50"
+    id("kotlin-multiplatform") version "1.3.60"
+    id("kotlinx-serialization") version "1.3.60"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
     id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.5"
 }
 
-version = Library.version
-group = Library.group
+apply(plugin = "com.android.library")
 
 repositories {
     jcenter()
+    google()
     mavenCentral()
     maven { url = URI("https://dl.bintray.com/kotlin/ktor") }
     maven { url = URI("https://kotlin.bintray.com/kotlinx") }
+}
+
+version = Library.version
+group = Library.group
+
+extensions.getByType(LibraryExtension::class.java).apply {
+    compileSdkVersion(29)
+
+    defaultConfig {
+        minSdkVersion(17)
+        targetSdkVersion(29)
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    testOptions.unitTests.isIncludeAndroidResources = true
+
+    sourceSets {
+        getByName("main") {
+            manifest.srcFile("src/androidMain/AndroidManifest.xml")
+            java.srcDirs("src/androidMain/kotlin")
+            res.srcDirs("src/androidMain/res")
+        }
+        getByName("test") {
+            java.srcDirs("src/androidTest/kotlin")
+            res.srcDirs("src/androidTest/res")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    testOptions.unitTests.isIncludeAndroidResources = true
 }
 
 buildConfigKotlin {
@@ -29,6 +71,17 @@ buildConfigKotlin {
 
 kotlin {
     jvm {
+        compilations.all {
+            kotlinOptions {
+                jvmTarget = "1.8"
+            }
+        }
+    }
+    android {
+        mavenPublication {
+            artifactId = "${Library.artifact}-android"
+        }
+        publishLibraryVariants("release")
         compilations.all {
             kotlinOptions {
                 jvmTarget = "1.8"
@@ -74,6 +127,26 @@ kotlin {
                 implementation(Ktor("client-okhttp"))
                 implementation(Ktor("client-apache"))
                 implementation(Ktor("client-android"))
+            }
+        }
+        val androidMain by getting {
+            dependencies {
+                api(kotlin("stdlib-jdk8"))
+                api(Ktor("client-core-jvm"))
+                api(Ktor("client-json-jvm"))
+                api(Ktor("client-logging-jvm"))
+                api(Ktor("client-serialization-jvm"))
+            }
+        }
+        val androidTest by getting {
+            dependencies {
+                implementation(kotlin("test"))
+                implementation(kotlin("test-junit"))
+                implementation(Ktor("client-mock-jvm"))
+                implementation(Ktor("client-android"))
+                implementation(AndroidTestRunner())
+                implementation(AndroidTestExtRunner())
+                implementation(Robolectric())
             }
         }
     }
@@ -151,9 +224,8 @@ bintray {
 
 tasks {
     val bintrayUpload by getting(BintrayUploadTask::class) {
-        dependsOn(publishToMavenLocal)
         doFirst {
-            setPublications("jvm", "metadata")
+            setPublications("jvm", "metadata", "androidRelease")
         }
     }
     withType<KotlinCompile> {

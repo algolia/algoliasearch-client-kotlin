@@ -205,4 +205,13 @@ internal class TestDSLQuery {
 
         query.responseFields.shouldNotBeNull()
     }
+
+    @Test
+    fun explainModules() {
+        val query = query {
+            explainModules { +MatchAlternatives }
+        }
+
+        query.explainModules.shouldNotBeNull()
+    }
 }

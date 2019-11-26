@@ -210,7 +210,7 @@ public data class Settings(
      * Engine default: []
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/decompoundedAttributes/?language=kotlin]
      */
-    @SerialName(KeyDecompoundedAttributes) var decompoundedAttributes: List<DecompoundedAttributes>? = null,
+    @SerialName(KeyDecompoundedAttributes) @Serializable(KSerializerDecompoundedAttributes::class) var decompoundedAttributes: List<DecompoundedAttributes>? = null,
 
     /**
      * Characters that should not be automatically normalized by the search engine.
@@ -363,7 +363,11 @@ public data class Settings(
      * Accepted value: [Language.Japanese]
      * Input data to index is treated as the given language(s) for segmentation.
      */
-    @SerialName(KeyIndexLanguages) var indexLanguages: List<Language>? = null
+    @SerialName(KeyIndexLanguages) var indexLanguages: List<Language>? = null,
+    /**
+     * Override the custom normalization handled by the engine.
+     */
+    @SerialName(KeyCustomNormalization) var customNormalization: Map<String, Map<String, String>>? = null
 ) {
 
     /**
