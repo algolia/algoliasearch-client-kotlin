@@ -14,6 +14,7 @@ internal class DocAssignUserID {
 //    suspend fun ClientSearch.assignUserID(
 //        #{userID}: __UserID__,
 //        #{clusterName}: __ClusterName__,
+//        #{requestOptions}: __RequestOptions?__ = null
 //    ): Creation
 
     @Test
