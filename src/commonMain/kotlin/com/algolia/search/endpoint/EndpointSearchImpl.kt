@@ -7,6 +7,7 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
+import com.algolia.search.model.filter.FilterGroupsConverter
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.request.RequestParams
 import com.algolia.search.model.response.ResponseHitWithPosition
@@ -102,20 +103,19 @@ internal class EndpointSearchImpl(
         val filtersOrFacet = filtersOr.filterIsInstance<Filter.Facet>()
         val filtersOrTag = filtersOr.filterIsInstance<Filter.Tag>()
         val filtersOrNumeric = filtersOr.filterIsInstance<Filter.Numeric>()
-        val queryForResults = query
-            .toIndexQuery()
-            .filters(filtersAnd, filtersOrFacet, filtersOrTag, filtersOrNumeric)
+        val queryForResults = query.toIndexQuery().setFilters(filterGroups)
         val queriesForDisjunctiveFacets = disjunctiveFacets.map { attribute ->
+            val groups = filterGroups.map { group ->
+                if (group is FilterGroup.Or.Facet) {
+                    FilterGroup.Or.Facet(group.filter { filter -> filter.attribute != attribute }.toSet())
+                } else group
+            }
+
             query
                 .toIndexQuery()
-                .filters(
-                    filtersAnd,
-                    filtersOrFacet.filter { it.attribute != attribute },
-                    filtersOrTag,
-                    filtersOrNumeric
-                )
                 .setFacets(attribute)
                 .optimize()
+                .setFilters(groups.toSet())
         }
         val queriesForHierarchicalFacets = filterGroups.filterIsInstance<FilterGroup.And.Hierarchical>().flatMap {
             it.attributes
@@ -137,6 +137,11 @@ internal class EndpointSearchImpl(
         val response = EndpointMultipleIndexImpl(transport).multipleQueries(queries, requestOptions = requestOptions)
 
         return response.aggregateResult(disjunctiveFacets.size)
+    }
+
+    private fun IndexQuery.setFilters(groups: Set<FilterGroup<*>>): IndexQuery {
+        query.filters = FilterGroupsConverter.SQL(groups)
+        return this
     }
 
     private fun List<ResponseSearch>.aggregateFacets(): Map<Attribute, List<Facet>> {
@@ -200,7 +205,6 @@ internal class EndpointSearchImpl(
         }
         return this
     }
-
 
     private fun IndexQuery.setFacets(facet: Attribute?): IndexQuery {
         if (facet != null) query.facets = setOf(facet)

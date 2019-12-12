@@ -14,7 +14,7 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
 
         override fun invoke(groups: Set<FilterGroup<*>>): String? {
             return if (groups.isNotEmpty()) {
-                groups.joinToString(separator = " AND ") { group ->
+                groups.filterNot { it.isEmpty() }.joinToString(separator = " AND ") { group ->
                     val separator = when (group) {
                         is FilterGroup.And -> " AND "
                         is FilterGroup.Or -> " OR "

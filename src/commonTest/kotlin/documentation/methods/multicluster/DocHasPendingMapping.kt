@@ -2,6 +2,8 @@ package documentation.methods.multicluster
 
 import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
+import com.algolia.search.model.response.ResponseHasPendingMapping
+import com.algolia.search.transport.RequestOptions
 import documentation.client
 import runBlocking
 import kotlin.test.Ignore
@@ -9,18 +11,17 @@ import kotlin.test.Test
 
 
 @Ignore
-internal class DocAssignUserID {
+internal class DocHasPendingMapping {
 
-//    suspend fun ClientSearch.assignUserID(
-//        #{userID}: __UserID__,
-//        #{clusterName}: __ClusterName__,
+//    suspend fun hasPendingMapping(
+//        #{retrieveMapping}: __Boolean__ = false,
 //        #{requestOptions}: __RequestOptions?__ = null
-//    ): Creation
+//    ): ResponseHasPendingMapping
 
     @Test
     fun snippet1() {
         runBlocking {
-            client.assignUserID(UserID("myUserID1"), ClusterName("c1-test"))
+            client.hasPendingMapping(retrieveMapping = true)
         }
     }
 }

@@ -11,14 +11,10 @@ import kotlinx.serialization.internal.StringSerializer
 
 
 /**
- * [ClusterName] of a cluster. Can't be a blank or empty string.
+ * [ClusterName] of a cluster.
  */
 @Serializable(ClusterName.Companion::class)
 public data class ClusterName(override val raw: String) : Raw<String> {
-
-    init {
-        if (raw.isBlank()) throw EmptyStringException("ClusterName")
-    }
 
     override fun toString(): String {
         return raw
