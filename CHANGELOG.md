@@ -1,3 +1,7 @@
+# 1.2.1
+
+- Fixed a bug when using advanced search: Disjunctive filters where flattened and lost proper AND / OR operator from the group #151
+
 # 1.2.0
 
 - Updated Kotlin `1.3.60`
