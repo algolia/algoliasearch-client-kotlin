@@ -56,7 +56,7 @@ internal class TestSuiteDisjunctive {
             )
             val filterGroups = setOf(
                 FilterGroup.Or.Facet(filters),
-                FilterGroup.And.Facet( Filter.Facet(category, "device"))
+                FilterGroup.And.Facet(Filter.Facet(category, "device"))
             )
 
             index.apply {
