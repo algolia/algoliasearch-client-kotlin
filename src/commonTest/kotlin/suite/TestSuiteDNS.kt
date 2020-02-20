@@ -12,7 +12,7 @@ import io.ktor.client.features.logging.LogLevel
 import io.ktor.http.ContentType
 import io.ktor.http.headersOf
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.io.ByteReadChannel
+import io.ktor.utils.io.ByteReadChannel
 import runBlocking
 import shouldEqual
 import kotlin.test.Test
@@ -29,16 +29,15 @@ internal class TestSuiteDNS {
 
         requestCount++
         delay(delay)
-        content
+        respond(
+            headers = headersOf(
+                "Content-Type",
+                listOf(ContentType.Application.Json.toString())
+            ),
+            content = ByteReadChannel(Json.stringify(ResponseSearch.serializer(), ResponseSearch()))
+        )
     }
 
-    private val content = respond(
-        headers = headersOf(
-            "Content-Type",
-            listOf(ContentType.Application.Json.toString())
-        ),
-        content = ByteReadChannel(Json.stringify(ResponseSearch.serializer(), ResponseSearch()))
-    )
     private val client = ClientSearch(
         ConfigurationSearch(
             clientAdmin1.applicationID,

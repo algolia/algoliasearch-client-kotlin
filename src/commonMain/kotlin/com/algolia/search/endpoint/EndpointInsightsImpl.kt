@@ -7,7 +7,7 @@ import com.algolia.search.serialize.JsonNoDefaults
 import com.algolia.search.serialize.RouteEventsV1
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
-import io.ktor.client.response.HttpResponse
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpMethod
 
 

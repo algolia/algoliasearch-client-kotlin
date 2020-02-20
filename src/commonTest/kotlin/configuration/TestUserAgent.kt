@@ -14,6 +14,9 @@ import io.ktor.client.engine.mock.respondOk
 import io.ktor.client.features.ResponseException
 import io.ktor.client.features.UserAgent
 import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.request.request
+import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.response
 import runBlocking
 import shouldBeTrue
 import shouldEqual
@@ -47,8 +50,8 @@ internal class TestUserAgent {
                     }
                 })
             val client = ClientSearch(configuration)
-            val request = client.httpClient.execute(HttpRequestBuilder())
-            val headers = request.response.call.request.headers
+            val request = client.httpClient.request<HttpResponse>(HttpRequestBuilder())
+            val headers = request.call.request.headers
 
             headers.contains(userAgentKey).shouldBeTrue()
             headers[userAgentKey] shouldEqual clientUserAgent(BuildConfig.version)

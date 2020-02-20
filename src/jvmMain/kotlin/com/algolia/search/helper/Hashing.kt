@@ -1,6 +1,6 @@
 package com.algolia.search.helper
 
-import kotlinx.io.core.toByteArray
+import io.ktor.utils.io.core.toByteArray
 import kotlinx.serialization.internal.HexConverter
 import java.util.*
 import javax.crypto.Mac

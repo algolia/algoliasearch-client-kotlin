@@ -10,7 +10,7 @@ import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withTimeout
-import kotlinx.io.IOException
+import io.ktor.utils.io.errors.IOException
 import kotlin.math.floor
 
 
