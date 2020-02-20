@@ -4,8 +4,7 @@ import com.algolia.search.endpoint.EndpointPlaces
 import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.*
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
 
 
 @Serializable
@@ -39,7 +38,7 @@ public data class RankingInfo(
      * Distance between the geo location in the search query and the best matching geo location in the record,
      * divided by the geo precision (in meters).
      */
-    @SerialName(KeyGeoDistance) val geoDistance: Int,
+    @SerialName(KeyGeoDistance) @Serializable(with=KSerializerGeoDistance::class)  val geoDistance: GeoDistance,
     /**
      * Precision used when computing the geo distance, in meters.
      * All distances will be floored to a multiple of this precision.

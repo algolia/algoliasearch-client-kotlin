@@ -1,3 +1,7 @@
+# 1.2.2
+
+- Fixed a bug for geoDistance when we receive a MAX_ULONG value of 18446744073709551615 from the server #156
+
 # 1.2.1
 
 - Fixed a bug when using advanced search: Disjunctive filters where flattened and lost proper AND / OR operator from the group #151
