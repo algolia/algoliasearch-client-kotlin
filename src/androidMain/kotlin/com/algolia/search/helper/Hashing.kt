@@ -1,7 +1,7 @@
 package com.algolia.search.helper
 
 import android.util.Base64
-import kotlinx.io.core.toByteArray
+import io.ktor.utils.io.core.toByteArray
 import kotlinx.serialization.internal.HexConverter
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec

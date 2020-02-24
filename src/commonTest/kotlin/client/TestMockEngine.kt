@@ -12,7 +12,7 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
-import kotlinx.coroutines.io.ByteReadChannel
+import io.ktor.utils.io.ByteReadChannel
 import runBlocking
 import shouldEqual
 import kotlin.test.Test

@@ -1,8 +1,8 @@
 package com.algolia.search.helper
 
 import io.ktor.client.features.ResponseException
-import io.ktor.client.response.readBytes
-import kotlinx.io.core.String
+import io.ktor.client.statement.readBytes
+import io.ktor.utils.io.core.String
 
 
 /**

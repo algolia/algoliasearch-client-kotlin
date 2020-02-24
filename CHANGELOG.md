@@ -1,3 +1,7 @@
+# 1.3.1
+
+- Updated Ktor to `1.3.0`
+
 # 1.2.2
 
 - Fixed a bug for geoDistance when we receive a MAX_ULONG value of 18446744073709551615 from the server #156
