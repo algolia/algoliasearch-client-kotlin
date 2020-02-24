@@ -18,7 +18,7 @@ import documentation.index
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.*
-import kotlinx.io.IOException
+import io.ktor.utils.io.errors.IOException
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json

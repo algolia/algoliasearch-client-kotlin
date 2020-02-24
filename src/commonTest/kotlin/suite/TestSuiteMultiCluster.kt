@@ -6,12 +6,12 @@ import com.algolia.search.helper.toUserID
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multicluster.UserIDQuery
 import io.ktor.client.features.ResponseException
-import io.ktor.client.response.readBytes
+import io.ktor.client.statement.readBytes
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import kotlinx.io.core.String
+import io.ktor.utils.io.core.String
 import runBlocking
 import shouldBeFalse
 import shouldBeTrue

@@ -144,7 +144,7 @@ internal class TestSuiteSearch {
             )
 
             search.explainOrNull.shouldNotBeNull()
-            search.explain.match.alternatives.size shouldEqual 11
+            search.explain.match.alternatives.size shouldEqual 13
         }
     }
 }

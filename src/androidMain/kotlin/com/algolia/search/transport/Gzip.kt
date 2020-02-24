@@ -2,7 +2,7 @@ package com.algolia.search.transport
 
 import io.ktor.util.GZip
 import io.ktor.util.toByteArray
-import kotlinx.coroutines.io.ByteReadChannel
+import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.runBlocking
 
 

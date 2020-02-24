@@ -7,7 +7,7 @@ import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.EventName
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.insights.UserToken
-import io.ktor.client.response.HttpResponse
+import io.ktor.client.statement.HttpResponse
 
 
 class EndpointInsightsUserImpl(
