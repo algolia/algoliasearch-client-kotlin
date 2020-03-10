@@ -45,12 +45,7 @@ internal class TestSuiteSynonyms {
     private val index = clientAdmin1.initIndex(indexName)
 
 
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
+
 
     @Test
     fun test() {

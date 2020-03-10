@@ -38,12 +38,7 @@ internal class TestSuiteABTest {
         endAt = ClientDate(Time.getCurrentTimeMillis() + dayInMillis)
     )
 
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
+
 
     @Test
     fun test() {

@@ -37,12 +37,7 @@ internal class TestSuiteAATest {
         )
     )
 
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
+
 
     @Test
     fun test() {

@@ -53,12 +53,7 @@ internal class TestSuiteIndexing {
             }
     }
 
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
+
 
     @Test
     fun test() {

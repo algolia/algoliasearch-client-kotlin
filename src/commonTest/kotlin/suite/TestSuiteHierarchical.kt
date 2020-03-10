@@ -43,12 +43,6 @@ internal class TestSuiteHierarchical {
     private val category3Sub2Sub2Sub1 = "Category3 > SubCategory2 > SubSubCategory2 > SubSubSubCategory1"
     private val category3Sub2Sub2Sub2 = "Category3 > SubCategory2 > SubSubCategory2 > SubSubSubCategory2"
 
-    @BeforeTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
 
     @Test
     fun hierarchicalDisjunctive() {

@@ -44,12 +44,7 @@ internal class TestSuiteInsights {
         Filter.Facet(attribute, "bar")
     )
 
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
+
 
     @Test
     fun test() {

@@ -42,12 +42,7 @@ internal class TestSuiteCopyIndex {
     )
     private val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Default(company)))
 
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
+
 
     @Test
     fun test() {
