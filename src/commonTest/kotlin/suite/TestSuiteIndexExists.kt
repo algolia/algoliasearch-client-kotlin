@@ -15,13 +15,6 @@ internal class TestSuiteIndexExists {
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
 
-    @BeforeTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
-
     @Test
     fun test() {
         runBlocking {

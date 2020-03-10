@@ -27,12 +27,7 @@ internal class TestSuiteMultipleOperations {
     private val jimmie = "Jimmie"
     private val json = json { firstname to jimmie }
 
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
+
 
     @Test
     fun test() {

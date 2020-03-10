@@ -26,12 +26,7 @@ class TestSuiteReplaceAll {
     private val objectIDOne = "one".toObjectID()
     private val objectIDTwo = "two".toObjectID()
 
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
+
 
     @Test
     fun test() {

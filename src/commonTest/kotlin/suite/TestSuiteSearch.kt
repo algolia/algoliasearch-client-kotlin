@@ -39,12 +39,7 @@ internal class TestSuiteSearch {
     private val index = clientAdmin1.initIndex(indexName)
     private val search = clientSearch.initIndex(indexName)
 
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
+
 
     @Test
     fun test() {

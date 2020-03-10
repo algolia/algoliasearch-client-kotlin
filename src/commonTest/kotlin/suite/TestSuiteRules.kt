@@ -33,12 +33,7 @@ internal class TestSuiteRules {
     private val model = "model".toAttribute()
     private val index = clientAdmin1.initIndex(indexName)
 
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
+
 
     @Test
     fun test() {

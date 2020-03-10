@@ -73,11 +73,4 @@ internal class TestSuiteAPIKey {
             }
         }
     }
-
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            clientAdmin1.deleteAPIKey(key)
-        }
-    }
 }

@@ -37,14 +37,6 @@ internal class TestSuiteAccount {
         Settings(searchableAttributes = listOf(SearchableAttribute.Default("objectID".toAttribute())))
 
 
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix1)
-            cleanIndex(clientAdmin2, suffix2)
-        }
-    }
-
     @Test
     fun test() {
         runBlocking {
