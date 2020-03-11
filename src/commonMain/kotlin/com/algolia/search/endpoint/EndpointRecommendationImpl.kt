@@ -2,7 +2,7 @@ package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.model.recommendation.PersonalizationStrategy
-import com.algolia.search.model.recommendation.SetStrategyResponse
+import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
 import com.algolia.search.serialize.Json
 import com.algolia.search.serialize.RouteRecommendationV2
 import com.algolia.search.transport.RequestOptions
@@ -16,7 +16,7 @@ internal class EndpointRecommendationImpl(
     override suspend fun setPersonalizationStrategy(
         strategy: PersonalizationStrategy,
         requestOptions: RequestOptions?
-    ): SetStrategyResponse {
+    ): SetPersonalizationStrategyResponse {
         val body = Json.stringify(PersonalizationStrategy.serializer(), strategy)
 
         return transport.request(

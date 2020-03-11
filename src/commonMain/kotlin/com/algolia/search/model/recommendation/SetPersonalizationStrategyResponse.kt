@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
  *  Set strategy response
  */
 @Serializable
-public data class SetStrategyResponse(
+public data class SetPersonalizationStrategyResponse(
     /**
      * Status code
      */

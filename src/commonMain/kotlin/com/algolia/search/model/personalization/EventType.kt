@@ -12,6 +12,10 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.serializer
 
+@Deprecated(
+    message = "Models are deprecated please use models located in com.algolia.search.model.recommendation.",
+    level = DeprecationLevel.WARNING
+)
 @Serializable(EventType.Companion::class)
 public sealed class EventType(override val raw: String) : Raw<String> {
 

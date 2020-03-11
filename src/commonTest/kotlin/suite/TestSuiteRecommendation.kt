@@ -4,7 +4,7 @@ import clientRecommendation
 import com.algolia.search.model.recommendation.EventsScoring
 import com.algolia.search.model.recommendation.FacetsScoring
 import com.algolia.search.model.recommendation.PersonalizationStrategy
-import com.algolia.search.model.recommendation.SetStrategyResponse
+import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
 import runBlocking
 import shouldEqual
 import kotlin.test.Test
@@ -34,7 +34,7 @@ internal class TestSuiteRecommendation {
                 personalizationImpact = 0
             )
 
-            val response = SetStrategyResponse(200, "Strategy was successfully updated")
+            val response = SetPersonalizationStrategyResponse(200, "Strategy was successfully updated")
 
             clientRecommendation.setPersonalizationStrategy(strategy).let {
                 it.shouldEqual(response)

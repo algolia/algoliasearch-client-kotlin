@@ -1,7 +1,7 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.model.recommendation.PersonalizationStrategy
-import com.algolia.search.model.recommendation.SetStrategyResponse
+import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
 import com.algolia.search.transport.RequestOptions
 
 /**
@@ -17,7 +17,7 @@ public interface EndpointRecommendation {
     suspend fun setPersonalizationStrategy(
         strategy: PersonalizationStrategy,
         requestOptions: RequestOptions? = null
-    ): SetStrategyResponse
+    ): SetPersonalizationStrategyResponse
 
     /**
      * @param requestOptions Configure request locally with [RequestOptions].
