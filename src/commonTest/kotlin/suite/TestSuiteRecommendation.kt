@@ -1,8 +1,8 @@
 package suite
 
 import clientRecommendation
-import com.algolia.search.model.recommendation.EventsScoring
-import com.algolia.search.model.recommendation.FacetsScoring
+import com.algolia.search.model.recommendation.EventScoring
+import com.algolia.search.model.recommendation.FacetScoring
 import com.algolia.search.model.recommendation.PersonalizationStrategy
 import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
 import runBlocking
@@ -24,12 +24,12 @@ internal class TestSuiteRecommendation {
         runBlocking {
             val strategy = PersonalizationStrategy(
                 eventsScoring = listOf(
-                    EventsScoring("Add to cart", "conversion", 50),
-                    EventsScoring("Purchase", "conversion", 100)
+                    EventScoring("Add to cart", "conversion", 50),
+                    EventScoring("Purchase", "conversion", 100)
                 ),
                 facetsScoring = listOf(
-                    FacetsScoring("brand", 100),
-                    FacetsScoring("categories", 10)
+                    FacetScoring("brand", 100),
+                    FacetScoring("categories", 10)
                 ),
                 personalizationImpact = 0
             )

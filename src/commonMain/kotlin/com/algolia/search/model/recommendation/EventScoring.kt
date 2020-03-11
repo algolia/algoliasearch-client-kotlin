@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
  * Scoring the event
  */
 @Serializable
-public data class EventsScoring(
+public data class EventScoring(
 
     /**
      * Name of the event

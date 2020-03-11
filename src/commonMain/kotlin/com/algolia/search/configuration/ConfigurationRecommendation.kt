@@ -10,11 +10,11 @@ import io.ktor.client.features.logging.LogLevel
 public data class ConfigurationRecommendation(
     override val applicationID: ApplicationID,
     override val apiKey: APIKey,
-    val region: String,
+    val region: Region,
     override val writeTimeout: Long = defaultWriteTimeout,
     override val readTimeout: Long = defaultReadTimeout,
     override val logLevel: LogLevel = defaultLogLevel,
-    override val hosts: List<RetryableHost> = recommendationHosts(region),
+    override val hosts: List<RetryableHost> = region.recommendationHosts,
     override val defaultHeaders: Map<String, String>? = null,
     override val engine: HttpClientEngine? = null,
     override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null

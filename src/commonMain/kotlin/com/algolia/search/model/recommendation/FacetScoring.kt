@@ -9,7 +9,7 @@ import kotlinx.serialization.Serializable
  * Configure the importance of facets
  */
 @Serializable
-public data class FacetsScoring(
+public data class FacetScoring(
 
     /**
      * Attribute name

@@ -737,5 +737,7 @@ internal class TestKeys {
         KeyTypes shouldEqual "types"
         KeyPending shouldEqual "pending"
         KeyGetClusters shouldEqual "getClusters"
+        KeyEU shouldEqual "eu"
+        KeyUS shouldEqual "us"
     }
 }

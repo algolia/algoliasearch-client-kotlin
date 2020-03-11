@@ -14,11 +14,11 @@ public data class PersonalizationStrategy(
     /**
      * Events scoring saved on the API
      */
-    @SerialName(KeyEventsScoring) val eventsScoring: List<EventsScoring>,
+    @SerialName(KeyEventsScoring) val eventsScoring: List<EventScoring>,
     /**
      * Facets scoring saved on the API
      */
-    @SerialName(KeyFacetsScoring) val facetsScoring: List<FacetsScoring>,
+    @SerialName(KeyFacetsScoring) val facetsScoring: List<FacetScoring>,
 
     /**
      * Personalization impact

@@ -19,7 +19,7 @@ public class ClientRecommendation private constructor(
     public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey,
-        region: String
+        region: Region
     ) : this(Transport(ConfigurationRecommendation(applicationID, apiKey, region), CredentialsImpl(applicationID, apiKey)))
 
     public constructor(
