@@ -68,7 +68,7 @@ internal class DocGenerateAPIKey {
     fun snippet4() {
         val parentAPIKey = APIKey("SearchOnlyApiKeyKeptPrivate")
         val restriction = SecuredAPIKeyRestriction(
-            restrictSources = listOf("192.168.1.0/24")
+            restrictSources = "192.168.1.0/24"
         )
 
         ClientSearch.generateAPIKey(parentAPIKey, restriction)
