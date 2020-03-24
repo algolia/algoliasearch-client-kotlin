@@ -43,10 +43,17 @@ public data class SecuredAPIKeyRestriction(
                     }
                 }
             }
-            restrictIndices?.let { append("restrictIndices", it.joinToString(";") { indexName -> indexName.raw }) }
-            restrictSources?.let { append("restrictSources", it) }
-            userToken?.let { append("userToken", it.raw) }
-            validUntil?.let { append("validUntil", it.toString()) }
+            restrictIndices?.let { append(RESTRICT_INDICES, it.joinToString(";") { indexName -> indexName.raw }) }
+            restrictSources?.let { append(RESTRICT_SOURCES, it) }
+            userToken?.let { append(USER_TOKEN, it.raw) }
+            validUntil?.let { append(VALID_UNTIL, it.toString()) }
         }.formUrlEncode()
+    }
+
+    companion object {
+        private const val RESTRICT_INDICES = "restrictIndices"
+        private const val RESTRICT_SOURCES = "restrictSources"
+        private const val USER_TOKEN = "userToken"
+        private const val VALID_UNTIL = "validUntil"
     }
 }
