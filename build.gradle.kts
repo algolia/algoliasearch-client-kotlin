@@ -1,14 +1,17 @@
 import com.android.build.gradle.LibraryExtension
+import com.diffplug.gradle.spotless.SpotlessExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 
 buildscript {
     repositories {
+        mavenCentral()
         google()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.5.2")
+        classpath(plugin.Android())
+        classpath(plugin.Spotless())
     }
 }
 
@@ -21,6 +24,7 @@ plugins {
 }
 
 apply(plugin = "com.android.library")
+apply(plugin = "com.diffplug.gradle.spotless")
 
 repositories {
     jcenter()
@@ -235,4 +239,13 @@ tasks {
 
 tasks.withType<Test> {
     maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
+}
+
+configure<SpotlessExtension> {
+    kotlin {
+        target("**/*.kt")
+        ktlint()
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
 }
