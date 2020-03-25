@@ -4,19 +4,22 @@ import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyUnordered
 import com.algolia.search.serialize.regexUnordered
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(SearchableAttribute.Companion::class)
-public sealed class SearchableAttribute {
+sealed class SearchableAttribute {
 
     /**
      * Putting several [attributes] in the same [Default] object will assign the same priority to each attribute.
      */
-    public data class Default(val attributes: List<Attribute>) : SearchableAttribute() {
+    data class Default(val attributes: List<Attribute>) : SearchableAttribute() {
 
-        public constructor(vararg attributes: Attribute) : this(attributes.toList())
+        constructor(vararg attributes: Attribute) : this(attributes.toList())
     }
 
     /**
@@ -24,7 +27,7 @@ public sealed class SearchableAttribute {
      * than in the middle, and matches in the middle are more important than towards the end.
      * Setting them as [Unordered] cancels out this behavior.
      */
-    public data class Unordered(val attribute: Attribute) : SearchableAttribute()
+    data class Unordered(val attribute: Attribute) : SearchableAttribute()
 
     @Serializer(SearchableAttribute::class)
     companion object : KSerializer<SearchableAttribute> {

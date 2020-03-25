@@ -10,11 +10,10 @@ import com.algolia.search.model.response.deletion.DeletionABTest
 import com.algolia.search.model.response.revision.RevisionABTest
 import com.algolia.search.transport.RequestOptions
 
-
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/ab-test/?language=kotlin]
  */
-public interface EndpointAnalytics {
+interface EndpointAnalytics {
 
     /**
      * Create an [ABTest].

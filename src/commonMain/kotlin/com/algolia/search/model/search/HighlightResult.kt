@@ -7,9 +7,8 @@ import com.algolia.search.serialize.KeyValue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-public data class HighlightResult(
+data class HighlightResult(
     /**
      * Markup text with occurrences highlighted. The tags used for highlighting are specified via [Query.highlightPreTag]
      * and [Query.highlightPostTag]

@@ -1,13 +1,30 @@
 package com.algolia.search.client
 
-import com.algolia.search.configuration.*
+import com.algolia.search.configuration.CallType
+import com.algolia.search.configuration.Configuration
+import com.algolia.search.configuration.ConfigurationSearch
+import com.algolia.search.configuration.Credentials
+import com.algolia.search.configuration.CredentialsImpl
+import com.algolia.search.configuration.defaultLogLevel
 import com.algolia.search.dsl.requestOptionsBuilder
-import com.algolia.search.endpoint.*
+import com.algolia.search.endpoint.EndpointAPIKey
+import com.algolia.search.endpoint.EndpointAPIKeyImpl
+import com.algolia.search.endpoint.EndpointAdvanced
+import com.algolia.search.endpoint.EndpointMultiCluster
+import com.algolia.search.endpoint.EndpointMulticlusterImpl
+import com.algolia.search.endpoint.EndpointMultipleIndex
+import com.algolia.search.endpoint.EndpointMultipleIndexImpl
+import com.algolia.search.endpoint.EndpointPersonalization
+import com.algolia.search.endpoint.EndpointPersonalizationImpl
 import com.algolia.search.helper.decodeBase64
 import com.algolia.search.helper.encodeBase64
 import com.algolia.search.helper.sha256
 import com.algolia.search.helper.toAPIKey
-import com.algolia.search.model.*
+import com.algolia.search.model.APIKey
+import com.algolia.search.model.ApplicationID
+import com.algolia.search.model.IndexName
+import com.algolia.search.model.LogType
+import com.algolia.search.model.Time
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
@@ -26,13 +43,16 @@ import io.ktor.client.features.ResponseException
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
-import kotlinx.coroutines.*
-
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withTimeout
 
 /**
  * Client to perform operations on indices.
  */
-public class ClientSearch private constructor(
+class ClientSearch private constructor(
     internal val transport: Transport
 ) :
     EndpointMultipleIndex by EndpointMultipleIndexImpl(transport),
@@ -42,7 +62,7 @@ public class ClientSearch private constructor(
     Configuration by transport,
     Credentials by transport.credentials {
 
-    public constructor(
+    constructor(
         applicationID: ApplicationID,
         apiKey: APIKey,
         logLevel: LogLevel = defaultLogLevel
@@ -53,14 +73,14 @@ public class ClientSearch private constructor(
         )
     )
 
-    public constructor(
+    constructor(
         configuration: ConfigurationSearch
     ) : this(Transport(configuration, configuration))
 
     /**
      *  Initialize an [Index] configured with [ConfigurationSearch].
      */
-    public fun initIndex(indexName: IndexName): Index {
+    fun initIndex(indexName: IndexName): Index {
         return Index(transport, indexName)
     }
 
@@ -70,7 +90,7 @@ public class ClientSearch private constructor(
      * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
      * the allotted time in milliseconds.
      */
-    public suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus> {
+    suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus> {
 
         suspend fun loop(): List<TaskStatus> {
             while (true) {
@@ -89,7 +109,7 @@ public class ClientSearch private constructor(
     /**
      * Convenience method similar to [waitAll] but with a [ResponseBatches] as receiver.
      */
-    public suspend fun ResponseBatches.waitAll(timeout: Long? = null): List<TaskStatus> {
+    suspend fun ResponseBatches.waitAll(timeout: Long? = null): List<TaskStatus> {
         return tasks.waitAll(timeout)
     }
 
@@ -99,7 +119,7 @@ public class ClientSearch private constructor(
      * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
      * the allotted time in milliseconds.
      */
-    public suspend fun CreationAPIKey.wait(timeout: Long? = null): ResponseAPIKey {
+    suspend fun CreationAPIKey.wait(timeout: Long? = null): ResponseAPIKey {
 
         suspend fun loop(): ResponseAPIKey {
             while (true) {
@@ -121,7 +141,7 @@ public class ClientSearch private constructor(
      * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
      * the allotted time in milliseconds.
      */
-    public suspend fun DeletionAPIKey.wait(timeout: Long? = null): Boolean {
+    suspend fun DeletionAPIKey.wait(timeout: Long? = null): Boolean {
 
         suspend fun loop(): Boolean {
             while (true) {
@@ -142,7 +162,7 @@ public class ClientSearch private constructor(
      *
      * @see EndpointAdvanced.getLogs
      */
-    public suspend fun getLogs(
+    suspend fun getLogs(
         page: Int? = null,
         hitsPerPage: Int? = null,
         logType: LogType? = null,
@@ -165,7 +185,7 @@ public class ClientSearch private constructor(
          * You can generate a Secured APIKey from any [APIKey].
          * Learn more about secured [API keys][https://www.algolia.com/doc/guides/security/api-keys/#secured-api-keys].
          */
-        public fun generateAPIKey(parentAPIKey: APIKey, restriction: SecuredAPIKeyRestriction): APIKey {
+        fun generateAPIKey(parentAPIKey: APIKey, restriction: SecuredAPIKeyRestriction): APIKey {
             val restrictionString = restriction.buildRestrictionString()
             val hash = parentAPIKey.raw.sha256(restrictionString)
 
@@ -179,7 +199,7 @@ public class ClientSearch private constructor(
          * @return Milliseconds left before the secured API key expires.
          * @throws IllegalArgumentException if [apiKey] doesn't have a [SecuredAPIKeyRestriction.validUntil].
          */
-        public fun getSecuredApiKeyRemainingValidity(apiKey: APIKey): Long {
+        fun getSecuredApiKeyRemainingValidity(apiKey: APIKey): Long {
             val decoded = apiKey.raw.decodeBase64()
             val pattern = Regex("validUntil=(\\d+)")
             val match = pattern.find(decoded)
@@ -189,7 +209,7 @@ public class ClientSearch private constructor(
 
                 timestamp - Time.getCurrentTimeMillis()
             } else {
-                throw IllegalArgumentException("The Secured API Key doesn't have a validUntil parameter.");
+                throw IllegalArgumentException("The Secured API Key doesn't have a validUntil parameter.")
             }
         }
     }

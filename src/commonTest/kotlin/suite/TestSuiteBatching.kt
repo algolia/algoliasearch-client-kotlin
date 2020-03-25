@@ -9,17 +9,13 @@ import kotlinx.serialization.list
 import loadScratch
 import runBlocking
 import shouldEqual
-import kotlin.test.AfterTest
 import kotlin.test.Test
-
 
 internal class TestSuiteBatching {
 
     private val suffix = "index_batching"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
-
-
 
     @Test
     fun test() {

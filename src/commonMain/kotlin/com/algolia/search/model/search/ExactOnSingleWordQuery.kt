@@ -10,21 +10,20 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(ExactOnSingleWordQuery.Companion::class)
-public sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<String> {
+sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<String> {
 
     /**
      * The exact ranking criterion is set to 1 if the query matches exactly an entire attribute value (default behavior).
      * For example, if you search for the TV show “V”, you want it to match the query “V” before all popular
      * TV shows starting with the letter V.
      */
-    public object Attribute : ExactOnSingleWordQuery(KeyAttribute)
+    object Attribute : ExactOnSingleWordQuery(KeyAttribute)
 
     /**
      * The exact ranking criterion is ignored on single word queries.
      */
-    public object None : ExactOnSingleWordQuery(KeyNone)
+    object None : ExactOnSingleWordQuery(KeyNone)
 
     /**
      * The exact ranking criterion is set to 1 if the query word is found in the record.
@@ -32,9 +31,9 @@ public sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<Strin
      * For example, if you search for the TV show “Road”, and in your dataset you have 2 records,
      * “Road” and “Road Trip”, both will be considered to match exactly.
      */
-    public object Word : ExactOnSingleWordQuery(KeyWord)
+    object Word : ExactOnSingleWordQuery(KeyWord)
 
-    public data class Other(override val raw: String) : ExactOnSingleWordQuery(raw)
+    data class Other(override val raw: String) : ExactOnSingleWordQuery(raw)
 
     override fun toString(): String {
         return raw

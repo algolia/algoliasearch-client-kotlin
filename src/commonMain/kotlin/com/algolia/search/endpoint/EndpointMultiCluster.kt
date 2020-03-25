@@ -4,17 +4,21 @@ import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multicluster.UserIDQuery
-import com.algolia.search.model.response.*
+import com.algolia.search.model.response.ResponseHasPendingMapping
+import com.algolia.search.model.response.ResponseListClusters
 import com.algolia.search.model.response.ResponseListClusters.Cluster
+import com.algolia.search.model.response.ResponseListUserIDs
+import com.algolia.search.model.response.ResponseSearchUserID
+import com.algolia.search.model.response.ResponseTopUserID
+import com.algolia.search.model.response.ResponseUserID
 import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.deletion.Deletion
 import com.algolia.search.transport.RequestOptions
 
-
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/multi-cluster/?language=kotlin]
  */
-public interface EndpointMultiCluster {
+interface EndpointMultiCluster {
 
     /**
      * List the [Cluster] available in a multi-clusters setup for a single [ApplicationID].
@@ -66,7 +70,6 @@ public interface EndpointMultiCluster {
         requestOptions: RequestOptions? = null
     ): ResponseUserID
 
-
     /**
      * Get the top 10 [ResponseUserID] with the highest number of records per cluster.
      * The data returned will usually be a few seconds behind real-time, because userID usage may take up to a few
@@ -84,8 +87,8 @@ public interface EndpointMultiCluster {
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun removeUserID(
-        userID: UserID, requestOptions:
-        RequestOptions? = null
+        userID: UserID,
+        requestOptions: RequestOptions? = null
     ): Deletion
 
     /**
@@ -99,7 +102,6 @@ public interface EndpointMultiCluster {
         query: UserIDQuery = UserIDQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchUserID
-
 
     /**
      * Assign or move [userIDs] to a [clusterName].

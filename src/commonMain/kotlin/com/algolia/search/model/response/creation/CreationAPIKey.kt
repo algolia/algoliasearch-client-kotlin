@@ -7,9 +7,8 @@ import com.algolia.search.serialize.KeyKey
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-public data class CreationAPIKey(
+data class CreationAPIKey(
     /**
      * The created or restored [APIKey].
      */

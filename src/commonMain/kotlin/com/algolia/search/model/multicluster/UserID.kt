@@ -8,12 +8,11 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * [UserID] in a multi-cluster setup.
  */
 @Serializable(UserID.Companion::class)
-public data class UserID(override val raw: String) : Raw<String> {
+data class UserID(override val raw: String) : Raw<String> {
 
     override fun toString(): String {
         return raw

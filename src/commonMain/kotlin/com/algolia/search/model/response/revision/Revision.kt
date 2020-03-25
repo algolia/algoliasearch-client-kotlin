@@ -5,9 +5,8 @@ import com.algolia.search.serialize.KeyUpdatedAt
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-public data class Revision(
+data class Revision(
     /**
      * The date at which the revision was created.
      */

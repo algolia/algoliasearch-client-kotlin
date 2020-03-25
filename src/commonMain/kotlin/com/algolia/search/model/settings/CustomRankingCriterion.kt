@@ -13,24 +13,23 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * [Documentation][https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/#custom-ranking]
  */
 @Serializable(CustomRankingCriterion.Companion::class)
-public sealed class CustomRankingCriterion(override val raw: String) : Raw<String> {
+sealed class CustomRankingCriterion(override val raw: String) : Raw<String> {
 
     /**
      * Sort an [Attribute] value by ascending order.
      */
-    public data class Asc(val attribute: Attribute) : CustomRankingCriterion("$KeyAsc($attribute)")
+    data class Asc(val attribute: Attribute) : CustomRankingCriterion("$KeyAsc($attribute)")
 
     /**
      * Sort an [Attribute] value by descending order.
      */
-    public data class Desc(val attribute: Attribute) : CustomRankingCriterion("$KeyDesc($attribute)")
+    data class Desc(val attribute: Attribute) : CustomRankingCriterion("$KeyDesc($attribute)")
 
-    public data class Other(override val raw: String) : CustomRankingCriterion(raw)
+    data class Other(override val raw: String) : CustomRankingCriterion(raw)
 
     override fun toString(): String {
         return raw

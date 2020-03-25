@@ -7,9 +7,8 @@ import com.algolia.search.serialize.KeyTotal
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-public data class ResponseABTests(
+data class ResponseABTests(
     /**
      * Number of [ABTest] returned.
      */
@@ -21,6 +20,6 @@ public data class ResponseABTests(
     @SerialName(KeyABTests) val abTestsOrNull: List<ResponseABTest>? = null
 ) {
 
-    public val abTests: List<ResponseABTest>
+    val abTests: List<ResponseABTest>
         get() = abTestsOrNull!!
 }

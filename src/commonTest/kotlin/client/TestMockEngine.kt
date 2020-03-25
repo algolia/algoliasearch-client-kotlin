@@ -17,7 +17,6 @@ import runBlocking
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestMockEngine {
 
     private val apiKey = "apiKey".toAPIKey()

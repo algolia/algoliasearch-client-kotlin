@@ -5,7 +5,6 @@ import com.algolia.search.model.places.Country
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLCountries {
 
     @Test

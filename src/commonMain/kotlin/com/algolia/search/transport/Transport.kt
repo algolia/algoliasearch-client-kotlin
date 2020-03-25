@@ -1,18 +1,22 @@
 package com.algolia.search.transport
 
-import com.algolia.search.configuration.*
+import com.algolia.search.configuration.CallType
+import com.algolia.search.configuration.Compression.Gzip
+import com.algolia.search.configuration.Compression.None
+import com.algolia.search.configuration.Configuration
+import com.algolia.search.configuration.Credentials
+import com.algolia.search.configuration.RetryableHost
 import io.ktor.client.features.ResponseException
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.http.HttpMethod
 import io.ktor.http.URLProtocol
+import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withTimeout
-import io.ktor.utils.io.errors.IOException
 import kotlin.math.floor
-
 
 internal class Transport(
     configuration: Configuration,
@@ -58,8 +62,8 @@ internal class Transport(
     private fun HttpRequestBuilder.compress(payload: String?) {
         if (payload != null) {
             body = when (compression) {
-                Compression.Gzip -> Gzip(payload)
-                Compression.None -> payload
+                Gzip -> Gzip(payload)
+                None -> payload
             }
         }
     }

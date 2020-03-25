@@ -1,11 +1,10 @@
 package com.algolia.search.helper
 
 import io.ktor.utils.io.core.toByteArray
-import kotlinx.serialization.internal.HexConverter
-import java.util.*
+import java.util.Base64
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
-
+import kotlinx.serialization.internal.HexConverter
 
 internal actual fun String.sha256(key: String): String {
     return Mac.getInstance("HmacSHA256").run {

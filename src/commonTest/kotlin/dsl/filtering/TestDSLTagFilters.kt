@@ -8,7 +8,6 @@ import com.algolia.search.model.filter.FilterGroup
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLTagFilters {
 
     @Test

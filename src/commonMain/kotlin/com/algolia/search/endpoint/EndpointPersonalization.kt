@@ -5,11 +5,10 @@ import com.algolia.search.model.response.ResponsePersonalizationStrategy
 import com.algolia.search.model.response.revision.Revision
 import com.algolia.search.transport.RequestOptions
 
-
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/personalization/?language=kotlin]
  */
-public interface EndpointPersonalization {
+interface EndpointPersonalization {
 
     /**
      * Set a [PersonalizationStrategy] for your application.

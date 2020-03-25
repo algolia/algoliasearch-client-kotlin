@@ -6,16 +6,19 @@ import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeySearchable
 import com.algolia.search.serialize.regexFilterOnly
 import com.algolia.search.serialize.regexSearchable
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(AttributeForFaceting.Companion::class)
-public sealed class AttributeForFaceting {
+sealed class AttributeForFaceting {
 
     abstract val attribute: Attribute
 
-    public data class Default(override val attribute: Attribute) : AttributeForFaceting()
+    data class Default(override val attribute: Attribute) : AttributeForFaceting()
 
     /**
      * Defines an [Attribute] as filterable only and not facetable.
@@ -23,7 +26,7 @@ public sealed class AttributeForFaceting {
      * and improve the speed of the search.
      * You cannot define an attribute as both [FilterOnly] and [Searchable].
      */
-    public data class FilterOnly(override val attribute: Attribute) : AttributeForFaceting()
+    data class FilterOnly(override val attribute: Attribute) : AttributeForFaceting()
 
     /**
      * Defines an attribute as searchable.
@@ -31,7 +34,7 @@ public sealed class AttributeForFaceting {
      * you need to specify [Searchable].
      * You cannot define an attribute as both [Searchable] and [FilterOnly].
      */
-    public data class Searchable(override val attribute: Attribute) : AttributeForFaceting()
+    data class Searchable(override val attribute: Attribute) : AttributeForFaceting()
 
     @Serializer(AttributeForFaceting::class)
     companion object : KSerializer<AttributeForFaceting> {

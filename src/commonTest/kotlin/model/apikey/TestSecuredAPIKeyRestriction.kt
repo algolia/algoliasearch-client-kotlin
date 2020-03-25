@@ -9,7 +9,6 @@ import shouldEqual
 import unknown
 import kotlin.test.Test
 
-
 internal class TestSecuredAPIKeyRestriction {
 
     @Test

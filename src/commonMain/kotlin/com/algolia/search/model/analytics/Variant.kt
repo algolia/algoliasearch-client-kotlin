@@ -9,12 +9,11 @@ import com.algolia.search.serialize.KeyTrafficPercentage
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * Variant of an [ABTest]
  */
 @Serializable
-public data class Variant(
+data class Variant(
     /**
      * Index name.
      */

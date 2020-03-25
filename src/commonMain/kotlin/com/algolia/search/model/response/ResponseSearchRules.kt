@@ -2,13 +2,22 @@ package com.algolia.search.model.response
 
 import com.algolia.search.model.response.ResponseSearchRules.Hit
 import com.algolia.search.model.rule.Rule
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.JsonNonStrict
+import com.algolia.search.serialize.KeyHits
+import com.algolia.search.serialize.KeyNbHits
+import com.algolia.search.serialize.KeyNbPages
+import com.algolia.search.serialize.KeyPage
+import com.algolia.search.serialize.Key_HighlightResult
+import com.algolia.search.serialize.asJsonInput
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JsonObject
 
-
 @Serializable
-public data class ResponseSearchRules(
+data class ResponseSearchRules(
     /**
      * A list of [Hit].
      */
@@ -28,12 +37,12 @@ public data class ResponseSearchRules(
 ) {
 
     @Serializable(Hit.Companion::class)
-    public data class Hit(
+    data class Hit(
         val rule: Rule,
         val highlightResultOrNull: JsonObject? = null
     ) {
 
-        public val highlightResult: JsonObject
+        val highlightResult: JsonObject
             get() = highlightResultOrNull!!
 
         @Serializer(Hit::class)
@@ -48,5 +57,4 @@ public data class ResponseSearchRules(
             }
         }
     }
-
 }

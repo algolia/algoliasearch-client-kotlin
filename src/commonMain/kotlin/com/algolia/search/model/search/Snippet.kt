@@ -10,9 +10,8 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(Snippet.Companion::class)
-public data class Snippet(
+data class Snippet(
     /**
      * Attribute to snippet.
      * Use "*" to snippet all attributes.

@@ -4,7 +4,6 @@ import com.algolia.search.helper.sha256
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestHashing {
 
     @Test

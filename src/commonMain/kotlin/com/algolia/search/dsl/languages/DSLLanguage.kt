@@ -4,81 +4,80 @@ import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.Language
 
-
 /**
  * DSL for building a [List] of [Language].
  */
 @Suppress("PropertyName")
 @DSLParameters
-public class DSLLanguage(
+class DSLLanguage(
     private val languages: MutableList<Language> = mutableListOf()
 ) {
 
-    public val Afrikaans = Language.Afrikaans
-    public val Arabic = Language.Arabic
-    public val Azeri = Language.Azeri
-    public val Bulgarian = Language.Bulgarian
-    public val Brunei = Language.Brunei
-    public val Catalan = Language.Catalan
-    public val Czech = Language.Czech
-    public val Welsh = Language.Welsh
-    public val Danish = Language.Danish
-    public val German = Language.German
-    public val English = Language.English
-    public val Esperanto = Language.Esperanto
-    public val Spanish = Language.Spanish
-    public val Estonian = Language.Estonian
-    public val Basque = Language.Basque
-    public val Finnish = Language.Finnish
-    public val Faroese = Language.Faroese
-    public val French = Language.French
-    public val Galician = Language.Galician
-    public val Hebrew = Language.Hebrew
-    public val Hindi = Language.Hindi
-    public val Hungarian = Language.Hungarian
-    public val Armenian = Language.Armenian
-    public val Indonesian = Language.Indonesian
-    public val Icelandic = Language.Icelandic
-    public val Italian = Language.Italian
-    public val Japanese = Language.Japanese
-    public val Georgian = Language.Georgian
-    public val Kazakh = Language.Kazakh
-    public val Korean = Language.Korean
-    public val Kyrgyz = Language.Kyrgyz
-    public val Lithuanian = Language.Lithuanian
-    public val Maori = Language.Maori
-    public val Mongolian = Language.Mongolian
-    public val Marathi = Language.Marathi
-    public val Malay = Language.Malay
-    public val Maltese = Language.Maltese
-    public val Norwegian = Language.Norwegian
-    public val Dutch = Language.Dutch
-    public val NorthernSotho = Language.NorthernSotho
-    public val Polish = Language.Polish
-    public val Pashto = Language.Pashto
-    public val Portuguese = Language.Portuguese
-    public val Quechua = Language.Quechua
-    public val Romanian = Language.Romanian
-    public val Russian = Language.Russian
-    public val Slovak = Language.Slovak
-    public val Albanian = Language.Albanian
-    public val Swedish = Language.Swedish
-    public val Swahili = Language.Swahili
-    public val Tamil = Language.Tamil
-    public val Telugu = Language.Telugu
-    public val Tagalog = Language.Tagalog
-    public val Tswana = Language.Tswana
-    public val Turkish = Language.Turkish
-    public val Tatar = Language.Tatar
+    val Afrikaans = Language.Afrikaans
+    val Arabic = Language.Arabic
+    val Azeri = Language.Azeri
+    val Bulgarian = Language.Bulgarian
+    val Brunei = Language.Brunei
+    val Catalan = Language.Catalan
+    val Czech = Language.Czech
+    val Welsh = Language.Welsh
+    val Danish = Language.Danish
+    val German = Language.German
+    val English = Language.English
+    val Esperanto = Language.Esperanto
+    val Spanish = Language.Spanish
+    val Estonian = Language.Estonian
+    val Basque = Language.Basque
+    val Finnish = Language.Finnish
+    val Faroese = Language.Faroese
+    val French = Language.French
+    val Galician = Language.Galician
+    val Hebrew = Language.Hebrew
+    val Hindi = Language.Hindi
+    val Hungarian = Language.Hungarian
+    val Armenian = Language.Armenian
+    val Indonesian = Language.Indonesian
+    val Icelandic = Language.Icelandic
+    val Italian = Language.Italian
+    val Japanese = Language.Japanese
+    val Georgian = Language.Georgian
+    val Kazakh = Language.Kazakh
+    val Korean = Language.Korean
+    val Kyrgyz = Language.Kyrgyz
+    val Lithuanian = Language.Lithuanian
+    val Maori = Language.Maori
+    val Mongolian = Language.Mongolian
+    val Marathi = Language.Marathi
+    val Malay = Language.Malay
+    val Maltese = Language.Maltese
+    val Norwegian = Language.Norwegian
+    val Dutch = Language.Dutch
+    val NorthernSotho = Language.NorthernSotho
+    val Polish = Language.Polish
+    val Pashto = Language.Pashto
+    val Portuguese = Language.Portuguese
+    val Quechua = Language.Quechua
+    val Romanian = Language.Romanian
+    val Russian = Language.Russian
+    val Slovak = Language.Slovak
+    val Albanian = Language.Albanian
+    val Swedish = Language.Swedish
+    val Swahili = Language.Swahili
+    val Tamil = Language.Tamil
+    val Telugu = Language.Telugu
+    val Tagalog = Language.Tagalog
+    val Tswana = Language.Tswana
+    val Turkish = Language.Turkish
+    val Tatar = Language.Tatar
 
     /**
      * Add [this] to [languages].
      */
-    public operator fun Language.unaryPlus() {
+    operator fun Language.unaryPlus() {
         languages += this
     }
 
-    public companion object : DSL<DSLLanguage, List<Language>> {
+    companion object : DSL<DSLLanguage, List<Language>> {
 
         override operator fun invoke(block: DSLLanguage.() -> Unit): List<Language> {
             return DSLLanguage().apply(block).languages

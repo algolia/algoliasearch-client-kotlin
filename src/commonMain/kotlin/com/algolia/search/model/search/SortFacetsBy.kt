@@ -9,23 +9,22 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(SortFacetsBy.Companion::class)
-public sealed class SortFacetsBy(override val raw: String) : Raw<String> {
+sealed class SortFacetsBy(override val raw: String) : Raw<String> {
 
     /**
      * [Facet.value] are sorted by decreasing [Facet.count].
      * The [Facet.count] is the number of records containing this [Facet.value] in the results of the [Query].
      */
-    public object Count : SortFacetsBy(KeyCount)
+    object Count : SortFacetsBy(KeyCount)
 
     /**
      * [Facet.value] are sorted in alphabetical order, ascending from A to Z.
      * The [Facet.count] is the number of records containing this [Facet.value] in the results of the [Query].
      */
-    public object Alpha : SortFacetsBy(KeyAlpha)
+    object Alpha : SortFacetsBy(KeyAlpha)
 
-    public data class Other(override val raw: String) : SortFacetsBy(raw)
+    data class Other(override val raw: String) : SortFacetsBy(raw)
 
     override fun toString(): String {
         return raw

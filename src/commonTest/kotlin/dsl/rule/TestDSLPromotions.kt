@@ -7,7 +7,6 @@ import objectIDA
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLPromotions {
 
     @Test

@@ -10,11 +10,10 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.transport.RequestOptions
 
-
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/synonyms/?language=kotlin]
  */
-public interface EndpointSynonym {
+interface EndpointSynonym {
 
     val indexName: IndexName
 
@@ -99,7 +98,6 @@ public interface EndpointSynonym {
         query: SynonymQuery = SynonymQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchSynonyms
-
 
     /**
      * Remove all synonyms from an index. This is a convenience method to delete all synonyms at once.

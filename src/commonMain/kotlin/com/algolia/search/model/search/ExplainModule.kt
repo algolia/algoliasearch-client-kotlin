@@ -8,13 +8,12 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(ExplainModule.Companion::class)
-public sealed class ExplainModule(override val raw: String) : Raw<String> {
+sealed class ExplainModule(override val raw: String) : Raw<String> {
 
-    public object MatchAlternatives : ExplainModule(KeyMatchAlternatives)
+    object MatchAlternatives : ExplainModule(KeyMatchAlternatives)
 
-    public data class Other(override val raw: String) : ExplainModule(raw)
+    data class Other(override val raw: String) : ExplainModule(raw)
 
     companion object : KSerializer<ExplainModule> {
 

@@ -4,7 +4,6 @@ import com.algolia.search.model.search.Point
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 
-
 internal class TestPoint : TestSerializer<Point>(Point) {
 
     override val items = listOf(

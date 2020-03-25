@@ -2,8 +2,11 @@ package suite
 
 import clientAdmin1
 import clientSearch
-import com.algolia.search.dsl.*
-import com.algolia.search.helper.readContent
+import com.algolia.search.dsl.decompoundedAttributes
+import com.algolia.search.dsl.explainModules
+import com.algolia.search.dsl.query
+import com.algolia.search.dsl.queryLanguages
+import com.algolia.search.dsl.settings
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
@@ -15,7 +18,6 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import io.ktor.client.features.ResponseException
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.list
@@ -26,9 +28,7 @@ import shouldContain
 import shouldEqual
 import shouldNotBeEmpty
 import shouldNotBeNull
-import kotlin.test.AfterTest
 import kotlin.test.Test
-
 
 internal class TestSuiteSearch {
 
@@ -38,8 +38,6 @@ internal class TestSuiteSearch {
     private val allFacets = setOf("*".toAttribute())
     private val index = clientAdmin1.initIndex(indexName)
     private val search = clientSearch.initIndex(indexName)
-
-
 
     @Test
     fun test() {
@@ -101,7 +99,7 @@ internal class TestSuiteSearch {
             override val objectID: ObjectID,
             val type: String,
             val category: String? = null
-        ): Indexable
+        ) : Indexable
 
         runBlocking {
             val settings = settings {

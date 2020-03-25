@@ -5,33 +5,36 @@ import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.serialize.KeyMin
 import com.algolia.search.serialize.KeyStrict
 import com.algolia.search.serialize.asJsonInput
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.BooleanSerializer
 import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.content
 
-
 @Serializable(TypoTolerance.Companion::class)
-public sealed class TypoTolerance(override val raw: String) : Raw<String> {
+sealed class TypoTolerance(override val raw: String) : Raw<String> {
 
     /**
      * Typo tolerance is enabled and all records matching with or without typos are retrieved
      */
-    public object True: TypoTolerance(true.toString())
+    object True : TypoTolerance(true.toString())
 
     /**
      * Typo tolerance is entirely disabled. Only records matching without typos are retrieved.
      */
-    public object False: TypoTolerance(false.toString())
+    object False : TypoTolerance(false.toString())
 
     /**
      * Retrieve records with the smallest number of typos.
      * For example, if the smallest number of typos found is 0, then only records matching without typos will be
      * returned. If the smallest number of typos found is 1, then only records matching with 1 typo will be returned.
      */
-    public object Min : TypoTolerance(KeyMin)
+    object Min : TypoTolerance(KeyMin)
 
     /**
      * Retrieve records with the 2 smallest number of typos.
@@ -40,9 +43,9 @@ public sealed class TypoTolerance(override val raw: String) : Raw<String> {
      * returned.
      * Strict changes the engine’s ranking, forcing the [RankingCriterion.Typo] to go the top of the ranking formula.
      */
-    public object Strict : TypoTolerance(KeyStrict)
+    object Strict : TypoTolerance(KeyStrict)
 
-    public data class Other(override val raw: String) : TypoTolerance(raw)
+    data class Other(override val raw: String) : TypoTolerance(raw)
 
     override fun toString(): String {
         return raw

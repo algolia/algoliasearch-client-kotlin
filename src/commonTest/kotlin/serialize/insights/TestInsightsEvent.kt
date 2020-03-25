@@ -1,6 +1,11 @@
 package serialize.insights
 
-import com.algolia.search.helper.*
+import com.algolia.search.helper.toAttribute
+import com.algolia.search.helper.toEventName
+import com.algolia.search.helper.toIndexName
+import com.algolia.search.helper.toObjectID
+import com.algolia.search.helper.toQueryID
+import com.algolia.search.helper.toUserToken
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.request.RequestInsightsEvents
@@ -8,7 +13,6 @@ import com.algolia.search.serialize.JsonDebug
 import loadScratch
 import shouldEqual
 import kotlin.test.Test
-
 
 internal class TestInsightsEvent {
 

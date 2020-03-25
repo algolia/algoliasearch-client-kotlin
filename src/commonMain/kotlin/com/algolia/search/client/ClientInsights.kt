@@ -14,26 +14,25 @@ import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.insights.UserToken
 import com.algolia.search.transport.Transport
 
-
 /**
  * Client to manage [InsightsEvent].
  */
-public class ClientInsights private constructor(
+class ClientInsights private constructor(
     private val transport: Transport
 ) : EndpointInsights by EndpointInsightsImpl(transport),
     Configuration by transport,
     Credentials by transport.credentials {
 
-    public constructor(
+    constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
     ) : this(Transport(ConfigurationInsights(applicationID, apiKey), CredentialsImpl(applicationID, apiKey)))
 
-    public constructor(
+    constructor(
         configuration: ConfigurationInsights
     ) : this(Transport(configuration, configuration))
 
-    public inner class User(
+    inner class User(
         val userToken: UserToken
     ) : EndpointInsightsUser by EndpointInsightsUserImpl(this, userToken)
 }

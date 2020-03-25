@@ -3,15 +3,14 @@ package com.algolia.search.dsl.filtering
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.filter.Filter
 
-
 /**
  * DSL for building a [Filter.Facet].
  * [Filter by string][https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/how-to/filter-by-string/]
  * [Filter by boolean][https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/how-to/filter-by-boolean/]
  */
-public interface DSLFacet {
+interface DSLFacet {
 
-    public operator fun Filter.Facet.unaryPlus()
+    operator fun Filter.Facet.unaryPlus()
 
     /**
      * Convenience method.

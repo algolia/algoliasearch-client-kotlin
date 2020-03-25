@@ -4,13 +4,12 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.NumericOperator
 
-
 /**
  * DSL for building a [Filter.Numeric].
  * [Filter by numeric][https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/how-to/filter-by-numeric-value/]
  */
 @Suppress("PropertyName")
-public interface DSLNumeric {
+interface DSLNumeric {
 
     val Less get() = NumericOperator.Less
     val LessOrEquals get() = NumericOperator.LessOrEquals
@@ -19,7 +18,7 @@ public interface DSLNumeric {
     val Greater get() = NumericOperator.Greater
     val GreaterOrEquals get() = NumericOperator.GreaterOrEquals
 
-    public operator fun Filter.Numeric.unaryPlus()
+    operator fun Filter.Numeric.unaryPlus()
 
     /**
      * Convenience method.

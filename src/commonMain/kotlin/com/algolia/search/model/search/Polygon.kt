@@ -2,29 +2,32 @@ package com.algolia.search.model.search
 
 import com.algolia.search.helper.and
 import com.algolia.search.model.Raw
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.FloatSerializer
-
+import kotlinx.serialization.list
 
 /**
  * A polygon with a minimum of 3 [Point].
  */
 @Serializable(Polygon.Companion::class)
-public data class Polygon(
+data class Polygon(
     val point1: Point,
     val point2: Point,
     val point3: Point,
     private val points: List<Point>
 ) : Raw<List<Float>> {
 
-    public constructor(point1: Point, point2: Point, point3: Point, vararg points: Point) : this(
+    constructor(point1: Point, point2: Point, point3: Point, vararg points: Point) : this(
         point1,
         point2,
         point3,
         points.toList()
     )
 
-    public operator fun get(index: Int): Point {
+    operator fun get(index: Int): Point {
         return when (index) {
             0 -> point1
             1 -> point2

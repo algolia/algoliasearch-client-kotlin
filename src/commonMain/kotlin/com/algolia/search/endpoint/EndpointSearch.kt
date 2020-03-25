@@ -10,11 +10,10 @@ import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Query
 import com.algolia.search.transport.RequestOptions
 
-
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/search/?language=kotlin]
  */
-public interface EndpointSearch {
+interface EndpointSearch {
 
     val indexName: IndexName
 

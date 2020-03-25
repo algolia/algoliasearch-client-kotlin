@@ -6,11 +6,10 @@ import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
 
-
 /**
  * Configuration used by [ClientPlaces].
  */
-public data class ConfigurationPlaces(
+data class ConfigurationPlaces(
     override val writeTimeout: Long = defaultWriteTimeout,
     override val readTimeout: Long = defaultReadTimeout,
     override val logLevel: LogLevel = defaultLogLevel,

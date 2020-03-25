@@ -10,7 +10,6 @@ import com.algolia.search.transport.searchHosts
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestRetryableHost {
 
     private val host = RetryableHost("url", CallType.Write)

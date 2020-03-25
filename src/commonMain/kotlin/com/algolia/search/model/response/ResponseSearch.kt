@@ -7,16 +7,67 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.insights.InsightsEvent
-import com.algolia.search.model.search.*
+import com.algolia.search.model.search.Cursor
+import com.algolia.search.model.search.Explain
+import com.algolia.search.model.search.Facet
+import com.algolia.search.model.search.FacetStats
+import com.algolia.search.model.search.Point
+import com.algolia.search.model.search.Query
+import com.algolia.search.model.search.RankingInfo
+import com.algolia.search.model.search.RemoveWordIfNoResults
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.JsonNonStrict
+import com.algolia.search.serialize.KSerializerFacetMap
+import com.algolia.search.serialize.KSerializerPoint
+import com.algolia.search.serialize.KeyAbTestVariantID
+import com.algolia.search.serialize.KeyAroundLatLng
+import com.algolia.search.serialize.KeyAutomaticRadius
+import com.algolia.search.serialize.KeyCursor
+import com.algolia.search.serialize.KeyDisjunctiveFacets
+import com.algolia.search.serialize.KeyExhaustiveFacetsCount
+import com.algolia.search.serialize.KeyExhaustiveNbHits
+import com.algolia.search.serialize.KeyExplain
+import com.algolia.search.serialize.KeyFacets
+import com.algolia.search.serialize.KeyFacets_Stats
+import com.algolia.search.serialize.KeyHierarchicalFacets
+import com.algolia.search.serialize.KeyHits
+import com.algolia.search.serialize.KeyHitsPerPage
+import com.algolia.search.serialize.KeyIndex
+import com.algolia.search.serialize.KeyIndexUsed
+import com.algolia.search.serialize.KeyLength
+import com.algolia.search.serialize.KeyMessage
+import com.algolia.search.serialize.KeyNbHits
+import com.algolia.search.serialize.KeyNbPages
+import com.algolia.search.serialize.KeyOffset
+import com.algolia.search.serialize.KeyPage
+import com.algolia.search.serialize.KeyParams
+import com.algolia.search.serialize.KeyParsedQuery
+import com.algolia.search.serialize.KeyProcessed
+import com.algolia.search.serialize.KeyProcessingTimeMS
+import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.KeyQueryAfterRemoval
+import com.algolia.search.serialize.KeyQueryID
+import com.algolia.search.serialize.KeyServerUsed
+import com.algolia.search.serialize.KeyUserData
+import com.algolia.search.serialize.Key_DistinctSeqID
+import com.algolia.search.serialize.Key_HighlightResult
+import com.algolia.search.serialize.Key_RankingInfo
+import com.algolia.search.serialize.Key_SnippetResult
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 
-
 @Serializable
-public data class ResponseSearch(
+data class ResponseSearch(
     /**
      * The hits returned by the search. Hits are ordered according to the ranking or sorting of the index being queried.
      * Hits are made of the schemaless JSON objects that you stored in the index.
@@ -163,94 +214,94 @@ public data class ResponseSearch(
     @SerialName(KeyExplain) val explainOrNull: Explain? = null
 ) {
 
-    public val hits: List<Hit>
+    val hits: List<Hit>
         get() = hitsOrNull!!
 
-    public val nbHits: Int
+    val nbHits: Int
         get() = nbHitsOrNull!!
 
-    public val page: Int
+    val page: Int
         get() = pageOrNull!!
 
-    public val hitsPerPage: Int
+    val hitsPerPage: Int
         get() = hitsPerPageOrNull!!
 
-    public val length: Int
+    val length: Int
         get() = lengthOrNull!!
 
-    public val offset: Int
+    val offset: Int
         get() = offsetOrNull!!
 
-    public val userData: List<JsonObject>
+    val userData: List<JsonObject>
         get() = userDataOrNull!!
 
-    public val nbPages: Int
+    val nbPages: Int
         get() = nbPagesOrNull!!
 
-    public val processingTimeMS: Long
+    val processingTimeMS: Long
         get() = processingTimeMSOrNull!!
 
-    public val exhaustiveNbHits: Boolean
+    val exhaustiveNbHits: Boolean
         get() = exhaustiveNbHitsOrNull!!
 
-    public val exhaustiveFacetsCount: Boolean
+    val exhaustiveFacetsCount: Boolean
         get() = exhaustiveFacetsCountOrNull!!
 
-    public val query: String
+    val query: String
         get() = queryOrNull!!
 
-    public val queryAfterRemoval: String
+    val queryAfterRemoval: String
         get() = queryAfterRemovalOrNull!!
 
-    public val params: String
+    val params: String
         get() = paramsOrNull!!
 
-    public val message: String
+    val message: String
         get() = messageOrNull!!
 
-    public val aroundLatLng: Point
+    val aroundLatLng: Point
         get() = aroundLatLngOrNull!!
 
-    public val automaticRadius: Float
+    val automaticRadius: Float
         get() = automaticRadiusOrNull!!
 
-    public val serverUsed: String
+    val serverUsed: String
         get() = serverUsedOrNull!!
 
-    public val indexUsed: IndexName
+    val indexUsed: IndexName
         get() = indexUsedOrNull!!
 
-    public val abTestVariantID: Int
+    val abTestVariantID: Int
         get() = abTestVariantIDOrNull!!
 
-    public val parsedQuery: String
+    val parsedQuery: String
         get() = parsedQueryOrNull!!
 
-    public val facets: Map<Attribute, List<Facet>>
+    val facets: Map<Attribute, List<Facet>>
         get() = facetsOrNull!!
 
-    public val disjunctiveFacets: Map<Attribute, List<Facet>>
+    val disjunctiveFacets: Map<Attribute, List<Facet>>
         get() = disjunctiveFacetsOrNull!!
 
-    public val facetStats: Map<Attribute, FacetStats>
+    val facetStats: Map<Attribute, FacetStats>
         get() = facetStatsOrNull!!
 
-    public val cursor: Cursor
+    val cursor: Cursor
         get() = cursorOrNull!!
 
-    public val indexName: IndexName
+    val indexName: IndexName
         get() = indexNameOrNull!!
 
-    public val processed: Boolean
+    val processed: Boolean
         get() = processedOrNull!!
 
-    public val queryID: QueryID
+    val queryID: QueryID
         get() = queryIDOrNull!!
 
-    public val hierarchicalFacets: Map<Attribute, List<Facet>>
+    val hierarchicalFacets: Map<Attribute, List<Facet>>
         get() = hierarchicalFacetsOrNull!!
 
-    public val explain: Explain
+    val explain: Explain
         get() = explainOrNull!!
 
     @Deprecated(
@@ -258,7 +309,7 @@ public data class ResponseSearch(
         replaceWith = ReplaceWith("getObjectPosition(objectID)"),
         level = DeprecationLevel.WARNING
     )
-    public fun getObjectIDPosition(objectID: ObjectID): Int {
+    fun getObjectIDPosition(objectID: ObjectID): Int {
         return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }
     }
 
@@ -266,7 +317,7 @@ public data class ResponseSearch(
      * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].
      * If the [objectID] is not found, -1 is returned.
      */
-    public fun getObjectPosition(objectID: ObjectID): Int {
+    fun getObjectPosition(objectID: ObjectID): Int {
         return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }
     }
 
@@ -274,43 +325,43 @@ public data class ResponseSearch(
      * A Hit returned by the search.
      */
     @Serializable(Hit.Companion::class)
-    public data class Hit(
+    data class Hit(
         val json: JsonObject
     ) : Map<String, JsonElement> by json {
 
-        public val distinctSeqIDOrNull: Int? = json.getPrimitiveOrNull(Key_DistinctSeqID)?.int
+        val distinctSeqIDOrNull: Int? = json.getPrimitiveOrNull(Key_DistinctSeqID)?.int
 
-        public val rankingInfoOrNull: RankingInfo? = json.getObjectOrNull(Key_RankingInfo)?.let {
+        val rankingInfoOrNull: RankingInfo? = json.getObjectOrNull(Key_RankingInfo)?.let {
             Json.fromJson(RankingInfo.serializer(), it)
         }
 
-        public val highlightResultOrNull: JsonObject? = json.getObjectOrNull(Key_HighlightResult)
+        val highlightResultOrNull: JsonObject? = json.getObjectOrNull(Key_HighlightResult)
 
-        public val snippetResultOrNull: JsonObject? = json.getObjectOrNull(Key_SnippetResult)
+        val snippetResultOrNull: JsonObject? = json.getObjectOrNull(Key_SnippetResult)
 
-        public val rankingInfo: RankingInfo
+        val rankingInfo: RankingInfo
             get() = rankingInfoOrNull!!
 
-        public val distinctSeqID: Int
+        val distinctSeqID: Int
             get() = distinctSeqIDOrNull!!
 
-        public val highlightResult: JsonObject
+        val highlightResult: JsonObject
             get() = highlightResultOrNull!!
 
-        public val snippetResult: JsonObject
+        val snippetResult: JsonObject
             get() = snippetResultOrNull!!
 
         /**
          * Deserialize the value of an [Attribute] to [T].
          */
-        public fun <T> getValue(serializer: KSerializer<T>, attribute: Attribute): T {
+        fun <T> getValue(serializer: KSerializer<T>, attribute: Attribute): T {
             return Json.fromJson(serializer, json.getAs(attribute.raw))
         }
 
         /**
          * Deserialize the entire [json] to [T].
          */
-        public fun <T> deserialize(deserializer: DeserializationStrategy<T>): T {
+        fun <T> deserialize(deserializer: DeserializationStrategy<T>): T {
             return JsonNonStrict.fromJson(deserializer, json)
         }
 

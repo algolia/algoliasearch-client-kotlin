@@ -1,8 +1,12 @@
 package documentation.tutorials
 
 import com.algolia.search.client.ClientSearch
-import com.algolia.search.dsl.*
+import com.algolia.search.dsl.attributesForFaceting
+import com.algolia.search.dsl.customRanking
+import com.algolia.search.dsl.query
 import com.algolia.search.dsl.rule.rules
+import com.algolia.search.dsl.searchableAttributes
+import com.algolia.search.dsl.settings
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.Attribute
@@ -12,7 +16,6 @@ import com.algolia.search.model.rule.Consequence
 import kotlinx.coroutines.runBlocking
 import org.junit.Ignore
 import org.junit.Test
-
 
 @Ignore
 internal class TutorialSetRelevance {

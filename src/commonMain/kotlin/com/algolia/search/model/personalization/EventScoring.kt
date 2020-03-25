@@ -6,9 +6,8 @@ import com.algolia.search.serialize.KeyType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-public data class EventScoring(
+data class EventScoring(
     /**
      * Indicates which type of [InsightsEvent] the [score] should be associated with.
      */

@@ -11,15 +11,19 @@ import com.algolia.search.serialize.KeyObjectIDs
 import com.algolia.search.serialize.KeyTaskID
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.long
 
-
 @Serializable(ResponseBatches.Companion::class)
-public data class ResponseBatches(
+data class ResponseBatches(
     /**
      * A list of [TaskIndex] to use with [ClientSearch.waitAll].
      */
@@ -30,7 +34,7 @@ public data class ResponseBatches(
     @SerialName(KeyObjectIDs) val objectIDsOrNull: List<ObjectID?>? = null
 ) {
 
-    public val objectIDs: List<ObjectID?>
+    val objectIDs: List<ObjectID?>
         get() = objectIDsOrNull!!
 
     @Serializer(ResponseBatches::class)

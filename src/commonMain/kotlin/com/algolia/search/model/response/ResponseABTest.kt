@@ -5,14 +5,28 @@ import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.ABTestStatus
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.KeyABTestID
+import com.algolia.search.serialize.KeyClickSignificance
+import com.algolia.search.serialize.KeyConversionSignificance
+import com.algolia.search.serialize.KeyCreatedAt
+import com.algolia.search.serialize.KeyEndAt
+import com.algolia.search.serialize.KeyName
+import com.algolia.search.serialize.KeyStatus
+import com.algolia.search.serialize.KeyVariants
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
-
 @Serializable(ResponseABTest.Companion::class)
-public data class ResponseABTest(
+data class ResponseABTest(
     /**
      * [ABTestID] of the [ABTest] test.
      */
@@ -53,10 +67,10 @@ public data class ResponseABTest(
     val variantB: ResponseVariant
 ) {
 
-    public val clickSignificance: Float
+    val clickSignificance: Float
         get() = clickSignificanceOrNull!!
 
-    public val conversionSignificance: Float
+    val conversionSignificance: Float
         get() = conversionSignificanceOrNull!!
 
     @Serializer(ResponseABTest::class)

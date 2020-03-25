@@ -5,18 +5,17 @@ import com.algolia.search.model.task.Task
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 
-
 /**
  * Client to perform operations between applications.
  */
-public object ClientAccount {
+object ClientAccount {
 
     /**
      *  Copy settings, synonyms, rules and objects from the [source] index to the [destination] index.
      *  @throws IllegalArgumentException if [source] and [destination] have the same [ApplicationID].
      *  @throws IllegalStateException if [destination] index already exists.
      */
-    public suspend fun copyIndex(source: Index, destination: Index): List<Task> {
+    suspend fun copyIndex(source: Index, destination: Index): List<Task> {
         if (source.transport.credentials.applicationID == destination.transport.credentials.applicationID) {
             throw IllegalArgumentException("Source and Destination indices should not be on the same application.")
         }

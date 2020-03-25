@@ -1,13 +1,15 @@
 package model.search
 
-import com.algolia.search.model.search.AlternativesAsExact.*
+import com.algolia.search.model.search.AlternativesAsExact.IgnorePlurals
+import com.algolia.search.model.search.AlternativesAsExact.MultiWordsSynonym
+import com.algolia.search.model.search.AlternativesAsExact.Other
+import com.algolia.search.model.search.AlternativesAsExact.SingleWordSynonym
 import com.algolia.search.serialize.KeyIgnorePlurals
 import com.algolia.search.serialize.KeyMultiWordsSynonym
 import com.algolia.search.serialize.KeySingleWordSynonym
 import shouldEqual
 import unknown
 import kotlin.test.Test
-
 
 internal class TestAlternativesAsExact {
 

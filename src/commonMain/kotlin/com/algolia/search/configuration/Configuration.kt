@@ -6,44 +6,51 @@ import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
 
-
 /**
  * Configuration used by a client.
  */
-public interface Configuration {
+interface Configuration {
 
     /**
      * The timeout for each request when performing write operations (POST, PUT ..).
      */
     val writeTimeout: Long
+
     /**
      * The timeout for each request when performing read operations (GET).
      */
     val readTimeout: Long
+
     /**
      * [LogLevel] to display in the console.
      */
     val logLevel: LogLevel
+
     /**
      * List of hosts and back-up host used to perform a custom retry logic.
      */
     val hosts: List<RetryableHost>
+
     /**
      * An optional [HttpClientConfig<*>] used by Ktor for advanced HttpClient httpClientConfig.
      */
     val httpClientConfig: ((HttpClientConfig<*>) -> Unit)?
+
     /**
      * An optional [HttpClientEngine] to specify which HttpEngine should be used by Ktor.
      */
     val engine: HttpClientEngine?
+
     /**
      * The [HttpClient] used by Ktor to perform http request.
      */
     val httpClient: HttpClient
+
     /**
      * Default headers that should be applied to every request.
      */
     val defaultHeaders: Map<String, String>?
+
     /**
      * The type of [Compression] to use for POST or PUT requests.
      */

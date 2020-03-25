@@ -4,11 +4,10 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
 
-
 /**
  * Parameters and functionality of an [APIKey].
  */
-public data class APIKeyParams(
+data class APIKeyParams(
     /**
      * Set of permissions [ACL] associated to an [APIKey].
      */

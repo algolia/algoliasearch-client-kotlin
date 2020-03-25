@@ -11,9 +11,8 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(NumericAttributeFilter.Companion::class)
-public data class NumericAttributeFilter(
+data class NumericAttributeFilter(
     /**
      * Numeric attribute that can be used as numerical filters.
      */

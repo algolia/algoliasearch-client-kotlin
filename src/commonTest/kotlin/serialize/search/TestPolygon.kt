@@ -5,7 +5,6 @@ import com.algolia.search.model.search.Polygon
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 
-
 internal class TestPolygon : TestSerializer<Polygon>(Polygon) {
 
     override val items = listOf(

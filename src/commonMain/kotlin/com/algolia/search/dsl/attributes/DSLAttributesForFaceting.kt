@@ -5,42 +5,41 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.AttributeForFaceting
 
-
 /**
  * DSL for building a [List] of [AttributeForFaceting].
  */
 @Suppress("PropertyName")
 @DSLParameters
-public class DSLAttributesForFaceting(
+class DSLAttributesForFaceting(
     private val attributesForFaceting: MutableList<AttributeForFaceting> = mutableListOf()
 ) {
 
-    public enum class Modifier {
+    enum class Modifier {
         FilterOnly,
         Searchable
     }
 
-    public val FilterOnly = Modifier.FilterOnly
-    public val Searchable = Modifier.Searchable
+    val FilterOnly = Modifier.FilterOnly
+    val Searchable = Modifier.Searchable
 
     /**
      * Convenience method.
      */
-    public operator fun String.unaryPlus() {
+    operator fun String.unaryPlus() {
         +Attribute(this)
     }
 
     /**
      * Convenience method.
      */
-    public operator fun Attribute.unaryPlus() {
+    operator fun Attribute.unaryPlus() {
         +AttributeForFaceting.Default(this)
     }
 
     /**
      * Add [this] to [attributesForFaceting].
      */
-    public operator fun AttributeForFaceting.unaryPlus() {
+    operator fun AttributeForFaceting.unaryPlus() {
         attributesForFaceting += this
     }
 
@@ -61,7 +60,7 @@ public class DSLAttributesForFaceting(
         }
     }
 
-    public companion object : DSL<DSLAttributesForFaceting, List<AttributeForFaceting>> {
+    companion object : DSL<DSLAttributesForFaceting, List<AttributeForFaceting>> {
 
         override operator fun invoke(block: DSLAttributesForFaceting.() -> Unit): List<AttributeForFaceting> {
             return DSLAttributesForFaceting().apply(block).attributesForFaceting

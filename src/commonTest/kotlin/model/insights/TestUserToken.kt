@@ -6,7 +6,6 @@ import shouldEqual
 import shouldFailWith
 import kotlin.test.Test
 
-
 internal class TestUserToken {
 
     @Test

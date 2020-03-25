@@ -10,12 +10,11 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * A user identifier for analytics and security purposes.
  */
 @Serializable(UserToken.Companion::class)
-public data class UserToken(override val raw: String) : Raw<String> {
+data class UserToken(override val raw: String) : Raw<String> {
 
     init {
         if (raw.isBlank()) throw EmptyStringException("UserToken")

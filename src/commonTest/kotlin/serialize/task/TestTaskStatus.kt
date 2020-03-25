@@ -5,7 +5,6 @@ import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 import unknown
 
-
 internal class TestTaskStatus : TestSerializer<TaskStatus>(TaskStatus) {
 
     override val items = listOf(

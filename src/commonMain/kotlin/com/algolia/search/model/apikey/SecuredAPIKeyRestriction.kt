@@ -10,7 +10,6 @@ import io.ktor.http.formUrlEncode
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.content
 
-
 /**
  * Create restrictions for an [APIKey].
  *

@@ -2,13 +2,24 @@ package com.algolia.search.model.response
 
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAverageClickPosition
+import com.algolia.search.serialize.KeyClickCount
+import com.algolia.search.serialize.KeyClickThroughRate
+import com.algolia.search.serialize.KeyConversionCount
+import com.algolia.search.serialize.KeyConversionRate
+import com.algolia.search.serialize.KeyCustomSearchParameters
+import com.algolia.search.serialize.KeyDescription
+import com.algolia.search.serialize.KeyIndex
+import com.algolia.search.serialize.KeyNoResultCount
+import com.algolia.search.serialize.KeySearchCount
+import com.algolia.search.serialize.KeyTrackedSearchCount
+import com.algolia.search.serialize.KeyTrafficPercentage
+import com.algolia.search.serialize.KeyUserCount
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-public data class ResponseVariant(
+data class ResponseVariant(
     /**
      * Distinct click count for the variant.
      */
@@ -42,27 +53,27 @@ public data class ResponseVariant(
     @SerialName(KeyCustomSearchParameters) val customSearchParametersOrNull: Query? = null
 ) {
 
-    public val conversionRate: Float
+    val conversionRate: Float
         get() = conversionRateOrNull!!
 
-    public val noResultCount: Int
+    val noResultCount: Int
         get() = noResultCountOrNull!!
 
-    public val averageClickPosition: Int
+    val averageClickPosition: Int
         get() = averageClickPositionOrNull!!
 
-    public val searchCount: Long
+    val searchCount: Long
         get() = searchCountOrNull!!
 
-    public val trackedSearchCount: Long
+    val trackedSearchCount: Long
         get() = trackedSearchCountOrNull!!
 
-    public val userCount: Long
+    val userCount: Long
         get() = userCountOrNull!!
 
-    public val clickThroughRate: Float
+    val clickThroughRate: Float
         get() = clickThroughRateOrNull!!
 
-    public val customSearchParameters: Query
+    val customSearchParameters: Query
         get() = customSearchParametersOrNull!!
 }

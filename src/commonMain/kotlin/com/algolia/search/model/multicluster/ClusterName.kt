@@ -1,6 +1,5 @@
 package com.algolia.search.model.multicluster
 
-import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toClusterName
 import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
@@ -9,12 +8,11 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * [ClusterName] of a cluster.
  */
 @Serializable(ClusterName.Companion::class)
-public data class ClusterName(override val raw: String) : Raw<String> {
+data class ClusterName(override val raw: String) : Raw<String> {
 
     override fun toString(): String {
         return raw

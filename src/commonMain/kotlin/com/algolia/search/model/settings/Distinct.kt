@@ -9,14 +9,13 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.IntSerializer
 import kotlinx.serialization.json.JsonLiteral
 
-
 /**
  * Enables de-duplication or grouping of results.
  * Distinct functionality is based on one attribute, as defined in [Settings.attributeForDistinct].
  * Using this attribute, you can limit the number of returned records that contain the same value in that attribute.
  */
 @Serializable(Distinct.Companion::class)
-public data class Distinct(val count: Int) {
+data class Distinct(val count: Int) {
 
     init {
         if (count < 0) throw IllegalArgumentException("Distinct must be a positive integer")

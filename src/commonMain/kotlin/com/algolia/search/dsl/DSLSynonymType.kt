@@ -2,37 +2,36 @@ package com.algolia.search.dsl
 
 import com.algolia.search.model.synonym.SynonymType
 
-
 /**
  * DSL for building a [List] of [SynonymType].
  */
 @Suppress("PropertyName")
 @DSLParameters
-public class DSLSynonymType(
+class DSLSynonymType(
     private val synonymTypes: MutableList<SynonymType> = mutableListOf()
 ) {
 
-    public val OneWay = SynonymType.OneWay
-    public val MultiWay = SynonymType.MultiWay
-    public val Placeholder = SynonymType.Placeholder
-    public val AlternativeCorrectionsOneTypo = SynonymType.Typo.One
-    public val AlternativeCorrectionsTwoTypos = SynonymType.Typo.Two
+    val OneWay = SynonymType.OneWay
+    val MultiWay = SynonymType.MultiWay
+    val Placeholder = SynonymType.Placeholder
+    val AlternativeCorrectionsOneTypo = SynonymType.Typo.One
+    val AlternativeCorrectionsTwoTypos = SynonymType.Typo.Two
 
     /**
      * Add [this] to [synonymTypes].
      */
-    public operator fun SynonymType.unaryPlus() {
+    operator fun SynonymType.unaryPlus() {
         synonymTypes += this
     }
 
     /**
      * Create and add a [SynonymType.AlternativeCorrections] using [this].
      */
-    public operator fun SynonymType.Typo.unaryPlus() {
+    operator fun SynonymType.Typo.unaryPlus() {
         +SynonymType.AlternativeCorrections(this)
     }
 
-    public companion object : DSL<DSLSynonymType, List<SynonymType>> {
+    companion object : DSL<DSLSynonymType, List<SynonymType>> {
 
         override operator fun invoke(block: DSLSynonymType.() -> Unit): List<SynonymType> {
             return DSLSynonymType().apply(block).synonymTypes

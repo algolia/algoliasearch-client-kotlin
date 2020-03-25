@@ -8,11 +8,10 @@ import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
 
-
 /**
  * Configuration used by [ClientAnalytics].
  */
-public data class ConfigurationAnalytics(
+data class ConfigurationAnalytics(
     override val applicationID: ApplicationID,
     override val apiKey: APIKey,
     override val writeTimeout: Long = defaultWriteTimeout,

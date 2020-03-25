@@ -7,9 +7,8 @@ import com.algolia.search.serialize.KeyTaskID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-public data class TaskIndex(
+data class TaskIndex(
     /**
      * The [IndexName] this task is running on.
      */

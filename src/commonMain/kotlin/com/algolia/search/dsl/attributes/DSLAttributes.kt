@@ -4,30 +4,29 @@ import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 
-
 /**
  * DSL for building a [List] of [Attribute].
  */
 @DSLParameters
-public class DSLAttributes(
+class DSLAttributes(
     private val attributes: MutableList<Attribute> = mutableListOf()
 ) {
 
     /**
      * Convenience method.
      */
-    public operator fun String.unaryPlus() {
+    operator fun String.unaryPlus() {
         +Attribute(this)
     }
 
     /**
      * Add [this] to [attributes].
      */
-    public operator fun Attribute.unaryPlus() {
+    operator fun Attribute.unaryPlus() {
         attributes += this
     }
 
-    public companion object : DSL<DSLAttributes, List<Attribute>> {
+    companion object : DSL<DSLAttributes, List<Attribute>> {
 
         override operator fun invoke(block: DSLAttributes.() -> Unit): List<Attribute> {
             return DSLAttributes().apply(block).attributes

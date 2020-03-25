@@ -5,7 +5,6 @@ import com.algolia.search.model.settings.SettingsKey
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLSettingsKey {
 
     @Test

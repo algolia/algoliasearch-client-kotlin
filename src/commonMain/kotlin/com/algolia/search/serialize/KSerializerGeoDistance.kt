@@ -9,7 +9,7 @@ import kotlinx.serialization.internal.SerialClassDescImpl
 typealias GeoDistance = Int
 
 @Serializer(forClass = GeoDistance::class)
-public object KSerializerGeoDistance: KSerializer<GeoDistance> {
+object KSerializerGeoDistance : KSerializer<GeoDistance> {
     override val descriptor = SerialClassDescImpl("GeoDistance")
 
     override fun serialize(encoder: Encoder, obj: GeoDistance) {

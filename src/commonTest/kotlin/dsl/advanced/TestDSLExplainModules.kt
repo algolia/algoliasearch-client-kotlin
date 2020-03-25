@@ -6,7 +6,6 @@ import com.algolia.search.model.search.ExplainModule
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLExplainModules {
 
     @Test

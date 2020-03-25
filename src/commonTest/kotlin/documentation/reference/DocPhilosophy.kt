@@ -1,7 +1,11 @@
 package documentation.reference
 
 import com.algolia.search.client.ClientSearch
-import com.algolia.search.dsl.*
+import com.algolia.search.dsl.attributesToRetrieve
+import com.algolia.search.dsl.attributesToSnippet
+import com.algolia.search.dsl.filters
+import com.algolia.search.dsl.query
+import com.algolia.search.dsl.settings
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.Attribute
@@ -17,15 +21,18 @@ import documentation.client
 import documentation.index
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlinx.coroutines.*
 import io.ktor.utils.io.errors.IOException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
 
 @Suppress("UNUSED_VARIABLE", "unused")
 @Ignore

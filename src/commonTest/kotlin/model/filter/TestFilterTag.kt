@@ -5,7 +5,6 @@ import com.algolia.search.model.filter.FilterConverter
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestFilterTag {
 
     private val filter = Filter.Tag("valueA")

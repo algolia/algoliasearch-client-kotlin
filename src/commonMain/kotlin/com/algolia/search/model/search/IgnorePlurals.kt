@@ -3,34 +3,38 @@ package com.algolia.search.model.search
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.asJsonInput
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.BooleanSerializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonLiteral
-
+import kotlinx.serialization.list
 
 @Serializable(IgnorePlurals.Companion::class)
-public sealed class IgnorePlurals {
+sealed class IgnorePlurals {
 
     /**
      * Enables the ignore plurals functionality, where singulars and plurals are considered equivalent (foot = feet).
      * The languages supported here are either every language or those set by [Settings.queryLanguages]
      */
-    public object True: IgnorePlurals()
+    object True : IgnorePlurals()
 
     /**
      * Which disables ignore plurals, where singulars and plurals are not considered the same for matching purposes
      * (foot will not find feet).
      */
-    public object False: IgnorePlurals()
+    object False : IgnorePlurals()
 
     /**
      * A list of [Language] for which ignoring plurals should be enabled.
      * This list of [queryLanguages] will override any values that you may have set in [Settings.queryLanguages].
      */
-    public data class QueryLanguages(val queryLanguages: List<Language>) : IgnorePlurals() {
+    data class QueryLanguages(val queryLanguages: List<Language>) : IgnorePlurals() {
 
-        public constructor(vararg queryLanguage: Language) : this(queryLanguage.toList())
+        constructor(vararg queryLanguage: Language) : this(queryLanguage.toList())
     }
 
     @Serializer(IgnorePlurals::class)

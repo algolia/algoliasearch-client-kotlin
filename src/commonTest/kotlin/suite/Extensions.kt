@@ -41,7 +41,7 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String, now: Boole
                 val difference = Time.getCurrentTimeMillis() - DateFormat.parse(date)
 
                 if (difference >= dayInMillis || now) {
-                    val index =  client.initIndex(it.indexName)
+                    val index = client.initIndex(it.indexName)
                     if (it.abTestOrNull != null) {
                         index.apply {
                             clientAnalytics.deleteABTest(it.abTest.abTestId).wait()
@@ -53,7 +53,6 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String, now: Boole
         }
     }
 }
-
 
 internal fun <T> load(serializer: KSerializer<T>, name: String): T {
     val string = loadScratch(name)

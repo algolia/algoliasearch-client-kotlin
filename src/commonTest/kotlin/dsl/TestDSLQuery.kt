@@ -1,14 +1,34 @@
 package dsl
 
 import attributeA
-import com.algolia.search.dsl.*
+import com.algolia.search.dsl.alternativesAsExact
+import com.algolia.search.dsl.analyticsTags
+import com.algolia.search.dsl.attributesToHighlight
+import com.algolia.search.dsl.attributesToRetrieve
+import com.algolia.search.dsl.attributesToSnippet
+import com.algolia.search.dsl.disableExactOnAttributes
+import com.algolia.search.dsl.disableTypoToleranceOnAttributes
+import com.algolia.search.dsl.explainModules
+import com.algolia.search.dsl.facetFilters
+import com.algolia.search.dsl.facets
+import com.algolia.search.dsl.filters
+import com.algolia.search.dsl.insideBoundingBox
+import com.algolia.search.dsl.insidePolygon
+import com.algolia.search.dsl.numericFilters
+import com.algolia.search.dsl.optionalFilters
+import com.algolia.search.dsl.optionalWords
+import com.algolia.search.dsl.query
+import com.algolia.search.dsl.queryLanguages
+import com.algolia.search.dsl.responseFields
+import com.algolia.search.dsl.restrictSearchableAttributes
+import com.algolia.search.dsl.ruleContexts
+import com.algolia.search.dsl.tagFilters
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.BoundingBox
 import com.algolia.search.model.search.Polygon
 import shouldNotBeNull
 import unknown
 import kotlin.test.Test
-
 
 internal class TestDSLQuery {
 

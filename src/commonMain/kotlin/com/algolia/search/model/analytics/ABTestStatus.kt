@@ -11,36 +11,35 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * [ABTest] server-side status.
  */
 @Serializable(ABTestStatus.Companion::class)
-public sealed class ABTestStatus(override val raw: String) : Raw<String> {
+sealed class ABTestStatus(override val raw: String) : Raw<String> {
 
     /**
      * The Analytics created the [ABTest] and performed a successful request to the engine.
      */
-    public object Active : ABTestStatus(KeyActive)
+    object Active : ABTestStatus(KeyActive)
 
     /**
      * The [ABTest] was stopped by a user: it was deleted from the engine but we have to keep the data for
      * historical purposes.
      */
-    public object Stopped : ABTestStatus(KeyStopped)
+    object Stopped : ABTestStatus(KeyStopped)
 
     /**
      * The [ABTest] reached its end date and was automatically stopped. It is removed from the engine but the
      * metadata/metrics are kept.
      */
-    public object Expired : ABTestStatus(KeyExpired)
+    object Expired : ABTestStatus(KeyExpired)
 
     /**
      * The [ABTest] creation failed.
      */
-    public object Failed : ABTestStatus(KeyFailed)
+    object Failed : ABTestStatus(KeyFailed)
 
-    public data class Other(override val raw: String) : ABTestStatus(raw)
+    data class Other(override val raw: String) : ABTestStatus(raw)
 
     companion object : KSerializer<ABTestStatus> {
 

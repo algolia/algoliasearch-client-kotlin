@@ -1,16 +1,15 @@
 package com.algolia.search.model.filter
 
-
 /**
  * Converts a [List] of [FilterGroup] to a type [O].
  */
-public sealed class FilterGroupsConverter<I, O> : (I) -> O {
+sealed class FilterGroupsConverter<I, O> : (I) -> O {
 
     /**
      * Converts a [List] of [FilterGroup] to its SQL-like [String] representation.
      * Returns null if the list is empty.
      */
-    public object SQL : FilterGroupsConverter<Set<FilterGroup<*>>, String?>() {
+    object SQL : FilterGroupsConverter<Set<FilterGroup<*>>, String?>() {
 
         override fun invoke(groups: Set<FilterGroup<*>>): String? {
             return if (groups.isNotEmpty()) {
@@ -27,7 +26,7 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
         /**
          * Same as [SQL], but removes quotes for readability purposes.
          */
-        public object Unquoted : FilterGroupsConverter<Set<FilterGroup<*>>, String?>() {
+        object Unquoted : FilterGroupsConverter<Set<FilterGroup<*>>, String?>() {
 
             override fun invoke(groups: Set<FilterGroup<*>>): String? {
                 return SQL(groups)?.replace("\"", "")
@@ -38,7 +37,7 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
     /**
      * Converts a [List] of [FilterGroup] to its legacy representation.
      */
-    public sealed class Legacy<T : Filter> : FilterGroupsConverter<Set<FilterGroup<T>>, List<List<String>>>() {
+    sealed class Legacy<T : Filter> : FilterGroupsConverter<Set<FilterGroup<T>>, List<List<String>>>() {
 
         override fun invoke(groups: Set<FilterGroup<T>>): List<List<String>> {
             val (andEntries, orEntries) = groups.partition { it is FilterGroup.And }

@@ -5,9 +5,8 @@ import com.algolia.search.serialize.KeyTopUsers
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-public data class ResponseTopUserID(
+data class ResponseTopUserID(
     /**
      * Mapping of [ClusterName] to top users.
      */

@@ -2,13 +2,26 @@ package com.algolia.search.model.response
 
 import com.algolia.search.model.ClientDate
 import com.algolia.search.model.IndexName
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyABTest
+import com.algolia.search.serialize.KeyCreatedAt
+import com.algolia.search.serialize.KeyDataSize
+import com.algolia.search.serialize.KeyEntries
+import com.algolia.search.serialize.KeyFileSize
+import com.algolia.search.serialize.KeyItems
+import com.algolia.search.serialize.KeyLastBuildTimeS
+import com.algolia.search.serialize.KeyName
+import com.algolia.search.serialize.KeyNbPages
+import com.algolia.search.serialize.KeyNumberOfPendingTasks
+import com.algolia.search.serialize.KeyPendingTask
+import com.algolia.search.serialize.KeyPrimary
+import com.algolia.search.serialize.KeyReplicas
+import com.algolia.search.serialize.KeySourceABTest
+import com.algolia.search.serialize.KeyUpdatedAt
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-public data class ResponseListIndices(
+data class ResponseListIndices(
     @SerialName(KeyItems) val items: List<Item>,
     /**
      * The value is always 1.
@@ -18,7 +31,7 @@ public data class ResponseListIndices(
 ) {
 
     @Serializable
-    public data class Item(
+    data class Item(
         /**
          * Index name.
          */
@@ -61,16 +74,16 @@ public data class ResponseListIndices(
         @SerialName(KeyABTest) val abTestOrNull: ResponseABTestShort? = null
     ) {
 
-        public val replicas: List<IndexName>
+        val replicas: List<IndexName>
             get() = replicasOrNull!!
 
-        public val primary: IndexName
+        val primary: IndexName
             get() = primaryOrNull!!
 
-        public val sourceABTest: IndexName
+        val sourceABTest: IndexName
             get() = sourceABTestOrNull!!
 
-        public val abTest: ResponseABTestShort
+        val abTest: ResponseABTestShort
             get() = abTestOrNull!!
     }
 }

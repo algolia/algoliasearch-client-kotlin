@@ -5,12 +5,11 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.dsl.all
 import com.algolia.search.model.Attribute
 
-
 /**
  * DSL for building a [List] of [Attribute] to retrieve.
  */
 @DSLParameters
-public class DSLAttributesToRetrieve(
+class DSLAttributesToRetrieve(
     private val attributes: MutableList<Attribute> = mutableListOf()
 ) {
 
@@ -18,23 +17,23 @@ public class DSLAttributesToRetrieve(
      * True will retrieve all attributes, except the one contained in [attributes].
      * False will retrieve only the attributes contained in [attributes].
      */
-    public var excludeAttributes: Boolean = false
+    var excludeAttributes: Boolean = false
 
     /**
      * Convenience method.
      */
-    public operator fun String.unaryPlus() {
+    operator fun String.unaryPlus() {
         +Attribute(this)
     }
 
     /**
      * Add [this] to [attributes].
      */
-    public operator fun Attribute.unaryPlus() {
+    operator fun Attribute.unaryPlus() {
         attributes += this
     }
 
-    public companion object : DSL<DSLAttributesToRetrieve, List<Attribute>> {
+    companion object : DSL<DSLAttributesToRetrieve, List<Attribute>> {
 
         override operator fun invoke(block: DSLAttributesToRetrieve.() -> Unit): List<Attribute> {
             return DSLAttributesToRetrieve().apply(block).run {

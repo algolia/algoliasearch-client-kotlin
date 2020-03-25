@@ -2,16 +2,19 @@ package com.algolia.search.model.search
 
 import com.algolia.search.helper.and
 import com.algolia.search.model.Raw
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.FloatSerializer
-
+import kotlinx.serialization.list
 
 /**
  * Search inside a rectangular area (in geo coordinates).
  * The rectangle is defined by two diagonally opposite points (hereafter [point1] and [point2]).
  */
 @Serializable(BoundingBox.Companion::class)
-public data class BoundingBox(
+data class BoundingBox(
     val point1: Point,
     val point2: Point
 ) : Raw<List<Float>> {

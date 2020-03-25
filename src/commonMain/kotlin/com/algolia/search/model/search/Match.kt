@@ -4,8 +4,7 @@ import com.algolia.search.serialize.KeyAlternatives
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
-public data class Match(
+data class Match(
     @SerialName(KeyAlternatives) val alternatives: List<Alternative>
 )

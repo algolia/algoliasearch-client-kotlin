@@ -17,9 +17,7 @@ import runBlocking
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
-import kotlin.test.AfterTest
 import kotlin.test.Test
-
 
 internal class TestSuiteAccount {
 
@@ -35,7 +33,6 @@ internal class TestSuiteAccount {
     private val synonym = Synonym.MultiWay(objectID, synonyms = listOf("one", "two"))
     private val settings =
         Settings(searchableAttributes = listOf(SearchableAttribute.Default("objectID".toAttribute())))
-
 
     @Test
     fun test() {

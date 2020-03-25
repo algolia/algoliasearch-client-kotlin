@@ -12,31 +12,30 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(Anchoring.Companion::class)
-public sealed class Anchoring(override val raw: String) : Raw<String> {
+sealed class Anchoring(override val raw: String) : Raw<String> {
 
     /**
      * The [Pattern] matches the [Query.query].
      */
-    public object Is : Anchoring(KeyIs)
+    object Is : Anchoring(KeyIs)
 
     /**
      * The [Pattern] matches the beginning of the [Query.query].
      */
-    public object StartsWith : Anchoring(KeyStartsWith)
+    object StartsWith : Anchoring(KeyStartsWith)
 
     /**
      * The [Pattern] matches the beginning of the [Query.query].
      */
-    public object EndsWith : Anchoring(KeyEndsWith)
+    object EndsWith : Anchoring(KeyEndsWith)
 
     /**
      * The [Pattern] is contained by the [Query.query].
      */
-    public object Contains : Anchoring(KeyContains)
+    object Contains : Anchoring(KeyContains)
 
-    public data class Other(override val raw: String) : Anchoring(raw)
+    data class Other(override val raw: String) : Anchoring(raw)
 
     companion object : KSerializer<Anchoring> {
 

@@ -11,8 +11,7 @@ import kotlinx.serialization.internal.HashMapSerializer
 import kotlinx.serialization.internal.IntSerializer
 import kotlinx.serialization.internal.StringSerializer
 
-
-public object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
+object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
 
     override val descriptor = HashMapClassDesc(
         Attribute.descriptor,

@@ -14,9 +14,7 @@ import runBlocking
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
-import kotlin.test.AfterTest
 import kotlin.test.Test
-
 
 class TestSuiteReplaceAll {
 
@@ -25,8 +23,6 @@ class TestSuiteReplaceAll {
     private val index = clientAdmin1.initIndex(indexName)
     private val objectIDOne = "one".toObjectID()
     private val objectIDTwo = "two".toObjectID()
-
-
 
     @Test
     fun test() {

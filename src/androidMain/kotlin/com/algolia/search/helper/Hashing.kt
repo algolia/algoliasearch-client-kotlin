@@ -6,7 +6,6 @@ import kotlinx.serialization.internal.HexConverter
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 
-
 internal actual fun String.sha256(key: String): String {
     return Mac.getInstance("HmacSHA256").run {
         val secretKey = SecretKeySpec(this@sha256.toByteArray(), "HmacSHA256")

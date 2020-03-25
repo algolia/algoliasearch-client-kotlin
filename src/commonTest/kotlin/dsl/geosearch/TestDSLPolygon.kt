@@ -6,7 +6,6 @@ import com.algolia.search.model.search.Polygon
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLPolygon {
 
     @Test

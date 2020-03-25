@@ -1,18 +1,21 @@
 package com.algolia.search.model.synonym
 
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAlternativeCorrection1
+import com.algolia.search.serialize.KeyAlternativeCorrection2
+import com.algolia.search.serialize.KeyOneWaySynonym
+import com.algolia.search.serialize.KeyPlaceholder
+import com.algolia.search.serialize.KeySynonym
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(SynonymType.Companion::class)
-public sealed class SynonymType(override val raw: String) : Raw<String> {
+sealed class SynonymType(override val raw: String) : Raw<String> {
 
-    public enum class Typo {
+    enum class Typo {
         One,
         Two
     }
@@ -20,17 +23,17 @@ public sealed class SynonymType(override val raw: String) : Raw<String> {
     /**
      * Matches [Synonym.OneWay].
      */
-    public object OneWay : SynonymType(KeyOneWaySynonym)
+    object OneWay : SynonymType(KeyOneWaySynonym)
 
     /**
      * Matches [Synonym.MultiWay].
      */
-    public object MultiWay : SynonymType(KeySynonym)
+    object MultiWay : SynonymType(KeySynonym)
 
     /**
      * Matches [Synonym.AlternativeCorrections].
      */
-    public data class AlternativeCorrections(val typo: Typo) : SynonymType(
+    data class AlternativeCorrections(val typo: Typo) : SynonymType(
         when (typo) {
             Typo.One -> KeyAlternativeCorrection1
             Typo.Two -> KeyAlternativeCorrection2
@@ -40,9 +43,9 @@ public sealed class SynonymType(override val raw: String) : Raw<String> {
     /**
      * Matches [Synonym.Placeholder]
      */
-    public object Placeholder : SynonymType(KeyPlaceholder)
+    object Placeholder : SynonymType(KeyPlaceholder)
 
-    public data class Other(override val raw: String) : SynonymType(raw)
+    data class Other(override val raw: String) : SynonymType(raw)
 
     companion object : KSerializer<SynonymType> {
 

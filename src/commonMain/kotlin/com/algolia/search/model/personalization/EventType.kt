@@ -5,29 +5,32 @@ import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.serialize.KeyClick
 import com.algolia.search.serialize.KeyConversion
 import com.algolia.search.serialize.KeyView
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(EventType.Companion::class)
-public sealed class EventType(override val raw: String) : Raw<String> {
+sealed class EventType(override val raw: String) : Raw<String> {
 
     /**
      * Matches an event of type [InsightsEvent.View].
      */
-    public object View : EventType(KeyView)
+    object View : EventType(KeyView)
 
     /**
      * Matches an event of type [InsightsEvent.Click].
      */
-    public object Click : EventType(KeyClick)
+    object Click : EventType(KeyClick)
 
     /**
      * Matches an event of type [InsightsEvent.Conversion].
      */
-    public object Conversion : EventType(KeyConversion)
+    object Conversion : EventType(KeyConversion)
 
-    public data class Other(override val raw: String) : EventType(raw)
+    data class Other(override val raw: String) : EventType(raw)
 
     @Serializer(EventType::class)
     companion object : KSerializer<EventType> {

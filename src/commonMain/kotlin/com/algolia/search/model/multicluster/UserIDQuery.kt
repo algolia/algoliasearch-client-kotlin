@@ -8,12 +8,11 @@ import com.algolia.search.serialize.KeyQuery
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * Query to use with [EndpointMultiCluster.searchUserID].
  */
 @Serializable
-public data class UserIDQuery(
+data class UserIDQuery(
     /**
      * Engine default: "empty string"
      * Query to search. The search is a prefix search with typoTolerance. Use empty query to retrieve all users.

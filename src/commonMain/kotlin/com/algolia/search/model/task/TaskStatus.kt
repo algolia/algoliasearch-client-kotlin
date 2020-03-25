@@ -9,24 +9,23 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * Current status of a [Task].
  */
 @Serializable(TaskStatus.Companion::class)
-public sealed class TaskStatus(override val raw: String) : Raw<String> {
+sealed class TaskStatus(override val raw: String) : Raw<String> {
 
     /**
      * The [Task] has been processed by the server.
      */
-    public object Published : TaskStatus(KeyPublished)
+    object Published : TaskStatus(KeyPublished)
 
     /**
      * The [Task] has not yet been processed by the server.
      */
-    public object NotPublished : TaskStatus(KeyNotPublished)
+    object NotPublished : TaskStatus(KeyNotPublished)
 
-    public data class Other(override val raw: String) : TaskStatus(raw)
+    data class Other(override val raw: String) : TaskStatus(raw)
 
     companion object : KSerializer<TaskStatus> {
 

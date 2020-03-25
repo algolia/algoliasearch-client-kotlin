@@ -12,7 +12,7 @@ internal expect val clientAdmin2: ClientSearch
 internal expect val clientMcm: ClientSearch
 internal expect val clientAnalytics: ClientAnalytics
 internal expect val clientInsights: ClientInsights
-internal expect val clientPlaces : ClientPlaces
+internal expect val clientPlaces: ClientPlaces
 
 internal expect fun runBlocking(
     coroutineContext: CoroutineContext = EmptyCoroutineContext,

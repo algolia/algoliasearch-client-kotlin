@@ -16,7 +16,6 @@ import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 
-
 internal class EndpointIndexImpl(
     private val transport: Transport,
     override val indexName: IndexName

@@ -5,16 +5,35 @@ import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.KeyAlternativeCorrection1
+import com.algolia.search.serialize.KeyAlternativeCorrection2
+import com.algolia.search.serialize.KeyCorrections
+import com.algolia.search.serialize.KeyInput
+import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.KeyOneWaySynonym
+import com.algolia.search.serialize.KeyPlaceholder
+import com.algolia.search.serialize.KeyReplacements
+import com.algolia.search.serialize.KeySynonym
+import com.algolia.search.serialize.KeySynonyms
+import com.algolia.search.serialize.KeyType
+import com.algolia.search.serialize.KeyWord
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.regexPlaceholder
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
-
+import kotlinx.serialization.list
 
 @Serializable(Synonym.Companion::class)
-public sealed class Synonym {
+sealed class Synonym {
 
     /**
      * Must be unique. It can contain any character, and be of unlimited length.
@@ -25,7 +44,7 @@ public sealed class Synonym {
      */
     abstract val objectID: ObjectID
 
-    public data class OneWay(
+    data class OneWay(
         override val objectID: ObjectID,
         /**
          * Defines the synonym. A word or expression, used as the basis for the [synonyms].
@@ -49,7 +68,7 @@ public sealed class Synonym {
         }
     }
 
-    public data class MultiWay(
+    data class MultiWay(
         override val objectID: ObjectID,
         /**
          * A list of synonyms (up to 20).
@@ -68,7 +87,7 @@ public sealed class Synonym {
         }
     }
 
-    public data class AlternativeCorrections(
+    data class AlternativeCorrections(
         override val objectID: ObjectID,
         /**
          * A single word, used as the basis for the [corrections].
@@ -88,10 +107,9 @@ public sealed class Synonym {
             if (word.isBlank()) throw EmptyStringException("Word")
             if (corrections.isEmpty()) throw EmptyListException("Corrections")
         }
-
     }
 
-    public data class Placeholder(
+    data class Placeholder(
         override val objectID: ObjectID,
         /**
          * A single word, used as the basis for the [replacements].
@@ -110,7 +128,7 @@ public sealed class Synonym {
         /**
          * Creates the [Placeholder.placeholder] pattern for you.
          */
-        public data class Token(val token: String) : Raw<String> {
+        data class Token(val token: String) : Raw<String> {
 
             override val raw = "<$token>"
 
@@ -120,7 +138,7 @@ public sealed class Synonym {
         }
     }
 
-    public data class Other(
+    data class Other(
         override val objectID: ObjectID,
         val json: JsonObject
     ) : Synonym()

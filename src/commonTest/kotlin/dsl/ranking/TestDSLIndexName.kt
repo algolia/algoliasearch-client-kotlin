@@ -6,7 +6,6 @@ import indexB
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLIndexName {
 
     @Test

@@ -7,7 +7,6 @@ import kotlinx.serialization.json.JsonElement
 import shouldEqual
 import kotlin.test.Test
 
-
 internal abstract class TestSerializer<T>(
     private val serializer: KSerializer<T>,
     private val json: Json = Json

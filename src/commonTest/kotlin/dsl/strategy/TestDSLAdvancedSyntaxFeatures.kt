@@ -5,7 +5,6 @@ import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLAdvancedSyntaxFeatures {
 
     @Test

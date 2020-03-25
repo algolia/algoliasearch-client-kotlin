@@ -7,7 +7,6 @@ import com.algolia.search.model.settings.SearchableAttribute
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLSearchableAttributes {
 
     @Test

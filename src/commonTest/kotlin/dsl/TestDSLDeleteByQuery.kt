@@ -1,14 +1,19 @@
 package dsl
 
 import attributeA
-import com.algolia.search.dsl.*
+import com.algolia.search.dsl.deleteByQuery
+import com.algolia.search.dsl.facetFilters
+import com.algolia.search.dsl.filters
+import com.algolia.search.dsl.insideBoundingBox
+import com.algolia.search.dsl.insidePolygon
+import com.algolia.search.dsl.numericFilters
+import com.algolia.search.dsl.tagFilters
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.BoundingBox
 import com.algolia.search.model.search.Polygon
 import shouldNotBeNull
 import unknown
 import kotlin.test.Test
-
 
 internal class TestDSLDeleteByQuery {
 

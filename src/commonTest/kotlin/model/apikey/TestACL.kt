@@ -1,11 +1,31 @@
 package model.apikey
 
-import com.algolia.search.model.apikey.ACL.*
-import com.algolia.search.serialize.*
+import com.algolia.search.model.apikey.ACL.AddObject
+import com.algolia.search.model.apikey.ACL.Analytics
+import com.algolia.search.model.apikey.ACL.Browse
+import com.algolia.search.model.apikey.ACL.DeleteIndex
+import com.algolia.search.model.apikey.ACL.DeleteObject
+import com.algolia.search.model.apikey.ACL.EditSettings
+import com.algolia.search.model.apikey.ACL.ListIndices
+import com.algolia.search.model.apikey.ACL.Logs
+import com.algolia.search.model.apikey.ACL.Other
+import com.algolia.search.model.apikey.ACL.Search
+import com.algolia.search.model.apikey.ACL.SeeUnretrievableAttributes
+import com.algolia.search.model.apikey.ACL.Settings
+import com.algolia.search.serialize.KeyAddObject
+import com.algolia.search.serialize.KeyAnalytics
+import com.algolia.search.serialize.KeyBrowse
+import com.algolia.search.serialize.KeyDeleteIndex
+import com.algolia.search.serialize.KeyDeleteObject
+import com.algolia.search.serialize.KeyEditSettings
+import com.algolia.search.serialize.KeyListIndexes
+import com.algolia.search.serialize.KeyLogs
+import com.algolia.search.serialize.KeySearch
+import com.algolia.search.serialize.KeySeeUnretrievableAttributes
+import com.algolia.search.serialize.KeySettings
 import shouldEqual
 import unknown
 import kotlin.test.Test
-
 
 internal class TestACL {
 

@@ -8,8 +8,7 @@ import kotlinx.serialization.internal.ArrayListClassDesc
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
-
-public object KSerializerFacetList : KSerializer<List<Facet>> {
+object KSerializerFacetList : KSerializer<List<Facet>> {
 
     override val descriptor = ArrayListClassDesc(Facet.serializer().descriptor)
 

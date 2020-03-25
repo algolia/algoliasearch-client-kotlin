@@ -10,18 +10,17 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * An empty [Pattern] is only allowed when the [Anchoring] is set to [Anchoring.Is].
  * Special characters ({, }, : and \) must be escaped by preceding them with a backslash (\) if they are to be
  * treated as literals.
  */
 @Serializable(Pattern.Companion::class)
-public sealed class Pattern(override val raw: String) : Raw<String> {
+sealed class Pattern(override val raw: String) : Raw<String> {
 
-    public data class Facet(val attribute: Attribute) : Pattern("{facet:$attribute}")
+    data class Facet(val attribute: Attribute) : Pattern("{facet:$attribute}")
 
-    public data class Literal(override val raw: String) : Pattern(raw)
+    data class Literal(override val raw: String) : Pattern(raw)
 
     companion object : KSerializer<Pattern> {
 

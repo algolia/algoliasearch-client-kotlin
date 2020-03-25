@@ -8,9 +8,7 @@ import shouldEqual
 import unknown
 import kotlin.test.Test
 
-
 internal class TestDSLFilters {
-
 
     @Test
     fun and() {
