@@ -1,13 +1,7 @@
 package configuration
 
 import BuildConfig
-import com.algolia.search.configuration.AlgoliaSearchClient
-import com.algolia.search.configuration.ConfigurationAnalytics
-import com.algolia.search.configuration.ConfigurationInsights
-import com.algolia.search.configuration.ConfigurationPlaces
-import com.algolia.search.configuration.ConfigurationSearch
-import com.algolia.search.configuration.defaultReadTimeout
-import com.algolia.search.configuration.defaultWriteTimeout
+import com.algolia.search.configuration.*
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.analyticsHosts
@@ -18,6 +12,7 @@ import io.ktor.client.features.logging.LogLevel
 import shouldBeNull
 import shouldEqual
 import kotlin.test.Test
+
 
 internal class TestConfiguration {
 

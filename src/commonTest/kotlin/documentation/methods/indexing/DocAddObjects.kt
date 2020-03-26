@@ -11,6 +11,7 @@ import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
+
 @Ignore
 internal class DocAddObjects {
 
@@ -114,7 +115,7 @@ internal class DocAddObjects {
 
             index.saveObject(json)
 
-            // / With serializable class
+            /// With serializable class
             @Serializable
             data class Contact(
                 val firstname: String,

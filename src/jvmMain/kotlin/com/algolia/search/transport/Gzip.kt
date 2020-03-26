@@ -5,6 +5,7 @@ import io.ktor.util.toByteArray
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.runBlocking
 
+
 internal actual object Gzip : (String) -> ByteArray {
 
     @Suppress("EXPERIMENTAL_API_USAGE")

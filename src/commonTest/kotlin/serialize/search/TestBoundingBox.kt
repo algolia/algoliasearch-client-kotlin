@@ -5,6 +5,7 @@ import com.algolia.search.model.search.BoundingBox
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 
+
 internal class TestBoundingBox : TestSerializer<BoundingBox>(BoundingBox) {
 
     override val items = listOf(

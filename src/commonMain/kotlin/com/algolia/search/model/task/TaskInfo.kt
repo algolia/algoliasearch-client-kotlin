@@ -5,8 +5,9 @@ import com.algolia.search.serialize.KeyStatus
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class TaskInfo(
+public data class TaskInfo(
     /**
      * The [Task] current [TaskStatus].
      */

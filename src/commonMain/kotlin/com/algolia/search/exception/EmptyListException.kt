@@ -1,6 +1,7 @@
 package com.algolia.search.exception
 
+
 /**
  * This exception is thrown when an illegal empty [List] is encountered.
  */
-class EmptyListException(name: String) : Exception("$name must not be an empty list.")
+public class EmptyListException(name: String) : Exception("$name must not be an empty list.")

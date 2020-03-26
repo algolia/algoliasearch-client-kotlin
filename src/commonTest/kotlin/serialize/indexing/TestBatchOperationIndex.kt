@@ -9,6 +9,7 @@ import indexA
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
+
 internal class TestBatchOperationIndex : TestSerializer<BatchOperationIndex>(
     BatchOperationIndex
 ) {

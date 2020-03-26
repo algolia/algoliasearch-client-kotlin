@@ -5,6 +5,7 @@ import com.algolia.search.model.search.AlternativesAsExact
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDSLAlternativesAsExact {
 
     @Test

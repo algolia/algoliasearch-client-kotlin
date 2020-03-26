@@ -7,6 +7,7 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDSLAttributesForFaceting {
 
     @Test

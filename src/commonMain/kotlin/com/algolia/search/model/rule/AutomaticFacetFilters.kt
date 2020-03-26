@@ -7,8 +7,9 @@ import com.algolia.search.serialize.KeyScore
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class AutomaticFacetFilters(
+public data class AutomaticFacetFilters(
     /**
      * [Attribute] to filter on. This must match [Pattern.Facet.attribute].
      */

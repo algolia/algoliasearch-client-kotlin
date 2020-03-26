@@ -9,8 +9,9 @@ import com.algolia.search.serialize.KeyObjectID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class RequestObjects(
+public data class RequestObjects(
     /**
      * [IndexName] containing the object.
      */

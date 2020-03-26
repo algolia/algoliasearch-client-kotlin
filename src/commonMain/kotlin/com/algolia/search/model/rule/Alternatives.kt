@@ -8,11 +8,12 @@ import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.BooleanSerializer
 import kotlinx.serialization.json.JsonLiteral
 
-sealed class Alternatives {
 
-    object True : Alternatives()
+public sealed class Alternatives {
 
-    object False : Alternatives()
+    public object True : Alternatives()
+
+    public object False : Alternatives()
 
     @Serializer(Alternatives::class)
     companion object : KSerializer<Alternatives> {

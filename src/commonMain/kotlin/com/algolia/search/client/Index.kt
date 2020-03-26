@@ -1,19 +1,6 @@
 package com.algolia.search.client
 
-import com.algolia.search.endpoint.EndpointAdvanced
-import com.algolia.search.endpoint.EndpointAdvancedImpl
-import com.algolia.search.endpoint.EndpointIndex
-import com.algolia.search.endpoint.EndpointIndexImpl
-import com.algolia.search.endpoint.EndpointIndexing
-import com.algolia.search.endpoint.EndpointIndexingImpl
-import com.algolia.search.endpoint.EndpointRule
-import com.algolia.search.endpoint.EndpointRuleImpl
-import com.algolia.search.endpoint.EndpointSearch
-import com.algolia.search.endpoint.EndpointSearchImpl
-import com.algolia.search.endpoint.EndpointSettings
-import com.algolia.search.endpoint.EndpointSettingsImpl
-import com.algolia.search.endpoint.EndpointSynonym
-import com.algolia.search.endpoint.EndpointSynonymImpl
+import com.algolia.search.endpoint.*
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchRules
@@ -26,10 +13,11 @@ import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 
+
 /**
  * The main entry point for performing operations on a single index.
  */
-data class Index internal constructor(
+public data class Index internal constructor(
     internal val transport: Transport,
     override val indexName: IndexName
 ) : EndpointSearch by EndpointSearchImpl(transport, indexName),
@@ -48,7 +36,7 @@ data class Index internal constructor(
      * @param query The [RuleQuery] used to search.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun browseRules(
+    public suspend fun browseRules(
         query: RuleQuery = RuleQuery(),
         requestOptions: RequestOptions? = null
     ): List<ResponseSearchRules> {
@@ -72,7 +60,7 @@ data class Index internal constructor(
      * @param query The [SynonymQuery] used to search.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun browseSynonyms(
+    public suspend fun browseSynonyms(
         query: SynonymQuery = SynonymQuery(),
         requestOptions: RequestOptions? = null
     ): List<ResponseSearchSynonyms> {
@@ -96,7 +84,7 @@ data class Index internal constructor(
      * @param query The [Query] used to search.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun browseObjects(
+    public suspend fun browseObjects(
         query: Query = Query(),
         requestOptions: RequestOptions? = null
     ): List<ResponseSearch> {

@@ -5,35 +5,36 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.RankingCriterion
 
+
 /**
  * DSL for building a [List] of [RankingCriterion].
  */
 @Suppress("PropertyName")
 @DSLParameters
-class DSLRanking(
+public class DSLRanking(
     private val rankingCriteria: MutableList<RankingCriterion> = mutableListOf()
 ) {
 
-    enum class Modifier {
+    public enum class Modifier {
         Asc,
         Desc
     }
 
-    val Asc = Modifier.Asc
-    val Desc = Modifier.Desc
-    val Typo = RankingCriterion.Typo
-    val Geo = RankingCriterion.Geo
-    val Words = RankingCriterion.Words
-    val Filters = RankingCriterion.Filters
-    val Proximity = RankingCriterion.Proximity
-    val Attribute = RankingCriterion.Attribute
-    val Exact = RankingCriterion.Exact
-    val Custom = RankingCriterion.Custom
+    public val Asc = Modifier.Asc
+    public val Desc = Modifier.Desc
+    public val Typo = RankingCriterion.Typo
+    public val Geo = RankingCriterion.Geo
+    public val Words = RankingCriterion.Words
+    public val Filters = RankingCriterion.Filters
+    public val Proximity = RankingCriterion.Proximity
+    public val Attribute = RankingCriterion.Attribute
+    public val Exact = RankingCriterion.Exact
+    public val Custom = RankingCriterion.Custom
 
     /**
      * Add [this] to [rankingCriteria].
      */
-    operator fun RankingCriterion.unaryPlus() {
+    public operator fun RankingCriterion.unaryPlus() {
         rankingCriteria += this
     }
 
@@ -54,7 +55,7 @@ class DSLRanking(
         }
     }
 
-    companion object : DSL<DSLRanking, List<RankingCriterion>> {
+    public companion object : DSL<DSLRanking, List<RankingCriterion>> {
 
         override operator fun invoke(block: DSLRanking.() -> Unit): List<RankingCriterion> {
             return DSLRanking().apply(block).rankingCriteria

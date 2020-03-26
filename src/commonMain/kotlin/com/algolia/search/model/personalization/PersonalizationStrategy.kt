@@ -4,8 +4,9 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.insights.EventName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class PersonalizationStrategy(
+public data class PersonalizationStrategy(
     /**
      * Associate a [EventScoring] to an [EventName].
      */

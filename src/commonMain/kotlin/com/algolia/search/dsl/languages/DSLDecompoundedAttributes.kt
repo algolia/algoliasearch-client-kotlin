@@ -6,11 +6,12 @@ import com.algolia.search.dsl.attributes.DSLAttributes
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.settings.DecompoundedAttributes
 
+
 /**
  * DSL for building a [List] of [DecompoundedAttributes].
  */
 @DSLParameters
-class DSLDecompoundedAttributes(
+public class DSLDecompoundedAttributes(
     private val decompoundedAttributes: MutableList<DecompoundedAttributes> = mutableListOf()
 ) {
 
@@ -21,32 +22,32 @@ class DSLDecompoundedAttributes(
     /**
      * Create and add a [DecompoundedAttributes] for the [Language.German] using [block] to [decompoundedAttributes].
      */
-    infix fun german(block: DSLAttributes.() -> Unit) {
+    public infix fun german(block: DSLAttributes.() -> Unit) {
         +Language.German.decompounded(block)
     }
 
     /**
      * Create and add a [DecompoundedAttributes] for the [Language.Finnish] using [block] to [decompoundedAttributes].
      */
-    infix fun finnish(block: DSLAttributes.() -> Unit) {
+    public infix fun finnish(block: DSLAttributes.() -> Unit) {
         +Language.Finnish.decompounded(block)
     }
 
     /**
      * Create and add a [DecompoundedAttributes] for the [Language.Dutch] using [block] to [decompoundedAttributes].
      */
-    infix fun dutch(block: DSLAttributes.() -> Unit) {
+    public infix fun dutch(block: DSLAttributes.() -> Unit) {
         +Language.Dutch.decompounded(block)
     }
 
     /**
      * Add [this] to [decompoundedAttributes].
      */
-    operator fun DecompoundedAttributes.unaryPlus() {
+    public operator fun DecompoundedAttributes.unaryPlus() {
         decompoundedAttributes += this
     }
 
-    companion object : DSL<DSLDecompoundedAttributes, List<DecompoundedAttributes>> {
+    public companion object : DSL<DSLDecompoundedAttributes, List<DecompoundedAttributes>> {
 
         override operator fun invoke(block: DSLDecompoundedAttributes.() -> Unit): List<DecompoundedAttributes> {
             return DSLDecompoundedAttributes().apply(block).decompoundedAttributes

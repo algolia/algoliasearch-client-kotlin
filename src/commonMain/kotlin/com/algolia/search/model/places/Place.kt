@@ -5,7 +5,8 @@ import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.RankingInfo
 import kotlinx.serialization.json.JsonObject
 
-interface Place {
+
+public interface Place {
 
     val objectIDOrNull: ObjectID?
     val administrativeOrNull: List<String>?

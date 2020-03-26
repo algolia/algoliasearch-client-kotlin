@@ -1,27 +1,15 @@
 package com.algolia.search.model.indexing
 
 import com.algolia.search.dsl.DSLParameters
-import com.algolia.search.model.search.AroundPrecision
-import com.algolia.search.model.search.AroundRadius
-import com.algolia.search.model.search.BoundingBox
-import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.Polygon
-import com.algolia.search.serialize.KSerializerPoint
-import com.algolia.search.serialize.KeyAroundLatLng
-import com.algolia.search.serialize.KeyAroundPrecision
-import com.algolia.search.serialize.KeyAroundRadius
-import com.algolia.search.serialize.KeyFacetFilters
-import com.algolia.search.serialize.KeyFilters
-import com.algolia.search.serialize.KeyInsideBoundingBox
-import com.algolia.search.serialize.KeyInsidePolygon
-import com.algolia.search.serialize.KeyNumericFilters
-import com.algolia.search.serialize.KeyTagFilters
+import com.algolia.search.model.search.*
+import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
 @DSLParameters
-data class DeleteByQuery(
+public data class DeleteByQuery(
     /**
      * Filter the query with numeric, facet and/or tag filters.
      * Engine default: "" (no filters)

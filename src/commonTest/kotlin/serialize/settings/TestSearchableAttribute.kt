@@ -9,6 +9,7 @@ import com.algolia.search.serialize.KeyUnordered
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 
+
 internal class TestSearchableAttribute : TestSerializer<SearchableAttribute>(SearchableAttribute) {
 
     override val items = listOf(

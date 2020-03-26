@@ -8,10 +8,11 @@ import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.RuleQuery
 import com.algolia.search.transport.RequestOptions
 
+
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/query-rules/?language=kotlin]
  */
-interface EndpointRule {
+public interface EndpointRule {
 
     val indexName: IndexName
 
@@ -34,7 +35,7 @@ interface EndpointRule {
      * Each [Rule] will be created or updated, depending on whether a rule with the same [ObjectID] already exists.
      *
      * @param rules The list of [Rule] to save.
-     * @param forwardToReplicas By default, this method applies only to the specified index. By making this true,
+     * @param forwardToReplicas  By default, this method applies only to the specified index. By making this true,
      * the method will also send the rules to all replicas.
      * @param clearExistingRules Whether the batch will remove all existing rules before adding/updating the rules.
      * @param requestOptions Configure request locally with [RequestOptions].
@@ -80,6 +81,7 @@ interface EndpointRule {
         query: RuleQuery = RuleQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchRules
+
 
     /**
      * Delete all [Rule] in an index.

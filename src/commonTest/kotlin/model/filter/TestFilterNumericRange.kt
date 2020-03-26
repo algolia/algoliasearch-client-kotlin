@@ -6,6 +6,7 @@ import com.algolia.search.model.filter.FilterConverter
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestFilterNumericRange {
 
     private val filterNumericInt = Filter.Numeric(attributeA, 0 until 6)

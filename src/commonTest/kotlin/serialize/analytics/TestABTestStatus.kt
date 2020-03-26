@@ -8,6 +8,7 @@ import com.algolia.search.serialize.KeyStopped
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 
+
 internal class TestABTestStatus : TestSerializer<ABTestStatus>(ABTestStatus) {
 
     override val items = listOf(

@@ -11,28 +11,29 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
+
 /**
  * Possible [Scope] to copy for a [EndpointIndex.copyIndex] operation.
  */
 @Serializable(Scope.Companion::class)
-sealed class Scope(override val raw: String) : Raw<String> {
+public sealed class Scope(override val raw: String) : Raw<String> {
 
     /**
      * Scope for [com.algolia.search.model.settings.Settings]
      */
-    object Settings : Scope(KeySettings)
+    public object Settings : Scope(KeySettings)
 
     /**
      * Scope for [com.algolia.search.model.synonym.Synonym]
      */
-    object Synonyms : Scope(KeySynonyms)
+    public object Synonyms : Scope(KeySynonyms)
 
     /**
      * Scope for [com.algolia.search.model.rule.Rule]
      */
-    object Rules : Scope(KeyRules)
+    public object Rules : Scope(KeyRules)
 
-    data class Other(override val raw: String) : Scope(raw)
+    public data class Other(override val raw: String) : Scope(raw)
 
     companion object : KSerializer<Scope> {
 

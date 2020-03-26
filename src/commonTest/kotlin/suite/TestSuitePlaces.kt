@@ -13,7 +13,9 @@ import shouldEqual
 import shouldNotBeEmpty
 import kotlin.test.Test
 
+
 internal class TestSuitePlaces {
+
 
     @Test
     fun withoutParameters() {

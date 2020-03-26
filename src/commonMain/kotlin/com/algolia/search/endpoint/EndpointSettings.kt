@@ -6,10 +6,11 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
 import com.algolia.search.transport.RequestOptions
 
+
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/settings/?language=kotlin]
  */
-interface EndpointSettings {
+public interface EndpointSettings {
 
     val indexName: IndexName
 

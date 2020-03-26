@@ -5,6 +5,7 @@ import com.algolia.search.model.rule.TimeRange
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDSLTimeRanges {
 
     @Test

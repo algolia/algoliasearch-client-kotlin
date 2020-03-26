@@ -8,6 +8,7 @@ import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
+
 @Ignore
 internal class DocRemoveWordsIfNoResults {
 
@@ -17,7 +18,7 @@ internal class DocRemoveWordsIfNoResults {
 //    |  [RemoveWordsIfNoResults.AllOptional](#parameter-option-alloptional)
 
     @Test
-    fun snippet1() {
+    fun snippet1 () {
         runBlocking {
             val settings = settings {
                 removeWordsIfNoResults = RemoveWordIfNoResults.None

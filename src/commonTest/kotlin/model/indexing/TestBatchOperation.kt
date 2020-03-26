@@ -1,24 +1,13 @@
 package model.indexing
 
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.indexing.BatchOperation.AddObject
-import com.algolia.search.model.indexing.BatchOperation.ClearIndex
-import com.algolia.search.model.indexing.BatchOperation.DeleteIndex
-import com.algolia.search.model.indexing.BatchOperation.DeleteObject
-import com.algolia.search.model.indexing.BatchOperation.Other
-import com.algolia.search.model.indexing.BatchOperation.PartialUpdateObject
-import com.algolia.search.model.indexing.BatchOperation.ReplaceObject
-import com.algolia.search.serialize.KeyAddObject
-import com.algolia.search.serialize.KeyClear
-import com.algolia.search.serialize.KeyDelete
-import com.algolia.search.serialize.KeyDeleteObject
-import com.algolia.search.serialize.KeyPartialUpdateObject
-import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
-import com.algolia.search.serialize.KeyUpdateObject
+import com.algolia.search.model.indexing.BatchOperation.*
+import com.algolia.search.serialize.*
 import kotlinx.serialization.json.json
 import shouldEqual
 import unknown
 import kotlin.test.Test
+
 
 internal class TestBatchOperation {
 

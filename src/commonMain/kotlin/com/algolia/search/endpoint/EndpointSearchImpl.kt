@@ -18,17 +18,12 @@ import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Facet
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.JsonNoDefaults
-import com.algolia.search.serialize.KeyCursor
-import com.algolia.search.serialize.KeyFacetQuery
-import com.algolia.search.serialize.merge
-import com.algolia.search.serialize.toBody
-import com.algolia.search.serialize.toJsonNoDefaults
-import com.algolia.search.serialize.urlEncode
+import com.algolia.search.serialize.*
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.json
+
 
 internal class EndpointSearchImpl(
     private val transport: Transport,

@@ -5,8 +5,9 @@ import com.algolia.search.serialize.KeyDeletedAt
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class Deletion(
+public data class Deletion(
     /**
      * The date at which the deletion happened.
      */

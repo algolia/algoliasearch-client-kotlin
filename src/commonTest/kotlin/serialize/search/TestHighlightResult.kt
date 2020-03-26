@@ -10,6 +10,7 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 
+
 internal class TestHighlightResult : TestSerializer<HighlightResult>(HighlightResult.serializer()) {
 
     override val items = listOf(

@@ -1,20 +1,16 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.dsl.DSLParameters
-import com.algolia.search.serialize.KeyAnchoring
-import com.algolia.search.serialize.KeyContext
-import com.algolia.search.serialize.KeyEnabled
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyPage
-import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
+
 @Suppress("PropertyName")
 @DSLParameters
 @Serializable
-data class RuleQuery(
+public data class RuleQuery(
     /**
      * Engine default: ""
      * Full text query.
@@ -48,14 +44,14 @@ data class RuleQuery(
 ) {
 
     @Transient
-    val Is = Anchoring.Is
+    public val Is = Anchoring.Is
 
     @Transient
-    val StartsWith = Anchoring.StartsWith
+    public val StartsWith = Anchoring.StartsWith
 
     @Transient
-    val EndsWith = Anchoring.EndsWith
+    public val EndsWith = Anchoring.EndsWith
 
     @Transient
-    val Contains = Anchoring.Contains
+    public val Contains = Anchoring.Contains
 }

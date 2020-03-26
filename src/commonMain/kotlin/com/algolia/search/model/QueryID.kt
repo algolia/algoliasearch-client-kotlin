@@ -11,11 +11,12 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
+
 /**
  * Unique identifier for a [Query]. Returned by [ResponseSearch] and used by [EndpointInsightsUser]
  */
 @Serializable(QueryID.Companion::class)
-data class QueryID(override val raw: String) : Raw<String> {
+public data class QueryID(override val raw: String) : Raw<String> {
 
     init {
         if (raw.isBlank()) throw EmptyStringException("QueryID")

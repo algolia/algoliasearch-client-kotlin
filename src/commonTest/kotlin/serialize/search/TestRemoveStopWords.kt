@@ -7,6 +7,7 @@ import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 
+
 internal class TestRemoveStopWords : TestSerializer<RemoveStopWords>(RemoveStopWords) {
 
     override val items = listOf(

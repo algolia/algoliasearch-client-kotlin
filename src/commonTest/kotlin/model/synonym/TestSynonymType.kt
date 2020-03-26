@@ -1,14 +1,11 @@
 package model.synonym
 
 import com.algolia.search.model.synonym.SynonymType
-import com.algolia.search.serialize.KeyAlternativeCorrection1
-import com.algolia.search.serialize.KeyAlternativeCorrection2
-import com.algolia.search.serialize.KeyOneWaySynonym
-import com.algolia.search.serialize.KeyPlaceholder
-import com.algolia.search.serialize.KeySynonym
+import com.algolia.search.serialize.*
 import shouldEqual
 import unknown
 import kotlin.test.Test
+
 
 internal class TestSynonymType {
 

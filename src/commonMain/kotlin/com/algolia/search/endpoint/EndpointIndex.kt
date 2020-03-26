@@ -8,10 +8,11 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.transport.RequestOptions
 
+
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/manage-indices/?language=kotlin]
  */
-interface EndpointIndex {
+public interface EndpointIndex {
 
     /**
      * The [IndexName] used by [Index] to perform operations on.

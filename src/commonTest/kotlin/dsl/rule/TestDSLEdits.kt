@@ -5,6 +5,7 @@ import com.algolia.search.model.rule.Edit
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDSLEdits {
 
     @Test

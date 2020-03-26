@@ -12,8 +12,9 @@ import com.algolia.search.serialize.KeyUpdatedAt
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class RevisionSynonym(
+public data class RevisionSynonym(
     /**
      * Date at which the [Task] to update the [Index] has been created.
      */

@@ -13,8 +13,9 @@ import com.algolia.search.serialize.KeyTaskID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class ResponsePersonalizationStrategy(
+public data class ResponsePersonalizationStrategy(
     /**
      * [EventScoring] associated to each [EventName].
      */

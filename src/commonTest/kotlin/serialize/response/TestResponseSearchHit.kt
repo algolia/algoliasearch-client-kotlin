@@ -4,23 +4,15 @@ import attributeA
 import attributeB
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.model.search.HighlightResult
-import com.algolia.search.model.search.MatchLevel
-import com.algolia.search.model.search.MatchedGeoLocation
-import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.RankingInfo
-import com.algolia.search.model.search.SnippetResult
-import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.Key_DistinctSeqID
-import com.algolia.search.serialize.Key_HighlightResult
-import com.algolia.search.serialize.Key_RankingInfo
-import com.algolia.search.serialize.Key_SnippetResult
+import com.algolia.search.model.search.*
+import com.algolia.search.serialize.*
 import kotlinx.serialization.internal.HashMapSerializer
 import kotlinx.serialization.json.json
 import kotlinx.serialization.list
 import serialize.TestSerializer
 import serialize.search.TestHighlightResult
 import unknown
+
 
 internal class TestResponseSearchHit : TestSerializer<ResponseSearch.Hit>(ResponseSearch.Hit) {
 

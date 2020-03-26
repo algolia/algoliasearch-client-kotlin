@@ -5,6 +5,7 @@ import com.algolia.search.serialize.KeyEvents
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
 internal data class RequestInsightsEvents(
     @SerialName(KeyEvents) val events: List<InsightsEvent>

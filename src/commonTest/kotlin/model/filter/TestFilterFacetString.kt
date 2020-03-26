@@ -6,6 +6,7 @@ import com.algolia.search.model.filter.FilterConverter
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestFilterFacetString {
 
     private val filter = Filter.Facet(attributeA, "valueA")

@@ -7,6 +7,7 @@ import com.algolia.search.model.filter.NumericOperator
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDSLFilterGroupNumeric {
 
     @Test

@@ -9,7 +9,9 @@ import shouldEqual
 import shouldFailWith
 import kotlin.test.Test
 
+
 internal class TestSynonym {
+
 
     @Test
     fun tokenShouldNotBeEmpty() {
@@ -35,7 +37,7 @@ internal class TestSynonym {
 
     @Test
     fun oneWaySynonymsShouldNotBeMoreThan100() {
-        shouldFailWith<IllegalArgumentException> { Synonym.OneWay(objectIDA, "input", (0..101).map { "" }) }
+        shouldFailWith<IllegalArgumentException> { Synonym.OneWay(objectIDA, "input", (0 .. 101).map { "" }) }
     }
 
     @Test
@@ -45,7 +47,7 @@ internal class TestSynonym {
 
     @Test
     fun multiWaySynonymsShouldNotBeMoreThan100() {
-        shouldFailWith<IllegalArgumentException> { Synonym.MultiWay(objectIDA, (0..101).map { "" }) }
+        shouldFailWith<IllegalArgumentException> { Synonym.MultiWay(objectIDA, (0 .. 101).map { "" }) }
     }
 
     @Test

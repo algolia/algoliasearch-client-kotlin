@@ -12,8 +12,9 @@ import com.algolia.search.serialize.KeyTaskID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class RevisionABTest(
+public data class RevisionABTest(
     /**
      * Generated [ABTestID] of the [ABTest].
      */

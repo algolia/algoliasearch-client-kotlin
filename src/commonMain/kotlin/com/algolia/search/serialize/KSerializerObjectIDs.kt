@@ -9,7 +9,8 @@ import kotlinx.serialization.internal.ArrayListClassDesc
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
-object KSerializerObjectIDs : KSerializer<List<ObjectID>> {
+
+public object KSerializerObjectIDs : KSerializer<List<ObjectID>> {
 
     override val descriptor = ArrayListClassDesc(ObjectID.descriptor)
 

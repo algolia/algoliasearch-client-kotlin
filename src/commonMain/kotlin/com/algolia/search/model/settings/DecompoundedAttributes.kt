@@ -2,7 +2,9 @@ package com.algolia.search.model.settings
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Language
-import kotlinx.serialization.Serializable
+import kotlinx.serialization.*
+import kotlinx.serialization.internal.PairSerializer
+
 
 /**
  * Specify on which attributes in your index Algolia should apply word-splitting (“decompounding”).
@@ -13,22 +15,22 @@ import kotlinx.serialization.Serializable
  * nstead of as a single word.
  */
 @Serializable
-data class DecompoundedAttributes internal constructor(
+public data class DecompoundedAttributes internal constructor(
     val language: Language,
     val attributes: List<Attribute>
 ) {
 
-    constructor(
+    public constructor(
         language: Language.German,
         vararg attributes: Attribute
     ) : this(language, attributes.toList())
 
-    constructor(
+    public constructor(
         language: Language.Finnish,
         vararg attributes: Attribute
     ) : this(language, attributes.toList())
 
-    constructor(
+    public constructor(
         language: Language.Dutch,
         vararg attributes: Attribute
     ) : this(language, attributes.toList())

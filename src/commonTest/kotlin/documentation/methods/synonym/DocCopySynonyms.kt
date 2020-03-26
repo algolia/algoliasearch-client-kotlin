@@ -8,6 +8,7 @@ import shouldFailWith
 import kotlin.test.Ignore
 import kotlin.test.Test
 
+
 @Ignore
 internal class DocCopySynonyms {
 

@@ -7,6 +7,7 @@ import serialize.TestSerializer
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDistinct : TestSerializer<Distinct>(Distinct) {
 
     override val items = listOf(

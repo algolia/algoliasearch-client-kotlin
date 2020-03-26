@@ -11,6 +11,7 @@ import shouldEqual
 import shouldFailWith
 import kotlin.test.Test
 
+
 internal class TestInsightsEvent {
 
     private val eventName = "eventName".toEventName()

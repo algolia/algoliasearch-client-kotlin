@@ -2,9 +2,10 @@ package model
 
 import com.algolia.search.helper.DateISO8601
 import com.algolia.search.model.ClientDate
-import java.util.Date
 import org.junit.Test
 import shouldEqual
+import java.util.*
+
 
 internal class TestClientDateJVM {
 

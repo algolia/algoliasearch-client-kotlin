@@ -6,17 +6,14 @@ import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.request.RequestMultipleQueries
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.KeyIndexName
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyRequests
-import com.algolia.search.serialize.KeyStrategy
+import com.algolia.search.serialize.*
 import indexA
 import indexB
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import shouldEqual
 import kotlin.test.Test
+
 
 internal class TestRequestMultipleQueries {
 

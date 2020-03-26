@@ -8,6 +8,7 @@ import com.algolia.search.serialize.KeyScope
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
 internal data class RequestCopyOrMove(
     @SerialName(KeyOperation) val operation: String,

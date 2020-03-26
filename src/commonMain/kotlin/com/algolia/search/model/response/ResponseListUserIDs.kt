@@ -6,8 +6,9 @@ import com.algolia.search.serialize.KeyUserIDs
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class ResponseListUserIDs(
+public data class ResponseListUserIDs(
     /**
      * [ResponseUserID] found for a multi-cluster setup.
      */

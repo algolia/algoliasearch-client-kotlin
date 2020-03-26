@@ -9,6 +9,7 @@ import runBlocking
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestCallableHosts {
 
     private val configuration = ConfigurationSearch(clientAdmin1.applicationID, clientAdmin1.apiKey)

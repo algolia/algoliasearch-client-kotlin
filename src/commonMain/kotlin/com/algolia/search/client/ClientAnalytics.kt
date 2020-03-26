@@ -13,16 +13,17 @@ import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 
+
 /**
  * Client to manage [ABTest] for analytics purposes.
  */
-class ClientAnalytics private constructor(
+public class ClientAnalytics private constructor(
     private val transport: Transport
 ) : EndpointAnalytics by EndpointAnalyticsImpl(transport),
     Configuration by transport,
     Credentials by transport.credentials {
 
-    constructor(
+    public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
     ) : this(
@@ -32,7 +33,7 @@ class ClientAnalytics private constructor(
         )
     )
 
-    constructor(
+    public constructor(
         configuration: ConfigurationAnalytics
     ) : this(Transport(configuration, configuration))
 
@@ -42,7 +43,7 @@ class ClientAnalytics private constructor(
      * @param hitsPerPage Specify the maximum number of entries to retrieve per request.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun browseAllABTests(
+    public suspend fun browseAllABTests(
         hitsPerPage: Int? = null,
         requestOptions: RequestOptions? = null
     ): List<ResponseABTests> {

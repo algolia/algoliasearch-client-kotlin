@@ -9,6 +9,7 @@ import indexB
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
+
 internal class TestResponseBatches : TestSerializer<ResponseBatches>(ResponseBatches) {
 
     private val taskIndexA = TaskIndex(indexA, 0L.toTaskID())

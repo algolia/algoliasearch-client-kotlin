@@ -7,6 +7,7 @@ import com.algolia.search.serialize.KeyUsers
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
 internal data class RequestAssignUserIDs(
     @SerialName(KeyCluster) val clusterName: ClusterName,

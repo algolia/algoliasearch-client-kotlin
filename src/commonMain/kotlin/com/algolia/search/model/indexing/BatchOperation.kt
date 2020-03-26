@@ -6,45 +6,29 @@ import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.KeyAction
-import com.algolia.search.serialize.KeyAddObject
-import com.algolia.search.serialize.KeyBody
-import com.algolia.search.serialize.KeyClear
-import com.algolia.search.serialize.KeyDelete
-import com.algolia.search.serialize.KeyDeleteObject
-import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.serialize.KeyPartialUpdateObject
-import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
-import com.algolia.search.serialize.KeyUpdateObject
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.serialize.merge
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
+import com.algolia.search.serialize.*
+import kotlinx.serialization.*
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.json
+
 
 /**
  * Operation that can be batched using [EndpointIndexing.batch] or [EndpointMultipleIndex.multipleBatchObjects]
  */
 @Serializable(BatchOperation.Companion::class)
-sealed class BatchOperation(override val raw: String) : Raw<String> {
+public sealed class BatchOperation(override val raw: String) : Raw<String> {
 
     /**
      *  Equivalent to [EndpointIndexing.saveObject] without an ID
      */
-    data class AddObject(
+    public data class AddObject(
         val json: JsonObject
     ) : BatchOperation(KeyAddObject) {
 
         companion object {
 
-            fun <T> from(serializer: KSerializer<T>, data: T): AddObject {
+            public fun <T> from(serializer: KSerializer<T>, data: T): AddObject {
                 return AddObject(Json.toJson(serializer, data).jsonObject)
             }
         }
@@ -53,14 +37,14 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
     /**
      *  Equivalent to [EndpointIndexing.replaceObject]
      */
-    data class ReplaceObject(
+    public data class ReplaceObject(
         val objectID: ObjectID,
         val json: JsonObject
     ) : BatchOperation(KeyUpdateObject) {
 
         companion object {
 
-            fun <T : Indexable> from(serializer: KSerializer<T>, data: T): ReplaceObject {
+            public fun <T : Indexable> from(serializer: KSerializer<T>, data: T): ReplaceObject {
                 return ReplaceObject(data.objectID, Json.toJson(serializer, data).jsonObject)
             }
         }
@@ -69,7 +53,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
     /**
      * Equivalent to [EndpointIndexing.partialUpdateObject]
      */
-    data class PartialUpdateObject(
+    public data class PartialUpdateObject(
         val objectID: ObjectID,
         val json: JsonObject,
         val createIfNotExists: Boolean = true
@@ -77,7 +61,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
 
         companion object {
 
-            fun <T : Indexable> from(
+            public fun <T : Indexable> from(
                 serializer: KSerializer<T>,
                 data: T,
                 createIfNotExists: Boolean = true
@@ -85,7 +69,7 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
                 return PartialUpdateObject(data.objectID, Json.toJson(serializer, data).jsonObject, createIfNotExists)
             }
 
-            fun from(
+            public fun from(
                 objectID: ObjectID,
                 partial: Partial,
                 createIfNotExists: Boolean = true
@@ -105,19 +89,19 @@ sealed class BatchOperation(override val raw: String) : Raw<String> {
     /**
      * Equivalent to [EndpointIndexing.deleteObject]
      */
-    data class DeleteObject(val objectID: ObjectID) : BatchOperation(KeyDeleteObject)
+    public data class DeleteObject(val objectID: ObjectID) : BatchOperation(KeyDeleteObject)
 
     /**
      * Equivalent to [EndpointIndex.deleteIndex]
      */
-    object DeleteIndex : BatchOperation(KeyDelete)
+    public object DeleteIndex : BatchOperation(KeyDelete)
 
     /**
      * Equivalent to [EndpointIndexing.clearObjects]
      */
-    object ClearIndex : BatchOperation(KeyClear)
+    public object ClearIndex : BatchOperation(KeyClear)
 
-    data class Other(val key: String, val json: JsonObject) : BatchOperation(key)
+    public data class Other(val key: String, val json: JsonObject) : BatchOperation(key)
 
     @Serializer(BatchOperation::class)
     companion object : KSerializer<BatchOperation> {

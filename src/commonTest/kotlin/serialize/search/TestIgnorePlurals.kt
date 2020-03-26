@@ -6,6 +6,7 @@ import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 
+
 internal class TestIgnorePlurals : TestSerializer<IgnorePlurals>(IgnorePlurals) {
 
     override val items = listOf(

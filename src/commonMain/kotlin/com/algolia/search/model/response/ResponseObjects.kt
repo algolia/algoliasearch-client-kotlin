@@ -6,8 +6,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 
+
 @Serializable
-data class ResponseObjects(
+public data class ResponseObjects(
     /**
      * List of requested records. If a record is not found, it will be marked as null in the list.
      */
@@ -18,6 +19,6 @@ data class ResponseObjects(
     @SerialName(KeyMessage) val messageOrNull: String? = null
 ) {
 
-    val message: String
+    public val message: String
         get() = messageOrNull!!
 }

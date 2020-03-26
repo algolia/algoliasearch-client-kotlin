@@ -3,20 +3,11 @@ package serialize.settings
 import attributeA
 import attributeB
 import com.algolia.search.model.settings.RankingCriterion
-import com.algolia.search.model.settings.RankingCriterion.Asc
-import com.algolia.search.model.settings.RankingCriterion.Attribute
-import com.algolia.search.model.settings.RankingCriterion.Custom
-import com.algolia.search.model.settings.RankingCriterion.Desc
-import com.algolia.search.model.settings.RankingCriterion.Exact
-import com.algolia.search.model.settings.RankingCriterion.Filters
-import com.algolia.search.model.settings.RankingCriterion.Geo
-import com.algolia.search.model.settings.RankingCriterion.Other
-import com.algolia.search.model.settings.RankingCriterion.Proximity
-import com.algolia.search.model.settings.RankingCriterion.Typo
-import com.algolia.search.model.settings.RankingCriterion.Words
+import com.algolia.search.model.settings.RankingCriterion.*
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 import unknown
+
 
 internal class TestRankingCriterion : TestSerializer<RankingCriterion>(RankingCriterion) {
 

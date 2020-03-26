@@ -9,12 +9,13 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.LongSerializer
 
+
 /**
  * This is a numeric value (up to 64bits) used to identify a [Task].
  * It can be used to perform a [EndpointAdvanced.waitTask] operation.
  */
 @Serializable(TaskID.Companion::class)
-data class TaskID(override val raw: Long) : Raw<Long> {
+public data class TaskID(override val raw: Long) : Raw<Long> {
 
     override fun toString(): String {
         return raw.toString()

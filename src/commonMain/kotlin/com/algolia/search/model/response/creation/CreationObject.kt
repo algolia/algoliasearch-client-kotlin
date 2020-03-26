@@ -11,8 +11,9 @@ import com.algolia.search.serialize.KeyTaskID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class CreationObject(
+public data class CreationObject(
     /**
      * The date at which the record has been created.
      */

@@ -18,10 +18,11 @@ import com.algolia.search.transport.RequestOptions
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.JsonObject
 
+
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/indexing/?language=kotlin]
  */
-interface EndpointIndexing {
+public interface EndpointIndexing {
 
     val indexName: IndexName
 

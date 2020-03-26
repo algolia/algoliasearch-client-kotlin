@@ -7,8 +7,9 @@ import com.algolia.search.serialize.KeyName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class Facet(
+public data class Facet(
     /**
      * Name of the facet. Is equal to the value associated to an [Attribute].
      */
@@ -27,10 +28,11 @@ data class Facet(
         get() = highlightedOrNull!!
 }
 
-operator fun List<Facet>.get(value: String): Int {
+public operator fun List<Facet>.get(value: String): Int {
     return find { it.value == value }!!.count
 }
 
-operator fun Map<Attribute, List<Facet>>.get(attribute: Attribute, value: String): Int {
+
+public operator fun Map<Attribute, List<Facet>>.get(attribute: Attribute, value: String): Int {
     return getValue(attribute).find { it.value == value }!!.count
 }

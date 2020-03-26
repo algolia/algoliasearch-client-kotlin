@@ -18,6 +18,7 @@ import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 
+
 internal class EndpointAnalyticsImpl(
     private val transport: Transport
 ) : EndpointAnalytics {

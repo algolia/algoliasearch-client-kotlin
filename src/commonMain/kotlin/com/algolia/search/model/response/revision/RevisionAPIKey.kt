@@ -7,8 +7,9 @@ import com.algolia.search.serialize.KeyUpdatedAt
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class RevisionAPIKey(
+public data class RevisionAPIKey(
     /**
      * The updated [APIKey].
      */

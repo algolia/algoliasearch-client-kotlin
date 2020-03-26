@@ -1,14 +1,15 @@
 package com.algolia.search.model.filter
 
+
 /**
  * Converts a single [Filter] to a type [O].
  */
-sealed class FilterConverter<I : Filter, O> : (I) -> O {
+public sealed class FilterConverter<I: Filter, O> : (I) -> O {
 
     /**
      * Converts a [Filter] to its SQL-like [String] representation.
      */
-    object SQL : FilterConverter<Filter, String>() {
+    public object SQL : FilterConverter<Filter, String>() {
 
         override fun invoke(filter: Filter): String {
             return when (filter) {
@@ -22,7 +23,7 @@ sealed class FilterConverter<I : Filter, O> : (I) -> O {
     /**
      * Converts a [Filter] to its legacy representation.
      */
-    object Legacy : FilterConverter<Filter, List<String>>() {
+    public object Legacy : FilterConverter<Filter, List<String>>() {
 
         override fun invoke(filter: Filter): List<String> {
             return when (filter) {

@@ -18,6 +18,7 @@ import shouldBeTrue
 import shouldEqual
 import kotlin.test.AfterTest
 
+
 internal class TestSuiteAPIKey {
 
     private lateinit var key: APIKey

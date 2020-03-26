@@ -12,6 +12,7 @@ import indexA
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
+
 internal class TestRequestObjects : TestSerializer<RequestObjects>(RequestObjects.serializer(), JsonNoDefaults) {
 
     private val objectID = ObjectID("objectA")

@@ -7,6 +7,7 @@ import com.algolia.search.serialize.KeyForwardedFor
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestRequestOptions {
 
     @Test

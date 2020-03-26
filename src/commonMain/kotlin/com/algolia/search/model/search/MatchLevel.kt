@@ -12,6 +12,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
+
 /**
  * Indicates how well the value matched the search query.
  * The matching relates to the words in the query string not in the searched text of the records.
@@ -21,15 +22,15 @@ import kotlinx.serialization.internal.StringSerializer
  * No matter how “accurately” a word matches, if it matches, it counts as one
  */
 @Serializable(MatchLevel.Companion::class)
-sealed class MatchLevel(override val raw: String) : Raw<String> {
+public sealed class MatchLevel(override val raw: String) : Raw<String> {
 
-    object None : MatchLevel(KeyNone)
+    public object None : MatchLevel(KeyNone)
 
-    object Partial : MatchLevel(KeyPartial)
+    public object Partial : MatchLevel(KeyPartial)
 
-    object Full : MatchLevel(KeyFull)
+    public object Full : MatchLevel(KeyFull)
 
-    data class Other(override val raw: String) : MatchLevel(raw)
+    public data class Other(override val raw: String) : MatchLevel(raw)
 
     companion object : KSerializer<MatchLevel> {
 

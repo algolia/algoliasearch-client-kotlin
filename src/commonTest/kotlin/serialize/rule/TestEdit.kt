@@ -1,14 +1,11 @@
 package serialize.rule
 
 import com.algolia.search.model.rule.Edit
-import com.algolia.search.serialize.KeyDelete
-import com.algolia.search.serialize.KeyInsert
-import com.algolia.search.serialize.KeyRemove
-import com.algolia.search.serialize.KeyReplace
-import com.algolia.search.serialize.KeyType
+import com.algolia.search.serialize.*
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
 import unknown
+
 
 internal class TestEdit : TestSerializer<Edit>(Edit) {
     override val items = listOf(

@@ -7,6 +7,7 @@ import com.algolia.search.model.rule.AutomaticFacetFilters
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDSLAutomaticFacetFilters {
 
     @Test

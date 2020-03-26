@@ -11,13 +11,17 @@ import com.algolia.search.model.task.TaskStatus
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
+import kotlin.test.AfterTest
 import kotlin.test.Test
+
 
 internal class TestSuiteSettings {
 
     private val suffix = "settings"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
+
+
 
     @Test
     fun test() {

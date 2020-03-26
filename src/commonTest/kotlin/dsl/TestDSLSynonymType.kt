@@ -5,6 +5,7 @@ import com.algolia.search.model.synonym.SynonymType
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDSLSynonymType {
 
     @Test

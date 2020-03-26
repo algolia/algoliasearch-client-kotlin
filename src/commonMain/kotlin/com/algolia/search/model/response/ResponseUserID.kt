@@ -3,18 +3,14 @@ package com.algolia.search.model.response
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
-import com.algolia.search.serialize.KeyClusterName
-import com.algolia.search.serialize.KeyDataSize
-import com.algolia.search.serialize.KeyNbRecords
-import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.serialize.KeyUserID
-import com.algolia.search.serialize.Key_HighlightResult
+import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 
+
 @Serializable
-data class ResponseUserID(
+public data class ResponseUserID(
     /**
      * [UserID] of the user.
      */
@@ -39,15 +35,15 @@ data class ResponseUserID(
      * Highlighted attributes.
      */
     @SerialName(Key_HighlightResult)
-    val highlightResultsOrNull: JsonObject? = null
+    val highlightResultsOrNull:  JsonObject? = null
 ) {
 
-    val clusterName: ClusterName
+    public val clusterName: ClusterName
         get() = clusterNameOrNull!!
 
-    val objectID: ObjectID
+    public val objectID: ObjectID
         get() = objectIDOrNull!!
 
-    val highlightResults: JsonObject
+    public val highlightResults:  JsonObject
         get() = highlightResultsOrNull!!
 }

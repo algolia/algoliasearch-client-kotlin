@@ -4,43 +4,44 @@ import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.ResponseFields
 
+
 /**
  * DSL for building a [List] of [ResponseFields].
  */
 @Suppress("PropertyName")
 @DSLParameters
-class DSLResponseFields(
+public class DSLResponseFields(
     private val responseFields: MutableList<ResponseFields> = mutableListOf()
 ) {
 
-    val All = ResponseFields.All
-    val AroundLatLng = ResponseFields.AroundLatLng
-    val AutomaticRadius = ResponseFields.AutomaticRadius
-    val ExhaustiveFacetsCount = ResponseFields.ExhaustiveFacetsCount
-    val Facets = ResponseFields.Facets
-    val FacetsStats = ResponseFields.FacetsStats
-    val Hits = ResponseFields.Hits
-    val HitsPerPage = ResponseFields.HitsPerPage
-    val Index = ResponseFields.Index
-    val Length = ResponseFields.Length
-    val NbHits = ResponseFields.NbHits
-    val NbPages = ResponseFields.NbPages
-    val Offset = ResponseFields.Offset
-    val Page = ResponseFields.Page
-    val Params = ResponseFields.Params
-    val ProcessingTimeMS = ResponseFields.ProcessingTimeMS
-    val Query = ResponseFields.Query
-    val QueryAfterRemoval = ResponseFields.QueryAfterRemoval
-    val UserData = ResponseFields.UserData
+    public val All = ResponseFields.All
+    public val AroundLatLng = ResponseFields.AroundLatLng
+    public val AutomaticRadius = ResponseFields.AutomaticRadius
+    public val ExhaustiveFacetsCount = ResponseFields.ExhaustiveFacetsCount
+    public val Facets = ResponseFields.Facets
+    public val FacetsStats = ResponseFields.FacetsStats
+    public val Hits = ResponseFields.Hits
+    public val HitsPerPage = ResponseFields.HitsPerPage
+    public val Index = ResponseFields.Index
+    public val Length = ResponseFields.Length
+    public val NbHits = ResponseFields.NbHits
+    public val NbPages = ResponseFields.NbPages
+    public val Offset = ResponseFields.Offset
+    public val Page = ResponseFields.Page
+    public val Params = ResponseFields.Params
+    public val ProcessingTimeMS = ResponseFields.ProcessingTimeMS
+    public val Query = ResponseFields.Query
+    public val QueryAfterRemoval = ResponseFields.QueryAfterRemoval
+    public val UserData = ResponseFields.UserData
 
     /**
      * Add [this] to [responseFields].
      */
-    operator fun ResponseFields.unaryPlus() {
+    public operator fun ResponseFields.unaryPlus() {
         responseFields += this
     }
 
-    companion object : DSL<DSLResponseFields, List<ResponseFields>> {
+    public companion object : DSL<DSLResponseFields, List<ResponseFields>> {
 
         override operator fun invoke(block: DSLResponseFields.() -> Unit): List<ResponseFields> {
             return DSLResponseFields().apply(block).responseFields

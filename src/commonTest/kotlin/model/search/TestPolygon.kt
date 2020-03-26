@@ -6,6 +6,7 @@ import shouldEqual
 import shouldFailWith
 import kotlin.test.Test
 
+
 internal class TestPolygon {
 
     private val point1 = 1f and 2f

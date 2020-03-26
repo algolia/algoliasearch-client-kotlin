@@ -2,6 +2,7 @@ package com.algolia.search.model.filter
 
 import com.algolia.search.model.Attribute
 
+
 internal fun String.escape() = "\"$this\""
 
 internal fun Attribute.escape() = raw.escape()

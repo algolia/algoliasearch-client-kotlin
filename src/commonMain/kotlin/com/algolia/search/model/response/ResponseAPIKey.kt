@@ -4,21 +4,13 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ClientDate
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
-import com.algolia.search.serialize.KeyAcl
-import com.algolia.search.serialize.KeyCreatedAt
-import com.algolia.search.serialize.KeyDescription
-import com.algolia.search.serialize.KeyIndexes
-import com.algolia.search.serialize.KeyMaxHitsPerQuery
-import com.algolia.search.serialize.KeyMaxQueriesPerIPPerHour
-import com.algolia.search.serialize.KeyQueryParameters
-import com.algolia.search.serialize.KeyReferers
-import com.algolia.search.serialize.KeyValidity
-import com.algolia.search.serialize.KeyValue
+import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class ResponseAPIKey(
+public data class ResponseAPIKey(
     /**
      * The [APIKey] value.
      */
@@ -49,24 +41,24 @@ data class ResponseAPIKey(
     @SerialName(KeyQueryParameters) val queryOrNull: String? = null
 ) {
 
-    val maxQueriesPerIPPerHour: Int
+    public val maxQueriesPerIPPerHour: Int
         get() = maxQueriesPerIPPerHourOrNull!!
 
-    val maxHitsPerQuery: Int
+    public val maxHitsPerQuery: Int
         get() = maxHitsPerQueryOrNull!!
 
-    val createdAt: ClientDate
+    public val createdAt: ClientDate
         get() = createdAtOrNull!!
 
-    val description: String
+    public val description: String
         get() = descriptionOrNull!!
 
-    val indices: List<IndexName>
+    public val indices: List<IndexName>
         get() = indicesOrNull!!
 
-    val referers: List<String>
+    public val referers: List<String>
         get() = referersOrNull!!
 
-    val query: String
+    public val query: String
         get() = queryOrNull!!
 }

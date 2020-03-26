@@ -7,6 +7,7 @@ import com.algolia.search.serialize.KeyLng
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
+
 internal class TestKSerializerGeoPoint : TestSerializer<Point>(KSerializerGeoPoint) {
 
     override val items = listOf(

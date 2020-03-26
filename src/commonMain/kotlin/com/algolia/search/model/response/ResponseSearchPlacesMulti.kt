@@ -1,18 +1,13 @@
 package com.algolia.search.model.response
 
 import com.algolia.search.model.places.PlaceLanguages
-import com.algolia.search.serialize.KeyDegradedQuery
-import com.algolia.search.serialize.KeyHits
-import com.algolia.search.serialize.KeyNbHits
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyParsedQuery
-import com.algolia.search.serialize.KeyProcessingTimeMS
-import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class ResponseSearchPlacesMulti(
+public data class ResponseSearchPlacesMulti(
     @SerialName(KeyHits) override val hits: List<PlaceLanguages>,
     @SerialName(KeyNbHits) override val nbHits: Int,
     @SerialName(KeyProcessingTimeMS) override val processingTimeMS: Long,

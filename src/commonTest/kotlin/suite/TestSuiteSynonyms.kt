@@ -16,7 +16,9 @@ import shouldBeTrue
 import shouldContain
 import shouldEqual
 import shouldFailWith
+import kotlin.test.AfterTest
 import kotlin.test.Test
+
 
 internal class TestSuiteSynonyms {
 
@@ -41,6 +43,9 @@ internal class TestSuiteSynonyms {
     private val synonyms =
         listOf(synonymOneWay, synonymPlaceholder, synonymAlternative1, synonymAlternative2)
     private val index = clientAdmin1.initIndex(indexName)
+
+
+
 
     @Test
     fun test() {

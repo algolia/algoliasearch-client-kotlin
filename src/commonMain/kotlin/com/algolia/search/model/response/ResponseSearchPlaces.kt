@@ -1,6 +1,7 @@
 package com.algolia.search.model.response
 
-interface ResponseSearchPlaces<T> {
+
+public interface ResponseSearchPlaces<T> {
 
     val hits: List<T>
     val nbHits: Int

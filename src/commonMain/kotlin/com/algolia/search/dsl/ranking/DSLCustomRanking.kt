@@ -5,27 +5,28 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.CustomRankingCriterion
 
+
 /**
  * DSL for building a [List] of [CustomRankingCriterion].
  */
 @Suppress("PropertyName")
 @DSLParameters
-class DSLCustomRanking(
+public class DSLCustomRanking(
     private val customRankingCriteria: MutableList<CustomRankingCriterion> = mutableListOf()
 ) {
 
-    enum class Modifier {
+    public enum class Modifier {
         Asc,
         Desc
     }
 
-    val Asc = Modifier.Asc
-    val Desc = Modifier.Desc
+    public val Asc = Modifier.Asc
+    public val Desc = Modifier.Desc
 
     /**
      * Add [this] to [customRankingCriteria].
      */
-    operator fun CustomRankingCriterion.unaryPlus() {
+    public operator fun CustomRankingCriterion.unaryPlus() {
         customRankingCriteria += this
     }
 
@@ -46,7 +47,7 @@ class DSLCustomRanking(
         }
     }
 
-    companion object : DSL<DSLCustomRanking, List<CustomRankingCriterion>> {
+    public companion object : DSL<DSLCustomRanking, List<CustomRankingCriterion>> {
 
         override operator fun invoke(block: DSLCustomRanking.() -> Unit): List<CustomRankingCriterion> {
             return DSLCustomRanking().apply(block).customRankingCriteria

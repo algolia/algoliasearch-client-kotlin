@@ -10,6 +10,7 @@ import com.algolia.search.transport.Transport
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpMethod
 
+
 internal class EndpointInsightsImpl(
     private val transport: Transport
 ) : EndpointInsights {

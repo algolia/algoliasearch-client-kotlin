@@ -9,6 +9,7 @@ import objectIDA
 import objectIDB
 import serialize.TestSerializer
 
+
 internal class TestKSerializerObjectIDs : TestSerializer<List<ObjectID>>(KSerializerObjectIDs) {
 
     override val items = listOf(

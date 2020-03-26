@@ -9,11 +9,12 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
+
 /**
  * [EventName] of an [InsightsEvent]. Can't be a blank or empty string.
  */
 @Serializable(EventName.Companion::class)
-data class EventName(override val raw: String) : Raw<String> {
+public data class EventName(override val raw: String) : Raw<String> {
 
     init {
         if (raw.isBlank()) throw EmptyStringException("EventName")

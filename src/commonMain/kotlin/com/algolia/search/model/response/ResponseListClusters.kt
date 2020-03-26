@@ -1,21 +1,18 @@
 package com.algolia.search.model.response
 
 import com.algolia.search.model.multicluster.ClusterName
-import com.algolia.search.serialize.KeyClusterName
-import com.algolia.search.serialize.KeyClusters
-import com.algolia.search.serialize.KeyDataSize
-import com.algolia.search.serialize.KeyNbRecords
-import com.algolia.search.serialize.KeyNbUserIDs
+import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class ResponseListClusters(
+public data class ResponseListClusters(
     @SerialName(KeyClusters) val clusters: List<Cluster>
 ) {
 
     @Serializable
-    data class Cluster(
+    public data class Cluster(
         /**
          * [ClusterName] of the cluster.
          */

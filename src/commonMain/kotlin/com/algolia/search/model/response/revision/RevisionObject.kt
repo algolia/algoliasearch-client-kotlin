@@ -11,8 +11,9 @@ import com.algolia.search.serialize.KeyUpdatedAt
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class RevisionObject(
+public data class RevisionObject(
     /**
      * The date at which the record has been revised.
      */

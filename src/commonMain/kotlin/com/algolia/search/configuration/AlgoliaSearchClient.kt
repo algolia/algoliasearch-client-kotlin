@@ -1,9 +1,10 @@
 package com.algolia.search.configuration
 
+
 /**
  * Singleton exposing information on the library.
  */
-object AlgoliaSearchClient {
+public object AlgoliaSearchClient {
 
     /**
      * Current version of the library.

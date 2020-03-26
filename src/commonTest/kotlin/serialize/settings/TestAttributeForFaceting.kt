@@ -2,13 +2,12 @@ package serialize.settings
 
 import attributeA
 import com.algolia.search.model.settings.AttributeForFaceting
-import com.algolia.search.model.settings.AttributeForFaceting.Default
-import com.algolia.search.model.settings.AttributeForFaceting.FilterOnly
-import com.algolia.search.model.settings.AttributeForFaceting.Searchable
+import com.algolia.search.model.settings.AttributeForFaceting.*
 import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeySearchable
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
+
 
 internal class TestAttributeForFaceting : TestSerializer<AttributeForFaceting>(AttributeForFaceting) {
 

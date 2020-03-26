@@ -9,6 +9,7 @@ import com.algolia.search.serialize.KeyDesc
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestCustomRankingCriterion {
 
     @Test

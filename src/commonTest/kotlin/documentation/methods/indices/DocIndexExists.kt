@@ -5,8 +5,9 @@ import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
+
 @Ignore
-internal class DocIndexExists {
+internal class DocIndexExists  {
 
     // suspend fun Index.exists(): Boolean
 

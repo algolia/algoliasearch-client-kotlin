@@ -10,8 +10,9 @@ import com.algolia.search.serialize.KeyTaskID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class DeletionIndex(
+public data class DeletionIndex(
     /**
      * Date at which the [Task] to delete the [Index] has been created.
      */

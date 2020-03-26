@@ -9,7 +9,8 @@ import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
 import com.algolia.search.transport.RequestOptions
 
-interface EndpointPlaces {
+
+public interface EndpointPlaces {
 
     suspend fun searchPlaces(
         query: PlacesQuery = PlacesQuery(),

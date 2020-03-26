@@ -9,11 +9,12 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
+
 /**
  * A cursor used to browse an index with [EndpointSearch.browse].
  */
 @Serializable(Cursor.Companion::class)
-data class Cursor(
+public data class Cursor(
     override val raw: String
 ) : Raw<String> {
 

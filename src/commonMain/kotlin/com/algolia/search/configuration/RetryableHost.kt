@@ -2,11 +2,12 @@ package com.algolia.search.configuration
 
 import com.algolia.search.model.Time
 
+
 /**
  * @param url The url to target.
  * @param callType Whether this host should be used for [CallType.Read] or [CallType.Write] requests.
  */
-data class RetryableHost(
+public data class RetryableHost(
     val url: String,
     val callType: CallType? = null
 ) {

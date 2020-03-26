@@ -7,6 +7,7 @@ import com.algolia.search.model.ApplicationID
 import kotlin.test.Ignore
 import kotlin.test.Test
 
+
 @Ignore
 internal class DocConfigurationHeaders {
 

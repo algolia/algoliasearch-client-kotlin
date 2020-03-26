@@ -1,12 +1,11 @@
 package serialize.search
 
 import com.algolia.search.model.search.SortFacetsBy
-import com.algolia.search.model.search.SortFacetsBy.Alpha
-import com.algolia.search.model.search.SortFacetsBy.Count
-import com.algolia.search.model.search.SortFacetsBy.Other
+import com.algolia.search.model.search.SortFacetsBy.*
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 import unknown
+
 
 internal class TestSortFacetsBy : TestSerializer<SortFacetsBy>(SortFacetsBy) {
 

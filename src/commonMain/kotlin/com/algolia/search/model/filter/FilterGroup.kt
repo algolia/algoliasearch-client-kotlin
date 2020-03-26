@@ -2,19 +2,20 @@ package com.algolia.search.model.filter
 
 import com.algolia.search.model.Attribute
 
+
 /**
  * Contains a [Set] of [Filter] that should be evaluated together.
  */
-sealed class FilterGroup<T : Filter> : Set<T> {
+public sealed class FilterGroup<T : Filter> : Set<T> {
 
     protected abstract val filters: Set<T>
 
-    abstract val name: String?
+    public abstract val name: String?
 
     /**
      * Filters in this group will be evaluated together with the "AND" operator.
      */
-    sealed class And<T : Filter>(
+    public sealed class And<T : Filter>(
         override val filters: Set<T>,
         override val name: String?
     ) : FilterGroup<T>(),
@@ -23,7 +24,7 @@ sealed class FilterGroup<T : Filter> : Set<T> {
         /**
          * Contains any type of [Filter].
          */
-        data class Any(
+        public data class Any(
             override val filters: Set<Filter>,
             override val name: String? = null
         ) : And<Filter>(filters, name) {
@@ -34,7 +35,7 @@ sealed class FilterGroup<T : Filter> : Set<T> {
         /**
          * Contains only [Filter.Facet].
          */
-        data class Facet(
+        public data class Facet(
             override val filters: Set<Filter.Facet>,
             override val name: String? = null
         ) : And<Filter.Facet>(filters, name) {
@@ -45,7 +46,7 @@ sealed class FilterGroup<T : Filter> : Set<T> {
         /**
          * Contains only [Filter.Tag].
          */
-        data class Tag(
+        public data class Tag(
             override val filters: Set<Filter.Tag>,
             override val name: String? = null
         ) : And<Filter.Tag>(filters, name) {
@@ -56,7 +57,7 @@ sealed class FilterGroup<T : Filter> : Set<T> {
         /**
          * Contains only [Filter.Numeric].
          */
-        data class Numeric(
+        public data class Numeric(
             override val filters: Set<Filter.Numeric>,
             override val name: String? = null
         ) : And<Filter.Numeric>(filters, name) {
@@ -64,7 +65,7 @@ sealed class FilterGroup<T : Filter> : Set<T> {
             constructor(vararg filters: Filter.Numeric, name: String? = null) : this(filters.toSet(), name)
         }
 
-        data class Hierarchical(
+        public data class Hierarchical(
             override val filters: Set<Filter.Facet>,
             val path: List<Filter.Facet>,
             val attributes: List<Attribute>,
@@ -75,7 +76,7 @@ sealed class FilterGroup<T : Filter> : Set<T> {
     /**
      * Filters in this group will be evaluated together with the "OR" operator.
      */
-    sealed class Or<T : Filter>(
+    public sealed class Or<T : Filter>(
         override val filters: Set<T>,
         override val name: String?
     ) : FilterGroup<T>(), Set<T> by filters {
@@ -83,7 +84,7 @@ sealed class FilterGroup<T : Filter> : Set<T> {
         /**
          * Contains only [Filter.Facet].
          */
-        data class Facet(
+        public data class Facet(
             override val filters: Set<Filter.Facet>,
             override val name: String? = null
         ) : Or<Filter.Facet>(filters, name) {
@@ -94,7 +95,7 @@ sealed class FilterGroup<T : Filter> : Set<T> {
         /**
          * Contains only [Filter.Tag].
          */
-        data class Tag(
+        public data class Tag(
             override val filters: Set<Filter.Tag>,
             override val name: String? = null
         ) : Or<Filter.Tag>(filters, name) {
@@ -105,7 +106,7 @@ sealed class FilterGroup<T : Filter> : Set<T> {
         /**
          * Contains only [Filter.Numeric].
          */
-        data class Numeric(
+        public data class Numeric(
             override val filters: Set<Filter.Numeric>,
             override val name: String? = null
         ) : Or<Filter.Numeric>(filters, name) {

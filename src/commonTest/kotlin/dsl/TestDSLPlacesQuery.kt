@@ -5,6 +5,7 @@ import com.algolia.search.dsl.placesQuery
 import shouldNotBeNull
 import kotlin.test.Test
 
+
 internal class TestDSLPlacesQuery {
 
     @Test

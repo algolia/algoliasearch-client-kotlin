@@ -6,19 +6,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterConverter
-import com.algolia.search.serialize.KeyClick
-import com.algolia.search.serialize.KeyConversion
-import com.algolia.search.serialize.KeyEventName
-import com.algolia.search.serialize.KeyEventType
-import com.algolia.search.serialize.KeyFilters
-import com.algolia.search.serialize.KeyIndex
-import com.algolia.search.serialize.KeyObjectIDs
-import com.algolia.search.serialize.KeyPositions
-import com.algolia.search.serialize.KeyQueryID
-import com.algolia.search.serialize.KeyTimestamp
-import com.algolia.search.serialize.KeyUserToken
-import com.algolia.search.serialize.KeyView
-import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.*
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationStrategy
@@ -27,11 +15,12 @@ import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
+
 /**
  * Event that can be send with [EndpointInsights].
  */
 @Serializable(InsightsEvent.Companion::class)
-sealed class InsightsEvent {
+public sealed class InsightsEvent {
 
     abstract val eventName: EventName
     abstract val indexName: IndexName
@@ -40,7 +29,7 @@ sealed class InsightsEvent {
     abstract val queryID: QueryID?
     abstract val resources: Resources?
 
-    data class View(
+    public data class View(
         override val eventName: EventName,
         override val indexName: IndexName,
         override val userToken: UserToken? = null,
@@ -49,7 +38,7 @@ sealed class InsightsEvent {
         override val resources: Resources? = null
     ) : InsightsEvent()
 
-    data class Click(
+    public data class Click(
         override val eventName: EventName,
         override val indexName: IndexName,
         override val userToken: UserToken? = null,
@@ -65,7 +54,7 @@ sealed class InsightsEvent {
         }
     }
 
-    data class Conversion(
+    public data class Conversion(
         override val eventName: EventName,
         override val indexName: IndexName,
         override val userToken: UserToken? = null,
@@ -74,17 +63,18 @@ sealed class InsightsEvent {
         override val resources: Resources? = null
     ) : InsightsEvent()
 
-    sealed class Resources {
+    public sealed class Resources {
 
-        data class ObjectIDs(val objectIDs: List<ObjectID>) : Resources() {
+        public data class ObjectIDs(val objectIDs: List<ObjectID>) : Resources() {
 
             init {
                 if (objectIDs.size > 20)
                     throw IllegalArgumentException("You can't send more than 20 objectIDs for a single event at a time.")
+
             }
         }
 
-        data class Filters(val filters: List<Filter.Facet>) : Resources() {
+        public data class Filters(val filters: List<Filter.Facet>) : Resources() {
 
             init {
                 if (filters.size > 10)

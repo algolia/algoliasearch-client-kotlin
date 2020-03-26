@@ -2,20 +2,21 @@ package com.algolia.search.model.filter
 
 import com.algolia.search.model.Attribute
 
+
 /**
  * [Documentation][https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/]
  */
-sealed class Filter {
+public sealed class Filter {
 
     /**
      * The [Attribute] this filter applies on.
      */
-    abstract val attribute: Attribute
+    public abstract val attribute: Attribute
 
     /**
      * Whether or not the filter is negated.
      */
-    abstract val isNegated: Boolean
+    public abstract val isNegated: Boolean
 
     /**
      * A [Filter.Facet] matches exactly an [attribute] with a [value].
@@ -23,46 +24,46 @@ sealed class Filter {
      * [FilterGroup].
      * [Read further on scoring][https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#filters-scoring]
      */
-    data class Facet internal constructor(
+    public data class Facet internal constructor(
         override val attribute: Attribute,
         override val isNegated: Boolean,
         val value: Value,
         val score: Int? = null
     ) : Filter() {
 
-        sealed class Value {
+        public sealed class Value {
 
             /**
              * Filter on a [kotlin.String] value.
              */
-            data class String(val raw: kotlin.String) : Value()
+            public data class String(val raw: kotlin.String) : Value()
 
             /**
              * Filter on a [kotlin.Boolean] value.
              */
-            data class Boolean(val raw: kotlin.Boolean) : Value()
+            public data class Boolean(val raw: kotlin.Boolean) : Value()
 
             /**
              * Filter on a [kotlin.Number] value.
              */
-            data class Number(val raw: kotlin.Number) : Value()
+            public data class Number(val raw: kotlin.Number) : Value()
         }
 
-        constructor(
+        public constructor(
             attribute: Attribute,
             value: String,
             score: Int? = null,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.String(value), score)
 
-        constructor(
+        public constructor(
             attribute: Attribute,
             value: Boolean,
             score: Int? = null,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Boolean(value), score)
 
-        constructor(
+        public constructor(
             attribute: Attribute,
             value: Number,
             score: Int? = null,
@@ -72,7 +73,7 @@ sealed class Filter {
         /**
          * Operator to negates a [Filter.Facet].
          */
-        operator fun not(): Facet {
+        public operator fun not(): Facet {
             return Facet(attribute, true, value, score)
         }
     }
@@ -80,13 +81,13 @@ sealed class Filter {
     /**
      * A [Filter.Tag] filters on a specific [value]. It uses a reserved keywords "_tags" as [attribute].
      */
-    data class Tag internal constructor(
+    public data class Tag internal constructor(
         override val attribute: Attribute,
         override val isNegated: Boolean,
         val value: String
     ) : Filter() {
 
-        constructor(
+        public constructor(
             value: String,
             isNegated: Boolean = false
         ) : this(Attribute("_tags"), isNegated, value)
@@ -94,7 +95,7 @@ sealed class Filter {
         /**
          * Operator to negates a [Filter.Tag].
          */
-        operator fun not(): Tag {
+        public operator fun not(): Tag {
             return Tag(attribute, true, value)
         }
     }
@@ -102,7 +103,7 @@ sealed class Filter {
     /**
      * A [Filter.Numeric] filters on a numeric [value].
      */
-    data class Numeric(
+    public data class Numeric(
         override val attribute: Attribute,
         override val isNegated: Boolean,
         val value: Value
@@ -121,43 +122,44 @@ sealed class Filter {
             data class Range(val lowerBound: Number, val upperBound: Number) : Value()
         }
 
-        constructor(
+        public constructor(
             attribute: Attribute,
             operator: NumericOperator,
             value: Number,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Comparison(operator, value))
 
-        constructor(
+        public constructor(
             attribute: Attribute,
             range: IntRange,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Range(range.start, range.endInclusive))
 
-        constructor(
+        public constructor(
             attribute: Attribute,
             range: LongRange,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Range(range.start, range.endInclusive))
 
-        constructor(
+        public constructor(
             attribute: Attribute,
             lowerBound: Float,
             upperBound: Float,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Range(lowerBound, upperBound))
 
-        constructor(
+        public constructor(
             attribute: Attribute,
             lowerBound: Double,
             upperBound: Double,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Range(lowerBound, upperBound))
 
+
         /**
          * Operator to negates a [Filter.Numeric].
          */
-        operator fun not(): Numeric {
+        public operator fun not(): Numeric {
             return Numeric(attribute, true, value)
         }
     }

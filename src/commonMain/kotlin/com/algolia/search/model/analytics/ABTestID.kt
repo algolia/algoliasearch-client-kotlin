@@ -8,11 +8,12 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.LongSerializer
 
+
 /**
  * ID of an [ABTest].
  */
 @Serializable(ABTestID.Companion::class)
-data class ABTestID(override val raw: Long) : Raw<Long> {
+public data class ABTestID(override val raw: Long) : Raw<Long> {
 
     override fun toString(): String {
         return raw.toString()

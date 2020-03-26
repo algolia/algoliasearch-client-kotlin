@@ -6,6 +6,7 @@ import com.algolia.search.dsl.attributes.DSLAttributes
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDSLAttributes {
 
     @Test

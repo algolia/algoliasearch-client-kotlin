@@ -5,7 +5,7 @@ import com.algolia.search.endpoint.EndpointAdvanced
 /**
  * A server-side task, used by [EndpointAdvanced.waitTask].
  */
-interface Task {
+public interface Task {
 
     val taskID: TaskID
 }

@@ -3,33 +3,11 @@ package com.algolia.search.model.places
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.RankingInfo
-import com.algolia.search.serialize.KSerializerGeoPoints
-import com.algolia.search.serialize.KeyAdmin_Level
-import com.algolia.search.serialize.KeyAdministrative
-import com.algolia.search.serialize.KeyCity
-import com.algolia.search.serialize.KeyCountry
-import com.algolia.search.serialize.KeyCountryCode
-import com.algolia.search.serialize.KeyCounty
-import com.algolia.search.serialize.KeyDistrict
-import com.algolia.search.serialize.KeyImportance
-import com.algolia.search.serialize.KeyIs_City
-import com.algolia.search.serialize.KeyIs_Country
-import com.algolia.search.serialize.KeyIs_Highway
-import com.algolia.search.serialize.KeyIs_Popular
-import com.algolia.search.serialize.KeyIs_Suburb
-import com.algolia.search.serialize.KeyLocaleNames
-import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.serialize.KeyPopulation
-import com.algolia.search.serialize.KeyPostCode
-import com.algolia.search.serialize.KeySuburb
-import com.algolia.search.serialize.KeyVillage
-import com.algolia.search.serialize.Key_Geoloc
-import com.algolia.search.serialize.Key_HighlightResult
-import com.algolia.search.serialize.Key_RankingInfo
-import com.algolia.search.serialize.Key_Tags
+import com.algolia.search.serialize.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
+
 
 @Serializable
 data class PlaceLanguage(
@@ -65,7 +43,7 @@ data class PlaceLanguage(
         get() = countyOrNull!!
 
     val city: List<String>
-        get() = cityOrNull!!
+        get () = cityOrNull!!
 
     val localNames: List<String>
         get() = localNamesOrNull!!

@@ -5,8 +5,9 @@ import com.algolia.search.serialize.KeyCreatedAt
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class Creation(
+public data class Creation(
     /**
      * The date at which the creation happened.
      */

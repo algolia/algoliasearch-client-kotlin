@@ -2,12 +2,17 @@ package suite
 
 import clientAdmin1
 import com.algolia.search.helper.toAttribute
+import com.algolia.search.model.ObjectID
+import com.algolia.search.model.rule.Condition
+import com.algolia.search.model.rule.Consequence
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
+import com.algolia.search.serialize.JsonDebug
+import com.algolia.search.serialize.JsonNoDefaults
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.JsonObjectSerializer
@@ -16,7 +21,9 @@ import runBlocking
 import shouldEqual
 import shouldFailWith
 import shouldNotBeNull
+import kotlin.test.AfterTest
 import kotlin.test.Test
+
 
 internal class TestSuiteRules {
 
@@ -25,6 +32,8 @@ internal class TestSuiteRules {
     private val brand = "brand".toAttribute()
     private val model = "model".toAttribute()
     private val index = clientAdmin1.initIndex(indexName)
+
+
 
     @Test
     fun test() {

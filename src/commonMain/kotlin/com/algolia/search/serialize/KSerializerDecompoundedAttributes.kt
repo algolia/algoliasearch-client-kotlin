@@ -3,15 +3,12 @@ package com.algolia.search.serialize
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.settings.DecompoundedAttributes
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
+import kotlinx.serialization.*
 import kotlinx.serialization.internal.HashMapSerializer
 import kotlinx.serialization.json.json
-import kotlinx.serialization.list
 
-object KSerializerDecompoundedAttributes : KSerializer<List<DecompoundedAttributes>> {
+
+public object KSerializerDecompoundedAttributes : KSerializer<List<DecompoundedAttributes>> {
 
     private val serializer = HashMapSerializer(Language, Attribute.list)
 

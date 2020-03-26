@@ -3,35 +3,13 @@ package com.algolia.search.model.rule
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.JsonNoDefaults
-import com.algolia.search.serialize.KSerializerObjectIDs
-import com.algolia.search.serialize.KeyAutomaticFacetFilters
-import com.algolia.search.serialize.KeyAutomaticOptionalFacetFilters
-import com.algolia.search.serialize.KeyEdits
-import com.algolia.search.serialize.KeyFilterPromotes
-import com.algolia.search.serialize.KeyHide
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyPromote
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyRemoveLowercase
-import com.algolia.search.serialize.KeyUserData
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.serialize.toJsonNoDefaults
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.json
-import kotlinx.serialization.list
+import com.algolia.search.serialize.*
+import kotlinx.serialization.*
+import kotlinx.serialization.json.*
+
 
 @Serializable(Consequence.Companion::class)
-data class Consequence(
+public data class Consequence(
     /**
      * Names of facets to which automatic filtering must be applied; they must match the facet name of a facet value
      * placeholder in the query pattern.
@@ -105,10 +83,7 @@ data class Consequence(
                 remove(KeyAutomaticFacetFilters)
                 remove(KeyAutomaticOptionalFacetFilters)
             }
-            return if (modified.isNotEmpty()) JsonNoDefaults.fromJson(
-                Query.serializer(),
-                JsonObject(modified)
-            ) else null
+            return if (modified.isNotEmpty()) JsonNoDefaults.fromJson(Query.serializer(), JsonObject(modified)) else null
         }
 
         override fun serialize(encoder: Encoder, obj: Consequence) {

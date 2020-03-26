@@ -7,6 +7,7 @@ import com.algolia.search.serialize.KeyStatus
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
+
 internal class TestTaskCluster : TestSerializer<TaskInfo>(TaskInfo.serializer()) {
 
     override val items = listOf(

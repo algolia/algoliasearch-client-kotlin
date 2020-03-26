@@ -6,6 +6,7 @@ import com.algolia.search.model.settings.NumericAttributeFilter
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDSLNumericAttributeFilter {
 
     @Test

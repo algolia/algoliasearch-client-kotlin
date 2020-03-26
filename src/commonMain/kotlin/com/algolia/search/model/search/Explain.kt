@@ -4,7 +4,8 @@ import com.algolia.search.serialize.KeyMatch
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class Explain(
+public data class Explain(
     @SerialName(KeyMatch) val match: Match
 )

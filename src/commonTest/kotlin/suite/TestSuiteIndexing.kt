@@ -15,7 +15,9 @@ import kotlinx.serialization.json.json
 import runBlocking
 import shouldBeTrue
 import shouldEqual
+import kotlin.test.AfterTest
 import kotlin.test.Test
+
 
 internal class TestSuiteIndexing {
 
@@ -41,6 +43,7 @@ internal class TestSuiteIndexing {
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
 
+
     private fun batchAddObject(): List<List<BatchOperation.AddObject>> {
         return (0 until 10)
             .map { index ->
@@ -49,6 +52,8 @@ internal class TestSuiteIndexing {
                     .map { BatchOperation.AddObject.from(Data.serializer(), it) }
             }
     }
+
+
 
     @Test
     fun test() {

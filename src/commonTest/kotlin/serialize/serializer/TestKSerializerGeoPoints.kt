@@ -10,6 +10,7 @@ import serialize.serializer.TestKSerializerGeoPoint.Companion.point
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestKSerializerGeoPoints : TestSerializer<List<Point>>(KSerializerGeoPoints) {
 
     override val items = listOf(

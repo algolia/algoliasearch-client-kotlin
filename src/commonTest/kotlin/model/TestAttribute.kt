@@ -5,6 +5,7 @@ import com.algolia.search.model.Attribute
 import shouldFailWith
 import kotlin.test.Test
 
+
 internal class TestAttribute {
 
     @Test

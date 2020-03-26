@@ -7,6 +7,7 @@ import com.algolia.search.serialize.KSerializerClientDate
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 
+
 internal class TestKSerializerClientDate : TestSerializer<ClientDate>(KSerializerClientDate) {
 
     private val date = Time.getCurrentTimeMillis()

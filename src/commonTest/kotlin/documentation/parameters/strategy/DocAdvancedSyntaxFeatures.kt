@@ -8,6 +8,7 @@ import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
+
 @Ignore
 internal class DocAdvancedSyntaxFeatures {
 
@@ -33,7 +34,7 @@ internal class DocAdvancedSyntaxFeatures {
     @Test
     fun snippet2() {
         runBlocking {
-            val query = query("query") {
+             val query = query("query") {
                 advancedSyntax = true
                 advancedSyntaxFeatures {
                     +ExactPhrase

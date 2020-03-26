@@ -1,16 +1,13 @@
 package documentation.guides.results.geolocation
 
-import com.algolia.search.dsl.customRanking
-import com.algolia.search.dsl.insidePolygon
-import com.algolia.search.dsl.query
-import com.algolia.search.dsl.searchableAttributes
-import com.algolia.search.dsl.settings
+import com.algolia.search.dsl.*
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.Polygon
 import documentation.index
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
+
 
 @Ignore
 internal class GuideInsidePolygon {

@@ -5,6 +5,7 @@ import com.algolia.search.model.QueryID
 import shouldFailWith
 import kotlin.test.Test
 
+
 internal class TestQueryID {
 
     @Test

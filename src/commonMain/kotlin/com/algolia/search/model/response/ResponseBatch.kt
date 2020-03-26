@@ -10,8 +10,9 @@ import com.algolia.search.serialize.KeyTaskID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class ResponseBatch(
+public data class ResponseBatch(
     /**
      * The [TaskID] which can be used with the [EndpointAdvanced.waitTask] method.
      */

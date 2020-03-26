@@ -6,20 +6,13 @@ import com.algolia.search.dsl.objectIDs
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.rule.DSLRules
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.rule.Anchoring
-import com.algolia.search.model.rule.AutomaticFacetFilters
-import com.algolia.search.model.rule.Condition
-import com.algolia.search.model.rule.Consequence
-import com.algolia.search.model.rule.Edit
-import com.algolia.search.model.rule.Pattern
-import com.algolia.search.model.rule.Promotion
-import com.algolia.search.model.rule.Rule
-import com.algolia.search.model.rule.TimeRange
+import com.algolia.search.model.rule.*
 import kotlinx.serialization.json.json
 import objectIDA
 import objectIDB
 import shouldEqual
 import kotlin.test.Test
+
 
 internal class TestDSLRules {
 

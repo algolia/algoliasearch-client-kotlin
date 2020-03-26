@@ -1,64 +1,10 @@
 package serialize.search
 
 import com.algolia.search.model.search.Language
-import com.algolia.search.model.search.Language.Afrikaans
-import com.algolia.search.model.search.Language.Albanian
-import com.algolia.search.model.search.Language.Arabic
-import com.algolia.search.model.search.Language.Armenian
-import com.algolia.search.model.search.Language.Azeri
-import com.algolia.search.model.search.Language.Basque
-import com.algolia.search.model.search.Language.Brunei
-import com.algolia.search.model.search.Language.Bulgarian
-import com.algolia.search.model.search.Language.Catalan
-import com.algolia.search.model.search.Language.Czech
-import com.algolia.search.model.search.Language.Danish
-import com.algolia.search.model.search.Language.Dutch
-import com.algolia.search.model.search.Language.English
-import com.algolia.search.model.search.Language.Esperanto
-import com.algolia.search.model.search.Language.Estonian
-import com.algolia.search.model.search.Language.Faroese
-import com.algolia.search.model.search.Language.Finnish
-import com.algolia.search.model.search.Language.French
-import com.algolia.search.model.search.Language.Galician
-import com.algolia.search.model.search.Language.Georgian
-import com.algolia.search.model.search.Language.German
-import com.algolia.search.model.search.Language.Hebrew
-import com.algolia.search.model.search.Language.Hindi
-import com.algolia.search.model.search.Language.Hungarian
-import com.algolia.search.model.search.Language.Icelandic
-import com.algolia.search.model.search.Language.Indonesian
-import com.algolia.search.model.search.Language.Italian
-import com.algolia.search.model.search.Language.Japanese
-import com.algolia.search.model.search.Language.Kazakh
-import com.algolia.search.model.search.Language.Korean
-import com.algolia.search.model.search.Language.Kyrgyz
-import com.algolia.search.model.search.Language.Lithuanian
-import com.algolia.search.model.search.Language.Malay
-import com.algolia.search.model.search.Language.Maltese
-import com.algolia.search.model.search.Language.Maori
-import com.algolia.search.model.search.Language.Marathi
-import com.algolia.search.model.search.Language.Mongolian
-import com.algolia.search.model.search.Language.NorthernSotho
-import com.algolia.search.model.search.Language.Norwegian
-import com.algolia.search.model.search.Language.Pashto
-import com.algolia.search.model.search.Language.Polish
-import com.algolia.search.model.search.Language.Portuguese
-import com.algolia.search.model.search.Language.Quechua
-import com.algolia.search.model.search.Language.Romanian
-import com.algolia.search.model.search.Language.Russian
-import com.algolia.search.model.search.Language.Slovak
-import com.algolia.search.model.search.Language.Spanish
-import com.algolia.search.model.search.Language.Swahili
-import com.algolia.search.model.search.Language.Swedish
-import com.algolia.search.model.search.Language.Tagalog
-import com.algolia.search.model.search.Language.Tamil
-import com.algolia.search.model.search.Language.Tatar
-import com.algolia.search.model.search.Language.Telugu
-import com.algolia.search.model.search.Language.Tswana
-import com.algolia.search.model.search.Language.Turkish
-import com.algolia.search.model.search.Language.Welsh
+import com.algolia.search.model.search.Language.*
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
+
 
 internal class TestLanguage : TestSerializer<Language>(Language) {
 

@@ -5,6 +5,7 @@ import com.algolia.search.model.search.Point
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestPoint {
 
     @Test

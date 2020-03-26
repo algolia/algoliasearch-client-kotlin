@@ -2,30 +2,13 @@ package com.algolia.search.model.search
 
 import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.KeyAroundLatLng
-import com.algolia.search.serialize.KeyAutomaticRadius
-import com.algolia.search.serialize.KeyExhaustiveFacetsCount
-import com.algolia.search.serialize.KeyFacets
-import com.algolia.search.serialize.KeyFacets_Stats
-import com.algolia.search.serialize.KeyHits
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyIndex
-import com.algolia.search.serialize.KeyLength
-import com.algolia.search.serialize.KeyNbHits
-import com.algolia.search.serialize.KeyNbPages
-import com.algolia.search.serialize.KeyOffset
-import com.algolia.search.serialize.KeyPage
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyProcessingTimeMS
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyQueryAfterRemoval
-import com.algolia.search.serialize.KeyStar
-import com.algolia.search.serialize.KeyUserData
+import com.algolia.search.serialize.*
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
+
 
 /**
  * Choose which fields the response will contain. Applies to [EndpointSearch.search] and [EndpointSearch.browse].
@@ -33,29 +16,29 @@ import kotlinx.serialization.internal.StringSerializer
  * parameters in the response’s params field can be undesirable.
  */
 @Serializable(ResponseFields.Companion::class)
-sealed class ResponseFields(override val raw: String) : Raw<String> {
+public sealed class ResponseFields(override val raw: String) : Raw<String> {
 
-    object All : ResponseFields(KeyStar)
-    object AroundLatLng : ResponseFields(KeyAroundLatLng)
-    object AutomaticRadius : ResponseFields(KeyAutomaticRadius)
-    object ExhaustiveFacetsCount : ResponseFields(KeyExhaustiveFacetsCount)
-    object Facets : ResponseFields(KeyFacets)
-    object FacetsStats : ResponseFields(KeyFacets_Stats)
-    object Hits : ResponseFields(KeyHits)
-    object HitsPerPage : ResponseFields(KeyHitsPerPage)
-    object Index : ResponseFields(KeyIndex)
-    object Length : ResponseFields(KeyLength)
-    object NbHits : ResponseFields(KeyNbHits)
-    object NbPages : ResponseFields(KeyNbPages)
-    object Offset : ResponseFields(KeyOffset)
-    object Page : ResponseFields(KeyPage)
-    object Params : ResponseFields(KeyParams)
-    object ProcessingTimeMS : ResponseFields(KeyProcessingTimeMS)
-    object Query : ResponseFields(KeyQuery)
-    object QueryAfterRemoval : ResponseFields(KeyQueryAfterRemoval)
-    object UserData : ResponseFields(KeyUserData)
+    public object All : ResponseFields(KeyStar)
+    public object AroundLatLng : ResponseFields(KeyAroundLatLng)
+    public object AutomaticRadius : ResponseFields(KeyAutomaticRadius)
+    public object ExhaustiveFacetsCount : ResponseFields(KeyExhaustiveFacetsCount)
+    public object Facets : ResponseFields(KeyFacets)
+    public object FacetsStats : ResponseFields(KeyFacets_Stats)
+    public object Hits : ResponseFields(KeyHits)
+    public object HitsPerPage : ResponseFields(KeyHitsPerPage)
+    public object Index : ResponseFields(KeyIndex)
+    public object Length : ResponseFields(KeyLength)
+    public object NbHits : ResponseFields(KeyNbHits)
+    public object NbPages : ResponseFields(KeyNbPages)
+    public object Offset : ResponseFields(KeyOffset)
+    public object Page : ResponseFields(KeyPage)
+    public object Params : ResponseFields(KeyParams)
+    public object ProcessingTimeMS : ResponseFields(KeyProcessingTimeMS)
+    public object Query : ResponseFields(KeyQuery)
+    public object QueryAfterRemoval : ResponseFields(KeyQueryAfterRemoval)
+    public object UserData : ResponseFields(KeyUserData)
 
-    data class Other(override val raw: String) : ResponseFields(raw)
+    public data class Other(override val raw: String) : ResponseFields(raw)
 
     override fun toString(): String {
         return raw

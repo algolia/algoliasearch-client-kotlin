@@ -8,6 +8,7 @@ import com.algolia.search.model.Attribute
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDSLAttributesToRetrieve {
 
     @Test

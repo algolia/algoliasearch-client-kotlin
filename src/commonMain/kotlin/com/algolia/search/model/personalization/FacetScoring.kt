@@ -4,8 +4,9 @@ import com.algolia.search.serialize.KeyScore
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+
 @Serializable
-data class FacetScoring(
+public data class FacetScoring(
     /**
      * The score to associate with a facet.
      */

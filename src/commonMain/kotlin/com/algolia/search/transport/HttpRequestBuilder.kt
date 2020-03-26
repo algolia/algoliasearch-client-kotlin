@@ -8,6 +8,7 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
 
+
 internal fun HttpRequestBuilder.setApplicationId(applicationID: ApplicationID?) {
     header(KeyAlgoliaApplicationID, applicationID?.raw)
 }

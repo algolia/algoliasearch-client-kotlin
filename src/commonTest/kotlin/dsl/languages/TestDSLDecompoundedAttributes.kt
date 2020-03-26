@@ -7,6 +7,7 @@ import com.algolia.search.model.settings.DecompoundedAttributes
 import shouldEqual
 import kotlin.test.Test
 
+
 internal class TestDSLDecompoundedAttributes {
 
     @Test
