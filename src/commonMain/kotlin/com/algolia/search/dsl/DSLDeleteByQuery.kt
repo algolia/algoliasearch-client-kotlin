@@ -9,7 +9,6 @@ import com.algolia.search.dsl.geosearch.DSLPolygon
 import com.algolia.search.model.filter.FilterGroupsConverter
 import com.algolia.search.model.indexing.DeleteByQuery
 
-
 /**
  * Create a [DeleteByQuery] with [block].
  */

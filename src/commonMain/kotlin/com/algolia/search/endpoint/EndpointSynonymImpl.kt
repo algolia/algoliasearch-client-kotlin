@@ -12,12 +12,15 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionSynonym
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.KeyForwardToReplicas
+import com.algolia.search.serialize.KeyReplaceExistingSynonyms
+import com.algolia.search.serialize.RouteSynonyms
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.list
-
 
 internal class EndpointSynonymImpl(
     private val transport: Transport,

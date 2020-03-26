@@ -1,6 +1,19 @@
 package com.algolia.search.client
 
-import com.algolia.search.endpoint.*
+import com.algolia.search.endpoint.EndpointAdvanced
+import com.algolia.search.endpoint.EndpointAdvancedImpl
+import com.algolia.search.endpoint.EndpointIndex
+import com.algolia.search.endpoint.EndpointIndexImpl
+import com.algolia.search.endpoint.EndpointIndexing
+import com.algolia.search.endpoint.EndpointIndexingImpl
+import com.algolia.search.endpoint.EndpointRule
+import com.algolia.search.endpoint.EndpointRuleImpl
+import com.algolia.search.endpoint.EndpointSearch
+import com.algolia.search.endpoint.EndpointSearchImpl
+import com.algolia.search.endpoint.EndpointSettings
+import com.algolia.search.endpoint.EndpointSettingsImpl
+import com.algolia.search.endpoint.EndpointSynonym
+import com.algolia.search.endpoint.EndpointSynonymImpl
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchRules
@@ -12,7 +25,6 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
-
 
 /**
  * The main entry point for performing operations on a single index.

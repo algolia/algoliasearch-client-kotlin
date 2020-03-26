@@ -11,12 +11,11 @@ import io.ktor.client.engine.mock.respond
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.http.ContentType
 import io.ktor.http.headersOf
-import kotlinx.coroutines.delay
 import io.ktor.utils.io.ByteReadChannel
+import kotlin.test.Test
+import kotlinx.coroutines.delay
 import runBlocking
 import shouldEqual
-import kotlin.test.Test
-
 
 internal class TestSuiteDNS {
 

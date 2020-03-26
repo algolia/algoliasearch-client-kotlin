@@ -6,7 +6,6 @@ import com.algolia.search.serialize.KeyPosition
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
 public data class Promotion(
     /**

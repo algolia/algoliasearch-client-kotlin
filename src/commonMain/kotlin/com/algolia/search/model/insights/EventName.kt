@@ -9,7 +9,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * [EventName] of an [InsightsEvent]. Can't be a blank or empty string.
  */

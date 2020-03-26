@@ -5,9 +5,12 @@ import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.serialize.KeyClick
 import com.algolia.search.serialize.KeyConversion
 import com.algolia.search.serialize.KeyView
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.StringSerializer
-
 
 @Serializable(EventType.Companion::class)
 public sealed class EventType(override val raw: String) : Raw<String> {

@@ -3,9 +3,8 @@ package dsl.ranking
 import com.algolia.search.dsl.ranking.DSLIndexName
 import indexA
 import indexB
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLIndexName {
 

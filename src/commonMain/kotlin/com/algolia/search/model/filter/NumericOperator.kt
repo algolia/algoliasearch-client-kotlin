@@ -1,6 +1,5 @@
 package com.algolia.search.model.filter
 
-
 /**
  * Operator to be used with [Filter.Numeric.Value.Comparison].
  */

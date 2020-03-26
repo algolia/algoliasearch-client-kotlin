@@ -6,12 +6,28 @@ import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.KeyAction
+import com.algolia.search.serialize.KeyAddObject
+import com.algolia.search.serialize.KeyBody
+import com.algolia.search.serialize.KeyClear
+import com.algolia.search.serialize.KeyDelete
+import com.algolia.search.serialize.KeyDeleteObject
+import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.KeyPartialUpdateObject
+import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
+import com.algolia.search.serialize.KeyUpdateObject
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.merge
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.json
-
 
 /**
  * Operation that can be batched using [EndpointIndexing.batch] or [EndpointMultipleIndex.multipleBatchObjects]

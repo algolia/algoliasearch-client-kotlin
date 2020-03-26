@@ -4,10 +4,17 @@ import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.rule.*
+import com.algolia.search.model.rule.Anchoring
+import com.algolia.search.model.rule.AutomaticFacetFilters
+import com.algolia.search.model.rule.Condition
+import com.algolia.search.model.rule.Consequence
+import com.algolia.search.model.rule.Edit
+import com.algolia.search.model.rule.Pattern
+import com.algolia.search.model.rule.Promotion
+import com.algolia.search.model.rule.Rule
+import com.algolia.search.model.rule.TimeRange
 import com.algolia.search.model.search.Query
 import kotlinx.serialization.json.JsonObject
-
 
 /**
  * DSL for building a [List] of [Rule].

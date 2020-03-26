@@ -4,10 +4,9 @@ import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.RemoveWordIfNoResults
 import documentation.index
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class DocRemoveWordsIfNoResults {
@@ -18,7 +17,7 @@ internal class DocRemoveWordsIfNoResults {
 //    |  [RemoveWordsIfNoResults.AllOptional](#parameter-option-alloptional)
 
     @Test
-    fun snippet1 () {
+    fun snippet1() {
         runBlocking {
             val settings = settings {
                 removeWordsIfNoResults = RemoveWordIfNoResults.None

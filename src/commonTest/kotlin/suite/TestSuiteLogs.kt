@@ -2,10 +2,9 @@ package suite
 
 import clientAdmin1
 import com.algolia.search.model.LogType
+import kotlin.test.Test
 import runBlocking
 import shouldEqual
-import kotlin.test.Test
-
 
 internal class TestSuiteLogs {
 

@@ -10,7 +10,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(ExactOnSingleWordQuery.Companion::class)
 public sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<String> {
 

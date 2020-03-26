@@ -3,9 +3,8 @@ package dsl.attributes
 import attributeA
 import attributeB
 import com.algolia.search.dsl.attributes.DSLAttributes
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLAttributes {
 

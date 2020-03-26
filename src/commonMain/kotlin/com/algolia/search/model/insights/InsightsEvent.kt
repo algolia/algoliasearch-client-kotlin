@@ -6,7 +6,19 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterConverter
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyClick
+import com.algolia.search.serialize.KeyConversion
+import com.algolia.search.serialize.KeyEventName
+import com.algolia.search.serialize.KeyEventType
+import com.algolia.search.serialize.KeyFilters
+import com.algolia.search.serialize.KeyIndex
+import com.algolia.search.serialize.KeyObjectIDs
+import com.algolia.search.serialize.KeyPositions
+import com.algolia.search.serialize.KeyQueryID
+import com.algolia.search.serialize.KeyTimestamp
+import com.algolia.search.serialize.KeyUserToken
+import com.algolia.search.serialize.KeyView
+import com.algolia.search.serialize.asJsonOutput
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationStrategy
@@ -14,7 +26,6 @@ import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-
 
 /**
  * Event that can be send with [EndpointInsights].
@@ -70,7 +81,6 @@ public sealed class InsightsEvent {
             init {
                 if (objectIDs.size > 20)
                     throw IllegalArgumentException("You can't send more than 20 objectIDs for a single event at a time.")
-
             }
         }
 

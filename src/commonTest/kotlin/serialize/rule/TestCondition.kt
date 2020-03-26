@@ -5,11 +5,14 @@ import com.algolia.search.model.rule.Alternatives
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Pattern
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.KeyAlternatives
+import com.algolia.search.serialize.KeyAnchoring
+import com.algolia.search.serialize.KeyIs
+import com.algolia.search.serialize.KeyPattern
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
 import unknown
-
 
 internal class TestCondition : TestSerializer<Condition>(Condition.serializer(), JsonNoDefaults) {
 

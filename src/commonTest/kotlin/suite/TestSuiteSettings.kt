@@ -8,20 +8,16 @@ import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.TaskStatus
+import kotlin.test.Test
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
-import kotlin.test.AfterTest
-import kotlin.test.Test
-
 
 internal class TestSuiteSettings {
 
     private val suffix = "settings"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
-
-
 
     @Test
     fun test() {

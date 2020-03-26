@@ -8,7 +8,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * An attribute is a key in the json definition of a record.
  * Example:

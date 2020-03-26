@@ -2,12 +2,17 @@ package serialize.indexing
 
 import attributeA
 import com.algolia.search.model.indexing.Partial
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAdd
+import com.algolia.search.serialize.KeyAddUnique
+import com.algolia.search.serialize.KeyDecrement
+import com.algolia.search.serialize.KeyIncrement
+import com.algolia.search.serialize.KeyRemove
+import com.algolia.search.serialize.KeyValue
+import com.algolia.search.serialize.Key_Operation
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
-
 
 internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
 

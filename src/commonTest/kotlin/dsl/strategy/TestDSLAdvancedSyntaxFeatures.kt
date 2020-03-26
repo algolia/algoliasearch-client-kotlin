@@ -2,9 +2,8 @@ package dsl.strategy
 
 import com.algolia.search.dsl.strategy.DSLAdvancedSyntaxFeatures
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLAdvancedSyntaxFeatures {
 

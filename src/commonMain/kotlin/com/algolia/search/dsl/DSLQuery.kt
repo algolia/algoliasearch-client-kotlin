@@ -18,7 +18,6 @@ import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
 import com.algolia.search.model.filter.FilterGroupsConverter
 import com.algolia.search.model.search.Query
 
-
 /**
  * Create a [Query] with [block] and an optional [query].
  */

@@ -4,7 +4,6 @@ import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.IndexName
 
-
 /**
  * DSL for building a [List] of [IndexName].
  */

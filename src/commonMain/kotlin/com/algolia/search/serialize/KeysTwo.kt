@@ -1,6 +1,5 @@
 package com.algolia.search.serialize
 
-
 public const val KeyUserIDs = "userIDs"
 public const val KeyTopUsers = "topUsers"
 public const val KeyKeys = "keys"

@@ -6,9 +6,12 @@ import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeySearchable
 import com.algolia.search.serialize.regexFilterOnly
 import com.algolia.search.serialize.regexSearchable
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.StringSerializer
-
 
 @Serializable(AttributeForFaceting.Companion::class)
 public sealed class AttributeForFaceting {

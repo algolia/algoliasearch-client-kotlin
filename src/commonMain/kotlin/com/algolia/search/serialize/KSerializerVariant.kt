@@ -9,7 +9,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.internal.SerialClassDescImpl
 import kotlinx.serialization.json.json
 
-
 public object KSerializerVariant : KSerializer<Variant> {
 
     override val descriptor = SerialClassDescImpl("variant")

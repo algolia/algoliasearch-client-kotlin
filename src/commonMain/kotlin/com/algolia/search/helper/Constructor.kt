@@ -1,6 +1,11 @@
 package com.algolia.search.helper
 
-import com.algolia.search.model.*
+import com.algolia.search.model.APIKey
+import com.algolia.search.model.ApplicationID
+import com.algolia.search.model.Attribute
+import com.algolia.search.model.IndexName
+import com.algolia.search.model.ObjectID
+import com.algolia.search.model.QueryID
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.insights.EventName
 import com.algolia.search.model.insights.UserToken
@@ -9,7 +14,6 @@ import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.task.TaskID
-
 
 /**
  * Convenience method to convert [this] to an [IndexName].

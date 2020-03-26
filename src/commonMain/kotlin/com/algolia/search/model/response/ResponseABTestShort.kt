@@ -4,11 +4,19 @@ import com.algolia.search.helper.toABTestID
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.Variant
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.KSerializerVariant
+import com.algolia.search.serialize.KeyId
+import com.algolia.search.serialize.KeyVariants
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-
 
 /**
  * Short version of [ResponseABTest].

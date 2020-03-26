@@ -9,7 +9,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * Current status of a [Task].
  */

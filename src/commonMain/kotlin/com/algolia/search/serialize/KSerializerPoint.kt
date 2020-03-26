@@ -7,7 +7,6 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.internal.StringSerializer
 
-
 public object KSerializerPoint : KSerializer<Point> {
 
     private val serializer = StringSerializer

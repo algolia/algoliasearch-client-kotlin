@@ -1,13 +1,16 @@
 package com.algolia.search.model.synonym
 
 import com.algolia.search.dsl.DSLParameters
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyHitsPerPage
+import com.algolia.search.serialize.KeyPage
+import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.KeyType
+import com.algolia.search.serialize.asJsonOutput
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.json
-
 
 @DSLParameters
 @Serializable(SynonymQuery.Companion::class)

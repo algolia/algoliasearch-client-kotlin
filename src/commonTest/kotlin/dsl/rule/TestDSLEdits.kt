@@ -2,9 +2,8 @@ package dsl.rule
 
 import com.algolia.search.dsl.rule.DSLEdits
 import com.algolia.search.model.rule.Edit
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLEdits {
 

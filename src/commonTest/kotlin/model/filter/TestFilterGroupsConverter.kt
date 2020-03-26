@@ -6,10 +6,9 @@ import com.algolia.search.dsl.facetFilters
 import com.algolia.search.dsl.filters
 import com.algolia.search.dsl.numericFilters
 import com.algolia.search.dsl.query
+import kotlin.test.Test
 import shouldEqual
 import unknown
-import kotlin.test.Test
-
 
 internal class TestFilterGroupsConverter {
 

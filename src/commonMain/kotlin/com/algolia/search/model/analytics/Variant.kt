@@ -9,7 +9,6 @@ import com.algolia.search.serialize.KeyTrafficPercentage
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * Variant of an [ABTest]
  */

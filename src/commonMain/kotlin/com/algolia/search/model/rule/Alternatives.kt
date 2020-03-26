@@ -8,7 +8,6 @@ import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.BooleanSerializer
 import kotlinx.serialization.json.JsonLiteral
 
-
 public sealed class Alternatives {
 
     public object True : Alternatives()

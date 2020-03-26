@@ -1,6 +1,5 @@
 package com.algolia.search.serialize
 
-
 public const val RouteIndexesV1 = "1/indexes"
 public const val RouteSettings = "settings"
 public const val RouteClustersV1 = "1/clusters"

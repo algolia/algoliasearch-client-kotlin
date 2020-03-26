@@ -1,6 +1,5 @@
 package com.algolia.search.helper
 
-
 internal class StringUTF8 private constructor(val string: String) {
 
     companion object {

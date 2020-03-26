@@ -2,9 +2,8 @@ package dsl
 
 import com.algolia.search.dsl.DSLSettingsKey
 import com.algolia.search.model.settings.SettingsKey
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLSettingsKey {
 

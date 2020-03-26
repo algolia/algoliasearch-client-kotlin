@@ -4,11 +4,10 @@ import com.algolia.search.dsl.rule.rules
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import documentation.index
-import kotlinx.serialization.json.json
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import kotlinx.serialization.json.json
+import runBlocking
 
 @Ignore
 internal class GuideAddBanners {

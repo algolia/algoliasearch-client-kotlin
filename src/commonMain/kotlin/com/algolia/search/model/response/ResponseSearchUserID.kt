@@ -1,10 +1,13 @@
 package com.algolia.search.model.response
 
 import com.algolia.search.model.ClientDate
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyHits
+import com.algolia.search.serialize.KeyHitsPerPage
+import com.algolia.search.serialize.KeyNbHits
+import com.algolia.search.serialize.KeyPage
+import com.algolia.search.serialize.KeyUpdatedAt
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 public data class ResponseSearchUserID(

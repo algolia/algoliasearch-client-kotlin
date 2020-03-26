@@ -4,10 +4,18 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ClientDate
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAcl
+import com.algolia.search.serialize.KeyCreatedAt
+import com.algolia.search.serialize.KeyDescription
+import com.algolia.search.serialize.KeyIndexes
+import com.algolia.search.serialize.KeyMaxHitsPerQuery
+import com.algolia.search.serialize.KeyMaxQueriesPerIPPerHour
+import com.algolia.search.serialize.KeyQueryParameters
+import com.algolia.search.serialize.KeyReferers
+import com.algolia.search.serialize.KeyValidity
+import com.algolia.search.serialize.KeyValue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 public data class ResponseAPIKey(

@@ -5,7 +5,6 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.NumericAttributeFilter
 
-
 /**
  * DSL for building a [List] of [NumericAttributeFilter].
  */

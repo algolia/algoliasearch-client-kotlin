@@ -1,13 +1,18 @@
 package com.algolia.search.model.places
 
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAddress
+import com.algolia.search.serialize.KeyAirport
+import com.algolia.search.serialize.KeyBusStop
+import com.algolia.search.serialize.KeyCity
+import com.algolia.search.serialize.KeyCountry
+import com.algolia.search.serialize.KeyTownhall
+import com.algolia.search.serialize.KeyTrainStation
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
-
 
 @Serializable(PlaceType.Companion::class)
 sealed class PlaceType(override val raw: String) : Raw<String> {

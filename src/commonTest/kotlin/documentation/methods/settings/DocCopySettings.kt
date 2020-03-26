@@ -2,10 +2,9 @@ package documentation.methods.settings
 
 import documentation.index
 import documentation.indexName
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class DocCopySettings {

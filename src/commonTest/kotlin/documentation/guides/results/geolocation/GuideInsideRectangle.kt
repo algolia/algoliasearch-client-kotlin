@@ -1,13 +1,16 @@
 package documentation.guides.results.geolocation
 
-import com.algolia.search.dsl.*
+import com.algolia.search.dsl.customRanking
+import com.algolia.search.dsl.insideBoundingBox
+import com.algolia.search.dsl.query
+import com.algolia.search.dsl.searchableAttributes
+import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.BoundingBox
 import com.algolia.search.model.search.Point
 import documentation.index
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class GuideInsideRectangle {

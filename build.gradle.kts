@@ -1,8 +1,8 @@
 import com.android.build.gradle.LibraryExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     repositories {
@@ -215,7 +215,7 @@ bintray {
         repo = "maven"
         name = Library.artifact
         websiteUrl = "https://www.algolia.com/"
-        issueTrackerUrl =  "https://github.com/algolia/algoliasearch-client-kotlin/issues"
+        issueTrackerUrl = "https://github.com/algolia/algoliasearch-client-kotlin/issues"
         setLicenses("MIT")
         setLabels("Kotlin", "Algolia")
         vcsUrl = "https://github.com/algolia/algoliasearch-client-kotlin.git"
@@ -244,7 +244,7 @@ tasks.withType<Test> {
 configure<SpotlessExtension> {
     kotlin {
         target("**/*.kt")
-        ktlint()
+        ktlint("0.36.0")
         trimTrailingWhitespace()
         endWithNewline()
     }

@@ -11,7 +11,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * Unique identifier for a [Query]. Returned by [ResponseSearch] and used by [EndpointInsightsUser]
  */

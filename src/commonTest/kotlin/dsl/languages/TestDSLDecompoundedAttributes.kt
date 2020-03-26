@@ -4,9 +4,8 @@ import attributeA
 import com.algolia.search.dsl.languages.DSLDecompoundedAttributes
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.settings.DecompoundedAttributes
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLDecompoundedAttributes {
 

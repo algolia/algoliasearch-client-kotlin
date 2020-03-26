@@ -13,7 +13,6 @@ import kotlinx.serialization.list
 import org.junit.Ignore
 import org.junit.Test
 
-
 @Ignore
 internal class TutorialPushData {
 

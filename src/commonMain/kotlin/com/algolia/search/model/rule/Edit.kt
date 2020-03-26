@@ -1,10 +1,19 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.KeyDelete
+import com.algolia.search.serialize.KeyInsert
+import com.algolia.search.serialize.KeyRemoveLowercase
+import com.algolia.search.serialize.KeyReplace
+import com.algolia.search.serialize.KeyType
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.json
-
 
 @Serializable(Edit.Companion::class)
 public data class Edit(

@@ -1,7 +1,17 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAltcorrection
+import com.algolia.search.serialize.KeyCompound
+import com.algolia.search.serialize.KeyConcat
+import com.algolia.search.serialize.KeyExcluded
+import com.algolia.search.serialize.KeyOptional
+import com.algolia.search.serialize.KeyOriginal
+import com.algolia.search.serialize.KeyPlural
+import com.algolia.search.serialize.KeySplit
+import com.algolia.search.serialize.KeyStopWord
+import com.algolia.search.serialize.KeySynonym
+import com.algolia.search.serialize.KeyTypo
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

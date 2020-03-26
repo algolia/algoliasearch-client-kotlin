@@ -3,13 +3,23 @@ package com.algolia.search.model.settings
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Raw
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAsc
+import com.algolia.search.serialize.KeyAttribute
+import com.algolia.search.serialize.KeyCustom
+import com.algolia.search.serialize.KeyDesc
+import com.algolia.search.serialize.KeyExact
+import com.algolia.search.serialize.KeyFilters
+import com.algolia.search.serialize.KeyGeo
+import com.algolia.search.serialize.KeyProximity
+import com.algolia.search.serialize.KeyTypo
+import com.algolia.search.serialize.KeyWords
+import com.algolia.search.serialize.regexAsc
+import com.algolia.search.serialize.regexDesc
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
-
 
 @Serializable(RankingCriterion.Companion::class)
 public sealed class RankingCriterion(override val raw: String) : Raw<String> {

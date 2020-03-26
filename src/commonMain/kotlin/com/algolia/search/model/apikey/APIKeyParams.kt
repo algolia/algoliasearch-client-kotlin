@@ -4,7 +4,6 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
 
-
 /**
  * Parameters and functionality of an [APIKey].
  */

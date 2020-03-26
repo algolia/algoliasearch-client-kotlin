@@ -10,7 +10,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * A user identifier for analytics and security purposes.
  */

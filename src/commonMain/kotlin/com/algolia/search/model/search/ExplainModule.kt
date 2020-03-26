@@ -8,7 +8,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(ExplainModule.Companion::class)
 public sealed class ExplainModule(override val raw: String) : Raw<String> {
 

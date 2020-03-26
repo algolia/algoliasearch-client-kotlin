@@ -4,10 +4,17 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.AroundRadius
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAroundLatLng
+import com.algolia.search.serialize.KeyAroundLatLngViaIP
+import com.algolia.search.serialize.KeyAroundRadius
+import com.algolia.search.serialize.KeyCountries
+import com.algolia.search.serialize.KeyGetRankingInfo
+import com.algolia.search.serialize.KeyHitsPerPage
+import com.algolia.search.serialize.KeyLanguage
+import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.KeyType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 @DSLParameters

@@ -3,9 +3,8 @@ package dsl.geosearch
 import com.algolia.search.dsl.geosearch.DSLPolygon
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.Polygon
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLPolygon {
 

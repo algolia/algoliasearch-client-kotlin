@@ -6,7 +6,6 @@ import com.algolia.search.model.search.Snippet
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 
-
 internal class TestSnippet : TestSerializer<Snippet>(Snippet) {
 
     override val items = listOf(

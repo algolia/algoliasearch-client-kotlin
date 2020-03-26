@@ -2,10 +2,9 @@ package documentation.parameters.geosearch
 
 import com.algolia.search.dsl.query
 import com.algolia.search.model.search.Point
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class DocAroundLatLng {

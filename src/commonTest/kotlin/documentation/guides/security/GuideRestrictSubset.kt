@@ -3,16 +3,19 @@ package documentation.guides.security
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.dsl.attributesForFaceting
 import com.algolia.search.dsl.settings
-import com.algolia.search.model.*
+import com.algolia.search.model.APIKey
+import com.algolia.search.model.ApplicationID
+import com.algolia.search.model.Attribute
+import com.algolia.search.model.IndexName
+import com.algolia.search.model.ObjectID
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.search.Query
 import documentation.index
-import kotlinx.serialization.json.jsonArray
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import kotlinx.serialization.json.jsonArray
+import runBlocking
 
 @Ignore
 internal class GuideRestrictSubset {
@@ -51,7 +54,6 @@ internal class GuideRestrictSubset {
         runBlocking {
             val currentUserId = 1
             val restriction = SecuredAPIKeyRestriction(Query(filters = "viewable_by:$currentUserId"))
-
 
             ClientSearch.generateAPIKey(APIKey("SearchOnlyApiKeyKeptPrivate"), restriction)
         }

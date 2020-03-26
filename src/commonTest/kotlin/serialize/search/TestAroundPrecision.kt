@@ -8,7 +8,6 @@ import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 
-
 internal class TestAroundPrecision : TestSerializer<AroundPrecision>(AroundPrecision) {
 
     override val items = listOf(

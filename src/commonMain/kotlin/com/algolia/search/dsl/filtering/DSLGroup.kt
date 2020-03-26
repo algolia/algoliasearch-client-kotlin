@@ -4,7 +4,6 @@ import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.filter.Filter
 
-
 /**
  * Abstract DSL for building a [Set] [T] [Filter].
  */

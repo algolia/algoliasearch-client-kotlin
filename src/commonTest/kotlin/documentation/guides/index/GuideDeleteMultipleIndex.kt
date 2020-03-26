@@ -4,10 +4,9 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import documentation.client
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 class GuideDeleteMultipleIndex {

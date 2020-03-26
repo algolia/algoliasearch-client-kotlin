@@ -10,7 +10,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(QueryType.Companion::class)
 public sealed class QueryType(override val raw: String) : Raw<String> {
 

@@ -7,10 +7,9 @@ import com.algolia.search.model.personalization.EventScoring
 import com.algolia.search.model.personalization.EventType
 import com.algolia.search.model.personalization.FacetScoring
 import com.algolia.search.model.personalization.PersonalizationStrategy
+import kotlin.test.Test
 import runBlocking
 import shouldEqual
-import kotlin.test.Test
-
 
 internal class TestSuitePersonalization {
 

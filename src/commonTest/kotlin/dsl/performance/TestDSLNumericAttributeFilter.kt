@@ -3,9 +3,8 @@ package dsl.performance
 import attributeA
 import com.algolia.search.dsl.performance.DSLNumericAttributeFilter
 import com.algolia.search.model.settings.NumericAttributeFilter
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLNumericAttributeFilter {
 

@@ -1,6 +1,5 @@
 package com.algolia.search.configuration
 
-
 /**
  * Singleton exposing information on the library.
  */

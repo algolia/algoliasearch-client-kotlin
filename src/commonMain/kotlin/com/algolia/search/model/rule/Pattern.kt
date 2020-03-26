@@ -10,7 +10,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * An empty [Pattern] is only allowed when the [Anchoring] is set to [Anchoring.Is].
  * Special characters ({, }, : and \) must be escaped by preceding them with a backslash (\) if they are to be

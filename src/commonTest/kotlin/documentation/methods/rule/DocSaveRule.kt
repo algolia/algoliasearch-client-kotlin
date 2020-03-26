@@ -1,13 +1,18 @@
 package documentation.methods.rule
 
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.rule.*
+import com.algolia.search.model.rule.Alternatives
+import com.algolia.search.model.rule.Anchoring
+import com.algolia.search.model.rule.Condition
+import com.algolia.search.model.rule.Consequence
+import com.algolia.search.model.rule.Pattern
+import com.algolia.search.model.rule.Rule
+import com.algolia.search.model.rule.TimeRange
 import com.algolia.search.model.search.Query
 import documentation.index
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class DocSaveRule {

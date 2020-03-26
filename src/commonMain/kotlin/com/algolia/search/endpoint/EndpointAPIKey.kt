@@ -9,7 +9,6 @@ import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.response.revision.RevisionAPIKey
 import com.algolia.search.transport.RequestOptions
 
-
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/api-keys/?language=kotlin]
  */
@@ -19,7 +18,7 @@ public interface EndpointAPIKey {
      * Add a new [APIKey].
      *
      * @param params permissions/restrictions specified by [APIKeyParams]
-     * @param restrictSources  You can also add a restriction on the IPv4 network allowed to use the generated key.
+     * @param restrictSources You can also add a restriction on the IPv4 network allowed to use the generated key.
      * This is used for more protection against [APIKey] leaking and reuse.
      * For security reasons, the creation of the key will fail if the server from which the key is created is not in the
      * restricted network. Example: "restrictSources=223.139.41".

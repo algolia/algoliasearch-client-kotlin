@@ -9,7 +9,6 @@ import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.insights.UserToken
 import io.ktor.client.statement.HttpResponse
 
-
 class EndpointInsightsUserImpl(
     private val insights: EndpointInsights,
     private val userToken: UserToken

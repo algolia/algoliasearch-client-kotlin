@@ -17,7 +17,6 @@ import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
 
-
 /**
  * Create a [Settings] with [block].
  */

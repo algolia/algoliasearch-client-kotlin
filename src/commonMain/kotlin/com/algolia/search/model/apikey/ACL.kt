@@ -2,10 +2,23 @@ package com.algolia.search.model.apikey
 
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.KeyAddObject
+import com.algolia.search.serialize.KeyAnalytics
+import com.algolia.search.serialize.KeyBrowse
+import com.algolia.search.serialize.KeyDeleteIndex
+import com.algolia.search.serialize.KeyDeleteObject
+import com.algolia.search.serialize.KeyEditSettings
+import com.algolia.search.serialize.KeyListIndexes
+import com.algolia.search.serialize.KeyLogs
+import com.algolia.search.serialize.KeySearch
+import com.algolia.search.serialize.KeySeeUnretrievableAttributes
+import com.algolia.search.serialize.KeySettings
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.StringSerializer
-
 
 /**
  * Permission associated to an [APIKey].

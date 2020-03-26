@@ -8,18 +8,17 @@ import com.algolia.search.model.multicluster.UserIDQuery
 import io.ktor.client.features.ResponseException
 import io.ktor.client.statement.readBytes
 import io.ktor.http.HttpStatusCode
+import io.ktor.utils.io.core.String
+import kotlin.test.Test
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import io.ktor.utils.io.core.String
 import runBlocking
 import shouldBeFalse
 import shouldBeTrue
 import shouldEqual
 import shouldNotBeEmpty
 import username
-import kotlin.test.Test
-
 
 internal class TestSuiteMultiCluster {
 

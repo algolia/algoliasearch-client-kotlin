@@ -2,9 +2,8 @@ package dsl
 
 import com.algolia.search.dsl.DSLSynonymType
 import com.algolia.search.model.synonym.SynonymType
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLSynonymType {
 

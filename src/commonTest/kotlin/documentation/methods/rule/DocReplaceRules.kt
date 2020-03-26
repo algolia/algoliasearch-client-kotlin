@@ -2,10 +2,9 @@ package documentation.methods.rule
 
 import com.algolia.search.model.rule.Rule
 import documentation.index
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class DocReplaceRules {

@@ -10,10 +10,9 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.places.PlacesQuery
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class DocPlaces {

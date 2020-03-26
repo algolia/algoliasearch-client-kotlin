@@ -5,7 +5,6 @@ import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 import unknown
 
-
 internal class TestACL : TestSerializer<ACL>(ACL) {
 
     override val items = listOf(
