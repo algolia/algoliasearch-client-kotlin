@@ -12,6 +12,7 @@ public interface EndpointRecommendation {
     /**
      * Set a [PersonalizationStrategy] for your application.
      *
+     * @param strategy The personalization strategy
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun setPersonalizationStrategy(
