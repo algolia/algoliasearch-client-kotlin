@@ -1,8 +1,9 @@
+
 import com.android.build.gradle.LibraryExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
-import java.net.URI
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.URI
 
 buildscript {
     repositories {
@@ -36,6 +37,14 @@ repositories {
 
 version = Library.version
 group = Library.group
+
+allprojects {
+    tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>> {
+        kotlinOptions {
+            freeCompilerArgs = listOfNotNull("-Xopt-in=kotlin.RequiresOptIn")
+        }
+    }
+}
 
 extensions.getByType(LibraryExtension::class.java).apply {
     compileSdkVersion(29)
