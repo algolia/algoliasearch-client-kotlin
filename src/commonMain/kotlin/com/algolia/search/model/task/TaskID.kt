@@ -7,7 +7,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.LongSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * This is a numeric value (up to 64bits) used to identify a [Task].
@@ -22,7 +22,7 @@ public data class TaskID(override val raw: Long) : Raw<Long> {
 
     companion object : KSerializer<TaskID> {
 
-        private val serializer = LongSerializer
+        private val serializer = Long.serializer()
 
         override val descriptor = serializer.descriptor
 

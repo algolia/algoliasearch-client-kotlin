@@ -3,25 +3,20 @@ package com.algolia.search.serialize
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Facet
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.internal.HashMapClassDesc
-import kotlinx.serialization.internal.HashMapSerializer
-import kotlinx.serialization.internal.IntSerializer
+import kotlinx.serialization.*
+import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
 
 public object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
 
-    override val descriptor = HashMapClassDesc(
-        Attribute.descriptor,
-        HashMapClassDesc(
-            String.serializer().descriptor,
-            IntSerializer.descriptor
-        )
-    )
+    override val descriptor = SerialDescriptor(Attribute.descriptor.serialName, StructureKind.MAP) {
+        mapDescriptor(String.serializer().descriptor, Int.serializer().descriptor)
+    }
 
-    private val serializer = HashMapSerializer(String.serializer(), HashMapSerializer(String.serializer(), IntSerializer))
+    private val serializer = MapSerializer(
+        String.serializer(),
+        MapSerializer(String.serializer(), Int.serializer())
+    )
 
     override fun serialize(encoder: Encoder, obj: Map<Attribute, List<Facet>>) {
         val element = obj.map { (key, value) -> key.raw to value.map { it.value to it.count }.toMap() }.toMap()

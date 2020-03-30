@@ -5,8 +5,8 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.list
 
 /**
  * A set of geo-coordinates [latitude] and [longitude].

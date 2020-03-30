@@ -16,9 +16,9 @@ import com.algolia.search.serialize.KeySynonym
 import com.algolia.search.serialize.KeySynonyms
 import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.KeyWord
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.json
-import kotlinx.serialization.list
 import serialize.TestSerializer
 import unknown
 

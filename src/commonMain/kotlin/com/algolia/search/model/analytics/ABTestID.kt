@@ -6,7 +6,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.LongSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * ID of an [ABTest].
@@ -20,7 +20,7 @@ public data class ABTestID(override val raw: Long) : Raw<Long> {
 
     companion object : KSerializer<ABTestID> {
 
-        private val serializer = LongSerializer
+        private val serializer = Long.serializer()
 
         override val descriptor = serializer.descriptor
 

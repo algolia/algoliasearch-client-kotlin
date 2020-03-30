@@ -4,13 +4,12 @@ import com.algolia.search.model.search.Facet
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.internal.ArrayListClassDesc
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
 public object KSerializerFacetList : KSerializer<List<Facet>> {
 
-    override val descriptor = ArrayListClassDesc(Facet.serializer().descriptor)
+    override val descriptor = Facet.serializer().descriptor
 
     override fun serialize(encoder: Encoder, obj: List<Facet>) {
         val json = jsonArray {

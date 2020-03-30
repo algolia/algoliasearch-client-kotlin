@@ -20,8 +20,8 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import kotlin.test.Test
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
-import kotlinx.serialization.list
 import runBlocking
 import shouldBeNull
 import shouldBeTrue

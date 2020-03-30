@@ -38,9 +38,9 @@ import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlin.random.Random
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
-import kotlinx.serialization.list
 
 internal class EndpointIndexingImpl(
     private val transport: Transport,

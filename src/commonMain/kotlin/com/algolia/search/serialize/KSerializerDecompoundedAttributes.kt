@@ -7,13 +7,13 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialDescriptor
-import kotlinx.serialization.internal.HashMapSerializer
+import kotlinx.serialization.builtins.MapSerializer
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.json
-import kotlinx.serialization.list
 
 public object KSerializerDecompoundedAttributes : KSerializer<List<DecompoundedAttributes>> {
 
-    private val serializer = HashMapSerializer(Language, Attribute.list)
+    private val serializer = MapSerializer(Language, Attribute.list)
 
     override val descriptor: SerialDescriptor = serializer.descriptor
 

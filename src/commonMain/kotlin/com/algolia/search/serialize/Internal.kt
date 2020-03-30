@@ -75,7 +75,13 @@ internal fun RequestAPIKey.stringify(): String {
 
 internal val Json = Json(JsonConfiguration.Stable.copy())
 internal val JsonNoDefaults = Json(JsonConfiguration.Stable.copy(encodeDefaults = false))
-internal val JsonNonStrict = Json(JsonConfiguration.Stable.copy(strictMode = false))
+internal val JsonNonStrict = Json(
+    JsonConfiguration.Stable.copy(
+        ignoreUnknownKeys = true,
+        isLenient = true,
+        serializeSpecialFloatingPointValues = true
+    )
+)
 internal val JsonDebug = Json(JsonConfiguration.Stable.copy(prettyPrint = true, indent = "  ", encodeDefaults = false))
 
 internal fun List<IndexQuery>.toBody(strategy: MultipleQueriesStrategy?): String {

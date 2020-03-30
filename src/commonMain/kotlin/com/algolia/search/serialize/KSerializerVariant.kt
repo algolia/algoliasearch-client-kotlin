@@ -6,12 +6,12 @@ import com.algolia.search.model.search.Query
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.internal.SerialClassDescImpl
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.json.json
 
 public object KSerializerVariant : KSerializer<Variant> {
 
-    override val descriptor = SerialClassDescImpl("variant")
+    override val descriptor = SerialDescriptor("variant")
 
     override fun serialize(encoder: Encoder, obj: Variant) {
         val json = json {

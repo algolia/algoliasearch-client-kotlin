@@ -8,10 +8,10 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.list
 
 @Serializable(RemoveStopWords.Companion::class)
 public sealed class RemoveStopWords {

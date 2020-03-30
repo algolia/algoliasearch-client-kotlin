@@ -3,8 +3,8 @@ package com.algolia.search.serialize
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.HighlightResult
 import com.algolia.search.model.search.SnippetResult
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.list
 
 /**
  * Convenience method.

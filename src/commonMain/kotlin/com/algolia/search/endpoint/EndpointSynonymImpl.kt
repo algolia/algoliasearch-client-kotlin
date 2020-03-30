@@ -20,7 +20,7 @@ import com.algolia.search.serialize.RouteSynonyms
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.list
+import kotlinx.serialization.builtins.list
 
 internal class EndpointSynonymImpl(
     private val transport: Transport,

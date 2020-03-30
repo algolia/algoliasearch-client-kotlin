@@ -4,9 +4,9 @@ import clientAdmin1
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.JsonDebug
+import kotlinx.serialization.builtins.list
 import kotlin.test.Test
 import kotlinx.serialization.json.JsonObjectSerializer
-import kotlinx.serialization.list
 import loadScratch
 import runBlocking
 import shouldEqual

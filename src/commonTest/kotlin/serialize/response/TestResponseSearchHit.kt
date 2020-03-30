@@ -15,9 +15,9 @@ import com.algolia.search.serialize.Key_DistinctSeqID
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.Key_RankingInfo
 import com.algolia.search.serialize.Key_SnippetResult
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.internal.HashMapSerializer
 import kotlinx.serialization.json.json
-import kotlinx.serialization.list
 import serialize.TestSerializer
 import serialize.search.TestHighlightResult
 import unknown
