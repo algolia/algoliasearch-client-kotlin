@@ -12,7 +12,7 @@ import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.json.content
-import kotlinx.serialization.list
+import kotlinx.serialization.builtins.list
 import org.junit.Ignore
 import org.junit.Test
 

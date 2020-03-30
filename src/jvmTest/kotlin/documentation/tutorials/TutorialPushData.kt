@@ -9,7 +9,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.json.JsonObjectSerializer
-import kotlinx.serialization.list
+import kotlinx.serialization.builtins.list
 import org.junit.Ignore
 import org.junit.Test
 
