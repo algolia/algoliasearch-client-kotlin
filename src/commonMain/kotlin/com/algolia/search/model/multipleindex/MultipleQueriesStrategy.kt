@@ -9,7 +9,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * The strategy used by [EndpointMultipleIndex.multipleQueries].
@@ -38,7 +38,7 @@ public sealed class MultipleQueriesStrategy(override val raw: String) : Raw<Stri
 
     companion object : KSerializer<MultipleQueriesStrategy> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 

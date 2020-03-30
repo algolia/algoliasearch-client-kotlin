@@ -8,7 +8,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 @Serializable(ExactOnSingleWordQuery.Companion::class)
 public sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<String> {
@@ -41,7 +41,7 @@ public sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<Strin
 
     companion object : KSerializer<ExactOnSingleWordQuery> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 

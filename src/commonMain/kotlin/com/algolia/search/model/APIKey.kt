@@ -7,7 +7,7 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * [APIKey] can't be a blank or empty string.
@@ -26,7 +26,7 @@ public data class APIKey(override val raw: String) : Raw<String> {
     @Serializer(APIKey::class)
     companion object : KSerializer<APIKey> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override fun serialize(encoder: Encoder, obj: APIKey) {
             serializer.serialize(encoder, obj.raw)

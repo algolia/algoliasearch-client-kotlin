@@ -19,7 +19,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 @Serializable(RankingCriterion.Companion::class)
 public sealed class RankingCriterion(override val raw: String) : Raw<String> {
@@ -122,7 +122,7 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<RankingCriterion> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 

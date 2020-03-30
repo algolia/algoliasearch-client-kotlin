@@ -9,7 +9,7 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 @Serializable(SearchableAttribute.Companion::class)
 public sealed class SearchableAttribute {
@@ -37,11 +37,11 @@ public sealed class SearchableAttribute {
                 is Default -> obj.attributes.joinToString { it.raw }
                 is Unordered -> "$KeyUnordered(${obj.attribute.raw})"
             }
-            StringSerializer.serialize(encoder, string)
+            String.serializer().serialize(encoder, string)
         }
 
         override fun deserialize(decoder: Decoder): SearchableAttribute {
-            val string = StringSerializer.deserialize(decoder)
+            val string = String.serializer().deserialize(decoder)
             val findUnordered = regexUnordered.find(string)
 
             return when {

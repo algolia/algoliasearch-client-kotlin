@@ -11,7 +11,7 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 @Serializable(AttributeForFaceting.Companion::class)
 public sealed class AttributeForFaceting {
@@ -45,11 +45,11 @@ public sealed class AttributeForFaceting {
                 is FilterOnly -> "$KeyFilterOnly(${obj.attribute.raw})"
                 is Searchable -> "$KeySearchable(${obj.attribute.raw})"
             }
-            StringSerializer.serialize(encoder, string)
+            String.serializer().serialize(encoder, string)
         }
 
         override fun deserialize(decoder: Decoder): AttributeForFaceting {
-            val string = StringSerializer.deserialize(decoder)
+            val string = String.serializer().deserialize(decoder)
             val findFilterOnly = regexFilterOnly.find(string)
             val findSearchable = regexSearchable.find(string)
 

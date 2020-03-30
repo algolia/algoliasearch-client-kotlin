@@ -9,7 +9,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * [ABTest] server-side status.
@@ -43,7 +43,7 @@ public sealed class ABTestStatus(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<ABTestStatus> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 

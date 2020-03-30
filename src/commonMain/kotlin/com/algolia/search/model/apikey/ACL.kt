@@ -18,7 +18,7 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * Permission associated to an [APIKey].
@@ -87,14 +87,14 @@ public sealed class ACL(override val raw: String) : Raw<String> {
     @Serializer(ACL::class)
     companion object : KSerializer<ACL> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override fun serialize(encoder: Encoder, obj: ACL) {
             return serializer.serialize(encoder, obj.raw)
         }
 
         override fun deserialize(decoder: Decoder): ACL {
-            return when (val string = StringSerializer.deserialize(decoder)) {
+            return when (val string = String.serializer().deserialize(decoder)) {
                 KeySearch -> Search
                 KeyBrowse -> Browse
                 KeyAddObject -> AddObject

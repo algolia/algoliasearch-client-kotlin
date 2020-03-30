@@ -10,8 +10,8 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.internal.BooleanSerializer
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.content
@@ -56,9 +56,9 @@ public sealed class TypoTolerance(override val raw: String) : Raw<String> {
 
         override fun serialize(encoder: Encoder, obj: TypoTolerance) {
             when (obj) {
-                is True -> BooleanSerializer.serialize(encoder, true)
-                is False -> BooleanSerializer.serialize(encoder, false)
-                else -> StringSerializer.serialize(encoder, obj.raw)
+                is True -> Boolean.serializer().serialize(encoder, true)
+                is False -> Boolean.serializer().serialize(encoder, false)
+                else -> String.serializer().serialize(encoder, obj.raw)
             }
         }
 

@@ -9,7 +9,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * Unique identifier for a [Query]. Returned by [ResponseSearch] and used by [EndpointInsightsUser]
@@ -27,7 +27,7 @@ public data class QueryID(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<QueryID> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 

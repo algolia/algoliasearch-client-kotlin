@@ -8,7 +8,7 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.internal.BooleanSerializer
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.list
@@ -42,8 +42,8 @@ public sealed class IgnorePlurals {
 
         override fun serialize(encoder: Encoder, obj: IgnorePlurals) {
             when (obj) {
-                is True -> BooleanSerializer.serialize(encoder, true)
-                is False -> BooleanSerializer.serialize(encoder, false)
+                is True -> Boolean.serializer().serialize(encoder, true)
+                is False -> Boolean.serializer().serialize(encoder, false)
                 is QueryLanguages -> Language.list.serialize(encoder, obj.queryLanguages)
             }
         }

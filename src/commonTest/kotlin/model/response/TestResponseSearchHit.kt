@@ -5,7 +5,7 @@ import attributeB
 import com.algolia.search.model.response.ResponseSearch
 import kotlin.test.Test
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.json
 import shouldEqual
 
@@ -25,8 +25,8 @@ internal class TestResponseSearchHit {
         }
         val hit = ResponseSearch.Hit(json)
 
-        hit.getValue(StringSerializer, attributeA) shouldEqual "valueA"
-        hit.getValue(StringSerializer, attributeB) shouldEqual "valueB"
+        hit.getValue(String.serializer(), attributeA) shouldEqual "valueA"
+        hit.getValue(String.serializer(), attributeB) shouldEqual "valueB"
         hit.deserialize(Sample.serializer()) shouldEqual Sample("valueA", "valueB")
     }
 }

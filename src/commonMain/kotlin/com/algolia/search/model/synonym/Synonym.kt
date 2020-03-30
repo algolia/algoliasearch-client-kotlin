@@ -26,7 +26,7 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
@@ -151,12 +151,12 @@ public sealed class Synonym {
                 is MultiWay -> json {
                     KeyObjectID to obj.objectID.raw
                     KeyType to KeySynonym
-                    KeySynonyms to Json.toJson(StringSerializer.list, obj.synonyms)
+                    KeySynonyms to Json.toJson(String.serializer().list, obj.synonyms)
                 }
                 is OneWay -> json {
                     KeyObjectID to obj.objectID.raw
                     KeyType to KeyOneWaySynonym
-                    KeySynonyms to Json.toJson(StringSerializer.list, obj.synonyms)
+                    KeySynonyms to Json.toJson(String.serializer().list, obj.synonyms)
                     KeyInput to obj.input
                 }
                 is AlternativeCorrections -> json {
@@ -166,13 +166,13 @@ public sealed class Synonym {
                         SynonymType.Typo.Two -> KeyAlternativeCorrection2
                     }
                     KeyWord to obj.word
-                    KeyCorrections to Json.toJson(StringSerializer.list, obj.corrections)
+                    KeyCorrections to Json.toJson(String.serializer().list, obj.corrections)
                 }
                 is Placeholder -> json {
                     KeyObjectID to obj.objectID.raw
                     KeyType to KeyPlaceholder
                     KeyPlaceholder to obj.placeholder.raw
-                    KeyReplacements to Json.toJson(StringSerializer.list, obj.replacements)
+                    KeyReplacements to Json.toJson(String.serializer().list, obj.replacements)
                 }
                 is Other -> obj.json
             }

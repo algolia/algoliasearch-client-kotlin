@@ -7,7 +7,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * [EventName] of an [InsightsEvent]. Can't be a blank or empty string.
@@ -22,7 +22,7 @@ public data class EventName(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<EventName> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 

@@ -9,19 +9,19 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.internal.HashMapClassDesc
 import kotlinx.serialization.internal.HashMapSerializer
 import kotlinx.serialization.internal.IntSerializer
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 public object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
 
     override val descriptor = HashMapClassDesc(
         Attribute.descriptor,
         HashMapClassDesc(
-            StringSerializer.descriptor,
+            String.serializer().descriptor,
             IntSerializer.descriptor
         )
     )
 
-    private val serializer = HashMapSerializer(StringSerializer, HashMapSerializer(StringSerializer, IntSerializer))
+    private val serializer = HashMapSerializer(String.serializer(), HashMapSerializer(String.serializer(), IntSerializer))
 
     override fun serialize(encoder: Encoder, obj: Map<Attribute, List<Facet>>) {
         val element = obj.map { (key, value) -> key.raw to value.map { it.value to it.count }.toMap() }.toMap()

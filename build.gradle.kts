@@ -16,8 +16,8 @@ buildscript {
 }
 
 plugins {
-    id("kotlin-multiplatform") version "1.3.60"
-    id("kotlinx-serialization") version "1.3.60"
+    id("kotlin-multiplatform") version "1.3.71"
+    id("kotlinx-serialization") version "1.3.71"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
     id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.5"
