@@ -42,8 +42,8 @@ public sealed class MultipleQueriesStrategy(override val raw: String) : Raw<Stri
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: MultipleQueriesStrategy) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: MultipleQueriesStrategy) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): MultipleQueriesStrategy {

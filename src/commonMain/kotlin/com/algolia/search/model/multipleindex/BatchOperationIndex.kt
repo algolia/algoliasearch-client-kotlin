@@ -33,10 +33,10 @@ public data class BatchOperationIndex(
     @Serializer(BatchOperationIndex::class)
     companion object : KSerializer<BatchOperationIndex> {
 
-        override fun serialize(encoder: Encoder, obj: BatchOperationIndex) {
+        override fun serialize(encoder: Encoder, value: BatchOperationIndex) {
             val elements =
-                Json.toJson(BatchOperation, obj.operation).jsonObject.content.toMutableMap().also {
-                    it[KeyIndexName] = JsonLiteral(obj.indexName.raw)
+                Json.toJson(BatchOperation, value.operation).jsonObject.content.toMutableMap().also {
+                    it[KeyIndexName] = JsonLiteral(value.indexName.raw)
                 }
 
             encoder.asJsonOutput().encodeJson(JsonObject(elements))

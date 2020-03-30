@@ -39,8 +39,8 @@ public sealed class EventType(override val raw: String) : Raw<String> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: EventType) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: EventType) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): EventType {

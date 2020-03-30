@@ -522,8 +522,8 @@ sealed class Country(override val raw: String) : Raw<String> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: Country) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: Country) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): Country {

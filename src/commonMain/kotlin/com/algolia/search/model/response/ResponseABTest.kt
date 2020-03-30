@@ -76,18 +76,18 @@ public data class ResponseABTest(
     @Serializer(ResponseABTest::class)
     companion object : KSerializer<ResponseABTest> {
 
-        override fun serialize(encoder: Encoder, obj: ResponseABTest) {
+        override fun serialize(encoder: Encoder, value: ResponseABTest) {
             val json = json {
-                KeyABTestID to obj.abTestID.raw
-                KeyCreatedAt to obj.createdAt
-                KeyEndAt to obj.endAt.raw
-                KeyName to obj.name
-                KeyStatus to obj.status.raw
-                obj.conversionSignificanceOrNull?.let { KeyConversionSignificance to it }
-                obj.clickSignificanceOrNull?.let { KeyClickSignificance to it }
+                KeyABTestID to value.abTestID.raw
+                KeyCreatedAt to value.createdAt
+                KeyEndAt to value.endAt.raw
+                KeyName to value.name
+                KeyStatus to value.status.raw
+                value.conversionSignificanceOrNull?.let { KeyConversionSignificance to it }
+                value.clickSignificanceOrNull?.let { KeyClickSignificance to it }
                 KeyVariants to jsonArray {
-                    +JsonNoDefaults.toJson(ResponseVariant.serializer(), obj.variantA)
-                    +JsonNoDefaults.toJson(ResponseVariant.serializer(), obj.variantB)
+                    +JsonNoDefaults.toJson(ResponseVariant.serializer(), value.variantA)
+                    +JsonNoDefaults.toJson(ResponseVariant.serializer(), value.variantB)
                 }
             }
 

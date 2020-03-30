@@ -18,8 +18,8 @@ public object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
         MapSerializer(String.serializer(), Int.serializer())
     )
 
-    override fun serialize(encoder: Encoder, obj: Map<Attribute, List<Facet>>) {
-        val element = obj.map { (key, value) -> key.raw to value.map { it.value to it.count }.toMap() }.toMap()
+    override fun serialize(encoder: Encoder, value: Map<Attribute, List<Facet>>) {
+        val element = value.map { (key, value) -> key.raw to value.map { it.value to it.count }.toMap() }.toMap()
 
         serializer.serialize(encoder, element)
     }

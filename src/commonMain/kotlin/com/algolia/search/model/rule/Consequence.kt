@@ -111,19 +111,19 @@ public data class Consequence(
             ) else null
         }
 
-        override fun serialize(encoder: Encoder, obj: Consequence) {
+        override fun serialize(encoder: Encoder, value: Consequence) {
             val params = mutableMapOf<String, JsonElement>().apply {
-                putFilters(KeyAutomaticFacetFilters, obj.automaticFacetFilters)
-                putFilters(KeyAutomaticOptionalFacetFilters, obj.automaticOptionalFacetFilters)
-                obj.query?.toJsonNoDefaults()?.let { putAll(it.content) }
-                if (obj.edits != null) put(KeyQuery, json { KeyEdits to JsonNoDefaults.toJson(Edit.list, obj.edits) })
+                putFilters(KeyAutomaticFacetFilters, value.automaticFacetFilters)
+                putFilters(KeyAutomaticOptionalFacetFilters, value.automaticOptionalFacetFilters)
+                value.query?.toJsonNoDefaults()?.let { putAll(it.content) }
+                if (value.edits != null) put(KeyQuery, json { KeyEdits to JsonNoDefaults.toJson(Edit.list, value.edits) })
             }
             val json = json {
                 if (params.isNotEmpty()) KeyParams to JsonObject(params)
-                obj.promote?.let { KeyPromote to JsonNoDefaults.toJson(Promotion.serializer().list, it) }
-                obj.hide?.let { KeyHide to JsonNoDefaults.toJson(KSerializerObjectIDs, it) }
-                obj.userData?.let { KeyUserData to it }
-                obj.filterPromotes?.let { KeyFilterPromotes to it }
+                value.promote?.let { KeyPromote to JsonNoDefaults.toJson(Promotion.serializer().list, it) }
+                value.hide?.let { KeyHide to JsonNoDefaults.toJson(KSerializerObjectIDs, it) }
+                value.userData?.let { KeyUserData to it }
+                value.filterPromotes?.let { KeyFilterPromotes to it }
             }
 
             encoder.asJsonOutput().encodeJson(json)

@@ -53,8 +53,8 @@ public sealed class SynonymType(override val raw: String) : Raw<String> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: SynonymType) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: SynonymType) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): SynonymType {

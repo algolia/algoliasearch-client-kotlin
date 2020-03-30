@@ -28,8 +28,8 @@ public data class APIKey(override val raw: String) : Raw<String> {
 
         private val serializer = String.serializer()
 
-        override fun serialize(encoder: Encoder, obj: APIKey) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: APIKey) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): APIKey {

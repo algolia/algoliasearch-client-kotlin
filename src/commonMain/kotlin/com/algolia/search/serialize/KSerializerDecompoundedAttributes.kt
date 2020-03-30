@@ -28,9 +28,9 @@ public object KSerializerDecompoundedAttributes : KSerializer<List<DecompoundedA
         }
     }
 
-    override fun serialize(encoder: Encoder, obj: List<DecompoundedAttributes>) {
+    override fun serialize(encoder: Encoder, value: List<DecompoundedAttributes>) {
         val json = json {
-            obj.forEach {
+            value.forEach {
                 it.language.raw to Json.toJson(Attribute.list, it.attributes)
             }
         }

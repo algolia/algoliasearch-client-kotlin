@@ -25,8 +25,8 @@ public data class Distinct(val count: Int) {
 
         override val descriptor = Int.serializer().descriptor
 
-        override fun serialize(encoder: Encoder, obj: Distinct) {
-            encoder.asJsonOutput().encodeJson(JsonLiteral(obj.count))
+        override fun serialize(encoder: Encoder, value: Distinct) {
+            encoder.asJsonOutput().encodeJson(JsonLiteral(value.count))
         }
 
         override fun deserialize(decoder: Decoder): Distinct {

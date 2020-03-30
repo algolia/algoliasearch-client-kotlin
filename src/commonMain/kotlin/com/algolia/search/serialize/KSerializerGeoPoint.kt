@@ -11,10 +11,10 @@ public object KSerializerGeoPoint : KSerializer<Point> {
 
     override val descriptor = SerialDescriptor("point")
 
-    override fun serialize(encoder: Encoder, obj: Point) {
+    override fun serialize(encoder: Encoder, value: Point) {
         val json = json {
-            KeyLat to obj.latitude
-            KeyLng to obj.longitude
+            KeyLat to value.latitude
+            KeyLng to value.longitude
         }
 
         encoder.asJsonOutput().encodeJson(json)

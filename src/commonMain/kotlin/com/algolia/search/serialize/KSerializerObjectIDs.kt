@@ -12,9 +12,9 @@ public object KSerializerObjectIDs : KSerializer<List<ObjectID>> {
 
     override val descriptor = ObjectID.descriptor
 
-    override fun serialize(encoder: Encoder, obj: List<ObjectID>) {
+    override fun serialize(encoder: Encoder, value: List<ObjectID>) {
         val json = jsonArray {
-            obj.forEach {
+            value.forEach {
                 +json { KeyObjectID to it.raw }
             }
         }

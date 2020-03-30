@@ -13,6 +13,7 @@ import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
+import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 import kotlinx.serialization.json.JsonElementSerializer
@@ -41,6 +42,7 @@ internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     }
 }
 
+@OptIn(UnstableDefault::class)
 internal fun JsonObject.urlEncode(): String? {
     return if (isNotEmpty()) {
         Parameters.build {

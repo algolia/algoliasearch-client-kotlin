@@ -11,9 +11,9 @@ public object KSerializerFacetList : KSerializer<List<Facet>> {
 
     override val descriptor = Facet.serializer().descriptor
 
-    override fun serialize(encoder: Encoder, obj: List<Facet>) {
+    override fun serialize(encoder: Encoder, value: List<Facet>) {
         val json = jsonArray {
-            obj.map {
+            value.map {
                 +json {
                     KeyValue to it.value
                     KeyCount to it.count

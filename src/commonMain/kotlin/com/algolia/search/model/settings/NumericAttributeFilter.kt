@@ -36,8 +36,8 @@ public data class NumericAttributeFilter(
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: NumericAttributeFilter) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: NumericAttributeFilter) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): NumericAttributeFilter {

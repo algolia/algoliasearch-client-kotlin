@@ -40,11 +40,11 @@ public sealed class IgnorePlurals {
     @Serializer(IgnorePlurals::class)
     companion object : KSerializer<IgnorePlurals> {
 
-        override fun serialize(encoder: Encoder, obj: IgnorePlurals) {
-            when (obj) {
+        override fun serialize(encoder: Encoder, value: IgnorePlurals) {
+            when (value) {
                 is True -> Boolean.serializer().serialize(encoder, true)
                 is False -> Boolean.serializer().serialize(encoder, false)
-                is QueryLanguages -> Language.list.serialize(encoder, obj.queryLanguages)
+                is QueryLanguages -> Language.list.serialize(encoder, value.queryLanguages)
             }
         }
 

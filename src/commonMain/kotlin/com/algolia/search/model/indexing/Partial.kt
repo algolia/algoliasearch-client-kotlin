@@ -118,8 +118,8 @@ public sealed class Partial {
     @Serializer(Partial::class)
     companion object : KSerializer<Partial> {
 
-        override fun serialize(encoder: Encoder, obj: Partial) {
-            val key = when (obj) {
+        override fun serialize(encoder: Encoder, value: Partial) {
+            val key = when (value) {
                 is Update -> null
                 is Increment -> KeyIncrement
                 is Decrement -> KeyDecrement
@@ -128,9 +128,9 @@ public sealed class Partial {
                 is AddUnique -> KeyAddUnique
             }
             val json = json {
-                obj.attribute.raw to json {
+                value.attribute.raw to json {
                     key?.let { Key_Operation to key }
-                    KeyValue to obj.value
+                    KeyValue to value.value
                 }
             }
             encoder.asJsonOutput().encodeJson(json)

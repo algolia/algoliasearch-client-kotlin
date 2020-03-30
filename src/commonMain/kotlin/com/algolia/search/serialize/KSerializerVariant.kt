@@ -13,11 +13,11 @@ public object KSerializerVariant : KSerializer<Variant> {
 
     override val descriptor = SerialDescriptor("variant")
 
-    override fun serialize(encoder: Encoder, obj: Variant) {
+    override fun serialize(encoder: Encoder, value: Variant) {
         val json = json {
-            KeyIndexName to obj.indexName.raw
-            KeyPercentage to obj.trafficPercentage
-            obj.customSearchParameters?.let {
+            KeyIndexName to value.indexName.raw
+            KeyPercentage to value.trafficPercentage
+            value.customSearchParameters?.let {
                 KeyCustomSearchParameters to JsonNoDefaults.toJson(Query.serializer(), it)
             }
         }

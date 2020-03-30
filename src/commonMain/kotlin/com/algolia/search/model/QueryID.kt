@@ -31,8 +31,8 @@ public data class QueryID(override val raw: String) : Raw<String> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: QueryID) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: QueryID) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): QueryID {

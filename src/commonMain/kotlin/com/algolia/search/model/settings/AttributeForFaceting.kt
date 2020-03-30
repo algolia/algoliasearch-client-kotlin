@@ -39,11 +39,11 @@ public sealed class AttributeForFaceting {
     @Serializer(AttributeForFaceting::class)
     companion object : KSerializer<AttributeForFaceting> {
 
-        override fun serialize(encoder: Encoder, obj: AttributeForFaceting) {
-            val string = when (obj) {
-                is Default -> obj.attribute.raw
-                is FilterOnly -> "$KeyFilterOnly(${obj.attribute.raw})"
-                is Searchable -> "$KeySearchable(${obj.attribute.raw})"
+        override fun serialize(encoder: Encoder, value: AttributeForFaceting) {
+            val string = when (value) {
+                is Default -> value.attribute.raw
+                is FilterOnly -> "$KeyFilterOnly(${value.attribute.raw})"
+                is Searchable -> "$KeySearchable(${value.attribute.raw})"
             }
             String.serializer().serialize(encoder, string)
         }

@@ -41,8 +41,8 @@ public data class IndexName(
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: IndexName) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: IndexName) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): IndexName {

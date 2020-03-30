@@ -41,8 +41,8 @@ public sealed class CustomRankingCriterion(override val raw: String) : Raw<Strin
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: CustomRankingCriterion) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: CustomRankingCriterion) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): CustomRankingCriterion {

@@ -28,8 +28,8 @@ public sealed class Pattern(override val raw: String) : Raw<String> {
 
         override val descriptor = String.serializer().descriptor
 
-        override fun serialize(encoder: Encoder, obj: Pattern) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: Pattern) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): Pattern {

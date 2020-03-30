@@ -32,10 +32,10 @@ public sealed class SearchableAttribute {
     @Serializer(SearchableAttribute::class)
     companion object : KSerializer<SearchableAttribute> {
 
-        override fun serialize(encoder: Encoder, obj: SearchableAttribute) {
-            val string = when (obj) {
-                is Default -> obj.attributes.joinToString { it.raw }
-                is Unordered -> "$KeyUnordered(${obj.attribute.raw})"
+        override fun serialize(encoder: Encoder, value: SearchableAttribute) {
+            val string = when (value) {
+                is Default -> value.attributes.joinToString { it.raw }
+                is Unordered -> "$KeyUnordered(${value.attribute.raw})"
             }
             String.serializer().serialize(encoder, string)
         }

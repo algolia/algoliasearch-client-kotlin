@@ -27,8 +27,8 @@ public data class BoundingBox(
 
         override val descriptor = serializer.list.descriptor
 
-        override fun serialize(encoder: Encoder, obj: BoundingBox) {
-            serializer.list.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: BoundingBox) {
+            serializer.list.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): BoundingBox {

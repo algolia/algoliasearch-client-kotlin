@@ -14,8 +14,8 @@ public object KSerializerClientDate : KSerializer<ClientDate> {
 
     override val descriptor = serializer.descriptor
 
-    override fun serialize(encoder: Encoder, obj: ClientDate) {
-        serializer.serialize(encoder, obj.raw)
+    override fun serialize(encoder: Encoder, value: ClientDate) {
+        serializer.serialize(encoder, value.raw)
     }
 
     override fun deserialize(decoder: Decoder): ClientDate {

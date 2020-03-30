@@ -26,8 +26,8 @@ public data class EventName(override val raw: String) : Raw<String> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: EventName) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: EventName) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): EventName {

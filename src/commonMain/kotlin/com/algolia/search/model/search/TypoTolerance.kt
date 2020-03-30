@@ -54,11 +54,11 @@ public sealed class TypoTolerance(override val raw: String) : Raw<String> {
     @Serializer(TypoTolerance::class)
     companion object : KSerializer<TypoTolerance> {
 
-        override fun serialize(encoder: Encoder, obj: TypoTolerance) {
-            when (obj) {
+        override fun serialize(encoder: Encoder, value: TypoTolerance) {
+            when (value) {
                 is True -> Boolean.serializer().serialize(encoder, true)
                 is False -> Boolean.serializer().serialize(encoder, false)
-                else -> String.serializer().serialize(encoder, obj.raw)
+                else -> String.serializer().serialize(encoder, value.raw)
             }
         }
 

@@ -26,8 +26,8 @@ public sealed class AdvancedSyntaxFeatures(override val raw: String) : Raw<Strin
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: AdvancedSyntaxFeatures) {
-            return serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: AdvancedSyntaxFeatures) {
+            return serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): AdvancedSyntaxFeatures {

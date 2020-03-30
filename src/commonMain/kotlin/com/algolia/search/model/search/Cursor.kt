@@ -27,8 +27,8 @@ public data class Cursor(
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: Cursor) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: Cursor) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): Cursor {

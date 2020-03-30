@@ -30,8 +30,8 @@ public data class ObjectID(@SerialName(KeyObjectID) override val raw: String) : 
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: ObjectID) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: ObjectID) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): ObjectID {

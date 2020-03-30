@@ -40,10 +40,10 @@ public data class ResponseBatches(
     @Serializer(ResponseBatches::class)
     companion object : KSerializer<ResponseBatches> {
 
-        override fun serialize(encoder: Encoder, obj: ResponseBatches) {
+        override fun serialize(encoder: Encoder, value: ResponseBatches) {
             val json = json {
-                KeyTaskID to json { obj.tasks.forEach { it.indexName.raw to it.taskID.raw } }
-                KeyObjectIDs to obj.objectIDsOrNull?.let { jsonArray { it.forEach { +it?.raw } } }
+                KeyTaskID to json { value.tasks.forEach { it.indexName.raw to it.taskID.raw } }
+                KeyObjectIDs to value.objectIDsOrNull?.let { jsonArray { it.forEach { +it?.raw } } }
             }
 
             encoder.asJsonOutput().encodeJson(json)

@@ -44,8 +44,8 @@ public sealed class LogType(override val raw: String) : Raw<String> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: LogType) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: LogType) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): LogType {

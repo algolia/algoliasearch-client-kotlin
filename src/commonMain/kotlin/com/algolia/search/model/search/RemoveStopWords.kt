@@ -40,11 +40,11 @@ public sealed class RemoveStopWords {
     @Serializer(RemoveStopWords::class)
     companion object : KSerializer<RemoveStopWords> {
 
-        override fun serialize(encoder: Encoder, obj: RemoveStopWords) {
-            when (obj) {
+        override fun serialize(encoder: Encoder, value: RemoveStopWords) {
+            when (value) {
                 is True -> Boolean.serializer().serialize(encoder, true)
                 is False -> Boolean.serializer().serialize(encoder, false)
-                is QueryLanguages -> Language.list.serialize(encoder, obj.queryLanguages)
+                is QueryLanguages -> Language.list.serialize(encoder, value.queryLanguages)
             }
         }
 

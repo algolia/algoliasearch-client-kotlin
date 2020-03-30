@@ -44,8 +44,8 @@ public sealed class QueryType(override val raw: String) : Raw<String> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: QueryType) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: QueryType) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): QueryType {

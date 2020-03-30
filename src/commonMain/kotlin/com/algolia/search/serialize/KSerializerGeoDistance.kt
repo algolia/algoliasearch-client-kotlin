@@ -12,9 +12,9 @@ typealias GeoDistance = Int
 public object KSerializerGeoDistance : KSerializer<GeoDistance> {
     override val descriptor = SerialDescriptor("GeoDistance")
 
-    override fun serialize(encoder: Encoder, obj: GeoDistance) {
+    override fun serialize(encoder: Encoder, value: GeoDistance) {
         try {
-            encoder.encodeInt(obj)
+            encoder.encodeInt(value)
         } catch (e: Exception) {
             encoder.encodeInt(-1)
         }

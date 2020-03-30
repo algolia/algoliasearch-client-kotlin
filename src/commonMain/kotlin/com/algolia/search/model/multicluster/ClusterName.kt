@@ -24,8 +24,8 @@ public data class ClusterName(override val raw: String) : Raw<String> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: ClusterName) {
-            String.serializer().serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: ClusterName) {
+            String.serializer().serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): ClusterName {

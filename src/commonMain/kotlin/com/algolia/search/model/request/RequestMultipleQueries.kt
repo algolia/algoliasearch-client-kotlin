@@ -26,17 +26,17 @@ internal class RequestMultipleQueries(
     @Serializer(RequestMultipleQueries::class)
     companion object : SerializationStrategy<RequestMultipleQueries> {
 
-        override fun serialize(encoder: Encoder, obj: RequestMultipleQueries) {
+        override fun serialize(encoder: Encoder, value: RequestMultipleQueries) {
             val json = json {
                 KeyRequests to jsonArray {
-                    obj.indexQueries.forEach {
+                    value.indexQueries.forEach {
                         +json {
                             KeyIndexName to it.indexName.raw
                             it.query.toJsonNoDefaults().urlEncode()?.let { KeyParams to it }
                         }
                     }
                 }
-                obj.strategy?.let { KeyStrategy to it.raw }
+                value.strategy?.let { KeyStrategy to it.raw }
             }
             encoder.asJsonOutput().encodeJson(json)
         }

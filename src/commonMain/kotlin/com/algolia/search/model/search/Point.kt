@@ -25,8 +25,8 @@ public data class Point(
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: Point) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: Point) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): Point {

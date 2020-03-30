@@ -17,8 +17,8 @@ public sealed class Alternatives {
     @Serializer(Alternatives::class)
     companion object : KSerializer<Alternatives> {
 
-        override fun serialize(encoder: Encoder, obj: Alternatives) {
-            when (obj) {
+        override fun serialize(encoder: Encoder, value: Alternatives) {
+            when (value) {
                 is Alternatives.True -> Boolean.serializer().serialize(encoder, true)
                 is Alternatives.False -> Boolean.serializer().serialize(encoder, false)
             }

@@ -42,13 +42,13 @@ public data class ABTest(
     @Serializer(ABTest::class)
     companion object : KSerializer<ABTest> {
 
-        override fun serialize(encoder: Encoder, obj: ABTest) {
+        override fun serialize(encoder: Encoder, value: ABTest) {
             val json = json {
-                KeyName to obj.name
-                KeyEndAt to obj.endAt.raw
+                KeyName to value.name
+                KeyEndAt to value.endAt.raw
                 KeyVariants to jsonArray {
-                    +JsonNoDefaults.toJson(Variant.serializer(), obj.variantA)
-                    +JsonNoDefaults.toJson(Variant.serializer(), obj.variantB)
+                    +JsonNoDefaults.toJson(Variant.serializer(), value.variantA)
+                    +JsonNoDefaults.toJson(Variant.serializer(), value.variantB)
                 }
             }
 

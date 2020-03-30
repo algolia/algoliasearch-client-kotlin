@@ -49,8 +49,8 @@ public data class Polygon(
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: Polygon) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: Polygon) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): Polygon {

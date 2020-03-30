@@ -51,8 +51,8 @@ public sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: RemoveWordIfNoResults) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: RemoveWordIfNoResults) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): RemoveWordIfNoResults {

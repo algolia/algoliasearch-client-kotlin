@@ -24,8 +24,8 @@ public data class ABTestID(override val raw: Long) : Raw<Long> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: ABTestID) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: ABTestID) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): ABTestID {

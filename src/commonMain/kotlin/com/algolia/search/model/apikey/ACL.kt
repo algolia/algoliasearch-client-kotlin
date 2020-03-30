@@ -89,8 +89,8 @@ public sealed class ACL(override val raw: String) : Raw<String> {
 
         private val serializer = String.serializer()
 
-        override fun serialize(encoder: Encoder, obj: ACL) {
-            return serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: ACL) {
+            return serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): ACL {

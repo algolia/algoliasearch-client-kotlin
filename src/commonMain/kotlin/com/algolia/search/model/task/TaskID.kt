@@ -26,8 +26,8 @@ public data class TaskID(override val raw: Long) : Raw<Long> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: TaskID) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: TaskID) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): TaskID {

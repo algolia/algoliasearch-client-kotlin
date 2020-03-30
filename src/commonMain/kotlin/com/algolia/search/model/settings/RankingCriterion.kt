@@ -126,8 +126,8 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: RankingCriterion) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: RankingCriterion) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): RankingCriterion {

@@ -36,8 +36,8 @@ public data class Snippet(
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: Snippet) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: Snippet) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): Snippet {

@@ -37,8 +37,8 @@ public sealed class MatchLevel(override val raw: String) : Raw<String> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: MatchLevel) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: MatchLevel) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): MatchLevel {

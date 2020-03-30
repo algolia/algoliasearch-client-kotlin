@@ -37,8 +37,8 @@ public data class Attribute(override val raw: String) : Raw<String> {
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: Attribute) {
-            String.serializer().serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: Attribute) {
+            String.serializer().serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): Attribute {
