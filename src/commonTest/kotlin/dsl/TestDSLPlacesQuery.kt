@@ -2,9 +2,8 @@ package dsl
 
 import com.algolia.search.dsl.countries
 import com.algolia.search.dsl.placesQuery
-import shouldNotBeNull
 import kotlin.test.Test
-
+import shouldNotBeNull
 
 internal class TestDSLPlacesQuery {
 

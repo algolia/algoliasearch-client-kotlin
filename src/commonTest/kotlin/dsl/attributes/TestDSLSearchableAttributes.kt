@@ -4,9 +4,8 @@ import attributeA
 import attributeB
 import com.algolia.search.dsl.attributes.DSLSearchableAttributes
 import com.algolia.search.model.settings.SearchableAttribute
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLSearchableAttributes {
 

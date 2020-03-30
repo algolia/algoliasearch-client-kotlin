@@ -1,10 +1,9 @@
 package dsl
 
 import com.algolia.search.dsl.DSLStrings
+import kotlin.test.Test
 import shouldEqual
 import unknown
-import kotlin.test.Test
-
 
 internal class TestDSLStrings {
 

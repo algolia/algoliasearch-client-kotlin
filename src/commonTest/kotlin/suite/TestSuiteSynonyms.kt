@@ -9,6 +9,7 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
+import kotlin.test.Test
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.list
 import runBlocking
@@ -16,9 +17,6 @@ import shouldBeTrue
 import shouldContain
 import shouldEqual
 import shouldFailWith
-import kotlin.test.AfterTest
-import kotlin.test.Test
-
 
 internal class TestSuiteSynonyms {
 
@@ -43,9 +41,6 @@ internal class TestSuiteSynonyms {
     private val synonyms =
         listOf(synonymOneWay, synonymPlaceholder, synonymAlternative1, synonymAlternative2)
     private val index = clientAdmin1.initIndex(indexName)
-
-
-
 
     @Test
     fun test() {

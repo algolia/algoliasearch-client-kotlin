@@ -1,11 +1,15 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.dsl.DSLParameters
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAnchoring
+import com.algolia.search.serialize.KeyContext
+import com.algolia.search.serialize.KeyEnabled
+import com.algolia.search.serialize.KeyHitsPerPage
+import com.algolia.search.serialize.KeyPage
+import com.algolia.search.serialize.KeyQuery
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
-
 
 @Suppress("PropertyName")
 @DSLParameters

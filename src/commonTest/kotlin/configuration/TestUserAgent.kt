@@ -16,13 +16,11 @@ import io.ktor.client.features.UserAgent
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
-import io.ktor.client.statement.response
+import kotlin.test.Test
 import runBlocking
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
-import kotlin.test.Test
-
 
 internal class TestUserAgent {
 

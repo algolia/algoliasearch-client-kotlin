@@ -9,7 +9,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.LongSerializer
 
-
 /**
  * This is a numeric value (up to 64bits) used to identify a [Task].
  * It can be used to perform a [EndpointAdvanced.waitTask] operation.

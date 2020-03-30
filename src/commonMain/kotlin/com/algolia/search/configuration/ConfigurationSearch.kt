@@ -8,7 +8,6 @@ import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
 
-
 /**
  * Configuration used by [ClientSearch].
  */

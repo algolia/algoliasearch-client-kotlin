@@ -8,7 +8,6 @@ import com.algolia.search.serialize.KSerializerFacetMap
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
-
 internal class TestKSerializerFacetMap : TestSerializer<Map<Attribute, List<Facet>>>(KSerializerFacetMap) {
 
     override val items = listOf(

@@ -9,7 +9,6 @@ import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
 import com.algolia.search.transport.RequestOptions
 
-
 public interface EndpointPlaces {
 
     suspend fun searchPlaces(

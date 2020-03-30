@@ -5,9 +5,8 @@ import attributeB
 import com.algolia.search.dsl.all
 import com.algolia.search.dsl.attributes.DSLAttributesToRetrieve
 import com.algolia.search.model.Attribute
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLAttributesToRetrieve {
 

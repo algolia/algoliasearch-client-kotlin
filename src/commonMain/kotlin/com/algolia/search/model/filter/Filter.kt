@@ -2,7 +2,6 @@ package com.algolia.search.model.filter
 
 import com.algolia.search.model.Attribute
 
-
 /**
  * [Documentation][https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/]
  */
@@ -154,7 +153,6 @@ public sealed class Filter {
             upperBound: Double,
             isNegated: Boolean = false
         ) : this(attribute, isNegated, Value.Range(lowerBound, upperBound))
-
 
         /**
          * Operator to negates a [Filter.Numeric].

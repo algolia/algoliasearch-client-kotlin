@@ -2,9 +2,8 @@ package dsl
 
 import com.algolia.search.dsl.synonymQuery
 import com.algolia.search.dsl.synonymTypes
-import shouldNotBeNull
 import kotlin.test.Test
-
+import shouldNotBeNull
 
 internal class TestDSLSynonymQuery {
 

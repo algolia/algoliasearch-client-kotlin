@@ -2,9 +2,12 @@ package com.algolia.search.model.search
 
 import com.algolia.search.helper.and
 import com.algolia.search.model.Raw
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.FloatSerializer
-
+import kotlinx.serialization.list
 
 /**
  * Search inside a rectangular area (in geo coordinates).

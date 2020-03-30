@@ -7,14 +7,21 @@ import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.request.RequestRequestObjects
-import com.algolia.search.model.response.*
-import com.algolia.search.serialize.*
+import com.algolia.search.model.response.ResponseBatches
+import com.algolia.search.model.response.ResponseListAPIKey
+import com.algolia.search.model.response.ResponseListIndices
+import com.algolia.search.model.response.ResponseObjects
+import com.algolia.search.model.response.ResponseSearches
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.KeyRequests
+import com.algolia.search.serialize.RouteIndexesV1
+import com.algolia.search.serialize.toBody
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.json
 import kotlinx.serialization.list
-
 
 internal class EndpointMultipleIndexImpl(
     private val transport: Transport

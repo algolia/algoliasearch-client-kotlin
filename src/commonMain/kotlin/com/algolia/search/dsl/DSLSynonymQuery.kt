@@ -2,7 +2,6 @@ package com.algolia.search.dsl
 
 import com.algolia.search.model.synonym.SynonymQuery
 
-
 /**
  * Create a [SynonymQuery] with [block].
  */

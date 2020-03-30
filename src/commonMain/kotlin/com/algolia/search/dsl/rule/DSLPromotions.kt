@@ -5,7 +5,6 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.rule.Promotion
 
-
 /**
  * DSL for building a [List] of [Promotion].
  */

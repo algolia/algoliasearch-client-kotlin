@@ -3,12 +3,11 @@ package model.response
 import attributeA
 import attributeB
 import com.algolia.search.model.response.ResponseSearch
+import kotlin.test.Test
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.json
 import shouldEqual
-import kotlin.test.Test
-
 
 internal class TestResponseSearchHit {
 

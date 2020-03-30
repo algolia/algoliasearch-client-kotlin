@@ -8,10 +8,13 @@ import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
-import com.algolia.search.model.response.*
+import com.algolia.search.model.response.ResponseBatches
+import com.algolia.search.model.response.ResponseListAPIKey
+import com.algolia.search.model.response.ResponseListIndices
+import com.algolia.search.model.response.ResponseObjects
+import com.algolia.search.model.response.ResponseSearches
 import com.algolia.search.model.search.Query
 import com.algolia.search.transport.RequestOptions
-
 
 public interface EndpointMultipleIndex {
 

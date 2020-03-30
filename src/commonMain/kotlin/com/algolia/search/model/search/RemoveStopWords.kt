@@ -3,11 +3,15 @@ package com.algolia.search.model.search
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.asJsonInput
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.BooleanSerializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonLiteral
-
+import kotlinx.serialization.list
 
 @Serializable(RemoveStopWords.Companion::class)
 public sealed class RemoveStopWords {
@@ -17,12 +21,12 @@ public sealed class RemoveStopWords {
      * The languages supported here are either every language (this is the default, see list of [Language]),
      * or those set by queryLanguages. See queryLanguages example below.
      */
-    public object True: RemoveStopWords()
+    public object True : RemoveStopWords()
 
     /**
      * Disables stop word functionality, allowing stop words to be taken into account in a search.
      */
-    public object False: RemoveStopWords()
+    public object False : RemoveStopWords()
 
     /**
      * A list of [Language] for which ignoring plurals should be enabled.

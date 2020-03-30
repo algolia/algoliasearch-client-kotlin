@@ -3,10 +3,9 @@ package documentation.guides.results.sorting
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
 import documentation.client
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Suppress("ConstantConditionIf")
 @Ignore

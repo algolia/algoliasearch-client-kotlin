@@ -2,10 +2,9 @@ package dsl.filtering
 
 import com.algolia.search.dsl.filtering.DSLGroupTag
 import com.algolia.search.model.filter.Filter
+import kotlin.test.Test
 import shouldEqual
 import unknown
-import kotlin.test.Test
-
 
 internal class TestDSLFilterGroupTag {
 

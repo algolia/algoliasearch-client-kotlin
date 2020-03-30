@@ -5,13 +5,32 @@ import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.KeyAlternativeCorrection1
+import com.algolia.search.serialize.KeyAlternativeCorrection2
+import com.algolia.search.serialize.KeyCorrections
+import com.algolia.search.serialize.KeyInput
+import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.KeyOneWaySynonym
+import com.algolia.search.serialize.KeyPlaceholder
+import com.algolia.search.serialize.KeyReplacements
+import com.algolia.search.serialize.KeySynonym
+import com.algolia.search.serialize.KeySynonyms
+import com.algolia.search.serialize.KeyType
+import com.algolia.search.serialize.KeyWord
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.regexPlaceholder
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
-
+import kotlinx.serialization.list
 
 @Serializable(Synonym.Companion::class)
 public sealed class Synonym {
@@ -88,7 +107,6 @@ public sealed class Synonym {
             if (word.isBlank()) throw EmptyStringException("Word")
             if (corrections.isEmpty()) throw EmptyListException("Corrections")
         }
-
     }
 
     public data class Placeholder(

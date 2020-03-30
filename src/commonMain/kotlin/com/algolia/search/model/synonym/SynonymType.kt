@@ -1,13 +1,16 @@
 package com.algolia.search.model.synonym
 
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAlternativeCorrection1
+import com.algolia.search.serialize.KeyAlternativeCorrection2
+import com.algolia.search.serialize.KeyOneWaySynonym
+import com.algolia.search.serialize.KeyPlaceholder
+import com.algolia.search.serialize.KeySynonym
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
-
 
 @Serializable(SynonymType.Companion::class)
 public sealed class SynonymType(override val raw: String) : Raw<String> {

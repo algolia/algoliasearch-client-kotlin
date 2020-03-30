@@ -1,6 +1,5 @@
 package com.algolia.search.serialize
 
-
 public const val KeyAfghanistan = "af"
 public const val KeyAlandIslands = "ax"
 public const val KeyAlbania = "al"

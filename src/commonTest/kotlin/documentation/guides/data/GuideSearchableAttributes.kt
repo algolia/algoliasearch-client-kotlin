@@ -3,10 +3,9 @@ package documentation.guides.data
 import com.algolia.search.dsl.searchableAttributes
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Suppress("VARIABLE_WITH_REDUNDANT_INITIALIZER")
 @Ignore

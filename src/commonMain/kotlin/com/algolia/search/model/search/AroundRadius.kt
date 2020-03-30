@@ -4,12 +4,15 @@ import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyAll
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.intOrNull
-
 
 /**
  * Define the maximum radius for a geo search (in meters).

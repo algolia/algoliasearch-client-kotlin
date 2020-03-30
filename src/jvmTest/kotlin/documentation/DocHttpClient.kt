@@ -10,7 +10,6 @@ import io.ktor.client.engine.okhttp.OkHttp
 import org.junit.Ignore
 import org.junit.Test
 
-
 @Ignore
 internal class DocHttpClient {
 

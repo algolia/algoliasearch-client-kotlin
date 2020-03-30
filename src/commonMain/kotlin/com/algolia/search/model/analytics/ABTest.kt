@@ -1,11 +1,20 @@
 package com.algolia.search.model.analytics
 
 import com.algolia.search.model.ClientDate
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.KeyEndAt
+import com.algolia.search.serialize.KeyName
+import com.algolia.search.serialize.KeyVariants
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-
 
 /**
  * [ABTest] applied to compare analytics performance between two indices.

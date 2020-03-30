@@ -8,7 +8,6 @@ import kotlinx.serialization.internal.StringSerializer
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.longOrNull
 
-
 public object KSerializerClientDate : KSerializer<ClientDate> {
 
     private val serializer = StringSerializer

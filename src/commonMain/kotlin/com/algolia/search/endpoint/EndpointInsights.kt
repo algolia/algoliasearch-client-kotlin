@@ -4,7 +4,6 @@ import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.transport.RequestOptions
 import io.ktor.client.statement.HttpResponse
 
-
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/insights/?language=kotlin]
  */

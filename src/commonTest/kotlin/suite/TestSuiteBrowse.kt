@@ -8,20 +8,16 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.model.task.TaskStatus
+import kotlin.test.Test
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
-import kotlin.test.AfterTest
-import kotlin.test.Test
-
 
 internal class TestSuiteBrowse {
 
     private val suffix = "helper"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
-
-
 
     @Test
     fun rules() {

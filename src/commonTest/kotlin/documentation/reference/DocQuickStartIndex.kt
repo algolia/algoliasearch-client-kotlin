@@ -2,11 +2,10 @@ package documentation.reference
 
 import com.algolia.search.model.IndexName
 import documentation.client
-import kotlinx.serialization.Serializable
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import kotlinx.serialization.Serializable
+import runBlocking
 
 @Ignore
 internal class DocQuickStartIndex {

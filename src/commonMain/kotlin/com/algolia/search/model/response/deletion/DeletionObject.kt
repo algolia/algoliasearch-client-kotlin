@@ -10,7 +10,6 @@ import com.algolia.search.serialize.KeyTaskID
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
 public data class DeletionObject(
     @SerialName(KeyDeletedAt) val deletedAt: ClientDate,

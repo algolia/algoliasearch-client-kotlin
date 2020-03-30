@@ -12,7 +12,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 @Serializable(Anchoring.Companion::class)
 public sealed class Anchoring(override val raw: String) : Raw<String> {
 

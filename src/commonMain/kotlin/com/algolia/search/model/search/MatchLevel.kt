@@ -12,7 +12,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * Indicates how well the value matched the search query.
  * The matching relates to the words in the query string not in the searched text of the records.

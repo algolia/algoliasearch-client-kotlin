@@ -1,6 +1,5 @@
 package com.algolia.search.helper
 
-
 internal expect object DateISO8601 {
 
     fun format(timestamp: Long, inMilliseconds: Boolean = false): String

@@ -9,14 +9,12 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
+import kotlin.test.Test
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldBeTrue
 import shouldEqual
-import kotlin.test.AfterTest
-import kotlin.test.Test
-
 
 internal class TestSuiteMultipleOperations {
 
@@ -26,8 +24,6 @@ internal class TestSuiteMultipleOperations {
     private val firstname = "firstname"
     private val jimmie = "Jimmie"
     private val json = json { firstname to jimmie }
-
-
 
     @Test
     fun test() {

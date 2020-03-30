@@ -6,11 +6,10 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.multicluster.UserID
 import documentation.index
-import kotlinx.serialization.Serializable
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import kotlinx.serialization.Serializable
+import runBlocking
 
 @Ignore
 internal class DocGetObjects {

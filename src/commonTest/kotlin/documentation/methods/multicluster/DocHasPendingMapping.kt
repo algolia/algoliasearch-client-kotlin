@@ -1,14 +1,9 @@
 package documentation.methods.multicluster
 
-import com.algolia.search.model.multicluster.ClusterName
-import com.algolia.search.model.multicluster.UserID
-import com.algolia.search.model.response.ResponseHasPendingMapping
-import com.algolia.search.transport.RequestOptions
 import documentation.client
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class DocHasPendingMapping {

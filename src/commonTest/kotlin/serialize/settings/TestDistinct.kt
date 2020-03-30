@@ -2,11 +2,10 @@ package serialize.settings
 
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.serialize.Json
+import kotlin.test.Test
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 import shouldEqual
-import kotlin.test.Test
-
 
 internal class TestDistinct : TestSerializer<Distinct>(Distinct) {
 

@@ -6,11 +6,10 @@ import com.algolia.search.helper.toQueryID
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.InsightsEvent
 import indexA
+import kotlin.test.Test
 import objectIDA
 import shouldEqual
 import shouldFailWith
-import kotlin.test.Test
-
 
 internal class TestInsightsEvent {
 

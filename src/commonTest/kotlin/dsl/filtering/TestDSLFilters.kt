@@ -8,9 +8,7 @@ import shouldEqual
 import unknown
 import kotlin.test.Test
 
-
 internal class TestDSLFilters {
-
 
     @Test
     fun and() {
@@ -113,10 +111,10 @@ internal class TestDSLFilters {
         }
 
         FilterGroupsConverter.SQL.Unquoted(dsl) shouldEqual
-                "(attributeA:0 AND attributeB:0) AND " +
-                "(attributeA:0 OR attributeB:0) AND " +
-                "(_tags:attributeA OR _tags:attributeB) AND " +
-                "(attributeA:0 TO 1 OR attributeB > 0)"
+            "(attributeA:0 AND attributeB:0) AND " +
+            "(attributeA:0 OR attributeB:0) AND " +
+            "(_tags:attributeA OR _tags:attributeB) AND " +
+            "(attributeA:0 TO 1 OR attributeB > 0)"
     }
 
     @Test

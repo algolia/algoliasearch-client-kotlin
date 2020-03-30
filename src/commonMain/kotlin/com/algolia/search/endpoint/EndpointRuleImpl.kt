@@ -19,7 +19,6 @@ import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.list
 
-
 internal class EndpointRuleImpl(
     private val transport: Transport,
     override val indexName: IndexName

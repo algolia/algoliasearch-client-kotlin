@@ -2,9 +2,12 @@ package com.algolia.search.model
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toAPIKey
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.internal.StringSerializer
-
 
 /**
  * [APIKey] can't be a blank or empty string.

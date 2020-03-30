@@ -1,9 +1,8 @@
 package model.filter
 
 import com.algolia.search.model.filter.NumericOperator
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestNumericOperator {
 

@@ -4,9 +4,16 @@ import com.algolia.search.serialize.KeyFrom
 import com.algolia.search.serialize.KeyValue
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
-
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.json
+import kotlinx.serialization.json.jsonArray
 
 /**
  * Precision of geo search (in meters), to add grouping by geo location to the ranking formula.

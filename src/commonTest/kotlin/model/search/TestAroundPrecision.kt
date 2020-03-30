@@ -1,9 +1,8 @@
 package model.search
 
 import com.algolia.search.model.search.AroundPrecision
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestAroundPrecision {
 

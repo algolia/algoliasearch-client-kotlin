@@ -1,14 +1,17 @@
 import com.android.build.gradle.LibraryExtension
+import com.diffplug.gradle.spotless.SpotlessExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
     repositories {
+        mavenCentral()
         google()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.5.2")
+        classpath(plugin.Android())
+        classpath(plugin.Spotless())
     }
 }
 
@@ -21,6 +24,7 @@ plugins {
 }
 
 apply(plugin = "com.android.library")
+apply(plugin = "com.diffplug.gradle.spotless")
 
 repositories {
     jcenter()
@@ -211,7 +215,7 @@ bintray {
         repo = "maven"
         name = Library.artifact
         websiteUrl = "https://www.algolia.com/"
-        issueTrackerUrl =  "https://github.com/algolia/algoliasearch-client-kotlin/issues"
+        issueTrackerUrl = "https://github.com/algolia/algoliasearch-client-kotlin/issues"
         setLicenses("MIT")
         setLabels("Kotlin", "Algolia")
         vcsUrl = "https://github.com/algolia/algoliasearch-client-kotlin.git"
@@ -235,4 +239,13 @@ tasks {
 
 tasks.withType<Test> {
     maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
+}
+
+configure<SpotlessExtension> {
+    kotlin {
+        target("**/*.kt")
+        ktlint("0.36.0")
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
 }

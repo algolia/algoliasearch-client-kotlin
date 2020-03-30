@@ -11,7 +11,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * The strategy used by [EndpointMultipleIndex.multipleQueries].
  */

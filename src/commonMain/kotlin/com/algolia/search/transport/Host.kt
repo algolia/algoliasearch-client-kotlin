@@ -5,7 +5,6 @@ import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.Time
 
-
 internal val ApplicationID.searchHosts
     get() = listOf(
         RetryableHost("$this-dsn.algolia.net", CallType.Read),

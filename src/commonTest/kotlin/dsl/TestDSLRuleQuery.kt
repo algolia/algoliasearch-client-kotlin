@@ -1,9 +1,8 @@
 package dsl
 
 import com.algolia.search.dsl.ruleQuery
-import shouldNotBeNull
 import kotlin.test.Test
-
+import shouldNotBeNull
 
 internal class TestDSLRuleQuery {
 

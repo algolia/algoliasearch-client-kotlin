@@ -14,12 +14,10 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
+import kotlin.test.Test
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
-import kotlin.test.AfterTest
-import kotlin.test.Test
-
 
 internal class TestSuiteInsights {
 
@@ -43,8 +41,6 @@ internal class TestSuiteInsights {
         Filter.Facet(attribute, "foo"),
         Filter.Facet(attribute, "bar")
     )
-
-
 
     @Test
     fun test() {

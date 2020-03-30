@@ -6,7 +6,6 @@ import com.algolia.search.model.settings.NumericAttributeFilter
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 
-
 internal class TestNumericAttribute : TestSerializer<NumericAttributeFilter>(NumericAttributeFilter) {
 
     override val items = listOf(

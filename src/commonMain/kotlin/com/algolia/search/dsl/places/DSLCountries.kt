@@ -4,7 +4,6 @@ import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.places.Country
 
-
 /**
  * DSL for building a [List] of [Country].
  */

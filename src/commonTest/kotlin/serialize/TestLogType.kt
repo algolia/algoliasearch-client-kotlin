@@ -1,10 +1,13 @@
 package serialize
 
 import com.algolia.search.model.LogType
-import com.algolia.search.model.LogType.*
+import com.algolia.search.model.LogType.All
+import com.algolia.search.model.LogType.Build
+import com.algolia.search.model.LogType.Error
+import com.algolia.search.model.LogType.Other
+import com.algolia.search.model.LogType.Query
 import kotlinx.serialization.json.JsonLiteral
 import unknown
-
 
 internal class TestLogType : TestSerializer<LogType>(LogType) {
 

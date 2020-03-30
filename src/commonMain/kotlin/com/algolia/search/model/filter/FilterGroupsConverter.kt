@@ -1,6 +1,5 @@
 package com.algolia.search.model.filter
 
-
 /**
  * Converts a [List] of [FilterGroup] to a type [O].
  */

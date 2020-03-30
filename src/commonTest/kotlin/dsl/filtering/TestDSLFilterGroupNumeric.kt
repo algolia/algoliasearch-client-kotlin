@@ -4,9 +4,8 @@ import attributeA
 import com.algolia.search.dsl.filtering.DSLGroupNumeric
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.NumericOperator
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLFilterGroupNumeric {
 

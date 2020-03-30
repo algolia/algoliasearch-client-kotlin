@@ -5,7 +5,6 @@ import com.algolia.search.model.task.Task
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 
-
 /**
  * Client to perform operations between applications.
  */

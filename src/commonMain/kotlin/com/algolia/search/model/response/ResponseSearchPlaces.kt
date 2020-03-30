@@ -1,6 +1,5 @@
 package com.algolia.search.model.response
 
-
 public interface ResponseSearchPlaces<T> {
 
     val hits: List<T>

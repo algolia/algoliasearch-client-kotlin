@@ -2,7 +2,6 @@ package com.algolia.search.dsl
 
 import com.algolia.search.model.settings.SettingsKey
 
-
 /**
  * DSL for building a [List] of [SettingsKey].
  */

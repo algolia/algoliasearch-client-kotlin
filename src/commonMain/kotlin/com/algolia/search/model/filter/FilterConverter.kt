@@ -1,10 +1,9 @@
 package com.algolia.search.model.filter
 
-
 /**
  * Converts a single [Filter] to a type [O].
  */
-public sealed class FilterConverter<I: Filter, O> : (I) -> O {
+public sealed class FilterConverter<I : Filter, O> : (I) -> O {
 
     /**
      * Converts a [Filter] to its SQL-like [String] representation.

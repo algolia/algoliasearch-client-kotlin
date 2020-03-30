@@ -3,10 +3,9 @@ package dsl.rule
 import com.algolia.search.dsl.rule.DSLPromotions
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.rule.Promotion
+import kotlin.test.Test
 import objectIDA
 import shouldEqual
-import kotlin.test.Test
-
 
 internal class TestDSLPromotions {
 

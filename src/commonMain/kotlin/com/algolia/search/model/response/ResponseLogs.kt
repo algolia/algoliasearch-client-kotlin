@@ -3,10 +3,25 @@ package com.algolia.search.model.response
 import com.algolia.search.model.ClientDate
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAnswer
+import com.algolia.search.serialize.KeyAnswer_Code
+import com.algolia.search.serialize.KeyIndex
+import com.algolia.search.serialize.KeyIp
+import com.algolia.search.serialize.KeyLogs
+import com.algolia.search.serialize.KeyMethod
+import com.algolia.search.serialize.KeyNb_Api_Calls
+import com.algolia.search.serialize.KeyProcessing_Time_Ms
+import com.algolia.search.serialize.KeyQuery_Body
+import com.algolia.search.serialize.KeyQuery_Headers
+import com.algolia.search.serialize.KeyQuery_Nb_Hits
+import com.algolia.search.serialize.KeyQuery_Params
+import com.algolia.search.serialize.KeySha1
+import com.algolia.search.serialize.KeyTimestamp
+import com.algolia.search.serialize.KeyUrl
+import com.algolia.search.serialize.Key_Exhaustive_Faceting
+import com.algolia.search.serialize.Key_Exhaustive_Nb_Hits
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 public data class ResponseLogs(

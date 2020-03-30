@@ -11,7 +11,6 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.internal.StringSerializer
 
-
 /**
  * Possible [Scope] to copy for a [EndpointIndex.copyIndex] operation.
  */

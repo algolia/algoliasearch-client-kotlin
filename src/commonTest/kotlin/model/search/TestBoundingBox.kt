@@ -2,9 +2,8 @@ package model.search
 
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.BoundingBox
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestBoundingBox {
 

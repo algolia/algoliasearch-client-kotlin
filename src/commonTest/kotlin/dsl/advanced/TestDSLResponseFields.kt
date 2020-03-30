@@ -2,9 +2,8 @@ package dsl.advanced
 
 import com.algolia.search.dsl.advanced.DSLResponseFields
 import com.algolia.search.model.search.ResponseFields
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLResponseFields {
 

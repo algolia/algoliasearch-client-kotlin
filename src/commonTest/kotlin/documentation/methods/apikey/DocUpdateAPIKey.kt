@@ -5,10 +5,9 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.apikey.APIKeyParams
 import documentation.client
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class DocUpdateAPIKey {

@@ -9,7 +9,6 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.Transport
 
-
 public class ClientPlaces private constructor(
     private val tranport: Transport
 ) : EndpointPlaces by EndpointPlacesImpl(tranport),

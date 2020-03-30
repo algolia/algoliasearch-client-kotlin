@@ -2,9 +2,8 @@ package dsl.languages
 
 import com.algolia.search.dsl.places.DSLCountries
 import com.algolia.search.model.places.Country
-import shouldEqual
 import kotlin.test.Test
-
+import shouldEqual
 
 internal class TestDSLCountries {
 

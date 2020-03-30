@@ -1,12 +1,11 @@
 package serialize
 
 import com.algolia.search.serialize.Json
+import kotlin.test.Test
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
 import shouldEqual
-import kotlin.test.Test
-
 
 internal abstract class TestSerializer<T>(
     private val serializer: KSerializer<T>,

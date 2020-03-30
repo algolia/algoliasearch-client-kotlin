@@ -6,10 +6,9 @@ import com.algolia.search.dsl.rule.rules
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import documentation.index
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class GuideDetectingKeywords {

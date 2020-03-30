@@ -2,10 +2,9 @@ package documentation.methods.synonym
 
 import com.algolia.search.model.synonym.Synonym
 import documentation.index
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class DocReplaceAllSynonym {

@@ -13,7 +13,6 @@ import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 
-
 /**
  * Client to manage [ABTest] for analytics purposes.
  */

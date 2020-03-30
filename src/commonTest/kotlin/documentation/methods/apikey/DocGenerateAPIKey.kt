@@ -7,10 +7,9 @@ import com.algolia.search.model.Time
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.search.Query
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
+import runBlocking
 
 @Ignore
 internal class DocGenerateAPIKey {
