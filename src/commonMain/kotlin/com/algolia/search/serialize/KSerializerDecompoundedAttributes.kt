@@ -21,7 +21,7 @@ public object KSerializerDecompoundedAttributes : KSerializer<List<DecompoundedA
         val json = decoder.asJsonInput().jsonObject
 
         return json.content.map {
-            val language = Json.parse(Language.serializer(), it.key)
+            val language = JsonNonStrict.parse(Language.serializer(), it.key)
             val attributes = JsonNoDefaults.fromJson(Attribute.serializer().list, it.value.jsonArray)
 
             DecompoundedAttributes(language, attributes)
