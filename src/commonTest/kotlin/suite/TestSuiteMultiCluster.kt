@@ -9,8 +9,6 @@ import io.ktor.client.features.ResponseException
 import io.ktor.client.statement.readBytes
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.core.String
-import kotlin.test.Test
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import runBlocking
@@ -19,6 +17,8 @@ import shouldBeTrue
 import shouldEqual
 import shouldNotBeEmpty
 import username
+import kotlin.coroutines.coroutineContext
+import kotlin.test.Test
 
 internal class TestSuiteMultiCluster {
 
@@ -29,8 +29,8 @@ internal class TestSuiteMultiCluster {
         return "$prefix-$username-$id".toUserID()
     }
 
-    private suspend fun CoroutineScope.waitForUserID(userID: UserID) {
-        while (isActive) {
+    private suspend fun waitForUserID(userID: UserID) {
+        while (coroutineContext.isActive) {
             try {
                 clientMcm.getUserID(userID)
                 break
@@ -41,8 +41,8 @@ internal class TestSuiteMultiCluster {
         }
     }
 
-    private suspend fun CoroutineScope.removeUserID(userID: UserID) {
-        loop@ while (isActive) {
+    private suspend fun removeUserID(userID: UserID) {
+        loop@ while (coroutineContext.isActive) {
             try {
                 clientMcm.removeUserID(userID)
             } catch (exception: ResponseException) {
