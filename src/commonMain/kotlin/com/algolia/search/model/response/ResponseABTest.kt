@@ -5,16 +5,10 @@ import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.ABTestStatus
+import com.algolia.search.serialize.*
 import com.algolia.search.serialize.Json
 import com.algolia.search.serialize.JsonNoDefaults
-import com.algolia.search.serialize.KeyABTestID
-import com.algolia.search.serialize.KeyClickSignificance
-import com.algolia.search.serialize.KeyConversionSignificance
-import com.algolia.search.serialize.KeyCreatedAt
-import com.algolia.search.serialize.KeyEndAt
-import com.algolia.search.serialize.KeyName
-import com.algolia.search.serialize.KeyStatus
-import com.algolia.search.serialize.KeyVariants
+import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
 import kotlinx.serialization.Decoder
@@ -103,7 +97,7 @@ public data class ResponseABTest(
                 createdAt = element.getPrimitive(KeyCreatedAt).content,
                 endAt = ClientDate(element.getPrimitive(KeyEndAt).content),
                 name = element.getPrimitive(KeyName).content,
-                status = Json.parse(ABTestStatus, element.getPrimitive(KeyStatus).content),
+                status = JsonNonStrict.parse(ABTestStatus, element.getPrimitive(KeyStatus).content),
                 conversionSignificanceOrNull = element.getPrimitive(KeyConversionSignificance).floatOrNull,
                 clickSignificanceOrNull = element.getPrimitive(KeyClickSignificance).floatOrNull,
                 variantA = Json.fromJson(ResponseVariant.serializer(), variants[0]),
