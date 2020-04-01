@@ -9,7 +9,6 @@ import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
 import kotlin.collections.set
-import kotlin.collections.toMutableMap
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer

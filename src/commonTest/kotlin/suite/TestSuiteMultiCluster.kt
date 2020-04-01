@@ -74,7 +74,15 @@ internal class TestSuiteMultiCluster {
             clientMcm.assignUserID(userID0, clusters.first().name)
             clientMcm.assignUserIds(listOf(userID1, userID2), clusters.first().name)
             userIDs.forEach { waitForUserID(it) }
-            userIDs.forEach { clientMcm.searchUserID(UserIDQuery(query = it.raw, hitsPerPage = 1, clusterName = clusters.first().name)).hits.size shouldEqual 1 }
+            userIDs.forEach {
+                clientMcm.searchUserID(
+                    UserIDQuery(
+                        query = it.raw,
+                        hitsPerPage = 1,
+                        clusterName = clusters.first().name
+                    )
+                ).hits.size shouldEqual 1
+            }
             clientMcm.listUserIDs().userIDs.shouldNotBeEmpty()
             clientMcm.getTopUserID().topUsers.shouldNotBeEmpty()
             userIDs.forEach { removeUSerID(it) }

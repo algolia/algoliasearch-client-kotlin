@@ -1,10 +1,10 @@
 package com.algolia.search.helper
 
 import io.ktor.utils.io.core.toByteArray
-import kotlinx.serialization.InternalSerializationApi
 import java.util.Base64
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
+import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.internal.HexConverter
 
 // TODO: Remove deprecated HexConverter object

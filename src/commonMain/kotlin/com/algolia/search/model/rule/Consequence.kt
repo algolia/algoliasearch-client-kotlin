@@ -116,7 +116,9 @@ public data class Consequence(
                 putFilters(KeyAutomaticFacetFilters, value.automaticFacetFilters)
                 putFilters(KeyAutomaticOptionalFacetFilters, value.automaticOptionalFacetFilters)
                 value.query?.toJsonNoDefaults()?.let { putAll(it.content) }
-                if (value.edits != null) put(KeyQuery, json { KeyEdits to JsonNoDefaults.toJson(Edit.list, value.edits) })
+                if (value.edits != null) put(
+                    KeyQuery,
+                    json { KeyEdits to JsonNoDefaults.toJson(Edit.list, value.edits) })
             }
             val json = json {
                 if (params.isNotEmpty()) KeyParams to JsonObject(params)

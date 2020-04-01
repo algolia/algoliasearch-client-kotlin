@@ -10,8 +10,8 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlinx.serialization.builtins.list
 import kotlin.test.Test
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
 import runBlocking
 import shouldEqual

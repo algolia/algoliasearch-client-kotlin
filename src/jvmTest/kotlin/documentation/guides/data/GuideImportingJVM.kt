@@ -10,9 +10,9 @@ import com.algolia.search.serialize.Json
 import java.io.File
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.json.json
-import kotlinx.serialization.builtins.list
 import org.junit.Ignore
 import org.junit.Test
 

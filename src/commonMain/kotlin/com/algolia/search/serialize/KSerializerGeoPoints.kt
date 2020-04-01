@@ -4,8 +4,8 @@ import com.algolia.search.model.search.Point
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.builtins.list
 import kotlinx.serialization.SerialDescriptor
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.jsonArray
 

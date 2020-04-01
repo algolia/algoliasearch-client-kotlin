@@ -1,4 +1,4 @@
-object Library: Dependency {
+object Library : Dependency {
 
     override val group = "com.algolia"
     override val artifact = "algoliasearch-client-kotlin"
