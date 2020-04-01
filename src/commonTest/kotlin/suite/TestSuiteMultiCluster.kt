@@ -41,7 +41,7 @@ internal class TestSuiteMultiCluster {
         }
     }
 
-    private suspend fun CoroutineScope.removeUSerID(userID: UserID) {
+    private suspend fun CoroutineScope.removeUserID(userID: UserID) {
         loop@ while (isActive) {
             try {
                 clientMcm.removeUserID(userID)
@@ -85,7 +85,7 @@ internal class TestSuiteMultiCluster {
             }
             clientMcm.listUserIDs().userIDs.shouldNotBeEmpty()
             clientMcm.getTopUserID().topUsers.shouldNotBeEmpty()
-            userIDs.forEach { removeUSerID(it) }
+            userIDs.forEach { removeUserID(it) }
             clientMcm.hasPendingMapping(true).clusters.isNullOrEmpty().shouldBeFalse()
         }
     }
