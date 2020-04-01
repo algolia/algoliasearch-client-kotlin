@@ -61,18 +61,6 @@ internal class TestSuiteMultiCluster {
         }
     }
 
-    private suspend fun CoroutineScope.waitForDeletion(userID: UserID) {
-        while (isActive) {
-            try {
-                clientMcm.getUserID(userID)
-            } catch (exception: ResponseException) {
-                exception.response.status.value shouldEqual HttpStatusCode.NotFound.value
-                break
-            }
-            delay(1000L)
-        }
-    }
-
     @Test
     fun test() {
         runBlocking {
@@ -86,14 +74,10 @@ internal class TestSuiteMultiCluster {
             clientMcm.assignUserID(userID0, clusters.first().name)
             clientMcm.assignUserIds(listOf(userID1, userID2), clusters.first().name)
             userIDs.forEach { waitForUserID(it) }
-            userIDs.forEach { clientMcm.searchUserID(UserIDQuery(query = it.raw)).hits.size shouldEqual 1 }
+            userIDs.forEach { clientMcm.searchUserID(UserIDQuery(query = it.raw, hitsPerPage = 1, clusterName = clusters.first().name)).hits.size shouldEqual 1 }
             clientMcm.listUserIDs().userIDs.shouldNotBeEmpty()
             clientMcm.getTopUserID().topUsers.shouldNotBeEmpty()
             userIDs.forEach { removeUSerID(it) }
-//            userIDs.forEach { waitForDeletion(it) }
-//            clientMcm.listUserIDs().userIDs.filter { it.userID.raw.startsWith(prefix) }.forEach {
-//                clientMcm.removeUserID(it.userID)
-//            }
             clientMcm.hasPendingMapping(true).clusters.isNullOrEmpty().shouldBeFalse()
         }
     }
