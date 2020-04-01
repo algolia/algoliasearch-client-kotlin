@@ -48,9 +48,16 @@ internal class TestSuiteMultiCluster {
             } catch (exception: ResponseException) {
                 when (exception.response.status) {
                     HttpStatusCode.NotFound -> break@loop
-                    HttpStatusCode.BadRequest -> println(String(exception.response.readBytes()))
+                    HttpStatusCode.BadRequest ->
+                        if (String(exception.response.readBytes()).contains("is already migrating")) {
+                            break@loop
+                        } else {
+                            // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
+                            println(String(exception.response.readBytes()))
+                        }
                 }
             }
+            delay(1000L)
         }
     }
 
@@ -83,10 +90,10 @@ internal class TestSuiteMultiCluster {
             clientMcm.listUserIDs().userIDs.shouldNotBeEmpty()
             clientMcm.getTopUserID().topUsers.shouldNotBeEmpty()
             userIDs.forEach { removeUSerID(it) }
-            userIDs.forEach { waitForDeletion(it) }
-            clientMcm.listUserIDs().userIDs.filter { it.userID.raw.startsWith(prefix) }.forEach {
-                clientMcm.removeUserID(it.userID)
-            }
+//            userIDs.forEach { waitForDeletion(it) }
+//            clientMcm.listUserIDs().userIDs.filter { it.userID.raw.startsWith(prefix) }.forEach {
+//                clientMcm.removeUserID(it.userID)
+//            }
             clientMcm.hasPendingMapping(true).clusters.isNullOrEmpty().shouldBeFalse()
         }
     }
