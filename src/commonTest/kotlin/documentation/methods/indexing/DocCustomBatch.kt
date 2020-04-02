@@ -10,11 +10,11 @@ import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import documentation.client
 import documentation.indexName
-import kotlin.test.Ignore
-import kotlin.test.Test
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking
+import kotlin.test.Ignore
+import kotlin.test.Test
 
 @Ignore
 internal class DocCustomBatch {

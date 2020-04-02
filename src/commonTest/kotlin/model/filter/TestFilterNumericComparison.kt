@@ -4,8 +4,8 @@ import attributeA
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterConverter
 import com.algolia.search.model.filter.NumericOperator
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestFilterNumericComparison {
 

@@ -1,9 +1,9 @@
 package documentation.methods.analytics
 
 import clientAnalytics
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 internal class DocListABTest {

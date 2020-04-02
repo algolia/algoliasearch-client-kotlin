@@ -98,8 +98,8 @@ import com.algolia.search.serialize.KeySortFacetValuesBy
 import com.algolia.search.serialize.KeyTypoTolerance
 import com.algolia.search.serialize.KeyUnretrievableAttributes
 import com.algolia.search.serialize.KeyUserData
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestSettingsKey {
 

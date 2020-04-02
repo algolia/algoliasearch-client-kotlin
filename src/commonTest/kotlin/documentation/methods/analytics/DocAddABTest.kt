@@ -8,9 +8,9 @@ import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Query
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 internal class DocAddABTest {

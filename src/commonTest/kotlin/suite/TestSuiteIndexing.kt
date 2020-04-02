@@ -10,12 +10,12 @@ import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.Json
-import kotlin.test.Test
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldBeTrue
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestSuiteIndexing {
 

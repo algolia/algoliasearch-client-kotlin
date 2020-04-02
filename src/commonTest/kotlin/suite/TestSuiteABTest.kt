@@ -12,13 +12,13 @@ import com.algolia.search.serialize.KeyObjectID
 import dayInMillis
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlin.test.Test
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
 import shouldFailWith
 import shouldNotBeNull
 import shouldNotEqual
+import kotlin.test.Test
 
 internal class TestSuiteABTest {
 

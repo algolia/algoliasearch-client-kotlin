@@ -1,9 +1,8 @@
-
 import com.android.build.gradle.LibraryExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
-import java.net.URI
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import java.net.URI
 
 buildscript {
     repositories {
@@ -253,7 +252,11 @@ tasks.withType<Test> {
 configure<SpotlessExtension> {
     kotlin {
         target("**/*.kt")
-        ktlint("0.36.0")
+        ktlint("0.36.0").userData(mapOf(
+            // Disable Ktlint import ordering temporarily.
+            // https://github.com/pinterest/ktlint/issues/527
+            "disabled_rules" to "import-ordering"
+        ))
         trimTrailingWhitespace()
         endWithNewline()
     }

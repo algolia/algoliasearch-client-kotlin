@@ -13,10 +13,10 @@ import com.algolia.search.serialize.KeyRequests
 import com.algolia.search.serialize.KeyStrategy
 import indexA
 import indexB
-import kotlin.test.Test
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestRequestMultipleQueries {
 

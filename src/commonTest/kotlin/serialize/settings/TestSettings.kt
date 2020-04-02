@@ -81,7 +81,6 @@ import com.algolia.search.serialize.KeyVersion
 import com.algolia.search.serialize.toJsonNoDefaults
 import indexA
 import int
-import kotlin.test.Test
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
@@ -90,6 +89,7 @@ import serialize.search.TestSnippet
 import shouldEqual
 import string
 import unknown
+import kotlin.test.Test
 
 internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
 

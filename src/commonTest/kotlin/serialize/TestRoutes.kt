@@ -9,8 +9,8 @@ import com.algolia.search.serialize.RouteLogs
 import com.algolia.search.serialize.RouteRules
 import com.algolia.search.serialize.RouteSettings
 import com.algolia.search.serialize.RouteSynonyms
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestRoutes {
 

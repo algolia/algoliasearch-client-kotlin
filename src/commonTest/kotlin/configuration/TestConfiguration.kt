@@ -15,9 +15,9 @@ import com.algolia.search.transport.insightHosts
 import com.algolia.search.transport.placesHosts
 import com.algolia.search.transport.searchHosts
 import io.ktor.client.features.logging.LogLevel
-import kotlin.test.Test
 import shouldBeNull
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestConfiguration {
 

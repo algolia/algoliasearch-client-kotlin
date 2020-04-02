@@ -9,12 +9,12 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import kotlin.test.Test
 import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
 import runBlocking
 import shouldBeTrue
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestSuiteHierarchical {
 

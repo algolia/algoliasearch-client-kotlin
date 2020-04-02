@@ -2,8 +2,8 @@ package dsl.strategy
 
 import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
 import com.algolia.search.model.search.AlternativesAsExact
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLAlternativesAsExact {
 

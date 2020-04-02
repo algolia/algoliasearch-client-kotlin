@@ -5,9 +5,9 @@ import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.search.Query
 import indexA
 import indexB
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestSecuredAPIKeyRestriction {
 

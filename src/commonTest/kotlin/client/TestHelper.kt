@@ -1,10 +1,10 @@
 package client
 
 import com.algolia.search.serialize.urlEncode
-import kotlin.test.Test
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestHelper {
 

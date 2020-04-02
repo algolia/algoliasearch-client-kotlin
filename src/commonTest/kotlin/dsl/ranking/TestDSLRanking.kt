@@ -4,8 +4,8 @@ import attributeA
 import attributeB
 import com.algolia.search.dsl.ranking.DSLRanking
 import com.algolia.search.model.settings.RankingCriterion
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLRanking {
 

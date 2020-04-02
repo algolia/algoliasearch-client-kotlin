@@ -7,8 +7,8 @@ import com.algolia.search.transport.hasFailed
 import com.algolia.search.transport.hasTimedOut
 import com.algolia.search.transport.reset
 import com.algolia.search.transport.searchHosts
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestRetryableHost {
 

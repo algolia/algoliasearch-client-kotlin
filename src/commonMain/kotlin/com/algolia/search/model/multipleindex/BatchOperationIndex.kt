@@ -8,7 +8,6 @@ import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlin.collections.set
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -16,6 +15,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonObject
+import kotlin.collections.set
 
 @Serializable(BatchOperationIndex.Companion::class)
 public data class BatchOperationIndex(

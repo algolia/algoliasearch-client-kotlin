@@ -9,12 +9,12 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
-import kotlin.test.Test
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldBeTrue
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestSuiteMultipleOperations {
 

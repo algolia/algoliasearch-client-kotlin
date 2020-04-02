@@ -4,8 +4,8 @@ import attributeA
 import attributeB
 import com.algolia.search.dsl.ranking.DSLCustomRanking
 import com.algolia.search.model.settings.CustomRankingCriterion
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLCustomRanking {
 

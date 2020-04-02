@@ -9,8 +9,8 @@ import com.algolia.search.serialize.KeyActive
 import com.algolia.search.serialize.KeyExpired
 import com.algolia.search.serialize.KeyFailed
 import com.algolia.search.serialize.KeyStopped
-import kotlin.test.Test
 import unknown
+import kotlin.test.Test
 
 internal class TestABStatus {
 

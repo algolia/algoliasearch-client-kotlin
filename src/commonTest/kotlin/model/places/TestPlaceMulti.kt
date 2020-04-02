@@ -2,8 +2,8 @@ package model.places
 
 import com.algolia.search.model.places.PlaceLanguages
 import com.algolia.search.model.search.Language
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestPlaceMulti {
 

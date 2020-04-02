@@ -5,11 +5,11 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.multicluster.UserID
 import documentation.index
-import kotlin.test.Ignore
-import kotlin.test.Test
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.json
 import runBlocking
+import kotlin.test.Ignore
+import kotlin.test.Test
 
 @Ignore
 internal class DocSaveObjects {

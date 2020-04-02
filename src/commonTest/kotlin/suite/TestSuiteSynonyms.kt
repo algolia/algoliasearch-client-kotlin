@@ -9,7 +9,6 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlin.test.Test
 import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
 import runBlocking
@@ -17,6 +16,7 @@ import shouldBeTrue
 import shouldContain
 import shouldEqual
 import shouldFailWith
+import kotlin.test.Test
 
 internal class TestSuiteSynonyms {
 

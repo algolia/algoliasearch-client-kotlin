@@ -7,9 +7,9 @@ import com.algolia.search.model.personalization.EventType
 import com.algolia.search.model.personalization.FacetScoring
 import com.algolia.search.model.personalization.PersonalizationStrategy
 import documentation.client
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 internal class DocAddStrategy {

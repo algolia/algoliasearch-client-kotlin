@@ -2,8 +2,8 @@ package model.filter
 
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterConverter
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestFilterTag {
 

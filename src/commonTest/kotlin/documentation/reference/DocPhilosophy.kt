@@ -22,8 +22,6 @@ import documentation.index
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.errors.IOException
-import kotlin.test.Ignore
-import kotlin.test.Test
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -33,6 +31,8 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
 import runBlocking
+import kotlin.test.Ignore
+import kotlin.test.Test
 
 @Suppress("UNUSED_VARIABLE", "unused")
 @Ignore

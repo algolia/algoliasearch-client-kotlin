@@ -3,9 +3,9 @@ package documentation.parameters.rule
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.ruleContexts
 import documentation.index
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 internal class DocRuleContexts {

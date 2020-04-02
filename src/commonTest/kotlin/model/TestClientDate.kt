@@ -2,8 +2,8 @@ package model
 
 import com.algolia.search.helper.DateISO8601
 import com.algolia.search.model.ClientDate
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestClientDate {
 

@@ -8,10 +8,10 @@ import com.algolia.search.model.places.PlacesQuery
 import com.algolia.search.model.search.AroundRadius
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import kotlin.test.Test
 import runBlocking
 import shouldEqual
 import shouldNotBeEmpty
+import kotlin.test.Test
 
 internal class TestSuitePlaces {
 

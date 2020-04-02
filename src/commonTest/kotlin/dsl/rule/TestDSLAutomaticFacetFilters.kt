@@ -4,8 +4,8 @@ import attributeA
 import attributeB
 import com.algolia.search.dsl.rule.DSLAutomaticFacetFilters
 import com.algolia.search.model.rule.AutomaticFacetFilters
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLAutomaticFacetFilters {
 

@@ -9,9 +9,9 @@ import com.algolia.search.serialize.KeyAll
 import com.algolia.search.serialize.KeyBuild
 import com.algolia.search.serialize.KeyError
 import com.algolia.search.serialize.KeyQuery
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestLogType {
 

@@ -5,9 +5,9 @@ import com.algolia.search.model.indexing.DeleteByQuery
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.search.Point
 import documentation.index
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 internal class DocDeleteBy {

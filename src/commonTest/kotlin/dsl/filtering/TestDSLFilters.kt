@@ -4,9 +4,9 @@ import attributeA
 import attributeB
 import com.algolia.search.dsl.filtering.DSLFilters
 import com.algolia.search.model.filter.FilterGroupsConverter
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestDSLFilters {
 

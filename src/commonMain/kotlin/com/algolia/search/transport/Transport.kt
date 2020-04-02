@@ -11,11 +11,11 @@ import io.ktor.client.request.request
 import io.ktor.http.HttpMethod
 import io.ktor.http.URLProtocol
 import io.ktor.utils.io.errors.IOException
-import kotlin.math.floor
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withTimeout
+import kotlin.math.floor
 
 internal class Transport(
     configuration: Configuration,

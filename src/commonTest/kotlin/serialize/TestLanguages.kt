@@ -56,8 +56,8 @@ import com.algolia.search.serialize.KeyTelugu
 import com.algolia.search.serialize.KeyTswana
 import com.algolia.search.serialize.KeyTurkish
 import com.algolia.search.serialize.KeyWelsh
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestLanguages {
 

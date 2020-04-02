@@ -26,9 +26,9 @@ import com.algolia.search.dsl.tagFilters
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.BoundingBox
 import com.algolia.search.model.search.Polygon
-import kotlin.test.Test
 import shouldNotBeNull
 import unknown
+import kotlin.test.Test
 
 internal class TestDSLQuery {
 

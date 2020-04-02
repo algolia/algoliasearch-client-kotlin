@@ -2,8 +2,8 @@ package dsl.languages
 
 import com.algolia.search.dsl.languages.DSLLanguage
 import com.algolia.search.model.search.Language
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLLanguage {
 

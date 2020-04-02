@@ -2,8 +2,8 @@ package dsl.rule
 
 import com.algolia.search.dsl.rule.DSLTimeRanges
 import com.algolia.search.model.rule.TimeRange
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLTimeRanges {
 
