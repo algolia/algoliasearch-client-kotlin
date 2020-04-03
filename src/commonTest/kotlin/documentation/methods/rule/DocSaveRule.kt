@@ -10,9 +10,9 @@ import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.TimeRange
 import com.algolia.search.model.search.Query
 import documentation.index
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 internal class DocSaveRule {

@@ -6,8 +6,8 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.FloatSerializer
-import kotlinx.serialization.list
+import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.serializer
 
 /**
  * A polygon with a minimum of 3 [Point].
@@ -45,12 +45,12 @@ public data class Polygon(
 
     companion object : KSerializer<Polygon> {
 
-        private val serializer = FloatSerializer.list
+        private val serializer = Float.serializer().list
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: Polygon) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: Polygon) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): Polygon {

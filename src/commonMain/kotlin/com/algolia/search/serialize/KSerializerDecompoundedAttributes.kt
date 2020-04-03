@@ -7,13 +7,13 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialDescriptor
-import kotlinx.serialization.internal.HashMapSerializer
+import kotlinx.serialization.builtins.MapSerializer
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.json
-import kotlinx.serialization.list
 
 public object KSerializerDecompoundedAttributes : KSerializer<List<DecompoundedAttributes>> {
 
-    private val serializer = HashMapSerializer(Language, Attribute.list)
+    private val serializer = MapSerializer(Language, Attribute.list)
 
     override val descriptor: SerialDescriptor = serializer.descriptor
 
@@ -21,16 +21,16 @@ public object KSerializerDecompoundedAttributes : KSerializer<List<DecompoundedA
         val json = decoder.asJsonInput().jsonObject
 
         return json.content.map {
-            val language = Json.parse(Language.serializer(), it.key)
+            val language = JsonNonStrict.parse(Language.serializer(), it.key)
             val attributes = JsonNoDefaults.fromJson(Attribute.serializer().list, it.value.jsonArray)
 
             DecompoundedAttributes(language, attributes)
         }
     }
 
-    override fun serialize(encoder: Encoder, obj: List<DecompoundedAttributes>) {
+    override fun serialize(encoder: Encoder, value: List<DecompoundedAttributes>) {
         val json = json {
-            obj.forEach {
+            value.forEach {
                 it.language.raw to Json.toJson(Attribute.list, it.attributes)
             }
         }

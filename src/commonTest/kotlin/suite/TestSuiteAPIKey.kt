@@ -11,12 +11,12 @@ import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.serialize.urlEncode
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlin.test.AfterTest
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import runBlocking
 import shouldBeTrue
 import shouldEqual
+import kotlin.test.AfterTest
 
 internal class TestSuiteAPIKey {
 

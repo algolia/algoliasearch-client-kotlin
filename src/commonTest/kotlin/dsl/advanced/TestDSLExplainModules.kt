@@ -3,8 +3,8 @@ package dsl.advanced
 import com.algolia.search.dsl.advanced.DSLExplainModules
 import com.algolia.search.dsl.advanced.DSLResponseFields
 import com.algolia.search.model.search.ExplainModule
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLExplainModules {
 

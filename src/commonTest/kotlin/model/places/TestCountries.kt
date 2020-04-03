@@ -498,8 +498,8 @@ import com.algolia.search.serialize.KeyWesternSahara
 import com.algolia.search.serialize.KeyYemen
 import com.algolia.search.serialize.KeyZambia
 import com.algolia.search.serialize.KeyZimbabwe
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestCountries {
 

@@ -7,9 +7,9 @@ import com.algolia.search.model.search.MatchLevel.Partial
 import com.algolia.search.serialize.KeyFull
 import com.algolia.search.serialize.KeyNone
 import com.algolia.search.serialize.KeyPartial
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestMatchLevel {
 

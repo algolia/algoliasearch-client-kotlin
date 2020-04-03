@@ -4,10 +4,10 @@ import com.algolia.search.exception.EmptyListException
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
-import kotlin.test.Test
 import objectIDA
 import shouldEqual
 import shouldFailWith
+import kotlin.test.Test
 
 internal class TestSynonym {
 

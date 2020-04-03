@@ -7,9 +7,9 @@ import com.algolia.search.model.personalization.EventType.View
 import com.algolia.search.serialize.KeyClick
 import com.algolia.search.serialize.KeyConversion
 import com.algolia.search.serialize.KeyView
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestEventType {
 

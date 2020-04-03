@@ -9,9 +9,9 @@ import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.AroundRadius
 import com.algolia.search.model.search.Point
 import documentation.index
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 internal class GuideAroundLocation {

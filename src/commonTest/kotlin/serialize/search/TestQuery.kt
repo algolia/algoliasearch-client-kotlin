@@ -88,7 +88,6 @@ import com.algolia.search.serialize.KeyTagFilters
 import com.algolia.search.serialize.KeyTypoTolerance
 import com.algolia.search.serialize.KeyUserToken
 import int
-import kotlin.test.Test
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import nestedLists
@@ -97,6 +96,7 @@ import serialize.TestSerializer
 import shouldEqual
 import string
 import unknown
+import kotlin.test.Test
 
 internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
 

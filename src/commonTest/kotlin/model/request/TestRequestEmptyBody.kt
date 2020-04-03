@@ -1,8 +1,8 @@
 package model.request
 
 import com.algolia.search.model.request.EmptyBody
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestRequestEmptyBody {
 

@@ -7,10 +7,10 @@ import com.algolia.search.helper.deserialize
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
 import documentation.client
-import kotlin.test.Ignore
-import kotlin.test.Test
 import kotlinx.serialization.Serializable
 import runBlocking
+import kotlin.test.Ignore
+import kotlin.test.Test
 
 @Ignore
 internal class DocSearch {

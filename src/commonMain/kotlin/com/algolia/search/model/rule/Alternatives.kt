@@ -5,7 +5,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.internal.BooleanSerializer
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.JsonLiteral
 
 public sealed class Alternatives {
@@ -17,10 +17,10 @@ public sealed class Alternatives {
     @Serializer(Alternatives::class)
     companion object : KSerializer<Alternatives> {
 
-        override fun serialize(encoder: Encoder, obj: Alternatives) {
-            when (obj) {
-                is Alternatives.True -> BooleanSerializer.serialize(encoder, true)
-                is Alternatives.False -> BooleanSerializer.serialize(encoder, false)
+        override fun serialize(encoder: Encoder, value: Alternatives) {
+            when (value) {
+                is Alternatives.True -> Boolean.serializer().serialize(encoder, true)
+                is Alternatives.False -> Boolean.serializer().serialize(encoder, false)
             }
         }
 

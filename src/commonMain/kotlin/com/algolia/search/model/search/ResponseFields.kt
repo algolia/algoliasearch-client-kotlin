@@ -25,7 +25,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * Choose which fields the response will contain. Applies to [EndpointSearch.search] and [EndpointSearch.browse].
@@ -63,12 +63,12 @@ public sealed class ResponseFields(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<ResponseFields> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: ResponseFields) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: ResponseFields) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): ResponseFields {

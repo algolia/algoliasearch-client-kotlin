@@ -4,8 +4,8 @@ import attributeA
 import attributeB
 import com.algolia.search.dsl.attributes.DSLAttributesForFaceting
 import com.algolia.search.model.settings.AttributeForFaceting
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLAttributesForFaceting {
 

@@ -8,7 +8,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * A user identifier for analytics and security purposes.
@@ -24,12 +24,12 @@ public data class UserToken(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<UserToken> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: UserToken) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: UserToken) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): UserToken {

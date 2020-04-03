@@ -3,9 +3,9 @@ package documentation.methods.rule
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.RuleQuery
 import documentation.index
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 internal class DocSearchRules {

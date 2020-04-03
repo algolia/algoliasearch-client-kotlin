@@ -8,9 +8,9 @@ import com.algolia.search.model.rule.Consequence
 import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Rule
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Suppress("UNUSED_VARIABLE")
 @Ignore

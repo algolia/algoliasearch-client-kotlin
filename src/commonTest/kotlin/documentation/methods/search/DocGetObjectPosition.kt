@@ -2,9 +2,9 @@ package documentation.methods.search
 
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseSearch
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 @Suppress("UNUSED_VARIABLE")

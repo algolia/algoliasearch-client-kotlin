@@ -4,18 +4,18 @@ import com.algolia.search.model.search.Point
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.internal.SerialClassDescImpl
+import kotlinx.serialization.SerialDescriptor
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.list
 
 public object KSerializerGeoPoints : KSerializer<List<Point>> {
 
-    override val descriptor = SerialClassDescImpl("point")
+    override val descriptor = SerialDescriptor("point")
 
-    override fun serialize(encoder: Encoder, obj: List<Point>) {
+    override fun serialize(encoder: Encoder, value: List<Point>) {
         val json = jsonArray {
-            obj.forEach { +Json.toJson(KSerializerGeoPoint, it) }
+            value.forEach { +Json.toJson(KSerializerGeoPoint, it) }
         }
 
         encoder.asJsonOutput().encodeJson(json)

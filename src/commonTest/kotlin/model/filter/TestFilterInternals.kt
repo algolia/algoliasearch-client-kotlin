@@ -2,8 +2,8 @@ package model.filter
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.filter.escape
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestFilterInternals {
 

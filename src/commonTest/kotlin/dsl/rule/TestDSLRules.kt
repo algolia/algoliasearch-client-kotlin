@@ -15,11 +15,11 @@ import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.TimeRange
-import kotlin.test.Test
 import kotlinx.serialization.json.json
 import objectIDA
 import objectIDB
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLRules {
 

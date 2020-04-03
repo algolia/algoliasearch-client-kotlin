@@ -30,12 +30,12 @@ public data class Edit(
     @Serializer(Edit::class)
     companion object : KSerializer<Edit> {
 
-        override fun serialize(encoder: Encoder, obj: Edit) {
-            val type = if (obj.insert != null) KeyReplace else KeyRemoveLowercase
+        override fun serialize(encoder: Encoder, value: Edit) {
+            val type = if (value.insert != null) KeyReplace else KeyRemoveLowercase
             val json = json {
                 KeyType to type.toLowerCase()
-                KeyDelete to obj.delete
-                obj.insert?.let { KeyInsert to it }
+                KeyDelete to value.delete
+                value.insert?.let { KeyInsert to it }
             }
 
             encoder.asJsonOutput().encodeJson(json)

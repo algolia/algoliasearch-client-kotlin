@@ -88,7 +88,7 @@ public interface EndpointMultiCluster {
      */
     suspend fun removeUserID(
         userID: UserID,
-        equestOptions: RequestOptions? = null
+        requestOptions: RequestOptions? = null
     ): Deletion
 
     /**

@@ -5,9 +5,9 @@ import com.algolia.search.model.settings.AdvancedSyntaxFeatures.ExcludeWords
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures.Other
 import com.algolia.search.serialize.KeyExactPhrase
 import com.algolia.search.serialize.KeyExcludeWords
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestAdvancedSyntaxFeatures {
 

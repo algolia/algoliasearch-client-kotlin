@@ -18,10 +18,9 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import kotlin.test.Test
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
-import kotlinx.serialization.list
 import runBlocking
 import shouldBeNull
 import shouldBeTrue
@@ -29,6 +28,7 @@ import shouldContain
 import shouldEqual
 import shouldNotBeEmpty
 import shouldNotBeNull
+import kotlin.test.Test
 
 internal class TestSuiteSearch {
 

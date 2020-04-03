@@ -39,9 +39,9 @@ import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyQueryAfterRemoval
 import com.algolia.search.serialize.KeyStar
 import com.algolia.search.serialize.KeyUserData
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestResponseFields {
 

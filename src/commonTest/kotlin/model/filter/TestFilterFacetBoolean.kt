@@ -3,8 +3,8 @@ package model.filter
 import attributeA
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterConverter
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestFilterFacetBoolean {
 

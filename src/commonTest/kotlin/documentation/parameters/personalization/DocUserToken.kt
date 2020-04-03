@@ -3,9 +3,9 @@ package documentation.parameters.personalization
 import com.algolia.search.dsl.query
 import com.algolia.search.model.insights.UserToken
 import documentation.index
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 internal class DocUserToken {

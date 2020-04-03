@@ -37,18 +37,18 @@ public sealed class AroundPrecision {
     @Serializer(AroundPrecision::class)
     companion object : KSerializer<AroundPrecision> {
 
-        override fun serialize(encoder: Encoder, obj: AroundPrecision) {
-            val json = when (obj) {
-                is Int -> JsonLiteral(obj.value)
+        override fun serialize(encoder: Encoder, value: AroundPrecision) {
+            val json = when (value) {
+                is Int -> JsonLiteral(value.value)
                 is Ranges -> jsonArray {
-                    obj.list.forEach {
+                    value.list.forEach {
                         +json {
                             KeyFrom to it.first
                             KeyValue to it.endInclusive
                         }
                     }
                 }
-                is Other -> obj.raw
+                is Other -> value.raw
             }
             encoder.asJsonOutput().encodeJson(json)
         }

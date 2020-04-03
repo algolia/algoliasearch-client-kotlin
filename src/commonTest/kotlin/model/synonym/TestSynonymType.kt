@@ -6,9 +6,9 @@ import com.algolia.search.serialize.KeyAlternativeCorrection2
 import com.algolia.search.serialize.KeyOneWaySynonym
 import com.algolia.search.serialize.KeyPlaceholder
 import com.algolia.search.serialize.KeySynonym
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestSynonymType {
 

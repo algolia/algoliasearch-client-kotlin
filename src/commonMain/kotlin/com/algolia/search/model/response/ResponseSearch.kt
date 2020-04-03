@@ -372,8 +372,8 @@ public data class ResponseSearch(
                 return Hit(decoder.asJsonInput().jsonObject)
             }
 
-            override fun serialize(encoder: Encoder, obj: Hit) {
-                encoder.asJsonOutput().encodeJson(obj.json)
+            override fun serialize(encoder: Encoder, value: Hit) {
+                encoder.asJsonOutput().encodeJson(value.json)
             }
         }
     }

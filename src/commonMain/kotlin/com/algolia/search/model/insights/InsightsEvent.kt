@@ -115,17 +115,17 @@ public sealed class InsightsEvent {
             }
         }
 
-        override fun serialize(encoder: Encoder, obj: InsightsEvent) {
+        override fun serialize(encoder: Encoder, value: InsightsEvent) {
             val json = json {
-                this eventType obj
-                KeyEventName to obj.eventName.raw
-                obj.timestamp?.let { KeyTimestamp to it }
-                KeyIndex to obj.indexName.raw
-                obj.userToken?.let { KeyUserToken to it.raw }
-                obj.queryID?.let { KeyQueryID to it.raw }
-                this stringify obj.resources
-                if (obj is Click) {
-                    obj.positions?.let { KeyPositions to jsonArray { it.forEach { +(it as Number) } } }
+                this eventType value
+                KeyEventName to value.eventName.raw
+                value.timestamp?.let { KeyTimestamp to it }
+                KeyIndex to value.indexName.raw
+                value.userToken?.let { KeyUserToken to it.raw }
+                value.queryID?.let { KeyQueryID to it.raw }
+                this stringify value.resources
+                if (value is Click) {
+                    value.positions?.let { KeyPositions to jsonArray { it.forEach { +(it as Number) } } }
                 }
             }
             encoder.asJsonOutput().encodeJson(json)

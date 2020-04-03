@@ -3,11 +3,11 @@ package documentation.guides.optimize.typo
 import com.algolia.search.dsl.ranking
 import com.algolia.search.dsl.settings
 import documentation.index
-import kotlin.test.Ignore
-import kotlin.test.Test
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonObject
 import runBlocking
+import kotlin.test.Ignore
+import kotlin.test.Test
 
 @Ignore
 internal class GuideTypoSquatting {

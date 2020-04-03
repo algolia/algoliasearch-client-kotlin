@@ -7,7 +7,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * Current status of a [Task].
@@ -29,12 +29,12 @@ public sealed class TaskStatus(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<TaskStatus> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: TaskStatus) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: TaskStatus) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): TaskStatus {

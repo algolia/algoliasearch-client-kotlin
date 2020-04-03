@@ -21,9 +21,9 @@ import com.algolia.search.serialize.KeyFilters
 import com.algolia.search.serialize.KeyGeo
 import com.algolia.search.serialize.KeyProximity
 import com.algolia.search.serialize.KeyWords
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestRankingCriterion {
 

@@ -2,9 +2,9 @@ package dsl
 
 import com.algolia.search.dsl.DSLObjectIDs
 import com.algolia.search.model.ObjectID
-import kotlin.test.Test
 import objectIDA
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLObjectIDs {
 

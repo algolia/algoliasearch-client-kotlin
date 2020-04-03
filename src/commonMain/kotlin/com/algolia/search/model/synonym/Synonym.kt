@@ -26,11 +26,11 @@ import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.content
 import kotlinx.serialization.json.json
-import kotlinx.serialization.list
 
 @Serializable(Synonym.Companion::class)
 public sealed class Synonym {
@@ -146,35 +146,35 @@ public sealed class Synonym {
     @Serializer(Synonym::class)
     companion object : KSerializer<Synonym> {
 
-        override fun serialize(encoder: Encoder, obj: Synonym) {
-            val json = when (obj) {
+        override fun serialize(encoder: Encoder, value: Synonym) {
+            val json = when (value) {
                 is MultiWay -> json {
-                    KeyObjectID to obj.objectID.raw
+                    KeyObjectID to value.objectID.raw
                     KeyType to KeySynonym
-                    KeySynonyms to Json.toJson(StringSerializer.list, obj.synonyms)
+                    KeySynonyms to Json.toJson(String.serializer().list, value.synonyms)
                 }
                 is OneWay -> json {
-                    KeyObjectID to obj.objectID.raw
+                    KeyObjectID to value.objectID.raw
                     KeyType to KeyOneWaySynonym
-                    KeySynonyms to Json.toJson(StringSerializer.list, obj.synonyms)
-                    KeyInput to obj.input
+                    KeySynonyms to Json.toJson(String.serializer().list, value.synonyms)
+                    KeyInput to value.input
                 }
                 is AlternativeCorrections -> json {
-                    KeyObjectID to obj.objectID.raw
-                    KeyType to when (obj.typo) {
+                    KeyObjectID to value.objectID.raw
+                    KeyType to when (value.typo) {
                         SynonymType.Typo.One -> KeyAlternativeCorrection1
                         SynonymType.Typo.Two -> KeyAlternativeCorrection2
                     }
-                    KeyWord to obj.word
-                    KeyCorrections to Json.toJson(StringSerializer.list, obj.corrections)
+                    KeyWord to value.word
+                    KeyCorrections to Json.toJson(String.serializer().list, value.corrections)
                 }
                 is Placeholder -> json {
-                    KeyObjectID to obj.objectID.raw
+                    KeyObjectID to value.objectID.raw
                     KeyType to KeyPlaceholder
-                    KeyPlaceholder to obj.placeholder.raw
-                    KeyReplacements to Json.toJson(StringSerializer.list, obj.replacements)
+                    KeyPlaceholder to value.placeholder.raw
+                    KeyReplacements to Json.toJson(String.serializer().list, value.replacements)
                 }
-                is Other -> obj.json
+                is Other -> value.json
             }
             encoder.asJsonOutput().encodeJson(json)
         }

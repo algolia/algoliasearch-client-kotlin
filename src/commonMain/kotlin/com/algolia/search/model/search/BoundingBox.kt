@@ -6,8 +6,8 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.FloatSerializer
-import kotlinx.serialization.list
+import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.serializer
 
 /**
  * Search inside a rectangular area (in geo coordinates).
@@ -23,12 +23,12 @@ public data class BoundingBox(
 
     companion object : KSerializer<BoundingBox> {
 
-        private val serializer = FloatSerializer
+        private val serializer = Float.serializer()
 
         override val descriptor = serializer.list.descriptor
 
-        override fun serialize(encoder: Encoder, obj: BoundingBox) {
-            serializer.list.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: BoundingBox) {
+            serializer.list.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): BoundingBox {

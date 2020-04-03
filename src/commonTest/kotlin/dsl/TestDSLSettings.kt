@@ -25,9 +25,9 @@ import com.algolia.search.dsl.searchableAttributes
 import com.algolia.search.dsl.settings
 import com.algolia.search.dsl.unretrieveableAttributes
 import indexA
-import kotlin.test.Test
 import shouldNotBeNull
 import unknown
+import kotlin.test.Test
 
 internal class TestDSLSettings {
 

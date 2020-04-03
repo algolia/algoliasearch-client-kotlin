@@ -1,8 +1,8 @@
 package helper
 
 import com.algolia.search.helper.sha256
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestHashing {
 

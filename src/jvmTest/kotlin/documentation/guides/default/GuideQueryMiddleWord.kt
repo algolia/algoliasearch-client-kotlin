@@ -4,17 +4,17 @@ import com.algolia.search.dsl.searchableAttributes
 import com.algolia.search.dsl.settings
 import com.algolia.search.serialize.Json
 import documentation.index
-import java.io.File
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.json.content
-import kotlinx.serialization.list
 import org.junit.Ignore
 import org.junit.Test
+import java.io.File
 
 @Ignore
 internal class GuideQueryMiddleWord {

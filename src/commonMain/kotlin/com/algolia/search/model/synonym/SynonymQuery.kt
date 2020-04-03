@@ -40,12 +40,12 @@ public data class SynonymQuery(
     @Serializer(SynonymQuery::class)
     companion object : SerializationStrategy<SynonymQuery> {
 
-        override fun serialize(encoder: Encoder, obj: SynonymQuery) {
+        override fun serialize(encoder: Encoder, value: SynonymQuery) {
             val json = json {
-                obj.query?.let { KeyQuery to it }
-                obj.page?.let { KeyPage to it }
-                obj.hitsPerPage?.let { KeyHitsPerPage to it }
-                obj.synonymTypes?.let { types -> KeyType to types.joinToString(",") { it.raw } }
+                value.query?.let { KeyQuery to it }
+                value.page?.let { KeyPage to it }
+                value.hitsPerPage?.let { KeyHitsPerPage to it }
+                value.synonymTypes?.let { types -> KeyType to types.joinToString(",") { it.raw } }
             }
 
             encoder.asJsonOutput().encodeJson(json)

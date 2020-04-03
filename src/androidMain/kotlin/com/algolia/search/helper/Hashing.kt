@@ -4,7 +4,6 @@ import android.util.Base64
 import io.ktor.utils.io.core.toByteArray
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
-import kotlinx.serialization.internal.HexConverter
 
 internal actual fun String.sha256(key: String): String {
     return Mac.getInstance("HmacSHA256").run {
@@ -12,7 +11,7 @@ internal actual fun String.sha256(key: String): String {
 
         init(secretKey)
         val hash = doFinal(key.toByteArray())
-        HexConverter.printHexBinary(hash, true)
+        hash.toHex(true)
     }
 }
 

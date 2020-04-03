@@ -3,9 +3,9 @@ package documentation.parameters.filtering
 import com.algolia.search.dsl.numericFilters
 import com.algolia.search.dsl.query
 import documentation.index
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 internal class DocNumericFilters {

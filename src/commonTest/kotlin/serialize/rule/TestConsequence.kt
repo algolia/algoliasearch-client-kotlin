@@ -24,16 +24,16 @@ import com.algolia.search.serialize.KeyPromote
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyUserData
 import com.algolia.search.serialize.toJsonNoDefaults
-import kotlin.test.Test
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.list
 import loadScratch
 import objectIDA
 import objectIDB
 import serialize.TestSerializer
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestConsequence : TestSerializer<Consequence>(Consequence.serializer(), JsonNoDefaults) {
 

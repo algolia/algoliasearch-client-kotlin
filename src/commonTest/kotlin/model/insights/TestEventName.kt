@@ -2,9 +2,9 @@ package model.insights
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.insights.EventName
-import kotlin.test.Test
 import shouldEqual
 import shouldFailWith
+import kotlin.test.Test
 
 internal class TestEventName {
 

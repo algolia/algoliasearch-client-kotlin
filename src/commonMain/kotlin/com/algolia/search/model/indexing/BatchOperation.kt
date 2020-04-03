@@ -122,20 +122,20 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
     @Serializer(BatchOperation::class)
     companion object : KSerializer<BatchOperation> {
 
-        private fun batchJson(obj: BatchOperation, block: JsonObjectBuilder.() -> Unit) = json {
-            KeyAction to obj.raw
+        private fun batchJson(value: BatchOperation, block: JsonObjectBuilder.() -> Unit) = json {
+            KeyAction to value.raw
             block(this)
         }
 
-        override fun serialize(encoder: Encoder, obj: BatchOperation) {
-            val json = when (obj) {
-                is AddObject -> batchJson(obj) { KeyBody to obj.json }
-                is ReplaceObject -> batchJson(obj) { KeyBody to obj.json.merge(json { KeyObjectID to obj.objectID.raw }) }
-                is PartialUpdateObject -> batchJson(obj) { KeyBody to obj.json.merge(json { KeyObjectID to obj.objectID.raw }) }
-                is DeleteObject -> batchJson(obj) { KeyBody to json { KeyObjectID to obj.objectID.raw } }
-                is DeleteIndex -> batchJson(obj) {}
-                is ClearIndex -> batchJson(obj) {}
-                is Other -> batchJson(obj) { KeyBody to obj.json }
+        override fun serialize(encoder: Encoder, value: BatchOperation) {
+            val json = when (value) {
+                is AddObject -> batchJson(value) { KeyBody to value.json }
+                is ReplaceObject -> batchJson(value) { KeyBody to value.json.merge(json { KeyObjectID to value.objectID.raw }) }
+                is PartialUpdateObject -> batchJson(value) { KeyBody to value.json.merge(json { KeyObjectID to value.objectID.raw }) }
+                is DeleteObject -> batchJson(value) { KeyBody to json { KeyObjectID to value.objectID.raw } }
+                is DeleteIndex -> batchJson(value) {}
+                is ClearIndex -> batchJson(value) {}
+                is Other -> batchJson(value) { KeyBody to value.json }
             }
 
             encoder.asJsonOutput().encodeJson(json)

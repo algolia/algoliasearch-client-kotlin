@@ -9,9 +9,9 @@ import com.algolia.search.serialize.KeyContains
 import com.algolia.search.serialize.KeyEndsWith
 import com.algolia.search.serialize.KeyIs
 import com.algolia.search.serialize.KeyStartsWith
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestAnchoring {
 

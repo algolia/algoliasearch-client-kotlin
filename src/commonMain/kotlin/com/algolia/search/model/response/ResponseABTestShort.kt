@@ -41,17 +41,17 @@ public data class ResponseABTestShort(
     companion object :
         KSerializer<ResponseABTestShort> {
 
-        override fun serialize(encoder: Encoder, obj: ResponseABTestShort) {
+        override fun serialize(encoder: Encoder, value: ResponseABTestShort) {
             val json = json {
-                KeyId to obj.abTestId
+                KeyId to value.abTestId
                 KeyVariants to jsonArray {
                     +JsonNoDefaults.toJson(
                         KSerializerVariant,
-                        obj.variantA
+                        value.variantA
                     )
                     +JsonNoDefaults.toJson(
                         KSerializerVariant,
-                        obj.variantB
+                        value.variantB
                     )
                 }
             }

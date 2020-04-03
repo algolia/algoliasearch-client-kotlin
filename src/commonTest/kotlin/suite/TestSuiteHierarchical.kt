@@ -9,12 +9,12 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import kotlin.test.Test
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
-import kotlinx.serialization.list
 import runBlocking
 import shouldBeTrue
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestSuiteHierarchical {
 
@@ -86,8 +86,8 @@ internal class TestSuiteHierarchical {
             response.hierarchicalFacets shouldEqual mapOf(
                 hierarchicalCategoryLvl0 to listOf(Facet(category3, 4), Facet(category2, 1)),
                 hierarchicalCategoryLvl1 to listOf(Facet(category3Sub2, 4)),
-                hierarchicalCategoryLvl2 to listOf(Facet(category3Sub2Sub1, 1), Facet(category3Sub2Sub2, 3)),
-                hierarchicalCategoryLvl3 to listOf(Facet(category3Sub2Sub2Sub2, 1), Facet(category3Sub2Sub2Sub1, 1))
+                hierarchicalCategoryLvl2 to listOf(Facet(category3Sub2Sub2, 3), Facet(category3Sub2Sub1, 1)),
+                hierarchicalCategoryLvl3 to listOf(Facet(category3Sub2Sub2Sub1, 1), Facet(category3Sub2Sub2Sub2, 1))
             )
             response.hits.size shouldEqual 3
             response.disjunctiveFacets shouldEqual mapOf(
@@ -140,8 +140,8 @@ internal class TestSuiteHierarchical {
             response.hierarchicalFacets shouldEqual mapOf(
                 hierarchicalCategoryLvl0 to listOf(Facet(category3, 6), Facet(category2, 2), Facet(category1, 1)),
                 hierarchicalCategoryLvl1 to listOf(Facet(category3Sub2, 4), Facet(category3Sub1, 2)),
-                hierarchicalCategoryLvl2 to listOf(Facet(category3Sub2Sub1, 1), Facet(category3Sub2Sub2, 3)),
-                hierarchicalCategoryLvl3 to listOf(Facet(category3Sub2Sub2Sub2, 1), Facet(category3Sub2Sub2Sub1, 1))
+                hierarchicalCategoryLvl2 to listOf(Facet(category3Sub2Sub2, 3), Facet(category3Sub2Sub1, 1)),
+                hierarchicalCategoryLvl3 to listOf(Facet(category3Sub2Sub2Sub1, 1), Facet(category3Sub2Sub2Sub2, 1))
             )
             response.hits.size shouldEqual 3
         }

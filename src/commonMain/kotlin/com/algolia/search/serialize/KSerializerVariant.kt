@@ -6,18 +6,18 @@ import com.algolia.search.model.search.Query
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.internal.SerialClassDescImpl
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.json.json
 
 public object KSerializerVariant : KSerializer<Variant> {
 
-    override val descriptor = SerialClassDescImpl("variant")
+    override val descriptor = SerialDescriptor("variant")
 
-    override fun serialize(encoder: Encoder, obj: Variant) {
+    override fun serialize(encoder: Encoder, value: Variant) {
         val json = json {
-            KeyIndexName to obj.indexName.raw
-            KeyPercentage to obj.trafficPercentage
-            obj.customSearchParameters?.let {
+            KeyIndexName to value.indexName.raw
+            KeyPercentage to value.trafficPercentage
+            value.customSearchParameters?.let {
                 KeyCustomSearchParameters to JsonNoDefaults.toJson(Query.serializer(), it)
             }
         }

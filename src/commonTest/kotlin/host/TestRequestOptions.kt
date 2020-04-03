@@ -4,8 +4,8 @@ import com.algolia.search.dsl.requestOptions
 import com.algolia.search.helper.toUserID
 import com.algolia.search.serialize.KeyAlgoliaUserID
 import com.algolia.search.serialize.KeyForwardedFor
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestRequestOptions {
 

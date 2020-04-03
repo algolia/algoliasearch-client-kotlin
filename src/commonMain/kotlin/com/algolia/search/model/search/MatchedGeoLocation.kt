@@ -28,11 +28,11 @@ public data class MatchedGeoLocation(
     @Serializer(MatchedGeoLocation::class)
     companion object : KSerializer<MatchedGeoLocation> {
 
-        override fun serialize(encoder: Encoder, obj: MatchedGeoLocation) {
+        override fun serialize(encoder: Encoder, value: MatchedGeoLocation) {
             val json = json {
-                KeyDistance to obj.distance
-                KeyLat to obj.point.latitude
-                KeyLng to obj.point.longitude
+                KeyDistance to value.distance
+                KeyLat to value.point.latitude
+                KeyLng to value.point.longitude
             }
 
             encoder.asJsonOutput().encodeJson(json)

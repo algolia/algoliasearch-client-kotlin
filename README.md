@@ -21,7 +21,7 @@
 
 ## ✨ Features
 
-- The Kotlin client is compatible with Kotlin `1.3.41` and higher.
+- The Kotlin client is compatible with Kotlin `1.3.70` and higher.
 - It is compatible with Kotlin project on the JVM, such as backend and Android applications.
 - It relies on the open source Kotlin libraries for seamless integration into Kotlin projects:
   - [Kotlin multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html).

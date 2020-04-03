@@ -17,7 +17,7 @@ import com.algolia.search.serialize.RouteRules
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.list
+import kotlinx.serialization.builtins.list
 
 internal class EndpointRuleImpl(
     private val transport: Transport,

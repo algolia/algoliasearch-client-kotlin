@@ -12,7 +12,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 @Serializable(PlaceType.Companion::class)
 sealed class PlaceType(override val raw: String) : Raw<String> {
@@ -35,12 +35,12 @@ sealed class PlaceType(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<PlaceType> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: PlaceType) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: PlaceType) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): PlaceType {

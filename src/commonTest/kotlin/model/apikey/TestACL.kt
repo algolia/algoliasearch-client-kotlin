@@ -23,9 +23,9 @@ import com.algolia.search.serialize.KeyLogs
 import com.algolia.search.serialize.KeySearch
 import com.algolia.search.serialize.KeySeeUnretrievableAttributes
 import com.algolia.search.serialize.KeySettings
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestACL {
 

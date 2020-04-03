@@ -365,8 +365,8 @@ import com.algolia.search.serialize.Key_Operation
 import com.algolia.search.serialize.Key_RankingInfo
 import com.algolia.search.serialize.Key_SnippetResult
 import com.algolia.search.serialize.Key_Tags
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestKeys {
 

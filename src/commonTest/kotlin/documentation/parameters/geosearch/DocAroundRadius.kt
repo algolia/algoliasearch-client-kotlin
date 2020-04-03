@@ -3,9 +3,9 @@ package documentation.parameters.geosearch
 import com.algolia.search.dsl.query
 import com.algolia.search.model.search.AroundRadius
 import documentation.index
+import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-import runBlocking
 
 @Ignore
 internal class DocAroundRadius {

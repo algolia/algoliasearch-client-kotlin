@@ -10,9 +10,9 @@ import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.request.RequestInsightsEvents
 import com.algolia.search.serialize.JsonDebug
-import kotlin.test.Test
 import loadScratch
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestInsightsEvent {
 

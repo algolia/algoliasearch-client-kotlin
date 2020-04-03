@@ -8,8 +8,6 @@ import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlin.collections.set
-import kotlin.collections.toMutableMap
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
@@ -17,6 +15,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonObject
+import kotlin.collections.set
 
 @Serializable(BatchOperationIndex.Companion::class)
 public data class BatchOperationIndex(
@@ -33,10 +32,10 @@ public data class BatchOperationIndex(
     @Serializer(BatchOperationIndex::class)
     companion object : KSerializer<BatchOperationIndex> {
 
-        override fun serialize(encoder: Encoder, obj: BatchOperationIndex) {
+        override fun serialize(encoder: Encoder, value: BatchOperationIndex) {
             val elements =
-                Json.toJson(BatchOperation, obj.operation).jsonObject.content.toMutableMap().also {
-                    it[KeyIndexName] = JsonLiteral(obj.indexName.raw)
+                Json.toJson(BatchOperation, value.operation).jsonObject.content.toMutableMap().also {
+                    it[KeyIndexName] = JsonLiteral(value.indexName.raw)
                 }
 
             encoder.asJsonOutput().encodeJson(JsonObject(elements))

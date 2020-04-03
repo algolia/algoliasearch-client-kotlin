@@ -12,10 +12,10 @@ import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.search.Query
 import documentation.index
-import kotlin.test.Ignore
-import kotlin.test.Test
 import kotlinx.serialization.json.jsonArray
 import runBlocking
+import kotlin.test.Ignore
+import kotlin.test.Test
 
 @Ignore
 internal class GuideRestrictSubset {

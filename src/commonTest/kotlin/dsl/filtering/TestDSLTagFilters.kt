@@ -5,8 +5,8 @@ import attributeB
 import com.algolia.search.dsl.filtering.DSLTagFilters
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLTagFilters {
 

@@ -12,9 +12,9 @@ import com.algolia.search.serialize.KeySplit
 import com.algolia.search.serialize.KeyStopWord
 import com.algolia.search.serialize.KeySynonym
 import com.algolia.search.serialize.KeyTypo
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestAlternativeType {
 

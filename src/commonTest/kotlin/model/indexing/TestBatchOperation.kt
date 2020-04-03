@@ -15,10 +15,10 @@ import com.algolia.search.serialize.KeyDeleteObject
 import com.algolia.search.serialize.KeyPartialUpdateObject
 import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
 import com.algolia.search.serialize.KeyUpdateObject
-import kotlin.test.Test
 import kotlinx.serialization.json.json
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestBatchOperation {
 

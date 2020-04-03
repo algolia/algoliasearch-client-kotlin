@@ -15,9 +15,9 @@ import com.algolia.search.serialize.KeyCity
 import com.algolia.search.serialize.KeyCountry
 import com.algolia.search.serialize.KeyTownhall
 import com.algolia.search.serialize.KeyTrainStation
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestPlaceType {
 

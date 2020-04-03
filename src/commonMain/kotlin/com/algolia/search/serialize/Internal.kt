@@ -13,6 +13,7 @@ import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
+import kotlinx.serialization.UnstableDefault
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonConfiguration
 import kotlinx.serialization.json.JsonElementSerializer
@@ -41,6 +42,7 @@ internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     }
 }
 
+@OptIn(UnstableDefault::class)
 internal fun JsonObject.urlEncode(): String? {
     return if (isNotEmpty()) {
         Parameters.build {
@@ -75,7 +77,13 @@ internal fun RequestAPIKey.stringify(): String {
 
 internal val Json = Json(JsonConfiguration.Stable.copy())
 internal val JsonNoDefaults = Json(JsonConfiguration.Stable.copy(encodeDefaults = false))
-internal val JsonNonStrict = Json(JsonConfiguration.Stable.copy(strictMode = false))
+internal val JsonNonStrict = Json(
+    JsonConfiguration.Stable.copy(
+        ignoreUnknownKeys = true,
+        isLenient = true,
+        serializeSpecialFloatingPointValues = true
+    )
+)
 internal val JsonDebug = Json(JsonConfiguration.Stable.copy(prettyPrint = true, indent = "  ", encodeDefaults = false))
 
 internal fun List<IndexQuery>.toBody(strategy: MultipleQueriesStrategy?): String {

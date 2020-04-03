@@ -20,8 +20,8 @@ import com.algolia.search.serialize.toBody
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.json
-import kotlinx.serialization.list
 
 internal class EndpointMultipleIndexImpl(
     private val transport: Transport

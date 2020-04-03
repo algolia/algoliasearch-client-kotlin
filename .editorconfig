@@ -8,3 +8,9 @@ indent_style = space
 insert_final_newline = true
 max_line_length = 120
 tab_width = 4
+
+# noinspection EditorConfigKeyCorrectness
+# Disable Ktlint import ordering temporarily
+# https://github.com/pinterest/ktlint/issues/527
+[*.{kt, kts}]
+disabled_rules = import-ordering
