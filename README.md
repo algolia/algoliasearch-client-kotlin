@@ -53,6 +53,8 @@ Install the Kotlin client by adding the following dependency to your `gradle.bui
 
 For full documentation, visit the **[Algolia Kotlin API Client](https://www.algolia.com/doc/api-client/getting-started/install/kotlin/)**.
 
+_ ⚠️ Important: starting from version `1.4.0` the library is compatible with kotlin version `1.3.70` or higher. This is due to the breaking changes of kotlin serialization library._
+
 ### Coroutines
 
 All methods performing HTTP calls in the Kotlin client are [suspending functions](https://kotlinlang.org/docs/reference/coroutines/composing-suspending-functions.html#composing-suspending-functions). 

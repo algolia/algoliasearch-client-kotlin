@@ -1,3 +1,12 @@
+# 1.4.0
+
+Starting from this version, the library is compatible only with kotlin version `1.3.70` or higher, 
+this due the [breaking changes](https://github.com/Kotlin/kotlinx.serialization/blob/master/CHANGELOG.md#0200--2020-03-04) of kotlin serialization library.
+
+- Updated Kotlin to `1.3.70`
+- Updated Ktor client to `1.3.2`
+- Updated Kotlin serialization `0.20.0`
+
 # 1.3.1
 
 - Updated Ktor to `1.3.0`
