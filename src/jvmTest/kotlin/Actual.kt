@@ -1,4 +1,8 @@
-import com.algolia.search.client.*
+import com.algolia.search.client.ClientAnalytics
+import com.algolia.search.client.ClientInsights
+import com.algolia.search.client.ClientPlaces
+import com.algolia.search.client.ClientRecommendation
+import com.algolia.search.client.ClientSearch
 import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Region

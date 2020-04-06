@@ -4,7 +4,6 @@ import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyEU
 import com.algolia.search.serialize.KeyUS
 
-
 /**
  * Available regions, used in [ConfigurationRecommendation].
  */

@@ -1,6 +1,7 @@
 package com.algolia.search.model.recommendation
 
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyMessage
+import com.algolia.search.serialize.KeyStatus
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

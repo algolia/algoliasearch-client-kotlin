@@ -1,4 +1,3 @@
-
 import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientPlaces
