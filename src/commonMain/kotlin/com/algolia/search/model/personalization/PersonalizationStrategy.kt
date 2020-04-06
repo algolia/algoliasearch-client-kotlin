@@ -4,6 +4,10 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.insights.EventName
 import kotlinx.serialization.Serializable
 
+@Deprecated(
+    message = "Models are deprecated please use models located in com.algolia.search.model.recommendation.",
+    level = DeprecationLevel.WARNING
+)
 @Serializable
 public data class PersonalizationStrategy(
     /**

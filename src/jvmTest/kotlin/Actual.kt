@@ -1,9 +1,11 @@
 import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientPlaces
+import com.algolia.search.client.ClientRecommendation
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.ConfigurationSearch
+import com.algolia.search.configuration.Region
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
 import kotlinx.coroutines.CoroutineScope
@@ -40,6 +42,13 @@ internal actual val clientInsights = ClientInsights(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey()
 )
+
+internal actual val clientRecommendation = ClientRecommendation(
+    System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
+    System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey(),
+    Region.EU
+)
+
 internal actual val clientPlaces = ClientPlaces(
     System.getenv("ALGOLIA_PLACES_APP_ID").toApplicationID(),
     System.getenv("ALGOLIA_PLACES_KEY").toAPIKey()

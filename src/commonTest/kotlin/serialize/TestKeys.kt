@@ -102,6 +102,7 @@ import com.algolia.search.serialize.KeyDisjunctiveFacets
 import com.algolia.search.serialize.KeyDistance
 import com.algolia.search.serialize.KeyDistinct
 import com.algolia.search.serialize.KeyDistrict
+import com.algolia.search.serialize.KeyEU
 import com.algolia.search.serialize.KeyEditSettings
 import com.algolia.search.serialize.KeyEdits
 import com.algolia.search.serialize.KeyEnableABTest
@@ -337,6 +338,7 @@ import com.algolia.search.serialize.KeyTypes
 import com.algolia.search.serialize.KeyTypo
 import com.algolia.search.serialize.KeyTypoTolerance
 import com.algolia.search.serialize.KeyTypos
+import com.algolia.search.serialize.KeyUS
 import com.algolia.search.serialize.KeyUnordered
 import com.algolia.search.serialize.KeyUnretrievableAttributes
 import com.algolia.search.serialize.KeyUntil
@@ -737,5 +739,7 @@ internal class TestKeys {
         KeyTypes shouldEqual "types"
         KeyPending shouldEqual "pending"
         KeyGetClusters shouldEqual "getClusters"
+        KeyEU shouldEqual "eu"
+        KeyUS shouldEqual "us"
     }
 }
