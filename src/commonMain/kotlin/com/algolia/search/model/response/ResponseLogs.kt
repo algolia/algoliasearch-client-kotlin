@@ -3,6 +3,7 @@ package com.algolia.search.model.response
 import com.algolia.search.model.ClientDate
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.QueryID
+import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.KeyAnswer
 import com.algolia.search.serialize.KeyAnswer_Code
@@ -113,8 +114,8 @@ public data class ResponseLogs(
         public data class InnerQuery(
             @SerialName(KeyIndex_Name) val indexName: IndexName? = null,
             @SerialName(KeyQuery_ID) val queryID: QueryID? = null,
-            @SerialName(KeyOffset) val offset: Long? = null,
-            @SerialName(KeyUser_Token) val userToken: String? = null
+            @SerialName(KeyOffset) val offset: Int? = null,
+            @SerialName(KeyUser_Token) val userToken: UserToken? = null
         )
     }
 }
