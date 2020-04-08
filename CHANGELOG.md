@@ -12,7 +12,7 @@ this due the [breaking changes](https://github.com/Kotlin/kotlinx.serialization/
 - Updated Kotlin serialization `0.20.0`
 
 ### Fixed
-- Ensure correctly typing of API key's restrictIndices` and `restrictSources` parameters (#167, #168)
+- Ensure correctly typing of API key's `restrictIndices` and `restrictSources` parameters (#167, #168)
 
 # 1.3.1
 
