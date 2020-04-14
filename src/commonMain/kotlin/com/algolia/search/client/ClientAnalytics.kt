@@ -4,6 +4,7 @@ import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationAnalytics
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.CredentialsImpl
+import com.algolia.search.configuration.Region
 import com.algolia.search.endpoint.EndpointAnalytics
 import com.algolia.search.endpoint.EndpointAnalyticsImpl
 import com.algolia.search.model.APIKey
@@ -22,6 +23,22 @@ public class ClientAnalytics private constructor(
     Configuration by transport,
     Credentials by transport.credentials {
 
+    public constructor(
+        applicationID: ApplicationID,
+        apiKey: APIKey,
+        region: Region.Analytics
+    ) : this(
+        Transport(
+            ConfigurationAnalytics(applicationID, apiKey, region),
+            CredentialsImpl(applicationID, apiKey)
+        )
+    )
+
+    @Deprecated(
+        message = "Explicitly specify analytics region",
+        level = DeprecationLevel.WARNING,
+        replaceWith = ReplaceWith("ClientAnalytics(applicationID, apiKey, Region.Analytics.US)")
+    )
     public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey
