@@ -26,8 +26,9 @@ public data class ConfigurationAnalytics(
 ) : Configuration, Credentials {
 
     @Deprecated(
-        message = "Use default constructor and explicitly specify an analytics region",
-        level = DeprecationLevel.WARNING
+        message = "Explicitly specify an analytics region",
+        level = DeprecationLevel.WARNING,
+        replaceWith = ReplaceWith("ConfigurationAnalytics(applicationID, apiKey, Region.Analytics.US)")
     )
     constructor(
         applicationID: ApplicationID,
