@@ -62,6 +62,7 @@ import com.algolia.search.serialize.KeyMinProximity
 import com.algolia.search.serialize.KeyMinWordSizeFor1Typo
 import com.algolia.search.serialize.KeyMinWordSizeFor2Typos
 import com.algolia.search.serialize.KeyMinimumAroundRadius
+import com.algolia.search.serialize.KeyNaturalLanguages
 import com.algolia.search.serialize.KeyNumericFilters
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyOptionalFilters
@@ -166,7 +167,8 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             percentileComputation = boolean,
             similarQuery = string,
             enableABTest = boolean,
-            explainModules = listOf(ExplainModule.MatchAlternatives)
+            explainModules = listOf(ExplainModule.MatchAlternatives),
+            naturalLanguages = listOf(Language.Afrikaans, Language.Albanian)
         ) to json {
             KeyQuery to string
             KeyAttributesToRetrieve to attributesJson
@@ -236,6 +238,10 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             KeySimilarQuery to string
             KeyEnableABTest to boolean
             KeyExplain to jsonArray { +ExplainModule.MatchAlternatives.raw }
+            KeyNaturalLanguages to jsonArray {
+                +Language.Afrikaans.raw
+                +Language.Albanian.raw
+            }
         }
     )
 

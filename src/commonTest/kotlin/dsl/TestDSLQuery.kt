@@ -14,6 +14,7 @@ import com.algolia.search.dsl.facets
 import com.algolia.search.dsl.filters
 import com.algolia.search.dsl.insideBoundingBox
 import com.algolia.search.dsl.insidePolygon
+import com.algolia.search.dsl.naturalLanguages
 import com.algolia.search.dsl.numericFilters
 import com.algolia.search.dsl.optionalFilters
 import com.algolia.search.dsl.optionalWords
@@ -233,5 +234,17 @@ internal class TestDSLQuery {
         }
 
         query.explainModules.shouldNotBeNull()
+    }
+
+    @Test
+    fun naturalLanguages() {
+        val query = query {
+            naturalLanguages {
+                +English
+                +French
+            }
+        }
+
+        query.naturalLanguages.shouldNotBeNull()
     }
 }
