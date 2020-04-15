@@ -211,6 +211,7 @@ import com.algolia.search.serialize.KeyMinimumAroundRadius
 import com.algolia.search.serialize.KeyMove
 import com.algolia.search.serialize.KeyMultiWordsSynonym
 import com.algolia.search.serialize.KeyName
+import com.algolia.search.serialize.KeyNaturalLanguages
 import com.algolia.search.serialize.KeyNbExactWords
 import com.algolia.search.serialize.KeyNbHits
 import com.algolia.search.serialize.KeyNbPages
@@ -741,5 +742,6 @@ internal class TestKeys {
         KeyGetClusters shouldEqual "getClusters"
         KeyEU shouldEqual "eu"
         KeyUS shouldEqual "us"
+        KeyNaturalLanguages shouldEqual "naturalLanguages"
     }
 }
