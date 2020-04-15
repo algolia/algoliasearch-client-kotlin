@@ -13,11 +13,19 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.ExplainModule
 import com.algolia.search.model.search.IgnorePlurals
+import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.search.RemoveWordIfNoResults
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
+import com.algolia.search.serialize.KeyAnalyticsTags
+import com.algolia.search.serialize.KeyIgnorePlurals
+import com.algolia.search.serialize.KeyRemoveStopWords
+import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
+import com.algolia.search.serialize.KeyRuleContexts
+import io.ktor.http.parseUrlEncodedParameters
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
@@ -87,6 +95,17 @@ internal class TestSuiteSearch {
                 facetHits shouldContain "Amazon"
                 facetHits shouldContain "Apple"
                 facetHits shouldContain "Arista Networks"
+            }
+
+            search.apply {
+                val lang = Language.English
+                val parameters = search(Query(query = "elon", naturalLanguages = listOf(lang)))
+                    .params.parseUrlEncodedParameters()
+                parameters[KeyRemoveStopWords] shouldEqual lang.raw
+                parameters[KeyIgnorePlurals] shouldEqual lang.raw
+                parameters[KeyRemoveWordsIfNoResults] shouldEqual RemoveWordIfNoResults.AllOptional.raw
+                parameters[KeyAnalyticsTags] shouldEqual "natural_language"
+                parameters[KeyRuleContexts] shouldEqual "natural_language"
             }
         }
     }

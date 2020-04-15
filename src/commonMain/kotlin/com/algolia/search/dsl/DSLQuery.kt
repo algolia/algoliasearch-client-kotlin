@@ -178,3 +178,10 @@ public fun Query.responseFields(block: DSLResponseFields.() -> Unit) {
 public fun Query.explainModules(block: DSLExplainModules.() -> Unit) {
     explainModules = DSLExplainModules(block)
 }
+
+/**
+ * Assign the output of [block] to [Query.naturalLanguages].
+ */
+public fun Query.naturalLanguages(block: DSLLanguage.() -> Unit) {
+    naturalLanguages = DSLLanguage(block)
+}
