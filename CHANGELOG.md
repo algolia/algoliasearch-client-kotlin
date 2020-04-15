@@ -5,6 +5,7 @@ this due the [breaking changes](https://github.com/Kotlin/kotlinx.serialization/
 
 ### Added
 - Recommendation client (#148)
+- Natural languages parameter to search query (#173)
 
 ### Changed
 - Updated Kotlin to `1.3.70`
