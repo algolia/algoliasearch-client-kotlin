@@ -14,7 +14,8 @@ internal class TestSuiteLogs {
             clientAdmin1.apply {
                 listIndices()
                 listIndices()
-                getLogs(hitsPerPage = 2, page = 0, logType = LogType.All).logs.size shouldEqual 2
+                val responseLogs = getLogs(hitsPerPage = 2, page = 0, logType = LogType.All)
+                responseLogs.logs.size shouldEqual 2
             }
         }
     }
