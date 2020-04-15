@@ -47,6 +47,7 @@ import com.algolia.search.serialize.KeyMinProximity
 import com.algolia.search.serialize.KeyMinWordSizeFor1Typo
 import com.algolia.search.serialize.KeyMinWordSizeFor2Typos
 import com.algolia.search.serialize.KeyMinimumAroundRadius
+import com.algolia.search.serialize.KeyNaturalLanguages
 import com.algolia.search.serialize.KeyNumericFilters
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyOptionalFilters
@@ -541,5 +542,12 @@ public data class Query(
      * Engine default: null
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/decompoundedAttributes/?language=kotlin]
      */
-    @SerialName(KeyExplain) var explainModules: List<ExplainModule>? = null
+    @SerialName(KeyExplain) var explainModules: List<ExplainModule>? = null,
+
+    /**
+     * List of supported languages with their associated language ISO code.
+     * Provide an easy way to implement voice and natural languages best practices such as ignorePlurals,
+     * removeStopWords, removeWordsIfNoResults, analyticsTags and ruleContexts.
+     */
+    @SerialName(KeyNaturalLanguages) var naturalLanguages: List<Language>? = null
 )
