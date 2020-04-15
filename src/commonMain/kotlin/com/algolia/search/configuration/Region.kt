@@ -1,21 +1,36 @@
 package com.algolia.search.configuration
 
 import com.algolia.search.model.Raw
+import com.algolia.search.serialize.KeyDE
 import com.algolia.search.serialize.KeyEU
 import com.algolia.search.serialize.KeyUS
 
 /**
- * Available regions, used in [ConfigurationRecommendation].
+ * Region configuration, used in some [Configuration] implementations.
  */
-public sealed class Region(override val raw: String) : Raw<String> {
+public sealed class Region {
 
-    public object EU : Region(KeyEU)
+    /**
+     * Available analytics' regions, used in [ConfigurationAnalytics].
+     */
+    public sealed class Analytics(override val raw: String) : Raw<String> {
 
-    public object US : Region(KeyUS)
+        public object EU : Analytics(KeyDE)
+        public object US : Analytics(KeyUS)
+        public class Other(override val raw: String) : Analytics(raw)
 
-    public data class Other(override val raw: String) : Region(raw)
+        override fun toString(): String = raw
+    }
 
-    override fun toString(): String {
-        return raw
+    /**
+     * Available regions, used in [ConfigurationRecommendation].
+     */
+    public sealed class Recommendation(override val raw: String) : Raw<String> {
+
+        public object EU : Recommendation(KeyEU)
+        public object US : Recommendation(KeyUS)
+        public class Other(override val raw: String) : Recommendation(raw)
+
+        override fun toString(): String = raw
     }
 }

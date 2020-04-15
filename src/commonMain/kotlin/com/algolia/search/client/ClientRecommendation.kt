@@ -23,7 +23,7 @@ public class ClientRecommendation private constructor(
     public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey,
-        region: Region
+        region: Region.Recommendation
     ) : this(
         Transport(
             ConfigurationRecommendation(applicationID, apiKey, region),

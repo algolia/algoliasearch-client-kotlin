@@ -46,7 +46,6 @@ public data class SecuredAPIKeyRestriction(
             restrictSources?.let { append(RESTRICT_SOURCES, it.joinToString(";")) }
             userToken?.let { append(USER_TOKEN, it.raw) }
             validUntil?.let { append(VALID_UNTIL, it.toString()) }
-
         }.formUrlEncode()
     }
 
