@@ -10,7 +10,7 @@ this due the [breaking changes](https://github.com/Kotlin/kotlinx.serialization/
 - Logs inner queries (#174)
 
 ### Changed
-- Updated Kotlin to `1.3.70`
+- Updated Kotlin to `1.3.72`
 - Updated Ktor client to `1.3.2`
 - Updated Kotlin serialization `0.20.0`
 
