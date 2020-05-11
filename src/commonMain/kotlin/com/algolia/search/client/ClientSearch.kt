@@ -14,8 +14,6 @@ import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMulticlusterImpl
 import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.endpoint.EndpointMultipleIndexImpl
-import com.algolia.search.endpoint.EndpointPersonalization
-import com.algolia.search.endpoint.EndpointPersonalizationImpl
 import com.algolia.search.helper.decodeBase64
 import com.algolia.search.helper.encodeBase64
 import com.algolia.search.helper.sha256
@@ -58,7 +56,6 @@ public class ClientSearch private constructor(
     EndpointMultipleIndex by EndpointMultipleIndexImpl(transport),
     EndpointAPIKey by EndpointAPIKeyImpl(transport),
     EndpointMultiCluster by EndpointMulticlusterImpl(transport),
-    EndpointPersonalization by EndpointPersonalizationImpl(transport),
     Configuration by transport,
     Credentials by transport.credentials {
 
