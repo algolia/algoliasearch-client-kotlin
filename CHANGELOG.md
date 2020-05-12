@@ -8,6 +8,7 @@ this due the [breaking changes](https://github.com/Kotlin/kotlinx.serialization/
 - Add analytics regions (#170)
 - Natural languages parameter to search query (#173)
 - Logs inner queries (#174)
+- Add personalization as part of the `RankingInfo` of the ResponseSearch (#185)
 
 ### Changed
 - Updated Kotlin to `1.3.72`
@@ -16,6 +17,10 @@ this due the [breaking changes](https://github.com/Kotlin/kotlinx.serialization/
 
 ### Fixed
 - Ensure correctly typing of API key's `restrictIndices` and `restrictSources` parameters (#167, #168)
+- Search response serialization after enabling personalization (#185)
+
+### Removed
+- Remove deprecated personalization endpoint in favor of the recommendation client (#185)
 
 # 1.3.1
 
