@@ -332,7 +332,7 @@ public data class ResponseSearch(
         public val distinctSeqIDOrNull: Int? = json.getPrimitiveOrNull(Key_DistinctSeqID)?.int
 
         public val rankingInfoOrNull: RankingInfo? = json.getObjectOrNull(Key_RankingInfo)?.let {
-            Json.fromJson(RankingInfo.serializer(), it)
+            JsonNonStrict.fromJson(RankingInfo.serializer(), it)
         }
 
         public val highlightResultOrNull: JsonObject? = json.getObjectOrNull(Key_HighlightResult)
