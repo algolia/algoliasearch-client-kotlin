@@ -19,9 +19,10 @@ import com.algolia.search.serialize.KeyTimestamp
 import com.algolia.search.serialize.KeyUserToken
 import com.algolia.search.serialize.KeyView
 import com.algolia.search.serialize.asJsonOutput
+import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.json
@@ -94,7 +95,7 @@ public sealed class InsightsEvent {
     }
 
     @Serializer(InsightsEvent::class)
-    companion object : SerializationStrategy<InsightsEvent> {
+    companion object : KSerializer<InsightsEvent> {
 
         private infix fun JsonObjectBuilder.stringify(resources: Resources?) {
             when (resources) {
@@ -129,6 +130,10 @@ public sealed class InsightsEvent {
                 }
             }
             encoder.asJsonOutput().encodeJson(json)
+        }
+
+        override fun deserialize(decoder: Decoder): InsightsEvent {
+            throw UnsupportedOperationException("Insight event deserialization is not an expected operation")
         }
     }
 }
