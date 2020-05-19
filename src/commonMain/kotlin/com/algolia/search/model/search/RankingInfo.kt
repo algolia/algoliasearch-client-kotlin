@@ -1,8 +1,6 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.endpoint.EndpointPlaces
-import com.algolia.search.model.multicluster.ClusterName
-import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.GeoDistance
