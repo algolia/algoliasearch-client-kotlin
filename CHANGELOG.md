@@ -18,6 +18,7 @@ this due the [breaking changes](https://github.com/Kotlin/kotlinx.serialization/
 ### Fixed
 - Ensure correctly typing of API key's `restrictIndices` and `restrictSources` parameters (#167, #168)
 - Search response serialization after enabling personalization (#185)
+- Insights event serialization causing errors in old Android JVMs (#189)
 
 ### Removed
 - Remove deprecated personalization endpoint in favor of the recommendation client (#185)
