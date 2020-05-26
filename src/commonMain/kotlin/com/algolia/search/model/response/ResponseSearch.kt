@@ -21,6 +21,7 @@ import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.KSerializerFacetMap
 import com.algolia.search.serialize.KSerializerPoint
 import com.algolia.search.serialize.KeyAbTestVariantID
+import com.algolia.search.serialize.KeyAppliedRules
 import com.algolia.search.serialize.KeyAroundLatLng
 import com.algolia.search.serialize.KeyAutomaticRadius
 import com.algolia.search.serialize.KeyCursor
@@ -211,7 +212,8 @@ public data class ResponseSearch(
     /**
      * Meta-information as to how the query was processed.
      */
-    @SerialName(KeyExplain) val explainOrNull: Explain? = null
+    @SerialName(KeyExplain) val explainOrNull: Explain? = null,
+    @SerialName(KeyAppliedRules) val appliedRulesOrNull: List<JsonObject>? = null
 ) {
 
     public val hits: List<Hit>
@@ -303,6 +305,9 @@ public data class ResponseSearch(
 
     public val explain: Explain
         get() = explainOrNull!!
+
+    public val appliedRules: List<JsonObject>
+        get() = appliedRulesOrNull!!
 
     @Deprecated(
         message = "Use getObjectPosition instead.",
