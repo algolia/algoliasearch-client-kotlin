@@ -40,7 +40,7 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
     public sealed class Legacy<T : Filter> : FilterGroupsConverter<Set<FilterGroup<T>>, List<List<String>>>() {
 
         override fun invoke(groups: Set<FilterGroup<T>>): List<List<String>> {
-            return toLegacy(groups, escape = false)
+            return toLegacy(groups, escape = true)
         }
 
         /**
@@ -48,7 +48,7 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
          */
         @Suppress("FunctionName") // To keep DX consistency
         public fun Unquoted(groups: Set<FilterGroup<T>>): List<List<String>> {
-            return toLegacy(groups, escape = true)
+            return toLegacy(groups, escape = false)
         }
 
         private fun toLegacy(groups: Set<FilterGroup<T>>, escape: Boolean): List<List<String>> {
@@ -60,7 +60,7 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
         }
 
         private fun <T : Filter> convertFilter(filter: T, escape: Boolean): List<String> {
-            return if (escape) FilterConverter.Legacy.Unquoted(filter) else FilterConverter.Legacy(filter)
+            return if (escape) FilterConverter.Legacy(filter) else FilterConverter.Legacy.Unquoted(filter)
         }
 
         object Facet : Legacy<Filter.Facet>()

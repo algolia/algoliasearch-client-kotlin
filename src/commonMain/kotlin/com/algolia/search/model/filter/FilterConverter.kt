@@ -25,7 +25,7 @@ public sealed class FilterConverter<I : Filter, O> : (I) -> O {
     public object Legacy : FilterConverter<Filter, List<String>>() {
 
         override fun invoke(filter: Filter): List<String> {
-            return toLegacy(filter, escape = false)
+            return toLegacy(filter, escape = true)
         }
 
         /**
@@ -34,7 +34,7 @@ public sealed class FilterConverter<I : Filter, O> : (I) -> O {
         public object Unquoted : FilterConverter<Filter, List<String>>() {
 
             override fun invoke(filter: Filter): List<String> {
-                return toLegacy(filter, escape = true)
+                return toLegacy(filter, escape = false)
             }
         }
 
