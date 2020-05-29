@@ -213,6 +213,9 @@ public data class ResponseSearch(
      * Meta-information as to how the query was processed.
      */
     @SerialName(KeyExplain) val explainOrNull: Explain? = null,
+    /**
+     * The rules applied to the query.
+     */
     @SerialName(KeyAppliedRules) val appliedRulesOrNull: List<JsonObject>? = null
 ) {
 
