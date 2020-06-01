@@ -30,6 +30,7 @@ import com.algolia.search.model.search.Polygon
 import shouldNotBeNull
 import unknown
 import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class TestDSLQuery {
 
@@ -71,6 +72,19 @@ internal class TestDSLQuery {
         }
 
         query.facetFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("\"attributeA\":0")), query.facetFilters)
+    }
+
+    @Test
+    fun facetFiltersUnquoted() {
+        val query = query {
+            facetFilters(escape = false) {
+                and { facet(attributeA, 0) }
+            }
+        }
+
+        query.facetFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("attributeA:0")), query.facetFilters)
     }
 
     @Test
@@ -82,6 +96,19 @@ internal class TestDSLQuery {
         }
 
         query.numericFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("\"attributeA\" >= 0"), listOf("\"attributeA\" <= 1")), query.numericFilters)
+    }
+
+    @Test
+    fun numericFiltersUnquoted() {
+        val query = query {
+            numericFilters(escape = false) {
+                and { range(attributeA, 0..1) }
+            }
+        }
+
+        query.numericFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("attributeA >= 0"), listOf("attributeA <= 1")), query.numericFilters)
     }
 
     @Test
@@ -93,6 +120,19 @@ internal class TestDSLQuery {
         }
 
         query.tagFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("_tags:\"unknown\"")), query.tagFilters)
+    }
+
+    @Test
+    fun tagFiltersUnquoted() {
+        val query = query {
+            tagFilters(escape = false) {
+                and { tag(unknown) }
+            }
+        }
+
+        query.tagFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("_tags:unknown")), query.tagFilters)
     }
 
     @Test
@@ -104,6 +144,19 @@ internal class TestDSLQuery {
         }
 
         query.optionalFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("\"attributeA\":0")), query.optionalFilters)
+    }
+
+    @Test
+    fun optionalFiltersUnquoted() {
+        val query = query {
+            optionalFilters(escape = false) {
+                and { facet(attributeA, 0) }
+            }
+        }
+
+        query.optionalFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("attributeA:0")), query.optionalFilters)
     }
 
     @Test

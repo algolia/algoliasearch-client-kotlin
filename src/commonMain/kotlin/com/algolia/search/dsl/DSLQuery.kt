@@ -49,29 +49,41 @@ public fun Query.filters(block: DSLFilters.() -> Unit) {
 /**
  * Use [FilterGroupsConverter.Legacy] on the [block] output and assign it to [Query.optionalFilters].
  */
-public fun Query.optionalFilters(block: DSLFacetFilters.() -> Unit) {
-    optionalFilters = FilterGroupsConverter.Legacy.Facet(DSLFacetFilters(block))
+public fun Query.optionalFilters(escape: Boolean = true, block: DSLFacetFilters.() -> Unit) {
+    optionalFilters = when(escape) {
+        true -> FilterGroupsConverter.Legacy.Facet(DSLFacetFilters(block))
+        false -> FilterGroupsConverter.Legacy.Facet.Unquoted(DSLFacetFilters(block))
+    }
 }
 
 /**
  * Use [FilterGroupsConverter.Legacy] on the [block] output and assign it to [Query.facetFilters].
  */
-public fun Query.facetFilters(block: DSLFacetFilters.() -> Unit) {
-    facetFilters = FilterGroupsConverter.Legacy.Facet(DSLFacetFilters(block))
+public fun Query.facetFilters(escape: Boolean = true, block: DSLFacetFilters.() -> Unit) {
+    facetFilters = when(escape) {
+        true -> FilterGroupsConverter.Legacy.Facet(DSLFacetFilters(block))
+        false -> FilterGroupsConverter.Legacy.Facet.Unquoted(DSLFacetFilters(block))
+    }
 }
 
 /**
  * Use [FilterGroupsConverter.Legacy] on the [block] output and assign it to [Query.numericFilters].
  */
-public fun Query.numericFilters(block: DSLNumericFilters.() -> Unit) {
-    numericFilters = FilterGroupsConverter.Legacy.Numeric(DSLNumericFilters(block))
+public fun Query.numericFilters(escape: Boolean = true, block: DSLNumericFilters.() -> Unit) {
+    numericFilters = when(escape) {
+        true -> FilterGroupsConverter.Legacy.Numeric(DSLNumericFilters(block))
+        false -> FilterGroupsConverter.Legacy.Numeric.Unquoted(DSLNumericFilters(block))
+    }
 }
 
 /**
  * Use [FilterGroupsConverter.Legacy] on the [block] output and assign it to [Query.tagFilters].
  */
-public fun Query.tagFilters(block: DSLTagFilters.() -> Unit) {
-    tagFilters = FilterGroupsConverter.Legacy.Tag(DSLTagFilters(block))
+public fun Query.tagFilters(escape: Boolean = true, block: DSLTagFilters.() -> Unit) {
+    tagFilters = when (escape) {
+        true -> FilterGroupsConverter.Legacy.Tag(DSLTagFilters(block))
+        false -> FilterGroupsConverter.Legacy.Tag.Unquoted(DSLTagFilters(block))
+    }
 }
 
 /**
