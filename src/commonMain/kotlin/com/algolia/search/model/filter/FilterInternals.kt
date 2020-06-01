@@ -100,7 +100,7 @@ internal fun Filter.Facet.Value.toLegacy(isNegated: Boolean, escape: Boolean): S
 
 internal fun Filter.Facet.toLegacy(escape: Boolean): List<String> {
     val value = value.toLegacy(isNegated, escape)
-    val attribute = attribute.escape()
+    val attribute = if (escape) attribute.escape() else attribute.raw
     val score = if (score != null) "<score=$score>" else ""
 
     return listOf("$attribute:$value$score")

@@ -28,4 +28,12 @@ internal class TestFilterFacetString {
         FilterConverter.Legacy(filterSpace) shouldEqual listOf("\"attributeA\":\"value with space\"")
         FilterConverter.Legacy(filterScore) shouldEqual listOf("\"attributeA\":\"valueA\"<score=1>")
     }
+
+    @Test
+    fun legacyUnquoted() {
+        FilterConverter.Legacy.Unquoted(filter) shouldEqual listOf("attributeA:valueA")
+        FilterConverter.Legacy.Unquoted(filterNegate) shouldEqual listOf("attributeA:-valueA")
+        FilterConverter.Legacy.Unquoted(filterSpace) shouldEqual listOf("attributeA:value with space")
+        FilterConverter.Legacy.Unquoted(filterScore) shouldEqual listOf("attributeA:valueA<score=1>")
+    }
 }
