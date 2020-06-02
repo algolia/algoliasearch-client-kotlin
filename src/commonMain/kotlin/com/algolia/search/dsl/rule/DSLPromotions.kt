@@ -34,6 +34,13 @@ public class DSLPromotions(
         return Promotion(this, position)
     }
 
+    /**
+     * Create a [Promotion] with [this] and [position].
+     */
+    public operator fun List<ObjectID>.invoke(position: Int): Promotion {
+        return Promotion(this, position)
+    }
+
     public companion object : DSL<DSLPromotions, List<Promotion>> {
 
         override operator fun invoke(block: DSLPromotions.() -> Unit): List<Promotion> {
