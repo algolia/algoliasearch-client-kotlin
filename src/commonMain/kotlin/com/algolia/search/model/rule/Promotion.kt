@@ -12,6 +12,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 public sealed class Promotion {
 
+    /**
+     * Promoted rank.
+     */
     abstract val position: Int
 
     @Serializable
@@ -20,10 +23,6 @@ public sealed class Promotion {
          * Unique identifier of the object to promote.
          */
         @SerialName(KeyObjectID) val objectID: ObjectID,
-
-        /**
-         * Promoted rank for the object.
-         */
         @SerialName(KeyPosition) override val position: Int
     ) : Promotion()
 
@@ -33,9 +32,6 @@ public sealed class Promotion {
          * List of unique identifiers of the objects to promote.
          */
         @SerialName(KeyObjectIDs) val objectIDs: List<ObjectID>,
-        /**
-         * Promoted rank for the objects.
-         */
         @SerialName(KeyPosition) override val position: Int
     ) : Promotion()
 }

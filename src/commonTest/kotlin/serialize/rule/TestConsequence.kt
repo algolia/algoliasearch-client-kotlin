@@ -96,5 +96,8 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
                 edits = listOf(Edit("mobile"), Edit("phone"))
             )
         )
+
+        promotions[0].position
+        promotions[0].objectID
     }
 }
