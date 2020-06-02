@@ -32,6 +32,7 @@ repositories {
     mavenCentral()
     maven { url = URI("https://dl.bintray.com/kotlin/ktor") }
     maven { url = URI("https://kotlin.bintray.com/kotlinx") }
+    maven { url = URI("https://oss.sonatype.org/content/repositories/snapshots") }
 }
 
 version = Library.version
