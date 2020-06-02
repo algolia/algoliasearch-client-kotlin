@@ -20,4 +20,10 @@ internal class TestFilterTag {
         FilterConverter.Legacy(filter) shouldEqual listOf("_tags:\"valueA\"")
         FilterConverter.Legacy(!filter) shouldEqual listOf("_tags:-\"valueA\"")
     }
+
+    @Test
+    fun legacyUnquoted() {
+        FilterConverter.Legacy.Unquoted(filter) shouldEqual listOf("_tags:valueA")
+        FilterConverter.Legacy.Unquoted(!filter) shouldEqual listOf("_tags:-valueA")
+    }
 }

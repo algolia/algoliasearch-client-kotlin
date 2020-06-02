@@ -30,4 +30,13 @@ internal class TestFilterNumericRange {
         FilterConverter.Legacy(filterDouble) shouldEqual listOf("\"attributeA\" >= 0.0", "\"attributeA\" <= 6.0")
         FilterConverter.Legacy(!filterDouble) shouldEqual listOf("\"attributeA\" < 0.0", "\"attributeA\" > 6.0")
     }
+
+    @Test
+    fun legacyUnquoted() {
+        FilterConverter.Legacy.Unquoted(filterNumericInt) shouldEqual listOf("attributeA >= 0", "attributeA <= 5")
+        FilterConverter.Legacy.Unquoted(filterNumericLong) shouldEqual listOf("attributeA >= 0", "attributeA <= 6")
+        FilterConverter.Legacy.Unquoted(filterFloat) shouldEqual listOf("attributeA >= 0.0", "attributeA <= 6.0")
+        FilterConverter.Legacy.Unquoted(filterDouble) shouldEqual listOf("attributeA >= 0.0", "attributeA <= 6.0")
+        FilterConverter.Legacy.Unquoted(!filterDouble) shouldEqual listOf("attributeA < 0.0", "attributeA > 6.0")
+    }
 }
