@@ -30,16 +30,28 @@ public sealed class Promotion {
     @Serializable
     data class Multiple(
         /**
-         * Unique identifier of the object to promote.
+         * List of unique identifiers of the objects to promote.
          */
         @SerialName(KeyObjectIDs) val objectIDs: List<ObjectID>,
         /**
-         * Promoted rank for the object.
+         * Promoted rank for the objects.
          */
         @SerialName(KeyPosition) override val position: Int
     ) : Promotion()
 }
 
-fun Promotion(objectID: ObjectID, position: Int): Promotion.Single = Promotion.Single(objectID, position)
+/**
+ * Creates an instance of [Promotion.Single].
+ *
+ * @param objectID unique identifier of the object to promote
+ * @param position promoted rank for the object.
+ */
+public fun Promotion(objectID: ObjectID, position: Int): Promotion.Single = Promotion.Single(objectID, position)
 
-fun Promotion(objectIDs: List<ObjectID>, position: Int): Promotion.Multiple = Promotion.Multiple(objectIDs, position)
+/**
+ * Creates an instance of [Promotion.Multiple].
+ *
+ * @param objectIDs list of unique identifiers of the objects to promote.
+ * @param position promoted rank for the objects.
+ */
+public fun Promotion(objectIDs: List<ObjectID>, position: Int): Promotion.Multiple = Promotion.Multiple(objectIDs, position)
