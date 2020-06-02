@@ -42,6 +42,7 @@ import com.algolia.search.serialize.KeyDisablePrefixOnAttributes
 import com.algolia.search.serialize.KeyDisableTypoToleranceOnAttributes
 import com.algolia.search.serialize.KeyDisableTypoToleranceOnWords
 import com.algolia.search.serialize.KeyDistinct
+import com.algolia.search.serialize.KeyEnablePersonalization
 import com.algolia.search.serialize.KeyEnableRules
 import com.algolia.search.serialize.KeyExactOnSingleWordQuery
 import com.algolia.search.serialize.KeyExactPhrase
@@ -163,7 +164,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             advancedSyntaxFeatures = listOf(AdvancedSyntaxFeatures.ExcludeWords, AdvancedSyntaxFeatures.ExactPhrase),
             userData = json { unknown to unknown },
             indexLanguages = listOf(Language.Japanese),
-            customNormalization = mapOf(unknown to mapOf(unknown to unknown))
+            customNormalization = mapOf(unknown to mapOf(unknown to unknown)),
+            enablePersonalization = true
         ) to json {
             // Attributes
             KeySearchableAttributes to attributesJson
@@ -242,6 +244,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             KeyCustomNormalization to json {
                 unknown to json { unknown to unknown }
             }
+            KeyEnablePersonalization to boolean
         }
     )
 

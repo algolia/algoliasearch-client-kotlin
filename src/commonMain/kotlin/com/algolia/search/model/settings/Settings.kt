@@ -34,6 +34,7 @@ import com.algolia.search.serialize.KeyDisablePrefixOnAttributes
 import com.algolia.search.serialize.KeyDisableTypoToleranceOnAttributes
 import com.algolia.search.serialize.KeyDisableTypoToleranceOnWords
 import com.algolia.search.serialize.KeyDistinct
+import com.algolia.search.serialize.KeyEnablePersonalization
 import com.algolia.search.serialize.KeyEnableRules
 import com.algolia.search.serialize.KeyExactOnSingleWordQuery
 import com.algolia.search.serialize.KeyHighlightPostTag
@@ -429,7 +430,13 @@ public data class Settings(
     /**
      * Override the custom normalization handled by the engine.
      */
-    @SerialName(KeyCustomNormalization) var customNormalization: Map<String, Map<String, String>>? = null
+    @SerialName(KeyCustomNormalization) var customNormalization: Map<String, Map<String, String>>? = null,
+    /**
+     * Enable the Personalization feature.
+     * Engine default: false
+     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/enablePersonalization/?language=kotlin]
+     */
+    @SerialName(KeyEnablePersonalization) var enablePersonalization: Boolean = false
 ) {
 
     /**
