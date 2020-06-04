@@ -7,10 +7,8 @@ import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-
 @Ignore
 internal class GuideForwardReplicas {
-
 
     @Test
     fun snippet1() {

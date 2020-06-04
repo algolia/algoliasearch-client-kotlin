@@ -5,7 +5,6 @@ import com.algolia.search.model.ClientDate
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestClientDate {
 
     private val timestamp = 10000L

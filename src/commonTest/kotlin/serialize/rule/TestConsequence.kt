@@ -2,12 +2,31 @@ package serialize.rule
 
 import attributeA
 import com.algolia.search.helper.toObjectID
-import com.algolia.search.model.rule.*
+import com.algolia.search.model.rule.Anchoring
+import com.algolia.search.model.rule.AutomaticFacetFilters
+import com.algolia.search.model.rule.Condition
+import com.algolia.search.model.rule.Consequence
+import com.algolia.search.model.rule.Edit
+import com.algolia.search.model.rule.Pattern
+import com.algolia.search.model.rule.Promotion
+import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.KeyAutomaticFacetFilters
+import com.algolia.search.serialize.KeyAutomaticOptionalFacetFilters
+import com.algolia.search.serialize.KeyEdits
+import com.algolia.search.serialize.KeyFilterPromotes
+import com.algolia.search.serialize.KeyHide
+import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.KeyParams
+import com.algolia.search.serialize.KeyPromote
+import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.KeyUserData
+import com.algolia.search.serialize.toJsonNoDefaults
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.list
 import loadScratch
 import objectIDA
 import objectIDB
@@ -15,7 +34,6 @@ import serialize.TestSerializer
 import shouldEqual
 import unknown
 import kotlin.test.Test
-
 
 internal class TestConsequence : TestSerializer<Consequence>(Consequence.serializer(), JsonNoDefaults) {
 
@@ -39,7 +57,13 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
                 }
             }
         },
-        Consequence(query = query, promote = promotions, hide = objectIDs, userData = userData, filterPromotes = true) to json {
+        Consequence(
+            query = query,
+            promote = promotions,
+            hide = objectIDs,
+            userData = userData,
+            filterPromotes = true
+        ) to json {
             KeyParams to queryJson
             KeyPromote to promotionsSerialized
             KeyHide to jsonArray {
@@ -72,5 +96,8 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
                 edits = listOf(Edit("mobile"), Edit("phone"))
             )
         )
+
+        promotions[0].position
+        promotions[0].objectID
     }
 }

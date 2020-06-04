@@ -6,7 +6,6 @@ import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-
 @Ignore
 @Suppress("UNUSED_VARIABLE")
 class DocGetObjectPosition {

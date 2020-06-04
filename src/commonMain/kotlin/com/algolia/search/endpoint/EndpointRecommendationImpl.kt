@@ -1,40 +1,38 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.model.personalization.PersonalizationStrategy
-import com.algolia.search.model.response.ResponsePersonalizationStrategy
-import com.algolia.search.model.response.revision.Revision
+import com.algolia.search.model.recommendation.PersonalizationStrategy
+import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
 import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.RouteRecommendation
+import com.algolia.search.serialize.RouteRecommendationV2
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 
-
-internal class EndpointPersonalizationImpl(
+internal class EndpointRecommendationImpl(
     private val transport: Transport
-) : EndpointPersonalization {
+) : EndpointRecommendation {
 
     override suspend fun setPersonalizationStrategy(
         strategy: PersonalizationStrategy,
         requestOptions: RequestOptions?
-    ): Revision {
+    ): SetPersonalizationStrategyResponse {
         val body = Json.stringify(PersonalizationStrategy.serializer(), strategy)
 
         return transport.request(
             HttpMethod.Post,
             CallType.Write,
-            "$RouteRecommendation/personalization/strategy",
+            RouteRecommendationV2,
             requestOptions,
             body
         )
     }
 
-    override suspend fun getPersonalizationStrategy(requestOptions: RequestOptions?): ResponsePersonalizationStrategy {
+    override suspend fun getPersonalizationStrategy(requestOptions: RequestOptions?): PersonalizationStrategy {
         return transport.request(
             HttpMethod.Get,
             CallType.Read,
-            "$RouteRecommendation/personalization/strategy",
+            RouteRecommendationV2,
             requestOptions
         )
     }

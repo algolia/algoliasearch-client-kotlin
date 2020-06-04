@@ -8,15 +8,22 @@ import com.algolia.search.model.settings.NumericAttributeFilter
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.JsonNonStrict
+import com.algolia.search.serialize.KeyAttributesToIndex
+import com.algolia.search.serialize.KeyForwardToReplicas
+import com.algolia.search.serialize.KeyNumericAttributesToIndex
+import com.algolia.search.serialize.KeySlaves
+import com.algolia.search.serialize.RouteSettings
+import com.algolia.search.serialize.merge
+import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.json
-import kotlinx.serialization.list
-
 
 internal class EndpointSettingsImpl(
     private val transport: Transport,

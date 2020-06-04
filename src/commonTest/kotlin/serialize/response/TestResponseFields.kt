@@ -1,11 +1,29 @@
 package serialize.response
 
 import com.algolia.search.model.search.ResponseFields
-import com.algolia.search.model.search.ResponseFields.*
+import com.algolia.search.model.search.ResponseFields.All
+import com.algolia.search.model.search.ResponseFields.AroundLatLng
+import com.algolia.search.model.search.ResponseFields.AutomaticRadius
+import com.algolia.search.model.search.ResponseFields.ExhaustiveFacetsCount
+import com.algolia.search.model.search.ResponseFields.Facets
+import com.algolia.search.model.search.ResponseFields.FacetsStats
+import com.algolia.search.model.search.ResponseFields.Hits
+import com.algolia.search.model.search.ResponseFields.HitsPerPage
+import com.algolia.search.model.search.ResponseFields.Index
+import com.algolia.search.model.search.ResponseFields.Length
+import com.algolia.search.model.search.ResponseFields.NbHits
+import com.algolia.search.model.search.ResponseFields.NbPages
+import com.algolia.search.model.search.ResponseFields.Offset
+import com.algolia.search.model.search.ResponseFields.Other
+import com.algolia.search.model.search.ResponseFields.Page
+import com.algolia.search.model.search.ResponseFields.Params
+import com.algolia.search.model.search.ResponseFields.ProcessingTimeMS
+import com.algolia.search.model.search.ResponseFields.Query
+import com.algolia.search.model.search.ResponseFields.QueryAfterRemoval
+import com.algolia.search.model.search.ResponseFields.UserData
 import kotlinx.serialization.json.JsonLiteral
 import serialize.TestSerializer
 import unknown
-
 
 internal class TestResponseFields : TestSerializer<ResponseFields>(ResponseFields) {
 

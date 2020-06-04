@@ -1,30 +1,29 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.model.personalization.PersonalizationStrategy
-import com.algolia.search.model.response.ResponsePersonalizationStrategy
-import com.algolia.search.model.response.revision.Revision
+import com.algolia.search.model.recommendation.PersonalizationStrategy
+import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
 import com.algolia.search.transport.RequestOptions
 
-
 /**
- * [Documentation][https://www.algolia.com/doc/api-client/methods/personalization/?language=kotlin]
+ * [Documentation][https://www.algolia.com/doc/rest-api/recommendation]
  */
-public interface EndpointPersonalization {
+public interface EndpointRecommendation {
 
     /**
      * Set a [PersonalizationStrategy] for your application.
      *
+     * @param strategy The personalization strategy
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun setPersonalizationStrategy(
         strategy: PersonalizationStrategy,
         requestOptions: RequestOptions? = null
-    ): Revision
+    ): SetPersonalizationStrategyResponse
 
     /**
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     suspend fun getPersonalizationStrategy(
         requestOptions: RequestOptions? = null
-    ): ResponsePersonalizationStrategy
+    ): PersonalizationStrategy
 }

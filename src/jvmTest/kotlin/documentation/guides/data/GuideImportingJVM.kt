@@ -9,13 +9,12 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.serialize.Json
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.json.json
-import kotlinx.serialization.list
 import org.junit.Ignore
 import org.junit.Test
 import java.io.File
-
 
 @Suppress("UNUSED_VARIABLE", "UnnecessaryVariable")
 @Ignore

@@ -8,7 +8,6 @@ import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-
 @Ignore
 internal class DocTypoTolerance {
 
@@ -45,5 +44,4 @@ internal class DocTypoTolerance {
             index.search(query)
         }
     }
-
 }

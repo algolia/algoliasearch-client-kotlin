@@ -6,7 +6,6 @@ import com.algolia.search.dsl.attributes.DSLAttributes
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.settings.DecompoundedAttributes
 
-
 /**
  * DSL for building a [List] of [DecompoundedAttributes].
  */

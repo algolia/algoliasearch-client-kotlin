@@ -5,7 +5,6 @@ import com.algolia.search.model.search.BoundingBox
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestBoundingBox {
 
     @Test

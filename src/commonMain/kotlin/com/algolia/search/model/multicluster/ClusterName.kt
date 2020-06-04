@@ -1,14 +1,12 @@
 package com.algolia.search.model.multicluster
 
-import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toClusterName
 import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
-
+import kotlinx.serialization.builtins.serializer
 
 /**
  * [ClusterName] of a cluster.
@@ -22,12 +20,12 @@ public data class ClusterName(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<ClusterName> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: ClusterName) {
-            StringSerializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: ClusterName) {
+            String.serializer().serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): ClusterName {

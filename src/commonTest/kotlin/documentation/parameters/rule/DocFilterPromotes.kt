@@ -2,11 +2,15 @@ package documentation.parameters.rule
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.rule.*
+import com.algolia.search.model.rule.Anchoring
+import com.algolia.search.model.rule.Condition
+import com.algolia.search.model.rule.Consequence
+import com.algolia.search.model.rule.Pattern
+import com.algolia.search.model.rule.Promotion
+import com.algolia.search.model.rule.Rule
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
-
 
 @Suppress("UNUSED_VARIABLE")
 @Ignore

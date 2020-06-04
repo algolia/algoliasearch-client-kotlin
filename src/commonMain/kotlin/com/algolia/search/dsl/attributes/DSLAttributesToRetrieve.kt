@@ -5,7 +5,6 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.dsl.all
 import com.algolia.search.model.Attribute
 
-
 /**
  * DSL for building a [List] of [Attribute] to retrieve.
  */

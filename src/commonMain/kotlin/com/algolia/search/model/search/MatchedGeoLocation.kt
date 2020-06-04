@@ -1,10 +1,17 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.helper.and
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.KeyDistance
+import com.algolia.search.serialize.KeyLat
+import com.algolia.search.serialize.KeyLng
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.json
-
 
 @Serializable
 public data class MatchedGeoLocation(
@@ -21,11 +28,11 @@ public data class MatchedGeoLocation(
     @Serializer(MatchedGeoLocation::class)
     companion object : KSerializer<MatchedGeoLocation> {
 
-        override fun serialize(encoder: Encoder, obj: MatchedGeoLocation) {
+        override fun serialize(encoder: Encoder, value: MatchedGeoLocation) {
             val json = json {
-                KeyDistance to obj.distance
-                KeyLat to obj.point.latitude
-                KeyLng to obj.point.longitude
+                KeyDistance to value.distance
+                KeyLat to value.point.latitude
+                KeyLng to value.point.longitude
             }
 
             encoder.asJsonOutput().encodeJson(json)

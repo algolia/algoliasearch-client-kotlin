@@ -1,13 +1,28 @@
 package com.algolia.search.client
 
-import com.algolia.search.configuration.*
+import com.algolia.search.configuration.CallType
+import com.algolia.search.configuration.Configuration
+import com.algolia.search.configuration.ConfigurationSearch
+import com.algolia.search.configuration.Credentials
+import com.algolia.search.configuration.CredentialsImpl
+import com.algolia.search.configuration.defaultLogLevel
 import com.algolia.search.dsl.requestOptionsBuilder
-import com.algolia.search.endpoint.*
+import com.algolia.search.endpoint.EndpointAPIKey
+import com.algolia.search.endpoint.EndpointAPIKeyImpl
+import com.algolia.search.endpoint.EndpointAdvanced
+import com.algolia.search.endpoint.EndpointMultiCluster
+import com.algolia.search.endpoint.EndpointMulticlusterImpl
+import com.algolia.search.endpoint.EndpointMultipleIndex
+import com.algolia.search.endpoint.EndpointMultipleIndexImpl
 import com.algolia.search.helper.decodeBase64
 import com.algolia.search.helper.encodeBase64
 import com.algolia.search.helper.sha256
 import com.algolia.search.helper.toAPIKey
-import com.algolia.search.model.*
+import com.algolia.search.model.APIKey
+import com.algolia.search.model.ApplicationID
+import com.algolia.search.model.IndexName
+import com.algolia.search.model.LogType
+import com.algolia.search.model.Time
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
@@ -26,8 +41,11 @@ import io.ktor.client.features.ResponseException
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
-import kotlinx.coroutines.*
-
+import kotlinx.coroutines.TimeoutCancellationException
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.withTimeout
 
 /**
  * Client to perform operations on indices.
@@ -38,7 +56,6 @@ public class ClientSearch private constructor(
     EndpointMultipleIndex by EndpointMultipleIndexImpl(transport),
     EndpointAPIKey by EndpointAPIKeyImpl(transport),
     EndpointMultiCluster by EndpointMulticlusterImpl(transport),
-    EndpointPersonalization by EndpointPersonalizationImpl(transport),
     Configuration by transport,
     Credentials by transport.credentials {
 
@@ -189,7 +206,7 @@ public class ClientSearch private constructor(
 
                 timestamp - Time.getCurrentTimeMillis()
             } else {
-                throw IllegalArgumentException("The Secured API Key doesn't have a validUntil parameter.");
+                throw IllegalArgumentException("The Secured API Key doesn't have a validUntil parameter.")
             }
         }
     }

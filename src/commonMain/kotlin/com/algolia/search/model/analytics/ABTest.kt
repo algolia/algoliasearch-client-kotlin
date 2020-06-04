@@ -1,11 +1,20 @@
 package com.algolia.search.model.analytics
 
 import com.algolia.search.model.ClientDate
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.KeyEndAt
+import com.algolia.search.serialize.KeyName
+import com.algolia.search.serialize.KeyVariants
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-
 
 /**
  * [ABTest] applied to compare analytics performance between two indices.
@@ -33,13 +42,13 @@ public data class ABTest(
     @Serializer(ABTest::class)
     companion object : KSerializer<ABTest> {
 
-        override fun serialize(encoder: Encoder, obj: ABTest) {
+        override fun serialize(encoder: Encoder, value: ABTest) {
             val json = json {
-                KeyName to obj.name
-                KeyEndAt to obj.endAt.raw
+                KeyName to value.name
+                KeyEndAt to value.endAt.raw
                 KeyVariants to jsonArray {
-                    +JsonNoDefaults.toJson(Variant.serializer(), obj.variantA)
-                    +JsonNoDefaults.toJson(Variant.serializer(), obj.variantB)
+                    +JsonNoDefaults.toJson(Variant.serializer(), value.variantA)
+                    +JsonNoDefaults.toJson(Variant.serializer(), value.variantB)
                 }
             }
 

@@ -7,8 +7,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
-
+import kotlinx.serialization.builtins.serializer
 
 /**
  * A cursor used to browse an index with [EndpointSearch.browse].
@@ -24,12 +23,12 @@ public data class Cursor(
 
     companion object : KSerializer<Cursor> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: Cursor) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: Cursor) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): Cursor {

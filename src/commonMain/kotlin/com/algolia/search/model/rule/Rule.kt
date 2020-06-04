@@ -1,10 +1,14 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.model.ObjectID
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyCondition
+import com.algolia.search.serialize.KeyConsequence
+import com.algolia.search.serialize.KeyDescription
+import com.algolia.search.serialize.KeyEnabled
+import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.KeyValidity
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 public data class Rule(

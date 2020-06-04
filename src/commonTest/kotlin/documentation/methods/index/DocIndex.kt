@@ -7,7 +7,6 @@ import com.algolia.search.model.IndexName
 import kotlin.test.Ignore
 import kotlin.test.Test
 
-
 @Ignore
 internal class DocIndex {
 

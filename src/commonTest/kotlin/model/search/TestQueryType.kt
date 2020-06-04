@@ -1,13 +1,15 @@
 package model.search
 
-import com.algolia.search.model.search.QueryType.*
+import com.algolia.search.model.search.QueryType.Other
+import com.algolia.search.model.search.QueryType.PrefixAll
+import com.algolia.search.model.search.QueryType.PrefixLast
+import com.algolia.search.model.search.QueryType.PrefixNone
 import com.algolia.search.serialize.KeyPrefixAll
 import com.algolia.search.serialize.KeyPrefixLast
 import com.algolia.search.serialize.KeyPrefixNone
 import shouldEqual
 import unknown
 import kotlin.test.Test
-
 
 internal class TestQueryType {
 

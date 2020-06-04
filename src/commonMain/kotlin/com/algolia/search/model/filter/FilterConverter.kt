@@ -1,10 +1,9 @@
 package com.algolia.search.model.filter
 
-
 /**
  * Converts a single [Filter] to a type [O].
  */
-public sealed class FilterConverter<I: Filter, O> : (I) -> O {
+public sealed class FilterConverter<I : Filter, O> : (I) -> O {
 
     /**
      * Converts a [Filter] to its SQL-like [String] representation.
@@ -26,10 +25,24 @@ public sealed class FilterConverter<I: Filter, O> : (I) -> O {
     public object Legacy : FilterConverter<Filter, List<String>>() {
 
         override fun invoke(filter: Filter): List<String> {
+            return toLegacy(filter, escape = true)
+        }
+
+        /**
+         * Same as [Legacy], but without quotes.
+         */
+        public object Unquoted : FilterConverter<Filter, List<String>>() {
+
+            override fun invoke(filter: Filter): List<String> {
+                return toLegacy(filter, escape = false)
+            }
+        }
+
+        private fun toLegacy(filter: Filter, escape: Boolean): List<String> {
             return when (filter) {
-                is Filter.Facet -> filter.toLegacy()
-                is Filter.Tag -> filter.toLegacy()
-                is Filter.Numeric -> filter.toLegacy()
+                is Filter.Facet -> filter.toLegacy(escape)
+                is Filter.Tag -> filter.toLegacy(escape)
+                is Filter.Numeric -> filter.toLegacy(escape)
             }
         }
     }

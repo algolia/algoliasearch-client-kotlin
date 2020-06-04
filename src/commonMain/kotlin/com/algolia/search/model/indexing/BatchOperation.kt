@@ -6,12 +6,28 @@ import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.KeyAction
+import com.algolia.search.serialize.KeyAddObject
+import com.algolia.search.serialize.KeyBody
+import com.algolia.search.serialize.KeyClear
+import com.algolia.search.serialize.KeyDelete
+import com.algolia.search.serialize.KeyDeleteObject
+import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.KeyPartialUpdateObject
+import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
+import com.algolia.search.serialize.KeyUpdateObject
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.merge
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.json
-
 
 /**
  * Operation that can be batched using [EndpointIndexing.batch] or [EndpointMultipleIndex.multipleBatchObjects]
@@ -106,20 +122,20 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
     @Serializer(BatchOperation::class)
     companion object : KSerializer<BatchOperation> {
 
-        private fun batchJson(obj: BatchOperation, block: JsonObjectBuilder.() -> Unit) = json {
-            KeyAction to obj.raw
+        private fun batchJson(value: BatchOperation, block: JsonObjectBuilder.() -> Unit) = json {
+            KeyAction to value.raw
             block(this)
         }
 
-        override fun serialize(encoder: Encoder, obj: BatchOperation) {
-            val json = when (obj) {
-                is AddObject -> batchJson(obj) { KeyBody to obj.json }
-                is ReplaceObject -> batchJson(obj) { KeyBody to obj.json.merge(json { KeyObjectID to obj.objectID.raw }) }
-                is PartialUpdateObject -> batchJson(obj) { KeyBody to obj.json.merge(json { KeyObjectID to obj.objectID.raw }) }
-                is DeleteObject -> batchJson(obj) { KeyBody to json { KeyObjectID to obj.objectID.raw } }
-                is DeleteIndex -> batchJson(obj) {}
-                is ClearIndex -> batchJson(obj) {}
-                is Other -> batchJson(obj) { KeyBody to obj.json }
+        override fun serialize(encoder: Encoder, value: BatchOperation) {
+            val json = when (value) {
+                is AddObject -> batchJson(value) { KeyBody to value.json }
+                is ReplaceObject -> batchJson(value) { KeyBody to value.json.merge(json { KeyObjectID to value.objectID.raw }) }
+                is PartialUpdateObject -> batchJson(value) { KeyBody to value.json.merge(json { KeyObjectID to value.objectID.raw }) }
+                is DeleteObject -> batchJson(value) { KeyBody to json { KeyObjectID to value.objectID.raw } }
+                is DeleteIndex -> batchJson(value) {}
+                is ClearIndex -> batchJson(value) {}
+                is Other -> batchJson(value) { KeyBody to value.json }
             }
 
             encoder.asJsonOutput().encodeJson(json)

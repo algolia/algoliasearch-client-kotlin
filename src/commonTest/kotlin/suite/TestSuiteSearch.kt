@@ -2,23 +2,33 @@ package suite
 
 import clientAdmin1
 import clientSearch
-import com.algolia.search.dsl.*
-import com.algolia.search.helper.readContent
+import com.algolia.search.dsl.decompoundedAttributes
+import com.algolia.search.dsl.explainModules
+import com.algolia.search.dsl.query
+import com.algolia.search.dsl.queryLanguages
+import com.algolia.search.dsl.settings
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.ExplainModule
 import com.algolia.search.model.search.IgnorePlurals
+import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Query
+import com.algolia.search.model.search.RemoveWordIfNoResults
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import io.ktor.client.features.ResponseException
+import com.algolia.search.serialize.KeyAnalyticsTags
+import com.algolia.search.serialize.KeyIgnorePlurals
+import com.algolia.search.serialize.KeyRemoveStopWords
+import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
+import com.algolia.search.serialize.KeyRuleContexts
+import io.ktor.http.parseUrlEncodedParameters
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
-import kotlinx.serialization.list
 import runBlocking
 import shouldBeNull
 import shouldBeTrue
@@ -26,9 +36,7 @@ import shouldContain
 import shouldEqual
 import shouldNotBeEmpty
 import shouldNotBeNull
-import kotlin.test.AfterTest
 import kotlin.test.Test
-
 
 internal class TestSuiteSearch {
 
@@ -38,13 +46,6 @@ internal class TestSuiteSearch {
     private val allFacets = setOf("*".toAttribute())
     private val index = clientAdmin1.initIndex(indexName)
     private val search = clientSearch.initIndex(indexName)
-
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
 
     @Test
     fun test() {
@@ -95,6 +96,17 @@ internal class TestSuiteSearch {
                 facetHits shouldContain "Apple"
                 facetHits shouldContain "Arista Networks"
             }
+
+            search.apply {
+                val lang = Language.English
+                val parameters = search(Query(query = "elon", naturalLanguages = listOf(lang)))
+                    .params.parseUrlEncodedParameters()
+                parameters[KeyRemoveStopWords] shouldEqual lang.raw
+                parameters[KeyIgnorePlurals] shouldEqual lang.raw
+                parameters[KeyRemoveWordsIfNoResults] shouldEqual RemoveWordIfNoResults.AllOptional.raw
+                parameters[KeyAnalyticsTags] shouldEqual "natural_language"
+                parameters[KeyRuleContexts] shouldEqual "natural_language"
+            }
         }
     }
 
@@ -106,7 +118,7 @@ internal class TestSuiteSearch {
             override val objectID: ObjectID,
             val type: String,
             val category: String? = null
-        ): Indexable
+        ) : Indexable
 
         runBlocking {
             val settings = settings {

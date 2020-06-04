@@ -10,7 +10,6 @@ import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.transport.RequestOptions
 
-
 /**
  * [Documentation][https://www.algolia.com/doc/api-client/methods/advanced/?language=kotlin]
  */

@@ -2,10 +2,8 @@ package com.algolia.search.helper
 
 import android.util.Base64
 import io.ktor.utils.io.core.toByteArray
-import kotlinx.serialization.internal.HexConverter
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
-
 
 internal actual fun String.sha256(key: String): String {
     return Mac.getInstance("HmacSHA256").run {
@@ -13,14 +11,14 @@ internal actual fun String.sha256(key: String): String {
 
         init(secretKey)
         val hash = doFinal(key.toByteArray())
-        HexConverter.printHexBinary(hash, true)
+        hash.toHex(true)
     }
 }
 
 internal actual fun String.encodeBase64(): String {
-    return Base64.encodeToString(toByteArray(), Base64.DEFAULT)
+    return Base64.encodeToString(toByteArray(), Base64.NO_WRAP)
 }
 
 internal actual fun String.decodeBase64(): String {
-    return String(Base64.decode(this, Base64.DEFAULT))
+    return String(Base64.decode(this, Base64.NO_WRAP))
 }

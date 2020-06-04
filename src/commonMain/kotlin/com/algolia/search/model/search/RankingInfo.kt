@@ -3,9 +3,25 @@ package com.algolia.search.model.search
 import com.algolia.search.endpoint.EndpointPlaces
 import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
-
+import com.algolia.search.serialize.GeoDistance
+import com.algolia.search.serialize.KSerializerGeoDistance
+import com.algolia.search.serialize.KSerializerGeoPoint
+import com.algolia.search.serialize.KeyFilters
+import com.algolia.search.serialize.KeyFirstMatchedWord
+import com.algolia.search.serialize.KeyGeoDistance
+import com.algolia.search.serialize.KeyGeoPoint
+import com.algolia.search.serialize.KeyGeoPrecision
+import com.algolia.search.serialize.KeyMatchedGeoLocation
+import com.algolia.search.serialize.KeyNbExactWords
+import com.algolia.search.serialize.KeyNbTypos
+import com.algolia.search.serialize.KeyPromoted
+import com.algolia.search.serialize.KeyProximityDistance
+import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.KeyUserScore
+import com.algolia.search.serialize.KeyWords
+import com.algolia.search.serialize.KeyPersonalization
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 @Serializable
 public data class RankingInfo(
@@ -38,7 +54,7 @@ public data class RankingInfo(
      * Distance between the geo location in the search query and the best matching geo location in the record,
      * divided by the geo precision (in meters).
      */
-    @SerialName(KeyGeoDistance) @Serializable(with=KSerializerGeoDistance::class)  val geoDistance: GeoDistance,
+    @SerialName(KeyGeoDistance) @Serializable(with = KSerializerGeoDistance::class) val geoDistance: GeoDistance,
     /**
      * Precision used when computing the geo distance, in meters.
      * All distances will be floored to a multiple of this precision.
@@ -68,5 +84,9 @@ public data class RankingInfo(
     /**
      * Only returned for [EndpointPlaces.searchPlaces].
      */
-    @SerialName(KeyQuery) val query: String? = null
+    @SerialName(KeyQuery) val query: String? = null,
+    /**
+     * Only returned when personalization is enabled
+     */
+    @SerialName(KeyPersonalization) val personalization: Personalization? = null
 )

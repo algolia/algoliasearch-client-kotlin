@@ -3,8 +3,7 @@ package com.algolia.search.model
 import com.algolia.search.helper.DateISO8601
 import com.algolia.search.serialize.KSerializerClientDate
 import kotlinx.serialization.Serializable
-import java.util.*
-
+import java.util.Date
 
 /**
  * JVM implementation converting a [String] or a [Long] into a [Date] format. Relies on ISO8601.

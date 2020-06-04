@@ -3,13 +3,24 @@ package com.algolia.search.model.indexing
 import com.algolia.search.endpoint.EndpointIndexing
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAdd
+import com.algolia.search.serialize.KeyAddUnique
+import com.algolia.search.serialize.KeyDecrement
+import com.algolia.search.serialize.KeyIncrement
+import com.algolia.search.serialize.KeyRemove
+import com.algolia.search.serialize.KeyValue
+import com.algolia.search.serialize.Key_Operation
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.*
-
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.json
 
 /**
  * An object used to define a partial update operation with the [EndpointIndexing.partialUpdateObject] method.
@@ -107,8 +118,8 @@ public sealed class Partial {
     @Serializer(Partial::class)
     companion object : KSerializer<Partial> {
 
-        override fun serialize(encoder: Encoder, obj: Partial) {
-            val key = when (obj) {
+        override fun serialize(encoder: Encoder, value: Partial) {
+            val key = when (value) {
                 is Update -> null
                 is Increment -> KeyIncrement
                 is Decrement -> KeyDecrement
@@ -117,9 +128,9 @@ public sealed class Partial {
                 is AddUnique -> KeyAddUnique
             }
             val json = json {
-                obj.attribute.raw to json {
+                value.attribute.raw to json {
                     key?.let { Key_Operation to key }
-                    KeyValue to obj.value
+                    KeyValue to value.value
                 }
             }
             encoder.asJsonOutput().encodeJson(json)
@@ -144,4 +155,3 @@ public sealed class Partial {
         }
     }
 }
-

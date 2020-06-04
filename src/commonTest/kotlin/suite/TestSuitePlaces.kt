@@ -13,9 +13,7 @@ import shouldEqual
 import shouldNotBeEmpty
 import kotlin.test.Test
 
-
 internal class TestSuitePlaces {
-
 
     @Test
     fun withoutParameters() {
@@ -93,7 +91,7 @@ internal class TestSuitePlaces {
     @Test
     fun getByObjectID() {
         runBlocking {
-            clientPlaces.getByObjectID(ObjectID("141420484_278859695"))
+            clientPlaces.getByObjectID(ObjectID("afd71bb8613f70ca495d8996923b5fd5"))
         }
     }
 

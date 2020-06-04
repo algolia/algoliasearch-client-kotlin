@@ -16,7 +16,6 @@ import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 import unknown
 
-
 internal class TestABTest : TestSerializer<ABTest>(ABTest, JsonNoDefaults) {
 
     private val date = DateISO8601.format(0)

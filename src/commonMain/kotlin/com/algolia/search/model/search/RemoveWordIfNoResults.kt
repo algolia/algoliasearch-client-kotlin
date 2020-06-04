@@ -9,8 +9,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
-
+import kotlinx.serialization.builtins.serializer
 
 @Serializable(RemoveWordIfNoResults.Companion::class)
 public sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String> {
@@ -48,12 +47,12 @@ public sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String
 
     companion object : KSerializer<RemoveWordIfNoResults> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: RemoveWordIfNoResults) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: RemoveWordIfNoResults) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): RemoveWordIfNoResults {

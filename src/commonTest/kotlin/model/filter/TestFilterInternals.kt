@@ -5,7 +5,6 @@ import com.algolia.search.model.filter.escape
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestFilterInternals {
 
     @Test

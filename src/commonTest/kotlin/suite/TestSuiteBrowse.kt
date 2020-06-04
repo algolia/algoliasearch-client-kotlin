@@ -11,22 +11,13 @@ import com.algolia.search.model.task.TaskStatus
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
-import kotlin.test.AfterTest
 import kotlin.test.Test
-
 
 internal class TestSuiteBrowse {
 
     private val suffix = "helper"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
-
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
 
     @Test
     fun rules() {

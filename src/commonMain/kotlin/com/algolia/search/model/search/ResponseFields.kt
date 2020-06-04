@@ -2,13 +2,30 @@ package com.algolia.search.model.search
 
 import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAroundLatLng
+import com.algolia.search.serialize.KeyAutomaticRadius
+import com.algolia.search.serialize.KeyExhaustiveFacetsCount
+import com.algolia.search.serialize.KeyFacets
+import com.algolia.search.serialize.KeyFacets_Stats
+import com.algolia.search.serialize.KeyHits
+import com.algolia.search.serialize.KeyHitsPerPage
+import com.algolia.search.serialize.KeyIndex
+import com.algolia.search.serialize.KeyLength
+import com.algolia.search.serialize.KeyNbHits
+import com.algolia.search.serialize.KeyNbPages
+import com.algolia.search.serialize.KeyOffset
+import com.algolia.search.serialize.KeyPage
+import com.algolia.search.serialize.KeyParams
+import com.algolia.search.serialize.KeyProcessingTimeMS
+import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.KeyQueryAfterRemoval
+import com.algolia.search.serialize.KeyStar
+import com.algolia.search.serialize.KeyUserData
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
-
+import kotlinx.serialization.builtins.serializer
 
 /**
  * Choose which fields the response will contain. Applies to [EndpointSearch.search] and [EndpointSearch.browse].
@@ -46,12 +63,12 @@ public sealed class ResponseFields(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<ResponseFields> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: ResponseFields) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: ResponseFields) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): ResponseFields {

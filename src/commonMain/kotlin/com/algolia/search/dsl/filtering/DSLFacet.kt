@@ -3,7 +3,6 @@ package com.algolia.search.dsl.filtering
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.filter.Filter
 
-
 /**
  * DSL for building a [Filter.Facet].
  * [Filter by string][https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/how-to/filter-by-string/]

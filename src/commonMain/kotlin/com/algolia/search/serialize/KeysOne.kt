@@ -1,6 +1,5 @@
 package com.algolia.search.serialize
 
-
 public const val KeyQuery = "query"
 public const val KeySearchableAttributes = "searchableAttributes"
 public const val KeyAttributesForFaceting = "attributesForFaceting"

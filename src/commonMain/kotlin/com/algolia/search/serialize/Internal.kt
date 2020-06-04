@@ -13,7 +13,14 @@ import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
-import kotlinx.serialization.json.*
+import kotlinx.serialization.UnstableDefault
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonConfiguration
+import kotlinx.serialization.json.JsonElementSerializer
+import kotlinx.serialization.json.JsonInput
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonOutput
+import kotlinx.serialization.json.JsonPrimitive
 
 internal val regexAsc = Regex("^$KeyAsc\\((.*)\\)$")
 internal val regexDesc = Regex("^$KeyDesc\\((.*)\\)$")
@@ -26,7 +33,7 @@ internal val regexSearchable = Regex("^$KeySearchable\\((.*)\\)$")
 internal val regexFacet = Regex("^\\{facet:(.*)\\}$")
 internal val regexPlaceholder = Regex("^<(.*)>$")
 internal val regexPoint = Regex("^(.*),(.*)$")
-internal val regexUserToken = Regex("^[a-zA-Z0-9_-]*$")
+internal val regexUserToken = Regex("^[a-zA-Z0-9_\\-\\.\\:]*\$") // alpha-numeric and/or IP address (IPv4/IPv6)
 
 internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     return toMutableMap().run {
@@ -35,6 +42,7 @@ internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     }
 }
 
+@OptIn(UnstableDefault::class)
 internal fun JsonObject.urlEncode(): String? {
     return if (isNotEmpty()) {
         Parameters.build {
@@ -50,7 +58,6 @@ internal fun JsonObject.urlEncode(): String? {
 
 internal fun Decoder.asJsonInput() = (this as JsonInput).decodeJson()
 internal fun Encoder.asJsonOutput() = this as JsonOutput
-
 
 internal fun Query.toJsonNoDefaults(): JsonObject {
     return JsonNoDefaults.toJson(Query.serializer(), this).jsonObject
@@ -70,7 +77,13 @@ internal fun RequestAPIKey.stringify(): String {
 
 internal val Json = Json(JsonConfiguration.Stable.copy())
 internal val JsonNoDefaults = Json(JsonConfiguration.Stable.copy(encodeDefaults = false))
-internal val JsonNonStrict = Json(JsonConfiguration.Stable.copy(strictMode = false))
+internal val JsonNonStrict = Json(
+    JsonConfiguration.Stable.copy(
+        ignoreUnknownKeys = true,
+        isLenient = true,
+        serializeSpecialFloatingPointValues = true
+    )
+)
 internal val JsonDebug = Json(JsonConfiguration.Stable.copy(prettyPrint = true, indent = "  ", encodeDefaults = false))
 
 internal fun List<IndexQuery>.toBody(strategy: MultipleQueriesStrategy?): String {

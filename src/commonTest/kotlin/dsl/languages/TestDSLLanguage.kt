@@ -5,7 +5,6 @@ import com.algolia.search.model.search.Language
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLLanguage {
 
     @Test

@@ -6,9 +6,8 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.IntSerializer
+import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.JsonLiteral
-
 
 /**
  * Enables de-duplication or grouping of results.
@@ -24,10 +23,10 @@ public data class Distinct(val count: Int) {
 
     companion object : KSerializer<Distinct> {
 
-        override val descriptor = IntSerializer.descriptor
+        override val descriptor = Int.serializer().descriptor
 
-        override fun serialize(encoder: Encoder, obj: Distinct) {
-            encoder.asJsonOutput().encodeJson(JsonLiteral(obj.count))
+        override fun serialize(encoder: Encoder, value: Distinct) {
+            encoder.asJsonOutput().encodeJson(JsonLiteral(value.count))
         }
 
         override fun deserialize(decoder: Decoder): Distinct {

@@ -1,3 +1,33 @@
+# 1.4.0
+
+Starting from this version, the library is compatible only with kotlin version `1.3.70` or higher, 
+this due the [breaking changes](https://github.com/Kotlin/kotlinx.serialization/blob/master/CHANGELOG.md#0200--2020-03-04) of kotlin serialization library.
+
+### Added
+- Recommendation client (#148)
+- Analytics regions (#170)
+- Natural languages parameter to search query (#173)
+- Logs inner queries (#174)
+- Personalization as part of the `RankingInfo` of the `ResponseSearch` (#185)
+- Unquoted variant of legacy `FilterConverter` (#188)
+- Accept `enablePersonalization` boolean as a valid setting parameter (#183)
+- `appliedRules` as part of the `ResponseSearch` (#184)
+
+### Changed
+- Updated Kotlin to `1.3.72`
+- Updated Ktor client to `1.3.2`
+- Updated Kotlin serialization `0.20.0`
+- Split `Promotion` into two variants: `Single` and `Multiple` (#191)
+
+### Fixed
+- Ensure correctly typing of API key's `restrictIndices` and `restrictSources` parameters (#167, #168)
+- Search response serialization after enabling personalization (#185)
+- Insights event serialization causing errors in old Android JVMs (#189)
+- Omit all line terminators in the base64 encoder (instantsearch-android#191)
+
+### Removed
+- Remove deprecated personalization endpoint in favor of the recommendation client (#185)
+
 # 1.3.1
 
 - Updated Ktor to `1.3.0`

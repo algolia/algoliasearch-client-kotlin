@@ -5,7 +5,6 @@ import com.algolia.search.dsl.synonymTypes
 import shouldNotBeNull
 import kotlin.test.Test
 
-
 internal class TestDSLSynonymQuery {
 
     @Test

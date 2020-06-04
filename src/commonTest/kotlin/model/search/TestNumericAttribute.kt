@@ -6,7 +6,6 @@ import com.algolia.search.serialize.KeyEqualOnly
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestNumericAttribute {
 
     @Test

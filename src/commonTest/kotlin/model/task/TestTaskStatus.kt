@@ -7,7 +7,6 @@ import com.algolia.search.serialize.KeyPublished
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestTaskStatus {
 
     @Test

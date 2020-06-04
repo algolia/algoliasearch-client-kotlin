@@ -10,7 +10,6 @@ import shouldEqual
 import unknown
 import kotlin.test.Test
 
-
 internal class TestFilterGroupsConverter {
 
     @Test

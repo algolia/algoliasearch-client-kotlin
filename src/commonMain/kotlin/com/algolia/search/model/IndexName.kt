@@ -9,8 +9,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
-
+import kotlinx.serialization.builtins.serializer
 
 /**
  * [IndexName] of an [Index]. Can't be a blank or empty string.
@@ -38,12 +37,12 @@ public data class IndexName(
 
     companion object : KSerializer<IndexName> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: IndexName) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: IndexName) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): IndexName {

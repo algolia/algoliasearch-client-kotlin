@@ -3,10 +3,32 @@ package com.algolia.search.model.rule
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.*
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
-
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.KSerializerObjectIDs
+import com.algolia.search.serialize.KeyAutomaticFacetFilters
+import com.algolia.search.serialize.KeyAutomaticOptionalFacetFilters
+import com.algolia.search.serialize.KeyEdits
+import com.algolia.search.serialize.KeyFilterPromotes
+import com.algolia.search.serialize.KeyHide
+import com.algolia.search.serialize.KeyParams
+import com.algolia.search.serialize.KeyPromote
+import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.KeyRemoveLowercase
+import com.algolia.search.serialize.KeyUserData
+import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.toJsonNoDefaults
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.builtins.list
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.content
+import kotlinx.serialization.json.json
 
 @Serializable(Consequence.Companion::class)
 public data class Consequence(
@@ -83,22 +105,27 @@ public data class Consequence(
                 remove(KeyAutomaticFacetFilters)
                 remove(KeyAutomaticOptionalFacetFilters)
             }
-            return if (modified.isNotEmpty()) JsonNoDefaults.fromJson(Query.serializer(), JsonObject(modified)) else null
+            return if (modified.isNotEmpty()) JsonNoDefaults.fromJson(
+                Query.serializer(),
+                JsonObject(modified)
+            ) else null
         }
 
-        override fun serialize(encoder: Encoder, obj: Consequence) {
+        override fun serialize(encoder: Encoder, value: Consequence) {
             val params = mutableMapOf<String, JsonElement>().apply {
-                putFilters(KeyAutomaticFacetFilters, obj.automaticFacetFilters)
-                putFilters(KeyAutomaticOptionalFacetFilters, obj.automaticOptionalFacetFilters)
-                obj.query?.toJsonNoDefaults()?.let { putAll(it.content) }
-                if (obj.edits != null) put(KeyQuery, json { KeyEdits to JsonNoDefaults.toJson(Edit.list, obj.edits) })
+                putFilters(KeyAutomaticFacetFilters, value.automaticFacetFilters)
+                putFilters(KeyAutomaticOptionalFacetFilters, value.automaticOptionalFacetFilters)
+                value.query?.toJsonNoDefaults()?.let { putAll(it.content) }
+                if (value.edits != null) put(
+                    KeyQuery,
+                    json { KeyEdits to JsonNoDefaults.toJson(Edit.list, value.edits) })
             }
             val json = json {
                 if (params.isNotEmpty()) KeyParams to JsonObject(params)
-                obj.promote?.let { KeyPromote to JsonNoDefaults.toJson(Promotion.serializer().list, it) }
-                obj.hide?.let { KeyHide to JsonNoDefaults.toJson(KSerializerObjectIDs, it) }
-                obj.userData?.let { KeyUserData to it }
-                obj.filterPromotes?.let { KeyFilterPromotes to it }
+                value.promote?.let { KeyPromote to JsonNoDefaults.toJson(Promotion.serializer().list, it) }
+                value.hide?.let { KeyHide to JsonNoDefaults.toJson(KSerializerObjectIDs, it) }
+                value.userData?.let { KeyUserData to it }
+                value.filterPromotes?.let { KeyFilterPromotes to it }
             }
 
             encoder.asJsonOutput().encodeJson(json)

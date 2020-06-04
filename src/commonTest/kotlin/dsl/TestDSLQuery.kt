@@ -1,14 +1,36 @@
 package dsl
 
 import attributeA
-import com.algolia.search.dsl.*
+import com.algolia.search.dsl.alternativesAsExact
+import com.algolia.search.dsl.analyticsTags
+import com.algolia.search.dsl.attributesToHighlight
+import com.algolia.search.dsl.attributesToRetrieve
+import com.algolia.search.dsl.attributesToSnippet
+import com.algolia.search.dsl.disableExactOnAttributes
+import com.algolia.search.dsl.disableTypoToleranceOnAttributes
+import com.algolia.search.dsl.explainModules
+import com.algolia.search.dsl.facetFilters
+import com.algolia.search.dsl.facets
+import com.algolia.search.dsl.filters
+import com.algolia.search.dsl.insideBoundingBox
+import com.algolia.search.dsl.insidePolygon
+import com.algolia.search.dsl.naturalLanguages
+import com.algolia.search.dsl.numericFilters
+import com.algolia.search.dsl.optionalFilters
+import com.algolia.search.dsl.optionalWords
+import com.algolia.search.dsl.query
+import com.algolia.search.dsl.queryLanguages
+import com.algolia.search.dsl.responseFields
+import com.algolia.search.dsl.restrictSearchableAttributes
+import com.algolia.search.dsl.ruleContexts
+import com.algolia.search.dsl.tagFilters
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.BoundingBox
 import com.algolia.search.model.search.Polygon
 import shouldNotBeNull
 import unknown
 import kotlin.test.Test
-
+import kotlin.test.assertEquals
 
 internal class TestDSLQuery {
 
@@ -50,6 +72,19 @@ internal class TestDSLQuery {
         }
 
         query.facetFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("\"attributeA\":0")), query.facetFilters)
+    }
+
+    @Test
+    fun facetFiltersUnquoted() {
+        val query = query {
+            facetFilters(escape = false) {
+                and { facet(attributeA, 0) }
+            }
+        }
+
+        query.facetFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("attributeA:0")), query.facetFilters)
     }
 
     @Test
@@ -61,6 +96,19 @@ internal class TestDSLQuery {
         }
 
         query.numericFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("\"attributeA\" >= 0"), listOf("\"attributeA\" <= 1")), query.numericFilters)
+    }
+
+    @Test
+    fun numericFiltersUnquoted() {
+        val query = query {
+            numericFilters(escape = false) {
+                and { range(attributeA, 0..1) }
+            }
+        }
+
+        query.numericFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("attributeA >= 0"), listOf("attributeA <= 1")), query.numericFilters)
     }
 
     @Test
@@ -72,6 +120,19 @@ internal class TestDSLQuery {
         }
 
         query.tagFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("_tags:\"unknown\"")), query.tagFilters)
+    }
+
+    @Test
+    fun tagFiltersUnquoted() {
+        val query = query {
+            tagFilters(escape = false) {
+                and { tag(unknown) }
+            }
+        }
+
+        query.tagFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("_tags:unknown")), query.tagFilters)
     }
 
     @Test
@@ -83,6 +144,19 @@ internal class TestDSLQuery {
         }
 
         query.optionalFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("\"attributeA\":0")), query.optionalFilters)
+    }
+
+    @Test
+    fun optionalFiltersUnquoted() {
+        val query = query {
+            optionalFilters(escape = false) {
+                and { facet(attributeA, 0) }
+            }
+        }
+
+        query.optionalFilters!!.isNotEmpty()
+        assertEquals(listOf(listOf("attributeA:0")), query.optionalFilters)
     }
 
     @Test
@@ -213,5 +287,17 @@ internal class TestDSLQuery {
         }
 
         query.explainModules.shouldNotBeNull()
+    }
+
+    @Test
+    fun naturalLanguages() {
+        val query = query {
+            naturalLanguages {
+                +English
+                +French
+            }
+        }
+
+        query.naturalLanguages.shouldNotBeNull()
     }
 }

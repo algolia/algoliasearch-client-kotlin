@@ -9,8 +9,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
-
+import kotlinx.serialization.builtins.serializer
 
 @Serializable(NumericAttributeFilter.Companion::class)
 public data class NumericAttributeFilter(
@@ -33,12 +32,12 @@ public data class NumericAttributeFilter(
 
     companion object : KSerializer<NumericAttributeFilter> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: NumericAttributeFilter) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: NumericAttributeFilter) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): NumericAttributeFilter {

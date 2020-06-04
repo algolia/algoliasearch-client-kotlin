@@ -1,12 +1,33 @@
 package dsl
 
 import attributeA
-import com.algolia.search.dsl.*
+import com.algolia.search.dsl.advancedSyntaxFeatures
+import com.algolia.search.dsl.alternativesAsExact
+import com.algolia.search.dsl.attributesForFaceting
+import com.algolia.search.dsl.attributesToHighlight
+import com.algolia.search.dsl.attributesToRetrieve
+import com.algolia.search.dsl.attributesToSnippet
+import com.algolia.search.dsl.camelCaseAttributes
+import com.algolia.search.dsl.customRanking
+import com.algolia.search.dsl.decompoundedAttributes
+import com.algolia.search.dsl.disableExactOnAttributes
+import com.algolia.search.dsl.disablePrefixOnAttributes
+import com.algolia.search.dsl.disableTypoToleranceOnAttributes
+import com.algolia.search.dsl.disableTypoToleranceOnWords
+import com.algolia.search.dsl.indexLanguages
+import com.algolia.search.dsl.numericAttributesForFiltering
+import com.algolia.search.dsl.optionalWords
+import com.algolia.search.dsl.queryLanguages
+import com.algolia.search.dsl.ranking
+import com.algolia.search.dsl.replicas
+import com.algolia.search.dsl.responseFields
+import com.algolia.search.dsl.searchableAttributes
+import com.algolia.search.dsl.settings
+import com.algolia.search.dsl.unretrieveableAttributes
 import indexA
 import shouldNotBeNull
 import unknown
 import kotlin.test.Test
-
 
 internal class TestDSLSettings {
 

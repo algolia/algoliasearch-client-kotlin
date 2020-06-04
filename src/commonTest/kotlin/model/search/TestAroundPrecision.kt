@@ -4,7 +4,6 @@ import com.algolia.search.model.search.AroundPrecision
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestAroundPrecision {
 
     @Test

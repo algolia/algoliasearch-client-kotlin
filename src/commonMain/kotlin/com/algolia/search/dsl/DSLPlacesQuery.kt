@@ -3,7 +3,6 @@ package com.algolia.search.dsl
 import com.algolia.search.dsl.places.DSLCountries
 import com.algolia.search.model.places.PlacesQuery
 
-
 /**
  * Create a [PlacesQuery] with [block] and an optional [query].
  */

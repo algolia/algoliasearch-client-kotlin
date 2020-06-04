@@ -8,8 +8,7 @@ import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
-
+import kotlinx.serialization.builtins.serializer
 
 /**
  * An empty [Pattern] is only allowed when the [Anchoring] is set to [Anchoring.Is].
@@ -25,12 +24,12 @@ public sealed class Pattern(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<Pattern> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
-        override val descriptor = StringSerializer.descriptor
+        override val descriptor = String.serializer().descriptor
 
-        override fun serialize(encoder: Encoder, obj: Pattern) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: Pattern) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): Pattern {

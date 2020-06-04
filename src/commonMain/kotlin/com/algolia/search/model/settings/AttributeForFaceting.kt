@@ -6,9 +6,12 @@ import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeySearchable
 import com.algolia.search.serialize.regexFilterOnly
 import com.algolia.search.serialize.regexSearchable
-import kotlinx.serialization.*
-import kotlinx.serialization.internal.StringSerializer
-
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.builtins.serializer
 
 @Serializable(AttributeForFaceting.Companion::class)
 public sealed class AttributeForFaceting {
@@ -36,17 +39,17 @@ public sealed class AttributeForFaceting {
     @Serializer(AttributeForFaceting::class)
     companion object : KSerializer<AttributeForFaceting> {
 
-        override fun serialize(encoder: Encoder, obj: AttributeForFaceting) {
-            val string = when (obj) {
-                is Default -> obj.attribute.raw
-                is FilterOnly -> "$KeyFilterOnly(${obj.attribute.raw})"
-                is Searchable -> "$KeySearchable(${obj.attribute.raw})"
+        override fun serialize(encoder: Encoder, value: AttributeForFaceting) {
+            val string = when (value) {
+                is Default -> value.attribute.raw
+                is FilterOnly -> "$KeyFilterOnly(${value.attribute.raw})"
+                is Searchable -> "$KeySearchable(${value.attribute.raw})"
             }
-            StringSerializer.serialize(encoder, string)
+            String.serializer().serialize(encoder, string)
         }
 
         override fun deserialize(decoder: Decoder): AttributeForFaceting {
-            val string = StringSerializer.deserialize(decoder)
+            val string = String.serializer().deserialize(decoder)
             val findFilterOnly = regexFilterOnly.find(string)
             val findSearchable = regexSearchable.find(string)
 

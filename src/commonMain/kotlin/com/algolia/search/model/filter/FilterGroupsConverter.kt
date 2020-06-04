@@ -1,6 +1,5 @@
 package com.algolia.search.model.filter
 
-
 /**
  * Converts a [List] of [FilterGroup] to a type [O].
  */
@@ -41,11 +40,27 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
     public sealed class Legacy<T : Filter> : FilterGroupsConverter<Set<FilterGroup<T>>, List<List<String>>>() {
 
         override fun invoke(groups: Set<FilterGroup<T>>): List<List<String>> {
+            return toLegacy(groups, escape = true)
+        }
+
+        /**
+         * Same as [Legacy], but without quotes.
+         */
+        @Suppress("FunctionName") // To keep DX consistency
+        public fun Unquoted(groups: Set<FilterGroup<T>>): List<List<String>> {
+            return toLegacy(groups, escape = false)
+        }
+
+        private fun toLegacy(groups: Set<FilterGroup<T>>, escape: Boolean): List<List<String>> {
             val (andEntries, orEntries) = groups.partition { it is FilterGroup.And }
-            val ands = andEntries.flatMap { group -> group.flatMap { FilterConverter.Legacy(it) } }.map { listOf(it) }
-            val ors = orEntries.map { group -> group.flatMap { FilterConverter.Legacy(it) } }
+            val ands = andEntries.flatMap { group -> group.flatMap { convertFilter(it, escape) }.map { listOf(it) } }
+            val ors = orEntries.map { group -> group.flatMap { convertFilter(it, escape) } }
 
             return ands + ors
+        }
+
+        private fun <T : Filter> convertFilter(filter: T, escape: Boolean): List<String> {
+            return if (escape) FilterConverter.Legacy(filter) else FilterConverter.Legacy.Unquoted(filter)
         }
 
         object Facet : Legacy<Filter.Facet>()

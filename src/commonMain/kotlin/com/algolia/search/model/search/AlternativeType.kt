@@ -1,12 +1,22 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAltcorrection
+import com.algolia.search.serialize.KeyCompound
+import com.algolia.search.serialize.KeyConcat
+import com.algolia.search.serialize.KeyExcluded
+import com.algolia.search.serialize.KeyOptional
+import com.algolia.search.serialize.KeyOriginal
+import com.algolia.search.serialize.KeyPlural
+import com.algolia.search.serialize.KeySplit
+import com.algolia.search.serialize.KeyStopWord
+import com.algolia.search.serialize.KeySynonym
+import com.algolia.search.serialize.KeyTypo
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
+import kotlinx.serialization.builtins.serializer
 
 /**
  * Type for [Alternative.type]
@@ -87,12 +97,12 @@ public sealed class AlternativeType(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<AlternativeType> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: AlternativeType) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: AlternativeType) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): AlternativeType {

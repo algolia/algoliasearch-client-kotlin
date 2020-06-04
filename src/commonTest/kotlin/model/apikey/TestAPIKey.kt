@@ -5,7 +5,6 @@ import com.algolia.search.model.APIKey
 import shouldFailWith
 import kotlin.test.Test
 
-
 internal class TestAPIKey {
 
     @Test

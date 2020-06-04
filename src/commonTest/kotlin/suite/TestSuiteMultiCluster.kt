@@ -8,18 +8,17 @@ import com.algolia.search.model.multicluster.UserIDQuery
 import io.ktor.client.features.ResponseException
 import io.ktor.client.statement.readBytes
 import io.ktor.http.HttpStatusCode
-import kotlinx.coroutines.CoroutineScope
+import io.ktor.utils.io.core.String
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import io.ktor.utils.io.core.String
 import runBlocking
 import shouldBeFalse
 import shouldBeTrue
 import shouldEqual
 import shouldNotBeEmpty
 import username
+import kotlin.coroutines.coroutineContext
 import kotlin.test.Test
-
 
 internal class TestSuiteMultiCluster {
 
@@ -30,8 +29,8 @@ internal class TestSuiteMultiCluster {
         return "$prefix-$username-$id".toUserID()
     }
 
-    private suspend fun CoroutineScope.waitForUserID(userID: UserID) {
-        while (isActive) {
+    private suspend fun waitForUserID(userID: UserID) {
+        while (coroutineContext.isActive) {
             try {
                 clientMcm.getUserID(userID)
                 break
@@ -42,26 +41,21 @@ internal class TestSuiteMultiCluster {
         }
     }
 
-    private suspend fun CoroutineScope.removeUSerID(userID: UserID) {
-        loop@ while (isActive) {
+    private suspend fun removeUserID(userID: UserID) {
+        loop@ while (coroutineContext.isActive) {
             try {
                 clientMcm.removeUserID(userID)
             } catch (exception: ResponseException) {
                 when (exception.response.status) {
                     HttpStatusCode.NotFound -> break@loop
-                    HttpStatusCode.BadRequest -> println(String(exception.response.readBytes()))
+                    HttpStatusCode.BadRequest ->
+                        if (String(exception.response.readBytes()).contains("is already migrating")) {
+                            break@loop
+                        } else {
+                            // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
+                            println(String(exception.response.readBytes()))
+                        }
                 }
-            }
-        }
-    }
-
-    private suspend fun CoroutineScope.waitForDeletion(userID: UserID) {
-        while (isActive) {
-            try {
-                clientMcm.getUserID(userID)
-            } catch (exception: ResponseException) {
-                exception.response.status.value shouldEqual HttpStatusCode.NotFound.value
-                break
             }
             delay(1000L)
         }
@@ -80,14 +74,18 @@ internal class TestSuiteMultiCluster {
             clientMcm.assignUserID(userID0, clusters.first().name)
             clientMcm.assignUserIds(listOf(userID1, userID2), clusters.first().name)
             userIDs.forEach { waitForUserID(it) }
-            userIDs.forEach { clientMcm.searchUserID(UserIDQuery(query = it.raw)).hits.size shouldEqual 1 }
+            userIDs.forEach {
+                clientMcm.searchUserID(
+                    UserIDQuery(
+                        query = it.raw,
+                        hitsPerPage = 1,
+                        clusterName = clusters.first().name
+                    )
+                ).hits.size shouldEqual 1
+            }
             clientMcm.listUserIDs().userIDs.shouldNotBeEmpty()
             clientMcm.getTopUserID().topUsers.shouldNotBeEmpty()
-            userIDs.forEach { removeUSerID(it) }
-            userIDs.forEach { waitForDeletion(it) }
-            clientMcm.listUserIDs().userIDs.filter { it.userID.raw.startsWith(prefix) }.forEach {
-                clientMcm.removeUserID(it.userID)
-            }
+            userIDs.forEach { removeUserID(it) }
             clientMcm.hasPendingMapping(true).clusters.isNullOrEmpty().shouldBeFalse()
         }
     }

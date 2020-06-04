@@ -8,7 +8,6 @@ import com.algolia.search.serialize.KeyQuery
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 /**
  * Query to use with [EndpointMultiCluster.searchUserID].
  */

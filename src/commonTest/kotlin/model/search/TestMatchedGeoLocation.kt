@@ -8,8 +8,7 @@ import com.algolia.search.serialize.KeyLng
 import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
-
-internal class TestMatchedGeoLocation: TestSerializer<MatchedGeoLocation>(MatchedGeoLocation) {
+internal class TestMatchedGeoLocation : TestSerializer<MatchedGeoLocation>(MatchedGeoLocation) {
 
     override val items = listOf(
         item to json

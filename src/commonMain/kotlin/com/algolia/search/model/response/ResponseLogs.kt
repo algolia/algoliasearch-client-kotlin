@@ -2,11 +2,33 @@ package com.algolia.search.model.response
 
 import com.algolia.search.model.ClientDate
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.QueryID
+import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAnswer
+import com.algolia.search.serialize.KeyAnswer_Code
+import com.algolia.search.serialize.KeyIndex
+import com.algolia.search.serialize.KeyIndex_Name
+import com.algolia.search.serialize.KeyInner_Queries
+import com.algolia.search.serialize.KeyIp
+import com.algolia.search.serialize.KeyLogs
+import com.algolia.search.serialize.KeyMethod
+import com.algolia.search.serialize.KeyNb_Api_Calls
+import com.algolia.search.serialize.KeyOffset
+import com.algolia.search.serialize.KeyProcessing_Time_Ms
+import com.algolia.search.serialize.KeyQuery_Body
+import com.algolia.search.serialize.KeyQuery_Headers
+import com.algolia.search.serialize.KeyQuery_ID
+import com.algolia.search.serialize.KeyQuery_Nb_Hits
+import com.algolia.search.serialize.KeyQuery_Params
+import com.algolia.search.serialize.KeySha1
+import com.algolia.search.serialize.KeyTimestamp
+import com.algolia.search.serialize.KeyUrl
+import com.algolia.search.serialize.KeyUser_Token
+import com.algolia.search.serialize.Key_Exhaustive_Faceting
+import com.algolia.search.serialize.Key_Exhaustive_Nb_Hits
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-
 
 @Serializable
 public data class ResponseLogs(
@@ -69,7 +91,11 @@ public data class ResponseLogs(
         @SerialName(KeyIndex) val indexNameOrNull: IndexName? = null,
         @SerialName(Key_Exhaustive_Nb_Hits) val exhaustiveNbHits: Boolean? = null,
         @SerialName(Key_Exhaustive_Faceting) val exhaustiveFaceting: Boolean? = null,
-        @SerialName(KeyQuery_Params) val queryParamsOrNull: String? = null
+        @SerialName(KeyQuery_Params) val queryParamsOrNull: String? = null,
+        /**
+         * Contains an object for each performed query with the indexName, queryID, offset, and userToken.
+         */
+        @SerialName(KeyInner_Queries) val innerQueries: List<InnerQuery>? = null
     ) {
 
         public val indexName: IndexName
@@ -83,5 +109,13 @@ public data class ResponseLogs(
 
         public val nbApiCalls: Long
             get() = nbApiCallsOrNull!!
+
+        @Serializable
+        public data class InnerQuery(
+            @SerialName(KeyIndex_Name) val indexName: IndexName? = null,
+            @SerialName(KeyQuery_ID) val queryID: QueryID? = null,
+            @SerialName(KeyOffset) val offset: Int? = null,
+            @SerialName(KeyUser_Token) val userToken: UserToken? = null
+        )
     }
 }

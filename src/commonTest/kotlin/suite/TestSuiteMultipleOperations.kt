@@ -14,9 +14,7 @@ import kotlinx.serialization.json.json
 import runBlocking
 import shouldBeTrue
 import shouldEqual
-import kotlin.test.AfterTest
 import kotlin.test.Test
-
 
 internal class TestSuiteMultipleOperations {
 
@@ -26,13 +24,6 @@ internal class TestSuiteMultipleOperations {
     private val firstname = "firstname"
     private val jimmie = "Jimmie"
     private val json = json { firstname to jimmie }
-
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
 
     @Test
     fun test() {

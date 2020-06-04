@@ -14,7 +14,6 @@ import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.insights.UserToken
 import com.algolia.search.transport.Transport
 
-
 /**
  * Client to manage [InsightsEvent].
  */

@@ -17,9 +17,7 @@ import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
-import kotlin.test.AfterTest
 import kotlin.test.Test
-
 
 internal class TestSuiteInsights {
 
@@ -43,13 +41,6 @@ internal class TestSuiteInsights {
         Filter.Facet(attribute, "foo"),
         Filter.Facet(attribute, "bar")
     )
-
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
 
     @Test
     fun test() {

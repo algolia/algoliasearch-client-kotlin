@@ -11,28 +11,19 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
-import kotlinx.serialization.list
 import runBlocking
 import shouldBeTrue
 import shouldEqual
 import shouldNotBeNull
-import kotlin.test.AfterTest
 import kotlin.test.Test
-
 
 internal class TestSuiteDisjunctive {
 
     private val suffix = "disjunctive"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
-
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
 
     @Test
     fun testA() {

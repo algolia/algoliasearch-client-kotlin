@@ -4,9 +4,16 @@ import com.algolia.search.serialize.KeyFrom
 import com.algolia.search.serialize.KeyValue
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.*
-import kotlinx.serialization.json.*
-
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.json
+import kotlinx.serialization.json.jsonArray
 
 /**
  * Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
@@ -30,18 +37,18 @@ public sealed class AroundPrecision {
     @Serializer(AroundPrecision::class)
     companion object : KSerializer<AroundPrecision> {
 
-        override fun serialize(encoder: Encoder, obj: AroundPrecision) {
-            val json = when (obj) {
-                is Int -> JsonLiteral(obj.value)
+        override fun serialize(encoder: Encoder, value: AroundPrecision) {
+            val json = when (value) {
+                is Int -> JsonLiteral(value.value)
                 is Ranges -> jsonArray {
-                    obj.list.forEach {
+                    value.list.forEach {
                         +json {
                             KeyFrom to it.first
                             KeyValue to it.endInclusive
                         }
                     }
                 }
-                is Other -> obj.raw
+                is Other -> value.raw
             }
             encoder.asJsonOutput().encodeJson(json)
         }

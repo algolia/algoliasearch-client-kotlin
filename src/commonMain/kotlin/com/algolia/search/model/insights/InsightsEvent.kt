@@ -6,15 +6,27 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterConverter
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyClick
+import com.algolia.search.serialize.KeyConversion
+import com.algolia.search.serialize.KeyEventName
+import com.algolia.search.serialize.KeyEventType
+import com.algolia.search.serialize.KeyFilters
+import com.algolia.search.serialize.KeyIndex
+import com.algolia.search.serialize.KeyObjectIDs
+import com.algolia.search.serialize.KeyPositions
+import com.algolia.search.serialize.KeyQueryID
+import com.algolia.search.serialize.KeyTimestamp
+import com.algolia.search.serialize.KeyUserToken
+import com.algolia.search.serialize.KeyView
+import com.algolia.search.serialize.asJsonOutput
+import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.JsonObjectBuilder
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
-
 
 /**
  * Event that can be send with [EndpointInsights].
@@ -70,7 +82,6 @@ public sealed class InsightsEvent {
             init {
                 if (objectIDs.size > 20)
                     throw IllegalArgumentException("You can't send more than 20 objectIDs for a single event at a time.")
-
             }
         }
 
@@ -84,7 +95,7 @@ public sealed class InsightsEvent {
     }
 
     @Serializer(InsightsEvent::class)
-    companion object : SerializationStrategy<InsightsEvent> {
+    companion object : KSerializer<InsightsEvent> {
 
         private infix fun JsonObjectBuilder.stringify(resources: Resources?) {
             when (resources) {
@@ -105,20 +116,24 @@ public sealed class InsightsEvent {
             }
         }
 
-        override fun serialize(encoder: Encoder, obj: InsightsEvent) {
+        override fun serialize(encoder: Encoder, value: InsightsEvent) {
             val json = json {
-                this eventType obj
-                KeyEventName to obj.eventName.raw
-                obj.timestamp?.let { KeyTimestamp to it }
-                KeyIndex to obj.indexName.raw
-                obj.userToken?.let { KeyUserToken to it.raw }
-                obj.queryID?.let { KeyQueryID to it.raw }
-                this stringify obj.resources
-                if (obj is Click) {
-                    obj.positions?.let { KeyPositions to jsonArray { it.forEach { +(it as Number) } } }
+                this eventType value
+                KeyEventName to value.eventName.raw
+                value.timestamp?.let { KeyTimestamp to it }
+                KeyIndex to value.indexName.raw
+                value.userToken?.let { KeyUserToken to it.raw }
+                value.queryID?.let { KeyQueryID to it.raw }
+                this stringify value.resources
+                if (value is Click) {
+                    value.positions?.let { KeyPositions to jsonArray { it.forEach { +(it as Number) } } }
                 }
             }
             encoder.asJsonOutput().encodeJson(json)
+        }
+
+        override fun deserialize(decoder: Decoder): InsightsEvent {
+            throw UnsupportedOperationException("Insight event deserialization is not an expected operation")
         }
     }
 }

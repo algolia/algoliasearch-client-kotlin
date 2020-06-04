@@ -18,7 +18,6 @@ import shouldBeTrue
 import shouldEqual
 import kotlin.test.AfterTest
 
-
 internal class TestSuiteAPIKey {
 
     private lateinit var key: APIKey
@@ -71,13 +70,6 @@ internal class TestSuiteAPIKey {
                 restoreAPIKey(key).wait()
                 deleteAPIKey(key).wait().shouldBeTrue()
             }
-        }
-    }
-
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            clientAdmin1.deleteAPIKey(key)
         }
     }
 }

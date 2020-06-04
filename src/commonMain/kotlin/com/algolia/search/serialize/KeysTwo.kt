@@ -1,6 +1,5 @@
 package com.algolia.search.serialize
 
-
 public const val KeyUserIDs = "userIDs"
 public const val KeyTopUsers = "topUsers"
 public const val KeyKeys = "keys"
@@ -187,3 +186,16 @@ public const val KeyMatchAlternatives = "match.alternatives"
 public const val KeyTypes = "types"
 public const val KeyPending = "pending"
 public const val KeyGetClusters = "getClusters"
+public const val KeyEU = "eu"
+public const val KeyUS = "us"
+public const val KeyDE = "de"
+public const val KeyFacetName = "facetName"
+public const val KeyNaturalLanguages = "naturalLanguages"
+public const val KeyInner_Queries = "inner_queries"
+public const val KeyIndex_Name = "index_name"
+public const val KeyQuery_ID = "query_id"
+public const val KeyUser_Token = "user_token"
+public const val KeyPersonalization = "personalization"
+public const val KeyRankingScore = "rankingScore"
+public const val KeyFiltersScore = "filtersScore"
+public const val KeyAppliedRules = "appliedRules"

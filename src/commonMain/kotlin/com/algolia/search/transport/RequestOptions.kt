@@ -5,7 +5,6 @@ import com.algolia.search.serialize.KeyAlgoliaUserID
 import com.algolia.search.serialize.KeyForwardedFor
 import kotlinx.serialization.json.JsonObject
 
-
 /**
  * Every endpoint can configure a request locally by passing additional
  * [headers], [urlParameters], [body], [writeTimeout], [readTimeout].

@@ -4,15 +4,23 @@ import attributeA
 import attributeB
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.model.search.*
-import com.algolia.search.serialize.*
-import kotlinx.serialization.internal.HashMapSerializer
+import com.algolia.search.model.search.HighlightResult
+import com.algolia.search.model.search.MatchLevel
+import com.algolia.search.model.search.MatchedGeoLocation
+import com.algolia.search.model.search.Point
+import com.algolia.search.model.search.RankingInfo
+import com.algolia.search.model.search.SnippetResult
+import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.Key_DistinctSeqID
+import com.algolia.search.serialize.Key_HighlightResult
+import com.algolia.search.serialize.Key_RankingInfo
+import com.algolia.search.serialize.Key_SnippetResult
+import kotlinx.serialization.builtins.MapSerializer
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.json
-import kotlinx.serialization.list
 import serialize.TestSerializer
 import serialize.search.TestHighlightResult
 import unknown
-
 
 internal class TestResponseSearchHit : TestSerializer<ResponseSearch.Hit>(ResponseSearch.Hit) {
 
@@ -42,8 +50,8 @@ internal class TestResponseSearchHit : TestSerializer<ResponseSearch.Hit>(Respon
         )
         val json = json {
             Key_DistinctSeqID to 0
-            Key_HighlightResult to Json.toJson(HashMapSerializer(Attribute, HighlightResult.serializer()), highlights)
-            Key_SnippetResult to Json.toJson(HashMapSerializer(Attribute, SnippetResult.serializer().list), snippets)
+            Key_HighlightResult to Json.toJson(MapSerializer(Attribute, HighlightResult.serializer()), highlights)
+            Key_SnippetResult to Json.toJson(MapSerializer(Attribute, SnippetResult.serializer().list), snippets)
             attributeA to unknown
             attributeB to unknown
             Key_RankingInfo to Json.toJson(RankingInfo.serializer(), rankingInfo)

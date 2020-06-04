@@ -5,7 +5,6 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
 
-
 /**
  * DSL for building a [List] of [FilterGroup] of [Filter.Facet].
  */

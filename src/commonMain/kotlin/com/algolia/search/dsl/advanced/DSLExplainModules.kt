@@ -4,7 +4,6 @@ import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.search.ExplainModule
 
-
 /**
  * DSL for building a [List] of [ExplainModule].
  */
@@ -15,6 +14,7 @@ public class DSLExplainModules(
 ) {
 
     public val MatchAlternatives = ExplainModule.MatchAlternatives
+
     /**
      * Add [this] to [explainModules].
      */

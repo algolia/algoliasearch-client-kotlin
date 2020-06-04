@@ -2,9 +2,7 @@ package com.algolia.search.model.settings
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Language
-import kotlinx.serialization.*
-import kotlinx.serialization.internal.PairSerializer
-
+import kotlinx.serialization.Serializable
 
 /**
  * Specify on which attributes in your index Algolia should apply word-splitting (“decompounding”).

@@ -1,26 +1,30 @@
 import com.android.build.gradle.LibraryExtension
+import com.diffplug.gradle.spotless.SpotlessExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 
 buildscript {
     repositories {
+        mavenCentral()
         google()
     }
     dependencies {
-        classpath("com.android.tools.build:gradle:3.5.2")
+        classpath(plugin.Android())
+        classpath(plugin.Spotless())
     }
 }
 
 plugins {
-    id("kotlin-multiplatform") version "1.3.60"
-    id("kotlinx-serialization") version "1.3.60"
+    id("kotlin-multiplatform") version "1.3.72"
+    id("kotlinx-serialization") version "1.3.72"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
     id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.5"
 }
 
 apply(plugin = "com.android.library")
+apply(plugin = "com.diffplug.gradle.spotless")
 
 repositories {
     jcenter()
@@ -28,10 +32,19 @@ repositories {
     mavenCentral()
     maven { url = URI("https://dl.bintray.com/kotlin/ktor") }
     maven { url = URI("https://kotlin.bintray.com/kotlinx") }
+    maven { url = URI("https://oss.sonatype.org/content/repositories/snapshots") }
 }
 
 version = Library.version
 group = Library.group
+
+allprojects {
+    tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>> {
+        kotlinOptions {
+            freeCompilerArgs = listOfNotNull("-Xopt-in=kotlin.RequiresOptIn")
+        }
+    }
+}
 
 extensions.getByType(LibraryExtension::class.java).apply {
     compileSdkVersion(29)
@@ -211,7 +224,7 @@ bintray {
         repo = "maven"
         name = Library.artifact
         websiteUrl = "https://www.algolia.com/"
-        issueTrackerUrl =  "https://github.com/algolia/algoliasearch-client-kotlin/issues"
+        issueTrackerUrl = "https://github.com/algolia/algoliasearch-client-kotlin/issues"
         setLicenses("MIT")
         setLabels("Kotlin", "Algolia")
         vcsUrl = "https://github.com/algolia/algoliasearch-client-kotlin.git"
@@ -235,4 +248,17 @@ tasks {
 
 tasks.withType<Test> {
     maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
+}
+
+configure<SpotlessExtension> {
+    kotlin {
+        target("**/*.kt")
+        ktlint("0.36.0").userData(mapOf(
+            // Disable Ktlint import ordering temporarily.
+            // https://github.com/pinterest/ktlint/issues/527
+            "disabled_rules" to "import-ordering"
+        ))
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
 }

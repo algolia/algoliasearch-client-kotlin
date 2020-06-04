@@ -5,7 +5,6 @@ import com.algolia.search.model.search.ResponseFields
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLResponseFields {
 
     @Test

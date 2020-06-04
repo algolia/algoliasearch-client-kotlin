@@ -4,27 +4,18 @@ import clientAdmin1
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.JsonDebug
+import kotlinx.serialization.builtins.list
 import kotlinx.serialization.json.JsonObjectSerializer
-import kotlinx.serialization.list
 import loadScratch
 import runBlocking
 import shouldEqual
-import kotlin.test.AfterTest
 import kotlin.test.Test
-
 
 internal class TestSuiteBatching {
 
     private val suffix = "index_batching"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
-
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
 
     @Test
     fun test() {

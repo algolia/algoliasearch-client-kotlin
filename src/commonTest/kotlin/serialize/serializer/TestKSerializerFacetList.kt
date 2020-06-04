@@ -9,7 +9,6 @@ import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 import unknown
 
-
 internal class TestKSerializerFacetList : TestSerializer<List<Facet>>(KSerializerFacetList) {
 
     override val items = listOf(

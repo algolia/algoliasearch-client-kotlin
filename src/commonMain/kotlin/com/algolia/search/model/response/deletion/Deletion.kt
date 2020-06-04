@@ -5,7 +5,6 @@ import com.algolia.search.serialize.KeyDeletedAt
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
 public data class Deletion(
     /**

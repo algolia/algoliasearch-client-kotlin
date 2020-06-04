@@ -14,9 +14,7 @@ import kotlinx.serialization.json.json
 import runBlocking
 import shouldBeTrue
 import shouldEqual
-import kotlin.test.AfterTest
 import kotlin.test.Test
-
 
 internal class TestSuiteCopyIndex {
 
@@ -41,13 +39,6 @@ internal class TestSuiteCopyIndex {
         }
     )
     private val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Default(company)))
-
-    @AfterTest
-    fun clean() {
-        runBlocking {
-            cleanIndex(clientAdmin1, suffix)
-        }
-    }
 
     @Test
     fun test() {
@@ -74,7 +65,8 @@ internal class TestSuiteCopyIndex {
 
                 clientAdmin1.initIndex(indexNameSettings).getSettings() shouldEqual getSettings()
                 clientAdmin1.initIndex(indexNameRules).getRule(ruleID) shouldEqual getRule(ruleID)
-                clientAdmin1.initIndex(indexNameSynonyms).getSynonym(synonym.objectID) shouldEqual getSynonym(synonym.objectID)
+                clientAdmin1.initIndex(indexNameSynonyms)
+                    .getSynonym(synonym.objectID) shouldEqual getSynonym(synonym.objectID)
                 clientAdmin1.initIndex(indexNameFullCopy).also {
                     it.getSettings() shouldEqual getSettings()
                     it.getRule(ruleID) shouldEqual getRule(ruleID)

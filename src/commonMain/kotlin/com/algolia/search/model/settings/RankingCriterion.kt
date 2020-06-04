@@ -3,13 +3,23 @@ package com.algolia.search.model.settings
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Raw
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.*
+import com.algolia.search.serialize.KeyAsc
+import com.algolia.search.serialize.KeyAttribute
+import com.algolia.search.serialize.KeyCustom
+import com.algolia.search.serialize.KeyDesc
+import com.algolia.search.serialize.KeyExact
+import com.algolia.search.serialize.KeyFilters
+import com.algolia.search.serialize.KeyGeo
+import com.algolia.search.serialize.KeyProximity
+import com.algolia.search.serialize.KeyTypo
+import com.algolia.search.serialize.KeyWords
+import com.algolia.search.serialize.regexAsc
+import com.algolia.search.serialize.regexDesc
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.internal.StringSerializer
-
+import kotlinx.serialization.builtins.serializer
 
 @Serializable(RankingCriterion.Companion::class)
 public sealed class RankingCriterion(override val raw: String) : Raw<String> {
@@ -112,12 +122,12 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
 
     companion object : KSerializer<RankingCriterion> {
 
-        private val serializer = StringSerializer
+        private val serializer = String.serializer()
 
         override val descriptor = serializer.descriptor
 
-        override fun serialize(encoder: Encoder, obj: RankingCriterion) {
-            serializer.serialize(encoder, obj.raw)
+        override fun serialize(encoder: Encoder, value: RankingCriterion) {
+            serializer.serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): RankingCriterion {

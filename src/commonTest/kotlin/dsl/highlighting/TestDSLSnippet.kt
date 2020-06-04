@@ -7,7 +7,6 @@ import com.algolia.search.model.search.Snippet
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLSnippet {
 
     @Test

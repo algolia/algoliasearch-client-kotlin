@@ -4,9 +4,12 @@ import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyUnordered
 import com.algolia.search.serialize.regexUnordered
-import kotlinx.serialization.*
-import kotlinx.serialization.internal.StringSerializer
-
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
+import kotlinx.serialization.builtins.serializer
 
 @Serializable(SearchableAttribute.Companion::class)
 public sealed class SearchableAttribute {
@@ -29,16 +32,16 @@ public sealed class SearchableAttribute {
     @Serializer(SearchableAttribute::class)
     companion object : KSerializer<SearchableAttribute> {
 
-        override fun serialize(encoder: Encoder, obj: SearchableAttribute) {
-            val string = when (obj) {
-                is Default -> obj.attributes.joinToString { it.raw }
-                is Unordered -> "$KeyUnordered(${obj.attribute.raw})"
+        override fun serialize(encoder: Encoder, value: SearchableAttribute) {
+            val string = when (value) {
+                is Default -> value.attributes.joinToString { it.raw }
+                is Unordered -> "$KeyUnordered(${value.attribute.raw})"
             }
-            StringSerializer.serialize(encoder, string)
+            String.serializer().serialize(encoder, string)
         }
 
         override fun deserialize(decoder: Decoder): SearchableAttribute {
-            val string = StringSerializer.deserialize(decoder)
+            val string = String.serializer().deserialize(decoder)
             val findUnordered = regexUnordered.find(string)
 
             return when {

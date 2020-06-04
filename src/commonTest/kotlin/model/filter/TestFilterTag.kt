@@ -5,7 +5,6 @@ import com.algolia.search.model.filter.FilterConverter
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestFilterTag {
 
     private val filter = Filter.Tag("valueA")
@@ -20,5 +19,11 @@ internal class TestFilterTag {
     fun legacy() {
         FilterConverter.Legacy(filter) shouldEqual listOf("_tags:\"valueA\"")
         FilterConverter.Legacy(!filter) shouldEqual listOf("_tags:-\"valueA\"")
+    }
+
+    @Test
+    fun legacyUnquoted() {
+        FilterConverter.Legacy.Unquoted(filter) shouldEqual listOf("_tags:valueA")
+        FilterConverter.Legacy.Unquoted(!filter) shouldEqual listOf("_tags:-valueA")
     }
 }

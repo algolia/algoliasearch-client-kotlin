@@ -11,12 +11,16 @@ import com.algolia.search.serialize.KeyObjectIDs
 import com.algolia.search.serialize.KeyTaskID
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.*
+import kotlinx.serialization.Decoder
+import kotlinx.serialization.Encoder
+import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.long
-
 
 @Serializable(ResponseBatches.Companion::class)
 public data class ResponseBatches(
@@ -36,10 +40,10 @@ public data class ResponseBatches(
     @Serializer(ResponseBatches::class)
     companion object : KSerializer<ResponseBatches> {
 
-        override fun serialize(encoder: Encoder, obj: ResponseBatches) {
+        override fun serialize(encoder: Encoder, value: ResponseBatches) {
             val json = json {
-                KeyTaskID to json { obj.tasks.forEach { it.indexName.raw to it.taskID.raw } }
-                KeyObjectIDs to obj.objectIDsOrNull?.let { jsonArray { it.forEach { +it?.raw } } }
+                KeyTaskID to json { value.tasks.forEach { it.indexName.raw to it.taskID.raw } }
+                KeyObjectIDs to value.objectIDsOrNull?.let { jsonArray { it.forEach { +it?.raw } } }
             }
 
             encoder.asJsonOutput().encodeJson(json)

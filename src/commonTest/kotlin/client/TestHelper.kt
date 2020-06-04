@@ -6,7 +6,6 @@ import kotlinx.serialization.json.jsonArray
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestHelper {
 
     @Test

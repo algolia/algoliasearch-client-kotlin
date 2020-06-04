@@ -7,7 +7,6 @@ import com.algolia.search.serialize.KeyPattern
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
 @Serializable
 public data class Condition(
     @SerialName(KeyAnchoring) val anchoring: Anchoring? = null,

@@ -5,7 +5,6 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.rule.Promotion
 
-
 /**
  * DSL for building a [List] of [Promotion].
  */
@@ -32,6 +31,13 @@ public class DSLPromotions(
      * Create a [Promotion] with [this] and [position].
      */
     public operator fun ObjectID.invoke(position: Int): Promotion {
+        return Promotion(this, position)
+    }
+
+    /**
+     * Create a [Promotion] with [this] and [position].
+     */
+    public operator fun List<ObjectID>.invoke(position: Int): Promotion {
         return Promotion(this, position)
     }
 

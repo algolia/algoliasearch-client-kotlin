@@ -1,10 +1,18 @@
 package configuration
 
 import BuildConfig
-import com.algolia.search.configuration.*
+import com.algolia.search.configuration.AlgoliaSearchClient
+import com.algolia.search.configuration.ConfigurationAnalytics
+import com.algolia.search.configuration.ConfigurationInsights
+import com.algolia.search.configuration.ConfigurationPlaces
+import com.algolia.search.configuration.ConfigurationRecommendation
+import com.algolia.search.configuration.ConfigurationSearch
+import com.algolia.search.configuration.Region
+import com.algolia.search.configuration.defaultReadTimeout
+import com.algolia.search.configuration.defaultWriteTimeout
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
-import com.algolia.search.transport.analyticsHosts
+import com.algolia.search.transport.hosts
 import com.algolia.search.transport.insightHosts
 import com.algolia.search.transport.placesHosts
 import com.algolia.search.transport.searchHosts
@@ -13,11 +21,12 @@ import shouldBeNull
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestConfiguration {
 
     private val applicationID = ApplicationID("applicationID")
     private val apiKey = APIKey("apiKey")
+    private val regionRecommendation = Region.Recommendation.EU
+    private val regionAnalytics = Region.Analytics.EU
 
     @Test
     fun testAlgoliaSearchClient() {
@@ -39,11 +48,11 @@ internal class TestConfiguration {
 
     @Test
     fun configurationAnalytics() {
-        ConfigurationAnalytics(applicationID, apiKey).apply {
+        ConfigurationAnalytics(applicationID, apiKey, regionAnalytics).apply {
             writeTimeout shouldEqual defaultWriteTimeout
             readTimeout shouldEqual defaultReadTimeout
             logLevel shouldEqual LogLevel.NONE
-            hosts shouldEqual analyticsHosts
+            hosts shouldEqual regionAnalytics.hosts
             defaultHeaders.shouldBeNull()
             engine.shouldBeNull()
             httpClientConfig.shouldBeNull()
@@ -70,6 +79,19 @@ internal class TestConfiguration {
             readTimeout shouldEqual defaultReadTimeout
             logLevel shouldEqual LogLevel.NONE
             hosts shouldEqual placesHosts
+            defaultHeaders.shouldBeNull()
+            engine.shouldBeNull()
+            httpClientConfig.shouldBeNull()
+        }
+    }
+
+    @Test
+    fun configurationRecommendation() {
+        ConfigurationRecommendation(applicationID, apiKey, regionRecommendation).apply {
+            writeTimeout shouldEqual defaultWriteTimeout
+            readTimeout shouldEqual defaultReadTimeout
+            logLevel shouldEqual LogLevel.NONE
+            hosts shouldEqual regionRecommendation.hosts
             defaultHeaders.shouldBeNull()
             engine.shouldBeNull()
             httpClientConfig.shouldBeNull()

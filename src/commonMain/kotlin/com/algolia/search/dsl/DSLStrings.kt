@@ -1,6 +1,5 @@
 package com.algolia.search.dsl
 
-
 /**
  * DSL for building a [List] of [String].
  */

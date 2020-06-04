@@ -7,7 +7,6 @@ import com.algolia.search.model.settings.CustomRankingCriterion
 import shouldEqual
 import kotlin.test.Test
 
-
 internal class TestDSLCustomRanking {
 
     @Test
