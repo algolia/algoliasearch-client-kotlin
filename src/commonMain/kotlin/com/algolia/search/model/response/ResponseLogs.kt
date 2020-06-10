@@ -112,7 +112,7 @@ public data class ResponseLogs(
 
         @Serializable
         public data class InnerQuery(
-            @SerialName(KeyIndex_Name) val indexName: IndexName? = null,
+            @SerialName(KeyIndex_Name) val indexName: IndexName,
             @SerialName(KeyQuery_ID) val queryID: QueryID? = null,
             @SerialName(KeyOffset) val offset: Int? = null,
             @SerialName(KeyUser_Token) val userToken: UserToken? = null
