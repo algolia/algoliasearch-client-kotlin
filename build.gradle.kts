@@ -47,11 +47,11 @@ allprojects {
 }
 
 extensions.getByType(LibraryExtension::class.java).apply {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
 
     defaultConfig {
         minSdkVersion(17)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
