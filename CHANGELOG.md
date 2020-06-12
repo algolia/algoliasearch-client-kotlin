@@ -1,3 +1,8 @@
+# Unreleased
+
+### Changed
+- `indexName` required in `InnerQuery`
+
 # 1.4.0
 
 Starting from this version, the library is compatible only with kotlin version `1.3.70` or higher, 
