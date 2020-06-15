@@ -44,7 +44,7 @@ public class ClientAnalytics private constructor(
         apiKey: APIKey
     ) : this(
         Transport(
-            ConfigurationAnalytics(applicationID, apiKey),
+            ConfigurationAnalytics(applicationID, apiKey, Region.Analytics.US),
             CredentialsImpl(applicationID, apiKey)
         )
     )
