@@ -1,5 +1,8 @@
 # Unreleased
 
+### Added
+- Support and target Android API 30
+
 ### Changed
 - `indexName` required in `InnerQuery`
 
