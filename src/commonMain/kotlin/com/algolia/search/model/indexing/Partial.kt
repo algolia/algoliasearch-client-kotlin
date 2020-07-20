@@ -7,6 +7,8 @@ import com.algolia.search.serialize.KeyAdd
 import com.algolia.search.serialize.KeyAddUnique
 import com.algolia.search.serialize.KeyDecrement
 import com.algolia.search.serialize.KeyIncrement
+import com.algolia.search.serialize.KeyIncrementFrom
+import com.algolia.search.serialize.KeyIncrementSet
 import com.algolia.search.serialize.KeyRemove
 import com.algolia.search.serialize.KeyValue
 import com.algolia.search.serialize.Key_Operation
@@ -58,6 +60,28 @@ public sealed class Partial {
      * Increment a numeric based value for an attribute.
      */
     public data class Increment internal constructor(
+        override val attribute: Attribute,
+        override val value: JsonElement
+    ) : Partial() {
+
+        public constructor(attribute: Attribute, value: Number) : this(attribute, JsonLiteral(value))
+    }
+
+    /**
+     * TODO
+     */
+    public data class IncrementFrom internal constructor(
+        override val attribute: Attribute,
+        override val value: JsonElement
+    ) : Partial() {
+
+        public constructor(attribute: Attribute, value: Number) : this(attribute, JsonLiteral(value))
+    }
+
+    /**
+     * TODO
+     */
+    public data class IncrementSet internal constructor(
         override val attribute: Attribute,
         override val value: JsonElement
     ) : Partial() {
@@ -122,6 +146,8 @@ public sealed class Partial {
             val key = when (value) {
                 is Update -> null
                 is Increment -> KeyIncrement
+                is IncrementFrom -> KeyIncrementFrom
+                is IncrementSet -> KeyIncrementSet
                 is Decrement -> KeyDecrement
                 is Add -> KeyAdd
                 is Remove -> KeyRemove
@@ -146,6 +172,8 @@ public sealed class Partial {
             return when (operation) {
                 null -> Update(attribute, jsonElement)
                 KeyIncrement -> Increment(attribute, jsonElement)
+                KeyIncrementFrom -> IncrementFrom(attribute, jsonElement)
+                KeyIncrementSet -> IncrementSet(attribute, jsonElement)
                 KeyDecrement -> Decrement(attribute, jsonElement)
                 KeyAdd -> Add(attribute, jsonElement)
                 KeyRemove -> Remove(attribute, jsonElement)
