@@ -88,13 +88,13 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
 
         rule shouldEqual Rule(
             "query_edits".toObjectID(),
-            Condition(
-                Anchoring.Is,
-                Pattern.Literal("mobile phone")
+            listOf(
+                Condition(
+                    Anchoring.Is,
+                    Pattern.Literal("mobile phone")
+                )
             ),
-            Consequence(
-                edits = listOf(Edit("mobile"), Edit("phone"))
-            )
+            Consequence(edits = listOf(Edit("mobile"), Edit("phone")))
         )
 
         promotions[0].position

@@ -1,11 +1,6 @@
 [
   {
     "objectID": "query_edits",
-    "condition": {
-      "anchoring": "is",
-      "pattern": "mobile phone",
-      "alternatives": true
-    },
     "consequence": {
       "params": {
         "query": {
@@ -22,7 +17,14 @@
           ]
         }
       }
-    }
+    },
+    "conditions": [
+      {
+        "anchoring": "is",
+        "pattern": "mobile phone",
+        "alternatives": true
+      }
+    ]
   },
   {
     "objectID": "query_promo",

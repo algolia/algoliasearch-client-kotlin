@@ -1,17 +1,19 @@
 {
-  "objectID": "query_edits",
-  "condition": {
-    "pattern": "mobile phone",
-    "anchoring": "is"
-  },
-  "consequence": {
-    "params": {
-      "query": {
-        "remove": [
-          "mobile",
-          "phone"
-        ]
-      }
+    "objectID": "query_edits",
+    "conditions": [
+        {
+            "pattern": "mobile phone",
+            "anchoring": "is"
+        }
+    ],
+    "consequence": {
+        "params": {
+            "query": {
+                "remove": [
+                    "mobile",
+                    "phone"
+                ]
+            }
+        }
     }
-  }
 }
