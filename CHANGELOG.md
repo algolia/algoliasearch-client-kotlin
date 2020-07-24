@@ -3,6 +3,7 @@
 ### Added
 - Support and target Android API 30
 - Multi-condition rules (#201)
+_ `IncrementFrom` and `IncrementSet` built-in operations (#202)
 
 ### Changed
 - `indexName` required in `InnerQuery`
