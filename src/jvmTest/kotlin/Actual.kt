@@ -90,3 +90,7 @@ internal actual fun loadScratch(name: String): String {
         File("../../src/commonTest/resources/$name").readText()
     }
 }
+
+internal actual fun setupTrustStoreType() {
+    System.setProperty("javax.net.ssl.trustStoreType", "JKS")
+}
