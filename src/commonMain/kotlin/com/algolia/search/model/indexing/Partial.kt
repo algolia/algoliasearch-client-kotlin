@@ -68,7 +68,10 @@ public sealed class Partial {
     }
 
     /**
-     * TODO
+     * Increment a numeric integer attribute only if the provided value matches the current value, and otherwise ignore
+     * the whole object update. For example, if you pass an `IncrementFrom` value of 2 for the `version` attribute, but
+     * the current value of the attribute is 1, the engine ignores the update. If the object doesn't exist, the engine
+     * only creates it if you pass an `IncrementFrom` value of 0.
      */
     public data class IncrementFrom internal constructor(
         override val attribute: Attribute,
@@ -79,7 +82,10 @@ public sealed class Partial {
     }
 
     /**
-     * TODO
+     * Increment a numeric integer attribute only if the provided value is greater than the current value, and otherwise
+     * ignore the whole object update. For example, if you pass an `IncrementSet` value of 2 for the `version`
+     * attribute, and the current value of the attribute is 1, the engine updates the object. If the object doesn't
+     * exist yet, the engine only creates it if you pass an `IncrementSet` value that's greater than 0.
      */
     public data class IncrementSet internal constructor(
         override val attribute: Attribute,
