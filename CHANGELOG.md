@@ -2,6 +2,7 @@
 
 ### Added
 - Support and target Android API 30
+- Multi-condition rules
 
 ### Changed
 - `indexName` required in `InnerQuery`
