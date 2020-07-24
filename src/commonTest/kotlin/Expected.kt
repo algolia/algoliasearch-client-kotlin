@@ -33,3 +33,5 @@ internal expect object DateFormat {
 
     fun parse(date: String): Long
 }
+
+internal expect fun setupTrustStoreType()

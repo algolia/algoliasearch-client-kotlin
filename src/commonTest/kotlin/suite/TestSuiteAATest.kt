@@ -14,6 +14,7 @@ import com.algolia.search.serialize.KeyObjectID
 import dayInMillis
 import kotlinx.serialization.json.json
 import runBlocking
+import setupTrustStoreType
 import shouldEqual
 import shouldNotEqual
 import kotlin.test.Test
@@ -34,6 +35,10 @@ internal class TestSuiteAATest {
             customSearchParameters = Query(ignorePlurals = IgnorePlurals.True)
         )
     )
+
+    init {
+        setupTrustStoreType()
+    }
 
     @Test
     fun test() {
