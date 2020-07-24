@@ -22,7 +22,9 @@ internal class GuideHideHits {
             val rules = rules {
                 rule(
                     objectID = "hide-12345",
-                    condition = Condition(Contains, Literal("harry potter")),
+                    conditions = conditions {
+                      +Condition(Contains, Literal("harry potter"))
+                    },
                     consequence = Consequence(hide = objectIDs { +"HP-12345" })
                 )
             }
@@ -37,10 +39,12 @@ internal class GuideHideHits {
             val rules = rules {
                 rule(
                     objectID = "hide-shirts",
-                    condition = Condition(
-                        pattern = Pattern.Literal("banana"),
-                        anchoring = Anchoring.Is
-                    ),
+                    conditions = conditions {
+                        +Condition(
+                            pattern = Pattern.Literal("banana"),
+                            anchoring = Anchoring.Is
+                        )
+                    },
                     consequence = Consequence(
                         query = query {
                             filters {

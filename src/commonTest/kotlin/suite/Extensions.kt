@@ -59,6 +59,8 @@ internal fun <T> load(serializer: KSerializer<T>, name: String): T {
     val data = JsonDebug.parse(serializer, string)
     val serialized = JsonDebug.stringify(serializer, data)
 
-    serialized shouldEqual string
+    serialized.removeSpaces() shouldEqual string.removeSpaces()
     return data
 }
+
+private fun String.removeSpaces() = replace("\\s".toRegex(), "")

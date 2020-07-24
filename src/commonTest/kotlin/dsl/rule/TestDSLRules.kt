@@ -28,7 +28,9 @@ internal class TestDSLRules {
         val dsl = DSLRules {
             rule(
                 objectID = objectIDA,
-                condition = condition(Contains, Literal("value")),
+                conditions = conditions {
+                    +condition(Contains, Literal("value"))
+                },
                 consequence = consequence(
                     automaticFacetFilters = automaticFacetFilters { +attributeA },
                     automaticOptionalFacetFilters = automaticFacetFilters { +attributeB },
@@ -48,7 +50,7 @@ internal class TestDSLRules {
         dsl shouldEqual listOf(
             Rule(
                 objectID = objectIDA,
-                condition = Condition(Anchoring.Contains, Pattern.Literal("value")),
+                conditions = listOf(Condition(Anchoring.Contains, Pattern.Literal("value"))),
                 consequence = Consequence(
                     automaticFacetFilters = listOf(AutomaticFacetFilters(attributeA)),
                     automaticOptionalFacetFilters = listOf(AutomaticFacetFilters(attributeB)),

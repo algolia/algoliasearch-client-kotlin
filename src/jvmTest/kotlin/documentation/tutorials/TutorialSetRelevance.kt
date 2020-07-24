@@ -142,12 +142,16 @@ internal class TutorialSetRelevance {
             val queryRules = rules {
                 rule(
                     objectID = "country",
-                    condition = Condition(Contains, Facet("country")),
+                    conditions = conditions {
+                        +Condition(Contains, Facet("country"))
+                    },
                     consequence = Consequence(query = query { aroundLatLngViaIP = false })
                 )
                 rule(
                     objectID = "city",
-                    condition = Condition(Contains, Facet("city")),
+                    conditions = conditions {
+                        +Condition(Contains, Facet("city"))
+                    },
                     consequence = Consequence(query = query { aroundLatLngViaIP = false })
                 )
             }
