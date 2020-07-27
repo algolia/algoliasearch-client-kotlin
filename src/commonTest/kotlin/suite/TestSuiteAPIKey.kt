@@ -7,17 +7,23 @@ import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.apikey.APIKeyParams
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.TypoTolerance
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
+import exception.AlgoliaApiException
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
+import io.ktor.utils.io.readUTF8Line
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
+import retryApiCall
 import runBlocking
 import shouldBeTrue
 import shouldEqual
-import kotlin.test.AfterTest
+import kotlin.test.Test
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 internal class TestSuiteAPIKey {
 
     private lateinit var key: APIKey
@@ -33,7 +39,7 @@ internal class TestSuiteAPIKey {
         validity = 600
     )
 
-    @AfterTest
+    @Test
     fun test() {
         runBlocking {
             clientAdmin1.apply {
@@ -67,7 +73,16 @@ internal class TestSuiteAPIKey {
                     delay(1000L)
                 }
                 deleteAPIKey(key).wait().shouldBeTrue()
-                restoreAPIKey(key).wait()
+
+                retryApiCall {
+                    restoreAPIKey(key).wait()
+                }.whenever { exception ->
+                    val status = exception.response?.status
+                    val message = exception.response?.content?.readUTF8Line()
+                        ?.let { JsonNoDefaults.decodeFromString(AlgoliaApiException.serializer(), it).message }
+                    HttpStatusCode.NotFound == status && "Key already exists" == message
+                }
+
                 deleteAPIKey(key).wait().shouldBeTrue()
             }
         }
