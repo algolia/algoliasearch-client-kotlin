@@ -6,7 +6,7 @@ platform :android do
 
   desc "Runs all the tests"
   lane :test do
-    gradle(task: "jvmTest")
+    gradle(task: "jvmTest", flags: "-i")
   end
 
   desc "Deploy artifacts to Bintray"

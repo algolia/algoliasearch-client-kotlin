@@ -4,11 +4,25 @@ import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 import kotlin.time.seconds
 
+/**
+ * Create a [RetryableClientRequest] instance.
+ */
 @OptIn(ExperimentalTime::class)
-internal class RetryableClientRequest internal constructor(
+internal fun retryApiCall(
+    delay: Duration = 1.seconds,
+    retries: Int = 10,
+    block: suspend () -> Unit,
+): RetryableClientRequest {
+    require(delay > Duration.ZERO) { "Expected positive delay, but had $delay" }
+    require(retries > 0) { "Expected positive amount of retries, but had $retries" }
+    return RetryableClientRequest(delay, retries, block)
+}
+
+@OptIn(ExperimentalTime::class)
+internal class RetryableClientRequest(
     private val delayDuration: Duration = 1.seconds,
     private val retries: Int = 10,
-    private val block: suspend () -> Unit
+    private val block: suspend () -> Unit,
 ) {
 
     /**
@@ -25,14 +39,4 @@ internal class RetryableClientRequest internal constructor(
         }
         throw RuntimeException("reached the maximum number of retries")
     }
-}
-
-/**
- * Create a [RetryableClientRequest] instance.
- */
-@OptIn(ExperimentalTime::class)
-internal fun retryApiCall(delay: Duration = 1.seconds, retries: Int = 10, block: suspend () -> Unit): RetryableClientRequest {
-    require(delay > Duration.ZERO) { "Expected positive delay, but had $delay" }
-    require(retries > 0) { "Expected positive amount of retries, but had $retries" }
-    return RetryableClientRequest(delay, retries, block)
 }
