@@ -4,7 +4,6 @@ import com.algolia.search.model.search.Point
 import com.algolia.search.serialize.KSerializerGeoPoint
 import com.algolia.search.serialize.KeyLat
 import com.algolia.search.serialize.KeyLng
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
 internal class TestKSerializerGeoPoint : TestSerializer<Point>(KSerializerGeoPoint) {

@@ -57,15 +57,18 @@ import com.algolia.search.serialize.Key_RankingInfo
 import com.algolia.search.serialize.Key_SnippetResult
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.Decoder
 import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.int
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 @Serializable
 public data class ResponseSearch(
@@ -318,7 +321,7 @@ public data class ResponseSearch(
         level = DeprecationLevel.WARNING
     )
     public fun getObjectIDPosition(objectID: ObjectID): Int {
-        return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }
+        return hits.indexOfFirst { it.json["objectID"]?.jsonPrimitive?.content == objectID.raw }
     }
 
     /**
@@ -326,7 +329,7 @@ public data class ResponseSearch(
      * If the [objectID] is not found, -1 is returned.
      */
     public fun getObjectPosition(objectID: ObjectID): Int {
-        return hits.indexOfFirst { it.json.getPrimitiveOrNull("objectID")?.content == objectID.raw }
+        return hits.indexOfFirst { it.json["objectID"]?.jsonPrimitive?.content == objectID.raw }
     }
 
     /**
@@ -337,15 +340,15 @@ public data class ResponseSearch(
         val json: JsonObject
     ) : Map<String, JsonElement> by json {
 
-        public val distinctSeqIDOrNull: Int? = json.getPrimitiveOrNull(Key_DistinctSeqID)?.int
+        public val distinctSeqIDOrNull: Int? = json[Key_DistinctSeqID]?.jsonPrimitive?.int
 
-        public val rankingInfoOrNull: RankingInfo? = json.getObjectOrNull(Key_RankingInfo)?.let {
-            JsonNonStrict.fromJson(RankingInfo.serializer(), it)
+        public val rankingInfoOrNull: RankingInfo? = json[Key_RankingInfo]?.jsonObject?.let {
+            JsonNonStrict.decodeFromJsonElement(RankingInfo.serializer(), it)
         }
 
-        public val highlightResultOrNull: JsonObject? = json.getObjectOrNull(Key_HighlightResult)
+        public val highlightResultOrNull: JsonObject? = json[Key_HighlightResult]?.jsonObject
 
-        public val snippetResultOrNull: JsonObject? = json.getObjectOrNull(Key_SnippetResult)
+        public val snippetResultOrNull: JsonObject? = json[Key_SnippetResult]?.jsonObject
 
         public val rankingInfo: RankingInfo
             get() = rankingInfoOrNull!!
@@ -363,14 +366,14 @@ public data class ResponseSearch(
          * Deserialize the value of an [Attribute] to [T].
          */
         public fun <T> getValue(serializer: KSerializer<T>, attribute: Attribute): T {
-            return Json.fromJson(serializer, json.getAs(attribute.raw))
+            return Json.decodeFromJsonElement(serializer, json.getValue(attribute.raw))
         }
 
         /**
          * Deserialize the entire [json] to [T].
          */
         public fun <T> deserialize(deserializer: DeserializationStrategy<T>): T {
-            return JsonNonStrict.fromJson(deserializer, json)
+            return JsonNonStrict.decodeFromJsonElement(deserializer, json)
         }
 
         @Serializer(Hit::class)
@@ -381,7 +384,7 @@ public data class ResponseSearch(
             }
 
             override fun serialize(encoder: Encoder, value: Hit) {
-                encoder.asJsonOutput().encodeJson(value.json)
+                encoder.asJsonOutput().encodeJsonElement(value.json)
             }
         }
     }

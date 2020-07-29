@@ -3,15 +3,16 @@ package com.algolia.search.model.search
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.asJsonInput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.boolean
 
 @Serializable(IgnorePlurals.Companion::class)
 public sealed class IgnorePlurals {
@@ -44,16 +45,16 @@ public sealed class IgnorePlurals {
             when (value) {
                 is True -> Boolean.serializer().serialize(encoder, true)
                 is False -> Boolean.serializer().serialize(encoder, false)
-                is QueryLanguages -> Language.list.serialize(encoder, value.queryLanguages)
+                is QueryLanguages -> ListSerializer(Language).serialize(encoder, value.queryLanguages)
             }
         }
 
         override fun deserialize(decoder: Decoder): IgnorePlurals {
             return when (val element = decoder.asJsonInput()) {
                 is JsonArray -> QueryLanguages(element.map {
-                    JsonNonStrict.fromJson(Language, it)
+                    JsonNonStrict.decodeFromJsonElement(Language, it)
                 })
-                is JsonLiteral -> if (element.boolean) True else False
+                is JsonPrimitive -> if (element.boolean) True else False
                 else -> throw Exception()
             }
         }

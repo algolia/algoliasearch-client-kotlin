@@ -1,7 +1,6 @@
 package serialize.search
 
 import com.algolia.search.model.search.FacetStats
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
 internal class TestFacetStats : TestSerializer<FacetStats>(FacetStats.serializer()) {

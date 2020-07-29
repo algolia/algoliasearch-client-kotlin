@@ -15,9 +15,8 @@ import com.algolia.search.serialize.Key_DistinctSeqID
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.Key_RankingInfo
 import com.algolia.search.serialize.Key_SnippetResult
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.MapSerializer
-import kotlinx.serialization.builtins.list
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 import serialize.search.TestHighlightResult
 import unknown
@@ -51,7 +50,7 @@ internal class TestResponseSearchHit : TestSerializer<ResponseSearch.Hit>(Respon
         val json = json {
             Key_DistinctSeqID to 0
             Key_HighlightResult to Json.toJson(MapSerializer(Attribute, HighlightResult.serializer()), highlights)
-            Key_SnippetResult to Json.toJson(MapSerializer(Attribute, SnippetResult.serializer().list), snippets)
+            Key_SnippetResult to Json.toJson(MapSerializer(Attribute, ListSerializer(SnippetResult.serializer())), snippets)
             attributeA to unknown
             attributeB to unknown
             Key_RankingInfo to Json.toJson(RankingInfo.serializer(), rankingInfo)

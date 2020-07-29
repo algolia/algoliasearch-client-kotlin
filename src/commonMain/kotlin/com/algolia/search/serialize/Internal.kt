@@ -11,16 +11,15 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.Settings
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
-import kotlinx.serialization.UnstableDefault
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
+import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.JsonElementSerializer
-import kotlinx.serialization.json.JsonInput
+import kotlinx.serialization.json.JsonEncoder
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonOutput
 import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.jsonObject
 
 internal val regexAsc = Regex("^$KeyAsc\\((.*)\\)$")
 internal val regexDesc = Regex("^$KeyDesc\\((.*)\\)$")
@@ -37,62 +36,63 @@ internal val regexUserToken = Regex("^[a-zA-Z0-9_\\-\\.\\:]*\$") // alpha-numeri
 
 internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     return toMutableMap().run {
-        putAll(jsonObject.content)
+        putAll(jsonObject)
         JsonObject(this)
     }
 }
 
-@OptIn(UnstableDefault::class)
 internal fun JsonObject.urlEncode(): String? {
     return if (isNotEmpty()) {
         Parameters.build {
             entries.forEach { (key, element) ->
                 when (element) {
                     is JsonPrimitive -> append(key, element.content)
-                    else -> append(key, Json.stringify(JsonElementSerializer, element))
+                    else -> append(key, Json.encodeToString(JsonElementSerializer, element))
                 }
             }
         }.formUrlEncode()
     } else null
 }
 
-internal fun Decoder.asJsonInput() = (this as JsonInput).decodeJson()
-internal fun Encoder.asJsonOutput() = this as JsonOutput
+internal fun Decoder.asJsonInput() = (this as JsonDecoder).decodeJsonElement()
+internal fun Encoder.asJsonOutput() = this as JsonEncoder
 
 internal fun Query.toJsonNoDefaults(): JsonObject {
-    return JsonNoDefaults.toJson(Query.serializer(), this).jsonObject
+    return JsonNoDefaults.encodeToJsonElement(Query.serializer(), this).jsonObject
 }
 
 internal fun DeleteByQuery.toJsonNoDefaults(): JsonObject {
-    return JsonNoDefaults.toJson(DeleteByQuery.serializer(), this).jsonObject
+    return JsonNoDefaults.encodeToJsonElement(DeleteByQuery.serializer(), this).jsonObject
 }
 
 internal fun Settings.toJsonNoDefaults(): JsonObject {
-    return JsonNoDefaults.toJson(Settings.serializer(), this).jsonObject
+    return JsonNoDefaults.encodeToJsonElement(Settings.serializer(), this).jsonObject
 }
 
 internal fun RequestAPIKey.stringify(): String {
-    return JsonNoDefaults.stringify(RequestAPIKey.serializer(), this)
+    return JsonNoDefaults.encodeToString(RequestAPIKey.serializer(), this)
 }
 
-internal val Json = Json(JsonConfiguration.Stable.copy())
-internal val JsonNoDefaults = Json(JsonConfiguration.Stable.copy(encodeDefaults = false))
-internal val JsonNonStrict = Json(
-    JsonConfiguration.Stable.copy(
-        ignoreUnknownKeys = true,
-        isLenient = true,
-        serializeSpecialFloatingPointValues = true
-    )
-)
-internal val JsonDebug = Json(JsonConfiguration.Stable.copy(prettyPrint = true, indent = "  ", encodeDefaults = false))
+internal val Json = Json.Default
+internal val JsonNoDefaults = Json { encodeDefaults = false }
+internal val JsonNonStrict = Json {
+    ignoreUnknownKeys = true
+    isLenient = true
+    allowSpecialFloatingPointValues = true
+}
+internal val JsonDebug = Json {
+    prettyPrint = true
+    prettyPrintIndent = "  "
+    encodeDefaults = false
+}
 
 internal fun List<IndexQuery>.toBody(strategy: MultipleQueriesStrategy?): String {
-    return JsonNoDefaults.stringify(
+    return JsonNoDefaults.encodeToString(
         RequestMultipleQueries,
         RequestMultipleQueries(this, strategy)
     )
 }
 
 internal fun Query.toBody(): String {
-    return JsonNoDefaults.stringify(Query.serializer(), this)
+    return JsonNoDefaults.encodeToString(Query.serializer(), this)
 }

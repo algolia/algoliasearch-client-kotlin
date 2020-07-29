@@ -20,8 +20,8 @@ import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
 
 internal class EndpointAPIKeyImpl(
     private val transport: Transport
@@ -33,8 +33,8 @@ internal class EndpointAPIKeyImpl(
         requestOptions: RequestOptions?
     ): CreationAPIKey {
         val query = mutableMapOf<String, JsonElement>().run {
-            restrictSources?.let { put(KeyRestrictSources, JsonLiteral(it)) }
-            params.query?.toJsonNoDefaults()?.let { putAll(it.content) }
+            restrictSources?.let { put(KeyRestrictSources, JsonPrimitive(it)) }
+            params.query?.toJsonNoDefaults()?.let { putAll(it) }
             JsonObject(this)
         }
         val body = RequestAPIKey(

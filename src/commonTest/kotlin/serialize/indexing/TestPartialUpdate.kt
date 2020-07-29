@@ -12,7 +12,6 @@ import com.algolia.search.serialize.KeyRemove
 import com.algolia.search.serialize.KeyValue
 import com.algolia.search.serialize.Key_Operation
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 

@@ -4,7 +4,6 @@ import com.algolia.search.model.search.AroundPrecision
 import com.algolia.search.serialize.KeyFrom
 import com.algolia.search.serialize.KeyValue
 import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 

@@ -37,9 +37,9 @@ import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
 import kotlin.random.Random
 
 internal class EndpointIndexingImpl(
@@ -56,7 +56,7 @@ internal class EndpointIndexingImpl(
         record: T,
         requestOptions: RequestOptions?
     ): CreationObject {
-        return saveObject(Json.stringify(serializer, record), requestOptions)
+        return saveObject(Json.encodeToString(serializer, record), requestOptions)
     }
 
     override suspend fun <T> saveObjects(
@@ -92,7 +92,7 @@ internal class EndpointIndexingImpl(
         record: T,
         requestOptions: RequestOptions?
     ): RevisionObject {
-        return replaceObject(Json.stringify(serializer, record), record.objectID, requestOptions)
+        return replaceObject(Json.encodeToString(serializer, record), record.objectID, requestOptions)
     }
 
     override suspend fun <T : Indexable> replaceObjects(
@@ -135,7 +135,7 @@ internal class EndpointIndexingImpl(
     override suspend fun deleteObjectsBy(query: DeleteByQuery, requestOptions: RequestOptions?): RevisionIndex {
         val path = indexName.toPath("/deleteByQuery")
         val params = RequestParams(query.toJsonNoDefaults().urlEncode())
-        val body = JsonNoDefaults.stringify(RequestParams.serializer(), params)
+        val body = JsonNoDefaults.encodeToString(RequestParams.serializer(), params)
 
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
@@ -145,7 +145,7 @@ internal class EndpointIndexingImpl(
         attributes: List<Attribute>?,
         requestOptions: RequestOptions?
     ): JsonObject {
-        val attributesToRetrieve = attributes?.let { Json.stringify(Attribute.list, it.toList()) }
+        val attributesToRetrieve = attributes?.let { Json.encodeToString(ListSerializer(Attribute), it.toList()) }
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyAttributesToRetrieve, attributesToRetrieve)
         }
@@ -168,7 +168,7 @@ internal class EndpointIndexingImpl(
         requestOptions: RequestOptions?
     ): T {
         return getObjectInternal(objectID, attributesToRetrieve, requestOptions = requestOptions).let {
-            JsonNonStrict.fromJson(serializer, it)
+            JsonNonStrict.decodeFromJsonElement(serializer, it)
         }
     }
 
@@ -178,7 +178,7 @@ internal class EndpointIndexingImpl(
         requestOptions: RequestOptions?
     ): ResponseObjects {
         val requests = objectIDs.map { RequestObjects(indexName, it, attributesToRetrieve) }
-        val body = JsonNoDefaults.stringify(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
+        val body = JsonNoDefaults.encodeToString(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
         return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/objects", requestOptions, body)
     }
@@ -193,7 +193,7 @@ internal class EndpointIndexingImpl(
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyCreateIfNotExists, createIfNotExists)
         }
-        val body = Json.toJson(Partial, partial).toString()
+        val body = Json.encodeToJsonElement(Partial, partial).toString()
 
         return transport.request(HttpMethod.Post, CallType.Write, path, options, body)
     }
@@ -214,8 +214,8 @@ internal class EndpointIndexingImpl(
         requestOptions: RequestOptions?
     ): ResponseBatch {
         if (batchOperations.isEmpty()) throw EmptyListException("batchOperations")
-        val requests = Json.toJson(BatchOperation.list, batchOperations)
-        val body = json { KeyRequests to requests }.toString()
+        val requests = Json.encodeToJsonElement(ListSerializer(BatchOperation), batchOperations)
+        val body = buildJsonObject { put(KeyRequests, requests) }.toString()
 
         return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/batch"), requestOptions, body)
     }

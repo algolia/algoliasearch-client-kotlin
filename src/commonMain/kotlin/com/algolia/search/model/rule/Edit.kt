@@ -8,12 +8,15 @@ import com.algolia.search.serialize.KeyReplace
 import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.json
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
 
 @Serializable(Edit.Companion::class)
 public data class Edit(
@@ -32,21 +35,21 @@ public data class Edit(
 
         override fun serialize(encoder: Encoder, value: Edit) {
             val type = if (value.insert != null) KeyReplace else KeyRemoveLowercase
-            val json = json {
-                KeyType to type.toLowerCase()
-                KeyDelete to value.delete
-                value.insert?.let { KeyInsert to it }
+            val json = buildJsonObject {
+                put(KeyType, type.toLowerCase())
+                put(KeyDelete, value.delete)
+                value.insert?.let { put(KeyInsert, it) }
             }
 
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJsonElement(json)
         }
 
         override fun deserialize(decoder: Decoder): Edit {
             val json = decoder.asJsonInput().jsonObject
 
             return Edit(
-                json.getPrimitive(KeyDelete).content,
-                json.getPrimitiveOrNull(KeyInsert)?.content
+                json.getValue(KeyDelete).jsonPrimitive.content,
+                json[KeyInsert]?.jsonPrimitive?.content
             )
         }
     }

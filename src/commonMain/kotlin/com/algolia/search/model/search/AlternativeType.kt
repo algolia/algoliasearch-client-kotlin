@@ -12,10 +12,10 @@ import com.algolia.search.serialize.KeySplit
 import com.algolia.search.serialize.KeyStopWord
 import com.algolia.search.serialize.KeySynonym
 import com.algolia.search.serialize.KeyTypo
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 

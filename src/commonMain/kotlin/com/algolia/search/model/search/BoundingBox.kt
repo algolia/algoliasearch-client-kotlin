@@ -2,12 +2,12 @@ package com.algolia.search.model.search
 
 import com.algolia.search.helper.and
 import com.algolia.search.model.Raw
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
 
 /**
@@ -26,14 +26,14 @@ public data class BoundingBox(
 
         private val serializer = Float.serializer()
 
-        override val descriptor: SerialDescriptor = serializer.list.descriptor
+        override val descriptor: SerialDescriptor = ListSerializer(serializer).descriptor
 
         override fun serialize(encoder: Encoder, value: BoundingBox) {
-            serializer.list.serialize(encoder, value.raw)
+            ListSerializer(serializer).serialize(encoder, value.raw)
         }
 
         override fun deserialize(decoder: Decoder): BoundingBox {
-            val floats = serializer.list.deserialize(decoder)
+            val floats = ListSerializer(serializer).deserialize(decoder)
 
             return BoundingBox(
                 floats[0] and floats[1],

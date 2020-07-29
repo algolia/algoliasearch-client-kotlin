@@ -2,13 +2,16 @@ package com.algolia.search.model.settings
 
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.boolean
+import kotlinx.serialization.json.intOrNull
+import kotlinx.serialization.json.jsonPrimitive
 
 /**
  * Enables de-duplication or grouping of results.
@@ -27,17 +30,17 @@ public data class Distinct(val count: Int) {
         override val descriptor: SerialDescriptor = Int.serializer().descriptor
 
         override fun serialize(encoder: Encoder, value: Distinct) {
-            encoder.asJsonOutput().encodeJson(JsonLiteral(value.count))
+            encoder.asJsonOutput().encodeJsonElement(JsonPrimitive(value.count))
         }
 
         override fun deserialize(decoder: Decoder): Distinct {
             val json = decoder.asJsonInput()
-            val int = json.primitive.intOrNull
+            val int = json.jsonPrimitive.intOrNull
 
             if (int != null) {
                 return Distinct(int)
             }
-            return json.primitive.boolean.let { if (it) Distinct(1) else Distinct(0) }
+            return json.jsonPrimitive.boolean.let { if (it) Distinct(1) else Distinct(0) }
         }
     }
 }

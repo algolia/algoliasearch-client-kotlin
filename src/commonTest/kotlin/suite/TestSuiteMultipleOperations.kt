@@ -9,8 +9,7 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.jsonPrimitive
 import runBlocking
 import shouldBeTrue
 import shouldEqual
@@ -45,10 +44,10 @@ internal class TestSuiteMultipleOperations {
 
                 multipleGetObjects(requests).let {
                     it.results.size shouldEqual 4
-                    it.results[0]?.get(firstname)?.content shouldEqual jimmie
-                    it.results[0]?.get(firstname)?.content shouldEqual jimmie
-                    it.results[0]?.get(firstname)?.content shouldEqual jimmie
-                    it.results[0]?.get(firstname)?.content shouldEqual jimmie
+                    it.results[0]?.get(firstname)?.let { it.jsonPrimitive.content } shouldEqual jimmie
+                    it.results[0]?.get(firstname)?.let { it.jsonPrimitive.content } shouldEqual jimmie
+                    it.results[0]?.get(firstname)?.let { it.jsonPrimitive.content } shouldEqual jimmie
+                    it.results[0]?.get(firstname)?.let { it.jsonPrimitive.content } shouldEqual jimmie
                 }
                 val query =
                     Query(query = "", hitsPerPage = 2, facets = setOf("color".toAttribute(), "brand".toAttribute()))

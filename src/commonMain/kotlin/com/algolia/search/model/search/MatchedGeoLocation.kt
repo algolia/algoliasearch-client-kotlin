@@ -6,12 +6,17 @@ import com.algolia.search.serialize.KeyLat
 import com.algolia.search.serialize.KeyLng
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.json
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.float
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.long
+import kotlinx.serialization.json.put
 
 @Serializable
 public data class MatchedGeoLocation(
@@ -29,21 +34,21 @@ public data class MatchedGeoLocation(
     public companion object : KSerializer<MatchedGeoLocation> {
 
         override fun serialize(encoder: Encoder, value: MatchedGeoLocation) {
-            val json = json {
-                KeyDistance to value.distance
-                KeyLat to value.point.latitude
-                KeyLng to value.point.longitude
+            val json = buildJsonObject {
+                put(KeyDistance, value.distance)
+                put(KeyLat, value.point.latitude)
+                put(KeyLng, value.point.longitude)
             }
 
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJsonElement(json)
         }
 
         override fun deserialize(decoder: Decoder): MatchedGeoLocation {
             val json = decoder.asJsonInput().jsonObject
 
             return MatchedGeoLocation(
-                distance = json.getPrimitive(KeyDistance).long,
-                point = json.getPrimitive(KeyLat).float and json.getPrimitive(KeyLng).float
+                distance = json.getValue(KeyDistance).jsonPrimitive.long,
+                point = json.getValue(KeyLat).jsonPrimitive.float and json.getValue(KeyLng).jsonPrimitive.float
             )
         }
     }

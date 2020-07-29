@@ -20,7 +20,7 @@ import com.algolia.search.serialize.RouteSynonyms
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 
 internal class EndpointSynonymImpl(
     private val transport: Transport,
@@ -33,7 +33,7 @@ internal class EndpointSynonymImpl(
         requestOptions: RequestOptions?
     ): RevisionSynonym {
         val path = indexName.toPath("/$RouteSynonyms/${synonym.objectID}")
-        val body = Json.stringify(Synonym, synonym)
+        val body = Json.encodeToString(Synonym, synonym)
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)
         }
@@ -49,7 +49,7 @@ internal class EndpointSynonymImpl(
     ): RevisionIndex {
         if (synonyms.isEmpty()) throw EmptyListException("synonyms")
         val path = indexName.toPath("/$RouteSynonyms/batch")
-        val body = Json.stringify(Synonym.list, synonyms)
+        val body = Json.encodeToString(ListSerializer(Synonym), synonyms)
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)
             parameter(KeyReplaceExistingSynonyms, clearExistingSynonyms)
@@ -82,7 +82,7 @@ internal class EndpointSynonymImpl(
         requestOptions: RequestOptions?
     ): ResponseSearchSynonyms {
         val path = indexName.toPath("/$RouteSynonyms/search")
-        val body = JsonNoDefaults.stringify(SynonymQuery.serializer(), query)
+        val body = JsonNoDefaults.encodeToString(SynonymQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }

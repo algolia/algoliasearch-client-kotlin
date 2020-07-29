@@ -4,7 +4,7 @@ import clientAdmin1
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.JsonDebug
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObjectSerializer
 import loadScratch
 import runBlocking
@@ -20,16 +20,16 @@ internal class TestSuiteBatching {
     @Test
     fun test() {
         runBlocking {
-            val objects = load(JsonObjectSerializer.list, "numbers.json")
+            val objects = load(ListSerializer(JsonObjectSerializer), "numbers.json")
             val expected = loadScratch("batches_result.json")
-            val batches = load(BatchOperation.list, "batches.json")
+            val batches = load(ListSerializer(BatchOperation), "batches.json")
 
             index.apply {
                 saveObjects(objects).wait() shouldEqual TaskStatus.Published
                 batch(batches).wait() shouldEqual TaskStatus.Published
                 val hits = browse().hits.map { it.json }
 
-                JsonDebug.stringify(JsonObjectSerializer.list, hits) shouldEqual expected
+                JsonDebug.stringify(ListSerializer(JsonObjectSerializer), hits) shouldEqual expected
             }
         }
     }

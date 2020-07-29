@@ -2,7 +2,6 @@ package documentation.marketing
 
 import com.algolia.search.model.IndexName
 import documentation.client
-import kotlinx.serialization.json.json
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test

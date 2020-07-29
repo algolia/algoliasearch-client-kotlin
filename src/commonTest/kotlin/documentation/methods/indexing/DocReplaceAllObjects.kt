@@ -3,7 +3,6 @@ package documentation.methods.indexing
 import documentation.client
 import documentation.index
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.json
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test

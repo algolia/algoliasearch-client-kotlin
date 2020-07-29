@@ -20,14 +20,17 @@ import com.algolia.search.serialize.KeyUpdateObject
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
 import com.algolia.search.serialize.merge
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonObjectBuilder
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
 
 /**
  * Operation that can be batched using [EndpointIndexing.batch] or [EndpointMultipleIndex.multipleBatchObjects]
@@ -45,7 +48,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
         public companion object {
 
             public fun <T> from(serializer: KSerializer<T>, data: T): AddObject {
-                return AddObject(Json.toJson(serializer, data).jsonObject)
+                return AddObject(Json.encodeToJsonElement(serializer, data).jsonObject)
             }
         }
     }
@@ -61,7 +64,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
         public companion object {
 
             public fun <T : Indexable> from(serializer: KSerializer<T>, data: T): ReplaceObject {
-                return ReplaceObject(data.objectID, Json.toJson(serializer, data).jsonObject)
+                return ReplaceObject(data.objectID, Json.encodeToJsonElement(serializer, data).jsonObject)
             }
         }
     }
@@ -82,7 +85,11 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
                 data: T,
                 createIfNotExists: Boolean = true
             ): PartialUpdateObject {
-                return PartialUpdateObject(data.objectID, Json.toJson(serializer, data).jsonObject, createIfNotExists)
+                return PartialUpdateObject(
+                    data.objectID,
+                    Json.encodeToJsonElement(serializer, data).jsonObject,
+                    createIfNotExists
+                )
             }
 
             public fun from(
@@ -92,9 +99,9 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
             ): PartialUpdateObject {
                 return PartialUpdateObject(
                     objectID,
-                    json {
-                        partial.attribute.raw to partial.value
-                        KeyObjectID to objectID.raw
+                    buildJsonObject {
+                        put(partial.attribute.raw, partial.value)
+                        put(KeyObjectID, objectID.raw)
                     },
                     createIfNotExists
                 )
@@ -122,32 +129,50 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
     @Serializer(BatchOperation::class)
     public companion object : KSerializer<BatchOperation> {
 
-        private fun batchJson(value: BatchOperation, block: JsonObjectBuilder.() -> Unit) = json {
-            KeyAction to value.raw
+        private fun batchJson(value: BatchOperation, block: JsonObjectBuilder.() -> Unit) = buildJsonObject {
+            put(KeyAction, value.raw)
             block(this)
         }
 
         override fun serialize(encoder: Encoder, value: BatchOperation) {
             val json = when (value) {
-                is AddObject -> batchJson(value) { KeyBody to value.json }
-                is ReplaceObject -> batchJson(value) { KeyBody to value.json.merge(json { KeyObjectID to value.objectID.raw }) }
-                is PartialUpdateObject -> batchJson(value) { KeyBody to value.json.merge(json { KeyObjectID to value.objectID.raw }) }
-                is DeleteObject -> batchJson(value) { KeyBody to json { KeyObjectID to value.objectID.raw } }
+                is AddObject -> batchJson(value) { put(KeyBody, value.json) }
+                is ReplaceObject -> batchJson(value) {
+                    put(KeyBody,
+                        value.json.merge(
+                            buildJsonObject {
+                                put(KeyObjectID, value.objectID.raw)
+                            }
+                        )
+                    )
+                }
+                is PartialUpdateObject -> batchJson(value) {
+                    put(KeyBody,
+                        value.json.merge(
+                            buildJsonObject {
+                                put(KeyObjectID, value.objectID.raw)
+                            }
+                        )
+                    )
+                }
+                is DeleteObject -> batchJson(value) {
+                    put(KeyBody, buildJsonObject { put(KeyObjectID, value.objectID.raw) })
+                }
                 is DeleteIndex -> batchJson(value) {}
                 is ClearIndex -> batchJson(value) {}
-                is Other -> batchJson(value) { KeyBody to value.json }
+                is Other -> batchJson(value) { put(KeyBody, value.json) }
             }
 
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJsonElement(json)
         }
 
-        private val JsonObject.body get() = this.getObject(KeyBody)
-        private val JsonObject.objectID get() = body.getPrimitive(KeyObjectID).content.toObjectID()
+        private val JsonObject.body get() = this.getValue(KeyBody).jsonObject
+        private val JsonObject.objectID get() = body.getValue(KeyObjectID).jsonPrimitive.content.toObjectID()
 
         override fun deserialize(decoder: Decoder): BatchOperation {
             val element = decoder.asJsonInput().jsonObject
 
-            return when (val action = element.getPrimitive(KeyAction).content) {
+            return when (val action = element.getValue(KeyAction).jsonPrimitive.content) {
                 KeyAddObject -> AddObject(element.body)
                 KeyUpdateObject -> ReplaceObject(element.objectID, element.body)
                 KeyPartialUpdateObject -> PartialUpdateObject(element.objectID, element.body)

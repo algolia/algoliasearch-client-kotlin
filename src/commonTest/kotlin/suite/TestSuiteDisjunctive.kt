@@ -11,7 +11,7 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObjectSerializer
 import runBlocking
 import shouldBeTrue
@@ -35,7 +35,7 @@ internal class TestSuiteDisjunctive {
             val settings = Settings(
                 attributesForFaceting = facets.map { AttributeForFaceting.Default(it) }
             )
-            val objects = load(JsonObjectSerializer.list, "disjunctive_A.json")
+            val objects = load(ListSerializer(JsonObjectSerializer), "disjunctive_A.json")
             val query = Query(
                 query = "phone",
                 facets = facets
@@ -81,7 +81,7 @@ internal class TestSuiteDisjunctive {
             val settings = Settings(
                 attributesForFaceting = listOf(stars, city, facilities).map { AttributeForFaceting.Default(it) }
             )
-            val objects = load(JsonObjectSerializer.list, "disjunctive_B.json")
+            val objects = load(ListSerializer(JsonObjectSerializer), "disjunctive_B.json")
             val query = Query(
                 query = "h",
                 facets = setOf(city)

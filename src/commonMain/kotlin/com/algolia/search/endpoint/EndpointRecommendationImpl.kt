@@ -17,7 +17,7 @@ internal class EndpointRecommendationImpl(
         strategy: PersonalizationStrategy,
         requestOptions: RequestOptions?
     ): SetPersonalizationStrategyResponse {
-        val body = Json.stringify(PersonalizationStrategy.serializer(), strategy)
+        val body = Json.encodeToString(PersonalizationStrategy.serializer(), strategy)
 
         return transport.request(
             HttpMethod.Post,

@@ -8,13 +8,15 @@ import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import kotlin.collections.set
 
 @Serializable(BatchOperationIndex.Companion::class)
@@ -34,17 +36,17 @@ public data class BatchOperationIndex(
 
         override fun serialize(encoder: Encoder, value: BatchOperationIndex) {
             val elements =
-                Json.toJson(BatchOperation, value.operation).jsonObject.content.toMutableMap().also {
-                    it[KeyIndexName] = JsonLiteral(value.indexName.raw)
+                Json.encodeToJsonElement(BatchOperation, value.operation).jsonObject.toMutableMap().also {
+                    it[KeyIndexName] = JsonPrimitive(value.indexName.raw)
                 }
 
-            encoder.asJsonOutput().encodeJson(JsonObject(elements))
+            encoder.asJsonOutput().encodeJsonElement(JsonObject(elements))
         }
 
         override fun deserialize(decoder: Decoder): BatchOperationIndex {
             val element = decoder.asJsonInput().jsonObject
-            val batchOperation = JsonNonStrict.fromJson(BatchOperation, element)
-            val indexName = element.getPrimitive(KeyIndexName).content.toIndexName()
+            val batchOperation = JsonNonStrict.decodeFromJsonElement(BatchOperation, element)
+            val indexName = element.getValue(KeyIndexName).jsonPrimitive.content.toIndexName()
 
             return BatchOperationIndex(indexName, batchOperation)
         }

@@ -8,7 +8,6 @@ import com.algolia.search.serialize.KeyFacetHits
 import com.algolia.search.serialize.KeyHighlighted
 import com.algolia.search.serialize.KeyProcessingTimeMS
 import com.algolia.search.serialize.KeyValue
-import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 import unknown

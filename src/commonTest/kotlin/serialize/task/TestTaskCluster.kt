@@ -4,7 +4,6 @@ import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyPendingTask
 import com.algolia.search.serialize.KeyStatus
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
 internal class TestTaskCluster : TestSerializer<TaskInfo>(TaskInfo.serializer()) {

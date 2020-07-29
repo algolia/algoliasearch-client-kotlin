@@ -6,7 +6,6 @@ import com.algolia.search.serialize.KeyAction
 import com.algolia.search.serialize.KeyDelete
 import com.algolia.search.serialize.KeyIndexName
 import indexA
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
 internal class TestBatchOperationIndex : TestSerializer<BatchOperationIndex>(

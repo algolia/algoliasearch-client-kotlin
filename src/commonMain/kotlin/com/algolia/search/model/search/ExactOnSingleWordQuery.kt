@@ -4,10 +4,10 @@ import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyAttribute
 import com.algolia.search.serialize.KeyNone
 import com.algolia.search.serialize.KeyWord
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 

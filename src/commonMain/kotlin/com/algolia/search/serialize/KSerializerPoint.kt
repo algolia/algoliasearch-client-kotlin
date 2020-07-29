@@ -2,10 +2,10 @@ package com.algolia.search.serialize
 
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.Point
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.builtins.serializer
 
 public object KSerializerPoint : KSerializer<Point> {

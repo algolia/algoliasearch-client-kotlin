@@ -20,10 +20,11 @@ import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonArray
 
 internal class EndpointSettingsImpl(
     private val transport: Transport,
@@ -34,15 +35,15 @@ internal class EndpointSettingsImpl(
         val path = indexName.toPath("/$RouteSettings")
         val json = transport.request<JsonObject>(HttpMethod.Get, CallType.Read, path, requestOptions)
         // The following lines handle the old names of attributes, thus providing backward compatibility.
-        val settings = JsonNonStrict.fromJson(Settings.serializer(), json)
-        val attributesToIndex = json.getArrayOrNull(KeyAttributesToIndex)?.let {
-            Json.fromJson(SearchableAttribute.list, it)
+        val settings = JsonNonStrict.decodeFromJsonElement(Settings.serializer(), json)
+        val attributesToIndex = json[KeyAttributesToIndex]?.jsonArray?.let {
+            Json.decodeFromJsonElement(ListSerializer(SearchableAttribute), it)
         }
-        val numericAttributesToIndex = json.getArrayOrNull(KeyNumericAttributesToIndex)?.let {
-            Json.fromJson(NumericAttributeFilter.list, it)
+        val numericAttributesToIndex = json[KeyNumericAttributesToIndex]?.jsonArray?.let {
+            Json.decodeFromJsonElement(ListSerializer(NumericAttributeFilter), it)
         }
-        val slaves = json.getArrayOrNull(KeySlaves)?.let {
-            Json.fromJson(IndexName.list, it)
+        val slaves = json[KeySlaves]?.jsonArray?.let {
+            Json.decodeFromJsonElement(ListSerializer(IndexName), it)
         }
 
         return settings.copy(
@@ -59,7 +60,7 @@ internal class EndpointSettingsImpl(
         requestOptions: RequestOptions?,
         indexName: IndexName
     ): RevisionIndex {
-        val resets = json { resetToDefault.forEach { it.raw to JsonNull } }
+        val resets = buildJsonObject { resetToDefault.forEach { put(it.raw, JsonNull) } }
         val body = settings.toJsonNoDefaults().merge(resets).toString()
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)

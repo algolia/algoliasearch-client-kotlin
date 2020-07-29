@@ -13,12 +13,12 @@ import com.algolia.search.serialize.KeyLogs
 import com.algolia.search.serialize.KeySearch
 import com.algolia.search.serialize.KeySeeUnretrievableAttributes
 import com.algolia.search.serialize.KeySettings
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * Permission associated to an [APIKey].

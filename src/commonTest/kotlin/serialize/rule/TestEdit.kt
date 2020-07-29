@@ -6,7 +6,6 @@ import com.algolia.search.serialize.KeyInsert
 import com.algolia.search.serialize.KeyRemove
 import com.algolia.search.serialize.KeyReplace
 import com.algolia.search.serialize.KeyType
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 import unknown
 

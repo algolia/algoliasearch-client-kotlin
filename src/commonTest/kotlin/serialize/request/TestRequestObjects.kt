@@ -9,7 +9,6 @@ import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyObjectID
 import indexA
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
 internal class TestRequestObjects : TestSerializer<RequestObjects>(RequestObjects.serializer(), JsonNoDefaults) {

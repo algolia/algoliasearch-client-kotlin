@@ -12,7 +12,6 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import dayInMillis
-import kotlinx.serialization.json.json
 import runBlocking
 import setupTrustStoreType
 import shouldEqual

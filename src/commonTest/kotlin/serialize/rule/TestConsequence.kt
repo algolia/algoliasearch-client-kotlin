@@ -24,8 +24,7 @@ import com.algolia.search.serialize.KeyPromote
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyUserData
 import com.algolia.search.serialize.toJsonNoDefaults
-import kotlinx.serialization.builtins.list
-import kotlinx.serialization.json.json
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.jsonArray
 import loadScratch
 import objectIDA
@@ -43,9 +42,9 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
     private val filters = listOf(AutomaticFacetFilters(attributeA, 1, true))
     private val objectIDs = listOf(objectIDA, objectIDB)
     private val promotions = listOf(Promotion(objectIDA, 0))
-    private val promotionsSerialized = Json.toJson(Promotion.serializer().list, promotions)
+    private val promotionsSerialized = Json.toJson(ListSerializer(Promotion.serializer()), promotions)
     private val userData = json { KeyUserData to unknown }
-    private val filtersJson = Json.toJson(AutomaticFacetFilters.serializer().list, filters)
+    private val filtersJson = Json.toJson(ListSerializer(AutomaticFacetFilters.serializer()), filters)
 
     override val items = listOf(
         Consequence() to json { },
@@ -53,7 +52,7 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
         Consequence(edits = edits) to json {
             KeyParams to json {
                 KeyQuery to json {
-                    KeyEdits to Json.toJson(Edit.list, edits)
+                    KeyEdits to Json.toJson(ListSerializer(Edit), edits)
                 }
             }
         },

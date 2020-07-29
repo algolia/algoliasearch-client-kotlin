@@ -5,12 +5,12 @@ import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toQueryID
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * Unique identifier for a [Query]. Returned by [ResponseSearch] and used by [EndpointInsightsUser]

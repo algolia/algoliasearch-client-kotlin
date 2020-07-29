@@ -5,7 +5,6 @@ import attributeB
 import com.algolia.search.model.response.ResponseSearch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.json.json
 import shouldEqual
 import kotlin.test.Test
 

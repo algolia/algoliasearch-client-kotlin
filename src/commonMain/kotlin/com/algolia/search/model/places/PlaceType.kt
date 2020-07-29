@@ -8,12 +8,12 @@ import com.algolia.search.serialize.KeyCity
 import com.algolia.search.serialize.KeyCountry
 import com.algolia.search.serialize.KeyTownhall
 import com.algolia.search.serialize.KeyTrainStation
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(PlaceType.Companion::class)
 public sealed class PlaceType(override val raw: String) : Raw<String> {

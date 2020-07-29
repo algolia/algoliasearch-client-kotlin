@@ -9,7 +9,7 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObjectSerializer
 import runBlocking
 import shouldBeTrue
@@ -45,7 +45,7 @@ internal class TestSuiteSynonyms {
     @Test
     fun test() {
         runBlocking {
-            val objects = load(JsonObjectSerializer.list, "console.json")
+            val objects = load(ListSerializer(JsonObjectSerializer), "console.json")
             val tasks = mutableListOf<Task>()
 
             index.apply {

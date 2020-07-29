@@ -5,7 +5,6 @@ import attributeB
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.settings.DecompoundedAttributes
 import com.algolia.search.serialize.KSerializerDecompoundedAttributes
-import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 

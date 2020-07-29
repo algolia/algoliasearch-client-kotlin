@@ -15,7 +15,6 @@ import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.TimeRange
-import kotlinx.serialization.json.json
 import objectIDA
 import objectIDB
 import shouldEqual

@@ -23,7 +23,7 @@ internal class GuideHideHits {
                 rule(
                     objectID = "hide-12345",
                     conditions = conditions {
-                      +Condition(Contains, Literal("harry potter"))
+                        +Condition(Contains, Literal("harry potter"))
                     },
                     consequence = Consequence(hide = objectIDs { +"HP-12345" })
                 )

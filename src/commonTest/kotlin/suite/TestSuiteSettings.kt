@@ -8,7 +8,6 @@ import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.TaskStatus
-import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
 import kotlin.test.Test

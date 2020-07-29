@@ -27,7 +27,7 @@ import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
 import com.algolia.search.serialize.KeyRuleContexts
 import io.ktor.http.parseUrlEncodedParameters
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObjectSerializer
 import runBlocking
 import shouldBeNull
@@ -50,7 +50,7 @@ internal class TestSuiteSearch {
     @Test
     fun test() {
         runBlocking {
-            val objects = load(JsonObjectSerializer.list, "companies.json")
+            val objects = load(ListSerializer(JsonObjectSerializer), "companies.json")
             val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Searchable(company)))
             val tasks = mutableListOf<Task>()
 

@@ -8,7 +8,7 @@ import com.algolia.search.serialize.toJsonNoDefaults
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.content
+import kotlinx.serialization.json.jsonPrimitive
 
 /**
  * Create restrictions for an [APIKey].
@@ -37,8 +37,8 @@ public data class SecuredAPIKeyRestriction(
             query?.let { query ->
                 query.toJsonNoDefaults().forEach { (key, element) ->
                     when (element) {
-                        is JsonArray -> appendAll(key, element.content.map { it.content })
-                        else -> append(key, element.content)
+                        is JsonArray -> appendAll(key, element.jsonPrimitive.content.map { it.toString() })
+                        else -> append(key, element.jsonPrimitive.content)
                     }
                 }
             }

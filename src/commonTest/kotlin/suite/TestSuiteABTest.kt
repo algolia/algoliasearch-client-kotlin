@@ -12,7 +12,6 @@ import com.algolia.search.serialize.KeyObjectID
 import dayInMillis
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlinx.serialization.json.json
 import runBlocking
 import shouldEqual
 import shouldFailWith
