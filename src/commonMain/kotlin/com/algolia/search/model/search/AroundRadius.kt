@@ -40,7 +40,7 @@ public sealed class AroundRadius(override val raw: String) : Raw<String> {
     }
 
     @Serializer(AroundRadius::class)
-    companion object : KSerializer<AroundRadius> {
+    public companion object : KSerializer<AroundRadius> {
 
         override fun serialize(encoder: Encoder, value: AroundRadius) {
             val element = when (value) {

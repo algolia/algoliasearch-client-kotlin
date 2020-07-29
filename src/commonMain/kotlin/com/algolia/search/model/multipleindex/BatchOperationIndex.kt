@@ -30,7 +30,7 @@ public data class BatchOperationIndex(
 ) {
 
     @Serializer(BatchOperationIndex::class)
-    companion object : KSerializer<BatchOperationIndex> {
+    public companion object : KSerializer<BatchOperationIndex> {
 
         override fun serialize(encoder: Encoder, value: BatchOperationIndex) {
             val elements =

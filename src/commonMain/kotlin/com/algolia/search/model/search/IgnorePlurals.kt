@@ -38,7 +38,7 @@ public sealed class IgnorePlurals {
     }
 
     @Serializer(IgnorePlurals::class)
-    companion object : KSerializer<IgnorePlurals> {
+    public companion object : KSerializer<IgnorePlurals> {
 
         override fun serialize(encoder: Encoder, value: IgnorePlurals) {
             when (value) {

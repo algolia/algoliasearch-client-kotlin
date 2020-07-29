@@ -34,11 +34,11 @@ public sealed class RemoveStopWords {
      */
     public data class QueryLanguages(val queryLanguages: List<Language>) : RemoveStopWords() {
 
-        constructor(vararg queryLanguage: Language) : this(queryLanguage.toList())
+        public constructor(vararg queryLanguage: Language) : this(queryLanguage.toList())
     }
 
     @Serializer(RemoveStopWords::class)
-    companion object : KSerializer<RemoveStopWords> {
+    public companion object : KSerializer<RemoveStopWords> {
 
         override fun serialize(encoder: Encoder, value: RemoveStopWords) {
             when (value) {

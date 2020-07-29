@@ -5,6 +5,7 @@ import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -18,11 +19,11 @@ public data class ClusterName(override val raw: String) : Raw<String> {
         return raw
     }
 
-    companion object : KSerializer<ClusterName> {
+    public companion object : KSerializer<ClusterName> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: ClusterName) {
             String.serializer().serialize(encoder, value.raw)

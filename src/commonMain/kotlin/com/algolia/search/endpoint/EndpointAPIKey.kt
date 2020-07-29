@@ -24,7 +24,7 @@ public interface EndpointAPIKey {
      * restricted network. Example: "restrictSources=223.139.41".
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun addAPIKey(
+    public suspend fun addAPIKey(
         params: APIKeyParams,
         restrictSources: String? = null,
         requestOptions: RequestOptions? = null
@@ -37,7 +37,7 @@ public interface EndpointAPIKey {
      * @param params permissions/restrictions specified by [APIKeyParams]
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun updateAPIKey(
+    public suspend fun updateAPIKey(
         apiKey: APIKey,
         params: APIKeyParams,
         requestOptions: RequestOptions? = null
@@ -52,7 +52,7 @@ public interface EndpointAPIKey {
      * @param apiKey [APIKey] to delete
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun deleteAPIKey(
+    public suspend fun deleteAPIKey(
         apiKey: APIKey,
         requestOptions: RequestOptions? = null
     ): DeletionAPIKey
@@ -63,7 +63,7 @@ public interface EndpointAPIKey {
      * @param apiKey [APIKey] to restore
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun restoreAPIKey(
+    public suspend fun restoreAPIKey(
         apiKey: APIKey,
         requestOptions: RequestOptions? = null
     ): CreationAPIKey
@@ -76,7 +76,7 @@ public interface EndpointAPIKey {
      * @param apiKey [APIKey] to retrieve permissions for.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun getAPIKey(
+    public suspend fun getAPIKey(
         apiKey: APIKey,
         requestOptions: RequestOptions? = null
     ): ResponseAPIKey
@@ -86,7 +86,7 @@ public interface EndpointAPIKey {
      *
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun listAPIKeys(
+    public suspend fun listAPIKeys(
         requestOptions: RequestOptions? = null
     ): ResponseListAPIKey
 }

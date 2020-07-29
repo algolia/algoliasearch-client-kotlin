@@ -5,15 +5,9 @@ package com.algolia.search.dsl.rule
 import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.ObjectID
 import com.algolia.search.model.rule.Anchoring
-import com.algolia.search.model.rule.AutomaticFacetFilters
 import com.algolia.search.model.rule.Condition
-import com.algolia.search.model.rule.Edit
 import com.algolia.search.model.rule.Pattern
-import com.algolia.search.model.rule.Promotion
-import com.algolia.search.model.search.Query
-import kotlinx.serialization.json.JsonObject
 
 /**
  * DSL for building a [List] of [Condition]s.
@@ -23,10 +17,10 @@ public class DSLConditions(
     private val conditions: MutableList<Condition> = mutableListOf()
 ) {
 
-    public val Is = Anchoring.Is
-    public val StartsWith = Anchoring.StartsWith
-    public val EndsWith = Anchoring.EndsWith
-    public val Contains = Anchoring.Contains
+    public val Is: Anchoring.Is = Anchoring.Is
+    public val StartsWith: Anchoring.StartsWith = Anchoring.StartsWith
+    public val EndsWith: Anchoring.EndsWith = Anchoring.EndsWith
+    public val Contains: Anchoring.Contains = Anchoring.Contains
 
     /**
      * Create a [Condition] with [anchoring], [pattern] and an optional [context].

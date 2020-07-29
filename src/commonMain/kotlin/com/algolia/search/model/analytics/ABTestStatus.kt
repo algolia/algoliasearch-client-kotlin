@@ -8,6 +8,7 @@ import com.algolia.search.serialize.KeyStopped
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -41,11 +42,11 @@ public sealed class ABTestStatus(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : ABTestStatus(raw)
 
-    companion object : KSerializer<ABTestStatus> {
+    public companion object : KSerializer<ABTestStatus> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: ABTestStatus) {
             serializer.serialize(encoder, value.raw)

@@ -13,8 +13,8 @@ public class DSLAdvancedSyntaxFeatures(
     private val advancedSyntaxFeatures: MutableList<AdvancedSyntaxFeatures> = mutableListOf()
 ) {
 
-    public val ExactPhrase = AdvancedSyntaxFeatures.ExactPhrase
-    public val ExcludeWords = AdvancedSyntaxFeatures.ExcludeWords
+    public val ExactPhrase: AdvancedSyntaxFeatures.ExactPhrase = AdvancedSyntaxFeatures.ExactPhrase
+    public val ExcludeWords: AdvancedSyntaxFeatures.ExcludeWords = AdvancedSyntaxFeatures.ExcludeWords
 
     /**
      * Add [this] to [advancedSyntaxFeatures].

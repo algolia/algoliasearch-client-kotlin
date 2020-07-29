@@ -30,7 +30,7 @@ public sealed class SearchableAttribute {
     public data class Unordered(val attribute: Attribute) : SearchableAttribute()
 
     @Serializer(SearchableAttribute::class)
-    companion object : KSerializer<SearchableAttribute> {
+    public companion object : KSerializer<SearchableAttribute> {
 
         override fun serialize(encoder: Encoder, value: SearchableAttribute) {
             val string = when (value) {

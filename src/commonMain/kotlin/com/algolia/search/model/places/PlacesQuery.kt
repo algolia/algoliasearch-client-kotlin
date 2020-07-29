@@ -18,7 +18,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 @DSLParameters
-data class PlacesQuery(
+public data class PlacesQuery(
     /**
      * The query to match places by name.
      */

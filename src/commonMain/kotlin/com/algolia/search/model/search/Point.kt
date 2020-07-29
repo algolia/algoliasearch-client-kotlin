@@ -4,6 +4,7 @@ import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.list
 import kotlinx.serialization.builtins.serializer
@@ -17,13 +18,13 @@ public data class Point(
     val longitude: Float
 ) : Raw<List<Float>> {
 
-    override val raw = listOf(latitude, longitude)
+    override val raw: List<Float> = listOf(latitude, longitude)
 
-    companion object : KSerializer<Point> {
+    public companion object : KSerializer<Point> {
 
         private val serializer = Float.serializer().list
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Point) {
             serializer.serialize(encoder, value.raw)

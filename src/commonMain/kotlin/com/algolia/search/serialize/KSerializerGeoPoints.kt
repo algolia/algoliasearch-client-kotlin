@@ -11,7 +11,7 @@ import kotlinx.serialization.json.jsonArray
 
 public object KSerializerGeoPoints : KSerializer<List<Point>> {
 
-    override val descriptor = SerialDescriptor("point")
+    override val descriptor: SerialDescriptor = SerialDescriptor("point")
 
     override fun serialize(encoder: Encoder, value: List<Point>) {
         val json = jsonArray {

@@ -4,6 +4,7 @@ import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.searchHosts
+import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
@@ -24,5 +25,5 @@ public data class ConfigurationSearch(
     override val compression: Compression = Compression.None
 ) : Configuration, Credentials {
 
-    override val httpClient = getHttpClient()
+    override val httpClient: HttpClient = getHttpClient()
 }

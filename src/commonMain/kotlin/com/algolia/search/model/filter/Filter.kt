@@ -108,17 +108,17 @@ public sealed class Filter {
         val value: Value
     ) : Filter() {
 
-        sealed class Value {
+        public sealed class Value {
 
             /**
              * Numeric comparison of a [number] using a [NumericOperator].
              */
-            data class Comparison(val operator: NumericOperator, val number: Number) : Value()
+            public data class Comparison(val operator: NumericOperator, val number: Number) : Value()
 
             /**
              * A numeric range comprised within a [lowerBound] and an [upperBound].
              */
-            data class Range(val lowerBound: Number, val upperBound: Number) : Value()
+            public data class Range(val lowerBound: Number, val upperBound: Number) : Value()
         }
 
         public constructor(

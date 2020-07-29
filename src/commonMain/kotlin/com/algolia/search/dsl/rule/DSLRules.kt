@@ -26,13 +26,13 @@ public class DSLRules(
 ) {
 
     @Deprecated(message = "Single condition is deprecated, use Conditions (plural) DSL which accept one or more condition(s)")
-    public val Is = Anchoring.Is
+    public val Is: Anchoring.Is = Anchoring.Is
     @Deprecated(message = "Single condition is deprecated, use Conditions (plural) DSL which accept one or more condition(s)")
-    public val StartsWith = Anchoring.StartsWith
+    public val StartsWith: Anchoring.StartsWith = Anchoring.StartsWith
     @Deprecated(message = "Single condition is deprecated, use Conditions (plural) DSL which accept one or more condition(s)")
-    public val EndsWith = Anchoring.EndsWith
+    public val EndsWith: Anchoring.EndsWith = Anchoring.EndsWith
     @Deprecated(message = "Single condition is deprecated, use Conditions (plural) DSL which accept one or more condition(s)")
-    public val Contains = Anchoring.Contains
+    public val Contains: Anchoring.Contains = Anchoring.Contains
 
     /**
      * Convenience method.

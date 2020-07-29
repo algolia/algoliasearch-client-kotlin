@@ -6,6 +6,7 @@ import com.algolia.search.serialize.KeyObjectID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -24,11 +25,11 @@ public data class ObjectID(@SerialName(KeyObjectID) override val raw: String) : 
         return raw
     }
 
-    companion object : KSerializer<ObjectID> {
+    public companion object : KSerializer<ObjectID> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: ObjectID) {
             serializer.serialize(encoder, value.raw)

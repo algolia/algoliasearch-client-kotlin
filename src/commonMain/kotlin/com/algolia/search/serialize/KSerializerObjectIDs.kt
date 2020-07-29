@@ -5,12 +5,13 @@ import com.algolia.search.model.ObjectID
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 
 public object KSerializerObjectIDs : KSerializer<List<ObjectID>> {
 
-    override val descriptor = ObjectID.descriptor
+    override val descriptor: SerialDescriptor = ObjectID.descriptor
 
     override fun serialize(encoder: Encoder, value: List<ObjectID>) {
         val json = jsonArray {

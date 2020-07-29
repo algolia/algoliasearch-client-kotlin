@@ -16,7 +16,7 @@ import kotlinx.serialization.builtins.serializer
 @Serializable(AttributeForFaceting.Companion::class)
 public sealed class AttributeForFaceting {
 
-    abstract val attribute: Attribute
+    public abstract val attribute: Attribute
 
     public data class Default(override val attribute: Attribute) : AttributeForFaceting()
 
@@ -37,7 +37,7 @@ public sealed class AttributeForFaceting {
     public data class Searchable(override val attribute: Attribute) : AttributeForFaceting()
 
     @Serializer(AttributeForFaceting::class)
-    companion object : KSerializer<AttributeForFaceting> {
+    public companion object : KSerializer<AttributeForFaceting> {
 
         override fun serialize(encoder: Encoder, value: AttributeForFaceting) {
             val string = when (value) {

@@ -5,6 +5,7 @@ import com.algolia.search.serialize.asJsonOutput
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.JsonLiteral
@@ -21,9 +22,9 @@ public data class Distinct(val count: Int) {
         if (count < 0) throw IllegalArgumentException("Distinct must be a positive integer")
     }
 
-    companion object : KSerializer<Distinct> {
+    public companion object : KSerializer<Distinct> {
 
-        override val descriptor = Int.serializer().descriptor
+        override val descriptor: SerialDescriptor = Int.serializer().descriptor
 
         override fun serialize(encoder: Encoder, value: Distinct) {
             encoder.asJsonOutput().encodeJson(JsonLiteral(value.count))

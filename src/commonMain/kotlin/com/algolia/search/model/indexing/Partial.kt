@@ -146,7 +146,7 @@ public sealed class Partial {
     }
 
     @Serializer(Partial::class)
-    companion object : KSerializer<Partial> {
+    public companion object : KSerializer<Partial> {
 
         override fun serialize(encoder: Encoder, value: Partial) {
             val key = when (value) {

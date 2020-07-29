@@ -16,8 +16,8 @@ buildscript {
 }
 
 plugins {
-    id("kotlin-multiplatform") version "1.3.72"
-    id("kotlinx-serialization") version "1.3.72"
+    id("kotlin-multiplatform") version "1.4.0-rc"
+    id("kotlinx-serialization") version "1.4.0-rc"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
     id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.5"
@@ -84,6 +84,7 @@ buildConfigKotlin {
 }
 
 kotlin {
+    explicitApi()
     jvm {
         compilations.all {
             kotlinOptions {

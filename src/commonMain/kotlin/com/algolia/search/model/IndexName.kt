@@ -8,6 +8,7 @@ import com.algolia.search.serialize.RouteIndexesV1
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -35,11 +36,11 @@ public data class IndexName(
         return raw
     }
 
-    companion object : KSerializer<IndexName> {
+    public companion object : KSerializer<IndexName> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: IndexName) {
             serializer.serialize(encoder, value.raw)

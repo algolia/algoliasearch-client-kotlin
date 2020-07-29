@@ -28,7 +28,7 @@ public sealed class FilterGroup<T : Filter> : Set<T> {
             override val name: String? = null
         ) : And<Filter>(filters, name) {
 
-            constructor(vararg filters: Filter, name: String? = null) : this(filters.toSet(), name)
+            public constructor(vararg filters: Filter, name: String? = null) : this(filters.toSet(), name)
         }
 
         /**
@@ -39,7 +39,7 @@ public sealed class FilterGroup<T : Filter> : Set<T> {
             override val name: String? = null
         ) : And<Filter.Facet>(filters, name) {
 
-            constructor(vararg filters: Filter.Facet, name: String? = null) : this(filters.toSet(), name)
+            public constructor(vararg filters: Filter.Facet, name: String? = null) : this(filters.toSet(), name)
         }
 
         /**
@@ -50,7 +50,7 @@ public sealed class FilterGroup<T : Filter> : Set<T> {
             override val name: String? = null
         ) : And<Filter.Tag>(filters, name) {
 
-            constructor(vararg filters: Filter.Tag, name: String? = null) : this(filters.toSet(), name)
+            public constructor(vararg filters: Filter.Tag, name: String? = null) : this(filters.toSet(), name)
         }
 
         /**
@@ -61,7 +61,7 @@ public sealed class FilterGroup<T : Filter> : Set<T> {
             override val name: String? = null
         ) : And<Filter.Numeric>(filters, name) {
 
-            constructor(vararg filters: Filter.Numeric, name: String? = null) : this(filters.toSet(), name)
+            public constructor(vararg filters: Filter.Numeric, name: String? = null) : this(filters.toSet(), name)
         }
 
         public data class Hierarchical(
@@ -88,7 +88,7 @@ public sealed class FilterGroup<T : Filter> : Set<T> {
             override val name: String? = null
         ) : Or<Filter.Facet>(filters, name) {
 
-            constructor(vararg filters: Filter.Facet, name: String? = null) : this(filters.toSet(), name)
+            public constructor(vararg filters: Filter.Facet, name: String? = null) : this(filters.toSet(), name)
         }
 
         /**
@@ -99,7 +99,7 @@ public sealed class FilterGroup<T : Filter> : Set<T> {
             override val name: String? = null
         ) : Or<Filter.Tag>(filters, name) {
 
-            constructor(vararg filters: Filter.Tag, name: String? = null) : this(filters.toSet(), name)
+            public constructor(vararg filters: Filter.Tag, name: String? = null) : this(filters.toSet(), name)
         }
 
         /**
@@ -110,7 +110,7 @@ public sealed class FilterGroup<T : Filter> : Set<T> {
             override val name: String? = null
         ) : Or<Filter.Numeric>(filters, name) {
 
-            constructor(vararg filters: Filter.Numeric, name: String? = null) : this(filters.toSet(), name)
+            public constructor(vararg filters: Filter.Numeric, name: String? = null) : this(filters.toSet(), name)
         }
     }
 }

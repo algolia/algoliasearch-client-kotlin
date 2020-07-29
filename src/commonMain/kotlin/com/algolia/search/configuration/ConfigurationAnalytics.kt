@@ -5,6 +5,7 @@ import com.algolia.search.configuration.Region.Analytics.US
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.hosts
+import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
@@ -30,7 +31,7 @@ public data class ConfigurationAnalytics(
         level = DeprecationLevel.WARNING,
         replaceWith = ReplaceWith("ConfigurationAnalytics(applicationID, apiKey, Region.Analytics.US)")
     )
-    constructor(
+    public constructor(
         applicationID: ApplicationID,
         apiKey: APIKey,
         writeTimeout: Long = defaultWriteTimeout,
@@ -47,5 +48,5 @@ public data class ConfigurationAnalytics(
     )
 
     override val compression: Compression = Compression.None
-    override val httpClient = getHttpClient()
+    override val httpClient: HttpClient = getHttpClient()
 }

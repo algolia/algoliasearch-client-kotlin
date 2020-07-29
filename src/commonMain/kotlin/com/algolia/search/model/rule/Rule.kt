@@ -47,7 +47,7 @@ public data class Rule(
     @SerialName(KeyConditions) val conditions: List<Condition>? = null
 ) {
 
-    constructor(
+    public constructor(
         objectID: ObjectID,
         conditions: List<Condition>? = null,
         consequence: Consequence,

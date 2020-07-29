@@ -6,6 +6,7 @@ import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -20,11 +21,11 @@ public data class EventName(override val raw: String) : Raw<String> {
         if (raw.length > 64) throw IllegalArgumentException("EventName length can't be superior to 64 characters.")
     }
 
-    companion object : KSerializer<EventName> {
+    public companion object : KSerializer<EventName> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: EventName) {
             serializer.serialize(encoder, value.raw)

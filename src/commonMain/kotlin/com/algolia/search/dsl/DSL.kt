@@ -4,12 +4,12 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
 import com.algolia.search.transport.RequestOptions
 
-public val all = Attribute("*")
+public val all: Attribute = Attribute("*")
 
 @DslMarker
 public annotation class DSLParameters
 
-interface DSL<T, S> : (T.() -> Unit) -> S
+public interface DSL<T, S> : (T.() -> Unit) -> S
 
 /**
  * Create a [RequestOptions] with [block]. Can take an optional [requestOptions] to be modified.
@@ -24,7 +24,7 @@ public fun requestOptions(
 /**
  * Create a [List] of [ObjectID] with [DSLObjectIDs].
  */
-fun objectIDs(block: DSLObjectIDs.() -> Unit): List<ObjectID> {
+public fun objectIDs(block: DSLObjectIDs.() -> Unit): List<ObjectID> {
     return DSLObjectIDs(block)
 }
 

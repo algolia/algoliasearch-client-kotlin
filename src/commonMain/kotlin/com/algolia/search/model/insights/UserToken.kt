@@ -7,6 +7,7 @@ import com.algolia.search.serialize.regexUserToken
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -22,11 +23,11 @@ public data class UserToken(override val raw: String) : Raw<String> {
         if (!regexUserToken.matches(raw)) throw IllegalArgumentException("UserToken allows only characters of type [a-zA-Z0-9_-]")
     }
 
-    companion object : KSerializer<UserToken> {
+    public companion object : KSerializer<UserToken> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: UserToken) {
             serializer.serialize(encoder, value.raw)

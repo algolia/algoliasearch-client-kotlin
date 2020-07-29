@@ -11,7 +11,7 @@ import kotlinx.serialization.json.json
 
 public object KSerializerVariant : KSerializer<Variant> {
 
-    override val descriptor = SerialDescriptor("variant")
+    override val descriptor: SerialDescriptor = SerialDescriptor("variant")
 
     override fun serialize(encoder: Encoder, value: Variant) {
         val json = json {

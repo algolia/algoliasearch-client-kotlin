@@ -11,82 +11,82 @@ import com.algolia.search.model.filter.NumericOperator
 @Suppress("PropertyName")
 public interface DSLNumeric {
 
-    val Less get() = NumericOperator.Less
-    val LessOrEquals get() = NumericOperator.LessOrEquals
-    val NotEquals get() = NumericOperator.NotEquals
-    val Equals get() = NumericOperator.Equals
-    val Greater get() = NumericOperator.Greater
-    val GreaterOrEquals get() = NumericOperator.GreaterOrEquals
+    public val Less: NumericOperator get() = NumericOperator.Less
+    public val LessOrEquals: NumericOperator get() = NumericOperator.LessOrEquals
+    public val NotEquals: NumericOperator get() = NumericOperator.NotEquals
+    public val Equals: NumericOperator get() = NumericOperator.Equals
+    public val Greater: NumericOperator get() = NumericOperator.Greater
+    public val GreaterOrEquals: NumericOperator get() = NumericOperator.GreaterOrEquals
 
     public operator fun Filter.Numeric.unaryPlus()
 
     /**
      * Convenience method.
      */
-    fun range(name: String, range: IntRange, isNegated: Boolean = false) {
+    public fun range(name: String, range: IntRange, isNegated: Boolean = false) {
         range(Attribute(name), range, isNegated)
     }
 
     /**
      * Create a [Filter.Numeric] with an [attribute] and a [range] of [IntRange].
      */
-    fun range(attribute: Attribute, range: IntRange, isNegated: Boolean = false) {
+    public fun range(attribute: Attribute, range: IntRange, isNegated: Boolean = false) {
         +Filter.Numeric(attribute, range, isNegated)
     }
 
     /**
      * Convenience method.
      */
-    fun range(name: String, range: LongRange, isNegated: Boolean = false) {
+    public fun range(name: String, range: LongRange, isNegated: Boolean = false) {
         range(Attribute(name), range, isNegated)
     }
 
     /**
      * Create a [Filter.Numeric] with an [attribute] and a [range] of [LongRange].
      */
-    fun range(attribute: Attribute, range: LongRange, isNegated: Boolean = false) {
+    public fun range(attribute: Attribute, range: LongRange, isNegated: Boolean = false) {
         +Filter.Numeric(attribute, range, isNegated)
     }
 
     /**
      * Convenience method.
      */
-    fun range(name: String, lowerBound: Float, upperBound: Float, isNegated: Boolean = false) {
+    public fun range(name: String, lowerBound: Float, upperBound: Float, isNegated: Boolean = false) {
         range(Attribute(name), lowerBound, upperBound, isNegated)
     }
 
     /**
      * Create a [Filter.Numeric] with an [attribute] and a [lowerBound] and [upperBound] of [Float].
      */
-    fun range(attribute: Attribute, lowerBound: Float, upperBound: Float, isNegated: Boolean = false) {
+    public fun range(attribute: Attribute, lowerBound: Float, upperBound: Float, isNegated: Boolean = false) {
         +Filter.Numeric(attribute, lowerBound, upperBound, isNegated)
     }
 
     /**
      * Convenience method.
      */
-    fun range(name: String, lowerBound: Double, upperBound: Double, isNegated: Boolean = false) {
+    public fun range(name: String, lowerBound: Double, upperBound: Double, isNegated: Boolean = false) {
         range(Attribute(name), lowerBound, upperBound, isNegated)
     }
 
     /**
      * Create a [Filter.Numeric] with an [attribute] and a [lowerBound] and [upperBound] of [Double].
      */
-    fun range(attribute: Attribute, lowerBound: Double, upperBound: Double, isNegated: Boolean = false) {
+    public fun range(attribute: Attribute, lowerBound: Double, upperBound: Double, isNegated: Boolean = false) {
         +Filter.Numeric(attribute, lowerBound, upperBound, isNegated)
     }
 
     /**
      * Convenience method.
      */
-    fun comparison(name: String, operator: NumericOperator, value: Number, isNegated: Boolean = false) {
+    public fun comparison(name: String, operator: NumericOperator, value: Number, isNegated: Boolean = false) {
         comparison(Attribute(name), operator, value, isNegated)
     }
 
     /**
      * Create a [Filter.Numeric] with an [attribute], an [operator] and a [value].
      */
-    fun comparison(attribute: Attribute, operator: NumericOperator, value: Number, isNegated: Boolean = false) {
+    public fun comparison(attribute: Attribute, operator: NumericOperator, value: Number, isNegated: Boolean = false) {
         +Filter.Numeric(attribute, operator, value, isNegated)
     }
 }

@@ -6,6 +6,7 @@ import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -21,11 +22,11 @@ public data class Cursor(
         return raw
     }
 
-    companion object : KSerializer<Cursor> {
+    public companion object : KSerializer<Cursor> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Cursor) {
             serializer.serialize(encoder, value.raw)
