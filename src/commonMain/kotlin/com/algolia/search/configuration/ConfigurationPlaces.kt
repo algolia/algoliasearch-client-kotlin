@@ -2,6 +2,7 @@ package com.algolia.search.configuration
 
 import com.algolia.search.client.ClientPlaces
 import com.algolia.search.transport.placesHosts
+import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
@@ -20,5 +21,5 @@ public data class ConfigurationPlaces(
 ) : Configuration {
 
     override val compression: Compression = Compression.None
-    override val httpClient = getHttpClient()
+    override val httpClient: HttpClient = getHttpClient()
 }

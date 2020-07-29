@@ -34,12 +34,12 @@ import kotlinx.serialization.json.jsonArray
 @Serializable(InsightsEvent.Companion::class)
 public sealed class InsightsEvent {
 
-    abstract val eventName: EventName
-    abstract val indexName: IndexName
-    abstract val userToken: UserToken?
-    abstract val timestamp: Long?
-    abstract val queryID: QueryID?
-    abstract val resources: Resources?
+    public abstract val eventName: EventName
+    public abstract val indexName: IndexName
+    public abstract val userToken: UserToken?
+    public abstract val timestamp: Long?
+    public abstract val queryID: QueryID?
+    public abstract val resources: Resources?
 
     public data class View(
         override val eventName: EventName,
@@ -95,7 +95,7 @@ public sealed class InsightsEvent {
     }
 
     @Serializer(InsightsEvent::class)
-    companion object : KSerializer<InsightsEvent> {
+    public companion object : KSerializer<InsightsEvent> {
 
         private infix fun JsonObjectBuilder.stringify(resources: Resources?) {
             when (resources) {

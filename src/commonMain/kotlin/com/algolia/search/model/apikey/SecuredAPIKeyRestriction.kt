@@ -49,7 +49,7 @@ public data class SecuredAPIKeyRestriction(
         }.formUrlEncode()
     }
 
-    companion object {
+    public companion object {
         private const val RESTRICT_INDICES = "restrictIndices"
         private const val RESTRICT_SOURCES = "restrictSources"
         private const val USER_TOKEN = "userToken"
@@ -64,7 +64,7 @@ public data class SecuredAPIKeyRestriction(
             restrictSources: String? = null,
             validUntil: Long? = null,
             userToken: UserToken? = null
-        ) = SecuredAPIKeyRestriction(
+        ): SecuredAPIKeyRestriction = SecuredAPIKeyRestriction(
             query = query,
             restrictIndices = restrictIndices?.split(";")?.map(::IndexName),
             restrictSources = restrictSources?.split(";"),

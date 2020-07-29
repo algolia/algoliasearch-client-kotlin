@@ -72,7 +72,7 @@ public data class Consequence(
 ) {
 
     @Serializer(Consequence::class)
-    companion object : KSerializer<Consequence> {
+    public companion object : KSerializer<Consequence> {
 
         private val serializer = AutomaticFacetFilters.serializer().list
 

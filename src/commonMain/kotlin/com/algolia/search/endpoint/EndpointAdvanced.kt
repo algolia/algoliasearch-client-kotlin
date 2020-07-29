@@ -18,7 +18,7 @@ public interface EndpointAdvanced {
     /**
      * The [IndexName] used by [Index] to perform operations on.
      */
-    val indexName: IndexName
+    public val indexName: IndexName
 
     /**
      * Check the current [TaskStatus] of a given [Task].
@@ -26,7 +26,7 @@ public interface EndpointAdvanced {
      * @param taskID of the indexing [Task].
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun getTask(
+    public suspend fun getTask(
         taskID: TaskID,
         requestOptions: RequestOptions? = null
     ): TaskInfo
@@ -42,7 +42,7 @@ public interface EndpointAdvanced {
      * @param taskID of the indexing task to wait for.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun waitTask(
+    public suspend fun waitTask(
         taskID: TaskID,
         timeout: Long? = null,
         requestOptions: RequestOptions? = null
@@ -55,7 +55,7 @@ public interface EndpointAdvanced {
      * timeout value in milliseconds is elapsed.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun Task.wait(
+    public suspend fun Task.wait(
         timeout: Long? = null,
         requestOptions: RequestOptions? = null
     ): TaskStatus
@@ -67,7 +67,7 @@ public interface EndpointAdvanced {
      *
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun List<Task>.wait(
+    public suspend fun List<Task>.wait(
         timeout: Long? = null,
         requestOptions: RequestOptions? = null
     ): List<TaskStatus>
@@ -84,7 +84,7 @@ public interface EndpointAdvanced {
      * @param logType Type of logs to retrieve.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun getLogs(
+    public suspend fun getLogs(
         page: Int? = null,
         hitsPerPage: Int? = null,
         logType: LogType? = null,

@@ -2,7 +2,7 @@ package com.algolia.search.helper
 
 internal class StringUTF8 private constructor(val string: String) {
 
-    companion object {
+    public companion object {
 
         fun encode(string: String) = StringUTF8(string.encodeUTF8())
     }

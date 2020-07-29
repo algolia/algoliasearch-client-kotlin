@@ -14,7 +14,7 @@ import kotlinx.serialization.mapDescriptor
 
 public object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
 
-    override val descriptor = SerialDescriptor(Attribute.descriptor.serialName, StructureKind.MAP) {
+    override val descriptor: SerialDescriptor = SerialDescriptor(Attribute.descriptor.serialName, StructureKind.MAP) {
         mapDescriptor(String.serializer().descriptor, Int.serializer().descriptor)
     }
 

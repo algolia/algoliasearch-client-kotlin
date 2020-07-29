@@ -23,7 +23,7 @@ public interface EndpointInsightsUser {
      * @param timestamp An optional timestamp for the time of the event.
      * The server will automatically assign a timestamp if no value is passed
      */
-    suspend fun viewedFilters(
+    public suspend fun viewedFilters(
         indexName: IndexName,
         eventName: EventName,
         filters: List<Filter.Facet>,
@@ -39,7 +39,7 @@ public interface EndpointInsightsUser {
      * @param timestamp An optional timestamp for the time of the event.
      * The server will automatically assign a timestamp if no value is passed
      */
-    suspend fun viewedObjectIDs(
+    public suspend fun viewedObjectIDs(
         indexName: IndexName,
         eventName: EventName,
         objectIDs: List<ObjectID>,
@@ -55,7 +55,7 @@ public interface EndpointInsightsUser {
      * @param timestamp An optional timestamp for the time of the event.
      * The server will automatically assign a timestamp if no value is passed
      */
-    suspend fun clickedFilters(
+    public suspend fun clickedFilters(
         indexName: IndexName,
         eventName: EventName,
         filters: List<Filter.Facet>,
@@ -71,7 +71,7 @@ public interface EndpointInsightsUser {
      * @param timestamp An optional timestamp for the time of the event.
      * The server will automatically assign a timestamp if no value is passed
      */
-    suspend fun clickedObjectIDs(
+    public suspend fun clickedObjectIDs(
         indexName: IndexName,
         eventName: EventName,
         objectIDs: List<ObjectID>,
@@ -88,7 +88,7 @@ public interface EndpointInsightsUser {
      * @param timestamp An optional timestamp for the time of the event.
      * The server will automatically assign a timestamp if no value is passed
      */
-    suspend fun clickedObjectIDsAfterSearch(
+    public suspend fun clickedObjectIDsAfterSearch(
         indexName: IndexName,
         eventName: EventName,
         queryID: QueryID,
@@ -106,7 +106,7 @@ public interface EndpointInsightsUser {
      * @param timestamp An optional timestamp for the time of the event.
      * The server will automatically assign a timestamp if no value is passed
      */
-    suspend fun convertedFilters(
+    public suspend fun convertedFilters(
         indexName: IndexName,
         eventName: EventName,
         filters: List<Filter.Facet>,
@@ -122,7 +122,7 @@ public interface EndpointInsightsUser {
      * @param timestamp An optional timestamp for the time of the event.
      * The server will automatically assign a timestamp if no value is passed
      */
-    suspend fun convertedObjectIDs(
+    public suspend fun convertedObjectIDs(
         indexName: IndexName,
         eventName: EventName,
         objectIDs: List<ObjectID>,
@@ -139,7 +139,7 @@ public interface EndpointInsightsUser {
      * @param timestamp An optional timestamp for the time of the event.
      * The server will automatically assign a timestamp if no value is passed
      */
-    suspend fun convertedObjectIDsAfterSearch(
+    public suspend fun convertedObjectIDsAfterSearch(
         indexName: IndexName,
         eventName: EventName,
         queryID: QueryID,

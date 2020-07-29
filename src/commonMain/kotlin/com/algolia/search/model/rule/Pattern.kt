@@ -7,6 +7,7 @@ import com.algolia.search.serialize.regexFacet
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -22,11 +23,11 @@ public sealed class Pattern(override val raw: String) : Raw<String> {
 
     public data class Literal(override val raw: String) : Pattern(raw)
 
-    companion object : KSerializer<Pattern> {
+    public companion object : KSerializer<Pattern> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = String.serializer().descriptor
+        override val descriptor: SerialDescriptor = String.serializer().descriptor
 
         override fun serialize(encoder: Encoder, value: Pattern) {
             serializer.serialize(encoder, value.raw)

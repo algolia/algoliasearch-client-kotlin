@@ -10,6 +10,7 @@ import com.algolia.search.serialize.regexDesc
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -35,11 +36,11 @@ public sealed class CustomRankingCriterion(override val raw: String) : Raw<Strin
         return raw
     }
 
-    companion object : KSerializer<CustomRankingCriterion> {
+    public companion object : KSerializer<CustomRankingCriterion> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: CustomRankingCriterion) {
             serializer.serialize(encoder, value.raw)

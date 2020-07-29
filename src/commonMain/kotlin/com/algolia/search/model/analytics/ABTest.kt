@@ -40,7 +40,7 @@ public data class ABTest(
 ) {
 
     @Serializer(ABTest::class)
-    companion object : KSerializer<ABTest> {
+    public companion object : KSerializer<ABTest> {
 
         override fun serialize(encoder: Encoder, value: ABTest) {
             val json = json {

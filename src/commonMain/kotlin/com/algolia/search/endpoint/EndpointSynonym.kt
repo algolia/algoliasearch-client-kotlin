@@ -15,7 +15,7 @@ import com.algolia.search.transport.RequestOptions
  */
 public interface EndpointSynonym {
 
-    val indexName: IndexName
+    public val indexName: IndexName
 
     /**
      * Create or update a single [Synonym] on an index.
@@ -28,7 +28,7 @@ public interface EndpointSynonym {
      * you will need to specify that.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun saveSynonym(
+    public suspend fun saveSynonym(
         synonym: Synonym,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
@@ -55,7 +55,7 @@ public interface EndpointSynonym {
      * always provide a full list of synonyms to your end-users.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun saveSynonyms(
+    public suspend fun saveSynonyms(
         synonyms: List<Synonym>,
         forwardToReplicas: Boolean? = null,
         clearExistingSynonyms: Boolean? = null,
@@ -68,7 +68,7 @@ public interface EndpointSynonym {
      * @param objectID [ObjectID] of the [Synonym] to retrieve.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun getSynonym(
+    public suspend fun getSynonym(
         objectID: ObjectID,
         requestOptions: RequestOptions? = null
     ): Synonym
@@ -82,7 +82,7 @@ public interface EndpointSynonym {
      * replicas you will need to set this parameter to true.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun deleteSynonym(
+    public suspend fun deleteSynonym(
         objectID: ObjectID,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
@@ -94,7 +94,7 @@ public interface EndpointSynonym {
      * @param query The [SynonymQuery].
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun searchSynonyms(
+    public suspend fun searchSynonyms(
         query: SynonymQuery = SynonymQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchSynonyms
@@ -109,7 +109,7 @@ public interface EndpointSynonym {
      * @param forwardToReplicas Also replace synonyms on replicas.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun clearSynonyms(
+    public suspend fun clearSynonyms(
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
@@ -123,7 +123,7 @@ public interface EndpointSynonym {
      * @param forwardToReplicas Also replace synonyms on replicas.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun replaceAllSynonyms(
+    public suspend fun replaceAllSynonyms(
         synonyms: List<Synonym>,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null

@@ -8,5 +8,5 @@ public object AlgoliaSearchClient {
     /**
      * Current version of the library.
      */
-    const val version = BuildConfig.version
+    public const val version: String = BuildConfig.version
 }

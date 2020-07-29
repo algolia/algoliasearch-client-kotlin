@@ -5,6 +5,7 @@ import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.list
 import kotlinx.serialization.builtins.serializer
@@ -36,18 +37,18 @@ public data class Polygon(
         }
     }
 
-    override val raw = listOf(
+    override val raw: List<Float> = listOf(
         *point1.raw.toTypedArray(),
         *point2.raw.toTypedArray(),
         *point3.raw.toTypedArray(),
         *points.flatMap { it.raw }.toTypedArray()
     )
 
-    companion object : KSerializer<Polygon> {
+    public companion object : KSerializer<Polygon> {
 
         private val serializer = Float.serializer().list
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Polygon) {
             serializer.serialize(encoder, value.raw)

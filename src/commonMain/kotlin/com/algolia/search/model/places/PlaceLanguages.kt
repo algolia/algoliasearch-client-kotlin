@@ -33,7 +33,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 
 @Serializable
-data class PlaceLanguages(
+public data class PlaceLanguages(
     @SerialName(KeyCountry) val countryOrNull: Map<Language, String>? = null,
     @SerialName(KeyCounty) val countyOrNull: Map<Language, List<String>>? = null,
     @SerialName(KeyCity) val cityOrNull: Map<Language, List<String>>? = null,

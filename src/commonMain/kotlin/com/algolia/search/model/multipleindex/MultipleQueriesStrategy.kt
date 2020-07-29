@@ -8,6 +8,7 @@ import com.algolia.search.serialize.KeyStopIfEnoughMatches
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -36,11 +37,11 @@ public sealed class MultipleQueriesStrategy(override val raw: String) : Raw<Stri
         return raw
     }
 
-    companion object : KSerializer<MultipleQueriesStrategy> {
+    public companion object : KSerializer<MultipleQueriesStrategy> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: MultipleQueriesStrategy) {
             serializer.serialize(encoder, value.raw)

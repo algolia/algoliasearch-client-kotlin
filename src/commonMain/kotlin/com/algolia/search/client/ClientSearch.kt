@@ -174,7 +174,7 @@ public class ClientSearch private constructor(
         return transport.request(HttpMethod.Get, CallType.Read, RouteLogs, options)
     }
 
-    companion object {
+    public companion object {
 
         /**
          * Generate a virtual [APIKey] without any call to the server.

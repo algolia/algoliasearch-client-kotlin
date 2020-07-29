@@ -13,7 +13,7 @@ public class DSLExplainModules(
     private val explainModules: MutableList<ExplainModule> = mutableListOf()
 ) {
 
-    public val MatchAlternatives = ExplainModule.MatchAlternatives
+    public val MatchAlternatives: ExplainModule.MatchAlternatives = ExplainModule.MatchAlternatives
 
     /**
      * Add [this] to [explainModules].

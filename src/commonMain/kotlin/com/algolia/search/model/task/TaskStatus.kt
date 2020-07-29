@@ -6,6 +6,7 @@ import com.algolia.search.serialize.KeyPublished
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -27,11 +28,11 @@ public sealed class TaskStatus(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : TaskStatus(raw)
 
-    companion object : KSerializer<TaskStatus> {
+    public companion object : KSerializer<TaskStatus> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: TaskStatus) {
             serializer.serialize(encoder, value.raw)

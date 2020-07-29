@@ -5,6 +5,7 @@ import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.list
 import kotlinx.serialization.builtins.serializer
@@ -19,13 +20,13 @@ public data class BoundingBox(
     val point2: Point
 ) : Raw<List<Float>> {
 
-    override val raw = listOf(point1.latitude, point1.longitude, point2.latitude, point2.longitude)
+    override val raw: List<Float> = listOf(point1.latitude, point1.longitude, point2.latitude, point2.longitude)
 
-    companion object : KSerializer<BoundingBox> {
+    public companion object : KSerializer<BoundingBox> {
 
         private val serializer = Float.serializer()
 
-        override val descriptor = serializer.list.descriptor
+        override val descriptor: SerialDescriptor = serializer.list.descriptor
 
         override fun serialize(encoder: Encoder, value: BoundingBox) {
             serializer.list.serialize(encoder, value.raw)

@@ -9,7 +9,7 @@ import java.util.Date
  * JVM implementation converting a [String] or a [Long] into a [Date] format. Relies on ISO8601.
  */
 @Serializable(KSerializerClientDate::class)
-public actual data class ClientDate internal actual constructor(override val raw: String) : Raw<String> {
+actual data class ClientDate internal actual constructor(override val raw: String) : Raw<String> {
 
     internal actual constructor(timestamp: Long) : this(DateISO8601.format(timestamp))
 

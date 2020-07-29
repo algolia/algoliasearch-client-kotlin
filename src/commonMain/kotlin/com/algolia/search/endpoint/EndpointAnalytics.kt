@@ -25,7 +25,7 @@ public interface EndpointAnalytics {
      * @param abTest The definition of the [ABTest].
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun addABTest(
+    public suspend fun addABTest(
         abTest: ABTest,
         requestOptions: RequestOptions? = null
     ): CreationABTest
@@ -36,7 +36,7 @@ public interface EndpointAnalytics {
      * @param abTestID The [ABTestID] that was sent back in the response of the [addABTest] method.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun getABTest(
+    public suspend fun getABTest(
         abTestID: ABTestID,
         requestOptions: RequestOptions? = null
     ): ResponseABTest
@@ -52,7 +52,7 @@ public interface EndpointAnalytics {
      * @param abTestID The [ABTestID] that was sent back in the response of the [addABTest] method.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun stopABTest(
+    public suspend fun stopABTest(
         abTestID: ABTestID,
         requestOptions: RequestOptions? = null
     ): RevisionABTest
@@ -67,7 +67,7 @@ public interface EndpointAnalytics {
      * @param abTestID The [ABTestID] that was sent back in the response of the [addABTest] method.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun deleteABTest(
+    public suspend fun deleteABTest(
         abTestID: ABTestID,
         requestOptions: RequestOptions? = null
     ): DeletionABTest
@@ -78,7 +78,7 @@ public interface EndpointAnalytics {
      * @param page Specify the first entry to retrieve (0-based, 0 is the most recent entry).
      * @param hitsPerPage Specify the maximum number of entries to retrieve starting at the [page].
      */
-    suspend fun listABTests(
+    public suspend fun listABTests(
         page: Int? = null,
         hitsPerPage: Int? = null,
         requestOptions: RequestOptions? = null

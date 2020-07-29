@@ -42,7 +42,7 @@ public sealed class Synonym {
      * synonym; otherwise, it will be an update.
      * Note that for some languages, this parameter is duplicated in the synonym object.
      */
-    abstract val objectID: ObjectID
+    public abstract val objectID: ObjectID
 
     public data class OneWay(
         override val objectID: ObjectID,
@@ -62,7 +62,7 @@ public sealed class Synonym {
             require(synonyms.size <= limit) { "OneWay synonym have a maximum of $limit synonyms" }
         }
 
-        companion object {
+        public companion object {
 
             private const val limit = 100
         }
@@ -81,7 +81,7 @@ public sealed class Synonym {
             require(synonyms.size <= limit) { "OneWay synonym have a maximum of $limit synonyms" }
         }
 
-        companion object {
+        public companion object {
 
             private const val limit = 20
         }
@@ -130,7 +130,7 @@ public sealed class Synonym {
          */
         public data class Token(val token: String) : Raw<String> {
 
-            override val raw = "<$token>"
+            override val raw: String = "<$token>"
 
             init {
                 if (token.isBlank()) throw EmptyStringException("Token")
@@ -144,7 +144,7 @@ public sealed class Synonym {
     ) : Synonym()
 
     @Serializer(Synonym::class)
-    companion object : KSerializer<Synonym> {
+    public companion object : KSerializer<Synonym> {
 
         override fun serialize(encoder: Encoder, value: Synonym) {
             val json = when (value) {

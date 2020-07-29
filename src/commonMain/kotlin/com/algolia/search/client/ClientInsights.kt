@@ -33,6 +33,6 @@ public class ClientInsights private constructor(
     ) : this(Transport(configuration, configuration))
 
     public inner class User(
-        val userToken: UserToken
+        public val userToken: UserToken
     ) : EndpointInsightsUser by EndpointInsightsUserImpl(this, userToken)
 }

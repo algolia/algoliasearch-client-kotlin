@@ -11,8 +11,8 @@ import kotlinx.serialization.json.JsonObject
  */
 public class RequestOptions {
 
-    public val headers = mutableMapOf<String, Any>()
-    public val urlParameters = mutableMapOf<String, Any>()
+    public val headers: MutableMap<String, Any> = mutableMapOf()
+    public val urlParameters: MutableMap<String, Any> = mutableMapOf()
 
     public var writeTimeout: Long? = null
     public var readTimeout: Long? = null

@@ -6,6 +6,7 @@ import com.algolia.search.model.Raw
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -20,11 +21,11 @@ public data class TaskID(override val raw: Long) : Raw<Long> {
         return raw.toString()
     }
 
-    companion object : KSerializer<TaskID> {
+    public companion object : KSerializer<TaskID> {
 
         private val serializer = Long.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: TaskID) {
             serializer.serialize(encoder, value.raw)

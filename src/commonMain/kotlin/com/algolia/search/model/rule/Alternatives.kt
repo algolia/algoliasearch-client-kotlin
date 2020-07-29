@@ -15,7 +15,7 @@ public sealed class Alternatives {
     public object False : Alternatives()
 
     @Serializer(Alternatives::class)
-    companion object : KSerializer<Alternatives> {
+    public companion object : KSerializer<Alternatives> {
 
         override fun serialize(encoder: Encoder, value: Alternatives) {
             when (value) {

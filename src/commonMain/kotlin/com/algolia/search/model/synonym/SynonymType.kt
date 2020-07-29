@@ -9,6 +9,7 @@ import com.algolia.search.serialize.KeySynonym
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -47,11 +48,11 @@ public sealed class SynonymType(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : SynonymType(raw)
 
-    companion object : KSerializer<SynonymType> {
+    public companion object : KSerializer<SynonymType> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: SynonymType) {
             serializer.serialize(encoder, value.raw)

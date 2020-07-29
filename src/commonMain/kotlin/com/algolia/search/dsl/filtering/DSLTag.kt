@@ -13,7 +13,7 @@ public interface DSLTag {
     /**
      * Create a [Filter.Tag] with an [value].
      */
-    fun tag(value: String, isNegated: Boolean = false) {
+    public fun tag(value: String, isNegated: Boolean = false) {
         +Filter.Tag(value, isNegated)
     }
 }

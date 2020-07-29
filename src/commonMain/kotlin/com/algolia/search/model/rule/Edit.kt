@@ -28,7 +28,7 @@ public data class Edit(
 ) {
 
     @Serializer(Edit::class)
-    companion object : KSerializer<Edit> {
+    public companion object : KSerializer<Edit> {
 
         override fun serialize(encoder: Encoder, value: Edit) {
             val type = if (value.insert != null) KeyReplace else KeyRemoveLowercase

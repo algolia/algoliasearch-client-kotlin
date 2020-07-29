@@ -9,7 +9,7 @@ import kotlinx.serialization.json.json
 
 public object KSerializerGeoPoint : KSerializer<Point> {
 
-    override val descriptor = SerialDescriptor("point")
+    override val descriptor: SerialDescriptor = SerialDescriptor("point")
 
     override fun serialize(encoder: Encoder, value: Point) {
         val json = json {

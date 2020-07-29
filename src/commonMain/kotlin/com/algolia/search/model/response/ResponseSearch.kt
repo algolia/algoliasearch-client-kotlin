@@ -374,7 +374,7 @@ public data class ResponseSearch(
         }
 
         @Serializer(Hit::class)
-        companion object : KSerializer<Hit> {
+        public companion object : KSerializer<Hit> {
 
             override fun deserialize(decoder: Decoder): Hit {
                 return Hit(decoder.asJsonInput().jsonObject)

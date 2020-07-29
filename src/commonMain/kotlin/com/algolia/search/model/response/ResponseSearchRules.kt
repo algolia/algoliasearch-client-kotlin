@@ -46,7 +46,7 @@ public data class ResponseSearchRules(
             get() = highlightResultOrNull!!
 
         @Serializer(Hit::class)
-        companion object : DeserializationStrategy<Hit> {
+        public companion object : DeserializationStrategy<Hit> {
 
             override fun deserialize(decoder: Decoder): Hit {
                 val json = decoder.asJsonInput().jsonObject

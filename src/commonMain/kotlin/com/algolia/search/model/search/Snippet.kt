@@ -7,6 +7,7 @@ import com.algolia.search.serialize.regexSnippet
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -24,17 +25,17 @@ public data class Snippet(
     val count: Int? = null
 ) : Raw<String> {
 
-    override val raw = attribute.raw + if (count != null) ":$count" else ""
+    override val raw: String = attribute.raw + if (count != null) ":$count" else ""
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<Snippet> {
+    public companion object : KSerializer<Snippet> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Snippet) {
             serializer.serialize(encoder, value.raw)

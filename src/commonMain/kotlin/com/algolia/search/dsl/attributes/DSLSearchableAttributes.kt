@@ -18,7 +18,7 @@ public class DSLSearchableAttributes(
         Unordered
     }
 
-    public val Unordered = Modifier.Unordered
+    public val Unordered: Modifier = Modifier.Unordered
 
     /**
      * Convenience method.
@@ -44,14 +44,14 @@ public class DSLSearchableAttributes(
     /**
      * Convenience method.
      */
-    operator fun Modifier.invoke(attribute: String): SearchableAttribute {
+    public operator fun Modifier.invoke(attribute: String): SearchableAttribute {
         return invoke(Attribute(attribute))
     }
 
     /**
      * Create an [SearchableAttribute] using [this] [Modifier] to be applied on [attribute].
      */
-    operator fun Modifier.invoke(attribute: Attribute): SearchableAttribute {
+    public operator fun Modifier.invoke(attribute: Attribute): SearchableAttribute {
         return when (this) {
             Modifier.Unordered -> SearchableAttribute.Unordered(attribute)
         }

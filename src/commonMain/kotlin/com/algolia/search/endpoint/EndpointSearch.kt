@@ -15,7 +15,7 @@ import com.algolia.search.transport.RequestOptions
  */
 public interface EndpointSearch {
 
-    val indexName: IndexName
+    public val indexName: IndexName
 
     /**
      * Method used for querying an index.
@@ -27,7 +27,7 @@ public interface EndpointSearch {
      * @param query The [Query] used to search.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun search(query: Query = Query(), requestOptions: RequestOptions? = null): ResponseSearch
+    public suspend fun search(query: Query = Query(), requestOptions: RequestOptions? = null): ResponseSearch
 
     /**
      * Get all index content without any record limit. Can be used for backups.
@@ -52,14 +52,14 @@ public interface EndpointSearch {
      * @param query The [Query] used to search.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun browse(query: Query = Query(), requestOptions: RequestOptions? = null): ResponseSearch
+    public suspend fun browse(query: Query = Query(), requestOptions: RequestOptions? = null): ResponseSearch
 
     /**
      * @param cursor [Cursor] indicating the location to resume browsing from.
      * Must match the value returned by the previous call to [browse] [ResponseSearch.cursorOrNull]
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun browse(cursor: Cursor, requestOptions: RequestOptions? = null): ResponseSearch
+    public suspend fun browse(cursor: Cursor, requestOptions: RequestOptions? = null): ResponseSearch
 
     /**
      * Search for a set of values within a given facet attribute. Can be combined with a query.
@@ -98,7 +98,7 @@ public interface EndpointSearch {
      * @param query: The [Query] to filter results.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun searchForFacets(
+    public suspend fun searchForFacets(
         attribute: Attribute,
         facetQuery: String? = null,
         query: Query = Query(),
@@ -115,7 +115,7 @@ public interface EndpointSearch {
      * @param filterGroups List of [FilterGroup] to apply to the query.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun advancedSearch(
+    public suspend fun advancedSearch(
         query: Query = Query(),
         filterGroups: Set<FilterGroup<*>> = setOf(),
         requestOptions: RequestOptions? = null
@@ -126,7 +126,7 @@ public interface EndpointSearch {
         replaceWith = ReplaceWith("findObject(match, query, doNotPaginate, requestOptions)"),
         level = DeprecationLevel.WARNING
     )
-    suspend fun findFirstObject(
+    public suspend fun findFirstObject(
         match: (ResponseSearch.Hit) -> Boolean,
         query: Query = Query(),
         doNotPaginate: Boolean = false,
@@ -148,7 +148,7 @@ public interface EndpointSearch {
      *  @param paginate To prevent the iteration through pages of results.
      *  @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun findObject(
+    public suspend fun findObject(
         match: (ResponseSearch.Hit) -> Boolean,
         query: Query = Query(),
         paginate: Boolean = true,

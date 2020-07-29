@@ -75,7 +75,7 @@ public data class ResponseABTest(
         get() = conversionSignificanceOrNull!!
 
     @Serializer(ResponseABTest::class)
-    companion object : KSerializer<ResponseABTest> {
+    public companion object : KSerializer<ResponseABTest> {
 
         override fun serialize(encoder: Encoder, value: ResponseABTest) {
             val json = json {

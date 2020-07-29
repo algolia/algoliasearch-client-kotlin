@@ -7,43 +7,43 @@ import kotlinx.serialization.json.JsonObject
 
 public interface Place {
 
-    val objectIDOrNull: ObjectID?
-    val administrativeOrNull: List<String>?
-    val countryCodeOrNull: Country?
-    val postCodeOrNull: List<String>?
-    val populationOrNull: Long?
-    val geolocationOrNull: List<Point>?
-    val highlightResultOrNull: JsonObject?
-    val tagsOrNull: List<String>?
-    val importanceOrNull: Int?
-    val adminLevelOrNull: Int?
-    val districtOrNull: String?
-    val suburbOrNull: List<String>?
-    val villageOrNull: List<String>?
-    val isCountryOrNull: Boolean?
-    val isCityOrNull: Boolean?
-    val isSuburbOrNull: Boolean?
-    val isHighwayOrNull: Boolean?
-    val isPopularOrNull: Boolean?
-    val rankingInfoOrNull: RankingInfo?
+    public val objectIDOrNull: ObjectID?
+    public val administrativeOrNull: List<String>?
+    public val countryCodeOrNull: Country?
+    public val postCodeOrNull: List<String>?
+    public val populationOrNull: Long?
+    public val geolocationOrNull: List<Point>?
+    public val highlightResultOrNull: JsonObject?
+    public val tagsOrNull: List<String>?
+    public val importanceOrNull: Int?
+    public val adminLevelOrNull: Int?
+    public val districtOrNull: String?
+    public val suburbOrNull: List<String>?
+    public val villageOrNull: List<String>?
+    public val isCountryOrNull: Boolean?
+    public val isCityOrNull: Boolean?
+    public val isSuburbOrNull: Boolean?
+    public val isHighwayOrNull: Boolean?
+    public val isPopularOrNull: Boolean?
+    public val rankingInfoOrNull: RankingInfo?
 
-    val objectID: ObjectID get() = objectIDOrNull!!
-    val administrative: List<String> get() = administrativeOrNull!!
-    val countryCode: Country get() = countryCodeOrNull!!
-    val postCode: List<String> get() = postCodeOrNull!!
-    val population: Long get() = populationOrNull!!
-    val geolocation: List<Point> get() = geolocationOrNull!!
-    val highlightResult: JsonObject get() = highlightResultOrNull!!
-    val tags: List<String> get() = tagsOrNull!!
-    val importance: Int get() = importanceOrNull!!
-    val adminLevel: Int get() = adminLevelOrNull!!
-    val district: String get() = districtOrNull!!
-    val suburb: List<String> get() = suburbOrNull!!
-    val village: List<String> get() = villageOrNull!!
-    val isCountry: Boolean get() = isCountryOrNull!!
-    val isCity: Boolean get() = isCityOrNull!!
-    val isSuburb: Boolean get() = isSuburbOrNull!!
-    val isHighway: Boolean get() = isHighwayOrNull!!
-    val isPopular: Boolean get() = isPopularOrNull!!
-    val rankingInfo: RankingInfo get() = rankingInfoOrNull!!
+    public val objectID: ObjectID get() = objectIDOrNull!!
+    public val administrative: List<String> get() = administrativeOrNull!!
+    public val countryCode: Country get() = countryCodeOrNull!!
+    public val postCode: List<String> get() = postCodeOrNull!!
+    public val population: Long get() = populationOrNull!!
+    public val geolocation: List<Point> get() = geolocationOrNull!!
+    public val highlightResult: JsonObject get() = highlightResultOrNull!!
+    public val tags: List<String> get() = tagsOrNull!!
+    public val importance: Int get() = importanceOrNull!!
+    public val adminLevel: Int get() = adminLevelOrNull!!
+    public val district: String get() = districtOrNull!!
+    public val suburb: List<String> get() = suburbOrNull!!
+    public val village: List<String> get() = villageOrNull!!
+    public val isCountry: Boolean get() = isCountryOrNull!!
+    public val isCity: Boolean get() = isCityOrNull!!
+    public val isSuburb: Boolean get() = isSuburbOrNull!!
+    public val isHighway: Boolean get() = isHighwayOrNull!!
+    public val isPopular: Boolean get() = isPopularOrNull!!
+    public val rankingInfo: RankingInfo get() = rankingInfoOrNull!!
 }

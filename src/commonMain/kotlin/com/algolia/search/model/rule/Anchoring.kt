@@ -9,6 +9,7 @@ import com.algolia.search.serialize.KeyStartsWith
 import kotlinx.serialization.Decoder
 import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
 
@@ -37,11 +38,11 @@ public sealed class Anchoring(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : Anchoring(raw)
 
-    companion object : KSerializer<Anchoring> {
+    public companion object : KSerializer<Anchoring> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Anchoring) {
             serializer.serialize(encoder, value.raw)

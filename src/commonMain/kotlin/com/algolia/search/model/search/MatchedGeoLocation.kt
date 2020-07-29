@@ -26,7 +26,7 @@ public data class MatchedGeoLocation(
 ) {
 
     @Serializer(MatchedGeoLocation::class)
-    companion object : KSerializer<MatchedGeoLocation> {
+    public companion object : KSerializer<MatchedGeoLocation> {
 
         override fun serialize(encoder: Encoder, value: MatchedGeoLocation) {
             val json = json {

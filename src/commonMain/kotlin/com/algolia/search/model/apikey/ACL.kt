@@ -85,7 +85,7 @@ public sealed class ACL(override val raw: String) : Raw<String> {
     public data class Other(override val raw: String) : ACL(raw)
 
     @Serializer(ACL::class)
-    companion object : KSerializer<ACL> {
+    public companion object : KSerializer<ACL> {
 
         private val serializer = String.serializer()
 

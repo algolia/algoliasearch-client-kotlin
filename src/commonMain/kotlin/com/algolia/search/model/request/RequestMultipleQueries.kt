@@ -24,7 +24,7 @@ internal class RequestMultipleQueries(
 ) {
 
     @Serializer(RequestMultipleQueries::class)
-    companion object : SerializationStrategy<RequestMultipleQueries> {
+    public companion object : SerializationStrategy<RequestMultipleQueries> {
 
         override fun serialize(encoder: Encoder, value: RequestMultipleQueries) {
             val json = json {

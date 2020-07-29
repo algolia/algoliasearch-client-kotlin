@@ -13,7 +13,7 @@ import com.algolia.search.transport.RequestOptions
  */
 public interface EndpointRule {
 
-    val indexName: IndexName
+    public val indexName: IndexName
 
     /**
      * Create or update a single [rule].
@@ -23,7 +23,7 @@ public interface EndpointRule {
      * the method will also send the rules to all replicas.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun saveRule(
+    public suspend fun saveRule(
         rule: Rule,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
@@ -39,7 +39,7 @@ public interface EndpointRule {
      * @param clearExistingRules Whether the batch will remove all existing rules before adding/updating the rules.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun saveRules(
+    public suspend fun saveRules(
         rules: List<Rule>,
         forwardToReplicas: Boolean? = null,
         clearExistingRules: Boolean? = null,
@@ -52,7 +52,7 @@ public interface EndpointRule {
      * @param objectID The [ObjectID] of the rule to retrieve.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun getRule(
+    public suspend fun getRule(
         objectID: ObjectID,
         requestOptions: RequestOptions? = null
     ): Rule
@@ -64,7 +64,7 @@ public interface EndpointRule {
      * @param forwardToReplicas Whether to forward the operation to the replica indices.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun deleteRule(
+    public suspend fun deleteRule(
         objectID: ObjectID,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
@@ -76,7 +76,7 @@ public interface EndpointRule {
      * @param query The [RuleQuery].
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun searchRules(
+    public suspend fun searchRules(
         query: RuleQuery = RuleQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchRules
@@ -87,7 +87,7 @@ public interface EndpointRule {
      * @param forwardToReplicas Whether to forward the operation to the replica indices.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun clearRules(
+    public suspend fun clearRules(
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
@@ -101,7 +101,7 @@ public interface EndpointRule {
      * @param forwardToReplicas Whether to forward the operation to the replica indices.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun replaceAllRules(
+    public suspend fun replaceAllRules(
         rules: List<Rule>,
         forwardToReplicas: Boolean? = null,
         requestOptions: RequestOptions? = null

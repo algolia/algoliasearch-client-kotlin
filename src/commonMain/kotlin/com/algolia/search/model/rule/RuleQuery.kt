@@ -48,14 +48,14 @@ public data class RuleQuery(
 ) {
 
     @Transient
-    public val Is = Anchoring.Is
+    public val Is: Anchoring.Is = Anchoring.Is
 
     @Transient
-    public val StartsWith = Anchoring.StartsWith
+    public val StartsWith: Anchoring.StartsWith = Anchoring.StartsWith
 
     @Transient
-    public val EndsWith = Anchoring.EndsWith
+    public val EndsWith: Anchoring.EndsWith = Anchoring.EndsWith
 
     @Transient
-    public val Contains = Anchoring.Contains
+    public val Contains: Anchoring.Contains = Anchoring.Contains
 }

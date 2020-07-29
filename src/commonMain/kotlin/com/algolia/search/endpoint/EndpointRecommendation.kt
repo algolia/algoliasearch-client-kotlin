@@ -15,7 +15,7 @@ public interface EndpointRecommendation {
      * @param strategy The personalization strategy
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun setPersonalizationStrategy(
+    public suspend fun setPersonalizationStrategy(
         strategy: PersonalizationStrategy,
         requestOptions: RequestOptions? = null
     ): SetPersonalizationStrategyResponse
@@ -23,7 +23,7 @@ public interface EndpointRecommendation {
     /**
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun getPersonalizationStrategy(
+    public suspend fun getPersonalizationStrategy(
         requestOptions: RequestOptions? = null
     ): PersonalizationStrategy
 }

@@ -38,7 +38,7 @@ public data class ResponseBatches(
         get() = objectIDsOrNull!!
 
     @Serializer(ResponseBatches::class)
-    companion object : KSerializer<ResponseBatches> {
+    public companion object : KSerializer<ResponseBatches> {
 
         override fun serialize(encoder: Encoder, value: ResponseBatches) {
             val json = json {

@@ -13,25 +13,25 @@ public class DSLResponseFields(
     private val responseFields: MutableList<ResponseFields> = mutableListOf()
 ) {
 
-    public val All = ResponseFields.All
-    public val AroundLatLng = ResponseFields.AroundLatLng
-    public val AutomaticRadius = ResponseFields.AutomaticRadius
-    public val ExhaustiveFacetsCount = ResponseFields.ExhaustiveFacetsCount
-    public val Facets = ResponseFields.Facets
-    public val FacetsStats = ResponseFields.FacetsStats
-    public val Hits = ResponseFields.Hits
-    public val HitsPerPage = ResponseFields.HitsPerPage
-    public val Index = ResponseFields.Index
-    public val Length = ResponseFields.Length
-    public val NbHits = ResponseFields.NbHits
-    public val NbPages = ResponseFields.NbPages
-    public val Offset = ResponseFields.Offset
-    public val Page = ResponseFields.Page
-    public val Params = ResponseFields.Params
-    public val ProcessingTimeMS = ResponseFields.ProcessingTimeMS
-    public val Query = ResponseFields.Query
-    public val QueryAfterRemoval = ResponseFields.QueryAfterRemoval
-    public val UserData = ResponseFields.UserData
+    public val All: ResponseFields.All = ResponseFields.All
+    public val AroundLatLng: ResponseFields.AroundLatLng = ResponseFields.AroundLatLng
+    public val AutomaticRadius: ResponseFields.AutomaticRadius = ResponseFields.AutomaticRadius
+    public val ExhaustiveFacetsCount: ResponseFields.ExhaustiveFacetsCount = ResponseFields.ExhaustiveFacetsCount
+    public val Facets: ResponseFields.Facets = ResponseFields.Facets
+    public val FacetsStats: ResponseFields.FacetsStats = ResponseFields.FacetsStats
+    public val Hits: ResponseFields.Hits = ResponseFields.Hits
+    public val HitsPerPage: ResponseFields.HitsPerPage = ResponseFields.HitsPerPage
+    public val Index: ResponseFields.Index = ResponseFields.Index
+    public val Length: ResponseFields.Length = ResponseFields.Length
+    public val NbHits: ResponseFields.NbHits = ResponseFields.NbHits
+    public val NbPages: ResponseFields.NbPages = ResponseFields.NbPages
+    public val Offset: ResponseFields.Offset = ResponseFields.Offset
+    public val Page: ResponseFields.Page = ResponseFields.Page
+    public val Params: ResponseFields.Params = ResponseFields.Params
+    public val ProcessingTimeMS: ResponseFields.ProcessingTimeMS = ResponseFields.ProcessingTimeMS
+    public val Query: ResponseFields.Query = ResponseFields.Query
+    public val QueryAfterRemoval: ResponseFields.QueryAfterRemoval = ResponseFields.QueryAfterRemoval
+    public val UserData: ResponseFields.UserData = ResponseFields.UserData
 
     /**
      * Add [this] to [responseFields].
