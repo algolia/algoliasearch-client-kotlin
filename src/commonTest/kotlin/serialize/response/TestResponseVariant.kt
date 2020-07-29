@@ -17,7 +17,6 @@ import com.algolia.search.serialize.KeyTrackedSearchCount
 import com.algolia.search.serialize.KeyTrafficPercentage
 import com.algolia.search.serialize.KeyUserCount
 import indexA
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 import unknown
 

@@ -11,16 +11,21 @@ import com.algolia.search.serialize.KeyObjectIDs
 import com.algolia.search.serialize.KeyTaskID
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.add
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.contentOrNull
-import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.long
+import kotlinx.serialization.json.put
 
 @Serializable(ResponseBatches.Companion::class)
 public data class ResponseBatches(
@@ -41,20 +46,24 @@ public data class ResponseBatches(
     public companion object : KSerializer<ResponseBatches> {
 
         override fun serialize(encoder: Encoder, value: ResponseBatches) {
-            val json = json {
-                KeyTaskID to json { value.tasks.forEach { it.indexName.raw to it.taskID.raw } }
-                KeyObjectIDs to value.objectIDsOrNull?.let { jsonArray { it.forEach { +it?.raw } } }
+            val json = buildJsonObject {
+                put(KeyTaskID, buildJsonObject {
+                    value.tasks.forEach {
+                        put(it.indexName.raw, it.taskID.raw)
+                    }
+                })
+                KeyObjectIDs to value.objectIDsOrNull?.let { buildJsonArray { it.forEach { add(it?.raw) } } }
             }
 
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJsonElement(json)
         }
 
         override fun deserialize(decoder: Decoder): ResponseBatches {
             val element = decoder.asJsonInput().jsonObject
-            val taskIDs = element.getObject(KeyTaskID).map { (key, entry) ->
-                TaskIndex(key.toIndexName(), entry.long.toTaskID())
+            val taskIDs = element.getValue(KeyTaskID).jsonObject.map { (key, entry) ->
+                TaskIndex(key.toIndexName(), entry.jsonPrimitive.long.toTaskID())
             }
-            val objectIDs = element.getArrayOrNull(KeyObjectIDs)?.map { it.contentOrNull?.toObjectID() }
+            val objectIDs = element[KeyObjectIDs]?.jsonArray?.map { it.jsonPrimitive.contentOrNull?.toObjectID() }
 
             return ResponseBatches(taskIDs, objectIDs)
         }

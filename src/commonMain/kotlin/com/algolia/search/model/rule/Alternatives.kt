@@ -1,12 +1,13 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.serialize.asJsonInput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.boolean
 
 public sealed class Alternatives {
 
@@ -19,14 +20,14 @@ public sealed class Alternatives {
 
         override fun serialize(encoder: Encoder, value: Alternatives) {
             when (value) {
-                is Alternatives.True -> Boolean.serializer().serialize(encoder, true)
-                is Alternatives.False -> Boolean.serializer().serialize(encoder, false)
+                is True -> Boolean.serializer().serialize(encoder, true)
+                is False -> Boolean.serializer().serialize(encoder, false)
             }
         }
 
         override fun deserialize(decoder: Decoder): Alternatives {
             return when (val element = decoder.asJsonInput()) {
-                is JsonLiteral -> if (element.boolean) Alternatives.True else Alternatives.False
+                is JsonPrimitive -> if (element.boolean) True else False
                 else -> throw Exception("Unsupported Type")
             }
         }

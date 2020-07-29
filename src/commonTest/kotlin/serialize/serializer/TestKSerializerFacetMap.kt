@@ -5,7 +5,6 @@ import attributeB
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Facet
 import com.algolia.search.serialize.KSerializerFacetMap
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
 internal class TestKSerializerFacetMap : TestSerializer<Map<Attribute, List<Facet>>>(KSerializerFacetMap) {

@@ -13,7 +13,6 @@ import com.algolia.search.serialize.KeyEndAt
 import com.algolia.search.serialize.KeyName
 import com.algolia.search.serialize.KeyStatus
 import com.algolia.search.serialize.KeyVariants
-import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 import unknown

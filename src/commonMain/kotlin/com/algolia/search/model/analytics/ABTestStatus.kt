@@ -5,12 +5,12 @@ import com.algolia.search.serialize.KeyActive
 import com.algolia.search.serialize.KeyExpired
 import com.algolia.search.serialize.KeyFailed
 import com.algolia.search.serialize.KeyStopped
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * [ABTest] server-side status.

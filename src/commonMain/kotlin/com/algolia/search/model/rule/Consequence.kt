@@ -19,16 +19,20 @@ import com.algolia.search.serialize.KeyUserData
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
 import com.algolia.search.serialize.toJsonNoDefaults
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.booleanOrNull
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
 
 @Serializable(Consequence.Companion::class)
 public data class Consequence(
@@ -74,28 +78,30 @@ public data class Consequence(
     @Serializer(Consequence::class)
     public companion object : KSerializer<Consequence> {
 
-        private val serializer = AutomaticFacetFilters.serializer().list
+        private val serializer = ListSerializer(AutomaticFacetFilters.serializer())
 
         private fun MutableMap<String, JsonElement>.putFilters(key: String, filters: List<AutomaticFacetFilters>?) {
-            filters?.let { put(key, JsonNoDefaults.toJson(serializer, it)) }
+            filters?.let { put(key, JsonNoDefaults.encodeToJsonElement(serializer, it)) }
         }
 
         private fun JsonObject.getFilters(key: String): List<AutomaticFacetFilters>? {
-            return getArrayOrNull(key)?.let { JsonNoDefaults.fromJson(serializer, it) }
+            return this[key]?.jsonArray?.let { JsonNoDefaults.decodeFromJsonElement(serializer, it) }
         }
 
         private fun JsonObject.getPromotions(): List<Promotion>? {
-            return getArrayOrNull(KeyPromote)?.let { Json.fromJson(Promotion.serializer().list, it) }
+            return this[KeyPromote]?.jsonArray?.let {
+                Json.decodeFromJsonElement(ListSerializer(Promotion.serializer()), it)
+            }
         }
 
         private fun JsonObject.getObjectIDs(): List<ObjectID>? {
-            return getArrayOrNull(KeyHide)?.let { Json.fromJson(KSerializerObjectIDs, it) }
+            return this[KeyHide]?.jsonArray?.let { Json.decodeFromJsonElement(KSerializerObjectIDs, it) }
         }
 
         private fun JsonObject.getEdits(): List<Edit>? {
-            return getObjectOrNull(KeyQuery)?.let { local ->
-                local.getArrayOrNull(KeyEdits)?.let { Json.fromJson(Edit.list, it) }
-                    ?: local.getArrayOrNull(KeyRemoveLowercase)?.map { Edit(it.content) }
+            return this[KeyQuery]?.jsonObject?.let { local ->
+                local[KeyEdits]?.jsonArray?.let { Json.decodeFromJsonElement(ListSerializer(Edit), it) }
+                    ?: local[KeyRemoveLowercase]?.jsonArray?.map { Edit(it.jsonPrimitive.content) }
             }
         }
 
@@ -105,43 +111,49 @@ public data class Consequence(
                 remove(KeyAutomaticFacetFilters)
                 remove(KeyAutomaticOptionalFacetFilters)
             }
-            return if (modified.isNotEmpty()) JsonNoDefaults.fromJson(
-                Query.serializer(),
-                JsonObject(modified)
-            ) else null
+            return if (modified.isNotEmpty()) {
+                JsonNoDefaults.decodeFromJsonElement(Query.serializer(), JsonObject(modified))
+            } else null
         }
 
         override fun serialize(encoder: Encoder, value: Consequence) {
             val params = mutableMapOf<String, JsonElement>().apply {
                 putFilters(KeyAutomaticFacetFilters, value.automaticFacetFilters)
                 putFilters(KeyAutomaticOptionalFacetFilters, value.automaticOptionalFacetFilters)
-                value.query?.toJsonNoDefaults()?.let { putAll(it.content) }
+                value.query?.toJsonNoDefaults()?.let { putAll(it) }
                 if (value.edits != null) put(
                     KeyQuery,
-                    json { KeyEdits to JsonNoDefaults.toJson(Edit.list, value.edits) })
+                    buildJsonObject {
+                        put(KeyEdits, JsonNoDefaults.encodeToJsonElement(ListSerializer(Edit), value.edits))
+                    }
+                )
             }
-            val json = json {
-                if (params.isNotEmpty()) KeyParams to JsonObject(params)
-                value.promote?.let { KeyPromote to JsonNoDefaults.toJson(Promotion.serializer().list, it) }
-                value.hide?.let { KeyHide to JsonNoDefaults.toJson(KSerializerObjectIDs, it) }
-                value.userData?.let { KeyUserData to it }
-                value.filterPromotes?.let { KeyFilterPromotes to it }
+            val json = buildJsonObject {
+                if (params.isNotEmpty()) put(KeyParams, JsonObject(params))
+                value.promote?.let {
+                    put(KeyPromote, JsonNoDefaults.encodeToJsonElement(ListSerializer(Promotion.serializer()), it))
+                }
+                value.hide?.let {
+                    put(KeyHide, JsonNoDefaults.encodeToJsonElement(KSerializerObjectIDs, it))
+                }
+                value.userData?.let { put(KeyUserData, it) }
+                value.filterPromotes?.let { put(KeyFilterPromotes, it) }
             }
 
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJsonElement(json)
         }
 
         override fun deserialize(decoder: Decoder): Consequence {
             val json = decoder.asJsonInput().jsonObject
-            val params = json.getObjectOrNull(KeyParams)
+            val params = json[KeyParams]?.jsonObject
             val automaticFacetFilters = params?.getFilters(KeyAutomaticFacetFilters)
             val automaticOptionalFacetFilters = params?.getFilters(KeyAutomaticOptionalFacetFilters)
             val promote = json.getPromotions()
             val hide = json.getObjectIDs()
-            val userData = json.getObjectOrNull(KeyUserData)
+            val userData = json[KeyUserData]?.jsonObject
             val edits = params?.getEdits()
             val query = params?.extractQuery(edits)
-            val filterPromotes = json.getPrimitiveOrNull(KeyFilterPromotes)?.booleanOrNull
+            val filterPromotes = json[KeyFilterPromotes]?.jsonPrimitive?.booleanOrNull
 
             return Consequence(
                 automaticFacetFilters = automaticFacetFilters,

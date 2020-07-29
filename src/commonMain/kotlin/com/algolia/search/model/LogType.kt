@@ -4,12 +4,12 @@ import com.algolia.search.serialize.KeyAll
 import com.algolia.search.serialize.KeyBuild
 import com.algolia.search.serialize.KeyError
 import com.algolia.search.serialize.KeyQuery
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * Type of logs to retrieve when performing a [com.algolia.search.endpoint.EndpointAdvanced.getLogs] operation.

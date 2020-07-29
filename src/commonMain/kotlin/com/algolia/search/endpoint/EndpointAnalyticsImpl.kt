@@ -23,7 +23,7 @@ internal class EndpointAnalyticsImpl(
 ) : EndpointAnalytics {
 
     override suspend fun addABTest(abTest: ABTest, requestOptions: RequestOptions?): CreationABTest {
-        val bodyString = Json.stringify(ABTest, abTest)
+        val bodyString = Json.encodeToString(ABTest, abTest)
 
         return transport.request(HttpMethod.Post, CallType.Write, RouteABTestsV2, requestOptions, bodyString)
     }

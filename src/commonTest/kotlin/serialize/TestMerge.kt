@@ -2,7 +2,6 @@ package serialize
 
 import com.algolia.search.serialize.merge
 import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.json
 import shouldContainKey
 import shouldContainValue
 import kotlin.test.Test

@@ -28,7 +28,7 @@ internal class EndpointIndexImpl(
         requestOptions: RequestOptions?
     ): RevisionIndex {
         val request = RequestCopyOrMove(key, destination, scopes)
-        val body = JsonNoDefaults.stringify(RequestCopyOrMove.serializer(), request)
+        val body = JsonNoDefaults.encodeToString(RequestCopyOrMove.serializer(), request)
 
         return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/operation"), requestOptions, body)
     }

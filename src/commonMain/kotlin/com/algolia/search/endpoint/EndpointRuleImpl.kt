@@ -17,7 +17,7 @@ import com.algolia.search.serialize.RouteRules
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 
 internal class EndpointRuleImpl(
     private val transport: Transport,
@@ -30,7 +30,7 @@ internal class EndpointRuleImpl(
         requestOptions: RequestOptions?
     ): RevisionIndex {
         val path = indexName.toPath("/$RouteRules/${rule.objectID}")
-        val body = JsonNoDefaults.stringify(Rule.serializer(), rule)
+        val body = JsonNoDefaults.encodeToString(Rule.serializer(), rule)
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)
         }
@@ -61,7 +61,7 @@ internal class EndpointRuleImpl(
         requestOptions: RequestOptions?
     ): ResponseSearchRules {
         val path = indexName.toPath("/$RouteRules/search")
-        val body = JsonNoDefaults.stringify(RuleQuery.serializer(), query)
+        val body = JsonNoDefaults.encodeToString(RuleQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }
@@ -87,7 +87,7 @@ internal class EndpointRuleImpl(
         requestOptions: RequestOptions?
     ): RevisionIndex {
         if (rules.isEmpty()) throw EmptyListException("rules")
-        val body = JsonNoDefaults.stringify(Rule.serializer().list, rules)
+        val body = JsonNoDefaults.encodeToString(ListSerializer(Rule.serializer()), rules)
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)
             parameter(KeyClearExistingRules, clearExistingRules)

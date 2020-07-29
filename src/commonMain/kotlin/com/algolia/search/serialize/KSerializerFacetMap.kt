@@ -3,20 +3,24 @@ package com.algolia.search.serialize
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Facet
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
-import kotlinx.serialization.StructureKind
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.mapDescriptor
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.StructureKind
+import kotlinx.serialization.descriptors.buildSerialDescriptor
+import kotlinx.serialization.descriptors.mapSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 public object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
 
-    override val descriptor: SerialDescriptor = SerialDescriptor(Attribute.descriptor.serialName, StructureKind.MAP) {
-        mapDescriptor(String.serializer().descriptor, Int.serializer().descriptor)
-    }
+    @OptIn(InternalSerializationApi::class)
+    override val descriptor: SerialDescriptor =
+        buildSerialDescriptor(Attribute.descriptor.serialName, StructureKind.MAP) {
+            mapSerialDescriptor(String.serializer().descriptor, Int.serializer().descriptor)
+        }
 
     private val serializer = MapSerializer(
         String.serializer(),
@@ -30,7 +34,8 @@ public object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
     }
 
     override fun deserialize(decoder: Decoder): Map<Attribute, List<Facet>> {
-        val json = JsonNonStrict.fromJson(serializer, decoder.asJsonInput())
+        decoder.asJsonInput()
+        val json = JsonNonStrict.decodeFromJsonElement(serializer, decoder.asJsonInput())
 
         return json.map { (key, value) -> key.toAttribute() to value.map { Facet(it.key, it.value) } }.toMap()
     }

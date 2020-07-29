@@ -12,7 +12,6 @@ import com.algolia.search.model.apikey.getSecuredApiKeyRemainingValidity
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.features.ResponseException
-import kotlinx.serialization.json.json
 import runBlocking
 import shouldBeTrue
 import shouldEqual

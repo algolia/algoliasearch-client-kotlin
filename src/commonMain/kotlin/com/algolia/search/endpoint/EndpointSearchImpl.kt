@@ -28,7 +28,8 @@ import com.algolia.search.serialize.urlEncode
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 
 internal class EndpointSearchImpl(
     private val transport: Transport,
@@ -69,7 +70,7 @@ internal class EndpointSearchImpl(
 
     override suspend fun browse(query: Query, requestOptions: RequestOptions?): ResponseSearch {
         val params = RequestParams(query.toJsonNoDefaults().urlEncode())
-        val body = JsonNoDefaults.stringify(RequestParams.serializer(), params)
+        val body = JsonNoDefaults.encodeToString(RequestParams.serializer(), params)
 
         return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/browse"), requestOptions, body)
     }
@@ -89,8 +90,8 @@ internal class EndpointSearchImpl(
         requestOptions: RequestOptions?
     ): ResponseSearchForFacets {
         val path = indexName.toPath("/facets/$attribute/query")
-        val extraParams = json {
-            facetQuery?.let { KeyFacetQuery to it }
+        val extraParams = buildJsonObject {
+            facetQuery?.let { put(KeyFacetQuery, it) }
         }
         val body = query.toJsonNoDefaults().merge(extraParams).toString()
 

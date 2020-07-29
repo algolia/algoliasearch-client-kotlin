@@ -11,7 +11,6 @@ import com.algolia.search.model.multipleindex.BatchOperationIndex
 import documentation.client
 import documentation.indexName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.json
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test

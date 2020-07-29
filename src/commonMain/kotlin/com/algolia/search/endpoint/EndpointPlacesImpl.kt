@@ -26,7 +26,7 @@ internal class EndpointPlacesImpl(
         query: PlacesQuery,
         requestOptions: RequestOptions?
     ): ResponseSearchPlacesMulti {
-        val body = JsonNoDefaults.stringify(PlacesQuery.serializer(), query)
+        val body = JsonNoDefaults.encodeToString(PlacesQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, "$RoutePlaces/query", requestOptions, body)
     }
@@ -37,7 +37,7 @@ internal class EndpointPlacesImpl(
         requestOptions: RequestOptions?
     ): ResponseSearchPlacesMono {
         val copy = query.copy().apply { this.language = language }
-        val body = JsonNoDefaults.stringify(PlacesQuery.serializer(), copy)
+        val body = JsonNoDefaults.encodeToString(PlacesQuery.serializer(), copy)
 
         return transport.request(HttpMethod.Post, CallType.Read, "$RoutePlaces/query", requestOptions, body)
     }

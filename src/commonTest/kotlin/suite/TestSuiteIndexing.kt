@@ -11,7 +11,6 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.Json
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.json
 import runBlocking
 import shouldBeTrue
 import shouldEqual

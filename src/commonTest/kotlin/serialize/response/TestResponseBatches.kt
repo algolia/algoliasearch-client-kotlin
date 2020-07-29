@@ -6,7 +6,6 @@ import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.serialize.KeyTaskID
 import indexA
 import indexB
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
 internal class TestResponseBatches : TestSerializer<ResponseBatches>(ResponseBatches) {

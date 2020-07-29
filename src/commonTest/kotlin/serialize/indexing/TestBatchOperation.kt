@@ -22,7 +22,6 @@ import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.KeyPartialUpdateObject
 import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
 import com.algolia.search.serialize.KeyUpdateObject
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 import shouldEqual
 import unknown

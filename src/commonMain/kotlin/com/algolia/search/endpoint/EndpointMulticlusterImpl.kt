@@ -24,7 +24,8 @@ import com.algolia.search.serialize.RouteClustersV1
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 
 internal class EndpointMulticlusterImpl(
     private val transport: Transport
@@ -40,7 +41,7 @@ internal class EndpointMulticlusterImpl(
         clusterName: ClusterName,
         requestOptions: RequestOptions?
     ): Creation {
-        val body = json { KeyCluster to clusterName.raw }.toString()
+        val body = buildJsonObject { put(KeyCluster, clusterName.raw) }.toString()
         val options = requestOptionsBuilder(requestOptions) {
             header(KeyAlgoliaUserID, userID.raw)
         }
@@ -81,7 +82,7 @@ internal class EndpointMulticlusterImpl(
         requestOptions: RequestOptions?
     ): ResponseSearchUserID {
         val path = "$RouteClustersV1/mapping/search"
-        val body = JsonNoDefaults.stringify(UserIDQuery.serializer(), query)
+        val body = JsonNoDefaults.encodeToString(UserIDQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }
@@ -93,7 +94,7 @@ internal class EndpointMulticlusterImpl(
     ): Creation {
         val path = "$RouteClustersV1/mapping/batch"
         val request = RequestAssignUserIDs(clusterName, userIDs)
-        val body = JsonNoDefaults.stringify(RequestAssignUserIDs.serializer(), request)
+        val body = JsonNoDefaults.encodeToString(RequestAssignUserIDs.serializer(), request)
 
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }

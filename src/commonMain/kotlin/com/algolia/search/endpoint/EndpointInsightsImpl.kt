@@ -19,7 +19,7 @@ internal class EndpointInsightsImpl(
     }
 
     override suspend fun sendEvents(events: List<InsightsEvent>, requestOptions: RequestOptions?): HttpResponse {
-        val body = JsonNoDefaults.stringify(RequestInsightsEvents.serializer(), RequestInsightsEvents(events))
+        val body = JsonNoDefaults.encodeToString(RequestInsightsEvents.serializer(), RequestInsightsEvents(events))
 
         return transport.request(HttpMethod.Post, CallType.Write, RouteEventsV1, requestOptions, body)
     }

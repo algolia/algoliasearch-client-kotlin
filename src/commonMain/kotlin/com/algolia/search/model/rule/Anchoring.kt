@@ -6,12 +6,12 @@ import com.algolia.search.serialize.KeyContains
 import com.algolia.search.serialize.KeyEndsWith
 import com.algolia.search.serialize.KeyIs
 import com.algolia.search.serialize.KeyStartsWith
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(Anchoring.Companion::class)
 public sealed class Anchoring(override val raw: String) : Raw<String> {

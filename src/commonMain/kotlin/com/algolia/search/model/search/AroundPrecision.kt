@@ -4,16 +4,20 @@ import com.algolia.search.serialize.KeyFrom
 import com.algolia.search.serialize.KeyValue
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.int
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
 
 /**
  * Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
@@ -39,18 +43,18 @@ public sealed class AroundPrecision {
 
         override fun serialize(encoder: Encoder, value: AroundPrecision) {
             val json = when (value) {
-                is Int -> JsonLiteral(value.value)
-                is Ranges -> jsonArray {
+                is Int -> JsonPrimitive(value.value)
+                is Ranges -> buildJsonArray {
                     value.list.forEach {
-                        +json {
-                            KeyFrom to it.first
-                            KeyValue to it.endInclusive
-                        }
+                        add(buildJsonObject {
+                            put(KeyFrom, it.first)
+                            put(KeyValue, it.last)
+                        })
                     }
                 }
                 is Other -> value.raw
             }
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJsonElement(json)
         }
 
         override fun deserialize(decoder: Decoder): AroundPrecision {
@@ -59,11 +63,11 @@ public sealed class AroundPrecision {
                     val pair = it.jsonObject
 
                     IntRange(
-                        pair.getPrimitive(KeyFrom).int,
-                        pair.getPrimitive(KeyValue).int
+                        pair.getValue(KeyFrom).jsonPrimitive.int,
+                        pair.getValue(KeyValue).jsonPrimitive.int
                     )
                 })
-                is JsonLiteral -> Int(json.int)
+                is JsonPrimitive -> Int(json.int)
                 else -> Other(json)
             }
         }

@@ -8,7 +8,6 @@ import com.algolia.search.serialize.KeyCustomSearchParameters
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyPercentage
 import indexA
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
 internal class TestKSerializerVariant : TestSerializer<Variant>(KSerializerVariant) {

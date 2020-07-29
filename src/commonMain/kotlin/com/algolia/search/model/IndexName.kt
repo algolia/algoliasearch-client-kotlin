@@ -5,12 +5,12 @@ import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.StringUTF8
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.serialize.RouteIndexesV1
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * [IndexName] of an [Index]. Can't be a blank or empty string.

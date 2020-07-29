@@ -9,13 +9,14 @@ import com.algolia.search.serialize.KeyStrategy
 import com.algolia.search.serialize.asJsonOutput
 import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.serialize.urlEncode
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 
 @Serializable(RequestMultipleQueries.Companion::class)
 internal class RequestMultipleQueries(
@@ -27,18 +28,18 @@ internal class RequestMultipleQueries(
     public companion object : SerializationStrategy<RequestMultipleQueries> {
 
         override fun serialize(encoder: Encoder, value: RequestMultipleQueries) {
-            val json = json {
-                KeyRequests to jsonArray {
+            val json = buildJsonObject {
+                put(KeyRequests, buildJsonArray {
                     value.indexQueries.forEach {
-                        +json {
-                            KeyIndexName to it.indexName.raw
-                            it.query.toJsonNoDefaults().urlEncode()?.let { KeyParams to it }
-                        }
+                        add(buildJsonObject {
+                            put(KeyIndexName, it.indexName.raw)
+                            it.query.toJsonNoDefaults().urlEncode()?.let { put(KeyParams, it) }
+                        })
                     }
-                }
-                value.strategy?.let { KeyStrategy to it.raw }
+                })
+                value.strategy?.let { put(KeyStrategy, it.raw) }
             }
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJsonElement(json)
         }
     }
 }

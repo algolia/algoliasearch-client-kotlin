@@ -3,12 +3,12 @@ package com.algolia.search.model.insights
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toEventName
 import com.algolia.search.model.Raw
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * [EventName] of an [InsightsEvent]. Can't be a blank or empty string.

@@ -6,7 +6,6 @@ import com.algolia.search.serialize.KeyFullyHighlighted
 import com.algolia.search.serialize.KeyMatchLevel
 import com.algolia.search.serialize.KeyMatchedWords
 import com.algolia.search.serialize.KeyValue
-import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 

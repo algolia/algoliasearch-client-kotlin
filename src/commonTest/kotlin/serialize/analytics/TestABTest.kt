@@ -11,7 +11,6 @@ import com.algolia.search.serialize.KeyName
 import com.algolia.search.serialize.KeyVariants
 import indexA
 import indexB
-import kotlinx.serialization.json.json
 import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 import unknown

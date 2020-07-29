@@ -5,7 +5,6 @@ import com.algolia.search.model.search.MatchedGeoLocation
 import com.algolia.search.serialize.KeyDistance
 import com.algolia.search.serialize.KeyLat
 import com.algolia.search.serialize.KeyLng
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 
 internal class TestMatchedGeoLocation : TestSerializer<MatchedGeoLocation>(MatchedGeoLocation) {

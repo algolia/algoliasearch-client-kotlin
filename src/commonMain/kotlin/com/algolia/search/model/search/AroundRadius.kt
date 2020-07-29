@@ -4,15 +4,15 @@ import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyAll
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.content
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.intOrNull
+import kotlinx.serialization.json.jsonPrimitive
 
 /**
  * Define the maximum radius for a geo search (in meters).
@@ -48,17 +48,17 @@ public sealed class AroundRadius(override val raw: String) : Raw<String> {
                 else -> JsonPrimitive(value.raw)
             }
 
-            encoder.asJsonOutput().encodeJson(element)
+            encoder.asJsonOutput().encodeJsonElement(element)
         }
 
         override fun deserialize(decoder: Decoder): AroundRadius {
             val element = decoder.asJsonInput()
 
             return when {
-                element.intOrNull != null -> InMeters(element.int)
-                else -> when (element.content) {
+                element.jsonPrimitive.intOrNull != null -> InMeters(element.jsonPrimitive.int)
+                else -> when (element.jsonPrimitive.content) {
                     KeyAll -> All
-                    else -> Other(element.content)
+                    else -> Other(element.jsonPrimitive.content)
                 }
             }
         }

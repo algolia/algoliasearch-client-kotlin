@@ -1,16 +1,17 @@
 package com.algolia.search.serialize
 
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
 import kotlinx.serialization.Serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 public typealias GeoDistance = Int
 
 @Serializer(forClass = GeoDistance::class)
 public object KSerializerGeoDistance : KSerializer<GeoDistance> {
-    override val descriptor: SerialDescriptor = SerialDescriptor("GeoDistance")
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("GeoDistance")
 
     override fun serialize(encoder: Encoder, value: GeoDistance) {
         try {

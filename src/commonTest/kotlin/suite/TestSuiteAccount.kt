@@ -12,7 +12,6 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
-import kotlinx.serialization.json.json
 import runBlocking
 import shouldBeTrue
 import shouldEqual

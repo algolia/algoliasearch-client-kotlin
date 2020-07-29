@@ -16,9 +16,8 @@ import com.algolia.search.serialize.KeySynonym
 import com.algolia.search.serialize.KeySynonyms
 import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.KeyWord
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.json.json
 import serialize.TestSerializer
 import unknown
 
@@ -27,7 +26,7 @@ internal class TestSynonym : TestSerializer<Synonym>(Synonym) {
     private val objectID = ObjectID("objectID")
     private val json = json { KeyObjectID to objectID.raw }
     private val strings = listOf("iPhone", "samsung")
-    private val array = Json.toJson(String.serializer().list, strings)
+    private val array = Json.toJson(ListSerializer(String.serializer()), strings)
 
     override val items = listOf(
         Synonym.OneWay(objectID, unknown, strings) to json {
