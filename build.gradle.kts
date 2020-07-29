@@ -20,7 +20,6 @@ plugins {
     id("kotlinx-serialization") version "1.4.0-rc"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
-    id("com.github.kukuhyoniatmoko.buildconfigkotlin") version "1.0.5"
 }
 
 apply(plugin = "com.android.library")
@@ -77,12 +76,6 @@ extensions.getByType(LibraryExtension::class.java).apply {
     testOptions.unitTests.isIncludeAndroidResources = true
 }
 
-buildConfigKotlin {
-    sourceSet("metadata") {
-        buildConfig(name = "version", value = Library.version)
-    }
-}
-
 kotlin {
     explicitApi()
     jvm {
@@ -108,9 +101,8 @@ kotlin {
             languageSettings.progressiveMode = true
         }
         val commonMain by getting {
-            kotlin.srcDirs("build/generated")
+            kotlin.srcDirs("$buildDir/generated/sources/templates/kotlin/main")
             dependencies {
-                api(kotlin("stdlib-common"))
                 api(Ktor("client"))
                 api(Ktor("client-logging"))
                 api(Ktor("client-core"))
@@ -127,7 +119,6 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                api(kotlin("stdlib-jdk8"))
                 api(Ktor("client-core-jvm"))
                 api(Ktor("client-json-jvm"))
                 api(Ktor("client-logging-jvm"))
@@ -146,7 +137,6 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
-                api(kotlin("stdlib-jdk8"))
                 api(Ktor("client-core-jvm"))
                 api(Ktor("client-json-jvm"))
                 api(Ktor("client-logging-jvm"))
@@ -244,7 +234,14 @@ tasks {
         }
     }
     withType<KotlinCompile> {
-        dependsOn("generateMetadataBuildConfigKotlin")
+        dependsOn("copyTemplates")
+    }
+
+    register(name = "copyTemplates", type = Copy::class) {
+        from("src/commonMain/templates")
+        into("$buildDir/generated/sources/templates/kotlin/main")
+        expand("projectVersion" to Library.version)
+        filteringCharset = "UTF-8"
     }
 }
 
