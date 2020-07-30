@@ -14,6 +14,7 @@ import com.algolia.search.serialize.KeyValue
 import com.algolia.search.serialize.Key_Operation
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.jsonPrimitiveOrNull
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.encoding.Decoder
@@ -24,7 +25,6 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 
 /**
@@ -175,7 +175,7 @@ public sealed class Partial {
             val element = decoder.asJsonInput().jsonObject
             val key = element.keys.first()
             val attribute = key.toAttribute()
-            val operation = element.getValue(key).jsonObject[Key_Operation]?.jsonPrimitive?.content
+            val operation = element.getValue(key).jsonObject[Key_Operation]?.jsonPrimitiveOrNull?.content
             val jsonElement = element.getValue(key).jsonObject.getValue(KeyValue)
 
             return when (operation) {

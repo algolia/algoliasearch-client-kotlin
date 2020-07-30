@@ -18,7 +18,9 @@ import com.algolia.search.serialize.KeyRemoveLowercase
 import com.algolia.search.serialize.KeyUserData
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.jsonArrayOrNull
 import com.algolia.search.serialize.jsonObjectOrNull
+import com.algolia.search.serialize.jsonPrimitiveOrNull
 import com.algolia.search.serialize.toJsonNoDefaults
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -30,7 +32,6 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
@@ -86,23 +87,23 @@ public data class Consequence(
         }
 
         private fun JsonObject.getFilters(key: String): List<AutomaticFacetFilters>? {
-            return this[key]?.jsonArray?.let { JsonNoDefaults.decodeFromJsonElement(serializer, it) }
+            return this[key]?.jsonArrayOrNull?.let { JsonNoDefaults.decodeFromJsonElement(serializer, it) }
         }
 
         private fun JsonObject.getPromotions(): List<Promotion>? {
-            return this[KeyPromote]?.jsonArray?.let {
+            return this[KeyPromote]?.jsonArrayOrNull?.let {
                 Json.decodeFromJsonElement(ListSerializer(Promotion.serializer()), it)
             }
         }
 
         private fun JsonObject.getObjectIDs(): List<ObjectID>? {
-            return this[KeyHide]?.jsonArray?.let { Json.decodeFromJsonElement(KSerializerObjectIDs, it) }
+            return this[KeyHide]?.jsonArrayOrNull?.let { Json.decodeFromJsonElement(KSerializerObjectIDs, it) }
         }
 
         private fun JsonObject.getEdits(): List<Edit>? {
             return this[KeyQuery]?.jsonObjectOrNull?.let { local ->
-                local[KeyEdits]?.jsonArray?.let { Json.decodeFromJsonElement(ListSerializer(Edit), it) }
-                    ?: local[KeyRemoveLowercase]?.jsonArray?.map { Edit(it.jsonPrimitive.content) }
+                local[KeyEdits]?.jsonArrayOrNull?.let { Json.decodeFromJsonElement(ListSerializer(Edit), it) }
+                    ?: local[KeyRemoveLowercase]?.jsonArrayOrNull?.map { Edit(it.jsonPrimitive.content) }
             }
         }
 
@@ -146,15 +147,15 @@ public data class Consequence(
 
         override fun deserialize(decoder: Decoder): Consequence {
             val json = decoder.asJsonInput().jsonObject
-            val params = json[KeyParams]?.jsonObject
+            val params = json[KeyParams]?.jsonObjectOrNull
             val automaticFacetFilters = params?.getFilters(KeyAutomaticFacetFilters)
             val automaticOptionalFacetFilters = params?.getFilters(KeyAutomaticOptionalFacetFilters)
             val promote = json.getPromotions()
             val hide = json.getObjectIDs()
-            val userData = json[KeyUserData]?.jsonObject
+            val userData = json[KeyUserData]?.jsonObjectOrNull
             val edits = params?.getEdits()
             val query = params?.extractQuery(edits)
-            val filterPromotes = json[KeyFilterPromotes]?.jsonPrimitive?.booleanOrNull
+            val filterPromotes = json[KeyFilterPromotes]?.jsonPrimitiveOrNull?.booleanOrNull
 
             return Consequence(
                 automaticFacetFilters = automaticFacetFilters,

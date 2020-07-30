@@ -57,6 +57,8 @@ import com.algolia.search.serialize.Key_RankingInfo
 import com.algolia.search.serialize.Key_SnippetResult
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.jsonObjectOrNull
+import com.algolia.search.serialize.jsonPrimitiveOrNull
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
@@ -68,7 +70,6 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
 
 @Serializable
 public data class ResponseSearch(
@@ -321,7 +322,7 @@ public data class ResponseSearch(
         level = DeprecationLevel.WARNING
     )
     public fun getObjectIDPosition(objectID: ObjectID): Int {
-        return hits.indexOfFirst { it.json["objectID"]?.jsonPrimitive?.content == objectID.raw }
+        return hits.indexOfFirst { it.json["objectID"]?.jsonPrimitiveOrNull?.content == objectID.raw }
     }
 
     /**
@@ -329,7 +330,7 @@ public data class ResponseSearch(
      * If the [objectID] is not found, -1 is returned.
      */
     public fun getObjectPosition(objectID: ObjectID): Int {
-        return hits.indexOfFirst { it.json["objectID"]?.jsonPrimitive?.content == objectID.raw }
+        return hits.indexOfFirst { it.json["objectID"]?.jsonPrimitiveOrNull?.content == objectID.raw }
     }
 
     /**
@@ -340,15 +341,15 @@ public data class ResponseSearch(
         val json: JsonObject
     ) : Map<String, JsonElement> by json {
 
-        public val distinctSeqIDOrNull: Int? = json[Key_DistinctSeqID]?.jsonPrimitive?.int
+        public val distinctSeqIDOrNull: Int? = json[Key_DistinctSeqID]?.jsonPrimitiveOrNull?.int
 
-        public val rankingInfoOrNull: RankingInfo? = json[Key_RankingInfo]?.jsonObject?.let {
+        public val rankingInfoOrNull: RankingInfo? = json[Key_RankingInfo]?.jsonObjectOrNull?.let {
             JsonNonStrict.decodeFromJsonElement(RankingInfo.serializer(), it)
         }
 
-        public val highlightResultOrNull: JsonObject? = json[Key_HighlightResult]?.jsonObject
+        public val highlightResultOrNull: JsonObject? = json[Key_HighlightResult]?.jsonObjectOrNull
 
-        public val snippetResultOrNull: JsonObject? = json[Key_SnippetResult]?.jsonObject
+        public val snippetResultOrNull: JsonObject? = json[Key_SnippetResult]?.jsonObjectOrNull
 
         public val rankingInfo: RankingInfo
             get() = rankingInfoOrNull!!

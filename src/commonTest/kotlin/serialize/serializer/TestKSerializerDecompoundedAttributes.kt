@@ -8,7 +8,6 @@ import com.algolia.search.serialize.KSerializerDecompoundedAttributes
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.jsonArray
 import serialize.TestSerializer
 
 internal class TestKSerializerDecompoundedAttributes :

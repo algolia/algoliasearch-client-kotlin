@@ -8,6 +8,7 @@ import com.algolia.search.serialize.KeyReplace
 import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.jsonPrimitiveOrNull
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -49,7 +50,7 @@ public data class Edit(
 
             return Edit(
                 json.getValue(KeyDelete).jsonPrimitive.content,
-                json[KeyInsert]?.jsonPrimitive?.content
+                json[KeyInsert]?.jsonPrimitiveOrNull?.content
             )
         }
     }

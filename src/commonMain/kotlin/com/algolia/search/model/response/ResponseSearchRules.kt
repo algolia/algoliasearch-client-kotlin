@@ -9,6 +9,7 @@ import com.algolia.search.serialize.KeyNbPages
 import com.algolia.search.serialize.KeyPage
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.jsonObjectOrNull
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -52,7 +53,7 @@ public data class ResponseSearchRules(
             override fun deserialize(decoder: Decoder): Hit {
                 val json = decoder.asJsonInput().jsonObject
                 val rule = JsonNonStrict.decodeFromJsonElement(Rule.serializer(), json)
-                val highlightResult = json[Key_HighlightResult]?.jsonObject
+                val highlightResult = json[Key_HighlightResult]?.jsonObjectOrNull
 
                 return Hit(rule, highlightResult)
             }
