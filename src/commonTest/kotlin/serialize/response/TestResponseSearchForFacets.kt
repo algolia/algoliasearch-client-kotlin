@@ -10,8 +10,6 @@ import com.algolia.search.serialize.KeyProcessingTimeMS
 import com.algolia.search.serialize.KeyValue
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.put
 import serialize.TestSerializer
 import unknown

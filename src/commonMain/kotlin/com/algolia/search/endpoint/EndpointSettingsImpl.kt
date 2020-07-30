@@ -42,14 +42,14 @@ internal class EndpointSettingsImpl(
         val numericAttributesToIndex = json[KeyNumericAttributesToIndex]?.jsonArrayOrNull?.let {
             Json.decodeFromJsonElement(ListSerializer(NumericAttributeFilter), it)
         }
-        val slaves = json[KeySlaves]?.jsonArrayOrNull?.let {
+        val replicas = json[KeySlaves]?.jsonArrayOrNull?.let {
             Json.decodeFromJsonElement(ListSerializer(IndexName), it)
         }
 
         return settings.copy(
             searchableAttributes = settings.searchableAttributes ?: attributesToIndex,
             numericAttributesForFiltering = settings.numericAttributesForFiltering ?: numericAttributesToIndex,
-            replicas = settings.replicas ?: slaves
+            replicas = settings.replicas ?: replicas
         )
     }
 

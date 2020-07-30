@@ -11,6 +11,7 @@ import com.algolia.search.serialize.KeyObjectIDs
 import com.algolia.search.serialize.KeyTaskID
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.jsonArrayOrNull
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -21,7 +22,6 @@ import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.contentOrNull
-import kotlinx.serialization.json.jsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.long
@@ -63,7 +63,7 @@ public data class ResponseBatches(
             val taskIDs = element.getValue(KeyTaskID).jsonObject.map { (key, entry) ->
                 TaskIndex(key.toIndexName(), entry.jsonPrimitive.long.toTaskID())
             }
-            val objectIDs = element[KeyObjectIDs]?.jsonArray?.map { it.jsonPrimitive.contentOrNull?.toObjectID() }
+            val objectIDs = element[KeyObjectIDs]?.jsonArrayOrNull?.map { it.jsonPrimitive.contentOrNull?.toObjectID() }
 
             return ResponseBatches(taskIDs, objectIDs)
         }

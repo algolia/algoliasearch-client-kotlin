@@ -11,7 +11,6 @@ import com.algolia.search.serialize.KeyAnchoring
 import com.algolia.search.serialize.KeyIs
 import com.algolia.search.serialize.KeyPattern
 import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.json
 import kotlinx.serialization.json.put
 import serialize.TestSerializer
 import unknown
