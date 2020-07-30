@@ -12,7 +12,8 @@ import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.search.Query
 import documentation.index
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.add
+import kotlinx.serialization.json.buildJsonArray
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -40,9 +41,9 @@ internal class GuideRestrictSubset {
                 ObjectID("myID1"),
                 Partial.Update(
                     Attribute("viewable_bly"),
-                    jsonArray {
-                        +(1 as Number)
-                        +(2 as Number)
+                    buildJsonArray {
+                        add((1 as Number))
+                        add((2 as Number))
                     }
                 )
             )

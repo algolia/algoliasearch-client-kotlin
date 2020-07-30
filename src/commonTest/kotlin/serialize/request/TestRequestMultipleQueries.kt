@@ -13,7 +13,9 @@ import com.algolia.search.serialize.KeyRequests
 import com.algolia.search.serialize.KeyStrategy
 import indexA
 import indexB
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import shouldEqual
 import kotlin.test.Test
 
@@ -28,28 +30,28 @@ internal class TestRequestMultipleQueries {
             ),
             strategy = MultipleQueriesStrategy.StopIfEnoughMatches
         )
-        val serialized = Json.toJson(RequestMultipleQueries, request)
+        val serialized = Json.encodeToJsonElement(RequestMultipleQueries, request)
 
-        serialized shouldEqual json {
-            KeyRequests to jsonArray {
-                +json {
-                    KeyIndexName to indexA.raw
-                    KeyParams to "facets=%5B%22attributeA%22%5D"
-                }
-                +json {
-                    KeyIndexName to indexB.raw
-                    KeyParams to "facets=%5B%22attributeA%22%2C%22attributeB%22%5D"
-                }
-            }
-            KeyStrategy to MultipleQueriesStrategy.StopIfEnoughMatches.raw
+        serialized shouldEqual buildJsonObject {
+            put(KeyRequests, buildJsonArray {
+                add(buildJsonObject {
+                    put(KeyIndexName, indexA.raw)
+                    put(KeyParams, "facets=%5B%22attributeA%22%5D")
+                })
+                add(buildJsonObject {
+                    put(KeyIndexName, indexB.raw)
+                    put(KeyParams, "facets=%5B%22attributeA%22%2C%22attributeB%22%5D")
+                })
+            })
+            put(KeyStrategy, MultipleQueriesStrategy.StopIfEnoughMatches.raw)
         }
     }
 
     @Test
     fun testNoStrategy() {
         val request = RequestMultipleQueries(indexQueries = listOf())
-        val serialized = Json.toJson(RequestMultipleQueries, request)
+        val serialized = Json.encodeToJsonElement(RequestMultipleQueries, request)
 
-        serialized shouldEqual json { KeyRequests to jsonArray {} }
+        serialized shouldEqual buildJsonObject { put(KeyRequests, buildJsonArray {}) }
     }
 }

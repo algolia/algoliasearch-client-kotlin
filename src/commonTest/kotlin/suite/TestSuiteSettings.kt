@@ -8,6 +8,8 @@ import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.TaskStatus
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import shouldEqual
 import kotlin.test.Test
@@ -24,7 +26,7 @@ internal class TestSuiteSettings {
             val settings = load(Settings.serializer(), "settings.json")
 
             index.apply {
-                saveObject(json { "value" to 42 })
+                saveObject(buildJsonObject { put("value", 42) })
                 setSettings(settings).wait() shouldEqual TaskStatus.Published
                 getSettings() shouldEqual settings
 
@@ -33,11 +35,16 @@ internal class TestSuiteSettings {
                     ignorePlurals = IgnorePlurals.QueryLanguages(Language.English, Language.French),
                     removeStopWords = RemoveStopWords.QueryLanguages(Language.English, Language.French),
                     distinct = Distinct(1),
-                    userData = json { "customUserData" to 42.0 }
+                    userData = buildJsonObject { put("customUserData", 42.0) }
                 )
                 setSettings(copy).wait() shouldEqual TaskStatus.Published
                 getSettings() shouldEqual copy.copy(
-                    userData = json { "customUserData" to 42 } // Round value expected to deserialize as int
+                    userData = buildJsonObject {
+                        put(
+                            "customUserData",
+                            42
+                        )
+                    } // Round value expected to deserialize as int
                 )
             }
         }

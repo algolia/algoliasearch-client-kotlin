@@ -6,15 +6,15 @@ import com.algolia.search.model.settings.AdvancedSyntaxFeatures.ExcludeWords
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures.Other
 import com.algolia.search.serialize.KeyExactPhrase
 import com.algolia.search.serialize.KeyExcludeWords
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.JsonPrimitive
 import serialize.TestSerializer
 import unknown
 
 internal class TestAdvancedSyntaxFeatures : TestSerializer<AdvancedSyntaxFeatures>(AdvancedSyntaxFeatures) {
 
     override val items = listOf(
-        ExcludeWords to JsonLiteral(KeyExcludeWords),
-        ExactPhrase to JsonLiteral(KeyExactPhrase),
-        Other(unknown) to JsonLiteral(unknown)
+        ExcludeWords to JsonPrimitive(KeyExcludeWords),
+        ExactPhrase to JsonPrimitive(KeyExactPhrase),
+        Other(unknown) to JsonPrimitive(unknown)
     )
 }

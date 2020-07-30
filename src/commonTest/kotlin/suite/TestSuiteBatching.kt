@@ -29,7 +29,7 @@ internal class TestSuiteBatching {
                 batch(batches).wait() shouldEqual TaskStatus.Published
                 val hits = browse().hits.map { it.json }
 
-                JsonDebug.stringify(ListSerializer(JsonObjectSerializer), hits) shouldEqual expected
+                JsonDebug.encodeToString(ListSerializer(JsonObjectSerializer), hits) shouldEqual expected
             }
         }
     }

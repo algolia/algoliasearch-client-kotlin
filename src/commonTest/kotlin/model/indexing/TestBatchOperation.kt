@@ -15,13 +15,14 @@ import com.algolia.search.serialize.KeyDeleteObject
 import com.algolia.search.serialize.KeyPartialUpdateObject
 import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
 import com.algolia.search.serialize.KeyUpdateObject
+import kotlinx.serialization.json.buildJsonObject
 import shouldEqual
 import unknown
 import kotlin.test.Test
 
 internal class TestBatchOperation {
 
-    private val json = json {}
+    private val json = buildJsonObject {}
     private val objectID = ObjectID(unknown)
 
     @Test

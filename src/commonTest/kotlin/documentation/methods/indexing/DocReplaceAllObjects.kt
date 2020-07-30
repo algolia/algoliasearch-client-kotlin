@@ -3,6 +3,8 @@ package documentation.methods.indexing
 import documentation.client
 import documentation.index
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -24,13 +26,13 @@ internal class DocReplaceAllObjects {
         runBlocking {
             // With JsonObject
             val json = listOf(
-                json {
-                    "firstname" to "Jimmie"
-                    "lastname" to "Barninger"
+                buildJsonObject {
+                    put("firstname", "Jimmie")
+                    put("lastname", "Barninger")
                 },
-                json {
-                    "firstname" to "Warren"
-                    "lastname" to "Speach"
+                buildJsonObject {
+                    put("firstname", "Warren")
+                    put("lastname", "Speach")
                 }
             )
 
@@ -54,13 +56,13 @@ internal class DocReplaceAllObjects {
         runBlocking {
             client.apply {
                 val json = listOf(
-                    json {
-                        "firstname" to "Jimmie"
-                        "lastname" to "Barninger"
+                    buildJsonObject {
+                        put("firstname", "Jimmie")
+                        put("lastname", "Barninger")
                     },
-                    json {
-                        "firstname" to "Warren"
-                        "lastname" to "Speach"
+                    buildJsonObject {
+                        put("firstname", "Warren")
+                        put("lastname", "Speach")
                     }
                 )
 

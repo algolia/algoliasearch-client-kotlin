@@ -29,6 +29,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -139,14 +141,14 @@ internal class DocPhilosophy {
                 val lastname: String
             )
 
-            val json: JsonObject = json {
-                "firstname" to "Jimmie"
-                "lastname" to "Barninger"
+            val json: JsonObject = buildJsonObject {
+                put("firstname", "Jimmie")
+                put("lastname", "Barninger")
             }
 
-            val contact: Contact = Json.fromJson(Contact.serializer(), json)
+            val contact: Contact = Json.decodeFromJsonElement(Contact.serializer(), json)
             // Or with Json.nonstrict
-            val contactNonStrict: Contact = JsonNonStrict.fromJson(Contact.serializer(), json)
+            val contactNonStrict: Contact = JsonNonStrict.decodeFromJsonElement(Contact.serializer(), json)
         }
     }
 

@@ -34,7 +34,7 @@ public object KSerializerVariant : KSerializer<Variant> {
 
     override fun deserialize(decoder: Decoder): Variant {
         val json = decoder.asJsonInput().jsonObject
-        val customSearchParameters = json[KeyCustomSearchParameters]?.jsonObject
+        val customSearchParameters = json[KeyCustomSearchParameters]?.jsonObjectOrNull
 
         return Variant(
             indexName = json.getValue(KeyIndexName).jsonPrimitive.content.toIndexName(),

@@ -6,18 +6,18 @@ import com.algolia.search.serialize.KeyAlternativeCorrection2
 import com.algolia.search.serialize.KeyOneWaySynonym
 import com.algolia.search.serialize.KeyPlaceholder
 import com.algolia.search.serialize.KeySynonym
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.JsonPrimitive
 import serialize.TestSerializer
 import unknown
 
 internal class TestSynonymType : TestSerializer<SynonymType>(SynonymType) {
 
     override val items = listOf(
-        SynonymType.OneWay to JsonLiteral(KeyOneWaySynonym),
-        SynonymType.MultiWay to JsonLiteral(KeySynonym),
-        SynonymType.AlternativeCorrections(SynonymType.Typo.One) to JsonLiteral(KeyAlternativeCorrection1),
-        SynonymType.AlternativeCorrections(SynonymType.Typo.Two) to JsonLiteral(KeyAlternativeCorrection2),
-        SynonymType.Placeholder to JsonLiteral(KeyPlaceholder),
-        SynonymType.Other(unknown) to JsonLiteral(unknown)
+        SynonymType.OneWay to JsonPrimitive(KeyOneWaySynonym),
+        SynonymType.MultiWay to JsonPrimitive(KeySynonym),
+        SynonymType.AlternativeCorrections(SynonymType.Typo.One) to JsonPrimitive(KeyAlternativeCorrection1),
+        SynonymType.AlternativeCorrections(SynonymType.Typo.Two) to JsonPrimitive(KeyAlternativeCorrection2),
+        SynonymType.Placeholder to JsonPrimitive(KeyPlaceholder),
+        SynonymType.Other(unknown) to JsonPrimitive(unknown)
     )
 }

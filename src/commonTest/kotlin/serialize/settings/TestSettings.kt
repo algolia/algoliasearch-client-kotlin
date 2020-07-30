@@ -83,7 +83,10 @@ import com.algolia.search.serialize.toJsonNoDefaults
 import indexA
 import int
 import kotlinx.serialization.json.JsonNull
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.add
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import serialize.TestSerializer
 import serialize.search.TestSnippet
 import shouldEqual
@@ -161,89 +164,87 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             maxFacetHits = int,
             version = int,
             advancedSyntaxFeatures = listOf(AdvancedSyntaxFeatures.ExcludeWords, AdvancedSyntaxFeatures.ExactPhrase),
-            userData = json { unknown to unknown },
+            userData = buildJsonObject { put(unknown, unknown) },
             indexLanguages = listOf(Language.Japanese),
             customNormalization = mapOf(unknown to mapOf(unknown to unknown)),
             enablePersonalization = true
-        ) to json {
+        ) to buildJsonObject {
             // Attributes
-            KeySearchableAttributes to attributesJson
-            KeyAttributesForFaceting to attributesJson
-            KeyUnretrievableAttributes to attributesJson
-            KeyAttributesToRetrieve to attributesJson
+            put(KeySearchableAttributes, attributesJson)
+            put(KeyAttributesForFaceting, attributesJson)
+            put(KeyUnretrievableAttributes, attributesJson)
+            put(KeyAttributesToRetrieve, attributesJson)
             // RankingCriterion
-            KeyRanking to jsonArray { +RankingCriterion.Geo.raw }
-            KeyCustomRanking to jsonArray { +CustomRankingCriterion.Asc(attributeA).raw }
-            KeyReplicas to jsonArray { +indexA.raw }
+            put(KeyRanking, buildJsonArray { add(RankingCriterion.Geo.raw) })
+            put(KeyCustomRanking, buildJsonArray { add(CustomRankingCriterion.Asc(attributeA).raw) })
+            put(KeyReplicas, buildJsonArray { add(indexA.raw) })
             // Faceting
-            KeyMaxValuesPerFacet to int
-            KeySortFacetValuesBy to SortFacetsBy.Count.raw
+            put(KeyMaxValuesPerFacet, int)
+            put(KeySortFacetValuesBy, SortFacetsBy.Count.raw)
             // Highlighting
-            KeyAttributesToHighlight to attributesJson
-            KeyAttributesToSnippet to jsonArray { +TestSnippet.json }
-            KeyHighlightPreTag to string
-            KeyHighlightPostTag to string
-            KeySnippetEllipsisText to string
-            KeyRestrictHighlightAndSnippetArrays to boolean
+            put(KeyAttributesToHighlight, attributesJson)
+            put(KeyAttributesToSnippet, buildJsonArray { add(TestSnippet.json) })
+            put(KeyHighlightPreTag, string)
+            put(KeyHighlightPostTag, string)
+            put(KeySnippetEllipsisText, string)
+            put(KeyRestrictHighlightAndSnippetArrays, boolean)
             // Pagination
-            KeyHitsPerPage to int
-            KeyPaginationLimitedTo to int
-            KeyMinWordSizeFor1Typo to int
-            KeyMinWordSizeFor2Typos to int
+            put(KeyHitsPerPage, int)
+            put(KeyPaginationLimitedTo, int)
+            put(KeyMinWordSizeFor1Typo, int)
+            put(KeyMinWordSizeFor2Typos, int)
             // Typos
-            KeyTypoTolerance to TypoTolerance.Min.raw
-            KeyAllowTyposOnNumericTokens to boolean
-            KeyDisableTypoToleranceOnAttributes to attributesJson
-            KeyDisableTypoToleranceOnWords to jsonArray { +string }
-            KeySeparatorsToIndex to string
+            put(KeyTypoTolerance, TypoTolerance.Min.raw)
+            put(KeyAllowTyposOnNumericTokens, boolean)
+            put(KeyDisableTypoToleranceOnAttributes, attributesJson)
+            put(KeyDisableTypoToleranceOnWords, buildJsonArray { add(string) })
+            put(KeySeparatorsToIndex, string)
             // Languages
-            KeyIgnorePlurals to boolean
-            KeyRemoveStopWords to boolean
-            KeyCamelCaseAttributes to attributesJson
-            KeyDecompoundedAttributes to json {
-                Language.German.raw to jsonArray {
-                    +attributeA.raw
-                    +attributeB.raw
-                }
-            }
-            KeyKeepDiacriticsOnCharacters to string
-            KeyQueryLanguages to jsonArray {
-                +Language.Afrikaans.raw
-                +Language.Albanian.raw
-            }
+            put(KeyIgnorePlurals, boolean)
+            put(KeyRemoveStopWords, boolean)
+            put(KeyCamelCaseAttributes, attributesJson)
+            put(KeyDecompoundedAttributes, buildJsonObject {
+                put(Language.German.raw, buildJsonArray {
+                    add(attributeA.raw)
+                    add(attributeB.raw)
+                })
+            })
+            put(KeyKeepDiacriticsOnCharacters, string)
+            put(KeyQueryLanguages, buildJsonArray {
+                add(Language.Afrikaans.raw)
+                add(Language.Albanian.raw)
+            })
             // Query-rules
-            KeyEnableRules to boolean
+            put(KeyEnableRules, boolean)
             // Query-strategy
-            KeyQueryType to QueryType.PrefixLast.raw
-            KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.LastWords.raw
-            KeyAdvancedSyntax to boolean
-            KeyAdvancedSyntaxFeatures to jsonArray {
-                +KeyExcludeWords
-                +KeyExactPhrase
-            }
-            KeyOptionalWords to jsonArray { +string }
-            KeyDisableExactOnAttributes to attributesJson
-            KeyDisablePrefixOnAttributes to attributesJson
-            KeyExactOnSingleWordQuery to ExactOnSingleWordQuery.Word.raw
-            KeyAlternativesAsExact to jsonArray { +AlternativesAsExact.IgnorePlurals.raw }
+            put(KeyQueryType, QueryType.PrefixLast.raw)
+            put(KeyRemoveWordsIfNoResults, RemoveWordIfNoResults.LastWords.raw)
+            put(KeyAdvancedSyntax, boolean)
+            put(KeyAdvancedSyntaxFeatures, buildJsonArray {
+                add(KeyExcludeWords)
+                add(KeyExactPhrase)
+            })
+            put(KeyOptionalWords, buildJsonArray { add(string) })
+            put(KeyDisableExactOnAttributes, attributesJson)
+            put(KeyDisablePrefixOnAttributes, attributesJson)
+            put(KeyExactOnSingleWordQuery, ExactOnSingleWordQuery.Word.raw)
+            put(KeyAlternativesAsExact, buildJsonArray { add(AlternativesAsExact.IgnorePlurals.raw) })
             // Performance
-            KeyNumericAttributesForFiltering to jsonArray { +TestNumericAttribute.json }
-            KeyAllowCompressionOfIntegerArray to boolean
+            put(KeyNumericAttributesForFiltering, buildJsonArray { add(TestNumericAttribute.json) })
+            put(KeyAllowCompressionOfIntegerArray, boolean)
             // Advanced
-            KeyAttributeForDistinct to attributeA.raw
-            KeyDistinct to int
-            KeyReplaceSynonymsInHighlight to boolean
-            KeyMinProximity to int
-            KeyResponseFields to jsonArray { +ResponseFields.NbHits.raw }
-            KeyMaxFacetHits to int
-            KeyVersion to int
-            KeyUserData to json { unknown to unknown }
-            KeyPrimary to JsonNull
-            KeyIndexLanguages to jsonArray { +Language.Japanese.raw }
-            KeyCustomNormalization to json {
-                unknown to json { unknown to unknown }
-            }
-            KeyEnablePersonalization to boolean
+            put(KeyAttributeForDistinct, attributeA.raw)
+            put(KeyDistinct, int)
+            put(KeyReplaceSynonymsInHighlight, boolean)
+            put(KeyMinProximity, int)
+            put(KeyResponseFields, buildJsonArray { add(ResponseFields.NbHits.raw) })
+            put(KeyMaxFacetHits, int)
+            put(KeyVersion, int)
+            put(KeyUserData, buildJsonObject { put(unknown, unknown) })
+            put(KeyPrimary, JsonNull)
+            put(KeyIndexLanguages, buildJsonArray { add(Language.Japanese.raw) })
+            put(KeyCustomNormalization, buildJsonObject { put(unknown, buildJsonObject { put(unknown, unknown) }) })
+            put(KeyEnablePersonalization, boolean)
         }
     )
 

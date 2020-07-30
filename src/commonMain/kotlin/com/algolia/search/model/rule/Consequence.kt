@@ -18,6 +18,7 @@ import com.algolia.search.serialize.KeyRemoveLowercase
 import com.algolia.search.serialize.KeyUserData
 import com.algolia.search.serialize.asJsonInput
 import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.jsonObjectOrNull
 import com.algolia.search.serialize.toJsonNoDefaults
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -99,7 +100,7 @@ public data class Consequence(
         }
 
         private fun JsonObject.getEdits(): List<Edit>? {
-            return this[KeyQuery]?.jsonObject?.let { local ->
+            return this[KeyQuery]?.jsonObjectOrNull?.let { local ->
                 local[KeyEdits]?.jsonArray?.let { Json.decodeFromJsonElement(ListSerializer(Edit), it) }
                     ?: local[KeyRemoveLowercase]?.jsonArray?.map { Edit(it.jsonPrimitive.content) }
             }

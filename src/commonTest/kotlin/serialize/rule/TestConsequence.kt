@@ -25,7 +25,9 @@ import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyUserData
 import com.algolia.search.serialize.toJsonNoDefaults
 import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import loadScratch
 import objectIDA
 import objectIDB
@@ -42,19 +44,19 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
     private val filters = listOf(AutomaticFacetFilters(attributeA, 1, true))
     private val objectIDs = listOf(objectIDA, objectIDB)
     private val promotions = listOf(Promotion(objectIDA, 0))
-    private val promotionsSerialized = Json.toJson(ListSerializer(Promotion.serializer()), promotions)
-    private val userData = json { KeyUserData to unknown }
-    private val filtersJson = Json.toJson(ListSerializer(AutomaticFacetFilters.serializer()), filters)
+    private val promotionsSerialized = Json.encodeToJsonElement(ListSerializer(Promotion.serializer()), promotions)
+    private val userData = buildJsonObject { put(KeyUserData, unknown) }
+    private val filtersJson = Json.encodeToJsonElement(ListSerializer(AutomaticFacetFilters.serializer()), filters)
 
     override val items = listOf(
-        Consequence() to json { },
-        Consequence(query = query) to json { KeyParams to queryJson },
-        Consequence(edits = edits) to json {
-            KeyParams to json {
-                KeyQuery to json {
-                    KeyEdits to Json.toJson(ListSerializer(Edit), edits)
-                }
-            }
+        Consequence() to buildJsonObject { },
+        Consequence(query = query) to buildJsonObject { put(KeyParams, queryJson) },
+        Consequence(edits = edits) to buildJsonObject {
+            put(KeyParams, buildJsonObject {
+                put(KeyQuery, buildJsonObject {
+                    put(KeyEdits, Json.encodeToJsonElement(ListSerializer(Edit), edits))
+                })
+            })
         },
         Consequence(
             query = query,
@@ -62,28 +64,32 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
             hide = objectIDs,
             userData = userData,
             filterPromotes = true
-        ) to json {
-            KeyParams to queryJson
-            KeyPromote to promotionsSerialized
-            KeyHide to jsonArray {
-                +json { KeyObjectID to objectIDA.raw }
-                +json { KeyObjectID to objectIDB.raw }
-            }
-            KeyUserData to userData
-            KeyFilterPromotes to true
+        ) to buildJsonObject {
+            put(KeyParams, queryJson)
+            put(KeyPromote, promotionsSerialized)
+            put(KeyHide, buildJsonArray {
+                add(buildJsonObject { put(KeyObjectID, objectIDA.raw) })
+                add(buildJsonObject { put(KeyObjectID, objectIDB.raw) })
+            })
+            put(KeyUserData, userData)
+            put(KeyFilterPromotes, true)
         },
-        Consequence(automaticFacetFilters = filters, automaticOptionalFacetFilters = filters, query = query) to json {
-            KeyParams to json {
-                KeyQuery to unknown
-                KeyAutomaticFacetFilters to filtersJson
-                KeyAutomaticOptionalFacetFilters to filtersJson
-            }
+        Consequence(
+            automaticFacetFilters = filters,
+            automaticOptionalFacetFilters = filters,
+            query = query
+        ) to buildJsonObject {
+            put(KeyParams, buildJsonObject {
+                put(KeyQuery, unknown)
+                put(KeyAutomaticFacetFilters, filtersJson)
+                put(KeyAutomaticOptionalFacetFilters, filtersJson)
+            })
         }
     )
 
     @Test
     fun backwardCompatibility() {
-        val rule = Json.parse(Rule.serializer(), loadScratch("rule_v1.json"))
+        val rule = Json.decodeFromString(Rule.serializer(), loadScratch("rule_v1.json"))
 
         rule shouldEqual Rule(
             "query_edits".toObjectID(),

@@ -15,6 +15,7 @@ import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.TimeRange
+import kotlinx.serialization.json.buildJsonObject
 import objectIDA
 import objectIDB
 import shouldEqual
@@ -37,7 +38,7 @@ internal class TestDSLRules {
                     filterPromotes = true,
                     promote = promotions { +objectIDA(10) },
                     query = query { },
-                    userData = json { },
+                    userData = buildJsonObject { },
                     hide = objectIDs { +objectIDB }
                 ),
                 enabled = true,
@@ -57,7 +58,7 @@ internal class TestDSLRules {
                     filterPromotes = true,
                     promote = listOf(Promotion(objectIDA, 10)),
                     query = query { },
-                    userData = json { },
+                    userData = buildJsonObject { },
                     hide = listOf(objectIDB)
                 ),
                 enabled = true,

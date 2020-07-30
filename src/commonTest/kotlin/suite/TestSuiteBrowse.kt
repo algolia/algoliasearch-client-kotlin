@@ -8,6 +8,7 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.model.task.TaskStatus
+import kotlinx.serialization.json.buildJsonObject
 import runBlocking
 import shouldEqual
 import kotlin.test.Test
@@ -61,7 +62,7 @@ internal class TestSuiteBrowse {
     @Test
     fun objects() {
         runBlocking {
-            val objects = (0 until 10).map { json { } }
+            val objects = (0 until 10).map { buildJsonObject { } }
 
             index.apply {
                 saveObjects(objects).wait() shouldEqual TaskStatus.Published

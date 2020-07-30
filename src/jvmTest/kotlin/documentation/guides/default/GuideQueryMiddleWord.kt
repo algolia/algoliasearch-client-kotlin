@@ -5,13 +5,13 @@ import com.algolia.search.dsl.settings
 import com.algolia.search.serialize.Json
 import documentation.index
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonLiteral
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonObjectSerializer
-import kotlinx.serialization.json.content
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.jsonPrimitive
 import org.junit.Ignore
 import org.junit.Test
 import java.io.File
@@ -23,15 +23,15 @@ internal class GuideQueryMiddleWord {
     fun snippet1() {
         runBlocking {
             val string = File("products.json").readText()
-            val objects = Json.parse(JsonObjectSerializer.list, string)
+            val objects = Json.decodeFromString(ListSerializer(JsonObjectSerializer), string)
             val records = objects.map {
                 val map = it.toMutableMap()
                 val suffixes = mutableListOf<JsonElement>()
-                var word = map.getValue("product_reference").content
+                var word = map.getValue("product_reference").jsonPrimitive.content
 
                 while (word.length > 1) {
                     word = word.substring(1)
-                    suffixes += JsonLiteral(word)
+                    suffixes += JsonPrimitive(word)
                 }
                 map["product_reference_suffixes"] = JsonArray(suffixes)
                 JsonObject(map)

@@ -6,6 +6,8 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.multicluster.UserID
 import documentation.index
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -40,13 +42,13 @@ internal class DocAddObjects {
         runBlocking {
             // With JsonObject
             val json = listOf(
-                json {
-                    "firstname" to "Jimmie"
-                    "lastname" to "Barninger"
+                buildJsonObject {
+                    put("firstname", "Jimmie")
+                    put("lastname", "Barninger")
                 },
-                json {
-                    "firstname" to "Warren"
-                    "lastname" to "Speach"
+                buildJsonObject {
+                    put("firstname", "Warren")
+                    put("lastname", "Speach")
                 }
             )
 
@@ -70,15 +72,15 @@ internal class DocAddObjects {
         runBlocking {
             // With JsonObject
             val json = listOf(
-                json {
-                    "objectID" to ObjectID("myID1")
-                    "firstname" to "Jimmie"
-                    "lastname" to "Barninger"
+                buildJsonObject {
+                    put("objectID", "myID1")
+                    put("firstname", "Jimmie")
+                    put("lastname", "Barninger")
                 },
-                json {
-                    "objectID" to ObjectID("myID2")
-                    "firstname" to "Warren"
-                    "lastname" to "Speach"
+                buildJsonObject {
+                    put("objectID", "myID2")
+                    put("firstname", "Warren")
+                    put("lastname", "Speach")
                 }
             )
 
@@ -105,10 +107,10 @@ internal class DocAddObjects {
     fun snippet3() {
         runBlocking {
             // With JsonObject
-            val json = json {
-                "firstname" to "Jimmie"
-                "lastname" to "Barninger"
-                "objectID" to "myID"
+            val json = buildJsonObject {
+                put("firstname", "Jimmie")
+                put("lastname", "Barninger")
+                put("objectID", "myID")
             }
 
             index.saveObject(json)
@@ -131,15 +133,15 @@ internal class DocAddObjects {
     fun snippet4() {
         runBlocking {
             val json = listOf(
-                json {
-                    "objectID" to ObjectID("myID1")
-                    "firstname" to "Jimmie"
-                    "lastname" to "Barninger"
+                buildJsonObject {
+                    put("objectID", "myID1")
+                    put("firstname", "Jimmie")
+                    put("lastname", "Barninger")
                 },
-                json {
-                    "objectID" to ObjectID("myID2")
-                    "firstname" to "Warren"
-                    "lastname" to "Speach"
+                buildJsonObject {
+                    put("objectID", "myID2")
+                    put("firstname", "Warren")
+                    put("lastname", "Speach")
                 }
             )
             val requestOptions = requestOptions {

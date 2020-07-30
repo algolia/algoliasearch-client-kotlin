@@ -50,7 +50,7 @@ internal class TestInsightsEvent {
     fun serialize() {
         val expected = loadScratch("events.json")
         val actual = RequestInsightsEvents(listOf(eventView, eventClick, eventConversion))
-        val events = JsonDebug.stringify(RequestInsightsEvents.serializer(), actual)
+        val events = JsonDebug.encodeToString(RequestInsightsEvents.serializer(), actual)
 
         events shouldEqual expected
     }

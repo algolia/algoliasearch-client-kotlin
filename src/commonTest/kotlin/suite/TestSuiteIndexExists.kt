@@ -1,6 +1,8 @@
 package suite
 
 import clientAdmin1
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import shouldBeFalse
 import shouldBeTrue
@@ -17,7 +19,7 @@ internal class TestSuiteIndexExists {
         runBlocking {
             index.apply {
                 exists().shouldBeFalse()
-                saveObject(json { "Key" to "Value" }).wait()
+                saveObject(buildJsonObject { put("Key", "Value") }).wait()
                 exists().shouldBeTrue()
             }
         }
