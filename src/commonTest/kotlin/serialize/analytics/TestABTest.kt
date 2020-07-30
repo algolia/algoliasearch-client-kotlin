@@ -11,7 +11,9 @@ import com.algolia.search.serialize.KeyName
 import com.algolia.search.serialize.KeyVariants
 import indexA
 import indexB
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import serialize.TestSerializer
 import unknown
 
@@ -26,13 +28,13 @@ internal class TestABTest : TestSerializer<ABTest>(ABTest, JsonNoDefaults) {
     )
 
     override val items = listOf(
-        abTest to json {
-            KeyName to unknown
-            KeyEndAt to date
-            KeyVariants to jsonArray {
-                +JsonNoDefaults.toJson(Variant.serializer(), abTest.variantA)
-                +JsonNoDefaults.toJson(Variant.serializer(), abTest.variantB)
-            }
+        abTest to buildJsonObject {
+            put(KeyName, unknown)
+            put(KeyEndAt, date)
+            put(KeyVariants, buildJsonArray {
+                add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), abTest.variantA))
+                add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), abTest.variantB))
+            })
         }
     )
 }

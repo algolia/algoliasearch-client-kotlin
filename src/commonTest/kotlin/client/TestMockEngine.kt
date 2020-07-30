@@ -26,7 +26,7 @@ internal class TestMockEngine {
         respond(
             status = HttpStatusCode.OK,
             headers = headersOf("Content-Type", listOf(ContentType.Application.Json.toString())),
-            content = ByteReadChannel(JsonNoDefaults.stringify(ResponseSearch.serializer(), responseSearch))
+            content = ByteReadChannel(JsonNoDefaults.encodeToString(ResponseSearch.serializer(), responseSearch))
         )
     }
     private val client = ClientSearch(ConfigurationSearch(appID, apiKey, engine = engine))

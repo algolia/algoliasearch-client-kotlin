@@ -56,8 +56,8 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String, now: Boole
 
 internal fun <T> load(serializer: KSerializer<T>, name: String): T {
     val string = loadScratch(name)
-    val data = JsonDebug.parse(serializer, string)
-    val serialized = JsonDebug.stringify(serializer, data)
+    val data = JsonDebug.decodeFromString(serializer, string)
+    val serialized = JsonDebug.encodeToString(serializer, data)
 
     serialized.removeSpaces() shouldEqual string.removeSpaces()
     return data

@@ -29,6 +29,7 @@ import io.ktor.http.parseUrlEncodedParameters
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObjectSerializer
+import kotlinx.serialization.json.jsonPrimitive
 import runBlocking
 import shouldBeNull
 import shouldBeTrue
@@ -71,7 +72,7 @@ internal class TestSuiteSearch {
                     page shouldEqual 0
                     position shouldEqual 0
                 }
-                val predicate = { hit: ResponseSearch.Hit -> hit.json.getPrimitive("company").content == "Apple" }
+                val predicate = { hit: ResponseSearch.Hit -> hit.json.getValue("company").jsonPrimitive.content == "Apple" }
 
                 findObject(predicate, Query("Algolia"), paginate = true).shouldBeNull()
                 findObject(predicate, Query(hitsPerPage = 5), paginate = false).shouldBeNull()

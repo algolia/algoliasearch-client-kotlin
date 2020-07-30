@@ -13,6 +13,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.headersOf
 import io.ktor.utils.io.ByteReadChannel
 import kotlinx.coroutines.delay
+import kotlinx.serialization.stringify
 import runBlocking
 import shouldEqual
 import kotlin.test.Test
@@ -33,7 +34,7 @@ internal class TestSuiteDNS {
                 "Content-Type",
                 listOf(ContentType.Application.Json.toString())
             ),
-            content = ByteReadChannel(Json.stringify(ResponseSearch.serializer(), ResponseSearch()))
+            content = ByteReadChannel(Json.encodeToString(ResponseSearch.serializer(), ResponseSearch()))
         )
     }
 

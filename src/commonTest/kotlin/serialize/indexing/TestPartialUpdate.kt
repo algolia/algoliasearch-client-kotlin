@@ -12,15 +12,18 @@ import com.algolia.search.serialize.KeyRemove
 import com.algolia.search.serialize.KeyValue
 import com.algolia.search.serialize.Key_Operation
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.add
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import serialize.TestSerializer
 
 internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
 
     private val updateString = Partial.Update(attributeA, "value")
     private val updateNumber = Partial.Update(attributeA, 0)
-    private val updateArray = Partial.Update(attributeA, jsonArray { +0 })
-    private val updateObject = Partial.Update(attributeA, json { "key" to "value" })
+    private val updateArray = Partial.Update(attributeA, buildJsonArray { add(0) })
+    private val updateObject = Partial.Update(attributeA, buildJsonObject { put("key", "value") })
     private val increment = Partial.Increment(attributeA, 0)
     private val incrementFrom = Partial.IncrementFrom(attributeA, 0)
     private val incrementSet = Partial.IncrementSet(attributeA, 0)
@@ -60,11 +63,11 @@ internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
             is Partial.Remove -> KeyRemove
             is Partial.AddUnique -> KeyAddUnique
         }
-        return json {
-            partial.attribute.raw to json {
-                key?.let { Key_Operation to key }
-                KeyValue to partial.value
-            }
+        return buildJsonObject {
+            put(partial.attribute.raw, buildJsonObject {
+                key?.let { put(Key_Operation, key) }
+                put(KeyValue, partial.value)
+            })
         }
     }
 }

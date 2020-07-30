@@ -14,7 +14,9 @@ import io.ktor.http.formUrlEncode
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonDecoder
+import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonElementSerializer
 import kotlinx.serialization.json.JsonEncoder
 import kotlinx.serialization.json.JsonObject
@@ -96,3 +98,15 @@ internal fun List<IndexQuery>.toBody(strategy: MultipleQueriesStrategy?): String
 internal fun Query.toBody(): String {
     return JsonNoDefaults.encodeToString(Query.serializer(), this)
 }
+
+/**
+ * Convenience method to get current element as [JsonObject] or null.
+ */
+internal val JsonElement.jsonObjectOrNull: JsonObject?
+    get() = this as? JsonObject
+
+/**
+ * Convenience method to get current element as [JsonArray] or null.
+ */
+public val JsonElement.jsonArrayOrNull: JsonArray?
+    get() = this as? JsonArray

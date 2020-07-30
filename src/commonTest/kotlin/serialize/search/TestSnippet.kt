@@ -3,13 +3,13 @@ package serialize.search
 import attributeA
 import attributeB
 import com.algolia.search.model.search.Snippet
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.JsonPrimitive
 import serialize.TestSerializer
 
 internal class TestSnippet : TestSerializer<Snippet>(Snippet) {
 
     override val items = listOf(
-        Snippet(attributeA) to JsonLiteral(
+        Snippet(attributeA) to JsonPrimitive(
             Snippet(
                 attributeA
             ).raw
@@ -20,6 +20,6 @@ internal class TestSnippet : TestSerializer<Snippet>(Snippet) {
     companion object {
 
         val snippet = Snippet(attributeB, 10)
-        val json = JsonLiteral(snippet.raw)
+        val json = JsonPrimitive(snippet.raw)
     }
 }

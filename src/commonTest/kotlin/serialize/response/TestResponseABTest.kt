@@ -13,7 +13,9 @@ import com.algolia.search.serialize.KeyEndAt
 import com.algolia.search.serialize.KeyName
 import com.algolia.search.serialize.KeyStatus
 import com.algolia.search.serialize.KeyVariants
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import serialize.TestSerializer
 import unknown
 
@@ -32,18 +34,18 @@ internal class TestResponseABTest : TestSerializer<ResponseABTest>(ResponseABTes
             variantB = TestResponseVariant.item,
             clickSignificanceOrNull = 1f,
             conversionSignificanceOrNull = 2f
-        ) to json {
-            KeyABTestID to 0L
-            KeyCreatedAt to unknown
-            KeyEndAt to date
-            KeyName to unknown
-            KeyStatus to ABTestStatus.Failed.raw
-            KeyVariants to jsonArray {
-                +TestResponseVariant.json
-                +TestResponseVariant.json
-            }
-            KeyClickSignificance to 1f
-            KeyConversionSignificance to 2f
+        ) to buildJsonObject {
+            put(KeyABTestID, 0L)
+            put(KeyCreatedAt, unknown)
+            put(KeyEndAt, date)
+            put(KeyName, unknown)
+            put(KeyStatus, ABTestStatus.Failed.raw)
+            put(KeyVariants, buildJsonArray {
+                add(TestResponseVariant.json)
+                add(TestResponseVariant.json)
+            })
+            put(KeyClickSignificance, 1f)
+            put(KeyConversionSignificance, 2f)
         }
     )
 }

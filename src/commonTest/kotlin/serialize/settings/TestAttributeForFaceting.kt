@@ -7,14 +7,14 @@ import com.algolia.search.model.settings.AttributeForFaceting.FilterOnly
 import com.algolia.search.model.settings.AttributeForFaceting.Searchable
 import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeySearchable
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.JsonPrimitive
 import serialize.TestSerializer
 
 internal class TestAttributeForFaceting : TestSerializer<AttributeForFaceting>(AttributeForFaceting) {
 
     override val items = listOf(
-        FilterOnly(attributeA) to JsonLiteral("$KeyFilterOnly($attributeA)"),
-        Searchable(attributeA) to JsonLiteral("$KeySearchable($attributeA)"),
-        Default(attributeA) to JsonLiteral(attributeA.raw)
+        FilterOnly(attributeA) to JsonPrimitive("$KeyFilterOnly($attributeA)"),
+        Searchable(attributeA) to JsonPrimitive("$KeySearchable($attributeA)"),
+        Default(attributeA) to JsonPrimitive(attributeA.raw)
     )
 }

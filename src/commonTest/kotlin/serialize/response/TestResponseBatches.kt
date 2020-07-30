@@ -6,6 +6,8 @@ import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.serialize.KeyTaskID
 import indexA
 import indexB
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import serialize.TestSerializer
 
 internal class TestResponseBatches : TestSerializer<ResponseBatches>(ResponseBatches) {
@@ -16,11 +18,11 @@ internal class TestResponseBatches : TestSerializer<ResponseBatches>(ResponseBat
     override val items = listOf(
         ResponseBatches(
             listOf(taskIndexA, taskIndexB)
-        ) to json {
-            KeyTaskID to json {
-                taskIndexA.indexName.raw to taskIndexA.taskID.raw
-                taskIndexB.indexName.raw to taskIndexB.taskID.raw
-            }
+        ) to buildJsonObject {
+            put(KeyTaskID, buildJsonObject {
+                put(taskIndexA.indexName.raw, taskIndexA.taskID.raw)
+                put(taskIndexB.indexName.raw, taskIndexB.taskID.raw)
+            })
         }
     )
 }

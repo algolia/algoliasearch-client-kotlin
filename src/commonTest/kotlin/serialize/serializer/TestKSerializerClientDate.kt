@@ -4,7 +4,7 @@ import com.algolia.search.helper.DateISO8601
 import com.algolia.search.model.ClientDate
 import com.algolia.search.model.Time
 import com.algolia.search.serialize.KSerializerClientDate
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.JsonPrimitive
 import serialize.TestSerializer
 
 internal class TestKSerializerClientDate : TestSerializer<ClientDate>(KSerializerClientDate) {
@@ -14,7 +14,7 @@ internal class TestKSerializerClientDate : TestSerializer<ClientDate>(KSerialize
     private val formatMillis = DateISO8601.format(date, true)
 
     override val items = listOf(
-        ClientDate(format) to JsonLiteral(format),
-        ClientDate(formatMillis) to JsonLiteral(formatMillis)
+        ClientDate(format) to JsonPrimitive(format),
+        ClientDate(formatMillis) to JsonPrimitive(formatMillis)
     )
 }

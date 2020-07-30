@@ -12,6 +12,8 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import dayInMillis
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import setupTrustStoreType
 import shouldEqual
@@ -23,7 +25,7 @@ internal class TestSuiteAATest {
     private val suffix = "aa_testing"
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
-    private val data = json { KeyObjectID to "one" }
+    private val data = buildJsonObject { put(KeyObjectID, "one") }
     private val abTest = ABTest(
         name = indexName.raw,
         endAt = ClientDate(Time.getCurrentTimeMillis() + dayInMillis),

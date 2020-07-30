@@ -3,6 +3,8 @@ package helper
 import com.algolia.search.helper.deserialize
 import com.algolia.search.model.response.ResponseSearch
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import shouldEqual
 import kotlin.test.Test
 
@@ -15,8 +17,8 @@ class TestResponseSearch {
 
         val response = ResponseSearch(
             hitsOrNull = listOf(
-                ResponseSearch.Hit(json { "key" to "value" }),
-                ResponseSearch.Hit(json { "key" to "value" })
+                ResponseSearch.Hit(buildJsonObject { put("key", "value") }),
+                ResponseSearch.Hit(buildJsonObject { put("key", "value") })
             )
         )
 

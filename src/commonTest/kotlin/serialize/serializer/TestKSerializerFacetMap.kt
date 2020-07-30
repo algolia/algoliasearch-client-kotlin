@@ -5,13 +5,13 @@ import attributeB
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Facet
 import com.algolia.search.serialize.KSerializerFacetMap
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import serialize.TestSerializer
 
 internal class TestKSerializerFacetMap : TestSerializer<Map<Attribute, List<Facet>>>(KSerializerFacetMap) {
 
-    override val items = listOf(
-        facets to json
-    )
+    override val items = listOf(facets to jsonObject)
 
     companion object {
 
@@ -19,14 +19,14 @@ internal class TestKSerializerFacetMap : TestSerializer<Map<Attribute, List<Face
             attributeA to listOf(Facet("facetA", 0)),
             attributeB to listOf(Facet("facetB", 1), Facet("facetC", 2))
         )
-        val json = json {
-            attributeA.raw to json {
-                "facetA" to 0
-            }
-            attributeB.raw to json {
-                "facetB" to 1
-                "facetC" to 2
-            }
+        val jsonObject = buildJsonObject {
+            put(attributeA.raw, buildJsonObject {
+                put("facetA", 0)
+            })
+            put(attributeB.raw, buildJsonObject {
+                put("facetB", 1)
+                put("facetC", 2)
+            })
         }
     }
 }

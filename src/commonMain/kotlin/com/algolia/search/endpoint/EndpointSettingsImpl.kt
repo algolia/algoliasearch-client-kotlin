@@ -15,6 +15,7 @@ import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.KeyNumericAttributesToIndex
 import com.algolia.search.serialize.KeySlaves
 import com.algolia.search.serialize.RouteSettings
+import com.algolia.search.serialize.jsonArrayOrNull
 import com.algolia.search.serialize.merge
 import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.transport.RequestOptions
@@ -24,7 +25,6 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.jsonArray
 
 internal class EndpointSettingsImpl(
     private val transport: Transport,
@@ -36,13 +36,13 @@ internal class EndpointSettingsImpl(
         val json = transport.request<JsonObject>(HttpMethod.Get, CallType.Read, path, requestOptions)
         // The following lines handle the old names of attributes, thus providing backward compatibility.
         val settings = JsonNonStrict.decodeFromJsonElement(Settings.serializer(), json)
-        val attributesToIndex = json[KeyAttributesToIndex]?.jsonArray?.let {
+        val attributesToIndex = json[KeyAttributesToIndex]?.jsonArrayOrNull?.let {
             Json.decodeFromJsonElement(ListSerializer(SearchableAttribute), it)
         }
-        val numericAttributesToIndex = json[KeyNumericAttributesToIndex]?.jsonArray?.let {
+        val numericAttributesToIndex = json[KeyNumericAttributesToIndex]?.jsonArrayOrNull?.let {
             Json.decodeFromJsonElement(ListSerializer(NumericAttributeFilter), it)
         }
-        val slaves = json[KeySlaves]?.jsonArray?.let {
+        val slaves = json[KeySlaves]?.jsonArrayOrNull?.let {
             Json.decodeFromJsonElement(ListSerializer(IndexName), it)
         }
 

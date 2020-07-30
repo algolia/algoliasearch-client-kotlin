@@ -3,7 +3,7 @@ package documentation.guides.data
 import com.algolia.search.serialize.Json
 import documentation.index
 import kotlinx.coroutines.runBlocking
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObjectSerializer
 import org.junit.Ignore
 import org.junit.Test
@@ -18,7 +18,7 @@ internal class GuideExportToFile {
             val records = index.browseObjects().flatMap { response ->
                 response.hits.map { it.json }
             }
-            val json = Json.stringify(JsonObjectSerializer.list, records)
+            val json = Json.encodeToString(ListSerializer(JsonObjectSerializer), records)
 
             File("your_filename.json").writeText(json)
         }

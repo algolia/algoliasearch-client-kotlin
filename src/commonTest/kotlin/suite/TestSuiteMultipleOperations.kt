@@ -9,7 +9,9 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
+import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
 import runBlocking
 import shouldBeTrue
 import shouldEqual
@@ -22,7 +24,7 @@ internal class TestSuiteMultipleOperations {
     private val indexName2 = indexName1.copy(raw = indexName1.raw + "_dev")
     private val firstname = "firstname"
     private val jimmie = "Jimmie"
-    private val json = json { firstname to jimmie }
+    private val json = buildJsonObject { put(firstname, jimmie) }
 
     @Test
     fun test() {
