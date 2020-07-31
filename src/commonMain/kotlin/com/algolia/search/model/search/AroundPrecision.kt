@@ -46,10 +46,12 @@ public sealed class AroundPrecision {
                 is Int -> JsonPrimitive(value.value)
                 is Ranges -> buildJsonArray {
                     value.list.forEach {
-                        add(buildJsonObject {
-                            put(KeyFrom, it.first)
-                            put(KeyValue, it.last)
-                        })
+                        add(
+                            buildJsonObject {
+                                put(KeyFrom, it.first)
+                                put(KeyValue, it.last)
+                            }
+                        )
                     }
                 }
                 is Other -> value.raw
@@ -59,14 +61,16 @@ public sealed class AroundPrecision {
 
         override fun deserialize(decoder: Decoder): AroundPrecision {
             return when (val json = decoder.asJsonInput()) {
-                is JsonArray -> Ranges(json.map {
-                    val pair = it.jsonObject
+                is JsonArray -> Ranges(
+                    json.map {
+                        val pair = it.jsonObject
 
-                    IntRange(
-                        pair.getValue(KeyFrom).jsonPrimitive.int,
-                        pair.getValue(KeyValue).jsonPrimitive.int
-                    )
-                })
+                        IntRange(
+                            pair.getValue(KeyFrom).jsonPrimitive.int,
+                            pair.getValue(KeyValue).jsonPrimitive.int
+                        )
+                    }
+                )
                 is JsonPrimitive -> Int(json.int)
                 else -> Other(json)
             }

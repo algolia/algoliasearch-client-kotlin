@@ -52,11 +52,17 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
         Consequence() to buildJsonObject { },
         Consequence(query = query) to buildJsonObject { put(KeyParams, queryJson) },
         Consequence(edits = edits) to buildJsonObject {
-            put(KeyParams, buildJsonObject {
-                put(KeyQuery, buildJsonObject {
-                    put(KeyEdits, Json.encodeToJsonElement(ListSerializer(Edit), edits))
-                })
-            })
+            put(
+                KeyParams,
+                buildJsonObject {
+                    put(
+                        KeyQuery,
+                        buildJsonObject {
+                            put(KeyEdits, Json.encodeToJsonElement(ListSerializer(Edit), edits))
+                        }
+                    )
+                }
+            )
         },
         Consequence(
             query = query,
@@ -67,10 +73,13 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
         ) to buildJsonObject {
             put(KeyParams, queryJson)
             put(KeyPromote, promotionsSerialized)
-            put(KeyHide, buildJsonArray {
-                add(buildJsonObject { put(KeyObjectID, objectIDA.raw) })
-                add(buildJsonObject { put(KeyObjectID, objectIDB.raw) })
-            })
+            put(
+                KeyHide,
+                buildJsonArray {
+                    add(buildJsonObject { put(KeyObjectID, objectIDA.raw) })
+                    add(buildJsonObject { put(KeyObjectID, objectIDB.raw) })
+                }
+            )
             put(KeyUserData, userData)
             put(KeyFilterPromotes, true)
         },
@@ -79,11 +88,14 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
             automaticOptionalFacetFilters = filters,
             query = query
         ) to buildJsonObject {
-            put(KeyParams, buildJsonObject {
-                put(KeyQuery, unknown)
-                put(KeyAutomaticFacetFilters, filtersJson)
-                put(KeyAutomaticOptionalFacetFilters, filtersJson)
-            })
+            put(
+                KeyParams,
+                buildJsonObject {
+                    put(KeyQuery, unknown)
+                    put(KeyAutomaticFacetFilters, filtersJson)
+                    put(KeyAutomaticOptionalFacetFilters, filtersJson)
+                }
+            )
         }
     )
 

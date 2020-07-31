@@ -46,7 +46,8 @@ internal class TestUserAgent {
                     install(UserAgent) {
                         agent = "Test"
                     }
-                })
+                }
+            )
             val client = ClientSearch(configuration)
             val request = client.httpClient.request<HttpResponse>(HttpRequestBuilder())
             val headers = request.call.request.headers

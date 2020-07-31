@@ -15,10 +15,13 @@ internal class TestKSerializerDecompoundedAttributes :
 
     override val items = listOf(
         listOf(DecompoundedAttributes(Language.German, listOf(attributeA, attributeB))) to buildJsonObject {
-            put(Language.German.raw, buildJsonArray {
-                add(attributeA.raw)
-                add(attributeB.raw)
-            })
+            put(
+                Language.German.raw,
+                buildJsonArray {
+                    add(attributeA.raw)
+                    add(attributeB.raw)
+                }
+            )
         }
     )
 }

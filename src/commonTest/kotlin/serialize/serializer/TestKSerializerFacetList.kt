@@ -14,10 +14,12 @@ internal class TestKSerializerFacetList : TestSerializer<List<Facet>>(KSerialize
 
     override val items = listOf(
         listOf(Facet(unknown, 0)) to buildJsonArray {
-            add(buildJsonObject {
-                put(KeyValue, unknown)
-                put(KeyCount, 0)
-            })
+            add(
+                buildJsonObject {
+                    put(KeyValue, unknown)
+                    put(KeyCount, 0)
+                }
+            )
         }
     )
 }

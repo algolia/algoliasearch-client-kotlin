@@ -60,10 +60,13 @@ internal class TestBatchOperation : TestSerializer<BatchOperation>(BatchOperatio
             )
         ) to buildJsonObject {
             put(KeyAction, KeyPartialUpdateObject)
-            put(KeyBody, buildJsonObject {
-                put(KeyObjectID, unknown)
-                put("key", "value")
-            })
+            put(
+                KeyBody,
+                buildJsonObject {
+                    put(KeyObjectID, unknown)
+                    put("key", "value")
+                }
+            )
         },
         DeleteObject(objectID) to buildJsonObject {
             put(KeyAction, KeyDeleteObject)

@@ -2,12 +2,12 @@ package com.algolia.search.model.search
 
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyMatchAlternatives
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(ExplainModule.Companion::class)
 public sealed class ExplainModule(override val raw: String) : Raw<String> {

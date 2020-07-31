@@ -6,12 +6,12 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.KeyFull
 import com.algolia.search.serialize.KeyNone
 import com.algolia.search.serialize.KeyPartial
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * Indicates how well the value matched the search query.

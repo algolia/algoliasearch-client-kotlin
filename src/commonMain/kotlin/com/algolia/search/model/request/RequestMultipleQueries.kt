@@ -29,14 +29,19 @@ internal class RequestMultipleQueries(
 
         override fun serialize(encoder: Encoder, value: RequestMultipleQueries) {
             val json = buildJsonObject {
-                put(KeyRequests, buildJsonArray {
-                    value.indexQueries.forEach {
-                        add(buildJsonObject {
-                            put(KeyIndexName, it.indexName.raw)
-                            it.query.toJsonNoDefaults().urlEncode()?.let { put(KeyParams, it) }
-                        })
+                put(
+                    KeyRequests,
+                    buildJsonArray {
+                        value.indexQueries.forEach {
+                            add(
+                                buildJsonObject {
+                                    put(KeyIndexName, it.indexName.raw)
+                                    it.query.toJsonNoDefaults().urlEncode()?.let { put(KeyParams, it) }
+                                }
+                            )
+                        }
                     }
-                })
+                )
                 value.strategy?.let { put(KeyStrategy, it.raw) }
             }
             encoder.asJsonOutput().encodeJsonElement(json)

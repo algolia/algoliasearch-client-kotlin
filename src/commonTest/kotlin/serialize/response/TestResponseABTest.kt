@@ -40,10 +40,13 @@ internal class TestResponseABTest : TestSerializer<ResponseABTest>(ResponseABTes
             put(KeyEndAt, date)
             put(KeyName, unknown)
             put(KeyStatus, ABTestStatus.Failed.raw)
-            put(KeyVariants, buildJsonArray {
-                add(TestResponseVariant.json)
-                add(TestResponseVariant.json)
-            })
+            put(
+                KeyVariants,
+                buildJsonArray {
+                    add(TestResponseVariant.json)
+                    add(TestResponseVariant.json)
+                }
+            )
             put(KeyClickSignificance, 1f)
             put(KeyConversionSignificance, 2f)
         }

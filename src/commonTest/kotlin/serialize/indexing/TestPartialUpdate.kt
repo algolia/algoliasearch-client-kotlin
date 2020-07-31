@@ -64,10 +64,13 @@ internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
             is Partial.AddUnique -> KeyAddUnique
         }
         return buildJsonObject {
-            put(partial.attribute.raw, buildJsonObject {
-                key?.let { put(Key_Operation, key) }
-                put(KeyValue, partial.value)
-            })
+            put(
+                partial.attribute.raw,
+                buildJsonObject {
+                    key?.let { put(Key_Operation, key) }
+                    put(KeyValue, partial.value)
+                }
+            )
         }
     }
 }

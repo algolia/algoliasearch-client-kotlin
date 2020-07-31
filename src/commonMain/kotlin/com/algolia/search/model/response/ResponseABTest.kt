@@ -92,10 +92,13 @@ public data class ResponseABTest(
                 put(KeyStatus, value.status.raw)
                 value.conversionSignificanceOrNull?.let { put(KeyConversionSignificance, it) }
                 value.clickSignificanceOrNull?.let { put(KeyClickSignificance, it) }
-                put(KeyVariants, buildJsonArray {
-                    add(JsonNoDefaults.encodeToJsonElement(ResponseVariant.serializer(), value.variantA))
-                    add(JsonNoDefaults.encodeToJsonElement(ResponseVariant.serializer(), value.variantB))
-                })
+                put(
+                    KeyVariants,
+                    buildJsonArray {
+                        add(JsonNoDefaults.encodeToJsonElement(ResponseVariant.serializer(), value.variantA))
+                        add(JsonNoDefaults.encodeToJsonElement(ResponseVariant.serializer(), value.variantB))
+                    }
+                )
             }
 
             encoder.asJsonOutput().encodeJsonElement(json)

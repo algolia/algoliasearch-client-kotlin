@@ -165,7 +165,8 @@ public sealed class Synonym {
                 is AlternativeCorrections -> buildJsonObject {
                     put(KeyObjectID, value.objectID.raw)
                     put(
-                        KeyType, when (value.typo) {
+                        KeyType,
+                        when (value.typo) {
                             SynonymType.Typo.One -> KeyAlternativeCorrection1
                             SynonymType.Typo.Two -> KeyAlternativeCorrection2
                         }

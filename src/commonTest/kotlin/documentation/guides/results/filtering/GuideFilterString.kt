@@ -29,32 +29,38 @@ internal class GuideFilterString {
     fun snippet2() {
         runBlocking {
             // Only “Motorola” smartphones
-            index.search(query("smartphone") {
-                filters {
-                    and {
-                        facet("brand", "Motorola")
+            index.search(
+                query("smartphone") {
+                    filters {
+                        and {
+                            facet("brand", "Motorola")
+                        }
                     }
                 }
-            })
+            )
 
             // Only “LG” or “Samsung” smartphones
-            index.search(query("smartphone") {
-                filters {
-                    orFacet {
-                        facet("brand", "Motorola")
-                        facet("brand", "Samsung")
+            index.search(
+                query("smartphone") {
+                    filters {
+                        orFacet {
+                            facet("brand", "Motorola")
+                            facet("brand", "Samsung")
+                        }
                     }
                 }
-            })
+            )
 
             // Everything but “Apple” smartphones
-            index.search(query("smartphone") {
-                filters {
-                    and {
-                        facet("brand", "Apple", isNegated = true)
+            index.search(
+                query("smartphone") {
+                    filters {
+                        and {
+                            facet("brand", "Apple", isNegated = true)
+                        }
                     }
                 }
-            })
+            )
         }
     }
 }

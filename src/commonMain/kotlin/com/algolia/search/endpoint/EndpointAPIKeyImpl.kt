@@ -77,7 +77,8 @@ internal class EndpointAPIKeyImpl(
                 CallType.Write,
                 "$RouteKeysV1/$apiKey",
                 requestOptions
-            ).deletedAt, apiKey
+            ).deletedAt,
+            apiKey
         )
     }
 

@@ -19,10 +19,13 @@ internal class TestResponseBatches : TestSerializer<ResponseBatches>(ResponseBat
         ResponseBatches(
             listOf(taskIndexA, taskIndexB)
         ) to buildJsonObject {
-            put(KeyTaskID, buildJsonObject {
-                put(taskIndexA.indexName.raw, taskIndexA.taskID.raw)
-                put(taskIndexB.indexName.raw, taskIndexB.taskID.raw)
-            })
+            put(
+                KeyTaskID,
+                buildJsonObject {
+                    put(taskIndexA.indexName.raw, taskIndexA.taskID.raw)
+                    put(taskIndexB.indexName.raw, taskIndexB.taskID.raw)
+                }
+            )
         }
     )
 }

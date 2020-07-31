@@ -103,18 +103,23 @@ public sealed class InsightsEvent {
             when (resources) {
                 is Resources.ObjectIDs -> put(
                     KeyObjectIDs,
-                    buildJsonArray { resources.objectIDs.forEach { add(it.raw) } })
-                is Resources.Filters -> put(KeyFilters, buildJsonArray {
-                    resources.filters.forEach { filter ->
-                        FilterConverter.Legacy(filter).forEach { add(it) }
+                    buildJsonArray { resources.objectIDs.forEach { add(it.raw) } }
+                )
+                is Resources.Filters -> put(
+                    KeyFilters,
+                    buildJsonArray {
+                        resources.filters.forEach { filter ->
+                            FilterConverter.Legacy(filter).forEach { add(it) }
+                        }
                     }
-                })
+                )
             }
         }
 
         private infix fun JsonObjectBuilder.eventType(event: InsightsEvent) {
             put(
-                KeyEventType, when (event) {
+                KeyEventType,
+                when (event) {
                     is Click -> KeyClick
                     is View -> KeyView
                     is Conversion -> KeyConversion
@@ -135,7 +140,8 @@ public sealed class InsightsEvent {
                     value.positions?.let {
                         put(
                             KeyPositions,
-                            buildJsonArray { it.forEach { add((it as Number)) } })
+                            buildJsonArray { it.forEach { add((it as Number)) } }
+                        )
                     }
                 }
             }

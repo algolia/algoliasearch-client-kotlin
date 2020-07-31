@@ -20,11 +20,13 @@ public object KSerializerFacetList : KSerializer<List<Facet>> {
     override fun serialize(encoder: Encoder, value: List<Facet>) {
         val json = buildJsonArray {
             value.map {
-                add(buildJsonObject {
-                    put(KeyValue, it.value)
-                    put(KeyCount, it.count)
-                    it.highlightedOrNull?.let { put(KeyHighlighted, it) }
-                })
+                add(
+                    buildJsonObject {
+                        put(KeyValue, it.value)
+                        put(KeyCount, it.count)
+                        it.highlightedOrNull?.let { put(KeyHighlighted, it) }
+                    }
+                )
             }
         }
         encoder.asJsonOutput().encodeJsonElement(json)

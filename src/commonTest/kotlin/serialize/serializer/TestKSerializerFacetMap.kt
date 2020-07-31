@@ -20,13 +20,19 @@ internal class TestKSerializerFacetMap : TestSerializer<Map<Attribute, List<Face
             attributeB to listOf(Facet("facetB", 1), Facet("facetC", 2))
         )
         val jsonObject = buildJsonObject {
-            put(attributeA.raw, buildJsonObject {
-                put("facetA", 0)
-            })
-            put(attributeB.raw, buildJsonObject {
-                put("facetB", 1)
-                put("facetC", 2)
-            })
+            put(
+                attributeA.raw,
+                buildJsonObject {
+                    put("facetA", 0)
+                }
+            )
+            put(
+                attributeB.raw,
+                buildJsonObject {
+                    put("facetB", 1)
+                    put("facetC", 2)
+                }
+            )
         }
     }
 }

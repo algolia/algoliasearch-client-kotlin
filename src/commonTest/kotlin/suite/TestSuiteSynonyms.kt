@@ -66,9 +66,11 @@ internal class TestSuiteSynonyms {
                     synonyms shouldContain synonymAlternative2
                 }
                 deleteSynonym(gba).wait() shouldEqual TaskStatus.Published
-                (shouldFailWith<ResponseException> {
-                    getSynonym(gba)
-                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                (
+                    shouldFailWith<ResponseException> {
+                        getSynonym(gba)
+                    }
+                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
                 clearSynonyms().wait() shouldEqual TaskStatus.Published
                 searchSynonyms(SynonymQuery(page = 0, hitsPerPage = 10)).nbHits shouldEqual 0

@@ -14,3 +14,4 @@ tab_width = 4
 # https://github.com/pinterest/ktlint/issues/527
 [*.{kt, kts}]
 disabled_rules = import-ordering
+kotlin_imports_layout=idea

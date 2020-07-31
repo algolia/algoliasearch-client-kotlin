@@ -15,12 +15,12 @@ import com.algolia.search.serialize.KeyTypo
 import com.algolia.search.serialize.KeyWords
 import com.algolia.search.serialize.regexAsc
 import com.algolia.search.serialize.regexDesc
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(RankingCriterion.Companion::class)
 public sealed class RankingCriterion(override val raw: String) : Raw<String> {
