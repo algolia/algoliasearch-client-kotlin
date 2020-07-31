@@ -53,6 +53,7 @@ extensions.getByType(LibraryExtension::class.java).apply {
         minSdkVersion(17)
         targetSdkVersion(30)
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("src/jvmMain/resources/META-INF/proguard/algoliasearch.pro")
     }
 
     testOptions.unitTests.isIncludeAndroidResources = true
