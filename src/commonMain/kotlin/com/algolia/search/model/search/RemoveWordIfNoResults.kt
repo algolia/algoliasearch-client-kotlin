@@ -5,12 +5,12 @@ import com.algolia.search.serialize.KeyAllOptional
 import com.algolia.search.serialize.KeyFirstWords
 import com.algolia.search.serialize.KeyLastWords
 import com.algolia.search.serialize.KeyNone
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(RemoveWordIfNoResults.Companion::class)
 public sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String> {

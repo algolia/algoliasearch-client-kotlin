@@ -138,7 +138,8 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
             val json = when (value) {
                 is AddObject -> batchJson(value) { put(KeyBody, value.json) }
                 is ReplaceObject -> batchJson(value) {
-                    put(KeyBody,
+                    put(
+                        KeyBody,
                         value.json.merge(
                             buildJsonObject {
                                 put(KeyObjectID, value.objectID.raw)
@@ -147,7 +148,8 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
                     )
                 }
                 is PartialUpdateObject -> batchJson(value) {
-                    put(KeyBody,
+                    put(
+                        KeyBody,
                         value.json.merge(
                             buildJsonObject {
                                 put(KeyObjectID, value.objectID.raw)

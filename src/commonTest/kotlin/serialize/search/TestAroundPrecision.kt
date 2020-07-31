@@ -14,10 +14,12 @@ internal class TestAroundPrecision : TestSerializer<AroundPrecision>(AroundPreci
     override val items = listOf(
         AroundPrecision.Int(0) to JsonPrimitive(0),
         AroundPrecision.Ranges(0 until 10) to buildJsonArray {
-            add(buildJsonObject {
-                put(KeyFrom, 0)
-                put(KeyValue, 9)
-            })
+            add(
+                buildJsonObject {
+                    put(KeyFrom, 0)
+                    put(KeyValue, 9)
+                }
+            )
         }
     )
 }

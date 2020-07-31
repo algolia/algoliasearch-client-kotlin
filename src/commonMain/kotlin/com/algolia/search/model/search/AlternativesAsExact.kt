@@ -4,12 +4,12 @@ import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyIgnorePlurals
 import com.algolia.search.serialize.KeyMultiWordsSynonym
 import com.algolia.search.serialize.KeySingleWordSynonym
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(AlternativesAsExact.Companion::class)
 public sealed class AlternativesAsExact(override val raw: String) : Raw<String> {

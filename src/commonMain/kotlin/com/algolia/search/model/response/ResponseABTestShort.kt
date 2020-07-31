@@ -48,10 +48,13 @@ public data class ResponseABTestShort(
         override fun serialize(encoder: Encoder, value: ResponseABTestShort) {
             val json = buildJsonObject {
                 KeyId to value.abTestId
-                put(KeyVariants, buildJsonArray {
-                    add(JsonNoDefaults.encodeToJsonElement(KSerializerVariant, value.variantA))
-                    add(JsonNoDefaults.encodeToJsonElement(KSerializerVariant, value.variantB))
-                })
+                put(
+                    KeyVariants,
+                    buildJsonArray {
+                        add(JsonNoDefaults.encodeToJsonElement(KSerializerVariant, value.variantA))
+                        add(JsonNoDefaults.encodeToJsonElement(KSerializerVariant, value.variantB))
+                    }
+                )
             }
 
             encoder.asJsonOutput().encodeJsonElement(json)

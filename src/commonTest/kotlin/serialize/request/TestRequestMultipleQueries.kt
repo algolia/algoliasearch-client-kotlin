@@ -33,16 +33,23 @@ internal class TestRequestMultipleQueries {
         val serialized = Json.encodeToJsonElement(RequestMultipleQueries, request)
 
         serialized shouldEqual buildJsonObject {
-            put(KeyRequests, buildJsonArray {
-                add(buildJsonObject {
-                    put(KeyIndexName, indexA.raw)
-                    put(KeyParams, "facets=%5B%22attributeA%22%5D")
-                })
-                add(buildJsonObject {
-                    put(KeyIndexName, indexB.raw)
-                    put(KeyParams, "facets=%5B%22attributeA%22%2C%22attributeB%22%5D")
-                })
-            })
+            put(
+                KeyRequests,
+                buildJsonArray {
+                    add(
+                        buildJsonObject {
+                            put(KeyIndexName, indexA.raw)
+                            put(KeyParams, "facets=%5B%22attributeA%22%5D")
+                        }
+                    )
+                    add(
+                        buildJsonObject {
+                            put(KeyIndexName, indexB.raw)
+                            put(KeyParams, "facets=%5B%22attributeA%22%2C%22attributeB%22%5D")
+                        }
+                    )
+                }
+            )
             put(KeyStrategy, MultipleQueriesStrategy.StopIfEnoughMatches.raw)
         }
     }

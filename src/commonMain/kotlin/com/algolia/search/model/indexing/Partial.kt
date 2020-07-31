@@ -163,10 +163,13 @@ public sealed class Partial {
                 is AddUnique -> KeyAddUnique
             }
             val json = buildJsonObject {
-                put(value.attribute.raw, buildJsonObject {
-                    key?.let { put(Key_Operation, key) }
-                    put(KeyValue, value.value)
-                })
+                put(
+                    value.attribute.raw,
+                    buildJsonObject {
+                        key?.let { put(Key_Operation, key) }
+                        put(KeyValue, value.value)
+                    }
+                )
             }
             encoder.asJsonOutput().encodeJsonElement(json)
         }

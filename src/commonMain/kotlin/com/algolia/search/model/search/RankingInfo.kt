@@ -14,12 +14,12 @@ import com.algolia.search.serialize.KeyGeoPrecision
 import com.algolia.search.serialize.KeyMatchedGeoLocation
 import com.algolia.search.serialize.KeyNbExactWords
 import com.algolia.search.serialize.KeyNbTypos
+import com.algolia.search.serialize.KeyPersonalization
 import com.algolia.search.serialize.KeyPromoted
 import com.algolia.search.serialize.KeyProximityDistance
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyUserScore
 import com.algolia.search.serialize.KeyWords
-import com.algolia.search.serialize.KeyPersonalization
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

@@ -6,12 +6,12 @@ import com.algolia.search.serialize.KeyAlternativeCorrection2
 import com.algolia.search.serialize.KeyOneWaySynonym
 import com.algolia.search.serialize.KeyPlaceholder
 import com.algolia.search.serialize.KeySynonym
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(SynonymType.Companion::class)
 public sealed class SynonymType(override val raw: String) : Raw<String> {

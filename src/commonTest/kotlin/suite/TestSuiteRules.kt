@@ -58,9 +58,11 @@ internal class TestSuiteRules {
                 deleteRule(rule.objectID).wait() shouldEqual TaskStatus.Published
 
                 search(Query(ruleContexts = listOf("summer"))).nbHits shouldEqual 1
-                (shouldFailWith<ResponseException> {
-                    getRule(rule.objectID)
-                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                (
+                    shouldFailWith<ResponseException> {
+                        getRule(rule.objectID)
+                    }
+                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
                 clearRules().wait() shouldEqual TaskStatus.Published
                 searchRules().nbHits shouldEqual 0
             }

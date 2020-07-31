@@ -21,12 +21,12 @@ import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyQueryAfterRemoval
 import com.algolia.search.serialize.KeyStar
 import com.algolia.search.serialize.KeyUserData
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * Choose which fields the response will contain. Applies to [EndpointSearch.search] and [EndpointSearch.browse].

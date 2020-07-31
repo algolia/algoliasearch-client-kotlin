@@ -252,11 +252,7 @@ tasks.withType<Test> {
 configure<SpotlessExtension> {
     kotlin {
         target("**/*.kt")
-        ktlint("0.36.0").userData(mapOf(
-            // Disable Ktlint import ordering temporarily.
-            // https://github.com/pinterest/ktlint/issues/527
-            "disabled_rules" to "import-ordering"
-        ))
+        ktlint("0.37.2")
         trimTrailingWhitespace()
         endWithNewline()
     }

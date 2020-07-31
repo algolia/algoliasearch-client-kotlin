@@ -26,13 +26,18 @@ internal class TestResponseSearchForFacets : TestSerializer<ResponseSearchForFac
             exhaustiveFacetsCount = true,
             processingTimeMS = 0
         ) to buildJsonObject {
-            put(KeyFacetHits, buildJsonArray {
-                add(buildJsonObject {
-                    put(KeyValue, unknown)
-                    put(KeyCount, 0)
-                    put(KeyHighlighted, "hello")
-                })
-            })
+            put(
+                KeyFacetHits,
+                buildJsonArray {
+                    add(
+                        buildJsonObject {
+                            put(KeyValue, unknown)
+                            put(KeyCount, 0)
+                            put(KeyHighlighted, "hello")
+                        }
+                    )
+                }
+            )
             put(KeyExhaustiveFacetsCount, true)
             put(KeyProcessingTimeMS, 0)
         }

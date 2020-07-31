@@ -51,9 +51,11 @@ public sealed class RemoveStopWords {
 
         override fun deserialize(decoder: Decoder): RemoveStopWords {
             return when (val element = decoder.asJsonInput()) {
-                is JsonArray -> QueryLanguages(element.map {
-                    JsonNonStrict.decodeFromJsonElement(Language, it)
-                })
+                is JsonArray -> QueryLanguages(
+                    element.map {
+                        JsonNonStrict.decodeFromJsonElement(Language, it)
+                    }
+                )
                 is JsonPrimitive -> if (element.boolean) True else False
                 else -> throw Exception()
             }

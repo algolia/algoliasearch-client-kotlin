@@ -50,10 +50,13 @@ public data class ABTest(
             val json = buildJsonObject {
                 put(KeyName, value.name)
                 put(KeyEndAt, value.endAt.raw)
-                put(KeyVariants, buildJsonArray {
-                    add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), value.variantA))
-                    add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), value.variantB))
-                })
+                put(
+                    KeyVariants,
+                    buildJsonArray {
+                        add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), value.variantA))
+                        add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), value.variantB))
+                    }
+                )
             }
 
             encoder.asJsonOutput().encodeJsonElement(json)

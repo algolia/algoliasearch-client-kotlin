@@ -47,11 +47,14 @@ public data class ResponseBatches(
 
         override fun serialize(encoder: Encoder, value: ResponseBatches) {
             val json = buildJsonObject {
-                put(KeyTaskID, buildJsonObject {
-                    value.tasks.forEach {
-                        put(it.indexName.raw, it.taskID.raw)
+                put(
+                    KeyTaskID,
+                    buildJsonObject {
+                        value.tasks.forEach {
+                            put(it.indexName.raw, it.taskID.raw)
+                        }
                     }
-                })
+                )
                 KeyObjectIDs to value.objectIDsOrNull?.let { buildJsonArray { it.forEach { add(it?.raw) } } }
             }
 

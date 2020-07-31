@@ -31,10 +31,13 @@ internal class TestABTest : TestSerializer<ABTest>(ABTest, JsonNoDefaults) {
         abTest to buildJsonObject {
             put(KeyName, unknown)
             put(KeyEndAt, date)
-            put(KeyVariants, buildJsonArray {
-                add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), abTest.variantA))
-                add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), abTest.variantB))
-            })
+            put(
+                KeyVariants,
+                buildJsonArray {
+                    add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), abTest.variantA))
+                    add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), abTest.variantB))
+                }
+            )
         }
     )
 }

@@ -4,12 +4,12 @@ import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyPrefixAll
 import com.algolia.search.serialize.KeyPrefixLast
 import com.algolia.search.serialize.KeyPrefixNone
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(QueryType.Companion::class)
 public sealed class QueryType(override val raw: String) : Raw<String> {

@@ -53,17 +53,23 @@ class TestSuiteReplaceAll {
                 getRule(objectIDTwo).objectID shouldEqual objectIDTwo
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
-                (shouldFailWith<ResponseException> {
-                    getObject(objectIDOne)
-                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                (
+                    shouldFailWith<ResponseException> {
+                        getObject(objectIDOne)
+                    }
+                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
-                (shouldFailWith<ResponseException> {
-                    getSynonym(objectIDOne)
-                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                (
+                    shouldFailWith<ResponseException> {
+                        getSynonym(objectIDOne)
+                    }
+                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
-                (shouldFailWith<ResponseException> {
-                    getRule(objectIDOne)
-                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                (
+                    shouldFailWith<ResponseException> {
+                        getRule(objectIDOne)
+                    }
+                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }

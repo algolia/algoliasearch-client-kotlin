@@ -203,27 +203,39 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             put(KeyIgnorePlurals, boolean)
             put(KeyRemoveStopWords, boolean)
             put(KeyCamelCaseAttributes, attributesJson)
-            put(KeyDecompoundedAttributes, buildJsonObject {
-                put(Language.German.raw, buildJsonArray {
-                    add(attributeA.raw)
-                    add(attributeB.raw)
-                })
-            })
+            put(
+                KeyDecompoundedAttributes,
+                buildJsonObject {
+                    put(
+                        Language.German.raw,
+                        buildJsonArray {
+                            add(attributeA.raw)
+                            add(attributeB.raw)
+                        }
+                    )
+                }
+            )
             put(KeyKeepDiacriticsOnCharacters, string)
-            put(KeyQueryLanguages, buildJsonArray {
-                add(Language.Afrikaans.raw)
-                add(Language.Albanian.raw)
-            })
+            put(
+                KeyQueryLanguages,
+                buildJsonArray {
+                    add(Language.Afrikaans.raw)
+                    add(Language.Albanian.raw)
+                }
+            )
             // Query-rules
             put(KeyEnableRules, boolean)
             // Query-strategy
             put(KeyQueryType, QueryType.PrefixLast.raw)
             put(KeyRemoveWordsIfNoResults, RemoveWordIfNoResults.LastWords.raw)
             put(KeyAdvancedSyntax, boolean)
-            put(KeyAdvancedSyntaxFeatures, buildJsonArray {
-                add(KeyExcludeWords)
-                add(KeyExactPhrase)
-            })
+            put(
+                KeyAdvancedSyntaxFeatures,
+                buildJsonArray {
+                    add(KeyExcludeWords)
+                    add(KeyExactPhrase)
+                }
+            )
             put(KeyOptionalWords, buildJsonArray { add(string) })
             put(KeyDisableExactOnAttributes, attributesJson)
             put(KeyDisablePrefixOnAttributes, attributesJson)

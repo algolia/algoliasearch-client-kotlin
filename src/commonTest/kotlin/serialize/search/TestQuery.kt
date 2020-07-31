@@ -209,10 +209,13 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             put(KeyInsidePolygon, buildJsonArray { add(TestPolygon.json) })
             put(KeyIgnorePlurals, boolean)
             put(KeyRemoveStopWords, boolean)
-            put(KeyQueryLanguages, buildJsonArray {
-                add(Language.Afrikaans.raw)
-                add(Language.Albanian.raw)
-            })
+            put(
+                KeyQueryLanguages,
+                buildJsonArray {
+                    add(Language.Afrikaans.raw)
+                    add(Language.Albanian.raw)
+                }
+            )
             put(KeyEnableRules, boolean)
             put(KeyRuleContexts, buildJsonArray { add(string) })
             put(KeyEnablePersonalization, boolean)
@@ -223,15 +226,19 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             put(KeyAdvancedSyntax, boolean)
             put(
                 KeyAdvancedSyntaxFeatures,
-                buildJsonArray { add(AdvancedSyntaxFeatures.ExcludeWords.raw) })
+                buildJsonArray { add(AdvancedSyntaxFeatures.ExcludeWords.raw) }
+            )
             put(KeyOptionalWords, buildJsonArray { add(string) })
             put(KeyDisableExactOnAttributes, attributesJson)
             put(KeyExactOnSingleWordQuery, ExactOnSingleWordQuery.Word.raw)
-            put(KeyAlternativesAsExact, buildJsonArray {
-                add(
-                    AlternativesAsExact.IgnorePlurals.raw
-                )
-            })
+            put(
+                KeyAlternativesAsExact,
+                buildJsonArray {
+                    add(
+                        AlternativesAsExact.IgnorePlurals.raw
+                    )
+                }
+            )
             put(KeyDistinct, int)
             put(KeyGetRankingInfo, boolean)
             put(KeyClickAnalytics, boolean)
@@ -246,10 +253,13 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             put(KeySimilarQuery, string)
             put(KeyEnableABTest, boolean)
             put(KeyExplain, buildJsonArray { add(ExplainModule.MatchAlternatives.raw) })
-            put(KeyNaturalLanguages, buildJsonArray {
-                add(Language.Afrikaans.raw)
-                add(Language.Albanian.raw)
-            })
+            put(
+                KeyNaturalLanguages,
+                buildJsonArray {
+                    add(Language.Afrikaans.raw)
+                    add(Language.Albanian.raw)
+                }
+            )
         }
     )
 

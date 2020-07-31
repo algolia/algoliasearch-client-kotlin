@@ -22,9 +22,11 @@ internal class GuideAddBanners {
                     conditions {
                         +Condition(Contains, Literal("harry potter"))
                     },
-                    Consequence(userData = buildJsonObject {
-                        put("promo_content", "20% OFF on all Harry Potter books!")
-                    }),
+                    Consequence(
+                        userData = buildJsonObject {
+                            put("promo_content", "20% OFF on all Harry Potter books!")
+                        }
+                    ),
                     enabled = false
                 )
             }
