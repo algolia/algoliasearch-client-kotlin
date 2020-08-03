@@ -4,6 +4,7 @@
 - Support and target Android API 30
 - Multi-condition rules (#201)
 _ `IncrementFrom` and `IncrementSet` built-in operations (#202)
+- Include ProGuard rules into `aar` and `jar` artifacts
 
 ### Changed
 - `indexName` required in `InnerQuery`
