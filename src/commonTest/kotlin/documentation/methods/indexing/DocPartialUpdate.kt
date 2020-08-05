@@ -72,4 +72,20 @@ internal class DocPartialUpdate {
             index.partialUpdateObjects(partials, requestOptions = requestOptions)
         }
     }
+
+    @Test
+    fun snippet6() {
+        runBlocking {
+            val partial = Partial.IncrementFrom(Attribute("version"), 2)
+            index.partialUpdateObject(ObjectID("myID"), partial)
+        }
+    }
+
+    @Test
+    fun snippet7() {
+        runBlocking {
+            val partial = Partial.IncrementSet(Attribute("lastmodified"), 1593431913)
+            index.partialUpdateObject(ObjectID("myID"), partial)
+        }
+    }
 }
