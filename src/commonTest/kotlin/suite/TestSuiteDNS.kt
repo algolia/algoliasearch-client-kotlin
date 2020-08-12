@@ -2,6 +2,7 @@ package suite
 
 import clientAdmin1
 import com.algolia.search.client.ClientSearch
+import com.algolia.search.client.internal.ClientSearchImpl
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
@@ -53,7 +54,7 @@ internal class TestSuiteDNS {
             val index = client.initIndex(IndexName("test"))
 
             index.search()
-            client.transport.hosts.first().retryCount shouldEqual 1
+            (client as ClientSearchImpl).transport.hosts.first().retryCount shouldEqual 1
         }
     }
 }
