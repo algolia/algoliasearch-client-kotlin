@@ -42,15 +42,6 @@ internal class EndpointSearchImpl(
         return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/query"), requestOptions, body)
     }
 
-    override suspend fun findFirstObject(
-        match: (ResponseSearch.Hit) -> Boolean,
-        query: Query,
-        doNotPaginate: Boolean,
-        requestOptions: RequestOptions?
-    ): ResponseHitWithPosition? {
-        return findObject(match, query, !doNotPaginate, requestOptions)
-    }
-
     override tailrec suspend fun findObject(
         match: (ResponseSearch.Hit) -> Boolean,
         query: Query,

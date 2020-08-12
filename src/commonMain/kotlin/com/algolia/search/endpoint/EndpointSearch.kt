@@ -121,18 +121,6 @@ public interface EndpointSearch {
         requestOptions: RequestOptions? = null
     ): ResponseSearch
 
-    @Deprecated(
-        message = "Use findObject instead.",
-        replaceWith = ReplaceWith("findObject(match, query, doNotPaginate, requestOptions)"),
-        level = DeprecationLevel.WARNING
-    )
-    public suspend fun findFirstObject(
-        match: (ResponseSearch.Hit) -> Boolean,
-        query: Query = Query(),
-        doNotPaginate: Boolean = false,
-        requestOptions: RequestOptions? = null
-    ): ResponseHitWithPosition?
-
     /**
      *  Search iteratively through the search response [ResponseSearch.hits] field to find the first response hit that
      *  would match against the given [match] function.

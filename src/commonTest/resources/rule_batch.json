@@ -1,48 +1,50 @@
 [
-  {
-    "objectID": "query_edits",
-    "consequence": {
-      "params": {
-        "query": {
-          "edits": [
+    {
+        "objectID": "query_edits",
+        "conditions": [
             {
-              "type": "remove",
-              "delete": "mobile"
-            },
-            {
-              "type": "replace",
-              "delete": "phone",
-              "insert": "iphone"
+                "anchoring": "is",
+                "pattern": "mobile phone",
+                "alternatives": true
             }
-          ]
+        ],
+        "consequence": {
+            "params": {
+                "query": {
+                    "edits": [
+                        {
+                            "type": "remove",
+                            "delete": "mobile"
+                        },
+                        {
+                            "type": "replace",
+                            "delete": "phone",
+                            "insert": "iphone"
+                        }
+                    ]
+                }
+            }
         }
-      }
     },
-    "conditions": [
-      {
-        "anchoring": "is",
-        "pattern": "mobile phone",
-        "alternatives": true
-      }
-    ]
-  },
-  {
-    "objectID": "query_promo",
-    "consequence": {
-      "params": {
-        "filters": "brand:OnePlus"
-      }
-    }
-  },
-  {
-    "objectID": "query_promo_summer",
-    "condition": {
-      "context": "summer"
+    {
+        "objectID": "query_promo",
+        "consequence": {
+            "params": {
+                "filters": "brand:OnePlus"
+            }
+        }
     },
-    "consequence": {
-      "params": {
-        "filters": "model:One"
-      }
+    {
+        "objectID": "query_promo_summer",
+        "conditions": [
+            {
+                "context": "summer"
+            }
+        ],
+        "consequence": {
+            "params": {
+                "filters": "model:One"
+            }
+        }
     }
-  }
 ]

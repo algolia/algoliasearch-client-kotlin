@@ -69,20 +69,9 @@ internal class TestDSLRules {
     }
 
     @Test
-    fun anchoring() {
-        DSLRules {
-            Is shouldEqual Anchoring.Is
-            StartsWith shouldEqual Anchoring.StartsWith
-            EndsWith shouldEqual Anchoring.EndsWith
-            Contains shouldEqual Anchoring.Contains
-        }
-    }
-
-    @Test
     fun pattern() {
         DSLRules {
             Facet("hello") shouldEqual Pattern.Facet(Attribute("hello"))
-            Literal("hello") shouldEqual Pattern.Literal("hello")
         }
     }
 }

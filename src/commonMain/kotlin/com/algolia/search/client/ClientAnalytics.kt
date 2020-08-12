@@ -34,21 +34,6 @@ public class ClientAnalytics private constructor(
         )
     )
 
-    @Deprecated(
-        message = "Explicitly specify analytics region",
-        level = DeprecationLevel.WARNING,
-        replaceWith = ReplaceWith("ClientAnalytics(applicationID, apiKey, Region.Analytics.US)")
-    )
-    public constructor(
-        applicationID: ApplicationID,
-        apiKey: APIKey
-    ) : this(
-        Transport(
-            ConfigurationAnalytics(applicationID, apiKey, Region.Analytics.US),
-            CredentialsImpl(applicationID, apiKey)
-        )
-    )
-
     public constructor(
         configuration: ConfigurationAnalytics
     ) : this(Transport(configuration, configuration))

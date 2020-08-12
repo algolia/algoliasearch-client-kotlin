@@ -64,13 +64,6 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
-@Deprecated(
-    message = "Obsolete name from the preview version of library.",
-    replaceWith = ReplaceWith("Language"),
-    level = DeprecationLevel.WARNING
-)
-public typealias QueryLanguage = Language
-
 /**
  * List of supported languages with their associated language ISO code.
  */
