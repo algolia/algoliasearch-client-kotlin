@@ -16,3 +16,6 @@ local.properties
 
 # scan temporary files
 **/fastlane/test_output
+
+# bitrise
+.bitrise.yml
