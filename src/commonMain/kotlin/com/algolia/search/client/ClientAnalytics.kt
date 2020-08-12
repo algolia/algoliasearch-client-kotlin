@@ -1,12 +1,14 @@
+@file:Suppress("FunctionName")
+
 package com.algolia.search.client
 
+import com.algolia.search.client.internal.ClientAnalyticsImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationAnalytics
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.CredentialsImpl
 import com.algolia.search.configuration.Region
 import com.algolia.search.endpoint.EndpointAnalytics
-import com.algolia.search.endpoint.EndpointAnalyticsImpl
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.analytics.ABTest
@@ -17,26 +19,7 @@ import com.algolia.search.transport.Transport
 /**
  * Client to manage [ABTest] for analytics purposes.
  */
-public class ClientAnalytics private constructor(
-    private val transport: Transport
-) : EndpointAnalytics by EndpointAnalyticsImpl(transport),
-    Configuration by transport,
-    Credentials by transport.credentials {
-
-    public constructor(
-        applicationID: ApplicationID,
-        apiKey: APIKey,
-        region: Region.Analytics
-    ) : this(
-        Transport(
-            ConfigurationAnalytics(applicationID, apiKey, region),
-            CredentialsImpl(applicationID, apiKey)
-        )
-    )
-
-    public constructor(
-        configuration: ConfigurationAnalytics
-    ) : this(Transport(configuration, configuration))
+public interface ClientAnalytics : EndpointAnalytics, Configuration, Credentials {
 
     /**
      * Browse every [ABTest] on the index and return them as a list.
@@ -46,18 +29,35 @@ public class ClientAnalytics private constructor(
      */
     public suspend fun browseAllABTests(
         hitsPerPage: Int? = null,
-        requestOptions: RequestOptions? = null
-    ): List<ResponseABTests> {
-        val responses = mutableListOf<ResponseABTests>()
-        var page = 0
+        requestOptions: RequestOptions? = null,
+    ): List<ResponseABTests>
 
-        while (true) {
-            val response = listABTests(page, hitsPerPage, requestOptions)
-
-            if (response.count == response.total || response.count == 0) break
-            page += response.count
-            responses += response
-        }
-        return responses
-    }
+    public companion object
 }
+
+/**
+ * Create a [ClientAnalytics] instance.
+ *
+ * @param applicationID application ID
+ * @param apiKey API Key
+ * @param region analytics region
+ */
+public fun ClientAnalytics(
+    applicationID: ApplicationID,
+    apiKey: APIKey,
+    region: Region.Analytics,
+): ClientAnalytics = ClientAnalyticsImpl(
+    Transport(
+        ConfigurationAnalytics(applicationID, apiKey, region),
+        CredentialsImpl(applicationID, apiKey)
+    )
+)
+
+/**
+ * Create a [ClientAnalytics] instance.
+ *
+ * @param configuration analytics configuration
+ */
+public fun ClientAnalytics(
+    configuration: ConfigurationAnalytics,
+): ClientAnalytics = ClientAnalyticsImpl(Transport(configuration, configuration))

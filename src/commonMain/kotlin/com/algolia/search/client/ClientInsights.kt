@@ -1,11 +1,13 @@
+@file:Suppress("FunctionName")
+
 package com.algolia.search.client
 
+import com.algolia.search.client.internal.ClientInsightsImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationInsights
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.CredentialsImpl
 import com.algolia.search.endpoint.EndpointInsights
-import com.algolia.search.endpoint.EndpointInsightsImpl
 import com.algolia.search.endpoint.EndpointInsightsUser
 import com.algolia.search.endpoint.EndpointInsightsUserImpl
 import com.algolia.search.model.APIKey
@@ -17,22 +19,48 @@ import com.algolia.search.transport.Transport
 /**
  * Client to manage [InsightsEvent].
  */
-public class ClientInsights private constructor(
-    private val transport: Transport
-) : EndpointInsights by EndpointInsightsImpl(transport),
-    Configuration by transport,
-    Credentials by transport.credentials {
+public interface ClientInsights : EndpointInsights,
+    Configuration,
+    Credentials {
 
-    public constructor(
-        applicationID: ApplicationID,
-        apiKey: APIKey
-    ) : this(Transport(ConfigurationInsights(applicationID, apiKey), CredentialsImpl(applicationID, apiKey)))
+    /**
+     * Create a [User] instance.
+     *
+     * @param userToken user token.
+     */
+    public fun User(userToken: UserToken): User
 
-    public constructor(
-        configuration: ConfigurationInsights
-    ) : this(Transport(configuration, configuration))
+    /**
+     * Represents an Insights User.
+     *
+     * @param insights insights endpoint
+     * @param userToken user token
+     */
+    public class User(
+        public val insights: EndpointInsights,
+        public val userToken: UserToken,
+    ) : EndpointInsightsUser by EndpointInsightsUserImpl(insights, userToken)
 
-    public inner class User(
-        public val userToken: UserToken
-    ) : EndpointInsightsUser by EndpointInsightsUserImpl(this, userToken)
+    public companion object
 }
+
+/**
+ * Create a [ClientInsights] instance.
+ *
+ * @param applicationID application ID
+ * @param apiKey API Key
+ */
+public fun ClientInsights(
+    applicationID: ApplicationID,
+    apiKey: APIKey,
+): ClientInsights = ClientInsightsImpl(Transport(ConfigurationInsights(applicationID, apiKey),
+    CredentialsImpl(applicationID, apiKey)))
+
+/**
+ * Create a [ClientSearch] instance.
+ *
+ * @param configuration insights configuration
+ */
+public fun ClientInsights(
+    configuration: ConfigurationInsights,
+): ClientInsights = ClientInsightsImpl(Transport(configuration, configuration))
