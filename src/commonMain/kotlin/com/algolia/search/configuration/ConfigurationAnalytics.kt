@@ -1,7 +1,6 @@
 package com.algolia.search.configuration
 
 import com.algolia.search.client.ClientAnalytics
-import com.algolia.search.configuration.Region.Analytics.US
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.hosts
@@ -25,27 +24,6 @@ public data class ConfigurationAnalytics(
     override val engine: HttpClientEngine? = null,
     override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null
 ) : Configuration, Credentials {
-
-    @Deprecated(
-        message = "Explicitly specify an analytics region",
-        level = DeprecationLevel.WARNING,
-        replaceWith = ReplaceWith("ConfigurationAnalytics(applicationID, apiKey, Region.Analytics.US)")
-    )
-    public constructor(
-        applicationID: ApplicationID,
-        apiKey: APIKey,
-        writeTimeout: Long = defaultWriteTimeout,
-        readTimeout: Long = defaultReadTimeout,
-        logLevel: LogLevel = defaultLogLevel,
-        hosts: List<RetryableHost>? = null,
-        defaultHeaders: Map<String, String>? = null,
-        engine: HttpClientEngine? = null,
-        httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
-        region: Region.Analytics = US
-    ) : this(
-        applicationID, apiKey, region, writeTimeout, readTimeout, logLevel,
-        hosts ?: region.hosts, defaultHeaders, engine, httpClientConfig
-    )
 
     override val compression: Compression = Compression.None
     override val httpClient: HttpClient = getHttpClient()

@@ -25,15 +25,6 @@ public class DSLRules(
     private val rules: MutableList<Rule> = mutableListOf()
 ) {
 
-    @Deprecated(message = "Single condition is deprecated, use Conditions (plural) DSL which accept one or more condition(s)")
-    public val Is: Anchoring.Is = Anchoring.Is
-    @Deprecated(message = "Single condition is deprecated, use Conditions (plural) DSL which accept one or more condition(s)")
-    public val StartsWith: Anchoring.StartsWith = Anchoring.StartsWith
-    @Deprecated(message = "Single condition is deprecated, use Conditions (plural) DSL which accept one or more condition(s)")
-    public val EndsWith: Anchoring.EndsWith = Anchoring.EndsWith
-    @Deprecated(message = "Single condition is deprecated, use Conditions (plural) DSL which accept one or more condition(s)")
-    public val Contains: Anchoring.Contains = Anchoring.Contains
-
     /**
      * Convenience method.
      */
@@ -46,25 +37,6 @@ public class DSLRules(
      */
     public fun Facet(attribute: Attribute): Pattern.Facet {
         return Pattern.Facet(attribute)
-    }
-
-    /**
-     * Create a [Pattern.Literal] with a [value].
-     */
-    @Deprecated(message = "Single condition is deprecated, use Conditions (plural) DSL which accept one or more condition(s)")
-    public fun Literal(value: String): Pattern.Literal {
-        return Pattern.Literal(value)
-    }
-
-    /**
-     * Create a [Condition] with [anchoring], [pattern] and an optional [context].
-     */
-    @Deprecated(
-        message = "Single condition is deprecated, use Conditions (plural) which accept one or more condition(s)",
-        replaceWith = ReplaceWith("conditions { +condition(anchoring, pattern) }")
-    )
-    public fun condition(anchoring: Anchoring, pattern: Pattern, context: String? = null): Condition {
-        return Condition(anchoring, pattern, context)
     }
 
     /**
@@ -150,24 +122,6 @@ public class DSLRules(
     }
 
     /**
-     * Convenience method.
-     */
-    @Deprecated(
-        message = "Single condition is deprecated, use Conditions (plural) which accept one or more condition(s)",
-        replaceWith = ReplaceWith("rule(objectID, conditions, consequence, enabled, validity, description)")
-    )
-    public fun rule(
-        objectID: String,
-        condition: Condition,
-        consequence: Consequence,
-        enabled: Boolean? = null,
-        validity: List<TimeRange>? = null,
-        description: String? = null
-    ) {
-        +Rule(ObjectID(objectID), condition, consequence, enabled, validity, description)
-    }
-
-    /**
      * Create a [Rule] with [objectID], [conditions], [consequence], [enabled], [validity] and [description].
      */
     public fun rule(
@@ -179,24 +133,6 @@ public class DSLRules(
         description: String? = null
     ) {
         +Rule(objectID, conditions, consequence, enabled, validity, description)
-    }
-
-    /**
-     * Create a [Rule] with [objectID], [condition], [consequence], [enabled], [validity] and [description].
-     */
-    @Deprecated(
-        message = "Single condition is deprecated, use Conditions (plural) which accept one or more condition(s)",
-        replaceWith = ReplaceWith("rule(objectID, conditions, consequence, enabled, validity, description)")
-    )
-    public fun rule(
-        objectID: ObjectID,
-        condition: Condition,
-        consequence: Consequence,
-        enabled: Boolean? = null,
-        validity: List<TimeRange>? = null,
-        description: String? = null
-    ) {
-        +Rule(objectID, condition, consequence, enabled, validity, description)
     }
 
     public companion object : DSL<DSLRules, List<Rule>> {

@@ -1,4 +1,4 @@
-@file:Suppress("FunctionName")
+@file:Suppress("FunctionName", "PropertyName")
 
 package com.algolia.search.dsl.rule
 

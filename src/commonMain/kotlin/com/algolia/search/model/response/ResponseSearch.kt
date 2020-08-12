@@ -316,15 +316,6 @@ public data class ResponseSearch(
     public val appliedRules: List<JsonObject>
         get() = appliedRulesOrNull!!
 
-    @Deprecated(
-        message = "Use getObjectPosition instead.",
-        replaceWith = ReplaceWith("getObjectPosition(objectID)"),
-        level = DeprecationLevel.WARNING
-    )
-    public fun getObjectIDPosition(objectID: ObjectID): Int {
-        return hits.indexOfFirst { it.json["objectID"]?.jsonPrimitiveOrNull?.content == objectID.raw }
-    }
-
     /**
      * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].
      * If the [objectID] is not found, -1 is returned.
