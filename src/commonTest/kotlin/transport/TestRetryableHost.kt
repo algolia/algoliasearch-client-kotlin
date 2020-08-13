@@ -3,10 +3,10 @@ package transport
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.helper.toApplicationID
-import com.algolia.search.transport.hasFailed
-import com.algolia.search.transport.hasTimedOut
-import com.algolia.search.transport.reset
-import com.algolia.search.transport.searchHosts
+import com.algolia.search.transport.internal.hasFailed
+import com.algolia.search.transport.internal.hasTimedOut
+import com.algolia.search.transport.internal.reset
+import com.algolia.search.transport.internal.searchHosts
 import shouldEqual
 import kotlin.test.Test
 

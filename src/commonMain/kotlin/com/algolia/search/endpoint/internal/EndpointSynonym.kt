@@ -21,7 +21,7 @@ import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.KeyReplaceExistingSynonyms
 import com.algolia.search.serialize.RouteSynonyms
 import com.algolia.search.transport.RequestOptions
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.builtins.ListSerializer
 

@@ -5,7 +5,7 @@ import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.endpoint.EndpointRecommendation
 import com.algolia.search.endpoint.internal.EndpointRecommendation
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 
 internal class ClientRecommendationImpl internal constructor(
     internal val transport: Transport,

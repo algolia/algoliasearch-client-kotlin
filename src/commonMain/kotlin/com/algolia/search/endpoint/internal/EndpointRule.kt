@@ -19,7 +19,7 @@ import com.algolia.search.serialize.KeyClearExistingRules
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.RouteRules
 import com.algolia.search.transport.RequestOptions
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.builtins.ListSerializer
 

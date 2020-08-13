@@ -12,10 +12,10 @@ import com.algolia.search.configuration.defaultReadTimeout
 import com.algolia.search.configuration.defaultWriteTimeout
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
-import com.algolia.search.transport.hosts
-import com.algolia.search.transport.insightHosts
-import com.algolia.search.transport.placesHosts
-import com.algolia.search.transport.searchHosts
+import com.algolia.search.transport.internal.hosts
+import com.algolia.search.transport.internal.insightHosts
+import com.algolia.search.transport.internal.placesHosts
+import com.algolia.search.transport.internal.searchHosts
 import io.ktor.client.features.logging.LogLevel
 import shouldBeNull
 import shouldEqual

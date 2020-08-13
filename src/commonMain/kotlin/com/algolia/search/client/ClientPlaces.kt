@@ -9,7 +9,7 @@ import com.algolia.search.configuration.CredentialsImpl
 import com.algolia.search.endpoint.EndpointPlaces
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 
 /**
  * Client for the places API.

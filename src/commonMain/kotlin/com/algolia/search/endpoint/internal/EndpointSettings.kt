@@ -22,7 +22,7 @@ import com.algolia.search.serialize.jsonArrayOrNull
 import com.algolia.search.serialize.merge
 import com.algolia.search.serialize.toJsonNoDefaults
 import com.algolia.search.transport.RequestOptions
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonNull

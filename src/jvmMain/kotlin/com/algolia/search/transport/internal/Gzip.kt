@@ -1,4 +1,4 @@
-package com.algolia.search.transport
+package com.algolia.search.transport.internal
 
 import io.ktor.util.GZip
 import io.ktor.util.toByteArray
