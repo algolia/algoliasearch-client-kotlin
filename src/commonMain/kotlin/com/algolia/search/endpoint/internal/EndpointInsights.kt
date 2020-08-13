@@ -1,6 +1,9 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
+import com.algolia.search.endpoint.EndpointInsights
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.request.RequestInsightsEvents
 import com.algolia.search.serialize.JsonNoDefaults
@@ -11,7 +14,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpMethod
 
 internal class EndpointInsightsImpl(
-    private val transport: Transport
+    private val transport: Transport,
 ) : EndpointInsights {
 
     override suspend fun sendEvent(event: InsightsEvent, requestOptions: RequestOptions?): HttpResponse {
@@ -24,3 +27,10 @@ internal class EndpointInsightsImpl(
         return transport.request(HttpMethod.Post, CallType.Write, RouteEventsV1, requestOptions, body)
     }
 }
+
+/**
+ * Create an [EndpointInsights] instance.
+ */
+internal fun EndpointInsights(
+    transport: Transport,
+): EndpointInsights = EndpointInsightsImpl(transport)

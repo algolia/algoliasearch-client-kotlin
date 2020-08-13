@@ -1,7 +1,10 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.endpoint.EndpointAnalytics
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.request.EmptyBody
@@ -19,7 +22,7 @@ import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 
 internal class EndpointAnalyticsImpl(
-    private val transport: Transport
+    private val transport: Transport,
 ) : EndpointAnalytics {
 
     override suspend fun addABTest(abTest: ABTest, requestOptions: RequestOptions?): CreationABTest {
@@ -54,3 +57,10 @@ internal class EndpointAnalyticsImpl(
         return transport.request(HttpMethod.Get, CallType.Read, RouteABTestsV2, options)
     }
 }
+
+/**
+ * Create an [EndpointAnalytics] instance.
+ */
+internal fun EndpointAnalytics(
+    transport: Transport,
+): EndpointAnalytics = EndpointAnalyticsImpl(transport)

@@ -1,7 +1,10 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.endpoint.EndpointSettings
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.settings.NumericAttributeFilter
@@ -28,7 +31,7 @@ import kotlinx.serialization.json.buildJsonObject
 
 internal class EndpointSettingsImpl(
     private val transport: Transport,
-    override val indexName: IndexName
+    override val indexName: IndexName,
 ) : EndpointSettings {
 
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
@@ -58,7 +61,7 @@ internal class EndpointSettingsImpl(
         resetToDefault: List<SettingsKey>,
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?,
-        indexName: IndexName
+        indexName: IndexName,
     ): RevisionIndex {
         val resets = buildJsonObject { resetToDefault.forEach { put(it.raw, JsonNull) } }
         val body = settings.toJsonNoDefaults().merge(resets).toString()
@@ -73,8 +76,16 @@ internal class EndpointSettingsImpl(
         settings: Settings,
         resetToDefault: List<SettingsKey>,
         forwardToReplicas: Boolean?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): RevisionIndex {
         return setSettings(settings, resetToDefault, forwardToReplicas, requestOptions, indexName)
     }
 }
+
+/**
+ * Create an [EndpointSettings] instance.
+ */
+internal fun EndpointSettings(
+    transport: Transport,
+    indexName: IndexName,
+): EndpointSettings = EndpointSettingsImpl(transport, indexName)

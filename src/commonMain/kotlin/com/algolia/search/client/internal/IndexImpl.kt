@@ -4,19 +4,19 @@ package com.algolia.search.client.internal
 
 import com.algolia.search.client.Index
 import com.algolia.search.endpoint.EndpointAdvanced
-import com.algolia.search.endpoint.EndpointAdvancedImpl
 import com.algolia.search.endpoint.EndpointIndex
-import com.algolia.search.endpoint.EndpointIndexImpl
 import com.algolia.search.endpoint.EndpointIndexing
-import com.algolia.search.endpoint.EndpointIndexingImpl
 import com.algolia.search.endpoint.EndpointRule
-import com.algolia.search.endpoint.EndpointRuleImpl
 import com.algolia.search.endpoint.EndpointSearch
-import com.algolia.search.endpoint.EndpointSearchImpl
 import com.algolia.search.endpoint.EndpointSettings
-import com.algolia.search.endpoint.EndpointSettingsImpl
 import com.algolia.search.endpoint.EndpointSynonym
-import com.algolia.search.endpoint.EndpointSynonymImpl
+import com.algolia.search.endpoint.internal.EndpointAdvanced
+import com.algolia.search.endpoint.internal.EndpointIndex
+import com.algolia.search.endpoint.internal.EndpointIndexing
+import com.algolia.search.endpoint.internal.EndpointRule
+import com.algolia.search.endpoint.internal.EndpointSearch
+import com.algolia.search.endpoint.internal.EndpointSettings
+import com.algolia.search.endpoint.internal.EndpointSynonym
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchRules
@@ -31,13 +31,13 @@ internal class IndexImpl internal constructor(
     internal val transport: Transport,
     override val indexName: IndexName,
 ) : Index,
-    EndpointSearch by EndpointSearchImpl(transport, indexName),
-    EndpointSettings by EndpointSettingsImpl(transport, indexName),
-    EndpointAdvanced by EndpointAdvancedImpl(transport, indexName),
-    EndpointIndex by EndpointIndexImpl(transport, indexName),
-    EndpointIndexing by EndpointIndexingImpl(transport, indexName),
-    EndpointSynonym by EndpointSynonymImpl(transport, indexName),
-    EndpointRule by EndpointRuleImpl(transport, indexName) {
+    EndpointSearch by EndpointSearch(transport, indexName),
+    EndpointSettings by EndpointSettings(transport, indexName),
+    EndpointAdvanced by EndpointAdvanced(transport, indexName),
+    EndpointIndex by EndpointIndex(transport, indexName),
+    EndpointIndexing by EndpointIndexing(transport, indexName),
+    EndpointSynonym by EndpointSynonym(transport, indexName),
+    EndpointRule by EndpointRule(transport, indexName) {
 
     public override suspend fun browseRules(
         query: RuleQuery,

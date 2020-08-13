@@ -1,6 +1,9 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
+import com.algolia.search.endpoint.EndpointRecommendation
 import com.algolia.search.model.recommendation.PersonalizationStrategy
 import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
 import com.algolia.search.serialize.Json
@@ -10,12 +13,12 @@ import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 
 internal class EndpointRecommendationImpl(
-    private val transport: Transport
+    private val transport: Transport,
 ) : EndpointRecommendation {
 
     override suspend fun setPersonalizationStrategy(
         strategy: PersonalizationStrategy,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): SetPersonalizationStrategyResponse {
         val body = Json.encodeToString(PersonalizationStrategy.serializer(), strategy)
 
@@ -37,3 +40,10 @@ internal class EndpointRecommendationImpl(
         )
     }
 }
+
+/**
+ * Create an [EndpointRecommendation] instance.
+ */
+internal fun EndpointRecommendation(
+    transport: Transport,
+): EndpointRecommendation = EndpointRecommendationImpl(transport)

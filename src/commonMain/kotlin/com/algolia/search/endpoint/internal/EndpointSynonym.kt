@@ -1,7 +1,10 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.endpoint.EndpointSynonym
 import com.algolia.search.exception.EmptyListException
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
@@ -24,13 +27,13 @@ import kotlinx.serialization.builtins.ListSerializer
 
 internal class EndpointSynonymImpl(
     private val transport: Transport,
-    override val indexName: IndexName
+    override val indexName: IndexName,
 ) : EndpointSynonym {
 
     override suspend fun saveSynonym(
         synonym: Synonym,
         forwardToReplicas: Boolean?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): RevisionSynonym {
         val path = indexName.toPath("/$RouteSynonyms/${synonym.objectID}")
         val body = Json.encodeToString(Synonym, synonym)
@@ -45,7 +48,7 @@ internal class EndpointSynonymImpl(
         synonyms: List<Synonym>,
         forwardToReplicas: Boolean?,
         clearExistingSynonyms: Boolean?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): RevisionIndex {
         if (synonyms.isEmpty()) throw EmptyListException("synonyms")
         val path = indexName.toPath("/$RouteSynonyms/batch")
@@ -67,7 +70,7 @@ internal class EndpointSynonymImpl(
     override suspend fun deleteSynonym(
         objectID: ObjectID,
         forwardToReplicas: Boolean?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): DeletionIndex {
         val path = indexName.toPath("/$RouteSynonyms/$objectID")
         val options = requestOptionsBuilder(requestOptions) {
@@ -79,7 +82,7 @@ internal class EndpointSynonymImpl(
 
     override suspend fun searchSynonyms(
         query: SynonymQuery,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseSearchSynonyms {
         val path = indexName.toPath("/$RouteSynonyms/search")
         val body = JsonNoDefaults.encodeToString(SynonymQuery.serializer(), query)
@@ -99,8 +102,16 @@ internal class EndpointSynonymImpl(
     override suspend fun replaceAllSynonyms(
         synonyms: List<Synonym>,
         forwardToReplicas: Boolean?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): RevisionIndex {
         return saveSynonyms(synonyms, forwardToReplicas, true, requestOptions)
     }
 }
+
+/**
+ * Create an [EndpointSynonym] instance.
+ */
+internal fun EndpointSynonym(
+    transport: Transport,
+    indexName: IndexName,
+): EndpointSynonym = EndpointSynonymImpl(transport, indexName)

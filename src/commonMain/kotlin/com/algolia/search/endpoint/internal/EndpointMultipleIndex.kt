@@ -1,6 +1,9 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
+import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.exception.EmptyListException
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
@@ -24,7 +27,7 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.buildJsonObject
 
 internal class EndpointMultipleIndexImpl(
-    private val transport: Transport
+    private val transport: Transport,
 ) : EndpointMultipleIndex {
 
     override suspend fun listIndices(requestOptions: RequestOptions?): ResponseListIndices {
@@ -38,7 +41,7 @@ internal class EndpointMultipleIndexImpl(
     override suspend fun multipleQueries(
         queries: List<IndexQuery>,
         strategy: MultipleQueriesStrategy?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseSearches {
         val body = queries.toBody(strategy)
 
@@ -47,7 +50,7 @@ internal class EndpointMultipleIndexImpl(
 
     override suspend fun multipleGetObjects(
         requests: List<RequestObjects>,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseObjects {
         val body = JsonNoDefaults.encodeToString(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
@@ -56,7 +59,7 @@ internal class EndpointMultipleIndexImpl(
 
     override suspend fun multipleBatchObjects(
         operations: List<BatchOperationIndex>,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseBatches {
         if (operations.isEmpty()) throw EmptyListException("operations")
         val requests = Json.encodeToJsonElement(ListSerializer(BatchOperationIndex), operations)
@@ -65,3 +68,10 @@ internal class EndpointMultipleIndexImpl(
         return transport.request(HttpMethod.Post, CallType.Write, "$RouteIndexesV1/*/batch", requestOptions, body)
     }
 }
+
+/**
+ * Create an [EndpointMultipleIndex] instance.
+ */
+internal fun EndpointMultipleIndex(
+    transport: Transport,
+): EndpointMultipleIndex = EndpointMultipleIndexImpl(transport)
