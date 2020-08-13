@@ -29,7 +29,7 @@ import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.transport.RequestOptions
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 import io.ktor.client.features.logging.LogLevel
 
 /**

@@ -1,4 +1,4 @@
-package com.algolia.search.transport
+package com.algolia.search.transport.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Region

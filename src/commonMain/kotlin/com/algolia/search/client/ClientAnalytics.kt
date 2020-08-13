@@ -14,7 +14,7 @@ import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.transport.RequestOptions
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 
 /**
  * Client to manage [ABTest] for analytics purposes.

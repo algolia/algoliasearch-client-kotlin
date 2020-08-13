@@ -1,10 +1,11 @@
-package com.algolia.search.transport
+package com.algolia.search.transport.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.RetryableHost
+import com.algolia.search.transport.RequestOptions
 import io.ktor.client.features.ResponseException
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
@@ -19,7 +20,7 @@ import kotlin.math.floor
 
 internal class Transport(
     configuration: Configuration,
-    private val credentialsOrNull: Credentials?
+    private val credentialsOrNull: Credentials?,
 ) : Configuration by configuration {
 
     private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
@@ -43,7 +44,7 @@ internal class Transport(
         httpMethod: HttpMethod,
         path: String,
         requestOptions: RequestOptions?,
-        body: String?
+        body: String?,
     ): HttpRequestBuilder {
         return HttpRequestBuilder().apply {
             url.path(path)
@@ -72,7 +73,7 @@ internal class Transport(
         callType: CallType,
         path: String,
         requestOptions: RequestOptions?,
-        body: String? = null
+        body: String? = null,
     ): T {
         val hosts = callableHosts(callType)
         val timeout = requestOptions.getTimeout(callType)

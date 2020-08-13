@@ -18,7 +18,7 @@ import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.RouteLogs
 import com.algolia.search.transport.RequestOptions
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope

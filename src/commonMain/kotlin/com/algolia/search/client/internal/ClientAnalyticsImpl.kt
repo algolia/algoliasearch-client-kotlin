@@ -7,7 +7,7 @@ import com.algolia.search.endpoint.EndpointAnalytics
 import com.algolia.search.endpoint.internal.EndpointAnalytics
 import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.transport.RequestOptions
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 
 public class ClientAnalyticsImpl internal constructor(
     internal val transport: Transport,

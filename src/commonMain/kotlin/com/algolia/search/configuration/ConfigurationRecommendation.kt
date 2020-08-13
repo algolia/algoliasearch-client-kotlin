@@ -2,7 +2,7 @@ package com.algolia.search.configuration
 
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
-import com.algolia.search.transport.hosts
+import com.algolia.search.transport.internal.hosts
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine

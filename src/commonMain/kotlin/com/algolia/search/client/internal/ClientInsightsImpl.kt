@@ -7,7 +7,7 @@ import com.algolia.search.endpoint.EndpointInsights
 import com.algolia.search.endpoint.internal.EndpointInsights
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.insights.UserToken
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 
 /**
  * Client to manage [InsightsEvent].

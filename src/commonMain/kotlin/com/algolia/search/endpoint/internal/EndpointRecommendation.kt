@@ -9,7 +9,7 @@ import com.algolia.search.model.recommendation.SetPersonalizationStrategyRespons
 import com.algolia.search.serialize.Json
 import com.algolia.search.serialize.RouteRecommendationV2
 import com.algolia.search.transport.RequestOptions
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
 
 internal class EndpointRecommendationImpl(

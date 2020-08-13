@@ -1,9 +1,10 @@
-package com.algolia.search.transport
+package com.algolia.search.transport.internal
 
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.serialize.KeyAlgoliaAPIKey
 import com.algolia.search.serialize.KeyAlgoliaApplicationID
+import com.algolia.search.transport.RequestOptions
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter

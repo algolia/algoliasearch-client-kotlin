@@ -1,7 +1,7 @@
 package com.algolia.search.configuration
 
 import com.algolia.search.client.ClientPlaces
-import com.algolia.search.transport.placesHosts
+import com.algolia.search.transport.internal.placesHosts
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine

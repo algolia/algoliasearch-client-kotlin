@@ -21,7 +21,7 @@ import com.algolia.search.serialize.KeyRequests
 import com.algolia.search.serialize.RouteIndexesV1
 import com.algolia.search.serialize.toBody
 import com.algolia.search.transport.RequestOptions
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.buildJsonObject
