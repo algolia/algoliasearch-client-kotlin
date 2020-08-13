@@ -1,7 +1,10 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multicluster.UserIDQuery
@@ -28,7 +31,7 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
 internal class EndpointMulticlusterImpl(
-    private val transport: Transport
+    private val transport: Transport,
 ) : EndpointMultiCluster {
 
     override suspend fun listClusters(requestOptions: RequestOptions?): ResponseListClusters {
@@ -39,7 +42,7 @@ internal class EndpointMulticlusterImpl(
     override suspend fun assignUserID(
         userID: UserID,
         clusterName: ClusterName,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): Creation {
         val body = buildJsonObject { put(KeyCluster, clusterName.raw) }.toString()
         val options = requestOptionsBuilder(requestOptions) {
@@ -60,7 +63,7 @@ internal class EndpointMulticlusterImpl(
     override suspend fun listUserIDs(
         page: Int?,
         hitsPerPage: Int?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseListUserIDs {
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyPage, page)
@@ -79,7 +82,7 @@ internal class EndpointMulticlusterImpl(
 
     override suspend fun searchUserID(
         query: UserIDQuery,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseSearchUserID {
         val path = "$RouteClustersV1/mapping/search"
         val body = JsonNoDefaults.encodeToString(UserIDQuery.serializer(), query)
@@ -90,7 +93,7 @@ internal class EndpointMulticlusterImpl(
     override suspend fun assignUserIds(
         userIDs: List<UserID>,
         clusterName: ClusterName,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): Creation {
         val path = "$RouteClustersV1/mapping/batch"
         val request = RequestAssignUserIDs(clusterName, userIDs)
@@ -101,7 +104,7 @@ internal class EndpointMulticlusterImpl(
 
     override suspend fun hasPendingMapping(
         retrieveMapping: Boolean,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseHasPendingMapping {
         val path = "$RouteClustersV1/mapping/pending"
         val options = requestOptionsBuilder(requestOptions) {
@@ -111,3 +114,10 @@ internal class EndpointMulticlusterImpl(
         return transport.request(HttpMethod.Get, CallType.Read, path, options)
     }
 }
+
+/**
+ * Create an [EndpointMulticluster] instance.
+ */
+internal fun EndpointMulticluster(
+    transport: Transport,
+): EndpointMultiCluster = EndpointMulticlusterImpl(transport)

@@ -4,7 +4,7 @@ import com.algolia.search.client.ClientInsights
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.endpoint.EndpointInsights
-import com.algolia.search.endpoint.EndpointInsightsImpl
+import com.algolia.search.endpoint.internal.EndpointInsights
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.insights.UserToken
 import com.algolia.search.transport.Transport
@@ -15,7 +15,7 @@ import com.algolia.search.transport.Transport
 public class ClientInsightsImpl internal constructor(
     internal val transport: Transport,
 ) : ClientInsights,
-    EndpointInsights by EndpointInsightsImpl(transport),
+    EndpointInsights by EndpointInsights(transport),
     Configuration by transport,
     Credentials by transport.credentials {
 

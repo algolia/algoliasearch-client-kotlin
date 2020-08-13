@@ -9,7 +9,7 @@ import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.CredentialsImpl
 import com.algolia.search.endpoint.EndpointInsights
 import com.algolia.search.endpoint.EndpointInsightsUser
-import com.algolia.search.endpoint.EndpointInsightsUserImpl
+import com.algolia.search.endpoint.internal.EndpointInsightsUser
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.insights.InsightsEvent
@@ -39,7 +39,7 @@ public interface ClientInsights : EndpointInsights,
     public class User(
         public val insights: EndpointInsights,
         public val userToken: UserToken,
-    ) : EndpointInsightsUser by EndpointInsightsUserImpl(insights, userToken)
+    ) : EndpointInsightsUser by EndpointInsightsUser(insights, userToken)
 
     public companion object
 }

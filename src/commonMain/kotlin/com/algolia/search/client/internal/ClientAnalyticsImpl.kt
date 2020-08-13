@@ -4,7 +4,7 @@ import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.endpoint.EndpointAnalytics
-import com.algolia.search.endpoint.EndpointAnalyticsImpl
+import com.algolia.search.endpoint.internal.EndpointAnalytics
 import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.Transport
@@ -12,7 +12,7 @@ import com.algolia.search.transport.Transport
 public class ClientAnalyticsImpl internal constructor(
     internal val transport: Transport,
 ) : ClientAnalytics,
-    EndpointAnalytics by EndpointAnalyticsImpl(transport),
+    EndpointAnalytics by EndpointAnalytics(transport),
     Configuration by transport,
     Credentials by transport.credentials {
 

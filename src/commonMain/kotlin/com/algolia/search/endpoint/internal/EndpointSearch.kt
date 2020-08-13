@@ -1,8 +1,11 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.filters
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.filter.Filter
@@ -33,7 +36,7 @@ import kotlinx.serialization.json.put
 
 internal class EndpointSearchImpl(
     private val transport: Transport,
-    override val indexName: IndexName
+    override val indexName: IndexName,
 ) : EndpointSearch {
 
     override suspend fun search(query: Query, requestOptions: RequestOptions?): ResponseSearch {
@@ -46,7 +49,7 @@ internal class EndpointSearchImpl(
         match: (ResponseSearch.Hit) -> Boolean,
         query: Query,
         paginate: Boolean,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseHitWithPosition? {
         val response = search(query, requestOptions)
         val hit = response.hits.find(match)
@@ -78,7 +81,7 @@ internal class EndpointSearchImpl(
         attribute: Attribute,
         facetQuery: String?,
         query: Query,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseSearchForFacets {
         val path = indexName.toPath("/facets/$attribute/query")
         val extraParams = buildJsonObject {
@@ -92,7 +95,7 @@ internal class EndpointSearchImpl(
     override suspend fun advancedSearch(
         query: Query,
         filterGroups: Set<FilterGroup<*>>,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseSearch {
         val filtersAnd = filterGroups.filterIsInstance<FilterGroup.And<*>>().flatten()
         val filtersOr = filterGroups.filterIsInstance<FilterGroup.Or<*>>().flatten()
@@ -131,7 +134,7 @@ internal class EndpointSearchImpl(
                 }
         }
         val queries = listOf(queryForResults) + queriesForDisjunctiveFacets + queriesForHierarchicalFacets
-        val response = EndpointMultipleIndexImpl(transport).multipleQueries(queries, requestOptions = requestOptions)
+        val response = EndpointMultipleIndex(transport).multipleQueries(queries, requestOptions = requestOptions)
 
         return response.aggregateResult(disjunctiveFacets.size)
     }
@@ -190,7 +193,7 @@ internal class EndpointSearchImpl(
         filtersAnd: List<Filter>,
         filtersOrFacet: List<Filter.Facet>,
         filtersOrTag: List<Filter.Tag>,
-        filtersOrNumeric: List<Filter.Numeric>
+        filtersOrNumeric: List<Filter.Numeric>,
     ): IndexQuery {
         query.apply {
             filters {
@@ -208,3 +211,11 @@ internal class EndpointSearchImpl(
         return this
     }
 }
+
+/**
+ * Create an [EndpointSearch] instance.
+ */
+internal fun EndpointSearch(
+    transport: Transport,
+    indexName: IndexName,
+): EndpointSearch = EndpointSearchImpl(transport, indexName)

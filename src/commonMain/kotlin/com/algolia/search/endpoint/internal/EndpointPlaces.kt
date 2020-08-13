@@ -1,7 +1,10 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.endpoint.EndpointPlaces
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.places.PlaceLanguages
 import com.algolia.search.model.places.PlacesQuery
@@ -19,12 +22,12 @@ import com.algolia.search.transport.Transport
 import io.ktor.http.HttpMethod
 
 internal class EndpointPlacesImpl(
-    private val transport: Transport
+    private val transport: Transport,
 ) : EndpointPlaces {
 
     override suspend fun searchPlaces(
         query: PlacesQuery,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseSearchPlacesMulti {
         val body = JsonNoDefaults.encodeToString(PlacesQuery.serializer(), query)
 
@@ -34,7 +37,7 @@ internal class EndpointPlacesImpl(
     override suspend fun searchPlaces(
         language: Language,
         query: PlacesQuery,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseSearchPlacesMono {
         val copy = query.copy().apply { this.language = language }
         val body = JsonNoDefaults.encodeToString(PlacesQuery.serializer(), copy)
@@ -49,7 +52,7 @@ internal class EndpointPlacesImpl(
     override suspend fun reverseGeocoding(
         geolocation: Point,
         hitsPerPage: Int?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseSearchPlacesMulti {
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyAroundLatLng, "${geolocation.latitude},${geolocation.longitude}")
@@ -63,7 +66,7 @@ internal class EndpointPlacesImpl(
         language: Language,
         geolocation: Point,
         hitsPerPage: Int?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseSearchPlacesMono {
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyAroundLatLng, "${geolocation.latitude},${geolocation.longitude}")
@@ -74,3 +77,10 @@ internal class EndpointPlacesImpl(
         return transport.request(HttpMethod.Get, CallType.Read, "$RoutePlaces/reverse", options)
     }
 }
+
+/**
+ * Create an [EndpointPlaces] instance.
+ */
+internal fun EndpointPlaces(
+    transport: Transport,
+): EndpointPlaces = EndpointPlacesImpl(transport)

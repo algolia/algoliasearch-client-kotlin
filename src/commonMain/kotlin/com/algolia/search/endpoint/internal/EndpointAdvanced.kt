@@ -1,7 +1,10 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.endpoint.EndpointAdvanced
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseLogs
@@ -24,7 +27,7 @@ import kotlinx.coroutines.withTimeout
 
 internal class EndpointAdvancedImpl(
     private val transport: Transport,
-    override val indexName: IndexName
+    override val indexName: IndexName,
 ) : EndpointAdvanced {
 
     override suspend fun List<Task>.wait(timeout: Long?, requestOptions: RequestOptions?): List<TaskStatus> {
@@ -64,7 +67,7 @@ internal class EndpointAdvancedImpl(
         page: Int?,
         hitsPerPage: Int?,
         logType: LogType?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseLogs {
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyIndexName, indexName.raw)
@@ -75,3 +78,11 @@ internal class EndpointAdvancedImpl(
         return transport.request(HttpMethod.Get, CallType.Read, RouteLogs, options)
     }
 }
+
+/**
+ * Create an [EndpointAdvanced] instance.
+ */
+internal fun EndpointAdvanced(
+    transport: Transport,
+    indexName: IndexName,
+): EndpointAdvanced = EndpointAdvancedImpl(transport, indexName)

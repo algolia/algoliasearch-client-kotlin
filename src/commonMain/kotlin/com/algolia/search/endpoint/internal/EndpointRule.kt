@@ -1,7 +1,11 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.endpoint.EndpointRecommendation
+import com.algolia.search.endpoint.EndpointRule
 import com.algolia.search.exception.EmptyListException
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
@@ -21,13 +25,13 @@ import kotlinx.serialization.builtins.ListSerializer
 
 internal class EndpointRuleImpl(
     private val transport: Transport,
-    override val indexName: IndexName
+    override val indexName: IndexName,
 ) : EndpointRule {
 
     override suspend fun saveRule(
         rule: Rule,
         forwardToReplicas: Boolean?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): RevisionIndex {
         val path = indexName.toPath("/$RouteRules/${rule.objectID}")
         val body = JsonNoDefaults.encodeToString(Rule.serializer(), rule)
@@ -47,7 +51,7 @@ internal class EndpointRuleImpl(
     override suspend fun deleteRule(
         objectID: ObjectID,
         forwardToReplicas: Boolean?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): RevisionIndex {
         val path = indexName.toPath("/$RouteRules/$objectID")
         val options = requestOptionsBuilder(requestOptions) {
@@ -58,7 +62,7 @@ internal class EndpointRuleImpl(
 
     override suspend fun searchRules(
         query: RuleQuery,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseSearchRules {
         val path = indexName.toPath("/$RouteRules/search")
         val body = JsonNoDefaults.encodeToString(RuleQuery.serializer(), query)
@@ -84,7 +88,7 @@ internal class EndpointRuleImpl(
         rules: List<Rule>,
         forwardToReplicas: Boolean?,
         clearExistingRules: Boolean?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): RevisionIndex {
         if (rules.isEmpty()) throw EmptyListException("rules")
         val body = JsonNoDefaults.encodeToString(ListSerializer(Rule.serializer()), rules)
@@ -99,8 +103,16 @@ internal class EndpointRuleImpl(
     override suspend fun replaceAllRules(
         rules: List<Rule>,
         forwardToReplicas: Boolean?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): RevisionIndex {
         return saveRules(rules, forwardToReplicas, true, requestOptions)
     }
 }
+
+/**
+ * Create an [EndpointRule] instance.
+ */
+internal fun EndpointRule(
+    transport: Transport,
+    indexName: IndexName,
+): EndpointRule = EndpointRuleImpl(transport, indexName)

@@ -1,6 +1,9 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
+import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.apikey.APIKeyParams
 import com.algolia.search.model.request.RequestAPIKey
@@ -24,13 +27,13 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 
 internal class EndpointAPIKeyImpl(
-    private val transport: Transport
+    private val transport: Transport,
 ) : EndpointAPIKey {
 
     override suspend fun addAPIKey(
         params: APIKeyParams,
         restrictSources: String?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): CreationAPIKey {
         val query = mutableMapOf<String, JsonElement>().run {
             restrictSources?.let { put(KeyRestrictSources, JsonPrimitive(it)) }
@@ -54,7 +57,7 @@ internal class EndpointAPIKeyImpl(
     override suspend fun updateAPIKey(
         apiKey: APIKey,
         params: APIKeyParams,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): RevisionAPIKey {
         val body = RequestAPIKey(
             ACLs = params.ACLs,
@@ -101,8 +104,15 @@ internal class EndpointAPIKeyImpl(
 
     override suspend fun getAPIKey(
         apiKey: APIKey,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): ResponseAPIKey {
         return transport.request(HttpMethod.Get, CallType.Read, "$RouteKeysV1/$apiKey", requestOptions)
     }
 }
+
+/**
+ * Create an [EndpointAPIKey] instance.
+ */
+internal fun EndpointAPIKey(
+    transport: Transport,
+): EndpointAPIKey = EndpointAPIKeyImpl(transport)

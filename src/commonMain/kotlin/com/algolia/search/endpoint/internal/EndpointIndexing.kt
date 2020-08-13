@@ -1,8 +1,12 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.client.internal.Index
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.endpoint.EndpointIndex
+import com.algolia.search.endpoint.EndpointIndexing
 import com.algolia.search.exception.EmptyListException
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.Attribute
@@ -254,3 +258,11 @@ internal class EndpointIndexingImpl(
         }
     }
 }
+
+/**
+ * Create an [EndpointIndex] instance.
+ */
+internal fun EndpointIndexing(
+    transport: Transport,
+    indexName: IndexName,
+): EndpointIndexing = EndpointIndexingImpl(transport, indexName)

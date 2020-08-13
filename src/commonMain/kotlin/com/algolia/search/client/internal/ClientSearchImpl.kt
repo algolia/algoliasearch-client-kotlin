@@ -8,12 +8,12 @@ import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointAPIKey
-import com.algolia.search.endpoint.EndpointAPIKeyImpl
 import com.algolia.search.endpoint.EndpointAdvanced
 import com.algolia.search.endpoint.EndpointMultiCluster
-import com.algolia.search.endpoint.EndpointMulticlusterImpl
 import com.algolia.search.endpoint.EndpointMultipleIndex
-import com.algolia.search.endpoint.EndpointMultipleIndexImpl
+import com.algolia.search.endpoint.internal.EndpointAPIKey
+import com.algolia.search.endpoint.internal.EndpointMulticluster
+import com.algolia.search.endpoint.internal.EndpointMultipleIndex
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseAPIKey
@@ -41,9 +41,9 @@ import kotlinx.coroutines.withTimeout
 internal class ClientSearchImpl internal constructor(
     internal val transport: Transport,
 ) : ClientSearch,
-    EndpointMultipleIndex by EndpointMultipleIndexImpl(transport),
-    EndpointAPIKey by EndpointAPIKeyImpl(transport),
-    EndpointMultiCluster by EndpointMulticlusterImpl(transport),
+    EndpointMultipleIndex by EndpointMultipleIndex(transport),
+    EndpointAPIKey by EndpointAPIKey(transport),
+    EndpointMultiCluster by EndpointMulticluster(transport),
     Configuration by transport,
     Credentials by transport.credentials {
 

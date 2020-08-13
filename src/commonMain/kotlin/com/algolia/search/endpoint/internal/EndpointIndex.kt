@@ -1,6 +1,9 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
+
+package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
+import com.algolia.search.endpoint.EndpointIndex
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.index.Scope
 import com.algolia.search.model.request.RequestCopyOrMove
@@ -18,14 +21,14 @@ import io.ktor.http.HttpStatusCode
 
 internal class EndpointIndexImpl(
     private val transport: Transport,
-    override val indexName: IndexName
+    override val indexName: IndexName,
 ) : EndpointIndex {
 
     private suspend fun copyOrMove(
         destination: IndexName,
         key: String,
         scopes: List<Scope>? = null,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): RevisionIndex {
         val request = RequestCopyOrMove(key, destination, scopes)
         val body = JsonNoDefaults.encodeToString(RequestCopyOrMove.serializer(), request)
@@ -36,7 +39,7 @@ internal class EndpointIndexImpl(
     override suspend fun copyIndex(
         destination: IndexName,
         scopes: List<Scope>?,
-        requestOptions: RequestOptions?
+        requestOptions: RequestOptions?,
     ): RevisionIndex {
         return copyOrMove(destination, KeyCopy, scopes, requestOptions)
     }
@@ -63,10 +66,18 @@ internal class EndpointIndexImpl(
 
     override suspend fun exists(): Boolean {
         try {
-            EndpointSearchImpl(transport, indexName).search(Query(responseFields = emptyList()))
+            EndpointSearch(transport, indexName).search(Query(responseFields = emptyList()))
         } catch (exception: ResponseException) {
             if (exception.response.status == HttpStatusCode.NotFound) return false
         }
         return true
     }
 }
+
+/**
+ * Create an [EndpointIndex] instance.
+ */
+internal fun EndpointIndex(
+    transport: Transport,
+    indexName: IndexName,
+): EndpointIndex = EndpointIndexImpl(transport, indexName)

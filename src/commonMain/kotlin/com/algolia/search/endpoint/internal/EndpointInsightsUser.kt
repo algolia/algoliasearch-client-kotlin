@@ -1,5 +1,9 @@
-package com.algolia.search.endpoint
+@file:Suppress("FunctionName")
 
+package com.algolia.search.endpoint.internal
+
+import com.algolia.search.endpoint.EndpointInsights
+import com.algolia.search.endpoint.EndpointInsightsUser
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
@@ -11,14 +15,14 @@ import io.ktor.client.statement.HttpResponse
 
 public class EndpointInsightsUserImpl(
     private val insights: EndpointInsights,
-    private val userToken: UserToken
+    private val userToken: UserToken,
 ) : EndpointInsightsUser {
 
     override suspend fun viewedFilters(
         indexName: IndexName,
         eventName: EventName,
         filters: List<Filter.Facet>,
-        timestamp: Long?
+        timestamp: Long?,
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.View(
@@ -35,7 +39,7 @@ public class EndpointInsightsUserImpl(
         indexName: IndexName,
         eventName: EventName,
         objectIDs: List<ObjectID>,
-        timestamp: Long?
+        timestamp: Long?,
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.View(
@@ -52,7 +56,7 @@ public class EndpointInsightsUserImpl(
         indexName: IndexName,
         eventName: EventName,
         filters: List<Filter.Facet>,
-        timestamp: Long?
+        timestamp: Long?,
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Click(
@@ -69,7 +73,7 @@ public class EndpointInsightsUserImpl(
         indexName: IndexName,
         eventName: EventName,
         objectIDs: List<ObjectID>,
-        timestamp: Long?
+        timestamp: Long?,
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Click(
@@ -88,7 +92,7 @@ public class EndpointInsightsUserImpl(
         queryID: QueryID,
         objectIDs: List<ObjectID>,
         positions: List<Int>,
-        timestamp: Long?
+        timestamp: Long?,
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Click(
@@ -107,7 +111,7 @@ public class EndpointInsightsUserImpl(
         indexName: IndexName,
         eventName: EventName,
         filters: List<Filter.Facet>,
-        timestamp: Long?
+        timestamp: Long?,
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Conversion(
@@ -124,7 +128,7 @@ public class EndpointInsightsUserImpl(
         indexName: IndexName,
         eventName: EventName,
         objectIDs: List<ObjectID>,
-        timestamp: Long?
+        timestamp: Long?,
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Conversion(
@@ -142,7 +146,7 @@ public class EndpointInsightsUserImpl(
         eventName: EventName,
         queryID: QueryID,
         objectIDs: List<ObjectID>,
-        timestamp: Long?
+        timestamp: Long?,
     ): HttpResponse {
         return insights.sendEvent(
             InsightsEvent.Conversion(
@@ -156,3 +160,11 @@ public class EndpointInsightsUserImpl(
         )
     }
 }
+
+/**
+ * Create an [EndpointInsightsUser] instance.
+ */
+internal fun EndpointInsightsUser(
+    insights: EndpointInsights,
+    userToken: UserToken,
+): EndpointInsightsUser = EndpointInsightsUserImpl(insights, userToken)
