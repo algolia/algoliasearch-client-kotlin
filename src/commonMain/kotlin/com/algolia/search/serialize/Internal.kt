@@ -108,11 +108,11 @@ internal val JsonElement.jsonObjectOrNull: JsonObject?
 /**
  * Convenience method to get current element as [JsonArray] or null.
  */
-public val JsonElement.jsonArrayOrNull: JsonArray?
+internal val JsonElement.jsonArrayOrNull: JsonArray?
     get() = this as? JsonArray
 
 /**
  * Convenience method to get current element as [JsonPrimitive] or null.
  */
-public val JsonElement.jsonPrimitiveOrNull: JsonPrimitive?
+internal val JsonElement.jsonPrimitiveOrNull: JsonPrimitive?
     get() = this as? JsonPrimitive
