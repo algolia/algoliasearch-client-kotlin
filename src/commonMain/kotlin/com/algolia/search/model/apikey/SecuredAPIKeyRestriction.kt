@@ -4,7 +4,7 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.toJsonNoDefaults
+import com.algolia.search.serialize.internal.toJsonNoDefaults
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.json.JsonArray

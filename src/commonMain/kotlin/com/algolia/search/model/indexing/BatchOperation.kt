@@ -6,7 +6,7 @@ import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.KeyAction
 import com.algolia.search.serialize.KeyAddObject
 import com.algolia.search.serialize.KeyBody
@@ -17,9 +17,9 @@ import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.KeyPartialUpdateObject
 import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
 import com.algolia.search.serialize.KeyUpdateObject
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.serialize.merge
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
+import com.algolia.search.serialize.internal.merge
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer

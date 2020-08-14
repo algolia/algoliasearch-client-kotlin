@@ -16,8 +16,8 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.model.search.RemoveWordIfNoResults
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.JsonNonStrict
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.KSerializerFacetMap
 import com.algolia.search.serialize.KSerializerPoint
 import com.algolia.search.serialize.KeyAbTestVariantID
@@ -55,10 +55,10 @@ import com.algolia.search.serialize.Key_DistinctSeqID
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.Key_RankingInfo
 import com.algolia.search.serialize.Key_SnippetResult
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.serialize.jsonObjectOrNull
-import com.algolia.search.serialize.jsonPrimitiveOrNull
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
+import com.algolia.search.serialize.internal.jsonObjectOrNull
+import com.algolia.search.serialize.internal.jsonPrimitiveOrNull
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName

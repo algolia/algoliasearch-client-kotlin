@@ -2,6 +2,7 @@ package com.algolia.search.serialize
 
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.Point
+import com.algolia.search.serialize.internal.regexPoint
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor

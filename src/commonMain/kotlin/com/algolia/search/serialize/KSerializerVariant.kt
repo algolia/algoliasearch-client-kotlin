@@ -3,6 +3,10 @@ package com.algolia.search.serialize
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.search.Query
+import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
+import com.algolia.search.serialize.internal.jsonObjectOrNull
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor

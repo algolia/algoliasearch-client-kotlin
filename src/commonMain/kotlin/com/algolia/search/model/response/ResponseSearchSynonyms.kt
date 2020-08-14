@@ -2,12 +2,12 @@ package com.algolia.search.model.response
 
 import com.algolia.search.model.response.ResponseSearchSynonyms.Hit
 import com.algolia.search.model.synonym.Synonym
-import com.algolia.search.serialize.JsonNonStrict
+import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.KeyHits
 import com.algolia.search.serialize.KeyNbHits
 import com.algolia.search.serialize.Key_HighlightResult
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.jsonObjectOrNull
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.jsonObjectOrNull
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

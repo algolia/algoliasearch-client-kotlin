@@ -4,7 +4,7 @@ import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import kotlinx.coroutines.runBlocking

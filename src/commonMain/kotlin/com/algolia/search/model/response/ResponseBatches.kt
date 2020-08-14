@@ -9,9 +9,9 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.serialize.KeyObjectIDs
 import com.algolia.search.serialize.KeyTaskID
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.serialize.jsonArrayOrNull
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
+import com.algolia.search.serialize.internal.jsonArrayOrNull
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

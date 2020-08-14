@@ -1,6 +1,6 @@
 package client
 
-import com.algolia.search.serialize.urlEncode
+import com.algolia.search.serialize.internal.urlEncode
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject

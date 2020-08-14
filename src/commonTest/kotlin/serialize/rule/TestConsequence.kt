@@ -11,8 +11,8 @@ import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyAutomaticFacetFilters
 import com.algolia.search.serialize.KeyAutomaticOptionalFacetFilters
 import com.algolia.search.serialize.KeyEdits
@@ -23,7 +23,7 @@ import com.algolia.search.serialize.KeyParams
 import com.algolia.search.serialize.KeyPromote
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyUserData
-import com.algolia.search.serialize.toJsonNoDefaults
+import com.algolia.search.serialize.internal.toJsonNoDefaults
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject

@@ -3,6 +3,7 @@ package com.algolia.search.serialize
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.HighlightResult
 import com.algolia.search.model.search.SnippetResult
+import com.algolia.search.serialize.internal.Json
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonArray

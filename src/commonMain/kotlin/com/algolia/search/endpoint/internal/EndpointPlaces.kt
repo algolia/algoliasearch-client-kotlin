@@ -12,7 +12,7 @@ import com.algolia.search.model.response.ResponseSearchPlacesMono
 import com.algolia.search.model.response.ResponseSearchPlacesMulti
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyAroundLatLng
 import com.algolia.search.serialize.KeyHitsPerPage
 import com.algolia.search.serialize.KeyLanguage

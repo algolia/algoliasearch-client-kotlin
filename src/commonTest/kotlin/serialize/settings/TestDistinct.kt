@@ -1,7 +1,7 @@
 package serialize.settings
 
 import com.algolia.search.model.settings.Distinct
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import kotlinx.serialization.json.JsonPrimitive
 import serialize.TestSerializer
 import shouldEqual

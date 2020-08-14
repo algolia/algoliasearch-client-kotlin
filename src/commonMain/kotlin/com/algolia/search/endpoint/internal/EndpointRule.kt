@@ -4,7 +4,6 @@ package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.requestOptionsBuilder
-import com.algolia.search.endpoint.EndpointRecommendation
 import com.algolia.search.endpoint.EndpointRule
 import com.algolia.search.exception.EmptyListException
 import com.algolia.search.model.IndexName
@@ -14,7 +13,7 @@ import com.algolia.search.model.response.ResponseSearchRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.RuleQuery
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyClearExistingRules
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.RouteRules

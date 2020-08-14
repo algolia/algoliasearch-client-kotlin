@@ -1,12 +1,12 @@
 package com.algolia.search.model.analytics
 
 import com.algolia.search.model.ClientDate
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyEndAt
 import com.algolia.search.serialize.KeyName
 import com.algolia.search.serialize.KeyVariants
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

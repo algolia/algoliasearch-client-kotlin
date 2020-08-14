@@ -11,7 +11,7 @@ import com.algolia.search.model.indexing.BatchOperation.Other
 import com.algolia.search.model.indexing.BatchOperation.PartialUpdateObject
 import com.algolia.search.model.indexing.BatchOperation.ReplaceObject
 import com.algolia.search.model.indexing.Partial
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.KeyAction
 import com.algolia.search.serialize.KeyAddObject
 import com.algolia.search.serialize.KeyBody

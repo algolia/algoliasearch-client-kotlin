@@ -21,7 +21,7 @@ import com.algolia.search.model.search.SortFacetsBy
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyAdvancedSyntax
 import com.algolia.search.serialize.KeyAdvancedSyntaxFeatures
 import com.algolia.search.serialize.KeyAllowTyposOnNumericTokens

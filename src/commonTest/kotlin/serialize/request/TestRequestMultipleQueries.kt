@@ -6,7 +6,7 @@ import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.request.RequestMultipleQueries
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyParams
 import com.algolia.search.serialize.KeyRequests

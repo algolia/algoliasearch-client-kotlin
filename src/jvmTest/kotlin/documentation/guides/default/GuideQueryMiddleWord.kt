@@ -2,7 +2,7 @@ package documentation.guides.default
 
 import com.algolia.search.dsl.searchableAttributes
 import com.algolia.search.dsl.settings
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import documentation.index
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.builtins.ListSerializer

@@ -9,7 +9,7 @@ import com.algolia.search.helper.toUserToken
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.request.RequestInsightsEvents
-import com.algolia.search.serialize.JsonDebug
+import com.algolia.search.serialize.internal.JsonDebug
 import loadScratch
 import shouldEqual
 import kotlin.test.Test

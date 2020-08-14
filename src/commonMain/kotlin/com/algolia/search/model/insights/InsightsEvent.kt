@@ -18,7 +18,7 @@ import com.algolia.search.serialize.KeyQueryID
 import com.algolia.search.serialize.KeyTimestamp
 import com.algolia.search.serialize.KeyUserToken
 import com.algolia.search.serialize.KeyView
-import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer

@@ -8,7 +8,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.Time
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.response.ResponseVariant
-import com.algolia.search.serialize.JsonDebug
+import com.algolia.search.serialize.internal.JsonDebug
 import dayInMillis
 import kotlinx.serialization.KSerializer
 import loadScratch

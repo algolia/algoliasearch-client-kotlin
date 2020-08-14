@@ -2,8 +2,8 @@ package com.algolia.search.model.search
 
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyAll
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer

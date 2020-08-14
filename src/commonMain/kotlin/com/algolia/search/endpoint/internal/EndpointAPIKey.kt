@@ -16,9 +16,9 @@ import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.response.revision.RevisionAPIKey
 import com.algolia.search.serialize.KeyRestrictSources
 import com.algolia.search.serialize.RouteKeysV1
-import com.algolia.search.serialize.stringify
-import com.algolia.search.serialize.toJsonNoDefaults
-import com.algolia.search.serialize.urlEncode
+import com.algolia.search.serialize.internal.stringify
+import com.algolia.search.serialize.internal.toJsonNoDefaults
+import com.algolia.search.serialize.internal.urlEncode
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod

@@ -4,7 +4,7 @@ import com.algolia.search.model.Raw
 import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.serialize.KeyMin
 import com.algolia.search.serialize.KeyStrict
-import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.internal.asJsonInput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer

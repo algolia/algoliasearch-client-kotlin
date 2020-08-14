@@ -1,6 +1,7 @@
 package com.algolia.search.serialize
 
 import com.algolia.search.model.ClientDate
+import com.algolia.search.serialize.internal.asJsonInput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.descriptors.SerialDescriptor

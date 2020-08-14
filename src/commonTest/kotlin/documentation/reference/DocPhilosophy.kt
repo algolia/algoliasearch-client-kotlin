@@ -15,8 +15,8 @@ import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.SortFacetsBy
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.JsonNonStrict
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNonStrict
 import documentation.client
 import documentation.index
 import io.ktor.client.features.ResponseException

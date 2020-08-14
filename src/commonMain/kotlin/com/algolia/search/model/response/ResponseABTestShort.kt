@@ -4,12 +4,12 @@ import com.algolia.search.helper.toABTestID
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.Variant
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KSerializerVariant
 import com.algolia.search.serialize.KeyId
 import com.algolia.search.serialize.KeyVariants
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer

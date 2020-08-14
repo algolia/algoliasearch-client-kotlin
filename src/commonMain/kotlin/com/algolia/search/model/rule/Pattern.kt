@@ -3,7 +3,7 @@ package com.algolia.search.model.rule
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.regexFacet
+import com.algolia.search.serialize.internal.regexFacet
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer

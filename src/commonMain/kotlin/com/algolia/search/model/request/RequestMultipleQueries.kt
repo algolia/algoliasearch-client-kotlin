@@ -6,9 +6,9 @@ import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyParams
 import com.algolia.search.serialize.KeyRequests
 import com.algolia.search.serialize.KeyStrategy
-import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.serialize.toJsonNoDefaults
-import com.algolia.search.serialize.urlEncode
+import com.algolia.search.serialize.internal.asJsonOutput
+import com.algolia.search.serialize.internal.toJsonNoDefaults
+import com.algolia.search.serialize.internal.urlEncode
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationStrategy

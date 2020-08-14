@@ -3,6 +3,8 @@ package com.algolia.search.serialize
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Facet
+import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.asJsonInput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
