@@ -2,6 +2,7 @@ package com.algolia.search.model
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toObjectID
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyObjectID
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName

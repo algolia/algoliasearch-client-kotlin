@@ -8,7 +8,7 @@ import com.algolia.search.endpoint.EndpointSynonym
 import com.algolia.search.exception.EmptyListException
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.request.EmptyBody
+import com.algolia.search.model.internal.request.EmptyBody
 import com.algolia.search.model.response.ResponseSearchSynonyms
 import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex

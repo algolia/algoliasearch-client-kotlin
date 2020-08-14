@@ -1,6 +1,7 @@
 package com.algolia.search.model
 
 import com.algolia.search.exception.EmptyStringException
+import com.algolia.search.model.internal.Raw
 
 /**
  * Your [ApplicationID] (or App ID) is what Algolia uses to identify your app, where we keep all your indices.

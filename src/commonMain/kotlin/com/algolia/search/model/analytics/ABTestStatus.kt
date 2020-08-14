@@ -1,6 +1,6 @@
 package com.algolia.search.model.analytics
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyActive
 import com.algolia.search.serialize.KeyExpired
 import com.algolia.search.serialize.KeyFailed

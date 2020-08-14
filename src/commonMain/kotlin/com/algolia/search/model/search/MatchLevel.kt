@@ -1,6 +1,6 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.search.MatchLevel.Full
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.KeyFull

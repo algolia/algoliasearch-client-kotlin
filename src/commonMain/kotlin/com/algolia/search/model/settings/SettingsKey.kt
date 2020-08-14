@@ -1,7 +1,7 @@
 package com.algolia.search.model.settings
 
 import com.algolia.search.endpoint.EndpointSettings
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAdvancedSyntax
 import com.algolia.search.serialize.KeyAllowCompressionOfIntegerArray
 import com.algolia.search.serialize.KeyAllowTyposOnNumericTokens

@@ -9,7 +9,7 @@ import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
-import com.algolia.search.model.request.RequestRequestObjects
+import com.algolia.search.model.internal.request.RequestRequestObjects
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.ResponseListAPIKey
 import com.algolia.search.model.response.ResponseListIndices

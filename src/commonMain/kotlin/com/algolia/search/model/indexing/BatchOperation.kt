@@ -5,7 +5,7 @@ import com.algolia.search.endpoint.EndpointIndexing
 import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.KeyAction
 import com.algolia.search.serialize.KeyAddObject

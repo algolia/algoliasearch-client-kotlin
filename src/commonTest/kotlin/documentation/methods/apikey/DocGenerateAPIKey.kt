@@ -3,7 +3,7 @@ package documentation.methods.apikey
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.Time
+import com.algolia.search.model.internal.Time
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.search.Query

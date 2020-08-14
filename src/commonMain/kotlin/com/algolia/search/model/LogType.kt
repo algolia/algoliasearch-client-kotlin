@@ -1,5 +1,6 @@
 package com.algolia.search.model
 
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAll
 import com.algolia.search.serialize.KeyBuild
 import com.algolia.search.serialize.KeyError

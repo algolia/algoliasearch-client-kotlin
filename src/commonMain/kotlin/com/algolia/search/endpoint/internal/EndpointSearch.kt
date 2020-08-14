@@ -12,7 +12,7 @@ import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.filter.FilterGroupsConverter
 import com.algolia.search.model.multipleindex.IndexQuery
-import com.algolia.search.model.request.RequestParams
+import com.algolia.search.model.internal.request.RequestParams
 import com.algolia.search.model.response.ResponseHitWithPosition
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets

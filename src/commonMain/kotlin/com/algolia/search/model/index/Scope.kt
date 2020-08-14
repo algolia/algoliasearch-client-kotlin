@@ -1,7 +1,7 @@
 package com.algolia.search.model.index
 
 import com.algolia.search.endpoint.EndpointIndex
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyRules
 import com.algolia.search.serialize.KeySettings
 import com.algolia.search.serialize.KeySynonyms

@@ -1,7 +1,7 @@
 package com.algolia.search.model.multipleindex
 
 import com.algolia.search.endpoint.EndpointMultipleIndex
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.KeyNone
 import com.algolia.search.serialize.KeyStopIfEnoughMatches

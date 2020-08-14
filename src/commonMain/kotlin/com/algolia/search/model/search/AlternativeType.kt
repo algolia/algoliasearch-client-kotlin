@@ -1,6 +1,6 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAltcorrection
 import com.algolia.search.serialize.KeyCompound
 import com.algolia.search.serialize.KeyConcat

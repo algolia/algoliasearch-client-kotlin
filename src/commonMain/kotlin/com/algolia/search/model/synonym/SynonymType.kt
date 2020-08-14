@@ -1,6 +1,6 @@
 package com.algolia.search.model.synonym
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAlternativeCorrection1
 import com.algolia.search.serialize.KeyAlternativeCorrection2
 import com.algolia.search.serialize.KeyOneWaySynonym

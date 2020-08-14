@@ -4,7 +4,7 @@ import com.algolia.search.exception.EmptyListException
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.KeyAlternativeCorrection1
 import com.algolia.search.serialize.KeyAlternativeCorrection2

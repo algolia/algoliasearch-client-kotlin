@@ -1,4 +1,4 @@
-package com.algolia.search.model.request
+package com.algolia.search.model.internal.request
 
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL

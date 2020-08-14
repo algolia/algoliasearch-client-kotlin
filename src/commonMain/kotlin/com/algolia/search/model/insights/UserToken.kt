@@ -2,7 +2,7 @@ package com.algolia.search.model.insights
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toUserToken
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.internal.regexUserToken
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable

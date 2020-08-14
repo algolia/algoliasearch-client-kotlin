@@ -6,7 +6,7 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.apikey.APIKeyParams
-import com.algolia.search.model.request.RequestAPIKey
+import com.algolia.search.model.internal.request.RequestAPIKey
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseListAPIKey
 import com.algolia.search.model.response.creation.Creation

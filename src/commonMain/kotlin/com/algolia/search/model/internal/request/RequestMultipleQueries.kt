@@ -1,4 +1,4 @@
-package com.algolia.search.model.request
+package com.algolia.search.model.internal.request
 
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
@@ -18,7 +18,7 @@ import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
-@Serializable(RequestMultipleQueries.Companion::class)
+@Serializable(RequestMultipleQueries::class)
 internal class RequestMultipleQueries(
     @SerialName(KeyRequests) val indexQueries: List<IndexQuery>,
     @SerialName(KeyStrategy) val strategy: MultipleQueriesStrategy? = null

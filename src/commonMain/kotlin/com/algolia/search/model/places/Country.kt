@@ -1,6 +1,6 @@
 package com.algolia.search.model.places
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.places.Country.Other
 import com.algolia.search.serialize.KeyAfghanistan
 import com.algolia.search.serialize.KeyAlandIslands

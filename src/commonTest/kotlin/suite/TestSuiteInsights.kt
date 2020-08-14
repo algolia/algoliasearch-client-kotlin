@@ -6,7 +6,7 @@ import com.algolia.search.helper.toAttribute
 import com.algolia.search.helper.toEventName
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.helper.toUserToken
-import com.algolia.search.model.Time
+import com.algolia.search.model.internal.Time
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.search.Query
