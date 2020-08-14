@@ -1,10 +1,15 @@
+@file:Suppress("FunctionName")
+
 package com.algolia.search.configuration
 
 import com.algolia.search.client.ClientAnalytics
+import com.algolia.search.configuration.internal.ConfigurationAnalyticsImpl
+import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
+import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
+import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.internal.hosts
-import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
@@ -12,19 +17,48 @@ import io.ktor.client.features.logging.LogLevel
 /**
  * Configuration used by [ClientAnalytics].
  */
-public data class ConfigurationAnalytics(
-    override val applicationID: ApplicationID,
-    override val apiKey: APIKey,
-    val region: Region.Analytics,
-    override val writeTimeout: Long = defaultWriteTimeout,
-    override val readTimeout: Long = defaultReadTimeout,
-    override val logLevel: LogLevel = defaultLogLevel,
-    override val hosts: List<RetryableHost> = region.hosts,
-    override val defaultHeaders: Map<String, String>? = null,
-    override val engine: HttpClientEngine? = null,
-    override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null
-) : Configuration, Credentials {
+public interface ConfigurationAnalytics : Configuration, Credentials {
 
-    override val compression: Compression = Compression.None
-    override val httpClient: HttpClient = getHttpClient()
+    /**
+     * Analytics region.
+     */
+    public val region: Region.Analytics
 }
+
+/**
+ * Create a [ConfigurationAnalytics] instance.
+ *
+ * @param applicationID application ID
+ * @param apiKey API key
+ * @param region analytics region
+ * @param writeTimeout write timout
+ * @param readTimeout read timeout
+ * @param logLevel logging level
+ * @param hosts analytics region hosts
+ * @param defaultHeaders default headers
+ * @param engine http client engine
+ * @param httpClientConfig http client configuration
+ */
+public fun ConfigurationAnalytics(
+    applicationID: ApplicationID,
+    apiKey: APIKey,
+    region: Region.Analytics,
+    writeTimeout: Long = DEFAULT_WRITE_TIMEOUT,
+    readTimeout: Long = DEFAULT_READ_TIMEOUT,
+    logLevel: LogLevel = DEFAULT_LOG_LEVEL,
+    hosts: List<RetryableHost> = region.hosts,
+    defaultHeaders: Map<String, String>? = null,
+    engine: HttpClientEngine? = null,
+    httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
+): ConfigurationAnalytics = ConfigurationAnalyticsImpl(
+    applicationID = applicationID,
+    apiKey = apiKey,
+    region = region,
+    writeTimeout = writeTimeout,
+    readTimeout = readTimeout,
+    logLevel = logLevel,
+    hosts = hosts,
+    defaultHeaders = defaultHeaders,
+    engine = engine,
+    httpClientConfig = httpClientConfig
+)

@@ -12,7 +12,7 @@ import com.algolia.search.transport.internal.Transport
 /**
  * Client to manage [InsightsEvent].
  */
-public class ClientInsightsImpl internal constructor(
+internal class ClientInsightsImpl internal constructor(
     internal val transport: Transport,
 ) : ClientInsights,
     EndpointInsights by EndpointInsights(transport),

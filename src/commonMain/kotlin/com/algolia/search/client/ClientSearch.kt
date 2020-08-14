@@ -6,8 +6,8 @@ import com.algolia.search.client.internal.ClientSearchImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Credentials
-import com.algolia.search.configuration.CredentialsImpl
-import com.algolia.search.configuration.defaultLogLevel
+import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
+import com.algolia.search.configuration.internal.Credentials
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMultipleIndex
@@ -127,11 +127,11 @@ public interface ClientSearch : EndpointMultipleIndex, EndpointAPIKey, EndpointM
 public fun ClientSearch(
     applicationID: ApplicationID,
     apiKey: APIKey,
-    logLevel: LogLevel = defaultLogLevel,
+    logLevel: LogLevel = DEFAULT_LOG_LEVEL,
 ): ClientSearch = ClientSearchImpl(
     Transport(
         ConfigurationSearch(applicationID = applicationID, apiKey = apiKey, logLevel = logLevel),
-        CredentialsImpl(applicationID = applicationID, apiKey = apiKey)
+        Credentials(applicationID = applicationID, apiKey = apiKey)
     )
 )
 

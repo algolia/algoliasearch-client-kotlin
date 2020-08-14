@@ -6,7 +6,7 @@ import com.algolia.search.client.internal.ClientInsightsImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationInsights
 import com.algolia.search.configuration.Credentials
-import com.algolia.search.configuration.CredentialsImpl
+import com.algolia.search.configuration.internal.Credentials
 import com.algolia.search.endpoint.EndpointInsights
 import com.algolia.search.endpoint.EndpointInsightsUser
 import com.algolia.search.endpoint.internal.EndpointInsightsUser
@@ -54,7 +54,7 @@ public fun ClientInsights(
     applicationID: ApplicationID,
     apiKey: APIKey,
 ): ClientInsights = ClientInsightsImpl(Transport(ConfigurationInsights(applicationID, apiKey),
-    CredentialsImpl(applicationID, apiKey)))
+    Credentials(applicationID, apiKey)))
 
 /**
  * Create a [ClientSearch] instance.

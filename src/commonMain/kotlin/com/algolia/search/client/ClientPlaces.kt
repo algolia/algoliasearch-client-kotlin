@@ -5,7 +5,7 @@ package com.algolia.search.client
 import com.algolia.search.client.internal.ClientPlacesImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationPlaces
-import com.algolia.search.configuration.CredentialsImpl
+import com.algolia.search.configuration.internal.Credentials
 import com.algolia.search.endpoint.EndpointPlaces
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
@@ -29,7 +29,7 @@ public fun ClientPlaces(
     applicationID: ApplicationID,
     apiKey: APIKey,
 ): ClientPlaces = ClientPlacesImpl(
-    Transport(ConfigurationPlaces(), CredentialsImpl(applicationID, apiKey))
+    Transport(ConfigurationPlaces(), Credentials(applicationID, apiKey))
 )
 
 /**

@@ -50,7 +50,7 @@ internal class ClientSearchImpl internal constructor(
     /**
      *  Initialize an [Index] configured with [ConfigurationSearch].
      */
-    public override fun initIndex(indexName: IndexName): Index {
+    override fun initIndex(indexName: IndexName): Index {
         return Index(transport, indexName)
     }
 
@@ -60,7 +60,7 @@ internal class ClientSearchImpl internal constructor(
      * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
      * the allotted time in milliseconds.
      */
-    public override suspend fun List<TaskIndex>.waitAll(timeout: Long?): List<TaskStatus> {
+    override suspend fun List<TaskIndex>.waitAll(timeout: Long?): List<TaskStatus> {
 
         suspend fun loop(): List<TaskStatus> {
             while (true) {
@@ -79,7 +79,7 @@ internal class ClientSearchImpl internal constructor(
     /**
      * Convenience method similar to [waitAll] but with a [ResponseBatches] as receiver.
      */
-    public override suspend fun ResponseBatches.waitAll(timeout: Long?): List<TaskStatus> {
+    override suspend fun ResponseBatches.waitAll(timeout: Long?): List<TaskStatus> {
         return tasks.waitAll(timeout)
     }
 
@@ -89,7 +89,7 @@ internal class ClientSearchImpl internal constructor(
      * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
      * the allotted time in milliseconds.
      */
-    public override suspend fun CreationAPIKey.wait(timeout: Long?): ResponseAPIKey {
+    override suspend fun CreationAPIKey.wait(timeout: Long?): ResponseAPIKey {
 
         suspend fun loop(): ResponseAPIKey {
             while (true) {
@@ -111,7 +111,7 @@ internal class ClientSearchImpl internal constructor(
      * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
      * the allotted time in milliseconds.
      */
-    public override suspend fun DeletionAPIKey.wait(timeout: Long?): Boolean {
+    override suspend fun DeletionAPIKey.wait(timeout: Long?): Boolean {
 
         suspend fun loop(): Boolean {
             while (true) {
@@ -132,7 +132,7 @@ internal class ClientSearchImpl internal constructor(
      *
      * @see EndpointAdvanced.getLogs
      */
-    public override suspend fun getLogs(
+    override suspend fun getLogs(
         page: Int?,
         hitsPerPage: Int?,
         logType: LogType?,

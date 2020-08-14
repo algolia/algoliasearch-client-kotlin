@@ -6,8 +6,8 @@ import com.algolia.search.client.internal.ClientRecommendationImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationRecommendation
 import com.algolia.search.configuration.Credentials
-import com.algolia.search.configuration.CredentialsImpl
 import com.algolia.search.configuration.Region
+import com.algolia.search.configuration.internal.Credentials
 import com.algolia.search.endpoint.EndpointRecommendation
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
@@ -35,7 +35,7 @@ public fun ClientRecommendation(
 ): ClientRecommendation = ClientRecommendationImpl(
     Transport(
         ConfigurationRecommendation(applicationID, apiKey, region),
-        CredentialsImpl(applicationID, apiKey)
+        Credentials(applicationID, apiKey)
     )
 )
 
