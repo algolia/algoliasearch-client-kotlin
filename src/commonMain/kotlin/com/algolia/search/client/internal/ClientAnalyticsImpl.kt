@@ -9,14 +9,14 @@ import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 
-public class ClientAnalyticsImpl internal constructor(
+internal class ClientAnalyticsImpl internal constructor(
     internal val transport: Transport,
 ) : ClientAnalytics,
     EndpointAnalytics by EndpointAnalytics(transport),
     Configuration by transport,
     Credentials by transport.credentials {
 
-    public override suspend fun browseAllABTests(
+    override suspend fun browseAllABTests(
         hitsPerPage: Int?,
         requestOptions: RequestOptions?,
     ): List<ResponseABTests> {

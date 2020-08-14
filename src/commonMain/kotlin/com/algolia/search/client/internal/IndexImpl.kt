@@ -39,7 +39,7 @@ internal class IndexImpl internal constructor(
     EndpointSynonym by EndpointSynonym(transport, indexName),
     EndpointRule by EndpointRule(transport, indexName) {
 
-    public override suspend fun browseRules(
+    override suspend fun browseRules(
         query: RuleQuery,
         requestOptions: RequestOptions?,
     ): List<ResponseSearchRules> {
@@ -55,7 +55,7 @@ internal class IndexImpl internal constructor(
         return responses
     }
 
-    public override suspend fun browseSynonyms(
+    override suspend fun browseSynonyms(
         query: SynonymQuery,
         requestOptions: RequestOptions?,
     ): List<ResponseSearchSynonyms> {
@@ -71,7 +71,7 @@ internal class IndexImpl internal constructor(
         return responses
     }
 
-    public override suspend fun browseObjects(
+    override suspend fun browseObjects(
         query: Query,
         requestOptions: RequestOptions?,
     ): List<ResponseSearch> {
