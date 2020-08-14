@@ -1,7 +1,7 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.endpoint.EndpointSearch
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAroundLatLng
 import com.algolia.search.serialize.KeyAutomaticRadius
 import com.algolia.search.serialize.KeyExhaustiveFacetsCount

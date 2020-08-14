@@ -1,4 +1,4 @@
-package com.algolia.search.model.request
+package com.algolia.search.model.internal.request
 
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.serialize.KeyEvents

@@ -1,4 +1,4 @@
-package com.algolia.search.model
+package com.algolia.search.model.internal
 
 internal expect object Time {
 

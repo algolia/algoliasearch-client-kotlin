@@ -1,6 +1,6 @@
 package com.algolia.search.model.places
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAddress
 import com.algolia.search.serialize.KeyAirport
 import com.algolia.search.serialize.KeyBusStop

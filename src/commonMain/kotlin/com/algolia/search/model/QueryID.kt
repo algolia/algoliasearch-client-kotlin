@@ -3,6 +3,7 @@ package com.algolia.search.model
 import com.algolia.search.endpoint.EndpointInsightsUser
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toQueryID
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
 import kotlinx.serialization.KSerializer

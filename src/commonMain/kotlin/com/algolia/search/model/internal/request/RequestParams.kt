@@ -1,4 +1,4 @@
-package com.algolia.search.model.request
+package com.algolia.search.model.internal.request
 
 import com.algolia.search.serialize.KeyParams
 import kotlinx.serialization.SerialName

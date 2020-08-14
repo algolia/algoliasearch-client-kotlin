@@ -3,7 +3,7 @@ package suite
 import clientAdmin1
 import clientAnalytics
 import com.algolia.search.model.ClientDate
-import com.algolia.search.model.Time
+import com.algolia.search.model.internal.Time
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant

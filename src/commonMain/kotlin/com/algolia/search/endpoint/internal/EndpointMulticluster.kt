@@ -8,7 +8,7 @@ import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multicluster.UserIDQuery
-import com.algolia.search.model.request.RequestAssignUserIDs
+import com.algolia.search.model.internal.request.RequestAssignUserIDs
 import com.algolia.search.model.response.ResponseHasPendingMapping
 import com.algolia.search.model.response.ResponseListClusters
 import com.algolia.search.model.response.ResponseListUserIDs

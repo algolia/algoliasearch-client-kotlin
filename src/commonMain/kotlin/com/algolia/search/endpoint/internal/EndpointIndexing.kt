@@ -18,9 +18,9 @@ import com.algolia.search.model.indexing.DeleteByQuery
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.multipleindex.RequestObjects
-import com.algolia.search.model.request.EmptyBody
-import com.algolia.search.model.request.RequestParams
-import com.algolia.search.model.request.RequestRequestObjects
+import com.algolia.search.model.internal.request.EmptyBody
+import com.algolia.search.model.internal.request.RequestParams
+import com.algolia.search.model.internal.request.RequestRequestObjects
 import com.algolia.search.model.response.ResponseBatch
 import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.creation.CreationObject

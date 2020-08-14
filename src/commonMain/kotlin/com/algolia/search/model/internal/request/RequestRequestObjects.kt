@@ -1,4 +1,4 @@
-package com.algolia.search.model.request
+package com.algolia.search.model.internal.request
 
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.serialize.KeyRequests

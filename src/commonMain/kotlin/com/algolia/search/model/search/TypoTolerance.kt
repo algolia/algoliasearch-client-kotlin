@@ -1,6 +1,6 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.serialize.KeyMin
 import com.algolia.search.serialize.KeyStrict

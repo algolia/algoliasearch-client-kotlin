@@ -7,7 +7,7 @@ import com.algolia.search.dsl.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointAnalytics
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
-import com.algolia.search.model.request.EmptyBody
+import com.algolia.search.model.internal.request.EmptyBody
 import com.algolia.search.model.response.ResponseABTest
 import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.creation.CreationABTest

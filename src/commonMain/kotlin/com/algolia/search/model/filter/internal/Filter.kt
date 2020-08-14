@@ -1,6 +1,8 @@
-package com.algolia.search.model.filter
+package com.algolia.search.model.filter.internal
 
 import com.algolia.search.model.Attribute
+import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.filter.NumericOperator
 
 internal fun String.escape() = "\"$this\""
 

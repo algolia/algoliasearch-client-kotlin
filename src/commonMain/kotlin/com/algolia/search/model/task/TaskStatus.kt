@@ -1,6 +1,6 @@
 package com.algolia.search.model.task
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyNotPublished
 import com.algolia.search.serialize.KeyPublished
 import kotlinx.serialization.KSerializer

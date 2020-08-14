@@ -1,6 +1,6 @@
 package com.algolia.search.model.rule
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.KeyContains
 import com.algolia.search.serialize.KeyEndsWith

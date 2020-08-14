@@ -1,6 +1,6 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAfrikaans
 import com.algolia.search.serialize.KeyAlbanian
 import com.algolia.search.serialize.KeyArabic

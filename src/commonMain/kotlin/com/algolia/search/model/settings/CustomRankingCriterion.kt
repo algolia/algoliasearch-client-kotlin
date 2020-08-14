@@ -2,7 +2,7 @@ package com.algolia.search.model.settings
 
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAsc
 import com.algolia.search.serialize.KeyDesc
 import com.algolia.search.serialize.internal.regexAsc

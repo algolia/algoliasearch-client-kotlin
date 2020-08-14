@@ -2,7 +2,7 @@ package serialize.serializer
 
 import com.algolia.search.helper.internal.DateISO8601
 import com.algolia.search.model.ClientDate
-import com.algolia.search.model.Time
+import com.algolia.search.model.internal.Time
 import com.algolia.search.serialize.KSerializerClientDate
 import kotlinx.serialization.json.JsonPrimitive
 import serialize.TestSerializer

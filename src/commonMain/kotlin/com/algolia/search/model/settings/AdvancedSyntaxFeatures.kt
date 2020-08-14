@@ -1,6 +1,6 @@
 package com.algolia.search.model.settings
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyExactPhrase
 import com.algolia.search.serialize.KeyExcludeWords
 import kotlinx.serialization.KSerializer

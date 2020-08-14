@@ -2,6 +2,7 @@ package com.algolia.search.model
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toAttribute
+import com.algolia.search.model.internal.Raw
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer

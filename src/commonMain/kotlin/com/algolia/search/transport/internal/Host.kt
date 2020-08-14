@@ -4,7 +4,7 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.model.ApplicationID
-import com.algolia.search.model.Time
+import com.algolia.search.model.internal.Time
 
 internal val ApplicationID.searchHosts
     get() = listOf(
