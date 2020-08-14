@@ -15,11 +15,11 @@ import com.algolia.search.model.response.ResponseListAPIKey
 import com.algolia.search.model.response.ResponseListIndices
 import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.ResponseSearches
-import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyRequests
 import com.algolia.search.serialize.RouteIndexesV1
-import com.algolia.search.serialize.toBody
+import com.algolia.search.serialize.internal.toBody
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod

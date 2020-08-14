@@ -6,9 +6,9 @@ import com.algolia.search.serialize.KeyInsert
 import com.algolia.search.serialize.KeyRemoveLowercase
 import com.algolia.search.serialize.KeyReplace
 import com.algolia.search.serialize.KeyType
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.serialize.jsonPrimitiveOrNull
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
+import com.algolia.search.serialize.internal.jsonPrimitiveOrNull
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer

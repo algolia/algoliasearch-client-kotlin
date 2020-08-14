@@ -79,7 +79,7 @@ import com.algolia.search.serialize.KeyTypoTolerance
 import com.algolia.search.serialize.KeyUnretrievableAttributes
 import com.algolia.search.serialize.KeyUserData
 import com.algolia.search.serialize.KeyVersion
-import com.algolia.search.serialize.toJsonNoDefaults
+import com.algolia.search.serialize.internal.toJsonNoDefaults
 import indexA
 import int
 import kotlinx.serialization.json.JsonNull

@@ -2,7 +2,7 @@ package serialize.response
 
 import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyAverageClickPosition
 import com.algolia.search.serialize.KeyClickCount
 import com.algolia.search.serialize.KeyClickThroughRate

@@ -3,7 +3,7 @@ package serialize.synonym
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.KeyAlternativeCorrection1
 import com.algolia.search.serialize.KeyAlternativeCorrection2
 import com.algolia.search.serialize.KeyCorrections

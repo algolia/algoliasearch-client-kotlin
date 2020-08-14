@@ -10,7 +10,7 @@ import com.algolia.search.model.search.MatchedGeoLocation
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.model.search.SnippetResult
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.Key_DistinctSeqID
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.Key_RankingInfo

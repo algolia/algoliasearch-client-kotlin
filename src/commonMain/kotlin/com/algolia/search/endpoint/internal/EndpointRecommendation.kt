@@ -6,7 +6,7 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.endpoint.EndpointRecommendation
 import com.algolia.search.model.recommendation.PersonalizationStrategy
 import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.RouteRecommendationV2
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport

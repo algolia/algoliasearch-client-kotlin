@@ -5,8 +5,8 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyAsc
 import com.algolia.search.serialize.KeyDesc
-import com.algolia.search.serialize.regexAsc
-import com.algolia.search.serialize.regexDesc
+import com.algolia.search.serialize.internal.regexAsc
+import com.algolia.search.serialize.internal.regexDesc
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer

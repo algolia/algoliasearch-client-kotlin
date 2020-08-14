@@ -1,6 +1,6 @@
 package documentation.guides.data
 
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import documentation.index
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.builtins.ListSerializer

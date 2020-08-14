@@ -1,6 +1,6 @@
 package com.algolia.search.model.rule
 
-import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.internal.asJsonInput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.serializer

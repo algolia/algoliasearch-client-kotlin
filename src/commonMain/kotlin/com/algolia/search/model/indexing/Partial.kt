@@ -12,9 +12,9 @@ import com.algolia.search.serialize.KeyIncrementSet
 import com.algolia.search.serialize.KeyRemove
 import com.algolia.search.serialize.KeyValue
 import com.algolia.search.serialize.Key_Operation
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.serialize.jsonPrimitiveOrNull
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
+import com.algolia.search.serialize.internal.jsonPrimitiveOrNull
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.encoding.Decoder

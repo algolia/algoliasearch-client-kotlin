@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.serialize.merge
+import com.algolia.search.serialize.internal.merge
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put

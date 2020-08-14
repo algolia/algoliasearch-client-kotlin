@@ -4,8 +4,8 @@ import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeySearchable
-import com.algolia.search.serialize.regexFilterOnly
-import com.algolia.search.serialize.regexSearchable
+import com.algolia.search.serialize.internal.regexFilterOnly
+import com.algolia.search.serialize.internal.regexSearchable
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer

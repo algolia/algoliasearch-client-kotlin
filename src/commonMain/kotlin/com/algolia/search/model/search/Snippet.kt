@@ -3,7 +3,7 @@ package com.algolia.search.model.search
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.Raw
-import com.algolia.search.serialize.regexSnippet
+import com.algolia.search.serialize.internal.regexSnippet
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer

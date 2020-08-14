@@ -1,8 +1,8 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.serialize.JsonNonStrict
-import com.algolia.search.serialize.asJsonInput
+import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.asJsonInput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer

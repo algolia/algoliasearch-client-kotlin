@@ -4,7 +4,7 @@ import attributes
 import attributesJson
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.multipleindex.RequestObjects
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyObjectID

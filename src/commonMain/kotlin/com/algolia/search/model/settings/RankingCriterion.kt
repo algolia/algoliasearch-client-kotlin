@@ -13,8 +13,8 @@ import com.algolia.search.serialize.KeyGeo
 import com.algolia.search.serialize.KeyProximity
 import com.algolia.search.serialize.KeyTypo
 import com.algolia.search.serialize.KeyWords
-import com.algolia.search.serialize.regexAsc
-import com.algolia.search.serialize.regexDesc
+import com.algolia.search.serialize.internal.regexAsc
+import com.algolia.search.serialize.internal.regexDesc
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer

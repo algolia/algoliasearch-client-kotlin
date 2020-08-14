@@ -3,6 +3,11 @@ package com.algolia.search.serialize
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.settings.DecompoundedAttributes
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.MapSerializer

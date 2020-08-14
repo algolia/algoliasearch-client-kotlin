@@ -15,8 +15,8 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionSynonym
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
-import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.KeyReplaceExistingSynonyms
 import com.algolia.search.serialize.RouteSynonyms

@@ -6,7 +6,7 @@ import com.algolia.search.client.internal.ClientSearchImpl
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.features.logging.LogLevel

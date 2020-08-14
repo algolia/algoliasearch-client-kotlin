@@ -5,7 +5,7 @@ import com.algolia.search.model.rule.Alternatives
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Pattern
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyAlternatives
 import com.algolia.search.serialize.KeyAnchoring
 import com.algolia.search.serialize.KeyIs

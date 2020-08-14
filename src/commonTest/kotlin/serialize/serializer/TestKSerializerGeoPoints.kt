@@ -1,7 +1,7 @@
 package serialize.serializer
 
 import com.algolia.search.model.search.Point
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.KSerializerGeoPoints
 import kotlinx.serialization.json.buildJsonArray
 import serialize.TestSerializer

@@ -4,7 +4,7 @@ import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.Raw
 import com.algolia.search.serialize.KeyEqualOnly
-import com.algolia.search.serialize.regexEqualOnly
+import com.algolia.search.serialize.internal.regexEqualOnly
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer

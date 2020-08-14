@@ -17,7 +17,7 @@ import com.algolia.search.model.response.ResponseTopUserID
 import com.algolia.search.model.response.ResponseUserID
 import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.deletion.Deletion
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyAlgoliaUserID
 import com.algolia.search.serialize.KeyCluster
 import com.algolia.search.serialize.KeyGetClusters
