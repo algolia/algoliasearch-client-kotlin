@@ -1,16 +1,17 @@
-package com.algolia.search.helper
+package com.algolia.search.helper.internal
 
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 import java.util.TimeZone
 
 internal actual object DateISO8601 {
 
-    val dateISO8601 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").apply {
+    val dateISO8601 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.US).apply {
         timeZone = TimeZone.getTimeZone("UTC")
     }
 
-    val dateISO8601Millis = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").apply {
+    val dateISO8601Millis = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US).apply {
         timeZone = TimeZone.getTimeZone("UTC")
     }
 
@@ -19,6 +20,6 @@ internal actual object DateISO8601 {
     }
 
     actual fun parse(date: String, inMilliseconds: Boolean): Long {
-        return if (inMilliseconds) dateISO8601Millis.parse(date).time else dateISO8601.parse(date).time
+        return if (inMilliseconds) dateISO8601Millis.parse(date)?.time ?: -1 else dateISO8601.parse(date)?.time ?: -1
     }
 }

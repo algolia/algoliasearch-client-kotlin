@@ -1,4 +1,4 @@
-package com.algolia.search.helper
+package com.algolia.search.helper.internal
 
 internal expect object DateISO8601 {
 

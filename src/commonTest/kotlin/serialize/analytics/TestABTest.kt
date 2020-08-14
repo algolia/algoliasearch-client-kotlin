@@ -1,6 +1,6 @@
 package serialize.analytics
 
-import com.algolia.search.helper.DateISO8601
+import com.algolia.search.helper.internal.DateISO8601
 import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.Variant

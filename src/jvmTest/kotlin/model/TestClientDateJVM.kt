@@ -1,6 +1,6 @@
 package model
 
-import com.algolia.search.helper.DateISO8601
+import com.algolia.search.helper.internal.DateISO8601
 import com.algolia.search.model.ClientDate
 import org.junit.Test
 import shouldEqual

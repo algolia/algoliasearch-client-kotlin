@@ -1,4 +1,4 @@
-package com.algolia.search.helper
+package com.algolia.search.helper.internal
 
 import java.net.URLEncoder
 
