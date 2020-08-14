@@ -1,8 +1,8 @@
 package helper
 
-import com.algolia.search.helper.decodeBase64
-import com.algolia.search.helper.encodeBase64
-import com.algolia.search.helper.sha256
+import com.algolia.search.helper.internal.decodeBase64
+import com.algolia.search.helper.internal.encodeBase64
+import com.algolia.search.helper.internal.sha256
 import shouldEqual
 import kotlin.test.Test
 

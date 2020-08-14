@@ -2,7 +2,7 @@ package com.algolia.search.model
 
 import com.algolia.search.client.Index
 import com.algolia.search.exception.EmptyStringException
-import com.algolia.search.helper.StringUTF8
+import com.algolia.search.helper.internal.StringUTF8
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.serialize.RouteIndexesV1
 import kotlinx.serialization.KSerializer

@@ -1,4 +1,4 @@
-package com.algolia.search.helper
+package com.algolia.search.helper.internal
 
 private const val hexCode = "0123456789ABCDEF"
 

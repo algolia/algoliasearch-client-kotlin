@@ -11,9 +11,9 @@ import com.algolia.search.configuration.internal.Credentials
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMultipleIndex
-import com.algolia.search.helper.decodeBase64
-import com.algolia.search.helper.encodeBase64
-import com.algolia.search.helper.sha256
+import com.algolia.search.helper.internal.decodeBase64
+import com.algolia.search.helper.internal.encodeBase64
+import com.algolia.search.helper.internal.sha256
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID

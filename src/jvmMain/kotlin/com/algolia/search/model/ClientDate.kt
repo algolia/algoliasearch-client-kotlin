@@ -1,6 +1,6 @@
 package com.algolia.search.model
 
-import com.algolia.search.helper.DateISO8601
+import com.algolia.search.helper.internal.DateISO8601
 import com.algolia.search.serialize.KSerializerClientDate
 import kotlinx.serialization.Serializable
 import java.util.Date
