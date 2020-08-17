@@ -19,7 +19,8 @@ import com.algolia.search.transport.internal.Transport
 /**
  * Client to manage [InsightsEvent].
  */
-public interface ClientInsights : EndpointInsights,
+public interface ClientInsights :
+    EndpointInsights,
     Configuration,
     Credentials {
 
@@ -53,8 +54,12 @@ public interface ClientInsights : EndpointInsights,
 public fun ClientInsights(
     applicationID: ApplicationID,
     apiKey: APIKey,
-): ClientInsights = ClientInsightsImpl(Transport(ConfigurationInsights(applicationID, apiKey),
-    Credentials(applicationID, apiKey)))
+): ClientInsights = ClientInsightsImpl(
+    Transport(
+        ConfigurationInsights(applicationID, apiKey),
+        Credentials(applicationID, apiKey)
+    )
+)
 
 /**
  * Create a [ClientSearch] instance.

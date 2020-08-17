@@ -3,8 +3,6 @@ package com.algolia.search.model.rule
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.Json
-import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KSerializerObjectIDs
 import com.algolia.search.serialize.KeyAutomaticFacetFilters
 import com.algolia.search.serialize.KeyAutomaticOptionalFacetFilters
@@ -16,6 +14,8 @@ import com.algolia.search.serialize.KeyPromote
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyRemoveLowercase
 import com.algolia.search.serialize.KeyUserData
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.jsonArrayOrNull

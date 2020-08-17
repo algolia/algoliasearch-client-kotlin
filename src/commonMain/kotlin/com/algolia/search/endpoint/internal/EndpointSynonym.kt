@@ -3,7 +3,7 @@
 package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.dsl.internal.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointSynonym
 import com.algolia.search.exception.EmptyListException
 import com.algolia.search.model.IndexName
@@ -15,11 +15,11 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionSynonym
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
-import com.algolia.search.serialize.internal.Json
-import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.KeyReplaceExistingSynonyms
 import com.algolia.search.serialize.RouteSynonyms
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod

@@ -1,10 +1,10 @@
 package com.algolia.search.serialize.internal
 
 import com.algolia.search.model.indexing.DeleteByQuery
-import com.algolia.search.model.multipleindex.IndexQuery
-import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.internal.request.RequestAPIKey
 import com.algolia.search.model.internal.request.RequestMultipleQueries
+import com.algolia.search.model.multipleindex.IndexQuery
+import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.Settings
 import io.ktor.http.Parameters

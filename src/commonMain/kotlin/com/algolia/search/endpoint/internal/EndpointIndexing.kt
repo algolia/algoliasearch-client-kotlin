@@ -4,7 +4,7 @@ package com.algolia.search.endpoint.internal
 
 import com.algolia.search.client.internal.Index
 import com.algolia.search.configuration.CallType
-import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.dsl.internal.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointIndex
 import com.algolia.search.endpoint.EndpointIndexing
 import com.algolia.search.exception.EmptyListException
@@ -17,10 +17,10 @@ import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.indexing.DeleteByQuery
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
-import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.internal.request.EmptyBody
 import com.algolia.search.model.internal.request.RequestParams
 import com.algolia.search.model.internal.request.RequestRequestObjects
+import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.response.ResponseBatch
 import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.creation.CreationObject
@@ -28,13 +28,13 @@ import com.algolia.search.model.response.deletion.DeletionObject
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.task.TaskIndex
-import com.algolia.search.serialize.internal.Json
-import com.algolia.search.serialize.internal.JsonNoDefaults
-import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyCreateIfNotExists
 import com.algolia.search.serialize.KeyRequests
 import com.algolia.search.serialize.RouteIndexesV1
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
 import com.algolia.search.transport.RequestOptions

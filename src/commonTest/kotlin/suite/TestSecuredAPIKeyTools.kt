@@ -5,10 +5,10 @@ import clientSearch
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.internal.Time
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.apikey.generateSecuredAPIKey
 import com.algolia.search.model.apikey.getSecuredApiKeyRemainingValidity
+import com.algolia.search.model.internal.Time
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.features.ResponseException

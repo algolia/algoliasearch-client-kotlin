@@ -27,8 +27,3 @@ public fun requestOptions(
 public fun objectIDs(block: DSLObjectIDs.() -> Unit): List<ObjectID> {
     return DSLObjectIDs(block)
 }
-
-internal fun requestOptionsBuilder(
-    requestOptions: RequestOptions? = null,
-    block: RequestOptions.() -> Unit
-) = requestOptions(requestOptions, block)

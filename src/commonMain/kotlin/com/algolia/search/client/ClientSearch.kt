@@ -6,8 +6,8 @@ import com.algolia.search.client.internal.ClientSearchImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Credentials
-import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.configuration.internal.Credentials
+import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMultipleIndex
@@ -19,8 +19,8 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
-import com.algolia.search.model.internal.Time
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
+import com.algolia.search.model.internal.Time
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.ResponseLogs
@@ -35,8 +35,12 @@ import io.ktor.client.features.logging.LogLevel
 /**
  * Client to perform operations on indices.
  */
-public interface ClientSearch : EndpointMultipleIndex, EndpointAPIKey, EndpointMultiCluster,
-    Configuration, Credentials {
+public interface ClientSearch :
+    EndpointMultipleIndex,
+    EndpointAPIKey,
+    EndpointMultiCluster,
+    Configuration,
+    Credentials {
 
     /**
      *  Initialize an [Index] configured with [ConfigurationSearch].

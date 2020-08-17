@@ -6,8 +6,8 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.endpoint.EndpointInsights
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.internal.request.RequestInsightsEvents
-import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.RouteEventsV1
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.client.statement.HttpResponse

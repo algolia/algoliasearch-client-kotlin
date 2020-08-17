@@ -21,7 +21,6 @@ import com.algolia.search.model.search.SortFacetsBy
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
-import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyAdvancedSyntax
 import com.algolia.search.serialize.KeyAdvancedSyntaxFeatures
 import com.algolia.search.serialize.KeyAllowTyposOnNumericTokens
@@ -88,6 +87,7 @@ import com.algolia.search.serialize.KeySynonyms
 import com.algolia.search.serialize.KeyTagFilters
 import com.algolia.search.serialize.KeyTypoTolerance
 import com.algolia.search.serialize.KeyUserToken
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import int
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray

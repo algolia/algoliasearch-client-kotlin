@@ -5,7 +5,6 @@ import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.KeyAlternativeCorrection1
 import com.algolia.search.serialize.KeyAlternativeCorrection2
 import com.algolia.search.serialize.KeyCorrections
@@ -18,6 +17,7 @@ import com.algolia.search.serialize.KeySynonym
 import com.algolia.search.serialize.KeySynonyms
 import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.KeyWord
+import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.regexPlaceholder

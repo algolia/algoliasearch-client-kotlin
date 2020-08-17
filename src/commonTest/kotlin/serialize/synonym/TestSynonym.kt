@@ -3,7 +3,6 @@ package serialize.synonym
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
-import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.KeyAlternativeCorrection1
 import com.algolia.search.serialize.KeyAlternativeCorrection2
 import com.algolia.search.serialize.KeyCorrections
@@ -16,6 +15,7 @@ import com.algolia.search.serialize.KeySynonym
 import com.algolia.search.serialize.KeySynonyms
 import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.KeyWord
+import com.algolia.search.serialize.internal.Json
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.buildJsonObject

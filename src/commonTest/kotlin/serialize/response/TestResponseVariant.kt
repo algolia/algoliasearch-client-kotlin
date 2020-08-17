@@ -2,7 +2,6 @@ package serialize.response
 
 import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyAverageClickPosition
 import com.algolia.search.serialize.KeyClickCount
 import com.algolia.search.serialize.KeyClickThroughRate
@@ -16,6 +15,7 @@ import com.algolia.search.serialize.KeySearchCount
 import com.algolia.search.serialize.KeyTrackedSearchCount
 import com.algolia.search.serialize.KeyTrafficPercentage
 import com.algolia.search.serialize.KeyUserCount
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import indexA
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put

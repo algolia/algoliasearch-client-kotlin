@@ -3,12 +3,12 @@
 package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.dsl.internal.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointMultiCluster
+import com.algolia.search.model.internal.request.RequestAssignUserIDs
 import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multicluster.UserIDQuery
-import com.algolia.search.model.internal.request.RequestAssignUserIDs
 import com.algolia.search.model.response.ResponseHasPendingMapping
 import com.algolia.search.model.response.ResponseListClusters
 import com.algolia.search.model.response.ResponseListUserIDs
@@ -17,13 +17,13 @@ import com.algolia.search.model.response.ResponseTopUserID
 import com.algolia.search.model.response.ResponseUserID
 import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.deletion.Deletion
-import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyAlgoliaUserID
 import com.algolia.search.serialize.KeyCluster
 import com.algolia.search.serialize.KeyGetClusters
 import com.algolia.search.serialize.KeyHitsPerPage
 import com.algolia.search.serialize.KeyPage
 import com.algolia.search.serialize.RouteClustersV1
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
