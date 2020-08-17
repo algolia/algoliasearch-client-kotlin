@@ -6,7 +6,7 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Credentials
-import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.dsl.internal.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.endpoint.EndpointAdvanced
 import com.algolia.search.endpoint.EndpointMultiCluster

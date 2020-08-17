@@ -18,14 +18,14 @@ import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 
-@Serializable(RequestMultipleQueries::class)
+@Serializable(RequestMultipleQueries.Companion::class)
 internal class RequestMultipleQueries(
     @SerialName(KeyRequests) val indexQueries: List<IndexQuery>,
     @SerialName(KeyStrategy) val strategy: MultipleQueriesStrategy? = null
 ) {
 
     @Serializer(RequestMultipleQueries::class)
-    public companion object : SerializationStrategy<RequestMultipleQueries> {
+    companion object : SerializationStrategy<RequestMultipleQueries> {
 
         override fun serialize(encoder: Encoder, value: RequestMultipleQueries) {
             val json = buildJsonObject {

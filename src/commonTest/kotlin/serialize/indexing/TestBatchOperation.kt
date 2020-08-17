@@ -11,7 +11,6 @@ import com.algolia.search.model.indexing.BatchOperation.Other
 import com.algolia.search.model.indexing.BatchOperation.PartialUpdateObject
 import com.algolia.search.model.indexing.BatchOperation.ReplaceObject
 import com.algolia.search.model.indexing.Partial
-import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.KeyAction
 import com.algolia.search.serialize.KeyAddObject
 import com.algolia.search.serialize.KeyBody
@@ -22,6 +21,7 @@ import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.KeyPartialUpdateObject
 import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
 import com.algolia.search.serialize.KeyUpdateObject
+import com.algolia.search.serialize.internal.Json
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import serialize.TestSerializer

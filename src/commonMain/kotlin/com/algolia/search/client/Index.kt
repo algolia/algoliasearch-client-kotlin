@@ -21,8 +21,14 @@ import com.algolia.search.transport.RequestOptions
 /**
  * The main entry point for performing operations on a single index.
  */
-public interface Index : EndpointSearch, EndpointSettings, EndpointAdvanced, EndpointIndex, EndpointIndexing,
-    EndpointSynonym, EndpointRule {
+public interface Index :
+    EndpointSearch,
+    EndpointSettings,
+    EndpointAdvanced,
+    EndpointIndex,
+    EndpointIndexing,
+    EndpointSynonym,
+    EndpointRule {
 
     /**
      * Index name.

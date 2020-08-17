@@ -3,7 +3,7 @@
 package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.dsl.internal.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointPlaces
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.places.PlaceLanguages
@@ -12,11 +12,11 @@ import com.algolia.search.model.response.ResponseSearchPlacesMono
 import com.algolia.search.model.response.ResponseSearchPlacesMulti
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyAroundLatLng
 import com.algolia.search.serialize.KeyHitsPerPage
 import com.algolia.search.serialize.KeyLanguage
 import com.algolia.search.serialize.RoutePlaces
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod

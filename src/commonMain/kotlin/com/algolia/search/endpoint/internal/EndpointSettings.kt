@@ -3,7 +3,7 @@
 package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.dsl.internal.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointSettings
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.revision.RevisionIndex
@@ -11,13 +11,13 @@ import com.algolia.search.model.settings.NumericAttributeFilter
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
-import com.algolia.search.serialize.internal.Json
-import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.KeyAttributesToIndex
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.KeyNumericAttributesToIndex
 import com.algolia.search.serialize.KeySlaves
 import com.algolia.search.serialize.RouteSettings
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.internal.jsonArrayOrNull
 import com.algolia.search.serialize.internal.merge
 import com.algolia.search.serialize.internal.toJsonNoDefaults

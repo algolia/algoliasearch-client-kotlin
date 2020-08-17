@@ -4,7 +4,6 @@ import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.AutomaticFacetFilters
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence

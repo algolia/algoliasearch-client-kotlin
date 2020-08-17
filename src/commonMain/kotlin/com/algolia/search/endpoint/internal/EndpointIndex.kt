@@ -10,9 +10,9 @@ import com.algolia.search.model.internal.request.RequestCopyOrMove
 import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyCopy
 import com.algolia.search.serialize.KeyMove
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.client.features.ResponseException

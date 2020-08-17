@@ -3,7 +3,7 @@
 package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.dsl.internal.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointAnalytics
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
@@ -13,10 +13,10 @@ import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.creation.CreationABTest
 import com.algolia.search.model.response.deletion.DeletionABTest
 import com.algolia.search.model.response.revision.RevisionABTest
-import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.KeyLimit
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.RouteABTestsV2
+import com.algolia.search.serialize.internal.Json
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod

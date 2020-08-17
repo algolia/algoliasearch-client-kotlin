@@ -4,15 +4,15 @@ package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.filters
-import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.dsl.internal.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.filter.FilterGroupsConverter
-import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.internal.request.RequestParams
+import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.response.ResponseHitWithPosition
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets
@@ -21,9 +21,9 @@ import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Facet
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.KeyCursor
 import com.algolia.search.serialize.KeyFacetQuery
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.merge
 import com.algolia.search.serialize.internal.toBody
 import com.algolia.search.serialize.internal.toJsonNoDefaults
