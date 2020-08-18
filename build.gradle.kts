@@ -16,14 +16,14 @@ buildscript {
 }
 
 plugins {
-    id("kotlin-multiplatform") version "1.4.0-rc"
-    id("kotlinx-serialization") version "1.4.0-rc"
+    id("kotlin-multiplatform") version "1.4.0"
+    id("kotlinx-serialization") version "1.4.0"
     id("maven-publish")
     id("com.jfrog.bintray") version "1.8.4"
 }
 
 apply(plugin = "com.android.library")
-apply(plugin = "com.diffplug.gradle.spotless")
+apply(plugin = "com.diffplug.spotless")
 
 repositories {
     jcenter()
