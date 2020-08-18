@@ -1,6 +1,6 @@
 package configuration
 
-import BuildConfig
+import com.algolia.search.internal.BuildConfig
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.ConfigurationSearch
