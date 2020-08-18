@@ -1,4 +1,3 @@
-import com.android.build.gradle.LibraryExtension
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -10,7 +9,6 @@ buildscript {
         google()
     }
     dependencies {
-        classpath(plugin.Android())
         classpath(plugin.Spotless())
     }
 }
@@ -22,7 +20,6 @@ plugins {
     id("com.jfrog.bintray") version "1.8.4"
 }
 
-apply(plugin = "com.android.library")
 apply(plugin = "com.diffplug.spotless")
 
 repositories {
@@ -45,37 +42,6 @@ allprojects {
     }
 }
 
-extensions.getByType(LibraryExtension::class.java).apply {
-    compileSdkVersion(30)
-
-    defaultConfig {
-        minSdkVersion(17)
-        targetSdkVersion(30)
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles("src/jvmMain/resources/META-INF/proguard/algoliasearch.pro")
-    }
-
-    testOptions.unitTests.isIncludeAndroidResources = true
-
-    sourceSets {
-        getByName("main") {
-            manifest.srcFile("src/androidMain/AndroidManifest.xml")
-            java.srcDirs("src/androidMain/kotlin")
-            res.srcDirs("src/androidMain/res")
-        }
-        getByName("test") {
-            java.srcDirs("src/androidTest/kotlin")
-            res.srcDirs("src/androidTest/res")
-        }
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-    testOptions.unitTests.isIncludeAndroidResources = true
-}
-
 kotlin {
     explicitApi()
     jvm {
@@ -85,17 +51,7 @@ kotlin {
             }
         }
     }
-    android {
-        mavenPublication {
-            artifactId = "${Library.artifact}-android"
-        }
-        publishLibraryVariants("release")
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
-        }
-    }
+
     sourceSets {
         all {
             languageSettings.progressiveMode = true
@@ -122,16 +78,6 @@ kotlin {
                 implementation(Ktor("client-okhttp"))
                 implementation(Ktor("client-apache"))
                 implementation(Ktor("client-android"))
-            }
-        }
-
-        val androidTest by getting {
-            dependencies {
-                implementation(kotlin("test-junit"))
-                implementation(Ktor("client-android"))
-                implementation(AndroidTestRunner())
-                implementation(AndroidTestExtRunner())
-                implementation(Robolectric())
             }
         }
     }
@@ -191,8 +137,8 @@ bintray {
 
     pkg.apply {
         desc = "Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries," +
-                "and pre-built integrations. Algolia API Client for Kotlin lets you easily use the Algolia Search" +
-                "REST API from your JVM project, such as Android or backend implementations."
+            "and pre-built integrations. Algolia API Client for Kotlin lets you easily use the Algolia Search" +
+            "REST API from your JVM project, such as Android or backend implementations."
         repo = "maven"
         name = Library.artifact
         websiteUrl = "https://www.algolia.com/"
@@ -210,7 +156,7 @@ bintray {
 tasks {
     val bintrayUpload by getting(BintrayUploadTask::class) {
         doFirst {
-            setPublications("jvm", "metadata", "androidRelease")
+            setPublications("jvm", "metadata")
         }
     }
     withType<KotlinCompile> {

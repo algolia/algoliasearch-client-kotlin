@@ -1,11 +1,11 @@
 package configuration
 
-import com.algolia.search.internal.BuildConfig
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.clientUserAgent
 import com.algolia.search.dsl.requestOptions
+import com.algolia.search.internal.BuildConfig
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import io.ktor.client.engine.mock.MockEngine
