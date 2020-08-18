@@ -104,50 +104,30 @@ kotlin {
             kotlin.srcDirs("$buildDir/generated/sources/templates/kotlin/main")
             dependencies {
                 api(Ktor("client"))
-                api(Ktor("client-logging"))
-                api(Ktor("client-core"))
                 api(Ktor("client-json"))
+                api(Ktor("client-logging"))
                 api(Ktor("client-serialization"))
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test-common"))
+                implementation(kotlin("test"))
                 implementation(kotlin("test-annotations-common"))
-                api(Ktor("client-mock"))
-            }
-        }
-        val jvmMain by getting {
-            dependencies {
-                api(Ktor("client-core-jvm"))
-                api(Ktor("client-json-jvm"))
-                api(Ktor("client-logging-jvm"))
-                api(Ktor("client-serialization-jvm"))
+                implementation(Ktor("client-mock"))
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
-                implementation(Ktor("client-mock-jvm"))
                 implementation(Ktor("client-okhttp"))
                 implementation(Ktor("client-apache"))
                 implementation(Ktor("client-android"))
             }
         }
-        val androidMain by getting {
-            dependencies {
-                api(Ktor("client-core-jvm"))
-                api(Ktor("client-json-jvm"))
-                api(Ktor("client-logging-jvm"))
-                api(Ktor("client-serialization-jvm"))
-            }
-        }
+
         val androidTest by getting {
             dependencies {
-                implementation(kotlin("test"))
                 implementation(kotlin("test-junit"))
-                implementation(Ktor("client-mock-jvm"))
                 implementation(Ktor("client-android"))
                 implementation(AndroidTestRunner())
                 implementation(AndroidTestExtRunner())
