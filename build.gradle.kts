@@ -1,5 +1,6 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
+import org.gradle.api.publish.maven.internal.artifact.FileBasedMavenArtifact
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.net.URI
 
@@ -87,6 +88,34 @@ val javadocJar by tasks.creating(Jar::class) {
     archiveClassifier.value("javadoc")
 }
 
+tasks {
+    withType<KotlinCompile> {
+        dependsOn("copyTemplates")
+    }
+
+    register(name = "copyTemplates", type = Copy::class) {
+        from("src/commonMain/templates")
+        into("$buildDir/generated/sources/templates/kotlin/main")
+        expand("projectVersion" to Library.version)
+        filteringCharset = "UTF-8"
+    }
+}
+
+tasks.withType<Test> {
+    maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
+}
+
+configure<SpotlessExtension> {
+    kotlin {
+        target("**/*.kt")
+        ktlint("0.37.2")
+        trimTrailingWhitespace()
+        endWithNewline()
+    }
+}
+
+//** Publish **//
+
 publishing {
     repositories {
         maven {
@@ -96,11 +125,6 @@ publishing {
     publications.withType<MavenPublication>().all {
         groupId = Library.group
         version = Library.version
-        artifactId = when (name) {
-            "kotlinMultiplatform" -> Library.artifact
-            "metadata" -> "${Library.artifact}-common"
-            else -> "${Library.artifact}-$name"
-        }
 
         pom.withXml {
             asNode().apply {
@@ -153,33 +177,19 @@ bintray {
     }
 }
 
-tasks {
-    val bintrayUpload by getting(BintrayUploadTask::class) {
-        doFirst {
-            setPublications("jvm", "metadata")
-        }
-    }
-    withType<KotlinCompile> {
-        dependsOn("copyTemplates")
-    }
-
-    register(name = "copyTemplates", type = Copy::class) {
-        from("src/commonMain/templates")
-        into("$buildDir/generated/sources/templates/kotlin/main")
-        expand("projectVersion" to Library.version)
-        filteringCharset = "UTF-8"
-    }
-}
-
-tasks.withType<Test> {
-    maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
-}
-
-configure<SpotlessExtension> {
-    kotlin {
-        target("**/*.kt")
-        ktlint("0.37.2")
-        trimTrailingWhitespace()
-        endWithNewline()
+// Workaround until Bintray gradle plugin caches up:
+// https://github.com/bintray/gradle-bintray-plugin/issues/229#issuecomment-473123891
+tasks.withType<BintrayUploadTask> {
+    doFirst {
+        publishing.publications
+            .filterIsInstance<MavenPublication>()
+            .forEach { publication ->
+                val moduleFile = buildDir.resolve("publications/${publication.name}/module.json")
+                if (moduleFile.exists()) {
+                    publication.artifact(object : FileBasedMavenArtifact(moduleFile) {
+                        override fun getDefaultExtension() = "module"
+                    })
+                }
+            }
     }
 }
