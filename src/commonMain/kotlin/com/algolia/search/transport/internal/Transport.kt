@@ -10,6 +10,7 @@ import io.ktor.client.features.ResponseException
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.http.HttpMethod
+import io.ktor.http.HttpStatusCode
 import io.ktor.http.URLProtocol
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.TimeoutCancellationException
@@ -92,7 +93,8 @@ internal class Transport(
             } catch (exception: IOException) {
                 mutex.withLock { host.hasFailed() }
             } catch (exception: ResponseException) {
-                val isRetryable = floor(exception.response.status.value / 100f) != 4f
+                val value = exception.response?.status?.value ?: 0
+                val isRetryable = floor(value / 100f) != 4f
 
                 if (isRetryable) mutex.withLock { host.hasFailed() } else throw exception
             }

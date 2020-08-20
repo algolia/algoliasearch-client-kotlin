@@ -10,7 +10,7 @@ import com.algolia.search.model.task.TaskStatus
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.json.JsonObjectSerializer
+import kotlinx.serialization.json.JsonObject
 import runBlocking
 import shouldBeTrue
 import shouldContain
@@ -45,7 +45,7 @@ internal class TestSuiteSynonyms {
     @Test
     fun test() {
         runBlocking {
-            val objects = load(ListSerializer(JsonObjectSerializer), "console.json")
+            val objects = load(ListSerializer(JsonObject.serializer()), "console.json")
             val tasks = mutableListOf<Task>()
 
             index.apply {
@@ -70,7 +70,7 @@ internal class TestSuiteSynonyms {
                     shouldFailWith<ResponseException> {
                         getSynonym(gba)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).response?.status?.value shouldEqual HttpStatusCode.NotFound.value
 
                 clearSynonyms().wait() shouldEqual TaskStatus.Published
                 searchSynonyms(SynonymQuery(page = 0, hitsPerPage = 10)).nbHits shouldEqual 0

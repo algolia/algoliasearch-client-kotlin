@@ -70,6 +70,7 @@ kotlin {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(kotlin("test-annotations-common"))
+                implementation(Ktor("client"))
                 implementation(Ktor("client-mock"))
             }
         }

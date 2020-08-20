@@ -15,7 +15,6 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonDecoder
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonElementSerializer
 import kotlinx.serialization.json.JsonEncoder
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
@@ -47,7 +46,7 @@ internal fun JsonObject.urlEncode(): String? {
             entries.forEach { (key, element) ->
                 when (element) {
                     is JsonPrimitive -> append(key, element.content)
-                    else -> append(key, kotlinx.serialization.json.Json.encodeToString(JsonElementSerializer, element))
+                    else -> append(key, Json.encodeToString(JsonElement.serializer(), element))
                 }
             }
         }.formUrlEncode()

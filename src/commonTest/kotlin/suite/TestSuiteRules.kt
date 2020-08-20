@@ -11,7 +11,7 @@ import com.algolia.search.model.task.TaskStatus
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.json.JsonObjectSerializer
+import kotlinx.serialization.json.JsonObject
 import runBlocking
 import shouldEqual
 import shouldFailWith
@@ -29,7 +29,7 @@ internal class TestSuiteRules {
     @Test
     fun test() {
         runBlocking {
-            val objects = load(ListSerializer(JsonObjectSerializer), "iphones.json")
+            val objects = load(ListSerializer(JsonObject.serializer()), "iphones.json")
             val rule = load(Rule.serializer(), "rule_brand.json")
             val rules = load(ListSerializer(Rule.serializer()), "rule_batch.json")
             val tasks = mutableListOf<Task>()
@@ -62,7 +62,7 @@ internal class TestSuiteRules {
                     shouldFailWith<ResponseException> {
                         getRule(rule.objectID)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).response?.status?.value shouldEqual HttpStatusCode.NotFound.value
                 clearRules().wait() shouldEqual TaskStatus.Published
                 searchRules().nbHits shouldEqual 0
             }

@@ -179,7 +179,7 @@ internal class DocPhilosophy {
             try {
                 val response = index.search()
             } catch (exception: ResponseException) {
-                when (exception.response.status) {
+                when (exception.response?.status) {
                     HttpStatusCode.NotFound -> TODO()
                     HttpStatusCode.BadRequest -> TODO()
                 }
