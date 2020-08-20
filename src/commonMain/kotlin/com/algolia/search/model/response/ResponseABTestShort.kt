@@ -42,7 +42,6 @@ public data class ResponseABTestShort(
     val variantB: Variant
 ) {
 
-
     @OptIn(ExperimentalSerializationApi::class)
     @Serializer(ResponseABTestShort::class)
     public companion object :

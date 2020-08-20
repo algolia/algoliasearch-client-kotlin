@@ -10,7 +10,6 @@ import io.ktor.client.features.ResponseException
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.http.HttpMethod
-import io.ktor.http.HttpStatusCode
 import io.ktor.http.URLProtocol
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.TimeoutCancellationException
