@@ -43,7 +43,6 @@ public data class ResponseBatches(
     public val objectIDs: List<ObjectID?>
         get() = objectIDsOrNull!!
 
-
     @OptIn(ExperimentalSerializationApi::class)
     @Serializer(ResponseBatches::class)
     public companion object : KSerializer<ResponseBatches> {

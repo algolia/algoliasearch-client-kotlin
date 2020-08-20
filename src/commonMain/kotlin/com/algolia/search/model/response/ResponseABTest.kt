@@ -81,7 +81,6 @@ public data class ResponseABTest(
     public val conversionSignificance: Float
         get() = conversionSignificanceOrNull!!
 
-
     @OptIn(ExperimentalSerializationApi::class)
     @Serializer(ResponseABTest::class)
     public companion object : KSerializer<ResponseABTest> {
