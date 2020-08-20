@@ -6,6 +6,7 @@ import com.algolia.search.serialize.KeyLat
 import com.algolia.search.serialize.KeyLng
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -30,6 +31,7 @@ public data class MatchedGeoLocation(
     val distance: Long? = null
 ) {
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(MatchedGeoLocation::class)
     public companion object : KSerializer<MatchedGeoLocation> {
 

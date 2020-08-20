@@ -3,6 +3,7 @@ package com.algolia.search.model.search
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.internal.asJsonInput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -38,6 +39,7 @@ public sealed class RemoveStopWords {
         public constructor(vararg queryLanguage: Language) : this(queryLanguage.toList())
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(RemoveStopWords::class)
     public companion object : KSerializer<RemoveStopWords> {
 

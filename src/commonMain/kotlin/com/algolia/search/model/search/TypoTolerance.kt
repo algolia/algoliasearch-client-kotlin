@@ -5,6 +5,7 @@ import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.serialize.KeyMin
 import com.algolia.search.serialize.KeyStrict
 import com.algolia.search.serialize.internal.asJsonInput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -50,6 +51,7 @@ public sealed class TypoTolerance(override val raw: String) : Raw<String> {
         return raw
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(TypoTolerance::class)
     public companion object : KSerializer<TypoTolerance> {
 

@@ -15,6 +15,7 @@ import com.algolia.search.serialize.Key_Operation
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.jsonPrimitiveOrNull
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.encoding.Decoder
@@ -148,6 +149,7 @@ public sealed class Partial {
         public constructor(attribute: Attribute, value: Number) : this(attribute, JsonPrimitive(value))
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(Partial::class)
     public companion object : KSerializer<Partial> {
 

@@ -20,6 +20,7 @@ import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.merge
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -127,6 +128,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
     public data class Other(val key: String, val json: JsonObject) : BatchOperation(key)
 
     @Serializer(BatchOperation::class)
+    @OptIn(ExperimentalSerializationApi::class)
     public companion object : KSerializer<BatchOperation> {
 
         private fun batchJson(value: BatchOperation, block: JsonObjectBuilder.() -> Unit) = buildJsonObject {

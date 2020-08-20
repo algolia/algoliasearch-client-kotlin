@@ -8,6 +8,7 @@ import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -31,6 +32,7 @@ public data class BatchOperationIndex(
     val operation: BatchOperation
 ) {
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(BatchOperationIndex::class)
     public companion object : KSerializer<BatchOperationIndex> {
 

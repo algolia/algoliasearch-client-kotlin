@@ -10,6 +10,7 @@ import com.algolia.search.serialize.KeyVariants
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -41,6 +42,8 @@ public data class ResponseABTestShort(
     val variantB: Variant
 ) {
 
+
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(ResponseABTestShort::class)
     public companion object :
         KSerializer<ResponseABTestShort> {

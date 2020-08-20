@@ -22,6 +22,7 @@ import com.algolia.search.serialize.internal.jsonArrayOrNull
 import com.algolia.search.serialize.internal.jsonObjectOrNull
 import com.algolia.search.serialize.internal.jsonPrimitiveOrNull
 import com.algolia.search.serialize.internal.toJsonNoDefaults
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -74,9 +75,10 @@ public data class Consequence(
      * Custom JSON object that will be appended to the [ResponseSearch.userData].
      * This object is not interpreted by the API. It is limited to 1kB of minified JSON.
      */
-    val userData: JsonObject? = null
+    val userData: JsonObject? = null,
 ) {
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(Consequence::class)
     public companion object : KSerializer<Consequence> {
 

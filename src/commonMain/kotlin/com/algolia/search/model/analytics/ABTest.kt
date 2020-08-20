@@ -7,6 +7,7 @@ import com.algolia.search.serialize.KeyVariants
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -44,6 +45,7 @@ public data class ABTest(
 ) {
 
     @Serializer(ABTest::class)
+    @OptIn(ExperimentalSerializationApi::class)
     public companion object : KSerializer<ABTest> {
 
         override fun serialize(encoder: Encoder, value: ABTest) {

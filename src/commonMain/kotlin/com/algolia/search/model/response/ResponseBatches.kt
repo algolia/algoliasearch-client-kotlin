@@ -12,6 +12,7 @@ import com.algolia.search.serialize.KeyTaskID
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.jsonArrayOrNull
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -42,6 +43,8 @@ public data class ResponseBatches(
     public val objectIDs: List<ObjectID?>
         get() = objectIDsOrNull!!
 
+
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(ResponseBatches::class)
     public companion object : KSerializer<ResponseBatches> {
 

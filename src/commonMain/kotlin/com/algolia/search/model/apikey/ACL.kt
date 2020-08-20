@@ -13,6 +13,7 @@ import com.algolia.search.serialize.KeyLogs
 import com.algolia.search.serialize.KeySearch
 import com.algolia.search.serialize.KeySeeUnretrievableAttributes
 import com.algolia.search.serialize.KeySettings
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -85,6 +86,7 @@ public sealed class ACL(override val raw: String) : Raw<String> {
     public data class Other(override val raw: String) : ACL(raw)
 
     @Serializer(ACL::class)
+    @OptIn(ExperimentalSerializationApi::class)
     public companion object : KSerializer<ACL> {
 
         private val serializer = String.serializer()

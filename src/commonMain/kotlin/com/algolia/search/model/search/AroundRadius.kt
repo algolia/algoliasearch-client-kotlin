@@ -4,6 +4,7 @@ import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAll
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -39,6 +40,7 @@ public sealed class AroundRadius(override val raw: String) : Raw<String> {
         return raw
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(AroundRadius::class)
     public companion object : KSerializer<AroundRadius> {
 

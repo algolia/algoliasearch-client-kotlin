@@ -5,6 +5,7 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Facet
 import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.internal.asJsonInput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.builtins.serializer
@@ -16,6 +17,7 @@ import kotlinx.serialization.encoding.Encoder
 
 public object KSerializerFacetMap : KSerializer<Map<Attribute, List<Facet>>> {
 
+    @OptIn(ExperimentalSerializationApi::class)
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor(Attribute.descriptor.serialName) {
         mapSerialDescriptor(String.serializer().descriptor, Int.serializer().descriptor)
     }

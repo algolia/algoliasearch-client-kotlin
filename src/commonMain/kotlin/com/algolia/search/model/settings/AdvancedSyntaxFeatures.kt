@@ -3,6 +3,7 @@ package com.algolia.search.model.settings
 import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyExactPhrase
 import com.algolia.search.serialize.KeyExcludeWords
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -20,6 +21,7 @@ public sealed class AdvancedSyntaxFeatures(override val raw: String) : Raw<Strin
 
     public data class Other(override val raw: String) : AdvancedSyntaxFeatures(raw)
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(AdvancedSyntaxFeatures::class)
     public companion object : KSerializer<AdvancedSyntaxFeatures> {
 

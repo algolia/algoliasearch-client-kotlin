@@ -9,6 +9,7 @@ import com.algolia.search.serialize.KeyStrategy
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationStrategy
@@ -24,6 +25,7 @@ internal class RequestMultipleQueries(
     @SerialName(KeyStrategy) val strategy: MultipleQueriesStrategy? = null
 ) {
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(RequestMultipleQueries::class)
     companion object : SerializationStrategy<RequestMultipleQueries> {
 
