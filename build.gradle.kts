@@ -1,6 +1,7 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
 import org.gradle.api.publish.maven.internal.artifact.FileBasedMavenArtifact
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 import java.net.URI
 
@@ -90,6 +91,10 @@ val javadocJar by tasks.creating(Jar::class) {
 }
 
 tasks {
+
+    withType<KotlinCompile> {
+        dependsOn("copyTemplates")
+    }
 
     withType<KotlinCompileCommon> {
         dependsOn("copyTemplates")
