@@ -10,7 +10,7 @@ import com.algolia.search.serialize.internal.Json
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.json.JsonObjectSerializer
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import org.junit.Ignore
@@ -27,7 +27,7 @@ internal class GuideImportingJVM {
         val rating: Int,
         val imagePath: String,
         val alternativePath: String,
-        override val objectID: ObjectID
+        override val objectID: ObjectID,
     ) : Indexable
 
     @Test
@@ -36,7 +36,7 @@ internal class GuideImportingJVM {
             val client = ClientSearch(ApplicationID("YourApplicationID"), APIKey("YourAdminAPIKey"))
             val index = client.initIndex(IndexName("actors"))
             val string = File("actors.json").readText()
-            val actors = Json.decodeFromString(ListSerializer(JsonObjectSerializer), string)
+            val actors = Json.decodeFromString(ListSerializer(JsonObject.serializer()), string)
 
             index.apply {
                 actors
@@ -55,7 +55,7 @@ internal class GuideImportingJVM {
             val rating: Int,
             val imagePath: String,
             val alternativePath: String,
-            override val objectID: ObjectID
+            override val objectID: ObjectID,
         ) : Indexable
 
         val string = File("actors.json").readText()

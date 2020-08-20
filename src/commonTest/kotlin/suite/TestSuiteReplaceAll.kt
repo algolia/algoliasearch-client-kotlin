@@ -57,19 +57,19 @@ class TestSuiteReplaceAll {
                     shouldFailWith<ResponseException> {
                         getObject(objectIDOne)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).response?.status?.value shouldEqual HttpStatusCode.NotFound.value
 
                 (
                     shouldFailWith<ResponseException> {
                         getSynonym(objectIDOne)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).response?.status?.value shouldEqual HttpStatusCode.NotFound.value
 
                 (
                     shouldFailWith<ResponseException> {
                         getRule(objectIDOne)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).response?.status?.value shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }

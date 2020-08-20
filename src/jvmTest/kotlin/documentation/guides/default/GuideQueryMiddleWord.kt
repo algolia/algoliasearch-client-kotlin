@@ -9,7 +9,6 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonObjectSerializer
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonPrimitive
 import org.junit.Ignore
@@ -23,7 +22,7 @@ internal class GuideQueryMiddleWord {
     fun snippet1() {
         runBlocking {
             val string = File("products.json").readText()
-            val objects = Json.decodeFromString(ListSerializer(JsonObjectSerializer), string)
+            val objects = Json.decodeFromString(ListSerializer(JsonObject.serializer()), string)
             val records = objects.map {
                 val map = it.toMutableMap()
                 val suffixes = mutableListOf<JsonElement>()

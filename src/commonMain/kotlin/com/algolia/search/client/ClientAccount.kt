@@ -28,7 +28,7 @@ public object ClientAccount {
         try {
             destination.getSettings()
         } catch (exception: ResponseException) {
-            hasThrown404 = exception.response.status.value == HttpStatusCode.NotFound.value
+            hasThrown404 = exception.response?.status?.value == HttpStatusCode.NotFound.value
             if (!hasThrown404) throw exception
         }
         if (!hasThrown404) {

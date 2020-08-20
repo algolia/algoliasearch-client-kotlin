@@ -9,7 +9,7 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.get
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.json.JsonObjectSerializer
+import kotlinx.serialization.json.JsonObject
 import org.junit.Ignore
 import org.junit.Test
 
@@ -25,7 +25,7 @@ internal class TutorialPushData {
     fun ecommerce() {
         runBlocking {
             val content = HttpClient().get<String>("https://alg.li/doc-ecommerce.json")
-            val objects = Json.decodeFromString(ListSerializer(JsonObjectSerializer), content)
+            val objects = Json.decodeFromString(ListSerializer(JsonObject.serializer()), content)
             val client = ClientSearch(
                 ApplicationID("YourApplicationID"),
                 APIKey("YourAdminAPIKey")
@@ -40,7 +40,7 @@ internal class TutorialPushData {
     fun saas() {
         runBlocking {
             val content = HttpClient().get<String>("https://alg.li/doc-saas.json")
-            val objects = Json.decodeFromString(ListSerializer(JsonObjectSerializer), content)
+            val objects = Json.decodeFromString(ListSerializer(JsonObject.serializer()), content)
             val client = ClientSearch(
                 ApplicationID("YourApplicationID"),
                 APIKey("YourAdminAPIKey")
@@ -55,7 +55,7 @@ internal class TutorialPushData {
     fun media() {
         runBlocking {
             val content = HttpClient().get<String>("https://alg.li/doc-media.json")
-            val objects = Json.decodeFromString(ListSerializer(JsonObjectSerializer), content)
+            val objects = Json.decodeFromString(ListSerializer(JsonObject.serializer()), content)
             val client = ClientSearch(
                 ApplicationID("YourApplicationID"),
                 APIKey("YourAdminAPIKey")
@@ -70,7 +70,7 @@ internal class TutorialPushData {
     fun geo() {
         runBlocking {
             val content = HttpClient().get<String>("https://alg.li/doc-geo.json")
-            val objects = Json.decodeFromString(ListSerializer(JsonObjectSerializer), content)
+            val objects = Json.decodeFromString(ListSerializer(JsonObject.serializer()), content)
             val client = ClientSearch(
                 ApplicationID("YourApplicationID"),
                 APIKey("YourAdminAPIKey")
