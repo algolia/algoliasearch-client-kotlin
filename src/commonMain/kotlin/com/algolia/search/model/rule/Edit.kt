@@ -9,6 +9,7 @@ import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.jsonPrimitiveOrNull
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -31,6 +32,7 @@ public data class Edit(
     val insert: String? = null
 ) {
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(Edit::class)
     public companion object : KSerializer<Edit> {
 

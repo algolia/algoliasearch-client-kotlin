@@ -9,6 +9,7 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.Settings
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.Json
@@ -27,6 +28,8 @@ internal val JsonNonStrict = Json {
     isLenient = true
     allowSpecialFloatingPointValues = true
 }
+
+@OptIn(ExperimentalSerializationApi::class)
 internal val JsonDebug = Json {
     prettyPrint = true
     prettyPrintIndent = "  "

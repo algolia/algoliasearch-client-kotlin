@@ -3,6 +3,7 @@ package com.algolia.search.model
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.model.internal.Raw
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -25,6 +26,7 @@ public data class APIKey(override val raw: String) : Raw<String> {
     }
 
     @Serializer(APIKey::class)
+    @OptIn(ExperimentalSerializationApi::class)
     public companion object : KSerializer<APIKey> {
 
         private val serializer = String.serializer()

@@ -6,6 +6,7 @@ import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeySearchable
 import com.algolia.search.serialize.internal.regexFilterOnly
 import com.algolia.search.serialize.internal.regexSearchable
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -36,6 +37,7 @@ public sealed class AttributeForFaceting {
      */
     public data class Searchable(override val attribute: Attribute) : AttributeForFaceting()
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(AttributeForFaceting::class)
     public companion object : KSerializer<AttributeForFaceting> {
 

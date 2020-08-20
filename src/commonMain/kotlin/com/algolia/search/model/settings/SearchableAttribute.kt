@@ -4,6 +4,7 @@ import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyUnordered
 import com.algolia.search.serialize.internal.regexUnordered
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -29,6 +30,7 @@ public sealed class SearchableAttribute {
      */
     public data class Unordered(val attribute: Attribute) : SearchableAttribute()
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(SearchableAttribute::class)
     public companion object : KSerializer<SearchableAttribute> {
 

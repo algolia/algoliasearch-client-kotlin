@@ -18,6 +18,7 @@ import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -80,6 +81,8 @@ public data class ResponseABTest(
     public val conversionSignificance: Float
         get() = conversionSignificanceOrNull!!
 
+
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(ResponseABTest::class)
     public companion object : KSerializer<ResponseABTest> {
 

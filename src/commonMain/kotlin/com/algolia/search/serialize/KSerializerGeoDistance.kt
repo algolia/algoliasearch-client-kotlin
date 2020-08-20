@@ -1,5 +1,6 @@
 package com.algolia.search.serialize
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -9,6 +10,7 @@ import kotlinx.serialization.encoding.Encoder
 
 public typealias GeoDistance = Int
 
+@OptIn(ExperimentalSerializationApi::class)
 @Serializer(forClass = GeoDistance::class)
 public object KSerializerGeoDistance : KSerializer<GeoDistance> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("GeoDistance")

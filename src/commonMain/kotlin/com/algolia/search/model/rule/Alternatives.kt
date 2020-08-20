@@ -1,6 +1,7 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.serialize.internal.asJsonInput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.serializer
@@ -15,6 +16,7 @@ public sealed class Alternatives {
 
     public object False : Alternatives()
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(Alternatives::class)
     public companion object : KSerializer<Alternatives> {
 

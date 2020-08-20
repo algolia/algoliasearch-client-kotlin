@@ -60,6 +60,7 @@ import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.jsonObjectOrNull
 import com.algolia.search.serialize.internal.jsonPrimitiveOrNull
 import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -368,6 +369,7 @@ public data class ResponseSearch(
             return JsonNonStrict.decodeFromJsonElement(deserializer, json)
         }
 
+        @OptIn(ExperimentalSerializationApi::class)
         @Serializer(Hit::class)
         public companion object : KSerializer<Hit> {
 

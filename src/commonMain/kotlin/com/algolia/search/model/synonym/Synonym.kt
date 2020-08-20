@@ -21,6 +21,7 @@ import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.regexPlaceholder
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -146,6 +147,7 @@ public sealed class Synonym {
         val json: JsonObject
     ) : Synonym()
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(Synonym::class)
     public companion object : KSerializer<Synonym> {
 

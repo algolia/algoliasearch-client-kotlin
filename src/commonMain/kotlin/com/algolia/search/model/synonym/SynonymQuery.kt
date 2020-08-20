@@ -6,6 +6,7 @@ import com.algolia.search.serialize.KeyPage
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.internal.asJsonOutput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.SerializationStrategy
 import kotlinx.serialization.Serializer
@@ -38,6 +39,7 @@ public data class SynonymQuery(
     var synonymTypes: List<SynonymType>? = null
 ) {
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(SynonymQuery::class)
     public companion object : SerializationStrategy<SynonymQuery> {
 

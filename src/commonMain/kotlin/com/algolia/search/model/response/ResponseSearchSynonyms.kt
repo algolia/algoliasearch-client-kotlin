@@ -9,6 +9,7 @@ import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.jsonObjectOrNull
 import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
@@ -37,6 +38,7 @@ public data class ResponseSearchSynonyms(
         public val highlightResult: JsonObject
             get() = highlightResultOrNull!!
 
+        @OptIn(ExperimentalSerializationApi::class)
         @Serializer(Hit::class)
         public companion object : DeserializationStrategy<Hit> {
 
