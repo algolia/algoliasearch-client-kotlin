@@ -58,7 +58,8 @@ Install the Kotlin client by adding the following dependency to your `gradle.bui
 
 For full documentation, visit the **[Algolia Kotlin API Client](https://www.algolia.com/doc/api-client/getting-started/install/kotlin/)**.
 
-⚠️ Important: starting from version `1.4.0` the library is compatible only with kotlin version `1.3.70` or higher; for previous versions of kotlin, please use version `1.3.1` of the library.
+⚠️ Important: starting from version `1.4.0` the library is compatible only with kotlin version `1.3.70` or higher; for previous versions of kotlin, please use version `1.3.1` of the library.  
+ℹ️ If you migrate from `1.4.0` to `1.5.0` please follow the [migration guide](guide/Migrate_1.4.x_1.5.x.md).
 
 ### Coroutines
 
