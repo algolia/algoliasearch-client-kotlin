@@ -22,7 +22,7 @@
 
 ## ✨ Features
 
-- The Kotlin client is compatible with Kotlin `1.3.70` and higher.
+- The Kotlin client is compatible with Kotlin `1.4.0` and higher.
 - It is compatible with Kotlin project on the JVM, such as backend and Android applications.
 - It relies on the open source Kotlin libraries for seamless integration into Kotlin projects:
   - [Kotlin multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html).
@@ -43,9 +43,9 @@ Install the Kotlin client by adding the following dependency to your `gradle.bui
   
   dependencies {
      // Search API Client
-     implementation "com.algolia:algoliasearch-client-kotlin-jvm:$kotlin_client_version"
-     // alternately - for android, use the following
-     implementation "com.algolia:algoliasearch-client-kotlin-android:$kotlin_client_version"
+     implementation "com.algolia:algoliasearch-client-kotlin:$kotlin_client_version"
+     // alternately - for Gradle version < 6.0, use the following
+     // implementation "com.algolia:algoliasearch-client-kotlin-jvm:$kotlin_client_version"
 
      // Choose one of the following http client
      implementation "io.ktor:ktor-client-apache:$ktor_version"
