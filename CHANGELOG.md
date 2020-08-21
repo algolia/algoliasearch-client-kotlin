@@ -7,6 +7,9 @@ _ `IncrementFrom` and `IncrementSet` built-in operations (#202)
 - Include ProGuard rules into `aar` and `jar` artifacts
 
 ### Changed
+- Update Kotlin to 1.4.0
+- Update Ktor to 1.4.0 and transitively Kotlin serialization to `1.0.0-RC`
+- Artifacts: remove `android` module and use [gradle module metadata](https://blog.gradle.org/gradle-metadata-1.0)
 - `indexName` required in `InnerQuery`
 
 # 1.4.0
