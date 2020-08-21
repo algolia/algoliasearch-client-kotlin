@@ -1,6 +1,9 @@
 # Migrate from 1.4.x to 1.5.x
 
-## Gradle
+Version `1.5.x` of the library uses the latest Kotlin version `1.4.0` and Kotlin serialization `1.0.0`. If you want to migrate from 
+`1.4.x` to `1.5.x` please follow these steps:
+
+### Gradle
 The library now uses the full power of [Gradle metadata module](https://blog.gradle.org/gradle-metadata-1.0).
 
 In the case you are using the android variant of the library 
@@ -15,7 +18,7 @@ implementation "com.algolia:algoliasearch-client-kotlin:$kotlin_client_version"
 ```
 Otherwise, nothing has to be changed.
 
-## Serialization
+### Serialization
 A significant part of the public API was renamed or extracted to a separate package.
 Here is the most important parts from the kotlinx serialization's [migration guide](https://github.com/Kotlin/kotlinx.serialization/blob/1.0.0-RC/docs/migration.md):
 
