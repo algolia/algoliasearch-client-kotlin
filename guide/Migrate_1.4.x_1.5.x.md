@@ -3,7 +3,7 @@
 ## Gradle
 The library now uses the full power of [Gradle metadata module](https://blog.gradle.org/gradle-metadata-1.0).
 
-In case of using the android variant of the library 
+In the case you are using the android variant of the library 
 ```groovy
 implementation "com.algolia:algoliasearch-client-kotlin-android:$kotlin_client_version"
 ```
@@ -13,7 +13,7 @@ implementation "com.algolia:algoliasearch-client-kotlin:$kotlin_client_version"
 // alternately - for Gradle version < 6.0, use the following
 // implementation "com.algolia:algoliasearch-client-kotlin-jvm:$kotlin_client_version"
 ```
-Otherwise, nothing have be changed.
+Otherwise, nothing has to be changed.
 
 ## Serialization
 A significant part of the public API was renamed or extracted to a separate package.
