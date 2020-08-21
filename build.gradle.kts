@@ -1,6 +1,4 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
-import com.jfrog.bintray.gradle.tasks.BintrayUploadTask
-import org.gradle.api.publish.maven.internal.artifact.FileBasedMavenArtifact
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 import java.net.URI
@@ -19,7 +17,6 @@ plugins {
     id("kotlin-multiplatform") version "1.4.0"
     id("kotlinx-serialization") version "1.4.0"
     id("maven-publish")
-    id("com.jfrog.bintray") version "1.8.4"
 }
 
 apply(plugin = "com.diffplug.spotless")
@@ -126,16 +123,27 @@ configure<SpotlessExtension> {
 publishing {
     repositories {
         maven {
-            url = uri("https://dl.bintray.com/algolia/maven")
+            url = uri("https://api.bintray.com/maven/algolia/maven/algoliasearch-client-kotlin/;publish=0")
+            credentials {
+                username = System.getenv("BINTRAY_USER")
+                password = System.getenv("BINTRAY_KEY")
+            }
         }
     }
     publications.withType<MavenPublication>().all {
         groupId = Library.group
         version = Library.version
+        artifactId = when (name) {
+            "kotlinMultiplatform" -> Library.artifact
+            else -> "${Library.artifact}-$name"
+        }
 
         pom.withXml {
             asNode().apply {
-                appendNode("description", "Kotlin client for Algolia Search API.")
+                appendNode("description",
+                    "Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries," +
+                        "and pre-built integrations. Algolia API Client for Kotlin lets you easily use the Algolia Search" +
+                        "REST API from your JVM project, such as Android or backend implementations.")
                 appendNode("url", "https://github.com/algolia/algoliasearch-client-kotlin")
                 appendNode("licenses").appendNode("license").apply {
                     appendNode("name", "MIT")
@@ -156,47 +164,6 @@ publishing {
 
     kotlin.targets.forEach { target ->
         val targetPublication = publications.withType<MavenPublication>().findByName(target.name)
-
         targetPublication?.artifact(javadocJar)
-    }
-}
-
-bintray {
-    user = System.getenv("BINTRAY_USER")
-    key = System.getenv("BINTRAY_KEY")
-    publish = true
-
-    pkg.apply {
-        desc = "Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries," +
-            "and pre-built integrations. Algolia API Client for Kotlin lets you easily use the Algolia Search" +
-            "REST API from your JVM project, such as Android or backend implementations."
-        repo = "maven"
-        name = Library.artifact
-        websiteUrl = "https://www.algolia.com/"
-        issueTrackerUrl = "https://github.com/algolia/algoliasearch-client-kotlin/issues"
-        setLicenses("MIT")
-        setLabels("Kotlin", "Algolia")
-        vcsUrl = "https://github.com/algolia/algoliasearch-client-kotlin.git"
-        version.apply {
-            name = Library.version
-            vcsTag = Library.version
-        }
-    }
-}
-
-// Workaround until Bintray gradle plugin caches up:
-// https://github.com/bintray/gradle-bintray-plugin/issues/229#issuecomment-473123891
-tasks.withType<BintrayUploadTask> {
-    doFirst {
-        publishing.publications
-            .filterIsInstance<MavenPublication>()
-            .forEach { publication ->
-                val moduleFile = buildDir.resolve("publications/${publication.name}/module.json")
-                if (moduleFile.exists()) {
-                    publication.artifact(object : FileBasedMavenArtifact(moduleFile) {
-                        override fun getDefaultExtension() = "module"
-                    })
-                }
-            }
     }
 }
