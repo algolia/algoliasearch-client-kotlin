@@ -1,12 +1,12 @@
-package helper
+package util
 
-import com.algolia.search.helper.internal.decodeBase64
-import com.algolia.search.helper.internal.encodeBase64
 import com.algolia.search.helper.internal.sha256
+import com.algolia.search.util.internal.decodeBase64String
+import com.algolia.search.util.internal.encodeBase64
 import shouldEqual
 import kotlin.test.Test
 
-internal abstract class TestHashing {
+internal class TestHashing {
 
     @Test
     fun sha256() {
@@ -17,7 +17,6 @@ internal abstract class TestHashing {
     fun encoding() {
         val url = "AZ:/19&@';#"
         val hash = "QVo6LzE5JkAnOyM="
-
         url.encodeBase64() shouldEqual hash
     }
 
@@ -26,6 +25,6 @@ internal abstract class TestHashing {
         val url = "AZ:/19&@';#"
         val hash = "QVo6LzE5JkAnOyM="
 
-        hash.decodeBase64() shouldEqual url
+        hash.decodeBase64String() shouldEqual url
     }
 }
