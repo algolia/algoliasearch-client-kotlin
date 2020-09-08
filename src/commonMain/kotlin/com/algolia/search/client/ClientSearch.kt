@@ -11,8 +11,6 @@ import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMultipleIndex
-import com.algolia.search.helper.internal.decodeBase64
-import com.algolia.search.helper.internal.encodeBase64
 import com.algolia.search.helper.internal.sha256
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.model.APIKey
@@ -30,6 +28,8 @@ import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
+import com.algolia.search.util.internal.decodeBase64String
+import com.algolia.search.util.internal.encodeBase64
 import io.ktor.client.features.logging.LogLevel
 
 /**
@@ -109,7 +109,7 @@ public interface ClientSearch :
          * @throws IllegalArgumentException if [apiKey] doesn't have a [SecuredAPIKeyRestriction.validUntil].
          */
         public fun getSecuredApiKeyRemainingValidity(apiKey: APIKey): Long {
-            val decoded = apiKey.raw.decodeBase64()
+            val decoded = apiKey.raw.decodeBase64String()
             val pattern = Regex("validUntil=(\\d+)")
             val match = pattern.find(decoded)
             return if (match != null) {
