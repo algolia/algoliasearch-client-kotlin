@@ -1,4 +1,4 @@
-# 2.5.0
+# 1.5.0
 
 ### Added
 - Support and target Android API 30
