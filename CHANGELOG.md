@@ -1,16 +1,17 @@
 # 1.5.0
 
 ### Added
-- Support and target Android API 30
 - Multi-condition rules (#201)
-_ `IncrementFrom` and `IncrementSet` built-in operations (#202)
+- `IncrementFrom` and `IncrementSet` built-in operations (#202)
 - Include ProGuard rules into `aar` and `jar` artifacts
 
 ### Changed
 - Update Kotlin to 1.4.0
 - Update Ktor to 1.4.0 and transitively Kotlin serialization to `1.0.0-RC`
-- Artifacts: remove `android` module and use [gradle module metadata](https://blog.gradle.org/gradle-metadata-1.0)
 - `indexName` required in `InnerQuery`
+
+### Removed
+- `android` module and use [gradle module metadata](https://blog.gradle.org/gradle-metadata-1.0)
 
 # 1.4.0
 
