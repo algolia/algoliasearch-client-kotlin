@@ -9,6 +9,7 @@
 - Update Kotlin to 1.4.0
 - Update Ktor to 1.4.0 and transitively Kotlin serialization to `1.0.0-RC`
 - `indexName` required in `InnerQuery`
+- Base64 implementation (#216)
 
 ### Removed
 - `android` module and use [gradle module metadata](https://blog.gradle.org/gradle-metadata-1.0)
