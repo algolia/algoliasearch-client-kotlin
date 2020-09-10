@@ -9,14 +9,16 @@ public val all: Attribute = Attribute("*")
 @DslMarker
 public annotation class DSLParameters
 
-public interface DSL<T, S> : (T.() -> Unit) -> S
+public interface DSL<T, S> {
+    public operator fun invoke(block: (T.() -> Unit)): S
+}
 
 /**
  * Create a [RequestOptions] with [block]. Can take an optional [requestOptions] to be modified.
  */
 public fun requestOptions(
     requestOptions: RequestOptions? = null,
-    block: RequestOptions.() -> Unit
+    block: RequestOptions.() -> Unit,
 ): RequestOptions {
     return (requestOptions ?: RequestOptions()).apply(block)
 }
