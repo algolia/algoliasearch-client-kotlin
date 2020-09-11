@@ -5,6 +5,7 @@ package com.algolia.search.dsl.rule
 import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
+import com.algolia.search.model.rule.Alternatives
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Pattern
@@ -14,7 +15,7 @@ import com.algolia.search.model.rule.Pattern
  */
 @DSLParameters
 public class DSLConditions(
-    private val conditions: MutableList<Condition> = mutableListOf()
+    private val conditions: MutableList<Condition> = mutableListOf(),
 ) {
 
     public val Is: Anchoring.Is = Anchoring.Is
@@ -23,10 +24,15 @@ public class DSLConditions(
     public val Contains: Anchoring.Contains = Anchoring.Contains
 
     /**
-     * Create a [Condition] with [anchoring], [pattern] and an optional [context].
+     * Create a [Condition] with [anchoring], [pattern] and optional [context] and [alternative].
      */
-    public fun condition(anchoring: Anchoring, pattern: Pattern, context: String? = null): Condition {
-        return Condition(anchoring, pattern, context)
+    public fun condition(
+        anchoring: Anchoring,
+        pattern: Pattern,
+        context: String? = null,
+        alternative: Alternatives? = null,
+    ): Condition {
+        return Condition(anchoring, pattern, context, alternative)
     }
 
     /**
