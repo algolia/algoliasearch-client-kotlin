@@ -14,8 +14,8 @@ buildscript {
 }
 
 plugins {
-    id("kotlin-multiplatform") version "1.4.0"
-    id("kotlinx-serialization") version "1.4.0"
+    kotlin("multiplatform") version "1.4.10"
+    kotlin("plugin.serialization") version "1.4.10"
     id("maven-publish")
 }
 
