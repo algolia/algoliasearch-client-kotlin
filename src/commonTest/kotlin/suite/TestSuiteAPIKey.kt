@@ -16,7 +16,7 @@ import kotlinx.coroutines.isActive
 import runBlocking
 import shouldBeTrue
 import shouldEqual
-import kotlin.test.AfterTest
+import kotlin.test.Test
 
 internal class TestSuiteAPIKey {
 
@@ -33,7 +33,7 @@ internal class TestSuiteAPIKey {
         validity = 600
     )
 
-    @AfterTest
+    @Test
     fun test() {
         runBlocking {
             clientAdmin1.apply {
