@@ -4,9 +4,10 @@
 - Multi-condition rules (#201)
 - `IncrementFrom` and `IncrementSet` built-in operations (#202)
 - Include ProGuard rules into `aar` and `jar` artifacts
+- `alternative` param in the `condition` function within `DSLConditions`
 
 ### Changed
-- Update Kotlin to 1.4.0
+- Update Kotlin to 1.4.10
 - Update Ktor to 1.4.0 and transitively Kotlin serialization to `1.0.0-RC`
 - `indexName` required in `InnerQuery`
 - Base64 implementation (#216)
