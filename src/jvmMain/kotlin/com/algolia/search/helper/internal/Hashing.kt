@@ -13,4 +13,3 @@ internal actual fun String.sha256(key: String): String {
         hash.toHex(true)
     }
 }
-

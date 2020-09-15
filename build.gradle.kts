@@ -112,11 +112,12 @@ tasks.withType<Test> {
 configure<SpotlessExtension> {
     kotlin {
         target("**/*.kt")
-        ktlint("0.37.2")
+        ktlint("0.39.0")
         trimTrailingWhitespace()
         endWithNewline()
     }
 }
+
 
 //** Publish **//
 
