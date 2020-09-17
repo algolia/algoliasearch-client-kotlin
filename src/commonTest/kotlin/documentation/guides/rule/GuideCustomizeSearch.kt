@@ -19,9 +19,11 @@ class GuideCustomizeSearch {
         runBlocking {
             val rule = Rule(
                 objectID = ObjectID("a-rule-id"),
-                conditions = listOf(Condition(
-                    context = "mobile"
-                )),
+                conditions = listOf(
+                    Condition(
+                        context = "mobile"
+                    )
+                ),
                 consequence = Consequence(
                     query = Query(filters = "release_date >= 1577836800")
                 ),
