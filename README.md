@@ -140,19 +140,12 @@ query.sortFacetsBy = SortFacetsBy.Count
 // query.sortFacetsBy = SortFacetsBy.Other("unforeseen value")
 ```
 
-### Proguard rules
+### R8 / Proguard rules
 
-When proguard `minifyEnabled` option is set to `true` , you might get this error:
+If you use this library in an Android project which uses R8, there is nothing you have to do. The specific rules are 
+already bundled into the JAR, which can be interpreted by R8 automatically.
 
-```
-Can't locate argument-less serializer for class e.a.b.g.n.c (Kotlin reflection is not available). For generic classes, such as lists, please provide serializer explicitly.
-```
-
-Add this proguard rule to solve it.
-
-```
--keep class com.algolia.search.model.** { *; }
-```
+If however, you don’t use R8 you have to apply the rules from [this file](src/jvmMain/resources/META-INF/proguard/algoliasearch.pro).
 
 ### Guides
 
