@@ -14,6 +14,7 @@
 
 ### Removed
 - `android` module and use [gradle module metadata](https://blog.gradle.org/gradle-metadata-1.0)
+- Long term deprecated functions and constructors
 
 # 1.4.0
 
