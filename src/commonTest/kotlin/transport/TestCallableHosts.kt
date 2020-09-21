@@ -4,7 +4,7 @@ import clientAdmin1
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.RetryableHost
-import com.algolia.search.transport.Transport
+import com.algolia.search.transport.internal.Transport
 import runBlocking
 import shouldEqual
 import kotlin.test.Test

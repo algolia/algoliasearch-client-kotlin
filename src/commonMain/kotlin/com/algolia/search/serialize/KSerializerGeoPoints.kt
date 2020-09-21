@@ -1,30 +1,34 @@
 package com.algolia.search.serialize
 
 import com.algolia.search.model.search.Point
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialDescriptor
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.buildJsonArray
 
 public object KSerializerGeoPoints : KSerializer<List<Point>> {
 
-    override val descriptor = SerialDescriptor("point")
+    override val descriptor: SerialDescriptor = buildClassSerialDescriptor("point")
 
     override fun serialize(encoder: Encoder, value: List<Point>) {
-        val json = jsonArray {
-            value.forEach { +Json.toJson(KSerializerGeoPoint, it) }
+        val json = buildJsonArray {
+            value.forEach { add(Json.encodeToJsonElement(KSerializerGeoPoint, it)) }
         }
 
-        encoder.asJsonOutput().encodeJson(json)
+        encoder.asJsonOutput().encodeJsonElement(json)
     }
 
     override fun deserialize(decoder: Decoder): List<Point> {
         return when (val json = decoder.asJsonInput()) {
-            is JsonArray -> Json.fromJson(KSerializerGeoPoint.list, json)
-            else -> listOf(Json.fromJson(KSerializerGeoPoint, json))
+            is JsonArray -> Json.decodeFromJsonElement(ListSerializer(KSerializerGeoPoint), json)
+            else -> listOf(Json.decodeFromJsonElement(KSerializerGeoPoint, json))
         }
     }
 }

@@ -1,3 +1,21 @@
+# 1.5.0
+
+### Added
+- Multi-condition rules (#201)
+- `IncrementFrom` and `IncrementSet` built-in operations (#202)
+- Include ProGuard rules into `aar` and `jar` artifacts
+- `alternative` param in the `condition` function within `DSLConditions`
+
+### Changed
+- Update Kotlin to 1.4.10
+- Update Ktor to 1.4.0 and transitively Kotlin serialization to `1.0.0-RC`
+- `indexName` required in `InnerQuery`
+- Base64 implementation (#216)
+
+### Removed
+- `android` module and use [gradle module metadata](https://blog.gradle.org/gradle-metadata-1.0)
+- Long term deprecated functions and constructors
+
 # 1.4.0
 
 Starting from this version, the library is compatible only with kotlin version `1.3.70` or higher, 

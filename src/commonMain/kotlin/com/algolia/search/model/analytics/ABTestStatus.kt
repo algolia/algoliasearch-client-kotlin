@@ -1,15 +1,16 @@
 package com.algolia.search.model.analytics
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyActive
 import com.algolia.search.serialize.KeyExpired
 import com.algolia.search.serialize.KeyFailed
 import com.algolia.search.serialize.KeyStopped
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * [ABTest] server-side status.
@@ -41,11 +42,11 @@ public sealed class ABTestStatus(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : ABTestStatus(raw)
 
-    companion object : KSerializer<ABTestStatus> {
+    public companion object : KSerializer<ABTestStatus> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: ABTestStatus) {
             serializer.serialize(encoder, value.raw)

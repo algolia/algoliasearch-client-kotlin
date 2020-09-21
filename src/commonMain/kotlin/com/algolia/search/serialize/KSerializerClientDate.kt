@@ -1,18 +1,20 @@
 package com.algolia.search.serialize
 
 import com.algolia.search.model.ClientDate
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.asJsonInput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.json.content
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.longOrNull
 
 public object KSerializerClientDate : KSerializer<ClientDate> {
 
     private val serializer = String.serializer()
 
-    override val descriptor = serializer.descriptor
+    override val descriptor: SerialDescriptor = serializer.descriptor
 
     override fun serialize(encoder: Encoder, value: ClientDate) {
         serializer.serialize(encoder, value.raw)
@@ -20,8 +22,8 @@ public object KSerializerClientDate : KSerializer<ClientDate> {
 
     override fun deserialize(decoder: Decoder): ClientDate {
         val input = decoder.asJsonInput()
-        val long = input.longOrNull
+        val long = input.jsonPrimitive.longOrNull
 
-        return if (long != null) ClientDate(long) else ClientDate(input.content)
+        return if (long != null) ClientDate(long) else ClientDate(input.jsonPrimitive.content)
     }
 }

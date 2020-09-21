@@ -1,6 +1,6 @@
 package serialize
 
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
@@ -17,9 +17,9 @@ internal abstract class TestSerializer<T>(
     @Test
     fun serialize() {
         items.forEach {
-            val serialized = json.stringify(serializer, it.first)
-            val deserialized = json.parse(serializer, serialized)
-            val deserializedJson = json.parseJson(serialized)
+            val serialized = json.encodeToString(serializer, it.first)
+            val deserialized = json.decodeFromString(serializer, serialized)
+            val deserializedJson = json.parseToJsonElement(serialized)
 
             deserialized shouldEqual it.first
             deserializedJson shouldEqual it.second

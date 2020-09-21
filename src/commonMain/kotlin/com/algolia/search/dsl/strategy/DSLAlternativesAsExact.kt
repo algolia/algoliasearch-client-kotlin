@@ -13,9 +13,9 @@ public class DSLAlternativesAsExact(
     private val alternativesAsExacts: MutableList<AlternativesAsExact> = mutableListOf()
 ) {
 
-    public val IgnorePlurals = AlternativesAsExact.IgnorePlurals
-    public val SingleWordSynonym = AlternativesAsExact.SingleWordSynonym
-    public val MultiWordsSynonym = AlternativesAsExact.MultiWordsSynonym
+    public val IgnorePlurals: AlternativesAsExact.IgnorePlurals = AlternativesAsExact.IgnorePlurals
+    public val SingleWordSynonym: AlternativesAsExact.SingleWordSynonym = AlternativesAsExact.SingleWordSynonym
+    public val MultiWordsSynonym: AlternativesAsExact.MultiWordsSynonym = AlternativesAsExact.MultiWordsSynonym
 
     /**
      * Add [this] to [alternativesAsExacts].

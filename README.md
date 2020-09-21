@@ -16,12 +16,13 @@
   <a href="https://discourse.algolia.com" target="_blank">Community Forum</a>  •
   <a href="http://stackoverflow.com/questions/tagged/algolia" target="_blank">Stack Overflow</a>  •
   <a href="https://github.com/algolia/algoliasearch-client-kotlin/issues" target="_blank">Report a bug</a>  •
+  <a href="https://www.algolia.com/doc/api-client/troubleshooting/faq/kotlin/" target="_blank">FAQ</a>  •
   <a href="https://www.algolia.com/support" target="_blank">Support</a>
 </p>
 
 ## ✨ Features
 
-- The Kotlin client is compatible with Kotlin `1.3.70` and higher.
+- The Kotlin client is compatible with Kotlin `1.4.0` and higher.
 - It is compatible with Kotlin project on the JVM, such as backend and Android applications.
 - It relies on the open source Kotlin libraries for seamless integration into Kotlin projects:
   - [Kotlin multiplatform](https://kotlinlang.org/docs/reference/multiplatform.html).
@@ -42,9 +43,9 @@ Install the Kotlin client by adding the following dependency to your `gradle.bui
   
   dependencies {
      // Search API Client
-     implementation "com.algolia:algoliasearch-client-kotlin-jvm:$kotlin_client_version"
-     // alternately - for android, use the following
-     implementation "com.algolia:algoliasearch-client-kotlin-android:$kotlin_client_version"
+     implementation "com.algolia:algoliasearch-client-kotlin:$kotlin_client_version"
+     // alternately - for Gradle version < 6.0, use the following
+     // implementation "com.algolia:algoliasearch-client-kotlin-jvm:$kotlin_client_version"
 
      // Choose one of the following http client
      implementation "io.ktor:ktor-client-apache:$ktor_version"
@@ -57,7 +58,8 @@ Install the Kotlin client by adding the following dependency to your `gradle.bui
 
 For full documentation, visit the **[Algolia Kotlin API Client](https://www.algolia.com/doc/api-client/getting-started/install/kotlin/)**.
 
-⚠️ Important: starting from version `1.4.0` the library is compatible only with kotlin version `1.3.70` or higher; for previous versions of kotlin, please use version `1.3.1` of the library.
+⚠️ Important: starting from version `1.4.0` the library is compatible only with kotlin version `1.3.70` or higher; for previous versions of kotlin, please use version `1.3.1` of the library.  
+ℹ️ Please follow the [migration guide](docs/guide/Migrate_1.4.x_1.5.x.md) to migrate from `1.4.x` or below to the latest version.
 
 ### Coroutines
 
@@ -138,19 +140,12 @@ query.sortFacetsBy = SortFacetsBy.Count
 // query.sortFacetsBy = SortFacetsBy.Other("unforeseen value")
 ```
 
-### Proguard rules
+### R8 / Proguard rules
 
-When proguard `minifyEnabled` option is set to `true` , you might get this error:
+If you use this library in an Android project which uses R8, there is nothing you have to do. The specific rules are 
+already bundled into the JAR, which can be interpreted by R8 automatically.
 
-```
-Can't locate argument-less serializer for class e.a.b.g.n.c (Kotlin reflection is not available). For generic classes, such as lists, please provide serializer explicitly.
-```
-
-Add this proguard rule to solve it.
-
-```
--keep class com.algolia.search.model.** { *; }
-```
+If however, you don’t use R8 you have to apply the rules from [this file](src/jvmMain/resources/META-INF/proguard/algoliasearch.pro).
 
 ### Guides
 
@@ -159,6 +154,10 @@ Add this proguard rule to solve it.
 - [Serialization](https://github.com/algolia/algoliasearch-client-kotlin/tree/master/docs/Serialization.md)
 - [ExceptionHandling](https://github.com/algolia/algoliasearch-client-kotlin/tree/master/docs/ExceptionHandling.md)
 - [Configure the HTTP client](https://github.com/algolia/algoliasearch-client-kotlin/tree/master/docs/HTTPClient.md)
+
+## ❓ Troubleshooting
+
+Encountering an issue? Before reaching out to support, we recommend heading to our [FAQ](https://www.algolia.com/doc/api-client/troubleshooting/faq/kotlin/) where you will find answers for the most common issues and gotchas with the client.
 
 ## 📄 License
 

@@ -5,14 +5,15 @@ import clientSearch
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.Time
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.apikey.generateSecuredAPIKey
 import com.algolia.search.model.apikey.getSecuredApiKeyRemainingValidity
+import com.algolia.search.model.internal.Time
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.features.ResponseException
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import shouldBeTrue
 import shouldEqual
@@ -33,7 +34,7 @@ internal class TestSecuredAPIKeyTools {
     )
     private val apiKey = ClientSearch.generateAPIKey(clientSearch.apiKey, restriction)
     private val client = ClientSearch(clientAdmin1.applicationID, apiKey)
-    private val data = json { KeyObjectID to "one" }
+    private val data = buildJsonObject { put(KeyObjectID, "one") }
 
     fun test() {
         runBlocking {

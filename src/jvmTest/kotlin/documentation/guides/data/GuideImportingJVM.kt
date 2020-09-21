@@ -6,12 +6,13 @@ import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.list
-import kotlinx.serialization.json.JsonObjectSerializer
-import kotlinx.serialization.json.json
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import org.junit.Ignore
 import org.junit.Test
 import java.io.File
@@ -26,7 +27,7 @@ internal class GuideImportingJVM {
         val rating: Int,
         val imagePath: String,
         val alternativePath: String,
-        override val objectID: ObjectID
+        override val objectID: ObjectID,
     ) : Indexable
 
     @Test
@@ -35,7 +36,7 @@ internal class GuideImportingJVM {
             val client = ClientSearch(ApplicationID("YourApplicationID"), APIKey("YourAdminAPIKey"))
             val index = client.initIndex(IndexName("actors"))
             val string = File("actors.json").readText()
-            val actors = Json.parse(JsonObjectSerializer.list, string)
+            val actors = Json.decodeFromString(ListSerializer(JsonObject.serializer()), string)
 
             index.apply {
                 actors
@@ -54,11 +55,11 @@ internal class GuideImportingJVM {
             val rating: Int,
             val imagePath: String,
             val alternativePath: String,
-            override val objectID: ObjectID
+            override val objectID: ObjectID,
         ) : Indexable
 
         val string = File("actors.json").readText()
-        val actors: List<Actor> = Json.parse(Actor.serializer().list, string)
+        val actors: List<Actor> = Json.decodeFromString(ListSerializer(Actor.serializer()), string)
     }
 
     @Test
@@ -75,8 +76,8 @@ internal class GuideImportingJVM {
     @Test
     fun snippet4() {
         val records = listOf(
-            json { "name" to "Tom Cruise" },
-            json { "name" to "Scarlett Johansson" }
+            buildJsonObject { put("name", "Tom Cruise") },
+            buildJsonObject { put("name", "Scarlett Johansson") }
         )
     }
 }

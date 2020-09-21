@@ -10,7 +10,8 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import shouldBeTrue
 import shouldEqual
@@ -29,13 +30,13 @@ internal class TestSuiteCopyIndex {
     private val ruleID = "company_auto_faceting".toObjectID()
 
     private val objects = listOf(
-        json {
-            KeyObjectID to "one"
-            company.raw to "apple"
+        buildJsonObject {
+            put(KeyObjectID, "one")
+            put(company.raw, "apple")
         },
-        json {
-            KeyObjectID to "two"
-            company.raw to "algolia"
+        buildJsonObject {
+            put(KeyObjectID, "two")
+            put(company.raw, "algolia")
         }
     )
     private val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Default(company)))

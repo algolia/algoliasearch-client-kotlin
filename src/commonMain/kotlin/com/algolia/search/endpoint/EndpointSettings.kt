@@ -11,14 +11,14 @@ import com.algolia.search.transport.RequestOptions
  */
 public interface EndpointSettings {
 
-    val indexName: IndexName
+    public val indexName: IndexName
 
     /**
      * Get the [Settings] of an index.
      *
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun getSettings(requestOptions: RequestOptions? = null): Settings
+    public suspend fun getSettings(requestOptions: RequestOptions? = null): Settings
 
     /**
      * Create or change an index’s [Settings].
@@ -30,7 +30,7 @@ public interface EndpointSettings {
      * @param forwardToReplicas Whether to forward the same settings to the replica indices.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun setSettings(
+    public suspend fun setSettings(
         settings: Settings,
         resetToDefault: List<SettingsKey> = listOf(),
         forwardToReplicas: Boolean? = null,

@@ -1,6 +1,6 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAfrikaans
 import com.algolia.search.serialize.KeyAlbanian
 import com.algolia.search.serialize.KeyArabic
@@ -57,18 +57,12 @@ import com.algolia.search.serialize.KeyTelugu
 import com.algolia.search.serialize.KeyTswana
 import com.algolia.search.serialize.KeyTurkish
 import com.algolia.search.serialize.KeyWelsh
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
-
-@Deprecated(
-    message = "Obsolete name from the preview version of library.",
-    replaceWith = ReplaceWith("Language"),
-    level = DeprecationLevel.WARNING
-)
-public typealias QueryLanguage = Language
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * List of supported languages with their associated language ISO code.
@@ -139,11 +133,11 @@ public sealed class Language(override val raw: String) : Raw<String> {
         return raw
     }
 
-    companion object : KSerializer<Language> {
+    public companion object : KSerializer<Language> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Language) {
             serializer.serialize(encoder, value.raw)

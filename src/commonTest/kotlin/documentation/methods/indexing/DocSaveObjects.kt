@@ -6,7 +6,8 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.multicluster.UserID
 import documentation.index
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -42,13 +43,13 @@ internal class DocSaveObjects {
         runBlocking {
             // With JsonObject
             val json = listOf(
-                ObjectID("myID1") to json {
-                    "firstname" to "Jimmie"
-                    "lastname" to "Barninger"
+                ObjectID("myID1") to buildJsonObject {
+                    put("firstname", "Jimmie")
+                    put("lastname", "Barninger")
                 },
-                ObjectID("myID1") to json {
-                    "firstname" to "Warren"
-                    "lastname" to "Speach"
+                ObjectID("myID1") to buildJsonObject {
+                    put("firstname", "Warren")
+                    put("lastname", "Speach")
                 }
             )
 
@@ -75,10 +76,10 @@ internal class DocSaveObjects {
     fun snippet2() {
         runBlocking {
             // With JsonObject
-            val json = json {
-                "firstname" to "Jimmie"
-                "lastname" to "Barninger"
-                "city" to "New York"
+            val json = buildJsonObject {
+                put("firstname", "Jimmie")
+                put("lastname", "Barninger")
+                put("city", "New York")
             }
 
             index.replaceObject(ObjectID("myID"), json)
@@ -102,13 +103,13 @@ internal class DocSaveObjects {
     fun snippet3() {
         runBlocking {
             val json = listOf(
-                ObjectID("myID1") to json {
-                    "firstname" to "Jimmie"
-                    "lastname" to "Barninger"
+                ObjectID("myID1") to buildJsonObject {
+                    put("firstname", "Jimmie")
+                    put("lastname", "Barninger")
                 },
-                ObjectID("myID1") to json {
-                    "firstname" to "Warren"
-                    "lastname" to "Speach"
+                ObjectID("myID1") to buildJsonObject {
+                    put("firstname", "Warren")
+                    put("lastname", "Speach")
                 }
             )
             val requestOptions = requestOptions {

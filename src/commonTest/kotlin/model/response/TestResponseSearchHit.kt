@@ -5,7 +5,8 @@ import attributeB
 import com.algolia.search.model.response.ResponseSearch
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import shouldEqual
 import kotlin.test.Test
 
@@ -19,9 +20,9 @@ internal class TestResponseSearchHit {
 
     @Test
     fun dx() {
-        val json = json {
-            attributeA.raw to "valueA"
-            attributeB.raw to "valueB"
+        val json = buildJsonObject {
+            put(attributeA.raw, "valueA")
+            put(attributeB.raw, "valueB")
         }
         val hit = ResponseSearch.Hit(json)
 

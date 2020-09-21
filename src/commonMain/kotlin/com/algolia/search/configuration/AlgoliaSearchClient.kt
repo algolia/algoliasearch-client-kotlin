@@ -1,5 +1,7 @@
 package com.algolia.search.configuration
 
+import com.algolia.search.internal.BuildConfig
+
 /**
  * Singleton exposing information on the library.
  */
@@ -8,5 +10,5 @@ public object AlgoliaSearchClient {
     /**
      * Current version of the library.
      */
-    const val version = BuildConfig.version
+    public const val version: String = BuildConfig.version
 }

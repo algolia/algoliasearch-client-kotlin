@@ -11,29 +11,29 @@ import com.algolia.search.transport.RequestOptions
 
 public interface EndpointPlaces {
 
-    suspend fun searchPlaces(
+    public suspend fun searchPlaces(
         query: PlacesQuery = PlacesQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchPlacesMulti
 
-    suspend fun searchPlaces(
+    public suspend fun searchPlaces(
         language: Language,
         query: PlacesQuery = PlacesQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchPlacesMono
 
-    suspend fun getByObjectID(
+    public suspend fun getByObjectID(
         objectID: ObjectID,
         requestOptions: RequestOptions? = null
     ): PlaceLanguages
 
-    suspend fun reverseGeocoding(
+    public suspend fun reverseGeocoding(
         geolocation: Point,
         hitsPerPage: Int? = null,
         requestOptions: RequestOptions? = null
     ): ResponseSearchPlacesMulti
 
-    suspend fun reverseGeocoding(
+    public suspend fun reverseGeocoding(
         language: Language,
         geolocation: Point,
         hitsPerPage: Int? = null,

@@ -1,6 +1,5 @@
 package configuration
 
-import BuildConfig
 import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.ConfigurationAnalytics
 import com.algolia.search.configuration.ConfigurationInsights
@@ -8,14 +7,15 @@ import com.algolia.search.configuration.ConfigurationPlaces
 import com.algolia.search.configuration.ConfigurationRecommendation
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Region
-import com.algolia.search.configuration.defaultReadTimeout
-import com.algolia.search.configuration.defaultWriteTimeout
+import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
+import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
+import com.algolia.search.internal.BuildConfig
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
-import com.algolia.search.transport.hosts
-import com.algolia.search.transport.insightHosts
-import com.algolia.search.transport.placesHosts
-import com.algolia.search.transport.searchHosts
+import com.algolia.search.transport.internal.hosts
+import com.algolia.search.transport.internal.insightHosts
+import com.algolia.search.transport.internal.placesHosts
+import com.algolia.search.transport.internal.searchHosts
 import io.ktor.client.features.logging.LogLevel
 import shouldBeNull
 import shouldEqual
@@ -36,8 +36,8 @@ internal class TestConfiguration {
     @Test
     fun configurationSearch() {
         ConfigurationSearch(applicationID, apiKey).apply {
-            writeTimeout shouldEqual defaultWriteTimeout
-            readTimeout shouldEqual defaultReadTimeout
+            writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
+            readTimeout shouldEqual DEFAULT_READ_TIMEOUT
             logLevel shouldEqual LogLevel.NONE
             hosts shouldEqual applicationID.searchHosts
             defaultHeaders.shouldBeNull()
@@ -49,8 +49,8 @@ internal class TestConfiguration {
     @Test
     fun configurationAnalytics() {
         ConfigurationAnalytics(applicationID, apiKey, regionAnalytics).apply {
-            writeTimeout shouldEqual defaultWriteTimeout
-            readTimeout shouldEqual defaultReadTimeout
+            writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
+            readTimeout shouldEqual DEFAULT_READ_TIMEOUT
             logLevel shouldEqual LogLevel.NONE
             hosts shouldEqual regionAnalytics.hosts
             defaultHeaders.shouldBeNull()
@@ -62,8 +62,8 @@ internal class TestConfiguration {
     @Test
     fun configurationInsights() {
         ConfigurationInsights(applicationID, apiKey).apply {
-            writeTimeout shouldEqual defaultWriteTimeout
-            readTimeout shouldEqual defaultReadTimeout
+            writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
+            readTimeout shouldEqual DEFAULT_READ_TIMEOUT
             logLevel shouldEqual LogLevel.NONE
             hosts shouldEqual insightHosts
             defaultHeaders.shouldBeNull()
@@ -75,8 +75,8 @@ internal class TestConfiguration {
     @Test
     fun configurationPlaces() {
         ConfigurationPlaces().apply {
-            writeTimeout shouldEqual defaultWriteTimeout
-            readTimeout shouldEqual defaultReadTimeout
+            writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
+            readTimeout shouldEqual DEFAULT_READ_TIMEOUT
             logLevel shouldEqual LogLevel.NONE
             hosts shouldEqual placesHosts
             defaultHeaders.shouldBeNull()
@@ -88,8 +88,8 @@ internal class TestConfiguration {
     @Test
     fun configurationRecommendation() {
         ConfigurationRecommendation(applicationID, apiKey, regionRecommendation).apply {
-            writeTimeout shouldEqual defaultWriteTimeout
-            readTimeout shouldEqual defaultReadTimeout
+            writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
+            readTimeout shouldEqual DEFAULT_READ_TIMEOUT
             logLevel shouldEqual LogLevel.NONE
             hosts shouldEqual regionRecommendation.hosts
             defaultHeaders.shouldBeNull()

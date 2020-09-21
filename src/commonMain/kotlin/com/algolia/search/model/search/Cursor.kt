@@ -2,12 +2,13 @@ package com.algolia.search.model.search
 
 import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.helper.toCursor
-import com.algolia.search.model.Raw
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.model.internal.Raw
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * A cursor used to browse an index with [EndpointSearch.browse].
@@ -21,11 +22,11 @@ public data class Cursor(
         return raw
     }
 
-    companion object : KSerializer<Cursor> {
+    public companion object : KSerializer<Cursor> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Cursor) {
             serializer.serialize(encoder, value.raw)

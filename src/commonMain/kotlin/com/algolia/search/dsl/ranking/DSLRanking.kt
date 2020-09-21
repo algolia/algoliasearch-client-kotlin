@@ -19,16 +19,16 @@ public class DSLRanking(
         Desc
     }
 
-    public val Asc = Modifier.Asc
-    public val Desc = Modifier.Desc
-    public val Typo = RankingCriterion.Typo
-    public val Geo = RankingCriterion.Geo
-    public val Words = RankingCriterion.Words
-    public val Filters = RankingCriterion.Filters
-    public val Proximity = RankingCriterion.Proximity
-    public val Attribute = RankingCriterion.Attribute
-    public val Exact = RankingCriterion.Exact
-    public val Custom = RankingCriterion.Custom
+    public val Asc: Modifier = Modifier.Asc
+    public val Desc: Modifier = Modifier.Desc
+    public val Typo: RankingCriterion.Typo = RankingCriterion.Typo
+    public val Geo: RankingCriterion.Geo = RankingCriterion.Geo
+    public val Words: RankingCriterion.Words = RankingCriterion.Words
+    public val Filters: RankingCriterion.Filters = RankingCriterion.Filters
+    public val Proximity: RankingCriterion.Proximity = RankingCriterion.Proximity
+    public val Attribute: RankingCriterion.Attribute = RankingCriterion.Attribute
+    public val Exact: RankingCriterion.Exact = RankingCriterion.Exact
+    public val Custom: RankingCriterion.Custom = RankingCriterion.Custom
 
     /**
      * Add [this] to [rankingCriteria].
@@ -40,14 +40,14 @@ public class DSLRanking(
     /**
      * Convenience method.
      */
-    operator fun Modifier.invoke(attribute: String): RankingCriterion {
+    public operator fun Modifier.invoke(attribute: String): RankingCriterion {
         return invoke(Attribute(attribute))
     }
 
     /**
      * Create a [RankingCriterion] with [this] [Modifier] to be applied on [attribute].
      */
-    operator fun Modifier.invoke(attribute: Attribute): RankingCriterion {
+    public operator fun Modifier.invoke(attribute: Attribute): RankingCriterion {
         return when (this) {
             Modifier.Asc -> RankingCriterion.Asc(attribute)
             Modifier.Desc -> RankingCriterion.Desc(attribute)

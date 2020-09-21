@@ -9,9 +9,10 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import shouldBeTrue
 import shouldEqual
@@ -31,7 +32,7 @@ internal class TestSuiteIndexing {
     private val dataB = Data("B".toObjectID())
     private val dataC = Data("C".toObjectID())
     private val dataD = Data("D".toObjectID())
-    private val data = json { attributeValue.raw to 0 }
+    private val data = buildJsonObject { put(attributeValue.raw, 0) }
     private val batches = (0 until 1000).map { Data(it.toString().toObjectID()) }
     private val objectIDs = batches.map { it.objectID }
     private val updateA = dataA.copy(value = 1)
@@ -71,7 +72,7 @@ internal class TestSuiteIndexing {
                 datas.forEach { getObject(Data.serializer(), it.objectID) shouldEqual it }
                 getObjects(objectIDs).results
                     .filterNotNull()
-                    .map { Json.fromJson(Data.serializer(), it) } shouldEqual batches
+                    .map { Json.decodeFromJsonElement(Data.serializer(), it) } shouldEqual batches
                 browse().nbHits shouldEqual 1007
                 revisions += replaceObject(Data.serializer(), updateA)
                 revisions += partialUpdateObject(dataE.objectID, Partial.Increment(attributeValue, 1))

@@ -1,16 +1,17 @@
 package com.algolia.search.model.rule
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.KeyContains
 import com.algolia.search.serialize.KeyEndsWith
 import com.algolia.search.serialize.KeyIs
 import com.algolia.search.serialize.KeyStartsWith
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(Anchoring.Companion::class)
 public sealed class Anchoring(override val raw: String) : Raw<String> {
@@ -37,11 +38,11 @@ public sealed class Anchoring(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : Anchoring(raw)
 
-    companion object : KSerializer<Anchoring> {
+    public companion object : KSerializer<Anchoring> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Anchoring) {
             serializer.serialize(encoder, value.raw)

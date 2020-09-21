@@ -9,7 +9,9 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
 import runBlocking
 import shouldBeTrue
 import shouldEqual
@@ -29,7 +31,7 @@ class TestSuiteReplaceAll {
         runBlocking {
             val rule = load(Rule.serializer(), "rule_one.json")
             val synonym = load(Synonym, "synonym_one.json") as Synonym.MultiWay
-            val data = json { KeyObjectID to objectIDOne }
+            val data = buildJsonObject { KeyObjectID to objectIDOne }
 
             index.apply {
                 val tasks = mutableListOf<Task>()
@@ -41,27 +43,33 @@ class TestSuiteReplaceAll {
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
                 tasks.clear()
 
-                tasks += replaceAllObjects(listOf(json { KeyObjectID to objectIDTwo.raw }))
+                tasks += replaceAllObjects(listOf(buildJsonObject { put(KeyObjectID, objectIDTwo.raw) }))
                 tasks += replaceAllSynonyms(listOf(synonym.copy(objectID = objectIDTwo)))
                 tasks += replaceAllRules(listOf(rule.copy(objectID = objectIDTwo)))
 
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
 
-                getObject(objectIDTwo).getPrimitive(KeyObjectID).content shouldEqual objectIDTwo.raw
+                getObject(objectIDTwo).getValue(KeyObjectID).jsonPrimitive.content shouldEqual objectIDTwo.raw
                 getRule(objectIDTwo).objectID shouldEqual objectIDTwo
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
-                (shouldFailWith<ResponseException> {
-                    getObject(objectIDOne)
-                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                (
+                    shouldFailWith<ResponseException> {
+                        getObject(objectIDOne)
+                    }
+                    ).response?.status?.value shouldEqual HttpStatusCode.NotFound.value
 
-                (shouldFailWith<ResponseException> {
-                    getSynonym(objectIDOne)
-                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                (
+                    shouldFailWith<ResponseException> {
+                        getSynonym(objectIDOne)
+                    }
+                    ).response?.status?.value shouldEqual HttpStatusCode.NotFound.value
 
-                (shouldFailWith<ResponseException> {
-                    getRule(objectIDOne)
-                }).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                (
+                    shouldFailWith<ResponseException> {
+                        getRule(objectIDOne)
+                    }
+                    ).response?.status?.value shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }

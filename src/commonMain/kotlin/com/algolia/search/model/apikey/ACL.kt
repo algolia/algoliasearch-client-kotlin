@@ -1,7 +1,7 @@
 package com.algolia.search.model.apikey
 
 import com.algolia.search.model.APIKey
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAddObject
 import com.algolia.search.serialize.KeyAnalytics
 import com.algolia.search.serialize.KeyBrowse
@@ -13,12 +13,13 @@ import com.algolia.search.serialize.KeyLogs
 import com.algolia.search.serialize.KeySearch
 import com.algolia.search.serialize.KeySeeUnretrievableAttributes
 import com.algolia.search.serialize.KeySettings
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * Permission associated to an [APIKey].
@@ -85,7 +86,8 @@ public sealed class ACL(override val raw: String) : Raw<String> {
     public data class Other(override val raw: String) : ACL(raw)
 
     @Serializer(ACL::class)
-    companion object : KSerializer<ACL> {
+    @OptIn(ExperimentalSerializationApi::class)
+    public companion object : KSerializer<ACL> {
 
         private val serializer = String.serializer()
 

@@ -3,16 +3,17 @@ package suite
 import clientAdmin1
 import clientAnalytics
 import com.algolia.search.model.ClientDate
-import com.algolia.search.model.Time
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
+import com.algolia.search.model.internal.Time
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import dayInMillis
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import shouldEqual
 import shouldFailWith
@@ -27,7 +28,7 @@ internal class TestSuiteABTest {
     private val indexNameB = indexNameA.copy(raw = indexNameA.raw + "_dev")
     private val indexA = clientAdmin1.initIndex(indexNameA)
     private val indexB = clientAdmin1.initIndex(indexNameB)
-    private val data = json { KeyObjectID to "one" }
+    private val data = buildJsonObject { put(KeyObjectID, "one") }
 
     private val abTest = ABTest(
         name = indexNameA.raw,
@@ -61,7 +62,7 @@ internal class TestSuiteABTest {
                     clientAnalytics.getABTest(responseA.abTestID)
                 }
 
-                responseB.response.status.value shouldEqual HttpStatusCode.NotFound.value
+                responseB.response?.status?.value shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }

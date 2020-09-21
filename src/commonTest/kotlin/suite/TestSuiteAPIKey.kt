@@ -7,8 +7,8 @@ import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.apikey.APIKeyParams
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.TypoTolerance
-import com.algolia.search.serialize.toJsonNoDefaults
-import com.algolia.search.serialize.urlEncode
+import com.algolia.search.serialize.internal.toJsonNoDefaults
+import com.algolia.search.serialize.internal.urlEncode
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.delay
@@ -16,7 +16,7 @@ import kotlinx.coroutines.isActive
 import runBlocking
 import shouldBeTrue
 import shouldEqual
-import kotlin.test.AfterTest
+import kotlin.test.Test
 
 internal class TestSuiteAPIKey {
 
@@ -33,7 +33,7 @@ internal class TestSuiteAPIKey {
         validity = 600
     )
 
-    @AfterTest
+    @Test
     fun test() {
         runBlocking {
             clientAdmin1.apply {
@@ -62,7 +62,7 @@ internal class TestSuiteAPIKey {
                     try {
                         if (getAPIKey(key).maxHitsPerQuery == 42) break
                     } catch (exception: ResponseException) {
-                        exception.response.status.value shouldEqual HttpStatusCode.NotFound
+                        exception.response?.status?.value shouldEqual HttpStatusCode.NotFound
                     }
                     delay(1000L)
                 }

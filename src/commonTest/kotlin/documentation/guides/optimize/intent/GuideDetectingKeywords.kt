@@ -19,7 +19,9 @@ internal class GuideDetectingKeywords {
             val rules = rules {
                 rule(
                     "rule",
-                    Condition(StartsWith, Literal("article")),
+                    conditions {
+                        +Condition(StartsWith, Literal("article"))
+                    },
                     Consequence(
                         query = query {
                             restrictSearchableAttributes {

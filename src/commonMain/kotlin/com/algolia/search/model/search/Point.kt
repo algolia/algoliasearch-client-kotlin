@@ -1,12 +1,13 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.model.Raw
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.model.internal.Raw
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * A set of geo-coordinates [latitude] and [longitude].
@@ -17,13 +18,13 @@ public data class Point(
     val longitude: Float
 ) : Raw<List<Float>> {
 
-    override val raw = listOf(latitude, longitude)
+    override val raw: List<Float> = listOf(latitude, longitude)
 
-    companion object : KSerializer<Point> {
+    public companion object : KSerializer<Point> {
 
-        private val serializer = Float.serializer().list
+        private val serializer = ListSerializer(Float.serializer())
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Point) {
             serializer.serialize(encoder, value.raw)

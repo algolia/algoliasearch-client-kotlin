@@ -2,12 +2,14 @@ package com.algolia.search.model
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toAPIKey
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.model.internal.Raw
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * [APIKey] can't be a blank or empty string.
@@ -24,7 +26,8 @@ public data class APIKey(override val raw: String) : Raw<String> {
     }
 
     @Serializer(APIKey::class)
-    companion object : KSerializer<APIKey> {
+    @OptIn(ExperimentalSerializationApi::class)
+    public companion object : KSerializer<APIKey> {
 
         private val serializer = String.serializer()
 

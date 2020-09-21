@@ -8,5 +8,5 @@ import com.algolia.search.model.ObjectID
  */
 public interface Indexable {
 
-    val objectID: ObjectID
+    public val objectID: ObjectID
 }

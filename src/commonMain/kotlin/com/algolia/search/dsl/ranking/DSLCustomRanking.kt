@@ -19,8 +19,8 @@ public class DSLCustomRanking(
         Desc
     }
 
-    public val Asc = Modifier.Asc
-    public val Desc = Modifier.Desc
+    public val Asc: Modifier = Modifier.Asc
+    public val Desc: Modifier = Modifier.Desc
 
     /**
      * Add [this] to [customRankingCriteria].
@@ -32,14 +32,14 @@ public class DSLCustomRanking(
     /**
      * Convenience method.
      */
-    operator fun Modifier.invoke(attribute: String): CustomRankingCriterion {
+    public operator fun Modifier.invoke(attribute: String): CustomRankingCriterion {
         return invoke(Attribute(attribute))
     }
 
     /**
      * Create a [CustomRankingCriterion] using [this] [Modifier] to be applied on [attribute].
      */
-    operator fun Modifier.invoke(attribute: Attribute): CustomRankingCriterion {
+    public operator fun Modifier.invoke(attribute: Attribute): CustomRankingCriterion {
         return when (this) {
             Modifier.Asc -> CustomRankingCriterion.Asc(attribute)
             Modifier.Desc -> CustomRankingCriterion.Desc(attribute)

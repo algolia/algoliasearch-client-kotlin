@@ -5,14 +5,14 @@ import com.algolia.search.model.search.MatchedGeoLocation
 import com.algolia.search.serialize.KeyDistance
 import com.algolia.search.serialize.KeyLat
 import com.algolia.search.serialize.KeyLng
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import serialize.TestSerializer
 
 internal class TestMatchedGeoLocation : TestSerializer<MatchedGeoLocation>(MatchedGeoLocation) {
 
-    override val items = listOf(
-        item to json
-    )
+    override val items: List<Pair<MatchedGeoLocation, JsonElement>> = listOf(item to jsonObject)
 
     companion object {
 
@@ -20,10 +20,10 @@ internal class TestMatchedGeoLocation : TestSerializer<MatchedGeoLocation>(Match
             point = 1f and 2f,
             distance = 10
         )
-        val json = json {
-            KeyDistance to 10
-            KeyLat to 1f
-            KeyLng to 2f
+        val jsonObject = buildJsonObject {
+            put(KeyDistance, 10)
+            put(KeyLat, 1f)
+            put(KeyLng, 2f)
         }
     }
 }

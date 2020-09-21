@@ -2,14 +2,15 @@ package com.algolia.search.model.settings
 
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyEqualOnly
-import com.algolia.search.serialize.regexEqualOnly
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.regexEqualOnly
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(NumericAttributeFilter.Companion::class)
 public data class NumericAttributeFilter(
@@ -24,17 +25,17 @@ public data class NumericAttributeFilter(
     val equalOnly: Boolean = false
 ) : Raw<String> {
 
-    override val raw = if (equalOnly) "$KeyEqualOnly($attribute)" else attribute.raw
+    override val raw: String = if (equalOnly) "$KeyEqualOnly($attribute)" else attribute.raw
 
     override fun toString(): String {
         return raw
     }
 
-    companion object : KSerializer<NumericAttributeFilter> {
+    public companion object : KSerializer<NumericAttributeFilter> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: NumericAttributeFilter) {
             serializer.serialize(encoder, value.raw)

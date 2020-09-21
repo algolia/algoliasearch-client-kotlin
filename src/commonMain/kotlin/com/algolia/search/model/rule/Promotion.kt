@@ -15,10 +15,10 @@ public sealed class Promotion {
     /**
      * Promoted rank.
      */
-    abstract val position: Int
+    public abstract val position: Int
 
     @Serializable
-    data class Single(
+    public data class Single(
         /**
          * Unique identifier of the object to promote.
          */
@@ -27,7 +27,7 @@ public sealed class Promotion {
     ) : Promotion()
 
     @Serializable
-    data class Multiple(
+    public data class Multiple(
         /**
          * List of unique identifiers of the objects to promote.
          */

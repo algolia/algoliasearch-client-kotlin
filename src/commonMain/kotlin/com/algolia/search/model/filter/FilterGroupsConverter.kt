@@ -63,10 +63,10 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
             return if (escape) FilterConverter.Legacy(filter) else FilterConverter.Legacy.Unquoted(filter)
         }
 
-        object Facet : Legacy<Filter.Facet>()
+        public object Facet : Legacy<Filter.Facet>()
 
-        object Tag : Legacy<Filter.Tag>()
+        public object Tag : Legacy<Filter.Tag>()
 
-        object Numeric : Legacy<Filter.Numeric>()
+        public object Numeric : Legacy<Filter.Numeric>()
     }
 }

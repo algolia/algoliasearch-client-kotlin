@@ -1,5 +1,6 @@
 package com.algolia.search.client
 
+import com.algolia.search.client.internal.IndexImpl
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.task.Task
 import io.ktor.client.features.ResponseException
@@ -16,14 +17,18 @@ public object ClientAccount {
      *  @throws IllegalStateException if [destination] index already exists.
      */
     public suspend fun copyIndex(source: Index, destination: Index): List<Task> {
-        if (source.transport.credentials.applicationID == destination.transport.credentials.applicationID) {
+        val sourceIndex = source as? IndexImpl
+        val destinationIndex = destination as? IndexImpl
+        if (sourceIndex != null && destinationIndex != null &&
+            sourceIndex.transport.credentials.applicationID == destinationIndex.transport.credentials.applicationID
+        ) {
             throw IllegalArgumentException("Source and Destination indices should not be on the same application.")
         }
         var hasThrown404 = false
         try {
             destination.getSettings()
         } catch (exception: ResponseException) {
-            hasThrown404 = exception.response.status.value == HttpStatusCode.NotFound.value
+            hasThrown404 = exception.response?.status?.value == HttpStatusCode.NotFound.value
             if (!hasThrown404) throw exception
         }
         if (!hasThrown404) {

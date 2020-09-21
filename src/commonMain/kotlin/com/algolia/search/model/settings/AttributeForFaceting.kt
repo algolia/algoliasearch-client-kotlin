@@ -4,19 +4,20 @@ import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeySearchable
-import com.algolia.search.serialize.regexFilterOnly
-import com.algolia.search.serialize.regexSearchable
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.regexFilterOnly
+import com.algolia.search.serialize.internal.regexSearchable
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(AttributeForFaceting.Companion::class)
 public sealed class AttributeForFaceting {
 
-    abstract val attribute: Attribute
+    public abstract val attribute: Attribute
 
     public data class Default(override val attribute: Attribute) : AttributeForFaceting()
 
@@ -36,8 +37,9 @@ public sealed class AttributeForFaceting {
      */
     public data class Searchable(override val attribute: Attribute) : AttributeForFaceting()
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(AttributeForFaceting::class)
-    companion object : KSerializer<AttributeForFaceting> {
+    public companion object : KSerializer<AttributeForFaceting> {
 
         override fun serialize(encoder: Encoder, value: AttributeForFaceting) {
             val string = when (value) {

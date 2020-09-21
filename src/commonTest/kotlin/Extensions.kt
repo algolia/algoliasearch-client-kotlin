@@ -2,7 +2,8 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.filter.Filter
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.add
+import kotlinx.serialization.json.buildJsonArray
 
 internal fun set(vararg filters: Filter) = mutableSetOf(*filters)
 
@@ -19,12 +20,12 @@ internal val objectIDB = ObjectID("322601")
 internal val nestedLists = listOf(listOf(string), listOf(string))
 internal val attributes = listOf(attributeA, attributeB)
 
-internal val nestedListsJson = jsonArray {
-    +jsonArray { +string }
-    +jsonArray { +string }
+internal val nestedListsJson = buildJsonArray {
+    add(buildJsonArray { add(string) })
+    add(buildJsonArray { add(string) })
 }
 
-internal val attributesJson = jsonArray {
-    +attributeA.raw
-    +attributeB.raw
+internal val attributesJson = buildJsonArray {
+    add(attributeA.raw)
+    add(attributeB.raw)
 }

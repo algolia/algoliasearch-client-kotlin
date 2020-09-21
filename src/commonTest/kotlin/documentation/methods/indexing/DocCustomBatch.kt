@@ -11,7 +11,8 @@ import com.algolia.search.model.multipleindex.BatchOperationIndex
 import documentation.client
 import documentation.indexName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -41,9 +42,9 @@ internal class DocCustomBatch {
                 BatchOperationIndex(
                     indexName = indexName1,
                     operation = BatchOperation.AddObject(
-                        json {
-                            "firstname" to "Jimmie"
-                            "lastname" to "Barninger"
+                        buildJsonObject {
+                            put("firstname", "Jimmie")
+                            put("lastname", "Barninger")
                         }
                     )
                 ),
@@ -99,9 +100,9 @@ internal class DocCustomBatch {
                 BatchOperationIndex(
                     indexName = indexName1,
                     operation = BatchOperation.AddObject(
-                        json {
-                            "firstname" to "Jimmie"
-                            "lastname" to "Barninger"
+                        buildJsonObject {
+                            put("firstname", "Jimmie")
+                            put("lastname", "Barninger")
                         }
                     )
                 ),

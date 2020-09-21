@@ -2,13 +2,14 @@ package com.algolia.search.model.rule
 
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.Raw
-import com.algolia.search.serialize.regexFacet
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.model.internal.Raw
+import com.algolia.search.serialize.internal.regexFacet
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * An empty [Pattern] is only allowed when the [Anchoring] is set to [Anchoring.Is].
@@ -22,11 +23,11 @@ public sealed class Pattern(override val raw: String) : Raw<String> {
 
     public data class Literal(override val raw: String) : Pattern(raw)
 
-    companion object : KSerializer<Pattern> {
+    public companion object : KSerializer<Pattern> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = String.serializer().descriptor
+        override val descriptor: SerialDescriptor = String.serializer().descriptor
 
         override fun serialize(encoder: Encoder, value: Pattern) {
             serializer.serialize(encoder, value.raw)

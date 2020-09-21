@@ -1,14 +1,15 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAttribute
 import com.algolia.search.serialize.KeyNone
 import com.algolia.search.serialize.KeyWord
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(ExactOnSingleWordQuery.Companion::class)
 public sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<String> {
@@ -39,11 +40,11 @@ public sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<Strin
         return raw
     }
 
-    companion object : KSerializer<ExactOnSingleWordQuery> {
+    public companion object : KSerializer<ExactOnSingleWordQuery> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: ExactOnSingleWordQuery) {
             serializer.serialize(encoder, value.raw)

@@ -16,7 +16,7 @@ public interface EndpointIndex {
     /**
      * The [IndexName] used by [Index] to perform operations on.
      */
-    val indexName: IndexName
+    public val indexName: IndexName
 
     /**
      * Make a copy of an index, including its objects, settings, synonyms, and query rules.
@@ -39,7 +39,7 @@ public interface EndpointIndex {
      * @param scopes List of [Scope]. If omitted, then all objects and all [Scope] are copied.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun copyIndex(
+    public suspend fun copyIndex(
         destination: IndexName,
         scopes: List<Scope>? = null,
         requestOptions: RequestOptions? = null
@@ -60,7 +60,7 @@ public interface EndpointIndex {
      * @param destination [IndexName] of the destination [Index].
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun moveIndex(
+    public suspend fun moveIndex(
         destination: IndexName,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
@@ -77,7 +77,7 @@ public interface EndpointIndex {
      *
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun deleteIndex(
+    public suspend fun deleteIndex(
         requestOptions: RequestOptions? = null
     ): DeletionIndex
 
@@ -89,7 +89,7 @@ public interface EndpointIndex {
      * @param destination [IndexName] of the destination [Index].
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun copyRules(
+    public suspend fun copyRules(
         destination: IndexName,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
@@ -102,7 +102,7 @@ public interface EndpointIndex {
      * @param destination [IndexName] of the destination [Index].
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun copySettings(
+    public suspend fun copySettings(
         destination: IndexName,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
@@ -115,7 +115,7 @@ public interface EndpointIndex {
      * @param destination [IndexName] of the destination [Index].
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun copySynonyms(
+    public suspend fun copySynonyms(
         destination: IndexName,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
@@ -124,5 +124,5 @@ public interface EndpointIndex {
      * @return true if the index exists on the remote server. An index exists if at least one object has been saved, or
      * if [Settings] have been saved.
      */
-    suspend fun exists(): Boolean
+    public suspend fun exists(): Boolean
 }

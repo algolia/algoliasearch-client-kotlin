@@ -1,13 +1,14 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAlpha
 import com.algolia.search.serialize.KeyCount
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(SortFacetsBy.Companion::class)
 public sealed class SortFacetsBy(override val raw: String) : Raw<String> {
@@ -30,11 +31,11 @@ public sealed class SortFacetsBy(override val raw: String) : Raw<String> {
         return raw
     }
 
-    companion object : KSerializer<SortFacetsBy> {
+    public companion object : KSerializer<SortFacetsBy> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: SortFacetsBy) {
             serializer.serialize(encoder, value.raw)

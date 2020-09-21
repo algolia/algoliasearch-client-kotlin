@@ -1,27 +1,37 @@
 package com.algolia.search.serialize
 
 import com.algolia.search.model.search.Facet
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.KSerializer
-import kotlinx.serialization.json.json
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
 
 public object KSerializerFacetList : KSerializer<List<Facet>> {
 
-    override val descriptor = Facet.serializer().descriptor
+    override val descriptor: SerialDescriptor = Facet.serializer().descriptor
 
     override fun serialize(encoder: Encoder, value: List<Facet>) {
-        val json = jsonArray {
+        val json = buildJsonArray {
             value.map {
-                +json {
-                    KeyValue to it.value
-                    KeyCount to it.count
-                    it.highlightedOrNull?.let { KeyHighlighted to it }
-                }
+                add(
+                    buildJsonObject {
+                        put(KeyValue, it.value)
+                        put(KeyCount, it.count)
+                        it.highlightedOrNull?.let { put(KeyHighlighted, it) }
+                    }
+                )
             }
         }
-        encoder.asJsonOutput().encodeJson(json)
+        encoder.asJsonOutput().encodeJsonElement(json)
     }
 
     override fun deserialize(decoder: Decoder): List<Facet> {
@@ -29,9 +39,9 @@ public object KSerializerFacetList : KSerializer<List<Facet>> {
 
         return json.map {
             Facet(
-                it.jsonObject.getPrimitive(KeyValue).content,
-                it.jsonObject.getPrimitive(KeyCount).int,
-                it.jsonObject.getPrimitiveOrNull(KeyHighlighted)?.content
+                it.jsonObject.getValue(KeyValue).jsonPrimitive.content,
+                it.jsonObject.getValue(KeyCount).jsonPrimitive.int,
+                it.jsonObject[KeyHighlighted]?.jsonPrimitive?.content
             )
         }
     }

@@ -1,13 +1,14 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.helper.and
-import com.algolia.search.model.Raw
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.model.internal.Raw
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * A polygon with a minimum of 3 [Point].
@@ -36,18 +37,18 @@ public data class Polygon(
         }
     }
 
-    override val raw = listOf(
+    override val raw: List<Float> = listOf(
         *point1.raw.toTypedArray(),
         *point2.raw.toTypedArray(),
         *point3.raw.toTypedArray(),
         *points.flatMap { it.raw }.toTypedArray()
     )
 
-    companion object : KSerializer<Polygon> {
+    public companion object : KSerializer<Polygon> {
 
-        private val serializer = Float.serializer().list
+        private val serializer = ListSerializer(Float.serializer())
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Polygon) {
             serializer.serialize(encoder, value.raw)

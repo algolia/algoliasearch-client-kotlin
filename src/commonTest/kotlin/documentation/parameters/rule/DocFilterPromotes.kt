@@ -23,7 +23,9 @@ class DocFilterPromotes {
         runBlocking {
             val rule = Rule(
                 objectID = ObjectID("rule_with_filterPromotes"),
-                condition = Condition(Anchoring.Is, Pattern.Facet(Attribute("brand"))),
+                conditions = listOf(
+                    Condition(Anchoring.Is, Pattern.Facet(Attribute("brand")))
+                ),
                 consequence = Consequence(
                     filterPromotes = true,
                     promote = listOf(

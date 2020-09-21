@@ -1,19 +1,21 @@
 {
-  "objectID": "one",
-  "condition": {
-    "anchoring": "is",
-    "pattern": "pattern"
-  },
-  "consequence": {
-    "params": {
-      "query": {
-        "edits": [
-          {
-            "type": "remove",
-            "delete": "pattern"
-          }
-        ]
-      }
+    "objectID": "one",
+    "conditions": [
+        {
+            "anchoring": "is",
+            "pattern": "pattern"
+        }
+    ],
+    "consequence": {
+        "params": {
+            "query": {
+                "edits": [
+                    {
+                        "type": "remove",
+                        "delete": "pattern"
+                    }
+                ]
+            }
+        }
     }
-  }
 }

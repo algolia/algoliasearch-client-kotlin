@@ -1,6 +1,6 @@
 package com.algolia.search.model.places
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.places.Country.Other
 import com.algolia.search.serialize.KeyAfghanistan
 import com.algolia.search.serialize.KeyAlandIslands
@@ -251,18 +251,19 @@ import com.algolia.search.serialize.KeyWesternSahara
 import com.algolia.search.serialize.KeyYemen
 import com.algolia.search.serialize.KeyZambia
 import com.algolia.search.serialize.KeyZimbabwe
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * List of countries with associated country code.
  * You can pass two letters country codes (ISO 3166-1) using the [Other] class, but they need to be lower-cased.
  */
 @Serializable(Country.Companion::class)
-sealed class Country(override val raw: String) : Raw<String> {
+public sealed class Country(override val raw: String) : Raw<String> {
 
     public object Afghanistan : Country(KeyAfghanistan)
     public object AlandIslands : Country(KeyAlandIslands)
@@ -516,11 +517,11 @@ sealed class Country(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : Country(raw)
 
-    companion object : KSerializer<Country> {
+    public companion object : KSerializer<Country> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Country) {
             serializer.serialize(encoder, value.raw)

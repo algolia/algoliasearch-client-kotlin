@@ -11,7 +11,6 @@ import com.algolia.search.model.indexing.BatchOperation.Other
 import com.algolia.search.model.indexing.BatchOperation.PartialUpdateObject
 import com.algolia.search.model.indexing.BatchOperation.ReplaceObject
 import com.algolia.search.model.indexing.Partial
-import com.algolia.search.serialize.Json
 import com.algolia.search.serialize.KeyAction
 import com.algolia.search.serialize.KeyAddObject
 import com.algolia.search.serialize.KeyBody
@@ -22,7 +21,9 @@ import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.KeyPartialUpdateObject
 import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
 import com.algolia.search.serialize.KeyUpdateObject
-import kotlinx.serialization.json.json
+import com.algolia.search.serialize.internal.Json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import serialize.TestSerializer
 import shouldEqual
 import unknown
@@ -31,56 +32,61 @@ import kotlin.test.Test
 internal class TestBatchOperation : TestSerializer<BatchOperation>(BatchOperation) {
 
     private val objectID = ObjectID("id")
-    private val json = json {
-        "objectID" to objectID.raw
+    private val jsonObject = buildJsonObject {
+        put("objectID", objectID.raw)
     }
 
     override val items = listOf(
-        AddObject(json) to json {
-            KeyAction to KeyAddObject
-            KeyBody to json
+        AddObject(jsonObject) to buildJsonObject {
+            put(KeyAction, KeyAddObject)
+            put(KeyBody, jsonObject)
         },
-        ReplaceObject(objectID, json) to json {
-            KeyAction to KeyUpdateObject
-            KeyBody to json
+        ReplaceObject(objectID, jsonObject) to buildJsonObject {
+            put(KeyAction, KeyUpdateObject)
+            put(KeyBody, jsonObject)
         },
-        PartialUpdateObject(objectID, json, true) to json {
-            KeyAction to KeyPartialUpdateObject
-            KeyBody to json
+        PartialUpdateObject(objectID, jsonObject, true) to buildJsonObject {
+            put(KeyAction, KeyPartialUpdateObject)
+            put(KeyBody, jsonObject)
         },
-        PartialUpdateObject(objectID, json, false) to json {
-            KeyAction to KeyPartialUpdateObjectNoCreate
-            KeyBody to json
+        PartialUpdateObject(objectID, jsonObject, false) to buildJsonObject {
+            put(KeyAction, KeyPartialUpdateObjectNoCreate)
+            put(KeyBody, jsonObject)
         },
         PartialUpdateObject.from(
             ObjectID(unknown),
             Partial.Update(
                 Attribute("key"), "value"
             )
-        ) to json {
-            KeyAction to KeyPartialUpdateObject
-            KeyBody to json {
-                KeyObjectID to unknown
-                "key" to "value"
-            }
+        ) to buildJsonObject {
+            put(KeyAction, KeyPartialUpdateObject)
+            put(
+                KeyBody,
+                buildJsonObject {
+                    put(KeyObjectID, unknown)
+                    put("key", "value")
+                }
+            )
         },
-        DeleteObject(objectID) to json {
-            KeyAction to KeyDeleteObject
-            KeyBody to json
+        DeleteObject(objectID) to buildJsonObject {
+            put(KeyAction, KeyDeleteObject)
+            put(KeyBody, jsonObject)
         },
-        DeleteIndex to json { KeyAction to KeyDelete },
-        ClearIndex to json { KeyAction to KeyClear },
-        Other(unknown, json) to json {
-            KeyAction to unknown
-            KeyBody to json
+        DeleteIndex to buildJsonObject { put(KeyAction, KeyDelete) },
+        ClearIndex to buildJsonObject { put(KeyAction, KeyClear) },
+        Other(unknown, jsonObject) to buildJsonObject {
+            put(KeyAction, unknown)
+            put(KeyBody, jsonObject)
         }
     )
 
     @Test
     fun fromPartialUpdate() {
         val fromPartialUpdate = PartialUpdateObject.from(ObjectID(unknown), Partial.Update(Attribute("key"), "value"))
-        val partialUpdateObject = PartialUpdateObject(ObjectID(unknown), json { "key" to "value" })
+        val partialUpdateObject = PartialUpdateObject(ObjectID(unknown), buildJsonObject { put("key", "value") })
 
-        Json.toJson(BatchOperation, fromPartialUpdate) shouldEqual Json.toJson(BatchOperation, partialUpdateObject)
+        Json.encodeToJsonElement(BatchOperation, fromPartialUpdate) shouldEqual Json.encodeToJsonElement(
+            BatchOperation, partialUpdateObject
+        )
     }
 }

@@ -1,29 +1,24 @@
+@file:Suppress("FunctionName")
+
 package com.algolia.search.client
 
-import com.algolia.search.configuration.CallType
+import com.algolia.search.client.internal.ClientSearchImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Credentials
-import com.algolia.search.configuration.CredentialsImpl
-import com.algolia.search.configuration.defaultLogLevel
-import com.algolia.search.dsl.requestOptionsBuilder
+import com.algolia.search.configuration.internal.Credentials
+import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.endpoint.EndpointAPIKey
-import com.algolia.search.endpoint.EndpointAPIKeyImpl
-import com.algolia.search.endpoint.EndpointAdvanced
 import com.algolia.search.endpoint.EndpointMultiCluster
-import com.algolia.search.endpoint.EndpointMulticlusterImpl
 import com.algolia.search.endpoint.EndpointMultipleIndex
-import com.algolia.search.endpoint.EndpointMultipleIndexImpl
-import com.algolia.search.helper.decodeBase64
-import com.algolia.search.helper.encodeBase64
-import com.algolia.search.helper.sha256
+import com.algolia.search.helper.internal.sha256
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
-import com.algolia.search.model.Time
 import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
+import com.algolia.search.model.internal.Time
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.ResponseLogs
@@ -31,55 +26,26 @@ import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyLength
-import com.algolia.search.serialize.KeyOffset
-import com.algolia.search.serialize.KeyType
-import com.algolia.search.serialize.RouteLogs
 import com.algolia.search.transport.RequestOptions
-import com.algolia.search.transport.Transport
-import io.ktor.client.features.ResponseException
+import com.algolia.search.transport.internal.Transport
+import com.algolia.search.util.internal.decodeBase64String
+import com.algolia.search.util.internal.encodeBase64
 import io.ktor.client.features.logging.LogLevel
-import io.ktor.http.HttpMethod
-import io.ktor.http.HttpStatusCode
-import kotlinx.coroutines.TimeoutCancellationException
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withTimeout
 
 /**
  * Client to perform operations on indices.
  */
-public class ClientSearch private constructor(
-    internal val transport: Transport
-) :
-    EndpointMultipleIndex by EndpointMultipleIndexImpl(transport),
-    EndpointAPIKey by EndpointAPIKeyImpl(transport),
-    EndpointMultiCluster by EndpointMulticlusterImpl(transport),
-    Configuration by transport,
-    Credentials by transport.credentials {
-
-    public constructor(
-        applicationID: ApplicationID,
-        apiKey: APIKey,
-        logLevel: LogLevel = defaultLogLevel
-    ) : this(
-        Transport(
-            ConfigurationSearch(applicationID, apiKey, logLevel = logLevel),
-            CredentialsImpl(applicationID, apiKey)
-        )
-    )
-
-    public constructor(
-        configuration: ConfigurationSearch
-    ) : this(Transport(configuration, configuration))
+public interface ClientSearch :
+    EndpointMultipleIndex,
+    EndpointAPIKey,
+    EndpointMultiCluster,
+    Configuration,
+    Credentials {
 
     /**
      *  Initialize an [Index] configured with [ConfigurationSearch].
      */
-    public fun initIndex(indexName: IndexName): Index {
-        return Index(transport, indexName)
-    }
+    public fun initIndex(indexName: IndexName): Index
 
     /**
      * Wait on multiple [TaskIndex] operations. To be used with [multipleBatchObjects].
@@ -87,28 +53,12 @@ public class ClientSearch private constructor(
      * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
      * the allotted time in milliseconds.
      */
-    public suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus> {
-
-        suspend fun loop(): List<TaskStatus> {
-            while (true) {
-                coroutineScope {
-                    map { async { initIndex(it.indexName).getTask(it.taskID) } }.map { it.await().status }
-                }.let {
-                    if (it.all { status -> status == TaskStatus.Published }) return it
-                }
-                delay(1000L)
-            }
-        }
-
-        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
-    }
+    public suspend fun List<TaskIndex>.waitAll(timeout: Long? = null): List<TaskStatus>
 
     /**
      * Convenience method similar to [waitAll] but with a [ResponseBatches] as receiver.
      */
-    public suspend fun ResponseBatches.waitAll(timeout: Long? = null): List<TaskStatus> {
-        return tasks.waitAll(timeout)
-    }
+    public suspend fun ResponseBatches.waitAll(timeout: Long? = null): List<TaskStatus>
 
     /**
      * Wait on a [CreationAPIKey] operation.
@@ -116,21 +66,7 @@ public class ClientSearch private constructor(
      * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
      * the allotted time in milliseconds.
      */
-    public suspend fun CreationAPIKey.wait(timeout: Long? = null): ResponseAPIKey {
-
-        suspend fun loop(): ResponseAPIKey {
-            while (true) {
-                try {
-                    return getAPIKey(apiKey)
-                } catch (exception: ResponseException) {
-                    if (exception.response.status.value != HttpStatusCode.NotFound.value) throw exception
-                }
-                delay(1000L)
-            }
-        }
-
-        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
-    }
+    public suspend fun CreationAPIKey.wait(timeout: Long? = null): ResponseAPIKey
 
     /**
      * Wait on a [DeletionAPIKey] operation.
@@ -138,21 +74,7 @@ public class ClientSearch private constructor(
      * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
      * the allotted time in milliseconds.
      */
-    public suspend fun DeletionAPIKey.wait(timeout: Long? = null): Boolean {
-
-        suspend fun loop(): Boolean {
-            while (true) {
-                try {
-                    getAPIKey(apiKey)
-                } catch (exception: ResponseException) {
-                    if (exception.response.status.value == HttpStatusCode.NotFound.value) return true else throw exception
-                }
-                delay(1000L)
-            }
-        }
-
-        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
-    }
+    public suspend fun DeletionAPIKey.wait(timeout: Long? = null): Boolean
 
     /**
      * Convenience methods to get the logs directly from the [ClientSearch] without instantiating an [Index].
@@ -163,19 +85,10 @@ public class ClientSearch private constructor(
         page: Int? = null,
         hitsPerPage: Int? = null,
         logType: LogType? = null,
-        requestOptions: RequestOptions? = null
-    ): ResponseLogs {
-        val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyOffset, page)
-            parameter(KeyLength, hitsPerPage)
-            parameter(KeyType, logType?.raw)
-        }
+        requestOptions: RequestOptions? = null,
+    ): ResponseLogs
 
-        return transport.request(HttpMethod.Get, CallType.Read, RouteLogs, options)
-    }
-
-    companion object {
-
+    public companion object {
         /**
          * Generate a virtual [APIKey] without any call to the server.
          * Use [SecuredAPIKeyRestriction] to restrict [APIKey] usage.
@@ -185,7 +98,6 @@ public class ClientSearch private constructor(
         public fun generateAPIKey(parentAPIKey: APIKey, restriction: SecuredAPIKeyRestriction): APIKey {
             val restrictionString = restriction.buildRestrictionString()
             val hash = parentAPIKey.raw.sha256(restrictionString)
-
             return "$hash$restrictionString".encodeBase64().toAPIKey()
         }
 
@@ -197,17 +109,43 @@ public class ClientSearch private constructor(
          * @throws IllegalArgumentException if [apiKey] doesn't have a [SecuredAPIKeyRestriction.validUntil].
          */
         public fun getSecuredApiKeyRemainingValidity(apiKey: APIKey): Long {
-            val decoded = apiKey.raw.decodeBase64()
+            val decoded = apiKey.raw.decodeBase64String()
             val pattern = Regex("validUntil=(\\d+)")
             val match = pattern.find(decoded)
-
             return if (match != null) {
-                val timestamp = match.groupValues[1].toLong()
-
-                timestamp - Time.getCurrentTimeMillis()
+                match.groupValues[1].toLong() - Time.getCurrentTimeMillis()
             } else {
                 throw IllegalArgumentException("The Secured API Key doesn't have a validUntil parameter.")
             }
         }
     }
 }
+
+/**
+ * Create a [ClientSearch] instance.
+ *
+ * @param applicationID application ID
+ * @param apiKey API Key
+ * @param logLevel log level
+ */
+public fun ClientSearch(
+    applicationID: ApplicationID,
+    apiKey: APIKey,
+    logLevel: LogLevel = DEFAULT_LOG_LEVEL,
+): ClientSearch = ClientSearchImpl(
+    Transport(
+        ConfigurationSearch(applicationID = applicationID, apiKey = apiKey, logLevel = logLevel),
+        Credentials(applicationID = applicationID, apiKey = apiKey)
+    )
+)
+
+/**
+ * Create a [ClientSearch] instance.
+ *
+ * @param configuration search configuration
+ */
+public fun ClientSearch(
+    configuration: ConfigurationSearch,
+): ClientSearch = ClientSearchImpl(
+    Transport(configuration, configuration)
+)

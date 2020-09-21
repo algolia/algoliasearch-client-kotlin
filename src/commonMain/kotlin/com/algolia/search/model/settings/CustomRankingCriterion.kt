@@ -2,16 +2,17 @@ package com.algolia.search.model.settings
 
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAsc
 import com.algolia.search.serialize.KeyDesc
-import com.algolia.search.serialize.regexAsc
-import com.algolia.search.serialize.regexDesc
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.regexAsc
+import com.algolia.search.serialize.internal.regexDesc
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * [Documentation][https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/#custom-ranking]
@@ -35,11 +36,11 @@ public sealed class CustomRankingCriterion(override val raw: String) : Raw<Strin
         return raw
     }
 
-    companion object : KSerializer<CustomRankingCriterion> {
+    public companion object : KSerializer<CustomRankingCriterion> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: CustomRankingCriterion) {
             serializer.serialize(encoder, value.raw)

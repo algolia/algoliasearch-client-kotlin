@@ -10,14 +10,15 @@ import com.algolia.search.model.search.MatchedGeoLocation
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.model.search.SnippetResult
-import com.algolia.search.serialize.Json
 import com.algolia.search.serialize.Key_DistinctSeqID
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.Key_RankingInfo
 import com.algolia.search.serialize.Key_SnippetResult
+import com.algolia.search.serialize.internal.Json
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.MapSerializer
-import kotlinx.serialization.builtins.list
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import serialize.TestSerializer
 import serialize.search.TestHighlightResult
 import unknown
@@ -25,7 +26,7 @@ import unknown
 internal class TestResponseSearchHit : TestSerializer<ResponseSearch.Hit>(ResponseSearch.Hit) {
 
     override val items = listOf(
-        hit to json
+        hit to jsonObject
     )
 
     companion object {
@@ -48,14 +49,20 @@ internal class TestResponseSearchHit : TestSerializer<ResponseSearch.Hit>(Respon
             attributeA to listOf(SnippetResult(unknown, MatchLevel.None)),
             attributeB to listOf(SnippetResult(unknown, MatchLevel.None))
         )
-        val json = json {
-            Key_DistinctSeqID to 0
-            Key_HighlightResult to Json.toJson(MapSerializer(Attribute, HighlightResult.serializer()), highlights)
-            Key_SnippetResult to Json.toJson(MapSerializer(Attribute, SnippetResult.serializer().list), snippets)
+        val jsonObject = buildJsonObject {
+            put(Key_DistinctSeqID, 0)
+            put(
+                Key_HighlightResult,
+                Json.encodeToJsonElement(MapSerializer(Attribute, HighlightResult.serializer()), highlights)
+            )
+            put(
+                Key_SnippetResult,
+                Json.encodeToJsonElement(MapSerializer(Attribute, ListSerializer(SnippetResult.serializer())), snippets)
+            )
             attributeA to unknown
             attributeB to unknown
-            Key_RankingInfo to Json.toJson(RankingInfo.serializer(), rankingInfo)
+            put(Key_RankingInfo, Json.encodeToJsonElement(RankingInfo.serializer(), rankingInfo))
         }
-        val hit = ResponseSearch.Hit(json)
+        val hit = ResponseSearch.Hit(jsonObject)
     }
 }

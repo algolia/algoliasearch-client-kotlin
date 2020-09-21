@@ -3,14 +3,17 @@ package com.algolia.search.serialize
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.HighlightResult
 import com.algolia.search.model.search.SnippetResult
-import kotlinx.serialization.builtins.list
+import com.algolia.search.serialize.internal.Json
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
 
 /**
  * Convenience method.
  */
 public fun JsonObject.toHighlight(key: String): HighlightResult? {
-    return getObjectOrNull(key)?.let { Json.fromJson(HighlightResult.serializer(), it) }
+    return this[key]?.jsonObject?.let { Json.decodeFromJsonElement(HighlightResult.serializer(), it) }
 }
 
 /**
@@ -24,7 +27,7 @@ public fun JsonObject.toHighlight(attribute: Attribute): HighlightResult? {
  * Convenience method.
  */
 public fun JsonObject.toHighlights(key: String): List<HighlightResult>? {
-    return getArrayOrNull(key)?.let { Json.fromJson(HighlightResult.serializer().list, it) }
+    return this[key]?.jsonArray?.let { Json.decodeFromJsonElement(ListSerializer(HighlightResult.serializer()), it) }
 }
 
 /**
@@ -38,7 +41,7 @@ public fun JsonObject.toHighlights(attribute: Attribute): List<HighlightResult>?
  * Convenience method.
  */
 public fun JsonObject.toSnippet(key: String): SnippetResult? {
-    return getObjectOrNull(key)?.let { Json.fromJson(SnippetResult.serializer(), it) }
+    return this[key]?.jsonObject?.let { Json.decodeFromJsonElement(SnippetResult.serializer(), it) }
 }
 
 /**
@@ -52,7 +55,7 @@ public fun JsonObject.toSnippet(attribute: Attribute): SnippetResult? {
  * Convenience method.
  */
 public fun JsonObject.toSnippets(key: String): List<SnippetResult>? {
-    return getArrayOrNull(key)?.let { Json.fromJson(SnippetResult.serializer().list, it) }
+    return this[key]?.jsonArray?.let { Json.decodeFromJsonElement(ListSerializer(SnippetResult.serializer()), it) }
 }
 
 /**

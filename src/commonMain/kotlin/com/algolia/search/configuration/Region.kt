@@ -1,6 +1,6 @@
 package com.algolia.search.configuration
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyDE
 import com.algolia.search.serialize.KeyEU
 import com.algolia.search.serialize.KeyUS

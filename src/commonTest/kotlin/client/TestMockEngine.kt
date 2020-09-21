@@ -6,7 +6,7 @@ import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.serialize.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.ContentType
@@ -26,7 +26,7 @@ internal class TestMockEngine {
         respond(
             status = HttpStatusCode.OK,
             headers = headersOf("Content-Type", listOf(ContentType.Application.Json.toString())),
-            content = ByteReadChannel(JsonNoDefaults.stringify(ResponseSearch.serializer(), responseSearch))
+            content = ByteReadChannel(JsonNoDefaults.encodeToString(ResponseSearch.serializer(), responseSearch))
         )
     }
     private val client = ClientSearch(ConfigurationSearch(appID, apiKey, engine = engine))

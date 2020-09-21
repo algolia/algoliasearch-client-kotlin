@@ -1,6 +1,6 @@
 package com.algolia.search.configuration
 
-import com.algolia.search.model.Time
+import com.algolia.search.model.internal.Time
 
 /**
  * @param url The url to target.

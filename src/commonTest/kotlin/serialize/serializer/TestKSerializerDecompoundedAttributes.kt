@@ -5,19 +5,23 @@ import attributeB
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.settings.DecompoundedAttributes
 import com.algolia.search.serialize.KSerializerDecompoundedAttributes
-import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.add
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
 import serialize.TestSerializer
 
 internal class TestKSerializerDecompoundedAttributes :
     TestSerializer<List<DecompoundedAttributes>>(KSerializerDecompoundedAttributes) {
 
     override val items = listOf(
-        listOf(DecompoundedAttributes(Language.German, listOf(attributeA, attributeB))) to json {
-            Language.German.raw to jsonArray {
-                +attributeA.raw
-                +attributeB.raw
-            }
+        listOf(DecompoundedAttributes(Language.German, listOf(attributeA, attributeB))) to buildJsonObject {
+            put(
+                Language.German.raw,
+                buildJsonArray {
+                    add(attributeA.raw)
+                    add(attributeB.raw)
+                }
+            )
         }
     )
 }

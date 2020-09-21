@@ -2,7 +2,8 @@ package serialize.search
 
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.Polygon
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.add
+import kotlinx.serialization.json.buildJsonArray
 import serialize.TestSerializer
 
 internal class TestPolygon : TestSerializer<Polygon>(Polygon) {
@@ -23,23 +24,23 @@ internal class TestPolygon : TestSerializer<Polygon>(Polygon) {
             13f and 14f,
             15f and 16f
         )
-        val json = jsonArray {
-            +(1f as Number)
-            +(2f as Number)
-            +(3f as Number)
-            +(4f as Number)
-            +(5f as Number)
-            +(6f as Number)
-            +(7f as Number)
-            +(8f as Number)
-            +(9f as Number)
-            +(10f as Number)
-            +(11f as Number)
-            +(12f as Number)
-            +(13f as Number)
-            +(14f as Number)
-            +(15f as Number)
-            +(16f as Number)
+        val json = buildJsonArray {
+            add((1f as Number))
+            add((2f as Number))
+            add((3f as Number))
+            add((4f as Number))
+            add((5f as Number))
+            add((6f as Number))
+            add((7f as Number))
+            add((8f as Number))
+            add((9f as Number))
+            add((10f as Number))
+            add((11f as Number))
+            add((12f as Number))
+            add((13f as Number))
+            add((14f as Number))
+            add((15f as Number))
+            add((16f as Number))
         }
     }
 }

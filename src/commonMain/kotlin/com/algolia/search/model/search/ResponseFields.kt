@@ -1,7 +1,7 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.endpoint.EndpointSearch
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAroundLatLng
 import com.algolia.search.serialize.KeyAutomaticRadius
 import com.algolia.search.serialize.KeyExhaustiveFacetsCount
@@ -21,11 +21,12 @@ import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyQueryAfterRemoval
 import com.algolia.search.serialize.KeyStar
 import com.algolia.search.serialize.KeyUserData
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * Choose which fields the response will contain. Applies to [EndpointSearch.search] and [EndpointSearch.browse].
@@ -61,11 +62,11 @@ public sealed class ResponseFields(override val raw: String) : Raw<String> {
         return raw
     }
 
-    companion object : KSerializer<ResponseFields> {
+    public companion object : KSerializer<ResponseFields> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: ResponseFields) {
             serializer.serialize(encoder, value.raw)

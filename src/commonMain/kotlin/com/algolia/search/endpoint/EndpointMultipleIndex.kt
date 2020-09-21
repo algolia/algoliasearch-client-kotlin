@@ -31,7 +31,7 @@ public interface EndpointMultipleIndex {
      *
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun listIndices(requestOptions: RequestOptions? = null): ResponseListIndices
+    public suspend fun listIndices(requestOptions: RequestOptions? = null): ResponseListIndices
 
     /**
      * [Documentation][https://www.algolia.com/doc/api-reference/api-methods/list-api-keys/?language=kotlin]
@@ -39,7 +39,7 @@ public interface EndpointMultipleIndex {
      *
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun listIndexAPIKeys(requestOptions: RequestOptions? = null): ResponseListAPIKey
+    public suspend fun listIndexAPIKeys(requestOptions: RequestOptions? = null): ResponseListAPIKey
 
     /**
      * [Documentation][https://www.algolia.com/doc/api-reference/api-methods/multiple-queries/?language=kotlin]
@@ -61,7 +61,7 @@ public interface EndpointMultipleIndex {
      * @param strategy The [MultipleQueriesStrategy] of the query.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun multipleQueries(
+    public suspend fun multipleQueries(
         queries: List<IndexQuery>,
         strategy: MultipleQueriesStrategy? = null,
         requestOptions: RequestOptions? = null
@@ -76,7 +76,7 @@ public interface EndpointMultipleIndex {
      * @param requests The list of objects to retrieve.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun multipleGetObjects(
+    public suspend fun multipleGetObjects(
         requests: List<RequestObjects>,
         requestOptions: RequestOptions? = null
     ): ResponseObjects
@@ -101,7 +101,7 @@ public interface EndpointMultipleIndex {
      * @param operations List of [BatchOperationIndex].
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun multipleBatchObjects(
+    public suspend fun multipleBatchObjects(
         operations: List<BatchOperationIndex>,
         requestOptions: RequestOptions? = null
     ): ResponseBatches

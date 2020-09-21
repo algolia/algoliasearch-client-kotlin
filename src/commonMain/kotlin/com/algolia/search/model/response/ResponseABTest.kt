@@ -5,9 +5,6 @@ import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.ABTestStatus
-import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.JsonNoDefaults
-import com.algolia.search.serialize.JsonNonStrict
 import com.algolia.search.serialize.KeyABTestID
 import com.algolia.search.serialize.KeyClickSignificance
 import com.algolia.search.serialize.KeyConversionSignificance
@@ -16,15 +13,25 @@ import com.algolia.search.serialize.KeyEndAt
 import com.algolia.search.serialize.KeyName
 import com.algolia.search.serialize.KeyStatus
 import com.algolia.search.serialize.KeyVariants
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.json
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.floatOrNull
 import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.long
+import kotlinx.serialization.json.put
 
 @Serializable(ResponseABTest.Companion::class)
 public data class ResponseABTest(
@@ -74,41 +81,48 @@ public data class ResponseABTest(
     public val conversionSignificance: Float
         get() = conversionSignificanceOrNull!!
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(ResponseABTest::class)
-    companion object : KSerializer<ResponseABTest> {
+    public companion object : KSerializer<ResponseABTest> {
 
         override fun serialize(encoder: Encoder, value: ResponseABTest) {
-            val json = json {
-                KeyABTestID to value.abTestID.raw
-                KeyCreatedAt to value.createdAt
-                KeyEndAt to value.endAt.raw
-                KeyName to value.name
-                KeyStatus to value.status.raw
-                value.conversionSignificanceOrNull?.let { KeyConversionSignificance to it }
-                value.clickSignificanceOrNull?.let { KeyClickSignificance to it }
-                KeyVariants to jsonArray {
-                    +JsonNoDefaults.toJson(ResponseVariant.serializer(), value.variantA)
-                    +JsonNoDefaults.toJson(ResponseVariant.serializer(), value.variantB)
-                }
+            val json = buildJsonObject {
+                put(KeyABTestID, value.abTestID.raw)
+                put(KeyCreatedAt, value.createdAt)
+                put(KeyEndAt, value.endAt.raw)
+                put(KeyName, value.name)
+                put(KeyStatus, value.status.raw)
+                value.conversionSignificanceOrNull?.let { put(KeyConversionSignificance, it) }
+                value.clickSignificanceOrNull?.let { put(KeyClickSignificance, it) }
+                put(
+                    KeyVariants,
+                    buildJsonArray {
+                        add(JsonNoDefaults.encodeToJsonElement(ResponseVariant.serializer(), value.variantA))
+                        add(JsonNoDefaults.encodeToJsonElement(ResponseVariant.serializer(), value.variantB))
+                    }
+                )
             }
 
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJsonElement(json)
         }
 
         override fun deserialize(decoder: Decoder): ResponseABTest {
             val element = decoder.asJsonInput().jsonObject
-            val variants = element.getArray(KeyVariants)
+            val variants = element.getValue(KeyVariants).jsonArray
 
             return ResponseABTest(
-                abTestID = element.getPrimitive(KeyABTestID).long.toABTestID(),
-                createdAt = element.getPrimitive(KeyCreatedAt).content,
-                endAt = ClientDate(element.getPrimitive(KeyEndAt).content),
-                name = element.getPrimitive(KeyName).content,
-                status = JsonNonStrict.parse(ABTestStatus, element.getPrimitive(KeyStatus).content),
-                conversionSignificanceOrNull = element.getPrimitive(KeyConversionSignificance).floatOrNull,
-                clickSignificanceOrNull = element.getPrimitive(KeyClickSignificance).floatOrNull,
-                variantA = Json.fromJson(ResponseVariant.serializer(), variants[0]),
-                variantB = Json.fromJson(ResponseVariant.serializer(), variants[1])
+                abTestID = element.getValue(KeyABTestID).jsonPrimitive.long.toABTestID(),
+                createdAt = element.getValue(KeyCreatedAt).jsonPrimitive.content,
+                endAt = ClientDate(element.getValue(KeyEndAt).jsonPrimitive.content),
+                name = element.getValue(KeyName).jsonPrimitive.content,
+                status = JsonNonStrict.decodeFromString(
+                    ABTestStatus,
+                    element.getValue(KeyStatus).jsonPrimitive.content
+                ),
+                conversionSignificanceOrNull = element.getValue(KeyConversionSignificance).jsonPrimitive.floatOrNull,
+                clickSignificanceOrNull = element.getValue(KeyClickSignificance).jsonPrimitive.floatOrNull,
+                variantA = Json.decodeFromJsonElement(ResponseVariant.serializer(), variants[0]),
+                variantB = Json.decodeFromJsonElement(ResponseVariant.serializer(), variants[1])
             )
         }
     }

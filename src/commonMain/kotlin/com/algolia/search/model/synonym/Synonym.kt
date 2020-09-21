@@ -4,8 +4,7 @@ import com.algolia.search.exception.EmptyListException
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.Raw
-import com.algolia.search.serialize.Json
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAlternativeCorrection1
 import com.algolia.search.serialize.KeyAlternativeCorrection2
 import com.algolia.search.serialize.KeyCorrections
@@ -18,19 +17,24 @@ import com.algolia.search.serialize.KeySynonym
 import com.algolia.search.serialize.KeySynonyms
 import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.KeyWord
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
-import com.algolia.search.serialize.regexPlaceholder
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
+import com.algolia.search.serialize.internal.regexPlaceholder
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.content
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
 
 @Serializable(Synonym.Companion::class)
 public sealed class Synonym {
@@ -42,7 +46,7 @@ public sealed class Synonym {
      * synonym; otherwise, it will be an update.
      * Note that for some languages, this parameter is duplicated in the synonym object.
      */
-    abstract val objectID: ObjectID
+    public abstract val objectID: ObjectID
 
     public data class OneWay(
         override val objectID: ObjectID,
@@ -62,7 +66,7 @@ public sealed class Synonym {
             require(synonyms.size <= limit) { "OneWay synonym have a maximum of $limit synonyms" }
         }
 
-        companion object {
+        public companion object {
 
             private const val limit = 100
         }
@@ -81,7 +85,7 @@ public sealed class Synonym {
             require(synonyms.size <= limit) { "OneWay synonym have a maximum of $limit synonyms" }
         }
 
-        companion object {
+        public companion object {
 
             private const val limit = 20
         }
@@ -130,7 +134,7 @@ public sealed class Synonym {
          */
         public data class Token(val token: String) : Raw<String> {
 
-            override val raw = "<$token>"
+            override val raw: String = "<$token>"
 
             init {
                 if (token.isBlank()) throw EmptyStringException("Token")
@@ -143,76 +147,85 @@ public sealed class Synonym {
         val json: JsonObject
     ) : Synonym()
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(Synonym::class)
-    companion object : KSerializer<Synonym> {
+    public companion object : KSerializer<Synonym> {
 
         override fun serialize(encoder: Encoder, value: Synonym) {
             val json = when (value) {
-                is MultiWay -> json {
-                    KeyObjectID to value.objectID.raw
-                    KeyType to KeySynonym
-                    KeySynonyms to Json.toJson(String.serializer().list, value.synonyms)
+                is MultiWay -> buildJsonObject {
+                    put(KeyObjectID, value.objectID.raw)
+                    put(KeyType, KeySynonym)
+                    put(KeySynonyms, Json.encodeToJsonElement(ListSerializer(String.serializer()), value.synonyms))
                 }
-                is OneWay -> json {
-                    KeyObjectID to value.objectID.raw
-                    KeyType to KeyOneWaySynonym
-                    KeySynonyms to Json.toJson(String.serializer().list, value.synonyms)
-                    KeyInput to value.input
+                is OneWay -> buildJsonObject {
+                    put(KeyObjectID, value.objectID.raw)
+                    put(KeyType, KeyOneWaySynonym)
+                    put(KeySynonyms, Json.encodeToJsonElement(ListSerializer(String.serializer()), value.synonyms))
+                    put(KeyInput, value.input)
                 }
-                is AlternativeCorrections -> json {
-                    KeyObjectID to value.objectID.raw
-                    KeyType to when (value.typo) {
-                        SynonymType.Typo.One -> KeyAlternativeCorrection1
-                        SynonymType.Typo.Two -> KeyAlternativeCorrection2
-                    }
-                    KeyWord to value.word
-                    KeyCorrections to Json.toJson(String.serializer().list, value.corrections)
+                is AlternativeCorrections -> buildJsonObject {
+                    put(KeyObjectID, value.objectID.raw)
+                    put(
+                        KeyType,
+                        when (value.typo) {
+                            SynonymType.Typo.One -> KeyAlternativeCorrection1
+                            SynonymType.Typo.Two -> KeyAlternativeCorrection2
+                        }
+                    )
+                    put(KeyWord, value.word)
+                    put(
+                        KeyCorrections, Json.encodeToJsonElement(ListSerializer(String.serializer()), value.corrections)
+                    )
                 }
-                is Placeholder -> json {
-                    KeyObjectID to value.objectID.raw
-                    KeyType to KeyPlaceholder
-                    KeyPlaceholder to value.placeholder.raw
-                    KeyReplacements to Json.toJson(String.serializer().list, value.replacements)
+                is Placeholder -> buildJsonObject {
+                    put(KeyObjectID, value.objectID.raw)
+                    put(KeyType, KeyPlaceholder)
+                    put(KeyPlaceholder, value.placeholder.raw)
+                    put(
+                        KeyReplacements,
+                        Json.encodeToJsonElement(ListSerializer(String.serializer()), value.replacements)
+                    )
                 }
                 is Other -> value.json
             }
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJsonElement(json)
         }
 
         override fun deserialize(decoder: Decoder): Synonym {
             val element = decoder.asJsonInput().jsonObject
-            val objectID = element.getPrimitive(KeyObjectID).content.toObjectID()
+            val objectID = element.getValue(KeyObjectID).jsonPrimitive.content.toObjectID()
 
             return if (element.containsKey(KeyType)) {
-                when (element.getPrimitive(KeyType).content) {
+                when (element.getValue(KeyType).jsonPrimitive.content) {
                     KeySynonym -> MultiWay(
                         objectID,
-                        element.getArray(KeySynonyms).map { it.content }
+                        element.getValue(KeySynonyms).jsonArray.map { it.jsonPrimitive.content }
                     )
                     KeyOneWaySynonym -> OneWay(
                         objectID,
-                        element.getPrimitive(KeyInput).content,
-                        element.getArray(KeySynonyms).map { it.content }
+                        element.getValue(KeyInput).jsonPrimitive.content,
+                        element.getValue(KeySynonyms).jsonArray.map { it.jsonPrimitive.content }
                     )
                     KeyAlternativeCorrection1 -> AlternativeCorrections(
                         objectID,
-                        element.getPrimitive(KeyWord).content,
-                        element.getArray(KeyCorrections).map { it.content },
+                        element.getValue(KeyWord).jsonPrimitive.content,
+                        element.getValue(KeyCorrections).jsonArray.map { it.jsonPrimitive.content },
                         SynonymType.Typo.One
                     )
                     KeyAlternativeCorrection2 -> AlternativeCorrections(
                         objectID,
-                        element.getPrimitive(KeyWord).content,
-                        element.getArray(KeyCorrections).map { it.content },
+                        element.getValue(KeyWord).jsonPrimitive.content,
+                        element.getValue(KeyCorrections).jsonArray.map { it.jsonPrimitive.content },
                         SynonymType.Typo.Two
                     )
                     KeyPlaceholder -> {
-                        val find = regexPlaceholder.find(element.getPrimitive(KeyPlaceholder).content)!!
+                        val find = regexPlaceholder.find(element.getValue(KeyPlaceholder).jsonPrimitive.content)!!
 
                         Placeholder(
                             objectID,
                             Placeholder.Token(find.groupValues[1]),
-                            element.getArray(KeyReplacements).map { it.content }
+                            element.getValue(KeyReplacements).jsonArray.map { it.jsonPrimitive.content }
                         )
                     }
                     else -> Other(objectID, element)

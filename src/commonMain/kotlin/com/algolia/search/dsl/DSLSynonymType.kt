@@ -11,11 +11,11 @@ public class DSLSynonymType(
     private val synonymTypes: MutableList<SynonymType> = mutableListOf()
 ) {
 
-    public val OneWay = SynonymType.OneWay
-    public val MultiWay = SynonymType.MultiWay
-    public val Placeholder = SynonymType.Placeholder
-    public val AlternativeCorrectionsOneTypo = SynonymType.Typo.One
-    public val AlternativeCorrectionsTwoTypos = SynonymType.Typo.Two
+    public val OneWay: SynonymType.OneWay = SynonymType.OneWay
+    public val MultiWay: SynonymType.MultiWay = SynonymType.MultiWay
+    public val Placeholder: SynonymType.Placeholder = SynonymType.Placeholder
+    public val AlternativeCorrectionsOneTypo: SynonymType.Typo = SynonymType.Typo.One
+    public val AlternativeCorrectionsTwoTypos: SynonymType.Typo = SynonymType.Typo.Two
 
     /**
      * Add [this] to [synonymTypes].

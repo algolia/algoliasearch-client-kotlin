@@ -1,19 +1,20 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.serialize.KeyMin
 import com.algolia.search.serialize.KeyStrict
-import com.algolia.search.serialize.asJsonInput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.asJsonInput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.boolean
 import kotlinx.serialization.json.booleanOrNull
-import kotlinx.serialization.json.content
+import kotlinx.serialization.json.jsonPrimitive
 
 @Serializable(TypoTolerance.Companion::class)
 public sealed class TypoTolerance(override val raw: String) : Raw<String> {
@@ -50,8 +51,9 @@ public sealed class TypoTolerance(override val raw: String) : Raw<String> {
         return raw
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(TypoTolerance::class)
-    companion object : KSerializer<TypoTolerance> {
+    public companion object : KSerializer<TypoTolerance> {
 
         override fun serialize(encoder: Encoder, value: TypoTolerance) {
             when (value) {
@@ -65,10 +67,10 @@ public sealed class TypoTolerance(override val raw: String) : Raw<String> {
             val element = decoder.asJsonInput()
 
             return when {
-                element.booleanOrNull != null -> if (element.boolean) True else False
-                element.content == KeyMin -> Min
-                element.content == KeyStrict -> Strict
-                else -> Other(element.content)
+                element.jsonPrimitive.booleanOrNull != null -> if (element.jsonPrimitive.boolean) True else False
+                element.jsonPrimitive.content == KeyMin -> Min
+                element.jsonPrimitive.content == KeyStrict -> Strict
+                else -> Other(element.jsonPrimitive.content)
             }
         }
     }

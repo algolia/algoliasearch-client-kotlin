@@ -18,7 +18,9 @@ internal class GuidePromoteHits {
             val rules = rules {
                 rule(
                     "Promote Harry Potter Box Set",
-                    Condition(Contains, Literal("Harry Potter")),
+                    conditions {
+                        +Condition(Contains, Literal("Harry Potter"))
+                    },
                     Consequence(promote = promotions { +ObjectID("HP-12345")(0) })
                 )
             }

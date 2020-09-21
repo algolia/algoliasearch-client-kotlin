@@ -1,11 +1,11 @@
 package configuration
 
-import BuildConfig
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.clientUserAgent
 import com.algolia.search.dsl.requestOptions
+import com.algolia.search.internal.BuildConfig
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import io.ktor.client.engine.mock.MockEngine
@@ -46,7 +46,8 @@ internal class TestUserAgent {
                     install(UserAgent) {
                         agent = "Test"
                     }
-                })
+                }
+            )
             val client = ClientSearch(configuration)
             val request = client.httpClient.request<HttpResponse>(HttpRequestBuilder())
             val headers = request.call.request.headers
@@ -72,9 +73,9 @@ internal class TestUserAgent {
             val request = shouldFailWith<ResponseException> {
                 client.listIndices(requestOptions)
             }
-            val headers = request.response.call.request.headers
+            val headers = request.response?.call?.request?.headers
 
-            headers[userAgentKey] shouldEqual expected
+            headers?.get(userAgentKey) shouldEqual expected
         }
     }
 }

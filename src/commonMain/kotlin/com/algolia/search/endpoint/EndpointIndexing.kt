@@ -23,7 +23,7 @@ import kotlinx.serialization.json.JsonObject
  */
 public interface EndpointIndexing {
 
-    val indexName: IndexName
+    public val indexName: IndexName
 
     /**
      * Add a new record to an index.
@@ -41,7 +41,7 @@ public interface EndpointIndexing {
      * @param record The record [T] to save.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun <T> saveObject(
+    public suspend fun <T> saveObject(
         serializer: KSerializer<T>,
         record: T,
         requestOptions: RequestOptions? = null
@@ -56,7 +56,7 @@ public interface EndpointIndexing {
      * @param records The records [T] to save.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun <T> saveObjects(
+    public suspend fun <T> saveObjects(
         serializer: KSerializer<T>,
         records: List<T>,
         requestOptions: RequestOptions? = null
@@ -70,7 +70,7 @@ public interface EndpointIndexing {
      * @param record The record [JsonObject] to save.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun saveObject(
+    public suspend fun saveObject(
         record: JsonObject,
         requestOptions: RequestOptions? = null
     ): CreationObject
@@ -83,7 +83,7 @@ public interface EndpointIndexing {
      * @param records The list of records [JsonObject] to save.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun saveObjects(
+    public suspend fun saveObjects(
         records: List<JsonObject>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
@@ -107,7 +107,7 @@ public interface EndpointIndexing {
      * @param record The record [T] to replace.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
-    suspend fun <T : Indexable> replaceObject(
+    public suspend fun <T : Indexable> replaceObject(
         serializer: KSerializer<T>,
         record: T,
         requestOptions: RequestOptions? = null
@@ -122,7 +122,7 @@ public interface EndpointIndexing {
      * @param records The records [T] to replace.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun <T : Indexable> replaceObjects(
+    public suspend fun <T : Indexable> replaceObjects(
         serializer: KSerializer<T>,
         records: List<T>,
         requestOptions: RequestOptions? = null
@@ -137,7 +137,7 @@ public interface EndpointIndexing {
      * @param record The record [JsonObject] to replace.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun replaceObject(
+    public suspend fun replaceObject(
         objectID: ObjectID,
         record: JsonObject,
         requestOptions: RequestOptions? = null
@@ -151,7 +151,7 @@ public interface EndpointIndexing {
      * @param records The list of records to replace.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun replaceObjects(
+    public suspend fun replaceObjects(
         records: List<Pair<ObjectID, JsonObject>>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
@@ -165,7 +165,7 @@ public interface EndpointIndexing {
      * @param serializer [KSerializer] of type [T] for serialization.
      * @param records The list of records to replace.
      */
-    suspend fun <T> replaceAllObjects(
+    public suspend fun <T> replaceAllObjects(
         serializer: KSerializer<T>,
         records: List<T>
     ): List<TaskIndex>
@@ -175,7 +175,7 @@ public interface EndpointIndexing {
      *
      * @see replaceAllObjects
      */
-    suspend fun replaceAllObjects(
+    public suspend fun replaceAllObjects(
         records: List<JsonObject>
     ): List<TaskIndex>
 
@@ -185,7 +185,7 @@ public interface EndpointIndexing {
      * @param objectID The [ObjectID] to identify the record.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun deleteObject(
+    public suspend fun deleteObject(
         objectID: ObjectID,
         requestOptions: RequestOptions? = null
     ): DeletionObject
@@ -196,7 +196,7 @@ public interface EndpointIndexing {
      * @param objectIDs The [ObjectID] to identify the record.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun deleteObjects(
+    public suspend fun deleteObjects(
         objectIDs: List<ObjectID>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
@@ -216,7 +216,7 @@ public interface EndpointIndexing {
      * @param query [DeleteByQuery] to match records for deletion.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun deleteObjectsBy(
+    public suspend fun deleteObjectsBy(
         query: DeleteByQuery,
         requestOptions: RequestOptions? = null
     ): RevisionIndex
@@ -230,7 +230,7 @@ public interface EndpointIndexing {
      * If you don’t specify any attributes, every attribute will be returned.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun <T : Indexable> getObject(
+    public suspend fun <T : Indexable> getObject(
         serializer: KSerializer<T>,
         objectID: ObjectID,
         attributesToRetrieve: List<Attribute>? = null,
@@ -246,7 +246,7 @@ public interface EndpointIndexing {
      * If you don’t specify any attributes, every attribute will be returned.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun getObject(
+    public suspend fun getObject(
         objectID: ObjectID,
         attributesToRetrieve: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
@@ -257,7 +257,7 @@ public interface EndpointIndexing {
      *
      * @see getObject
      */
-    suspend fun getObjects(
+    public suspend fun getObjects(
         objectIDs: List<ObjectID>,
         attributesToRetrieve: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
@@ -291,7 +291,7 @@ public interface EndpointIndexing {
      * update on a nonexistent record will be ignored (but no error will be sent back).
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun partialUpdateObject(
+    public suspend fun partialUpdateObject(
         objectID: ObjectID,
         partial: Partial,
         createIfNotExists: Boolean? = null,
@@ -305,7 +305,7 @@ public interface EndpointIndexing {
      * @param createIfNotExists
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun partialUpdateObjects(
+    public suspend fun partialUpdateObjects(
         partials: List<Pair<ObjectID, Partial>>,
         createIfNotExists: Boolean = true,
         requestOptions: RequestOptions? = null
@@ -329,7 +329,7 @@ public interface EndpointIndexing {
      * @param batchOperations List of [BatchOperation]
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun batch(
+    public suspend fun batch(
         batchOperations: List<BatchOperation>,
         requestOptions: RequestOptions? = null
     ): ResponseBatch
@@ -342,7 +342,7 @@ public interface EndpointIndexing {
      *
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun clearObjects(
+    public suspend fun clearObjects(
         requestOptions: RequestOptions? = null
     ): RevisionIndex
 }

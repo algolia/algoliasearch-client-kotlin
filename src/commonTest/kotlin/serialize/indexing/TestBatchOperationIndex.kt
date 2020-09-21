@@ -6,7 +6,8 @@ import com.algolia.search.serialize.KeyAction
 import com.algolia.search.serialize.KeyDelete
 import com.algolia.search.serialize.KeyIndexName
 import indexA
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import serialize.TestSerializer
 
 internal class TestBatchOperationIndex : TestSerializer<BatchOperationIndex>(
@@ -14,9 +15,9 @@ internal class TestBatchOperationIndex : TestSerializer<BatchOperationIndex>(
 ) {
 
     override val items = listOf(
-        BatchOperationIndex(indexA, BatchOperation.DeleteIndex) to json {
-            KeyAction to KeyDelete
-            KeyIndexName to indexA.raw
+        BatchOperationIndex(indexA, BatchOperation.DeleteIndex) to buildJsonObject {
+            put(KeyAction, KeyDelete)
+            put(KeyIndexName, indexA.raw)
         }
     )
 }

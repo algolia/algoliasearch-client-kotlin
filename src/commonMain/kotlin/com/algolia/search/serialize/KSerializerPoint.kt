@@ -2,16 +2,18 @@ package com.algolia.search.serialize
 
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.Point
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.regexPoint
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 public object KSerializerPoint : KSerializer<Point> {
 
     private val serializer = String.serializer()
 
-    override val descriptor = serializer.descriptor
+    override val descriptor: SerialDescriptor = serializer.descriptor
 
     override fun serialize(encoder: Encoder, value: Point) {
         serializer.serialize(encoder, "${value.latitude},${value.longitude}")

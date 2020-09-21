@@ -3,13 +3,14 @@ package com.algolia.search.model.settings
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyUnordered
-import com.algolia.search.serialize.regexUnordered
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.regexUnordered
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(SearchableAttribute.Companion::class)
 public sealed class SearchableAttribute {
@@ -29,8 +30,9 @@ public sealed class SearchableAttribute {
      */
     public data class Unordered(val attribute: Attribute) : SearchableAttribute()
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(SearchableAttribute::class)
-    companion object : KSerializer<SearchableAttribute> {
+    public companion object : KSerializer<SearchableAttribute> {
 
         override fun serialize(encoder: Encoder, value: SearchableAttribute) {
             val string = when (value) {

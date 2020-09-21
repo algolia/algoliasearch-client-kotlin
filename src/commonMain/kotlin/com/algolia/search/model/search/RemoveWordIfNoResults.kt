@@ -1,15 +1,16 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.model.Raw
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAllOptional
 import com.algolia.search.serialize.KeyFirstWords
 import com.algolia.search.serialize.KeyLastWords
 import com.algolia.search.serialize.KeyNone
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 @Serializable(RemoveWordIfNoResults.Companion::class)
 public sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String> {
@@ -45,11 +46,11 @@ public sealed class RemoveWordIfNoResults(override val raw: String) : Raw<String
         return raw
     }
 
-    companion object : KSerializer<RemoveWordIfNoResults> {
+    public companion object : KSerializer<RemoveWordIfNoResults> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: RemoveWordIfNoResults) {
             serializer.serialize(encoder, value.raw)

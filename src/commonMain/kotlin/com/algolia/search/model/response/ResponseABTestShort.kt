@@ -4,19 +4,24 @@ import com.algolia.search.helper.toABTestID
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.Variant
-import com.algolia.search.serialize.JsonNoDefaults
 import com.algolia.search.serialize.KSerializerVariant
 import com.algolia.search.serialize.KeyId
 import com.algolia.search.serialize.KeyVariants
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.json.json
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.long
 
 /**
  * Short version of [ResponseABTest].
@@ -37,39 +42,37 @@ public data class ResponseABTestShort(
     val variantB: Variant
 ) {
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(ResponseABTestShort::class)
-    companion object :
+    public companion object :
         KSerializer<ResponseABTestShort> {
 
         override fun serialize(encoder: Encoder, value: ResponseABTestShort) {
-            val json = json {
+            val json = buildJsonObject {
                 KeyId to value.abTestId
-                KeyVariants to jsonArray {
-                    +JsonNoDefaults.toJson(
-                        KSerializerVariant,
-                        value.variantA
-                    )
-                    +JsonNoDefaults.toJson(
-                        KSerializerVariant,
-                        value.variantB
-                    )
-                }
+                put(
+                    KeyVariants,
+                    buildJsonArray {
+                        add(JsonNoDefaults.encodeToJsonElement(KSerializerVariant, value.variantA))
+                        add(JsonNoDefaults.encodeToJsonElement(KSerializerVariant, value.variantB))
+                    }
+                )
             }
 
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJsonElement(json)
         }
 
         override fun deserialize(decoder: Decoder): ResponseABTestShort {
             val json = decoder.asJsonInput().jsonObject
-            val variants = json.getArray(KeyVariants)
+            val variants = json.getValue(KeyVariants).jsonArray
 
             return ResponseABTestShort(
-                abTestId = json.getPrimitive(KeyId).long.toABTestID(),
-                variantA = JsonNoDefaults.fromJson(
+                abTestId = json.getValue(KeyId).jsonPrimitive.long.toABTestID(),
+                variantA = JsonNoDefaults.decodeFromJsonElement(
                     KSerializerVariant,
                     variants[0]
                 ),
-                variantB = JsonNoDefaults.fromJson(
+                variantB = JsonNoDefaults.decodeFromJsonElement(
                     KSerializerVariant,
                     variants[1]
                 )

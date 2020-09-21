@@ -12,10 +12,10 @@ public interface EndpointInsights {
     /**
      * Send one [InsightsEvent].
      */
-    suspend fun sendEvent(event: InsightsEvent, requestOptions: RequestOptions? = null): HttpResponse
+    public suspend fun sendEvent(event: InsightsEvent, requestOptions: RequestOptions? = null): HttpResponse
 
     /**
      * Send multiple [InsightsEvent].
      */
-    suspend fun sendEvents(events: List<InsightsEvent>, requestOptions: RequestOptions? = null): HttpResponse
+    public suspend fun sendEvents(events: List<InsightsEvent>, requestOptions: RequestOptions? = null): HttpResponse
 }

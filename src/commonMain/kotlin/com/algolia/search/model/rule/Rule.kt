@@ -1,7 +1,7 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.model.ObjectID
-import com.algolia.search.serialize.KeyCondition
+import com.algolia.search.serialize.KeyConditions
 import com.algolia.search.serialize.KeyConsequence
 import com.algolia.search.serialize.KeyDescription
 import com.algolia.search.serialize.KeyEnabled
@@ -17,9 +17,9 @@ public data class Rule(
      */
     @SerialName(KeyObjectID) val objectID: ObjectID,
     /**
-     * Condition of the rule.
+     * Conditions of the rule.
      */
-    @SerialName(KeyCondition) val condition: Condition? = null,
+    @SerialName(KeyConditions) val conditions: List<Condition>? = null,
     /**
      * Consequence of the rule.
      */

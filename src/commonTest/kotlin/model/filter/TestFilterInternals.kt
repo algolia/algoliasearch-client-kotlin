@@ -1,7 +1,7 @@
 package model.filter
 
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.filter.escape
+import com.algolia.search.model.filter.internal.escape
 import shouldEqual
 import kotlin.test.Test
 

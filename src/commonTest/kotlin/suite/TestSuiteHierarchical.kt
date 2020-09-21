@@ -9,8 +9,8 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import kotlinx.serialization.builtins.list
-import kotlinx.serialization.json.JsonObjectSerializer
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.json.JsonObject
 import runBlocking
 import shouldBeTrue
 import shouldEqual
@@ -48,7 +48,7 @@ internal class TestSuiteHierarchical {
             val settings = Settings(
                 attributesForFaceting = facets.map { AttributeForFaceting.Default(it) }
             )
-            val objects = load(JsonObjectSerializer.list, "hierarchical_disjunctive.json")
+            val objects = load(ListSerializer(JsonObject.serializer()), "hierarchical_disjunctive.json")
 
             index.apply {
                 val tasks = mutableListOf<Task>()
@@ -106,7 +106,7 @@ internal class TestSuiteHierarchical {
             val settings = Settings(
                 attributesForFaceting = facets.map { AttributeForFaceting.Default(it) }
             )
-            val objects = load(JsonObjectSerializer.list, "hierarchical.json")
+            val objects = load(ListSerializer(JsonObject.serializer()), "hierarchical.json")
 
             index.apply {
                 val tasks = mutableListOf<Task>()
@@ -154,7 +154,7 @@ internal class TestSuiteHierarchical {
             val settings = Settings(
                 attributesForFaceting = facets.map { AttributeForFaceting.Default(it) }
             )
-            val objects = load(JsonObjectSerializer.list, "hierarchical_disjunctive.json")
+            val objects = load(ListSerializer(JsonObject.serializer()), "hierarchical_disjunctive.json")
 
             index.apply {
                 val tasks = mutableListOf<Task>()
@@ -199,7 +199,7 @@ internal class TestSuiteHierarchical {
             val settings = Settings(
                 attributesForFaceting = facets.map { AttributeForFaceting.Default(it) }
             )
-            val objects = load(JsonObjectSerializer.list, "hierarchical.json")
+            val objects = load(ListSerializer(JsonObject.serializer()), "hierarchical.json")
 
             index.apply {
                 val tasks = mutableListOf<Task>()

@@ -27,8 +27,9 @@ import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
 import com.algolia.search.serialize.KeyRuleContexts
 import io.ktor.http.parseUrlEncodedParameters
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.list
-import kotlinx.serialization.json.JsonObjectSerializer
+import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import runBlocking
 import shouldBeNull
 import shouldBeTrue
@@ -50,7 +51,7 @@ internal class TestSuiteSearch {
     @Test
     fun test() {
         runBlocking {
-            val objects = load(JsonObjectSerializer.list, "companies.json")
+            val objects = load(ListSerializer(JsonObject.serializer()), "companies.json")
             val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Searchable(company)))
             val tasks = mutableListOf<Task>()
 
@@ -71,7 +72,8 @@ internal class TestSuiteSearch {
                     page shouldEqual 0
                     position shouldEqual 0
                 }
-                val predicate = { hit: ResponseSearch.Hit -> hit.json.getPrimitive("company").content == "Apple" }
+                val predicate =
+                    { hit: ResponseSearch.Hit -> hit.json.getValue("company").jsonPrimitive.content == "Apple" }
 
                 findObject(predicate, Query("Algolia"), paginate = true).shouldBeNull()
                 findObject(predicate, Query(hitsPerPage = 5), paginate = false).shouldBeNull()
@@ -117,7 +119,7 @@ internal class TestSuiteSearch {
         data class DecompoundingObject(
             override val objectID: ObjectID,
             val type: String,
-            val category: String? = null
+            val category: String? = null,
         ) : Indexable
 
         runBlocking {

@@ -21,7 +21,6 @@ import com.algolia.search.model.search.SortFacetsBy
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
-import com.algolia.search.serialize.JsonNoDefaults
 import com.algolia.search.serialize.KeyAdvancedSyntax
 import com.algolia.search.serialize.KeyAdvancedSyntaxFeatures
 import com.algolia.search.serialize.KeyAllowTyposOnNumericTokens
@@ -88,9 +87,12 @@ import com.algolia.search.serialize.KeySynonyms
 import com.algolia.search.serialize.KeyTagFilters
 import com.algolia.search.serialize.KeyTypoTolerance
 import com.algolia.search.serialize.KeyUserToken
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import int
-import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.add
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import nestedLists
 import nestedListsJson
 import serialize.TestSerializer
@@ -169,84 +171,100 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             enableABTest = boolean,
             explainModules = listOf(ExplainModule.MatchAlternatives),
             naturalLanguages = listOf(Language.Afrikaans, Language.Albanian)
-        ) to json {
-            KeyQuery to string
-            KeyAttributesToRetrieve to attributesJson
-            KeyRestrictSearchableAttributes to attributesJson
-            KeyFilters to string
-            KeyFacetFilters to nestedListsJson
-            KeyOptionalFilters to nestedListsJson
-            KeyNumericFilters to nestedListsJson
-            KeyTagFilters to nestedListsJson
-            KeySumOrFiltersScores to boolean
-            KeyFacets to attributesJson
-            KeyMaxValuesPerFacet to int
-            KeyFacetingAfterDistinct to boolean
-            KeySortFacetValuesBy to SortFacetsBy.Count.raw
-            KeyAttributesToHighlight to attributesJson
-            KeyAttributesToSnippet to jsonArray { +TestSnippet.json }
-            KeyHighlightPreTag to string
-            KeyHighlightPostTag to string
-            KeySnippetEllipsisText to string
-            KeyRestrictHighlightAndSnippetArrays to boolean
-            KeyPage to int
-            KeyHitsPerPage to int
-            KeyOffset to int
-            KeyLength to int
-            KeyMinWordSizeFor1Typo to int
-            KeyMinWordSizeFor2Typos to int
-            KeyTypoTolerance to TypoTolerance.Min.raw
-            KeyAllowTyposOnNumericTokens to boolean
-            KeyDisableTypoToleranceOnAttributes to attributesJson
-            KeyAroundLatLng to "0.0,0.0"
-            KeyAroundLatLngViaIP to boolean
-            KeyAroundRadius to AroundRadius.All.raw
-            KeyAroundPrecision to int
-            KeyMinimumAroundRadius to int
-            KeyInsideBoundingBox to jsonArray { +TestBoundingBox.json }
-            KeyInsidePolygon to jsonArray { +TestPolygon.json }
-            KeyIgnorePlurals to boolean
-            KeyRemoveStopWords to boolean
-            KeyQueryLanguages to jsonArray {
-                +Language.Afrikaans.raw
-                +Language.Albanian.raw
-            }
-            KeyEnableRules to boolean
-            KeyRuleContexts to jsonArray { +string }
-            KeyEnablePersonalization to boolean
-            KeyPersonalizationImpact to 1
-            KeyUserToken to unknown
-            KeyQueryType to QueryType.PrefixLast.raw
-            KeyRemoveWordsIfNoResults to RemoveWordIfNoResults.LastWords.raw
-            KeyAdvancedSyntax to boolean
-            KeyAdvancedSyntaxFeatures to jsonArray { +AdvancedSyntaxFeatures.ExcludeWords.raw }
-            KeyOptionalWords to jsonArray { +string }
-            KeyDisableExactOnAttributes to attributesJson
-            KeyExactOnSingleWordQuery to ExactOnSingleWordQuery.Word.raw
-            KeyAlternativesAsExact to jsonArray { +AlternativesAsExact.IgnorePlurals.raw }
-            KeyDistinct to int
-            KeyGetRankingInfo to boolean
-            KeyClickAnalytics to boolean
-            KeyAnalytics to boolean
-            KeyAnalyticsTags to jsonArray { +string }
-            KeySynonyms to boolean
-            KeyReplaceSynonymsInHighlight to boolean
-            KeyMinProximity to int
-            KeyResponseFields to jsonArray { +ResponseFields.NbHits.raw }
-            KeyMaxFacetHits to int
-            KeyPercentileComputation to boolean
-            KeySimilarQuery to string
-            KeyEnableABTest to boolean
-            KeyExplain to jsonArray { +ExplainModule.MatchAlternatives.raw }
-            KeyNaturalLanguages to jsonArray {
-                +Language.Afrikaans.raw
-                +Language.Albanian.raw
-            }
+        ) to buildJsonObject {
+            put(KeyQuery, string)
+            put(KeyAttributesToRetrieve, attributesJson)
+            put(KeyRestrictSearchableAttributes, attributesJson)
+            put(KeyFilters, string)
+            put(KeyFacetFilters, nestedListsJson)
+            put(KeyOptionalFilters, nestedListsJson)
+            put(KeyNumericFilters, nestedListsJson)
+            put(KeyTagFilters, nestedListsJson)
+            put(KeySumOrFiltersScores, boolean)
+            put(KeyFacets, attributesJson)
+            put(KeyMaxValuesPerFacet, int)
+            put(KeyFacetingAfterDistinct, boolean)
+            put(KeySortFacetValuesBy, SortFacetsBy.Count.raw)
+            put(KeyAttributesToHighlight, attributesJson)
+            put(KeyAttributesToSnippet, buildJsonArray { add(TestSnippet.json) })
+            put(KeyHighlightPreTag, string)
+            put(KeyHighlightPostTag, string)
+            put(KeySnippetEllipsisText, string)
+            put(KeyRestrictHighlightAndSnippetArrays, boolean)
+            put(KeyPage, int)
+            put(KeyHitsPerPage, int)
+            put(KeyOffset, int)
+            put(KeyLength, int)
+            put(KeyMinWordSizeFor1Typo, int)
+            put(KeyMinWordSizeFor2Typos, int)
+            put(KeyTypoTolerance, TypoTolerance.Min.raw)
+            put(KeyAllowTyposOnNumericTokens, boolean)
+            put(KeyDisableTypoToleranceOnAttributes, attributesJson)
+            put(KeyAroundLatLng, "0.0,0.0")
+            put(KeyAroundLatLngViaIP, boolean)
+            put(KeyAroundRadius, AroundRadius.All.raw)
+            put(KeyAroundPrecision, int)
+            put(KeyMinimumAroundRadius, int)
+            put(KeyInsideBoundingBox, buildJsonArray { add(TestBoundingBox.json) })
+            put(KeyInsidePolygon, buildJsonArray { add(TestPolygon.json) })
+            put(KeyIgnorePlurals, boolean)
+            put(KeyRemoveStopWords, boolean)
+            put(
+                KeyQueryLanguages,
+                buildJsonArray {
+                    add(Language.Afrikaans.raw)
+                    add(Language.Albanian.raw)
+                }
+            )
+            put(KeyEnableRules, boolean)
+            put(KeyRuleContexts, buildJsonArray { add(string) })
+            put(KeyEnablePersonalization, boolean)
+            put(KeyPersonalizationImpact, 1)
+            put(KeyUserToken, unknown)
+            put(KeyQueryType, QueryType.PrefixLast.raw)
+            put(KeyRemoveWordsIfNoResults, RemoveWordIfNoResults.LastWords.raw)
+            put(KeyAdvancedSyntax, boolean)
+            put(
+                KeyAdvancedSyntaxFeatures,
+                buildJsonArray { add(AdvancedSyntaxFeatures.ExcludeWords.raw) }
+            )
+            put(KeyOptionalWords, buildJsonArray { add(string) })
+            put(KeyDisableExactOnAttributes, attributesJson)
+            put(KeyExactOnSingleWordQuery, ExactOnSingleWordQuery.Word.raw)
+            put(
+                KeyAlternativesAsExact,
+                buildJsonArray {
+                    add(
+                        AlternativesAsExact.IgnorePlurals.raw
+                    )
+                }
+            )
+            put(KeyDistinct, int)
+            put(KeyGetRankingInfo, boolean)
+            put(KeyClickAnalytics, boolean)
+            put(KeyAnalytics, boolean)
+            put(KeyAnalyticsTags, buildJsonArray { add(string) })
+            put(KeySynonyms, boolean)
+            put(KeyReplaceSynonymsInHighlight, boolean)
+            put(KeyMinProximity, int)
+            put(KeyResponseFields, buildJsonArray { add(ResponseFields.NbHits.raw) })
+            put(KeyMaxFacetHits, int)
+            put(KeyPercentileComputation, boolean)
+            put(KeySimilarQuery, string)
+            put(KeyEnableABTest, boolean)
+            put(KeyExplain, buildJsonArray { add(ExplainModule.MatchAlternatives.raw) })
+            put(
+                KeyNaturalLanguages,
+                buildJsonArray {
+                    add(Language.Afrikaans.raw)
+                    add(Language.Albanian.raw)
+                }
+            )
         }
     )
 
     @Test
     fun encodeNoNull() {
-        JsonNoDefaults.stringify(Query.serializer(), Query()) shouldEqual "{}"
+        JsonNoDefaults.encodeToString(Query.serializer(), Query()) shouldEqual "{}"
     }
 }

@@ -5,10 +5,10 @@ import clientAnalytics
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.Time
 import com.algolia.search.model.analytics.Variant
+import com.algolia.search.model.internal.Time
 import com.algolia.search.model.response.ResponseVariant
-import com.algolia.search.serialize.JsonDebug
+import com.algolia.search.serialize.internal.JsonDebug
 import dayInMillis
 import kotlinx.serialization.KSerializer
 import loadScratch
@@ -56,9 +56,11 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String, now: Boole
 
 internal fun <T> load(serializer: KSerializer<T>, name: String): T {
     val string = loadScratch(name)
-    val data = JsonDebug.parse(serializer, string)
-    val serialized = JsonDebug.stringify(serializer, data)
+    val data = JsonDebug.decodeFromString(serializer, string)
+    val serialized = JsonDebug.encodeToString(serializer, data)
 
-    serialized shouldEqual string
+    serialized.removeSpaces() shouldEqual string.removeSpaces()
     return data
 }
+
+private fun String.removeSpaces() = replace("\\s".toRegex(), "")

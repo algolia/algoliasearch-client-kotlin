@@ -35,7 +35,7 @@ internal class TestSuiteMultiCluster {
                 clientMcm.getUserID(userID)
                 break
             } catch (exception: ResponseException) {
-                exception.response.status shouldEqual HttpStatusCode.NotFound
+                exception.response?.status shouldEqual HttpStatusCode.NotFound
             }
             delay(1000L)
         }
@@ -46,14 +46,15 @@ internal class TestSuiteMultiCluster {
             try {
                 clientMcm.removeUserID(userID)
             } catch (exception: ResponseException) {
-                when (exception.response.status) {
+                val response = exception.response
+                when (response?.status) {
                     HttpStatusCode.NotFound -> break@loop
                     HttpStatusCode.BadRequest ->
-                        if (String(exception.response.readBytes()).contains("is already migrating")) {
+                        if (String(response.readBytes()).contains("is already migrating")) {
                             break@loop
                         } else {
                             // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
-                            println(String(exception.response.readBytes()))
+                            println(String(response.readBytes()))
                         }
                 }
             }

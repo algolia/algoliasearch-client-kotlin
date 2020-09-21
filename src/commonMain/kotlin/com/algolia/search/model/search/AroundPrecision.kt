@@ -2,18 +2,23 @@ package com.algolia.search.model.search
 
 import com.algolia.search.serialize.KeyFrom
 import com.algolia.search.serialize.KeyValue
-import com.algolia.search.serialize.asJsonInput
-import com.algolia.search.serialize.asJsonOutput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.int
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.json.put
 
 /**
  * Precision of geo search (in meters), to add grouping by geo location to the ranking formula.
@@ -34,36 +39,41 @@ public sealed class AroundPrecision {
 
     public data class Other(val raw: JsonElement) : AroundPrecision()
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(AroundPrecision::class)
-    companion object : KSerializer<AroundPrecision> {
+    public companion object : KSerializer<AroundPrecision> {
 
         override fun serialize(encoder: Encoder, value: AroundPrecision) {
             val json = when (value) {
-                is Int -> JsonLiteral(value.value)
-                is Ranges -> jsonArray {
+                is Int -> JsonPrimitive(value.value)
+                is Ranges -> buildJsonArray {
                     value.list.forEach {
-                        +json {
-                            KeyFrom to it.first
-                            KeyValue to it.endInclusive
-                        }
+                        add(
+                            buildJsonObject {
+                                put(KeyFrom, it.first)
+                                put(KeyValue, it.last)
+                            }
+                        )
                     }
                 }
                 is Other -> value.raw
             }
-            encoder.asJsonOutput().encodeJson(json)
+            encoder.asJsonOutput().encodeJsonElement(json)
         }
 
         override fun deserialize(decoder: Decoder): AroundPrecision {
             return when (val json = decoder.asJsonInput()) {
-                is JsonArray -> Ranges(json.map {
-                    val pair = it.jsonObject
+                is JsonArray -> Ranges(
+                    json.map {
+                        val pair = it.jsonObject
 
-                    IntRange(
-                        pair.getPrimitive(KeyFrom).int,
-                        pair.getPrimitive(KeyValue).int
-                    )
-                })
-                is JsonLiteral -> Int(json.int)
+                        IntRange(
+                            pair.getValue(KeyFrom).jsonPrimitive.int,
+                            pair.getValue(KeyValue).jsonPrimitive.int
+                        )
+                    }
+                )
+                is JsonPrimitive -> Int(json.int)
                 else -> Other(json)
             }
         }

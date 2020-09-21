@@ -34,7 +34,9 @@ internal class GuideConsequences {
             val rules = rules {
                 rule(
                     "director_rule",
-                    Condition(Contains, Facet(director)),
+                    conditions {
+                        +Condition(Contains, Facet(director))
+                    },
                     Consequence(
                         automaticFacetFilters { +director },
                         edits = edits { +"director" }

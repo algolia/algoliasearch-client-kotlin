@@ -2,10 +2,11 @@ package suite
 
 import clientAdmin1
 import com.algolia.search.client.ClientSearch
+import com.algolia.search.client.internal.ClientSearchImpl
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.serialize.Json
+import com.algolia.search.serialize.internal.Json
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.features.logging.LogLevel
@@ -33,7 +34,7 @@ internal class TestSuiteDNS {
                 "Content-Type",
                 listOf(ContentType.Application.Json.toString())
             ),
-            content = ByteReadChannel(Json.stringify(ResponseSearch.serializer(), ResponseSearch()))
+            content = ByteReadChannel(Json.encodeToString(ResponseSearch.serializer(), ResponseSearch()))
         )
     }
 
@@ -53,7 +54,7 @@ internal class TestSuiteDNS {
             val index = client.initIndex(IndexName("test"))
 
             index.search()
-            client.transport.hosts.first().retryCount shouldEqual 1
+            (client as ClientSearchImpl).transport.hosts.first().retryCount shouldEqual 1
         }
     }
 }

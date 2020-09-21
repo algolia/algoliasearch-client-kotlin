@@ -15,7 +15,7 @@ import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.TimeRange
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
 import objectIDA
 import objectIDB
 import shouldEqual
@@ -28,7 +28,9 @@ internal class TestDSLRules {
         val dsl = DSLRules {
             rule(
                 objectID = objectIDA,
-                condition = condition(Contains, Literal("value")),
+                conditions = conditions {
+                    +condition(Contains, Literal("value"))
+                },
                 consequence = consequence(
                     automaticFacetFilters = automaticFacetFilters { +attributeA },
                     automaticOptionalFacetFilters = automaticFacetFilters { +attributeB },
@@ -36,7 +38,7 @@ internal class TestDSLRules {
                     filterPromotes = true,
                     promote = promotions { +objectIDA(10) },
                     query = query { },
-                    userData = json { },
+                    userData = buildJsonObject { },
                     hide = objectIDs { +objectIDB }
                 ),
                 enabled = true,
@@ -48,7 +50,7 @@ internal class TestDSLRules {
         dsl shouldEqual listOf(
             Rule(
                 objectID = objectIDA,
-                condition = Condition(Anchoring.Contains, Pattern.Literal("value")),
+                conditions = listOf(Condition(Anchoring.Contains, Pattern.Literal("value"))),
                 consequence = Consequence(
                     automaticFacetFilters = listOf(AutomaticFacetFilters(attributeA)),
                     automaticOptionalFacetFilters = listOf(AutomaticFacetFilters(attributeB)),
@@ -56,7 +58,7 @@ internal class TestDSLRules {
                     filterPromotes = true,
                     promote = listOf(Promotion(objectIDA, 10)),
                     query = query { },
-                    userData = json { },
+                    userData = buildJsonObject { },
                     hide = listOf(objectIDB)
                 ),
                 enabled = true,
@@ -67,20 +69,9 @@ internal class TestDSLRules {
     }
 
     @Test
-    fun anchoring() {
-        DSLRules {
-            Is shouldEqual Anchoring.Is
-            StartsWith shouldEqual Anchoring.StartsWith
-            EndsWith shouldEqual Anchoring.EndsWith
-            Contains shouldEqual Anchoring.Contains
-        }
-    }
-
-    @Test
     fun pattern() {
         DSLRules {
             Facet("hello") shouldEqual Pattern.Facet(Attribute("hello"))
-            Literal("hello") shouldEqual Pattern.Literal("hello")
         }
     }
 }

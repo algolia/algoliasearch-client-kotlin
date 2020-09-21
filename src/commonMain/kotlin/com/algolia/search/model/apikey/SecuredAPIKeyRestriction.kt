@@ -4,11 +4,11 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.toJsonNoDefaults
+import com.algolia.search.serialize.internal.toJsonNoDefaults
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.content
+import kotlinx.serialization.json.jsonPrimitive
 
 /**
  * Create restrictions for an [APIKey].
@@ -37,8 +37,8 @@ public data class SecuredAPIKeyRestriction(
             query?.let { query ->
                 query.toJsonNoDefaults().forEach { (key, element) ->
                     when (element) {
-                        is JsonArray -> appendAll(key, element.content.map { it.content })
-                        else -> append(key, element.content)
+                        is JsonArray -> appendAll(key, element.jsonPrimitive.content.map { it.toString() })
+                        else -> append(key, element.jsonPrimitive.content)
                     }
                 }
             }
@@ -49,7 +49,7 @@ public data class SecuredAPIKeyRestriction(
         }.formUrlEncode()
     }
 
-    companion object {
+    public companion object {
         private const val RESTRICT_INDICES = "restrictIndices"
         private const val RESTRICT_SOURCES = "restrictSources"
         private const val USER_TOKEN = "userToken"
@@ -64,7 +64,7 @@ public data class SecuredAPIKeyRestriction(
             restrictSources: String? = null,
             validUntil: Long? = null,
             userToken: UserToken? = null
-        ) = SecuredAPIKeyRestriction(
+        ): SecuredAPIKeyRestriction = SecuredAPIKeyRestriction(
             query = query,
             restrictIndices = restrictIndices?.split(";")?.map(::IndexName),
             restrictSources = restrictSources?.split(";"),

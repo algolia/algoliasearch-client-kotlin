@@ -29,10 +29,12 @@ internal class DocSaveRule {
             val rule = Rule(
                 objectID = ObjectID("a-rule-id"),
                 enabled = false,
-                condition = Condition(
-                    pattern = Pattern.Literal("smartphone"),
-                    anchoring = Anchoring.Contains,
-                    alternative = Alternatives.True
+                conditions = listOf(
+                    Condition(
+                        pattern = Pattern.Literal("smartphone"),
+                        anchoring = Anchoring.Contains,
+                        alternative = Alternatives.True
+                    )
                 ),
                 consequence = Consequence(
                     query = Query(filters = "category = 1")

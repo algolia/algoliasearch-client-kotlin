@@ -4,7 +4,6 @@ import com.algolia.search.dsl.DSL
 import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.AutomaticFacetFilters
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
@@ -25,11 +24,6 @@ public class DSLRules(
     private val rules: MutableList<Rule> = mutableListOf()
 ) {
 
-    public val Is = Anchoring.Is
-    public val StartsWith = Anchoring.StartsWith
-    public val EndsWith = Anchoring.EndsWith
-    public val Contains = Anchoring.Contains
-
     /**
      * Convenience method.
      */
@@ -45,17 +39,10 @@ public class DSLRules(
     }
 
     /**
-     * Create a [Pattern.Literal] with a [value].
+     * Create a [List] of [Condition] with [DSLConditions].
      */
-    public fun Literal(value: String): Pattern.Literal {
-        return Pattern.Literal(value)
-    }
-
-    /**
-     * Create a [Condition] with [anchoring], [pattern] and an optional [context].
-     */
-    public fun condition(anchoring: Anchoring, pattern: Pattern, context: String? = null): Condition {
-        return Condition(anchoring, pattern, context)
+    public fun conditions(block: DSLConditions.() -> Unit): List<Condition> {
+        return DSLConditions(block)
     }
 
     /**
@@ -124,27 +111,27 @@ public class DSLRules(
      */
     public fun rule(
         objectID: String,
-        condition: Condition,
+        conditions: List<Condition>,
         consequence: Consequence,
         enabled: Boolean? = null,
         validity: List<TimeRange>? = null,
         description: String? = null
     ) {
-        +Rule(ObjectID(objectID), condition, consequence, enabled, validity, description)
+        +Rule(ObjectID(objectID), conditions, consequence, enabled, validity, description)
     }
 
     /**
-     * Create a [Rule] with [objectID], [condition], [consequence], [enabled], [validity] and [description].
+     * Create a [Rule] with [objectID], [conditions], [consequence], [enabled], [validity] and [description].
      */
     public fun rule(
         objectID: ObjectID,
-        condition: Condition,
+        conditions: List<Condition>,
         consequence: Consequence,
         enabled: Boolean? = null,
         validity: List<TimeRange>? = null,
         description: String? = null
     ) {
-        +Rule(objectID, condition, consequence, enabled, validity, description)
+        +Rule(objectID, conditions, consequence, enabled, validity, description)
     }
 
     public companion object : DSL<DSLRules, List<Rule>> {

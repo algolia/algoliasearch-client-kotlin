@@ -19,8 +19,8 @@ public class DSLAttributesForFaceting(
         Searchable
     }
 
-    public val FilterOnly = Modifier.FilterOnly
-    public val Searchable = Modifier.Searchable
+    public val FilterOnly: Modifier = Modifier.FilterOnly
+    public val Searchable: Modifier = Modifier.Searchable
 
     /**
      * Convenience method.
@@ -46,14 +46,14 @@ public class DSLAttributesForFaceting(
     /**
      * Convenience method.
      */
-    operator fun Modifier.invoke(attribute: String): AttributeForFaceting {
+    public operator fun Modifier.invoke(attribute: String): AttributeForFaceting {
         return invoke(Attribute(attribute))
     }
 
     /**
      * Create an [AttributeForFaceting] using [this] [Modifier] to be applied on [attribute].
      */
-    operator fun Modifier.invoke(attribute: Attribute): AttributeForFaceting {
+    public operator fun Modifier.invoke(attribute: Attribute): AttributeForFaceting {
         return when (this) {
             Modifier.Searchable -> AttributeForFaceting.Searchable(attribute)
             Modifier.FilterOnly -> AttributeForFaceting.FilterOnly(attribute)

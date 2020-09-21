@@ -15,8 +15,8 @@ import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.SortFacetsBy
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.serialize.Json
-import com.algolia.search.serialize.JsonNonStrict
+import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNonStrict
 import documentation.client
 import documentation.index
 import io.ktor.client.features.ResponseException
@@ -29,7 +29,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.json
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -140,14 +141,14 @@ internal class DocPhilosophy {
                 val lastname: String
             )
 
-            val json: JsonObject = json {
-                "firstname" to "Jimmie"
-                "lastname" to "Barninger"
+            val json: JsonObject = buildJsonObject {
+                put("firstname", "Jimmie")
+                put("lastname", "Barninger")
             }
 
-            val contact: Contact = Json.fromJson(Contact.serializer(), json)
+            val contact: Contact = Json.decodeFromJsonElement(Contact.serializer(), json)
             // Or with Json.nonstrict
-            val contactNonStrict: Contact = JsonNonStrict.fromJson(Contact.serializer(), json)
+            val contactNonStrict: Contact = JsonNonStrict.decodeFromJsonElement(Contact.serializer(), json)
         }
     }
 
@@ -178,7 +179,7 @@ internal class DocPhilosophy {
             try {
                 val response = index.search()
             } catch (exception: ResponseException) {
-                when (exception.response.status) {
+                when (exception.response?.status) {
                     HttpStatusCode.NotFound -> TODO()
                     HttpStatusCode.BadRequest -> TODO()
                 }

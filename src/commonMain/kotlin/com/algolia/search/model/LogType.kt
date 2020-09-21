@@ -1,14 +1,16 @@
 package com.algolia.search.model
 
+import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyAll
 import com.algolia.search.serialize.KeyBuild
 import com.algolia.search.serialize.KeyError
 import com.algolia.search.serialize.KeyQuery
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * Type of logs to retrieve when performing a [com.algolia.search.endpoint.EndpointAdvanced.getLogs] operation.
@@ -38,11 +40,11 @@ public sealed class LogType(override val raw: String) : Raw<String> {
 
     public data class Other(override val raw: String) : LogType(raw)
 
-    companion object : KSerializer<LogType> {
+    public companion object : KSerializer<LogType> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: LogType) {
             serializer.serialize(encoder, value.raw)

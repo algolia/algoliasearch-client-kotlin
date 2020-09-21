@@ -8,8 +8,9 @@ import com.algolia.search.serialize.KeyFacetHits
 import com.algolia.search.serialize.KeyHighlighted
 import com.algolia.search.serialize.KeyProcessingTimeMS
 import com.algolia.search.serialize.KeyValue
-import kotlinx.serialization.json.json
-import kotlinx.serialization.json.jsonArray
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import serialize.TestSerializer
 import unknown
 
@@ -24,16 +25,21 @@ internal class TestResponseSearchForFacets : TestSerializer<ResponseSearchForFac
             ),
             exhaustiveFacetsCount = true,
             processingTimeMS = 0
-        ) to json {
-            KeyFacetHits to jsonArray {
-                +json {
-                    KeyValue to unknown
-                    KeyCount to 0
-                    KeyHighlighted to "hello"
+        ) to buildJsonObject {
+            put(
+                KeyFacetHits,
+                buildJsonArray {
+                    add(
+                        buildJsonObject {
+                            put(KeyValue, unknown)
+                            put(KeyCount, 0)
+                            put(KeyHighlighted, "hello")
+                        }
+                    )
                 }
-            }
-            KeyExhaustiveFacetsCount to true
-            KeyProcessingTimeMS to 0
+            )
+            put(KeyExhaustiveFacetsCount, true)
+            put(KeyProcessingTimeMS, 0)
         }
     )
 }

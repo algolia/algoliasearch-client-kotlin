@@ -1,17 +1,19 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.serialize.JsonNonStrict
-import com.algolia.search.serialize.asJsonInput
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.asJsonInput
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
-import kotlinx.serialization.builtins.list
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonLiteral
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.boolean
 
 @Serializable(RemoveStopWords.Companion::class)
 public sealed class RemoveStopWords {
@@ -34,26 +36,29 @@ public sealed class RemoveStopWords {
      */
     public data class QueryLanguages(val queryLanguages: List<Language>) : RemoveStopWords() {
 
-        constructor(vararg queryLanguage: Language) : this(queryLanguage.toList())
+        public constructor(vararg queryLanguage: Language) : this(queryLanguage.toList())
     }
 
+    @OptIn(ExperimentalSerializationApi::class)
     @Serializer(RemoveStopWords::class)
-    companion object : KSerializer<RemoveStopWords> {
+    public companion object : KSerializer<RemoveStopWords> {
 
         override fun serialize(encoder: Encoder, value: RemoveStopWords) {
             when (value) {
                 is True -> Boolean.serializer().serialize(encoder, true)
                 is False -> Boolean.serializer().serialize(encoder, false)
-                is QueryLanguages -> Language.list.serialize(encoder, value.queryLanguages)
+                is QueryLanguages -> ListSerializer(Language).serialize(encoder, value.queryLanguages)
             }
         }
 
         override fun deserialize(decoder: Decoder): RemoveStopWords {
             return when (val element = decoder.asJsonInput()) {
-                is JsonArray -> QueryLanguages(element.map {
-                    JsonNonStrict.fromJson(Language, it)
-                })
-                is JsonLiteral -> if (element.boolean) True else False
+                is JsonArray -> QueryLanguages(
+                    element.map {
+                        JsonNonStrict.decodeFromJsonElement(Language, it)
+                    }
+                )
+                is JsonPrimitive -> if (element.boolean) True else False
                 else -> throw Exception()
             }
         }

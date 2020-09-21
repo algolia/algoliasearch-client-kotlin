@@ -7,5 +7,5 @@ import com.algolia.search.endpoint.EndpointAdvanced
  */
 public interface Task {
 
-    val taskID: TaskID
+    public val taskID: TaskID
 }

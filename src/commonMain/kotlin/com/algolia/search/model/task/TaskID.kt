@@ -2,12 +2,13 @@ package com.algolia.search.model.task
 
 import com.algolia.search.endpoint.EndpointAdvanced
 import com.algolia.search.helper.toTaskID
-import com.algolia.search.model.Raw
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.model.internal.Raw
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * This is a numeric value (up to 64bits) used to identify a [Task].
@@ -20,11 +21,11 @@ public data class TaskID(override val raw: Long) : Raw<Long> {
         return raw.toString()
     }
 
-    companion object : KSerializer<TaskID> {
+    public companion object : KSerializer<TaskID> {
 
         private val serializer = Long.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: TaskID) {
             serializer.serialize(encoder, value.raw)

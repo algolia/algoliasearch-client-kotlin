@@ -25,7 +25,7 @@ public interface EndpointMultiCluster {
      *
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun listClusters(requestOptions: RequestOptions? = null): ResponseListClusters
+    public suspend fun listClusters(requestOptions: RequestOptions? = null): ResponseListClusters
 
     /**
      * List the [UserID] assigned to a multi-clusters [ApplicationID].
@@ -36,7 +36,7 @@ public interface EndpointMultiCluster {
      * @param hitsPerPage Number of users to retrieve per page.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun listUserIDs(
+    public suspend fun listUserIDs(
         page: Int? = null,
         hitsPerPage: Int? = null,
         requestOptions: RequestOptions? = null
@@ -52,7 +52,7 @@ public interface EndpointMultiCluster {
      * @param clusterName The [ClusterName] destination.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun assignUserID(
+    public suspend fun assignUserID(
         userID: UserID,
         clusterName: ClusterName,
         requestOptions: RequestOptions? = null
@@ -65,7 +65,7 @@ public interface EndpointMultiCluster {
      * @param userID [UserID] to fetch.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun getUserID(
+    public suspend fun getUserID(
         userID: UserID,
         requestOptions: RequestOptions? = null
     ): ResponseUserID
@@ -77,7 +77,7 @@ public interface EndpointMultiCluster {
      *
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun getTopUserID(requestOptions: RequestOptions? = null): ResponseTopUserID
+    public suspend fun getTopUserID(requestOptions: RequestOptions? = null): ResponseTopUserID
 
     /**
      * Remove a [UserID] and its associated data from the multi-clusters. Even if the [UserID] doesn’t exist,
@@ -86,7 +86,7 @@ public interface EndpointMultiCluster {
      * @param userID [UserID] to remove.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun removeUserID(
+    public suspend fun removeUserID(
         userID: UserID,
         requestOptions: RequestOptions? = null
     ): Deletion
@@ -98,7 +98,7 @@ public interface EndpointMultiCluster {
      * @param query The [UserIDQuery].
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun searchUserID(
+    public suspend fun searchUserID(
         query: UserIDQuery = UserIDQuery(),
         requestOptions: RequestOptions? = null
     ): ResponseSearchUserID
@@ -111,7 +111,7 @@ public interface EndpointMultiCluster {
      * @param clusterName The [ClusterName]
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun assignUserIds(
+    public suspend fun assignUserIds(
         userIDs: List<UserID>,
         clusterName: ClusterName,
         requestOptions: RequestOptions? = null
@@ -121,7 +121,7 @@ public interface EndpointMultiCluster {
      * @param retrieveMapping If set to true, retrieves [ResponseHasPendingMapping.clusters].
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    suspend fun hasPendingMapping(
+    public suspend fun hasPendingMapping(
         retrieveMapping: Boolean = false,
         requestOptions: RequestOptions? = null
     ): ResponseHasPendingMapping

@@ -2,11 +2,13 @@ package com.algolia.search.model
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toAttribute
-import kotlinx.serialization.Decoder
-import kotlinx.serialization.Encoder
+import com.algolia.search.model.internal.Raw
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 
 /**
  * An attribute is a key in the json definition of a record.
@@ -31,11 +33,11 @@ public data class Attribute(override val raw: String) : Raw<String> {
         return raw
     }
 
-    companion object : KSerializer<Attribute> {
+    public companion object : KSerializer<Attribute> {
 
         private val serializer = String.serializer()
 
-        override val descriptor = serializer.descriptor
+        override val descriptor: SerialDescriptor = serializer.descriptor
 
         override fun serialize(encoder: Encoder, value: Attribute) {
             String.serializer().serialize(encoder, value.raw)

@@ -1,5 +1,8 @@
 package com.algolia.search.model.filter
 
+import com.algolia.search.model.filter.internal.toLegacy
+import com.algolia.search.model.filter.internal.toSQL
+
 /**
  * Converts a single [Filter] to a type [O].
  */

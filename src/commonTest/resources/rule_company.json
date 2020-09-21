@@ -1,16 +1,18 @@
 {
-  "objectID": "company_auto_faceting",
-  "condition": {
-    "anchoring": "contains",
-    "pattern": "{facet:company}"
-  },
-  "consequence": {
-    "params": {
-      "automaticFacetFilters": [
+    "objectID": "company_auto_faceting",
+    "conditions": [
         {
-          "facet": "company"
+            "anchoring": "contains",
+            "pattern": "{facet:company}"
         }
-      ]
+    ],
+    "consequence": {
+        "params": {
+            "automaticFacetFilters": [
+                {
+                    "facet": "company"
+                }
+            ]
+        }
     }
-  }
 }
