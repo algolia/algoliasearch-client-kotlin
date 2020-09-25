@@ -21,12 +21,13 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
 
-internal val Json = Json.Default
-internal val JsonNoDefaults = Json { encodeDefaults = false }
+internal val Json = Json { encodeDefaults = true }
+internal val JsonNoDefaults = Json.Default
 internal val JsonNonStrict = Json {
     ignoreUnknownKeys = true
     isLenient = true
     allowSpecialFloatingPointValues = true
+    encodeDefaults = true
 }
 
 @OptIn(ExperimentalSerializationApi::class)
