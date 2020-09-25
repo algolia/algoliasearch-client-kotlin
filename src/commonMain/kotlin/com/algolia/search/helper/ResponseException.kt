@@ -8,5 +8,5 @@ import io.ktor.utils.io.core.String
  * Convenience method to convert [ResponseException.response] body bytes to a [String].
  */
 public suspend fun ResponseException.readContent(): String? {
-    return response?.readBytes()?.let { String(it) }
+    return String(response.readBytes())
 }

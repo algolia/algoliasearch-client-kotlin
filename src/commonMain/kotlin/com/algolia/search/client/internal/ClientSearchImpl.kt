@@ -96,7 +96,7 @@ internal class ClientSearchImpl internal constructor(
                 try {
                     return getAPIKey(apiKey)
                 } catch (exception: ResponseException) {
-                    if (exception.response?.status?.value != HttpStatusCode.NotFound.value) throw exception
+                    if (exception.response.status.value != HttpStatusCode.NotFound.value) throw exception
                 }
                 delay(1000L)
             }
@@ -118,7 +118,7 @@ internal class ClientSearchImpl internal constructor(
                 try {
                     getAPIKey(apiKey)
                 } catch (exception: ResponseException) {
-                    if (exception.response?.status?.value == HttpStatusCode.NotFound.value) return true else throw exception
+                    if (exception.response.status.value == HttpStatusCode.NotFound.value) return true else throw exception
                 }
                 delay(1000L)
             }

@@ -35,7 +35,7 @@ internal class TestSuiteMultiCluster {
                 clientMcm.getUserID(userID)
                 break
             } catch (exception: ResponseException) {
-                exception.response?.status shouldEqual HttpStatusCode.NotFound
+                exception.response.status shouldEqual HttpStatusCode.NotFound
             }
             delay(1000L)
         }
@@ -47,7 +47,7 @@ internal class TestSuiteMultiCluster {
                 clientMcm.removeUserID(userID)
             } catch (exception: ResponseException) {
                 val response = exception.response
-                when (response?.status) {
+                when (response.status) {
                     HttpStatusCode.NotFound -> break@loop
                     HttpStatusCode.BadRequest ->
                         if (String(response.readBytes()).contains("is already migrating")) {

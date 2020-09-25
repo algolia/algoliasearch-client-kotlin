@@ -70,7 +70,7 @@ internal class TestSuiteSynonyms {
                     shouldFailWith<ResponseException> {
                         getSynonym(gba)
                     }
-                    ).response?.status?.value shouldEqual HttpStatusCode.NotFound.value
+                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
                 clearSynonyms().wait() shouldEqual TaskStatus.Published
                 searchSynonyms(SynonymQuery(page = 0, hitsPerPage = 10)).nbHits shouldEqual 0
