@@ -62,7 +62,7 @@ internal class TestSuiteAPIKey {
                     try {
                         if (getAPIKey(key).maxHitsPerQuery == 42) break
                     } catch (exception: ResponseException) {
-                        exception.response?.status?.value shouldEqual HttpStatusCode.NotFound
+                        exception.response.status.value shouldEqual HttpStatusCode.NotFound
                     }
                     delay(1000L)
                 }

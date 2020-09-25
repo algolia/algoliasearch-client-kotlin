@@ -92,7 +92,7 @@ internal class Transport(
             } catch (exception: IOException) {
                 mutex.withLock { host.hasFailed() }
             } catch (exception: ResponseException) {
-                val value = exception.response?.status?.value ?: 0
+                val value = exception.response.status.value
                 val isRetryable = floor(value / 100f) != 4f
 
                 if (isRetryable) mutex.withLock { host.hasFailed() } else throw exception

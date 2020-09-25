@@ -62,7 +62,7 @@ internal class TestSuiteRules {
                     shouldFailWith<ResponseException> {
                         getRule(rule.objectID)
                     }
-                    ).response?.status?.value shouldEqual HttpStatusCode.NotFound.value
+                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
                 clearRules().wait() shouldEqual TaskStatus.Published
                 searchRules().nbHits shouldEqual 0
             }
