@@ -1,4 +1,5 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
+import io.gitlab.arturbosch.detekt.Detekt
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
 import java.net.URI
@@ -17,6 +18,7 @@ plugins {
     kotlin("multiplatform") version "1.4.10"
     kotlin("plugin.serialization") version "1.4.10"
     id("maven-publish")
+    id("io.gitlab.arturbosch.detekt") version "1.14.1"
 }
 
 apply(plugin = "com.diffplug.spotless")
@@ -103,6 +105,10 @@ tasks {
         expand("projectVersion" to Library.version)
         filteringCharset = "UTF-8"
     }
+
+    withType<Detekt> {
+        jvmTarget = "1.8"
+    }
 }
 
 tasks.withType<Test> {
@@ -118,6 +124,12 @@ configure<SpotlessExtension> {
     }
 }
 
+detekt {
+    failFast = true
+    buildUponDefaultConfig = true
+    config = files("$projectDir/config/detekt.yml")
+    input = files("src/commonMain/kotlin", "src/jvmMain/kotlin")
+}
 
 //** Publish **//
 
