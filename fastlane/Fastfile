@@ -4,7 +4,12 @@ default_platform :android
 
 platform :android do
 
-  desc "Runs all the tests"
+  desc "Runs static code analysis"
+  lane :static_analysis do
+    gradle(task: "spotlessCheck detekt"
+  end
+
+  desc "Runs unit tests"
   lane :test do
     gradle(task: "jvmTest")
   end
