@@ -6,8 +6,6 @@ import com.algolia.search.dsl.optionalFilters
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.rule.rules
 import com.algolia.search.dsl.settings
-import com.algolia.search.model.rule.Condition
-import com.algolia.search.model.rule.Consequence
 import documentation.index
 import runBlocking
 import kotlin.test.Ignore
@@ -36,9 +34,9 @@ internal class GuideDynamicFiltering {
                 rule(
                     "gluten-free-rule",
                     conditions {
-                        +Condition(Contains, Literal("gluten-free"))
+                        +condition(Contains, Literal("gluten-free"))
                     },
-                    Consequence(
+                    consequence(
                         edits = edits { +"gluten-free" },
                         query = query {
                             filters { and { facet("allergens", "gluten", isNegated = true) } }
@@ -58,9 +56,9 @@ internal class GuideDynamicFiltering {
                 rule(
                     "diet-rule",
                     conditions {
-                        +Condition(Contains, Literal("diet"))
+                        +condition(Contains, Literal("diet"))
                     },
-                    Consequence(
+                    consequence(
                         edits = edits { +"diet" },
                         query = query {
                             filters {
@@ -98,15 +96,39 @@ internal class GuideDynamicFiltering {
                 rule(
                     "asap-rule",
                     conditions {
-                        +Condition(Contains, Literal("asap"))
+                        +condition(Contains, Literal("asap"))
                     },
-                    Consequence(
+                    consequence(
                         edits = edits { +"asap" },
                         query = query {
                             optionalFilters {
                                 and {
                                     facet("can_deliver_quickly", "true")
                                 }
+                            }
+                        }
+                    )
+                )
+            }
+
+            index.saveRules(rules)
+        }
+    }
+
+    @Test
+    fun snippet6() {
+        runBlocking {
+            val rules = rules {
+                rule(
+                    "cheap",
+                    conditions {
+                        +condition(Contains, Literal("cheap"))
+                    },
+                    consequence(
+                        edits = edits { +"cheap" },
+                        query = query {
+                            filters {
+                                and { comparison("price", Less, 10) }
                             }
                         }
                     )
