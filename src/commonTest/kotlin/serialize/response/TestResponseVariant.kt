@@ -38,7 +38,7 @@ internal class TestResponseVariant : TestSerializer<ResponseVariant>(ResponseVar
             trafficPercentage = 2,
             conversionRateOrNull = 3f,
             noResultCountOrNull = 4,
-            averageClickPositionOrNull = 5,
+            averageClickPositionOrNull = 5f,
             searchCountOrNull = 6,
             trackedSearchCountOrNull = 7,
             userCountOrNull = 8,
@@ -54,7 +54,7 @@ internal class TestResponseVariant : TestSerializer<ResponseVariant>(ResponseVar
             put(KeyTrafficPercentage, 2)
             put(KeyConversionRate, 3f)
             put(KeyNoResultCount, 4)
-            put(KeyAverageClickPosition, 5)
+            put(KeyAverageClickPosition, 5f)
             put(KeySearchCount, 6)
             put(KeyTrackedSearchCount, 7)
             put(KeyUserCount, 8)
