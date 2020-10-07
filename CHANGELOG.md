@@ -1,5 +1,8 @@
 # Unreleased
 
+### Fixed
+- AB testing average click pos type from `Int` to `Float`
+
 ### Changed
 - Update Ktor to 1.4.0 transitively Kotlin serialization to `1.0.0-RC2`
 
