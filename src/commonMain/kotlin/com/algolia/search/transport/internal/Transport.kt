@@ -15,7 +15,6 @@ import io.ktor.client.request.request
 import io.ktor.http.HttpMethod
 import io.ktor.http.URLProtocol
 import io.ktor.utils.io.errors.IOException
-import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlin.math.floor
@@ -47,7 +46,6 @@ internal class Transport(
         path: String,
         requestOptions: RequestOptions?,
         body: String?,
-        callType: CallType,
     ): HttpRequestBuilder {
         return HttpRequestBuilder().apply {
             url.path(path)
@@ -57,9 +55,6 @@ internal class Transport(
             credentialsOrNull?.let {
                 setApplicationId(it.applicationID)
                 setApiKey(it.apiKey)
-            }
-            timeout {
-                requestTimeoutMillis = requestOptions.getTimeout(callType)
             }
             setRequestOptions(requestOptions)
         }
@@ -82,11 +77,14 @@ internal class Transport(
         body: String? = null,
     ): T {
         val hosts = callableHosts(callType)
-        val requestBuilder = httpRequestBuilder(httpMethod, path, requestOptions, body, callType)
         val errors by lazy(LazyThreadSafetyMode.NONE) { mutableListOf<Throwable>() }
+        val requestBuilder = httpRequestBuilder(httpMethod, path, requestOptions, body)
 
         for (host in hosts) {
             requestBuilder.url.host = host.url
+            requestBuilder.timeout {
+                requestTimeoutMillis = requestOptions.getTimeout(callType) * (host.retryCount + 1)
+            }
             try {
                 return httpClient.request<T>(requestBuilder).apply {
                     mutex.withLock { host.reset() }
