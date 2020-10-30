@@ -7,6 +7,7 @@ import com.algolia.search.configuration.clientUserAgent
 import com.algolia.search.serialize.internal.JsonNonStrict
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
+import io.ktor.client.features.HttpTimeout
 import io.ktor.client.features.UserAgent
 import io.ktor.client.features.defaultRequest
 import io.ktor.client.features.json.JsonFeature
@@ -35,6 +36,7 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
     install(UserAgent) {
         agent = clientUserAgent(AlgoliaSearchClient.version)
     }
+    install(HttpTimeout)
     defaultRequest {
         configuration.defaultHeaders?.let {
             it.forEach { (key, value) -> header(key, value) }

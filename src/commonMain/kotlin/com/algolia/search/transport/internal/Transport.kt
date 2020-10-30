@@ -5,8 +5,11 @@ import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.RetryableHost
+import com.algolia.search.exception.UnreachableHostsException
 import com.algolia.search.transport.RequestOptions
+import io.ktor.client.features.HttpRequestTimeoutException
 import io.ktor.client.features.ResponseException
+import io.ktor.client.features.timeout
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.http.HttpMethod
@@ -15,7 +18,6 @@ import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlinx.coroutines.withTimeout
 import kotlin.math.floor
 
 internal class Transport(
@@ -45,6 +47,7 @@ internal class Transport(
         path: String,
         requestOptions: RequestOptions?,
         body: String?,
+        callType: CallType,
     ): HttpRequestBuilder {
         return HttpRequestBuilder().apply {
             url.path(path)
@@ -54,6 +57,9 @@ internal class Transport(
             credentialsOrNull?.let {
                 setApplicationId(it.applicationID)
                 setApiKey(it.apiKey)
+            }
+            timeout {
+                requestTimeoutMillis = requestOptions.getTimeout(callType)
             }
             setRequestOptions(requestOptions)
         }
@@ -76,28 +82,29 @@ internal class Transport(
         body: String? = null,
     ): T {
         val hosts = callableHosts(callType)
-        val timeout = requestOptions.getTimeout(callType)
-        val requestBuilder = httpRequestBuilder(httpMethod, path, requestOptions, body)
+        val requestBuilder = httpRequestBuilder(httpMethod, path, requestOptions, body, callType)
+        val errors by lazy(LazyThreadSafetyMode.NONE) { mutableListOf<Throwable>() }
 
         for (host in hosts) {
             requestBuilder.url.host = host.url
             try {
-                return withTimeout((host.retryCount + 1) * timeout) {
-                    httpClient.request<T>(requestBuilder).apply {
-                        mutex.withLock { host.reset() }
-                    }
+                return httpClient.request<T>(requestBuilder).apply {
+                    mutex.withLock { host.reset() }
                 }
-            } catch (exception: TimeoutCancellationException) {
+            } catch (exception: HttpRequestTimeoutException) {
                 mutex.withLock { host.hasTimedOut() }
+                errors += exception
             } catch (exception: IOException) {
                 mutex.withLock { host.hasFailed() }
+                errors += exception
             } catch (exception: ResponseException) {
                 val value = exception.response.status.value
                 val isRetryable = floor(value / 100f) != 4f
-
                 if (isRetryable) mutex.withLock { host.hasFailed() } else throw exception
+                errors += exception
             }
         }
-        throw RuntimeException("Unreachable hosts.")
+
+        throw UnreachableHostsException(errors)
     }
 }
