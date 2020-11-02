@@ -62,7 +62,7 @@ internal class TestSuiteABTest {
                     clientAnalytics.getABTest(responseA.abTestID)
                 }
 
-                responseB.response?.status?.value shouldEqual HttpStatusCode.NotFound.value
+                responseB.response.status.value shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }

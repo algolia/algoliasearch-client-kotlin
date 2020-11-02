@@ -42,7 +42,7 @@ internal class TestSuiteRecommendation {
             } catch (e: ClientRequestException) {
                 // The personalization API is now limiting the number of setPersonalizationStrategy()` successful calls
                 // to 15 per day. If the 429 error is returned, the response is considered a "success".
-                if (e.response?.status != HttpStatusCode.TooManyRequests) throw e
+                if (e.response.status != HttpStatusCode.TooManyRequests) throw e
             }
             clientRecommendation.getPersonalizationStrategy() shouldEqual strategy
         }

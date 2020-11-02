@@ -5,11 +5,13 @@ import com.algolia.search.helper.toAttribute
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.BatchOperation
+import com.algolia.search.model.indexing.DeleteByQuery
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Json
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
@@ -23,7 +25,8 @@ internal class TestSuiteIndexing {
     @Serializable
     data class Data(
         override val objectID: ObjectID,
-        val value: Int = 0
+        val value: Int = 0,
+        @SerialName("_tags") val tags: List<String>? = null,
     ) : Indexable
 
     private val suffix = "indexing"
@@ -88,6 +91,26 @@ internal class TestSuiteIndexing {
                 deletions += datas.map { deleteObject(it.objectID) }
                 deletions += clearObjects()
                 deletions.wait().all { it is TaskStatus.Published }.shouldBeTrue()
+                browse().nbHits shouldEqual 0
+            }
+        }
+    }
+
+    @Test
+    fun testDeleteBy() {
+        runBlocking {
+            index.apply {
+                // Create and save 10 tagged Data objects
+                val tagValue = "algolia"
+                val objectsToBatch = (1..10).map { Data(objectID = ObjectID("$it"), tags = listOf(tagValue)) }.toList()
+                saveObjects(Data.serializer(), objectsToBatch).wait()
+
+                // Delete one Data object by its ID. The index content should be 9.
+                deleteObject(objectsToBatch[0].objectID).wait()
+                browse().nbHits shouldEqual objectsToBatch.size - 1
+
+                // Delete the rest of the data objects by tag. The index should become empty.
+                deleteObjectsBy(DeleteByQuery(tagFilters = listOf(listOf(tagValue)))).wait()
                 browse().nbHits shouldEqual 0
             }
         }

@@ -42,7 +42,7 @@ public data class ResponseVariant(
     /**
      * Average click position for the variant.
      */
-    @SerialName(KeyAverageClickPosition) val averageClickPositionOrNull: Int? = null,
+    @SerialName(KeyAverageClickPosition) val averageClickPositionOrNull: Float? = null,
     @SerialName(KeySearchCount) val searchCountOrNull: Long? = null,
     @SerialName(KeyTrackedSearchCount) val trackedSearchCountOrNull: Long? = null,
     @SerialName(KeyUserCount) val userCountOrNull: Long? = null,
@@ -59,7 +59,7 @@ public data class ResponseVariant(
     public val noResultCount: Int
         get() = noResultCountOrNull!!
 
-    public val averageClickPosition: Int
+    public val averageClickPosition: Float
         get() = averageClickPositionOrNull!!
 
     public val searchCount: Long

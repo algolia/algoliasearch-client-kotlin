@@ -1,3 +1,12 @@
+# 1.5.1
+
+### Fixed
+- AB testing average click pos type from `Int` to `Float`
+- Transport layer timeouts
+
+### Changed
+- Update Ktor to 1.4.1 transitively Kotlin serialization to `1.0.0-RC2`
+
 # 1.5.0
 
 ### Added

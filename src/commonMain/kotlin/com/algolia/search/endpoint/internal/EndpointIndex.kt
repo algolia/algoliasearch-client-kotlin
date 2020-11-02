@@ -68,7 +68,7 @@ internal class EndpointIndexImpl(
         try {
             EndpointSearch(transport, indexName).search(Query(responseFields = emptyList()))
         } catch (exception: ResponseException) {
-            if (exception.response?.status == HttpStatusCode.NotFound) return false
+            if (exception.response.status == HttpStatusCode.NotFound) return false
         }
         return true
     }

@@ -73,9 +73,9 @@ internal class TestUserAgent {
             val request = shouldFailWith<ResponseException> {
                 client.listIndices(requestOptions)
             }
-            val headers = request.response?.call?.request?.headers
+            val headers = request.response.call.request.headers
 
-            headers?.get(userAgentKey) shouldEqual expected
+            headers.get(userAgentKey) shouldEqual expected
         }
     }
 }
