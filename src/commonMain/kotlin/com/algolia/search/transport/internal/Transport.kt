@@ -14,8 +14,9 @@ import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.http.HttpMethod
 import io.ktor.http.URLProtocol
+import io.ktor.network.sockets.ConnectTimeoutException
+import io.ktor.network.sockets.SocketTimeoutException
 import io.ktor.utils.io.errors.IOException
-import kotlinx.coroutines.TimeoutCancellationException
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlin.math.floor
@@ -47,7 +48,6 @@ internal class Transport(
         path: String,
         requestOptions: RequestOptions?,
         body: String?,
-        callType: CallType,
     ): HttpRequestBuilder {
         return HttpRequestBuilder().apply {
             url.path(path)
@@ -57,9 +57,6 @@ internal class Transport(
             credentialsOrNull?.let {
                 setApplicationId(it.applicationID)
                 setApiKey(it.apiKey)
-            }
-            timeout {
-                requestTimeoutMillis = requestOptions.getTimeout(callType)
             }
             setRequestOptions(requestOptions)
         }
@@ -82,29 +79,45 @@ internal class Transport(
         body: String? = null,
     ): T {
         val hosts = callableHosts(callType)
-        val requestBuilder = httpRequestBuilder(httpMethod, path, requestOptions, body, callType)
         val errors by lazy(LazyThreadSafetyMode.NONE) { mutableListOf<Throwable>() }
+        val requestBuilder = httpRequestBuilder(httpMethod, path, requestOptions, body)
 
         for (host in hosts) {
             requestBuilder.url.host = host.url
             try {
+                setTimeout(requestBuilder, requestOptions, callType, host)
                 return httpClient.request<T>(requestBuilder).apply {
                     mutex.withLock { host.reset() }
                 }
-            } catch (exception: HttpRequestTimeoutException) {
-                mutex.withLock { host.hasTimedOut() }
+            } catch (exception: Exception) {
                 errors += exception
-            } catch (exception: IOException) {
-                mutex.withLock { host.hasFailed() }
-                errors += exception
-            } catch (exception: ResponseException) {
-                val value = exception.response.status.value
-                val isRetryable = floor(value / 100f) != 4f
-                if (isRetryable) mutex.withLock { host.hasFailed() } else throw exception
-                errors += exception
+                when (exception) {
+                    is HttpRequestTimeoutException, is SocketTimeoutException, is ConnectTimeoutException -> mutex.withLock { host.hasTimedOut() }
+                    is IOException -> mutex.withLock { host.hasFailed() }
+                    is ResponseException -> {
+                        val value = exception.response.status.value
+                        val isRetryable = floor(value / 100f) != 4f
+                        if (isRetryable) mutex.withLock { host.hasFailed() } else throw exception
+                    }
+                    else -> throw exception
+                }
             }
         }
 
         throw UnreachableHostsException(errors)
+    }
+
+    /**
+     * Set socket read/write timeout.
+     */
+    private fun setTimeout(
+        requestBuilder: HttpRequestBuilder,
+        requestOptions: RequestOptions?,
+        callType: CallType,
+        host: RetryableHost,
+    ) {
+        requestBuilder.timeout {
+            socketTimeoutMillis = requestOptions.getTimeout(callType) * (host.retryCount + 1)
+        }
     }
 }
