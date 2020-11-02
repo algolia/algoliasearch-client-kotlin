@@ -5,7 +5,7 @@
 - Transport layer timeouts
 
 ### Changed
-- Update Ktor to 1.4.0 transitively Kotlin serialization to `1.0.0-RC2`
+- Update Ktor to 1.4.1 transitively Kotlin serialization to `1.0.0-RC2`
 
 # 1.5.0
 
