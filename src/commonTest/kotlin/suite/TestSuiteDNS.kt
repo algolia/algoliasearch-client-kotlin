@@ -9,26 +9,31 @@ import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.serialize.internal.Json
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
+import io.ktor.client.features.HttpTimeout
+import io.ktor.client.features.SocketTimeoutException
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.http.ContentType
 import io.ktor.http.headersOf
+import io.ktor.util.KtorExperimentalAPI
 import io.ktor.utils.io.ByteReadChannel
-import kotlinx.coroutines.delay
 import runBlocking
 import shouldEqual
 import kotlin.test.Test
 
+@OptIn(KtorExperimentalAPI::class)
 internal class TestSuiteDNS {
 
     private val readTimeout = 500L
     private val shouldTimeout = 600L
     private val shouldNotTimeout = 400L
     private var requestCount = 0
-    private val mockEngine = MockEngine {
+    private val mockEngine = MockEngine { call ->
         val delay = if (requestCount == 0) shouldTimeout else shouldNotTimeout
-
         requestCount++
-        delay(delay)
+        val timeout = requireNotNull(call.getCapabilityOrNull(HttpTimeout)) { "Timeout feature required" }
+        val socketTimeoutMillis = requireNotNull(timeout.socketTimeoutMillis) { "socket timeout required" }
+        if (delay > socketTimeoutMillis) throw SocketTimeoutException(call, null)
+
         respond(
             headers = headersOf(
                 "Content-Type",
