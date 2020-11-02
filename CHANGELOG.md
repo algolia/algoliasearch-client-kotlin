@@ -1,4 +1,4 @@
-# Unreleased
+# 1.5.1
 
 ### Fixed
 - AB testing average click pos type from `Int` to `Float`
