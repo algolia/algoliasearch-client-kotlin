@@ -1,3 +1,8 @@
+# 1.5.2
+
+### Fixed
+- Serialization Proguard rules (#231)
+
 # 1.5.1
 
 ### Fixed
