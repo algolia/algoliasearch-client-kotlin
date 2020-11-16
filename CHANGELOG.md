@@ -1,3 +1,8 @@
+# Unreleased
+
+### Changed
+- Update Ktor to `1.4.2`, transitively Kotlin serialization to `1.0.1`
+
 # 1.5.2
 
 ### Fixed
