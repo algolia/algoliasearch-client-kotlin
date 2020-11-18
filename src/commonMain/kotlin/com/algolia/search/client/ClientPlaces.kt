@@ -5,6 +5,7 @@ package com.algolia.search.client
 import com.algolia.search.client.internal.ClientPlacesImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationPlaces
+import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.internal.Credentials
 import com.algolia.search.endpoint.EndpointPlaces
 import com.algolia.search.model.APIKey
@@ -36,12 +37,9 @@ public fun ClientPlaces(
  * Create a [ClientPlaces] instance.
  *
  * @param configuration places configuration
+ * @param credentials used by a client for authenticated request
  */
 public fun ClientPlaces(
-    configuration: ConfigurationPlaces,
-): ClientPlaces = ClientPlacesImpl(Transport(configuration, null))
-
-/**
- * Create a [ClientPlaces] instance.
- */
-public fun ClientPlaces(): ClientPlaces = ClientPlacesImpl(Transport(ConfigurationPlaces(), null))
+    configuration: ConfigurationPlaces = ConfigurationPlaces(),
+    credentials: Credentials? = null,
+): ClientPlaces = ClientPlacesImpl(Transport(configuration, credentials))
