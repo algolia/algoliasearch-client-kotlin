@@ -1,4 +1,5 @@
 import com.algolia.search.client.ClientAnalytics
+import com.algolia.search.client.ClientAnswers
 import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientPlaces
 import com.algolia.search.client.ClientRecommendation
@@ -15,6 +16,7 @@ internal expect val clientAnalytics: ClientAnalytics
 internal expect val clientInsights: ClientInsights
 internal expect val clientPlaces: ClientPlaces
 internal expect val clientRecommendation: ClientRecommendation
+internal expect val clientAnswers: ClientAnswers
 
 internal expect fun runBlocking(
     coroutineContext: CoroutineContext = EmptyCoroutineContext,

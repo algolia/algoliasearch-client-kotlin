@@ -1,4 +1,5 @@
 import com.algolia.search.client.ClientAnalytics
+import com.algolia.search.client.ClientAnswers
 import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientPlaces
 import com.algolia.search.client.ClientRecommendation
@@ -53,6 +54,11 @@ internal actual val clientRecommendation = ClientRecommendation(
 internal actual val clientPlaces = ClientPlaces(
     System.getenv("ALGOLIA_PLACES_APP_ID").toApplicationID(),
     System.getenv("ALGOLIA_PLACES_KEY").toAPIKey()
+)
+
+internal actual val clientAnswers = ClientAnswers(
+    System.getenv("ALGOLIA_ANSWERS_APP_ID").toApplicationID(),
+    System.getenv("ALGOLIA_ANSWERS_KEY").toAPIKey()
 )
 
 internal actual val username: String

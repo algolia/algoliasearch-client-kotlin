@@ -27,6 +27,8 @@ import com.algolia.search.serialize.KeyDisjunctiveFacets
 import com.algolia.search.serialize.KeyExhaustiveFacetsCount
 import com.algolia.search.serialize.KeyExhaustiveNbHits
 import com.algolia.search.serialize.KeyExplain
+import com.algolia.search.serialize.KeyExtract
+import com.algolia.search.serialize.KeyExtractAttribute
 import com.algolia.search.serialize.KeyFacets
 import com.algolia.search.serialize.KeyFacets_Stats
 import com.algolia.search.serialize.KeyHierarchicalFacets
@@ -47,8 +49,10 @@ import com.algolia.search.serialize.KeyProcessingTimeMS
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyQueryAfterRemoval
 import com.algolia.search.serialize.KeyQueryID
+import com.algolia.search.serialize.KeyScore
 import com.algolia.search.serialize.KeyServerUsed
 import com.algolia.search.serialize.KeyUserData
+import com.algolia.search.serialize.Key_Answer
 import com.algolia.search.serialize.Key_DistinctSeqID
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.Key_RankingInfo
@@ -221,7 +225,7 @@ public data class ResponseSearch(
     /**
      * The rules applied to the query.
      */
-    @SerialName(KeyAppliedRules) val appliedRulesOrNull: List<JsonObject>? = null
+    @SerialName(KeyAppliedRules) val appliedRulesOrNull: List<JsonObject>? = null,
 ) {
 
     public val hits: List<Hit>
@@ -330,7 +334,7 @@ public data class ResponseSearch(
      */
     @Serializable(Hit.Companion::class)
     public data class Hit(
-        val json: JsonObject
+        val json: JsonObject,
     ) : Map<String, JsonElement> by json {
 
         public val distinctSeqIDOrNull: Int? = json[Key_DistinctSeqID]?.jsonPrimitiveOrNull?.int
@@ -343,6 +347,10 @@ public data class ResponseSearch(
 
         public val snippetResultOrNull: JsonObject? = json[Key_SnippetResult]?.jsonObjectOrNull
 
+        public val answerOrNull: Answer? = json[Key_Answer]?.jsonObjectOrNull?.let {
+            JsonNonStrict.decodeFromJsonElement(Answer.serializer(), it)
+        }
+
         public val rankingInfo: RankingInfo
             get() = rankingInfoOrNull!!
 
@@ -354,6 +362,9 @@ public data class ResponseSearch(
 
         public val snippetResult: JsonObject
             get() = snippetResultOrNull!!
+
+        public val answer: Answer
+            get() = answerOrNull!!
 
         /**
          * Deserialize the value of an [Attribute] to [T].
@@ -382,4 +393,11 @@ public data class ResponseSearch(
             }
         }
     }
+
+    @Serializable
+    public data class Answer(
+        @SerialName(KeyExtract) val extract: String,
+        @SerialName(KeyScore) val score: Double,
+        @SerialName(KeyExtractAttribute) val extractAttribute: Attribute,
+    )
 }
