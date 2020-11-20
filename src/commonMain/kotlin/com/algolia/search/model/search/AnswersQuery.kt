@@ -1,4 +1,4 @@
-package com.algolia.search.model.answers
+package com.algolia.search.model.search
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Language

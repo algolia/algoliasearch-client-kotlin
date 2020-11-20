@@ -3,7 +3,7 @@ package suite
 import clientAnswers
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.answers.AnswersQuery
+import com.algolia.search.model.search.AnswersQuery
 import com.algolia.search.model.search.Language
 import runBlocking
 import shouldEqual

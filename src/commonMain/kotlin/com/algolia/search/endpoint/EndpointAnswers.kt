@@ -1,7 +1,7 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.answers.AnswersQuery
+import com.algolia.search.model.search.AnswersQuery
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.transport.RequestOptions
 
