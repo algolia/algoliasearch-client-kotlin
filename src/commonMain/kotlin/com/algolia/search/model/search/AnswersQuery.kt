@@ -35,7 +35,7 @@ public data class AnswersQuery(
      * - `hitsPerPage`
      * - `restrictSearchableAttributes`
      */
-    @SerialName(KeyParams) var params: JsonObject? = null, // TODO: RequestParams?
+    @SerialName(KeyParams) var params: Query? = null,
 
     /**
      * Engine default: ["*"]
