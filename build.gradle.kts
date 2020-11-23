@@ -1,6 +1,5 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompileCommon
+import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
 import java.net.URI
 
 buildscript {
@@ -14,8 +13,8 @@ buildscript {
 }
 
 plugins {
-    kotlin("multiplatform") version "1.4.10"
-    kotlin("plugin.serialization") version "1.4.10"
+    kotlin("multiplatform") version "1.4.20"
+    kotlin("plugin.serialization") version "1.4.20"
     id("maven-publish")
 }
 
@@ -32,14 +31,6 @@ repositories {
 
 version = Library.version
 group = Library.group
-
-allprojects {
-    tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>> {
-        kotlinOptions {
-            freeCompilerArgs = listOfNotNull("-Xopt-in=kotlin.RequiresOptIn")
-        }
-    }
-}
 
 kotlin {
     explicitApi()
@@ -89,12 +80,9 @@ val javadocJar by tasks.creating(Jar::class) {
 
 tasks {
 
-    withType<KotlinCompile> {
+    withType<KotlinCompile<*>>().configureEach {
         dependsOn("copyTemplates")
-    }
-
-    withType<KotlinCompileCommon> {
-        dependsOn("copyTemplates")
+        kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
 
     register(name = "copyTemplates", type = Copy::class) {
@@ -103,10 +91,10 @@ tasks {
         expand("projectVersion" to Library.version)
         filteringCharset = "UTF-8"
     }
-}
 
-tasks.withType<Test> {
-    maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
+    withType<Test> {
+        maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
+    }
 }
 
 configure<SpotlessExtension> {
@@ -117,7 +105,6 @@ configure<SpotlessExtension> {
         endWithNewline()
     }
 }
-
 
 //** Publish **//
 
