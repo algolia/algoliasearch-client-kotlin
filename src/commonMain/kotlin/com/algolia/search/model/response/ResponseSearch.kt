@@ -1,5 +1,6 @@
 package com.algolia.search.model.response
 
+import com.algolia.search.ExperimentalAlgoliaClientAPI
 import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
@@ -225,7 +226,7 @@ public data class ResponseSearch(
     /**
      * The rules applied to the query.
      */
-    @SerialName(KeyAppliedRules) val appliedRulesOrNull: List<JsonObject>? = null
+    @SerialName(KeyAppliedRules) val appliedRulesOrNull: List<JsonObject>? = null,
 ) {
 
     public val hits: List<Hit>
@@ -334,7 +335,7 @@ public data class ResponseSearch(
      */
     @Serializable(Hit.Companion::class)
     public data class Hit(
-        val json: JsonObject
+        val json: JsonObject,
     ) : Map<String, JsonElement> by json {
 
         public val distinctSeqIDOrNull: Int? = json[Key_DistinctSeqID]?.jsonPrimitiveOrNull?.int
@@ -347,6 +348,7 @@ public data class ResponseSearch(
 
         public val snippetResultOrNull: JsonObject? = json[Key_SnippetResult]?.jsonObjectOrNull
 
+        @ExperimentalAlgoliaClientAPI
         public val answerOrNull: Answer? = json[Key_Answer]?.jsonObjectOrNull?.let {
             JsonNonStrict.decodeFromJsonElement(Answer.serializer(), it)
         }
@@ -363,6 +365,7 @@ public data class ResponseSearch(
         public val snippetResult: JsonObject
             get() = snippetResultOrNull!!
 
+        @ExperimentalAlgoliaClientAPI
         public val answer: Answer
             get() = answerOrNull!!
 
