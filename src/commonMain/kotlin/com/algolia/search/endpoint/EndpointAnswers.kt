@@ -1,8 +1,9 @@
 package com.algolia.search.endpoint
 
+import com.algolia.search.ExperimentalAlgoliaClientAPI
 import com.algolia.search.model.IndexName
-import com.algolia.search.model.search.AnswersQuery
 import com.algolia.search.model.response.ResponseSearch
+import com.algolia.search.model.search.AnswersQuery
 import com.algolia.search.transport.RequestOptions
 
 /**
@@ -23,6 +24,7 @@ public interface EndpointAnswers {
      * @param requestOptions configure request locally
      * @return answers that match the query.
      */
+    @ExperimentalAlgoliaClientAPI
     public suspend fun findAnswers(
         answersQuery: AnswersQuery,
         requestOptions: RequestOptions? = null,

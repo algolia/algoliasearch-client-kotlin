@@ -225,7 +225,7 @@ public data class ResponseSearch(
     /**
      * The rules applied to the query.
      */
-    @SerialName(KeyAppliedRules) val appliedRulesOrNull: List<JsonObject>? = null,
+    @SerialName(KeyAppliedRules) val appliedRulesOrNull: List<JsonObject>? = null
 ) {
 
     public val hits: List<Hit>
@@ -334,7 +334,7 @@ public data class ResponseSearch(
      */
     @Serializable(Hit.Companion::class)
     public data class Hit(
-        val json: JsonObject,
+        val json: JsonObject
     ) : Map<String, JsonElement> by json {
 
         public val distinctSeqIDOrNull: Int? = json[Key_DistinctSeqID]?.jsonPrimitiveOrNull?.int

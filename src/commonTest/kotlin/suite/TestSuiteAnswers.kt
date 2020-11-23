@@ -1,6 +1,7 @@
 package suite
 
 import clientAnswers
+import com.algolia.search.ExperimentalAlgoliaClientAPI
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.AnswersQuery
@@ -15,6 +16,7 @@ internal class TestSuiteAnswers {
     private val answers = clientAnswers.initIndex(indexName)
 
     @Test
+    @OptIn(ExperimentalAlgoliaClientAPI::class)
     fun test() {
         runBlocking {
             val query = AnswersQuery(
