@@ -4,6 +4,7 @@ package com.algolia.search.client.internal
 
 import com.algolia.search.client.Index
 import com.algolia.search.endpoint.EndpointAdvanced
+import com.algolia.search.endpoint.EndpointAnswers
 import com.algolia.search.endpoint.EndpointIndex
 import com.algolia.search.endpoint.EndpointIndexing
 import com.algolia.search.endpoint.EndpointRule
@@ -11,6 +12,7 @@ import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.endpoint.EndpointSettings
 import com.algolia.search.endpoint.EndpointSynonym
 import com.algolia.search.endpoint.internal.EndpointAdvanced
+import com.algolia.search.endpoint.internal.EndpointAnswers
 import com.algolia.search.endpoint.internal.EndpointIndex
 import com.algolia.search.endpoint.internal.EndpointIndexing
 import com.algolia.search.endpoint.internal.EndpointRule
@@ -37,7 +39,8 @@ internal class IndexImpl internal constructor(
     EndpointIndex by EndpointIndex(transport, indexName),
     EndpointIndexing by EndpointIndexing(transport, indexName),
     EndpointSynonym by EndpointSynonym(transport, indexName),
-    EndpointRule by EndpointRule(transport, indexName) {
+    EndpointRule by EndpointRule(transport, indexName),
+    EndpointAnswers by EndpointAnswers(transport, indexName) {
 
     override suspend fun browseRules(
         query: RuleQuery,

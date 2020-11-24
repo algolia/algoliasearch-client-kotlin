@@ -1,6 +1,7 @@
 package com.algolia.search.client
 
 import com.algolia.search.endpoint.EndpointAdvanced
+import com.algolia.search.endpoint.EndpointAnswers
 import com.algolia.search.endpoint.EndpointIndex
 import com.algolia.search.endpoint.EndpointIndexing
 import com.algolia.search.endpoint.EndpointRule
@@ -28,7 +29,8 @@ public interface Index :
     EndpointIndex,
     EndpointIndexing,
     EndpointSynonym,
-    EndpointRule {
+    EndpointRule,
+    EndpointAnswers {
 
     /**
      * Index name.
