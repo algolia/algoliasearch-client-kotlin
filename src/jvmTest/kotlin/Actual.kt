@@ -55,6 +55,11 @@ internal actual val clientPlaces = ClientPlaces(
     System.getenv("ALGOLIA_PLACES_KEY").toAPIKey()
 )
 
+internal actual val clientAnswers = ClientSearch(
+    System.getenv("ALGOLIA_ANSWERS_APP_ID").toApplicationID(),
+    System.getenv("ALGOLIA_ANSWERS_KEY").toAPIKey()
+)
+
 internal actual val username: String
     get() {
         return try {
