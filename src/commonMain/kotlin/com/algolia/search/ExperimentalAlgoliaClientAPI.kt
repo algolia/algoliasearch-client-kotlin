@@ -15,9 +15,9 @@ import kotlin.annotation.AnnotationTarget.VALUE_PARAMETER
 /**
  * This annotation marks a library API as experimental.
  *
- * Any usage of a declaration annotated with `@ExperimentalAPI` must be accepted either by
- * annotating that usage with the [OptIn] annotation, e.g. `@OptIn(ExperimentalAPI::class)`,
- * or by using the compiler argument `-Xopt-in=kotlin.time.ExperimentalAPI`.
+ * Any usage of a declaration annotated with `@ExperimentalAlgoliaClientAPI` must be accepted either by annotating that
+ * usage with the [OptIn] annotation, e.g. `@OptIn(ExperimentalAlgoliaClientAPI::class)`, or by using the compiler
+ * argument `-Xopt-in=com.algolia.search.ExperimentalAlgoliaClientAPI`.
  */
 @Target(
     CLASS,

@@ -1,3 +1,8 @@
+# Unreleased
+
+### Fixed
+- Experimental annotation KDoc
+
 # 1.6.0
 
 ### Added
