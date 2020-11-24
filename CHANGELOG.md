@@ -1,5 +1,8 @@
 # Unreleased
 
+### Added
+- _Experimental_: Algolia Answers API
+
 ### Changed
 - Update Ktor to `1.4.2`, transitively Kotlin serialization to `1.0.1`
 
