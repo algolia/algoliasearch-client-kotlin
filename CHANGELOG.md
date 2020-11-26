@@ -1,5 +1,9 @@
 # Unreleased
 
+### Added
+- Settings: `attributeCriteriaComputedByMinProximity` parameter 
+- AnswersQuery: implements `SearchParameters` for convenience (delegated to `params`)
+
 ### Fixed
 - Experimental annotation KDoc
 

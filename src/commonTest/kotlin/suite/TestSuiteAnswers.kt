@@ -5,7 +5,6 @@ import com.algolia.search.ExperimentalAlgoliaClientAPI
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.AnswersQuery
 import com.algolia.search.model.search.Language
-import com.algolia.search.model.search.Query
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import runBlocking
@@ -55,11 +54,10 @@ internal class TestSuiteAnswers {
                 query = "sarah jones",
                 queryLanguages = listOf(Language.English),
                 nbHits = 2,
-                params = Query(
-                    highlightPreTag = "_pre_",
-                    highlightPostTag = "_post_",
-                )
-            )
+            ).apply {
+                highlightPreTag = "_pre_"
+                highlightPostTag = "_post_"
+            }
 
             val response = answers.findAnswers(query)
 

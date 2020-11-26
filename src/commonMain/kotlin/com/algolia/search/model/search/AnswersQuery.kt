@@ -2,6 +2,7 @@ package com.algolia.search.model.search
 
 import com.algolia.search.ExperimentalAlgoliaClientAPI
 import com.algolia.search.model.Attribute
+import com.algolia.search.model.params.SearchParameters
 import com.algolia.search.serialize.KeyAttributesForPrediction
 import com.algolia.search.serialize.KeyNbHits
 import com.algolia.search.serialize.KeyParams
@@ -18,24 +19,16 @@ public data class AnswersQuery(
     /**
      * The query for which to retrieve results.
      * Cannot be empty or spaces only.
+     * **Required**.
      */
-    @SerialName(KeyQuery) var query: String,
+    @SerialName(KeyQuery) override var query: String? = "",
 
     /**
      * Engine default: ["en"]
      * The languages in the query.
      * Currently only supports `en`.
      */
-    @SerialName(KeyQueryLanguages) var queryLanguages: List<Language>? = null,
-
-    /**
-     * Algolia search parameters to use to fetch the hits.
-     * Can be any search parameter, except:
-     * - `attributesToSnippet`
-     * - `hitsPerPage`
-     * - `restrictSearchableAttributes`
-     */
-    @SerialName(KeyParams) var params: Query? = null,
+    @SerialName(KeyQueryLanguages) override var queryLanguages: List<Language>? = null,
 
     /**
      * Engine default: ["*"]
@@ -58,4 +51,13 @@ public data class AnswersQuery(
      * Cannot be greater than 1000.
      */
     @SerialName(KeyThreshold) val threshold: Float? = null,
-)
+
+    /**
+     * Algolia search parameters to use to fetch the hits.
+     * Can be any search parameter, except:
+     * - `attributesToSnippet`
+     * - `hitsPerPage`
+     * - `restrictSearchableAttributes`
+     */
+    @SerialName(KeyParams) val params: Query = Query(),
+) : SearchParameters by params
