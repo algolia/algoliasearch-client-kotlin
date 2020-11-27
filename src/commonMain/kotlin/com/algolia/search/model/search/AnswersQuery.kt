@@ -59,5 +59,5 @@ public data class AnswersQuery(
      * - `hitsPerPage`
      * - `restrictSearchableAttributes`
      */
-    @SerialName(KeyParams) val params: Query = Query(),
+    @SerialName(KeyParams) val params: AnswersParameters = AnswersParameters(),
 ) : SearchParameters by params
