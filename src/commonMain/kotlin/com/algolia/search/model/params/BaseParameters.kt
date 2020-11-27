@@ -9,13 +9,12 @@ import com.algolia.search.model.search.QueryType
 import com.algolia.search.model.search.RemoveStopWords
 import com.algolia.search.model.search.RemoveWordIfNoResults
 import com.algolia.search.model.search.ResponseFields
-import com.algolia.search.model.search.Snippet
 import com.algolia.search.model.search.SortFacetsBy
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
 
-public interface CommonParameters {
+public interface BaseParameters {
 
     /**
      * Gives control over which attributes to retrieve and which not to retrieve.
@@ -46,13 +45,6 @@ public interface CommonParameters {
     public var attributesToHighlight: List<Attribute>?
 
     /**
-     * List of attributes to snippet.
-     * Engine default: []
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToSnippet/?language=kotlin]
-     */
-    public var attributesToSnippet: List<Snippet>?
-
-    /**
      * The HTML string to insert before the highlighted parts in all highlight and snippet results.
      * Needs to be used along [highlightPostTag].
      * Engine default: "<em>"
@@ -81,13 +73,6 @@ public interface CommonParameters {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/restrictHighlightAndSnippetArrays/?language=kotlin]
      */
     public var restrictHighlightAndSnippetArrays: Boolean?
-
-    /**
-     * Set the number of hits per page.
-     * Engine default: 20
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/hitsPerPage/?language=kotlin]
-     */
-    public var hitsPerPage: Int?
 
     /**
      * Minimum number of characters a word in the query name must contain to accept matches with 1 typo.

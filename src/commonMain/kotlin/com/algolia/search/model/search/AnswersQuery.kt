@@ -2,7 +2,8 @@ package com.algolia.search.model.search
 
 import com.algolia.search.ExperimentalAlgoliaClientAPI
 import com.algolia.search.model.Attribute
-import com.algolia.search.model.params.SearchParameters
+import com.algolia.search.model.params.AnswersParameters
+import com.algolia.search.model.params.CommonSearch
 import com.algolia.search.serialize.KeyAttributesForPrediction
 import com.algolia.search.serialize.KeyNbHits
 import com.algolia.search.serialize.KeyParams
@@ -19,9 +20,8 @@ public data class AnswersQuery(
     /**
      * The query for which to retrieve results.
      * Cannot be empty or spaces only.
-     * **Required**.
      */
-    @SerialName(KeyQuery) override var query: String? = "",
+    @SerialName(KeyQuery) override var query: String,
 
     /**
      * Engine default: ["en"]
@@ -59,5 +59,5 @@ public data class AnswersQuery(
      * - `hitsPerPage`
      * - `restrictSearchableAttributes`
      */
-    @SerialName(KeyParams) val params: AnswersParameters = AnswersParameters(),
-) : SearchParameters by params
+    @SerialName(KeyParams) val params: SearchParameters = SearchParameters(),
+) : AnswersParameters, CommonSearch by params

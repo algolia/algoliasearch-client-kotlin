@@ -2,7 +2,7 @@ package com.algolia.search.model.search
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.insights.UserToken
-import com.algolia.search.model.params.SearchParameters
+import com.algolia.search.model.params.CommonSearch
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.serialize.KSerializerPoint
@@ -52,7 +52,6 @@ import com.algolia.search.serialize.KeyOptionalWords
 import com.algolia.search.serialize.KeyPage
 import com.algolia.search.serialize.KeyPercentileComputation
 import com.algolia.search.serialize.KeyPersonalizationImpact
-import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyQueryLanguages
 import com.algolia.search.serialize.KeyQueryType
 import com.algolia.search.serialize.KeyRemoveStopWords
@@ -73,13 +72,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class AnswersParameters(
-    /**
-     * The text to search in the index.
-     * Engine default: ""
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/query/?language=kotlin]
-     */
-    @SerialName(KeyQuery) override var query: String? = null,
+public data class SearchParameters(
 
     /**
      * Gives control over which attributes to retrieve and which not to retrieve.
@@ -524,23 +517,4 @@ public data class AnswersParameters(
      * removeStopWords, removeWordsIfNoResults, analyticsTags and ruleContexts.
      */
     @SerialName(KeyNaturalLanguages) override var naturalLanguages: List<Language>? = null,
-) : SearchParameters {
-
-    /**
-     * Has no effect. Unused by Answers API.
-     * [Documentation](https://www.algolia.com/doc/rest-api/answers/#method-param-params)
-     */
-    override var attributesToSnippet: List<Snippet>? = null
-
-    /**
-     * Has no effect. Unused by Answers API.
-     * [Documentation](https://www.algolia.com/doc/rest-api/answers/#method-param-params)
-     */
-    override var hitsPerPage: Int? = null
-
-    /**
-     * Has no effect. Unused by Answers API.
-     * [Documentation](https://www.algolia.com/doc/rest-api/answers/#method-param-params)
-     */
-    override var restrictSearchableAttributes: List<Attribute>? = null
-}
+) : CommonSearch
