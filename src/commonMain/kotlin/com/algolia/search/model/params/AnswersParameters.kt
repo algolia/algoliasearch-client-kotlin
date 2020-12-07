@@ -1,6 +1,6 @@
 package com.algolia.search.model.params
 
-public interface AnswersParameters : CommonSearch {
+public interface AnswersParameters : CommonSearchParameters {
 
     /**
      * The query for which to retrieve results. Cannot be empty or spaces only.

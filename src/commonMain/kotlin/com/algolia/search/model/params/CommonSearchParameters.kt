@@ -10,7 +10,7 @@ import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.Polygon
 
-public interface CommonSearch : BaseParameters {
+public interface CommonSearchParameters : BaseParameters {
 
     /**
      *  Overrides the query parameter and performs a more generic search that can be used to find "similar" results.

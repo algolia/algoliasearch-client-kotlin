@@ -2,7 +2,7 @@ package com.algolia.search.model.params
 
 import com.algolia.search.model.search.Snippet
 
-public interface CommonScope : BaseParameters {
+public interface CommonParameters : BaseParameters {
 
     /**
      * List of attributes to snippet.

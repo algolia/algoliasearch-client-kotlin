@@ -2,7 +2,7 @@ package com.algolia.search.model.search
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.insights.UserToken
-import com.algolia.search.model.params.CommonSearch
+import com.algolia.search.model.params.CommonSearchParameters
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.serialize.KSerializerPoint
@@ -517,4 +517,4 @@ public data class SearchParameters(
      * removeStopWords, removeWordsIfNoResults, analyticsTags and ruleContexts.
      */
     @SerialName(KeyNaturalLanguages) override var naturalLanguages: List<Language>? = null,
-) : CommonSearch
+) : CommonSearchParameters

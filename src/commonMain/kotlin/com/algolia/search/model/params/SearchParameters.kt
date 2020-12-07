@@ -2,7 +2,7 @@ package com.algolia.search.model.params
 
 import com.algolia.search.model.Attribute
 
-public interface SearchParameters : CommonSearch, CommonScope {
+public interface SearchParameters : CommonSearchParameters, CommonParameters {
 
     /**
      * The text to search in the index.

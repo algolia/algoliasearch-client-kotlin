@@ -11,7 +11,7 @@ import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.model.settings.SearchableAttribute
 import kotlinx.serialization.json.JsonObject
 
-public interface SettingsParameters : CommonScope {
+public interface SettingsParameters : CommonParameters {
 
     /**
      * The complete list of attributes that will be used for searching.
