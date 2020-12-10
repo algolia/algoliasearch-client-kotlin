@@ -11,13 +11,32 @@ public data class Personalization(
     /**
      * Personalization Score
      */
-    @SerialName(KeyScore) val score: Int,
+    @SerialName(KeyScore) val scoreOrNull: Int? = null,
     /**
      * Personalization Ranking Score
      */
-    @SerialName(KeyRankingScore) val rankingScore: Int,
+    @SerialName(KeyRankingScore) val rankingScoreOrNull: Int? = null,
     /**
      * Personalization Filters Score
      */
-    @SerialName(KeyFiltersScore) val filtersScore: Int
-)
+    @SerialName(KeyFiltersScore) val filtersScoreOrNull: Int? = null,
+) {
+
+    /**
+     * Personalization Score
+     */
+    val score: Int
+        get() = requireNotNull(scoreOrNull)
+
+    /**
+     * Personalization Ranking Score
+     */
+    val rankingScore: Int
+        get() = requireNotNull(rankingScoreOrNull)
+
+    /**
+     * Personalization Filters Score
+     */
+    val filtersScore: Int
+        get() = requireNotNull(filtersScoreOrNull)
+}
