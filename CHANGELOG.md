@@ -1,3 +1,9 @@
+# 1.6.1
+
+### Fixed
+- Experimental annotation KDoc
+- RankingInfo: personalization fields deserialization
+
 # 1.6.0
 
 ### Added
