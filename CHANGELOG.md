@@ -1,5 +1,9 @@
 # 1.6.1
 
+### Added
+- Settings: `attributeCriteriaComputedByMinProximity` parameter 
+- AnswersQuery: implements `SearchParameters` for convenience (delegated to `params`)
+
 ### Fixed
 - Experimental annotation KDoc
 - RankingInfo: personalization fields deserialization

@@ -28,6 +28,7 @@ import com.algolia.search.serialize.KeyAdvancedSyntaxFeatures
 import com.algolia.search.serialize.KeyAllowCompressionOfIntegerArray
 import com.algolia.search.serialize.KeyAllowTyposOnNumericTokens
 import com.algolia.search.serialize.KeyAlternativesAsExact
+import com.algolia.search.serialize.KeyAttributeCriteriaComputedByMinProximity
 import com.algolia.search.serialize.KeyAttributeForDistinct
 import com.algolia.search.serialize.KeyAttributesForFaceting
 import com.algolia.search.serialize.KeyAttributesToHighlight
@@ -167,7 +168,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             userData = buildJsonObject { put(unknown, unknown) },
             indexLanguages = listOf(Language.Japanese),
             customNormalization = mapOf(unknown to mapOf(unknown to unknown)),
-            enablePersonalization = true
+            enablePersonalization = boolean,
+            attributeCriteriaComputedByMinProximity = boolean
         ) to buildJsonObject {
             // Attributes
             put(KeySearchableAttributes, attributesJson)
@@ -257,6 +259,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             put(KeyIndexLanguages, buildJsonArray { add(Language.Japanese.raw) })
             put(KeyCustomNormalization, buildJsonObject { put(unknown, buildJsonObject { put(unknown, unknown) }) })
             put(KeyEnablePersonalization, boolean)
+            put(KeyAttributeCriteriaComputedByMinProximity, boolean)
         }
     )
 
