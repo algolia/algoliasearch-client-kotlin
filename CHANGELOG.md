@@ -1,3 +1,8 @@
+# Unreleased
+
+### Changed
+- Update Kotlin to 1.4.21
+
 # 1.6.1
 
 ### Added
