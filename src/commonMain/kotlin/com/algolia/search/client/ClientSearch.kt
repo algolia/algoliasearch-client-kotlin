@@ -9,6 +9,7 @@ import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.internal.Credentials
 import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.endpoint.EndpointAPIKey
+import com.algolia.search.endpoint.EndpointDictionary
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.helper.internal.sha256
@@ -39,6 +40,7 @@ public interface ClientSearch :
     EndpointMultipleIndex,
     EndpointAPIKey,
     EndpointMultiCluster,
+    EndpointDictionary,
     Configuration,
     Credentials {
 

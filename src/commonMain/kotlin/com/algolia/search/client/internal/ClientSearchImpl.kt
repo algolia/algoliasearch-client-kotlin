@@ -9,9 +9,11 @@ import com.algolia.search.configuration.Credentials
 import com.algolia.search.dsl.internal.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.endpoint.EndpointAdvanced
+import com.algolia.search.endpoint.EndpointDictionary
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.endpoint.internal.EndpointAPIKey
+import com.algolia.search.endpoint.internal.EndpointDictionary
 import com.algolia.search.endpoint.internal.EndpointMulticluster
 import com.algolia.search.endpoint.internal.EndpointMultipleIndex
 import com.algolia.search.model.IndexName
@@ -44,6 +46,7 @@ internal class ClientSearchImpl internal constructor(
     EndpointMultipleIndex by EndpointMultipleIndex(transport),
     EndpointAPIKey by EndpointAPIKey(transport),
     EndpointMultiCluster by EndpointMulticluster(transport),
+    EndpointDictionary by EndpointDictionary(transport),
     Configuration by transport,
     Credentials by transport.credentials {
 
