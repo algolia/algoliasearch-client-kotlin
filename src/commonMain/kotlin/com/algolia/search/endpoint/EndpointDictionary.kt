@@ -41,7 +41,7 @@ public interface EndpointDictionary {
         dictionary: Dictionary,
         objectIDs: List<ObjectID>,
         requestOptions: RequestOptions? = null,
-    ): DeletionIndex
+    ): RevisionIndex
 
     /**
      * Clear dictionary entries.
@@ -49,7 +49,7 @@ public interface EndpointDictionary {
     public suspend fun clearDictionaryEntries(
         dictionary: Dictionary,
         requestOptions: RequestOptions? = null,
-    ): DeletionIndex
+    ): RevisionIndex
 
     /**
      * Search the dictionary entries.

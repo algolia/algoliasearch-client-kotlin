@@ -6,12 +6,13 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.dictionary.Dictionary
 import com.algolia.search.model.dictionary.DictionaryEntry
 import com.algolia.search.model.dictionary.DictionarySettings
-import com.algolia.search.model.internal.request.RequestDictionary
+import com.algolia.search.model.internal.request.RequestAddDictionary
+import com.algolia.search.model.internal.request.RequestDeleteDictionary
 import com.algolia.search.model.response.ResponseSearchDictionaries
 import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Json
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
@@ -28,12 +29,11 @@ internal class EndpointDictionaryImpl(
         requestOptions: RequestOptions?,
     ): RevisionIndex {
         val path = dictionary.toPath("/batch")
-        val request = RequestDictionary(
+        val request = RequestAddDictionary(
             clearExistingDictionaryEntries = clearExistingDictionaryEntries,
-            entries = dictionaryEntries,
-            action = RequestDictionary.Request.Action.AddEntry
+            entries = dictionaryEntries
         )
-        val body = JsonNoDefaults.encodeToString(request)
+        val body = Json.encodeToString(request)
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
 
@@ -42,22 +42,33 @@ internal class EndpointDictionaryImpl(
         dictionaryEntries: List<DictionaryEntry<T>>,
         requestOptions: RequestOptions?,
     ): RevisionIndex {
-        TODO("Not yet implemented")
+        return saveDictionaryEntries(
+            dictionary = dictionary,
+            dictionaryEntries = dictionaryEntries,
+            clearExistingDictionaryEntries = true,
+            requestOptions = requestOptions
+        )
     }
 
     override suspend fun deleteDictionaryEntries(
         dictionary: Dictionary,
         objectIDs: List<ObjectID>,
         requestOptions: RequestOptions?,
-    ): DeletionIndex {
-        TODO("Not yet implemented")
+    ): RevisionIndex {
+        val path = dictionary.toPath("/batch")
+        val request = RequestDeleteDictionary(
+            clearExistingDictionaryEntries = false,
+            entries = objectIDs
+        )
+        val body = Json.encodeToString(request)
+        return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
 
     override suspend fun clearDictionaryEntries(
         dictionary: Dictionary,
         requestOptions: RequestOptions?,
-    ): DeletionIndex {
-        TODO("Not yet implemented")
+    ): RevisionIndex {
+        return replaceDictionaryEntries(dictionary, emptyList(), requestOptions)
     }
 
     override suspend fun searchDictionaryEntries(
