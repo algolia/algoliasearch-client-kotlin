@@ -16,26 +16,26 @@ import com.algolia.search.transport.RequestOptions
 public interface EndpointDictionary {
 
     /**
-     * Send a batch of dictionary entries.
+     * Save dictionary entries.
      */
-    public suspend fun saveDictionaryEntries(
-        dictionary: Dictionary,
-        dictionaryEntries: List<DictionaryEntry>,
+    public suspend fun <T : Dictionary> saveDictionaryEntries(
+        dictionary: T,
+        dictionaryEntries: List<DictionaryEntry<T>>,
         clearExistingDictionaryEntries: Boolean = false,
         requestOptions: RequestOptions? = null,
     ): RevisionIndex
 
     /**
-     *
+     * Replace dictionary entries.
      */
-    public suspend fun replaceDictionaryEntries(
-        dictionary: Dictionary,
-        dictionaryEntries: List<DictionaryEntry>,
+    public suspend fun <T : Dictionary> replaceDictionaryEntries(
+        dictionary: T,
+        dictionaryEntries: List<DictionaryEntry<T>>,
         requestOptions: RequestOptions? = null,
     ): RevisionIndex
 
     /**
-     *
+     * Delete dictionary entries.
      */
     public suspend fun deleteDictionaryEntries(
         dictionary: Dictionary,
@@ -44,7 +44,7 @@ public interface EndpointDictionary {
     ): DeletionIndex
 
     /**
-     *
+     * Clear dictionary entries.
      */
     public suspend fun clearDictionaryEntries(
         dictionary: Dictionary,

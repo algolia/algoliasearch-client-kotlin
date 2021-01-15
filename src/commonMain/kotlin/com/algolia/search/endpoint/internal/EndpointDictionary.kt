@@ -21,9 +21,9 @@ internal class EndpointDictionaryImpl(
     private val transport: Transport,
 ) : EndpointDictionary {
 
-    override suspend fun saveDictionaryEntries(
-        dictionary: Dictionary,
-        dictionaryEntries: List<DictionaryEntry>,
+    override suspend fun <T : Dictionary> saveDictionaryEntries(
+        dictionary: T,
+        dictionaryEntries: List<DictionaryEntry<T>>,
         clearExistingDictionaryEntries: Boolean,
         requestOptions: RequestOptions?,
     ): RevisionIndex {
@@ -31,16 +31,15 @@ internal class EndpointDictionaryImpl(
         val request = RequestDictionary(
             clearExistingDictionaryEntries = clearExistingDictionaryEntries,
             entries = dictionaryEntries,
-            action = RequestDictionary.Request.Action.ADD_ENTRY
+            action = RequestDictionary.Request.Action.AddEntry
         )
         val body = JsonNoDefaults.encodeToString(request)
-
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
 
-    override suspend fun replaceDictionaryEntries(
-        dictionary: Dictionary,
-        dictionaryEntries: List<DictionaryEntry>,
+    override suspend fun <T : Dictionary> replaceDictionaryEntries(
+        dictionary: T,
+        dictionaryEntries: List<DictionaryEntry<T>>,
         requestOptions: RequestOptions?,
     ): RevisionIndex {
         TODO("Not yet implemented")

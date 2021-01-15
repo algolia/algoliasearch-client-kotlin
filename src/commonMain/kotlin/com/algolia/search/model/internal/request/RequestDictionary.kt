@@ -18,25 +18,25 @@ internal data class RequestDictionary(
 
     constructor(
         clearExistingDictionaryEntries: Boolean,
-        entries: List<DictionaryEntry>,
+        entries: List<DictionaryEntry<*>>,
         action: Request.Action,
     ) : this(clearExistingDictionaryEntries, entries.map { Request(action, it) })
 
     @Serializable
     internal data class Request(
         @SerialName(KeyAction) val action: Action,
-        @SerialName(KeyBody) val body: DictionaryEntry,
+        @SerialName(KeyBody) val body: DictionaryEntry<*>,
     ) {
 
         @Serializable
         internal enum class Action {
             /** Add the entry in the dictionary */
             @SerialName(KeyAddEntry)
-            ADD_ENTRY,
+            AddEntry,
 
             /** Delete the entry from the dictionary */
             @SerialName(KeyDeleteEntry)
-            DELETE_ENTRY
+            DeleteEntry
         }
     }
 }

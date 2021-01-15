@@ -13,7 +13,7 @@ public data class ResponseSearchDictionaries(
     /**
      * A list of [DictionaryEntry].
      */
-    @SerialName(KeyHits) val hits: List<DictionaryEntry>,
+    @SerialName(KeyHits) val hits: List<DictionaryEntry<*>>,
     /**
      *  Number of hits.
      */
