@@ -13,12 +13,20 @@ import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.KeyState
 import com.algolia.search.serialize.KeyWord
 import com.algolia.search.serialize.KeyWords
+import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.asJsonInput
+import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
+import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.jsonPrimitive
 
 @Serializable(DictionaryEntry.Companion::class)
 public sealed class DictionaryEntry<T : Dictionary> {
@@ -26,12 +34,12 @@ public sealed class DictionaryEntry<T : Dictionary> {
     /**
      * Unique identifier of the entry to add or override.
      */
-    public abstract val objectID: ObjectID
+    public abstract val objectID: ObjectID?
 
     /**
      * Language ISO code supported by the dictionary.
      */
-    public abstract val language: Language
+    public abstract val language: Language?
 
     @Serializable
     public class Stopword(
@@ -46,7 +54,7 @@ public sealed class DictionaryEntry<T : Dictionary> {
         /**
          * The state of the entry.
          */
-        @SerialName(KeyState) public val state: State? = State.Enabled,
+        @SerialName(KeyState) public val state: DictionaryEntryState? = DictionaryEntryState.Enabled,
     ) : DictionaryEntry<Stopwords>()
 
     @Serializable
@@ -78,13 +86,31 @@ public sealed class DictionaryEntry<T : Dictionary> {
         @SerialName(KeyDecomposition) public val decomposition: List<String>,
     ) : DictionaryEntry<Compounds>()
 
-    @Serializable
-    public enum class State {
-        @SerialName(KeyEnabled)
-        Enabled,
+    @Serializable(Generic.Companion::class)
+    public class Generic(
+        public val json: JsonObject,
+    ) : Map<String, JsonElement> by json, DictionaryEntry<Dictionary.Generic>() {
 
-        @SerialName(KeyDisabled)
-        Disabled
+        override val objectID: ObjectID? = json[KeyObjectID]?.jsonPrimitive?.let {
+            JsonNonStrict.decodeFromJsonElement(ObjectID.serializer(), it)
+        }
+
+        override val language: Language? = json[KeyLanguage]?.jsonPrimitive?.let {
+            JsonNonStrict.decodeFromJsonElement(Language.serializer(), it)
+        }
+
+        @OptIn(ExperimentalSerializationApi::class)
+        @Serializer(Generic::class)
+        public companion object : KSerializer<Generic> {
+
+            override fun deserialize(decoder: Decoder): Generic {
+                return Generic(decoder.asJsonInput().jsonObject)
+            }
+
+            override fun serialize(encoder: Encoder, value: Generic) {
+                encoder.asJsonOutput().encodeJsonElement(value.json)
+            }
+        }
     }
 
     @OptIn(ExperimentalSerializationApi::class)
@@ -96,7 +122,18 @@ public sealed class DictionaryEntry<T : Dictionary> {
                 is Stopword -> encoder.encodeSerializableValue(Stopword.serializer(), value)
                 is Plural -> encoder.encodeSerializableValue(Plural.serializer(), value)
                 is Compound -> encoder.encodeSerializableValue(Compound.serializer(), value)
+                is Generic -> encoder.encodeSerializableValue(Generic.serializer(), value)
             }
         }
     }
+}
+
+@Serializable
+public enum class DictionaryEntryState {
+
+    @SerialName(KeyEnabled)
+    Enabled,
+
+    @SerialName(KeyDisabled)
+    Disabled
 }

@@ -18,12 +18,10 @@ public sealed class Dictionary(
     override val raw: String,
 ) : Raw<String> {
 
-    @Serializable
     public object Plurals : Dictionary(KeyPlurals)
-    @Serializable
     public object Stopwords : Dictionary(KeyStopwords)
-    @Serializable
     public object Compounds : Dictionary(KeyCompounds)
+    public class Generic(raw: String) : Dictionary(raw)
 
     private fun encode(): StringUTF8 {
         return StringUTF8.encode(raw)
@@ -52,7 +50,7 @@ public sealed class Dictionary(
                 KeyPlurals -> Plurals
                 KeyStopwords -> Stopwords
                 KeyCompounds -> Compounds
-                else -> throw UnsupportedOperationException("Unknown dictionary: $raw") // TODO: Custom Dictionary?
+                else -> Generic(raw)
             }
         }
     }

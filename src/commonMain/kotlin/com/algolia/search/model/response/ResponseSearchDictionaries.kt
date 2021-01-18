@@ -9,11 +9,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class ResponseSearchDictionaries(
+public data class ResponseSearchDictionaries<T>(
     /**
      * A list of [DictionaryEntry].
      */
-    @SerialName(KeyHits) val hits: List<DictionaryEntry<*>>,
+    @SerialName(KeyHits) val hits: List<T>,
     /**
      *  Number of hits.
      */

@@ -9,10 +9,11 @@ import com.algolia.search.model.dictionary.DictionarySettings
 import com.algolia.search.model.internal.request.RequestAddDictionary
 import com.algolia.search.model.internal.request.RequestDeleteDictionary
 import com.algolia.search.model.response.ResponseSearchDictionaries
-import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.search.Query
+import com.algolia.search.serialize.RouteDictionaries
 import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
@@ -28,7 +29,7 @@ internal class EndpointDictionaryImpl(
         clearExistingDictionaryEntries: Boolean,
         requestOptions: RequestOptions?,
     ): RevisionIndex {
-        val path = dictionary.toPath("/batch")
+        val path = dictionary.toPath(ENDPOINT_BATCH)
         val request = RequestAddDictionary(
             clearExistingDictionaryEntries = clearExistingDictionaryEntries,
             entries = dictionaryEntries
@@ -55,7 +56,7 @@ internal class EndpointDictionaryImpl(
         objectIDs: List<ObjectID>,
         requestOptions: RequestOptions?,
     ): RevisionIndex {
-        val path = dictionary.toPath("/batch")
+        val path = dictionary.toPath(ENDPOINT_BATCH)
         val request = RequestDeleteDictionary(
             clearExistingDictionaryEntries = false,
             entries = objectIDs
@@ -72,22 +73,33 @@ internal class EndpointDictionaryImpl(
     }
 
     override suspend fun searchDictionaryEntries(
-        dictionary: Dictionary,
+        dictionary: Dictionary.Generic,
         query: Query,
         requestOptions: RequestOptions?,
-    ): ResponseSearchDictionaries {
-        TODO("Not yet implemented")
+    ): ResponseSearchDictionaries<DictionaryEntry.Generic> {
+        val path = dictionary.toPath(ENDPOINT_SEARCH)
+        val body = JsonNoDefaults.encodeToString(query)
+        return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }
 
     override suspend fun setDictionarySettings(
         dictionarySettings: DictionarySettings,
         requestOptions: RequestOptions?,
     ): RevisionIndex {
-        TODO("Not yet implemented")
+        val path = "$RouteDictionaries/$ENDPOINT_SETTINGS"
+        val body = JsonNoDefaults.encodeToString(dictionarySettings)
+        return transport.request(HttpMethod.Put, CallType.Write, path, requestOptions, body)
     }
 
     override suspend fun getDictionarySettings(requestOptions: RequestOptions?): DictionarySettings {
-        TODO("Not yet implemented")
+        val path = "$RouteDictionaries/$ENDPOINT_SETTINGS"
+        return transport.request(HttpMethod.Get, CallType.Read, path, requestOptions)
+    }
+
+    companion object {
+        const val ENDPOINT_SEARCH = "/search"
+        const val ENDPOINT_BATCH = "/batch"
+        const val ENDPOINT_SETTINGS = "*/settings"
     }
 }
 

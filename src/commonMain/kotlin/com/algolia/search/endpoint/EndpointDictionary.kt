@@ -5,7 +5,6 @@ import com.algolia.search.model.dictionary.Dictionary
 import com.algolia.search.model.dictionary.DictionaryEntry
 import com.algolia.search.model.dictionary.DictionarySettings
 import com.algolia.search.model.response.ResponseSearchDictionaries
-import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.search.Query
 import com.algolia.search.transport.RequestOptions
@@ -55,10 +54,10 @@ public interface EndpointDictionary {
      * Search the dictionary entries.
      */
     public suspend fun searchDictionaryEntries(
-        dictionary: Dictionary,
-        query: Query, // TODO: params
+        dictionary: Dictionary.Generic,
+        query: Query,
         requestOptions: RequestOptions? = null,
-    ): ResponseSearchDictionaries
+    ): ResponseSearchDictionaries<DictionaryEntry.Generic>
 
     /**
      * Update some index settings.
