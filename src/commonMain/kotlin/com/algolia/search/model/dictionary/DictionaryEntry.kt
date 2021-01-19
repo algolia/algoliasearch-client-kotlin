@@ -4,31 +4,28 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.dictionary.Dictionary.Compounds
 import com.algolia.search.model.dictionary.Dictionary.Plurals
 import com.algolia.search.model.dictionary.Dictionary.Stopwords
+import com.algolia.search.model.dictionary.DictionaryEntry.State.Disabled
+import com.algolia.search.model.dictionary.DictionaryEntry.State.Enabled
+import com.algolia.search.model.dictionary.DictionaryEntry.Type.Custom
+import com.algolia.search.model.dictionary.DictionaryEntry.Type.Standard
 import com.algolia.search.model.search.Language
+import com.algolia.search.serialize.KSerializerDictionaryEntry
+import com.algolia.search.serialize.KeyCustom
 import com.algolia.search.serialize.KeyDecomposition
 import com.algolia.search.serialize.KeyDisabled
 import com.algolia.search.serialize.KeyEnabled
 import com.algolia.search.serialize.KeyLanguage
 import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.KeyStandard
 import com.algolia.search.serialize.KeyState
+import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.KeyWord
 import com.algolia.search.serialize.KeyWords
-import com.algolia.search.serialize.internal.JsonNonStrict
-import com.algolia.search.serialize.internal.asJsonInput
-import com.algolia.search.serialize.internal.asJsonOutput
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
+import kotlinx.serialization.Transient
 
-@Serializable(DictionaryEntry.Companion::class)
+@Serializable(KSerializerDictionaryEntry::class)
 public sealed class DictionaryEntry<T : Dictionary> {
 
     /**
@@ -41,8 +38,13 @@ public sealed class DictionaryEntry<T : Dictionary> {
      */
     public abstract val language: Language?
 
+    /**
+     * Dictionary entry type.
+     */
+    public abstract val type: Type
+
     @Serializable
-    public class Stopword(
+    public data class Stopword(
         @SerialName(KeyObjectID) override val objectID: ObjectID,
         @SerialName(KeyLanguage) override val language: Language,
         /**
@@ -54,11 +56,15 @@ public sealed class DictionaryEntry<T : Dictionary> {
         /**
          * The state of the entry.
          */
-        @SerialName(KeyState) public val state: DictionaryEntryState? = DictionaryEntryState.Enabled,
-    ) : DictionaryEntry<Stopwords>()
+        @SerialName(KeyState) public val state: State? = State.Enabled,
+    ) : DictionaryEntry<Stopwords>() {
+
+        @SerialName(KeyType)
+        override val type: Type = Custom
+    }
 
     @Serializable
-    public class Plural(
+    public data class Plural(
         @SerialName(KeyObjectID) override val objectID: ObjectID,
         @SerialName(KeyLanguage) override val language: Language,
         /**
@@ -67,12 +73,17 @@ public sealed class DictionaryEntry<T : Dictionary> {
          * in the standard dictionary provided by Algolia.
          */
         @SerialName(KeyWords) public val words: List<String>,
-    ) : DictionaryEntry<Plurals>()
+    ) : DictionaryEntry<Plurals>() {
+
+        @SerialName(KeyType)
+        override val type: Type = Custom
+    }
 
     @Serializable
-    public class Compound(
+    public data class Compound(
         @SerialName(KeyObjectID) override val objectID: ObjectID,
         @SerialName(KeyLanguage) override val language: Language,
+
         /**
          * The stop word being added or modified.
          * When word already exists in the standard dictionary provided by Algolia,
@@ -84,56 +95,40 @@ public sealed class DictionaryEntry<T : Dictionary> {
          * Otherwise, it is the decomposition of word.
          */
         @SerialName(KeyDecomposition) public val decomposition: List<String>,
-    ) : DictionaryEntry<Compounds>()
+    ) : DictionaryEntry<Compounds>() {
 
-    @Serializable(Generic.Companion::class)
-    public class Generic(
-        public val json: JsonObject,
-    ) : Map<String, JsonElement> by json, DictionaryEntry<Dictionary.Generic>() {
-
-        override val objectID: ObjectID? = json[KeyObjectID]?.jsonPrimitive?.let {
-            JsonNonStrict.decodeFromJsonElement(ObjectID.serializer(), it)
-        }
-
-        override val language: Language? = json[KeyLanguage]?.jsonPrimitive?.let {
-            JsonNonStrict.decodeFromJsonElement(Language.serializer(), it)
-        }
-
-        @OptIn(ExperimentalSerializationApi::class)
-        @Serializer(Generic::class)
-        public companion object : KSerializer<Generic> {
-
-            override fun deserialize(decoder: Decoder): Generic {
-                return Generic(decoder.asJsonInput().jsonObject)
-            }
-
-            override fun serialize(encoder: Encoder, value: Generic) {
-                encoder.asJsonOutput().encodeJsonElement(value.json)
-            }
-        }
+        @Transient
+        @SerialName(KeyType)
+        override val type: Type = Custom
     }
 
-    @OptIn(ExperimentalSerializationApi::class)
-    @Serializer(DictionaryEntry::class)
-    public companion object : KSerializer<DictionaryEntry<*>> {
+    /**
+     * The state of the entry:
+     * - [Enabled]: the entry is enabled.
+     * - [Disabled]: the entry is disabled.
+     */
+    @Serializable
+    public enum class State {
+        @SerialName(KeyEnabled)
+        Enabled,
 
-        override fun serialize(encoder: Encoder, value: DictionaryEntry<*>) {
-            when (value) {
-                is Stopword -> encoder.encodeSerializableValue(Stopword.serializer(), value)
-                is Plural -> encoder.encodeSerializableValue(Plural.serializer(), value)
-                is Compound -> encoder.encodeSerializableValue(Compound.serializer(), value)
-                is Generic -> encoder.encodeSerializableValue(Generic.serializer(), value)
-            }
-        }
+        @SerialName(KeyDisabled)
+        Disabled
     }
-}
 
-@Serializable
-public enum class DictionaryEntryState {
+    /**
+     * The type of the entry:
+     * - [Standard]: default entry.
+     * - [Custom]: custom user entry.
+     */
+    @Serializable
+    public enum class Type {
+        @SerialName(KeyStandard)
+        Standard,
 
-    @SerialName(KeyEnabled)
-    Enabled,
+        @SerialName(KeyCustom)
+        Custom
+    }
 
-    @SerialName(KeyDisabled)
-    Disabled
+    public companion object
 }

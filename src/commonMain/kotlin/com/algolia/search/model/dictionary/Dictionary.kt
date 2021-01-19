@@ -6,22 +6,21 @@ import com.algolia.search.serialize.KeyCompounds
 import com.algolia.search.serialize.KeyPlurals
 import com.algolia.search.serialize.KeyStopwords
 import com.algolia.search.serialize.RouteDictionaries
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.builtins.serializer
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 
 @Serializable
 public sealed class Dictionary(
     override val raw: String,
 ) : Raw<String> {
 
+    @Serializable
     public object Plurals : Dictionary(KeyPlurals)
+
+    @Serializable
     public object Stopwords : Dictionary(KeyStopwords)
+
+    @Serializable
     public object Compounds : Dictionary(KeyCompounds)
-    public class Generic(raw: String) : Dictionary(raw)
 
     private fun encode(): StringUTF8 {
         return StringUTF8.encode(raw)
@@ -33,25 +32,5 @@ public sealed class Dictionary(
 
     override fun toString(): String {
         return raw
-    }
-
-    public companion object : KSerializer<Dictionary> {
-
-        private val serializer = String.serializer()
-
-        override val descriptor: SerialDescriptor = serializer.descriptor
-
-        override fun serialize(encoder: Encoder, value: Dictionary) {
-            serializer.serialize(encoder, value.raw)
-        }
-
-        override fun deserialize(decoder: Decoder): Dictionary {
-            return when (val raw = serializer.deserialize(decoder)) {
-                KeyPlurals -> Plurals
-                KeyStopwords -> Stopwords
-                KeyCompounds -> Compounds
-                else -> Generic(raw)
-            }
-        }
     }
 }

@@ -1,28 +1,105 @@
 package com.algolia.search.endpoint.extension
 
 import com.algolia.search.endpoint.EndpointDictionary
+import com.algolia.search.model.ObjectID
 import com.algolia.search.model.dictionary.Dictionary
 import com.algolia.search.model.dictionary.DictionaryEntry
+import com.algolia.search.model.response.ResponseDictionary
 import com.algolia.search.model.response.ResponseSearchDictionaries
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.transport.RequestOptions
-import kotlinx.serialization.json.decodeFromJsonElement
 
+//region Dictionary entry save extensions
+/**
+ * Save Stopwords dictionary entries.
+ */
+public suspend fun EndpointDictionary.saveStopwordsEntries(
+    dictionaryEntries: List<DictionaryEntry<Dictionary.Stopwords>>,
+    clearExistingDictionaryEntries: Boolean = false,
+    requestOptions: RequestOptions? = null,
+): ResponseDictionary = saveDictionaryEntries(
+    dictionary = Dictionary.Stopwords,
+    dictionaryEntries = dictionaryEntries,
+    clearExistingDictionaryEntries = clearExistingDictionaryEntries,
+    requestOptions = requestOptions
+)
+
+/**
+ * Save Plurals dictionary entries.
+ */
+public suspend fun EndpointDictionary.savePluralsEntries(
+    dictionaryEntries: List<DictionaryEntry<Dictionary.Plurals>>,
+    clearExistingDictionaryEntries: Boolean = false,
+    requestOptions: RequestOptions? = null,
+): ResponseDictionary = saveDictionaryEntries(
+    dictionary = Dictionary.Plurals,
+    dictionaryEntries = dictionaryEntries,
+    clearExistingDictionaryEntries = clearExistingDictionaryEntries,
+    requestOptions = requestOptions
+)
+
+/**
+ * Save Compounds dictionary entries.
+ */
+public suspend fun EndpointDictionary.saveCompoundsEntries(
+    dictionaryEntries: List<DictionaryEntry<Dictionary.Compounds>>,
+    clearExistingDictionaryEntries: Boolean = false,
+    requestOptions: RequestOptions? = null,
+): ResponseDictionary = saveDictionaryEntries(
+    dictionary = Dictionary.Compounds,
+    dictionaryEntries = dictionaryEntries,
+    clearExistingDictionaryEntries = clearExistingDictionaryEntries,
+    requestOptions = requestOptions
+)
+//endregion
+
+//region Dictionary entry delete extensions
+/**
+ * Delete Stopwords dictionary entries.
+ */
+public suspend fun EndpointDictionary.deleteStopwordsEntries(
+    objectIDs: List<ObjectID>,
+    requestOptions: RequestOptions? = null,
+): ResponseDictionary = deleteDictionaryEntries(
+    dictionary = Dictionary.Stopwords,
+    objectIDs = objectIDs,
+    requestOptions = requestOptions
+)
+
+/**
+ * Delete Plurals dictionary entries.
+ */
+public suspend fun EndpointDictionary.deletePluralsEntries(
+    objectIDs: List<ObjectID>,
+    requestOptions: RequestOptions? = null,
+): ResponseDictionary = deleteDictionaryEntries(
+    dictionary = Dictionary.Plurals,
+    objectIDs = objectIDs,
+    requestOptions = requestOptions
+)
+
+/**
+ * Delete Compounds dictionary entries.
+ */
+public suspend fun EndpointDictionary.deleteCompoundsEntries(
+    objectIDs: List<ObjectID>,
+    requestOptions: RequestOptions? = null,
+): ResponseDictionary = deleteDictionaryEntries(
+    dictionary = Dictionary.Compounds,
+    objectIDs = objectIDs,
+    requestOptions = requestOptions
+)
+//endregion
+
+//region Dictionary Search Extensions
 /**
  * Search the stopwords dictionary entries.
  */
 public suspend fun EndpointDictionary.searchStopwordsEntries(
     query: Query,
     requestOptions: RequestOptions? = null,
-): ResponseSearchDictionaries<DictionaryEntry.Stopword> {
-    val response = searchDictionaryEntries(Dictionary.Generic(Dictionary.Stopwords.raw), query, requestOptions)
-    return ResponseSearchDictionaries(
-        hits = response.hits.map { JsonNonStrict.decodeFromJsonElement(it.json) },
-        nbHits = response.nbHits,
-        page = response.page,
-        nbPages = response.nbPages
-    )
+): ResponseSearchDictionaries<Dictionary.Stopwords> {
+    return searchDictionaryEntries(Dictionary.Stopwords, query, requestOptions)
 }
 
 /**
@@ -31,14 +108,8 @@ public suspend fun EndpointDictionary.searchStopwordsEntries(
 public suspend fun EndpointDictionary.searchPluralsEntries(
     query: Query,
     requestOptions: RequestOptions? = null,
-): ResponseSearchDictionaries<DictionaryEntry.Plural> {
-    val response = searchDictionaryEntries(Dictionary.Generic(Dictionary.Stopwords.raw), query, requestOptions)
-    return ResponseSearchDictionaries(
-        hits = response.hits.map { JsonNonStrict.decodeFromJsonElement(it.json) },
-        nbHits = response.nbHits,
-        page = response.page,
-        nbPages = response.nbPages
-    )
+): ResponseSearchDictionaries<Dictionary.Plurals> {
+    return searchDictionaryEntries(Dictionary.Plurals, query, requestOptions)
 }
 
 /**
@@ -47,12 +118,39 @@ public suspend fun EndpointDictionary.searchPluralsEntries(
 public suspend fun EndpointDictionary.searchCompoundEntries(
     query: Query,
     requestOptions: RequestOptions? = null,
-): ResponseSearchDictionaries<DictionaryEntry.Compound> {
-    val response = searchDictionaryEntries(Dictionary.Generic(Dictionary.Stopwords.raw), query, requestOptions)
-    return ResponseSearchDictionaries(
-        hits = response.hits.map { JsonNonStrict.decodeFromJsonElement(it.json) },
-        nbHits = response.nbHits,
-        page = response.page,
-        nbPages = response.nbPages
-    )
+): ResponseSearchDictionaries<Dictionary.Compounds> {
+    return searchDictionaryEntries(Dictionary.Compounds, query, requestOptions)
 }
+//endregion
+
+//region Dictionary replace save extensions
+/**
+ * Replace stopwords dictionary entries.
+ */
+public suspend fun EndpointDictionary.replaceStopwordsEntries(
+    dictionaryEntries: List<DictionaryEntry<Dictionary.Stopwords>>,
+    requestOptions: RequestOptions? = null,
+): ResponseDictionary {
+    return replaceDictionaryEntries(Dictionary.Stopwords, dictionaryEntries, requestOptions)
+}
+
+/**
+ * Replace plurals dictionary entries.
+ */
+public suspend fun EndpointDictionary.replacePluralsEntries(
+    dictionaryEntries: List<DictionaryEntry<Dictionary.Plurals>>,
+    requestOptions: RequestOptions? = null,
+): ResponseDictionary {
+    return replaceDictionaryEntries(Dictionary.Plurals, dictionaryEntries, requestOptions)
+}
+
+/**
+ * Replace compounds dictionary entries.
+ */
+public suspend fun EndpointDictionary.replaceCompoundsEntries(
+    dictionaryEntries: List<DictionaryEntry<Dictionary.Compounds>>,
+    requestOptions: RequestOptions? = null,
+): ResponseDictionary {
+    return replaceDictionaryEntries(Dictionary.Compounds, dictionaryEntries, requestOptions)
+}
+//endregion

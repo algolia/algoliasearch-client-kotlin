@@ -1,5 +1,6 @@
 package com.algolia.search.model.response
 
+import com.algolia.search.model.dictionary.Dictionary
 import com.algolia.search.model.dictionary.DictionaryEntry
 import com.algolia.search.serialize.KeyHits
 import com.algolia.search.serialize.KeyNbHits
@@ -9,11 +10,11 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public data class ResponseSearchDictionaries<T>(
+public data class ResponseSearchDictionaries<T : Dictionary>(
     /**
      * A list of [DictionaryEntry].
      */
-    @SerialName(KeyHits) val hits: List<T>,
+    @SerialName(KeyHits) val hits: List<DictionaryEntry<T>>,
     /**
      *  Number of hits.
      */

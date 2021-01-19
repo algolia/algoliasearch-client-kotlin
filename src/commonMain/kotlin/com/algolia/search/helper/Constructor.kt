@@ -13,6 +13,7 @@ import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Point
+import com.algolia.search.model.task.DictionaryTaskID
 import com.algolia.search.model.task.TaskID
 
 /**
@@ -48,6 +49,13 @@ public fun String.toObjectID(): ObjectID {
  */
 public fun Long.toTaskID(): TaskID {
     return TaskID(this)
+}
+
+/**
+ * Convenience method to convert [this] to a [DictionaryTaskID].
+ */
+public fun Long.toDictionaryTaskID(): DictionaryTaskID {
+    return DictionaryTaskID(this)
 }
 
 /**
