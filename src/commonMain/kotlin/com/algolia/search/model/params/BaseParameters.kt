@@ -124,14 +124,6 @@ public interface BaseParameters {
     public var removeStopWords: RemoveStopWords?
 
     /**
-     * Sets the languages to be used by language-specific settings and functionalities such as [ignorePlurals],
-     * [removeStopWords], and [CJK word-detection][https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#using-a-language-specific-dictionary-for-cjk-words].
-     * Engine default: []
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryLanguages/?language=kotlin]
-     */
-    public var queryLanguages: List<Language>?
-
-    /**
      * Whether rules should be globally enabled.
      * Engine default: true
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/enableRules/?language=kotlin]

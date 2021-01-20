@@ -52,7 +52,6 @@ import com.algolia.search.serialize.KeyOptionalWords
 import com.algolia.search.serialize.KeyPage
 import com.algolia.search.serialize.KeyPercentileComputation
 import com.algolia.search.serialize.KeyPersonalizationImpact
-import com.algolia.search.serialize.KeyQueryLanguages
 import com.algolia.search.serialize.KeyQueryType
 import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
@@ -304,15 +303,6 @@ public data class SearchParameters(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/removeStopWords/?language=kotlin]
      */
     @SerialName(KeyRemoveStopWords) override var removeStopWords: RemoveStopWords? = null,
-
-    /**
-     * Sets the queryLanguage to be used by language-specific settings and functionalities such as
-     * [ignorePlurals], [removeStopWords], and
-     * [CJK word-detection][https://www.algolia.com/doc/guides/textual-relevance/queryLanguage/#using-a-language-specific-dictionary-for-cjk-words].
-     * Engine default: []
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryLanguages/?language=kotlin]
-     */
-    @SerialName(KeyQueryLanguages) override var queryLanguages: List<Language>? = null,
 
     /**
      * Whether rules should be globally enabled.

@@ -28,7 +28,7 @@ public data class AnswersQuery(
      * The languages in the query.
      * Currently only supports `en`.
      */
-    @SerialName(KeyQueryLanguages) override var queryLanguages: List<Language>? = null,
+    @SerialName(KeyQueryLanguages) var queryLanguages: List<Language>,
 
     /**
      * Engine default: ["*"]
