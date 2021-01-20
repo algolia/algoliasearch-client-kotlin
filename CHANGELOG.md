@@ -5,6 +5,7 @@
 
 ### Changed
 - Update Kotlin to 1.4.2
+- Update Ktor 1.5.0
 
 ### Experimental
 - AnswersQuery: `queryLanguages` required (non-nullable)
