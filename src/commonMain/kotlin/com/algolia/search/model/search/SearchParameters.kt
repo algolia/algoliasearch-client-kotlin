@@ -1,12 +1,10 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.insights.UserToken
-import com.algolia.search.model.params.SearchParameters
+import com.algolia.search.model.params.CommonSearchParameters
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
-import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.KSerializerPoint
 import com.algolia.search.serialize.KeyAdvancedSyntax
 import com.algolia.search.serialize.KeyAdvancedSyntaxFeatures
@@ -20,7 +18,6 @@ import com.algolia.search.serialize.KeyAroundPrecision
 import com.algolia.search.serialize.KeyAroundRadius
 import com.algolia.search.serialize.KeyAttributesToHighlight
 import com.algolia.search.serialize.KeyAttributesToRetrieve
-import com.algolia.search.serialize.KeyAttributesToSnippet
 import com.algolia.search.serialize.KeyClickAnalytics
 import com.algolia.search.serialize.KeyDisableExactOnAttributes
 import com.algolia.search.serialize.KeyDisableTypoToleranceOnAttributes
@@ -37,7 +34,6 @@ import com.algolia.search.serialize.KeyFilters
 import com.algolia.search.serialize.KeyGetRankingInfo
 import com.algolia.search.serialize.KeyHighlightPostTag
 import com.algolia.search.serialize.KeyHighlightPreTag
-import com.algolia.search.serialize.KeyHitsPerPage
 import com.algolia.search.serialize.KeyIgnorePlurals
 import com.algolia.search.serialize.KeyInsideBoundingBox
 import com.algolia.search.serialize.KeyInsidePolygon
@@ -56,15 +52,12 @@ import com.algolia.search.serialize.KeyOptionalWords
 import com.algolia.search.serialize.KeyPage
 import com.algolia.search.serialize.KeyPercentileComputation
 import com.algolia.search.serialize.KeyPersonalizationImpact
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyQueryLanguages
 import com.algolia.search.serialize.KeyQueryType
 import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
 import com.algolia.search.serialize.KeyReplaceSynonymsInHighlight
 import com.algolia.search.serialize.KeyResponseFields
 import com.algolia.search.serialize.KeyRestrictHighlightAndSnippetArrays
-import com.algolia.search.serialize.KeyRestrictSearchableAttributes
 import com.algolia.search.serialize.KeyRuleContexts
 import com.algolia.search.serialize.KeySimilarQuery
 import com.algolia.search.serialize.KeySnippetEllipsisText
@@ -78,14 +71,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-@DSLParameters
-public data class Query(
-    /**
-     * The text to search in the index.
-     * Engine default: ""
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/query/?language=kotlin]
-     */
-    @SerialName(KeyQuery) override var query: String? = null,
+public data class SearchParameters(
 
     /**
      * Gives control over which attributes to retrieve and which not to retrieve.
@@ -93,13 +79,6 @@ public data class Query(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToRetrieve/?language=kotlin]
      */
     @SerialName(KeyAttributesToRetrieve) override var attributesToRetrieve: List<Attribute>? = null,
-
-    /**
-     * Restricts a given query to look in only a subset of your searchable attributes.
-     * Engine default: all attributes in [Settings.searchableAttributes].
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/restrictSearchableAttributes/?language=kotlin]
-     */
-    @SerialName(KeyRestrictSearchableAttributes) override var restrictSearchableAttributes: List<Attribute>? = null,
 
     /**
      * Filter the query with numeric, facet and/or tag filters.
@@ -179,13 +158,6 @@ public data class Query(
     @SerialName(KeyAttributesToHighlight) override var attributesToHighlight: List<Attribute>? = null,
 
     /**
-     * List of attributes to snippet, with an optional maximum number of words to snippet.
-     * Engine default: []
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/attributesToSnippet/?language=kotlin]
-     */
-    @SerialName(KeyAttributesToSnippet) override var attributesToSnippet: List<Snippet>? = null,
-
-    /**
      * The HTML name to insert before the highlighted parts in all highlight and snippet results.
      * Engine default: <em>
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/highlightPreTag/?language=kotlin]
@@ -219,13 +191,6 @@ public data class Query(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/page/?language=kotlin]
      */
     @SerialName(KeyPage) override var page: Int? = null,
-
-    /**
-     * Set the number of hits per page.
-     * Engine default: 20
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/hitsPerPage/?language=kotlin]
-     */
-    @SerialName(KeyHitsPerPage) override var hitsPerPage: Int? = null,
 
     /**
      * Specify the offset of the first hit to return.
@@ -338,15 +303,6 @@ public data class Query(
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/removeStopWords/?language=kotlin]
      */
     @SerialName(KeyRemoveStopWords) override var removeStopWords: RemoveStopWords? = null,
-
-    /**
-     * Sets the queryLanguage to be used by language-specific settings and functionalities such as
-     * [ignorePlurals], [removeStopWords], and
-     * [CJK word-detection][https://www.algolia.com/doc/guides/textual-relevance/queryLanguage/#using-a-language-specific-dictionary-for-cjk-words].
-     * Engine default: []
-     * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryLanguages/?language=kotlin]
-     */
-    @SerialName(KeyQueryLanguages) override var queryLanguages: List<Language>? = null,
 
     /**
      * Whether rules should be globally enabled.
@@ -551,4 +507,4 @@ public data class Query(
      * removeStopWords, removeWordsIfNoResults, analyticsTags and ruleContexts.
      */
     @SerialName(KeyNaturalLanguages) override var naturalLanguages: List<Language>? = null,
-) : SearchParameters
+) : CommonSearchParameters

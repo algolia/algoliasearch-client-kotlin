@@ -1,3 +1,15 @@
+# 1.6.2
+
+### Added
+- Settings: `attributeCriteriaComputedByMinProximity` parameter
+
+### Changed
+- Update Kotlin to 1.4.2
+
+### Experimental
+- AnswersQuery: `queryLanguages` required (non-nullable)
+- AnswersQuery: implements `SearchParameters` for convenience (delegated to `params`)
+
 # 1.6.1
 
 ### Fixed
@@ -6,11 +18,11 @@
 
 # 1.6.0
 
-### Added
-- _Experimental_: Algolia Answers API
-
 ### Changed
 - Update Ktor to `1.4.2`, transitively Kotlin serialization to `1.0.1`
+
+### Experimental
+- _Experimental_: Algolia Answers API
 
 # 1.5.2
 
