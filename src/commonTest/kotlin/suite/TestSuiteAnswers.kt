@@ -2,14 +2,13 @@ package suite
 
 import clientAnswers
 import com.algolia.search.ExperimentalAlgoliaClientAPI
+import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.AnswersQuery
 import com.algolia.search.model.search.Language
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
-import runBlocking
-import shouldEqual
 import kotlin.test.Test
+import kotlin.test.assertFalse
+import runBlocking
 
 internal class TestSuiteAnswers {
 
@@ -18,55 +17,18 @@ internal class TestSuiteAnswers {
 
     @OptIn(ExperimentalAlgoliaClientAPI::class)
     @Test
-    fun withResult() {
+    fun testFindAnswers() {
         runBlocking {
             val query = AnswersQuery(
-                query = "sir ken robinson",
-                queryLanguages = listOf(Language.English)
-            )
-
-            val response = answers.findAnswers(query)
-
-            response.nbHits shouldEqual 10
-        }
-    }
-
-    @OptIn(ExperimentalAlgoliaClientAPI::class)
-    @Test
-    fun withoutResult() {
-        runBlocking {
-            val query = AnswersQuery(
-                query = "what",
-                queryLanguages = listOf(Language.English)
-            )
-
-            val response = answers.findAnswers(query)
-
-            response.nbHits shouldEqual 0
-        }
-    }
-
-    @OptIn(ExperimentalAlgoliaClientAPI::class)
-    @Test
-    fun withHighlight() {
-        runBlocking {
-            val query = AnswersQuery(
-                query = "sarah jones",
+                query = "when do babies start learning?",
                 queryLanguages = listOf(Language.English),
-                nbHits = 2,
-            ).apply {
-                highlightPreTag = "_pre_"
-                highlightPostTag = "_post_"
-            }
+                nbHits = 20,
+                attributesForPrediction = listOf(Attribute("description"), Attribute("title"), Attribute("transcript"))
+            )
 
             val response = answers.findAnswers(query)
 
-            response.nbHits shouldEqual 2
-            response.hits[0]
-                .highlightResult["main_speaker"]
-                ?.jsonObject?.get("value")
-                ?.jsonPrimitive?.content shouldEqual "_pre_Sarah_post_ _pre_Jones_post_"
-
+            assertFalse(response.hits.map { it.answer }.isEmpty())
         }
     }
 }
