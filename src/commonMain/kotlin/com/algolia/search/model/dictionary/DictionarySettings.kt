@@ -6,7 +6,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-public class DictionarySettings(
+public data class DictionarySettings(
     public val disableStandardEntries: DisableStandardEntries? = null,
 )
 

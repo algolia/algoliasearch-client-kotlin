@@ -1,12 +1,17 @@
 package suite
 
 import clientAdmin2
+import com.algolia.search.endpoint.extension.deletePluralsEntries
 import com.algolia.search.endpoint.extension.deleteStopwordsEntries
 import com.algolia.search.endpoint.extension.replaceStopwordsEntries
+import com.algolia.search.endpoint.extension.savePluralsEntries
 import com.algolia.search.endpoint.extension.saveStopwordsEntries
+import com.algolia.search.endpoint.extension.searchPluralsEntries
 import com.algolia.search.endpoint.extension.searchStopwordsEntries
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.dictionary.DictionaryEntry
+import com.algolia.search.model.dictionary.DictionarySettings
+import com.algolia.search.model.dictionary.DisableStandardEntries
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Query
 import java.util.UUID
@@ -17,71 +22,79 @@ import runBlocking
 internal class TestSuiteDictionary {
 
     @Test
-    fun testStopwordsDictionaries() {
-        runBlocking {
-            val randomID = UUID.randomUUID().toString()
-            val entryID = ObjectID(randomID)
-            val word = "upper"
-            val entry = DictionaryEntry.Stopword(
-                objectID = entryID,
-                language = Language.English,
-                word = word
+    fun testStopwordsDictionaries(): Unit = runBlocking {
+        val entry = DictionaryEntry.Stopword(
+            objectID = ObjectID(UUID.randomUUID().toString()),
+            language = Language.English,
+            word = "upper"
+        )
+
+        // Search for non existent.
+        assertEquals(0, clientAdmin2.searchStopwordsEntries(query = Query(entry.objectID.raw)).nbHits)
+
+        // Save entry
+        clientAdmin2.run {
+            saveStopwordsEntries(listOf(entry)).wait()
+            val response = searchStopwordsEntries(query = Query(entry.objectID.raw))
+            assertEquals(1, response.nbHits)
+            assertEquals(entry, response.hits[0])
+        }
+
+        // Delete entry
+        clientAdmin2.run {
+            deleteStopwordsEntries(listOf(entry.objectID)).wait()
+            val response = searchStopwordsEntries(query = Query(entry.objectID.raw))
+            assertEquals(0, response.nbHits)
+        }
+
+        // Replace
+        clientAdmin2.run {
+            val oldDictionaryState = searchStopwordsEntries(Query(""))
+            val oldDictionaryEntries = oldDictionaryState.hits.filter { it.type == DictionaryEntry.Type.Custom }
+
+            saveStopwordsEntries(listOf(entry)).wait()
+            assertEquals(1, searchStopwordsEntries(query = Query(entry.objectID.raw)).nbHits)
+
+            replaceStopwordsEntries(oldDictionaryEntries).wait()
+            replaceStopwordsEntries(listOf(entry.copy(word = "uppercase")))
+            assertEquals(0, searchStopwordsEntries(query = Query(entry.objectID.raw)).nbHits)
+        }
+
+        // Settings
+        clientAdmin2.run {
+            val stopwordsSettings = DictionarySettings(
+                disableStandardEntries = DisableStandardEntries(
+                    stopwords = mapOf(Language.English to true)
+                )
             )
+            setDictionarySettings(stopwordsSettings).wait()
+            assertEquals(stopwordsSettings, getDictionarySettings())
+        }
+    }
 
-            // Search non existent.
-            assertEquals(0, clientAdmin2.searchStopwordsEntries(query = Query(randomID)).nbHits)
+    @Test
+    fun testPluralsDictionaries(): Unit = runBlocking {
+        val entry = DictionaryEntry.Plural(
+            objectID = ObjectID(UUID.randomUUID().toString()),
+            language = Language.French,
+            words = listOf("cheval", "chevaux")
+        )
 
-            // Save entry
-            clientAdmin2.run {
-                saveStopwordsEntries(listOf(entry)).wait()
-                val response = searchStopwordsEntries(query = Query(entryID.raw))
-                assertEquals(1, response.nbHits)
-                assertEquals(entry, response.hits[0])
-            }
+        // Search for non existent.
+        assertEquals(0, clientAdmin2.searchPluralsEntries(query = Query(entry.objectID.raw)).nbHits)
 
-            // Delete entry
-            clientAdmin2.run {
-                deleteStopwordsEntries(listOf(entryID)).wait()
-                val response = searchStopwordsEntries(query = Query(entryID.raw))
-                assertEquals(0, response.nbHits)
-            }
+        // Save
+        clientAdmin2.run {
+            savePluralsEntries(listOf(entry)).wait()
+            val response = searchPluralsEntries(query = Query(entry.objectID.raw))
+            assertEquals(1, response.nbPages)
+            assertEquals(entry, response.hits[0])
+        }
 
-            // Replace
-            clientAdmin2.run {
-                val oldDictionaryState = searchStopwordsEntries(Query(""))
-                val oldDictionaryEntries = oldDictionaryState.hits.filter { it.type == DictionaryEntry.Type.Custom }
-
-                saveStopwordsEntries(listOf(entry)).wait()
-                assertEquals(1, searchStopwordsEntries(query = Query(entryID.raw)).nbHits)
-
-                replaceStopwordsEntries(oldDictionaryEntries).wait()
-                replaceStopwordsEntries(listOf(entry.copy(word = "uppercase")))
-                assertEquals(0, searchStopwordsEntries(query = Query(entryID.raw)).nbHits)
-            }
-
-            //
-            //         old_dictionary_state   = @client.search_dictionary_entries('stopwords', '')
-            //         old_dictionary_entries = old_dictionary_state[:hits].map do |hit|
-            //           hit.reject { |key| key == :type }
-            //         end
-            //
-            //         @client.save_dictionary_entries!('stopwords', [entry])
-            //         assert_equal 1, @client.search_dictionary_entries('stopwords', entry_id)[:nbHits]
-            //
-            //         @client.replace_dictionary_entries!('stopwords', old_dictionary_entries)
-            //         assert_equal 0, @client.search_dictionary_entries('stopwords', entry_id)[:nbHits]
-            //
-            //         stopwords_settings = {
-            //           disableStandardEntries: {
-            //             stopwords: {
-            //               en: true
-            //             }
-            //           }
-            //         }
-            //
-            //         @client.set_dictionary_settings!(stopwords_settings)
-            //
-            //         assert_equal @client.get_dictionary_settings, stopwords_settings
+        // Delete
+        clientAdmin2.run {
+            deletePluralsEntries(objectIDs = listOf(entry.objectID)).wait()
+            assertEquals(0, searchPluralsEntries(query = Query(entry.objectID.raw)).nbHits)
         }
     }
 }
