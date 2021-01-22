@@ -12,6 +12,11 @@ import com.algolia.search.transport.RequestOptions
 //region Dictionary entry save extensions
 /**
  * Save Stopwords dictionary entries.
+ *
+ * @param dictionaryEntries dictionary entries to be saved.
+ * @param clearExistingDictionaryEntries when `true`, start the batch by removing all the custom entries
+ * from the dictionary.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.saveStopwordsEntries(
     dictionaryEntries: List<DictionaryEntry<Dictionary.Stopwords>>,
@@ -26,6 +31,11 @@ public suspend fun EndpointDictionary.saveStopwordsEntries(
 
 /**
  * Save Plurals dictionary entries.
+ *
+ * @param dictionaryEntries dictionary entries to be saved.
+ * @param clearExistingDictionaryEntries when `true`, start the batch by removing all the custom entries
+ * from the dictionary.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.savePluralsEntries(
     dictionaryEntries: List<DictionaryEntry<Dictionary.Plurals>>,
@@ -40,6 +50,11 @@ public suspend fun EndpointDictionary.savePluralsEntries(
 
 /**
  * Save Compounds dictionary entries.
+ *
+ * @param dictionaryEntries dictionary entries to be saved.
+ * @param clearExistingDictionaryEntries when `true`, start the batch by removing all the custom entries
+ * from the dictionary.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.saveCompoundsEntries(
     dictionaryEntries: List<DictionaryEntry<Dictionary.Compounds>>,
@@ -56,6 +71,9 @@ public suspend fun EndpointDictionary.saveCompoundsEntries(
 //region Dictionary entry delete extensions
 /**
  * Delete Stopwords dictionary entries.
+ *
+ * @param objectIDs list of entries' IDs to delete.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.deleteStopwordsEntries(
     objectIDs: List<ObjectID>,
@@ -68,6 +86,9 @@ public suspend fun EndpointDictionary.deleteStopwordsEntries(
 
 /**
  * Delete Plurals dictionary entries.
+ *
+ * @param objectIDs list of entries' IDs to delete.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.deletePluralsEntries(
     objectIDs: List<ObjectID>,
@@ -80,6 +101,9 @@ public suspend fun EndpointDictionary.deletePluralsEntries(
 
 /**
  * Delete Compounds dictionary entries.
+ *
+ * @param objectIDs list of entries' IDs to delete.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.deleteCompoundsEntries(
     objectIDs: List<ObjectID>,
@@ -94,6 +118,9 @@ public suspend fun EndpointDictionary.deleteCompoundsEntries(
 //region Dictionary Search Extensions
 /**
  * Search the stopwords dictionary entries.
+ *
+ * @param query the [Query] used to search.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.searchStopwordsEntries(
     query: Query,
@@ -104,6 +131,9 @@ public suspend fun EndpointDictionary.searchStopwordsEntries(
 
 /**
  * Search the plurals dictionary entries.
+ *
+ * @param query the [Query] used to search.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.searchPluralsEntries(
     query: Query,
@@ -114,6 +144,9 @@ public suspend fun EndpointDictionary.searchPluralsEntries(
 
 /**
  * Search the plurals dictionary entries.
+ *
+ * @param query the [Query] used to search.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.searchCompoundEntries(
     query: Query,
@@ -126,6 +159,9 @@ public suspend fun EndpointDictionary.searchCompoundEntries(
 //region Dictionary replace save extensions
 /**
  * Replace stopwords dictionary entries.
+ *
+ * @param dictionaryEntries dictionary entries to be replaced.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.replaceStopwordsEntries(
     dictionaryEntries: List<DictionaryEntry<Dictionary.Stopwords>>,
@@ -136,6 +172,9 @@ public suspend fun EndpointDictionary.replaceStopwordsEntries(
 
 /**
  * Replace plurals dictionary entries.
+ *
+ * @param dictionaryEntries dictionary entries to be replaced.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.replacePluralsEntries(
     dictionaryEntries: List<DictionaryEntry<Dictionary.Plurals>>,
@@ -146,6 +185,9 @@ public suspend fun EndpointDictionary.replacePluralsEntries(
 
 /**
  * Replace compounds dictionary entries.
+ *
+ * @param dictionaryEntries dictionary entries to be replaced.
+ * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.replaceCompoundsEntries(
     dictionaryEntries: List<DictionaryEntry<Dictionary.Compounds>>,

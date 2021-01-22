@@ -20,6 +20,8 @@ internal sealed class RequestDictionary {
 
     /**
      * When `true`, start the batch by removing all the custom entries from the dictionary.
+     *
+     * Engine default: `false`
      */
     abstract val clearExistingDictionaryEntries: Boolean
 

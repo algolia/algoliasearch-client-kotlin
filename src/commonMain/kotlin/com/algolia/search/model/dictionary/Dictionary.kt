@@ -8,6 +8,9 @@ import com.algolia.search.serialize.KeyStopwords
 import com.algolia.search.serialize.RouteDictionaries
 import kotlinx.serialization.Serializable
 
+/**
+ * Represents a linguistic resources provided by Algolia.
+ */
 @Serializable
 public sealed class Dictionary(
     override val raw: String,

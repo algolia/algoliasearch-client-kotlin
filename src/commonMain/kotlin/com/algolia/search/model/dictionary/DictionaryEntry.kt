@@ -25,18 +25,21 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 
+/**
+ * Represents an entry in a given dictionary.
+ */
 @Serializable(KSerializerDictionaryEntry::class)
 public sealed class DictionaryEntry<T : Dictionary> {
 
     /**
      * Unique identifier of the entry to add or override.
      */
-    public abstract val objectID: ObjectID?
+    public abstract val objectID: ObjectID
 
     /**
      * Language ISO code supported by the dictionary.
      */
-    public abstract val language: Language?
+    public abstract val language: Language
 
     /**
      * Dictionary entry type.

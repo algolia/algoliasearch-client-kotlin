@@ -13,12 +13,21 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.transport.RequestOptions
 
 /**
+ * The Dictionary API enables users to customize linguistic resources provided by Algolia such as stop words, plurals,
+ * and segmentation.
+ *
  * [Documentation](https://www.algolia.com/doc/rest-api/search/#dictionaries-endpoints)
  */
 public interface EndpointDictionary {
 
     /**
      * Save dictionary entries.
+     *
+     * @param dictionary target dictionary.
+     * @param dictionaryEntries dictionary entries to be saved.
+     * @param clearExistingDictionaryEntries when `true`, start the batch by removing all the custom entries
+     * from the dictionary.
+     * @param requestOptions Configure request locally with [RequestOptions].
      */
     public suspend fun <T : Dictionary> saveDictionaryEntries(
         dictionary: T,
@@ -29,6 +38,10 @@ public interface EndpointDictionary {
 
     /**
      * Replace dictionary entries.
+     *
+     * @param dictionary target dictionary.
+     * @param dictionaryEntries dictionary entries to be replaced.
+     * @param requestOptions Configure request locally with [RequestOptions].
      */
     public suspend fun <T : Dictionary> replaceDictionaryEntries(
         dictionary: T,
@@ -38,6 +51,10 @@ public interface EndpointDictionary {
 
     /**
      * Delete dictionary entries.
+     *
+     * @param dictionary target dictionary.
+     * @param objectIDs list of entries' IDs to delete.
+     * @param requestOptions Configure request locally with [RequestOptions].
      */
     public suspend fun deleteDictionaryEntries(
         dictionary: Dictionary,
@@ -46,7 +63,10 @@ public interface EndpointDictionary {
     ): ResponseDictionary
 
     /**
-     * Clear dictionary entries.
+     * Clear all dictionary entries.
+     *
+     * @param dictionary target dictionary.
+     * @param requestOptions Configure request locally with [RequestOptions].
      */
     public suspend fun clearDictionaryEntries(
         dictionary: Dictionary,
@@ -55,6 +75,10 @@ public interface EndpointDictionary {
 
     /**
      * Search the dictionary entries.
+     *
+     * @param dictionary target dictionary.
+     * @param query the [Query] used to search.
+     * @param requestOptions Configure request locally with [RequestOptions].
      */
     public suspend fun <T : Dictionary> searchDictionaryEntries(
         dictionary: T,
@@ -66,6 +90,9 @@ public interface EndpointDictionary {
      * Update some index settings.
      * Only specified settings are overridden; unspecified settings are left unchanged.
      * Specifying `null` for a setting resets it to its default value.
+     *
+     * @param dictionarySettings settings to be applied.
+     * @param requestOptions Configure request locally with [RequestOptions].
      */
     public suspend fun setDictionarySettings(
         dictionarySettings: DictionarySettings,
@@ -74,6 +101,10 @@ public interface EndpointDictionary {
 
     /**
      * Wait for dictionary task to finish.
+     *
+     * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
+     * the allotted time in milliseconds.
+     * @param requestOptions Configure request locally with [RequestOptions].
      */
     public suspend fun ResponseDictionary.wait(
         timeout: Long? = null,
@@ -83,7 +114,9 @@ public interface EndpointDictionary {
     /**
      * Wait for a [DictionaryTaskID] to complete before executing the next line of code.
      *
-     * @param taskID of the indexing task to wait for.
+     * @param taskID ID of the task to wait for.
+     * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
+     * the allotted time in milliseconds.
      * @param requestOptions Configure request locally with [RequestOptions]
      */
     public suspend fun waitTask(
@@ -94,6 +127,9 @@ public interface EndpointDictionary {
 
     /**
      * Check the current [TaskStatus] of a given [DictionaryTaskID].
+     *
+     * @param taskID ID of the task to get its info.
+     * @param requestOptions Configure request locally with [RequestOptions]
      */
     public suspend fun getTask(
         taskID: DictionaryTaskID,

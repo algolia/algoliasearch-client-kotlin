@@ -18,5 +18,8 @@ public data class DictionarySettings(
  */
 @Serializable
 public data class DisableStandardEntries(
+    /**
+     * Settings for the stop word dictionary.
+     */
     @SerialName(KeyStopwords) val stopwords: Map<Language, Boolean>?,
 )
