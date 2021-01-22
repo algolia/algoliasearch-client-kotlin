@@ -1,11 +1,14 @@
 package suite
 
 import clientAdmin2
+import com.algolia.search.endpoint.extension.deleteCompoundsEntries
 import com.algolia.search.endpoint.extension.deletePluralsEntries
 import com.algolia.search.endpoint.extension.deleteStopwordsEntries
 import com.algolia.search.endpoint.extension.replaceStopwordsEntries
+import com.algolia.search.endpoint.extension.saveCompoundsEntries
 import com.algolia.search.endpoint.extension.savePluralsEntries
 import com.algolia.search.endpoint.extension.saveStopwordsEntries
+import com.algolia.search.endpoint.extension.searchCompoundEntries
 import com.algolia.search.endpoint.extension.searchPluralsEntries
 import com.algolia.search.endpoint.extension.searchStopwordsEntries
 import com.algolia.search.model.ObjectID
@@ -95,6 +98,30 @@ internal class TestSuiteDictionary {
         clientAdmin2.run {
             deletePluralsEntries(objectIDs = listOf(entry.objectID)).wait()
             assertEquals(0, searchPluralsEntries(query = Query(entry.objectID.raw)).nbHits)
+        }
+    }
+
+    @Test
+    fun testCompoundsDictionaries(): Unit = runBlocking {
+        val entry = DictionaryEntry.Compound(
+            objectID = ObjectID(UUID.randomUUID().toString()),
+            language = Language.Dutch,
+            word = "kopfschmerztablette",
+            decomposition = listOf("kopf", "schmerz", "tablette")
+        )
+
+        // Save
+        clientAdmin2.run {
+            saveCompoundsEntries(listOf(entry)).wait()
+            val response = searchCompoundEntries(query = Query(entry.objectID.raw))
+            assertEquals(1, response.nbHits)
+            assertEquals(entry, response.hits[0])
+        }
+
+        // Delete
+        clientAdmin2.run {
+            deleteCompoundsEntries(listOf(entry.objectID)).wait()
+            assertEquals(0, searchCompoundEntries(query = Query(entry.objectID.raw)).nbHits)
         }
     }
 }

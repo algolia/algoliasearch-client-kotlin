@@ -129,6 +129,4 @@ public sealed class DictionaryEntry<T : Dictionary> {
         @SerialName(KeyCustom)
         Custom
     }
-
-    public companion object
 }
