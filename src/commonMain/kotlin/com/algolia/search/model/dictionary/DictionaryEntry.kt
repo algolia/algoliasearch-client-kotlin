@@ -14,12 +14,10 @@ import com.algolia.search.serialize.KeyLanguage
 import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.KeyStandard
 import com.algolia.search.serialize.KeyState
-import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.KeyWord
 import com.algolia.search.serialize.KeyWords
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 /**
  * Represents an entry in a given dictionary.
@@ -36,11 +34,6 @@ public sealed class DictionaryEntry {
      */
     public abstract val language: Language
 
-    /**
-     * Dictionary entry type.
-     */
-    public abstract val type: Type
-
     @Serializable
     public data class Stopword(
         @SerialName(KeyObjectID) override val objectID: ObjectID,
@@ -55,11 +48,7 @@ public sealed class DictionaryEntry {
          * The state of the entry.
          */
         @SerialName(KeyState) public val state: State? = State.Enabled,
-    ) : DictionaryEntry() {
-
-        @SerialName(KeyType)
-        override val type: Type = Custom
-    }
+    ) : DictionaryEntry()
 
     @Serializable
     public data class Plural(
@@ -71,11 +60,7 @@ public sealed class DictionaryEntry {
          * in the standard dictionary provided by Algolia.
          */
         @SerialName(KeyWords) public val words: List<String>,
-    ) : DictionaryEntry() {
-
-        @SerialName(KeyType)
-        override val type: Type = Custom
-    }
+    ) : DictionaryEntry()
 
     @Serializable
     public data class Compound(
@@ -93,12 +78,7 @@ public sealed class DictionaryEntry {
          * Otherwise, it is the decomposition of word.
          */
         @SerialName(KeyDecomposition) public val decomposition: List<String>,
-    ) : DictionaryEntry() {
-
-        @Transient
-        @SerialName(KeyType)
-        override val type: Type = Custom
-    }
+    ) : DictionaryEntry()
 
     /**
      * The state of the entry:

@@ -87,7 +87,7 @@ public interface EndpointDictionary {
     ): ResponseSearchDictionaries<T>
 
     /**
-     * Update some index settings.
+     * Update dictionary settings.
      * Only specified settings are overridden; unspecified settings are left unchanged.
      * Specifying `null` for a setting resets it to its default value.
      *
@@ -98,6 +98,13 @@ public interface EndpointDictionary {
         dictionarySettings: DictionarySettings,
         requestOptions: RequestOptions? = null,
     ): ResponseDictionary
+
+    /**
+     * Retrieve dictionaries settings.
+     *
+     * @param requestOptions Configure request locally with [RequestOptions].
+     */
+    public suspend fun getDictionarySettings(requestOptions: RequestOptions? = null): DictionarySettings
 
     /**
      * Wait for dictionary task to finish.
@@ -135,9 +142,4 @@ public interface EndpointDictionary {
         taskID: DictionaryTaskID,
         requestOptions: RequestOptions? = null,
     ): TaskInfo
-
-    /**
-     * Retrieve dictionaries settings.
-     */
-    public suspend fun getDictionarySettings(requestOptions: RequestOptions? = null): DictionarySettings
 }

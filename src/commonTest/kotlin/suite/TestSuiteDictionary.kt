@@ -17,10 +17,10 @@ import com.algolia.search.model.dictionary.DictionarySettings
 import com.algolia.search.model.dictionary.DisableStandardEntries
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Query
-import runBlocking
 import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import runBlocking
 
 internal class TestSuiteDictionary {
 
@@ -43,35 +43,20 @@ internal class TestSuiteDictionary {
             assertEquals(entry, response.hits[0])
         }
 
+        // Replace
+        clientAdmin2.run {
+            val newWord = "uppercase"
+            replaceStopwordEntries(listOf(entry.copy(word = newWord))).wait()
+            val responseSearchDictionaries = searchStopwordEntries(query = Query(entry.objectID.raw))
+            assertEquals(1, responseSearchDictionaries.nbHits)
+            assertEquals(newWord, responseSearchDictionaries.hits[0].word)
+        }
+
         // Delete entry
         clientAdmin2.run {
             deleteStopwordEntries(listOf(entry.objectID)).wait()
             val response = searchStopwordEntries(query = Query(entry.objectID.raw))
             assertEquals(0, response.nbHits)
-        }
-
-        // Replace
-        clientAdmin2.run {
-            val oldDictionaryState = searchStopwordEntries(Query(""))
-            val oldDictionaryEntries = oldDictionaryState.hits.filter { it.type == DictionaryEntry.Type.Custom }
-
-            saveStopwordEntries(listOf(entry)).wait()
-            assertEquals(1, searchStopwordEntries(query = Query(entry.objectID.raw)).nbHits)
-
-            replaceStopwordEntries(oldDictionaryEntries).wait()
-            replaceStopwordEntries(listOf(entry.copy(word = "uppercase")))
-            assertEquals(0, searchStopwordEntries(query = Query(entry.objectID.raw)).nbHits)
-        }
-
-        // Settings
-        clientAdmin2.run {
-            val stopwordsSettings = DictionarySettings(
-                disableStandardEntries = DisableStandardEntries(
-                    stopwords = mapOf(Language.English to true)
-                )
-            )
-            setDictionarySettings(stopwordsSettings).wait()
-            assertEquals(stopwordsSettings, getDictionarySettings())
         }
     }
 
@@ -122,6 +107,19 @@ internal class TestSuiteDictionary {
         clientAdmin2.run {
             deleteCompoundEntries(listOf(entry.objectID)).wait()
             assertEquals(0, searchCompoundEntries(query = Query(entry.objectID.raw)).nbHits)
+        }
+    }
+
+    @Test
+    fun testSettings(): Unit = runBlocking {
+        clientAdmin2.run {
+            val stopwordsSettings = DictionarySettings(
+                disableStandardEntries = DisableStandardEntries(
+                    stopwords = mapOf(Language.English to true)
+                )
+            )
+            setDictionarySettings(stopwordsSettings).wait()
+            assertEquals(stopwordsSettings, getDictionarySettings())
         }
     }
 }
