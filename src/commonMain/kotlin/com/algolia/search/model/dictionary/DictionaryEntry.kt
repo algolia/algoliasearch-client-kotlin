@@ -3,16 +3,12 @@ package com.algolia.search.model.dictionary
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.dictionary.DictionaryEntry.State.Disabled
 import com.algolia.search.model.dictionary.DictionaryEntry.State.Enabled
-import com.algolia.search.model.dictionary.DictionaryEntry.Type.Custom
-import com.algolia.search.model.dictionary.DictionaryEntry.Type.Standard
 import com.algolia.search.model.search.Language
-import com.algolia.search.serialize.KeyCustom
 import com.algolia.search.serialize.KeyDecomposition
 import com.algolia.search.serialize.KeyDisabled
 import com.algolia.search.serialize.KeyEnabled
 import com.algolia.search.serialize.KeyLanguage
 import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.serialize.KeyStandard
 import com.algolia.search.serialize.KeyState
 import com.algolia.search.serialize.KeyWord
 import com.algolia.search.serialize.KeyWords
@@ -47,7 +43,7 @@ public sealed class DictionaryEntry {
         /**
          * The state of the entry.
          */
-        @SerialName(KeyState) public val state: State? = State.Enabled,
+        @SerialName(KeyState) public val state: State? = Enabled,
     ) : DictionaryEntry()
 
     @Serializable
@@ -92,19 +88,5 @@ public sealed class DictionaryEntry {
 
         @SerialName(KeyDisabled)
         Disabled
-    }
-
-    /**
-     * The type of the entry:
-     * - [Standard]: default entry.
-     * - [Custom]: custom user entry.
-     */
-    @Serializable
-    public enum class Type {
-        @SerialName(KeyStandard)
-        Standard,
-
-        @SerialName(KeyCustom)
-        Custom
     }
 }
