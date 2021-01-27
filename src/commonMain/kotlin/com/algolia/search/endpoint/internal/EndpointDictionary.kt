@@ -8,6 +8,9 @@ import com.algolia.search.model.dictionary.Dictionary.Compounds
 import com.algolia.search.model.dictionary.Dictionary.Plurals
 import com.algolia.search.model.dictionary.Dictionary.Stopwords
 import com.algolia.search.model.dictionary.DictionaryEntry
+import com.algolia.search.model.dictionary.DictionaryEntry.Compound
+import com.algolia.search.model.dictionary.DictionaryEntry.Plural
+import com.algolia.search.model.dictionary.DictionaryEntry.Stopword
 import com.algolia.search.model.dictionary.DictionarySettings
 import com.algolia.search.model.internal.request.RequestDictionary
 import com.algolia.search.model.response.ResponseDictionary
@@ -16,8 +19,8 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.DictionaryTaskID
 import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
+import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.RouteDictionaries
-import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.transport.RequestOptions
@@ -27,33 +30,35 @@ import io.ktor.http.HttpMethod
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeout
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonArray
 
 internal class EndpointDictionaryImpl(
     private val transport: Transport,
 ) : EndpointDictionary {
 
-    override suspend fun <T : Dictionary> saveDictionaryEntries(
-        dictionary: T,
-        dictionaryEntries: List<DictionaryEntry<T>>,
+    override suspend fun <T : DictionaryEntry> saveDictionaryEntries(
+        dictionary: Dictionary<T>,
+        dictionaryEntries: List<T>,
         clearExistingDictionaryEntries: Boolean,
         requestOptions: RequestOptions?,
     ): ResponseDictionary {
         val path = dictionary.toPath(ENDPOINT_BATCH)
-        val request = RequestDictionary.Add(
-            clearExistingDictionaryEntries = clearExistingDictionaryEntries,
-            entries = dictionaryEntries
-        )
-        val serializer = RequestDictionary.Add.serializer(dictionary.serializer())
-            .cast<KSerializer<RequestDictionary.Add<T>>>()
-        val body = JsonNoDefaults.encodeToString(serializer, request)
+        val serializer = ListSerializer(dictionary.entrySerializer()).cast<KSerializer<List<T>>>()
+        val entries = JsonNoDefaults.encodeToJsonElement(serializer, dictionaryEntries).jsonArray
+        val request = RequestDictionary.Add(entries, clearExistingDictionaryEntries)
+        val body = JsonNoDefaults.encodeToString(request)
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
 
-    override suspend fun <T : Dictionary> replaceDictionaryEntries(
-        dictionary: T,
-        dictionaryEntries: List<DictionaryEntry<T>>,
+    override suspend fun <T : DictionaryEntry> replaceDictionaryEntries(
+        dictionary: Dictionary<T>,
+        dictionaryEntries: List<T>,
         requestOptions: RequestOptions?,
     ): ResponseDictionary {
         return saveDictionaryEntries(
@@ -64,29 +69,38 @@ internal class EndpointDictionaryImpl(
         )
     }
 
-    override suspend fun deleteDictionaryEntries(
-        dictionary: Dictionary,
+    override suspend fun <T : DictionaryEntry> deleteDictionaryEntries(
+        dictionary: Dictionary<T>,
         objectIDs: List<ObjectID>,
         requestOptions: RequestOptions?,
     ): ResponseDictionary {
         val path = dictionary.toPath(ENDPOINT_BATCH)
+        val entries = buildJsonArray {
+            objectIDs.forEach {
+                add(
+                    buildJsonObject {
+                        put(KeyObjectID, JsonPrimitive(it.raw))
+                    }
+                )
+            }
+        }
         val request = RequestDictionary.Delete(
             clearExistingDictionaryEntries = false,
-            entries = objectIDs
+            entries = entries
         )
         val body = JsonNoDefaults.encodeToString(request)
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
 
-    override suspend fun clearDictionaryEntries(
-        dictionary: Dictionary,
+    override suspend fun <T : DictionaryEntry> clearDictionaryEntries(
+        dictionary: Dictionary<T>,
         requestOptions: RequestOptions?,
     ): ResponseDictionary {
         return replaceDictionaryEntries(dictionary, emptyList(), requestOptions)
     }
 
-    override suspend fun <T : Dictionary> searchDictionaryEntries(
-        dictionary: T,
+    override suspend fun <T : DictionaryEntry> searchDictionaryEntries(
+        dictionary: Dictionary<T>,
         query: Query,
         requestOptions: RequestOptions?,
     ): ResponseSearchDictionaries<T> {
@@ -94,7 +108,7 @@ internal class EndpointDictionaryImpl(
         val body = JsonNoDefaults.encodeToString(query)
         val json = transport.request<JsonObject>(HttpMethod.Post, CallType.Read, path, requestOptions, body)
         return JsonNonStrict.decodeFromJsonElement(
-            deserializer = ResponseSearchDictionaries.serializer(dictionary.serializer()),
+            deserializer = ResponseSearchDictionaries.serializer(dictionary.entrySerializer()),
             element = json
         ).cast()
     }
@@ -139,10 +153,10 @@ internal class EndpointDictionaryImpl(
     /**
      * Get Dictionary instance's serializer.
      */
-    private fun Dictionary.serializer() = when (this) {
-        Plurals -> Plurals.serializer()
-        Stopwords -> Stopwords.serializer()
-        Compounds -> Compounds.serializer()
+    private fun Dictionary<*>.entrySerializer() = when (this) {
+        Plurals -> Plural.serializer()
+        Stopwords -> Stopword.serializer()
+        Compounds -> Compound.serializer()
     }
 
     companion object {

@@ -1,17 +1,15 @@
 package com.algolia.search.model.internal.request
 
-import com.algolia.search.model.ObjectID
-import com.algolia.search.model.dictionary.Dictionary
-import com.algolia.search.model.dictionary.DictionaryEntry
-import com.algolia.search.serialize.KeyAction
+import com.algolia.search.model.internal.request.RequestDictionary.Request.Action.AddEntry
+import com.algolia.search.model.internal.request.RequestDictionary.Request.Action.DeleteEntry
 import com.algolia.search.serialize.KeyAddEntry
-import com.algolia.search.serialize.KeyBody
 import com.algolia.search.serialize.KeyClearExistingDictionaryEntries
 import com.algolia.search.serialize.KeyDeleteEntry
-import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.KeyRequests
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonElement
 
 /**
  * Batch request structure for dictionary entries.
@@ -31,59 +29,44 @@ internal sealed class RequestDictionary {
     abstract val requests: List<Request>
 
     @Serializable
-    internal data class Add<T : Dictionary>(
+    internal data class Add(
         @SerialName(KeyClearExistingDictionaryEntries) override val clearExistingDictionaryEntries: Boolean,
-        @SerialName(KeyRequests) override val requests: List<Request.Add<T>>,
+        @SerialName(KeyRequests) override val requests: List<Request>,
     ) : RequestDictionary() {
 
         constructor(
-            entries: List<DictionaryEntry<T>>,
+            entries: JsonArray,
             clearExistingDictionaryEntries: Boolean,
-        ) : this(clearExistingDictionaryEntries, entries.map { Request.Add(it) })
+        ) : this(clearExistingDictionaryEntries, entries.map { Request(it, AddEntry) })
     }
 
     @Serializable
     internal data class Delete(
         @SerialName(KeyClearExistingDictionaryEntries) override val clearExistingDictionaryEntries: Boolean,
-        @SerialName(KeyRequests) override val requests: List<Request.Delete>,
+        @SerialName(KeyRequests) override val requests: List<Request>,
     ) : RequestDictionary() {
 
         constructor(
-            entries: List<ObjectID>,
+            entries: JsonArray,
             clearExistingDictionaryEntries: Boolean,
-        ) : this(clearExistingDictionaryEntries, entries.map { Request.Delete(DeleteObject(it)) })
+        ) : this(clearExistingDictionaryEntries, entries.map { Request(it, DeleteEntry) })
     }
-}
-
-/**
- * Request actions to perform
- */
-@Serializable
-internal sealed class Request(
-    @SerialName(KeyAction) val action: Action,
-) {
 
     @Serializable
-    data class Add<T : Dictionary>(
-        @SerialName(KeyBody) val body: DictionaryEntry<T>,
-    ) : Request(Action.AddEntry)
+    internal data class Request(
+        val body: JsonElement,
+        val action: Action,
+    ) {
 
-    @Serializable
-    data class Delete(
-        @SerialName(KeyBody) val body: DeleteObject,
-    ) : Request(Action.DeleteEntry)
-}
+        @Serializable
+        internal enum class Action {
+            /** Add the entry in the dictionary */
+            @SerialName(KeyAddEntry)
+            AddEntry,
 
-@Serializable
-internal data class DeleteObject(@SerialName(KeyObjectID) val objectID: ObjectID)
-
-@Serializable
-internal enum class Action {
-    /** Add the entry in the dictionary */
-    @SerialName(KeyAddEntry)
-    AddEntry,
-
-    /** Delete the entry from the dictionary */
-    @SerialName(KeyDeleteEntry)
-    DeleteEntry
+            /** Delete the entry from the dictionary */
+            @SerialName(KeyDeleteEntry)
+            DeleteEntry
+        }
+    }
 }

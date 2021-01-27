@@ -1,26 +1,26 @@
 package suite
 
 import clientAdmin2
-import com.algolia.search.endpoint.extension.deleteCompoundsEntries
-import com.algolia.search.endpoint.extension.deletePluralsEntries
-import com.algolia.search.endpoint.extension.deleteStopwordsEntries
-import com.algolia.search.endpoint.extension.replaceStopwordsEntries
-import com.algolia.search.endpoint.extension.saveCompoundsEntries
-import com.algolia.search.endpoint.extension.savePluralsEntries
-import com.algolia.search.endpoint.extension.saveStopwordsEntries
+import com.algolia.search.endpoint.extension.deleteCompoundEntries
+import com.algolia.search.endpoint.extension.deletePluralEntries
+import com.algolia.search.endpoint.extension.deleteStopwordEntries
+import com.algolia.search.endpoint.extension.replaceStopwordEntries
+import com.algolia.search.endpoint.extension.saveCompoundEntries
+import com.algolia.search.endpoint.extension.savePluralEntries
+import com.algolia.search.endpoint.extension.saveStopwordEntries
 import com.algolia.search.endpoint.extension.searchCompoundEntries
-import com.algolia.search.endpoint.extension.searchPluralsEntries
-import com.algolia.search.endpoint.extension.searchStopwordsEntries
+import com.algolia.search.endpoint.extension.searchPluralEntries
+import com.algolia.search.endpoint.extension.searchStopwordEntries
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.dictionary.DictionaryEntry
 import com.algolia.search.model.dictionary.DictionarySettings
 import com.algolia.search.model.dictionary.DisableStandardEntries
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Query
+import runBlocking
 import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import runBlocking
 
 internal class TestSuiteDictionary {
 
@@ -33,34 +33,34 @@ internal class TestSuiteDictionary {
         )
 
         // Search for non existent.
-        assertEquals(0, clientAdmin2.searchStopwordsEntries(query = Query(entry.objectID.raw)).nbHits)
+        assertEquals(0, clientAdmin2.searchStopwordEntries(query = Query(entry.objectID.raw)).nbHits)
 
         // Save entry
         clientAdmin2.run {
-            saveStopwordsEntries(listOf(entry)).wait()
-            val response = searchStopwordsEntries(query = Query(entry.objectID.raw))
+            saveStopwordEntries(listOf(entry)).wait()
+            val response = searchStopwordEntries(query = Query(entry.objectID.raw))
             assertEquals(1, response.nbHits)
             assertEquals(entry, response.hits[0])
         }
 
         // Delete entry
         clientAdmin2.run {
-            deleteStopwordsEntries(listOf(entry.objectID)).wait()
-            val response = searchStopwordsEntries(query = Query(entry.objectID.raw))
+            deleteStopwordEntries(listOf(entry.objectID)).wait()
+            val response = searchStopwordEntries(query = Query(entry.objectID.raw))
             assertEquals(0, response.nbHits)
         }
 
         // Replace
         clientAdmin2.run {
-            val oldDictionaryState = searchStopwordsEntries(Query(""))
+            val oldDictionaryState = searchStopwordEntries(Query(""))
             val oldDictionaryEntries = oldDictionaryState.hits.filter { it.type == DictionaryEntry.Type.Custom }
 
-            saveStopwordsEntries(listOf(entry)).wait()
-            assertEquals(1, searchStopwordsEntries(query = Query(entry.objectID.raw)).nbHits)
+            saveStopwordEntries(listOf(entry)).wait()
+            assertEquals(1, searchStopwordEntries(query = Query(entry.objectID.raw)).nbHits)
 
-            replaceStopwordsEntries(oldDictionaryEntries).wait()
-            replaceStopwordsEntries(listOf(entry.copy(word = "uppercase")))
-            assertEquals(0, searchStopwordsEntries(query = Query(entry.objectID.raw)).nbHits)
+            replaceStopwordEntries(oldDictionaryEntries).wait()
+            replaceStopwordEntries(listOf(entry.copy(word = "uppercase")))
+            assertEquals(0, searchStopwordEntries(query = Query(entry.objectID.raw)).nbHits)
         }
 
         // Settings
@@ -84,20 +84,20 @@ internal class TestSuiteDictionary {
         )
 
         // Search for non existent.
-        assertEquals(0, clientAdmin2.searchPluralsEntries(query = Query(entry.objectID.raw)).nbHits)
+        assertEquals(0, clientAdmin2.searchPluralEntries(query = Query(entry.objectID.raw)).nbHits)
 
         // Save
         clientAdmin2.run {
-            savePluralsEntries(listOf(entry)).wait()
-            val response = searchPluralsEntries(query = Query(entry.objectID.raw))
+            savePluralEntries(listOf(entry)).wait()
+            val response = searchPluralEntries(query = Query(entry.objectID.raw))
             assertEquals(1, response.nbPages)
             assertEquals(entry, response.hits[0])
         }
 
         // Delete
         clientAdmin2.run {
-            deletePluralsEntries(objectIDs = listOf(entry.objectID)).wait()
-            assertEquals(0, searchPluralsEntries(query = Query(entry.objectID.raw)).nbHits)
+            deletePluralEntries(objectIDs = listOf(entry.objectID)).wait()
+            assertEquals(0, searchPluralEntries(query = Query(entry.objectID.raw)).nbHits)
         }
     }
 
@@ -112,7 +112,7 @@ internal class TestSuiteDictionary {
 
         // Save
         clientAdmin2.run {
-            saveCompoundsEntries(listOf(entry)).wait()
+            saveCompoundEntries(listOf(entry)).wait()
             val response = searchCompoundEntries(query = Query(entry.objectID.raw))
             assertEquals(1, response.nbHits)
             assertEquals(entry, response.hits[0])
@@ -120,7 +120,7 @@ internal class TestSuiteDictionary {
 
         // Delete
         clientAdmin2.run {
-            deleteCompoundsEntries(listOf(entry.objectID)).wait()
+            deleteCompoundEntries(listOf(entry.objectID)).wait()
             assertEquals(0, searchCompoundEntries(query = Query(entry.objectID.raw)).nbHits)
         }
     }

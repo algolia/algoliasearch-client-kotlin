@@ -8,7 +8,6 @@ import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Region
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
-import io.ktor.client.features.logging.LogLevel
 import kotlinx.coroutines.CoroutineScope
 import java.io.File
 import java.text.SimpleDateFormat

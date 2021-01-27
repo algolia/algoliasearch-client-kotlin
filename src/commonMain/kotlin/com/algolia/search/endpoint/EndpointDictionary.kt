@@ -29,9 +29,9 @@ public interface EndpointDictionary {
      * from the dictionary.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    public suspend fun <T : Dictionary> saveDictionaryEntries(
-        dictionary: T,
-        dictionaryEntries: List<DictionaryEntry<T>>,
+    public suspend fun <T : DictionaryEntry> saveDictionaryEntries(
+        dictionary: Dictionary<T>,
+        dictionaryEntries: List<T>,
         clearExistingDictionaryEntries: Boolean = false,
         requestOptions: RequestOptions? = null,
     ): ResponseDictionary
@@ -43,9 +43,9 @@ public interface EndpointDictionary {
      * @param dictionaryEntries dictionary entries to be replaced.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    public suspend fun <T : Dictionary> replaceDictionaryEntries(
-        dictionary: T,
-        dictionaryEntries: List<DictionaryEntry<T>>,
+    public suspend fun <T : DictionaryEntry> replaceDictionaryEntries(
+        dictionary: Dictionary<T>,
+        dictionaryEntries: List<T>,
         requestOptions: RequestOptions? = null,
     ): ResponseDictionary
 
@@ -56,8 +56,8 @@ public interface EndpointDictionary {
      * @param objectIDs list of entries' IDs to delete.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    public suspend fun deleteDictionaryEntries(
-        dictionary: Dictionary,
+    public suspend fun <T : DictionaryEntry> deleteDictionaryEntries(
+        dictionary: Dictionary<T>,
         objectIDs: List<ObjectID>,
         requestOptions: RequestOptions? = null,
     ): ResponseDictionary
@@ -68,8 +68,8 @@ public interface EndpointDictionary {
      * @param dictionary target dictionary.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    public suspend fun clearDictionaryEntries(
-        dictionary: Dictionary,
+    public suspend fun <T : DictionaryEntry> clearDictionaryEntries(
+        dictionary: Dictionary<T>,
         requestOptions: RequestOptions? = null,
     ): ResponseDictionary
 
@@ -80,8 +80,8 @@ public interface EndpointDictionary {
      * @param query the [Query] used to search.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
-    public suspend fun <T : Dictionary> searchDictionaryEntries(
-        dictionary: T,
+    public suspend fun <T : DictionaryEntry> searchDictionaryEntries(
+        dictionary: Dictionary<T>,
         query: Query,
         requestOptions: RequestOptions? = null,
     ): ResponseSearchDictionaries<T>

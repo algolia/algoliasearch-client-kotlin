@@ -1,15 +1,11 @@
 package com.algolia.search.model.dictionary
 
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.dictionary.Dictionary.Compounds
-import com.algolia.search.model.dictionary.Dictionary.Plurals
-import com.algolia.search.model.dictionary.Dictionary.Stopwords
 import com.algolia.search.model.dictionary.DictionaryEntry.State.Disabled
 import com.algolia.search.model.dictionary.DictionaryEntry.State.Enabled
 import com.algolia.search.model.dictionary.DictionaryEntry.Type.Custom
 import com.algolia.search.model.dictionary.DictionaryEntry.Type.Standard
 import com.algolia.search.model.search.Language
-import com.algolia.search.serialize.KSerializerDictionaryEntry
 import com.algolia.search.serialize.KeyCustom
 import com.algolia.search.serialize.KeyDecomposition
 import com.algolia.search.serialize.KeyDisabled
@@ -28,8 +24,7 @@ import kotlinx.serialization.Transient
 /**
  * Represents an entry in a given dictionary.
  */
-@Serializable(KSerializerDictionaryEntry::class)
-public sealed class DictionaryEntry<T : Dictionary> {
+public sealed class DictionaryEntry {
 
     /**
      * Unique identifier of the entry to add or override.
@@ -60,7 +55,7 @@ public sealed class DictionaryEntry<T : Dictionary> {
          * The state of the entry.
          */
         @SerialName(KeyState) public val state: State? = State.Enabled,
-    ) : DictionaryEntry<Stopwords>() {
+    ) : DictionaryEntry() {
 
         @SerialName(KeyType)
         override val type: Type = Custom
@@ -76,7 +71,7 @@ public sealed class DictionaryEntry<T : Dictionary> {
          * in the standard dictionary provided by Algolia.
          */
         @SerialName(KeyWords) public val words: List<String>,
-    ) : DictionaryEntry<Plurals>() {
+    ) : DictionaryEntry() {
 
         @SerialName(KeyType)
         override val type: Type = Custom
@@ -98,7 +93,7 @@ public sealed class DictionaryEntry<T : Dictionary> {
          * Otherwise, it is the decomposition of word.
          */
         @SerialName(KeyDecomposition) public val decomposition: List<String>,
-    ) : DictionaryEntry<Compounds>() {
+    ) : DictionaryEntry() {
 
         @Transient
         @SerialName(KeyType)

@@ -4,7 +4,6 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.AlternativesAsExact
 import com.algolia.search.model.search.ExactOnSingleWordQuery
 import com.algolia.search.model.search.IgnorePlurals
-import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.QueryType
 import com.algolia.search.model.search.RemoveStopWords
 import com.algolia.search.model.search.RemoveWordIfNoResults

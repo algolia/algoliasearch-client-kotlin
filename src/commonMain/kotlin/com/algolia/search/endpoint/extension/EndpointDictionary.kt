@@ -18,8 +18,8 @@ import com.algolia.search.transport.RequestOptions
  * from the dictionary.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.saveStopwordsEntries(
-    dictionaryEntries: List<DictionaryEntry<Dictionary.Stopwords>>,
+public suspend fun EndpointDictionary.saveStopwordEntries(
+    dictionaryEntries: List<DictionaryEntry.Stopword>,
     clearExistingDictionaryEntries: Boolean = false,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary = saveDictionaryEntries(
@@ -37,8 +37,8 @@ public suspend fun EndpointDictionary.saveStopwordsEntries(
  * from the dictionary.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.savePluralsEntries(
-    dictionaryEntries: List<DictionaryEntry<Dictionary.Plurals>>,
+public suspend fun EndpointDictionary.savePluralEntries(
+    dictionaryEntries: List<DictionaryEntry.Plural>,
     clearExistingDictionaryEntries: Boolean = false,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary = saveDictionaryEntries(
@@ -56,8 +56,8 @@ public suspend fun EndpointDictionary.savePluralsEntries(
  * from the dictionary.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.saveCompoundsEntries(
-    dictionaryEntries: List<DictionaryEntry<Dictionary.Compounds>>,
+public suspend fun EndpointDictionary.saveCompoundEntries(
+    dictionaryEntries: List<DictionaryEntry.Compound>,
     clearExistingDictionaryEntries: Boolean = false,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary = saveDictionaryEntries(
@@ -75,7 +75,7 @@ public suspend fun EndpointDictionary.saveCompoundsEntries(
  * @param objectIDs list of entries' IDs to delete.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.deleteStopwordsEntries(
+public suspend fun EndpointDictionary.deleteStopwordEntries(
     objectIDs: List<ObjectID>,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary = deleteDictionaryEntries(
@@ -90,7 +90,7 @@ public suspend fun EndpointDictionary.deleteStopwordsEntries(
  * @param objectIDs list of entries' IDs to delete.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.deletePluralsEntries(
+public suspend fun EndpointDictionary.deletePluralEntries(
     objectIDs: List<ObjectID>,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary = deleteDictionaryEntries(
@@ -105,7 +105,7 @@ public suspend fun EndpointDictionary.deletePluralsEntries(
  * @param objectIDs list of entries' IDs to delete.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.deleteCompoundsEntries(
+public suspend fun EndpointDictionary.deleteCompoundEntries(
     objectIDs: List<ObjectID>,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary = deleteDictionaryEntries(
@@ -122,10 +122,10 @@ public suspend fun EndpointDictionary.deleteCompoundsEntries(
  * @param query the [Query] used to search.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.searchStopwordsEntries(
+public suspend fun EndpointDictionary.searchStopwordEntries(
     query: Query,
     requestOptions: RequestOptions? = null,
-): ResponseSearchDictionaries<Dictionary.Stopwords> {
+): ResponseSearchDictionaries<DictionaryEntry.Stopword> {
     return searchDictionaryEntries(Dictionary.Stopwords, query, requestOptions)
 }
 
@@ -135,10 +135,10 @@ public suspend fun EndpointDictionary.searchStopwordsEntries(
  * @param query the [Query] used to search.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.searchPluralsEntries(
+public suspend fun EndpointDictionary.searchPluralEntries(
     query: Query,
     requestOptions: RequestOptions? = null,
-): ResponseSearchDictionaries<Dictionary.Plurals> {
+): ResponseSearchDictionaries<DictionaryEntry.Plural> {
     return searchDictionaryEntries(Dictionary.Plurals, query, requestOptions)
 }
 
@@ -151,7 +151,7 @@ public suspend fun EndpointDictionary.searchPluralsEntries(
 public suspend fun EndpointDictionary.searchCompoundEntries(
     query: Query,
     requestOptions: RequestOptions? = null,
-): ResponseSearchDictionaries<Dictionary.Compounds> {
+): ResponseSearchDictionaries<DictionaryEntry.Compound> {
     return searchDictionaryEntries(Dictionary.Compounds, query, requestOptions)
 }
 //endregion
@@ -163,8 +163,8 @@ public suspend fun EndpointDictionary.searchCompoundEntries(
  * @param dictionaryEntries dictionary entries to be replaced.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.replaceStopwordsEntries(
-    dictionaryEntries: List<DictionaryEntry<Dictionary.Stopwords>>,
+public suspend fun EndpointDictionary.replaceStopwordEntries(
+    dictionaryEntries: List<DictionaryEntry.Stopword>,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary {
     return replaceDictionaryEntries(Dictionary.Stopwords, dictionaryEntries, requestOptions)
@@ -176,8 +176,8 @@ public suspend fun EndpointDictionary.replaceStopwordsEntries(
  * @param dictionaryEntries dictionary entries to be replaced.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.replacePluralsEntries(
-    dictionaryEntries: List<DictionaryEntry<Dictionary.Plurals>>,
+public suspend fun EndpointDictionary.replacePluralEntries(
+    dictionaryEntries: List<DictionaryEntry.Plural>,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary {
     return replaceDictionaryEntries(Dictionary.Plurals, dictionaryEntries, requestOptions)
@@ -189,8 +189,8 @@ public suspend fun EndpointDictionary.replacePluralsEntries(
  * @param dictionaryEntries dictionary entries to be replaced.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
-public suspend fun EndpointDictionary.replaceCompoundsEntries(
-    dictionaryEntries: List<DictionaryEntry<Dictionary.Compounds>>,
+public suspend fun EndpointDictionary.replaceCompoundEntries(
+    dictionaryEntries: List<DictionaryEntry.Compound>,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary {
     return replaceDictionaryEntries(Dictionary.Compounds, dictionaryEntries, requestOptions)
