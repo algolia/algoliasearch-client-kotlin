@@ -76,10 +76,7 @@ To build and run tests, you can use the following commands:
 # build the project
 ./gradlew assemble
 
-# run all tests
-./gradlew allTests
-
-# run only jvm tests
+# run tests
 ./gradlew jvmTest
 ```
 
