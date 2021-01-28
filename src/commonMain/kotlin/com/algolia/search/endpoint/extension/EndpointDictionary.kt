@@ -14,18 +14,15 @@ import com.algolia.search.transport.RequestOptions
  * Save Stopwords dictionary entries.
  *
  * @param dictionaryEntries dictionary entries to be saved.
- * @param clearExistingDictionaryEntries when `true`, start the batch by removing all the custom entries
  * from the dictionary.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.saveStopwordEntries(
     dictionaryEntries: List<DictionaryEntry.Stopword>,
-    clearExistingDictionaryEntries: Boolean = false,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary = saveDictionaryEntries(
     dictionary = Dictionary.Stopwords,
     dictionaryEntries = dictionaryEntries,
-    clearExistingDictionaryEntries = clearExistingDictionaryEntries,
     requestOptions = requestOptions
 )
 
@@ -33,18 +30,14 @@ public suspend fun EndpointDictionary.saveStopwordEntries(
  * Save Plurals dictionary entries.
  *
  * @param dictionaryEntries dictionary entries to be saved.
- * @param clearExistingDictionaryEntries when `true`, start the batch by removing all the custom entries
- * from the dictionary.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.savePluralEntries(
     dictionaryEntries: List<DictionaryEntry.Plural>,
-    clearExistingDictionaryEntries: Boolean = false,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary = saveDictionaryEntries(
     dictionary = Dictionary.Plurals,
     dictionaryEntries = dictionaryEntries,
-    clearExistingDictionaryEntries = clearExistingDictionaryEntries,
     requestOptions = requestOptions
 )
 
@@ -52,18 +45,14 @@ public suspend fun EndpointDictionary.savePluralEntries(
  * Save Compounds dictionary entries.
  *
  * @param dictionaryEntries dictionary entries to be saved.
- * @param clearExistingDictionaryEntries when `true`, start the batch by removing all the custom entries
- * from the dictionary.
  * @param requestOptions Configure request locally with [RequestOptions].
  */
 public suspend fun EndpointDictionary.saveCompoundEntries(
     dictionaryEntries: List<DictionaryEntry.Compound>,
-    clearExistingDictionaryEntries: Boolean = false,
     requestOptions: RequestOptions? = null,
 ): ResponseDictionary = saveDictionaryEntries(
     dictionary = Dictionary.Compounds,
     dictionaryEntries = dictionaryEntries,
-    clearExistingDictionaryEntries = clearExistingDictionaryEntries,
     requestOptions = requestOptions
 )
 //endregion

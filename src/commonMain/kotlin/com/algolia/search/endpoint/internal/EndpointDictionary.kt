@@ -45,6 +45,29 @@ internal class EndpointDictionaryImpl(
     override suspend fun <T : DictionaryEntry> saveDictionaryEntries(
         dictionary: Dictionary<T>,
         dictionaryEntries: List<T>,
+        requestOptions: RequestOptions?,
+    ): ResponseDictionary {
+        return batch(dictionary, dictionaryEntries, false, requestOptions)
+    }
+
+    override suspend fun <T : DictionaryEntry> replaceDictionaryEntries(
+        dictionary: Dictionary<T>,
+        dictionaryEntries: List<T>,
+        requestOptions: RequestOptions?,
+    ): ResponseDictionary {
+        return batch(dictionary, dictionaryEntries, true, requestOptions)
+    }
+
+    /**
+     * Send a batch of dictionary entries.
+     *
+     * @param dictionary target dictionary.
+     * @param dictionaryEntries list of a dictionary entries
+     * @param requestOptions Configure request locally with [RequestOptions].
+     */
+    private suspend fun <T : DictionaryEntry> batch(
+        dictionary: Dictionary<T>,
+        dictionaryEntries: List<T>,
         clearExistingDictionaryEntries: Boolean,
         requestOptions: RequestOptions?,
     ): ResponseDictionary {
@@ -56,19 +79,6 @@ internal class EndpointDictionaryImpl(
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
 
-    override suspend fun <T : DictionaryEntry> replaceDictionaryEntries(
-        dictionary: Dictionary<T>,
-        dictionaryEntries: List<T>,
-        requestOptions: RequestOptions?,
-    ): ResponseDictionary {
-        return saveDictionaryEntries(
-            dictionary = dictionary,
-            dictionaryEntries = dictionaryEntries,
-            clearExistingDictionaryEntries = true,
-            requestOptions = requestOptions
-        )
-    }
-
     override suspend fun <T : DictionaryEntry> deleteDictionaryEntries(
         dictionary: Dictionary<T>,
         objectIDs: List<ObjectID>,
@@ -78,9 +88,7 @@ internal class EndpointDictionaryImpl(
         val entries = buildJsonArray {
             objectIDs.forEach {
                 add(
-                    buildJsonObject {
-                        put(KeyObjectID, JsonPrimitive(it.raw))
-                    }
+                    buildJsonObject { put(KeyObjectID, JsonPrimitive(it.raw)) } // { "objectID": "myID1" }
                 )
             }
         }

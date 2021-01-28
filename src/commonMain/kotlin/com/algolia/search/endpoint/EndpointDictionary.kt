@@ -25,14 +25,12 @@ public interface EndpointDictionary {
      *
      * @param dictionary target dictionary.
      * @param dictionaryEntries dictionary entries to be saved.
-     * @param clearExistingDictionaryEntries when `true`, start the batch by removing all the custom entries
      * from the dictionary.
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     public suspend fun <T : DictionaryEntry> saveDictionaryEntries(
         dictionary: Dictionary<T>,
         dictionaryEntries: List<T>,
-        clearExistingDictionaryEntries: Boolean = false,
         requestOptions: RequestOptions? = null,
     ): ResponseDictionary
 
