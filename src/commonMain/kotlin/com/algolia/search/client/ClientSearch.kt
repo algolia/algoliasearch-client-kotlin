@@ -22,10 +22,13 @@ import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.internal.Time
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
+import com.algolia.search.model.response.ResponseDictionary
 import com.algolia.search.model.response.ResponseLogs
 import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.DeletionAPIKey
+import com.algolia.search.model.task.AppTaskID
 import com.algolia.search.model.task.TaskIndex
+import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
@@ -77,6 +80,42 @@ public interface ClientSearch :
      * the allotted time in milliseconds.
      */
     public suspend fun DeletionAPIKey.wait(timeout: Long? = null): Boolean
+
+    /**
+     * Wait on a [ResponseDictionary] operation.
+     *
+     * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
+     * the allotted time in milliseconds.
+     */
+    public suspend fun ResponseDictionary.wait(
+        timeout: Long? = null,
+        requestOptions: RequestOptions? = null,
+    ): TaskStatus
+
+    /**
+     * Wait for a task at application level to complete before executing the next line of code.
+     *
+     * @param taskID ID of the task to wait for.
+     * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
+     * the allotted time in milliseconds.
+     * @param requestOptions Configure request locally with [RequestOptions]
+     */
+    public suspend fun waitTask(
+        taskID: AppTaskID,
+        timeout: Long? = null,
+        requestOptions: RequestOptions? = null,
+    ): TaskStatus
+
+    /**
+     * Check the current [TaskStatus] of a given application level task.
+     *
+     * @param taskID ID of the task to get its info.
+     * @param requestOptions Configure request locally with [RequestOptions]
+     */
+    public suspend fun getTask(
+        taskID: AppTaskID,
+        requestOptions: RequestOptions? = null,
+    ): TaskInfo
 
     /**
      * Convenience methods to get the logs directly from the [ClientSearch] without instantiating an [Index].

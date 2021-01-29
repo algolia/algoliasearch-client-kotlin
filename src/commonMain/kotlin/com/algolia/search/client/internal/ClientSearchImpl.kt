@@ -20,10 +20,13 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
+import com.algolia.search.model.response.ResponseDictionary
 import com.algolia.search.model.response.ResponseLogs
 import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.DeletionAPIKey
+import com.algolia.search.model.task.AppTaskID
 import com.algolia.search.model.task.TaskIndex
+import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyLength
 import com.algolia.search.serialize.KeyOffset
@@ -128,6 +131,33 @@ internal class ClientSearchImpl internal constructor(
         }
 
         return timeout?.let { withTimeout(it) { loop() } } ?: loop()
+    }
+
+    override suspend fun ResponseDictionary.wait(timeout: Long?, requestOptions: RequestOptions?): TaskStatus {
+        return waitTask(taskID, timeout, requestOptions)
+    }
+
+    override suspend fun waitTask(
+        taskID: AppTaskID,
+        timeout: Long?,
+        requestOptions: RequestOptions?,
+    ): TaskStatus {
+        suspend fun loop(): TaskStatus {
+            while (true) {
+                val taskStatus = getTask(taskID, requestOptions).status
+                if (TaskStatus.Published == taskStatus) return taskStatus
+                delay(1000L)
+            }
+        }
+        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
+    }
+
+    override suspend fun getTask(taskID: AppTaskID, requestOptions: RequestOptions?): TaskInfo {
+        return transport.request(
+            HttpMethod.Get,
+            CallType.Read,
+            "1/task/$taskID",
+            requestOptions)
     }
 
     /**

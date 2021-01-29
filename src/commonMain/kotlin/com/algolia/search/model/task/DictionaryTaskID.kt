@@ -1,7 +1,6 @@
 package com.algolia.search.model.task
 
 import com.algolia.search.helper.toDictionaryTaskID
-import com.algolia.search.model.internal.Raw
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -11,10 +10,9 @@ import kotlinx.serialization.encoding.Encoder
 
 /**
  * This is a numeric value (up to 64bits) used to identify a [DictionaryTaskID].
- * It can be used to perform a [EndpointDictionary.waitTask] operation.
  */
 @Serializable(DictionaryTaskID.Companion::class)
-public data class DictionaryTaskID(override val raw: Long) : Raw<Long> {
+public data class DictionaryTaskID(override val raw: Long) : AppTaskID {
 
     override fun toString(): String {
         return raw.toString()

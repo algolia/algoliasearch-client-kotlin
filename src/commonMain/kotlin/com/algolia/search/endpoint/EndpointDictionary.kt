@@ -7,9 +7,6 @@ import com.algolia.search.model.dictionary.DictionarySettings
 import com.algolia.search.model.response.ResponseDictionary
 import com.algolia.search.model.response.ResponseSearchDictionaries
 import com.algolia.search.model.search.Query
-import com.algolia.search.model.task.DictionaryTaskID
-import com.algolia.search.model.task.TaskInfo
-import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.transport.RequestOptions
 
 /**
@@ -103,41 +100,4 @@ public interface EndpointDictionary {
      * @param requestOptions Configure request locally with [RequestOptions].
      */
     public suspend fun getDictionarySettings(requestOptions: RequestOptions? = null): DictionarySettings
-
-    /**
-     * Wait for dictionary task to finish.
-     *
-     * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
-     * the allotted time in milliseconds.
-     * @param requestOptions Configure request locally with [RequestOptions].
-     */
-    public suspend fun ResponseDictionary.wait(
-        timeout: Long? = null,
-        requestOptions: RequestOptions? = null,
-    ): TaskStatus
-
-    /**
-     * Wait for a [DictionaryTaskID] to complete before executing the next line of code.
-     *
-     * @param taskID ID of the task to wait for.
-     * @param timeout If a value is specified, the method will throw [TimeoutCancellationException] after waiting for
-     * the allotted time in milliseconds.
-     * @param requestOptions Configure request locally with [RequestOptions]
-     */
-    public suspend fun waitTask(
-        taskID: DictionaryTaskID,
-        timeout: Long? = null,
-        requestOptions: RequestOptions? = null,
-    ): TaskStatus
-
-    /**
-     * Check the current [TaskStatus] of a given [DictionaryTaskID].
-     *
-     * @param taskID ID of the task to get its info.
-     * @param requestOptions Configure request locally with [RequestOptions]
-     */
-    public suspend fun getTask(
-        taskID: DictionaryTaskID,
-        requestOptions: RequestOptions? = null,
-    ): TaskInfo
 }

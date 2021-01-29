@@ -16,9 +16,6 @@ import com.algolia.search.model.internal.request.RequestDictionary
 import com.algolia.search.model.response.ResponseDictionary
 import com.algolia.search.model.response.ResponseSearchDictionaries
 import com.algolia.search.model.search.Query
-import com.algolia.search.model.task.DictionaryTaskID
-import com.algolia.search.model.task.TaskInfo
-import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.RouteDictionaries
 import com.algolia.search.serialize.internal.JsonNoDefaults
@@ -27,8 +24,6 @@ import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import com.algolia.search.util.internal.cast
 import io.ktor.http.HttpMethod
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.withTimeout
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.encodeToString
@@ -135,29 +130,6 @@ internal class EndpointDictionaryImpl(
         return transport.request(HttpMethod.Get, CallType.Read, path, requestOptions)
     }
 
-    override suspend fun waitTask(
-        taskID: DictionaryTaskID,
-        timeout: Long?,
-        requestOptions: RequestOptions?,
-    ): TaskStatus {
-        suspend fun loop(): TaskStatus {
-            while (true) {
-                val taskStatus = getTask(taskID, requestOptions).status
-                if (TaskStatus.Published == taskStatus) return taskStatus
-                delay(1000L)
-            }
-        }
-        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
-    }
-
-    override suspend fun ResponseDictionary.wait(timeout: Long?, requestOptions: RequestOptions?): TaskStatus {
-        return waitTask(taskID, timeout, requestOptions)
-    }
-
-    override suspend fun getTask(taskID: DictionaryTaskID, requestOptions: RequestOptions?): TaskInfo {
-        return transport.request(HttpMethod.Get, CallType.Read, "$ENDPOINT_TASK/$taskID", requestOptions)
-    }
-
     /**
      * Get Dictionary instance's serializer.
      */
@@ -171,7 +143,6 @@ internal class EndpointDictionaryImpl(
         const val ENDPOINT_SEARCH = "/search"
         const val ENDPOINT_BATCH = "/batch"
         const val ENDPOINT_SETTINGS = "*/settings"
-        const val ENDPOINT_TASK = "1/task"
     }
 }
 
