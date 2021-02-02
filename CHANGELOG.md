@@ -3,6 +3,7 @@
 ### Added
 - Query/Settings: `relevancyStrictness` and `decompoundQuery` parameters (#248)
 - ResponseSearch: `appliedRelevancyStrictness` and `nbSortedHits` parameters
+- Settings: `attributesToTransliterate` parameter (#249)
 
 # 1.6.2
 
