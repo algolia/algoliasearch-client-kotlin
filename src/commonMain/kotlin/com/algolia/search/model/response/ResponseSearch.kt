@@ -20,6 +20,7 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.KSerializerFacetMap
 import com.algolia.search.serialize.KSerializerPoint
 import com.algolia.search.serialize.KeyAbTestVariantID
+import com.algolia.search.serialize.KeyAppliedRelevancyStrictness
 import com.algolia.search.serialize.KeyAppliedRules
 import com.algolia.search.serialize.KeyAroundLatLng
 import com.algolia.search.serialize.KeyAutomaticRadius
@@ -41,6 +42,7 @@ import com.algolia.search.serialize.KeyLength
 import com.algolia.search.serialize.KeyMessage
 import com.algolia.search.serialize.KeyNbHits
 import com.algolia.search.serialize.KeyNbPages
+import com.algolia.search.serialize.KeyNbSortedHits
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyPage
 import com.algolia.search.serialize.KeyParams
@@ -227,6 +229,14 @@ public data class ResponseSearch(
      * The rules applied to the query.
      */
     @SerialName(KeyAppliedRules) val appliedRulesOrNull: List<JsonObject>? = null,
+    /**
+     * Applied relevancy Strictness value.
+     */
+    @SerialName(KeyAppliedRelevancyStrictness) val appliedRelevancyStrictnessOrNull: Int? = null,
+    /**
+     * The number of records returned after the smart sort.
+     */
+    @SerialName(KeyNbSortedHits) val nbSortedHitsOrNull: Int? = null,
 ) {
 
     public val hits: List<Hit>
@@ -321,6 +331,12 @@ public data class ResponseSearch(
 
     public val appliedRules: List<JsonObject>
         get() = appliedRulesOrNull!!
+
+    public val appliedRelevancyStrictness: Int
+        get() = requireNotNull(appliedRelevancyStrictnessOrNull)
+
+    public val nbSortedHits: Int
+        get() = requireNotNull(nbSortedHitsOrNull)
 
     /**
      * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].
