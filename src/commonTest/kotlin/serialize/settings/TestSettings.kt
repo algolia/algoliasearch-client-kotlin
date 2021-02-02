@@ -34,6 +34,7 @@ import com.algolia.search.serialize.KeyAttributesForFaceting
 import com.algolia.search.serialize.KeyAttributesToHighlight
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyAttributesToSnippet
+import com.algolia.search.serialize.KeyAttributesToTransliterate
 import com.algolia.search.serialize.KeyCamelCaseAttributes
 import com.algolia.search.serialize.KeyCustomNormalization
 import com.algolia.search.serialize.KeyCustomRanking
@@ -175,6 +176,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             relevancyStrictness = int,
             attributeCriteriaComputedByMinProximity = boolean,
             decompoundQuery = boolean,
+            attributesToTransliterate = attributes
         ) to buildJsonObject {
             // Attributes
             put(KeySearchableAttributes, attributesJson)
@@ -267,6 +269,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             put(KeyAttributeCriteriaComputedByMinProximity, boolean)
             put(KeyRelevancyStrictness, int)
             put(KeyDecompoundQuery, boolean)
+            put(KeyAttributesToTransliterate, attributesJson)
         }
     )
 

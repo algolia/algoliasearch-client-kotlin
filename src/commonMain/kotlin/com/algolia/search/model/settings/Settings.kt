@@ -27,6 +27,7 @@ import com.algolia.search.serialize.KeyAttributesForFaceting
 import com.algolia.search.serialize.KeyAttributesToHighlight
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyAttributesToSnippet
+import com.algolia.search.serialize.KeyAttributesToTransliterate
 import com.algolia.search.serialize.KeyCamelCaseAttributes
 import com.algolia.search.serialize.KeyCustomNormalization
 import com.algolia.search.serialize.KeyCustomRanking
@@ -463,6 +464,15 @@ public data class Settings(
      * [Documentation](https://www.algolia.com/doc/api-reference/api-parameters/decompoundQuery/?client=kotlin)
      */
     @SerialName(KeyDecompoundQuery) override var decompoundQuery: Boolean? = null,
+
+    /**
+     * Specify on which attributes to apply transliteration. Transliteration refers to the ability of finding results in
+     * a given alphabet with a query in another alphabet. For example, in Japanese, transliteration enables users to
+     * find results indexed in Kanji or Katakana with a query in Hiragana.
+     * Engine default: [*]
+     * [Documentation](https://www.algolia.com/doc/api-reference/api-parameters/attributesToTransliterate/?language=kotlin)
+     */
+    @SerialName(KeyAttributesToTransliterate) override var attributesToTransliterate: List<Attribute>? = null
 ) : SettingsParameters {
 
     /**
