@@ -209,3 +209,4 @@ public const val KeyAttributeCriteriaComputedByMinProximity: String = "attribute
 public const val KeyRelevancyStrictness: String = "relevancyStrictness"
 public const val KeyAppliedRelevancyStrictness: String = "appliedRelevancyStrictness"
 public const val KeyNbSortedHits: String = "nbSortedHits"
+public const val KeyDecompoundQuery: String = "decompoundQuery"
