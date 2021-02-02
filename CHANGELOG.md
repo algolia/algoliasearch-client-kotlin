@@ -1,7 +1,7 @@
 # Unreleased
 
 ### Added
-- Query and Settings: `relevancyStrictness` parameter
+- Query/Settings: `relevancyStrictness` and `decompoundQuery` parameters (#248)
 - ResponseSearch: `appliedRelevancyStrictness` and `nbSortedHits` parameters
 
 # 1.6.2
