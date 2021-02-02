@@ -66,6 +66,7 @@ import com.algolia.search.serialize.KeyPrimary
 import com.algolia.search.serialize.KeyQueryLanguages
 import com.algolia.search.serialize.KeyQueryType
 import com.algolia.search.serialize.KeyRanking
+import com.algolia.search.serialize.KeyRelevancyStrictness
 import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
 import com.algolia.search.serialize.KeyReplaceSynonymsInHighlight
@@ -169,7 +170,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             indexLanguages = listOf(Language.Japanese),
             customNormalization = mapOf(unknown to mapOf(unknown to unknown)),
             enablePersonalization = boolean,
-            attributeCriteriaComputedByMinProximity = boolean
+            attributeCriteriaComputedByMinProximity = boolean,
+            relevancyStrictness = int,
         ) to buildJsonObject {
             // Attributes
             put(KeySearchableAttributes, attributesJson)
@@ -260,6 +262,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             put(KeyCustomNormalization, buildJsonObject { put(unknown, buildJsonObject { put(unknown, unknown) }) })
             put(KeyEnablePersonalization, boolean)
             put(KeyAttributeCriteriaComputedByMinProximity, boolean)
+            put(KeyRelevancyStrictness, int)
         }
     )
 
