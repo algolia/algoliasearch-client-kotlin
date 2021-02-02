@@ -230,11 +230,11 @@ public data class ResponseSearch(
      */
     @SerialName(KeyAppliedRules) val appliedRulesOrNull: List<JsonObject>? = null,
     /**
-     * Applied relevancy Strictness value.
+     * Applied relevancy score in the virtual index [0-100].
      */
     @SerialName(KeyAppliedRelevancyStrictness) val appliedRelevancyStrictnessOrNull: Int? = null,
     /**
-     * The number of records returned after the smart sort.
+     * Number of relevant hits to display in case of non-zero `relevancyStrictness` applied.
      */
     @SerialName(KeyNbSortedHits) val nbSortedHitsOrNull: Int? = null,
 ) {
