@@ -72,6 +72,7 @@ import com.algolia.search.serialize.KeyPersonalizationImpact
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyQueryLanguages
 import com.algolia.search.serialize.KeyQueryType
+import com.algolia.search.serialize.KeyRelevancyStrictness
 import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
 import com.algolia.search.serialize.KeyReplaceSynonymsInHighlight
@@ -89,6 +90,7 @@ import com.algolia.search.serialize.KeyTypoTolerance
 import com.algolia.search.serialize.KeyUserToken
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import int
+import kotlin.test.Test
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
@@ -99,7 +101,6 @@ import serialize.TestSerializer
 import shouldEqual
 import string
 import unknown
-import kotlin.test.Test
 
 internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
 
@@ -170,7 +171,8 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             similarQuery = string,
             enableABTest = boolean,
             explainModules = listOf(ExplainModule.MatchAlternatives),
-            naturalLanguages = listOf(Language.Afrikaans, Language.Albanian)
+            naturalLanguages = listOf(Language.Afrikaans, Language.Albanian),
+            relevancyStrictness = int,
         ) to buildJsonObject {
             put(KeyQuery, string)
             put(KeyAttributesToRetrieve, attributesJson)
@@ -260,6 +262,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
                     add(Language.Albanian.raw)
                 }
             )
+            put(KeyRelevancyStrictness, int)
         }
     )
 

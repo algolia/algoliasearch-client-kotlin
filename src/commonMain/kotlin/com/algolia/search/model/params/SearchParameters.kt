@@ -17,4 +17,9 @@ public interface SearchParameters : CommonSearchParameters, CommonParameters {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/restrictSearchableAttributes/?language=kotlin]
      */
     public var restrictSearchableAttributes: List<Attribute>?
+
+    /**
+     * Relevancy Strictness value.
+     */
+    public var relevancyStrictness: Int?
 }

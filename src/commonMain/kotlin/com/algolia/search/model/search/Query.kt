@@ -8,6 +8,7 @@ import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.KSerializerPoint
+import com.algolia.search.serialize.KeyRelevancyStrictness
 import com.algolia.search.serialize.KeyAdvancedSyntax
 import com.algolia.search.serialize.KeyAdvancedSyntaxFeatures
 import com.algolia.search.serialize.KeyAllowTyposOnNumericTokens
@@ -551,4 +552,9 @@ public data class Query(
      * removeStopWords, removeWordsIfNoResults, analyticsTags and ruleContexts.
      */
     @SerialName(KeyNaturalLanguages) override var naturalLanguages: List<Language>? = null,
+
+    /**
+     * Relevancy Strictness value.
+     */
+    @SerialName(KeyRelevancyStrictness) override var relevancyStrictness: Int? = null,
 ) : SearchParameters
