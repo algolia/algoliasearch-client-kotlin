@@ -33,10 +33,13 @@ internal class TestAnswers : TestSerializer<AnswersQuery>(AnswersQuery.serialize
         ) to buildJsonObject {
             put(KeyQuery, "query")
             put(KeyQueryLanguages, buildJsonArray { add(Language.English.raw) })
-            put(KeyAttributesForPrediction, buildJsonArray {
-                add("a1")
-                add("a2")
-            })
+            put(
+                KeyAttributesForPrediction,
+                buildJsonArray {
+                    add("a1")
+                    add("a2")
+                }
+            )
             put(KeyNbHits, 10)
             put(KeyThreshold, 20f)
         },
@@ -49,9 +52,12 @@ internal class TestAnswers : TestSerializer<AnswersQuery>(AnswersQuery.serialize
         } to buildJsonObject {
             put(KeyQuery, "query")
             put(KeyQueryLanguages, buildJsonArray { add(Language.English.raw) })
-            put(KeyParams, buildJsonObject {
-                put(KeyFilters, "brand:sony")
-            })
+            put(
+                KeyParams,
+                buildJsonObject {
+                    put(KeyFilters, "brand:sony")
+                }
+            )
         }
     )
 }

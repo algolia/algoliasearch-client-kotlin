@@ -6,9 +6,9 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.AnswersQuery
 import com.algolia.search.model.search.Language
+import runBlocking
 import kotlin.test.Test
 import kotlin.test.assertFalse
-import runBlocking
 
 internal class TestSuiteAnswers {
 
