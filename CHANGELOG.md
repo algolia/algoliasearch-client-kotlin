@@ -4,6 +4,7 @@
 - Query/Settings: `relevancyStrictness` and `decompoundQuery` parameters (#248)
 - ResponseSearch: `appliedRelevancyStrictness` and `nbSortedHits` parameters
 - Settings: `attributesToTransliterate` parameter (#249)
+- Custom dictionaries: stop words, plurals and compounds
 
 # 1.6.2
 
