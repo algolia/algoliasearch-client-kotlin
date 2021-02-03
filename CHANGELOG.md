@@ -5,6 +5,7 @@
 - ResponseSearch: `appliedRelevancyStrictness` and `nbSortedHits` parameters
 - Settings: `attributesToTransliterate` parameter (#249)
 - Custom dictionaries: stop words, plurals and compounds
+- Rules condition: `filters` parameter (#250)
 
 # 1.6.2
 
