@@ -174,7 +174,6 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             enablePersonalization = boolean,
             attributeCriteriaComputedByMinProximity = boolean,
             relevancyStrictness = int,
-            attributeCriteriaComputedByMinProximity = boolean,
             decompoundQuery = boolean,
             attributesToTransliterate = attributes
         ) to buildJsonObject {

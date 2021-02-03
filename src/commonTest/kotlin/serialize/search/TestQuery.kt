@@ -174,7 +174,6 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             explainModules = listOf(ExplainModule.MatchAlternatives),
             naturalLanguages = listOf(Language.Afrikaans, Language.Albanian),
             relevancyStrictness = int,
-            naturalLanguages = listOf(Language.Afrikaans, Language.Albanian),
             decompoundQuery = boolean
         ) to buildJsonObject {
             put(KeyQuery, string)
