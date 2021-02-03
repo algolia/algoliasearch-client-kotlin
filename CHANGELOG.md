@@ -1,3 +1,9 @@
+# Unreleased
+
+### Added
+- Query and Settings: `relevancyStrictness` parameter
+- ResponseSearch: `appliedRelevancyStrictness` and `nbSortedHits` parameters
+
 # 1.6.2
 
 ### Added

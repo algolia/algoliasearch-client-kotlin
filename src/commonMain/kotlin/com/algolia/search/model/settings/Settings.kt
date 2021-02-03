@@ -57,6 +57,7 @@ import com.algolia.search.serialize.KeyPrimary
 import com.algolia.search.serialize.KeyQueryLanguages
 import com.algolia.search.serialize.KeyQueryType
 import com.algolia.search.serialize.KeyRanking
+import com.algolia.search.serialize.KeyRelevancyStrictness
 import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
 import com.algolia.search.serialize.KeyReplaceSynonymsInHighlight
@@ -447,6 +448,12 @@ public data class Settings(
      * [Documentation](https://www.algolia.com/doc/api-reference/api-parameters/attributeCriteriaComputedByMinProximity/?language=kotlin)
      */
     @SerialName(KeyAttributeCriteriaComputedByMinProximity) override var attributeCriteriaComputedByMinProximity: Boolean? = false,
+
+    /**
+     * Relevancy score to apply to search in virtual index [0-100]. Bigger value means less, but more relevant results,
+     * lesser value - less relevant results.
+     */
+    @SerialName(KeyRelevancyStrictness) override var relevancyStrictness: Int? = null,
 ) : SettingsParameters {
 
     /**

@@ -26,4 +26,10 @@ public interface CommonParameters : BaseParameters {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryLanguages/?language=kotlin]
      */
     public var queryLanguages: List<Language>?
+
+    /**
+     * Relevancy score to apply to search in virtual index [0-100]. Bigger value means less, but more relevant results,
+     * lesser value - less relevant results.
+     */
+    public var relevancyStrictness: Int?
 }

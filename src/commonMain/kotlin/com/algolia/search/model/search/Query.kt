@@ -59,6 +59,7 @@ import com.algolia.search.serialize.KeyPersonalizationImpact
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyQueryLanguages
 import com.algolia.search.serialize.KeyQueryType
+import com.algolia.search.serialize.KeyRelevancyStrictness
 import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
 import com.algolia.search.serialize.KeyReplaceSynonymsInHighlight
@@ -551,4 +552,10 @@ public data class Query(
      * removeStopWords, removeWordsIfNoResults, analyticsTags and ruleContexts.
      */
     @SerialName(KeyNaturalLanguages) override var naturalLanguages: List<Language>? = null,
+
+    /**
+     * Relevancy score to apply to search in virtual index [0-100]. Bigger value means less, but more relevant results,
+     * lesser value - less relevant results.
+     */
+    @SerialName(KeyRelevancyStrictness) override var relevancyStrictness: Int? = null,
 ) : SearchParameters
