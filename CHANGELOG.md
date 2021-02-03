@@ -7,13 +7,17 @@
 - Custom dictionaries: stop words, plurals and compounds
 - Rules condition: `filters` parameter (#250)
 
+### Changed
+- Update Kotlin to 1.4.30
+- Update Ktor 1.5.1
+
 # 1.6.2
 
 ### Added
 - Settings: `attributeCriteriaComputedByMinProximity` parameter
 
 ### Changed
-- Update Kotlin to 1.4.2
+- Update Kotlin to 1.4.20
 - Update Ktor 1.5.0
 
 ### Experimental
