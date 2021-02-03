@@ -3,6 +3,7 @@ package com.algolia.search.model.rule
 import com.algolia.search.serialize.KeyAlternatives
 import com.algolia.search.serialize.KeyAnchoring
 import com.algolia.search.serialize.KeyContext
+import com.algolia.search.serialize.KeyFilters
 import com.algolia.search.serialize.KeyPattern
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -20,5 +21,9 @@ public data class Condition(
     /**
      *  Indicates if the rule can be applied with alternatives.
      */
-    @SerialName(KeyAlternatives) val alternative: Alternatives? = null
+    @SerialName(KeyAlternatives) val alternative: Alternatives? = null,
+    /**
+     * Enables triggering rules based on applied facet and filter.
+     */
+    @SerialName(KeyFilters) val filters: String? = null,
 )

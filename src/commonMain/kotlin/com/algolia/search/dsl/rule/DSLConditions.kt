@@ -31,8 +31,9 @@ public class DSLConditions(
         pattern: Pattern,
         context: String? = null,
         alternative: Alternatives? = null,
+        filters: String? = null,
     ): Condition {
-        return Condition(anchoring, pattern, context, alternative)
+        return Condition(anchoring, pattern, context, alternative, filters)
     }
 
     /**
