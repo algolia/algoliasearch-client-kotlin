@@ -1,0 +1,15 @@
+package com.algolia.search.serialize
+
+public const val KeyFiltersScore: String = "filtersScore"
+public const val KeyAppliedRules: String = "appliedRules"
+public const val KeyAttributesForPrediction: String = "attributesForPrediction"
+public const val KeyThreshold: String = "threshold"
+public const val Key_Answer: String = "_answer"
+public const val KeyExtract: String = "extract"
+public const val KeyExtractAttribute: String = "extractAttribute"
+public const val KeyAttributeCriteriaComputedByMinProximity: String = "attributeCriteriaComputedByMinProximity"
+public const val KeyRelevancyStrictness: String = "relevancyStrictness"
+public const val KeyAppliedRelevancyStrictness: String = "appliedRelevancyStrictness"
+public const val KeyNbSortedHits: String = "nbSortedHits"
+public const val KeyDecompoundQuery: String = "decompoundQuery"
+public const val KeyAttributesToTransliterate: String = "attributesToTransliterate"
