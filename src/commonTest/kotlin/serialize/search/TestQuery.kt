@@ -35,6 +35,7 @@ import com.algolia.search.serialize.KeyAttributesToHighlight
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyAttributesToSnippet
 import com.algolia.search.serialize.KeyClickAnalytics
+import com.algolia.search.serialize.KeyDecompoundQuery
 import com.algolia.search.serialize.KeyDisableExactOnAttributes
 import com.algolia.search.serialize.KeyDisableTypoToleranceOnAttributes
 import com.algolia.search.serialize.KeyDistinct
@@ -173,6 +174,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             explainModules = listOf(ExplainModule.MatchAlternatives),
             naturalLanguages = listOf(Language.Afrikaans, Language.Albanian),
             relevancyStrictness = int,
+            decompoundQuery = boolean
         ) to buildJsonObject {
             put(KeyQuery, string)
             put(KeyAttributesToRetrieve, attributesJson)
@@ -263,6 +265,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
                 }
             )
             put(KeyRelevancyStrictness, int)
+            put(KeyDecompoundQuery, boolean)
         }
     )
 

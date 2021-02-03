@@ -22,6 +22,7 @@ import com.algolia.search.serialize.KeyAttributesToHighlight
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyAttributesToSnippet
 import com.algolia.search.serialize.KeyClickAnalytics
+import com.algolia.search.serialize.KeyDecompoundQuery
 import com.algolia.search.serialize.KeyDisableExactOnAttributes
 import com.algolia.search.serialize.KeyDisableTypoToleranceOnAttributes
 import com.algolia.search.serialize.KeyDistinct
@@ -558,4 +559,12 @@ public data class Query(
      * lesser value - less relevant results.
      */
     @SerialName(KeyRelevancyStrictness) override var relevancyStrictness: Int? = null,
+
+    /**
+     * Enable word segmentation (also called decompounding) at query time for compatible languages. For example, this
+     * turns the Dutch query "spaanplaatbehang" into "spaan plaat behang" to retrieve more relevant results.
+     * Engine default: true
+     * [Documentation](https://www.algolia.com/doc/api-reference/api-parameters/decompoundQuery/?client=kotlin)
+     */
+    @SerialName(KeyDecompoundQuery) override var decompoundQuery: Boolean? = null,
 ) : SearchParameters

@@ -34,9 +34,11 @@ import com.algolia.search.serialize.KeyAttributesForFaceting
 import com.algolia.search.serialize.KeyAttributesToHighlight
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyAttributesToSnippet
+import com.algolia.search.serialize.KeyAttributesToTransliterate
 import com.algolia.search.serialize.KeyCamelCaseAttributes
 import com.algolia.search.serialize.KeyCustomNormalization
 import com.algolia.search.serialize.KeyCustomRanking
+import com.algolia.search.serialize.KeyDecompoundQuery
 import com.algolia.search.serialize.KeyDecompoundedAttributes
 import com.algolia.search.serialize.KeyDisableExactOnAttributes
 import com.algolia.search.serialize.KeyDisablePrefixOnAttributes
@@ -84,6 +86,7 @@ import com.algolia.search.serialize.KeyVersion
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import indexA
 import int
+import kotlin.test.Test
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
@@ -94,7 +97,6 @@ import serialize.search.TestSnippet
 import shouldEqual
 import string
 import unknown
-import kotlin.test.Test
 
 internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
 
@@ -172,6 +174,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             enablePersonalization = boolean,
             attributeCriteriaComputedByMinProximity = boolean,
             relevancyStrictness = int,
+            decompoundQuery = boolean,
+            attributesToTransliterate = attributes
         ) to buildJsonObject {
             // Attributes
             put(KeySearchableAttributes, attributesJson)
@@ -263,6 +267,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             put(KeyEnablePersonalization, boolean)
             put(KeyAttributeCriteriaComputedByMinProximity, boolean)
             put(KeyRelevancyStrictness, int)
+            put(KeyDecompoundQuery, boolean)
+            put(KeyAttributesToTransliterate, attributesJson)
         }
     )
 
