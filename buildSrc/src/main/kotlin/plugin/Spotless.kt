@@ -6,5 +6,5 @@ object Spotless : Dependency {
 
     override val group = "com.diffplug.spotless"
     override val artifact = "spotless-plugin-gradle"
-    override val version = "5.1.1"
+    override val version = "5.9.0"
 }

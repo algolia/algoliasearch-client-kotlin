@@ -91,7 +91,6 @@ import com.algolia.search.serialize.KeyTypoTolerance
 import com.algolia.search.serialize.KeyUserToken
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import int
-import kotlin.test.Test
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
@@ -102,6 +101,7 @@ import serialize.TestSerializer
 import shouldEqual
 import string
 import unknown
+import kotlin.test.Test
 
 internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
 
