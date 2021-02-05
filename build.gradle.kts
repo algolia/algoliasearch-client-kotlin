@@ -21,7 +21,6 @@ plugins {
 apply(plugin = "com.diffplug.spotless")
 
 repositories {
-    jcenter()
     google()
     mavenCentral()
     maven { url = URI("https://dl.bintray.com/kotlin/ktor") }
