@@ -1,6 +1,5 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinCompile
-import java.net.URI
 
 buildscript {
     repositories {
@@ -16,16 +15,14 @@ plugins {
     kotlin("multiplatform") version "1.4.30"
     kotlin("plugin.serialization") version "1.4.30"
     id("maven-publish")
+    id("signing")
 }
 
 apply(plugin = "com.diffplug.spotless")
 
 repositories {
-    google()
     mavenCentral()
-    maven { url = URI("https://dl.bintray.com/kotlin/ktor") }
-    maven { url = URI("https://kotlin.bintray.com/kotlinx") }
-    maven { url = URI("https://oss.sonatype.org/content/repositories/snapshots") }
+    google()
 }
 
 version = Library.version
@@ -110,10 +107,11 @@ configure<SpotlessExtension> {
 publishing {
     repositories {
         maven {
-            url = uri("https://api.bintray.com/maven/algolia/maven/algoliasearch-client-kotlin/;publish=0")
+            name = "MavenCentral"
+            url = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2")
             credentials {
-                username = System.getenv("BINTRAY_USER")
-                password = System.getenv("BINTRAY_KEY")
+                username = System.getenv("SONATYPE_USER")
+                password = System.getenv("SONATYPE_KEY")
             }
         }
     }
@@ -127,23 +125,30 @@ publishing {
 
         pom.withXml {
             asNode().apply {
+                appendNode("name", "Algolia Search API Client for Kotlin")
                 appendNode("description",
                     "Algolia is a powerful search-as-a-service solution, made easy to use with API clients, UI libraries," +
                         "and pre-built integrations. Algolia API Client for Kotlin lets you easily use the Algolia Search" +
                         "REST API from your JVM project, such as Android or backend implementations.")
                 appendNode("url", "https://github.com/algolia/algoliasearch-client-kotlin")
-                appendNode("licenses").appendNode("license").apply {
-                    appendNode("name", "MIT")
-                    appendNode("url", "http://www.opensource.org/licenses/mit-license.php")
-                    appendNode("distribution", "repo")
-                }
-                appendNode("developers").appendNode("developer").apply {
-                    appendNode("id", "algolia")
-                    appendNode("name", "The Algolia Team")
-                    appendNode("email", "hey@algolia.com")
-                }
+                appendNode("licenses")
+                    .appendNode("license").apply {
+                        appendNode("name", "MIT")
+                        appendNode("url", "http://www.opensource.org/licenses/mit-license.php")
+                        appendNode("distribution", "repo")
+                    }
+                appendNode("developers")
+                    .appendNode("developer").apply {
+                        appendNode("id", "algolia")
+                        appendNode("name", "The Algolia Team")
+                        appendNode("email", "hey@algolia.com")
+                        appendNode("organization", "Algolia")
+                        appendNode("organizationUrl", "https://algolia.com")
+                    }
                 appendNode("scm").apply {
-                    appendNode("url", "https://github.com/algolia/algoliasearch-client-kotlin.git")
+                    appendNode("url", "https://github.com/algolia/algoliasearch-client-kotlin")
+                    appendNode("connection", "scm:git:git://github.com/algolia/algoliasearch-client-kotlin.git")
+                    appendNode("developerConnection", "scm:git:ssh://github.com:algolia/algoliasearch-client-kotlin.git")
                 }
             }
         }
