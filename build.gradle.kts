@@ -70,10 +70,6 @@ kotlin {
     }
 }
 
-val javadocJar by tasks.creating(Jar::class) {
-    archiveClassifier.value("javadoc")
-}
-
 tasks {
 
     withType<KotlinCompile<*>>().configureEach {
@@ -103,6 +99,9 @@ configure<SpotlessExtension> {
 }
 
 //** Publish **//
+val emptyJar by tasks.creating(Jar::class) {
+    archiveAppendix.set("empty")
+}
 
 publishing {
     repositories {
@@ -123,6 +122,8 @@ publishing {
             "kotlinMultiplatform" -> Library.artifact
             else -> "${Library.artifact}-$name"
         }
+
+        artifact(emptyJar) { classifier = "javadoc" }
 
         pom.withXml {
             asNode().apply {
@@ -149,15 +150,11 @@ publishing {
                 appendNode("scm").apply {
                     appendNode("url", "https://github.com/algolia/algoliasearch-client-kotlin")
                     appendNode("connection", "scm:git:git://github.com/algolia/algoliasearch-client-kotlin.git")
-                    appendNode("developerConnection", "scm:git:ssh://github.com:algolia/algoliasearch-client-kotlin.git")
+                    appendNode("developerConnection",
+                        "scm:git:ssh://github.com:algolia/algoliasearch-client-kotlin.git")
                 }
             }
         }
-    }
-
-    kotlin.targets.forEach { target ->
-        val targetPublication = publications.withType<MavenPublication>().findByName(target.name)
-        targetPublication?.artifact(javadocJar)
     }
 }
 
