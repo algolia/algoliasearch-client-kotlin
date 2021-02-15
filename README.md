@@ -6,7 +6,7 @@
   <h4 align="center">The perfect starting point to integrate <a href="https://algolia.com" target="_blank">Algolia</a> within your Kotlin project</h4>
 
   <p align="center">
-    <a href="https://bintray.com/algolia/maven/algoliasearch-client-kotlin/_latestVersion"><img src="https://api.bintray.com/packages/algolia/maven/algoliasearch-client-kotlin/images/download.svg" alt="Latest version"></img></a>
+    <a href="https://search.maven.org/artifact/com.algolia/algoliasearch-client-kotlin"><img src="https://img.shields.io/maven-central/v/com.algolia/algoliasearch-client-kotlin?label=Download" alt="Latest version"></img></a>
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="Licence"></img></a>
   </p>
 </p>
@@ -38,7 +38,7 @@ Install the Kotlin client by adding the following dependency to your `gradle.bui
 
   ```gradle
   repositories {
-     maven { url "https://dl.bintray.com/algolia/maven" }
+     mavenCentral()
   }
   
   dependencies {
