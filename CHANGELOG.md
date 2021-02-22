@@ -1,4 +1,4 @@
-# Unreleased
+# 1.7.0
 
 ### Added
 - Query/Settings: `relevancyStrictness` and `decompoundQuery` parameters (#248)
