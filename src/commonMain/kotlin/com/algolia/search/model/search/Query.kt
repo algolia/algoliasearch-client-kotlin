@@ -22,6 +22,7 @@ import com.algolia.search.serialize.KeyAttributesToHighlight
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyAttributesToSnippet
 import com.algolia.search.serialize.KeyClickAnalytics
+import com.algolia.search.serialize.KeyDecompoundQuery
 import com.algolia.search.serialize.KeyDisableExactOnAttributes
 import com.algolia.search.serialize.KeyDisableTypoToleranceOnAttributes
 import com.algolia.search.serialize.KeyDistinct
@@ -59,6 +60,7 @@ import com.algolia.search.serialize.KeyPersonalizationImpact
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyQueryLanguages
 import com.algolia.search.serialize.KeyQueryType
+import com.algolia.search.serialize.KeyRelevancyStrictness
 import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
 import com.algolia.search.serialize.KeyReplaceSynonymsInHighlight
@@ -551,4 +553,18 @@ public data class Query(
      * removeStopWords, removeWordsIfNoResults, analyticsTags and ruleContexts.
      */
     @SerialName(KeyNaturalLanguages) override var naturalLanguages: List<Language>? = null,
+
+    /**
+     * Relevancy score to apply to search in virtual index [0-100]. Bigger value means less, but more relevant results,
+     * lesser value - less relevant results.
+     */
+    @SerialName(KeyRelevancyStrictness) override var relevancyStrictness: Int? = null,
+
+    /**
+     * Enable word segmentation (also called decompounding) at query time for compatible languages. For example, this
+     * turns the Dutch query "spaanplaatbehang" into "spaan plaat behang" to retrieve more relevant results.
+     * Engine default: true
+     * [Documentation](https://www.algolia.com/doc/api-reference/api-parameters/decompoundQuery/?client=kotlin)
+     */
+    @SerialName(KeyDecompoundQuery) override var decompoundQuery: Boolean? = null,
 ) : SearchParameters

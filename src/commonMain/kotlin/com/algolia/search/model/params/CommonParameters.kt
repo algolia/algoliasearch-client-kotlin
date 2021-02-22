@@ -26,4 +26,18 @@ public interface CommonParameters : BaseParameters {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/queryLanguages/?language=kotlin]
      */
     public var queryLanguages: List<Language>?
+
+    /**
+     * Relevancy score to apply to search in virtual index [0-100]. Bigger value means less, but more relevant results,
+     * lesser value - less relevant results.
+     */
+    public var relevancyStrictness: Int?
+
+    /**
+     * Enable word segmentation (also called decompounding) at query time for compatible languages. For example, this
+     * turns the Dutch query "spaanplaatbehang" into "spaan plaat behang" to retrieve more relevant results.
+     * Engine default: true
+     * [Documentation](https://www.algolia.com/doc/api-reference/api-parameters/decompoundQuery/?client=kotlin)
+     */
+    public var decompoundQuery: Boolean?
 }

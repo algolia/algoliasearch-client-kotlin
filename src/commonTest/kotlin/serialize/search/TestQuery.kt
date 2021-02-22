@@ -35,6 +35,7 @@ import com.algolia.search.serialize.KeyAttributesToHighlight
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyAttributesToSnippet
 import com.algolia.search.serialize.KeyClickAnalytics
+import com.algolia.search.serialize.KeyDecompoundQuery
 import com.algolia.search.serialize.KeyDisableExactOnAttributes
 import com.algolia.search.serialize.KeyDisableTypoToleranceOnAttributes
 import com.algolia.search.serialize.KeyDistinct
@@ -72,6 +73,7 @@ import com.algolia.search.serialize.KeyPersonalizationImpact
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyQueryLanguages
 import com.algolia.search.serialize.KeyQueryType
+import com.algolia.search.serialize.KeyRelevancyStrictness
 import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
 import com.algolia.search.serialize.KeyReplaceSynonymsInHighlight
@@ -170,7 +172,9 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             similarQuery = string,
             enableABTest = boolean,
             explainModules = listOf(ExplainModule.MatchAlternatives),
-            naturalLanguages = listOf(Language.Afrikaans, Language.Albanian)
+            naturalLanguages = listOf(Language.Afrikaans, Language.Albanian),
+            relevancyStrictness = int,
+            decompoundQuery = boolean
         ) to buildJsonObject {
             put(KeyQuery, string)
             put(KeyAttributesToRetrieve, attributesJson)
@@ -260,6 +264,8 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
                     add(Language.Albanian.raw)
                 }
             )
+            put(KeyRelevancyStrictness, int)
+            put(KeyDecompoundQuery, boolean)
         }
     )
 

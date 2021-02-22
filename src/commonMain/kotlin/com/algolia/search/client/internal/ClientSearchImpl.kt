@@ -9,24 +9,30 @@ import com.algolia.search.configuration.Credentials
 import com.algolia.search.dsl.internal.requestOptionsBuilder
 import com.algolia.search.endpoint.EndpointAPIKey
 import com.algolia.search.endpoint.EndpointAdvanced
+import com.algolia.search.endpoint.EndpointDictionary
 import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.endpoint.internal.EndpointAPIKey
+import com.algolia.search.endpoint.internal.EndpointDictionary
 import com.algolia.search.endpoint.internal.EndpointMulticluster
 import com.algolia.search.endpoint.internal.EndpointMultipleIndex
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseAPIKey
 import com.algolia.search.model.response.ResponseBatches
+import com.algolia.search.model.response.ResponseDictionary
 import com.algolia.search.model.response.ResponseLogs
 import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.DeletionAPIKey
+import com.algolia.search.model.task.AppTaskID
 import com.algolia.search.model.task.TaskIndex
+import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyLength
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.RouteLogs
+import com.algolia.search.serialize.RouteTask
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.client.features.ResponseException
@@ -44,6 +50,7 @@ internal class ClientSearchImpl internal constructor(
     EndpointMultipleIndex by EndpointMultipleIndex(transport),
     EndpointAPIKey by EndpointAPIKey(transport),
     EndpointMultiCluster by EndpointMulticluster(transport),
+    EndpointDictionary by EndpointDictionary(transport),
     Configuration by transport,
     Credentials by transport.credentials {
 
@@ -125,6 +132,34 @@ internal class ClientSearchImpl internal constructor(
         }
 
         return timeout?.let { withTimeout(it) { loop() } } ?: loop()
+    }
+
+    override suspend fun ResponseDictionary.wait(timeout: Long?, requestOptions: RequestOptions?): TaskStatus {
+        return waitTask(taskID, timeout, requestOptions)
+    }
+
+    override suspend fun waitTask(
+        taskID: AppTaskID,
+        timeout: Long?,
+        requestOptions: RequestOptions?,
+    ): TaskStatus {
+        suspend fun loop(): TaskStatus {
+            while (true) {
+                val taskStatus = getTask(taskID, requestOptions).status
+                if (TaskStatus.Published == taskStatus) return taskStatus
+                delay(1000L)
+            }
+        }
+        return timeout?.let { withTimeout(it) { loop() } } ?: loop()
+    }
+
+    override suspend fun getTask(taskID: AppTaskID, requestOptions: RequestOptions?): TaskInfo {
+        return transport.request(
+            HttpMethod.Get,
+            CallType.Read,
+            "$RouteTask/$taskID",
+            requestOptions
+        )
     }
 
     /**

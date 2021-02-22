@@ -165,4 +165,13 @@ public interface SettingsParameters : CommonParameters {
      * [Documentation](https://www.algolia.com/doc/api-reference/api-parameters/attributeCriteriaComputedByMinProximity/?language=kotlin)
      */
     public var attributeCriteriaComputedByMinProximity: Boolean?
+
+    /**
+     * Specify on which attributes to apply transliteration. Transliteration refers to the ability of finding results in
+     * a given alphabet with a query in another alphabet. For example, in Japanese, transliteration enables users to
+     * find results indexed in Kanji or Katakana with a query in Hiragana.
+     * Engine default: [*]
+     * [Documentation](https://www.algolia.com/doc/api-reference/api-parameters/attributesToTransliterate/?language=kotlin)
+     */
+    public var attributesToTransliterate: List<Attribute>?
 }
