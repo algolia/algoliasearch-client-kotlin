@@ -32,9 +32,10 @@ kotlin {
     explicitApi()
     jvm {
         compilations.all {
-            kotlinOptions {
-                jvmTarget = "1.8"
-            }
+            kotlinOptions.jvmTarget = "1.8"
+        }
+        testRuns["test"].executionTask.configure {
+            useJUnit()
         }
     }
 
@@ -53,12 +54,13 @@ kotlin {
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test"))
+                implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
                 implementation(Ktor("client"))
                 implementation(Ktor("client-mock"))
             }
         }
+        val jvmMain by getting
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
