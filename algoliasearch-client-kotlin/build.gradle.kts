@@ -21,7 +21,10 @@ kotlin {
 
     sourceSets {
         all {
-            languageSettings.progressiveMode = true
+            languageSettings.apply {
+                progressiveMode = true
+                useExperimentalAnnotation("kotlin.RequiresOptIn")
+            }
         }
         val commonMain by getting {
             kotlin.srcDirs("$buildDir/generated/sources/templates/kotlin/main")
@@ -56,7 +59,6 @@ tasks {
 
     withType<KotlinCompile> {
         dependsOn("copyTemplates")
-        kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
     }
 
     register(name = "copyTemplates", type = Copy::class) {
