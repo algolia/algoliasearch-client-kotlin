@@ -142,7 +142,7 @@ public class DSLRules(
     public fun renderingContent(
         redirect: Redirect,
         facetMerchandising: FacetMerchandising,
-        userData: JsonObject? = null,
+        userData: List<JsonObject>? = null,
     ): RenderingContent = RenderingContent(redirect, facetMerchandising, userData)
 
     public fun redirect(url: String): Redirect = Redirect(url)

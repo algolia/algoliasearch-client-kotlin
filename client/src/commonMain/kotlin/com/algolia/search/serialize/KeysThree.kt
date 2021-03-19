@@ -22,3 +22,5 @@ public const val KeyClearExistingDictionaryEntries: String = "clearExistingDicti
 public const val KeyAddEntry: String = "addEntry"
 public const val KeyDeleteEntry: String = "deleteEntry"
 public const val KeyDisabled: String = "disabled"
+public const val KeyRedirect: String = "redirect"
+public const val KeyFacetMerchandising: String = "facetMerchandising"

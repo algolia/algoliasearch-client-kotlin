@@ -75,6 +75,7 @@ public data class Consequence(
      * Custom JSON object that will be appended to the [ResponseSearch.userData].
      * This object is not interpreted by the API. It is limited to 1kB of minified JSON.
      */
+    @Deprecated("use renderingContent.userData instead", replaceWith = ReplaceWith("renderingContent?.userData[0]"))
     val userData: JsonObject? = null,
 
     /**

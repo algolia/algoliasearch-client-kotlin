@@ -46,7 +46,7 @@ internal class TestDSLRules {
                     renderingContent = renderingContent(
                         redirect = redirect("http://algolia.com/kotlin"),
                         facetMerchandising = facetMerchandising(listOf(Attribute("brand"))),
-                        userData = buildJsonObject { }
+                        userData = listOf(buildJsonObject { })
                     )
                 ),
                 enabled = true,
@@ -71,7 +71,7 @@ internal class TestDSLRules {
                     renderingContent = RenderingContent(
                         redirect = Redirect("http://algolia.com/kotlin"),
                         facetMerchandising = FacetMerchandising(listOf(Attribute("brand"))),
-                        userData = buildJsonObject { }
+                        userData = listOf(buildJsonObject { })
                     )
                 ),
                 enabled = true,
