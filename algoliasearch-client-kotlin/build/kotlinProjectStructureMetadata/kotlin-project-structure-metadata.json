@@ -1,0 +1,34 @@
+{
+  "projectStructure": {
+    "formatVersion": "0.3.1",
+    "isPublishedAsRoot": "true",
+    "variants": [
+      {
+        "name": "jvmApiElements",
+        "sourceSet": [
+          "commonMain"
+        ]
+      },
+      {
+        "name": "jvmRuntimeElements",
+        "sourceSet": [
+          "commonMain"
+        ]
+      }
+    ],
+    "sourceSets": [
+      {
+        "name": "commonMain",
+        "dependsOn": [],
+        "moduleDependency": [
+          "io.ktor:ktor-client",
+          "io.ktor:ktor-client-json",
+          "io.ktor:ktor-client-logging",
+          "io.ktor:ktor-client-serialization",
+          "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+        ],
+        "binaryLayout": "klib"
+      }
+    ]
+  }
+}
