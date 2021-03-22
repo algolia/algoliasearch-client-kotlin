@@ -7,6 +7,7 @@ import com.algolia.search.dsl.query
 import com.algolia.search.dsl.rule.DSLRules
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.rule.Anchoring
+import com.algolia.search.model.rule.AttributedFacets
 import com.algolia.search.model.rule.AutomaticFacetFilters
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
@@ -45,7 +46,9 @@ internal class TestDSLRules {
                     hide = objectIDs { +objectIDB },
                     renderingContent = renderingContent(
                         redirect = redirect("http://algolia.com/kotlin"),
-                        facetMerchandising = facetMerchandising(listOf(Attribute("brand"))),
+                        facetMerchandising = facetMerchandising {
+                            attributedFacets(attribute = Attribute("brand"), facets = listOf())
+                        },
                         userData = listOf(buildJsonObject { })
                     )
                 ),
@@ -70,7 +73,11 @@ internal class TestDSLRules {
                     hide = listOf(objectIDB),
                     renderingContent = RenderingContent(
                         redirect = Redirect("http://algolia.com/kotlin"),
-                        facetMerchandising = FacetMerchandising(listOf(Attribute("brand"))),
+                        facetMerchandising = FacetMerchandising(
+                            facetOrder = listOf(
+                                AttributedFacets(attribute = Attribute("brand"), facets = listOf())
+                            )
+                        ),
                         userData = listOf(buildJsonObject { })
                     )
                 ),

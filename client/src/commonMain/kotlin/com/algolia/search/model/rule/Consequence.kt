@@ -157,6 +157,7 @@ public data class Consequence(
                 value.hide?.let {
                     put(KeyHide, JsonNoDefaults.encodeToJsonElement(KSerializerObjectIDs, it))
                 }
+                @Suppress("DEPRECATION")
                 value.userData?.let { put(KeyUserData, it) }
                 value.filterPromotes?.let { put(KeyFilterPromotes, it) }
                 value.renderingContent?.let {

@@ -147,7 +147,9 @@ public class DSLRules(
 
     public fun redirect(url: String): Redirect = Redirect(url)
 
-    public fun facetMerchandising(order: List<Attribute>): FacetMerchandising = FacetMerchandising(order)
+    public fun facetMerchandising(block: DSLFacetMerchandising.() -> Unit): FacetMerchandising {
+        return DSLFacetMerchandising(block)
+    }
 
     public companion object : DSL<DSLRules, List<Rule>> {
 
