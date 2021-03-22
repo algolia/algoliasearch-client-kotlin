@@ -8,6 +8,9 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.insights.InsightsEvent
+import com.algolia.search.model.rule.FacetMerchandising
+import com.algolia.search.model.rule.Redirect
+import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Explain
 import com.algolia.search.model.search.Facet
@@ -31,6 +34,7 @@ import com.algolia.search.serialize.KeyExhaustiveNbHits
 import com.algolia.search.serialize.KeyExplain
 import com.algolia.search.serialize.KeyExtract
 import com.algolia.search.serialize.KeyExtractAttribute
+import com.algolia.search.serialize.KeyFacetOrder
 import com.algolia.search.serialize.KeyFacets
 import com.algolia.search.serialize.KeyFacets_Stats
 import com.algolia.search.serialize.KeyHierarchicalFacets
@@ -76,6 +80,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 
@@ -338,6 +343,9 @@ public data class ResponseSearch(
     public val nbSortedHits: Int
         get() = requireNotNull(nbSortedHitsOrNull)
 
+    public val rules: Rules?
+        get() = userDataOrNull?.let { Rules(it) }
+
     /**
      * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].
      * If the [objectID] is not found, -1 is returned.
@@ -418,5 +426,33 @@ public data class ResponseSearch(
         @SerialName(KeyExtract) val extract: String,
         @SerialName(KeyScore) val score: Double,
         @SerialName(KeyExtractAttribute) val extractAttribute: Attribute,
+    )
+
+    /**
+     * Uses a temporary serializer for prototyping purposes.
+     * TODO: remove it when the feature is complete.
+     */
+    public data class Rules(
+        private val userData: List<JsonObject>,
+    ) {
+        public val consequence: Consequence?
+
+        init {
+            val redirect = userData.firstOrNull()?.jsonObject
+                ?.get("link")?.jsonPrimitiveOrNull?.content?.let { Redirect(it) }
+            val facetMerchandising = userData.firstOrNull()?.jsonObject
+                ?.get(KeyFacetOrder)?.let { FacetMerchandising(Json.decodeFromJsonElement(it)) }
+            consequence = Consequence(
+                renderingContent = RenderingContent(
+                    userData = userData,
+                    redirect = redirect,
+                    facetMerchandising = facetMerchandising,
+                )
+            )
+        }
+    }
+
+    public data class Consequence(
+        public val renderingContent: RenderingContent?
     )
 }
