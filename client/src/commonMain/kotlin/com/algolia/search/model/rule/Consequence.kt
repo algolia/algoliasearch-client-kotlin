@@ -13,6 +13,7 @@ import com.algolia.search.serialize.KeyParams
 import com.algolia.search.serialize.KeyPromote
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyRemoveLowercase
+import com.algolia.search.serialize.KeyRenderingContent
 import com.algolia.search.serialize.KeyUserData
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
@@ -24,6 +25,7 @@ import com.algolia.search.serialize.internal.jsonPrimitiveOrNull
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.ListSerializer
@@ -33,6 +35,8 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.booleanOrNull
 import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.decodeFromJsonElement
+import kotlinx.serialization.json.encodeToJsonElement
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
@@ -44,7 +48,7 @@ public data class Consequence(
      * placeholder in the query pattern.
      * Ex. facetName1, facetName2. You can specify a score: facetName1<score=5>, facetName2<score=1>.
      */
-    val automaticFacetFilters: List<AutomaticFacetFilters>? = null,
+    @SerialName(KeyAutomaticFacetFilters) val automaticFacetFilters: List<AutomaticFacetFilters>? = null,
     /**
      * Same as [automaticFacetFilters], but the engine treats the filters as optional.
      * Behaves like [Query.optionalFilters].
@@ -129,6 +133,10 @@ public data class Consequence(
             } else null
         }
 
+        private fun JsonObject.getRenderingContent(): RenderingContent? {
+            return this[KeyRenderingContent]?.jsonObjectOrNull?.let { Json.decodeFromJsonElement(it) }
+        }
+
         override fun serialize(encoder: Encoder, value: Consequence) {
             val params = mutableMapOf<String, JsonElement>().apply {
                 putFilters(KeyAutomaticFacetFilters, value.automaticFacetFilters)
@@ -151,6 +159,9 @@ public data class Consequence(
                 }
                 value.userData?.let { put(KeyUserData, it) }
                 value.filterPromotes?.let { put(KeyFilterPromotes, it) }
+                value.renderingContent?.let {
+                    put(KeyRenderingContent, JsonNoDefaults.encodeToJsonElement(it))
+                }
             }
 
             encoder.asJsonOutput().encodeJsonElement(json)
@@ -167,6 +178,7 @@ public data class Consequence(
             val edits = params?.getEdits()
             val query = params?.extractQuery(edits)
             val filterPromotes = json[KeyFilterPromotes]?.jsonPrimitiveOrNull?.booleanOrNull
+            val renderingContent = json.getRenderingContent()
 
             return Consequence(
                 automaticFacetFilters = automaticFacetFilters,
@@ -176,7 +188,8 @@ public data class Consequence(
                 hide = hide,
                 userData = userData,
                 edits = edits,
-                filterPromotes = filterPromotes
+                filterPromotes = filterPromotes,
+                renderingContent = renderingContent,
             )
         }
     }

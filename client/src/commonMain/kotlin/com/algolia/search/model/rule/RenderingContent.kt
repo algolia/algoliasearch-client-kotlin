@@ -9,7 +9,7 @@ import kotlinx.serialization.json.JsonObject
 
 @Serializable
 public data class RenderingContent(
-    @SerialName(KeyRedirect) public val redirect: Redirect?,
-    @SerialName(KeyFacetMerchandising) public val facetMerchandising: FacetMerchandising?,
+    @SerialName(KeyRedirect) public val redirect: Redirect? = null,
+    @SerialName(KeyFacetMerchandising) public val facetMerchandising: FacetMerchandising? = null,
     @SerialName(KeyUserData) public val userData: List<JsonObject>? = null,
 )
