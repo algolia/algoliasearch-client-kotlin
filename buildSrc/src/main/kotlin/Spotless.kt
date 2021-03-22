@@ -1,5 +1,3 @@
-package plugin
-
 import Dependency
 
 object Spotless : Dependency {
