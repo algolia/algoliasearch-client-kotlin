@@ -76,6 +76,14 @@ public data class Consequence(
      * This object is not interpreted by the API. It is limited to 1kB of minified JSON.
      */
     val userData: JsonObject? = null,
+
+    /**
+     * Consequence each top level attribute is restricted to known use cases. The currently identified use cases are:
+     * - Redirect
+     * - Facet merchandising / ordering
+     * - User defined data
+     */
+    val renderingContent: RenderingContent? = null,
 ) {
 
     @OptIn(ExperimentalSerializationApi::class)
