@@ -26,3 +26,5 @@ public const val KeyRedirect: String = "redirect"
 public const val KeyFacetMerchandising: String = "facetMerchandising"
 public const val KeyFacetOrder: String = "facetOrder"
 public const val KeyRenderingContent: String = "renderingContent"
+public const val KeyValues: String = "values"
+
