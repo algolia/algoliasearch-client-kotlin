@@ -32,20 +32,28 @@ public sealed class Filter {
 
         public sealed class Value {
 
+            public abstract fun asString(): kotlin.String
+
             /**
              * Filter on a [kotlin.String] value.
              */
-            public data class String(val raw: kotlin.String) : Value()
+            public data class String(val raw: kotlin.String) : Value() {
+                override fun asString(): kotlin.String = "\"$raw\""
+            }
 
             /**
              * Filter on a [kotlin.Boolean] value.
              */
-            public data class Boolean(val raw: kotlin.Boolean) : Value()
+            public data class Boolean(val raw: kotlin.Boolean) : Value() {
+                override fun asString(): kotlin.String = raw.toString()
+            }
 
             /**
              * Filter on a [kotlin.Number] value.
              */
-            public data class Number(val raw: kotlin.Number) : Value()
+            public data class Number(val raw: kotlin.Number) : Value() {
+                override fun asString(): kotlin.String = raw.toString()
+            }
         }
 
         public constructor(
