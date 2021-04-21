@@ -57,15 +57,15 @@ kotlin {
 
 tasks {
 
-    withType<KotlinCompile> {
-        dependsOn("copyTemplates")
-    }
-
-    register(name = "copyTemplates", type = Copy::class) {
+    val copyTemplates by creating(type = Copy::class) {
         from("src/commonMain/templates")
         into("$buildDir/generated/sources/templates/kotlin/main")
         expand("projectVersion" to Library.version)
         filteringCharset = "UTF-8"
+    }
+
+    withType<KotlinCompile> {
+        dependsOn(copyTemplates)
     }
 
     withType<Test> {
@@ -76,7 +76,7 @@ tasks {
 configure<SpotlessExtension> {
     kotlin {
         target("**/*.kt")
-        ktlint("0.40.0")
+        ktlint("0.41.0")
         trimTrailingWhitespace()
         endWithNewline()
     }
