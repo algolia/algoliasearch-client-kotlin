@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class FacetMerchandising(
-    @SerialName(KeyFacetOrder) public val facetOrder: List<AttributedFacets> = emptyList(),
+    @SerialName(KeyFacetOrder) public val facetOrder: FacetOrdering,
 )

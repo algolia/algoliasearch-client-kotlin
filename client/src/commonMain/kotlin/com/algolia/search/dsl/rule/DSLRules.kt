@@ -9,11 +9,14 @@ import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import com.algolia.search.model.rule.Edit
 import com.algolia.search.model.rule.FacetMerchandising
+import com.algolia.search.model.rule.FacetOrdering
+import com.algolia.search.model.rule.OrderingRule
 import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Redirect
 import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.rule.Rule
+import com.algolia.search.model.rule.SortRule
 import com.algolia.search.model.rule.TimeRange
 import com.algolia.search.model.search.Query
 import kotlinx.serialization.json.JsonObject
@@ -140,15 +143,27 @@ public class DSLRules(
     }
 
     public fun renderingContent(
-        redirect: Redirect,
-        facetMerchandising: FacetMerchandising,
+        redirect: Redirect? = null,
+        facetMerchandising: FacetMerchandising? = null,
         userData: List<JsonObject>? = null,
     ): RenderingContent = RenderingContent(redirect, facetMerchandising, userData)
 
     public fun redirect(url: String): Redirect = Redirect(url)
 
-    public fun facetMerchandising(block: DSLFacetMerchandising.() -> Unit): FacetMerchandising {
-        return DSLFacetMerchandising(block)
+    public fun facetMerchandising(facetOrdering: FacetOrdering): FacetMerchandising {
+        return FacetMerchandising(facetOrdering)
+    }
+
+    public fun facetOrdering(facets: OrderingRule, facetValues: Map<String, OrderingRule>): FacetOrdering {
+        return FacetOrdering(facets, facetValues)
+    }
+
+    public fun orderingRule(
+        order: List<String>? = listOf("*"),
+        hide: List<String>? = null,
+        sortBy: SortRule? = null
+    ): OrderingRule {
+        return OrderingRule(order, hide, sortBy)
     }
 
     public companion object : DSL<DSLRules, List<Rule>> {

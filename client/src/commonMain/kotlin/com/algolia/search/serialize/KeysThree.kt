@@ -27,4 +27,5 @@ public const val KeyFacetMerchandising: String = "facetMerchandising"
 public const val KeyFacetOrder: String = "facetOrder"
 public const val KeyRenderingContent: String = "renderingContent"
 public const val KeyValues: String = "values"
-
+public const val KeyOrder: String = "order"
+public const val KeySortBy: String = "sortBy"
