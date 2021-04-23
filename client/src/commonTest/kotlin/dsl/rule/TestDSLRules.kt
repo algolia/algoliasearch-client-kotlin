@@ -7,7 +7,6 @@ import com.algolia.search.dsl.query
 import com.algolia.search.dsl.rule.DSLRules
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.rule.Anchoring
-import com.algolia.search.model.rule.AttributedFacets
 import com.algolia.search.model.rule.AutomaticFacetFilters
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
@@ -79,7 +78,7 @@ internal class TestDSLRules {
                     renderingContent = RenderingContent(
                         redirect = Redirect("http://algolia.com/kotlin"),
                         facetMerchandising = FacetMerchandising(
-                            facetOrder = FacetOrdering(
+                            facetOrdering = FacetOrdering(
                                 facets = OrderingRule(),
                                 facetValues = emptyMap(),
                             )

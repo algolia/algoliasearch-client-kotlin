@@ -34,7 +34,7 @@ import com.algolia.search.serialize.KeyExhaustiveNbHits
 import com.algolia.search.serialize.KeyExplain
 import com.algolia.search.serialize.KeyExtract
 import com.algolia.search.serialize.KeyExtractAttribute
-import com.algolia.search.serialize.KeyFacetOrder
+import com.algolia.search.serialize.KeyFacetOrdering
 import com.algolia.search.serialize.KeyFacets
 import com.algolia.search.serialize.KeyFacets_Stats
 import com.algolia.search.serialize.KeyHierarchicalFacets
@@ -441,7 +441,7 @@ public data class ResponseSearch(
             val redirect = userData.firstOrNull()?.jsonObject
                 ?.get("link")?.jsonPrimitiveOrNull?.content?.let { Redirect(it) }
             val facetMerchandising = userData.firstOrNull()?.jsonObject
-                ?.get(KeyFacetOrder)?.let { FacetMerchandising(Json.decodeFromJsonElement(it)) }
+                ?.get(KeyFacetOrdering)?.let { FacetMerchandising(Json.decodeFromJsonElement(it)) }
             consequence = Consequence(
                 renderingContent = RenderingContent(
                     userData = userData,

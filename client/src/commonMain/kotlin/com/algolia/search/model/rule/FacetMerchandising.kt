@@ -1,10 +1,10 @@
 package com.algolia.search.model.rule
 
-import com.algolia.search.serialize.KeyFacetOrder
+import com.algolia.search.serialize.KeyFacetOrdering
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 public data class FacetMerchandising(
-    @SerialName(KeyFacetOrder) public val facetOrder: FacetOrdering,
+    @SerialName(KeyFacetOrdering) public val facetOrdering: FacetOrdering,
 )
