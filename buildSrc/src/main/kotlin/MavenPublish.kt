@@ -1,5 +1,3 @@
-import Dependency
-
 object MavenPublish : Dependency {
 
     override val group = "com.vanniktech"
