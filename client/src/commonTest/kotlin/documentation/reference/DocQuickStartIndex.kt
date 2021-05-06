@@ -10,17 +10,17 @@ import kotlin.test.Test
 @Ignore
 internal class DocQuickStartIndex {
 
+    @Serializable
+    data class Contact(
+        val firstname: String,
+        val lastname: String,
+        val followers: Int,
+        val company: String
+    )
+
     @Test
     fun snippet1() {
         runBlocking {
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String,
-                val followers: Int,
-                val company: String
-            )
-
             val contacts = listOf(
                 Contact("Jimmie", "Barninger", 93, "California Paint"),
                 Contact("Warren", "Speach", 42, "Norwalk Crmc")

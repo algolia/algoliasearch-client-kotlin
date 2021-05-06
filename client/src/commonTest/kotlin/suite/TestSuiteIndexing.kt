@@ -11,6 +11,7 @@ import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Json
+import kotlin.test.Test
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
@@ -18,16 +19,8 @@ import kotlinx.serialization.json.put
 import runBlocking
 import shouldBeTrue
 import shouldEqual
-import kotlin.test.Test
 
 internal class TestSuiteIndexing {
-
-    @Serializable
-    data class Data(
-        override val objectID: ObjectID,
-        val value: Int = 0,
-        @SerialName("_tags") val tags: List<String>? = null,
-    ) : Indexable
 
     private val suffix = "indexing"
     private val attributeValue = "value".toAttribute()
@@ -44,6 +37,13 @@ internal class TestSuiteIndexing {
     private val updateD = dataD.copy(value = 1)
     private val indexName = testSuiteIndexName(suffix)
     private val index = clientAdmin1.initIndex(indexName)
+
+    @Serializable
+    data class Data(
+        override val objectID: ObjectID,
+        val value: Int = 0,
+        @SerialName("_tags") val tags: List<String>? = null,
+    ) : Indexable
 
     private fun batchAddObject(): List<List<BatchOperation.AddObject>> {
         return (0 until 10)

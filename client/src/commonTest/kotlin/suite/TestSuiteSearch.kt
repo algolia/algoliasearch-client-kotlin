@@ -26,6 +26,7 @@ import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
 import com.algolia.search.serialize.KeyRuleContexts
 import io.ktor.http.parseUrlEncodedParameters
+import kotlin.test.Test
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
@@ -37,7 +38,6 @@ import shouldContain
 import shouldEqual
 import shouldNotBeEmpty
 import shouldNotBeNull
-import kotlin.test.Test
 
 internal class TestSuiteSearch {
 
@@ -47,6 +47,13 @@ internal class TestSuiteSearch {
     private val allFacets = setOf("*".toAttribute())
     private val index = clientAdmin1.initIndex(indexName)
     private val search = clientSearch.initIndex(indexName)
+
+    @Serializable
+    data class DecompoundingObject(
+        override val objectID: ObjectID,
+        val type: String,
+        val category: String? = null,
+    ) : Indexable
 
     @Test
     fun test() {
@@ -114,13 +121,6 @@ internal class TestSuiteSearch {
 
     @Test
     fun explain() {
-
-        @Serializable
-        data class DecompoundingObject(
-            override val objectID: ObjectID,
-            val type: String,
-            val category: String? = null,
-        ) : Indexable
 
         runBlocking {
             val settings = settings {

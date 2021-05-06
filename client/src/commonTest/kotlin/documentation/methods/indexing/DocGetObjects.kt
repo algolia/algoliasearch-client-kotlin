@@ -33,6 +33,13 @@ internal class DocGetObjects {
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseObjects
 
+    @Serializable
+    data class Contact(
+        val firstname: String,
+        val lastname: String,
+        override val objectID: ObjectID
+    ) : Indexable
+
     @Test
     fun snippet1() {
         runBlocking {
@@ -43,13 +50,6 @@ internal class DocGetObjects {
     @Test
     fun snippet2() {
         runBlocking {
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String,
-                override val objectID: ObjectID
-            ) : Indexable
-
             val objectID = ObjectID("myID1")
 
             index.getObject(objectID)
