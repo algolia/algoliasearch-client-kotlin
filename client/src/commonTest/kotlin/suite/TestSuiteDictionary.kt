@@ -17,10 +17,10 @@ import com.algolia.search.model.dictionary.DictionarySettings
 import com.algolia.search.model.dictionary.DisableStandardEntries
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Query
-import runBlocking
 import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import runBlocking
 
 internal class TestSuiteDictionary {
 
@@ -113,13 +113,15 @@ internal class TestSuiteDictionary {
     @Test
     fun testSettings(): Unit = runBlocking {
         clientAdmin2.run {
+            val stopwords: Map<Language, Boolean> = mapOf(Language.English to true)
             val stopwordsSettings = DictionarySettings(
                 disableStandardEntries = DisableStandardEntries(
-                    stopwords = mapOf(Language.English to true)
+                    stopwords = stopwords
                 )
             )
             setDictionarySettings(stopwordsSettings).wait()
-            assertEquals(stopwordsSettings, getDictionarySettings())
+            val response = getDictionarySettings()
+            assert(response.disableStandardEntries?.stopwords?.entries?.containsAll(stopwords.entries) == true)
         }
     }
 }
