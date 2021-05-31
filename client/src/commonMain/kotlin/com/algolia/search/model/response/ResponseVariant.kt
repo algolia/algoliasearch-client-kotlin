@@ -20,20 +20,17 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 public data class ResponseVariant(
+    @SerialName(KeyIndex) val indexName: IndexName,
+    @SerialName(KeyTrafficPercentage) val trafficPercentage: Int,
     /**
      * Distinct click count for the variant.
      */
-    @SerialName(KeyClickCount) val clickCount: Int,
+    @SerialName(KeyClickCount) val clickCountOrNull: Int? = null,
     /**
      * Distinct conversion count for the variant.
      */
-    @SerialName(KeyConversionCount) val conversionCount: Int,
-    /**
-     *
-     */
-    @SerialName(KeyDescription) val description: String,
-    @SerialName(KeyIndex) val indexName: IndexName,
-    @SerialName(KeyTrafficPercentage) val trafficPercentage: Int,
+    @SerialName(KeyConversionCount) val conversionCountOrNull: Int? = null,
+    @SerialName(KeyDescription) val descriptionOrNull: String? = null,
     /**
      * Conversion rate for the variant.
      */
@@ -76,4 +73,13 @@ public data class ResponseVariant(
 
     public val customSearchParameters: Query
         get() = customSearchParametersOrNull!!
+
+    public val clickCount: Int
+        get() = requireNotNull(clickCountOrNull)
+
+    public val conversionCount: Int
+        get() = requireNotNull(conversionCountOrNull)
+
+    public val description: String
+        get() = requireNotNull(descriptionOrNull)
 }
