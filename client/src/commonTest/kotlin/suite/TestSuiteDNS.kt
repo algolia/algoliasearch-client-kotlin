@@ -14,13 +14,11 @@ import io.ktor.client.features.SocketTimeoutException
 import io.ktor.client.features.logging.LogLevel
 import io.ktor.http.ContentType
 import io.ktor.http.headersOf
-import io.ktor.util.KtorExperimentalAPI
 import io.ktor.utils.io.ByteReadChannel
 import runBlocking
 import shouldEqual
 import kotlin.test.Test
 
-@OptIn(KtorExperimentalAPI::class)
 internal class TestSuiteDNS {
 
     private val readTimeout = 500L
