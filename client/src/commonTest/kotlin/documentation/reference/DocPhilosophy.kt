@@ -39,6 +39,13 @@ import kotlin.test.Test
 @Ignore
 internal class DocPhilosophy {
 
+    @Serializable
+    data class Contact(
+        val firstname: String,
+        val lastname: String,
+        override val objectID: ObjectID
+    ) : Indexable
+
     @Test
     fun typeSafetyClient() {
         val appID = ApplicationID("YourApplicationID")
@@ -104,12 +111,6 @@ internal class DocPhilosophy {
     @Test
     fun unwrappingHits() {
         runBlocking {
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String
-            )
-
             val response = index.search()
 
             val contacts: List<Contact> = response.hits.map { it.deserialize(Contact.serializer()) }
@@ -119,13 +120,6 @@ internal class DocPhilosophy {
     @Test
     fun unwrappingObject() {
         runBlocking {
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String,
-                override val objectID: ObjectID
-            ) : Indexable
-
             val objectID = ObjectID("myID1")
 
             val contact: Contact = index.getObject(Contact.serializer(), objectID)
@@ -135,12 +129,6 @@ internal class DocPhilosophy {
     @Test
     fun unwrappingJson() {
         runBlocking {
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String
-            )
-
             val json: JsonObject = buildJsonObject {
                 put("firstname", "Jimmie")
                 put("lastname", "Barninger")

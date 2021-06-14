@@ -5,12 +5,12 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.multicluster.UserID
 import documentation.index
+import kotlin.test.Ignore
+import kotlin.test.Test
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import runBlocking
-import kotlin.test.Ignore
-import kotlin.test.Test
 
 @Ignore
 internal class DocAddObjects {
@@ -37,6 +37,19 @@ internal class DocAddObjects {
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
 
+    @Serializable
+    data class Contact(
+        val firstname: String,
+        val lastname: String,
+        override val objectID: ObjectID
+    ) : Indexable
+
+    @Serializable
+    data class MyContact(
+        val firstname: String,
+        val lastname: String
+    )
+
     @Test
     fun snippet1() {
         runBlocking {
@@ -55,15 +68,12 @@ internal class DocAddObjects {
             index.saveObjects(json)
 
             // With serializable class
-            @Serializable
-            data class Contact(val firstname: String, val lastname: String)
-
             val contacts = listOf(
-                Contact("Jimmie", "Barninger"),
-                Contact("Warren", "Speach")
+                MyContact("Jimmie", "Barninger"),
+                MyContact("Warren", "Speach")
             )
 
-            index.saveObjects(Contact.serializer(), contacts)
+            index.saveObjects(MyContact.serializer(), contacts)
         }
     }
 
@@ -87,13 +97,6 @@ internal class DocAddObjects {
             index.saveObjects(json)
 
             // With serializable class
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String,
-                override val objectID: ObjectID
-            ) : Indexable
-
             val contacts = listOf(
                 Contact("Jimmie", "Barninger", ObjectID("myID")),
                 Contact("Jimmie", "Barninger", ObjectID("myID"))
@@ -116,13 +119,6 @@ internal class DocAddObjects {
             index.saveObject(json)
 
             // / With serializable class
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String,
-                override val objectID: ObjectID
-            ) : Indexable
-
             val contact = Contact("Jimmie", "Barninger", ObjectID("myID"))
 
             index.saveObject(Contact.serializer(), contact)

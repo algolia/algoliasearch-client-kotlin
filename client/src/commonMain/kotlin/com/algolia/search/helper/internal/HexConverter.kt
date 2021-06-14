@@ -13,5 +13,5 @@ internal fun ByteArray.toHex(lowerCase: Boolean = false): String {
         r.append(hexCode[b.toInt() shr 4 and 0xF])
         r.append(hexCode[b.toInt() and 0xF])
     }
-    return if (lowerCase) r.toString().toLowerCase() else r.toString()
+    return if (lowerCase) r.toString().lowercase() else r.toString()
 }

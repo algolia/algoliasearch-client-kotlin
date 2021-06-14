@@ -7,6 +7,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.serialize.internal.Json
+import java.io.File
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
@@ -15,21 +16,10 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import org.junit.Ignore
 import org.junit.Test
-import java.io.File
 
 @Suppress("UNUSED_VARIABLE", "UnnecessaryVariable")
 @Ignore
 internal class GuideImportingJVM {
-
-    @Serializable
-    data class Actor(
-        val name: String,
-        val rating: Int,
-        val imagePath: String,
-        val alternativePath: String,
-        override val objectID: ObjectID,
-    ) : Indexable
-
     @Test
     fun snippet1() {
         runBlocking {
@@ -49,15 +39,6 @@ internal class GuideImportingJVM {
 
     @Test
     fun snippet2() {
-        @Serializable
-        data class Actor(
-            val name: String,
-            val rating: Int,
-            val imagePath: String,
-            val alternativePath: String,
-            override val objectID: ObjectID,
-        ) : Indexable
-
         val string = File("actors.json").readText()
         val actors: List<Actor> = Json.decodeFromString(ListSerializer(Actor.serializer()), string)
     }
@@ -81,3 +62,12 @@ internal class GuideImportingJVM {
         )
     }
 }
+
+@Serializable
+data class Actor(
+    val name: String,
+    val rating: Int,
+    val imagePath: String,
+    val alternativePath: String,
+    override val objectID: ObjectID,
+) : Indexable

@@ -28,16 +28,16 @@ internal class DocCustomBatch {
     private val indexName1 = indexName
     private val indexName2 = indexName
 
+    @Serializable
+    data class Contact(
+        val firstname: String,
+        val lastname: String,
+        override val objectID: ObjectID
+    ) : Indexable
+
     @Test
     fun snippet1() {
         runBlocking {
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String,
-                override val objectID: ObjectID
-            ) : Indexable
-
             val operations = listOf(
                 BatchOperationIndex(
                     indexName = indexName1,
@@ -89,13 +89,6 @@ internal class DocCustomBatch {
     @Test
     fun snippet2() {
         runBlocking {
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String,
-                override val objectID: ObjectID
-            ) : Indexable
-
             val operations = listOf(
                 BatchOperationIndex(
                     indexName = indexName1,

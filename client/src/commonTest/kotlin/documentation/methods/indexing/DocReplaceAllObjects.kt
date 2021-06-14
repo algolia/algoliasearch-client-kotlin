@@ -21,6 +21,9 @@ internal class DocReplaceAllObjects {
 //        [records](#method-param-objects): List<T>
 //    ): List<Task>
 
+    @Serializable
+    data class Contact(val firstname: String, val lastname: String)
+
     @Test
     fun snippet1() {
         runBlocking {
@@ -39,9 +42,6 @@ internal class DocReplaceAllObjects {
             index.replaceAllObjects(json)
 
             // With serializable class
-            @Serializable
-            data class Contact(val firstname: String, val lastname: String)
-
             val contacts = listOf(
                 Contact("Jimmie", "Barninger"),
                 Contact("Warren", "Speach")

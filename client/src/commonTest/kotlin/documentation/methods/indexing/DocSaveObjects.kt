@@ -5,12 +5,12 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.multicluster.UserID
 import documentation.index
+import kotlin.test.Ignore
+import kotlin.test.Test
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import runBlocking
-import kotlin.test.Ignore
-import kotlin.test.Test
 
 @Ignore
 internal class DocSaveObjects {
@@ -38,6 +38,14 @@ internal class DocSaveObjects {
 //        #{requestOptions}: __RequestOptions?__ = null
 //    ): ResponseBatch
 
+    @Serializable
+    data class Contact(
+        val firstname: String,
+        val lastname: String,
+        val city: String? = null,
+        override val objectID: ObjectID
+    ) : Indexable
+
     @Test
     fun snippet1() {
         runBlocking {
@@ -56,16 +64,9 @@ internal class DocSaveObjects {
             index.replaceObjects(json)
 
             // With serializable class
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String,
-                override val objectID: ObjectID
-            ) : Indexable
-
             val contacts = listOf(
-                Contact("Jimmie", "Barninger", ObjectID("myID")),
-                Contact("Jimmie", "Barninger", ObjectID("myID"))
+                Contact(firstname = "Jimmie", lastname = "Barninger", objectID = ObjectID("myID")),
+                Contact(firstname = "Jimmie", lastname = "Barninger", objectID = ObjectID("myID"))
             )
 
             index.replaceObjects(Contact.serializer(), contacts)
@@ -85,14 +86,6 @@ internal class DocSaveObjects {
             index.replaceObject(ObjectID("myID"), json)
 
             // With serializable class
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String,
-                val city: String,
-                override val objectID: ObjectID
-            ) : Indexable
-
             val contact = Contact("Jimmie", "Barninger", "New York", ObjectID("myID"))
 
             index.replaceObject(Contact.serializer(), contact)

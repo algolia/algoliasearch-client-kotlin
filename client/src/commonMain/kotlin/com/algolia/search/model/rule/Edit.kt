@@ -39,7 +39,7 @@ public data class Edit(
         override fun serialize(encoder: Encoder, value: Edit) {
             val type = if (value.insert != null) KeyReplace else KeyRemoveLowercase
             val json = buildJsonObject {
-                put(KeyType, type.toLowerCase())
+                put(KeyType, type.lowercase())
                 put(KeyDelete, value.delete)
                 value.insert?.let { put(KeyInsert, it) }
             }

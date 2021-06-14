@@ -22,15 +22,15 @@ internal class DocSearch {
 //
 //     // any #{searchParameters} can be set on the Query object
 
+    @Serializable
+    data class Contact(
+        val firstname: String,
+        val lastname: String
+    )
+
     @Test
     fun snippet1() {
         runBlocking {
-            @Serializable
-            data class Contact(
-                val firstname: String,
-                val lastname: String
-            )
-
             val indexName = IndexName("contacts")
             val index = client.initIndex(indexName)
             val query = query("query") {
