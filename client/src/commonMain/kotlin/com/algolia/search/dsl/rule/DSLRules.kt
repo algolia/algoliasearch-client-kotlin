@@ -10,7 +10,7 @@ import com.algolia.search.model.rule.Consequence
 import com.algolia.search.model.rule.Edit
 import com.algolia.search.model.rule.FacetMerchandising
 import com.algolia.search.model.rule.FacetOrdering
-import com.algolia.search.model.rule.OrderingRule
+import com.algolia.search.model.rule.FacetsOrder
 import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Redirect
@@ -154,7 +154,7 @@ public class DSLRules(
         return FacetMerchandising(facetOrdering)
     }
 
-    public fun facetOrdering(facets: OrderingRule, facetValues: Map<String, OrderingRule>): FacetOrdering {
+    public fun facetOrdering(facets: FacetsOrder, facetValues: Map<String, FacetsOrder>): FacetOrdering {
         return FacetOrdering(facets, facetValues)
     }
 
@@ -162,8 +162,8 @@ public class DSLRules(
         order: List<String>? = listOf("*"),
         hide: List<String>? = null,
         sortBy: SortRule? = null
-    ): OrderingRule {
-        return OrderingRule(order, hide, sortBy)
+    ): FacetsOrder {
+        return FacetsOrder(order, hide, sortBy)
     }
 
     public companion object : DSL<DSLRules, List<Rule>> {

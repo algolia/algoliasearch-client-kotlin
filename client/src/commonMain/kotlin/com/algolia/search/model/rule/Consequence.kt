@@ -81,12 +81,9 @@ public data class Consequence(
      */
     @Deprecated("use renderingContent.userData instead", replaceWith = ReplaceWith("renderingContent?.userData[0]"))
     val userData: JsonObject? = null,
-
     /**
-     * Consequence each top level attribute is restricted to known use cases. The currently identified use cases are:
-     * - Redirect
-     * - Facet merchandising / ordering
-     * - User defined data
+     * Content defining how the search interface should be rendered.
+     * A default value for this can be set via settings.
      */
     val renderingContent: RenderingContent? = null,
 ) {

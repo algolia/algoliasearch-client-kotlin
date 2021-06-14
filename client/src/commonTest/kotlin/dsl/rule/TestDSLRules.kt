@@ -13,7 +13,7 @@ import com.algolia.search.model.rule.Consequence
 import com.algolia.search.model.rule.Edit
 import com.algolia.search.model.rule.FacetMerchandising
 import com.algolia.search.model.rule.FacetOrdering
-import com.algolia.search.model.rule.OrderingRule
+import com.algolia.search.model.rule.FacetsOrder
 import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Redirect
@@ -79,8 +79,8 @@ internal class TestDSLRules {
                         redirect = Redirect("http://algolia.com/kotlin"),
                         facetMerchandising = FacetMerchandising(
                             facetOrdering = FacetOrdering(
-                                facets = OrderingRule(),
-                                facetValues = emptyMap(),
+                                facets = FacetsOrder(),
+                                values = emptyMap(),
                             )
                         ),
                         userData = listOf(buildJsonObject { })

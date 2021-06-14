@@ -1,15 +1,17 @@
 package com.algolia.search.model.rule
 
-import com.algolia.search.serialize.KeyFacetMerchandising
-import com.algolia.search.serialize.KeyRedirect
-import com.algolia.search.serialize.KeyUserData
+import com.algolia.search.serialize.KeyFacetOrdering
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonObject
 
+/**
+ * Content defining how the search interface should be rendered.
+ * This is set via the settings for a default value and can be overridden via rules.
+ */
 @Serializable
 public data class RenderingContent(
-    @SerialName(KeyRedirect) public val redirect: Redirect? = null,
-    @SerialName(KeyFacetMerchandising) public val facetMerchandising: FacetMerchandising? = null,
-    @SerialName(KeyUserData) public val userData: List<JsonObject>? = null,
+    /**
+     * Defining how facets should be ordered.
+     */
+    @SerialName(KeyFacetOrdering) public val facetOrdering: FacetOrdering? = null,
 )

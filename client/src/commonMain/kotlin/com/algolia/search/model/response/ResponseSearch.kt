@@ -8,8 +8,6 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.insights.InsightsEvent
-import com.algolia.search.model.rule.FacetMerchandising
-import com.algolia.search.model.rule.Redirect
 import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Explain
@@ -34,7 +32,6 @@ import com.algolia.search.serialize.KeyExhaustiveNbHits
 import com.algolia.search.serialize.KeyExplain
 import com.algolia.search.serialize.KeyExtract
 import com.algolia.search.serialize.KeyExtractAttribute
-import com.algolia.search.serialize.KeyFacetOrdering
 import com.algolia.search.serialize.KeyFacets
 import com.algolia.search.serialize.KeyFacets_Stats
 import com.algolia.search.serialize.KeyHierarchicalFacets
@@ -56,6 +53,7 @@ import com.algolia.search.serialize.KeyProcessingTimeMS
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyQueryAfterRemoval
 import com.algolia.search.serialize.KeyQueryID
+import com.algolia.search.serialize.KeyRenderingContent
 import com.algolia.search.serialize.KeyScore
 import com.algolia.search.serialize.KeyServerUsed
 import com.algolia.search.serialize.KeyUserData
@@ -80,7 +78,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.decodeFromJsonElement
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 
@@ -242,6 +239,11 @@ public data class ResponseSearch(
      * Number of relevant hits to display in case of non-zero `relevancyStrictness` applied.
      */
     @SerialName(KeyNbSortedHits) val nbSortedHitsOrNull: Int? = null,
+
+    /**
+     * Content defining how the search interface should be rendered.
+     */
+    @SerialName(KeyRenderingContent) val renderingContentOrNull: RenderingContent? = null,
 ) {
 
     public val hits: List<Hit>
@@ -343,8 +345,8 @@ public data class ResponseSearch(
     public val nbSortedHits: Int
         get() = requireNotNull(nbSortedHitsOrNull)
 
-    public val rules: Rules?
-        get() = userDataOrNull?.let { Rules(it) }
+    public val renderingContent: RenderingContent
+        get() = requireNotNull(renderingContentOrNull)
 
     /**
      * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].
@@ -426,33 +428,5 @@ public data class ResponseSearch(
         @SerialName(KeyExtract) val extract: String,
         @SerialName(KeyScore) val score: Double,
         @SerialName(KeyExtractAttribute) val extractAttribute: Attribute,
-    )
-
-    /**
-     * Uses a temporary serializer for prototyping purposes.
-     * TODO: remove it when the feature is complete.
-     */
-    public data class Rules(
-        private val userData: List<JsonObject>,
-    ) {
-        public val consequence: Consequence?
-
-        init {
-            val redirect = userData.firstOrNull()?.jsonObject
-                ?.get("link")?.jsonPrimitiveOrNull?.content?.let { Redirect(it) }
-            val facetMerchandising = userData.firstOrNull()?.jsonObject
-                ?.get(KeyFacetOrdering)?.let { FacetMerchandising(Json.decodeFromJsonElement(it)) }
-            consequence = Consequence(
-                renderingContent = RenderingContent(
-                    userData = userData,
-                    redirect = redirect,
-                    facetMerchandising = facetMerchandising,
-                )
-            )
-        }
-    }
-
-    public data class Consequence(
-        public val renderingContent: RenderingContent?
     )
 }
