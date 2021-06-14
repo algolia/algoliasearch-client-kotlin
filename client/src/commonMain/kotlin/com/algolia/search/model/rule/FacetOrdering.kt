@@ -1,8 +1,8 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.model.Attribute
-import com.algolia.search.serialize.KeyFacetValues
 import com.algolia.search.serialize.KeyFacets
+import com.algolia.search.serialize.KeyValues
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,5 +15,5 @@ public data class FacetOrdering(
     /**
      * The ordering of facet values, within an individual list.
      */
-    @SerialName(KeyFacetValues) public val values: Map<Attribute, FacetValuesOrder>
+    @SerialName(KeyValues) public val values: Map<Attribute, FacetValuesOrder>
 )

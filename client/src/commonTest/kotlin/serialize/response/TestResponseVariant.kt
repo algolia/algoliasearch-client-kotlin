@@ -31,9 +31,9 @@ internal class TestResponseVariant : TestSerializer<ResponseVariant>(ResponseVar
     companion object {
 
         val item = ResponseVariant(
-            clickCount = 0,
-            conversionCount = 1,
-            description = unknown,
+            clickCountOrNull = 0,
+            conversionCountOrNull = 1,
+            descriptionOrNull = unknown,
             indexName = indexA,
             trafficPercentage = 2,
             conversionRateOrNull = 3f,

@@ -8,15 +8,11 @@ import com.algolia.search.model.rule.AutomaticFacetFilters
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import com.algolia.search.model.rule.Edit
-import com.algolia.search.model.rule.FacetMerchandising
 import com.algolia.search.model.rule.FacetOrdering
-import com.algolia.search.model.rule.FacetsOrder
 import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
-import com.algolia.search.model.rule.Redirect
 import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.rule.Rule
-import com.algolia.search.model.rule.SortRule
 import com.algolia.search.model.rule.TimeRange
 import com.algolia.search.model.search.Query
 import kotlinx.serialization.json.JsonObject
@@ -142,28 +138,11 @@ public class DSLRules(
         +Rule(objectID, conditions, consequence, enabled, validity, description)
     }
 
-    public fun renderingContent(
-        redirect: Redirect? = null,
-        facetMerchandising: FacetMerchandising? = null,
-        userData: List<JsonObject>? = null,
-    ): RenderingContent = RenderingContent(redirect, facetMerchandising, userData)
-
-    public fun redirect(url: String): Redirect = Redirect(url)
-
-    public fun facetMerchandising(facetOrdering: FacetOrdering): FacetMerchandising {
-        return FacetMerchandising(facetOrdering)
-    }
-
-    public fun facetOrdering(facets: FacetsOrder, facetValues: Map<String, FacetsOrder>): FacetOrdering {
-        return FacetOrdering(facets, facetValues)
-    }
-
-    public fun orderingRule(
-        order: List<String>? = listOf("*"),
-        hide: List<String>? = null,
-        sortBy: SortRule? = null
-    ): FacetsOrder {
-        return FacetsOrder(order, hide, sortBy)
+    /**
+     * Content defining how the search interface should be rendered.
+     */
+    public fun renderingContent(facetOrdering: FacetOrdering? = null): RenderingContent {
+        return RenderingContent(facetOrdering)
     }
 
     public companion object : DSL<DSLRules, List<Rule>> {
