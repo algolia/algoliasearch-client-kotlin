@@ -10,9 +10,9 @@ public data class FacetValuesOrder(
     /**
      * Pinned order of facet values.
      */
-    @SerialName(KeyOrder) public val order: List<String>? = null,
+    @SerialName(KeyOrder) public val order: List<String> = emptyList(),
     /**
      * How to display the remaining items.
      */
-    @SerialName(KeySortRemainingBy) public val sortRemainingBy: SortRule?
+    @SerialName(KeySortRemainingBy) public val sortRemainingBy: SortRule = SortRule.Count
 )
