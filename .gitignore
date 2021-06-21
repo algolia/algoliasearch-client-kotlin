@@ -1,21 +1,31 @@
-/build
-/.idea
+# Gradle
 .gradle
-.DS_STORE
-*.iml
+gradlew.bat
+build
 local.properties
+reports
+build
 
-# fastlane specific
+# IntelliJ IDEA
+.idea
+*.iml
+*.ipl
+*.iws
+classes/
+idea-classes/
+coverage-error.log
+
+# Finder
+.DS_Store
+
+# fastlane
 **/fastlane/report.xml
-
-# deliver temporary files
 **/fastlane/Preview.html
-
-# snapshot generated screenshots
 **/fastlane/screenshots
-
-# scan temporary files
 **/fastlane/test_output
 
 # bitrise
 .bitrise.yml
+
+# Java
+*.hprof

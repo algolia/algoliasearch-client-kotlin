@@ -1,3 +1,15 @@
+# 1.8.0
+
+### Added
+- Facets ordering (#245)
+
+### Fixed
+- Analytics: fields nullability in response variant (#262)
+
+### Changed
+- Update Kotlin to 1.5.10
+- Update Ktor 1.6.0
+
 # 1.7.0
 
 ### Added
