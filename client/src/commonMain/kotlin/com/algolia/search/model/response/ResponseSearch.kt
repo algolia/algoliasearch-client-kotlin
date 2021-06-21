@@ -8,6 +8,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.insights.InsightsEvent
+import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Explain
 import com.algolia.search.model.search.Facet
@@ -52,6 +53,7 @@ import com.algolia.search.serialize.KeyProcessingTimeMS
 import com.algolia.search.serialize.KeyQuery
 import com.algolia.search.serialize.KeyQueryAfterRemoval
 import com.algolia.search.serialize.KeyQueryID
+import com.algolia.search.serialize.KeyRenderingContent
 import com.algolia.search.serialize.KeyScore
 import com.algolia.search.serialize.KeyServerUsed
 import com.algolia.search.serialize.KeyUserData
@@ -237,6 +239,11 @@ public data class ResponseSearch(
      * Number of relevant hits to display in case of non-zero `relevancyStrictness` applied.
      */
     @SerialName(KeyNbSortedHits) val nbSortedHitsOrNull: Int? = null,
+
+    /**
+     * Content defining how the search interface should be rendered.
+     */
+    @SerialName(KeyRenderingContent) val renderingContentOrNull: RenderingContent? = null,
 ) {
 
     public val hits: List<Hit>
@@ -337,6 +344,9 @@ public data class ResponseSearch(
 
     public val nbSortedHits: Int
         get() = requireNotNull(nbSortedHitsOrNull)
+
+    public val renderingContent: RenderingContent
+        get() = requireNotNull(renderingContentOrNull)
 
     /**
      * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].

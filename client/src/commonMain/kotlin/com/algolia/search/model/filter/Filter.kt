@@ -33,19 +33,24 @@ public sealed class Filter {
         public sealed class Value {
 
             /**
+             * Raw value.
+             */
+            public abstract val raw: Any
+
+            /**
              * Filter on a [kotlin.String] value.
              */
-            public data class String(val raw: kotlin.String) : Value()
+            public data class String(override val raw: kotlin.String) : Value()
 
             /**
              * Filter on a [kotlin.Boolean] value.
              */
-            public data class Boolean(val raw: kotlin.Boolean) : Value()
+            public data class Boolean(override val raw: kotlin.Boolean) : Value()
 
             /**
              * Filter on a [kotlin.Number] value.
              */
-            public data class Number(val raw: kotlin.Number) : Value()
+            public data class Number(override val raw: kotlin.Number) : Value()
         }
 
         public constructor(

@@ -8,8 +8,10 @@ import com.algolia.search.model.rule.AutomaticFacetFilters
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import com.algolia.search.model.rule.Edit
+import com.algolia.search.model.rule.FacetOrdering
 import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
+import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.TimeRange
 import com.algolia.search.model.search.Query
@@ -85,7 +87,8 @@ public class DSLRules(
         filterPromotes: Boolean? = null,
         userData: JsonObject? = null,
         hide: List<ObjectID>? = null,
-        query: Query? = null
+        query: Query? = null,
+        renderingContent: RenderingContent? = null,
     ): Consequence {
         return Consequence(
             automaticFacetFilters = automaticFacetFilters,
@@ -95,7 +98,8 @@ public class DSLRules(
             userData = userData,
             hide = hide,
             query = query,
-            filterPromotes = filterPromotes
+            filterPromotes = filterPromotes,
+            renderingContent = renderingContent
         )
     }
 
@@ -132,6 +136,13 @@ public class DSLRules(
         description: String? = null
     ) {
         +Rule(objectID, conditions, consequence, enabled, validity, description)
+    }
+
+    /**
+     * Content defining how the search interface should be rendered.
+     */
+    public fun renderingContent(facetOrdering: FacetOrdering? = null): RenderingContent {
+        return RenderingContent(facetOrdering)
     }
 
     public companion object : DSL<DSLRules, List<Rule>> {

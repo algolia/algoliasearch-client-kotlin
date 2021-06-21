@@ -4,6 +4,7 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyCount
 import com.algolia.search.serialize.KeyHighlighted
 import com.algolia.search.serialize.KeyName
+import com.algolia.search.serialize.KeyValue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,7 +13,7 @@ public data class Facet(
     /**
      * Name of the facet. Is equal to the value associated to an [Attribute].
      */
-    @SerialName(KeyName) val value: String,
+    @SerialName(KeyValue) val value: String,
     /**
      * Number of times this [value] occurs for a given [Attribute].
      */

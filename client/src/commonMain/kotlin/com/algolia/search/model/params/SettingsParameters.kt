@@ -2,6 +2,7 @@ package com.algolia.search.model.params
 
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.CustomRankingCriterion
@@ -174,4 +175,10 @@ public interface SettingsParameters : CommonParameters {
      * [Documentation](https://www.algolia.com/doc/api-reference/api-parameters/attributesToTransliterate/?language=kotlin)
      */
     public var attributesToTransliterate: List<Attribute>?
+
+    /**
+     * Content defining how the search interface should be rendered.
+     * This is set via the settings for a default value and can be overridden via rules
+     */
+    public var renderingContent: RenderingContent?
 }

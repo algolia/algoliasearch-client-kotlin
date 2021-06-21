@@ -4,6 +4,7 @@ import com.algolia.search.dsl.DSLParameters
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.params.SettingsParameters
+import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.search.AlternativesAsExact
 import com.algolia.search.model.search.ExactOnSingleWordQuery
 import com.algolia.search.model.search.IgnorePlurals
@@ -62,6 +63,7 @@ import com.algolia.search.serialize.KeyRanking
 import com.algolia.search.serialize.KeyRelevancyStrictness
 import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
+import com.algolia.search.serialize.KeyRenderingContent
 import com.algolia.search.serialize.KeyReplaceSynonymsInHighlight
 import com.algolia.search.serialize.KeyReplicas
 import com.algolia.search.serialize.KeyResponseFields
@@ -472,7 +474,13 @@ public data class Settings(
      * Engine default: [*]
      * [Documentation](https://www.algolia.com/doc/api-reference/api-parameters/attributesToTransliterate/?language=kotlin)
      */
-    @SerialName(KeyAttributesToTransliterate) override var attributesToTransliterate: List<Attribute>? = null
+    @SerialName(KeyAttributesToTransliterate) override var attributesToTransliterate: List<Attribute>? = null,
+
+    /**
+     * Content defining how the search interface should be rendered.
+     * This is set via the settings for a default value and can be overridden via rules
+     */
+    @SerialName(KeyRenderingContent) override var renderingContent: RenderingContent? = null,
 ) : SettingsParameters {
 
     /**

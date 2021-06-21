@@ -5,6 +5,11 @@ import attributeB
 import attributes
 import attributesJson
 import boolean
+import com.algolia.search.model.rule.FacetOrdering
+import com.algolia.search.model.rule.FacetValuesOrder
+import com.algolia.search.model.rule.FacetsOrder
+import com.algolia.search.model.rule.RenderingContent
+import com.algolia.search.model.rule.SortRule
 import com.algolia.search.model.search.AlternativesAsExact
 import com.algolia.search.model.search.ExactOnSingleWordQuery
 import com.algolia.search.model.search.IgnorePlurals
@@ -27,6 +32,7 @@ import com.algolia.search.serialize.KeyAdvancedSyntax
 import com.algolia.search.serialize.KeyAdvancedSyntaxFeatures
 import com.algolia.search.serialize.KeyAllowCompressionOfIntegerArray
 import com.algolia.search.serialize.KeyAllowTyposOnNumericTokens
+import com.algolia.search.serialize.KeyAlpha
 import com.algolia.search.serialize.KeyAlternativesAsExact
 import com.algolia.search.serialize.KeyAttributeCriteriaComputedByMinProximity
 import com.algolia.search.serialize.KeyAttributeForDistinct
@@ -50,6 +56,8 @@ import com.algolia.search.serialize.KeyEnableRules
 import com.algolia.search.serialize.KeyExactOnSingleWordQuery
 import com.algolia.search.serialize.KeyExactPhrase
 import com.algolia.search.serialize.KeyExcludeWords
+import com.algolia.search.serialize.KeyFacetOrdering
+import com.algolia.search.serialize.KeyFacets
 import com.algolia.search.serialize.KeyHighlightPostTag
 import com.algolia.search.serialize.KeyHighlightPreTag
 import com.algolia.search.serialize.KeyHitsPerPage
@@ -63,6 +71,7 @@ import com.algolia.search.serialize.KeyMinWordSizeFor1Typo
 import com.algolia.search.serialize.KeyMinWordSizeFor2Typos
 import com.algolia.search.serialize.KeyNumericAttributesForFiltering
 import com.algolia.search.serialize.KeyOptionalWords
+import com.algolia.search.serialize.KeyOrder
 import com.algolia.search.serialize.KeyPaginationLimitedTo
 import com.algolia.search.serialize.KeyPrimary
 import com.algolia.search.serialize.KeyQueryLanguages
@@ -71,6 +80,7 @@ import com.algolia.search.serialize.KeyRanking
 import com.algolia.search.serialize.KeyRelevancyStrictness
 import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
+import com.algolia.search.serialize.KeyRenderingContent
 import com.algolia.search.serialize.KeyReplaceSynonymsInHighlight
 import com.algolia.search.serialize.KeyReplicas
 import com.algolia.search.serialize.KeyResponseFields
@@ -79,13 +89,16 @@ import com.algolia.search.serialize.KeySearchableAttributes
 import com.algolia.search.serialize.KeySeparatorsToIndex
 import com.algolia.search.serialize.KeySnippetEllipsisText
 import com.algolia.search.serialize.KeySortFacetValuesBy
+import com.algolia.search.serialize.KeySortRemainingBy
 import com.algolia.search.serialize.KeyTypoTolerance
 import com.algolia.search.serialize.KeyUnretrievableAttributes
 import com.algolia.search.serialize.KeyUserData
+import com.algolia.search.serialize.KeyValues
 import com.algolia.search.serialize.KeyVersion
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import indexA
 import int
+import kotlin.test.Test
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
@@ -96,7 +109,6 @@ import serialize.search.TestSnippet
 import shouldEqual
 import string
 import unknown
-import kotlin.test.Test
 
 internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
 
@@ -175,7 +187,18 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             attributeCriteriaComputedByMinProximity = boolean,
             relevancyStrictness = int,
             decompoundQuery = boolean,
-            attributesToTransliterate = attributes
+            attributesToTransliterate = attributes,
+            renderingContent = RenderingContent(
+                facetOrdering = FacetOrdering(
+                    facets = FacetsOrder(order = listOf(unknown)),
+                    values = mapOf(
+                        attributeA to FacetValuesOrder(
+                            order = listOf(string),
+                            sortRemainingBy = SortRule.Alpha
+                        )
+                    )
+                )
+            )
         ) to buildJsonObject {
             // Attributes
             put(KeySearchableAttributes, attributesJson)
@@ -245,8 +268,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
                 }
             )
             put(KeyOptionalWords, buildJsonArray { add(string) })
-            put(KeyDisableExactOnAttributes, attributesJson)
             put(KeyDisablePrefixOnAttributes, attributesJson)
+            put(KeyDisableExactOnAttributes, attributesJson)
             put(KeyExactOnSingleWordQuery, ExactOnSingleWordQuery.Word.raw)
             put(KeyAlternativesAsExact, buildJsonArray { add(AlternativesAsExact.IgnorePlurals.raw) })
             // Performance
@@ -261,7 +284,6 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             put(KeyMaxFacetHits, int)
             put(KeyVersion, int)
             put(KeyUserData, buildJsonObject { put(unknown, unknown) })
-            put(KeyPrimary, JsonNull)
             put(KeyIndexLanguages, buildJsonArray { add(Language.Japanese.raw) })
             put(KeyCustomNormalization, buildJsonObject { put(unknown, buildJsonObject { put(unknown, unknown) }) })
             put(KeyEnablePersonalization, boolean)
@@ -269,6 +291,20 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             put(KeyRelevancyStrictness, int)
             put(KeyDecompoundQuery, boolean)
             put(KeyAttributesToTransliterate, attributesJson)
+            put(KeyRenderingContent, buildJsonObject {
+                put(KeyFacetOrdering, buildJsonObject {
+                    put(KeyFacets, buildJsonObject {
+                        put(KeyOrder, buildJsonArray { add(unknown) })
+                    })
+                    put(KeyValues, buildJsonObject {
+                        put(attributeA.raw, buildJsonObject {
+                            put(KeyOrder, buildJsonArray { add(string) })
+                            put(KeySortRemainingBy, KeyAlpha)
+                        })
+                    })
+                })
+            })
+            put(KeyPrimary, JsonNull)
         }
     )
 
