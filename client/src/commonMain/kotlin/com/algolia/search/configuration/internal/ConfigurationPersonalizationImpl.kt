@@ -18,7 +18,7 @@ import io.ktor.client.features.logging.LogLevel
 internal class ConfigurationPersonalizationImpl(
     override val applicationID: ApplicationID,
     override val apiKey: APIKey,
-    override val region: Region.Recommendation,
+    override val region: Region.Personalization,
     override val writeTimeout: Long,
     override val readTimeout: Long,
     override val logLevel: LogLevel,

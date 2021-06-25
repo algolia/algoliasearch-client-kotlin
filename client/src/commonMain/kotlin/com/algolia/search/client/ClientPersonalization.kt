@@ -1,4 +1,4 @@
-@file:Suppress("FunctionName")
+@file:Suppress("FunctionName", "DEPRECATION")
 
 package com.algolia.search.client
 
@@ -9,6 +9,7 @@ import com.algolia.search.configuration.ConfigurationRecommendation
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.internal.Credentials
+import com.algolia.search.configuration.internal.extension.toPersonalization
 import com.algolia.search.endpoint.EndpointPersonalization
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
@@ -32,7 +33,7 @@ public interface ClientPersonalization : EndpointPersonalization, Configuration,
 public fun ClientPersonalization(
     applicationID: ApplicationID,
     apiKey: APIKey,
-    region: Region.Recommendation,
+    region: Region.Personalization,
 ): ClientPersonalization = ClientPersonalizationImpl(
     Transport(
         ConfigurationPersonalization(applicationID, apiKey, region),
@@ -70,7 +71,7 @@ public fun ClientRecommendation(
     applicationID: ApplicationID,
     apiKey: APIKey,
     region: Region.Recommendation,
-): ClientRecommendation = ClientPersonalization(applicationID, apiKey, region)
+): ClientRecommendation = ClientPersonalization(applicationID, apiKey, region.toPersonalization())
 
 /**
  * Create a [ClientRecommendation] instance.

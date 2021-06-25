@@ -4,7 +4,6 @@ import com.algolia.search.client.ClientPersonalization
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.endpoint.EndpointPersonalization
-import com.algolia.search.endpoint.EndpointRecommendation
 import com.algolia.search.endpoint.internal.EndpointPersonalization
 import com.algolia.search.transport.internal.Transport
 

@@ -8,6 +8,7 @@ import com.algolia.search.configuration.internal.ConfigurationPersonalizationImp
 import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
+import com.algolia.search.configuration.internal.extension.toPersonalization
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.internal.hosts
@@ -23,7 +24,7 @@ public interface ConfigurationPersonalization : Configuration, Credentials {
     /**
      * Recommendation region.
      */
-    public val region: Region.Recommendation
+    public val region: Region.Personalization
 }
 
 /**
@@ -31,8 +32,8 @@ public interface ConfigurationPersonalization : Configuration, Credentials {
  *
  * @param applicationID application ID
  * @param apiKey API key
- * @param region recommendation region
- * @param writeTimeout write timout
+ * @param region personalization region
+ * @param writeTimeout write timeout
  * @param readTimeout read timeout
  * @param logLevel logging level
  * @param hosts recommendation region hosts
@@ -43,7 +44,7 @@ public interface ConfigurationPersonalization : Configuration, Credentials {
 public fun ConfigurationPersonalization(
     applicationID: ApplicationID,
     apiKey: APIKey,
-    region: Region.Recommendation,
+    region: Region.Personalization,
     writeTimeout: Long = DEFAULT_WRITE_TIMEOUT,
     readTimeout: Long = DEFAULT_READ_TIMEOUT,
     logLevel: LogLevel = DEFAULT_LOG_LEVEL,
@@ -88,6 +89,7 @@ public typealias ConfigurationRecommendation = ConfigurationPersonalization
     "use ConfigurationPersonalization instead",
     replaceWith = ReplaceWith("ConfigurationPersonalization(applicationID, apiKey, region, writeTimeout, readTimeout, logLevel, hosts, defaultHeaders, engine, httpClientConfig)")
 )
+@Suppress("DEPRECATION")
 public fun ConfigurationRecommendation(
     applicationID: ApplicationID,
     apiKey: APIKey,
@@ -95,14 +97,14 @@ public fun ConfigurationRecommendation(
     writeTimeout: Long = DEFAULT_WRITE_TIMEOUT,
     readTimeout: Long = DEFAULT_READ_TIMEOUT,
     logLevel: LogLevel = DEFAULT_LOG_LEVEL,
-    hosts: List<RetryableHost> = region.hosts,
+    hosts: List<RetryableHost> = region.toPersonalization().hosts,
     defaultHeaders: Map<String, String>? = null,
     engine: HttpClientEngine? = null,
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
 ): ConfigurationRecommendation = ConfigurationPersonalization(
     applicationID = applicationID,
     apiKey = apiKey,
-    region = region,
+    region = region.toPersonalization(),
     writeTimeout = writeTimeout,
     readTimeout = readTimeout,
     logLevel = logLevel,
