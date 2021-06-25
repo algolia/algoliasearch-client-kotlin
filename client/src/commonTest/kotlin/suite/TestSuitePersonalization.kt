@@ -11,10 +11,10 @@ import runBlocking
 import shouldEqual
 import kotlin.test.Test
 
-internal class TestSuiteRecommendation {
+internal class TestSuitePersonalization {
 
     @Test
-    fun testRecommendationClient() {
+    fun testPersonalizationClient() {
         runBlocking {
             clientPersonalization.getPersonalizationStrategy()
         }
