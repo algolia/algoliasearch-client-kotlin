@@ -7,16 +7,16 @@ import com.algolia.search.model.recommendation.PersonalizationStrategy
 import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
 import io.ktor.client.features.ClientRequestException
 import io.ktor.http.HttpStatusCode
+import kotlin.test.Test
 import runBlocking
 import shouldEqual
-import kotlin.test.Test
 
 internal class TestSuitePersonalization {
 
     @Test
     fun testPersonalizationClient() {
         runBlocking {
-            clientPersonalization.getPersonalizationStrategy()
+            val personalizationStrategy = clientPersonalization.getPersonalizationStrategy()
         }
     }
 
@@ -45,6 +45,22 @@ internal class TestSuitePersonalization {
                 if (e.response.status != HttpStatusCode.TooManyRequests) throw e
             }
             clientPersonalization.getPersonalizationStrategy() shouldEqual strategy
+        }
+    }
+
+    @Test
+    fun testGetPersonalizationProfile() {
+        runBlocking {
+            //clientPersonalization.getPersonalizationProfile()
+            TODO()
+        }
+    }
+
+    @Test
+    fun testDeletePersonalizationProfile() {
+        runBlocking {
+            //clientPersonalization.deletePersonalizationProfile()
+            TODO()
         }
     }
 }
