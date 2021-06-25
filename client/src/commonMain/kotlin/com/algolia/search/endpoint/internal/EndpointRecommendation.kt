@@ -3,7 +3,7 @@
 package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.endpoint.EndpointRecommendation
+import com.algolia.search.endpoint.EndpointPersonalization
 import com.algolia.search.model.recommendation.PersonalizationStrategy
 import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
 import com.algolia.search.serialize.RouteRecommendationV2
@@ -12,9 +12,9 @@ import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
 
-internal class EndpointRecommendationImpl(
+internal class EndpointPersonalizationImpl(
     private val transport: Transport,
-) : EndpointRecommendation {
+) : EndpointPersonalization {
 
     override suspend fun setPersonalizationStrategy(
         strategy: PersonalizationStrategy,
@@ -42,8 +42,8 @@ internal class EndpointRecommendationImpl(
 }
 
 /**
- * Create an [EndpointRecommendation] instance.
+ * Create an [EndpointPersonalization] instance.
  */
-internal fun EndpointRecommendation(
+internal fun EndpointPersonalization(
     transport: Transport,
-): EndpointRecommendation = EndpointRecommendationImpl(transport)
+): EndpointPersonalization = EndpointPersonalizationImpl(transport)

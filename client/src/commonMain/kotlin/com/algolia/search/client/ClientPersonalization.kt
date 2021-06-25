@@ -2,7 +2,7 @@
 
 package com.algolia.search.client
 
-import com.algolia.search.client.internal.ClientRecommendationImpl
+import com.algolia.search.client.internal.ClientPersonalizationImpl
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.ConfigurationRecommendation
 import com.algolia.search.configuration.Credentials
@@ -16,23 +16,23 @@ import com.algolia.search.transport.internal.Transport
 /**
  * Client for the recommendation API.
  */
-public interface ClientRecommendation : EndpointRecommendation, Configuration, Credentials {
+public interface ClientPersonalization : EndpointRecommendation, Configuration, Credentials {
 
     public companion object
 }
 
 /**
- * Create a [ClientRecommendation] instance.
+ * Create a [ClientPersonalization] instance.
  *
  * @param applicationID application ID
  * @param apiKey API Key
- * @param region recommendation region
+ * @param region personalization region
  */
-public fun ClientRecommendation(
+public fun ClientPersonalization(
     applicationID: ApplicationID,
     apiKey: APIKey,
     region: Region.Recommendation,
-): ClientRecommendation = ClientRecommendationImpl(
+): ClientPersonalization = ClientPersonalizationImpl(
     Transport(
         ConfigurationRecommendation(applicationID, apiKey, region),
         Credentials(applicationID, apiKey)
@@ -42,8 +42,14 @@ public fun ClientRecommendation(
 /**
  * Create a [ClientSearch] instance.
  *
- * @param configuration recommendation configuration
+ * @param configuration personalization configuration
  */
-public fun ClientRecommendation(
+public fun ClientPersonalization(
     configuration: ConfigurationRecommendation,
-): ClientRecommendation = ClientRecommendationImpl((Transport(configuration, configuration)))
+): ClientPersonalization = ClientPersonalizationImpl((Transport(configuration, configuration)))
+
+/**
+ * Client for the personalization API.
+ */
+@Deprecated("use ClientPersonalization instead", replaceWith = ReplaceWith("ClientPersonalization"))
+public typealias ClientRecommendation = ClientPersonalization

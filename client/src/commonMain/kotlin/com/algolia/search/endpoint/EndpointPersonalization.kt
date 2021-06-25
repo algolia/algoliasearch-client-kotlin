@@ -7,7 +7,7 @@ import com.algolia.search.transport.RequestOptions
 /**
  * [Documentation][https://www.algolia.com/doc/rest-api/recommendation]
  */
-public interface EndpointRecommendation {
+public interface EndpointPersonalization {
 
     /**
      * Set a [PersonalizationStrategy] for your application.
@@ -27,3 +27,6 @@ public interface EndpointRecommendation {
         requestOptions: RequestOptions? = null
     ): PersonalizationStrategy
 }
+
+@Deprecated("use EndpointPersonalization instead", replaceWith = ReplaceWith("EndpointPersonalization"))
+public typealias EndpointRecommendation = EndpointPersonalization
