@@ -1,3 +1,8 @@
+# Unreleased
+
+### Changed
+- Update Kotlin to 1.5.20
+
 # 1.8.0
 
 ### Added
