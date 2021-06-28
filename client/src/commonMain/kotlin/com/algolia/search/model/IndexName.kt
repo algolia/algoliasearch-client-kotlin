@@ -25,7 +25,7 @@ public data class IndexName(
         if (raw.isBlank()) throw EmptyStringException("IndexName")
     }
 
-    private fun encode(): StringUTF8 {
+    internal fun encode(): StringUTF8 {
         return StringUTF8.encode(raw)
     }
 
