@@ -36,7 +36,7 @@ public interface ConfigurationPersonalization : Configuration, Credentials {
  * @param writeTimeout write timeout
  * @param readTimeout read timeout
  * @param logLevel logging level
- * @param hosts recommendation region hosts
+ * @param hosts personalization region hosts
  * @param defaultHeaders default headers
  * @param engine http client engine
  * @param httpClientConfig http client configuration

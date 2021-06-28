@@ -16,7 +16,7 @@ import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.internal.Transport
 
 /**
- * Client for the recommendation API.
+ * Client for the personalization API.
  */
 public interface ClientPersonalization : EndpointPersonalization, Configuration, Credentials {
 
