@@ -11,6 +11,10 @@ buildscript {
     }
 }
 
+project.extensions.extraProperties.apply {
+    set("VERSION_NAME", libs.versions.apiclient)
+}
+
 subprojects {
     repositories {
         mavenCentral()

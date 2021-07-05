@@ -1,4 +1,5 @@
 [versions]
+apiclient = "1.8.0"
 ktor = "1.6.1"
 
 [libraries]

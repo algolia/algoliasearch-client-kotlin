@@ -60,7 +60,7 @@ tasks {
     val copyTemplates by creating(type = Copy::class) {
         from("src/commonMain/templates")
         into("$buildDir/generated/sources/templates/kotlin/main")
-        expand("projectVersion" to Library.version)
+        expand("projectVersion" to libs.versions.apiclient)
         filteringCharset = "UTF-8"
     }
 
