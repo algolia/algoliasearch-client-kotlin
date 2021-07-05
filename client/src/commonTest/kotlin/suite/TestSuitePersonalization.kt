@@ -1,10 +1,10 @@
 package suite
 
 import clientPersonalization
-import com.algolia.search.model.recommendation.EventScoring
-import com.algolia.search.model.recommendation.FacetScoring
-import com.algolia.search.model.recommendation.PersonalizationStrategy
-import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
+import com.algolia.search.model.personalization.EventScoring
+import com.algolia.search.model.personalization.FacetScoring
+import com.algolia.search.model.personalization.PersonalizationStrategy
+import com.algolia.search.model.personalization.SetPersonalizationStrategyResponse
 import io.ktor.client.features.ClientRequestException
 import io.ktor.http.HttpStatusCode
 import kotlin.test.Test

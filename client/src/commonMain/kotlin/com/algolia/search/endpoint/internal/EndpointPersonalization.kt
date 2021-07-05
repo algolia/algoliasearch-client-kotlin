@@ -5,9 +5,9 @@ package com.algolia.search.endpoint.internal
 import com.algolia.search.configuration.CallType
 import com.algolia.search.endpoint.EndpointPersonalization
 import com.algolia.search.model.insights.UserToken
-import com.algolia.search.model.recommendation.PersonalizationProfileResponse
-import com.algolia.search.model.recommendation.PersonalizationStrategy
-import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
+import com.algolia.search.model.personalization.PersonalizationProfileResponse
+import com.algolia.search.model.personalization.PersonalizationStrategy
+import com.algolia.search.model.personalization.SetPersonalizationStrategyResponse
 import com.algolia.search.serialize.RoutePersonalization
 import com.algolia.search.serialize.RouteProfiles
 import com.algolia.search.serialize.internal.Json
