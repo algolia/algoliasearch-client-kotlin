@@ -12,7 +12,7 @@ buildscript {
 }
 
 project.extensions.extraProperties.apply {
-    set("VERSION_NAME", libs.versions.apiclient)
+    set("VERSION_NAME", libs.versions.apiclient.get())
 }
 
 subprojects {
