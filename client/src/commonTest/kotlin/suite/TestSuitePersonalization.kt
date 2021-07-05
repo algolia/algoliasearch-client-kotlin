@@ -16,7 +16,7 @@ internal class TestSuitePersonalization {
     @Test
     fun testPersonalizationClient() {
         runBlocking {
-            val personalizationStrategy = clientPersonalization.getPersonalizationStrategy()
+            clientPersonalization.getPersonalizationStrategy()
         }
     }
 
@@ -45,22 +45,6 @@ internal class TestSuitePersonalization {
                 if (e.response.status != HttpStatusCode.TooManyRequests) throw e
             }
             clientPersonalization.getPersonalizationStrategy() shouldEqual strategy
-        }
-    }
-
-    @Test
-    fun testGetPersonalizationProfile() {
-        runBlocking {
-            //clientPersonalization.getPersonalizationProfile()
-            TODO()
-        }
-    }
-
-    @Test
-    fun testDeletePersonalizationProfile() {
-        runBlocking {
-            //clientPersonalization.deletePersonalizationProfile()
-            TODO()
         }
     }
 }
