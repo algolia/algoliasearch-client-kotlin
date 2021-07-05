@@ -29,27 +29,27 @@ kotlin {
         val commonMain by getting {
             kotlin.srcDirs("$buildDir/generated/sources/templates/kotlin/main")
             dependencies {
-                api(Ktor("client"))
-                api(Ktor("client-json"))
-                api(Ktor("client-logging"))
-                api(Ktor("client-serialization"))
+                api(libs.ktor.client.core)
+                api(libs.ktor.client.json)
+                api(libs.ktor.client.logging)
+                api(libs.ktor.client.serialization)
             }
         }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                implementation(Ktor("client"))
-                implementation(Ktor("client-mock"))
+                api(libs.ktor.client.core)
+                api(libs.ktor.client.mock)
             }
         }
         val jvmMain by getting
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
-                implementation(Ktor("client-okhttp"))
-                implementation(Ktor("client-apache"))
-                implementation(Ktor("client-android"))
+                api(libs.ktor.client.apache)
+                api(libs.ktor.client.okhttp)
+                api(libs.ktor.client.android)
             }
         }
     }
