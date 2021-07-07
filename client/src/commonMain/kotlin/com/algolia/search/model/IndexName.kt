@@ -2,7 +2,7 @@ package com.algolia.search.model
 
 import com.algolia.search.client.Index
 import com.algolia.search.exception.EmptyStringException
-import com.algolia.search.helper.internal.StringUTF8
+import com.algolia.search.helper.internal.encodeUTF8
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.RouteIndexesV1
@@ -25,12 +25,12 @@ public data class IndexName(
         if (raw.isBlank()) throw EmptyStringException("IndexName")
     }
 
-    internal fun encode(): StringUTF8 {
-        return StringUTF8.encode(raw)
+    internal fun encode(): String {
+        return raw.encodeUTF8()
     }
 
     internal fun toPath(suffix: String? = null): String {
-        return "$RouteIndexesV1/${encode().string}" + (suffix ?: "")
+        return "$RouteIndexesV1/${encode()}" + (suffix ?: "")
     }
 
     override fun toString(): String {
