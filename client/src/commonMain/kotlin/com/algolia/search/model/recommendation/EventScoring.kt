@@ -1,27 +1,15 @@
 package com.algolia.search.model.recommendation
 
-import com.algolia.search.serialize.KeyEventName
-import com.algolia.search.serialize.KeyEventType
-import com.algolia.search.serialize.KeyScore
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.algolia.search.model.personalization.EventScoring
 
 /**
- * Scoring the event
+ * Scoring the event.
  */
-@Serializable
-public data class EventScoring(
-
-    /**
-     * Name of the event
-     */
-    @SerialName(KeyEventName) val eventName: String,
-    /**
-     * Type of the event
-     */
-    @SerialName(KeyEventType) val eventType: String,
-    /**
-     * Score of the event
-     */
-    @SerialName(KeyScore) val score: Int
+@Deprecated(
+    message = "use EventScoring from personalization package instead",
+    replaceWith = ReplaceWith(
+        expression = "EventScoring",
+        imports = arrayOf("com.algolia.search.model.personalization.EventScoring")
+    )
 )
+public typealias EventScoring = EventScoring

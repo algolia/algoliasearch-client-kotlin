@@ -1,7 +1,7 @@
 package com.algolia.search.configuration.internal
 
 import com.algolia.search.configuration.Compression
-import com.algolia.search.configuration.ConfigurationRecommendation
+import com.algolia.search.configuration.ConfigurationPersonalization
 import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.configuration.internal.extension.getHttpClient
@@ -13,12 +13,12 @@ import io.ktor.client.engine.HttpClientEngine
 import io.ktor.client.features.logging.LogLevel
 
 /**
- * Implementation of [ConfigurationRecommendation].
+ * Implementation of [ConfigurationPersonalization].
  */
-internal class ConfigurationRecommendationImpl(
+internal class ConfigurationPersonalizationImpl(
     override val applicationID: ApplicationID,
     override val apiKey: APIKey,
-    override val region: Region.Recommendation,
+    override val region: Region.Personalization,
     override val writeTimeout: Long,
     override val readTimeout: Long,
     override val logLevel: LogLevel,
@@ -26,7 +26,7 @@ internal class ConfigurationRecommendationImpl(
     override val defaultHeaders: Map<String, String>?,
     override val engine: HttpClientEngine?,
     override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)?,
-) : ConfigurationRecommendation {
+) : ConfigurationPersonalization {
 
     override val compression: Compression = Compression.None
     override val httpClient: HttpClient = getHttpClient()

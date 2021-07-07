@@ -3,8 +3,8 @@ package configuration
 import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.ConfigurationAnalytics
 import com.algolia.search.configuration.ConfigurationInsights
+import com.algolia.search.configuration.ConfigurationPersonalization
 import com.algolia.search.configuration.ConfigurationPlaces
-import com.algolia.search.configuration.ConfigurationRecommendation
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
@@ -25,7 +25,7 @@ internal class TestConfiguration {
 
     private val applicationID = ApplicationID("applicationID")
     private val apiKey = APIKey("apiKey")
-    private val regionRecommendation = Region.Recommendation.EU
+    private val regionPersonalization = Region.Personalization.EU
     private val regionAnalytics = Region.Analytics.EU
 
     @Test
@@ -87,11 +87,11 @@ internal class TestConfiguration {
 
     @Test
     fun configurationRecommendation() {
-        ConfigurationRecommendation(applicationID, apiKey, regionRecommendation).apply {
+        ConfigurationPersonalization(applicationID, apiKey, regionPersonalization).apply {
             writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
             readTimeout shouldEqual DEFAULT_READ_TIMEOUT
             logLevel shouldEqual LogLevel.NONE
-            hosts shouldEqual regionRecommendation.hosts
+            hosts shouldEqual regionPersonalization.hosts
             defaultHeaders.shouldBeNull()
             engine.shouldBeNull()
             httpClientConfig.shouldBeNull()
