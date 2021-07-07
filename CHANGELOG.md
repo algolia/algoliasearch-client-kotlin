@@ -1,6 +1,7 @@
 # Unreleased
 
 ### Changed
+- `ClientRecommendation` renamed to `ClientPersonalization` (#267)
 - Update Kotlin to 1.5.20
 - Update Ktor to 1.6.1
 
