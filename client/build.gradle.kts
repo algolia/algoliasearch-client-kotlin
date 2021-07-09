@@ -60,7 +60,8 @@ tasks {
     val copyTemplates by creating(type = Copy::class) {
         from("src/commonMain/templates")
         into("$buildDir/generated/sources/templates/kotlin/main")
-        expand("projectVersion" to libs.versions.apiclient.get())
+        val version = project.extensions.extraProperties["VERSION_NAME"] as String // require clean build
+        expand("projectVersion" to version)
         filteringCharset = "UTF-8"
     }
 
@@ -81,5 +82,3 @@ configure<SpotlessExtension> {
         endWithNewline()
     }
 }
-
-val javadoc by tasks.creating(Javadoc::class)
