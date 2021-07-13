@@ -1,10 +1,11 @@
-# Unreleased
+# 1.9.0
 
 ### Fixed
 - Answers: use UTF8 encoded index name (#269)
 
 ### Changed
 - `ClientRecommendation` renamed to `ClientPersonalization` (#267)
+- Remove defaults from `FacetsOrder` and `FacetsValuesOrder` (#273)  
 - Update Kotlin to 1.5.20
 - Update Ktor to 1.6.1
 
