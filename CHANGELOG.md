@@ -1,5 +1,8 @@
 # Unreleased
 
+### Fixed
+- Answers: use UTF8 encoded index name (#269)
+
 ### Changed
 - `ClientRecommendation` renamed to `ClientPersonalization` (#267)
 - Update Kotlin to 1.5.20

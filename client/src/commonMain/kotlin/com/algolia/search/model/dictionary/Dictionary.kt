@@ -1,6 +1,6 @@
 package com.algolia.search.model.dictionary
 
-import com.algolia.search.helper.internal.StringUTF8
+import com.algolia.search.helper.internal.encodeUTF8
 import com.algolia.search.model.dictionary.DictionaryEntry.Compound
 import com.algolia.search.model.dictionary.DictionaryEntry.Plural
 import com.algolia.search.model.dictionary.DictionaryEntry.Stopword
@@ -28,12 +28,12 @@ public sealed class Dictionary<T : DictionaryEntry>(
     @Serializable
     public object Compounds : Dictionary<Compound>(KeyCompounds)
 
-    private fun encode(): StringUTF8 {
-        return StringUTF8.encode(raw)
+    private fun encode(): String {
+        return raw.encodeUTF8()
     }
 
     internal fun toPath(suffix: String? = null): String {
-        return "$RouteDictionaries/${encode().string}" + (suffix ?: "")
+        return "$RouteDictionaries/${encode()}" + (suffix ?: "")
     }
 
     override fun toString(): String {
