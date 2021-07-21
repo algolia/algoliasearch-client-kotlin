@@ -28,6 +28,7 @@ import com.algolia.search.serialize.KeyDisableTypoToleranceOnAttributes
 import com.algolia.search.serialize.KeyDistinct
 import com.algolia.search.serialize.KeyEnableABTest
 import com.algolia.search.serialize.KeyEnablePersonalization
+import com.algolia.search.serialize.KeyEnableReRanking
 import com.algolia.search.serialize.KeyEnableRules
 import com.algolia.search.serialize.KeyExactOnSingleWordQuery
 import com.algolia.search.serialize.KeyExplain
@@ -567,4 +568,11 @@ public data class Query(
      * [Documentation](https://www.algolia.com/doc/api-reference/api-parameters/decompoundQuery/?client=kotlin)
      */
     @SerialName(KeyDecompoundQuery) override var decompoundQuery: Boolean? = null,
+
+    /**
+     * You need to turn on Dynamic Re-Ranking on your index for it to have an effect on your search results.
+     * You can do this through the Re-Ranking page on the dashboard. This parameter is only used to turn off Dynamic
+     * Re-Ranking (with false) at search time.
+     */
+    @SerialName(KeyEnableReRanking) override var enableReRanking: Boolean? = null,
 ) : SearchParameters
