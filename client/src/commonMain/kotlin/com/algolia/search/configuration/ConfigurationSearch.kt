@@ -27,7 +27,7 @@ public interface ConfigurationSearch : Configuration, Credentials
  * @param writeTimeout write timout
  * @param readTimeout read timeout
  * @param logLevel logging level
- * @param hosts recommendation region hosts
+ * @param hosts personalization region hosts
  * @param defaultHeaders default headers
  * @param engine http client engine
  * @param httpClientConfig http client configuration

@@ -23,8 +23,22 @@ public sealed class Region {
     }
 
     /**
+     * Available regions, used in [ConfigurationPersonalization].
+     */
+    public sealed class Personalization(override val raw: String) : Raw<String> {
+
+        public object EU : Personalization(KeyEU)
+        public object US : Personalization(KeyUS)
+        public class Other(override val raw: String) : Personalization(raw)
+
+        override fun toString(): String = raw
+    }
+
+    /**
      * Available regions, used in [ConfigurationRecommendation].
      */
+    @Deprecated("use Recommendation instead", replaceWith = ReplaceWith("Personalization"))
+    @Suppress("DEPRECATION")
     public sealed class Recommendation(override val raw: String) : Raw<String> {
 
         public object EU : Recommendation(KeyEU)

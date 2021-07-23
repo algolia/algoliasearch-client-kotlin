@@ -41,6 +41,7 @@ import com.algolia.search.serialize.KeyDisableTypoToleranceOnAttributes
 import com.algolia.search.serialize.KeyDistinct
 import com.algolia.search.serialize.KeyEnableABTest
 import com.algolia.search.serialize.KeyEnablePersonalization
+import com.algolia.search.serialize.KeyEnableReRanking
 import com.algolia.search.serialize.KeyEnableRules
 import com.algolia.search.serialize.KeyExactOnSingleWordQuery
 import com.algolia.search.serialize.KeyExplain
@@ -174,7 +175,8 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             explainModules = listOf(ExplainModule.MatchAlternatives),
             naturalLanguages = listOf(Language.Afrikaans, Language.Albanian),
             relevancyStrictness = int,
-            decompoundQuery = boolean
+            decompoundQuery = boolean,
+            enableReRanking = boolean,
         ) to buildJsonObject {
             put(KeyQuery, string)
             put(KeyAttributesToRetrieve, attributesJson)
@@ -266,6 +268,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             )
             put(KeyRelevancyStrictness, int)
             put(KeyDecompoundQuery, boolean)
+            put(KeyEnableReRanking, boolean)
         }
     )
 

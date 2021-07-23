@@ -3,17 +3,12 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        val kotlinVersion = "1.5.10"
+        val kotlinVersion = "1.5.20"
         classpath(kotlin("gradle-plugin", version = kotlinVersion))
         classpath(kotlin("serialization", version = kotlinVersion))
-        classpath(MavenPublish())
-        classpath(Spotless())
+        classpath("com.vanniktech:gradle-maven-publish-plugin:0.17.0")
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:5.14.0")
     }
-}
-
-project.extensions.extraProperties.apply {
-    set("GROUP", Library.group)
-    set("VERSION_NAME", Library.version)
 }
 
 subprojects {

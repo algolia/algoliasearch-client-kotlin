@@ -1,22 +1,22 @@
 package suite
 
-import clientRecommendation
-import com.algolia.search.model.recommendation.EventScoring
-import com.algolia.search.model.recommendation.FacetScoring
-import com.algolia.search.model.recommendation.PersonalizationStrategy
-import com.algolia.search.model.recommendation.SetPersonalizationStrategyResponse
+import clientPersonalization
+import com.algolia.search.model.personalization.EventScoring
+import com.algolia.search.model.personalization.FacetScoring
+import com.algolia.search.model.personalization.PersonalizationStrategy
+import com.algolia.search.model.personalization.SetPersonalizationStrategyResponse
 import io.ktor.client.features.ClientRequestException
 import io.ktor.http.HttpStatusCode
+import kotlin.test.Test
 import runBlocking
 import shouldEqual
-import kotlin.test.Test
 
-internal class TestSuiteRecommendation {
+internal class TestSuitePersonalization {
 
     @Test
-    fun testRecommendationClient() {
+    fun testPersonalizationClient() {
         runBlocking {
-            clientRecommendation.getPersonalizationStrategy()
+            clientPersonalization.getPersonalizationStrategy()
         }
     }
 
@@ -38,13 +38,13 @@ internal class TestSuiteRecommendation {
             val response = SetPersonalizationStrategyResponse(200, "Strategy was successfully updated")
 
             try {
-                clientRecommendation.setPersonalizationStrategy(strategy) shouldEqual response
+                clientPersonalization.setPersonalizationStrategy(strategy) shouldEqual response
             } catch (e: ClientRequestException) {
                 // The personalization API is now limiting the number of setPersonalizationStrategy()` successful calls
                 // to 15 per day. If the 429 error is returned, the response is considered a "success".
                 if (e.response.status != HttpStatusCode.TooManyRequests) throw e
             }
-            clientRecommendation.getPersonalizationStrategy() shouldEqual strategy
+            clientPersonalization.getPersonalizationStrategy() shouldEqual strategy
         }
     }
 }

@@ -24,7 +24,7 @@ internal class EndpointAnswersImpl(
         return transport.request(
             httpMethod = HttpMethod.Post,
             callType = CallType.Read,
-            path = "1/answers/${indexName.raw}/prediction",
+            path = "1/answers/${indexName.encode()}/prediction",
             requestOptions = requestOptions,
             body = body
         )
