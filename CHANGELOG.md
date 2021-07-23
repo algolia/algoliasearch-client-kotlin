@@ -1,3 +1,8 @@
+# 1.9.1
+
+### Fix
+- Search: add `enableReRanking` field to Query (#275)
+
 # 1.9.0
 
 ### Fixed
