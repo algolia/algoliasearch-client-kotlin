@@ -17,4 +17,11 @@ public interface SearchParameters : CommonSearchParameters, CommonParameters {
      * [Documentation][https://www.algolia.com/doc/api-reference/api-parameters/restrictSearchableAttributes/?language=kotlin]
      */
     public var restrictSearchableAttributes: List<Attribute>?
+
+    /**
+     * You need to turn on Dynamic Re-Ranking on your index for it to have an effect on your search results.
+     * You can do this through the Re-Ranking page on the dashboard. This parameter is only used to turn off Dynamic
+     * Re-Ranking (with false) at search time.
+     */
+    public var enableReRanking: Boolean?
 }
