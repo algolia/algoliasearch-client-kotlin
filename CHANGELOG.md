@@ -1,3 +1,12 @@
+# 1.9.2
+
+### Fix
+- Facets ordering: `emptyList()` as default for `FacetValuesOrder`'s field `order` (#278) 
+
+### Changed
+- Update Kotlin to 1.5.21
+- Update Ktor 1.6.2
+
 # 1.9.1
 
 ### Fix
