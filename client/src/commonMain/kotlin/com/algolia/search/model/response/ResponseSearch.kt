@@ -63,6 +63,7 @@ import com.algolia.search.serialize.Key_Answer
 import com.algolia.search.serialize.Key_DistinctSeqID
 import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.Key_RankingInfo
+import com.algolia.search.serialize.Key_Score
 import com.algolia.search.serialize.Key_SnippetResult
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNonStrict
@@ -80,6 +81,7 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.floatOrNull
 import kotlinx.serialization.json.int
 import kotlinx.serialization.json.jsonObject
 
@@ -595,6 +597,8 @@ public data class ResponseSearch(
             JsonNonStrict.decodeFromJsonElement(Answer.serializer(), it)
         }
 
+        public val scoreOrNull: Float? = json[Key_Score]?.jsonPrimitiveOrNull?.floatOrNull
+
         public val rankingInfo: RankingInfo
             get() = checkNotNull(rankingInfoOrNull)
 
@@ -610,6 +614,9 @@ public data class ResponseSearch(
         @ExperimentalAlgoliaClientAPI
         public val answer: Answer
             get() = checkNotNull(answerOrNull)
+
+        public val score: Float
+            get() = checkNotNull(scoreOrNull)
 
         /**
          * Deserialize the value of an [Attribute] to [T].
