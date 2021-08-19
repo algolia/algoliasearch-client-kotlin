@@ -15,7 +15,7 @@ internal class RecommendationModelSerializer : KSerializer<RecommendationModel> 
         return when (val value = decoder.decodeString()) {
             RecommendationModel.RelatedProducts.model -> RecommendationModel.RelatedProducts
             RecommendationModel.BoughtTogether.model -> RecommendationModel.BoughtTogether
-            else -> RecommendationModel.Custom(value)
+            else -> RecommendationModel(value)
         }
     }
 

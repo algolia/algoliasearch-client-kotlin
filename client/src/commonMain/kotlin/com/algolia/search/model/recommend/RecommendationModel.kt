@@ -7,17 +7,11 @@ import kotlinx.serialization.Serializable
  * The recommendation model.
  */
 @Serializable(RecommendationModelSerializer::class)
-public sealed interface RecommendationModel {
+@JvmInline
+public value class RecommendationModel(public val model: String) {
 
-    public val model: String
-
-    public object RelatedProducts : RecommendationModel {
-        override val model: String = "related-products"
+    public companion object {
+        public val RelatedProducts: RecommendationModel = RecommendationModel("related-products")
+        public val BoughtTogether: RecommendationModel = RecommendationModel("bought-together")
     }
-
-    public object BoughtTogether : RecommendationModel {
-        override val model: String = "bought-together"
-    }
-
-    public data class Custom(override val model: String) : RecommendationModel
 }
