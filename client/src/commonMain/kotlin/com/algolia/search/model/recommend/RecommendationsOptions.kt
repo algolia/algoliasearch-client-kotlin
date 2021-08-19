@@ -3,7 +3,15 @@ package com.algolia.search.model.recommend
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.search.RecommendSearchOptions
+import com.algolia.search.serialize.KeyFallbackParameters
+import com.algolia.search.serialize.KeyIndexName
+import com.algolia.search.serialize.KeyMaxRecommendations
+import com.algolia.search.serialize.KeyModel
+import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.KeyQueryParameters
+import com.algolia.search.serialize.KeyThreshold
 import kotlinx.serialization.Required
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
@@ -36,37 +44,39 @@ public sealed interface RecommendationsOptions {
 
 @Serializable
 public data class RecommendationsQuery(
-    override val indexName: IndexName,
-    override val model: RecommendationModel,
-    override val objectID: ObjectID,
-    override val threshold: Int? = null,
-    override val maxRecommendations: Int? = null,
-    override val queryParameters: RecommendSearchOptions? = null,
-    override val fallbackParameters: RecommendSearchOptions? = null,
+    @SerialName(KeyIndexName) override val indexName: IndexName,
+    @SerialName(KeyModel) override val model: RecommendationModel,
+    @SerialName(KeyObjectID) override val objectID: ObjectID,
+    @SerialName(KeyThreshold) override val threshold: Int? = null,
+    @SerialName(KeyMaxRecommendations) override val maxRecommendations: Int? = null,
+    @SerialName(KeyQueryParameters) override val queryParameters: RecommendSearchOptions? = null,
+    @SerialName(KeyFallbackParameters) override val fallbackParameters: RecommendSearchOptions? = null,
 ) : RecommendationsOptions
 
 @Serializable
 public data class RelatedProducts(
-    override val indexName: IndexName,
-    override val objectID: ObjectID,
-    override val threshold: Int? = null,
-    override val maxRecommendations: Int? = null,
-    override val queryParameters: RecommendSearchOptions? = null,
-    override val fallbackParameters: RecommendSearchOptions? = null,
+    @SerialName(KeyIndexName) override val indexName: IndexName,
+    @SerialName(KeyObjectID) override val objectID: ObjectID,
+    @SerialName(KeyThreshold) override val threshold: Int? = null,
+    @SerialName(KeyMaxRecommendations) override val maxRecommendations: Int? = null,
+    @SerialName(KeyQueryParameters) override val queryParameters: RecommendSearchOptions? = null,
+    @SerialName(KeyFallbackParameters) override val fallbackParameters: RecommendSearchOptions? = null,
 ) : RecommendationsOptions {
     @Required
+    @SerialName(KeyModel)
     override val model: RecommendationModel = RecommendationModel.RelatedProducts
 }
 
 @Serializable
 public data class FrequencyBoughtTogether(
-    override val indexName: IndexName,
-    override val objectID: ObjectID,
-    override val threshold: Int? = null,
-    override val maxRecommendations: Int? = null,
-    override val queryParameters: RecommendSearchOptions? = null,
-    override val fallbackParameters: RecommendSearchOptions? = null,
+    @SerialName(KeyIndexName) override val indexName: IndexName,
+    @SerialName(KeyObjectID) override val objectID: ObjectID,
+    @SerialName(KeyThreshold) override val threshold: Int? = null,
+    @SerialName(KeyMaxRecommendations) override val maxRecommendations: Int? = null,
+    @SerialName(KeyQueryParameters) override val queryParameters: RecommendSearchOptions? = null,
+    @SerialName(KeyFallbackParameters) override val fallbackParameters: RecommendSearchOptions? = null,
 ) : RecommendationsOptions {
     @Required
+    @SerialName(KeyModel)
     override val model: RecommendationModel = RecommendationModel.BoughtTogether
 }

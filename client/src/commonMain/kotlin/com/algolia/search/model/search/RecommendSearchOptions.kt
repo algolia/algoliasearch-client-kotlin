@@ -39,11 +39,9 @@ import com.algolia.search.serialize.KeyFilters
 import com.algolia.search.serialize.KeyGetRankingInfo
 import com.algolia.search.serialize.KeyHighlightPostTag
 import com.algolia.search.serialize.KeyHighlightPreTag
-import com.algolia.search.serialize.KeyHitsPerPage
 import com.algolia.search.serialize.KeyIgnorePlurals
 import com.algolia.search.serialize.KeyInsideBoundingBox
 import com.algolia.search.serialize.KeyInsidePolygon
-import com.algolia.search.serialize.KeyLength
 import com.algolia.search.serialize.KeyMaxFacetHits
 import com.algolia.search.serialize.KeyMaxValuesPerFacet
 import com.algolia.search.serialize.KeyMinProximity
@@ -52,10 +50,8 @@ import com.algolia.search.serialize.KeyMinWordSizeFor2Typos
 import com.algolia.search.serialize.KeyMinimumAroundRadius
 import com.algolia.search.serialize.KeyNaturalLanguages
 import com.algolia.search.serialize.KeyNumericFilters
-import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyOptionalFilters
 import com.algolia.search.serialize.KeyOptionalWords
-import com.algolia.search.serialize.KeyPage
 import com.algolia.search.serialize.KeyPercentileComputation
 import com.algolia.search.serialize.KeyPersonalizationImpact
 import com.algolia.search.serialize.KeyQuery
@@ -552,10 +548,13 @@ public data class RecommendSearchOptions(
 
     @Transient
     override var hitsPerPage: Int? = null
+
     @Transient
     override var page: Int? = null
+
     @Transient
     override var offset: Int? = null
+
     @Transient
     override var length: Int? = null
 }

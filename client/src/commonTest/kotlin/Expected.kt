@@ -17,7 +17,6 @@ internal expect val clientInsights: ClientInsights
 internal expect val clientPlaces: ClientPlaces
 internal expect val clientPersonalization: ClientPersonalization
 internal expect val clientAnswers: ClientSearch
-internal expect val clientRecommend: ClientRecommend
 
 internal expect fun runBlocking(
     coroutineContext: CoroutineContext = EmptyCoroutineContext,
