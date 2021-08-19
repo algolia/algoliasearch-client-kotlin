@@ -54,7 +54,7 @@ public data class RecommendationsQuery(
 ) : RecommendationsOptions
 
 @Serializable
-public data class RelatedProducts(
+public data class RelatedProductsQuery(
     @SerialName(KeyIndexName) override val indexName: IndexName,
     @SerialName(KeyObjectID) override val objectID: ObjectID,
     @SerialName(KeyThreshold) override val threshold: Int? = null,
@@ -68,7 +68,7 @@ public data class RelatedProducts(
 }
 
 @Serializable
-public data class FrequencyBoughtTogether(
+public data class FrequencyBoughtTogetherQuery(
     @SerialName(KeyIndexName) override val indexName: IndexName,
     @SerialName(KeyObjectID) override val objectID: ObjectID,
     @SerialName(KeyThreshold) override val threshold: Int? = null,

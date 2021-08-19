@@ -1,10 +1,9 @@
 package com.algolia.search.endpoint
 
-import com.algolia.search.model.recommend.FrequencyBoughtTogether
+import com.algolia.search.model.recommend.FrequencyBoughtTogetherQuery
 import com.algolia.search.model.recommend.RecommendationsQuery
-import com.algolia.search.model.recommend.RelatedProducts
+import com.algolia.search.model.recommend.RelatedProductsQuery
 import com.algolia.search.model.response.ResponseGetRecommendations
-import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.transport.RequestOptions
 
 public interface EndpointRecommend {
@@ -21,7 +20,7 @@ public interface EndpointRecommend {
      * Returns related products recommendations for a specific model and objectID.
      */
     public suspend fun getRelatedProducts(
-        requests: List<RelatedProducts>,
+        requests: List<RelatedProductsQuery>,
         requestOptions: RequestOptions? = null
     ): ResponseGetRecommendations
 
@@ -29,7 +28,7 @@ public interface EndpointRecommend {
      * Returns frequently bought together recommendations for a specific model and objectID.
      */
     public suspend fun getFrequentlyBoughtTogether(
-        requests: List<FrequencyBoughtTogether>,
+        requests: List<FrequencyBoughtTogetherQuery>,
         requestOptions: RequestOptions? = null
     ): ResponseGetRecommendations
 }

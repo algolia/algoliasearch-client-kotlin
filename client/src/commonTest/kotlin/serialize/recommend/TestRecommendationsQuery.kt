@@ -3,10 +3,10 @@ package serialize.recommend
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
-import com.algolia.search.model.recommend.FrequencyBoughtTogether
+import com.algolia.search.model.recommend.FrequencyBoughtTogetherQuery
 import com.algolia.search.model.recommend.RecommendationModel
 import com.algolia.search.model.recommend.RecommendationsQuery
-import com.algolia.search.model.recommend.RelatedProducts
+import com.algolia.search.model.recommend.RelatedProductsQuery
 import com.algolia.search.model.search.RecommendSearchOptions
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyIndexName
@@ -61,7 +61,7 @@ internal class TestRecommendationsQuery {
 
     @Test
     fun testRelatedProducts() {
-        val query = RelatedProducts(
+        val query = RelatedProductsQuery(
             indexName = IndexName("products"),
             objectID = ObjectID("B018APC4LE"),
             threshold = 0,
@@ -89,7 +89,7 @@ internal class TestRecommendationsQuery {
 
     @Test
     fun testFrequencyBoughtTogether() {
-        val query = FrequencyBoughtTogether(
+        val query = FrequencyBoughtTogetherQuery(
             indexName = IndexName("products"),
             objectID = ObjectID("B018APC4LE"),
             threshold = 0,

@@ -2,9 +2,9 @@ package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.endpoint.EndpointRecommend
-import com.algolia.search.model.recommend.FrequencyBoughtTogether
+import com.algolia.search.model.recommend.FrequencyBoughtTogetherQuery
 import com.algolia.search.model.recommend.RecommendationsQuery
-import com.algolia.search.model.recommend.RelatedProducts
+import com.algolia.search.model.recommend.RelatedProductsQuery
 import com.algolia.search.model.recommend.internal.RecommendationsRequests
 import com.algolia.search.model.response.ResponseGetRecommendations
 import com.algolia.search.serialize.RouteIndexesV1
@@ -28,7 +28,7 @@ internal class EndpointRecommendImpl(
     }
 
     override suspend fun getRelatedProducts(
-        requests: List<RelatedProducts>,
+        requests: List<RelatedProductsQuery>,
         requestOptions: RequestOptions?
     ): ResponseGetRecommendations {
         val recommendationsRequests = RecommendationsRequests(requests)
@@ -37,7 +37,7 @@ internal class EndpointRecommendImpl(
     }
 
     override suspend fun getFrequentlyBoughtTogether(
-        requests: List<FrequencyBoughtTogether>,
+        requests: List<FrequencyBoughtTogetherQuery>,
         requestOptions: RequestOptions?
     ): ResponseGetRecommendations {
         val recommendationsRequests = RecommendationsRequests(requests)
