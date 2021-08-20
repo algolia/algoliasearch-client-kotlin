@@ -68,7 +68,7 @@ public data class RelatedProductsQuery(
 }
 
 @Serializable
-public data class FrequencyBoughtTogetherQuery(
+public data class FrequentlyBoughtTogetherQuery(
     @SerialName(KeyIndexName) override val indexName: IndexName,
     @SerialName(KeyObjectID) override val objectID: ObjectID,
     @SerialName(KeyThreshold) override val threshold: Int? = null,
