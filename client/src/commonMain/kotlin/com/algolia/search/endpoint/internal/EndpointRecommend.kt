@@ -6,7 +6,8 @@ import com.algolia.search.model.recommend.FrequencyBoughtTogetherQuery
 import com.algolia.search.model.recommend.RecommendationsQuery
 import com.algolia.search.model.recommend.RelatedProductsQuery
 import com.algolia.search.model.recommend.internal.RecommendationsRequests
-import com.algolia.search.model.response.ResponseGetRecommendations
+import com.algolia.search.model.recommend.internal.RecommendationsResponse
+import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.serialize.RouteIndexesV1
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
@@ -21,34 +22,34 @@ internal class EndpointRecommendImpl(
     override suspend fun getRecommendations(
         requests: List<RecommendationsQuery>,
         requestOptions: RequestOptions?
-    ): ResponseGetRecommendations {
+    ): List<ResponseSearch> {
         val recommendationsRequests = RecommendationsRequests(requests)
         val body = JsonNoDefaults.encodeToString(recommendationsRequests)
-        return requestRecommendations(requestOptions, body)
+        return requestRecommendations(requestOptions, body).results
     }
 
     override suspend fun getRelatedProducts(
         requests: List<RelatedProductsQuery>,
         requestOptions: RequestOptions?
-    ): ResponseGetRecommendations {
+    ): List<ResponseSearch> {
         val recommendationsRequests = RecommendationsRequests(requests)
         val body = JsonNoDefaults.encodeToString(recommendationsRequests)
-        return requestRecommendations(requestOptions, body)
+        return requestRecommendations(requestOptions, body).results
     }
 
     override suspend fun getFrequentlyBoughtTogether(
         requests: List<FrequencyBoughtTogetherQuery>,
         requestOptions: RequestOptions?
-    ): ResponseGetRecommendations {
+    ): List<ResponseSearch> {
         val recommendationsRequests = RecommendationsRequests(requests)
         val body = JsonNoDefaults.encodeToString(recommendationsRequests)
-        return requestRecommendations(requestOptions, body)
+        return requestRecommendations(requestOptions, body).results
     }
 
     private suspend fun requestRecommendations(
         requestOptions: RequestOptions?,
         body: String
-    ): ResponseGetRecommendations = transport.request(
+    ): RecommendationsResponse = transport.request(
         HttpMethod.Post,
         CallType.Read,
         "$RouteIndexesV1/*/recommendations",
