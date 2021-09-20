@@ -7,7 +7,7 @@ buildscript {
         classpath(kotlin("gradle-plugin", version = kotlinVersion))
         classpath(kotlin("serialization", version = kotlinVersion))
         classpath("com.vanniktech:gradle-maven-publish-plugin:0.18.0")
-        classpath("com.diffplug.spotless:spotless-plugin-gradle:5.14.0")
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:5.15.0")
     }
 }
 
