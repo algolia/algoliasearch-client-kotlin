@@ -6,6 +6,7 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
+import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.rule.RenderingContent
@@ -20,6 +21,7 @@ import com.algolia.search.model.search.RemoveWordIfNoResults
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.KSerializerFacetMap
 import com.algolia.search.serialize.KSerializerPoint
+import com.algolia.search.serialize.KeyABTestID
 import com.algolia.search.serialize.KeyAbTestVariantID
 import com.algolia.search.serialize.KeyAppliedRelevancyStrictness
 import com.algolia.search.serialize.KeyAppliedRules
@@ -244,6 +246,12 @@ public data class ResponseSearch(
      * Content defining how the search interface should be rendered.
      */
     @SerialName(KeyRenderingContent) val renderingContentOrNull: RenderingContent? = null,
+
+    /**
+     * In case of A/B test, reports the ID of the A/B test used.
+     * Returned only if [Query.getRankingInfo] is set to true.
+     */
+    @SerialName(KeyABTestID) val abTestIDOrNull: ABTestID? = null
 ) {
 
     public val hits: List<Hit>
@@ -347,6 +355,15 @@ public data class ResponseSearch(
 
     public val renderingContent: RenderingContent
         get() = requireNotNull(renderingContentOrNull)
+
+    /**
+     * In case of A/B test, reports the ID of the A/B test used.
+     * Returned only if [Query.getRankingInfo] is set to true.
+     *
+     * @throws IllegalStateException if [abTestIDOrNull] is null.
+    */
+    public val abTestID: ABTestID
+        get() = checkNotNull(abTestIDOrNull)
 
     /**
      * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].
