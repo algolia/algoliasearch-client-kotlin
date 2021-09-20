@@ -60,11 +60,44 @@ internal class TestRecommendationsQuery {
     }
 
     @Test
+    fun testRecommendationsQueryDefaultThreshold() {
+        val query = RecommendationsQuery(
+            indexName = IndexName("products"),
+            model = RecommendationModel.BoughtTogether,
+            objectID = ObjectID("B018APC4LE"),
+            maxRecommendations = 10,
+            queryParameters = RecommendSearchOptions(
+                attributesToRetrieve = listOf(Attribute("*")),
+            ).apply { // all options bellow should be ignored
+                hitsPerPage = 1
+                page = 1
+                offset = 1
+                length = 1
+            }
+        )
+
+        val json = JsonNoDefaults.encodeToJsonElement(query)
+        json shouldEqual buildJsonObject {
+            put(KeyIndexName, JsonPrimitive("products"))
+            put(KeyModel, JsonPrimitive("bought-together"))
+            put(KeyObjectID, JsonPrimitive("B018APC4LE"))
+            put(KeyThreshold, JsonPrimitive(0))
+            put(KeyMaxRecommendations, JsonPrimitive(10))
+            put(
+                KeyQueryParameters,
+                buildJsonObject {
+                    put(KeyAttributesToRetrieve, buildJsonArray { add(JsonPrimitive("*")) })
+                }
+            )
+        }
+    }
+
+    @Test
     fun testRelatedProducts() {
         val query = RelatedProductsQuery(
             indexName = IndexName("products"),
             objectID = ObjectID("B018APC4LE"),
-            threshold = 0,
+            threshold = 10,
             maxRecommendations = 10,
             queryParameters = RecommendSearchOptions(
                 attributesToRetrieve = listOf(Attribute("*"))
@@ -76,7 +109,7 @@ internal class TestRecommendationsQuery {
             put(KeyIndexName, JsonPrimitive("products"))
             put(KeyModel, JsonPrimitive("related-products"))
             put(KeyObjectID, JsonPrimitive("B018APC4LE"))
-            put(KeyThreshold, JsonPrimitive(0))
+            put(KeyThreshold, JsonPrimitive(10))
             put(KeyMaxRecommendations, JsonPrimitive(10))
             put(
                 KeyQueryParameters,
@@ -92,7 +125,7 @@ internal class TestRecommendationsQuery {
         val query = FrequentlyBoughtTogetherQuery(
             indexName = IndexName("products"),
             objectID = ObjectID("B018APC4LE"),
-            threshold = 0,
+            threshold = 10,
             maxRecommendations = 10,
             queryParameters = RecommendSearchOptions(
                 attributesToRetrieve = listOf(Attribute("*"))
@@ -104,7 +137,7 @@ internal class TestRecommendationsQuery {
             put(KeyIndexName, JsonPrimitive("products"))
             put(KeyModel, JsonPrimitive("bought-together"))
             put(KeyObjectID, JsonPrimitive("B018APC4LE"))
-            put(KeyThreshold, JsonPrimitive(0))
+            put(KeyThreshold, JsonPrimitive(10))
             put(KeyMaxRecommendations, JsonPrimitive(10))
             put(
                 KeyQueryParameters,
