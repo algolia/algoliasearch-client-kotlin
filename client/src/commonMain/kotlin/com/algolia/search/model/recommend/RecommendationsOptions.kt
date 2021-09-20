@@ -47,7 +47,7 @@ public data class RecommendationsQuery(
     @SerialName(KeyIndexName) override val indexName: IndexName,
     @SerialName(KeyModel) override val model: RecommendationModel,
     @SerialName(KeyObjectID) override val objectID: ObjectID,
-    @SerialName(KeyThreshold) override val threshold: Int? = null,
+    @SerialName(KeyThreshold) override val threshold: Int = 0,
     @SerialName(KeyMaxRecommendations) override val maxRecommendations: Int? = null,
     @SerialName(KeyQueryParameters) override val queryParameters: RecommendSearchOptions? = null,
     @SerialName(KeyFallbackParameters) override val fallbackParameters: RecommendSearchOptions? = null,
@@ -57,7 +57,7 @@ public data class RecommendationsQuery(
 public data class RelatedProductsQuery(
     @SerialName(KeyIndexName) override val indexName: IndexName,
     @SerialName(KeyObjectID) override val objectID: ObjectID,
-    @SerialName(KeyThreshold) override val threshold: Int? = null,
+    @SerialName(KeyThreshold) override val threshold: Int = 0,
     @SerialName(KeyMaxRecommendations) override val maxRecommendations: Int? = null,
     @SerialName(KeyQueryParameters) override val queryParameters: RecommendSearchOptions? = null,
     @SerialName(KeyFallbackParameters) override val fallbackParameters: RecommendSearchOptions? = null,
@@ -71,7 +71,7 @@ public data class RelatedProductsQuery(
 public data class FrequentlyBoughtTogetherQuery(
     @SerialName(KeyIndexName) override val indexName: IndexName,
     @SerialName(KeyObjectID) override val objectID: ObjectID,
-    @SerialName(KeyThreshold) override val threshold: Int? = null,
+    @SerialName(KeyThreshold) override val threshold: Int = 0,
     @SerialName(KeyMaxRecommendations) override val maxRecommendations: Int? = null,
     @SerialName(KeyQueryParameters) override val queryParameters: RecommendSearchOptions? = null,
     @SerialName(KeyFallbackParameters) override val fallbackParameters: RecommendSearchOptions? = null,
