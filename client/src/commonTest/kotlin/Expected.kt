@@ -2,6 +2,7 @@ import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientPersonalization
 import com.algolia.search.client.ClientPlaces
+import com.algolia.search.client.ClientRecommend
 import com.algolia.search.client.ClientSearch
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext

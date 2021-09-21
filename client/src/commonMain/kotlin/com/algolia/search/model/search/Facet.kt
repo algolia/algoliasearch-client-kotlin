@@ -3,7 +3,6 @@ package com.algolia.search.model.search
 import com.algolia.search.model.Attribute
 import com.algolia.search.serialize.KeyCount
 import com.algolia.search.serialize.KeyHighlighted
-import com.algolia.search.serialize.KeyName
 import com.algolia.search.serialize.KeyValue
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
