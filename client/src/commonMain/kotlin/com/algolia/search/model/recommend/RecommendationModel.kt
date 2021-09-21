@@ -1,13 +1,14 @@
 package com.algolia.search.model.recommend
 
 import com.algolia.search.model.recommend.internal.RecommendationModelSerializer
+import kotlin.jvm.JvmInline
 import kotlinx.serialization.Serializable
 
 /**
  * The recommendation model.
  */
-@Serializable(RecommendationModelSerializer::class)
 @JvmInline
+@Serializable(RecommendationModelSerializer::class)
 public value class RecommendationModel(public val model: String) {
 
     public companion object {

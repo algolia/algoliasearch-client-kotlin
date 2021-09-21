@@ -2,6 +2,7 @@ package com.algolia.search.util.internal
 
 import io.ktor.utils.io.charsets.Charsets
 import io.ktor.utils.io.core.ByteReadPacket
+import io.ktor.utils.io.core.ExperimentalIoApi
 import io.ktor.utils.io.core.Input
 import io.ktor.utils.io.core.String
 import io.ktor.utils.io.core.buildPacket
@@ -84,6 +85,7 @@ internal fun ByteReadPacket.decodeBase64Bytes(): Input = buildPacket {
 
         for (index in data.size - 2 downTo (data.size - read)) {
             val origin = (chunk shr (8 * index)) and 0xff
+            @OptIn(ExperimentalIoApi::class)
             writeByte(origin.toByte())
         }
     }
