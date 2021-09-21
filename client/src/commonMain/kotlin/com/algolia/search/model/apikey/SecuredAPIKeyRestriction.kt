@@ -7,6 +7,7 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
+import io.ktor.util.InternalAPI
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.jsonPrimitive
 
@@ -32,6 +33,7 @@ public data class SecuredAPIKeyRestriction(
     val userToken: UserToken? = null
 ) {
 
+    @OptIn(InternalAPI::class) // https://youtrack.jetbrains.com/issue/KT-48127
     internal fun buildRestrictionString(): String {
         return Parameters.build {
             query?.let { query ->

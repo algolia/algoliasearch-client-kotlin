@@ -102,6 +102,7 @@ public sealed class InsightsEvent {
     public companion object : KSerializer<InsightsEvent> {
 
         private infix fun JsonObjectBuilder.stringify(resources: Resources?) {
+            if (resources == null) return
             when (resources) {
                 is Resources.ObjectIDs -> put(
                     KeyObjectIDs,
