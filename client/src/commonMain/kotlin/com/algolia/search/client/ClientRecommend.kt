@@ -1,6 +1,6 @@
 @file:Suppress("FunctionName")
 
-package com.algolia.search.client;
+package com.algolia.search.client
 
 import com.algolia.search.client.internal.ClientRecommendImpl
 import com.algolia.search.configuration.Configuration

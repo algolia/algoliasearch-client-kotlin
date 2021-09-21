@@ -16,12 +16,12 @@ import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.KeyQueryParameters
 import com.algolia.search.serialize.KeyThreshold
 import com.algolia.search.serialize.internal.JsonNoDefaults
-import kotlin.test.Test
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.encodeToJsonElement
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestRecommendationsQuery {
 

@@ -1,8 +1,8 @@
 package com.algolia.search.model.recommend
 
 import com.algolia.search.model.recommend.internal.RecommendationModelSerializer
-import kotlin.jvm.JvmInline
 import kotlinx.serialization.Serializable
+import kotlin.jvm.JvmInline
 
 /**
  * The recommendation model.

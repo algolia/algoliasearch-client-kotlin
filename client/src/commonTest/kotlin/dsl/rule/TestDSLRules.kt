@@ -20,11 +20,11 @@ import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.SortRule
 import com.algolia.search.model.rule.TimeRange
-import kotlin.test.Test
 import kotlinx.serialization.json.buildJsonObject
 import objectIDA
 import objectIDB
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestDSLRules {
 

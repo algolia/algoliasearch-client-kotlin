@@ -562,7 +562,7 @@ public data class ResponseSearch(
      * Returned only if [Query.getRankingInfo] is set to true.
      *
      * @throws IllegalStateException if [abTestIDOrNull] is null.
-    */
+     */
     public val abTestID: ABTestID
         get() = checkNotNull(abTestIDOrNull)
 

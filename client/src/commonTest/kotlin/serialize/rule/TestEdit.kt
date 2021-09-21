@@ -6,7 +6,6 @@ import com.algolia.search.serialize.KeyInsert
 import com.algolia.search.serialize.KeyRemove
 import com.algolia.search.serialize.KeyReplace
 import com.algolia.search.serialize.KeyType
-import java.util.Locale
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import serialize.TestSerializer
