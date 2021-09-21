@@ -2,11 +2,11 @@ package helper
 
 import com.algolia.search.helper.deserialize
 import com.algolia.search.model.response.ResponseSearch
-import kotlin.test.Test
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import shouldEqual
+import kotlin.test.Test
 
 class TestResponseSearch {
 

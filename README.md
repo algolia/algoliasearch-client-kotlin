@@ -145,7 +145,7 @@ query.sortFacetsBy = SortFacetsBy.Count
 If you use this library in an Android project which uses R8, there is nothing you have to do. The specific rules are 
 already bundled into the JAR, which can be interpreted by R8 automatically.
 
-If however, you don’t use R8 you have to apply the rules from [this file](src/jvmMain/resources/META-INF/proguard/algoliasearch.pro).
+If however, you don’t use R8 you have to apply the rules from [this file](client/src/jvmMain/resources/META-INF/proguard/algoliasearch.pro).
 
 ### Guides
 

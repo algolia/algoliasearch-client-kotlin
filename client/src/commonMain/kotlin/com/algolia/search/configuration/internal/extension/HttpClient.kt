@@ -12,6 +12,7 @@ import io.ktor.client.features.UserAgent
 import io.ktor.client.features.defaultRequest
 import io.ktor.client.features.json.JsonFeature
 import io.ktor.client.features.json.serializer.KotlinxSerializer
+import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.client.features.logging.SIMPLE
@@ -29,10 +30,7 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
     install(JsonFeature) {
         serializer = KotlinxSerializer(JsonNonStrict)
     }
-    install(Logging) {
-        level = configuration.logLevel
-        logger = Logger.SIMPLE
-    }
+    installLogging(configuration.logLevel)
     install(UserAgent) {
         agent = clientUserAgent(AlgoliaSearchClient.version)
     }
@@ -44,6 +42,17 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
         if (method.canCompress()) {
             compressionHeader(configuration.compression)
         }
+    }
+}
+
+/**
+ * Installs [Logging] if logging level is superior to [LogLevel.NONE].
+ */
+private fun HttpClientConfig<*>.installLogging(logLevel: LogLevel) {
+    if (LogLevel.NONE == logLevel) return
+    install(Logging) {
+        level = logLevel
+        logger = Logger.SIMPLE
     }
 }
 

@@ -7,9 +7,9 @@ import com.algolia.search.model.personalization.PersonalizationStrategy
 import com.algolia.search.model.personalization.SetPersonalizationStrategyResponse
 import io.ktor.client.features.ClientRequestException
 import io.ktor.http.HttpStatusCode
-import kotlin.test.Test
 import runBlocking
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestSuitePersonalization {
 

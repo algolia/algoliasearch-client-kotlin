@@ -9,6 +9,7 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.Settings
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
+import io.ktor.util.InternalAPI
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
@@ -21,7 +22,9 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
 
-internal val Json = Json { encodeDefaults = true }
+internal val Json = Json {
+    encodeDefaults = true
+}
 internal val JsonNoDefaults = Json.Default
 internal val JsonNonStrict = Json {
     ignoreUnknownKeys = true
@@ -44,6 +47,7 @@ internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     }
 }
 
+@OptIn(InternalAPI::class) // https://youtrack.jetbrains.com/issue/KT-48127
 internal fun JsonObject.urlEncode(): String? {
     return if (isNotEmpty()) {
         Parameters.build {

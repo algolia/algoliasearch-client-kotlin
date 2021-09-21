@@ -26,7 +26,6 @@ import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
 import com.algolia.search.serialize.KeyRuleContexts
 import io.ktor.http.parseUrlEncodedParameters
-import kotlin.test.Test
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
@@ -38,6 +37,7 @@ import shouldContain
 import shouldEqual
 import shouldNotBeEmpty
 import shouldNotBeNull
+import kotlin.test.Test
 
 internal class TestSuiteSearch {
 
