@@ -1,3 +1,14 @@
+# 1.10.0
+
+### Added
+- Recommend API client (#281)
+
+### Fix 
+- Add `abTestID` to `ResponseSearch` (#285)
+
+### Changed
+- Non-null fields from `ResponseSearch` throws `IllegalStateException` instead of NPE (#286)
+
 # 1.9.2
 
 ### Fix
