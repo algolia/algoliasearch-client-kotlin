@@ -13,7 +13,6 @@ import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
-import kotlinx.serialization.encodeToString
 
 internal class EndpointRecommendImpl(
     private val transport: Transport
@@ -24,7 +23,10 @@ internal class EndpointRecommendImpl(
         requestOptions: RequestOptions?
     ): List<ResponseSearch> {
         val recommendationsRequests = RecommendationsRequests(requests)
-        val body = JsonNoDefaults.encodeToString(recommendationsRequests)
+        val body = JsonNoDefaults.encodeToString(
+            RecommendationsRequests.serializer(RecommendationsQuery.serializer()),
+            recommendationsRequests
+        )
         return requestRecommendations(requestOptions, body).results
     }
 
@@ -33,7 +35,10 @@ internal class EndpointRecommendImpl(
         requestOptions: RequestOptions?
     ): List<ResponseSearch> {
         val recommendationsRequests = RecommendationsRequests(requests)
-        val body = JsonNoDefaults.encodeToString(recommendationsRequests)
+        val body = JsonNoDefaults.encodeToString(
+            RecommendationsRequests.serializer(RelatedProductsQuery.serializer()),
+            recommendationsRequests
+        )
         return requestRecommendations(requestOptions, body).results
     }
 
@@ -42,7 +47,10 @@ internal class EndpointRecommendImpl(
         requestOptions: RequestOptions?
     ): List<ResponseSearch> {
         val recommendationsRequests = RecommendationsRequests(requests)
-        val body = JsonNoDefaults.encodeToString(recommendationsRequests)
+        val body = JsonNoDefaults.encodeToString(
+            RecommendationsRequests.serializer(FrequentlyBoughtTogetherQuery.serializer()),
+            recommendationsRequests
+        )
         return requestRecommendations(requestOptions, body).results
     }
 

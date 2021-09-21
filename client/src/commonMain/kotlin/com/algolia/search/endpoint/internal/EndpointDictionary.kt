@@ -26,7 +26,6 @@ import com.algolia.search.util.internal.cast
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.ListSerializer
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonArray
@@ -70,7 +69,7 @@ internal class EndpointDictionaryImpl(
         val serializer = ListSerializer(dictionary.entrySerializer()).cast<KSerializer<List<T>>>()
         val entries = JsonNoDefaults.encodeToJsonElement(serializer, dictionaryEntries).jsonArray
         val request = RequestDictionary.Add(entries, clearExistingDictionaryEntries)
-        val body = JsonNoDefaults.encodeToString(request)
+        val body = JsonNoDefaults.encodeToString(RequestDictionary.Add.serializer(), request)
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
 
@@ -91,7 +90,7 @@ internal class EndpointDictionaryImpl(
             clearExistingDictionaryEntries = false,
             entries = entries
         )
-        val body = JsonNoDefaults.encodeToString(request)
+        val body = JsonNoDefaults.encodeToString(RequestDictionary.Delete.serializer(), request)
         return transport.request(HttpMethod.Post, CallType.Write, path, requestOptions, body)
     }
 
@@ -108,7 +107,7 @@ internal class EndpointDictionaryImpl(
         requestOptions: RequestOptions?,
     ): ResponseSearchDictionaries<T> {
         val path = dictionary.toPath(ENDPOINT_SEARCH)
-        val body = JsonNoDefaults.encodeToString(query)
+        val body = JsonNoDefaults.encodeToString(Query.serializer(), query)
         val json = transport.request<JsonObject>(HttpMethod.Post, CallType.Read, path, requestOptions, body)
         return JsonNonStrict.decodeFromJsonElement(
             deserializer = ResponseSearchDictionaries.serializer(dictionary.entrySerializer()),
@@ -121,7 +120,7 @@ internal class EndpointDictionaryImpl(
         requestOptions: RequestOptions?,
     ): ResponseDictionary {
         val path = "$RouteDictionaries/$ENDPOINT_SETTINGS"
-        val body = JsonNoDefaults.encodeToString(dictionarySettings)
+        val body = JsonNoDefaults.encodeToString(DictionarySettings.serializer(), dictionarySettings)
         return transport.request(HttpMethod.Put, CallType.Write, path, requestOptions, body)
     }
 
