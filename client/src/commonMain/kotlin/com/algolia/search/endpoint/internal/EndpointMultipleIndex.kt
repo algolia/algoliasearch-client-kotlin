@@ -10,6 +10,7 @@ import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
+import com.algolia.search.model.multipleindex.IndexedQuery
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.ResponseListAPIKey
 import com.algolia.search.model.response.ResponseListIndices
@@ -66,6 +67,13 @@ internal class EndpointMultipleIndexImpl(
         val body = buildJsonObject { put(KeyRequests, requests) }.toString()
 
         return transport.request(HttpMethod.Post, CallType.Write, "$RouteIndexesV1/*/batch", requestOptions, body)
+    }
+
+    override suspend fun search(
+        requests: List<IndexedQuery>,
+        requestOptions: RequestOptions?
+    ): ResponseSearches {
+        TODO()
     }
 }
 
