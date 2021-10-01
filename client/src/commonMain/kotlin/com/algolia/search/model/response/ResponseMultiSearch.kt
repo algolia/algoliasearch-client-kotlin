@@ -1,13 +1,14 @@
-package com.algolia.search.model.multipleindex
+package com.algolia.search.model.response
 
-import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.model.response.ResponseSearchForFacets
+import com.algolia.search.serialize.KeyFacetHits
+import com.algolia.search.serialize.internal.asJsonInput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.descriptors.buildClassSerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.jsonObject
 
 @Serializable
 public class ResponseMultiSearch(
@@ -22,10 +23,12 @@ public sealed class ResultMultiSearch {
     public companion object : KSerializer<ResultMultiSearch> {
 
         override fun deserialize(decoder: Decoder): ResultMultiSearch {
-            return try {
-                Hits(decoder.decodeSerializableValue(ResponseSearch.serializer()))
-            } catch (e: Exception) {
+            val json = decoder.asJsonInput().jsonObject
+            val hasFacetsHits = json.keys.contains(KeyFacetHits)
+            return if (hasFacetsHits) {
                 Facets(decoder.decodeSerializableValue(ResponseSearchForFacets.serializer()))
+            } else {
+                Hits(decoder.decodeSerializableValue(ResponseSearch.serializer()))
             }
         }
 
