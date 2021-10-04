@@ -1,41 +1,45 @@
 package com.algolia.search.model.response
 
 import com.algolia.search.serialize.KeyFacetHits
+import com.algolia.search.serialize.KeyResults
+import com.algolia.search.serialize.internal.asJsonDecoder
 import com.algolia.search.serialize.internal.asJsonInput
-import kotlinx.serialization.KSerializer
+import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.Serializer
 import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.jsonObject
 
 @Serializable
 public class ResponseMultiSearch(
-    public val results: List<ResultMultiSearch>
+    @SerialName(KeyResults) public val results: List<ResultMultiSearch>
 )
 
+/**
+ * Query response. Can be:
+ * - hits: [ResponseSearch]
+ * - facets: [ResponseSearchForFacets]
+ */
 @Serializable(ResultMultiSearch.Companion::class)
 public sealed class ResultMultiSearch {
     public class Hits(public val response: ResponseSearch) : ResultMultiSearch()
     public class Facets(public val response: ResponseSearchForFacets) : ResultMultiSearch()
 
-    public companion object : KSerializer<ResultMultiSearch> {
+    @OptIn(ExperimentalSerializationApi::class)
+    @Serializer(ResultMultiSearch::class)
+    public companion object : DeserializationStrategy<ResultMultiSearch> {
 
         override fun deserialize(decoder: Decoder): ResultMultiSearch {
-            val json = decoder.asJsonInput().jsonObject
-            val hasFacetsHits = json.keys.contains(KeyFacetHits)
+            val json = decoder.asJsonDecoder().json
+            val element = decoder.asJsonInput().jsonObject
+            val hasFacetsHits = element.keys.contains(KeyFacetHits)
             return if (hasFacetsHits) {
-                Facets(decoder.decodeSerializableValue(ResponseSearchForFacets.serializer()))
+                Facets(json.decodeFromJsonElement(ResponseSearchForFacets.serializer(), element))
             } else {
-                Hits(decoder.decodeSerializableValue(ResponseSearch.serializer()))
+                Hits(json.decodeFromJsonElement(ResponseSearch.serializer(), element))
             }
-        }
-
-        override val descriptor: SerialDescriptor = buildClassSerialDescriptor(ResultMultiSearch::class.qualifiedName!!)
-
-        override fun serialize(encoder: Encoder, value: ResultMultiSearch) {
-            throw UnsupportedOperationException("ResultMultiSearch serialization is not an expected operation")
         }
     }
 }

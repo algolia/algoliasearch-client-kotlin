@@ -24,13 +24,13 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import shouldEqual
 
-internal class TestRequestTypedMultipleQueries {
+class TestRequestTypedMultipleQueries {
 
     @Test
     fun test() {
         val request = RequestTypedMultipleQueries(
             requests = listOf(
-                IndexQuery(indexName = indexA, query = Query(facets = setOf(attributeA))),
+                IndexQuery(indexName = indexA, query = Query(facets = setOf(attributeA), hitsPerPage = 3)),
                 FacetIndexQuery(
                     indexName = indexB,
                     query = Query(facets = setOf(attributeA, attributeB)),
