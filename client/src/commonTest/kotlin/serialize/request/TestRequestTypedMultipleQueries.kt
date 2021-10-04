@@ -48,7 +48,7 @@ class TestRequestTypedMultipleQueries {
                     add(
                         buildJsonObject {
                             put(KeyIndexName, indexA.raw)
-                            put(KeyParams, "facets=%5B%22attributeA%22%5D")
+                            put(KeyParams, "facets=%5B%22attributeA%22%5D&hitsPerPage=3")
                             put(KeyType, KeyDefault)
                         }
                     )
