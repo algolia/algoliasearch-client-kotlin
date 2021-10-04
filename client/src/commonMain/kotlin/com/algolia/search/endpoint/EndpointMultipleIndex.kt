@@ -5,6 +5,7 @@ import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.multipleindex.BatchOperationIndex
+import com.algolia.search.model.multipleindex.FacetIndexQuery
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.IndexedQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
@@ -108,9 +109,29 @@ public interface EndpointMultipleIndex {
         requestOptions: RequestOptions? = null
     ): ResponseBatches
 
+    /**
+     * Perform a search on several indices at the same time, with one method call.
+     * The returned results are broken down by [IndexedQuery].
+     * This method can be used in several kinds of situations. Here are three typical usage scenarios:
+     *
+     * 1. You have multiple indices that serve different purposes. This is typical when you want to search your main
+     * index as well as an index that contains a history of searches (to be used for autocomplete).
+     *
+     * 2. You want to target one index and send it multiple queries, where, for example, each query contains different
+     * settings or filters, or the query itself is slightly adjusted.
+     *
+     * 3. You want to perform multiple [IndexQuery] and [FacetIndexQuery] queries in the same time.
+     *
+     * Note that for 2., you will want to use the [MultipleQueriesStrategy.StopIfEnoughMatches] value of the [strategy]
+     * parameter.
+     *
+     * @param requests The [IndexedQuery] that will execute each [Query] against its [IndexName]
+     * @param strategy The [MultipleQueriesStrategy] of the query.
+     * @param requestOptions Configure request locally with [RequestOptions].
+     */
     public suspend fun search(
         requests: List<IndexedQuery>,
-        strategy: MultipleQueriesStrategy?,
+        strategy: MultipleQueriesStrategy? = null,
         requestOptions: RequestOptions? = null
     ): ResponseMultiSearch
 }
