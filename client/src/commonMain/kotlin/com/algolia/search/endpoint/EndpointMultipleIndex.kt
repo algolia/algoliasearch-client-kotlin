@@ -6,12 +6,13 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
+import com.algolia.search.model.multipleindex.IndexedQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
-import com.algolia.search.model.multipleindex.IndexedQuery
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.ResponseListAPIKey
 import com.algolia.search.model.response.ResponseListIndices
+import com.algolia.search.model.response.ResponseMultiSearch
 import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.ResponseSearches
 import com.algolia.search.model.search.Query
@@ -109,6 +110,7 @@ public interface EndpointMultipleIndex {
 
     public suspend fun search(
         requests: List<IndexedQuery>,
+        strategy: MultipleQueriesStrategy?,
         requestOptions: RequestOptions? = null
-    ): ResponseSearches
+    ): ResponseMultiSearch
 }

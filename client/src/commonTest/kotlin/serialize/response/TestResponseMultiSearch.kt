@@ -3,9 +3,9 @@ package serialize.response
 import com.algolia.search.model.response.ResponseMultiSearch
 import com.algolia.search.model.response.ResultMultiSearch
 import com.algolia.search.serialize.internal.JsonDebug
-import kotlin.test.Test
 import loadScratch
 import shouldEqual
+import kotlin.test.Test
 
 class TestResponseMultiSearch {
 

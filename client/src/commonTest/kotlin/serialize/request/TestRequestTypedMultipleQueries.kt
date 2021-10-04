@@ -18,11 +18,11 @@ import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.internal.Json
 import indexA
 import indexB
-import kotlin.test.Test
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import shouldEqual
+import kotlin.test.Test
 
 class TestRequestTypedMultipleQueries {
 

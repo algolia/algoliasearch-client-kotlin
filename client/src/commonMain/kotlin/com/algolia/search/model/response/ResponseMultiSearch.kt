@@ -1,5 +1,6 @@
 package com.algolia.search.model.response
 
+import com.algolia.search.model.multipleindex.IndexedQuery
 import com.algolia.search.serialize.KeyFacetHits
 import com.algolia.search.serialize.KeyResults
 import com.algolia.search.serialize.internal.asJsonDecoder
@@ -13,7 +14,10 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.json.jsonObject
 
 @Serializable
-public class ResponseMultiSearch(
+public data class ResponseMultiSearch(
+    /**
+     * List of result in the order they were submitted, one element for each [IndexedQuery].
+     */
     @SerialName(KeyResults) public val results: List<ResultMultiSearch>
 )
 
@@ -24,8 +28,8 @@ public class ResponseMultiSearch(
  */
 @Serializable(ResultMultiSearch.Companion::class)
 public sealed class ResultMultiSearch {
-    public class Hits(public val response: ResponseSearch) : ResultMultiSearch()
-    public class Facets(public val response: ResponseSearchForFacets) : ResultMultiSearch()
+    public data class Hits(public val response: ResponseSearch) : ResultMultiSearch()
+    public data class Facets(public val response: ResponseSearchForFacets) : ResultMultiSearch()
 
     @OptIn(ExperimentalSerializationApi::class)
     @Serializer(ResultMultiSearch::class)
