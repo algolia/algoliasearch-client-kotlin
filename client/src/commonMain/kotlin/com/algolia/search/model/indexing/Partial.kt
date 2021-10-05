@@ -167,9 +167,13 @@ public sealed class Partial {
             val json = buildJsonObject {
                 put(
                     value.attribute.raw,
-                    buildJsonObject {
-                        key?.let { put(Key_Operation, key) }
-                        put(KeyValue, value.value)
+                    key?.let {
+                        buildJsonObject {
+                            put(Key_Operation, key)
+                            put(KeyValue, value.value)
+                        }
+                    } ?: run {
+                        value.value
                     }
                 )
             }
@@ -180,8 +184,16 @@ public sealed class Partial {
             val element = decoder.asJsonInput().jsonObject
             val key = element.keys.first()
             val attribute = key.toAttribute()
-            val operation = element.getValue(key).jsonObject[Key_Operation]?.jsonPrimitiveOrNull?.content
-            val jsonElement = element.getValue(key).jsonObject.getValue(KeyValue)
+            val value = element.getValue(key)
+            val hasOperation = (value is JsonObject && value.jsonObject.containsKey(Key_Operation))
+            val (operation, jsonElement) = if (hasOperation) {
+                Pair(
+                    value.jsonObject[Key_Operation]?.jsonPrimitiveOrNull?.content,
+                    value.jsonObject.getValue((KeyValue))
+                )
+            } else {
+                Pair(null, value)
+            }
 
             return when (operation) {
                 null -> Update(attribute, jsonElement)

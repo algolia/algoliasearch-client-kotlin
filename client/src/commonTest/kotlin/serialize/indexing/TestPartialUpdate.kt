@@ -66,9 +66,13 @@ internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
         return buildJsonObject {
             put(
                 partial.attribute.raw,
-                buildJsonObject {
-                    key?.let { put(Key_Operation, key) }
-                    put(KeyValue, partial.value)
+                key?.let {
+                    buildJsonObject {
+                        put(Key_Operation, key)
+                        put(KeyValue, partial.value)
+                    }
+                } ?: run {
+                    partial.value
                 }
             )
         }
