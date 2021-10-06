@@ -23,14 +23,14 @@ public data class ResponseMultiSearch(
     /**
      * List of result in the order they were submitted, one element for each [IndexedQuery].
      */
-    @SerialName(KeyResults) public val results: List<ResultMultiSearch<MultiSearchResponse>>
+    @SerialName(KeyResults) public val results: List<ResultMultiSearch<ResultSearch>>
 )
 
 /**
  * Multi search query response.
  */
 @Serializable(ResultMultiSearchDeserializer::class)
-public sealed interface ResultMultiSearch<T : MultiSearchResponse> {
+public sealed interface ResultMultiSearch<T : ResultSearch> {
 
     /** Actual search response */
     public val response: T
@@ -46,7 +46,7 @@ public sealed interface ResultMultiSearch<T : MultiSearchResponse> {
 /**
  * [ResultMultiSearch] serializer.
  */
-internal class ResultMultiSearchDeserializer<T : MultiSearchResponse>(dataSerializer: KSerializer<MultiSearchResponse>) :
+internal class ResultMultiSearchDeserializer<T : ResultSearch>(dataSerializer: KSerializer<ResultSearch>) :
     KSerializer<ResultMultiSearch<T>> {
 
     override val descriptor = dataSerializer.descriptor
