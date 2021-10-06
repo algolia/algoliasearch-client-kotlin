@@ -257,7 +257,7 @@ public data class ResponseSearch(
      * Returned only if [Query.getRankingInfo] is set to true.
      */
     @SerialName(KeyABTestID) val abTestIDOrNull: ABTestID? = null
-) {
+): MultiSearchResponse {
 
     /**
      * The hits returned by the search. Hits are ordered according to the ranking or sorting of the index being queried.

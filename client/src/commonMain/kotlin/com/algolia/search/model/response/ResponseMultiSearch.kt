@@ -5,45 +5,72 @@ import com.algolia.search.serialize.KeyFacetHits
 import com.algolia.search.serialize.KeyResults
 import com.algolia.search.serialize.internal.asJsonDecoder
 import com.algolia.search.serialize.internal.asJsonInput
-import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.ExperimentalSerializationApi
+import com.algolia.search.serialize.internal.asJsonOutput
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
 import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonObject
 
+/**
+ * Response for multi search operation.
+ */
 @Serializable
 public data class ResponseMultiSearch(
     /**
      * List of result in the order they were submitted, one element for each [IndexedQuery].
      */
-    @SerialName(KeyResults) public val results: List<ResultMultiSearch>
+    @SerialName(KeyResults) public val results: List<ResultMultiSearch<MultiSearchResponse>>
 )
 
 /**
- * Query response. Can be:
- * - hits: [ResponseSearch]
- * - facets: [ResponseSearchForFacets]
+ * Multi search query response.
  */
-@Serializable(ResultMultiSearch.Companion::class)
-public sealed class ResultMultiSearch {
-    public data class Hits(public val response: ResponseSearch) : ResultMultiSearch()
-    public data class Facets(public val response: ResponseSearchForFacets) : ResultMultiSearch()
+@Serializable(ResultMultiSearchDeserializer::class)
+public sealed interface ResultMultiSearch<T : MultiSearchResponse> {
 
-    @OptIn(ExperimentalSerializationApi::class)
-    @Serializer(ResultMultiSearch::class)
-    public companion object : DeserializationStrategy<ResultMultiSearch> {
+    /** Actual search response */
+    public val response: T
 
-        override fun deserialize(decoder: Decoder): ResultMultiSearch {
-            val json = decoder.asJsonDecoder().json
-            val element = decoder.asJsonInput().jsonObject
-            val hasFacetsHits = element.keys.contains(KeyFacetHits)
-            return if (hasFacetsHits) {
-                Facets(json.decodeFromJsonElement(ResponseSearchForFacets.serializer(), element))
-            } else {
-                Hits(json.decodeFromJsonElement(ResponseSearch.serializer(), element))
-            }
+    /** Response for hits search */
+    public data class Hits(override val response: ResponseSearch) : ResultMultiSearch<ResponseSearch>
+
+    /** Response for facets search */
+    public data class Facets(override val response: ResponseSearchForFacets) :
+        ResultMultiSearch<ResponseSearchForFacets>
+}
+
+/**
+ * [ResultMultiSearch] serializer.
+ */
+internal class ResultMultiSearchDeserializer<T : MultiSearchResponse>(dataSerializer: KSerializer<MultiSearchResponse>) :
+    KSerializer<ResultMultiSearch<T>> {
+
+    override val descriptor = dataSerializer.descriptor
+
+    override fun deserialize(decoder: Decoder): ResultMultiSearch<T> {
+        val json = decoder.asJsonDecoder().json
+        val jsonObject = decoder.asJsonInput().jsonObject
+        return multiSearchResult(json, jsonObject)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private fun multiSearchResult(json: Json, jsonObject: JsonObject): ResultMultiSearch<T> {
+        return if (jsonObject.keys.contains(KeyFacetHits)) {
+            ResultMultiSearch.Facets(json.decodeFromJsonElement(ResponseSearchForFacets.serializer(), jsonObject))
+        } else {
+            ResultMultiSearch.Hits(json.decodeFromJsonElement(ResponseSearch.serializer(), jsonObject))
+        } as ResultMultiSearch<T>
+    }
+
+    override fun serialize(encoder: Encoder, value: ResultMultiSearch<T>) {
+        val json = encoder.asJsonOutput().json
+        when (value) {
+            is ResultMultiSearch.Hits -> json.encodeToString(ResponseSearch.serializer(), value.response)
+            is ResultMultiSearch.Facets -> json.encodeToString(ResponseSearchForFacets.serializer(), value.response)
         }
     }
 }
