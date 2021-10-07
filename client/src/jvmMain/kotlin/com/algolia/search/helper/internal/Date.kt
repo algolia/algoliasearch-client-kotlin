@@ -6,11 +6,11 @@ import java.util.TimeZone
 
 internal actual object DateISO8601 {
 
-    val dateISO8601 = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").apply {
+    val dateISO8601 get() = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'").apply {
         timeZone = TimeZone.getTimeZone("UTC")
     }
 
-    val dateISO8601Millis = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").apply {
+    val dateISO8601Millis get() = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").apply {
         timeZone = TimeZone.getTimeZone("UTC")
     }
 

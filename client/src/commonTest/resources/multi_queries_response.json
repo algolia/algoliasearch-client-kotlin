@@ -1,0 +1,430 @@
+{
+    "results": [
+        {
+            "hits": [
+                {
+                    "title": "Vanilla Sky",
+                    "alternative_titles": [
+                        "Ванильное небо",
+                        "香子兰天空 / 魂离情外天 / 香草天空",
+                        "Vanilia égbolt",
+                        "Vanilnoe Nebo"
+                    ],
+                    "year": 2001,
+                    "image": "https://image.tmdb.org/t/p/w154/ujMy9P4VczTW9YSpAM31uqdOMpz.jpg",
+                    "color": "#7C8581",
+                    "score": 6.030769230769231,
+                    "rating": 3,
+                    "actors": [
+                        "Tom Cruise",
+                        "Penélope Cruz",
+                        "Cameron Diaz",
+                        "Kurt Russell",
+                        "Jason Lee",
+                        "Noah Taylor",
+                        "Timothy Spall",
+                        "Tilda Swinton",
+                        "Armand Schultz",
+                        "Alicia Witt",
+                        "Michael Shannon",
+                        "Ivana Miličević",
+                        "Shalom Harlow",
+                        "Johnny Galecki"
+                    ],
+                    "actor_facets": [
+                        "https://image.tmdb.org/t/p/w45/3oWEuo0e8Nx8JvkqYCDec2iMY6K.jpg|Tom Cruise",
+                        "https://image.tmdb.org/t/p/w45/dcPSUfxMa791NZvrFiBc3ReDdpU.jpg|Penélope Cruz",
+                        "https://image.tmdb.org/t/p/w45/ahFkUN9Sm8oF1txUHE5JcJ95Ere.jpg|Cameron Diaz",
+                        "https://image.tmdb.org/t/p/w45/r3oJkdyBOs3ZWmamgNQzcvDGaxc.jpg|Kurt Russell",
+                        "https://image.tmdb.org/t/p/w45/67wSoVHxlOqtRhh3KJFBYf2qrDJ.jpg|Jason Lee",
+                        "https://image.tmdb.org/t/p/w45/dSlH0WA09dVqQhgB7LB5xn8WzD.jpg|Noah Taylor",
+                        "https://image.tmdb.org/t/p/w45/wqPqtdxObseJikozhcWLNDU5Pao.jpg|Timothy Spall",
+                        "https://image.tmdb.org/t/p/w45/eGNo9qwlunvAi4kCVUEFtQFM5X.jpg|Tilda Swinton",
+                        "https://image.tmdb.org/t/p/w45/oKcmZbjESiUybY7AgWeRvaBWCFu.jpg|Armand Schultz",
+                        "https://image.tmdb.org/t/p/w45/pmKMhehztGEv2i7PPY20nP68j0f.jpg|Alicia Witt",
+                        "https://image.tmdb.org/t/p/w45/5yGCJ6znHM96zTfW2LNP6uPPDCZ.jpg|Michael Shannon",
+                        "https://image.tmdb.org/t/p/w45/uWQTBSaZEo5iVIlATgEynocQQsG.jpg|Ivana Miličević",
+                        "https://image.tmdb.org/t/p/w45/vrXxkJBKAKiGg0tsUlUbdQK5WJv.jpg|Shalom Harlow",
+                        "https://image.tmdb.org/t/p/w45/iY3e0Zw5lygRO4BXbhcSxMcPEb9.jpg|Johnny Galecki"
+                    ],
+                    "genre": [
+                        "Drama",
+                        "Mystery",
+                        "Romance",
+                        "Science Fiction",
+                        "Thriller"
+                    ],
+                    "objectID": "439532680",
+                    "_highlightResult": {
+                        "title": {
+                            "value": "<em>Van</em>illa Sky",
+                            "matchLevel": "full",
+                            "fullyHighlighted": false,
+                            "matchedWords": [
+                                "van"
+                            ]
+                        },
+                        "year": {
+                            "value": "2001",
+                            "matchLevel": "none",
+                            "matchedWords": []
+                        },
+                        "actors": [
+                            {
+                                "value": "Tom Cruise",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Penélope Cruz",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Cameron Diaz",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Kurt Russell",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Jason Lee",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Noah Taylor",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Timothy Spall",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Tilda Swinton",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Armand Schultz",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Alicia Witt",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Michael Shannon",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Ivana Miličević",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Shalom Harlow",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Johnny Galecki",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            }
+                        ]
+                    }
+                },
+                {
+                    "title": "Vantage Point",
+                    "alternative_titles": [
+                        "Ponto de Vista",
+                        "En el punto de mira. Vantage Point",
+                        "Angles d'attaque",
+                        "Úhel pohledu"
+                    ],
+                    "year": 2008,
+                    "image": "https://image.tmdb.org/t/p/w154/2PnFsTzmFC3Ydhj0uBEYjPqHWHO.jpg",
+                    "color": "#A2A5A7",
+                    "score": 5.922047244094488,
+                    "rating": 3,
+                    "actors": [
+                        "Dennis Quaid",
+                        "Matthew Fox",
+                        "Forest Whitaker",
+                        "Sigourney Weaver",
+                        "William Hurt",
+                        "Ayelet Zurer",
+                        "Édgar Ramírez",
+                        "Eduardo Noriega",
+                        "Saïd Taghmaoui",
+                        "Zoe Saldana",
+                        "James Le Gros",
+                        "Bruce McGill"
+                    ],
+                    "actor_facets": [
+                        "https://image.tmdb.org/t/p/w45/tctj9LayHh6N2MX3G6LIFEEup26.jpg|Dennis Quaid",
+                        "https://image.tmdb.org/t/p/w45/o8hMOleGaZ4BbZQFJXrU0xtMsSI.jpg|Matthew Fox",
+                        "https://image.tmdb.org/t/p/w45/4pMQkelS5lK661m9Kz3oIxLYiyS.jpg|Forest Whitaker",
+                        "https://image.tmdb.org/t/p/w45/pYtEkU8VOP0pS2gC1iD2Vuesgyj.jpg|Sigourney Weaver",
+                        "https://image.tmdb.org/t/p/w45/mf5GiYZjURQ72CPtY1kBva7mqIK.jpg|William Hurt",
+                        "https://image.tmdb.org/t/p/w45/mrj36B6kZtE6jE6oNKEMperxBhW.jpg|Ayelet Zurer",
+                        "https://image.tmdb.org/t/p/w45/yQFzQITF35S9VpzO8sHDgxYA3cs.jpg|Édgar Ramírez",
+                        "https://image.tmdb.org/t/p/w45/5B1D3MChVAZ5z7cypJbCbSGgDge.jpg|Eduardo Noriega",
+                        "https://image.tmdb.org/t/p/w45/bOh3ZQ64WiGivN6GJrrO8vrw9wU.jpg|Saïd Taghmaoui",
+                        "https://image.tmdb.org/t/p/w45/ofNrWiA2KDdqiNxFTLp51HcXUlp.jpg|Zoe Saldana",
+                        "https://image.tmdb.org/t/p/w45/rqBjmSkcRGwtwpb2tTjGcqLtKyG.jpg|James Le Gros",
+                        "https://image.tmdb.org/t/p/w45/26nSF2hvk5YfJCbqnp8aNq9xNak.jpg|Bruce McGill"
+                    ],
+                    "genre": [
+                        "Drama",
+                        "Action",
+                        "Thriller",
+                        "Crime"
+                    ],
+                    "objectID": "439720420",
+                    "_highlightResult": {
+                        "title": {
+                            "value": "<em>Van</em>tage Point",
+                            "matchLevel": "full",
+                            "fullyHighlighted": false,
+                            "matchedWords": [
+                                "van"
+                            ]
+                        },
+                        "year": {
+                            "value": "2008",
+                            "matchLevel": "none",
+                            "matchedWords": []
+                        },
+                        "actors": [
+                            {
+                                "value": "Dennis Quaid",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Matthew Fox",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Forest Whitaker",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Sigourney Weaver",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "William Hurt",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Ayelet Zurer",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Édgar Ramírez",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Eduardo Noriega",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Saïd Taghmaoui",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Zoe Saldana",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "James Le Gros",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            },
+                            {
+                                "value": "Bruce McGill",
+                                "matchLevel": "none",
+                                "matchedWords": []
+                            }
+                        ]
+                    }
+                }
+            ],
+            "nbHits": 2250,
+            "page": 0,
+            "nbPages": 500,
+            "hitsPerPage": 2,
+            "exhaustiveNbHits": true,
+            "query": "van",
+            "queryAfterRemoval": "van",
+            "params": "query=van&hitsPerPage=2",
+            "index": "movies",
+            "renderingContent": {},
+            "processingTimeMS": 1
+        },
+        {
+            "hits": [
+                {
+                    "brand": "Robert Clergerie",
+                    "name": "Van",
+                    "price": 230,
+                    "color": "Black",
+                    "material": "Leather",
+                    "nbView": 93,
+                    "nbLike": 1,
+                    "nbWish": 3,
+                    "priceUSD": 310.45,
+                    "objectID": "219306",
+                    "_highlightResult": {
+                        "brand": {
+                            "value": "Robert Clergerie",
+                            "matchLevel": "none",
+                            "matchedWords": []
+                        },
+                        "name": {
+                            "value": "<em>Van</em>",
+                            "matchLevel": "full",
+                            "fullyHighlighted": true,
+                            "matchedWords": [
+                                "van"
+                            ]
+                        },
+                        "color": {
+                            "value": "Black",
+                            "matchLevel": "none",
+                            "matchedWords": []
+                        },
+                        "material": {
+                            "value": "Leather",
+                            "matchLevel": "none",
+                            "matchedWords": []
+                        }
+                    }
+                },
+                {
+                    "brand": "Chanel",
+                    "name": "Vanity Case",
+                    "price": 301,
+                    "color": "Black",
+                    "material": "Leather",
+                    "nbView": 275,
+                    "nbLike": 25,
+                    "nbWish": 36,
+                    "priceUSD": 406.29,
+                    "objectID": "747685",
+                    "_highlightResult": {
+                        "brand": {
+                            "value": "Chanel",
+                            "matchLevel": "none",
+                            "matchedWords": []
+                        },
+                        "name": {
+                            "value": "<em>Van</em>ity Case",
+                            "matchLevel": "full",
+                            "fullyHighlighted": false,
+                            "matchedWords": [
+                                "van"
+                            ]
+                        },
+                        "color": {
+                            "value": "Black",
+                            "matchLevel": "none",
+                            "matchedWords": []
+                        },
+                        "material": {
+                            "value": "Leather",
+                            "matchLevel": "none",
+                            "matchedWords": []
+                        }
+                    }
+                }
+            ],
+            "nbHits": 7564,
+            "page": 0,
+            "nbPages": 500,
+            "hitsPerPage": 2,
+            "exhaustiveNbHits": true,
+            "query": "van",
+            "params": "query=van&hitsPerPage=2",
+            "index": "products",
+            "renderingContent": {},
+            "processingTimeMS": 2
+        },
+        {
+            "facetHits": [
+                {
+                    "value": "Vanessa Redgrave",
+                    "highlighted": "Vanessa Redgrave",
+                    "count": 92
+                },
+                {
+                    "value": "Lee Van Cleef",
+                    "highlighted": "Lee Van Cleef",
+                    "count": 75
+                },
+                {
+                    "value": "Casper Van Dien",
+                    "highlighted": "Casper Van Dien",
+                    "count": 51
+                },
+                {
+                    "value": "Jean-Claude Van Damme",
+                    "highlighted": "Jean-Claude Van Damme",
+                    "count": 50
+                },
+                {
+                    "value": "Van Johnson",
+                    "highlighted": "Van Johnson",
+                    "count": 49
+                },
+                {
+                    "value": "Mario Van Peebles",
+                    "highlighted": "Mario Van Peebles",
+                    "count": 41
+                },
+                {
+                    "value": "Vanessa Williams",
+                    "highlighted": "Vanessa Williams",
+                    "count": 41
+                },
+                {
+                    "value": "Peter van Eyck",
+                    "highlighted": "Peter van Eyck",
+                    "count": 35
+                },
+                {
+                    "value": "Van Heflin",
+                    "highlighted": "Van Heflin",
+                    "count": 30
+                },
+                {
+                    "value": "Dick Van Patten",
+                    "highlighted": "Dick Van Patten",
+                    "count": 29
+                }
+            ],
+            "exhaustiveFacetsCount": true,
+            "processingTimeMS": 2
+        }
+    ]
+}
