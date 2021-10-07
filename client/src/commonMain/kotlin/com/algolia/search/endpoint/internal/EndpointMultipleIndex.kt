@@ -6,13 +6,16 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.exception.EmptyListException
 import com.algolia.search.model.internal.request.RequestRequestObjects
+import com.algolia.search.model.internal.request.RequestTypedMultipleQueries
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import com.algolia.search.model.multipleindex.IndexQuery
+import com.algolia.search.model.multipleindex.IndexedQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.response.ResponseListAPIKey
 import com.algolia.search.model.response.ResponseListIndices
+import com.algolia.search.model.response.ResponseMultiSearch
 import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.ResponseSearches
 import com.algolia.search.serialize.KeyRequests
@@ -66,6 +69,18 @@ internal class EndpointMultipleIndexImpl(
         val body = buildJsonObject { put(KeyRequests, requests) }.toString()
 
         return transport.request(HttpMethod.Post, CallType.Write, "$RouteIndexesV1/*/batch", requestOptions, body)
+    }
+
+    override suspend fun search(
+        requests: List<IndexedQuery>,
+        strategy: MultipleQueriesStrategy?,
+        requestOptions: RequestOptions?
+    ): ResponseMultiSearch {
+        val body = JsonNoDefaults.encodeToString(
+            RequestTypedMultipleQueries,
+            RequestTypedMultipleQueries(requests, strategy)
+        )
+        return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/queries", requestOptions, body)
     }
 }
 

@@ -88,7 +88,8 @@ internal fun Query.toBody(): String {
     return JsonNoDefaults.encodeToString(Query.serializer(), this)
 }
 
-internal fun Decoder.asJsonInput() = (this as JsonDecoder).decodeJsonElement()
+internal fun Decoder.asJsonDecoder() = this as JsonDecoder
+internal fun Decoder.asJsonInput() = asJsonDecoder().decodeJsonElement()
 internal fun Encoder.asJsonOutput() = this as JsonEncoder
 
 /**

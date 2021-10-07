@@ -16,6 +16,10 @@ kotlin {
         }
         testRuns["test"].executionTask.configure {
             useJUnit()
+            testLogging {
+                events("failed")
+                setExceptionFormat("full")
+            }
         }
     }
 

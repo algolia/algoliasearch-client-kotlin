@@ -22,4 +22,4 @@ public data class ResponseSearchForFacets(
      * Processing time.
      */
     @SerialName(KeyProcessingTimeMS) val processingTimeMS: Long
-)
+) : ResultSearch
