@@ -100,10 +100,11 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
             ): PartialUpdateObject {
                 return PartialUpdateObject(
                     objectID,
-                    buildJsonObject {
-                        put(partial.attribute.raw, partial.value)
-                        put(KeyObjectID, objectID.raw)
-                    },
+                    Json.encodeToJsonElement(Partial, partial).jsonObject.merge(
+                        buildJsonObject {
+                            put(KeyObjectID, objectID.raw)
+                        }
+                    ),
                     createIfNotExists
                 )
             }
