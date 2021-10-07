@@ -120,7 +120,7 @@ public interface EndpointMultipleIndex {
      * 2. You want to target one index and send it multiple queries, where, for example, each query contains different
      * settings or filters, or the query itself is slightly adjusted.
      *
-     * 3. You want to perform multiple [IndexQuery] and [FacetIndexQuery] queries in the same time.
+     * 3. You want to perform multiple [IndexQuery] and [FacetIndexQuery] queries at the same time.
      *
      * Note that for 2., you will want to use the [MultipleQueriesStrategy.StopIfEnoughMatches] value of the [strategy]
      * parameter.
