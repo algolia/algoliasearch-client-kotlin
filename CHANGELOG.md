@@ -1,3 +1,16 @@
+# 1.11.0
+
+### Added
+- Search: client-level search method (#291)
+
+### Fix
+- Include `_operation` for partialUpdateObjects (#295)
+- Shared `SimpleDateFormat` instances (#296)
+
+### Changed
+- Update Kotlin to 1.5.30
+- Update Ktor 1.6.4
+
 # 1.10.0
 
 ### Added
