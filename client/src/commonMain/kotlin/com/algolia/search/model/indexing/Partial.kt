@@ -172,9 +172,7 @@ public sealed class Partial {
                             put(Key_Operation, key)
                             put(KeyValue, value.value)
                         }
-                    } ?: run {
-                        value.value
-                    }
+                    } ?: value.value
                 )
             }
             encoder.asJsonOutput().encodeJsonElement(json)
@@ -186,14 +184,8 @@ public sealed class Partial {
             val attribute = key.toAttribute()
             val value = element.getValue(key)
             val hasOperation = (value is JsonObject && value.jsonObject.containsKey(Key_Operation))
-            val (operation, jsonElement) = if (hasOperation) {
-                Pair(
-                    value.jsonObject[Key_Operation]?.jsonPrimitiveOrNull?.content,
-                    value.jsonObject.getValue((KeyValue))
-                )
-            } else {
-                Pair(null, value)
-            }
+            val operation = if (hasOperation) value.jsonObject[Key_Operation]?.jsonPrimitiveOrNull?.content else null
+            val jsonElement = if (hasOperation) value.jsonObject.getValue((KeyValue)) else value
 
             return when (operation) {
                 null -> Update(attribute, jsonElement)

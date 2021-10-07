@@ -71,9 +71,7 @@ internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
                         put(Key_Operation, key)
                         put(KeyValue, partial.value)
                     }
-                } ?: run {
-                    partial.value
-                }
+                } ?: partial.value
             )
         }
     }
