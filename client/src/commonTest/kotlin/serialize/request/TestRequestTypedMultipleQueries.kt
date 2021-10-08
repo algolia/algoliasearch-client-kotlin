@@ -22,6 +22,7 @@ import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import shouldEqual
+import string
 import kotlin.test.Test
 
 class TestRequestTypedMultipleQueries {
@@ -34,7 +35,8 @@ class TestRequestTypedMultipleQueries {
                 FacetIndexQuery(
                     indexName = indexB,
                     query = Query(facets = setOf(attributeA, attributeB)),
-                    facetAttribute = attributeA
+                    facetAttribute = attributeA,
+                    facetQuery = string
                 )
             ),
             strategy = MultipleQueriesStrategy.StopIfEnoughMatches
@@ -48,16 +50,16 @@ class TestRequestTypedMultipleQueries {
                     add(
                         buildJsonObject {
                             put(KeyIndexName, indexA.raw)
-                            put(KeyParams, "facets=%5B%22attributeA%22%5D&hitsPerPage=3")
                             put(KeyType, KeyDefault)
+                            put(KeyParams, "facets=%5B%22attributeA%22%5D&hitsPerPage=3")
                         }
                     )
                     add(
                         buildJsonObject {
                             put(KeyIndexName, indexB.raw)
-                            put(KeyParams, "facets=%5B%22attributeA%22%2C%22attributeB%22%5D")
                             put(KeyType, KeyFacet)
                             put(KeyFacet, attributeA.raw)
+                            put(KeyParams, "facets=%5B%22attributeA%22%2C%22attributeB%22%5D&facetQuery=string")
                         }
                     )
                 }
