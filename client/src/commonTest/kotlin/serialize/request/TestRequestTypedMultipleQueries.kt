@@ -10,7 +10,6 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.KeyDefault
 import com.algolia.search.serialize.KeyFacet
-import com.algolia.search.serialize.KeyFacetQuery
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyParams
 import com.algolia.search.serialize.KeyRequests
@@ -19,12 +18,12 @@ import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.internal.Json
 import indexA
 import indexB
-import kotlin.test.Test
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import shouldEqual
 import string
+import kotlin.test.Test
 
 class TestRequestTypedMultipleQueries {
 
