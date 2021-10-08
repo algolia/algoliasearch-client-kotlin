@@ -28,5 +28,6 @@ public data class IndexQuery(
 public class FacetIndexQuery(
     override val indexName: IndexName,
     override val query: Query,
-    public val facetAttribute: Attribute
+    public val facetAttribute: Attribute,
+    public val facetQuery: String? = null
 ) : IndexedQuery
