@@ -6,6 +6,7 @@ plugins {
     kotlin("plugin.serialization")
     id("com.vanniktech.maven.publish")
     id("com.diffplug.spotless")
+    id("binary-compatibility-validator")
 }
 
 kotlin {
