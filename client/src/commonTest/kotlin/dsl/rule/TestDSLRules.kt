@@ -16,15 +16,16 @@ import com.algolia.search.model.rule.FacetValuesOrder
 import com.algolia.search.model.rule.FacetsOrder
 import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
+import com.algolia.search.model.rule.Redirect
 import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.SortRule
 import com.algolia.search.model.rule.TimeRange
+import kotlin.test.Test
 import kotlinx.serialization.json.buildJsonObject
 import objectIDA
 import objectIDB
 import shouldEqual
-import kotlin.test.Test
 
 internal class TestDSLRules {
 
@@ -54,6 +55,8 @@ internal class TestDSLRules {
             )
         )
 
+        val redirect = Redirect("https://my.redirect.url")
+
         val dsl = DSLRules {
             rule(
                 objectID = objectIDA,
@@ -69,7 +72,7 @@ internal class TestDSLRules {
                     query = query { },
                     userData = buildJsonObject { },
                     hide = objectIDs { +objectIDB },
-                    renderingContent = renderingContent(facetOrdering),
+                    renderingContent = renderingContent(facetOrdering = facetOrdering, redirect = redirect),
                 ),
                 enabled = true,
                 description = "hello",
@@ -90,7 +93,7 @@ internal class TestDSLRules {
                     query = query { },
                     userData = buildJsonObject { },
                     hide = listOf(objectIDB),
-                    renderingContent = RenderingContent(facetOrdering),
+                    renderingContent = RenderingContent(facetOrdering, redirect),
                 ),
                 enabled = true,
                 description = "hello",

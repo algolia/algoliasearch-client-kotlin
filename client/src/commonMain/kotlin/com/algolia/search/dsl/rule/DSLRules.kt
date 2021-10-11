@@ -11,6 +11,7 @@ import com.algolia.search.model.rule.Edit
 import com.algolia.search.model.rule.FacetOrdering
 import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
+import com.algolia.search.model.rule.Redirect
 import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.TimeRange
@@ -141,8 +142,8 @@ public class DSLRules(
     /**
      * Content defining how the search interface should be rendered.
      */
-    public fun renderingContent(facetOrdering: FacetOrdering? = null): RenderingContent {
-        return RenderingContent(facetOrdering)
+    public fun renderingContent(facetOrdering: FacetOrdering? = null, redirect: Redirect? = null): RenderingContent {
+        return RenderingContent(facetOrdering, redirect)
     }
 
     public companion object : DSL<DSLRules, List<Rule>> {

@@ -8,6 +8,7 @@ import boolean
 import com.algolia.search.model.rule.FacetOrdering
 import com.algolia.search.model.rule.FacetValuesOrder
 import com.algolia.search.model.rule.FacetsOrder
+import com.algolia.search.model.rule.Redirect
 import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.rule.SortRule
 import com.algolia.search.model.search.AlternativesAsExact
@@ -77,6 +78,7 @@ import com.algolia.search.serialize.KeyPrimary
 import com.algolia.search.serialize.KeyQueryLanguages
 import com.algolia.search.serialize.KeyQueryType
 import com.algolia.search.serialize.KeyRanking
+import com.algolia.search.serialize.KeyRedirect
 import com.algolia.search.serialize.KeyRelevancyStrictness
 import com.algolia.search.serialize.KeyRemoveStopWords
 import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
@@ -92,12 +94,14 @@ import com.algolia.search.serialize.KeySortFacetValuesBy
 import com.algolia.search.serialize.KeySortRemainingBy
 import com.algolia.search.serialize.KeyTypoTolerance
 import com.algolia.search.serialize.KeyUnretrievableAttributes
+import com.algolia.search.serialize.KeyUrl
 import com.algolia.search.serialize.KeyUserData
 import com.algolia.search.serialize.KeyValues
 import com.algolia.search.serialize.KeyVersion
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import indexA
 import int
+import kotlin.test.Test
 import kotlinx.serialization.json.JsonNull
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
@@ -108,7 +112,6 @@ import serialize.search.TestSnippet
 import shouldEqual
 import string
 import unknown
-import kotlin.test.Test
 
 internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
 
@@ -197,7 +200,8 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
                             sortRemainingBy = SortRule.Alpha
                         )
                     )
-                )
+                ),
+                redirect = Redirect(string)
             )
         ) to buildJsonObject {
             // Attributes
@@ -315,6 +319,12 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
                                     )
                                 }
                             )
+                        }
+                    )
+                    put(
+                        KeyRedirect,
+                        buildJsonObject {
+                            put(KeyUrl, string)
                         }
                     )
                 }
