@@ -1,6 +1,7 @@
 package com.algolia.search.configuration
 
 import com.algolia.search.transport.RequestOptions
+import com.algolia.search.util.Closeable
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
@@ -9,7 +10,7 @@ import io.ktor.client.features.logging.LogLevel
 /**
  * Configuration used by a client.
  */
-public interface Configuration {
+public interface Configuration : Closeable {
 
     /**
      * The timeout for each request when performing write operations (POST, PUT ..).
@@ -65,5 +66,9 @@ public interface Configuration {
             CallType.Read -> this?.readTimeout ?: readTimeout
             CallType.Write -> this?.writeTimeout ?: writeTimeout
         }
+    }
+
+    override fun close() {
+        httpClient.close()
     }
 }
