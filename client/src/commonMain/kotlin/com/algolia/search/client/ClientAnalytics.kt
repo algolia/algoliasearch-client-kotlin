@@ -13,13 +13,14 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.response.ResponseABTests
+import com.algolia.search.transport.CustomRequest
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 
 /**
  * Client to manage [ABTest] for analytics purposes.
  */
-public interface ClientAnalytics : EndpointAnalytics, Configuration, Credentials {
+public interface ClientAnalytics : EndpointAnalytics, Configuration, Credentials, CustomRequest {
 
     /**
      * Browse every [ABTest] on the index and return them as a list.

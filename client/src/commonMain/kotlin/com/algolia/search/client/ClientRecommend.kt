@@ -11,10 +11,11 @@ import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.endpoint.EndpointRecommend
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
+import com.algolia.search.transport.CustomRequest
 import com.algolia.search.transport.internal.Transport
 import io.ktor.client.features.logging.LogLevel
 
-public interface ClientRecommend : Configuration, EndpointRecommend, Credentials {
+public interface ClientRecommend : Configuration, EndpointRecommend, Credentials, CustomRequest {
 
     public companion object
 }
