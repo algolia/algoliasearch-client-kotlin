@@ -154,12 +154,12 @@ internal class Transport(
         httpMethod: HttpMethod,
         callType: CallType,
         path: String,
-        requestOptions: RequestOptions?,
+        responseType: TypeInfo,
         body: String?,
-        type: TypeInfo
+        requestOptions: RequestOptions?
     ): T {
         val httpResponse = genericRequest(httpMethod, callType, path, requestOptions, body)
-        return httpResponse.call.receiveAs(type)
+        return httpResponse.call.receiveAs(responseType)
     }
 
     @Suppress("UNCHECKED_CAST")

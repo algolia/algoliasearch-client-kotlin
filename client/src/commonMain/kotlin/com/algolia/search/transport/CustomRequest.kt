@@ -15,7 +15,7 @@ public interface CustomRequest {
      * @param path request path
      * @param requestOptions configure request locally
      * @param body request body
-     * @param type return value type
+     * @param responseType return value type
      *
      * @return request's response; type [T] must be serializable
      */
@@ -23,9 +23,9 @@ public interface CustomRequest {
         httpMethod: HttpMethod,
         callType: CallType,
         path: String,
-        requestOptions: RequestOptions?,
+        responseType: TypeInfo,
         body: String? = null,
-        type: TypeInfo
+        requestOptions: RequestOptions? = null,
     ): T
 }
 
@@ -44,13 +44,13 @@ public suspend inline fun <reified T : Any> CustomRequest.customRequest(
     httpMethod: HttpMethod,
     callType: CallType,
     path: String,
-    requestOptions: RequestOptions?,
-    body: String? = null
+    body: String? = null,
+    requestOptions: RequestOptions? = null,
 ): T = customRequest(
     httpMethod = httpMethod,
     callType = callType,
     path = path,
     requestOptions = requestOptions,
     body = body,
-    type = typeInfo<T>()
+    responseType = typeInfo<T>()
 )
