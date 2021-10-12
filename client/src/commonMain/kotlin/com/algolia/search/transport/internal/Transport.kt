@@ -6,28 +6,33 @@ import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.exception.UnreachableHostsException
+import com.algolia.search.transport.CustomRequest
 import com.algolia.search.transport.RequestOptions
+import io.ktor.client.call.HttpClientCall
 import io.ktor.client.features.HttpRequestTimeoutException
 import io.ktor.client.features.ResponseException
 import io.ktor.client.features.timeout
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
+import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpMethod
 import io.ktor.http.URLProtocol
 import io.ktor.network.sockets.ConnectTimeoutException
 import io.ktor.network.sockets.SocketTimeoutException
+import io.ktor.util.reflect.TypeInfo
 import io.ktor.utils.io.errors.IOException
+import kotlin.math.floor
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlin.math.floor
 
 internal class Transport(
     configuration: Configuration,
     private val credentialsOrNull: Credentials?,
-) : Configuration by configuration {
+) : CustomRequest, Configuration by configuration {
 
     private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
-    private val mutex = Mutex()
+
+    internal val mutex: Mutex = Mutex()
 
     val credentials get() = credentialsOrNull!!
 
@@ -43,7 +48,7 @@ internal class Transport(
         }
     }
 
-    private fun httpRequestBuilder(
+    internal fun httpRequestBuilder(
         httpMethod: HttpMethod,
         path: String,
         requestOptions: RequestOptions?,
@@ -71,12 +76,37 @@ internal class Transport(
         }
     }
 
-    suspend inline fun <reified T> request(
+    internal suspend inline fun <reified T> request(
         httpMethod: HttpMethod,
         callType: CallType,
         path: String,
         requestOptions: RequestOptions?,
         body: String? = null,
+    ): T {
+        return execute(httpMethod, callType, path, requestOptions, body) {
+            httpClient.request(it)
+        }
+    }
+
+    private suspend fun genericRequest(
+        httpMethod: HttpMethod,
+        callType: CallType,
+        path: String,
+        requestOptions: RequestOptions?,
+        body: String? = null
+    ): HttpResponse {
+        return execute(httpMethod, callType, path, requestOptions, body) {
+            httpClient.request(it)
+        }
+    }
+
+    suspend inline fun <T> execute(
+        httpMethod: HttpMethod,
+        callType: CallType,
+        path: String,
+        requestOptions: RequestOptions?,
+        body: String? = null,
+        block: (HttpRequestBuilder) -> T
     ): T {
         val hosts = callableHosts(callType)
         val errors by lazy(LazyThreadSafetyMode.NONE) { mutableListOf<Throwable>() }
@@ -86,7 +116,7 @@ internal class Transport(
             requestBuilder.url.host = host.url
             try {
                 setTimeout(requestBuilder, requestOptions, callType, host)
-                return httpClient.request<T>(requestBuilder).apply {
+                return block(requestBuilder).apply {
                     mutex.withLock { host.reset() }
                 }
             } catch (exception: Exception) {
@@ -103,14 +133,13 @@ internal class Transport(
                 }
             }
         }
-
         throw UnreachableHostsException(errors)
     }
 
     /**
      * Set socket read/write timeout.
      */
-    private fun setTimeout(
+    internal fun setTimeout(
         requestBuilder: HttpRequestBuilder,
         requestOptions: RequestOptions?,
         callType: CallType,
@@ -120,4 +149,19 @@ internal class Transport(
             socketTimeoutMillis = requestOptions.getTimeout(callType) * (host.retryCount + 1)
         }
     }
+
+    override suspend fun <T : Any> customRequest(
+        httpMethod: HttpMethod,
+        callType: CallType,
+        path: String,
+        requestOptions: RequestOptions?,
+        body: String?,
+        type: TypeInfo
+    ): T {
+        val httpResponse = genericRequest(httpMethod, callType, path, requestOptions, body)
+        return httpResponse.call.receiveAs(type)
+    }
+
+    @Suppress("UNCHECKED_CAST")
+    private suspend fun <T> HttpClientCall.receiveAs(type: TypeInfo): T = receive(type) as T
 }

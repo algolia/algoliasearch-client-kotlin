@@ -33,6 +33,7 @@ import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyType
 import com.algolia.search.serialize.RouteLogs
 import com.algolia.search.serialize.RouteTask
+import com.algolia.search.transport.CustomRequest
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.client.features.ResponseException
@@ -52,7 +53,8 @@ internal class ClientSearchImpl internal constructor(
     EndpointMultiCluster by EndpointMulticluster(transport),
     EndpointDictionary by EndpointDictionary(transport),
     Configuration by transport,
-    Credentials by transport.credentials {
+    Credentials by transport.credentials,
+    CustomRequest by transport {
 
     /**
      *  Initialize an [Index] configured with [ConfigurationSearch].
