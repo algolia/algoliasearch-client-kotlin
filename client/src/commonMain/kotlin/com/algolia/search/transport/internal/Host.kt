@@ -32,14 +32,12 @@ internal fun RetryableHost.reset() {
     retryCount = 0
 }
 
-@PublishedApi
 internal fun RetryableHost.hasTimedOut() {
     isUp = true
     lastUpdated = Time.getCurrentTimeMillis()
     retryCount += 1
 }
 
-@PublishedApi
 internal fun RetryableHost.hasFailed() {
     isUp = false
     lastUpdated = Time.getCurrentTimeMillis()

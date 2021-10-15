@@ -31,24 +31,22 @@ internal class Transport(
 ) : CustomRequest, Configuration by configuration {
 
     private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
+    private val mutex: Mutex = Mutex()
 
-    internal val mutex: Mutex = Mutex()
-
-    val credentials get() = credentialsOrNull!!
+    internal val credentials get() = credentialsOrNull!!
 
     suspend fun callableHosts(callType: CallType): List<RetryableHost> {
         return mutex.withLock {
             hosts.expireHostsOlderThan(hostStatusExpirationDelayMS)
             val hostsCallType = hosts.filterCallType(callType)
             val hostsCallTypeAreUp = hostsCallType.filter { it.isUp }
-
-            if (hostsCallTypeAreUp.isEmpty()) {
-                hostsCallType.apply { forEach { it.reset() } }
-            } else hostsCallTypeAreUp
+            hostsCallTypeAreUp.ifEmpty {
+                hostsCallType.onEach { it.reset() }
+            }
         }
     }
 
-    internal fun httpRequestBuilder(
+    private fun httpRequestBuilder(
         httpMethod: HttpMethod,
         path: String,
         requestOptions: RequestOptions?,
@@ -100,7 +98,7 @@ internal class Transport(
         }
     }
 
-    suspend inline fun <T> execute(
+    private suspend inline fun <T> execute(
         httpMethod: HttpMethod,
         callType: CallType,
         path: String,
@@ -139,7 +137,7 @@ internal class Transport(
     /**
      * Set socket read/write timeout.
      */
-    internal fun setTimeout(
+    private fun setTimeout(
         requestBuilder: HttpRequestBuilder,
         requestOptions: RequestOptions?,
         callType: CallType,
