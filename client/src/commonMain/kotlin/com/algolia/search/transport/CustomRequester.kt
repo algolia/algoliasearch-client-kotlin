@@ -19,7 +19,7 @@ public interface CustomRequester {
      *
      * @return request's response; type [T] must be serializable
      */
-    public suspend fun <T : Any> customRequest(
+    public suspend fun <T> customRequest(
         method: HttpMethod,
         callType: CallType,
         path: String,
@@ -40,7 +40,7 @@ public interface CustomRequester {
  *
  * @return request's response; type [T] must be serializable
  */
-public suspend inline fun <reified T : Any> CustomRequester.customRequest(
+public suspend inline fun <reified T> CustomRequester.customRequest(
     method: HttpMethod,
     callType: CallType,
     path: String,

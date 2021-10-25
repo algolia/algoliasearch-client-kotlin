@@ -148,7 +148,7 @@ internal class Transport(
         }
     }
 
-    override suspend fun <T : Any> customRequest(
+    override suspend fun <T> customRequest(
         method: HttpMethod,
         callType: CallType,
         path: String,
