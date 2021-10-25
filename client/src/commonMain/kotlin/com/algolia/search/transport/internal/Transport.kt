@@ -149,14 +149,14 @@ internal class Transport(
     }
 
     override suspend fun <T : Any> customRequest(
-        httpMethod: HttpMethod,
+        method: HttpMethod,
         callType: CallType,
         path: String,
         responseType: TypeInfo,
         body: String?,
         requestOptions: RequestOptions?
     ): T {
-        val httpResponse = genericRequest(httpMethod, callType, path, requestOptions, body)
+        val httpResponse = genericRequest(method, callType, path, requestOptions, body)
         return httpResponse.call.receiveAs(responseType)
     }
 
