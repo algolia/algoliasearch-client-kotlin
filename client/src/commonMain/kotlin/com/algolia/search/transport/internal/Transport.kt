@@ -6,7 +6,7 @@ import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.exception.UnreachableHostsException
-import com.algolia.search.transport.CustomRequest
+import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import io.ktor.client.call.HttpClientCall
 import io.ktor.client.features.HttpRequestTimeoutException
@@ -28,7 +28,7 @@ import kotlinx.coroutines.sync.withLock
 internal class Transport(
     configuration: Configuration,
     private val credentialsOrNull: Credentials?,
-) : CustomRequest, Configuration by configuration {
+) : CustomRequester, Configuration by configuration {
 
     private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
     private val mutex: Mutex = Mutex()

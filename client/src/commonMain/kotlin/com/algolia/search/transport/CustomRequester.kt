@@ -5,7 +5,7 @@ import io.ktor.http.HttpMethod
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.util.reflect.typeInfo
 
-public interface CustomRequest {
+public interface CustomRequester {
 
     /**
      * Perform a custom request.
@@ -40,7 +40,7 @@ public interface CustomRequest {
  *
  * @return request's response; type [T] must be serializable
  */
-public suspend inline fun <reified T : Any> CustomRequest.customRequest(
+public suspend inline fun <reified T : Any> CustomRequester.customRequest(
     httpMethod: HttpMethod,
     callType: CallType,
     path: String,

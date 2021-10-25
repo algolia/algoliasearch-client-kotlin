@@ -7,7 +7,7 @@ import com.algolia.search.endpoint.EndpointInsights
 import com.algolia.search.endpoint.internal.EndpointInsights
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.insights.UserToken
-import com.algolia.search.transport.CustomRequest
+import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.internal.Transport
 
 /**
@@ -19,7 +19,7 @@ internal class ClientInsightsImpl internal constructor(
     EndpointInsights by EndpointInsights(transport),
     Configuration by transport,
     Credentials by transport.credentials,
-    CustomRequest by transport {
+    CustomRequester by transport {
 
     override fun User(userToken: UserToken): ClientInsights.User {
         return ClientInsights.User(insights = this, userToken = userToken)
