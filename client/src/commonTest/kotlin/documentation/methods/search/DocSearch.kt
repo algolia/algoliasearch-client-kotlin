@@ -1,13 +1,19 @@
 package documentation.methods.search
 
+import com.algolia.search.configuration.CallType
 import com.algolia.search.dsl.attributesToRetrieve
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.requestOptions
 import com.algolia.search.helper.deserialize
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
+import com.algolia.search.transport.customRequest
 import documentation.client
+import io.ktor.http.HttpMethod
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonObject
 import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -58,5 +64,18 @@ internal class DocSearch {
 
             index.search(query, requestOptions)
         }
+    }
+
+    @Test
+    fun snippet3() = runBlocking {
+        val response = client.customRequest<JsonElement>(
+            method = HttpMethod.Post,
+            callType = CallType.Read,
+            path = "1/indexes/movies/query",
+            body = buildJsonObject {
+                put("query", JsonPrimitive("van"))
+                put("hitsPerPage", JsonPrimitive(3))
+            }.toString()
+        )
     }
 }

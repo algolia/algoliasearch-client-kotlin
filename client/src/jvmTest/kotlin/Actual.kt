@@ -47,7 +47,7 @@ internal actual val clientInsights = ClientInsights(
 internal actual val clientPersonalization = ClientPersonalization(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey(),
-    Region.Personalization.EU
+    Region.Personalization.US
 )
 
 internal actual val clientPlaces = ClientPlaces(

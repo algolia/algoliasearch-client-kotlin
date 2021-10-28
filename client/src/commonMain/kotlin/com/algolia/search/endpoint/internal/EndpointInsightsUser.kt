@@ -13,7 +13,7 @@ import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.insights.UserToken
 import io.ktor.client.statement.HttpResponse
 
-public class EndpointInsightsUserImpl(
+internal class EndpointInsightsUserImpl(
     private val insights: EndpointInsights,
     private val userToken: UserToken,
 ) : EndpointInsightsUser {

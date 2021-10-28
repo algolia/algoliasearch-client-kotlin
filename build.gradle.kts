@@ -8,6 +8,7 @@ buildscript {
         classpath(kotlin("serialization", version = kotlinVersion))
         classpath("com.vanniktech:gradle-maven-publish-plugin:0.18.0")
         classpath("com.diffplug.spotless:spotless-plugin-gradle:5.15.0")
+        classpath("org.jetbrains.kotlinx:binary-compatibility-validator:0.7.1")
     }
 }
 

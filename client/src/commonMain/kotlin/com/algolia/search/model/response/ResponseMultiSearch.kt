@@ -23,7 +23,7 @@ public data class ResponseMultiSearch(
     /**
      * List of result in the order they were submitted, one element for each [IndexedQuery].
      */
-    @SerialName(KeyResults) public val results: List<ResultMultiSearch<ResultSearch>>
+    @SerialName(KeyResults) public val results: List<ResultMultiSearch<*>>
 )
 
 /**

@@ -14,7 +14,7 @@ import io.ktor.client.features.logging.LogLevel
 /**
  * Implementation of [ConfigurationInsights].
  */
-public data class ConfigurationInsightsImpl(
+internal data class ConfigurationInsightsImpl(
     override val applicationID: ApplicationID,
     override val apiKey: APIKey,
     override val writeTimeout: Long,

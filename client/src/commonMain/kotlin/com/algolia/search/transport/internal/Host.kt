@@ -25,6 +25,7 @@ internal val placesHosts = listOf(
     RetryableHost("places-3.algolianet.com")
 )
 
+@PublishedApi
 internal fun RetryableHost.reset() {
     lastUpdated = Time.getCurrentTimeMillis()
     isUp = true
