@@ -13,12 +13,13 @@ import com.algolia.search.configuration.internal.extension.toPersonalization
 import com.algolia.search.endpoint.EndpointPersonalization
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
+import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.internal.Transport
 
 /**
  * Client for the personalization API.
  */
-public interface ClientPersonalization : EndpointPersonalization, Configuration, Credentials {
+public interface ClientPersonalization : EndpointPersonalization, Configuration, Credentials, CustomRequester {
 
     public companion object
 }

@@ -30,6 +30,7 @@ import com.algolia.search.model.task.AppTaskID
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
+import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import com.algolia.search.util.internal.decodeBase64String
@@ -45,7 +46,8 @@ public interface ClientSearch :
     EndpointMultiCluster,
     EndpointDictionary,
     Configuration,
-    Credentials {
+    Credentials,
+    CustomRequester {
 
     /**
      *  Initialize an [Index] configured with [ConfigurationSearch].

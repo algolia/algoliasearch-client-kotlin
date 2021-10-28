@@ -6,6 +6,7 @@ import com.algolia.search.configuration.Credentials
 import com.algolia.search.endpoint.EndpointAnalytics
 import com.algolia.search.endpoint.internal.EndpointAnalytics
 import com.algolia.search.model.response.ResponseABTests
+import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 
@@ -14,7 +15,8 @@ internal class ClientAnalyticsImpl internal constructor(
 ) : ClientAnalytics,
     EndpointAnalytics by EndpointAnalytics(transport),
     Configuration by transport,
-    Credentials by transport.credentials {
+    Credentials by transport.credentials,
+    CustomRequester by transport {
 
     override suspend fun browseAllABTests(
         hitsPerPage: Int?,
