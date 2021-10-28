@@ -21,9 +21,9 @@ import io.ktor.network.sockets.ConnectTimeoutException
 import io.ktor.network.sockets.SocketTimeoutException
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.utils.io.errors.IOException
-import kotlin.math.floor
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
+import kotlin.math.floor
 
 internal class Transport(
     configuration: Configuration,

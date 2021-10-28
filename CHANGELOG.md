@@ -1,3 +1,13 @@
+# 1.12.0
+
+### Added
+- Add custom request (#302)
+
+### Fix
+- Add `facetQuery` parameter to `FacetIndexQuery` (#297)
+- Optimize `SimpleDateFormat` instantiations (#301)
+- `ResponseMultiSearch` generic `results` type (#303)
+
 # 1.11.0
 
 ### Added
