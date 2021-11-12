@@ -1,5 +1,5 @@
 [versions]
-ktor = "1.6.5"
+ktor = "1.6.4"
 
 [libraries]
 # Ktor

@@ -1,4 +1,5 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("multiplatform")
@@ -22,6 +23,25 @@ kotlin {
             }
         }
     }
+    js(IR) {
+        useCommonJs()
+        browser()
+    }
+
+    val iosX64 = iosX64()
+    val iosArm32 = iosArm32()
+    val iosArm64 = iosArm64()
+    val tvosX64 = tvosX64()
+    val tvosArm64 = tvosArm64()
+    val watchosX86 = watchosX86()
+    val watchosX64 = watchosX64()
+    val watchosArm32 = watchosArm32()
+    val watchosArm64 = watchosArm64()
+    val macosX64 = macosX64()
+    //val macosArm64 = macosArm64()
+    //val iosSimulatorArm64 = iosSimulatorArm64()
+    //val watchosSimulatorArm64 = watchosSimulatorArm64()
+    //val tvosSimulatorArm64 = tvosSimulatorArm64()
 
     sourceSets {
         all {
@@ -49,10 +69,18 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
-                api(libs.ktor.client.apache)
                 api(libs.ktor.client.okhttp)
-                api(libs.ktor.client.android)
             }
+        }
+        val darwinMain by creating {
+            dependsOn(commonMain)
+        }
+        val darwinTest by creating {
+            dependsOn(commonTest)
+        }
+        configure(listOf(iosX64, iosArm32, iosArm64, tvosX64, tvosArm64, watchosX86, watchosX64, watchosArm32, watchosArm64, macosX64)) {
+            sourceSets.getByName("${name}Main").dependsOn(darwinMain)
+            sourceSets.getByName("${name}Test").dependsOn(darwinTest)
         }
     }
 }
