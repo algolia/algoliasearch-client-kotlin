@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        val kotlinVersion = "1.5.30"
+        val kotlinVersion = "1.5.31"
         classpath(kotlin("gradle-plugin", version = kotlinVersion))
         classpath(kotlin("serialization", version = kotlinVersion))
         classpath("com.vanniktech:gradle-maven-publish-plugin:0.18.0")
