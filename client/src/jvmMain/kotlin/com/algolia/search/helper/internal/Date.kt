@@ -7,8 +7,8 @@ import java.util.TimeZone
 
 internal actual object DateISO8601 {
 
-    private val localDateISO8601 = dateFormatOf("yyyy-MM-dd'T'HH:mm:ss'Z'")
-    private val localDateISO8601Millis = dateFormatOf("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    private val localDateISO8601 = dateFormatOf(dateTimeFormatISO8601)
+    private val localDateISO8601Millis = dateFormatOf(dateTimeFormatISO8601Millis)
 
     val dateISO8601: DateFormat get() = localDateISO8601.get()
     val dateISO8601Millis: DateFormat get() = localDateISO8601Millis.get()

@@ -1,3 +1,7 @@
 package com.algolia.search.transport.internal
 
-internal expect object Gzip : (String) -> ByteArray
+import com.algolia.search.model.filter.internal.Converter
+
+internal expect val isGzipSupported: Boolean
+
+internal expect object Gzip : Converter<String, ByteArray>

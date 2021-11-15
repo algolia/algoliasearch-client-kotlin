@@ -8,12 +8,13 @@ import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Region
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
-import kotlinx.coroutines.CoroutineScope
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.TimeZone
+import java.util.UUID
 import kotlin.coroutines.CoroutineContext
+import kotlinx.coroutines.CoroutineScope
 
 internal actual val clientSearch = ClientSearch(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
@@ -99,3 +100,5 @@ internal actual fun loadScratch(name: String): String {
 internal actual fun setupTrustStoreType() {
     System.setProperty("javax.net.ssl.trustStoreType", "JKS")
 }
+
+internal actual fun randomUUID(): String = UUID.randomUUID().toString()

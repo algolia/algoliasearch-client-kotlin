@@ -1,5 +1,5 @@
 [versions]
-ktor = "1.6.4"
+ktor = "1.6.5"
 
 [libraries]
 # Ktor
@@ -11,3 +11,5 @@ ktor-client-mock = { group = "io.ktor", name = "ktor-client-mock", version.ref =
 ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-apache = { group = "io.ktor", name = "ktor-client-apache", version.ref = "ktor" }
 ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version.ref = "ktor" }
+ktor-client-cio = { group = "io.ktor", name = "ktor-client-cio", version.ref = "ktor" }
+ktor-client-js = { group = "io.ktor", name = "ktor-client-js", version.ref = "ktor" }

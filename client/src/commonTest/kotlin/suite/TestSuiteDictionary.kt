@@ -17,17 +17,17 @@ import com.algolia.search.model.dictionary.DictionarySettings
 import com.algolia.search.model.dictionary.DisableStandardEntries
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Query
-import runBlocking
-import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import randomUUID
+import runBlocking
 
 internal class TestSuiteDictionary {
 
     @Test
     fun testStopwordsDictionaries(): Unit = runBlocking {
         val entry = DictionaryEntry.Stopword(
-            objectID = ObjectID(UUID.randomUUID().toString()),
+            objectID = ObjectID(randomUUID()),
             language = Language.English,
             word = "upper"
         )
@@ -63,7 +63,7 @@ internal class TestSuiteDictionary {
     @Test
     fun testPluralsDictionaries(): Unit = runBlocking {
         val entry = DictionaryEntry.Plural(
-            objectID = ObjectID(UUID.randomUUID().toString()),
+            objectID = ObjectID(randomUUID()),
             language = Language.French,
             words = listOf("cheval", "chevaux")
         )
@@ -89,7 +89,7 @@ internal class TestSuiteDictionary {
     @Test
     fun testCompoundsDictionaries(): Unit = runBlocking {
         val entry = DictionaryEntry.Compound(
-            objectID = ObjectID(UUID.randomUUID().toString()),
+            objectID = ObjectID(randomUUID()),
             language = Language.Dutch,
             word = "kopfschmerztablette",
             decomposition = listOf("kopf", "schmerz", "tablette")
@@ -121,7 +121,7 @@ internal class TestSuiteDictionary {
             )
             setDictionarySettings(stopwordsSettings).wait()
             val response = getDictionarySettings()
-            assert(response.disableStandardEntries?.stopwords?.entries?.containsAll(stopwords.entries) == true)
+            assertEquals(true, response.disableStandardEntries?.stopwords?.entries?.containsAll(stopwords.entries))
         }
     }
 }

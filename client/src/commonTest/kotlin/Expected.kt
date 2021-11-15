@@ -36,3 +36,5 @@ internal expect object DateFormat {
 }
 
 internal expect fun setupTrustStoreType()
+
+internal expect fun randomUUID(): String
