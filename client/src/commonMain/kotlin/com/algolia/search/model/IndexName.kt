@@ -2,10 +2,10 @@ package com.algolia.search.model
 
 import com.algolia.search.client.Index
 import com.algolia.search.exception.EmptyStringException
-import com.algolia.search.helper.internal.encodeUTF8
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.RouteIndexesV1
+import io.ktor.http.encodeURLPath
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -26,7 +26,7 @@ public data class IndexName(
     }
 
     internal fun encode(): String {
-        return raw.encodeUTF8()
+        return raw.encodeURLPath()
     }
 
     internal fun toPath(suffix: String? = null): String {
