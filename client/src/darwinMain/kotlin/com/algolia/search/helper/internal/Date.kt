@@ -18,9 +18,17 @@ internal actual object DateISO8601 {
     }
 
     actual fun format(timestamp: Long, inMilliseconds: Boolean): String {
-        val date = NSDate.create(timestamp.toDouble())
-        val formatter = if (inMilliseconds) dateISO8601Millis else dateISO8601
-        return formatter.stringFromDate(date)
+        return if (inMilliseconds) formatInMilliseconds(timestamp) else formatInSeconds(timestamp)
+    }
+
+    private fun formatInSeconds(timestamp: Long): String {
+        val date = NSDate.create(timeIntervalSince1970 = timestamp.toDouble())
+        return dateISO8601.stringFromDate(date)
+    }
+
+    private fun formatInMilliseconds(timestamp: Long): String {
+        val date = NSDate.create(timeIntervalSince1970 = timestamp / 1000.0)
+        return dateISO8601Millis.stringFromDate(date)
     }
 
     actual fun parse(date: String, inMilliseconds: Boolean): Long {
