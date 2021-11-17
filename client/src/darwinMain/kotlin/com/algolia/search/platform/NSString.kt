@@ -7,4 +7,4 @@ import platform.Foundation.NSString
  *
  * [documentation](https://kotlinlang.org/docs/native-objc-interop.html#mappings)
  */
-internal fun String.asNSString() = this as NSString
+internal fun String.nsString() = this as NSString

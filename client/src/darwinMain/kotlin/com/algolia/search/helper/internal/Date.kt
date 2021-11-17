@@ -10,7 +10,7 @@ import platform.Foundation.create
 @ThreadLocal
 internal actual object DateISO8601 {
 
-    internal val dateISO8601 = NSISO8601DateFormatter()
+    private val dateISO8601 = NSISO8601DateFormatter()
 
     @OptIn(UnsafeNumber::class)
     internal val dateISO8601Millis = NSISO8601DateFormatter().apply {
