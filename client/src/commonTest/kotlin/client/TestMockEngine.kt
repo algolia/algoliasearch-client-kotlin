@@ -29,11 +29,12 @@ internal class TestMockEngine {
             content = ByteReadChannel(JsonNoDefaults.encodeToString(ResponseSearch.serializer(), responseSearch))
         )
     }
-    private val client = ClientSearch(ConfigurationSearch(appID, apiKey, engine = engine))
+    //private val client = ClientSearch(ConfigurationSearch(appID, apiKey, engine = engine))
 
     @Test
     fun mock() {
         runBlocking {
+            val client = ClientSearch(ConfigurationSearch(appID, apiKey, engine = engine))
             client.initIndex(IndexName("index_name")).search() shouldEqual responseSearch
         }
     }

@@ -11,10 +11,15 @@ import platform.Foundation.dataUsingEncoding
  * Converts [NSData] to [String] using UTF-8 encoding.
  */
 @OptIn(UnsafeNumber::class)
-internal fun NSData.string(): String? {
+internal fun NSData.asString(): String? {
     return NSString.create(this, NSUTF8StringEncoding) as String?
 }
 
-public fun String.nsData(): NSData? {
+/**
+ * Converts [String] to [NSData] using UTF-8 encoding.
+ */
+@OptIn(UnsafeNumber::class)
+@Suppress("CAST_NEVER_SUCCEEDS")
+public fun String.asNSData(): NSData? {
     return (this as NSString).dataUsingEncoding(NSUTF8StringEncoding)
 }

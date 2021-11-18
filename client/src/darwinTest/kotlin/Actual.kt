@@ -8,8 +8,9 @@ import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Region
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
-import com.algolia.search.platform.string
+import com.algolia.search.platform.asString
 import kotlin.coroutines.CoroutineContext
+import kotlin.native.concurrent.SharedImmutable
 import kotlinx.cinterop.toKString
 import kotlinx.coroutines.CoroutineScope
 import platform.Foundation.NSDate
@@ -23,14 +24,18 @@ import platform.Foundation.timeIntervalSince1970
 import platform.Foundation.timeZoneForSecondsFromGMT
 import platform.posix.getenv
 
+@SharedImmutable
 internal actual val clientSearch = ClientSearch(
     env("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
     env("ALGOLIA_SEARCH_KEY_1").toAPIKey()
 )
+@SharedImmutable
 internal actual val clientAdmin1 = ClientSearch(
     env("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
     env("ALGOLIA_ADMIN_KEY_1").toAPIKey()
 )
+
+@SharedImmutable
 internal actual val clientAdmin2 = ClientSearch(
     ConfigurationSearch(
         env("ALGOLIA_APPLICATION_ID_2").toApplicationID(),
@@ -38,6 +43,8 @@ internal actual val clientAdmin2 = ClientSearch(
         compression = Compression.None
     )
 )
+
+@SharedImmutable
 internal actual val clientMcm = ClientSearch(
     env("ALGOLIA_ADMIN_ID_MCM").toApplicationID(),
     env("ALGOLIA_ADMIN_KEY_MCM").toAPIKey()
@@ -63,6 +70,7 @@ internal actual val clientPlaces = ClientPlaces(
     env("ALGOLIA_PLACES_KEY").toAPIKey()
 )
 
+@SharedImmutable
 internal actual val clientAnswers = ClientSearch(
     env("ALGOLIA_ANSWERS_APP_ID").toApplicationID(),
     env("ALGOLIA_ANSWERS_KEY").toAPIKey()
@@ -96,9 +104,9 @@ internal actual object DateFormat {
 internal actual fun loadScratch(name: String): String {
     val manager = NSFileManager()
     return if (manager.fileExistsAtPath("src/commonTest/resources")) {
-        manager.contentsAtPath("src/commonTest/resources/$name")?.string()
+        manager.contentsAtPath("src/commonTest/resources/$name")?.asString()
     } else {
-        manager.contentsAtPath("../../src/commonTest/resources/$name")?.string()
+        manager.contentsAtPath("../../src/commonTest/resources/$name")?.asString()
     } ?: throw IllegalStateException("empty content for file $name")
 }
 

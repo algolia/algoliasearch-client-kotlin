@@ -7,4 +7,5 @@ import platform.Foundation.NSString
  *
  * [documentation](https://kotlinlang.org/docs/native-objc-interop.html#mappings)
  */
-internal fun String.nsString() = this as NSString
+@Suppress("CAST_NEVER_SUCCEEDS")
+internal fun String.asNSString() = this as NSString

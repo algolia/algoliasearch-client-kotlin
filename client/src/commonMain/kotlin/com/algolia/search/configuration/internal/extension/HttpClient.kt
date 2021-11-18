@@ -30,17 +30,20 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
     install(JsonFeature) {
         serializer = KotlinxSerializer(JsonNonStrict)
     }
-    installLogging(configuration.logLevel)
+
+    val logLevel = configuration.logLevel
+    installLogging(logLevel)
+
     install(UserAgent) {
         agent = clientUserAgent(AlgoliaSearchClient.version)
     }
     install(HttpTimeout)
+    val defaults = configuration.defaultHeaders
+    val compression = configuration.compression
     defaultRequest {
-        configuration.defaultHeaders?.let {
-            it.forEach { (key, value) -> header(key, value) }
-        }
+        defaults?.forEach { (key, value) -> header(key, value) }
         if (method.canCompress()) {
-            compressionHeader(configuration.compression)
+            compressionHeader(compression)
         }
     }
 }

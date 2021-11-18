@@ -1,6 +1,8 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
 
 plugins {
     kotlin("multiplatform")
@@ -95,6 +97,16 @@ tasks {
     }
 
     kotlin.sourceSets.commonMain.get().kotlin.srcDir(copyTemplates)
+
+    // TODO: remove
+    val macosX64Test by getting(KotlinNativeTest::class) {
+        testLogging {
+            events( "FAILED")
+            exceptionFormat = TestExceptionFormat.FULL
+            showStandardStreams = true
+            showStackTraces = true
+        }
+    }
 }
 
 configure<SpotlessExtension> {
