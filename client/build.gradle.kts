@@ -49,7 +49,7 @@ kotlin {
 
         val darwinTest by getting {
             dependencies {
-                implementation(libs.ktor.client.cio)
+                implementation(libs.ktor.client.ios)
             }
         }
     }
