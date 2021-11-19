@@ -38,7 +38,8 @@ internal class TestSuiteAccount {
     @Test
     fun test() {
         runTest {
-            val rule = load(Rule.serializer(), "rule_one.json")
+            val serializer = Rule.serializer()
+            val rule = load(serializer, "rule_one.json")
 
             shouldFailWith<IllegalArgumentException> {
                 ClientAccount.copyIndex(index1, index2)

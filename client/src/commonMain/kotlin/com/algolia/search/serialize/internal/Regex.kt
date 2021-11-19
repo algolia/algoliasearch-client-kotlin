@@ -7,16 +7,17 @@ import com.algolia.search.serialize.KeyFilterOnly
 import com.algolia.search.serialize.KeyOrdered
 import com.algolia.search.serialize.KeySearchable
 import com.algolia.search.serialize.KeyUnordered
+import kotlin.native.concurrent.SharedImmutable
 
-internal val regexAsc = Regex("^$KeyAsc\\((.*)\\)$")
-internal val regexDesc = Regex("^$KeyDesc\\((.*)\\)$")
-internal val regexEqualOnly = Regex("^$KeyEqualOnly\\((.*)\\)$")
-internal val regexSnippet = Regex("^(.*):(\\d+)$")
-internal val regexOrdered = Regex("^$KeyOrdered\\((.*)\\)$")
-internal val regexUnordered = Regex("^$KeyUnordered\\((.*)\\)$")
-internal val regexFilterOnly = Regex("^$KeyFilterOnly\\((.*)\\)$")
-internal val regexSearchable = Regex("^$KeySearchable\\((.*)\\)$")
-internal val regexFacet = Regex("^\\{facet:(.*)\\}$")
-internal val regexPlaceholder = Regex("^<(.*)>$")
-internal val regexPoint = Regex("^(.*),(.*)$")
-internal val regexUserToken = Regex("^[a-zA-Z0-9_\\-.:]*\$") // alpha-numeric and/or IP address (IPv4/IPv6)
+@SharedImmutable internal val regexAsc = Regex("^$KeyAsc\\((.*)\\)$")
+@SharedImmutable internal val regexDesc = Regex("^$KeyDesc\\((.*)\\)$")
+@SharedImmutable internal val regexEqualOnly = Regex("^$KeyEqualOnly\\((.*)\\)$")
+@SharedImmutable internal val regexSnippet = Regex("^(.*):(\\d+)$")
+@SharedImmutable internal val regexOrdered = Regex("^$KeyOrdered\\((.*)\\)$")
+@SharedImmutable internal val regexUnordered = Regex("^$KeyUnordered\\((.*)\\)$")
+@SharedImmutable internal val regexFilterOnly = Regex("^$KeyFilterOnly\\((.*)\\)$")
+@SharedImmutable internal val regexSearchable = Regex("^$KeySearchable\\((.*)\\)$")
+@SharedImmutable internal val regexFacet = Regex("^\\{facet:(.*)\\}$")
+@SharedImmutable internal val regexPlaceholder = Regex("^<(.*)>$")
+@SharedImmutable internal val regexPoint = Regex("^(.*),(.*)$")
+@SharedImmutable internal val regexUserToken = Regex("^[a-zA-Z0-9_\\-.:]*\$") // alpha-numeric and/or IP address (IPv4/IPv6)

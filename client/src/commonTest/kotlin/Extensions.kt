@@ -7,23 +7,24 @@ import com.algolia.search.model.rule.FacetValuesOrder
 import com.algolia.search.model.rule.FacetsOrder
 import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.rule.SortRule
+import kotlin.native.concurrent.SharedImmutable
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
 
 internal fun set(vararg filters: Filter) = mutableSetOf(*filters)
 
-internal const val unknown = "unknown"
-internal const val int = 0
-internal const val boolean = true
-internal const val string = "string"
-internal val attributeA = Attribute("attributeA")
-internal val attributeB = Attribute("attributeB")
-internal val indexA = IndexName("indexA")
-internal val indexB = IndexName("indexB")
-internal val objectIDA = ObjectID("442854")
-internal val objectIDB = ObjectID("322601")
-internal val nestedLists = listOf(listOf(string), listOf(string))
-internal val attributes = listOf(attributeA, attributeB)
+@SharedImmutable internal const val unknown = "unknown"
+@SharedImmutable internal const val int = 0
+@SharedImmutable internal const val boolean = true
+@SharedImmutable internal const val string = "string"
+@SharedImmutable internal val attributeA = Attribute("attributeA")
+@SharedImmutable internal val attributeB = Attribute("attributeB")
+@SharedImmutable internal val indexA = IndexName("indexA")
+@SharedImmutable internal val indexB = IndexName("indexB")
+@SharedImmutable internal val objectIDA = ObjectID("442854")
+@SharedImmutable internal val objectIDB = ObjectID("322601")
+@SharedImmutable internal val nestedLists = listOf(listOf(string), listOf(string))
+@SharedImmutable internal val attributes = listOf(attributeA, attributeB)
 internal val renderingContent = RenderingContent(
     facetOrdering = FacetOrdering(
         facets = FacetsOrder(
@@ -50,12 +51,12 @@ internal val renderingContent = RenderingContent(
     )
 )
 
-internal val nestedListsJson = buildJsonArray {
+@SharedImmutable internal val nestedListsJson = buildJsonArray {
     add(buildJsonArray { add(string) })
     add(buildJsonArray { add(string) })
 }
 
-internal val attributesJson = buildJsonArray {
+@SharedImmutable internal val attributesJson = buildJsonArray {
     add(attributeA.raw)
     add(attributeB.raw)
 }
