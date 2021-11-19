@@ -22,7 +22,7 @@ import kotlin.test.Test
 
 internal class TestSuiteMultiCluster {
 
-    private val date = DateFormat.format()
+    private val date = DateFormat.now()
     private val prefix = "kotlin-$date"
 
     fun userId(id: Int): UserID {

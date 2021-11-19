@@ -10,6 +10,7 @@ import com.algolia.search.model.settings.Settings
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import io.ktor.util.InternalAPI
+import kotlin.native.concurrent.SharedImmutable
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
@@ -22,10 +23,15 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
 
+@SharedImmutable
 internal val Json = Json {
     encodeDefaults = true
 }
+
+@SharedImmutable
 internal val JsonNoDefaults = Json.Default
+
+@SharedImmutable
 internal val JsonNonStrict = Json {
     ignoreUnknownKeys = true
     isLenient = true
@@ -33,6 +39,7 @@ internal val JsonNonStrict = Json {
     encodeDefaults = true
 }
 
+@SharedImmutable
 @OptIn(ExperimentalSerializationApi::class)
 internal val JsonDebug = Json {
     prettyPrint = true

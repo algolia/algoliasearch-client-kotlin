@@ -6,7 +6,6 @@ import com.algolia.search.client.ClientSearch
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.analytics.Variant
-import com.algolia.search.model.internal.Time
 import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.serialize.internal.JsonDebug
 import dayInMillis
@@ -16,7 +15,7 @@ import shouldEqual
 import username
 
 internal fun testSuiteIndexName(suffix: String): IndexName {
-    val date = DateFormat.format()
+    val date = DateFormat.now()
     val prefix = "kotlin-$date"
 
     return "$prefix-$username-$suffix".toIndexName()
@@ -38,7 +37,8 @@ internal suspend fun cleanIndex(client: ClientSearch, suffix: String, now: Boole
             val result = Regex("kotlin-(.*)-$username-$suffix").find(indexName)
             val date = result?.groupValues?.get(1)
             if (date != null) {
-                val difference = Time.getCurrentTimeMillis() - DateFormat.parse(date)
+                DateFormat.fromNow(date)
+                val difference = DateFormat.fromNow(date)
 
                 if (difference >= dayInMillis || now) {
                     val index = client.initIndex(it.indexName)

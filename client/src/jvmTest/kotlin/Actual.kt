@@ -80,12 +80,12 @@ internal actual object DateFormat {
         it.timeZone = TimeZone.getTimeZone("UTC")
     }
 
-    actual fun format(timestamp: Long?): String {
-        return dateFormat.format(if (timestamp != null) Date(timestamp) else Date())
+    actual fun now(): String {
+        return dateFormat.format(Date())
     }
 
-    actual fun parse(date: String): Long {
-        return dateFormat.parse(date).time
+    actual fun fromNow(date: String): Long {
+        return System.currentTimeMillis() - dateFormat.parse(date).time
     }
 }
 
