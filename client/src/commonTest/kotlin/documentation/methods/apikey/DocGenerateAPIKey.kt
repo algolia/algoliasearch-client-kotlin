@@ -7,7 +7,7 @@ import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.internal.Time
 import com.algolia.search.model.search.Query
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -29,7 +29,7 @@ internal class DocGenerateAPIKey {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val parentAPIKey = APIKey("SearchOnlyApiKeyKeptPrivate")
             val restriction = SecuredAPIKeyRestriction(
                 query = Query(filters = "_tags:user_42")

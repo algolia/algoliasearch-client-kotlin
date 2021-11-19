@@ -3,7 +3,7 @@ package documentation.parameters.advanced
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class DocReplaceSynonymsInHighlight {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 replaceSynonymsInHighlight = true
             }
@@ -25,7 +25,7 @@ internal class DocReplaceSynonymsInHighlight {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 replaceSynonymsInHighlight = true
             }

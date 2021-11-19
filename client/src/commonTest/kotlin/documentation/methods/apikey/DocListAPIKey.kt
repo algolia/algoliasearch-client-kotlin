@@ -1,7 +1,7 @@
 package documentation.methods.apikey
 
 import documentation.client
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class DocListAPIKey {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             client.listAPIKeys()
         }
     }

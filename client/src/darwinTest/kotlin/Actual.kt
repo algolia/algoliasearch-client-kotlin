@@ -15,6 +15,9 @@ import kotlin.native.concurrent.ThreadLocal
 import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.toKString
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.newSingleThreadContext
+import kotlinx.coroutines.runBlocking
 import platform.Foundation.NSDate
 import platform.Foundation.NSDateFormatter
 import platform.Foundation.NSFileManager
@@ -88,8 +91,11 @@ internal actual val clientAnswers = ClientSearch(
 internal actual val username: String
     get() = NSFullUserName()
 
-internal actual fun runBlocking(coroutineContext: CoroutineContext, block: suspend CoroutineScope.() -> Unit) {
-    kotlinx.coroutines.runBlocking(coroutineContext, block = block)
+@OptIn(ExperimentalCoroutinesApi::class)
+private val testCoroutineContext: CoroutineContext = newSingleThreadContext("testRunner")
+
+internal actual fun <T> runTest(block: suspend () -> T) {
+    runBlocking(testCoroutineContext) { block() }
 }
 
 internal actual object DateFormat {

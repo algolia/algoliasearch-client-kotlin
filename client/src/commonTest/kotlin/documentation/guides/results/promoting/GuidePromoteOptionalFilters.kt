@@ -5,7 +5,7 @@ import com.algolia.search.dsl.optionalFilters
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ class GuidePromoteOptionalFilters {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesForFaceting {
                     +"can_deliver_quickly"
@@ -27,7 +27,7 @@ class GuidePromoteOptionalFilters {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("hungry") {
                 optionalFilters {
                     and {

@@ -3,7 +3,7 @@ package documentation.parameters.filtering
 import com.algolia.search.dsl.numericFilters
 import com.algolia.search.dsl.query
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -31,7 +31,7 @@ internal class DocNumericFilters {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 numericFilters {
                     or {

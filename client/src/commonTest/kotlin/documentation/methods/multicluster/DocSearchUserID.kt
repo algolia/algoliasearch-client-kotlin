@@ -3,7 +3,7 @@ package documentation.methods.multicluster
 import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserIDQuery
 import documentation.client
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -24,7 +24,7 @@ internal class DocSearchUserID {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = UserIDQuery(
                 query = "query",
                 clusterName = ClusterName("c1-test"),

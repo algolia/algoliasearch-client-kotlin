@@ -4,7 +4,7 @@ import com.algolia.search.dsl.advancedSyntaxFeatures
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class DocAdvancedSyntaxFeatures {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 advancedSyntaxFeatures {
                     +ExactPhrase
@@ -32,7 +32,7 @@ internal class DocAdvancedSyntaxFeatures {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 advancedSyntax = true
                 advancedSyntaxFeatures {
@@ -46,7 +46,7 @@ internal class DocAdvancedSyntaxFeatures {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 advancedSyntax = true
                 advancedSyntaxFeatures {

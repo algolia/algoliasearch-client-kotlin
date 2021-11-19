@@ -7,7 +7,7 @@ import com.algolia.search.dsl.query
 import com.algolia.search.dsl.rule.rules
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -16,7 +16,7 @@ internal class GuideDynamicFiltering {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesForFaceting {
                     +"allergens"
@@ -29,7 +29,7 @@ internal class GuideDynamicFiltering {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     "gluten-free-rule",
@@ -51,7 +51,7 @@ internal class GuideDynamicFiltering {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     "diet-rule",
@@ -78,7 +78,7 @@ internal class GuideDynamicFiltering {
 
     @Test
     fun snippet4() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesForFaceting {
                     +"can_deliver_quickly"
@@ -91,7 +91,7 @@ internal class GuideDynamicFiltering {
 
     @Test
     fun snippet5() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     "asap-rule",
@@ -117,7 +117,7 @@ internal class GuideDynamicFiltering {
 
     @Test
     fun snippet6() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     "cheap",

@@ -6,7 +6,7 @@ import com.algolia.search.dsl.settings
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.settings.Distinct
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -15,7 +15,7 @@ internal class GuideItemVariations {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 searchableAttributes {
                     +"model"
@@ -30,7 +30,7 @@ internal class GuideItemVariations {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributeForDistinct = Attribute("model")
                 distinct = Distinct(1)
@@ -42,7 +42,7 @@ internal class GuideItemVariations {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 distinct = Distinct(1)
             }

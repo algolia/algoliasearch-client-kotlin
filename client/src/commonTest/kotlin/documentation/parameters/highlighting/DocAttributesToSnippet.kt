@@ -4,7 +4,7 @@ import com.algolia.search.dsl.attributesToSnippet
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class DocAttributesToSnippet {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesToSnippet {
                     +"content"(80)
@@ -32,7 +32,7 @@ internal class DocAttributesToSnippet {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesToSnippet {
                     +"*"(80)
@@ -45,7 +45,7 @@ internal class DocAttributesToSnippet {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 attributesToSnippet {
                     +"title"

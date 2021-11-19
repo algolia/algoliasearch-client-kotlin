@@ -8,7 +8,7 @@ import documentation.index
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -52,7 +52,7 @@ internal class DocAddObjects {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             // With JsonObject
             val json = listOf(
                 buildJsonObject {
@@ -79,7 +79,7 @@ internal class DocAddObjects {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             // With JsonObject
             val json = listOf(
                 buildJsonObject {
@@ -108,7 +108,7 @@ internal class DocAddObjects {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             // With JsonObject
             val json = buildJsonObject {
                 put("firstname", "Jimmie")
@@ -127,7 +127,7 @@ internal class DocAddObjects {
 
     @Test
     fun snippet4() {
-        runBlocking {
+        runTest {
             val json = listOf(
                 buildJsonObject {
                     put("objectID", "myID1")

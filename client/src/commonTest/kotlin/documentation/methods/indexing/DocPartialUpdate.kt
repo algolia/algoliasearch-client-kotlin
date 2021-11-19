@@ -6,7 +6,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.multicluster.UserID
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -28,7 +28,7 @@ internal class DocPartialUpdate {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val partial = Partial.Update(Attribute("city"), "San Francisco")
 
             index.partialUpdateObject(ObjectID("myID"), partial)
@@ -37,7 +37,7 @@ internal class DocPartialUpdate {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val partial = Partial.Update(Attribute("state"), "California")
 
             index.partialUpdateObject(ObjectID("myID"), partial)
@@ -46,7 +46,7 @@ internal class DocPartialUpdate {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val firstname = Attribute("firstname")
             val partials = listOf(
                 ObjectID("myID1") to Partial.Update(firstname, "Jimmie"),
@@ -59,7 +59,7 @@ internal class DocPartialUpdate {
 
     @Test
     fun snippet4() {
-        runBlocking {
+        runTest {
             val firstname = Attribute("firstname")
             val partials = listOf(
                 ObjectID("myID1") to Partial.Update(firstname, "Jimmie"),
@@ -75,7 +75,7 @@ internal class DocPartialUpdate {
 
     @Test
     fun snippet6() {
-        runBlocking {
+        runTest {
             val partial = Partial.IncrementFrom(Attribute("version"), 2)
             index.partialUpdateObject(ObjectID("myID"), partial)
         }
@@ -83,7 +83,7 @@ internal class DocPartialUpdate {
 
     @Test
     fun snippet7() {
-        runBlocking {
+        runTest {
             val partial = Partial.IncrementSet(Attribute("lastmodified"), 1593431913)
             index.partialUpdateObject(ObjectID("myID"), partial)
         }

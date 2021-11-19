@@ -3,7 +3,7 @@ package documentation.parameters.geosearch
 import com.algolia.search.dsl.query
 import com.algolia.search.model.search.AroundRadius
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -15,7 +15,7 @@ internal class DocAroundRadius {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 aroundRadius = AroundRadius.InMeters(1000)
             }
@@ -26,7 +26,7 @@ internal class DocAroundRadius {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 aroundRadius = AroundRadius.All
             }

@@ -14,7 +14,7 @@ import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.features.ResponseException
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import runTest
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
@@ -37,7 +37,7 @@ internal class TestSecuredAPIKeyTools {
     private val data = buildJsonObject { put(KeyObjectID, "one") }
 
     fun test() {
-        runBlocking {
+        runTest {
             index.apply {
                 saveObject(data).wait() shouldEqual TaskStatus.Published
             }

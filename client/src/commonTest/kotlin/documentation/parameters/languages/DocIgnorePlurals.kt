@@ -6,7 +6,7 @@ import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Language
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocIgnorePlurals {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 queryLanguages {
                     +Spanish
@@ -31,7 +31,7 @@ internal class DocIgnorePlurals {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 ignorePlurals = IgnorePlurals.QueryLanguages(
                     Language.Spanish,

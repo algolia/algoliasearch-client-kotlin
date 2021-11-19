@@ -16,7 +16,7 @@ import io.ktor.client.features.UserAgent
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse
-import runBlocking
+import runTest
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
@@ -37,7 +37,7 @@ internal class TestUserAgent {
 
     @Test
     fun overridingUserAgentInConfigurationShouldBeIgnored() {
-        runBlocking {
+        runTest {
             val configuration = ConfigurationSearch(
                 applicationID = applicationID,
                 engine = MockEngine { respondOk() },
@@ -59,7 +59,7 @@ internal class TestUserAgent {
 
     @Test
     fun overridingUserAgentInRequestOptionsShouldNotBeIgnored() {
-        runBlocking {
+        runTest {
             val expected = "My User Agent"
             val configuration = ConfigurationSearch(
                 applicationID = applicationID,

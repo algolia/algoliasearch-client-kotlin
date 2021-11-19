@@ -6,7 +6,7 @@ import com.algolia.search.dsl.rule.rules
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -15,7 +15,7 @@ internal class GuideDetectingKeywords {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     "rule",

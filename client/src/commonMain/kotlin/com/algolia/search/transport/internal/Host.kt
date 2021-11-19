@@ -15,15 +15,16 @@ internal val ApplicationID.searchHosts
         RetryableHost("$this-3.algolianet.com")
     )
 
-internal val insightHosts = listOf(RetryableHost("insights.algolia.io"))
+internal val insightHosts get() = listOf(RetryableHost("insights.algolia.io"))
 internal val Region.Analytics.hosts get() = listOf(RetryableHost("analytics.$this.algolia.com"))
 internal val Region.Personalization.hosts get() = listOf(RetryableHost("personalization.$this.algolia.com"))
-internal val placesHosts = listOf(
-    RetryableHost("places-dsn.algolia.net"),
-    RetryableHost("places-1.algolianet.com"),
-    RetryableHost("places-2.algolianet.com"),
-    RetryableHost("places-3.algolianet.com")
-)
+internal val placesHosts
+    get() = listOf(
+        RetryableHost("places-dsn.algolia.net"),
+        RetryableHost("places-1.algolianet.com"),
+        RetryableHost("places-2.algolianet.com"),
+        RetryableHost("places-3.algolianet.com")
+    )
 
 @PublishedApi
 internal fun RetryableHost.reset() {

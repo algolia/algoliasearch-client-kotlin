@@ -1,7 +1,7 @@
 package documentation.methods.synonym
 
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -15,7 +15,7 @@ internal class DocClearSynonyms {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             index.clearSynonyms(forwardToReplicas = true)
         }
     }

@@ -4,7 +4,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import documentation.client
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -13,7 +13,7 @@ class GuideDeleteMultipleIndex {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val indices = client.listIndices().items
 
             if (indices.isNotEmpty()) {
@@ -28,7 +28,7 @@ class GuideDeleteMultipleIndex {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val indices = client.listIndices().items.filter {
                 it.indexName.raw.contains("_tmp")
             }
@@ -45,7 +45,7 @@ class GuideDeleteMultipleIndex {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             client.initIndex(IndexName("YourIndexName")).deleteIndex()
         }
     }

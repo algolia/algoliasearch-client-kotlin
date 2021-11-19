@@ -4,7 +4,7 @@ import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.QueryType
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocQueryType {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 queryType = QueryType.PrefixLast
                 // queryType = QueryType.PrefixAll
@@ -30,7 +30,7 @@ internal class DocQueryType {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 queryType = QueryType.PrefixLast
                 // queryType = QueryType.PrefixAll

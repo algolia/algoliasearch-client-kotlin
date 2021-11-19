@@ -14,7 +14,7 @@ import com.algolia.search.serialize.KeyObjectID
 import dayInMillis
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import runTest
 import setupTrustStoreType
 import shouldEqual
 import shouldNotEqual
@@ -43,7 +43,7 @@ internal class TestSuiteAATest {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             index.apply {
                 saveObject(data).wait() shouldEqual TaskStatus.Published
                 val response = clientAnalytics.addABTest(abTest)

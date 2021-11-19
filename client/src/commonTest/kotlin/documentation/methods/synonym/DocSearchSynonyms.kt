@@ -3,7 +3,7 @@ package documentation.methods.synonym
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.model.synonym.SynonymType
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -24,7 +24,7 @@ internal class DocSearchSynonyms {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = SynonymQuery(
                 query = "street",
                 hitsPerPage = 10,

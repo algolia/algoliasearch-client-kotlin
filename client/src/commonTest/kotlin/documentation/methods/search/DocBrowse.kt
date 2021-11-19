@@ -3,7 +3,7 @@ package documentation.methods.search
 import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.search.Query
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocBrowse {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = Query()
 
             index.browseObjects(query).forEach { responseSearch ->
@@ -28,7 +28,7 @@ internal class DocBrowse {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = Query(query = "")
             val requestOptions = requestOptions {
                 header("X-Algolia-User-ID", "user123")

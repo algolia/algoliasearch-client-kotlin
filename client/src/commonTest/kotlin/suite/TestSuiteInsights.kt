@@ -16,7 +16,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import runTest
 import shouldEqual
 import kotlin.test.Test
 
@@ -45,7 +45,7 @@ internal class TestSuiteInsights {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             index.apply {
                 saveObject(buildJsonObject { put(KeyObjectID, "one") }).wait() shouldEqual TaskStatus.Published
 

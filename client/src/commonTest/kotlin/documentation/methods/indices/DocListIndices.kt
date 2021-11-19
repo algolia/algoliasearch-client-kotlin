@@ -1,7 +1,7 @@
 package documentation.methods.indices
 
 import documentation.client
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class DocListIndices {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val indices = client.listIndices()
 
             println(indices)

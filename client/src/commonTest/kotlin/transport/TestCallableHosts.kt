@@ -5,7 +5,7 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.transport.internal.Transport
-import runBlocking
+import runTest
 import shouldEqual
 import kotlin.test.Test
 
@@ -21,7 +21,7 @@ internal class TestCallableHosts {
 
     @Test
     fun callTypeRead() {
-        runBlocking {
+        runTest {
             val hosts = transport.callableHosts(CallType.Read)
 
             hosts shouldEqual listOf(
@@ -35,7 +35,7 @@ internal class TestCallableHosts {
 
     @Test
     fun callTypeWrite() {
-        runBlocking {
+        runTest {
             val hosts = transport.callableHosts(CallType.Write)
 
             hosts shouldEqual listOf(
@@ -49,7 +49,7 @@ internal class TestCallableHosts {
 
     @Test
     fun onlyFirstIsUp() {
-        runBlocking {
+        runTest {
             transport.hosts.forEach { it.isUp = false }
             transport.hosts.first().isUp = true
 
@@ -61,7 +61,7 @@ internal class TestCallableHosts {
 
     @Test
     fun onlyLastIsUp() {
-        runBlocking {
+        runTest {
             transport.hosts.forEach { it.isUp = false }
             transport.hosts.last().isUp = true
 
@@ -73,7 +73,7 @@ internal class TestCallableHosts {
 
     @Test
     fun noneAreUp() {
-        runBlocking {
+        runTest {
             transport.hosts.forEach { it.isUp = false }
 
             val hosts = transport.callableHosts(CallType.Write)

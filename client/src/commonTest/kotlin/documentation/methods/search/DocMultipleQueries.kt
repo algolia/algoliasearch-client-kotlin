@@ -5,7 +5,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.search.Query
 import documentation.client
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -20,7 +20,7 @@ internal class DocMultipleQueries {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val queries = listOf(
                 IndexQuery(
                     IndexName("categories"),
@@ -42,7 +42,7 @@ internal class DocMultipleQueries {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val queries = listOf(
                 IndexQuery(
                     IndexName("categories"),

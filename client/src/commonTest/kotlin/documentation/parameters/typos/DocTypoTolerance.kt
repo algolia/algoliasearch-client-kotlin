@@ -4,7 +4,7 @@ import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.TypoTolerance
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -19,7 +19,7 @@ internal class DocTypoTolerance {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 typoTolerance = TypoTolerance.True
                 // typoTolerance = TypoTolerance.False
@@ -33,7 +33,7 @@ internal class DocTypoTolerance {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 typoTolerance = TypoTolerance.True
                 // typoTolerance = TypoTolerance.False

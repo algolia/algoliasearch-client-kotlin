@@ -3,7 +3,7 @@ package documentation.methods.synonym
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.synonym.Synonym
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -19,7 +19,7 @@ internal class DocBatchSynonyms {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val synonyms = listOf(
                 Synonym.MultiWay(
                     objectID = ObjectID("myID1"),

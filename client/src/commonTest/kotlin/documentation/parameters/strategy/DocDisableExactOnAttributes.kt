@@ -4,7 +4,7 @@ import com.algolia.search.dsl.disableExactOnAttributes
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class DocDisableExactOnAttributes {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 disableExactOnAttributes { +"keywords" }
             }
@@ -29,7 +29,7 @@ internal class DocDisableExactOnAttributes {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 disableExactOnAttributes { +"keywords" }
             }

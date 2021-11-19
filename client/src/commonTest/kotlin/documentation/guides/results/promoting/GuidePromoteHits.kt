@@ -5,7 +5,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class GuidePromoteHits {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     "Promote Harry Potter Box Set",

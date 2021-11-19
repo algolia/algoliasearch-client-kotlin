@@ -11,7 +11,7 @@ import com.algolia.search.model.rule.Edit
 import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Rule
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 
 @Ignore
@@ -19,7 +19,7 @@ class GuideTaggedQuery {
 
     /** API save rule tagged **/
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rule = Rule(
                 objectID = ObjectID("tagged-brand-rule"),
                 conditions = listOf(

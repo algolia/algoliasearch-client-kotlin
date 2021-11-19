@@ -14,7 +14,7 @@ import com.algolia.search.model.search.Query
 import documentation.index
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -23,7 +23,7 @@ internal class GuideRestrictSubset {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesForFaceting {
                     +FilterOnly("viewable_by")
@@ -36,7 +36,7 @@ internal class GuideRestrictSubset {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             index.partialUpdateObject(
                 ObjectID("myID1"),
                 Partial.Update(
@@ -52,7 +52,7 @@ internal class GuideRestrictSubset {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val currentUserId = 1
             val restriction = SecuredAPIKeyRestriction(Query(filters = "viewable_by:$currentUserId"))
 
@@ -62,7 +62,7 @@ internal class GuideRestrictSubset {
 
     @Test
     fun snippet4() {
-        runBlocking {
+        runTest {
             val securedApiKey = APIKey("Secured API Key for current user") // Use the key generated earlier
             val client = ClientSearch(ApplicationID("YourApplicationID"), securedApiKey)
             val index = client.initIndex(IndexName("your_index_name"))

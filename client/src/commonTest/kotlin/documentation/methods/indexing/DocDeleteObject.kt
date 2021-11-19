@@ -4,7 +4,7 @@ import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.multicluster.UserID
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -23,7 +23,7 @@ internal class DocDeleteObject {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val objectIDS = listOf(ObjectID("myID1"), ObjectID("myID2"))
 
             index.deleteObjects(objectIDS)
@@ -32,7 +32,7 @@ internal class DocDeleteObject {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val objectID = ObjectID("myID1")
 
             index.deleteObject(objectID)
@@ -41,7 +41,7 @@ internal class DocDeleteObject {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val objectIDS = listOf(ObjectID("myID1"), ObjectID("myID2"))
             val requestOptions = requestOptions {
                 headerAlgoliaUserId(UserID("user123"))

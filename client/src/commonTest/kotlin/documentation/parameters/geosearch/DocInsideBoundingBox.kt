@@ -5,7 +5,7 @@ import com.algolia.search.dsl.query
 import com.algolia.search.model.search.BoundingBox
 import com.algolia.search.model.search.Point
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -22,7 +22,7 @@ internal class DocInsideBoundingBox {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 insideBoundingBox {
                     +BoundingBox(
@@ -38,7 +38,7 @@ internal class DocInsideBoundingBox {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 insideBoundingBox {
                     +BoundingBox(

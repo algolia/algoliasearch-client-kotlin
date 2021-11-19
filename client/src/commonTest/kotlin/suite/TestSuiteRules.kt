@@ -12,7 +12,7 @@ import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
-import runBlocking
+import runTest
 import shouldEqual
 import shouldFailWith
 import shouldNotBeNull
@@ -28,7 +28,7 @@ internal class TestSuiteRules {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             val objects = load(ListSerializer(JsonObject.serializer()), "iphones.json")
             val rule = load(Rule.serializer(), "rule_brand.json")
             val rules = load(ListSerializer(Rule.serializer()), "rule_batch.json")

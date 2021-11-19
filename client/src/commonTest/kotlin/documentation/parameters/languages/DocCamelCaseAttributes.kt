@@ -3,7 +3,7 @@ package documentation.parameters.languages
 import com.algolia.search.dsl.camelCaseAttributes
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocCamelCaseAttributes {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 camelCaseAttributes { +"description" }
             }

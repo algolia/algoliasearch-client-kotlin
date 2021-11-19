@@ -3,7 +3,7 @@ package documentation.reference
 import com.algolia.search.dsl.searchableAttributes
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -12,7 +12,7 @@ internal class DocQuickStartAttributes {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 searchableAttributes {
                     +"lastname"

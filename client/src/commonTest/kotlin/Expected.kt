@@ -18,10 +18,7 @@ internal expect val clientPlaces: ClientPlaces
 internal expect val clientPersonalization: ClientPersonalization
 internal expect val clientAnswers: ClientSearch
 
-internal expect fun runBlocking(
-    coroutineContext: CoroutineContext = EmptyCoroutineContext,
-    block: suspend CoroutineScope.() -> Unit
-)
+internal expect fun <T> runTest(block: suspend () -> T)
 
 internal expect fun loadScratch(name: String): String
 

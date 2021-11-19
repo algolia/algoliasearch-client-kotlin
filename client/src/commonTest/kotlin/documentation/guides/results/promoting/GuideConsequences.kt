@@ -7,7 +7,7 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -16,7 +16,7 @@ internal class GuideConsequences {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesForFaceting {
                     +"director"
@@ -29,7 +29,7 @@ internal class GuideConsequences {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val director = Attribute("director")
             val rules = rules {
                 rule(

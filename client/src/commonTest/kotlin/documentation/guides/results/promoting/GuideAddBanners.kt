@@ -6,7 +6,7 @@ import com.algolia.search.model.rule.Consequence
 import documentation.index
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -15,7 +15,7 @@ internal class GuideAddBanners {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     "a-rule-id",

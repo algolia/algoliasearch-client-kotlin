@@ -8,7 +8,7 @@ import com.algolia.search.model.rule.Consequence
 import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Rule
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -20,7 +20,7 @@ class DocFilterPromotes {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rule = Rule(
                 objectID = ObjectID("rule_with_filterPromotes"),
                 conditions = listOf(

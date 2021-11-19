@@ -13,7 +13,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import io.ktor.utils.io.ByteReadChannel
-import runBlocking
+import runTest
 import shouldEqual
 import kotlin.test.Test
 
@@ -32,7 +32,7 @@ internal class TestMockEngine {
 
     @Test
     fun mock() {
-        runBlocking {
+        runTest {
             val client = ClientSearch(ConfigurationSearch(appID, apiKey, engine = engine))
             client.initIndex(IndexName("index_name")).search() shouldEqual responseSearch
         }

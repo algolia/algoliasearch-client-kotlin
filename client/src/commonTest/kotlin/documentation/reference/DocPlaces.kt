@@ -10,7 +10,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.places.PlacesQuery
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -21,7 +21,7 @@ internal class DocPlaces {
 
     @Test
     fun unauthenticated() {
-        runBlocking {
+        runTest {
             ClientPlaces()
         }
     }
@@ -29,7 +29,7 @@ internal class DocPlaces {
     @Suppress("UNUSED_VARIABLE")
     @Test
     fun authenticated() {
-        runBlocking {
+        runTest {
             val client = ClientPlaces(
                 ApplicationID("YourApplicationID"),
                 APIKey("YourPlacesAPIKey")
@@ -39,7 +39,7 @@ internal class DocPlaces {
 
     @Test
     fun multipleLanguage() {
-        runBlocking {
+        runTest {
             val response = client.searchPlaces(PlacesQuery("Paris"))
 
             response.hits.first().city.getValue(Language.English)
@@ -48,7 +48,7 @@ internal class DocPlaces {
 
     @Test
     fun oneLanguage() {
-        runBlocking {
+        runTest {
             val response = client.searchPlaces(
                 query = PlacesQuery("New-York"),
                 language = Language.English
@@ -60,7 +60,7 @@ internal class DocPlaces {
 
     @Test
     fun multipleCountries() {
-        runBlocking {
+        runTest {
             val query = placesQuery("York") {
                 countries {
                     +UnitedKingdom
@@ -74,7 +74,7 @@ internal class DocPlaces {
 
     @Test
     fun aroundLatLng() {
-        runBlocking {
+        runTest {
             val query = placesQuery {
                 aroundLatLng = Point(40.7128f, -74.0060f) // New-York
             }
@@ -85,14 +85,14 @@ internal class DocPlaces {
 
     @Test
     fun reverseGeoCoding() {
-        runBlocking {
+        runTest {
             client.reverseGeocoding(Point(40.7128f, -74.0060f)) // New-York
         }
     }
 
     @Test
     fun getByObjectID() {
-        runBlocking {
+        runTest {
             clientPlaces.getByObjectID(ObjectID("201316654_7340078")) // New-York
         }
     }

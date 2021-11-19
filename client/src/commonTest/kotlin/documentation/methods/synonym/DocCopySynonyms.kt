@@ -3,7 +3,7 @@ package documentation.methods.synonym
 import documentation.index
 import documentation.indexName
 import io.ktor.client.features.ResponseException
-import runBlocking
+import runTest
 import shouldFailWith
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -19,7 +19,7 @@ internal class DocCopySynonyms {
     @Test
     fun snippet1() {
         shouldFailWith<ResponseException> {
-            runBlocking {
+            runTest {
                 index.copySynonyms(indexName)
             }
         }

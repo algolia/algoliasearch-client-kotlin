@@ -2,7 +2,7 @@ package documentation.parameters.advanced
 
 import com.algolia.search.dsl.query
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -13,7 +13,7 @@ internal class DocSynonyms {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 synonyms = true
             }

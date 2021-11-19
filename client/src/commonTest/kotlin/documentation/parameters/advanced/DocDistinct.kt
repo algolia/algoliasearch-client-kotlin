@@ -4,7 +4,7 @@ import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.settings.Distinct
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -15,7 +15,7 @@ internal class DocDistinct {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = settings {
                 distinct = Distinct(0)
                 // distinct = Distinct(1)
@@ -28,7 +28,7 @@ internal class DocDistinct {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 distinct = Distinct(1)
                 // distinct = Distinct(0)

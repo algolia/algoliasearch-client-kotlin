@@ -3,7 +3,7 @@ package documentation.methods.advanced
 import documentation.index
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -28,7 +28,7 @@ internal class DocWait {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val json = buildJsonObject {
                 put("Firstname", "Jimmie")
                 put("Lastname", "Barninger")

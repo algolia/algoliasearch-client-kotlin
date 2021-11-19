@@ -11,7 +11,7 @@ import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.core.String
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import runBlocking
+import runTest
 import shouldBeFalse
 import shouldBeTrue
 import shouldEqual
@@ -64,7 +64,7 @@ internal class TestSuiteMultiCluster {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             val clusters = clientMcm.listClusters().clusters
             val userID0 = userId(0)
             val userID1 = userId(1)

@@ -5,7 +5,7 @@ import com.algolia.search.dsl.filters
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class GuideFilterString {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesForFaceting {
                     +"brand" // or FilterOnly(brand) for filtering purposes only
@@ -27,7 +27,7 @@ internal class GuideFilterString {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             // Only “Motorola” smartphones
             index.search(
                 query("smartphone") {

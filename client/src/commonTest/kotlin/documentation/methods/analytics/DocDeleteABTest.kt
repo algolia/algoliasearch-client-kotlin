@@ -2,7 +2,7 @@ package documentation.methods.analytics
 
 import clientAnalytics
 import com.algolia.search.model.analytics.ABTestID
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -16,7 +16,7 @@ internal class DocDeleteABTest {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             clientAnalytics.deleteABTest(ABTestID(42))
         }
     }

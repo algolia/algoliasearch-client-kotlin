@@ -11,7 +11,7 @@ import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
-import runBlocking
+import runTest
 import shouldBeTrue
 import shouldContain
 import shouldEqual
@@ -44,7 +44,7 @@ internal class TestSuiteSynonyms {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             val objects = load(ListSerializer(JsonObject.serializer()), "console.json")
             val tasks = mutableListOf<Task>()
 

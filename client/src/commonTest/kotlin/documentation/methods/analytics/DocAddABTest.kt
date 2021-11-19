@@ -8,7 +8,7 @@ import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.internal.Time
 import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Query
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -25,7 +25,7 @@ internal class DocAddABTest {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val dayInMilliseconds = 60 * 60 * 24 * 1000
             val abTest = ABTest(
                 name = "myABTest",
@@ -48,7 +48,7 @@ internal class DocAddABTest {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val dayInMilliseconds = 60 * 60 * 24 * 1000
             val abTest = ABTest(
                 name = "myABTest",

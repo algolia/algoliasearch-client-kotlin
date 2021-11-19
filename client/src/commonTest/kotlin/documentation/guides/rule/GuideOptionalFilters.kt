@@ -5,7 +5,7 @@ import com.algolia.search.dsl.optionalFilters
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 
 @Ignore
@@ -13,7 +13,7 @@ class GuideOptionalFilters {
 
     /** Optional filter **/
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("phone") {
                 optionalFilters {
                     and {
@@ -29,7 +29,7 @@ class GuideOptionalFilters {
 
     /** Filter score **/
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query {
                 optionalFilters {
                     and {
@@ -44,7 +44,7 @@ class GuideOptionalFilters {
 
     /** Filter only faceting **/
     fun snippets3() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesForFaceting {
                     +"filterOnly(brand)"

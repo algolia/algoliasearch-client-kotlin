@@ -6,7 +6,7 @@ import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.RemoveStopWords
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -20,7 +20,7 @@ internal class DocQueryLanguages {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 queryLanguages {
                     +Spanish
@@ -35,7 +35,7 @@ internal class DocQueryLanguages {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 queryLanguages {
                     +Spanish
@@ -49,7 +49,7 @@ internal class DocQueryLanguages {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 queryLanguages {
                     +Japanese

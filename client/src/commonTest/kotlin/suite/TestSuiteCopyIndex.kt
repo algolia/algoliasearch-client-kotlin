@@ -12,7 +12,7 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import runTest
 import shouldBeTrue
 import shouldEqual
 import kotlin.test.Test
@@ -43,7 +43,7 @@ internal class TestSuiteCopyIndex {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             index.apply {
                 val tasks = mutableListOf<Task>()
                 val synonym = load(Synonym, "synonym_placeholder.json")

@@ -9,7 +9,7 @@ import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import com.algolia.search.model.rule.Pattern
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class GuideHideHits {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     objectID = "hide-12345",
@@ -35,7 +35,7 @@ internal class GuideHideHits {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     objectID = "hide-shirts",

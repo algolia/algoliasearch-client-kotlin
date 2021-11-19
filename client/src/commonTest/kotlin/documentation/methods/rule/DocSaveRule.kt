@@ -10,7 +10,7 @@ import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.TimeRange
 import com.algolia.search.model.search.Query
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -25,7 +25,7 @@ internal class DocSaveRule {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rule = Rule(
                 objectID = ObjectID("a-rule-id"),
                 enabled = false,

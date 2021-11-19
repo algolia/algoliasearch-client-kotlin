@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -36,7 +36,7 @@ internal class DocSearch {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val indexName = IndexName("contacts")
             val index = client.initIndex(indexName)
             val query = query("query") {
@@ -54,7 +54,7 @@ internal class DocSearch {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val indexName = IndexName("contacts")
             val index = client.initIndex(indexName)
             val query = Query("query")
@@ -67,7 +67,7 @@ internal class DocSearch {
     }
 
     @Test
-    fun snippet3() = runBlocking {
+    fun snippet3() = runTest {
         client.customRequest<JsonElement>(
             method = HttpMethod.Post,
             callType = CallType.Read,

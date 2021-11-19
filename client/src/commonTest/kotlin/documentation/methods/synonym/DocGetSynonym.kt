@@ -2,7 +2,7 @@ package documentation.methods.synonym
 
 import com.algolia.search.model.ObjectID
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -16,7 +16,7 @@ internal class DocGetSynonym {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             index.getSynonym(ObjectID("myID"))
         }
     }

@@ -11,12 +11,15 @@ import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
+import kotlin.coroutines.coroutineContext
+import kotlin.test.Test
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.isActive
-import runBlocking
+import kotlinx.coroutines.yield
+import runTest
 import shouldBeTrue
 import shouldEqual
-import kotlin.test.Test
 
 internal class TestSuiteAPIKey {
 
@@ -35,7 +38,7 @@ internal class TestSuiteAPIKey {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             clientAdmin1.apply {
                 val response = addAPIKey(params)
 
@@ -58,7 +61,7 @@ internal class TestSuiteAPIKey {
 
                 key = updateAPIKey(key, params.copy(maxHitsPerQuery = 42)).apiKey
 
-                while (isActive) {
+                while (coroutineContext.isActive) {
                     try {
                         if (getAPIKey(key).maxHitsPerQuery == 42) break
                     } catch (exception: ResponseException) {

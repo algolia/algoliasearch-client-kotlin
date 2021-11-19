@@ -7,7 +7,7 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class DocAnalytics {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 analytics = true
             }
@@ -29,7 +29,7 @@ internal class DocAnalytics {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             // "94.228.178.246" should be replaced with your end user IP.
             // Depending on your stack there are multiple ways to get this information.
             val client = ClientSearch(

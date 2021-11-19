@@ -4,7 +4,7 @@ import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.RemoveWordIfNoResults
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class DocRemoveWordsIfNoResults {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 removeWordsIfNoResults = RemoveWordIfNoResults.None
                 // removeWordsIfNoResults = RemoveWordIfNoResults.LastWords
@@ -32,7 +32,7 @@ internal class DocRemoveWordsIfNoResults {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 removeWordsIfNoResults = RemoveWordIfNoResults.LastWords
                 // removeWordsIfNoResults = RemoveWordIfNoResults.None

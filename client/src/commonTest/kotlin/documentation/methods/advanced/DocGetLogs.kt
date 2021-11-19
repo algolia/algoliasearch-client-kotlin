@@ -1,7 +1,7 @@
 package documentation.methods.advanced
 
 import documentation.client
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocGetLogs {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             client.getLogs(page = 0, hitsPerPage = 100)
         }
     }

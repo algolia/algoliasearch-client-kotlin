@@ -3,7 +3,7 @@ package documentation.reference
 import com.algolia.search.model.IndexName
 import documentation.client
 import kotlinx.serialization.Serializable
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -20,7 +20,7 @@ internal class DocQuickStartIndex {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val contacts = listOf(
                 Contact("Jimmie", "Barninger", 93, "California Paint"),
                 Contact("Warren", "Speach", 42, "Norwalk Crmc")

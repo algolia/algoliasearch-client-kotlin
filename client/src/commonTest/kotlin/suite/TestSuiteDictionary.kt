@@ -20,12 +20,12 @@ import com.algolia.search.model.search.Query
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import randomUUID
-import runBlocking
+import runTest
 
 internal class TestSuiteDictionary {
 
     @Test
-    fun testStopwordsDictionaries(): Unit = runBlocking {
+    fun testStopwordsDictionaries(): Unit = runTest {
         val entry = DictionaryEntry.Stopword(
             objectID = ObjectID(randomUUID()),
             language = Language.English,
@@ -61,7 +61,7 @@ internal class TestSuiteDictionary {
     }
 
     @Test
-    fun testPluralsDictionaries(): Unit = runBlocking {
+    fun testPluralsDictionaries(): Unit = runTest {
         val entry = DictionaryEntry.Plural(
             objectID = ObjectID(randomUUID()),
             language = Language.French,
@@ -87,7 +87,7 @@ internal class TestSuiteDictionary {
     }
 
     @Test
-    fun testCompoundsDictionaries(): Unit = runBlocking {
+    fun testCompoundsDictionaries(): Unit = runTest {
         val entry = DictionaryEntry.Compound(
             objectID = ObjectID(randomUUID()),
             language = Language.Dutch,
@@ -111,7 +111,7 @@ internal class TestSuiteDictionary {
     }
 
     @Test
-    fun testSettings(): Unit = runBlocking {
+    fun testSettings(): Unit = runTest {
         clientAdmin2.run {
             val stopwords: Map<Language, Boolean> = mapOf(Language.English to true)
             val stopwordsSettings = DictionarySettings(

@@ -6,7 +6,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Pattern
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 
 @Ignore
@@ -14,7 +14,7 @@ class GuidePromotingHits {
 
     /** API **/
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     objectID = "Promote Harry Potter Box Set",
@@ -35,7 +35,7 @@ class GuidePromotingHits {
 
     /** API promote some results **/
     fun snippet2() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     objectID = "tomato fruit",
@@ -56,7 +56,7 @@ class GuidePromotingHits {
 
     /** API promote newest **/
     fun snippet3() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     objectID = "Promote-iPhone-X",

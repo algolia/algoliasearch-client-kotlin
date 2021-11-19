@@ -31,7 +31,7 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -110,7 +110,7 @@ internal class DocPhilosophy {
 
     @Test
     fun unwrappingHits() {
-        runBlocking {
+        runTest {
             val response = index.search()
 
             val contacts: List<Contact> = response.hits.map { it.deserialize(Contact.serializer()) }
@@ -119,7 +119,7 @@ internal class DocPhilosophy {
 
     @Test
     fun unwrappingObject() {
-        runBlocking {
+        runTest {
             val objectID = ObjectID("myID1")
 
             val contact: Contact = index.getObject(Contact.serializer(), objectID)
@@ -128,7 +128,7 @@ internal class DocPhilosophy {
 
     @Test
     fun unwrappingJson() {
-        runBlocking {
+        runTest {
             val json: JsonObject = buildJsonObject {
                 put("firstname", "Jimmie")
                 put("lastname", "Barninger")
@@ -156,14 +156,14 @@ internal class DocPhilosophy {
 
     @Test
     fun exceptionSuccess() {
-        runBlocking {
+        runTest {
             val response: ResponseSearch = index.search()
         }
     }
 
     @Test
     fun exceptionHttpFailure() {
-        runBlocking {
+        runTest {
             try {
                 val response = index.search()
             } catch (exception: ResponseException) {
@@ -177,7 +177,7 @@ internal class DocPhilosophy {
 
     @Test
     fun exceptionFailure() {
-        runBlocking {
+        runTest {
             try {
                 val response = index.search()
             } catch (exception: ResponseException) {
@@ -192,7 +192,7 @@ internal class DocPhilosophy {
 
     @Test
     fun waitAll() {
-        runBlocking {
+        runTest {
             index.apply {
                 setSettings(Settings()).wait()
             }

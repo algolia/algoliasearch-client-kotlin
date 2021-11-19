@@ -6,7 +6,7 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.AnswersQuery
 import com.algolia.search.model.search.Language
-import runBlocking
+import runTest
 import kotlin.test.Test
 import kotlin.test.assertFalse
 
@@ -18,7 +18,7 @@ internal class TestSuiteAnswers {
     @OptIn(ExperimentalAlgoliaClientAPI::class)
     @Test
     fun testFindAnswers() {
-        runBlocking {
+        runTest {
             val query = AnswersQuery(
                 query = "when do babies start learning?",
                 queryLanguages = listOf(Language.English),

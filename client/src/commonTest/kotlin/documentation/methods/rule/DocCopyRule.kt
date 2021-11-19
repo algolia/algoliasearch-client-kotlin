@@ -2,7 +2,7 @@ package documentation.methods.rule
 
 import documentation.index
 import documentation.indexName
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -16,7 +16,7 @@ internal class DocCopyRule {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             index.copyRules(indexName)
         }
     }

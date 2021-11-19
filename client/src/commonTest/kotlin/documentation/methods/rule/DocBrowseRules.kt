@@ -1,7 +1,7 @@
 package documentation.methods.rule
 
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -15,7 +15,7 @@ internal class DocBrowseRules {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             index.browseRules().forEach {
                 println(it)
             }

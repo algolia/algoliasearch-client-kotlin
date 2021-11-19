@@ -15,7 +15,7 @@ import io.ktor.client.features.logging.LogLevel
 import io.ktor.http.ContentType
 import io.ktor.http.headersOf
 import io.ktor.utils.io.ByteReadChannel
-import runBlocking
+import runTest
 import shouldEqual
 import kotlin.test.Test
 
@@ -53,7 +53,7 @@ internal class TestSuiteDNS {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             val index = client.initIndex(IndexName("test"))
 
             index.search()

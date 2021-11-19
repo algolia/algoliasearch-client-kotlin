@@ -6,7 +6,7 @@ import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 
 @Ignore
@@ -16,7 +16,7 @@ class GuideCustomizeSearch {
 
     /** save contextual **/
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rule = Rule(
                 objectID = ObjectID("a-rule-id"),
                 conditions = listOf(

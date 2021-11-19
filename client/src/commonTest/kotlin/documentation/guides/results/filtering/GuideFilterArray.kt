@@ -5,7 +5,7 @@ import com.algolia.search.dsl.filters
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class GuideFilterArray {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesForFaceting {
                     +"categories" // or FilterOnly("categories") for filtering purposes only
@@ -28,7 +28,7 @@ internal class GuideFilterArray {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("harry") {
                 filters {
                     and {

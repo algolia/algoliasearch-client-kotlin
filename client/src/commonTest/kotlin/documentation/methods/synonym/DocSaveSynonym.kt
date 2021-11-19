@@ -4,7 +4,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -19,7 +19,7 @@ internal class DocSaveSynonym {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val synonym = Synonym.MultiWay(
                 objectID = ObjectID("myID"),
                 synonyms = listOf("car", "vehicle", "auto")
@@ -31,7 +31,7 @@ internal class DocSaveSynonym {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val synonym = Synonym.OneWay(
                 objectID = ObjectID("myID"),
                 input = "car",
@@ -44,7 +44,7 @@ internal class DocSaveSynonym {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val synonym = Synonym.AlternativeCorrections(
                 objectID = ObjectID("myID"),
                 corrections = listOf("vehicle", "auto"),
@@ -58,7 +58,7 @@ internal class DocSaveSynonym {
 
     @Test
     fun snippet4() {
-        runBlocking {
+        runTest {
             val synonym = Synonym.Placeholder(
                 objectID = ObjectID("myID"),
                 placeholder = Synonym.Placeholder.Token("street"),

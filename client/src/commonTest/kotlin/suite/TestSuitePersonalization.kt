@@ -7,7 +7,7 @@ import com.algolia.search.model.personalization.PersonalizationStrategy
 import com.algolia.search.model.personalization.SetPersonalizationStrategyResponse
 import io.ktor.client.features.ClientRequestException
 import io.ktor.http.HttpStatusCode
-import runBlocking
+import runTest
 import shouldEqual
 import kotlin.test.Test
 
@@ -15,14 +15,14 @@ internal class TestSuitePersonalization {
 
     @Test
     fun testPersonalizationClient() {
-        runBlocking {
+        runTest {
             clientPersonalization.getPersonalizationStrategy()
         }
     }
 
     @Test
     fun testSetStrategyPayload() {
-        runBlocking {
+        runTest {
             val strategy = PersonalizationStrategy(
                 eventsScoring = listOf(
                     EventScoring("Add to cart", "conversion", 50),

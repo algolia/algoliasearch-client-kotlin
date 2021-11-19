@@ -3,7 +3,7 @@ package documentation.parameters.ranking
 import com.algolia.search.dsl.customRanking
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocCustomRanking {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 customRanking {
                     +Desc("popularity")
