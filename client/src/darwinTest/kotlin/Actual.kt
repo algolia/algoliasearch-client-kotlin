@@ -14,7 +14,6 @@ import kotlin.native.concurrent.SharedImmutable
 import kotlin.native.concurrent.ThreadLocal
 import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.toKString
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.newSingleThreadContext
 import kotlinx.coroutines.runBlocking
@@ -95,7 +94,7 @@ internal actual val username: String
 private val testCoroutineContext: CoroutineContext = newSingleThreadContext("testRunner")
 
 internal actual fun <T> runTest(block: suspend () -> T) {
-    runBlocking(testCoroutineContext) { block() }
+    runBlocking { block() }
 }
 
 internal actual object DateFormat {

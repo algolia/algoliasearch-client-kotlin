@@ -13,7 +13,8 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.TimeZone
 import java.util.UUID
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.test.runBlockingTest
 
 internal actual val clientSearch = ClientSearch(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
@@ -69,8 +70,9 @@ internal actual val username: String
         }
     }
 
+@OptIn(ExperimentalCoroutinesApi::class)
 internal actual fun <T> runTest(block: suspend () -> T) {
-    runBlocking { block() }
+    runBlockingTest { block() }
 }
 
 internal actual object DateFormat {
