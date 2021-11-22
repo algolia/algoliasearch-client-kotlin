@@ -21,9 +21,9 @@ import io.ktor.network.sockets.ConnectTimeoutException
 import io.ktor.network.sockets.SocketTimeoutException
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.utils.io.errors.IOException
+import kotlin.math.floor
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlin.math.floor
 
 internal class Transport(
     configuration: Configuration,
@@ -66,11 +66,10 @@ internal class Transport(
     }
 
     private fun HttpRequestBuilder.compress(payload: String?) {
-        if (payload != null && isGzipSupported) {
-            body = when (compression) {
-                Compression.Gzip -> Gzip(payload)
-                Compression.None -> payload
-            }
+        if (payload == null) return
+        body = when (compression) {
+            Compression.Gzip -> if (isGzipSupported) Gzip(payload) else payload
+            Compression.None -> payload
         }
     }
 

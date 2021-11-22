@@ -57,7 +57,6 @@ internal class EndpointSynonymImpl(
             parameter(KeyForwardToReplicas, forwardToReplicas)
             parameter(KeyReplaceExistingSynonyms, clearExistingSynonyms)
         }
-
         return transport.request(HttpMethod.Post, CallType.Write, path, options, body)
     }
 

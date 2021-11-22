@@ -76,10 +76,8 @@ fun KotlinMultiplatformExtension.darwin() {
         add(watchosSimulatorArm64())
     }
     kotlin.sourceSets.apply {
-        val commonMain by getting
-        val commonTest by getting
-        val darwinMain by creating { dependsOn(commonMain) }
-        val darwinTest by creating { dependsOn(commonTest) }
+        val darwinMain by creating { dependsOn(getByName("commonMain")) }
+        val darwinTest by creating { dependsOn(getByName("commonTest")) }
         configure(targets) {
             sourceSets.getByName("${name}Main").dependsOn(darwinMain)
             sourceSets.getByName("${name}Test").dependsOn(darwinTest)
