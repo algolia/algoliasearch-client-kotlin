@@ -19,12 +19,16 @@ import io.ktor.http.HttpMethod
 import io.ktor.http.URLProtocol
 import io.ktor.network.sockets.ConnectTimeoutException
 import io.ktor.network.sockets.SocketTimeoutException
+import io.ktor.util.InternalAPI
+import io.ktor.util.Lock
 import io.ktor.util.reflect.TypeInfo
+import io.ktor.util.withLock
 import io.ktor.utils.io.errors.IOException
 import kotlin.math.floor
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
+@OptIn(InternalAPI::class)
 internal class Transport(
     configuration: Configuration,
     private val credentialsOrNull: Credentials?,

@@ -4,6 +4,7 @@ import clientAdmin1
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.RetryableHost
+import com.algolia.search.configuration.edit
 import com.algolia.search.transport.internal.Transport
 import runTest
 import shouldEqual
@@ -50,8 +51,8 @@ internal class TestCallableHosts {
     @Test
     fun onlyFirstIsUp() {
         runTest {
-            transport.hosts.forEach { it.isUp = false }
-            transport.hosts.first().isUp = true
+            transport.hosts.first().edit { isUp = true }
+            transport.hosts.drop(1).forEach { it.edit { isUp = false } }
 
             val hosts = transport.callableHosts(CallType.Read)
 
@@ -62,8 +63,8 @@ internal class TestCallableHosts {
     @Test
     fun onlyLastIsUp() {
         runTest {
-            transport.hosts.forEach { it.isUp = false }
-            transport.hosts.last().isUp = true
+            transport.hosts.last().edit { isUp = true }
+            transport.hosts.dropLast(1).forEach { it.edit { isUp = false } }
 
             val hosts = transport.callableHosts(CallType.Read)
 
@@ -74,7 +75,7 @@ internal class TestCallableHosts {
     @Test
     fun noneAreUp() {
         runTest {
-            transport.hosts.forEach { it.isUp = false }
+            transport.hosts.forEach { it.edit { isUp = false } }
 
             val hosts = transport.callableHosts(CallType.Write)
 

@@ -2,13 +2,14 @@ package transport
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.RetryableHost
+import com.algolia.search.configuration.edit
 import com.algolia.search.helper.toApplicationID
 import com.algolia.search.transport.internal.hasFailed
 import com.algolia.search.transport.internal.hasTimedOut
 import com.algolia.search.transport.internal.reset
 import com.algolia.search.transport.internal.searchHosts
-import shouldEqual
 import kotlin.test.Test
+import shouldEqual
 
 internal class TestRetryableHost {
 
@@ -28,7 +29,7 @@ internal class TestRetryableHost {
 
     @Test
     fun reset() {
-        host.apply {
+        host.edit {
             isUp = false
             retryCount = 1
         }
@@ -41,7 +42,7 @@ internal class TestRetryableHost {
 
     @Test
     fun timedOut() {
-        host.apply {
+        host.edit {
             isUp = false
             retryCount = 0
         }
@@ -54,7 +55,7 @@ internal class TestRetryableHost {
 
     @Test
     fun failed() {
-        host.apply {
+        host.edit {
             isUp = true
             retryCount = 1
         }

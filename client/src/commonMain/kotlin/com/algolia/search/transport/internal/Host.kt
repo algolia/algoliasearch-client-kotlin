@@ -3,6 +3,7 @@ package com.algolia.search.transport.internal
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.RetryableHost
+import com.algolia.search.configuration.edit
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.internal.Time
 
@@ -28,20 +29,26 @@ internal val placesHosts
 
 @PublishedApi
 internal fun RetryableHost.reset() {
-    lastUpdated = Time.getCurrentTimeMillis()
-    isUp = true
-    retryCount = 0
+    edit {
+        lastUpdated = Time.getCurrentTimeMillis()
+        isUp = true
+        retryCount = 0
+    }
 }
 
 internal fun RetryableHost.hasTimedOut() {
-    isUp = true
-    lastUpdated = Time.getCurrentTimeMillis()
-    retryCount += 1
+    edit {
+        isUp = true
+        lastUpdated = Time.getCurrentTimeMillis()
+        retryCount += 1
+    }
 }
 
 internal fun RetryableHost.hasFailed() {
-    isUp = false
-    lastUpdated = Time.getCurrentTimeMillis()
+    edit {
+        isUp = false
+        lastUpdated = Time.getCurrentTimeMillis()
+    }
 }
 
 internal fun List<RetryableHost>.expireHostsOlderThan(hostStatusExpirationDelayMS: Long) {
