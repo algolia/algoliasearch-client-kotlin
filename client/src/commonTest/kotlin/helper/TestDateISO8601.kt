@@ -39,4 +39,18 @@ class TestDateISO8601 {
         val timestamp = DateISO8601.parse(datetime, true)
         assertEquals(1644445273333L, timestamp)
     }
+
+    @Test
+    fun testFormat() {
+        val timestamp = 1644445273000L
+        val format = DateISO8601.format(timestamp)
+        assertEquals("2022-02-09T22:21:13Z", format)
+    }
+
+    @Test
+    fun testFormatInMillis() {
+        val timestamp = 1644445273333L
+        val format = DateISO8601.format(timestamp, true)
+        assertEquals("2022-02-09T22:21:13.333Z", format)
+    }
 }

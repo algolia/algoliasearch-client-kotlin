@@ -1,6 +1,7 @@
 package com.algolia.search.helper.internal
 
 import com.algolia.search.platform.toMillis
+import com.algolia.search.platform.fractional
 import kotlinx.cinterop.UnsafeNumber
 import platform.Foundation.NSDate
 import platform.Foundation.NSISO8601DateFormatWithFractionalSeconds
@@ -20,17 +21,9 @@ internal actual object DateISO8601 {
     }
 
     actual fun format(timestamp: Long, inMilliseconds: Boolean): String {
-        return if (inMilliseconds) formatInMilliseconds(timestamp) else formatInSeconds(timestamp)
-    }
-
-    private fun formatInSeconds(timestamp: Long): String {
-        val date = NSDate.create(timeIntervalSince1970 = timestamp.toDouble())
-        return dateISO8601.stringFromDate(date)
-    }
-
-    private fun formatInMilliseconds(timestamp: Long): String {
-        val date = NSDate.create(timeIntervalSince1970 = timestamp / 1000.0)
-        return dateISO8601Millis.stringFromDate(date)
+        val date = NSDate.create(timeIntervalSince1970 = timestamp.fractional())
+        val formatter = if (inMilliseconds) dateISO8601Millis else dateISO8601
+        return formatter.stringFromDate(date)
     }
 
     actual fun parse(date: String, inMilliseconds: Boolean): Long {
