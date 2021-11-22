@@ -12,14 +12,14 @@ import com.algolia.search.serialize.KeyObjectID
 import dayInMillis
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
+import kotlin.test.Test
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import runTest
 import shouldEqual
-import runFailWith
+import shouldFailWith
 import shouldNotBeNull
 import shouldNotEqual
-import kotlin.test.Test
 
 internal class TestSuiteABTest {
 
@@ -58,7 +58,7 @@ internal class TestSuiteABTest {
                 clientAnalytics.getABTest(responseA.abTestID).status shouldEqual ABTestStatus.Stopped
                 clientAnalytics.deleteABTest(responseA.abTestID).wait() shouldEqual TaskStatus.Published
 
-                val responseB = runFailWith<ResponseException> {
+                val responseB = shouldFailWith<ResponseException> {
                     clientAnalytics.getABTest(responseA.abTestID)
                 }
 

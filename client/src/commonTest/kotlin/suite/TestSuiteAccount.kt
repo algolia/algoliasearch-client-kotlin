@@ -12,13 +12,13 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
+import kotlin.test.Test
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import runTest
 import shouldBeTrue
 import shouldEqual
-import runFailWith
-import kotlin.test.Test
+import shouldFailWith
 
 internal class TestSuiteAccount {
 
@@ -41,7 +41,7 @@ internal class TestSuiteAccount {
             val serializer = Rule.serializer()
             val rule = load(serializer, "rule_one.json")
 
-            runFailWith<IllegalArgumentException> {
+            shouldFailWith<IllegalArgumentException> {
                 ClientAccount.copyIndex(index1, index2)
             }
             val tasks = mutableListOf<Task>()
@@ -61,7 +61,7 @@ internal class TestSuiteAccount {
                 getRule(objectID) shouldEqual rule
                 getSettings().searchableAttributes shouldEqual settings.searchableAttributes
 
-                runFailWith<IllegalStateException> { ClientAccount.copyIndex(index1, this) }
+                shouldFailWith<IllegalStateException> { ClientAccount.copyIndex(index1, this) }
             }
         }
     }

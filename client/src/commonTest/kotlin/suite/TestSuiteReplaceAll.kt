@@ -9,14 +9,14 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
+import kotlin.test.Test
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 import runTest
 import shouldBeTrue
 import shouldEqual
-import runFailWith
-import kotlin.test.Test
+import shouldFailWith
 
 class TestSuiteReplaceAll {
 
@@ -54,19 +54,19 @@ class TestSuiteReplaceAll {
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
                 (
-                    runFailWith<ResponseException> {
+                    shouldFailWith<ResponseException> {
                         getObject(objectIDOne)
                     }
                     ).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
                 (
-                    runFailWith<ResponseException> {
+                    shouldFailWith<ResponseException> {
                         getSynonym(objectIDOne)
                     }
                     ).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
                 (
-                    runFailWith<ResponseException> {
+                    shouldFailWith<ResponseException> {
                         getRule(objectIDOne)
                     }
                     ).response.status.value shouldEqual HttpStatusCode.NotFound.value
