@@ -2,7 +2,6 @@ package suite
 
 import clientAdmin1
 import com.algolia.search.helper.toIndexName
-import com.algolia.search.model.APIKey
 import com.algolia.search.model.apikey.ACL
 import com.algolia.search.model.apikey.APIKeyParams
 import com.algolia.search.model.search.Query
@@ -14,16 +13,12 @@ import io.ktor.http.HttpStatusCode
 import kotlin.coroutines.coroutineContext
 import kotlin.test.Test
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.isActive
-import kotlinx.coroutines.yield
 import runTest
 import shouldBeTrue
 import shouldEqual
 
 internal class TestSuiteAPIKey {
-
-    private lateinit var key: APIKey
 
     private val params = APIKeyParams(
         ACLs = listOf(ACL.Search),
@@ -42,7 +37,7 @@ internal class TestSuiteAPIKey {
             clientAdmin1.apply {
                 val response = addAPIKey(params)
 
-                key = response.apiKey
+                var key = response.apiKey
 
                 response.wait().let {
                     getAPIKey(key).let {
