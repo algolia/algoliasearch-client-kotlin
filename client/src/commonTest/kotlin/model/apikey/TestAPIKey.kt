@@ -2,18 +2,18 @@ package model.apikey
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.APIKey
-import shouldFailWith
+import runFailWith
 import kotlin.test.Test
 
 internal class TestAPIKey {
 
     @Test
     fun rawShouldNotBeEmpty() {
-        shouldFailWith<EmptyStringException> { APIKey("") }
+        runFailWith<EmptyStringException> { APIKey("") }
     }
 
     @Test
     fun rawShouldNotBeBlank() {
-        shouldFailWith<EmptyStringException> { APIKey(" ") }
+        runFailWith<EmptyStringException> { APIKey(" ") }
     }
 }

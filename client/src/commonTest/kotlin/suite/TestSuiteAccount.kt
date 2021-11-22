@@ -17,7 +17,7 @@ import kotlinx.serialization.json.put
 import runTest
 import shouldBeTrue
 import shouldEqual
-import shouldFailWith
+import runFailWith
 import kotlin.test.Test
 
 internal class TestSuiteAccount {
@@ -41,7 +41,7 @@ internal class TestSuiteAccount {
             val serializer = Rule.serializer()
             val rule = load(serializer, "rule_one.json")
 
-            shouldFailWith<IllegalArgumentException> {
+            runFailWith<IllegalArgumentException> {
                 ClientAccount.copyIndex(index1, index2)
             }
             val tasks = mutableListOf<Task>()
@@ -61,7 +61,7 @@ internal class TestSuiteAccount {
                 getRule(objectID) shouldEqual rule
                 getSettings().searchableAttributes shouldEqual settings.searchableAttributes
 
-                shouldFailWith<IllegalStateException> { ClientAccount.copyIndex(index1, this) }
+                runFailWith<IllegalStateException> { ClientAccount.copyIndex(index1, this) }
             }
         }
     }

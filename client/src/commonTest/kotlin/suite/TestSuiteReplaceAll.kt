@@ -15,7 +15,7 @@ import kotlinx.serialization.json.put
 import runTest
 import shouldBeTrue
 import shouldEqual
-import shouldFailWith
+import runFailWith
 import kotlin.test.Test
 
 class TestSuiteReplaceAll {
@@ -54,19 +54,19 @@ class TestSuiteReplaceAll {
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
                 (
-                    shouldFailWith<ResponseException> {
+                    runFailWith<ResponseException> {
                         getObject(objectIDOne)
                     }
                     ).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
                 (
-                    shouldFailWith<ResponseException> {
+                    runFailWith<ResponseException> {
                         getSynonym(objectIDOne)
                     }
                     ).response.status.value shouldEqual HttpStatusCode.NotFound.value
 
                 (
-                    shouldFailWith<ResponseException> {
+                    runFailWith<ResponseException> {
                         getRule(objectIDOne)
                     }
                     ).response.status.value shouldEqual HttpStatusCode.NotFound.value

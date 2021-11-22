@@ -14,7 +14,7 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
 import runTest
 import shouldEqual
-import shouldFailWith
+import runFailWith
 import shouldNotBeNull
 import kotlin.test.Test
 
@@ -59,7 +59,7 @@ internal class TestSuiteRules {
 
                 search(Query(ruleContexts = listOf("summer"))).nbHits shouldEqual 1
                 (
-                    shouldFailWith<ResponseException> {
+                    runFailWith<ResponseException> {
                         getRule(rule.objectID)
                     }
                     ).response.status.value shouldEqual HttpStatusCode.NotFound.value

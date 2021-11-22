@@ -4,7 +4,7 @@ import documentation.index
 import documentation.indexName
 import io.ktor.client.features.ResponseException
 import runTest
-import shouldFailWith
+import runFailWith
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class DocCopySynonyms {
 
     @Test
     fun snippet1() {
-        shouldFailWith<ResponseException> {
+        runFailWith<ResponseException> {
             runTest {
                 index.copySynonyms(indexName)
             }

@@ -15,7 +15,7 @@ import runTest
 import shouldBeTrue
 import shouldContain
 import shouldEqual
-import shouldFailWith
+import runFailWith
 import kotlin.test.Test
 
 internal class TestSuiteSynonyms {
@@ -67,7 +67,7 @@ internal class TestSuiteSynonyms {
                 }
                 deleteSynonym(gba).wait() shouldEqual TaskStatus.Published
                 (
-                    shouldFailWith<ResponseException> {
+                    runFailWith<ResponseException> {
                         getSynonym(gba)
                     }
                     ).response.status.value shouldEqual HttpStatusCode.NotFound.value

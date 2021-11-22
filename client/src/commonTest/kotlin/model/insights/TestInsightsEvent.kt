@@ -8,7 +8,7 @@ import com.algolia.search.model.insights.InsightsEvent
 import indexA
 import objectIDA
 import shouldEqual
-import shouldFailWith
+import runFailWith
 import kotlin.test.Test
 
 internal class TestInsightsEvent {
@@ -18,7 +18,7 @@ internal class TestInsightsEvent {
 
     @Test
     fun positionsAreRequired() {
-        shouldFailWith<IllegalArgumentException> {
+        runFailWith<IllegalArgumentException> {
             InsightsEvent.Click(
                 eventName = eventName,
                 indexName = indexA,
@@ -35,7 +35,7 @@ internal class TestInsightsEvent {
 
         InsightsEvent.Resources.ObjectIDs(underTheSizeLimit).objectIDs shouldEqual underTheSizeLimit
         InsightsEvent.Resources.ObjectIDs(equalToTheSizeLimit).objectIDs shouldEqual equalToTheSizeLimit
-        shouldFailWith<IllegalArgumentException> { InsightsEvent.Resources.ObjectIDs(overTheSizeLimit) }
+        runFailWith<IllegalArgumentException> { InsightsEvent.Resources.ObjectIDs(overTheSizeLimit) }
     }
 
     @Test
@@ -46,6 +46,6 @@ internal class TestInsightsEvent {
 
         InsightsEvent.Resources.Filters(underTheSizeLimit).filters shouldEqual underTheSizeLimit
         InsightsEvent.Resources.Filters(equalToTheSizeLimit).filters shouldEqual equalToTheSizeLimit
-        shouldFailWith<IllegalArgumentException> { InsightsEvent.Resources.Filters(overTheSizeLimit) }
+        runFailWith<IllegalArgumentException> { InsightsEvent.Resources.Filters(overTheSizeLimit) }
     }
 }

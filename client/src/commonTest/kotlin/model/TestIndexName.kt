@@ -3,19 +3,19 @@ package model
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.IndexName
 import shouldEqual
-import shouldFailWith
+import runFailWith
 import kotlin.test.Test
 
 internal class TestIndexName {
 
     @Test
     fun rawShouldNotBeEmpty() {
-        shouldFailWith<EmptyStringException> { IndexName("") }
+        runFailWith<EmptyStringException> { IndexName("") }
     }
 
     @Test
     fun rawShouldNotBeBlank() {
-        shouldFailWith<EmptyStringException> { IndexName(" ") }
+        runFailWith<EmptyStringException> { IndexName(" ") }
     }
 
     @Test

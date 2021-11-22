@@ -3,19 +3,19 @@ package model.insights
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.insights.UserToken
 import shouldEqual
-import shouldFailWith
+import runFailWith
 import kotlin.test.Test
 
 internal class TestUserToken {
 
     @Test
     fun rawShouldNotBeEmpty() {
-        shouldFailWith<EmptyStringException> { UserToken("") }
+        runFailWith<EmptyStringException> { UserToken("") }
     }
 
     @Test
     fun rawShouldNotBeBlank() {
-        shouldFailWith<EmptyStringException> { UserToken(" ") }
+        runFailWith<EmptyStringException> { UserToken(" ") }
     }
 
     @Test
@@ -32,7 +32,7 @@ internal class TestUserToken {
 
         UserToken(stringShorterThan64).raw.length shouldEqual 63
         UserToken(stringEqualTo64).raw.length shouldEqual 64
-        shouldFailWith<IllegalArgumentException> { UserToken(stringLongerThan64) }
+        runFailWith<IllegalArgumentException> { UserToken(stringLongerThan64) }
     }
 
     @Test
@@ -53,7 +53,7 @@ internal class TestUserToken {
         )
 
         illegals.forEach {
-            shouldFailWith<IllegalArgumentException> { UserToken(it) }
+            runFailWith<IllegalArgumentException> { UserToken(it) }
         }
         legals.forEachIndexed { index, s -> UserToken(s).raw shouldEqual legals[index] }
     }

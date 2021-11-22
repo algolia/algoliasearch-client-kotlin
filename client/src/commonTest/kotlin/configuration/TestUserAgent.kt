@@ -19,8 +19,8 @@ import io.ktor.client.statement.HttpResponse
 import runTest
 import shouldBeTrue
 import shouldEqual
-import shouldFailWith
 import kotlin.test.Test
+import shouldFailWith
 
 internal class TestUserAgent {
 
@@ -74,8 +74,7 @@ internal class TestUserAgent {
                 client.listIndices(requestOptions)
             }
             val headers = request.response.call.request.headers
-
-            headers.get(userAgentKey) shouldEqual expected
+            headers[userAgentKey] shouldEqual expected
         }
     }
 }

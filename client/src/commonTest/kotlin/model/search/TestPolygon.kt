@@ -3,7 +3,7 @@ package model.search
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.Polygon
 import shouldEqual
-import shouldFailWith
+import runFailWith
 import kotlin.test.Test
 
 internal class TestPolygon {
@@ -32,7 +32,7 @@ internal class TestPolygon {
 
     @Test
     fun operatorThrow() {
-        shouldFailWith<IndexOutOfBoundsException> { polygon[4] }
+        runFailWith<IndexOutOfBoundsException> { polygon[4] }
     }
 
     @Test

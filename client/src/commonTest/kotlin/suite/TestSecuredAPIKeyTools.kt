@@ -17,7 +17,7 @@ import kotlinx.serialization.json.put
 import runTest
 import shouldBeTrue
 import shouldEqual
-import shouldFailWith
+import runFailWith
 import kotlin.test.Ignore
 
 @Ignore
@@ -46,7 +46,7 @@ internal class TestSecuredAPIKeyTools {
             }
             client.apply {
                 initIndex(indexName).search()
-                shouldFailWith<ResponseException> { initIndex(indexNameDev).search() }
+                runFailWith<ResponseException> { initIndex(indexNameDev).search() }
             }
         }
     }
@@ -77,6 +77,6 @@ internal class TestSecuredAPIKeyTools {
         )
         val key = APIKey("parentKey").generateSecuredAPIKey(restrictions)
 
-        shouldFailWith<IllegalArgumentException> { key.getSecuredApiKeyRemainingValidity() }
+        runFailWith<IllegalArgumentException> { key.getSecuredApiKeyRemainingValidity() }
     }
 }

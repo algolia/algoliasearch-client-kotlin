@@ -16,7 +16,7 @@ import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import runTest
 import shouldEqual
-import shouldFailWith
+import runFailWith
 import shouldNotBeNull
 import shouldNotEqual
 import kotlin.test.Test
@@ -58,7 +58,7 @@ internal class TestSuiteABTest {
                 clientAnalytics.getABTest(responseA.abTestID).status shouldEqual ABTestStatus.Stopped
                 clientAnalytics.deleteABTest(responseA.abTestID).wait() shouldEqual TaskStatus.Published
 
-                val responseB = shouldFailWith<ResponseException> {
+                val responseB = runFailWith<ResponseException> {
                     clientAnalytics.getABTest(responseA.abTestID)
                 }
 

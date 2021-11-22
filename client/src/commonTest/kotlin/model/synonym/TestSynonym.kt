@@ -6,15 +6,15 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
 import objectIDA
 import shouldEqual
-import shouldFailWith
+import runFailWith
 import kotlin.test.Test
 
 internal class TestSynonym {
 
     @Test
     fun tokenShouldNotBeEmpty() {
-        shouldFailWith<EmptyStringException> { Synonym.Placeholder.Token("") }
-        shouldFailWith<EmptyStringException> { Synonym.Placeholder.Token(" ") }
+        runFailWith<EmptyStringException> { Synonym.Placeholder.Token("") }
+        runFailWith<EmptyStringException> { Synonym.Placeholder.Token(" ") }
     }
 
     @Test
@@ -24,33 +24,33 @@ internal class TestSynonym {
 
     @Test
     fun oneWayInputShouldNotBeEmpty() {
-        shouldFailWith<EmptyStringException> { Synonym.OneWay(objectIDA, "", listOf()) }
-        shouldFailWith<EmptyStringException> { Synonym.OneWay(objectIDA, " ", listOf()) }
+        runFailWith<EmptyStringException> { Synonym.OneWay(objectIDA, "", listOf()) }
+        runFailWith<EmptyStringException> { Synonym.OneWay(objectIDA, " ", listOf()) }
     }
 
     @Test
     fun oneWaySynonymsShouldNotBeEmpty() {
-        shouldFailWith<EmptyListException> { Synonym.OneWay(objectIDA, "input", listOf()) }
+        runFailWith<EmptyListException> { Synonym.OneWay(objectIDA, "input", listOf()) }
     }
 
     @Test
     fun oneWaySynonymsShouldNotBeMoreThan100() {
-        shouldFailWith<IllegalArgumentException> { Synonym.OneWay(objectIDA, "input", (0..101).map { "" }) }
+        runFailWith<IllegalArgumentException> { Synonym.OneWay(objectIDA, "input", (0..101).map { "" }) }
     }
 
     @Test
     fun multiWaySynonymsShouldNotBeEmpty() {
-        shouldFailWith<EmptyListException> { Synonym.MultiWay(objectIDA, listOf()) }
+        runFailWith<EmptyListException> { Synonym.MultiWay(objectIDA, listOf()) }
     }
 
     @Test
     fun multiWaySynonymsShouldNotBeMoreThan100() {
-        shouldFailWith<IllegalArgumentException> { Synonym.MultiWay(objectIDA, (0..101).map { "" }) }
+        runFailWith<IllegalArgumentException> { Synonym.MultiWay(objectIDA, (0..101).map { "" }) }
     }
 
     @Test
     fun alternativeWordShouldNotBeEmpty() {
-        shouldFailWith<EmptyStringException> {
+        runFailWith<EmptyStringException> {
             Synonym.AlternativeCorrections(objectIDA, "", listOf(), SynonymType.Typo.One)
             Synonym.AlternativeCorrections(objectIDA, " ", listOf(), SynonymType.Typo.One)
         }
@@ -58,7 +58,7 @@ internal class TestSynonym {
 
     @Test
     fun alternativeCorrectionsShouldNotBeEmpty() {
-        shouldFailWith<EmptyListException> {
+        runFailWith<EmptyListException> {
             Synonym.AlternativeCorrections(objectIDA, "word", listOf(), SynonymType.Typo.One)
         }
     }
@@ -67,7 +67,7 @@ internal class TestSynonym {
     fun placeholderReplacementsShouldNotBeEmpty() {
         val token = Synonym.Placeholder.Token("token")
 
-        shouldFailWith<EmptyListException> {
+        runFailWith<EmptyListException> {
             Synonym.Placeholder(objectIDA, token, listOf())
         }
     }
