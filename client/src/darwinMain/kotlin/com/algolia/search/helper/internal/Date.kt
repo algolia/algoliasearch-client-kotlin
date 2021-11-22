@@ -7,6 +7,7 @@ import platform.Foundation.NSISO8601DateFormatWithFractionalSeconds
 import platform.Foundation.NSISO8601DateFormatWithInternetDateTime
 import platform.Foundation.NSISO8601DateFormatter
 import platform.Foundation.create
+import platform.Foundation.timeIntervalSince1970
 
 @ThreadLocal
 internal actual object DateISO8601 {
@@ -34,11 +35,11 @@ internal actual object DateISO8601 {
 
     actual fun parse(date: String, inMilliseconds: Boolean): Long {
         val formatter = if (inMilliseconds) dateISO8601Millis else dateISO8601
-        return formatter.dateFromString(date)?.timeIntervalSinceReferenceDate?.toMillis()
+        return formatter.dateFromString(date)?.timeIntervalSince1970?.toMillis()
             ?: throw IllegalArgumentException("unable to parse $date")
     }
 
-    fun parse(date: String): NSDate {
+    fun parseToNSDate(date: String): NSDate {
         return when (date.length) {
             20 -> dateISO8601.dateFromString(date)
             24 -> dateISO8601Millis.dateFromString(date)

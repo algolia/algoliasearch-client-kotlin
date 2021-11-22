@@ -17,6 +17,6 @@ public actual data class ClientDate internal actual constructor(override val raw
     /**
      * In the eventuality of the Date format being wrong, we create an empty [NSDate] object instead of throwing an exception.
      */
-    val date: NSDate = DateISO8601.parse(raw)
+    val date: NSDate = DateISO8601.parseToNSDate(raw)
 }
 
