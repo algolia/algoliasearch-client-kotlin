@@ -2,7 +2,7 @@ package transport
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.RetryableHost
-import com.algolia.search.configuration.edit
+import com.algolia.search.configuration.internal.extension.edit
 import com.algolia.search.helper.toApplicationID
 import com.algolia.search.transport.internal.hasFailed
 import com.algolia.search.transport.internal.hasTimedOut

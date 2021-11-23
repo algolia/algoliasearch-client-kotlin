@@ -4,11 +4,11 @@ import clientAdmin1
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.RetryableHost
-import com.algolia.search.configuration.edit
+import com.algolia.search.configuration.internal.extension.edit
 import com.algolia.search.transport.internal.Transport
+import kotlin.test.Test
 import runTest
 import shouldEqual
-import kotlin.test.Test
 
 internal class TestCallableHosts {
 

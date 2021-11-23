@@ -1,6 +1,6 @@
 package com.algolia.search.configuration
 
-public sealed interface RetryableHost {
+public interface RetryableHost {
 
     /** The url to target.*/
     public val url: String
@@ -21,9 +21,7 @@ public sealed interface RetryableHost {
 /**
  * Creates an instance of [RetryableHost].
  */
-public fun RetryableHost(
+public expect fun RetryableHost(
     url: String,
     callType: CallType? = null
-): RetryableHost {
-    return AtomicRetryableHost(init = DefaultRetryableHost(url, callType))
-}
+): RetryableHost

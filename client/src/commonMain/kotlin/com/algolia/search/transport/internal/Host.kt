@@ -3,7 +3,7 @@ package com.algolia.search.transport.internal
 import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.RetryableHost
-import com.algolia.search.configuration.edit
+import com.algolia.search.configuration.internal.extension.edit
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.internal.Time
 
