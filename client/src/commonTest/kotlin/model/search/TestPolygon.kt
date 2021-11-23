@@ -2,8 +2,8 @@ package model.search
 
 import com.algolia.search.helper.and
 import com.algolia.search.model.search.Polygon
-import shouldEqual
 import runFailWith
+import shouldEqual
 import kotlin.test.Test
 
 internal class TestPolygon {

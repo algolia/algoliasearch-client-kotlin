@@ -2,8 +2,8 @@ package model.insights
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.insights.UserToken
-import shouldEqual
 import runFailWith
+import shouldEqual
 import kotlin.test.Test
 
 internal class TestUserToken {

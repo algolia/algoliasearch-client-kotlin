@@ -2,8 +2,8 @@ package model
 
 import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.model.IndexName
-import shouldEqual
 import runFailWith
+import shouldEqual
 import kotlin.test.Test
 
 internal class TestIndexName {

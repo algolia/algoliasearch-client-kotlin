@@ -1,12 +1,12 @@
 package helper
 
 import com.algolia.search.helper.internal.DateISO8601
-import kotlin.test.Test
-import kotlin.test.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import runTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 class TestDateISO8601 {
 

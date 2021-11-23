@@ -7,9 +7,9 @@ import com.algolia.search.model.rule.FacetValuesOrder
 import com.algolia.search.model.rule.FacetsOrder
 import com.algolia.search.model.rule.RenderingContent
 import com.algolia.search.model.rule.SortRule
-import kotlin.native.concurrent.SharedImmutable
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
+import kotlin.native.concurrent.SharedImmutable
 
 internal fun set(vararg filters: Filter) = mutableSetOf(*filters)
 

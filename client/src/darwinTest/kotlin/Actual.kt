@@ -9,9 +9,6 @@ import com.algolia.search.configuration.Region
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
 import com.algolia.search.platform.asString
-import kotlin.coroutines.CoroutineContext
-import kotlin.native.concurrent.SharedImmutable
-import kotlin.native.concurrent.ThreadLocal
 import kotlinx.cinterop.UnsafeNumber
 import kotlinx.cinterop.toKString
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -27,6 +24,9 @@ import platform.Foundation.now
 import platform.Foundation.timeIntervalSinceDate
 import platform.Foundation.timeZoneForSecondsFromGMT
 import platform.posix.getenv
+import kotlin.coroutines.CoroutineContext
+import kotlin.native.concurrent.SharedImmutable
+import kotlin.native.concurrent.ThreadLocal
 
 @ThreadLocal
 internal actual val clientSearch = ClientSearch(

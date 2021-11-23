@@ -14,10 +14,10 @@ import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.features.ResponseException
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
+import runFailWith
 import runTest
 import shouldBeTrue
 import shouldEqual
-import runFailWith
 import kotlin.test.Ignore
 
 @Ignore

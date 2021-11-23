@@ -7,8 +7,8 @@ import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.InsightsEvent
 import indexA
 import objectIDA
-import shouldEqual
 import runFailWith
+import shouldEqual
 import kotlin.test.Test
 
 internal class TestInsightsEvent {

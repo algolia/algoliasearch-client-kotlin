@@ -3,8 +3,8 @@ package documentation.methods.synonym
 import documentation.index
 import documentation.indexName
 import io.ktor.client.features.ResponseException
-import runTest
 import runFailWith
+import runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 

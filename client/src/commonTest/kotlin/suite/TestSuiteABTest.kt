@@ -12,7 +12,6 @@ import com.algolia.search.serialize.KeyObjectID
 import dayInMillis
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlin.test.Test
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import runTest
@@ -20,6 +19,7 @@ import shouldEqual
 import shouldFailWith
 import shouldNotBeNull
 import shouldNotEqual
+import kotlin.test.Test
 
 internal class TestSuiteABTest {
 

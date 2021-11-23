@@ -19,8 +19,8 @@ import io.ktor.client.statement.HttpResponse
 import runTest
 import shouldBeTrue
 import shouldEqual
-import kotlin.test.Test
 import shouldFailWith
+import kotlin.test.Test
 
 internal class TestUserAgent {
 

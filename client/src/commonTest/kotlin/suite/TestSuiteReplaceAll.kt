@@ -9,7 +9,6 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlin.test.Test
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
@@ -17,6 +16,7 @@ import runTest
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
+import kotlin.test.Test
 
 class TestSuiteReplaceAll {
 

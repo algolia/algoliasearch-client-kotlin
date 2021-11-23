@@ -10,7 +10,6 @@ import com.algolia.search.model.settings.Settings
 import io.ktor.http.Parameters
 import io.ktor.http.formUrlEncode
 import io.ktor.util.InternalAPI
-import kotlin.native.concurrent.SharedImmutable
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
@@ -22,6 +21,7 @@ import kotlinx.serialization.json.JsonEncoder
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonObject
+import kotlin.native.concurrent.SharedImmutable
 
 @SharedImmutable
 internal val Json = Json {

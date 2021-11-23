@@ -10,13 +10,13 @@ import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
 import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
-import kotlin.coroutines.coroutineContext
-import kotlin.test.Test
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import runTest
 import shouldBeTrue
 import shouldEqual
+import kotlin.coroutines.coroutineContext
+import kotlin.test.Test
 
 internal class TestSuiteAPIKey {
 

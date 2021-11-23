@@ -3,10 +3,7 @@ import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientPersonalization
 import com.algolia.search.client.ClientPlaces
 import com.algolia.search.client.ClientSearch
-import kotlinx.coroutines.CoroutineScope
 import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
-
 
 internal expect val clientSearch: ClientSearch
 internal expect val clientAdmin1: ClientSearch

@@ -1,7 +1,7 @@
 package com.algolia.search.helper.internal
 
-import com.algolia.search.platform.toMillis
 import com.algolia.search.platform.fractional
+import com.algolia.search.platform.toMillis
 import kotlinx.cinterop.UnsafeNumber
 import platform.Foundation.NSDate
 import platform.Foundation.NSISO8601DateFormatWithFractionalSeconds

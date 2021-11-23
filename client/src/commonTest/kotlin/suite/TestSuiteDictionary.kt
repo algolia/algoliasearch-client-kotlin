@@ -17,10 +17,10 @@ import com.algolia.search.model.dictionary.DictionarySettings
 import com.algolia.search.model.dictionary.DisableStandardEntries
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Query
-import kotlin.test.Test
-import kotlin.test.assertEquals
 import randomUUID
 import runTest
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
 internal class TestSuiteDictionary {
 
