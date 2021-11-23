@@ -30,7 +30,6 @@ kotlin {
                 api(libs.ktor.client.json)
                 api(libs.ktor.client.logging)
                 api(libs.ktor.client.serialization)
-                implementation("org.jetbrains.kotlinx:atomicfu:0.17.0")
             }
         }
         val commonTest by getting {

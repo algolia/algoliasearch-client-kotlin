@@ -10,13 +10,20 @@ internal abstract class EditableDefaultRetryableHost : RetryableHost {
 
 internal data class DefaultRetryableHost(
     override val url: String,
-    override val callType: CallType? = null,
+    override val callType: CallType? = null
 ) : EditableDefaultRetryableHost() {
+
     override var isUp: Boolean = true
     override var lastUpdated: Long = Time.getCurrentTimeMillis()
     override var retryCount: Int = 0
 
     override fun edit(block: DefaultRetryableHost.() -> Unit) {
         block()
+    }
+
+    fun clone() = DefaultRetryableHost(url, callType).also {
+        isUp = it.isUp
+        lastUpdated = it.lastUpdated
+        retryCount = it.retryCount
     }
 }

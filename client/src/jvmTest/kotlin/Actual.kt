@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.TimeZone
 import java.util.UUID
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.EmptyCoroutineContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runBlockingTest
 
@@ -72,6 +74,11 @@ internal actual val username: String
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal actual fun <T> runTest(block: suspend () -> T) {
+    runTest(EmptyCoroutineContext, block)
+}
+
+@OptIn(ExperimentalCoroutinesApi::class)
+internal actual fun <T> runTest(context: CoroutineContext, block: suspend () -> T) {
     runBlockingTest { block() }
 }
 

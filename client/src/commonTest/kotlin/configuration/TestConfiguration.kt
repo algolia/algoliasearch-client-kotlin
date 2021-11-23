@@ -86,7 +86,7 @@ internal class TestConfiguration {
     }
 
     @Test
-    fun configurationRecommendation() {
+    fun configurationPersonalization() {
         ConfigurationPersonalization(applicationID, apiKey, regionPersonalization).apply {
             writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
             readTimeout shouldEqual DEFAULT_READ_TIMEOUT

@@ -94,7 +94,11 @@ internal actual val username: String
 private val testCoroutineContext: CoroutineContext = newSingleThreadContext("testRunner")
 
 internal actual fun <T> runTest(block: suspend () -> T) {
-    runBlocking(testCoroutineContext) { block() }
+    runTest(testCoroutineContext, block)
+}
+
+internal actual fun <T> runTest(context: CoroutineContext, block: suspend () -> T) {
+    runBlocking(context) { block() }
 }
 
 internal actual object DateFormat {

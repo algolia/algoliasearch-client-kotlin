@@ -20,6 +20,8 @@ internal expect val clientAnswers: ClientSearch
 
 internal expect fun <T> runTest(block: suspend () -> T)
 
+internal expect fun <T> runTest(context: CoroutineContext, block: suspend () -> T)
+
 internal expect fun loadScratch(name: String): String
 
 internal expect val username: String
