@@ -27,5 +27,5 @@ internal actual fun String.sha256(key: String): String {
             }
         }
     }
-    return digest.toByteArray().decodeToString()
+    return digest.toByteArray().toHex(true)
 }

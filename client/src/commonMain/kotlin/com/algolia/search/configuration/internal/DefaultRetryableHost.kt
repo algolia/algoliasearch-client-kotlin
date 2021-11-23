@@ -22,8 +22,8 @@ internal data class DefaultRetryableHost(
     }
 
     fun clone() = DefaultRetryableHost(url, callType).also {
-        isUp = it.isUp
-        lastUpdated = it.lastUpdated
-        retryCount = it.retryCount
+        it.isUp = isUp
+        it.lastUpdated = lastUpdated
+        it.retryCount = retryCount
     }
 }
