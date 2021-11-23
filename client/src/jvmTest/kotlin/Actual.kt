@@ -16,7 +16,7 @@ import java.util.UUID
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.runBlocking
 
 internal actual val clientSearch = ClientSearch(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
@@ -79,7 +79,7 @@ internal actual fun <T> runTest(block: suspend () -> T) {
 
 @OptIn(ExperimentalCoroutinesApi::class)
 internal actual fun <T> runTest(context: CoroutineContext, block: suspend () -> T) {
-    runBlockingTest { block() }
+    runBlocking { block() }
 }
 
 internal actual object DateFormat {

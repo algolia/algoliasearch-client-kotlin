@@ -43,7 +43,6 @@ kotlin {
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2-native-mt")
                 implementation(libs.ktor.client.okhttp)
                 implementation(libs.ktor.client.apache)
                 implementation(libs.ktor.client.android)
