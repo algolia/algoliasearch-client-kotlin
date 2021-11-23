@@ -95,16 +95,6 @@ tasks {
     }
 
     kotlin.sourceSets.commonMain.get().kotlin.srcDir(copyTemplates)
-
-    // TODO: remove
-    val macosX64Test by getting(KotlinNativeTest::class) {
-        testLogging {
-            events("FAILED")
-            exceptionFormat = TestExceptionFormat.FULL
-            showStandardStreams = true
-            showStackTraces = true
-        }
-    }
 }
 
 configure<SpotlessExtension> {
