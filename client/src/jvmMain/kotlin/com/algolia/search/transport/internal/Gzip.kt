@@ -9,8 +9,8 @@ internal actual val isGzipSupported: Boolean = true
 internal actual object Gzip : Converter<String, ByteArray> {
 
     override fun invoke(input: String): ByteArray {
-        return ByteArrayOutputStream(input.length).use { bos ->
-            GZIPOutputStream(bos).use { gzip -> gzip.write(input.toByteArray()) }
+        return ByteArrayOutputStream().use { bos ->
+            GZIPOutputStream(bos).bufferedWriter().use { gzip -> gzip.write(input) }
             bos.toByteArray()
         }
     }
