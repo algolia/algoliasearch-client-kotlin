@@ -1,8 +1,6 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
-import org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
 
 plugins {
     kotlin("multiplatform")
@@ -93,8 +91,16 @@ tasks {
         expand("projectVersion" to version)
         filteringCharset = "UTF-8"
     }
-
     kotlin.sourceSets.commonMain.get().kotlin.srcDir(copyTemplates)
+
+    withType<Test> {
+        testLogging {
+            events("FAILED")
+            setExceptionFormat("FULL")
+            showStandardStreams = true
+            showStackTraces = true
+        }
+    }
 }
 
 configure<SpotlessExtension> {
