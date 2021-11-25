@@ -1,7 +1,6 @@
 package transport.internal
 
 import com.algolia.search.transport.internal.Gzip
-import com.algolia.search.transport.internal.isGzipSupported
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -10,7 +9,6 @@ class TestGzip {
 
     @Test
     fun test() {
-        if (!isGzipSupported) return
         val json = "{ \"id\": 123456, \"name\": \"john doe\", \"books\": [ \"harry potter\", \"dune\" ] }"
         val compressed = Gzip(json).toList().map { it.toUByte().toInt() }
         val compressedData = listOf(
@@ -19,7 +17,6 @@ class TestGzip {
             193, 104, 5, 165, 140, 196, 162, 162, 74, 133, 130, 252, 146, 146, 212, 34, 144, 84, 74, 105, 94, 170, 146,
             66, 172, 66, 45, 0
         )
-        println(compressed)
         assertEquals(listOf(0x1f, 0x8b), compressed.slice(0..1)) // two-byte Gzip ID.
         assertEquals(0x08, compressed[2]) // deflate compression method.
         assertEquals(0x00, compressed[3]) // no flags.

@@ -5,7 +5,6 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
-    kotlin("native.cocoapods")
     id("com.vanniktech.maven.publish")
     id("com.diffplug.spotless")
     id("binary-compatibility-validator")
@@ -52,20 +51,6 @@ kotlin {
             dependencies {
                 implementation(libs.ktor.client.ios)
             }
-        }
-    }
-
-    cocoapods {
-        summary = properties["POM_NAME"].toString()
-        homepage = properties["POM_URL"].toString()
-
-        ios.deploymentTarget = "9.0"
-        osx.deploymentTarget = "10.10"
-        tvos.deploymentTarget = "9.0"
-        watchos.deploymentTarget = "2.0"
-
-        pod("GZIP") {
-            version = "~> 1.3.0"
         }
     }
 }
