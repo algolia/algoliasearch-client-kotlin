@@ -29,3 +29,6 @@ coverage-error.log
 
 # Java
 *.hprof
+
+# cocoapods (generated)
+*.podspec

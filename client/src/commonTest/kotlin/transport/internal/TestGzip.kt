@@ -19,6 +19,7 @@ class TestGzip {
             193, 104, 5, 165, 140, 196, 162, 162, 74, 133, 130, 252, 146, 146, 212, 34, 144, 84, 74, 105, 94, 170, 146,
             66, 172, 66, 45, 0
         )
+        println(compressed)
         assertEquals(listOf(0x1f, 0x8b), compressed.slice(0..1)) // two-byte Gzip ID.
         assertEquals(0x08, compressed[2]) // deflate compression method.
         assertEquals(0x00, compressed[3]) // no flags.

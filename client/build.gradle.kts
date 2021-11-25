@@ -5,6 +5,7 @@ import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
+    kotlin("native.cocoapods")
     id("com.vanniktech.maven.publish")
     id("com.diffplug.spotless")
     id("binary-compatibility-validator")
@@ -53,6 +54,20 @@ kotlin {
             }
         }
     }
+
+    cocoapods {
+        summary = properties["POM_NAME"].toString()
+        homepage = properties["POM_URL"].toString()
+
+        ios.deploymentTarget = "9.0"
+        osx.deploymentTarget = "10.10"
+        tvos.deploymentTarget = "9.0"
+        watchos.deploymentTarget = "2.0"
+
+        pod("GZIP") {
+            version = "~> 1.3.0"
+        }
+    }
 }
 
 fun KotlinMultiplatformExtension.darwin() {
@@ -60,16 +75,16 @@ fun KotlinMultiplatformExtension.darwin() {
         add(iosArm32())
         add(iosArm64())
         add(iosX64())
+        add(iosSimulatorArm64())
         add(macosArm64())
         add(macosX64())
         add(tvosArm64())
         add(tvosX64())
+        add(tvosSimulatorArm64())
         add(watchosArm32())
         add(watchosArm64())
         add(watchosX64())
         add(watchosX86())
-        add(iosSimulatorArm64())
-        add(tvosSimulatorArm64())
         add(watchosSimulatorArm64())
     }
     kotlin.sourceSets.apply {

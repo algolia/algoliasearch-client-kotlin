@@ -71,7 +71,7 @@ internal class Transport(
     private fun HttpRequestBuilder.compress(payload: String?) {
         if (payload == null) return
         body = when (compression) {
-            Compression.Gzip -> if (isGzipSupported) Gzip(payload) else payload
+            Compression.Gzip -> Gzip(payload)
             Compression.None -> payload
         }
     }
