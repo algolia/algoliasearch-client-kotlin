@@ -4,14 +4,14 @@ import com.algolia.search.configuration.CallType
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.model.internal.Time
 
-internal abstract class EditableDefaultRetryableHost : RetryableHost {
+internal abstract class EditableRetryableHost : RetryableHost {
     abstract fun edit(block: DefaultRetryableHost.() -> Unit)
 }
 
 internal data class DefaultRetryableHost(
     override val url: String,
     override val callType: CallType? = null
-) : EditableDefaultRetryableHost() {
+) : EditableRetryableHost() {
 
     override var isUp: Boolean = true
     override var lastUpdated: Long = Time.getCurrentTimeMillis()

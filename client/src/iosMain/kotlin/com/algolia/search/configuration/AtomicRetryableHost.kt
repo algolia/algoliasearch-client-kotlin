@@ -1,13 +1,13 @@
 package com.algolia.search.configuration
 
 import com.algolia.search.configuration.internal.DefaultRetryableHost
-import com.algolia.search.configuration.internal.EditableDefaultRetryableHost
+import com.algolia.search.configuration.internal.EditableRetryableHost
 import kotlinx.atomicfu.AtomicRef
 import kotlinx.atomicfu.atomic
 
 internal class AtomicRetryableHost(
     private val ref: AtomicRef<DefaultRetryableHost>,
-) : EditableDefaultRetryableHost() { // delegate to ref.value uses always the same (initial) reference.
+) : EditableRetryableHost() { // delegate to ref.value uses always the same (initial) reference.
 
     constructor(init: DefaultRetryableHost) : this(atomic(init))
 
