@@ -12,9 +12,8 @@ plugins {
 
 kotlin {
     explicitApi()
-
     jvm()
-    darwin()
+    ios()
 
     sourceSets {
         all {
@@ -47,37 +46,10 @@ kotlin {
             }
         }
 
-        val darwinTest by getting {
+        val iosMain by getting {
             dependencies {
                 implementation(libs.ktor.client.ios)
             }
-        }
-    }
-}
-
-fun KotlinMultiplatformExtension.darwin() {
-    val targets = mutableListOf<KotlinNativeTarget>().apply {
-        add(iosArm32())
-        add(iosArm64())
-        add(iosX64())
-        add(iosSimulatorArm64())
-        add(macosArm64())
-        add(macosX64())
-        add(tvosArm64())
-        add(tvosX64())
-        add(tvosSimulatorArm64())
-        add(watchosArm32())
-        add(watchosArm64())
-        add(watchosX64())
-        add(watchosX86())
-        add(watchosSimulatorArm64())
-    }
-    kotlin.sourceSets.apply {
-        val darwinMain by creating { dependsOn(getByName("commonMain")) }
-        val darwinTest by creating { dependsOn(getByName("commonTest")) }
-        configure(targets) {
-            sourceSets.getByName("${name}Main").dependsOn(darwinMain)
-            sourceSets.getByName("${name}Test").dependsOn(darwinTest)
         }
     }
 }
