@@ -357,18 +357,17 @@ public final class com/algolia/search/configuration/Region$Recommendation$US : c
 	public static final field INSTANCE Lcom/algolia/search/configuration/Region$Recommendation$US;
 }
 
-public final class com/algolia/search/configuration/RetryableHost {
-	public fun <init> (Ljava/lang/String;Lcom/algolia/search/configuration/CallType;)V
-	public synthetic fun <init> (Ljava/lang/String;Lcom/algolia/search/configuration/CallType;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public final fun component1 ()Ljava/lang/String;
-	public final fun component2 ()Lcom/algolia/search/configuration/CallType;
-	public final fun copy (Ljava/lang/String;Lcom/algolia/search/configuration/CallType;)Lcom/algolia/search/configuration/RetryableHost;
-	public static synthetic fun copy$default (Lcom/algolia/search/configuration/RetryableHost;Ljava/lang/String;Lcom/algolia/search/configuration/CallType;ILjava/lang/Object;)Lcom/algolia/search/configuration/RetryableHost;
-	public fun equals (Ljava/lang/Object;)Z
-	public final fun getCallType ()Lcom/algolia/search/configuration/CallType;
-	public final fun getUrl ()Ljava/lang/String;
-	public fun hashCode ()I
-	public fun toString ()Ljava/lang/String;
+public abstract interface class com/algolia/search/configuration/RetryableHost {
+	public abstract fun getCallType ()Lcom/algolia/search/configuration/CallType;
+	public abstract fun getLastUpdated ()J
+	public abstract fun getRetryCount ()I
+	public abstract fun getUrl ()Ljava/lang/String;
+	public abstract fun isUp ()Z
+}
+
+public final class com/algolia/search/configuration/RetryableHostKt {
+	public static final fun RetryableHost (Ljava/lang/String;Lcom/algolia/search/configuration/CallType;)Lcom/algolia/search/configuration/RetryableHost;
+	public static synthetic fun RetryableHost$default (Ljava/lang/String;Lcom/algolia/search/configuration/CallType;ILjava/lang/Object;)Lcom/algolia/search/configuration/RetryableHost;
 }
 
 public final class com/algolia/search/configuration/UserAgentKt {
@@ -2821,7 +2820,7 @@ public final class com/algolia/search/model/filter/Filter$Tag : com/algolia/sear
 	public fun toString ()Ljava/lang/String;
 }
 
-public abstract class com/algolia/search/model/filter/FilterConverter : kotlin/jvm/functions/Function1 {
+public abstract class com/algolia/search/model/filter/FilterConverter : com/algolia/search/model/filter/internal/Converter {
 }
 
 public final class com/algolia/search/model/filter/FilterConverter$Legacy : com/algolia/search/model/filter/FilterConverter {
@@ -2997,7 +2996,7 @@ public final class com/algolia/search/model/filter/FilterGroup$Or$Tag : com/algo
 	public fun toString ()Ljava/lang/String;
 }
 
-public abstract class com/algolia/search/model/filter/FilterGroupsConverter : kotlin/jvm/functions/Function1 {
+public abstract class com/algolia/search/model/filter/FilterGroupsConverter : com/algolia/search/model/filter/internal/Converter {
 }
 
 public abstract class com/algolia/search/model/filter/FilterGroupsConverter$Legacy : com/algolia/search/model/filter/FilterGroupsConverter {
