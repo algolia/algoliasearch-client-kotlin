@@ -25,7 +25,6 @@ import platform.Foundation.timeIntervalSinceDate
 import platform.Foundation.timeZoneForSecondsFromGMT
 import platform.posix.getenv
 import kotlin.coroutines.CoroutineContext
-import kotlin.native.concurrent.SharedImmutable
 import kotlin.native.concurrent.ThreadLocal
 
 @ThreadLocal
@@ -49,7 +48,7 @@ internal actual val clientAdmin2 = ClientSearch(
     )
 )
 
-@SharedImmutable
+@ThreadLocal
 internal actual val clientMcm = ClientSearch(
     env("ALGOLIA_ADMIN_ID_MCM").toApplicationID(),
     env("ALGOLIA_ADMIN_KEY_MCM").toAPIKey()

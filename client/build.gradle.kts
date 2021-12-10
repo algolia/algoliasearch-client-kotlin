@@ -57,9 +57,8 @@ kotlin {
 tasks {
     val copyTemplates by registering(type = Copy::class) {
         from("src/commonMain/templates")
-        val outputDir = "$buildDir/generated/sources/templates/kotlin/main"
-        into(outputDir)
-        val version = project.extensions.extraProperties["VERSION_NAME"] as String // require clean build
+        into("$buildDir/generated/sources/templates/commonMain")
+        val version = project.extra["VERSION_NAME"] as String // changes require clean build
         expand("projectVersion" to version)
         filteringCharset = "UTF-8"
     }
