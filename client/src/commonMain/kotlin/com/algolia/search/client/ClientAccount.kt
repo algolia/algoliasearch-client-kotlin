@@ -3,7 +3,7 @@ package com.algolia.search.client
 import com.algolia.search.client.internal.IndexImpl
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.task.Task
-import io.ktor.client.features.ResponseException
+import io.ktor.client.plugins.ResponseException
 import io.ktor.http.HttpStatusCode
 
 /**

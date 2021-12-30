@@ -13,7 +13,7 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.internal.Transport
-import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.plugins.logging.LogLevel
 
 public interface ClientRecommend : Configuration, EndpointRecommend, Credentials, CustomRequester {
 

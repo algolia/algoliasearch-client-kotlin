@@ -9,7 +9,7 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
-import io.ktor.client.features.ResponseException
+import io.ktor.client.plugins.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive

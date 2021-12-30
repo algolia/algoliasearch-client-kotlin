@@ -7,7 +7,7 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
-import io.ktor.client.features.ResponseException
+import io.ktor.client.plugins.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive

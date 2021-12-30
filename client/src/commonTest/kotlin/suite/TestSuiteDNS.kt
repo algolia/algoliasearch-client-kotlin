@@ -9,9 +9,9 @@ import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.serialize.internal.Json
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
-import io.ktor.client.features.HttpTimeout
-import io.ktor.client.features.SocketTimeoutException
-import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.SocketTimeoutException
+import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.http.ContentType
 import io.ktor.http.headersOf
 import io.ktor.utils.io.ByteReadChannel

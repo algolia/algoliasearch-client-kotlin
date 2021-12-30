@@ -19,7 +19,7 @@ import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNonStrict
 import documentation.client
 import documentation.index
-import io.ktor.client.features.ResponseException
+import io.ktor.client.plugins.ResponseException
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.CoroutineScope

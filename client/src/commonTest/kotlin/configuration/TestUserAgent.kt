@@ -11,8 +11,8 @@ import com.algolia.search.model.ApplicationID
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respondBadRequest
 import io.ktor.client.engine.mock.respondOk
-import io.ktor.client.features.ResponseException
-import io.ktor.client.features.UserAgent
+import io.ktor.client.plugins.ResponseException
+import io.ktor.client.plugins.UserAgent
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
 import io.ktor.client.statement.HttpResponse

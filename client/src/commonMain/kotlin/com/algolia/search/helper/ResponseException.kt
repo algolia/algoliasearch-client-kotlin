@@ -1,6 +1,6 @@
 package com.algolia.search.helper
 
-import io.ktor.client.features.ResponseException
+import io.ktor.client.plugins.ResponseException
 import io.ktor.client.statement.readBytes
 import io.ktor.utils.io.core.String
 

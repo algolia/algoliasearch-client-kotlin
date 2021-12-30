@@ -5,7 +5,7 @@ import clientMcm
 import com.algolia.search.helper.toUserID
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multicluster.UserIDQuery
-import io.ktor.client.features.ResponseException
+import io.ktor.client.plugins.ResponseException
 import io.ktor.client.statement.readBytes
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.core.String

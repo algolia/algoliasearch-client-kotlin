@@ -15,7 +15,7 @@ import com.algolia.search.serialize.KeyMove
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
-import io.ktor.client.features.ResponseException
+import io.ktor.client.plugins.ResponseException
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 

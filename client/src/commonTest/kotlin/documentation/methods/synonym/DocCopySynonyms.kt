@@ -2,7 +2,7 @@ package documentation.methods.synonym
 
 import documentation.index
 import documentation.indexName
-import io.ktor.client.features.ResponseException
+import io.ktor.client.plugins.ResponseException
 import runBlocking
 import shouldFailWith
 import kotlin.test.Ignore

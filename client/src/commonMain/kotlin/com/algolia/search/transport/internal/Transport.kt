@@ -9,16 +9,19 @@ import com.algolia.search.exception.UnreachableHostsException
 import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import io.ktor.client.call.HttpClientCall
-import io.ktor.client.features.HttpRequestTimeoutException
-import io.ktor.client.features.ResponseException
-import io.ktor.client.features.timeout
+import io.ktor.client.call.body
+import io.ktor.client.network.sockets.ConnectTimeoutException
+import io.ktor.client.network.sockets.SocketTimeoutException
+import io.ktor.client.plugins.HttpRequestTimeoutException
+import io.ktor.client.plugins.ResponseException
+import io.ktor.client.plugins.timeout
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
+import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpMethod
 import io.ktor.http.URLProtocol
-import io.ktor.network.sockets.ConnectTimeoutException
-import io.ktor.network.sockets.SocketTimeoutException
+import io.ktor.http.path
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.sync.Mutex
@@ -53,8 +56,10 @@ internal class Transport(
         body: String?,
     ): HttpRequestBuilder {
         return HttpRequestBuilder().apply {
-            url.path(path)
-            url.protocol = URLProtocol.HTTPS
+            url {
+                path(path)
+                protocol = URLProtocol.HTTPS
+            }
             method = httpMethod
             compress(body)
             credentialsOrNull?.let {
@@ -67,10 +72,11 @@ internal class Transport(
 
     private fun HttpRequestBuilder.compress(payload: String?) {
         if (payload != null) {
-            body = when (compression) {
+            val body = when (compression) {
                 Compression.Gzip -> Gzip(payload)
                 Compression.None -> payload
             }
+            setBody(body)
         }
     }
 
@@ -82,7 +88,7 @@ internal class Transport(
         body: String? = null,
     ): T {
         return execute(httpMethod, callType, path, requestOptions, body) {
-            httpClient.request(it)
+            httpClient.request(it).call.body()
         }
     }
 
@@ -157,9 +163,9 @@ internal class Transport(
         requestOptions: RequestOptions?
     ): T {
         val httpResponse = genericRequest(method, callType, path, requestOptions, body)
-        return httpResponse.call.receiveAs(responseType)
+        return httpResponse.call.bodyAs(responseType)
     }
 
     @Suppress("UNCHECKED_CAST")
-    private suspend fun <T> HttpClientCall.receiveAs(type: TypeInfo): T = receive(type) as T
+    private suspend fun <T> HttpClientCall.bodyAs(type: TypeInfo): T = body(type) as T
 }
