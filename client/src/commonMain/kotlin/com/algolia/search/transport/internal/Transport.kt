@@ -24,9 +24,9 @@ import io.ktor.http.URLProtocol
 import io.ktor.http.path
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.utils.io.errors.IOException
+import kotlin.math.floor
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlin.math.floor
 
 internal class Transport(
     configuration: Configuration,
@@ -71,13 +71,12 @@ internal class Transport(
     }
 
     private fun HttpRequestBuilder.compress(payload: String?) {
-        if (payload != null) {
-            val body = when (compression) {
-                Compression.Gzip -> Gzip(payload)
-                Compression.None -> payload
-            }
-            setBody(body)
+        if (payload == null) return
+        val body: Any = when (compression) {
+            Compression.Gzip -> Gzip(payload)
+            Compression.None -> payload
         }
+        setBody(body)
     }
 
     internal suspend inline fun <reified T> request(

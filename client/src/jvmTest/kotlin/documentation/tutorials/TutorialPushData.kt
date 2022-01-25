@@ -7,6 +7,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.serialize.internal.Json
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
@@ -24,7 +25,7 @@ internal class TutorialPushData {
     @Test
     fun ecommerce() {
         runBlocking {
-            val content = HttpClient().get<String>("https://alg.li/doc-ecommerce.json")
+            val content = HttpClient().get("https://alg.li/doc-ecommerce.json").bodyAsText()
             val objects = Json.decodeFromString(ListSerializer(JsonObject.serializer()), content)
             val client = ClientSearch(
                 ApplicationID("YourApplicationID"),
@@ -39,7 +40,7 @@ internal class TutorialPushData {
     @Test
     fun saas() {
         runBlocking {
-            val content = HttpClient().get<String>("https://alg.li/doc-saas.json")
+            val content = HttpClient().get("https://alg.li/doc-saas.json").bodyAsText()
             val objects = Json.decodeFromString(ListSerializer(JsonObject.serializer()), content)
             val client = ClientSearch(
                 ApplicationID("YourApplicationID"),
@@ -54,7 +55,7 @@ internal class TutorialPushData {
     @Test
     fun media() {
         runBlocking {
-            val content = HttpClient().get<String>("https://alg.li/doc-media.json")
+            val content = HttpClient().get("https://alg.li/doc-media.json").bodyAsText()
             val objects = Json.decodeFromString(ListSerializer(JsonObject.serializer()), content)
             val client = ClientSearch(
                 ApplicationID("YourApplicationID"),
@@ -69,7 +70,7 @@ internal class TutorialPushData {
     @Test
     fun geo() {
         runBlocking {
-            val content = HttpClient().get<String>("https://alg.li/doc-geo.json")
+            val content = HttpClient().get("https://alg.li/doc-geo.json").bodyAsText()
             val objects = Json.decodeFromString(ListSerializer(JsonObject.serializer()), content)
             val client = ClientSearch(
                 ApplicationID("YourApplicationID"),

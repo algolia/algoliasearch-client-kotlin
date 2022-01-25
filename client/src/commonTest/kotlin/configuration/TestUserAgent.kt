@@ -15,12 +15,11 @@ import io.ktor.client.plugins.ResponseException
 import io.ktor.client.plugins.UserAgent
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
-import io.ktor.client.statement.HttpResponse
+import kotlin.test.Test
 import runBlocking
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
-import kotlin.test.Test
 
 internal class TestUserAgent {
 
@@ -49,7 +48,7 @@ internal class TestUserAgent {
                 }
             )
             val client = ClientSearch(configuration)
-            val request = client.httpClient.request<HttpResponse>(HttpRequestBuilder())
+            val request = client.httpClient.request(HttpRequestBuilder())
             val headers = request.call.request.headers
 
             headers.contains(userAgentKey).shouldBeTrue()
