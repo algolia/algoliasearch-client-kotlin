@@ -1,8 +1,13 @@
-name: Tests
+name: Build
+
 on: [ push ]
+
+env:
+    GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
+
 jobs:
-    integration:
-        runs-on: macos-11
+    test:
+        runs-on: ubuntu-latest
         env:
             ALGOLIA_APPLICATION_ID_1: ${{ secrets.ALGOLIA_APPLICATION_ID_1 }}
             ALGOLIA_ADMIN_KEY_1: ${{ secrets.ALGOLIA_ADMIN_KEY_1 }}
