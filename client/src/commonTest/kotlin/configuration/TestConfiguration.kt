@@ -20,6 +20,7 @@ import io.ktor.client.features.logging.LogLevel
 import shouldBeNull
 import shouldEqual
 import kotlin.test.Test
+import shouldContainAll
 
 internal class TestConfiguration {
 
@@ -39,7 +40,7 @@ internal class TestConfiguration {
             writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
             readTimeout shouldEqual DEFAULT_READ_TIMEOUT
             logLevel shouldEqual LogLevel.NONE
-            hosts shouldEqual applicationID.searchHosts
+            hosts shouldContainAll applicationID.searchHosts
             defaultHeaders.shouldBeNull()
             engine.shouldBeNull()
             httpClientConfig.shouldBeNull()

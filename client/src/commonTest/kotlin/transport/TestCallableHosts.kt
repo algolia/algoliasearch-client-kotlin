@@ -8,6 +8,7 @@ import com.algolia.search.transport.internal.Transport
 import runBlocking
 import shouldEqual
 import kotlin.test.Test
+import shouldContainAll
 
 internal class TestCallableHosts {
 
@@ -24,7 +25,7 @@ internal class TestCallableHosts {
         runBlocking {
             val hosts = transport.callableHosts(CallType.Read)
 
-            hosts shouldEqual listOf(
+            hosts shouldContainAll listOf(
                 hostRead,
                 hostFallback1,
                 hostFallback2,
@@ -38,7 +39,7 @@ internal class TestCallableHosts {
         runBlocking {
             val hosts = transport.callableHosts(CallType.Write)
 
-            hosts shouldEqual listOf(
+            hosts shouldContainAll listOf(
                 hostWrite,
                 hostFallback1,
                 hostFallback2,
@@ -67,7 +68,7 @@ internal class TestCallableHosts {
 
             val hosts = transport.callableHosts(CallType.Read)
 
-            hosts shouldEqual listOf(hostfallback3)
+            hosts shouldEqual listOf(transport.hosts.last())
         }
     }
 
@@ -78,7 +79,7 @@ internal class TestCallableHosts {
 
             val hosts = transport.callableHosts(CallType.Write)
 
-            hosts shouldEqual listOf(
+            hosts shouldContainAll  listOf(
                 hostWrite,
                 hostFallback1,
                 hostFallback2,
