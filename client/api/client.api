@@ -6832,19 +6832,23 @@ public final class com/algolia/search/model/response/ResponseSearchPlacesMulti$C
 
 public final class com/algolia/search/model/response/ResponseSearchRules {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseSearchRules$Companion;
-	public synthetic fun <init> (ILjava/util/List;IIILkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/util/List;III)V
+	public synthetic fun <init> (ILjava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/util/List;
-	public final fun component2 ()I
-	public final fun component3 ()I
-	public final fun component4 ()I
-	public final fun copy (Ljava/util/List;III)Lcom/algolia/search/model/response/ResponseSearchRules;
-	public static synthetic fun copy$default (Lcom/algolia/search/model/response/ResponseSearchRules;Ljava/util/List;IIIILjava/lang/Object;)Lcom/algolia/search/model/response/ResponseSearchRules;
+	public final fun component2 ()Ljava/lang/Integer;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun component4 ()Ljava/lang/Integer;
+	public final fun copy (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;)Lcom/algolia/search/model/response/ResponseSearchRules;
+	public static synthetic fun copy$default (Lcom/algolia/search/model/response/ResponseSearchRules;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;ILjava/lang/Object;)Lcom/algolia/search/model/response/ResponseSearchRules;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getHits ()Ljava/util/List;
 	public final fun getNbHits ()I
+	public final fun getNbHitsOrNull ()Ljava/lang/Integer;
 	public final fun getNbPages ()I
+	public final fun getNbPagesOrNull ()Ljava/lang/Integer;
 	public final fun getPage ()I
+	public final fun getPageOrNull ()Ljava/lang/Integer;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 	public static final fun write$Self (Lcom/algolia/search/model/response/ResponseSearchRules;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
@@ -6868,7 +6872,6 @@ public final class com/algolia/search/model/response/ResponseSearchRules$Compani
 
 public final class com/algolia/search/model/response/ResponseSearchRules$Hit {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseSearchRules$Hit$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Lcom/algolia/search/model/rule/Rule;Lkotlinx/serialization/json/JsonObject;)V
 	public synthetic fun <init> (Lcom/algolia/search/model/rule/Rule;Lkotlinx/serialization/json/JsonObject;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lcom/algolia/search/model/rule/Rule;
@@ -6883,7 +6886,7 @@ public final class com/algolia/search/model/response/ResponseSearchRules$Hit {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class com/algolia/search/model/response/ResponseSearchRules$Hit$Companion : kotlinx/serialization/DeserializationStrategy, kotlinx/serialization/KSerializer {
+public final class com/algolia/search/model/response/ResponseSearchRules$Hit$Companion : kotlinx/serialization/KSerializer {
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearchRules$Hit;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
@@ -8000,12 +8003,15 @@ public final class com/algolia/search/model/rule/Pattern$Literal : com/algolia/s
 
 public abstract class com/algolia/search/model/rule/Promotion {
 	public static final field Companion Lcom/algolia/search/model/rule/Promotion$Companion;
-	public synthetic fun <init> (ILkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public abstract fun getPosition ()I
-	public static final fun write$Self (Lcom/algolia/search/model/rule/Promotion;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
-public final class com/algolia/search/model/rule/Promotion$Companion {
+public final class com/algolia/search/model/rule/Promotion$Companion : kotlinx/serialization/KSerializer {
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/Promotion;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/algolia/search/model/rule/Promotion;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
