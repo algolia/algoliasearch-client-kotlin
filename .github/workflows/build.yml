@@ -29,6 +29,7 @@ jobs:
 
     integration:
         name: Integration tests
+        needs: lint
         runs-on: ubuntu-latest
         env:
             ALGOLIA_APPLICATION_ID_1: ${{ secrets.ALGOLIA_APPLICATION_ID_1 }}
