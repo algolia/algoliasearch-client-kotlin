@@ -1,7 +1,7 @@
 name: Tests
-on: [push]
+on: [ push ]
 jobs:
-    test:
+    integration:
         runs-on: macos-11
         env:
             ALGOLIA_APPLICATION_ID_1: ${{ secrets.ALGOLIA_APPLICATION_ID_1 }}
@@ -16,22 +16,22 @@ jobs:
             ALGOLIA_ANSWERS_APP_ID: ${{ secrets.ALGOLIA_ANSWERS_APP_ID }}
             ALGOLIA_ANSWERS_KEY: ${{ secrets.ALGOLIA_ANSWERS_KEY }}
         steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-java@v2
-              with:
-                distribution: temurin
-                java-version: 11
+            -   uses: actions/checkout@v2
+            -   uses: actions/setup-java@v2
+                with:
+                    distribution: temurin
+                    java-version: 11
 
-            - name: Setup Gradle
-              uses: gradle/gradle-build-action@v2
-              with:
-                gradle-version: wrapper
+            -   name: Setup Gradle
+                uses: gradle/gradle-build-action@v2
+                with:
+                    gradle-version: wrapper
 
-            - name: Build project
-              run: ./gradlew assemble
+            -   name: Build project
+                run: ./gradlew assemble
 
-            - name: Run lint
-              run: ./gradlew spotlessCheck
+            -   name: Run lint
+                run: ./gradlew spotlessCheck
 
-            - name: Run tests
-              run: ./gradlew jvmTest
+            -   name: Run tests
+                run: ./gradlew jvmTest
