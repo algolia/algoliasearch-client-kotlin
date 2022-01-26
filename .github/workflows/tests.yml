@@ -34,4 +34,4 @@ jobs:
               run: ./gradlew spotlessCheck
 
             - name: Run tests
-              run: ./gradlew jvmTests
+              run: ./gradlew jvmTest
