@@ -6,9 +6,9 @@ import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.transport.internal.Transport
 import runBlocking
+import shouldContainAll
 import shouldEqual
 import kotlin.test.Test
-import shouldContainAll
 
 internal class TestCallableHosts {
 
@@ -79,7 +79,7 @@ internal class TestCallableHosts {
 
             val hosts = transport.callableHosts(CallType.Write)
 
-            hosts shouldContainAll  listOf(
+            hosts shouldContainAll listOf(
                 hostWrite,
                 hostFallback1,
                 hostFallback2,
