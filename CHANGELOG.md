@@ -1,3 +1,13 @@
+# 1.12.1
+
+### Changed
+- Update Kotlin to 1.5.32
+- Update Ktor 1.6.5
+
+### Fix
+- Rules: `Promotion` deserialization (#317)
+- Randomize fallback hosts (#319)
+
 # 1.12.0
 
 ### Added
