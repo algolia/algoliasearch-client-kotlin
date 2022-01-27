@@ -1,6 +1,10 @@
 name: Build
 
-on: [ push ]
+on:
+    push:
+        branches: [ master ]
+    pull_request:
+        branches: [ develop ]
 
 env:
     GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
@@ -60,32 +64,3 @@ jobs:
                     ALGOLIA_PLACES_KEY: ${{ secrets.ALGOLIA_PLACES_KEY }}
                     ALGOLIA_ANSWERS_APP_ID: ${{ secrets.ALGOLIA_ANSWERS_APP_ID }}
                     ALGOLIA_ANSWERS_KEY: ${{ secrets.ALGOLIA_ANSWERS_KEY }}
-
-    publish:
-        runs-on: ubuntu-latest
-        if: github.repository == 'algolia/algoliasearch-client-kotlin' && contains(github.ref, "refs/tags/")
-
-        steps:
-            -   name: Checkout
-                uses: actions/checkout@v2
-
-            -   name: Configure JDK
-                uses: actions/setup-java@v2
-                with:
-                    distribution: temurin
-                    java-version: 11
-
-            -   name: Setup Gradle
-                uses: gradle/gradle-build-action@v2
-                with:
-                    gradle-version: wrapper
-
-            -   name: Upload Artifacts
-                run: |
-                    ./gradlew clean publish --no-parallel --stacktrace
-                env:
-                    ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-                    ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
-                    ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
-                    ORG_GRADLE_PROJECT_signingInMemoryKeyId: ${{ secrets.SIGNING_PRIVATE_KEY_ID }}
-                    ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PRIVATE_KEY_PASSWORD }}
