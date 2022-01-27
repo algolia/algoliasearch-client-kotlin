@@ -8,8 +8,8 @@ env:
 
 jobs:
     publish:
+        name: Publish to Sonatype
         runs-on: ubuntu-latest
-
         steps:
             -   name: Checkout
                 uses: actions/checkout@v2
@@ -26,8 +26,7 @@ jobs:
                     gradle-version: wrapper
 
             -   name: Upload Artifacts
-                run: |
-                    ./gradlew clean publish --no-parallel --stacktrace
+                run: ./gradlew clean publish --no-parallel --stacktrace
                 env:
                     ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
                     ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
