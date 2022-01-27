@@ -6,7 +6,7 @@ public final class com/algolia/search/client/ClientAccount {
 	public final fun copyIndex (Lcom/algolia/search/client/Index;Lcom/algolia/search/client/Index;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
-public abstract interface class com/algolia/search/client/ClientAnalytics : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials, com/algolia/search/endpoint/EndpointAnalytics {
+public abstract interface class com/algolia/search/client/ClientAnalytics : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials, com/algolia/search/endpoint/EndpointAnalytics, com/algolia/search/transport/CustomRequester {
 	public static final field Companion Lcom/algolia/search/client/ClientAnalytics$Companion;
 	public abstract fun browseAllABTests (Ljava/lang/Integer;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
@@ -16,6 +16,7 @@ public final class com/algolia/search/client/ClientAnalytics$Companion {
 
 public final class com/algolia/search/client/ClientAnalytics$DefaultImpls {
 	public static synthetic fun browseAllABTests$default (Lcom/algolia/search/client/ClientAnalytics;Ljava/lang/Integer;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static fun close (Lcom/algolia/search/client/ClientAnalytics;)V
 	public static fun getTimeout (Lcom/algolia/search/client/ClientAnalytics;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -24,7 +25,7 @@ public final class com/algolia/search/client/ClientAnalyticsKt {
 	public static final fun ClientAnalytics (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;)Lcom/algolia/search/client/ClientAnalytics;
 }
 
-public abstract interface class com/algolia/search/client/ClientInsights : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials, com/algolia/search/endpoint/EndpointInsights {
+public abstract interface class com/algolia/search/client/ClientInsights : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials, com/algolia/search/endpoint/EndpointInsights, com/algolia/search/transport/CustomRequester {
 	public static final field Companion Lcom/algolia/search/client/ClientInsights$Companion;
 	public abstract fun User (Lcom/algolia/search/model/insights/UserToken;)Lcom/algolia/search/client/ClientInsights$User;
 }
@@ -33,6 +34,7 @@ public final class com/algolia/search/client/ClientInsights$Companion {
 }
 
 public final class com/algolia/search/client/ClientInsights$DefaultImpls {
+	public static fun close (Lcom/algolia/search/client/ClientInsights;)V
 	public static fun getTimeout (Lcom/algolia/search/client/ClientInsights;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -55,7 +57,7 @@ public final class com/algolia/search/client/ClientInsightsKt {
 	public static final fun ClientInsights (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;)Lcom/algolia/search/client/ClientInsights;
 }
 
-public abstract interface class com/algolia/search/client/ClientPersonalization : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials, com/algolia/search/endpoint/EndpointPersonalization {
+public abstract interface class com/algolia/search/client/ClientPersonalization : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials, com/algolia/search/endpoint/EndpointPersonalization, com/algolia/search/transport/CustomRequester {
 	public static final field Companion Lcom/algolia/search/client/ClientPersonalization$Companion;
 }
 
@@ -63,6 +65,7 @@ public final class com/algolia/search/client/ClientPersonalization$Companion {
 }
 
 public final class com/algolia/search/client/ClientPersonalization$DefaultImpls {
+	public static fun close (Lcom/algolia/search/client/ClientPersonalization;)V
 	public static fun getTimeout (Lcom/algolia/search/client/ClientPersonalization;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -73,7 +76,7 @@ public final class com/algolia/search/client/ClientPersonalizationKt {
 	public static final fun ClientRecommendation (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Recommendation;)Lcom/algolia/search/client/ClientPersonalization;
 }
 
-public abstract interface class com/algolia/search/client/ClientPlaces : com/algolia/search/configuration/Configuration, com/algolia/search/endpoint/EndpointPlaces {
+public abstract interface class com/algolia/search/client/ClientPlaces : com/algolia/search/configuration/Configuration, com/algolia/search/endpoint/EndpointPlaces, com/algolia/search/transport/CustomRequester {
 	public static final field Companion Lcom/algolia/search/client/ClientPlaces$Companion;
 }
 
@@ -81,6 +84,7 @@ public final class com/algolia/search/client/ClientPlaces$Companion {
 }
 
 public final class com/algolia/search/client/ClientPlaces$DefaultImpls {
+	public static fun close (Lcom/algolia/search/client/ClientPlaces;)V
 	public static fun getTimeout (Lcom/algolia/search/client/ClientPlaces;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -90,7 +94,7 @@ public final class com/algolia/search/client/ClientPlacesKt {
 	public static synthetic fun ClientPlaces$default (Lcom/algolia/search/configuration/ConfigurationPlaces;Lcom/algolia/search/configuration/Credentials;ILjava/lang/Object;)Lcom/algolia/search/client/ClientPlaces;
 }
 
-public abstract interface class com/algolia/search/client/ClientRecommend : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials, com/algolia/search/endpoint/EndpointRecommend {
+public abstract interface class com/algolia/search/client/ClientRecommend : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials, com/algolia/search/endpoint/EndpointRecommend, com/algolia/search/transport/CustomRequester {
 	public static final field Companion Lcom/algolia/search/client/ClientRecommend$Companion;
 }
 
@@ -98,6 +102,7 @@ public final class com/algolia/search/client/ClientRecommend$Companion {
 }
 
 public final class com/algolia/search/client/ClientRecommend$DefaultImpls {
+	public static fun close (Lcom/algolia/search/client/ClientRecommend;)V
 	public static fun getTimeout (Lcom/algolia/search/client/ClientRecommend;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -107,7 +112,7 @@ public final class com/algolia/search/client/ClientRecommendKt {
 	public static synthetic fun ClientRecommend$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lio/ktor/client/features/logging/LogLevel;ILjava/lang/Object;)Lcom/algolia/search/client/ClientRecommend;
 }
 
-public abstract interface class com/algolia/search/client/ClientSearch : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials, com/algolia/search/endpoint/EndpointAPIKey, com/algolia/search/endpoint/EndpointDictionary, com/algolia/search/endpoint/EndpointMultiCluster, com/algolia/search/endpoint/EndpointMultipleIndex {
+public abstract interface class com/algolia/search/client/ClientSearch : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials, com/algolia/search/endpoint/EndpointAPIKey, com/algolia/search/endpoint/EndpointDictionary, com/algolia/search/endpoint/EndpointMultiCluster, com/algolia/search/endpoint/EndpointMultipleIndex, com/algolia/search/transport/CustomRequester {
 	public static final field Companion Lcom/algolia/search/client/ClientSearch$Companion;
 	public abstract fun getLogs (Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/LogType;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun getTask (Lcom/algolia/search/model/task/AppTaskID;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
@@ -126,6 +131,7 @@ public final class com/algolia/search/client/ClientSearch$Companion {
 }
 
 public final class com/algolia/search/client/ClientSearch$DefaultImpls {
+	public static fun close (Lcom/algolia/search/client/ClientSearch;)V
 	public static synthetic fun getLogs$default (Lcom/algolia/search/client/ClientSearch;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/LogType;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static synthetic fun getTask$default (Lcom/algolia/search/client/ClientSearch;Lcom/algolia/search/model/task/AppTaskID;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
 	public static fun getTimeout (Lcom/algolia/search/client/ClientSearch;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
@@ -179,7 +185,8 @@ public final class com/algolia/search/configuration/Compression : java/lang/Enum
 	public static fun values ()[Lcom/algolia/search/configuration/Compression;
 }
 
-public abstract interface class com/algolia/search/configuration/Configuration {
+public abstract interface class com/algolia/search/configuration/Configuration : java/io/Closeable {
+	public abstract fun close ()V
 	public abstract fun getCompression ()Lcom/algolia/search/configuration/Compression;
 	public abstract fun getDefaultHeaders ()Ljava/util/Map;
 	public abstract fun getEngine ()Lio/ktor/client/engine/HttpClientEngine;
@@ -193,6 +200,7 @@ public abstract interface class com/algolia/search/configuration/Configuration {
 }
 
 public final class com/algolia/search/configuration/Configuration$DefaultImpls {
+	public static fun close (Lcom/algolia/search/configuration/Configuration;)V
 	public static fun getTimeout (Lcom/algolia/search/configuration/Configuration;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -201,6 +209,7 @@ public abstract interface class com/algolia/search/configuration/ConfigurationAn
 }
 
 public final class com/algolia/search/configuration/ConfigurationAnalytics$DefaultImpls {
+	public static fun close (Lcom/algolia/search/configuration/ConfigurationAnalytics;)V
 	public static fun getTimeout (Lcom/algolia/search/configuration/ConfigurationAnalytics;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -213,6 +222,7 @@ public abstract interface class com/algolia/search/configuration/ConfigurationIn
 }
 
 public final class com/algolia/search/configuration/ConfigurationInsights$DefaultImpls {
+	public static fun close (Lcom/algolia/search/configuration/ConfigurationInsights;)V
 	public static fun getTimeout (Lcom/algolia/search/configuration/ConfigurationInsights;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -226,6 +236,7 @@ public abstract interface class com/algolia/search/configuration/ConfigurationPe
 }
 
 public final class com/algolia/search/configuration/ConfigurationPersonalization$DefaultImpls {
+	public static fun close (Lcom/algolia/search/configuration/ConfigurationPersonalization;)V
 	public static fun getTimeout (Lcom/algolia/search/configuration/ConfigurationPersonalization;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -240,6 +251,7 @@ public abstract interface class com/algolia/search/configuration/ConfigurationPl
 }
 
 public final class com/algolia/search/configuration/ConfigurationPlaces$DefaultImpls {
+	public static fun close (Lcom/algolia/search/configuration/ConfigurationPlaces;)V
 	public static fun getTimeout (Lcom/algolia/search/configuration/ConfigurationPlaces;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -252,6 +264,7 @@ public abstract interface class com/algolia/search/configuration/ConfigurationRe
 }
 
 public final class com/algolia/search/configuration/ConfigurationRecommend$DefaultImpls {
+	public static fun close (Lcom/algolia/search/configuration/ConfigurationRecommend;)V
 	public static fun getTimeout (Lcom/algolia/search/configuration/ConfigurationRecommend;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -264,6 +277,7 @@ public abstract interface class com/algolia/search/configuration/ConfigurationSe
 }
 
 public final class com/algolia/search/configuration/ConfigurationSearch$DefaultImpls {
+	public static fun close (Lcom/algolia/search/configuration/ConfigurationSearch;)V
 	public static fun getTimeout (Lcom/algolia/search/configuration/ConfigurationSearch;Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 }
 
@@ -3613,8 +3627,10 @@ public final class com/algolia/search/model/multipleindex/BatchOperationIndex$Co
 }
 
 public final class com/algolia/search/model/multipleindex/FacetIndexQuery : com/algolia/search/model/multipleindex/IndexedQuery {
-	public fun <init> (Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/search/Query;Lcom/algolia/search/model/Attribute;)V
+	public fun <init> (Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/search/Query;Lcom/algolia/search/model/Attribute;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/search/Query;Lcom/algolia/search/model/Attribute;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun getFacetAttribute ()Lcom/algolia/search/model/Attribute;
+	public final fun getFacetQuery ()Ljava/lang/String;
 	public fun getIndexName ()Lcom/algolia/search/model/IndexName;
 	public fun getQuery ()Lcom/algolia/search/model/search/Query;
 }
@@ -6816,19 +6832,23 @@ public final class com/algolia/search/model/response/ResponseSearchPlacesMulti$C
 
 public final class com/algolia/search/model/response/ResponseSearchRules {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseSearchRules$Companion;
-	public synthetic fun <init> (ILjava/util/List;IIILkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/util/List;III)V
+	public synthetic fun <init> (ILjava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/util/List;
-	public final fun component2 ()I
-	public final fun component3 ()I
-	public final fun component4 ()I
-	public final fun copy (Ljava/util/List;III)Lcom/algolia/search/model/response/ResponseSearchRules;
-	public static synthetic fun copy$default (Lcom/algolia/search/model/response/ResponseSearchRules;Ljava/util/List;IIIILjava/lang/Object;)Lcom/algolia/search/model/response/ResponseSearchRules;
+	public final fun component2 ()Ljava/lang/Integer;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun component4 ()Ljava/lang/Integer;
+	public final fun copy (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;)Lcom/algolia/search/model/response/ResponseSearchRules;
+	public static synthetic fun copy$default (Lcom/algolia/search/model/response/ResponseSearchRules;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;ILjava/lang/Object;)Lcom/algolia/search/model/response/ResponseSearchRules;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getHits ()Ljava/util/List;
 	public final fun getNbHits ()I
+	public final fun getNbHitsOrNull ()Ljava/lang/Integer;
 	public final fun getNbPages ()I
+	public final fun getNbPagesOrNull ()Ljava/lang/Integer;
 	public final fun getPage ()I
+	public final fun getPageOrNull ()Ljava/lang/Integer;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 	public static final fun write$Self (Lcom/algolia/search/model/response/ResponseSearchRules;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
@@ -6852,7 +6872,6 @@ public final class com/algolia/search/model/response/ResponseSearchRules$Compani
 
 public final class com/algolia/search/model/response/ResponseSearchRules$Hit {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseSearchRules$Hit$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Lcom/algolia/search/model/rule/Rule;Lkotlinx/serialization/json/JsonObject;)V
 	public synthetic fun <init> (Lcom/algolia/search/model/rule/Rule;Lkotlinx/serialization/json/JsonObject;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lcom/algolia/search/model/rule/Rule;
@@ -6867,7 +6886,7 @@ public final class com/algolia/search/model/response/ResponseSearchRules$Hit {
 	public fun toString ()Ljava/lang/String;
 }
 
-public final class com/algolia/search/model/response/ResponseSearchRules$Hit$Companion : kotlinx/serialization/DeserializationStrategy, kotlinx/serialization/KSerializer {
+public final class com/algolia/search/model/response/ResponseSearchRules$Hit$Companion : kotlinx/serialization/KSerializer {
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearchRules$Hit;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
@@ -7984,12 +8003,15 @@ public final class com/algolia/search/model/rule/Pattern$Literal : com/algolia/s
 
 public abstract class com/algolia/search/model/rule/Promotion {
 	public static final field Companion Lcom/algolia/search/model/rule/Promotion$Companion;
-	public synthetic fun <init> (ILkotlinx/serialization/internal/SerializationConstructorMarker;)V
 	public abstract fun getPosition ()I
-	public static final fun write$Self (Lcom/algolia/search/model/rule/Promotion;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
 }
 
-public final class com/algolia/search/model/rule/Promotion$Companion {
+public final class com/algolia/search/model/rule/Promotion$Companion : kotlinx/serialization/KSerializer {
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/Promotion;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/algolia/search/model/rule/Promotion;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
@@ -12482,6 +12504,14 @@ public final class com/algolia/search/serialize/RoutesKt {
 	public static final field RouteTask Ljava/lang/String;
 }
 
+public abstract interface class com/algolia/search/transport/CustomRequester {
+	public abstract fun customRequest (Lio/ktor/http/HttpMethod;Lcom/algolia/search/configuration/CallType;Ljava/lang/String;Lio/ktor/util/reflect/TypeInfo;Ljava/lang/String;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/algolia/search/transport/CustomRequester$DefaultImpls {
+	public static synthetic fun customRequest$default (Lcom/algolia/search/transport/CustomRequester;Lio/ktor/http/HttpMethod;Lcom/algolia/search/configuration/CallType;Ljava/lang/String;Lio/ktor/util/reflect/TypeInfo;Ljava/lang/String;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
 public final class com/algolia/search/transport/RequestOptions {
 	public fun <init> ()V
 	public final fun getBody ()Lkotlinx/serialization/json/JsonObject;
@@ -12496,5 +12526,17 @@ public final class com/algolia/search/transport/RequestOptions {
 	public final fun setBody (Lkotlinx/serialization/json/JsonObject;)V
 	public final fun setReadTimeout (Ljava/lang/Long;)V
 	public final fun setWriteTimeout (Ljava/lang/Long;)V
+}
+
+public final class com/algolia/search/transport/internal/HostKt {
+	public static final fun reset (Lcom/algolia/search/configuration/RetryableHost;)V
+}
+
+public final class com/algolia/search/util/CloseableJVMKt {
+	public static final fun addSuppressedInternal (Ljava/lang/Throwable;Ljava/lang/Throwable;)V
+}
+
+public final class com/algolia/search/util/CloseableKt {
+	public static final fun use (Ljava/io/Closeable;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
 }
 

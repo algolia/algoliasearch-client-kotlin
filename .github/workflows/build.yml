@@ -1,0 +1,66 @@
+name: Build
+
+on:
+    push:
+        branches: [ master ]
+    pull_request:
+        branches: [ develop ]
+
+env:
+    GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dkotlin.incremental=false"
+
+concurrency:
+    group: ${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    lint:
+        name: Lint
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v2
+            -   uses: actions/setup-java@v2
+                with:
+                    distribution: temurin
+                    java-version: 11
+
+            -   name: Setup Gradle
+                uses: gradle/gradle-build-action@v2
+                with:
+                    gradle-version: wrapper
+            -   name: Run lint
+                run: ./gradlew spotlessCheck
+
+    integration:
+        name: Integration tests
+        needs: lint
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v2
+
+            -   name: Configure JDK
+                uses: actions/setup-java@v2
+                with:
+                    distribution: temurin
+                    java-version: 11
+
+            -   name: Setup Gradle
+                uses: gradle/gradle-build-action@v2
+                with:
+                    gradle-version: wrapper
+
+            -   name: Run tests
+                run: ./gradlew jvmTest
+                env:
+                    ALGOLIA_APPLICATION_ID_1: ${{ secrets.ALGOLIA_APPLICATION_ID_1 }}
+                    ALGOLIA_ADMIN_KEY_1: ${{ secrets.ALGOLIA_ADMIN_KEY_1 }}
+                    ALGOLIA_SEARCH_KEY_1: ${{ secrets.ALGOLIA_SEARCH_KEY_1 }}
+                    ALGOLIA_APPLICATION_ID_2: ${{ secrets.ALGOLIA_APPLICATION_ID_2 }}
+                    ALGOLIA_ADMIN_KEY_2: ${{ secrets.ALGOLIA_ADMIN_KEY_2 }}
+                    ALGOLIA_ADMIN_ID_MCM: ${{ secrets.ALGOLIA_ADMIN_ID_MCM }}
+                    ALGOLIA_ADMIN_KEY_MCM: ${{ secrets.ALGOLIA_ADMIN_KEY_MCM }}
+                    ALGOLIA_PLACES_APP_ID: ${{ secrets.ALGOLIA_PLACES_APP_ID }}
+                    ALGOLIA_PLACES_KEY: ${{ secrets.ALGOLIA_PLACES_KEY }}
+                    ALGOLIA_ANSWERS_APP_ID: ${{ secrets.ALGOLIA_ANSWERS_APP_ID }}
+                    ALGOLIA_ANSWERS_KEY: ${{ secrets.ALGOLIA_ANSWERS_KEY }}

@@ -10,34 +10,53 @@ import com.algolia.search.serialize.Key_HighlightResult
 import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.jsonObjectOrNull
-import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
+import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonObject
 
 @Serializable
 public data class ResponseSearchRules(
+
     /**
      * A list of [Hit].
      */
     @SerialName(KeyHits) val hits: List<Hit>,
+
+    /**
+     *  Number of hits or null.
+     */
+    @SerialName(KeyNbHits) val nbHitsOrNull: Int? = null,
+
+    /**
+     * Returned page number or null.
+     */
+    @SerialName(KeyPage) val pageOrNull: Int? = null,
+
+    /**
+     * Total number of pages or null.
+     */
+    @SerialName(KeyNbPages) val nbPagesOrNull: Int? = null
+) {
+
     /**
      *  Number of hits.
      */
-    @SerialName(KeyNbHits) val nbHits: Int,
+    val nbHits: Int get() = requireNotNull(nbHitsOrNull)
+
     /**
      * Returned page number.
      */
-    @SerialName(KeyPage) val page: Int,
+    val page: Int get() = requireNotNull(pageOrNull)
+
     /**
      * Total number of pages.
      */
-    @SerialName(KeyNbPages) val nbPages: Int
-) {
+    val nbPages: Int get() = requireNotNull(nbPagesOrNull)
 
     @Serializable(Hit.Companion::class)
     public data class Hit(
@@ -48,16 +67,19 @@ public data class ResponseSearchRules(
         public val highlightResult: JsonObject
             get() = highlightResultOrNull!!
 
-        @OptIn(ExperimentalSerializationApi::class)
-        @Serializer(Hit::class)
-        public companion object : DeserializationStrategy<Hit> {
+        public companion object : KSerializer<Hit> {
+
+            override val descriptor: SerialDescriptor = Rule.serializer().descriptor
 
             override fun deserialize(decoder: Decoder): Hit {
                 val json = decoder.asJsonInput().jsonObject
                 val rule = JsonNonStrict.decodeFromJsonElement(Rule.serializer(), json)
                 val highlightResult = json[Key_HighlightResult]?.jsonObjectOrNull
-
                 return Hit(rule, highlightResult)
+            }
+
+            override fun serialize(encoder: Encoder, value: Hit) {
+                throw UnsupportedOperationException("ResponseSearchRules.Hit serialization is not an expected operation")
             }
         }
     }

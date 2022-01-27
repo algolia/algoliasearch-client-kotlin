@@ -68,7 +68,7 @@ internal class DocSearch {
 
     @Test
     fun snippet3() = runBlocking {
-        val response = client.customRequest<JsonElement>(
+        client.customRequest<JsonElement>(
             method = HttpMethod.Post,
             callType = CallType.Read,
             path = "1/indexes/movies/query",

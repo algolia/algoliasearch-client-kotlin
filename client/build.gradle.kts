@@ -1,5 +1,4 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     kotlin("multiplatform")
@@ -31,7 +30,6 @@ kotlin {
             }
         }
         val commonMain by getting {
-            kotlin.srcDirs("$buildDir/generated/sources/templates/kotlin/main")
             dependencies {
                 api(libs.ktor.client.core)
                 api(libs.ktor.client.json)
@@ -60,22 +58,16 @@ kotlin {
 }
 
 tasks {
-
-    val copyTemplates by creating(type = Copy::class) {
+    val copyTemplates by registering(type = Copy::class) {
         from("src/commonMain/templates")
-        into("$buildDir/generated/sources/templates/kotlin/main")
+        val outputDir = "$buildDir/generated/sources/templates/kotlin/main"
+        into(outputDir)
         val version = project.extensions.extraProperties["VERSION_NAME"] as String // require clean build
         expand("projectVersion" to version)
         filteringCharset = "UTF-8"
     }
 
-    withType<KotlinCompile> {
-        dependsOn(copyTemplates)
-    }
-
-    withType<Test> {
-        maxParallelForks = Runtime.getRuntime().availableProcessors().minus(1).coerceAtLeast(1)
-    }
+    kotlin.sourceSets.commonMain.get().kotlin.srcDir(copyTemplates)
 }
 
 configure<SpotlessExtension> {
