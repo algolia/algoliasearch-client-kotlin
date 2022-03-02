@@ -11,6 +11,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.filter.FilterGroupsConverter
+import com.algolia.search.model.internal.request.RequestCursor
 import com.algolia.search.model.internal.request.RequestParams
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.response.ResponseHitWithPosition
@@ -70,11 +71,10 @@ internal class EndpointSearchImpl(
     }
 
     override suspend fun browse(cursor: Cursor, requestOptions: RequestOptions?): ResponseSearch {
-        val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyCursor, cursor)
-        }
+        val params = RequestCursor(cursor.toString())
+        val body = JsonNoDefaults.encodeToString(RequestCursor.serializer(), params)
 
-        return transport.request(HttpMethod.Get, CallType.Read, indexName.toPath("/browse"), options)
+        return transport.request(HttpMethod.Post, CallType.Read, indexName.toPath("/browse"), requestOptions, body)
     }
 
     override suspend fun searchForFacets(
