@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class RequestCursor(
-    @SerialName(KeyCursor) val params: String? = null
+    @SerialName(KeyCursor) val cursor: String? = null
 )
