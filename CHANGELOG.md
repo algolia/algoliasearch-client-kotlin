@@ -1,3 +1,9 @@
+# 1.12.2
+
+### Fix
+- use `POST` for subsequent browse (#321)
+- default value for `FacetOrdering.values` (#323)
+
 # 1.12.1
 
 ### Changed
