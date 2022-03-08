@@ -15,5 +15,5 @@ public data class FacetOrdering(
     /**
      * The ordering of facet values, within an individual list.
      */
-    @SerialName(KeyValues) public val values: Map<Attribute, FacetValuesOrder>
+    @SerialName(KeyValues) public val values: Map<Attribute, FacetValuesOrder> = emptyMap()
 )
