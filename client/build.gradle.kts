@@ -24,15 +24,7 @@ kotlin {
     }
 
     js(IR) {
-        nodejs {}
         browser {}
-        compilations.all {
-            kotlinOptions {
-                moduleKind = "umd"
-                sourceMap = true
-                sourceMapEmbedSources = null
-            }
-        }
     }
 
     sourceSets {
