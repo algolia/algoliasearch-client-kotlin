@@ -1,7 +1,6 @@
 package com.algolia.search.transport.internal
 
 import com.algolia.search.configuration.CallType
-import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.RetryableHost
@@ -23,6 +22,7 @@ import io.ktor.network.sockets.ConnectTimeoutException
 import io.ktor.network.sockets.SocketTimeoutException
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.utils.io.errors.IOException
+import kotlin.math.floor
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -125,10 +125,12 @@ internal class Transport(
 
     private fun HttpRequestBuilder.compress(payload: String?) {
         if (payload != null) {
-            body = when (compression) {
-                Compression.Gzip -> Gzip(payload)
-                Compression.None -> payload
-            }
+            // TODO: Disable compression for now
+            //body = when (compression) {
+            //    Compression.Gzip -> Gzip(payload)
+            //    Compression.None -> payload
+            //}
+            body = payload
         }
     }
 

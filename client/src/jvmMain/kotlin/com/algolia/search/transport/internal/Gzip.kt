@@ -8,7 +8,7 @@ import kotlinx.coroutines.runBlocking
 internal actual object Gzip : (String) -> ByteArray {
 
     @Suppress("EXPERIMENTAL_API_USAGE")
-    override fun invoke(input: String): ByteArray {
+    actual override fun invoke(input: String): ByteArray {
         return runBlocking {
             GZip.run {
                 encode(ByteReadChannel(input)).toByteArray()

@@ -23,6 +23,18 @@ kotlin {
         }
     }
 
+    js(IR) {
+        nodejs {}
+        browser {}
+        compilations.all {
+            kotlinOptions {
+                moduleKind = "umd"
+                sourceMap = true
+                sourceMapEmbedSources = null
+            }
+        }
+    }
+
     sourceSets {
         all {
             languageSettings.apply {
@@ -52,6 +64,12 @@ kotlin {
                 api(libs.ktor.client.apache)
                 api(libs.ktor.client.okhttp)
                 api(libs.ktor.client.android)
+            }
+        }
+
+        val jsMain by getting {
+            dependencies {
+
             }
         }
     }

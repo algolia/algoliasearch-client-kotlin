@@ -1,9 +1,11 @@
 package com.algolia.search.model.filter
 
+import com.algolia.search.model.filter.internal.Converter
+
 /**
  * Converts a [List] of [FilterGroup] to a type [O].
  */
-public sealed class FilterGroupsConverter<I, O> : (I) -> O {
+public sealed class FilterGroupsConverter<I, O> : Converter<I, O> {
 
     /**
      * Converts a [List] of [FilterGroup] to its SQL-like [String] representation.
@@ -11,9 +13,9 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
      */
     public object SQL : FilterGroupsConverter<Set<FilterGroup<*>>, String?>() {
 
-        override fun invoke(groups: Set<FilterGroup<*>>): String? {
-            return if (groups.isNotEmpty()) {
-                groups.filterNot { it.isEmpty() }.joinToString(separator = " AND ") { group ->
+        override fun invoke(input: Set<FilterGroup<*>>): String? {
+            return if (input.isNotEmpty()) {
+                input.filterNot { it.isEmpty() }.joinToString(separator = " AND ") { group ->
                     val separator = when (group) {
                         is FilterGroup.And -> " AND "
                         is FilterGroup.Or -> " OR "
@@ -28,8 +30,8 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
          */
         public object Unquoted : FilterGroupsConverter<Set<FilterGroup<*>>, String?>() {
 
-            override fun invoke(groups: Set<FilterGroup<*>>): String? {
-                return SQL(groups)?.replace("\"", "")
+            override fun invoke(input: Set<FilterGroup<*>>): String? {
+                return SQL(input)?.replace("\"", "")
             }
         }
     }
@@ -39,8 +41,8 @@ public sealed class FilterGroupsConverter<I, O> : (I) -> O {
      */
     public sealed class Legacy<T : Filter> : FilterGroupsConverter<Set<FilterGroup<T>>, List<List<String>>>() {
 
-        override fun invoke(groups: Set<FilterGroup<T>>): List<List<String>> {
-            return toLegacy(groups, escape = true)
+        override fun invoke(input: Set<FilterGroup<T>>): List<List<String>> {
+            return toLegacy(input, escape = true)
         }
 
         /**
