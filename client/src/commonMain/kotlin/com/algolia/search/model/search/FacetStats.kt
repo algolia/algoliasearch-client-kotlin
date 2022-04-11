@@ -26,9 +26,9 @@ public data class FacetStats(
     /**
      * The average facet value in the result set.
      */
-    @SerialName(KeyAvg) val average: Float,
+    @SerialName(KeyAvg) val average: Float? = null,
     /**
      * The sum of all values in the result set.
      */
-    @SerialName(KeySum) val sum: Float
+    @SerialName(KeySum) val sum: Float? = null
 )
