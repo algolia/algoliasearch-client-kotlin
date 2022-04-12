@@ -6,6 +6,8 @@ import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.exception.UnreachableHostsException
+import com.algolia.search.exception.internal.asApiException
+import com.algolia.search.exception.internal.asClientException
 import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import io.ktor.client.call.HttpClientCall
@@ -23,7 +25,6 @@ import io.ktor.util.reflect.TypeInfo
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlin.math.floor
 
 internal class Transport(
     configuration: Configuration,
@@ -87,11 +88,7 @@ internal class Transport(
     }
 
     private suspend fun genericRequest(
-        httpMethod: HttpMethod,
-        callType: CallType,
-        path: String,
-        requestOptions: RequestOptions?,
-        body: String? = null
+        httpMethod: HttpMethod, callType: CallType, path: String, requestOptions: RequestOptions?, body: String? = null
     ): HttpResponse {
         return execute(httpMethod, callType, path, requestOptions, body) {
             httpClient.request(it)
@@ -117,21 +114,29 @@ internal class Transport(
                 return block(requestBuilder).apply {
                     mutex.withLock { host.reset() }
                 }
-            } catch (exception: Exception) {
-                errors += exception
-                when (exception) {
-                    is HttpRequestTimeoutException, is SocketTimeoutException, is ConnectTimeoutException -> mutex.withLock { host.hasTimedOut() }
-                    is IOException -> mutex.withLock { host.hasFailed() }
-                    is ResponseException -> {
-                        val value = exception.response.status.value
-                        val isRetryable = floor(value / 100f) != 4f
-                        if (isRetryable) mutex.withLock { host.hasFailed() } else throw exception
-                    }
-                    else -> throw exception
-                }
+            } catch (exception: Throwable) {
+                launderException(exception, host)
+                errors += exception.asClientException()
             }
         }
         throw UnreachableHostsException(errors)
+    }
+
+    /**
+     * Handle APA request exceptions.
+     */
+    private suspend fun launderException(exception: Throwable, host: RetryableHost) {
+        when (exception) {
+            is HttpRequestTimeoutException, is SocketTimeoutException, is ConnectTimeoutException -> mutex.withLock { host.hasTimedOut() }
+            is IOException -> mutex.withLock { host.hasFailed() }
+            is ResponseException -> {
+                when (exception.response.status.value) {
+                    in (400 until 500) -> throw exception.asApiException()
+                    else -> mutex.withLock { host.hasFailed() }
+                }
+            }
+            else -> throw exception.asClientException()
+        }
     }
 
     /**
