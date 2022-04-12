@@ -3,10 +3,10 @@ package documentation.methods.synonym
 import com.algolia.search.exception.AlgoliaApiException
 import documentation.index
 import documentation.indexName
-import kotlin.test.Ignore
-import kotlin.test.Test
 import runBlocking
 import shouldFailWith
+import kotlin.test.Ignore
+import kotlin.test.Test
 
 @Ignore
 internal class DocCopySynonyms {

@@ -10,13 +10,13 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import io.ktor.http.HttpStatusCode
-import kotlin.test.Test
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
 import runBlocking
 import shouldEqual
 import shouldFailWith
 import shouldNotBeNull
+import kotlin.test.Test
 
 internal class TestSuiteRules {
 

@@ -22,7 +22,6 @@ public class AlgoliaClientException(
     cause: Throwable? = null
 ) : AlgoliaRuntimeException(message, cause)
 
-
 /**
  * Exception thrown in case of API failure.
  *

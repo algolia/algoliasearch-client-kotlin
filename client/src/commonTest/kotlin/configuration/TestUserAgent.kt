@@ -4,15 +4,11 @@ import com.algolia.search.client.ClientSearch
 import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.clientUserAgent
-import com.algolia.search.dsl.requestOptions
-import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.internal.BuildConfig
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import io.ktor.client.engine.mock.MockEngine
-import io.ktor.client.engine.mock.respondBadRequest
 import io.ktor.client.engine.mock.respondOk
-import io.ktor.client.features.ResponseException
 import io.ktor.client.features.UserAgent
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
@@ -20,7 +16,6 @@ import io.ktor.client.statement.HttpResponse
 import runBlocking
 import shouldBeTrue
 import shouldEqual
-import shouldFailWith
 import kotlin.test.Test
 
 internal class TestUserAgent {

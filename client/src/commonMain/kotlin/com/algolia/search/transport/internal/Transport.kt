@@ -88,7 +88,11 @@ internal class Transport(
     }
 
     private suspend fun genericRequest(
-        httpMethod: HttpMethod, callType: CallType, path: String, requestOptions: RequestOptions?, body: String? = null
+        httpMethod: HttpMethod,
+        callType: CallType,
+        path: String,
+        requestOptions: RequestOptions?,
+        body: String? = null
     ): HttpResponse {
         return execute(httpMethod, callType, path, requestOptions, body) {
             httpClient.request(it)
