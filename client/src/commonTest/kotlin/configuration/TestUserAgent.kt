@@ -5,6 +5,7 @@ import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.clientUserAgent
 import com.algolia.search.dsl.requestOptions
+import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.internal.BuildConfig
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
@@ -54,28 +55,6 @@ internal class TestUserAgent {
 
             headers.contains(userAgentKey).shouldBeTrue()
             headers[userAgentKey] shouldEqual clientUserAgent(BuildConfig.version)
-        }
-    }
-
-    @Test
-    fun overridingUserAgentInRequestOptionsShouldNotBeIgnored() {
-        runBlocking {
-            val expected = "My User Agent"
-            val configuration = ConfigurationSearch(
-                applicationID = applicationID,
-                engine = MockEngine {
-                    respondBadRequest()
-                },
-                apiKey = apiKey
-            )
-            val client = ClientSearch(configuration)
-            val requestOptions = requestOptions { header(userAgentKey, expected) }
-            val request = shouldFailWith<ResponseException> {
-                client.listIndices(requestOptions)
-            }
-            val headers = request.response.call.request.headers
-
-            headers.get(userAgentKey) shouldEqual expected
         }
     }
 }

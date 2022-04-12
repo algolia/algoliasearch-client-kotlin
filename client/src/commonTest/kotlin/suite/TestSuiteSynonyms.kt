@@ -1,14 +1,15 @@
 package suite
 
 import clientAdmin1
+import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.model.synonym.SynonymType
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
+import kotlin.test.Test
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
 import runBlocking
@@ -16,7 +17,6 @@ import shouldBeTrue
 import shouldContain
 import shouldEqual
 import shouldFailWith
-import kotlin.test.Test
 
 internal class TestSuiteSynonyms {
 
@@ -67,10 +67,10 @@ internal class TestSuiteSynonyms {
                 }
                 deleteSynonym(gba).wait() shouldEqual TaskStatus.Published
                 (
-                    shouldFailWith<ResponseException> {
+                    shouldFailWith<AlgoliaApiException> {
                         getSynonym(gba)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).httpErrorCode shouldEqual HttpStatusCode.NotFound.value
 
                 clearSynonyms().wait() shouldEqual TaskStatus.Published
                 searchSynonyms(SynonymQuery(page = 0, hitsPerPage = 10)).nbHits shouldEqual 0

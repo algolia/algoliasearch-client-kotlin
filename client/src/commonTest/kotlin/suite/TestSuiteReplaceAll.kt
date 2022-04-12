@@ -1,6 +1,7 @@
 package suite
 
 import clientAdmin1
+import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.synonym.Synonym
@@ -54,22 +55,22 @@ class TestSuiteReplaceAll {
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
                 (
-                    shouldFailWith<ResponseException> {
+                    shouldFailWith<AlgoliaApiException> {
                         getObject(objectIDOne)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).httpErrorCode shouldEqual HttpStatusCode.NotFound.value
 
                 (
-                    shouldFailWith<ResponseException> {
+                    shouldFailWith<AlgoliaApiException> {
                         getSynonym(objectIDOne)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).httpErrorCode shouldEqual HttpStatusCode.NotFound.value
 
                 (
-                    shouldFailWith<ResponseException> {
+                    shouldFailWith<AlgoliaApiException> {
                         getRule(objectIDOne)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).httpErrorCode shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }
