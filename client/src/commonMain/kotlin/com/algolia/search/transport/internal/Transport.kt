@@ -36,6 +36,60 @@ internal class Transport(
 
     internal val credentials get() = credentialsOrNull!!
 
+    /**
+     * Runs an HTTP request (with retry strategy) and get a result as [T].
+     *
+     * @param httpMethod http method (verb)
+     * @param callType indicate whether the HTTP call performed is of type Read or Write
+     * @param path request path
+     * @param requestOptions additional request configuration
+     * @param body request body
+     */
+    internal suspend inline fun <reified T> request(
+        httpMethod: HttpMethod,
+        callType: CallType,
+        path: String,
+        requestOptions: RequestOptions?,
+        body: String? = null,
+    ): T {
+        return execute(httpMethod, callType, path, requestOptions, body) {
+            httpClient.request(it)
+        }
+    }
+
+    /**
+     * Execute HTTP request (with retry strategy) and get a result as [T].
+     */
+    private suspend inline fun <T> execute(
+        httpMethod: HttpMethod,
+        callType: CallType,
+        path: String,
+        requestOptions: RequestOptions?,
+        body: String? = null,
+        block: (HttpRequestBuilder) -> T
+    ): T {
+        val hosts = callableHosts(callType)
+        val errors by lazy(LazyThreadSafetyMode.NONE) { mutableListOf<Throwable>() }
+        val requestBuilder = httpRequestBuilder(httpMethod, path, requestOptions, body)
+
+        for (host in hosts) {
+            requestBuilder.url.host = host.url
+            try {
+                setTimeout(requestBuilder, requestOptions, callType, host)
+                return block(requestBuilder).apply {
+                    mutex.withLock { host.reset() }
+                }
+            } catch (exception: Throwable) {
+                host.handle(exception)
+                errors += exception.asClientException()
+            }
+        }
+        throw UnreachableHostsException(errors)
+    }
+
+    /**
+     * Get list of [RetryableHost] for a given [CallType].
+     */
     suspend fun callableHosts(callType: CallType): List<RetryableHost> {
         return mutex.withLock {
             hosts.expireHostsOlderThan(hostStatusExpirationDelayMS)
@@ -47,6 +101,9 @@ internal class Transport(
         }
     }
 
+    /**
+     * Get a [HttpRequestBuilder] with given parameters.
+     */
     private fun httpRequestBuilder(
         httpMethod: HttpMethod,
         path: String,
@@ -75,68 +132,17 @@ internal class Transport(
         }
     }
 
-    internal suspend inline fun <reified T> request(
-        httpMethod: HttpMethod,
-        callType: CallType,
-        path: String,
-        requestOptions: RequestOptions?,
-        body: String? = null,
-    ): T {
-        return execute(httpMethod, callType, path, requestOptions, body) {
-            httpClient.request(it)
-        }
-    }
-
-    private suspend fun genericRequest(
-        httpMethod: HttpMethod,
-        callType: CallType,
-        path: String,
-        requestOptions: RequestOptions?,
-        body: String? = null
-    ): HttpResponse {
-        return execute(httpMethod, callType, path, requestOptions, body) {
-            httpClient.request(it)
-        }
-    }
-
-    private suspend inline fun <T> execute(
-        httpMethod: HttpMethod,
-        callType: CallType,
-        path: String,
-        requestOptions: RequestOptions?,
-        body: String? = null,
-        block: (HttpRequestBuilder) -> T
-    ): T {
-        val hosts = callableHosts(callType)
-        val errors by lazy(LazyThreadSafetyMode.NONE) { mutableListOf<Throwable>() }
-        val requestBuilder = httpRequestBuilder(httpMethod, path, requestOptions, body)
-
-        for (host in hosts) {
-            requestBuilder.url.host = host.url
-            try {
-                setTimeout(requestBuilder, requestOptions, callType, host)
-                return block(requestBuilder).apply {
-                    mutex.withLock { host.reset() }
-                }
-            } catch (exception: Throwable) {
-                launderException(exception, host)
-                errors += exception.asClientException()
-            }
-        }
-        throw UnreachableHostsException(errors)
-    }
-
     /**
-     * Handle APA request exceptions.
+     * Handle API request exceptions.
      */
-    private suspend fun launderException(exception: Throwable, host: RetryableHost) {
+    private suspend fun RetryableHost.handle(exception: Throwable) {
         when (exception) {
-            is HttpRequestTimeoutException, is SocketTimeoutException, is ConnectTimeoutException -> mutex.withLock { host.hasTimedOut() }
-            is IOException -> mutex.withLock { host.hasFailed() }
+            is HttpRequestTimeoutException, is SocketTimeoutException, is ConnectTimeoutException -> mutex.withLock { hasTimedOut() }
+            is IOException -> mutex.withLock { hasFailed() }
             is ResponseException -> {
                 when (exception.response.status.value) {
                     in (400 until 500) -> throw exception.asApiException()
-                    else -> mutex.withLock { host.hasFailed() }
+                    else -> mutex.withLock { hasFailed() }
                 }
             }
             else -> throw exception.asClientException()
@@ -169,6 +175,24 @@ internal class Transport(
         return httpResponse.call.receiveAs(responseType)
     }
 
+    /**
+     * Execute HTTP request (with retry strategy) and get a result as [HttpResponse].
+     */
+    private suspend fun genericRequest(
+        httpMethod: HttpMethod,
+        callType: CallType,
+        path: String,
+        requestOptions: RequestOptions?,
+        body: String? = null
+    ): HttpResponse {
+        return execute(httpMethod, callType, path, requestOptions, body) {
+            httpClient.request(it)
+        }
+    }
+
+    /**
+     * Receive Http payload as [T].
+     */
     @Suppress("UNCHECKED_CAST")
     private suspend fun <T> HttpClientCall.receiveAs(type: TypeInfo): T = receive(type) as T
 }
