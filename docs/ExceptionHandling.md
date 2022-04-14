@@ -30,7 +30,7 @@ Other kinds of exceptions can occur. Handle them appropriately.
 ```kotlin
 try {
     val response = index.search()
-} catch (exception: AlgoliaApiException) {
+} catch (exception: AlgoliaRuntimeException) {
     TODO()
 } catch (exception: IOException) {
     TODO()
