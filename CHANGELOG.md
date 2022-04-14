@@ -1,3 +1,13 @@
+# 1.13.0
+
+### Changed
+- **Breaking**: the client throws `AlgoliaRuntimeException` instead of ktor's `ResponseException` ([guide](/docs/ExceptionHandling.md)) (#327)
+- Update Kotlin to 1.6.10
+- Update Ktor 1.6.8
+
+### Fix
+- **Breaking**: facet stats `average` and `sum` as nullable (#325)
+
 # 1.12.2
 
 ### Fix
