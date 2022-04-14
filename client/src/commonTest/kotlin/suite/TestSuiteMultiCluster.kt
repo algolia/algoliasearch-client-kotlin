@@ -6,9 +6,7 @@ import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.helper.toUserID
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multicluster.UserIDQuery
-import io.ktor.client.statement.readBytes
 import io.ktor.http.HttpStatusCode
-import io.ktor.utils.io.core.String
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import runBlocking
