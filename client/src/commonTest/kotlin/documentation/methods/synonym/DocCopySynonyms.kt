@@ -1,8 +1,8 @@
 package documentation.methods.synonym
 
+import com.algolia.search.exception.AlgoliaApiException
 import documentation.index
 import documentation.indexName
-import io.ktor.client.features.ResponseException
 import runBlocking
 import shouldFailWith
 import kotlin.test.Ignore
@@ -18,7 +18,7 @@ internal class DocCopySynonyms {
 
     @Test
     fun snippet1() {
-        shouldFailWith<ResponseException> {
+        shouldFailWith<AlgoliaApiException> {
             runBlocking {
                 index.copySynonyms(indexName)
             }

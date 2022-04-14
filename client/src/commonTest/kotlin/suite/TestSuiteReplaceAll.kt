@@ -1,13 +1,13 @@
 package suite
 
 import clientAdmin1
+import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyObjectID
-import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -54,22 +54,22 @@ class TestSuiteReplaceAll {
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 
                 (
-                    shouldFailWith<ResponseException> {
+                    shouldFailWith<AlgoliaApiException> {
                         getObject(objectIDOne)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).httpErrorCode shouldEqual HttpStatusCode.NotFound.value
 
                 (
-                    shouldFailWith<ResponseException> {
+                    shouldFailWith<AlgoliaApiException> {
                         getSynonym(objectIDOne)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).httpErrorCode shouldEqual HttpStatusCode.NotFound.value
 
                 (
-                    shouldFailWith<ResponseException> {
+                    shouldFailWith<AlgoliaApiException> {
                         getRule(objectIDOne)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).httpErrorCode shouldEqual HttpStatusCode.NotFound.value
             }
         }
     }

@@ -2,13 +2,11 @@ package suite
 
 import DateFormat
 import clientMcm
+import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.helper.toUserID
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multicluster.UserIDQuery
-import io.ktor.client.features.ResponseException
-import io.ktor.client.statement.readBytes
 import io.ktor.http.HttpStatusCode
-import io.ktor.utils.io.core.String
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import runBlocking
@@ -34,8 +32,8 @@ internal class TestSuiteMultiCluster {
             try {
                 clientMcm.getUserID(userID)
                 break
-            } catch (exception: ResponseException) {
-                exception.response.status shouldEqual HttpStatusCode.NotFound
+            } catch (exception: AlgoliaApiException) {
+                exception.httpErrorCode shouldEqual HttpStatusCode.NotFound.value
             }
             delay(1000L)
         }
@@ -45,16 +43,15 @@ internal class TestSuiteMultiCluster {
         loop@ while (coroutineContext.isActive) {
             try {
                 clientMcm.removeUserID(userID)
-            } catch (exception: ResponseException) {
-                val response = exception.response
-                when (response.status) {
-                    HttpStatusCode.NotFound -> break@loop
-                    HttpStatusCode.BadRequest ->
-                        if (String(response.readBytes()).contains("is already migrating")) {
+            } catch (exception: AlgoliaApiException) {
+                when (exception.httpErrorCode) {
+                    HttpStatusCode.NotFound.value -> break@loop
+                    HttpStatusCode.BadRequest.value ->
+                        if (exception.message?.contains("is already migrating") == true) {
                             break@loop
                         } else {
                             // Loop until we don't have Error 400: "Another mapping operation is already running for this userID"
-                            println(String(response.readBytes()))
+                            println(exception.message)
                         }
                 }
             }

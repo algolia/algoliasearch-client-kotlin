@@ -1,6 +1,7 @@
 package suite
 
 import clientAdmin1
+import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
@@ -8,7 +9,6 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import io.ktor.client.features.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
@@ -59,10 +59,10 @@ internal class TestSuiteRules {
 
                 search(Query(ruleContexts = listOf("summer"))).nbHits shouldEqual 1
                 (
-                    shouldFailWith<ResponseException> {
+                    shouldFailWith<AlgoliaApiException> {
                         getRule(rule.objectID)
                     }
-                    ).response.status.value shouldEqual HttpStatusCode.NotFound.value
+                    ).httpErrorCode shouldEqual HttpStatusCode.NotFound.value
                 clearRules().wait() shouldEqual TaskStatus.Published
                 searchRules().nbHits shouldEqual 0
             }
