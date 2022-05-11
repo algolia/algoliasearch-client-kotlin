@@ -38,6 +38,10 @@ internal infix fun <T> Collection<T>?.shouldNotContain(element: T) {
     (this?.contains(element) ?: false).shouldBeFalse()
 }
 
+internal infix fun <T> Collection<T>?.shouldContainAll(collection: Collection<T>) {
+    (this?.containsAll(collection) ?: false).shouldBeTrue()
+}
+
 internal fun <T> Collection<T>.shouldBeEmpty() {
     this.isEmpty().shouldBeTrue()
 }

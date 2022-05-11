@@ -4,6 +4,7 @@ package com.algolia.search.endpoint.internal
 
 import com.algolia.search.configuration.CallType
 import com.algolia.search.endpoint.EndpointIndex
+import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.index.Scope
 import com.algolia.search.model.internal.request.RequestCopyOrMove
@@ -15,7 +16,6 @@ import com.algolia.search.serialize.KeyMove
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
-import io.ktor.client.plugins.ResponseException
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 
@@ -67,8 +67,8 @@ internal class EndpointIndexImpl(
     override suspend fun exists(): Boolean {
         try {
             EndpointSearch(transport, indexName).search(Query(responseFields = emptyList()))
-        } catch (exception: ResponseException) {
-            if (exception.response.status == HttpStatusCode.NotFound) return false
+        } catch (exception: AlgoliaApiException) {
+            if (exception.httpErrorCode == HttpStatusCode.NotFound.value) return false
         }
         return true
     }

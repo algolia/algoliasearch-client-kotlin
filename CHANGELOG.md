@@ -1,3 +1,29 @@
+# 1.13.0
+
+### Changed
+- **Breaking**: the client throws `AlgoliaRuntimeException` instead of ktor's `ResponseException` ([guide](/docs/ExceptionHandling.md)) (#327)
+- Update Kotlin to 1.6.10
+- Update Ktor 1.6.8
+
+### Fix
+- **Breaking**: facet stats `average` and `sum` as nullable (#325)
+
+# 1.12.2
+
+### Fix
+- use `POST` for subsequent browse (#321)
+- default value for `FacetOrdering.values` (#323)
+
+# 1.12.1
+
+### Changed
+- Update Kotlin to 1.5.32
+- Update Ktor 1.6.5
+
+### Fix
+- Rules: `Promotion` deserialization (#317)
+- Randomize fallback hosts (#319)
+
 # 1.12.0
 
 ### Added

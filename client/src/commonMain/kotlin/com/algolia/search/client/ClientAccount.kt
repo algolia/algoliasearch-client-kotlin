@@ -1,9 +1,9 @@
 package com.algolia.search.client
 
 import com.algolia.search.client.internal.IndexImpl
+import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.task.Task
-import io.ktor.client.plugins.ResponseException
 import io.ktor.http.HttpStatusCode
 
 /**
@@ -27,8 +27,8 @@ public object ClientAccount {
         var hasThrown404 = false
         try {
             destination.getSettings()
-        } catch (exception: ResponseException) {
-            hasThrown404 = exception.response.status.value == HttpStatusCode.NotFound.value
+        } catch (exception: AlgoliaApiException) {
+            hasThrown404 = exception.httpErrorCode == HttpStatusCode.NotFound.value
             if (!hasThrown404) throw exception
         }
         if (!hasThrown404) {

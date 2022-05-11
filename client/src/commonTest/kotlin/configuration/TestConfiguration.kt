@@ -18,6 +18,7 @@ import com.algolia.search.transport.internal.placesHosts
 import com.algolia.search.transport.internal.searchHosts
 import io.ktor.client.plugins.logging.LogLevel
 import shouldBeNull
+import shouldContainAll
 import shouldEqual
 import kotlin.test.Test
 
@@ -39,7 +40,7 @@ internal class TestConfiguration {
             writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
             readTimeout shouldEqual DEFAULT_READ_TIMEOUT
             logLevel shouldEqual LogLevel.NONE
-            hosts shouldEqual applicationID.searchHosts
+            hosts shouldContainAll applicationID.searchHosts
             defaultHeaders.shouldBeNull()
             engine.shouldBeNull()
             httpClientConfig.shouldBeNull()

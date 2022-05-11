@@ -1,10 +1,39 @@
 package com.algolia.search.exception
 
 /**
- * Exception thrown when an error occurs during the Serialization/Deserialization process.
+ * Algolia runtime exception.
+ *
+ * @param message the detail message
+ * @param cause the cause of the exception
  */
-public sealed class AlgoliaRuntimeException(message: String? = null, cause: Throwable? = null) :
-    RuntimeException(message, cause)
+public sealed class AlgoliaRuntimeException(
+    message: String? = null,
+    cause: Throwable? = null
+) : RuntimeException(message, cause)
+
+/**
+ * Exception thrown when an error occurs during API requests.
+ *
+ * @param message the detail message
+ * @param cause the cause of the exception
+ */
+public class AlgoliaClientException(
+    message: String? = null,
+    cause: Throwable? = null
+) : AlgoliaRuntimeException(message, cause)
+
+/**
+ * Exception thrown in case of API failure.
+ *
+ * @param message the detail message
+ * @param cause the cause of the exception
+ * @param httpErrorCode
+ */
+public class AlgoliaApiException(
+    message: String? = null,
+    cause: Throwable? = null,
+    public val httpErrorCode: Int? = null
+) : AlgoliaRuntimeException(message, cause)
 
 /**
  * Exception thrown when all hosts are unreachable.
@@ -14,7 +43,4 @@ public sealed class AlgoliaRuntimeException(message: String? = null, cause: Thro
  */
 public class UnreachableHostsException(
     public val exceptions: List<Throwable>,
-) : AlgoliaRuntimeException("Unreachable Hosts", exceptions.last()) {
-
-    public constructor(vararg exceptions: Throwable) : this(exceptions.toList())
-}
+) : AlgoliaRuntimeException("Error(s) while processing the retry strategy", exceptions.last())

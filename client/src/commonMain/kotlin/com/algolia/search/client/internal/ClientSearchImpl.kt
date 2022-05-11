@@ -16,6 +16,7 @@ import com.algolia.search.endpoint.internal.EndpointAPIKey
 import com.algolia.search.endpoint.internal.EndpointDictionary
 import com.algolia.search.endpoint.internal.EndpointMulticluster
 import com.algolia.search.endpoint.internal.EndpointMultipleIndex
+import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.LogType
 import com.algolia.search.model.response.ResponseAPIKey
@@ -36,7 +37,6 @@ import com.algolia.search.serialize.RouteTask
 import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
-import io.ktor.client.plugins.ResponseException
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.TimeoutCancellationException
@@ -104,8 +104,8 @@ internal class ClientSearchImpl internal constructor(
             while (true) {
                 try {
                     return getAPIKey(apiKey)
-                } catch (exception: ResponseException) {
-                    if (exception.response.status.value != HttpStatusCode.NotFound.value) throw exception
+                } catch (exception: AlgoliaApiException) {
+                    if (exception.httpErrorCode != HttpStatusCode.NotFound.value) throw exception
                 }
                 delay(1000L)
             }
@@ -126,8 +126,8 @@ internal class ClientSearchImpl internal constructor(
             while (true) {
                 try {
                     getAPIKey(apiKey)
-                } catch (exception: ResponseException) {
-                    if (exception.response.status.value == HttpStatusCode.NotFound.value) return true else throw exception
+                } catch (exception: AlgoliaApiException) {
+                    if (exception.httpErrorCode == HttpStatusCode.NotFound.value) return true else throw exception
                 }
                 delay(1000L)
             }

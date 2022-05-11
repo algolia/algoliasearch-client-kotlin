@@ -6,10 +6,17 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.KeyObjectIDs
 import com.algolia.search.serialize.KeyPosition
+import com.algolia.search.serialize.internal.asJsonInput
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.SerialDescriptor
+import kotlinx.serialization.descriptors.buildClassSerialDescriptor
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
+import kotlinx.serialization.json.jsonObject
 
-@Serializable
+@Serializable(Promotion.Companion::class)
 public sealed class Promotion {
 
     /**
@@ -34,6 +41,27 @@ public sealed class Promotion {
         @SerialName(KeyObjectIDs) val objectIDs: List<ObjectID>,
         @SerialName(KeyPosition) override val position: Int
     ) : Promotion()
+
+    public companion object : KSerializer<Promotion> {
+
+        override val descriptor: SerialDescriptor = buildClassSerialDescriptor("promotion")
+
+        override fun deserialize(decoder: Decoder): Promotion {
+            val json = decoder.asJsonInput().jsonObject
+            return when {
+                json.containsKey(KeyObjectID) -> Single.serializer().deserialize(decoder)
+                json.containsKey(KeyObjectIDs) -> Multiple.serializer().deserialize(decoder)
+                else -> throw IllegalStateException("Unable to deserialize 'Promotion' object")
+            }
+        }
+
+        override fun serialize(encoder: Encoder, value: Promotion) {
+            when (value) {
+                is Single -> Single.serializer().serialize(encoder, value)
+                is Multiple -> Multiple.serializer().serialize(encoder, value)
+            }
+        }
+    }
 }
 
 /**
@@ -50,4 +78,5 @@ public fun Promotion(objectID: ObjectID, position: Int): Promotion.Single = Prom
  * @param objectIDs list of unique identifiers of the objects to promote.
  * @param position promoted rank for the objects.
  */
-public fun Promotion(objectIDs: List<ObjectID>, position: Int): Promotion.Multiple = Promotion.Multiple(objectIDs, position)
+public fun Promotion(objectIDs: List<ObjectID>, position: Int): Promotion.Multiple =
+    Promotion.Multiple(objectIDs, position)

@@ -6,6 +6,8 @@ import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.Credentials
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.exception.UnreachableHostsException
+import com.algolia.search.exception.internal.asApiException
+import com.algolia.search.exception.internal.asClientException
 import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import io.ktor.client.call.HttpClientCall
@@ -24,7 +26,6 @@ import io.ktor.http.URLProtocol
 import io.ktor.http.path
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.utils.io.errors.IOException
-import kotlin.math.floor
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -38,47 +39,15 @@ internal class Transport(
 
     internal val credentials get() = credentialsOrNull!!
 
-    suspend fun callableHosts(callType: CallType): List<RetryableHost> {
-        return mutex.withLock {
-            hosts.expireHostsOlderThan(hostStatusExpirationDelayMS)
-            val hostsCallType = hosts.filterCallType(callType)
-            val hostsCallTypeAreUp = hostsCallType.filter { it.isUp }
-            hostsCallTypeAreUp.ifEmpty {
-                hostsCallType.onEach { it.reset() }
-            }
-        }
-    }
-
-    private fun httpRequestBuilder(
-        httpMethod: HttpMethod,
-        path: String,
-        requestOptions: RequestOptions?,
-        body: String?,
-    ): HttpRequestBuilder {
-        return HttpRequestBuilder().apply {
-            url {
-                path(path)
-                protocol = URLProtocol.HTTPS
-            }
-            method = httpMethod
-            compress(body)
-            credentialsOrNull?.let {
-                setApplicationId(it.applicationID)
-                setApiKey(it.apiKey)
-            }
-            setRequestOptions(requestOptions)
-        }
-    }
-
-    private fun HttpRequestBuilder.compress(payload: String?) {
-        if (payload == null) return
-        val body: Any = when (compression) {
-            Compression.Gzip -> Gzip(payload)
-            Compression.None -> payload
-        }
-        setBody(body)
-    }
-
+    /**
+     * Runs an HTTP request (with retry strategy) and get a result as [T].
+     *
+     * @param httpMethod http method (verb)
+     * @param callType indicate whether the HTTP call performed is of type Read or Write
+     * @param path request path
+     * @param requestOptions additional request configuration
+     * @param body request body
+     */
     internal suspend inline fun <reified T> request(
         httpMethod: HttpMethod,
         callType: CallType,
@@ -91,18 +60,9 @@ internal class Transport(
         }
     }
 
-    private suspend fun genericRequest(
-        httpMethod: HttpMethod,
-        callType: CallType,
-        path: String,
-        requestOptions: RequestOptions?,
-        body: String? = null
-    ): HttpResponse {
-        return execute(httpMethod, callType, path, requestOptions, body) {
-            httpClient.request(it)
-        }
-    }
-
+    /**
+     * Execute HTTP request (with retry strategy) and get a result as [T].
+     */
     private suspend inline fun <T> execute(
         httpMethod: HttpMethod,
         callType: CallType,
@@ -122,21 +82,74 @@ internal class Transport(
                 return block(requestBuilder).apply {
                     mutex.withLock { host.reset() }
                 }
-            } catch (exception: Exception) {
-                errors += exception
-                when (exception) {
-                    is HttpRequestTimeoutException, is SocketTimeoutException, is ConnectTimeoutException -> mutex.withLock { host.hasTimedOut() }
-                    is IOException -> mutex.withLock { host.hasFailed() }
-                    is ResponseException -> {
-                        val value = exception.response.status.value
-                        val isRetryable = floor(value / 100f) != 4f
-                        if (isRetryable) mutex.withLock { host.hasFailed() } else throw exception
-                    }
-                    else -> throw exception
-                }
+            } catch (exception: Throwable) {
+                host.handle(exception)
+                errors += exception.asClientException()
             }
         }
         throw UnreachableHostsException(errors)
+    }
+
+    /**
+     * Get list of [RetryableHost] for a given [CallType].
+     */
+    suspend fun callableHosts(callType: CallType): List<RetryableHost> {
+        return mutex.withLock {
+            hosts.expireHostsOlderThan(hostStatusExpirationDelayMS)
+            val hostsCallType = hosts.filterCallType(callType)
+            val hostsCallTypeAreUp = hostsCallType.filter { it.isUp }
+            hostsCallTypeAreUp.ifEmpty {
+                hostsCallType.onEach { it.reset() }
+            }
+        }
+    }
+
+    /**
+     * Get a [HttpRequestBuilder] with given parameters.
+     */
+    private fun httpRequestBuilder(
+        httpMethod: HttpMethod,
+        path: String,
+        requestOptions: RequestOptions?,
+        body: String?,
+    ): HttpRequestBuilder {
+        return HttpRequestBuilder().apply {
+            url.path(path)
+            url.protocol = URLProtocol.HTTPS
+            method = httpMethod
+            compress(body)
+            credentialsOrNull?.let {
+                setApplicationId(it.applicationID)
+                setApiKey(it.apiKey)
+            }
+            setRequestOptions(requestOptions)
+        }
+    }
+
+    private fun HttpRequestBuilder.compress(payload: String?) {
+        if (payload == null) return
+        val body: Any = when (compression) {
+            Compression.Gzip -> Gzip(payload)
+            Compression.None -> payload
+        }
+        setBody(body)
+    }
+
+    /**
+     * Handle API request exceptions.
+     */
+    private suspend fun RetryableHost.handle(exception: Throwable) {
+        when (exception) {
+            is HttpRequestTimeoutException, is SocketTimeoutException, is ConnectTimeoutException -> mutex.withLock { hasTimedOut() }
+            is IOException -> mutex.withLock { hasFailed() }
+            is ResponseException -> {
+                when (exception.response.status.value) {
+                    in (400 until 500) -> throw exception.asApiException()
+                    else -> mutex.withLock { hasFailed() }
+                }
+            }
+            else -> throw exception.asClientException()
+        }
     }
 
     /**
@@ -165,6 +178,24 @@ internal class Transport(
         return httpResponse.call.bodyAs(responseType)
     }
 
+    /**
+     * Execute HTTP request (with retry strategy) and get a result as [HttpResponse].
+     */
+    private suspend fun genericRequest(
+        httpMethod: HttpMethod,
+        callType: CallType,
+        path: String,
+        requestOptions: RequestOptions?,
+        body: String? = null
+    ): HttpResponse {
+        return execute(httpMethod, callType, path, requestOptions, body) {
+            httpClient.request(it).call.body()
+        }
+    }
+
+    /**
+     * Receive Http payload as [T].
+     */
     @Suppress("UNCHECKED_CAST")
     private suspend fun <T> HttpClientCall.bodyAs(type: TypeInfo): T = body(type) as T
 }

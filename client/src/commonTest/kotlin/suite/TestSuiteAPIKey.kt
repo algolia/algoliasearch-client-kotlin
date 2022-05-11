@@ -1,6 +1,7 @@
 package suite
 
 import clientAdmin1
+import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.apikey.ACL
@@ -9,7 +10,6 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
-import io.ktor.client.plugins.ResponseException
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -61,8 +61,8 @@ internal class TestSuiteAPIKey {
                 while (isActive) {
                     try {
                         if (getAPIKey(key).maxHitsPerQuery == 42) break
-                    } catch (exception: ResponseException) {
-                        exception.response.status.value shouldEqual HttpStatusCode.NotFound
+                    } catch (exception: AlgoliaApiException) {
+                        exception.httpErrorCode shouldEqual HttpStatusCode.NotFound
                     }
                     delay(1000L)
                 }

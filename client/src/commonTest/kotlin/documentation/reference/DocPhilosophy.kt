@@ -6,6 +6,7 @@ import com.algolia.search.dsl.attributesToSnippet
 import com.algolia.search.dsl.filters
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
+import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.Attribute
@@ -19,7 +20,6 @@ import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNonStrict
 import documentation.client
 import documentation.index
-import io.ktor.client.plugins.ResponseException
 import io.ktor.http.HttpStatusCode
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.CoroutineScope
@@ -166,10 +166,10 @@ internal class DocPhilosophy {
         runBlocking {
             try {
                 val response = index.search()
-            } catch (exception: ResponseException) {
-                when (exception.response.status) {
-                    HttpStatusCode.NotFound -> TODO()
-                    HttpStatusCode.BadRequest -> TODO()
+            } catch (exception: AlgoliaApiException) {
+                when (exception.httpErrorCode) {
+                    404 -> TODO()
+                    400 -> TODO()
                 }
             }
         }
@@ -180,7 +180,7 @@ internal class DocPhilosophy {
         runBlocking {
             try {
                 val response = index.search()
-            } catch (exception: ResponseException) {
+            } catch (exception: AlgoliaApiException) {
                 TODO()
             } catch (exception: IOException) {
                 TODO()

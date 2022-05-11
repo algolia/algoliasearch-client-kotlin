@@ -7,6 +7,7 @@ import com.algolia.search.transport.internal.hasFailed
 import com.algolia.search.transport.internal.hasTimedOut
 import com.algolia.search.transport.internal.reset
 import com.algolia.search.transport.internal.searchHosts
+import shouldContainAll
 import shouldEqual
 import kotlin.test.Test
 
@@ -17,7 +18,7 @@ internal class TestRetryableHost {
 
     @Test
     fun searchHosts() {
-        applicationID.searchHosts shouldEqual listOf(
+        applicationID.searchHosts shouldContainAll listOf(
             RetryableHost("$applicationID-dsn.algolia.net", CallType.Read),
             RetryableHost("$applicationID.algolia.net", CallType.Write),
             RetryableHost("$applicationID-1.algolianet.com"),
