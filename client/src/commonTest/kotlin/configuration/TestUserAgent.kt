@@ -9,13 +9,13 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respondOk
-import io.ktor.client.features.UserAgent
+import io.ktor.client.plugins.UserAgent
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
+import kotlin.test.Test
 import runBlocking
 import shouldBeTrue
 import shouldEqual
-import kotlin.test.Test
 
 internal class TestUserAgent {
 
