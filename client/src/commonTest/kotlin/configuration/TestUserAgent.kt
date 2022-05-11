@@ -12,7 +12,6 @@ import io.ktor.client.engine.mock.respondOk
 import io.ktor.client.features.UserAgent
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
-import kotlin.test.Test
 import runBlocking
 import shouldBeTrue
 import shouldEqual

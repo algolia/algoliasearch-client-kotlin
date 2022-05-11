@@ -3,8 +3,8 @@ package util
 import com.algolia.search.helper.internal.sha256
 import io.ktor.util.decodeBase64String
 import io.ktor.util.encodeBase64
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestHashing {
 
