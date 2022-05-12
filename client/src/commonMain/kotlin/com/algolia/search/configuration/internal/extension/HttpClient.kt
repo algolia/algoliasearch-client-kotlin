@@ -15,31 +15,42 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.request.header
-import io.ktor.http.ContentType
-import io.ktor.serialization.kotlinx.KotlinxSerializationConverter
+import io.ktor.serialization.kotlinx.json.json
 
 internal fun Configuration.getHttpClient() = engine?.let {
     HttpClient(it) { configure(this@getHttpClient) }
 } ?: HttpClient { configure(this@getHttpClient) }
 
 internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
+    // Custom configuration
     configuration.httpClientConfig?.invoke(this)
-    install(ContentNegotiation) {
-        register(ContentType.Application.Json, KotlinxSerializationConverter(JsonNonStrict))
-    }
+
+    // Content negotiation and serialization
+    install(ContentNegotiation) { json(JsonNonStrict) }
+
+    // Logging
     installLogging(configuration.logLevel)
+
+    // User agent
     install(UserAgent) {
         agent = clientUserAgent(AlgoliaSearchClient.version)
     }
+
+    // Timeout
     install(HttpTimeout)
-    defaultRequest {
-        configuration.defaultHeaders?.let {
-            it.forEach { (key, value) -> header(key, value) }
-        }
-    }
+
+    // Gzip Compression
     install(ClientCompression) {
         compression = configuration.compression
     }
+
+    // Defaults
+    defaultRequest {
+        configuration.defaultHeaders?.forEach(::header)
+    }
+
+    // Enable default (2XX) validation
+    expectSuccess = true
 }
 
 /**

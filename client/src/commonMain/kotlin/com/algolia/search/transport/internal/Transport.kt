@@ -24,6 +24,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpMethod
 import io.ktor.http.URLProtocol
 import io.ktor.http.path
+import io.ktor.http.vary
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.sync.Mutex
@@ -56,7 +57,9 @@ internal class Transport(
         body: String? = null,
     ): T {
         return execute(httpMethod, callType, path, requestOptions, body) {
-            httpClient.request(it).call.body()
+            val response = httpClient.request(it)
+            response.vary()
+            response.call.body()
         }
     }
 
@@ -177,23 +180,8 @@ internal class Transport(
         body: String?,
         requestOptions: RequestOptions?
     ): T {
-        val httpResponse = genericRequest(method, callType, path, requestOptions, body)
+        val httpResponse = request<HttpResponse>(method, callType, path, requestOptions, body)
         return httpResponse.call.bodyAs(responseType)
-    }
-
-    /**
-     * Execute HTTP request (with retry strategy) and get a result as [HttpResponse].
-     */
-    private suspend fun genericRequest(
-        httpMethod: HttpMethod,
-        callType: CallType,
-        path: String,
-        requestOptions: RequestOptions?,
-        body: String? = null
-    ): HttpResponse {
-        return execute(httpMethod, callType, path, requestOptions, body) {
-            httpClient.request(it).call.body()
-        }
     }
 
     /**
