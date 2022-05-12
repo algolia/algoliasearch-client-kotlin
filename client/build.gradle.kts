@@ -33,9 +33,9 @@ kotlin {
             dependencies {
                 api(libs.ktor.client.core)
                 api(libs.ktor.client.json)
-                api(libs.ktor.client.logging)
-                api(libs.ktor.client.serialization.json)
-                api(libs.ktor.client.content.negotiation)
+                implementation(libs.ktor.client.logging)
+                implementation(libs.ktor.client.serialization.json)
+                implementation(libs.ktor.client.content.negotiation)
             }
         }
         val commonTest by getting {
