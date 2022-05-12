@@ -10,17 +10,17 @@ import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
 import com.algolia.search.internal.BuildConfig
+import com.algolia.search.logging.LogLevel
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.internal.hosts
 import com.algolia.search.transport.internal.insightHosts
 import com.algolia.search.transport.internal.placesHosts
 import com.algolia.search.transport.internal.searchHosts
-import io.ktor.client.plugins.logging.LogLevel
+import kotlin.test.Test
 import shouldBeNull
 import shouldContainAll
 import shouldEqual
-import kotlin.test.Test
 
 internal class TestConfiguration {
 
@@ -39,7 +39,7 @@ internal class TestConfiguration {
         ConfigurationSearch(applicationID, apiKey).apply {
             writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
             readTimeout shouldEqual DEFAULT_READ_TIMEOUT
-            logLevel shouldEqual LogLevel.NONE
+            logLevel shouldEqual LogLevel.None
             hosts shouldContainAll applicationID.searchHosts
             defaultHeaders.shouldBeNull()
             engine.shouldBeNull()
@@ -52,7 +52,7 @@ internal class TestConfiguration {
         ConfigurationAnalytics(applicationID, apiKey, regionAnalytics).apply {
             writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
             readTimeout shouldEqual DEFAULT_READ_TIMEOUT
-            logLevel shouldEqual LogLevel.NONE
+            logLevel shouldEqual LogLevel.None
             hosts shouldEqual regionAnalytics.hosts
             defaultHeaders.shouldBeNull()
             engine.shouldBeNull()
@@ -65,7 +65,7 @@ internal class TestConfiguration {
         ConfigurationInsights(applicationID, apiKey).apply {
             writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
             readTimeout shouldEqual DEFAULT_READ_TIMEOUT
-            logLevel shouldEqual LogLevel.NONE
+            logLevel shouldEqual LogLevel.None
             hosts shouldEqual insightHosts
             defaultHeaders.shouldBeNull()
             engine.shouldBeNull()
@@ -78,7 +78,7 @@ internal class TestConfiguration {
         ConfigurationPlaces().apply {
             writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
             readTimeout shouldEqual DEFAULT_READ_TIMEOUT
-            logLevel shouldEqual LogLevel.NONE
+            logLevel shouldEqual LogLevel.None
             hosts shouldEqual placesHosts
             defaultHeaders.shouldBeNull()
             engine.shouldBeNull()
@@ -91,7 +91,7 @@ internal class TestConfiguration {
         ConfigurationPersonalization(applicationID, apiKey, regionPersonalization).apply {
             writeTimeout shouldEqual DEFAULT_WRITE_TIMEOUT
             readTimeout shouldEqual DEFAULT_READ_TIMEOUT
-            logLevel shouldEqual LogLevel.NONE
+            logLevel shouldEqual LogLevel.None
             hosts shouldEqual regionPersonalization.hosts
             defaultHeaders.shouldBeNull()
             engine.shouldBeNull()
