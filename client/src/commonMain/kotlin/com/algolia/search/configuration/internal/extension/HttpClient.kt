@@ -2,7 +2,7 @@ package com.algolia.search.configuration.internal.extension
 
 import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.Configuration
-import com.algolia.search.configuration.LogLevel
+import com.algolia.search.logging.LogLevel
 import com.algolia.search.configuration.clientUserAgent
 import com.algolia.search.serialize.internal.JsonNonStrict
 import io.ktor.client.HttpClient

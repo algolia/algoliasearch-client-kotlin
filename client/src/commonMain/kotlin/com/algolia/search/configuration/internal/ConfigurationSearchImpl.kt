@@ -3,7 +3,7 @@ package com.algolia.search.configuration.internal
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.ConfigurationSearch
-import com.algolia.search.configuration.LogLevel
+import com.algolia.search.logging.LogLevel
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.configuration.internal.extension.getHttpClient
 import com.algolia.search.model.APIKey

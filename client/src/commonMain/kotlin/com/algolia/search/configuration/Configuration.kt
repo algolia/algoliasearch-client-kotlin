@@ -1,5 +1,6 @@
 package com.algolia.search.configuration
 
+import com.algolia.search.logging.LogLevel
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.util.Closeable
 import io.ktor.client.HttpClient

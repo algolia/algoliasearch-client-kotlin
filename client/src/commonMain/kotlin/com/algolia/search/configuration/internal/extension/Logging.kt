@@ -1,7 +1,7 @@
 package com.algolia.search.configuration.internal.extension
 
-import com.algolia.search.configuration.LogLevel
-import com.algolia.search.configuration.Logger
+import com.algolia.search.logging.LogLevel
+import com.algolia.search.logging.Logger
 import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.EMPTY
 import io.ktor.client.plugins.logging.LogLevel as KLogLevel

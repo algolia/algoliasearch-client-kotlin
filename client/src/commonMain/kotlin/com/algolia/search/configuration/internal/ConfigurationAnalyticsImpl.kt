@@ -2,7 +2,7 @@ package com.algolia.search.configuration.internal
 
 import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.ConfigurationAnalytics
-import com.algolia.search.configuration.LogLevel
+import com.algolia.search.logging.LogLevel
 import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.configuration.internal.extension.getHttpClient
