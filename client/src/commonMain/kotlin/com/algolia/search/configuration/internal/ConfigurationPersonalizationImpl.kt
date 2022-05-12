@@ -2,6 +2,7 @@ package com.algolia.search.configuration.internal
 
 import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.ConfigurationPersonalization
+import com.algolia.search.configuration.LogLevel
 import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.configuration.internal.extension.getHttpClient
@@ -10,7 +11,6 @@ import com.algolia.search.model.ApplicationID
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.plugins.logging.LogLevel
 
 /**
  * Implementation of [ConfigurationPersonalization].

@@ -5,7 +5,6 @@ import com.algolia.search.util.Closeable
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.plugins.logging.LogLevel
 
 /**
  * Configuration used by a client.

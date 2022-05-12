@@ -42,17 +42,17 @@ kotlin {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
-                api(libs.ktor.client.core)
-                api(libs.ktor.client.mock)
+                implementation(libs.ktor.client.core)
+                implementation(libs.ktor.client.mock)
             }
         }
         val jvmMain by getting
         val jvmTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
-                api(libs.ktor.client.apache)
-                api(libs.ktor.client.okhttp)
-                api(libs.ktor.client.android)
+                implementation(libs.ktor.client.apache)
+                implementation(libs.ktor.client.okhttp)
+                implementation(libs.ktor.client.android)
             }
         }
     }
