@@ -3,9 +3,9 @@ package com.algolia.search.configuration.internal
 import com.algolia.search.client.ClientRecommend
 import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.ConfigurationRecommend
-import com.algolia.search.logging.LogLevel
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.configuration.internal.extension.getHttpClient
+import com.algolia.search.logging.LogLevel
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import io.ktor.client.HttpClient

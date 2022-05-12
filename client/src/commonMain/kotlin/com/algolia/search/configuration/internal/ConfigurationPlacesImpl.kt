@@ -2,9 +2,9 @@ package com.algolia.search.configuration.internal
 
 import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.ConfigurationPlaces
-import com.algolia.search.logging.LogLevel
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.configuration.internal.extension.getHttpClient
+import com.algolia.search.logging.LogLevel
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine

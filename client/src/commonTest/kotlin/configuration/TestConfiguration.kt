@@ -17,10 +17,10 @@ import com.algolia.search.transport.internal.hosts
 import com.algolia.search.transport.internal.insightHosts
 import com.algolia.search.transport.internal.placesHosts
 import com.algolia.search.transport.internal.searchHosts
-import kotlin.test.Test
 import shouldBeNull
 import shouldContainAll
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestConfiguration {
 
