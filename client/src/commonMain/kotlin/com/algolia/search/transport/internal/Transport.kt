@@ -114,8 +114,11 @@ internal class Transport(
         body: String?,
     ): HttpRequestBuilder {
         return HttpRequestBuilder().apply {
-            url.path(path)
-            url.protocol = URLProtocol.HTTPS
+            url {
+                protocol = URLProtocol.HTTPS
+                port = URLProtocol.HTTPS.defaultPort
+                path(path)
+            }
             method = httpMethod
             compress(body)
             credentialsOrNull?.let {
