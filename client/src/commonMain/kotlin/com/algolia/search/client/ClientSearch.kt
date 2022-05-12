@@ -14,6 +14,7 @@ import com.algolia.search.endpoint.EndpointMultiCluster
 import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.helper.internal.sha256
 import com.algolia.search.helper.toAPIKey
+import com.algolia.search.logging.LogLevel
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
@@ -33,7 +34,6 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
-import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.util.decodeBase64String
 import io.ktor.util.encodeBase64
 
