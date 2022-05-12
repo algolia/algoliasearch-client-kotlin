@@ -33,9 +33,9 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
-import com.algolia.search.util.internal.decodeBase64String
-import com.algolia.search.util.internal.encodeBase64
-import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.util.decodeBase64String
+import io.ktor.util.encodeBase64
 
 /**
  * Client to perform operations on indices.

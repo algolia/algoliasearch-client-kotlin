@@ -1,48 +1,56 @@
 package com.algolia.search.configuration.internal.extension
 
 import com.algolia.search.configuration.AlgoliaSearchClient
-import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.clientUserAgent
 import com.algolia.search.serialize.internal.JsonNonStrict
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
-import io.ktor.client.features.HttpTimeout
-import io.ktor.client.features.UserAgent
-import io.ktor.client.features.defaultRequest
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.features.json.serializer.KotlinxSerializer
-import io.ktor.client.features.logging.LogLevel
-import io.ktor.client.features.logging.Logger
-import io.ktor.client.features.logging.Logging
-import io.ktor.client.features.logging.SIMPLE
-import io.ktor.client.request.HttpRequestBuilder
+import io.ktor.client.plugins.HttpTimeout
+import io.ktor.client.plugins.UserAgent
+import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.logging.LogLevel
+import io.ktor.client.plugins.logging.Logger
+import io.ktor.client.plugins.logging.Logging
+import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.request.header
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpMethod
+import io.ktor.serialization.kotlinx.json.json
 
 internal fun Configuration.getHttpClient() = engine?.let {
     HttpClient(it) { configure(this@getHttpClient) }
 } ?: HttpClient { configure(this@getHttpClient) }
 
 internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
+    // Custom configuration
     configuration.httpClientConfig?.invoke(this)
-    install(JsonFeature) {
-        serializer = KotlinxSerializer(JsonNonStrict)
-    }
+
+    // Content negotiation and serialization
+    install(ContentNegotiation) { json(JsonNonStrict) }
+
+    // Logging
     installLogging(configuration.logLevel)
+
+    // User agent
     install(UserAgent) {
         agent = clientUserAgent(AlgoliaSearchClient.version)
     }
+
+    // Timeout
     install(HttpTimeout)
-    defaultRequest {
-        configuration.defaultHeaders?.let {
-            it.forEach { (key, value) -> header(key, value) }
-        }
-        if (method.canCompress()) {
-            compressionHeader(configuration.compression)
-        }
+
+    // Gzip Compression
+    install(ClientCompression) {
+        compression = configuration.compression
     }
+
+    // Defaults
+    defaultRequest {
+        configuration.defaultHeaders?.forEach(::header)
+    }
+
+    // Enable default (2XX) validation
+    expectSuccess = true
 }
 
 /**
@@ -53,16 +61,5 @@ private fun HttpClientConfig<*>.installLogging(logLevel: LogLevel) {
     install(Logging) {
         level = logLevel
         logger = Logger.SIMPLE
-    }
-}
-
-internal fun HttpMethod.canCompress(): Boolean {
-    return this == HttpMethod.Post || this == HttpMethod.Put
-}
-
-internal fun HttpRequestBuilder.compressionHeader(compression: Compression) {
-    when (compression) {
-        Compression.Gzip -> header(HttpHeaders.ContentEncoding, "gzip")
-        else -> Unit
     }
 }

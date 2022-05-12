@@ -11,16 +11,20 @@ import com.algolia.search.exception.internal.asClientException
 import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import io.ktor.client.call.HttpClientCall
-import io.ktor.client.features.HttpRequestTimeoutException
-import io.ktor.client.features.ResponseException
-import io.ktor.client.features.timeout
+import io.ktor.client.call.body
+import io.ktor.client.network.sockets.ConnectTimeoutException
+import io.ktor.client.network.sockets.SocketTimeoutException
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.HttpRequestTimeoutException
+import io.ktor.client.plugins.ResponseException
+import io.ktor.client.plugins.timeout
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
+import io.ktor.client.request.setBody
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpMethod
 import io.ktor.http.URLProtocol
-import io.ktor.network.sockets.ConnectTimeoutException
-import io.ktor.network.sockets.SocketTimeoutException
+import io.ktor.http.path
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.sync.Mutex
@@ -34,7 +38,7 @@ internal class Transport(
     private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
     private val mutex: Mutex = Mutex()
 
-    internal val credentials get() = credentialsOrNull!!
+    internal val credentials get() = requireNotNull(credentialsOrNull)
 
     /**
      * Runs an HTTP request (with retry strategy) and get a result as [T].
@@ -53,7 +57,8 @@ internal class Transport(
         body: String? = null,
     ): T {
         return execute(httpMethod, callType, path, requestOptions, body) {
-            httpClient.request(it)
+            val response = httpClient.request(it)
+            response.call.body()
         }
     }
 
@@ -80,7 +85,7 @@ internal class Transport(
                     mutex.withLock { host.reset() }
                 }
             } catch (exception: Throwable) {
-                host.handle(exception)
+                host.onError(exception)
                 errors += exception.asClientException()
             }
         }
@@ -111,41 +116,38 @@ internal class Transport(
         body: String?,
     ): HttpRequestBuilder {
         return HttpRequestBuilder().apply {
-            url.path(path)
-            url.protocol = URLProtocol.HTTPS
-            method = httpMethod
-            compress(body)
-            credentialsOrNull?.let {
-                setApplicationId(it.applicationID)
-                setApiKey(it.apiKey)
+            url {
+                protocol = URLProtocol.HTTPS
+                port = URLProtocol.HTTPS.defaultPort
+                path(path)
             }
-            setRequestOptions(requestOptions)
+            method = httpMethod
+            credentialsOrNull?.let {
+                applicationId(it.applicationID)
+                apiKey(it.apiKey)
+            }
+            requestOptions(requestOptions)
+            requestBody(body)
         }
     }
 
-    private fun HttpRequestBuilder.compress(payload: String?) {
-        if (payload != null) {
-            body = when (compression) {
-                Compression.Gzip -> Gzip(payload)
-                Compression.None -> payload
-            }
+    private fun HttpRequestBuilder.requestBody(payload: String?) {
+        val body = when (compression) {
+            Compression.Gzip -> payload?.let(Gzip::invoke)
+            Compression.None -> payload
         }
+        setBody(body)
     }
 
     /**
      * Handle API request exceptions.
      */
-    private suspend fun RetryableHost.handle(exception: Throwable) {
-        when (exception) {
+    private suspend fun RetryableHost.onError(throwable: Throwable) {
+        when (throwable) {
+            is ClientRequestException -> throw throwable.asApiException()
             is HttpRequestTimeoutException, is SocketTimeoutException, is ConnectTimeoutException -> mutex.withLock { hasTimedOut() }
-            is IOException -> mutex.withLock { hasFailed() }
-            is ResponseException -> {
-                when (exception.response.status.value) {
-                    in (400 until 500) -> throw exception.asApiException()
-                    else -> mutex.withLock { hasFailed() }
-                }
-            }
-            else -> throw exception.asClientException()
+            is IOException, is ResponseException -> mutex.withLock { hasFailed() }
+            else -> throw throwable.asClientException()
         }
     }
 
@@ -171,28 +173,13 @@ internal class Transport(
         body: String?,
         requestOptions: RequestOptions?
     ): T {
-        val httpResponse = genericRequest(method, callType, path, requestOptions, body)
-        return httpResponse.call.receiveAs(responseType)
-    }
-
-    /**
-     * Execute HTTP request (with retry strategy) and get a result as [HttpResponse].
-     */
-    private suspend fun genericRequest(
-        httpMethod: HttpMethod,
-        callType: CallType,
-        path: String,
-        requestOptions: RequestOptions?,
-        body: String? = null
-    ): HttpResponse {
-        return execute(httpMethod, callType, path, requestOptions, body) {
-            httpClient.request(it)
-        }
+        val httpResponse = request<HttpResponse>(method, callType, path, requestOptions, body)
+        return httpResponse.call.bodyAs(responseType)
     }
 
     /**
      * Receive Http payload as [T].
      */
     @Suppress("UNCHECKED_CAST")
-    private suspend fun <T> HttpClientCall.receiveAs(type: TypeInfo): T = receive(type) as T
+    private suspend fun <T> HttpClientCall.bodyAs(type: TypeInfo): T = body(type) as T
 }

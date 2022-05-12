@@ -10,7 +10,7 @@ import com.algolia.search.model.ApplicationID
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.plugins.logging.LogLevel
 
 /**
  * Configuration used by [ClientRecommend].

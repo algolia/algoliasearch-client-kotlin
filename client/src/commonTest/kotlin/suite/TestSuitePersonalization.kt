@@ -5,7 +5,7 @@ import com.algolia.search.model.personalization.EventScoring
 import com.algolia.search.model.personalization.FacetScoring
 import com.algolia.search.model.personalization.PersonalizationStrategy
 import com.algolia.search.model.personalization.SetPersonalizationStrategyResponse
-import io.ktor.client.features.ClientRequestException
+import io.ktor.client.plugins.ClientRequestException
 import io.ktor.http.HttpStatusCode
 import runBlocking
 import shouldEqual

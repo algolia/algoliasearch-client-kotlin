@@ -12,7 +12,7 @@ import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.internal.insightHosts
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.plugins.logging.LogLevel
 
 /**
  * Configuration used by [ClientInsights].

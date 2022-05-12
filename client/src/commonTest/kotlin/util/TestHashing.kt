@@ -1,8 +1,8 @@
 package util
 
 import com.algolia.search.helper.internal.sha256
-import com.algolia.search.util.internal.decodeBase64String
-import com.algolia.search.util.internal.encodeBase64
+import io.ktor.util.decodeBase64String
+import io.ktor.util.encodeBase64
 import shouldEqual
 import kotlin.test.Test
 

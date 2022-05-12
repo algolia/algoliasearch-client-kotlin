@@ -16,7 +16,7 @@ import com.algolia.search.transport.internal.hosts
 import com.algolia.search.transport.internal.insightHosts
 import com.algolia.search.transport.internal.placesHosts
 import com.algolia.search.transport.internal.searchHosts
-import io.ktor.client.features.logging.LogLevel
+import io.ktor.client.plugins.logging.LogLevel
 import shouldBeNull
 import shouldContainAll
 import shouldEqual

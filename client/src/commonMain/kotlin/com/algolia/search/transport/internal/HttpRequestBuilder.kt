@@ -8,17 +8,18 @@ import com.algolia.search.transport.RequestOptions
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.header
 import io.ktor.client.request.parameter
+import io.ktor.client.request.setBody
 
-internal fun HttpRequestBuilder.setApplicationId(applicationID: ApplicationID?) {
+internal fun HttpRequestBuilder.applicationId(applicationID: ApplicationID?) {
     header(KeyAlgoliaApplicationID, applicationID?.raw)
 }
 
-internal fun HttpRequestBuilder.setApiKey(apiKey: APIKey?) {
+internal fun HttpRequestBuilder.apiKey(apiKey: APIKey?) {
     header(KeyAlgoliaAPIKey, apiKey?.raw)
 }
 
-internal fun HttpRequestBuilder.setRequestOptions(requestOptions: RequestOptions?) {
+internal fun HttpRequestBuilder.requestOptions(requestOptions: RequestOptions?) {
     requestOptions?.headers?.forEach { header(it.key, it.value) }
     requestOptions?.urlParameters?.forEach { parameter(it.key, it.value) }
-    requestOptions?.body?.let { body = it }
+    requestOptions?.body?.let { setBody(it) }
 }

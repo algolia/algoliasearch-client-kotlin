@@ -3,7 +3,7 @@ package com.algolia.search.exception.internal
 import com.algolia.search.exception.AlgoliaApiException
 import com.algolia.search.exception.AlgoliaClientException
 import com.algolia.search.exception.AlgoliaRuntimeException
-import io.ktor.client.features.ResponseException
+import io.ktor.client.plugins.ResponseException
 
 /**
  * Coerce a Throwable to a [AlgoliaClientException].
