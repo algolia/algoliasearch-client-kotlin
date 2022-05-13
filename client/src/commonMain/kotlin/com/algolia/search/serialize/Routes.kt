@@ -14,9 +14,3 @@ public const val RouteProfiles: String = "1/profiles"
 public const val RoutePlaces: String = "1/places"
 public const val RouteDictionaries: String = "1/dictionaries"
 public const val RouteTask: String = "1/task"
-
-@Deprecated("use RoutePersonalization instead", replaceWith = ReplaceWith("RoutePersonalization"))
-public const val RouteRecommendation: String = "1/recommendation"
-
-@Deprecated("use RoutePersonalization instead", replaceWith = ReplaceWith("RoutePersonalization"))
-public const val RouteRecommendationV2: String = "1/strategies/personalization"
