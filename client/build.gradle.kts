@@ -32,7 +32,6 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(libs.ktor.client.core)
-                api(libs.ktor.client.json)
                 implementation(libs.ktor.client.logging)
                 implementation(libs.ktor.client.serialization.json)
                 implementation(libs.ktor.client.content.negotiation)
@@ -40,18 +39,17 @@ kotlin {
         }
         val commonTest by getting {
             dependencies {
-                implementation(kotlin("test-common"))
-                implementation(kotlin("test-annotations-common"))
+                implementation(libs.kotlin.test.common)
+                implementation(libs.kotlin.test.annotations.common)
                 implementation(libs.ktor.client.mock)
             }
         }
         val jvmMain by getting
         val jvmTest by getting {
             dependencies {
-                implementation(kotlin("test-junit"))
+                implementation(libs.kotlin.test.junit)
                 implementation(libs.ktor.client.apache)
                 implementation(libs.ktor.client.okhttp)
-                implementation(libs.ktor.client.android)
             }
         }
     }
