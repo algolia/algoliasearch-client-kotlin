@@ -7,10 +7,10 @@ import com.algolia.search.configuration.internal.ConfigurationPlacesImpl
 import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
+import com.algolia.search.logging.LogLevel
 import com.algolia.search.transport.internal.placesHosts
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
-import io.ktor.client.plugins.logging.LogLevel
 
 /**
  * Configuration used by [ClientPlaces].

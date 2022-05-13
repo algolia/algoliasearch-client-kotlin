@@ -3,6 +3,7 @@ package com.algolia.search.configuration.internal.extension
 import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.clientUserAgent
+import com.algolia.search.logging.LogLevel
 import com.algolia.search.serialize.internal.JsonNonStrict
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
@@ -10,7 +11,6 @@ import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.UserAgent
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import io.ktor.client.plugins.logging.SIMPLE
@@ -57,9 +57,9 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
  * Installs [Logging] if logging level is superior to [LogLevel.NONE].
  */
 private fun HttpClientConfig<*>.installLogging(logLevel: LogLevel) {
-    if (LogLevel.NONE == logLevel) return
+    if (LogLevel.None == logLevel) return
     install(Logging) {
-        level = logLevel
+        level = logLevel.toKtorLogLevel()
         logger = Logger.SIMPLE
     }
 }

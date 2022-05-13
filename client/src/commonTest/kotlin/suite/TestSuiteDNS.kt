@@ -4,6 +4,7 @@ import clientAdmin1
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.client.internal.ClientSearchImpl
 import com.algolia.search.configuration.ConfigurationSearch
+import com.algolia.search.logging.LogLevel
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.serialize.internal.Json
@@ -11,7 +12,6 @@ import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.SocketTimeoutException
-import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.http.ContentType
 import io.ktor.http.headersOf
 import io.ktor.utils.io.ByteReadChannel
@@ -47,7 +47,7 @@ internal class TestSuiteDNS {
             clientAdmin1.apiKey,
             readTimeout = readTimeout,
             engine = mockEngine,
-            logLevel = LogLevel.INFO
+            logLevel = LogLevel.Info
         )
     )
 
