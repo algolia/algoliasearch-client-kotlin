@@ -33,18 +33,4 @@ public sealed class Region {
 
         override fun toString(): String = raw
     }
-
-    /**
-     * Available regions, used in [ConfigurationRecommendation].
-     */
-    @Deprecated("use Recommendation instead", replaceWith = ReplaceWith("Personalization"))
-    @Suppress("DEPRECATION")
-    public sealed class Recommendation(override val raw: String) : Raw<String> {
-
-        public object EU : Recommendation(KeyEU)
-        public object US : Recommendation(KeyUS)
-        public class Other(override val raw: String) : Recommendation(raw)
-
-        override fun toString(): String = raw
-    }
 }
