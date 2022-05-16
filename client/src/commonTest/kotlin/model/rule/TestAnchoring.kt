@@ -5,22 +5,19 @@ import com.algolia.search.model.rule.Anchoring.EndsWith
 import com.algolia.search.model.rule.Anchoring.Is
 import com.algolia.search.model.rule.Anchoring.Other
 import com.algolia.search.model.rule.Anchoring.StartsWith
-import com.algolia.search.serialize.internal.KeyContains
-import com.algolia.search.serialize.internal.KeyEndsWith
-import com.algolia.search.serialize.internal.KeyIs
-import com.algolia.search.serialize.internal.KeyStartsWith
-import shouldEqual
+import com.algolia.search.serialize.internal.Key
 import unknown
 import kotlin.test.Test
+import shouldEqual
 
 internal class TestAnchoring {
 
     @Test
     fun raw() {
-        Is.raw shouldEqual KeyIs
-        StartsWith.raw shouldEqual KeyStartsWith
-        EndsWith.raw shouldEqual KeyEndsWith
-        Contains.raw shouldEqual KeyContains
+        Is.raw shouldEqual Key.Is
+        StartsWith.raw shouldEqual Key.StartsWith
+        EndsWith.raw shouldEqual Key.EndsWith
+        Contains.raw shouldEqual Key.Contains
         Other(unknown).raw shouldEqual unknown
     }
 }

@@ -8,13 +8,7 @@ import com.algolia.search.model.recommend.RecommendationModel
 import com.algolia.search.model.recommend.RecommendationsQuery
 import com.algolia.search.model.recommend.RelatedProductsQuery
 import com.algolia.search.model.search.RecommendSearchOptions
-import com.algolia.search.serialize.internal.KeyAttributesToRetrieve
-import com.algolia.search.serialize.internal.KeyIndexName
-import com.algolia.search.serialize.internal.KeyMaxRecommendations
-import com.algolia.search.serialize.internal.KeyModel
-import com.algolia.search.serialize.internal.KeyObjectID
-import com.algolia.search.serialize.internal.KeyQueryParameters
-import com.algolia.search.serialize.internal.KeyThreshold
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonArray
@@ -45,15 +39,15 @@ internal class TestRecommendationsQuery {
 
         val json = JsonNoDefaults.encodeToJsonElement(query)
         json shouldEqual buildJsonObject {
-            put(KeyIndexName, JsonPrimitive("products"))
-            put(KeyModel, JsonPrimitive("bought-together"))
-            put(KeyObjectID, JsonPrimitive("B018APC4LE"))
-            put(KeyThreshold, JsonPrimitive(0))
-            put(KeyMaxRecommendations, JsonPrimitive(10))
+            put(Key.IndexName, JsonPrimitive("products"))
+            put(Key.Model, JsonPrimitive("bought-together"))
+            put(Key.ObjectID, JsonPrimitive("B018APC4LE"))
+            put(Key.Threshold, JsonPrimitive(0))
+            put(Key.MaxRecommendations, JsonPrimitive(10))
             put(
-                KeyQueryParameters,
+                Key.QueryParameters,
                 buildJsonObject {
-                    put(KeyAttributesToRetrieve, buildJsonArray { add(JsonPrimitive("*")) })
+                    put(Key.AttributesToRetrieve, buildJsonArray { add(JsonPrimitive("*")) })
                 }
             )
         }
@@ -78,15 +72,15 @@ internal class TestRecommendationsQuery {
 
         val json = JsonNoDefaults.encodeToJsonElement(query)
         json shouldEqual buildJsonObject {
-            put(KeyIndexName, JsonPrimitive("products"))
-            put(KeyModel, JsonPrimitive("bought-together"))
-            put(KeyObjectID, JsonPrimitive("B018APC4LE"))
-            put(KeyThreshold, JsonPrimitive(0))
-            put(KeyMaxRecommendations, JsonPrimitive(10))
+            put(Key.IndexName, JsonPrimitive("products"))
+            put(Key.Model, JsonPrimitive("bought-together"))
+            put(Key.ObjectID, JsonPrimitive("B018APC4LE"))
+            put(Key.Threshold, JsonPrimitive(0))
+            put(Key.MaxRecommendations, JsonPrimitive(10))
             put(
-                KeyQueryParameters,
+                Key.QueryParameters,
                 buildJsonObject {
-                    put(KeyAttributesToRetrieve, buildJsonArray { add(JsonPrimitive("*")) })
+                    put(Key.AttributesToRetrieve, buildJsonArray { add(JsonPrimitive("*")) })
                 }
             )
         }
@@ -106,15 +100,15 @@ internal class TestRecommendationsQuery {
 
         val json = JsonNoDefaults.encodeToJsonElement(query)
         json shouldEqual buildJsonObject {
-            put(KeyIndexName, JsonPrimitive("products"))
-            put(KeyModel, JsonPrimitive("related-products"))
-            put(KeyObjectID, JsonPrimitive("B018APC4LE"))
-            put(KeyThreshold, JsonPrimitive(10))
-            put(KeyMaxRecommendations, JsonPrimitive(10))
+            put(Key.IndexName, JsonPrimitive("products"))
+            put(Key.Model, JsonPrimitive("related-products"))
+            put(Key.ObjectID, JsonPrimitive("B018APC4LE"))
+            put(Key.Threshold, JsonPrimitive(10))
+            put(Key.MaxRecommendations, JsonPrimitive(10))
             put(
-                KeyQueryParameters,
+                Key.QueryParameters,
                 buildJsonObject {
-                    put(KeyAttributesToRetrieve, buildJsonArray { add(JsonPrimitive("*")) })
+                    put(Key.AttributesToRetrieve, buildJsonArray { add(JsonPrimitive("*")) })
                 }
             )
         }
@@ -134,15 +128,15 @@ internal class TestRecommendationsQuery {
 
         val json = JsonNoDefaults.encodeToJsonElement(query)
         json shouldEqual buildJsonObject {
-            put(KeyIndexName, JsonPrimitive("products"))
-            put(KeyModel, JsonPrimitive("bought-together"))
-            put(KeyObjectID, JsonPrimitive("B018APC4LE"))
-            put(KeyThreshold, JsonPrimitive(10))
-            put(KeyMaxRecommendations, JsonPrimitive(10))
+            put(Key.IndexName, JsonPrimitive("products"))
+            put(Key.Model, JsonPrimitive("bought-together"))
+            put(Key.ObjectID, JsonPrimitive("B018APC4LE"))
+            put(Key.Threshold, JsonPrimitive(10))
+            put(Key.MaxRecommendations, JsonPrimitive(10))
             put(
-                KeyQueryParameters,
+                Key.QueryParameters,
                 buildJsonObject {
-                    put(KeyAttributesToRetrieve, buildJsonArray { add(JsonPrimitive("*")) })
+                    put(Key.AttributesToRetrieve, buildJsonArray { add(JsonPrimitive("*")) })
                 }
             )
         }

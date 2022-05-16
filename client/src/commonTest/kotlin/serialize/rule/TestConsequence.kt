@@ -11,16 +11,7 @@ import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.KeyAutomaticFacetFilters
-import com.algolia.search.serialize.internal.KeyAutomaticOptionalFacetFilters
-import com.algolia.search.serialize.internal.KeyEdits
-import com.algolia.search.serialize.internal.KeyFilterPromotes
-import com.algolia.search.serialize.internal.KeyHide
-import com.algolia.search.serialize.internal.KeyObjectID
-import com.algolia.search.serialize.internal.KeyParams
-import com.algolia.search.serialize.internal.KeyPromote
-import com.algolia.search.serialize.internal.KeyQuery
-import com.algolia.search.serialize.internal.KeyUserData
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.toJsonNoDefaults
@@ -45,20 +36,20 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
     private val objectIDs = listOf(objectIDA, objectIDB)
     private val promotions = listOf(Promotion(objectIDA, 0))
     private val promotionsSerialized = Json.encodeToJsonElement(ListSerializer(Promotion.serializer()), promotions)
-    private val userData = buildJsonObject { put(KeyUserData, unknown) }
+    private val userData = buildJsonObject { put(Key.UserData, unknown) }
     private val filtersJson = Json.encodeToJsonElement(ListSerializer(AutomaticFacetFilters.serializer()), filters)
 
     override val items = listOf(
         Consequence() to buildJsonObject { },
-        Consequence(query = query) to buildJsonObject { put(KeyParams, queryJson) },
+        Consequence(query = query) to buildJsonObject { put(Key.Params, queryJson) },
         Consequence(edits = edits) to buildJsonObject {
             put(
-                KeyParams,
+                Key.Params,
                 buildJsonObject {
                     put(
-                        KeyQuery,
+                        Key.Query,
                         buildJsonObject {
-                            put(KeyEdits, Json.encodeToJsonElement(ListSerializer(Edit), edits))
+                            put(Key.Edits, Json.encodeToJsonElement(ListSerializer(Edit), edits))
                         }
                     )
                 }
@@ -71,17 +62,17 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
             userData = userData,
             filterPromotes = true
         ) to buildJsonObject {
-            put(KeyParams, queryJson)
-            put(KeyPromote, promotionsSerialized)
+            put(Key.Params, queryJson)
+            put(Key.Promote, promotionsSerialized)
             put(
-                KeyHide,
+                Key.Hide,
                 buildJsonArray {
-                    add(buildJsonObject { put(KeyObjectID, objectIDA.raw) })
-                    add(buildJsonObject { put(KeyObjectID, objectIDB.raw) })
+                    add(buildJsonObject { put(Key.ObjectID, objectIDA.raw) })
+                    add(buildJsonObject { put(Key.ObjectID, objectIDB.raw) })
                 }
             )
-            put(KeyUserData, userData)
-            put(KeyFilterPromotes, true)
+            put(Key.UserData, userData)
+            put(Key.FilterPromotes, true)
         },
         Consequence(
             automaticFacetFilters = filters,
@@ -89,11 +80,11 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
             query = query
         ) to buildJsonObject {
             put(
-                KeyParams,
+                Key.Params,
                 buildJsonObject {
-                    put(KeyQuery, unknown)
-                    put(KeyAutomaticFacetFilters, filtersJson)
-                    put(KeyAutomaticOptionalFacetFilters, filtersJson)
+                    put(Key.Query, unknown)
+                    put(Key.AutomaticFacetFilters, filtersJson)
+                    put(Key.AutomaticOptionalFacetFilters, filtersJson)
                 }
             )
         }

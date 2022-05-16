@@ -2,19 +2,7 @@ package serialize.response
 
 import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.KeyAverageClickPosition
-import com.algolia.search.serialize.internal.KeyClickCount
-import com.algolia.search.serialize.internal.KeyClickThroughRate
-import com.algolia.search.serialize.internal.KeyConversionCount
-import com.algolia.search.serialize.internal.KeyConversionRate
-import com.algolia.search.serialize.internal.KeyCustomSearchParameters
-import com.algolia.search.serialize.internal.KeyDescription
-import com.algolia.search.serialize.internal.KeyIndex
-import com.algolia.search.serialize.internal.KeyNoResultCount
-import com.algolia.search.serialize.internal.KeySearchCount
-import com.algolia.search.serialize.internal.KeyTrackedSearchCount
-import com.algolia.search.serialize.internal.KeyTrafficPercentage
-import com.algolia.search.serialize.internal.KeyUserCount
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import indexA
 import kotlinx.serialization.json.buildJsonObject
@@ -47,19 +35,19 @@ internal class TestResponseVariant : TestSerializer<ResponseVariant>(ResponseVar
         )
 
         val json = buildJsonObject {
-            put(KeyClickCount, 0)
-            put(KeyConversionCount, 1)
-            put(KeyDescription, unknown)
-            put(KeyIndex, indexA.raw)
-            put(KeyTrafficPercentage, 2)
-            put(KeyConversionRate, 3f)
-            put(KeyNoResultCount, 4)
-            put(KeyAverageClickPosition, 5f)
-            put(KeySearchCount, 6)
-            put(KeyTrackedSearchCount, 7)
-            put(KeyUserCount, 8)
-            put(KeyClickThroughRate, 9f)
-            put(KeyCustomSearchParameters, buildJsonObject { })
+            put(Key.ClickCount, 0)
+            put(Key.ConversionCount, 1)
+            put(Key.Description, unknown)
+            put(Key.Index, indexA.raw)
+            put(Key.TrafficPercentage, 2)
+            put(Key.ConversionRate, 3f)
+            put(Key.NoResultCount, 4)
+            put(Key.AverageClickPosition, 5f)
+            put(Key.SearchCount, 6)
+            put(Key.TrackedSearchCount, 7)
+            put(Key.UserCount, 8)
+            put(Key.ClickThroughRate, 9f)
+            put(Key.CustomSearchParameters, buildJsonObject { })
         }
     }
 }

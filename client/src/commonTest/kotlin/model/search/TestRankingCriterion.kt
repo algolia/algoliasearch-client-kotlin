@@ -12,32 +12,24 @@ import com.algolia.search.model.settings.RankingCriterion.Geo
 import com.algolia.search.model.settings.RankingCriterion.Other
 import com.algolia.search.model.settings.RankingCriterion.Proximity
 import com.algolia.search.model.settings.RankingCriterion.Words
-import com.algolia.search.serialize.internal.KeyAsc
-import com.algolia.search.serialize.internal.KeyAttribute
-import com.algolia.search.serialize.internal.KeyCustom
-import com.algolia.search.serialize.internal.KeyDesc
-import com.algolia.search.serialize.internal.KeyExact
-import com.algolia.search.serialize.internal.KeyFilters
-import com.algolia.search.serialize.internal.KeyGeo
-import com.algolia.search.serialize.internal.KeyProximity
-import com.algolia.search.serialize.internal.KeyWords
+import com.algolia.search.serialize.internal.Key
+import kotlin.test.Test
 import shouldEqual
 import unknown
-import kotlin.test.Test
 
 internal class TestRankingCriterion {
 
     @Test
     fun raw() {
-        Geo.raw shouldEqual KeyGeo
-        Words.raw shouldEqual KeyWords
-        Filters.raw shouldEqual KeyFilters
-        Proximity.raw shouldEqual KeyProximity
-        Attribute.raw shouldEqual KeyAttribute
-        Exact.raw shouldEqual KeyExact
-        Custom.raw shouldEqual KeyCustom
-        Asc(attributeA).raw shouldEqual "$KeyAsc($attributeA)"
-        Desc(attributeB).raw shouldEqual "$KeyDesc($attributeB)"
+        Geo.raw shouldEqual Key.Geo
+        Words.raw shouldEqual Key.Words
+        Filters.raw shouldEqual Key.Filters
+        Proximity.raw shouldEqual Key.Proximity
+        Attribute.raw shouldEqual Key.Attribute
+        Exact.raw shouldEqual Key.Exact
+        Custom.raw shouldEqual Key.Custom
+        Asc(attributeA).raw shouldEqual "${Key.Asc}($attributeA)"
+        Desc(attributeB).raw shouldEqual "${Key.Desc}($attributeB)"
         Other(unknown).raw shouldEqual unknown
     }
 }

@@ -1,747 +1,379 @@
 package serialize
 
-import com.algolia.search.serialize.internal.KeyABTest
-import com.algolia.search.serialize.internal.KeyABTestID
-import com.algolia.search.serialize.internal.KeyABTests
-import com.algolia.search.serialize.internal.KeyAbTestVariantID
-import com.algolia.search.serialize.internal.KeyAcl
-import com.algolia.search.serialize.internal.KeyAction
-import com.algolia.search.serialize.internal.KeyActive
-import com.algolia.search.serialize.internal.KeyAdd
-import com.algolia.search.serialize.internal.KeyAddObject
-import com.algolia.search.serialize.internal.KeyAddUnique
-import com.algolia.search.serialize.internal.KeyAddress
-import com.algolia.search.serialize.internal.KeyAdmin_Level
-import com.algolia.search.serialize.internal.KeyAdministrative
-import com.algolia.search.serialize.internal.KeyAdvancedSyntax
-import com.algolia.search.serialize.internal.KeyAdvancedSyntaxFeatures
-import com.algolia.search.serialize.internal.KeyAirport
-import com.algolia.search.serialize.internal.KeyAlgoliaAPIKey
-import com.algolia.search.serialize.internal.KeyAlgoliaApplicationID
-import com.algolia.search.serialize.internal.KeyAlgoliaUserID
-import com.algolia.search.serialize.internal.KeyAll
-import com.algolia.search.serialize.internal.KeyAllOptional
-import com.algolia.search.serialize.internal.KeyAllowCompressionOfIntegerArray
-import com.algolia.search.serialize.internal.KeyAllowTyposOnNumericTokens
-import com.algolia.search.serialize.internal.KeyAlpha
-import com.algolia.search.serialize.internal.KeyAltcorrection
-import com.algolia.search.serialize.internal.KeyAlternativeCorrection1
-import com.algolia.search.serialize.internal.KeyAlternativeCorrection2
-import com.algolia.search.serialize.internal.KeyAlternatives
-import com.algolia.search.serialize.internal.KeyAlternativesAsExact
-import com.algolia.search.serialize.internal.KeyAnalytics
-import com.algolia.search.serialize.internal.KeyAnalyticsTags
-import com.algolia.search.serialize.internal.KeyAnchoring
-import com.algolia.search.serialize.internal.KeyAnswer
-import com.algolia.search.serialize.internal.KeyAnswer_Code
-import com.algolia.search.serialize.internal.KeyAroundLatLng
-import com.algolia.search.serialize.internal.KeyAroundLatLngViaIP
-import com.algolia.search.serialize.internal.KeyAroundPrecision
-import com.algolia.search.serialize.internal.KeyAroundRadius
-import com.algolia.search.serialize.internal.KeyAsc
-import com.algolia.search.serialize.internal.KeyAttribute
-import com.algolia.search.serialize.internal.KeyAttributeForDistinct
-import com.algolia.search.serialize.internal.KeyAttributesForFaceting
-import com.algolia.search.serialize.internal.KeyAttributesToHighlight
-import com.algolia.search.serialize.internal.KeyAttributesToIndex
-import com.algolia.search.serialize.internal.KeyAttributesToRetrieve
-import com.algolia.search.serialize.internal.KeyAttributesToSnippet
-import com.algolia.search.serialize.internal.KeyAutomaticFacetFilters
-import com.algolia.search.serialize.internal.KeyAutomaticOptionalFacetFilters
-import com.algolia.search.serialize.internal.KeyAutomaticRadius
-import com.algolia.search.serialize.internal.KeyAvg
-import com.algolia.search.serialize.internal.KeyBody
-import com.algolia.search.serialize.internal.KeyBrowse
-import com.algolia.search.serialize.internal.KeyBusStop
-import com.algolia.search.serialize.internal.KeyCamelCaseAttributes
-import com.algolia.search.serialize.internal.KeyCity
-import com.algolia.search.serialize.internal.KeyClear
-import com.algolia.search.serialize.internal.KeyClearExistingRules
-import com.algolia.search.serialize.internal.KeyClick
-import com.algolia.search.serialize.internal.KeyClickAnalytics
-import com.algolia.search.serialize.internal.KeyCluster
-import com.algolia.search.serialize.internal.KeyClusterName
-import com.algolia.search.serialize.internal.KeyClusters
-import com.algolia.search.serialize.internal.KeyCompound
-import com.algolia.search.serialize.internal.KeyConcat
-import com.algolia.search.serialize.internal.KeyCondition
-import com.algolia.search.serialize.internal.KeyConsequence
-import com.algolia.search.serialize.internal.KeyContains
-import com.algolia.search.serialize.internal.KeyContext
-import com.algolia.search.serialize.internal.KeyConversion
-import com.algolia.search.serialize.internal.KeyCopy
-import com.algolia.search.serialize.internal.KeyCorrections
-import com.algolia.search.serialize.internal.KeyCount
-import com.algolia.search.serialize.internal.KeyCountry
-import com.algolia.search.serialize.internal.KeyCountryCode
-import com.algolia.search.serialize.internal.KeyCounty
-import com.algolia.search.serialize.internal.KeyCreateIfNotExists
-import com.algolia.search.serialize.internal.KeyCreatedAt
-import com.algolia.search.serialize.internal.KeyCursor
-import com.algolia.search.serialize.internal.KeyCustom
-import com.algolia.search.serialize.internal.KeyCustomNormalization
-import com.algolia.search.serialize.internal.KeyCustomRanking
-import com.algolia.search.serialize.internal.KeyCustomSearchParameters
-import com.algolia.search.serialize.internal.KeyDataSize
-import com.algolia.search.serialize.internal.KeyDecompoundedAttributes
-import com.algolia.search.serialize.internal.KeyDecrement
-import com.algolia.search.serialize.internal.KeyDegradedQuery
-import com.algolia.search.serialize.internal.KeyDelete
-import com.algolia.search.serialize.internal.KeyDeleteIndex
-import com.algolia.search.serialize.internal.KeyDeleteObject
-import com.algolia.search.serialize.internal.KeyDeletedAt
-import com.algolia.search.serialize.internal.KeyDesc
-import com.algolia.search.serialize.internal.KeyDescription
-import com.algolia.search.serialize.internal.KeyDestination
-import com.algolia.search.serialize.internal.KeyDisableExactOnAttributes
-import com.algolia.search.serialize.internal.KeyDisablePrefixOnAttributes
-import com.algolia.search.serialize.internal.KeyDisableTypoToleranceOnAttributes
-import com.algolia.search.serialize.internal.KeyDisableTypoToleranceOnWords
-import com.algolia.search.serialize.internal.KeyDisjunctive
-import com.algolia.search.serialize.internal.KeyDisjunctiveFacets
-import com.algolia.search.serialize.internal.KeyDistance
-import com.algolia.search.serialize.internal.KeyDistinct
-import com.algolia.search.serialize.internal.KeyDistrict
-import com.algolia.search.serialize.internal.KeyEU
-import com.algolia.search.serialize.internal.KeyEditSettings
-import com.algolia.search.serialize.internal.KeyEdits
-import com.algolia.search.serialize.internal.KeyEnableABTest
-import com.algolia.search.serialize.internal.KeyEnablePersonalization
-import com.algolia.search.serialize.internal.KeyEnableRules
-import com.algolia.search.serialize.internal.KeyEnabled
-import com.algolia.search.serialize.internal.KeyEndAt
-import com.algolia.search.serialize.internal.KeyEndsWith
-import com.algolia.search.serialize.internal.KeyEntries
-import com.algolia.search.serialize.internal.KeyEqualOnly
-import com.algolia.search.serialize.internal.KeyEventName
-import com.algolia.search.serialize.internal.KeyEventType
-import com.algolia.search.serialize.internal.KeyEvents
-import com.algolia.search.serialize.internal.KeyEventsScoring
-import com.algolia.search.serialize.internal.KeyExact
-import com.algolia.search.serialize.internal.KeyExactOnSingleWordQuery
-import com.algolia.search.serialize.internal.KeyExactPhrase
-import com.algolia.search.serialize.internal.KeyExcludeWords
-import com.algolia.search.serialize.internal.KeyExcluded
-import com.algolia.search.serialize.internal.KeyExhaustiveFacetsCount
-import com.algolia.search.serialize.internal.KeyExhaustiveNbHits
-import com.algolia.search.serialize.internal.KeyExpired
-import com.algolia.search.serialize.internal.KeyExplain
-import com.algolia.search.serialize.internal.KeyFacet
-import com.algolia.search.serialize.internal.KeyFacetFilters
-import com.algolia.search.serialize.internal.KeyFacetHits
-import com.algolia.search.serialize.internal.KeyFacetQuery
-import com.algolia.search.serialize.internal.KeyFacetingAfterDistinct
-import com.algolia.search.serialize.internal.KeyFacets
-import com.algolia.search.serialize.internal.KeyFacetsScoring
-import com.algolia.search.serialize.internal.KeyFacets_Stats
-import com.algolia.search.serialize.internal.KeyFailed
-import com.algolia.search.serialize.internal.KeyFileSize
-import com.algolia.search.serialize.internal.KeyFilterOnly
-import com.algolia.search.serialize.internal.KeyFilterPromotes
-import com.algolia.search.serialize.internal.KeyFilters
-import com.algolia.search.serialize.internal.KeyFirstMatchedWord
-import com.algolia.search.serialize.internal.KeyFirstWords
-import com.algolia.search.serialize.internal.KeyForwardedFor
-import com.algolia.search.serialize.internal.KeyFrom
-import com.algolia.search.serialize.internal.KeyFull
-import com.algolia.search.serialize.internal.KeyFullyHighlighted
-import com.algolia.search.serialize.internal.KeyGeo
-import com.algolia.search.serialize.internal.KeyGeoDistance
-import com.algolia.search.serialize.internal.KeyGeoPoint
-import com.algolia.search.serialize.internal.KeyGeoPrecision
-import com.algolia.search.serialize.internal.KeyGetClusters
-import com.algolia.search.serialize.internal.KeyGetRankingInfo
-import com.algolia.search.serialize.internal.KeyHide
-import com.algolia.search.serialize.internal.KeyHighlightPostTag
-import com.algolia.search.serialize.internal.KeyHighlightPreTag
-import com.algolia.search.serialize.internal.KeyHighlighted
-import com.algolia.search.serialize.internal.KeyHits
-import com.algolia.search.serialize.internal.KeyHitsPerPage
-import com.algolia.search.serialize.internal.KeyId
-import com.algolia.search.serialize.internal.KeyIgnorePlurals
-import com.algolia.search.serialize.internal.KeyImportance
-import com.algolia.search.serialize.internal.KeyIncrement
-import com.algolia.search.serialize.internal.KeyIndex
-import com.algolia.search.serialize.internal.KeyIndexLanguages
-import com.algolia.search.serialize.internal.KeyIndexName
-import com.algolia.search.serialize.internal.KeyIndexUsed
-import com.algolia.search.serialize.internal.KeyIndexes
-import com.algolia.search.serialize.internal.KeyInput
-import com.algolia.search.serialize.internal.KeyInsert
-import com.algolia.search.serialize.internal.KeyInsideBoundingBox
-import com.algolia.search.serialize.internal.KeyInsidePolygon
-import com.algolia.search.serialize.internal.KeyIp
-import com.algolia.search.serialize.internal.KeyIs
-import com.algolia.search.serialize.internal.KeyIs_City
-import com.algolia.search.serialize.internal.KeyIs_Country
-import com.algolia.search.serialize.internal.KeyIs_Highway
-import com.algolia.search.serialize.internal.KeyIs_Popular
-import com.algolia.search.serialize.internal.KeyIs_Suburb
-import com.algolia.search.serialize.internal.KeyItems
-import com.algolia.search.serialize.internal.KeyKeepDiacriticsOnCharacters
-import com.algolia.search.serialize.internal.KeyKey
-import com.algolia.search.serialize.internal.KeyKeys
-import com.algolia.search.serialize.internal.KeyLanguage
-import com.algolia.search.serialize.internal.KeyLastBuildTimeS
-import com.algolia.search.serialize.internal.KeyLastWords
-import com.algolia.search.serialize.internal.KeyLat
-import com.algolia.search.serialize.internal.KeyLength
-import com.algolia.search.serialize.internal.KeyLimit
-import com.algolia.search.serialize.internal.KeyListIndexes
-import com.algolia.search.serialize.internal.KeyLng
-import com.algolia.search.serialize.internal.KeyLocaleNames
-import com.algolia.search.serialize.internal.KeyLogs
-import com.algolia.search.serialize.internal.KeyMatch
-import com.algolia.search.serialize.internal.KeyMatchAlternatives
-import com.algolia.search.serialize.internal.KeyMatchLevel
-import com.algolia.search.serialize.internal.KeyMatchedGeoLocation
-import com.algolia.search.serialize.internal.KeyMatchedWords
-import com.algolia.search.serialize.internal.KeyMax
-import com.algolia.search.serialize.internal.KeyMaxFacetHits
-import com.algolia.search.serialize.internal.KeyMaxHitsPerQuery
-import com.algolia.search.serialize.internal.KeyMaxQueriesPerIPPerHour
-import com.algolia.search.serialize.internal.KeyMaxValuesPerFacet
-import com.algolia.search.serialize.internal.KeyMessage
-import com.algolia.search.serialize.internal.KeyMethod
-import com.algolia.search.serialize.internal.KeyMin
-import com.algolia.search.serialize.internal.KeyMinProximity
-import com.algolia.search.serialize.internal.KeyMinWordSizeFor1Typo
-import com.algolia.search.serialize.internal.KeyMinWordSizeFor2Typos
-import com.algolia.search.serialize.internal.KeyMinimumAroundRadius
-import com.algolia.search.serialize.internal.KeyMove
-import com.algolia.search.serialize.internal.KeyMultiWordsSynonym
-import com.algolia.search.serialize.internal.KeyName
-import com.algolia.search.serialize.internal.KeyNaturalLanguages
-import com.algolia.search.serialize.internal.KeyNbExactWords
-import com.algolia.search.serialize.internal.KeyNbHits
-import com.algolia.search.serialize.internal.KeyNbPages
-import com.algolia.search.serialize.internal.KeyNbRecords
-import com.algolia.search.serialize.internal.KeyNbTypos
-import com.algolia.search.serialize.internal.KeyNbUserIDs
-import com.algolia.search.serialize.internal.KeyNb_Api_Calls
-import com.algolia.search.serialize.internal.KeyNone
-import com.algolia.search.serialize.internal.KeyNotPublished
-import com.algolia.search.serialize.internal.KeyNumberOfPendingTasks
-import com.algolia.search.serialize.internal.KeyNumericAttributesForFiltering
-import com.algolia.search.serialize.internal.KeyNumericAttributesToIndex
-import com.algolia.search.serialize.internal.KeyNumericFilters
-import com.algolia.search.serialize.internal.KeyObjectID
-import com.algolia.search.serialize.internal.KeyObjectIDs
-import com.algolia.search.serialize.internal.KeyOffset
-import com.algolia.search.serialize.internal.KeyOneWaySynonym
-import com.algolia.search.serialize.internal.KeyOperation
-import com.algolia.search.serialize.internal.KeyOptional
-import com.algolia.search.serialize.internal.KeyOptionalFilters
-import com.algolia.search.serialize.internal.KeyOptionalWords
-import com.algolia.search.serialize.internal.KeyOrdered
-import com.algolia.search.serialize.internal.KeyOriginal
-import com.algolia.search.serialize.internal.KeyPage
-import com.algolia.search.serialize.internal.KeyPaginationLimitedTo
-import com.algolia.search.serialize.internal.KeyParams
-import com.algolia.search.serialize.internal.KeyParsedQuery
-import com.algolia.search.serialize.internal.KeyPartial
-import com.algolia.search.serialize.internal.KeyPartialUpdateObject
-import com.algolia.search.serialize.internal.KeyPartialUpdateObjectNoCreate
-import com.algolia.search.serialize.internal.KeyPattern
-import com.algolia.search.serialize.internal.KeyPending
-import com.algolia.search.serialize.internal.KeyPendingTask
-import com.algolia.search.serialize.internal.KeyPercentage
-import com.algolia.search.serialize.internal.KeyPercentileComputation
-import com.algolia.search.serialize.internal.KeyPersonalizationImpact
-import com.algolia.search.serialize.internal.KeyPlaceholder
-import com.algolia.search.serialize.internal.KeyPlural
-import com.algolia.search.serialize.internal.KeyPopulation
-import com.algolia.search.serialize.internal.KeyPosition
-import com.algolia.search.serialize.internal.KeyPositions
-import com.algolia.search.serialize.internal.KeyPostCode
-import com.algolia.search.serialize.internal.KeyPrefixAll
-import com.algolia.search.serialize.internal.KeyPrefixLast
-import com.algolia.search.serialize.internal.KeyPrefixNone
-import com.algolia.search.serialize.internal.KeyPrimary
-import com.algolia.search.serialize.internal.KeyProcessed
-import com.algolia.search.serialize.internal.KeyProcessingTimeMS
-import com.algolia.search.serialize.internal.KeyProcessing_Time_Ms
-import com.algolia.search.serialize.internal.KeyPromote
-import com.algolia.search.serialize.internal.KeyPromoted
-import com.algolia.search.serialize.internal.KeyProximity
-import com.algolia.search.serialize.internal.KeyProximityDistance
-import com.algolia.search.serialize.internal.KeyPublished
-import com.algolia.search.serialize.internal.KeyQuery
-import com.algolia.search.serialize.internal.KeyQueryAfterRemoval
-import com.algolia.search.serialize.internal.KeyQueryID
-import com.algolia.search.serialize.internal.KeyQueryLanguages
-import com.algolia.search.serialize.internal.KeyQueryParameters
-import com.algolia.search.serialize.internal.KeyQueryType
-import com.algolia.search.serialize.internal.KeyQuery_Body
-import com.algolia.search.serialize.internal.KeyQuery_Headers
-import com.algolia.search.serialize.internal.KeyQuery_Nb_Hits
-import com.algolia.search.serialize.internal.KeyQuery_Params
-import com.algolia.search.serialize.internal.KeyRanking
-import com.algolia.search.serialize.internal.KeyReferers
-import com.algolia.search.serialize.internal.KeyRemove
-import com.algolia.search.serialize.internal.KeyRemoveLowercase
-import com.algolia.search.serialize.internal.KeyRemoveStopWords
-import com.algolia.search.serialize.internal.KeyRemoveWordsIfNoResults
-import com.algolia.search.serialize.internal.KeyReplace
-import com.algolia.search.serialize.internal.KeyReplaceExistingSynonyms
-import com.algolia.search.serialize.internal.KeyReplaceSynonymsInHighlight
-import com.algolia.search.serialize.internal.KeyReplacements
-import com.algolia.search.serialize.internal.KeyReplicas
-import com.algolia.search.serialize.internal.KeyRequests
-import com.algolia.search.serialize.internal.KeyResponseFields
-import com.algolia.search.serialize.internal.KeyRestrictHighlightAndSnippetArrays
-import com.algolia.search.serialize.internal.KeyRestrictSearchableAttributes
-import com.algolia.search.serialize.internal.KeyRestrictSources
-import com.algolia.search.serialize.internal.KeyResults
-import com.algolia.search.serialize.internal.KeyRule
-import com.algolia.search.serialize.internal.KeyRuleContexts
-import com.algolia.search.serialize.internal.KeyRules
-import com.algolia.search.serialize.internal.KeyScope
-import com.algolia.search.serialize.internal.KeyScore
-import com.algolia.search.serialize.internal.KeySearch
-import com.algolia.search.serialize.internal.KeySearchable
-import com.algolia.search.serialize.internal.KeySearchableAttributes
-import com.algolia.search.serialize.internal.KeySeeUnretrievableAttributes
-import com.algolia.search.serialize.internal.KeySeparatorsToIndex
-import com.algolia.search.serialize.internal.KeyServerUsed
-import com.algolia.search.serialize.internal.KeySettings
-import com.algolia.search.serialize.internal.KeySha1
-import com.algolia.search.serialize.internal.KeySimilarQuery
-import com.algolia.search.serialize.internal.KeySingleWordSynonym
-import com.algolia.search.serialize.internal.KeySlaves
-import com.algolia.search.serialize.internal.KeySnippetEllipsisText
-import com.algolia.search.serialize.internal.KeySortFacetValuesBy
-import com.algolia.search.serialize.internal.KeySourceABTest
-import com.algolia.search.serialize.internal.KeySplit
-import com.algolia.search.serialize.internal.KeyStar
-import com.algolia.search.serialize.internal.KeyStartsWith
-import com.algolia.search.serialize.internal.KeyStatus
-import com.algolia.search.serialize.internal.KeyStopIfEnoughMatches
-import com.algolia.search.serialize.internal.KeyStopWord
-import com.algolia.search.serialize.internal.KeyStopped
-import com.algolia.search.serialize.internal.KeyStrategy
-import com.algolia.search.serialize.internal.KeyStrict
-import com.algolia.search.serialize.internal.KeySum
-import com.algolia.search.serialize.internal.KeySumOrFiltersScores
-import com.algolia.search.serialize.internal.KeySynonym
-import com.algolia.search.serialize.internal.KeySynonyms
-import com.algolia.search.serialize.internal.KeyTagFilters
-import com.algolia.search.serialize.internal.KeyTaskID
-import com.algolia.search.serialize.internal.KeyTimestamp
-import com.algolia.search.serialize.internal.KeyTopUsers
-import com.algolia.search.serialize.internal.KeyTotal
-import com.algolia.search.serialize.internal.KeyTownhall
-import com.algolia.search.serialize.internal.KeyTrackedSearchCount
-import com.algolia.search.serialize.internal.KeyTrafficPercentage
-import com.algolia.search.serialize.internal.KeyTrainStation
-import com.algolia.search.serialize.internal.KeyType
-import com.algolia.search.serialize.internal.KeyTypes
-import com.algolia.search.serialize.internal.KeyTypo
-import com.algolia.search.serialize.internal.KeyTypoTolerance
-import com.algolia.search.serialize.internal.KeyTypos
-import com.algolia.search.serialize.internal.KeyUS
-import com.algolia.search.serialize.internal.KeyUnordered
-import com.algolia.search.serialize.internal.KeyUnretrievableAttributes
-import com.algolia.search.serialize.internal.KeyUntil
-import com.algolia.search.serialize.internal.KeyUpdateObject
-import com.algolia.search.serialize.internal.KeyUpdatedAt
-import com.algolia.search.serialize.internal.KeyUrl
-import com.algolia.search.serialize.internal.KeyUserData
-import com.algolia.search.serialize.internal.KeyUserID
-import com.algolia.search.serialize.internal.KeyUserIDs
-import com.algolia.search.serialize.internal.KeyUserScore
-import com.algolia.search.serialize.internal.KeyUserToken
-import com.algolia.search.serialize.internal.KeyUsers
-import com.algolia.search.serialize.internal.KeyValidity
-import com.algolia.search.serialize.internal.KeyValue
-import com.algolia.search.serialize.internal.KeyVariants
-import com.algolia.search.serialize.internal.KeyVersion
-import com.algolia.search.serialize.internal.KeyView
-import com.algolia.search.serialize.internal.KeyVillage
-import com.algolia.search.serialize.internal.KeyWord
-import com.algolia.search.serialize.internal.KeyWords
-import com.algolia.search.serialize.internal.Key_DistinctSeqID
-import com.algolia.search.serialize.internal.Key_Exhaustive_Faceting
-import com.algolia.search.serialize.internal.Key_Geoloc
-import com.algolia.search.serialize.internal.Key_HighlightResult
-import com.algolia.search.serialize.internal.Key_Operation
-import com.algolia.search.serialize.internal.Key_RankingInfo
-import com.algolia.search.serialize.internal.Key_SnippetResult
-import com.algolia.search.serialize.internal.Key_Tags
-import shouldEqual
+import com.algolia.search.serialize.internal.Key
 import kotlin.test.Test
-
+import shouldEqual
 internal class TestKeys {
 
     @Test
     fun keys() {
-        KeyQuery shouldEqual "query"
-        KeySearchableAttributes shouldEqual "searchableAttributes"
-        KeyAttributesForFaceting shouldEqual "attributesForFaceting"
-        KeyUnretrievableAttributes shouldEqual "unretrievableAttributes"
-        KeyAttributesToRetrieve shouldEqual "attributesToRetrieve"
-        KeyRestrictSearchableAttributes shouldEqual "restrictSearchableAttributes"
-        KeyRanking shouldEqual "ranking"
-        KeyCustomRanking shouldEqual "customRanking"
-        KeyReplicas shouldEqual "replicas"
-        KeyFilters shouldEqual "filters"
-        KeyFacetFilters shouldEqual "facetFilters"
-        KeyOptionalFilters shouldEqual "optionalFilters"
-        KeyNumericFilters shouldEqual "numericFilters"
-        KeyTagFilters shouldEqual "tagFilters"
-        KeySumOrFiltersScores shouldEqual "sumOrFiltersScores"
-        KeyFacets shouldEqual "facets"
-        KeyMaxValuesPerFacet shouldEqual "maxValuesPerFacet"
-        KeyFacetingAfterDistinct shouldEqual "facetingAfterDistinct"
-        KeySortFacetValuesBy shouldEqual "sortFacetValuesBy"
-        KeyAttributesToHighlight shouldEqual "attributesToHighlight"
-        KeyAttributesToSnippet shouldEqual "attributesToSnippet"
-        KeyHighlightPreTag shouldEqual "highlightPreTag"
-        KeyHighlightPostTag shouldEqual "highlightPostTag"
-        KeySnippetEllipsisText shouldEqual "snippetEllipsisText"
-        KeyRestrictHighlightAndSnippetArrays shouldEqual "restrictHighlightAndSnippetArrays"
-        KeyPage shouldEqual "page"
-        KeyHitsPerPage shouldEqual "hitsPerPage"
-        KeyOffset shouldEqual "offset"
-        KeyLength shouldEqual "length"
-        KeyPaginationLimitedTo shouldEqual "paginationLimitedTo"
-        KeyMinWordSizeFor1Typo shouldEqual "minWordSizefor1Typo"
-        KeyMinWordSizeFor2Typos shouldEqual "minWordSizefor2Typos"
-        KeyTypoTolerance shouldEqual "typoTolerance"
-        KeyAllowTyposOnNumericTokens shouldEqual "allowTyposOnNumericTokens"
-        KeyDisableTypoToleranceOnAttributes shouldEqual "disableTypoToleranceOnAttributes"
-        KeyDisableTypoToleranceOnWords shouldEqual "disableTypoToleranceOnWords"
-        KeySeparatorsToIndex shouldEqual "separatorsToIndex"
-        KeyAroundLatLng shouldEqual "aroundLatLng"
-        KeyAroundLatLngViaIP shouldEqual "aroundLatLngViaIP"
-        KeyAroundRadius shouldEqual "aroundRadius"
-        KeyAroundPrecision shouldEqual "aroundPrecision"
-        KeyMinimumAroundRadius shouldEqual "minimumAroundRadius"
-        KeyInsideBoundingBox shouldEqual "insideBoundingBox"
-        KeyInsidePolygon shouldEqual "insidePolygon"
-        KeyIgnorePlurals shouldEqual "ignorePlurals"
-        KeyRemoveStopWords shouldEqual "removeStopWords"
-        KeyCamelCaseAttributes shouldEqual "camelCaseAttributes"
-        KeyDecompoundedAttributes shouldEqual "decompoundedAttributes"
-        KeyKeepDiacriticsOnCharacters shouldEqual "keepDiacriticsOnCharacters"
-        KeyQueryLanguages shouldEqual "queryLanguages"
-        KeyEnableRules shouldEqual "enableRules"
-        KeyRuleContexts shouldEqual "ruleContexts"
-        KeyEnablePersonalization shouldEqual "enablePersonalization"
-        KeyQueryType shouldEqual "queryType"
-        KeyRemoveWordsIfNoResults shouldEqual "removeWordsIfNoResults"
-        KeyAdvancedSyntax shouldEqual "advancedSyntax"
-        KeyOptionalWords shouldEqual "optionalWords"
-        KeyDisablePrefixOnAttributes shouldEqual "disablePrefixOnAttributes"
-        KeyDisableExactOnAttributes shouldEqual "disableExactOnAttributes"
-        KeyExactOnSingleWordQuery shouldEqual "exactOnSingleWordQuery"
-        KeyAlternativesAsExact shouldEqual "alternativesAsExact"
-        KeyNumericAttributesForFiltering shouldEqual "numericAttributesForFiltering"
-        KeyAllowCompressionOfIntegerArray shouldEqual "allowCompressionOfIntegerArray"
-        KeyAttributeForDistinct shouldEqual "attributeForDistinct"
-        KeyDistinct shouldEqual "distinct"
-        KeyGetRankingInfo shouldEqual "getRankingInfo"
-        KeyClickAnalytics shouldEqual "clickAnalytics"
-        KeyAnalytics shouldEqual "analytics"
-        KeyAnalyticsTags shouldEqual "analyticsTags"
-        KeySynonyms shouldEqual "synonyms"
-        KeyReplaceSynonymsInHighlight shouldEqual "replaceSynonymsInHighlight"
-        KeyMinProximity shouldEqual "minProximity"
-        KeyResponseFields shouldEqual "responseFields"
-        KeyMaxFacetHits shouldEqual "maxFacetHits"
-        KeyPercentileComputation shouldEqual "percentileComputation"
-        KeyGeo shouldEqual "geo"
-        KeyTypo shouldEqual "typo"
-        KeyWords shouldEqual "words"
-        KeyProximity shouldEqual "proximity"
-        KeyAttribute shouldEqual "attribute"
-        KeyExact shouldEqual "exact"
-        KeyCustom shouldEqual "custom"
-        KeyAsc shouldEqual "asc"
-        KeyDesc shouldEqual "desc"
-        KeyStrict shouldEqual "strict"
-        KeyMin shouldEqual "min"
-        KeySingleWordSynonym shouldEqual "singleWordSynonym"
-        KeyMultiWordsSynonym shouldEqual "multiWordsSynonym"
-        KeyAll shouldEqual "all"
-        KeyWord shouldEqual "word"
-        KeyNone shouldEqual "none"
-        KeyStopIfEnoughMatches shouldEqual "stopIfEnoughMatches"
-        KeyPrefixLast shouldEqual "prefixLast"
-        KeyPrefixAll shouldEqual "prefixAll"
-        KeyPrefixNone shouldEqual "prefixNone"
-        KeyLastWords shouldEqual "lastWords"
-        KeyFirstWords shouldEqual "firstWords"
-        KeyAllOptional shouldEqual "allOptional"
-        KeyStar shouldEqual "*"
-        KeyAutomaticRadius shouldEqual "automaticRadius"
-        KeyExhaustiveFacetsCount shouldEqual "exhaustiveFacetsCount"
-        KeyFacets_Stats shouldEqual "facets_stats"
-        KeyHits shouldEqual "hits"
-        KeyIndex shouldEqual "index"
-        KeyNbHits shouldEqual "nbHits"
-        KeyNbPages shouldEqual "nbPages"
-        KeyParams shouldEqual "params"
-        KeyProcessingTimeMS shouldEqual "processingTimeMS"
-        KeyQueryAfterRemoval shouldEqual "queryAfterRemoval"
-        KeyUserData shouldEqual "userData"
-        KeyCount shouldEqual "count"
-        KeyAlpha shouldEqual "alpha"
-        KeyEqualOnly shouldEqual "equalOnly"
-        KeyFacetQuery shouldEqual "facetQuery"
-        KeyStrategy shouldEqual "strategy"
-        KeyRequests shouldEqual "requests"
-        KeyIndexName shouldEqual "indexName"
-        KeyPublished shouldEqual "published"
-        KeyNotPublished shouldEqual "notPublished"
-        KeyStatus shouldEqual "status"
-        KeyOperation shouldEqual "operation"
-        KeyDestination shouldEqual "destination"
-        KeyCopy shouldEqual "copy"
-        KeyMove shouldEqual "move"
-        KeyRules shouldEqual "rules"
-        KeySettings shouldEqual "settings"
-        KeyScope shouldEqual "scope"
-        KeyCursor shouldEqual "cursor"
-        KeyPartial shouldEqual "partial"
-        KeyFull shouldEqual "full"
-        KeyCreateIfNotExists shouldEqual "createIfNotExists"
-        KeyIncrement shouldEqual "Increment"
-        KeyDecrement shouldEqual "Decrement"
-        KeyAdd shouldEqual "Add"
-        KeyRemove shouldEqual "Remove"
-        KeyRemoveLowercase shouldEqual "remove"
-        KeyAddUnique shouldEqual "AddUnique"
-        Key_Operation shouldEqual "_operation"
-        KeyValue shouldEqual "value"
-        KeyObjectID shouldEqual "objectID"
-        KeyResults shouldEqual "results"
-        KeyAddObject shouldEqual "addObject"
-        KeyUpdateObject shouldEqual "updateObject"
-        KeyPartialUpdateObject shouldEqual "partialUpdateObject"
-        KeyPartialUpdateObjectNoCreate shouldEqual "partialUpdateObjectNoCreate"
-        KeyDeleteObject shouldEqual "deleteObject"
-        KeyDelete shouldEqual "delete"
-        KeyClear shouldEqual "clear"
-        KeyAction shouldEqual "action"
-        KeyBody shouldEqual "body"
-        KeyObjectIDs shouldEqual "objectIDs"
-        KeyTaskID shouldEqual "taskID"
-        KeySearch shouldEqual "search"
-        KeyBrowse shouldEqual "browse"
-        KeyDeleteIndex shouldEqual "deleteIndex"
-        KeyEditSettings shouldEqual "editSettings"
-        KeyListIndexes shouldEqual "listIndexes"
-        KeyLogs shouldEqual "logs"
-        KeySeeUnretrievableAttributes shouldEqual "seeUnretrievableAttributes"
-        KeyType shouldEqual "type"
-        KeySynonym shouldEqual "synonym"
-        KeyOneWaySynonym shouldEqual "onewaysynonym"
-        KeyInput shouldEqual "input"
-        KeyCorrections shouldEqual "corrections"
-        KeyReplacements shouldEqual "replacements"
-        KeyPlaceholder shouldEqual "placeholder"
-        KeyAlternativeCorrection1 shouldEqual "altcorrection1"
-        KeyAlternativeCorrection2 shouldEqual "altcorrection2"
-        KeyReplaceExistingSynonyms shouldEqual "replaceExistingSynonyms"
-        KeyIs shouldEqual "is"
-        KeyStartsWith shouldEqual "startsWith"
-        KeyEndsWith shouldEqual "endsWith"
-        KeyContains shouldEqual "contains"
-        KeyContext shouldEqual "context"
-        KeyRule shouldEqual "rule"
-        KeyAnchoring shouldEqual "anchoring"
-        KeyPattern shouldEqual "pattern"
-        KeyReplace shouldEqual "replace"
-        KeyFacet shouldEqual "facet"
-        KeyDisjunctive shouldEqual "disjunctive"
-        KeyScore shouldEqual "score"
-        KeyInsert shouldEqual "insert"
-        KeyEdits shouldEqual "edits"
-        KeyAutomaticFacetFilters shouldEqual "automaticFacetFilters"
-        KeyAutomaticOptionalFacetFilters shouldEqual "automaticOptionalFacetFilters"
-        KeyPromote shouldEqual "promote"
-        KeyHide shouldEqual "hide"
-        KeyClearExistingRules shouldEqual "clearExistingRules"
-        KeyCluster shouldEqual "cluster"
-        KeyAlgoliaUserID shouldEqual "X-Algolia-User-ID"
-        KeyForwardedFor shouldEqual "X-Forwarded-For"
-        KeyDeletedAt shouldEqual "deletedAt"
-        KeyCreatedAt shouldEqual "createdAt"
-        KeyUpdatedAt shouldEqual "updatedAt"
-        KeyKey shouldEqual "key"
-        KeyUserIDs shouldEqual "userIDs"
-        KeyTopUsers shouldEqual "topUsers"
-        KeyKeys shouldEqual "keys"
-        Key_HighlightResult shouldEqual "_highlightResult"
-        Key_SnippetResult shouldEqual "_snippetResult"
-        Key_RankingInfo shouldEqual "_rankingInfo"
-        KeyPromoted shouldEqual "promoted"
-        KeyNbTypos shouldEqual "nbTypos"
-        KeyFirstMatchedWord shouldEqual "firstMatchedWord"
-        KeyProximityDistance shouldEqual "proximityDistance"
-        KeyUserScore shouldEqual "userScore"
-        KeyGeoDistance shouldEqual "geoDistance"
-        KeyGeoPrecision shouldEqual "geoPrecision"
-        KeyNbExactWords shouldEqual "nbExactWords"
-        KeyMatchedGeoLocation shouldEqual "matchedGeoLocation"
-        KeyLat shouldEqual "lat"
-        KeyLng shouldEqual "lng"
-        KeyDistance shouldEqual "distance"
-        Key_DistinctSeqID shouldEqual "_distinctSeqID"
-        KeyExhaustiveNbHits shouldEqual "exhaustiveNbHits"
-        KeyMessage shouldEqual "message"
-        KeyServerUsed shouldEqual "serverUsed"
-        KeyIndexUsed shouldEqual "indexUsed"
-        KeyAbTestVariantID shouldEqual "abTestVariantID"
-        KeyParsedQuery shouldEqual "parsedQuery"
-        KeyProcessed shouldEqual "processed"
-        KeyMatchLevel shouldEqual "matchLevel"
-        KeyFullyHighlighted shouldEqual "fullyHighlighted"
-        KeyMatchedWords shouldEqual "matchedWords"
-        KeyMax shouldEqual "max"
-        KeyAvg shouldEqual "avg"
-        KeySum shouldEqual "sum"
-        KeyName shouldEqual "name"
-        KeyAcl shouldEqual "acl"
-        KeyIndexes shouldEqual "indexes"
-        KeyDescription shouldEqual "description"
-        KeyMaxHitsPerQuery shouldEqual "maxHitsPerQuery"
-        KeyMaxQueriesPerIPPerHour shouldEqual "maxQueriesPerIPPerHour"
-        KeyValidity shouldEqual "validity"
-        KeyQueryParameters shouldEqual "queryParameters"
-        KeyReferers shouldEqual "referers"
-        KeyClusterName shouldEqual "clusterName"
-        KeyUserID shouldEqual "userID"
-        KeyNbRecords shouldEqual "nbRecords"
-        KeyDataSize shouldEqual "dataSize"
-        KeyNbUserIDs shouldEqual "nbUserIDs"
-        KeyClusters shouldEqual "clusters"
-        KeyItems shouldEqual "items"
-        KeyEntries shouldEqual "entries"
-        KeyFileSize shouldEqual "fileSize"
-        KeyLastBuildTimeS shouldEqual "lastBuildTimeS"
-        KeyNumberOfPendingTasks shouldEqual "numberOfPendingTasks"
-        KeyPendingTask shouldEqual "pendingTask"
-        KeyCondition shouldEqual "condition"
-        KeyConsequence shouldEqual "consequence"
-        KeyEnabled shouldEqual "enabled"
-        KeyFacetHits shouldEqual "facetHits"
-        KeyId shouldEqual "id"
-        KeyHighlighted shouldEqual "highlighted"
-        KeyAlgoliaApplicationID shouldEqual "X-Algolia-Application-Id"
-        KeyAlgoliaAPIKey shouldEqual "X-Algolia-API-Key"
-        KeyPrimary shouldEqual "primary"
-        KeySourceABTest shouldEqual "sourceABTest"
-        KeyABTest shouldEqual "abTest"
-        KeyOrdered shouldEqual "ordered"
-        KeyUnordered shouldEqual "unordered"
-        KeyFilterOnly shouldEqual "filterOnly"
-        KeySearchable shouldEqual "searchable"
-        KeyQueryID shouldEqual "queryID"
-        KeyVersion shouldEqual "version"
-        KeyPosition shouldEqual "position"
-        KeyFrom shouldEqual "from"
-        KeyUntil shouldEqual "until"
-        KeyAttributesToIndex shouldEqual "attributesToIndex"
-        KeyNumericAttributesToIndex shouldEqual "numericAttributesToIndex"
-        KeySlaves shouldEqual "slaves"
-        KeyRestrictSources shouldEqual "restrictSources"
-        KeyTimestamp shouldEqual "timestamp"
-        KeyMethod shouldEqual "method"
-        KeyAnswer_Code shouldEqual "answer_code"
-        KeyQuery_Body shouldEqual "query_body"
-        KeyAnswer shouldEqual "answer"
-        KeyUrl shouldEqual "url"
-        KeyIp shouldEqual "ip"
-        KeyQuery_Headers shouldEqual "query_headers"
-        KeySha1 shouldEqual "sha1"
-        KeyProcessing_Time_Ms shouldEqual "processing_time_ms"
-        KeyNb_Api_Calls shouldEqual "nb_api_calls"
-        KeyQuery_Params shouldEqual "query_params"
-        KeyQuery_Nb_Hits shouldEqual "query_nb_hits"
-        KeyEndAt shouldEqual "endAt"
-        KeyTrafficPercentage shouldEqual "trafficPercentage"
-        KeyVariants shouldEqual "variants"
-        KeyABTestID shouldEqual "abTestID"
-        KeyTrackedSearchCount shouldEqual "trackedSearchCount"
-        KeyABTests shouldEqual "abtests"
-        KeyLimit shouldEqual "limit"
-        KeyTotal shouldEqual "total"
-        KeyCustomSearchParameters shouldEqual "customSearchParameters"
-        KeyActive shouldEqual "active"
-        KeyStopped shouldEqual "stopped"
-        KeyExpired shouldEqual "expired"
-        KeyFailed shouldEqual "failed"
-        KeyPercentage shouldEqual "percentage"
-        KeyEventName shouldEqual "eventName"
-        KeyUserToken shouldEqual "userToken"
-        KeyPositions shouldEqual "positions"
-        KeyEventType shouldEqual "eventType"
-        KeyClick shouldEqual "click"
-        KeyView shouldEqual "view"
-        KeyConversion shouldEqual "conversion"
-        KeyEvents shouldEqual "events"
-        KeyDisjunctiveFacets shouldEqual "disjunctiveFacets"
-        KeyEventsScoring shouldEqual "eventsScoring"
-        KeyFacetsScoring shouldEqual "facetsScoring"
-        Key_Exhaustive_Faceting shouldEqual "exhaustive_faceting"
-        KeyExactPhrase shouldEqual "exactPhrase"
-        KeyExcludeWords shouldEqual "excludeWords"
-        KeyAdvancedSyntaxFeatures shouldEqual "advancedSyntaxFeatures"
-        KeyPersonalizationImpact shouldEqual "personalizationImpact"
-        KeyLanguage shouldEqual "language"
-        KeyCity shouldEqual "city"
-        KeyCountry shouldEqual "country"
-        KeyAddress shouldEqual "address"
-        KeyBusStop shouldEqual "busStop"
-        KeyTrainStation shouldEqual "trainStation"
-        KeyTownhall shouldEqual "townhall"
-        KeyAirport shouldEqual "airport"
-        KeyLocaleNames shouldEqual "locale_names"
-        KeyCounty shouldEqual "county"
-        KeyAdministrative shouldEqual "administrative"
-        KeyCountryCode shouldEqual "country_code"
-        KeyPostCode shouldEqual "postcode"
-        KeyPopulation shouldEqual "population"
-        Key_Geoloc shouldEqual "_geoloc"
-        KeyIs_Country shouldEqual "is_country"
-        KeyIs_City shouldEqual "is_city"
-        KeyIs_Popular shouldEqual "is_popular"
-        KeyIs_Highway shouldEqual "is_highway"
-        KeyIs_Suburb shouldEqual "is_suburb"
-        KeyImportance shouldEqual "importance"
-        Key_Tags shouldEqual "_tags"
-        KeyAdmin_Level shouldEqual "admin_level"
-        KeyDistrict shouldEqual "district"
-        KeyDegradedQuery shouldEqual "degradedQuery"
-        KeyGeoPoint shouldEqual "geoPoint"
-        KeyVillage shouldEqual "village"
-        KeySimilarQuery shouldEqual "similarQuery"
-        KeyEnableABTest shouldEqual "enableABTest"
-        KeyAlternatives shouldEqual "alternatives"
-        KeyIndexLanguages shouldEqual "indexLanguages"
-        KeyCustomNormalization shouldEqual "customNormalization"
-        KeyFilterPromotes shouldEqual "filterPromotes"
-        KeyUsers shouldEqual "users"
-        KeyExplain shouldEqual "explain"
-        KeyOriginal shouldEqual "original"
-        KeyExcluded shouldEqual "excluded"
-        KeyOptional shouldEqual "optional"
-        KeyStopWord shouldEqual "stopword"
-        KeySplit shouldEqual "split"
-        KeyConcat shouldEqual "concat"
-        KeyAltcorrection shouldEqual "altcorrection"
-        KeyPlural shouldEqual "plural"
-        KeyCompound shouldEqual "compound"
-        KeyMatch shouldEqual "match"
-        KeyTypos shouldEqual "typos"
-        KeyMatchAlternatives shouldEqual "match.alternatives"
-        KeyTypes shouldEqual "types"
-        KeyPending shouldEqual "pending"
-        KeyGetClusters shouldEqual "getClusters"
-        KeyEU shouldEqual "eu"
-        KeyUS shouldEqual "us"
-        KeyNaturalLanguages shouldEqual "naturalLanguages"
+        Key.Query shouldEqual "query"
+        Key.SearchableAttributes shouldEqual "searchableAttributes"
+        Key.AttributesForFaceting shouldEqual "attributesForFaceting"
+        Key.UnretrievableAttributes shouldEqual "unretrievableAttributes"
+        Key.AttributesToRetrieve shouldEqual "attributesToRetrieve"
+        Key.RestrictSearchableAttributes shouldEqual "restrictSearchableAttributes"
+        Key.Ranking shouldEqual "ranking"
+        Key.CustomRanking shouldEqual "customRanking"
+        Key.Replicas shouldEqual "replicas"
+        Key.Filters shouldEqual "filters"
+        Key.FacetFilters shouldEqual "facetFilters"
+        Key.OptionalFilters shouldEqual "optionalFilters"
+        Key.NumericFilters shouldEqual "numericFilters"
+        Key.TagFilters shouldEqual "tagFilters"
+        Key.SumOrFiltersScores shouldEqual "sumOrFiltersScores"
+        Key.Facets shouldEqual "facets"
+        Key.MaxValuesPerFacet shouldEqual "maxValuesPerFacet"
+        Key.FacetingAfterDistinct shouldEqual "facetingAfterDistinct"
+        Key.SortFacetValuesBy shouldEqual "sortFacetValuesBy"
+        Key.AttributesToHighlight shouldEqual "attributesToHighlight"
+        Key.AttributesToSnippet shouldEqual "attributesToSnippet"
+        Key.HighlightPreTag shouldEqual "highlightPreTag"
+        Key.HighlightPostTag shouldEqual "highlightPostTag"
+        Key.SnippetEllipsisText shouldEqual "snippetEllipsisText"
+        Key.RestrictHighlightAndSnippetArrays shouldEqual "restrictHighlightAndSnippetArrays"
+        Key.Page shouldEqual "page"
+        Key.HitsPerPage shouldEqual "hitsPerPage"
+        Key.Offset shouldEqual "offset"
+        Key.Length shouldEqual "length"
+        Key.PaginationLimitedTo shouldEqual "paginationLimitedTo"
+        Key.MinWordSizeFor1Typo shouldEqual "minWordSizefor1Typo"
+        Key.MinWordSizeFor2Typos shouldEqual "minWordSizefor2Typos"
+        Key.TypoTolerance shouldEqual "typoTolerance"
+        Key.AllowTyposOnNumericTokens shouldEqual "allowTyposOnNumericTokens"
+        Key.DisableTypoToleranceOnAttributes shouldEqual "disableTypoToleranceOnAttributes"
+        Key.DisableTypoToleranceOnWords shouldEqual "disableTypoToleranceOnWords"
+        Key.SeparatorsToIndex shouldEqual "separatorsToIndex"
+        Key.AroundLatLng shouldEqual "aroundLatLng"
+        Key.AroundLatLngViaIP shouldEqual "aroundLatLngViaIP"
+        Key.AroundRadius shouldEqual "aroundRadius"
+        Key.AroundPrecision shouldEqual "aroundPrecision"
+        Key.MinimumAroundRadius shouldEqual "minimumAroundRadius"
+        Key.InsideBoundingBox shouldEqual "insideBoundingBox"
+        Key.InsidePolygon shouldEqual "insidePolygon"
+        Key.IgnorePlurals shouldEqual "ignorePlurals"
+        Key.RemoveStopWords shouldEqual "removeStopWords"
+        Key.CamelCaseAttributes shouldEqual "camelCaseAttributes"
+        Key.DecompoundedAttributes shouldEqual "decompoundedAttributes"
+        Key.KeepDiacriticsOnCharacters shouldEqual "keepDiacriticsOnCharacters"
+        Key.QueryLanguages shouldEqual "queryLanguages"
+        Key.EnableRules shouldEqual "enableRules"
+        Key.RuleContexts shouldEqual "ruleContexts"
+        Key.EnablePersonalization shouldEqual "enablePersonalization"
+        Key.QueryType shouldEqual "queryType"
+        Key.RemoveWordsIfNoResults shouldEqual "removeWordsIfNoResults"
+        Key.AdvancedSyntax shouldEqual "advancedSyntax"
+        Key.OptionalWords shouldEqual "optionalWords"
+        Key.DisablePrefixOnAttributes shouldEqual "disablePrefixOnAttributes"
+        Key.DisableExactOnAttributes shouldEqual "disableExactOnAttributes"
+        Key.ExactOnSingleWordQuery shouldEqual "exactOnSingleWordQuery"
+        Key.AlternativesAsExact shouldEqual "alternativesAsExact"
+        Key.NumericAttributesForFiltering shouldEqual "numericAttributesForFiltering"
+        Key.AllowCompressionOfIntegerArray shouldEqual "allowCompressionOfIntegerArray"
+        Key.AttributeForDistinct shouldEqual "attributeForDistinct"
+        Key.Distinct shouldEqual "distinct"
+        Key.GetRankingInfo shouldEqual "getRankingInfo"
+        Key.ClickAnalytics shouldEqual "clickAnalytics"
+        Key.Analytics shouldEqual "analytics"
+        Key.AnalyticsTags shouldEqual "analyticsTags"
+        Key.Synonyms shouldEqual "synonyms"
+        Key.ReplaceSynonymsInHighlight shouldEqual "replaceSynonymsInHighlight"
+        Key.MinProximity shouldEqual "minProximity"
+        Key.ResponseFields shouldEqual "responseFields"
+        Key.MaxFacetHits shouldEqual "maxFacetHits"
+        Key.PercentileComputation shouldEqual "percentileComputation"
+        Key.Geo shouldEqual "geo"
+        Key.Typo shouldEqual "typo"
+        Key.Words shouldEqual "words"
+        Key.Proximity shouldEqual "proximity"
+        Key.Attribute shouldEqual "attribute"
+        Key.Exact shouldEqual "exact"
+        Key.Custom shouldEqual "custom"
+        Key.Asc shouldEqual "asc"
+        Key.Desc shouldEqual "desc"
+        Key.Strict shouldEqual "strict"
+        Key.Min shouldEqual "min"
+        Key.SingleWordSynonym shouldEqual "singleWordSynonym"
+        Key.MultiWordsSynonym shouldEqual "multiWordsSynonym"
+        Key.All shouldEqual "all"
+        Key.Word shouldEqual "word"
+        Key.None shouldEqual "none"
+        Key.StopIfEnoughMatches shouldEqual "stopIfEnoughMatches"
+        Key.PrefixLast shouldEqual "prefixLast"
+        Key.PrefixAll shouldEqual "prefixAll"
+        Key.PrefixNone shouldEqual "prefixNone"
+        Key.LastWords shouldEqual "lastWords"
+        Key.FirstWords shouldEqual "firstWords"
+        Key.AllOptional shouldEqual "allOptional"
+        Key.Star shouldEqual "*"
+        Key.AutomaticRadius shouldEqual "automaticRadius"
+        Key.ExhaustiveFacetsCount shouldEqual "exhaustiveFacetsCount"
+        Key.Facets_Stats shouldEqual "facets_stats"
+        Key.Hits shouldEqual "hits"
+        Key.Index shouldEqual "index"
+        Key.NbHits shouldEqual "nbHits"
+        Key.NbPages shouldEqual "nbPages"
+        Key.Params shouldEqual "params"
+        Key.ProcessingTimeMS shouldEqual "processingTimeMS"
+        Key.QueryAfterRemoval shouldEqual "queryAfterRemoval"
+        Key.UserData shouldEqual "userData"
+        Key.Count shouldEqual "count"
+        Key.Alpha shouldEqual "alpha"
+        Key.EqualOnly shouldEqual "equalOnly"
+        Key.FacetQuery shouldEqual "facetQuery"
+        Key.Strategy shouldEqual "strategy"
+        Key.Requests shouldEqual "requests"
+        Key.IndexName shouldEqual "indexName"
+        Key.Published shouldEqual "published"
+        Key.NotPublished shouldEqual "notPublished"
+        Key.Status shouldEqual "status"
+        Key.Operation shouldEqual "operation"
+        Key.Destination shouldEqual "destination"
+        Key.Copy shouldEqual "copy"
+        Key.Move shouldEqual "move"
+        Key.Rules shouldEqual "rules"
+        Key.Settings shouldEqual "settings"
+        Key.Scope shouldEqual "scope"
+        Key.Cursor shouldEqual "cursor"
+        Key.Partial shouldEqual "partial"
+        Key.Full shouldEqual "full"
+        Key.CreateIfNotExists shouldEqual "createIfNotExists"
+        Key.Increment shouldEqual "Increment"
+        Key.Decrement shouldEqual "Decrement"
+        Key.Add shouldEqual "Add"
+        Key.Remove shouldEqual "Remove"
+        Key.RemoveLowercase shouldEqual "remove"
+        Key.AddUnique shouldEqual "AddUnique"
+        Key._Operation shouldEqual "_operation"
+        Key.Value shouldEqual "value"
+        Key.ObjectID shouldEqual "objectID"
+        Key.Results shouldEqual "results"
+        Key.AddObject shouldEqual "addObject"
+        Key.UpdateObject shouldEqual "updateObject"
+        Key.PartialUpdateObject shouldEqual "partialUpdateObject"
+        Key.PartialUpdateObjectNoCreate shouldEqual "partialUpdateObjectNoCreate"
+        Key.DeleteObject shouldEqual "deleteObject"
+        Key.Delete shouldEqual "delete"
+        Key.Clear shouldEqual "clear"
+        Key.Action shouldEqual "action"
+        Key.Body shouldEqual "body"
+        Key.ObjectIDs shouldEqual "objectIDs"
+        Key.TaskID shouldEqual "taskID"
+        Key.Search shouldEqual "search"
+        Key.Browse shouldEqual "browse"
+        Key.DeleteIndex shouldEqual "deleteIndex"
+        Key.EditSettings shouldEqual "editSettings"
+        Key.ListIndexes shouldEqual "listIndexes"
+        Key.Logs shouldEqual "logs"
+        Key.SeeUnretrievableAttributes shouldEqual "seeUnretrievableAttributes"
+        Key.Type shouldEqual "type"
+        Key.Synonym shouldEqual "synonym"
+        Key.OneWaySynonym shouldEqual "onewaysynonym"
+        Key.Input shouldEqual "input"
+        Key.Corrections shouldEqual "corrections"
+        Key.Replacements shouldEqual "replacements"
+        Key.Placeholder shouldEqual "placeholder"
+        Key.AlternativeCorrection1 shouldEqual "altcorrection1"
+        Key.AlternativeCorrection2 shouldEqual "altcorrection2"
+        Key.ReplaceExistingSynonyms shouldEqual "replaceExistingSynonyms"
+        Key.Is shouldEqual "is"
+        Key.StartsWith shouldEqual "startsWith"
+        Key.EndsWith shouldEqual "endsWith"
+        Key.Contains shouldEqual "contains"
+        Key.Context shouldEqual "context"
+        Key.Rule shouldEqual "rule"
+        Key.Anchoring shouldEqual "anchoring"
+        Key.Pattern shouldEqual "pattern"
+        Key.Replace shouldEqual "replace"
+        Key.Facet shouldEqual "facet"
+        Key.Disjunctive shouldEqual "disjunctive"
+        Key.Score shouldEqual "score"
+        Key.Insert shouldEqual "insert"
+        Key.Edits shouldEqual "edits"
+        Key.AutomaticFacetFilters shouldEqual "automaticFacetFilters"
+        Key.AutomaticOptionalFacetFilters shouldEqual "automaticOptionalFacetFilters"
+        Key.Promote shouldEqual "promote"
+        Key.Hide shouldEqual "hide"
+        Key.ClearExistingRules shouldEqual "clearExistingRules"
+        Key.Cluster shouldEqual "cluster"
+        Key.AlgoliaUserID shouldEqual "X-Algolia-User-ID"
+        Key.ForwardedFor shouldEqual "X-Forwarded-For"
+        Key.DeletedAt shouldEqual "deletedAt"
+        Key.CreatedAt shouldEqual "createdAt"
+        Key.UpdatedAt shouldEqual "updatedAt"
+        Key.Key shouldEqual "key"
+        Key.UserIDs shouldEqual "userIDs"
+        Key.TopUsers shouldEqual "topUsers"
+        Key.Key shouldEqual "keys"
+        Key._HighlightResult shouldEqual "_highlightResult"
+        Key._SnippetResult shouldEqual "_snippetResult"
+        Key._RankingInfo shouldEqual "_rankingInfo"
+        Key.Promoted shouldEqual "promoted"
+        Key.NbTypos shouldEqual "nbTypos"
+        Key.FirstMatchedWord shouldEqual "firstMatchedWord"
+        Key.ProximityDistance shouldEqual "proximityDistance"
+        Key.UserScore shouldEqual "userScore"
+        Key.GeoDistance shouldEqual "geoDistance"
+        Key.GeoPrecision shouldEqual "geoPrecision"
+        Key.NbExactWords shouldEqual "nbExactWords"
+        Key.MatchedGeoLocation shouldEqual "matchedGeoLocation"
+        Key.Lat shouldEqual "lat"
+        Key.Lng shouldEqual "lng"
+        Key.Distance shouldEqual "distance"
+        Key._DistinctSeqID shouldEqual "_distinctSeqID"
+        Key.ExhaustiveNbHits shouldEqual "exhaustiveNbHits"
+        Key.Message shouldEqual "message"
+        Key.ServerUsed shouldEqual "serverUsed"
+        Key.IndexUsed shouldEqual "indexUsed"
+        Key.AbTestVariantID shouldEqual "abTestVariantID"
+        Key.ParsedQuery shouldEqual "parsedQuery"
+        Key.Processed shouldEqual "processed"
+        Key.MatchLevel shouldEqual "matchLevel"
+        Key.FullyHighlighted shouldEqual "fullyHighlighted"
+        Key.MatchedWords shouldEqual "matchedWords"
+        Key.Max shouldEqual "max"
+        Key.Avg shouldEqual "avg"
+        Key.Sum shouldEqual "sum"
+        Key.Name shouldEqual "name"
+        Key.Acl shouldEqual "acl"
+        Key.Indexes shouldEqual "indexes"
+        Key.Description shouldEqual "description"
+        Key.MaxHitsPerQuery shouldEqual "maxHitsPerQuery"
+        Key.MaxQueriesPerIPPerHour shouldEqual "maxQueriesPerIPPerHour"
+        Key.Validity shouldEqual "validity"
+        Key.QueryParameters shouldEqual "queryParameters"
+        Key.Referers shouldEqual "referers"
+        Key.ClusterName shouldEqual "clusterName"
+        Key.UserID shouldEqual "userID"
+        Key.NbRecords shouldEqual "nbRecords"
+        Key.DataSize shouldEqual "dataSize"
+        Key.NbUserIDs shouldEqual "nbUserIDs"
+        Key.Clusters shouldEqual "clusters"
+        Key.Items shouldEqual "items"
+        Key.Entries shouldEqual "entries"
+        Key.FileSize shouldEqual "fileSize"
+        Key.LastBuildTimeS shouldEqual "lastBuildTimeS"
+        Key.NumberOfPendingTasks shouldEqual "numberOfPendingTasks"
+        Key.PendingTask shouldEqual "pendingTask"
+        Key.Condition shouldEqual "condition"
+        Key.Consequence shouldEqual "consequence"
+        Key.Enabled shouldEqual "enabled"
+        Key.FacetHits shouldEqual "facetHits"
+        Key.Id shouldEqual "id"
+        Key.Highlighted shouldEqual "highlighted"
+        Key.AlgoliaApplicationID shouldEqual "X-Algolia-Application-Id"
+        Key.AlgoliaAPIKey shouldEqual "X-Algolia-API-Key"
+        Key.Primary shouldEqual "primary"
+        Key.SourceABTest shouldEqual "sourceABTest"
+        Key.ABTest shouldEqual "abTest"
+        Key.Ordered shouldEqual "ordered"
+        Key.Unordered shouldEqual "unordered"
+        Key.FilterOnly shouldEqual "filterOnly"
+        Key.Searchable shouldEqual "searchable"
+        Key.QueryID shouldEqual "queryID"
+        Key.Version shouldEqual "version"
+        Key.Position shouldEqual "position"
+        Key.From shouldEqual "from"
+        Key.Until shouldEqual "until"
+        Key.AttributesToIndex shouldEqual "attributesToIndex"
+        Key.NumericAttributesToIndex shouldEqual "numericAttributesToIndex"
+        Key.Slaves shouldEqual "slaves"
+        Key.RestrictSources shouldEqual "restrictSources"
+        Key.Timestamp shouldEqual "timestamp"
+        Key.Method shouldEqual "method"
+        Key.Answer_Code shouldEqual "answer_code"
+        Key.Query_Body shouldEqual "query_body"
+        Key.Answer shouldEqual "answer"
+        Key.Url shouldEqual "url"
+        Key.Ip shouldEqual "ip"
+        Key.Query_Headers shouldEqual "query_headers"
+        Key.Sha1 shouldEqual "sha1"
+        Key.Processing_Time_Ms shouldEqual "processing_time_ms"
+        Key.Nb_Api_Calls shouldEqual "nb_api_calls"
+        Key.Query_Params shouldEqual "query_params"
+        Key.Query_Nb_Hits shouldEqual "query_nb_hits"
+        Key.EndAt shouldEqual "endAt"
+        Key.TrafficPercentage shouldEqual "trafficPercentage"
+        Key.Variants shouldEqual "variants"
+        Key.ABTestID shouldEqual "abTestID"
+        Key.TrackedSearchCount shouldEqual "trackedSearchCount"
+        Key.ABTests shouldEqual "abtests"
+        Key.Limit shouldEqual "limit"
+        Key.Total shouldEqual "total"
+        Key.CustomSearchParameters shouldEqual "customSearchParameters"
+        Key.Active shouldEqual "active"
+        Key.Stopped shouldEqual "stopped"
+        Key.Expired shouldEqual "expired"
+        Key.Failed shouldEqual "failed"
+        Key.Percentage shouldEqual "percentage"
+        Key.EventName shouldEqual "eventName"
+        Key.UserToken shouldEqual "userToken"
+        Key.Positions shouldEqual "positions"
+        Key.EventType shouldEqual "eventType"
+        Key.Click shouldEqual "click"
+        Key.View shouldEqual "view"
+        Key.Conversion shouldEqual "conversion"
+        Key.Events shouldEqual "events"
+        Key.DisjunctiveFacets shouldEqual "disjunctiveFacets"
+        Key.EventsScoring shouldEqual "eventsScoring"
+        Key.FacetsScoring shouldEqual "facetsScoring"
+        Key._Exhaustive_Faceting shouldEqual "exhaustive_faceting"
+        Key.ExactPhrase shouldEqual "exactPhrase"
+        Key.ExcludeWords shouldEqual "excludeWords"
+        Key.AdvancedSyntaxFeatures shouldEqual "advancedSyntaxFeatures"
+        Key.PersonalizationImpact shouldEqual "personalizationImpact"
+        Key.Language shouldEqual "language"
+        Key.City shouldEqual "city"
+        Key.Country shouldEqual "country"
+        Key.Address shouldEqual "address"
+        Key.BusStop shouldEqual "busStop"
+        Key.TrainStation shouldEqual "trainStation"
+        Key.Townhall shouldEqual "townhall"
+        Key.Airport shouldEqual "airport"
+        Key.LocaleNames shouldEqual "locale_names"
+        Key.County shouldEqual "county"
+        Key.Administrative shouldEqual "administrative"
+        Key.CountryCode shouldEqual "country_code"
+        Key.PostCode shouldEqual "postcode"
+        Key.Population shouldEqual "population"
+        Key._Geoloc shouldEqual "_geoloc"
+        Key.Is_Country shouldEqual "is_country"
+        Key.Is_City shouldEqual "is_city"
+        Key.Is_Popular shouldEqual "is_popular"
+        Key.Is_Highway shouldEqual "is_highway"
+        Key.Is_Suburb shouldEqual "is_suburb"
+        Key.Importance shouldEqual "importance"
+        Key._Tags shouldEqual "_tags"
+        Key.Admin_Level shouldEqual "admin_level"
+        Key.District shouldEqual "district"
+        Key.DegradedQuery shouldEqual "degradedQuery"
+        Key.GeoPoint shouldEqual "geoPoint"
+        Key.Village shouldEqual "village"
+        Key.SimilarQuery shouldEqual "similarQuery"
+        Key.EnableABTest shouldEqual "enableABTest"
+        Key.Alternatives shouldEqual "alternatives"
+        Key.IndexLanguages shouldEqual "indexLanguages"
+        Key.CustomNormalization shouldEqual "customNormalization"
+        Key.FilterPromotes shouldEqual "filterPromotes"
+        Key.Users shouldEqual "users"
+        Key.Explain shouldEqual "explain"
+        Key.Original shouldEqual "original"
+        Key.Excluded shouldEqual "excluded"
+        Key.Optional shouldEqual "optional"
+        Key.StopWord shouldEqual "stopword"
+        Key.Split shouldEqual "split"
+        Key.Concat shouldEqual "concat"
+        Key.Altcorrection shouldEqual "altcorrection"
+        Key.Plural shouldEqual "plural"
+        Key.Compound shouldEqual "compound"
+        Key.Match shouldEqual "match"
+        Key.Typos shouldEqual "typos"
+        Key.MatchAlternatives shouldEqual "match.alternatives"
+        Key.Types shouldEqual "types"
+        Key.Pending shouldEqual "pending"
+        Key.GetClusters shouldEqual "getClusters"
+        Key.EU shouldEqual "eu"
+        Key.US shouldEqual "us"
+        Key.NaturalLanguages shouldEqual "naturalLanguages"
     }
 }

@@ -3,7 +3,7 @@ package serialize.response
 import com.algolia.search.helper.toTaskID
 import com.algolia.search.model.response.ResponseBatches
 import com.algolia.search.model.task.TaskIndex
-import com.algolia.search.serialize.internal.KeyTaskID
+import com.algolia.search.serialize.internal.Key
 import indexA
 import indexB
 import kotlinx.serialization.json.buildJsonObject
@@ -20,7 +20,7 @@ internal class TestResponseBatches : TestSerializer<ResponseBatches>(ResponseBat
             listOf(taskIndexA, taskIndexB)
         ) to buildJsonObject {
             put(
-                KeyTaskID,
+                Key.TaskID,
                 buildJsonObject {
                     put(taskIndexA.indexName.raw, taskIndexA.taskID.raw)
                     put(taskIndexB.indexName.raw, taskIndexB.taskID.raw)

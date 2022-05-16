@@ -4,13 +4,7 @@ import com.algolia.search.ExperimentalAlgoliaClientAPI
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.AnswersQuery
 import com.algolia.search.model.search.Language
-import com.algolia.search.serialize.internal.KeyAttributesForPrediction
-import com.algolia.search.serialize.internal.KeyFilters
-import com.algolia.search.serialize.internal.KeyNbHits
-import com.algolia.search.serialize.internal.KeyParams
-import com.algolia.search.serialize.internal.KeyQuery
-import com.algolia.search.serialize.internal.KeyQueryLanguages
-import com.algolia.search.serialize.internal.KeyThreshold
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.add
@@ -31,17 +25,17 @@ internal class TestAnswers : TestSerializer<AnswersQuery>(AnswersQuery.serialize
             nbHits = 10,
             threshold = 20f
         ) to buildJsonObject {
-            put(KeyQuery, "query")
-            put(KeyQueryLanguages, buildJsonArray { add(Language.English.raw) })
+            put(Key.Query, "query")
+            put(Key.QueryLanguages, buildJsonArray { add(Language.English.raw) })
             put(
-                KeyAttributesForPrediction,
+                Key.AttributesForPrediction,
                 buildJsonArray {
                     add("a1")
                     add("a2")
                 }
             )
-            put(KeyNbHits, 10)
-            put(KeyThreshold, 20f)
+            put(Key.NbHits, 10)
+            put(Key.Threshold, 20f)
         },
 
         AnswersQuery(
@@ -50,12 +44,12 @@ internal class TestAnswers : TestSerializer<AnswersQuery>(AnswersQuery.serialize
         ).apply {
             filters = "brand:sony"
         } to buildJsonObject {
-            put(KeyQuery, "query")
-            put(KeyQueryLanguages, buildJsonArray { add(Language.English.raw) })
+            put(Key.Query, "query")
+            put(Key.QueryLanguages, buildJsonArray { add(Language.English.raw) })
             put(
-                KeyParams,
+                Key.Params,
                 buildJsonObject {
-                    put(KeyFilters, "brand:sony")
+                    put(Key.Filters, "brand:sony")
                 }
             )
         }

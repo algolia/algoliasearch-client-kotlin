@@ -11,7 +11,7 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.internal.KeyObjectID
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import runBlocking
@@ -30,7 +30,7 @@ internal class TestSuiteAccount {
     private val index2 = clientAdmin1.initIndex(indexName2)
     private val index3 = clientAdmin2.initIndex(indexName2)
     private val objectID = "one".toObjectID()
-    private val data = buildJsonObject { put(KeyObjectID, objectID.raw) }
+    private val data = buildJsonObject { put(Key.ObjectID, objectID.raw) }
     private val synonym = Synonym.MultiWay(objectID, synonyms = listOf("one", "two"))
     private val settings =
         Settings(searchableAttributes = listOf(SearchableAttribute.Default("objectID".toAttribute())))

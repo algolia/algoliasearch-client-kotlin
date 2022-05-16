@@ -11,7 +11,7 @@ import com.algolia.search.model.apikey.generateSecuredAPIKey
 import com.algolia.search.model.apikey.getSecuredApiKeyRemainingValidity
 import com.algolia.search.model.internal.Time
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.internal.KeyObjectID
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import runBlocking
@@ -34,7 +34,7 @@ internal class TestSecuredAPIKeyTools {
     )
     private val apiKey = ClientSearch.generateAPIKey(clientSearch.apiKey, restriction)
     private val client = ClientSearch(clientAdmin1.applicationID, apiKey)
-    private val data = buildJsonObject { put(KeyObjectID, "one") }
+    private val data = buildJsonObject { put(Key.ObjectID, "one") }
 
     fun test() {
         runBlocking {

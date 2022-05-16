@@ -12,36 +12,26 @@ import com.algolia.search.model.apikey.ACL.Other
 import com.algolia.search.model.apikey.ACL.Search
 import com.algolia.search.model.apikey.ACL.SeeUnretrievableAttributes
 import com.algolia.search.model.apikey.ACL.Settings
-import com.algolia.search.serialize.internal.KeyAddObject
-import com.algolia.search.serialize.internal.KeyAnalytics
-import com.algolia.search.serialize.internal.KeyBrowse
-import com.algolia.search.serialize.internal.KeyDeleteIndex
-import com.algolia.search.serialize.internal.KeyDeleteObject
-import com.algolia.search.serialize.internal.KeyEditSettings
-import com.algolia.search.serialize.internal.KeyListIndexes
-import com.algolia.search.serialize.internal.KeyLogs
-import com.algolia.search.serialize.internal.KeySearch
-import com.algolia.search.serialize.internal.KeySeeUnretrievableAttributes
-import com.algolia.search.serialize.internal.KeySettings
-import shouldEqual
+import com.algolia.search.serialize.internal.Key
 import unknown
 import kotlin.test.Test
+import shouldEqual
 
 internal class TestACL {
 
     @Test
     fun raw() {
-        Search.raw shouldEqual KeySearch
-        Browse.raw shouldEqual KeyBrowse
-        AddObject.raw shouldEqual KeyAddObject
-        DeleteObject.raw shouldEqual KeyDeleteObject
-        DeleteIndex.raw shouldEqual KeyDeleteIndex
-        Settings.raw shouldEqual KeySettings
-        EditSettings.raw shouldEqual KeyEditSettings
-        Analytics.raw shouldEqual KeyAnalytics
-        ListIndices.raw shouldEqual KeyListIndexes
-        Logs.raw shouldEqual KeyLogs
-        SeeUnretrievableAttributes.raw shouldEqual KeySeeUnretrievableAttributes
+        Search.raw shouldEqual Key.Search
+        Browse.raw shouldEqual Key.Browse
+        AddObject.raw shouldEqual Key.AddObject
+        DeleteObject.raw shouldEqual Key.DeleteObject
+        DeleteIndex.raw shouldEqual Key.DeleteIndex
+        Settings.raw shouldEqual Key.Settings
+        EditSettings.raw shouldEqual Key.EditSettings
+        Analytics.raw shouldEqual Key.Analytics
+        ListIndices.raw shouldEqual Key.ListIndexes
+        Logs.raw shouldEqual Key.Logs
+        SeeUnretrievableAttributes.raw shouldEqual Key.SeeUnretrievableAttributes
         Other(unknown).raw shouldEqual unknown
     }
 }

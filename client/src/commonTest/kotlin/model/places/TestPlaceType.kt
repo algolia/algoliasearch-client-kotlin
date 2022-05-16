@@ -8,13 +8,7 @@ import com.algolia.search.model.places.PlaceType.Country
 import com.algolia.search.model.places.PlaceType.Other
 import com.algolia.search.model.places.PlaceType.TownHall
 import com.algolia.search.model.places.PlaceType.TrainStation
-import com.algolia.search.serialize.internal.KeyAddress
-import com.algolia.search.serialize.internal.KeyAirport
-import com.algolia.search.serialize.internal.KeyBusStop
-import com.algolia.search.serialize.internal.KeyCity
-import com.algolia.search.serialize.internal.KeyCountry
-import com.algolia.search.serialize.internal.KeyTownhall
-import com.algolia.search.serialize.internal.KeyTrainStation
+import com.algolia.search.serialize.internal.Key
 import shouldEqual
 import unknown
 import kotlin.test.Test
@@ -23,13 +17,13 @@ internal class TestPlaceType {
 
     @Test
     fun raw() {
-        City.raw shouldEqual KeyCity
-        Country.raw shouldEqual KeyCountry
-        Address.raw shouldEqual KeyAddress
-        BusStop.raw shouldEqual KeyBusStop
-        TrainStation.raw shouldEqual KeyTrainStation
-        TownHall.raw shouldEqual KeyTownhall
-        Airport.raw shouldEqual KeyAirport
+        City.raw shouldEqual Key.City
+        Country.raw shouldEqual Key.Country
+        Address.raw shouldEqual Key.Address
+        BusStop.raw shouldEqual Key.BusStop
+        TrainStation.raw shouldEqual Key.TrainStation
+        TownHall.raw shouldEqual Key.Townhall
+        Airport.raw shouldEqual Key.Airport
         Other(unknown).raw shouldEqual unknown
     }
 }

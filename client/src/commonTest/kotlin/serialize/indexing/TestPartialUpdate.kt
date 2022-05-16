@@ -2,15 +2,7 @@ package serialize.indexing
 
 import attributeA
 import com.algolia.search.model.indexing.Partial
-import com.algolia.search.serialize.internal.KeyAdd
-import com.algolia.search.serialize.internal.KeyAddUnique
-import com.algolia.search.serialize.internal.KeyDecrement
-import com.algolia.search.serialize.internal.KeyIncrement
-import com.algolia.search.serialize.internal.KeyIncrementFrom
-import com.algolia.search.serialize.internal.KeyIncrementSet
-import com.algolia.search.serialize.internal.KeyRemove
-import com.algolia.search.serialize.internal.KeyValue
-import com.algolia.search.serialize.internal.Key_Operation
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
@@ -55,21 +47,21 @@ internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
     private fun toJson(partial: Partial): JsonElement {
         val key = when (partial) {
             is Partial.Update -> null
-            is Partial.Increment -> KeyIncrement
-            is Partial.IncrementFrom -> KeyIncrementFrom
-            is Partial.IncrementSet -> KeyIncrementSet
-            is Partial.Decrement -> KeyDecrement
-            is Partial.Add -> KeyAdd
-            is Partial.Remove -> KeyRemove
-            is Partial.AddUnique -> KeyAddUnique
+            is Partial.Increment -> Key.Increment
+            is Partial.IncrementFrom -> Key.IncrementFrom
+            is Partial.IncrementSet -> Key.IncrementSet
+            is Partial.Decrement -> Key.Decrement
+            is Partial.Add -> Key.Add
+            is Partial.Remove -> Key.Remove
+            is Partial.AddUnique -> Key.AddUnique
         }
         return buildJsonObject {
             put(
                 partial.attribute.raw,
                 key?.let {
                     buildJsonObject {
-                        put(Key_Operation, key)
-                        put(KeyValue, partial.value)
+                        put(Key._Operation, key)
+                        put(Key.Value, partial.value)
                     }
                 } ?: partial.value
             )

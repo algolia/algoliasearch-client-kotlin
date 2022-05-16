@@ -2,8 +2,7 @@ package host
 
 import com.algolia.search.dsl.requestOptions
 import com.algolia.search.helper.toUserID
-import com.algolia.search.serialize.internal.KeyAlgoliaUserID
-import com.algolia.search.serialize.internal.KeyForwardedFor
+import com.algolia.search.serialize.internal.Key
 import shouldEqual
 import kotlin.test.Test
 
@@ -34,7 +33,7 @@ internal class TestRequestOptions {
         val requestOptions = requestOptions {
             headerAlgoliaUserId("value".toUserID())
         }
-        requestOptions.headers shouldEqual mutableMapOf(KeyAlgoliaUserID to "value")
+        requestOptions.headers shouldEqual mutableMapOf(Key.AlgoliaUserID to "value")
     }
 
     @Test
@@ -43,6 +42,6 @@ internal class TestRequestOptions {
             headerForwardedFor("value")
         }
 
-        requestOptions.headers shouldEqual mutableMapOf(KeyForwardedFor to "value")
+        requestOptions.headers shouldEqual mutableMapOf(Key.ForwardedFor to "value")
     }
 }

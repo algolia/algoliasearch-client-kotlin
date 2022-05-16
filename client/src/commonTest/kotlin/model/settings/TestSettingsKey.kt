@@ -49,110 +49,62 @@ import com.algolia.search.model.settings.SettingsKey.SortFacetsBy
 import com.algolia.search.model.settings.SettingsKey.TypoTolerance
 import com.algolia.search.model.settings.SettingsKey.UnretrievableAttributes
 import com.algolia.search.model.settings.SettingsKey.UserData
-import com.algolia.search.serialize.internal.KeyAdvancedSyntax
-import com.algolia.search.serialize.internal.KeyAllowCompressionOfIntegerArray
-import com.algolia.search.serialize.internal.KeyAllowTyposOnNumericTokens
-import com.algolia.search.serialize.internal.KeyAlternativesAsExact
-import com.algolia.search.serialize.internal.KeyAttributeForDistinct
-import com.algolia.search.serialize.internal.KeyAttributesForFaceting
-import com.algolia.search.serialize.internal.KeyAttributesToHighlight
-import com.algolia.search.serialize.internal.KeyAttributesToRetrieve
-import com.algolia.search.serialize.internal.KeyAttributesToSnippet
-import com.algolia.search.serialize.internal.KeyCamelCaseAttributes
-import com.algolia.search.serialize.internal.KeyCustomRanking
-import com.algolia.search.serialize.internal.KeyDecompoundedAttributes
-import com.algolia.search.serialize.internal.KeyDisableExactOnAttributes
-import com.algolia.search.serialize.internal.KeyDisablePrefixOnAttributes
-import com.algolia.search.serialize.internal.KeyDisableTypoToleranceOnAttributes
-import com.algolia.search.serialize.internal.KeyDisableTypoToleranceOnWords
-import com.algolia.search.serialize.internal.KeyDistinct
-import com.algolia.search.serialize.internal.KeyEnableRules
-import com.algolia.search.serialize.internal.KeyExactOnSingleWordQuery
-import com.algolia.search.serialize.internal.KeyHighlightPostTag
-import com.algolia.search.serialize.internal.KeyHighlightPreTag
-import com.algolia.search.serialize.internal.KeyHitsPerPage
-import com.algolia.search.serialize.internal.KeyIgnorePlurals
-import com.algolia.search.serialize.internal.KeyIndexLanguages
-import com.algolia.search.serialize.internal.KeyKeepDiacriticsOnCharacters
-import com.algolia.search.serialize.internal.KeyMaxFacetHits
-import com.algolia.search.serialize.internal.KeyMaxValuesPerFacet
-import com.algolia.search.serialize.internal.KeyMinProximity
-import com.algolia.search.serialize.internal.KeyMinWordSizeFor1Typo
-import com.algolia.search.serialize.internal.KeyMinWordSizeFor2Typos
-import com.algolia.search.serialize.internal.KeyNumericAttributesForFiltering
-import com.algolia.search.serialize.internal.KeyOptionalWords
-import com.algolia.search.serialize.internal.KeyPaginationLimitedTo
-import com.algolia.search.serialize.internal.KeyQueryLanguages
-import com.algolia.search.serialize.internal.KeyQueryType
-import com.algolia.search.serialize.internal.KeyRanking
-import com.algolia.search.serialize.internal.KeyRemoveStopWords
-import com.algolia.search.serialize.internal.KeyRemoveWordsIfNoResults
-import com.algolia.search.serialize.internal.KeyReplaceSynonymsInHighlight
-import com.algolia.search.serialize.internal.KeyReplicas
-import com.algolia.search.serialize.internal.KeyResponseFields
-import com.algolia.search.serialize.internal.KeyRestrictHighlightAndSnippetArrays
-import com.algolia.search.serialize.internal.KeySearchableAttributes
-import com.algolia.search.serialize.internal.KeySeparatorsToIndex
-import com.algolia.search.serialize.internal.KeySnippetEllipsisText
-import com.algolia.search.serialize.internal.KeySortFacetValuesBy
-import com.algolia.search.serialize.internal.KeyTypoTolerance
-import com.algolia.search.serialize.internal.KeyUnretrievableAttributes
-import com.algolia.search.serialize.internal.KeyUserData
-import shouldEqual
+import com.algolia.search.serialize.internal.Key
 import kotlin.test.Test
+import shouldEqual
 
 internal class TestSettingsKey {
 
     @Test
     fun raw() {
-        SearchableAttributes.raw shouldEqual KeySearchableAttributes
-        AttributesForFaceting.raw shouldEqual KeyAttributesForFaceting
-        UnretrievableAttributes.raw shouldEqual KeyUnretrievableAttributes
-        AttributesToRetrieve.raw shouldEqual KeyAttributesToRetrieve
-        Ranking.raw shouldEqual KeyRanking
-        CustomRanking.raw shouldEqual KeyCustomRanking
-        Replicas.raw shouldEqual KeyReplicas
-        MaxValuesPerFacet.raw shouldEqual KeyMaxValuesPerFacet
-        SortFacetsBy.raw shouldEqual KeySortFacetValuesBy
-        AttributesToHighlight.raw shouldEqual KeyAttributesToHighlight
-        AttributesToSnippet.raw shouldEqual KeyAttributesToSnippet
-        HighlightPreTag.raw shouldEqual KeyHighlightPreTag
-        HighlightPostTag.raw shouldEqual KeyHighlightPostTag
-        SnippetEllipsisText.raw shouldEqual KeySnippetEllipsisText
-        RestrictHighlightAndSnippetArrays.raw shouldEqual KeyRestrictHighlightAndSnippetArrays
-        HitsPerPage.raw shouldEqual KeyHitsPerPage
-        PaginationLimitedTo.raw shouldEqual KeyPaginationLimitedTo
-        MinWordSizefor1Typo.raw shouldEqual KeyMinWordSizeFor1Typo
-        MinWordSizefor2Typos.raw shouldEqual KeyMinWordSizeFor2Typos
-        TypoTolerance.raw shouldEqual KeyTypoTolerance
-        AllowTyposOnNumericTokens.raw shouldEqual KeyAllowTyposOnNumericTokens
-        DisableTypoToleranceOnAttributes.raw shouldEqual KeyDisableTypoToleranceOnAttributes
-        DisableTypoToleranceOnWords.raw shouldEqual KeyDisableTypoToleranceOnWords
-        SeparatorsToIndex.raw shouldEqual KeySeparatorsToIndex
-        IgnorePlurals.raw shouldEqual KeyIgnorePlurals
-        RemoveStopWords.raw shouldEqual KeyRemoveStopWords
-        CamelCaseAttributes.raw shouldEqual KeyCamelCaseAttributes
-        DecompoundedAttributes.raw shouldEqual KeyDecompoundedAttributes
-        KeepDiacriticsOnCharacters.raw shouldEqual KeyKeepDiacriticsOnCharacters
-        QueryLanguages.raw shouldEqual KeyQueryLanguages
-        EnableRules.raw shouldEqual KeyEnableRules
-        QueryType.raw shouldEqual KeyQueryType
-        RemoveWordsIfNoResults.raw shouldEqual KeyRemoveWordsIfNoResults
-        AdvancedSyntax.raw shouldEqual KeyAdvancedSyntax
-        OptionalWords.raw shouldEqual KeyOptionalWords
-        DisablePrefixOnAttributes.raw shouldEqual KeyDisablePrefixOnAttributes
-        DisableExactOnAttributes.raw shouldEqual KeyDisableExactOnAttributes
-        ExactOnSingleWordQuery.raw shouldEqual KeyExactOnSingleWordQuery
-        AlternativesAsExact.raw shouldEqual KeyAlternativesAsExact
-        NumericAttributesForFiltering.raw shouldEqual KeyNumericAttributesForFiltering
-        AllowCompressionOfIntegerArray.raw shouldEqual KeyAllowCompressionOfIntegerArray
-        AttributeForDistinct.raw shouldEqual KeyAttributeForDistinct
-        Distinct.raw shouldEqual KeyDistinct
-        ReplaceSynonymsInHighlight.raw shouldEqual KeyReplaceSynonymsInHighlight
-        MinProximity.raw shouldEqual KeyMinProximity
-        ResponseFields.raw shouldEqual KeyResponseFields
-        MaxFacetHits.raw shouldEqual KeyMaxFacetHits
-        IndexLanguages.raw shouldEqual KeyIndexLanguages
-        UserData.raw shouldEqual KeyUserData
+        SearchableAttributes.raw shouldEqual Key.SearchableAttributes
+        AttributesForFaceting.raw shouldEqual Key.AttributesForFaceting
+        UnretrievableAttributes.raw shouldEqual Key.UnretrievableAttributes
+        AttributesToRetrieve.raw shouldEqual Key.AttributesToRetrieve
+        Ranking.raw shouldEqual Key.Ranking
+        CustomRanking.raw shouldEqual Key.CustomRanking
+        Replicas.raw shouldEqual Key.Replicas
+        MaxValuesPerFacet.raw shouldEqual Key.MaxValuesPerFacet
+        SortFacetsBy.raw shouldEqual Key.SortFacetValuesBy
+        AttributesToHighlight.raw shouldEqual Key.AttributesToHighlight
+        AttributesToSnippet.raw shouldEqual Key.AttributesToSnippet
+        HighlightPreTag.raw shouldEqual Key.HighlightPreTag
+        HighlightPostTag.raw shouldEqual Key.HighlightPostTag
+        SnippetEllipsisText.raw shouldEqual Key.SnippetEllipsisText
+        RestrictHighlightAndSnippetArrays.raw shouldEqual Key.RestrictHighlightAndSnippetArrays
+        HitsPerPage.raw shouldEqual Key.HitsPerPage
+        PaginationLimitedTo.raw shouldEqual Key.PaginationLimitedTo
+        MinWordSizefor1Typo.raw shouldEqual Key.MinWordSizeFor1Typo
+        MinWordSizefor2Typos.raw shouldEqual Key.MinWordSizeFor2Typos
+        TypoTolerance.raw shouldEqual Key.TypoTolerance
+        AllowTyposOnNumericTokens.raw shouldEqual Key.AllowTyposOnNumericTokens
+        DisableTypoToleranceOnAttributes.raw shouldEqual Key.DisableTypoToleranceOnAttributes
+        DisableTypoToleranceOnWords.raw shouldEqual Key.DisableTypoToleranceOnWords
+        SeparatorsToIndex.raw shouldEqual Key.SeparatorsToIndex
+        IgnorePlurals.raw shouldEqual Key.IgnorePlurals
+        RemoveStopWords.raw shouldEqual Key.RemoveStopWords
+        CamelCaseAttributes.raw shouldEqual Key.CamelCaseAttributes
+        DecompoundedAttributes.raw shouldEqual Key.DecompoundedAttributes
+        KeepDiacriticsOnCharacters.raw shouldEqual Key.KeepDiacriticsOnCharacters
+        QueryLanguages.raw shouldEqual Key.QueryLanguages
+        EnableRules.raw shouldEqual Key.EnableRules
+        QueryType.raw shouldEqual Key.QueryType
+        RemoveWordsIfNoResults.raw shouldEqual Key.RemoveWordsIfNoResults
+        AdvancedSyntax.raw shouldEqual Key.AdvancedSyntax
+        OptionalWords.raw shouldEqual Key.OptionalWords
+        DisablePrefixOnAttributes.raw shouldEqual Key.DisablePrefixOnAttributes
+        DisableExactOnAttributes.raw shouldEqual Key.DisableExactOnAttributes
+        ExactOnSingleWordQuery.raw shouldEqual Key.ExactOnSingleWordQuery
+        AlternativesAsExact.raw shouldEqual Key.AlternativesAsExact
+        NumericAttributesForFiltering.raw shouldEqual Key.NumericAttributesForFiltering
+        AllowCompressionOfIntegerArray.raw shouldEqual Key.AllowCompressionOfIntegerArray
+        AttributeForDistinct.raw shouldEqual Key.AttributeForDistinct
+        Distinct.raw shouldEqual Key.Distinct
+        ReplaceSynonymsInHighlight.raw shouldEqual Key.ReplaceSynonymsInHighlight
+        MinProximity.raw shouldEqual Key.MinProximity
+        ResponseFields.raw shouldEqual Key.ResponseFields
+        MaxFacetHits.raw shouldEqual Key.MaxFacetHits
+        IndexLanguages.raw shouldEqual Key.IndexLanguages
+        UserData.raw shouldEqual Key.UserData
     }
 }

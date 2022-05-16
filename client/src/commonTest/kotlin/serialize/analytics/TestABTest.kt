@@ -5,9 +5,7 @@ import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.KeyEndAt
-import com.algolia.search.serialize.internal.KeyName
-import com.algolia.search.serialize.internal.KeyVariants
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import indexA
 import indexB
@@ -29,10 +27,10 @@ internal class TestABTest : TestSerializer<ABTest>(ABTest, JsonNoDefaults) {
 
     override val items = listOf(
         abTest to buildJsonObject {
-            put(KeyName, unknown)
-            put(KeyEndAt, date)
+            put(Key.Name, unknown)
+            put(Key.EndAt, date)
             put(
-                KeyVariants,
+                Key.Variants,
                 buildJsonArray {
                     add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), abTest.variantA))
                     add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), abTest.variantB))

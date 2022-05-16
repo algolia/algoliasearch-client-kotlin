@@ -1,8 +1,7 @@
 package serialize.search
 
 import com.algolia.search.model.search.AroundPrecision
-import com.algolia.search.serialize.internal.KeyFrom
-import com.algolia.search.serialize.internal.KeyValue
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
@@ -16,8 +15,8 @@ internal class TestAroundPrecision : TestSerializer<AroundPrecision>(AroundPreci
         AroundPrecision.Ranges(0 until 10) to buildJsonArray {
             add(
                 buildJsonObject {
-                    put(KeyFrom, 0)
-                    put(KeyValue, 9)
+                    put(Key.From, 0)
+                    put(Key.Value, 9)
                 }
             )
         }
