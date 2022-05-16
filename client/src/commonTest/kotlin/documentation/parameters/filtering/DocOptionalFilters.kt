@@ -3,7 +3,7 @@ package documentation.parameters.filtering
 import com.algolia.search.dsl.optionalFilters
 import com.algolia.search.dsl.query
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -29,7 +29,7 @@ internal class DocOptionalFilters {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 optionalFilters {
                     and {

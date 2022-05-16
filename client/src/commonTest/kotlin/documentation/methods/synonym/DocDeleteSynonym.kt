@@ -2,7 +2,7 @@ package documentation.methods.synonym
 
 import com.algolia.search.model.ObjectID
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocDeleteSynonym {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             index.deleteSynonym(ObjectID("myID"), forwardToReplicas = true)
         }
     }

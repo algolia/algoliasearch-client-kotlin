@@ -9,10 +9,10 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Key
 import io.ktor.http.HttpStatusCode
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
-import runBlocking
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
@@ -28,7 +28,7 @@ class TestSuiteReplaceAll {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             val rule = load(Rule.serializer(), "rule_one.json")
             val synonym = load(Synonym, "synonym_one.json") as Synonym.MultiWay
             val data = buildJsonObject { Key.ObjectID to objectIDOne }

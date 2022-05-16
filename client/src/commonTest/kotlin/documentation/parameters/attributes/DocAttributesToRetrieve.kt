@@ -4,7 +4,7 @@ import com.algolia.search.dsl.attributesToRetrieve
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -33,7 +33,7 @@ internal class DocAttributesToRetrieve {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesToRetrieve {
                     +"author"
@@ -48,7 +48,7 @@ internal class DocAttributesToRetrieve {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesToRetrieve { +"*" }
             }
@@ -59,7 +59,7 @@ internal class DocAttributesToRetrieve {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 attributesToRetrieve {
                     +"title"
@@ -73,7 +73,7 @@ internal class DocAttributesToRetrieve {
 
     @Test
     fun snippet4() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributesToRetrieve {
                     +"sku"

@@ -5,7 +5,7 @@ import com.algolia.search.dsl.query
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.Polygon
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -24,7 +24,7 @@ internal class DocInsidePolygon {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 insidePolygon {
                     +Polygon(
@@ -41,7 +41,7 @@ internal class DocInsidePolygon {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 insidePolygon {
                     +Polygon(

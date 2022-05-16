@@ -2,7 +2,7 @@ package documentation.parameters.geosearch
 
 import com.algolia.search.dsl.query
 import com.algolia.search.model.search.Point
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -13,7 +13,7 @@ internal class DocAroundLatLng {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             query("query") {
                 aroundLatLng = Point(latitude = 40.71f, longitude = -74.01f)
             }

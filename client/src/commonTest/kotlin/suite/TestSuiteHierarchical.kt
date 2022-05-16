@@ -9,9 +9,9 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
-import runBlocking
 import shouldBeTrue
 import shouldEqual
 import kotlin.test.Test
@@ -43,7 +43,7 @@ internal class TestSuiteHierarchical {
 
     @Test
     fun hierarchicalDisjunctive() {
-        runBlocking {
+        runTest {
             val facets = setOf(hierarchicalCategory, color)
             val settings = Settings(
                 attributesForFaceting = facets.map { AttributeForFaceting.Default(it) }
@@ -101,7 +101,7 @@ internal class TestSuiteHierarchical {
 
     @Test
     fun hierarchical() {
-        runBlocking {
+        runTest {
             val facets = setOf(hierarchicalCategory)
             val settings = Settings(
                 attributesForFaceting = facets.map { AttributeForFaceting.Default(it) }
@@ -149,7 +149,7 @@ internal class TestSuiteHierarchical {
 
     @Test
     fun hierarchicalFirstLevel() {
-        runBlocking {
+        runTest {
             val facets = setOf(hierarchicalCategory)
             val settings = Settings(
                 attributesForFaceting = facets.map { AttributeForFaceting.Default(it) }
@@ -194,7 +194,7 @@ internal class TestSuiteHierarchical {
 
     @Test
     fun empty() {
-        runBlocking {
+        runTest {
             val facets = setOf(hierarchicalCategory)
             val settings = Settings(
                 attributesForFaceting = facets.map { AttributeForFaceting.Default(it) }

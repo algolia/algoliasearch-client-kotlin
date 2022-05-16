@@ -17,7 +17,7 @@ import com.algolia.search.model.dictionary.DictionarySettings
 import com.algolia.search.model.dictionary.DisableStandardEntries
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Query
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import java.util.UUID
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -25,7 +25,7 @@ import kotlin.test.assertEquals
 internal class TestSuiteDictionary {
 
     @Test
-    fun testStopwordsDictionaries(): Unit = runBlocking {
+    fun testStopwordsDictionaries(): Unit = runTest {
         val entry = DictionaryEntry.Stopword(
             objectID = ObjectID(UUID.randomUUID().toString()),
             language = Language.English,
@@ -61,7 +61,7 @@ internal class TestSuiteDictionary {
     }
 
     @Test
-    fun testPluralsDictionaries(): Unit = runBlocking {
+    fun testPluralsDictionaries(): Unit = runTest {
         val entry = DictionaryEntry.Plural(
             objectID = ObjectID(UUID.randomUUID().toString()),
             language = Language.French,
@@ -87,7 +87,7 @@ internal class TestSuiteDictionary {
     }
 
     @Test
-    fun testCompoundsDictionaries(): Unit = runBlocking {
+    fun testCompoundsDictionaries(): Unit = runTest {
         val entry = DictionaryEntry.Compound(
             objectID = ObjectID(UUID.randomUUID().toString()),
             language = Language.Dutch,
@@ -111,7 +111,7 @@ internal class TestSuiteDictionary {
     }
 
     @Test
-    fun testSettings(): Unit = runBlocking {
+    fun testSettings(): Unit = runTest {
         clientAdmin2.run {
             val stopwords: Map<Language, Boolean> = mapOf(Language.English to true)
             val stopwordsSettings = DictionarySettings(

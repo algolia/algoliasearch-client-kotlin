@@ -2,7 +2,7 @@ package documentation.methods.rule
 
 import com.algolia.search.model.ObjectID
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocDeleteRule {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             index.deleteRule(ObjectID("nyID"), forwardToReplicas = true)
         }
     }

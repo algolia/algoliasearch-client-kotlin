@@ -6,7 +6,7 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.Query
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -15,7 +15,7 @@ internal class DocMultiCluster {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val client = ClientSearch(
                 ConfigurationSearch(
                     applicationID = ApplicationID("Your Application ID"),

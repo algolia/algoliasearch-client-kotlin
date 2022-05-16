@@ -3,8 +3,8 @@ package documentation.methods.search
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
 import documentation.index
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.jsonPrimitive
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -20,7 +20,7 @@ class DocFindObject {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val match: (ResponseSearch.Hit) -> Boolean = {
                 it.json.getValue("firstname").jsonPrimitive.content == "Jimmie"
             }

@@ -12,7 +12,7 @@ import io.ktor.client.engine.mock.respondOk
 import io.ktor.client.plugins.UserAgent
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.request.request
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldBeTrue
 import shouldEqual
 import kotlin.test.Test
@@ -32,7 +32,7 @@ internal class TestUserAgent {
 
     @Test
     fun overridingUserAgentInConfigurationShouldBeIgnored() {
-        runBlocking {
+        runTest {
             val configuration = ConfigurationSearch(
                 applicationID = applicationID,
                 engine = MockEngine { respondOk() },

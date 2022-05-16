@@ -3,11 +3,11 @@ package documentation.guides.optimize.typo
 import com.algolia.search.dsl.ranking
 import com.algolia.search.dsl.settings
 import documentation.index
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.long
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -16,7 +16,7 @@ internal class GuideTypoSquatting {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 ranking {
                     +Desc("is_popular")
@@ -37,7 +37,7 @@ internal class GuideTypoSquatting {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val records = index.browseObjects().flatMap { response ->
                 response.hits.map {
                     val map = it.toMutableMap()

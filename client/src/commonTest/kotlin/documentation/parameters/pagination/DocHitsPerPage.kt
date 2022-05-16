@@ -3,7 +3,7 @@ package documentation.parameters.pagination
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class DocHitsPerPage {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 hitsPerPage = 20
             }
@@ -25,7 +25,7 @@ internal class DocHitsPerPage {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 hitsPerPage = 10
             }

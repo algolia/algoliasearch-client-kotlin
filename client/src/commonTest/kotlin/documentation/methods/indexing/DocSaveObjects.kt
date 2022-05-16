@@ -5,10 +5,10 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.multicluster.UserID
 import documentation.index
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -48,7 +48,7 @@ internal class DocSaveObjects {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             // With JsonObject
             val json = listOf(
                 ObjectID("myID1") to buildJsonObject {
@@ -75,7 +75,7 @@ internal class DocSaveObjects {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             // With JsonObject
             val json = buildJsonObject {
                 put("firstname", "Jimmie")
@@ -94,7 +94,7 @@ internal class DocSaveObjects {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val json = listOf(
                 ObjectID("myID1") to buildJsonObject {
                     put("firstname", "Jimmie")

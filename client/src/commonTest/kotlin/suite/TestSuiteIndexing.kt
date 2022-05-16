@@ -11,11 +11,11 @@ import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Json
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
 import shouldBeTrue
 import shouldEqual
 import kotlin.test.Test
@@ -56,7 +56,7 @@ internal class TestSuiteIndexing {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             index.apply {
                 val creations = mutableListOf<Task>()
                 val revisions = mutableListOf<Task>()
@@ -98,7 +98,7 @@ internal class TestSuiteIndexing {
 
     @Test
     fun testDeleteBy() {
-        runBlocking {
+        runTest {
             index.apply {
                 // Create and save 10 tagged Data objects
                 val tagValue = "algolia"

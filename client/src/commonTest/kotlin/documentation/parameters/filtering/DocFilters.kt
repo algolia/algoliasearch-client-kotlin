@@ -4,7 +4,7 @@ import com.algolia.search.dsl.filters
 import com.algolia.search.dsl.query
 import com.algolia.search.model.filter.NumericOperator
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -53,7 +53,7 @@ internal class DocFilters {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             // "(category:Book OR category:Ebook) AND _tags:published"
             val query = query("query") {
                 filters {
@@ -73,7 +73,7 @@ internal class DocFilters {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             //  available = 1
             //  AND (category:Book OR NOT category:Ebook)
             //  AND _tags:published
@@ -102,7 +102,7 @@ internal class DocFilters {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             // "\"category\":\"Books and Comics\""
             val query = query("query") {
                 filters {
@@ -119,7 +119,7 @@ internal class DocFilters {
 
     @Test
     fun snippet4() {
-        runBlocking {
+        runTest {
             // "\"keyword\":\"OR\""
             val query = query("query") {
                 filters {
@@ -136,7 +136,7 @@ internal class DocFilters {
 
     @Test
     fun snippet5() {
-        runBlocking {
+        runTest {
             // "\"content\":\"It's a wonderful day\""
             val query = query("query") {
                 filters {
@@ -153,7 +153,7 @@ internal class DocFilters {
 
     @Test
     fun snippet6() {
-        runBlocking {
+        runTest {
             // "\"content\":\"She said Hello World\""
             val query = query("query") {
                 filters {

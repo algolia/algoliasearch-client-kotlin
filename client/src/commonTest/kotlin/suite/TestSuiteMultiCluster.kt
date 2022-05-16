@@ -9,7 +9,7 @@ import com.algolia.search.model.multicluster.UserIDQuery
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldBeFalse
 import shouldBeTrue
 import shouldEqual
@@ -61,7 +61,7 @@ internal class TestSuiteMultiCluster {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             val clusters = clientMcm.listClusters().clusters
             val userID0 = userId(0)
             val userID1 = userId(1)

@@ -4,9 +4,9 @@ import com.algolia.search.dsl.rule.rules
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Consequence
 import documentation.index
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -15,7 +15,7 @@ internal class GuideAddBanners {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rules = rules {
                 rule(
                     "a-rule-id",

@@ -3,7 +3,7 @@ package documentation.reference
 import com.algolia.search.dsl.customRanking
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -12,7 +12,7 @@ internal class DocQuickStartCustomRanking {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 customRanking {
                     +Desc("followers")

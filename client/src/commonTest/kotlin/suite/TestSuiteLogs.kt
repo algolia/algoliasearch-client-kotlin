@@ -2,7 +2,7 @@ package suite
 
 import clientAdmin1
 import com.algolia.search.model.LogType
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldEqual
 import kotlin.test.Test
 
@@ -10,7 +10,7 @@ internal class TestSuiteLogs {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             clientAdmin1.apply {
                 listIndices()
                 listIndices()

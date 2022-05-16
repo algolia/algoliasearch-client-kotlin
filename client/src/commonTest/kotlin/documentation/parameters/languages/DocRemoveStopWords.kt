@@ -6,7 +6,7 @@ import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.RemoveStopWords
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocRemoveStopWords {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 queryLanguages {
                     +English
@@ -31,7 +31,7 @@ internal class DocRemoveStopWords {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 removeStopWords = RemoveStopWords.QueryLanguages(Language.English)
             }

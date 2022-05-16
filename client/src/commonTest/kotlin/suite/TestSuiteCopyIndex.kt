@@ -10,9 +10,9 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Key
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
 import shouldBeTrue
 import shouldEqual
 import kotlin.test.Test
@@ -42,37 +42,35 @@ internal class TestSuiteCopyIndex {
     private val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Default(company)))
 
     @Test
-    fun test() {
-        runBlocking {
-            index.apply {
-                val tasks = mutableListOf<Task>()
-                val synonym = load(Synonym, "synonym_placeholder.json")
-                val rule = load(Rule.serializer(), "rule_company.json")
+    fun test() = runTest {
+        index.apply {
+            val tasks = mutableListOf<Task>()
+            val synonym = load(Synonym, "synonym_placeholder.json")
+            val rule = load(Rule.serializer(), "rule_company.json")
 
-                tasks += saveObjects(objects)
-                tasks += setSettings(settings)
-                tasks += saveSynonym(synonym)
-                tasks += saveRule(rule)
+            tasks += saveObjects(objects)
+            tasks += setSettings(settings)
+            tasks += saveSynonym(synonym)
+            tasks += saveRule(rule)
 
-                tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
-                tasks.clear()
+            tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
+            tasks.clear()
 
-                tasks += copySettings(indexNameSettings)
-                tasks += copyRules(indexNameRules)
-                tasks += copySynonyms(indexNameSynonyms)
-                tasks += copyIndex(indexNameFullCopy)
+            tasks += copySettings(indexNameSettings)
+            tasks += copyRules(indexNameRules)
+            tasks += copySynonyms(indexNameSynonyms)
+            tasks += copyIndex(indexNameFullCopy)
 
-                tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
+            tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
 
-                clientAdmin1.initIndex(indexNameSettings).getSettings() shouldEqual getSettings()
-                clientAdmin1.initIndex(indexNameRules).getRule(ruleID) shouldEqual getRule(ruleID)
-                clientAdmin1.initIndex(indexNameSynonyms)
-                    .getSynonym(synonym.objectID) shouldEqual getSynonym(synonym.objectID)
-                clientAdmin1.initIndex(indexNameFullCopy).also {
-                    it.getSettings() shouldEqual getSettings()
-                    it.getRule(ruleID) shouldEqual getRule(ruleID)
-                    it.getSynonym(synonym.objectID) shouldEqual getSynonym(synonym.objectID)
-                }
+            clientAdmin1.initIndex(indexNameSettings).getSettings() shouldEqual getSettings()
+            clientAdmin1.initIndex(indexNameRules).getRule(ruleID) shouldEqual getRule(ruleID)
+            clientAdmin1.initIndex(indexNameSynonyms)
+                .getSynonym(synonym.objectID) shouldEqual getSynonym(synonym.objectID)
+            clientAdmin1.initIndex(indexNameFullCopy).also {
+                it.getSettings() shouldEqual getSettings()
+                it.getRule(ruleID) shouldEqual getRule(ruleID)
+                it.getSynonym(synonym.objectID) shouldEqual getSynonym(synonym.objectID)
             }
         }
     }

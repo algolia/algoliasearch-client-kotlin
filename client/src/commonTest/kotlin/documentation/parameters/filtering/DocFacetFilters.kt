@@ -3,7 +3,7 @@ package documentation.parameters.filtering
 import com.algolia.search.dsl.facetFilters
 import com.algolia.search.dsl.query
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -29,7 +29,7 @@ internal class DocFacetFilters {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 facetFilters {
                     and { facet("category", "Book") }
@@ -42,7 +42,7 @@ internal class DocFacetFilters {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 facetFilters {
                     and {
@@ -58,7 +58,7 @@ internal class DocFacetFilters {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 facetFilters {
                     or {
@@ -74,7 +74,7 @@ internal class DocFacetFilters {
 
     @Test
     fun snippet4() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 facetFilters {
                     or {

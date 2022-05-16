@@ -2,7 +2,7 @@ package documentation.methods.search
 
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseSearch
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -16,7 +16,7 @@ class DocGetObjectPosition {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val position: Int = responseSearch.getObjectPosition(ObjectID("a-unique-identifier"))
         }
     }

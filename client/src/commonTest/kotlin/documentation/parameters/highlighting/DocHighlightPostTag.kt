@@ -3,7 +3,7 @@ package documentation.parameters.highlighting
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class DocHighlightPostTag {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 highlightPostTag = "</em>"
             }
@@ -25,7 +25,7 @@ internal class DocHighlightPostTag {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 highlightPostTag = "</strong>"
             }

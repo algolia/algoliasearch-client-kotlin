@@ -2,7 +2,7 @@ package documentation.reference
 
 import com.algolia.search.model.search.Query
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -11,7 +11,7 @@ internal class DocQuickStartSearch {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             // Search for a first name
             index.search(Query("jimmie"))
             // Search for a first name with typo

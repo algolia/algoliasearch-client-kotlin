@@ -22,11 +22,11 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Key
 import io.ktor.http.parseUrlEncodedParameters
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import runBlocking
 import shouldBeNull
 import shouldBeTrue
 import shouldContain
@@ -53,7 +53,7 @@ internal class TestSuiteSearch {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             val objects = load(ListSerializer(JsonObject.serializer()), "companies.json")
             val settings = Settings(attributesForFaceting = listOf(AttributeForFaceting.Searchable(company)))
             val tasks = mutableListOf<Task>()
@@ -118,7 +118,7 @@ internal class TestSuiteSearch {
     @Test
     fun explain() {
 
-        runBlocking {
+        runTest {
             val settings = settings {
                 decompoundedAttributes {
                     german {

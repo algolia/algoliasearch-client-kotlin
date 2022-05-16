@@ -8,7 +8,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.index.Scope
 import documentation.index
 import documentation.indexName
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -28,14 +28,14 @@ internal class DocCopyIndex {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             index.copyIndex(indexName)
         }
     }
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val scopes = listOf(
                 Scope.Settings,
                 Scope.Synonyms
@@ -46,7 +46,7 @@ internal class DocCopyIndex {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val index1 = ClientSearch(
                 applicationID = ApplicationID("APP_ID_1"),
                 apiKey = APIKey("API_KEY_1")

@@ -9,10 +9,10 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
-import runBlocking
 import shouldBeTrue
 import shouldEqual
 import kotlin.test.Test
@@ -28,7 +28,7 @@ internal class TestSuiteMultipleOperations {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             val operations = listOf(
                 BatchOperationIndex(indexName1, BatchOperation.AddObject(json)),
                 BatchOperationIndex(indexName1, BatchOperation.AddObject(json)),

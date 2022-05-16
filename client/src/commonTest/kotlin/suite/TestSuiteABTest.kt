@@ -12,9 +12,9 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Key
 import dayInMillis
 import io.ktor.http.HttpStatusCode
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
 import shouldEqual
 import shouldFailWith
 import shouldNotBeNull
@@ -39,7 +39,7 @@ internal class TestSuiteABTest {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             indexA.apply { saveObject(data).wait() shouldEqual TaskStatus.Published }
             indexB.apply { saveObject(data).wait() shouldEqual TaskStatus.Published }
             indexA.apply {

@@ -10,10 +10,10 @@ import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import documentation.client
 import documentation.indexName
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -37,7 +37,7 @@ internal class DocCustomBatch {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val operations = listOf(
                 BatchOperationIndex(
                     indexName = indexName1,
@@ -88,7 +88,7 @@ internal class DocCustomBatch {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val operations = listOf(
                 BatchOperationIndex(
                     indexName = indexName1,

@@ -11,7 +11,7 @@ import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 
 @Ignore
@@ -19,7 +19,7 @@ class GuideDynamicFiltring {
 
     /** API filter rule example **/
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rule = Rule(
                 objectID = ObjectID("red-color"),
                 conditions = listOf(
@@ -37,7 +37,7 @@ class GuideDynamicFiltring {
 
     /** API facet rule example **/
     fun snippet2() {
-        runBlocking {
+        runTest {
             val rule = Rule(
                 objectID = ObjectID("color-facets"),
                 conditions = listOf(
@@ -59,7 +59,7 @@ class GuideDynamicFiltring {
 
     /** API filter by type **/
     fun snippet3() {
-        runBlocking {
+        runTest {
             val rule = Rule(
                 objectID = ObjectID("t-shirt"),
                 conditions = listOf(
@@ -80,7 +80,7 @@ class GuideDynamicFiltring {
 
     /** API numerical filtering **/
     fun snippet4() {
-        runBlocking {
+        runTest {
             val toasterRule = Rule(
                 objectID = ObjectID("toaster"),
                 conditions = listOf(

@@ -8,7 +8,7 @@ import com.algolia.search.model.places.PlacesQuery
 import com.algolia.search.model.search.AroundRadius
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldEqual
 import shouldNotBeEmpty
 import kotlin.test.Test
@@ -17,42 +17,42 @@ internal class TestSuitePlaces {
 
     @Test
     fun withoutParameters() {
-        runBlocking {
+        runTest {
             clientPlaces.searchPlaces().hits.shouldNotBeEmpty()
         }
     }
 
     @Test
     fun withLanguage() {
-        runBlocking {
+        runTest {
             clientPlaces.searchPlaces(Language.English).hits.shouldNotBeEmpty()
         }
     }
 
     @Test
     fun withRankingInfo() {
-        runBlocking {
+        runTest {
             clientPlaces.searchPlaces(PlacesQuery(getRankingInfo = true)).hits.shouldNotBeEmpty()
         }
     }
 
     @Test
     fun withQuery() {
-        runBlocking {
+        runTest {
             clientPlaces.searchPlaces(PlacesQuery("New-York")).hits.shouldNotBeEmpty()
         }
     }
 
     @Test
     fun withCountry() {
-        runBlocking {
+        runTest {
             clientPlaces.searchPlaces(PlacesQuery(countries = listOf(Country.UnitedStates))).hits.shouldNotBeEmpty()
         }
     }
 
     @Test
     fun withType() {
-        runBlocking {
+        runTest {
             clientPlaces.searchPlaces(PlacesQuery(type = PlaceType.Country)).hits.shouldNotBeEmpty()
             clientPlaces.searchPlaces(PlacesQuery(type = PlaceType.City)).hits.shouldNotBeEmpty()
             clientPlaces.searchPlaces(PlacesQuery(type = PlaceType.TownHall)).hits.shouldNotBeEmpty()
@@ -65,7 +65,7 @@ internal class TestSuitePlaces {
 
     @Test
     fun withGeo() {
-        runBlocking {
+        runTest {
             clientPlaces.searchPlaces(PlacesQuery(aroundRadius = AroundRadius.All)).hits.shouldNotBeEmpty()
             clientPlaces.searchPlaces(PlacesQuery(aroundRadius = AroundRadius.InMeters(1000000))).hits.shouldNotBeEmpty()
             clientPlaces.searchPlaces(PlacesQuery(aroundLatLng = Point(0f, 0f))).hits.shouldNotBeEmpty()
@@ -75,7 +75,7 @@ internal class TestSuitePlaces {
 
     @Test
     fun withAllParameters() {
-        runBlocking {
+        runTest {
             val query = PlacesQuery(
                 query = "Paris",
                 type = PlaceType.City,
@@ -90,14 +90,14 @@ internal class TestSuitePlaces {
 
     @Test
     fun getByObjectID() {
-        runBlocking {
+        runTest {
             clientPlaces.getByObjectID(ObjectID("afd71bb8613f70ca495d8996923b5fd5"))
         }
     }
 
     @Test
     fun reverseGeocoding() {
-        runBlocking {
+        runTest {
             clientPlaces.reverseGeocoding(
                 Point(48.880379f, 2.327007f), hitsPerPage = 5
             ).hits.size shouldEqual 5
@@ -106,7 +106,7 @@ internal class TestSuitePlaces {
 
     @Test
     fun reverseGeocodingLanguage() {
-        runBlocking {
+        runTest {
             clientPlaces.reverseGeocoding(
                 Language.French,
                 Point(48.880379f, 2.327007f),
@@ -117,7 +117,7 @@ internal class TestSuitePlaces {
 
     @Test
     fun hitsPerPage() {
-        runBlocking {
+        runTest {
             clientPlaces.searchPlaces(PlacesQuery(hitsPerPage = 5)).hits.size shouldEqual 5
         }
     }

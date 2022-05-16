@@ -14,9 +14,9 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Key
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.HttpStatusCode
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
 import shouldEqual
 import kotlin.test.Test
 
@@ -45,7 +45,7 @@ internal class TestSuiteInsights {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             index.apply {
                 saveObject(buildJsonObject { put(Key.ObjectID, "one") }).wait() shouldEqual TaskStatus.Published
 

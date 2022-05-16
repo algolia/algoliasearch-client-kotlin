@@ -2,10 +2,10 @@ package documentation.methods.indexing
 
 import documentation.client
 import documentation.index
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -26,7 +26,7 @@ internal class DocReplaceAllObjects {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             // With JsonObject
             val json = listOf(
                 buildJsonObject {
@@ -53,7 +53,7 @@ internal class DocReplaceAllObjects {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             client.apply {
                 val json = listOf(
                     buildJsonObject {

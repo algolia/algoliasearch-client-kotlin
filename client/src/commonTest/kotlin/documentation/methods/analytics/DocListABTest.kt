@@ -1,7 +1,7 @@
 package documentation.methods.analytics
 
 import clientAnalytics
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -16,7 +16,7 @@ internal class DocListABTest {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             clientAnalytics.listABTests(10, 20)
         }
     }

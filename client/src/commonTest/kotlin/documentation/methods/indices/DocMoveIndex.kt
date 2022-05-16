@@ -2,7 +2,7 @@ package documentation.methods.indices
 
 import documentation.index
 import documentation.indexName
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -16,7 +16,7 @@ internal class DocMoveIndex {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             index.moveIndex(indexName)
         }
     }

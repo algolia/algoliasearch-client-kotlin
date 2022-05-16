@@ -4,7 +4,7 @@ import com.algolia.search.dsl.optionalWords
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class DocOptionalWords {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 optionalWords {
                     +"word1"
@@ -32,7 +32,7 @@ internal class DocOptionalWords {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 optionalWords {
                     +"word1"
@@ -46,7 +46,7 @@ internal class DocOptionalWords {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val queryString = "query"
             val query = query(queryString) {
                 optionalWords {

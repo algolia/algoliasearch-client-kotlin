@@ -1,8 +1,8 @@
 package documentation.guides.data
 
 import documentation.index
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.JsonObject
-import runBlocking
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -11,7 +11,7 @@ internal class GuideImporting {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val records = listOf<JsonObject>()
 
             index.saveObjects(records)

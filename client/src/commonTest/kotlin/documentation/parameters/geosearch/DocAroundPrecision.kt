@@ -3,7 +3,7 @@ package documentation.parameters.geosearch
 import com.algolia.search.dsl.query
 import com.algolia.search.model.search.AroundPrecision
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class DocAroundPrecision {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 aroundPrecision = AroundPrecision.Int(100)
             }

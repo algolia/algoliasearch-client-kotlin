@@ -3,7 +3,7 @@ package documentation.parameters.personalization
 import com.algolia.search.dsl.query
 import com.algolia.search.model.insights.UserToken
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class DocUserToken {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 userToken = UserToken("123456")
             }
@@ -25,7 +25,7 @@ internal class DocUserToken {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 enablePersonalization = true
                 userToken = UserToken("123456")

@@ -3,7 +3,7 @@ package documentation.parameters.attributes
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.restrictSearchableAttributes
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocRestrictSearchableAttributes {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 restrictSearchableAttributes {
                     +"title"

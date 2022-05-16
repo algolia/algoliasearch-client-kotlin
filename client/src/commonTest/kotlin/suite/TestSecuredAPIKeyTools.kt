@@ -12,9 +12,9 @@ import com.algolia.search.model.apikey.getSecuredApiKeyRemainingValidity
 import com.algolia.search.model.internal.Time
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Key
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
@@ -37,7 +37,7 @@ internal class TestSecuredAPIKeyTools {
     private val data = buildJsonObject { put(Key.ObjectID, "one") }
 
     fun test() {
-        runBlocking {
+        runTest {
             index.apply {
                 saveObject(data).wait() shouldEqual TaskStatus.Published
             }
