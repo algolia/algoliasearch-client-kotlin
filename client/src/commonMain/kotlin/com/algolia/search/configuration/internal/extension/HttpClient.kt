@@ -46,7 +46,7 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
 
     // Defaults
     defaultRequest {
-        configuration.defaultHeaders?.forEach(::header)
+        configuration.defaultHeaders?.forEach { (key, value) -> header(key, value) }
     }
 
     // Enable default (2XX) validation

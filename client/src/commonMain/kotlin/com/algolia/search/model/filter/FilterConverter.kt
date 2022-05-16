@@ -1,23 +1,24 @@
 package com.algolia.search.model.filter
 
+import com.algolia.search.model.filter.internal.Converter
 import com.algolia.search.model.filter.internal.toLegacy
 import com.algolia.search.model.filter.internal.toSQL
 
 /**
  * Converts a single [Filter] to a type [O].
  */
-public sealed class FilterConverter<I : Filter, O> : (I) -> O {
+public sealed class FilterConverter<I : Filter, O> : Converter<I, O> {
 
     /**
      * Converts a [Filter] to its SQL-like [String] representation.
      */
     public object SQL : FilterConverter<Filter, String>() {
 
-        override fun invoke(filter: Filter): String {
-            return when (filter) {
-                is Filter.Facet -> filter.toSQL()
-                is Filter.Tag -> filter.toSQL()
-                is Filter.Numeric -> filter.toSQL()
+        override fun invoke(input: Filter): String {
+            return when (input) {
+                is Filter.Facet -> input.toSQL()
+                is Filter.Tag -> input.toSQL()
+                is Filter.Numeric -> input.toSQL()
             }
         }
     }
@@ -27,8 +28,8 @@ public sealed class FilterConverter<I : Filter, O> : (I) -> O {
      */
     public object Legacy : FilterConverter<Filter, List<String>>() {
 
-        override fun invoke(filter: Filter): List<String> {
-            return toLegacy(filter, escape = true)
+        override fun invoke(input: Filter): List<String> {
+            return toLegacy(input, escape = true)
         }
 
         /**
@@ -36,8 +37,8 @@ public sealed class FilterConverter<I : Filter, O> : (I) -> O {
          */
         public object Unquoted : FilterConverter<Filter, List<String>>() {
 
-            override fun invoke(filter: Filter): List<String> {
-                return toLegacy(filter, escape = false)
+            override fun invoke(input: Filter): List<String> {
+                return toLegacy(input, escape = false)
             }
         }
 
