@@ -3,9 +3,7 @@ package com.algolia.search.model.search
 import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.search.MatchLevel.Full
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.serialize.KeyFull
-import com.algolia.search.serialize.KeyNone
-import com.algolia.search.serialize.KeyPartial
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -24,11 +22,11 @@ import kotlinx.serialization.encoding.Encoder
 @Serializable(MatchLevel.Companion::class)
 public sealed class MatchLevel(override val raw: String) : Raw<String> {
 
-    public object None : MatchLevel(KeyNone)
+    public object None : MatchLevel(Key.None)
 
-    public object Partial : MatchLevel(KeyPartial)
+    public object Partial : MatchLevel(Key.Partial)
 
-    public object Full : MatchLevel(KeyFull)
+    public object Full : MatchLevel(Key.Full)
 
     public data class Other(override val raw: String) : MatchLevel(raw)
 
@@ -44,9 +42,9 @@ public sealed class MatchLevel(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): MatchLevel {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyNone -> None
-                KeyPartial -> Partial
-                KeyFull -> Full
+                Key.None -> None
+                Key.Partial -> Partial
+                Key.Full -> Full
                 else -> Other(string)
             }
         }

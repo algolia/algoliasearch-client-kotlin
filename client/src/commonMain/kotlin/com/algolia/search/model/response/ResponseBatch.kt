@@ -5,8 +5,7 @@ import com.algolia.search.endpoint.EndpointIndexing
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskID
-import com.algolia.search.serialize.KeyObjectIDs
-import com.algolia.search.serialize.KeyTaskID
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,7 +14,7 @@ public data class ResponseBatch(
     /**
      * The [TaskID] which can be used with the [EndpointAdvanced.waitTask] method.
      */
-    @SerialName(KeyTaskID) override val taskID: TaskID,
+    @SerialName(Key.TaskID) override val taskID: TaskID,
     /**
      * The [ObjectID] records targeted by a batch operation. If an [ObjectID] was not found, for example after a
      * [EndpointIndexing.replaceObjects] call, it will be `null` at the same index it was passed in the "records"
@@ -37,5 +36,5 @@ public data class ResponseBatch(
      * response[2] == ObjectID("C")
      * ```
      */
-    @SerialName(KeyObjectIDs) val objectIDs: List<ObjectID?>
+    @SerialName(Key.ObjectIDs) val objectIDs: List<ObjectID?>
 ) : Task

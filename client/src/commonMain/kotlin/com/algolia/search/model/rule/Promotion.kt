@@ -3,9 +3,7 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.model.ObjectID
-import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.serialize.KeyObjectIDs
-import com.algolia.search.serialize.KeyPosition
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
@@ -29,8 +27,8 @@ public sealed class Promotion {
         /**
          * Unique identifier of the object to promote.
          */
-        @SerialName(KeyObjectID) val objectID: ObjectID,
-        @SerialName(KeyPosition) override val position: Int
+        @SerialName(Key.ObjectID) val objectID: ObjectID,
+        @SerialName(Key.Position) override val position: Int
     ) : Promotion()
 
     @Serializable
@@ -38,8 +36,8 @@ public sealed class Promotion {
         /**
          * List of unique identifiers of the objects to promote.
          */
-        @SerialName(KeyObjectIDs) val objectIDs: List<ObjectID>,
-        @SerialName(KeyPosition) override val position: Int
+        @SerialName(Key.ObjectIDs) val objectIDs: List<ObjectID>,
+        @SerialName(Key.Position) override val position: Int
     ) : Promotion()
 
     public companion object : KSerializer<Promotion> {
@@ -49,8 +47,8 @@ public sealed class Promotion {
         override fun deserialize(decoder: Decoder): Promotion {
             val json = decoder.asJsonInput().jsonObject
             return when {
-                json.containsKey(KeyObjectID) -> Single.serializer().deserialize(decoder)
-                json.containsKey(KeyObjectIDs) -> Multiple.serializer().deserialize(decoder)
+                json.containsKey(Key.ObjectID) -> Single.serializer().deserialize(decoder)
+                json.containsKey(Key.ObjectIDs) -> Multiple.serializer().deserialize(decoder)
                 else -> throw IllegalStateException("Unable to deserialize 'Promotion' object")
             }
         }

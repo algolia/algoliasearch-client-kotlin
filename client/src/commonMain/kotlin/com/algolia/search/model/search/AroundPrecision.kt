@@ -1,7 +1,6 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.serialize.KeyFrom
-import com.algolia.search.serialize.KeyValue
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -50,8 +49,8 @@ public sealed class AroundPrecision {
                     value.list.forEach {
                         add(
                             buildJsonObject {
-                                put(KeyFrom, it.first)
-                                put(KeyValue, it.last)
+                                put(Key.From, it.first)
+                                put(Key.Value, it.last)
                             }
                         )
                     }
@@ -68,8 +67,8 @@ public sealed class AroundPrecision {
                         val pair = it.jsonObject
 
                         IntRange(
-                            pair.getValue(KeyFrom).jsonPrimitive.int,
-                            pair.getValue(KeyValue).jsonPrimitive.int
+                            pair.getValue(Key.From).jsonPrimitive.int,
+                            pair.getValue(Key.Value).jsonPrimitive.int
                         )
                     }
                 )

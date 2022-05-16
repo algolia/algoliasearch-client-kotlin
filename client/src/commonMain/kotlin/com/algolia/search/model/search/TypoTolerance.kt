@@ -2,8 +2,7 @@ package com.algolia.search.model.search
 
 import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.settings.RankingCriterion
-import com.algolia.search.serialize.KeyMin
-import com.algolia.search.serialize.KeyStrict
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -34,7 +33,7 @@ public sealed class TypoTolerance(override val raw: String) : Raw<String> {
      * For example, if the smallest number of typos found is 0, then only records matching without typos will be
      * returned. If the smallest number of typos found is 1, then only records matching with 1 typo will be returned.
      */
-    public object Min : TypoTolerance(KeyMin)
+    public object Min : TypoTolerance(Key.Min)
 
     /**
      * Retrieve records with the 2 smallest number of typos.
@@ -43,7 +42,7 @@ public sealed class TypoTolerance(override val raw: String) : Raw<String> {
      * returned.
      * Strict changes the engine’s ranking, forcing the [RankingCriterion.Typo] to go the top of the ranking formula.
      */
-    public object Strict : TypoTolerance(KeyStrict)
+    public object Strict : TypoTolerance(Key.Strict)
 
     public data class Other(override val raw: String) : TypoTolerance(raw)
 
@@ -68,8 +67,8 @@ public sealed class TypoTolerance(override val raw: String) : Raw<String> {
 
             return when {
                 element.jsonPrimitive.booleanOrNull != null -> if (element.jsonPrimitive.boolean) True else False
-                element.jsonPrimitive.content == KeyMin -> Min
-                element.jsonPrimitive.content == KeyStrict -> Strict
+                element.jsonPrimitive.content == Key.Min -> Min
+                element.jsonPrimitive.content == Key.Strict -> Strict
                 else -> Other(element.jsonPrimitive.content)
             }
         }

@@ -13,10 +13,9 @@ import com.algolia.search.model.response.ResponseSearchRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.RuleQuery
-import com.algolia.search.serialize.KeyClearExistingRules
-import com.algolia.search.serialize.KeyForwardToReplicas
-import com.algolia.search.serialize.RouteRules
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
@@ -32,17 +31,17 @@ internal class EndpointRuleImpl(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?,
     ): RevisionIndex {
-        val path = indexName.toPath("/$RouteRules/${rule.objectID}")
+        val path = indexName.toPath("/${Route.Rules}/${rule.objectID}")
         val body = JsonNoDefaults.encodeToString(Rule.serializer(), rule)
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyForwardToReplicas, forwardToReplicas)
+            parameter(Key.ForwardToReplicas, forwardToReplicas)
         }
 
         return transport.request(HttpMethod.Put, CallType.Write, path, options, body)
     }
 
     override suspend fun getRule(objectID: ObjectID, requestOptions: RequestOptions?): Rule {
-        val path = indexName.toPath("/$RouteRules/$objectID")
+        val path = indexName.toPath("/${Route.Rules}/$objectID")
 
         return transport.request(HttpMethod.Get, CallType.Read, path, requestOptions)
     }
@@ -52,9 +51,9 @@ internal class EndpointRuleImpl(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?,
     ): RevisionIndex {
-        val path = indexName.toPath("/$RouteRules/$objectID")
+        val path = indexName.toPath("/${Route.Rules}/$objectID")
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyForwardToReplicas, forwardToReplicas)
+            parameter(Key.ForwardToReplicas, forwardToReplicas)
         }
         return transport.request(HttpMethod.Delete, CallType.Write, path, options)
     }
@@ -63,7 +62,7 @@ internal class EndpointRuleImpl(
         query: RuleQuery,
         requestOptions: RequestOptions?,
     ): ResponseSearchRules {
-        val path = indexName.toPath("/$RouteRules/search")
+        val path = indexName.toPath("/${Route.Rules}/search")
         val body = JsonNoDefaults.encodeToString(RuleQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
@@ -71,13 +70,13 @@ internal class EndpointRuleImpl(
 
     override suspend fun clearRules(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): RevisionIndex {
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyForwardToReplicas, forwardToReplicas)
+            parameter(Key.ForwardToReplicas, forwardToReplicas)
         }
 
         return transport.request(
             HttpMethod.Post,
             CallType.Write,
-            indexName.toPath("/$RouteRules/clear"),
+            indexName.toPath("/${Route.Rules}/clear"),
             options,
             EmptyBody
         )
@@ -92,11 +91,11 @@ internal class EndpointRuleImpl(
         if (rules.isEmpty()) throw EmptyListException("rules")
         val body = JsonNoDefaults.encodeToString(ListSerializer(Rule.serializer()), rules)
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyForwardToReplicas, forwardToReplicas)
-            parameter(KeyClearExistingRules, clearExistingRules)
+            parameter(Key.ForwardToReplicas, forwardToReplicas)
+            parameter(Key.ClearExistingRules, clearExistingRules)
         }
 
-        return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/$RouteRules/batch"), options, body)
+        return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/${Route.Rules}/batch"), options, body)
     }
 
     override suspend fun replaceAllRules(

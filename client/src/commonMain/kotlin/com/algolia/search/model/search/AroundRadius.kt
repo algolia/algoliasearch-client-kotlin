@@ -1,7 +1,7 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyAll
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -27,7 +27,7 @@ public sealed class AroundRadius(override val raw: String) : Raw<String> {
      *  Disables the radius logic, allowing all results to be returned, regardless of distance. =
      *  Ranking is still based on proximity to the central axis point. This option is faster than specifying a high integer value.
      */
-    public object All : AroundRadius(KeyAll)
+    public object All : AroundRadius(Key.All)
 
     /**
      * Integer value (in meters) representing the radius around the coordinates specified during the query.
@@ -59,7 +59,7 @@ public sealed class AroundRadius(override val raw: String) : Raw<String> {
             return when {
                 element.jsonPrimitive.intOrNull != null -> InMeters(element.jsonPrimitive.int)
                 else -> when (element.jsonPrimitive.content) {
-                    KeyAll -> All
+                    Key.All -> All
                     else -> Other(element.jsonPrimitive.content)
                 }
             }

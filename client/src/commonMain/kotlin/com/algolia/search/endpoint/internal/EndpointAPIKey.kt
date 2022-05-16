@@ -14,8 +14,8 @@ import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.Deletion
 import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.response.revision.RevisionAPIKey
-import com.algolia.search.serialize.KeyRestrictSources
-import com.algolia.search.serialize.RouteKeysV1
+import com.algolia.search.serialize.internal.Key
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.serialize.internal.stringify
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
@@ -36,7 +36,7 @@ internal class EndpointAPIKeyImpl(
         requestOptions: RequestOptions?,
     ): CreationAPIKey {
         val query = mutableMapOf<String, JsonElement>().run {
-            restrictSources?.let { put(KeyRestrictSources, JsonPrimitive(it)) }
+            restrictSources?.let { put(Key.RestrictSources, JsonPrimitive(it)) }
             params.query?.toJsonNoDefaults()?.let { putAll(it) }
             JsonObject(this)
         }
@@ -51,7 +51,7 @@ internal class EndpointAPIKeyImpl(
             referers = params.referers
         ).stringify()
 
-        return transport.request(HttpMethod.Post, CallType.Write, RouteKeysV1, requestOptions, body)
+        return transport.request(HttpMethod.Post, CallType.Write, Route.KeysV1, requestOptions, body)
     }
 
     override suspend fun updateAPIKey(
@@ -70,16 +70,13 @@ internal class EndpointAPIKeyImpl(
             referers = params.referers
         ).stringify()
 
-        return transport.request(HttpMethod.Put, CallType.Write, "$RouteKeysV1/$apiKey", requestOptions, body)
+        return transport.request(HttpMethod.Put, CallType.Write, "${Route.KeysV1}/$apiKey", requestOptions, body)
     }
 
     override suspend fun deleteAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): DeletionAPIKey {
         return DeletionAPIKey(
             transport.request<Deletion>(
-                HttpMethod.Delete,
-                CallType.Write,
-                "$RouteKeysV1/$apiKey",
-                requestOptions
+                HttpMethod.Delete, CallType.Write, "${Route.KeysV1}/$apiKey", requestOptions
             ).deletedAt,
             apiKey
         )
@@ -89,24 +86,20 @@ internal class EndpointAPIKeyImpl(
         return CreationAPIKey(
             apiKey,
             transport.request<Creation>(
-                HttpMethod.Post,
-                CallType.Write,
-                "$RouteKeysV1/$apiKey/restore",
-                requestOptions,
-                ""
+                HttpMethod.Post, CallType.Write, "${Route.KeysV1}/$apiKey/restore", requestOptions, ""
             ).createdAt
         )
     }
 
     override suspend fun listAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
-        return transport.request(HttpMethod.Get, CallType.Read, RouteKeysV1, requestOptions)
+        return transport.request(HttpMethod.Get, CallType.Read, Route.KeysV1, requestOptions)
     }
 
     override suspend fun getAPIKey(
         apiKey: APIKey,
         requestOptions: RequestOptions?,
     ): ResponseAPIKey {
-        return transport.request(HttpMethod.Get, CallType.Read, "$RouteKeysV1/$apiKey", requestOptions)
+        return transport.request(HttpMethod.Get, CallType.Read, "${Route.KeysV1}/$apiKey", requestOptions)
     }
 }
 

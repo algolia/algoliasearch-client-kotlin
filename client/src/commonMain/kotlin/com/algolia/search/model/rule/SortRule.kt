@@ -1,8 +1,6 @@
 package com.algolia.search.model.rule
 
-import com.algolia.search.serialize.KeyAlpha
-import com.algolia.search.serialize.KeyCount
-import com.algolia.search.serialize.KeyHidden
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,14 +11,14 @@ import kotlinx.serialization.Serializable
 public enum class SortRule {
 
     /** Alphabetical (ascending) */
-    @SerialName(KeyAlpha)
+    @SerialName(Key.Alpha)
     Alpha,
 
     /** Facet count (descending) */
-    @SerialName(KeyCount)
+    @SerialName(Key.Count)
     Count,
 
     /** Hidden (show only pinned values) */
-    @SerialName(KeyHidden)
+    @SerialName(Key.Hidden)
     Hidden
 }

@@ -1,8 +1,7 @@
 package com.algolia.search.model.response
 
 import com.algolia.search.model.multipleindex.IndexedQuery
-import com.algolia.search.serialize.KeyFacetHits
-import com.algolia.search.serialize.KeyResults
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonDecoder
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
@@ -23,7 +22,7 @@ public data class ResponseMultiSearch(
     /**
      * List of result in the order they were submitted, one element for each [IndexedQuery].
      */
-    @SerialName(KeyResults) public val results: List<ResultMultiSearch<*>>
+    @SerialName(Key.Results) public val results: List<ResultMultiSearch<*>>
 )
 
 /**
@@ -59,7 +58,7 @@ internal class ResultMultiSearchDeserializer<T : ResultSearch>(dataSerializer: K
 
     @Suppress("UNCHECKED_CAST")
     private fun multiSearchResult(json: Json, jsonObject: JsonObject): ResultMultiSearch<T> {
-        return if (jsonObject.keys.contains(KeyFacetHits)) {
+        return if (jsonObject.keys.contains(Key.FacetHits)) {
             ResultMultiSearch.Facets(json.decodeFromJsonElement(ResponseSearchForFacets.serializer(), jsonObject))
         } else {
             ResultMultiSearch.Hits(json.decodeFromJsonElement(ResponseSearch.serializer(), jsonObject))

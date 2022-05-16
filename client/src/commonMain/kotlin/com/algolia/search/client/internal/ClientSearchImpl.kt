@@ -29,11 +29,8 @@ import com.algolia.search.model.task.AppTaskID
 import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyLength
-import com.algolia.search.serialize.KeyOffset
-import com.algolia.search.serialize.KeyType
-import com.algolia.search.serialize.RouteLogs
-import com.algolia.search.serialize.RouteTask
+import com.algolia.search.serialize.internal.Key
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
@@ -159,7 +156,7 @@ internal class ClientSearchImpl internal constructor(
         return transport.request(
             HttpMethod.Get,
             CallType.Read,
-            "$RouteTask/$taskID",
+            "${Route.Task}/$taskID",
             requestOptions
         )
     }
@@ -176,11 +173,11 @@ internal class ClientSearchImpl internal constructor(
         requestOptions: RequestOptions?,
     ): ResponseLogs {
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyOffset, page)
-            parameter(KeyLength, hitsPerPage)
-            parameter(KeyType, logType?.raw)
+            parameter(Key.Offset, page)
+            parameter(Key.Length, hitsPerPage)
+            parameter(Key.Type, logType?.raw)
         }
 
-        return transport.request(HttpMethod.Get, CallType.Read, RouteLogs, options)
+        return transport.request(HttpMethod.Get, CallType.Read, Route.Logs, options)
     }
 }

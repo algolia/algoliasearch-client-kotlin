@@ -5,14 +5,7 @@ import com.algolia.search.helper.toABTestID
 import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.response.ResponseABTest
-import com.algolia.search.serialize.KeyABTestID
-import com.algolia.search.serialize.KeyClickSignificance
-import com.algolia.search.serialize.KeyConversionSignificance
-import com.algolia.search.serialize.KeyCreatedAt
-import com.algolia.search.serialize.KeyEndAt
-import com.algolia.search.serialize.KeyName
-import com.algolia.search.serialize.KeyStatus
-import com.algolia.search.serialize.KeyVariants
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
@@ -35,20 +28,20 @@ internal class TestResponseABTest : TestSerializer<ResponseABTest>(ResponseABTes
             clickSignificanceOrNull = 1f,
             conversionSignificanceOrNull = 2f
         ) to buildJsonObject {
-            put(KeyABTestID, 0L)
-            put(KeyCreatedAt, unknown)
-            put(KeyEndAt, date)
-            put(KeyName, unknown)
-            put(KeyStatus, ABTestStatus.Failed.raw)
+            put(Key.ABTestID, 0L)
+            put(Key.CreatedAt, unknown)
+            put(Key.EndAt, date)
+            put(Key.Name, unknown)
+            put(Key.Status, ABTestStatus.Failed.raw)
             put(
-                KeyVariants,
+                Key.Variants,
                 buildJsonArray {
                     add(TestResponseVariant.json)
                     add(TestResponseVariant.json)
                 }
             )
-            put(KeyClickSignificance, 1f)
-            put(KeyConversionSignificance, 2f)
+            put(Key.ClickSignificance, 1f)
+            put(Key.ConversionSignificance, 2f)
         }
     )
 }

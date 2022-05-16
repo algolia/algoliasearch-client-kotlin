@@ -18,10 +18,10 @@ import com.algolia.search.model.response.ResponseListIndices
 import com.algolia.search.model.response.ResponseMultiSearch
 import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.ResponseSearches
-import com.algolia.search.serialize.KeyRequests
-import com.algolia.search.serialize.RouteIndexesV1
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.serialize.internal.toBody
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
@@ -34,11 +34,11 @@ internal class EndpointMultipleIndexImpl(
 ) : EndpointMultipleIndex {
 
     override suspend fun listIndices(requestOptions: RequestOptions?): ResponseListIndices {
-        return transport.request(HttpMethod.Get, CallType.Read, RouteIndexesV1, requestOptions)
+        return transport.request(HttpMethod.Get, CallType.Read, Route.IndexesV1, requestOptions)
     }
 
     override suspend fun listIndexAPIKeys(requestOptions: RequestOptions?): ResponseListAPIKey {
-        return transport.request(HttpMethod.Get, CallType.Read, "$RouteIndexesV1/*/keys", requestOptions)
+        return transport.request(HttpMethod.Get, CallType.Read, "${Route.IndexesV1}/*/keys", requestOptions)
     }
 
     override suspend fun multipleQueries(
@@ -48,7 +48,7 @@ internal class EndpointMultipleIndexImpl(
     ): ResponseSearches {
         val body = queries.toBody(strategy)
 
-        return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/queries", requestOptions, body)
+        return transport.request(HttpMethod.Post, CallType.Read, "${Route.IndexesV1}/*/queries", requestOptions, body)
     }
 
     override suspend fun multipleGetObjects(
@@ -57,7 +57,7 @@ internal class EndpointMultipleIndexImpl(
     ): ResponseObjects {
         val body = JsonNoDefaults.encodeToString(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
-        return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/objects", requestOptions, body)
+        return transport.request(HttpMethod.Post, CallType.Read, "${Route.IndexesV1}/*/objects", requestOptions, body)
     }
 
     override suspend fun multipleBatchObjects(
@@ -66,9 +66,9 @@ internal class EndpointMultipleIndexImpl(
     ): ResponseBatches {
         if (operations.isEmpty()) throw EmptyListException("operations")
         val requests = Json.encodeToJsonElement(ListSerializer(BatchOperationIndex), operations)
-        val body = buildJsonObject { put(KeyRequests, requests) }.toString()
+        val body = buildJsonObject { put(Key.Requests, requests) }.toString()
 
-        return transport.request(HttpMethod.Post, CallType.Write, "$RouteIndexesV1/*/batch", requestOptions, body)
+        return transport.request(HttpMethod.Post, CallType.Write, "${Route.IndexesV1}/*/batch", requestOptions, body)
     }
 
     override suspend fun search(
@@ -80,7 +80,7 @@ internal class EndpointMultipleIndexImpl(
             RequestTypedMultipleQueries,
             RequestTypedMultipleQueries(requests, strategy)
         )
-        return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/queries", requestOptions, body)
+        return transport.request(HttpMethod.Post, CallType.Read, "${Route.IndexesV1}/*/queries", requestOptions, body)
     }
 }
 

@@ -28,13 +28,11 @@ import com.algolia.search.model.response.deletion.DeletionObject
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.task.TaskIndex
-import com.algolia.search.serialize.KeyAttributesToRetrieve
-import com.algolia.search.serialize.KeyCreateIfNotExists
-import com.algolia.search.serialize.KeyRequests
-import com.algolia.search.serialize.RouteIndexesV1
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.Key
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
 import com.algolia.search.transport.RequestOptions
@@ -151,7 +149,7 @@ internal class EndpointIndexingImpl(
     ): JsonObject {
         val attributesToRetrieve = attributes?.let { Json.encodeToString(ListSerializer(Attribute), it.toList()) }
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyAttributesToRetrieve, attributesToRetrieve)
+            parameter(Key.AttributesToRetrieve, attributesToRetrieve)
         }
 
         return transport.request(HttpMethod.Get, CallType.Read, indexName.toPath("/$objectID"), options)
@@ -184,7 +182,7 @@ internal class EndpointIndexingImpl(
         val requests = objectIDs.map { RequestObjects(indexName, it, attributesToRetrieve) }
         val body = JsonNoDefaults.encodeToString(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
-        return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/objects", requestOptions, body)
+        return transport.request(HttpMethod.Post, CallType.Read, "${Route.IndexesV1}/*/objects", requestOptions, body)
     }
 
     override suspend fun partialUpdateObject(
@@ -195,7 +193,7 @@ internal class EndpointIndexingImpl(
     ): RevisionObject {
         val path = indexName.toPath("/$objectID/partial")
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyCreateIfNotExists, createIfNotExists)
+            parameter(Key.CreateIfNotExists, createIfNotExists)
         }
         val body = Json.encodeToJsonElement(Partial, partial).toString()
 
@@ -219,7 +217,7 @@ internal class EndpointIndexingImpl(
     ): ResponseBatch {
         if (batchOperations.isEmpty()) throw EmptyListException("batchOperations")
         val requests = Json.encodeToJsonElement(ListSerializer(BatchOperation), batchOperations)
-        val body = buildJsonObject { put(KeyRequests, requests) }.toString()
+        val body = buildJsonObject { put(Key.Requests, requests) }.toString()
 
         return transport.request(HttpMethod.Post, CallType.Write, indexName.toPath("/batch"), requestOptions, body)
     }

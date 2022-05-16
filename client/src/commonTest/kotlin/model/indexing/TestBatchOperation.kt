@@ -8,13 +8,7 @@ import com.algolia.search.model.indexing.BatchOperation.DeleteObject
 import com.algolia.search.model.indexing.BatchOperation.Other
 import com.algolia.search.model.indexing.BatchOperation.PartialUpdateObject
 import com.algolia.search.model.indexing.BatchOperation.ReplaceObject
-import com.algolia.search.serialize.KeyAddObject
-import com.algolia.search.serialize.KeyClear
-import com.algolia.search.serialize.KeyDelete
-import com.algolia.search.serialize.KeyDeleteObject
-import com.algolia.search.serialize.KeyPartialUpdateObject
-import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
-import com.algolia.search.serialize.KeyUpdateObject
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.buildJsonObject
 import shouldEqual
 import unknown
@@ -27,13 +21,13 @@ internal class TestBatchOperation {
 
     @Test
     fun raw() {
-        AddObject(json).raw shouldEqual KeyAddObject
-        ReplaceObject(objectID, json).raw shouldEqual KeyUpdateObject
-        DeleteObject(objectID).raw shouldEqual KeyDeleteObject
-        PartialUpdateObject(objectID, json).raw shouldEqual KeyPartialUpdateObject
-        PartialUpdateObject(objectID, json, false).raw shouldEqual KeyPartialUpdateObjectNoCreate
-        ClearIndex.raw shouldEqual KeyClear
-        DeleteIndex.raw shouldEqual KeyDelete
+        AddObject(json).raw shouldEqual Key.AddObject
+        ReplaceObject(objectID, json).raw shouldEqual Key.UpdateObject
+        DeleteObject(objectID).raw shouldEqual Key.DeleteObject
+        PartialUpdateObject(objectID, json).raw shouldEqual Key.PartialUpdateObject
+        PartialUpdateObject(objectID, json, false).raw shouldEqual Key.PartialUpdateObjectNoCreate
+        ClearIndex.raw shouldEqual Key.Clear
+        DeleteIndex.raw shouldEqual Key.Delete
         Other(unknown, json).raw shouldEqual unknown
     }
 }

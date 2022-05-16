@@ -21,76 +21,8 @@ import com.algolia.search.model.search.SortFacetsBy
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
-import com.algolia.search.serialize.KeyAdvancedSyntax
-import com.algolia.search.serialize.KeyAdvancedSyntaxFeatures
-import com.algolia.search.serialize.KeyAllowTyposOnNumericTokens
-import com.algolia.search.serialize.KeyAlternativesAsExact
-import com.algolia.search.serialize.KeyAnalytics
-import com.algolia.search.serialize.KeyAnalyticsTags
-import com.algolia.search.serialize.KeyAroundLatLng
-import com.algolia.search.serialize.KeyAroundLatLngViaIP
-import com.algolia.search.serialize.KeyAroundPrecision
-import com.algolia.search.serialize.KeyAroundRadius
-import com.algolia.search.serialize.KeyAttributesToHighlight
-import com.algolia.search.serialize.KeyAttributesToRetrieve
-import com.algolia.search.serialize.KeyAttributesToSnippet
-import com.algolia.search.serialize.KeyClickAnalytics
-import com.algolia.search.serialize.KeyDecompoundQuery
-import com.algolia.search.serialize.KeyDisableExactOnAttributes
-import com.algolia.search.serialize.KeyDisableTypoToleranceOnAttributes
-import com.algolia.search.serialize.KeyDistinct
-import com.algolia.search.serialize.KeyEnableABTest
-import com.algolia.search.serialize.KeyEnablePersonalization
-import com.algolia.search.serialize.KeyEnableReRanking
-import com.algolia.search.serialize.KeyEnableRules
-import com.algolia.search.serialize.KeyExactOnSingleWordQuery
-import com.algolia.search.serialize.KeyExplain
-import com.algolia.search.serialize.KeyFacetFilters
-import com.algolia.search.serialize.KeyFacetingAfterDistinct
-import com.algolia.search.serialize.KeyFacets
-import com.algolia.search.serialize.KeyFilters
-import com.algolia.search.serialize.KeyGetRankingInfo
-import com.algolia.search.serialize.KeyHighlightPostTag
-import com.algolia.search.serialize.KeyHighlightPreTag
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyIgnorePlurals
-import com.algolia.search.serialize.KeyInsideBoundingBox
-import com.algolia.search.serialize.KeyInsidePolygon
-import com.algolia.search.serialize.KeyLength
-import com.algolia.search.serialize.KeyMaxFacetHits
-import com.algolia.search.serialize.KeyMaxValuesPerFacet
-import com.algolia.search.serialize.KeyMinProximity
-import com.algolia.search.serialize.KeyMinWordSizeFor1Typo
-import com.algolia.search.serialize.KeyMinWordSizeFor2Typos
-import com.algolia.search.serialize.KeyMinimumAroundRadius
-import com.algolia.search.serialize.KeyNaturalLanguages
-import com.algolia.search.serialize.KeyNumericFilters
-import com.algolia.search.serialize.KeyOffset
-import com.algolia.search.serialize.KeyOptionalFilters
-import com.algolia.search.serialize.KeyOptionalWords
-import com.algolia.search.serialize.KeyPage
-import com.algolia.search.serialize.KeyPercentileComputation
-import com.algolia.search.serialize.KeyPersonalizationImpact
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyQueryLanguages
-import com.algolia.search.serialize.KeyQueryType
-import com.algolia.search.serialize.KeyRelevancyStrictness
-import com.algolia.search.serialize.KeyRemoveStopWords
-import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
-import com.algolia.search.serialize.KeyReplaceSynonymsInHighlight
-import com.algolia.search.serialize.KeyResponseFields
-import com.algolia.search.serialize.KeyRestrictHighlightAndSnippetArrays
-import com.algolia.search.serialize.KeyRestrictSearchableAttributes
-import com.algolia.search.serialize.KeyRuleContexts
-import com.algolia.search.serialize.KeySimilarQuery
-import com.algolia.search.serialize.KeySnippetEllipsisText
-import com.algolia.search.serialize.KeySortFacetValuesBy
-import com.algolia.search.serialize.KeySumOrFiltersScores
-import com.algolia.search.serialize.KeySynonyms
-import com.algolia.search.serialize.KeyTagFilters
-import com.algolia.search.serialize.KeyTypoTolerance
-import com.algolia.search.serialize.KeyUserToken
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import int
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
@@ -178,97 +110,97 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             decompoundQuery = boolean,
             enableReRanking = boolean,
         ) to buildJsonObject {
-            put(KeyQuery, string)
-            put(KeyAttributesToRetrieve, attributesJson)
-            put(KeyRestrictSearchableAttributes, attributesJson)
-            put(KeyFilters, string)
-            put(KeyFacetFilters, nestedListsJson)
-            put(KeyOptionalFilters, nestedListsJson)
-            put(KeyNumericFilters, nestedListsJson)
-            put(KeyTagFilters, nestedListsJson)
-            put(KeySumOrFiltersScores, boolean)
-            put(KeyFacets, attributesJson)
-            put(KeyMaxValuesPerFacet, int)
-            put(KeyFacetingAfterDistinct, boolean)
-            put(KeySortFacetValuesBy, SortFacetsBy.Count.raw)
-            put(KeyAttributesToHighlight, attributesJson)
-            put(KeyAttributesToSnippet, buildJsonArray { add(TestSnippet.json) })
-            put(KeyHighlightPreTag, string)
-            put(KeyHighlightPostTag, string)
-            put(KeySnippetEllipsisText, string)
-            put(KeyRestrictHighlightAndSnippetArrays, boolean)
-            put(KeyPage, int)
-            put(KeyHitsPerPage, int)
-            put(KeyOffset, int)
-            put(KeyLength, int)
-            put(KeyMinWordSizeFor1Typo, int)
-            put(KeyMinWordSizeFor2Typos, int)
-            put(KeyTypoTolerance, TypoTolerance.Min.raw)
-            put(KeyAllowTyposOnNumericTokens, boolean)
-            put(KeyDisableTypoToleranceOnAttributes, attributesJson)
-            put(KeyAroundLatLng, "0.0,0.0")
-            put(KeyAroundLatLngViaIP, boolean)
-            put(KeyAroundRadius, AroundRadius.All.raw)
-            put(KeyAroundPrecision, int)
-            put(KeyMinimumAroundRadius, int)
-            put(KeyInsideBoundingBox, buildJsonArray { add(TestBoundingBox.json) })
-            put(KeyInsidePolygon, buildJsonArray { add(TestPolygon.json) })
-            put(KeyIgnorePlurals, boolean)
-            put(KeyRemoveStopWords, boolean)
+            put(Key.Query, string)
+            put(Key.AttributesToRetrieve, attributesJson)
+            put(Key.RestrictSearchableAttributes, attributesJson)
+            put(Key.Filters, string)
+            put(Key.FacetFilters, nestedListsJson)
+            put(Key.OptionalFilters, nestedListsJson)
+            put(Key.NumericFilters, nestedListsJson)
+            put(Key.TagFilters, nestedListsJson)
+            put(Key.SumOrFiltersScores, boolean)
+            put(Key.Facets, attributesJson)
+            put(Key.MaxValuesPerFacet, int)
+            put(Key.FacetingAfterDistinct, boolean)
+            put(Key.SortFacetValuesBy, SortFacetsBy.Count.raw)
+            put(Key.AttributesToHighlight, attributesJson)
+            put(Key.AttributesToSnippet, buildJsonArray { add(TestSnippet.json) })
+            put(Key.HighlightPreTag, string)
+            put(Key.HighlightPostTag, string)
+            put(Key.SnippetEllipsisText, string)
+            put(Key.RestrictHighlightAndSnippetArrays, boolean)
+            put(Key.Page, int)
+            put(Key.HitsPerPage, int)
+            put(Key.Offset, int)
+            put(Key.Length, int)
+            put(Key.MinWordSizeFor1Typo, int)
+            put(Key.MinWordSizeFor2Typos, int)
+            put(Key.TypoTolerance, TypoTolerance.Min.raw)
+            put(Key.AllowTyposOnNumericTokens, boolean)
+            put(Key.DisableTypoToleranceOnAttributes, attributesJson)
+            put(Key.AroundLatLng, "0.0,0.0")
+            put(Key.AroundLatLngViaIP, boolean)
+            put(Key.AroundRadius, AroundRadius.All.raw)
+            put(Key.AroundPrecision, int)
+            put(Key.MinimumAroundRadius, int)
+            put(Key.InsideBoundingBox, buildJsonArray { add(TestBoundingBox.json) })
+            put(Key.InsidePolygon, buildJsonArray { add(TestPolygon.json) })
+            put(Key.IgnorePlurals, boolean)
+            put(Key.RemoveStopWords, boolean)
             put(
-                KeyQueryLanguages,
+                Key.QueryLanguages,
                 buildJsonArray {
                     add(Language.Afrikaans.raw)
                     add(Language.Albanian.raw)
                 }
             )
-            put(KeyEnableRules, boolean)
-            put(KeyRuleContexts, buildJsonArray { add(string) })
-            put(KeyEnablePersonalization, boolean)
-            put(KeyPersonalizationImpact, 1)
-            put(KeyUserToken, unknown)
-            put(KeyQueryType, QueryType.PrefixLast.raw)
-            put(KeyRemoveWordsIfNoResults, RemoveWordIfNoResults.LastWords.raw)
-            put(KeyAdvancedSyntax, boolean)
+            put(Key.EnableRules, boolean)
+            put(Key.RuleContexts, buildJsonArray { add(string) })
+            put(Key.EnablePersonalization, boolean)
+            put(Key.PersonalizationImpact, 1)
+            put(Key.UserToken, unknown)
+            put(Key.QueryType, QueryType.PrefixLast.raw)
+            put(Key.RemoveWordsIfNoResults, RemoveWordIfNoResults.LastWords.raw)
+            put(Key.AdvancedSyntax, boolean)
             put(
-                KeyAdvancedSyntaxFeatures,
+                Key.AdvancedSyntaxFeatures,
                 buildJsonArray { add(AdvancedSyntaxFeatures.ExcludeWords.raw) }
             )
-            put(KeyOptionalWords, buildJsonArray { add(string) })
-            put(KeyDisableExactOnAttributes, attributesJson)
-            put(KeyExactOnSingleWordQuery, ExactOnSingleWordQuery.Word.raw)
+            put(Key.OptionalWords, buildJsonArray { add(string) })
+            put(Key.DisableExactOnAttributes, attributesJson)
+            put(Key.ExactOnSingleWordQuery, ExactOnSingleWordQuery.Word.raw)
             put(
-                KeyAlternativesAsExact,
+                Key.AlternativesAsExact,
                 buildJsonArray {
                     add(
                         AlternativesAsExact.IgnorePlurals.raw
                     )
                 }
             )
-            put(KeyDistinct, int)
-            put(KeyGetRankingInfo, boolean)
-            put(KeyClickAnalytics, boolean)
-            put(KeyAnalytics, boolean)
-            put(KeyAnalyticsTags, buildJsonArray { add(string) })
-            put(KeySynonyms, boolean)
-            put(KeyReplaceSynonymsInHighlight, boolean)
-            put(KeyMinProximity, int)
-            put(KeyResponseFields, buildJsonArray { add(ResponseFields.NbHits.raw) })
-            put(KeyMaxFacetHits, int)
-            put(KeyPercentileComputation, boolean)
-            put(KeySimilarQuery, string)
-            put(KeyEnableABTest, boolean)
-            put(KeyExplain, buildJsonArray { add(ExplainModule.MatchAlternatives.raw) })
+            put(Key.Distinct, int)
+            put(Key.GetRankingInfo, boolean)
+            put(Key.ClickAnalytics, boolean)
+            put(Key.Analytics, boolean)
+            put(Key.AnalyticsTags, buildJsonArray { add(string) })
+            put(Key.Synonyms, boolean)
+            put(Key.ReplaceSynonymsInHighlight, boolean)
+            put(Key.MinProximity, int)
+            put(Key.ResponseFields, buildJsonArray { add(ResponseFields.NbHits.raw) })
+            put(Key.MaxFacetHits, int)
+            put(Key.PercentileComputation, boolean)
+            put(Key.SimilarQuery, string)
+            put(Key.EnableABTest, boolean)
+            put(Key.Explain, buildJsonArray { add(ExplainModule.MatchAlternatives.raw) })
             put(
-                KeyNaturalLanguages,
+                Key.NaturalLanguages,
                 buildJsonArray {
                     add(Language.Afrikaans.raw)
                     add(Language.Albanian.raw)
                 }
             )
-            put(KeyRelevancyStrictness, int)
-            put(KeyDecompoundQuery, boolean)
-            put(KeyEnableReRanking, boolean)
+            put(Key.RelevancyStrictness, int)
+            put(Key.DecompoundQuery, boolean)
+            put(Key.EnableReRanking, boolean)
         }
     )
 

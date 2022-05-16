@@ -1,9 +1,7 @@
 package com.algolia.search.model.response
 
 import com.algolia.search.model.analytics.ABTest
-import com.algolia.search.serialize.KeyABTests
-import com.algolia.search.serialize.KeyCount
-import com.algolia.search.serialize.KeyTotal
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,12 +10,12 @@ public data class ResponseABTests(
     /**
      * Number of [ABTest] returned.
      */
-    @SerialName(KeyCount) val count: Int,
+    @SerialName(Key.Count) val count: Int,
     /**
      * Total number of [ABTest] that can be fetched.
      */
-    @SerialName(KeyTotal) val total: Int,
-    @SerialName(KeyABTests) val abTestsOrNull: List<ResponseABTest>? = null
+    @SerialName(Key.Total) val total: Int,
+    @SerialName(Key.ABTests) val abTestsOrNull: List<ResponseABTest>? = null
 ) {
 
     public val abTests: List<ResponseABTest>

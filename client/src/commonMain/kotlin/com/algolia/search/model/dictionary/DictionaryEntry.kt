@@ -4,14 +4,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.dictionary.DictionaryEntry.State.Disabled
 import com.algolia.search.model.dictionary.DictionaryEntry.State.Enabled
 import com.algolia.search.model.search.Language
-import com.algolia.search.serialize.KeyDecomposition
-import com.algolia.search.serialize.KeyDisabled
-import com.algolia.search.serialize.KeyEnabled
-import com.algolia.search.serialize.KeyLanguage
-import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.serialize.KeyState
-import com.algolia.search.serialize.KeyWord
-import com.algolia.search.serialize.KeyWords
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -32,48 +25,48 @@ public sealed class DictionaryEntry {
 
     @Serializable
     public data class Stopword(
-        @SerialName(KeyObjectID) override val objectID: ObjectID,
-        @SerialName(KeyLanguage) override val language: Language,
+        @SerialName(Key.ObjectID) override val objectID: ObjectID,
+        @SerialName(Key.Language) override val language: Language,
         /**
          * The stop word being added or modified.
          * When word already exists in the standard dictionary provided by Algolia,
          * the entry can be overridden by the one provided by the user.
          */
-        @SerialName(KeyWord) public val word: String,
+        @SerialName(Key.Word) public val word: String,
         /**
          * The state of the entry.
          */
-        @SerialName(KeyState) public val state: State? = Enabled,
+        @SerialName(Key.State) public val state: State? = Enabled,
     ) : DictionaryEntry()
 
     @Serializable
     public data class Plural(
-        @SerialName(KeyObjectID) override val objectID: ObjectID,
-        @SerialName(KeyLanguage) override val language: Language,
+        @SerialName(Key.ObjectID) override val objectID: ObjectID,
+        @SerialName(Key.Language) override val language: Language,
         /**
          * List of word declensions.
          * The entry overrides existing entries when any of these words are defined
          * in the standard dictionary provided by Algolia.
          */
-        @SerialName(KeyWords) public val words: List<String>,
+        @SerialName(Key.Words) public val words: List<String>,
     ) : DictionaryEntry()
 
     @Serializable
     public data class Compound(
-        @SerialName(KeyObjectID) override val objectID: ObjectID,
-        @SerialName(KeyLanguage) override val language: Language,
+        @SerialName(Key.ObjectID) override val objectID: ObjectID,
+        @SerialName(Key.Language) override val language: Language,
 
         /**
          * The stop word being added or modified.
          * When word already exists in the standard dictionary provided by Algolia,
          * the entry can be overridden by the one provided by the user.
          */
-        @SerialName(KeyWord) public val word: String,
+        @SerialName(Key.Word) public val word: String,
         /**
          * When empty, the key word is considered as a compound atom.
          * Otherwise, it is the decomposition of word.
          */
-        @SerialName(KeyDecomposition) public val decomposition: List<String>,
+        @SerialName(Key.Decomposition) public val decomposition: List<String>,
     ) : DictionaryEntry()
 
     /**
@@ -83,10 +76,10 @@ public sealed class DictionaryEntry {
      */
     @Serializable
     public enum class State {
-        @SerialName(KeyEnabled)
+        @SerialName(Key.Enabled)
         Enabled,
 
-        @SerialName(KeyDisabled)
+        @SerialName(Key.Disabled)
         Disabled
     }
 }

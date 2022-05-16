@@ -1,10 +1,10 @@
 package com.algolia.search.model.internal.request
 
-import com.algolia.search.serialize.KeyParams
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class RequestParams(
-    @SerialName(KeyParams) val params: String? = null
+    @SerialName(Key.Params) val params: String? = null
 )

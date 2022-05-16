@@ -1,6 +1,7 @@
 package com.algolia.search.serialize
 
 import com.algolia.search.model.search.Facet
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.KSerializer
@@ -24,9 +25,9 @@ public object KSerializerFacetList : KSerializer<List<Facet>> {
             value.map {
                 add(
                     buildJsonObject {
-                        put(KeyValue, it.value)
-                        put(KeyCount, it.count)
-                        it.highlightedOrNull?.let { put(KeyHighlighted, it) }
+                        put(Key.Value, it.value)
+                        put(Key.Count, it.count)
+                        it.highlightedOrNull?.let { put(Key.Highlighted, it) }
                     }
                 )
             }
@@ -39,9 +40,9 @@ public object KSerializerFacetList : KSerializer<List<Facet>> {
 
         return json.map {
             Facet(
-                it.jsonObject.getValue(KeyValue).jsonPrimitive.content,
-                it.jsonObject.getValue(KeyCount).jsonPrimitive.int,
-                it.jsonObject[KeyHighlighted]?.jsonPrimitive?.content
+                it.jsonObject.getValue(Key.Value).jsonPrimitive.content,
+                it.jsonObject.getValue(Key.Count).jsonPrimitive.int,
+                it.jsonObject[Key.Highlighted]?.jsonPrimitive?.content
             )
         }
     }

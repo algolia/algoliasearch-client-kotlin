@@ -4,6 +4,7 @@ import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.jsonObjectOrNull
@@ -24,11 +25,11 @@ public object KSerializerVariant : KSerializer<Variant> {
 
     override fun serialize(encoder: Encoder, value: Variant) {
         val json = buildJsonObject {
-            put(KeyIndexName, value.indexName.raw)
-            put(KeyPercentage, value.trafficPercentage)
+            put(Key.IndexName, value.indexName.raw)
+            put(Key.Percentage, value.trafficPercentage)
             value.customSearchParameters?.let {
                 put(
-                    KeyCustomSearchParameters,
+                    Key.CustomSearchParameters,
                     JsonNoDefaults.encodeToJsonElement(Query.serializer(), it)
                 )
             }
@@ -38,11 +39,11 @@ public object KSerializerVariant : KSerializer<Variant> {
 
     override fun deserialize(decoder: Decoder): Variant {
         val json = decoder.asJsonInput().jsonObject
-        val customSearchParameters = json[KeyCustomSearchParameters]?.jsonObjectOrNull
+        val customSearchParameters = json[Key.CustomSearchParameters]?.jsonObjectOrNull
 
         return Variant(
-            indexName = json.getValue(KeyIndexName).jsonPrimitive.content.toIndexName(),
-            trafficPercentage = json.getValue(KeyPercentage).jsonPrimitive.int,
+            indexName = json.getValue(Key.IndexName).jsonPrimitive.content.toIndexName(),
+            trafficPercentage = json.getValue(Key.Percentage).jsonPrimitive.int,
             customSearchParameters = customSearchParameters?.let {
                 JsonNoDefaults.decodeFromJsonElement(Query.serializer(), it)
             }

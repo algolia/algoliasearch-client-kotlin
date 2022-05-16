@@ -7,7 +7,7 @@ import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.internal.Key
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
@@ -31,7 +31,7 @@ class TestSuiteReplaceAll {
         runBlocking {
             val rule = load(Rule.serializer(), "rule_one.json")
             val synonym = load(Synonym, "synonym_one.json") as Synonym.MultiWay
-            val data = buildJsonObject { KeyObjectID to objectIDOne }
+            val data = buildJsonObject { Key.ObjectID to objectIDOne }
 
             index.apply {
                 val tasks = mutableListOf<Task>()
@@ -43,13 +43,13 @@ class TestSuiteReplaceAll {
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
                 tasks.clear()
 
-                tasks += replaceAllObjects(listOf(buildJsonObject { put(KeyObjectID, objectIDTwo.raw) }))
+                tasks += replaceAllObjects(listOf(buildJsonObject { put(Key.ObjectID, objectIDTwo.raw) }))
                 tasks += replaceAllSynonyms(listOf(synonym.copy(objectID = objectIDTwo)))
                 tasks += replaceAllRules(listOf(rule.copy(objectID = objectIDTwo)))
 
                 tasks.wait().all { it is TaskStatus.Published }.shouldBeTrue()
 
-                getObject(objectIDTwo).getValue(KeyObjectID).jsonPrimitive.content shouldEqual objectIDTwo.raw
+                getObject(objectIDTwo).getValue(Key.ObjectID).jsonPrimitive.content shouldEqual objectIDTwo.raw
                 getRule(objectIDTwo).objectID shouldEqual objectIDTwo
                 getSynonym(objectIDTwo).objectID shouldEqual objectIDTwo
 

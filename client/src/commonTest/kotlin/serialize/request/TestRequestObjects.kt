@@ -4,10 +4,8 @@ import attributes
 import attributesJson
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.multipleindex.RequestObjects
-import com.algolia.search.serialize.KeyAttributesToRetrieve
-import com.algolia.search.serialize.KeyIndexName
-import com.algolia.search.serialize.KeyObjectID
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import indexA
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
@@ -19,13 +17,13 @@ internal class TestRequestObjects : TestSerializer<RequestObjects>(RequestObject
 
     override val items = listOf(
         RequestObjects(indexA, objectID) to buildJsonObject {
-            put(KeyIndexName, indexA.raw)
-            put(KeyObjectID, objectID.raw)
+            put(Key.IndexName, indexA.raw)
+            put(Key.ObjectID, objectID.raw)
         },
         RequestObjects(indexA, objectID, attributes) to buildJsonObject {
-            put(KeyIndexName, indexA.raw)
-            put(KeyObjectID, objectID.raw)
-            put(KeyAttributesToRetrieve, attributesJson)
+            put(Key.IndexName, indexA.raw)
+            put(Key.ObjectID, objectID.raw)
+            put(Key.AttributesToRetrieve, attributesJson)
         }
     )
 }

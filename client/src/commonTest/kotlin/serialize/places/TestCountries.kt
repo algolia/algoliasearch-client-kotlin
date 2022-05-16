@@ -250,509 +250,261 @@ import com.algolia.search.model.places.Country.WesternSahara
 import com.algolia.search.model.places.Country.Yemen
 import com.algolia.search.model.places.Country.Zambia
 import com.algolia.search.model.places.Country.Zimbabwe
-import com.algolia.search.serialize.KeyAfghanistan
-import com.algolia.search.serialize.KeyAlandIslands
-import com.algolia.search.serialize.KeyAlbania
-import com.algolia.search.serialize.KeyAlgeria
-import com.algolia.search.serialize.KeyAmericanSamoa
-import com.algolia.search.serialize.KeyAndorra
-import com.algolia.search.serialize.KeyAngola
-import com.algolia.search.serialize.KeyAnguilla
-import com.algolia.search.serialize.KeyAntarctica
-import com.algolia.search.serialize.KeyAntiguaAndBarbuda
-import com.algolia.search.serialize.KeyArgentina
-import com.algolia.search.serialize.KeyArmenia
-import com.algolia.search.serialize.KeyAruba
-import com.algolia.search.serialize.KeyAustralia
-import com.algolia.search.serialize.KeyAustria
-import com.algolia.search.serialize.KeyAzerbaijan
-import com.algolia.search.serialize.KeyBahamas
-import com.algolia.search.serialize.KeyBahrain
-import com.algolia.search.serialize.KeyBailiwickOfGuernsey
-import com.algolia.search.serialize.KeyBangladesh
-import com.algolia.search.serialize.KeyBarbados
-import com.algolia.search.serialize.KeyBelarus
-import com.algolia.search.serialize.KeyBelgium
-import com.algolia.search.serialize.KeyBelize
-import com.algolia.search.serialize.KeyBenin
-import com.algolia.search.serialize.KeyBermuda
-import com.algolia.search.serialize.KeyBhutan
-import com.algolia.search.serialize.KeyBolivia
-import com.algolia.search.serialize.KeyBosniaAndHerzegovina
-import com.algolia.search.serialize.KeyBotswana
-import com.algolia.search.serialize.KeyBouvetIsland
-import com.algolia.search.serialize.KeyBrazil
-import com.algolia.search.serialize.KeyBritishIndianOceanTerritory
-import com.algolia.search.serialize.KeyBruneiDarussalam
-import com.algolia.search.serialize.KeyBulgaria
-import com.algolia.search.serialize.KeyBurkinaFaso
-import com.algolia.search.serialize.KeyBurundi
-import com.algolia.search.serialize.KeyCaboVerde
-import com.algolia.search.serialize.KeyCambodia
-import com.algolia.search.serialize.KeyCameroon
-import com.algolia.search.serialize.KeyCanada
-import com.algolia.search.serialize.KeyCaribbeanNetherlands
-import com.algolia.search.serialize.KeyCaymanIslands
-import com.algolia.search.serialize.KeyCentralAfricanRepublic
-import com.algolia.search.serialize.KeyChad
-import com.algolia.search.serialize.KeyChile
-import com.algolia.search.serialize.KeyChina
-import com.algolia.search.serialize.KeyChristmasIsland
-import com.algolia.search.serialize.KeyCocosIslands
-import com.algolia.search.serialize.KeyColombia
-import com.algolia.search.serialize.KeyComoros
-import com.algolia.search.serialize.KeyCookIslands
-import com.algolia.search.serialize.KeyCostaRica
-import com.algolia.search.serialize.KeyCroatia
-import com.algolia.search.serialize.KeyCuba
-import com.algolia.search.serialize.KeyCuracao
-import com.algolia.search.serialize.KeyCyprus
-import com.algolia.search.serialize.KeyCzechRepublic
-import com.algolia.search.serialize.KeyDemocraticRepublicOfTheCongo
-import com.algolia.search.serialize.KeyDenmark
-import com.algolia.search.serialize.KeyDjibouti
-import com.algolia.search.serialize.KeyDominica
-import com.algolia.search.serialize.KeyDominicanRepublic
-import com.algolia.search.serialize.KeyEcuador
-import com.algolia.search.serialize.KeyEgypt
-import com.algolia.search.serialize.KeyElSalvador
-import com.algolia.search.serialize.KeyEquatorialGuinea
-import com.algolia.search.serialize.KeyEritrea
-import com.algolia.search.serialize.KeyEstonia
-import com.algolia.search.serialize.KeyEswatini
-import com.algolia.search.serialize.KeyEthiopia
-import com.algolia.search.serialize.KeyFalklandIslands
-import com.algolia.search.serialize.KeyFaroeIslands
-import com.algolia.search.serialize.KeyFiji
-import com.algolia.search.serialize.KeyFinland
-import com.algolia.search.serialize.KeyFrance
-import com.algolia.search.serialize.KeyFrenchGuiana
-import com.algolia.search.serialize.KeyFrenchPolynesia
-import com.algolia.search.serialize.KeyFrenchSouthernAndAntarcticLands
-import com.algolia.search.serialize.KeyGabon
-import com.algolia.search.serialize.KeyGambia
-import com.algolia.search.serialize.KeyGeorgia
-import com.algolia.search.serialize.KeyGermany
-import com.algolia.search.serialize.KeyGhana
-import com.algolia.search.serialize.KeyGibraltar
-import com.algolia.search.serialize.KeyGreece
-import com.algolia.search.serialize.KeyGreenland
-import com.algolia.search.serialize.KeyGrenada
-import com.algolia.search.serialize.KeyGuadeloupe
-import com.algolia.search.serialize.KeyGuam
-import com.algolia.search.serialize.KeyGuatemala
-import com.algolia.search.serialize.KeyGuinea
-import com.algolia.search.serialize.KeyGuineaBissau
-import com.algolia.search.serialize.KeyGuyana
-import com.algolia.search.serialize.KeyHaiti
-import com.algolia.search.serialize.KeyHeardIslandAndMcDonaldIslands
-import com.algolia.search.serialize.KeyHonduras
-import com.algolia.search.serialize.KeyHongKong
-import com.algolia.search.serialize.KeyHungary
-import com.algolia.search.serialize.KeyIceland
-import com.algolia.search.serialize.KeyIndia
-import com.algolia.search.serialize.KeyIndonesia
-import com.algolia.search.serialize.KeyIran
-import com.algolia.search.serialize.KeyIraq
-import com.algolia.search.serialize.KeyIreland
-import com.algolia.search.serialize.KeyIsleOfMan
-import com.algolia.search.serialize.KeyIsrael
-import com.algolia.search.serialize.KeyItaly
-import com.algolia.search.serialize.KeyIvoryCoast
-import com.algolia.search.serialize.KeyJamaica
-import com.algolia.search.serialize.KeyJapan
-import com.algolia.search.serialize.KeyJersey
-import com.algolia.search.serialize.KeyJordan
-import com.algolia.search.serialize.KeyKazakhstan
-import com.algolia.search.serialize.KeyKenya
-import com.algolia.search.serialize.KeyKiribati
-import com.algolia.search.serialize.KeyKuwait
-import com.algolia.search.serialize.KeyKyrgyzstan
-import com.algolia.search.serialize.KeyLaos
-import com.algolia.search.serialize.KeyLatvia
-import com.algolia.search.serialize.KeyLebanon
-import com.algolia.search.serialize.KeyLesotho
-import com.algolia.search.serialize.KeyLiberia
-import com.algolia.search.serialize.KeyLibya
-import com.algolia.search.serialize.KeyLiechtenstein
-import com.algolia.search.serialize.KeyLithuania
-import com.algolia.search.serialize.KeyLuxembourg
-import com.algolia.search.serialize.KeyMacau
-import com.algolia.search.serialize.KeyMadagascar
-import com.algolia.search.serialize.KeyMalawi
-import com.algolia.search.serialize.KeyMalaysia
-import com.algolia.search.serialize.KeyMaldives
-import com.algolia.search.serialize.KeyMali
-import com.algolia.search.serialize.KeyMalta
-import com.algolia.search.serialize.KeyMarshallIslands
-import com.algolia.search.serialize.KeyMartinique
-import com.algolia.search.serialize.KeyMauritania
-import com.algolia.search.serialize.KeyMauritius
-import com.algolia.search.serialize.KeyMayotte
-import com.algolia.search.serialize.KeyMexico
-import com.algolia.search.serialize.KeyMicronesia
-import com.algolia.search.serialize.KeyMoldova
-import com.algolia.search.serialize.KeyMonaco
-import com.algolia.search.serialize.KeyMongolia
-import com.algolia.search.serialize.KeyMontenegro
-import com.algolia.search.serialize.KeyMontserrat
-import com.algolia.search.serialize.KeyMorocco
-import com.algolia.search.serialize.KeyMozambique
-import com.algolia.search.serialize.KeyMyanmar
-import com.algolia.search.serialize.KeyNamibia
-import com.algolia.search.serialize.KeyNauru
-import com.algolia.search.serialize.KeyNepal
-import com.algolia.search.serialize.KeyNetherlands
-import com.algolia.search.serialize.KeyNewCaledonia
-import com.algolia.search.serialize.KeyNewZealand
-import com.algolia.search.serialize.KeyNicaragua
-import com.algolia.search.serialize.KeyNiger
-import com.algolia.search.serialize.KeyNigeria
-import com.algolia.search.serialize.KeyNiue
-import com.algolia.search.serialize.KeyNorfolkIsland
-import com.algolia.search.serialize.KeyNorthKorea
-import com.algolia.search.serialize.KeyNorthMacedonia
-import com.algolia.search.serialize.KeyNorthernMarianaIslands
-import com.algolia.search.serialize.KeyNorway
-import com.algolia.search.serialize.KeyOman
-import com.algolia.search.serialize.KeyPakistan
-import com.algolia.search.serialize.KeyPalau
-import com.algolia.search.serialize.KeyPalestine
-import com.algolia.search.serialize.KeyPanama
-import com.algolia.search.serialize.KeyPapuaNewGuinea
-import com.algolia.search.serialize.KeyParaguay
-import com.algolia.search.serialize.KeyPeru
-import com.algolia.search.serialize.KeyPhilippines
-import com.algolia.search.serialize.KeyPitcairnIslands
-import com.algolia.search.serialize.KeyPoland
-import com.algolia.search.serialize.KeyPortugal
-import com.algolia.search.serialize.KeyPuertoRico
-import com.algolia.search.serialize.KeyQatar
-import com.algolia.search.serialize.KeyRepublicOfTheCongo
-import com.algolia.search.serialize.KeyReunion
-import com.algolia.search.serialize.KeyRomania
-import com.algolia.search.serialize.KeyRussia
-import com.algolia.search.serialize.KeyRwanda
-import com.algolia.search.serialize.KeySaintBarthelemy
-import com.algolia.search.serialize.KeySaintHelena
-import com.algolia.search.serialize.KeySaintKittsAndNevis
-import com.algolia.search.serialize.KeySaintLucia
-import com.algolia.search.serialize.KeySaintMartin
-import com.algolia.search.serialize.KeySaintPierreAndMiquelon
-import com.algolia.search.serialize.KeySaintVincentAndTheGrenadines
-import com.algolia.search.serialize.KeySamoa
-import com.algolia.search.serialize.KeySanMarino
-import com.algolia.search.serialize.KeySaoTomeAndPrincipe
-import com.algolia.search.serialize.KeySaudiArabia
-import com.algolia.search.serialize.KeySenegal
-import com.algolia.search.serialize.KeySerbia
-import com.algolia.search.serialize.KeySeychelles
-import com.algolia.search.serialize.KeySierraLeone
-import com.algolia.search.serialize.KeySingapore
-import com.algolia.search.serialize.KeySintMaarten
-import com.algolia.search.serialize.KeySlovakia
-import com.algolia.search.serialize.KeySlovenia
-import com.algolia.search.serialize.KeySolomonIslands
-import com.algolia.search.serialize.KeySomalia
-import com.algolia.search.serialize.KeySouthAfrica
-import com.algolia.search.serialize.KeySouthGeorgiaAndTheSouthSandwichIslands
-import com.algolia.search.serialize.KeySouthKorea
-import com.algolia.search.serialize.KeySouthSudan
-import com.algolia.search.serialize.KeySpain
-import com.algolia.search.serialize.KeySriLanka
-import com.algolia.search.serialize.KeySudan
-import com.algolia.search.serialize.KeySuriname
-import com.algolia.search.serialize.KeySvalbardAndJanMayen
-import com.algolia.search.serialize.KeySweden
-import com.algolia.search.serialize.KeySwitzerland
-import com.algolia.search.serialize.KeySyria
-import com.algolia.search.serialize.KeyTaiwan
-import com.algolia.search.serialize.KeyTajikistan
-import com.algolia.search.serialize.KeyTanzania
-import com.algolia.search.serialize.KeyThailand
-import com.algolia.search.serialize.KeyTimorLeste
-import com.algolia.search.serialize.KeyTogo
-import com.algolia.search.serialize.KeyTokelau
-import com.algolia.search.serialize.KeyTonga
-import com.algolia.search.serialize.KeyTrinidadAndTobago
-import com.algolia.search.serialize.KeyTunisia
-import com.algolia.search.serialize.KeyTurkey
-import com.algolia.search.serialize.KeyTurkmenistan
-import com.algolia.search.serialize.KeyTurksAndCaicosIslands
-import com.algolia.search.serialize.KeyTuvalu
-import com.algolia.search.serialize.KeyUganda
-import com.algolia.search.serialize.KeyUkraine
-import com.algolia.search.serialize.KeyUnitedArabEmirates
-import com.algolia.search.serialize.KeyUnitedKingdom
-import com.algolia.search.serialize.KeyUnitedStates
-import com.algolia.search.serialize.KeyUnitedStatesMinorOutlyingIslands
-import com.algolia.search.serialize.KeyUruguay
-import com.algolia.search.serialize.KeyUzbekistan
-import com.algolia.search.serialize.KeyVanuatu
-import com.algolia.search.serialize.KeyVaticanCity
-import com.algolia.search.serialize.KeyVenezuela
-import com.algolia.search.serialize.KeyVietnam
-import com.algolia.search.serialize.KeyVirginIslandsGB
-import com.algolia.search.serialize.KeyVirginIslandsUS
-import com.algolia.search.serialize.KeyWallisAndFutuna
-import com.algolia.search.serialize.KeyWesternSahara
-import com.algolia.search.serialize.KeyYemen
-import com.algolia.search.serialize.KeyZambia
-import com.algolia.search.serialize.KeyZimbabwe
+import com.algolia.search.serialize.internal.Countries
 import kotlinx.serialization.json.JsonPrimitive
 import serialize.TestSerializer
 
 internal class TestCountries : TestSerializer<Country>(Country) {
 
     override val items = listOf(
-        Afghanistan to JsonPrimitive(KeyAfghanistan),
-        AlandIslands to JsonPrimitive(KeyAlandIslands),
-        Albania to JsonPrimitive(KeyAlbania),
-        Algeria to JsonPrimitive(KeyAlgeria),
-        AmericanSamoa to JsonPrimitive(KeyAmericanSamoa),
-        Andorra to JsonPrimitive(KeyAndorra),
-        Angola to JsonPrimitive(KeyAngola),
-        Anguilla to JsonPrimitive(KeyAnguilla),
-        Antarctica to JsonPrimitive(KeyAntarctica),
-        AntiguaAndBarbuda to JsonPrimitive(KeyAntiguaAndBarbuda),
-        Argentina to JsonPrimitive(KeyArgentina),
-        Armenia to JsonPrimitive(KeyArmenia),
-        Aruba to JsonPrimitive(KeyAruba),
-        Australia to JsonPrimitive(KeyAustralia),
-        Austria to JsonPrimitive(KeyAustria),
-        Azerbaijan to JsonPrimitive(KeyAzerbaijan),
-        Bahamas to JsonPrimitive(KeyBahamas),
-        Bahrain to JsonPrimitive(KeyBahrain),
-        Bangladesh to JsonPrimitive(KeyBangladesh),
-        Barbados to JsonPrimitive(KeyBarbados),
-        Belarus to JsonPrimitive(KeyBelarus),
-        Belgium to JsonPrimitive(KeyBelgium),
-        Belize to JsonPrimitive(KeyBelize),
-        Benin to JsonPrimitive(KeyBenin),
-        Bermuda to JsonPrimitive(KeyBermuda),
-        Bhutan to JsonPrimitive(KeyBhutan),
-        Bolivia to JsonPrimitive(KeyBolivia),
-        CaribbeanNetherlands to JsonPrimitive(KeyCaribbeanNetherlands),
-        BosniaAndHerzegovina to JsonPrimitive(KeyBosniaAndHerzegovina),
-        Botswana to JsonPrimitive(KeyBotswana),
-        BouvetIsland to JsonPrimitive(KeyBouvetIsland),
-        Brazil to JsonPrimitive(KeyBrazil),
-        BritishIndianOceanTerritory to JsonPrimitive(KeyBritishIndianOceanTerritory),
-        BruneiDarussalam to JsonPrimitive(KeyBruneiDarussalam),
-        Bulgaria to JsonPrimitive(KeyBulgaria),
-        BurkinaFaso to JsonPrimitive(KeyBurkinaFaso),
-        Burundi to JsonPrimitive(KeyBurundi),
-        CaboVerde to JsonPrimitive(KeyCaboVerde),
-        Cambodia to JsonPrimitive(KeyCambodia),
-        Cameroon to JsonPrimitive(KeyCameroon),
-        Canada to JsonPrimitive(KeyCanada),
-        CaymanIslands to JsonPrimitive(KeyCaymanIslands),
-        CentralAfricanRepublic to JsonPrimitive(KeyCentralAfricanRepublic),
-        Chad to JsonPrimitive(KeyChad),
-        Chile to JsonPrimitive(KeyChile),
-        China to JsonPrimitive(KeyChina),
-        ChristmasIsland to JsonPrimitive(KeyChristmasIsland),
-        CocosIslands to JsonPrimitive(KeyCocosIslands),
-        Colombia to JsonPrimitive(KeyColombia),
-        Comoros to JsonPrimitive(KeyComoros),
-        RepublicOfTheCongo to JsonPrimitive(KeyRepublicOfTheCongo),
-        DemocraticRepublicOfTheCongo to JsonPrimitive(KeyDemocraticRepublicOfTheCongo),
-        CookIslands to JsonPrimitive(KeyCookIslands),
-        CostaRica to JsonPrimitive(KeyCostaRica),
-        IvoryCoast to JsonPrimitive(KeyIvoryCoast),
-        Croatia to JsonPrimitive(KeyCroatia),
-        Cuba to JsonPrimitive(KeyCuba),
-        Curacao to JsonPrimitive(KeyCuracao),
-        Cyprus to JsonPrimitive(KeyCyprus),
-        CzechRepublic to JsonPrimitive(KeyCzechRepublic),
-        Denmark to JsonPrimitive(KeyDenmark),
-        Djibouti to JsonPrimitive(KeyDjibouti),
-        Dominica to JsonPrimitive(KeyDominica),
-        DominicanRepublic to JsonPrimitive(KeyDominicanRepublic),
-        Ecuador to JsonPrimitive(KeyEcuador),
-        Egypt to JsonPrimitive(KeyEgypt),
-        ElSalvador to JsonPrimitive(KeyElSalvador),
-        EquatorialGuinea to JsonPrimitive(KeyEquatorialGuinea),
-        Eritrea to JsonPrimitive(KeyEritrea),
-        Estonia to JsonPrimitive(KeyEstonia),
-        Eswatini to JsonPrimitive(KeyEswatini),
-        Ethiopia to JsonPrimitive(KeyEthiopia),
-        FalklandIslands to JsonPrimitive(KeyFalklandIslands),
-        FaroeIslands to JsonPrimitive(KeyFaroeIslands),
-        Fiji to JsonPrimitive(KeyFiji),
-        Finland to JsonPrimitive(KeyFinland),
-        France to JsonPrimitive(KeyFrance),
-        FrenchGuiana to JsonPrimitive(KeyFrenchGuiana),
-        FrenchPolynesia to JsonPrimitive(KeyFrenchPolynesia),
-        FrenchSouthernAndAntarcticLands to JsonPrimitive(KeyFrenchSouthernAndAntarcticLands),
-        Gabon to JsonPrimitive(KeyGabon),
-        Gambia to JsonPrimitive(KeyGambia),
-        Georgia to JsonPrimitive(KeyGeorgia),
-        Germany to JsonPrimitive(KeyGermany),
-        Ghana to JsonPrimitive(KeyGhana),
-        Gibraltar to JsonPrimitive(KeyGibraltar),
-        Greece to JsonPrimitive(KeyGreece),
-        Greenland to JsonPrimitive(KeyGreenland),
-        Grenada to JsonPrimitive(KeyGrenada),
-        Guadeloupe to JsonPrimitive(KeyGuadeloupe),
-        Guam to JsonPrimitive(KeyGuam),
-        Guatemala to JsonPrimitive(KeyGuatemala),
-        BailiwickOfGuernsey to JsonPrimitive(KeyBailiwickOfGuernsey),
-        Guinea to JsonPrimitive(KeyGuinea),
-        GuineaBissau to JsonPrimitive(KeyGuineaBissau),
-        Guyana to JsonPrimitive(KeyGuyana),
-        Haiti to JsonPrimitive(KeyHaiti),
-        HeardIslandAndMcDonaldIslands to JsonPrimitive(KeyHeardIslandAndMcDonaldIslands),
-        VaticanCity to JsonPrimitive(KeyVaticanCity),
-        Honduras to JsonPrimitive(KeyHonduras),
-        HongKong to JsonPrimitive(KeyHongKong),
-        Hungary to JsonPrimitive(KeyHungary),
-        Iceland to JsonPrimitive(KeyIceland),
-        India to JsonPrimitive(KeyIndia),
-        Indonesia to JsonPrimitive(KeyIndonesia),
-        Iran to JsonPrimitive(KeyIran),
-        Iraq to JsonPrimitive(KeyIraq),
-        Ireland to JsonPrimitive(KeyIreland),
-        IsleOfMan to JsonPrimitive(KeyIsleOfMan),
-        Israel to JsonPrimitive(KeyIsrael),
-        Italy to JsonPrimitive(KeyItaly),
-        Jamaica to JsonPrimitive(KeyJamaica),
-        Japan to JsonPrimitive(KeyJapan),
-        Jersey to JsonPrimitive(KeyJersey),
-        Jordan to JsonPrimitive(KeyJordan),
-        Kazakhstan to JsonPrimitive(KeyKazakhstan),
-        Kenya to JsonPrimitive(KeyKenya),
-        Kiribati to JsonPrimitive(KeyKiribati),
-        NorthKorea to JsonPrimitive(KeyNorthKorea),
-        SouthKorea to JsonPrimitive(KeySouthKorea),
-        Kuwait to JsonPrimitive(KeyKuwait),
-        Kyrgyzstan to JsonPrimitive(KeyKyrgyzstan),
-        Laos to JsonPrimitive(KeyLaos),
-        Latvia to JsonPrimitive(KeyLatvia),
-        Lebanon to JsonPrimitive(KeyLebanon),
-        Lesotho to JsonPrimitive(KeyLesotho),
-        Liberia to JsonPrimitive(KeyLiberia),
-        Libya to JsonPrimitive(KeyLibya),
-        Liechtenstein to JsonPrimitive(KeyLiechtenstein),
-        Lithuania to JsonPrimitive(KeyLithuania),
-        Luxembourg to JsonPrimitive(KeyLuxembourg),
-        Macau to JsonPrimitive(KeyMacau),
-        Madagascar to JsonPrimitive(KeyMadagascar),
-        Malawi to JsonPrimitive(KeyMalawi),
-        Malaysia to JsonPrimitive(KeyMalaysia),
-        Maldives to JsonPrimitive(KeyMaldives),
-        Mali to JsonPrimitive(KeyMali),
-        Malta to JsonPrimitive(KeyMalta),
-        MarshallIslands to JsonPrimitive(KeyMarshallIslands),
-        Martinique to JsonPrimitive(KeyMartinique),
-        Mauritania to JsonPrimitive(KeyMauritania),
-        Mauritius to JsonPrimitive(KeyMauritius),
-        Mayotte to JsonPrimitive(KeyMayotte),
-        Mexico to JsonPrimitive(KeyMexico),
-        Micronesia to JsonPrimitive(KeyMicronesia),
-        Moldova to JsonPrimitive(KeyMoldova),
-        Monaco to JsonPrimitive(KeyMonaco),
-        Mongolia to JsonPrimitive(KeyMongolia),
-        Montenegro to JsonPrimitive(KeyMontenegro),
-        Montserrat to JsonPrimitive(KeyMontserrat),
-        Morocco to JsonPrimitive(KeyMorocco),
-        Mozambique to JsonPrimitive(KeyMozambique),
-        Myanmar to JsonPrimitive(KeyMyanmar),
-        Namibia to JsonPrimitive(KeyNamibia),
-        Nauru to JsonPrimitive(KeyNauru),
-        Nepal to JsonPrimitive(KeyNepal),
-        Netherlands to JsonPrimitive(KeyNetherlands),
-        NewCaledonia to JsonPrimitive(KeyNewCaledonia),
-        NewZealand to JsonPrimitive(KeyNewZealand),
-        Nicaragua to JsonPrimitive(KeyNicaragua),
-        Niger to JsonPrimitive(KeyNiger),
-        Nigeria to JsonPrimitive(KeyNigeria),
-        Niue to JsonPrimitive(KeyNiue),
-        NorfolkIsland to JsonPrimitive(KeyNorfolkIsland),
-        NorthMacedonia to JsonPrimitive(KeyNorthMacedonia),
-        NorthernMarianaIslands to JsonPrimitive(KeyNorthernMarianaIslands),
-        Norway to JsonPrimitive(KeyNorway),
-        Oman to JsonPrimitive(KeyOman),
-        Pakistan to JsonPrimitive(KeyPakistan),
-        Palau to JsonPrimitive(KeyPalau),
-        Palestine to JsonPrimitive(KeyPalestine),
-        Panama to JsonPrimitive(KeyPanama),
-        PapuaNewGuinea to JsonPrimitive(KeyPapuaNewGuinea),
-        Paraguay to JsonPrimitive(KeyParaguay),
-        Peru to JsonPrimitive(KeyPeru),
-        Philippines to JsonPrimitive(KeyPhilippines),
-        PitcairnIslands to JsonPrimitive(KeyPitcairnIslands),
-        Poland to JsonPrimitive(KeyPoland),
-        Portugal to JsonPrimitive(KeyPortugal),
-        PuertoRico to JsonPrimitive(KeyPuertoRico),
-        Qatar to JsonPrimitive(KeyQatar),
-        Reunion to JsonPrimitive(KeyReunion),
-        Romania to JsonPrimitive(KeyRomania),
-        Russia to JsonPrimitive(KeyRussia),
-        Rwanda to JsonPrimitive(KeyRwanda),
-        SaintBarthelemy to JsonPrimitive(KeySaintBarthelemy),
-        SaintHelena to JsonPrimitive(KeySaintHelena),
-        SaintKittsAndNevis to JsonPrimitive(KeySaintKittsAndNevis),
-        SaintLucia to JsonPrimitive(KeySaintLucia),
-        SaintMartin to JsonPrimitive(KeySaintMartin),
-        SaintPierreAndMiquelon to JsonPrimitive(KeySaintPierreAndMiquelon),
-        SaintVincentAndTheGrenadines to JsonPrimitive(KeySaintVincentAndTheGrenadines),
-        Samoa to JsonPrimitive(KeySamoa),
-        SanMarino to JsonPrimitive(KeySanMarino),
-        SaoTomeAndPrincipe to JsonPrimitive(KeySaoTomeAndPrincipe),
-        SaudiArabia to JsonPrimitive(KeySaudiArabia),
-        Senegal to JsonPrimitive(KeySenegal),
-        Serbia to JsonPrimitive(KeySerbia),
-        Seychelles to JsonPrimitive(KeySeychelles),
-        SierraLeone to JsonPrimitive(KeySierraLeone),
-        Singapore to JsonPrimitive(KeySingapore),
-        SintMaarten to JsonPrimitive(KeySintMaarten),
-        Slovakia to JsonPrimitive(KeySlovakia),
-        Slovenia to JsonPrimitive(KeySlovenia),
-        SolomonIslands to JsonPrimitive(KeySolomonIslands),
-        Somalia to JsonPrimitive(KeySomalia),
-        SouthAfrica to JsonPrimitive(KeySouthAfrica),
-        SouthGeorgiaAndTheSouthSandwichIslands to JsonPrimitive(KeySouthGeorgiaAndTheSouthSandwichIslands),
-        SouthSudan to JsonPrimitive(KeySouthSudan),
-        Spain to JsonPrimitive(KeySpain),
-        SriLanka to JsonPrimitive(KeySriLanka),
-        Sudan to JsonPrimitive(KeySudan),
-        Suriname to JsonPrimitive(KeySuriname),
-        SvalbardAndJanMayen to JsonPrimitive(KeySvalbardAndJanMayen),
-        Sweden to JsonPrimitive(KeySweden),
-        Switzerland to JsonPrimitive(KeySwitzerland),
-        Syria to JsonPrimitive(KeySyria),
-        Taiwan to JsonPrimitive(KeyTaiwan),
-        Tajikistan to JsonPrimitive(KeyTajikistan),
-        Tanzania to JsonPrimitive(KeyTanzania),
-        Thailand to JsonPrimitive(KeyThailand),
-        TimorLeste to JsonPrimitive(KeyTimorLeste),
-        Togo to JsonPrimitive(KeyTogo),
-        Tokelau to JsonPrimitive(KeyTokelau),
-        Tonga to JsonPrimitive(KeyTonga),
-        TrinidadAndTobago to JsonPrimitive(KeyTrinidadAndTobago),
-        Tunisia to JsonPrimitive(KeyTunisia),
-        Turkey to JsonPrimitive(KeyTurkey),
-        Turkmenistan to JsonPrimitive(KeyTurkmenistan),
-        TurksAndCaicosIslands to JsonPrimitive(KeyTurksAndCaicosIslands),
-        Tuvalu to JsonPrimitive(KeyTuvalu),
-        Uganda to JsonPrimitive(KeyUganda),
-        Ukraine to JsonPrimitive(KeyUkraine),
-        UnitedArabEmirates to JsonPrimitive(KeyUnitedArabEmirates),
-        UnitedKingdom to JsonPrimitive(KeyUnitedKingdom),
-        UnitedStates to JsonPrimitive(KeyUnitedStates),
-        UnitedStatesMinorOutlyingIslands to JsonPrimitive(KeyUnitedStatesMinorOutlyingIslands),
-        Uruguay to JsonPrimitive(KeyUruguay),
-        Uzbekistan to JsonPrimitive(KeyUzbekistan),
-        Vanuatu to JsonPrimitive(KeyVanuatu),
-        Venezuela to JsonPrimitive(KeyVenezuela),
-        Vietnam to JsonPrimitive(KeyVietnam),
-        VirginIslandsGB to JsonPrimitive(KeyVirginIslandsGB),
-        VirginIslandsUS to JsonPrimitive(KeyVirginIslandsUS),
-        WallisAndFutuna to JsonPrimitive(KeyWallisAndFutuna),
-        WesternSahara to JsonPrimitive(KeyWesternSahara),
-        Yemen to JsonPrimitive(KeyYemen),
-        Zambia to JsonPrimitive(KeyZambia),
-        Zimbabwe to JsonPrimitive(KeyZimbabwe)
+        Afghanistan to JsonPrimitive(Countries.Afghanistan),
+        AlandIslands to JsonPrimitive(Countries.AlandIslands),
+        Albania to JsonPrimitive(Countries.Albania),
+        Algeria to JsonPrimitive(Countries.Algeria),
+        AmericanSamoa to JsonPrimitive(Countries.AmericanSamoa),
+        Andorra to JsonPrimitive(Countries.Andorra),
+        Angola to JsonPrimitive(Countries.Angola),
+        Anguilla to JsonPrimitive(Countries.Anguilla),
+        Antarctica to JsonPrimitive(Countries.Antarctica),
+        AntiguaAndBarbuda to JsonPrimitive(Countries.AntiguaAndBarbuda),
+        Argentina to JsonPrimitive(Countries.Argentina),
+        Armenia to JsonPrimitive(Countries.Armenia),
+        Aruba to JsonPrimitive(Countries.Aruba),
+        Australia to JsonPrimitive(Countries.Australia),
+        Austria to JsonPrimitive(Countries.Austria),
+        Azerbaijan to JsonPrimitive(Countries.Azerbaijan),
+        Bahamas to JsonPrimitive(Countries.Bahamas),
+        Bahrain to JsonPrimitive(Countries.Bahrain),
+        Bangladesh to JsonPrimitive(Countries.Bangladesh),
+        Barbados to JsonPrimitive(Countries.Barbados),
+        Belarus to JsonPrimitive(Countries.Belarus),
+        Belgium to JsonPrimitive(Countries.Belgium),
+        Belize to JsonPrimitive(Countries.Belize),
+        Benin to JsonPrimitive(Countries.Benin),
+        Bermuda to JsonPrimitive(Countries.Bermuda),
+        Bhutan to JsonPrimitive(Countries.Bhutan),
+        Bolivia to JsonPrimitive(Countries.Bolivia),
+        CaribbeanNetherlands to JsonPrimitive(Countries.CaribbeanNetherlands),
+        BosniaAndHerzegovina to JsonPrimitive(Countries.BosniaAndHerzegovina),
+        Botswana to JsonPrimitive(Countries.Botswana),
+        BouvetIsland to JsonPrimitive(Countries.BouvetIsland),
+        Brazil to JsonPrimitive(Countries.Brazil),
+        BritishIndianOceanTerritory to JsonPrimitive(Countries.BritishIndianOceanTerritory),
+        BruneiDarussalam to JsonPrimitive(Countries.BruneiDarussalam),
+        Bulgaria to JsonPrimitive(Countries.Bulgaria),
+        BurkinaFaso to JsonPrimitive(Countries.BurkinaFaso),
+        Burundi to JsonPrimitive(Countries.Burundi),
+        CaboVerde to JsonPrimitive(Countries.CaboVerde),
+        Cambodia to JsonPrimitive(Countries.Cambodia),
+        Cameroon to JsonPrimitive(Countries.Cameroon),
+        Canada to JsonPrimitive(Countries.Canada),
+        CaymanIslands to JsonPrimitive(Countries.CaymanIslands),
+        CentralAfricanRepublic to JsonPrimitive(Countries.CentralAfricanRepublic),
+        Chad to JsonPrimitive(Countries.Chad),
+        Chile to JsonPrimitive(Countries.Chile),
+        China to JsonPrimitive(Countries.China),
+        ChristmasIsland to JsonPrimitive(Countries.ChristmasIsland),
+        CocosIslands to JsonPrimitive(Countries.CocosIslands),
+        Colombia to JsonPrimitive(Countries.Colombia),
+        Comoros to JsonPrimitive(Countries.Comoros),
+        RepublicOfTheCongo to JsonPrimitive(Countries.RepublicOfTheCongo),
+        DemocraticRepublicOfTheCongo to JsonPrimitive(Countries.DemocraticRepublicOfTheCongo),
+        CookIslands to JsonPrimitive(Countries.CookIslands),
+        CostaRica to JsonPrimitive(Countries.CostaRica),
+        IvoryCoast to JsonPrimitive(Countries.IvoryCoast),
+        Croatia to JsonPrimitive(Countries.Croatia),
+        Cuba to JsonPrimitive(Countries.Cuba),
+        Curacao to JsonPrimitive(Countries.Curacao),
+        Cyprus to JsonPrimitive(Countries.Cyprus),
+        CzechRepublic to JsonPrimitive(Countries.CzechRepublic),
+        Denmark to JsonPrimitive(Countries.Denmark),
+        Djibouti to JsonPrimitive(Countries.Djibouti),
+        Dominica to JsonPrimitive(Countries.Dominica),
+        DominicanRepublic to JsonPrimitive(Countries.DominicanRepublic),
+        Ecuador to JsonPrimitive(Countries.Ecuador),
+        Egypt to JsonPrimitive(Countries.Egypt),
+        ElSalvador to JsonPrimitive(Countries.ElSalvador),
+        EquatorialGuinea to JsonPrimitive(Countries.EquatorialGuinea),
+        Eritrea to JsonPrimitive(Countries.Eritrea),
+        Estonia to JsonPrimitive(Countries.Estonia),
+        Eswatini to JsonPrimitive(Countries.Eswatini),
+        Ethiopia to JsonPrimitive(Countries.Ethiopia),
+        FalklandIslands to JsonPrimitive(Countries.FalklandIslands),
+        FaroeIslands to JsonPrimitive(Countries.FaroeIslands),
+        Fiji to JsonPrimitive(Countries.Fiji),
+        Finland to JsonPrimitive(Countries.Finland),
+        France to JsonPrimitive(Countries.France),
+        FrenchGuiana to JsonPrimitive(Countries.FrenchGuiana),
+        FrenchPolynesia to JsonPrimitive(Countries.FrenchPolynesia),
+        FrenchSouthernAndAntarcticLands to JsonPrimitive(Countries.FrenchSouthernAndAntarcticLands),
+        Gabon to JsonPrimitive(Countries.Gabon),
+        Gambia to JsonPrimitive(Countries.Gambia),
+        Georgia to JsonPrimitive(Countries.Georgia),
+        Germany to JsonPrimitive(Countries.Germany),
+        Ghana to JsonPrimitive(Countries.Ghana),
+        Gibraltar to JsonPrimitive(Countries.Gibraltar),
+        Greece to JsonPrimitive(Countries.Greece),
+        Greenland to JsonPrimitive(Countries.Greenland),
+        Grenada to JsonPrimitive(Countries.Grenada),
+        Guadeloupe to JsonPrimitive(Countries.Guadeloupe),
+        Guam to JsonPrimitive(Countries.Guam),
+        Guatemala to JsonPrimitive(Countries.Guatemala),
+        BailiwickOfGuernsey to JsonPrimitive(Countries.BailiwickOfGuernsey),
+        Guinea to JsonPrimitive(Countries.Guinea),
+        GuineaBissau to JsonPrimitive(Countries.GuineaBissau),
+        Guyana to JsonPrimitive(Countries.Guyana),
+        Haiti to JsonPrimitive(Countries.Haiti),
+        HeardIslandAndMcDonaldIslands to JsonPrimitive(Countries.HeardIslandAndMcDonaldIslands),
+        VaticanCity to JsonPrimitive(Countries.VaticanCity),
+        Honduras to JsonPrimitive(Countries.Honduras),
+        HongKong to JsonPrimitive(Countries.HongKong),
+        Hungary to JsonPrimitive(Countries.Hungary),
+        Iceland to JsonPrimitive(Countries.Iceland),
+        India to JsonPrimitive(Countries.India),
+        Indonesia to JsonPrimitive(Countries.Indonesia),
+        Iran to JsonPrimitive(Countries.Iran),
+        Iraq to JsonPrimitive(Countries.Iraq),
+        Ireland to JsonPrimitive(Countries.Ireland),
+        IsleOfMan to JsonPrimitive(Countries.IsleOfMan),
+        Israel to JsonPrimitive(Countries.Israel),
+        Italy to JsonPrimitive(Countries.Italy),
+        Jamaica to JsonPrimitive(Countries.Jamaica),
+        Japan to JsonPrimitive(Countries.Japan),
+        Jersey to JsonPrimitive(Countries.Jersey),
+        Jordan to JsonPrimitive(Countries.Jordan),
+        Kazakhstan to JsonPrimitive(Countries.Kazakhstan),
+        Kenya to JsonPrimitive(Countries.Kenya),
+        Kiribati to JsonPrimitive(Countries.Kiribati),
+        NorthKorea to JsonPrimitive(Countries.NorthKorea),
+        SouthKorea to JsonPrimitive(Countries.SouthKorea),
+        Kuwait to JsonPrimitive(Countries.Kuwait),
+        Kyrgyzstan to JsonPrimitive(Countries.Kyrgyzstan),
+        Laos to JsonPrimitive(Countries.Laos),
+        Latvia to JsonPrimitive(Countries.Latvia),
+        Lebanon to JsonPrimitive(Countries.Lebanon),
+        Lesotho to JsonPrimitive(Countries.Lesotho),
+        Liberia to JsonPrimitive(Countries.Liberia),
+        Libya to JsonPrimitive(Countries.Libya),
+        Liechtenstein to JsonPrimitive(Countries.Liechtenstein),
+        Lithuania to JsonPrimitive(Countries.Lithuania),
+        Luxembourg to JsonPrimitive(Countries.Luxembourg),
+        Macau to JsonPrimitive(Countries.Macau),
+        Madagascar to JsonPrimitive(Countries.Madagascar),
+        Malawi to JsonPrimitive(Countries.Malawi),
+        Malaysia to JsonPrimitive(Countries.Malaysia),
+        Maldives to JsonPrimitive(Countries.Maldives),
+        Mali to JsonPrimitive(Countries.Mali),
+        Malta to JsonPrimitive(Countries.Malta),
+        MarshallIslands to JsonPrimitive(Countries.MarshallIslands),
+        Martinique to JsonPrimitive(Countries.Martinique),
+        Mauritania to JsonPrimitive(Countries.Mauritania),
+        Mauritius to JsonPrimitive(Countries.Mauritius),
+        Mayotte to JsonPrimitive(Countries.Mayotte),
+        Mexico to JsonPrimitive(Countries.Mexico),
+        Micronesia to JsonPrimitive(Countries.Micronesia),
+        Moldova to JsonPrimitive(Countries.Moldova),
+        Monaco to JsonPrimitive(Countries.Monaco),
+        Mongolia to JsonPrimitive(Countries.Mongolia),
+        Montenegro to JsonPrimitive(Countries.Montenegro),
+        Montserrat to JsonPrimitive(Countries.Montserrat),
+        Morocco to JsonPrimitive(Countries.Morocco),
+        Mozambique to JsonPrimitive(Countries.Mozambique),
+        Myanmar to JsonPrimitive(Countries.Myanmar),
+        Namibia to JsonPrimitive(Countries.Namibia),
+        Nauru to JsonPrimitive(Countries.Nauru),
+        Nepal to JsonPrimitive(Countries.Nepal),
+        Netherlands to JsonPrimitive(Countries.Netherlands),
+        NewCaledonia to JsonPrimitive(Countries.NewCaledonia),
+        NewZealand to JsonPrimitive(Countries.NewZealand),
+        Nicaragua to JsonPrimitive(Countries.Nicaragua),
+        Niger to JsonPrimitive(Countries.Niger),
+        Nigeria to JsonPrimitive(Countries.Nigeria),
+        Niue to JsonPrimitive(Countries.Niue),
+        NorfolkIsland to JsonPrimitive(Countries.NorfolkIsland),
+        NorthMacedonia to JsonPrimitive(Countries.NorthMacedonia),
+        NorthernMarianaIslands to JsonPrimitive(Countries.NorthernMarianaIslands),
+        Norway to JsonPrimitive(Countries.Norway),
+        Oman to JsonPrimitive(Countries.Oman),
+        Pakistan to JsonPrimitive(Countries.Pakistan),
+        Palau to JsonPrimitive(Countries.Palau),
+        Palestine to JsonPrimitive(Countries.Palestine),
+        Panama to JsonPrimitive(Countries.Panama),
+        PapuaNewGuinea to JsonPrimitive(Countries.PapuaNewGuinea),
+        Paraguay to JsonPrimitive(Countries.Paraguay),
+        Peru to JsonPrimitive(Countries.Peru),
+        Philippines to JsonPrimitive(Countries.Philippines),
+        PitcairnIslands to JsonPrimitive(Countries.PitcairnIslands),
+        Poland to JsonPrimitive(Countries.Poland),
+        Portugal to JsonPrimitive(Countries.Portugal),
+        PuertoRico to JsonPrimitive(Countries.PuertoRico),
+        Qatar to JsonPrimitive(Countries.Qatar),
+        Reunion to JsonPrimitive(Countries.Reunion),
+        Romania to JsonPrimitive(Countries.Romania),
+        Russia to JsonPrimitive(Countries.Russia),
+        Rwanda to JsonPrimitive(Countries.Rwanda),
+        SaintBarthelemy to JsonPrimitive(Countries.SaintBarthelemy),
+        SaintHelena to JsonPrimitive(Countries.SaintHelena),
+        SaintKittsAndNevis to JsonPrimitive(Countries.SaintKittsAndNevis),
+        SaintLucia to JsonPrimitive(Countries.SaintLucia),
+        SaintMartin to JsonPrimitive(Countries.SaintMartin),
+        SaintPierreAndMiquelon to JsonPrimitive(Countries.SaintPierreAndMiquelon),
+        SaintVincentAndTheGrenadines to JsonPrimitive(Countries.SaintVincentAndTheGrenadines),
+        Samoa to JsonPrimitive(Countries.Samoa),
+        SanMarino to JsonPrimitive(Countries.SanMarino),
+        SaoTomeAndPrincipe to JsonPrimitive(Countries.SaoTomeAndPrincipe),
+        SaudiArabia to JsonPrimitive(Countries.SaudiArabia),
+        Senegal to JsonPrimitive(Countries.Senegal),
+        Serbia to JsonPrimitive(Countries.Serbia),
+        Seychelles to JsonPrimitive(Countries.Seychelles),
+        SierraLeone to JsonPrimitive(Countries.SierraLeone),
+        Singapore to JsonPrimitive(Countries.Singapore),
+        SintMaarten to JsonPrimitive(Countries.SintMaarten),
+        Slovakia to JsonPrimitive(Countries.Slovakia),
+        Slovenia to JsonPrimitive(Countries.Slovenia),
+        SolomonIslands to JsonPrimitive(Countries.SolomonIslands),
+        Somalia to JsonPrimitive(Countries.Somalia),
+        SouthAfrica to JsonPrimitive(Countries.SouthAfrica),
+        SouthGeorgiaAndTheSouthSandwichIslands to JsonPrimitive(Countries.SouthGeorgiaAndTheSouthSandwichIslands),
+        SouthSudan to JsonPrimitive(Countries.SouthSudan),
+        Spain to JsonPrimitive(Countries.Spain),
+        SriLanka to JsonPrimitive(Countries.SriLanka),
+        Sudan to JsonPrimitive(Countries.Sudan),
+        Suriname to JsonPrimitive(Countries.Suriname),
+        SvalbardAndJanMayen to JsonPrimitive(Countries.SvalbardAndJanMayen),
+        Sweden to JsonPrimitive(Countries.Sweden),
+        Switzerland to JsonPrimitive(Countries.Switzerland),
+        Syria to JsonPrimitive(Countries.Syria),
+        Taiwan to JsonPrimitive(Countries.Taiwan),
+        Tajikistan to JsonPrimitive(Countries.Tajikistan),
+        Tanzania to JsonPrimitive(Countries.Tanzania),
+        Thailand to JsonPrimitive(Countries.Thailand),
+        TimorLeste to JsonPrimitive(Countries.TimorLeste),
+        Togo to JsonPrimitive(Countries.Togo),
+        Tokelau to JsonPrimitive(Countries.Tokelau),
+        Tonga to JsonPrimitive(Countries.Tonga),
+        TrinidadAndTobago to JsonPrimitive(Countries.TrinidadAndTobago),
+        Tunisia to JsonPrimitive(Countries.Tunisia),
+        Turkey to JsonPrimitive(Countries.Turkey),
+        Turkmenistan to JsonPrimitive(Countries.Turkmenistan),
+        TurksAndCaicosIslands to JsonPrimitive(Countries.TurksAndCaicosIslands),
+        Tuvalu to JsonPrimitive(Countries.Tuvalu),
+        Uganda to JsonPrimitive(Countries.Uganda),
+        Ukraine to JsonPrimitive(Countries.Ukraine),
+        UnitedArabEmirates to JsonPrimitive(Countries.UnitedArabEmirates),
+        UnitedKingdom to JsonPrimitive(Countries.UnitedKingdom),
+        UnitedStates to JsonPrimitive(Countries.UnitedStates),
+        UnitedStatesMinorOutlyingIslands to JsonPrimitive(Countries.UnitedStatesMinorOutlyingIslands),
+        Uruguay to JsonPrimitive(Countries.Uruguay),
+        Uzbekistan to JsonPrimitive(Countries.Uzbekistan),
+        Vanuatu to JsonPrimitive(Countries.Vanuatu),
+        Venezuela to JsonPrimitive(Countries.Venezuela),
+        Vietnam to JsonPrimitive(Countries.Vietnam),
+        VirginIslandsGB to JsonPrimitive(Countries.VirginIslandsGB),
+        VirginIslandsUS to JsonPrimitive(Countries.VirginIslandsUS),
+        WallisAndFutuna to JsonPrimitive(Countries.WallisAndFutuna),
+        WesternSahara to JsonPrimitive(Countries.WesternSahara),
+        Yemen to JsonPrimitive(Countries.Yemen),
+        Zambia to JsonPrimitive(Countries.Zambia),
+        Zimbabwe to JsonPrimitive(Countries.Zimbabwe)
     )
 }

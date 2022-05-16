@@ -1,10 +1,7 @@
 package com.algolia.search.model.response
 
 import com.algolia.search.model.dictionary.DictionaryEntry
-import com.algolia.search.serialize.KeyHits
-import com.algolia.search.serialize.KeyNbHits
-import com.algolia.search.serialize.KeyNbPages
-import com.algolia.search.serialize.KeyPage
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,17 +10,17 @@ public data class ResponseSearchDictionaries<T : DictionaryEntry>(
     /**
      * A list of [DictionaryEntry].
      */
-    @SerialName(KeyHits) val hits: List<T>,
+    @SerialName(Key.Hits) val hits: List<T>,
     /**
      *  Number of hits.
      */
-    @SerialName(KeyNbHits) val nbHits: Int,
+    @SerialName(Key.NbHits) val nbHits: Int,
     /**
      * Returned page number.
      */
-    @SerialName(KeyPage) val page: Int,
+    @SerialName(Key.Page) val page: Int,
     /**
      * Total number of pages.
      */
-    @SerialName(KeyNbPages) val nbPages: Int,
+    @SerialName(Key.NbPages) val nbPages: Int,
 )

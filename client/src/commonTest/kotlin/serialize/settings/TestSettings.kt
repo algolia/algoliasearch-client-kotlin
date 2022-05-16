@@ -28,73 +28,7 @@ import com.algolia.search.model.settings.Distinct
 import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.serialize.KeyAdvancedSyntax
-import com.algolia.search.serialize.KeyAdvancedSyntaxFeatures
-import com.algolia.search.serialize.KeyAllowCompressionOfIntegerArray
-import com.algolia.search.serialize.KeyAllowTyposOnNumericTokens
-import com.algolia.search.serialize.KeyAlpha
-import com.algolia.search.serialize.KeyAlternativesAsExact
-import com.algolia.search.serialize.KeyAttributeCriteriaComputedByMinProximity
-import com.algolia.search.serialize.KeyAttributeForDistinct
-import com.algolia.search.serialize.KeyAttributesForFaceting
-import com.algolia.search.serialize.KeyAttributesToHighlight
-import com.algolia.search.serialize.KeyAttributesToRetrieve
-import com.algolia.search.serialize.KeyAttributesToSnippet
-import com.algolia.search.serialize.KeyAttributesToTransliterate
-import com.algolia.search.serialize.KeyCamelCaseAttributes
-import com.algolia.search.serialize.KeyCustomNormalization
-import com.algolia.search.serialize.KeyCustomRanking
-import com.algolia.search.serialize.KeyDecompoundQuery
-import com.algolia.search.serialize.KeyDecompoundedAttributes
-import com.algolia.search.serialize.KeyDisableExactOnAttributes
-import com.algolia.search.serialize.KeyDisablePrefixOnAttributes
-import com.algolia.search.serialize.KeyDisableTypoToleranceOnAttributes
-import com.algolia.search.serialize.KeyDisableTypoToleranceOnWords
-import com.algolia.search.serialize.KeyDistinct
-import com.algolia.search.serialize.KeyEnablePersonalization
-import com.algolia.search.serialize.KeyEnableRules
-import com.algolia.search.serialize.KeyExactOnSingleWordQuery
-import com.algolia.search.serialize.KeyExactPhrase
-import com.algolia.search.serialize.KeyExcludeWords
-import com.algolia.search.serialize.KeyFacetOrdering
-import com.algolia.search.serialize.KeyFacets
-import com.algolia.search.serialize.KeyHighlightPostTag
-import com.algolia.search.serialize.KeyHighlightPreTag
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyIgnorePlurals
-import com.algolia.search.serialize.KeyIndexLanguages
-import com.algolia.search.serialize.KeyKeepDiacriticsOnCharacters
-import com.algolia.search.serialize.KeyMaxFacetHits
-import com.algolia.search.serialize.KeyMaxValuesPerFacet
-import com.algolia.search.serialize.KeyMinProximity
-import com.algolia.search.serialize.KeyMinWordSizeFor1Typo
-import com.algolia.search.serialize.KeyMinWordSizeFor2Typos
-import com.algolia.search.serialize.KeyNumericAttributesForFiltering
-import com.algolia.search.serialize.KeyOptionalWords
-import com.algolia.search.serialize.KeyOrder
-import com.algolia.search.serialize.KeyPaginationLimitedTo
-import com.algolia.search.serialize.KeyPrimary
-import com.algolia.search.serialize.KeyQueryLanguages
-import com.algolia.search.serialize.KeyQueryType
-import com.algolia.search.serialize.KeyRanking
-import com.algolia.search.serialize.KeyRelevancyStrictness
-import com.algolia.search.serialize.KeyRemoveStopWords
-import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
-import com.algolia.search.serialize.KeyRenderingContent
-import com.algolia.search.serialize.KeyReplaceSynonymsInHighlight
-import com.algolia.search.serialize.KeyReplicas
-import com.algolia.search.serialize.KeyResponseFields
-import com.algolia.search.serialize.KeyRestrictHighlightAndSnippetArrays
-import com.algolia.search.serialize.KeySearchableAttributes
-import com.algolia.search.serialize.KeySeparatorsToIndex
-import com.algolia.search.serialize.KeySnippetEllipsisText
-import com.algolia.search.serialize.KeySortFacetValuesBy
-import com.algolia.search.serialize.KeySortRemainingBy
-import com.algolia.search.serialize.KeyTypoTolerance
-import com.algolia.search.serialize.KeyUnretrievableAttributes
-import com.algolia.search.serialize.KeyUserData
-import com.algolia.search.serialize.KeyValues
-import com.algolia.search.serialize.KeyVersion
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import indexA
 import int
@@ -201,41 +135,41 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
             )
         ) to buildJsonObject {
             // Attributes
-            put(KeySearchableAttributes, attributesJson)
-            put(KeyAttributesForFaceting, attributesJson)
-            put(KeyUnretrievableAttributes, attributesJson)
-            put(KeyAttributesToRetrieve, attributesJson)
+            put(Key.SearchableAttributes, attributesJson)
+            put(Key.AttributesForFaceting, attributesJson)
+            put(Key.UnretrievableAttributes, attributesJson)
+            put(Key.AttributesToRetrieve, attributesJson)
             // RankingCriterion
-            put(KeyRanking, buildJsonArray { add(RankingCriterion.Geo.raw) })
-            put(KeyCustomRanking, buildJsonArray { add(CustomRankingCriterion.Asc(attributeA).raw) })
-            put(KeyReplicas, buildJsonArray { add(indexA.raw) })
+            put(Key.Ranking, buildJsonArray { add(RankingCriterion.Geo.raw) })
+            put(Key.CustomRanking, buildJsonArray { add(CustomRankingCriterion.Asc(attributeA).raw) })
+            put(Key.Replicas, buildJsonArray { add(indexA.raw) })
             // Faceting
-            put(KeyMaxValuesPerFacet, int)
-            put(KeySortFacetValuesBy, SortFacetsBy.Count.raw)
+            put(Key.MaxValuesPerFacet, int)
+            put(Key.SortFacetValuesBy, SortFacetsBy.Count.raw)
             // Highlighting
-            put(KeyAttributesToHighlight, attributesJson)
-            put(KeyAttributesToSnippet, buildJsonArray { add(TestSnippet.json) })
-            put(KeyHighlightPreTag, string)
-            put(KeyHighlightPostTag, string)
-            put(KeySnippetEllipsisText, string)
-            put(KeyRestrictHighlightAndSnippetArrays, boolean)
+            put(Key.AttributesToHighlight, attributesJson)
+            put(Key.AttributesToSnippet, buildJsonArray { add(TestSnippet.json) })
+            put(Key.HighlightPreTag, string)
+            put(Key.HighlightPostTag, string)
+            put(Key.SnippetEllipsisText, string)
+            put(Key.RestrictHighlightAndSnippetArrays, boolean)
             // Pagination
-            put(KeyHitsPerPage, int)
-            put(KeyPaginationLimitedTo, int)
-            put(KeyMinWordSizeFor1Typo, int)
-            put(KeyMinWordSizeFor2Typos, int)
+            put(Key.HitsPerPage, int)
+            put(Key.PaginationLimitedTo, int)
+            put(Key.MinWordSizeFor1Typo, int)
+            put(Key.MinWordSizeFor2Typos, int)
             // Typos
-            put(KeyTypoTolerance, TypoTolerance.Min.raw)
-            put(KeyAllowTyposOnNumericTokens, boolean)
-            put(KeyDisableTypoToleranceOnAttributes, attributesJson)
-            put(KeyDisableTypoToleranceOnWords, buildJsonArray { add(string) })
-            put(KeySeparatorsToIndex, string)
+            put(Key.TypoTolerance, TypoTolerance.Min.raw)
+            put(Key.AllowTyposOnNumericTokens, boolean)
+            put(Key.DisableTypoToleranceOnAttributes, attributesJson)
+            put(Key.DisableTypoToleranceOnWords, buildJsonArray { add(string) })
+            put(Key.SeparatorsToIndex, string)
             // Languages
-            put(KeyIgnorePlurals, boolean)
-            put(KeyRemoveStopWords, boolean)
-            put(KeyCamelCaseAttributes, attributesJson)
+            put(Key.IgnorePlurals, boolean)
+            put(Key.RemoveStopWords, boolean)
+            put(Key.CamelCaseAttributes, attributesJson)
             put(
-                KeyDecompoundedAttributes,
+                Key.DecompoundedAttributes,
                 buildJsonObject {
                     put(
                         Language.German.raw,
@@ -246,71 +180,71 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
                     )
                 }
             )
-            put(KeyKeepDiacriticsOnCharacters, string)
+            put(Key.KeepDiacriticsOnCharacters, string)
             put(
-                KeyQueryLanguages,
+                Key.QueryLanguages,
                 buildJsonArray {
                     add(Language.Afrikaans.raw)
                     add(Language.Albanian.raw)
                 }
             )
             // Query-rules
-            put(KeyEnableRules, boolean)
+            put(Key.EnableRules, boolean)
             // Query-strategy
-            put(KeyQueryType, QueryType.PrefixLast.raw)
-            put(KeyRemoveWordsIfNoResults, RemoveWordIfNoResults.LastWords.raw)
-            put(KeyAdvancedSyntax, boolean)
+            put(Key.QueryType, QueryType.PrefixLast.raw)
+            put(Key.RemoveWordsIfNoResults, RemoveWordIfNoResults.LastWords.raw)
+            put(Key.AdvancedSyntax, boolean)
             put(
-                KeyAdvancedSyntaxFeatures,
+                Key.AdvancedSyntaxFeatures,
                 buildJsonArray {
-                    add(KeyExcludeWords)
-                    add(KeyExactPhrase)
+                    add(Key.ExcludeWords)
+                    add(Key.ExactPhrase)
                 }
             )
-            put(KeyOptionalWords, buildJsonArray { add(string) })
-            put(KeyDisablePrefixOnAttributes, attributesJson)
-            put(KeyDisableExactOnAttributes, attributesJson)
-            put(KeyExactOnSingleWordQuery, ExactOnSingleWordQuery.Word.raw)
-            put(KeyAlternativesAsExact, buildJsonArray { add(AlternativesAsExact.IgnorePlurals.raw) })
+            put(Key.OptionalWords, buildJsonArray { add(string) })
+            put(Key.DisablePrefixOnAttributes, attributesJson)
+            put(Key.DisableExactOnAttributes, attributesJson)
+            put(Key.ExactOnSingleWordQuery, ExactOnSingleWordQuery.Word.raw)
+            put(Key.AlternativesAsExact, buildJsonArray { add(AlternativesAsExact.IgnorePlurals.raw) })
             // Performance
-            put(KeyNumericAttributesForFiltering, buildJsonArray { add(TestNumericAttribute.json) })
-            put(KeyAllowCompressionOfIntegerArray, boolean)
+            put(Key.NumericAttributesForFiltering, buildJsonArray { add(TestNumericAttribute.json) })
+            put(Key.AllowCompressionOfIntegerArray, boolean)
             // Advanced
-            put(KeyAttributeForDistinct, attributeA.raw)
-            put(KeyDistinct, int)
-            put(KeyReplaceSynonymsInHighlight, boolean)
-            put(KeyMinProximity, int)
-            put(KeyResponseFields, buildJsonArray { add(ResponseFields.NbHits.raw) })
-            put(KeyMaxFacetHits, int)
-            put(KeyVersion, int)
-            put(KeyUserData, buildJsonObject { put(unknown, unknown) })
-            put(KeyIndexLanguages, buildJsonArray { add(Language.Japanese.raw) })
-            put(KeyCustomNormalization, buildJsonObject { put(unknown, buildJsonObject { put(unknown, unknown) }) })
-            put(KeyEnablePersonalization, boolean)
-            put(KeyAttributeCriteriaComputedByMinProximity, boolean)
-            put(KeyRelevancyStrictness, int)
-            put(KeyDecompoundQuery, boolean)
-            put(KeyAttributesToTransliterate, attributesJson)
+            put(Key.AttributeForDistinct, attributeA.raw)
+            put(Key.Distinct, int)
+            put(Key.ReplaceSynonymsInHighlight, boolean)
+            put(Key.MinProximity, int)
+            put(Key.ResponseFields, buildJsonArray { add(ResponseFields.NbHits.raw) })
+            put(Key.MaxFacetHits, int)
+            put(Key.Version, int)
+            put(Key.UserData, buildJsonObject { put(unknown, unknown) })
+            put(Key.IndexLanguages, buildJsonArray { add(Language.Japanese.raw) })
+            put(Key.CustomNormalization, buildJsonObject { put(unknown, buildJsonObject { put(unknown, unknown) }) })
+            put(Key.EnablePersonalization, boolean)
+            put(Key.AttributeCriteriaComputedByMinProximity, boolean)
+            put(Key.RelevancyStrictness, int)
+            put(Key.DecompoundQuery, boolean)
+            put(Key.AttributesToTransliterate, attributesJson)
             put(
-                KeyRenderingContent,
+                Key.RenderingContent,
                 buildJsonObject {
                     put(
-                        KeyFacetOrdering,
+                        Key.FacetOrdering,
                         buildJsonObject {
                             put(
-                                KeyFacets,
+                                Key.Facets,
                                 buildJsonObject {
-                                    put(KeyOrder, buildJsonArray { add(unknown) })
+                                    put(Key.Order, buildJsonArray { add(unknown) })
                                 }
                             )
                             put(
-                                KeyValues,
+                                Key.Values,
                                 buildJsonObject {
                                     put(
                                         attributeA.raw,
                                         buildJsonObject {
-                                            put(KeyOrder, buildJsonArray { add(string) })
-                                            put(KeySortRemainingBy, KeyAlpha)
+                                            put(Key.Order, buildJsonArray { add(string) })
+                                            put(Key.SortRemainingBy, Key.Alpha)
                                         }
                                     )
                                 }
@@ -319,7 +253,7 @@ internal class TestSettings : TestSerializer<Settings>(Settings.serializer()) {
                     )
                 }
             )
-            put(KeyPrimary, JsonNull)
+            put(Key.Primary, JsonNull)
         }
     )
 

@@ -9,7 +9,7 @@ import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.internal.Time
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.internal.Key
 import dayInMillis
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.buildJsonObject
@@ -28,7 +28,7 @@ internal class TestSuiteABTest {
     private val indexNameB = indexNameA.copy(raw = indexNameA.raw + "_dev")
     private val indexA = clientAdmin1.initIndex(indexNameA)
     private val indexB = clientAdmin1.initIndex(indexNameB)
-    private val data = buildJsonObject { put(KeyObjectID, "one") }
+    private val data = buildJsonObject { put(Key.ObjectID, "one") }
 
     private val abTest = ABTest(
         name = indexNameA.raw,

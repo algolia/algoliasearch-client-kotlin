@@ -6,18 +6,7 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterConverter
-import com.algolia.search.serialize.KeyClick
-import com.algolia.search.serialize.KeyConversion
-import com.algolia.search.serialize.KeyEventName
-import com.algolia.search.serialize.KeyEventType
-import com.algolia.search.serialize.KeyFilters
-import com.algolia.search.serialize.KeyIndex
-import com.algolia.search.serialize.KeyObjectIDs
-import com.algolia.search.serialize.KeyPositions
-import com.algolia.search.serialize.KeyQueryID
-import com.algolia.search.serialize.KeyTimestamp
-import com.algolia.search.serialize.KeyUserToken
-import com.algolia.search.serialize.KeyView
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -105,11 +94,11 @@ public sealed class InsightsEvent {
             if (resources == null) return
             when (resources) {
                 is Resources.ObjectIDs -> put(
-                    KeyObjectIDs,
+                    Key.ObjectIDs,
                     buildJsonArray { resources.objectIDs.forEach { add(it.raw) } }
                 )
                 is Resources.Filters -> put(
-                    KeyFilters,
+                    Key.Filters,
                     buildJsonArray {
                         resources.filters.forEach { filter ->
                             FilterConverter.Legacy(filter).forEach { add(it) }
@@ -121,11 +110,11 @@ public sealed class InsightsEvent {
 
         private infix fun JsonObjectBuilder.eventType(event: InsightsEvent) {
             put(
-                KeyEventType,
+                Key.EventType,
                 when (event) {
-                    is Click -> KeyClick
-                    is View -> KeyView
-                    is Conversion -> KeyConversion
+                    is Click -> Key.Click
+                    is View -> Key.View
+                    is Conversion -> Key.Conversion
                 }
             )
         }
@@ -133,16 +122,16 @@ public sealed class InsightsEvent {
         override fun serialize(encoder: Encoder, value: InsightsEvent) {
             val json = buildJsonObject {
                 this eventType value
-                put(KeyEventName, value.eventName.raw)
-                value.timestamp?.let { put(KeyTimestamp, it) }
-                put(KeyIndex, value.indexName.raw)
-                value.userToken?.let { put(KeyUserToken, it.raw) }
-                value.queryID?.let { put(KeyQueryID, it.raw) }
+                put(Key.EventName, value.eventName.raw)
+                value.timestamp?.let { put(Key.Timestamp, it) }
+                put(Key.Index, value.indexName.raw)
+                value.userToken?.let { put(Key.UserToken, it.raw) }
+                value.queryID?.let { put(Key.QueryID, it.raw) }
                 this stringify value.resources
                 if (value is Click) {
                     value.positions?.let {
                         put(
-                            KeyPositions,
+                            Key.Positions,
                             buildJsonArray { it.forEach { add((it as Number)) } }
                         )
                     }

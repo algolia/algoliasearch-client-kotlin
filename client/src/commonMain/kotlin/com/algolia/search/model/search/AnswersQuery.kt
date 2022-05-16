@@ -4,12 +4,7 @@ import com.algolia.search.ExperimentalAlgoliaClientAPI
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.params.AnswersParameters
 import com.algolia.search.model.params.CommonSearchParameters
-import com.algolia.search.serialize.KeyAttributesForPrediction
-import com.algolia.search.serialize.KeyNbHits
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyQueryLanguages
-import com.algolia.search.serialize.KeyThreshold
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -21,14 +16,14 @@ public data class AnswersQuery(
      * The query for which to retrieve results.
      * Cannot be empty or spaces only.
      */
-    @SerialName(KeyQuery) override var query: String,
+    @SerialName(Key.Query) override var query: String,
 
     /**
      * Engine default: ["en"]
      * The languages in the query.
      * Currently only supports `en`.
      */
-    @SerialName(KeyQueryLanguages) var queryLanguages: List<Language>,
+    @SerialName(Key.QueryLanguages) var queryLanguages: List<Language>,
 
     /**
      * Engine default: ["*"]
@@ -36,21 +31,21 @@ public data class AnswersQuery(
      * If empty, we use all `searchableAttributes` to find answers.
      * Note: All your `attributesForPrediction` must be part of your `searchableAttributes`.
      */
-    @SerialName(KeyAttributesForPrediction) var attributesForPrediction: List<Attribute>? = null,
+    @SerialName(Key.AttributesForPrediction) var attributesForPrediction: List<Attribute>? = null,
 
     /**
      * Engine default: 10
      * Maximum number of answers to retrieve from the Answers Engine.
      * Cannot be greater than 1000.
      */
-    @SerialName(KeyNbHits) val nbHits: Int? = null,
+    @SerialName(Key.NbHits) val nbHits: Int? = null,
 
     /**
      * Engine default: 10
      * Maximum number of answers to retrieve from the Answers Engine.
      * Cannot be greater than 1000.
      */
-    @SerialName(KeyThreshold) val threshold: Float? = null,
+    @SerialName(Key.Threshold) val threshold: Float? = null,
 
     /**
      * Algolia search parameters to use to fetch the hits.
@@ -59,5 +54,5 @@ public data class AnswersQuery(
      * - `hitsPerPage`
      * - `restrictSearchableAttributes`
      */
-    @SerialName(KeyParams) val params: SearchParameters = SearchParameters(),
+    @SerialName(Key.Params) val params: SearchParameters = SearchParameters(),
 ) : AnswersParameters, CommonSearchParameters by params

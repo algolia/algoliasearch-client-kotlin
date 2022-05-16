@@ -2,10 +2,7 @@ package com.algolia.search.model.rule
 
 import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.KeyContains
-import com.algolia.search.serialize.KeyEndsWith
-import com.algolia.search.serialize.KeyIs
-import com.algolia.search.serialize.KeyStartsWith
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -19,22 +16,22 @@ public sealed class Anchoring(override val raw: String) : Raw<String> {
     /**
      * The [Pattern] matches the [Query.query].
      */
-    public object Is : Anchoring(KeyIs)
+    public object Is : Anchoring(Key.Is)
 
     /**
      * The [Pattern] matches the beginning of the [Query.query].
      */
-    public object StartsWith : Anchoring(KeyStartsWith)
+    public object StartsWith : Anchoring(Key.StartsWith)
 
     /**
      * The [Pattern] matches the beginning of the [Query.query].
      */
-    public object EndsWith : Anchoring(KeyEndsWith)
+    public object EndsWith : Anchoring(Key.EndsWith)
 
     /**
      * The [Pattern] is contained by the [Query.query].
      */
-    public object Contains : Anchoring(KeyContains)
+    public object Contains : Anchoring(Key.Contains)
 
     public data class Other(override val raw: String) : Anchoring(raw)
 
@@ -50,10 +47,10 @@ public sealed class Anchoring(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): Anchoring {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyIs -> Is
-                KeyEndsWith -> EndsWith
-                KeyStartsWith -> StartsWith
-                KeyContains -> Contains
+                Key.Is -> Is
+                Key.EndsWith -> EndsWith
+                Key.StartsWith -> StartsWith
+                Key.Contains -> Contains
                 else -> Other(string)
             }
         }

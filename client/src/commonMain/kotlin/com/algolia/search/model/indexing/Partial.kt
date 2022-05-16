@@ -3,15 +3,7 @@ package com.algolia.search.model.indexing
 import com.algolia.search.endpoint.EndpointIndexing
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
-import com.algolia.search.serialize.KeyAdd
-import com.algolia.search.serialize.KeyAddUnique
-import com.algolia.search.serialize.KeyDecrement
-import com.algolia.search.serialize.KeyIncrement
-import com.algolia.search.serialize.KeyIncrementFrom
-import com.algolia.search.serialize.KeyIncrementSet
-import com.algolia.search.serialize.KeyRemove
-import com.algolia.search.serialize.KeyValue
-import com.algolia.search.serialize.Key_Operation
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.jsonPrimitiveOrNull
@@ -156,21 +148,21 @@ public sealed class Partial {
         override fun serialize(encoder: Encoder, value: Partial) {
             val key = when (value) {
                 is Update -> null
-                is Increment -> KeyIncrement
-                is IncrementFrom -> KeyIncrementFrom
-                is IncrementSet -> KeyIncrementSet
-                is Decrement -> KeyDecrement
-                is Add -> KeyAdd
-                is Remove -> KeyRemove
-                is AddUnique -> KeyAddUnique
+                is Increment -> Key.Increment
+                is IncrementFrom -> Key.IncrementFrom
+                is IncrementSet -> Key.IncrementSet
+                is Decrement -> Key.Decrement
+                is Add -> Key.Add
+                is Remove -> Key.Remove
+                is AddUnique -> Key.AddUnique
             }
             val json = buildJsonObject {
                 put(
                     value.attribute.raw,
                     key?.let {
                         buildJsonObject {
-                            put(Key_Operation, key)
-                            put(KeyValue, value.value)
+                            put(Key._Operation, key)
+                            put(Key.Value, value.value)
                         }
                     } ?: value.value
                 )
@@ -183,19 +175,19 @@ public sealed class Partial {
             val key = element.keys.first()
             val attribute = key.toAttribute()
             val value = element.getValue(key)
-            val hasOperation = (value is JsonObject && value.jsonObject.containsKey(Key_Operation))
-            val operation = if (hasOperation) value.jsonObject[Key_Operation]?.jsonPrimitiveOrNull?.content else null
-            val jsonElement = if (hasOperation) value.jsonObject.getValue((KeyValue)) else value
+            val hasOperation = (value is JsonObject && value.jsonObject.containsKey(Key._Operation))
+            val operation = if (hasOperation) value.jsonObject[Key._Operation]?.jsonPrimitiveOrNull?.content else null
+            val jsonElement = if (hasOperation) value.jsonObject.getValue((Key.Value)) else value
 
             return when (operation) {
                 null -> Update(attribute, jsonElement)
-                KeyIncrement -> Increment(attribute, jsonElement)
-                KeyIncrementFrom -> IncrementFrom(attribute, jsonElement)
-                KeyIncrementSet -> IncrementSet(attribute, jsonElement)
-                KeyDecrement -> Decrement(attribute, jsonElement)
-                KeyAdd -> Add(attribute, jsonElement)
-                KeyRemove -> Remove(attribute, jsonElement)
-                KeyAddUnique -> AddUnique(attribute, jsonElement)
+                Key.Increment -> Increment(attribute, jsonElement)
+                Key.IncrementFrom -> IncrementFrom(attribute, jsonElement)
+                Key.IncrementSet -> IncrementSet(attribute, jsonElement)
+                Key.Decrement -> Decrement(attribute, jsonElement)
+                Key.Add -> Add(attribute, jsonElement)
+                Key.Remove -> Remove(attribute, jsonElement)
+                Key.AddUnique -> AddUnique(attribute, jsonElement)
                 else -> throw Exception("Unknown operation $operation")
             }
         }

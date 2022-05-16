@@ -1,8 +1,7 @@
 package com.algolia.search.model.settings
 
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyExactPhrase
-import com.algolia.search.serialize.KeyExcludeWords
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -15,9 +14,9 @@ import kotlinx.serialization.encoding.Encoder
 @Serializable(AdvancedSyntaxFeatures.Companion::class)
 public sealed class AdvancedSyntaxFeatures(override val raw: String) : Raw<String> {
 
-    public object ExactPhrase : AdvancedSyntaxFeatures(KeyExactPhrase)
+    public object ExactPhrase : AdvancedSyntaxFeatures(Key.ExactPhrase)
 
-    public object ExcludeWords : AdvancedSyntaxFeatures(KeyExcludeWords)
+    public object ExcludeWords : AdvancedSyntaxFeatures(Key.ExcludeWords)
 
     public data class Other(override val raw: String) : AdvancedSyntaxFeatures(raw)
 
@@ -35,8 +34,8 @@ public sealed class AdvancedSyntaxFeatures(override val raw: String) : Raw<Strin
 
         override fun deserialize(decoder: Decoder): AdvancedSyntaxFeatures {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyExactPhrase -> ExactPhrase
-                KeyExcludeWords -> ExcludeWords
+                Key.ExactPhrase -> ExactPhrase
+                Key.ExcludeWords -> ExcludeWords
                 else -> Other(string)
             }
         }

@@ -17,13 +17,9 @@ import com.algolia.search.model.response.ResponseTopUserID
 import com.algolia.search.model.response.ResponseUserID
 import com.algolia.search.model.response.creation.Creation
 import com.algolia.search.model.response.deletion.Deletion
-import com.algolia.search.serialize.KeyAlgoliaUserID
-import com.algolia.search.serialize.KeyCluster
-import com.algolia.search.serialize.KeyGetClusters
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyPage
-import com.algolia.search.serialize.RouteClustersV1
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
@@ -36,7 +32,7 @@ internal class EndpointMulticlusterImpl(
 
     override suspend fun listClusters(requestOptions: RequestOptions?): ResponseListClusters {
 
-        return transport.request(HttpMethod.Get, CallType.Read, RouteClustersV1, requestOptions)
+        return transport.request(HttpMethod.Get, CallType.Read, Route.ClustersV1, requestOptions)
     }
 
     override suspend fun assignUserID(
@@ -44,20 +40,20 @@ internal class EndpointMulticlusterImpl(
         clusterName: ClusterName,
         requestOptions: RequestOptions?,
     ): Creation {
-        val body = buildJsonObject { put(KeyCluster, clusterName.raw) }.toString()
+        val body = buildJsonObject { put(Key.Cluster, clusterName.raw) }.toString()
         val options = requestOptionsBuilder(requestOptions) {
-            header(KeyAlgoliaUserID, userID.raw)
+            header(Key.AlgoliaUserID, userID.raw)
         }
 
-        return transport.request(HttpMethod.Post, CallType.Write, "$RouteClustersV1/mapping", options, body)
+        return transport.request(HttpMethod.Post, CallType.Write, "${Route.ClustersV1}/mapping", options, body)
     }
 
     override suspend fun getUserID(userID: UserID, requestOptions: RequestOptions?): ResponseUserID {
-        return transport.request(HttpMethod.Get, CallType.Read, "$RouteClustersV1/mapping/$userID", requestOptions)
+        return transport.request(HttpMethod.Get, CallType.Read, "${Route.ClustersV1}/mapping/$userID", requestOptions)
     }
 
     override suspend fun getTopUserID(requestOptions: RequestOptions?): ResponseTopUserID {
-        return transport.request(HttpMethod.Get, CallType.Read, "$RouteClustersV1/mapping/top", requestOptions)
+        return transport.request(HttpMethod.Get, CallType.Read, "${Route.ClustersV1}/mapping/top", requestOptions)
     }
 
     override suspend fun listUserIDs(
@@ -66,25 +62,25 @@ internal class EndpointMulticlusterImpl(
         requestOptions: RequestOptions?,
     ): ResponseListUserIDs {
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyPage, page)
-            parameter(KeyHitsPerPage, hitsPerPage)
+            parameter(Key.Page, page)
+            parameter(Key.HitsPerPage, hitsPerPage)
         }
 
-        return transport.request(HttpMethod.Get, CallType.Read, "$RouteClustersV1/mapping", options)
+        return transport.request(HttpMethod.Get, CallType.Read, "${Route.ClustersV1}/mapping", options)
     }
 
     override suspend fun removeUserID(userID: UserID, requestOptions: RequestOptions?): Deletion {
         val options = requestOptionsBuilder(requestOptions) {
-            header(KeyAlgoliaUserID, userID)
+            header(Key.AlgoliaUserID, userID)
         }
-        return transport.request(HttpMethod.Delete, CallType.Write, "$RouteClustersV1/mapping", options)
+        return transport.request(HttpMethod.Delete, CallType.Write, "${Route.ClustersV1}/mapping", options)
     }
 
     override suspend fun searchUserID(
         query: UserIDQuery,
         requestOptions: RequestOptions?,
     ): ResponseSearchUserID {
-        val path = "$RouteClustersV1/mapping/search"
+        val path = "${Route.ClustersV1}/mapping/search"
         val body = JsonNoDefaults.encodeToString(UserIDQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
@@ -95,7 +91,7 @@ internal class EndpointMulticlusterImpl(
         clusterName: ClusterName,
         requestOptions: RequestOptions?,
     ): Creation {
-        val path = "$RouteClustersV1/mapping/batch"
+        val path = "${Route.ClustersV1}/mapping/batch"
         val request = RequestAssignUserIDs(clusterName, userIDs)
         val body = JsonNoDefaults.encodeToString(RequestAssignUserIDs.serializer(), request)
 
@@ -106,9 +102,9 @@ internal class EndpointMulticlusterImpl(
         retrieveMapping: Boolean,
         requestOptions: RequestOptions?,
     ): ResponseHasPendingMapping {
-        val path = "$RouteClustersV1/mapping/pending"
+        val path = "${Route.ClustersV1}/mapping/pending"
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyGetClusters, retrieveMapping)
+            parameter(Key.GetClusters, retrieveMapping)
         }
 
         return transport.request(HttpMethod.Get, CallType.Read, path, options)

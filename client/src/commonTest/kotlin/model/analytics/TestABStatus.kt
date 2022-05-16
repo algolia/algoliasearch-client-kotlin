@@ -5,10 +5,7 @@ import com.algolia.search.model.analytics.ABTestStatus.Expired
 import com.algolia.search.model.analytics.ABTestStatus.Failed
 import com.algolia.search.model.analytics.ABTestStatus.Other
 import com.algolia.search.model.analytics.ABTestStatus.Stopped
-import com.algolia.search.serialize.KeyActive
-import com.algolia.search.serialize.KeyExpired
-import com.algolia.search.serialize.KeyFailed
-import com.algolia.search.serialize.KeyStopped
+import com.algolia.search.serialize.internal.Key
 import unknown
 import kotlin.test.Test
 
@@ -16,10 +13,10 @@ internal class TestABStatus {
 
     @Test
     fun raw() {
-        Expired.raw to KeyExpired
-        Stopped.raw to KeyStopped
-        Active.raw to KeyActive
-        Failed.raw to KeyFailed
+        Expired.raw to Key.Expired
+        Stopped.raw to Key.Stopped
+        Active.raw to Key.Active
+        Failed.raw to Key.Failed
         Other(unknown).raw to unknown
     }
 }

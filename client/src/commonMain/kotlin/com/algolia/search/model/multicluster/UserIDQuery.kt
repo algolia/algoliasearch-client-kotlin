@@ -1,10 +1,7 @@
 package com.algolia.search.model.multicluster
 
 import com.algolia.search.endpoint.EndpointMultiCluster
-import com.algolia.search.serialize.KeyCluster
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,20 +14,20 @@ public data class UserIDQuery(
      * Engine default: "empty string"
      * Query to search. The search is a prefix search with typoTolerance. Use empty query to retrieve all users.
      */
-    @SerialName(KeyQuery) var query: String? = null,
+    @SerialName(Key.Query) var query: String? = null,
     /**
      * Engine default: null
      * If specified only clusters assigned to this cluster can be returned.
      */
-    @SerialName(KeyCluster) var clusterName: ClusterName? = null,
+    @SerialName(Key.Cluster) var clusterName: ClusterName? = null,
     /**
      * Engine default: 0
      * Page to fetch.
      */
-    @SerialName(KeyParams) var page: Int? = null,
+    @SerialName(Key.Params) var page: Int? = null,
     /**
      * Engine default: 20
      * Number of users to return by page.
      */
-    @SerialName(KeyHitsPerPage) var hitsPerPage: Int? = null
+    @SerialName(Key.HitsPerPage) var hitsPerPage: Int? = null
 )

@@ -11,13 +11,10 @@ import com.algolia.search.model.settings.NumericAttributeFilter
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
-import com.algolia.search.serialize.KeyAttributesToIndex
-import com.algolia.search.serialize.KeyForwardToReplicas
-import com.algolia.search.serialize.KeyNumericAttributesToIndex
-import com.algolia.search.serialize.KeySlaves
-import com.algolia.search.serialize.RouteSettings
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.Key
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.serialize.internal.jsonArrayOrNull
 import com.algolia.search.serialize.internal.merge
 import com.algolia.search.serialize.internal.toJsonNoDefaults
@@ -35,17 +32,17 @@ internal class EndpointSettingsImpl(
 ) : EndpointSettings {
 
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
-        val path = indexName.toPath("/$RouteSettings")
+        val path = indexName.toPath("/${Route.Settings}")
         val json = transport.request<JsonObject>(HttpMethod.Get, CallType.Read, path, requestOptions)
         // The following lines handle the old names of attributes, thus providing backward compatibility.
         val settings = JsonNonStrict.decodeFromJsonElement(Settings.serializer(), json)
-        val attributesToIndex = json[KeyAttributesToIndex]?.jsonArrayOrNull?.let {
+        val attributesToIndex = json[Key.AttributesToIndex]?.jsonArrayOrNull?.let {
             Json.decodeFromJsonElement(ListSerializer(SearchableAttribute), it)
         }
-        val numericAttributesToIndex = json[KeyNumericAttributesToIndex]?.jsonArrayOrNull?.let {
+        val numericAttributesToIndex = json[Key.NumericAttributesToIndex]?.jsonArrayOrNull?.let {
             Json.decodeFromJsonElement(ListSerializer(NumericAttributeFilter), it)
         }
-        val replicas = json[KeySlaves]?.jsonArrayOrNull?.let {
+        val replicas = json[Key.Slaves]?.jsonArrayOrNull?.let {
             Json.decodeFromJsonElement(ListSerializer(IndexName), it)
         }
 
@@ -66,10 +63,10 @@ internal class EndpointSettingsImpl(
         val resets = buildJsonObject { resetToDefault.forEach { put(it.raw, JsonNull) } }
         val body = settings.toJsonNoDefaults().merge(resets).toString()
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyForwardToReplicas, forwardToReplicas)
+            parameter(Key.ForwardToReplicas, forwardToReplicas)
         }
 
-        return transport.request(HttpMethod.Put, CallType.Write, indexName.toPath("/$RouteSettings"), options, body)
+        return transport.request(HttpMethod.Put, CallType.Write, indexName.toPath("/${Route.Settings}"), options, body)
     }
 
     override suspend fun setSettings(

@@ -1,10 +1,7 @@
 package com.algolia.search.model
 
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyAll
-import com.algolia.search.serialize.KeyBuild
-import com.algolia.search.serialize.KeyError
-import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -21,22 +18,22 @@ public sealed class LogType(override val raw: String) : Raw<String> {
     /**
      * Retrieve all the logs.
      */
-    public object All : LogType(KeyAll)
+    public object All : LogType(Key.All)
 
     /**
      * Retrieve only the queries.
      */
-    public object Query : LogType(KeyQuery)
+    public object Query : LogType(Key.Query)
 
     /**
      * Retrieve only the build operations.
      */
-    public object Build : LogType(KeyBuild)
+    public object Build : LogType(Key.Build)
 
     /**
      * Retrieve only the errors.
      */
-    public object Error : LogType(KeyError)
+    public object Error : LogType(Key.Error)
 
     public data class Other(override val raw: String) : LogType(raw)
 
@@ -52,10 +49,10 @@ public sealed class LogType(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): LogType {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyAll -> All
-                KeyQuery -> Query
-                KeyBuild -> Build
-                KeyError -> Error
+                Key.All -> All
+                Key.Query -> Query
+                Key.Build -> Build
+                Key.Error -> Error
                 else -> Other(string)
             }
         }

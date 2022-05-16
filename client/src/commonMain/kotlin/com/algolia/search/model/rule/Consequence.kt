@@ -4,19 +4,9 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.KSerializerObjectIDs
-import com.algolia.search.serialize.KeyAutomaticFacetFilters
-import com.algolia.search.serialize.KeyAutomaticOptionalFacetFilters
-import com.algolia.search.serialize.KeyEdits
-import com.algolia.search.serialize.KeyFilterPromotes
-import com.algolia.search.serialize.KeyHide
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyPromote
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyRemoveLowercase
-import com.algolia.search.serialize.KeyRenderingContent
-import com.algolia.search.serialize.KeyUserData
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.jsonArrayOrNull
@@ -48,7 +38,7 @@ public data class Consequence(
      * placeholder in the query pattern.
      * Ex. facetName1, facetName2. You can specify a score: facetName1<score=5>, facetName2<score=1>.
      */
-    @SerialName(KeyAutomaticFacetFilters) val automaticFacetFilters: List<AutomaticFacetFilters>? = null,
+    @SerialName(Key.AutomaticFacetFilters) val automaticFacetFilters: List<AutomaticFacetFilters>? = null,
     /**
      * Same as [automaticFacetFilters], but the engine treats the filters as optional.
      * Behaves like [Query.optionalFilters].
@@ -102,27 +92,27 @@ public data class Consequence(
         }
 
         private fun JsonObject.getPromotions(): List<Promotion>? {
-            return this[KeyPromote]?.jsonArrayOrNull?.let {
+            return this[Key.Promote]?.jsonArrayOrNull?.let {
                 Json.decodeFromJsonElement(ListSerializer(Promotion.serializer()), it)
             }
         }
 
         private fun JsonObject.getObjectIDs(): List<ObjectID>? {
-            return this[KeyHide]?.jsonArrayOrNull?.let { Json.decodeFromJsonElement(KSerializerObjectIDs, it) }
+            return this[Key.Hide]?.jsonArrayOrNull?.let { Json.decodeFromJsonElement(KSerializerObjectIDs, it) }
         }
 
         private fun JsonObject.getEdits(): List<Edit>? {
-            return this[KeyQuery]?.jsonObjectOrNull?.let { local ->
-                local[KeyEdits]?.jsonArrayOrNull?.let { Json.decodeFromJsonElement(ListSerializer(Edit), it) }
-                    ?: local[KeyRemoveLowercase]?.jsonArrayOrNull?.map { Edit(it.jsonPrimitive.content) }
+            return this[Key.Query]?.jsonObjectOrNull?.let { local ->
+                local[Key.Edits]?.jsonArrayOrNull?.let { Json.decodeFromJsonElement(ListSerializer(Edit), it) }
+                    ?: local[Key.RemoveLowercase]?.jsonArrayOrNull?.map { Edit(it.jsonPrimitive.content) }
             }
         }
 
         private fun JsonObject.extractQuery(edits: List<Edit>?): Query? {
             val modified = toMutableMap().apply {
-                if (edits != null) remove(KeyQuery)
-                remove(KeyAutomaticFacetFilters)
-                remove(KeyAutomaticOptionalFacetFilters)
+                if (edits != null) remove(Key.Query)
+                remove(Key.AutomaticFacetFilters)
+                remove(Key.AutomaticOptionalFacetFilters)
             }
             return if (modified.isNotEmpty()) {
                 JsonNoDefaults.decodeFromJsonElement(Query.serializer(), JsonObject(modified))
@@ -130,33 +120,33 @@ public data class Consequence(
         }
 
         private fun JsonObject.getRenderingContent(): RenderingContent? {
-            return this[KeyRenderingContent]?.jsonObjectOrNull?.let { Json.decodeFromJsonElement(it) }
+            return this[Key.RenderingContent]?.jsonObjectOrNull?.let { Json.decodeFromJsonElement(it) }
         }
 
         override fun serialize(encoder: Encoder, value: Consequence) {
             val params = mutableMapOf<String, JsonElement>().apply {
-                putFilters(KeyAutomaticFacetFilters, value.automaticFacetFilters)
-                putFilters(KeyAutomaticOptionalFacetFilters, value.automaticOptionalFacetFilters)
+                putFilters(Key.AutomaticFacetFilters, value.automaticFacetFilters)
+                putFilters(Key.AutomaticOptionalFacetFilters, value.automaticOptionalFacetFilters)
                 value.query?.toJsonNoDefaults()?.let { putAll(it) }
                 if (value.edits != null) put(
-                    KeyQuery,
+                    Key.Query,
                     buildJsonObject {
-                        put(KeyEdits, JsonNoDefaults.encodeToJsonElement(ListSerializer(Edit), value.edits))
+                        put(Key.Edits, JsonNoDefaults.encodeToJsonElement(ListSerializer(Edit), value.edits))
                     }
                 )
             }
             val json = buildJsonObject {
-                if (params.isNotEmpty()) put(KeyParams, JsonObject(params))
+                if (params.isNotEmpty()) put(Key.Params, JsonObject(params))
                 value.promote?.let {
-                    put(KeyPromote, JsonNoDefaults.encodeToJsonElement(ListSerializer(Promotion.serializer()), it))
+                    put(Key.Promote, JsonNoDefaults.encodeToJsonElement(ListSerializer(Promotion.serializer()), it))
                 }
                 value.hide?.let {
-                    put(KeyHide, JsonNoDefaults.encodeToJsonElement(KSerializerObjectIDs, it))
+                    put(Key.Hide, JsonNoDefaults.encodeToJsonElement(KSerializerObjectIDs, it))
                 }
-                value.userData?.let { put(KeyUserData, it) }
-                value.filterPromotes?.let { put(KeyFilterPromotes, it) }
+                value.userData?.let { put(Key.UserData, it) }
+                value.filterPromotes?.let { put(Key.FilterPromotes, it) }
                 value.renderingContent?.let {
-                    put(KeyRenderingContent, JsonNoDefaults.encodeToJsonElement(it))
+                    put(Key.RenderingContent, JsonNoDefaults.encodeToJsonElement(it))
                 }
             }
 
@@ -165,15 +155,15 @@ public data class Consequence(
 
         override fun deserialize(decoder: Decoder): Consequence {
             val json = decoder.asJsonInput().jsonObject
-            val params = json[KeyParams]?.jsonObjectOrNull
-            val automaticFacetFilters = params?.getFilters(KeyAutomaticFacetFilters)
-            val automaticOptionalFacetFilters = params?.getFilters(KeyAutomaticOptionalFacetFilters)
+            val params = json[Key.Params]?.jsonObjectOrNull
+            val automaticFacetFilters = params?.getFilters(Key.AutomaticFacetFilters)
+            val automaticOptionalFacetFilters = params?.getFilters(Key.AutomaticOptionalFacetFilters)
             val promote = json.getPromotions()
             val hide = json.getObjectIDs()
-            val userData = json[KeyUserData]?.jsonObjectOrNull
+            val userData = json[Key.UserData]?.jsonObjectOrNull
             val edits = params?.getEdits()
             val query = params?.extractQuery(edits)
-            val filterPromotes = json[KeyFilterPromotes]?.jsonPrimitiveOrNull?.booleanOrNull
+            val filterPromotes = json[Key.FilterPromotes]?.jsonPrimitiveOrNull?.booleanOrNull
             val renderingContent = json.getRenderingContent()
 
             return Consequence(

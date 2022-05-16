@@ -1,7 +1,6 @@
 package com.algolia.search.model.rule
 
-import com.algolia.search.serialize.KeyFrom
-import com.algolia.search.serialize.KeyUntil
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -10,9 +9,9 @@ public data class TimeRange(
     /**
      * Lower bound of the time range (Unix timestamp).
      */
-    @SerialName(KeyFrom) val from: Long,
+    @SerialName(Key.From) val from: Long,
     /**
      * Upper bound of the time range (Unix timestamp).
      */
-    @SerialName(KeyUntil) val until: Long
+    @SerialName(Key.Until) val until: Long
 )

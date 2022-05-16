@@ -1,7 +1,7 @@
 package com.algolia.search.model.dictionary
 
 import com.algolia.search.model.search.Language
-import com.algolia.search.serialize.KeyStopwords
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -21,5 +21,5 @@ public data class DisableStandardEntries(
     /**
      * Settings for the stop word dictionary.
      */
-    @SerialName(KeyStopwords) val stopwords: Map<Language, Boolean>?,
+    @SerialName(Key.Stopwords) val stopwords: Map<Language, Boolean>?,
 )

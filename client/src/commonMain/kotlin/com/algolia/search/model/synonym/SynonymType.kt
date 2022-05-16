@@ -1,11 +1,7 @@
 package com.algolia.search.model.synonym
 
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyAlternativeCorrection1
-import com.algolia.search.serialize.KeyAlternativeCorrection2
-import com.algolia.search.serialize.KeyOneWaySynonym
-import com.algolia.search.serialize.KeyPlaceholder
-import com.algolia.search.serialize.KeySynonym
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -24,27 +20,27 @@ public sealed class SynonymType(override val raw: String) : Raw<String> {
     /**
      * Matches [Synonym.OneWay].
      */
-    public object OneWay : SynonymType(KeyOneWaySynonym)
+    public object OneWay : SynonymType(Key.OneWaySynonym)
 
     /**
      * Matches [Synonym.MultiWay].
      */
-    public object MultiWay : SynonymType(KeySynonym)
+    public object MultiWay : SynonymType(Key.Synonym)
 
     /**
      * Matches [Synonym.AlternativeCorrections].
      */
     public data class AlternativeCorrections(val typo: Typo) : SynonymType(
         when (typo) {
-            Typo.One -> KeyAlternativeCorrection1
-            Typo.Two -> KeyAlternativeCorrection2
+            Typo.One -> Key.AlternativeCorrection1
+            Typo.Two -> Key.AlternativeCorrection2
         }
     )
 
     /**
      * Matches [Synonym.Placeholder]
      */
-    public object Placeholder : SynonymType(KeyPlaceholder)
+    public object Placeholder : SynonymType(Key.Placeholder)
 
     public data class Other(override val raw: String) : SynonymType(raw)
 
@@ -60,11 +56,11 @@ public sealed class SynonymType(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): SynonymType {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyOneWaySynonym -> OneWay
-                KeySynonym -> MultiWay
-                KeyAlternativeCorrection1 -> AlternativeCorrections(Typo.One)
-                KeyAlternativeCorrection2 -> AlternativeCorrections(Typo.Two)
-                KeyPlaceholder -> Placeholder
+                Key.OneWaySynonym -> OneWay
+                Key.Synonym -> MultiWay
+                Key.AlternativeCorrection1 -> AlternativeCorrections(Typo.One)
+                Key.AlternativeCorrection2 -> AlternativeCorrections(Typo.Two)
+                Key.Placeholder -> Placeholder
                 else -> Other(string)
             }
         }

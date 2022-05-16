@@ -2,12 +2,7 @@ package serialize.response
 
 import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.search.Facet
-import com.algolia.search.serialize.KeyCount
-import com.algolia.search.serialize.KeyExhaustiveFacetsCount
-import com.algolia.search.serialize.KeyFacetHits
-import com.algolia.search.serialize.KeyHighlighted
-import com.algolia.search.serialize.KeyProcessingTimeMS
-import com.algolia.search.serialize.KeyValue
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
@@ -27,19 +22,19 @@ internal class TestResponseSearchForFacets : TestSerializer<ResponseSearchForFac
             processingTimeMS = 0
         ) to buildJsonObject {
             put(
-                KeyFacetHits,
+                Key.FacetHits,
                 buildJsonArray {
                     add(
                         buildJsonObject {
-                            put(KeyValue, unknown)
-                            put(KeyCount, 0)
-                            put(KeyHighlighted, "hello")
+                            put(Key.Value, unknown)
+                            put(Key.Count, 0)
+                            put(Key.Highlighted, "hello")
                         }
                     )
                 }
             )
-            put(KeyExhaustiveFacetsCount, true)
-            put(KeyProcessingTimeMS, 0)
+            put(Key.ExhaustiveFacetsCount, true)
+            put(Key.ProcessingTimeMS, 0)
         }
     )
 }

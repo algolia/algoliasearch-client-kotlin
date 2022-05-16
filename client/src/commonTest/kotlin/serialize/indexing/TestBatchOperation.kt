@@ -11,17 +11,8 @@ import com.algolia.search.model.indexing.BatchOperation.Other
 import com.algolia.search.model.indexing.BatchOperation.PartialUpdateObject
 import com.algolia.search.model.indexing.BatchOperation.ReplaceObject
 import com.algolia.search.model.indexing.Partial
-import com.algolia.search.serialize.KeyAction
-import com.algolia.search.serialize.KeyAddObject
-import com.algolia.search.serialize.KeyBody
-import com.algolia.search.serialize.KeyClear
-import com.algolia.search.serialize.KeyDelete
-import com.algolia.search.serialize.KeyDeleteObject
-import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.serialize.KeyPartialUpdateObject
-import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
-import com.algolia.search.serialize.KeyUpdateObject
 import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import serialize.TestSerializer
@@ -38,20 +29,20 @@ internal class TestBatchOperation : TestSerializer<BatchOperation>(BatchOperatio
 
     override val items = listOf(
         AddObject(jsonObject) to buildJsonObject {
-            put(KeyAction, KeyAddObject)
-            put(KeyBody, jsonObject)
+            put(Key.Action, Key.AddObject)
+            put(Key.Body, jsonObject)
         },
         ReplaceObject(objectID, jsonObject) to buildJsonObject {
-            put(KeyAction, KeyUpdateObject)
-            put(KeyBody, jsonObject)
+            put(Key.Action, Key.UpdateObject)
+            put(Key.Body, jsonObject)
         },
         PartialUpdateObject(objectID, jsonObject, true) to buildJsonObject {
-            put(KeyAction, KeyPartialUpdateObject)
-            put(KeyBody, jsonObject)
+            put(Key.Action, Key.PartialUpdateObject)
+            put(Key.Body, jsonObject)
         },
         PartialUpdateObject(objectID, jsonObject, false) to buildJsonObject {
-            put(KeyAction, KeyPartialUpdateObjectNoCreate)
-            put(KeyBody, jsonObject)
+            put(Key.Action, Key.PartialUpdateObjectNoCreate)
+            put(Key.Body, jsonObject)
         },
         PartialUpdateObject.from(
             ObjectID(unknown),
@@ -59,24 +50,24 @@ internal class TestBatchOperation : TestSerializer<BatchOperation>(BatchOperatio
                 Attribute("key"), "value"
             )
         ) to buildJsonObject {
-            put(KeyAction, KeyPartialUpdateObject)
+            put(Key.Action, Key.PartialUpdateObject)
             put(
-                KeyBody,
+                Key.Body,
                 buildJsonObject {
-                    put(KeyObjectID, unknown)
+                    put(Key.ObjectID, unknown)
                     put("key", "value")
                 }
             )
         },
         DeleteObject(objectID) to buildJsonObject {
-            put(KeyAction, KeyDeleteObject)
-            put(KeyBody, jsonObject)
+            put(Key.Action, Key.DeleteObject)
+            put(Key.Body, jsonObject)
         },
-        DeleteIndex to buildJsonObject { put(KeyAction, KeyDelete) },
-        ClearIndex to buildJsonObject { put(KeyAction, KeyClear) },
+        DeleteIndex to buildJsonObject { put(Key.Action, Key.Delete) },
+        ClearIndex to buildJsonObject { put(Key.Action, Key.Clear) },
         Other(unknown, jsonObject) to buildJsonObject {
-            put(KeyAction, unknown)
-            put(KeyBody, jsonObject)
+            put(Key.Action, unknown)
+            put(Key.Body, jsonObject)
         }
     )
 

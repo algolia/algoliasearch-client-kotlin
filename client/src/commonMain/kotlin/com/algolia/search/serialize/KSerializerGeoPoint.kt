@@ -1,6 +1,7 @@
 package com.algolia.search.serialize
 
 import com.algolia.search.model.search.Point
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.KSerializer
@@ -20,8 +21,8 @@ public object KSerializerGeoPoint : KSerializer<Point> {
 
     override fun serialize(encoder: Encoder, value: Point) {
         val json = buildJsonObject {
-            put(KeyLat, value.latitude)
-            put(KeyLng, value.longitude)
+            put(Key.Lat, value.latitude)
+            put(Key.Lng, value.longitude)
         }
 
         encoder.asJsonOutput().encodeJsonElement(json)
@@ -31,8 +32,8 @@ public object KSerializerGeoPoint : KSerializer<Point> {
         val json = decoder.asJsonInput().jsonObject
 
         return Point(
-            latitude = json.getValue(KeyLat).jsonPrimitive.float,
-            longitude = json.getValue(KeyLng).jsonPrimitive.float
+            latitude = json.getValue(Key.Lat).jsonPrimitive.float,
+            longitude = json.getValue(Key.Lng).jsonPrimitive.float
         )
     }
 }

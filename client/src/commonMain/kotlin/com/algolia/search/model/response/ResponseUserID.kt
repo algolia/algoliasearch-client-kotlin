@@ -3,12 +3,7 @@ package com.algolia.search.model.response
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.multicluster.ClusterName
 import com.algolia.search.model.multicluster.UserID
-import com.algolia.search.serialize.KeyClusterName
-import com.algolia.search.serialize.KeyDataSize
-import com.algolia.search.serialize.KeyNbRecords
-import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.serialize.KeyUserID
-import com.algolia.search.serialize.Key_HighlightResult
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
@@ -18,27 +13,27 @@ public data class ResponseUserID(
     /**
      * [UserID] of the user.
      */
-    @SerialName(KeyUserID) val userID: UserID,
+    @SerialName(Key.UserID) val userID: UserID,
     /**
      * Number of records belonging to the user.
      */
-    @SerialName(KeyNbRecords) val nbRecords: Long,
+    @SerialName(Key.NbRecords) val nbRecords: Long,
     /**
      * Data size used by the user.
      */
-    @SerialName(KeyDataSize) val dataSize: Long,
+    @SerialName(Key.DataSize) val dataSize: Long,
     /**
      * Cluster on which the data of the user is stored.
      */
-    @SerialName(KeyClusterName) val clusterNameOrNull: ClusterName? = null,
+    @SerialName(Key.ClusterName) val clusterNameOrNull: ClusterName? = null,
     /**
      * [ObjectID] of the requested user. Same as [UserID].
      */
-    @SerialName(KeyObjectID) val objectIDOrNull: ObjectID? = null,
+    @SerialName(Key.ObjectID) val objectIDOrNull: ObjectID? = null,
     /**
      * Highlighted attributes.
      */
-    @SerialName(Key_HighlightResult)
+    @SerialName(Key._HighlightResult)
     val highlightResultsOrNull: JsonObject? = null
 ) {
 

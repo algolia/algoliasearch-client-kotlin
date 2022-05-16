@@ -4,16 +4,7 @@ import com.algolia.search.model.APIKey
 import com.algolia.search.model.ClientDate
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.apikey.ACL
-import com.algolia.search.serialize.KeyAcl
-import com.algolia.search.serialize.KeyCreatedAt
-import com.algolia.search.serialize.KeyDescription
-import com.algolia.search.serialize.KeyIndexes
-import com.algolia.search.serialize.KeyMaxHitsPerQuery
-import com.algolia.search.serialize.KeyMaxQueriesPerIPPerHour
-import com.algolia.search.serialize.KeyQueryParameters
-import com.algolia.search.serialize.KeyReferers
-import com.algolia.search.serialize.KeyValidity
-import com.algolia.search.serialize.KeyValue
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -22,31 +13,31 @@ public data class ResponseAPIKey(
     /**
      * The [APIKey] value.
      */
-    @SerialName(KeyValue) val apiKey: APIKey,
+    @SerialName(Key.Value) val apiKey: APIKey,
     /**
      * The date at which the [APIKey] has been created.
      */
-    @SerialName(KeyCreatedAt) val createdAtOrNull: ClientDate? = null,
+    @SerialName(Key.CreatedAt) val createdAtOrNull: ClientDate? = null,
     /**
      * List of permissions [ACL] the key contains.
      */
-    @SerialName(KeyAcl) val ACLs: List<ACL>,
+    @SerialName(Key.Acl) val ACLs: List<ACL>,
     /**
      * Timestamp of the date at which the [APIKey] expires. (0 means it will not expire automatically).
      */
-    @SerialName(KeyValidity) val validity: Long,
+    @SerialName(Key.Validity) val validity: Long,
     /**
      * The list of targeted indices, if any.
      */
-    @SerialName(KeyIndexes) val indicesOrNull: List<IndexName>? = null,
+    @SerialName(Key.Indexes) val indicesOrNull: List<IndexName>? = null,
     /**
      * Description of the key, if set.
      */
-    @SerialName(KeyDescription) val descriptionOrNull: String? = null,
-    @SerialName(KeyMaxQueriesPerIPPerHour) val maxQueriesPerIPPerHourOrNull: Int? = null,
-    @SerialName(KeyMaxHitsPerQuery) val maxHitsPerQueryOrNull: Int? = null,
-    @SerialName(KeyReferers) val referersOrNull: List<String>? = null,
-    @SerialName(KeyQueryParameters) val queryOrNull: String? = null
+    @SerialName(Key.Description) val descriptionOrNull: String? = null,
+    @SerialName(Key.MaxQueriesPerIPPerHour) val maxQueriesPerIPPerHourOrNull: Int? = null,
+    @SerialName(Key.MaxHitsPerQuery) val maxHitsPerQueryOrNull: Int? = null,
+    @SerialName(Key.Referers) val referersOrNull: List<String>? = null,
+    @SerialName(Key.QueryParameters) val queryOrNull: String? = null
 ) {
 
     public val maxQueriesPerIPPerHour: Int

@@ -1,10 +1,7 @@
 package com.algolia.search.model.synonym
 
 import com.algolia.search.dsl.DSLParameters
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyPage
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyType
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
@@ -45,10 +42,10 @@ public data class SynonymQuery(
 
         override fun serialize(encoder: Encoder, value: SynonymQuery) {
             val json = buildJsonObject {
-                value.query?.let { put(KeyQuery, it) }
-                value.page?.let { put(KeyPage, it) }
-                value.hitsPerPage?.let { put(KeyHitsPerPage, it) }
-                value.synonymTypes?.let { types -> put(KeyType, types.joinToString(",") { it.raw }) }
+                value.query?.let { put(Key.Query, it) }
+                value.page?.let { put(Key.Page, it) }
+                value.hitsPerPage?.let { put(Key.HitsPerPage, it) }
+                value.synonymTypes?.let { types -> put(Key.Type, types.joinToString(",") { it.raw }) }
             }
 
             encoder.asJsonOutput().encodeJsonElement(json)

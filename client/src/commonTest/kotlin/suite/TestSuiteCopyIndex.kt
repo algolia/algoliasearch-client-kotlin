@@ -9,7 +9,7 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import runBlocking
@@ -31,11 +31,11 @@ internal class TestSuiteCopyIndex {
 
     private val objects = listOf(
         buildJsonObject {
-            put(KeyObjectID, "one")
+            put(Key.ObjectID, "one")
             put(company.raw, "apple")
         },
         buildJsonObject {
-            put(KeyObjectID, "two")
+            put(Key.ObjectID, "two")
             put(company.raw, "algolia")
         }
     )

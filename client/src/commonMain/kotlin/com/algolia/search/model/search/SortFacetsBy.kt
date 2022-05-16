@@ -1,8 +1,7 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyAlpha
-import com.algolia.search.serialize.KeyCount
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -17,13 +16,13 @@ public sealed class SortFacetsBy(override val raw: String) : Raw<String> {
      * [Facet.value] are sorted by decreasing [Facet.count].
      * The [Facet.count] is the number of records containing this [Facet.value] in the results of the [Query].
      */
-    public object Count : SortFacetsBy(KeyCount)
+    public object Count : SortFacetsBy(Key.Count)
 
     /**
      * [Facet.value] are sorted in alphabetical order, ascending from A to Z.
      * The [Facet.count] is the number of records containing this [Facet.value] in the results of the [Query].
      */
-    public object Alpha : SortFacetsBy(KeyAlpha)
+    public object Alpha : SortFacetsBy(Key.Alpha)
 
     public data class Other(override val raw: String) : SortFacetsBy(raw)
 
@@ -43,8 +42,8 @@ public sealed class SortFacetsBy(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): SortFacetsBy {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyCount -> Count
-                KeyAlpha -> Alpha
+                Key.Count -> Count
+                Key.Alpha -> Alpha
                 else -> Other(string)
             }
         }

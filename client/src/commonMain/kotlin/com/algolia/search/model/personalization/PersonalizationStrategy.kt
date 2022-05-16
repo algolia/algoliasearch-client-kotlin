@@ -1,8 +1,6 @@
 package com.algolia.search.model.personalization
 
-import com.algolia.search.serialize.KeyEventsScoring
-import com.algolia.search.serialize.KeyFacetsScoring
-import com.algolia.search.serialize.KeyPersonalizationImpact
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,14 +12,14 @@ public data class PersonalizationStrategy(
     /**
      * Events scoring saved on the API
      */
-    @SerialName(KeyEventsScoring) val eventsScoring: List<EventScoring>,
+    @SerialName(Key.EventsScoring) val eventsScoring: List<EventScoring>,
     /**
      * Facets scoring saved on the API
      */
-    @SerialName(KeyFacetsScoring) val facetsScoring: List<FacetScoring>,
+    @SerialName(Key.FacetsScoring) val facetsScoring: List<FacetScoring>,
 
     /**
      * Personalization impact
      */
-    @SerialName(KeyPersonalizationImpact) val personalizationImpact: Int
+    @SerialName(Key.PersonalizationImpact) val personalizationImpact: Int
 )

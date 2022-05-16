@@ -2,7 +2,7 @@ package com.algolia.search.model.settings
 
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
-import com.algolia.search.serialize.KeyUnordered
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.regexUnordered
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
@@ -37,7 +37,7 @@ public sealed class SearchableAttribute {
         override fun serialize(encoder: Encoder, value: SearchableAttribute) {
             val string = when (value) {
                 is Default -> value.attributes.joinToString { it.raw }
-                is Unordered -> "$KeyUnordered(${value.attribute.raw})"
+                is Unordered -> "${Key.Unordered}(${value.attribute.raw})"
             }
             String.serializer().serialize(encoder, string)
         }

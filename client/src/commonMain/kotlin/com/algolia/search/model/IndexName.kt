@@ -5,7 +5,7 @@ import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.internal.encodeUTF8
 import com.algolia.search.helper.toIndexName
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.RouteIndexesV1
+import com.algolia.search.serialize.internal.Route
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -30,7 +30,7 @@ public data class IndexName(
     }
 
     internal fun toPath(suffix: String? = null): String {
-        return "$RouteIndexesV1/${encode()}" + (suffix ?: "")
+        return "${Route.IndexesV1}/${encode()}" + (suffix ?: "")
     }
 
     override fun toString(): String {

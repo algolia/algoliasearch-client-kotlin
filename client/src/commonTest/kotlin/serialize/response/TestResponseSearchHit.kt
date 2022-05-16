@@ -10,11 +10,8 @@ import com.algolia.search.model.search.MatchedGeoLocation
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.model.search.SnippetResult
-import com.algolia.search.serialize.Key_DistinctSeqID
-import com.algolia.search.serialize.Key_HighlightResult
-import com.algolia.search.serialize.Key_RankingInfo
-import com.algolia.search.serialize.Key_SnippetResult
 import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.json.buildJsonObject
@@ -50,18 +47,18 @@ internal class TestResponseSearchHit : TestSerializer<ResponseSearch.Hit>(Respon
             attributeB to listOf(SnippetResult(unknown, MatchLevel.None))
         )
         val jsonObject = buildJsonObject {
-            put(Key_DistinctSeqID, 0)
+            put(Key._DistinctSeqID, 0)
             put(
-                Key_HighlightResult,
+                Key._HighlightResult,
                 Json.encodeToJsonElement(MapSerializer(Attribute, HighlightResult.serializer()), highlights)
             )
             put(
-                Key_SnippetResult,
+                Key._SnippetResult,
                 Json.encodeToJsonElement(MapSerializer(Attribute, ListSerializer(SnippetResult.serializer())), snippets)
             )
             attributeA to unknown
             attributeB to unknown
-            put(Key_RankingInfo, Json.encodeToJsonElement(RankingInfo.serializer(), rankingInfo))
+            put(Key._RankingInfo, Json.encodeToJsonElement(RankingInfo.serializer(), rankingInfo))
         }
         val hit = ResponseSearch.Hit(jsonObject)
     }

@@ -1,6 +1,6 @@
 package com.algolia.search.model.rule
 
-import com.algolia.search.serialize.KeyOrder
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,5 +12,5 @@ public data class FacetsOrder(
     /**
      * Pinned order of facet lists.
      */
-    @SerialName(KeyOrder) public val order: List<String>,
+    @SerialName(Key.Order) public val order: List<String>,
 )

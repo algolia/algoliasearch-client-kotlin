@@ -20,11 +20,7 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyAnalyticsTags
-import com.algolia.search.serialize.KeyIgnorePlurals
-import com.algolia.search.serialize.KeyRemoveStopWords
-import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
-import com.algolia.search.serialize.KeyRuleContexts
+import com.algolia.search.serialize.internal.Key
 import io.ktor.http.parseUrlEncodedParameters
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
@@ -110,11 +106,11 @@ internal class TestSuiteSearch {
                 val lang = Language.English
                 val parameters = search(Query(query = "elon", naturalLanguages = listOf(lang)))
                     .params.parseUrlEncodedParameters()
-                parameters[KeyRemoveStopWords] shouldEqual lang.raw
-                parameters[KeyIgnorePlurals] shouldEqual lang.raw
-                parameters[KeyRemoveWordsIfNoResults] shouldEqual RemoveWordIfNoResults.AllOptional.raw
-                parameters[KeyAnalyticsTags] shouldEqual "natural_language"
-                parameters[KeyRuleContexts] shouldEqual "natural_language"
+                parameters[Key.RemoveStopWords] shouldEqual lang.raw
+                parameters[Key.IgnorePlurals] shouldEqual lang.raw
+                parameters[Key.RemoveWordsIfNoResults] shouldEqual RemoveWordIfNoResults.AllOptional.raw
+                parameters[Key.AnalyticsTags] shouldEqual "natural_language"
+                parameters[Key.RuleContexts] shouldEqual "natural_language"
             }
         }
     }

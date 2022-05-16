@@ -6,9 +6,7 @@ import com.algolia.search.model.ClientDate
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskID
-import com.algolia.search.serialize.KeyId
-import com.algolia.search.serialize.KeyTaskID
-import com.algolia.search.serialize.KeyUpdatedAt
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -17,13 +15,13 @@ public data class RevisionSynonym(
     /**
      * Date at which the [Task] to update the [Index] has been created.
      */
-    @SerialName(KeyUpdatedAt) val updatedAt: ClientDate,
+    @SerialName(Key.UpdatedAt) val updatedAt: ClientDate,
     /**
      * [ObjectID] of the inserted synonym.
      */
-    @SerialName(KeyId) val objectID: ObjectID,
+    @SerialName(Key.Id) val objectID: ObjectID,
     /**
      * The [TaskID] which can be used with the [EndpointAdvanced.waitTask] method.
      */
-    @SerialName(KeyTaskID) override val taskID: TaskID
+    @SerialName(Key.TaskID) override val taskID: TaskID
 ) : Task

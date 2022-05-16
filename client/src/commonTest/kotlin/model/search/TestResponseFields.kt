@@ -20,25 +20,7 @@ import com.algolia.search.model.search.ResponseFields.ProcessingTimeMS
 import com.algolia.search.model.search.ResponseFields.Query
 import com.algolia.search.model.search.ResponseFields.QueryAfterRemoval
 import com.algolia.search.model.search.ResponseFields.UserData
-import com.algolia.search.serialize.KeyAroundLatLng
-import com.algolia.search.serialize.KeyAutomaticRadius
-import com.algolia.search.serialize.KeyExhaustiveFacetsCount
-import com.algolia.search.serialize.KeyFacets
-import com.algolia.search.serialize.KeyFacets_Stats
-import com.algolia.search.serialize.KeyHits
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyIndex
-import com.algolia.search.serialize.KeyLength
-import com.algolia.search.serialize.KeyNbHits
-import com.algolia.search.serialize.KeyNbPages
-import com.algolia.search.serialize.KeyOffset
-import com.algolia.search.serialize.KeyPage
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyProcessingTimeMS
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyQueryAfterRemoval
-import com.algolia.search.serialize.KeyStar
-import com.algolia.search.serialize.KeyUserData
+import com.algolia.search.serialize.internal.Key
 import shouldEqual
 import unknown
 import kotlin.test.Test
@@ -47,25 +29,25 @@ internal class TestResponseFields {
 
     @Test
     fun raw() {
-        All.raw shouldEqual KeyStar
-        AroundLatLng.raw shouldEqual KeyAroundLatLng
-        AutomaticRadius.raw shouldEqual KeyAutomaticRadius
-        ExhaustiveFacetsCount.raw shouldEqual KeyExhaustiveFacetsCount
-        Facets.raw shouldEqual KeyFacets
-        FacetsStats.raw shouldEqual KeyFacets_Stats
-        Hits.raw shouldEqual KeyHits
-        HitsPerPage.raw shouldEqual KeyHitsPerPage
-        Index.raw shouldEqual KeyIndex
-        Length.raw shouldEqual KeyLength
-        NbHits.raw shouldEqual KeyNbHits
-        NbPages.raw shouldEqual KeyNbPages
-        Offset.raw shouldEqual KeyOffset
-        Page.raw shouldEqual KeyPage
-        Params.raw shouldEqual KeyParams
-        ProcessingTimeMS.raw shouldEqual KeyProcessingTimeMS
-        Query.raw shouldEqual KeyQuery
-        QueryAfterRemoval.raw shouldEqual KeyQueryAfterRemoval
-        UserData.raw shouldEqual KeyUserData
+        All.raw shouldEqual Key.Star
+        AroundLatLng.raw shouldEqual Key.AroundLatLng
+        AutomaticRadius.raw shouldEqual Key.AutomaticRadius
+        ExhaustiveFacetsCount.raw shouldEqual Key.ExhaustiveFacetsCount
+        Facets.raw shouldEqual Key.Facets
+        FacetsStats.raw shouldEqual Key.Facets_Stats
+        Hits.raw shouldEqual Key.Hits
+        HitsPerPage.raw shouldEqual Key.HitsPerPage
+        Index.raw shouldEqual Key.Index
+        Length.raw shouldEqual Key.Length
+        NbHits.raw shouldEqual Key.NbHits
+        NbPages.raw shouldEqual Key.NbPages
+        Offset.raw shouldEqual Key.Offset
+        Page.raw shouldEqual Key.Page
+        Params.raw shouldEqual Key.Params
+        ProcessingTimeMS.raw shouldEqual Key.ProcessingTimeMS
+        Query.raw shouldEqual Key.Query
+        QueryAfterRemoval.raw shouldEqual Key.QueryAfterRemoval
+        UserData.raw shouldEqual Key.UserData
         Other(unknown).raw shouldEqual unknown
     }
 }
