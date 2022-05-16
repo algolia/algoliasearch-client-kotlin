@@ -11,10 +11,10 @@ import com.algolia.search.model.settings.NumericAttributeFilter
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.settings.SettingsKey
-import com.algolia.search.serialize.internal.Key
-import com.algolia.search.serialize.internal.Route
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.Key
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.serialize.internal.jsonArrayOrNull
 import com.algolia.search.serialize.internal.merge
 import com.algolia.search.serialize.internal.toJsonNoDefaults

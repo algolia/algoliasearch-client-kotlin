@@ -13,9 +13,9 @@ import com.algolia.search.model.response.ResponseSearchRules
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.rule.RuleQuery
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Route
-import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod

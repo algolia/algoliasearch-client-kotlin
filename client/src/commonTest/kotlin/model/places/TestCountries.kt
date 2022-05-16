@@ -250,8 +250,8 @@ import com.algolia.search.model.places.Country.Yemen
 import com.algolia.search.model.places.Country.Zambia
 import com.algolia.search.model.places.Country.Zimbabwe
 import com.algolia.search.serialize.internal.Countries
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestCountries {
 

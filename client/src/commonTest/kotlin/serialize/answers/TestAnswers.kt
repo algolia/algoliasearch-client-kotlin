@@ -4,8 +4,8 @@ import com.algolia.search.ExperimentalAlgoliaClientAPI
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.AnswersQuery
 import com.algolia.search.model.search.Language
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray

@@ -5,10 +5,10 @@ import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.ABTestStatus
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.ExperimentalSerializationApi

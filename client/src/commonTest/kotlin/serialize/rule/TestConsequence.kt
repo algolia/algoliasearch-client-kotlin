@@ -11,9 +11,9 @@ import com.algolia.search.model.rule.Pattern
 import com.algolia.search.model.rule.Promotion
 import com.algolia.search.model.rule.Rule
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.buildJsonArray

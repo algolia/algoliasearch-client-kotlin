@@ -5,8 +5,8 @@ import com.algolia.search.exception.EmptyStringException
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.regexPlaceholder

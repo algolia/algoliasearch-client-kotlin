@@ -10,8 +10,8 @@ import com.algolia.search.model.search.MatchedGeoLocation
 import com.algolia.search.model.search.Point
 import com.algolia.search.model.search.RankingInfo
 import com.algolia.search.model.search.SnippetResult
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.MapSerializer
 import kotlinx.serialization.json.buildJsonObject

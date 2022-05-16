@@ -8,8 +8,8 @@ import com.algolia.search.model.recommend.RecommendationModel
 import com.algolia.search.model.recommend.RecommendationsQuery
 import com.algolia.search.model.recommend.RelatedProductsQuery
 import com.algolia.search.model.search.RecommendSearchOptions
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject

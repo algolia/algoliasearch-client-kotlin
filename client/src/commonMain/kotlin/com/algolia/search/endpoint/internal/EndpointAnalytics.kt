@@ -13,8 +13,8 @@ import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.creation.CreationABTest
 import com.algolia.search.model.response.deletion.DeletionABTest
 import com.algolia.search.model.response.revision.RevisionABTest
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport

@@ -12,13 +12,13 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Key
 import dayInMillis
-import kotlin.test.Test
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import runBlocking
 import setupTrustStoreType
 import shouldEqual
 import shouldNotEqual
+import kotlin.test.Test
 
 internal class TestSuiteAATest {
 

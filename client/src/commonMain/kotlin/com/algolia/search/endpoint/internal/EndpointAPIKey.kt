@@ -77,13 +77,15 @@ internal class EndpointAPIKeyImpl(
         return DeletionAPIKey(
             transport.request<Deletion>(
                 HttpMethod.Delete, CallType.Write, "${Route.KeysV1}/$apiKey", requestOptions
-            ).deletedAt, apiKey
+            ).deletedAt,
+            apiKey
         )
     }
 
     override suspend fun restoreAPIKey(apiKey: APIKey, requestOptions: RequestOptions?): CreationAPIKey {
         return CreationAPIKey(
-            apiKey, transport.request<Creation>(
+            apiKey,
+            transport.request<Creation>(
                 HttpMethod.Post, CallType.Write, "${Route.KeysV1}/$apiKey/restore", requestOptions, ""
             ).createdAt
         )

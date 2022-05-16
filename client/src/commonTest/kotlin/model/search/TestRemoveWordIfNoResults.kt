@@ -6,9 +6,9 @@ import com.algolia.search.model.search.RemoveWordIfNoResults.LastWords
 import com.algolia.search.model.search.RemoveWordIfNoResults.None
 import com.algolia.search.model.search.RemoveWordIfNoResults.Other
 import com.algolia.search.serialize.internal.Key
+import shouldEqual
 import unknown
 import kotlin.test.Test
-import shouldEqual
 
 internal class TestRemoveWordIfNoResults {
 

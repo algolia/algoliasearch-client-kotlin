@@ -5,8 +5,8 @@ import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.serialize.KSerializerVariant
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.ExperimentalSerializationApi

@@ -1,8 +1,8 @@
 package serialize
 
 import com.algolia.search.serialize.internal.Key
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 internal class TestKeys {
 
     @Test

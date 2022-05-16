@@ -6,9 +6,9 @@ import com.algolia.search.model.rule.Anchoring.Is
 import com.algolia.search.model.rule.Anchoring.Other
 import com.algolia.search.model.rule.Anchoring.StartsWith
 import com.algolia.search.serialize.internal.Key
+import shouldEqual
 import unknown
 import kotlin.test.Test
-import shouldEqual
 
 internal class TestAnchoring {
 

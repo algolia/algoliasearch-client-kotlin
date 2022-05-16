@@ -50,8 +50,8 @@ import com.algolia.search.model.settings.SettingsKey.TypoTolerance
 import com.algolia.search.model.settings.SettingsKey.UnretrievableAttributes
 import com.algolia.search.model.settings.SettingsKey.UserData
 import com.algolia.search.serialize.internal.Key
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestSettingsKey {
 

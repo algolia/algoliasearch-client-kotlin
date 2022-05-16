@@ -2,8 +2,8 @@ package serialize.response
 
 import com.algolia.search.model.response.ResponseVariant
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import indexA
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put

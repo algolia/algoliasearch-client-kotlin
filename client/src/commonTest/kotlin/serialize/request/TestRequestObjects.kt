@@ -4,8 +4,8 @@ import attributes
 import attributesJson
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.multipleindex.RequestObjects
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import indexA
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put

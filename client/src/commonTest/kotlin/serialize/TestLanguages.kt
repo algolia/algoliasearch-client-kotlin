@@ -1,8 +1,8 @@
 package serialize
 
 import com.algolia.search.serialize.internal.Languages
-import kotlin.test.Test
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestLanguages {
 

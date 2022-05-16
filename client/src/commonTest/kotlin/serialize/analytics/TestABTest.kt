@@ -5,8 +5,8 @@ import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import indexA
 import indexB
 import kotlinx.serialization.json.buildJsonArray

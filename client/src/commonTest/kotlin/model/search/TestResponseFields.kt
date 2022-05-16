@@ -21,9 +21,9 @@ import com.algolia.search.model.search.ResponseFields.Query
 import com.algolia.search.model.search.ResponseFields.QueryAfterRemoval
 import com.algolia.search.model.search.ResponseFields.UserData
 import com.algolia.search.serialize.internal.Key
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestResponseFields {
 

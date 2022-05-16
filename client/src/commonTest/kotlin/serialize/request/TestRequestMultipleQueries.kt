@@ -6,8 +6,8 @@ import com.algolia.search.model.internal.request.RequestMultipleQueries
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.Key
 import indexA
 import indexB
 import kotlinx.serialization.json.buildJsonArray

@@ -3,8 +3,8 @@ package serialize.synonym
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymType
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.builtins.serializer
 import kotlinx.serialization.json.buildJsonObject

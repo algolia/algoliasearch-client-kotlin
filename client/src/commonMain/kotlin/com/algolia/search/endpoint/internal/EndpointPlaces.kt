@@ -12,8 +12,8 @@ import com.algolia.search.model.response.ResponseSearchPlacesMono
 import com.algolia.search.model.response.ResponseSearchPlacesMulti
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport

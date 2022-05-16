@@ -13,9 +13,9 @@ import com.algolia.search.model.settings.RankingCriterion.Other
 import com.algolia.search.model.settings.RankingCriterion.Proximity
 import com.algolia.search.model.settings.RankingCriterion.Words
 import com.algolia.search.serialize.internal.Key
-import kotlin.test.Test
 import shouldEqual
 import unknown
+import kotlin.test.Test
 
 internal class TestRankingCriterion {
 

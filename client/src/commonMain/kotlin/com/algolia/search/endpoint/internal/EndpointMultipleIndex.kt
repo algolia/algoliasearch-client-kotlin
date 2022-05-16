@@ -18,9 +18,9 @@ import com.algolia.search.model.response.ResponseListIndices
 import com.algolia.search.model.response.ResponseMultiSearch
 import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.ResponseSearches
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Route
 import com.algolia.search.serialize.internal.toBody
 import com.algolia.search.transport.RequestOptions

@@ -21,8 +21,8 @@ import com.algolia.search.model.search.SortFacetsBy
 import com.algolia.search.model.search.TypoTolerance
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import int
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray

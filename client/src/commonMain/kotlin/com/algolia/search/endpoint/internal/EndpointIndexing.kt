@@ -28,21 +28,21 @@ import com.algolia.search.model.response.deletion.DeletionObject
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionObject
 import com.algolia.search.model.task.TaskIndex
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Route
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
-import kotlin.random.Random
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
+import kotlin.random.Random
 
 internal class EndpointIndexingImpl(
     private val transport: Transport,

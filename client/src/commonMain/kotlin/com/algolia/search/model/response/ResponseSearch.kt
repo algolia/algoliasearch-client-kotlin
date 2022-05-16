@@ -21,9 +21,9 @@ import com.algolia.search.model.search.RemoveWordIfNoResults
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.KSerializerFacetMap
 import com.algolia.search.serialize.KSerializerPoint
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.jsonObjectOrNull

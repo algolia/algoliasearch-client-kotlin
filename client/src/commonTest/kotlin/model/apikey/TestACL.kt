@@ -13,9 +13,9 @@ import com.algolia.search.model.apikey.ACL.Search
 import com.algolia.search.model.apikey.ACL.SeeUnretrievableAttributes
 import com.algolia.search.model.apikey.ACL.Settings
 import com.algolia.search.serialize.internal.Key
+import shouldEqual
 import unknown
 import kotlin.test.Test
-import shouldEqual
 
 internal class TestACL {
 

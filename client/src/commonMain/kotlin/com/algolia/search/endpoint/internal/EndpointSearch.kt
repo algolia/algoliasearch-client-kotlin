@@ -21,8 +21,8 @@ import com.algolia.search.model.search.Cursor
 import com.algolia.search.model.search.Facet
 import com.algolia.search.model.search.FacetStats
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.merge
 import com.algolia.search.serialize.internal.toBody
 import com.algolia.search.serialize.internal.toJsonNoDefaults
