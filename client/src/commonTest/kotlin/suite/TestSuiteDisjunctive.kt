@@ -13,7 +13,7 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldBeTrue
 import shouldEqual
 import shouldNotBeNull
@@ -27,7 +27,7 @@ internal class TestSuiteDisjunctive {
 
     @Test
     fun testA() {
-        runBlocking {
+        runTest {
             val brand = "brand".toAttribute()
             val category = "category".toAttribute()
             val stars = "stars".toAttribute()
@@ -74,7 +74,7 @@ internal class TestSuiteDisjunctive {
 
     @Test
     fun testB() {
-        runBlocking {
+        runTest {
             val city = "city".toAttribute()
             val stars = "stars".toAttribute()
             val facilities = "facilities".toAttribute()

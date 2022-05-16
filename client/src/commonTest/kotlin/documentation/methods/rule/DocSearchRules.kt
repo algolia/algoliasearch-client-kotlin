@@ -3,7 +3,7 @@ package documentation.methods.rule
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.RuleQuery
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -27,7 +27,7 @@ internal class DocSearchRules {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val rule = RuleQuery(
                 anchoring = Anchoring.Is,
                 page = 1,

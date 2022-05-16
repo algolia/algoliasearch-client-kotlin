@@ -5,7 +5,7 @@ import com.algolia.search.model.indexing.DeleteByQuery
 import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.search.Point
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -19,7 +19,7 @@ internal class DocDeleteBy {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val query = DeleteByQuery(
                 filters = "category:car",
                 aroundLatLng = Point(40.71f, -74.01f)
@@ -31,7 +31,7 @@ internal class DocDeleteBy {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = DeleteByQuery(
                 filters = "category:car",
                 aroundLatLng = Point(40.71f, -74.01f)

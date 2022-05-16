@@ -7,7 +7,7 @@ import com.algolia.search.serialize.internal.JsonDebug
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
 import loadScratch
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldEqual
 import kotlin.test.Test
 
@@ -19,7 +19,7 @@ internal class TestSuiteBatching {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             val objects = load(ListSerializer(JsonObject.serializer()), "numbers.json")
             val expected = loadScratch("batches_result.json")
             val batches = load(ListSerializer(BatchOperation), "batches.json")

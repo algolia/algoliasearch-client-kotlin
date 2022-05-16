@@ -4,7 +4,7 @@ import com.algolia.search.dsl.requestOptions
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.search.Query
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -20,7 +20,7 @@ internal class DocSearchForFacets {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val attribute = Attribute("category")
 
             index.searchForFacets(attribute, "phone")
@@ -29,7 +29,7 @@ internal class DocSearchForFacets {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val attribute = Attribute("category")
 
             index.searchForFacets(attribute, "phone", Query(filters = "brand:Apple"))
@@ -38,7 +38,7 @@ internal class DocSearchForFacets {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val attribute = Attribute("category")
             val requestOptions = requestOptions {
                 header("X-Algolia-User-ID", "user123")

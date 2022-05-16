@@ -5,6 +5,7 @@ import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
+import kotlinx.coroutines.test.runTest
 
 internal infix fun <T> T.shouldEqual(expected: T) {
     assertEquals(expected, this)
@@ -76,7 +77,7 @@ internal fun <K, V> Map<K, V>.shouldNotBeEmpty() {
 
 internal inline fun <reified T : Throwable> shouldFailWith(noinline block: suspend () -> Unit): T {
     return assertFailsWith(T::class, null) {
-        runBlocking {
+        runTest {
             block()
         }
     }

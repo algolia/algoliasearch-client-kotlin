@@ -6,7 +6,7 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.insights.EventName
 import com.algolia.search.model.insights.UserToken
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -22,7 +22,7 @@ internal class DocViewedFilters {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val userToken = UserToken("user-id")
 
             clientInsights.User(userToken).viewedFilters(

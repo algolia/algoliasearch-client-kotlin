@@ -14,7 +14,7 @@ import dayInMillis
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldEqual
 import shouldFailWith
 import shouldNotBeNull
@@ -39,7 +39,7 @@ internal class TestSuiteABTest {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             indexA.apply { saveObject(data).wait() shouldEqual TaskStatus.Published }
             indexB.apply { saveObject(data).wait() shouldEqual TaskStatus.Published }
             indexA.apply {

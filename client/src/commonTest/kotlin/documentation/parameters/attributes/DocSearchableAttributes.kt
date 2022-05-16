@@ -3,7 +3,7 @@ package documentation.parameters.attributes
 import com.algolia.search.dsl.searchableAttributes
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -19,7 +19,7 @@ internal class DocSearchableAttributes {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 searchableAttributes {
                     +"title,alternativeTitle"

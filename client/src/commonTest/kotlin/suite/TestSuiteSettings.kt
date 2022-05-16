@@ -10,7 +10,7 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.TaskStatus
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldEqual
 import kotlin.test.Test
 
@@ -22,7 +22,7 @@ internal class TestSuiteSettings {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             val settings = load(Settings.serializer(), "settings.json")
 
             index.apply {

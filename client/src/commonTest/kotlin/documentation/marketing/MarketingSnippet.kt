@@ -4,7 +4,7 @@ import com.algolia.search.model.IndexName
 import documentation.client
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -13,7 +13,7 @@ internal class MarketingSnippet {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val index = client.initIndex(IndexName("contacts"))
             val json = buildJsonObject {
                 put("firstname", "Jimmie")

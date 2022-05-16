@@ -4,7 +4,7 @@ import com.algolia.search.dsl.attributesToHighlight
 import com.algolia.search.dsl.query
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,30 +17,26 @@ internal class DocAttributesToHighlight {
 //    }
 
     @Test
-    fun snippet1() {
-        runBlocking {
-            val settings = settings {
-                attributesToHighlight {
-                    +"author"
-                    +"title"
-                    +"content"
-                }
+    fun snippet1() = runTest {
+        val settings = settings {
+            attributesToHighlight {
+                +"author"
+                +"title"
+                +"content"
             }
-
-            index.setSettings(settings)
         }
+
+        index.setSettings(settings)
     }
 
     @Test
-    fun snippet2() {
-        runBlocking {
-            val query = query("query") {
-                attributesToHighlight {
-                    +"*"
-                }
+    fun snippet2() = runTest {
+        val query = query("query") {
+            attributesToHighlight {
+                +"*"
             }
-
-            index.search(query)
         }
+
+        index.search(query)
     }
 }

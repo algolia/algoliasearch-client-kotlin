@@ -1,7 +1,7 @@
 package documentation.methods.indices
 
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class DocDeleteIndex {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             index.deleteIndex()
         }
     }

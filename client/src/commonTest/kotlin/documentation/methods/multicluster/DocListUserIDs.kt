@@ -1,7 +1,7 @@
 package documentation.methods.multicluster
 
 import documentation.client
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -16,7 +16,7 @@ internal class DocListUserIDs {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             client.listUserIDs()
         }
     }

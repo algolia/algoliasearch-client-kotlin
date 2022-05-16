@@ -3,7 +3,7 @@ package documentation.parameters.strategy
 import com.algolia.search.dsl.disablePrefixOnAttributes
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocDisablePrefixOnAttributes {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 disablePrefixOnAttributes { +"sku" }
             }

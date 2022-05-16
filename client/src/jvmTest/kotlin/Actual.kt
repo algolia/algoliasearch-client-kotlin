@@ -69,10 +69,6 @@ internal actual val username: String
         }
     }
 
-internal actual fun runBlocking(coroutineContext: CoroutineContext, block: suspend CoroutineScope.() -> Unit) {
-    kotlinx.coroutines.runBlocking(coroutineContext, block = block)
-}
-
 internal actual object DateFormat {
 
     private val dateFormat = SimpleDateFormat("YYYY-MM-dd-HH-mm-ss").also {

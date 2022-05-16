@@ -13,7 +13,7 @@ import com.algolia.search.serialize.internal.urlEncode
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldBeTrue
 import shouldEqual
 import kotlin.test.Test
@@ -35,7 +35,7 @@ internal class TestSuiteAPIKey {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             clientAdmin1.apply {
                 val response = addAPIKey(params)
 

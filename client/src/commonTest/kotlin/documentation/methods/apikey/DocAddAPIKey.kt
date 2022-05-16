@@ -7,7 +7,7 @@ import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.search.TypoTolerance
 import documentation.client
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -33,7 +33,7 @@ internal class DocAddAPIKey {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val params = APIKeyParams(
                 ACLs = listOf(ACL.Search)
             )
@@ -47,7 +47,7 @@ internal class DocAddAPIKey {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val params = APIKeyParams(
                 ACLs = listOf(ACL.Search),
                 description = "Limited search only API key for algolia.com",

@@ -9,7 +9,7 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.model.task.TaskStatus
 import kotlinx.serialization.json.buildJsonObject
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldEqual
 import kotlin.test.Test
 
@@ -21,7 +21,7 @@ internal class TestSuiteBrowse {
 
     @Test
     fun rules() {
-        runBlocking {
+        runTest {
             val ruleA = load(Rule.serializer(), "rule_brand.json")
             val ruleB = load(Rule.serializer(), "rule_company.json")
             var count = 0
@@ -41,7 +41,7 @@ internal class TestSuiteBrowse {
 
     @Test
     fun synonyms() {
-        runBlocking {
+        runTest {
             val synonymA = Synonym.OneWay("a".toObjectID(), "a", listOf("b"))
             val synonymB = Synonym.Placeholder("b".toObjectID(), Synonym.Placeholder.Token("as"), listOf("sad"))
             var count = 0
@@ -61,7 +61,7 @@ internal class TestSuiteBrowse {
 
     @Test
     fun objects() {
-        runBlocking {
+        runTest {
             val objects = (0 until 10).map { buildJsonObject { } }
 
             index.apply {

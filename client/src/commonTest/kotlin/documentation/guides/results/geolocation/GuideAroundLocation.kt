@@ -9,7 +9,7 @@ import com.algolia.search.dsl.settings
 import com.algolia.search.model.search.AroundRadius
 import com.algolia.search.model.search.Point
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class GuideAroundLocation {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 searchableAttributes {
                     +"name"
@@ -46,7 +46,7 @@ internal class GuideAroundLocation {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query {
                 aroundLatLng = Point(40.71f, -74.01f)
             }
@@ -57,7 +57,7 @@ internal class GuideAroundLocation {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val query = query {
                 aroundLatLngViaIP = true
             }
@@ -68,7 +68,7 @@ internal class GuideAroundLocation {
 
     @Test
     fun snippet4() {
-        runBlocking {
+        runTest {
             val query = query {
                 aroundLatLng = Point(40.71f, -74.01f)
                 aroundRadius = AroundRadius.InMeters(10000000) // 10000km

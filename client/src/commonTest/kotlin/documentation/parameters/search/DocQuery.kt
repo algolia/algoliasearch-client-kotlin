@@ -2,7 +2,7 @@ package documentation.parameters.search
 
 import com.algolia.search.model.search.Query
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -13,14 +13,14 @@ internal class DocQuery {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             index.search(Query("my query"))
         }
     }
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             index.search(Query(""))
         }
     }

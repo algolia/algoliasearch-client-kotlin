@@ -7,7 +7,7 @@ import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.multicluster.UserID
 import documentation.index
 import kotlinx.serialization.Serializable
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -42,14 +42,14 @@ internal class DocGetObjects {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             index.getObject(ObjectID("myID1"))
         }
     }
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val objectID = ObjectID("myID1")
 
             index.getObject(objectID)
@@ -59,14 +59,14 @@ internal class DocGetObjects {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             index.getObjects(listOf(ObjectID("myID1"), ObjectID("myID2")))
         }
     }
 
     @Test
     fun snippet4() {
-        runBlocking {
+        runTest {
             val objectIDs = listOf(ObjectID("myID1"), ObjectID("myID2"))
             val attributes = listOf(Attribute("firstname"), Attribute("lastname"))
 
@@ -76,7 +76,7 @@ internal class DocGetObjects {
 
     @Test
     fun snippet5() {
-        runBlocking {
+        runTest {
             val requestOptions = requestOptions {
                 headerAlgoliaUserId(UserID("user123"))
             }

@@ -3,7 +3,7 @@ package documentation.guides.results.mustdo
 import com.algolia.search.dsl.customRanking
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -12,7 +12,7 @@ internal class GuideCustomRanking {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 customRanking {
                     +Desc("boosted")
@@ -25,7 +25,7 @@ internal class GuideCustomRanking {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 customRanking {
                     +Desc("retweets")
@@ -39,7 +39,7 @@ internal class GuideCustomRanking {
 
     @Test
     fun snippet3() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 customRanking {
                     +Desc("pageviews")
@@ -53,7 +53,7 @@ internal class GuideCustomRanking {
 
     @Test
     fun snippet4() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 customRanking {
                     +Desc("rounded_pageviews")

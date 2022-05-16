@@ -3,7 +3,7 @@ package documentation.methods.synonym
 import com.algolia.search.exception.AlgoliaApiException
 import documentation.index
 import documentation.indexName
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldFailWith
 import kotlin.test.Ignore
 import kotlin.test.Test
@@ -19,7 +19,7 @@ internal class DocCopySynonyms {
     @Test
     fun snippet1() {
         shouldFailWith<AlgoliaApiException> {
-            runBlocking {
+            runTest {
                 index.copySynonyms(indexName)
             }
         }

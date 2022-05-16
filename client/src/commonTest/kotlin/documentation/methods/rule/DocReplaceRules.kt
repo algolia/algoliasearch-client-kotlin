@@ -2,7 +2,7 @@ package documentation.methods.rule
 
 import com.algolia.search.model.rule.Rule
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class DocReplaceRules {
     @Test
     fun snippet1() {
         // Fetch your rules
-        runBlocking {
+        runTest {
             val rules = listOf<Rule>()
 
             index.replaceAllRules(rules, forwardToReplicas = true)

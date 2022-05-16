@@ -3,7 +3,7 @@ package documentation.parameters.languages
 import com.algolia.search.dsl.decompoundedAttributes
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -17,7 +17,7 @@ internal class DocDecompoundedAttributes {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 decompoundedAttributes {
                     german { +"name" }

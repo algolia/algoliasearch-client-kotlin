@@ -4,7 +4,7 @@ import com.algolia.search.dsl.query
 import com.algolia.search.dsl.responseFields
 import com.algolia.search.dsl.settings
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -18,7 +18,7 @@ internal class DocResponseFields {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 responseFields {
                     +Hits
@@ -34,7 +34,7 @@ internal class DocResponseFields {
 
     @Test
     fun snippet2() {
-        runBlocking {
+        runTest {
             val query = query("query") {
                 responseFields {
                     +Hits

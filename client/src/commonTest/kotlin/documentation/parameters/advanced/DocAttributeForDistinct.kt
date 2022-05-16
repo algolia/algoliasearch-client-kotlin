@@ -3,7 +3,7 @@ package documentation.parameters.advanced
 import com.algolia.search.dsl.settings
 import com.algolia.search.model.Attribute
 import documentation.index
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 
@@ -14,7 +14,7 @@ internal class DocAttributeForDistinct {
 
     @Test
     fun snippet1() {
-        runBlocking {
+        runTest {
             val settings = settings {
                 attributeForDistinct = Attribute("url")
             }

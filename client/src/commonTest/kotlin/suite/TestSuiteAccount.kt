@@ -14,7 +14,7 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import runBlocking
+import kotlinx.coroutines.test.runTest
 import shouldBeTrue
 import shouldEqual
 import shouldFailWith
@@ -37,7 +37,7 @@ internal class TestSuiteAccount {
 
     @Test
     fun test() {
-        runBlocking {
+        runTest {
             val rule = load(Rule.serializer(), "rule_one.json")
 
             shouldFailWith<IllegalArgumentException> {
