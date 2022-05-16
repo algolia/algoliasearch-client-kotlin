@@ -8,8 +8,8 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.model.task.TaskStatus
-import kotlinx.serialization.json.buildJsonObject
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.json.buildJsonObject
 import shouldEqual
 import kotlin.test.Test
 

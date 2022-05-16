@@ -3,11 +3,11 @@ package documentation.guides.optimize.typo
 import com.algolia.search.dsl.ranking
 import com.algolia.search.dsl.settings
 import documentation.index
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.long
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 

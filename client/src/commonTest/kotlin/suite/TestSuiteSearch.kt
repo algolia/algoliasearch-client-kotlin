@@ -22,11 +22,11 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Key
 import io.ktor.http.parseUrlEncodedParameters
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import kotlinx.coroutines.test.runTest
 import shouldBeNull
 import shouldBeTrue
 import shouldContain

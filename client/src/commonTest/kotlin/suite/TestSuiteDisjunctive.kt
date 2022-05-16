@@ -11,9 +11,9 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
-import kotlinx.coroutines.test.runTest
 import shouldBeTrue
 import shouldEqual
 import shouldNotBeNull

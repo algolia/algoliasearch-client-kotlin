@@ -10,10 +10,10 @@ import com.algolia.search.model.multicluster.UserID
 import com.algolia.search.model.multipleindex.BatchOperationIndex
 import documentation.client
 import documentation.indexName
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 

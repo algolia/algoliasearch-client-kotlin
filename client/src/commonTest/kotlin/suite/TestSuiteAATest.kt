@@ -12,9 +12,9 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Key
 import dayInMillis
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import kotlinx.coroutines.test.runTest
 import setupTrustStoreType
 import shouldEqual
 import shouldNotEqual

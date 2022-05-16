@@ -9,10 +9,10 @@ import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.multipleindex.RequestObjects
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
-import kotlinx.coroutines.test.runTest
 import shouldBeTrue
 import shouldEqual
 import kotlin.test.Test

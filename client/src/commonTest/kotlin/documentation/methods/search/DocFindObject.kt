@@ -3,8 +3,8 @@ package documentation.methods.search
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.search.Query
 import documentation.index
-import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.json.jsonPrimitive
 import kotlin.test.Ignore
 import kotlin.test.Test
 

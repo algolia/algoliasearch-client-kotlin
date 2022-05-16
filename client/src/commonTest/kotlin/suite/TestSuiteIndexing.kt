@@ -11,11 +11,11 @@ import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.Json
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
-import kotlinx.coroutines.test.runTest
 import shouldBeTrue
 import shouldEqual
 import kotlin.test.Test

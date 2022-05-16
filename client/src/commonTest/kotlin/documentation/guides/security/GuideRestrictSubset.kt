@@ -12,9 +12,9 @@ import com.algolia.search.model.apikey.SecuredAPIKeyRestriction
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.model.search.Query
 import documentation.index
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 

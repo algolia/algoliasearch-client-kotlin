@@ -2,8 +2,8 @@ package documentation.reference
 
 import com.algolia.search.model.IndexName
 import documentation.client
-import kotlinx.serialization.Serializable
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.Serializable
 import kotlin.test.Ignore
 import kotlin.test.Test
 

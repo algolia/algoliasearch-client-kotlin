@@ -13,9 +13,9 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.headersOf
 import io.ktor.utils.io.ByteReadChannel
-import kotlin.test.Test
 import kotlinx.coroutines.test.runTest
 import shouldEqual
+import kotlin.test.Test
 
 internal class TestMockEngine {
 

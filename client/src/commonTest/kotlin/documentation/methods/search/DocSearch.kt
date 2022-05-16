@@ -10,11 +10,11 @@ import com.algolia.search.model.search.Query
 import com.algolia.search.transport.customRequest
 import documentation.client
 import io.ktor.http.HttpMethod
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonObject
-import kotlinx.coroutines.test.runTest
 import kotlin.test.Ignore
 import kotlin.test.Test
 

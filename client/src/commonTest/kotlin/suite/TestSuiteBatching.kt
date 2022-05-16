@@ -4,10 +4,10 @@ import clientAdmin1
 import com.algolia.search.model.indexing.BatchOperation
 import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.internal.JsonDebug
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
 import loadScratch
-import kotlinx.coroutines.test.runTest
 import shouldEqual
 import kotlin.test.Test
 

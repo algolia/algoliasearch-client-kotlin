@@ -10,9 +10,9 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import io.ktor.http.HttpStatusCode
+import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
-import kotlinx.coroutines.test.runTest
 import shouldEqual
 import shouldFailWith
 import shouldNotBeNull

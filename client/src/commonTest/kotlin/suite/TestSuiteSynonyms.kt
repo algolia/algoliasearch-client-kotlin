@@ -9,7 +9,6 @@ import com.algolia.search.model.synonym.SynonymType
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
 import io.ktor.http.HttpStatusCode
-import kotlin.test.Test
 import kotlinx.coroutines.test.runTest
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
@@ -17,6 +16,7 @@ import shouldBeTrue
 import shouldContain
 import shouldEqual
 import shouldFailWith
+import kotlin.test.Test
 
 internal class TestSuiteSynonyms {
 
@@ -62,9 +62,11 @@ internal class TestSuiteSynonyms {
                 synonyms shouldContain synonymAlternative2
             }
             deleteSynonym(gba).wait() shouldEqual TaskStatus.Published
-            (shouldFailWith<AlgoliaApiException> {
-                getSynonym(gba)
-            }).httpErrorCode shouldEqual HttpStatusCode.NotFound.value
+            (
+                shouldFailWith<AlgoliaApiException> {
+                    getSynonym(gba)
+                }
+                ).httpErrorCode shouldEqual HttpStatusCode.NotFound.value
 
             clearSynonyms().wait() shouldEqual TaskStatus.Published
             searchSynonyms(SynonymQuery(page = 0, hitsPerPage = 10)).nbHits shouldEqual 0

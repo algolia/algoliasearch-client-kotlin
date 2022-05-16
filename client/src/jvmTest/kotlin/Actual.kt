@@ -8,12 +8,10 @@ import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.configuration.Region
 import com.algolia.search.helper.toAPIKey
 import com.algolia.search.helper.toApplicationID
-import kotlinx.coroutines.CoroutineScope
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.TimeZone
-import kotlin.coroutines.CoroutineContext
 
 internal actual val clientSearch = ClientSearch(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),

@@ -6,8 +6,8 @@ import com.algolia.search.model.ObjectID
 import com.algolia.search.model.indexing.Indexable
 import com.algolia.search.model.multicluster.UserID
 import documentation.index
-import kotlinx.serialization.Serializable
 import kotlinx.coroutines.test.runTest
+import kotlinx.serialization.Serializable
 import kotlin.test.Ignore
 import kotlin.test.Test
 
