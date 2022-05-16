@@ -261,7 +261,7 @@ internal object Key {
     const val Id: String = "id"
     const val Highlighted: String = "highlighted"
     const val AlgoliaApplicationID: String = "X-Algolia-Application-Id"
-    const val AlgoliaAPIKey: String = "X-Algolia-API-"
+    const val AlgoliaAPIKey: String = "X-Algolia-API-Key"
     const val Primary: String = "primary"
     const val SourceABTest: String = "sourceABTest"
     const val ABTest: String = "abTest"
