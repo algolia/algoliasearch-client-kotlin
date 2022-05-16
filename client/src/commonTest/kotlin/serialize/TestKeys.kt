@@ -204,7 +204,7 @@ internal class TestKeys {
         Key.Key shouldEqual "key"
         Key.UserIDs shouldEqual "userIDs"
         Key.TopUsers shouldEqual "topUsers"
-        Key.Key shouldEqual "keys"
+        Key.Keys shouldEqual "keys"
         Key._HighlightResult shouldEqual "_highlightResult"
         Key._SnippetResult shouldEqual "_snippetResult"
         Key._RankingInfo shouldEqual "_rankingInfo"
