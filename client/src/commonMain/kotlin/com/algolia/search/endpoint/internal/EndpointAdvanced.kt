@@ -16,7 +16,7 @@ import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyLength
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyType
-import com.algolia.search.serialize.RouteLogs
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
@@ -75,7 +75,7 @@ internal class EndpointAdvancedImpl(
             parameter(KeyLength, hitsPerPage)
             parameter(KeyType, logType?.raw)
         }
-        return transport.request(HttpMethod.Get, CallType.Read, RouteLogs, options)
+        return transport.request(HttpMethod.Get, CallType.Read, Route.Logs, options)
     }
 }
 

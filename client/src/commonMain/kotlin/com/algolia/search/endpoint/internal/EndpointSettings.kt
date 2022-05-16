@@ -15,7 +15,7 @@ import com.algolia.search.serialize.KeyAttributesToIndex
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.KeyNumericAttributesToIndex
 import com.algolia.search.serialize.KeySlaves
-import com.algolia.search.serialize.RouteSettings
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.internal.jsonArrayOrNull
@@ -35,7 +35,7 @@ internal class EndpointSettingsImpl(
 ) : EndpointSettings {
 
     override suspend fun getSettings(requestOptions: RequestOptions?): Settings {
-        val path = indexName.toPath("/$RouteSettings")
+        val path = indexName.toPath("/${Route.Settings}")
         val json = transport.request<JsonObject>(HttpMethod.Get, CallType.Read, path, requestOptions)
         // The following lines handle the old names of attributes, thus providing backward compatibility.
         val settings = JsonNonStrict.decodeFromJsonElement(Settings.serializer(), json)
@@ -69,7 +69,7 @@ internal class EndpointSettingsImpl(
             parameter(KeyForwardToReplicas, forwardToReplicas)
         }
 
-        return transport.request(HttpMethod.Put, CallType.Write, indexName.toPath("/$RouteSettings"), options, body)
+        return transport.request(HttpMethod.Put, CallType.Write, indexName.toPath("/${Route.Settings}"), options, body)
     }
 
     override suspend fun setSettings(

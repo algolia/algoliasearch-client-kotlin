@@ -32,8 +32,7 @@ import com.algolia.search.model.task.TaskStatus
 import com.algolia.search.serialize.KeyLength
 import com.algolia.search.serialize.KeyOffset
 import com.algolia.search.serialize.KeyType
-import com.algolia.search.serialize.RouteLogs
-import com.algolia.search.serialize.RouteTask
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.CustomRequester
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
@@ -159,7 +158,7 @@ internal class ClientSearchImpl internal constructor(
         return transport.request(
             HttpMethod.Get,
             CallType.Read,
-            "$RouteTask/$taskID",
+            "${Route.Task}/$taskID",
             requestOptions
         )
     }
@@ -181,6 +180,6 @@ internal class ClientSearchImpl internal constructor(
             parameter(KeyType, logType?.raw)
         }
 
-        return transport.request(HttpMethod.Get, CallType.Read, RouteLogs, options)
+        return transport.request(HttpMethod.Get, CallType.Read, Route.Logs, options)
     }
 }

@@ -15,8 +15,8 @@ import com.algolia.search.model.search.Point
 import com.algolia.search.serialize.KeyAroundLatLng
 import com.algolia.search.serialize.KeyHitsPerPage
 import com.algolia.search.serialize.KeyLanguage
-import com.algolia.search.serialize.RoutePlaces
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
@@ -31,7 +31,7 @@ internal class EndpointPlacesImpl(
     ): ResponseSearchPlacesMulti {
         val body = JsonNoDefaults.encodeToString(PlacesQuery.serializer(), query)
 
-        return transport.request(HttpMethod.Post, CallType.Read, "$RoutePlaces/query", requestOptions, body)
+        return transport.request(HttpMethod.Post, CallType.Read, "${Route.Places}/query", requestOptions, body)
     }
 
     override suspend fun searchPlaces(
@@ -42,11 +42,11 @@ internal class EndpointPlacesImpl(
         val copy = query.copy().apply { this.language = language }
         val body = JsonNoDefaults.encodeToString(PlacesQuery.serializer(), copy)
 
-        return transport.request(HttpMethod.Post, CallType.Read, "$RoutePlaces/query", requestOptions, body)
+        return transport.request(HttpMethod.Post, CallType.Read, "${Route.Places}/query", requestOptions, body)
     }
 
     override suspend fun getByObjectID(objectID: ObjectID, requestOptions: RequestOptions?): PlaceLanguages {
-        return transport.request(HttpMethod.Get, CallType.Read, "$RoutePlaces/$objectID", requestOptions)
+        return transport.request(HttpMethod.Get, CallType.Read, "${Route.Places}/$objectID", requestOptions)
     }
 
     override suspend fun reverseGeocoding(
@@ -59,7 +59,7 @@ internal class EndpointPlacesImpl(
             parameter(KeyHitsPerPage, hitsPerPage)
         }
 
-        return transport.request(HttpMethod.Get, CallType.Read, "$RoutePlaces/reverse", options)
+        return transport.request(HttpMethod.Get, CallType.Read, "${Route.Places}/reverse", options)
     }
 
     override suspend fun reverseGeocoding(
@@ -74,7 +74,7 @@ internal class EndpointPlacesImpl(
             parameter(KeyLanguage, language.raw)
         }
 
-        return transport.request(HttpMethod.Get, CallType.Read, "$RoutePlaces/reverse", options)
+        return transport.request(HttpMethod.Get, CallType.Read, "${Route.Places}/reverse", options)
     }
 }
 

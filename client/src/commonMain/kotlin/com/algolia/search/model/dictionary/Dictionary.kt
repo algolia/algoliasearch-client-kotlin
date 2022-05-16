@@ -8,7 +8,7 @@ import com.algolia.search.model.internal.Raw
 import com.algolia.search.serialize.KeyCompounds
 import com.algolia.search.serialize.KeyPlurals
 import com.algolia.search.serialize.KeyStopwords
-import com.algolia.search.serialize.RouteDictionaries
+import com.algolia.search.serialize.internal.Route
 import kotlinx.serialization.Serializable
 
 /**
@@ -33,7 +33,7 @@ public sealed class Dictionary<T : DictionaryEntry>(
     }
 
     internal fun toPath(suffix: String? = null): String {
-        return "$RouteDictionaries/${encode()}" + (suffix ?: "")
+        return "${Route.Dictionaries}/${encode()}" + (suffix ?: "")
     }
 
     override fun toString(): String {

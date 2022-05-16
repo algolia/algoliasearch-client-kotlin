@@ -1,14 +1,14 @@
 package serialize
 
-import com.algolia.search.serialize.RouteABTestsV2
-import com.algolia.search.serialize.RouteClustersV1
-import com.algolia.search.serialize.RouteEventsV1
-import com.algolia.search.serialize.RouteIndexesV1
-import com.algolia.search.serialize.RouteKeysV1
-import com.algolia.search.serialize.RouteLogs
-import com.algolia.search.serialize.RouteRules
-import com.algolia.search.serialize.RouteSettings
-import com.algolia.search.serialize.RouteSynonyms
+import com.algolia.search.serialize.internal.RouteABTestsV2
+import com.algolia.search.serialize.internal.RouteClustersV1
+import com.algolia.search.serialize.internal.RouteEventsV1
+import com.algolia.search.serialize.internal.RouteIndexesV1
+import com.algolia.search.serialize.internal.RouteKeysV1
+import com.algolia.search.serialize.internal.RouteLogs
+import com.algolia.search.serialize.internal.RouteRules
+import com.algolia.search.serialize.internal.RouteSettings
+import com.algolia.search.serialize.internal.RouteSynonyms
 import shouldEqual
 import kotlin.test.Test
 

@@ -17,9 +17,9 @@ import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
 import com.algolia.search.serialize.KeyForwardToReplicas
 import com.algolia.search.serialize.KeyReplaceExistingSynonyms
-import com.algolia.search.serialize.RouteSynonyms
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
@@ -35,7 +35,7 @@ internal class EndpointSynonymImpl(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?,
     ): RevisionSynonym {
-        val path = indexName.toPath("/$RouteSynonyms/${synonym.objectID}")
+        val path = indexName.toPath("/${Route.Synonyms}/${synonym.objectID}")
         val body = Json.encodeToString(Synonym, synonym)
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)
@@ -51,7 +51,7 @@ internal class EndpointSynonymImpl(
         requestOptions: RequestOptions?,
     ): RevisionIndex {
         if (synonyms.isEmpty()) throw EmptyListException("synonyms")
-        val path = indexName.toPath("/$RouteSynonyms/batch")
+        val path = indexName.toPath("/${Route.Synonyms}/batch")
         val body = Json.encodeToString(ListSerializer(Synonym), synonyms)
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)
@@ -62,7 +62,7 @@ internal class EndpointSynonymImpl(
     }
 
     override suspend fun getSynonym(objectID: ObjectID, requestOptions: RequestOptions?): Synonym {
-        val path = indexName.toPath("/$RouteSynonyms/$objectID")
+        val path = indexName.toPath("/${Route.Synonyms}/$objectID")
 
         return transport.request(HttpMethod.Get, CallType.Read, path, requestOptions)
     }
@@ -72,7 +72,7 @@ internal class EndpointSynonymImpl(
         forwardToReplicas: Boolean?,
         requestOptions: RequestOptions?,
     ): DeletionIndex {
-        val path = indexName.toPath("/$RouteSynonyms/$objectID")
+        val path = indexName.toPath("/${Route.Synonyms}/$objectID")
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)
         }
@@ -84,14 +84,14 @@ internal class EndpointSynonymImpl(
         query: SynonymQuery,
         requestOptions: RequestOptions?,
     ): ResponseSearchSynonyms {
-        val path = indexName.toPath("/$RouteSynonyms/search")
+        val path = indexName.toPath("/${Route.Synonyms}/search")
         val body = JsonNoDefaults.encodeToString(SynonymQuery.serializer(), query)
 
         return transport.request(HttpMethod.Post, CallType.Read, path, requestOptions, body)
     }
 
     override suspend fun clearSynonyms(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): RevisionIndex {
-        val path = indexName.toPath("/$RouteSynonyms/clear")
+        val path = indexName.toPath("/${Route.Synonyms}/clear")
         val options = requestOptionsBuilder(requestOptions) {
             parameter(KeyForwardToReplicas, forwardToReplicas)
         }

@@ -8,8 +8,8 @@ import com.algolia.search.model.recommend.RelatedProductsQuery
 import com.algolia.search.model.recommend.internal.RecommendationsRequests
 import com.algolia.search.model.recommend.internal.RecommendationsResponse
 import com.algolia.search.model.response.ResponseSearch
-import com.algolia.search.serialize.RouteIndexesV1
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
@@ -60,7 +60,7 @@ internal class EndpointRecommendImpl(
     ): RecommendationsResponse = transport.request(
         HttpMethod.Post,
         CallType.Read,
-        "$RouteIndexesV1/*/recommendations",
+        "${Route.IndexesV1}/*/recommendations",
         requestOptions,
         body
     )

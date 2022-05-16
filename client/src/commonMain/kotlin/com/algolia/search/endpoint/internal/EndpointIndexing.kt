@@ -31,20 +31,20 @@ import com.algolia.search.model.task.TaskIndex
 import com.algolia.search.serialize.KeyAttributesToRetrieve
 import com.algolia.search.serialize.KeyCreateIfNotExists
 import com.algolia.search.serialize.KeyRequests
-import com.algolia.search.serialize.RouteIndexesV1
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
+import kotlin.random.Random
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
-import kotlin.random.Random
 
 internal class EndpointIndexingImpl(
     private val transport: Transport,
@@ -184,7 +184,7 @@ internal class EndpointIndexingImpl(
         val requests = objectIDs.map { RequestObjects(indexName, it, attributesToRetrieve) }
         val body = JsonNoDefaults.encodeToString(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
-        return transport.request(HttpMethod.Post, CallType.Read, "$RouteIndexesV1/*/objects", requestOptions, body)
+        return transport.request(HttpMethod.Post, CallType.Read, "${Route.IndexesV1}/*/objects", requestOptions, body)
     }
 
     override suspend fun partialUpdateObject(

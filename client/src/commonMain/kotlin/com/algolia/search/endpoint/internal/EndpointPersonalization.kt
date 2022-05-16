@@ -8,9 +8,8 @@ import com.algolia.search.model.insights.UserToken
 import com.algolia.search.model.personalization.PersonalizationProfileResponse
 import com.algolia.search.model.personalization.PersonalizationStrategy
 import com.algolia.search.model.personalization.SetPersonalizationStrategyResponse
-import com.algolia.search.serialize.RoutePersonalization
-import com.algolia.search.serialize.RouteProfiles
 import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
@@ -26,7 +25,7 @@ internal class EndpointPersonalizationImpl(
         return transport.request(
             HttpMethod.Get,
             CallType.Read,
-            "$RouteProfiles/personalization/${userToken.raw}",
+            "${Route.Profiles}/personalization/${userToken.raw}",
             requestOptions
         )
     }
@@ -35,7 +34,7 @@ internal class EndpointPersonalizationImpl(
         return transport.request(
             HttpMethod.Delete,
             CallType.Write,
-            "$RouteProfiles/${userToken.raw}",
+            "${Route.Profiles}/${userToken.raw}",
             requestOptions
         )
     }
@@ -49,7 +48,7 @@ internal class EndpointPersonalizationImpl(
         return transport.request(
             HttpMethod.Post,
             CallType.Write,
-            RoutePersonalization,
+            Route.Personalization,
             requestOptions,
             body
         )
@@ -59,7 +58,7 @@ internal class EndpointPersonalizationImpl(
         return transport.request(
             HttpMethod.Get,
             CallType.Read,
-            RoutePersonalization,
+            Route.Personalization,
             requestOptions
         )
     }

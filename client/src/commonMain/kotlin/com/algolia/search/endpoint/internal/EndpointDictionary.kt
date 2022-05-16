@@ -17,9 +17,9 @@ import com.algolia.search.model.response.ResponseDictionary
 import com.algolia.search.model.response.ResponseSearchDictionaries
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.serialize.RouteDictionaries
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.JsonNonStrict
+import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import com.algolia.search.util.internal.cast
@@ -119,13 +119,13 @@ internal class EndpointDictionaryImpl(
         dictionarySettings: DictionarySettings,
         requestOptions: RequestOptions?,
     ): ResponseDictionary {
-        val path = "$RouteDictionaries/$ENDPOINT_SETTINGS"
+        val path = "${Route.Dictionaries}/$ENDPOINT_SETTINGS"
         val body = JsonNoDefaults.encodeToString(DictionarySettings.serializer(), dictionarySettings)
         return transport.request(HttpMethod.Put, CallType.Write, path, requestOptions, body)
     }
 
     override suspend fun getDictionarySettings(requestOptions: RequestOptions?): DictionarySettings {
-        val path = "$RouteDictionaries/$ENDPOINT_SETTINGS"
+        val path = "${Route.Dictionaries}/$ENDPOINT_SETTINGS"
         return transport.request(HttpMethod.Get, CallType.Read, path, requestOptions)
     }
 
