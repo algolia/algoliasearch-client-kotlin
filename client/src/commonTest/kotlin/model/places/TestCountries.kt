@@ -249,510 +249,262 @@ import com.algolia.search.model.places.Country.WesternSahara
 import com.algolia.search.model.places.Country.Yemen
 import com.algolia.search.model.places.Country.Zambia
 import com.algolia.search.model.places.Country.Zimbabwe
-import com.algolia.search.serialize.KeyAfghanistan
-import com.algolia.search.serialize.KeyAlandIslands
-import com.algolia.search.serialize.KeyAlbania
-import com.algolia.search.serialize.KeyAlgeria
-import com.algolia.search.serialize.KeyAmericanSamoa
-import com.algolia.search.serialize.KeyAndorra
-import com.algolia.search.serialize.KeyAngola
-import com.algolia.search.serialize.KeyAnguilla
-import com.algolia.search.serialize.KeyAntarctica
-import com.algolia.search.serialize.KeyAntiguaAndBarbuda
-import com.algolia.search.serialize.KeyArgentina
-import com.algolia.search.serialize.KeyArmenia
-import com.algolia.search.serialize.KeyAruba
-import com.algolia.search.serialize.KeyAustralia
-import com.algolia.search.serialize.KeyAustria
-import com.algolia.search.serialize.KeyAzerbaijan
-import com.algolia.search.serialize.KeyBahamas
-import com.algolia.search.serialize.KeyBahrain
-import com.algolia.search.serialize.KeyBailiwickOfGuernsey
-import com.algolia.search.serialize.KeyBangladesh
-import com.algolia.search.serialize.KeyBarbados
-import com.algolia.search.serialize.KeyBelarus
-import com.algolia.search.serialize.KeyBelgium
-import com.algolia.search.serialize.KeyBelize
-import com.algolia.search.serialize.KeyBenin
-import com.algolia.search.serialize.KeyBermuda
-import com.algolia.search.serialize.KeyBhutan
-import com.algolia.search.serialize.KeyBolivia
-import com.algolia.search.serialize.KeyBosniaAndHerzegovina
-import com.algolia.search.serialize.KeyBotswana
-import com.algolia.search.serialize.KeyBouvetIsland
-import com.algolia.search.serialize.KeyBrazil
-import com.algolia.search.serialize.KeyBritishIndianOceanTerritory
-import com.algolia.search.serialize.KeyBruneiDarussalam
-import com.algolia.search.serialize.KeyBulgaria
-import com.algolia.search.serialize.KeyBurkinaFaso
-import com.algolia.search.serialize.KeyBurundi
-import com.algolia.search.serialize.KeyCaboVerde
-import com.algolia.search.serialize.KeyCambodia
-import com.algolia.search.serialize.KeyCameroon
-import com.algolia.search.serialize.KeyCanada
-import com.algolia.search.serialize.KeyCaribbeanNetherlands
-import com.algolia.search.serialize.KeyCaymanIslands
-import com.algolia.search.serialize.KeyCentralAfricanRepublic
-import com.algolia.search.serialize.KeyChad
-import com.algolia.search.serialize.KeyChile
-import com.algolia.search.serialize.KeyChina
-import com.algolia.search.serialize.KeyChristmasIsland
-import com.algolia.search.serialize.KeyCocosIslands
-import com.algolia.search.serialize.KeyColombia
-import com.algolia.search.serialize.KeyComoros
-import com.algolia.search.serialize.KeyCookIslands
-import com.algolia.search.serialize.KeyCostaRica
-import com.algolia.search.serialize.KeyCroatia
-import com.algolia.search.serialize.KeyCuba
-import com.algolia.search.serialize.KeyCuracao
-import com.algolia.search.serialize.KeyCyprus
-import com.algolia.search.serialize.KeyCzechRepublic
-import com.algolia.search.serialize.KeyDemocraticRepublicOfTheCongo
-import com.algolia.search.serialize.KeyDenmark
-import com.algolia.search.serialize.KeyDjibouti
-import com.algolia.search.serialize.KeyDominica
-import com.algolia.search.serialize.KeyDominicanRepublic
-import com.algolia.search.serialize.KeyEcuador
-import com.algolia.search.serialize.KeyEgypt
-import com.algolia.search.serialize.KeyElSalvador
-import com.algolia.search.serialize.KeyEquatorialGuinea
-import com.algolia.search.serialize.KeyEritrea
-import com.algolia.search.serialize.KeyEstonia
-import com.algolia.search.serialize.KeyEswatini
-import com.algolia.search.serialize.KeyEthiopia
-import com.algolia.search.serialize.KeyFalklandIslands
-import com.algolia.search.serialize.KeyFaroeIslands
-import com.algolia.search.serialize.KeyFiji
-import com.algolia.search.serialize.KeyFinland
-import com.algolia.search.serialize.KeyFrance
-import com.algolia.search.serialize.KeyFrenchGuiana
-import com.algolia.search.serialize.KeyFrenchPolynesia
-import com.algolia.search.serialize.KeyFrenchSouthernAndAntarcticLands
-import com.algolia.search.serialize.KeyGabon
-import com.algolia.search.serialize.KeyGambia
-import com.algolia.search.serialize.KeyGeorgia
-import com.algolia.search.serialize.KeyGermany
-import com.algolia.search.serialize.KeyGhana
-import com.algolia.search.serialize.KeyGibraltar
-import com.algolia.search.serialize.KeyGreece
-import com.algolia.search.serialize.KeyGreenland
-import com.algolia.search.serialize.KeyGrenada
-import com.algolia.search.serialize.KeyGuadeloupe
-import com.algolia.search.serialize.KeyGuam
-import com.algolia.search.serialize.KeyGuatemala
-import com.algolia.search.serialize.KeyGuinea
-import com.algolia.search.serialize.KeyGuineaBissau
-import com.algolia.search.serialize.KeyGuyana
-import com.algolia.search.serialize.KeyHaiti
-import com.algolia.search.serialize.KeyHeardIslandAndMcDonaldIslands
-import com.algolia.search.serialize.KeyHonduras
-import com.algolia.search.serialize.KeyHongKong
-import com.algolia.search.serialize.KeyHungary
-import com.algolia.search.serialize.KeyIceland
-import com.algolia.search.serialize.KeyIndia
-import com.algolia.search.serialize.KeyIndonesia
-import com.algolia.search.serialize.KeyIran
-import com.algolia.search.serialize.KeyIraq
-import com.algolia.search.serialize.KeyIreland
-import com.algolia.search.serialize.KeyIsleOfMan
-import com.algolia.search.serialize.KeyIsrael
-import com.algolia.search.serialize.KeyItaly
-import com.algolia.search.serialize.KeyIvoryCoast
-import com.algolia.search.serialize.KeyJamaica
-import com.algolia.search.serialize.KeyJapan
-import com.algolia.search.serialize.KeyJersey
-import com.algolia.search.serialize.KeyJordan
-import com.algolia.search.serialize.KeyKazakhstan
-import com.algolia.search.serialize.KeyKenya
-import com.algolia.search.serialize.KeyKiribati
-import com.algolia.search.serialize.KeyKuwait
-import com.algolia.search.serialize.KeyKyrgyzstan
-import com.algolia.search.serialize.KeyLaos
-import com.algolia.search.serialize.KeyLatvia
-import com.algolia.search.serialize.KeyLebanon
-import com.algolia.search.serialize.KeyLesotho
-import com.algolia.search.serialize.KeyLiberia
-import com.algolia.search.serialize.KeyLibya
-import com.algolia.search.serialize.KeyLiechtenstein
-import com.algolia.search.serialize.KeyLithuania
-import com.algolia.search.serialize.KeyLuxembourg
-import com.algolia.search.serialize.KeyMacau
-import com.algolia.search.serialize.KeyMadagascar
-import com.algolia.search.serialize.KeyMalawi
-import com.algolia.search.serialize.KeyMalaysia
-import com.algolia.search.serialize.KeyMaldives
-import com.algolia.search.serialize.KeyMali
-import com.algolia.search.serialize.KeyMalta
-import com.algolia.search.serialize.KeyMarshallIslands
-import com.algolia.search.serialize.KeyMartinique
-import com.algolia.search.serialize.KeyMauritania
-import com.algolia.search.serialize.KeyMauritius
-import com.algolia.search.serialize.KeyMayotte
-import com.algolia.search.serialize.KeyMexico
-import com.algolia.search.serialize.KeyMicronesia
-import com.algolia.search.serialize.KeyMoldova
-import com.algolia.search.serialize.KeyMonaco
-import com.algolia.search.serialize.KeyMongolia
-import com.algolia.search.serialize.KeyMontenegro
-import com.algolia.search.serialize.KeyMontserrat
-import com.algolia.search.serialize.KeyMorocco
-import com.algolia.search.serialize.KeyMozambique
-import com.algolia.search.serialize.KeyMyanmar
-import com.algolia.search.serialize.KeyNamibia
-import com.algolia.search.serialize.KeyNauru
-import com.algolia.search.serialize.KeyNepal
-import com.algolia.search.serialize.KeyNetherlands
-import com.algolia.search.serialize.KeyNewCaledonia
-import com.algolia.search.serialize.KeyNewZealand
-import com.algolia.search.serialize.KeyNicaragua
-import com.algolia.search.serialize.KeyNiger
-import com.algolia.search.serialize.KeyNigeria
-import com.algolia.search.serialize.KeyNiue
-import com.algolia.search.serialize.KeyNorfolkIsland
-import com.algolia.search.serialize.KeyNorthKorea
-import com.algolia.search.serialize.KeyNorthMacedonia
-import com.algolia.search.serialize.KeyNorthernMarianaIslands
-import com.algolia.search.serialize.KeyNorway
-import com.algolia.search.serialize.KeyOman
-import com.algolia.search.serialize.KeyPakistan
-import com.algolia.search.serialize.KeyPalau
-import com.algolia.search.serialize.KeyPalestine
-import com.algolia.search.serialize.KeyPanama
-import com.algolia.search.serialize.KeyPapuaNewGuinea
-import com.algolia.search.serialize.KeyParaguay
-import com.algolia.search.serialize.KeyPeru
-import com.algolia.search.serialize.KeyPhilippines
-import com.algolia.search.serialize.KeyPitcairnIslands
-import com.algolia.search.serialize.KeyPoland
-import com.algolia.search.serialize.KeyPortugal
-import com.algolia.search.serialize.KeyPuertoRico
-import com.algolia.search.serialize.KeyQatar
-import com.algolia.search.serialize.KeyRepublicOfTheCongo
-import com.algolia.search.serialize.KeyReunion
-import com.algolia.search.serialize.KeyRomania
-import com.algolia.search.serialize.KeyRussia
-import com.algolia.search.serialize.KeyRwanda
-import com.algolia.search.serialize.KeySaintBarthelemy
-import com.algolia.search.serialize.KeySaintHelena
-import com.algolia.search.serialize.KeySaintKittsAndNevis
-import com.algolia.search.serialize.KeySaintLucia
-import com.algolia.search.serialize.KeySaintMartin
-import com.algolia.search.serialize.KeySaintPierreAndMiquelon
-import com.algolia.search.serialize.KeySaintVincentAndTheGrenadines
-import com.algolia.search.serialize.KeySamoa
-import com.algolia.search.serialize.KeySanMarino
-import com.algolia.search.serialize.KeySaoTomeAndPrincipe
-import com.algolia.search.serialize.KeySaudiArabia
-import com.algolia.search.serialize.KeySenegal
-import com.algolia.search.serialize.KeySerbia
-import com.algolia.search.serialize.KeySeychelles
-import com.algolia.search.serialize.KeySierraLeone
-import com.algolia.search.serialize.KeySingapore
-import com.algolia.search.serialize.KeySintMaarten
-import com.algolia.search.serialize.KeySlovakia
-import com.algolia.search.serialize.KeySlovenia
-import com.algolia.search.serialize.KeySolomonIslands
-import com.algolia.search.serialize.KeySomalia
-import com.algolia.search.serialize.KeySouthAfrica
-import com.algolia.search.serialize.KeySouthGeorgiaAndTheSouthSandwichIslands
-import com.algolia.search.serialize.KeySouthKorea
-import com.algolia.search.serialize.KeySouthSudan
-import com.algolia.search.serialize.KeySpain
-import com.algolia.search.serialize.KeySriLanka
-import com.algolia.search.serialize.KeySudan
-import com.algolia.search.serialize.KeySuriname
-import com.algolia.search.serialize.KeySvalbardAndJanMayen
-import com.algolia.search.serialize.KeySweden
-import com.algolia.search.serialize.KeySwitzerland
-import com.algolia.search.serialize.KeySyria
-import com.algolia.search.serialize.KeyTaiwan
-import com.algolia.search.serialize.KeyTajikistan
-import com.algolia.search.serialize.KeyTanzania
-import com.algolia.search.serialize.KeyThailand
-import com.algolia.search.serialize.KeyTimorLeste
-import com.algolia.search.serialize.KeyTogo
-import com.algolia.search.serialize.KeyTokelau
-import com.algolia.search.serialize.KeyTonga
-import com.algolia.search.serialize.KeyTrinidadAndTobago
-import com.algolia.search.serialize.KeyTunisia
-import com.algolia.search.serialize.KeyTurkey
-import com.algolia.search.serialize.KeyTurkmenistan
-import com.algolia.search.serialize.KeyTurksAndCaicosIslands
-import com.algolia.search.serialize.KeyTuvalu
-import com.algolia.search.serialize.KeyUganda
-import com.algolia.search.serialize.KeyUkraine
-import com.algolia.search.serialize.KeyUnitedArabEmirates
-import com.algolia.search.serialize.KeyUnitedKingdom
-import com.algolia.search.serialize.KeyUnitedStates
-import com.algolia.search.serialize.KeyUnitedStatesMinorOutlyingIslands
-import com.algolia.search.serialize.KeyUruguay
-import com.algolia.search.serialize.KeyUzbekistan
-import com.algolia.search.serialize.KeyVanuatu
-import com.algolia.search.serialize.KeyVaticanCity
-import com.algolia.search.serialize.KeyVenezuela
-import com.algolia.search.serialize.KeyVietnam
-import com.algolia.search.serialize.KeyVirginIslandsGB
-import com.algolia.search.serialize.KeyVirginIslandsUS
-import com.algolia.search.serialize.KeyWallisAndFutuna
-import com.algolia.search.serialize.KeyWesternSahara
-import com.algolia.search.serialize.KeyYemen
-import com.algolia.search.serialize.KeyZambia
-import com.algolia.search.serialize.KeyZimbabwe
-import shouldEqual
+import com.algolia.search.serialize.internal.Countries
 import kotlin.test.Test
+import shouldEqual
 
 internal class TestCountries {
 
     @Test
     fun raw() {
-        Afghanistan.raw shouldEqual KeyAfghanistan
-        AlandIslands.raw shouldEqual KeyAlandIslands
-        Albania.raw shouldEqual KeyAlbania
-        Algeria.raw shouldEqual KeyAlgeria
-        AmericanSamoa.raw shouldEqual KeyAmericanSamoa
-        Andorra.raw shouldEqual KeyAndorra
-        Angola.raw shouldEqual KeyAngola
-        Anguilla.raw shouldEqual KeyAnguilla
-        Antarctica.raw shouldEqual KeyAntarctica
-        AntiguaAndBarbuda.raw shouldEqual KeyAntiguaAndBarbuda
-        Argentina.raw shouldEqual KeyArgentina
-        Armenia.raw shouldEqual KeyArmenia
-        Aruba.raw shouldEqual KeyAruba
-        Australia.raw shouldEqual KeyAustralia
-        Austria.raw shouldEqual KeyAustria
-        Azerbaijan.raw shouldEqual KeyAzerbaijan
-        Bahamas.raw shouldEqual KeyBahamas
-        Bahrain.raw shouldEqual KeyBahrain
-        Bangladesh.raw shouldEqual KeyBangladesh
-        Barbados.raw shouldEqual KeyBarbados
-        Belarus.raw shouldEqual KeyBelarus
-        Belgium.raw shouldEqual KeyBelgium
-        Belize.raw shouldEqual KeyBelize
-        Benin.raw shouldEqual KeyBenin
-        Bermuda.raw shouldEqual KeyBermuda
-        Bhutan.raw shouldEqual KeyBhutan
-        Bolivia.raw shouldEqual KeyBolivia
-        CaribbeanNetherlands.raw shouldEqual KeyCaribbeanNetherlands
-        BosniaAndHerzegovina.raw shouldEqual KeyBosniaAndHerzegovina
-        Botswana.raw shouldEqual KeyBotswana
-        BouvetIsland.raw shouldEqual KeyBouvetIsland
-        Brazil.raw shouldEqual KeyBrazil
-        BritishIndianOceanTerritory.raw shouldEqual KeyBritishIndianOceanTerritory
-        BruneiDarussalam.raw shouldEqual KeyBruneiDarussalam
-        Bulgaria.raw shouldEqual KeyBulgaria
-        BurkinaFaso.raw shouldEqual KeyBurkinaFaso
-        Burundi.raw shouldEqual KeyBurundi
-        CaboVerde.raw shouldEqual KeyCaboVerde
-        Cambodia.raw shouldEqual KeyCambodia
-        Cameroon.raw shouldEqual KeyCameroon
-        Canada.raw shouldEqual KeyCanada
-        CaymanIslands.raw shouldEqual KeyCaymanIslands
-        CentralAfricanRepublic.raw shouldEqual KeyCentralAfricanRepublic
-        Chad.raw shouldEqual KeyChad
-        Chile.raw shouldEqual KeyChile
-        China.raw shouldEqual KeyChina
-        ChristmasIsland.raw shouldEqual KeyChristmasIsland
-        CocosIslands.raw shouldEqual KeyCocosIslands
-        Colombia.raw shouldEqual KeyColombia
-        Comoros.raw shouldEqual KeyComoros
-        RepublicOfTheCongo.raw shouldEqual KeyRepublicOfTheCongo
-        DemocraticRepublicOfTheCongo.raw shouldEqual KeyDemocraticRepublicOfTheCongo
-        CookIslands.raw shouldEqual KeyCookIslands
-        CostaRica.raw shouldEqual KeyCostaRica
-        IvoryCoast.raw shouldEqual KeyIvoryCoast
-        Croatia.raw shouldEqual KeyCroatia
-        Cuba.raw shouldEqual KeyCuba
-        Curacao.raw shouldEqual KeyCuracao
-        Cyprus.raw shouldEqual KeyCyprus
-        CzechRepublic.raw shouldEqual KeyCzechRepublic
-        Denmark.raw shouldEqual KeyDenmark
-        Djibouti.raw shouldEqual KeyDjibouti
-        Dominica.raw shouldEqual KeyDominica
-        DominicanRepublic.raw shouldEqual KeyDominicanRepublic
-        Ecuador.raw shouldEqual KeyEcuador
-        Egypt.raw shouldEqual KeyEgypt
-        ElSalvador.raw shouldEqual KeyElSalvador
-        EquatorialGuinea.raw shouldEqual KeyEquatorialGuinea
-        Eritrea.raw shouldEqual KeyEritrea
-        Estonia.raw shouldEqual KeyEstonia
-        Eswatini.raw shouldEqual KeyEswatini
-        Ethiopia.raw shouldEqual KeyEthiopia
-        FalklandIslands.raw shouldEqual KeyFalklandIslands
-        FaroeIslands.raw shouldEqual KeyFaroeIslands
-        Fiji.raw shouldEqual KeyFiji
-        Finland.raw shouldEqual KeyFinland
-        France.raw shouldEqual KeyFrance
-        FrenchGuiana.raw shouldEqual KeyFrenchGuiana
-        FrenchPolynesia.raw shouldEqual KeyFrenchPolynesia
-        FrenchSouthernAndAntarcticLands.raw shouldEqual KeyFrenchSouthernAndAntarcticLands
-        Gabon.raw shouldEqual KeyGabon
-        Gambia.raw shouldEqual KeyGambia
-        Georgia.raw shouldEqual KeyGeorgia
-        Germany.raw shouldEqual KeyGermany
-        Ghana.raw shouldEqual KeyGhana
-        Gibraltar.raw shouldEqual KeyGibraltar
-        Greece.raw shouldEqual KeyGreece
-        Greenland.raw shouldEqual KeyGreenland
-        Grenada.raw shouldEqual KeyGrenada
-        Guadeloupe.raw shouldEqual KeyGuadeloupe
-        Guam.raw shouldEqual KeyGuam
-        Guatemala.raw shouldEqual KeyGuatemala
-        BailiwickOfGuernsey.raw shouldEqual KeyBailiwickOfGuernsey
-        Guinea.raw shouldEqual KeyGuinea
-        GuineaBissau.raw shouldEqual KeyGuineaBissau
-        Guyana.raw shouldEqual KeyGuyana
-        Haiti.raw shouldEqual KeyHaiti
-        HeardIslandAndMcDonaldIslands.raw shouldEqual KeyHeardIslandAndMcDonaldIslands
-        VaticanCity.raw shouldEqual KeyVaticanCity
-        Honduras.raw shouldEqual KeyHonduras
-        HongKong.raw shouldEqual KeyHongKong
-        Hungary.raw shouldEqual KeyHungary
-        Iceland.raw shouldEqual KeyIceland
-        India.raw shouldEqual KeyIndia
-        Indonesia.raw shouldEqual KeyIndonesia
-        Iran.raw shouldEqual KeyIran
-        Iraq.raw shouldEqual KeyIraq
-        Ireland.raw shouldEqual KeyIreland
-        IsleOfMan.raw shouldEqual KeyIsleOfMan
-        Israel.raw shouldEqual KeyIsrael
-        Italy.raw shouldEqual KeyItaly
-        Jamaica.raw shouldEqual KeyJamaica
-        Japan.raw shouldEqual KeyJapan
-        Jersey.raw shouldEqual KeyJersey
-        Jordan.raw shouldEqual KeyJordan
-        Kazakhstan.raw shouldEqual KeyKazakhstan
-        Kenya.raw shouldEqual KeyKenya
-        Kiribati.raw shouldEqual KeyKiribati
-        NorthKorea.raw shouldEqual KeyNorthKorea
-        SouthKorea.raw shouldEqual KeySouthKorea
-        Kuwait.raw shouldEqual KeyKuwait
-        Kyrgyzstan.raw shouldEqual KeyKyrgyzstan
-        Laos.raw shouldEqual KeyLaos
-        Latvia.raw shouldEqual KeyLatvia
-        Lebanon.raw shouldEqual KeyLebanon
-        Lesotho.raw shouldEqual KeyLesotho
-        Liberia.raw shouldEqual KeyLiberia
-        Libya.raw shouldEqual KeyLibya
-        Liechtenstein.raw shouldEqual KeyLiechtenstein
-        Lithuania.raw shouldEqual KeyLithuania
-        Luxembourg.raw shouldEqual KeyLuxembourg
-        Macau.raw shouldEqual KeyMacau
-        Madagascar.raw shouldEqual KeyMadagascar
-        Malawi.raw shouldEqual KeyMalawi
-        Malaysia.raw shouldEqual KeyMalaysia
-        Maldives.raw shouldEqual KeyMaldives
-        Mali.raw shouldEqual KeyMali
-        Malta.raw shouldEqual KeyMalta
-        MarshallIslands.raw shouldEqual KeyMarshallIslands
-        Martinique.raw shouldEqual KeyMartinique
-        Mauritania.raw shouldEqual KeyMauritania
-        Mauritius.raw shouldEqual KeyMauritius
-        Mayotte.raw shouldEqual KeyMayotte
-        Mexico.raw shouldEqual KeyMexico
-        Micronesia.raw shouldEqual KeyMicronesia
-        Moldova.raw shouldEqual KeyMoldova
-        Monaco.raw shouldEqual KeyMonaco
-        Mongolia.raw shouldEqual KeyMongolia
-        Montenegro.raw shouldEqual KeyMontenegro
-        Montserrat.raw shouldEqual KeyMontserrat
-        Morocco.raw shouldEqual KeyMorocco
-        Mozambique.raw shouldEqual KeyMozambique
-        Myanmar.raw shouldEqual KeyMyanmar
-        Namibia.raw shouldEqual KeyNamibia
-        Nauru.raw shouldEqual KeyNauru
-        Nepal.raw shouldEqual KeyNepal
-        Netherlands.raw shouldEqual KeyNetherlands
-        NewCaledonia.raw shouldEqual KeyNewCaledonia
-        NewZealand.raw shouldEqual KeyNewZealand
-        Nicaragua.raw shouldEqual KeyNicaragua
-        Niger.raw shouldEqual KeyNiger
-        Nigeria.raw shouldEqual KeyNigeria
-        Niue.raw shouldEqual KeyNiue
-        NorfolkIsland.raw shouldEqual KeyNorfolkIsland
-        NorthMacedonia.raw shouldEqual KeyNorthMacedonia
-        NorthernMarianaIslands.raw shouldEqual KeyNorthernMarianaIslands
-        Norway.raw shouldEqual KeyNorway
-        Oman.raw shouldEqual KeyOman
-        Pakistan.raw shouldEqual KeyPakistan
-        Palau.raw shouldEqual KeyPalau
-        Palestine.raw shouldEqual KeyPalestine
-        Panama.raw shouldEqual KeyPanama
-        PapuaNewGuinea.raw shouldEqual KeyPapuaNewGuinea
-        Paraguay.raw shouldEqual KeyParaguay
-        Peru.raw shouldEqual KeyPeru
-        Philippines.raw shouldEqual KeyPhilippines
-        PitcairnIslands.raw shouldEqual KeyPitcairnIslands
-        Poland.raw shouldEqual KeyPoland
-        Portugal.raw shouldEqual KeyPortugal
-        PuertoRico.raw shouldEqual KeyPuertoRico
-        Qatar.raw shouldEqual KeyQatar
-        Reunion.raw shouldEqual KeyReunion
-        Romania.raw shouldEqual KeyRomania
-        Russia.raw shouldEqual KeyRussia
-        Rwanda.raw shouldEqual KeyRwanda
-        SaintBarthelemy.raw shouldEqual KeySaintBarthelemy
-        SaintHelena.raw shouldEqual KeySaintHelena
-        SaintKittsAndNevis.raw shouldEqual KeySaintKittsAndNevis
-        SaintLucia.raw shouldEqual KeySaintLucia
-        SaintMartin.raw shouldEqual KeySaintMartin
-        SaintPierreAndMiquelon.raw shouldEqual KeySaintPierreAndMiquelon
-        SaintVincentAndTheGrenadines.raw shouldEqual KeySaintVincentAndTheGrenadines
-        Samoa.raw shouldEqual KeySamoa
-        SanMarino.raw shouldEqual KeySanMarino
-        SaoTomeAndPrincipe.raw shouldEqual KeySaoTomeAndPrincipe
-        SaudiArabia.raw shouldEqual KeySaudiArabia
-        Senegal.raw shouldEqual KeySenegal
-        Serbia.raw shouldEqual KeySerbia
-        Seychelles.raw shouldEqual KeySeychelles
-        SierraLeone.raw shouldEqual KeySierraLeone
-        Singapore.raw shouldEqual KeySingapore
-        SintMaarten.raw shouldEqual KeySintMaarten
-        Slovakia.raw shouldEqual KeySlovakia
-        Slovenia.raw shouldEqual KeySlovenia
-        SolomonIslands.raw shouldEqual KeySolomonIslands
-        Somalia.raw shouldEqual KeySomalia
-        SouthAfrica.raw shouldEqual KeySouthAfrica
-        SouthGeorgiaAndTheSouthSandwichIslands.raw shouldEqual KeySouthGeorgiaAndTheSouthSandwichIslands
-        SouthSudan.raw shouldEqual KeySouthSudan
-        Spain.raw shouldEqual KeySpain
-        SriLanka.raw shouldEqual KeySriLanka
-        Sudan.raw shouldEqual KeySudan
-        Suriname.raw shouldEqual KeySuriname
-        SvalbardAndJanMayen.raw shouldEqual KeySvalbardAndJanMayen
-        Sweden.raw shouldEqual KeySweden
-        Switzerland.raw shouldEqual KeySwitzerland
-        Syria.raw shouldEqual KeySyria
-        Taiwan.raw shouldEqual KeyTaiwan
-        Tajikistan.raw shouldEqual KeyTajikistan
-        Tanzania.raw shouldEqual KeyTanzania
-        Thailand.raw shouldEqual KeyThailand
-        TimorLeste.raw shouldEqual KeyTimorLeste
-        Togo.raw shouldEqual KeyTogo
-        Tokelau.raw shouldEqual KeyTokelau
-        Tonga.raw shouldEqual KeyTonga
-        TrinidadAndTobago.raw shouldEqual KeyTrinidadAndTobago
-        Tunisia.raw shouldEqual KeyTunisia
-        Turkey.raw shouldEqual KeyTurkey
-        Turkmenistan.raw shouldEqual KeyTurkmenistan
-        TurksAndCaicosIslands.raw shouldEqual KeyTurksAndCaicosIslands
-        Tuvalu.raw shouldEqual KeyTuvalu
-        Uganda.raw shouldEqual KeyUganda
-        Ukraine.raw shouldEqual KeyUkraine
-        UnitedArabEmirates.raw shouldEqual KeyUnitedArabEmirates
-        UnitedKingdom.raw shouldEqual KeyUnitedKingdom
-        UnitedStates.raw shouldEqual KeyUnitedStates
-        UnitedStatesMinorOutlyingIslands.raw shouldEqual KeyUnitedStatesMinorOutlyingIslands
-        Uruguay.raw shouldEqual KeyUruguay
-        Uzbekistan.raw shouldEqual KeyUzbekistan
-        Vanuatu.raw shouldEqual KeyVanuatu
-        Venezuela.raw shouldEqual KeyVenezuela
-        Vietnam.raw shouldEqual KeyVietnam
-        VirginIslandsGB.raw shouldEqual KeyVirginIslandsGB
-        VirginIslandsUS.raw shouldEqual KeyVirginIslandsUS
-        WallisAndFutuna.raw shouldEqual KeyWallisAndFutuna
-        WesternSahara.raw shouldEqual KeyWesternSahara
-        Yemen.raw shouldEqual KeyYemen
-        Zambia.raw shouldEqual KeyZambia
-        Zimbabwe.raw shouldEqual KeyZimbabwe
+        Afghanistan.raw shouldEqual Countries.Afghanistan
+        AlandIslands.raw shouldEqual Countries.AlandIslands
+        Albania.raw shouldEqual Countries.Albania
+        Algeria.raw shouldEqual Countries.Algeria
+        AmericanSamoa.raw shouldEqual Countries.AmericanSamoa
+        Andorra.raw shouldEqual Countries.Andorra
+        Angola.raw shouldEqual Countries.Angola
+        Anguilla.raw shouldEqual Countries.Anguilla
+        Antarctica.raw shouldEqual Countries.Antarctica
+        AntiguaAndBarbuda.raw shouldEqual Countries.AntiguaAndBarbuda
+        Argentina.raw shouldEqual Countries.Argentina
+        Armenia.raw shouldEqual Countries.Armenia
+        Aruba.raw shouldEqual Countries.Aruba
+        Australia.raw shouldEqual Countries.Australia
+        Austria.raw shouldEqual Countries.Austria
+        Azerbaijan.raw shouldEqual Countries.Azerbaijan
+        Bahamas.raw shouldEqual Countries.Bahamas
+        Bahrain.raw shouldEqual Countries.Bahrain
+        Bangladesh.raw shouldEqual Countries.Bangladesh
+        Barbados.raw shouldEqual Countries.Barbados
+        Belarus.raw shouldEqual Countries.Belarus
+        Belgium.raw shouldEqual Countries.Belgium
+        Belize.raw shouldEqual Countries.Belize
+        Benin.raw shouldEqual Countries.Benin
+        Bermuda.raw shouldEqual Countries.Bermuda
+        Bhutan.raw shouldEqual Countries.Bhutan
+        Bolivia.raw shouldEqual Countries.Bolivia
+        CaribbeanNetherlands.raw shouldEqual Countries.CaribbeanNetherlands
+        BosniaAndHerzegovina.raw shouldEqual Countries.BosniaAndHerzegovina
+        Botswana.raw shouldEqual Countries.Botswana
+        BouvetIsland.raw shouldEqual Countries.BouvetIsland
+        Brazil.raw shouldEqual Countries.Brazil
+        BritishIndianOceanTerritory.raw shouldEqual Countries.BritishIndianOceanTerritory
+        BruneiDarussalam.raw shouldEqual Countries.BruneiDarussalam
+        Bulgaria.raw shouldEqual Countries.Bulgaria
+        BurkinaFaso.raw shouldEqual Countries.BurkinaFaso
+        Burundi.raw shouldEqual Countries.Burundi
+        CaboVerde.raw shouldEqual Countries.CaboVerde
+        Cambodia.raw shouldEqual Countries.Cambodia
+        Cameroon.raw shouldEqual Countries.Cameroon
+        Canada.raw shouldEqual Countries.Canada
+        CaymanIslands.raw shouldEqual Countries.CaymanIslands
+        CentralAfricanRepublic.raw shouldEqual Countries.CentralAfricanRepublic
+        Chad.raw shouldEqual Countries.Chad
+        Chile.raw shouldEqual Countries.Chile
+        China.raw shouldEqual Countries.China
+        ChristmasIsland.raw shouldEqual Countries.ChristmasIsland
+        CocosIslands.raw shouldEqual Countries.CocosIslands
+        Colombia.raw shouldEqual Countries.Colombia
+        Comoros.raw shouldEqual Countries.Comoros
+        RepublicOfTheCongo.raw shouldEqual Countries.RepublicOfTheCongo
+        DemocraticRepublicOfTheCongo.raw shouldEqual Countries.DemocraticRepublicOfTheCongo
+        CookIslands.raw shouldEqual Countries.CookIslands
+        CostaRica.raw shouldEqual Countries.CostaRica
+        IvoryCoast.raw shouldEqual Countries.IvoryCoast
+        Croatia.raw shouldEqual Countries.Croatia
+        Cuba.raw shouldEqual Countries.Cuba
+        Curacao.raw shouldEqual Countries.Curacao
+        Cyprus.raw shouldEqual Countries.Cyprus
+        CzechRepublic.raw shouldEqual Countries.CzechRepublic
+        Denmark.raw shouldEqual Countries.Denmark
+        Djibouti.raw shouldEqual Countries.Djibouti
+        Dominica.raw shouldEqual Countries.Dominica
+        DominicanRepublic.raw shouldEqual Countries.DominicanRepublic
+        Ecuador.raw shouldEqual Countries.Ecuador
+        Egypt.raw shouldEqual Countries.Egypt
+        ElSalvador.raw shouldEqual Countries.ElSalvador
+        EquatorialGuinea.raw shouldEqual Countries.EquatorialGuinea
+        Eritrea.raw shouldEqual Countries.Eritrea
+        Estonia.raw shouldEqual Countries.Estonia
+        Eswatini.raw shouldEqual Countries.Eswatini
+        Ethiopia.raw shouldEqual Countries.Ethiopia
+        FalklandIslands.raw shouldEqual Countries.FalklandIslands
+        FaroeIslands.raw shouldEqual Countries.FaroeIslands
+        Fiji.raw shouldEqual Countries.Fiji
+        Finland.raw shouldEqual Countries.Finland
+        France.raw shouldEqual Countries.France
+        FrenchGuiana.raw shouldEqual Countries.FrenchGuiana
+        FrenchPolynesia.raw shouldEqual Countries.FrenchPolynesia
+        FrenchSouthernAndAntarcticLands.raw shouldEqual Countries.FrenchSouthernAndAntarcticLands
+        Gabon.raw shouldEqual Countries.Gabon
+        Gambia.raw shouldEqual Countries.Gambia
+        Georgia.raw shouldEqual Countries.Georgia
+        Germany.raw shouldEqual Countries.Germany
+        Ghana.raw shouldEqual Countries.Ghana
+        Gibraltar.raw shouldEqual Countries.Gibraltar
+        Greece.raw shouldEqual Countries.Greece
+        Greenland.raw shouldEqual Countries.Greenland
+        Grenada.raw shouldEqual Countries.Grenada
+        Guadeloupe.raw shouldEqual Countries.Guadeloupe
+        Guam.raw shouldEqual Countries.Guam
+        Guatemala.raw shouldEqual Countries.Guatemala
+        BailiwickOfGuernsey.raw shouldEqual Countries.BailiwickOfGuernsey
+        Guinea.raw shouldEqual Countries.Guinea
+        GuineaBissau.raw shouldEqual Countries.GuineaBissau
+        Guyana.raw shouldEqual Countries.Guyana
+        Haiti.raw shouldEqual Countries.Haiti
+        HeardIslandAndMcDonaldIslands.raw shouldEqual Countries.HeardIslandAndMcDonaldIslands
+        VaticanCity.raw shouldEqual Countries.VaticanCity
+        Honduras.raw shouldEqual Countries.Honduras
+        HongKong.raw shouldEqual Countries.HongKong
+        Hungary.raw shouldEqual Countries.Hungary
+        Iceland.raw shouldEqual Countries.Iceland
+        India.raw shouldEqual Countries.India
+        Indonesia.raw shouldEqual Countries.Indonesia
+        Iran.raw shouldEqual Countries.Iran
+        Iraq.raw shouldEqual Countries.Iraq
+        Ireland.raw shouldEqual Countries.Ireland
+        IsleOfMan.raw shouldEqual Countries.IsleOfMan
+        Israel.raw shouldEqual Countries.Israel
+        Italy.raw shouldEqual Countries.Italy
+        Jamaica.raw shouldEqual Countries.Jamaica
+        Japan.raw shouldEqual Countries.Japan
+        Jersey.raw shouldEqual Countries.Jersey
+        Jordan.raw shouldEqual Countries.Jordan
+        Kazakhstan.raw shouldEqual Countries.Kazakhstan
+        Kenya.raw shouldEqual Countries.Kenya
+        Kiribati.raw shouldEqual Countries.Kiribati
+        NorthKorea.raw shouldEqual Countries.NorthKorea
+        SouthKorea.raw shouldEqual Countries.SouthKorea
+        Kuwait.raw shouldEqual Countries.Kuwait
+        Kyrgyzstan.raw shouldEqual Countries.Kyrgyzstan
+        Laos.raw shouldEqual Countries.Laos
+        Latvia.raw shouldEqual Countries.Latvia
+        Lebanon.raw shouldEqual Countries.Lebanon
+        Lesotho.raw shouldEqual Countries.Lesotho
+        Liberia.raw shouldEqual Countries.Liberia
+        Libya.raw shouldEqual Countries.Libya
+        Liechtenstein.raw shouldEqual Countries.Liechtenstein
+        Lithuania.raw shouldEqual Countries.Lithuania
+        Luxembourg.raw shouldEqual Countries.Luxembourg
+        Macau.raw shouldEqual Countries.Macau
+        Madagascar.raw shouldEqual Countries.Madagascar
+        Malawi.raw shouldEqual Countries.Malawi
+        Malaysia.raw shouldEqual Countries.Malaysia
+        Maldives.raw shouldEqual Countries.Maldives
+        Mali.raw shouldEqual Countries.Mali
+        Malta.raw shouldEqual Countries.Malta
+        MarshallIslands.raw shouldEqual Countries.MarshallIslands
+        Martinique.raw shouldEqual Countries.Martinique
+        Mauritania.raw shouldEqual Countries.Mauritania
+        Mauritius.raw shouldEqual Countries.Mauritius
+        Mayotte.raw shouldEqual Countries.Mayotte
+        Mexico.raw shouldEqual Countries.Mexico
+        Micronesia.raw shouldEqual Countries.Micronesia
+        Moldova.raw shouldEqual Countries.Moldova
+        Monaco.raw shouldEqual Countries.Monaco
+        Mongolia.raw shouldEqual Countries.Mongolia
+        Montenegro.raw shouldEqual Countries.Montenegro
+        Montserrat.raw shouldEqual Countries.Montserrat
+        Morocco.raw shouldEqual Countries.Morocco
+        Mozambique.raw shouldEqual Countries.Mozambique
+        Myanmar.raw shouldEqual Countries.Myanmar
+        Namibia.raw shouldEqual Countries.Namibia
+        Nauru.raw shouldEqual Countries.Nauru
+        Nepal.raw shouldEqual Countries.Nepal
+        Netherlands.raw shouldEqual Countries.Netherlands
+        NewCaledonia.raw shouldEqual Countries.NewCaledonia
+        NewZealand.raw shouldEqual Countries.NewZealand
+        Nicaragua.raw shouldEqual Countries.Nicaragua
+        Niger.raw shouldEqual Countries.Niger
+        Nigeria.raw shouldEqual Countries.Nigeria
+        Niue.raw shouldEqual Countries.Niue
+        NorfolkIsland.raw shouldEqual Countries.NorfolkIsland
+        NorthMacedonia.raw shouldEqual Countries.NorthMacedonia
+        NorthernMarianaIslands.raw shouldEqual Countries.NorthernMarianaIslands
+        Norway.raw shouldEqual Countries.Norway
+        Oman.raw shouldEqual Countries.Oman
+        Pakistan.raw shouldEqual Countries.Pakistan
+        Palau.raw shouldEqual Countries.Palau
+        Palestine.raw shouldEqual Countries.Palestine
+        Panama.raw shouldEqual Countries.Panama
+        PapuaNewGuinea.raw shouldEqual Countries.PapuaNewGuinea
+        Paraguay.raw shouldEqual Countries.Paraguay
+        Peru.raw shouldEqual Countries.Peru
+        Philippines.raw shouldEqual Countries.Philippines
+        PitcairnIslands.raw shouldEqual Countries.PitcairnIslands
+        Poland.raw shouldEqual Countries.Poland
+        Portugal.raw shouldEqual Countries.Portugal
+        PuertoRico.raw shouldEqual Countries.PuertoRico
+        Qatar.raw shouldEqual Countries.Qatar
+        Reunion.raw shouldEqual Countries.Reunion
+        Romania.raw shouldEqual Countries.Romania
+        Russia.raw shouldEqual Countries.Russia
+        Rwanda.raw shouldEqual Countries.Rwanda
+        SaintBarthelemy.raw shouldEqual Countries.SaintBarthelemy
+        SaintHelena.raw shouldEqual Countries.SaintHelena
+        SaintKittsAndNevis.raw shouldEqual Countries.SaintKittsAndNevis
+        SaintLucia.raw shouldEqual Countries.SaintLucia
+        SaintMartin.raw shouldEqual Countries.SaintMartin
+        SaintPierreAndMiquelon.raw shouldEqual Countries.SaintPierreAndMiquelon
+        SaintVincentAndTheGrenadines.raw shouldEqual Countries.SaintVincentAndTheGrenadines
+        Samoa.raw shouldEqual Countries.Samoa
+        SanMarino.raw shouldEqual Countries.SanMarino
+        SaoTomeAndPrincipe.raw shouldEqual Countries.SaoTomeAndPrincipe
+        SaudiArabia.raw shouldEqual Countries.SaudiArabia
+        Senegal.raw shouldEqual Countries.Senegal
+        Serbia.raw shouldEqual Countries.Serbia
+        Seychelles.raw shouldEqual Countries.Seychelles
+        SierraLeone.raw shouldEqual Countries.SierraLeone
+        Singapore.raw shouldEqual Countries.Singapore
+        SintMaarten.raw shouldEqual Countries.SintMaarten
+        Slovakia.raw shouldEqual Countries.Slovakia
+        Slovenia.raw shouldEqual Countries.Slovenia
+        SolomonIslands.raw shouldEqual Countries.SolomonIslands
+        Somalia.raw shouldEqual Countries.Somalia
+        SouthAfrica.raw shouldEqual Countries.SouthAfrica
+        SouthGeorgiaAndTheSouthSandwichIslands.raw shouldEqual Countries.SouthGeorgiaAndTheSouthSandwichIslands
+        SouthSudan.raw shouldEqual Countries.SouthSudan
+        Spain.raw shouldEqual Countries.Spain
+        SriLanka.raw shouldEqual Countries.SriLanka
+        Sudan.raw shouldEqual Countries.Sudan
+        Suriname.raw shouldEqual Countries.Suriname
+        SvalbardAndJanMayen.raw shouldEqual Countries.SvalbardAndJanMayen
+        Sweden.raw shouldEqual Countries.Sweden
+        Switzerland.raw shouldEqual Countries.Switzerland
+        Syria.raw shouldEqual Countries.Syria
+        Taiwan.raw shouldEqual Countries.Taiwan
+        Tajikistan.raw shouldEqual Countries.Tajikistan
+        Tanzania.raw shouldEqual Countries.Tanzania
+        Thailand.raw shouldEqual Countries.Thailand
+        TimorLeste.raw shouldEqual Countries.TimorLeste
+        Togo.raw shouldEqual Countries.Togo
+        Tokelau.raw shouldEqual Countries.Tokelau
+        Tonga.raw shouldEqual Countries.Tonga
+        TrinidadAndTobago.raw shouldEqual Countries.TrinidadAndTobago
+        Tunisia.raw shouldEqual Countries.Tunisia
+        Turkey.raw shouldEqual Countries.Turkey
+        Turkmenistan.raw shouldEqual Countries.Turkmenistan
+        TurksAndCaicosIslands.raw shouldEqual Countries.TurksAndCaicosIslands
+        Tuvalu.raw shouldEqual Countries.Tuvalu
+        Uganda.raw shouldEqual Countries.Uganda
+        Ukraine.raw shouldEqual Countries.Ukraine
+        UnitedArabEmirates.raw shouldEqual Countries.UnitedArabEmirates
+        UnitedKingdom.raw shouldEqual Countries.UnitedKingdom
+        UnitedStates.raw shouldEqual Countries.UnitedStates
+        UnitedStatesMinorOutlyingIslands.raw shouldEqual Countries.UnitedStatesMinorOutlyingIslands
+        Uruguay.raw shouldEqual Countries.Uruguay
+        Uzbekistan.raw shouldEqual Countries.Uzbekistan
+        Vanuatu.raw shouldEqual Countries.Vanuatu
+        Venezuela.raw shouldEqual Countries.Venezuela
+        Vietnam.raw shouldEqual Countries.Vietnam
+        VirginIslandsGB.raw shouldEqual Countries.VirginIslandsGB
+        VirginIslandsUS.raw shouldEqual Countries.VirginIslandsUS
+        WallisAndFutuna.raw shouldEqual Countries.WallisAndFutuna
+        WesternSahara.raw shouldEqual Countries.WesternSahara
+        Yemen.raw shouldEqual Countries.Yemen
+        Zambia.raw shouldEqual Countries.Zambia
+        Zimbabwe.raw shouldEqual Countries.Zimbabwe
     }
 }
