@@ -5,7 +5,7 @@ import attributeB
 import com.algolia.search.model.settings.SearchableAttribute
 import com.algolia.search.model.settings.SearchableAttribute.Default
 import com.algolia.search.model.settings.SearchableAttribute.Unordered
-import com.algolia.search.serialize.KeyUnordered
+import com.algolia.search.serialize.internal.KeyUnordered
 import kotlinx.serialization.json.JsonPrimitive
 import serialize.TestSerializer
 

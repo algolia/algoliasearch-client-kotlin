@@ -11,7 +11,7 @@ import com.algolia.search.model.apikey.generateSecuredAPIKey
 import com.algolia.search.model.apikey.getSecuredApiKeyRemainingValidity
 import com.algolia.search.model.internal.Time
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.internal.KeyObjectID
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import runBlocking

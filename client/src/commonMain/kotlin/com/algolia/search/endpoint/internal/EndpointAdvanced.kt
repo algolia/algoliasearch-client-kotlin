@@ -12,10 +12,7 @@ import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskID
 import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyIndexName
-import com.algolia.search.serialize.KeyLength
-import com.algolia.search.serialize.KeyOffset
-import com.algolia.search.serialize.KeyType
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
@@ -70,10 +67,10 @@ internal class EndpointAdvancedImpl(
         requestOptions: RequestOptions?,
     ): ResponseLogs {
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyIndexName, indexName.raw)
-            parameter(KeyOffset, page)
-            parameter(KeyLength, hitsPerPage)
-            parameter(KeyType, logType?.raw)
+            parameter(Key.IndexName, indexName.raw)
+            parameter(Key.Offset, page)
+            parameter(Key.Length, hitsPerPage)
+            parameter(Key.Type, logType?.raw)
         }
         return transport.request(HttpMethod.Get, CallType.Read, Route.Logs, options)
     }

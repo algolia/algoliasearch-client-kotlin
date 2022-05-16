@@ -1,7 +1,7 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyMatchAlternatives
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -12,7 +12,7 @@ import kotlinx.serialization.encoding.Encoder
 @Serializable(ExplainModule.Companion::class)
 public sealed class ExplainModule(override val raw: String) : Raw<String> {
 
-    public object MatchAlternatives : ExplainModule(KeyMatchAlternatives)
+    public object MatchAlternatives : ExplainModule(Key.MatchAlternatives)
 
     public data class Other(override val raw: String) : ExplainModule(raw)
 
@@ -28,7 +28,7 @@ public sealed class ExplainModule(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): ExplainModule {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyMatchAlternatives -> MatchAlternatives
+                Key.MatchAlternatives -> MatchAlternatives
                 else -> Other(string)
             }
         }

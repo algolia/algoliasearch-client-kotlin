@@ -20,11 +20,11 @@ import com.algolia.search.model.settings.AttributeForFaceting
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyAnalyticsTags
-import com.algolia.search.serialize.KeyIgnorePlurals
-import com.algolia.search.serialize.KeyRemoveStopWords
-import com.algolia.search.serialize.KeyRemoveWordsIfNoResults
-import com.algolia.search.serialize.KeyRuleContexts
+import com.algolia.search.serialize.internal.KeyAnalyticsTags
+import com.algolia.search.serialize.internal.KeyIgnorePlurals
+import com.algolia.search.serialize.internal.KeyRemoveStopWords
+import com.algolia.search.serialize.internal.KeyRemoveWordsIfNoResults
+import com.algolia.search.serialize.internal.KeyRuleContexts
 import io.ktor.http.parseUrlEncodedParameters
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.ListSerializer

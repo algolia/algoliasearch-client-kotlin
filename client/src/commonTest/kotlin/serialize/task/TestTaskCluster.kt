@@ -2,8 +2,8 @@ package serialize.task
 
 import com.algolia.search.model.task.TaskInfo
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyPendingTask
-import com.algolia.search.serialize.KeyStatus
+import com.algolia.search.serialize.internal.KeyPendingTask
+import com.algolia.search.serialize.internal.KeyStatus
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import serialize.TestSerializer

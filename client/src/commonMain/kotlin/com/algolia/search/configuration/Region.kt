@@ -1,9 +1,7 @@
 package com.algolia.search.configuration
 
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyDE
-import com.algolia.search.serialize.KeyEU
-import com.algolia.search.serialize.KeyUS
+import com.algolia.search.serialize.internal.Key
 
 /**
  * Region configuration, used in some [Configuration] implementations.
@@ -15,8 +13,8 @@ public sealed class Region {
      */
     public sealed class Analytics(override val raw: String) : Raw<String> {
 
-        public object EU : Analytics(KeyDE)
-        public object US : Analytics(KeyUS)
+        public object EU : Analytics(Key.DE)
+        public object US : Analytics(Key.US)
         public class Other(override val raw: String) : Analytics(raw)
 
         override fun toString(): String = raw
@@ -27,8 +25,8 @@ public sealed class Region {
      */
     public sealed class Personalization(override val raw: String) : Raw<String> {
 
-        public object EU : Personalization(KeyEU)
-        public object US : Personalization(KeyUS)
+        public object EU : Personalization(Key.EU)
+        public object US : Personalization(Key.US)
         public class Other(override val raw: String) : Personalization(raw)
 
         override fun toString(): String = raw

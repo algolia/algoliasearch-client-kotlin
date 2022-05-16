@@ -5,10 +5,10 @@ import com.algolia.search.model.rule.Anchoring.EndsWith
 import com.algolia.search.model.rule.Anchoring.Is
 import com.algolia.search.model.rule.Anchoring.Other
 import com.algolia.search.model.rule.Anchoring.StartsWith
-import com.algolia.search.serialize.KeyContains
-import com.algolia.search.serialize.KeyEndsWith
-import com.algolia.search.serialize.KeyIs
-import com.algolia.search.serialize.KeyStartsWith
+import com.algolia.search.serialize.internal.KeyContains
+import com.algolia.search.serialize.internal.KeyEndsWith
+import com.algolia.search.serialize.internal.KeyIs
+import com.algolia.search.serialize.internal.KeyStartsWith
 import shouldEqual
 import unknown
 import kotlin.test.Test

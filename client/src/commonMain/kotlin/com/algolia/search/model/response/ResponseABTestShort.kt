@@ -5,8 +5,7 @@ import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.serialize.KSerializerVariant
-import com.algolia.search.serialize.KeyId
-import com.algolia.search.serialize.KeyVariants
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
@@ -49,9 +48,9 @@ public data class ResponseABTestShort(
 
         override fun serialize(encoder: Encoder, value: ResponseABTestShort) {
             val json = buildJsonObject {
-                KeyId to value.abTestId
+                Key.Id to value.abTestId
                 put(
-                    KeyVariants,
+                    Key.Variants,
                     buildJsonArray {
                         add(JsonNoDefaults.encodeToJsonElement(KSerializerVariant, value.variantA))
                         add(JsonNoDefaults.encodeToJsonElement(KSerializerVariant, value.variantB))
@@ -64,10 +63,10 @@ public data class ResponseABTestShort(
 
         override fun deserialize(decoder: Decoder): ResponseABTestShort {
             val json = decoder.asJsonInput().jsonObject
-            val variants = json.getValue(KeyVariants).jsonArray
+            val variants = json.getValue(Key.Variants).jsonArray
 
             return ResponseABTestShort(
-                abTestId = json.getValue(KeyId).jsonPrimitive.long.toABTestID(),
+                abTestId = json.getValue(Key.Id).jsonPrimitive.long.toABTestID(),
                 variantA = JsonNoDefaults.decodeFromJsonElement(
                     KSerializerVariant,
                     variants[0]

@@ -3,16 +3,7 @@ package com.algolia.search.model.settings
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.internal.Raw
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.KeyAsc
-import com.algolia.search.serialize.KeyAttribute
-import com.algolia.search.serialize.KeyCustom
-import com.algolia.search.serialize.KeyDesc
-import com.algolia.search.serialize.KeyExact
-import com.algolia.search.serialize.KeyFilters
-import com.algolia.search.serialize.KeyGeo
-import com.algolia.search.serialize.KeyProximity
-import com.algolia.search.serialize.KeyTypo
-import com.algolia.search.serialize.KeyWords
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.regexAsc
 import com.algolia.search.serialize.internal.regexDesc
 import kotlinx.serialization.KSerializer
@@ -32,7 +23,7 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
      * The Typo criterion in the ranking formula makes sure that a record without typos will be ranked higher than one
      * with 1 typo, themselves being ranked higher than ones with 2 typos, and so on.
      */
-    public object Typo : RankingCriterion(KeyTypo)
+    public object Typo : RankingCriterion(Key.Typo)
 
     /**
      * If you’re using the [geo-search][[https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/]
@@ -40,7 +31,7 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
      * The precision of this ranking is set by the parameter [Query.aroundPrecision].
      * For example, with [Query.aroundPrecision] = 100 two results up to 100 meters apart will be considered equal.
      */
-    public object Geo : RankingCriterion(KeyGeo)
+    public object Geo : RankingCriterion(Key.Geo)
 
     /**
      * This criterion is only applicable if you are using the [Settings.optionalWords] setting.
@@ -51,7 +42,7 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
      * For example, if the user typed 2 words, the maximal score for this criterion is 2 - even if a record contains
      * this word 10 times.
      */
-    public object Words : RankingCriterion(KeyWords)
+    public object Words : RankingCriterion(Key.Words)
 
     /**
      * If a [Query] has used [Query.filters] or [Query.optionalFilters], the [Filters] criterion will rank records
@@ -71,7 +62,7 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
      *
      * The [Filters] criterion can be quite powerful in defining relevance, as seen in the promoting results example.
      */
-    public object Filters : RankingCriterion(KeyFilters)
+    public object Filters : RankingCriterion(Key.Filters)
 
     /**
      * For a [Query.query] that contains two or more words, [Proximity] calculates how physically near those words are
@@ -79,7 +70,7 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
      * to each other.
      * For example, George Clooney is a better proximity match than George Timothy Clooney.
      */
-    public object Proximity : RankingCriterion(KeyProximity)
+    public object Proximity : RankingCriterion(Key.Proximity)
 
     /**
      * The [Attribute] criterion only considers attributes you have placed in the [Settings.searchableAttributes].
@@ -89,12 +80,12 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
      * For example, words in position 2 of an attribute are ranked higher than words in position 5.
      * Otherwise, the position of the word is not taken into account.
      */
-    public object Attribute : RankingCriterion(KeyAttribute)
+    public object Attribute : RankingCriterion(Key.Attribute)
 
     /**
      * Records with words (not just prefixes) that exactly match the query terms are ranked higher.
      */
-    public object Exact : RankingCriterion(KeyExact)
+    public object Exact : RankingCriterion(Key.Exact)
 
     /**
      * This criterion takes into account the settings that you have selected using [Settings.customRanking].
@@ -103,17 +94,19 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
      * criteria.
      * [Documentation][https://www.algolia.com/doc/guides/managing-results/must-do/custom-ranking/#custom-ranking]
      */
-    public object Custom : RankingCriterion(KeyCustom)
+    public object Custom : RankingCriterion(Key.Custom)
 
     /**
      * Sort an [com.algolia.search.model.Attribute] value by ascending order.
      */
-    public data class Asc(val attribute: com.algolia.search.model.Attribute) : RankingCriterion("$KeyAsc($attribute)")
+    public data class Asc(val attribute: com.algolia.search.model.Attribute) :
+        RankingCriterion("${Key.Asc}($attribute)")
 
     /**
      * Sort an [com.algolia.search.model.Attribute] value by descending order.
      */
-    public data class Desc(val attribute: com.algolia.search.model.Attribute) : RankingCriterion("$KeyDesc($attribute)")
+    public data class Desc(val attribute: com.algolia.search.model.Attribute) :
+        RankingCriterion("${Key.Desc}($attribute)")
 
     public data class Other(override val raw: String) : RankingCriterion(raw)
 
@@ -140,14 +133,14 @@ public sealed class RankingCriterion(override val raw: String) : Raw<String> {
             return when {
                 findAsc != null -> Asc(findAsc.groupValues[1].toAttribute())
                 findDesc != null -> Desc(findDesc.groupValues[1].toAttribute())
-                string == KeyTypo -> Typo
-                string == KeyGeo -> Geo
-                string == KeyWords -> Words
-                string == KeyFilters -> Filters
-                string == KeyProximity -> Proximity
-                string == KeyAttribute -> Attribute
-                string == KeyExact -> Exact
-                string == KeyCustom -> Custom
+                string == Key.Typo -> Typo
+                string == Key.Geo -> Geo
+                string == Key.Words -> Words
+                string == Key.Filters -> Filters
+                string == Key.Proximity -> Proximity
+                string == Key.Attribute -> Attribute
+                string == Key.Exact -> Exact
+                string == Key.Custom -> Custom
                 else -> Other(string)
             }
         }

@@ -1,12 +1,7 @@
 package com.algolia.search.model.rule
 
 import com.algolia.search.dsl.DSLParameters
-import com.algolia.search.serialize.KeyAnchoring
-import com.algolia.search.serialize.KeyContext
-import com.algolia.search.serialize.KeyEnabled
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyPage
-import com.algolia.search.serialize.KeyQuery
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
@@ -19,32 +14,32 @@ public data class RuleQuery(
      * Engine default: ""
      * Full text query.
      */
-    @SerialName(KeyQuery) var query: String? = null,
+    @SerialName(Key.Query) var query: String? = null,
     /**
      * Engine default: null
      * When not null, restricts matches to rules with a specific [Anchoring]. Otherwise all [Anchoring] may match.
      */
-    @SerialName(KeyAnchoring) var anchoring: Anchoring? = null,
+    @SerialName(Key.Anchoring) var anchoring: Anchoring? = null,
     /**
      * Restricts matches to contextual rules with a specific context (exact match).
      */
-    @SerialName(KeyContext) var context: String? = null,
+    @SerialName(Key.Context) var context: String? = null,
     /**
      * Engine default: 0
      * Requested page.
      */
-    @SerialName(KeyPage) var page: Int? = null,
+    @SerialName(Key.Page) var page: Int? = null,
     /**
      * Engine default: 20
      * Maximum number of hits in a page. Minimum is 1, maximum is 1000.
      */
-    @SerialName(KeyHitsPerPage) var hitsPerPage: Int? = null,
+    @SerialName(Key.HitsPerPage) var hitsPerPage: Int? = null,
     /**
      * Engine default: null
      * When specified, restricts matches to [Rule] with a specific [Rule.enabled].
      * When absent (default), all [Rule] are retrieved, regardless of their [Rule.enabled].
      */
-    @SerialName(KeyEnabled) var enabled: Boolean? = null
+    @SerialName(Key.Enabled) var enabled: Boolean? = null
 ) {
 
     @Transient

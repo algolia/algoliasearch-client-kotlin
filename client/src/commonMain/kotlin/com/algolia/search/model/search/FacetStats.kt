@@ -1,10 +1,7 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.model.settings.Settings
-import com.algolia.search.serialize.KeyAvg
-import com.algolia.search.serialize.KeyMax
-import com.algolia.search.serialize.KeyMin
-import com.algolia.search.serialize.KeySum
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -18,17 +15,17 @@ public data class FacetStats(
     /**
      * The minimum value in the result set.
      */
-    @SerialName(KeyMin) val min: Float,
+    @SerialName(Key.Min) val min: Float,
     /**
      * The maximum value in the result set.
      */
-    @SerialName(KeyMax) val max: Float,
+    @SerialName(Key.Max) val max: Float,
     /**
      * The average facet value in the result set.
      */
-    @SerialName(KeyAvg) val average: Float? = null,
+    @SerialName(Key.Avg) val average: Float? = null,
     /**
      * The sum of all values in the result set.
      */
-    @SerialName(KeySum) val sum: Float? = null
+    @SerialName(Key.Sum) val sum: Float? = null
 )

@@ -4,9 +4,9 @@ import com.algolia.search.model.search.QueryType.Other
 import com.algolia.search.model.search.QueryType.PrefixAll
 import com.algolia.search.model.search.QueryType.PrefixLast
 import com.algolia.search.model.search.QueryType.PrefixNone
-import com.algolia.search.serialize.KeyPrefixAll
-import com.algolia.search.serialize.KeyPrefixLast
-import com.algolia.search.serialize.KeyPrefixNone
+import com.algolia.search.serialize.internal.KeyPrefixAll
+import com.algolia.search.serialize.internal.KeyPrefixLast
+import com.algolia.search.serialize.internal.KeyPrefixNone
 import shouldEqual
 import unknown
 import kotlin.test.Test

@@ -2,6 +2,7 @@ package com.algolia.search.serialize
 
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.KSerializer
@@ -22,13 +23,13 @@ public object KSerializerObjectIDs : KSerializer<List<ObjectID>> {
     override fun serialize(encoder: Encoder, value: List<ObjectID>) {
         val json = buildJsonArray {
             value.forEach {
-                add(buildJsonObject { put(KeyObjectID, it.raw) })
+                add(buildJsonObject { put(Key.ObjectID, it.raw) })
             }
         }
         encoder.asJsonOutput().encodeJsonElement(json)
     }
 
     override fun deserialize(decoder: Decoder): List<ObjectID> {
-        return decoder.asJsonInput().jsonArray.map { it.jsonObject.getValue(KeyObjectID).jsonPrimitive.content.toObjectID() }
+        return decoder.asJsonInput().jsonArray.map { it.jsonObject.getValue(Key.ObjectID).jsonPrimitive.content.toObjectID() }
     }
 }

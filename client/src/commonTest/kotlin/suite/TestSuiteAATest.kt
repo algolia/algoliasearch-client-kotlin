@@ -10,7 +10,7 @@ import com.algolia.search.model.internal.Time
 import com.algolia.search.model.search.IgnorePlurals
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.internal.KeyObjectID
 import dayInMillis
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put

@@ -1,8 +1,8 @@
 package serialize.search
 
 import com.algolia.search.model.search.AroundPrecision
-import com.algolia.search.serialize.KeyFrom
-import com.algolia.search.serialize.KeyValue
+import com.algolia.search.serialize.internal.KeyFrom
+import com.algolia.search.serialize.internal.KeyValue
 import kotlinx.serialization.json.JsonPrimitive
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject

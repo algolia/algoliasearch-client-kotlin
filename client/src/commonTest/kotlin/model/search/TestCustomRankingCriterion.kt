@@ -4,8 +4,8 @@ import attributeA
 import attributeB
 import com.algolia.search.model.settings.CustomRankingCriterion.Asc
 import com.algolia.search.model.settings.CustomRankingCriterion.Desc
-import com.algolia.search.serialize.KeyAsc
-import com.algolia.search.serialize.KeyDesc
+import com.algolia.search.serialize.internal.KeyAsc
+import com.algolia.search.serialize.internal.KeyDesc
 import shouldEqual
 import kotlin.test.Test
 

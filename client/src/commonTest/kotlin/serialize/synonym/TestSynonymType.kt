@@ -1,11 +1,11 @@
 package serialize.synonym
 
 import com.algolia.search.model.synonym.SynonymType
-import com.algolia.search.serialize.KeyAlternativeCorrection1
-import com.algolia.search.serialize.KeyAlternativeCorrection2
-import com.algolia.search.serialize.KeyOneWaySynonym
-import com.algolia.search.serialize.KeyPlaceholder
-import com.algolia.search.serialize.KeySynonym
+import com.algolia.search.serialize.internal.KeyAlternativeCorrection1
+import com.algolia.search.serialize.internal.KeyAlternativeCorrection2
+import com.algolia.search.serialize.internal.KeyOneWaySynonym
+import com.algolia.search.serialize.internal.KeyPlaceholder
+import com.algolia.search.serialize.internal.KeySynonym
 import kotlinx.serialization.json.JsonPrimitive
 import serialize.TestSerializer
 import unknown

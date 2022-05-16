@@ -2,25 +2,7 @@ package com.algolia.search.model.search
 
 import com.algolia.search.endpoint.EndpointSearch
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyAroundLatLng
-import com.algolia.search.serialize.KeyAutomaticRadius
-import com.algolia.search.serialize.KeyExhaustiveFacetsCount
-import com.algolia.search.serialize.KeyFacets
-import com.algolia.search.serialize.KeyFacets_Stats
-import com.algolia.search.serialize.KeyHits
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyIndex
-import com.algolia.search.serialize.KeyLength
-import com.algolia.search.serialize.KeyNbHits
-import com.algolia.search.serialize.KeyNbPages
-import com.algolia.search.serialize.KeyOffset
-import com.algolia.search.serialize.KeyPage
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyProcessingTimeMS
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyQueryAfterRemoval
-import com.algolia.search.serialize.KeyStar
-import com.algolia.search.serialize.KeyUserData
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -36,25 +18,25 @@ import kotlinx.serialization.encoding.Encoder
 @Serializable(ResponseFields.Companion::class)
 public sealed class ResponseFields(override val raw: String) : Raw<String> {
 
-    public object All : ResponseFields(KeyStar)
-    public object AroundLatLng : ResponseFields(KeyAroundLatLng)
-    public object AutomaticRadius : ResponseFields(KeyAutomaticRadius)
-    public object ExhaustiveFacetsCount : ResponseFields(KeyExhaustiveFacetsCount)
-    public object Facets : ResponseFields(KeyFacets)
-    public object FacetsStats : ResponseFields(KeyFacets_Stats)
-    public object Hits : ResponseFields(KeyHits)
-    public object HitsPerPage : ResponseFields(KeyHitsPerPage)
-    public object Index : ResponseFields(KeyIndex)
-    public object Length : ResponseFields(KeyLength)
-    public object NbHits : ResponseFields(KeyNbHits)
-    public object NbPages : ResponseFields(KeyNbPages)
-    public object Offset : ResponseFields(KeyOffset)
-    public object Page : ResponseFields(KeyPage)
-    public object Params : ResponseFields(KeyParams)
-    public object ProcessingTimeMS : ResponseFields(KeyProcessingTimeMS)
-    public object Query : ResponseFields(KeyQuery)
-    public object QueryAfterRemoval : ResponseFields(KeyQueryAfterRemoval)
-    public object UserData : ResponseFields(KeyUserData)
+    public object All : ResponseFields(Key.Star)
+    public object AroundLatLng : ResponseFields(Key.AroundLatLng)
+    public object AutomaticRadius : ResponseFields(Key.AutomaticRadius)
+    public object ExhaustiveFacetsCount : ResponseFields(Key.ExhaustiveFacetsCount)
+    public object Facets : ResponseFields(Key.Facets)
+    public object FacetsStats : ResponseFields(Key.Facets_Stats)
+    public object Hits : ResponseFields(Key.Hits)
+    public object HitsPerPage : ResponseFields(Key.HitsPerPage)
+    public object Index : ResponseFields(Key.Index)
+    public object Length : ResponseFields(Key.Length)
+    public object NbHits : ResponseFields(Key.NbHits)
+    public object NbPages : ResponseFields(Key.NbPages)
+    public object Offset : ResponseFields(Key.Offset)
+    public object Page : ResponseFields(Key.Page)
+    public object Params : ResponseFields(Key.Params)
+    public object ProcessingTimeMS : ResponseFields(Key.ProcessingTimeMS)
+    public object Query : ResponseFields(Key.Query)
+    public object QueryAfterRemoval : ResponseFields(Key.QueryAfterRemoval)
+    public object UserData : ResponseFields(Key.UserData)
 
     public data class Other(override val raw: String) : ResponseFields(raw)
 
@@ -74,25 +56,25 @@ public sealed class ResponseFields(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): ResponseFields {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyStar -> All
-                KeyAroundLatLng -> AroundLatLng
-                KeyAutomaticRadius -> AutomaticRadius
-                KeyExhaustiveFacetsCount -> ExhaustiveFacetsCount
-                KeyFacets -> Facets
-                KeyFacets_Stats -> FacetsStats
-                KeyHits -> Hits
-                KeyHitsPerPage -> HitsPerPage
-                KeyIndex -> Index
-                KeyLength -> Length
-                KeyNbHits -> NbHits
-                KeyNbPages -> NbPages
-                KeyOffset -> Offset
-                KeyPage -> Page
-                KeyParams -> Params
-                KeyProcessingTimeMS -> ProcessingTimeMS
-                KeyQuery -> Query
-                KeyQueryAfterRemoval -> QueryAfterRemoval
-                KeyUserData -> UserData
+                Key.Star -> All
+                Key.AroundLatLng -> AroundLatLng
+                Key.AutomaticRadius -> AutomaticRadius
+                Key.ExhaustiveFacetsCount -> ExhaustiveFacetsCount
+                Key.Facets -> Facets
+                Key.Facets_Stats -> FacetsStats
+                Key.Hits -> Hits
+                Key.HitsPerPage -> HitsPerPage
+                Key.Index -> Index
+                Key.Length -> Length
+                Key.NbHits -> NbHits
+                Key.NbPages -> NbPages
+                Key.Offset -> Offset
+                Key.Page -> Page
+                Key.Params -> Params
+                Key.ProcessingTimeMS -> ProcessingTimeMS
+                Key.Query -> Query
+                Key.QueryAfterRemoval -> QueryAfterRemoval
+                Key.UserData -> UserData
                 else -> Other(string)
             }
         }

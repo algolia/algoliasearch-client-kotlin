@@ -1,9 +1,7 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.model.Attribute
-import com.algolia.search.serialize.KeyCount
-import com.algolia.search.serialize.KeyHighlighted
-import com.algolia.search.serialize.KeyValue
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,15 +10,15 @@ public data class Facet(
     /**
      * Name of the facet. Is equal to the value associated to an [Attribute].
      */
-    @SerialName(KeyValue) val value: String,
+    @SerialName(Key.Value) val value: String,
     /**
      * Number of times this [value] occurs for a given [Attribute].
      */
-    @SerialName(KeyCount) val count: Int,
+    @SerialName(Key.Count) val count: Int,
     /**
      * Highlighted value.
      */
-    @SerialName(KeyHighlighted) val highlightedOrNull: String? = null
+    @SerialName(Key.Highlighted) val highlightedOrNull: String? = null
 ) {
 
     val highlighted: String

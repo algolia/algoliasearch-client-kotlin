@@ -9,7 +9,7 @@ import com.algolia.search.model.analytics.ABTestStatus
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.internal.Time
 import com.algolia.search.model.task.TaskStatus
-import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.internal.KeyObjectID
 import dayInMillis
 import io.ktor.http.HttpStatusCode
 import kotlinx.serialization.json.buildJsonObject

@@ -2,10 +2,10 @@ package serialize.search
 
 import com.algolia.search.model.search.HighlightResult
 import com.algolia.search.model.search.MatchLevel
-import com.algolia.search.serialize.KeyFullyHighlighted
-import com.algolia.search.serialize.KeyMatchLevel
-import com.algolia.search.serialize.KeyMatchedWords
-import com.algolia.search.serialize.KeyValue
+import com.algolia.search.serialize.internal.KeyFullyHighlighted
+import com.algolia.search.serialize.internal.KeyMatchLevel
+import com.algolia.search.serialize.internal.KeyMatchedWords
+import com.algolia.search.serialize.internal.KeyValue
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject

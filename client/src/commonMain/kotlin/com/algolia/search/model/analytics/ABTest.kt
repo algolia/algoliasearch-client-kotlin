@@ -1,10 +1,8 @@
 package com.algolia.search.model.analytics
 
 import com.algolia.search.model.ClientDate
-import com.algolia.search.serialize.KeyEndAt
-import com.algolia.search.serialize.KeyName
-import com.algolia.search.serialize.KeyVariants
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -29,11 +27,11 @@ public data class ABTest(
     /**
      * Name of the [ABTest].
      */
-    @SerialName(KeyName) val name: String,
+    @SerialName(Key.Name) val name: String,
     /**
      * A date to automatically end an [ABTest] at a specific time.
      */
-    @SerialName(KeyEndAt) val endAt: ClientDate,
+    @SerialName(Key.EndAt) val endAt: ClientDate,
     /**
      * The base index [Variant].
      */
@@ -50,10 +48,10 @@ public data class ABTest(
 
         override fun serialize(encoder: Encoder, value: ABTest) {
             val json = buildJsonObject {
-                put(KeyName, value.name)
-                put(KeyEndAt, value.endAt.raw)
+                put(Key.Name, value.name)
+                put(Key.EndAt, value.endAt.raw)
                 put(
-                    KeyVariants,
+                    Key.Variants,
                     buildJsonArray {
                         add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), value.variantA))
                         add(JsonNoDefaults.encodeToJsonElement(Variant.serializer(), value.variantB))
@@ -66,11 +64,11 @@ public data class ABTest(
 
         override fun deserialize(decoder: Decoder): ABTest {
             val json = decoder.asJsonInput().jsonObject
-            val variants = json.getValue(KeyVariants).jsonArray
+            val variants = json.getValue(Key.Variants).jsonArray
 
             return ABTest(
-                name = json.getValue(KeyName).jsonPrimitive.content,
-                endAt = ClientDate(json.getValue(KeyEndAt).jsonPrimitive.content),
+                name = json.getValue(Key.Name).jsonPrimitive.content,
+                endAt = ClientDate(json.getValue(Key.EndAt).jsonPrimitive.content),
                 variantA = JsonNoDefaults.decodeFromJsonElement(Variant.serializer(), variants[0]),
                 variantB = JsonNoDefaults.decodeFromJsonElement(Variant.serializer(), variants[1])
             )

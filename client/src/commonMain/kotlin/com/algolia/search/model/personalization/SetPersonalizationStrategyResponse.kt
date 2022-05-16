@@ -1,7 +1,6 @@
 package com.algolia.search.model.personalization
 
-import com.algolia.search.serialize.KeyMessage
-import com.algolia.search.serialize.KeyStatus
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -13,9 +12,9 @@ public data class SetPersonalizationStrategyResponse(
     /**
      * Status code
      */
-    @SerialName(KeyStatus) val status: Int,
+    @SerialName(Key.Status) val status: Int,
     /**
      * Status message
      */
-    @SerialName(KeyMessage) val message: String
+    @SerialName(Key.Message) val message: String
 )

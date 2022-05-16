@@ -1,8 +1,7 @@
 package com.algolia.search.model.task
 
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyNotPublished
-import com.algolia.search.serialize.KeyPublished
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -19,12 +18,12 @@ public sealed class TaskStatus(override val raw: String) : Raw<String> {
     /**
      * The [Task] has been processed by the server.
      */
-    public object Published : TaskStatus(KeyPublished)
+    public object Published : TaskStatus(Key.Published)
 
     /**
      * The [Task] has not yet been processed by the server.
      */
-    public object NotPublished : TaskStatus(KeyNotPublished)
+    public object NotPublished : TaskStatus(Key.NotPublished)
 
     public data class Other(override val raw: String) : TaskStatus(raw)
 
@@ -40,8 +39,8 @@ public sealed class TaskStatus(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): TaskStatus {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyPublished -> Published
-                KeyNotPublished -> NotPublished
+                Key.Published -> Published
+                Key.NotPublished -> NotPublished
                 else -> Other(string)
             }
         }

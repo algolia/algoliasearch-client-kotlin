@@ -2,7 +2,7 @@ package serialize.serializer
 
 import com.algolia.search.model.ObjectID
 import com.algolia.search.serialize.KSerializerObjectIDs
-import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.internal.KeyObjectID
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put

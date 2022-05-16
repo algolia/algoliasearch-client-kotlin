@@ -1,9 +1,7 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyAttribute
-import com.algolia.search.serialize.KeyNone
-import com.algolia.search.serialize.KeyWord
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -19,12 +17,12 @@ public sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<Strin
      * For example, if you search for the TV show “V”, you want it to match the query “V” before all popular
      * TV shows starting with the letter V.
      */
-    public object Attribute : ExactOnSingleWordQuery(KeyAttribute)
+    public object Attribute : ExactOnSingleWordQuery(Key.Attribute)
 
     /**
      * The exact ranking criterion is ignored on single word queries.
      */
-    public object None : ExactOnSingleWordQuery(KeyNone)
+    public object None : ExactOnSingleWordQuery(Key.None)
 
     /**
      * The exact ranking criterion is set to 1 if the query word is found in the record.
@@ -32,7 +30,7 @@ public sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<Strin
      * For example, if you search for the TV show “Road”, and in your dataset you have 2 records,
      * “Road” and “Road Trip”, both will be considered to match exactly.
      */
-    public object Word : ExactOnSingleWordQuery(KeyWord)
+    public object Word : ExactOnSingleWordQuery(Key.Word)
 
     public data class Other(override val raw: String) : ExactOnSingleWordQuery(raw)
 
@@ -52,9 +50,9 @@ public sealed class ExactOnSingleWordQuery(override val raw: String) : Raw<Strin
 
         override fun deserialize(decoder: Decoder): ExactOnSingleWordQuery {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyAttribute -> Attribute
-                KeyNone -> None
-                KeyWord -> Word
+                Key.Attribute -> Attribute
+                Key.None -> None
+                Key.Word -> Word
                 else -> Other(string)
             }
         }

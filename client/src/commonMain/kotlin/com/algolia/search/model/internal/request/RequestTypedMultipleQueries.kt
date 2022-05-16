@@ -5,14 +5,7 @@ import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.IndexedQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.KeyDefault
-import com.algolia.search.serialize.KeyFacet
-import com.algolia.search.serialize.KeyFacetQuery
-import com.algolia.search.serialize.KeyIndexName
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyRequests
-import com.algolia.search.serialize.KeyStrategy
-import com.algolia.search.serialize.KeyType
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.merge
 import com.algolia.search.serialize.internal.toJsonNoDefaults
@@ -30,8 +23,8 @@ import kotlinx.serialization.json.put
 
 @Serializable(RequestTypedMultipleQueries.Companion::class)
 internal class RequestTypedMultipleQueries(
-    @SerialName(KeyRequests) val requests: List<IndexedQuery>,
-    @SerialName(KeyStrategy) val strategy: MultipleQueriesStrategy? = null
+    @SerialName(Key.Requests) val requests: List<IndexedQuery>,
+    @SerialName(Key.Strategy) val strategy: MultipleQueriesStrategy? = null
 ) {
 
     @OptIn(ExperimentalSerializationApi::class)
@@ -41,21 +34,21 @@ internal class RequestTypedMultipleQueries(
         override fun serialize(encoder: Encoder, value: RequestTypedMultipleQueries) {
             val json = buildJsonObject {
                 put(
-                    KeyRequests,
+                    Key.Requests,
                     buildJsonArray {
                         value.requests.forEach {
                             add(
                                 buildJsonObject {
-                                    put(KeyIndexName, it.indexName.raw)
+                                    put(Key.IndexName, it.indexName.raw)
                                     when (it) {
                                         is IndexQuery -> {
-                                            put(KeyType, KeyDefault)
-                                            it.query.toJsonNoDefaults().urlEncode()?.let { put(KeyParams, it) }
+                                            put(Key.Type, Key.Default)
+                                            it.query.toJsonNoDefaults().urlEncode()?.let { put(Key.Params, it) }
                                         }
                                         is FacetIndexQuery -> {
-                                            put(KeyType, KeyFacet)
-                                            put(KeyFacet, it.facetAttribute.raw)
-                                            paramsFacetQuery(it.query, it.facetQuery)?.let { put(KeyParams, it) }
+                                            put(Key.Type, Key.Facet)
+                                            put(Key.Facet, it.facetAttribute.raw)
+                                            paramsFacetQuery(it.query, it.facetQuery)?.let { put(Key.Params, it) }
                                         }
                                     }
                                 }
@@ -63,14 +56,14 @@ internal class RequestTypedMultipleQueries(
                         }
                     }
                 )
-                value.strategy?.let { put(KeyStrategy, it.raw) }
+                value.strategy?.let { put(Key.Strategy, it.raw) }
             }
             encoder.asJsonOutput().encodeJsonElement(json)
         }
 
         private fun paramsFacetQuery(query: Query, facetQuery: String? = null): String? {
             val queryJsonObject = query.toJsonNoDefaults()
-            val extras = facetQuery?.let { buildJsonObject { put(KeyFacetQuery, it) } }
+            val extras = facetQuery?.let { buildJsonObject { put(Key.FacetQuery, it) } }
             return queryJsonObject.mergeExtras(extras).urlEncode()
         }
 

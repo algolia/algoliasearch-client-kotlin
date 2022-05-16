@@ -2,12 +2,12 @@ package serialize.response
 
 import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.search.Facet
-import com.algolia.search.serialize.KeyCount
-import com.algolia.search.serialize.KeyExhaustiveFacetsCount
-import com.algolia.search.serialize.KeyFacetHits
-import com.algolia.search.serialize.KeyHighlighted
-import com.algolia.search.serialize.KeyProcessingTimeMS
-import com.algolia.search.serialize.KeyValue
+import com.algolia.search.serialize.internal.KeyCount
+import com.algolia.search.serialize.internal.KeyExhaustiveFacetsCount
+import com.algolia.search.serialize.internal.KeyFacetHits
+import com.algolia.search.serialize.internal.KeyHighlighted
+import com.algolia.search.serialize.internal.KeyProcessingTimeMS
+import com.algolia.search.serialize.internal.KeyValue
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put

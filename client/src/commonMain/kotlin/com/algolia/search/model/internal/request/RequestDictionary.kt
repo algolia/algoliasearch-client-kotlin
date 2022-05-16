@@ -2,10 +2,7 @@ package com.algolia.search.model.internal.request
 
 import com.algolia.search.model.internal.request.RequestDictionary.Request.Action.AddEntry
 import com.algolia.search.model.internal.request.RequestDictionary.Request.Action.DeleteEntry
-import com.algolia.search.serialize.KeyAddEntry
-import com.algolia.search.serialize.KeyClearExistingDictionaryEntries
-import com.algolia.search.serialize.KeyDeleteEntry
-import com.algolia.search.serialize.KeyRequests
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonArray
@@ -30,8 +27,8 @@ internal sealed class RequestDictionary {
 
     @Serializable
     internal data class Add(
-        @SerialName(KeyClearExistingDictionaryEntries) override val clearExistingDictionaryEntries: Boolean,
-        @SerialName(KeyRequests) override val requests: List<Request>,
+        @SerialName(Key.ClearExistingDictionaryEntries) override val clearExistingDictionaryEntries: Boolean,
+        @SerialName(Key.Requests) override val requests: List<Request>,
     ) : RequestDictionary() {
 
         constructor(
@@ -42,8 +39,8 @@ internal sealed class RequestDictionary {
 
     @Serializable
     internal data class Delete(
-        @SerialName(KeyClearExistingDictionaryEntries) override val clearExistingDictionaryEntries: Boolean,
-        @SerialName(KeyRequests) override val requests: List<Request>,
+        @SerialName(Key.ClearExistingDictionaryEntries) override val clearExistingDictionaryEntries: Boolean,
+        @SerialName(Key.Requests) override val requests: List<Request>,
     ) : RequestDictionary() {
 
         constructor(
@@ -61,11 +58,11 @@ internal sealed class RequestDictionary {
         @Serializable
         internal enum class Action {
             /** Add the entry in the dictionary */
-            @SerialName(KeyAddEntry)
+            @SerialName(Key.AddEntry)
             AddEntry,
 
             /** Delete the entry from the dictionary */
-            @SerialName(KeyDeleteEntry)
+            @SerialName(Key.DeleteEntry)
             DeleteEntry
         }
     }

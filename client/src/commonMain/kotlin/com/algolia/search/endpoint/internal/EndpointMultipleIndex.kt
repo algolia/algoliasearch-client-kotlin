@@ -18,7 +18,7 @@ import com.algolia.search.model.response.ResponseListIndices
 import com.algolia.search.model.response.ResponseMultiSearch
 import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.ResponseSearches
-import com.algolia.search.serialize.KeyRequests
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.Route
@@ -66,7 +66,7 @@ internal class EndpointMultipleIndexImpl(
     ): ResponseBatches {
         if (operations.isEmpty()) throw EmptyListException("operations")
         val requests = Json.encodeToJsonElement(ListSerializer(BatchOperationIndex), operations)
-        val body = buildJsonObject { put(KeyRequests, requests) }.toString()
+        val body = buildJsonObject { put(Key.Requests, requests) }.toString()
 
         return transport.request(HttpMethod.Post, CallType.Write, "${Route.IndexesV1}/*/batch", requestOptions, body)
     }

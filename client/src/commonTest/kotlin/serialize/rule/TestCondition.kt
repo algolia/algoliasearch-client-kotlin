@@ -5,11 +5,11 @@ import com.algolia.search.model.rule.Alternatives
 import com.algolia.search.model.rule.Anchoring
 import com.algolia.search.model.rule.Condition
 import com.algolia.search.model.rule.Pattern
-import com.algolia.search.serialize.KeyAlternatives
-import com.algolia.search.serialize.KeyAnchoring
-import com.algolia.search.serialize.KeyFilters
-import com.algolia.search.serialize.KeyIs
-import com.algolia.search.serialize.KeyPattern
+import com.algolia.search.serialize.internal.KeyAlternatives
+import com.algolia.search.serialize.internal.KeyAnchoring
+import com.algolia.search.serialize.internal.KeyFilters
+import com.algolia.search.serialize.internal.KeyIs
+import com.algolia.search.serialize.internal.KeyPattern
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put

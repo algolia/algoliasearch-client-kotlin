@@ -2,17 +2,7 @@ package com.algolia.search.model.apikey
 
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyAddObject
-import com.algolia.search.serialize.KeyAnalytics
-import com.algolia.search.serialize.KeyBrowse
-import com.algolia.search.serialize.KeyDeleteIndex
-import com.algolia.search.serialize.KeyDeleteObject
-import com.algolia.search.serialize.KeyEditSettings
-import com.algolia.search.serialize.KeyListIndexes
-import com.algolia.search.serialize.KeyLogs
-import com.algolia.search.serialize.KeySearch
-import com.algolia.search.serialize.KeySeeUnretrievableAttributes
-import com.algolia.search.serialize.KeySettings
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -30,58 +20,58 @@ public sealed class ACL(override val raw: String) : Raw<String> {
     /**
      * Allows search.
      */
-    public object Search : ACL(KeySearch)
+    public object Search : ACL(Key.Search)
 
     /**
      * Allows retrieval of all index contents via the browse API.
      */
-    public object Browse : ACL(KeyBrowse)
+    public object Browse : ACL(Key.Browse)
 
     /**
      * Allows adding/updating an object in the index. (Copying/moving indices are also allowed with this permission.)
      */
-    public object AddObject : ACL(KeyAddObject)
+    public object AddObject : ACL(Key.AddObject)
 
     /**
      *  Allows deleting an existing object.
      */
-    public object DeleteObject : ACL(KeyDeleteObject)
+    public object DeleteObject : ACL(Key.DeleteObject)
 
     /**
      * Allows deleting index content.
      */
-    public object DeleteIndex : ACL(KeyDeleteIndex)
+    public object DeleteIndex : ACL(Key.DeleteIndex)
 
     /**
      * Allows getting index settings.
      */
-    public object Settings : ACL(KeySettings)
+    public object Settings : ACL(Key.Settings)
 
     /**
      * Allows changing index settings.
      */
-    public object EditSettings : ACL(KeyEditSettings)
+    public object EditSettings : ACL(Key.EditSettings)
 
     /**
      * Allows retrieval of analytics through the analytics API.
      */
-    public object Analytics : ACL(KeyAnalytics)
+    public object Analytics : ACL(Key.Analytics)
 
     /**
      * Allows listing all accessible indices.
      */
-    public object ListIndices : ACL(KeyListIndexes)
+    public object ListIndices : ACL(Key.ListIndexes)
 
     /**
      * Allows getting the logs.
      */
-    public object Logs : ACL(KeyLogs)
+    public object Logs : ACL(Key.Logs)
 
     /**
      *  Disables the [com.algolia.search.model.settings.Settings.unretrievableAttributes] feature for all operations
      *  returning records.
      */
-    public object SeeUnretrievableAttributes : ACL(KeySeeUnretrievableAttributes)
+    public object SeeUnretrievableAttributes : ACL(Key.SeeUnretrievableAttributes)
 
     public data class Other(override val raw: String) : ACL(raw)
 
@@ -97,17 +87,17 @@ public sealed class ACL(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): ACL {
             return when (val string = String.serializer().deserialize(decoder)) {
-                KeySearch -> Search
-                KeyBrowse -> Browse
-                KeyAddObject -> AddObject
-                KeyDeleteObject -> DeleteObject
-                KeyDeleteIndex -> DeleteIndex
-                KeySettings -> Settings
-                KeyEditSettings -> EditSettings
-                KeyAnalytics -> Analytics
-                KeyListIndexes -> ListIndices
-                KeyLogs -> Logs
-                KeySeeUnretrievableAttributes -> SeeUnretrievableAttributes
+                Key.Search -> Search
+                Key.Browse -> Browse
+                Key.AddObject -> AddObject
+                Key.DeleteObject -> DeleteObject
+                Key.DeleteIndex -> DeleteIndex
+                Key.Settings -> Settings
+                Key.EditSettings -> EditSettings
+                Key.Analytics -> Analytics
+                Key.ListIndexes -> ListIndices
+                Key.Logs -> Logs
+                Key.SeeUnretrievableAttributes -> SeeUnretrievableAttributes
                 else -> Other(string)
             }
         }

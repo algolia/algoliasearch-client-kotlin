@@ -6,17 +6,8 @@ import com.algolia.search.endpoint.EndpointMultipleIndex
 import com.algolia.search.helper.toObjectID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyAction
-import com.algolia.search.serialize.KeyAddObject
-import com.algolia.search.serialize.KeyBody
-import com.algolia.search.serialize.KeyClear
-import com.algolia.search.serialize.KeyDelete
-import com.algolia.search.serialize.KeyDeleteObject
-import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.serialize.KeyPartialUpdateObject
-import com.algolia.search.serialize.KeyPartialUpdateObjectNoCreate
-import com.algolia.search.serialize.KeyUpdateObject
 import com.algolia.search.serialize.internal.Json
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.merge
@@ -44,7 +35,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
      */
     public data class AddObject(
         val json: JsonObject
-    ) : BatchOperation(KeyAddObject) {
+    ) : BatchOperation(Key.AddObject) {
 
         public companion object {
 
@@ -60,7 +51,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
     public data class ReplaceObject(
         val objectID: ObjectID,
         val json: JsonObject
-    ) : BatchOperation(KeyUpdateObject) {
+    ) : BatchOperation(Key.UpdateObject) {
 
         public companion object {
 
@@ -77,7 +68,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
         val objectID: ObjectID,
         val json: JsonObject,
         val createIfNotExists: Boolean = true
-    ) : BatchOperation(if (createIfNotExists) KeyPartialUpdateObject else KeyPartialUpdateObjectNoCreate) {
+    ) : BatchOperation(if (createIfNotExists) Key.PartialUpdateObject else Key.PartialUpdateObjectNoCreate) {
 
         public companion object {
 
@@ -102,7 +93,7 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
                     objectID,
                     Json.encodeToJsonElement(Partial, partial).jsonObject.merge(
                         buildJsonObject {
-                            put(KeyObjectID, objectID.raw)
+                            put(Key.ObjectID, objectID.raw)
                         }
                     ),
                     createIfNotExists
@@ -114,17 +105,17 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
     /**
      * Equivalent to [EndpointIndexing.deleteObject]
      */
-    public data class DeleteObject(val objectID: ObjectID) : BatchOperation(KeyDeleteObject)
+    public data class DeleteObject(val objectID: ObjectID) : BatchOperation(Key.DeleteObject)
 
     /**
      * Equivalent to [EndpointIndex.deleteIndex]
      */
-    public object DeleteIndex : BatchOperation(KeyDelete)
+    public object DeleteIndex : BatchOperation(Key.Delete)
 
     /**
      * Equivalent to [EndpointIndexing.clearObjects]
      */
-    public object ClearIndex : BatchOperation(KeyClear)
+    public object ClearIndex : BatchOperation(Key.Clear)
 
     public data class Other(val key: String, val json: JsonObject) : BatchOperation(key)
 
@@ -133,58 +124,58 @@ public sealed class BatchOperation(override val raw: String) : Raw<String> {
     public companion object : KSerializer<BatchOperation> {
 
         private fun batchJson(value: BatchOperation, block: JsonObjectBuilder.() -> Unit) = buildJsonObject {
-            put(KeyAction, value.raw)
+            put(Key.Action, value.raw)
             block(this)
         }
 
         override fun serialize(encoder: Encoder, value: BatchOperation) {
             val json = when (value) {
-                is AddObject -> batchJson(value) { put(KeyBody, value.json) }
+                is AddObject -> batchJson(value) { put(Key.Body, value.json) }
                 is ReplaceObject -> batchJson(value) {
                     put(
-                        KeyBody,
+                        Key.Body,
                         value.json.merge(
                             buildJsonObject {
-                                put(KeyObjectID, value.objectID.raw)
+                                put(Key.ObjectID, value.objectID.raw)
                             }
                         )
                     )
                 }
                 is PartialUpdateObject -> batchJson(value) {
                     put(
-                        KeyBody,
+                        Key.Body,
                         value.json.merge(
                             buildJsonObject {
-                                put(KeyObjectID, value.objectID.raw)
+                                put(Key.ObjectID, value.objectID.raw)
                             }
                         )
                     )
                 }
                 is DeleteObject -> batchJson(value) {
-                    put(KeyBody, buildJsonObject { put(KeyObjectID, value.objectID.raw) })
+                    put(Key.Body, buildJsonObject { put(Key.ObjectID, value.objectID.raw) })
                 }
                 is DeleteIndex -> batchJson(value) {}
                 is ClearIndex -> batchJson(value) {}
-                is Other -> batchJson(value) { put(KeyBody, value.json) }
+                is Other -> batchJson(value) { put(Key.Body, value.json) }
             }
 
             encoder.asJsonOutput().encodeJsonElement(json)
         }
 
-        private val JsonObject.body get() = this.getValue(KeyBody).jsonObject
-        private val JsonObject.objectID get() = body.getValue(KeyObjectID).jsonPrimitive.content.toObjectID()
+        private val JsonObject.body get() = this.getValue(Key.Body).jsonObject
+        private val JsonObject.objectID get() = body.getValue(Key.ObjectID).jsonPrimitive.content.toObjectID()
 
         override fun deserialize(decoder: Decoder): BatchOperation {
             val element = decoder.asJsonInput().jsonObject
 
-            return when (val action = element.getValue(KeyAction).jsonPrimitive.content) {
-                KeyAddObject -> AddObject(element.body)
-                KeyUpdateObject -> ReplaceObject(element.objectID, element.body)
-                KeyPartialUpdateObject -> PartialUpdateObject(element.objectID, element.body)
-                KeyPartialUpdateObjectNoCreate -> PartialUpdateObject(element.objectID, element.body, false)
-                KeyDeleteObject -> DeleteObject(element.objectID)
-                KeyDelete -> DeleteIndex
-                KeyClear -> ClearIndex
+            return when (val action = element.getValue(Key.Action).jsonPrimitive.content) {
+                Key.AddObject -> AddObject(element.body)
+                Key.UpdateObject -> ReplaceObject(element.objectID, element.body)
+                Key.PartialUpdateObject -> PartialUpdateObject(element.objectID, element.body)
+                Key.PartialUpdateObjectNoCreate -> PartialUpdateObject(element.objectID, element.body, false)
+                Key.DeleteObject -> DeleteObject(element.objectID)
+                Key.Delete -> DeleteIndex
+                Key.Clear -> ClearIndex
                 else -> Other(action, element.body)
             }
         }

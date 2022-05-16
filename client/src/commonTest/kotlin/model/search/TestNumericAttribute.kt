@@ -2,7 +2,7 @@ package model.search
 
 import attributeA
 import com.algolia.search.model.settings.NumericAttributeFilter
-import com.algolia.search.serialize.KeyEqualOnly
+import com.algolia.search.serialize.internal.KeyEqualOnly
 import shouldEqual
 import kotlin.test.Test
 

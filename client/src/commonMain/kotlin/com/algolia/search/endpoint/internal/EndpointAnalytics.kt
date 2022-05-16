@@ -13,8 +13,7 @@ import com.algolia.search.model.response.ResponseABTests
 import com.algolia.search.model.response.creation.CreationABTest
 import com.algolia.search.model.response.deletion.DeletionABTest
 import com.algolia.search.model.response.revision.RevisionABTest
-import com.algolia.search.serialize.KeyLimit
-import com.algolia.search.serialize.KeyOffset
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
@@ -47,8 +46,8 @@ internal class EndpointAnalyticsImpl(
 
     override suspend fun listABTests(page: Int?, hitsPerPage: Int?, requestOptions: RequestOptions?): ResponseABTests {
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyOffset, page)
-            parameter(KeyLimit, hitsPerPage)
+            parameter(Key.Offset, page)
+            parameter(Key.Limit, hitsPerPage)
         }
         return transport.request(HttpMethod.Get, CallType.Read, Route.ABTestsV2, options)
     }

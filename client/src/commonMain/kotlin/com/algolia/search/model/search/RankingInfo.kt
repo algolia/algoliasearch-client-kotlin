@@ -6,20 +6,7 @@ import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.GeoDistance
 import com.algolia.search.serialize.KSerializerGeoDistance
 import com.algolia.search.serialize.KSerializerGeoPoint
-import com.algolia.search.serialize.KeyFilters
-import com.algolia.search.serialize.KeyFirstMatchedWord
-import com.algolia.search.serialize.KeyGeoDistance
-import com.algolia.search.serialize.KeyGeoPoint
-import com.algolia.search.serialize.KeyGeoPrecision
-import com.algolia.search.serialize.KeyMatchedGeoLocation
-import com.algolia.search.serialize.KeyNbExactWords
-import com.algolia.search.serialize.KeyNbTypos
-import com.algolia.search.serialize.KeyPersonalization
-import com.algolia.search.serialize.KeyPromoted
-import com.algolia.search.serialize.KeyProximityDistance
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyUserScore
-import com.algolia.search.serialize.KeyWords
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -28,65 +15,65 @@ public data class RankingInfo(
     /**
      * Present and set to true if a query rule promoted the hit.
      */
-    @SerialName(KeyPromoted) val promoted: Boolean? = null,
+    @SerialName(Key.Promoted) val promoted: Boolean? = null,
     /**
      * Number of typos encountered when matching the record.
      * Corresponds to the [RankingCriterion.Typo] in the ranking formula.
      */
-    @SerialName(KeyNbTypos) val nbTypos: Int,
+    @SerialName(Key.NbTypos) val nbTypos: Int,
     /**
      * Position of the most important matched attribute in the attributes to index list.
      * Corresponds to the [RankingCriterion.Attribute] in the ranking formula.
      */
-    @SerialName(KeyFirstMatchedWord) val firstMatchedWord: Int,
+    @SerialName(Key.FirstMatchedWord) val firstMatchedWord: Int,
     /**
      * When the query contains more than one word, the sum of the distances between matched words (in meters).
      * Corresponds to the [RankingCriterion.Proximity] in the ranking formula.
      */
-    @SerialName(KeyProximityDistance) val proximityDistance: Int,
+    @SerialName(Key.ProximityDistance) val proximityDistance: Int,
     /**
      * Custom ranking for the object, expressed as a single integer value.
      * This field is internal to Algolia and shouldn’t be relied upon, as it will eventually be removed
      * from the public API.
      */
-    @SerialName(KeyUserScore) val userScore: Int,
+    @SerialName(Key.UserScore) val userScore: Int,
     /**
      * Distance between the geo location in the search query and the best matching geo location in the record,
      * divided by the geo precision (in meters).
      */
-    @SerialName(KeyGeoDistance) @Serializable(with = KSerializerGeoDistance::class) val geoDistance: GeoDistance,
+    @SerialName(Key.GeoDistance) @Serializable(with = KSerializerGeoDistance::class) val geoDistance: GeoDistance,
     /**
      * Precision used when computing the geo distance, in meters.
      * All distances will be floored to a multiple of this precision.
      */
-    @SerialName(KeyGeoPrecision) val geoPrecision: Int,
+    @SerialName(Key.GeoPrecision) val geoPrecision: Int,
     /**
      * Number of exactly matched words. If [Query.alternativesAsExact] or [Settings.alternativesAsExact] is set,
      * it may include plurals and/or synonyms.
      */
-    @SerialName(KeyNbExactWords) val nbExactWords: Int,
+    @SerialName(Key.NbExactWords) val nbExactWords: Int,
     /**
      * Number of matched words, including prefixes and typos.
      */
-    @SerialName(KeyWords) val words: Int,
+    @SerialName(Key.Words) val words: Int,
     /**
      * This field is reserved for advanced usage. It will be zero in most cases.
      */
-    @SerialName(KeyFilters) val filters: Int,
+    @SerialName(Key.Filters) val filters: Int,
     /**
      * Geo location that matched the query. Only returned if [Query.aroundRadius] is used.
      */
-    @SerialName(KeyMatchedGeoLocation) val matchedGeoLocation: MatchedGeoLocation? = null,
+    @SerialName(Key.MatchedGeoLocation) val matchedGeoLocation: MatchedGeoLocation? = null,
     /**
      * Only returned for [EndpointPlaces.searchPlaces].
      */
-    @SerialName(KeyGeoPoint) @Serializable(KSerializerGeoPoint::class) val geoPoint: Point? = null,
+    @SerialName(Key.GeoPoint) @Serializable(KSerializerGeoPoint::class) val geoPoint: Point? = null,
     /**
      * Only returned for [EndpointPlaces.searchPlaces].
      */
-    @SerialName(KeyQuery) val query: String? = null,
+    @SerialName(Key.Query) val query: String? = null,
     /**
      * Only returned when personalization is enabled
      */
-    @SerialName(KeyPersonalization) val personalization: Personalization? = null
+    @SerialName(Key.Personalization) val personalization: Personalization? = null
 )

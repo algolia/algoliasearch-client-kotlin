@@ -2,8 +2,7 @@ package com.algolia.search.model.task
 
 import com.algolia.search.endpoint.EndpointAdvanced
 import com.algolia.search.model.IndexName
-import com.algolia.search.serialize.KeyIndexName
-import com.algolia.search.serialize.KeyTaskID
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,9 +11,9 @@ public data class TaskIndex(
     /**
      * The [IndexName] this task is running on.
      */
-    @SerialName(KeyIndexName) val indexName: IndexName,
+    @SerialName(Key.IndexName) val indexName: IndexName,
     /**
      * The [TaskID] which can be used with the [EndpointAdvanced.waitTask] method.
      */
-    @SerialName(KeyTaskID) override val taskID: TaskID
+    @SerialName(Key.TaskID) override val taskID: TaskID
 ) : Task

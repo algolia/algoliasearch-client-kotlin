@@ -12,9 +12,7 @@ import com.algolia.search.model.response.ResponseSearchPlacesMono
 import com.algolia.search.model.response.ResponseSearchPlacesMulti
 import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
-import com.algolia.search.serialize.KeyAroundLatLng
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyLanguage
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
@@ -55,8 +53,8 @@ internal class EndpointPlacesImpl(
         requestOptions: RequestOptions?,
     ): ResponseSearchPlacesMulti {
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyAroundLatLng, "${geolocation.latitude},${geolocation.longitude}")
-            parameter(KeyHitsPerPage, hitsPerPage)
+            parameter(Key.AroundLatLng, "${geolocation.latitude},${geolocation.longitude}")
+            parameter(Key.HitsPerPage, hitsPerPage)
         }
 
         return transport.request(HttpMethod.Get, CallType.Read, "${Route.Places}/reverse", options)
@@ -69,9 +67,9 @@ internal class EndpointPlacesImpl(
         requestOptions: RequestOptions?,
     ): ResponseSearchPlacesMono {
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyAroundLatLng, "${geolocation.latitude},${geolocation.longitude}")
-            parameter(KeyHitsPerPage, hitsPerPage)
-            parameter(KeyLanguage, language.raw)
+            parameter(Key.AroundLatLng, "${geolocation.latitude},${geolocation.longitude}")
+            parameter(Key.HitsPerPage, hitsPerPage)
+            parameter(Key.Language, language.raw)
         }
 
         return transport.request(HttpMethod.Get, CallType.Read, "${Route.Places}/reverse", options)

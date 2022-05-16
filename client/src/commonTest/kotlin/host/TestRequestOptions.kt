@@ -2,8 +2,8 @@ package host
 
 import com.algolia.search.dsl.requestOptions
 import com.algolia.search.helper.toUserID
-import com.algolia.search.serialize.KeyAlgoliaUserID
-import com.algolia.search.serialize.KeyForwardedFor
+import com.algolia.search.serialize.internal.KeyAlgoliaUserID
+import com.algolia.search.serialize.internal.KeyForwardedFor
 import shouldEqual
 import kotlin.test.Test
 

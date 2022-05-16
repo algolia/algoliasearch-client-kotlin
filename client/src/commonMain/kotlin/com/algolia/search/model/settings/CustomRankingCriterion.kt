@@ -3,8 +3,7 @@ package com.algolia.search.model.settings
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyAsc
-import com.algolia.search.serialize.KeyDesc
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.regexAsc
 import com.algolia.search.serialize.internal.regexDesc
 import kotlinx.serialization.KSerializer
@@ -23,12 +22,12 @@ public sealed class CustomRankingCriterion(override val raw: String) : Raw<Strin
     /**
      * Sort an [Attribute] value by ascending order.
      */
-    public data class Asc(val attribute: Attribute) : CustomRankingCriterion("$KeyAsc($attribute)")
+    public data class Asc(val attribute: Attribute) : CustomRankingCriterion("${Key.Asc}($attribute)")
 
     /**
      * Sort an [Attribute] value by descending order.
      */
-    public data class Desc(val attribute: Attribute) : CustomRankingCriterion("$KeyDesc($attribute)")
+    public data class Desc(val attribute: Attribute) : CustomRankingCriterion("${Key.Desc}($attribute)")
 
     public data class Other(override val raw: String) : CustomRankingCriterion(raw)
 

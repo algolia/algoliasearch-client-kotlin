@@ -1,7 +1,6 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.serialize.KeyMatchLevel
-import com.algolia.search.serialize.KeyValue
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -12,9 +11,9 @@ public data class SnippetResult(
      * [Query.highlightPreTag] and [Query.highlightPostTag].
      * The text used to indicate ellipsis is specified via [Query.snippetEllipsisText].
      */
-    @SerialName(KeyValue) val value: String,
+    @SerialName(Key.Value) val value: String,
     /**
      * Indicates how well the attribute matched the search query.
      */
-    @SerialName(KeyMatchLevel) val matchLevel: MatchLevel
+    @SerialName(Key.MatchLevel) val matchLevel: MatchLevel
 )

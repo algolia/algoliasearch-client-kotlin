@@ -1,8 +1,6 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.serialize.KeyFiltersScore
-import com.algolia.search.serialize.KeyRankingScore
-import com.algolia.search.serialize.KeyScore
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -11,15 +9,15 @@ public data class Personalization(
     /**
      * Personalization Score
      */
-    @SerialName(KeyScore) val scoreOrNull: Int? = null,
+    @SerialName(Key.Score) val scoreOrNull: Int? = null,
     /**
      * Personalization Ranking Score
      */
-    @SerialName(KeyRankingScore) val rankingScoreOrNull: Int? = null,
+    @SerialName(Key.RankingScore) val rankingScoreOrNull: Int? = null,
     /**
      * Personalization Filters Score
      */
-    @SerialName(KeyFiltersScore) val filtersScoreOrNull: Int? = null,
+    @SerialName(Key.FiltersScore) val filtersScoreOrNull: Int? = null,
 ) {
 
     /**

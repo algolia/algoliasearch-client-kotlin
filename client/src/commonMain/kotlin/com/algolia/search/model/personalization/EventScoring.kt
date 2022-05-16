@@ -1,8 +1,6 @@
 package com.algolia.search.model.personalization
 
-import com.algolia.search.serialize.KeyEventName
-import com.algolia.search.serialize.KeyEventType
-import com.algolia.search.serialize.KeyScore
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -15,13 +13,13 @@ public data class EventScoring(
     /**
      * Name of the event
      */
-    @SerialName(KeyEventName) val eventName: String,
+    @SerialName(Key.EventName) val eventName: String,
     /**
      * Type of the event
      */
-    @SerialName(KeyEventType) val eventType: String,
+    @SerialName(Key.EventType) val eventType: String,
     /**
      * Score of the event
      */
-    @SerialName(KeyScore) val score: Int
+    @SerialName(Key.Score) val score: Int
 )

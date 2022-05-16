@@ -14,7 +14,7 @@ import com.algolia.search.model.response.creation.CreationAPIKey
 import com.algolia.search.model.response.deletion.Deletion
 import com.algolia.search.model.response.deletion.DeletionAPIKey
 import com.algolia.search.model.response.revision.RevisionAPIKey
-import com.algolia.search.serialize.KeyRestrictSources
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Route
 import com.algolia.search.serialize.internal.stringify
 import com.algolia.search.serialize.internal.toJsonNoDefaults
@@ -36,7 +36,7 @@ internal class EndpointAPIKeyImpl(
         requestOptions: RequestOptions?,
     ): CreationAPIKey {
         val query = mutableMapOf<String, JsonElement>().run {
-            restrictSources?.let { put(KeyRestrictSources, JsonPrimitive(it)) }
+            restrictSources?.let { put(Key.RestrictSources, JsonPrimitive(it)) }
             params.query?.toJsonNoDefaults()?.let { putAll(it) }
             JsonObject(this)
         }

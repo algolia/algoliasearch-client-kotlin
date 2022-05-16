@@ -1,7 +1,6 @@
 package com.algolia.search.model.personalization
 
-import com.algolia.search.serialize.KeyFacetName
-import com.algolia.search.serialize.KeyScore
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,9 +13,9 @@ public data class FacetScoring(
     /**
      * Attribute name
      */
-    @SerialName(KeyFacetName) val facetName: String,
+    @SerialName(Key.FacetName) val facetName: String,
     /**
      * Score for the facet
      */
-    @SerialName(KeyScore) val score: Int
+    @SerialName(Key.Score) val score: Int
 )

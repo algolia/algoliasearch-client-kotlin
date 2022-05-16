@@ -5,9 +5,9 @@ import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.Variant
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.KeyEndAt
-import com.algolia.search.serialize.KeyName
-import com.algolia.search.serialize.KeyVariants
+import com.algolia.search.serialize.internal.KeyEndAt
+import com.algolia.search.serialize.internal.KeyName
+import com.algolia.search.serialize.internal.KeyVariants
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import indexA
 import indexB

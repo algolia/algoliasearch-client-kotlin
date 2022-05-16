@@ -5,10 +5,10 @@ import com.algolia.search.model.analytics.ABTestStatus.Expired
 import com.algolia.search.model.analytics.ABTestStatus.Failed
 import com.algolia.search.model.analytics.ABTestStatus.Other
 import com.algolia.search.model.analytics.ABTestStatus.Stopped
-import com.algolia.search.serialize.KeyActive
-import com.algolia.search.serialize.KeyExpired
-import com.algolia.search.serialize.KeyFailed
-import com.algolia.search.serialize.KeyStopped
+import com.algolia.search.serialize.internal.KeyActive
+import com.algolia.search.serialize.internal.KeyExpired
+import com.algolia.search.serialize.internal.KeyFailed
+import com.algolia.search.serialize.internal.KeyStopped
 import unknown
 import kotlin.test.Test
 

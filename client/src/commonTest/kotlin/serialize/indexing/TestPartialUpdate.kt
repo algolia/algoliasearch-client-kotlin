@@ -2,15 +2,15 @@ package serialize.indexing
 
 import attributeA
 import com.algolia.search.model.indexing.Partial
-import com.algolia.search.serialize.KeyAdd
-import com.algolia.search.serialize.KeyAddUnique
-import com.algolia.search.serialize.KeyDecrement
-import com.algolia.search.serialize.KeyIncrement
-import com.algolia.search.serialize.KeyIncrementFrom
-import com.algolia.search.serialize.KeyIncrementSet
-import com.algolia.search.serialize.KeyRemove
-import com.algolia.search.serialize.KeyValue
-import com.algolia.search.serialize.Key_Operation
+import com.algolia.search.serialize.internal.KeyAdd
+import com.algolia.search.serialize.internal.KeyAddUnique
+import com.algolia.search.serialize.internal.KeyDecrement
+import com.algolia.search.serialize.internal.KeyIncrement
+import com.algolia.search.serialize.internal.KeyIncrementFrom
+import com.algolia.search.serialize.internal.KeyIncrementSet
+import com.algolia.search.serialize.internal.KeyRemove
+import com.algolia.search.serialize.internal.KeyValue
+import com.algolia.search.serialize.internal.Key_Operation
 import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray

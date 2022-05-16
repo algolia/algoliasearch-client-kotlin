@@ -15,10 +15,9 @@ import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.response.revision.RevisionSynonym
 import com.algolia.search.model.synonym.Synonym
 import com.algolia.search.model.synonym.SynonymQuery
-import com.algolia.search.serialize.KeyForwardToReplicas
-import com.algolia.search.serialize.KeyReplaceExistingSynonyms
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Route
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
@@ -38,7 +37,7 @@ internal class EndpointSynonymImpl(
         val path = indexName.toPath("/${Route.Synonyms}/${synonym.objectID}")
         val body = Json.encodeToString(Synonym, synonym)
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyForwardToReplicas, forwardToReplicas)
+            parameter(Key.ForwardToReplicas, forwardToReplicas)
         }
 
         return transport.request(HttpMethod.Put, CallType.Write, path, options, body)
@@ -54,8 +53,8 @@ internal class EndpointSynonymImpl(
         val path = indexName.toPath("/${Route.Synonyms}/batch")
         val body = Json.encodeToString(ListSerializer(Synonym), synonyms)
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyForwardToReplicas, forwardToReplicas)
-            parameter(KeyReplaceExistingSynonyms, clearExistingSynonyms)
+            parameter(Key.ForwardToReplicas, forwardToReplicas)
+            parameter(Key.ReplaceExistingSynonyms, clearExistingSynonyms)
         }
 
         return transport.request(HttpMethod.Post, CallType.Write, path, options, body)
@@ -74,7 +73,7 @@ internal class EndpointSynonymImpl(
     ): DeletionIndex {
         val path = indexName.toPath("/${Route.Synonyms}/$objectID")
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyForwardToReplicas, forwardToReplicas)
+            parameter(Key.ForwardToReplicas, forwardToReplicas)
         }
 
         return transport.request(HttpMethod.Delete, CallType.Write, path, options)
@@ -93,7 +92,7 @@ internal class EndpointSynonymImpl(
     override suspend fun clearSynonyms(forwardToReplicas: Boolean?, requestOptions: RequestOptions?): RevisionIndex {
         val path = indexName.toPath("/${Route.Synonyms}/clear")
         val options = requestOptionsBuilder(requestOptions) {
-            parameter(KeyForwardToReplicas, forwardToReplicas)
+            parameter(Key.ForwardToReplicas, forwardToReplicas)
         }
 
         return transport.request(HttpMethod.Post, CallType.Write, path, options, EmptyBody)

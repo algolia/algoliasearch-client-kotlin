@@ -1,8 +1,7 @@
 package com.algolia.search.transport
 
 import com.algolia.search.model.multicluster.UserID
-import com.algolia.search.serialize.KeyAlgoliaUserID
-import com.algolia.search.serialize.KeyForwardedFor
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.json.JsonObject
 
 /**
@@ -22,14 +21,14 @@ public class RequestOptions {
      * Add a "X-Forwarded-For" header with an [ipAddress] to [headers].
      */
     public fun headerForwardedFor(ipAddress: String) {
-        headers[KeyForwardedFor] = ipAddress
+        headers[Key.ForwardedFor] = ipAddress
     }
 
     /**
      * Add a "X-Algolia-User-ID" header with an [userId] to [headers].
      */
     public fun headerAlgoliaUserId(userId: UserID) {
-        headers[KeyAlgoliaUserID] = userId.raw
+        headers[Key.AlgoliaUserID] = userId.raw
     }
 
     /**

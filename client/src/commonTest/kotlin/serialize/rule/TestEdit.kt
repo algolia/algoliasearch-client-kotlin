@@ -1,11 +1,11 @@
 package serialize.rule
 
 import com.algolia.search.model.rule.Edit
-import com.algolia.search.serialize.KeyDelete
-import com.algolia.search.serialize.KeyInsert
-import com.algolia.search.serialize.KeyRemove
-import com.algolia.search.serialize.KeyReplace
-import com.algolia.search.serialize.KeyType
+import com.algolia.search.serialize.internal.KeyDelete
+import com.algolia.search.serialize.internal.KeyInsert
+import com.algolia.search.serialize.internal.KeyRemove
+import com.algolia.search.serialize.internal.KeyReplace
+import com.algolia.search.serialize.internal.KeyType
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
 import serialize.TestSerializer

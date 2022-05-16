@@ -4,8 +4,8 @@ import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures.ExactPhrase
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures.ExcludeWords
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures.Other
-import com.algolia.search.serialize.KeyExactPhrase
-import com.algolia.search.serialize.KeyExcludeWords
+import com.algolia.search.serialize.internal.KeyExactPhrase
+import com.algolia.search.serialize.internal.KeyExcludeWords
 import kotlinx.serialization.json.JsonPrimitive
 import serialize.TestSerializer
 import unknown

@@ -16,7 +16,7 @@ import com.algolia.search.model.internal.request.RequestDictionary
 import com.algolia.search.model.response.ResponseDictionary
 import com.algolia.search.model.response.ResponseSearchDictionaries
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.KeyObjectID
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.internal.Route
@@ -82,7 +82,7 @@ internal class EndpointDictionaryImpl(
         val entries = buildJsonArray {
             objectIDs.forEach {
                 add(
-                    buildJsonObject { put(KeyObjectID, JsonPrimitive(it.raw)) } // { "objectID": "myID1" }
+                    buildJsonObject { put(Key.ObjectID, JsonPrimitive(it.raw)) } // { "objectID": "myID1" }
                 )
             }
         }

@@ -2,10 +2,7 @@ package com.algolia.search.model.internal.request
 
 import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
-import com.algolia.search.serialize.KeyIndexName
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyRequests
-import com.algolia.search.serialize.KeyStrategy
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.toJsonNoDefaults
 import com.algolia.search.serialize.internal.urlEncode
@@ -21,8 +18,8 @@ import kotlinx.serialization.json.put
 
 @Serializable(RequestMultipleQueries.Companion::class)
 internal class RequestMultipleQueries(
-    @SerialName(KeyRequests) val indexQueries: List<IndexQuery>,
-    @SerialName(KeyStrategy) val strategy: MultipleQueriesStrategy? = null
+    @SerialName(Key.Requests) val indexQueries: List<IndexQuery>,
+    @SerialName(Key.Strategy) val strategy: MultipleQueriesStrategy? = null
 ) {
 
     @OptIn(ExperimentalSerializationApi::class)
@@ -32,19 +29,19 @@ internal class RequestMultipleQueries(
         override fun serialize(encoder: Encoder, value: RequestMultipleQueries) {
             val json = buildJsonObject {
                 put(
-                    KeyRequests,
+                    Key.Requests,
                     buildJsonArray {
                         value.indexQueries.forEach {
                             add(
                                 buildJsonObject {
-                                    put(KeyIndexName, it.indexName.raw)
-                                    it.query.toJsonNoDefaults().urlEncode()?.let { put(KeyParams, it) }
+                                    put(Key.IndexName, it.indexName.raw)
+                                    it.query.toJsonNoDefaults().urlEncode()?.let { put(Key.Params, it) }
                                 }
                             )
                         }
                     }
                 )
-                value.strategy?.let { put(KeyStrategy, it.raw) }
+                value.strategy?.let { put(Key.Strategy, it.raw) }
             }
             encoder.asJsonOutput().encodeJsonElement(json)
         }

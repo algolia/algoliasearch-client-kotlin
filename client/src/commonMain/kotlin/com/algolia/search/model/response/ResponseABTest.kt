@@ -5,14 +5,7 @@ import com.algolia.search.model.ClientDate
 import com.algolia.search.model.analytics.ABTest
 import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.analytics.ABTestStatus
-import com.algolia.search.serialize.KeyABTestID
-import com.algolia.search.serialize.KeyClickSignificance
-import com.algolia.search.serialize.KeyConversionSignificance
-import com.algolia.search.serialize.KeyCreatedAt
-import com.algolia.search.serialize.KeyEndAt
-import com.algolia.search.serialize.KeyName
-import com.algolia.search.serialize.KeyStatus
-import com.algolia.search.serialize.KeyVariants
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.JsonNonStrict
@@ -87,15 +80,15 @@ public data class ResponseABTest(
 
         override fun serialize(encoder: Encoder, value: ResponseABTest) {
             val json = buildJsonObject {
-                put(KeyABTestID, value.abTestID.raw)
-                put(KeyCreatedAt, value.createdAt)
-                put(KeyEndAt, value.endAt.raw)
-                put(KeyName, value.name)
-                put(KeyStatus, value.status.raw)
-                value.conversionSignificanceOrNull?.let { put(KeyConversionSignificance, it) }
-                value.clickSignificanceOrNull?.let { put(KeyClickSignificance, it) }
+                put(Key.ABTestID, value.abTestID.raw)
+                put(Key.CreatedAt, value.createdAt)
+                put(Key.EndAt, value.endAt.raw)
+                put(Key.Name, value.name)
+                put(Key.Status, value.status.raw)
+                value.conversionSignificanceOrNull?.let { put(Key.ConversionSignificance, it) }
+                value.clickSignificanceOrNull?.let { put(Key.ClickSignificance, it) }
                 put(
-                    KeyVariants,
+                    Key.Variants,
                     buildJsonArray {
                         add(JsonNoDefaults.encodeToJsonElement(ResponseVariant.serializer(), value.variantA))
                         add(JsonNoDefaults.encodeToJsonElement(ResponseVariant.serializer(), value.variantB))
@@ -108,19 +101,19 @@ public data class ResponseABTest(
 
         override fun deserialize(decoder: Decoder): ResponseABTest {
             val element = decoder.asJsonInput().jsonObject
-            val variants = element.getValue(KeyVariants).jsonArray
+            val variants = element.getValue(Key.Variants).jsonArray
 
             return ResponseABTest(
-                abTestID = element.getValue(KeyABTestID).jsonPrimitive.long.toABTestID(),
-                createdAt = element.getValue(KeyCreatedAt).jsonPrimitive.content,
-                endAt = ClientDate(element.getValue(KeyEndAt).jsonPrimitive.content),
-                name = element.getValue(KeyName).jsonPrimitive.content,
+                abTestID = element.getValue(Key.ABTestID).jsonPrimitive.long.toABTestID(),
+                createdAt = element.getValue(Key.CreatedAt).jsonPrimitive.content,
+                endAt = ClientDate(element.getValue(Key.EndAt).jsonPrimitive.content),
+                name = element.getValue(Key.Name).jsonPrimitive.content,
                 status = JsonNonStrict.decodeFromString(
                     ABTestStatus,
-                    element.getValue(KeyStatus).jsonPrimitive.content
+                    element.getValue(Key.Status).jsonPrimitive.content
                 ),
-                conversionSignificanceOrNull = element.getValue(KeyConversionSignificance).jsonPrimitive.floatOrNull,
-                clickSignificanceOrNull = element.getValue(KeyClickSignificance).jsonPrimitive.floatOrNull,
+                conversionSignificanceOrNull = element.getValue(Key.ConversionSignificance).jsonPrimitive.floatOrNull,
+                clickSignificanceOrNull = element.getValue(Key.ClickSignificance).jsonPrimitive.floatOrNull,
                 variantA = Json.decodeFromJsonElement(ResponseVariant.serializer(), variants[0]),
                 variantB = Json.decodeFromJsonElement(ResponseVariant.serializer(), variants[1])
             )

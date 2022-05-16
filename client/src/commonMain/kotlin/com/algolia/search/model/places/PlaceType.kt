@@ -1,13 +1,7 @@
 package com.algolia.search.model.places
 
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyAddress
-import com.algolia.search.serialize.KeyAirport
-import com.algolia.search.serialize.KeyBusStop
-import com.algolia.search.serialize.KeyCity
-import com.algolia.search.serialize.KeyCountry
-import com.algolia.search.serialize.KeyTownhall
-import com.algolia.search.serialize.KeyTrainStation
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -18,19 +12,19 @@ import kotlinx.serialization.encoding.Encoder
 @Serializable(PlaceType.Companion::class)
 public sealed class PlaceType(override val raw: String) : Raw<String> {
 
-    public object City : PlaceType(KeyCity)
+    public object City : PlaceType(Key.City)
 
-    public object Country : PlaceType(KeyCountry)
+    public object Country : PlaceType(Key.Country)
 
-    public object Address : PlaceType(KeyAddress)
+    public object Address : PlaceType(Key.Address)
 
-    public object BusStop : PlaceType(KeyBusStop)
+    public object BusStop : PlaceType(Key.BusStop)
 
-    public object TrainStation : PlaceType(KeyTrainStation)
+    public object TrainStation : PlaceType(Key.TrainStation)
 
-    public object TownHall : PlaceType(KeyTownhall)
+    public object TownHall : PlaceType(Key.Townhall)
 
-    public object Airport : PlaceType(KeyAirport)
+    public object Airport : PlaceType(Key.Airport)
 
     public data class Other(override val raw: String) : PlaceType(raw)
 
@@ -46,13 +40,13 @@ public sealed class PlaceType(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): PlaceType {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyCity -> City
-                KeyCountry -> Country
-                KeyAddress -> Address
-                KeyBusStop -> BusStop
-                KeyTrainStation -> TrainStation
-                KeyTownhall -> TownHall
-                KeyAirport -> Airport
+                Key.City -> City
+                Key.Country -> Country
+                Key.Address -> Address
+                Key.BusStop -> BusStop
+                Key.TrainStation -> TrainStation
+                Key.Townhall -> TownHall
+                Key.Airport -> Airport
                 else -> Other(string)
             }
         }

@@ -1,9 +1,7 @@
 package com.algolia.search.model.search
 
 import com.algolia.search.helper.and
-import com.algolia.search.serialize.KeyDistance
-import com.algolia.search.serialize.KeyLat
-import com.algolia.search.serialize.KeyLng
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -37,9 +35,9 @@ public data class MatchedGeoLocation(
 
         override fun serialize(encoder: Encoder, value: MatchedGeoLocation) {
             val json = buildJsonObject {
-                put(KeyDistance, value.distance)
-                put(KeyLat, value.point.latitude)
-                put(KeyLng, value.point.longitude)
+                put(Key.Distance, value.distance)
+                put(Key.Lat, value.point.latitude)
+                put(Key.Lng, value.point.longitude)
             }
 
             encoder.asJsonOutput().encodeJsonElement(json)
@@ -49,8 +47,8 @@ public data class MatchedGeoLocation(
             val json = decoder.asJsonInput().jsonObject
 
             return MatchedGeoLocation(
-                distance = json.getValue(KeyDistance).jsonPrimitive.long,
-                point = json.getValue(KeyLat).jsonPrimitive.float and json.getValue(KeyLng).jsonPrimitive.float
+                distance = json.getValue(Key.Distance).jsonPrimitive.long,
+                point = json.getValue(Key.Lat).jsonPrimitive.float and json.getValue(Key.Lng).jsonPrimitive.float
             )
         }
     }

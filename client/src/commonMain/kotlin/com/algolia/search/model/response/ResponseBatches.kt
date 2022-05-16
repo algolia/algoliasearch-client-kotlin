@@ -7,8 +7,7 @@ import com.algolia.search.helper.toObjectID
 import com.algolia.search.helper.toTaskID
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.task.TaskIndex
-import com.algolia.search.serialize.KeyObjectIDs
-import com.algolia.search.serialize.KeyTaskID
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonInput
 import com.algolia.search.serialize.internal.asJsonOutput
 import com.algolia.search.serialize.internal.jsonArrayOrNull
@@ -33,11 +32,11 @@ public data class ResponseBatches(
     /**
      * A list of [TaskIndex] to use with [ClientSearch.waitAll].
      */
-    @SerialName(KeyTaskID) val tasks: List<TaskIndex>,
+    @SerialName(Key.TaskID) val tasks: List<TaskIndex>,
     /**
      * List of [ObjectID] affected by [EndpointMultipleIndex.multipleBatchObjects].
      */
-    @SerialName(KeyObjectIDs) val objectIDsOrNull: List<ObjectID?>? = null
+    @SerialName(Key.ObjectIDs) val objectIDsOrNull: List<ObjectID?>? = null
 ) {
 
     public val objectIDs: List<ObjectID?>
@@ -50,14 +49,14 @@ public data class ResponseBatches(
         override fun serialize(encoder: Encoder, value: ResponseBatches) {
             val json = buildJsonObject {
                 put(
-                    KeyTaskID,
+                    Key.TaskID,
                     buildJsonObject {
                         value.tasks.forEach {
                             put(it.indexName.raw, it.taskID.raw)
                         }
                     }
                 )
-                KeyObjectIDs to value.objectIDsOrNull?.let { buildJsonArray { it.forEach { add(it?.raw) } } }
+                Key.ObjectIDs to value.objectIDsOrNull?.let { buildJsonArray { it.forEach { add(it?.raw) } } }
             }
 
             encoder.asJsonOutput().encodeJsonElement(json)
@@ -65,10 +64,11 @@ public data class ResponseBatches(
 
         override fun deserialize(decoder: Decoder): ResponseBatches {
             val element = decoder.asJsonInput().jsonObject
-            val taskIDs = element.getValue(KeyTaskID).jsonObject.map { (key, entry) ->
+            val taskIDs = element.getValue(Key.TaskID).jsonObject.map { (key, entry) ->
                 TaskIndex(key.toIndexName(), entry.jsonPrimitive.long.toTaskID())
             }
-            val objectIDs = element[KeyObjectIDs]?.jsonArrayOrNull?.map { it.jsonPrimitive.contentOrNull?.toObjectID() }
+            val objectIDs =
+                element[Key.ObjectIDs]?.jsonArrayOrNull?.map { it.jsonPrimitive.contentOrNull?.toObjectID() }
 
             return ResponseBatches(taskIDs, objectIDs)
         }

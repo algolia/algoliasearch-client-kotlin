@@ -21,50 +21,7 @@ import com.algolia.search.model.search.RemoveWordIfNoResults
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.KSerializerFacetMap
 import com.algolia.search.serialize.KSerializerPoint
-import com.algolia.search.serialize.KeyABTestID
-import com.algolia.search.serialize.KeyAbTestVariantID
-import com.algolia.search.serialize.KeyAppliedRelevancyStrictness
-import com.algolia.search.serialize.KeyAppliedRules
-import com.algolia.search.serialize.KeyAroundLatLng
-import com.algolia.search.serialize.KeyAutomaticRadius
-import com.algolia.search.serialize.KeyCursor
-import com.algolia.search.serialize.KeyDisjunctiveFacets
-import com.algolia.search.serialize.KeyExhaustiveFacetsCount
-import com.algolia.search.serialize.KeyExhaustiveNbHits
-import com.algolia.search.serialize.KeyExplain
-import com.algolia.search.serialize.KeyExtract
-import com.algolia.search.serialize.KeyExtractAttribute
-import com.algolia.search.serialize.KeyFacets
-import com.algolia.search.serialize.KeyFacets_Stats
-import com.algolia.search.serialize.KeyHierarchicalFacets
-import com.algolia.search.serialize.KeyHits
-import com.algolia.search.serialize.KeyHitsPerPage
-import com.algolia.search.serialize.KeyIndex
-import com.algolia.search.serialize.KeyIndexUsed
-import com.algolia.search.serialize.KeyLength
-import com.algolia.search.serialize.KeyMessage
-import com.algolia.search.serialize.KeyNbHits
-import com.algolia.search.serialize.KeyNbPages
-import com.algolia.search.serialize.KeyNbSortedHits
-import com.algolia.search.serialize.KeyOffset
-import com.algolia.search.serialize.KeyPage
-import com.algolia.search.serialize.KeyParams
-import com.algolia.search.serialize.KeyParsedQuery
-import com.algolia.search.serialize.KeyProcessed
-import com.algolia.search.serialize.KeyProcessingTimeMS
-import com.algolia.search.serialize.KeyQuery
-import com.algolia.search.serialize.KeyQueryAfterRemoval
-import com.algolia.search.serialize.KeyQueryID
-import com.algolia.search.serialize.KeyRenderingContent
-import com.algolia.search.serialize.KeyScore
-import com.algolia.search.serialize.KeyServerUsed
-import com.algolia.search.serialize.KeyUserData
-import com.algolia.search.serialize.Key_Answer
-import com.algolia.search.serialize.Key_DistinctSeqID
-import com.algolia.search.serialize.Key_HighlightResult
-import com.algolia.search.serialize.Key_RankingInfo
-import com.algolia.search.serialize.Key_Score
-import com.algolia.search.serialize.Key_SnippetResult
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNonStrict
 import com.algolia.search.serialize.internal.asJsonInput
@@ -91,59 +48,59 @@ public data class ResponseSearch(
      * The hits returned by the search. Hits are ordered according to the ranking or sorting of the index being queried.
      * Hits are made of the schemaless JSON objects that you stored in the index.
      */
-    @SerialName(KeyHits) val hitsOrNull: List<Hit>? = null,
+    @SerialName(Key.Hits) val hitsOrNull: List<Hit>? = null,
     /**
      * The number of hits matched by the query.
      */
-    @SerialName(KeyNbHits) val nbHitsOrNull: Int? = null,
+    @SerialName(Key.NbHits) val nbHitsOrNull: Int? = null,
     /**
      * Index of the current page (zero-based). See the [Query.page] search parameter.
      * Not returned if you use offset/length for pagination.
      */
-    @SerialName(KeyPage) val pageOrNull: Int? = null,
+    @SerialName(Key.Page) val pageOrNull: Int? = null,
     /**
      * The maximum number of hits returned per page. See the [Query.hitsPerPage] search parameter.
      * Not returned if you use offset & length for pagination.
      */
-    @SerialName(KeyHitsPerPage) val hitsPerPageOrNull: Int? = null,
+    @SerialName(Key.HitsPerPage) val hitsPerPageOrNull: Int? = null,
     /**
      * Alternative to [page] (zero-based). Is returned only when [Query.offset] [Query.length] is specified.
      */
-    @SerialName(KeyOffset) val offsetOrNull: Int? = null,
+    @SerialName(Key.Offset) val offsetOrNull: Int? = null,
     /**
      * Alternative to [hitsPerPageOrNull] (zero-based). Is returned only when [Query.offset] [Query.length] is specified.
      */
-    @SerialName(KeyLength) val lengthOrNull: Int? = null,
+    @SerialName(Key.Length) val lengthOrNull: Int? = null,
     /**
      * Array of userData object. Only returned if at least one query rule containing a custom userData
      * consequence was applied.
      */
-    @SerialName(KeyUserData) val userDataOrNull: List<JsonObject>? = null,
+    @SerialName(Key.UserData) val userDataOrNull: List<JsonObject>? = null,
     /**
      * The number of returned pages. Calculation is based on the total number of hits (nbHits) divided by the number of
      * hits per page (hitsPerPage), rounded up to the nearest integer.
      * Not returned if you use offset & length for pagination.
      */
-    @SerialName(KeyNbPages) val nbPagesOrNull: Int? = null,
+    @SerialName(Key.NbPages) val nbPagesOrNull: Int? = null,
     /**
      * Time the server took to process the request, in milliseconds. This does not include network time.
      */
-    @SerialName(KeyProcessingTimeMS) val processingTimeMSOrNull: Long? = null,
+    @SerialName(Key.ProcessingTimeMS) val processingTimeMSOrNull: Long? = null,
     /**
      * Whether the nbHits is exhaustive (true) or approximate (false). An approximation is done when the query takes
      * more than 50ms to be processed (this can happen when using complex filters on millions on records).
      * See the related [discussion][https://www.algolia.com/doc/faq/index-configuration/my-facet-and-hit-counts-are-not-accurate/]
      */
-    @SerialName(KeyExhaustiveNbHits) val exhaustiveNbHitsOrNull: Boolean? = null,
+    @SerialName(Key.ExhaustiveNbHits) val exhaustiveNbHitsOrNull: Boolean? = null,
     /**
      * Whether the facet count is exhaustive (true) or approximate (false).
      * See the related [discussion][https://www.algolia.com/doc/faq/index-configuration/my-facet-and-hit-counts-are-not-accurate/].
      */
-    @SerialName(KeyExhaustiveFacetsCount) val exhaustiveFacetsCountOrNull: Boolean? = null,
+    @SerialName(Key.ExhaustiveFacetsCount) val exhaustiveFacetsCountOrNull: Boolean? = null,
     /**
      * An echo of the query text. See the [Query.query] search parameter.
      */
-    @SerialName(KeyQuery) val queryOrNull: String? = null,
+    @SerialName(Key.Query) val queryOrNull: String? = null,
     /**
      * A markup text indicating which parts of the original query have been removed in order to retrieve a non-empty
      * result set.
@@ -151,42 +108,42 @@ public data class ResponseSearch(
      * Only returned when [Query.removeWordsIfNoResults] or [Settings.removeWordsIfNoResults] is set to
      * [RemoveWordIfNoResults.LastWords] or [RemoveWordIfNoResults.FirstWords].
      */
-    @SerialName(KeyQueryAfterRemoval) val queryAfterRemovalOrNull: String? = null,
+    @SerialName(Key.QueryAfterRemoval) val queryAfterRemovalOrNull: String? = null,
     /**
      * An url-encoded string of all [Query] parameters.
      */
-    @SerialName(KeyParams) val paramsOrNull: String? = null,
+    @SerialName(Key.Params) val paramsOrNull: String? = null,
     /**
      * Used to return warnings about the query.
      */
-    @SerialName(KeyMessage) val messageOrNull: String? = null,
+    @SerialName(Key.Message) val messageOrNull: String? = null,
     /**
      * The computed geo location.
      * Only returned when [Query.aroundLatLngViaIP] or [Query.aroundLatLng] is set.
      */
-    @SerialName(KeyAroundLatLng) @Serializable(KSerializerPoint::class) val aroundLatLngOrNull: Point? = null,
+    @SerialName(Key.AroundLatLng) @Serializable(KSerializerPoint::class) val aroundLatLngOrNull: Point? = null,
     /**
      * The automatically computed radius. For legacy reasons, this parameter is a string and not an integer.
      * Only returned for geo queries without an explicitly specified [Query.aroundRadius].
      */
-    @SerialName(KeyAutomaticRadius) val automaticRadiusOrNull: Float? = null,
+    @SerialName(Key.AutomaticRadius) val automaticRadiusOrNull: Float? = null,
     /**
      * Actual host name of the server that processed the request. Our DNS supports automatic failover and load
      * balancing, so this may differ from the host name used in the request.
      * Returned only if [Query.getRankingInfo] is set to true.
      */
-    @SerialName(KeyServerUsed) val serverUsedOrNull: String? = null,
+    @SerialName(Key.ServerUsed) val serverUsedOrNull: String? = null,
     /**
      * Index name used for the query. In case of A/B test, the index targeted isn’t always the index used by the query.
      * Returned only if [Query.getRankingInfo] is set to true.
      */
-    @SerialName(KeyIndexUsed) val indexUsedOrNull: IndexName? = null,
+    @SerialName(Key.IndexUsed) val indexUsedOrNull: IndexName? = null,
     /**
      * In case of A/B test, reports the variant ID used. The variant ID is the position in the array of variants
      * (starting at 1).
      * Returned only if [Query.getRankingInfo] is set to true.
      */
-    @SerialName(KeyAbTestVariantID) val abTestVariantIDOrNull: Int? = null,
+    @SerialName(Key.AbTestVariantID) val abTestVariantIDOrNull: Int? = null,
     /**
      * The query string that will be searched, after
      * [normalization][https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/#what-is-normalization].
@@ -195,68 +152,68 @@ public data class ResponseSearch(
      * (see [Query.advancedSyntax] or [Settings.advancedSyntax]).
      * Returned only if [Query.getRankingInfo] is set to true.
      */
-    @SerialName(KeyParsedQuery) val parsedQueryOrNull: String? = null,
+    @SerialName(Key.ParsedQuery) val parsedQueryOrNull: String? = null,
     /**
      * A mapping of each facet name to the corresponding facet counts.
      * Returned only if [Query.facets] is non-empty.
      */
-    @SerialName(KeyFacets) @Serializable(KSerializerFacetMap::class) val facetsOrNull: Map<Attribute, List<Facet>>? = null,
+    @SerialName(Key.Facets) @Serializable(KSerializerFacetMap::class) val facetsOrNull: Map<Attribute, List<Facet>>? = null,
     /**
      * A mapping of each facet name to the corresponding facet counts for disjunctive facets.
      * Returned only by the [EndpointSearch.advancedSearch] method.
      * [Documentation][https://www.algolia.com/doc/guides/building-search-ui/going-further/backend-search/how-to/faceting/?language=kotlin#conjunctive-and-disjunctive-faceting]
      */
-    @SerialName(KeyDisjunctiveFacets) @Serializable(KSerializerFacetMap::class) val disjunctiveFacetsOrNull: Map<Attribute, List<Facet>>? = null,
+    @SerialName(Key.DisjunctiveFacets) @Serializable(KSerializerFacetMap::class) val disjunctiveFacetsOrNull: Map<Attribute, List<Facet>>? = null,
     /**
      * Statistics for numerical facets.
      * Returned only if [Query.facets] is non-empty and at least one of the returned facets contains numerical values.
      */
-    @SerialName(KeyFacets_Stats) val facetStatsOrNull: Map<Attribute, FacetStats>? = null,
+    @SerialName(Key.Facets_Stats) val facetStatsOrNull: Map<Attribute, FacetStats>? = null,
     /**
      * Returned only by the [EndpointSearch.browse] method.
      */
-    @SerialName(KeyCursor) val cursorOrNull: Cursor? = null,
+    @SerialName(Key.Cursor) val cursorOrNull: Cursor? = null,
     /**
      * Index name used for the query. In case of A/B test, the index targeted isn’t always the index used by the query.
      * Returned only if [Query.getRankingInfo] is set to true.
      */
-    @SerialName(KeyIndex) val indexNameOrNull: IndexName? = null,
-    @SerialName(KeyProcessed) val processedOrNull: Boolean? = null,
+    @SerialName(Key.Index) val indexNameOrNull: IndexName? = null,
+    @SerialName(Key.Processed) val processedOrNull: Boolean? = null,
     /**
      * Identifies the query uniquely. Can be used by [InsightsEvent].
      */
-    @SerialName(KeyQueryID) val queryIDOrNull: QueryID? = null,
+    @SerialName(Key.QueryID) val queryIDOrNull: QueryID? = null,
     /**
      * A mapping of each facet name to the corresponding facet counts for hierarchical facets.
      * Returned only by the [EndpointSearch.advancedSearch] method, only if a [FilterGroup.And.Hierarchical] is used.
      */
-    @SerialName(KeyHierarchicalFacets) val hierarchicalFacetsOrNull: Map<Attribute, List<Facet>>? = null,
+    @SerialName(Key.HierarchicalFacets) val hierarchicalFacetsOrNull: Map<Attribute, List<Facet>>? = null,
     /**
      * Meta-information as to how the query was processed.
      */
-    @SerialName(KeyExplain) val explainOrNull: Explain? = null,
+    @SerialName(Key.Explain) val explainOrNull: Explain? = null,
     /**
      * The rules applied to the query.
      */
-    @SerialName(KeyAppliedRules) val appliedRulesOrNull: List<JsonObject>? = null,
+    @SerialName(Key.AppliedRules) val appliedRulesOrNull: List<JsonObject>? = null,
     /**
      * Applied relevancy score in the virtual index [0-100].
      */
-    @SerialName(KeyAppliedRelevancyStrictness) val appliedRelevancyStrictnessOrNull: Int? = null,
+    @SerialName(Key.AppliedRelevancyStrictness) val appliedRelevancyStrictnessOrNull: Int? = null,
     /**
      * Number of relevant hits to display in case of non-zero `relevancyStrictness` applied.
      */
-    @SerialName(KeyNbSortedHits) val nbSortedHitsOrNull: Int? = null,
+    @SerialName(Key.NbSortedHits) val nbSortedHitsOrNull: Int? = null,
     /**
      * Content defining how the search interface should be rendered.
      */
-    @SerialName(KeyRenderingContent) val renderingContentOrNull: RenderingContent? = null,
+    @SerialName(Key.RenderingContent) val renderingContentOrNull: RenderingContent? = null,
 
     /**
      * In case of A/B test, reports the ID of the A/B test used.
      * Returned only if [Query.getRankingInfo] is set to true.
      */
-    @SerialName(KeyABTestID) val abTestIDOrNull: ABTestID? = null
+    @SerialName(Key.ABTestID) val abTestIDOrNull: ABTestID? = null
 ) : ResultSearch {
 
     /**
@@ -582,22 +539,22 @@ public data class ResponseSearch(
         val json: JsonObject,
     ) : Map<String, JsonElement> by json {
 
-        public val distinctSeqIDOrNull: Int? = json[Key_DistinctSeqID]?.jsonPrimitiveOrNull?.int
+        public val distinctSeqIDOrNull: Int? = json[Key._DistinctSeqID]?.jsonPrimitiveOrNull?.int
 
-        public val rankingInfoOrNull: RankingInfo? = json[Key_RankingInfo]?.jsonObjectOrNull?.let {
+        public val rankingInfoOrNull: RankingInfo? = json[Key._RankingInfo]?.jsonObjectOrNull?.let {
             JsonNonStrict.decodeFromJsonElement(RankingInfo.serializer(), it)
         }
 
-        public val highlightResultOrNull: JsonObject? = json[Key_HighlightResult]?.jsonObjectOrNull
+        public val highlightResultOrNull: JsonObject? = json[Key._HighlightResult]?.jsonObjectOrNull
 
-        public val snippetResultOrNull: JsonObject? = json[Key_SnippetResult]?.jsonObjectOrNull
+        public val snippetResultOrNull: JsonObject? = json[Key._SnippetResult]?.jsonObjectOrNull
 
         @ExperimentalAlgoliaClientAPI
-        public val answerOrNull: Answer? = json[Key_Answer]?.jsonObjectOrNull?.let {
+        public val answerOrNull: Answer? = json[Key._Answer]?.jsonObjectOrNull?.let {
             JsonNonStrict.decodeFromJsonElement(Answer.serializer(), it)
         }
 
-        public val scoreOrNull: Float? = json[Key_Score]?.jsonPrimitiveOrNull?.floatOrNull
+        public val scoreOrNull: Float? = json[Key._Score]?.jsonPrimitiveOrNull?.floatOrNull
 
         public val rankingInfo: RankingInfo
             get() = checkNotNull(rankingInfoOrNull)
@@ -648,8 +605,8 @@ public data class ResponseSearch(
 
     @Serializable
     public data class Answer(
-        @SerialName(KeyExtract) val extract: String,
-        @SerialName(KeyScore) val score: Double,
-        @SerialName(KeyExtractAttribute) val extractAttribute: Attribute,
+        @SerialName(Key.Extract) val extract: String,
+        @SerialName(Key.Score) val score: Double,
+        @SerialName(Key.ExtractAttribute) val extractAttribute: Attribute,
     )
 }

@@ -3,8 +3,8 @@ package model.search
 import com.algolia.search.model.search.SortFacetsBy.Alpha
 import com.algolia.search.model.search.SortFacetsBy.Count
 import com.algolia.search.model.search.SortFacetsBy.Other
-import com.algolia.search.serialize.KeyAlpha
-import com.algolia.search.serialize.KeyCount
+import com.algolia.search.serialize.internal.KeyAlpha
+import com.algolia.search.serialize.internal.KeyCount
 import shouldEqual
 import unknown
 import kotlin.test.Test

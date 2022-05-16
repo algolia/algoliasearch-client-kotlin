@@ -3,7 +3,7 @@ package com.algolia.search.model.settings
 import com.algolia.search.helper.toAttribute
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyEqualOnly
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.regexEqualOnly
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
@@ -25,7 +25,7 @@ public data class NumericAttributeFilter(
     val equalOnly: Boolean = false
 ) : Raw<String> {
 
-    override val raw: String = if (equalOnly) "$KeyEqualOnly($attribute)" else attribute.raw
+    override val raw: String = if (equalOnly) "${Key.EqualOnly}($attribute)" else attribute.raw
 
     override fun toString(): String {
         return raw

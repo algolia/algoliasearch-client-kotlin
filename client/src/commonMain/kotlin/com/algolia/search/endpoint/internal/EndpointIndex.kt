@@ -11,8 +11,7 @@ import com.algolia.search.model.internal.request.RequestCopyOrMove
 import com.algolia.search.model.response.deletion.DeletionIndex
 import com.algolia.search.model.response.revision.RevisionIndex
 import com.algolia.search.model.search.Query
-import com.algolia.search.serialize.KeyCopy
-import com.algolia.search.serialize.KeyMove
+import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
@@ -41,11 +40,11 @@ internal class EndpointIndexImpl(
         scopes: List<Scope>?,
         requestOptions: RequestOptions?,
     ): RevisionIndex {
-        return copyOrMove(destination, KeyCopy, scopes, requestOptions)
+        return copyOrMove(destination, Key.Copy, scopes, requestOptions)
     }
 
     override suspend fun moveIndex(destination: IndexName, requestOptions: RequestOptions?): RevisionIndex {
-        return copyOrMove(destination, KeyMove, null, requestOptions)
+        return copyOrMove(destination, Key.Move, null, requestOptions)
     }
 
     override suspend fun deleteIndex(requestOptions: RequestOptions?): DeletionIndex {

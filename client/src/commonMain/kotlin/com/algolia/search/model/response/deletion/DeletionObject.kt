@@ -4,15 +4,13 @@ import com.algolia.search.model.ClientDate
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.task.Task
 import com.algolia.search.model.task.TaskID
-import com.algolia.search.serialize.KeyDeletedAt
-import com.algolia.search.serialize.KeyObjectID
-import com.algolia.search.serialize.KeyTaskID
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
 public data class DeletionObject(
-    @SerialName(KeyDeletedAt) val deletedAt: ClientDate,
-    @SerialName(KeyTaskID) override val taskID: TaskID,
-    @SerialName(KeyObjectID) val objectID: ObjectID
+    @SerialName(Key.DeletedAt) val deletedAt: ClientDate,
+    @SerialName(Key.TaskID) override val taskID: TaskID,
+    @SerialName(Key.ObjectID) val objectID: ObjectID
 ) : Task

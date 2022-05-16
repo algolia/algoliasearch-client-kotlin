@@ -1,10 +1,7 @@
 package com.algolia.search.model.analytics
 
 import com.algolia.search.model.internal.Raw
-import com.algolia.search.serialize.KeyActive
-import com.algolia.search.serialize.KeyExpired
-import com.algolia.search.serialize.KeyFailed
-import com.algolia.search.serialize.KeyStopped
+import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.builtins.serializer
@@ -21,24 +18,24 @@ public sealed class ABTestStatus(override val raw: String) : Raw<String> {
     /**
      * The Analytics created the [ABTest] and performed a successful request to the engine.
      */
-    public object Active : ABTestStatus(KeyActive)
+    public object Active : ABTestStatus(Key.Active)
 
     /**
      * The [ABTest] was stopped by a user: it was deleted from the engine but we have to keep the data for
      * historical purposes.
      */
-    public object Stopped : ABTestStatus(KeyStopped)
+    public object Stopped : ABTestStatus(Key.Stopped)
 
     /**
      * The [ABTest] reached its end date and was automatically stopped. It is removed from the engine but the
      * metadata/metrics are kept.
      */
-    public object Expired : ABTestStatus(KeyExpired)
+    public object Expired : ABTestStatus(Key.Expired)
 
     /**
      * The [ABTest] creation failed.
      */
-    public object Failed : ABTestStatus(KeyFailed)
+    public object Failed : ABTestStatus(Key.Failed)
 
     public data class Other(override val raw: String) : ABTestStatus(raw)
 
@@ -54,10 +51,10 @@ public sealed class ABTestStatus(override val raw: String) : Raw<String> {
 
         override fun deserialize(decoder: Decoder): ABTestStatus {
             return when (val string = serializer.deserialize(decoder)) {
-                KeyActive -> Active
-                KeyStopped -> Stopped
-                KeyExpired -> Expired
-                KeyFailed -> Failed
+                Key.Active -> Active
+                Key.Stopped -> Stopped
+                Key.Expired -> Expired
+                Key.Failed -> Failed
                 else -> Other(string)
             }
         }
