@@ -16,7 +16,7 @@ val index = client.initIndex(indexName)
 
 ## Indexing data
 
-Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/datasets/blob/master/contacts/contacts.json) in the ```contacts``` index using the following code:
+Without any prior configuration, you can start indexing [500 contacts](https://github.com/algolia/datasets/blob/master/contacts/contacts.json) in the `contacts` index using the following code:
 
 ```kotlin
 @Serializable
@@ -27,7 +27,7 @@ data class Contact(
 )
 
 val string = File("contacts.json").readText()
-val contacts = Json.parse(Contact.serializer().list, string)
+val contacts = Json.decodeFromString(Contact.serializer().list, string)
 
 index.saveObjects(Contact.serializer(), contacts)
 ```
@@ -65,6 +65,3 @@ val response = index.search(query)
 
 response.hits.deserialize(Contact.serializer())
 ```
-
-
-
