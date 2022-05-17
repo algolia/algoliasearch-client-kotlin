@@ -72,8 +72,6 @@ public final class com/algolia/search/client/ClientPersonalization$DefaultImpls 
 public final class com/algolia/search/client/ClientPersonalizationKt {
 	public static final fun ClientPersonalization (Lcom/algolia/search/configuration/ConfigurationPersonalization;)Lcom/algolia/search/client/ClientPersonalization;
 	public static final fun ClientPersonalization (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;)Lcom/algolia/search/client/ClientPersonalization;
-	public static final fun ClientRecommendation (Lcom/algolia/search/configuration/ConfigurationPersonalization;)Lcom/algolia/search/client/ClientPersonalization;
-	public static final fun ClientRecommendation (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Recommendation;)Lcom/algolia/search/client/ClientPersonalization;
 }
 
 public abstract interface class com/algolia/search/client/ClientPlaces : com/algolia/search/configuration/Configuration, com/algolia/search/endpoint/EndpointPlaces, com/algolia/search/transport/CustomRequester {
@@ -108,8 +106,8 @@ public final class com/algolia/search/client/ClientRecommend$DefaultImpls {
 
 public final class com/algolia/search/client/ClientRecommendKt {
 	public static final fun ClientRecommend (Lcom/algolia/search/configuration/ConfigurationRecommend;)Lcom/algolia/search/client/ClientRecommend;
-	public static final fun ClientRecommend (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lio/ktor/client/plugins/logging/LogLevel;)Lcom/algolia/search/client/ClientRecommend;
-	public static synthetic fun ClientRecommend$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lio/ktor/client/plugins/logging/LogLevel;ILjava/lang/Object;)Lcom/algolia/search/client/ClientRecommend;
+	public static final fun ClientRecommend (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/logging/LogLevel;)Lcom/algolia/search/client/ClientRecommend;
+	public static synthetic fun ClientRecommend$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/logging/LogLevel;ILjava/lang/Object;)Lcom/algolia/search/client/ClientRecommend;
 }
 
 public abstract interface class com/algolia/search/client/ClientSearch : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials, com/algolia/search/endpoint/EndpointAPIKey, com/algolia/search/endpoint/EndpointDictionary, com/algolia/search/endpoint/EndpointMultiCluster, com/algolia/search/endpoint/EndpointMultipleIndex, com/algolia/search/transport/CustomRequester {
@@ -145,8 +143,8 @@ public final class com/algolia/search/client/ClientSearch$DefaultImpls {
 
 public final class com/algolia/search/client/ClientSearchKt {
 	public static final fun ClientSearch (Lcom/algolia/search/configuration/ConfigurationSearch;)Lcom/algolia/search/client/ClientSearch;
-	public static final fun ClientSearch (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lio/ktor/client/plugins/logging/LogLevel;)Lcom/algolia/search/client/ClientSearch;
-	public static synthetic fun ClientSearch$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lio/ktor/client/plugins/logging/LogLevel;ILjava/lang/Object;)Lcom/algolia/search/client/ClientSearch;
+	public static final fun ClientSearch (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/logging/LogLevel;)Lcom/algolia/search/client/ClientSearch;
+	public static synthetic fun ClientSearch$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/logging/LogLevel;ILjava/lang/Object;)Lcom/algolia/search/client/ClientSearch;
 }
 
 public abstract interface class com/algolia/search/client/Index : com/algolia/search/endpoint/EndpointAdvanced, com/algolia/search/endpoint/EndpointAnswers, com/algolia/search/endpoint/EndpointIndex, com/algolia/search/endpoint/EndpointIndexing, com/algolia/search/endpoint/EndpointRule, com/algolia/search/endpoint/EndpointSearch, com/algolia/search/endpoint/EndpointSettings, com/algolia/search/endpoint/EndpointSynonym {
@@ -193,7 +191,7 @@ public abstract interface class com/algolia/search/configuration/Configuration :
 	public abstract fun getHosts ()Ljava/util/List;
 	public abstract fun getHttpClient ()Lio/ktor/client/HttpClient;
 	public abstract fun getHttpClientConfig ()Lkotlin/jvm/functions/Function1;
-	public abstract fun getLogLevel ()Lio/ktor/client/plugins/logging/LogLevel;
+	public abstract fun getLogLevel ()Lcom/algolia/search/logging/LogLevel;
 	public abstract fun getReadTimeout ()J
 	public abstract fun getTimeout (Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 	public abstract fun getWriteTimeout ()J
@@ -214,8 +212,8 @@ public final class com/algolia/search/configuration/ConfigurationAnalytics$Defau
 }
 
 public final class com/algolia/search/configuration/ConfigurationAnalyticsKt {
-	public static final fun ConfigurationAnalytics (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationAnalytics;
-	public static synthetic fun ConfigurationAnalytics$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationAnalytics;
+	public static final fun ConfigurationAnalytics (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationAnalytics;
+	public static synthetic fun ConfigurationAnalytics$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationAnalytics;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationInsights : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -227,8 +225,8 @@ public final class com/algolia/search/configuration/ConfigurationInsights$Defaul
 }
 
 public final class com/algolia/search/configuration/ConfigurationInsightsKt {
-	public static final fun ConfigurationInsights (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationInsights;
-	public static synthetic fun ConfigurationInsights$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationInsights;
+	public static final fun ConfigurationInsights (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationInsights;
+	public static synthetic fun ConfigurationInsights$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationInsights;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationPersonalization : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -241,10 +239,8 @@ public final class com/algolia/search/configuration/ConfigurationPersonalization
 }
 
 public final class com/algolia/search/configuration/ConfigurationPersonalizationKt {
-	public static final fun ConfigurationPersonalization (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
-	public static synthetic fun ConfigurationPersonalization$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
-	public static final fun ConfigurationRecommendation (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Recommendation;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
-	public static synthetic fun ConfigurationRecommendation$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Recommendation;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
+	public static final fun ConfigurationPersonalization (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
+	public static synthetic fun ConfigurationPersonalization$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationPlaces : com/algolia/search/configuration/Configuration {
@@ -256,8 +252,8 @@ public final class com/algolia/search/configuration/ConfigurationPlaces$DefaultI
 }
 
 public final class com/algolia/search/configuration/ConfigurationPlacesKt {
-	public static final fun ConfigurationPlaces (JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationPlaces;
-	public static synthetic fun ConfigurationPlaces$default (JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPlaces;
+	public static final fun ConfigurationPlaces (JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationPlaces;
+	public static synthetic fun ConfigurationPlaces$default (JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPlaces;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationRecommend : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -269,8 +265,8 @@ public final class com/algolia/search/configuration/ConfigurationRecommend$Defau
 }
 
 public final class com/algolia/search/configuration/ConfigurationRecommendKt {
-	public static final fun ConfigurationRecommend (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;)Lcom/algolia/search/configuration/ConfigurationRecommend;
-	public static synthetic fun ConfigurationRecommend$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationRecommend;
+	public static final fun ConfigurationRecommend (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;)Lcom/algolia/search/configuration/ConfigurationRecommend;
+	public static synthetic fun ConfigurationRecommend$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationRecommend;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationSearch : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -282,8 +278,8 @@ public final class com/algolia/search/configuration/ConfigurationSearch$DefaultI
 }
 
 public final class com/algolia/search/configuration/ConfigurationSearchKt {
-	public static final fun ConfigurationSearch (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;)Lcom/algolia/search/configuration/ConfigurationSearch;
-	public static synthetic fun ConfigurationSearch$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLio/ktor/client/plugins/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationSearch;
+	public static final fun ConfigurationSearch (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;)Lcom/algolia/search/configuration/ConfigurationSearch;
+	public static synthetic fun ConfigurationSearch$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationSearch;
 }
 
 public abstract interface class com/algolia/search/configuration/Credentials {
@@ -334,27 +330,6 @@ public final class com/algolia/search/configuration/Region$Personalization$Other
 
 public final class com/algolia/search/configuration/Region$Personalization$US : com/algolia/search/configuration/Region$Personalization {
 	public static final field INSTANCE Lcom/algolia/search/configuration/Region$Personalization$US;
-}
-
-public abstract class com/algolia/search/configuration/Region$Recommendation : com/algolia/search/model/internal/Raw {
-	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
-	public synthetic fun getRaw ()Ljava/lang/Object;
-	public fun getRaw ()Ljava/lang/String;
-	public fun toString ()Ljava/lang/String;
-}
-
-public final class com/algolia/search/configuration/Region$Recommendation$EU : com/algolia/search/configuration/Region$Recommendation {
-	public static final field INSTANCE Lcom/algolia/search/configuration/Region$Recommendation$EU;
-}
-
-public final class com/algolia/search/configuration/Region$Recommendation$Other : com/algolia/search/configuration/Region$Recommendation {
-	public fun <init> (Ljava/lang/String;)V
-	public synthetic fun getRaw ()Ljava/lang/Object;
-	public fun getRaw ()Ljava/lang/String;
-}
-
-public final class com/algolia/search/configuration/Region$Recommendation$US : com/algolia/search/configuration/Region$Recommendation {
-	public static final field INSTANCE Lcom/algolia/search/configuration/Region$Recommendation$US;
 }
 
 public final class com/algolia/search/configuration/RetryableHost {
@@ -2011,12 +1986,18 @@ public final class com/algolia/search/helper/ConstructorKt {
 	public static final fun toUserToken (Ljava/lang/String;)Lcom/algolia/search/model/insights/UserToken;
 }
 
-public final class com/algolia/search/helper/ResponseExceptionKt {
-	public static final fun readContent (Lio/ktor/client/plugins/ResponseException;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-}
-
 public final class com/algolia/search/helper/ResponseSearchKt {
 	public static final fun deserialize (Ljava/util/List;Lkotlinx/serialization/DeserializationStrategy;)Ljava/util/List;
+}
+
+public final class com/algolia/search/logging/LogLevel : java/lang/Enum {
+	public static final field All Lcom/algolia/search/logging/LogLevel;
+	public static final field Body Lcom/algolia/search/logging/LogLevel;
+	public static final field Headers Lcom/algolia/search/logging/LogLevel;
+	public static final field Info Lcom/algolia/search/logging/LogLevel;
+	public static final field None Lcom/algolia/search/logging/LogLevel;
+	public static fun valueOf (Ljava/lang/String;)Lcom/algolia/search/logging/LogLevel;
+	public static fun values ()[Lcom/algolia/search/logging/LogLevel;
 }
 
 public final class com/algolia/search/model/APIKey : com/algolia/search/model/internal/Raw {
@@ -2833,7 +2814,7 @@ public final class com/algolia/search/model/filter/Filter$Tag : com/algolia/sear
 	public fun toString ()Ljava/lang/String;
 }
 
-public abstract class com/algolia/search/model/filter/FilterConverter : kotlin/jvm/functions/Function1 {
+public abstract class com/algolia/search/model/filter/FilterConverter : com/algolia/search/model/filter/internal/Converter {
 }
 
 public final class com/algolia/search/model/filter/FilterConverter$Legacy : com/algolia/search/model/filter/FilterConverter {
@@ -3009,7 +2990,7 @@ public final class com/algolia/search/model/filter/FilterGroup$Or$Tag : com/algo
 	public fun toString ()Ljava/lang/String;
 }
 
-public abstract class com/algolia/search/model/filter/FilterGroupsConverter : kotlin/jvm/functions/Function1 {
+public abstract class com/algolia/search/model/filter/FilterGroupsConverter : com/algolia/search/model/filter/internal/Converter {
 }
 
 public abstract class com/algolia/search/model/filter/FilterGroupsConverter$Legacy : com/algolia/search/model/filter/FilterGroupsConverter {
@@ -11651,258 +11632,6 @@ public final class com/algolia/search/model/task/TaskStatus$Published : com/algo
 	public static final field INSTANCE Lcom/algolia/search/model/task/TaskStatus$Published;
 }
 
-public final class com/algolia/search/serialize/CountriesKt {
-	public static final field KeyAfghanistan Ljava/lang/String;
-	public static final field KeyAlandIslands Ljava/lang/String;
-	public static final field KeyAlbania Ljava/lang/String;
-	public static final field KeyAlgeria Ljava/lang/String;
-	public static final field KeyAmericanSamoa Ljava/lang/String;
-	public static final field KeyAndorra Ljava/lang/String;
-	public static final field KeyAngola Ljava/lang/String;
-	public static final field KeyAnguilla Ljava/lang/String;
-	public static final field KeyAntarctica Ljava/lang/String;
-	public static final field KeyAntiguaAndBarbuda Ljava/lang/String;
-	public static final field KeyArgentina Ljava/lang/String;
-	public static final field KeyArmenia Ljava/lang/String;
-	public static final field KeyAruba Ljava/lang/String;
-	public static final field KeyAustralia Ljava/lang/String;
-	public static final field KeyAustria Ljava/lang/String;
-	public static final field KeyAzerbaijan Ljava/lang/String;
-	public static final field KeyBahamas Ljava/lang/String;
-	public static final field KeyBahrain Ljava/lang/String;
-	public static final field KeyBailiwickOfGuernsey Ljava/lang/String;
-	public static final field KeyBangladesh Ljava/lang/String;
-	public static final field KeyBarbados Ljava/lang/String;
-	public static final field KeyBelarus Ljava/lang/String;
-	public static final field KeyBelgium Ljava/lang/String;
-	public static final field KeyBelize Ljava/lang/String;
-	public static final field KeyBenin Ljava/lang/String;
-	public static final field KeyBermuda Ljava/lang/String;
-	public static final field KeyBhutan Ljava/lang/String;
-	public static final field KeyBolivia Ljava/lang/String;
-	public static final field KeyBosniaAndHerzegovina Ljava/lang/String;
-	public static final field KeyBotswana Ljava/lang/String;
-	public static final field KeyBouvetIsland Ljava/lang/String;
-	public static final field KeyBrazil Ljava/lang/String;
-	public static final field KeyBritishIndianOceanTerritory Ljava/lang/String;
-	public static final field KeyBruneiDarussalam Ljava/lang/String;
-	public static final field KeyBulgaria Ljava/lang/String;
-	public static final field KeyBurkinaFaso Ljava/lang/String;
-	public static final field KeyBurundi Ljava/lang/String;
-	public static final field KeyCaboVerde Ljava/lang/String;
-	public static final field KeyCambodia Ljava/lang/String;
-	public static final field KeyCameroon Ljava/lang/String;
-	public static final field KeyCanada Ljava/lang/String;
-	public static final field KeyCaribbeanNetherlands Ljava/lang/String;
-	public static final field KeyCaymanIslands Ljava/lang/String;
-	public static final field KeyCentralAfricanRepublic Ljava/lang/String;
-	public static final field KeyChad Ljava/lang/String;
-	public static final field KeyChile Ljava/lang/String;
-	public static final field KeyChina Ljava/lang/String;
-	public static final field KeyChristmasIsland Ljava/lang/String;
-	public static final field KeyCocosIslands Ljava/lang/String;
-	public static final field KeyColombia Ljava/lang/String;
-	public static final field KeyComoros Ljava/lang/String;
-	public static final field KeyCookIslands Ljava/lang/String;
-	public static final field KeyCostaRica Ljava/lang/String;
-	public static final field KeyCroatia Ljava/lang/String;
-	public static final field KeyCuba Ljava/lang/String;
-	public static final field KeyCuracao Ljava/lang/String;
-	public static final field KeyCyprus Ljava/lang/String;
-	public static final field KeyCzechRepublic Ljava/lang/String;
-	public static final field KeyDemocraticRepublicOfTheCongo Ljava/lang/String;
-	public static final field KeyDenmark Ljava/lang/String;
-	public static final field KeyDjibouti Ljava/lang/String;
-	public static final field KeyDominica Ljava/lang/String;
-	public static final field KeyDominicanRepublic Ljava/lang/String;
-	public static final field KeyEcuador Ljava/lang/String;
-	public static final field KeyEgypt Ljava/lang/String;
-	public static final field KeyElSalvador Ljava/lang/String;
-	public static final field KeyEquatorialGuinea Ljava/lang/String;
-	public static final field KeyEritrea Ljava/lang/String;
-	public static final field KeyEstonia Ljava/lang/String;
-	public static final field KeyEswatini Ljava/lang/String;
-	public static final field KeyEthiopia Ljava/lang/String;
-	public static final field KeyFalklandIslands Ljava/lang/String;
-	public static final field KeyFaroeIslands Ljava/lang/String;
-	public static final field KeyFiji Ljava/lang/String;
-	public static final field KeyFinland Ljava/lang/String;
-	public static final field KeyFrance Ljava/lang/String;
-	public static final field KeyFrenchGuiana Ljava/lang/String;
-	public static final field KeyFrenchPolynesia Ljava/lang/String;
-	public static final field KeyFrenchSouthernAndAntarcticLands Ljava/lang/String;
-	public static final field KeyGabon Ljava/lang/String;
-	public static final field KeyGambia Ljava/lang/String;
-	public static final field KeyGeorgia Ljava/lang/String;
-	public static final field KeyGermany Ljava/lang/String;
-	public static final field KeyGhana Ljava/lang/String;
-	public static final field KeyGibraltar Ljava/lang/String;
-	public static final field KeyGreece Ljava/lang/String;
-	public static final field KeyGreenland Ljava/lang/String;
-	public static final field KeyGrenada Ljava/lang/String;
-	public static final field KeyGuadeloupe Ljava/lang/String;
-	public static final field KeyGuam Ljava/lang/String;
-	public static final field KeyGuatemala Ljava/lang/String;
-	public static final field KeyGuinea Ljava/lang/String;
-	public static final field KeyGuineaBissau Ljava/lang/String;
-	public static final field KeyGuyana Ljava/lang/String;
-	public static final field KeyHaiti Ljava/lang/String;
-	public static final field KeyHeardIslandAndMcDonaldIslands Ljava/lang/String;
-	public static final field KeyHonduras Ljava/lang/String;
-	public static final field KeyHongKong Ljava/lang/String;
-	public static final field KeyHungary Ljava/lang/String;
-	public static final field KeyIceland Ljava/lang/String;
-	public static final field KeyIndia Ljava/lang/String;
-	public static final field KeyIndonesia Ljava/lang/String;
-	public static final field KeyIran Ljava/lang/String;
-	public static final field KeyIraq Ljava/lang/String;
-	public static final field KeyIreland Ljava/lang/String;
-	public static final field KeyIsleOfMan Ljava/lang/String;
-	public static final field KeyIsrael Ljava/lang/String;
-	public static final field KeyItaly Ljava/lang/String;
-	public static final field KeyIvoryCoast Ljava/lang/String;
-	public static final field KeyJamaica Ljava/lang/String;
-	public static final field KeyJapan Ljava/lang/String;
-	public static final field KeyJersey Ljava/lang/String;
-	public static final field KeyJordan Ljava/lang/String;
-	public static final field KeyKazakhstan Ljava/lang/String;
-	public static final field KeyKenya Ljava/lang/String;
-	public static final field KeyKiribati Ljava/lang/String;
-	public static final field KeyKuwait Ljava/lang/String;
-	public static final field KeyKyrgyzstan Ljava/lang/String;
-	public static final field KeyLaos Ljava/lang/String;
-	public static final field KeyLatvia Ljava/lang/String;
-	public static final field KeyLebanon Ljava/lang/String;
-	public static final field KeyLesotho Ljava/lang/String;
-	public static final field KeyLiberia Ljava/lang/String;
-	public static final field KeyLibya Ljava/lang/String;
-	public static final field KeyLiechtenstein Ljava/lang/String;
-	public static final field KeyLithuania Ljava/lang/String;
-	public static final field KeyLuxembourg Ljava/lang/String;
-	public static final field KeyMacau Ljava/lang/String;
-	public static final field KeyMadagascar Ljava/lang/String;
-	public static final field KeyMalawi Ljava/lang/String;
-	public static final field KeyMalaysia Ljava/lang/String;
-	public static final field KeyMaldives Ljava/lang/String;
-	public static final field KeyMali Ljava/lang/String;
-	public static final field KeyMalta Ljava/lang/String;
-	public static final field KeyMarshallIslands Ljava/lang/String;
-	public static final field KeyMartinique Ljava/lang/String;
-	public static final field KeyMauritania Ljava/lang/String;
-	public static final field KeyMauritius Ljava/lang/String;
-	public static final field KeyMayotte Ljava/lang/String;
-	public static final field KeyMexico Ljava/lang/String;
-	public static final field KeyMicronesia Ljava/lang/String;
-	public static final field KeyMoldova Ljava/lang/String;
-	public static final field KeyMonaco Ljava/lang/String;
-	public static final field KeyMongolia Ljava/lang/String;
-	public static final field KeyMontenegro Ljava/lang/String;
-	public static final field KeyMontserrat Ljava/lang/String;
-	public static final field KeyMorocco Ljava/lang/String;
-	public static final field KeyMozambique Ljava/lang/String;
-	public static final field KeyMyanmar Ljava/lang/String;
-	public static final field KeyNamibia Ljava/lang/String;
-	public static final field KeyNauru Ljava/lang/String;
-	public static final field KeyNepal Ljava/lang/String;
-	public static final field KeyNetherlands Ljava/lang/String;
-	public static final field KeyNewCaledonia Ljava/lang/String;
-	public static final field KeyNewZealand Ljava/lang/String;
-	public static final field KeyNicaragua Ljava/lang/String;
-	public static final field KeyNiger Ljava/lang/String;
-	public static final field KeyNigeria Ljava/lang/String;
-	public static final field KeyNiue Ljava/lang/String;
-	public static final field KeyNorfolkIsland Ljava/lang/String;
-	public static final field KeyNorthKorea Ljava/lang/String;
-	public static final field KeyNorthMacedonia Ljava/lang/String;
-	public static final field KeyNorthernMarianaIslands Ljava/lang/String;
-	public static final field KeyNorway Ljava/lang/String;
-	public static final field KeyOman Ljava/lang/String;
-	public static final field KeyPakistan Ljava/lang/String;
-	public static final field KeyPalau Ljava/lang/String;
-	public static final field KeyPalestine Ljava/lang/String;
-	public static final field KeyPanama Ljava/lang/String;
-	public static final field KeyPapuaNewGuinea Ljava/lang/String;
-	public static final field KeyParaguay Ljava/lang/String;
-	public static final field KeyPeru Ljava/lang/String;
-	public static final field KeyPhilippines Ljava/lang/String;
-	public static final field KeyPitcairnIslands Ljava/lang/String;
-	public static final field KeyPoland Ljava/lang/String;
-	public static final field KeyPortugal Ljava/lang/String;
-	public static final field KeyPuertoRico Ljava/lang/String;
-	public static final field KeyQatar Ljava/lang/String;
-	public static final field KeyRepublicOfTheCongo Ljava/lang/String;
-	public static final field KeyReunion Ljava/lang/String;
-	public static final field KeyRomania Ljava/lang/String;
-	public static final field KeyRussia Ljava/lang/String;
-	public static final field KeyRwanda Ljava/lang/String;
-	public static final field KeySaintBarthelemy Ljava/lang/String;
-	public static final field KeySaintHelena Ljava/lang/String;
-	public static final field KeySaintKittsAndNevis Ljava/lang/String;
-	public static final field KeySaintLucia Ljava/lang/String;
-	public static final field KeySaintMartin Ljava/lang/String;
-	public static final field KeySaintPierreAndMiquelon Ljava/lang/String;
-	public static final field KeySaintVincentAndTheGrenadines Ljava/lang/String;
-	public static final field KeySamoa Ljava/lang/String;
-	public static final field KeySanMarino Ljava/lang/String;
-	public static final field KeySaoTomeAndPrincipe Ljava/lang/String;
-	public static final field KeySaudiArabia Ljava/lang/String;
-	public static final field KeySenegal Ljava/lang/String;
-	public static final field KeySerbia Ljava/lang/String;
-	public static final field KeySeychelles Ljava/lang/String;
-	public static final field KeySierraLeone Ljava/lang/String;
-	public static final field KeySingapore Ljava/lang/String;
-	public static final field KeySintMaarten Ljava/lang/String;
-	public static final field KeySlovakia Ljava/lang/String;
-	public static final field KeySlovenia Ljava/lang/String;
-	public static final field KeySolomonIslands Ljava/lang/String;
-	public static final field KeySomalia Ljava/lang/String;
-	public static final field KeySouthAfrica Ljava/lang/String;
-	public static final field KeySouthGeorgiaAndTheSouthSandwichIslands Ljava/lang/String;
-	public static final field KeySouthKorea Ljava/lang/String;
-	public static final field KeySouthSudan Ljava/lang/String;
-	public static final field KeySpain Ljava/lang/String;
-	public static final field KeySriLanka Ljava/lang/String;
-	public static final field KeySudan Ljava/lang/String;
-	public static final field KeySuriname Ljava/lang/String;
-	public static final field KeySvalbardAndJanMayen Ljava/lang/String;
-	public static final field KeySweden Ljava/lang/String;
-	public static final field KeySwitzerland Ljava/lang/String;
-	public static final field KeySyria Ljava/lang/String;
-	public static final field KeyTaiwan Ljava/lang/String;
-	public static final field KeyTajikistan Ljava/lang/String;
-	public static final field KeyTanzania Ljava/lang/String;
-	public static final field KeyThailand Ljava/lang/String;
-	public static final field KeyTimorLeste Ljava/lang/String;
-	public static final field KeyTogo Ljava/lang/String;
-	public static final field KeyTokelau Ljava/lang/String;
-	public static final field KeyTonga Ljava/lang/String;
-	public static final field KeyTrinidadAndTobago Ljava/lang/String;
-	public static final field KeyTunisia Ljava/lang/String;
-	public static final field KeyTurkey Ljava/lang/String;
-	public static final field KeyTurkmenistan Ljava/lang/String;
-	public static final field KeyTurksAndCaicosIslands Ljava/lang/String;
-	public static final field KeyTuvalu Ljava/lang/String;
-	public static final field KeyUganda Ljava/lang/String;
-	public static final field KeyUkraine Ljava/lang/String;
-	public static final field KeyUnitedArabEmirates Ljava/lang/String;
-	public static final field KeyUnitedKingdom Ljava/lang/String;
-	public static final field KeyUnitedStates Ljava/lang/String;
-	public static final field KeyUnitedStatesMinorOutlyingIslands Ljava/lang/String;
-	public static final field KeyUruguay Ljava/lang/String;
-	public static final field KeyUzbekistan Ljava/lang/String;
-	public static final field KeyVanuatu Ljava/lang/String;
-	public static final field KeyVaticanCity Ljava/lang/String;
-	public static final field KeyVenezuela Ljava/lang/String;
-	public static final field KeyVietnam Ljava/lang/String;
-	public static final field KeyVirginIslandsGB Ljava/lang/String;
-	public static final field KeyVirginIslandsUS Ljava/lang/String;
-	public static final field KeyWallisAndFutuna Ljava/lang/String;
-	public static final field KeyWesternSahara Ljava/lang/String;
-	public static final field KeyYemen Ljava/lang/String;
-	public static final field KeyZambia Ljava/lang/String;
-	public static final field KeyZimbabwe Ljava/lang/String;
-}
-
 public final class com/algolia/search/serialize/DeserializerKt {
 	public static final fun toHighlight (Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/model/Attribute;)Lcom/algolia/search/model/search/HighlightResult;
 	public static final fun toHighlight (Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;)Lcom/algolia/search/model/search/HighlightResult;
@@ -12002,525 +11731,6 @@ public final class com/algolia/search/serialize/KSerializerVariant : kotlinx/ser
 	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/algolia/search/model/analytics/Variant;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-}
-
-public final class com/algolia/search/serialize/KeysOneKt {
-	public static final field KeyAction Ljava/lang/String;
-	public static final field KeyAdd Ljava/lang/String;
-	public static final field KeyAddObject Ljava/lang/String;
-	public static final field KeyAddUnique Ljava/lang/String;
-	public static final field KeyAdvancedSyntax Ljava/lang/String;
-	public static final field KeyAlgoliaUserID Ljava/lang/String;
-	public static final field KeyAll Ljava/lang/String;
-	public static final field KeyAllOptional Ljava/lang/String;
-	public static final field KeyAllowCompressionOfIntegerArray Ljava/lang/String;
-	public static final field KeyAllowTyposOnNumericTokens Ljava/lang/String;
-	public static final field KeyAlpha Ljava/lang/String;
-	public static final field KeyAlternativeCorrection1 Ljava/lang/String;
-	public static final field KeyAlternativeCorrection2 Ljava/lang/String;
-	public static final field KeyAlternativesAsExact Ljava/lang/String;
-	public static final field KeyAnalytics Ljava/lang/String;
-	public static final field KeyAnalyticsTags Ljava/lang/String;
-	public static final field KeyAnchoring Ljava/lang/String;
-	public static final field KeyAroundLatLng Ljava/lang/String;
-	public static final field KeyAroundLatLngViaIP Ljava/lang/String;
-	public static final field KeyAroundPrecision Ljava/lang/String;
-	public static final field KeyAroundRadius Ljava/lang/String;
-	public static final field KeyAsc Ljava/lang/String;
-	public static final field KeyAttribute Ljava/lang/String;
-	public static final field KeyAttributeForDistinct Ljava/lang/String;
-	public static final field KeyAttributesForFaceting Ljava/lang/String;
-	public static final field KeyAttributesToHighlight Ljava/lang/String;
-	public static final field KeyAttributesToRetrieve Ljava/lang/String;
-	public static final field KeyAttributesToSnippet Ljava/lang/String;
-	public static final field KeyAutomaticFacetFilters Ljava/lang/String;
-	public static final field KeyAutomaticOptionalFacetFilters Ljava/lang/String;
-	public static final field KeyAutomaticRadius Ljava/lang/String;
-	public static final field KeyBody Ljava/lang/String;
-	public static final field KeyBrowse Ljava/lang/String;
-	public static final field KeyCamelCaseAttributes Ljava/lang/String;
-	public static final field KeyClear Ljava/lang/String;
-	public static final field KeyClearExistingRules Ljava/lang/String;
-	public static final field KeyClickAnalytics Ljava/lang/String;
-	public static final field KeyCluster Ljava/lang/String;
-	public static final field KeyContains Ljava/lang/String;
-	public static final field KeyContext Ljava/lang/String;
-	public static final field KeyCopy Ljava/lang/String;
-	public static final field KeyCorrections Ljava/lang/String;
-	public static final field KeyCount Ljava/lang/String;
-	public static final field KeyCreateIfNotExists Ljava/lang/String;
-	public static final field KeyCreatedAt Ljava/lang/String;
-	public static final field KeyCursor Ljava/lang/String;
-	public static final field KeyCustom Ljava/lang/String;
-	public static final field KeyCustomRanking Ljava/lang/String;
-	public static final field KeyDecompoundedAttributes Ljava/lang/String;
-	public static final field KeyDecrement Ljava/lang/String;
-	public static final field KeyDelete Ljava/lang/String;
-	public static final field KeyDeleteIndex Ljava/lang/String;
-	public static final field KeyDeleteObject Ljava/lang/String;
-	public static final field KeyDeletedAt Ljava/lang/String;
-	public static final field KeyDesc Ljava/lang/String;
-	public static final field KeyDestination Ljava/lang/String;
-	public static final field KeyDisableExactOnAttributes Ljava/lang/String;
-	public static final field KeyDisablePrefixOnAttributes Ljava/lang/String;
-	public static final field KeyDisableTypoToleranceOnAttributes Ljava/lang/String;
-	public static final field KeyDisableTypoToleranceOnWords Ljava/lang/String;
-	public static final field KeyDisjunctive Ljava/lang/String;
-	public static final field KeyDistinct Ljava/lang/String;
-	public static final field KeyEditSettings Ljava/lang/String;
-	public static final field KeyEdits Ljava/lang/String;
-	public static final field KeyEnablePersonalization Ljava/lang/String;
-	public static final field KeyEnableRules Ljava/lang/String;
-	public static final field KeyEndsWith Ljava/lang/String;
-	public static final field KeyEqualOnly Ljava/lang/String;
-	public static final field KeyExact Ljava/lang/String;
-	public static final field KeyExactOnSingleWordQuery Ljava/lang/String;
-	public static final field KeyExhaustiveFacetsCount Ljava/lang/String;
-	public static final field KeyFacet Ljava/lang/String;
-	public static final field KeyFacetFilters Ljava/lang/String;
-	public static final field KeyFacetQuery Ljava/lang/String;
-	public static final field KeyFacetingAfterDistinct Ljava/lang/String;
-	public static final field KeyFacets Ljava/lang/String;
-	public static final field KeyFacets_Stats Ljava/lang/String;
-	public static final field KeyFilters Ljava/lang/String;
-	public static final field KeyFirstWords Ljava/lang/String;
-	public static final field KeyForwardToReplicas Ljava/lang/String;
-	public static final field KeyForwardedFor Ljava/lang/String;
-	public static final field KeyFull Ljava/lang/String;
-	public static final field KeyGeo Ljava/lang/String;
-	public static final field KeyGetRankingInfo Ljava/lang/String;
-	public static final field KeyHide Ljava/lang/String;
-	public static final field KeyHighlightPostTag Ljava/lang/String;
-	public static final field KeyHighlightPreTag Ljava/lang/String;
-	public static final field KeyHits Ljava/lang/String;
-	public static final field KeyHitsPerPage Ljava/lang/String;
-	public static final field KeyIgnorePlurals Ljava/lang/String;
-	public static final field KeyIncrement Ljava/lang/String;
-	public static final field KeyIncrementFrom Ljava/lang/String;
-	public static final field KeyIncrementSet Ljava/lang/String;
-	public static final field KeyIndex Ljava/lang/String;
-	public static final field KeyIndexName Ljava/lang/String;
-	public static final field KeyInput Ljava/lang/String;
-	public static final field KeyInsert Ljava/lang/String;
-	public static final field KeyInsideBoundingBox Ljava/lang/String;
-	public static final field KeyInsidePolygon Ljava/lang/String;
-	public static final field KeyIs Ljava/lang/String;
-	public static final field KeyKeepDiacriticsOnCharacters Ljava/lang/String;
-	public static final field KeyKey Ljava/lang/String;
-	public static final field KeyLastWords Ljava/lang/String;
-	public static final field KeyLength Ljava/lang/String;
-	public static final field KeyListIndexes Ljava/lang/String;
-	public static final field KeyLogs Ljava/lang/String;
-	public static final field KeyMaxFacetHits Ljava/lang/String;
-	public static final field KeyMaxValuesPerFacet Ljava/lang/String;
-	public static final field KeyMin Ljava/lang/String;
-	public static final field KeyMinProximity Ljava/lang/String;
-	public static final field KeyMinWordSizeFor1Typo Ljava/lang/String;
-	public static final field KeyMinWordSizeFor2Typos Ljava/lang/String;
-	public static final field KeyMinimumAroundRadius Ljava/lang/String;
-	public static final field KeyMove Ljava/lang/String;
-	public static final field KeyMultiWordsSynonym Ljava/lang/String;
-	public static final field KeyNbHits Ljava/lang/String;
-	public static final field KeyNbPages Ljava/lang/String;
-	public static final field KeyNone Ljava/lang/String;
-	public static final field KeyNotPublished Ljava/lang/String;
-	public static final field KeyNumericAttributesForFiltering Ljava/lang/String;
-	public static final field KeyNumericFilters Ljava/lang/String;
-	public static final field KeyObjectID Ljava/lang/String;
-	public static final field KeyObjectIDs Ljava/lang/String;
-	public static final field KeyOffset Ljava/lang/String;
-	public static final field KeyOneWaySynonym Ljava/lang/String;
-	public static final field KeyOperation Ljava/lang/String;
-	public static final field KeyOptionalFilters Ljava/lang/String;
-	public static final field KeyOptionalWords Ljava/lang/String;
-	public static final field KeyPage Ljava/lang/String;
-	public static final field KeyPaginationLimitedTo Ljava/lang/String;
-	public static final field KeyParams Ljava/lang/String;
-	public static final field KeyPartial Ljava/lang/String;
-	public static final field KeyPartialUpdateObject Ljava/lang/String;
-	public static final field KeyPartialUpdateObjectNoCreate Ljava/lang/String;
-	public static final field KeyPattern Ljava/lang/String;
-	public static final field KeyPercentileComputation Ljava/lang/String;
-	public static final field KeyPlaceholder Ljava/lang/String;
-	public static final field KeyPrefixAll Ljava/lang/String;
-	public static final field KeyPrefixLast Ljava/lang/String;
-	public static final field KeyPrefixNone Ljava/lang/String;
-	public static final field KeyProcessingTimeMS Ljava/lang/String;
-	public static final field KeyPromote Ljava/lang/String;
-	public static final field KeyProximity Ljava/lang/String;
-	public static final field KeyPublished Ljava/lang/String;
-	public static final field KeyQuery Ljava/lang/String;
-	public static final field KeyQueryAfterRemoval Ljava/lang/String;
-	public static final field KeyQueryLanguages Ljava/lang/String;
-	public static final field KeyQueryType Ljava/lang/String;
-	public static final field KeyRanking Ljava/lang/String;
-	public static final field KeyRemove Ljava/lang/String;
-	public static final field KeyRemoveLowercase Ljava/lang/String;
-	public static final field KeyRemoveStopWords Ljava/lang/String;
-	public static final field KeyRemoveWordsIfNoResults Ljava/lang/String;
-	public static final field KeyReplace Ljava/lang/String;
-	public static final field KeyReplaceExistingSynonyms Ljava/lang/String;
-	public static final field KeyReplaceSynonymsInHighlight Ljava/lang/String;
-	public static final field KeyReplacements Ljava/lang/String;
-	public static final field KeyReplicas Ljava/lang/String;
-	public static final field KeyRequests Ljava/lang/String;
-	public static final field KeyResponseFields Ljava/lang/String;
-	public static final field KeyRestrictHighlightAndSnippetArrays Ljava/lang/String;
-	public static final field KeyRestrictSearchableAttributes Ljava/lang/String;
-	public static final field KeyResults Ljava/lang/String;
-	public static final field KeyRule Ljava/lang/String;
-	public static final field KeyRuleContexts Ljava/lang/String;
-	public static final field KeyRules Ljava/lang/String;
-	public static final field KeyScope Ljava/lang/String;
-	public static final field KeyScore Ljava/lang/String;
-	public static final field KeySearch Ljava/lang/String;
-	public static final field KeySearchableAttributes Ljava/lang/String;
-	public static final field KeySeeUnretrievableAttributes Ljava/lang/String;
-	public static final field KeySeparatorsToIndex Ljava/lang/String;
-	public static final field KeySettings Ljava/lang/String;
-	public static final field KeySingleWordSynonym Ljava/lang/String;
-	public static final field KeySnippetEllipsisText Ljava/lang/String;
-	public static final field KeySortFacetValuesBy Ljava/lang/String;
-	public static final field KeyStar Ljava/lang/String;
-	public static final field KeyStartsWith Ljava/lang/String;
-	public static final field KeyStatus Ljava/lang/String;
-	public static final field KeyStopIfEnoughMatches Ljava/lang/String;
-	public static final field KeyStrategy Ljava/lang/String;
-	public static final field KeyStrict Ljava/lang/String;
-	public static final field KeySumOrFiltersScores Ljava/lang/String;
-	public static final field KeySynonym Ljava/lang/String;
-	public static final field KeySynonyms Ljava/lang/String;
-	public static final field KeyTagFilters Ljava/lang/String;
-	public static final field KeyTaskID Ljava/lang/String;
-	public static final field KeyType Ljava/lang/String;
-	public static final field KeyTypo Ljava/lang/String;
-	public static final field KeyTypoTolerance Ljava/lang/String;
-	public static final field KeyUnretrievableAttributes Ljava/lang/String;
-	public static final field KeyUpdateObject Ljava/lang/String;
-	public static final field KeyUpdatedAt Ljava/lang/String;
-	public static final field KeyUserData Ljava/lang/String;
-	public static final field KeyValue Ljava/lang/String;
-	public static final field KeyWord Ljava/lang/String;
-	public static final field KeyWords Ljava/lang/String;
-	public static final field Key_Operation Ljava/lang/String;
-}
-
-public final class com/algolia/search/serialize/KeysThreeKt {
-	public static final field KeyAddEntry Ljava/lang/String;
-	public static final field KeyAppliedRelevancyStrictness Ljava/lang/String;
-	public static final field KeyAppliedRules Ljava/lang/String;
-	public static final field KeyAttributeCriteriaComputedByMinProximity Ljava/lang/String;
-	public static final field KeyAttributesForPrediction Ljava/lang/String;
-	public static final field KeyAttributesToTransliterate Ljava/lang/String;
-	public static final field KeyClearExistingDictionaryEntries Ljava/lang/String;
-	public static final field KeyCompounds Ljava/lang/String;
-	public static final field KeyDecomposition Ljava/lang/String;
-	public static final field KeyDecompoundQuery Ljava/lang/String;
-	public static final field KeyDefault Ljava/lang/String;
-	public static final field KeyDeleteEntry Ljava/lang/String;
-	public static final field KeyDisabled Ljava/lang/String;
-	public static final field KeyEnableReRanking Ljava/lang/String;
-	public static final field KeyExtract Ljava/lang/String;
-	public static final field KeyExtractAttribute Ljava/lang/String;
-	public static final field KeyFacetOrdering Ljava/lang/String;
-	public static final field KeyFallbackParameters Ljava/lang/String;
-	public static final field KeyFiltersScore Ljava/lang/String;
-	public static final field KeyHidden Ljava/lang/String;
-	public static final field KeyLastEventAt Ljava/lang/String;
-	public static final field KeyMaxRecommendations Ljava/lang/String;
-	public static final field KeyModel Ljava/lang/String;
-	public static final field KeyNbSortedHits Ljava/lang/String;
-	public static final field KeyOrder Ljava/lang/String;
-	public static final field KeyPlurals Ljava/lang/String;
-	public static final field KeyRelevancyStrictness Ljava/lang/String;
-	public static final field KeyRenderingContent Ljava/lang/String;
-	public static final field KeyScores Ljava/lang/String;
-	public static final field KeySortRemainingBy Ljava/lang/String;
-	public static final field KeyState Ljava/lang/String;
-	public static final field KeyStopwords Ljava/lang/String;
-	public static final field KeyThreshold Ljava/lang/String;
-	public static final field KeyValues Ljava/lang/String;
-	public static final field Key_Answer Ljava/lang/String;
-	public static final field Key_Score Ljava/lang/String;
-}
-
-public final class com/algolia/search/serialize/KeysTwoKt {
-	public static final field KeyABTest Ljava/lang/String;
-	public static final field KeyABTestID Ljava/lang/String;
-	public static final field KeyABTests Ljava/lang/String;
-	public static final field KeyAbTestVariantID Ljava/lang/String;
-	public static final field KeyAcl Ljava/lang/String;
-	public static final field KeyActive Ljava/lang/String;
-	public static final field KeyAddress Ljava/lang/String;
-	public static final field KeyAdmin_Level Ljava/lang/String;
-	public static final field KeyAdministrative Ljava/lang/String;
-	public static final field KeyAdvancedSyntaxFeatures Ljava/lang/String;
-	public static final field KeyAirport Ljava/lang/String;
-	public static final field KeyAlgoliaAPIKey Ljava/lang/String;
-	public static final field KeyAlgoliaApplicationID Ljava/lang/String;
-	public static final field KeyAltcorrection Ljava/lang/String;
-	public static final field KeyAlternatives Ljava/lang/String;
-	public static final field KeyAnswer Ljava/lang/String;
-	public static final field KeyAnswer_Code Ljava/lang/String;
-	public static final field KeyAttributesToIndex Ljava/lang/String;
-	public static final field KeyAverageClickPosition Ljava/lang/String;
-	public static final field KeyAvg Ljava/lang/String;
-	public static final field KeyBuild Ljava/lang/String;
-	public static final field KeyBusStop Ljava/lang/String;
-	public static final field KeyCity Ljava/lang/String;
-	public static final field KeyClick Ljava/lang/String;
-	public static final field KeyClickCount Ljava/lang/String;
-	public static final field KeyClickSignificance Ljava/lang/String;
-	public static final field KeyClickThroughRate Ljava/lang/String;
-	public static final field KeyClusterName Ljava/lang/String;
-	public static final field KeyClusters Ljava/lang/String;
-	public static final field KeyCompound Ljava/lang/String;
-	public static final field KeyConcat Ljava/lang/String;
-	public static final field KeyCondition Ljava/lang/String;
-	public static final field KeyConditions Ljava/lang/String;
-	public static final field KeyConsequence Ljava/lang/String;
-	public static final field KeyConversion Ljava/lang/String;
-	public static final field KeyConversionCount Ljava/lang/String;
-	public static final field KeyConversionRate Ljava/lang/String;
-	public static final field KeyConversionSignificance Ljava/lang/String;
-	public static final field KeyCountries Ljava/lang/String;
-	public static final field KeyCountry Ljava/lang/String;
-	public static final field KeyCountryCode Ljava/lang/String;
-	public static final field KeyCounty Ljava/lang/String;
-	public static final field KeyCustomNormalization Ljava/lang/String;
-	public static final field KeyCustomSearchParameters Ljava/lang/String;
-	public static final field KeyDE Ljava/lang/String;
-	public static final field KeyDataSize Ljava/lang/String;
-	public static final field KeyDegradedQuery Ljava/lang/String;
-	public static final field KeyDescription Ljava/lang/String;
-	public static final field KeyDisjunctiveFacets Ljava/lang/String;
-	public static final field KeyDistance Ljava/lang/String;
-	public static final field KeyDistrict Ljava/lang/String;
-	public static final field KeyEU Ljava/lang/String;
-	public static final field KeyEnableABTest Ljava/lang/String;
-	public static final field KeyEnabled Ljava/lang/String;
-	public static final field KeyEndAt Ljava/lang/String;
-	public static final field KeyEntries Ljava/lang/String;
-	public static final field KeyError Ljava/lang/String;
-	public static final field KeyEventName Ljava/lang/String;
-	public static final field KeyEventType Ljava/lang/String;
-	public static final field KeyEvents Ljava/lang/String;
-	public static final field KeyEventsScoring Ljava/lang/String;
-	public static final field KeyExactPhrase Ljava/lang/String;
-	public static final field KeyExcludeWords Ljava/lang/String;
-	public static final field KeyExcluded Ljava/lang/String;
-	public static final field KeyExhaustiveNbHits Ljava/lang/String;
-	public static final field KeyExpired Ljava/lang/String;
-	public static final field KeyExplain Ljava/lang/String;
-	public static final field KeyFacetHits Ljava/lang/String;
-	public static final field KeyFacetName Ljava/lang/String;
-	public static final field KeyFacetsScoring Ljava/lang/String;
-	public static final field KeyFailed Ljava/lang/String;
-	public static final field KeyFileSize Ljava/lang/String;
-	public static final field KeyFilterOnly Ljava/lang/String;
-	public static final field KeyFilterPromotes Ljava/lang/String;
-	public static final field KeyFirstMatchedWord Ljava/lang/String;
-	public static final field KeyFrom Ljava/lang/String;
-	public static final field KeyFullyHighlighted Ljava/lang/String;
-	public static final field KeyGeoDistance Ljava/lang/String;
-	public static final field KeyGeoPoint Ljava/lang/String;
-	public static final field KeyGeoPrecision Ljava/lang/String;
-	public static final field KeyGetClusters Ljava/lang/String;
-	public static final field KeyHierarchicalFacets Ljava/lang/String;
-	public static final field KeyHighlighted Ljava/lang/String;
-	public static final field KeyId Ljava/lang/String;
-	public static final field KeyImportance Ljava/lang/String;
-	public static final field KeyIndexLanguages Ljava/lang/String;
-	public static final field KeyIndexUsed Ljava/lang/String;
-	public static final field KeyIndex_Name Ljava/lang/String;
-	public static final field KeyIndexes Ljava/lang/String;
-	public static final field KeyInner_Queries Ljava/lang/String;
-	public static final field KeyIp Ljava/lang/String;
-	public static final field KeyIs_City Ljava/lang/String;
-	public static final field KeyIs_Country Ljava/lang/String;
-	public static final field KeyIs_Highway Ljava/lang/String;
-	public static final field KeyIs_Popular Ljava/lang/String;
-	public static final field KeyIs_Suburb Ljava/lang/String;
-	public static final field KeyItems Ljava/lang/String;
-	public static final field KeyKeys Ljava/lang/String;
-	public static final field KeyLanguage Ljava/lang/String;
-	public static final field KeyLastBuildTimeS Ljava/lang/String;
-	public static final field KeyLat Ljava/lang/String;
-	public static final field KeyLimit Ljava/lang/String;
-	public static final field KeyLng Ljava/lang/String;
-	public static final field KeyLocaleNames Ljava/lang/String;
-	public static final field KeyMatch Ljava/lang/String;
-	public static final field KeyMatchAlternatives Ljava/lang/String;
-	public static final field KeyMatchLevel Ljava/lang/String;
-	public static final field KeyMatchedGeoLocation Ljava/lang/String;
-	public static final field KeyMatchedWords Ljava/lang/String;
-	public static final field KeyMax Ljava/lang/String;
-	public static final field KeyMaxHitsPerQuery Ljava/lang/String;
-	public static final field KeyMaxQueriesPerIPPerHour Ljava/lang/String;
-	public static final field KeyMessage Ljava/lang/String;
-	public static final field KeyMethod Ljava/lang/String;
-	public static final field KeyName Ljava/lang/String;
-	public static final field KeyNaturalLanguages Ljava/lang/String;
-	public static final field KeyNbExactWords Ljava/lang/String;
-	public static final field KeyNbRecords Ljava/lang/String;
-	public static final field KeyNbTypos Ljava/lang/String;
-	public static final field KeyNbUserIDs Ljava/lang/String;
-	public static final field KeyNb_Api_Calls Ljava/lang/String;
-	public static final field KeyNoResultCount Ljava/lang/String;
-	public static final field KeyNumberOfPendingTasks Ljava/lang/String;
-	public static final field KeyNumericAttributesToIndex Ljava/lang/String;
-	public static final field KeyOptional Ljava/lang/String;
-	public static final field KeyOrdered Ljava/lang/String;
-	public static final field KeyOriginal Ljava/lang/String;
-	public static final field KeyParsedQuery Ljava/lang/String;
-	public static final field KeyPending Ljava/lang/String;
-	public static final field KeyPendingTask Ljava/lang/String;
-	public static final field KeyPercentage Ljava/lang/String;
-	public static final field KeyPersonalization Ljava/lang/String;
-	public static final field KeyPersonalizationImpact Ljava/lang/String;
-	public static final field KeyPlural Ljava/lang/String;
-	public static final field KeyPopulation Ljava/lang/String;
-	public static final field KeyPosition Ljava/lang/String;
-	public static final field KeyPositions Ljava/lang/String;
-	public static final field KeyPostCode Ljava/lang/String;
-	public static final field KeyPrimary Ljava/lang/String;
-	public static final field KeyProcessed Ljava/lang/String;
-	public static final field KeyProcessing_Time_Ms Ljava/lang/String;
-	public static final field KeyPromoted Ljava/lang/String;
-	public static final field KeyProximityDistance Ljava/lang/String;
-	public static final field KeyQueryID Ljava/lang/String;
-	public static final field KeyQueryParameters Ljava/lang/String;
-	public static final field KeyQuery_Body Ljava/lang/String;
-	public static final field KeyQuery_Headers Ljava/lang/String;
-	public static final field KeyQuery_ID Ljava/lang/String;
-	public static final field KeyQuery_Nb_Hits Ljava/lang/String;
-	public static final field KeyQuery_Params Ljava/lang/String;
-	public static final field KeyRankingScore Ljava/lang/String;
-	public static final field KeyReferers Ljava/lang/String;
-	public static final field KeyRestrictSources Ljava/lang/String;
-	public static final field KeySearchCount Ljava/lang/String;
-	public static final field KeySearchable Ljava/lang/String;
-	public static final field KeyServerUsed Ljava/lang/String;
-	public static final field KeySha1 Ljava/lang/String;
-	public static final field KeySimilarQuery Ljava/lang/String;
-	public static final field KeySlaves Ljava/lang/String;
-	public static final field KeySourceABTest Ljava/lang/String;
-	public static final field KeySplit Ljava/lang/String;
-	public static final field KeyStopWord Ljava/lang/String;
-	public static final field KeyStopped Ljava/lang/String;
-	public static final field KeySuburb Ljava/lang/String;
-	public static final field KeySum Ljava/lang/String;
-	public static final field KeyTimestamp Ljava/lang/String;
-	public static final field KeyTopUsers Ljava/lang/String;
-	public static final field KeyTotal Ljava/lang/String;
-	public static final field KeyTownhall Ljava/lang/String;
-	public static final field KeyTrackedSearchCount Ljava/lang/String;
-	public static final field KeyTrafficPercentage Ljava/lang/String;
-	public static final field KeyTrainStation Ljava/lang/String;
-	public static final field KeyTypes Ljava/lang/String;
-	public static final field KeyTypos Ljava/lang/String;
-	public static final field KeyUS Ljava/lang/String;
-	public static final field KeyUnordered Ljava/lang/String;
-	public static final field KeyUntil Ljava/lang/String;
-	public static final field KeyUrl Ljava/lang/String;
-	public static final field KeyUserCount Ljava/lang/String;
-	public static final field KeyUserID Ljava/lang/String;
-	public static final field KeyUserIDs Ljava/lang/String;
-	public static final field KeyUserScore Ljava/lang/String;
-	public static final field KeyUserToken Ljava/lang/String;
-	public static final field KeyUser_Token Ljava/lang/String;
-	public static final field KeyUsers Ljava/lang/String;
-	public static final field KeyValidity Ljava/lang/String;
-	public static final field KeyVariants Ljava/lang/String;
-	public static final field KeyVersion Ljava/lang/String;
-	public static final field KeyView Ljava/lang/String;
-	public static final field KeyVillage Ljava/lang/String;
-	public static final field Key_DistinctSeqID Ljava/lang/String;
-	public static final field Key_Exhaustive_Faceting Ljava/lang/String;
-	public static final field Key_Exhaustive_Nb_Hits Ljava/lang/String;
-	public static final field Key_Geoloc Ljava/lang/String;
-	public static final field Key_HighlightResult Ljava/lang/String;
-	public static final field Key_RankingInfo Ljava/lang/String;
-	public static final field Key_SnippetResult Ljava/lang/String;
-	public static final field Key_Tags Ljava/lang/String;
-}
-
-public final class com/algolia/search/serialize/LanguagesKt {
-	public static final field KeyAfrikaans Ljava/lang/String;
-	public static final field KeyAlbanian Ljava/lang/String;
-	public static final field KeyArabic Ljava/lang/String;
-	public static final field KeyArmenian Ljava/lang/String;
-	public static final field KeyAzeri Ljava/lang/String;
-	public static final field KeyBasque Ljava/lang/String;
-	public static final field KeyBrunei Ljava/lang/String;
-	public static final field KeyBulgarian Ljava/lang/String;
-	public static final field KeyCatalan Ljava/lang/String;
-	public static final field KeyCzech Ljava/lang/String;
-	public static final field KeyDanish Ljava/lang/String;
-	public static final field KeyDutch Ljava/lang/String;
-	public static final field KeyEnglish Ljava/lang/String;
-	public static final field KeyEsperanto Ljava/lang/String;
-	public static final field KeyEstonian Ljava/lang/String;
-	public static final field KeyFaroese Ljava/lang/String;
-	public static final field KeyFinnish Ljava/lang/String;
-	public static final field KeyFrench Ljava/lang/String;
-	public static final field KeyGalician Ljava/lang/String;
-	public static final field KeyGeorgian Ljava/lang/String;
-	public static final field KeyGerman Ljava/lang/String;
-	public static final field KeyHebrew Ljava/lang/String;
-	public static final field KeyHindi Ljava/lang/String;
-	public static final field KeyHungarian Ljava/lang/String;
-	public static final field KeyIcelandic Ljava/lang/String;
-	public static final field KeyIndonesian Ljava/lang/String;
-	public static final field KeyItalian Ljava/lang/String;
-	public static final field KeyJapanese Ljava/lang/String;
-	public static final field KeyKazakh Ljava/lang/String;
-	public static final field KeyKorean Ljava/lang/String;
-	public static final field KeyKyrgyz Ljava/lang/String;
-	public static final field KeyLithuanian Ljava/lang/String;
-	public static final field KeyMalay Ljava/lang/String;
-	public static final field KeyMaltese Ljava/lang/String;
-	public static final field KeyMaori Ljava/lang/String;
-	public static final field KeyMarathi Ljava/lang/String;
-	public static final field KeyMongolian Ljava/lang/String;
-	public static final field KeyNorthernSotho Ljava/lang/String;
-	public static final field KeyNorwegian Ljava/lang/String;
-	public static final field KeyPashto Ljava/lang/String;
-	public static final field KeyPolish Ljava/lang/String;
-	public static final field KeyPortuguese Ljava/lang/String;
-	public static final field KeyQuechua Ljava/lang/String;
-	public static final field KeyRomanian Ljava/lang/String;
-	public static final field KeyRussian Ljava/lang/String;
-	public static final field KeySlovak Ljava/lang/String;
-	public static final field KeySpanish Ljava/lang/String;
-	public static final field KeySwahili Ljava/lang/String;
-	public static final field KeySwedish Ljava/lang/String;
-	public static final field KeyTagalog Ljava/lang/String;
-	public static final field KeyTamil Ljava/lang/String;
-	public static final field KeyTatar Ljava/lang/String;
-	public static final field KeyTelugu Ljava/lang/String;
-	public static final field KeyTswana Ljava/lang/String;
-	public static final field KeyTurkish Ljava/lang/String;
-	public static final field KeyWelsh Ljava/lang/String;
-}
-
-public final class com/algolia/search/serialize/RoutesKt {
-	public static final field RouteABTestsV2 Ljava/lang/String;
-	public static final field RouteClustersV1 Ljava/lang/String;
-	public static final field RouteDictionaries Ljava/lang/String;
-	public static final field RouteEventsV1 Ljava/lang/String;
-	public static final field RouteIndexesV1 Ljava/lang/String;
-	public static final field RouteKeysV1 Ljava/lang/String;
-	public static final field RouteLogs Ljava/lang/String;
-	public static final field RoutePersonalization Ljava/lang/String;
-	public static final field RoutePlaces Ljava/lang/String;
-	public static final field RouteProfiles Ljava/lang/String;
-	public static final field RouteRecommendation Ljava/lang/String;
-	public static final field RouteRecommendationV2 Ljava/lang/String;
-	public static final field RouteRules Ljava/lang/String;
-	public static final field RouteSettings Ljava/lang/String;
-	public static final field RouteSynonyms Ljava/lang/String;
-	public static final field RouteTask Ljava/lang/String;
 }
 
 public abstract interface class com/algolia/search/transport/CustomRequester {

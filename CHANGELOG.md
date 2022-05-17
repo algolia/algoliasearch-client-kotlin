@@ -1,3 +1,16 @@
+# 2.0.0
+
+### Changed
+- Update Kotlin to `1.6.21`
+- Update Ktor client to [2.0](https://blog.jetbrains.com/ktor/2022/04/11/ktor-2-0-released/)
+- Library's own `LogLevel` to specify the logging level
+
+### Removed
+- Public string constants (e.g. `KeyQuery`, `RouteIndexesV1`...)
+- Ktor's plugins from the library binary interface
+- Deprecated `ClientRecommendation`
+- `ResponseException` extensions
+
 # 1.13.0
 
 ### Changed
