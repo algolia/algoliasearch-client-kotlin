@@ -33,6 +33,7 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 api(libs.ktor.client.core)
+                api(libs.kotlinx.serialization.json)
                 implementation(libs.ktor.client.logging)
                 implementation(libs.ktor.client.serialization.json)
                 implementation(libs.ktor.client.content.negotiation)
