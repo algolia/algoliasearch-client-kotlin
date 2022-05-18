@@ -15,7 +15,7 @@ data class Contact(
 
 val response = index.search()
 
-val contacts: List<Contact> = response.deserialize(Contact.serializer)
+val contacts: List<Contact> = response.hits.deserialize(Contact.serializer())
 ```
 
 ## GetObject
@@ -46,12 +46,12 @@ data class Contact(
     val lastname: String
 )
 
-val json: JsonObject = json {
-    "firstname" to "Jimmie"
-    "lastname" to "Barninger"
+val json = buildJsonObject {
+    put("firstname", "Jimmie")
+    put("lastname", "Barninger")
 }
 
-val contact: Contact = Json.plain.fromJson(Contact.serializer(), json)
+val contact: Contact = Json.decodeFromJsonElement(Contact.serializer(), json)
 // Or with Json.nonstrict, allowing unknown fields to be ignored.
-val contactNonStrict: Contact = Json.nonstrict.fromJson(Contact.serializer(), json)
+val contactNonStrict: Contact = Json { ignoreUnknownKeys = true }.decodeFromJsonElement(Contact.serializer(), json)
 ```
