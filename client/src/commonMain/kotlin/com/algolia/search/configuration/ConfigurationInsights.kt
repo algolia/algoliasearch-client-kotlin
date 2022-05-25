@@ -43,7 +43,7 @@ public fun ConfigurationInsights(
     defaultHeaders: Map<String, String>? = null,
     engine: HttpClientEngine? = null,
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
-    logger: Logger = Logger.Default,
+    logger: Logger = Logger.Simple,
 ): ConfigurationInsights = ConfigurationInsightsImpl(
     applicationID = applicationID,
     apiKey = apiKey,

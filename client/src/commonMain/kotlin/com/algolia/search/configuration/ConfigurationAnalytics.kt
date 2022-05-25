@@ -51,7 +51,7 @@ public fun ConfigurationAnalytics(
     defaultHeaders: Map<String, String>? = null,
     engine: HttpClientEngine? = null,
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
-    logger: Logger = Logger.Default,
+    logger: Logger = Logger.Simple,
 ): ConfigurationAnalytics = ConfigurationAnalyticsImpl(
     applicationID = applicationID,
     apiKey = apiKey,

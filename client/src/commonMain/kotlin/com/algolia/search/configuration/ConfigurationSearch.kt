@@ -45,7 +45,7 @@ public fun ConfigurationSearch(
     engine: HttpClientEngine? = null,
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
     compression: Compression = Compression.None,
-    logger: Logger = Logger.Default,
+    logger: Logger = Logger.Simple,
 ): ConfigurationSearch = ConfigurationSearchImpl(
     applicationID = applicationID,
     apiKey = apiKey,

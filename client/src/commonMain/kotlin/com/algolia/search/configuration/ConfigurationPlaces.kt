@@ -37,7 +37,7 @@ public fun ConfigurationPlaces(
     defaultHeaders: Map<String, String>? = null,
     engine: HttpClientEngine? = null,
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
-    logger: Logger = Logger.Default,
+    logger: Logger = Logger.Simple,
 ): ConfigurationPlaces = ConfigurationPlacesImpl(
     writeTimeout = writeTimeout,
     readTimeout = readTimeout,

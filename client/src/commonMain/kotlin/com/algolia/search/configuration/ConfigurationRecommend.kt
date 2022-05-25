@@ -42,7 +42,7 @@ public fun ConfigurationRecommend(
     engine: HttpClientEngine? = null,
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
     compression: Compression = Compression.None,
-    logger: Logger = Logger.Default,
+    logger: Logger = Logger.Simple,
 ): ConfigurationRecommend = ConfigurationRecommendImpl(
     applicationID = applicationID,
     apiKey = apiKey,

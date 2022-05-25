@@ -51,7 +51,7 @@ public fun ConfigurationPersonalization(
     defaultHeaders: Map<String, String>? = null,
     engine: HttpClientEngine? = null,
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
-    logger: Logger = Logger.Default,
+    logger: Logger = Logger.Simple,
 ): ConfigurationPersonalization = ConfigurationPersonalizationImpl(
     applicationID = applicationID,
     apiKey = apiKey,
