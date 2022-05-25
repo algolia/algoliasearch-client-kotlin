@@ -6,6 +6,7 @@ import com.algolia.search.configuration.Region
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.configuration.internal.extension.getHttpClient
 import com.algolia.search.logging.LogLevel
+import com.algolia.search.logging.Logger
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import io.ktor.client.HttpClient
@@ -26,6 +27,7 @@ internal class ConfigurationPersonalizationImpl(
     override val defaultHeaders: Map<String, String>?,
     override val engine: HttpClientEngine?,
     override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)?,
+    override val logger: Logger,
 ) : ConfigurationPersonalization {
 
     override val compression: Compression = Compression.None

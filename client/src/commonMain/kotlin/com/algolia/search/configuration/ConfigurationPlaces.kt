@@ -8,6 +8,7 @@ import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
 import com.algolia.search.logging.LogLevel
+import com.algolia.search.logging.Logger
 import com.algolia.search.transport.internal.placesHosts
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.engine.HttpClientEngine
@@ -36,6 +37,7 @@ public fun ConfigurationPlaces(
     defaultHeaders: Map<String, String>? = null,
     engine: HttpClientEngine? = null,
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
+    logger: Logger = Logger.Default,
 ): ConfigurationPlaces = ConfigurationPlacesImpl(
     writeTimeout = writeTimeout,
     readTimeout = readTimeout,
@@ -43,5 +45,6 @@ public fun ConfigurationPlaces(
     hosts = hosts,
     defaultHeaders = defaultHeaders,
     engine = engine,
-    httpClientConfig = httpClientConfig
+    httpClientConfig = httpClientConfig,
+    logger = logger,
 )

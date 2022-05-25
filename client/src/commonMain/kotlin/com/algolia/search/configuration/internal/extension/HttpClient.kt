@@ -4,6 +4,8 @@ import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.Configuration
 import com.algolia.search.configuration.clientUserAgent
 import com.algolia.search.logging.LogLevel
+import com.algolia.search.logging.Logger
+import com.algolia.search.logging.internal.toKtorLogger
 import com.algolia.search.serialize.internal.JsonNonStrict
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
@@ -11,9 +13,7 @@ import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.UserAgent
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
-import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
-import io.ktor.client.plugins.logging.SIMPLE
 import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 
@@ -29,7 +29,7 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
     install(ContentNegotiation) { json(JsonNonStrict) }
 
     // Logging
-    installLogging(configuration.logLevel)
+    installLogging(configuration.logLevel, configuration.logger)
 
     // User agent
     install(UserAgent) {
@@ -56,10 +56,10 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
 /**
  * Installs [Logging] if logging level is superior to [LogLevel.NONE].
  */
-private fun HttpClientConfig<*>.installLogging(logLevel: LogLevel) {
+private fun HttpClientConfig<*>.installLogging(logLevel: LogLevel, customLogger: Logger) {
     if (LogLevel.None == logLevel) return
     install(Logging) {
         level = logLevel.toKtorLogLevel()
-        logger = Logger.SIMPLE
+        logger = customLogger.toKtorLogger()
     }
 }

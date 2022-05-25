@@ -5,6 +5,7 @@ import com.algolia.search.configuration.ConfigurationInsights
 import com.algolia.search.configuration.RetryableHost
 import com.algolia.search.configuration.internal.extension.getHttpClient
 import com.algolia.search.logging.LogLevel
+import com.algolia.search.logging.Logger
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import io.ktor.client.HttpClient
@@ -23,7 +24,8 @@ internal data class ConfigurationInsightsImpl(
     override val hosts: List<RetryableHost>,
     override val defaultHeaders: Map<String, String>?,
     override val engine: HttpClientEngine?,
-    override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)?
+    override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)?,
+    override val logger: Logger,
 ) : ConfigurationInsights {
 
     override val compression: Compression = Compression.None

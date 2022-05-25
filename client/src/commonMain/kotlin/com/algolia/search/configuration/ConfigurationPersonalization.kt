@@ -8,6 +8,7 @@ import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
 import com.algolia.search.logging.LogLevel
+import com.algolia.search.logging.Logger
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.transport.internal.hosts
@@ -50,6 +51,7 @@ public fun ConfigurationPersonalization(
     defaultHeaders: Map<String, String>? = null,
     engine: HttpClientEngine? = null,
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
+    logger: Logger = Logger.Default,
 ): ConfigurationPersonalization = ConfigurationPersonalizationImpl(
     applicationID = applicationID,
     apiKey = apiKey,
@@ -60,5 +62,6 @@ public fun ConfigurationPersonalization(
     hosts = hosts,
     defaultHeaders = defaultHeaders,
     engine = engine,
-    httpClientConfig = httpClientConfig
+    httpClientConfig = httpClientConfig,
+    logger = logger,
 )
