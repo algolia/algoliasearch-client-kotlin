@@ -1,10 +1,13 @@
 package com.algolia.search.logging
 
-import io.ktor.client.plugins.logging.ANDROID
-import io.ktor.client.plugins.logging.Logger as KLogger
+import com.algolia.search.logging.internal.toKtorLogger
+import com.algolia.search.logging.internal.toLogger
+
+import io.ktor.client.plugins.logging.MessageLengthLimitingLogger
 
 /**
  * Android [Logger]: breaks up long log messages that would be truncated by Android's max log
  * length of 4068 characters
  */
-public val Logger.Companion.Android: Logger get() = Logger { KLogger.ANDROID.log(it) }
+public fun Logger.Companion.Android(delegate: Logger = Simple): Logger =
+    MessageLengthLimitingLogger(delegate = delegate.toKtorLogger()).toLogger()

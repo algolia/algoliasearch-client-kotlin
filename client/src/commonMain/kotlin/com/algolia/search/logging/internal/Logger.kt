@@ -11,3 +11,10 @@ internal fun Logger.toKtorLogger() = object : KLogger {
         this@toKtorLogger.log(message)
     }
 }
+
+/**
+ * Convert Ktor's Logger to [Logger]
+ */
+internal fun KLogger.toLogger() = Logger { message ->
+    this@toLogger.log(message)
+}
