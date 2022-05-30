@@ -72,25 +72,25 @@ internal class TestDSLQuery {
         }
 
         query.facetFilters!!.isNotEmpty()
-        assertEquals(listOf(listOf("\"attributeA\":0")), query.facetFilters)
+        assertEquals(listOf(listOf("attributeA:0")), query.facetFilters)
     }
 
     @Test
     fun facetFiltersUnquoted() {
         val query = query {
-            facetFilters(escape = false) {
+            facetFilters(escape = true) {
                 and { facet(attributeA, 0) }
             }
         }
 
         query.facetFilters!!.isNotEmpty()
-        assertEquals(listOf(listOf("attributeA:0")), query.facetFilters)
+        assertEquals(listOf(listOf("\"attributeA\":0")), query.facetFilters)
     }
 
     @Test
     fun numericFilters() {
         val query = query {
-            numericFilters {
+            numericFilters(escape = true) {
                 and { range(attributeA, 0..1) }
             }
         }
@@ -102,7 +102,7 @@ internal class TestDSLQuery {
     @Test
     fun numericFiltersUnquoted() {
         val query = query {
-            numericFilters(escape = false) {
+            numericFilters {
                 and { range(attributeA, 0..1) }
             }
         }
@@ -120,19 +120,19 @@ internal class TestDSLQuery {
         }
 
         query.tagFilters!!.isNotEmpty()
-        assertEquals(listOf(listOf("_tags:\"unknown\"")), query.tagFilters)
+        assertEquals(listOf(listOf("unknown")), query.tagFilters)
     }
 
     @Test
     fun tagFiltersUnquoted() {
         val query = query {
-            tagFilters(escape = false) {
+            tagFilters(escape = true) {
                 and { tag(unknown) }
             }
         }
 
         query.tagFilters!!.isNotEmpty()
-        assertEquals(listOf(listOf("_tags:unknown")), query.tagFilters)
+        assertEquals(listOf(listOf("\"unknown\"")), query.tagFilters)
     }
 
     @Test
@@ -144,19 +144,19 @@ internal class TestDSLQuery {
         }
 
         query.optionalFilters!!.isNotEmpty()
-        assertEquals(listOf(listOf("\"attributeA\":0")), query.optionalFilters)
+        assertEquals(listOf(listOf("attributeA:0")), query.optionalFilters)
     }
 
     @Test
     fun optionalFiltersUnquoted() {
         val query = query {
-            optionalFilters(escape = false) {
+            optionalFilters(escape = true) {
                 and { facet(attributeA, 0) }
             }
         }
 
         query.optionalFilters!!.isNotEmpty()
-        assertEquals(listOf(listOf("attributeA:0")), query.optionalFilters)
+        assertEquals(listOf(listOf("\"attributeA\":0")), query.optionalFilters)
     }
 
     @Test
