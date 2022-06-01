@@ -9,12 +9,12 @@ import io.ktor.client.plugins.ResponseException
  * Coerce a Throwable to a [AlgoliaClientException].
  */
 internal fun Throwable.asClientException(): AlgoliaClientException {
-    return AlgoliaClientException(message = message, cause = cause)
+    return AlgoliaClientException(message = message, cause = this)
 }
 
 /**
  * Coerce a [ResponseException] to a [AlgoliaRuntimeException].
  */
 internal fun ResponseException.asApiException(): AlgoliaApiException {
-    return AlgoliaApiException(message = message, cause = cause, httpErrorCode = response.status.value)
+    return AlgoliaApiException(message = message, cause = this, httpErrorCode = response.status.value)
 }
