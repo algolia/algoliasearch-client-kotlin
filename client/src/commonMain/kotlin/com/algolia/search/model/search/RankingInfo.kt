@@ -1,6 +1,5 @@
 package com.algolia.search.model.search
 
-import com.algolia.search.endpoint.EndpointPlaces
 import com.algolia.search.model.settings.RankingCriterion
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.GeoDistance
@@ -67,10 +66,12 @@ public data class RankingInfo(
     /**
      * Only returned for [EndpointPlaces.searchPlaces].
      */
+    @Deprecated("Places feature is deprecated")
     @SerialName(Key.GeoPoint) @Serializable(KSerializerGeoPoint::class) val geoPoint: Point? = null,
     /**
      * Only returned for [EndpointPlaces.searchPlaces].
      */
+    @Deprecated("Places feature is deprecated")
     @SerialName(Key.Query) val query: String? = null,
     /**
      * Only returned when personalization is enabled

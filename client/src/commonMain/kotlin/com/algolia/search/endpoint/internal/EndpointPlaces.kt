@@ -1,4 +1,4 @@
-@file:Suppress("FunctionName")
+@file:Suppress("FunctionName", "DEPRECATION")
 
 package com.algolia.search.endpoint.internal
 
@@ -19,6 +19,7 @@ import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
 
+@Deprecated("Places feature is deprecated")
 internal class EndpointPlacesImpl(
     private val transport: Transport,
 ) : EndpointPlaces {

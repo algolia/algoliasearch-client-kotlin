@@ -1,4 +1,4 @@
-@file:Suppress("FunctionName")
+@file:Suppress("FunctionName", "DEPRECATION")
 
 package com.algolia.search.client
 
@@ -16,6 +16,7 @@ import com.algolia.search.transport.internal.Transport
 /**
  * Client for the places API.
  */
+@Deprecated("Places feature is deprecated")
 public interface ClientPlaces : EndpointPlaces, Configuration, CustomRequester {
 
     public companion object
@@ -27,6 +28,7 @@ public interface ClientPlaces : EndpointPlaces, Configuration, CustomRequester {
  * @param applicationID application ID
  * @param apiKey API Key
  */
+@Deprecated("Places feature is deprecated")
 public fun ClientPlaces(
     applicationID: ApplicationID,
     apiKey: APIKey,
@@ -40,6 +42,7 @@ public fun ClientPlaces(
  * @param configuration places configuration
  * @param credentials used by a client for authenticated request
  */
+@Deprecated("Places feature is deprecated")
 public fun ClientPlaces(
     configuration: ConfigurationPlaces = ConfigurationPlaces(),
     credentials: Credentials? = null,
