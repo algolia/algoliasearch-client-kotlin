@@ -1,8 +1,3 @@
-rootProject.name = "algoliasearch-client-kotlin"
-enableFeaturePreview("VERSION_CATALOGS")
-
-include(":client")
-
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -17,3 +12,11 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
+
+rootProject.name = "algoliasearch-client-kotlin"
+
+include(":client")
+include(":client-bom")
+
+enableFeaturePreview("VERSION_CATALOGS")
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
