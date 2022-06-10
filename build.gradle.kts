@@ -1,3 +1,5 @@
+import com.vanniktech.maven.publish.MavenPublishBaseExtension
+
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.kotlin.multiplaform) apply false
