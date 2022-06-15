@@ -17,13 +17,13 @@ internal class TestFilterTag {
 
     @Test
     fun legacy() {
-        FilterConverter.Legacy(filter) shouldEqual listOf("_tags:\"valueA\"")
-        FilterConverter.Legacy(!filter) shouldEqual listOf("_tags:-\"valueA\"")
+        FilterConverter.Legacy(filter) shouldEqual listOf("\"valueA\"")
+        FilterConverter.Legacy(!filter) shouldEqual listOf("-\"valueA\"")
     }
 
     @Test
     fun legacyUnquoted() {
-        FilterConverter.Legacy.Unquoted(filter) shouldEqual listOf("_tags:valueA")
-        FilterConverter.Legacy.Unquoted(!filter) shouldEqual listOf("_tags:-valueA")
+        FilterConverter.Legacy.Unquoted(filter) shouldEqual listOf("valueA")
+        FilterConverter.Legacy.Unquoted(!filter) shouldEqual listOf("-valueA")
     }
 }

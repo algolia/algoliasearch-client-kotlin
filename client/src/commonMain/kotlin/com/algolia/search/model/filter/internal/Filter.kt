@@ -112,5 +112,5 @@ internal fun Filter.Tag.toLegacy(escape: Boolean): List<String> {
     val raw = if (escape) value.escape() else value
     val value = if (isNegated) "-$raw" else raw
 
-    return listOf("$attribute:$value")
+    return listOf(value)
 }

@@ -29,7 +29,7 @@ internal class TestFilterGroupsConverter {
                 and { range(attributeA, 0..10, isNegated = true) }
             }
         }
-        query.numericFilters shouldEqual listOf(listOf("\"attributeA\" < 0"), listOf("\"attributeA\" > 10"))
+        query.numericFilters shouldEqual listOf(listOf("attributeA < 0"), listOf("attributeA > 10"))
     }
 
     @Test
@@ -48,9 +48,9 @@ internal class TestFilterGroupsConverter {
         }
 
         query.facetFilters shouldEqual listOf(
-            listOf("\"attributeA\":\"unknown\""),
-            listOf("\"attributeB\":\"unknown\""),
-            listOf("\"attributeA\":\"unknown\"", "\"attributeB\":\"unknown\"")
+            listOf("attributeA:unknown"),
+            listOf("attributeB:unknown"),
+            listOf("attributeA:unknown", "attributeB:unknown")
         )
     }
 }
