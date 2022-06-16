@@ -1,3 +1,18 @@
+# 2.1.0
+
+### Added
+- Http Client `Logger` (#341)
+- BOM artifact (#346)
+- Enable metadata variant compatibility (#345)
+
+### Changed
+- Update Kotlin to `1.7.0` (#348)
+- Update ktor to `2.0.2` (#343)
+
+### Fix
+- Filters dsl defaults (#342)
+- `AlgoliaClientException` to include exception cause (#344)
+
 # 2.0.0
 
 ### Changed

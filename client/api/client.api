@@ -192,6 +192,7 @@ public abstract interface class com/algolia/search/configuration/Configuration :
 	public abstract fun getHttpClient ()Lio/ktor/client/HttpClient;
 	public abstract fun getHttpClientConfig ()Lkotlin/jvm/functions/Function1;
 	public abstract fun getLogLevel ()Lcom/algolia/search/logging/LogLevel;
+	public abstract fun getLogger ()Lcom/algolia/search/logging/Logger;
 	public abstract fun getReadTimeout ()J
 	public abstract fun getTimeout (Lcom/algolia/search/transport/RequestOptions;Lcom/algolia/search/configuration/CallType;)J
 	public abstract fun getWriteTimeout ()J
@@ -212,8 +213,8 @@ public final class com/algolia/search/configuration/ConfigurationAnalytics$Defau
 }
 
 public final class com/algolia/search/configuration/ConfigurationAnalyticsKt {
-	public static final fun ConfigurationAnalytics (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationAnalytics;
-	public static synthetic fun ConfigurationAnalytics$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationAnalytics;
+	public static final fun ConfigurationAnalytics (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationAnalytics;
+	public static synthetic fun ConfigurationAnalytics$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationAnalytics;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationInsights : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -225,8 +226,8 @@ public final class com/algolia/search/configuration/ConfigurationInsights$Defaul
 }
 
 public final class com/algolia/search/configuration/ConfigurationInsightsKt {
-	public static final fun ConfigurationInsights (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationInsights;
-	public static synthetic fun ConfigurationInsights$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationInsights;
+	public static final fun ConfigurationInsights (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationInsights;
+	public static synthetic fun ConfigurationInsights$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationInsights;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationPersonalization : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -239,8 +240,8 @@ public final class com/algolia/search/configuration/ConfigurationPersonalization
 }
 
 public final class com/algolia/search/configuration/ConfigurationPersonalizationKt {
-	public static final fun ConfigurationPersonalization (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
-	public static synthetic fun ConfigurationPersonalization$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
+	public static final fun ConfigurationPersonalization (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
+	public static synthetic fun ConfigurationPersonalization$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationPlaces : com/algolia/search/configuration/Configuration {
@@ -252,8 +253,8 @@ public final class com/algolia/search/configuration/ConfigurationPlaces$DefaultI
 }
 
 public final class com/algolia/search/configuration/ConfigurationPlacesKt {
-	public static final fun ConfigurationPlaces (JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;)Lcom/algolia/search/configuration/ConfigurationPlaces;
-	public static synthetic fun ConfigurationPlaces$default (JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPlaces;
+	public static final fun ConfigurationPlaces (JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationPlaces;
+	public static synthetic fun ConfigurationPlaces$default (JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPlaces;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationRecommend : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -265,8 +266,8 @@ public final class com/algolia/search/configuration/ConfigurationRecommend$Defau
 }
 
 public final class com/algolia/search/configuration/ConfigurationRecommendKt {
-	public static final fun ConfigurationRecommend (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;)Lcom/algolia/search/configuration/ConfigurationRecommend;
-	public static synthetic fun ConfigurationRecommend$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationRecommend;
+	public static final fun ConfigurationRecommend (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationRecommend;
+	public static synthetic fun ConfigurationRecommend$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationRecommend;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationSearch : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -278,8 +279,8 @@ public final class com/algolia/search/configuration/ConfigurationSearch$DefaultI
 }
 
 public final class com/algolia/search/configuration/ConfigurationSearchKt {
-	public static final fun ConfigurationSearch (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;)Lcom/algolia/search/configuration/ConfigurationSearch;
-	public static synthetic fun ConfigurationSearch$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationSearch;
+	public static final fun ConfigurationSearch (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationSearch;
+	public static synthetic fun ConfigurationSearch$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationSearch;
 }
 
 public abstract interface class com/algolia/search/configuration/Credentials {
@@ -1998,6 +1999,22 @@ public final class com/algolia/search/logging/LogLevel : java/lang/Enum {
 	public static final field None Lcom/algolia/search/logging/LogLevel;
 	public static fun valueOf (Ljava/lang/String;)Lcom/algolia/search/logging/LogLevel;
 	public static fun values ()[Lcom/algolia/search/logging/LogLevel;
+}
+
+public abstract interface class com/algolia/search/logging/Logger {
+	public static final field Companion Lcom/algolia/search/logging/Logger$Companion;
+	public abstract fun log (Ljava/lang/String;)V
+}
+
+public final class com/algolia/search/logging/Logger$Companion {
+	public final fun getEmpty ()Lcom/algolia/search/logging/Logger;
+	public final fun getSimple ()Lcom/algolia/search/logging/Logger;
+	public final fun messageLengthLimiting (IILcom/algolia/search/logging/Logger;)Lcom/algolia/search/logging/Logger;
+	public static synthetic fun messageLengthLimiting$default (Lcom/algolia/search/logging/Logger$Companion;IILcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/logging/Logger;
+}
+
+public final class com/algolia/search/logging/LoggerKt {
+	public static final fun getSlf4j (Lcom/algolia/search/logging/Logger$Companion;)Lcom/algolia/search/logging/Logger;
 }
 
 public final class com/algolia/search/model/APIKey : com/algolia/search/model/internal/Raw {
