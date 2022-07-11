@@ -74,7 +74,6 @@ tasks {
 configure<SpotlessExtension> {
     kotlin {
         target("**/*.kt")
-        ktlint("0.41.0")
         trimTrailingWhitespace()
         endWithNewline()
     }
