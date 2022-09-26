@@ -132,7 +132,7 @@ internal class Transport(
     }
 
     private fun HttpRequestBuilder.requestBody(payload: String) {
-        val body = when (compression) {
+        val body: Any = when (compression) {
             Compression.Gzip -> payload.let(Gzip::invoke)
             Compression.None -> payload
         }
