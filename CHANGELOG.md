@@ -1,3 +1,10 @@
+# 2.1.1
+
+### Changed
+- Update Kotlin to `1.7.10` (#361)
+- Update ktor to `2.1.1` (#374)
+- Update Kotlin serialization json `1.4.0` (#372)
+
 # 2.1.0
 
 ### Added
