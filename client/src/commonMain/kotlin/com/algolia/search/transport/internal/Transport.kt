@@ -127,13 +127,13 @@ internal class Transport(
                 apiKey(it.apiKey)
             }
             requestOptions(requestOptions)
-            requestBody(body)
+            body?.let { requestBody(it) }
         }
     }
 
-    private fun HttpRequestBuilder.requestBody(payload: String?) {
+    private fun HttpRequestBuilder.requestBody(payload: String) {
         val body = when (compression) {
-            Compression.Gzip -> payload?.let(Gzip::invoke)
+            Compression.Gzip -> payload.let(Gzip::invoke)
             Compression.None -> payload
         }
         setBody(body)
