@@ -16,19 +16,9 @@ import io.ktor.client.engine.HttpClientEngine
 /**
  * Configuration used by [ClientPlaces].
  */
+@Deprecated("Algolia Places has reached end of life.")
 public interface ConfigurationPlaces : Configuration
 
-/**
- * Create a [ConfigurationPlaces] instance.
- *
- * @param writeTimeout write timout
- * @param readTimeout read timeout
- * @param logLevel logging level
- * @param hosts insights region hosts
- * @param defaultHeaders default headers
- * @param engine http client engine
- * @param httpClientConfig http client configuration
- */
 public fun ConfigurationPlaces(
     writeTimeout: Long = DEFAULT_WRITE_TIMEOUT,
     readTimeout: Long = DEFAULT_READ_TIMEOUT,

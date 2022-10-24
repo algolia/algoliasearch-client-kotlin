@@ -9,6 +9,7 @@ import com.algolia.search.model.search.Language
 import com.algolia.search.model.search.Point
 import com.algolia.search.transport.RequestOptions
 
+@Deprecated("Algolia Places has reached end of life.")
 public interface EndpointPlaces {
 
     public suspend fun searchPlaces(
