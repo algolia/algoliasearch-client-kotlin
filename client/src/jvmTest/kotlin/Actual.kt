@@ -1,7 +1,6 @@
 import com.algolia.search.client.ClientAnalytics
 import com.algolia.search.client.ClientInsights
 import com.algolia.search.client.ClientPersonalization
-import com.algolia.search.client.ClientPlaces
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.configuration.Compression
 import com.algolia.search.configuration.ConfigurationSearch
@@ -46,11 +45,6 @@ internal actual val clientPersonalization = ClientPersonalization(
     System.getenv("ALGOLIA_APPLICATION_ID_1").toApplicationID(),
     System.getenv("ALGOLIA_ADMIN_KEY_1").toAPIKey(),
     Region.Personalization.US
-)
-
-internal actual val clientPlaces = ClientPlaces(
-    System.getenv("ALGOLIA_PLACES_APP_ID").toApplicationID(),
-    System.getenv("ALGOLIA_PLACES_KEY").toAPIKey()
 )
 
 internal actual val clientAnswers = ClientSearch(

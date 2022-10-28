@@ -16,6 +16,7 @@ import com.algolia.search.transport.internal.Transport
 /**
  * Client for the places API.
  */
+@Deprecated("Algolia Places has reached end of life.")
 public interface ClientPlaces : EndpointPlaces, Configuration, CustomRequester {
 
     public companion object
