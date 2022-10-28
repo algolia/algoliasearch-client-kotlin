@@ -27,6 +27,7 @@ import io.ktor.http.URLProtocol
 import io.ktor.http.path
 import io.ktor.util.reflect.TypeInfo
 import io.ktor.utils.io.errors.IOException
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
@@ -144,6 +145,7 @@ internal class Transport(
      */
     private suspend fun RetryableHost.onError(throwable: Throwable) {
         when (throwable) {
+            is CancellationException -> throw throwable // propagate coroutine cancellation
             is ClientRequestException -> throw throwable.asApiException()
             is HttpRequestTimeoutException, is SocketTimeoutException, is ConnectTimeoutException -> mutex.withLock { hasTimedOut() }
             is IOException, is ResponseException -> mutex.withLock { hasFailed() }
