@@ -1,7 +1,21 @@
 {
     "extends": [
         "config:base",
-        "docker:disable"
+        "docker:disable",
+        {
+            "groupName": "all dependencies",
+            "separateMajorMinor": true,
+            "groupSlug": "all",
+            "packageRules": [
+                {
+                    "packagePatterns": [
+                        "*"
+                    ],
+                    "groupName": "all dependencies",
+                    "groupSlug": "all"
+                }
+            ]
+        }
     ],
     "schedule": [
         "before 3am on the first day of the month"
