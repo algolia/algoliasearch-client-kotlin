@@ -113,6 +113,7 @@ public data class Consequence(
                 if (edits != null) remove(Key.Query)
                 remove(Key.AutomaticFacetFilters)
                 remove(Key.AutomaticOptionalFacetFilters)
+                remove(Key.RenderingContent)
             }
             return if (modified.isNotEmpty()) {
                 JsonNoDefaults.decodeFromJsonElement(Query.serializer(), JsonObject(modified))
