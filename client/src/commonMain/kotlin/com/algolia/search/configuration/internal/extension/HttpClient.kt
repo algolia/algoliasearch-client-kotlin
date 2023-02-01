@@ -1,8 +1,6 @@
 package com.algolia.search.configuration.internal.extension
 
-import com.algolia.search.configuration.AlgoliaSearchClient
 import com.algolia.search.configuration.Configuration
-import com.algolia.search.configuration.clientUserAgent
 import com.algolia.search.logging.LogLevel
 import com.algolia.search.logging.Logger
 import com.algolia.search.logging.internal.toKtorLogger
@@ -10,7 +8,6 @@ import com.algolia.search.serialize.internal.JsonNonStrict
 import io.ktor.client.HttpClient
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.HttpTimeout
-import io.ktor.client.plugins.UserAgent
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.plugins.logging.Logging
@@ -31,10 +28,8 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
     // Logging
     installLogging(configuration.logLevel, configuration.logger)
 
-    // User agent
-    install(UserAgent) {
-        agent = clientUserAgent(AlgoliaSearchClient.version)
-    }
+    // Algolia user agent
+    install(AlgoliaAgent)
 
     // Timeout
     install(HttpTimeout)
