@@ -18,7 +18,7 @@ internal class EndpointInsightsImpl(
 ) : EndpointInsights {
 
     override suspend fun sendEvent(event: InsightsEvent, requestOptions: RequestOptions?): HttpResponse {
-        return sendEvents(listOf(event))
+        return sendEvents(listOf(event), requestOptions)
     }
 
     override suspend fun sendEvents(events: List<InsightsEvent>, requestOptions: RequestOptions?): HttpResponse {
