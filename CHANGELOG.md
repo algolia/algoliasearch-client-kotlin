@@ -1,3 +1,13 @@
+# 2.1.3
+
+### Fixed
+- Insights: `sendEvent` ignoring request options (#391)
+- Algolia agent as url param (#391)
+
+### Changed
+- Update Kotlin to `1.8.10` (#390)
+- Update ktor to `2.2.2` (#390)
+
 # 2.1.2
 
 ### Fixed
