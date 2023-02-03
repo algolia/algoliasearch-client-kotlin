@@ -433,4 +433,5 @@ internal object Key {
     const val MaxRecommendations: String = "maxRecommendations"
     const val FallbackParameters: String = "fallbackParameters"
     const val Default: String = "default"
+    const val AlgoliaAgent = "X-Algolia-Agent"
 }
