@@ -18,6 +18,7 @@ import com.algolia.search.model.response.ResponseObjects
 import com.algolia.search.model.response.ResponseSearches
 import com.algolia.search.model.search.Query
 import com.algolia.search.transport.RequestOptions
+import kotlinx.serialization.json.JsonObject
 
 public interface EndpointMultipleIndex {
 
@@ -82,7 +83,7 @@ public interface EndpointMultipleIndex {
     public suspend fun multipleGetObjects(
         requests: List<RequestObjects>,
         requestOptions: RequestOptions? = null
-    ): ResponseObjects
+    ): ResponseObjects<JsonObject?>
 
     /**
      * Perform several indexing operations in one API call.

@@ -1,8 +1,13 @@
+## [Unreleased]
+
+### Added
+
+- Convenience `getObjects` method with serializer (#392)
+
 # 2.1.5
 
 ### feat:
 - **Search**: add basic support of extensions (#398)
-
 
 # 2.1.4
 
