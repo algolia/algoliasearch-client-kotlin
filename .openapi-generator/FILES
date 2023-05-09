@@ -57,6 +57,7 @@ client/src/commonMain/kotlin/com/algolia/client/model/ingestion/Run.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/RunListResponse.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/RunOutcome.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/RunProgress.kt
+client/src/commonMain/kotlin/com/algolia/client/model/ingestion/RunReasonCode.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/RunResponse.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/RunSortKeys.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/RunStatus.kt
