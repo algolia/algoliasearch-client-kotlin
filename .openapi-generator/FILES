@@ -45,6 +45,7 @@ client/src/commonMain/kotlin/com/algolia/client/model/ingestion/ListSourcesRespo
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/ListTasksResponse.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/MappingTypeCSV.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/MethodType.kt
+client/src/commonMain/kotlin/com/algolia/client/model/ingestion/OnDemandDateUtilsInput.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/OnDemandTrigger.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/OnDemandTriggerInput.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/OnDemandTriggerType.kt
@@ -62,6 +63,7 @@ client/src/commonMain/kotlin/com/algolia/client/model/ingestion/RunResponse.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/RunSortKeys.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/RunStatus.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/RunType.kt
+client/src/commonMain/kotlin/com/algolia/client/model/ingestion/ScheduleDateUtilsInput.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/ScheduleTrigger.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/ScheduleTriggerInput.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/ScheduleTriggerType.kt
@@ -87,6 +89,7 @@ client/src/commonMain/kotlin/com/algolia/client/model/ingestion/Task.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/TaskCreate.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/TaskCreateResponse.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/TaskCreateTrigger.kt
+client/src/commonMain/kotlin/com/algolia/client/model/ingestion/TaskInput.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/TaskSearch.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/TaskSortKeys.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/TaskUpdate.kt
