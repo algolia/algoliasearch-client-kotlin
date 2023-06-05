@@ -33,6 +33,8 @@ client/src/commonMain/kotlin/com/algolia/client/model/ingestion/DestinationSortK
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/DestinationType.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/DestinationUpdate.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/DestinationUpdateResponse.kt
+client/src/commonMain/kotlin/com/algolia/client/model/ingestion/DockerImageType.kt
+client/src/commonMain/kotlin/com/algolia/client/model/ingestion/DockerRegistry.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/ErrorBase.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/Event.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/EventSortKeys.kt
@@ -74,6 +76,7 @@ client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceCSV.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceCommercetools.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceCreate.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceCreateResponse.kt
+client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceDocker.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceInput.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceJSON.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceSearch.kt
