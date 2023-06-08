@@ -12,6 +12,7 @@ internal class TestFilterFacetString {
     private val filterNegate = !Filter.Facet(attributeA, "valueA")
     private val filterSpace = Filter.Facet(attributeA, "value with space")
     private val filterScore = Filter.Facet(attributeA, "valueA", 1)
+    private val filterQuotation = Filter.Facet(attributeA, "45\"-50\" tv\'s")
 
     @Test
     fun sql() {
@@ -19,6 +20,7 @@ internal class TestFilterFacetString {
         FilterConverter.SQL(filterNegate) shouldEqual "NOT \"attributeA\":\"valueA\""
         FilterConverter.SQL(filterSpace) shouldEqual "\"attributeA\":\"value with space\""
         FilterConverter.SQL(filterScore) shouldEqual "\"attributeA\":\"valueA\"<score=1>"
+        FilterConverter.SQL(filterQuotation) shouldEqual "\"attributeA\":\"45\\\"-50\\\" tv's\""
     }
 
     @Test
@@ -27,6 +29,7 @@ internal class TestFilterFacetString {
         FilterConverter.Legacy(filterNegate) shouldEqual listOf("\"attributeA\":-\"valueA\"")
         FilterConverter.Legacy(filterSpace) shouldEqual listOf("\"attributeA\":\"value with space\"")
         FilterConverter.Legacy(filterScore) shouldEqual listOf("\"attributeA\":\"valueA\"<score=1>")
+        FilterConverter.Legacy(filterQuotation) shouldEqual listOf("\"attributeA\":\"45\\\"-50\\\" tv's\"")
     }
 
     @Test
@@ -35,5 +38,6 @@ internal class TestFilterFacetString {
         FilterConverter.Legacy.Unquoted(filterNegate) shouldEqual listOf("attributeA:-valueA")
         FilterConverter.Legacy.Unquoted(filterSpace) shouldEqual listOf("attributeA:value with space")
         FilterConverter.Legacy.Unquoted(filterScore) shouldEqual listOf("attributeA:valueA<score=1>")
+        FilterConverter.Legacy.Unquoted(filterQuotation) shouldEqual listOf("attributeA:45\\\"-50\\\" tv's")
     }
 }
