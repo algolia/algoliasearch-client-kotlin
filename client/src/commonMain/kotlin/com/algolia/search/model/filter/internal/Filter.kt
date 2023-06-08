@@ -4,7 +4,8 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.NumericOperator
 
-internal fun String.escape() = "\"$this\""
+internal fun String.escape() = "\"${this.escapeQuotation()}\""
+internal fun String.escapeQuotation() = this.replace("\"", "\\\"")
 
 internal fun Attribute.escape() = raw.escape()
 
@@ -93,7 +94,7 @@ internal fun Filter.Numeric.toLegacy(escape: Boolean): List<String> {
 
 internal fun Filter.Facet.Value.toLegacy(isNegated: Boolean, escape: Boolean): String {
     val value = when (this) {
-        is Filter.Facet.Value.String -> if (escape) raw.escape() else raw
+        is Filter.Facet.Value.String -> if (escape) raw.escape() else raw.escapeQuotation()
         is Filter.Facet.Value.Number -> raw.toString()
         is Filter.Facet.Value.Boolean -> raw.toString()
     }
@@ -109,7 +110,7 @@ internal fun Filter.Facet.toLegacy(escape: Boolean): List<String> {
 }
 
 internal fun Filter.Tag.toLegacy(escape: Boolean): List<String> {
-    val raw = if (escape) value.escape() else value
+    val raw = if (escape) value.escape() else value.escapeQuotation()
     val value = if (isNegated) "-$raw" else raw
 
     return listOf(value)
