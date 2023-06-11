@@ -1,3 +1,8 @@
+# 2.1.4
+
+### Fixed:
+- Filters: quotation mark escaping for textual values (#396)
+
 # 2.1.3
 
 ### Fixed
