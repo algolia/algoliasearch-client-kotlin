@@ -5,24 +5,12 @@ import attributesJson
 import boolean
 import com.algolia.search.helper.and
 import com.algolia.search.model.insights.UserToken
-import com.algolia.search.model.search.AlternativesAsExact
-import com.algolia.search.model.search.AroundPrecision
-import com.algolia.search.model.search.AroundRadius
-import com.algolia.search.model.search.ExactOnSingleWordQuery
-import com.algolia.search.model.search.ExplainModule
-import com.algolia.search.model.search.IgnorePlurals
-import com.algolia.search.model.search.Language
-import com.algolia.search.model.search.Query
-import com.algolia.search.model.search.QueryType
-import com.algolia.search.model.search.RemoveStopWords
-import com.algolia.search.model.search.RemoveWordIfNoResults
-import com.algolia.search.model.search.ResponseFields
-import com.algolia.search.model.search.SortFacetsBy
-import com.algolia.search.model.search.TypoTolerance
+import com.algolia.search.model.search.*
 import com.algolia.search.model.settings.AdvancedSyntaxFeatures
 import com.algolia.search.model.settings.Distinct
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.Key
+import extensions
 import int
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
@@ -109,6 +97,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             relevancyStrictness = int,
             decompoundQuery = boolean,
             enableReRanking = boolean,
+            extensions = extensions,
         ) to buildJsonObject {
             put(Key.Query, string)
             put(Key.AttributesToRetrieve, attributesJson)
@@ -201,6 +190,7 @@ internal class TestQuery : TestSerializer<Query>(Query.serializer()) {
             put(Key.RelevancyStrictness, int)
             put(Key.DecompoundQuery, boolean)
             put(Key.EnableReRanking, boolean)
+            put(Key.Extensions, extensions)
         }
     )
 

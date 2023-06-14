@@ -2,13 +2,11 @@ import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.filter.Filter
-import com.algolia.search.model.rule.FacetOrdering
-import com.algolia.search.model.rule.FacetValuesOrder
-import com.algolia.search.model.rule.FacetsOrder
-import com.algolia.search.model.rule.RenderingContent
-import com.algolia.search.model.rule.SortRule
+import com.algolia.search.model.rule.*
 import kotlinx.serialization.json.add
 import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 
 internal fun set(vararg filters: Filter) = mutableSetOf(*filters)
 
@@ -24,6 +22,15 @@ internal val objectIDA = ObjectID("442854")
 internal val objectIDB = ObjectID("322601")
 internal val nestedLists = listOf(listOf(string), listOf(string))
 internal val attributes = listOf(attributeA, attributeB)
+internal val extensions = buildJsonObject {
+    put(
+        key = "queryCategorization",
+        element = buildJsonObject {
+            put("enableCategoriesRetrieval", true)
+            put("enableAutoFiltering", false)
+        },
+    )
+}
 internal val renderingContent = RenderingContent(
     facetOrdering = FacetOrdering(
         facets = FacetsOrder(

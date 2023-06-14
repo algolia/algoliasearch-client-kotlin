@@ -10,37 +10,16 @@ import com.algolia.search.model.analytics.ABTestID
 import com.algolia.search.model.filter.FilterGroup
 import com.algolia.search.model.insights.InsightsEvent
 import com.algolia.search.model.rule.RenderingContent
-import com.algolia.search.model.search.Cursor
-import com.algolia.search.model.search.Explain
-import com.algolia.search.model.search.Facet
-import com.algolia.search.model.search.FacetStats
-import com.algolia.search.model.search.Point
-import com.algolia.search.model.search.Query
-import com.algolia.search.model.search.RankingInfo
-import com.algolia.search.model.search.RemoveWordIfNoResults
+import com.algolia.search.model.search.*
 import com.algolia.search.model.settings.Settings
 import com.algolia.search.serialize.KSerializerFacetMap
 import com.algolia.search.serialize.KSerializerPoint
+import com.algolia.search.serialize.internal.*
 import com.algolia.search.serialize.internal.Json
-import com.algolia.search.serialize.internal.JsonNonStrict
-import com.algolia.search.serialize.internal.Key
-import com.algolia.search.serialize.internal.asJsonInput
-import com.algolia.search.serialize.internal.asJsonOutput
-import com.algolia.search.serialize.internal.jsonObjectOrNull
-import com.algolia.search.serialize.internal.jsonPrimitiveOrNull
-import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
+import kotlinx.serialization.*
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.floatOrNull
-import kotlinx.serialization.json.int
-import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.*
 
 @Serializable
 public data class ResponseSearch(
@@ -213,7 +192,12 @@ public data class ResponseSearch(
      * In case of A/B test, reports the ID of the A/B test used.
      * Returned only if [Query.getRankingInfo] is set to true.
      */
-    @SerialName(Key.ABTestID) val abTestIDOrNull: ABTestID? = null
+    @SerialName(Key.ABTestID) val abTestIDOrNull: ABTestID? = null,
+
+    /**
+     * Search extensions.
+     */
+    @SerialName(Key.Extensions) val extensionsOrNull: JsonObject? = null,
 ) : ResultSearch {
 
     /**
@@ -522,6 +506,12 @@ public data class ResponseSearch(
      */
     public val abTestID: ABTestID
         get() = checkNotNull(abTestIDOrNull)
+
+    /**
+     * Search extensions.
+     */
+    public val extensions: JsonObject
+        get() = requireNotNull(extensionsOrNull)
 
     /**
      * Returns the position (0-based) within the [hits] result list of the record matching against the given [objectID].

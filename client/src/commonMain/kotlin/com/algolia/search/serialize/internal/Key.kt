@@ -434,4 +434,5 @@ internal object Key {
     const val FallbackParameters: String = "fallbackParameters"
     const val Default: String = "default"
     const val AlgoliaAgent = "X-Algolia-Agent"
+    const val Extensions = "extensions"
 }
