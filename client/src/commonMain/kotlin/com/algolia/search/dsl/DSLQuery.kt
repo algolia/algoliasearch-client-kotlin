@@ -17,6 +17,8 @@ import com.algolia.search.dsl.strategy.DSLAdvancedSyntaxFeatures
 import com.algolia.search.dsl.strategy.DSLAlternativesAsExact
 import com.algolia.search.model.filter.FilterGroupsConverter
 import com.algolia.search.model.search.Query
+import kotlinx.serialization.json.JsonObjectBuilder
+import kotlinx.serialization.json.buildJsonObject
 
 /**
  * Create a [Query] with [block] and an optional [query].
@@ -196,4 +198,13 @@ public fun Query.explainModules(block: DSLExplainModules.() -> Unit) {
  */
 public fun Query.naturalLanguages(block: DSLLanguage.() -> Unit) {
     naturalLanguages = DSLLanguage(block)
+}
+
+/**
+ * Assign the output of [block] to [Query.extensions].
+ */
+public fun Query.extensions(block: JsonObjectBuilder.() -> Unit) {
+    extensions = buildJsonObject {
+        block()
+    }
 }

@@ -11,6 +11,7 @@ import com.algolia.search.serialize.KSerializerPoint
 import com.algolia.search.serialize.internal.Key
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonObject
 
 @Serializable
 @DSLParameters
@@ -507,4 +508,9 @@ public data class Query(
      * Re-Ranking (with false) at search time.
      */
     @SerialName(Key.EnableReRanking) override var enableReRanking: Boolean? = null,
+
+    /**
+     * Search extensions..
+     */
+    @SerialName(Key.Extensions) public var extensions: JsonObject? = null,
 ) : SearchParameters
