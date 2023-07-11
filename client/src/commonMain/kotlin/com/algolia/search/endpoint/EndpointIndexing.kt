@@ -180,6 +180,26 @@ public interface EndpointIndexing {
     ): List<TaskIndex>
 
     /**
+     * Push a new set of schemaless objects and remove all previous ones.
+     *
+     * @param serializer [KSerializer] of type [T] for serialization.
+     * @param records The sequence of records to replace.
+     */
+    public suspend fun <T> replaceAllObjects(
+        serializer: KSerializer<T>,
+        records: Sequence<T>
+    ): List<TaskIndex>
+
+    /**
+     * Push a new set of schemaless objects and remove all previous ones.
+     *
+     * @see replaceAllObjects
+     */
+    public suspend fun replaceAllObjects(
+        records: Sequence<JsonObject>
+    ): List<TaskIndex>
+
+    /**
      * Remove an object from an index using its [ObjectID].
      *
      * @param objectID The [ObjectID] to identify the record.

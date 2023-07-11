@@ -1691,7 +1691,9 @@ public abstract interface class com/algolia/search/endpoint/EndpointIndexing {
 	public abstract fun partialUpdateObject (Lcom/algolia/search/model/ObjectID;Lcom/algolia/search/model/indexing/Partial;Ljava/lang/Boolean;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun partialUpdateObjects (Ljava/util/List;ZLcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun replaceAllObjects (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun replaceAllObjects (Lkotlin/sequences/Sequence;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun replaceAllObjects (Lkotlinx/serialization/KSerializer;Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun replaceAllObjects (Lkotlinx/serialization/KSerializer;Lkotlin/sequences/Sequence;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun replaceObject (Lcom/algolia/search/model/ObjectID;Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun replaceObject (Lkotlinx/serialization/KSerializer;Lcom/algolia/search/model/indexing/Indexable;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 	public abstract fun replaceObjects (Ljava/util/List;Lcom/algolia/search/transport/RequestOptions;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;

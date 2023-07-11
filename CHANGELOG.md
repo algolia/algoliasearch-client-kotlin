@@ -1,8 +1,12 @@
+# Unreleased
+
+### feat:
+- **Search**: support `Sequence` as argument of `replaceAllObjects()` (#400)
+
 # 2.1.5
 
 ### feat:
 - **Search**: add basic support of extensions (#398)
-
 
 # 2.1.4
 

@@ -255,6 +255,32 @@ internal class EndpointIndexingImpl(
             it += TaskIndex(indexDestination.indexName, indexDestination.moveIndex(indexName).taskID)
         }
     }
+
+    override suspend fun <T> replaceAllObjects(serializer: KSerializer<T>, records: Sequence<T>): List<TaskIndex> {
+        val operations = records.map { BatchOperation.AddObject.from(serializer, it) }
+
+        return replaceAllObjectsInternal(operations)
+    }
+
+    override suspend fun replaceAllObjects(records: Sequence<JsonObject>): List<TaskIndex> {
+        val operations = records.map { BatchOperation.AddObject(it) }
+
+        return replaceAllObjectsInternal(operations)
+    }
+
+    private suspend fun replaceAllObjectsInternal(batchOperations: Sequence<BatchOperation>): List<TaskIndex> {
+        val indexSource = Index(transport, indexName)
+        val indexDestination = Index(transport, "${indexName}_tmp_${Random.nextInt()}".toIndexName())
+        val scopes = listOf(Scope.Settings, Scope.Rules, Scope.Synonyms)
+
+        return mutableListOf<TaskIndex>().also { list ->
+            list += TaskIndex(indexName, indexSource.copyIndex(indexDestination.indexName, scopes).taskID)
+            batchOperations.chunked(10_000).forEach {
+                list += TaskIndex(indexDestination.indexName, indexDestination.batch(it).taskID)
+            }
+            list += TaskIndex(indexDestination.indexName, indexDestination.moveIndex(indexName).taskID)
+        }
+    }
 }
 
 /**
