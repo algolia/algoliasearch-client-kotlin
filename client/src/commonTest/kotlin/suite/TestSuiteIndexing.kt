@@ -115,4 +115,32 @@ internal class TestSuiteIndexing {
             }
         }
     }
+
+    @Test
+    fun testReplaceAll() {
+        runTest {
+            index.apply {
+                val json = listOf(
+                    buildJsonObject {
+                        put("firstname", "Jimmie")
+                        put("lastname", "Barninger")
+                    },
+                    buildJsonObject {
+                        put("firstname", "Warren")
+                        put("lastname", "Speach")
+                    }
+                )
+
+                replaceAllObjects(json).wait()
+                browse().nbHits shouldEqual 2
+
+                val data = generateSequence(1, Int::inc).map {
+                    Data("data_$it".toObjectID())
+                }
+
+                replaceAllObjects(Data.serializer(), data.take(15_000)).wait()
+                browse().nbHits shouldEqual 15_000
+            }
+        }
+    }
 }
