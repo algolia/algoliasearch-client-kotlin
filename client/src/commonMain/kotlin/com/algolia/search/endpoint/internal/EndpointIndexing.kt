@@ -174,15 +174,38 @@ internal class EndpointIndexingImpl(
         }
     }
 
-    override suspend fun getObjects(
+    private suspend fun getObjectsInternal(
         objectIDs: List<ObjectID>,
         attributesToRetrieve: List<Attribute>?,
         requestOptions: RequestOptions?,
-    ): ResponseObjects {
+    ): ResponseObjects<JsonObject?> {
         val requests = objectIDs.map { RequestObjects(indexName, it, attributesToRetrieve) }
         val body = JsonNoDefaults.encodeToString(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
         return transport.request(HttpMethod.Post, CallType.Read, "${Route.IndexesV1}/*/objects", requestOptions, body)
+    }
+
+    override suspend fun getObjects(
+        objectIDs: List<ObjectID>,
+        attributesToRetrieve: List<Attribute>?,
+        requestOptions: RequestOptions?,
+    ): ResponseObjects<JsonObject?> {
+        return getObjectsInternal(objectIDs, attributesToRetrieve, requestOptions)
+    }
+
+    override suspend fun <T : Indexable> getObjects(
+        serializer: KSerializer<T>,
+        objectIDs: List<ObjectID>,
+        attributesToRetrieve: List<Attribute>?,
+        requestOptions: RequestOptions?,
+    ): ResponseObjects<T?> {
+        return getObjectsInternal(objectIDs, attributesToRetrieve, requestOptions).run {
+            ResponseObjects(results.map { optionalJsonObject ->
+                optionalJsonObject?.let { jsonObject ->
+                    JsonNonStrict.decodeFromJsonElement(serializer, jsonObject)
+                }
+            }, messageOrNull)
+        }
     }
 
     override suspend fun partialUpdateObject(

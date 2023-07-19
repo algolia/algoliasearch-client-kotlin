@@ -261,7 +261,19 @@ public interface EndpointIndexing {
         objectIDs: List<ObjectID>,
         attributesToRetrieve: List<Attribute>? = null,
         requestOptions: RequestOptions? = null
-    ): ResponseObjects
+    ): ResponseObjects<JsonObject?>
+
+    /**
+     * Get multiple records using their [ObjectID].
+     *
+     * @see getObject
+     */
+    public suspend fun <T : Indexable> getObjects(
+        serializer: KSerializer<T>,
+        objectIDs: List<ObjectID>,
+        attributesToRetrieve: List<Attribute>? = null,
+        requestOptions: RequestOptions? = null
+    ): ResponseObjects<T?>
 
     /**
      * Update one or more attributes of an existing record.

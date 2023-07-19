@@ -61,6 +61,7 @@ internal class DocGetObjects {
     fun snippet3() {
         runTest {
             index.getObjects(listOf(ObjectID("myID1"), ObjectID("myID2")))
+            index.getObjects(Contact.serializer(), listOf(ObjectID("myID1"), ObjectID("myID2")))
         }
     }
 
@@ -71,6 +72,7 @@ internal class DocGetObjects {
             val attributes = listOf(Attribute("firstname"), Attribute("lastname"))
 
             index.getObjects(objectIDs, attributes)
+            index.getObjects(Contact.serializer(), objectIDs, attributes)
         }
     }
 
@@ -82,6 +84,7 @@ internal class DocGetObjects {
             }
 
             index.getObjects(listOf(ObjectID("myID1"), ObjectID("myID2")), requestOptions = requestOptions)
+            index.getObjects(Contact.serializer(), listOf(ObjectID("myID1"), ObjectID("myID2")), requestOptions = requestOptions)
         }
     }
 }

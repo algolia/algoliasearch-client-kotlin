@@ -27,6 +27,7 @@ import com.algolia.search.transport.RequestOptions
 import com.algolia.search.transport.internal.Transport
 import io.ktor.http.HttpMethod
 import kotlinx.serialization.builtins.ListSerializer
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
 
 internal class EndpointMultipleIndexImpl(
@@ -54,7 +55,7 @@ internal class EndpointMultipleIndexImpl(
     override suspend fun multipleGetObjects(
         requests: List<RequestObjects>,
         requestOptions: RequestOptions?,
-    ): ResponseObjects {
+    ): ResponseObjects<JsonObject?> {
         val body = JsonNoDefaults.encodeToString(RequestRequestObjects.serializer(), RequestRequestObjects(requests))
 
         return transport.request(HttpMethod.Post, CallType.Read, "${Route.IndexesV1}/*/objects", requestOptions, body)

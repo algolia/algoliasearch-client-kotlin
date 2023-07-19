@@ -76,6 +76,8 @@ internal class TestSuiteIndexing {
                 getObjects(objectIDs).results
                     .filterNotNull()
                     .map { Json.decodeFromJsonElement(Data.serializer(), it) } shouldEqual batches
+                getObjects(Data.serializer(), objectIDs).results
+                    .filterNotNull() shouldEqual batches
                 browse().nbHits shouldEqual 1007
                 revisions += replaceObject(Data.serializer(), updateA)
                 revisions += partialUpdateObject(dataE.objectID, Partial.Increment(attributeValue, 1))
