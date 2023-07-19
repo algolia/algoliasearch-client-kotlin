@@ -5,13 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * IndexName
+ * Facet to use as category.
  *
- * @param indexName Index name to target.
+ * @param attribute Facet name.
+ * @param amount Number of suggestions.
  */
 @Serializable
-public data class IndexName(
+public data class Facet(
 
-  /** Index name to target. */
-  @SerialName(value = "indexName") val indexName: String,
+  /** Facet name. */
+  @SerialName(value = "attribute") val attribute: String? = null,
+
+  /** Number of suggestions. */
+  @SerialName(value = "amount") val amount: Int? = null,
 )

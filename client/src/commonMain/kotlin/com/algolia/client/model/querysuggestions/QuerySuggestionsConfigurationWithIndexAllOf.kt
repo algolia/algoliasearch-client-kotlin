@@ -5,17 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SuccessResponse
+ * QuerySuggestionsConfigurationWithIndexAllOf
  *
- * @param status Status code.
- * @param message Response message.
+ * @param indexName Query Suggestions index name.
  */
 @Serializable
-public data class SuccessResponse(
+public data class QuerySuggestionsConfigurationWithIndexAllOf(
 
-  /** Status code. */
-  @SerialName(value = "status") val status: Int,
-
-  /** Response message. */
-  @SerialName(value = "message") val message: String,
+  /** Query Suggestions index name. */
+  @SerialName(value = "indexName") val indexName: String,
 )
