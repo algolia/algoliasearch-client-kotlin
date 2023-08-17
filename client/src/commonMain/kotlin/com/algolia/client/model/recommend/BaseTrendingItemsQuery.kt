@@ -5,20 +5,26 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * BaseTrendingRequest
+ * BaseTrendingItemsQuery
  *
- * @param model
  * @param facetName Facet name for trending models.
  * @param facetValue Facet value for trending models.
+ * @param model
+ * @param queryParameters
+ * @param fallbackParameters
  */
 @Serializable
-public data class BaseTrendingRequest(
-
-  @SerialName(value = "model") val model: TrendingModels,
+public data class BaseTrendingItemsQuery(
 
   /** Facet name for trending models. */
   @SerialName(value = "facetName") val facetName: String? = null,
 
   /** Facet value for trending models. */
   @SerialName(value = "facetValue") val facetValue: String? = null,
+
+  @SerialName(value = "model") val model: TrendingItemsModel? = null,
+
+  @SerialName(value = "queryParameters") val queryParameters: SearchParamsObject? = null,
+
+  @SerialName(value = "fallbackParameters") val fallbackParameters: SearchParamsObject? = null,
 )

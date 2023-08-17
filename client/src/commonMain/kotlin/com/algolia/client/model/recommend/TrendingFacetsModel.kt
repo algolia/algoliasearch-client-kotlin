@@ -4,16 +4,13 @@ package com.algolia.client.model.recommend
 import kotlinx.serialization.*
 
 /**
- * Trending model.
+ * Trending facets model.
  */
 @Serializable
-public enum class TrendingModels(public val value: kotlin.String) {
+public enum class TrendingFacetsModel(public val value: kotlin.String) {
 
   @SerialName(value = "trending-facets")
-  Facets("trending-facets"),
-
-  @SerialName(value = "trending-items")
-  Items("trending-items");
+  TrendingFacets("trending-facets");
 
   override fun toString(): kotlin.String = value
 }

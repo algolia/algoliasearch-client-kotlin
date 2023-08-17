@@ -5,16 +5,16 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * BaseRecommendationRequest
+ * BaseTrendingFacetsQuery
  *
+ * @param facetName Facet name for trending models.
  * @param model
- * @param objectID Unique object identifier.
  */
 @Serializable
-public data class BaseRecommendationRequest(
+public data class BaseTrendingFacetsQuery(
 
-  @SerialName(value = "model") val model: RecommendationModels,
+  /** Facet name for trending models. */
+  @SerialName(value = "facetName") val facetName: String,
 
-  /** Unique object identifier. */
-  @SerialName(value = "objectID") val objectID: String,
+  @SerialName(value = "model") val model: TrendingFacetsModel? = null,
 )
