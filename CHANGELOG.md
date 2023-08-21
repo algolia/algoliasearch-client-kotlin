@@ -1,3 +1,8 @@
+# 2.1.6
+
+### Fixed
+- **Indexing**: allow `JsonElement` as `Parial.Update` param (#404) 
+
 # 2.1.5
 
 ### feat:
