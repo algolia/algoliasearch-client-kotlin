@@ -3,11 +3,7 @@ package serialize.indexing
 import attributeA
 import com.algolia.search.model.indexing.Partial
 import com.algolia.search.serialize.internal.Key
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.add
-import kotlinx.serialization.json.buildJsonArray
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.put
+import kotlinx.serialization.json.*
 import serialize.TestSerializer
 
 internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
@@ -16,6 +12,7 @@ internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
     private val updateNumber = Partial.Update(attributeA, 0)
     private val updateArray = Partial.Update(attributeA, buildJsonArray { add(0) })
     private val updateObject = Partial.Update(attributeA, buildJsonObject { put("key", "value") })
+    private val updateNull = Partial.Update(attributeA, JsonNull)
     private val increment = Partial.Increment(attributeA, 0)
     private val incrementFrom = Partial.IncrementFrom(attributeA, 0)
     private val incrementSet = Partial.IncrementSet(attributeA, 0)
@@ -32,6 +29,7 @@ internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
         updateNumber to toJson(updateNumber),
         updateObject to toJson(updateObject),
         updateArray to toJson(updateArray),
+        updateNull to toJson(updateNull),
         increment to toJson(increment),
         incrementFrom to toJson(incrementFrom),
         incrementSet to toJson(incrementSet),
@@ -41,7 +39,7 @@ internal class TestPartialUpdate : TestSerializer<Partial>(Partial) {
         removeNumber to toJson(removeNumber),
         removeString to toJson(removeString),
         addUniqueString to toJson(addUniqueString),
-        addUniqueNumber to toJson(addUniqueNumber)
+        addUniqueNumber to toJson(addUniqueNumber),
     )
 
     private fun toJson(partial: Partial): JsonElement {

@@ -12,13 +12,7 @@ import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializer
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.put
+import kotlinx.serialization.json.*
 
 /**
  * An object used to define a partial update operation with the [EndpointIndexing.partialUpdateObject] method.
@@ -36,7 +30,7 @@ public sealed class Partial {
      * Add or update the value of an attribute.
      * Several convenience constructors are available for each value type.
      */
-    public data class Update internal constructor(
+    public data class Update(
         override val attribute: Attribute,
         override val value: JsonElement
     ) : Partial() {
