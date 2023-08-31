@@ -15,7 +15,7 @@ public data class ResponseSearchForFacets(
     /**
      * Whether the count returned for each [facets] is exhaustive.
      */
-    @SerialName(Key.ExhaustiveFacetsCount) val exhaustiveFacetsCount: Boolean,
+    @SerialName(Key.ExhaustiveFacetsCount) val exhaustiveFacetsCount: Boolean? = null,
     /**
      * Processing time.
      */
