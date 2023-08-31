@@ -24,8 +24,11 @@ import kotlinx.serialization.json.jsonObject
 
 internal val Json = Json {
     encodeDefaults = true
+    ignoreUnknownKeys = true
 }
-internal val JsonNoDefaults = Json.Default
+internal val JsonNoDefaults = Json {
+    ignoreUnknownKeys = true
+}
 internal val JsonNonStrict = Json {
     ignoreUnknownKeys = true
     isLenient = true
