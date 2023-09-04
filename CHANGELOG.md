@@ -1,3 +1,8 @@
+# 2.1.7
+
+### Fixed
+- **Serialization**: ignore unknown keys (#406)
+
 # 2.1.6
 
 ### Fixed
