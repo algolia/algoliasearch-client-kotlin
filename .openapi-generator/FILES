@@ -90,6 +90,7 @@ client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceSortKeys.k
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceType.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceUpdate.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceUpdateCommercetools.kt
+client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceUpdateDocker.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceUpdateInput.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SourceUpdateResponse.kt
 client/src/commonMain/kotlin/com/algolia/client/model/ingestion/SubscriptionTrigger.kt
