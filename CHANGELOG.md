@@ -1,3 +1,8 @@
+# 2.1.8
+
+### Fixed
+- **Serialization**: unpaired surrogate encoding (#407)
+
 # 2.1.7
 
 ### Fixed
