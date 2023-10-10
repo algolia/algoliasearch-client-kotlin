@@ -7,20 +7,11 @@ import com.algolia.search.model.multipleindex.IndexQuery
 import com.algolia.search.model.multipleindex.MultipleQueriesStrategy
 import com.algolia.search.model.search.Query
 import com.algolia.search.model.settings.Settings
-import io.ktor.http.Parameters
-import io.ktor.http.formUrlEncode
-import io.ktor.util.InternalAPI
+import io.ktor.http.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonArray
-import kotlinx.serialization.json.JsonDecoder
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonEncoder
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonPrimitive
-import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.*
 
 internal val Json = Json {
     encodeDefaults = true
@@ -50,18 +41,34 @@ internal fun JsonObject.merge(jsonObject: JsonObject): JsonObject {
     }
 }
 
-@OptIn(InternalAPI::class) // https://youtrack.jetbrains.com/issue/KT-48127
 internal fun JsonObject.urlEncode(): String? {
     return if (isNotEmpty()) {
         Parameters.build {
             entries.forEach { (key, element) ->
                 when (element) {
-                    is JsonPrimitive -> append(key, element.content)
+                    is JsonPrimitive -> {
+                        append(key, sanitizeString(element.content))
+                    }
+
                     else -> append(key, Json.encodeToString(JsonElement.serializer(), element))
                 }
             }
         }.formUrlEncode()
     } else null
+}
+
+internal fun sanitizeString(input: String): String {
+    return buildString {
+        input.forEachIndexed { index, char ->
+            val next = index + 1
+            if (char.isHighSurrogate() && next < input.length && input[next].isLowSurrogate()) {
+                append(char)
+                append(input[next])
+            } else if (!char.isSurrogate()) {
+                append(char)
+            }
+        }
+    }
 }
 
 internal fun Query.toJsonNoDefaults(): JsonObject {
