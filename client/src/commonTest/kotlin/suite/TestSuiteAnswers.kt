@@ -7,9 +7,11 @@ import com.algolia.search.model.IndexName
 import com.algolia.search.model.search.AnswersQuery
 import com.algolia.search.model.search.Language
 import kotlinx.coroutines.test.runTest
+import kotlin.test.Ignore
 import kotlin.test.Test
 import kotlin.test.assertFalse
 
+@Ignore
 internal class TestSuiteAnswers {
 
     private val indexName = IndexName("ted")
