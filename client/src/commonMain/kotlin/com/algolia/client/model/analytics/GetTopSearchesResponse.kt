@@ -23,41 +23,12 @@ public sealed interface GetTopSearchesResponse {
   }
 }
 
-internal class GetTopSearchesResponseSerializer : KSerializer<GetTopSearchesResponse> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("GetTopSearchesResponse")
-
-  override fun serialize(encoder: Encoder, value: GetTopSearchesResponse) {
-    when (value) {
-      is TopSearchesResponse -> TopSearchesResponse.serializer().serialize(encoder, value)
-      is TopSearchesResponseWithAnalytics -> TopSearchesResponseWithAnalytics.serializer().serialize(encoder, value)
+internal class GetTopSearchesResponseSerializer : JsonContentPolymorphicSerializer<GetTopSearchesResponse>(GetTopSearchesResponse::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<GetTopSearchesResponse> {
+    return when {
+      element is JsonObject -> TopSearchesResponse.serializer()
+      element is JsonObject -> TopSearchesResponseWithAnalytics.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): GetTopSearchesResponse {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize TopSearchesResponse
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(TopSearchesResponse.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize TopSearchesResponse (error: ${e.message})")
-      }
-    }
-
-    // deserialize TopSearchesResponseWithAnalytics
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(TopSearchesResponseWithAnalytics.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize TopSearchesResponseWithAnalytics (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

@@ -19,64 +19,31 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(PriceSerializer::class)
 public sealed interface Price {
-
+  @Serializable
   @JvmInline
   public value class DoubleValue(public val value: Double) : Price
 
+  @Serializable
   @JvmInline
   public value class StringValue(public val value: String) : Price
 
   public companion object {
 
-    /** [Price] as [Double] Value. */
     public fun of(value: Double): Price {
       return DoubleValue(value)
     }
-
-    /** [Price] as [String] Value. */
     public fun of(value: String): Price {
       return StringValue(value)
     }
   }
 }
 
-internal class PriceSerializer : KSerializer<Price> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Price")
-
-  override fun serialize(encoder: Encoder, value: Price) {
-    when (value) {
-      is Price.DoubleValue -> Double.serializer().serialize(encoder, value.value)
-      is Price.StringValue -> String.serializer().serialize(encoder, value.value)
+internal class PriceSerializer : JsonContentPolymorphicSerializer<Price>(Price::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Price> {
+    return when {
+      element.isDouble -> Price.DoubleValue.serializer()
+      element.isString -> Price.StringValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): Price {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize Double
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(Double.serializer(), tree)
-        return Price.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize Double (error: ${e.message})")
-      }
-    }
-
-    // deserialize String
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(String.serializer(), tree)
-        return Price.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize String (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

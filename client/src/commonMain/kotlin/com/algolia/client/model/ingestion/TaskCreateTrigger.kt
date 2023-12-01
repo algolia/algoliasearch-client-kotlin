@@ -24,52 +24,13 @@ public sealed interface TaskCreateTrigger {
   }
 }
 
-internal class TaskCreateTriggerSerializer : KSerializer<TaskCreateTrigger> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("TaskCreateTrigger")
-
-  override fun serialize(encoder: Encoder, value: TaskCreateTrigger) {
-    when (value) {
-      is OnDemandTriggerInput -> OnDemandTriggerInput.serializer().serialize(encoder, value)
-      is ScheduleTriggerInput -> ScheduleTriggerInput.serializer().serialize(encoder, value)
-      is SubscriptionTrigger -> SubscriptionTrigger.serializer().serialize(encoder, value)
+internal class TaskCreateTriggerSerializer : JsonContentPolymorphicSerializer<TaskCreateTrigger>(TaskCreateTrigger::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TaskCreateTrigger> {
+    return when {
+      element is JsonObject -> OnDemandTriggerInput.serializer()
+      element is JsonObject -> ScheduleTriggerInput.serializer()
+      element is JsonObject -> SubscriptionTrigger.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): TaskCreateTrigger {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize OnDemandTriggerInput
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(OnDemandTriggerInput.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize OnDemandTriggerInput (error: ${e.message})")
-      }
-    }
-
-    // deserialize ScheduleTriggerInput
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(ScheduleTriggerInput.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ScheduleTriggerInput (error: ${e.message})")
-      }
-    }
-
-    // deserialize SubscriptionTrigger
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(SubscriptionTrigger.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SubscriptionTrigger (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

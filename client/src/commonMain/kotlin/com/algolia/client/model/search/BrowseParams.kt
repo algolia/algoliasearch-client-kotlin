@@ -23,41 +23,12 @@ public sealed interface BrowseParams {
   }
 }
 
-internal class BrowseParamsSerializer : KSerializer<BrowseParams> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("BrowseParams")
-
-  override fun serialize(encoder: Encoder, value: BrowseParams) {
-    when (value) {
-      is SearchParamsString -> SearchParamsString.serializer().serialize(encoder, value)
-      is BrowseParamsObject -> BrowseParamsObject.serializer().serialize(encoder, value)
+internal class BrowseParamsSerializer : JsonContentPolymorphicSerializer<BrowseParams>(BrowseParams::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<BrowseParams> {
+    return when {
+      element is JsonObject && element.containsKey("params") -> SearchParamsString.serializer()
+      element is JsonObject -> BrowseParamsObject.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): BrowseParams {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize SearchParamsString
-    if (tree is JsonObject && tree.containsKey("params")) {
-      try {
-        return codec.json.decodeFromJsonElement(SearchParamsString.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SearchParamsString (error: ${e.message})")
-      }
-    }
-
-    // deserialize BrowseParamsObject
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(BrowseParamsObject.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize BrowseParamsObject (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

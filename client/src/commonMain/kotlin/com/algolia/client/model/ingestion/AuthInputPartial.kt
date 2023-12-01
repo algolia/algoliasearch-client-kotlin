@@ -26,74 +26,15 @@ public sealed interface AuthInputPartial {
   }
 }
 
-internal class AuthInputPartialSerializer : KSerializer<AuthInputPartial> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("AuthInputPartial")
-
-  override fun serialize(encoder: Encoder, value: AuthInputPartial) {
-    when (value) {
-      is AuthAPIKeyPartial -> AuthAPIKeyPartial.serializer().serialize(encoder, value)
-      is AuthAlgoliaPartial -> AuthAlgoliaPartial.serializer().serialize(encoder, value)
-      is AuthBasicPartial -> AuthBasicPartial.serializer().serialize(encoder, value)
-      is AuthGoogleServiceAccountPartial -> AuthGoogleServiceAccountPartial.serializer().serialize(encoder, value)
-      is AuthOAuthPartial -> AuthOAuthPartial.serializer().serialize(encoder, value)
+internal class AuthInputPartialSerializer : JsonContentPolymorphicSerializer<AuthInputPartial>(AuthInputPartial::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AuthInputPartial> {
+    return when {
+      element is JsonObject -> AuthGoogleServiceAccountPartial.serializer()
+      element is JsonObject -> AuthBasicPartial.serializer()
+      element is JsonObject -> AuthAPIKeyPartial.serializer()
+      element is JsonObject -> AuthOAuthPartial.serializer()
+      element is JsonObject -> AuthAlgoliaPartial.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): AuthInputPartial {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize AuthAPIKeyPartial
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AuthAPIKeyPartial.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AuthAPIKeyPartial (error: ${e.message})")
-      }
-    }
-
-    // deserialize AuthAlgoliaPartial
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AuthAlgoliaPartial.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AuthAlgoliaPartial (error: ${e.message})")
-      }
-    }
-
-    // deserialize AuthBasicPartial
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AuthBasicPartial.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AuthBasicPartial (error: ${e.message})")
-      }
-    }
-
-    // deserialize AuthGoogleServiceAccountPartial
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AuthGoogleServiceAccountPartial.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AuthGoogleServiceAccountPartial (error: ${e.message})")
-      }
-    }
-
-    // deserialize AuthOAuthPartial
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AuthOAuthPartial.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AuthOAuthPartial (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

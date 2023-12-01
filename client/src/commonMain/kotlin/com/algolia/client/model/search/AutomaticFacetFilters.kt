@@ -19,64 +19,30 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(AutomaticFacetFiltersSerializer::class)
 public sealed interface AutomaticFacetFilters {
-
+  @Serializable
   @JvmInline
   public value class ListOfAutomaticFacetFilterValue(public val value: List<AutomaticFacetFilter>) : AutomaticFacetFilters
 
+  @Serializable
   @JvmInline
   public value class ListOfStringValue(public val value: List<String>) : AutomaticFacetFilters
 
   public companion object {
-
-    /** [AutomaticFacetFilters] as [List<AutomaticFacetFilter>] Value. */
     public fun ofListOfAutomaticFacetFilter(value: List<AutomaticFacetFilter>): AutomaticFacetFilters {
       return ListOfAutomaticFacetFilterValue(value)
     }
-
-    /** [AutomaticFacetFilters] as [List<String>] Value. */
     public fun ofListOfString(value: List<String>): AutomaticFacetFilters {
       return ListOfStringValue(value)
     }
   }
 }
 
-internal class AutomaticFacetFiltersSerializer : KSerializer<AutomaticFacetFilters> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("AutomaticFacetFilters")
-
-  override fun serialize(encoder: Encoder, value: AutomaticFacetFilters) {
-    when (value) {
-      is AutomaticFacetFilters.ListOfAutomaticFacetFilterValue -> ListSerializer(AutomaticFacetFilter.serializer()).serialize(encoder, value.value)
-      is AutomaticFacetFilters.ListOfStringValue -> ListSerializer(String.serializer()).serialize(encoder, value.value)
+internal class AutomaticFacetFiltersSerializer : JsonContentPolymorphicSerializer<AutomaticFacetFilters>(AutomaticFacetFilters::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AutomaticFacetFilters> {
+    return when {
+      element.isJsonArrayOfObjects -> AutomaticFacetFilters.ListOfAutomaticFacetFilterValue.serializer()
+      element.isJsonArrayOfPrimitives -> AutomaticFacetFilters.ListOfStringValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): AutomaticFacetFilters {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize List<AutomaticFacetFilter>
-    if (tree is JsonArray) {
-      try {
-        val value = codec.json.decodeFromJsonElement(ListSerializer(AutomaticFacetFilter.serializer()), tree)
-        return AutomaticFacetFilters.ofListOfAutomaticFacetFilter(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize List<AutomaticFacetFilter> (error: ${e.message})")
-      }
-    }
-
-    // deserialize List<String>
-    if (tree is JsonArray) {
-      try {
-        val value = codec.json.decodeFromJsonElement(ListSerializer(String.serializer()), tree)
-        return AutomaticFacetFilters.ofListOfString(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize List<String> (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

@@ -33,151 +33,22 @@ public sealed interface EventsItems {
   }
 }
 
-internal class EventsItemsSerializer : KSerializer<EventsItems> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("EventsItems")
-
-  override fun serialize(encoder: Encoder, value: EventsItems) {
-    when (value) {
-      is AddedToCartObjectIDsAfterSearch -> AddedToCartObjectIDsAfterSearch.serializer().serialize(encoder, value)
-      is PurchasedObjectIDsAfterSearch -> PurchasedObjectIDsAfterSearch.serializer().serialize(encoder, value)
-      is AddedToCartObjectIDs -> AddedToCartObjectIDs.serializer().serialize(encoder, value)
-      is ClickedObjectIDsAfterSearch -> ClickedObjectIDsAfterSearch.serializer().serialize(encoder, value)
-      is PurchasedObjectIDs -> PurchasedObjectIDs.serializer().serialize(encoder, value)
-      is ClickedFilters -> ClickedFilters.serializer().serialize(encoder, value)
-      is ClickedObjectIDs -> ClickedObjectIDs.serializer().serialize(encoder, value)
-      is ConvertedFilters -> ConvertedFilters.serializer().serialize(encoder, value)
-      is ConvertedObjectIDs -> ConvertedObjectIDs.serializer().serialize(encoder, value)
-      is ConvertedObjectIDsAfterSearch -> ConvertedObjectIDsAfterSearch.serializer().serialize(encoder, value)
-      is ViewedFilters -> ViewedFilters.serializer().serialize(encoder, value)
-      is ViewedObjectIDs -> ViewedObjectIDs.serializer().serialize(encoder, value)
+internal class EventsItemsSerializer : JsonContentPolymorphicSerializer<EventsItems>(EventsItems::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<EventsItems> {
+    return when {
+      element is JsonObject && element.containsKey("positions") && element.containsKey("queryID") && element.containsKey("eventType") -> ClickedObjectIDsAfterSearch.serializer()
+      element is JsonObject && element.containsKey("queryID") && element.containsKey("eventType") -> ConvertedObjectIDsAfterSearch.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("objectIDs") -> ClickedObjectIDs.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("objectIDs") -> ConvertedObjectIDs.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("filters") -> ClickedFilters.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("filters") -> ConvertedFilters.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("objectIDs") -> ViewedObjectIDs.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("filters") -> ViewedFilters.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("queryID") && element.containsKey("objectIDs") -> AddedToCartObjectIDsAfterSearch.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("objectIDs") -> AddedToCartObjectIDs.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("objectIDs") -> PurchasedObjectIDs.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("queryID") && element.containsKey("objectIDs") -> PurchasedObjectIDsAfterSearch.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): EventsItems {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize AddedToCartObjectIDsAfterSearch
-    if (tree is JsonObject && tree.containsKey("eventType") && tree.containsKey("eventSubtype") && tree.containsKey("queryID") && tree.containsKey("objectIDs")) {
-      try {
-        return codec.json.decodeFromJsonElement(AddedToCartObjectIDsAfterSearch.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AddedToCartObjectIDsAfterSearch (error: ${e.message})")
-      }
-    }
-
-    // deserialize PurchasedObjectIDsAfterSearch
-    if (tree is JsonObject && tree.containsKey("eventType") && tree.containsKey("eventSubtype") && tree.containsKey("queryID") && tree.containsKey("objectIDs")) {
-      try {
-        return codec.json.decodeFromJsonElement(PurchasedObjectIDsAfterSearch.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize PurchasedObjectIDsAfterSearch (error: ${e.message})")
-      }
-    }
-
-    // deserialize AddedToCartObjectIDs
-    if (tree is JsonObject && tree.containsKey("eventType") && tree.containsKey("eventSubtype") && tree.containsKey("objectIDs")) {
-      try {
-        return codec.json.decodeFromJsonElement(AddedToCartObjectIDs.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AddedToCartObjectIDs (error: ${e.message})")
-      }
-    }
-
-    // deserialize ClickedObjectIDsAfterSearch
-    if (tree is JsonObject && tree.containsKey("positions") && tree.containsKey("queryID") && tree.containsKey("eventType")) {
-      try {
-        return codec.json.decodeFromJsonElement(ClickedObjectIDsAfterSearch.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ClickedObjectIDsAfterSearch (error: ${e.message})")
-      }
-    }
-
-    // deserialize PurchasedObjectIDs
-    if (tree is JsonObject && tree.containsKey("eventType") && tree.containsKey("eventSubtype") && tree.containsKey("objectIDs")) {
-      try {
-        return codec.json.decodeFromJsonElement(PurchasedObjectIDs.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize PurchasedObjectIDs (error: ${e.message})")
-      }
-    }
-
-    // deserialize ClickedFilters
-    if (tree is JsonObject && tree.containsKey("eventType") && tree.containsKey("filters")) {
-      try {
-        return codec.json.decodeFromJsonElement(ClickedFilters.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ClickedFilters (error: ${e.message})")
-      }
-    }
-
-    // deserialize ClickedObjectIDs
-    if (tree is JsonObject && tree.containsKey("eventType") && tree.containsKey("objectIDs")) {
-      try {
-        return codec.json.decodeFromJsonElement(ClickedObjectIDs.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ClickedObjectIDs (error: ${e.message})")
-      }
-    }
-
-    // deserialize ConvertedFilters
-    if (tree is JsonObject && tree.containsKey("eventType") && tree.containsKey("filters")) {
-      try {
-        return codec.json.decodeFromJsonElement(ConvertedFilters.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ConvertedFilters (error: ${e.message})")
-      }
-    }
-
-    // deserialize ConvertedObjectIDs
-    if (tree is JsonObject && tree.containsKey("eventType") && tree.containsKey("objectIDs")) {
-      try {
-        return codec.json.decodeFromJsonElement(ConvertedObjectIDs.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ConvertedObjectIDs (error: ${e.message})")
-      }
-    }
-
-    // deserialize ConvertedObjectIDsAfterSearch
-    if (tree is JsonObject && tree.containsKey("queryID") && tree.containsKey("eventType")) {
-      try {
-        return codec.json.decodeFromJsonElement(ConvertedObjectIDsAfterSearch.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ConvertedObjectIDsAfterSearch (error: ${e.message})")
-      }
-    }
-
-    // deserialize ViewedFilters
-    if (tree is JsonObject && tree.containsKey("eventType") && tree.containsKey("filters")) {
-      try {
-        return codec.json.decodeFromJsonElement(ViewedFilters.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ViewedFilters (error: ${e.message})")
-      }
-    }
-
-    // deserialize ViewedObjectIDs
-    if (tree is JsonObject && tree.containsKey("eventType") && tree.containsKey("objectIDs")) {
-      try {
-        return codec.json.decodeFromJsonElement(ViewedObjectIDs.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ViewedObjectIDs (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

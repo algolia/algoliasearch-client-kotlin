@@ -3,9 +3,7 @@ package com.algolia.client.extensions.internal
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.JsonDecoder
-import kotlinx.serialization.json.JsonEncoder
-import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.*
 
 /**
  * Casts the [Decoder] instance to a [JsonDecoder] if possible, otherwise throws a
@@ -26,3 +24,45 @@ internal fun JsonDecoder.decodeJsonObject() =
 internal fun Encoder.asJsonEncoder() =
   this as? JsonEncoder
     ?: throw SerializationException("This class can be encoded only by Json format")
+
+/**
+ * Returns true if [JsonElement] is an integer, false otherwise.
+ */
+internal val JsonElement.isInt: Boolean
+  get() = this is JsonPrimitive && intOrNull != null
+
+/**
+ * Returns true if [JsonElement] is a boolean, false otherwise.
+ */
+internal val JsonElement.isBoolean: Boolean
+  get() = this is JsonPrimitive && booleanOrNull != null
+
+/**
+ * Returns true if [JsonElement] is a float, false otherwise
+ */
+internal val JsonElement.isFloat: Boolean
+  get() = this is JsonPrimitive && floatOrNull != null
+
+/**
+ * Returns true if [JsonElement] is a double, false otherwise
+ */
+internal val JsonElement.isDouble: Boolean
+  get() = this is JsonPrimitive && doubleOrNull != null
+
+/**
+ * Returns true if [JsonElement] is a string, false otherwise.
+ */
+internal val JsonElement.isString: Boolean
+  get() = this is JsonPrimitive && isString
+
+/**
+ * Returns true if [JsonElement] is a [JsonArray] of primitives, false otherwise.
+ */
+internal val JsonElement.isJsonArrayOfPrimitives: Boolean
+  get() = this is JsonArray && first() is JsonPrimitive
+
+/**
+ * Returns true if [JsonElement] is a [JsonArray] of objects, false otherwise.
+ */
+internal val JsonElement.isJsonArrayOfObjects: Boolean
+  get() = this is JsonArray && first() is JsonObject

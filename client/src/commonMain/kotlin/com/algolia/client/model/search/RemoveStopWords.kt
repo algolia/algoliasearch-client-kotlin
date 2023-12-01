@@ -19,64 +19,31 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(RemoveStopWordsSerializer::class)
 public sealed interface RemoveStopWords {
-
-  @JvmInline
-  public value class BooleanValue(public val value: Boolean) : RemoveStopWords
-
+  @Serializable
   @JvmInline
   public value class ListOfStringValue(public val value: List<String>) : RemoveStopWords
 
+  @Serializable
+  @JvmInline
+  public value class BooleanValue(public val value: Boolean) : RemoveStopWords
+
   public companion object {
 
-    /** [RemoveStopWords] as [Boolean] Value. */
-    public fun of(value: Boolean): RemoveStopWords {
-      return BooleanValue(value)
-    }
-
-    /** [RemoveStopWords] as [List<String>] Value. */
     public fun of(value: List<String>): RemoveStopWords {
       return ListOfStringValue(value)
+    }
+    public fun of(value: Boolean): RemoveStopWords {
+      return BooleanValue(value)
     }
   }
 }
 
-internal class RemoveStopWordsSerializer : KSerializer<RemoveStopWords> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("RemoveStopWords")
-
-  override fun serialize(encoder: Encoder, value: RemoveStopWords) {
-    when (value) {
-      is RemoveStopWords.BooleanValue -> Boolean.serializer().serialize(encoder, value.value)
-      is RemoveStopWords.ListOfStringValue -> ListSerializer(String.serializer()).serialize(encoder, value.value)
+internal class RemoveStopWordsSerializer : JsonContentPolymorphicSerializer<RemoveStopWords>(RemoveStopWords::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RemoveStopWords> {
+    return when {
+      element.isJsonArrayOfPrimitives -> RemoveStopWords.ListOfStringValue.serializer()
+      element.isBoolean -> RemoveStopWords.BooleanValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): RemoveStopWords {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize Boolean
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(Boolean.serializer(), tree)
-        return RemoveStopWords.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize Boolean (error: ${e.message})")
-      }
-    }
-
-    // deserialize List<String>
-    if (tree is JsonArray) {
-      try {
-        val value = codec.json.decodeFromJsonElement(ListSerializer(String.serializer()), tree)
-        return RemoveStopWords.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize List<String> (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

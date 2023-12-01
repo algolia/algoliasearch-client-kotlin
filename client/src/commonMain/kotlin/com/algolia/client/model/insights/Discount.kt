@@ -19,64 +19,31 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(DiscountSerializer::class)
 public sealed interface Discount {
-
+  @Serializable
   @JvmInline
   public value class DoubleValue(public val value: Double) : Discount
 
+  @Serializable
   @JvmInline
   public value class StringValue(public val value: String) : Discount
 
   public companion object {
 
-    /** [Discount] as [Double] Value. */
     public fun of(value: Double): Discount {
       return DoubleValue(value)
     }
-
-    /** [Discount] as [String] Value. */
     public fun of(value: String): Discount {
       return StringValue(value)
     }
   }
 }
 
-internal class DiscountSerializer : KSerializer<Discount> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Discount")
-
-  override fun serialize(encoder: Encoder, value: Discount) {
-    when (value) {
-      is Discount.DoubleValue -> Double.serializer().serialize(encoder, value.value)
-      is Discount.StringValue -> String.serializer().serialize(encoder, value.value)
+internal class DiscountSerializer : JsonContentPolymorphicSerializer<Discount>(Discount::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Discount> {
+    return when {
+      element.isDouble -> Discount.DoubleValue.serializer()
+      element.isString -> Discount.StringValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): Discount {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize Double
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(Double.serializer(), tree)
-        return Discount.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize Double (error: ${e.message})")
-      }
-    }
-
-    // deserialize String
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(String.serializer(), tree)
-        return Discount.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize String (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

@@ -23,41 +23,12 @@ public sealed interface GetTopHitsResponse {
   }
 }
 
-internal class GetTopHitsResponseSerializer : KSerializer<GetTopHitsResponse> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("GetTopHitsResponse")
-
-  override fun serialize(encoder: Encoder, value: GetTopHitsResponse) {
-    when (value) {
-      is TopHitsResponse -> TopHitsResponse.serializer().serialize(encoder, value)
-      is TopHitsResponseWithAnalytics -> TopHitsResponseWithAnalytics.serializer().serialize(encoder, value)
+internal class GetTopHitsResponseSerializer : JsonContentPolymorphicSerializer<GetTopHitsResponse>(GetTopHitsResponse::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<GetTopHitsResponse> {
+    return when {
+      element is JsonObject -> TopHitsResponse.serializer()
+      element is JsonObject -> TopHitsResponseWithAnalytics.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): GetTopHitsResponse {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize TopHitsResponse
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(TopHitsResponse.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize TopHitsResponse (error: ${e.message})")
-      }
-    }
-
-    // deserialize TopHitsResponseWithAnalytics
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(TopHitsResponseWithAnalytics.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize TopHitsResponseWithAnalytics (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

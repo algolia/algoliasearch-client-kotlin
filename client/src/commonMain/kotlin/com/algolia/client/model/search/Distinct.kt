@@ -19,64 +19,31 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(DistinctSerializer::class)
 public sealed interface Distinct {
-
+  @Serializable
   @JvmInline
   public value class BooleanValue(public val value: Boolean) : Distinct
 
+  @Serializable
   @JvmInline
   public value class IntValue(public val value: Int) : Distinct
 
   public companion object {
 
-    /** [Distinct] as [Boolean] Value. */
     public fun of(value: Boolean): Distinct {
       return BooleanValue(value)
     }
-
-    /** [Distinct] as [Int] Value. */
     public fun of(value: Int): Distinct {
       return IntValue(value)
     }
   }
 }
 
-internal class DistinctSerializer : KSerializer<Distinct> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Distinct")
-
-  override fun serialize(encoder: Encoder, value: Distinct) {
-    when (value) {
-      is Distinct.BooleanValue -> Boolean.serializer().serialize(encoder, value.value)
-      is Distinct.IntValue -> Int.serializer().serialize(encoder, value.value)
+internal class DistinctSerializer : JsonContentPolymorphicSerializer<Distinct>(Distinct::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Distinct> {
+    return when {
+      element.isBoolean -> Distinct.BooleanValue.serializer()
+      element.isInt -> Distinct.IntValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): Distinct {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize Boolean
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(Boolean.serializer(), tree)
-        return Distinct.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize Boolean (error: ${e.message})")
-      }
-    }
-
-    // deserialize Int
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(Int.serializer(), tree)
-        return Distinct.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize Int (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

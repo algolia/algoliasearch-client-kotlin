@@ -23,41 +23,12 @@ public sealed interface DestinationInput {
   }
 }
 
-internal class DestinationInputSerializer : KSerializer<DestinationInput> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("DestinationInput")
-
-  override fun serialize(encoder: Encoder, value: DestinationInput) {
-    when (value) {
-      is DestinationIndexName -> DestinationIndexName.serializer().serialize(encoder, value)
-      is DestinationIndexPrefix -> DestinationIndexPrefix.serializer().serialize(encoder, value)
+internal class DestinationInputSerializer : JsonContentPolymorphicSerializer<DestinationInput>(DestinationInput::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<DestinationInput> {
+    return when {
+      element is JsonObject -> DestinationIndexPrefix.serializer()
+      element is JsonObject -> DestinationIndexName.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): DestinationInput {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize DestinationIndexName
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(DestinationIndexName.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize DestinationIndexName (error: ${e.message})")
-      }
-    }
-
-    // deserialize DestinationIndexPrefix
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(DestinationIndexPrefix.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize DestinationIndexPrefix (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

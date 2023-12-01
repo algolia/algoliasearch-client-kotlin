@@ -19,64 +19,31 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(ReRankingApplyFilterSerializer::class)
 public sealed interface ReRankingApplyFilter {
-
+  @Serializable
   @JvmInline
   public value class ListOfMixedSearchFiltersValue(public val value: List<MixedSearchFilters>) : ReRankingApplyFilter
 
+  @Serializable
   @JvmInline
   public value class StringValue(public val value: String) : ReRankingApplyFilter
 
   public companion object {
 
-    /** [ReRankingApplyFilter] as [List<MixedSearchFilters>] Value. */
     public fun of(value: List<MixedSearchFilters>): ReRankingApplyFilter {
       return ListOfMixedSearchFiltersValue(value)
     }
-
-    /** [ReRankingApplyFilter] as [String] Value. */
     public fun of(value: String): ReRankingApplyFilter {
       return StringValue(value)
     }
   }
 }
 
-internal class ReRankingApplyFilterSerializer : KSerializer<ReRankingApplyFilter> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("ReRankingApplyFilter")
-
-  override fun serialize(encoder: Encoder, value: ReRankingApplyFilter) {
-    when (value) {
-      is ReRankingApplyFilter.ListOfMixedSearchFiltersValue -> ListSerializer(MixedSearchFilters.serializer()).serialize(encoder, value.value)
-      is ReRankingApplyFilter.StringValue -> String.serializer().serialize(encoder, value.value)
+internal class ReRankingApplyFilterSerializer : JsonContentPolymorphicSerializer<ReRankingApplyFilter>(ReRankingApplyFilter::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ReRankingApplyFilter> {
+    return when {
+      element.isJsonArrayOfObjects -> ReRankingApplyFilter.ListOfMixedSearchFiltersValue.serializer()
+      element.isString -> ReRankingApplyFilter.StringValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): ReRankingApplyFilter {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize List<MixedSearchFilters>
-    if (tree is JsonArray) {
-      try {
-        val value = codec.json.decodeFromJsonElement(ListSerializer(MixedSearchFilters.serializer()), tree)
-        return ReRankingApplyFilter.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize List<MixedSearchFilters> (error: ${e.message})")
-      }
-    }
-
-    // deserialize String
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(String.serializer(), tree)
-        return ReRankingApplyFilter.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize String (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

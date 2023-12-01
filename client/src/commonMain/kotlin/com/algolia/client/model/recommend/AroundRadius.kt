@@ -19,55 +19,24 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(AroundRadiusSerializer::class)
 public sealed interface AroundRadius {
-
+  @Serializable
   @JvmInline
   public value class IntValue(public val value: Int) : AroundRadius
 
   public companion object {
 
-    /** [AroundRadius] as [Int] Value. */
     public fun of(value: Int): AroundRadius {
       return IntValue(value)
     }
   }
 }
 
-internal class AroundRadiusSerializer : KSerializer<AroundRadius> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("AroundRadius")
-
-  override fun serialize(encoder: Encoder, value: AroundRadius) {
-    when (value) {
-      is AroundRadiusAll -> AroundRadiusAll.serializer().serialize(encoder, value)
-      is AroundRadius.IntValue -> Int.serializer().serialize(encoder, value.value)
+internal class AroundRadiusSerializer : JsonContentPolymorphicSerializer<AroundRadius>(AroundRadius::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AroundRadius> {
+    return when {
+      element.isInt -> AroundRadius.IntValue.serializer()
+      element.isString -> AroundRadiusAll.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): AroundRadius {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize AroundRadiusAll
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AroundRadiusAll.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AroundRadiusAll (error: ${e.message})")
-      }
-    }
-
-    // deserialize Int
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(Int.serializer(), tree)
-        return AroundRadius.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize Int (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

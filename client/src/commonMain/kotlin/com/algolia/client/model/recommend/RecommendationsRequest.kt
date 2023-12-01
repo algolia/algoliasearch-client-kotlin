@@ -24,52 +24,13 @@ public sealed interface RecommendationsRequest {
   }
 }
 
-internal class RecommendationsRequestSerializer : KSerializer<RecommendationsRequest> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("RecommendationsRequest")
-
-  override fun serialize(encoder: Encoder, value: RecommendationsRequest) {
-    when (value) {
-      is RecommendationsQuery -> RecommendationsQuery.serializer().serialize(encoder, value)
-      is TrendingFacetsQuery -> TrendingFacetsQuery.serializer().serialize(encoder, value)
-      is TrendingItemsQuery -> TrendingItemsQuery.serializer().serialize(encoder, value)
+internal class RecommendationsRequestSerializer : JsonContentPolymorphicSerializer<RecommendationsRequest>(RecommendationsRequest::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RecommendationsRequest> {
+    return when {
+      element is JsonObject -> TrendingItemsQuery.serializer()
+      element is JsonObject -> TrendingFacetsQuery.serializer()
+      element is JsonObject -> RecommendationsQuery.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): RecommendationsRequest {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize RecommendationsQuery
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(RecommendationsQuery.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize RecommendationsQuery (error: ${e.message})")
-      }
-    }
-
-    // deserialize TrendingFacetsQuery
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(TrendingFacetsQuery.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize TrendingFacetsQuery (error: ${e.message})")
-      }
-    }
-
-    // deserialize TrendingItemsQuery
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(TrendingItemsQuery.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize TrendingItemsQuery (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

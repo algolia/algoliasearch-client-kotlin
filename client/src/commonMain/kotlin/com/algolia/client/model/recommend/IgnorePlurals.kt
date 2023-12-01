@@ -19,64 +19,31 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(IgnorePluralsSerializer::class)
 public sealed interface IgnorePlurals {
-
-  @JvmInline
-  public value class BooleanValue(public val value: Boolean) : IgnorePlurals
-
+  @Serializable
   @JvmInline
   public value class ListOfStringValue(public val value: List<String>) : IgnorePlurals
 
+  @Serializable
+  @JvmInline
+  public value class BooleanValue(public val value: Boolean) : IgnorePlurals
+
   public companion object {
 
-    /** [IgnorePlurals] as [Boolean] Value. */
-    public fun of(value: Boolean): IgnorePlurals {
-      return BooleanValue(value)
-    }
-
-    /** [IgnorePlurals] as [List<String>] Value. */
     public fun of(value: List<String>): IgnorePlurals {
       return ListOfStringValue(value)
+    }
+    public fun of(value: Boolean): IgnorePlurals {
+      return BooleanValue(value)
     }
   }
 }
 
-internal class IgnorePluralsSerializer : KSerializer<IgnorePlurals> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("IgnorePlurals")
-
-  override fun serialize(encoder: Encoder, value: IgnorePlurals) {
-    when (value) {
-      is IgnorePlurals.BooleanValue -> Boolean.serializer().serialize(encoder, value.value)
-      is IgnorePlurals.ListOfStringValue -> ListSerializer(String.serializer()).serialize(encoder, value.value)
+internal class IgnorePluralsSerializer : JsonContentPolymorphicSerializer<IgnorePlurals>(IgnorePlurals::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<IgnorePlurals> {
+    return when {
+      element.isJsonArrayOfPrimitives -> IgnorePlurals.ListOfStringValue.serializer()
+      element.isBoolean -> IgnorePlurals.BooleanValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): IgnorePlurals {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize Boolean
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(Boolean.serializer(), tree)
-        return IgnorePlurals.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize Boolean (error: ${e.message})")
-      }
-    }
-
-    // deserialize List<String>
-    if (tree is JsonArray) {
-      try {
-        val value = codec.json.decodeFromJsonElement(ListSerializer(String.serializer()), tree)
-        return IgnorePlurals.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize List<String> (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

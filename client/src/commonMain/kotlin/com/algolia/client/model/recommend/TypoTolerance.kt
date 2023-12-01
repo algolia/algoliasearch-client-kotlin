@@ -19,55 +19,24 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(TypoToleranceSerializer::class)
 public sealed interface TypoTolerance {
-
+  @Serializable
   @JvmInline
   public value class BooleanValue(public val value: Boolean) : TypoTolerance
 
   public companion object {
 
-    /** [TypoTolerance] as [Boolean] Value. */
     public fun of(value: Boolean): TypoTolerance {
       return BooleanValue(value)
     }
   }
 }
 
-internal class TypoToleranceSerializer : KSerializer<TypoTolerance> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("TypoTolerance")
-
-  override fun serialize(encoder: Encoder, value: TypoTolerance) {
-    when (value) {
-      is TypoTolerance.BooleanValue -> Boolean.serializer().serialize(encoder, value.value)
-      is TypoToleranceEnum -> TypoToleranceEnum.serializer().serialize(encoder, value)
+internal class TypoToleranceSerializer : JsonContentPolymorphicSerializer<TypoTolerance>(TypoTolerance::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TypoTolerance> {
+    return when {
+      element.isBoolean -> TypoTolerance.BooleanValue.serializer()
+      element.isString -> TypoToleranceEnum.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): TypoTolerance {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize Boolean
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(Boolean.serializer(), tree)
-        return TypoTolerance.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize Boolean (error: ${e.message})")
-      }
-    }
-
-    // deserialize TypoToleranceEnum
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(TypoToleranceEnum.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize TypoToleranceEnum (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

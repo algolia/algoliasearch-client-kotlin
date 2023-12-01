@@ -23,41 +23,12 @@ public sealed interface SearchQuery {
   }
 }
 
-internal class SearchQuerySerializer : KSerializer<SearchQuery> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("SearchQuery")
-
-  override fun serialize(encoder: Encoder, value: SearchQuery) {
-    when (value) {
-      is SearchForFacets -> SearchForFacets.serializer().serialize(encoder, value)
-      is SearchForHits -> SearchForHits.serializer().serialize(encoder, value)
+internal class SearchQuerySerializer : JsonContentPolymorphicSerializer<SearchQuery>(SearchQuery::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SearchQuery> {
+    return when {
+      element is JsonObject && element.containsKey("facet") && element.containsKey("type") -> SearchForFacets.serializer()
+      element is JsonObject -> SearchForHits.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): SearchQuery {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize SearchForFacets
-    if (tree is JsonObject && tree.containsKey("facet") && tree.containsKey("type")) {
-      try {
-        return codec.json.decodeFromJsonElement(SearchForFacets.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SearchForFacets (error: ${e.message})")
-      }
-    }
-
-    // deserialize SearchForHits
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(SearchForHits.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SearchForHits (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

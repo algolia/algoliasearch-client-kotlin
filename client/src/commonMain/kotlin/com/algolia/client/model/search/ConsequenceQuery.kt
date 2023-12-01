@@ -19,55 +19,24 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(ConsequenceQuerySerializer::class)
 public sealed interface ConsequenceQuery {
-
+  @Serializable
   @JvmInline
   public value class StringValue(public val value: String) : ConsequenceQuery
 
   public companion object {
 
-    /** [ConsequenceQuery] as [String] Value. */
     public fun of(value: String): ConsequenceQuery {
       return StringValue(value)
     }
   }
 }
 
-internal class ConsequenceQuerySerializer : KSerializer<ConsequenceQuery> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("ConsequenceQuery")
-
-  override fun serialize(encoder: Encoder, value: ConsequenceQuery) {
-    when (value) {
-      is ConsequenceQueryObject -> ConsequenceQueryObject.serializer().serialize(encoder, value)
-      is ConsequenceQuery.StringValue -> String.serializer().serialize(encoder, value.value)
+internal class ConsequenceQuerySerializer : JsonContentPolymorphicSerializer<ConsequenceQuery>(ConsequenceQuery::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ConsequenceQuery> {
+    return when {
+      element is JsonObject -> ConsequenceQueryObject.serializer()
+      element.isString -> ConsequenceQuery.StringValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): ConsequenceQuery {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize ConsequenceQueryObject
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(ConsequenceQueryObject.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ConsequenceQueryObject (error: ${e.message})")
-      }
-    }
-
-    // deserialize String
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(String.serializer(), tree)
-        return ConsequenceQuery.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize String (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

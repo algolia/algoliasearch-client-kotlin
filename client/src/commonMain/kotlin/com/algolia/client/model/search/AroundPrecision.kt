@@ -19,64 +19,31 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(AroundPrecisionSerializer::class)
 public sealed interface AroundPrecision {
-
+  @Serializable
   @JvmInline
   public value class IntValue(public val value: Int) : AroundPrecision
 
+  @Serializable
   @JvmInline
   public value class ListOfAroundPrecisionFromValueInnerValue(public val value: List<AroundPrecisionFromValueInner>) : AroundPrecision
 
   public companion object {
 
-    /** [AroundPrecision] as [Int] Value. */
     public fun of(value: Int): AroundPrecision {
       return IntValue(value)
     }
-
-    /** [AroundPrecision] as [List<AroundPrecisionFromValueInner>] Value. */
     public fun of(value: List<AroundPrecisionFromValueInner>): AroundPrecision {
       return ListOfAroundPrecisionFromValueInnerValue(value)
     }
   }
 }
 
-internal class AroundPrecisionSerializer : KSerializer<AroundPrecision> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("AroundPrecision")
-
-  override fun serialize(encoder: Encoder, value: AroundPrecision) {
-    when (value) {
-      is AroundPrecision.IntValue -> Int.serializer().serialize(encoder, value.value)
-      is AroundPrecision.ListOfAroundPrecisionFromValueInnerValue -> ListSerializer(AroundPrecisionFromValueInner.serializer()).serialize(encoder, value.value)
+internal class AroundPrecisionSerializer : JsonContentPolymorphicSerializer<AroundPrecision>(AroundPrecision::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AroundPrecision> {
+    return when {
+      element.isInt -> AroundPrecision.IntValue.serializer()
+      element.isJsonArrayOfObjects -> AroundPrecision.ListOfAroundPrecisionFromValueInnerValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): AroundPrecision {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize Int
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(Int.serializer(), tree)
-        return AroundPrecision.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize Int (error: ${e.message})")
-      }
-    }
-
-    // deserialize List<AroundPrecisionFromValueInner>
-    if (tree is JsonArray) {
-      try {
-        val value = codec.json.decodeFromJsonElement(ListSerializer(AroundPrecisionFromValueInner.serializer()), tree)
-        return AroundPrecision.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize List<AroundPrecisionFromValueInner> (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

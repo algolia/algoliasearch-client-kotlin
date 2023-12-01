@@ -23,41 +23,12 @@ public sealed interface TaskInput {
   }
 }
 
-internal class TaskInputSerializer : KSerializer<TaskInput> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("TaskInput")
-
-  override fun serialize(encoder: Encoder, value: TaskInput) {
-    when (value) {
-      is OnDemandDateUtilsInput -> OnDemandDateUtilsInput.serializer().serialize(encoder, value)
-      is ScheduleDateUtilsInput -> ScheduleDateUtilsInput.serializer().serialize(encoder, value)
+internal class TaskInputSerializer : JsonContentPolymorphicSerializer<TaskInput>(TaskInput::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TaskInput> {
+    return when {
+      element is JsonObject -> OnDemandDateUtilsInput.serializer()
+      element is JsonObject -> ScheduleDateUtilsInput.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): TaskInput {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize OnDemandDateUtilsInput
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(OnDemandDateUtilsInput.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize OnDemandDateUtilsInput (error: ${e.message})")
-      }
-    }
-
-    // deserialize ScheduleDateUtilsInput
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(ScheduleDateUtilsInput.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ScheduleDateUtilsInput (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

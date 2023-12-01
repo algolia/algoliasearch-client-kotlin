@@ -19,55 +19,24 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(AttributeToUpdateSerializer::class)
 public sealed interface AttributeToUpdate {
-
+  @Serializable
   @JvmInline
   public value class StringValue(public val value: String) : AttributeToUpdate
 
   public companion object {
 
-    /** [AttributeToUpdate] as [String] Value. */
     public fun of(value: String): AttributeToUpdate {
       return StringValue(value)
     }
   }
 }
 
-internal class AttributeToUpdateSerializer : KSerializer<AttributeToUpdate> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("AttributeToUpdate")
-
-  override fun serialize(encoder: Encoder, value: AttributeToUpdate) {
-    when (value) {
-      is BuiltInOperation -> BuiltInOperation.serializer().serialize(encoder, value)
-      is AttributeToUpdate.StringValue -> String.serializer().serialize(encoder, value.value)
+internal class AttributeToUpdateSerializer : JsonContentPolymorphicSerializer<AttributeToUpdate>(AttributeToUpdate::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AttributeToUpdate> {
+    return when {
+      element.isString -> AttributeToUpdate.StringValue.serializer()
+      element is JsonObject -> BuiltInOperation.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): AttributeToUpdate {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize BuiltInOperation
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(BuiltInOperation.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize BuiltInOperation (error: ${e.message})")
-      }
-    }
-
-    // deserialize String
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(String.serializer(), tree)
-        return AttributeToUpdate.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize String (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

@@ -19,64 +19,31 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(LanguagesSerializer::class)
 public sealed interface Languages {
-
-  @JvmInline
-  public value class BooleanValue(public val value: Boolean) : Languages
-
+  @Serializable
   @JvmInline
   public value class ListOfStringValue(public val value: List<String>) : Languages
 
+  @Serializable
+  @JvmInline
+  public value class BooleanValue(public val value: Boolean) : Languages
+
   public companion object {
 
-    /** [Languages] as [Boolean] Value. */
-    public fun of(value: Boolean): Languages {
-      return BooleanValue(value)
-    }
-
-    /** [Languages] as [List<String>] Value. */
     public fun of(value: List<String>): Languages {
       return ListOfStringValue(value)
+    }
+    public fun of(value: Boolean): Languages {
+      return BooleanValue(value)
     }
   }
 }
 
-internal class LanguagesSerializer : KSerializer<Languages> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Languages")
-
-  override fun serialize(encoder: Encoder, value: Languages) {
-    when (value) {
-      is Languages.BooleanValue -> Boolean.serializer().serialize(encoder, value.value)
-      is Languages.ListOfStringValue -> ListSerializer(String.serializer()).serialize(encoder, value.value)
+internal class LanguagesSerializer : JsonContentPolymorphicSerializer<Languages>(Languages::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Languages> {
+    return when {
+      element.isJsonArrayOfPrimitives -> Languages.ListOfStringValue.serializer()
+      element.isBoolean -> Languages.BooleanValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): Languages {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize Boolean
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(Boolean.serializer(), tree)
-        return Languages.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize Boolean (error: ${e.message})")
-      }
-    }
-
-    // deserialize List<String>
-    if (tree is JsonArray) {
-      try {
-        val value = codec.json.decodeFromJsonElement(ListSerializer(String.serializer()), tree)
-        return Languages.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize List<String> (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

@@ -23,41 +23,12 @@ public sealed interface PlatformWithNone {
   }
 }
 
-internal class PlatformWithNoneSerializer : KSerializer<PlatformWithNone> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("PlatformWithNone")
-
-  override fun serialize(encoder: Encoder, value: PlatformWithNone) {
-    when (value) {
-      is Platform -> Platform.serializer().serialize(encoder, value)
-      is PlatformNone -> PlatformNone.serializer().serialize(encoder, value)
+internal class PlatformWithNoneSerializer : JsonContentPolymorphicSerializer<PlatformWithNone>(PlatformWithNone::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<PlatformWithNone> {
+    return when {
+      element.isString -> Platform.serializer()
+      element.isString -> PlatformNone.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): PlatformWithNone {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize Platform
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(Platform.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize Platform (error: ${e.message})")
-      }
-    }
-
-    // deserialize PlatformNone
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(PlatformNone.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize PlatformNone (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

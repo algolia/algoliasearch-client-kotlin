@@ -23,41 +23,12 @@ public sealed interface AddABTestsVariant {
   }
 }
 
-internal class AddABTestsVariantSerializer : KSerializer<AddABTestsVariant> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("AddABTestsVariant")
-
-  override fun serialize(encoder: Encoder, value: AddABTestsVariant) {
-    when (value) {
-      is AbTestsVariant -> AbTestsVariant.serializer().serialize(encoder, value)
-      is AbTestsVariantSearchParams -> AbTestsVariantSearchParams.serializer().serialize(encoder, value)
+internal class AddABTestsVariantSerializer : JsonContentPolymorphicSerializer<AddABTestsVariant>(AddABTestsVariant::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AddABTestsVariant> {
+    return when {
+      element is JsonObject -> AbTestsVariant.serializer()
+      element is JsonObject -> AbTestsVariantSearchParams.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): AddABTestsVariant {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize AbTestsVariant
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AbTestsVariant.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AbTestsVariant (error: ${e.message})")
-      }
-    }
-
-    // deserialize AbTestsVariantSearchParams
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AbTestsVariantSearchParams.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AbTestsVariantSearchParams (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

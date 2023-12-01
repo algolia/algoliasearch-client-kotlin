@@ -19,64 +19,31 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(MixedSearchFiltersSerializer::class)
 public sealed interface MixedSearchFilters {
-
+  @Serializable
   @JvmInline
   public value class ListOfStringValue(public val value: List<String>) : MixedSearchFilters
 
+  @Serializable
   @JvmInline
   public value class StringValue(public val value: String) : MixedSearchFilters
 
   public companion object {
 
-    /** [MixedSearchFilters] as [List<String>] Value. */
     public fun of(value: List<String>): MixedSearchFilters {
       return ListOfStringValue(value)
     }
-
-    /** [MixedSearchFilters] as [String] Value. */
     public fun of(value: String): MixedSearchFilters {
       return StringValue(value)
     }
   }
 }
 
-internal class MixedSearchFiltersSerializer : KSerializer<MixedSearchFilters> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("MixedSearchFilters")
-
-  override fun serialize(encoder: Encoder, value: MixedSearchFilters) {
-    when (value) {
-      is MixedSearchFilters.ListOfStringValue -> ListSerializer(String.serializer()).serialize(encoder, value.value)
-      is MixedSearchFilters.StringValue -> String.serializer().serialize(encoder, value.value)
+internal class MixedSearchFiltersSerializer : JsonContentPolymorphicSerializer<MixedSearchFilters>(MixedSearchFilters::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<MixedSearchFilters> {
+    return when {
+      element.isJsonArrayOfPrimitives -> MixedSearchFilters.ListOfStringValue.serializer()
+      element.isString -> MixedSearchFilters.StringValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): MixedSearchFilters {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize List<String>
-    if (tree is JsonArray) {
-      try {
-        val value = codec.json.decodeFromJsonElement(ListSerializer(String.serializer()), tree)
-        return MixedSearchFilters.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize List<String> (error: ${e.message})")
-      }
-    }
-
-    // deserialize String
-    if (tree is JsonPrimitive) {
-      try {
-        val value = codec.json.decodeFromJsonElement(String.serializer(), tree)
-        return MixedSearchFilters.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize String (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

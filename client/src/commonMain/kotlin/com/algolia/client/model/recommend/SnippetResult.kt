@@ -19,55 +19,24 @@ import kotlin.jvm.JvmInline
  */
 @Serializable(SnippetResultSerializer::class)
 public sealed interface SnippetResult {
-
+  @Serializable
   @JvmInline
   public value class ListOfSnippetResultOptionValue(public val value: List<SnippetResultOption>) : SnippetResult
 
   public companion object {
 
-    /** [SnippetResult] as [List<SnippetResultOption>] Value. */
     public fun of(value: List<SnippetResultOption>): SnippetResult {
       return ListOfSnippetResultOptionValue(value)
     }
   }
 }
 
-internal class SnippetResultSerializer : KSerializer<SnippetResult> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("SnippetResult")
-
-  override fun serialize(encoder: Encoder, value: SnippetResult) {
-    when (value) {
-      is SnippetResult.ListOfSnippetResultOptionValue -> ListSerializer(SnippetResultOption.serializer()).serialize(encoder, value.value)
-      is SnippetResultOption -> SnippetResultOption.serializer().serialize(encoder, value)
+internal class SnippetResultSerializer : JsonContentPolymorphicSerializer<SnippetResult>(SnippetResult::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SnippetResult> {
+    return when {
+      element is JsonObject -> SnippetResultOption.serializer()
+      element.isJsonArrayOfObjects -> SnippetResult.ListOfSnippetResultOptionValue.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): SnippetResult {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize List<SnippetResultOption>
-    if (tree is JsonArray) {
-      try {
-        val value = codec.json.decodeFromJsonElement(ListSerializer(SnippetResultOption.serializer()), tree)
-        return SnippetResult.of(value)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize List<SnippetResultOption> (error: ${e.message})")
-      }
-    }
-
-    // deserialize SnippetResultOption
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(SnippetResultOption.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SnippetResultOption (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

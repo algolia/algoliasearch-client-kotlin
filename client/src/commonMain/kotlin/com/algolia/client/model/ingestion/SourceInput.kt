@@ -27,85 +27,16 @@ public sealed interface SourceInput {
   }
 }
 
-internal class SourceInputSerializer : KSerializer<SourceInput> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("SourceInput")
-
-  override fun serialize(encoder: Encoder, value: SourceInput) {
-    when (value) {
-      is SourceBigCommerce -> SourceBigCommerce.serializer().serialize(encoder, value)
-      is SourceBigQuery -> SourceBigQuery.serializer().serialize(encoder, value)
-      is SourceCSV -> SourceCSV.serializer().serialize(encoder, value)
-      is SourceCommercetools -> SourceCommercetools.serializer().serialize(encoder, value)
-      is SourceDocker -> SourceDocker.serializer().serialize(encoder, value)
-      is SourceJSON -> SourceJSON.serializer().serialize(encoder, value)
+internal class SourceInputSerializer : JsonContentPolymorphicSerializer<SourceInput>(SourceInput::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SourceInput> {
+    return when {
+      element is JsonObject -> SourceCommercetools.serializer()
+      element is JsonObject -> SourceBigCommerce.serializer()
+      element is JsonObject -> SourceJSON.serializer()
+      element is JsonObject -> SourceCSV.serializer()
+      element is JsonObject -> SourceBigQuery.serializer()
+      element is JsonObject -> SourceDocker.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): SourceInput {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize SourceBigCommerce
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(SourceBigCommerce.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SourceBigCommerce (error: ${e.message})")
-      }
-    }
-
-    // deserialize SourceBigQuery
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(SourceBigQuery.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SourceBigQuery (error: ${e.message})")
-      }
-    }
-
-    // deserialize SourceCSV
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(SourceCSV.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SourceCSV (error: ${e.message})")
-      }
-    }
-
-    // deserialize SourceCommercetools
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(SourceCommercetools.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SourceCommercetools (error: ${e.message})")
-      }
-    }
-
-    // deserialize SourceDocker
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(SourceDocker.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SourceDocker (error: ${e.message})")
-      }
-    }
-
-    // deserialize SourceJSON
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(SourceJSON.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SourceJSON (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

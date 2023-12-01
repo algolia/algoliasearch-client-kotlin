@@ -23,41 +23,12 @@ public sealed interface Promote {
   }
 }
 
-internal class PromoteSerializer : KSerializer<Promote> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Promote")
-
-  override fun serialize(encoder: Encoder, value: Promote) {
-    when (value) {
-      is PromoteObjectID -> PromoteObjectID.serializer().serialize(encoder, value)
-      is PromoteObjectIDs -> PromoteObjectIDs.serializer().serialize(encoder, value)
+internal class PromoteSerializer : JsonContentPolymorphicSerializer<Promote>(Promote::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Promote> {
+    return when {
+      element is JsonObject -> PromoteObjectIDs.serializer()
+      element is JsonObject -> PromoteObjectID.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): Promote {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize PromoteObjectID
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(PromoteObjectID.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize PromoteObjectID (error: ${e.message})")
-      }
-    }
-
-    // deserialize PromoteObjectIDs
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(PromoteObjectIDs.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize PromoteObjectIDs (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

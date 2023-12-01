@@ -26,74 +26,15 @@ public sealed interface AuthInput {
   }
 }
 
-internal class AuthInputSerializer : KSerializer<AuthInput> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("AuthInput")
-
-  override fun serialize(encoder: Encoder, value: AuthInput) {
-    when (value) {
-      is AuthAPIKey -> AuthAPIKey.serializer().serialize(encoder, value)
-      is AuthAlgolia -> AuthAlgolia.serializer().serialize(encoder, value)
-      is AuthBasic -> AuthBasic.serializer().serialize(encoder, value)
-      is AuthGoogleServiceAccount -> AuthGoogleServiceAccount.serializer().serialize(encoder, value)
-      is AuthOAuth -> AuthOAuth.serializer().serialize(encoder, value)
+internal class AuthInputSerializer : JsonContentPolymorphicSerializer<AuthInput>(AuthInput::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AuthInput> {
+    return when {
+      element is JsonObject -> AuthGoogleServiceAccount.serializer()
+      element is JsonObject -> AuthBasic.serializer()
+      element is JsonObject -> AuthAPIKey.serializer()
+      element is JsonObject -> AuthOAuth.serializer()
+      element is JsonObject -> AuthAlgolia.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): AuthInput {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize AuthAPIKey
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AuthAPIKey.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AuthAPIKey (error: ${e.message})")
-      }
-    }
-
-    // deserialize AuthAlgolia
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AuthAlgolia.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AuthAlgolia (error: ${e.message})")
-      }
-    }
-
-    // deserialize AuthBasic
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AuthBasic.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AuthBasic (error: ${e.message})")
-      }
-    }
-
-    // deserialize AuthGoogleServiceAccount
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AuthGoogleServiceAccount.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AuthGoogleServiceAccount (error: ${e.message})")
-      }
-    }
-
-    // deserialize AuthOAuth
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(AuthOAuth.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize AuthOAuth (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }

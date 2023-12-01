@@ -24,52 +24,13 @@ public sealed interface Trigger {
   }
 }
 
-internal class TriggerSerializer : KSerializer<Trigger> {
-
-  override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Trigger")
-
-  override fun serialize(encoder: Encoder, value: Trigger) {
-    when (value) {
-      is OnDemandTrigger -> OnDemandTrigger.serializer().serialize(encoder, value)
-      is ScheduleTrigger -> ScheduleTrigger.serializer().serialize(encoder, value)
-      is SubscriptionTrigger -> SubscriptionTrigger.serializer().serialize(encoder, value)
+internal class TriggerSerializer : JsonContentPolymorphicSerializer<Trigger>(Trigger::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Trigger> {
+    return when {
+      element is JsonObject -> OnDemandTrigger.serializer()
+      element is JsonObject -> ScheduleTrigger.serializer()
+      element is JsonObject -> SubscriptionTrigger.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
-  }
-
-  override fun deserialize(decoder: Decoder): Trigger {
-    val codec = decoder.asJsonDecoder()
-    val tree = codec.decodeJsonElement()
-
-    // deserialize OnDemandTrigger
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(OnDemandTrigger.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize OnDemandTrigger (error: ${e.message})")
-      }
-    }
-
-    // deserialize ScheduleTrigger
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(ScheduleTrigger.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize ScheduleTrigger (error: ${e.message})")
-      }
-    }
-
-    // deserialize SubscriptionTrigger
-    if (tree is JsonObject) {
-      try {
-        return codec.json.decodeFromJsonElement(SubscriptionTrigger.serializer(), tree)
-      } catch (e: Exception) {
-        // deserialization failed, continue
-        println("Failed to deserialize SubscriptionTrigger (error: ${e.message})")
-      }
-    }
-
-    throw AlgoliaClientException("Failed to deserialize json element: $tree")
   }
 }
