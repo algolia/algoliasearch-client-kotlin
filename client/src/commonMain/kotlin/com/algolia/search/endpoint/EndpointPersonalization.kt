@@ -1,6 +1,7 @@
 package com.algolia.search.endpoint
 
 import com.algolia.search.model.insights.UserToken
+import com.algolia.search.model.personalization.DeletePersonalizationProfileResponse
 import com.algolia.search.model.personalization.PersonalizationProfileResponse
 import com.algolia.search.model.personalization.PersonalizationStrategy
 import com.algolia.search.model.personalization.SetPersonalizationStrategyResponse
@@ -42,7 +43,7 @@ public interface EndpointPersonalization {
     public suspend fun deletePersonalizationProfile(
         userToken: UserToken,
         requestOptions: RequestOptions? = null
-    )
+    ): DeletePersonalizationProfileResponse
 
     /**
      * Set a [PersonalizationStrategy] for your application.
