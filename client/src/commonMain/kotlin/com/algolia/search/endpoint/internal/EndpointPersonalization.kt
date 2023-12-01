@@ -5,6 +5,7 @@ package com.algolia.search.endpoint.internal
 import com.algolia.search.configuration.CallType
 import com.algolia.search.endpoint.EndpointPersonalization
 import com.algolia.search.model.insights.UserToken
+import com.algolia.search.model.personalization.DeletePersonalizationProfileResponse
 import com.algolia.search.model.personalization.PersonalizationProfileResponse
 import com.algolia.search.model.personalization.PersonalizationStrategy
 import com.algolia.search.model.personalization.SetPersonalizationStrategyResponse
@@ -30,7 +31,7 @@ internal class EndpointPersonalizationImpl(
         )
     }
 
-    override suspend fun deletePersonalizationProfile(userToken: UserToken, requestOptions: RequestOptions?) {
+    override suspend fun deletePersonalizationProfile(userToken: UserToken, requestOptions: RequestOptions?): DeletePersonalizationProfileResponse {
         return transport.request(
             HttpMethod.Delete,
             CallType.Write,

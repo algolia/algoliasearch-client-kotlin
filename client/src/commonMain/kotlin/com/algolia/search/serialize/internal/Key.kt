@@ -435,4 +435,5 @@ internal object Key {
     const val Default: String = "default"
     const val AlgoliaAgent = "X-Algolia-Agent"
     const val Extensions = "extensions"
+    const val DeletedUntil = "deletedUntil"
 }
