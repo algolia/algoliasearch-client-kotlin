@@ -7,15 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * UserHighlightResult
  *
- * @param userID Show highlighted section and words matched on a query.
- * @param clusterName Show highlighted section and words matched on a query.
+ * @param userID
+ * @param clusterName
  */
 @Serializable
 public data class UserHighlightResult(
 
-  /** Show highlighted section and words matched on a query. */
-  @SerialName(value = "userID") val userID: Map<kotlin.String, HighlightResult>,
+  @SerialName(value = "userID") val userID: HighlightResult,
 
-  /** Show highlighted section and words matched on a query. */
-  @SerialName(value = "clusterName") val clusterName: Map<kotlin.String, HighlightResult>,
+  @SerialName(value = "clusterName") val clusterName: HighlightResult,
 )
