@@ -186,6 +186,7 @@ public final class com/algolia/search/configuration/Compression : java/lang/Enum
 public abstract interface class com/algolia/search/configuration/Configuration : java/io/Closeable {
 	public abstract fun close ()V
 	public abstract fun getCompression ()Lcom/algolia/search/configuration/Compression;
+	public abstract fun getConnectTimeout ()J
 	public abstract fun getDefaultHeaders ()Ljava/util/Map;
 	public abstract fun getEngine ()Lio/ktor/client/engine/HttpClientEngine;
 	public abstract fun getHosts ()Ljava/util/List;
@@ -213,8 +214,8 @@ public final class com/algolia/search/configuration/ConfigurationAnalytics$Defau
 }
 
 public final class com/algolia/search/configuration/ConfigurationAnalyticsKt {
-	public static final fun ConfigurationAnalytics (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationAnalytics;
-	public static synthetic fun ConfigurationAnalytics$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationAnalytics;
+	public static final fun ConfigurationAnalytics (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;J)Lcom/algolia/search/configuration/ConfigurationAnalytics;
+	public static synthetic fun ConfigurationAnalytics$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Analytics;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;JILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationAnalytics;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationInsights : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -226,8 +227,8 @@ public final class com/algolia/search/configuration/ConfigurationInsights$Defaul
 }
 
 public final class com/algolia/search/configuration/ConfigurationInsightsKt {
-	public static final fun ConfigurationInsights (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationInsights;
-	public static synthetic fun ConfigurationInsights$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationInsights;
+	public static final fun ConfigurationInsights (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;J)Lcom/algolia/search/configuration/ConfigurationInsights;
+	public static synthetic fun ConfigurationInsights$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;JILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationInsights;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationPersonalization : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -240,8 +241,8 @@ public final class com/algolia/search/configuration/ConfigurationPersonalization
 }
 
 public final class com/algolia/search/configuration/ConfigurationPersonalizationKt {
-	public static final fun ConfigurationPersonalization (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
-	public static synthetic fun ConfigurationPersonalization$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
+	public static final fun ConfigurationPersonalization (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;J)Lcom/algolia/search/configuration/ConfigurationPersonalization;
+	public static synthetic fun ConfigurationPersonalization$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;Lcom/algolia/search/configuration/Region$Personalization;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;JILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPersonalization;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationPlaces : com/algolia/search/configuration/Configuration {
@@ -253,8 +254,8 @@ public final class com/algolia/search/configuration/ConfigurationPlaces$DefaultI
 }
 
 public final class com/algolia/search/configuration/ConfigurationPlacesKt {
-	public static final fun ConfigurationPlaces (JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationPlaces;
-	public static synthetic fun ConfigurationPlaces$default (JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPlaces;
+	public static final fun ConfigurationPlaces (JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;J)Lcom/algolia/search/configuration/ConfigurationPlaces;
+	public static synthetic fun ConfigurationPlaces$default (JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/logging/Logger;JILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationPlaces;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationRecommend : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -266,8 +267,8 @@ public final class com/algolia/search/configuration/ConfigurationRecommend$Defau
 }
 
 public final class com/algolia/search/configuration/ConfigurationRecommendKt {
-	public static final fun ConfigurationRecommend (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationRecommend;
-	public static synthetic fun ConfigurationRecommend$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationRecommend;
+	public static final fun ConfigurationRecommend (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;J)Lcom/algolia/search/configuration/ConfigurationRecommend;
+	public static synthetic fun ConfigurationRecommend$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;JILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationRecommend;
 }
 
 public abstract interface class com/algolia/search/configuration/ConfigurationSearch : com/algolia/search/configuration/Configuration, com/algolia/search/configuration/Credentials {
@@ -279,8 +280,8 @@ public final class com/algolia/search/configuration/ConfigurationSearch$DefaultI
 }
 
 public final class com/algolia/search/configuration/ConfigurationSearchKt {
-	public static final fun ConfigurationSearch (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;)Lcom/algolia/search/configuration/ConfigurationSearch;
-	public static synthetic fun ConfigurationSearch$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;ILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationSearch;
+	public static final fun ConfigurationSearch (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;J)Lcom/algolia/search/configuration/ConfigurationSearch;
+	public static synthetic fun ConfigurationSearch$default (Lcom/algolia/search/model/ApplicationID;Lcom/algolia/search/model/APIKey;JJLcom/algolia/search/logging/LogLevel;Ljava/util/List;Ljava/util/Map;Lio/ktor/client/engine/HttpClientEngine;Lkotlin/jvm/functions/Function1;Lcom/algolia/search/configuration/Compression;Lcom/algolia/search/logging/Logger;JILjava/lang/Object;)Lcom/algolia/search/configuration/ConfigurationSearch;
 }
 
 public abstract interface class com/algolia/search/configuration/Credentials {
@@ -405,6 +406,7 @@ public final class com/algolia/search/dsl/DSLQueryKt {
 	public static final fun disableExactOnAttributes (Lcom/algolia/search/model/search/Query;Lkotlin/jvm/functions/Function1;)V
 	public static final fun disableTypoToleranceOnAttributes (Lcom/algolia/search/model/search/Query;Lkotlin/jvm/functions/Function1;)V
 	public static final fun explainModules (Lcom/algolia/search/model/search/Query;Lkotlin/jvm/functions/Function1;)V
+	public static final fun extensions (Lcom/algolia/search/model/search/Query;Lkotlin/jvm/functions/Function1;)V
 	public static final fun facetFilters (Lcom/algolia/search/model/search/Query;ZLkotlin/jvm/functions/Function1;)V
 	public static synthetic fun facetFilters$default (Lcom/algolia/search/model/search/Query;ZLkotlin/jvm/functions/Function1;ILjava/lang/Object;)V
 	public static final fun facets (Lcom/algolia/search/model/search/Query;Lkotlin/jvm/functions/Function1;)V
@@ -2019,7 +2021,6 @@ public final class com/algolia/search/logging/LoggerKt {
 
 public final class com/algolia/search/model/APIKey : com/algolia/search/model/internal/Raw {
 	public static final field Companion Lcom/algolia/search/model/APIKey$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Ljava/lang/String;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun copy (Ljava/lang/String;)Lcom/algolia/search/model/APIKey;
@@ -2203,7 +2204,6 @@ public final class com/algolia/search/model/QueryID$Companion : kotlinx/serializ
 
 public final class com/algolia/search/model/analytics/ABTest {
 	public static final field Companion Lcom/algolia/search/model/analytics/ABTest$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Ljava/lang/String;Lcom/algolia/search/model/ClientDate;Lcom/algolia/search/model/analytics/Variant;Lcom/algolia/search/model/analytics/Variant;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component2 ()Lcom/algolia/search/model/ClientDate;
@@ -2318,7 +2318,6 @@ public final class com/algolia/search/model/analytics/Variant {
 
 public final class com/algolia/search/model/analytics/Variant$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/analytics/Variant$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/analytics/Variant;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -2334,7 +2333,6 @@ public final class com/algolia/search/model/analytics/Variant$Companion {
 
 public abstract class com/algolia/search/model/apikey/ACL : com/algolia/search/model/internal/Raw {
 	public static final field Companion Lcom/algolia/search/model/apikey/ACL$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun getRaw ()Ljava/lang/Object;
 	public fun getRaw ()Ljava/lang/String;
@@ -2520,7 +2518,6 @@ public final class com/algolia/search/model/dictionary/DictionaryEntry$Compound 
 
 public final class com/algolia/search/model/dictionary/DictionaryEntry$Compound$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/dictionary/DictionaryEntry$Compound$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/dictionary/DictionaryEntry$Compound;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -2554,7 +2551,6 @@ public final class com/algolia/search/model/dictionary/DictionaryEntry$Plural : 
 
 public final class com/algolia/search/model/dictionary/DictionaryEntry$Plural$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/dictionary/DictionaryEntry$Plural$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/dictionary/DictionaryEntry$Plural;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -2574,18 +2570,6 @@ public final class com/algolia/search/model/dictionary/DictionaryEntry$State : j
 	public static final field Enabled Lcom/algolia/search/model/dictionary/DictionaryEntry$State;
 	public static fun valueOf (Ljava/lang/String;)Lcom/algolia/search/model/dictionary/DictionaryEntry$State;
 	public static fun values ()[Lcom/algolia/search/model/dictionary/DictionaryEntry$State;
-}
-
-public final class com/algolia/search/model/dictionary/DictionaryEntry$State$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lcom/algolia/search/model/dictionary/DictionaryEntry$State$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/dictionary/DictionaryEntry$State;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/algolia/search/model/dictionary/DictionaryEntry$State;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/algolia/search/model/dictionary/DictionaryEntry$State$Companion {
@@ -2615,7 +2599,6 @@ public final class com/algolia/search/model/dictionary/DictionaryEntry$Stopword 
 
 public final class com/algolia/search/model/dictionary/DictionaryEntry$Stopword$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/dictionary/DictionaryEntry$Stopword$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/dictionary/DictionaryEntry$Stopword;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -2647,7 +2630,6 @@ public final class com/algolia/search/model/dictionary/DictionarySettings {
 
 public final class com/algolia/search/model/dictionary/DictionarySettings$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/dictionary/DictionarySettings$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/dictionary/DictionarySettings;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -2677,7 +2659,6 @@ public final class com/algolia/search/model/dictionary/DisableStandardEntries {
 
 public final class com/algolia/search/model/dictionary/DisableStandardEntries$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/dictionary/DisableStandardEntries$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/dictionary/DisableStandardEntries;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -3094,7 +3075,6 @@ public final class com/algolia/search/model/index/Scope$Synonyms : com/algolia/s
 
 public abstract class com/algolia/search/model/indexing/BatchOperation : com/algolia/search/model/internal/Raw {
 	public static final field Companion Lcom/algolia/search/model/indexing/BatchOperation$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun getRaw ()Ljava/lang/Object;
 	public fun getRaw ()Ljava/lang/String;
@@ -3242,7 +3222,6 @@ public final class com/algolia/search/model/indexing/DeleteByQuery {
 
 public final class com/algolia/search/model/indexing/DeleteByQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/indexing/DeleteByQuery$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/indexing/DeleteByQuery;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -3262,7 +3241,6 @@ public abstract interface class com/algolia/search/model/indexing/Indexable {
 
 public abstract class com/algolia/search/model/indexing/Partial {
 	public static final field Companion Lcom/algolia/search/model/indexing/Partial$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public abstract fun getAttribute ()Lcom/algolia/search/model/Attribute;
 }
 
@@ -3358,6 +3336,7 @@ public final class com/algolia/search/model/indexing/Partial$Update : com/algoli
 	public fun <init> (Lcom/algolia/search/model/Attribute;Ljava/lang/Number;)V
 	public fun <init> (Lcom/algolia/search/model/Attribute;Ljava/lang/String;)V
 	public fun <init> (Lcom/algolia/search/model/Attribute;Lkotlinx/serialization/json/JsonArray;)V
+	public fun <init> (Lcom/algolia/search/model/Attribute;Lkotlinx/serialization/json/JsonElement;)V
 	public fun <init> (Lcom/algolia/search/model/Attribute;Lkotlinx/serialization/json/JsonObject;)V
 	public fun <init> (Lcom/algolia/search/model/Attribute;Z)V
 	public final fun component1 ()Lcom/algolia/search/model/Attribute;
@@ -3393,7 +3372,6 @@ public final class com/algolia/search/model/insights/EventName$Companion : kotli
 
 public abstract class com/algolia/search/model/insights/InsightsEvent {
 	public static final field Companion Lcom/algolia/search/model/insights/InsightsEvent$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public abstract fun getEventName ()Lcom/algolia/search/model/insights/EventName;
 	public abstract fun getIndexName ()Lcom/algolia/search/model/IndexName;
 	public abstract fun getQueryID ()Lcom/algolia/search/model/QueryID;
@@ -3598,7 +3576,6 @@ public final class com/algolia/search/model/multicluster/UserIDQuery {
 
 public final class com/algolia/search/model/multicluster/UserIDQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/multicluster/UserIDQuery$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/multicluster/UserIDQuery;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -3614,7 +3591,6 @@ public final class com/algolia/search/model/multicluster/UserIDQuery$Companion {
 
 public final class com/algolia/search/model/multipleindex/BatchOperationIndex {
 	public static final field Companion Lcom/algolia/search/model/multipleindex/BatchOperationIndex$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/indexing/BatchOperation;)V
 	public final fun component1 ()Lcom/algolia/search/model/IndexName;
 	public final fun component2 ()Lcom/algolia/search/model/indexing/BatchOperation;
@@ -3664,7 +3640,6 @@ public final class com/algolia/search/model/multipleindex/IndexQuery : com/algol
 
 public final class com/algolia/search/model/multipleindex/IndexQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/multipleindex/IndexQuery$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/multipleindex/IndexQuery;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -3741,7 +3716,6 @@ public final class com/algolia/search/model/multipleindex/RequestObjects {
 
 public final class com/algolia/search/model/multipleindex/RequestObjects$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/multipleindex/RequestObjects$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/multipleindex/RequestObjects;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -3961,6 +3935,39 @@ public abstract interface class com/algolia/search/model/params/SettingsParamete
 	public abstract fun setVersion (Ljava/lang/Integer;)V
 }
 
+public final class com/algolia/search/model/personalization/DeletePersonalizationProfileResponse {
+	public static final field Companion Lcom/algolia/search/model/personalization/DeletePersonalizationProfileResponse$Companion;
+	public fun <init> ()V
+	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lcom/algolia/search/model/personalization/DeletePersonalizationProfileResponse;
+	public static synthetic fun copy$default (Lcom/algolia/search/model/personalization/DeletePersonalizationProfileResponse;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/algolia/search/model/personalization/DeletePersonalizationProfileResponse;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDeletedUntil ()Ljava/lang/String;
+	public final fun getUserToken ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public static final fun write$Self (Lcom/algolia/search/model/personalization/DeletePersonalizationProfileResponse;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+}
+
+public final class com/algolia/search/model/personalization/DeletePersonalizationProfileResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/algolia/search/model/personalization/DeletePersonalizationProfileResponse$$serializer;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/personalization/DeletePersonalizationProfileResponse;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/algolia/search/model/personalization/DeletePersonalizationProfileResponse;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/algolia/search/model/personalization/DeletePersonalizationProfileResponse$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class com/algolia/search/model/personalization/EventScoring {
 	public static final field Companion Lcom/algolia/search/model/personalization/EventScoring$Companion;
 	public synthetic fun <init> (ILjava/lang/String;Ljava/lang/String;ILkotlinx/serialization/internal/SerializationConstructorMarker;)V
@@ -3981,7 +3988,6 @@ public final class com/algolia/search/model/personalization/EventScoring {
 
 public final class com/algolia/search/model/personalization/EventScoring$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/personalization/EventScoring$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/personalization/EventScoring;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -4013,7 +4019,6 @@ public final class com/algolia/search/model/personalization/FacetScoring {
 
 public final class com/algolia/search/model/personalization/FacetScoring$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/personalization/FacetScoring$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/personalization/FacetScoring;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -4047,7 +4052,6 @@ public final class com/algolia/search/model/personalization/PersonalizationProfi
 
 public final class com/algolia/search/model/personalization/PersonalizationProfileResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/personalization/PersonalizationProfileResponse$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/personalization/PersonalizationProfileResponse;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -4081,7 +4085,6 @@ public final class com/algolia/search/model/personalization/PersonalizationStrat
 
 public final class com/algolia/search/model/personalization/PersonalizationStrategy$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/personalization/PersonalizationStrategy$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/personalization/PersonalizationStrategy;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -4113,7 +4116,6 @@ public final class com/algolia/search/model/personalization/SetPersonalizationSt
 
 public final class com/algolia/search/model/personalization/SetPersonalizationStrategyResponse$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/personalization/SetPersonalizationStrategyResponse$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/personalization/SetPersonalizationStrategyResponse;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5299,7 +5301,6 @@ public final class com/algolia/search/model/places/PlaceLanguage : com/algolia/s
 
 public final class com/algolia/search/model/places/PlaceLanguage$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/places/PlaceLanguage$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/places/PlaceLanguage;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5398,7 +5399,6 @@ public final class com/algolia/search/model/places/PlaceLanguages : com/algolia/
 
 public final class com/algolia/search/model/places/PlaceLanguages$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/places/PlaceLanguages$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/places/PlaceLanguages;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5508,7 +5508,6 @@ public final class com/algolia/search/model/places/PlacesQuery {
 
 public final class com/algolia/search/model/places/PlacesQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/places/PlacesQuery$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/places/PlacesQuery;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5550,7 +5549,6 @@ public final class com/algolia/search/model/recommend/FrequentlyBoughtTogetherQu
 
 public final class com/algolia/search/model/recommend/FrequentlyBoughtTogetherQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/recommend/FrequentlyBoughtTogetherQuery$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/recommend/FrequentlyBoughtTogetherQuery;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5624,7 +5622,6 @@ public final class com/algolia/search/model/recommend/RecommendationsQuery : com
 
 public final class com/algolia/search/model/recommend/RecommendationsQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/recommend/RecommendationsQuery$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/recommend/RecommendationsQuery;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5666,7 +5663,6 @@ public final class com/algolia/search/model/recommend/RelatedProductsQuery : com
 
 public final class com/algolia/search/model/recommend/RelatedProductsQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/recommend/RelatedProductsQuery$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/recommend/RelatedProductsQuery;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5682,7 +5678,6 @@ public final class com/algolia/search/model/recommend/RelatedProductsQuery$Compa
 
 public final class com/algolia/search/model/response/ResponseABTest {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseABTest$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Lcom/algolia/search/model/analytics/ABTestID;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/ClientDate;Ljava/lang/String;Lcom/algolia/search/model/analytics/ABTestStatus;Lcom/algolia/search/model/response/ResponseVariant;Lcom/algolia/search/model/response/ResponseVariant;)V
 	public synthetic fun <init> (Lcom/algolia/search/model/analytics/ABTestID;Ljava/lang/Float;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/ClientDate;Ljava/lang/String;Lcom/algolia/search/model/analytics/ABTestStatus;Lcom/algolia/search/model/response/ResponseVariant;Lcom/algolia/search/model/response/ResponseVariant;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lcom/algolia/search/model/analytics/ABTestID;
@@ -5723,7 +5718,6 @@ public final class com/algolia/search/model/response/ResponseABTest$Companion : 
 
 public final class com/algolia/search/model/response/ResponseABTestShort {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseABTestShort$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Lcom/algolia/search/model/analytics/ABTestID;Lcom/algolia/search/model/analytics/Variant;Lcom/algolia/search/model/analytics/Variant;)V
 	public final fun component1 ()Lcom/algolia/search/model/analytics/ABTestID;
 	public final fun component2 ()Lcom/algolia/search/model/analytics/Variant;
@@ -5769,7 +5763,6 @@ public final class com/algolia/search/model/response/ResponseABTests {
 
 public final class com/algolia/search/model/response/ResponseABTests$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseABTests$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseABTests;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5825,7 +5818,6 @@ public final class com/algolia/search/model/response/ResponseAPIKey {
 
 public final class com/algolia/search/model/response/ResponseAPIKey$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseAPIKey$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseAPIKey;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5857,7 +5849,6 @@ public final class com/algolia/search/model/response/ResponseBatch : com/algolia
 
 public final class com/algolia/search/model/response/ResponseBatch$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseBatch$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseBatch;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5873,7 +5864,6 @@ public final class com/algolia/search/model/response/ResponseBatch$Companion {
 
 public final class com/algolia/search/model/response/ResponseBatches {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseBatches$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Ljava/util/List;Ljava/util/List;)V
 	public synthetic fun <init> (Ljava/util/List;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/util/List;
@@ -5915,7 +5905,6 @@ public final class com/algolia/search/model/response/ResponseDictionary : com/al
 
 public final class com/algolia/search/model/response/ResponseDictionary$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseDictionary$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseDictionary;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5948,7 +5937,6 @@ public final class com/algolia/search/model/response/ResponseHasPendingMapping {
 
 public final class com/algolia/search/model/response/ResponseHasPendingMapping$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseHasPendingMapping$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseHasPendingMapping;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -5982,7 +5970,6 @@ public final class com/algolia/search/model/response/ResponseHitWithPosition {
 
 public final class com/algolia/search/model/response/ResponseHitWithPosition$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseHitWithPosition$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseHitWithPosition;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6012,7 +5999,6 @@ public final class com/algolia/search/model/response/ResponseListAPIKey {
 
 public final class com/algolia/search/model/response/ResponseListAPIKey$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseListAPIKey$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseListAPIKey;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6042,7 +6028,6 @@ public final class com/algolia/search/model/response/ResponseListClusters {
 
 public final class com/algolia/search/model/response/ResponseListClusters$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseListClusters$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseListClusters;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6074,7 +6059,6 @@ public final class com/algolia/search/model/response/ResponseListClusters$Cluste
 
 public final class com/algolia/search/model/response/ResponseListClusters$Cluster$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseListClusters$Cluster$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseListClusters$Cluster;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6110,7 +6094,6 @@ public final class com/algolia/search/model/response/ResponseListIndices {
 
 public final class com/algolia/search/model/response/ResponseListIndices$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseListIndices$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseListIndices;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6169,7 +6152,6 @@ public final class com/algolia/search/model/response/ResponseListIndices$Item {
 
 public final class com/algolia/search/model/response/ResponseListIndices$Item$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseListIndices$Item$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseListIndices$Item;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6203,7 +6185,6 @@ public final class com/algolia/search/model/response/ResponseListUserIDs {
 
 public final class com/algolia/search/model/response/ResponseListUserIDs$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseListUserIDs$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseListUserIDs;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6233,7 +6214,6 @@ public final class com/algolia/search/model/response/ResponseLogs {
 
 public final class com/algolia/search/model/response/ResponseLogs$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseLogs$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseLogs;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6300,7 +6280,6 @@ public final class com/algolia/search/model/response/ResponseLogs$Log {
 
 public final class com/algolia/search/model/response/ResponseLogs$Log$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseLogs$Log$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseLogs$Log;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6337,7 +6316,6 @@ public final class com/algolia/search/model/response/ResponseLogs$Log$InnerQuery
 
 public final class com/algolia/search/model/response/ResponseLogs$Log$InnerQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseLogs$Log$InnerQuery$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseLogs$Log$InnerQuery;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6367,7 +6345,6 @@ public final class com/algolia/search/model/response/ResponseMultiSearch {
 
 public final class com/algolia/search/model/response/ResponseMultiSearch$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseMultiSearch$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseMultiSearch;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6401,7 +6378,6 @@ public final class com/algolia/search/model/response/ResponseObjects {
 
 public final class com/algolia/search/model/response/ResponseObjects$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseObjects$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseObjects;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6418,9 +6394,9 @@ public final class com/algolia/search/model/response/ResponseObjects$Companion {
 public final class com/algolia/search/model/response/ResponseSearch : com/algolia/search/model/response/ResultSearch {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseSearch$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (IILjava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;)V
-	public synthetic fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (IILjava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/util/List;
 	public final fun component10 ()Ljava/lang/Boolean;
 	public final fun component11 ()Ljava/lang/Boolean;
@@ -6450,14 +6426,15 @@ public final class com/algolia/search/model/response/ResponseSearch : com/algoli
 	public final fun component33 ()Ljava/lang/Integer;
 	public final fun component34 ()Lcom/algolia/search/model/rule/RenderingContent;
 	public final fun component35 ()Lcom/algolia/search/model/analytics/ABTestID;
+	public final fun component36 ()Lkotlinx/serialization/json/JsonObject;
 	public final fun component4 ()Ljava/lang/Integer;
 	public final fun component5 ()Ljava/lang/Integer;
 	public final fun component6 ()Ljava/lang/Integer;
 	public final fun component7 ()Ljava/util/List;
 	public final fun component8 ()Ljava/lang/Integer;
 	public final fun component9 ()Ljava/lang/Long;
-	public final fun copy (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;)Lcom/algolia/search/model/response/ResponseSearch;
-	public static synthetic fun copy$default (Lcom/algolia/search/model/response/ResponseSearch;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;IILjava/lang/Object;)Lcom/algolia/search/model/response/ResponseSearch;
+	public final fun copy (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;)Lcom/algolia/search/model/response/ResponseSearch;
+	public static synthetic fun copy$default (Lcom/algolia/search/model/response/ResponseSearch;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;IILjava/lang/Object;)Lcom/algolia/search/model/response/ResponseSearch;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAbTestID ()Lcom/algolia/search/model/analytics/ABTestID;
 	public final fun getAbTestIDOrNull ()Lcom/algolia/search/model/analytics/ABTestID;
@@ -6481,6 +6458,8 @@ public final class com/algolia/search/model/response/ResponseSearch : com/algoli
 	public final fun getExhaustiveNbHitsOrNull ()Ljava/lang/Boolean;
 	public final fun getExplain ()Lcom/algolia/search/model/search/Explain;
 	public final fun getExplainOrNull ()Lcom/algolia/search/model/search/Explain;
+	public final fun getExtensions ()Lkotlinx/serialization/json/JsonObject;
+	public final fun getExtensionsOrNull ()Lkotlinx/serialization/json/JsonObject;
 	public final fun getFacetStats ()Ljava/util/Map;
 	public final fun getFacetStatsOrNull ()Ljava/util/Map;
 	public final fun getFacets ()Ljava/util/Map;
@@ -6537,7 +6516,6 @@ public final class com/algolia/search/model/response/ResponseSearch : com/algoli
 
 public final class com/algolia/search/model/response/ResponseSearch$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseSearch$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearch;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6567,7 +6545,6 @@ public final class com/algolia/search/model/response/ResponseSearch$Answer {
 
 public final class com/algolia/search/model/response/ResponseSearch$Answer$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseSearch$Answer$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearch$Answer;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6587,7 +6564,6 @@ public final class com/algolia/search/model/response/ResponseSearch$Companion {
 
 public final class com/algolia/search/model/response/ResponseSearch$Hit : java/util/Map, kotlin/jvm/internal/markers/KMappedMarker {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseSearch$Hit$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Lkotlinx/serialization/json/JsonObject;)V
 	public fun clear ()V
 	public final fun component1 ()Lkotlinx/serialization/json/JsonObject;
@@ -6680,7 +6656,6 @@ public final class com/algolia/search/model/response/ResponseSearchDictionaries 
 }
 
 public final class com/algolia/search/model/response/ResponseSearchDictionaries$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun <init> (Lkotlinx/serialization/KSerializer;)V
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearchDictionaries;
@@ -6697,15 +6672,16 @@ public final class com/algolia/search/model/response/ResponseSearchDictionaries$
 
 public final class com/algolia/search/model/response/ResponseSearchForFacets : com/algolia/search/model/response/ResultSearch {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseSearchForFacets$Companion;
-	public synthetic fun <init> (ILjava/util/List;ZJLkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/util/List;ZJ)V
+	public synthetic fun <init> (ILjava/util/List;Ljava/lang/Boolean;JLkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/util/List;Ljava/lang/Boolean;J)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/Boolean;JILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/util/List;
-	public final fun component2 ()Z
+	public final fun component2 ()Ljava/lang/Boolean;
 	public final fun component3 ()J
-	public final fun copy (Ljava/util/List;ZJ)Lcom/algolia/search/model/response/ResponseSearchForFacets;
-	public static synthetic fun copy$default (Lcom/algolia/search/model/response/ResponseSearchForFacets;Ljava/util/List;ZJILjava/lang/Object;)Lcom/algolia/search/model/response/ResponseSearchForFacets;
+	public final fun copy (Ljava/util/List;Ljava/lang/Boolean;J)Lcom/algolia/search/model/response/ResponseSearchForFacets;
+	public static synthetic fun copy$default (Lcom/algolia/search/model/response/ResponseSearchForFacets;Ljava/util/List;Ljava/lang/Boolean;JILjava/lang/Object;)Lcom/algolia/search/model/response/ResponseSearchForFacets;
 	public fun equals (Ljava/lang/Object;)Z
-	public final fun getExhaustiveFacetsCount ()Z
+	public final fun getExhaustiveFacetsCount ()Ljava/lang/Boolean;
 	public final fun getFacets ()Ljava/util/List;
 	public final fun getProcessingTimeMS ()J
 	public fun hashCode ()I
@@ -6715,7 +6691,6 @@ public final class com/algolia/search/model/response/ResponseSearchForFacets : c
 
 public final class com/algolia/search/model/response/ResponseSearchForFacets$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseSearchForFacets$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearchForFacets;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6780,7 +6755,6 @@ public final class com/algolia/search/model/response/ResponseSearchPlacesMono : 
 
 public final class com/algolia/search/model/response/ResponseSearchPlacesMono$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseSearchPlacesMono$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearchPlacesMono;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6826,7 +6800,6 @@ public final class com/algolia/search/model/response/ResponseSearchPlacesMulti :
 
 public final class com/algolia/search/model/response/ResponseSearchPlacesMulti$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseSearchPlacesMulti$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearchPlacesMulti;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6866,7 +6839,6 @@ public final class com/algolia/search/model/response/ResponseSearchRules {
 
 public final class com/algolia/search/model/response/ResponseSearchRules$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseSearchRules$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearchRules;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6923,7 +6895,6 @@ public final class com/algolia/search/model/response/ResponseSearchSynonyms {
 
 public final class com/algolia/search/model/response/ResponseSearchSynonyms$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseSearchSynonyms$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearchSynonyms;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -6939,7 +6910,6 @@ public final class com/algolia/search/model/response/ResponseSearchSynonyms$Comp
 
 public final class com/algolia/search/model/response/ResponseSearchSynonyms$Hit {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseSearchSynonyms$Hit$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Lcom/algolia/search/model/synonym/Synonym;Lkotlinx/serialization/json/JsonObject;)V
 	public synthetic fun <init> (Lcom/algolia/search/model/synonym/Synonym;Lkotlinx/serialization/json/JsonObject;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lcom/algolia/search/model/synonym/Synonym;
@@ -6987,7 +6957,6 @@ public final class com/algolia/search/model/response/ResponseSearchUserID {
 
 public final class com/algolia/search/model/response/ResponseSearchUserID$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseSearchUserID$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearchUserID;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7017,7 +6986,6 @@ public final class com/algolia/search/model/response/ResponseSearches {
 
 public final class com/algolia/search/model/response/ResponseSearches$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseSearches$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseSearches;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7047,7 +7015,6 @@ public final class com/algolia/search/model/response/ResponseTopUserID {
 
 public final class com/algolia/search/model/response/ResponseTopUserID$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseTopUserID$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseTopUserID;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7091,7 +7058,6 @@ public final class com/algolia/search/model/response/ResponseUserID {
 
 public final class com/algolia/search/model/response/ResponseUserID$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseUserID$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseUserID;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7157,7 +7123,6 @@ public final class com/algolia/search/model/response/ResponseVariant {
 
 public final class com/algolia/search/model/response/ResponseVariant$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/ResponseVariant$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/ResponseVariant;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7223,7 +7188,6 @@ public final class com/algolia/search/model/response/creation/Creation {
 
 public final class com/algolia/search/model/response/creation/Creation$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/creation/Creation$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/creation/Creation;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7257,7 +7221,6 @@ public final class com/algolia/search/model/response/creation/CreationABTest : c
 
 public final class com/algolia/search/model/response/creation/CreationABTest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/creation/CreationABTest$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/creation/CreationABTest;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7289,7 +7252,6 @@ public final class com/algolia/search/model/response/creation/CreationAPIKey {
 
 public final class com/algolia/search/model/response/creation/CreationAPIKey$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/creation/CreationAPIKey$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/creation/CreationAPIKey;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7323,7 +7285,6 @@ public final class com/algolia/search/model/response/creation/CreationObject : c
 
 public final class com/algolia/search/model/response/creation/CreationObject$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/creation/CreationObject$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/creation/CreationObject;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7353,7 +7314,6 @@ public final class com/algolia/search/model/response/deletion/Deletion {
 
 public final class com/algolia/search/model/response/deletion/Deletion$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/deletion/Deletion$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/deletion/Deletion;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7387,7 +7347,6 @@ public final class com/algolia/search/model/response/deletion/DeletionABTest : c
 
 public final class com/algolia/search/model/response/deletion/DeletionABTest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/deletion/DeletionABTest$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/deletion/DeletionABTest;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7432,7 +7391,6 @@ public final class com/algolia/search/model/response/deletion/DeletionIndex : co
 
 public final class com/algolia/search/model/response/deletion/DeletionIndex$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/deletion/DeletionIndex$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/deletion/DeletionIndex;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7466,7 +7424,6 @@ public final class com/algolia/search/model/response/deletion/DeletionObject : c
 
 public final class com/algolia/search/model/response/deletion/DeletionObject$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/deletion/DeletionObject$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/deletion/DeletionObject;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7496,7 +7453,6 @@ public final class com/algolia/search/model/response/revision/Revision {
 
 public final class com/algolia/search/model/response/revision/Revision$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/revision/Revision$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/revision/Revision;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7530,7 +7486,6 @@ public final class com/algolia/search/model/response/revision/RevisionABTest : c
 
 public final class com/algolia/search/model/response/revision/RevisionABTest$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/revision/RevisionABTest$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/revision/RevisionABTest;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7562,7 +7517,6 @@ public final class com/algolia/search/model/response/revision/RevisionAPIKey {
 
 public final class com/algolia/search/model/response/revision/RevisionAPIKey$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/revision/RevisionAPIKey$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/revision/RevisionAPIKey;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7594,7 +7548,6 @@ public final class com/algolia/search/model/response/revision/RevisionIndex : co
 
 public final class com/algolia/search/model/response/revision/RevisionIndex$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/revision/RevisionIndex$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/revision/RevisionIndex;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7628,7 +7581,6 @@ public final class com/algolia/search/model/response/revision/RevisionObject : c
 
 public final class com/algolia/search/model/response/revision/RevisionObject$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/revision/RevisionObject$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/revision/RevisionObject;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7662,7 +7614,6 @@ public final class com/algolia/search/model/response/revision/RevisionSynonym : 
 
 public final class com/algolia/search/model/response/revision/RevisionSynonym$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/response/revision/RevisionSynonym$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/response/revision/RevisionSynonym;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7678,7 +7629,6 @@ public final class com/algolia/search/model/response/revision/RevisionSynonym$Co
 
 public abstract class com/algolia/search/model/rule/Alternatives {
 	public static final field Companion Lcom/algolia/search/model/rule/Alternatives$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 }
 
 public final class com/algolia/search/model/rule/Alternatives$Companion : kotlinx/serialization/KSerializer {
@@ -7762,7 +7712,6 @@ public final class com/algolia/search/model/rule/AutomaticFacetFilters {
 
 public final class com/algolia/search/model/rule/AutomaticFacetFilters$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/rule/AutomaticFacetFilters$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/AutomaticFacetFilters;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7802,7 +7751,6 @@ public final class com/algolia/search/model/rule/Condition {
 
 public final class com/algolia/search/model/rule/Condition$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/rule/Condition$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/Condition;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7818,7 +7766,6 @@ public final class com/algolia/search/model/rule/Condition$Companion {
 
 public final class com/algolia/search/model/rule/Consequence {
 	public static final field Companion Lcom/algolia/search/model/rule/Consequence$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> ()V
 	public fun <init> (Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/Query;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/model/rule/RenderingContent;)V
 	public synthetic fun <init> (Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/Query;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/model/rule/RenderingContent;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
@@ -7858,7 +7805,6 @@ public final class com/algolia/search/model/rule/Consequence$Companion : kotlinx
 
 public final class com/algolia/search/model/rule/Edit {
 	public static final field Companion Lcom/algolia/search/model/rule/Edit$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
@@ -7900,7 +7846,6 @@ public final class com/algolia/search/model/rule/FacetOrdering {
 
 public final class com/algolia/search/model/rule/FacetOrdering$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/rule/FacetOrdering$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/FacetOrdering;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7934,7 +7879,6 @@ public final class com/algolia/search/model/rule/FacetValuesOrder {
 
 public final class com/algolia/search/model/rule/FacetValuesOrder$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/rule/FacetValuesOrder$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/FacetValuesOrder;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -7964,7 +7908,6 @@ public final class com/algolia/search/model/rule/FacetsOrder {
 
 public final class com/algolia/search/model/rule/FacetsOrder$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/rule/FacetsOrder$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/FacetsOrder;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8049,7 +7992,6 @@ public final class com/algolia/search/model/rule/Promotion$Multiple : com/algoli
 
 public final class com/algolia/search/model/rule/Promotion$Multiple$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/rule/Promotion$Multiple$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/Promotion$Multiple;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8081,7 +8023,6 @@ public final class com/algolia/search/model/rule/Promotion$Single : com/algolia/
 
 public final class com/algolia/search/model/rule/Promotion$Single$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/rule/Promotion$Single$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/Promotion$Single;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8118,7 +8059,6 @@ public final class com/algolia/search/model/rule/RenderingContent {
 
 public final class com/algolia/search/model/rule/RenderingContent$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/rule/RenderingContent$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/RenderingContent;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8159,7 +8099,6 @@ public final class com/algolia/search/model/rule/Rule {
 
 public final class com/algolia/search/model/rule/Rule$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/rule/Rule$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/Rule;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8211,7 +8150,6 @@ public final class com/algolia/search/model/rule/RuleQuery {
 
 public final class com/algolia/search/model/rule/RuleQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/rule/RuleQuery$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/RuleQuery;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8232,18 +8170,6 @@ public final class com/algolia/search/model/rule/SortRule : java/lang/Enum {
 	public static final field Hidden Lcom/algolia/search/model/rule/SortRule;
 	public static fun valueOf (Ljava/lang/String;)Lcom/algolia/search/model/rule/SortRule;
 	public static fun values ()[Lcom/algolia/search/model/rule/SortRule;
-}
-
-public final class com/algolia/search/model/rule/SortRule$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
-	public static final field INSTANCE Lcom/algolia/search/model/rule/SortRule$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
-	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/SortRule;
-	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
-	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
-	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/algolia/search/model/rule/SortRule;)V
-	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
-	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/algolia/search/model/rule/SortRule$Companion {
@@ -8268,7 +8194,6 @@ public final class com/algolia/search/model/rule/TimeRange {
 
 public final class com/algolia/search/model/rule/TimeRange$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/rule/TimeRange$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/rule/TimeRange;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8306,7 +8231,6 @@ public final class com/algolia/search/model/search/Alternative {
 
 public final class com/algolia/search/model/search/Alternative$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/Alternative$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/Alternative;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8585,7 +8509,6 @@ public final class com/algolia/search/model/search/AnswersQuery : com/algolia/se
 
 public final class com/algolia/search/model/search/AnswersQuery$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/AnswersQuery$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/AnswersQuery;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8601,7 +8524,6 @@ public final class com/algolia/search/model/search/AnswersQuery$Companion {
 
 public abstract class com/algolia/search/model/search/AroundPrecision {
 	public static final field Companion Lcom/algolia/search/model/search/AroundPrecision$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 }
 
 public final class com/algolia/search/model/search/AroundPrecision$Companion : kotlinx/serialization/KSerializer {
@@ -8649,7 +8571,6 @@ public final class com/algolia/search/model/search/AroundPrecision$Ranges : com/
 
 public abstract class com/algolia/search/model/search/AroundRadius : com/algolia/search/model/internal/Raw {
 	public static final field Companion Lcom/algolia/search/model/search/AroundRadius$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun getRaw ()Ljava/lang/Object;
 	public fun getRaw ()Ljava/lang/String;
@@ -8796,7 +8717,6 @@ public final class com/algolia/search/model/search/Explain {
 
 public final class com/algolia/search/model/search/Explain$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/Explain$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/Explain;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8864,7 +8784,6 @@ public final class com/algolia/search/model/search/Facet {
 
 public final class com/algolia/search/model/search/Facet$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/Facet$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/Facet;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8906,7 +8825,6 @@ public final class com/algolia/search/model/search/FacetStats {
 
 public final class com/algolia/search/model/search/FacetStats$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/FacetStats$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/FacetStats;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8943,7 +8861,6 @@ public final class com/algolia/search/model/search/HighlightResult {
 
 public final class com/algolia/search/model/search/HighlightResult$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/HighlightResult$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/HighlightResult;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -8959,7 +8876,6 @@ public final class com/algolia/search/model/search/HighlightResult$Companion {
 
 public abstract class com/algolia/search/model/search/IgnorePlurals {
 	public static final field Companion Lcom/algolia/search/model/search/IgnorePlurals$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 }
 
 public final class com/algolia/search/model/search/IgnorePlurals$Companion : kotlinx/serialization/KSerializer {
@@ -9260,7 +9176,6 @@ public final class com/algolia/search/model/search/Match {
 
 public final class com/algolia/search/model/search/Match$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/Match$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/Match;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -9316,7 +9231,6 @@ public final class com/algolia/search/model/search/MatchLevel$Partial : com/algo
 
 public final class com/algolia/search/model/search/MatchedGeoLocation {
 	public static final field Companion Lcom/algolia/search/model/search/MatchedGeoLocation$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> (Lcom/algolia/search/model/search/Point;Ljava/lang/Long;)V
 	public synthetic fun <init> (Lcom/algolia/search/model/search/Point;Ljava/lang/Long;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lcom/algolia/search/model/search/Point;
@@ -9364,7 +9278,6 @@ public final class com/algolia/search/model/search/Personalization {
 
 public final class com/algolia/search/model/search/Personalization$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/Personalization$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/Personalization;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -9435,9 +9348,9 @@ public final class com/algolia/search/model/search/Polygon$Companion : kotlinx/s
 public final class com/algolia/search/model/search/Query : com/algolia/search/model/params/SearchParameters {
 	public static final field Companion Lcom/algolia/search/model/search/Query$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (IIILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/Set;Ljava/lang/Integer;Ljava/lang/Boolean;Lcom/algolia/search/model/search/SortFacetsBy;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/search/TypoTolerance;Ljava/lang/Boolean;Ljava/util/List;Lcom/algolia/search/model/search/Point;Ljava/lang/Boolean;Lcom/algolia/search/model/search/AroundRadius;Lcom/algolia/search/model/search/AroundPrecision;Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/IgnorePlurals;Lcom/algolia/search/model/search/RemoveStopWords;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Integer;Lcom/algolia/search/model/insights/UserToken;Lcom/algolia/search/model/search/QueryType;Lcom/algolia/search/model/search/RemoveWordIfNoResults;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/ExactOnSingleWordQuery;Ljava/util/List;Lcom/algolia/search/model/settings/Distinct;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/Set;Ljava/lang/Integer;Ljava/lang/Boolean;Lcom/algolia/search/model/search/SortFacetsBy;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/search/TypoTolerance;Ljava/lang/Boolean;Ljava/util/List;Lcom/algolia/search/model/search/Point;Ljava/lang/Boolean;Lcom/algolia/search/model/search/AroundRadius;Lcom/algolia/search/model/search/AroundPrecision;Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/IgnorePlurals;Lcom/algolia/search/model/search/RemoveStopWords;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Integer;Lcom/algolia/search/model/insights/UserToken;Lcom/algolia/search/model/search/QueryType;Lcom/algolia/search/model/search/RemoveWordIfNoResults;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/ExactOnSingleWordQuery;Ljava/util/List;Lcom/algolia/search/model/settings/Distinct;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;)V
-	public synthetic fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/Set;Ljava/lang/Integer;Ljava/lang/Boolean;Lcom/algolia/search/model/search/SortFacetsBy;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/search/TypoTolerance;Ljava/lang/Boolean;Ljava/util/List;Lcom/algolia/search/model/search/Point;Ljava/lang/Boolean;Lcom/algolia/search/model/search/AroundRadius;Lcom/algolia/search/model/search/AroundPrecision;Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/IgnorePlurals;Lcom/algolia/search/model/search/RemoveStopWords;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Integer;Lcom/algolia/search/model/insights/UserToken;Lcom/algolia/search/model/search/QueryType;Lcom/algolia/search/model/search/RemoveWordIfNoResults;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/ExactOnSingleWordQuery;Ljava/util/List;Lcom/algolia/search/model/settings/Distinct;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (IIILjava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/Set;Ljava/lang/Integer;Ljava/lang/Boolean;Lcom/algolia/search/model/search/SortFacetsBy;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/search/TypoTolerance;Ljava/lang/Boolean;Ljava/util/List;Lcom/algolia/search/model/search/Point;Ljava/lang/Boolean;Lcom/algolia/search/model/search/AroundRadius;Lcom/algolia/search/model/search/AroundPrecision;Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/IgnorePlurals;Lcom/algolia/search/model/search/RemoveStopWords;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Integer;Lcom/algolia/search/model/insights/UserToken;Lcom/algolia/search/model/search/QueryType;Lcom/algolia/search/model/search/RemoveWordIfNoResults;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/ExactOnSingleWordQuery;Ljava/util/List;Lcom/algolia/search/model/settings/Distinct;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;Lkotlinx/serialization/json/JsonObject;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/Set;Ljava/lang/Integer;Ljava/lang/Boolean;Lcom/algolia/search/model/search/SortFacetsBy;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/search/TypoTolerance;Ljava/lang/Boolean;Ljava/util/List;Lcom/algolia/search/model/search/Point;Ljava/lang/Boolean;Lcom/algolia/search/model/search/AroundRadius;Lcom/algolia/search/model/search/AroundPrecision;Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/IgnorePlurals;Lcom/algolia/search/model/search/RemoveStopWords;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Integer;Lcom/algolia/search/model/insights/UserToken;Lcom/algolia/search/model/search/QueryType;Lcom/algolia/search/model/search/RemoveWordIfNoResults;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/ExactOnSingleWordQuery;Ljava/util/List;Lcom/algolia/search/model/settings/Distinct;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;Lkotlinx/serialization/json/JsonObject;)V
+	public synthetic fun <init> (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/Set;Ljava/lang/Integer;Ljava/lang/Boolean;Lcom/algolia/search/model/search/SortFacetsBy;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/search/TypoTolerance;Ljava/lang/Boolean;Ljava/util/List;Lcom/algolia/search/model/search/Point;Ljava/lang/Boolean;Lcom/algolia/search/model/search/AroundRadius;Lcom/algolia/search/model/search/AroundPrecision;Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/IgnorePlurals;Lcom/algolia/search/model/search/RemoveStopWords;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Integer;Lcom/algolia/search/model/insights/UserToken;Lcom/algolia/search/model/search/QueryType;Lcom/algolia/search/model/search/RemoveWordIfNoResults;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/ExactOnSingleWordQuery;Ljava/util/List;Lcom/algolia/search/model/settings/Distinct;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;Lkotlinx/serialization/json/JsonObject;IIILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/lang/String;
 	public final fun component10 ()Ljava/util/Set;
 	public final fun component11 ()Ljava/lang/Integer;
@@ -9505,10 +9418,11 @@ public final class com/algolia/search/model/search/Query : com/algolia/search/mo
 	public final fun component68 ()Ljava/lang/Boolean;
 	public final fun component69 ()Ljava/lang/Boolean;
 	public final fun component7 ()Ljava/util/List;
+	public final fun component70 ()Lkotlinx/serialization/json/JsonObject;
 	public final fun component8 ()Ljava/util/List;
 	public final fun component9 ()Ljava/lang/Boolean;
-	public final fun copy (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/Set;Ljava/lang/Integer;Ljava/lang/Boolean;Lcom/algolia/search/model/search/SortFacetsBy;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/search/TypoTolerance;Ljava/lang/Boolean;Ljava/util/List;Lcom/algolia/search/model/search/Point;Ljava/lang/Boolean;Lcom/algolia/search/model/search/AroundRadius;Lcom/algolia/search/model/search/AroundPrecision;Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/IgnorePlurals;Lcom/algolia/search/model/search/RemoveStopWords;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Integer;Lcom/algolia/search/model/insights/UserToken;Lcom/algolia/search/model/search/QueryType;Lcom/algolia/search/model/search/RemoveWordIfNoResults;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/ExactOnSingleWordQuery;Ljava/util/List;Lcom/algolia/search/model/settings/Distinct;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;)Lcom/algolia/search/model/search/Query;
-	public static synthetic fun copy$default (Lcom/algolia/search/model/search/Query;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/Set;Ljava/lang/Integer;Ljava/lang/Boolean;Lcom/algolia/search/model/search/SortFacetsBy;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/search/TypoTolerance;Ljava/lang/Boolean;Ljava/util/List;Lcom/algolia/search/model/search/Point;Ljava/lang/Boolean;Lcom/algolia/search/model/search/AroundRadius;Lcom/algolia/search/model/search/AroundPrecision;Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/IgnorePlurals;Lcom/algolia/search/model/search/RemoveStopWords;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Integer;Lcom/algolia/search/model/insights/UserToken;Lcom/algolia/search/model/search/QueryType;Lcom/algolia/search/model/search/RemoveWordIfNoResults;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/ExactOnSingleWordQuery;Ljava/util/List;Lcom/algolia/search/model/settings/Distinct;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;IIILjava/lang/Object;)Lcom/algolia/search/model/search/Query;
+	public final fun copy (Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/Set;Ljava/lang/Integer;Ljava/lang/Boolean;Lcom/algolia/search/model/search/SortFacetsBy;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/search/TypoTolerance;Ljava/lang/Boolean;Ljava/util/List;Lcom/algolia/search/model/search/Point;Ljava/lang/Boolean;Lcom/algolia/search/model/search/AroundRadius;Lcom/algolia/search/model/search/AroundPrecision;Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/IgnorePlurals;Lcom/algolia/search/model/search/RemoveStopWords;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Integer;Lcom/algolia/search/model/insights/UserToken;Lcom/algolia/search/model/search/QueryType;Lcom/algolia/search/model/search/RemoveWordIfNoResults;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/ExactOnSingleWordQuery;Ljava/util/List;Lcom/algolia/search/model/settings/Distinct;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;Lkotlinx/serialization/json/JsonObject;)Lcom/algolia/search/model/search/Query;
+	public static synthetic fun copy$default (Lcom/algolia/search/model/search/Query;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/Set;Ljava/lang/Integer;Ljava/lang/Boolean;Lcom/algolia/search/model/search/SortFacetsBy;Ljava/util/List;Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/search/TypoTolerance;Ljava/lang/Boolean;Ljava/util/List;Lcom/algolia/search/model/search/Point;Ljava/lang/Boolean;Lcom/algolia/search/model/search/AroundRadius;Lcom/algolia/search/model/search/AroundPrecision;Ljava/lang/Integer;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/IgnorePlurals;Lcom/algolia/search/model/search/RemoveStopWords;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Integer;Lcom/algolia/search/model/insights/UserToken;Lcom/algolia/search/model/search/QueryType;Lcom/algolia/search/model/search/RemoveWordIfNoResults;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/ExactOnSingleWordQuery;Ljava/util/List;Lcom/algolia/search/model/settings/Distinct;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/util/List;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/Boolean;Ljava/util/List;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Boolean;Ljava/lang/Boolean;Lkotlinx/serialization/json/JsonObject;IIILjava/lang/Object;)Lcom/algolia/search/model/search/Query;
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getAdvancedSyntax ()Ljava/lang/Boolean;
 	public fun getAdvancedSyntaxFeatures ()Ljava/util/List;
@@ -9534,6 +9448,7 @@ public final class com/algolia/search/model/search/Query : com/algolia/search/mo
 	public fun getEnableRules ()Ljava/lang/Boolean;
 	public fun getExactOnSingleWordQuery ()Lcom/algolia/search/model/search/ExactOnSingleWordQuery;
 	public fun getExplainModules ()Ljava/util/List;
+	public final fun getExtensions ()Lkotlinx/serialization/json/JsonObject;
 	public fun getFacetFilters ()Ljava/util/List;
 	public fun getFacetingAfterDistinct ()Ljava/lang/Boolean;
 	public fun getFacets ()Ljava/util/Set;
@@ -9604,6 +9519,7 @@ public final class com/algolia/search/model/search/Query : com/algolia/search/mo
 	public fun setEnableRules (Ljava/lang/Boolean;)V
 	public fun setExactOnSingleWordQuery (Lcom/algolia/search/model/search/ExactOnSingleWordQuery;)V
 	public fun setExplainModules (Ljava/util/List;)V
+	public final fun setExtensions (Lkotlinx/serialization/json/JsonObject;)V
 	public fun setFacetFilters (Ljava/util/List;)V
 	public fun setFacetingAfterDistinct (Ljava/lang/Boolean;)V
 	public fun setFacets (Ljava/util/Set;)V
@@ -9655,7 +9571,6 @@ public final class com/algolia/search/model/search/Query : com/algolia/search/mo
 
 public final class com/algolia/search/model/search/Query$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/Query$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/Query;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -9753,7 +9668,6 @@ public final class com/algolia/search/model/search/RankingInfo {
 
 public final class com/algolia/search/model/search/RankingInfo$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/RankingInfo$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/RankingInfo;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -9986,7 +9900,6 @@ public final class com/algolia/search/model/search/RecommendSearchOptions : com/
 
 public final class com/algolia/search/model/search/RecommendSearchOptions$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/RecommendSearchOptions$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/RecommendSearchOptions;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -10002,7 +9915,6 @@ public final class com/algolia/search/model/search/RecommendSearchOptions$Compan
 
 public abstract class com/algolia/search/model/search/RemoveStopWords {
 	public static final field Companion Lcom/algolia/search/model/search/RemoveStopWords$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 }
 
 public final class com/algolia/search/model/search/RemoveStopWords$Companion : kotlinx/serialization/KSerializer {
@@ -10383,7 +10295,6 @@ public final class com/algolia/search/model/search/SearchParameters : com/algoli
 
 public final class com/algolia/search/model/search/SearchParameters$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/SearchParameters$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/SearchParameters;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -10441,7 +10352,6 @@ public final class com/algolia/search/model/search/SnippetResult {
 
 public final class com/algolia/search/model/search/SnippetResult$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/search/SnippetResult$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/SnippetResult;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -10494,7 +10404,6 @@ public final class com/algolia/search/model/search/SortFacetsBy$Other : com/algo
 
 public abstract class com/algolia/search/model/search/TypoTolerance : com/algolia/search/model/internal/Raw {
 	public static final field Companion Lcom/algolia/search/model/search/TypoTolerance$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public synthetic fun <init> (Ljava/lang/String;Lkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public synthetic fun getRaw ()Ljava/lang/Object;
 	public fun getRaw ()Ljava/lang/String;
@@ -10576,7 +10485,6 @@ public final class com/algolia/search/model/settings/AdvancedSyntaxFeatures$Othe
 
 public abstract class com/algolia/search/model/settings/AttributeForFaceting {
 	public static final field Companion Lcom/algolia/search/model/settings/AttributeForFaceting$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public abstract fun getAttribute ()Lcom/algolia/search/model/Attribute;
 }
 
@@ -10693,7 +10601,6 @@ public final class com/algolia/search/model/settings/DecompoundedAttributes {
 
 public final class com/algolia/search/model/settings/DecompoundedAttributes$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/settings/DecompoundedAttributes$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/settings/DecompoundedAttributes;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -10839,7 +10746,6 @@ public final class com/algolia/search/model/settings/RankingCriterion$Words : co
 
 public abstract class com/algolia/search/model/settings/SearchableAttribute {
 	public static final field Companion Lcom/algolia/search/model/settings/SearchableAttribute$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 }
 
 public final class com/algolia/search/model/settings/SearchableAttribute$Companion : kotlinx/serialization/KSerializer {
@@ -11065,7 +10971,6 @@ public final class com/algolia/search/model/settings/Settings : com/algolia/sear
 
 public final class com/algolia/search/model/settings/Settings$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/settings/Settings$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/settings/Settings;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -11295,7 +11200,6 @@ public final class com/algolia/search/model/settings/SettingsKey$UserData : com/
 
 public abstract class com/algolia/search/model/synonym/Synonym {
 	public static final field Companion Lcom/algolia/search/model/synonym/Synonym$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public abstract fun getObjectID ()Lcom/algolia/search/model/ObjectID;
 }
 
@@ -11404,7 +11308,6 @@ public final class com/algolia/search/model/synonym/Synonym$Placeholder$Token : 
 
 public final class com/algolia/search/model/synonym/SynonymQuery {
 	public static final field Companion Lcom/algolia/search/model/synonym/SynonymQuery$Companion;
-	public static final field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun <init> ()V
 	public fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;)V
 	public synthetic fun <init> (Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
@@ -11567,7 +11470,6 @@ public final class com/algolia/search/model/task/TaskIndex : com/algolia/search/
 
 public final class com/algolia/search/model/task/TaskIndex$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/task/TaskIndex$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/task/TaskIndex;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
@@ -11599,7 +11501,6 @@ public final class com/algolia/search/model/task/TaskInfo {
 
 public final class com/algolia/search/model/task/TaskInfo$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/algolia/search/model/task/TaskInfo$$serializer;
-	public static final synthetic field descriptor Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/task/TaskInfo;
 	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;

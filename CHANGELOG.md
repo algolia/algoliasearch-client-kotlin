@@ -1,3 +1,9 @@
+# 2.1.9
+
+### Fixed
+- **Personalization**: delete profile response (#410)
+- **Config**: add connect timeout config (#411)
+
 # 2.1.8
 
 ### Fixed
