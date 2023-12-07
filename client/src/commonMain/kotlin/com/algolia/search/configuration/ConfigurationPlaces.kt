@@ -3,7 +3,9 @@
 package com.algolia.search.configuration
 
 import com.algolia.search.client.ClientPlaces
+import com.algolia.search.configuration.internal.*
 import com.algolia.search.configuration.internal.ConfigurationPlacesImpl
+import com.algolia.search.configuration.internal.DEFAULT_CONNECT_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
@@ -28,6 +30,7 @@ public fun ConfigurationPlaces(
     engine: HttpClientEngine? = null,
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
     logger: Logger = Logger.Simple,
+    connectTimeout: Long = DEFAULT_CONNECT_TIMEOUT,
 ): ConfigurationPlaces = ConfigurationPlacesImpl(
     writeTimeout = writeTimeout,
     readTimeout = readTimeout,
@@ -37,4 +40,5 @@ public fun ConfigurationPlaces(
     engine = engine,
     httpClientConfig = httpClientConfig,
     logger = logger,
+    connectTimeout = connectTimeout,
 )

@@ -18,5 +18,4 @@ rootProject.name = "algoliasearch-client-kotlin"
 include(":client")
 include(":client-bom")
 
-enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

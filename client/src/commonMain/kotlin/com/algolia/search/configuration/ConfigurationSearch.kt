@@ -3,6 +3,7 @@
 package com.algolia.search.configuration
 
 import com.algolia.search.client.ClientSearch
+import com.algolia.search.configuration.internal.*
 import com.algolia.search.configuration.internal.ConfigurationSearchImpl
 import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
@@ -46,6 +47,8 @@ public fun ConfigurationSearch(
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
     compression: Compression = Compression.None,
     logger: Logger = Logger.Simple,
+    connectTimeout: Long = DEFAULT_CONNECT_TIMEOUT,
+
 ): ConfigurationSearch = ConfigurationSearchImpl(
     applicationID = applicationID,
     apiKey = apiKey,
@@ -57,5 +60,6 @@ public fun ConfigurationSearch(
     engine = engine,
     httpClientConfig = httpClientConfig,
     compression = compression,
-    logger = logger
+    logger = logger,
+    connectTimeout = connectTimeout,
 )

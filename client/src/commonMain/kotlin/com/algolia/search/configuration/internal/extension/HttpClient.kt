@@ -32,7 +32,9 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
     install(AlgoliaAgent)
 
     // Timeout
-    install(HttpTimeout)
+    install(HttpTimeout) {
+        connectTimeoutMillis = configuration.connectTimeout
+    }
 
     // Gzip Compression
     install(ClientCompression) {

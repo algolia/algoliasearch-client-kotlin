@@ -1,6 +1,8 @@
 package com.algolia.search.configuration
 
+import com.algolia.search.configuration.internal.*
 import com.algolia.search.configuration.internal.ConfigurationRecommendImpl
+import com.algolia.search.configuration.internal.DEFAULT_CONNECT_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
@@ -43,6 +45,7 @@ public fun ConfigurationRecommend(
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
     compression: Compression = Compression.None,
     logger: Logger = Logger.Simple,
+    connectTimeout: Long = DEFAULT_CONNECT_TIMEOUT,
 ): ConfigurationRecommend = ConfigurationRecommendImpl(
     applicationID = applicationID,
     apiKey = apiKey,
@@ -55,4 +58,5 @@ public fun ConfigurationRecommend(
     httpClientConfig = httpClientConfig,
     compression = compression,
     logger = logger,
+    connectTimeout = connectTimeout,
 )

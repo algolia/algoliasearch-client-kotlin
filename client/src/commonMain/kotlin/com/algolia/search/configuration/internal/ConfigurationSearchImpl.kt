@@ -28,6 +28,7 @@ internal class ConfigurationSearchImpl(
     override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)?,
     override val compression: Compression,
     override val logger: Logger,
+    override val connectTimeout: Long,
 ) : ConfigurationSearch {
 
     override val httpClient: HttpClient = getHttpClient()
