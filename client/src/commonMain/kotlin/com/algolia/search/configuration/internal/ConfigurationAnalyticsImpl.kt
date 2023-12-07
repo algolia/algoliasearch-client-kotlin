@@ -28,6 +28,7 @@ internal class ConfigurationAnalyticsImpl(
     override val engine: HttpClientEngine?,
     override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)?,
     override val logger: Logger,
+    override val connectTimeout: Long,
 ) : ConfigurationAnalytics {
 
     override val compression: Compression = Compression.None

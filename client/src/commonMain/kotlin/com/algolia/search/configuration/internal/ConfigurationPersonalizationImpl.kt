@@ -28,6 +28,7 @@ internal class ConfigurationPersonalizationImpl(
     override val engine: HttpClientEngine?,
     override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)?,
     override val logger: Logger,
+    override val connectTimeout: Long,
 ) : ConfigurationPersonalization {
 
     override val compression: Compression = Compression.None

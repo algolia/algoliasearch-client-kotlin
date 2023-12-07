@@ -3,7 +3,9 @@
 package com.algolia.search.configuration
 
 import com.algolia.search.client.ClientPersonalization
+import com.algolia.search.configuration.internal.*
 import com.algolia.search.configuration.internal.ConfigurationPersonalizationImpl
+import com.algolia.search.configuration.internal.DEFAULT_CONNECT_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_LOG_LEVEL
 import com.algolia.search.configuration.internal.DEFAULT_READ_TIMEOUT
 import com.algolia.search.configuration.internal.DEFAULT_WRITE_TIMEOUT
@@ -52,6 +54,7 @@ public fun ConfigurationPersonalization(
     engine: HttpClientEngine? = null,
     httpClientConfig: (HttpClientConfig<*>.() -> Unit)? = null,
     logger: Logger = Logger.Simple,
+    connectTimeout: Long = DEFAULT_CONNECT_TIMEOUT,
 ): ConfigurationPersonalization = ConfigurationPersonalizationImpl(
     applicationID = applicationID,
     apiKey = apiKey,
@@ -64,4 +67,5 @@ public fun ConfigurationPersonalization(
     engine = engine,
     httpClientConfig = httpClientConfig,
     logger = logger,
+    connectTimeout = connectTimeout,
 )

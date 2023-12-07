@@ -24,6 +24,11 @@ public interface Configuration : Closeable {
     public val readTimeout: Long
 
     /**
+     * The timeout when connecting to the server.
+     */
+    public val connectTimeout: Long
+
+    /**
      * [LogLevel] to display in the console.
      */
     public val logLevel: LogLevel

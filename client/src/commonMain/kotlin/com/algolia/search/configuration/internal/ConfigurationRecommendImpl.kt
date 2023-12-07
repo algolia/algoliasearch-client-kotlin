@@ -28,6 +28,7 @@ internal class ConfigurationRecommendImpl(
     override val httpClientConfig: (HttpClientConfig<*>.() -> Unit)?,
     override val compression: Compression,
     override val logger: Logger,
+    override val connectTimeout: Long,
 ) : ConfigurationRecommend {
 
     override val httpClient: HttpClient = getHttpClient()
