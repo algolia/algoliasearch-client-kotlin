@@ -35,8 +35,8 @@ public class InsightsClient(
    * @param parameters Query parameters to apply to the current query.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun del(path: String, parameters: Map<kotlin.String, Any>? = null, requestOptions: RequestOptions? = null): JsonObject {
-    require(path.isNotBlank()) { "Parameter `path` is required when calling `del`." }
+  public suspend fun customDelete(path: String, parameters: Map<kotlin.String, Any>? = null, requestOptions: RequestOptions? = null): JsonObject {
+    require(path.isNotBlank()) { "Parameter `path` is required when calling `customDelete`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.DELETE,
       path = "/1{path}".replace("{path}", path),
@@ -57,8 +57,8 @@ public class InsightsClient(
    * @param parameters Query parameters to apply to the current query.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun get(path: String, parameters: Map<kotlin.String, Any>? = null, requestOptions: RequestOptions? = null): JsonObject {
-    require(path.isNotBlank()) { "Parameter `path` is required when calling `get`." }
+  public suspend fun customGet(path: String, parameters: Map<kotlin.String, Any>? = null, requestOptions: RequestOptions? = null): JsonObject {
+    require(path.isNotBlank()) { "Parameter `path` is required when calling `customGet`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
       path = "/1{path}".replace("{path}", path),
@@ -80,10 +80,34 @@ public class InsightsClient(
    * @param body Parameters to send with the custom request.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun post(path: String, parameters: Map<kotlin.String, Any>? = null, body: JsonObject? = null, requestOptions: RequestOptions? = null): JsonObject {
-    require(path.isNotBlank()) { "Parameter `path` is required when calling `post`." }
+  public suspend fun customPost(path: String, parameters: Map<kotlin.String, Any>? = null, body: JsonObject? = null, requestOptions: RequestOptions? = null): JsonObject {
+    require(path.isNotBlank()) { "Parameter `path` is required when calling `customPost`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
+      path = "/1{path}".replace("{path}", path),
+      query = buildMap {
+        parameters?.let { putAll(it) }
+      },
+      body = body,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Send requests to the Algolia REST API.
+   * This method allow you to send requests to the Algolia REST API.
+   * @param path Path of the endpoint, anything after \"/1\" must be specified.
+   * @param parameters Query parameters to apply to the current query.
+   * @param body Parameters to send with the custom request.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun customPut(path: String, parameters: Map<kotlin.String, Any>? = null, body: JsonObject? = null, requestOptions: RequestOptions? = null): JsonObject {
+    require(path.isNotBlank()) { "Parameter `path` is required when calling `customPut`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.PUT,
       path = "/1{path}".replace("{path}", path),
       query = buildMap {
         parameters?.let { putAll(it) }
@@ -107,30 +131,6 @@ public class InsightsClient(
       method = RequestMethod.POST,
       path = listOf("1", "events"),
       body = insightsEvents,
-    )
-    return requester.execute(
-      requestConfig = requestConfig,
-      requestOptions = requestOptions,
-    )
-  }
-
-  /**
-   * Send requests to the Algolia REST API.
-   * This method allow you to send requests to the Algolia REST API.
-   * @param path Path of the endpoint, anything after \"/1\" must be specified.
-   * @param parameters Query parameters to apply to the current query.
-   * @param body Parameters to send with the custom request.
-   * @param requestOptions additional request configuration.
-   */
-  public suspend fun put(path: String, parameters: Map<kotlin.String, Any>? = null, body: JsonObject? = null, requestOptions: RequestOptions? = null): JsonObject {
-    require(path.isNotBlank()) { "Parameter `path` is required when calling `put`." }
-    val requestConfig = RequestConfig(
-      method = RequestMethod.PUT,
-      path = "/1{path}".replace("{path}", path),
-      query = buildMap {
-        parameters?.let { putAll(it) }
-      },
-      body = body,
     )
     return requester.execute(
       requestConfig = requestConfig,
