@@ -37,4 +37,4 @@ public data class SourceBigQuery(
 
   /** The name of the column that contains the unique ID, used as `objectID` in Algolia. */
   @SerialName(value = "uniqueIDColumn") val uniqueIDColumn: String? = null,
-) : SourceUpdateInput, SourceInput
+) : SourceInput, SourceUpdateInput

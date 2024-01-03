@@ -21,4 +21,4 @@ public data class SourceJSON(
   @SerialName(value = "uniqueIDColumn") val uniqueIDColumn: String? = null,
 
   @SerialName(value = "method") val method: MethodType? = null,
-) : SourceUpdateInput, SourceInput
+) : SourceInput, SourceUpdateInput
