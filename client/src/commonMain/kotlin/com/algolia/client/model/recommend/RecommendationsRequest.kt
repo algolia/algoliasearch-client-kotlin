@@ -14,6 +14,7 @@ import kotlinx.serialization.json.*
  *
  * Implementations:
  * - [RecommendationsQuery]
+ * - [RecommendedForYouQuery]
  * - [TrendingFacetsQuery]
  * - [TrendingItemsQuery]
  */
@@ -30,6 +31,7 @@ internal class RecommendationsRequestSerializer : JsonContentPolymorphicSerializ
       element is JsonObject -> TrendingItemsQuery.serializer()
       element is JsonObject -> TrendingFacetsQuery.serializer()
       element is JsonObject -> RecommendationsQuery.serializer()
+      element is JsonObject -> RecommendedForYouQuery.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

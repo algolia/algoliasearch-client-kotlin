@@ -2,15 +2,15 @@
 package com.algolia.client.model.recommend
 
 import kotlinx.serialization.*
-import kotlinx.serialization.json.*
 
 /**
- * GetRecommendationsResponse
- *
- * @param results
+ * Recommended for you model.
  */
 @Serializable
-public data class GetRecommendationsResponse(
+public enum class RecommendedForYouModel(public val value: kotlin.String) {
 
-  @SerialName(value = "results") val results: List<RecommendationsResults>? = null,
-)
+  @SerialName(value = "recommended-for-you")
+  RecommendedForYou("recommended-for-you");
+
+  override fun toString(): kotlin.String = value
+}

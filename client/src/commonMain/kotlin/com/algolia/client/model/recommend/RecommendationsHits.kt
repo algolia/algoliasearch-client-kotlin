@@ -5,16 +5,16 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * RecommendHits
+ * RecommendationsHits
  *
  * @param hits
  * @param query Text to search for in an index.
  * @param params URL-encoded string of all search parameters.
  */
 @Serializable
-public data class RecommendHits(
+public data class RecommendationsHits(
 
-  @SerialName(value = "hits") val hits: List<RecommendHit>,
+  @SerialName(value = "hits") val hits: List<RecommendationsHit>,
 
   /** Text to search for in an index. */
   @SerialName(value = "query") val query: String? = null,

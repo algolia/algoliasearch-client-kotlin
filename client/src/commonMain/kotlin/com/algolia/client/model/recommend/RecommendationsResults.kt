@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * RecommendationsResponse
+ * RecommendationsResults
  *
  * @param hitsPerPage Number of hits per page.
  * @param nbHits Number of hits the search query matched.
@@ -39,7 +39,7 @@ import kotlinx.serialization.json.*
  * @param params URL-encoded string of all search parameters.
  */
 @Serializable
-public data class RecommendationsResponse(
+public data class RecommendationsResults(
 
   /** Number of hits per page. */
   @SerialName(value = "hitsPerPage") val hitsPerPage: Int,
@@ -56,7 +56,7 @@ public data class RecommendationsResponse(
   /** Time the server took to process the request, in milliseconds. */
   @SerialName(value = "processingTimeMS") val processingTimeMS: Int,
 
-  @SerialName(value = "hits") val hits: List<RecommendHit>,
+  @SerialName(value = "hits") val hits: List<RecommendationsHit>,
 
   /** A/B test ID. This is only included in the response for indices that are part of an A/B test. */
   @SerialName(value = "abTestID") val abTestID: Int? = null,

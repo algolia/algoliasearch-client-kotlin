@@ -12,7 +12,6 @@ import kotlinx.serialization.json.*
  * @param page Requested page (the first page is page 0).
  * @param hitsPerPage Maximum number of hits per page.
  * @param enabled Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.
- * @param requestOptions Request options to send with the API call.
  */
 @Serializable
 public data class SearchRecommendRulesParams(
@@ -31,7 +30,4 @@ public data class SearchRecommendRulesParams(
 
   /** Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved. */
   @SerialName(value = "enabled") val enabled: Boolean? = null,
-
-  /** Request options to send with the API call. */
-  @SerialName(value = "requestOptions") val requestOptions: List<JsonObject>? = null,
 )

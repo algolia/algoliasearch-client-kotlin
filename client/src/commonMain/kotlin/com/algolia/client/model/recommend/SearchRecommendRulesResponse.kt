@@ -8,9 +8,9 @@ import kotlinx.serialization.json.*
  * SearchRecommendRulesResponse
  *
  * @param hits Fetched rules.
- * @param nbHits Number of fetched rules.
- * @param page Current page.
- * @param nbPages Number of pages.
+ * @param nbHits Number of hits the search query matched.
+ * @param page Page to retrieve (the first page is `0`, not `1`).
+ * @param nbPages Number of pages of results for the current query.
  */
 @Serializable
 public data class SearchRecommendRulesResponse(
@@ -18,12 +18,12 @@ public data class SearchRecommendRulesResponse(
   /** Fetched rules. */
   @SerialName(value = "hits") val hits: List<RuleResponse>,
 
-  /** Number of fetched rules. */
+  /** Number of hits the search query matched. */
   @SerialName(value = "nbHits") val nbHits: Int,
 
-  /** Current page. */
+  /** Page to retrieve (the first page is `0`, not `1`). */
   @SerialName(value = "page") val page: Int,
 
-  /** Number of pages. */
+  /** Number of pages of results for the current query. */
   @SerialName(value = "nbPages") val nbPages: Int,
 )

@@ -37,7 +37,7 @@ public data class RecommendHit(
   val distinctSeqID: Int? = null,
 
   val additionalProperties: Map<String, JsonElement>? = null,
-)
+) : RecommendationsHit
 
 internal object RecommendHitSerializer : KSerializer<RecommendHit> {
 

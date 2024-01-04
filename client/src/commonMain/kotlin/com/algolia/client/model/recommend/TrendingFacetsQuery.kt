@@ -7,26 +7,26 @@ import kotlinx.serialization.json.*
 /**
  * TrendingFacetsQuery
  *
- * @param facetName Facet name for trending models.
  * @param indexName Algolia index name.
- * @param model
+ * @param facetName Facet name for trending models.
  * @param threshold Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.
  * @param maxRecommendations Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
+ * @param model
  */
 @Serializable
 public data class TrendingFacetsQuery(
 
-  /** Facet name for trending models. */
-  @SerialName(value = "facetName") val facetName: String,
-
   /** Algolia index name. */
   @SerialName(value = "indexName") val indexName: String,
 
-  @SerialName(value = "model") val model: TrendingFacetsModel? = null,
+  /** Facet name for trending models. */
+  @SerialName(value = "facetName") val facetName: String,
 
   /** Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.  */
   @SerialName(value = "threshold") val threshold: Int? = null,
 
   /** Maximum number of recommendations to retrieve. If 0, all recommendations will be returned. */
   @SerialName(value = "maxRecommendations") val maxRecommendations: Int? = null,
+
+  @SerialName(value = "model") val model: TrendingFacetsModel? = null,
 ) : RecommendationsRequest

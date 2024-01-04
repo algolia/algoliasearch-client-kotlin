@@ -5,26 +5,22 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * RecommendationsQuery
+ * RecommendedForYouQuery
  *
  * @param indexName Algolia index name.
  * @param model
- * @param objectID Unique object identifier.
  * @param threshold Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.
  * @param maxRecommendations Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
  * @param queryParameters
  * @param fallbackParameters
  */
 @Serializable
-public data class RecommendationsQuery(
+public data class RecommendedForYouQuery(
 
   /** Algolia index name. */
   @SerialName(value = "indexName") val indexName: String,
 
-  @SerialName(value = "model") val model: RecommendationModels,
-
-  /** Unique object identifier. */
-  @SerialName(value = "objectID") val objectID: String,
+  @SerialName(value = "model") val model: RecommendedForYouModel,
 
   /** Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.  */
   @SerialName(value = "threshold") val threshold: Int? = null,
@@ -32,7 +28,7 @@ public data class RecommendationsQuery(
   /** Maximum number of recommendations to retrieve. If 0, all recommendations will be returned. */
   @SerialName(value = "maxRecommendations") val maxRecommendations: Int? = null,
 
-  @SerialName(value = "queryParameters") val queryParameters: SearchParamsObject? = null,
+  @SerialName(value = "queryParameters") val queryParameters: RecommendedForYouQueryParameters? = null,
 
-  @SerialName(value = "fallbackParameters") val fallbackParameters: SearchParamsObject? = null,
+  @SerialName(value = "fallbackParameters") val fallbackParameters: RecommendedForYouQueryParameters? = null,
 ) : RecommendationsRequest
