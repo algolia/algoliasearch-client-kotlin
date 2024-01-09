@@ -1,3 +1,7 @@
+## [3.0.0-beta.9](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.8...3.0.0-beta.9)
+
+- [461796bb7](https://github.com/algolia/api-clients-automation/commit/461796bb7) feat(clients): add missing clients ([#2479](https://github.com/algolia/api-clients-automation/pull/2479)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [3.0.0-beta.8](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.7...3.0.0-beta.8)
 
 - [ae6adfbf7](https://github.com/algolia/api-clients-automation/commit/ae6adfbf7) fix(specs): port recommend changes ([#2476](https://github.com/algolia/api-clients-automation/pull/2476)) by [@shortcuts](https://github.com/shortcuts/)
