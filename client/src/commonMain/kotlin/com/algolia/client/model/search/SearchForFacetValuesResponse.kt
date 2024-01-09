@@ -8,9 +8,18 @@ import kotlinx.serialization.json.*
  * SearchForFacetValuesResponse
  *
  * @param facetHits
+ * @param exhaustiveFacetsCount See the `facetsCount` field of the `exhaustive` object in the response.
+ * @param processingTimeMS Time the server took to process the request, in milliseconds.
  */
 @Serializable
 public data class SearchForFacetValuesResponse(
 
   @SerialName(value = "facetHits") val facetHits: List<FacetHits>,
+
+  /** See the `facetsCount` field of the `exhaustive` object in the response. */
+  @Deprecated(message = "This property is deprecated.")
+  @SerialName(value = "exhaustiveFacetsCount") val exhaustiveFacetsCount: Boolean,
+
+  /** Time the server took to process the request, in milliseconds. */
+  @SerialName(value = "processingTimeMS") val processingTimeMS: Int? = null,
 ) : SearchResult
