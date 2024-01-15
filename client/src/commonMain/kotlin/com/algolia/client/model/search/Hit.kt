@@ -39,10 +39,10 @@ internal object HitSerializer : KSerializer<Hit> {
 
   override val descriptor: SerialDescriptor = buildClassSerialDescriptor("Hit") {
     element<String>("objectID")
-    element<Map<kotlin.String, HighlightResult>>("_highlightResult")
-    element<Map<kotlin.String, SnippetResult>>("_snippetResult")
-    element<RankingInfo>("_rankingInfo")
-    element<Int>("_distinctSeqID")
+    element<Map<kotlin.String, HighlightResult>>("_highlightResult", isOptional = true)
+    element<Map<kotlin.String, SnippetResult>>("_snippetResult", isOptional = true)
+    element<RankingInfo>("_rankingInfo", isOptional = true)
+    element<Int>("_distinctSeqID", isOptional = true)
   }
 
   override fun deserialize(decoder: Decoder): Hit {

@@ -44,10 +44,10 @@ internal object RecommendHitSerializer : KSerializer<RecommendHit> {
   override val descriptor: SerialDescriptor = buildClassSerialDescriptor("RecommendHit") {
     element<String>("objectID")
     element<Double>("_score")
-    element<Map<kotlin.String, HighlightResult>>("_highlightResult")
-    element<Map<kotlin.String, SnippetResult>>("_snippetResult")
-    element<RankingInfo>("_rankingInfo")
-    element<Int>("_distinctSeqID")
+    element<Map<kotlin.String, HighlightResult>>("_highlightResult", isOptional = true)
+    element<Map<kotlin.String, SnippetResult>>("_snippetResult", isOptional = true)
+    element<RankingInfo>("_rankingInfo", isOptional = true)
+    element<Int>("_distinctSeqID", isOptional = true)
   }
 
   override fun deserialize(decoder: Decoder): RecommendHit {

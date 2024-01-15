@@ -45,10 +45,10 @@ internal object DictionaryEntrySerializer : KSerializer<DictionaryEntry> {
   override val descriptor: SerialDescriptor = buildClassSerialDescriptor("DictionaryEntry") {
     element<String>("objectID")
     element<String>("language")
-    element<String>("word")
-    element<List<String>>("words")
-    element<List<String>>("decomposition")
-    element<DictionaryEntryState>("state")
+    element<String>("word", isOptional = true)
+    element<List<String>>("words", isOptional = true)
+    element<List<String>>("decomposition", isOptional = true)
+    element<DictionaryEntryState>("state", isOptional = true)
   }
 
   override fun deserialize(decoder: Decoder): DictionaryEntry {
