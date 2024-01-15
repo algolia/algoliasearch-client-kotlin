@@ -7,42 +7,42 @@ import kotlinx.serialization.json.*
 /**
  * Click event after an Algolia request.  Use this event to track when users click items in the search results. If you're building your category pages with Algolia, you'll also use this event.
  *
- * @param eventName Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
+ * @param eventName The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
  * @param eventType
- * @param index Name of the Algolia index.
- * @param objectIDs List of object identifiers for items of an Algolia index.
- * @param positions Position of the clicked objects in the search results.  The first search result has a position of 1 (not 0). You must provide 1 `position` for each `objectID`.
+ * @param index The name of an Algolia index.
+ * @param objectIDs The object IDs of the records that are part of the event.
+ * @param positions The position of the clicked item the search results.  The first search result has a position of 1 (not 0). You must provide 1 `position` for each `objectID`.
  * @param queryID Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response.
- * @param userToken Anonymous or pseudonymous user identifier.   > **Note**: Never include personally identifiable information in user tokens.
- * @param timestamp Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
- * @param authenticatedUserToken User token for authenticated users.
+ * @param userToken An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens.
+ * @param authenticatedUserToken An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens.
+ * @param timestamp The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
  */
 @Serializable
 public data class ClickedObjectIDsAfterSearch(
 
-  /** Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  */
+  /** The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  */
   @SerialName(value = "eventName") val eventName: String,
 
   @SerialName(value = "eventType") val eventType: ClickEvent,
 
-  /** Name of the Algolia index. */
+  /** The name of an Algolia index. */
   @SerialName(value = "index") val index: String,
 
-  /** List of object identifiers for items of an Algolia index. */
+  /** The object IDs of the records that are part of the event. */
   @SerialName(value = "objectIDs") val objectIDs: List<String>,
 
-  /** Position of the clicked objects in the search results.  The first search result has a position of 1 (not 0). You must provide 1 `position` for each `objectID`.  */
+  /** The position of the clicked item the search results.  The first search result has a position of 1 (not 0). You must provide 1 `position` for each `objectID`.  */
   @SerialName(value = "positions") val positions: List<Int>,
 
   /** Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response.  */
   @SerialName(value = "queryID") val queryID: String,
 
-  /** Anonymous or pseudonymous user identifier.   > **Note**: Never include personally identifiable information in user tokens.  */
+  /** An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens.  */
   @SerialName(value = "userToken") val userToken: String,
 
-  /** Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.  */
-  @SerialName(value = "timestamp") val timestamp: Long? = null,
-
-  /** User token for authenticated users. */
+  /** An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens.  */
   @SerialName(value = "authenticatedUserToken") val authenticatedUserToken: String? = null,
+
+  /** The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.  */
+  @SerialName(value = "timestamp") val timestamp: Long? = null,
 ) : EventsItems

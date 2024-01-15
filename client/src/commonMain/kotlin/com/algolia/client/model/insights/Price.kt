@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
 import kotlin.jvm.JvmInline
 
 /**
- * The price of the item. This should be the final price, inclusive of any discounts in effect.
+ * The total price of a product, including any discounts, in units of `currency`.
  *
  * Implementations:
  * - [Double] - *[Price.of]*

@@ -7,49 +7,52 @@ import kotlinx.serialization.json.*
 /**
  * Use this event to track when users add items to their shopping cart after a previous Algolia request. If you're building your category pages with Algolia, you'll also use this event.
  *
- * @param eventName Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
+ * @param eventName The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
  * @param eventType
  * @param eventSubtype
- * @param index Name of the Algolia index.
+ * @param index The name of an Algolia index.
  * @param queryID Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response.
- * @param objectIDs List of object identifiers for items of an Algolia index.
- * @param userToken Anonymous or pseudonymous user identifier.   > **Note**: Never include personally identifiable information in user tokens.
- * @param objectData Extra information about the records involved in the event—for example, to add price and quantities of purchased products.  If provided, must be the same length as `objectIDs`.
- * @param currency If you include pricing information in the `objectData` parameter, you must also specify the currency as ISO-4217 currency code, such as USD or EUR.
- * @param timestamp Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
- * @param authenticatedUserToken User token for authenticated users.
+ * @param objectIDs The object IDs of the records that are part of the event.
+ * @param userToken An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens.
+ * @param authenticatedUserToken An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens.
+ * @param currency Three-letter [currency code](https://www.iso.org/iso-4217-currency-codes.html).
+ * @param objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
+ * @param timestamp The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
+ * @param `value`
  */
 @Serializable
 public data class AddedToCartObjectIDsAfterSearch(
 
-  /** Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  */
+  /** The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  */
   @SerialName(value = "eventName") val eventName: String,
 
   @SerialName(value = "eventType") val eventType: ConversionEvent,
 
   @SerialName(value = "eventSubtype") val eventSubtype: AddToCartEvent,
 
-  /** Name of the Algolia index. */
+  /** The name of an Algolia index. */
   @SerialName(value = "index") val index: String,
 
   /** Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response.  */
   @SerialName(value = "queryID") val queryID: String,
 
-  /** List of object identifiers for items of an Algolia index. */
+  /** The object IDs of the records that are part of the event. */
   @SerialName(value = "objectIDs") val objectIDs: List<String>,
 
-  /** Anonymous or pseudonymous user identifier.   > **Note**: Never include personally identifiable information in user tokens.  */
+  /** An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens.  */
   @SerialName(value = "userToken") val userToken: String,
 
-  /** Extra information about the records involved in the event—for example, to add price and quantities of purchased products.  If provided, must be the same length as `objectIDs`.  */
-  @SerialName(value = "objectData") val objectData: List<ObjectDataAfterSearch>? = null,
+  /** An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens.  */
+  @SerialName(value = "authenticatedUserToken") val authenticatedUserToken: String? = null,
 
-  /** If you include pricing information in the `objectData` parameter, you must also specify the currency as ISO-4217 currency code, such as USD or EUR. */
+  /** Three-letter [currency code](https://www.iso.org/iso-4217-currency-codes.html). */
   @SerialName(value = "currency") val currency: String? = null,
 
-  /** Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.  */
+  /** Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.  */
+  @SerialName(value = "objectData") val objectData: List<ObjectDataAfterSearch>? = null,
+
+  /** The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.  */
   @SerialName(value = "timestamp") val timestamp: Long? = null,
 
-  /** User token for authenticated users. */
-  @SerialName(value = "authenticatedUserToken") val authenticatedUserToken: String? = null,
+  @SerialName(value = "value") val `value`: Value? = null,
 ) : EventsItems

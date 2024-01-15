@@ -7,34 +7,34 @@ import kotlinx.serialization.json.*
 /**
  * Use this method to capture active filters. For example, when browsing a category page, users see content filtered on that specific category.
  *
- * @param eventName Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
+ * @param eventName The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
  * @param eventType
- * @param index Name of the Algolia index.
+ * @param index The name of an Algolia index.
  * @param filters Facet filters.  Each facet filter string must be URL-encoded, such as, `discount:10%25`.
- * @param userToken Anonymous or pseudonymous user identifier.   > **Note**: Never include personally identifiable information in user tokens.
- * @param timestamp Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
- * @param authenticatedUserToken User token for authenticated users.
+ * @param userToken An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens.
+ * @param authenticatedUserToken An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens.
+ * @param timestamp The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
  */
 @Serializable
 public data class ViewedFilters(
 
-  /** Can contain up to 64 ASCII characters.   Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  */
+  /** The name of the event, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.  */
   @SerialName(value = "eventName") val eventName: String,
 
   @SerialName(value = "eventType") val eventType: ViewEvent,
 
-  /** Name of the Algolia index. */
+  /** The name of an Algolia index. */
   @SerialName(value = "index") val index: String,
 
   /** Facet filters.  Each facet filter string must be URL-encoded, such as, `discount:10%25`.  */
   @SerialName(value = "filters") val filters: List<String>,
 
-  /** Anonymous or pseudonymous user identifier.   > **Note**: Never include personally identifiable information in user tokens.  */
+  /** An anonymous or pseudonymous user identifier.  > **Note**: Never include personally identifiable information in user tokens.  */
   @SerialName(value = "userToken") val userToken: String,
 
-  /** Time of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.  */
-  @SerialName(value = "timestamp") val timestamp: Long? = null,
-
-  /** User token for authenticated users. */
+  /** An identifier for authenticated users.  > **Note**: Never include personally identifiable information in user tokens.  */
   @SerialName(value = "authenticatedUserToken") val authenticatedUserToken: String? = null,
+
+  /** The timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.  */
+  @SerialName(value = "timestamp") val timestamp: Long? = null,
 ) : EventsItems

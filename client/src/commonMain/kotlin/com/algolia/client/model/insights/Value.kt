@@ -11,38 +11,38 @@ import kotlinx.serialization.json.*
 import kotlin.jvm.JvmInline
 
 /**
- * The absolute value of the discount for this product, in units of `currency`.
+ * Total monetary value of this event in units of `currency`.
  *
  * Implementations:
- * - [Double] - *[Discount.of]*
- * - [String] - *[Discount.of]*
+ * - [Double] - *[Value.of]*
+ * - [String] - *[Value.of]*
  */
-@Serializable(DiscountSerializer::class)
-public sealed interface Discount {
+@Serializable(ValueSerializer::class)
+public sealed interface Value {
   @Serializable
   @JvmInline
-  public value class DoubleValue(public val value: Double) : Discount
+  public value class DoubleValue(public val value: Double) : Value
 
   @Serializable
   @JvmInline
-  public value class StringValue(public val value: String) : Discount
+  public value class StringValue(public val value: String) : Value
 
   public companion object {
 
-    public fun of(value: Double): Discount {
+    public fun of(value: Double): Value {
       return DoubleValue(value)
     }
-    public fun of(value: String): Discount {
+    public fun of(value: String): Value {
       return StringValue(value)
     }
   }
 }
 
-internal class DiscountSerializer : JsonContentPolymorphicSerializer<Discount>(Discount::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Discount> {
+internal class ValueSerializer : JsonContentPolymorphicSerializer<Value>(Value::class) {
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Value> {
     return when {
-      element.isDouble -> Discount.DoubleValue.serializer()
-      element.isString -> Discount.StringValue.serializer()
+      element.isDouble -> Value.DoubleValue.serializer()
+      element.isString -> Value.StringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

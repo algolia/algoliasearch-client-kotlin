@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * ObjectData
  *
  * @param price
- * @param quantity The quantity of the purchased or added-to-cart item. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item.
+ * @param quantity The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item.
  * @param discount
  */
 @Serializable
@@ -16,7 +16,7 @@ public data class ObjectData(
 
   @SerialName(value = "price") val price: Price? = null,
 
-  /** The quantity of the purchased or added-to-cart item. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item. */
+  /** The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item.  */
   @SerialName(value = "quantity") val quantity: Int? = null,
 
   @SerialName(value = "discount") val discount: Discount? = null,

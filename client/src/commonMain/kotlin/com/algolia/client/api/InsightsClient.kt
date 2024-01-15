@@ -121,6 +121,24 @@ public class InsightsClient(
   }
 
   /**
+   * Delete user token.
+   * Delete all events related to a certain user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](https://www.algolia.com/doc/rest-api/personalization/#delete-a-user-profile).
+   * @param userToken The user token for which to delete all associated events.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun deleteUserToken(userToken: String, requestOptions: RequestOptions? = null) {
+    require(userToken.isNotBlank()) { "Parameter `userToken` is required when calling `deleteUserToken`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.DELETE,
+      path = listOf("1", "usertokens", "$userToken"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * Send events.
    * Send a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
    * @param insightsEvents

@@ -37,17 +37,17 @@ internal class EventsItemsSerializer : JsonContentPolymorphicSerializer<EventsIt
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<EventsItems> {
     return when {
       element is JsonObject && element.containsKey("positions") && element.containsKey("queryID") && element.containsKey("eventType") -> ClickedObjectIDsAfterSearch.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("queryID") && element.containsKey("objectIDs") -> AddedToCartObjectIDsAfterSearch.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("objectIDs") && element.containsKey("objectData") -> PurchasedObjectIDsAfterSearch.serializer()
       element is JsonObject && element.containsKey("queryID") && element.containsKey("eventType") -> ConvertedObjectIDsAfterSearch.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("objectIDs") -> ClickedObjectIDs.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("objectIDs") -> PurchasedObjectIDs.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("objectIDs") -> AddedToCartObjectIDs.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("objectIDs") -> ConvertedObjectIDs.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("filters") -> ClickedFilters.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("filters") -> ConvertedFilters.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("objectIDs") -> ViewedObjectIDs.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("filters") -> ViewedFilters.serializer()
-      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("queryID") && element.containsKey("objectIDs") -> AddedToCartObjectIDsAfterSearch.serializer()
-      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("objectIDs") -> AddedToCartObjectIDs.serializer()
-      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("objectIDs") -> PurchasedObjectIDs.serializer()
-      element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("queryID") && element.containsKey("objectIDs") -> PurchasedObjectIDsAfterSearch.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
