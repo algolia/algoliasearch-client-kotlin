@@ -196,28 +196,6 @@ public class SearchClient(
   }
 
   /**
-   * Delete all synonyms.
-   * Delete all synonyms in the index.
-   * @param indexName Index on which to perform the request.
-   * @param forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices.
-   * @param requestOptions additional request configuration.
-   */
-  public suspend fun clearAllSynonyms(indexName: String, forwardToReplicas: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedAtResponse {
-    require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `clearAllSynonyms`." }
-    val requestConfig = RequestConfig(
-      method = RequestMethod.POST,
-      path = listOf("1", "indexes", "$indexName", "synonyms", "clear"),
-      query = buildMap {
-        forwardToReplicas?.let { put("forwardToReplicas", it) }
-      },
-    )
-    return requester.execute(
-      requestConfig = requestConfig,
-      requestOptions = requestOptions,
-    )
-  }
-
-  /**
    * Delete all records from an index.
    * Delete the records but leave settings and index-specific API keys untouched.
    * @param indexName Index on which to perform the request.
@@ -247,6 +225,28 @@ public class SearchClient(
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "indexes", "$indexName", "rules", "clear"),
+      query = buildMap {
+        forwardToReplicas?.let { put("forwardToReplicas", it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Delete all synonyms.
+   * Delete all synonyms in the index.
+   * @param indexName Index on which to perform the request.
+   * @param forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun clearSynonyms(indexName: String, forwardToReplicas: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedAtResponse {
+    require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `clearSynonyms`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "indexes", "$indexName", "synonyms", "clear"),
       query = buildMap {
         forwardToReplicas?.let { put("forwardToReplicas", it) }
       },
