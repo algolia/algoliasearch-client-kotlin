@@ -21,14 +21,7 @@ public class MonitoringClient(
   }
 
   override val requester: Requester = requesterOf(clientName = "Monitoring", appId = appId, apiKey = apiKey, options = options) {
-    listOf(
-      Host("$appId-dsn.algolia.net", CallType.Read),
-      Host("$appId.algolia.net", CallType.Write),
-    ) + mutableListOf(
-      Host("$appId-1.algolianet.com"),
-      Host("$appId-2.algolianet.com"),
-      Host("$appId-3.algolianet.com"),
-    ).apply { shuffle() }
+    listOf(Host("status.algolia.com"))
   }
 
   /**
