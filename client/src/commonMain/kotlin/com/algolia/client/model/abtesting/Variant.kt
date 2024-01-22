@@ -24,6 +24,7 @@ import kotlinx.serialization.json.*
  * @param trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
  * @param trafficPercentage A/B test traffic percentage.
  * @param userCount Number of users during the A/B test.
+ * @param trackedUserCount Number of users that performed a tracked search during the A/B test.
  * @param filterEffects
  */
 @Serializable
@@ -79,6 +80,9 @@ public data class Variant(
 
   /** Number of users during the A/B test. */
   @SerialName(value = "userCount") val userCount: Int,
+
+  /** Number of users that performed a tracked search during the A/B test. */
+  @SerialName(value = "trackedUserCount") val trackedUserCount: Int,
 
   @SerialName(value = "filterEffects") val filterEffects: FilterEffects? = null,
 )
