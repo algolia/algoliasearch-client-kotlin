@@ -1184,23 +1184,15 @@ public class SearchClient(
    * Search for synonyms.
    * Search for synonyms in your index. You can control and filter the search with parameters. To get all synonyms, send an empty request body.
    * @param indexName Index on which to perform the request.
-   * @param type Search for specific [types of synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#the-different-types-of-synonyms).
-   * @param page Returns the requested page number (the first page is 0). Page size is set by `hitsPerPage`. When null, there's no pagination.  (default to 0)
-   * @param hitsPerPage Maximum number of hits per page. (default to 100)
    * @param searchSynonymsParams Body of the `searchSynonyms` operation.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun searchSynonyms(indexName: String, type: SynonymType? = null, page: Int? = null, hitsPerPage: Int? = null, searchSynonymsParams: SearchSynonymsParams? = null, requestOptions: RequestOptions? = null): SearchSynonymsResponse {
+  public suspend fun searchSynonyms(indexName: String, searchSynonymsParams: SearchSynonymsParams? = null, requestOptions: RequestOptions? = null): SearchSynonymsResponse {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `searchSynonyms`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "indexes", "$indexName", "synonyms", "search"),
       isRead = true,
-      query = buildMap {
-        type?.let { put("type", it) }
-        page?.let { put("page", it) }
-        hitsPerPage?.let { put("hitsPerPage", it) }
-      },
       body = searchSynonymsParams,
     )
     return requester.execute(

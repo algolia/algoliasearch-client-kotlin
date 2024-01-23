@@ -8,10 +8,21 @@ import kotlinx.serialization.json.*
  * SearchSynonymsParams
  *
  * @param query Text to search for in an index.
+ * @param type
+ * @param page Page to retrieve (the first page is `0`, not `1`).
+ * @param hitsPerPage Number of hits per page.
  */
 @Serializable
 public data class SearchSynonymsParams(
 
   /** Text to search for in an index. */
   @SerialName(value = "query") val query: String? = null,
+
+  @SerialName(value = "type") val type: SynonymType? = null,
+
+  /** Page to retrieve (the first page is `0`, not `1`). */
+  @SerialName(value = "page") val page: Int? = null,
+
+  /** Number of hits per page. */
+  @SerialName(value = "hitsPerPage") val hitsPerPage: Int? = null,
 )
