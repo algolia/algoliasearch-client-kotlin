@@ -29,10 +29,8 @@ public class QuerySuggestionsClient(
   }
 
   /**
+   * Create a configuration.
    * Create a new Query Suggestions configuration.  You can have up to 100 configurations per Algolia application.
-   *
-   * Required API Key ACLs:
-   *   - editSettings
    * @param querySuggestionsConfigurationWithIndex
    * @param requestOptions additional request configuration.
    */
@@ -49,6 +47,7 @@ public class QuerySuggestionsClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -70,6 +69,7 @@ public class QuerySuggestionsClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -91,6 +91,7 @@ public class QuerySuggestionsClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -114,6 +115,7 @@ public class QuerySuggestionsClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -137,10 +139,8 @@ public class QuerySuggestionsClient(
   }
 
   /**
+   * Delete a configuration.
    * Delete a Query Suggestions configuration.  Deleting only removes the configuration and stops updates to the Query Suggestions index. The Query Suggestions index itself is not deleted.
-   *
-   * Required API Key ACLs:
-   *   - editSettings
    * @param indexName Query Suggestions index name.
    * @param requestOptions additional request configuration.
    */
@@ -157,10 +157,8 @@ public class QuerySuggestionsClient(
   }
 
   /**
+   * List configurations.
    * List all Query Suggestions configurations of your Algolia application.
-   *
-   * Required API Key ACLs:
-   *   - settings
    * @param requestOptions additional request configuration.
    */
   public suspend fun getAllConfigs(requestOptions: RequestOptions? = null): List<QuerySuggestionsConfigurationResponse> {
@@ -175,10 +173,8 @@ public class QuerySuggestionsClient(
   }
 
   /**
+   * Get a configuration.
    * Get a single Query Suggestions configuration.
-   *
-   * Required API Key ACLs:
-   *   - settings
    * @param indexName Query Suggestions index name.
    * @param requestOptions additional request configuration.
    */
@@ -195,10 +191,8 @@ public class QuerySuggestionsClient(
   }
 
   /**
+   * Get configuration status.
    * Report the status of a Query Suggestions index.
-   *
-   * Required API Key ACLs:
-   *   - settings
    * @param indexName Query Suggestions index name.
    * @param requestOptions additional request configuration.
    */
@@ -215,10 +209,8 @@ public class QuerySuggestionsClient(
   }
 
   /**
+   * Get logs.
    * Get the logs for a single Query Suggestions index.
-   *
-   * Required API Key ACLs:
-   *   - settings
    * @param indexName Query Suggestions index name.
    * @param requestOptions additional request configuration.
    */
@@ -235,10 +227,8 @@ public class QuerySuggestionsClient(
   }
 
   /**
+   * Update a configuration.
    * Update a QuerySuggestions configuration.
-   *
-   * Required API Key ACLs:
-   *   - editSettings
    * @param indexName Query Suggestions index name.
    * @param querySuggestionsConfiguration
    * @param requestOptions additional request configuration.

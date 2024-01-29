@@ -29,6 +29,7 @@ public class PersonalizationClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -50,6 +51,7 @@ public class PersonalizationClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -71,6 +73,7 @@ public class PersonalizationClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -94,6 +97,7 @@ public class PersonalizationClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -117,10 +121,8 @@ public class PersonalizationClient(
   }
 
   /**
+   * Delete a user profile.
    * Delete the user profile and all its associated data.  Returns, as part of the response, a date until which the data can safely be considered as deleted for the given user. This means if you send events for the given user before this date, they will be ignored. Any data received after the deletedUntil date will start building a new user profile.  It might take a couple hours for the deletion request to be fully processed.
-   *
-   * Required API Key ACLs:
-   *   - recommendation
    * @param userToken userToken representing the user for which to fetch the Personalization profile.
    * @param requestOptions additional request configuration.
    */
@@ -137,10 +139,8 @@ public class PersonalizationClient(
   }
 
   /**
+   * Get the current strategy.
    * The strategy contains information on the events and facets that impact user profiles and personalized search results.
-   *
-   * Required API Key ACLs:
-   *   - recommendation
    * @param requestOptions additional request configuration.
    */
   public suspend fun getPersonalizationStrategy(requestOptions: RequestOptions? = null): PersonalizationStrategyParams {
@@ -155,10 +155,8 @@ public class PersonalizationClient(
   }
 
   /**
+   * Get a user profile.
    * Get the user profile built from Personalization strategy.  The profile is structured by facet name used in the strategy. Each facet value is mapped to its score. Each score represents the user affinity for a specific facet value given the userToken past events and the Personalization strategy defined. Scores are bounded to 20. The last processed event timestamp is provided using the ISO 8601 format for debugging purposes.
-   *
-   * Required API Key ACLs:
-   *   - recommendation
    * @param userToken userToken representing the user for which to fetch the Personalization profile.
    * @param requestOptions additional request configuration.
    */
@@ -175,10 +173,8 @@ public class PersonalizationClient(
   }
 
   /**
+   * Set a new strategy.
    * A strategy defines the events and facets that impact user profiles and personalized search results.
-   *
-   * Required API Key ACLs:
-   *   - recommendation
    * @param personalizationStrategyParams
    * @param requestOptions additional request configuration.
    */

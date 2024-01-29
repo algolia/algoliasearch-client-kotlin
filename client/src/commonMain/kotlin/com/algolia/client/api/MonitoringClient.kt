@@ -25,6 +25,7 @@ public class MonitoringClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -46,6 +47,7 @@ public class MonitoringClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -67,6 +69,7 @@ public class MonitoringClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -90,6 +93,7 @@ public class MonitoringClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -113,6 +117,7 @@ public class MonitoringClient(
   }
 
   /**
+   * List incidents for selected clusters.
    * List known incidents for selected clusters.
    * @param clusters Subset of clusters, separated by comma.
    * @param requestOptions additional request configuration.
@@ -130,6 +135,7 @@ public class MonitoringClient(
   }
 
   /**
+   * List statuses of selected clusters.
    * Report whether a cluster is operational.
    * @param clusters Subset of clusters, separated by comma.
    * @param requestOptions additional request configuration.
@@ -147,6 +153,7 @@ public class MonitoringClient(
   }
 
   /**
+   * List incidents.
    * List known incidents for all clusters.
    * @param requestOptions additional request configuration.
    */
@@ -162,6 +169,7 @@ public class MonitoringClient(
   }
 
   /**
+   * Get indexing times.
    * List the average times for indexing operations for selected clusters.
    * @param clusters Subset of clusters, separated by comma.
    * @param requestOptions additional request configuration.
@@ -179,6 +187,7 @@ public class MonitoringClient(
   }
 
   /**
+   * List servers.
    * List the servers belonging to clusters.  The response depends on whether you authenticate your API request:  - With authentication, the response lists the servers assigned to your Algolia application's cluster.  - Without authentication, the response lists the servers for all Algolia clusters.
    * @param requestOptions additional request configuration.
    */
@@ -194,6 +203,7 @@ public class MonitoringClient(
   }
 
   /**
+   * Get search latency times.
    * List the average latency for search requests for selected clusters.
    * @param clusters Subset of clusters, separated by comma.
    * @param requestOptions additional request configuration.
@@ -211,6 +221,7 @@ public class MonitoringClient(
   }
 
   /**
+   * Get metrics for a given period.
    * Report the aggregate value of a metric for a selected period of time.
    * @param metric Metric to report.  For more information about the individual metrics, see the response. To include all metrics, use `*` as the parameter.
    * @param period Period over which to aggregate the metrics:  - `minute`. Aggregate the last minute. 1 data point per 10 seconds. - `hour`. Aggregate the last hour. 1 data point per minute. - `day`. Aggregate the last day. 1 data point per 10 minutes. - `week`. Aggregate the last week. 1 data point per hour. - `month`. Aggregate the last month. 1 data point per day.
@@ -228,6 +239,7 @@ public class MonitoringClient(
   }
 
   /**
+   * Test the reachability of clusters.
    * Test whether clusters are reachable or not.
    * @param clusters Subset of clusters, separated by comma.
    * @param requestOptions additional request configuration.
@@ -245,6 +257,7 @@ public class MonitoringClient(
   }
 
   /**
+   * List cluster statuses.
    * Report whether clusters are operational.  The response depends on whether you authenticate your API request.  - With authentication, the response includes the status of the cluster assigned to your Algolia application.  - Without authentication, the response lists the statuses of all public Algolia clusters.
    * @param requestOptions additional request configuration.
    */

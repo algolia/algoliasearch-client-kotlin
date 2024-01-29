@@ -32,6 +32,7 @@ public class RecommendClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -53,6 +54,7 @@ public class RecommendClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -74,6 +76,7 @@ public class RecommendClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -97,6 +100,7 @@ public class RecommendClient(
   }
 
   /**
+   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -120,10 +124,8 @@ public class RecommendClient(
   }
 
   /**
+   * Delete a Recommend rule.
    * Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-   *
-   * Required API Key ACLs:
-   *   - editSettings
    * @param indexName Index on which to perform the request.
    * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
    * @param objectID Unique record (object) identifier.
@@ -143,10 +145,8 @@ public class RecommendClient(
   }
 
   /**
+   * Get a Recommend rule.
    * Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-   *
-   * Required API Key ACLs:
-   *   - settings
    * @param indexName Index on which to perform the request.
    * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
    * @param objectID Unique record (object) identifier.
@@ -166,10 +166,8 @@ public class RecommendClient(
   }
 
   /**
+   * Get a Recommend task's status.
    * Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task.
-   *
-   * Required API Key ACLs:
-   *   - editSettings
    * @param indexName Index on which to perform the request.
    * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
    * @param taskID Unique identifier of a task. Numeric value (up to 64bits).
@@ -188,10 +186,8 @@ public class RecommendClient(
   }
 
   /**
+   * Get recommendations and trending items.
    * Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values).
-   *
-   * Required API Key ACLs:
-   *   - search
    * @param getRecommendationsParams
    * @param requestOptions additional request configuration.
    */
@@ -209,10 +205,8 @@ public class RecommendClient(
   }
 
   /**
+   * List Recommend rules.
    * List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
-   *
-   * Required API Key ACLs:
-   *   - settings
    * @param indexName Index on which to perform the request.
    * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
    * @param searchRecommendRulesParams
