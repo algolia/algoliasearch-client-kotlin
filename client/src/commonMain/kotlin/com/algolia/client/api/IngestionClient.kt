@@ -30,7 +30,11 @@ public class IngestionClient(
 
   /**
    * Create a authentication.
-   * Create a authentication.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param authenticationCreate
    * @param requestOptions additional request configuration.
    */
@@ -48,7 +52,11 @@ public class IngestionClient(
 
   /**
    * Create a destination.
-   * Create a destination.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param destinationCreate
    * @param requestOptions additional request configuration.
    */
@@ -66,7 +74,11 @@ public class IngestionClient(
 
   /**
    * Create a source.
-   * Create a source.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param sourceCreate
    * @param requestOptions additional request configuration.
    */
@@ -84,7 +96,6 @@ public class IngestionClient(
 
   /**
    * Create a task.
-   * Create a task.
    * @param taskCreate
    * @param requestOptions additional request configuration.
    */
@@ -101,7 +112,6 @@ public class IngestionClient(
   }
 
   /**
-   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -123,7 +133,6 @@ public class IngestionClient(
   }
 
   /**
-   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -145,7 +154,6 @@ public class IngestionClient(
   }
 
   /**
-   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -169,7 +177,6 @@ public class IngestionClient(
   }
 
   /**
-   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -193,8 +200,12 @@ public class IngestionClient(
   }
 
   /**
-   * Delete a authentication.
    * Soft delete the authentication of the given authenticationID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param authenticationID The authentication UUID.
    * @param requestOptions additional request configuration.
    */
@@ -211,8 +222,12 @@ public class IngestionClient(
   }
 
   /**
-   * Delete a destination.
    * Soft delete the destination of the given destinationID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param destinationID The destination UUID.
    * @param requestOptions additional request configuration.
    */
@@ -229,8 +244,12 @@ public class IngestionClient(
   }
 
   /**
-   * Delete a source.
    * Soft delete the source of the given sourceID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param sourceID The source UUID.
    * @param requestOptions additional request configuration.
    */
@@ -247,7 +266,6 @@ public class IngestionClient(
   }
 
   /**
-   * Delete a task.
    * Soft delete the task of the given taskID.
    * @param taskID The task UUID.
    * @param requestOptions additional request configuration.
@@ -265,8 +283,12 @@ public class IngestionClient(
   }
 
   /**
-   * Disable a task.
    * Disable the task of the given taskID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param taskID The task UUID.
    * @param requestOptions additional request configuration.
    */
@@ -283,8 +305,12 @@ public class IngestionClient(
   }
 
   /**
-   * Enable a task.
    * Enable the task of the given taskID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param taskID The task UUID.
    * @param requestOptions additional request configuration.
    */
@@ -301,8 +327,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get a authentication.
    * Get the authentication of the given authenticationID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param authenticationID The authentication UUID.
    * @param requestOptions additional request configuration.
    */
@@ -319,8 +349,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of authentications.
    * Get a list of authentications for the given query parameters, with pagination details.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param itemsPerPage The number of items per page to return.
    * @param page The page number to fetch, starting at 1.
    * @param type The type of the authentications to retrieve.
@@ -349,8 +383,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get a destination.
    * Get the destination of the given destinationID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param destinationID The destination UUID.
    * @param requestOptions additional request configuration.
    */
@@ -367,8 +405,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of destinations.
    * Get a list of destinations for the given query parameters, with pagination details.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param itemsPerPage The number of items per page to return.
    * @param page The page number to fetch, starting at 1.
    * @param type The type of the destinations to retrive.
@@ -397,8 +439,12 @@ public class IngestionClient(
   }
 
   /**
-   * Retrieve a stream listing.
    * Retrieve a stream listing for a given Singer specification compatible docker type source ID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param sourceID The source UUID.
    * @param requestOptions additional request configuration.
    */
@@ -415,8 +461,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get an event.
    * Get a single event for a specific runID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param runID The run UUID.
    * @param eventID The event UUID.
    * @param requestOptions additional request configuration.
@@ -435,8 +485,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of events.
    * Get a list of events associated to the given runID, for the given query parameters.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param runID The run UUID.
    * @param itemsPerPage The number of items per page to return.
    * @param page The page number to fetch, starting at 1.
@@ -471,8 +525,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get a run.
    * Get a single run for the given ID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param runID The run UUID.
    * @param requestOptions additional request configuration.
    */
@@ -489,8 +547,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of runs.
    * Get a list of runs for the given query parameters, with pagination details.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param itemsPerPage The number of items per page to return.
    * @param page The page number to fetch, starting at 1.
    * @param status Filter the status of the runs.
@@ -523,8 +585,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get a source.
    * Get the source of the given sourceID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param sourceID The source UUID.
    * @param requestOptions additional request configuration.
    */
@@ -541,8 +607,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of sources.
    * Get a list of sources for the given query parameters, with pagination details.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param itemsPerPage The number of items per page to return.
    * @param page The page number to fetch, starting at 1.
    * @param type The type of the sources to retrieve.
@@ -571,8 +641,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get a task.
    * Get the task of the given taskID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param taskID The task UUID.
    * @param requestOptions additional request configuration.
    */
@@ -589,8 +663,12 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of tasks.
    * Get a list of tasks for the given query parameters, with pagination details.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param itemsPerPage The number of items per page to return.
    * @param page The page number to fetch, starting at 1.
    * @param action The action of the tasks to retrieve.
@@ -625,8 +703,12 @@ public class IngestionClient(
   }
 
   /**
-   * Run a task.
    * Run the task of the given taskID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param taskID The task UUID.
    * @param requestOptions additional request configuration.
    */
@@ -643,8 +725,12 @@ public class IngestionClient(
   }
 
   /**
-   * Search among authentications.
    * Search among authentications with a defined set of parameters.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param authenticationSearch
    * @param requestOptions additional request configuration.
    */
@@ -661,8 +747,12 @@ public class IngestionClient(
   }
 
   /**
-   * Search among destinations.
    * Search among destinations with a defined set of parameters.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param destinationSearch
    * @param requestOptions additional request configuration.
    */
@@ -679,8 +769,12 @@ public class IngestionClient(
   }
 
   /**
-   * Search among sources.
    * Search among sources with a defined set of parameters.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param sourceSearch
    * @param requestOptions additional request configuration.
    */
@@ -697,8 +791,12 @@ public class IngestionClient(
   }
 
   /**
-   * Search among tasks.
    * Search among tasks with a defined set of parameters.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param taskSearch
    * @param requestOptions additional request configuration.
    */
@@ -715,8 +813,12 @@ public class IngestionClient(
   }
 
   /**
-   * Trigger a stream listing request.
    * Trigger a stream listing request for a Singer specification compatible docker type source.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param sourceID The source UUID.
    * @param requestOptions additional request configuration.
    */
@@ -733,8 +835,12 @@ public class IngestionClient(
   }
 
   /**
-   * Update a authentication.
    * Update the authentication of the given authenticationID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param authenticationID The authentication UUID.
    * @param authenticationUpdate
    * @param requestOptions additional request configuration.
@@ -753,8 +859,12 @@ public class IngestionClient(
   }
 
   /**
-   * Update a destination.
    * Update the destination of the given destinationID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param destinationID The destination UUID.
    * @param destinationUpdate
    * @param requestOptions additional request configuration.
@@ -773,8 +883,12 @@ public class IngestionClient(
   }
 
   /**
-   * Update a source.
    * Update the source of the given sourceID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
    * @param sourceID The source UUID.
    * @param sourceUpdate
    * @param requestOptions additional request configuration.
@@ -793,7 +907,6 @@ public class IngestionClient(
   }
 
   /**
-   * Update a task.
    * Update the task of the given taskID.
    * @param taskID The task UUID.
    * @param taskUpdate

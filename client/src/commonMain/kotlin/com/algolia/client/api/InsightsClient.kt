@@ -29,7 +29,6 @@ public class InsightsClient(
   }
 
   /**
-   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -51,7 +50,6 @@ public class InsightsClient(
   }
 
   /**
-   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -73,7 +71,6 @@ public class InsightsClient(
   }
 
   /**
-   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -97,7 +94,6 @@ public class InsightsClient(
   }
 
   /**
-   * Send requests to the Algolia REST API.
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -121,7 +117,6 @@ public class InsightsClient(
   }
 
   /**
-   * Delete user token.
    * Delete all events related to a certain user token from events metrics and analytics. To delete a personalization user profile, see [Delete a user profile](https://www.algolia.com/doc/rest-api/personalization/#delete-a-user-profile).
    * @param userToken The user token for which to delete all associated events.
    * @param requestOptions additional request configuration.
@@ -139,7 +134,6 @@ public class InsightsClient(
   }
 
   /**
-   * Send events.
    * Send a list of events to the Insights API.  You can include up to 1,000 events in a single request, but the request body must be smaller than 2&nbsp;MB.
    * @param insightsEvents
    * @param requestOptions additional request configuration.
