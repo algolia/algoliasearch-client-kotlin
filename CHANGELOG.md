@@ -1,3 +1,7 @@
+## [3.0.0-beta.14](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.13...3.0.0-beta.14)
+
+- [b3d61128a](https://github.com/algolia/api-clients-automation/commit/b3d61128a) docs(clients): add ACL section to code doc ([#2576](https://github.com/algolia/api-clients-automation/pull/2576)) by [@millotp](https://github.com/millotp/)
+
 ## [3.0.0-beta.13](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.12...3.0.0-beta.13)
 
 - [872ab29bf](https://github.com/algolia/api-clients-automation/commit/872ab29bf) feat(specs): update query suggestions unauthorized response example ([#2606](https://github.com/algolia/api-clients-automation/pull/2606)) by [@alphonseb](https://github.com/alphonseb/)
