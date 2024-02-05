@@ -1,6 +1,6 @@
 [versions]
 kotlin = "1.9.22"
-ktor = "2.3.7"
+ktor = "2.3.8"
 
 [libraries]
 # Kotlin
@@ -28,6 +28,6 @@ ktor-client-okhttp = { group = "io.ktor", name = "ktor-client-okhttp", version.r
 [plugins]
 kotlin-multiplaform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotlinx-binary-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.13.2" }
+kotlinx-binary-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.14.0" }
 maven-publish = { id = "com.vanniktech.maven.publish", version = "0.27.0" }
 spotless = { id = "com.diffplug.gradle.spotless", version = "6.23.3" }
