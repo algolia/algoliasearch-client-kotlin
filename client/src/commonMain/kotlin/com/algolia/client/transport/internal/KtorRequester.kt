@@ -165,7 +165,22 @@ public class KtorRequester(
   }
 
   private fun HttpRequestBuilder.queryParameter(parameters: Map<String, Any>) {
-    url.parameters.replaceAll(parameters)
+    url.encodedParameters.replaceAllEncoded(parameters)
+  }
+
+  private fun StringValuesBuilder.replaceAllEncoded(input: Map<String, Any>) {
+    input.onEach { (key, value) ->
+      if (contains(key)) remove(key)
+      when (value) {
+        is Iterable<*> -> append(
+          key.encodeURLParameter(),
+          value.joinToString(",") {
+            it.toString()
+          }.encodeURLParameter(),
+        )
+        else -> append(key.encodeURLParameter(), value.toString().encodeURLParameter())
+      }
+    }
   }
 
   private fun StringValuesBuilder.replaceAll(input: Map<String, Any>) {
