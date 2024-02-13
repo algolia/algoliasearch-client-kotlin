@@ -1,9 +1,11 @@
 package com.algolia.client.configuration
 
+import com.algolia.client.configuration.internal.buildJson
 import com.algolia.client.transport.Requester
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.plugins.logging.*
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonBuilder
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
@@ -18,11 +20,13 @@ public actual class ClientOptions(
   public actual val defaultHeaders: Map<String, String>? = null,
   public actual val engine: HttpClientEngine? = null,
   public actual val httpClientConfig: ((HttpClientConfig<*>) -> Unit)? = null,
-  public actual val jsonConfig: ((JsonBuilder) -> Unit)? = null,
   public actual val requester: Requester? = null,
+  jsonConfig: ((JsonBuilder) -> Unit)? = null,
   public actual val algoliaAgentSegments: List<AgentSegment> = emptyList(),
   public val compressionType: CompressionType,
 ) {
+
+  public actual val json: Json = buildJson(jsonConfig)
 
   public actual constructor(
     connectTimeout: Duration,

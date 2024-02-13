@@ -7,7 +7,6 @@ import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
 import io.ktor.serialization.kotlinx.json.*
-import kotlinx.serialization.json.Json
 
 private const val HEADER_APPLICATION_ID = "x-algolia-application-id"
 private const val HEADER_APIKEY = "x-algolia-api-key"
@@ -33,15 +32,7 @@ internal fun HttpClientConfig<*>.configure(
 
   // Content negotiation and serialization
   install(ContentNegotiation) {
-    json(
-      Json {
-        options.jsonConfig?.invoke(this)
-        isLenient = true
-        ignoreUnknownKeys = true
-        allowSpecialFloatingPointValues = true
-        coerceInputValues = true
-      },
-    )
+    json(options.json)
   }
 
   // Logging

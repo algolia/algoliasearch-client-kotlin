@@ -4,6 +4,7 @@ import com.algolia.client.transport.Requester
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.plugins.logging.*
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonBuilder
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.seconds
@@ -20,7 +21,7 @@ public expect class ClientOptions(
   httpClientConfig: ((HttpClientConfig<*>) -> Unit)? = null,
   jsonConfig: ((JsonBuilder) -> Unit)? = null,
   requester: Requester? = null,
-  algoliaAgentSegments: List<AgentSegment> = emptyList()
+  algoliaAgentSegments: List<AgentSegment> = emptyList(),
 ) {
 
   /** Connect timeout for each request */
@@ -50,8 +51,8 @@ public expect class ClientOptions(
   /** An optional [HttpClientConfig] used by Ktor for advanced HttpClient configuration. */
   public val httpClientConfig: ((HttpClientConfig<*>) -> Unit)?
 
-  /** An optional [JsonBuilder] configuration. */
-  public val jsonConfig: ((JsonBuilder) -> Unit)?
+  /** Json serialization instance */
+  public val json: Json
 
   /** Custom Http Requester. */
   public val requester: Requester?

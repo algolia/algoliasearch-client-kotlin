@@ -4,8 +4,6 @@ import com.algolia.client.exception.AlgoliaWaitException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeoutOrNull
 import kotlin.time.Duration
-import kotlin.time.Duration.Companion.milliseconds
-import kotlin.time.Duration.Companion.seconds
 
 /**
  * Retries the given [retry] function until the [until] condition is satisfied or the maximum number
@@ -22,14 +20,14 @@ import kotlin.time.Duration.Companion.seconds
 internal suspend fun <T> retryUntil(
   retry: suspend () -> T,
   until: (T) -> Boolean,
-  maxRetries: Int? = null,
-  timeout: Duration? = null,
-  initialDelay: Duration = 200.milliseconds,
-  maxDelay: Duration = 5.seconds,
+  maxRetries: Int,
+  timeout: Duration,
+  initialDelay: Duration,
+  maxDelay: Duration,
 ): T {
   suspend fun wait(): T {
     var currentDelay = initialDelay
-    repeat(maxRetries ?: 50) {
+    repeat(maxRetries) {
       val result = retry()
       if (until(result)) return result
       delay(currentDelay)
@@ -38,7 +36,7 @@ internal suspend fun <T> retryUntil(
     throw AlgoliaWaitException("The maximum number of retries ($maxRetries) exceeded")
   }
 
-  return if (timeout != null) {
+  return if (timeout != Duration.INFINITE) {
     withTimeoutOrNull(timeout) { wait() }
       ?: throw AlgoliaWaitException("Timeout of $timeout ms exceeded")
   } else {
