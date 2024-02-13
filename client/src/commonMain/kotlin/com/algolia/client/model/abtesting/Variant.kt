@@ -14,7 +14,6 @@ import kotlinx.serialization.json.*
  * @param clickThroughRate Variant's [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
  * @param conversionCount Number of click events for this variant.
  * @param conversionRate Variant's [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
- * @param currencies A/B test currencies.
  * @param description A/B test description.
  * @param index A/B test index.
  * @param noResultCount Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant.
@@ -25,6 +24,8 @@ import kotlinx.serialization.json.*
  * @param trafficPercentage A/B test traffic percentage.
  * @param userCount Number of users during the A/B test.
  * @param trackedUserCount Number of users that performed a tracked search during the A/B test.
+ * @param currencies A/B test currencies.
+ * @param estimatedSampleSize The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used.
  * @param filterEffects
  */
 @Serializable
@@ -50,9 +51,6 @@ public data class Variant(
 
   /** Variant's [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate). */
   @SerialName(value = "conversionRate") val conversionRate: Double,
-
-  /** A/B test currencies. */
-  @SerialName(value = "currencies") val currencies: Map<kotlin.String, CurrenciesValue>,
 
   /** A/B test description. */
   @SerialName(value = "description") val description: String,
@@ -83,6 +81,12 @@ public data class Variant(
 
   /** Number of users that performed a tracked search during the A/B test. */
   @SerialName(value = "trackedUserCount") val trackedUserCount: Int,
+
+  /** A/B test currencies. */
+  @SerialName(value = "currencies") val currencies: Map<kotlin.String, CurrenciesValue>? = null,
+
+  /** The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used. */
+  @SerialName(value = "estimatedSampleSize") val estimatedSampleSize: Int? = null,
 
   @SerialName(value = "filterEffects") val filterEffects: FilterEffects? = null,
 )
