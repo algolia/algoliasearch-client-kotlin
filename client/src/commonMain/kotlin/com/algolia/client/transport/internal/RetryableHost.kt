@@ -13,9 +13,12 @@ import com.algolia.client.configuration.Host
 internal data class RetryableHost(
   private val host: Host,
 ) {
-
   val url
     get() = host.url
+  val protocol
+    get() = host.protocol
+  val port
+    get() = host.port
   val callType
     get() = host.callType
 
