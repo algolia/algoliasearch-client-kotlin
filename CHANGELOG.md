@@ -1,3 +1,7 @@
+## [3.0.0-beta.15](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.14...3.0.0-beta.15)
+
+- [dd5abab96](https://github.com/algolia/api-clients-automation/commit/dd5abab96) feat(kotlin): add `replaceAllObjects`, `generateSecuredApiKeys`  and `waitForApiKey` functions ([#2702](https://github.com/algolia/api-clients-automation/pull/2702)) by [@aallam](https://github.com/aallam/)
+
 ## [3.0.0-beta.14](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.13...3.0.0-beta.14)
 
 - [b3d61128a](https://github.com/algolia/api-clients-automation/commit/b3d61128a) docs(clients): add ACL section to code doc ([#2576](https://github.com/algolia/api-clients-automation/pull/2576)) by [@millotp](https://github.com/millotp/)
