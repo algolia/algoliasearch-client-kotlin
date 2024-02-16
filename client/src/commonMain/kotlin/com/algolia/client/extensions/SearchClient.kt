@@ -263,8 +263,8 @@ public suspend fun <T> SearchClient.replaceAllObjects(
   serializer: KSerializer<T>,
   records: List<T>,
   requestOptions: RequestOptions?,
-): Map<String, Long> {
-  if (records.isEmpty()) return emptyMap()
+): List<Long> {
+  if (records.isEmpty()) return emptyList()
 
   val requests = records.map { record ->
     val body = options.json.encodeToJsonElement(serializer, record).jsonObject
@@ -301,11 +301,7 @@ public suspend fun <T> SearchClient.replaceAllObjects(
   waitTask(indexName = destinationIndex, taskID = move.taskID)
 
   // 4. Return the list of operations
-  return mapOf(
-    indexName to copy.taskID,
-    destinationIndex to batch.taskID,
-    destinationIndex to move.taskID,
-  )
+  return listOf(copy.taskID, batch.taskID, move.taskID)
 }
 
 /**
