@@ -9,7 +9,6 @@ import kotlinx.serialization.json.*
  *
  * @param indexName Query Suggestions index name.
  * @param sourceIndices Algolia indices from which to get the popular searches for query suggestions.
- * @param appId Your Algolia application ID.
  * @param sourceIndicesAPIKey API key used to read from your source index.
  * @param suggestionsIndicesAPIKey API key used to write and configure your Query Suggestions index.
  * @param externalIndicesAPIKey API key used to read from external Algolia indices.
@@ -26,9 +25,6 @@ public data class QuerySuggestionsConfigurationResponse(
 
   /** Algolia indices from which to get the popular searches for query suggestions. */
   @SerialName(value = "sourceIndices") val sourceIndices: List<SourceIndex>,
-
-  /** Your Algolia application ID. */
-  @SerialName(value = "appId") val appId: String? = null,
 
   /** API key used to read from your source index. */
   @SerialName(value = "sourceIndicesAPIKey") val sourceIndicesAPIKey: String? = null,
