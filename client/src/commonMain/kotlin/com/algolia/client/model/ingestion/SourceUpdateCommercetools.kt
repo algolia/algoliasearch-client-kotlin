@@ -9,6 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param storeKeys Unique and immutable key of the referenced Store.
  * @param locales Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"].
+ * @param customFields
  */
 @Serializable
 public data class SourceUpdateCommercetools(
@@ -18,4 +19,6 @@ public data class SourceUpdateCommercetools(
 
   /** Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"].  */
   @SerialName(value = "locales") val locales: List<String>? = null,
+
+  @SerialName(value = "customFields") val customFields: CommercetoolsCustomFields? = null,
 ) : SourceUpdateInput
