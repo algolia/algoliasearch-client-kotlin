@@ -10,7 +10,7 @@ import kotlinx.serialization.json.*
  * @param type
  * @param name An human readable name describing the object.
  * @param input
- * @param authenticationID
+ * @param authenticationID The authentication UUID.
  */
 @Serializable
 public data class DestinationUpdate(
@@ -22,5 +22,6 @@ public data class DestinationUpdate(
 
   @SerialName(value = "input") val input: DestinationInput? = null,
 
+  /** The authentication UUID. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
 )

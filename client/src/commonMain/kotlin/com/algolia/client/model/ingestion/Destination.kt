@@ -13,7 +13,7 @@ import kotlinx.serialization.json.*
  * @param input
  * @param createdAt Date of creation (RFC3339 format).
  * @param updatedAt Date of last update (RFC3339 format).
- * @param authenticationID
+ * @param authenticationID The authentication UUID.
  */
 @Serializable
 public data class Destination(
@@ -34,5 +34,6 @@ public data class Destination(
   /** Date of last update (RFC3339 format). */
   @SerialName(value = "updatedAt") val updatedAt: String? = null,
 
+  /** The authentication UUID. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
 )

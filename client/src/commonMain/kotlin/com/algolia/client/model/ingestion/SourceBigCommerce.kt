@@ -17,7 +17,7 @@ import kotlinx.serialization.json.*
 public data class SourceBigCommerce(
 
   /** The store hash identifying the store the shopper is signing in to. */
-  @SerialName(value = "storeHash") val storeHash: String? = null,
+  @SerialName(value = "storeHash") val storeHash: String,
 
   @SerialName(value = "channel") val channel: BigCommerceChannel? = null,
 

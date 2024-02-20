@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * An authentication is used to login into a Source or a Destination.
+ * An authentication is used to login into a Source or a Destination, with obfuscated input.
  *
  * @param authenticationID The authentication UUID.
  * @param type
@@ -26,7 +26,7 @@ public data class Authentication(
   /** An human readable name describing the object. */
   @SerialName(value = "name") val name: String,
 
-  @SerialName(value = "input") val input: AuthInput,
+  @SerialName(value = "input") val input: AuthInputPartial,
 
   /** Date of creation (RFC3339 format). */
   @SerialName(value = "createdAt") val createdAt: String,
