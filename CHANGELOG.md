@@ -1,3 +1,9 @@
+## [3.0.0-beta.16](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.15...3.0.0-beta.16)
+
+- [6624759e1](https://github.com/algolia/api-clients-automation/commit/6624759e1) feat(specs): add CustomFields to CT Source Input ([#2742](https://github.com/algolia/api-clients-automation/pull/2742)) by [@damcou](https://github.com/damcou/)
+- [ef37e65b7](https://github.com/algolia/api-clients-automation/commit/ef37e65b7) fix(clients): add e2e tests for analytics API ([#2737](https://github.com/algolia/api-clients-automation/pull/2737)) by [@millotp](https://github.com/millotp/)
+- [9bb7b8192](https://github.com/algolia/api-clients-automation/commit/9bb7b8192) fix(kotlin): return `replaceAllObjects`'s intermediate operations ([#2719](https://github.com/algolia/api-clients-automation/pull/2719)) by [@aallam](https://github.com/aallam/)
+
 ## [3.0.0-beta.15](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.14...3.0.0-beta.15)
 
 - [dd5abab96](https://github.com/algolia/api-clients-automation/commit/dd5abab96) feat(kotlin): add `replaceAllObjects`, `generateSecuredApiKeys`  and `waitForApiKey` functions ([#2702](https://github.com/algolia/api-clients-automation/pull/2702)) by [@aallam](https://github.com/aallam/)
