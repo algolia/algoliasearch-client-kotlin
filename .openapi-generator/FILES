@@ -9,6 +9,7 @@ client/src/commonMain/kotlin/com/algolia/client/model/search/AdvancedSyntaxFeatu
 client/src/commonMain/kotlin/com/algolia/client/model/search/AlternativesAsExact.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/Anchoring.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/ApiKey.kt
+client/src/commonMain/kotlin/com/algolia/client/model/search/ApiKeyOperation.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/AroundPrecision.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/AroundPrecisionFromValueInner.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/AroundRadius.kt
@@ -143,6 +144,7 @@ client/src/commonMain/kotlin/com/algolia/client/model/search/SearchTypeDefault.k
 client/src/commonMain/kotlin/com/algolia/client/model/search/SearchTypeFacet.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/SearchUserIdsParams.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/SearchUserIdsResponse.kt
+client/src/commonMain/kotlin/com/algolia/client/model/search/SecuredAPIKeyRestrictions.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/SemanticSearch.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/SnippetResult.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/SnippetResultOption.kt

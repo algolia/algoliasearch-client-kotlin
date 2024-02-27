@@ -41,7 +41,7 @@ public suspend fun SearchClient.waitForApiKey(
   requestOptions: RequestOptions? = null,
 ) {
   when (operation) {
-    ApiKeyOperation.Create -> waitKeyCreation(
+    ApiKeyOperation.Add -> waitKeyCreation(
       key = key,
       maxRetries = maxRetries,
       timeout = timeout,
@@ -311,7 +311,7 @@ public suspend fun <T> SearchClient.replaceAllObjects(
  * @param restriction Restriction to add the key
  * @throws Exception if an error occurs during the encoding
  */
-public fun SearchClient.generateSecuredApiKey(parentAPIKey: String, restriction: SecuredAPIKeyRestriction): String {
+public fun SearchClient.generateSecuredApiKey(parentAPIKey: String, restriction: SecuredAPIKeyRestrictions): String {
   val restrictionString = buildRestrictionString(restriction)
   val hash = encodeKeySHA256(parentAPIKey, restrictionString)
   return "$hash$restrictionString".encodeBase64()
@@ -322,7 +322,7 @@ public fun SearchClient.generateSecuredApiKey(parentAPIKey: String, restriction:
  *
  * @param apiKey The secured API Key to check.
  * @return Duration left before the secured API key expires.
- * @throws IllegalArgumentException if [apiKey] doesn't have a [SecuredAPIKeyRestriction.validUntil].
+ * @throws IllegalArgumentException if [apiKey] doesn't have a [SecuredAPIKeyRestrictions.validUntil].
  */
 public fun securedApiKeyRemainingValidity(apiKey: String): Duration {
   val decoded = apiKey.decodeBase64String()
