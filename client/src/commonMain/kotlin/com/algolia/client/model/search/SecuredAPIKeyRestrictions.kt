@@ -23,7 +23,7 @@ public data class SecuredAPIKeyRestrictions(
   @SerialName(value = "filters") val filters: String? = null,
 
   /** Unix timestamp used to set the expiration date of the API key. */
-  @SerialName(value = "validUntil") val validUntil: Double? = null,
+  @SerialName(value = "validUntil") val validUntil: Long? = null,
 
   /** Index names that can be queried. */
   @SerialName(value = "restrictIndices") val restrictIndices: List<String>? = null,
