@@ -35,6 +35,7 @@ import kotlinx.serialization.json.*
  * @param serverTimeMS Time the server took to process the request, in milliseconds.
  * @param serverUsed Host name of the server that processed the request.
  * @param userData Lets you store custom data in your indices.
+ * @param queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
  * @param query Text to search for in an index.
  * @param params URL-encoded string of all search parameters.
  */
@@ -123,6 +124,9 @@ public data class RecommendationsResults(
 
   /** Lets you store custom data in your indices. */
   @SerialName(value = "userData") val userData: JsonObject? = null,
+
+  /** Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/). */
+  @SerialName(value = "queryID") val queryID: String? = null,
 
   /** Text to search for in an index. */
   @SerialName(value = "query") val query: String? = null,
