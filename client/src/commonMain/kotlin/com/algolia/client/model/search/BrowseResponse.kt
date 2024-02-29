@@ -37,6 +37,7 @@ import kotlinx.serialization.json.*
  * @param serverTimeMS Time the server took to process the request, in milliseconds.
  * @param serverUsed Host name of the server that processed the request.
  * @param userData Lets you store custom data in your indices.
+ * @param queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
  * @param cursor Cursor indicating the location to resume browsing from. Must match the value returned by the previous call. Pass this value to the subsequent browse call to get the next page of results. When the end of the index has been reached, `cursor` is absent from the response.
  */
 @Serializable
@@ -130,6 +131,9 @@ public data class BrowseResponse(
 
   /** Lets you store custom data in your indices. */
   @SerialName(value = "userData") val userData: JsonObject? = null,
+
+  /** Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/). */
+  @SerialName(value = "queryID") val queryID: String? = null,
 
   /** Cursor indicating the location to resume browsing from. Must match the value returned by the previous call. Pass this value to the subsequent browse call to get the next page of results. When the end of the index has been reached, `cursor` is absent from the response.  */
   @SerialName(value = "cursor") val cursor: String? = null,

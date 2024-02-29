@@ -37,6 +37,7 @@ import kotlinx.serialization.json.*
  * @param serverTimeMS Time the server took to process the request, in milliseconds.
  * @param serverUsed Host name of the server that processed the request.
  * @param userData Lets you store custom data in your indices.
+ * @param queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
  */
 @Serializable(BaseSearchResponseSerializer::class)
 public data class BaseSearchResponse(
@@ -122,6 +123,9 @@ public data class BaseSearchResponse(
   /** Lets you store custom data in your indices. */
   val userData: JsonElement? = null,
 
+  /** Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/). */
+  val queryID: String? = null,
+
   val additionalProperties: Map<String, JsonElement>? = null,
 )
 
@@ -155,6 +159,7 @@ internal object BaseSearchResponseSerializer : KSerializer<BaseSearchResponse> {
     element<Int>("serverTimeMS", isOptional = true)
     element<String>("serverUsed", isOptional = true)
     element<Any>("userData", isOptional = true)
+    element<String>("queryID", isOptional = true)
   }
 
   override fun deserialize(decoder: Decoder): BaseSearchResponse {
@@ -188,6 +193,7 @@ internal object BaseSearchResponseSerializer : KSerializer<BaseSearchResponse> {
       serverTimeMS = tree["serverTimeMS"]?.let { input.json.decodeFromJsonElement(it) },
       serverUsed = tree["serverUsed"]?.let { input.json.decodeFromJsonElement(it) },
       userData = tree["userData"]?.let { input.json.decodeFromJsonElement(it) },
+      queryID = tree["queryID"]?.let { input.json.decodeFromJsonElement(it) },
       additionalProperties = tree.filterKeys { it !in descriptor.elementNames },
     )
   }
@@ -222,6 +228,7 @@ internal object BaseSearchResponseSerializer : KSerializer<BaseSearchResponse> {
       value.serverTimeMS?.let { put("serverTimeMS", output.json.encodeToJsonElement(it)) }
       value.serverUsed?.let { put("serverUsed", output.json.encodeToJsonElement(it)) }
       value.userData?.let { put("userData", output.json.encodeToJsonElement(it)) }
+      value.queryID?.let { put("queryID", output.json.encodeToJsonElement(it)) }
       value.additionalProperties?.onEach { (key, element) -> put(key, element) }
     }
     (encoder as JsonEncoder).encodeJsonElement(json)
