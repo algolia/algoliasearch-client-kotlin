@@ -9,6 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param startDate The start date of the extraction (RFC3339 format).
  * @param endDate The end date of the extraction (RFC3339 format).
+ * @param mapping
  */
 @Serializable
 public data class OnDemandDateUtilsInput(
@@ -18,4 +19,6 @@ public data class OnDemandDateUtilsInput(
 
   /** The end date of the extraction (RFC3339 format). */
   @SerialName(value = "endDate") val endDate: String,
+
+  @SerialName(value = "mapping") val mapping: MappingInput? = null,
 ) : TaskInput
