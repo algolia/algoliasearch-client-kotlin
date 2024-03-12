@@ -5,15 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * AroundPrecisionFromValueInner
+ * Range object with lower and upper values in meters to define custom ranges.
  *
- * @param from
- * @param `value`
+ * @param from Lower boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.
+ * @param `value` Upper boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal.
  */
 @Serializable
 public data class AroundPrecisionFromValueInner(
 
+  /** Lower boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal. */
   @SerialName(value = "from") val from: Int? = null,
 
+  /** Upper boundary of a range in meters. The Geo ranking criterion considers all records within the range to be equal. */
   @SerialName(value = "value") val `value`: Int? = null,
 )

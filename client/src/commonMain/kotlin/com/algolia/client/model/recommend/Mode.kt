@@ -4,7 +4,7 @@ package com.algolia.client.model.recommend
 import kotlinx.serialization.*
 
 /**
- * Search mode the index will use to query for results.
+ * Search mode the index will use to query for results.  This setting only applies to indices, for which Algolia enabled NeuralSearch for you.
  */
 @Serializable
 public enum class Mode(public val value: kotlin.String) {

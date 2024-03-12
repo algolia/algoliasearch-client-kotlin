@@ -5,21 +5,21 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Record retrieval operation.
+ * Request body for retrieving records.
  *
- * @param objectID Record's objectID.
- * @param indexName Name of the index containing the required records.
+ * @param objectID Object ID for the record to retrieve.
+ * @param indexName Index from which to retrieve the records.
  * @param attributesToRetrieve Attributes to retrieve. If not specified, all retrievable attributes are returned.
  */
 @Serializable
 public data class GetObjectsRequest(
 
-  /** Record's objectID. */
+  /** Object ID for the record to retrieve. */
   @SerialName(value = "objectID") val objectID: String,
 
-  /** Name of the index containing the required records. */
+  /** Index from which to retrieve the records. */
   @SerialName(value = "indexName") val indexName: String,
 
-  /** Attributes to retrieve. If not specified, all retrievable attributes are returned. */
+  /** Attributes to retrieve. If not specified, all retrievable attributes are returned.  */
   @SerialName(value = "attributesToRetrieve") val attributesToRetrieve: List<String>? = null,
 )

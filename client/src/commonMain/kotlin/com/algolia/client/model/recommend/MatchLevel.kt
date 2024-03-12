@@ -4,7 +4,7 @@ package com.algolia.client.model.recommend
 import kotlinx.serialization.*
 
 /**
- * Indicates how well the attribute matched the search query.
+ * Whether the whole query string matches or only a part.
  */
 @Serializable
 public enum class MatchLevel(public val value: kotlin.String) {

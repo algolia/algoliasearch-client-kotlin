@@ -7,13 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * Value
  *
- * @param order Pinned order of facet lists.
+ * @param order Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list.
  * @param sortRemainingBy
  */
 @Serializable
 public data class Value(
 
-  /** Pinned order of facet lists. */
+  /** Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list.  */
   @SerialName(value = "order") val order: List<String>? = null,
 
   @SerialName(value = "sortRemainingBy") val sortRemainingBy: SortRemainingBy? = null,

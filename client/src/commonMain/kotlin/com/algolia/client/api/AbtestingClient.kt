@@ -179,8 +179,8 @@ public class AbtestingClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param offset Position of the starting record. Used for paging. 0 is the first record. (default to 0)
-   * @param limit Number of records to return (page size). (default to 10)
+   * @param offset Position of the first item to return. (default to 0)
+   * @param limit Number of items to return. (default to 10)
    * @param indexPrefix Only return A/B tests for indices starting with this prefix.
    * @param indexSuffix Only return A/B tests for indices ending with this suffix.
    * @param requestOptions additional request configuration.

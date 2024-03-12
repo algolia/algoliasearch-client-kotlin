@@ -5,17 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * `batchDictionaryEntries` parameters.
+ * Request body for updating dictionary entries.
  *
- * @param requests Operations to batch.
- * @param clearExistingDictionaryEntries Incidates whether to replace all custom entries in the dictionary with the ones sent with this request.
+ * @param requests List of additions and deletions to your dictionaries.
+ * @param clearExistingDictionaryEntries Whether to replace all custom entries in the dictionary with the ones sent with this request.
  */
 @Serializable
 public data class BatchDictionaryEntriesParams(
 
-  /** Operations to batch. */
+  /** List of additions and deletions to your dictionaries. */
   @SerialName(value = "requests") val requests: List<BatchDictionaryEntriesRequest>,
 
-  /** Incidates whether to replace all custom entries in the dictionary with the ones sent with this request. */
+  /** Whether to replace all custom entries in the dictionary with the ones sent with this request. */
   @SerialName(value = "clearExistingDictionaryEntries") val clearExistingDictionaryEntries: Boolean? = null,
 )

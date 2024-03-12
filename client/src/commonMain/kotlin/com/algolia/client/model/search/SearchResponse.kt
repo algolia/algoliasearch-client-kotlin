@@ -11,22 +11,22 @@ import kotlinx.serialization.json.*
  * SearchResponse
  *
  * @param hitsPerPage Number of hits per page.
- * @param nbHits Number of hits the search query matched.
- * @param nbPages Number of pages of results for the current query.
- * @param page Page to retrieve (the first page is `0`, not `1`).
+ * @param nbHits Number of results (hits).
+ * @param nbPages Number of pages of results.
+ * @param page Page of search results to retrieve.
  * @param processingTimeMS Time the server took to process the request, in milliseconds.
- * @param hits
- * @param query Text to search for in an index.
+ * @param hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
+ * @param query Search query.
  * @param params URL-encoded string of all search parameters.
  * @param abTestID A/B test ID. This is only included in the response for indices that are part of an A/B test.
  * @param abTestVariantID Variant ID. This is only included in the response for indices that are part of an A/B test.
  * @param aroundLatLng Computed geographical location.
- * @param automaticRadius Automatically-computed radius.
+ * @param automaticRadius Distance from a central coordinate provided by `aroundLatLng`.
  * @param exhaustive
  * @param exhaustiveFacetsCount See the `facetsCount` field of the `exhaustive` object in the response.
  * @param exhaustiveNbHits See the `nbHits` field of the `exhaustive` object in the response.
  * @param exhaustiveTypo See the `typo` field of the `exhaustive` object in the response.
- * @param facets Mapping of each facet name to the corresponding facet counts.
+ * @param facets Facet counts.
  * @param facetsStats Statistics for numerical facets.
  * @param index Index name used for the query.
  * @param indexUsed Index name used for the query. During A/B testing, the targeted index isn't always the index used by the query.
@@ -39,7 +39,7 @@ import kotlinx.serialization.json.*
  * @param renderingContent
  * @param serverTimeMS Time the server took to process the request, in milliseconds.
  * @param serverUsed Host name of the server that processed the request.
- * @param userData Lets you store custom data in your indices.
+ * @param userData An object with custom data.  You can store up to 32&nbsp;kB as custom data.
  * @param queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
  */
 @Serializable(SearchResponseSerializer::class)
@@ -48,21 +48,22 @@ public data class SearchResponse(
   /** Number of hits per page. */
   val hitsPerPage: Int,
 
-  /** Number of hits the search query matched. */
+  /** Number of results (hits). */
   val nbHits: Int,
 
-  /** Number of pages of results for the current query. */
+  /** Number of pages of results. */
   val nbPages: Int,
 
-  /** Page to retrieve (the first page is `0`, not `1`). */
+  /** Page of search results to retrieve. */
   val page: Int,
 
   /** Time the server took to process the request, in milliseconds. */
   val processingTimeMS: Int,
 
+  /** Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.  */
   val hits: List<Hit>,
 
-  /** Text to search for in an index. */
+  /** Search query. */
   val query: String,
 
   /** URL-encoded string of all search parameters. */
@@ -77,7 +78,7 @@ public data class SearchResponse(
   /** Computed geographical location. */
   val aroundLatLng: String? = null,
 
-  /** Automatically-computed radius. */
+  /** Distance from a central coordinate provided by `aroundLatLng`. */
   val automaticRadius: String? = null,
 
   val exhaustive: Exhaustive? = null,
@@ -94,7 +95,7 @@ public data class SearchResponse(
   @Deprecated(message = "This property is deprecated.")
   val exhaustiveTypo: Boolean? = null,
 
-  /** Mapping of each facet name to the corresponding facet counts. */
+  /** Facet counts. */
   val facets: Map<kotlin.String, Map<kotlin.String, Int>>? = null,
 
   /** Statistics for numerical facets. */
@@ -131,7 +132,7 @@ public data class SearchResponse(
   /** Host name of the server that processed the request. */
   val serverUsed: String? = null,
 
-  /** Lets you store custom data in your indices. */
+  /** An object with custom data.  You can store up to 32&nbsp;kB as custom data.  */
   val userData: JsonObject? = null,
 
   /** Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/). */

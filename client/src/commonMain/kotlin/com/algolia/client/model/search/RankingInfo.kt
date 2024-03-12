@@ -5,29 +5,29 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * RankingInfo
+ * Object with detailed information about the record's ranking.
  *
- * @param filters This field is reserved for advanced usage.
- * @param firstMatchedWord Position of the most important matched attribute in the attributes to index list.
+ * @param filters Whether a filter matched the query.
+ * @param firstMatchedWord Position of the first matched word in the best matching attribute of the record.
  * @param geoDistance Distance between the geo location in the search query and the best matching geo location in the record, divided by the geo precision (in meters).
  * @param nbExactWords Number of exactly matched words.
  * @param nbTypos Number of typos encountered when matching the record.
- * @param promoted Present and set to true if a Rule promoted the hit.
- * @param userScore Custom ranking for the object, expressed as a single integer value.
- * @param words Number of matched words, including prefixes and typos.
+ * @param promoted Whether the record was promoted by a rule.
+ * @param userScore Overall ranking of the record, expressed as a single integer. This attribute is internal.
+ * @param words Number of matched words.
  * @param geoPrecision Precision used when computing the geo distance, in meters.
  * @param matchedGeoLocation
  * @param personalization
- * @param proximityDistance When the query contains more than one word, the sum of the distances between matched words (in meters).
- * @param promotedByReRanking Wether the record are promoted by the re-ranking strategy.
+ * @param proximityDistance Number of words between multiple matches in the query plus 1. For single word queries, `proximityDistance` is 0.
+ * @param promotedByReRanking Whether the record is re-ranked.
  */
 @Serializable
 public data class RankingInfo(
 
-  /** This field is reserved for advanced usage. */
+  /** Whether a filter matched the query. */
   @SerialName(value = "filters") val filters: Int,
 
-  /** Position of the most important matched attribute in the attributes to index list. */
+  /** Position of the first matched word in the best matching attribute of the record. */
   @SerialName(value = "firstMatchedWord") val firstMatchedWord: Int,
 
   /** Distance between the geo location in the search query and the best matching geo location in the record, divided by the geo precision (in meters). */
@@ -39,13 +39,13 @@ public data class RankingInfo(
   /** Number of typos encountered when matching the record. */
   @SerialName(value = "nbTypos") val nbTypos: Int,
 
-  /** Present and set to true if a Rule promoted the hit. */
+  /** Whether the record was promoted by a rule. */
   @SerialName(value = "promoted") val promoted: Boolean,
 
-  /** Custom ranking for the object, expressed as a single integer value. */
+  /** Overall ranking of the record, expressed as a single integer. This attribute is internal. */
   @SerialName(value = "userScore") val userScore: Int,
 
-  /** Number of matched words, including prefixes and typos. */
+  /** Number of matched words. */
   @SerialName(value = "words") val words: Int,
 
   /** Precision used when computing the geo distance, in meters. */
@@ -55,9 +55,9 @@ public data class RankingInfo(
 
   @SerialName(value = "personalization") val personalization: Personalization? = null,
 
-  /** When the query contains more than one word, the sum of the distances between matched words (in meters). */
+  /** Number of words between multiple matches in the query plus 1. For single word queries, `proximityDistance` is 0. */
   @SerialName(value = "proximityDistance") val proximityDistance: Int? = null,
 
-  /** Wether the record are promoted by the re-ranking strategy. */
+  /** Whether the record is re-ranked. */
   @SerialName(value = "promotedByReRanking") val promotedByReRanking: Boolean? = null,
 )

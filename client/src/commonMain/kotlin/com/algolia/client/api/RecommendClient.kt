@@ -124,9 +124,9 @@ public class RecommendClient(
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
-   * @param objectID Unique record (object) identifier.
+   * @param objectID Unique record identifier.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteRecommendRule(indexName: String, model: RecommendModels, objectID: String, requestOptions: RequestOptions? = null): DeletedAtResponse {
@@ -147,9 +147,9 @@ public class RecommendClient(
    *
    * Required API Key ACLs:
    *   - settings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
-   * @param objectID Unique record (object) identifier.
+   * @param objectID Unique record identifier.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getRecommendRule(indexName: String, model: RecommendModels, objectID: String, requestOptions: RequestOptions? = null): RuleResponse {
@@ -170,7 +170,7 @@ public class RecommendClient(
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
    * @param taskID Unique identifier of a task. Numeric value (up to 64bits).
    * @param requestOptions additional request configuration.
@@ -213,7 +213,7 @@ public class RecommendClient(
    *
    * Required API Key ACLs:
    *   - settings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
    * @param searchRecommendRulesParams
    * @param requestOptions additional request configuration.

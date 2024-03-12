@@ -9,7 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param params Search parameters as a URL-encoded query string.
  * @param facetQuery Text to search inside the facet's values.
- * @param maxFacetHits Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
+ * @param maxFacetHits Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
  */
 @Serializable
 public data class SearchForFacetValuesRequest(
@@ -20,6 +20,6 @@ public data class SearchForFacetValuesRequest(
   /** Text to search inside the facet's values. */
   @SerialName(value = "facetQuery") val facetQuery: String? = null,
 
-  /** Maximum number of facet hits to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values). */
+  /** Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values). */
   @SerialName(value = "maxFacetHits") val maxFacetHits: Int? = null,
 )

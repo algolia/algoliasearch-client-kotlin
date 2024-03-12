@@ -8,8 +8,8 @@ import kotlinx.serialization.json.*
  * userIDs data.
  *
  * @param hits User objects that match the query.
- * @param nbHits Number of hits the search query matched.
- * @param page Page to retrieve (the first page is `0`, not `1`).
+ * @param nbHits Number of results (hits).
+ * @param page Page of search results to retrieve.
  * @param hitsPerPage Maximum number of hits per page.
  * @param updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
  */
@@ -19,10 +19,10 @@ public data class SearchUserIdsResponse(
   /** User objects that match the query. */
   @SerialName(value = "hits") val hits: List<UserHit>,
 
-  /** Number of hits the search query matched. */
+  /** Number of results (hits). */
   @SerialName(value = "nbHits") val nbHits: Int,
 
-  /** Page to retrieve (the first page is `0`, not `1`). */
+  /** Page of search results to retrieve. */
   @SerialName(value = "page") val page: Int,
 
   /** Maximum number of hits per page. */

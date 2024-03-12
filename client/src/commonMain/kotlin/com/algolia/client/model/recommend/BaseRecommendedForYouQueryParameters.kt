@@ -7,11 +7,11 @@ import kotlinx.serialization.json.*
 /**
  * BaseRecommendedForYouQueryParameters
  *
- * @param userToken Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search.
+ * @param userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
  */
 @Serializable
 public data class BaseRecommendedForYouQueryParameters(
 
-  /** Associates a [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/) with the current search. */
+  /** Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  */
   @SerialName(value = "userToken") val userToken: String,
 )

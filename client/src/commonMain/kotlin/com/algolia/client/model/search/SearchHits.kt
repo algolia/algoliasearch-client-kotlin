@@ -10,16 +10,17 @@ import kotlinx.serialization.json.*
 /**
  * SearchHits
  *
- * @param hits
- * @param query Text to search for in an index.
+ * @param hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
+ * @param query Search query.
  * @param params URL-encoded string of all search parameters.
  */
 @Serializable(SearchHitsSerializer::class)
 public data class SearchHits(
 
+  /** Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.  */
   val hits: List<Hit>,
 
-  /** Text to search for in an index. */
+  /** Search query. */
   val query: String,
 
   /** URL-encoded string of all search parameters. */

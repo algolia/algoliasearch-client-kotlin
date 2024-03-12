@@ -119,6 +119,7 @@ client/src/commonMain/kotlin/com/algolia/client/model/search/SaveObjectResponse.
 client/src/commonMain/kotlin/com/algolia/client/model/search/SaveSynonymResponse.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/ScopeType.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/SearchDictionaryEntriesParams.kt
+client/src/commonMain/kotlin/com/algolia/client/model/search/SearchDictionaryEntriesResponse.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/SearchForFacetValuesRequest.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/SearchForFacetValuesResponse.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/SearchForFacets.kt

@@ -7,15 +7,15 @@ import kotlinx.serialization.json.*
 /**
  * TimeRange
  *
- * @param from Lower bound of the time range (Unix timestamp).
- * @param until Upper bound of the time range (Unix timestamp).
+ * @param from When the rule should start to be active, in Unix epoch time.
+ * @param until When the rule should stop to be active, in Unix epoch time.
  */
 @Serializable
 public data class TimeRange(
 
-  /** Lower bound of the time range (Unix timestamp). */
+  /** When the rule should start to be active, in Unix epoch time. */
   @SerialName(value = "from") val from: Int,
 
-  /** Upper bound of the time range (Unix timestamp). */
+  /** When the rule should stop to be active, in Unix epoch time. */
   @SerialName(value = "until") val until: Int,
 )

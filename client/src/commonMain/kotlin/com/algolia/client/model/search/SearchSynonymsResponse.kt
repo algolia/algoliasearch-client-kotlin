@@ -10,16 +10,16 @@ import kotlinx.serialization.json.*
 /**
  * SearchSynonymsResponse
  *
- * @param hits Synonym objects.
- * @param nbHits Number of hits the search query matched.
+ * @param hits Matching synonyms.
+ * @param nbHits Number of results (hits).
  */
 @Serializable(SearchSynonymsResponseSerializer::class)
 public data class SearchSynonymsResponse(
 
-  /** Synonym objects. */
+  /** Matching synonyms. */
   val hits: List<SynonymHit>,
 
-  /** Number of hits the search query matched. */
+  /** Number of results (hits). */
   val nbHits: Int,
 
   val additionalProperties: Map<String, JsonElement>? = null,

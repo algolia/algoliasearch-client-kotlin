@@ -7,34 +7,30 @@ import kotlinx.serialization.json.*
 /**
  * Rules search parameters.
  *
- * @param query Rule object query.
+ * @param query Search query for rules.
  * @param anchoring
- * @param context Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
- * @param page Requested page (the first page is page 0).
+ * @param context Only return rules that match the context (exact match).
+ * @param page Requested page of the API response.
  * @param hitsPerPage Maximum number of hits per page.
- * @param enabled Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved.
- * @param requestOptions Request options to send with the API call.
+ * @param enabled If `true`, return only enabled rules. If `false`, return only inactive rules. By default, _all_ rules are returned.
  */
 @Serializable
 public data class SearchRulesParams(
 
-  /** Rule object query. */
+  /** Search query for rules. */
   @SerialName(value = "query") val query: String? = null,
 
   @SerialName(value = "anchoring") val anchoring: Anchoring? = null,
 
-  /** Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules). */
+  /** Only return rules that match the context (exact match). */
   @SerialName(value = "context") val context: String? = null,
 
-  /** Requested page (the first page is page 0). */
+  /** Requested page of the API response. */
   @SerialName(value = "page") val page: Int? = null,
 
   /** Maximum number of hits per page. */
   @SerialName(value = "hitsPerPage") val hitsPerPage: Int? = null,
 
-  /** Restricts responses to enabled rules. When not specified (default), _all_ rules are retrieved. */
+  /** If `true`, return only enabled rules. If `false`, return only inactive rules. By default, _all_ rules are returned.  */
   @SerialName(value = "enabled") val enabled: Boolean? = null,
-
-  /** Request options to send with the API call. */
-  @SerialName(value = "requestOptions") val requestOptions: List<JsonObject>? = null,
 )

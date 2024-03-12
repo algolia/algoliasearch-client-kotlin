@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Additional search parameters.
+ * Parameters to apply to this search.  You can use all search parameters, plus special `automaticFacetFilters`, `automaticOptionalFacetFilters`, and `query`.
  *
  * @param query
  * @param automaticFacetFilters

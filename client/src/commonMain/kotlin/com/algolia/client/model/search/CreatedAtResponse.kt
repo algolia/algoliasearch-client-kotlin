@@ -7,11 +7,11 @@ import kotlinx.serialization.json.*
 /**
  * Response and creation timestamp.
  *
- * @param createdAt Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+ * @param createdAt Timestamp of creation in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
  */
 @Serializable
 public data class CreatedAtResponse(
 
-  /** Timestamp of creation in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. */
+  /** Timestamp of creation in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. */
   @SerialName(value = "createdAt") val createdAt: String,
 )

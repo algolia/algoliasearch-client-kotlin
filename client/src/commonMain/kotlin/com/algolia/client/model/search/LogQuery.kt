@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * LogQuery
  *
  * @param indexName Index targeted by the query.
- * @param userToken User identifier.
+ * @param userToken A user identifier.
  * @param queryId Unique query identifier.
  */
 @Serializable
@@ -17,7 +17,7 @@ public data class LogQuery(
   /** Index targeted by the query. */
   @SerialName(value = "index_name") val indexName: String? = null,
 
-  /** User identifier. */
+  /** A user identifier. */
   @SerialName(value = "user_token") val userToken: String? = null,
 
   /** Unique query identifier. */

@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * BaseRecommendationsQuery
  *
  * @param model
- * @param objectID Unique object identifier.
+ * @param objectID Unique record identifier.
  * @param queryParameters
  * @param fallbackParameters
  */
@@ -17,7 +17,7 @@ public data class BaseRecommendationsQuery(
 
   @SerialName(value = "model") val model: RecommendationModels,
 
-  /** Unique object identifier. */
+  /** Unique record identifier. */
   @SerialName(value = "objectID") val objectID: String,
 
   @SerialName(value = "queryParameters") val queryParameters: SearchParamsObject? = null,

@@ -32,7 +32,7 @@ public class SearchClient(
   }
 
   /**
-   * Add a new API key with specific permissions and restrictions. The request must be authenticated with the admin API key. The response returns an API key string.
+   * Creates a new API key with specific permissions and restrictions.
    *
    * Required API Key ACLs:
    *   - admin
@@ -52,13 +52,13 @@ public class SearchClient(
   }
 
   /**
-   * If you use an existing `objectID`, the existing record will be replaced with the new one.  To update only some attributes of an existing record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject) instead.  To add multiple records to your index in a single API request, use the [`batch` operation](#tag/Records/operation/batch).
+   * If a record with the specified object ID exists, the existing record is replaced. Otherwise, a new record is added to the index.  To update _some_ attributes of an existing record, use the [`partial` operation](#tag/Records/operation/partialUpdateObject) instead. To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).
    *
    * Required API Key ACLs:
    *   - addObject
-   * @param indexName Index on which to perform the request.
-   * @param objectID Unique record (object) identifier.
-   * @param body Algolia record.
+   * @param indexName Name of the index on which to perform the operation.
+   * @param objectID Unique record identifier.
+   * @param body The record, a schemaless object with attributes that are useful in the context of search and discovery.
    * @param requestOptions additional request configuration.
    */
   public suspend fun addOrUpdateObject(indexName: String, objectID: String, body: JsonObject, requestOptions: RequestOptions? = null): UpdatedAtWithObjectIdResponse {
@@ -77,7 +77,7 @@ public class SearchClient(
   }
 
   /**
-   * Add a source to the list of allowed sources.
+   * Adds a source to the list of allowed sources.
    *
    * Required API Key ACLs:
    *   - admin
@@ -97,11 +97,11 @@ public class SearchClient(
   }
 
   /**
-   * Assign or move a user ID to a cluster. The time it takes to move a user is proportional to the amount of data linked to the user ID.
+   * Assigns or moves a user ID to a cluster.  The time it takes to move a user is proportional to the amount of data linked to the user ID.
    *
    * Required API Key ACLs:
    *   - admin
-   * @param xAlgoliaUserID userID to assign.
+   * @param xAlgoliaUserID User ID to assign.
    * @param assignUserIdParams
    * @param requestOptions additional request configuration.
    */
@@ -122,8 +122,8 @@ public class SearchClient(
   }
 
   /**
-   * To reduce the time spent on network round trips, you can perform several write actions in a single API call. Actions are applied in the order they are specified. The supported `action`s are equivalent to the individual operations of the same name.
-   * @param indexName Index on which to perform the request.
+   * Adds, updates, or deletes records in one index with a single API request.  Batching index updates reduces latency and increases data integrity.  - Actions are applied in the order they're specified. - Actions are equivalent to the individual API requests of the same name.
+   * @param indexName Name of the index on which to perform the operation.
    * @param batchWriteParams
    * @param requestOptions additional request configuration.
    */
@@ -141,11 +141,11 @@ public class SearchClient(
   }
 
   /**
-   * Assign multiple user IDs to a cluster. **You can't _move_ users with this operation.**.
+   * Assigns multiple user IDs to a cluster.  **You can't move users with this operation**.
    *
    * Required API Key ACLs:
    *   - admin
-   * @param xAlgoliaUserID userID to assign.
+   * @param xAlgoliaUserID User ID to assign.
    * @param batchAssignUserIdsParams
    * @param requestOptions additional request configuration.
    */
@@ -166,11 +166,11 @@ public class SearchClient(
   }
 
   /**
-   * Add or remove a batch of dictionary entries.
+   * Adds or deletes multiple entries from your plurals, segmentation, or stop word dictionaries.
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param dictionaryName Dictionary to search in.
+   * @param dictionaryName Dictionary type in which to search.
    * @param batchDictionaryEntriesParams
    * @param requestOptions additional request configuration.
    */
@@ -187,11 +187,11 @@ public class SearchClient(
   }
 
   /**
-   * Retrieve up to 1,000 records per call. Supports full-text search and filters. For better performance, it doesn't support: - The `distinct` query parameter - Sorting by typos, proximity, words, or geographical distance.
+   * Retrieves records from an index, up to 1,000 per request.  While searching retrieves _hits_ (records augmented with attributes for highlighting and ranking details), browsing _just_ returns matching records. This can be useful if you want to export your indices.  - The Analytics API doesn't collect data when using `browse`. - Records are ranked by attributes and custom ranking. - Deduplication (`distinct`) is turned off. - There's no ranking for: typo-tolerance, number of matched words, proximity, geo distance.
    *
    * Required API Key ACLs:
    *   - browse
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param browseParams
    * @param requestOptions additional request configuration.
    */
@@ -209,11 +209,11 @@ public class SearchClient(
   }
 
   /**
-   * Delete the records but leave settings and index-specific API keys untouched.
+   * Deletes only the records from an index while keeping settings, synonyms, and rules.
    *
    * Required API Key ACLs:
    *   - deleteIndex
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param requestOptions additional request configuration.
    */
   public suspend fun clearObjects(indexName: String, requestOptions: RequestOptions? = null): UpdatedAtResponse {
@@ -229,12 +229,12 @@ public class SearchClient(
   }
 
   /**
-   * Delete all rules in the index.
+   * Deletes all rules from the index.
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param indexName Index on which to perform the request.
-   * @param forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices.
+   * @param indexName Name of the index on which to perform the operation.
+   * @param forwardToReplicas Whether changes are applied to replica indices.
    * @param requestOptions additional request configuration.
    */
   public suspend fun clearRules(indexName: String, forwardToReplicas: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedAtResponse {
@@ -253,12 +253,12 @@ public class SearchClient(
   }
 
   /**
-   * Delete all synonyms in the index.
+   * Deletes all synonyms from the index.
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param indexName Index on which to perform the request.
-   * @param forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices.
+   * @param indexName Name of the index on which to perform the operation.
+   * @param forwardToReplicas Whether changes are applied to replica indices.
    * @param requestOptions additional request configuration.
    */
   public suspend fun clearSynonyms(indexName: String, forwardToReplicas: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedAtResponse {
@@ -365,7 +365,7 @@ public class SearchClient(
   }
 
   /**
-   * Delete an existing API key. The request must be authenticated with the admin API key.
+   * Deletes the API key.
    *
    * Required API Key ACLs:
    *   - admin
@@ -385,11 +385,11 @@ public class SearchClient(
   }
 
   /**
-   * This operation doesn't support all the query options, only its filters (numeric, facet, or tag) and geo queries. It doesn't accept empty filters or queries.
+   * This operation doesn't accept empty queries or filters.  It's more efficient to get a list of object IDs with the [`browse` operation](#tag/Search/operation/browse), and then delete the records using the [`batch` operation](tag/Records/operation/batch).
    *
    * Required API Key ACLs:
    *   - deleteIndex
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param deleteByParams
    * @param requestOptions additional request configuration.
    */
@@ -407,11 +407,11 @@ public class SearchClient(
   }
 
   /**
-   * Delete an existing index.
+   * Deletes an index and all its settings.  - Deleting an index doesn't delete its analytics data. - If you try to delete a non-existing index, the operation is ignored without warning. - If the index you want to delete has replica indices, the replicas become independent indices. - If the index you want to delete is a replica index, you must first unlink it from its primary index before you can delete it.   For more information, see [Delete replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/deleting-replicas/).
    *
    * Required API Key ACLs:
    *   - deleteIndex
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteIndex(indexName: String, requestOptions: RequestOptions? = null): DeletedAtResponse {
@@ -427,12 +427,12 @@ public class SearchClient(
   }
 
   /**
-   * To delete a set of records matching a query, use the [`deleteByQuery` operation](#tag/Records/operation/deleteBy) instead.
+   * Deletes a record by its object ID.  To delete more than one record, use the [`batch` operation](#tag/Records/operation/batch). To delete records matching a query, use the [`deleteByQuery` operation](#tag/Records/operation/deleteBy).
    *
    * Required API Key ACLs:
    *   - deleteObject
-   * @param indexName Index on which to perform the request.
-   * @param objectID Unique record (object) identifier.
+   * @param indexName Name of the index on which to perform the operation.
+   * @param objectID Unique record identifier.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteObject(indexName: String, objectID: String, requestOptions: RequestOptions? = null): DeletedAtResponse {
@@ -449,13 +449,13 @@ public class SearchClient(
   }
 
   /**
-   * Delete a rule by its `objectID`. To find the `objectID` for rules, use the [`search` operation](#tag/Rules/operation/searchRules).
+   * Deletes a rule by its ID. To find the object ID for rules, use the [`search` operation](#tag/Rules/operation/searchRules).
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param objectID Unique identifier of a rule object.
-   * @param forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices.
+   * @param forwardToReplicas Whether changes are applied to replica indices.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteRule(indexName: String, objectID: String, forwardToReplicas: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedAtResponse {
@@ -475,7 +475,7 @@ public class SearchClient(
   }
 
   /**
-   * Remove a source from the list of allowed sources.
+   * Deletes a source from the list of allowed sources.
    *
    * Required API Key ACLs:
    *   - admin
@@ -495,13 +495,13 @@ public class SearchClient(
   }
 
   /**
-   * Delete a synonym by its `objectID`. To find the object IDs of your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).
+   * Deletes a synonym by its ID. To find the object IDs of your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param objectID Unique identifier of a synonym object.
-   * @param forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices.
+   * @param forwardToReplicas Whether changes are applied to replica indices.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteSynonym(indexName: String, objectID: String, forwardToReplicas: Boolean? = null, requestOptions: RequestOptions? = null): DeletedAtResponse {
@@ -521,7 +521,7 @@ public class SearchClient(
   }
 
   /**
-   * Get the permissions and restrictions of a specific API key. When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key.
+   * Gets the permissions and restrictions of an API key.  When authenticating with the admin API key, you can request information for any of your application's keys. When authenticating with other API keys, you can only retrieve information for that key.
    * @param key API key.
    * @param requestOptions additional request configuration.
    */
@@ -538,7 +538,7 @@ public class SearchClient(
   }
 
   /**
-   * Lists Algolia's [supported languages](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/) and any customizations applied to each language's [stop word](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/), [plural](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/), and [segmentation (compound)](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) features.
+   * Lists supported languages with their supported dictionary types and number of custom entries.
    *
    * Required API Key ACLs:
    *   - settings
@@ -556,7 +556,7 @@ public class SearchClient(
   }
 
   /**
-   * Get the languages for which [stop words are turned off](#tag/Dictionaries/operation/setDictionarySettings).
+   * Retrieves the languages for which standard dictionary entries are turned off.
    *
    * Required API Key ACLs:
    *   - settings
@@ -574,14 +574,14 @@ public class SearchClient(
   }
 
   /**
-   * The request must be authenticated by an API key with the [`logs` ACL](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl). Logs are held for the last seven days. There's also a logging limit of 1,000 API calls per server. This request counts towards your [operations quota](https://support.algolia.com/hc/en-us/articles/4406981829777-How-does-Algolia-count-records-and-operations-) but doesn't appear in the logs itself. > **Note**: To fetch the logs for a Distributed Search Network (DSN) cluster, target the [DSN's endpoint](https://www.algolia.com/doc/guides/scaling/distributed-search-network-dsn/#accessing-dsn-servers).
+   * The request must be authenticated by an API key with the [`logs` ACL](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).  - Logs are held for the last seven days. - Up to 1,000 API requests per server are logged. - This request counts towards your [operations quota](https://support.algolia.com/hc/en-us/articles/4406981829777-How-does-Algolia-count-records-and-operations-) but doesn't appear in the logs itself.
    *
    * Required API Key ACLs:
    *   - logs
-   * @param offset First log entry to retrieve. Sorted by decreasing date with 0 being the most recent. (default to 0)
+   * @param offset First log entry to retrieve. The most recent entries are listed first. (default to 0)
    * @param length Maximum number of entries to retrieve. (default to 10)
-   * @param indexName Index for which log entries should be retrieved. When omitted, log entries are retrieved for all indices.
-   * @param type Type of log entries to retrieve. When omitted, all log entries are retrieved. (default to all)
+   * @param indexName Index for which to retrieve log entries. By default, log entries are retrieved for all indices.
+   * @param type Type of log entries to retrieve. By default, all log entries are retrieved.  (default to all)
    * @param requestOptions additional request configuration.
    */
   public suspend fun getLogs(offset: Int? = null, length: Int? = null, indexName: String? = null, type: LogType? = null, requestOptions: RequestOptions? = null): GetLogsResponse {
@@ -602,13 +602,13 @@ public class SearchClient(
   }
 
   /**
-   * To get more than one record, use the [`objects` operation](#tag/Records/operation/getObjects).
+   * Retrieves one record by its object ID.  To retrieve more than one record, use the [`objects` operation](#tag/Records/operation/getObjects).
    *
    * Required API Key ACLs:
    *   - search
-   * @param indexName Index on which to perform the request.
-   * @param objectID Unique record (object) identifier.
-   * @param attributesToRetrieve Attributes to include with the records in the response. This is useful to reduce the size of the API response. By default, all retrievable attributes are returned. `objectID` is always retrieved, even when not specified. [`unretrievableAttributes`](https://www.algolia.com/doc/api-reference/api-parameters/unretrievableAttributes/) won't be retrieved unless the request is authenticated with the admin API key.
+   * @param indexName Name of the index on which to perform the operation.
+   * @param objectID Unique record identifier.
+   * @param attributesToRetrieve Attributes to include with the records in the response. This is useful to reduce the size of the API response. By default, all retrievable attributes are returned.  `objectID` is always retrieved.  Attributes included in `unretrievableAttributes` won't be retrieved unless the request is authenticated with the admin API key.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getObject(indexName: String, objectID: String, attributesToRetrieve: List<String>? = null, requestOptions: RequestOptions? = null): Map<kotlin.String, String> {
@@ -628,7 +628,7 @@ public class SearchClient(
   }
 
   /**
-   * Retrieve one or more records, potentially from different indices, in a single API operation. Results will be received in the same order as the requests.
+   * Retrieves one or more records, potentially from different indices.  Records are returned in the same order as the requests.
    *
    * Required API Key ACLs:
    *   - search
@@ -649,11 +649,11 @@ public class SearchClient(
   }
 
   /**
-   * Get a rule by its `objectID`. To find the `objectID` for rules, use the [`search` operation](#tag/Rules/operation/searchRules).
+   * Retrieves a rule by its ID. To find the object ID of rules, use the [`search` operation](#tag/Rules/operation/searchRules).
    *
    * Required API Key ACLs:
    *   - settings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param objectID Unique identifier of a rule object.
    * @param requestOptions additional request configuration.
    */
@@ -671,11 +671,11 @@ public class SearchClient(
   }
 
   /**
-   * Return an object containing an index's [configuration settings](https://www.algolia.com/doc/api-reference/settings-api-parameters/).
+   * Retrieves an object with non-null index settings.
    *
    * Required API Key ACLs:
    *   - search
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getSettings(indexName: String, requestOptions: RequestOptions? = null): IndexSettings {
@@ -691,7 +691,7 @@ public class SearchClient(
   }
 
   /**
-   * Get all allowed sources (IP addresses).
+   * Retrieves all allowed IP addresses with access to your application.
    *
    * Required API Key ACLs:
    *   - admin
@@ -709,11 +709,11 @@ public class SearchClient(
   }
 
   /**
-   * Get a syonym by its `objectID`. To find the object IDs for your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).
+   * Retrieves a syonym by its ID. To find the object IDs for your synonyms, use the [`search` operation](#tag/Synonyms/operation/searchSynonyms).
    *
    * Required API Key ACLs:
    *   - settings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param objectID Unique identifier of a synonym object.
    * @param requestOptions additional request configuration.
    */
@@ -731,11 +731,11 @@ public class SearchClient(
   }
 
   /**
-   * Some operations, such as copying an index, will respond with a `taskID` value. Use this value here to check the status of that task.
+   * Checks the status of a given task.  Indexing tasks are asynchronous. When you add, update, or delete records or indices, a task is created on a queue and completed depending on the load on the server.  The indexing tasks' responses include a task ID that you can use to check the status.
    *
    * Required API Key ACLs:
    *   - addObject
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param taskID Unique task identifier.
    * @param requestOptions additional request configuration.
    */
@@ -752,7 +752,7 @@ public class SearchClient(
   }
 
   /**
-   * Get the IDs of the 10 users with the highest number of records per cluster. Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time.
+   * Get the IDs of the 10 users with the highest number of records per cluster.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.
    *
    * Required API Key ACLs:
    *   - admin
@@ -770,11 +770,11 @@ public class SearchClient(
   }
 
   /**
-   * Returns the userID data stored in the mapping. Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time.
+   * Returns the user ID data stored in the mapping.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.
    *
    * Required API Key ACLs:
    *   - admin
-   * @param userID userID to assign.
+   * @param userID User ID to assign.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getUserId(userID: String, requestOptions: RequestOptions? = null): UserId {
@@ -794,7 +794,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
-   * @param getClusters Indicates whether to include the cluster's pending mapping state in the response.
+   * @param getClusters Whether to include the cluster's pending mapping state in the response.
    * @param requestOptions additional request configuration.
    */
   public suspend fun hasPendingMappings(getClusters: Boolean? = null, requestOptions: RequestOptions? = null): HasPendingMappingsResponse {
@@ -812,7 +812,7 @@ public class SearchClient(
   }
 
   /**
-   * List all API keys associated with your Algolia application, including their permissions and restrictions.
+   * Lists all API keys associated with your Algolia application, including their permissions and restrictions.
    *
    * Required API Key ACLs:
    *   - admin
@@ -830,7 +830,7 @@ public class SearchClient(
   }
 
   /**
-   * List the available clusters in a multi-cluster setup.
+   * Lists the available clusters in a multi-cluster setup.
    *
    * Required API Key ACLs:
    *   - admin
@@ -848,12 +848,12 @@ public class SearchClient(
   }
 
   /**
-   * List indices in an Algolia application.
+   * Lists all indices in the current Algolia application.  The request follows any index restrictions of the API key you use to make the request.
    *
    * Required API Key ACLs:
    *   - listIndexes
-   * @param page Returns the requested page number. The page size is determined by the `hitsPerPage` parameter. You can see the number of available pages in the `nbPages` response attribute. When `page` is null, the API response is not paginated.
-   * @param hitsPerPage Maximum number of hits per page. (default to 100)
+   * @param page Requested page of the API response. If `null`, the API response is not paginated.
+   * @param hitsPerPage Number of hits per page. (default to 100)
    * @param requestOptions additional request configuration.
    */
   public suspend fun listIndices(page: Int? = null, hitsPerPage: Int? = null, requestOptions: RequestOptions? = null): ListIndicesResponse {
@@ -872,12 +872,12 @@ public class SearchClient(
   }
 
   /**
-   * List the userIDs assigned to a multi-cluster application. Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time.
+   * Lists the userIDs assigned to a multi-cluster application.  Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.
    *
    * Required API Key ACLs:
    *   - admin
-   * @param page Returns the requested page number. The page size is determined by the `hitsPerPage` parameter. You can see the number of available pages in the `nbPages` response attribute. When `page` is null, the API response is not paginated.
-   * @param hitsPerPage Maximum number of hits per page. (default to 100)
+   * @param page Requested page of the API response. If `null`, the API response is not paginated.
+   * @param hitsPerPage Number of hits per page. (default to 100)
    * @param requestOptions additional request configuration.
    */
   public suspend fun listUserIds(page: Int? = null, hitsPerPage: Int? = null, requestOptions: RequestOptions? = null): ListUserIdsResponse {
@@ -896,7 +896,7 @@ public class SearchClient(
   }
 
   /**
-   * To reduce the time spent on network round trips, you can perform several write actions in a single request. It's a multi-index version of the [`batch` operation](#tag/Records/operation/batch). Actions are applied in the order they are specified. The supported actions are equivalent to the individual operations of the same name.
+   * Adds, updates, or deletes records in multiple indices with a single API request.  - Actions are applied in the order they are specified. - Actions are equivalent to the individual API requests of the same name.
    * @param batchParams
    * @param requestOptions additional request configuration.
    */
@@ -913,11 +913,11 @@ public class SearchClient(
   }
 
   /**
-   * This `operation`, _copy_ or _move_, will copy or move a source index's (`IndexName`) records, settings, synonyms, and rules to a `destination` index. If the destination index exists, it will be replaced, except for index-specific API keys and analytics data. If the destination index doesn't exist, it will be created.  The choice between moving or copying an index depends on your needs. Choose:  - **Move** to rename an index. - **Copy** to create a new index with the same records and configuration as an existing one.  > **Note**: When considering copying or moving, be aware of the [rate limitations](https://www.algolia.com/doc/guides/scaling/algolia-service-limits/#application-record-and-index-limits) on these processes and the [impact on your analytics data](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/concepts/indices-analytics/).
+   * Copies or moves (renames) an index within the same Algolia application.  - Existing destination indices are overwritten, except for index-specific API keys and analytics data. - If the destination index doesn't exist yet, it'll be created.  **Copy**  - Copying a source index that doesn't exist creates a new index with 0 records and default settings. - The API keys of the source index are merged with the existing keys in the destination index. - You can't copy the `enableReRanking`, `mode`, and `replicas` settings. - You can't copy to a destination index that already has replicas. - Be aware of the [size limits](https://www.algolia.com/doc/guides/scaling/algolia-service-limits/#application-record-and-index-limits). - Related guide: [Copy indices](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/how-to/copy-indices/)  **Move**  - Moving a source index that doesn't exist is ignored without returning an error. - When moving an index, the analytics data keep their original name and a new set of analytics data is started for the new name.   To access the original analytics in the dashboard, create an index with the original name. - If the destination index has replicas, moving will overwrite the existing index and copy the data to the replica indices. - Related guide: [Move indices](https://www.algolia.com/doc/guides/sending-and-managing-data/manage-indices-and-apps/manage-indices/how-to/move-indices/).
    *
    * Required API Key ACLs:
    *   - addObject
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param operationIndexParams
    * @param requestOptions additional request configuration.
    */
@@ -935,14 +935,14 @@ public class SearchClient(
   }
 
   /**
-   * Add new attributes or update current ones in an existing record. You can use any first-level attribute but not nested attributes. If you specify a [nested attribute](https://www.algolia.com/doc/guides/sending-and-managing-data/prepare-your-data/how-to/creating-and-using-nested-attributes/), the engine treats it as a replacement for its first-level ancestor.
+   * Adds new attributes to a record, or update existing ones.  - If a record with the specified object ID doesn't exist,   a new record is added to the index **if** `createIfNotExists` is true. - If the index doesn't exist yet, this method creates a new index. - You can use any first-level attribute but not nested attributes.   If you specify a nested attribute, the engine treats it as a replacement for its first-level ancestor.
    *
    * Required API Key ACLs:
    *   - addObject
-   * @param indexName Index on which to perform the request.
-   * @param objectID Unique record (object) identifier.
-   * @param attributesToUpdate Object with attributes to update.
-   * @param createIfNotExists Indicates whether to create a new record if it doesn't exist yet.  (default to true)
+   * @param indexName Name of the index on which to perform the operation.
+   * @param objectID Unique record identifier.
+   * @param attributesToUpdate Attributes with their values.
+   * @param createIfNotExists Whether to create a new record if it doesn't exist. (default to true)
    * @param requestOptions additional request configuration.
    */
   public suspend fun partialUpdateObject(indexName: String, objectID: String, attributesToUpdate: Map<kotlin.String, AttributeToUpdate>, createIfNotExists: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedAtWithObjectIdResponse {
@@ -963,11 +963,11 @@ public class SearchClient(
   }
 
   /**
-   * Remove a userID and its associated data from the multi-clusters.
+   * Deletes a user ID and its associated data from the clusters.
    *
    * Required API Key ACLs:
    *   - admin
-   * @param userID userID to assign.
+   * @param userID User ID to assign.
    * @param requestOptions additional request configuration.
    */
   public suspend fun removeUserId(userID: String, requestOptions: RequestOptions? = null): RemoveUserIdResponse {
@@ -983,7 +983,7 @@ public class SearchClient(
   }
 
   /**
-   * Replace all allowed sources.
+   * Replaces the list of allowed sources.
    *
    * Required API Key ACLs:
    *   - admin
@@ -1003,7 +1003,7 @@ public class SearchClient(
   }
 
   /**
-   * Restore a deleted API key, along with its associated permissions. The request must be authenticated with the admin API key.
+   * Restores a deleted API key.  Restoring resets the `validity` attribute to `0`.  Algolia stores up to 1,000 API keys per application. If you create more, the oldest API keys are deleted and can't be restored.
    *
    * Required API Key ACLs:
    *   - admin
@@ -1023,12 +1023,12 @@ public class SearchClient(
   }
 
   /**
-   * Add a record (object) to an index or replace it. If the record doesn't contain an `objectID`, Algolia automatically adds it. If you use an existing `objectID`, the existing record is replaced with the new one. To add multiple records to your index in a single API request, use the [`batch` operation](#tag/Records/operation/batch).
+   * Adds a record to an index or replace it.  - If the record doesn't have an object ID, a new record with an auto-generated object ID is added to your index. - If a record with the specified object ID exists, the existing record is replaced. - If a record with the specified object ID doesn't exist, a new record is added to your index. - If you add a record to an index that doesn't exist yet, a new index is created.  To update _some_ attributes of a record, use the [`partial` operation](#tag/Records/operation/partial). To add, update, or replace multiple records, use the [`batch` operation](#tag/Records/operation/batch).
    *
    * Required API Key ACLs:
    *   - addObject
-   * @param indexName Index on which to perform the request.
-   * @param body The Algolia record.
+   * @param indexName Name of the index on which to perform the operation.
+   * @param body The record, a schemaless object with attributes that are useful in the context of search and discovery.
    * @param requestOptions additional request configuration.
    */
   public suspend fun saveObject(indexName: String, body: JsonObject, requestOptions: RequestOptions? = null): SaveObjectResponse {
@@ -1046,14 +1046,14 @@ public class SearchClient(
   }
 
   /**
-   * To create or update more than one rule, use the [`batch` operation](#tag/Rules/operation/saveRules).
+   * If a rule with the specified object ID doesn't exist, it's created. Otherwise, the existing rule is replaced.  To create or update more than one rule, use the [`batch` operation](#tag/Rules/operation/saveRules).
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param objectID Unique identifier of a rule object.
    * @param rule
-   * @param forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices.
+   * @param forwardToReplicas Whether changes are applied to replica indices.
    * @param requestOptions additional request configuration.
    */
   public suspend fun saveRule(indexName: String, objectID: String, rule: Rule, forwardToReplicas: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedRuleResponse {
@@ -1074,14 +1074,14 @@ public class SearchClient(
   }
 
   /**
-   * Create or update multiple rules.
+   * Create or update multiple rules.  If a rule with the specified object ID doesn't exist, Algolia creates a new one. Otherwise, existing rules are replaced.
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param rules
-   * @param forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices.
-   * @param clearExistingRules Indicates whether existing rules should be deleted before adding this batch.
+   * @param forwardToReplicas Whether changes are applied to replica indices.
+   * @param clearExistingRules Whether existing rules should be deleted before adding this batch.
    * @param requestOptions additional request configuration.
    */
   public suspend fun saveRules(indexName: String, rules: List<Rule>, forwardToReplicas: Boolean? = null, clearExistingRules: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedAtResponse {
@@ -1102,14 +1102,14 @@ public class SearchClient(
   }
 
   /**
-   * Add a [synonym](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#the-different-types-of-synonyms) to an index or replace it. If the synonym `objectID` doesn't exist, Algolia adds a new one. If you use an existing synonym `objectID`, the existing synonym is replaced with the new one. To add multiple synonyms in a single API request, use the [`batch` operation](#tag/Synonyms/operation/saveSynonyms).
+   * If a synonym with the specified object ID doesn't exist, Algolia adds a new one. Otherwise, the existing synonym is replaced. To add multiple synonyms in a single API request, use the [`batch` operation](#tag/Synonyms/operation/saveSynonyms).
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param objectID Unique identifier of a synonym object.
    * @param synonymHit
-   * @param forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices.
+   * @param forwardToReplicas Whether changes are applied to replica indices.
    * @param requestOptions additional request configuration.
    */
   public suspend fun saveSynonym(indexName: String, objectID: String, synonymHit: SynonymHit, forwardToReplicas: Boolean? = null, requestOptions: RequestOptions? = null): SaveSynonymResponse {
@@ -1130,14 +1130,14 @@ public class SearchClient(
   }
 
   /**
-   * Create or update multiple synonyms.
+   * If a synonym with the `objectID` doesn't exist, Algolia adds a new one. Otherwise, existing synonyms are replaced.
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param synonymHit
-   * @param forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices.
-   * @param replaceExistingSynonyms Indicates whether to replace all synonyms in the index with the ones sent with this request.
+   * @param forwardToReplicas Whether changes are applied to replica indices.
+   * @param replaceExistingSynonyms Whether to replace all synonyms in the index with the ones sent with this request.
    * @param requestOptions additional request configuration.
    */
   public suspend fun saveSynonyms(indexName: String, synonymHit: List<SynonymHit>, forwardToReplicas: Boolean? = null, replaceExistingSynonyms: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedAtResponse {
@@ -1158,11 +1158,11 @@ public class SearchClient(
   }
 
   /**
-   * Send multiple search queries to one or more indices.
+   * Sends multiple search request to one or more indices.  This can be useful in these cases:  - Different indices for different purposes, such as, one index for products, another one for marketing content. - Multiple searches to the same index—for example, with different filters.
    *
    * Required API Key ACLs:
    *   - search
-   * @param searchMethodParams Query requests and strategies. Results will be received in the same order as the queries.
+   * @param searchMethodParams Muli-search request body. Results are returned in the same order as the requests.
    * @param requestOptions additional request configuration.
    */
   public suspend fun search(searchMethodParams: SearchMethodParams, requestOptions: RequestOptions? = null): SearchResponses {
@@ -1179,15 +1179,15 @@ public class SearchClient(
   }
 
   /**
-   * Search for standard and [custom](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/) entries in the [stop words](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-stop-words/), [plurals](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-plurals-and-other-declensions/), or [segmentation (compounds)](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/how-to/customize-segmentation/) dictionaries.
+   * Searches for standard and custom dictionary entries.
    *
    * Required API Key ACLs:
    *   - settings
-   * @param dictionaryName Dictionary to search in.
+   * @param dictionaryName Dictionary type in which to search.
    * @param searchDictionaryEntriesParams
    * @param requestOptions additional request configuration.
    */
-  public suspend fun searchDictionaryEntries(dictionaryName: DictionaryType, searchDictionaryEntriesParams: SearchDictionaryEntriesParams, requestOptions: RequestOptions? = null): UpdatedAtResponse {
+  public suspend fun searchDictionaryEntries(dictionaryName: DictionaryType, searchDictionaryEntriesParams: SearchDictionaryEntriesParams, requestOptions: RequestOptions? = null): SearchDictionaryEntriesResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "dictionaries", "$dictionaryName", "search"),
@@ -1201,12 +1201,12 @@ public class SearchClient(
   }
 
   /**
-   * [Search for a facet's values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values), optionally restricting the returned values to those contained in records matching other search criteria. > **Note**: Pagination isn't supported (`page` and `hitsPerPage` are ignored). By default, the engine returns a maximum of 10 values but you can adjust this with `maxFacetHits`.
+   * Searches for values of a specified facet attribute.  - By default, facet values are sorted by decreasing count.   You can adjust this with the `sortFacetValueBy` parameter. - Searching for facet values doesn't work if you have **more than 65 searchable facets and searchable attributes combined**.
    *
    * Required API Key ACLs:
    *   - search
-   * @param indexName Index on which to perform the request.
-   * @param facetName Facet name.
+   * @param indexName Name of the index on which to perform the operation.
+   * @param facetName Facet attribute in which to search for values.  This attribute must be included in the `attributesForFaceting` index setting with the `searchable()` modifier.
    * @param searchForFacetValuesRequest
    * @param requestOptions additional request configuration.
    */
@@ -1226,11 +1226,11 @@ public class SearchClient(
   }
 
   /**
-   * Search for rules in your index. You can control the search with parameters. To list all rules, send an empty request body.
+   * Searches for rules in your index.
    *
    * Required API Key ACLs:
    *   - settings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param searchRulesParams
    * @param requestOptions additional request configuration.
    */
@@ -1249,11 +1249,11 @@ public class SearchClient(
   }
 
   /**
-   * Return records that match the query.
+   * Searches a single index and return matching search results (_hits_).  This method lets you retrieve up to 1,000 hits. If you need more, use the [`browse` operation](#tag/Search/operation/browse) or increase the `paginatedLimitedTo` index setting.
    *
    * Required API Key ACLs:
    *   - search
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param searchParams
    * @param requestOptions additional request configuration.
    */
@@ -1272,11 +1272,11 @@ public class SearchClient(
   }
 
   /**
-   * Search for synonyms in your index. You can control and filter the search with parameters. To get all synonyms, send an empty request body.
+   * Searches for synonyms in your index.
    *
    * Required API Key ACLs:
    *   - settings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param searchSynonymsParams Body of the `searchSynonyms` operation.
    * @param requestOptions additional request configuration.
    */
@@ -1295,7 +1295,7 @@ public class SearchClient(
   }
 
   /**
-   * Since it can take up to a few seconds to get the data from the different clusters, the response isn't real-time. To ensure rapid updates, the user IDs index isn't built at the same time as the mapping. Instead, it's built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours).
+   * Since it can take a few seconds to get the data from the different clusters, the response isn't real-time.  To ensure rapid updates, the user IDs index isn't built at the same time as the mapping. Instead, it's built every 12 hours, at the same time as the update of user ID usage. For example, if you add or move a user ID, the search will show an old value until the next time the mapping is rebuilt (every 12 hours).
    *
    * Required API Key ACLs:
    *   - admin
@@ -1316,7 +1316,7 @@ public class SearchClient(
   }
 
   /**
-   * Set stop word settings for a specific language.
+   * Turns standard stop word dictionary entries on or off for a given language.
    *
    * Required API Key ACLs:
    *   - editSettings
@@ -1336,13 +1336,13 @@ public class SearchClient(
   }
 
   /**
-   * Update the specified [index settings](https://www.algolia.com/doc/api-reference/settings-api-parameters/). Specifying null for a setting resets it to its default value.
+   * Update the specified index settings.  Index settings that you don't specify are left unchanged. Specify `null` to reset a setting to its default value.  For best performance, update the index settings before you add new records to your index.
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param indexName Index on which to perform the request.
+   * @param indexName Name of the index on which to perform the operation.
    * @param indexSettings
-   * @param forwardToReplicas Indicates whether changed index settings are forwarded to the replica indices.
+   * @param forwardToReplicas Whether changes are applied to replica indices.
    * @param requestOptions additional request configuration.
    */
   public suspend fun setSettings(indexName: String, indexSettings: IndexSettings, forwardToReplicas: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedAtResponse {
@@ -1362,7 +1362,7 @@ public class SearchClient(
   }
 
   /**
-   * Replace the permissions of an existing API key. Any unspecified parameter resets that permission to its default value. The request must be authenticated with the admin API key.
+   * Replaces the permissions of an existing API key.  Any unspecified attribute resets that attribute to its default value.
    *
    * Required API Key ACLs:
    *   - admin

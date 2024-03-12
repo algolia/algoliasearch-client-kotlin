@@ -121,9 +121,9 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
+   * @param index Index name.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -150,9 +150,9 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
+   * @param index Index name.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -179,9 +179,9 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
+   * @param index Index name.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -208,9 +208,9 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
+   * @param index Index name.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -237,9 +237,9 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
+   * @param index Index name.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -266,9 +266,9 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
+   * @param index Index name.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -295,9 +295,9 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
+   * @param index Index name.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -324,11 +324,11 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param limit Number of records to return (page size). (default to 10)
-   * @param offset Position of the starting record. Used for paging. 0 is the first record. (default to 0)
+   * @param index Index name.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param limit Number of items to return. (default to 10)
+   * @param offset Position of the first item to return. (default to 0)
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -357,11 +357,11 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param limit Number of records to return (page size). (default to 10)
-   * @param offset Position of the starting record. Used for paging. 0 is the first record. (default to 0)
+   * @param index Index name.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param limit Number of items to return. (default to 10)
+   * @param offset Position of the first item to return. (default to 0)
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -390,7 +390,7 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
+   * @param index Index name.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getStatus(index: String, requestOptions: RequestOptions? = null): GetStatusResponse {
@@ -413,11 +413,11 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param limit Number of records to return (page size). (default to 10)
-   * @param offset Position of the starting record. Used for paging. 0 is the first record. (default to 0)
+   * @param index Index name.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param limit Number of items to return. (default to 10)
+   * @param offset Position of the first item to return. (default to 0)
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -446,12 +446,12 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
+   * @param index Index name.
    * @param search User query.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param limit Number of records to return (page size). (default to 10)
-   * @param offset Position of the starting record. Used for paging. 0 is the first record. (default to 0)
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param limit Number of items to return. (default to 10)
+   * @param offset Position of the first item to return. (default to 0)
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -482,12 +482,12 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param attribute Attribute name.
-   * @param index Index name to target.
+   * @param index Index name.
    * @param search User query.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param limit Number of records to return (page size). (default to 10)
-   * @param offset Position of the starting record. Used for paging. 0 is the first record. (default to 0)
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param limit Number of items to return. (default to 10)
+   * @param offset Position of the first item to return. (default to 0)
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -518,12 +518,12 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
+   * @param index Index name.
    * @param search User query.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param limit Number of records to return (page size). (default to 10)
-   * @param offset Position of the starting record. Used for paging. 0 is the first record. (default to 0)
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param limit Number of items to return. (default to 10)
+   * @param offset Position of the first item to return. (default to 0)
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -553,13 +553,13 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
+   * @param index Index name.
    * @param search User query.
    * @param clickAnalytics Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (default to false)
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param limit Number of records to return (page size). (default to 10)
-   * @param offset Position of the starting record. Used for paging. 0 is the first record. (default to 0)
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param limit Number of items to return. (default to 10)
+   * @param offset Position of the first item to return. (default to 0)
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -590,14 +590,14 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
+   * @param index Index name.
    * @param clickAnalytics Whether to include [click and conversion](https://www.algolia.com/doc/guides/sending-events/getting-started/) rates for a search. (default to false)
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
    * @param orderBy Reorder the results. (default to searchCount)
    * @param direction Sorting direction of the results: ascending or descending.  (default to asc)
-   * @param limit Number of records to return (page size). (default to 10)
-   * @param offset Position of the starting record. Used for paging. 0 is the first record. (default to 0)
+   * @param limit Number of items to return. (default to 10)
+   * @param offset Position of the first item to return. (default to 0)
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */
@@ -629,9 +629,9 @@ public class AnalyticsClient(
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param index Index name to target.
-   * @param startDate Start date (a string in the format `YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (a string in the format `YYYY-MM-DD`) of the period to analyze.
+   * @param index Index name.
+   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
+   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
    * @param tags Filter analytics on the [`analyticsTags`](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) set at search time. Multiple tags can be combined with the operators OR and AND. If a tag contains characters like spaces or parentheses, it must be URL-encoded.
    * @param requestOptions additional request configuration.
    */

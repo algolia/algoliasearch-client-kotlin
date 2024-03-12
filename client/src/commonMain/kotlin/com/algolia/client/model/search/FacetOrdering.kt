@@ -5,16 +5,16 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Defines the ordering of facets (widgets).
+ * Order of facet names and facet values in your UI.
  *
  * @param facets
- * @param values Ordering of facet values within an individual facet.
+ * @param values Order of facet values. One object for each facet.
  */
 @Serializable
 public data class FacetOrdering(
 
   @SerialName(value = "facets") val facets: Facets? = null,
 
-  /** Ordering of facet values within an individual facet. */
+  /** Order of facet values. One object for each facet. */
   @SerialName(value = "values") val values: Map<kotlin.String, Value>? = null,
 )

@@ -4,7 +4,7 @@ package com.algolia.client.model.search
 import kotlinx.serialization.*
 
 /**
- * Operation to apply to the attribute.
+ * How to change the attribute.
  */
 @Serializable
 public enum class BuiltInOperationType(public val value: kotlin.String) {

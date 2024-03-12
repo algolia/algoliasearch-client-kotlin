@@ -7,30 +7,30 @@ import kotlinx.serialization.json.*
 /**
  * Rule object.
  *
- * @param objectID Unique identifier for a rule object.
- * @param conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
+ * @param objectID Unique identifier of a rule object.
+ * @param conditions Conditions that trigger a rule.  Some consequences require specific conditions or don't require any condition. For more information, see [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions).
  * @param consequence
- * @param description Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
- * @param enabled Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.
- * @param validity If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty.
+ * @param description Description of the rule's purpose to help you distinguish between different rules.
+ * @param enabled Whether the rule is active.
+ * @param validity Time periods when the rule is active.
  */
 @Serializable
 public data class Rule(
 
-  /** Unique identifier for a rule object. */
+  /** Unique identifier of a rule object. */
   @SerialName(value = "objectID") val objectID: String,
 
-  /** [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.  */
+  /** Conditions that trigger a rule.  Some consequences require specific conditions or don't require any condition. For more information, see [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions).  */
   @SerialName(value = "conditions") val conditions: List<Condition>? = null,
 
   @SerialName(value = "consequence") val consequence: Consequence? = null,
 
-  /** Description of the rule's purpose. This can be helpful for display in the Algolia dashboard. */
+  /** Description of the rule's purpose to help you distinguish between different rules. */
   @SerialName(value = "description") val description: String? = null,
 
-  /** Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time. */
+  /** Whether the rule is active. */
   @SerialName(value = "enabled") val enabled: Boolean? = null,
 
-  /** If you specify a validity period, the rule _only_ applies only during that period. If specified, the array must not be empty. */
+  /** Time periods when the rule is active. */
   @SerialName(value = "validity") val validity: List<TimeRange>? = null,
 )

@@ -3,6 +3,9 @@ package com.algolia.client.model.search
 
 import kotlinx.serialization.*
 
+/**
+ * - `min`. Return matches with the lowest number of typos.   For example, if you have matches without typos, only include those.   But if there are no matches without typos (with 1 typo), include matches with 1 typo (2 typos). - `strict`. Return matches with the two lowest numbers of typos.   With `strict`, the Typo ranking criterion is applied first in the `ranking` setting.
+ */
 @Serializable
 public enum class TypoToleranceEnum(public val value: kotlin.String) : TypoTolerance {
 

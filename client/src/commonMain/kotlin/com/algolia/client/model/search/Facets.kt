@@ -5,13 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Ordering of facets (widgets).
+ * Order of facet names.
  *
- * @param order Pinned order of facet lists.
+ * @param order Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list.
  */
 @Serializable
 public data class Facets(
 
-  /** Pinned order of facet lists. */
+  /** Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list.  */
   @SerialName(value = "order") val order: List<String>? = null,
 )

@@ -7,13 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * HasPendingMappingsResponse
  *
- * @param pending Indicates whether there are clusters undergoing migration, creation, or deletion.
+ * @param pending Whether there are clusters undergoing migration, creation, or deletion.
  * @param clusters Cluster pending mapping state: migrating, creating, deleting.
  */
 @Serializable
 public data class HasPendingMappingsResponse(
 
-  /** Indicates whether there are clusters undergoing migration, creation, or deletion. */
+  /** Whether there are clusters undergoing migration, creation, or deletion. */
   @SerialName(value = "pending") val pending: Boolean,
 
   /** Cluster pending mapping state: migrating, creating, deleting.  */

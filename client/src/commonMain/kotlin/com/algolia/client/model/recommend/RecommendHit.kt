@@ -10,26 +10,26 @@ import kotlinx.serialization.json.*
 /**
  * Recommend hit.
  *
- * @param objectID Unique object identifier.
+ * @param objectID Unique record identifier.
  * @param score Recommendation score.
- * @param highlightResult Show highlighted section and words matched on a query.
- * @param snippetResult Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+ * @param highlightResult Surround words that match the query with HTML tags for highlighting.
+ * @param snippetResult Snippets that show the context around a matching search query.
  * @param rankingInfo
  * @param distinctSeqID
  */
 @Serializable(RecommendHitSerializer::class)
 public data class RecommendHit(
 
-  /** Unique object identifier. */
+  /** Unique record identifier. */
   val objectID: String,
 
   /** Recommendation score. */
   val score: Double,
 
-  /** Show highlighted section and words matched on a query. */
+  /** Surround words that match the query with HTML tags for highlighting. */
   val highlightResult: Map<kotlin.String, HighlightResult>? = null,
 
-  /** Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty. */
+  /** Snippets that show the context around a matching search query. */
   val snippetResult: Map<kotlin.String, SnippetResult>? = null,
 
   val rankingInfo: RankingInfo? = null,

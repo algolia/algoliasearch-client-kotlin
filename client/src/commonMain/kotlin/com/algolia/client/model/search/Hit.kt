@@ -8,24 +8,24 @@ import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
 
 /**
- * A single hit.
+ * Search result.  A hit is a record from your index, augmented with special attributes for highlighting, snippeting, and ranking.
  *
- * @param objectID Unique object identifier.
- * @param highlightResult Show highlighted section and words matched on a query.
- * @param snippetResult Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty.
+ * @param objectID Unique record identifier.
+ * @param highlightResult Surround words that match the query with HTML tags for highlighting.
+ * @param snippetResult Snippets that show the context around a matching search query.
  * @param rankingInfo
  * @param distinctSeqID
  */
 @Serializable(HitSerializer::class)
 public data class Hit(
 
-  /** Unique object identifier. */
+  /** Unique record identifier. */
   val objectID: String,
 
-  /** Show highlighted section and words matched on a query. */
+  /** Surround words that match the query with HTML tags for highlighting. */
   val highlightResult: Map<kotlin.String, HighlightResult>? = null,
 
-  /** Snippeted attributes show parts of the matched attributes. Only returned when attributesToSnippet is non-empty. */
+  /** Snippets that show the context around a matching search query. */
   val snippetResult: Map<kotlin.String, SnippetResult>? = null,
 
   val rankingInfo: RankingInfo? = null,

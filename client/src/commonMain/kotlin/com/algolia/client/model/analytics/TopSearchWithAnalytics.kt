@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
  * @param trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
  * @param clickCount Number of click events.
  * @param conversionCount Number of converted clicks.
- * @param nbHits Number of hits the search query matched.
+ * @param nbHits Number of results (hits).
  */
 @Serializable
 public data class TopSearchWithAnalytics(
@@ -44,6 +44,6 @@ public data class TopSearchWithAnalytics(
   /** Number of converted clicks. */
   @SerialName(value = "conversionCount") val conversionCount: Int,
 
-  /** Number of hits the search query matched. */
+  /** Number of results (hits). */
   @SerialName(value = "nbHits") val nbHits: Int,
 )

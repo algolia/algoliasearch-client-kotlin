@@ -7,15 +7,15 @@ import kotlinx.serialization.json.*
 /**
  * ConsequenceQueryObject
  *
- * @param remove Words to remove.
- * @param edits Edits to apply.
+ * @param remove Words to remove from the search query.
+ * @param edits Changes to make to the search query.
  */
 @Serializable
 public data class ConsequenceQueryObject(
 
-  /** Words to remove. */
+  /** Words to remove from the search query. */
   @SerialName(value = "remove") val remove: List<String>? = null,
 
-  /** Edits to apply. */
+  /** Changes to make to the search query. */
   @SerialName(value = "edits") val edits: List<Edit>? = null,
 ) : ConsequenceQuery

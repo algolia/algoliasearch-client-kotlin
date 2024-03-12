@@ -7,15 +7,15 @@ import kotlinx.serialization.json.*
 /**
  * Records to promote.
  *
- * @param objectIDs Unique identifiers of the records to promote.
- * @param position The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions.
+ * @param objectIDs Object IDs of the records you want to promote.  The records are placed as a group at the `position`. For example, if you want to promote four records to position `0`, they will be the first four search results.
+ * @param position Position in the search results where you want to show the promoted records.
  */
 @Serializable
 public data class PromoteObjectIDs(
 
-  /** Unique identifiers of the records to promote. */
+  /** Object IDs of the records you want to promote.  The records are placed as a group at the `position`. For example, if you want to promote four records to position `0`, they will be the first four search results.  */
   @SerialName(value = "objectIDs") val objectIDs: List<String>,
 
-  /** The position to promote the records to. If you pass objectIDs, the records are placed at this position as a group. For example, if you pronmote four objectIDs to position 0, the records take the first four positions. */
+  /** Position in the search results where you want to show the promoted records. */
   @SerialName(value = "position") val position: Int,
 ) : Promote

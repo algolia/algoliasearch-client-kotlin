@@ -7,22 +7,26 @@ import kotlinx.serialization.json.*
 /**
  * Condition
  *
- * @param pattern Query pattern syntax.
+ * @param pattern Query pattern that triggers the rule.  You can use either a literal string, or a special pattern `{facet:ATTRIBUTE}`, where `ATTRIBUTE` is a facet name. The rule is triggered if the query matches the literal string or a value of the specified facet. For example, with `pattern: {facet:genre}`, the rule is triggered when users search for a genre, such as \"comedy\".
  * @param anchoring
- * @param alternatives Whether the pattern matches on plurals, synonyms, and typos.
- * @param context Rule context format: [A-Za-z0-9_-]+).
+ * @param alternatives Whether the pattern should match plurals, synonyms, and typos.
+ * @param context An additional restriction that only triggers the rule, when the search has the same value as `ruleContexts` parameter. For example, if `context: mobile`, the rule is only triggered when the search request has a matching `ruleContexts: mobile`. A rule context must only contain alphanumeric characters.
+ * @param filters Filters that trigger the rule.  You can add add filters using the syntax `facet:value` so that the rule is triggered, when the specific filter is selected. You can use `filters` on its own or combine it with the `pattern` parameter.
  */
 @Serializable
 public data class Condition(
 
-  /** Query pattern syntax. */
+  /** Query pattern that triggers the rule.  You can use either a literal string, or a special pattern `{facet:ATTRIBUTE}`, where `ATTRIBUTE` is a facet name. The rule is triggered if the query matches the literal string or a value of the specified facet. For example, with `pattern: {facet:genre}`, the rule is triggered when users search for a genre, such as \"comedy\".  */
   @SerialName(value = "pattern") val pattern: String? = null,
 
   @SerialName(value = "anchoring") val anchoring: Anchoring? = null,
 
-  /** Whether the pattern matches on plurals, synonyms, and typos. */
+  /** Whether the pattern should match plurals, synonyms, and typos. */
   @SerialName(value = "alternatives") val alternatives: Boolean? = null,
 
-  /** Rule context format: [A-Za-z0-9_-]+). */
+  /** An additional restriction that only triggers the rule, when the search has the same value as `ruleContexts` parameter. For example, if `context: mobile`, the rule is only triggered when the search request has a matching `ruleContexts: mobile`. A rule context must only contain alphanumeric characters.  */
   @SerialName(value = "context") val context: String? = null,
+
+  /** Filters that trigger the rule.  You can add add filters using the syntax `facet:value` so that the rule is triggered, when the specific filter is selected. You can use `filters` on its own or combine it with the `pattern` parameter.  */
+  @SerialName(value = "filters") val filters: String? = null,
 )

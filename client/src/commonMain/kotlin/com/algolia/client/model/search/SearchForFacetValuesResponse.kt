@@ -7,13 +7,14 @@ import kotlinx.serialization.json.*
 /**
  * SearchForFacetValuesResponse
  *
- * @param facetHits
+ * @param facetHits Matching facet values.
  * @param exhaustiveFacetsCount See the `facetsCount` field of the `exhaustive` object in the response.
  * @param processingTimeMS Time the server took to process the request, in milliseconds.
  */
 @Serializable
 public data class SearchForFacetValuesResponse(
 
+  /** Matching facet values. */
   @SerialName(value = "facetHits") val facetHits: List<FacetHits>,
 
   /** See the `facetsCount` field of the `exhaustive` object in the response. */

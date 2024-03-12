@@ -5,22 +5,22 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Show highlighted section and words matched on a query.
+ * Surround words that match the query with HTML tags for highlighting.
  *
- * @param `value` Markup text with `facetQuery` matches highlighted.
+ * @param `value` Highlighted attribute value, including HTML tags.
  * @param matchLevel
- * @param matchedWords List of words from the query that matched the object.
+ * @param matchedWords List of matched words from the search query.
  * @param fullyHighlighted Whether the entire attribute value is highlighted.
  */
 @Serializable
 public data class HighlightResultOption(
 
-  /** Markup text with `facetQuery` matches highlighted. */
+  /** Highlighted attribute value, including HTML tags. */
   @SerialName(value = "value") val `value`: String,
 
   @SerialName(value = "matchLevel") val matchLevel: MatchLevel,
 
-  /** List of words from the query that matched the object. */
+  /** List of matched words from the search query. */
   @SerialName(value = "matchedWords") val matchedWords: List<String>,
 
   /** Whether the entire attribute value is highlighted. */

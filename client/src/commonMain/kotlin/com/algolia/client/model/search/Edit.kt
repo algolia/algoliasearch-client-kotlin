@@ -9,7 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param type
  * @param delete Text or patterns to remove from the query string.
- * @param insert Text that should be inserted in place of the removed text inside the query string.
+ * @param insert Text to be added in place of the deleted text inside the query string.
  */
 @Serializable
 public data class Edit(
@@ -19,6 +19,6 @@ public data class Edit(
   /** Text or patterns to remove from the query string. */
   @SerialName(value = "delete") val delete: String? = null,
 
-  /** Text that should be inserted in place of the removed text inside the query string. */
+  /** Text to be added in place of the deleted text inside the query string. */
   @SerialName(value = "insert") val insert: String? = null,
 )

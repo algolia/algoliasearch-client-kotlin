@@ -7,56 +7,56 @@ import kotlinx.serialization.json.*
 /**
  * Log
  *
- * @param timestamp Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
- * @param method HTTP method of the performed request.
- * @param answerCode HTTP response code.
- * @param queryBody Request body. Truncated after 1,000 characters.
- * @param answer Answer body. Truncated after 1,000 characters.
- * @param url Request URL.
+ * @param timestamp Timestamp of the API request in ISO 8601 format.
+ * @param method HTTP method of the request.
+ * @param answerCode HTTP status code of the response.
+ * @param queryBody Request body.
+ * @param answer Response body.
+ * @param url URL of the API endpoint.
  * @param ip IP address of the client that performed the request.
- * @param queryHeaders Request headers (API key is obfuscated).
+ * @param queryHeaders Request headers (API keys are obfuscated).
  * @param sha1 SHA1 signature of the log entry.
- * @param nbApiCalls Number of API calls.
- * @param processingTimeMs Processing time for the query. Doesn't include network time.
+ * @param nbApiCalls Number of API requests.
+ * @param processingTimeMs Processing time for the query in milliseconds. This doesn't include latency due to the network.
  * @param index Index targeted by the query.
  * @param queryParams Query parameters sent with the request.
- * @param queryNbHits Number of hits returned for the query.
- * @param innerQueries Performed queries for the given request.
+ * @param queryNbHits Number of search results (hits) returned for the query.
+ * @param innerQueries Queries performed for the given request.
  */
 @Serializable
 public data class Log(
 
-  /** Timestamp in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. */
+  /** Timestamp of the API request in ISO 8601 format. */
   @SerialName(value = "timestamp") val timestamp: String,
 
-  /** HTTP method of the performed request. */
+  /** HTTP method of the request. */
   @SerialName(value = "method") val method: String,
 
-  /** HTTP response code. */
+  /** HTTP status code of the response. */
   @SerialName(value = "answer_code") val answerCode: String,
 
-  /** Request body. Truncated after 1,000 characters. */
+  /** Request body. */
   @SerialName(value = "query_body") val queryBody: String,
 
-  /** Answer body. Truncated after 1,000 characters. */
+  /** Response body. */
   @SerialName(value = "answer") val answer: String,
 
-  /** Request URL. */
-  @SerialName(value = "url") val url: String,
+  /** URL of the API endpoint. */
+  @SerialName(value = "url") val url: kotlin.String,
 
   /** IP address of the client that performed the request. */
   @SerialName(value = "ip") val ip: String,
 
-  /** Request headers (API key is obfuscated). */
+  /** Request headers (API keys are obfuscated). */
   @SerialName(value = "query_headers") val queryHeaders: String,
 
   /** SHA1 signature of the log entry. */
   @SerialName(value = "sha1") val sha1: String,
 
-  /** Number of API calls. */
+  /** Number of API requests. */
   @SerialName(value = "nb_api_calls") val nbApiCalls: String,
 
-  /** Processing time for the query. Doesn't include network time. */
+  /** Processing time for the query in milliseconds. This doesn't include latency due to the network.  */
   @SerialName(value = "processing_time_ms") val processingTimeMs: String,
 
   /** Index targeted by the query. */
@@ -65,9 +65,9 @@ public data class Log(
   /** Query parameters sent with the request. */
   @SerialName(value = "query_params") val queryParams: String? = null,
 
-  /** Number of hits returned for the query. */
+  /** Number of search results (hits) returned for the query. */
   @SerialName(value = "query_nb_hits") val queryNbHits: String? = null,
 
-  /** Performed queries for the given request. */
+  /** Queries performed for the given request. */
   @SerialName(value = "inner_queries") val innerQueries: List<LogQuery>? = null,
 )

@@ -5,28 +5,28 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences) of a rule.
+ * Effect of the rule.  For more information, see [Consequences](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#consequences).
  *
  * @param params
- * @param promote Records to promote.
- * @param filterPromotes Only use in combination with the `promote` consequence. When `true`, promoted results will be restricted to match the filters of the current search. When `false`, the promoted results will show up regardless of the filters.
- * @param hide Records to hide. By default, you can hide up to 50 records per rule.
- * @param userData Custom JSON object that will be appended to the userData array in the response. This object isn't interpreted by the API. It's limited to 1kB of minified JSON.
+ * @param promote Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each.
+ * @param filterPromotes Whether promoted records must match an active filter for the consequence to be applied.  This ensures that user actions (filtering the search) are given a higher precendence. For example, if you promote a record with the `color: red` attribute, and the user filters the search for `color: blue`, the \"red\" record won't be shown.
+ * @param hide Records you want to hide from the search results.
+ * @param userData A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON.
  */
 @Serializable
 public data class Consequence(
 
   @SerialName(value = "params") val params: ConsequenceParams? = null,
 
-  /** Records to promote. */
+  /** Records you want to pin to a specific position in the search results.  You can promote up to 300 records, either individually, or as groups of up to 100 records each.  */
   @SerialName(value = "promote") val promote: List<Promote>? = null,
 
-  /** Only use in combination with the `promote` consequence. When `true`, promoted results will be restricted to match the filters of the current search. When `false`, the promoted results will show up regardless of the filters. */
+  /** Whether promoted records must match an active filter for the consequence to be applied.  This ensures that user actions (filtering the search) are given a higher precendence. For example, if you promote a record with the `color: red` attribute, and the user filters the search for `color: blue`, the \"red\" record won't be shown.  */
   @SerialName(value = "filterPromotes") val filterPromotes: Boolean? = null,
 
-  /** Records to hide. By default, you can hide up to 50 records per rule. */
+  /** Records you want to hide from the search results. */
   @SerialName(value = "hide") val hide: List<ConsequenceHide>? = null,
 
-  /** Custom JSON object that will be appended to the userData array in the response. This object isn't interpreted by the API. It's limited to 1kB of minified JSON. */
+  /** A JSON object with custom data that will be appended to the `userData` array in the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified JSON.  */
   @SerialName(value = "userData") val userData: JsonElement? = null,
 )

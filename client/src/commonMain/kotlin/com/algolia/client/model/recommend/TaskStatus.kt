@@ -4,7 +4,7 @@ package com.algolia.client.model.recommend
 import kotlinx.serialization.*
 
 /**
- * _published_ if the task has been processed, _notPublished_ otherwise.
+ * Task status, `published` if the task is completed, `notPublished` otherwise.
  */
 @Serializable
 public enum class TaskStatus(public val value: kotlin.String) {

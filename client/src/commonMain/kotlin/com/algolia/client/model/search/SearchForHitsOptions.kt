@@ -7,13 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * SearchForHitsOptions
  *
- * @param indexName Algolia index name.
+ * @param indexName Index name.
  * @param type
  */
 @Serializable
 public data class SearchForHitsOptions(
 
-  /** Algolia index name. */
+  /** Index name. */
   @SerialName(value = "indexName") val indexName: String,
 
   @SerialName(value = "type") val type: SearchTypeDefault? = null,

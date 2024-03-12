@@ -7,18 +7,18 @@ import kotlinx.serialization.json.*
 /**
  * SearchRulesResponse
  *
- * @param hits Fetched rules.
- * @param nbHits Number of fetched rules.
+ * @param hits Rules that matched the search criteria.
+ * @param nbHits Number of rules that matched the search criteria.
  * @param page Current page.
  * @param nbPages Number of pages.
  */
 @Serializable
 public data class SearchRulesResponse(
 
-  /** Fetched rules. */
+  /** Rules that matched the search criteria. */
   @SerialName(value = "hits") val hits: List<Rule>,
 
-  /** Number of fetched rules. */
+  /** Number of rules that matched the search criteria. */
   @SerialName(value = "nbHits") val nbHits: Int,
 
   /** Current page. */

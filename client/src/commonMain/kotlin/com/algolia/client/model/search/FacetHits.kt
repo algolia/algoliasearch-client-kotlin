@@ -8,8 +8,8 @@ import kotlinx.serialization.json.*
  * FacetHits
  *
  * @param `value` Facet value.
- * @param highlighted Markup text with `facetQuery` matches highlighted.
- * @param count Number of records containing this facet value. This takes into account the extra search parameters specified in the query. Like for a regular search query, the [counts may not be exhaustive](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).
+ * @param highlighted Highlighted attribute value, including HTML tags.
+ * @param count Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).
  */
 @Serializable
 public data class FacetHits(
@@ -17,9 +17,9 @@ public data class FacetHits(
   /** Facet value. */
   @SerialName(value = "value") val `value`: String,
 
-  /** Markup text with `facetQuery` matches highlighted. */
+  /** Highlighted attribute value, including HTML tags. */
   @SerialName(value = "highlighted") val highlighted: String,
 
-  /** Number of records containing this facet value. This takes into account the extra search parameters specified in the query. Like for a regular search query, the [counts may not be exhaustive](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-). */
+  /** Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-). */
   @SerialName(value = "count") val count: Int,
 )

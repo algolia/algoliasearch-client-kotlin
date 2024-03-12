@@ -3,6 +3,9 @@ package com.algolia.client.model.search
 
 import kotlinx.serialization.*
 
+/**
+ * Return all records with a valid `_geoloc` attribute. Don't filter by distance.
+ */
 @Serializable
 public enum class AroundRadiusAll(public val value: kotlin.String) : AroundRadius {
 
