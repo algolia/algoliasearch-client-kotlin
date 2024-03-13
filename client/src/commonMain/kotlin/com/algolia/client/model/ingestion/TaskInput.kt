@@ -15,6 +15,7 @@ import kotlinx.serialization.json.*
  * Implementations:
  * - [OnDemandDateUtilsInput]
  * - [ScheduleDateUtilsInput]
+ * - [StreamingUtilsInput]
  */
 @Serializable(TaskInputSerializer::class)
 public sealed interface TaskInput {
@@ -28,6 +29,7 @@ internal class TaskInputSerializer : JsonContentPolymorphicSerializer<TaskInput>
     return when {
       element is JsonObject -> OnDemandDateUtilsInput.serializer()
       element is JsonObject -> ScheduleDateUtilsInput.serializer()
+      element is JsonObject -> StreamingUtilsInput.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

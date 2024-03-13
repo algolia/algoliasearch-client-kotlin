@@ -13,6 +13,7 @@ import kotlinx.serialization.json.*
  * SourceUpdateInput
  *
  * Implementations:
+ * - [SourceGA4BigQueryExport]
  * - [SourceBigQuery]
  * - [SourceCSV]
  * - [SourceJSON]
@@ -30,6 +31,7 @@ internal class SourceUpdateInputSerializer : JsonContentPolymorphicSerializer<So
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SourceUpdateInput> {
     return when {
       element is JsonObject && element.containsKey("projectID") -> SourceBigQuery.serializer()
+      element is JsonObject && element.containsKey("projectID") && element.containsKey("datasetID") && element.containsKey("tablePrefix") -> SourceGA4BigQueryExport.serializer()
       element is JsonObject -> SourceUpdateCommercetools.serializer()
       element is JsonObject -> SourceJSON.serializer()
       element is JsonObject -> SourceCSV.serializer()

@@ -22,7 +22,10 @@ public enum class SourceType(public val value: kotlin.String) {
   Bigquery("bigquery"),
 
   @SerialName(value = "docker")
-  Docker("docker");
+  Docker("docker"),
+
+  @SerialName(value = "ga4BigqueryExport")
+  Ga4BigqueryExport("ga4BigqueryExport");
 
   override fun toString(): kotlin.String = value
 }

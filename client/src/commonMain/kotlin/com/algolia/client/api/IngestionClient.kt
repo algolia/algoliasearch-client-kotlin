@@ -673,8 +673,8 @@ public class IngestionClient(
    * @param page The page number to fetch, starting at 1.
    * @param action The action of the tasks to retrieve.
    * @param enabled Whether the task is enabled or not.
-   * @param sourceID The sourceIDs of the tasks to retrive.
-   * @param destinationID The destinationIDs of the tasks to retrive.
+   * @param sourceID The sourceIDs of the tasks to retrieve.
+   * @param destinationID The destinationIDs of the tasks to retrieve.
    * @param triggerType The trigger type of the task.
    * @param sort The key by which the list should be sorted.
    * @param order The order of the returned list.

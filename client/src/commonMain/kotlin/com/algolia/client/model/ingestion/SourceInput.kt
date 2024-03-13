@@ -13,6 +13,7 @@ import kotlinx.serialization.json.*
  * SourceInput
  *
  * Implementations:
+ * - [SourceGA4BigQueryExport]
  * - [SourceBigCommerce]
  * - [SourceBigQuery]
  * - [SourceCommercetools]
@@ -33,6 +34,7 @@ internal class SourceInputSerializer : JsonContentPolymorphicSerializer<SourceIn
       element is JsonObject && element.containsKey("projectKey") -> SourceCommercetools.serializer()
       element is JsonObject && element.containsKey("storeHash") -> SourceBigCommerce.serializer()
       element is JsonObject && element.containsKey("projectID") -> SourceBigQuery.serializer()
+      element is JsonObject && element.containsKey("projectID") && element.containsKey("datasetID") && element.containsKey("tablePrefix") -> SourceGA4BigQueryExport.serializer()
       element is JsonObject -> SourceJSON.serializer()
       element is JsonObject -> SourceCSV.serializer()
       element is JsonObject -> SourceDocker.serializer()

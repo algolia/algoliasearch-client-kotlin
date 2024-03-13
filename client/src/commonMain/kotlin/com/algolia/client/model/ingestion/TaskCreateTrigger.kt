@@ -15,6 +15,7 @@ import kotlinx.serialization.json.*
  * Implementations:
  * - [OnDemandTriggerInput]
  * - [ScheduleTriggerInput]
+ * - [StreamingTrigger]
  * - [SubscriptionTrigger]
  */
 @Serializable(TaskCreateTriggerSerializer::class)
@@ -30,6 +31,7 @@ internal class TaskCreateTriggerSerializer : JsonContentPolymorphicSerializer<Ta
       element is JsonObject -> OnDemandTriggerInput.serializer()
       element is JsonObject -> ScheduleTriggerInput.serializer()
       element is JsonObject -> SubscriptionTrigger.serializer()
+      element is JsonObject -> StreamingTrigger.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

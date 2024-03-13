@@ -4,22 +4,13 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * The action to perform on the Algolia index.
+ * A task that runs continuously.
  */
 @Serializable
-public enum class ActionType(public val value: kotlin.String) {
+public enum class StreamingTriggerType(public val value: kotlin.String) {
 
-  @SerialName(value = "replace")
-  Replace("replace"),
-
-  @SerialName(value = "save")
-  Save("save"),
-
-  @SerialName(value = "partial")
-  Partial("partial"),
-
-  @SerialName(value = "append")
-  Append("append");
+  @SerialName(value = "streaming")
+  Streaming("streaming");
 
   override fun toString(): kotlin.String = value
 }
