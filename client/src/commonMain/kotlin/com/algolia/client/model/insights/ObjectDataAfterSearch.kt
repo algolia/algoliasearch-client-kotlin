@@ -9,7 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param queryID Unique identifier for a search query, used to track purchase events with multiple records that originate from different searches.
  * @param price
- * @param quantity The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item.
+ * @param quantity Quantity of a product that has been purchased or added to the cart. The total purchase value is the sum of `quantity` multiplied with the `price` for each purchased item.
  * @param discount
  */
 @Serializable
@@ -20,7 +20,7 @@ public data class ObjectDataAfterSearch(
 
   @SerialName(value = "price") val price: Price? = null,
 
-  /** The quantity of a product that has been purchased or added to the cart. The total value of a purchase is the sum of `quantity` multiplied with the `price` for each purchased item.  */
+  /** Quantity of a product that has been purchased or added to the cart. The total purchase value is the sum of `quantity` multiplied with the `price` for each purchased item.  */
   @SerialName(value = "quantity") val quantity: Int? = null,
 
   @SerialName(value = "discount") val discount: Discount? = null,
