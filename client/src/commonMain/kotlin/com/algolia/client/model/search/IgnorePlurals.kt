@@ -15,13 +15,13 @@ import kotlin.jvm.JvmInline
  *
  * Implementations:
  * - [Boolean] - *[IgnorePlurals.of]*
- * - [List<String>] - *[IgnorePlurals.of]*
+ * - [List<SupportedLanguage>] - *[IgnorePlurals.of]*
  */
 @Serializable(IgnorePluralsSerializer::class)
 public sealed interface IgnorePlurals {
   @Serializable
   @JvmInline
-  public value class ListOfStringValue(public val value: List<String>) : IgnorePlurals
+  public value class ListOfSupportedLanguageValue(public val value: List<SupportedLanguage>) : IgnorePlurals
 
   @Serializable
   @JvmInline
@@ -29,8 +29,8 @@ public sealed interface IgnorePlurals {
 
   public companion object {
 
-    public fun of(value: List<String>): IgnorePlurals {
-      return ListOfStringValue(value)
+    public fun of(value: List<SupportedLanguage>): IgnorePlurals {
+      return ListOfSupportedLanguageValue(value)
     }
     public fun of(value: Boolean): IgnorePlurals {
       return BooleanValue(value)
@@ -41,7 +41,7 @@ public sealed interface IgnorePlurals {
 internal class IgnorePluralsSerializer : JsonContentPolymorphicSerializer<IgnorePlurals>(IgnorePlurals::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<IgnorePlurals> {
     return when {
-      element.isJsonArrayOfPrimitives -> IgnorePlurals.ListOfStringValue.serializer()
+      element is JsonArray -> IgnorePlurals.ListOfSupportedLanguageValue.serializer()
       element.isBoolean -> IgnorePlurals.BooleanValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

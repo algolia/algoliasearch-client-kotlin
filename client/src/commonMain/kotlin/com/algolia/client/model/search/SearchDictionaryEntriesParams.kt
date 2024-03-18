@@ -10,7 +10,7 @@ import kotlinx.serialization.json.*
  * @param query Search query.
  * @param page Page of search results to retrieve.
  * @param hitsPerPage Number of hits per page.
- * @param language ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
+ * @param language
  */
 @Serializable
 public data class SearchDictionaryEntriesParams(
@@ -24,6 +24,5 @@ public data class SearchDictionaryEntriesParams(
   /** Number of hits per page. */
   @SerialName(value = "hitsPerPage") val hitsPerPage: Int? = null,
 
-  /** ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). */
-  @SerialName(value = "language") val language: String? = null,
+  @SerialName(value = "language") val language: SupportedLanguage? = null,
 )

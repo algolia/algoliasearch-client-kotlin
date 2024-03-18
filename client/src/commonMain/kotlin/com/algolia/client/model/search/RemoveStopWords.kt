@@ -15,13 +15,13 @@ import kotlin.jvm.JvmInline
  *
  * Implementations:
  * - [Boolean] - *[RemoveStopWords.of]*
- * - [List<String>] - *[RemoveStopWords.of]*
+ * - [List<SupportedLanguage>] - *[RemoveStopWords.of]*
  */
 @Serializable(RemoveStopWordsSerializer::class)
 public sealed interface RemoveStopWords {
   @Serializable
   @JvmInline
-  public value class ListOfStringValue(public val value: List<String>) : RemoveStopWords
+  public value class ListOfSupportedLanguageValue(public val value: List<SupportedLanguage>) : RemoveStopWords
 
   @Serializable
   @JvmInline
@@ -29,8 +29,8 @@ public sealed interface RemoveStopWords {
 
   public companion object {
 
-    public fun of(value: List<String>): RemoveStopWords {
-      return ListOfStringValue(value)
+    public fun of(value: List<SupportedLanguage>): RemoveStopWords {
+      return ListOfSupportedLanguageValue(value)
     }
     public fun of(value: Boolean): RemoveStopWords {
       return BooleanValue(value)
@@ -41,7 +41,7 @@ public sealed interface RemoveStopWords {
 internal class RemoveStopWordsSerializer : JsonContentPolymorphicSerializer<RemoveStopWords>(RemoveStopWords::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RemoveStopWords> {
     return when {
-      element.isJsonArrayOfPrimitives -> RemoveStopWords.ListOfStringValue.serializer()
+      element is JsonArray -> RemoveStopWords.ListOfSupportedLanguageValue.serializer()
       element.isBoolean -> RemoveStopWords.BooleanValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

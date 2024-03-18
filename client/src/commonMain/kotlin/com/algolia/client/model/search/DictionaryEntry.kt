@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
  * Dictionary entry.
  *
  * @param objectID Unique identifier for the dictionary entry.
- * @param language ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/).
+ * @param language
  * @param word Matching dictionary word for `stopwords` and `compounds` dictionaries.
  * @param words Matching words in the `plurals` dictionary including declensions.
  * @param decomposition Invividual components of a compound word in the `compounds` dictionary.
@@ -23,8 +23,7 @@ public data class DictionaryEntry(
   /** Unique identifier for the dictionary entry. */
   val objectID: String,
 
-  /** ISO code of a [supported language](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/supported-languages/). */
-  val language: String,
+  val language: SupportedLanguage,
 
   /** Matching dictionary word for `stopwords` and `compounds` dictionaries. */
   val word: String? = null,
@@ -44,7 +43,7 @@ internal object DictionaryEntrySerializer : KSerializer<DictionaryEntry> {
 
   override val descriptor: SerialDescriptor = buildClassSerialDescriptor("DictionaryEntry") {
     element<String>("objectID")
-    element<String>("language")
+    element<SupportedLanguage>("language")
     element<String>("word", isOptional = true)
     element<List<String>>("words", isOptional = true)
     element<List<String>>("decomposition", isOptional = true)

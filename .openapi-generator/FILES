@@ -152,6 +152,7 @@ client/src/commonMain/kotlin/com/algolia/client/model/search/SnippetResultOption
 client/src/commonMain/kotlin/com/algolia/client/model/search/SortRemainingBy.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/Source.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/StandardEntries.kt
+client/src/commonMain/kotlin/com/algolia/client/model/search/SupportedLanguage.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/SynonymHit.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/SynonymType.kt
 client/src/commonMain/kotlin/com/algolia/client/model/search/TagFilters.kt
