@@ -22,7 +22,7 @@ public data class SourceIndex(
   /** Name of the Algolia index to use as source for query suggestions. */
   @SerialName(value = "indexName") val indexName: String,
 
-  /** If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.   */
+  /** If true, Query Suggestions uses all replicas of the primary index to find popular searches. If false, only the primary index is used.  */
   @SerialName(value = "replicas") val replicas: Boolean? = null,
 
   /** [Analytics tags](https://www.algolia.com/doc/api-reference/api-parameters/analyticsTags/) for filtering the popular searches.  */
