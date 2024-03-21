@@ -20,13 +20,13 @@ import kotlinx.serialization.json.*
  * @param purchaseCount Number of purchase events for this variant.
  * @param purchaseRate Variant's [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate).
  * @param searchCount Number of searches carried out during the A/B test.
- * @param trackedSearchCount Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`.
  * @param trafficPercentage A/B test traffic percentage.
  * @param userCount Number of users during the A/B test.
  * @param trackedUserCount Number of users that performed a tracked search during the A/B test.
  * @param currencies A/B test currencies.
  * @param estimatedSampleSize The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used.
  * @param filterEffects
+ * @param trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
  */
 @Serializable
 public data class Variant(
@@ -70,9 +70,6 @@ public data class Variant(
   /** Number of searches carried out during the A/B test. */
   @SerialName(value = "searchCount") val searchCount: Int,
 
-  /** Number of tracked searches. This is the number of search requests where the `clickAnalytics` parameter is `true`. */
-  @SerialName(value = "trackedSearchCount") val trackedSearchCount: Int,
-
   /** A/B test traffic percentage. */
   @SerialName(value = "trafficPercentage") val trafficPercentage: Int,
 
@@ -83,10 +80,13 @@ public data class Variant(
   @SerialName(value = "trackedUserCount") val trackedUserCount: Int,
 
   /** A/B test currencies. */
-  @SerialName(value = "currencies") val currencies: Map<kotlin.String, CurrenciesValue>? = null,
+  @SerialName(value = "currencies") val currencies: Map<kotlin.String, Currency>? = null,
 
   /** The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used. */
   @SerialName(value = "estimatedSampleSize") val estimatedSampleSize: Int? = null,
 
   @SerialName(value = "filterEffects") val filterEffects: FilterEffects? = null,
+
+  /** Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true. */
+  @SerialName(value = "trackedSearchCount") val trackedSearchCount: Int? = null,
 )

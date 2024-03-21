@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * GetSearchesCountResponse
  *
  * @param count Number of occurrences.
- * @param dates Search events with their associated dates and hit counts.
+ * @param dates Daily number of searches.
  */
 @Serializable
 public data class GetSearchesCountResponse(
@@ -16,6 +16,6 @@ public data class GetSearchesCountResponse(
   /** Number of occurrences. */
   @SerialName(value = "count") val count: Int,
 
-  /** Search events with their associated dates and hit counts. */
-  @SerialName(value = "dates") val dates: List<SearchEvent>,
+  /** Daily number of searches. */
+  @SerialName(value = "dates") val dates: List<DailySearches>,
 )

@@ -5,15 +5,15 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * GetNoClickRateResponse
+ * DailyNoClickRates
  *
  * @param rate No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches.
  * @param count Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
  * @param noClickCount Number of times this search was returned as a result without any click.
- * @param dates Daily no click rates.
+ * @param date Date in the format YYYY-MM-DD.
  */
 @Serializable
-public data class GetNoClickRateResponse(
+public data class DailyNoClickRates(
 
   /** No click rate, calculated as number of tracked searches without any click divided by the number of tracked searches. */
   @SerialName(value = "rate") val rate: Double,
@@ -24,6 +24,6 @@ public data class GetNoClickRateResponse(
   /** Number of times this search was returned as a result without any click. */
   @SerialName(value = "noClickCount") val noClickCount: Int,
 
-  /** Daily no click rates. */
-  @SerialName(value = "dates") val dates: List<DailyNoClickRates>,
+  /** Date in the format YYYY-MM-DD. */
+  @SerialName(value = "date") val date: String,
 )

@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * GetTopFiltersNoResultsValue
  *
  * @param attribute Attribute name.
- * @param `operator` Operator.
+ * @param `operator`
  * @param `value` Attribute value.
  */
 @Serializable
@@ -17,8 +17,7 @@ public data class GetTopFiltersNoResultsValue(
   /** Attribute name. */
   @SerialName(value = "attribute") val attribute: String,
 
-  /** Operator. */
-  @SerialName(value = "operator") val `operator`: String,
+  @SerialName(value = "operator") val `operator`: Operator,
 
   /** Attribute value. */
   @SerialName(value = "value") val `value`: String,

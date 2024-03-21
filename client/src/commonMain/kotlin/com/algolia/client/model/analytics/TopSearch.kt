@@ -7,17 +7,17 @@ import kotlinx.serialization.json.*
 /**
  * TopSearch
  *
- * @param search User query.
- * @param count Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`).
+ * @param search Search query.
+ * @param count Number of searches.
  * @param nbHits Number of results (hits).
  */
 @Serializable
 public data class TopSearch(
 
-  /** User query. */
+  /** Search query. */
   @SerialName(value = "search") val search: String,
 
-  /** Number of tracked _and_ untracked searches (where the `clickAnalytics` parameter isn't `true`). */
+  /** Number of searches. */
   @SerialName(value = "count") val count: Int,
 
   /** Number of results (hits). */

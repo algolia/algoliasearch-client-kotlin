@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * TopSearchWithAnalytics
+ * TopSearchWithRevenueAnalytics
  *
  * @param search Search query.
  * @param count Number of searches.
@@ -17,9 +17,14 @@ import kotlinx.serialization.json.*
  * @param clickCount Number of clicks associated with this search.
  * @param conversionCount Number of conversions from this search.
  * @param nbHits Number of results (hits).
+ * @param currencies Revenue associated with this search, broken-down by currencies.
+ * @param addToCartRate Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+ * @param addToCartCount Number of add-to-cart events from this search.
+ * @param purchaseRate Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+ * @param purchaseCount Number of purchase events from this search.
  */
 @Serializable
-public data class TopSearchWithAnalytics(
+public data class TopSearchWithRevenueAnalytics(
 
   /** Search query. */
   @SerialName(value = "search") val search: String,
@@ -50,4 +55,19 @@ public data class TopSearchWithAnalytics(
 
   /** Number of results (hits). */
   @SerialName(value = "nbHits") val nbHits: Int,
+
+  /** Revenue associated with this search, broken-down by currencies. */
+  @SerialName(value = "currencies") val currencies: Map<kotlin.String, CurrenciesValue>,
+
+  /** Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
+  @SerialName(value = "addToCartRate") val addToCartRate: Double,
+
+  /** Number of add-to-cart events from this search. */
+  @SerialName(value = "addToCartCount") val addToCartCount: Int,
+
+  /** Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
+  @SerialName(value = "purchaseRate") val purchaseRate: Double,
+
+  /** Number of purchase events from this search. */
+  @SerialName(value = "purchaseCount") val purchaseCount: Int,
 )

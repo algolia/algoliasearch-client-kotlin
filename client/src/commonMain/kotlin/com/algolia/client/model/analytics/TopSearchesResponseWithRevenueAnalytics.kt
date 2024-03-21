@@ -5,13 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * TopSearchesResponseWithAnalytics
+ * TopSearchesResponseWithRevenueAnalytics
  *
- * @param searches Most popular searches and their associated click and conversion metrics.
+ * @param searches Most popular searches, including their click and revenue metrics.
  */
 @Serializable
-public data class TopSearchesResponseWithAnalytics(
+public data class TopSearchesResponseWithRevenueAnalytics(
 
-  /** Most popular searches and their associated click and conversion metrics. */
-  @SerialName(value = "searches") val searches: List<TopSearchWithAnalytics>,
+  /** Most popular searches, including their click and revenue metrics. */
+  @SerialName(value = "searches") val searches: List<TopSearchWithRevenueAnalytics>,
 ) : GetTopSearchesResponse

@@ -7,15 +7,15 @@ import kotlinx.serialization.json.*
 /**
  * GetUsersCountResponse
  *
- * @param count Number of occurrences.
- * @param dates User count.
+ * @param count Number of unique users.
+ * @param dates Daily number of unique users.
  */
 @Serializable
 public data class GetUsersCountResponse(
 
-  /** Number of occurrences. */
+  /** Number of unique users. */
   @SerialName(value = "count") val count: Int,
 
-  /** User count. */
-  @SerialName(value = "dates") val dates: List<UserWithDate>,
+  /** Daily number of unique users. */
+  @SerialName(value = "dates") val dates: List<DailyUsers>,
 )

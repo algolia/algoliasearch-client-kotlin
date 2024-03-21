@@ -7,11 +7,11 @@ import kotlinx.serialization.json.*
 /**
  * GetSearchesNoResultsResponse
  *
- * @param searches Searches with no results.
+ * @param searches Searches without results.
  */
 @Serializable
 public data class GetSearchesNoResultsResponse(
 
-  /** Searches with no results. */
-  @SerialName(value = "searches") val searches: List<SearchNoResultEvent>,
+  /** Searches without results. */
+  @SerialName(value = "searches") val searches: List<DailySearchesNoResults>,
 )

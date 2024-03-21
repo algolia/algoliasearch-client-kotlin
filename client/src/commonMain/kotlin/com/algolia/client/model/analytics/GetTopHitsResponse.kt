@@ -15,6 +15,7 @@ import kotlinx.serialization.json.*
  * Implementations:
  * - [TopHitsResponse]
  * - [TopHitsResponseWithAnalytics]
+ * - [TopHitsResponseWithRevenueAnalytics]
  */
 @Serializable(GetTopHitsResponseSerializer::class)
 public sealed interface GetTopHitsResponse {
@@ -28,6 +29,7 @@ internal class GetTopHitsResponseSerializer : JsonContentPolymorphicSerializer<G
     return when {
       element is JsonObject -> TopHitsResponse.serializer()
       element is JsonObject -> TopHitsResponseWithAnalytics.serializer()
+      element is JsonObject -> TopHitsResponseWithRevenueAnalytics.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

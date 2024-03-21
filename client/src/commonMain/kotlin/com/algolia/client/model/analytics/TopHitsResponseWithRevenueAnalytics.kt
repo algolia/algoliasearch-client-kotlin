@@ -5,13 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * TopHitsResponseWithAnalytics
+ * TopHitsResponseWithRevenueAnalytics
  *
- * @param hits Most frequent search results with click and conversion metrics.
+ * @param hits Most frequent search results with click, conversion, and revenue metrics.
  */
 @Serializable
-public data class TopHitsResponseWithAnalytics(
+public data class TopHitsResponseWithRevenueAnalytics(
 
-  /** Most frequent search results with click and conversion metrics. */
-  @SerialName(value = "hits") val hits: List<TopHitWithAnalytics>,
+  /** Most frequent search results with click, conversion, and revenue metrics. */
+  @SerialName(value = "hits") val hits: List<TopHitWithRevenueAnalytics>,
 ) : GetTopHitsResponse

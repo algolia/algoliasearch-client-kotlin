@@ -5,19 +5,19 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SearchNoResultEvent
+ * DailySearchesNoClicks
  *
- * @param search User query.
- * @param count Number of occurrences.
+ * @param search Search query.
+ * @param count Number of tracked searches.
  * @param nbHits Number of results (hits).
  */
 @Serializable
-public data class SearchNoResultEvent(
+public data class DailySearchesNoClicks(
 
-  /** User query. */
+  /** Search query. */
   @SerialName(value = "search") val search: String,
 
-  /** Number of occurrences. */
+  /** Number of tracked searches. */
   @SerialName(value = "count") val count: Int,
 
   /** Number of results (hits). */

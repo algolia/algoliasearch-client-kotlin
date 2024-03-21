@@ -7,11 +7,11 @@ import kotlinx.serialization.json.*
 /**
  * GetSearchesNoClicksResponse
  *
- * @param searches Searches with no clicks.
+ * @param searches Searches without any clicks.
  */
 @Serializable
 public data class GetSearchesNoClicksResponse(
 
-  /** Searches with no clicks. */
-  @SerialName(value = "searches") val searches: List<SearchNoClickEvent>,
+  /** Searches without any clicks. */
+  @SerialName(value = "searches") val searches: List<DailySearchesNoClicks>,
 )

@@ -5,21 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SearchNoClickEvent
+ * DailySearches
  *
- * @param search User query.
+ * @param date Date in the format YYYY-MM-DD.
  * @param count Number of occurrences.
- * @param withFilterCount Number of occurrences.
  */
 @Serializable
-public data class SearchNoClickEvent(
+public data class DailySearches(
 
-  /** User query. */
-  @SerialName(value = "search") val search: String,
+  /** Date in the format YYYY-MM-DD. */
+  @SerialName(value = "date") val date: String,
 
   /** Number of occurrences. */
   @SerialName(value = "count") val count: Int,
-
-  /** Number of occurrences. */
-  @SerialName(value = "withFilterCount") val withFilterCount: Int,
 )

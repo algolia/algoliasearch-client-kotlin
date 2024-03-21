@@ -5,17 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SearchEvent
+ * DailyUsers
  *
- * @param date Date of the event in the format YYYY-MM-DD.
- * @param count Number of occurrences.
+ * @param date Date in the format YYYY-MM-DD.
+ * @param count Number of unique users.
  */
 @Serializable
-public data class SearchEvent(
+public data class DailyUsers(
 
-  /** Date of the event in the format YYYY-MM-DD. */
+  /** Date in the format YYYY-MM-DD. */
   @SerialName(value = "date") val date: String,
 
-  /** Number of occurrences. */
+  /** Number of unique users. */
   @SerialName(value = "count") val count: Int,
 )

@@ -7,11 +7,11 @@ import kotlinx.serialization.json.*
 /**
  * GetTopCountriesResponse
  *
- * @param countries Countries
+ * @param countries Countries and number of searches.
  */
 @Serializable
 public data class GetTopCountriesResponse(
 
-  /** Countries */
+  /** Countries and number of searches. */
   @SerialName(value = "countries") val countries: List<TopCountry>,
 )

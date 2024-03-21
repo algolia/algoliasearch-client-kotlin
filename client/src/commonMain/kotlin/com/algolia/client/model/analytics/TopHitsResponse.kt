@@ -7,11 +7,11 @@ import kotlinx.serialization.json.*
 /**
  * TopHitsResponse
  *
- * @param hits Top hits.
+ * @param hits Most frequent search results.
  */
 @Serializable
 public data class TopHitsResponse(
 
-  /** Top hits. */
+  /** Most frequent search results. */
   @SerialName(value = "hits") val hits: List<TopHit>,
 ) : GetTopHitsResponse

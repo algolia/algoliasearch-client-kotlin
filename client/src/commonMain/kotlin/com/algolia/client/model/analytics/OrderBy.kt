@@ -4,7 +4,7 @@ package com.algolia.client.model.analytics
 import kotlinx.serialization.*
 
 /**
- * Method for ordering results. `clickThroughRate`, `conversionRate` and `averageClickPosition` are only available if the `clickAnalytics` parameter is `true`.
+ * Attribute by which to order the response items.  If the `clickAnalytics` parameter is false, only `searchCount` is available.
  */
 @Serializable
 public enum class OrderBy(public val value: kotlin.String) {

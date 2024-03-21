@@ -7,11 +7,11 @@ import kotlinx.serialization.json.*
 /**
  * GetStatusResponse
  *
- * @param updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+ * @param updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. If null, no update was performed yet.
  */
 @Serializable
 public data class GetStatusResponse(
 
-  /** Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. */
+  /** Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. If null, no update was performed yet.  */
   @SerialName(value = "updatedAt") val updatedAt: String,
 )

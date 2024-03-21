@@ -7,11 +7,11 @@ import kotlinx.serialization.json.*
 /**
  * GetTopFilterAttributesResponse
  *
- * @param attributes Filterable attributes.
+ * @param attributes Most frequent filters.
  */
 @Serializable
 public data class GetTopFilterAttributesResponse(
 
-  /** Filterable attributes. */
+  /** Most frequent filters. */
   @SerialName(value = "attributes") val attributes: List<GetTopFilterAttribute>,
 )
