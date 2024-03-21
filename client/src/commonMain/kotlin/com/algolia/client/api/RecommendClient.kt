@@ -41,7 +41,7 @@ public class RecommendClient(
     require(path.isNotBlank()) { "Parameter `path` is required when calling `customDelete`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.DELETE,
-      path = "/1{path}".replace("{path}", path),
+      path = "/{path}".replace("{path}", path),
       query = buildMap {
         parameters?.let { putAll(it) }
       },
@@ -62,7 +62,7 @@ public class RecommendClient(
     require(path.isNotBlank()) { "Parameter `path` is required when calling `customGet`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
-      path = "/1{path}".replace("{path}", path),
+      path = "/{path}".replace("{path}", path),
       query = buildMap {
         parameters?.let { putAll(it) }
       },
@@ -84,7 +84,7 @@ public class RecommendClient(
     require(path.isNotBlank()) { "Parameter `path` is required when calling `customPost`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
-      path = "/1{path}".replace("{path}", path),
+      path = "/{path}".replace("{path}", path),
       query = buildMap {
         parameters?.let { putAll(it) }
       },
@@ -107,7 +107,7 @@ public class RecommendClient(
     require(path.isNotBlank()) { "Parameter `path` is required when calling `customPut`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.PUT,
-      path = "/1{path}".replace("{path}", path),
+      path = "/{path}".replace("{path}", path),
       query = buildMap {
         parameters?.let { putAll(it) }
       },
