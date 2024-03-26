@@ -9,8 +9,8 @@ import kotlinx.serialization.json.*
  *
  * @param name Server name.
  * @param region
- * @param isSlave Included to support legacy applications. Do not rely on this attribute being present in the response. Use `is_replica` instead.
- * @param isReplica Indicates whether this server is a replica of another server.
+ * @param isSlave Included to support legacy applications. Use `is_replica` instead.
+ * @param isReplica Whether this server is a replica of another server.
  * @param cluster Name of the cluster to which this server belongs.
  * @param status
  * @param type
@@ -23,11 +23,11 @@ public data class Server(
 
   @SerialName(value = "region") val region: Region? = null,
 
-  /** Included to support legacy applications. Do not rely on this attribute being present in the response. Use `is_replica` instead.  */
+  /** Included to support legacy applications. Use `is_replica` instead.  */
   @Deprecated(message = "This property is deprecated.")
   @SerialName(value = "is_slave") val isSlave: Boolean? = null,
 
-  /** Indicates whether this server is a replica of another server. */
+  /** Whether this server is a replica of another server. */
   @SerialName(value = "is_replica") val isReplica: Boolean? = null,
 
   /** Name of the cluster to which this server belongs. */

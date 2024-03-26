@@ -5,12 +5,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * GetInventory403Response
+ * GetServers403Response
  *
  * @param reason
  */
 @Serializable
-public data class GetInventory403Response(
+public data class GetServers403Response(
 
   @SerialName(value = "reason") val reason: String? = null,
 )

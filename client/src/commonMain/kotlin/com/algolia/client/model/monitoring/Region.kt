@@ -4,7 +4,7 @@ package com.algolia.client.model.monitoring
 import kotlinx.serialization.*
 
 /**
- * The region where the cluster is located.
+ * Region where the cluster is located.
  */
 @Serializable
 public enum class Region(public val value: kotlin.String) {
