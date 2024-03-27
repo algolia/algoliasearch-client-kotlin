@@ -1,3 +1,8 @@
+# 2.1.10
+
+### Fixed
+- **Transport**: long API keys (#415)
+
 # 2.1.9
 
 ### Fixed
