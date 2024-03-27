@@ -41,10 +41,13 @@ internal fun HttpClientConfig<*>.configure(configuration: Configuration) {
         compression = configuration.compression
     }
 
+    install(ApiKeyPlugin)
+
     // Defaults
     defaultRequest {
         configuration.defaultHeaders?.forEach { (key, value) -> header(key, value) }
     }
+
 
     // Enable default (2XX) validation
     expectSuccess = true
