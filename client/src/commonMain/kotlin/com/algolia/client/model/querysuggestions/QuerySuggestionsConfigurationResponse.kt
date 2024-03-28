@@ -5,44 +5,35 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * QuerySuggestionsConfigurationResponse
+ * API response for retrieving Query Suggestions configurations.
  *
- * @param indexName Query Suggestions index name.
+ * @param appID Algolia application ID to which this Query Suggestions configuration belongs.
+ * @param indexName Name of the Query Suggestions index.
  * @param sourceIndices Algolia indices from which to get the popular searches for query suggestions.
- * @param sourceIndicesAPIKey API key used to read from your source index.
- * @param suggestionsIndicesAPIKey API key used to write and configure your Query Suggestions index.
- * @param externalIndicesAPIKey API key used to read from external Algolia indices.
  * @param languages
- * @param exclude Patterns to exclude from query suggestions.
- * @param enablePersonalization Turn on personalized query suggestions.
- * @param allowSpecialCharacters Allow suggestions with special characters.
+ * @param exclude
+ * @param enablePersonalization Whether to turn on personalized query suggestions.
+ * @param allowSpecialCharacters Whether to include suggestions with special characters.
  */
 @Serializable
 public data class QuerySuggestionsConfigurationResponse(
 
-  /** Query Suggestions index name. */
+  /** Algolia application ID to which this Query Suggestions configuration belongs. */
+  @SerialName(value = "appID") val appID: String,
+
+  /** Name of the Query Suggestions index. */
   @SerialName(value = "indexName") val indexName: String,
 
   /** Algolia indices from which to get the popular searches for query suggestions. */
   @SerialName(value = "sourceIndices") val sourceIndices: List<SourceIndex>,
 
-  /** API key used to read from your source index. */
-  @SerialName(value = "sourceIndicesAPIKey") val sourceIndicesAPIKey: String? = null,
+  @SerialName(value = "languages") val languages: Languages,
 
-  /** API key used to write and configure your Query Suggestions index. */
-  @SerialName(value = "suggestionsIndicesAPIKey") val suggestionsIndicesAPIKey: String? = null,
+  @SerialName(value = "exclude") val exclude: List<String>,
 
-  /** API key used to read from external Algolia indices. */
-  @SerialName(value = "externalIndicesAPIKey") val externalIndicesAPIKey: String? = null,
+  /** Whether to turn on personalized query suggestions. */
+  @SerialName(value = "enablePersonalization") val enablePersonalization: Boolean,
 
-  @SerialName(value = "languages") val languages: Languages? = null,
-
-  /** Patterns to exclude from query suggestions. */
-  @SerialName(value = "exclude") val exclude: List<String>? = null,
-
-  /** Turn on personalized query suggestions. */
-  @SerialName(value = "enablePersonalization") val enablePersonalization: Boolean? = null,
-
-  /** Allow suggestions with special characters. */
-  @SerialName(value = "allowSpecialCharacters") val allowSpecialCharacters: Boolean? = null,
+  /** Whether to include suggestions with special characters. */
+  @SerialName(value = "allowSpecialCharacters") val allowSpecialCharacters: Boolean,
 )

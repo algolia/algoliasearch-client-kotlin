@@ -10,7 +10,7 @@ import kotlinx.serialization.json.*
  * @param timestamp Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
  * @param level
  * @param message Details about this log entry.
- * @param contextLevel Level indicating the position of a suggestion in a hierarchy of records.   For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0.
+ * @param contextLevel Level indicating the position of a suggestion in a hierarchy of records.  For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0.
  */
 @Serializable
 public data class GetLogFile200Response(
@@ -23,6 +23,6 @@ public data class GetLogFile200Response(
   /** Details about this log entry. */
   @SerialName(value = "message") val message: String? = null,
 
-  /** Level indicating the position of a suggestion in a hierarchy of records.   For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0.  */
+  /** Level indicating the position of a suggestion in a hierarchy of records.  For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0.  */
   @SerialName(value = "contextLevel") val contextLevel: Int? = null,
 )

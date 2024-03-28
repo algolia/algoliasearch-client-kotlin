@@ -5,13 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * BaseQuerySuggestionsConfigurationWithIndex
+ * AppID
  *
- * @param indexName Query Suggestions index name.
+ * @param appID Algolia application ID to which this Query Suggestions configuration belongs.
  */
 @Serializable
-public data class BaseQuerySuggestionsConfigurationWithIndex(
+public data class AppID(
 
-  /** Query Suggestions index name. */
-  @SerialName(value = "indexName") val indexName: String,
+  /** Algolia application ID to which this Query Suggestions configuration belongs. */
+  @SerialName(value = "appID") val appID: String? = null,
 )

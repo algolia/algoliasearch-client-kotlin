@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
 import kotlin.jvm.JvmInline
 
 /**
- * Set the language for deduplicating singular and plural suggestions. If specified, only the more popular form is included.
+ * Languages for deduplicating singular and plural suggestions. If specified, only the more popular form is included.
  *
  * Implementations:
  * - [Boolean] - *[Languages.of]*
