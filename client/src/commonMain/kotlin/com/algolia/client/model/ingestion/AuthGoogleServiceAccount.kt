@@ -5,17 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Authentication input to connect to a Google service (e.g. BigQuery).
+ * Credentials for authenticating with a Google service account, such as BigQuery.
  *
- * @param clientEmail Email address of the Service Account.
- * @param privateKey Private key of the Service Account.
+ * @param clientEmail Email address of the Google service account.
+ * @param privateKey Private key of the Google service account. This field is `null` in the API response.
  */
 @Serializable
 public data class AuthGoogleServiceAccount(
 
-  /** Email address of the Service Account. */
+  /** Email address of the Google service account. */
   @SerialName(value = "clientEmail") val clientEmail: String,
 
-  /** Private key of the Service Account. */
+  /** Private key of the Google service account. This field is `null` in the API response. */
   @SerialName(value = "privateKey") val privateKey: String,
 ) : AuthInput

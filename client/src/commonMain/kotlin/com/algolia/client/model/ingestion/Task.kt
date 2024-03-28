@@ -7,44 +7,44 @@ import kotlinx.serialization.json.*
 /**
  * Task
  *
- * @param taskID The task UUID.
- * @param sourceID The source UUID.
- * @param destinationID The destination UUID.
+ * @param taskID Universally unique identifier (UUID) of a task.
+ * @param sourceID Universally uniqud identifier (UUID) of a source.
+ * @param destinationID Universally unique identifier (UUID) of a destination resource.
  * @param trigger
- * @param enabled Whether the task is enabled or not.
+ * @param enabled Whether the task is enabled.
  * @param action
- * @param createdAt Date of creation (RFC3339 format).
+ * @param createdAt Date of creation in RFC3339 format.
  * @param input
- * @param failureThreshold A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
- * @param updatedAt Date of last update (RFC3339 format).
+ * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
+ * @param updatedAt Date of last update in RFC3339 format.
  */
 @Serializable
 public data class Task(
 
-  /** The task UUID. */
+  /** Universally unique identifier (UUID) of a task. */
   @SerialName(value = "taskID") val taskID: String,
 
-  /** The source UUID. */
+  /** Universally uniqud identifier (UUID) of a source. */
   @SerialName(value = "sourceID") val sourceID: String,
 
-  /** The destination UUID. */
+  /** Universally unique identifier (UUID) of a destination resource. */
   @SerialName(value = "destinationID") val destinationID: String,
 
   @SerialName(value = "trigger") val trigger: Trigger,
 
-  /** Whether the task is enabled or not. */
+  /** Whether the task is enabled. */
   @SerialName(value = "enabled") val enabled: Boolean,
 
   @SerialName(value = "action") val action: ActionType,
 
-  /** Date of creation (RFC3339 format). */
+  /** Date of creation in RFC3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
   @SerialName(value = "input") val input: TaskInput? = null,
 
-  /** A percentage representing the accepted failure threshold to determine if a `run` succeeded or not. */
+  /** Maximum accepted percentage of failures for a task run to finish successfully. */
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
 
-  /** Date of last update (RFC3339 format). */
+  /** Date of last update in RFC3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String? = null,
 )

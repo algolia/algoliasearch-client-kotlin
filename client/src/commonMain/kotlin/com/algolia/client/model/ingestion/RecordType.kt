@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Determines the indexing strategy to use for a given e-commerce source.
+ * Record type for ecommerce sources.
  */
 @Serializable
 public enum class RecordType(public val value: kotlin.String) {

@@ -8,19 +8,20 @@ import kotlinx.serialization.json.*
  * SourceCreate
  *
  * @param type
- * @param name
+ * @param name Descriptive name of the source.
  * @param input
- * @param authenticationID The authentication UUID.
+ * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
  */
 @Serializable
 public data class SourceCreate(
 
   @SerialName(value = "type") val type: SourceType,
 
+  /** Descriptive name of the source. */
   @SerialName(value = "name") val name: String,
 
   @SerialName(value = "input") val input: SourceInput,
 
-  /** The authentication UUID. */
+  /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
 )

@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * The type of the image.
+ * Image type.
  */
 @Serializable
 public enum class DockerImageType(public val value: kotlin.String) {

@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * A task which is triggered by an external subscription (e.g. Webhook).
+ * Task runs after receiving subscribed event.
  */
 @Serializable
 public enum class SubscriptionTriggerType(public val value: kotlin.String) {

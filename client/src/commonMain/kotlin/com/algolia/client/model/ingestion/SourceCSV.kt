@@ -7,22 +7,22 @@ import kotlinx.serialization.json.*
 /**
  * SourceCSV
  *
- * @param url The URL of the file.
- * @param uniqueIDColumn The name of the column that contains the unique ID, used as `objectID` in Algolia.
- * @param mapping Mapping of type for every column. For example {\"myColumn\": \"boolean\", \"myOtherColumn\": \"json\"}.
+ * @param url URL of the file.
+ * @param uniqueIDColumn Name of a column that contains a unique ID which will be used as `objectID` in Algolia.
+ * @param mapping Key-value pairs of column names and their expected types.
  * @param method
  * @param delimiter The character used to split the value on each line, default to a comma (\\r, \\n, 0xFFFD, and space are forbidden).
  */
 @Serializable
 public data class SourceCSV(
 
-  /** The URL of the file. */
+  /** URL of the file. */
   @SerialName(value = "url") val url: String,
 
-  /** The name of the column that contains the unique ID, used as `objectID` in Algolia. */
+  /** Name of a column that contains a unique ID which will be used as `objectID` in Algolia. */
   @SerialName(value = "uniqueIDColumn") val uniqueIDColumn: String? = null,
 
-  /** Mapping of type for every column. For example {\"myColumn\": \"boolean\", \"myOtherColumn\": \"json\"}.  */
+  /** Key-value pairs of column names and their expected types.  */
   @SerialName(value = "mapping") val mapping: Map<kotlin.String, MappingTypeCSV>? = null,
 
   @SerialName(value = "method") val method: MethodType? = null,

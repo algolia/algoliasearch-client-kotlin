@@ -5,34 +5,34 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * An authentication is used to login into a Source or a Destination, with obfuscated input.
+ * Resource representing the information required to authenticate with a source or a destination.
  *
- * @param authenticationID The authentication UUID.
+ * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
  * @param type
- * @param name An human readable name describing the object.
+ * @param name Descriptive name for the resource.
  * @param input
- * @param createdAt Date of creation (RFC3339 format).
+ * @param createdAt Date of creation in RFC3339 format.
  * @param platform
- * @param updatedAt Date of last update (RFC3339 format).
+ * @param updatedAt Date of last update in RFC3339 format.
  */
 @Serializable
 public data class Authentication(
 
-  /** The authentication UUID. */
+  /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String,
 
   @SerialName(value = "type") val type: AuthenticationType,
 
-  /** An human readable name describing the object. */
+  /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String,
 
   @SerialName(value = "input") val input: AuthInputPartial,
 
-  /** Date of creation (RFC3339 format). */
+  /** Date of creation in RFC3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
   @SerialName(value = "platform") val platform: Platform? = null,
 
-  /** Date of last update (RFC3339 format). */
+  /** Date of last update in RFC3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String? = null,
 )

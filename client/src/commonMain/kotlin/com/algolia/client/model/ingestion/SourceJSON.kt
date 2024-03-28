@@ -7,17 +7,17 @@ import kotlinx.serialization.json.*
 /**
  * SourceJSON
  *
- * @param url The URL of the file.
- * @param uniqueIDColumn The name of the column that contains the unique ID, used as `objectID` in Algolia.
+ * @param url URL of the file.
+ * @param uniqueIDColumn Name of a column that contains a unique ID which will be used as `objectID` in Algolia.
  * @param method
  */
 @Serializable
 public data class SourceJSON(
 
-  /** The URL of the file. */
+  /** URL of the file. */
   @SerialName(value = "url") val url: String,
 
-  /** The name of the column that contains the unique ID, used as `objectID` in Algolia. */
+  /** Name of a column that contains a unique ID which will be used as `objectID` in Algolia. */
   @SerialName(value = "uniqueIDColumn") val uniqueIDColumn: String? = null,
 
   @SerialName(value = "method") val method: MethodType? = null,

@@ -5,17 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The response from the run task API, containing an Observability Run ID and the time it was created at.
+ * API response for running a task.
  *
- * @param runID The run UUID.
- * @param createdAt Date of creation (RFC3339 format).
+ * @param runID Universally unique identifier (UUID) of a task run.
+ * @param createdAt Date of creation in RFC3339 format.
  */
 @Serializable
 public data class RunResponse(
 
-  /** The run UUID. */
+  /** Universally unique identifier (UUID) of a task run. */
   @SerialName(value = "runID") val runID: String,
 
-  /** Date of creation (RFC3339 format). */
+  /** Date of creation in RFC3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 )

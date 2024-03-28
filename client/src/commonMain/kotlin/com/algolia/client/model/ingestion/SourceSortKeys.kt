@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Used to sort the Source list endpoint.
+ * Property by which to sort the list of sources.
  */
 @Serializable
 public enum class SourceSortKeys(public val value: kotlin.String) {

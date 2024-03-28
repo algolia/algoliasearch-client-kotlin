@@ -7,17 +7,18 @@ import kotlinx.serialization.json.*
 /**
  * SourceUpdate
  *
- * @param name
+ * @param name Descriptive name of the source.
  * @param input
- * @param authenticationID The authentication UUID.
+ * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
  */
 @Serializable
 public data class SourceUpdate(
 
+  /** Descriptive name of the source. */
   @SerialName(value = "name") val name: String? = null,
 
   @SerialName(value = "input") val input: SourceUpdateInput? = null,
 
-  /** The authentication UUID. */
+  /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
 )

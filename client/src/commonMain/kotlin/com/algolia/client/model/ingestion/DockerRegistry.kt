@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * The registry where the image is stored.
+ * Container registry name from where to pull the image.
  */
 @Serializable
 public enum class DockerRegistry(public val value: kotlin.String) {

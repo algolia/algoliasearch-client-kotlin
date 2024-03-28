@@ -9,23 +9,29 @@ public enum class SourceType(public val value: kotlin.String) {
   @SerialName(value = "bigcommerce")
   Bigcommerce("bigcommerce"),
 
+  @SerialName(value = "bigquery")
+  Bigquery("bigquery"),
+
   @SerialName(value = "commercetools")
   Commercetools("commercetools"),
 
-  @SerialName(value = "json")
-  Json("json"),
-
   @SerialName(value = "csv")
   Csv("csv"),
-
-  @SerialName(value = "bigquery")
-  Bigquery("bigquery"),
 
   @SerialName(value = "docker")
   Docker("docker"),
 
   @SerialName(value = "ga4BigqueryExport")
-  Ga4BigqueryExport("ga4BigqueryExport");
+  Ga4BigqueryExport("ga4BigqueryExport"),
+
+  @SerialName(value = "json")
+  Json("json"),
+
+  @SerialName(value = "shopify")
+  Shopify("shopify"),
+
+  @SerialName(value = "sfcc")
+  Sfcc("sfcc");
 
   override fun toString(): kotlin.String = value
 }

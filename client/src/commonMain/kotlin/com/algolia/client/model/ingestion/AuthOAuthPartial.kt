@@ -5,21 +5,25 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Authentication input for OAuth login.
+ * Credentials for authenticating with OAuth 2.0.
  *
- * @param url The OAuth endpoint URL.
- * @param clientId The clientID.
- * @param clientSecret The secret.
+ * @param url URL for the OAuth endpoint.
+ * @param clientId Client ID.
+ * @param clientSecret Client secret. This field is `null` in the API response.
+ * @param scope OAuth scope.
  */
 @Serializable
 public data class AuthOAuthPartial(
 
-  /** The OAuth endpoint URL. */
+  /** URL for the OAuth endpoint. */
   @SerialName(value = "url") val url: String? = null,
 
-  /** The clientID. */
+  /** Client ID. */
   @SerialName(value = "client_id") val clientId: String? = null,
 
-  /** The secret. */
+  /** Client secret. This field is `null` in the API response. */
   @SerialName(value = "client_secret") val clientSecret: String? = null,
+
+  /** OAuth scope. */
+  @SerialName(value = "scope") val scope: String? = null,
 ) : AuthInputPartial

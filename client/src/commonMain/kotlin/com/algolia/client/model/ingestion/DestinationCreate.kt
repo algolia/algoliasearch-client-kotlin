@@ -5,23 +5,23 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The payload when creating a destination.
+ * API request body for creating a new destination.
  *
  * @param type
- * @param name An human readable name describing the object.
+ * @param name Descriptive name for the resource.
  * @param input
- * @param authenticationID The authentication UUID.
+ * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
  */
 @Serializable
 public data class DestinationCreate(
 
   @SerialName(value = "type") val type: DestinationType,
 
-  /** An human readable name describing the object. */
+  /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String,
 
   @SerialName(value = "input") val input: DestinationInput,
 
-  /** The authentication UUID. */
+  /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
 )

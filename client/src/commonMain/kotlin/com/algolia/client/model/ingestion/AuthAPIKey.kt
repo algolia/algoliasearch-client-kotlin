@@ -5,12 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Authentication input used for token credentials.
+ * Credentials for authenticating with an API key.
  *
- * @param key
+ * @param key API key. This field is `null` in the API response.
  */
 @Serializable
 public data class AuthAPIKey(
 
+  /** API key. This field is `null` in the API response. */
   @SerialName(value = "key") val key: String,
 ) : AuthInput

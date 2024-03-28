@@ -3,6 +3,9 @@ package com.algolia.client.model.ingestion
 
 import kotlinx.serialization.*
 
+/**
+ * Task run type.
+ */
 @Serializable
 public enum class RunType(public val value: kotlin.String) {
 

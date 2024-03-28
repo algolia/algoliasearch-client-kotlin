@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The trigger input for a task of type 'subscription'.
+ * Trigger input for subscription tasks.
  *
  * @param type
  */

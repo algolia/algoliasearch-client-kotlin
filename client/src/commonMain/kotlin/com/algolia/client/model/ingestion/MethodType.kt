@@ -3,6 +3,9 @@ package com.algolia.client.model.ingestion
 
 import kotlinx.serialization.*
 
+/**
+ * HTTP method to be used for retrieving your data.
+ */
 @Serializable
 public enum class MethodType(public val value: kotlin.String) {
 

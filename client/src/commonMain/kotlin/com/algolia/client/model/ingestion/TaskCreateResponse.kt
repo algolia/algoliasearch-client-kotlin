@@ -5,17 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The response from the API after a task creation.
+ * API response for creating a task.
  *
- * @param taskID The task UUID.
- * @param createdAt Date of creation (RFC3339 format).
+ * @param taskID Universally unique identifier (UUID) of a task.
+ * @param createdAt Date of creation in RFC3339 format.
  */
 @Serializable
 public data class TaskCreateResponse(
 
-  /** The task UUID. */
+  /** Universally unique identifier (UUID) of a task. */
   @SerialName(value = "taskID") val taskID: String,
 
-  /** Date of creation (RFC3339 format). */
+  /** Date of creation in RFC3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 )

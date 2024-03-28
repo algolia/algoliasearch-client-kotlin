@@ -2,15 +2,15 @@
 package com.algolia.client.model.ingestion
 
 import kotlinx.serialization.*
-import kotlinx.serialization.json.*
 
 /**
- * Trigger information for manually-triggered tasks.
- *
- * @param type
+ * Mapping format schema.
  */
 @Serializable
-public data class OnDemandTriggerInput(
+public enum class MappingFormatSchema(public val value: kotlin.String) {
 
-  @SerialName(value = "type") val type: OnDemandTriggerType,
-) : TaskCreateTrigger
+  @SerialName(value = "mappingkit/v1")
+  MappingkitSlashV1("mappingkit/v1");
+
+  override fun toString(): kotlin.String = value
+}

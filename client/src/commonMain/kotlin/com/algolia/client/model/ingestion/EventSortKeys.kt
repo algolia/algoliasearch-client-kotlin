@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Used to sort the Event list endpoint.
+ * Property by which to sort the list of task run events.
  */
 @Serializable
 public enum class EventSortKeys(public val value: kotlin.String) {

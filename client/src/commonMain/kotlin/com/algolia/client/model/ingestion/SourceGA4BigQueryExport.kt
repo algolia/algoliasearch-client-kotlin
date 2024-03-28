@@ -7,19 +7,19 @@ import kotlinx.serialization.json.*
 /**
  * SourceGA4BigQueryExport
  *
- * @param projectID GCP project ID that the BigQuery Export writes to.
- * @param datasetID BigQuery dataset ID that the BigQuery Export writes to.
- * @param tablePrefix Prefix of the tables that the BigQuery Export writes to (i.e. events_intraday_ for streaming, events_ for daily).
+ * @param projectID GCP project ID that the BigQuery export writes to.
+ * @param datasetID BigQuery dataset ID that the BigQuery export writes to.
+ * @param tablePrefix Prefix of the tables that the BigQuery Export writes to.
  */
 @Serializable
 public data class SourceGA4BigQueryExport(
 
-  /** GCP project ID that the BigQuery Export writes to. */
+  /** GCP project ID that the BigQuery export writes to. */
   @SerialName(value = "projectID") val projectID: String,
 
-  /** BigQuery dataset ID that the BigQuery Export writes to. */
+  /** BigQuery dataset ID that the BigQuery export writes to. */
   @SerialName(value = "datasetID") val datasetID: String,
 
-  /** Prefix of the tables that the BigQuery Export writes to (i.e. events_intraday_ for streaming, events_ for daily). */
+  /** Prefix of the tables that the BigQuery Export writes to. */
   @SerialName(value = "tablePrefix") val tablePrefix: String,
 ) : SourceInput, SourceUpdateInput

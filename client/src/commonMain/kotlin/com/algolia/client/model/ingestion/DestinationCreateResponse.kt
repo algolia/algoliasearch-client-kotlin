@@ -5,21 +5,21 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Response from the API when the Destination is successfully created.
+ * API response for creating a new destination.
  *
- * @param destinationID The destination UUID.
- * @param name An human readable name describing the object.
- * @param createdAt Date of creation (RFC3339 format).
+ * @param destinationID Universally unique identifier (UUID) of a destination resource.
+ * @param name Descriptive name for the resource.
+ * @param createdAt Date of creation in RFC3339 format.
  */
 @Serializable
 public data class DestinationCreateResponse(
 
-  /** The destination UUID. */
+  /** Universally unique identifier (UUID) of a destination resource. */
   @SerialName(value = "destinationID") val destinationID: String,
 
-  /** An human readable name describing the object. */
+  /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String,
 
-  /** Date of creation (RFC3339 format). */
+  /** Date of creation in RFC3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 )

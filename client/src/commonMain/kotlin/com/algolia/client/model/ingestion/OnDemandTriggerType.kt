@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * A task which is manually executed via the run task endpoint.
+ * Task is run manually, with the `/run` endpoint.
  */
 @Serializable
 public enum class OnDemandTriggerType(public val value: kotlin.String) {

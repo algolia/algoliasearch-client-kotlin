@@ -5,19 +5,19 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The input for an `onDemand` task whose source is of type `bigquery` and for which extracted data spans a given time range.
+ * Input for a manually-triggered task whose source is of type `bigquery` and for which extracted data spans a given time range.
  *
- * @param startDate The start date of the extraction (RFC3339 format).
- * @param endDate The end date of the extraction (RFC3339 format).
+ * @param startDate Earliest date in RFC3339 format of the extracted data from Big Query.
+ * @param endDate Latest date in RFC3339 format of the extracted data from Big Query.
  * @param mapping
  */
 @Serializable
 public data class OnDemandDateUtilsInput(
 
-  /** The start date of the extraction (RFC3339 format). */
+  /** Earliest date in RFC3339 format of the extracted data from Big Query. */
   @SerialName(value = "startDate") val startDate: String,
 
-  /** The end date of the extraction (RFC3339 format). */
+  /** Latest date in RFC3339 format of the extracted data from Big Query. */
   @SerialName(value = "endDate") val endDate: String,
 
   @SerialName(value = "mapping") val mapping: MappingInput? = null,

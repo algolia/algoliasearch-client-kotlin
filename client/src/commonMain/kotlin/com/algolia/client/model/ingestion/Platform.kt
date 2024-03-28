@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Describe which platform the Authentication is used for.
+ * Name of an ecommerce platform with which to authenticate. This determines which authentication type you can select.
  */
 @Serializable
 public enum class Platform(public val value: kotlin.String) : PlatformWithNone {
@@ -13,7 +13,10 @@ public enum class Platform(public val value: kotlin.String) : PlatformWithNone {
   Bigcommerce("bigcommerce"),
 
   @SerialName(value = "commercetools")
-  Commercetools("commercetools");
+  Commercetools("commercetools"),
+
+  @SerialName(value = "shopify")
+  Shopify("shopify");
 
   override fun toString(): kotlin.String = value
 }

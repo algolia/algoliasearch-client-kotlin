@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Used to sort the Run list endpoint.
+ * Property by which to sort the list of task runs.
  */
 @Serializable
 public enum class RunSortKeys(public val value: kotlin.String) {

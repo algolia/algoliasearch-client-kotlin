@@ -5,10 +5,10 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The payload when creating an authentication.
+ * Request body for creating a new authentication resource.
  *
  * @param type
- * @param name An human readable name describing the object.
+ * @param name Descriptive name for the resource.
  * @param input
  * @param platform
  */
@@ -17,7 +17,7 @@ public data class AuthenticationCreate(
 
   @SerialName(value = "type") val type: AuthenticationType,
 
-  /** An human readable name describing the object. */
+  /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String,
 
   @SerialName(value = "input") val input: AuthInput,

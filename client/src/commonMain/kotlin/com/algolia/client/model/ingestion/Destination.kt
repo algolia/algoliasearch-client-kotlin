@@ -5,35 +5,35 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * A destination describe how the data is indexed on the Algolia side.
+ * Destinations are Algolia resources like indices or event streams.
  *
- * @param destinationID The destination UUID.
+ * @param destinationID Universally unique identifier (UUID) of a destination resource.
  * @param type
- * @param name An human readable name describing the object.
+ * @param name Descriptive name for the resource.
  * @param input
- * @param createdAt Date of creation (RFC3339 format).
- * @param updatedAt Date of last update (RFC3339 format).
- * @param authenticationID The authentication UUID.
+ * @param createdAt Date of creation in RFC3339 format.
+ * @param updatedAt Date of last update in RFC3339 format.
+ * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
  */
 @Serializable
 public data class Destination(
 
-  /** The destination UUID. */
+  /** Universally unique identifier (UUID) of a destination resource. */
   @SerialName(value = "destinationID") val destinationID: String,
 
   @SerialName(value = "type") val type: DestinationType,
 
-  /** An human readable name describing the object. */
+  /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String,
 
   @SerialName(value = "input") val input: DestinationInput,
 
-  /** Date of creation (RFC3339 format). */
+  /** Date of creation in RFC3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
-  /** Date of last update (RFC3339 format). */
+  /** Date of last update in RFC3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String? = null,
 
-  /** The authentication UUID. */
+  /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
 )

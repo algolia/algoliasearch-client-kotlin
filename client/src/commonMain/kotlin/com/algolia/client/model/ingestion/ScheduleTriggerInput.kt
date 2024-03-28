@@ -5,16 +5,16 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The trigger input for a task of type 'schedule'.
+ * Trigger input for scheduled tasks.
  *
  * @param type
- * @param cron A cron expression that represent at which regularity the task should run.
+ * @param cron Cron expression for the task's schedule.
  */
 @Serializable
 public data class ScheduleTriggerInput(
 
   @SerialName(value = "type") val type: ScheduleTriggerType,
 
-  /** A cron expression that represent at which regularity the task should run. */
+  /** Cron expression for the task's schedule. */
   @SerialName(value = "cron") val cron: String,
 ) : TaskCreateTrigger

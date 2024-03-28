@@ -10,8 +10,8 @@ import kotlinx.serialization.json.*
  * @param url
  * @param projectKey
  * @param storeKeys
- * @param locales Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"].
- * @param fallbackIsInStockValue Determines the value that will be stored in the Algolia record if there's no inventory information on the product.
+ * @param locales Locales for your commercetools stores.
+ * @param fallbackIsInStockValue Whether a fallback value is stored in the Algolia record if there's no inventory information about the product.
  * @param customFields
  */
 @Serializable
@@ -23,10 +23,10 @@ public data class SourceCommercetools(
 
   @SerialName(value = "storeKeys") val storeKeys: List<String>? = null,
 
-  /** Array of locales that must match the following pattern: ^[a-z]{2}(-[A-Z]{2})?$. For example [\"fr-FR\", \"en\"].  */
+  /** Locales for your commercetools stores. */
   @SerialName(value = "locales") val locales: List<String>? = null,
 
-  /** Determines the value that will be stored in the Algolia record if there's no inventory information on the product.  */
+  /** Whether a fallback value is stored in the Algolia record if there's no inventory information about the product.  */
   @SerialName(value = "fallbackIsInStockValue") val fallbackIsInStockValue: Boolean? = null,
 
   @SerialName(value = "customFields") val customFields: CommercetoolsCustomFields? = null,

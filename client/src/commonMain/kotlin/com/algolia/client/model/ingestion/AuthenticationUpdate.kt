@@ -5,10 +5,10 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Payload to partially update an Authentication.
+ * Request body for updating an authentication resource.
  *
  * @param type
- * @param name An human readable name describing the object.
+ * @param name Descriptive name for the resource.
  * @param platform
  * @param input
  */
@@ -17,7 +17,7 @@ public data class AuthenticationUpdate(
 
   @SerialName(value = "type") val type: AuthenticationType? = null,
 
-  /** An human readable name describing the object. */
+  /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String? = null,
 
   @SerialName(value = "platform") val platform: Platform? = null,

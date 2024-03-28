@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Payload to search for multiple destinations, based on the given `destinationIDs`.
+ * API request body for searching destinations.
  *
  * @param destinationIDs
  */

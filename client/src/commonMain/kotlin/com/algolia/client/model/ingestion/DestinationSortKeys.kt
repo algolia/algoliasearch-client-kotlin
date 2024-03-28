@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Used to sort the Destination list endpoint.
+ * Property by which to sort the destinations.
  */
 @Serializable
 public enum class DestinationSortKeys(public val value: kotlin.String) {

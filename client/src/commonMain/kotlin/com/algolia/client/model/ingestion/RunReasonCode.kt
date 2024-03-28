@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * An identifier that pairs with the outcome reason.
+ * A code for the task run's outcome. A readable description of the code is included in the `reason` response property.
  */
 @Serializable
 public enum class RunReasonCode(public val value: kotlin.String) {

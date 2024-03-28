@@ -5,17 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * AuthAlgolia
+ * Credentials for authenticating with Algolia.
  *
- * @param appID Algolia Application ID.
- * @param apiKey Algolia API Key, with the correct rights to push to an index and change settings.
+ * @param appID Algolia application ID.
+ * @param apiKey Algolia API key with the ACL: `addObject`, `deleteObject`, `settings`, `editSettings`, `listIndexes`, `deleteIndex`. This field is `null` in the API response.
  */
 @Serializable
 public data class AuthAlgolia(
 
-  /** Algolia Application ID. */
+  /** Algolia application ID. */
   @SerialName(value = "appID") val appID: String,
 
-  /** Algolia API Key, with the correct rights to push to an index and change settings. */
+  /** Algolia API key with the ACL: `addObject`, `deleteObject`, `settings`, `editSettings`, `listIndexes`, `deleteIndex`. This field is `null` in the API response.  */
   @SerialName(value = "apiKey") val apiKey: String,
 ) : AuthInput

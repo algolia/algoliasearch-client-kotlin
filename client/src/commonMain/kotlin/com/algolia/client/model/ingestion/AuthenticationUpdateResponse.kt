@@ -5,21 +5,21 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Response from the API when the Authentication is successfully updated.
+ * API response for a successful update of an authentication resource.
  *
- * @param authenticationID The authentication UUID.
- * @param name An human readable name describing the object.
- * @param updatedAt Date of last update (RFC3339 format).
+ * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
+ * @param name Descriptive name for the resource.
+ * @param updatedAt Date of last update in RFC3339 format.
  */
 @Serializable
 public data class AuthenticationUpdateResponse(
 
-  /** The authentication UUID. */
+  /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String,
 
-  /** An human readable name describing the object. */
+  /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String,
 
-  /** Date of last update (RFC3339 format). */
+  /** Date of last update in RFC3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
 )

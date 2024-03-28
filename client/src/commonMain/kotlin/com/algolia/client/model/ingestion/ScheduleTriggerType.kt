@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * A task which is triggered by a schedule (cron expression).
+ * Task runs on a schedule.
  */
 @Serializable
 public enum class ScheduleTriggerType(public val value: kotlin.String) {

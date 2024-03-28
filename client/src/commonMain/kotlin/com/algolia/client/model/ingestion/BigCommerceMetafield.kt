@@ -7,15 +7,15 @@ import kotlinx.serialization.json.*
 /**
  * BigCommerceMetafield
  *
- * @param namespace The namespace of the metafield.
- * @param key The key identifier of the metafield.
+ * @param namespace Namespace of the metafield.
+ * @param key Key identifier of the metafield.
  */
 @Serializable
 public data class BigCommerceMetafield(
 
-  /** The namespace of the metafield. */
+  /** Namespace of the metafield. */
   @SerialName(value = "namespace") val namespace: String,
 
-  /** The key identifier of the metafield. */
+  /** Key identifier of the metafield. */
   @SerialName(value = "key") val key: String,
 )

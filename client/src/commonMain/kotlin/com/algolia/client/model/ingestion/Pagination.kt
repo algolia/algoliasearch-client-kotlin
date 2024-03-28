@@ -5,21 +5,25 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Pagination
+ * Paginated API response.
  *
- * @param nbPages
- * @param page
- * @param nbItems
- * @param itemsPerPage
+ * @param nbPages Number of pages in the API response.
+ * @param page Page of the API response to retrieve.
+ * @param nbItems Number of items in the API response.
+ * @param itemsPerPage Number of items per page.
  */
 @Serializable
 public data class Pagination(
 
+  /** Number of pages in the API response. */
   @SerialName(value = "nbPages") val nbPages: Int,
 
+  /** Page of the API response to retrieve. */
   @SerialName(value = "page") val page: Int,
 
+  /** Number of items in the API response. */
   @SerialName(value = "nbItems") val nbItems: Int,
 
+  /** Number of items per page. */
   @SerialName(value = "itemsPerPage") val itemsPerPage: Int,
 )

@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Used to filter Authentication without platform property.
+ * Authentication resource not tied to any ecommerce platform, used for filtering.
  */
 @Serializable
 public enum class PlatformNone(public val value: kotlin.String) : PlatformWithNone {

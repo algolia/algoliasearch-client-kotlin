@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The input for a `streaming` task whose source is of type `ga4BigqueryExport` and for which extracted data is continuously streamed.
+ * Input for a `streaming` task whose source is of type `ga4BigqueryExport` and for which extracted data is continuously streamed.
  *
  * @param mapping
  */

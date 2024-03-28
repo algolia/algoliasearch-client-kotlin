@@ -5,16 +5,15 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Transformations to apply to source, serialized as a JSON string.
+ * Transformations to apply to the source, serialized as a JSON string.
  *
- * @param format Name of the mapping format schema, `mappingkit/v1` is currently the only supported format.
+ * @param format
  * @param actions
  */
 @Serializable
 public data class MappingInput(
 
-  /** Name of the mapping format schema, `mappingkit/v1` is currently the only supported format. */
-  @SerialName(value = "format") val format: String,
+  @SerialName(value = "format") val format: MappingFormatSchema,
 
   @SerialName(value = "actions") val actions: List<MappingKitAction>,
 )

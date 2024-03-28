@@ -29,7 +29,7 @@ public class IngestionClient(
   }
 
   /**
-   * Create a authentication.
+   * Creates a new authentication resource.
    *
    * Required API Key ACLs:
    *   - addObject
@@ -51,7 +51,7 @@ public class IngestionClient(
   }
 
   /**
-   * Create a destination.
+   * Creates a new destination.
    *
    * Required API Key ACLs:
    *   - addObject
@@ -73,7 +73,7 @@ public class IngestionClient(
   }
 
   /**
-   * Create a source.
+   * Creates a new source.
    *
    * Required API Key ACLs:
    *   - addObject
@@ -95,8 +95,8 @@ public class IngestionClient(
   }
 
   /**
-   * Create a task.
-   * @param taskCreate
+   * Creates a new task.
+   * @param taskCreate Request body for creating a task.
    * @param requestOptions additional request configuration.
    */
   public suspend fun createTask(taskCreate: TaskCreate, requestOptions: RequestOptions? = null): TaskCreateResponse {
@@ -200,13 +200,13 @@ public class IngestionClient(
   }
 
   /**
-   * Soft delete the authentication of the given authenticationID.
+   * Deletes an authentication resource. You can't delete authentication resources that are used by a source or a destination.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param authenticationID The authentication UUID.
+   * @param authenticationID Unique identifier of an authentication resource.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteAuthentication(authenticationID: String, requestOptions: RequestOptions? = null): DeleteResponse {
@@ -222,13 +222,13 @@ public class IngestionClient(
   }
 
   /**
-   * Soft delete the destination of the given destinationID.
+   * Deletes a destination by its ID. You can't delete destinations that are referenced in tasks.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param destinationID The destination UUID.
+   * @param destinationID Unique identifier of a destination.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteDestination(destinationID: String, requestOptions: RequestOptions? = null): DeleteResponse {
@@ -244,13 +244,13 @@ public class IngestionClient(
   }
 
   /**
-   * Soft delete the source of the given sourceID.
+   * Deletes a source by its ID. You can't delete sources that are referenced in tasks.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param sourceID The source UUID.
+   * @param sourceID Unique identifier of a source.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteSource(sourceID: String, requestOptions: RequestOptions? = null): DeleteResponse {
@@ -266,8 +266,8 @@ public class IngestionClient(
   }
 
   /**
-   * Soft delete the task of the given taskID.
-   * @param taskID The task UUID.
+   * Deletes a task by its ID.
+   * @param taskID Unique identifier of a task.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteTask(taskID: String, requestOptions: RequestOptions? = null): DeleteResponse {
@@ -283,13 +283,13 @@ public class IngestionClient(
   }
 
   /**
-   * Disable the task of the given taskID.
+   * Disables a task.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param taskID The task UUID.
+   * @param taskID Unique identifier of a task.
    * @param requestOptions additional request configuration.
    */
   public suspend fun disableTask(taskID: String, requestOptions: RequestOptions? = null): TaskUpdateResponse {
@@ -305,13 +305,13 @@ public class IngestionClient(
   }
 
   /**
-   * Enable the task of the given taskID.
+   * Enables a task.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param taskID The task UUID.
+   * @param taskID Unique identifier of a task.
    * @param requestOptions additional request configuration.
    */
   public suspend fun enableTask(taskID: String, requestOptions: RequestOptions? = null): TaskUpdateResponse {
@@ -327,13 +327,13 @@ public class IngestionClient(
   }
 
   /**
-   * Get the authentication of the given authenticationID.
+   * Retrieves an authentication resource by its ID.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param authenticationID The authentication UUID.
+   * @param authenticationID Unique identifier of an authentication resource.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getAuthentication(authenticationID: String, requestOptions: RequestOptions? = null): Authentication {
@@ -349,18 +349,18 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of authentications for the given query parameters, with pagination details.
+   * Retrieves a list of all authentication resources.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param itemsPerPage The number of items per page to return.
-   * @param page The page number to fetch, starting at 1.
-   * @param type The type of the authentications to retrieve.
-   * @param platform The platform of the authentications to retrieve.
-   * @param sort The key by which the list should be sorted.
-   * @param order The order of the returned list.
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param type Type of authentication resource to retrieve.
+   * @param platform Ecommerce platform for which to retrieve authentication resources.
+   * @param sort Property by which to sort the list of authentication resources. (default to createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
    * @param requestOptions additional request configuration.
    */
   public suspend fun getAuthentications(itemsPerPage: Int? = null, page: Int? = null, type: List<AuthenticationType>? = null, platform: List<PlatformWithNone>? = null, sort: AuthenticationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListAuthenticationsResponse {
@@ -383,13 +383,13 @@ public class IngestionClient(
   }
 
   /**
-   * Get the destination of the given destinationID.
+   * Retrieves a destination by its ID.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param destinationID The destination UUID.
+   * @param destinationID Unique identifier of a destination.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getDestination(destinationID: String, requestOptions: RequestOptions? = null): Destination {
@@ -405,18 +405,18 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of destinations for the given query parameters, with pagination details.
+   * Retrieves a list of destinations.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param itemsPerPage The number of items per page to return.
-   * @param page The page number to fetch, starting at 1.
-   * @param type The type of the destinations to retrive.
-   * @param authenticationID The authenticationIDs of the destinations to retrive.
-   * @param sort The key by which the list should be sorted.
-   * @param order The order of the returned list.
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param type Destination type.
+   * @param authenticationID Authentication ID used by destinations.
+   * @param sort Property by which to sort the destinations. (default to createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
    * @param requestOptions additional request configuration.
    */
   public suspend fun getDestinations(itemsPerPage: Int? = null, page: Int? = null, type: List<DestinationType>? = null, authenticationID: List<String>? = null, sort: DestinationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListDestinationsResponse {
@@ -439,13 +439,13 @@ public class IngestionClient(
   }
 
   /**
-   * Retrieve a stream listing for a given Singer specification compatible docker type source ID.
+   * Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param sourceID The source UUID.
+   * @param sourceID Unique identifier of a source.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getDockerSourceStreams(sourceID: String, requestOptions: RequestOptions? = null): DockerSourceStreams {
@@ -461,14 +461,14 @@ public class IngestionClient(
   }
 
   /**
-   * Get a single event for a specific runID.
+   * Retrieves a single task run event by its ID.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param runID The run UUID.
-   * @param eventID The event UUID.
+   * @param runID Unique identifier of a task run.
+   * @param eventID Unique identifier of an event.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getEvent(runID: String, eventID: String, requestOptions: RequestOptions? = null): Event {
@@ -485,21 +485,21 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of events associated to the given runID, for the given query parameters.
+   * Retrieves a list of events for a task run, identified by it's ID.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param runID The run UUID.
-   * @param itemsPerPage The number of items per page to return.
-   * @param page The page number to fetch, starting at 1.
-   * @param status Filter the status of the events.
-   * @param type Filter the type of the events.
-   * @param sort The key by which the list should be sorted.
-   * @param order The order of the returned list.
-   * @param startDate The start date (in RFC3339 format) of the events fetching window. Defaults to 'now'-3 hours if omitted.
-   * @param endDate The end date (in RFC3339 format) of the events fetching window. Defaults to 'now' days if omitted.
+   * @param runID Unique identifier of a task run.
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param status Event status for filtering the list of task runs.
+   * @param type Event type for filtering the list of task runs.
+   * @param sort Property by which to sort the list of task run events.
+   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param startDate Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used.
+   * @param endDate Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getEvents(runID: String, itemsPerPage: Int? = null, page: Int? = null, status: List<EventStatus>? = null, type: List<EventType>? = null, sort: EventSortKeys? = null, order: OrderKeys? = null, startDate: String? = null, endDate: String? = null, requestOptions: RequestOptions? = null): ListEventsResponse {
@@ -525,13 +525,13 @@ public class IngestionClient(
   }
 
   /**
-   * Get a single run for the given ID.
+   * Retrieve a single task run by its ID.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param runID The run UUID.
+   * @param runID Unique identifier of a task run.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getRun(runID: String, requestOptions: RequestOptions? = null): Run {
@@ -547,20 +547,20 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of runs for the given query parameters, with pagination details.
+   * Retrieve a list of task runs.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param itemsPerPage The number of items per page to return.
-   * @param page The page number to fetch, starting at 1.
-   * @param status Filter the status of the runs.
-   * @param taskID Filter by taskID.
-   * @param sort The key by which the list should be sorted.
-   * @param order The order of the returned list.
-   * @param startDate The start date (in RFC3339 format) of the runs fetching window. Defaults to 'now'-7 days if omitted.
-   * @param endDate The end date (in RFC3339 format) of the runs fetching window. Defaults to 'now' days if omitted.
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param status Run status for filtering the list of task runs.
+   * @param taskID Task ID for filtering the list of task runs.
+   * @param sort Property by which to sort the list of task runs. (default to createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param startDate Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used.
+   * @param endDate Date in RFC3339 format for the latest run to retrieve. By default, the current day is used.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getRuns(itemsPerPage: Int? = null, page: Int? = null, status: List<RunStatus>? = null, taskID: String? = null, sort: RunSortKeys? = null, order: OrderKeys? = null, startDate: String? = null, endDate: String? = null, requestOptions: RequestOptions? = null): RunListResponse {
@@ -585,13 +585,13 @@ public class IngestionClient(
   }
 
   /**
-   * Get the source of the given sourceID.
+   * Retrieve a source by its ID.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param sourceID The source UUID.
+   * @param sourceID Unique identifier of a source.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getSource(sourceID: String, requestOptions: RequestOptions? = null): Source {
@@ -607,18 +607,18 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of sources for the given query parameters, with pagination details.
+   * Retrieves a list of sources.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param itemsPerPage The number of items per page to return.
-   * @param page The page number to fetch, starting at 1.
-   * @param type The type of the sources to retrieve.
-   * @param authenticationID The authenticationIDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication.
-   * @param sort The key by which the list should be sorted.
-   * @param order The order of the returned list.
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param type Source type. Some sources require authentication.
+   * @param authenticationID Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication resource.
+   * @param sort Property by which to sort the list of sources. (default to createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
    * @param requestOptions additional request configuration.
    */
   public suspend fun getSources(itemsPerPage: Int? = null, page: Int? = null, type: List<SourceType>? = null, authenticationID: List<String>? = null, sort: SourceSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListSourcesResponse {
@@ -641,13 +641,13 @@ public class IngestionClient(
   }
 
   /**
-   * Get the task of the given taskID.
+   * Retrieves a task by its ID.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param taskID The task UUID.
+   * @param taskID Unique identifier of a task.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getTask(taskID: String, requestOptions: RequestOptions? = null): Task {
@@ -663,21 +663,21 @@ public class IngestionClient(
   }
 
   /**
-   * Get a list of tasks for the given query parameters, with pagination details.
+   * Retrieves a list of tasks.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param itemsPerPage The number of items per page to return.
-   * @param page The page number to fetch, starting at 1.
-   * @param action The action of the tasks to retrieve.
-   * @param enabled Whether the task is enabled or not.
-   * @param sourceID The sourceIDs of the tasks to retrieve.
-   * @param destinationID The destinationIDs of the tasks to retrieve.
-   * @param triggerType The trigger type of the task.
-   * @param sort The key by which the list should be sorted.
-   * @param order The order of the returned list.
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param action Actions for filtering the list of tasks.
+   * @param enabled Whether to filter the list of tasks by the `enabled` status.
+   * @param sourceID Source IDs for filtering the list of tasks.
+   * @param destinationID Destination IDs for filtering the list of tasks.
+   * @param triggerType Type of task trigger for filtering the list of tasks.
+   * @param sort Property by which to sort the list of tasks. (default to createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
    * @param requestOptions additional request configuration.
    */
   public suspend fun getTasks(itemsPerPage: Int? = null, page: Int? = null, action: List<ActionType>? = null, enabled: Boolean? = null, sourceID: List<String>? = null, destinationID: List<String>? = null, triggerType: List<TriggerType>? = null, sort: TaskSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTasksResponse {
@@ -703,13 +703,13 @@ public class IngestionClient(
   }
 
   /**
-   * Run the task of the given taskID.
+   * Runs a task. You can check the status of task runs with the observability endpoints.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param taskID The task UUID.
+   * @param taskID Unique identifier of a task.
    * @param requestOptions additional request configuration.
    */
   public suspend fun runTask(taskID: String, requestOptions: RequestOptions? = null): RunResponse {
@@ -725,7 +725,7 @@ public class IngestionClient(
   }
 
   /**
-   * Search among authentications with a defined set of parameters.
+   * Searches for authentication resources.
    *
    * Required API Key ACLs:
    *   - addObject
@@ -747,7 +747,7 @@ public class IngestionClient(
   }
 
   /**
-   * Search among destinations with a defined set of parameters.
+   * Searches for destinations.
    *
    * Required API Key ACLs:
    *   - addObject
@@ -769,7 +769,7 @@ public class IngestionClient(
   }
 
   /**
-   * Search among sources with a defined set of parameters.
+   * Searches for sources.
    *
    * Required API Key ACLs:
    *   - addObject
@@ -791,7 +791,7 @@ public class IngestionClient(
   }
 
   /**
-   * Search among tasks with a defined set of parameters.
+   * Searches for tasks.
    *
    * Required API Key ACLs:
    *   - addObject
@@ -813,13 +813,13 @@ public class IngestionClient(
   }
 
   /**
-   * Trigger a stream listing request for a Singer specification compatible docker type source.
+   * Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: singer`.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param sourceID The source UUID.
+   * @param sourceID Unique identifier of a source.
    * @param requestOptions additional request configuration.
    */
   public suspend fun triggerDockerSourceDiscover(sourceID: String, requestOptions: RequestOptions? = null): DockerSourceDiscover {
@@ -835,13 +835,13 @@ public class IngestionClient(
   }
 
   /**
-   * Update the authentication of the given authenticationID.
+   * Updates an authentication resource.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param authenticationID The authentication UUID.
+   * @param authenticationID Unique identifier of an authentication resource.
    * @param authenticationUpdate
    * @param requestOptions additional request configuration.
    */
@@ -859,13 +859,13 @@ public class IngestionClient(
   }
 
   /**
-   * Update the destination of the given destinationID.
+   * Updates the destination by its ID.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param destinationID The destination UUID.
+   * @param destinationID Unique identifier of a destination.
    * @param destinationUpdate
    * @param requestOptions additional request configuration.
    */
@@ -883,13 +883,13 @@ public class IngestionClient(
   }
 
   /**
-   * Update the source of the given sourceID.
+   * Updates a source by its ID.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param sourceID The source UUID.
+   * @param sourceID Unique identifier of a source.
    * @param sourceUpdate
    * @param requestOptions additional request configuration.
    */
@@ -907,8 +907,8 @@ public class IngestionClient(
   }
 
   /**
-   * Update the task of the given taskID.
-   * @param taskID The task UUID.
+   * Updates a task by its ID.
+   * @param taskID Unique identifier of a task.
    * @param taskUpdate
    * @param requestOptions additional request configuration.
    */

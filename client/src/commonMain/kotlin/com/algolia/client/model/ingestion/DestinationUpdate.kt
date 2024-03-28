@@ -5,23 +5,23 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Payload to partially update a Destination.
+ * API request body for updating a destination.
  *
  * @param type
- * @param name An human readable name describing the object.
+ * @param name Descriptive name for the resource.
  * @param input
- * @param authenticationID The authentication UUID.
+ * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
  */
 @Serializable
 public data class DestinationUpdate(
 
   @SerialName(value = "type") val type: DestinationType? = null,
 
-  /** An human readable name describing the object. */
+  /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String? = null,
 
   @SerialName(value = "input") val input: DestinationInput? = null,
 
-  /** The authentication UUID. */
+  /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
 )

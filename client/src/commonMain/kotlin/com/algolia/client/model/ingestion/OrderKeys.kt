@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Used to order a sorted request.
+ * Ascending or descending sort order.
  */
 @Serializable
 public enum class OrderKeys(public val value: kotlin.String) {

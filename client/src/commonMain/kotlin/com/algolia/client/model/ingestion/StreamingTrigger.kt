@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The trigger input for a task of type 'streaming'.
+ * Trigger input for continuously running tasks.
  *
  * @param type
  */

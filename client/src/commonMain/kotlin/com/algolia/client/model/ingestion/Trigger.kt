@@ -10,7 +10,7 @@ import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
 
 /**
- * Trigger
+ * Trigger that runs the task.
  *
  * Implementations:
  * - [OnDemandTrigger]

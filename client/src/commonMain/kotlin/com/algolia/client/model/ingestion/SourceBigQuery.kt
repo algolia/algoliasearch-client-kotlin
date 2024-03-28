@@ -7,34 +7,34 @@ import kotlinx.serialization.json.*
 /**
  * SourceBigQuery
  *
- * @param projectID Project ID of the BigQuery Source.
- * @param datasetID Dataset ID of the BigQuery Source.
+ * @param projectID Project ID of the BigQuery source.
+ * @param datasetID Dataset ID of the BigQuery source.
  * @param dataType
- * @param table Table name (for default BQ).
- * @param tablePrefix Table prefix (for Google Analytics).
+ * @param table Table name for the BigQuery export.
+ * @param tablePrefix Table prefix for a Google Analytics 4 data export to BigQuery.
  * @param customSQLRequest Custom SQL request to extract data from the BigQuery table.
- * @param uniqueIDColumn The name of the column that contains the unique ID, used as `objectID` in Algolia.
+ * @param uniqueIDColumn Name of a column that contains a unique ID which will be used as `objectID` in Algolia.
  */
 @Serializable
 public data class SourceBigQuery(
 
-  /** Project ID of the BigQuery Source. */
+  /** Project ID of the BigQuery source. */
   @SerialName(value = "projectID") val projectID: String,
 
-  /** Dataset ID of the BigQuery Source. */
+  /** Dataset ID of the BigQuery source. */
   @SerialName(value = "datasetID") val datasetID: String,
 
   @SerialName(value = "dataType") val dataType: BigQueryDataType? = null,
 
-  /** Table name (for default BQ). */
+  /** Table name for the BigQuery export. */
   @SerialName(value = "table") val table: String? = null,
 
-  /** Table prefix (for Google Analytics). */
+  /** Table prefix for a Google Analytics 4 data export to BigQuery. */
   @SerialName(value = "tablePrefix") val tablePrefix: String? = null,
 
   /** Custom SQL request to extract data from the BigQuery table. */
   @SerialName(value = "customSQLRequest") val customSQLRequest: String? = null,
 
-  /** The name of the column that contains the unique ID, used as `objectID` in Algolia. */
+  /** Name of a column that contains a unique ID which will be used as `objectID` in Algolia. */
   @SerialName(value = "uniqueIDColumn") val uniqueIDColumn: String? = null,
 ) : SourceInput, SourceUpdateInput

@@ -3,6 +3,9 @@ package com.algolia.client.model.ingestion
 
 import kotlinx.serialization.*
 
+/**
+ * Task run outcome.
+ */
 @Serializable
 public enum class RunOutcome(public val value: kotlin.String) {
 

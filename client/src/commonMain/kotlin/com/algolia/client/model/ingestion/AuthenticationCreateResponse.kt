@@ -5,21 +5,21 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Response from the API when the Authentication is successfully created.
+ * API response for the successful creation of an authentication resource.
  *
- * @param authenticationID The authentication UUID.
- * @param name An human readable name describing the object.
- * @param createdAt Date of creation (RFC3339 format).
+ * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
+ * @param name Descriptive name for the resource.
+ * @param createdAt Date of creation in RFC3339 format.
  */
 @Serializable
 public data class AuthenticationCreateResponse(
 
-  /** The authentication UUID. */
+  /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String,
 
-  /** An human readable name describing the object. */
+  /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String,
 
-  /** Date of creation (RFC3339 format). */
+  /** Date of creation in RFC3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 )

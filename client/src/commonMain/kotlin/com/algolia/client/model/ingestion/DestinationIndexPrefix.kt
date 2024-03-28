@@ -7,11 +7,11 @@ import kotlinx.serialization.json.*
 /**
  * DestinationIndexPrefix
  *
- * @param indexPrefix The prefix of the final index name.
+ * @param indexPrefix String added to the beginning of all indices created by this destination.
  */
 @Serializable
 public data class DestinationIndexPrefix(
 
-  /** The prefix of the final index name. */
+  /** String added to the beginning of all indices created by this destination. */
   @SerialName(value = "indexPrefix") val indexPrefix: String,
 ) : DestinationInput

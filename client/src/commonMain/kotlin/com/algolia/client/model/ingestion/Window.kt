@@ -5,17 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The window parameter represents the holds the dates used to query the Observability data from the database in a given window.
+ * Time window by which to filter the observability data.
  *
- * @param startDate A date in format RFC3339 representing the oldest possible data in query window.
- * @param endDate A date in format RFC3339 representing the newest possible data in query window.
+ * @param startDate Date in RFC3339 format representing the oldest data in the time window.
+ * @param endDate Date in RFC3339 format representing the newest data in the time window.
  */
 @Serializable
 public data class Window(
 
-  /** A date in format RFC3339 representing the oldest possible data in query window. */
+  /** Date in RFC3339 format representing the oldest data in the time window. */
   @SerialName(value = "startDate") val startDate: String,
 
-  /** A date in format RFC3339 representing the newest possible data in query window. */
+  /** Date in RFC3339 format representing the newest data in the time window. */
   @SerialName(value = "endDate") val endDate: String,
 )

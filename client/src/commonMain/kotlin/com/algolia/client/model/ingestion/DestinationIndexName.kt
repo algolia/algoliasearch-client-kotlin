@@ -7,18 +7,18 @@ import kotlinx.serialization.json.*
 /**
  * DestinationIndexName
  *
- * @param indexName The index name to store data in.
+ * @param indexName Algolia index name.
  * @param recordType
- * @param attributesToExclude Determines the attributes to exclude from an Algolia record. To remove nested element, you can separate the path to the element with dots (`.`):   - \"foo.bar\": will remove `bar` from `foo`. To remove elements from an array, you can use the following:   - \"foo.[0].bar\": will only remove `bar` from the first element of `foo`.   - \"foo.[*].bar\": will remove `bar` from every elements of `foo`.
+ * @param attributesToExclude Attributes from your source to exclude from Algolia records.  Not all your data attributes will be useful for searching. Keeping your Algolia records small increases indexing and search performance.  - Exclude nested attributes with `.` notation. For example, `foo.bar` indexes the `foo` attribute and all its children **except** the `bar` attribute. - Exclude attributes from arrays with `[i]`, where `i` is the index of the array element.   For example, `foo.[0].bar` only excludes the `bar` attribute from the first element of the `foo` array, but indexes the complete `foo` attribute for all other elements.   Use `*` as wildcard: `foo.[*].bar` excludes `bar` from all elements of the `foo` array.
  */
 @Serializable
 public data class DestinationIndexName(
 
-  /** The index name to store data in. */
+  /** Algolia index name. */
   @SerialName(value = "indexName") val indexName: String,
 
   @SerialName(value = "recordType") val recordType: RecordType? = null,
 
-  /** Determines the attributes to exclude from an Algolia record. To remove nested element, you can separate the path to the element with dots (`.`):   - \"foo.bar\": will remove `bar` from `foo`. To remove elements from an array, you can use the following:   - \"foo.[0].bar\": will only remove `bar` from the first element of `foo`.   - \"foo.[*].bar\": will remove `bar` from every elements of `foo`.  */
+  /** Attributes from your source to exclude from Algolia records.  Not all your data attributes will be useful for searching. Keeping your Algolia records small increases indexing and search performance.  - Exclude nested attributes with `.` notation. For example, `foo.bar` indexes the `foo` attribute and all its children **except** the `bar` attribute. - Exclude attributes from arrays with `[i]`, where `i` is the index of the array element.   For example, `foo.[0].bar` only excludes the `bar` attribute from the first element of the `foo` array, but indexes the complete `foo` attribute for all other elements.   Use `*` as wildcard: `foo.[*].bar` excludes `bar` from all elements of the `foo` array.  */
   @SerialName(value = "attributesToExclude") val attributesToExclude: List<String>? = null,
 ) : DestinationInput

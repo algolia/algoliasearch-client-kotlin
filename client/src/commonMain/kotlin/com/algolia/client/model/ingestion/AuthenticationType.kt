@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Type of the Authentication, defines what kind of object is stored in the input.
+ * Type of authentication. This determines the type of credentials required in the `input` object.
  */
 @Serializable
 public enum class AuthenticationType(public val value: kotlin.String) {

@@ -7,15 +7,15 @@ import kotlinx.serialization.json.*
 /**
  * BigCommerceChannel
  *
- * @param id The ID of the bigcommerce channel.
- * @param currencies An array of currencies for the given channel `ID`, a currency is a trigram string that represents the currency code.
+ * @param id ID of the BigCommerce channel.
+ * @param currencies Currencies for the given channel.
  */
 @Serializable
 public data class BigCommerceChannel(
 
-  /** The ID of the bigcommerce channel. */
+  /** ID of the BigCommerce channel. */
   @SerialName(value = "id") val id: Int,
 
-  /** An array of currencies for the given channel `ID`, a currency is a trigram string that represents the currency code. */
+  /** Currencies for the given channel. */
   @SerialName(value = "currencies") val currencies: List<String>? = null,
 )

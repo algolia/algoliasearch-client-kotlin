@@ -5,15 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Authentication input for Basic login with username and password.
+ * Credentials for authenticating with user name and password.
  *
- * @param username
- * @param password
+ * @param username Username.
+ * @param password Password. This field is `null` in the API response.
  */
 @Serializable
 public data class AuthBasicPartial(
 
+  /** Username. */
   @SerialName(value = "username") val username: String? = null,
 
+  /** Password. This field is `null` in the API response. */
   @SerialName(value = "password") val password: String? = null,
 ) : AuthInputPartial

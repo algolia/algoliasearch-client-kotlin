@@ -5,16 +5,16 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The trigger information of a task of type `onDemand`.
+ * Trigger information for manually-triggered tasks.
  *
  * @param type
- * @param lastRun The last time the scheduled task ran (RFC3339 format).
+ * @param lastRun The last time the scheduled task ran in RFC3339 format.
  */
 @Serializable
 public data class OnDemandTrigger(
 
   @SerialName(value = "type") val type: OnDemandTriggerType,
 
-  /** The last time the scheduled task ran (RFC3339 format). */
+  /** The last time the scheduled task ran in RFC3339 format. */
   @SerialName(value = "lastRun") val lastRun: String? = null,
 ) : Trigger

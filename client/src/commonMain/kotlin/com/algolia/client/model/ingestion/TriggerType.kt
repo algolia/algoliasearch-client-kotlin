@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * The type of the task reflect how it can be used:   - onDemand: a task that runs manually   - schedule: a task that runs regularly, following a given cron expression   - subscription: a task that runs after a subscription event is received from an integration (e.g. Webhook).   - streaming: a task that runs continuously.
+ * Task trigger, describing when a task should run.  <dl> <dt><code>onDemand</code></dt> <dd>  Manually trigger the task with the `/run` endpoint.  </dd> <dt><code>schedule</code></dt> <dd>  Regularly trigger the task on a `cron` schedule.  </dd>  <dt><code>subscription</code></dt>  <dd>  Trigger the task after an event is received, such as, a webhook.  </dd>  <dt><code>streaming</code></dt>  <dd>  Run the task continuously.  </dd> </dl>.
  */
 @Serializable
 public enum class TriggerType(public val value: kotlin.String) {

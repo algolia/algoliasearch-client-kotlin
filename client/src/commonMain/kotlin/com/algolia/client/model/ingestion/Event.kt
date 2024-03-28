@@ -7,22 +7,22 @@ import kotlinx.serialization.json.*
 /**
  * An event describe a step of the task execution flow..
  *
- * @param eventID The event UUID.
- * @param runID The run UUID.
+ * @param eventID Universally unique identifier (UUID) of an event.
+ * @param runID Universally unique identifier (UUID) of a task run.
  * @param status
  * @param type
  * @param batchSize The extracted record batch size.
- * @param publishedAt Date of publish (RFC3339 format).
+ * @param publishedAt Date of publish RFC3339 format.
  * @param parentID The parent event, the cause of this event.
  * @param `data`
  */
 @Serializable
 public data class Event(
 
-  /** The event UUID. */
+  /** Universally unique identifier (UUID) of an event. */
   @SerialName(value = "eventID") val eventID: String,
 
-  /** The run UUID. */
+  /** Universally unique identifier (UUID) of a task run. */
   @SerialName(value = "runID") val runID: String,
 
   @SerialName(value = "status") val status: EventStatus,
@@ -32,7 +32,7 @@ public data class Event(
   /** The extracted record batch size. */
   @SerialName(value = "batchSize") val batchSize: Int,
 
-  /** Date of publish (RFC3339 format). */
+  /** Date of publish RFC3339 format. */
   @SerialName(value = "publishedAt") val publishedAt: String,
 
   /** The parent event, the cause of this event. */

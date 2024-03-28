@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Used to sort the Task list endpoint.
+ * Property by which to sort the list of tasks.
  */
 @Serializable
 public enum class TaskSortKeys(public val value: kotlin.String) {

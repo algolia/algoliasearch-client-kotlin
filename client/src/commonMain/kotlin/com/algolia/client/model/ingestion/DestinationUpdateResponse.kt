@@ -5,21 +5,21 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Response from the API when the Destination is successfully updated.
+ * API response for updating a destination.
  *
- * @param destinationID The destination UUID.
- * @param name An human readable name describing the object.
- * @param updatedAt Date of last update (RFC3339 format).
+ * @param destinationID Universally unique identifier (UUID) of a destination resource.
+ * @param name Descriptive name for the resource.
+ * @param updatedAt Date of last update in RFC3339 format.
  */
 @Serializable
 public data class DestinationUpdateResponse(
 
-  /** The destination UUID. */
+  /** Universally unique identifier (UUID) of a destination resource. */
   @SerialName(value = "destinationID") val destinationID: String,
 
-  /** An human readable name describing the object. */
+  /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String,
 
-  /** Date of last update (RFC3339 format). */
+  /** Date of last update in RFC3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
 )

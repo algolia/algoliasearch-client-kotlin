@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Payload to search for multiple authentications, based on the given `authenticationIDs`.
+ * Request body for searching for authentication resources.
  *
  * @param authenticationIDs
  */

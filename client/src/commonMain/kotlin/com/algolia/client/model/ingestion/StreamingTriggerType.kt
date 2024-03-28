@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * A task that runs continuously.
+ * Task runs continuously.
  */
 @Serializable
 public enum class StreamingTriggerType(public val value: kotlin.String) {

@@ -3,6 +3,9 @@ package com.algolia.client.model.ingestion
 
 import kotlinx.serialization.*
 
+/**
+ * Task run status.
+ */
 @Serializable
 public enum class RunStatus(public val value: kotlin.String) {
 

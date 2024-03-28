@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * The action to perform on the Algolia index.
+ * Action to perform on the Algolia index.
  */
 @Serializable
 public enum class ActionType(public val value: kotlin.String) {

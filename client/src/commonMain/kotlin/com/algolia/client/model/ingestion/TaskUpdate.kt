@@ -5,27 +5,27 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The payload for a task update.
+ * API request body for updating a task.
  *
- * @param destinationID The destination UUID.
+ * @param destinationID Universally unique identifier (UUID) of a destination resource.
  * @param trigger
  * @param input
- * @param enabled Whether the task is enabled or not.
- * @param failureThreshold A percentage representing the accepted failure threshold to determine if a `run` succeeded or not.
+ * @param enabled Whether the task is enabled.
+ * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
  */
 @Serializable
 public data class TaskUpdate(
 
-  /** The destination UUID. */
+  /** Universally unique identifier (UUID) of a destination resource. */
   @SerialName(value = "destinationID") val destinationID: String? = null,
 
   @SerialName(value = "trigger") val trigger: TriggerUpdateInput? = null,
 
   @SerialName(value = "input") val input: TaskInput? = null,
 
-  /** Whether the task is enabled or not. */
+  /** Whether the task is enabled. */
   @SerialName(value = "enabled") val enabled: Boolean? = null,
 
-  /** A percentage representing the accepted failure threshold to determine if a `run` succeeded or not. */
+  /** Maximum accepted percentage of failures for a task run to finish successfully. */
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
 )

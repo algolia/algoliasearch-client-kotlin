@@ -5,24 +5,24 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The trigger information for a task of type 'schedule'.
+ * Trigger information for scheduled tasks.
  *
  * @param type
- * @param cron A cron expression that represent at which regularity the task should run.
- * @param nextRun The next scheduled run of the task (RFC3339 format).
- * @param lastRun The last time the scheduled task ran (RFC3339 format).
+ * @param cron Cron expression for the task's schedule.
+ * @param nextRun The next scheduled run of the task in RFC3339 format.
+ * @param lastRun The last time the scheduled task ran in RFC3339 format.
  */
 @Serializable
 public data class ScheduleTrigger(
 
   @SerialName(value = "type") val type: ScheduleTriggerType,
 
-  /** A cron expression that represent at which regularity the task should run. */
+  /** Cron expression for the task's schedule. */
   @SerialName(value = "cron") val cron: String,
 
-  /** The next scheduled run of the task (RFC3339 format). */
+  /** The next scheduled run of the task in RFC3339 format. */
   @SerialName(value = "nextRun") val nextRun: String,
 
-  /** The last time the scheduled task ran (RFC3339 format). */
+  /** The last time the scheduled task ran in RFC3339 format. */
   @SerialName(value = "lastRun") val lastRun: String? = null,
 ) : Trigger

@@ -10,7 +10,7 @@ import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
 
 /**
- * TaskInput
+ * Configuration of the task, depending on its type.
  *
  * Implementations:
  * - [OnDemandDateUtilsInput]

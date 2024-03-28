@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Used to sort the Authentication list endpoint.
+ * Property by which to sort the list of authentication resources.
  */
 @Serializable
 public enum class AuthenticationSortKeys(public val value: kotlin.String) {

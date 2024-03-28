@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * A list of tasks with pagination details.
+ * Configured tasks and pagination information.
  *
  * @param tasks
  * @param pagination

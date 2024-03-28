@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Type of the Destination, defines in which Algolia product the data will be stored.
+ * Destination type.  <dl> <dt><code>search</code></dt> <dd>Data is stored in an Algolia index.</dd> <dt><code>insights</code></dt> <dd>Data is recorded as user events in the Insights API.</dd> </dl>.
  */
 @Serializable
 public enum class DestinationType(public val value: kotlin.String) {
@@ -13,10 +13,7 @@ public enum class DestinationType(public val value: kotlin.String) {
   Search("search"),
 
   @SerialName(value = "insights")
-  Insights("insights"),
-
-  @SerialName(value = "flow")
-  Flow("flow");
+  Insights("insights");
 
   override fun toString(): kotlin.String = value
 }

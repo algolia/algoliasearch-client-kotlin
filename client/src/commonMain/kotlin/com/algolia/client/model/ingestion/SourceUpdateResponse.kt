@@ -7,18 +7,19 @@ import kotlinx.serialization.json.*
 /**
  * SourceUpdateResponse
  *
- * @param sourceID The source UUID.
- * @param name
- * @param updatedAt Date of last update (RFC3339 format).
+ * @param sourceID Universally uniqud identifier (UUID) of a source.
+ * @param name Descriptive name of the source.
+ * @param updatedAt Date of last update in RFC3339 format.
  */
 @Serializable
 public data class SourceUpdateResponse(
 
-  /** The source UUID. */
+  /** Universally uniqud identifier (UUID) of a source. */
   @SerialName(value = "sourceID") val sourceID: String,
 
+  /** Descriptive name of the source. */
   @SerialName(value = "name") val name: String,
 
-  /** Date of last update (RFC3339 format). */
+  /** Date of last update in RFC3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
 )
