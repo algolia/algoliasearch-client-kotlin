@@ -14,6 +14,7 @@ import kotlinx.serialization.json.*
  *
  * Implementations:
  * - [AuthAPIKeyPartial]
+ * - [AuthAlgoliaInsightsPartial]
  * - [AuthAlgoliaPartial]
  * - [AuthBasicPartial]
  * - [AuthGoogleServiceAccountPartial]
@@ -34,6 +35,7 @@ internal class AuthInputPartialSerializer : JsonContentPolymorphicSerializer<Aut
       element is JsonObject -> AuthAPIKeyPartial.serializer()
       element is JsonObject -> AuthOAuthPartial.serializer()
       element is JsonObject -> AuthAlgoliaPartial.serializer()
+      element is JsonObject -> AuthAlgoliaInsightsPartial.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
