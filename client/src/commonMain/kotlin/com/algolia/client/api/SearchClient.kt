@@ -101,7 +101,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
-   * @param xAlgoliaUserID User ID to assign.
+   * @param xAlgoliaUserID Unique identifier of the user who makes the search request.
    * @param assignUserIdParams
    * @param requestOptions additional request configuration.
    */
@@ -145,7 +145,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
-   * @param xAlgoliaUserID User ID to assign.
+   * @param xAlgoliaUserID Unique identifier of the user who makes the search request.
    * @param batchAssignUserIdsParams
    * @param requestOptions additional request configuration.
    */
@@ -774,7 +774,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
-   * @param userID User ID to assign.
+   * @param userID Unique identifier of the user who makes the search request.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getUserId(userID: String, requestOptions: RequestOptions? = null): UserId {
@@ -967,7 +967,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
-   * @param userID User ID to assign.
+   * @param userID Unique identifier of the user who makes the search request.
    * @param requestOptions additional request configuration.
    */
   public suspend fun removeUserId(userID: String, requestOptions: RequestOptions? = null): RemoveUserIdResponse {

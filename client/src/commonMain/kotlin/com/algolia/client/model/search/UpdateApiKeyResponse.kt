@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * UpdateApiKeyResponse
  *
  * @param key API key.
- * @param updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+ * @param updatedAt Date and time when the object was updated, in RFC 3339 format.
  */
 @Serializable
 public data class UpdateApiKeyResponse(
@@ -16,6 +16,6 @@ public data class UpdateApiKeyResponse(
   /** API key. */
   @SerialName(value = "key") val key: String,
 
-  /** Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. */
+  /** Date and time when the object was updated, in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
 )

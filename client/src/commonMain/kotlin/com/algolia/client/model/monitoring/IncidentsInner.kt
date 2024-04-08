@@ -7,13 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * IncidentsInner
  *
- * @param t Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds.
+ * @param t Timestamp, measured in milliseconds since the Unix epoch.
  * @param v
  */
 @Serializable
 public data class IncidentsInner(
 
-  /** Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds. */
+  /** Timestamp, measured in milliseconds since the Unix epoch. */
   @SerialName(value = "t") val t: Long? = null,
 
   @SerialName(value = "v") val v: Incident? = null,

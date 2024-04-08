@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * GetApiKeyResponse
  *
- * @param createdAt Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time).
+ * @param createdAt Timestamp when the object was created, in milliseconds since the Unix epoch.
  * @param acl Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).
  * @param `value` API key.
  * @param description Description of an API key to help you identify this API key.
@@ -21,7 +21,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class GetApiKeyResponse(
 
-  /** Timestamp of creation in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). */
+  /** Timestamp when the object was created, in milliseconds since the Unix epoch. */
   @SerialName(value = "createdAt") val createdAt: Long,
 
   /** Permissions that determine the type of API requests this key can make. The required ACL is listed in each endpoint's reference. For more information, see [access control list](https://www.algolia.com/doc/guides/security/api-keys/#access-control-list-acl).  */

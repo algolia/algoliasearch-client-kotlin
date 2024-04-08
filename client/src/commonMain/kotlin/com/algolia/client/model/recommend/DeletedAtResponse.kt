@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * Response, taskID, and deletion timestamp.
  *
  * @param taskID Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.
- * @param deletedAt Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+ * @param deletedAt Date and time when the object was deleted, in RFC 3339 format.
  */
 @Serializable
 public data class DeletedAtResponse(
@@ -16,6 +16,6 @@ public data class DeletedAtResponse(
   /** Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.  */
   @SerialName(value = "taskID") val taskID: Long,
 
-  /** Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. */
+  /** Date and time when the object was deleted, in RFC 3339 format. */
   @SerialName(value = "deletedAt") val deletedAt: String,
 )

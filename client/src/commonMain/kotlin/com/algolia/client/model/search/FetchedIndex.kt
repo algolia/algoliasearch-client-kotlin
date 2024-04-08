@@ -9,7 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param name Index name.
  * @param createdAt Index creation date. An empty string means that the index has no records.
- * @param updatedAt Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+ * @param updatedAt Date and time when the object was updated, in RFC 3339 format.
  * @param entries Number of records contained in the index.
  * @param dataSize Number of bytes of the index in minified format.
  * @param fileSize Number of bytes of the index binary file.
@@ -28,7 +28,7 @@ public data class FetchedIndex(
   /** Index creation date. An empty string means that the index has no records. */
   @SerialName(value = "createdAt") val createdAt: String,
 
-  /** Timestamp of the last update in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. */
+  /** Date and time when the object was updated, in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
 
   /** Number of records contained in the index. */

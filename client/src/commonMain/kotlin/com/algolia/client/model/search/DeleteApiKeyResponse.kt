@@ -7,11 +7,11 @@ import kotlinx.serialization.json.*
 /**
  * DeleteApiKeyResponse
  *
- * @param deletedAt Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format.
+ * @param deletedAt Date and time when the object was deleted, in RFC 3339 format.
  */
 @Serializable
 public data class DeleteApiKeyResponse(
 
-  /** Timestamp of deletion in [ISO 8601](https://wikipedia.org/wiki/ISO_8601) format. */
+  /** Date and time when the object was deleted, in RFC 3339 format. */
   @SerialName(value = "deletedAt") val deletedAt: String,
 )

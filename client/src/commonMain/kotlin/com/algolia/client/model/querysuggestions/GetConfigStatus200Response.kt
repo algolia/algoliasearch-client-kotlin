@@ -9,8 +9,8 @@ import kotlinx.serialization.json.*
  *
  * @param indexName Name of the Query Suggestions index.
  * @param isRunning Whether the creation or update of the Query Suggestions index is in progress.
- * @param lastBuiltAt Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built.
- * @param lastSuccessfulBuiltAt Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully.
+ * @param lastBuiltAt Date and time when the Query Suggestions index was last built, in RFC 3339 format.
+ * @param lastSuccessfulBuiltAt Date and time when the Query Suggestions index was last updated successfully.
  * @param lastSuccessfulBuildDuration Duration of the last successful build in seconds.
  */
 @Serializable
@@ -22,10 +22,10 @@ public data class GetConfigStatus200Response(
   /** Whether the creation or update of the Query Suggestions index is in progress. */
   @SerialName(value = "isRunning") val isRunning: Boolean? = null,
 
-  /** Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last built. */
+  /** Date and time when the Query Suggestions index was last built, in RFC 3339 format. */
   @SerialName(value = "lastBuiltAt") val lastBuiltAt: String? = null,
 
-  /** Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format when the Query Suggestions index was last updated successfully. */
+  /** Date and time when the Query Suggestions index was last updated successfully. */
   @SerialName(value = "lastSuccessfulBuiltAt") val lastSuccessfulBuiltAt: String? = null,
 
   /** Duration of the last successful build in seconds. */

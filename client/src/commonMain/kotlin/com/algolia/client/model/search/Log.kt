@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * Log
  *
- * @param timestamp Timestamp of the API request in ISO 8601 format.
+ * @param timestamp Date and time of the API request, in RFC 3339 format.
  * @param method HTTP method of the request.
  * @param answerCode HTTP status code of the response.
  * @param queryBody Request body.
@@ -26,7 +26,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class Log(
 
-  /** Timestamp of the API request in ISO 8601 format. */
+  /** Date and time of the API request, in RFC 3339 format. */
   @SerialName(value = "timestamp") val timestamp: String,
 
   /** HTTP method of the request. */

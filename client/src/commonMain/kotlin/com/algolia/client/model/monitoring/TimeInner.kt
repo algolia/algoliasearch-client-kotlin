@@ -7,13 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * TimeInner
  *
- * @param t Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds.
+ * @param t Timestamp, measured in milliseconds since the Unix epoch.
  * @param v Time in ms.
  */
 @Serializable
 public data class TimeInner(
 
-  /** Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds. */
+  /** Timestamp, measured in milliseconds since the Unix epoch. */
   @SerialName(value = "t") val t: Long? = null,
 
   /** Time in ms. */

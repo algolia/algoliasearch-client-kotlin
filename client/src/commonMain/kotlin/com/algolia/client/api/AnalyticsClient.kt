@@ -122,8 +122,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -151,8 +151,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -180,8 +180,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -209,8 +209,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -238,8 +238,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -267,8 +267,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -296,8 +296,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -325,8 +325,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -354,8 +354,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -383,8 +383,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -412,8 +412,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param limit Number of items to return. (default to 10)
    * @param offset Position of the first item to return. (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
@@ -445,8 +445,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param limit Number of items to return. (default to 10)
    * @param offset Position of the first item to return. (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
@@ -501,8 +501,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param limit Number of items to return. (default to 10)
    * @param offset Position of the first item to return. (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
@@ -535,8 +535,8 @@ public class AnalyticsClient(
    *   - analytics
    * @param index Index name.
    * @param search Search query.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param limit Number of items to return. (default to 10)
    * @param offset Position of the first item to return. (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
@@ -571,8 +571,8 @@ public class AnalyticsClient(
    * @param attribute Attribute name.
    * @param index Index name.
    * @param search Search query.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param limit Number of items to return. (default to 10)
    * @param offset Position of the first item to return. (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
@@ -607,8 +607,8 @@ public class AnalyticsClient(
    *   - analytics
    * @param index Index name.
    * @param search Search query.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param limit Number of items to return. (default to 10)
    * @param offset Position of the first item to return. (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
@@ -644,8 +644,8 @@ public class AnalyticsClient(
    * @param search Search query.
    * @param clickAnalytics Whether to include metrics related to click and conversion events in the response. (default to false)
    * @param revenueAnalytics Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (default to false)
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param limit Number of items to return. (default to 10)
    * @param offset Position of the first item to return. (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
@@ -682,8 +682,8 @@ public class AnalyticsClient(
    * @param index Index name.
    * @param clickAnalytics Whether to include metrics related to click and conversion events in the response. (default to false)
    * @param revenueAnalytics Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (default to false)
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param orderBy Attribute by which to order the response items.  If the `clickAnalytics` parameter is false, only `searchCount` is available.  (default to searchCount)
    * @param direction Sorting direction of the results: ascending or descending.  (default to asc)
    * @param limit Number of items to return. (default to 10)
@@ -721,8 +721,8 @@ public class AnalyticsClient(
    * Required API Key ACLs:
    *   - analytics
    * @param index Index name.
-   * @param startDate Start date (`YYYY-MM-DD`) of the period to analyze.
-   * @param endDate End date (`YYYY-MM-DD`) of the period to analyze.
+   * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
+   * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */

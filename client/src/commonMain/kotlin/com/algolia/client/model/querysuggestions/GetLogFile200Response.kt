@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * GetLogFile200Response
  *
- * @param timestamp Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+ * @param timestamp Date and time of the log entry, in RFC 3339 format.
  * @param level
  * @param message Details about this log entry.
  * @param contextLevel Level indicating the position of a suggestion in a hierarchy of records.  For example, a `contextLevel` of 1 indicates that this suggestion belongs to a previous suggestion with `contextLevel` 0.
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class GetLogFile200Response(
 
-  /** Timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. */
+  /** Date and time of the log entry, in RFC 3339 format. */
   @SerialName(value = "timestamp") val timestamp: String? = null,
 
   @SerialName(value = "level") val level: LogLevel? = null,

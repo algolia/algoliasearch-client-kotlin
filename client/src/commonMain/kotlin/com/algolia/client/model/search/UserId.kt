@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * Unique user ID.
  *
- * @param userID User ID.
+ * @param userID Unique identifier of the user who makes the search request.
  * @param clusterName Cluster to which the user is assigned.
  * @param nbRecords Number of records belonging to the user.
  * @param dataSize Data size used by the user.
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class UserId(
 
-  /** User ID. */
+  /** Unique identifier of the user who makes the search request. */
   @SerialName(value = "userID") val userID: String,
 
   /** Cluster to which the user is assigned. */

@@ -16,7 +16,7 @@ import kotlinx.serialization.json.*
  * @param authenticatedUserToken Identifier for authenticated users.  When the user signs in, you can get an identifier from your system and send it as `authenticatedUserToken`. This lets you keep using the `userToken` from before the user signed in, while providing a reliable way to identify users across sessions. Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
  * @param currency Three-letter [currency code](https://www.iso.org/iso-4217-currency-codes.html).
  * @param objectData Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as `objectIDs`.
- * @param timestamp Timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.
+ * @param timestamp Timestamp of the event, measured in milliseconds since the Unix epoch. By default, the Insights API uses the time it receives an event as its timestamp.
  * @param `value`
  */
 @Serializable
@@ -47,7 +47,7 @@ public data class PurchasedObjectIDs(
   /** Extra information about the records involved in a purchase or add-to-cart event.  If specified, it must have the same length as `objectIDs`.  */
   @SerialName(value = "objectData") val objectData: List<ObjectData>? = null,
 
-  /** Timestamp of the event in milliseconds in [Unix epoch time](https://wikipedia.org/wiki/Unix_time). By default, the Insights API uses the time it receives an event as its timestamp.  */
+  /** Timestamp of the event, measured in milliseconds since the Unix epoch. By default, the Insights API uses the time it receives an event as its timestamp.  */
   @SerialName(value = "timestamp") val timestamp: Long? = null,
 
   @SerialName(value = "value") val `value`: Value? = null,

@@ -7,13 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * GetUsage200ResponseStatisticsInner
  *
- * @param t Timestamp in milliseconds in Unix epoch time.
+ * @param t Timestamp, measured in milliseconds since the Unix epoch.
  * @param v
  */
 @Serializable
 public data class GetUsage200ResponseStatisticsInner(
 
-  /** Timestamp in milliseconds in Unix epoch time. */
+  /** Timestamp, measured in milliseconds since the Unix epoch. */
   @SerialName(value = "t") val t: Int? = null,
 
   @SerialName(value = "v") val v: StatisticValue? = null,

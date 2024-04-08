@@ -7,14 +7,14 @@ import kotlinx.serialization.json.*
 /**
  * SaveObjectResponse
  *
- * @param createdAt Timestamp when the record was added, in ISO 8601 format.
+ * @param createdAt Date and time when the object was created, in RFC 3339 format.
  * @param taskID Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.
  * @param objectID Unique record identifier.
  */
 @Serializable
 public data class SaveObjectResponse(
 
-  /** Timestamp when the record was added, in ISO 8601 format. */
+  /** Date and time when the object was created, in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
   /** Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.  */

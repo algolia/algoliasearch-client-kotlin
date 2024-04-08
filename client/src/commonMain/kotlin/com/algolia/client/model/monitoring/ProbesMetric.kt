@@ -7,13 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * ProbesMetric
  *
- * @param t Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds.
+ * @param t Timestamp, measured in milliseconds since the Unix epoch.
  * @param v Value of the metric.
  */
 @Serializable
 public data class ProbesMetric(
 
-  /** Timestamp in [Unix epoch time](https://wikipedia.org/wiki/Unix_time) in milliseconds. */
+  /** Timestamp, measured in milliseconds since the Unix epoch. */
   @SerialName(value = "t") val t: Long? = null,
 
   /** Value of the metric. */
