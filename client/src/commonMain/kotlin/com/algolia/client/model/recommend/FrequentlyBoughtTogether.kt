@@ -5,13 +5,16 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * RuleResponseMetadata
+ * FrequentlyBoughtTogether
  *
- * @param lastUpdate Date and time when the object was updated, in RFC 3339 format.
+ * @param model
+ * @param objectID Unique record identifier.
  */
 @Serializable
-public data class RuleResponseMetadata(
+public data class FrequentlyBoughtTogether(
 
-  /** Date and time when the object was updated, in RFC 3339 format. */
-  @SerialName(value = "lastUpdate") val lastUpdate: String? = null,
+  @SerialName(value = "model") val model: FbtModel,
+
+  /** Unique record identifier. */
+  @SerialName(value = "objectID") val objectID: String,
 )

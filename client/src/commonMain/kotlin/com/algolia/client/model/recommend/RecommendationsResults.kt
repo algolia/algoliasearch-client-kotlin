@@ -36,8 +36,6 @@ import kotlinx.serialization.json.*
  * @param serverUsed Host name of the server that processed the request.
  * @param userData An object with custom data.  You can store up to 32&nbsp;kB as custom data.
  * @param queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
- * @param query Search query.
- * @param params URL-encoded string of all search parameters.
  */
 @Serializable
 public data class RecommendationsResults(
@@ -127,10 +125,4 @@ public data class RecommendationsResults(
 
   /** Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/). */
   @SerialName(value = "queryID") val queryID: String? = null,
-
-  /** Search query. */
-  @SerialName(value = "query") val query: String? = null,
-
-  /** URL-encoded string of all search parameters. */
-  @SerialName(value = "params") val params: String? = null,
 )

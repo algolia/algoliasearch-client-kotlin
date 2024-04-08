@@ -5,13 +5,16 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Recommend rules search parameters.
+ * Recommend rules parameters.
  *
  * @param query Search query.
- * @param context Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules).
+ * @param context Only search for rules with matching context.
  * @param page Requested page of the API response.
  * @param hitsPerPage Maximum number of hits per page.
- * @param enabled Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved.
+ * @param enabled Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property.
+ * @param filters Filter expression. This only searches for rules matching the filter expression.
+ * @param facets Include facets and facet values in the response. Use `['*']` to include all facets.
+ * @param maxValuesPerFacet Maximum number of values to return for each facet.
  */
 @Serializable
 public data class SearchRecommendRulesParams(
@@ -19,7 +22,7 @@ public data class SearchRecommendRulesParams(
   /** Search query. */
   @SerialName(value = "query") val query: String? = null,
 
-  /** Restricts responses to the specified [contextual rule](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#creating-contextual-rules). */
+  /** Only search for rules with matching context. */
   @SerialName(value = "context") val context: String? = null,
 
   /** Requested page of the API response. */
@@ -28,6 +31,15 @@ public data class SearchRecommendRulesParams(
   /** Maximum number of hits per page. */
   @SerialName(value = "hitsPerPage") val hitsPerPage: Int? = null,
 
-  /** Restricts responses to enabled rules. When absent (default), _all_ rules are retrieved. */
+  /** Whether to only show rules where the value of their `enabled` property matches this parameter. If absent, show all rules, regardless of their `enabled` property.  */
   @SerialName(value = "enabled") val enabled: Boolean? = null,
+
+  /** Filter expression. This only searches for rules matching the filter expression. */
+  @SerialName(value = "filters") val filters: String? = null,
+
+  /** Include facets and facet values in the response. Use `['*']` to include all facets. */
+  @SerialName(value = "facets") val facets: List<String>? = null,
+
+  /** Maximum number of values to return for each facet. */
+  @SerialName(value = "maxValuesPerFacet") val maxValuesPerFacet: Int? = null,
 )

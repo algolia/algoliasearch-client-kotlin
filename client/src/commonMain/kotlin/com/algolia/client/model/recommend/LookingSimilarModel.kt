@@ -4,16 +4,13 @@ package com.algolia.client.model.recommend
 import kotlinx.serialization.*
 
 /**
- * Type of edit.
+ * Looking similar model.  This model recommends items that look similar to the item with the ID `objectID` based on image attributes in your index.
  */
 @Serializable
-public enum class EditType(public val value: kotlin.String) {
+public enum class LookingSimilarModel(public val value: kotlin.String) {
 
-  @SerialName(value = "remove")
-  Remove("remove"),
-
-  @SerialName(value = "replace")
-  Replace("replace");
+  @SerialName(value = "looking-similar")
+  LookingSimilar("looking-similar");
 
   override fun toString(): kotlin.String = value
 }

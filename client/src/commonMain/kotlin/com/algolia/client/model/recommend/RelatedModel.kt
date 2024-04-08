@@ -4,16 +4,13 @@ package com.algolia.client.model.recommend
 import kotlinx.serialization.*
 
 /**
- * Recommendation model.
+ * Related products or similar content model.  This model recommends items that are similar to the item with the ID `objectID`. Similarity is determined from the user interactions and attributes.
  */
 @Serializable
-public enum class RecommendationModels(public val value: kotlin.String) {
+public enum class RelatedModel(public val value: kotlin.String) {
 
   @SerialName(value = "related-products")
-  RelatedProducts("related-products"),
-
-  @SerialName(value = "bought-together")
-  BoughtTogether("bought-together");
+  RelatedProducts("related-products");
 
   override fun toString(): kotlin.String = value
 }

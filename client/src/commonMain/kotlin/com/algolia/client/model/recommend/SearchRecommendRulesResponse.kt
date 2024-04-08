@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * SearchRecommendRulesResponse
  *
- * @param hits Fetched rules.
+ * @param hits Recommend rules that match the search criteria.
  * @param nbHits Number of results (hits).
  * @param page Page of search results to retrieve.
  * @param nbPages Number of pages of results.
@@ -15,8 +15,8 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class SearchRecommendRulesResponse(
 
-  /** Fetched rules. */
-  @SerialName(value = "hits") val hits: List<RuleResponse>,
+  /** Recommend rules that match the search criteria. */
+  @SerialName(value = "hits") val hits: List<RecommendRule>,
 
   /** Number of results (hits). */
   @SerialName(value = "nbHits") val nbHits: Int,

@@ -8,8 +8,8 @@ import kotlinx.serialization.json.*
  * Trending facet hit.
  *
  * @param score Recommendation score.
- * @param facetName Facet name for trending models.
- * @param facetValue Facet value for trending models.
+ * @param facetName Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned.
+ * @param facetValue Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned.
  */
 @Serializable
 public data class TrendingFacetHit(
@@ -17,9 +17,9 @@ public data class TrendingFacetHit(
   /** Recommendation score. */
   @SerialName(value = "_score") val score: Double,
 
-  /** Facet name for trending models. */
+  /** Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned.  */
   @SerialName(value = "facetName") val facetName: String,
 
-  /** Facet value for trending models. */
+  /** Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned.  */
   @SerialName(value = "facetValue") val facetValue: String,
 ) : RecommendationsHit

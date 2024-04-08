@@ -13,8 +13,10 @@ import kotlinx.serialization.json.*
  * RecommendationsRequest
  *
  * Implementations:
- * - [RecommendationsQuery]
+ * - [BoughtTogetherQuery]
+ * - [LookingSimilarQuery]
  * - [RecommendedForYouQuery]
+ * - [RelatedQuery]
  * - [TrendingFacetsQuery]
  * - [TrendingItemsQuery]
  */
@@ -28,9 +30,11 @@ public sealed interface RecommendationsRequest {
 internal class RecommendationsRequestSerializer : JsonContentPolymorphicSerializer<RecommendationsRequest>(RecommendationsRequest::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RecommendationsRequest> {
     return when {
+      element is JsonObject -> BoughtTogetherQuery.serializer()
+      element is JsonObject -> RelatedQuery.serializer()
       element is JsonObject -> TrendingItemsQuery.serializer()
       element is JsonObject -> TrendingFacetsQuery.serializer()
-      element is JsonObject -> RecommendationsQuery.serializer()
+      element is JsonObject -> LookingSimilarQuery.serializer()
       element is JsonObject -> RecommendedForYouQuery.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

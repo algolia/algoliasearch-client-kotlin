@@ -5,22 +5,19 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * BaseRecommendationsQuery
+ * LookingSimilar
  *
  * @param model
  * @param objectID Unique record identifier.
- * @param queryParameters
  * @param fallbackParameters
  */
 @Serializable
-public data class BaseRecommendationsQuery(
+public data class LookingSimilar(
 
-  @SerialName(value = "model") val model: RecommendationModels,
+  @SerialName(value = "model") val model: LookingSimilarModel,
 
   /** Unique record identifier. */
   @SerialName(value = "objectID") val objectID: String,
 
-  @SerialName(value = "queryParameters") val queryParameters: SearchParamsObject? = null,
-
-  @SerialName(value = "fallbackParameters") val fallbackParameters: SearchParamsObject? = null,
+  @SerialName(value = "fallbackParameters") val fallbackParameters: FallbackParams? = null,
 )

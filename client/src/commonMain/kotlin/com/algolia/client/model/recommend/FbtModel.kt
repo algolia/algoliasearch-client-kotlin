@@ -4,13 +4,13 @@ package com.algolia.client.model.recommend
 import kotlinx.serialization.*
 
 /**
- * Trending items model.  Trending items are determined from the number of conversion events collected on them.
+ * Frequently bought together model.  This model recommends items that have been purchased within 1 day with the item with the ID `objectID`.
  */
 @Serializable
-public enum class TrendingItemsModel(public val value: kotlin.String) {
+public enum class FbtModel(public val value: kotlin.String) {
 
-  @SerialName(value = "trending-items")
-  TrendingItems("trending-items");
+  @SerialName(value = "bought-together")
+  BoughtTogether("bought-together");
 
   override fun toString(): kotlin.String = value
 }

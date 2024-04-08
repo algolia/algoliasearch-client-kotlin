@@ -4,7 +4,7 @@ package com.algolia.client.model.recommend
 import kotlinx.serialization.*
 
 /**
- * Trending facets model.
+ * Trending facet values model.  This model recommends trending facet values for the specified facet attribute.
  */
 @Serializable
 public enum class TrendingFacetsModel(public val value: kotlin.String) {

@@ -5,13 +5,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Object ID of the record to hide.
+ * Object ID and position of the recommendation you want to pin.
  *
  * @param objectID Unique record identifier.
+ * @param position Index in the list of recommendations where to place this item.
  */
 @Serializable
-public data class ConsequenceHide(
+public data class PromoteConsequenceObject(
 
   /** Unique record identifier. */
-  @SerialName(value = "objectID") val objectID: String,
+  @SerialName(value = "objectID") val objectID: String? = null,
+
+  /** Index in the list of recommendations where to place this item. */
+  @SerialName(value = "position") val position: Int? = null,
 )

@@ -8,8 +8,9 @@ import kotlinx.serialization.json.*
  * BaseRecommendRequest
  *
  * @param indexName Index name.
- * @param threshold Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.
- * @param maxRecommendations Maximum number of recommendations to retrieve. If 0, all recommendations will be returned.
+ * @param threshold Minimum score a recommendation must have to be included in the response.
+ * @param maxRecommendations Maximum number of recommendations to retrieve. By default, all recommendations are returned and no fallback request is made. Depending on the available recommendations and the other request parameters, the actual number of recommendations may be lower than this value.
+ * @param queryParameters
  */
 @Serializable
 public data class BaseRecommendRequest(
@@ -17,9 +18,11 @@ public data class BaseRecommendRequest(
   /** Index name. */
   @SerialName(value = "indexName") val indexName: String,
 
-  /** Recommendations with a confidence score lower than `threshold` won't appear in results. > **Note**: Each recommendation has a confidence score of 0 to 100. The closer the score is to 100, the more relevant the recommendations are.  */
-  @SerialName(value = "threshold") val threshold: Int? = null,
+  /** Minimum score a recommendation must have to be included in the response. */
+  @SerialName(value = "threshold") val threshold: Double,
 
-  /** Maximum number of recommendations to retrieve. If 0, all recommendations will be returned. */
+  /** Maximum number of recommendations to retrieve. By default, all recommendations are returned and no fallback request is made. Depending on the available recommendations and the other request parameters, the actual number of recommendations may be lower than this value.  */
   @SerialName(value = "maxRecommendations") val maxRecommendations: Int? = null,
+
+  @SerialName(value = "queryParameters") val queryParameters: SearchParams? = null,
 )

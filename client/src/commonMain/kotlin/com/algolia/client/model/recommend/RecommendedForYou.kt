@@ -5,18 +5,15 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * BaseRecommendedForYouQuery
+ * RecommendedForYou
  *
  * @param model
- * @param queryParameters
  * @param fallbackParameters
  */
 @Serializable
-public data class BaseRecommendedForYouQuery(
+public data class RecommendedForYou(
 
   @SerialName(value = "model") val model: RecommendedForYouModel,
 
-  @SerialName(value = "queryParameters") val queryParameters: RecommendedForYouQueryParameters? = null,
-
-  @SerialName(value = "fallbackParameters") val fallbackParameters: RecommendedForYouQueryParameters? = null,
+  @SerialName(value = "fallbackParameters") val fallbackParameters: FallbackParams? = null,
 )

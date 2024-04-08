@@ -5,16 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * BaseTrendingFacetsQuery
+ * Rule metadata.
  *
- * @param facetName Facet name for trending models.
- * @param model
+ * @param lastUpdate Date and time when the object was updated, in RFC 3339 format.
  */
 @Serializable
-public data class BaseTrendingFacetsQuery(
+public data class RecommendRuleMetadata(
 
-  /** Facet name for trending models. */
-  @SerialName(value = "facetName") val facetName: String,
-
-  @SerialName(value = "model") val model: TrendingFacetsModel? = null,
+  /** Date and time when the object was updated, in RFC 3339 format. */
+  @SerialName(value = "lastUpdate") val lastUpdate: String? = null,
 )

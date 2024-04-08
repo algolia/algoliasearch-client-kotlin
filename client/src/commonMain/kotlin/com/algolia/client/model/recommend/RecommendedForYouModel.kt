@@ -4,7 +4,7 @@ package com.algolia.client.model.recommend
 import kotlinx.serialization.*
 
 /**
- * Recommended for you model.
+ * \"Recommened for you\" model.
  */
 @Serializable
 public enum class RecommendedForYouModel(public val value: kotlin.String) {

@@ -120,12 +120,12 @@ public class RecommendClient(
   }
 
   /**
-   * Delete a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+   * Deletes a Recommend rule from a recommendation scenario.
    *
    * Required API Key ACLs:
    *   - editSettings
    * @param indexName Name of the index on which to perform the operation.
-   * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
+   * @param model [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
    * @param objectID Unique record identifier.
    * @param requestOptions additional request configuration.
    */
@@ -143,16 +143,16 @@ public class RecommendClient(
   }
 
   /**
-   * Return a [Recommend rule](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+   * Retrieves a Recommend rule that you previously created in the Algolia dashboard.
    *
    * Required API Key ACLs:
    *   - settings
    * @param indexName Name of the index on which to perform the operation.
-   * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
+   * @param model [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
    * @param objectID Unique record identifier.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getRecommendRule(indexName: String, model: RecommendModels, objectID: String, requestOptions: RequestOptions? = null): RuleResponse {
+  public suspend fun getRecommendRule(indexName: String, model: RecommendModels, objectID: String, requestOptions: RequestOptions? = null): RecommendRule {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `getRecommendRule`." }
     require(objectID.isNotBlank()) { "Parameter `objectID` is required when calling `getRecommendRule`." }
     val requestConfig = RequestConfig(
@@ -166,13 +166,13 @@ public class RecommendClient(
   }
 
   /**
-   * Some operations, such as deleting a Recommend rule, will respond with a `taskID` value. Use this value here to check the status of that task.
+   * Checks the status of a given task.  Deleting a Recommend rule is asynchronous. When you delete a rule, a task is created on a queue and completed depending on the load on the server. The API response includes a task ID that you can use to check the status.
    *
    * Required API Key ACLs:
    *   - editSettings
    * @param indexName Name of the index on which to perform the operation.
-   * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
-   * @param taskID Unique identifier of a task. Numeric value (up to 64bits).
+   * @param model [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
+   * @param taskID Unique task identifier.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getRecommendStatus(indexName: String, model: RecommendModels, taskID: Long, requestOptions: RequestOptions? = null): GetRecommendTaskResponse {
@@ -188,7 +188,7 @@ public class RecommendClient(
   }
 
   /**
-   * Returns results from either recommendation or trending models:    - **Recommendations** are provided by the [Related Products](https://www.algolia.com/doc/guides/algolia-recommend/overview/#related-products-and-related-content) and [Frequently Bought Together](https://www.algolia.com/doc/guides/algolia-recommend/overview/#frequently-bought-together) models   - **Trending** models are [Trending Items and Trending Facet Values](https://www.algolia.com/doc/guides/algolia-recommend/overview/#trending-items-and-trending-facet-values).
+   * Retrieves recommendations from selected AI models.
    *
    * Required API Key ACLs:
    *   - search
@@ -209,12 +209,12 @@ public class RecommendClient(
   }
 
   /**
-   * List [Recommend rules](https://www.algolia.com/doc/guides/algolia-recommend/how-to/rules/).
+   * Searches for Recommend rules.  Use an empty query to list all rules for this recommendation scenario.
    *
    * Required API Key ACLs:
    *   - settings
    * @param indexName Name of the index on which to perform the operation.
-   * @param model [Recommend models](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
+   * @param model [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
    * @param searchRecommendRulesParams
    * @param requestOptions additional request configuration.
    */

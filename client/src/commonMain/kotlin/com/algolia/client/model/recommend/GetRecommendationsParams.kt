@@ -5,13 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Recommend parameters.
+ * Recommend request body.
  *
- * @param requests Request parameters depend on the model (recommendations or trending).
+ * @param requests Recommendation request with parameters depending on the requested model.
  */
 @Serializable
 public data class GetRecommendationsParams(
 
-  /** Request parameters depend on the model (recommendations or trending). */
+  /** Recommendation request with parameters depending on the requested model. */
   @SerialName(value = "requests") val requests: List<RecommendationsRequest>,
 )

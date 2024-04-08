@@ -5,12 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * RecommendationsHits
+ * Object ID of the recommendation you want to exclude.
  *
- * @param hits
+ * @param objectID Unique record identifier.
  */
 @Serializable
-public data class RecommendationsHits(
+public data class HideConsequenceObject(
 
-  @SerialName(value = "hits") val hits: List<RecommendationsHit>,
+  /** Unique record identifier. */
+  @SerialName(value = "objectID") val objectID: String? = null,
 )

@@ -5,17 +5,19 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Record to promote.
+ * RelatedProducts
  *
+ * @param model
  * @param objectID Unique record identifier.
- * @param position Position in the search results where you want to show the promoted records.
+ * @param fallbackParameters
  */
 @Serializable
-public data class PromoteObjectID(
+public data class RelatedProducts(
+
+  @SerialName(value = "model") val model: RelatedModel,
 
   /** Unique record identifier. */
   @SerialName(value = "objectID") val objectID: String,
 
-  /** Position in the search results where you want to show the promoted records. */
-  @SerialName(value = "position") val position: Int,
-) : Promote
+  @SerialName(value = "fallbackParameters") val fallbackParameters: FallbackParams? = null,
+)

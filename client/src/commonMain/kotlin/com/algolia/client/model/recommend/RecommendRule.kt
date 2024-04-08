@@ -5,25 +5,24 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Rule object.
+ * Recommend rule.
  *
- * @param objectID Unique identifier for a rule object.
  * @param metadata
- * @param conditions [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.
+ * @param objectID Unique identifier of a rule object.
+ * @param condition
  * @param consequence
  * @param description Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
  * @param enabled Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.
  */
 @Serializable
-public data class RuleResponse(
+public data class RecommendRule(
 
-  /** Unique identifier for a rule object. */
-  @SerialName(value = "objectID") val objectID: String,
+  @SerialName(value = "_metadata") val metadata: RecommendRuleMetadata? = null,
 
-  @SerialName(value = "_metadata") val metadata: RuleResponseMetadata? = null,
+  /** Unique identifier of a rule object. */
+  @SerialName(value = "objectID") val objectID: String? = null,
 
-  /** [Conditions](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/#conditions) required to activate a rule. You can use up to 25 conditions per rule.  */
-  @SerialName(value = "conditions") val conditions: List<Condition>? = null,
+  @SerialName(value = "condition") val condition: Condition? = null,
 
   @SerialName(value = "consequence") val consequence: Consequence? = null,
 
