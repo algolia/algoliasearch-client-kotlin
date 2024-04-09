@@ -8,23 +8,23 @@ import kotlinx.serialization.json.*
  * Variant
  *
  * @param addToCartCount Number of add-to-cart events for this variant.
- * @param addToCartRate Variant's [add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate).
- * @param averageClickPosition Variant's [average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position).
+ * @param addToCartRate [Add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate) for this variant.
+ * @param averageClickPosition [Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant.
  * @param clickCount Number of click events for this variant.
- * @param clickThroughRate Variant's [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate).
+ * @param clickThroughRate [Click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate) for this variant.
  * @param conversionCount Number of click events for this variant.
- * @param conversionRate Variant's [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate).
- * @param description A/B test description.
+ * @param conversionRate [Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant.
+ * @param description Description for this variant.
  * @param index A/B test index.
- * @param noResultCount Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant.
+ * @param noResultCount Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant.
  * @param purchaseCount Number of purchase events for this variant.
- * @param purchaseRate Variant's [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate).
- * @param searchCount Number of searches carried out during the A/B test.
- * @param trafficPercentage A/B test traffic percentage.
- * @param userCount Number of users during the A/B test.
- * @param trackedUserCount Number of users that performed a tracked search during the A/B test.
+ * @param purchaseRate [Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant.
+ * @param searchCount Number of searches for this variant.
+ * @param trafficPercentage Percentage of search requests each variant receives.
+ * @param userCount Number of users that made searches to this variant.
+ * @param trackedUserCount Number of users that made tracked searches to this variant.
  * @param currencies A/B test currencies.
- * @param estimatedSampleSize The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used.
+ * @param estimatedSampleSize Estimated number of searches required to achieve the desired statistical significance.  The A/B test configuration must include a `mininmumDetectableEffect` setting for this number to be included in the response.
  * @param filterEffects
  * @param trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
  */
@@ -34,55 +34,55 @@ public data class Variant(
   /** Number of add-to-cart events for this variant. */
   @SerialName(value = "addToCartCount") val addToCartCount: Int,
 
-  /** Variant's [add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate). */
+  /** [Add-to-cart rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#add-to-cart-rate) for this variant.  */
   @SerialName(value = "addToCartRate") val addToCartRate: Double,
 
-  /** Variant's [average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position). */
+  /** [Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant.  */
   @SerialName(value = "averageClickPosition") val averageClickPosition: Int,
 
   /** Number of click events for this variant. */
   @SerialName(value = "clickCount") val clickCount: Int,
 
-  /** Variant's [click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate). */
+  /** [Click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate) for this variant.  */
   @SerialName(value = "clickThroughRate") val clickThroughRate: Double,
 
   /** Number of click events for this variant. */
   @SerialName(value = "conversionCount") val conversionCount: Int,
 
-  /** Variant's [conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate). */
+  /** [Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant.  */
   @SerialName(value = "conversionRate") val conversionRate: Double,
 
-  /** A/B test description. */
+  /** Description for this variant. */
   @SerialName(value = "description") val description: String,
 
   /** A/B test index. */
   @SerialName(value = "index") val index: String,
 
-  /** Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for that variant. */
+  /** Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant. */
   @SerialName(value = "noResultCount") val noResultCount: Int,
 
   /** Number of purchase events for this variant. */
   @SerialName(value = "purchaseCount") val purchaseCount: Int,
 
-  /** Variant's [purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate). */
+  /** [Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant.  */
   @SerialName(value = "purchaseRate") val purchaseRate: Double,
 
-  /** Number of searches carried out during the A/B test. */
+  /** Number of searches for this variant. */
   @SerialName(value = "searchCount") val searchCount: Int,
 
-  /** A/B test traffic percentage. */
+  /** Percentage of search requests each variant receives. */
   @SerialName(value = "trafficPercentage") val trafficPercentage: Int,
 
-  /** Number of users during the A/B test. */
+  /** Number of users that made searches to this variant. */
   @SerialName(value = "userCount") val userCount: Int,
 
-  /** Number of users that performed a tracked search during the A/B test. */
+  /** Number of users that made tracked searches to this variant. */
   @SerialName(value = "trackedUserCount") val trackedUserCount: Int,
 
   /** A/B test currencies. */
   @SerialName(value = "currencies") val currencies: Map<kotlin.String, Currency>? = null,
 
-  /** The estimated number of searches that will need to be run to achieve the desired confidence level and statistical power. A `minimumDetectableEffect` must be set in the `configuration` object for this to be used. */
+  /** Estimated number of searches required to achieve the desired statistical significance.  The A/B test configuration must include a `mininmumDetectableEffect` setting for this number to be included in the response.  */
   @SerialName(value = "estimatedSampleSize") val estimatedSampleSize: Int? = null,
 
   @SerialName(value = "filterEffects") val filterEffects: FilterEffects? = null,

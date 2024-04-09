@@ -9,7 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param name A/B test name.
  * @param variants A/B test variants.
- * @param endAt End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format.
+ * @param endAt End date and time of the A/B test, in RFC 3339 format.
  */
 @Serializable
 public data class AddABTestsRequest(
@@ -20,6 +20,6 @@ public data class AddABTestsRequest(
   /** A/B test variants. */
   @SerialName(value = "variants") val variants: List<AddABTestsVariant>,
 
-  /** End date timestamp in [ISO-8601](https://wikipedia.org/wiki/ISO_8601) format. */
+  /** End date and time of the A/B test, in RFC 3339 format. */
   @SerialName(value = "endAt") val endAt: String,
 )

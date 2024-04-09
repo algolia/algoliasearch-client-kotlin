@@ -29,7 +29,7 @@ public class AbtestingClient(
   }
 
   /**
-   * Creates an A/B test.
+   * Creates a new A/B test.
    *
    * Required API Key ACLs:
    *   - editSettings
@@ -137,11 +137,11 @@ public class AbtestingClient(
   }
 
   /**
-   * Delete an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).
+   * Deletes an A/B test by its ID.
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param id Unique A/B test ID.
+   * @param id Unique A/B test identifier.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteABTest(id: Int, requestOptions: RequestOptions? = null): ABTestResponse {
@@ -156,11 +156,11 @@ public class AbtestingClient(
   }
 
   /**
-   * Get specific details for an A/B test. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).
+   * Retrieves the details for an A/B test by its ID.
    *
    * Required API Key ACLs:
    *   - analytics
-   * @param id Unique A/B test ID.
+   * @param id Unique A/B test identifier.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getABTest(id: Int, requestOptions: RequestOptions? = null): ABTest {
@@ -175,14 +175,14 @@ public class AbtestingClient(
   }
 
   /**
-   * List all A/B tests.
+   * Lists all A/B tests you configured for this application.
    *
    * Required API Key ACLs:
    *   - analytics
    * @param offset Position of the first item to return. (default to 0)
    * @param limit Number of items to return. (default to 10)
-   * @param indexPrefix Only return A/B tests for indices starting with this prefix.
-   * @param indexSuffix Only return A/B tests for indices ending with this suffix.
+   * @param indexPrefix Index name prefix. Only A/B tests for indices starting with this string are included in the response.
+   * @param indexSuffix Index name suffix. Only A/B tests for indices ending with this string are included in the response.
    * @param requestOptions additional request configuration.
    */
   public suspend fun listABTests(offset: Int? = null, limit: Int? = null, indexPrefix: String? = null, indexSuffix: String? = null, requestOptions: RequestOptions? = null): ListABTestsResponse {
@@ -203,11 +203,11 @@ public class AbtestingClient(
   }
 
   /**
-   * If stopped, the test is over and can't be restarted. There is now only one index, receiving 100% of all search requests. The data gathered for stopped A/B tests is retained. To determine the `id` for an A/B test, use the [`listABTests` operation](#tag/abtest/operation/listABTests).
+   * Stops an A/B test by its ID.  You can't restart stopped A/B tests.
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param id Unique A/B test ID.
+   * @param id Unique A/B test identifier.
    * @param requestOptions additional request configuration.
    */
   public suspend fun stopABTest(id: Int, requestOptions: RequestOptions? = null): ABTestResponse {

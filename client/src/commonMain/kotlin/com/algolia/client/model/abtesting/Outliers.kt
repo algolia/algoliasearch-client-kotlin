@@ -5,12 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Search parameters to add to the test variant. Only use this parameter if the two variants use the same index.
+ * Configuration for handling outliers.
  *
- * @param customSearchParameters
+ * @param exclude Whether to exclude outliers when calculating A/B test results.
  */
 @Serializable
-public data class CustomSearchParams(
+public data class Outliers(
 
-  @SerialName(value = "customSearchParameters") val customSearchParameters: JsonObject,
+  /** Whether to exclude outliers when calculating A/B test results. */
+  @SerialName(value = "exclude") val exclude: Boolean? = null,
 )

@@ -8,8 +8,8 @@ import kotlinx.serialization.json.*
  * AbTestsVariant
  *
  * @param index A/B test index.
- * @param trafficPercentage A/B test traffic percentage.
- * @param description A/B test description.
+ * @param trafficPercentage Percentage of search requests each variant receives.
+ * @param description Description for this variant.
  */
 @Serializable
 public data class AbTestsVariant(
@@ -17,9 +17,9 @@ public data class AbTestsVariant(
   /** A/B test index. */
   @SerialName(value = "index") val index: String,
 
-  /** A/B test traffic percentage. */
+  /** Percentage of search requests each variant receives. */
   @SerialName(value = "trafficPercentage") val trafficPercentage: Int,
 
-  /** A/B test description. */
+  /** Description for this variant. */
   @SerialName(value = "description") val description: String? = null,
 ) : AddABTestsVariant

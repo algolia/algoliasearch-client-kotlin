@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * ListABTestsResponse
  *
  * @param abtests A/B tests.
- * @param count Number of A/B tests implemented.
+ * @param count Number of A/B tests.
  * @param total Number of retrievable A/B tests.
  */
 @Serializable
@@ -17,7 +17,7 @@ public data class ListABTestsResponse(
   /** A/B tests. */
   @SerialName(value = "abtests") val abtests: List<ABTest>,
 
-  /** Number of A/B tests implemented. */
+  /** Number of A/B tests. */
   @SerialName(value = "count") val count: Int,
 
   /** Number of retrievable A/B tests. */
