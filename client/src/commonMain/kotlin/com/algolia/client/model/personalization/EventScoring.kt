@@ -7,19 +7,18 @@ import kotlinx.serialization.json.*
 /**
  * EventScoring
  *
- * @param score The score for the event.
- * @param eventName The name of the event.
- * @param eventType The type of the event.
+ * @param score Event score.
+ * @param eventName Event name.
+ * @param eventType
  */
 @Serializable
 public data class EventScoring(
 
-  /** The score for the event. */
+  /** Event score. */
   @SerialName(value = "score") val score: Int,
 
-  /** The name of the event. */
+  /** Event name. */
   @SerialName(value = "eventName") val eventName: String,
 
-  /** The type of the event. */
-  @SerialName(value = "eventType") val eventType: String,
+  @SerialName(value = "eventType") val eventType: EventType,
 )
