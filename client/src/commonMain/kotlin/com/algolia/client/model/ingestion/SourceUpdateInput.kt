@@ -19,6 +19,7 @@ import kotlinx.serialization.json.*
  * - [SourceJSON]
  * - [SourceUpdateCommercetools]
  * - [SourceUpdateDocker]
+ * - [SourceUpdateShopify]
  */
 @Serializable(SourceUpdateInputSerializer::class)
 public sealed interface SourceUpdateInput {
@@ -36,6 +37,7 @@ internal class SourceUpdateInputSerializer : JsonContentPolymorphicSerializer<So
       element is JsonObject -> SourceJSON.serializer()
       element is JsonObject -> SourceCSV.serializer()
       element is JsonObject -> SourceUpdateDocker.serializer()
+      element is JsonObject -> SourceUpdateShopify.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
