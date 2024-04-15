@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
  * @param conversionCount Number of click events for this variant.
  * @param conversionRate [Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant.
  * @param description Description for this variant.
- * @param index A/B test index.
+ * @param index Index name of the A/B test variant (case-sensitive).
  * @param noResultCount Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant.
  * @param purchaseCount Number of purchase events for this variant.
  * @param purchaseRate [Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant.
@@ -55,7 +55,7 @@ public data class Variant(
   /** Description for this variant. */
   @SerialName(value = "description") val description: String,
 
-  /** A/B test index. */
+  /** Index name of the A/B test variant (case-sensitive). */
   @SerialName(value = "index") val index: String,
 
   /** Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant. */

@@ -10,7 +10,7 @@ import kotlinx.serialization.json.*
  * @param eventName Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
  * @param eventType
  * @param eventSubtype
- * @param index Index name to which the event's items belong.
+ * @param index Index name (case-sensitive) to which the event's items belong.
  * @param objectIDs Object IDs of the records that are part of the event.
  * @param userToken Anonymous or pseudonymous user identifier.  Don't use personally identifiable information in user tokens. For more information, see [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
  * @param objectData Extra information about the records involved in a purchase or add-to-cart events.  If provided, it must be the same length as `objectIDs`.
@@ -29,7 +29,7 @@ public data class PurchasedObjectIDsAfterSearch(
 
   @SerialName(value = "eventSubtype") val eventSubtype: PurchaseEvent,
 
-  /** Index name to which the event's items belong. */
+  /** Index name (case-sensitive) to which the event's items belong. */
   @SerialName(value = "index") val index: String,
 
   /** Object IDs of the records that are part of the event. */

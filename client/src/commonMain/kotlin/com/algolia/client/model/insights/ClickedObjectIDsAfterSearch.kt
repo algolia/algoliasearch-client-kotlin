@@ -9,7 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param eventName Event name, up to 64 ASCII characters.  Consider naming events consistently—for example, by adopting Segment's [object-action](https://segment.com/academy/collecting-data/naming-conventions-for-clean-data/#the-object-action-framework) framework.
  * @param eventType
- * @param index Index name to which the event's items belong.
+ * @param index Index name (case-sensitive) to which the event's items belong.
  * @param objectIDs Object IDs of the records that are part of the event.
  * @param positions Position of the clicked item the search results.  You must provide 1 `position` for each `objectID`.
  * @param queryID Unique identifier for a search query.  The query ID is required for events related to search or browse requests. If you add `clickAnalytics: true` as a search request parameter, the query ID is included in the API response.
@@ -25,7 +25,7 @@ public data class ClickedObjectIDsAfterSearch(
 
   @SerialName(value = "eventType") val eventType: ClickEvent,
 
-  /** Index name to which the event's items belong. */
+  /** Index name (case-sensitive) to which the event's items belong. */
   @SerialName(value = "index") val index: String,
 
   /** Object IDs of the records that are part of the event. */

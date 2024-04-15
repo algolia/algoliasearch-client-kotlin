@@ -7,14 +7,14 @@ import kotlinx.serialization.json.*
 /**
  * ABTestResponse
  *
- * @param index A/B test index.
+ * @param index Index name of the A/B test variant (case-sensitive).
  * @param abTestID Unique A/B test identifier.
  * @param taskID Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.
  */
 @Serializable
 public data class ABTestResponse(
 
-  /** A/B test index. */
+  /** Index name of the A/B test variant (case-sensitive). */
   @SerialName(value = "index") val index: String,
 
   /** Unique A/B test identifier. */

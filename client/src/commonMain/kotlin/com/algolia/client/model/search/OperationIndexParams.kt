@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * OperationIndexParams
  *
  * @param operation
- * @param destination Index name.
+ * @param destination Index name (case-sensitive).
  * @param scope **Only for copying.**  If you specify a scope, only the selected scopes are copied. Records and the other scopes are left unchanged. If you omit the `scope` parameter, everything is copied: records, settings, synonyms, and rules.
  */
 @Serializable
@@ -16,7 +16,7 @@ public data class OperationIndexParams(
 
   @SerialName(value = "operation") val operation: OperationType,
 
-  /** Index name. */
+  /** Index name (case-sensitive). */
   @SerialName(value = "destination") val destination: String,
 
   /** **Only for copying.**  If you specify a scope, only the selected scopes are copied. Records and the other scopes are left unchanged. If you omit the `scope` parameter, everything is copied: records, settings, synonyms, and rules.  */

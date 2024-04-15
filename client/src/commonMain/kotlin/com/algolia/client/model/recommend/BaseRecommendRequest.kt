@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * BaseRecommendRequest
  *
- * @param indexName Index name.
+ * @param indexName Index name (case-sensitive).
  * @param threshold Minimum score a recommendation must have to be included in the response.
  * @param maxRecommendations Maximum number of recommendations to retrieve. By default, all recommendations are returned and no fallback request is made. Depending on the available recommendations and the other request parameters, the actual number of recommendations may be lower than this value.
  * @param queryParameters
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class BaseRecommendRequest(
 
-  /** Index name. */
+  /** Index name (case-sensitive). */
   @SerialName(value = "indexName") val indexName: String,
 
   /** Minimum score a recommendation must have to be included in the response. */

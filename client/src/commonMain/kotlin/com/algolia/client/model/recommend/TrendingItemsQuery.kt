@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * TrendingItemsQuery
  *
- * @param indexName Index name.
+ * @param indexName Index name (case-sensitive).
  * @param threshold Minimum score a recommendation must have to be included in the response.
  * @param facetName Facet attribute. To be used in combination with `facetValue`. If specified, only recommendations matching the facet filter will be returned.
  * @param facetValue Facet value. To be used in combination with `facetName`. If specified, only recommendations matching the facet filter will be returned.
@@ -19,7 +19,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class TrendingItemsQuery(
 
-  /** Index name. */
+  /** Index name (case-sensitive). */
   @SerialName(value = "indexName") val indexName: String,
 
   /** Minimum score a recommendation must have to be included in the response. */

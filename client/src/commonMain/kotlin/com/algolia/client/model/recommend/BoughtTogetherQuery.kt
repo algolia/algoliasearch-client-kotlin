@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * BoughtTogetherQuery
  *
- * @param indexName Index name.
+ * @param indexName Index name (case-sensitive).
  * @param threshold Minimum score a recommendation must have to be included in the response.
  * @param model
  * @param objectID Unique record identifier.
@@ -17,7 +17,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class BoughtTogetherQuery(
 
-  /** Index name. */
+  /** Index name (case-sensitive). */
   @SerialName(value = "indexName") val indexName: String,
 
   /** Minimum score a recommendation must have to be included in the response. */

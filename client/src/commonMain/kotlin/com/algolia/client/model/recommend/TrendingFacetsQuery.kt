@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * TrendingFacetsQuery
  *
- * @param indexName Index name.
+ * @param indexName Index name (case-sensitive).
  * @param threshold Minimum score a recommendation must have to be included in the response.
  * @param facetName Facet attribute for which to retrieve trending facet values.
  * @param model
@@ -18,7 +18,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class TrendingFacetsQuery(
 
-  /** Index name. */
+  /** Index name (case-sensitive). */
   @SerialName(value = "indexName") val indexName: String,
 
   /** Minimum score a recommendation must have to be included in the response. */

@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * SearchForFacetsOptions
  *
  * @param facet Facet name.
- * @param indexName Index name.
+ * @param indexName Index name (case-sensitive).
  * @param type
  * @param facetQuery Text to search inside the facet's values.
  * @param maxFacetHits Maximum number of facet values to return when [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
@@ -19,7 +19,7 @@ public data class SearchForFacetsOptions(
   /** Facet name. */
   @SerialName(value = "facet") val facet: String,
 
-  /** Index name. */
+  /** Index name (case-sensitive). */
   @SerialName(value = "indexName") val indexName: String,
 
   @SerialName(value = "type") val type: SearchTypeFacet,

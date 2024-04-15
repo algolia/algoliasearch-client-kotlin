@@ -9,7 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param action
  * @param body Operation arguments (varies with specified `action`).
- * @param indexName Index to target for this operation.
+ * @param indexName Index name (case-sensitive).
  */
 @Serializable
 public data class MultipleBatchRequest(
@@ -19,6 +19,6 @@ public data class MultipleBatchRequest(
   /** Operation arguments (varies with specified `action`). */
   @SerialName(value = "body") val body: JsonObject,
 
-  /** Index to target for this operation. */
+  /** Index name (case-sensitive). */
   @SerialName(value = "indexName") val indexName: String,
 )

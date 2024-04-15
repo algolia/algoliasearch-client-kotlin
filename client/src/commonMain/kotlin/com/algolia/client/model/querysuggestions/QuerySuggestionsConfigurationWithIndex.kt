@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * Query Suggestions configuration.
  *
  * @param sourceIndices Algolia indices from which to get the popular searches for query suggestions.
- * @param indexName Name of the Query Suggestions index.
+ * @param indexName Name of the Query Suggestions index (case-sensitive).
  * @param languages
  * @param exclude
  * @param enablePersonalization Whether to turn on personalized query suggestions.
@@ -20,7 +20,7 @@ public data class QuerySuggestionsConfigurationWithIndex(
   /** Algolia indices from which to get the popular searches for query suggestions. */
   @SerialName(value = "sourceIndices") val sourceIndices: List<SourceIndex>,
 
-  /** Name of the Query Suggestions index. */
+  /** Name of the Query Suggestions index (case-sensitive). */
   @SerialName(value = "indexName") val indexName: String,
 
   @SerialName(value = "languages") val languages: Languages? = null,

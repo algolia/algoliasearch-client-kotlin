@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * AbTestsVariantSearchParams
  *
- * @param index A/B test index.
+ * @param index Index name of the A/B test variant (case-sensitive).
  * @param trafficPercentage Percentage of search requests each variant receives.
  * @param customSearchParameters
  * @param description Description for this variant.
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class AbTestsVariantSearchParams(
 
-  /** A/B test index. */
+  /** Index name of the A/B test variant (case-sensitive). */
   @SerialName(value = "index") val index: String,
 
   /** Percentage of search requests each variant receives. */

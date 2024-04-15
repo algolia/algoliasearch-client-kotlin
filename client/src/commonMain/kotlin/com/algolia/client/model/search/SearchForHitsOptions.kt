@@ -7,13 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * SearchForHitsOptions
  *
- * @param indexName Index name.
+ * @param indexName Index name (case-sensitive).
  * @param type
  */
 @Serializable
 public data class SearchForHitsOptions(
 
-  /** Index name. */
+  /** Index name (case-sensitive). */
   @SerialName(value = "indexName") val indexName: String,
 
   @SerialName(value = "type") val type: SearchTypeDefault? = null,

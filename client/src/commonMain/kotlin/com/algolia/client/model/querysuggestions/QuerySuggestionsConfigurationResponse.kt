@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * API response for retrieving Query Suggestions configurations.
  *
  * @param appID Algolia application ID to which this Query Suggestions configuration belongs.
- * @param indexName Name of the Query Suggestions index.
+ * @param indexName Name of the Query Suggestions index (case-sensitive).
  * @param sourceIndices Algolia indices from which to get the popular searches for query suggestions.
  * @param languages
  * @param exclude
@@ -21,7 +21,7 @@ public data class QuerySuggestionsConfigurationResponse(
   /** Algolia application ID to which this Query Suggestions configuration belongs. */
   @SerialName(value = "appID") val appID: String,
 
-  /** Name of the Query Suggestions index. */
+  /** Name of the Query Suggestions index (case-sensitive). */
   @SerialName(value = "indexName") val indexName: String,
 
   /** Algolia indices from which to get the popular searches for query suggestions. */
