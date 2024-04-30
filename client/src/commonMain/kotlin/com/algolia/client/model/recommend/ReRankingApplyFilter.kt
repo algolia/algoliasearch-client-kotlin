@@ -14,14 +14,14 @@ import kotlin.jvm.JvmInline
  * Restrict [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/) to records that match these filters.
  *
  * Implementations:
- * - [List<MixedSearchFilters>] - *[ReRankingApplyFilter.of]*
+ * - [List<ReRankingApplyFilter>] - *[ReRankingApplyFilter.of]*
  * - [String] - *[ReRankingApplyFilter.of]*
  */
 @Serializable(ReRankingApplyFilterSerializer::class)
 public sealed interface ReRankingApplyFilter {
   @Serializable
   @JvmInline
-  public value class ListOfMixedSearchFiltersValue(public val value: List<MixedSearchFilters>) : ReRankingApplyFilter
+  public value class ListOfReRankingApplyFilterValue(public val value: List<ReRankingApplyFilter>) : ReRankingApplyFilter
 
   @Serializable
   @JvmInline
@@ -29,8 +29,8 @@ public sealed interface ReRankingApplyFilter {
 
   public companion object {
 
-    public fun of(value: List<MixedSearchFilters>): ReRankingApplyFilter {
-      return ListOfMixedSearchFiltersValue(value)
+    public fun of(value: List<ReRankingApplyFilter>): ReRankingApplyFilter {
+      return ListOfReRankingApplyFilterValue(value)
     }
     public fun of(value: String): ReRankingApplyFilter {
       return StringValue(value)
@@ -41,7 +41,7 @@ public sealed interface ReRankingApplyFilter {
 internal class ReRankingApplyFilterSerializer : JsonContentPolymorphicSerializer<ReRankingApplyFilter>(ReRankingApplyFilter::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ReRankingApplyFilter> {
     return when {
-      element.isJsonArrayOfObjects -> ReRankingApplyFilter.ListOfMixedSearchFiltersValue.serializer()
+      element.isJsonArrayOfObjects -> ReRankingApplyFilter.ListOfReRankingApplyFilterValue.serializer()
       element.isString -> ReRankingApplyFilter.StringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

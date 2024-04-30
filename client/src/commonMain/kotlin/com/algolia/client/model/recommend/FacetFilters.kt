@@ -14,14 +14,14 @@ import kotlin.jvm.JvmInline
  * Filter the search by facet values, so that only records with the same facet values are retrieved.  **Prefer using the `filters` parameter, which supports all filter types and combinations with boolean operators.**  - `[filter1, filter2]` is interpreted as `filter1 AND filter2`. - `[[filter1, filter2], filter3]` is interpreted as `filter1 OR filter2 AND filter3`. - `facet:-value` is interpreted as `NOT facet:value`.  While it's best to avoid attributes that start with a `-`, you can still filter them by escaping with a backslash: `facet:\\-value`.
  *
  * Implementations:
- * - [List<MixedSearchFilters>] - *[FacetFilters.of]*
+ * - [List<FacetFilters>] - *[FacetFilters.of]*
  * - [String] - *[FacetFilters.of]*
  */
 @Serializable(FacetFiltersSerializer::class)
 public sealed interface FacetFilters {
   @Serializable
   @JvmInline
-  public value class ListOfMixedSearchFiltersValue(public val value: List<MixedSearchFilters>) : FacetFilters
+  public value class ListOfFacetFiltersValue(public val value: List<FacetFilters>) : FacetFilters
 
   @Serializable
   @JvmInline
@@ -29,8 +29,8 @@ public sealed interface FacetFilters {
 
   public companion object {
 
-    public fun of(value: List<MixedSearchFilters>): FacetFilters {
-      return ListOfMixedSearchFiltersValue(value)
+    public fun of(value: List<FacetFilters>): FacetFilters {
+      return ListOfFacetFiltersValue(value)
     }
     public fun of(value: String): FacetFilters {
       return StringValue(value)
@@ -41,7 +41,7 @@ public sealed interface FacetFilters {
 internal class FacetFiltersSerializer : JsonContentPolymorphicSerializer<FacetFilters>(FacetFilters::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<FacetFilters> {
     return when {
-      element.isJsonArrayOfObjects -> FacetFilters.ListOfMixedSearchFiltersValue.serializer()
+      element.isJsonArrayOfObjects -> FacetFilters.ListOfFacetFiltersValue.serializer()
       element.isString -> FacetFilters.StringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

@@ -14,14 +14,14 @@ import kotlin.jvm.JvmInline
  * Filter the search by values of the special `_tags` attribute.  **Prefer using the `filters` parameter, which supports all filter types and combinations with boolean operators.**  Different from regular facets, `_tags` can only be used for filtering (including or excluding records). You won't get a facet count. The same combination and escaping rules apply as for `facetFilters`.
  *
  * Implementations:
- * - [List<MixedSearchFilters>] - *[TagFilters.of]*
+ * - [List<TagFilters>] - *[TagFilters.of]*
  * - [String] - *[TagFilters.of]*
  */
 @Serializable(TagFiltersSerializer::class)
 public sealed interface TagFilters {
   @Serializable
   @JvmInline
-  public value class ListOfMixedSearchFiltersValue(public val value: List<MixedSearchFilters>) : TagFilters
+  public value class ListOfTagFiltersValue(public val value: List<TagFilters>) : TagFilters
 
   @Serializable
   @JvmInline
@@ -29,8 +29,8 @@ public sealed interface TagFilters {
 
   public companion object {
 
-    public fun of(value: List<MixedSearchFilters>): TagFilters {
-      return ListOfMixedSearchFiltersValue(value)
+    public fun of(value: List<TagFilters>): TagFilters {
+      return ListOfTagFiltersValue(value)
     }
     public fun of(value: String): TagFilters {
       return StringValue(value)
@@ -41,7 +41,7 @@ public sealed interface TagFilters {
 internal class TagFiltersSerializer : JsonContentPolymorphicSerializer<TagFilters>(TagFilters::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TagFilters> {
     return when {
-      element.isJsonArrayOfObjects -> TagFilters.ListOfMixedSearchFiltersValue.serializer()
+      element.isJsonArrayOfObjects -> TagFilters.ListOfTagFiltersValue.serializer()
       element.isString -> TagFilters.StringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
