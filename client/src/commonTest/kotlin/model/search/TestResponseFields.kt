@@ -4,6 +4,7 @@ import com.algolia.search.model.search.ResponseFields.All
 import com.algolia.search.model.search.ResponseFields.AroundLatLng
 import com.algolia.search.model.search.ResponseFields.AutomaticRadius
 import com.algolia.search.model.search.ResponseFields.ExhaustiveFacetsCount
+import com.algolia.search.model.search.ResponseFields.Exhaustive
 import com.algolia.search.model.search.ResponseFields.Facets
 import com.algolia.search.model.search.ResponseFields.FacetsStats
 import com.algolia.search.model.search.ResponseFields.Hits
@@ -33,6 +34,7 @@ internal class TestResponseFields {
         AroundLatLng.raw shouldEqual Key.AroundLatLng
         AutomaticRadius.raw shouldEqual Key.AutomaticRadius
         ExhaustiveFacetsCount.raw shouldEqual Key.ExhaustiveFacetsCount
+        Exhaustive.raw shouldEqual Key.Exhaustive
         Facets.raw shouldEqual Key.Facets
         FacetsStats.raw shouldEqual Key.Facets_Stats
         Hits.raw shouldEqual Key.Hits

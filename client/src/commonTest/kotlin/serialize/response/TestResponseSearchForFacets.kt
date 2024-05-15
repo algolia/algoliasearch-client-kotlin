@@ -1,8 +1,10 @@
 package serialize.response
 
 import com.algolia.search.model.response.ResponseSearchForFacets
+import com.algolia.search.model.search.Exhaustive
 import com.algolia.search.model.search.Facet
 import com.algolia.search.serialize.internal.Key
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.buildJsonArray
 import kotlinx.serialization.json.buildJsonObject
 import kotlinx.serialization.json.put
@@ -13,6 +15,7 @@ internal class TestResponseSearchForFacets : TestSerializer<ResponseSearchForFac
     ResponseSearchForFacets.serializer()
 ) {
 
+    @OptIn(ExperimentalSerializationApi::class)
     override val items = listOf(
         ResponseSearchForFacets(
             facets = listOf(

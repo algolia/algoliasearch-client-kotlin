@@ -22,6 +22,7 @@ public sealed class ResponseFields(override val raw: String) : Raw<String> {
     public object AroundLatLng : ResponseFields(Key.AroundLatLng)
     public object AutomaticRadius : ResponseFields(Key.AutomaticRadius)
     public object ExhaustiveFacetsCount : ResponseFields(Key.ExhaustiveFacetsCount)
+    public object Exhaustive : ResponseFields(Key.Exhaustive)
     public object Facets : ResponseFields(Key.Facets)
     public object FacetsStats : ResponseFields(Key.Facets_Stats)
     public object Hits : ResponseFields(Key.Hits)
@@ -60,6 +61,7 @@ public sealed class ResponseFields(override val raw: String) : Raw<String> {
                 Key.AroundLatLng -> AroundLatLng
                 Key.AutomaticRadius -> AutomaticRadius
                 Key.ExhaustiveFacetsCount -> ExhaustiveFacetsCount
+                Key.Exhaustive -> Exhaustive
                 Key.Facets -> Facets
                 Key.Facets_Stats -> FacetsStats
                 Key.Hits -> Hits

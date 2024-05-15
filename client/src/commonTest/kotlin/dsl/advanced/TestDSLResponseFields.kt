@@ -27,6 +27,7 @@ internal class TestDSLResponseFields {
             AroundLatLng shouldEqual ResponseFields.AroundLatLng
             AutomaticRadius shouldEqual ResponseFields.AutomaticRadius
             ExhaustiveFacetsCount shouldEqual ResponseFields.ExhaustiveFacetsCount
+            Exhaustive shouldEqual ResponseFields.Exhaustive
             Facets shouldEqual ResponseFields.Facets
             FacetsStats shouldEqual ResponseFields.FacetsStats
             Hits shouldEqual ResponseFields.Hits

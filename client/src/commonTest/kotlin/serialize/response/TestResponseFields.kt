@@ -5,6 +5,7 @@ import com.algolia.search.model.search.ResponseFields.All
 import com.algolia.search.model.search.ResponseFields.AroundLatLng
 import com.algolia.search.model.search.ResponseFields.AutomaticRadius
 import com.algolia.search.model.search.ResponseFields.ExhaustiveFacetsCount
+import com.algolia.search.model.search.ResponseFields.Exhaustive
 import com.algolia.search.model.search.ResponseFields.Facets
 import com.algolia.search.model.search.ResponseFields.FacetsStats
 import com.algolia.search.model.search.ResponseFields.Hits
@@ -32,6 +33,7 @@ internal class TestResponseFields : TestSerializer<ResponseFields>(ResponseField
         AroundLatLng to JsonPrimitive(AroundLatLng.raw),
         AutomaticRadius to JsonPrimitive(AutomaticRadius.raw),
         ExhaustiveFacetsCount to JsonPrimitive(ExhaustiveFacetsCount.raw),
+        Exhaustive to JsonPrimitive(Exhaustive.raw),
         Facets to JsonPrimitive(Facets.raw),
         FacetsStats to JsonPrimitive(FacetsStats.raw),
         Hits to JsonPrimitive(Hits.raw),

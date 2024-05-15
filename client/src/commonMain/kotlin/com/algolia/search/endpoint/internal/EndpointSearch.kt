@@ -17,10 +17,7 @@ import com.algolia.search.model.response.ResponseHitWithPosition
 import com.algolia.search.model.response.ResponseSearch
 import com.algolia.search.model.response.ResponseSearchForFacets
 import com.algolia.search.model.response.ResponseSearches
-import com.algolia.search.model.search.Cursor
-import com.algolia.search.model.search.Facet
-import com.algolia.search.model.search.FacetStats
-import com.algolia.search.model.search.Query
+import com.algolia.search.model.search.*
 import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.merge
@@ -148,6 +145,28 @@ internal class EndpointSearchImpl(
         }
     }
 
+    private fun List<ResponseSearch>.aggregateExhaustive(): Exhaustive? {
+        val exhaustive: Exhaustive? = null
+
+        return fold(exhaustive) { acc, cur ->
+                if (cur.exhaustiveOrNull == null) {
+                    return@fold acc
+                }
+
+                if (acc == null) {
+                    return@fold cur.exhaustiveOrNull
+                }
+
+                return@fold Exhaustive(
+                    facetsCount = if (cur.exhaustiveOrNull.facetsCount == null && acc.facetsCount == null) null else cur.exhaustiveOrNull.facetsCount == true && acc.facetsCount == true,
+                    facetValues = if (cur.exhaustiveOrNull.facetValues == null && acc.facetValues == null) null else cur.exhaustiveOrNull.facetValues == true && acc.facetValues == true,
+                    nbHits = cur.exhaustiveOrNull.nbHits && acc.nbHits,
+                    rulesMatch = if (cur.exhaustiveOrNull.rulesMatch == null && acc.rulesMatch == null) null else cur.exhaustiveOrNull.rulesMatch == true && acc.rulesMatch == true,
+                    typo = if (cur.exhaustiveOrNull.typo == null && acc.typo == null) null else cur.exhaustiveOrNull.typo == true && acc.typo == true
+                )
+            }
+    }
+
     private fun List<ResponseSearch>.aggregateFacetStats(): Map<Attribute, FacetStats> {
         return fold(mapOf()) { acc, result ->
             result.facetStatsOrNull?.let { acc + it } ?: acc
@@ -164,12 +183,14 @@ internal class EndpointSearchImpl(
         val facets = resultsDisjunctiveFacets.aggregateFacets()
         val facetStats = results.aggregateFacetStats()
         val hierarchicalFacets = resultHierarchicalFacets.aggregateFacets()
+        val exhaustive = results.aggregateExhaustive()
 
         return results.first().copy(
             facetStatsOrNull = if (facetStats.isEmpty()) null else facetStats,
             disjunctiveFacetsOrNull = facets,
             hierarchicalFacetsOrNull = if (hierarchicalFacets.isEmpty()) null else hierarchicalFacets,
-            exhaustiveFacetsCountOrNull = resultsDisjunctiveFacets.all { it.exhaustiveFacetsCountOrNull == true }
+            exhaustiveFacetsCountOrNull = resultsDisjunctiveFacets.all { it.exhaustiveFacetsCountOrNull == true },
+            exhaustiveOrNull = exhaustive
         )
     }
 
