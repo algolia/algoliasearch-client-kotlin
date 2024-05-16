@@ -17,6 +17,7 @@ public class DSLResponseFields(
     public val AroundLatLng: ResponseFields.AroundLatLng = ResponseFields.AroundLatLng
     public val AutomaticRadius: ResponseFields.AutomaticRadius = ResponseFields.AutomaticRadius
     public val ExhaustiveFacetsCount: ResponseFields.ExhaustiveFacetsCount = ResponseFields.ExhaustiveFacetsCount
+    public val Exhaustive: ResponseFields.Exhaustive = ResponseFields.Exhaustive
     public val Facets: ResponseFields.Facets = ResponseFields.Facets
     public val FacetsStats: ResponseFields.FacetsStats = ResponseFields.FacetsStats
     public val Hits: ResponseFields.Hits = ResponseFields.Hits

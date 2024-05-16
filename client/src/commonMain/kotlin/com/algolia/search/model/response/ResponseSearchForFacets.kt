@@ -1,5 +1,6 @@
 package com.algolia.search.model.response
 
+import com.algolia.search.model.search.Exhaustive
 import com.algolia.search.model.search.Facet
 import com.algolia.search.serialize.KSerializerFacetList
 import com.algolia.search.serialize.internal.Key

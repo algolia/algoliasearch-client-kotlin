@@ -66,6 +66,7 @@ internal class TestSuiteDisjunctive {
                 it.disjunctiveFacets[brand, "Whatever"] shouldEqual 1
                 it.disjunctiveFacets[brand, "Commas' voice, Ltd"] shouldEqual 1
                 it.exhaustiveFacetsCount.shouldBeTrue()
+                it.exhaustive.facetsCount?.shouldBeTrue()
                 it.facetStats.size shouldEqual 1
                 it.facetStats[stars] shouldEqual FacetStats(2f, 5f, 4f, 16f)
             }
@@ -101,6 +102,7 @@ internal class TestSuiteDisjunctive {
                 it.nbHits shouldEqual 5
                 it.facets.size shouldEqual 1
                 it.exhaustiveFacetsCount.shouldBeTrue()
+                it.exhaustive.facetsCount?.shouldBeTrue()
             }
             filters += Filter.Facet(stars, "1")
             index.advancedSearch(query, setOf(FilterGroup.Or.Facet(filters))).let {
@@ -113,6 +115,7 @@ internal class TestSuiteDisjunctive {
                     this[stars, "4"] shouldEqual 2
                 }
                 it.exhaustiveFacetsCount.shouldBeTrue()
+                it.exhaustive.facetsCount?.shouldBeTrue()
                 it.facetStats.size shouldEqual 1
                 it.facetStats[stars] shouldEqual FacetStats(1f, 4f, 2f, 12f)
             }

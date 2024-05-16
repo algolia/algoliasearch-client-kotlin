@@ -108,6 +108,7 @@ internal class TestKeys {
         Key.Star shouldEqual "*"
         Key.AutomaticRadius shouldEqual "automaticRadius"
         Key.ExhaustiveFacetsCount shouldEqual "exhaustiveFacetsCount"
+        Key.Exhaustive shouldEqual "exhaustive"
         Key.Facets_Stats shouldEqual "facets_stats"
         Key.Hits shouldEqual "hits"
         Key.Index shouldEqual "index"

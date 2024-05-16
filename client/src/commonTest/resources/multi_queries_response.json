@@ -275,6 +275,9 @@
             "nbPages": 500,
             "hitsPerPage": 2,
             "exhaustiveNbHits": true,
+            "exhaustive": {
+                "nbHits": true
+            },
             "query": "van",
             "queryAfterRemoval": "van",
             "params": "query=van&hitsPerPage=2",
@@ -364,6 +367,9 @@
             "nbPages": 500,
             "hitsPerPage": 2,
             "exhaustiveNbHits": true,
+            "exhaustive": {
+                "nbHits": true
+            },
             "query": "van",
             "params": "query=van&hitsPerPage=2",
             "index": "products",
