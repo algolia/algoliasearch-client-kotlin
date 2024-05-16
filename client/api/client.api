@@ -580,6 +580,7 @@ public final class com/algolia/search/dsl/advanced/DSLResponseFields {
 	public final fun getAll ()Lcom/algolia/search/model/search/ResponseFields$All;
 	public final fun getAroundLatLng ()Lcom/algolia/search/model/search/ResponseFields$AroundLatLng;
 	public final fun getAutomaticRadius ()Lcom/algolia/search/model/search/ResponseFields$AutomaticRadius;
+	public final fun getExhaustive ()Lcom/algolia/search/model/search/ResponseFields$Exhaustive;
 	public final fun getExhaustiveFacetsCount ()Lcom/algolia/search/model/search/ResponseFields$ExhaustiveFacetsCount;
 	public final fun getFacets ()Lcom/algolia/search/model/search/ResponseFields$Facets;
 	public final fun getFacetsStats ()Lcom/algolia/search/model/search/ResponseFields$FacetsStats;
@@ -6394,47 +6395,48 @@ public final class com/algolia/search/model/response/ResponseObjects$Companion {
 public final class com/algolia/search/model/response/ResponseSearch : com/algolia/search/model/response/ResultSearch {
 	public static final field Companion Lcom/algolia/search/model/response/ResponseSearch$Companion;
 	public fun <init> ()V
-	public synthetic fun <init> (IILjava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
-	public fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;)V
-	public synthetic fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public synthetic fun <init> (IILjava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Lcom/algolia/search/model/search/Exhaustive;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Lcom/algolia/search/model/search/Exhaustive;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Lcom/algolia/search/model/search/Exhaustive;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;IILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/util/List;
 	public final fun component10 ()Ljava/lang/Boolean;
 	public final fun component11 ()Ljava/lang/Boolean;
-	public final fun component12 ()Ljava/lang/String;
+	public final fun component12 ()Lcom/algolia/search/model/search/Exhaustive;
 	public final fun component13 ()Ljava/lang/String;
 	public final fun component14 ()Ljava/lang/String;
 	public final fun component15 ()Ljava/lang/String;
-	public final fun component16 ()Lcom/algolia/search/model/search/Point;
-	public final fun component17 ()Ljava/lang/Float;
-	public final fun component18 ()Ljava/lang/String;
-	public final fun component19 ()Lcom/algolia/search/model/IndexName;
+	public final fun component16 ()Ljava/lang/String;
+	public final fun component17 ()Lcom/algolia/search/model/search/Point;
+	public final fun component18 ()Ljava/lang/Float;
+	public final fun component19 ()Ljava/lang/String;
 	public final fun component2 ()Ljava/lang/Integer;
-	public final fun component20 ()Ljava/lang/Integer;
-	public final fun component21 ()Ljava/lang/String;
-	public final fun component22 ()Ljava/util/Map;
+	public final fun component20 ()Lcom/algolia/search/model/IndexName;
+	public final fun component21 ()Ljava/lang/Integer;
+	public final fun component22 ()Ljava/lang/String;
 	public final fun component23 ()Ljava/util/Map;
 	public final fun component24 ()Ljava/util/Map;
-	public final fun component25 ()Lcom/algolia/search/model/search/Cursor;
-	public final fun component26 ()Lcom/algolia/search/model/IndexName;
-	public final fun component27 ()Ljava/lang/Boolean;
-	public final fun component28 ()Lcom/algolia/search/model/QueryID;
-	public final fun component29 ()Ljava/util/Map;
+	public final fun component25 ()Ljava/util/Map;
+	public final fun component26 ()Lcom/algolia/search/model/search/Cursor;
+	public final fun component27 ()Lcom/algolia/search/model/IndexName;
+	public final fun component28 ()Ljava/lang/Boolean;
+	public final fun component29 ()Lcom/algolia/search/model/QueryID;
 	public final fun component3 ()Ljava/lang/Integer;
-	public final fun component30 ()Lcom/algolia/search/model/search/Explain;
-	public final fun component31 ()Ljava/util/List;
-	public final fun component32 ()Ljava/lang/Integer;
+	public final fun component30 ()Ljava/util/Map;
+	public final fun component31 ()Lcom/algolia/search/model/search/Explain;
+	public final fun component32 ()Ljava/util/List;
 	public final fun component33 ()Ljava/lang/Integer;
-	public final fun component34 ()Lcom/algolia/search/model/rule/RenderingContent;
-	public final fun component35 ()Lcom/algolia/search/model/analytics/ABTestID;
-	public final fun component36 ()Lkotlinx/serialization/json/JsonObject;
+	public final fun component34 ()Ljava/lang/Integer;
+	public final fun component35 ()Lcom/algolia/search/model/rule/RenderingContent;
+	public final fun component36 ()Lcom/algolia/search/model/analytics/ABTestID;
+	public final fun component37 ()Lkotlinx/serialization/json/JsonObject;
 	public final fun component4 ()Ljava/lang/Integer;
 	public final fun component5 ()Ljava/lang/Integer;
 	public final fun component6 ()Ljava/lang/Integer;
 	public final fun component7 ()Ljava/util/List;
 	public final fun component8 ()Ljava/lang/Integer;
 	public final fun component9 ()Ljava/lang/Long;
-	public final fun copy (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;)Lcom/algolia/search/model/response/ResponseSearch;
-	public static synthetic fun copy$default (Lcom/algolia/search/model/response/ResponseSearch;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;IILjava/lang/Object;)Lcom/algolia/search/model/response/ResponseSearch;
+	public final fun copy (Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Lcom/algolia/search/model/search/Exhaustive;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;)Lcom/algolia/search/model/response/ResponseSearch;
+	public static synthetic fun copy$default (Lcom/algolia/search/model/response/ResponseSearch;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Long;Ljava/lang/Boolean;Ljava/lang/Boolean;Lcom/algolia/search/model/search/Exhaustive;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Lcom/algolia/search/model/search/Point;Ljava/lang/Float;Ljava/lang/String;Lcom/algolia/search/model/IndexName;Ljava/lang/Integer;Ljava/lang/String;Ljava/util/Map;Ljava/util/Map;Ljava/util/Map;Lcom/algolia/search/model/search/Cursor;Lcom/algolia/search/model/IndexName;Ljava/lang/Boolean;Lcom/algolia/search/model/QueryID;Ljava/util/Map;Lcom/algolia/search/model/search/Explain;Ljava/util/List;Ljava/lang/Integer;Ljava/lang/Integer;Lcom/algolia/search/model/rule/RenderingContent;Lcom/algolia/search/model/analytics/ABTestID;Lkotlinx/serialization/json/JsonObject;IILjava/lang/Object;)Lcom/algolia/search/model/response/ResponseSearch;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAbTestID ()Lcom/algolia/search/model/analytics/ABTestID;
 	public final fun getAbTestIDOrNull ()Lcom/algolia/search/model/analytics/ABTestID;
@@ -6452,10 +6454,12 @@ public final class com/algolia/search/model/response/ResponseSearch : com/algoli
 	public final fun getCursorOrNull ()Lcom/algolia/search/model/search/Cursor;
 	public final fun getDisjunctiveFacets ()Ljava/util/Map;
 	public final fun getDisjunctiveFacetsOrNull ()Ljava/util/Map;
+	public final fun getExhaustive ()Lcom/algolia/search/model/search/Exhaustive;
 	public final fun getExhaustiveFacetsCount ()Z
 	public final fun getExhaustiveFacetsCountOrNull ()Ljava/lang/Boolean;
 	public final fun getExhaustiveNbHits ()Z
 	public final fun getExhaustiveNbHitsOrNull ()Ljava/lang/Boolean;
+	public final fun getExhaustiveOrNull ()Lcom/algolia/search/model/search/Exhaustive;
 	public final fun getExplain ()Lcom/algolia/search/model/search/Explain;
 	public final fun getExplainOrNull ()Lcom/algolia/search/model/search/Explain;
 	public final fun getExtensions ()Lkotlinx/serialization/json/JsonObject;
@@ -8701,6 +8705,44 @@ public final class com/algolia/search/model/search/ExactOnSingleWordQuery$Word :
 	public static final field INSTANCE Lcom/algolia/search/model/search/ExactOnSingleWordQuery$Word;
 }
 
+public final class com/algolia/search/model/search/Exhaustive {
+	public static final field Companion Lcom/algolia/search/model/search/Exhaustive$Companion;
+	public synthetic fun <init> (ILjava/lang/Boolean;Ljava/lang/Boolean;ZLjava/lang/Boolean;Ljava/lang/Boolean;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Ljava/lang/Boolean;Ljava/lang/Boolean;ZLjava/lang/Boolean;Ljava/lang/Boolean;)V
+	public synthetic fun <init> (Ljava/lang/Boolean;Ljava/lang/Boolean;ZLjava/lang/Boolean;Ljava/lang/Boolean;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Ljava/lang/Boolean;
+	public final fun component2 ()Ljava/lang/Boolean;
+	public final fun component3 ()Z
+	public final fun component4 ()Ljava/lang/Boolean;
+	public final fun component5 ()Ljava/lang/Boolean;
+	public final fun copy (Ljava/lang/Boolean;Ljava/lang/Boolean;ZLjava/lang/Boolean;Ljava/lang/Boolean;)Lcom/algolia/search/model/search/Exhaustive;
+	public static synthetic fun copy$default (Lcom/algolia/search/model/search/Exhaustive;Ljava/lang/Boolean;Ljava/lang/Boolean;ZLjava/lang/Boolean;Ljava/lang/Boolean;ILjava/lang/Object;)Lcom/algolia/search/model/search/Exhaustive;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getFacetValues ()Ljava/lang/Boolean;
+	public final fun getFacetsCount ()Ljava/lang/Boolean;
+	public final fun getNbHits ()Z
+	public final fun getRulesMatch ()Ljava/lang/Boolean;
+	public final fun getTypo ()Ljava/lang/Boolean;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public static final fun write$Self (Lcom/algolia/search/model/search/Exhaustive;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+}
+
+public final class com/algolia/search/model/search/Exhaustive$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/algolia/search/model/search/Exhaustive$$serializer;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/algolia/search/model/search/Exhaustive;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/algolia/search/model/search/Exhaustive;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/algolia/search/model/search/Exhaustive$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public final class com/algolia/search/model/search/Explain {
 	public static final field Companion Lcom/algolia/search/model/search/Explain$Companion;
 	public synthetic fun <init> (ILcom/algolia/search/model/search/Match;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
@@ -10018,6 +10060,10 @@ public final class com/algolia/search/model/search/ResponseFields$Companion : ko
 	public fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/algolia/search/model/search/ResponseFields;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/algolia/search/model/search/ResponseFields$Exhaustive : com/algolia/search/model/search/ResponseFields {
+	public static final field INSTANCE Lcom/algolia/search/model/search/ResponseFields$Exhaustive;
 }
 
 public final class com/algolia/search/model/search/ResponseFields$ExhaustiveFacetsCount : com/algolia/search/model/search/ResponseFields {

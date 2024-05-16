@@ -1,3 +1,8 @@
+# 2.1.11
+
+### Fixed
+- **Search**: introduce new exhaustive object (#416)
+
 # 2.1.10
 
 ### Fixed
