@@ -1,3 +1,9 @@
+## [3.0.0-beta.27](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.26...3.0.0-beta.27)
+
+- [09cf06739](https://github.com/algolia/api-clients-automation/commit/09cf06739) fix(kotlin): ci release workflow ([#3091](https://github.com/algolia/api-clients-automation/pull/3091)) by [@Fluf22](https://github.com/Fluf22/)
+- [2b70d9ea5](https://github.com/algolia/api-clients-automation/commit/2b70d9ea5) fix(specs): exhaustiveFacetsCount is not deprecated for sffv ([#3089](https://github.com/algolia/api-clients-automation/pull/3089)) by [@kai687](https://github.com/kai687/)
+- [1250c2b3c](https://github.com/algolia/api-clients-automation/commit/1250c2b3c) fix(specs): simplify filter types ([#3042](https://github.com/algolia/api-clients-automation/pull/3042)) by [@millotp](https://github.com/millotp/)
+
 ## [3.0.0-beta.26](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.25...3.0.0-beta.26)
 
 - [b621988bc](https://github.com/algolia/api-clients-automation/commit/b621988bc) feat(specs): promote @kai687 to code owner ([#3014](https://github.com/algolia/api-clients-automation/pull/3014)) by [@Fluf22](https://github.com/Fluf22/)
