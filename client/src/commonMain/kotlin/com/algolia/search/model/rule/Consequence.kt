@@ -21,15 +21,7 @@ import kotlinx.serialization.Serializer
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.booleanOrNull
-import kotlinx.serialization.json.buildJsonObject
-import kotlinx.serialization.json.decodeFromJsonElement
-import kotlinx.serialization.json.encodeToJsonElement
-import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.json.jsonPrimitive
-import kotlinx.serialization.json.put
+import kotlinx.serialization.json.*
 
 @Serializable(Consequence.Companion::class)
 public data class Consequence(
@@ -44,6 +36,14 @@ public data class Consequence(
      * Behaves like [Query.optionalFilters].
      */
     val automaticOptionalFacetFilters: List<AutomaticFacetFilters>? = null,
+    /**
+     * Filters to promote or demote records in the search results.
+     *
+     * Implementations:
+     * - [List<OptionalFilters>] - *[OptionalFilters.of]*
+     * - [String] - *[OptionalFilters.of]*
+     */
+    val optionalFilters: List<OptionalFilters>? = null,
     /**
      * Describes incremental edits to be made to the query string. You can't do both this and [edits] at the same time.
      */
@@ -113,6 +113,7 @@ public data class Consequence(
                 if (edits != null) remove(Key.Query)
                 remove(Key.AutomaticFacetFilters)
                 remove(Key.AutomaticOptionalFacetFilters)
+                remove(Key.OptionalFilters)
                 remove(Key.RenderingContent)
             }
             return if (modified.isNotEmpty()) {
@@ -128,6 +129,9 @@ public data class Consequence(
             val params = mutableMapOf<String, JsonElement>().apply {
                 putFilters(Key.AutomaticFacetFilters, value.automaticFacetFilters)
                 putFilters(Key.AutomaticOptionalFacetFilters, value.automaticOptionalFacetFilters)
+                if (value.optionalFilters != null) {
+                    put(Key.OptionalFilters, JsonNoDefaults.encodeToJsonElement(ListSerializer(OptionalFilters.serializer()), value.optionalFilters))
+                }
                 value.query?.toJsonNoDefaults()?.let { putAll(it) }
                 if (value.edits != null) put(
                     Key.Query,
@@ -159,6 +163,9 @@ public data class Consequence(
             val params = json[Key.Params]?.jsonObjectOrNull
             val automaticFacetFilters = params?.getFilters(Key.AutomaticFacetFilters)
             val automaticOptionalFacetFilters = params?.getFilters(Key.AutomaticOptionalFacetFilters)
+            val optionalFilters = params?.get("optionalFilters")?.jsonArrayOrNull?.let {
+                JsonNoDefaults.decodeFromJsonElement(ListSerializer(OptionalFilters.serializer()), it)
+            }
             val promote = json.getPromotions()
             val hide = json.getObjectIDs()
             val userData = json[Key.UserData]?.jsonObjectOrNull
@@ -177,6 +184,7 @@ public data class Consequence(
                 edits = edits,
                 filterPromotes = filterPromotes,
                 renderingContent = renderingContent,
+                optionalFilters = optionalFilters,
             )
         }
     }
