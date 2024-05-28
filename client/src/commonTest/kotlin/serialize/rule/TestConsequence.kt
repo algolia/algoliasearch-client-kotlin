@@ -2,14 +2,7 @@ package serialize.rule
 
 import attributeA
 import com.algolia.search.helper.toObjectID
-import com.algolia.search.model.rule.Anchoring
-import com.algolia.search.model.rule.AutomaticFacetFilters
-import com.algolia.search.model.rule.Condition
-import com.algolia.search.model.rule.Consequence
-import com.algolia.search.model.rule.Edit
-import com.algolia.search.model.rule.Pattern
-import com.algolia.search.model.rule.Promotion
-import com.algolia.search.model.rule.Rule
+import com.algolia.search.model.rule.*
 import com.algolia.search.model.search.Query
 import com.algolia.search.serialize.internal.Json
 import com.algolia.search.serialize.internal.JsonNoDefaults
@@ -38,6 +31,12 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
     private val promotionsSerialized = Json.encodeToJsonElement(ListSerializer(Promotion.serializer()), promotions)
     private val userData = buildJsonObject { put(Key.UserData, unknown) }
     private val filtersJson = Json.encodeToJsonElement(ListSerializer(AutomaticFacetFilters.serializer()), filters)
+    // {"optionalFilters":[["foo","bar"],"b",["alice","bob"]]}
+    private val optionalFilters = listOf(
+        OptionalFilters(listOf(OptionalFilters("foo"), OptionalFilters("bar"))),
+        OptionalFilters("b"),
+        OptionalFilters(listOf(OptionalFilters("alice"), OptionalFilters("bob")))
+    )
 
     override val items = listOf(
         Consequence() to buildJsonObject { },
@@ -85,6 +84,18 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
                     put(Key.Query, unknown)
                     put(Key.AutomaticFacetFilters, filtersJson)
                     put(Key.AutomaticOptionalFacetFilters, filtersJson)
+                }
+            )
+        },
+        Consequence(optionalFilters = optionalFilters, query = query) to buildJsonObject {
+            put(
+                Key.Params,
+                buildJsonObject {
+                    put(Key.Query, unknown)
+                    put(
+                        Key.OptionalFilters,
+                        Json.encodeToJsonElement(ListSerializer(OptionalFilters.serializer()), optionalFilters)
+                    )
                 }
             )
         }

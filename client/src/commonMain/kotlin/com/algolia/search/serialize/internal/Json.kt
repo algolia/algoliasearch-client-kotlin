@@ -119,3 +119,15 @@ internal val JsonElement.jsonArrayOrNull: JsonArray?
  */
 internal val JsonElement.jsonPrimitiveOrNull: JsonPrimitive?
     get() = this as? JsonPrimitive
+
+/**
+ * Returns true if [JsonElement] is a string, false otherwise.
+ */
+internal val JsonElement.isString: Boolean
+    get() = this is JsonPrimitive && isString
+
+/**
+ * Returns true if [JsonElement] is a [JsonArray], false otherwise.
+ */
+internal val JsonElement.isJsonArray: Boolean
+    get() = this is JsonArray
