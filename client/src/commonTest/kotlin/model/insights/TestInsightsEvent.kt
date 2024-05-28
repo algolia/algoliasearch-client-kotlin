@@ -26,8 +26,8 @@ internal class TestInsightsEvent {
         eventName = eventName,
         indexName = indexA,
         objectData = listOf(
-            ObjectData(price = "10", queryID = "queryID", quantity = 1),
-            ObjectData(price = "20", queryID = "queryID2", quantity = 2)
+            ObjectData(price = "10", queryID = "queryID".toQueryID(), quantity = 1),
+            ObjectData(price = "20", queryID = "queryID2".toQueryID(), quantity = 2)
         )
     )
 
