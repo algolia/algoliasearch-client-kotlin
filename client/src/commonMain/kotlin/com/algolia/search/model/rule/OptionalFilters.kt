@@ -7,6 +7,7 @@ import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement
+import kotlin.jvm.JvmInline
 
 /**
  * Filters to promote or demote records in the search results.
