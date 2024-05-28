@@ -1,3 +1,9 @@
+# 2.1.12
+
+### Fixed
+- **Recommend**: support polymorphic `OptionalFilters` in Rule Consequence params (#417)
+- **Insights**: support `objectData` in Conversion events (#418)
+
 # 2.1.11
 
 ### Fixed

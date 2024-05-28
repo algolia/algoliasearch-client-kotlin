@@ -1,3 +1,40 @@
+public final class ObjectData {
+	public static final field Companion LObjectData$Companion;
+	public fun <init> ()V
+	public synthetic fun <init> (ILcom/algolia/search/model/QueryID;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;Lkotlinx/serialization/internal/SerializationConstructorMarker;)V
+	public fun <init> (Lcom/algolia/search/model/QueryID;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/algolia/search/model/QueryID;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lcom/algolia/search/model/QueryID;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/Integer;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun copy (Lcom/algolia/search/model/QueryID;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;)LObjectData;
+	public static synthetic fun copy$default (LObjectData;Lcom/algolia/search/model/QueryID;Ljava/lang/String;Ljava/lang/Integer;Ljava/lang/String;ILjava/lang/Object;)LObjectData;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getDiscount ()Ljava/lang/String;
+	public final fun getPrice ()Ljava/lang/String;
+	public final fun getQuantity ()Ljava/lang/Integer;
+	public final fun getQueryID ()Lcom/algolia/search/model/QueryID;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+	public static final fun write$Self (LObjectData;Lkotlinx/serialization/encoding/CompositeEncoder;Lkotlinx/serialization/descriptors/SerialDescriptor;)V
+}
+
+public final class ObjectData$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE LObjectData$$serializer;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public fun deserialize (Lkotlinx/serialization/encoding/Decoder;)LObjectData;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public fun serialize (Lkotlinx/serialization/encoding/Encoder;LObjectData;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class ObjectData$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
 public abstract interface annotation class com/algolia/search/ExperimentalAlgoliaClientAPI : java/lang/annotation/Annotation {
 }
 
@@ -3415,19 +3452,21 @@ public final class com/algolia/search/model/insights/InsightsEvent$Companion : k
 }
 
 public final class com/algolia/search/model/insights/InsightsEvent$Conversion : com/algolia/search/model/insights/InsightsEvent {
-	public fun <init> (Lcom/algolia/search/model/insights/EventName;Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/insights/UserToken;Ljava/lang/Long;Lcom/algolia/search/model/QueryID;Lcom/algolia/search/model/insights/InsightsEvent$Resources;)V
-	public synthetic fun <init> (Lcom/algolia/search/model/insights/EventName;Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/insights/UserToken;Ljava/lang/Long;Lcom/algolia/search/model/QueryID;Lcom/algolia/search/model/insights/InsightsEvent$Resources;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lcom/algolia/search/model/insights/EventName;Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/insights/UserToken;Ljava/lang/Long;Lcom/algolia/search/model/QueryID;Lcom/algolia/search/model/insights/InsightsEvent$Resources;Ljava/util/List;)V
+	public synthetic fun <init> (Lcom/algolia/search/model/insights/EventName;Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/insights/UserToken;Ljava/lang/Long;Lcom/algolia/search/model/QueryID;Lcom/algolia/search/model/insights/InsightsEvent$Resources;Ljava/util/List;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lcom/algolia/search/model/insights/EventName;
 	public final fun component2 ()Lcom/algolia/search/model/IndexName;
 	public final fun component3 ()Lcom/algolia/search/model/insights/UserToken;
 	public final fun component4 ()Ljava/lang/Long;
 	public final fun component5 ()Lcom/algolia/search/model/QueryID;
 	public final fun component6 ()Lcom/algolia/search/model/insights/InsightsEvent$Resources;
-	public final fun copy (Lcom/algolia/search/model/insights/EventName;Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/insights/UserToken;Ljava/lang/Long;Lcom/algolia/search/model/QueryID;Lcom/algolia/search/model/insights/InsightsEvent$Resources;)Lcom/algolia/search/model/insights/InsightsEvent$Conversion;
-	public static synthetic fun copy$default (Lcom/algolia/search/model/insights/InsightsEvent$Conversion;Lcom/algolia/search/model/insights/EventName;Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/insights/UserToken;Ljava/lang/Long;Lcom/algolia/search/model/QueryID;Lcom/algolia/search/model/insights/InsightsEvent$Resources;ILjava/lang/Object;)Lcom/algolia/search/model/insights/InsightsEvent$Conversion;
+	public final fun component7 ()Ljava/util/List;
+	public final fun copy (Lcom/algolia/search/model/insights/EventName;Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/insights/UserToken;Ljava/lang/Long;Lcom/algolia/search/model/QueryID;Lcom/algolia/search/model/insights/InsightsEvent$Resources;Ljava/util/List;)Lcom/algolia/search/model/insights/InsightsEvent$Conversion;
+	public static synthetic fun copy$default (Lcom/algolia/search/model/insights/InsightsEvent$Conversion;Lcom/algolia/search/model/insights/EventName;Lcom/algolia/search/model/IndexName;Lcom/algolia/search/model/insights/UserToken;Ljava/lang/Long;Lcom/algolia/search/model/QueryID;Lcom/algolia/search/model/insights/InsightsEvent$Resources;Ljava/util/List;ILjava/lang/Object;)Lcom/algolia/search/model/insights/InsightsEvent$Conversion;
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getEventName ()Lcom/algolia/search/model/insights/EventName;
 	public fun getIndexName ()Lcom/algolia/search/model/IndexName;
+	public final fun getObjectData ()Ljava/util/List;
 	public fun getQueryID ()Lcom/algolia/search/model/QueryID;
 	public fun getResources ()Lcom/algolia/search/model/insights/InsightsEvent$Resources;
 	public fun getTimestamp ()Ljava/lang/Long;
@@ -7771,25 +7810,27 @@ public final class com/algolia/search/model/rule/Condition$Companion {
 public final class com/algolia/search/model/rule/Consequence {
 	public static final field Companion Lcom/algolia/search/model/rule/Consequence$Companion;
 	public fun <init> ()V
-	public fun <init> (Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/Query;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/model/rule/RenderingContent;)V
-	public synthetic fun <init> (Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/Query;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/model/rule/RenderingContent;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/Query;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/model/rule/RenderingContent;)V
+	public synthetic fun <init> (Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/Query;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/model/rule/RenderingContent;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Ljava/util/List;
+	public final fun component10 ()Lcom/algolia/search/model/rule/RenderingContent;
 	public final fun component2 ()Ljava/util/List;
 	public final fun component3 ()Ljava/util/List;
-	public final fun component4 ()Lcom/algolia/search/model/search/Query;
-	public final fun component5 ()Ljava/util/List;
-	public final fun component6 ()Ljava/lang/Boolean;
-	public final fun component7 ()Ljava/util/List;
-	public final fun component8 ()Lkotlinx/serialization/json/JsonObject;
-	public final fun component9 ()Lcom/algolia/search/model/rule/RenderingContent;
-	public final fun copy (Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/Query;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/model/rule/RenderingContent;)Lcom/algolia/search/model/rule/Consequence;
-	public static synthetic fun copy$default (Lcom/algolia/search/model/rule/Consequence;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/Query;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/model/rule/RenderingContent;ILjava/lang/Object;)Lcom/algolia/search/model/rule/Consequence;
+	public final fun component4 ()Ljava/util/List;
+	public final fun component5 ()Lcom/algolia/search/model/search/Query;
+	public final fun component6 ()Ljava/util/List;
+	public final fun component7 ()Ljava/lang/Boolean;
+	public final fun component8 ()Ljava/util/List;
+	public final fun component9 ()Lkotlinx/serialization/json/JsonObject;
+	public final fun copy (Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/Query;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/model/rule/RenderingContent;)Lcom/algolia/search/model/rule/Consequence;
+	public static synthetic fun copy$default (Lcom/algolia/search/model/rule/Consequence;Ljava/util/List;Ljava/util/List;Ljava/util/List;Ljava/util/List;Lcom/algolia/search/model/search/Query;Ljava/util/List;Ljava/lang/Boolean;Ljava/util/List;Lkotlinx/serialization/json/JsonObject;Lcom/algolia/search/model/rule/RenderingContent;ILjava/lang/Object;)Lcom/algolia/search/model/rule/Consequence;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getAutomaticFacetFilters ()Ljava/util/List;
 	public final fun getAutomaticOptionalFacetFilters ()Ljava/util/List;
 	public final fun getEdits ()Ljava/util/List;
 	public final fun getFilterPromotes ()Ljava/lang/Boolean;
 	public final fun getHide ()Ljava/util/List;
+	public final fun getOptionalFilters ()Ljava/util/List;
 	public final fun getPromote ()Ljava/util/List;
 	public final fun getQuery ()Lcom/algolia/search/model/search/Query;
 	public final fun getRenderingContent ()Lcom/algolia/search/model/rule/RenderingContent;
@@ -7922,6 +7963,76 @@ public final class com/algolia/search/model/rule/FacetsOrder$$serializer : kotli
 }
 
 public final class com/algolia/search/model/rule/FacetsOrder$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public abstract interface class com/algolia/search/model/rule/OptionalFilters {
+	public static final field Companion Lcom/algolia/search/model/rule/OptionalFilters$Companion;
+}
+
+public final class com/algolia/search/model/rule/OptionalFilters$Companion {
+	public final fun invoke (Ljava/lang/String;)Lcom/algolia/search/model/rule/OptionalFilters;
+	public final fun invoke (Ljava/util/List;)Lcom/algolia/search/model/rule/OptionalFilters;
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/algolia/search/model/rule/OptionalFilters$ListOfOptionalFiltersValue : com/algolia/search/model/rule/OptionalFilters {
+	public static final field Companion Lcom/algolia/search/model/rule/OptionalFilters$ListOfOptionalFiltersValue$Companion;
+	public static final synthetic fun box-impl (Ljava/util/List;)Lcom/algolia/search/model/rule/OptionalFilters$ListOfOptionalFiltersValue;
+	public static fun constructor-impl (Ljava/util/List;)Ljava/util/List;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/util/List;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/util/List;Ljava/util/List;)Z
+	public final fun getValue ()Ljava/util/List;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/util/List;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/util/List;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/util/List;
+}
+
+public final class com/algolia/search/model/rule/OptionalFilters$ListOfOptionalFiltersValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/algolia/search/model/rule/OptionalFilters$ListOfOptionalFiltersValue$$serializer;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize-H9XAVq8 (Lkotlinx/serialization/encoding/Decoder;)Ljava/util/List;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize-o6jSQH0 (Lkotlinx/serialization/encoding/Encoder;Ljava/util/List;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/algolia/search/model/rule/OptionalFilters$ListOfOptionalFiltersValue$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/algolia/search/model/rule/OptionalFilters$StringValue : com/algolia/search/model/rule/OptionalFilters {
+	public static final field Companion Lcom/algolia/search/model/rule/OptionalFilters$StringValue$Companion;
+	public static final synthetic fun box-impl (Ljava/lang/String;)Lcom/algolia/search/model/rule/OptionalFilters$StringValue;
+	public static fun constructor-impl (Ljava/lang/String;)Ljava/lang/String;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Ljava/lang/String;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Ljava/lang/String;Ljava/lang/String;)Z
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Ljava/lang/String;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Ljava/lang/String;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Ljava/lang/String;
+}
+
+public final class com/algolia/search/model/rule/OptionalFilters$StringValue$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/algolia/search/model/rule/OptionalFilters$StringValue$$serializer;
+	public fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public fun deserialize-bM5ApNE (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/String;
+	public fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun serialize-bJ5ZHEU (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/String;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/algolia/search/model/rule/OptionalFilters$StringValue$Companion {
 	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
