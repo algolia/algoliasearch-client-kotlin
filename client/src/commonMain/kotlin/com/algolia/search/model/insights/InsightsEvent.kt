@@ -1,11 +1,13 @@
 package com.algolia.search.model.insights
 
+import ObjectData
 import com.algolia.search.endpoint.EndpointInsights
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.ObjectID
 import com.algolia.search.model.QueryID
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.FilterConverter
+import com.algolia.search.serialize.internal.JsonNoDefaults
 import com.algolia.search.serialize.internal.Key
 import com.algolia.search.serialize.internal.asJsonOutput
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -39,7 +41,7 @@ public sealed class InsightsEvent {
         override val userToken: UserToken? = null,
         override val timestamp: Long? = null,
         override val queryID: QueryID? = null,
-        override val resources: Resources? = null
+        override val resources: Resources? = null,
     ) : InsightsEvent()
 
     public data class Click(
@@ -49,7 +51,7 @@ public sealed class InsightsEvent {
         override val timestamp: Long? = null,
         override val queryID: QueryID? = null,
         override val resources: Resources? = null,
-        val positions: List<Int>? = null
+        val positions: List<Int>? = null,
     ) : InsightsEvent() {
 
         init {
@@ -64,7 +66,8 @@ public sealed class InsightsEvent {
         override val userToken: UserToken? = null,
         override val timestamp: Long? = null,
         override val queryID: QueryID? = null,
-        override val resources: Resources? = null
+        override val resources: Resources? = null,
+        val objectData: List<ObjectData>? = null
     ) : InsightsEvent()
 
     public sealed class Resources {
@@ -134,6 +137,17 @@ public sealed class InsightsEvent {
                             Key.Positions,
                             buildJsonArray { it.forEach { add((it as Number)) } }
                         )
+                    }
+                }
+                if (value is Conversion) {
+                    value.objectData?.let {
+                        put(
+                            Key.ObjectData,
+                            buildJsonArray {
+                                it.forEach { add(JsonNoDefaults.encodeToJsonElement(ObjectData.serializer(), it)) }
+                            }
+                        )
+
                     }
                 }
             }

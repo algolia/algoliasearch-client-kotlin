@@ -440,4 +440,8 @@ internal object Key {
     const val AlgoliaAgent = "X-Algolia-Agent"
     const val Extensions = "extensions"
     const val DeletedUntil = "deletedUntil"
+    const val ObjectData: String = "objectData"
+    const val Price: String = "price"
+    const val Quantity: String = "quantity"
+    const val Discount: String = "discount"
 }
