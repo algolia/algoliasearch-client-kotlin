@@ -33,9 +33,9 @@ internal class TestConsequence : TestSerializer<Consequence>(Consequence.seriali
     private val filtersJson = Json.encodeToJsonElement(ListSerializer(AutomaticFacetFilters.serializer()), filters)
     // {"optionalFilters":[["foo","bar"],"b",["alice","bob"]]}
     private val optionalFilters = listOf(
-        OptionalFilters.of(listOf(OptionalFilters.of("foo"), OptionalFilters.of("bar"))),
-        OptionalFilters.of("b"),
-        OptionalFilters.of(listOf(OptionalFilters.of("alice"), OptionalFilters.of("bob")))
+        OptionalFilters(listOf(OptionalFilters("foo"), OptionalFilters("bar"))),
+        OptionalFilters("b"),
+        OptionalFilters(listOf(OptionalFilters("alice"), OptionalFilters("bob")))
     )
 
     override val items = listOf(

@@ -17,8 +17,8 @@ import kotlinx.serialization.json.JsonElement
  * - Optional filters don't work with numeric attributes.
  *
  * Implementations:
- * - [List<OptionalFilters>] - *[OptionalFilters.of]*
- * - [String] - *[OptionalFilters.of]*
+ * - [List<OptionalFilters>] - *[OptionalFilters()]*
+ * - [String] - *[OptionalFilters()]*
  */
 @Serializable(OptionalFiltersSerializer::class)
 public sealed interface OptionalFilters {
@@ -32,10 +32,10 @@ public sealed interface OptionalFilters {
 
     public companion object {
 
-        public fun of(value: List<OptionalFilters>): OptionalFilters {
+        public operator fun invoke(value: List<OptionalFilters>): OptionalFilters {
             return ListOfOptionalFiltersValue(value)
         }
-        public fun of(value: String): OptionalFilters {
+        public operator fun invoke(value: String): OptionalFilters {
             return StringValue(value)
         }
     }

@@ -40,8 +40,8 @@ public data class Consequence(
      * Filters to promote or demote records in the search results.
      *
      * Implementations:
-     * - [List<OptionalFilters>] - *[OptionalFilters.of]*
-     * - [String] - *[OptionalFilters.of]*
+     * - [List<OptionalFilters>] - *[OptionalFilters()]*
+     * - [String] - *[OptionalFilters()]*
      */
     val optionalFilters: List<OptionalFilters>? = null,
     /**
