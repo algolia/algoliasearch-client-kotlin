@@ -538,6 +538,25 @@ public class SearchClient(
   }
 
   /**
+   * Checks the status of a given application task.
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   * @param taskID Unique task identifier.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun getAppTask(taskID: Long, requestOptions: RequestOptions? = null): GetTaskResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "task", "$taskID"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * Lists supported languages with their supported dictionary types and number of custom entries.
    *
    * Required API Key ACLs:
