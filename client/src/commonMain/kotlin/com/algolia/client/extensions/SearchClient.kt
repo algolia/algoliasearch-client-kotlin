@@ -106,6 +106,34 @@ public suspend fun SearchClient.waitTask(
 }
 
 /**
+ * Wait for an application-level [taskID] to complete before executing the next line of code.
+ *
+ * @param taskID The ID of the task to wait for.
+ * @param timeout If specified, the method will throw a
+ *   [kotlinx.coroutines.TimeoutCancellationException] after the timeout value in milliseconds is
+ *   elapsed.
+ * @param maxRetries maximum number of retry attempts.
+ * @param requestOptions additional request configuration.
+ */
+public suspend fun SearchClient.waitAppTask(
+  taskID: Long,
+  maxRetries: Int = 50,
+  timeout: Duration = Duration.INFINITE,
+  initialDelay: Duration = 200.milliseconds,
+  maxDelay: Duration = 5.seconds,
+  requestOptions: RequestOptions? = null,
+): TaskStatus {
+  return retryUntil(
+    timeout = timeout,
+    maxRetries = maxRetries,
+    initialDelay = initialDelay,
+    maxDelay = maxDelay,
+    retry = { getAppTask(taskID, requestOptions).status },
+    until = { it == TaskStatus.Published },
+  )
+}
+
+/**
  * Wait on an API key update operation.
  *
  * @param key The key that has been updated.
