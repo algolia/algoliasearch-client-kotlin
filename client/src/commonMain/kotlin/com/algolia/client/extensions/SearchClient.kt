@@ -282,6 +282,8 @@ public suspend fun SearchClient.searchForFacets(
  * Internally, this method copies the existing index settings, synonyms and query rules and indexes all
  * passed objects. Finally, the temporary one replaces the existing index.
  *
+ * See https://api-clients-automation.netlify.app/docs/contributing/add-new-api-client#5-helpers for implementation details.
+ *
  * @param serializer [KSerializer] of type [T] for serialization.
  * @param records The list of records to replace.
  * @return intermediate operations (index name to task ID).
@@ -298,37 +300,44 @@ public suspend fun <T> SearchClient.replaceAllObjects(
     val body = options.json.encodeToJsonElement(serializer, record).jsonObject
     BatchRequest(action = Action.AddObject, body = body)
   }
-  val destinationIndex = "${indexName}_tmp_${Random.nextInt(from = 0, until = 100)}"
+  val tmpIndexName = "${indexName}_tmp_${Random.nextInt(from = 0, until = 100)}"
 
-  // 1. Copy index resources
-  val copy = operationIndex(
+  var copy = operationIndex(
     indexName = indexName,
     operationIndexParams = OperationIndexParams(
       operation = OperationType.Copy,
-      destination = destinationIndex,
+      destination = tmpIndexName,
       scope = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
     ),
     requestOptions = requestOptions,
   )
-  waitTask(indexName = indexName, taskID = copy.taskID)
 
-  // 2. Save new objects
   val batch = batch(
-    indexName = destinationIndex,
+    indexName = tmpIndexName,
     batchWriteParams = BatchWriteParams(requests),
     requestOptions = requestOptions,
   )
-  waitTask(indexName = destinationIndex, taskID = batch.taskID)
+  waitTask(indexName = tmpIndexName, taskID = batch.taskID)
+  waitTask(indexName = tmpIndexName, taskID = copy.taskID)
 
-  // 3.  Move temporary index to source index
+  copy = operationIndex(
+    indexName = indexName,
+    operationIndexParams = OperationIndexParams(
+      operation = OperationType.Copy,
+      destination = tmpIndexName,
+      scope = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
+    ),
+    requestOptions = requestOptions,
+  )
+  waitTask(indexName = tmpIndexName, taskID = copy.taskID)
+
   val move = operationIndex(
-    indexName = destinationIndex,
+    indexName = tmpIndexName,
     operationIndexParams = OperationIndexParams(operation = OperationType.Move, destination = indexName),
     requestOptions = requestOptions,
   )
-  waitTask(indexName = destinationIndex, taskID = move.taskID)
+  waitTask(indexName = tmpIndexName, taskID = move.taskID)
 
-  // 4. Return the list of operations
   return listOf(copy.taskID, batch.taskID, move.taskID)
 }
 
