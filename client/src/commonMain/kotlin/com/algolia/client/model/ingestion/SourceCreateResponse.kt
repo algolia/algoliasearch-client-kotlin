@@ -9,7 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param sourceID Universally uniqud identifier (UUID) of a source.
  * @param name Descriptive name of the source.
- * @param createdAt Date of creation in RFC3339 format.
+ * @param createdAt Date of creation in RFC 3339 format.
  */
 @Serializable
 public data class SourceCreateResponse(
@@ -20,6 +20,6 @@ public data class SourceCreateResponse(
   /** Descriptive name of the source. */
   @SerialName(value = "name") val name: String,
 
-  /** Date of creation in RFC3339 format. */
+  /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 )

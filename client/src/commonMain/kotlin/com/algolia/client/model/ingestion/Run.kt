@@ -12,14 +12,14 @@ import kotlinx.serialization.json.*
  * @param taskID Universally unique identifier (UUID) of a task.
  * @param status
  * @param type
- * @param createdAt Date of creation in RFC3339 format.
+ * @param createdAt Date of creation in RFC 3339 format.
  * @param progress
  * @param outcome
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
  * @param reason More information about the task run's outcome.
  * @param reasonCode
- * @param startedAt Date of start in RFC3339 format.
- * @param finishedAt Date of finish in RFC3339 format.
+ * @param startedAt Date of start in RFC 3339 format.
+ * @param finishedAt Date of finish in RFC 3339 format.
  */
 @Serializable
 public data class Run(
@@ -36,7 +36,7 @@ public data class Run(
 
   @SerialName(value = "type") val type: RunType,
 
-  /** Date of creation in RFC3339 format. */
+  /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
   @SerialName(value = "progress") val progress: RunProgress? = null,
@@ -51,9 +51,9 @@ public data class Run(
 
   @SerialName(value = "reasonCode") val reasonCode: RunReasonCode? = null,
 
-  /** Date of start in RFC3339 format. */
+  /** Date of start in RFC 3339 format. */
   @SerialName(value = "startedAt") val startedAt: String? = null,
 
-  /** Date of finish in RFC3339 format. */
+  /** Date of finish in RFC 3339 format. */
   @SerialName(value = "finishedAt") val finishedAt: String? = null,
 )

@@ -498,8 +498,8 @@ public class IngestionClient(
    * @param type Event type for filtering the list of task runs.
    * @param sort Property by which to sort the list of task run events.
    * @param order Sort order of the response, ascending or descending. (default to desc)
-   * @param startDate Date and time in RFC3339 format for the earliest events to retrieve. By default, the current time minus three hours is used.
-   * @param endDate Date and time in RFC3339 format for the latest events to retrieve. By default, the current time is used.
+   * @param startDate Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used.
+   * @param endDate Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getEvents(runID: String, itemsPerPage: Int? = null, page: Int? = null, status: List<EventStatus>? = null, type: List<EventType>? = null, sort: EventSortKeys? = null, order: OrderKeys? = null, startDate: String? = null, endDate: String? = null, requestOptions: RequestOptions? = null): ListEventsResponse {
@@ -559,8 +559,8 @@ public class IngestionClient(
    * @param taskID Task ID for filtering the list of task runs.
    * @param sort Property by which to sort the list of task runs. (default to createdAt)
    * @param order Sort order of the response, ascending or descending. (default to desc)
-   * @param startDate Date in RFC3339 format for the earliest run to retrieve. By default, the current day minus seven days is used.
-   * @param endDate Date in RFC3339 format for the latest run to retrieve. By default, the current day is used.
+   * @param startDate Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used.
+   * @param endDate Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getRuns(itemsPerPage: Int? = null, page: Int? = null, status: List<RunStatus>? = null, taskID: String? = null, sort: RunSortKeys? = null, order: OrderKeys? = null, startDate: String? = null, endDate: String? = null, requestOptions: RequestOptions? = null): RunListResponse {

@@ -11,9 +11,9 @@ import kotlinx.serialization.json.*
  * @param type
  * @param name
  * @param input
- * @param createdAt Date of creation in RFC3339 format.
+ * @param createdAt Date of creation in RFC 3339 format.
  * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
- * @param updatedAt Date of last update in RFC3339 format.
+ * @param updatedAt Date of last update in RFC 3339 format.
  */
 @Serializable
 public data class Source(
@@ -27,12 +27,12 @@ public data class Source(
 
   @SerialName(value = "input") val input: SourceInput,
 
-  /** Date of creation in RFC3339 format. */
+  /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
   /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
 
-  /** Date of last update in RFC3339 format. */
+  /** Date of last update in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String? = null,
 )

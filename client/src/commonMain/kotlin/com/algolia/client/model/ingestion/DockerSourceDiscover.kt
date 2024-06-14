@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * DockerSourceDiscover
  *
  * @param runID Universally unique identifier (UUID) of a task run.
- * @param createdAt Date of creation in RFC3339 format.
+ * @param createdAt Date of creation in RFC 3339 format.
  */
 @Serializable
 public data class DockerSourceDiscover(
@@ -16,6 +16,6 @@ public data class DockerSourceDiscover(
   /** Universally unique identifier (UUID) of a task run. */
   @SerialName(value = "runID") val runID: String,
 
-  /** Date of creation in RFC3339 format. */
+  /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 )

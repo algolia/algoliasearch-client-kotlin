@@ -9,7 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param destinationID Universally unique identifier (UUID) of a destination resource.
  * @param name Descriptive name for the resource.
- * @param updatedAt Date of last update in RFC3339 format.
+ * @param updatedAt Date of last update in RFC 3339 format.
  */
 @Serializable
 public data class DestinationUpdateResponse(
@@ -20,6 +20,6 @@ public data class DestinationUpdateResponse(
   /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String,
 
-  /** Date of last update in RFC3339 format. */
+  /** Date of last update in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
 )

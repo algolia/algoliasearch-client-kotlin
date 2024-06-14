@@ -13,10 +13,10 @@ import kotlinx.serialization.json.*
  * @param trigger
  * @param enabled Whether the task is enabled.
  * @param action
- * @param createdAt Date of creation in RFC3339 format.
+ * @param createdAt Date of creation in RFC 3339 format.
  * @param input
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
- * @param updatedAt Date of last update in RFC3339 format.
+ * @param updatedAt Date of last update in RFC 3339 format.
  */
 @Serializable
 public data class Task(
@@ -37,7 +37,7 @@ public data class Task(
 
   @SerialName(value = "action") val action: ActionType,
 
-  /** Date of creation in RFC3339 format. */
+  /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
   @SerialName(value = "input") val input: TaskInput? = null,
@@ -45,6 +45,6 @@ public data class Task(
   /** Maximum accepted percentage of failures for a task run to finish successfully. */
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
 
-  /** Date of last update in RFC3339 format. */
+  /** Date of last update in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String? = null,
 )
