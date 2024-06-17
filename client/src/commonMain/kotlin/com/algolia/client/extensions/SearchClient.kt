@@ -344,13 +344,13 @@ public suspend fun <T> SearchClient.replaceAllObjects(
 /**
  * Generate a virtual API Key without any call to the server.
  *
- * @param parentAPIKey API key to generate from.
+ * @param parentApiKey API key to generate from.
  * @param restriction Restriction to add the key
  * @throws Exception if an error occurs during the encoding
  */
-public fun SearchClient.generateSecuredApiKey(parentAPIKey: String, restriction: SecuredAPIKeyRestrictions): String {
+public fun SearchClient.generateSecuredApiKey(parentApiKey: String, restriction: SecuredApiKeyRestrictions): String {
   val restrictionString = buildRestrictionString(restriction)
-  val hash = encodeKeySHA256(parentAPIKey, restrictionString)
+  val hash = encodeKeySHA256(parentApiKey, restrictionString)
   return "$hash$restrictionString".encodeBase64()
 }
 
@@ -359,7 +359,7 @@ public fun SearchClient.generateSecuredApiKey(parentAPIKey: String, restriction:
  *
  * @param apiKey The secured API Key to check.
  * @return Duration left before the secured API key expires.
- * @throws IllegalArgumentException if [apiKey] doesn't have a [SecuredAPIKeyRestrictions.validUntil].
+ * @throws IllegalArgumentException if [apiKey] doesn't have a [SecuredApiKeyRestrictions.validUntil].
  */
 public fun securedApiKeyRemainingValidity(apiKey: String): Duration {
   val decoded = apiKey.decodeBase64String()

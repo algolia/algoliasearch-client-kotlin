@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SecuredAPIKeyRestrictions
+ * SecuredApiKeyRestrictions
  *
  * @param searchParams
  * @param filters Filters that apply to every search made with the secured API key. Extra filters added at search time will be combined with `AND`. For example, if you set `group:admin` as fixed filter on your generated API key, and add `groups:visitors` to the search query, the complete set of filters will be `group:admin AND groups:visitors`.
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
  * @param userToken Pseudonymous user identifier to restrict usage of this API key to specific users.  By default, rate limits are set based on IP addresses. This can be an issue if many users search from the same IP address. To avoid this, add a user token to each generated API key.
  */
 @Serializable
-public data class SecuredAPIKeyRestrictions(
+public data class SecuredApiKeyRestrictions(
 
   @SerialName(value = "searchParams") val searchParams: SearchParamsObject? = null,
 
