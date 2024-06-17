@@ -25,7 +25,7 @@ public data class TrendingFacetsQuery(
   @SerialName(value = "threshold") val threshold: Double,
 
   /** Facet attribute for which to retrieve trending facet values. */
-  @SerialName(value = "facetName") val facetName: JsonObject,
+  @SerialName(value = "facetName") val facetName: JsonElement,
 
   @SerialName(value = "model") val model: TrendingFacetsModel,
 

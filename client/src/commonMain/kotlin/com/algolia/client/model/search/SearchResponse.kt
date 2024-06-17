@@ -39,7 +39,7 @@ import kotlinx.serialization.json.*
  * @param renderingContent
  * @param serverTimeMS Time the server took to process the request, in milliseconds.
  * @param serverUsed Host name of the server that processed the request.
- * @param userData An object with custom data.  You can store up to 32&nbsp;kB as custom data.
+ * @param userData An object with custom data.  You can store up to 32kB as custom data.
  * @param queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
  */
 @Serializable(SearchResponseSerializer::class)
@@ -132,7 +132,7 @@ public data class SearchResponse(
   /** Host name of the server that processed the request. */
   val serverUsed: String? = null,
 
-  /** An object with custom data.  You can store up to 32&nbsp;kB as custom data.  */
+  /** An object with custom data.  You can store up to 32kB as custom data.  */
   val userData: JsonObject? = null,
 
   /** Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/). */
