@@ -1,3 +1,8 @@
+# 2.1.13
+
+### Fixed
+- **Serialization**: `FacetValuesOrder` deserialization (#420)
+
 # 2.1.12
 
 ### Fixed
