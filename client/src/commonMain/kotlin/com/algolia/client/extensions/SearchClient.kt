@@ -277,6 +277,49 @@ public suspend fun SearchClient.searchForFacets(
 }
 
 /**
+ * Helper: Chunks the given `objects` list in subset of 1000 elements max to make it fit in `batch` requests.
+ *
+ * @param indexName The index in which to perform the request.
+ * @param records The list of objects to index.
+ * @param serializer The serializer to use for the objects.
+ * @param action The action to perform on the objects. Default is `Action.AddObject`.
+ * @param waitForTask If true, wait for the task to complete.
+ * @param batchSize The size of the batch. Default is 1000.
+ * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
+ * @return The list of responses from the batch requests.
+ *
+ */
+public suspend fun <T> SearchClient.chunkedBatch(
+  indexName: String,
+  records: List<T>,
+  serializer: KSerializer<T>,
+  action: Action = Action.AddObject,
+  waitForTask: Boolean,
+  batchSize: Int = 1000,
+  requestOptions: RequestOptions? = null,
+): List<BatchResponse> {
+  val tasks = mutableListOf<BatchResponse>()
+  records.chunked(batchSize).forEach { chunk ->
+    val requests = chunk.map {
+      BatchRequest(
+        action = action,
+        body = options.json.encodeToJsonElement(serializer, it).jsonObject,
+      )
+    }
+    val batch = batch(
+      indexName = indexName,
+      batchWriteParams = BatchWriteParams(requests),
+      requestOptions = requestOptions,
+    )
+    tasks.add(batch)
+  }
+  if (waitForTask) {
+    tasks.forEach { waitTask(indexName, it.taskID) }
+  }
+  return tasks
+}
+
+/**
  * Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
  * Replace all objects in an index without any downtime.
  * Internally, this method copies the existing index settings, synonyms and query rules and indexes all
@@ -284,22 +327,19 @@ public suspend fun SearchClient.searchForFacets(
  *
  * See https://api-clients-automation.netlify.app/docs/contributing/add-new-api-client#5-helpers for implementation details.
  *
- * @param serializer [KSerializer] of type [T] for serialization.
+ * @param indexName The index in which to perform the request.
  * @param records The list of records to replace.
- * @return intermediate operations (index name to task ID).
+ * @param serializer [KSerializer] of type [T] for serialization.
+ * @param batchSize The size of the batch. Default is 1000.
+ * @return responses from the three-step operations: copy, batch, move.
  */
 public suspend fun <T> SearchClient.replaceAllObjects(
   indexName: String,
-  serializer: KSerializer<T>,
   records: List<T>,
+  serializer: KSerializer<T>,
+  batchSize: Int = 1000,
   requestOptions: RequestOptions?,
-): List<Long> {
-  if (records.isEmpty()) return emptyList()
-
-  val requests = records.map { record ->
-    val body = options.json.encodeToJsonElement(serializer, record).jsonObject
-    BatchRequest(action = Action.AddObject, body = body)
-  }
+): ReplaceAllObjectsResponse {
   val tmpIndexName = "${indexName}_tmp_${Random.nextInt(from = 0, until = 100)}"
 
   var copy = operationIndex(
@@ -312,12 +352,16 @@ public suspend fun <T> SearchClient.replaceAllObjects(
     requestOptions = requestOptions,
   )
 
-  val batch = batch(
+  val batchResponses = this.chunkedBatch(
     indexName = tmpIndexName,
-    batchWriteParams = BatchWriteParams(requests),
+    records = records,
+    serializer = serializer,
+    action = Action.AddObject,
+    waitForTask = true,
+    batchSize = batchSize,
     requestOptions = requestOptions,
   )
-  waitTask(indexName = tmpIndexName, taskID = batch.taskID)
+
   waitTask(indexName = tmpIndexName, taskID = copy.taskID)
 
   copy = operationIndex(
@@ -338,7 +382,7 @@ public suspend fun <T> SearchClient.replaceAllObjects(
   )
   waitTask(indexName = tmpIndexName, taskID = move.taskID)
 
-  return listOf(copy.taskID, batch.taskID, move.taskID)
+  return ReplaceAllObjectsResponse(copy, batchResponses, move)
 }
 
 /**
