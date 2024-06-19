@@ -924,4 +924,50 @@ public class IngestionClient(
       requestOptions = requestOptions,
     )
   }
+
+  /**
+   * Validates a source payload to ensure it can be created and that the data source can be reached by Algolia.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param sourceCreate
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun validateSource(sourceCreate: SourceCreate? = null, requestOptions: RequestOptions? = null): SourceValidateResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "sources", "validate"),
+      body = sourceCreate,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Validates an update of a source payload to ensure it can be created and that the data source can be reached by Algolia.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param sourceID Unique identifier of a source.
+   * @param sourceUpdate
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun validateSourceBeforeUpdate(sourceID: String, sourceUpdate: SourceUpdate, requestOptions: RequestOptions? = null): SourceValidateResponse {
+    require(sourceID.isNotBlank()) { "Parameter `sourceID` is required when calling `validateSourceBeforeUpdate`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "sources", "$sourceID", "validate"),
+      body = sourceUpdate,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
 }
