@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SourceValidateResponse
+ * SourceWatchResponse
  *
  * @param message a message describing the outcome of a validate run.
  * @param runID Universally unique identifier (UUID) of a task run.
@@ -13,7 +13,7 @@ import kotlinx.serialization.json.*
  * @param events in case of error, observability events will be added to the response, if any.
  */
 @Serializable
-public data class SourceValidateResponse(
+public data class SourceWatchResponse(
 
   /** a message describing the outcome of a validate run. */
   @SerialName(value = "message") val message: String,

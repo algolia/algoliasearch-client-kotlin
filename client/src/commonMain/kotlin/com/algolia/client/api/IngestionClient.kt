@@ -439,28 +439,6 @@ public class IngestionClient(
   }
 
   /**
-   * Retrieves a stream listing for a source.  Listing streams only works with sources with `type: docker` and `imageType: singer`.
-   *
-   * Required API Key ACLs:
-   *   - addObject
-   *   - deleteIndex
-   *   - editSettings
-   * @param sourceID Unique identifier of a source.
-   * @param requestOptions additional request configuration.
-   */
-  public suspend fun getDockerSourceStreams(sourceID: String, requestOptions: RequestOptions? = null): DockerSourceStreams {
-    require(sourceID.isNotBlank()) { "Parameter `sourceID` is required when calling `getDockerSourceStreams`." }
-    val requestConfig = RequestConfig(
-      method = RequestMethod.GET,
-      path = listOf("1", "sources", "$sourceID", "discover"),
-    )
-    return requester.execute(
-      requestConfig = requestConfig,
-      requestOptions = requestOptions,
-    )
-  }
-
-  /**
    * Retrieves a single task run event by its ID.
    *
    * Required API Key ACLs:
@@ -822,7 +800,7 @@ public class IngestionClient(
    * @param sourceID Unique identifier of a source.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun triggerDockerSourceDiscover(sourceID: String, requestOptions: RequestOptions? = null): DockerSourceDiscover {
+  public suspend fun triggerDockerSourceDiscover(sourceID: String, requestOptions: RequestOptions? = null): SourceWatchResponse {
     require(sourceID.isNotBlank()) { "Parameter `sourceID` is required when calling `triggerDockerSourceDiscover`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
@@ -935,7 +913,7 @@ public class IngestionClient(
    * @param sourceCreate
    * @param requestOptions additional request configuration.
    */
-  public suspend fun validateSource(sourceCreate: SourceCreate? = null, requestOptions: RequestOptions? = null): SourceValidateResponse {
+  public suspend fun validateSource(sourceCreate: SourceCreate? = null, requestOptions: RequestOptions? = null): SourceWatchResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "sources", "validate"),
@@ -958,7 +936,7 @@ public class IngestionClient(
    * @param sourceUpdate
    * @param requestOptions additional request configuration.
    */
-  public suspend fun validateSourceBeforeUpdate(sourceID: String, sourceUpdate: SourceUpdate, requestOptions: RequestOptions? = null): SourceValidateResponse {
+  public suspend fun validateSourceBeforeUpdate(sourceID: String, sourceUpdate: SourceUpdate, requestOptions: RequestOptions? = null): SourceWatchResponse {
     require(sourceID.isNotBlank()) { "Parameter `sourceID` is required when calling `validateSourceBeforeUpdate`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
