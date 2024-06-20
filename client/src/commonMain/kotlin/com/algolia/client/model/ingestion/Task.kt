@@ -16,6 +16,7 @@ import kotlinx.serialization.json.*
  * @param createdAt Date of creation in RFC 3339 format.
  * @param input
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
+ * @param cursor Date of the last cursor in RFC 3339 format.
  * @param updatedAt Date of last update in RFC 3339 format.
  */
 @Serializable
@@ -44,6 +45,9 @@ public data class Task(
 
   /** Maximum accepted percentage of failures for a task run to finish successfully. */
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
+
+  /** Date of the last cursor in RFC 3339 format. */
+  @SerialName(value = "cursor") val cursor: String? = null,
 
   /** Date of last update in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String? = null,

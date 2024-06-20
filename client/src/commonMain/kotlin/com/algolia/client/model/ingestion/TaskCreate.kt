@@ -14,6 +14,7 @@ import kotlinx.serialization.json.*
  * @param enabled Whether the task is enabled.
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
  * @param input
+ * @param cursor Date of the last cursor in RFC 3339 format.
  */
 @Serializable
 public data class TaskCreate(
@@ -35,4 +36,7 @@ public data class TaskCreate(
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
 
   @SerialName(value = "input") val input: TaskInput? = null,
+
+  /** Date of the last cursor in RFC 3339 format. */
+  @SerialName(value = "cursor") val cursor: String? = null,
 )
