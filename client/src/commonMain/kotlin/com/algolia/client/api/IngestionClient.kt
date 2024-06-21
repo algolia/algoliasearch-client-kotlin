@@ -112,6 +112,23 @@ public class IngestionClient(
   }
 
   /**
+   * Creates a new transformation.
+   * @param transformationCreate Request body for creating a transformation.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun createTransformation(transformationCreate: TransformationCreate, requestOptions: RequestOptions? = null): TransformationCreateResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "transformations"),
+      body = transformationCreate,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
@@ -275,6 +292,23 @@ public class IngestionClient(
     val requestConfig = RequestConfig(
       method = RequestMethod.DELETE,
       path = listOf("1", "tasks", "$taskID"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Deletes a transformation by its ID.
+   * @param transformationID Unique identifier of a transformation.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun deleteTransformation(transformationID: String, requestOptions: RequestOptions? = null): DeleteResponse {
+    require(transformationID.isNotBlank()) { "Parameter `transformationID` is required when calling `deleteTransformation`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.DELETE,
+      path = listOf("1", "transformations", "$transformationID"),
     )
     return requester.execute(
       requestConfig = requestConfig,
@@ -681,6 +715,54 @@ public class IngestionClient(
   }
 
   /**
+   * Retrieves a transformation by its ID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param transformationID Unique identifier of a transformation.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun getTransformation(transformationID: String, requestOptions: RequestOptions? = null): Transformation {
+    require(transformationID.isNotBlank()) { "Parameter `transformationID` is required when calling `getTransformation`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "transformations", "$transformationID"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Retrieves a list of transformations.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param sort Property by which to sort the list. (default to desc)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun getTransformations(sort: SortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTransformationsResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "transformations"),
+      query = buildMap {
+        sort?.let { put("sort", it) }
+        order?.let { put("order", it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * Runs a task. You can check the status of task runs with the observability endpoints.
    *
    * Required API Key ACLs:
@@ -791,6 +873,28 @@ public class IngestionClient(
   }
 
   /**
+   * Searches for transformations.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param transformationSearch
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun searchTransformations(transformationSearch: TransformationSearch, requestOptions: RequestOptions? = null): List<Transformation> {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "transformations", "search"),
+      body = transformationSearch,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * Triggers a stream-listing request for a source. Triggering stream-listing requests only works with sources with `type: docker` and `imageType: singer`.
    *
    * Required API Key ACLs:
@@ -805,6 +909,28 @@ public class IngestionClient(
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "sources", "$sourceID", "discover"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Searches for transformations.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param transformationTry
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun tryTransformations(transformationTry: TransformationTry, requestOptions: RequestOptions? = null): TransformationTryResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "transformations", "try"),
+      body = transformationTry,
     )
     return requester.execute(
       requestConfig = requestConfig,
@@ -896,6 +1022,25 @@ public class IngestionClient(
       method = RequestMethod.PATCH,
       path = listOf("1", "tasks", "$taskID"),
       body = taskUpdate,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Updates a transformation by its ID.
+   * @param transformationID Unique identifier of a transformation.
+   * @param transformationCreate
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun updateTransformation(transformationID: String, transformationCreate: TransformationCreate, requestOptions: RequestOptions? = null): TransformationUpdateResponse {
+    require(transformationID.isNotBlank()) { "Parameter `transformationID` is required when calling `updateTransformation`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.PUT,
+      path = listOf("1", "transformations", "$transformationID"),
+      body = transformationCreate,
     )
     return requester.execute(
       requestConfig = requestConfig,
