@@ -10,8 +10,7 @@ import com.algolia.client.transport.RequestOptions
 import io.ktor.util.*
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.json.jsonObject
+import kotlinx.serialization.json.JsonObject
 import kotlin.random.Random
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
@@ -280,8 +279,7 @@ public suspend fun SearchClient.searchForFacets(
  * Helper: Chunks the given `objects` list in subset of 1000 elements max to make it fit in `batch` requests.
  *
  * @param indexName The index in which to perform the request.
- * @param records The list of objects to index.
- * @param serializer The serializer to use for the objects.
+ * @param objects The list of objects to index.
  * @param action The action to perform on the objects. Default is `Action.AddObject`.
  * @param waitForTask If true, wait for the task to complete.
  * @param batchSize The size of the batch. Default is 1000.
@@ -289,21 +287,20 @@ public suspend fun SearchClient.searchForFacets(
  * @return The list of responses from the batch requests.
  *
  */
-public suspend fun <T> SearchClient.chunkedBatch(
+public suspend fun SearchClient.chunkedBatch(
   indexName: String,
-  records: List<T>,
-  serializer: KSerializer<T>,
+  objects: List<JsonObject>,
   action: Action = Action.AddObject,
   waitForTask: Boolean,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
 ): List<BatchResponse> {
   val tasks = mutableListOf<BatchResponse>()
-  records.chunked(batchSize).forEach { chunk ->
+  objects.chunked(batchSize).forEach { chunk ->
     val requests = chunk.map {
       BatchRequest(
         action = action,
-        body = options.json.encodeToJsonElement(serializer, it).jsonObject,
+        body = it,
       )
     }
     val batch = batch(
@@ -328,17 +325,15 @@ public suspend fun <T> SearchClient.chunkedBatch(
  * See https://api-clients-automation.netlify.app/docs/contributing/add-new-api-client#5-helpers for implementation details.
  *
  * @param indexName The index in which to perform the request.
- * @param records The list of records to replace.
- * @param serializer [KSerializer] of type [T] for serialization.
+ * @param objects The list of objects to replace.
  * @param batchSize The size of the batch. Default is 1000.
  * @return responses from the three-step operations: copy, batch, move.
  */
-public suspend fun <T> SearchClient.replaceAllObjects(
+public suspend fun SearchClient.replaceAllObjects(
   indexName: String,
-  records: List<T>,
-  serializer: KSerializer<T>,
+  objects: List<JsonObject>,
   batchSize: Int = 1000,
-  requestOptions: RequestOptions?,
+  requestOptions: RequestOptions? = null,
 ): ReplaceAllObjectsResponse {
   val tmpIndexName = "${indexName}_tmp_${Random.nextInt(from = 0, until = 100)}"
 
@@ -354,8 +349,7 @@ public suspend fun <T> SearchClient.replaceAllObjects(
 
   val batchResponses = this.chunkedBatch(
     indexName = tmpIndexName,
-    records = records,
-    serializer = serializer,
+    objects = objects,
     action = Action.AddObject,
     waitForTask = true,
     batchSize = batchSize,
@@ -392,8 +386,8 @@ public suspend fun <T> SearchClient.replaceAllObjects(
  * @param restriction Restriction to add the key
  * @throws Exception if an error occurs during the encoding
  */
-public fun SearchClient.generateSecuredApiKey(parentApiKey: String, restriction: SecuredApiKeyRestrictions): String {
-  val restrictionString = buildRestrictionString(restriction)
+public fun SearchClient.generateSecuredApiKey(parentApiKey: String, restrictions: SecuredApiKeyRestrictions): String {
+  val restrictionString = buildRestrictionString(restrictions)
   val hash = encodeKeySHA256(parentApiKey, restrictionString)
   return "$hash$restrictionString".encodeBase64()
 }
