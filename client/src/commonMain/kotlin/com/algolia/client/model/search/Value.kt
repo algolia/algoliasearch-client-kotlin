@@ -9,6 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param order Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list.
  * @param sortRemainingBy
+ * @param hide Hide facet values.
  */
 @Serializable
 public data class Value(
@@ -17,4 +18,7 @@ public data class Value(
   @SerialName(value = "order") val order: List<String>? = null,
 
   @SerialName(value = "sortRemainingBy") val sortRemainingBy: SortRemainingBy? = null,
+
+  /** Hide facet values. */
+  @SerialName(value = "hide") val hide: List<String>? = null,
 )
