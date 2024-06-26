@@ -67,4 +67,4 @@ If you want to contribute to this project without installing all its dependencie
 
 ## 📄 License
 
-Algolia Kotlin API Client is an open-sourced software licensed under the [MIT license](LICENSE).
+The Algolia Kotlin API Client is an open-sourced software licensed under the [MIT license](LICENSE).
