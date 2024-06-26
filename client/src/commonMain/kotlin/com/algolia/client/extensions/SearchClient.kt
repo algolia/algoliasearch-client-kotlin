@@ -10,6 +10,7 @@ import com.algolia.client.transport.RequestOptions
 import io.ktor.util.*
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import kotlinx.serialization.json.*
 import kotlinx.serialization.json.JsonObject
 import kotlin.random.Random
 import kotlin.time.Duration
@@ -314,6 +315,80 @@ public suspend fun SearchClient.chunkedBatch(
     tasks.forEach { waitTask(indexName, it.taskID) }
   }
   return tasks
+}
+
+/**
+ * Helper: Saves the given array of objects in the given index. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
+ *
+ * @param indexName The index in which to perform the request.
+ * @param objects The list of objects to index.
+ * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
+ * @return The list of responses from the batch requests.
+ *
+ */
+public suspend fun SearchClient.saveObjects(
+  indexName: String,
+  objects: List<JsonObject>,
+  requestOptions: RequestOptions? = null,
+): List<BatchResponse> {
+  return this.chunkedBatch(
+    indexName = indexName,
+    objects = objects,
+    action = Action.AddObject,
+    waitForTask = false,
+    batchSize = 1000,
+    requestOptions = requestOptions,
+  )
+}
+
+/**
+ * Helper: Deletes every records for the given objectIDs. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objectIDs in it.
+ *
+ * @param indexName The index in which to perform the request.
+ * @param objectIDs The list of objectIDs to delete from the index.
+ * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
+ * @return The list of responses from the batch requests.
+ *
+ */
+public suspend fun SearchClient.deleteObjects(
+  indexName: String,
+  objectIDs: List<String>,
+  requestOptions: RequestOptions? = null,
+): List<BatchResponse> {
+  return this.chunkedBatch(
+    indexName = indexName,
+    objects = objectIDs.map { id -> JsonObject(mapOf("objectID" to Json.encodeToJsonElement(id))) },
+    action = Action.DeleteObject,
+    waitForTask = false,
+    batchSize = 1000,
+    requestOptions = requestOptions,
+  )
+}
+
+/**
+ * Helper: Replaces object content of all the given objects according to their respective `objectID` field. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
+ *
+ * @param indexName The index in which to perform the request.
+ * @param objectIDs The list of objects to update in the index.
+ * @param createIfNotExists To be provided if non-existing objects are passed, otherwise, the call will fail..
+ * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
+ * @return The list of responses from the batch requests.
+ *
+ */
+public suspend fun SearchClient.partialUpdateObjects(
+  indexName: String,
+  objects: List<JsonObject>,
+  createIfNotExists: Boolean,
+  requestOptions: RequestOptions? = null,
+): List<BatchResponse> {
+  return this.chunkedBatch(
+    indexName = indexName,
+    objects = objects,
+    action = if (createIfNotExists) Action.PartialUpdateObject else Action.PartialUpdateObjectNoCreate,
+    waitForTask = false,
+    batchSize = 1000,
+    requestOptions = requestOptions,
+  )
 }
 
 /**
