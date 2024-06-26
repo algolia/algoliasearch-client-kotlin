@@ -18,6 +18,7 @@ import kotlinx.serialization.json.*
  * @param pendingTask A boolean which says whether the index has pending tasks. This value is deprecated and should not be used.
  * @param primary Only present if the index is a replica. Contains the name of the related primary index.
  * @param replicas Only present if the index is a primary index with replicas. Contains the names of all linked replicas.
+ * @param virtual Only present if the index is a [virtual replica](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-an-index-alphabetically/#virtual-replicas).
  */
 @Serializable
 public data class FetchedIndex(
@@ -54,4 +55,7 @@ public data class FetchedIndex(
 
   /** Only present if the index is a primary index with replicas. Contains the names of all linked replicas. */
   @SerialName(value = "replicas") val replicas: List<String>? = null,
+
+  /** Only present if the index is a [virtual replica](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-an-index-alphabetically/#virtual-replicas). */
+  @SerialName(value = "virtual") val virtual: Boolean? = null,
 )
