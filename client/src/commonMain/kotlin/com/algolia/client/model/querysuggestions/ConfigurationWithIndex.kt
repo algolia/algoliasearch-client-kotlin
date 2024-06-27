@@ -5,35 +5,31 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * API response for retrieving Query Suggestions configurations.
+ * Query Suggestions configuration.
  *
- * @param appID Algolia application ID to which this Query Suggestions configuration belongs.
- * @param indexName Name of the Query Suggestions index (case-sensitive).
  * @param sourceIndices Algolia indices from which to get the popular searches for query suggestions.
+ * @param indexName Name of the Query Suggestions index (case-sensitive).
  * @param languages
  * @param exclude
  * @param enablePersonalization Whether to turn on personalized query suggestions.
  * @param allowSpecialCharacters Whether to include suggestions with special characters.
  */
 @Serializable
-public data class QuerySuggestionsConfigurationResponse(
-
-  /** Algolia application ID to which this Query Suggestions configuration belongs. */
-  @SerialName(value = "appID") val appID: String,
-
-  /** Name of the Query Suggestions index (case-sensitive). */
-  @SerialName(value = "indexName") val indexName: String,
+public data class ConfigurationWithIndex(
 
   /** Algolia indices from which to get the popular searches for query suggestions. */
   @SerialName(value = "sourceIndices") val sourceIndices: List<SourceIndex>,
 
-  @SerialName(value = "languages") val languages: Languages,
+  /** Name of the Query Suggestions index (case-sensitive). */
+  @SerialName(value = "indexName") val indexName: String,
 
-  @SerialName(value = "exclude") val exclude: List<String>,
+  @SerialName(value = "languages") val languages: Languages? = null,
+
+  @SerialName(value = "exclude") val exclude: List<String>? = null,
 
   /** Whether to turn on personalized query suggestions. */
-  @SerialName(value = "enablePersonalization") val enablePersonalization: Boolean,
+  @SerialName(value = "enablePersonalization") val enablePersonalization: Boolean? = null,
 
   /** Whether to include suggestions with special characters. */
-  @SerialName(value = "allowSpecialCharacters") val allowSpecialCharacters: Boolean,
+  @SerialName(value = "allowSpecialCharacters") val allowSpecialCharacters: Boolean? = null,
 )

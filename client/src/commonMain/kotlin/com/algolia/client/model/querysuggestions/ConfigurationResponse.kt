@@ -5,8 +5,10 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Query Suggestions configuration.
+ * API response for retrieving Query Suggestions configurations.
  *
+ * @param appID Algolia application ID to which this Query Suggestions configuration belongs.
+ * @param indexName Name of the Query Suggestions index (case-sensitive).
  * @param sourceIndices Algolia indices from which to get the popular searches for query suggestions.
  * @param languages
  * @param exclude
@@ -14,18 +16,24 @@ import kotlinx.serialization.json.*
  * @param allowSpecialCharacters Whether to include suggestions with special characters.
  */
 @Serializable
-public data class QuerySuggestionsConfiguration(
+public data class ConfigurationResponse(
+
+  /** Algolia application ID to which this Query Suggestions configuration belongs. */
+  @SerialName(value = "appID") val appID: String,
+
+  /** Name of the Query Suggestions index (case-sensitive). */
+  @SerialName(value = "indexName") val indexName: String,
 
   /** Algolia indices from which to get the popular searches for query suggestions. */
   @SerialName(value = "sourceIndices") val sourceIndices: List<SourceIndex>,
 
-  @SerialName(value = "languages") val languages: Languages? = null,
+  @SerialName(value = "languages") val languages: Languages,
 
-  @SerialName(value = "exclude") val exclude: List<String>? = null,
+  @SerialName(value = "exclude") val exclude: List<String>,
 
   /** Whether to turn on personalized query suggestions. */
-  @SerialName(value = "enablePersonalization") val enablePersonalization: Boolean? = null,
+  @SerialName(value = "enablePersonalization") val enablePersonalization: Boolean,
 
   /** Whether to include suggestions with special characters. */
-  @SerialName(value = "allowSpecialCharacters") val allowSpecialCharacters: Boolean? = null,
+  @SerialName(value = "allowSpecialCharacters") val allowSpecialCharacters: Boolean,
 )

@@ -33,14 +33,14 @@ public class QuerySuggestionsClient(
    *
    * Required API Key ACLs:
    *   - editSettings
-   * @param querySuggestionsConfigurationWithIndex
+   * @param configurationWithIndex
    * @param requestOptions additional request configuration.
    */
-  public suspend fun createConfig(querySuggestionsConfigurationWithIndex: QuerySuggestionsConfigurationWithIndex, requestOptions: RequestOptions? = null): BaseResponse {
+  public suspend fun createConfig(configurationWithIndex: ConfigurationWithIndex, requestOptions: RequestOptions? = null): BaseResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "configs"),
-      body = querySuggestionsConfigurationWithIndex,
+      body = configurationWithIndex,
     )
     return requester.execute(
       requestConfig = requestConfig,
@@ -163,7 +163,7 @@ public class QuerySuggestionsClient(
    *   - settings
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getAllConfigs(requestOptions: RequestOptions? = null): List<QuerySuggestionsConfigurationResponse> {
+  public suspend fun getAllConfigs(requestOptions: RequestOptions? = null): List<ConfigurationResponse> {
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
       path = listOf("1", "configs"),
@@ -182,7 +182,7 @@ public class QuerySuggestionsClient(
    * @param indexName Query Suggestions index name.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getConfig(indexName: String, requestOptions: RequestOptions? = null): QuerySuggestionsConfigurationResponse {
+  public suspend fun getConfig(indexName: String, requestOptions: RequestOptions? = null): ConfigurationResponse {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `getConfig`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
@@ -240,15 +240,15 @@ public class QuerySuggestionsClient(
    * Required API Key ACLs:
    *   - editSettings
    * @param indexName Query Suggestions index name.
-   * @param querySuggestionsConfiguration
+   * @param configuration
    * @param requestOptions additional request configuration.
    */
-  public suspend fun updateConfig(indexName: String, querySuggestionsConfiguration: QuerySuggestionsConfiguration, requestOptions: RequestOptions? = null): BaseResponse {
+  public suspend fun updateConfig(indexName: String, configuration: Configuration, requestOptions: RequestOptions? = null): BaseResponse {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `updateConfig`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.PUT,
       path = listOf("1", "configs", "$indexName"),
-      body = querySuggestionsConfiguration,
+      body = configuration,
     )
     return requester.execute(
       requestConfig = requestConfig,
