@@ -917,7 +917,7 @@ public class IngestionClient(
   }
 
   /**
-   * Searches for transformations.
+   * Try a transformation.
    *
    * Required API Key ACLs:
    *   - addObject
