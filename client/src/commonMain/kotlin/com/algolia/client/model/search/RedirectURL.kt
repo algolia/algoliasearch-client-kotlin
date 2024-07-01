@@ -5,12 +5,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * [Redirect results to a URL](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/redirects/), this this parameter is for internal use only.
+ * The redirect rule container.
  *
- * @param index
+ * @param url
  */
 @Serializable
-public data class Redirect(
+public data class RedirectURL(
 
-  @SerialName(value = "index") val index: List<RedirectRuleIndexMetadata>? = null,
+  @SerialName(value = "url") val url: String? = null,
 )
