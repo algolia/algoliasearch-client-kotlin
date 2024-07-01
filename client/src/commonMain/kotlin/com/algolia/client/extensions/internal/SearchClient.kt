@@ -7,14 +7,13 @@ import io.ktor.http.*
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.json.jsonPrimitive
-import java.util.SortedMap
-import java.util.TreeMap
+import kotlin.collections.LinkedHashMap
 
 /**
  * Builds a restriction string based on provided [SecuredApiKeyRestrictions].
  */
 internal fun SearchClient.buildRestrictionString(restriction: SecuredApiKeyRestrictions): String {
-  val sortedParams: SortedMap<String, String> = TreeMap()
+  val sortedParams = LinkedHashMap<String, String>()
 
   restriction.searchParams?.let { searchParams ->
     val json = options.json.encodeToJsonElement(SearchParamsObject.serializer(), searchParams).jsonObject
@@ -23,7 +22,7 @@ internal fun SearchClient.buildRestrictionString(restriction: SecuredApiKeyRestr
         is JsonArray -> element.joinToString(",") { it.jsonPrimitive.content }
         else -> element.jsonPrimitive.content
       }
-      sortedParams[key] = value
+      sortedParams.put(key, value)
     }
   }
 
@@ -43,5 +42,7 @@ internal fun SearchClient.buildRestrictionString(restriction: SecuredApiKeyRestr
     sortedParams["validUntil"] = it.toString()
   }
 
-  return sortedParams.entries.joinToString("&") { "${it.key}=${it.value.encodeURLParameter()}" }
+  return sortedParams.entries
+    .sortedBy { it.key }
+    .joinToString("&") { "${it.key}=${it.value.encodeURLParameter()}" }
 }
