@@ -1,3 +1,8 @@
+## [3.0.0-beta.34](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.33...3.0.0-beta.34)
+
+- [4f25d3c60](https://github.com/algolia/api-clients-automation/commit/4f25d3c60) fix(kotlin): macos compatible helpers and build on CI ([#3297](https://github.com/algolia/api-clients-automation/pull/3297)) by [@shortcuts](https://github.com/shortcuts/)
+- [9776cb3ba](https://github.com/algolia/api-clients-automation/commit/9776cb3ba) feat(specs): add redirect to renderingContent ([#3296](https://github.com/algolia/api-clients-automation/pull/3296)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [3.0.0-beta.33](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.32...3.0.0-beta.33)
 
 - [8e98407c1](https://github.com/algolia/api-clients-automation/commit/8e98407c1) fix(clients): update ingestion transformations description and fix taggroups ([#3265](https://github.com/algolia/api-clients-automation/pull/3265)) by [@shortcuts](https://github.com/shortcuts/)
