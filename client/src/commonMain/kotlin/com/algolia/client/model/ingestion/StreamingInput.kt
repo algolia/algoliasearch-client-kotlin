@@ -10,7 +10,7 @@ import kotlinx.serialization.json.*
  * @param mapping
  */
 @Serializable
-public data class StreamingUtilsInput(
+public data class StreamingInput(
 
   @SerialName(value = "mapping") val mapping: MappingInput,
 ) : TaskInput

@@ -21,5 +21,5 @@ public data class TransformationCreate(
   @SerialName(value = "name") val name: String,
 
   /** A descriptive name for your transformation of what it does. */
-  @SerialName(value = "description") val description: String,
+  @SerialName(value = "description") val description: String? = null,
 )
