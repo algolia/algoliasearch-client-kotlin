@@ -7,10 +7,6 @@ import kotlinx.serialization.json.*
 /**
  * BrowseResponse
  *
- * @param hitsPerPage Number of hits per page.
- * @param nbHits Number of results (hits).
- * @param nbPages Number of pages of results.
- * @param page Page of search results to retrieve.
  * @param processingTimeMS Time the server took to process the request, in milliseconds.
  * @param hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
  * @param query Search query.
@@ -38,22 +34,14 @@ import kotlinx.serialization.json.*
  * @param serverUsed Host name of the server that processed the request.
  * @param userData An object with custom data.  You can store up to 32kB as custom data.
  * @param queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
+ * @param page Page of search results to retrieve.
+ * @param nbHits Number of results (hits).
+ * @param nbPages Number of pages of results.
+ * @param hitsPerPage Number of hits per page.
  * @param cursor Cursor to get the next page of the response.  The parameter must match the value returned in the response of a previous request. The last page of the response does not return a `cursor` attribute.
  */
 @Serializable
 public data class BrowseResponse(
-
-  /** Number of hits per page. */
-  @SerialName(value = "hitsPerPage") val hitsPerPage: Int,
-
-  /** Number of results (hits). */
-  @SerialName(value = "nbHits") val nbHits: Int,
-
-  /** Number of pages of results. */
-  @SerialName(value = "nbPages") val nbPages: Int,
-
-  /** Page of search results to retrieve. */
-  @SerialName(value = "page") val page: Int,
 
   /** Time the server took to process the request, in milliseconds. */
   @SerialName(value = "processingTimeMS") val processingTimeMS: Int,
@@ -135,6 +123,18 @@ public data class BrowseResponse(
 
   /** Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/). */
   @SerialName(value = "queryID") val queryID: String? = null,
+
+  /** Page of search results to retrieve. */
+  @SerialName(value = "page") val page: Int? = null,
+
+  /** Number of results (hits). */
+  @SerialName(value = "nbHits") val nbHits: Int? = null,
+
+  /** Number of pages of results. */
+  @SerialName(value = "nbPages") val nbPages: Int? = null,
+
+  /** Number of hits per page. */
+  @SerialName(value = "hitsPerPage") val hitsPerPage: Int? = null,
 
   /** Cursor to get the next page of the response.  The parameter must match the value returned in the response of a previous request. The last page of the response does not return a `cursor` attribute.  */
   @SerialName(value = "cursor") val cursor: String? = null,

@@ -10,11 +10,11 @@ import kotlinx.serialization.json.*
 /**
  * SearchResponse
  *
- * @param hitsPerPage Number of hits per page.
+ * @param processingTimeMS Time the server took to process the request, in milliseconds.
+ * @param page Page of search results to retrieve.
  * @param nbHits Number of results (hits).
  * @param nbPages Number of pages of results.
- * @param page Page of search results to retrieve.
- * @param processingTimeMS Time the server took to process the request, in milliseconds.
+ * @param hitsPerPage Number of hits per page.
  * @param hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
  * @param query Search query.
  * @param params URL-encoded string of all search parameters.
@@ -45,8 +45,11 @@ import kotlinx.serialization.json.*
 @Serializable(SearchResponseSerializer::class)
 public data class SearchResponse(
 
-  /** Number of hits per page. */
-  val hitsPerPage: Int,
+  /** Time the server took to process the request, in milliseconds. */
+  val processingTimeMS: Int,
+
+  /** Page of search results to retrieve. */
+  val page: Int,
 
   /** Number of results (hits). */
   val nbHits: Int,
@@ -54,11 +57,8 @@ public data class SearchResponse(
   /** Number of pages of results. */
   val nbPages: Int,
 
-  /** Page of search results to retrieve. */
-  val page: Int,
-
-  /** Time the server took to process the request, in milliseconds. */
-  val processingTimeMS: Int,
+  /** Number of hits per page. */
+  val hitsPerPage: Int,
 
   /** Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.  */
   val hits: List<Hit>,
@@ -144,11 +144,11 @@ public data class SearchResponse(
 internal object SearchResponseSerializer : KSerializer<SearchResponse> {
 
   override val descriptor: SerialDescriptor = buildClassSerialDescriptor("SearchResponse") {
-    element<Int>("hitsPerPage")
+    element<Int>("processingTimeMS")
+    element<Int>("page")
     element<Int>("nbHits")
     element<Int>("nbPages")
-    element<Int>("page")
-    element<Int>("processingTimeMS")
+    element<Int>("hitsPerPage")
     element<List<Hit>>("hits")
     element<String>("query")
     element<String>("params")
@@ -181,11 +181,11 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
     val input = decoder.asJsonDecoder()
     val tree = input.decodeJsonObject()
     return SearchResponse(
-      hitsPerPage = tree.getValue("hitsPerPage").let { input.json.decodeFromJsonElement(it) },
+      processingTimeMS = tree.getValue("processingTimeMS").let { input.json.decodeFromJsonElement(it) },
+      page = tree.getValue("page").let { input.json.decodeFromJsonElement(it) },
       nbHits = tree.getValue("nbHits").let { input.json.decodeFromJsonElement(it) },
       nbPages = tree.getValue("nbPages").let { input.json.decodeFromJsonElement(it) },
-      page = tree.getValue("page").let { input.json.decodeFromJsonElement(it) },
-      processingTimeMS = tree.getValue("processingTimeMS").let { input.json.decodeFromJsonElement(it) },
+      hitsPerPage = tree.getValue("hitsPerPage").let { input.json.decodeFromJsonElement(it) },
       hits = tree.getValue("hits").let { input.json.decodeFromJsonElement(it) },
       query = tree.getValue("query").let { input.json.decodeFromJsonElement(it) },
       params = tree.getValue("params").let { input.json.decodeFromJsonElement(it) },
@@ -219,11 +219,11 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
   override fun serialize(encoder: Encoder, value: SearchResponse) {
     val output = encoder.asJsonEncoder()
     val json = buildJsonObject {
-      put("hitsPerPage", output.json.encodeToJsonElement(value.hitsPerPage))
+      put("processingTimeMS", output.json.encodeToJsonElement(value.processingTimeMS))
+      put("page", output.json.encodeToJsonElement(value.page))
       put("nbHits", output.json.encodeToJsonElement(value.nbHits))
       put("nbPages", output.json.encodeToJsonElement(value.nbPages))
-      put("page", output.json.encodeToJsonElement(value.page))
-      put("processingTimeMS", output.json.encodeToJsonElement(value.processingTimeMS))
+      put("hitsPerPage", output.json.encodeToJsonElement(value.hitsPerPage))
       put("hits", output.json.encodeToJsonElement(value.hits))
       put("query", output.json.encodeToJsonElement(value.query))
       put("params", output.json.encodeToJsonElement(value.params))

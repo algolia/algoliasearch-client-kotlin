@@ -10,10 +10,6 @@ import kotlinx.serialization.json.*
 /**
  * BaseSearchResponse
  *
- * @param hitsPerPage Number of hits per page.
- * @param nbHits Number of results (hits).
- * @param nbPages Number of pages of results.
- * @param page Page of search results to retrieve.
  * @param processingTimeMS Time the server took to process the request, in milliseconds.
  * @param abTestID A/B test ID. This is only included in the response for indices that are part of an A/B test.
  * @param abTestVariantID Variant ID. This is only included in the response for indices that are part of an A/B test.
@@ -41,18 +37,6 @@ import kotlinx.serialization.json.*
  */
 @Serializable(BaseSearchResponseSerializer::class)
 public data class BaseSearchResponse(
-
-  /** Number of hits per page. */
-  val hitsPerPage: Int,
-
-  /** Number of results (hits). */
-  val nbHits: Int,
-
-  /** Number of pages of results. */
-  val nbPages: Int,
-
-  /** Page of search results to retrieve. */
-  val page: Int,
 
   /** Time the server took to process the request, in milliseconds. */
   val processingTimeMS: Int,
@@ -132,10 +116,6 @@ public data class BaseSearchResponse(
 internal object BaseSearchResponseSerializer : KSerializer<BaseSearchResponse> {
 
   override val descriptor: SerialDescriptor = buildClassSerialDescriptor("BaseSearchResponse") {
-    element<Int>("hitsPerPage")
-    element<Int>("nbHits")
-    element<Int>("nbPages")
-    element<Int>("page")
     element<Int>("processingTimeMS")
     element<Int>("abTestID", isOptional = true)
     element<Int>("abTestVariantID", isOptional = true)
@@ -166,10 +146,6 @@ internal object BaseSearchResponseSerializer : KSerializer<BaseSearchResponse> {
     val input = decoder.asJsonDecoder()
     val tree = input.decodeJsonObject()
     return BaseSearchResponse(
-      hitsPerPage = tree.getValue("hitsPerPage").let { input.json.decodeFromJsonElement(it) },
-      nbHits = tree.getValue("nbHits").let { input.json.decodeFromJsonElement(it) },
-      nbPages = tree.getValue("nbPages").let { input.json.decodeFromJsonElement(it) },
-      page = tree.getValue("page").let { input.json.decodeFromJsonElement(it) },
       processingTimeMS = tree.getValue("processingTimeMS").let { input.json.decodeFromJsonElement(it) },
       abTestID = tree["abTestID"]?.let { input.json.decodeFromJsonElement(it) },
       abTestVariantID = tree["abTestVariantID"]?.let { input.json.decodeFromJsonElement(it) },
@@ -201,10 +177,6 @@ internal object BaseSearchResponseSerializer : KSerializer<BaseSearchResponse> {
   override fun serialize(encoder: Encoder, value: BaseSearchResponse) {
     val output = encoder.asJsonEncoder()
     val json = buildJsonObject {
-      put("hitsPerPage", output.json.encodeToJsonElement(value.hitsPerPage))
-      put("nbHits", output.json.encodeToJsonElement(value.nbHits))
-      put("nbPages", output.json.encodeToJsonElement(value.nbPages))
-      put("page", output.json.encodeToJsonElement(value.page))
       put("processingTimeMS", output.json.encodeToJsonElement(value.processingTimeMS))
       value.abTestID?.let { put("abTestID", output.json.encodeToJsonElement(it)) }
       value.abTestVariantID?.let { put("abTestVariantID", output.json.encodeToJsonElement(it)) }
