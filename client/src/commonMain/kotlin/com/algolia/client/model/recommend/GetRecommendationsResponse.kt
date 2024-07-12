@@ -12,5 +12,5 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class GetRecommendationsResponse(
 
-  @SerialName(value = "results") val results: List<RecommendationsResults>? = null,
+  @SerialName(value = "results") val results: List<RecommendationsResults>,
 )
