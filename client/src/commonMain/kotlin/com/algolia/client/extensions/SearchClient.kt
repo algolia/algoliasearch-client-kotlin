@@ -20,8 +20,8 @@ import kotlin.time.Duration.Companion.seconds
 /**
  * Wait for an API key to be added, updated or deleted based on a given `operation`.
  *
- * @param operation The `operation` that was done on a `key`.
  * @param key The `key` that has been added, deleted or updated.
+ * @param operation The `operation` that was done on a `key`.
  * @param apiKey Necessary to know if an `update` operation has been processed, compare fields of
  *     the response with it.
  * @param maxRetries The maximum number of retries. 50 by default. (optional)
@@ -31,16 +31,16 @@ import kotlin.time.Duration.Companion.seconds
  *     the transporter requestOptions. (optional)
  */
 public suspend fun SearchClient.waitForApiKey(
-  operation: ApiKeyOperation,
   key: String,
+  operation: ApiKeyOperation,
   apiKey: ApiKey? = null,
   maxRetries: Int = 50,
   timeout: Duration = Duration.INFINITE,
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
   requestOptions: RequestOptions? = null,
-) {
-  when (operation) {
+): GetApiKeyResponse? {
+  return when (operation) {
     ApiKeyOperation.Add -> waitKeyCreation(
       key = key,
       maxRetries = maxRetries,
@@ -226,25 +226,25 @@ public suspend fun SearchClient.waitKeyDelete(
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
   requestOptions: RequestOptions? = null,
-) {
-  retryUntil(
+): GetApiKeyResponse? {
+  return retryUntil(
     timeout = timeout,
     maxRetries = maxRetries,
     initialDelay = initialDelay,
     maxDelay = maxDelay,
     retry = {
       try {
-        val response = getApiKey(key, requestOptions)
-        Result.success(response)
+        return@retryUntil getApiKey(key, requestOptions)
       } catch (e: AlgoliaApiException) {
-        Result.failure(e)
+        if (e.httpErrorCode == 404) {
+          return@retryUntil null
+        }
+
+        throw e
       }
     },
     until = { result ->
-      result.fold(
-        onSuccess = { false },
-        onFailure = { (it as AlgoliaApiException).httpErrorCode == 404 },
-      )
+      result == null
     },
   )
 }
