@@ -5,19 +5,20 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * API request body for creating a task.
+ * API request body for creating a task using the V1 shape, please use methods and types that don't contain the V1 suffix.
  *
  * @param sourceID Universally uniqud identifier (UUID) of a source.
  * @param destinationID Universally unique identifier (UUID) of a destination resource.
+ * @param trigger
  * @param action
- * @param cron Cron expression for the task's schedule.
  * @param enabled Whether the task is enabled.
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
  * @param input
  * @param cursor Date of the last cursor in RFC 3339 format.
  */
+@Deprecated(message = "This schema is deprecated.")
 @Serializable
-public data class TaskCreate(
+public data class TaskCreateV1(
 
   /** Universally uniqud identifier (UUID) of a source. */
   @SerialName(value = "sourceID") val sourceID: String,
@@ -25,10 +26,9 @@ public data class TaskCreate(
   /** Universally unique identifier (UUID) of a destination resource. */
   @SerialName(value = "destinationID") val destinationID: String,
 
-  @SerialName(value = "action") val action: ActionType,
+  @SerialName(value = "trigger") val trigger: TaskCreateTrigger,
 
-  /** Cron expression for the task's schedule. */
-  @SerialName(value = "cron") val cron: String? = null,
+  @SerialName(value = "action") val action: ActionType,
 
   /** Whether the task is enabled. */
   @SerialName(value = "enabled") val enabled: Boolean? = null,

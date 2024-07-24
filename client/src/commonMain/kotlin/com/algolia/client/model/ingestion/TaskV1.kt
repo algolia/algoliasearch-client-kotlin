@@ -5,19 +5,26 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * API request body for creating a task.
+ * The V1 task object, please use methods and types that don't contain the V1 suffix.
  *
+ * @param taskID Universally unique identifier (UUID) of a task.
  * @param sourceID Universally uniqud identifier (UUID) of a source.
  * @param destinationID Universally unique identifier (UUID) of a destination resource.
- * @param action
- * @param cron Cron expression for the task's schedule.
+ * @param trigger
  * @param enabled Whether the task is enabled.
- * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
+ * @param action
+ * @param createdAt Date of creation in RFC 3339 format.
  * @param input
+ * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
  * @param cursor Date of the last cursor in RFC 3339 format.
+ * @param updatedAt Date of last update in RFC 3339 format.
  */
+@Deprecated(message = "This schema is deprecated.")
 @Serializable
-public data class TaskCreate(
+public data class TaskV1(
+
+  /** Universally unique identifier (UUID) of a task. */
+  @SerialName(value = "taskID") val taskID: String,
 
   /** Universally uniqud identifier (UUID) of a source. */
   @SerialName(value = "sourceID") val sourceID: String,
@@ -25,19 +32,24 @@ public data class TaskCreate(
   /** Universally unique identifier (UUID) of a destination resource. */
   @SerialName(value = "destinationID") val destinationID: String,
 
-  @SerialName(value = "action") val action: ActionType,
-
-  /** Cron expression for the task's schedule. */
-  @SerialName(value = "cron") val cron: String? = null,
+  @SerialName(value = "trigger") val trigger: Trigger,
 
   /** Whether the task is enabled. */
-  @SerialName(value = "enabled") val enabled: Boolean? = null,
+  @SerialName(value = "enabled") val enabled: Boolean,
+
+  @SerialName(value = "action") val action: ActionType,
+
+  /** Date of creation in RFC 3339 format. */
+  @SerialName(value = "createdAt") val createdAt: String,
+
+  @SerialName(value = "input") val input: TaskInput? = null,
 
   /** Maximum accepted percentage of failures for a task run to finish successfully. */
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
 
-  @SerialName(value = "input") val input: TaskInput? = null,
-
   /** Date of the last cursor in RFC 3339 format. */
   @SerialName(value = "cursor") val cursor: String? = null,
+
+  /** Date of last update in RFC 3339 format. */
+  @SerialName(value = "updatedAt") val updatedAt: String? = null,
 )

@@ -5,39 +5,28 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * API request body for creating a task.
+ * API request body for updating a task using the V1 shape, please use methods and types that don't contain the V1 suffix.
  *
- * @param sourceID Universally uniqud identifier (UUID) of a source.
  * @param destinationID Universally unique identifier (UUID) of a destination resource.
- * @param action
- * @param cron Cron expression for the task's schedule.
+ * @param trigger
+ * @param input
  * @param enabled Whether the task is enabled.
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
- * @param input
- * @param cursor Date of the last cursor in RFC 3339 format.
  */
+@Deprecated(message = "This schema is deprecated.")
 @Serializable
-public data class TaskCreate(
-
-  /** Universally uniqud identifier (UUID) of a source. */
-  @SerialName(value = "sourceID") val sourceID: String,
+public data class TaskUpdateV1(
 
   /** Universally unique identifier (UUID) of a destination resource. */
-  @SerialName(value = "destinationID") val destinationID: String,
+  @SerialName(value = "destinationID") val destinationID: String? = null,
 
-  @SerialName(value = "action") val action: ActionType,
+  @SerialName(value = "trigger") val trigger: TriggerUpdateInput? = null,
 
-  /** Cron expression for the task's schedule. */
-  @SerialName(value = "cron") val cron: String? = null,
+  @SerialName(value = "input") val input: TaskInput? = null,
 
   /** Whether the task is enabled. */
   @SerialName(value = "enabled") val enabled: Boolean? = null,
 
   /** Maximum accepted percentage of failures for a task run to finish successfully. */
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
-
-  @SerialName(value = "input") val input: TaskInput? = null,
-
-  /** Date of the last cursor in RFC 3339 format. */
-  @SerialName(value = "cursor") val cursor: String? = null,
 )

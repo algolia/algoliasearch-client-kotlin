@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * API request body for updating a task.
  *
  * @param destinationID Universally unique identifier (UUID) of a destination resource.
- * @param trigger
+ * @param cron Cron expression for the task's schedule.
  * @param input
  * @param enabled Whether the task is enabled.
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
@@ -19,7 +19,8 @@ public data class TaskUpdate(
   /** Universally unique identifier (UUID) of a destination resource. */
   @SerialName(value = "destinationID") val destinationID: String? = null,
 
-  @SerialName(value = "trigger") val trigger: TriggerUpdateInput? = null,
+  /** Cron expression for the task's schedule. */
+  @SerialName(value = "cron") val cron: String? = null,
 
   @SerialName(value = "input") val input: TaskInput? = null,
 

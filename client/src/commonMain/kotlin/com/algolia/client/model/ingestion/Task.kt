@@ -10,10 +10,12 @@ import kotlinx.serialization.json.*
  * @param taskID Universally unique identifier (UUID) of a task.
  * @param sourceID Universally uniqud identifier (UUID) of a source.
  * @param destinationID Universally unique identifier (UUID) of a destination resource.
- * @param trigger
  * @param enabled Whether the task is enabled.
  * @param action
  * @param createdAt Date of creation in RFC 3339 format.
+ * @param cron Cron expression for the task's schedule.
+ * @param lastRun The last time the scheduled task ran in RFC 3339 format.
+ * @param nextRun The next scheduled run of the task in RFC 3339 format.
  * @param input
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
  * @param cursor Date of the last cursor in RFC 3339 format.
@@ -31,8 +33,6 @@ public data class Task(
   /** Universally unique identifier (UUID) of a destination resource. */
   @SerialName(value = "destinationID") val destinationID: String,
 
-  @SerialName(value = "trigger") val trigger: Trigger,
-
   /** Whether the task is enabled. */
   @SerialName(value = "enabled") val enabled: Boolean,
 
@@ -40,6 +40,15 @@ public data class Task(
 
   /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
+
+  /** Cron expression for the task's schedule. */
+  @SerialName(value = "cron") val cron: String? = null,
+
+  /** The last time the scheduled task ran in RFC 3339 format. */
+  @SerialName(value = "lastRun") val lastRun: String? = null,
+
+  /** The next scheduled run of the task in RFC 3339 format. */
+  @SerialName(value = "nextRun") val nextRun: String? = null,
 
   @SerialName(value = "input") val input: TaskInput? = null,
 

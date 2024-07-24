@@ -102,6 +102,23 @@ public class IngestionClient(
   public suspend fun createTask(taskCreate: TaskCreate, requestOptions: RequestOptions? = null): TaskCreateResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
+      path = listOf("2", "tasks"),
+      body = taskCreate,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Creates a new task using the v1 endpoint, please use `createTask` instead.
+   * @param taskCreate Request body for creating a task.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun createTaskV1(taskCreate: TaskCreateV1, requestOptions: RequestOptions? = null): TaskCreateResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
       path = listOf("1", "tasks"),
       body = taskCreate,
     )
@@ -291,6 +308,23 @@ public class IngestionClient(
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `deleteTask`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.DELETE,
+      path = listOf("2", "tasks", "$taskID"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+   * @param taskID Unique identifier of a task.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun deleteTaskV1(taskID: String, requestOptions: RequestOptions? = null): DeleteResponse {
+    require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `deleteTaskV1`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.DELETE,
       path = listOf("1", "tasks", "$taskID"),
     )
     return requester.execute(
@@ -330,6 +364,28 @@ public class IngestionClient(
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `disableTask`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.PUT,
+      path = listOf("2", "tasks", "$taskID", "disable"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Disables a task using the v1 endpoint, please use `disableTask` instead.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param taskID Unique identifier of a task.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun disableTaskV1(taskID: String, requestOptions: RequestOptions? = null): TaskUpdateResponse {
+    require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `disableTaskV1`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.PUT,
       path = listOf("1", "tasks", "$taskID", "disable"),
     )
     return requester.execute(
@@ -350,6 +406,28 @@ public class IngestionClient(
    */
   public suspend fun enableTask(taskID: String, requestOptions: RequestOptions? = null): TaskUpdateResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `enableTask`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.PUT,
+      path = listOf("2", "tasks", "$taskID", "enable"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Enables a task using the v1 endpoint, please use `enableTask` instead.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param taskID Unique identifier of a task.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun enableTaskV1(taskID: String, requestOptions: RequestOptions? = null): TaskUpdateResponse {
+    require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `enableTaskV1`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.PUT,
       path = listOf("1", "tasks", "$taskID", "enable"),
@@ -383,40 +461,6 @@ public class IngestionClient(
   }
 
   /**
-   * Retrieves a list of all authentication resources.
-   *
-   * Required API Key ACLs:
-   *   - addObject
-   *   - deleteIndex
-   *   - editSettings
-   * @param itemsPerPage Number of items per page. (default to 10)
-   * @param page Page number of the paginated API response.
-   * @param type Type of authentication resource to retrieve.
-   * @param platform Ecommerce platform for which to retrieve authentication resources.
-   * @param sort Property by which to sort the list of authentication resources. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
-   * @param requestOptions additional request configuration.
-   */
-  public suspend fun getAuthentications(itemsPerPage: Int? = null, page: Int? = null, type: List<AuthenticationType>? = null, platform: List<PlatformWithNone>? = null, sort: AuthenticationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListAuthenticationsResponse {
-    val requestConfig = RequestConfig(
-      method = RequestMethod.GET,
-      path = listOf("1", "authentications"),
-      query = buildMap {
-        itemsPerPage?.let { put("itemsPerPage", it) }
-        page?.let { put("page", it) }
-        type?.let { put("type", it.joinToString(",")) }
-        platform?.let { put("platform", it.joinToString(",")) }
-        sort?.let { put("sort", it) }
-        order?.let { put("order", it) }
-      },
-    )
-    return requester.execute(
-      requestConfig = requestConfig,
-      requestOptions = requestOptions,
-    )
-  }
-
-  /**
    * Retrieves a destination by its ID.
    *
    * Required API Key ACLs:
@@ -431,40 +475,6 @@ public class IngestionClient(
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
       path = listOf("1", "destinations", "$destinationID"),
-    )
-    return requester.execute(
-      requestConfig = requestConfig,
-      requestOptions = requestOptions,
-    )
-  }
-
-  /**
-   * Retrieves a list of destinations.
-   *
-   * Required API Key ACLs:
-   *   - addObject
-   *   - deleteIndex
-   *   - editSettings
-   * @param itemsPerPage Number of items per page. (default to 10)
-   * @param page Page number of the paginated API response.
-   * @param type Destination type.
-   * @param authenticationID Authentication ID used by destinations.
-   * @param sort Property by which to sort the destinations. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
-   * @param requestOptions additional request configuration.
-   */
-  public suspend fun getDestinations(itemsPerPage: Int? = null, page: Int? = null, type: List<DestinationType>? = null, authenticationID: List<String>? = null, sort: DestinationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListDestinationsResponse {
-    val requestConfig = RequestConfig(
-      method = RequestMethod.GET,
-      path = listOf("1", "destinations"),
-      query = buildMap {
-        itemsPerPage?.let { put("itemsPerPage", it) }
-        page?.let { put("page", it) }
-        type?.let { put("type", it.joinToString(",")) }
-        authenticationID?.let { put("authenticationID", it.joinToString(",")) }
-        sort?.let { put("sort", it) }
-        order?.let { put("order", it) }
-      },
     )
     return requester.execute(
       requestConfig = requestConfig,
@@ -497,46 +507,6 @@ public class IngestionClient(
   }
 
   /**
-   * Retrieves a list of events for a task run, identified by it's ID.
-   *
-   * Required API Key ACLs:
-   *   - addObject
-   *   - deleteIndex
-   *   - editSettings
-   * @param runID Unique identifier of a task run.
-   * @param itemsPerPage Number of items per page. (default to 10)
-   * @param page Page number of the paginated API response.
-   * @param status Event status for filtering the list of task runs.
-   * @param type Event type for filtering the list of task runs.
-   * @param sort Property by which to sort the list of task run events.
-   * @param order Sort order of the response, ascending or descending. (default to desc)
-   * @param startDate Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used.
-   * @param endDate Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used.
-   * @param requestOptions additional request configuration.
-   */
-  public suspend fun getEvents(runID: String, itemsPerPage: Int? = null, page: Int? = null, status: List<EventStatus>? = null, type: List<EventType>? = null, sort: EventSortKeys? = null, order: OrderKeys? = null, startDate: String? = null, endDate: String? = null, requestOptions: RequestOptions? = null): ListEventsResponse {
-    require(runID.isNotBlank()) { "Parameter `runID` is required when calling `getEvents`." }
-    val requestConfig = RequestConfig(
-      method = RequestMethod.GET,
-      path = listOf("1", "runs", "$runID", "events"),
-      query = buildMap {
-        itemsPerPage?.let { put("itemsPerPage", it) }
-        page?.let { put("page", it) }
-        status?.let { put("status", it.joinToString(",")) }
-        type?.let { put("type", it.joinToString(",")) }
-        sort?.let { put("sort", it) }
-        order?.let { put("order", it) }
-        startDate?.let { put("startDate", it) }
-        endDate?.let { put("endDate", it) }
-      },
-    )
-    return requester.execute(
-      requestConfig = requestConfig,
-      requestOptions = requestOptions,
-    )
-  }
-
-  /**
    * Retrieve a single task run by its ID.
    *
    * Required API Key ACLs:
@@ -551,44 +521,6 @@ public class IngestionClient(
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
       path = listOf("1", "runs", "$runID"),
-    )
-    return requester.execute(
-      requestConfig = requestConfig,
-      requestOptions = requestOptions,
-    )
-  }
-
-  /**
-   * Retrieve a list of task runs.
-   *
-   * Required API Key ACLs:
-   *   - addObject
-   *   - deleteIndex
-   *   - editSettings
-   * @param itemsPerPage Number of items per page. (default to 10)
-   * @param page Page number of the paginated API response.
-   * @param status Run status for filtering the list of task runs.
-   * @param taskID Task ID for filtering the list of task runs.
-   * @param sort Property by which to sort the list of task runs. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
-   * @param startDate Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used.
-   * @param endDate Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used.
-   * @param requestOptions additional request configuration.
-   */
-  public suspend fun getRuns(itemsPerPage: Int? = null, page: Int? = null, status: List<RunStatus>? = null, taskID: String? = null, sort: RunSortKeys? = null, order: OrderKeys? = null, startDate: String? = null, endDate: String? = null, requestOptions: RequestOptions? = null): RunListResponse {
-    val requestConfig = RequestConfig(
-      method = RequestMethod.GET,
-      path = listOf("1", "runs"),
-      query = buildMap {
-        itemsPerPage?.let { put("itemsPerPage", it) }
-        page?.let { put("page", it) }
-        status?.let { put("status", it.joinToString(",")) }
-        taskID?.let { put("taskID", it) }
-        sort?.let { put("sort", it) }
-        order?.let { put("order", it) }
-        startDate?.let { put("startDate", it) }
-        endDate?.let { put("endDate", it) }
-      },
     )
     return requester.execute(
       requestConfig = requestConfig,
@@ -619,40 +551,6 @@ public class IngestionClient(
   }
 
   /**
-   * Retrieves a list of sources.
-   *
-   * Required API Key ACLs:
-   *   - addObject
-   *   - deleteIndex
-   *   - editSettings
-   * @param itemsPerPage Number of items per page. (default to 10)
-   * @param page Page number of the paginated API response.
-   * @param type Source type. Some sources require authentication.
-   * @param authenticationID Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication resource.
-   * @param sort Property by which to sort the list of sources. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
-   * @param requestOptions additional request configuration.
-   */
-  public suspend fun getSources(itemsPerPage: Int? = null, page: Int? = null, type: List<SourceType>? = null, authenticationID: List<String>? = null, sort: SourceSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListSourcesResponse {
-    val requestConfig = RequestConfig(
-      method = RequestMethod.GET,
-      path = listOf("1", "sources"),
-      query = buildMap {
-        itemsPerPage?.let { put("itemsPerPage", it) }
-        page?.let { put("page", it) }
-        type?.let { put("type", it.joinToString(",")) }
-        authenticationID?.let { put("authenticationID", it.joinToString(",")) }
-        sort?.let { put("sort", it) }
-        order?.let { put("order", it) }
-      },
-    )
-    return requester.execute(
-      requestConfig = requestConfig,
-      requestOptions = requestOptions,
-    )
-  }
-
-  /**
    * Retrieves a task by its ID.
    *
    * Required API Key ACLs:
@@ -666,7 +564,7 @@ public class IngestionClient(
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `getTask`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
-      path = listOf("1", "tasks", "$taskID"),
+      path = listOf("2", "tasks", "$taskID"),
     )
     return requester.execute(
       requestConfig = requestConfig,
@@ -675,38 +573,20 @@ public class IngestionClient(
   }
 
   /**
-   * Retrieves a list of tasks.
+   * Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.
    *
    * Required API Key ACLs:
    *   - addObject
    *   - deleteIndex
    *   - editSettings
-   * @param itemsPerPage Number of items per page. (default to 10)
-   * @param page Page number of the paginated API response.
-   * @param action Actions for filtering the list of tasks.
-   * @param enabled Whether to filter the list of tasks by the `enabled` status.
-   * @param sourceID Source IDs for filtering the list of tasks.
-   * @param destinationID Destination IDs for filtering the list of tasks.
-   * @param triggerType Type of task trigger for filtering the list of tasks.
-   * @param sort Property by which to sort the list of tasks. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param taskID Unique identifier of a task.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getTasks(itemsPerPage: Int? = null, page: Int? = null, action: List<ActionType>? = null, enabled: Boolean? = null, sourceID: List<String>? = null, destinationID: List<String>? = null, triggerType: List<TriggerType>? = null, sort: TaskSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTasksResponse {
+  public suspend fun getTaskV1(taskID: String, requestOptions: RequestOptions? = null): TaskV1 {
+    require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `getTaskV1`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
-      path = listOf("1", "tasks"),
-      query = buildMap {
-        itemsPerPage?.let { put("itemsPerPage", it) }
-        page?.let { put("page", it) }
-        action?.let { put("action", it.joinToString(",")) }
-        enabled?.let { put("enabled", it) }
-        sourceID?.let { put("sourceID", it.joinToString(",")) }
-        destinationID?.let { put("destinationID", it.joinToString(",")) }
-        triggerType?.let { put("triggerType", it.joinToString(",")) }
-        sort?.let { put("sort", it) }
-        order?.let { put("order", it) }
-      },
+      path = listOf("1", "tasks", "$taskID"),
     )
     return requester.execute(
       requestConfig = requestConfig,
@@ -737,6 +617,266 @@ public class IngestionClient(
   }
 
   /**
+   * Retrieves a list of all authentication resources.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param type Type of authentication resource to retrieve.
+   * @param platform Ecommerce platform for which to retrieve authentication resources.
+   * @param sort Property by which to sort the list of authentication resources. (default to createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun listAuthentications(itemsPerPage: Int? = null, page: Int? = null, type: List<AuthenticationType>? = null, platform: List<PlatformWithNone>? = null, sort: AuthenticationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListAuthenticationsResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "authentications"),
+      query = buildMap {
+        itemsPerPage?.let { put("itemsPerPage", it) }
+        page?.let { put("page", it) }
+        type?.let { put("type", it.joinToString(",")) }
+        platform?.let { put("platform", it.joinToString(",")) }
+        sort?.let { put("sort", it) }
+        order?.let { put("order", it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Retrieves a list of destinations.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param type Destination type.
+   * @param authenticationID Authentication ID used by destinations.
+   * @param sort Property by which to sort the destinations. (default to createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun listDestinations(itemsPerPage: Int? = null, page: Int? = null, type: List<DestinationType>? = null, authenticationID: List<String>? = null, sort: DestinationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListDestinationsResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "destinations"),
+      query = buildMap {
+        itemsPerPage?.let { put("itemsPerPage", it) }
+        page?.let { put("page", it) }
+        type?.let { put("type", it.joinToString(",")) }
+        authenticationID?.let { put("authenticationID", it.joinToString(",")) }
+        sort?.let { put("sort", it) }
+        order?.let { put("order", it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Retrieves a list of events for a task run, identified by it's ID.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param runID Unique identifier of a task run.
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param status Event status for filtering the list of task runs.
+   * @param type Event type for filtering the list of task runs.
+   * @param sort Property by which to sort the list of task run events.
+   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param startDate Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used.
+   * @param endDate Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun listEvents(runID: String, itemsPerPage: Int? = null, page: Int? = null, status: List<EventStatus>? = null, type: List<EventType>? = null, sort: EventSortKeys? = null, order: OrderKeys? = null, startDate: String? = null, endDate: String? = null, requestOptions: RequestOptions? = null): ListEventsResponse {
+    require(runID.isNotBlank()) { "Parameter `runID` is required when calling `listEvents`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "runs", "$runID", "events"),
+      query = buildMap {
+        itemsPerPage?.let { put("itemsPerPage", it) }
+        page?.let { put("page", it) }
+        status?.let { put("status", it.joinToString(",")) }
+        type?.let { put("type", it.joinToString(",")) }
+        sort?.let { put("sort", it) }
+        order?.let { put("order", it) }
+        startDate?.let { put("startDate", it) }
+        endDate?.let { put("endDate", it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Retrieve a list of task runs.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param status Run status for filtering the list of task runs.
+   * @param taskID Task ID for filtering the list of task runs.
+   * @param sort Property by which to sort the list of task runs. (default to createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param startDate Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used.
+   * @param endDate Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun listRuns(itemsPerPage: Int? = null, page: Int? = null, status: List<RunStatus>? = null, taskID: String? = null, sort: RunSortKeys? = null, order: OrderKeys? = null, startDate: String? = null, endDate: String? = null, requestOptions: RequestOptions? = null): RunListResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "runs"),
+      query = buildMap {
+        itemsPerPage?.let { put("itemsPerPage", it) }
+        page?.let { put("page", it) }
+        status?.let { put("status", it.joinToString(",")) }
+        taskID?.let { put("taskID", it) }
+        sort?.let { put("sort", it) }
+        order?.let { put("order", it) }
+        startDate?.let { put("startDate", it) }
+        endDate?.let { put("endDate", it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Retrieves a list of sources.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param type Source type. Some sources require authentication.
+   * @param authenticationID Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication resource.
+   * @param sort Property by which to sort the list of sources. (default to createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun listSources(itemsPerPage: Int? = null, page: Int? = null, type: List<SourceType>? = null, authenticationID: List<String>? = null, sort: SourceSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListSourcesResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "sources"),
+      query = buildMap {
+        itemsPerPage?.let { put("itemsPerPage", it) }
+        page?.let { put("page", it) }
+        type?.let { put("type", it.joinToString(",")) }
+        authenticationID?.let { put("authenticationID", it.joinToString(",")) }
+        sort?.let { put("sort", it) }
+        order?.let { put("order", it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Retrieves a list of tasks.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param action Actions for filtering the list of tasks.
+   * @param enabled Whether to filter the list of tasks by the `enabled` status.
+   * @param sourceID Source IDs for filtering the list of tasks.
+   * @param destinationID Destination IDs for filtering the list of tasks.
+   * @param triggerType Type of task trigger for filtering the list of tasks.
+   * @param sort Property by which to sort the list of tasks. (default to createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun listTasks(itemsPerPage: Int? = null, page: Int? = null, action: List<ActionType>? = null, enabled: Boolean? = null, sourceID: List<String>? = null, destinationID: List<String>? = null, triggerType: List<TriggerType>? = null, sort: TaskSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTasksResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("2", "tasks"),
+      query = buildMap {
+        itemsPerPage?.let { put("itemsPerPage", it) }
+        page?.let { put("page", it) }
+        action?.let { put("action", it.joinToString(",")) }
+        enabled?.let { put("enabled", it) }
+        sourceID?.let { put("sourceID", it.joinToString(",")) }
+        destinationID?.let { put("destinationID", it.joinToString(",")) }
+        triggerType?.let { put("triggerType", it.joinToString(",")) }
+        sort?.let { put("sort", it) }
+        order?.let { put("order", it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param itemsPerPage Number of items per page. (default to 10)
+   * @param page Page number of the paginated API response.
+   * @param action Actions for filtering the list of tasks.
+   * @param enabled Whether to filter the list of tasks by the `enabled` status.
+   * @param sourceID Source IDs for filtering the list of tasks.
+   * @param destinationID Destination IDs for filtering the list of tasks.
+   * @param triggerType Type of task trigger for filtering the list of tasks.
+   * @param sort Property by which to sort the list of tasks. (default to createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun listTasksV1(itemsPerPage: Int? = null, page: Int? = null, action: List<ActionType>? = null, enabled: Boolean? = null, sourceID: List<String>? = null, destinationID: List<String>? = null, triggerType: List<TriggerType>? = null, sort: TaskSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTasksResponseV1 {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "tasks"),
+      query = buildMap {
+        itemsPerPage?.let { put("itemsPerPage", it) }
+        page?.let { put("page", it) }
+        action?.let { put("action", it.joinToString(",")) }
+        enabled?.let { put("enabled", it) }
+        sourceID?.let { put("sourceID", it.joinToString(",")) }
+        destinationID?.let { put("destinationID", it.joinToString(",")) }
+        triggerType?.let { put("triggerType", it.joinToString(",")) }
+        sort?.let { put("sort", it) }
+        order?.let { put("order", it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * Retrieves a list of transformations.
    *
    * Required API Key ACLs:
@@ -747,7 +887,7 @@ public class IngestionClient(
    * @param order Sort order of the response, ascending or descending. (default to desc)
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getTransformations(sort: SortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTransformationsResponse {
+  public suspend fun listTransformations(sort: SortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTransformationsResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
       path = listOf("1", "transformations"),
@@ -774,6 +914,28 @@ public class IngestionClient(
    */
   public suspend fun runTask(taskID: String, requestOptions: RequestOptions? = null): RunResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `runTask`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("2", "tasks", "$taskID", "run"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of task runs with the observability endpoints.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param taskID Unique identifier of a task.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun runTaskV1(taskID: String, requestOptions: RequestOptions? = null): RunResponse {
+    require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `runTaskV1`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "tasks", "$taskID", "run"),
@@ -861,6 +1023,28 @@ public class IngestionClient(
    * @param requestOptions additional request configuration.
    */
   public suspend fun searchTasks(taskSearch: TaskSearch, requestOptions: RequestOptions? = null): List<Task> {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("2", "tasks", "search"),
+      body = taskSearch,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Searches for tasks using the v1 endpoint, please use `searchTasks` instead.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param taskSearch
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun searchTasksV1(taskSearch: TaskSearch, requestOptions: RequestOptions? = null): List<TaskV1> {
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "tasks", "search"),
@@ -1018,6 +1202,25 @@ public class IngestionClient(
    */
   public suspend fun updateTask(taskID: String, taskUpdate: TaskUpdate, requestOptions: RequestOptions? = null): TaskUpdateResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `updateTask`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.PATCH,
+      path = listOf("2", "tasks", "$taskID"),
+      body = taskUpdate,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
+   * @param taskID Unique identifier of a task.
+   * @param taskUpdate
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun updateTaskV1(taskID: String, taskUpdate: TaskUpdateV1, requestOptions: RequestOptions? = null): TaskUpdateResponse {
+    require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `updateTaskV1`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.PATCH,
       path = listOf("1", "tasks", "$taskID"),
