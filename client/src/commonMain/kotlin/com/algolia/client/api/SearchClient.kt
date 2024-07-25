@@ -697,7 +697,7 @@ public class SearchClient(
    * @param indexName Name of the index on which to perform the operation.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getSettings(indexName: String, requestOptions: RequestOptions? = null): IndexSettings {
+  public suspend fun getSettings(indexName: String, requestOptions: RequestOptions? = null): SettingsResponse {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `getSettings`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
