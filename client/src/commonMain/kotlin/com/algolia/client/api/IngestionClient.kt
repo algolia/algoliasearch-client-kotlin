@@ -903,6 +903,30 @@ public class IngestionClient(
   }
 
   /**
+   * Push a `batch` request payload through the Pipeline. You can check the status of task pushes with the observability endpoints.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param taskID Unique identifier of a task.
+   * @param batchWriteParams Request body of a Search API `batch` request that will be pushed in the Connectors pipeline.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun pushTask(taskID: String, batchWriteParams: BatchWriteParams, requestOptions: RequestOptions? = null): RunResponse {
+    require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `pushTask`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("2", "tasks", "$taskID", "push"),
+      body = batchWriteParams,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * Runs a task. You can check the status of task runs with the observability endpoints.
    *
    * Required API Key ACLs:
