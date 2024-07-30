@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * GetUsage400ResponseErrorErrorsInner
+ * ErrorItem
  *
  * @param message
  * @param code
@@ -13,7 +13,7 @@ import kotlinx.serialization.json.*
  * @param position
  */
 @Serializable
-public data class GetUsage400ResponseErrorErrorsInner(
+public data class ErrorItem(
 
   @SerialName(value = "message") val message: String,
 

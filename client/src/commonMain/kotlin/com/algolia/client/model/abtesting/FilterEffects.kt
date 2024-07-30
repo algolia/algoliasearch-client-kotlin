@@ -13,7 +13,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class FilterEffects(
 
-  @SerialName(value = "outliers") val outliers: FilterEffectsOutliers? = null,
+  @SerialName(value = "outliers") val outliers: OutliersFilter? = null,
 
-  @SerialName(value = "emptySearch") val emptySearch: FilterEffectsEmptySearch? = null,
+  @SerialName(value = "emptySearch") val emptySearch: EmptySearchFilter? = null,
 )

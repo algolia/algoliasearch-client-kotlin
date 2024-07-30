@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
  * @param clickCount Number of times this search has been clicked at that position.
  */
 @Serializable
-public data class ClickPositionsInner(
+public data class ClickPosition(
 
   /** Range of positions in the search results, using the pattern `[start,end]`.  For positions 11 and up, click events are summed over the specified range. `-1` indicates the end of the list of search results.  */
   @SerialName(value = "position") val position: List<Int>? = null,

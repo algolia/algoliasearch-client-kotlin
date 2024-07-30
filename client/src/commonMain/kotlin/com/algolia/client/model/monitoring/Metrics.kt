@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * InfrastructureResponseMetrics
+ * Metrics
  *
  * @param cpuUsage CPU idleness in %.
  * @param ramIndexingUsage RAM used for indexing in MB.
@@ -14,7 +14,7 @@ import kotlinx.serialization.json.*
  * @param avgBuildTime Average build time of the indices in seconds.
  */
 @Serializable
-public data class InfrastructureResponseMetrics(
+public data class Metrics(
 
   /** CPU idleness in %. */
   @SerialName(value = "cpu_usage") val cpuUsage: Map<kotlin.String, List<ProbesMetric>>? = null,

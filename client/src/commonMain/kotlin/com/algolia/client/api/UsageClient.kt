@@ -128,7 +128,7 @@ public class UsageClient(
    * @param granularity Granularity of the aggregated metrics.  - `hourly`: the maximum time range for hourly metrics is 7 days. - `daily`: the maximum time range for daily metrics is 365 days.  (default to daily)
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getIndexUsage(statistic: Statistic, indexName: String, startDate: String, endDate: String, granularity: Granularity? = null, requestOptions: RequestOptions? = null): GetUsage200Response {
+  public suspend fun getIndexUsage(statistic: Statistic, indexName: String, startDate: String, endDate: String, granularity: Granularity? = null, requestOptions: RequestOptions? = null): IndexUsage {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `getIndexUsage`." }
     require(startDate.isNotBlank()) { "Parameter `startDate` is required when calling `getIndexUsage`." }
     require(endDate.isNotBlank()) { "Parameter `endDate` is required when calling `getIndexUsage`." }
@@ -155,7 +155,7 @@ public class UsageClient(
    * @param granularity Granularity of the aggregated metrics.  - `hourly`: the maximum time range for hourly metrics is 7 days. - `daily`: the maximum time range for daily metrics is 365 days.  (default to daily)
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getUsage(statistic: Statistic, startDate: String, endDate: String, granularity: Granularity? = null, requestOptions: RequestOptions? = null): GetUsage200Response {
+  public suspend fun getUsage(statistic: Statistic, startDate: String, endDate: String, granularity: Granularity? = null, requestOptions: RequestOptions? = null): IndexUsage {
     require(startDate.isNotBlank()) { "Parameter `startDate` is required when calling `getUsage`." }
     require(endDate.isNotBlank()) { "Parameter `endDate` is required when calling `getUsage`." }
     val requestConfig = RequestConfig(

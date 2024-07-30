@@ -12,5 +12,5 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class LatencyResponse(
 
-  @SerialName(value = "metrics") val metrics: LatencyResponseMetrics? = null,
+  @SerialName(value = "metrics") val metrics: LatencyMetric? = null,
 )

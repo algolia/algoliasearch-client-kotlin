@@ -202,7 +202,7 @@ public class QuerySuggestionsClient(
    * @param indexName Query Suggestions index name.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getConfigStatus(indexName: String, requestOptions: RequestOptions? = null): GetConfigStatus200Response {
+  public suspend fun getConfigStatus(indexName: String, requestOptions: RequestOptions? = null): ConfigStatus {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `getConfigStatus`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
@@ -222,7 +222,7 @@ public class QuerySuggestionsClient(
    * @param indexName Query Suggestions index name.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getLogFile(indexName: String, requestOptions: RequestOptions? = null): GetLogFile200Response {
+  public suspend fun getLogFile(indexName: String, requestOptions: RequestOptions? = null): LogFile {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `getLogFile`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,

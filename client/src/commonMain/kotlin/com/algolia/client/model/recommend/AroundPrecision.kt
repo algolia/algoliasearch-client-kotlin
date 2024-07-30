@@ -15,7 +15,7 @@ import kotlin.jvm.JvmInline
  *
  * Implementations:
  * - [Int] - *[AroundPrecision.of]*
- * - [List<AroundPrecisionFromValueInner>] - *[AroundPrecision.of]*
+ * - [List<Range>] - *[AroundPrecision.of]*
  */
 @Serializable(AroundPrecisionSerializer::class)
 public sealed interface AroundPrecision {
@@ -25,15 +25,15 @@ public sealed interface AroundPrecision {
 
   @Serializable
   @JvmInline
-  public value class ListOfAroundPrecisionFromValueInnerValue(public val value: List<AroundPrecisionFromValueInner>) : AroundPrecision
+  public value class ListOfRangeValue(public val value: List<Range>) : AroundPrecision
 
   public companion object {
 
     public fun of(value: Int): AroundPrecision {
       return IntValue(value)
     }
-    public fun of(value: List<AroundPrecisionFromValueInner>): AroundPrecision {
-      return ListOfAroundPrecisionFromValueInnerValue(value)
+    public fun of(value: List<Range>): AroundPrecision {
+      return ListOfRangeValue(value)
     }
   }
 }
@@ -42,7 +42,7 @@ internal class AroundPrecisionSerializer : JsonContentPolymorphicSerializer<Arou
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AroundPrecision> {
     return when {
       element.isInt -> AroundPrecision.IntValue.serializer()
-      element.isJsonArrayOfObjects -> AroundPrecision.ListOfAroundPrecisionFromValueInnerValue.serializer()
+      element.isJsonArrayOfObjects -> AroundPrecision.ListOfRangeValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

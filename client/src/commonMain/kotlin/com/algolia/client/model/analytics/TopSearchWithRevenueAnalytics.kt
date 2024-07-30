@@ -39,7 +39,7 @@ public data class TopSearchWithRevenueAnalytics(
   @SerialName(value = "averageClickPosition") val averageClickPosition: Double,
 
   /** List of positions in the search results and clicks associated with this search. */
-  @SerialName(value = "clickPositions") val clickPositions: List<ClickPositionsInner>,
+  @SerialName(value = "clickPositions") val clickPositions: List<ClickPosition>,
 
   /** Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
   @SerialName(value = "conversionRate") val conversionRate: Double,

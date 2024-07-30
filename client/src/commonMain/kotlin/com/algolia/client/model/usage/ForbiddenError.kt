@@ -5,18 +5,18 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * GetUsage400ResponseError
+ * ForbiddenError
  *
  * @param code
  * @param message
  * @param errors
  */
 @Serializable
-public data class GetUsage400ResponseError(
+public data class ForbiddenError(
 
   @SerialName(value = "code") val code: String? = null,
 
   @SerialName(value = "message") val message: String? = null,
 
-  @SerialName(value = "errors") val errors: List<GetUsage400ResponseErrorErrorsInner>? = null,
+  @SerialName(value = "errors") val errors: List<ErrorItem>? = null,
 )

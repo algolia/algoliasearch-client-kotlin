@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * DockerStreamsInput
+ * The selected streams of a singer or airbyte connector.
  *
  * @param streams
  */

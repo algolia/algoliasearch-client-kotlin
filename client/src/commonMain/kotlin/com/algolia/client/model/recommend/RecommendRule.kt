@@ -17,7 +17,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class RecommendRule(
 
-  @SerialName(value = "_metadata") val metadata: RecommendRuleMetadata? = null,
+  @SerialName(value = "_metadata") val metadata: RuleMetadata? = null,
 
   /** Unique identifier of a rule object. */
   @SerialName(value = "objectID") val objectID: String? = null,

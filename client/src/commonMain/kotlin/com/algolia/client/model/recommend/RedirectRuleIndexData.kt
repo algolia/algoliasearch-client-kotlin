@@ -5,13 +5,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Rule metadata.
+ * Redirect rule data.
  *
- * @param lastUpdate Date and time when the object was updated, in RFC 3339 format.
+ * @param ruleObjectID
  */
 @Serializable
-public data class RecommendRuleMetadata(
+public data class RedirectRuleIndexData(
 
-  /** Date and time when the object was updated, in RFC 3339 format. */
-  @SerialName(value = "lastUpdate") val lastUpdate: String? = null,
+  @SerialName(value = "ruleObjectID") val ruleObjectID: String,
 )

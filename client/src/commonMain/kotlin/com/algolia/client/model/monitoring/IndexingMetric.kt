@@ -5,12 +5,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * IncidentsResponse
+ * IndexingMetric
  *
- * @param incidents
+ * @param indexing
  */
 @Serializable
-public data class IncidentsResponse(
+public data class IndexingMetric(
 
-  @SerialName(value = "incidents") val incidents: Map<kotlin.String, List<IncidentEntry>>? = null,
+  @SerialName(value = "indexing") val indexing: Map<kotlin.String, List<TimeEntry>>? = null,
 )

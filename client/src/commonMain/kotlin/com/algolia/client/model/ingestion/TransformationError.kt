@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
  * @param message A descriptive message explaining the failure.
  */
 @Serializable
-public data class TransformationTryResponseError(
+public data class TransformationError(
 
   /** The error status code. */
   @SerialName(value = "code") val code: Int? = null,

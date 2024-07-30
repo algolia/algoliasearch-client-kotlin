@@ -5,12 +5,16 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * GetServers403Response
+ * IncidentEntry
  *
- * @param reason
+ * @param t Timestamp, measured in milliseconds since the Unix epoch.
+ * @param v
  */
 @Serializable
-public data class GetServers403Response(
+public data class IncidentEntry(
 
-  @SerialName(value = "reason") val reason: String? = null,
+  /** Timestamp, measured in milliseconds since the Unix epoch. */
+  @SerialName(value = "t") val t: Long? = null,
+
+  @SerialName(value = "v") val v: Incident? = null,
 )

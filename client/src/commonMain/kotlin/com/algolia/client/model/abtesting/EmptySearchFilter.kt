@@ -5,13 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Outliers removed from the A/B test as a result of configuration settings.
+ * Empty searches removed from the A/B test as a result of configuration settings.
  *
  * @param usersCount Number of users removed from the A/B test.
  * @param trackedSearchesCount Number of tracked searches removed from the A/B test.
  */
 @Serializable
-public data class FilterEffectsOutliers(
+public data class EmptySearchFilter(
 
   /** Number of users removed from the A/B test. */
   @SerialName(value = "usersCount") val usersCount: Int? = null,

@@ -16,5 +16,5 @@ public data class TransformationTryResponse(
   /** The array of records returned by the transformation service. */
   @SerialName(value = "payloads") val payloads: List<JsonObject>,
 
-  @SerialName(value = "error") val error: TransformationTryResponseError? = null,
+  @SerialName(value = "error") val error: TransformationError? = null,
 )

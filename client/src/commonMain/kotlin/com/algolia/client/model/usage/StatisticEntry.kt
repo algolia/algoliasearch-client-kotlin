@@ -5,12 +5,16 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * GetUsage200Response
+ * StatisticEntry
  *
- * @param statistics
+ * @param t Timestamp, measured in milliseconds since the Unix epoch.
+ * @param v
  */
 @Serializable
-public data class GetUsage200Response(
+public data class StatisticEntry(
 
-  @SerialName(value = "statistics") val statistics: List<GetUsage200ResponseStatisticsInner>? = null,
+  /** Timestamp, measured in milliseconds since the Unix epoch. */
+  @SerialName(value = "t") val t: Int? = null,
+
+  @SerialName(value = "v") val v: StatisticValue? = null,
 )

@@ -28,5 +28,5 @@ public data class RedirectRuleIndexMetadata(
   /** Redirect rule status. */
   @SerialName(value = "succeed") val succeed: Boolean,
 
-  @SerialName(value = "data") val `data`: RedirectRuleIndexMetadataData,
+  @SerialName(value = "data") val `data`: RedirectRuleIndexData,
 )

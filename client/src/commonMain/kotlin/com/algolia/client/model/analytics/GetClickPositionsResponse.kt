@@ -13,5 +13,5 @@ import kotlinx.serialization.json.*
 public data class GetClickPositionsResponse(
 
   /** List of positions in the search results and clicks associated with this search. */
-  @SerialName(value = "positions") val positions: List<ClickPositionsInner>,
+  @SerialName(value = "positions") val positions: List<ClickPosition>,
 )

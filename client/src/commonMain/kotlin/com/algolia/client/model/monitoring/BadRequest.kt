@@ -5,17 +5,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * TimeInner
+ * BadRequest
  *
- * @param t Timestamp, measured in milliseconds since the Unix epoch.
- * @param v Time in ms.
+ * @param reason
  */
 @Serializable
-public data class TimeInner(
+public data class BadRequest(
 
-  /** Timestamp, measured in milliseconds since the Unix epoch. */
-  @SerialName(value = "t") val t: Long? = null,
-
-  /** Time in ms. */
-  @SerialName(value = "v") val v: Int? = null,
+  @SerialName(value = "reason") val reason: String? = null,
 )

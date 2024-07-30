@@ -12,5 +12,5 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class IndexingTimeResponse(
 
-  @SerialName(value = "metrics") val metrics: IndexingTimeResponseMetrics? = null,
+  @SerialName(value = "metrics") val metrics: IndexingMetric? = null,
 )

@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * GetConfigStatus200Response
+ * ConfigStatus
  *
  * @param indexName Name of the Query Suggestions index (case-sensitive).
  * @param isRunning Whether the creation or update of the Query Suggestions index is in progress.
@@ -14,7 +14,7 @@ import kotlinx.serialization.json.*
  * @param lastSuccessfulBuildDuration Duration of the last successful build in seconds.
  */
 @Serializable
-public data class GetConfigStatus200Response(
+public data class ConfigStatus(
 
   /** Name of the Query Suggestions index (case-sensitive). */
   @SerialName(value = "indexName") val indexName: String? = null,

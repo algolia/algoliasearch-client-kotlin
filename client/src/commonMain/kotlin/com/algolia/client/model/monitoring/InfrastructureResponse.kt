@@ -12,5 +12,5 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class InfrastructureResponse(
 
-  @SerialName(value = "metrics") val metrics: InfrastructureResponseMetrics? = null,
+  @SerialName(value = "metrics") val metrics: Metrics? = null,
 )

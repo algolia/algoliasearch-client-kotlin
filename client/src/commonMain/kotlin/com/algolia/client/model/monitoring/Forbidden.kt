@@ -5,12 +5,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * IncidentsResponse
+ * Forbidden
  *
- * @param incidents
+ * @param reason
  */
 @Serializable
-public data class IncidentsResponse(
+public data class Forbidden(
 
-  @SerialName(value = "incidents") val incidents: Map<kotlin.String, List<IncidentEntry>>? = null,
+  @SerialName(value = "reason") val reason: String? = null,
 )
