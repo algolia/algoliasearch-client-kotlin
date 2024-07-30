@@ -630,7 +630,7 @@ public class SearchClient(
    * @param attributesToRetrieve Attributes to include with the records in the response. This is useful to reduce the size of the API response. By default, all retrievable attributes are returned.  `objectID` is always retrieved.  Attributes included in `unretrievableAttributes` won't be retrieved unless the request is authenticated with the admin API key.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getObject(indexName: String, objectID: String, attributesToRetrieve: List<String>? = null, requestOptions: RequestOptions? = null): Map<kotlin.String, String> {
+  public suspend fun getObject(indexName: String, objectID: String, attributesToRetrieve: List<String>? = null, requestOptions: RequestOptions? = null): JsonObject {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `getObject`." }
     require(objectID.isNotBlank()) { "Parameter `objectID` is required when calling `getObject`." }
     val requestConfig = RequestConfig(
