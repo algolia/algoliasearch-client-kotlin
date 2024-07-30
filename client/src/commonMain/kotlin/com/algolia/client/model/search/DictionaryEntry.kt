@@ -23,7 +23,7 @@ public data class DictionaryEntry(
   /** Unique identifier for the dictionary entry. */
   val objectID: String,
 
-  val language: SupportedLanguage,
+  val language: SupportedLanguage? = null,
 
   /** Matching dictionary word for `stopwords` and `compounds` dictionaries. */
   val word: String? = null,
@@ -43,7 +43,7 @@ internal object DictionaryEntrySerializer : KSerializer<DictionaryEntry> {
 
   override val descriptor: SerialDescriptor = buildClassSerialDescriptor("DictionaryEntry") {
     element<String>("objectID")
-    element<SupportedLanguage>("language")
+    element<SupportedLanguage>("language", isOptional = true)
     element<String>("word", isOptional = true)
     element<List<String>>("words", isOptional = true)
     element<List<String>>("decomposition", isOptional = true)
@@ -55,7 +55,7 @@ internal object DictionaryEntrySerializer : KSerializer<DictionaryEntry> {
     val tree = input.decodeJsonObject()
     return DictionaryEntry(
       objectID = tree.getValue("objectID").let { input.json.decodeFromJsonElement(it) },
-      language = tree.getValue("language").let { input.json.decodeFromJsonElement(it) },
+      language = tree["language"]?.let { input.json.decodeFromJsonElement(it) },
       word = tree["word"]?.let { input.json.decodeFromJsonElement(it) },
       words = tree["words"]?.let { input.json.decodeFromJsonElement(it) },
       decomposition = tree["decomposition"]?.let { input.json.decodeFromJsonElement(it) },
@@ -68,7 +68,7 @@ internal object DictionaryEntrySerializer : KSerializer<DictionaryEntry> {
     val output = encoder.asJsonEncoder()
     val json = buildJsonObject {
       put("objectID", output.json.encodeToJsonElement(value.objectID))
-      put("language", output.json.encodeToJsonElement(value.language))
+      value.language?.let { put("language", output.json.encodeToJsonElement(it)) }
       value.word?.let { put("word", output.json.encodeToJsonElement(it)) }
       value.words?.let { put("words", output.json.encodeToJsonElement(it)) }
       value.decomposition?.let { put("decomposition", output.json.encodeToJsonElement(it)) }
