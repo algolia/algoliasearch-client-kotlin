@@ -8,13 +8,12 @@ import kotlinx.serialization.json.*
  * Update to perform on the attribute.
  *
  * @param operation
- * @param `value` Value that corresponds to the operation, for example an `Increment` or `Decrement` step, or an `Add` or `Remove` value.
+ * @param `value`
  */
 @Serializable
 public data class BuiltInOperation(
 
   @SerialName(value = "_operation") val operation: BuiltInOperationType,
 
-  /** Value that corresponds to the operation, for example an `Increment` or `Decrement` step, or an `Add` or `Remove` value. */
-  @SerialName(value = "value") val `value`: String,
+  @SerialName(value = "value") val `value`: BuiltInOperationValue,
 ) : AttributeToUpdate
