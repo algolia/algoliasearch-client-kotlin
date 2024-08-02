@@ -927,6 +927,30 @@ public class IngestionClient(
   }
 
   /**
+   * Runs all tasks linked to a source, only available for Shopify sources. It will create 1 run per task.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param sourceID Unique identifier of a source.
+   * @param runSourcePayload
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun runSource(sourceID: String, runSourcePayload: RunSourcePayload? = null, requestOptions: RequestOptions? = null): RunSourceResponse {
+    require(sourceID.isNotBlank()) { "Parameter `sourceID` is required when calling `runSource`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "sources", "$sourceID", "run"),
+      body = runSourcePayload,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * Runs a task. You can check the status of task runs with the observability endpoints.
    *
    * Required API Key ACLs:
