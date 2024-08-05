@@ -11,6 +11,7 @@ import kotlinx.serialization.json.*
  * @param name Descriptive name for the resource.
  * @param input
  * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
+ * @param transformationIDs
  */
 @Serializable
 public data class DestinationCreate(
@@ -24,4 +25,6 @@ public data class DestinationCreate(
 
   /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
+
+  @SerialName(value = "transformationIDs") val transformationIDs: List<String>? = null,
 )

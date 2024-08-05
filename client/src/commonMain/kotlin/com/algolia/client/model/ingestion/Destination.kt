@@ -14,6 +14,7 @@ import kotlinx.serialization.json.*
  * @param createdAt Date of creation in RFC 3339 format.
  * @param updatedAt Date of last update in RFC 3339 format.
  * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
+ * @param transformationIDs
  */
 @Serializable
 public data class Destination(
@@ -36,4 +37,6 @@ public data class Destination(
 
   /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
+
+  @SerialName(value = "transformationIDs") val transformationIDs: List<String>? = null,
 )
