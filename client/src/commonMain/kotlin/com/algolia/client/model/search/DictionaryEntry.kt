@@ -16,6 +16,7 @@ import kotlinx.serialization.json.*
  * @param words Matching words in the `plurals` dictionary including declensions.
  * @param decomposition Invividual components of a compound word in the `compounds` dictionary.
  * @param state
+ * @param type
  */
 @Serializable(DictionaryEntrySerializer::class)
 public data class DictionaryEntry(
@@ -36,6 +37,8 @@ public data class DictionaryEntry(
 
   val state: DictionaryEntryState? = null,
 
+  val type: DictionaryEntryType? = null,
+
   val additionalProperties: Map<String, JsonElement>? = null,
 )
 
@@ -48,6 +51,7 @@ internal object DictionaryEntrySerializer : KSerializer<DictionaryEntry> {
     element<List<String>>("words", isOptional = true)
     element<List<String>>("decomposition", isOptional = true)
     element<DictionaryEntryState>("state", isOptional = true)
+    element<DictionaryEntryType>("type", isOptional = true)
   }
 
   override fun deserialize(decoder: Decoder): DictionaryEntry {
@@ -60,6 +64,7 @@ internal object DictionaryEntrySerializer : KSerializer<DictionaryEntry> {
       words = tree["words"]?.let { input.json.decodeFromJsonElement(it) },
       decomposition = tree["decomposition"]?.let { input.json.decodeFromJsonElement(it) },
       state = tree["state"]?.let { input.json.decodeFromJsonElement(it) },
+      type = tree["type"]?.let { input.json.decodeFromJsonElement(it) },
       additionalProperties = tree.filterKeys { it !in descriptor.elementNames },
     )
   }
@@ -73,6 +78,7 @@ internal object DictionaryEntrySerializer : KSerializer<DictionaryEntry> {
       value.words?.let { put("words", output.json.encodeToJsonElement(it)) }
       value.decomposition?.let { put("decomposition", output.json.encodeToJsonElement(it)) }
       value.state?.let { put("state", output.json.encodeToJsonElement(it)) }
+      value.type?.let { put("type", output.json.encodeToJsonElement(it)) }
       value.additionalProperties?.onEach { (key, element) -> put(key, element) }
     }
     (encoder as JsonEncoder).encodeJsonElement(json)
