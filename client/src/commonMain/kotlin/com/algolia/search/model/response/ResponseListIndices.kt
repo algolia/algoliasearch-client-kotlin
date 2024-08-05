@@ -45,20 +45,29 @@ public data class ResponseListIndices(
         /**
          * Last build time in seconds.
          */
-        @SerialName(Key.LastBuildTimeS) val lastBuildTimeS: Int,
+        @SerialName(Key.LastBuildTimeS) val lastBuildTimeSOrNull: Int? = null,
         /**
          * Number of pending indexing operations.
          */
-        @SerialName(Key.NumberOfPendingTasks) val numberOfPendingTasks: Int,
+        @SerialName(Key.NumberOfPendingTasks) val numberOfPendingTasksOrNull: Int? = null,
         /**
          * A boolean which says whether the index has pending tasks.
          */
-        @SerialName(Key.PendingTask) val pendingTask: Boolean,
+        @SerialName(Key.PendingTask) val pendingTaskOrNull: Boolean? = null,
         @SerialName(Key.Replicas) val replicasOrNull: List<IndexName>? = null,
         @SerialName(Key.Primary) val primaryOrNull: IndexName? = null,
         @SerialName(Key.SourceABTest) val sourceABTestOrNull: IndexName? = null,
         @SerialName(Key.ABTest) val abTestOrNull: ResponseABTestShort? = null
     ) {
+
+        public val lastBuildTimeS: Int
+            get() = lastBuildTimeSOrNull!!
+
+        public val numberOfPendingTasks: Int
+            get() = numberOfPendingTasksOrNull!!
+
+        public val pendingTask: Boolean
+            get() = pendingTaskOrNull!!
 
         public val replicas: List<IndexName>
             get() = replicasOrNull!!
