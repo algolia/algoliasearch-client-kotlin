@@ -14,7 +14,6 @@ import kotlinx.serialization.json.*
  *
  * Implementations:
  * - [DestinationIndexName]
- * - [DestinationIndexPrefix]
  */
 @Serializable(DestinationInputSerializer::class)
 public sealed interface DestinationInput {
@@ -26,7 +25,6 @@ public sealed interface DestinationInput {
 internal class DestinationInputSerializer : JsonContentPolymorphicSerializer<DestinationInput>(DestinationInput::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<DestinationInput> {
     return when {
-      element is JsonObject -> DestinationIndexPrefix.serializer()
       element is JsonObject -> DestinationIndexName.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
