@@ -877,6 +877,26 @@ public class IngestionClient(
   }
 
   /**
+   * Retrieves a list of existing LLM transformation helpers.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun listTransformationModels(requestOptions: RequestOptions? = null): TransformationModels {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "transformations", "copilot"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * Retrieves a list of transformations.
    *
    * Required API Key ACLs:
