@@ -1,3 +1,8 @@
+# 2.1.14
+
+### Fixed
+- **Search**: `ResponseListIndices` optional props deserialization (#422)
+
 # 2.1.13
 
 ### Fixed
