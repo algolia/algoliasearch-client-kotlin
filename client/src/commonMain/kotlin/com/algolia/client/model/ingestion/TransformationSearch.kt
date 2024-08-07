@@ -7,10 +7,10 @@ import kotlinx.serialization.json.*
 /**
  * TransformationSearch
  *
- * @param transformationsIDs
+ * @param transformationIDs
  */
 @Serializable
 public data class TransformationSearch(
 
-  @SerialName(value = "transformationsIDs") val transformationsIDs: List<String>,
+  @SerialName(value = "transformationIDs") val transformationIDs: List<String>? = null,
 )
