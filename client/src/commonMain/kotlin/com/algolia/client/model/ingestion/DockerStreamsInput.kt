@@ -12,5 +12,5 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class DockerStreamsInput(
 
-  @SerialName(value = "streams") val streams: JsonObject,
+  @SerialName(value = "streams") val streams: List<DockerStreams>,
 ) : TaskInput

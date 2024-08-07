@@ -1182,7 +1182,7 @@ public class IngestionClient(
    * @param transformationTry
    * @param requestOptions additional request configuration.
    */
-  public suspend fun tryTransformations(transformationTry: TransformationTry, requestOptions: RequestOptions? = null): TransformationTryResponse {
+  public suspend fun tryTransformation(transformationTry: TransformationTry, requestOptions: RequestOptions? = null): TransformationTryResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "transformations", "try"),
