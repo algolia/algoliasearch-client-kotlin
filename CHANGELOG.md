@@ -1,3 +1,7 @@
+## [3.0.0-beta.41](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.40...3.0.0-beta.41)
+
+- [7d2ab99ce](https://github.com/algolia/api-clients-automation/commit/7d2ab99ce) feat(specs): add authentications to ingestion transformations ([#3494](https://github.com/algolia/api-clients-automation/pull/3494)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [3.0.0-beta.40](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.0.0-beta.39...3.0.0-beta.40)
 
 - [2c6147ee7](https://github.com/algolia/api-clients-automation/commit/2c6147ee7) feat(specs): add generate code endpoint to ingestion specs ([#3489](https://github.com/algolia/api-clients-automation/pull/3489)) by [@shortcuts](https://github.com/shortcuts/)
