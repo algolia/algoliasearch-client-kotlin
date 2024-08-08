@@ -11,6 +11,7 @@ import kotlinx.serialization.json.*
  * @param code The source code of the transformation.
  * @param name The uniquely identified name of your transformation.
  * @param createdAt Date of creation in RFC 3339 format.
+ * @param authenticationIDs The authentications associated for the current transformation.
  * @param description A descriptive name for your transformation of what it does.
  * @param updatedAt Date of last update in RFC 3339 format.
  */
@@ -28,6 +29,9 @@ public data class Transformation(
 
   /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
+
+  /** The authentications associated for the current transformation. */
+  @SerialName(value = "authenticationIDs") val authenticationIDs: List<String>? = null,
 
   /** A descriptive name for your transformation of what it does. */
   @SerialName(value = "description") val description: String? = null,

@@ -1195,7 +1195,7 @@ public class IngestionClient(
   }
 
   /**
-   * Try a transformation.
+   * Try a transformation before creating it.
    *
    * Required API Key ACLs:
    *   - addObject
@@ -1208,6 +1208,30 @@ public class IngestionClient(
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "transformations", "try"),
+      body = transformationTry,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Try a transformation before updating it.
+   *
+   * Required API Key ACLs:
+   *   - addObject
+   *   - deleteIndex
+   *   - editSettings
+   * @param transformationID Unique identifier of a transformation.
+   * @param transformationTry
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun tryTransformationBeforeUpdate(transformationID: String, transformationTry: TransformationTry, requestOptions: RequestOptions? = null): TransformationTryResponse {
+    require(transformationID.isNotBlank()) { "Parameter `transformationID` is required when calling `tryTransformationBeforeUpdate`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "transformations", "$transformationID", "try"),
       body = transformationTry,
     )
     return requester.execute(

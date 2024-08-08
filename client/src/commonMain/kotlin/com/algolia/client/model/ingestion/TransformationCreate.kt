@@ -10,6 +10,7 @@ import kotlinx.serialization.json.*
  * @param code The source code of the transformation.
  * @param name The uniquely identified name of your transformation.
  * @param description A descriptive name for your transformation of what it does.
+ * @param authenticationIDs The authentications associated for the current transformation.
  */
 @Serializable
 public data class TransformationCreate(
@@ -22,4 +23,7 @@ public data class TransformationCreate(
 
   /** A descriptive name for your transformation of what it does. */
   @SerialName(value = "description") val description: String? = null,
+
+  /** The authentications associated for the current transformation. */
+  @SerialName(value = "authenticationIDs") val authenticationIDs: List<String>? = null,
 )

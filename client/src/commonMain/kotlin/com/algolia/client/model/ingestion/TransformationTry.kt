@@ -9,6 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param code The source code of the transformation.
  * @param sampleRecord The record to apply the given code to.
+ * @param authentications
  */
 @Serializable
 public data class TransformationTry(
@@ -18,4 +19,6 @@ public data class TransformationTry(
 
   /** The record to apply the given code to. */
   @SerialName(value = "sampleRecord") val sampleRecord: JsonObject,
+
+  @SerialName(value = "authentications") val authentications: List<AuthenticationCreate>? = null,
 )
