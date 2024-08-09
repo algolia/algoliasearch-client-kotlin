@@ -16,10 +16,15 @@ import kotlin.jvm.JvmInline
  * Implementations:
  * - [HighlightResultOption]
  * - [List<HighlightResultOption>] - *[HighlightResult.of]*
+ * - [Map<kotlin.String, HighlightResult>] - *[HighlightResult.of]*
  * - [Map<kotlin.String, HighlightResultOption>] - *[HighlightResult.of]*
  */
 @Serializable(HighlightResultSerializer::class)
 public sealed interface HighlightResult {
+  @Serializable
+  @JvmInline
+  public value class MapOfkotlinStringHighlightResultValue(public val value: Map<kotlin.String, HighlightResult>) : HighlightResult
+
   @Serializable
   @JvmInline
   public value class MapOfkotlinStringHighlightResultOptionValue(public val value: Map<kotlin.String, HighlightResultOption>) : HighlightResult
@@ -30,7 +35,10 @@ public sealed interface HighlightResult {
 
   public companion object {
 
-    public fun of(value: Map<kotlin.String, HighlightResultOption>): HighlightResult {
+    public fun ofMapOfkotlinStringHighlightResult(value: Map<kotlin.String, HighlightResult>): HighlightResult {
+      return MapOfkotlinStringHighlightResultValue(value)
+    }
+    public fun ofMapOfkotlinStringHighlightResultOption(value: Map<kotlin.String, HighlightResultOption>): HighlightResult {
       return MapOfkotlinStringHighlightResultOptionValue(value)
     }
     public fun of(value: List<HighlightResultOption>): HighlightResult {
@@ -42,6 +50,7 @@ public sealed interface HighlightResult {
 internal class HighlightResultSerializer : JsonContentPolymorphicSerializer<HighlightResult>(HighlightResult::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<HighlightResult> {
     return when {
+      element is JsonObject -> HighlightResult.MapOfkotlinStringHighlightResultValue.serializer()
       element is JsonObject -> HighlightResultOption.serializer()
       element is JsonObject -> HighlightResult.MapOfkotlinStringHighlightResultOptionValue.serializer()
       element.isJsonArrayOfObjects -> HighlightResult.ListOfHighlightResultOptionValue.serializer()

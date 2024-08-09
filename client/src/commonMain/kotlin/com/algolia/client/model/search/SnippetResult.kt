@@ -15,11 +15,16 @@ import kotlin.jvm.JvmInline
  *
  * Implementations:
  * - [List<SnippetResultOption>] - *[SnippetResult.of]*
+ * - [Map<kotlin.String, SnippetResult>] - *[SnippetResult.of]*
  * - [Map<kotlin.String, SnippetResultOption>] - *[SnippetResult.of]*
  * - [SnippetResultOption]
  */
 @Serializable(SnippetResultSerializer::class)
 public sealed interface SnippetResult {
+  @Serializable
+  @JvmInline
+  public value class MapOfkotlinStringSnippetResultValue(public val value: Map<kotlin.String, SnippetResult>) : SnippetResult
+
   @Serializable
   @JvmInline
   public value class MapOfkotlinStringSnippetResultOptionValue(public val value: Map<kotlin.String, SnippetResultOption>) : SnippetResult
@@ -30,7 +35,10 @@ public sealed interface SnippetResult {
 
   public companion object {
 
-    public fun of(value: Map<kotlin.String, SnippetResultOption>): SnippetResult {
+    public fun ofMapOfkotlinStringSnippetResult(value: Map<kotlin.String, SnippetResult>): SnippetResult {
+      return MapOfkotlinStringSnippetResultValue(value)
+    }
+    public fun ofMapOfkotlinStringSnippetResultOption(value: Map<kotlin.String, SnippetResultOption>): SnippetResult {
       return MapOfkotlinStringSnippetResultOptionValue(value)
     }
     public fun of(value: List<SnippetResultOption>): SnippetResult {
@@ -42,6 +50,7 @@ public sealed interface SnippetResult {
 internal class SnippetResultSerializer : JsonContentPolymorphicSerializer<SnippetResult>(SnippetResult::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SnippetResult> {
     return when {
+      element is JsonObject -> SnippetResult.MapOfkotlinStringSnippetResultValue.serializer()
       element is JsonObject -> SnippetResultOption.serializer()
       element is JsonObject -> SnippetResult.MapOfkotlinStringSnippetResultOptionValue.serializer()
       element.isJsonArrayOfObjects -> SnippetResult.ListOfSnippetResultOptionValue.serializer()
