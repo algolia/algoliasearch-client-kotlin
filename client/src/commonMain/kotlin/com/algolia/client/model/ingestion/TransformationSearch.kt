@@ -12,5 +12,5 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class TransformationSearch(
 
-  @SerialName(value = "transformationIDs") val transformationIDs: List<String>? = null,
+  @SerialName(value = "transformationIDs") val transformationIDs: List<String>,
 )
