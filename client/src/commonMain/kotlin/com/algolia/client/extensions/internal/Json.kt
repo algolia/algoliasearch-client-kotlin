@@ -59,10 +59,10 @@ internal val JsonElement.isString: Boolean
  * Returns true if [JsonElement] is a [JsonArray] of primitives, false otherwise.
  */
 internal val JsonElement.isJsonArrayOfPrimitives: Boolean
-  get() = this is JsonArray && first() is JsonPrimitive
+  get() = this is JsonArray && (isEmpty() || first() is JsonPrimitive)
 
 /**
  * Returns true if [JsonElement] is a [JsonArray] of objects, false otherwise.
  */
 internal val JsonElement.isJsonArrayOfObjects: Boolean
-  get() = this is JsonArray && first() is JsonObject
+  get() = this is JsonArray && (isEmpty() || first() is JsonObject)

@@ -13,16 +13,16 @@ import kotlinx.serialization.json.*
  * EventsItems
  *
  * Implementations:
- * - [AddedToCartObjectIDsAfterSearch]
- * - [PurchasedObjectIDsAfterSearch]
  * - [AddedToCartObjectIDs]
- * - [ClickedObjectIDsAfterSearch]
- * - [PurchasedObjectIDs]
+ * - [AddedToCartObjectIDsAfterSearch]
  * - [ClickedFilters]
  * - [ClickedObjectIDs]
+ * - [ClickedObjectIDsAfterSearch]
  * - [ConvertedFilters]
  * - [ConvertedObjectIDs]
  * - [ConvertedObjectIDsAfterSearch]
+ * - [PurchasedObjectIDs]
+ * - [PurchasedObjectIDsAfterSearch]
  * - [ViewedFilters]
  * - [ViewedObjectIDs]
  */
@@ -36,13 +36,13 @@ public sealed interface EventsItems {
 internal class EventsItemsSerializer : JsonContentPolymorphicSerializer<EventsItems>(EventsItems::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<EventsItems> {
     return when {
-      element is JsonObject && element.containsKey("positions") && element.containsKey("queryID") && element.containsKey("eventType") -> ClickedObjectIDsAfterSearch.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("queryID") && element.containsKey("objectIDs") -> AddedToCartObjectIDsAfterSearch.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("objectIDs") && element.containsKey("objectData") -> PurchasedObjectIDsAfterSearch.serializer()
-      element is JsonObject && element.containsKey("queryID") && element.containsKey("eventType") -> ConvertedObjectIDsAfterSearch.serializer()
-      element is JsonObject && element.containsKey("eventType") && element.containsKey("objectIDs") -> ClickedObjectIDs.serializer()
+      element is JsonObject && element.containsKey("positions") && element.containsKey("queryID") && element.containsKey("eventType") -> ClickedObjectIDsAfterSearch.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("objectIDs") -> PurchasedObjectIDs.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("eventSubtype") && element.containsKey("objectIDs") -> AddedToCartObjectIDs.serializer()
+      element is JsonObject && element.containsKey("queryID") && element.containsKey("eventType") -> ConvertedObjectIDsAfterSearch.serializer()
+      element is JsonObject && element.containsKey("eventType") && element.containsKey("objectIDs") -> ClickedObjectIDs.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("objectIDs") -> ConvertedObjectIDs.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("filters") -> ClickedFilters.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("filters") -> ConvertedFilters.serializer()

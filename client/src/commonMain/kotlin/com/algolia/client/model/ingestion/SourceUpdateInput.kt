@@ -13,9 +13,9 @@ import kotlinx.serialization.json.*
  * SourceUpdateInput
  *
  * Implementations:
- * - [SourceGA4BigQueryExport]
  * - [SourceBigQuery]
  * - [SourceCSV]
+ * - [SourceGA4BigQueryExport]
  * - [SourceJSON]
  * - [SourceUpdateCommercetools]
  * - [SourceUpdateDocker]
@@ -31,12 +31,12 @@ public sealed interface SourceUpdateInput {
 internal class SourceUpdateInputSerializer : JsonContentPolymorphicSerializer<SourceUpdateInput>(SourceUpdateInput::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SourceUpdateInput> {
     return when {
-      element is JsonObject && element.containsKey("projectID") -> SourceBigQuery.serializer()
       element is JsonObject && element.containsKey("projectID") && element.containsKey("datasetID") && element.containsKey("tablePrefix") -> SourceGA4BigQueryExport.serializer()
+      element is JsonObject && element.containsKey("projectID") -> SourceBigQuery.serializer()
+      element is JsonObject && element.containsKey("configuration") -> SourceUpdateDocker.serializer()
       element is JsonObject -> SourceUpdateCommercetools.serializer()
       element is JsonObject -> SourceJSON.serializer()
       element is JsonObject -> SourceCSV.serializer()
-      element is JsonObject -> SourceUpdateDocker.serializer()
       element is JsonObject -> SourceUpdateShopify.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

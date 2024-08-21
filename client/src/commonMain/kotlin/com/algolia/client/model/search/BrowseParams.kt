@@ -13,8 +13,8 @@ import kotlinx.serialization.json.*
  * BrowseParams
  *
  * Implementations:
- * - [SearchParamsString]
  * - [BrowseParamsObject]
+ * - [SearchParamsString]
  */
 @Serializable(BrowseParamsSerializer::class)
 public sealed interface BrowseParams {

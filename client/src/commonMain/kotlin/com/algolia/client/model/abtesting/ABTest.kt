@@ -8,17 +8,17 @@ import kotlinx.serialization.json.*
  * ABTest
  *
  * @param abTestID Unique A/B test identifier.
- * @param clickSignificance
- * @param conversionSignificance
- * @param addToCartSignificance
- * @param purchaseSignificance
- * @param revenueSignificance
  * @param updatedAt Date and time when the A/B test was last updated, in RFC 3339 format.
  * @param createdAt Date and time when the A/B test was created, in RFC 3339 format.
  * @param endAt End date and time of the A/B test, in RFC 3339 format.
  * @param name A/B test name.
  * @param status
  * @param variants A/B test variants.  The first variant is your _control_ index, typically your production index. The second variant is an index with changed settings that you want to test against the control.
+ * @param clickSignificance
+ * @param conversionSignificance
+ * @param addToCartSignificance
+ * @param purchaseSignificance
+ * @param revenueSignificance
  * @param configuration
  */
 @Serializable
@@ -26,16 +26,6 @@ public data class ABTest(
 
   /** Unique A/B test identifier. */
   @SerialName(value = "abTestID") val abTestID: Int,
-
-  @SerialName(value = "clickSignificance") val clickSignificance: Double,
-
-  @SerialName(value = "conversionSignificance") val conversionSignificance: Double,
-
-  @SerialName(value = "addToCartSignificance") val addToCartSignificance: Double,
-
-  @SerialName(value = "purchaseSignificance") val purchaseSignificance: Double,
-
-  @SerialName(value = "revenueSignificance") val revenueSignificance: Map<kotlin.String, Double>,
 
   /** Date and time when the A/B test was last updated, in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
@@ -53,6 +43,16 @@ public data class ABTest(
 
   /** A/B test variants.  The first variant is your _control_ index, typically your production index. The second variant is an index with changed settings that you want to test against the control.  */
   @SerialName(value = "variants") val variants: List<Variant>,
+
+  @SerialName(value = "clickSignificance") val clickSignificance: Double? = null,
+
+  @SerialName(value = "conversionSignificance") val conversionSignificance: Double? = null,
+
+  @SerialName(value = "addToCartSignificance") val addToCartSignificance: Double? = null,
+
+  @SerialName(value = "purchaseSignificance") val purchaseSignificance: Double? = null,
+
+  @SerialName(value = "revenueSignificance") val revenueSignificance: Map<kotlin.String, Double>? = null,
 
   @SerialName(value = "configuration") val configuration: ABTestConfiguration? = null,
 )

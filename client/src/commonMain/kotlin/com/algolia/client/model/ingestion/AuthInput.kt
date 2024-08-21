@@ -30,10 +30,10 @@ public sealed interface AuthInput {
 internal class AuthInputSerializer : JsonContentPolymorphicSerializer<AuthInput>(AuthInput::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AuthInput> {
     return when {
-      element is JsonObject -> AuthGoogleServiceAccount.serializer()
-      element is JsonObject -> AuthBasic.serializer()
-      element is JsonObject -> AuthAPIKey.serializer()
-      element is JsonObject -> AuthOAuth.serializer()
+      element is JsonObject && element.containsKey("url") && element.containsKey("client_id") && element.containsKey("client_secret") -> AuthOAuth.serializer()
+      element is JsonObject && element.containsKey("clientEmail") && element.containsKey("privateKey") -> AuthGoogleServiceAccount.serializer()
+      element is JsonObject && element.containsKey("username") && element.containsKey("password") -> AuthBasic.serializer()
+      element is JsonObject && element.containsKey("key") -> AuthAPIKey.serializer()
       element is JsonObject -> AuthAlgolia.serializer()
       element is JsonObject -> AuthAlgoliaInsights.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")

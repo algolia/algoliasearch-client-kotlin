@@ -28,8 +28,8 @@ public sealed interface TaskCreateTrigger {
 internal class TaskCreateTriggerSerializer : JsonContentPolymorphicSerializer<TaskCreateTrigger>(TaskCreateTrigger::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TaskCreateTrigger> {
     return when {
+      element is JsonObject && element.containsKey("cron") -> ScheduleTriggerInput.serializer()
       element is JsonObject -> OnDemandTriggerInput.serializer()
-      element is JsonObject -> ScheduleTriggerInput.serializer()
       element is JsonObject -> SubscriptionTrigger.serializer()
       element is JsonObject -> StreamingTrigger.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")

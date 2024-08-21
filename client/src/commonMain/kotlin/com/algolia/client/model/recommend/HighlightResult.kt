@@ -50,8 +50,8 @@ public sealed interface HighlightResult {
 internal class HighlightResultSerializer : JsonContentPolymorphicSerializer<HighlightResult>(HighlightResult::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<HighlightResult> {
     return when {
+      element is JsonObject && element.containsKey("matchLevel") && element.containsKey("matchedWords") -> HighlightResultOption.serializer()
       element is JsonObject -> HighlightResult.MapOfkotlinStringHighlightResultValue.serializer()
-      element is JsonObject -> HighlightResultOption.serializer()
       element is JsonObject -> HighlightResult.MapOfkotlinStringHighlightResultOptionValue.serializer()
       element.isJsonArrayOfObjects -> HighlightResult.ListOfHighlightResultOptionValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")

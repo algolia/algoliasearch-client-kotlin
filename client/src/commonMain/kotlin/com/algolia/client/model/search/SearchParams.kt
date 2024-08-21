@@ -13,8 +13,8 @@ import kotlinx.serialization.json.*
  * SearchParams
  *
  * Implementations:
- * - [SearchParamsString]
  * - [SearchParamsObject]
+ * - [SearchParamsString]
  */
 @Serializable(SearchParamsSerializer::class)
 public sealed interface SearchParams {

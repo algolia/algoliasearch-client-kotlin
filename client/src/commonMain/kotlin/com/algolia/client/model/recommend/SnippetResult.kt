@@ -50,8 +50,8 @@ public sealed interface SnippetResult {
 internal class SnippetResultSerializer : JsonContentPolymorphicSerializer<SnippetResult>(SnippetResult::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SnippetResult> {
     return when {
+      element is JsonObject && element.containsKey("matchLevel") -> SnippetResultOption.serializer()
       element is JsonObject -> SnippetResult.MapOfkotlinStringSnippetResultValue.serializer()
-      element is JsonObject -> SnippetResultOption.serializer()
       element is JsonObject -> SnippetResult.MapOfkotlinStringSnippetResultOptionValue.serializer()
       element.isJsonArrayOfObjects -> SnippetResult.ListOfSnippetResultOptionValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")

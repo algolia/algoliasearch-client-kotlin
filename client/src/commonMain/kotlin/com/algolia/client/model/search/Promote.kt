@@ -26,8 +26,8 @@ public sealed interface Promote {
 internal class PromoteSerializer : JsonContentPolymorphicSerializer<Promote>(Promote::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Promote> {
     return when {
-      element is JsonObject -> PromoteObjectIDs.serializer()
-      element is JsonObject -> PromoteObjectID.serializer()
+      element is JsonObject && element.containsKey("objectIDs") -> PromoteObjectIDs.serializer()
+      element is JsonObject && element.containsKey("objectID") -> PromoteObjectID.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

@@ -26,8 +26,8 @@ public sealed interface AddABTestsVariant {
 internal class AddABTestsVariantSerializer : JsonContentPolymorphicSerializer<AddABTestsVariant>(AddABTestsVariant::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AddABTestsVariant> {
     return when {
+      element is JsonObject && element.containsKey("customSearchParameters") -> AbTestsVariantSearchParams.serializer()
       element is JsonObject -> AbTestsVariant.serializer()
-      element is JsonObject -> AbTestsVariantSearchParams.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
