@@ -57,5 +57,5 @@ public data class TopHitWithRevenueAnalytics(
   @SerialName(value = "purchaseCount") val purchaseCount: Int,
 
   /** Revenue associated with this search, broken-down by currencies. */
-  @SerialName(value = "currencies") val currencies: Map<kotlin.String, CurrenciesValue>,
+  @SerialName(value = "currencies") val currencies: Map<kotlin.String, CurrencyCode>,
 )

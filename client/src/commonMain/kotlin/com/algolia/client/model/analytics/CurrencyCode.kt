@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
  * @param revenue Revenue associated with this search in this currency.
  */
 @Serializable
-public data class CurrenciesValue(
+public data class CurrencyCode(
 
   /** Currency code. */
   @SerialName(value = "currency") val currency: String? = null,

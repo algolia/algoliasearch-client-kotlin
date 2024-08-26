@@ -99,7 +99,7 @@ public data class SearchResponse(
   val facets: Map<kotlin.String, Map<kotlin.String, Int>>? = null,
 
   /** Statistics for numerical facets. */
-  val facetsStats: Map<kotlin.String, FacetsStats>? = null,
+  val facetsStats: Map<kotlin.String, FacetStats>? = null,
 
   /** Index name used for the query. */
   val index: String? = null,
@@ -161,7 +161,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
     element<Boolean>("exhaustiveNbHits", isOptional = true)
     element<Boolean>("exhaustiveTypo", isOptional = true)
     element<Map<kotlin.String, Map<kotlin.String, Int>>>("facets", isOptional = true)
-    element<Map<kotlin.String, FacetsStats>>("facets_stats", isOptional = true)
+    element<Map<kotlin.String, FacetStats>>("facets_stats", isOptional = true)
     element<String>("index", isOptional = true)
     element<String>("indexUsed", isOptional = true)
     element<String>("message", isOptional = true)

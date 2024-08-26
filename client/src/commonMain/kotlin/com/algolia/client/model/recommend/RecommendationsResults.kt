@@ -87,7 +87,7 @@ public data class RecommendationsResults(
   @SerialName(value = "facets") val facets: Map<kotlin.String, Map<kotlin.String, Int>>? = null,
 
   /** Statistics for numerical facets. */
-  @SerialName(value = "facets_stats") val facetsStats: Map<kotlin.String, FacetsStats>? = null,
+  @SerialName(value = "facets_stats") val facetsStats: Map<kotlin.String, FacetStats>? = null,
 
   /** Index name used for the query. */
   @SerialName(value = "index") val index: String? = null,

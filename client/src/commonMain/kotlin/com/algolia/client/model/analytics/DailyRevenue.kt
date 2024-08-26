@@ -14,7 +14,7 @@ import kotlinx.serialization.json.*
 public data class DailyRevenue(
 
   /** Revenue associated with this search, broken-down by currencies. */
-  @SerialName(value = "currencies") val currencies: Map<kotlin.String, CurrenciesValue>,
+  @SerialName(value = "currencies") val currencies: Map<kotlin.String, CurrencyCode>,
 
   /** Date in the format YYYY-MM-DD. */
   @SerialName(value = "date") val date: String,
