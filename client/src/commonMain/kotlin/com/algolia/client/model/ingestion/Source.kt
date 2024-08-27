@@ -10,8 +10,8 @@ import kotlinx.serialization.json.*
  * @param sourceID Universally uniqud identifier (UUID) of a source.
  * @param type
  * @param name
- * @param input
  * @param createdAt Date of creation in RFC 3339 format.
+ * @param input
  * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
  * @param updatedAt Date of last update in RFC 3339 format.
  */
@@ -25,10 +25,10 @@ public data class Source(
 
   @SerialName(value = "name") val name: String,
 
-  @SerialName(value = "input") val input: SourceInput,
-
   /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
+
+  @SerialName(value = "input") val input: SourceInput? = null,
 
   /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,

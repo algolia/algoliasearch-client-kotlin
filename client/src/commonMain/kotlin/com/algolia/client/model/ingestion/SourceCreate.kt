@@ -20,7 +20,7 @@ public data class SourceCreate(
   /** Descriptive name of the source. */
   @SerialName(value = "name") val name: String,
 
-  @SerialName(value = "input") val input: SourceInput,
+  @SerialName(value = "input") val input: SourceInput? = null,
 
   /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
