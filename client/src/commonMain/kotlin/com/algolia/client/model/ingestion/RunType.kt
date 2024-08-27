@@ -16,7 +16,13 @@ public enum class RunType(public val value: kotlin.String) {
   Update("update"),
 
   @SerialName(value = "discover")
-  Discover("discover");
+  Discover("discover"),
+
+  @SerialName(value = "validate")
+  Validate("validate"),
+
+  @SerialName(value = "push")
+  Push("push");
 
   override fun toString(): kotlin.String = value
 }

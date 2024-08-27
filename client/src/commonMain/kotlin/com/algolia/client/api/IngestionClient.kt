@@ -756,6 +756,7 @@ public class IngestionClient(
    * @param itemsPerPage Number of items per page. (default to 10)
    * @param page Page number of the paginated API response.
    * @param status Run status for filtering the list of task runs.
+   * @param type Run type for filtering the list of task runs.
    * @param taskID Task ID for filtering the list of task runs.
    * @param sort Property by which to sort the list of task runs. (default to createdAt)
    * @param order Sort order of the response, ascending or descending. (default to desc)
@@ -763,7 +764,7 @@ public class IngestionClient(
    * @param endDate Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun listRuns(itemsPerPage: Int? = null, page: Int? = null, status: List<RunStatus>? = null, taskID: String? = null, sort: RunSortKeys? = null, order: OrderKeys? = null, startDate: String? = null, endDate: String? = null, requestOptions: RequestOptions? = null): RunListResponse {
+  public suspend fun listRuns(itemsPerPage: Int? = null, page: Int? = null, status: List<RunStatus>? = null, type: List<RunType>? = null, taskID: String? = null, sort: RunSortKeys? = null, order: OrderKeys? = null, startDate: String? = null, endDate: String? = null, requestOptions: RequestOptions? = null): RunListResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
       path = listOf("1", "runs"),
@@ -771,6 +772,7 @@ public class IngestionClient(
         itemsPerPage?.let { put("itemsPerPage", it) }
         page?.let { put("page", it) }
         status?.let { put("status", it.joinToString(",")) }
+        type?.let { put("type", it.joinToString(",")) }
         taskID?.let { put("taskID", it) }
         sort?.let { put("sort", it) }
         order?.let { put("order", it) }
