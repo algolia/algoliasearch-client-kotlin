@@ -17,6 +17,7 @@ import kotlin.jvm.JvmInline
  * - [BuiltInOperation]
  * - [String] - *[AttributeToUpdate.of]*
  */
+@Deprecated(message = "This schema is deprecated.")
 @Serializable(AttributeToUpdateSerializer::class)
 public sealed interface AttributeToUpdate {
   @Serializable
