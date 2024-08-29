@@ -958,15 +958,15 @@ public class IngestionClient(
    *   - deleteIndex
    *   - editSettings
    * @param taskID Unique identifier of a task.
-   * @param batchWriteParams Request body of a Search API `batch` request that will be pushed in the Connectors pipeline.
+   * @param pushTaskPayload Request body of a Search API `batch` request that will be pushed in the Connectors pipeline.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun pushTask(taskID: String, batchWriteParams: BatchWriteParams, requestOptions: RequestOptions? = null): RunResponse {
+  public suspend fun pushTask(taskID: String, pushTaskPayload: PushTaskPayload, requestOptions: RequestOptions? = null): RunResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `pushTask`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("2", "tasks", "$taskID", "push"),
-      body = batchWriteParams,
+      body = pushTaskPayload,
     )
     return requester.execute(
       requestConfig = requestConfig,

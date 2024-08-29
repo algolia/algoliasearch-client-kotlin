@@ -5,16 +5,15 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * BatchRequest
+ * PushTaskPayload
  *
  * @param action
- * @param body Operation arguments (varies with specified `action`).
+ * @param records
  */
 @Serializable
-public data class BatchRequest(
+public data class PushTaskPayload(
 
   @SerialName(value = "action") val action: Action,
 
-  /** Operation arguments (varies with specified `action`). */
-  @SerialName(value = "body") val body: JsonObject,
+  @SerialName(value = "records") val records: List<PushTaskRecords>,
 )
