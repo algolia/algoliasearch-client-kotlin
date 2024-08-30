@@ -21,7 +21,9 @@ public class MonitoringClient(
   }
 
   override val requester: Requester = requesterOf(clientName = "Monitoring", appId = appId, apiKey = apiKey, options = options) {
-    listOf(Host("status.algolia.com"))
+    listOf(
+      Host("status.algolia.com"),
+    )
   }
 
   /**
