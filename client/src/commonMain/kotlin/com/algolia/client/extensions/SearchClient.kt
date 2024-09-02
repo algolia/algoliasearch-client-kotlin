@@ -86,6 +86,26 @@ public suspend fun SearchClient.waitForApiKey(
  * @param maxRetries maximum number of retry attempts.
  * @param requestOptions additional request configuration.
  */
+public suspend fun SearchClient.waitForTask(
+  indexName: String,
+  taskID: Long,
+  maxRetries: Int = 50,
+  timeout: Duration = Duration.INFINITE,
+  initialDelay: Duration = 200.milliseconds,
+  maxDelay: Duration = 5.seconds,
+  requestOptions: RequestOptions? = null,
+): GetTaskResponse {
+  return retryUntil(
+    timeout = timeout,
+    maxRetries = maxRetries,
+    initialDelay = initialDelay,
+    maxDelay = maxDelay,
+    retry = { getTask(indexName, taskID, requestOptions) },
+    until = { it.status == TaskStatus.Published },
+  )
+}
+
+@Deprecated("Please use waitForTask instead", ReplaceWith("waitForTask(indexName, taskID, maxRetries, timeout, initialDelay, maxDelay, requestOptions)"))
 public suspend fun SearchClient.waitTask(
   indexName: String,
   taskID: Long,
@@ -95,14 +115,15 @@ public suspend fun SearchClient.waitTask(
   maxDelay: Duration = 5.seconds,
   requestOptions: RequestOptions? = null,
 ): TaskStatus {
-  return retryUntil(
-    timeout = timeout,
+  return waitForTask(
+    indexName = indexName,
+    taskID = taskID,
     maxRetries = maxRetries,
+    timeout = timeout,
     initialDelay = initialDelay,
     maxDelay = maxDelay,
-    retry = { getTask(indexName, taskID, requestOptions).status },
-    until = { it == TaskStatus.Published },
-  )
+    requestOptions = requestOptions,
+  ).status
 }
 
 /**
@@ -115,6 +136,25 @@ public suspend fun SearchClient.waitTask(
  * @param maxRetries maximum number of retry attempts.
  * @param requestOptions additional request configuration.
  */
+public suspend fun SearchClient.waitForAppTask(
+  taskID: Long,
+  maxRetries: Int = 50,
+  timeout: Duration = Duration.INFINITE,
+  initialDelay: Duration = 200.milliseconds,
+  maxDelay: Duration = 5.seconds,
+  requestOptions: RequestOptions? = null,
+): GetTaskResponse {
+  return retryUntil(
+    timeout = timeout,
+    maxRetries = maxRetries,
+    initialDelay = initialDelay,
+    maxDelay = maxDelay,
+    retry = { getAppTask(taskID, requestOptions) },
+    until = { it.status == TaskStatus.Published },
+  )
+}
+
+@Deprecated("Please use waitForAppTask instead", ReplaceWith("waitForAppTask(taskID, maxRetries, timeout, initialDelay, maxDelay, requestOptions)"))
 public suspend fun SearchClient.waitAppTask(
   taskID: Long,
   maxRetries: Int = 50,
@@ -123,14 +163,14 @@ public suspend fun SearchClient.waitAppTask(
   maxDelay: Duration = 5.seconds,
   requestOptions: RequestOptions? = null,
 ): TaskStatus {
-  return retryUntil(
-    timeout = timeout,
+  return waitForAppTask(
+    taskID = taskID,
     maxRetries = maxRetries,
+    timeout = timeout,
     initialDelay = initialDelay,
     maxDelay = maxDelay,
-    retry = { getAppTask(taskID, requestOptions).status },
-    until = { it == TaskStatus.Published },
-  )
+    requestOptions = requestOptions,
+  ).status
 }
 
 /**
@@ -312,7 +352,7 @@ public suspend fun SearchClient.chunkedBatch(
     tasks.add(batch)
   }
   if (waitForTask) {
-    tasks.forEach { waitTask(indexName, it.taskID) }
+    tasks.forEach { waitForTask(indexName, it.taskID) }
   }
   return tasks
 }
@@ -431,7 +471,7 @@ public suspend fun SearchClient.replaceAllObjects(
     requestOptions = requestOptions,
   )
 
-  waitTask(indexName = tmpIndexName, taskID = copy.taskID)
+  waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
 
   copy = operationIndex(
     indexName = indexName,
@@ -442,14 +482,14 @@ public suspend fun SearchClient.replaceAllObjects(
     ),
     requestOptions = requestOptions,
   )
-  waitTask(indexName = tmpIndexName, taskID = copy.taskID)
+  waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
 
   val move = operationIndex(
     indexName = tmpIndexName,
     operationIndexParams = OperationIndexParams(operation = OperationType.Move, destination = indexName),
     requestOptions = requestOptions,
   )
-  waitTask(indexName = tmpIndexName, taskID = move.taskID)
+  waitForTask(indexName = tmpIndexName, taskID = move.taskID)
 
   return ReplaceAllObjectsResponse(copy, batchResponses, move)
 }
