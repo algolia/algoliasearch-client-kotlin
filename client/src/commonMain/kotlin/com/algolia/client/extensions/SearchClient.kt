@@ -521,3 +521,16 @@ public fun securedApiKeyRemainingValidity(apiKey: String): Duration {
   val validUntil = Instant.fromEpochMilliseconds(match.groupValues[1].toLong())
   return validUntil - Clock.System.now()
 }
+
+public suspend fun SearchClient.indexExists(indexName: String): Boolean {
+  try {
+    getSettings(indexName)
+  } catch (e: AlgoliaApiException) {
+    if (e.httpErrorCode == 404) {
+      return false
+    }
+    throw e
+  }
+
+  return true
+}
