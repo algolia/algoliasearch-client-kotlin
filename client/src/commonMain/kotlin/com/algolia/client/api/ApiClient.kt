@@ -12,7 +12,15 @@ import com.algolia.client.transport.Requester
  */
 public sealed interface ApiClient {
   public val appId: String
-  public val apiKey: String
+  public var apiKey: String
   public val options: ClientOptions
   public val requester: Requester
+
+  /**
+   * Helper method to switch the API key used to authenticate requests.
+   */
+  public fun setClientApiKey(apiKey: String) {
+    this.apiKey = apiKey
+    this.requester.setClientApiKey(apiKey)
+  }
 }

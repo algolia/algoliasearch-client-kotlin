@@ -9,7 +9,7 @@ import io.ktor.client.request.*
 import io.ktor.serialization.kotlinx.json.*
 
 private const val HEADER_APPLICATION_ID = "x-algolia-application-id"
-private const val HEADER_APIKEY = "x-algolia-api-key"
+public const val HEADER_APIKEY: String = "x-algolia-api-key"
 
 internal fun algoliaHttpClient(
   appId: String,

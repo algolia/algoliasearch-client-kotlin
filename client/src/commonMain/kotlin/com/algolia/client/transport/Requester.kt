@@ -30,4 +30,6 @@ public interface Requester {
     requestOptions: RequestOptions? = null,
     returnType: TypeInfo,
   ): T
+
+  public fun setClientApiKey(apiKey: String)
 }

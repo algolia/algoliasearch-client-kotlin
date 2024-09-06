@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
 
 public class SearchClient(
   override val appId: String,
-  override val apiKey: String,
+  override var apiKey: String,
   override val options: ClientOptions = ClientOptions(),
 ) : ApiClient {
 

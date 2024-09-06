@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
 
 public class InsightsClient(
   override val appId: String,
-  override val apiKey: String,
+  override var apiKey: String,
   public val region: String? = null,
   override val options: ClientOptions = ClientOptions(),
 ) : ApiClient {
