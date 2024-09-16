@@ -8,10 +8,6 @@ import kotlinx.serialization.json.*
  * RecommendationsResults
  *
  * @param processingTimeMS Time the server took to process the request, in milliseconds.
- * @param page Page of search results to retrieve.
- * @param nbHits Number of results (hits).
- * @param nbPages Number of pages of results.
- * @param hitsPerPage Number of hits per page.
  * @param hits
  * @param abTestID A/B test ID. This is only included in the response for indices that are part of an A/B test.
  * @param abTestVariantID Variant ID. This is only included in the response for indices that are part of an A/B test.
@@ -37,24 +33,16 @@ import kotlinx.serialization.json.*
  * @param userData An object with custom data.  You can store up to 32kB as custom data.
  * @param queryID Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/).
  * @param automaticInsights Whether automatic events collection is enabled for the application.
+ * @param page Page of search results to retrieve.
+ * @param nbHits Number of results (hits).
+ * @param nbPages Number of pages of results.
+ * @param hitsPerPage Number of hits per page.
  */
 @Serializable
 public data class RecommendationsResults(
 
   /** Time the server took to process the request, in milliseconds. */
   @SerialName(value = "processingTimeMS") val processingTimeMS: Int,
-
-  /** Page of search results to retrieve. */
-  @SerialName(value = "page") val page: Int,
-
-  /** Number of results (hits). */
-  @SerialName(value = "nbHits") val nbHits: Int,
-
-  /** Number of pages of results. */
-  @SerialName(value = "nbPages") val nbPages: Int,
-
-  /** Number of hits per page. */
-  @SerialName(value = "hitsPerPage") val hitsPerPage: Int,
 
   @SerialName(value = "hits") val hits: List<RecommendationsHit>,
 
@@ -129,4 +117,16 @@ public data class RecommendationsResults(
 
   /** Whether automatic events collection is enabled for the application. */
   @SerialName(value = "_automaticInsights") val automaticInsights: Boolean? = null,
+
+  /** Page of search results to retrieve. */
+  @SerialName(value = "page") val page: Int? = null,
+
+  /** Number of results (hits). */
+  @SerialName(value = "nbHits") val nbHits: Int? = null,
+
+  /** Number of pages of results. */
+  @SerialName(value = "nbPages") val nbPages: Int? = null,
+
+  /** Number of hits per page. */
+  @SerialName(value = "hitsPerPage") val hitsPerPage: Int? = null,
 )

@@ -15,9 +15,8 @@ import kotlin.jvm.JvmInline
  *
  * Implementations:
  * - [HighlightResultOption]
- * - [List<HighlightResultOption>] - *[HighlightResult.of]*
+ * - [List<HighlightResult>] - *[HighlightResult.of]*
  * - [Map<kotlin.String, HighlightResult>] - *[HighlightResult.of]*
- * - [Map<kotlin.String, HighlightResultOption>] - *[HighlightResult.of]*
  */
 @Serializable(HighlightResultSerializer::class)
 public sealed interface HighlightResult {
@@ -27,22 +26,15 @@ public sealed interface HighlightResult {
 
   @Serializable
   @JvmInline
-  public value class MapOfkotlinStringHighlightResultOptionValue(public val value: Map<kotlin.String, HighlightResultOption>) : HighlightResult
-
-  @Serializable
-  @JvmInline
-  public value class ListOfHighlightResultOptionValue(public val value: List<HighlightResultOption>) : HighlightResult
+  public value class ListOfHighlightResultValue(public val value: List<HighlightResult>) : HighlightResult
 
   public companion object {
 
-    public fun ofMapOfkotlinStringHighlightResult(value: Map<kotlin.String, HighlightResult>): HighlightResult {
+    public fun of(value: Map<kotlin.String, HighlightResult>): HighlightResult {
       return MapOfkotlinStringHighlightResultValue(value)
     }
-    public fun ofMapOfkotlinStringHighlightResultOption(value: Map<kotlin.String, HighlightResultOption>): HighlightResult {
-      return MapOfkotlinStringHighlightResultOptionValue(value)
-    }
-    public fun of(value: List<HighlightResultOption>): HighlightResult {
-      return ListOfHighlightResultOptionValue(value)
+    public fun of(value: List<HighlightResult>): HighlightResult {
+      return ListOfHighlightResultValue(value)
     }
   }
 }
@@ -52,8 +44,7 @@ internal class HighlightResultSerializer : JsonContentPolymorphicSerializer<High
     return when {
       element is JsonObject && element.containsKey("matchLevel") && element.containsKey("matchedWords") -> HighlightResultOption.serializer()
       element is JsonObject -> HighlightResult.MapOfkotlinStringHighlightResultValue.serializer()
-      element is JsonObject -> HighlightResult.MapOfkotlinStringHighlightResultOptionValue.serializer()
-      element.isJsonArrayOfObjects -> HighlightResult.ListOfHighlightResultOptionValue.serializer()
+      element.isJsonArrayOfObjects -> HighlightResult.ListOfHighlightResultValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
