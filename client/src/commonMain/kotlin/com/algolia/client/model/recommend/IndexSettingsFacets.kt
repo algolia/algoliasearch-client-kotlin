@@ -10,7 +10,7 @@ import kotlinx.serialization.json.*
  * @param order Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list.
  */
 @Serializable
-public data class Facets(
+public data class IndexSettingsFacets(
 
   /** Explicit order of facets or facet values.  This setting lets you always show specific facets or facet values at the top of the list.  */
   @SerialName(value = "order") val order: List<String>? = null,

@@ -439,28 +439,6 @@ public class IngestionClient(
   }
 
   /**
-   * Generates code for the selected model based on the given prompt.
-   *
-   * Required API Key ACLs:
-   *   - addObject
-   *   - deleteIndex
-   *   - editSettings
-   * @param generateTransformationCodePayload
-   * @param requestOptions additional request configuration.
-   */
-  public suspend fun generateTransformationCode(generateTransformationCodePayload: GenerateTransformationCodePayload, requestOptions: RequestOptions? = null): GenerateTransformationCodeResponse {
-    val requestConfig = RequestConfig(
-      method = RequestMethod.POST,
-      path = listOf("1", "transformations", "models"),
-      body = generateTransformationCodePayload,
-    )
-    return requester.execute(
-      requestConfig = requestConfig,
-      requestOptions = requestOptions,
-    )
-  }
-
-  /**
    * Retrieves an authentication resource by its ID.
    *
    * Required API Key ACLs:
@@ -893,26 +871,6 @@ public class IngestionClient(
         sort?.let { put("sort", it) }
         order?.let { put("order", it) }
       },
-    )
-    return requester.execute(
-      requestConfig = requestConfig,
-      requestOptions = requestOptions,
-    )
-  }
-
-  /**
-   * Retrieves a list of existing LLM transformation helpers.
-   *
-   * Required API Key ACLs:
-   *   - addObject
-   *   - deleteIndex
-   *   - editSettings
-   * @param requestOptions additional request configuration.
-   */
-  public suspend fun listTransformationModels(requestOptions: RequestOptions? = null): TransformationModels {
-    val requestConfig = RequestConfig(
-      method = RequestMethod.GET,
-      path = listOf("1", "transformations", "models"),
     )
     return requester.execute(
       requestConfig = requestConfig,
