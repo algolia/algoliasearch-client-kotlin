@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * Configuration of the task, depending on its type.
@@ -19,8 +20,29 @@ import kotlinx.serialization.json.*
  */
 @Serializable(TaskInputSerializer::class)
 public sealed interface TaskInput {
+  @Serializable
+  @JvmInline
+  public value class StreamingInputValue(public val value: StreamingInput) : TaskInput
+
+  @Serializable
+  @JvmInline
+  public value class DockerStreamsInputValue(public val value: DockerStreamsInput) : TaskInput
+
+  @Serializable
+  @JvmInline
+  public value class ShopifyInputValue(public val value: ShopifyInput) : TaskInput
 
   public companion object {
+
+    public fun of(value: StreamingInput): TaskInput {
+      return StreamingInputValue(value)
+    }
+    public fun of(value: DockerStreamsInput): TaskInput {
+      return DockerStreamsInputValue(value)
+    }
+    public fun of(value: ShopifyInput): TaskInput {
+      return ShopifyInputValue(value)
+    }
   }
 }
 

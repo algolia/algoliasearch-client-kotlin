@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * AddABTestsVariant
@@ -18,8 +19,22 @@ import kotlinx.serialization.json.*
  */
 @Serializable(AddABTestsVariantSerializer::class)
 public sealed interface AddABTestsVariant {
+  @Serializable
+  @JvmInline
+  public value class AbTestsVariantSearchParamsValue(public val value: AbTestsVariantSearchParams) : AddABTestsVariant
+
+  @Serializable
+  @JvmInline
+  public value class AbTestsVariantValue(public val value: AbTestsVariant) : AddABTestsVariant
 
   public companion object {
+
+    public fun of(value: AbTestsVariantSearchParams): AddABTestsVariant {
+      return AbTestsVariantSearchParamsValue(value)
+    }
+    public fun of(value: AbTestsVariant): AddABTestsVariant {
+      return AbTestsVariantValue(value)
+    }
   }
 }
 

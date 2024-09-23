@@ -21,10 +21,17 @@ import kotlin.jvm.JvmInline
 public sealed interface ConsequenceQuery {
   @Serializable
   @JvmInline
+  public value class ConsequenceQueryObjectValue(public val value: ConsequenceQueryObject) : ConsequenceQuery
+
+  @Serializable
+  @JvmInline
   public value class StringValue(public val value: String) : ConsequenceQuery
 
   public companion object {
 
+    public fun of(value: ConsequenceQueryObject): ConsequenceQuery {
+      return ConsequenceQueryObjectValue(value)
+    }
     public fun of(value: String): ConsequenceQuery {
       return StringValue(value)
     }

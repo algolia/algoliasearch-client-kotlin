@@ -23,10 +23,17 @@ public sealed interface AroundRadius {
   @JvmInline
   public value class IntValue(public val value: Int) : AroundRadius
 
+  @Serializable
+  @JvmInline
+  public value class AroundRadiusAllValue(public val value: AroundRadiusAll) : AroundRadius
+
   public companion object {
 
     public fun of(value: Int): AroundRadius {
       return IntValue(value)
+    }
+    public fun of(value: AroundRadiusAll): AroundRadius {
+      return AroundRadiusAllValue(value)
     }
   }
 }

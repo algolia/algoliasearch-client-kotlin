@@ -41,7 +41,7 @@ public sealed interface OptionalFilters {
 internal class OptionalFiltersSerializer : JsonContentPolymorphicSerializer<OptionalFilters>(OptionalFilters::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<OptionalFilters> {
     return when {
-      element.isJsonArrayOfObjects -> OptionalFilters.ListOfOptionalFiltersValue.serializer()
+      element is JsonArray -> OptionalFilters.ListOfOptionalFiltersValue.serializer()
       element.isString -> OptionalFilters.StringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

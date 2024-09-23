@@ -22,6 +22,10 @@ import kotlin.jvm.JvmInline
 public sealed interface HighlightResult {
   @Serializable
   @JvmInline
+  public value class HighlightResultOptionValue(public val value: HighlightResultOption) : HighlightResult
+
+  @Serializable
+  @JvmInline
   public value class MapOfkotlinStringHighlightResultValue(public val value: Map<kotlin.String, HighlightResult>) : HighlightResult
 
   @Serializable
@@ -30,6 +34,9 @@ public sealed interface HighlightResult {
 
   public companion object {
 
+    public fun of(value: HighlightResultOption): HighlightResult {
+      return HighlightResultOptionValue(value)
+    }
     public fun of(value: Map<kotlin.String, HighlightResult>): HighlightResult {
       return MapOfkotlinStringHighlightResultValue(value)
     }
@@ -44,7 +51,7 @@ internal class HighlightResultSerializer : JsonContentPolymorphicSerializer<High
     return when {
       element is JsonObject && element.containsKey("matchLevel") && element.containsKey("matchedWords") -> HighlightResultOption.serializer()
       element is JsonObject -> HighlightResult.MapOfkotlinStringHighlightResultValue.serializer()
-      element.isJsonArrayOfObjects -> HighlightResult.ListOfHighlightResultValue.serializer()
+      element is JsonArray -> HighlightResult.ListOfHighlightResultValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

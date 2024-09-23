@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * Trigger that runs the task.
@@ -20,8 +21,36 @@ import kotlinx.serialization.json.*
  */
 @Serializable(TriggerSerializer::class)
 public sealed interface Trigger {
+  @Serializable
+  @JvmInline
+  public value class OnDemandTriggerValue(public val value: OnDemandTrigger) : Trigger
+
+  @Serializable
+  @JvmInline
+  public value class ScheduleTriggerValue(public val value: ScheduleTrigger) : Trigger
+
+  @Serializable
+  @JvmInline
+  public value class SubscriptionTriggerValue(public val value: SubscriptionTrigger) : Trigger
+
+  @Serializable
+  @JvmInline
+  public value class StreamingTriggerValue(public val value: StreamingTrigger) : Trigger
 
   public companion object {
+
+    public fun of(value: OnDemandTrigger): Trigger {
+      return OnDemandTriggerValue(value)
+    }
+    public fun of(value: ScheduleTrigger): Trigger {
+      return ScheduleTriggerValue(value)
+    }
+    public fun of(value: SubscriptionTrigger): Trigger {
+      return SubscriptionTriggerValue(value)
+    }
+    public fun of(value: StreamingTrigger): Trigger {
+      return StreamingTriggerValue(value)
+    }
   }
 }
 

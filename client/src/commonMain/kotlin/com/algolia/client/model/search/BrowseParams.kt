@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * BrowseParams
@@ -18,8 +19,22 @@ import kotlinx.serialization.json.*
  */
 @Serializable(BrowseParamsSerializer::class)
 public sealed interface BrowseParams {
+  @Serializable
+  @JvmInline
+  public value class SearchParamsStringValue(public val value: SearchParamsString) : BrowseParams
+
+  @Serializable
+  @JvmInline
+  public value class BrowseParamsObjectValue(public val value: BrowseParamsObject) : BrowseParams
 
   public companion object {
+
+    public fun of(value: SearchParamsString): BrowseParams {
+      return SearchParamsStringValue(value)
+    }
+    public fun of(value: BrowseParamsObject): BrowseParams {
+      return BrowseParamsObjectValue(value)
+    }
   }
 }
 

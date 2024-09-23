@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * TaskCreateTrigger
@@ -20,8 +21,36 @@ import kotlinx.serialization.json.*
  */
 @Serializable(TaskCreateTriggerSerializer::class)
 public sealed interface TaskCreateTrigger {
+  @Serializable
+  @JvmInline
+  public value class ScheduleTriggerInputValue(public val value: ScheduleTriggerInput) : TaskCreateTrigger
+
+  @Serializable
+  @JvmInline
+  public value class OnDemandTriggerInputValue(public val value: OnDemandTriggerInput) : TaskCreateTrigger
+
+  @Serializable
+  @JvmInline
+  public value class SubscriptionTriggerValue(public val value: SubscriptionTrigger) : TaskCreateTrigger
+
+  @Serializable
+  @JvmInline
+  public value class StreamingTriggerValue(public val value: StreamingTrigger) : TaskCreateTrigger
 
   public companion object {
+
+    public fun of(value: ScheduleTriggerInput): TaskCreateTrigger {
+      return ScheduleTriggerInputValue(value)
+    }
+    public fun of(value: OnDemandTriggerInput): TaskCreateTrigger {
+      return OnDemandTriggerInputValue(value)
+    }
+    public fun of(value: SubscriptionTrigger): TaskCreateTrigger {
+      return SubscriptionTriggerValue(value)
+    }
+    public fun of(value: StreamingTrigger): TaskCreateTrigger {
+      return StreamingTriggerValue(value)
+    }
   }
 }
 

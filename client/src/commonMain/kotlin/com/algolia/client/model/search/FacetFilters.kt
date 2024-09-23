@@ -41,7 +41,7 @@ public sealed interface FacetFilters {
 internal class FacetFiltersSerializer : JsonContentPolymorphicSerializer<FacetFilters>(FacetFilters::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<FacetFilters> {
     return when {
-      element.isJsonArrayOfObjects -> FacetFilters.ListOfFacetFiltersValue.serializer()
+      element is JsonArray -> FacetFilters.ListOfFacetFiltersValue.serializer()
       element.isString -> FacetFilters.StringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

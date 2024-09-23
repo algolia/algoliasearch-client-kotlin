@@ -26,12 +26,19 @@ public sealed interface IgnorePlurals {
 
   @Serializable
   @JvmInline
+  public value class BooleanStringValue(public val value: BooleanString) : IgnorePlurals
+
+  @Serializable
+  @JvmInline
   public value class BooleanValue(public val value: Boolean) : IgnorePlurals
 
   public companion object {
 
     public fun of(value: List<SupportedLanguage>): IgnorePlurals {
       return ListOfSupportedLanguageValue(value)
+    }
+    public fun of(value: BooleanString): IgnorePlurals {
+      return BooleanStringValue(value)
     }
     public fun of(value: Boolean): IgnorePlurals {
       return BooleanValue(value)

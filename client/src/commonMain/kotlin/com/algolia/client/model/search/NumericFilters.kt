@@ -41,7 +41,7 @@ public sealed interface NumericFilters {
 internal class NumericFiltersSerializer : JsonContentPolymorphicSerializer<NumericFilters>(NumericFilters::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<NumericFilters> {
     return when {
-      element.isJsonArrayOfObjects -> NumericFilters.ListOfNumericFiltersValue.serializer()
+      element is JsonArray -> NumericFilters.ListOfNumericFiltersValue.serializer()
       element.isString -> NumericFilters.StringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * SourceInput
@@ -24,8 +25,64 @@ import kotlinx.serialization.json.*
  */
 @Serializable(SourceInputSerializer::class)
 public sealed interface SourceInput {
+  @Serializable
+  @JvmInline
+  public value class SourceDockerValue(public val value: SourceDocker) : SourceInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceGA4BigQueryExportValue(public val value: SourceGA4BigQueryExport) : SourceInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceCommercetoolsValue(public val value: SourceCommercetools) : SourceInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceBigCommerceValue(public val value: SourceBigCommerce) : SourceInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceBigQueryValue(public val value: SourceBigQuery) : SourceInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceShopifyValue(public val value: SourceShopify) : SourceInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceJSONValue(public val value: SourceJSON) : SourceInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceCSVValue(public val value: SourceCSV) : SourceInput
 
   public companion object {
+
+    public fun of(value: SourceDocker): SourceInput {
+      return SourceDockerValue(value)
+    }
+    public fun of(value: SourceGA4BigQueryExport): SourceInput {
+      return SourceGA4BigQueryExportValue(value)
+    }
+    public fun of(value: SourceCommercetools): SourceInput {
+      return SourceCommercetoolsValue(value)
+    }
+    public fun of(value: SourceBigCommerce): SourceInput {
+      return SourceBigCommerceValue(value)
+    }
+    public fun of(value: SourceBigQuery): SourceInput {
+      return SourceBigQueryValue(value)
+    }
+    public fun of(value: SourceShopify): SourceInput {
+      return SourceShopifyValue(value)
+    }
+    public fun of(value: SourceJSON): SourceInput {
+      return SourceJSONValue(value)
+    }
+    public fun of(value: SourceCSV): SourceInput {
+      return SourceCSVValue(value)
+    }
   }
 }
 

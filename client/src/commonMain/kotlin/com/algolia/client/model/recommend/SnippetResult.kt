@@ -22,6 +22,10 @@ import kotlin.jvm.JvmInline
 public sealed interface SnippetResult {
   @Serializable
   @JvmInline
+  public value class SnippetResultOptionValue(public val value: SnippetResultOption) : SnippetResult
+
+  @Serializable
+  @JvmInline
   public value class MapOfkotlinStringSnippetResultValue(public val value: Map<kotlin.String, SnippetResult>) : SnippetResult
 
   @Serializable
@@ -30,6 +34,9 @@ public sealed interface SnippetResult {
 
   public companion object {
 
+    public fun of(value: SnippetResultOption): SnippetResult {
+      return SnippetResultOptionValue(value)
+    }
     public fun of(value: Map<kotlin.String, SnippetResult>): SnippetResult {
       return MapOfkotlinStringSnippetResultValue(value)
     }
@@ -44,7 +51,7 @@ internal class SnippetResultSerializer : JsonContentPolymorphicSerializer<Snippe
     return when {
       element is JsonObject && element.containsKey("matchLevel") -> SnippetResultOption.serializer()
       element is JsonObject -> SnippetResult.MapOfkotlinStringSnippetResultValue.serializer()
-      element.isJsonArrayOfObjects -> SnippetResult.ListOfSnippetResultValue.serializer()
+      element is JsonArray -> SnippetResult.ListOfSnippetResultValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

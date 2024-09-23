@@ -41,7 +41,7 @@ public sealed interface ReRankingApplyFilter {
 internal class ReRankingApplyFilterSerializer : JsonContentPolymorphicSerializer<ReRankingApplyFilter>(ReRankingApplyFilter::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ReRankingApplyFilter> {
     return when {
-      element.isJsonArrayOfObjects -> ReRankingApplyFilter.ListOfReRankingApplyFilterValue.serializer()
+      element is JsonArray -> ReRankingApplyFilter.ListOfReRankingApplyFilterValue.serializer()
       element.isString -> ReRankingApplyFilter.StringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

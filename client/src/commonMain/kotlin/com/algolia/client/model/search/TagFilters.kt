@@ -41,7 +41,7 @@ public sealed interface TagFilters {
 internal class TagFiltersSerializer : JsonContentPolymorphicSerializer<TagFilters>(TagFilters::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TagFilters> {
     return when {
-      element.isJsonArrayOfObjects -> TagFilters.ListOfTagFiltersValue.serializer()
+      element is JsonArray -> TagFilters.ListOfTagFiltersValue.serializer()
       element.isString -> TagFilters.StringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

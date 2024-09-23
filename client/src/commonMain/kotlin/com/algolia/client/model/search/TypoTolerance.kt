@@ -23,10 +23,17 @@ public sealed interface TypoTolerance {
   @JvmInline
   public value class BooleanValue(public val value: Boolean) : TypoTolerance
 
+  @Serializable
+  @JvmInline
+  public value class TypoToleranceEnumValue(public val value: TypoToleranceEnum) : TypoTolerance
+
   public companion object {
 
     public fun of(value: Boolean): TypoTolerance {
       return BooleanValue(value)
+    }
+    public fun of(value: TypoToleranceEnum): TypoTolerance {
+      return TypoToleranceEnumValue(value)
     }
   }
 }

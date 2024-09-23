@@ -40,8 +40,8 @@ public sealed interface AutomaticFacetFilters {
 internal class AutomaticFacetFiltersSerializer : JsonContentPolymorphicSerializer<AutomaticFacetFilters>(AutomaticFacetFilters::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AutomaticFacetFilters> {
     return when {
-      element.isJsonArrayOfObjects -> AutomaticFacetFilters.ListOfAutomaticFacetFilterValue.serializer()
-      element.isJsonArrayOfPrimitives -> AutomaticFacetFilters.ListOfStringValue.serializer()
+      element is JsonArray -> AutomaticFacetFilters.ListOfAutomaticFacetFilterValue.serializer()
+      element is JsonArray -> AutomaticFacetFilters.ListOfStringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * GetTopSearchesResponse
@@ -19,8 +20,29 @@ import kotlinx.serialization.json.*
  */
 @Serializable(GetTopSearchesResponseSerializer::class)
 public sealed interface GetTopSearchesResponse {
+  @Serializable
+  @JvmInline
+  public value class TopSearchesResponseValue(public val value: TopSearchesResponse) : GetTopSearchesResponse
+
+  @Serializable
+  @JvmInline
+  public value class TopSearchesResponseWithAnalyticsValue(public val value: TopSearchesResponseWithAnalytics) : GetTopSearchesResponse
+
+  @Serializable
+  @JvmInline
+  public value class TopSearchesResponseWithRevenueAnalyticsValue(public val value: TopSearchesResponseWithRevenueAnalytics) : GetTopSearchesResponse
 
   public companion object {
+
+    public fun of(value: TopSearchesResponse): GetTopSearchesResponse {
+      return TopSearchesResponseValue(value)
+    }
+    public fun of(value: TopSearchesResponseWithAnalytics): GetTopSearchesResponse {
+      return TopSearchesResponseWithAnalyticsValue(value)
+    }
+    public fun of(value: TopSearchesResponseWithRevenueAnalytics): GetTopSearchesResponse {
+      return TopSearchesResponseWithRevenueAnalyticsValue(value)
+    }
   }
 }
 

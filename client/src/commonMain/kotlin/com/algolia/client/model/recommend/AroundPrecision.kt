@@ -42,7 +42,7 @@ internal class AroundPrecisionSerializer : JsonContentPolymorphicSerializer<Arou
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AroundPrecision> {
     return when {
       element.isInt -> AroundPrecision.IntValue.serializer()
-      element.isJsonArrayOfObjects -> AroundPrecision.ListOfRangeValue.serializer()
+      element is JsonArray -> AroundPrecision.ListOfRangeValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

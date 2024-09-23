@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * DestinationInput
@@ -17,8 +18,15 @@ import kotlinx.serialization.json.*
  */
 @Serializable(DestinationInputSerializer::class)
 public sealed interface DestinationInput {
+  @Serializable
+  @JvmInline
+  public value class DestinationIndexNameValue(public val value: DestinationIndexName) : DestinationInput
 
   public companion object {
+
+    public fun of(value: DestinationIndexName): DestinationInput {
+      return DestinationIndexNameValue(value)
+    }
   }
 }
 

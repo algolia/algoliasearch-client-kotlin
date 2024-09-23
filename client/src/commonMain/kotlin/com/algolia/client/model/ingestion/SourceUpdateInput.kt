@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * SourceUpdateInput
@@ -23,8 +24,57 @@ import kotlinx.serialization.json.*
  */
 @Serializable(SourceUpdateInputSerializer::class)
 public sealed interface SourceUpdateInput {
+  @Serializable
+  @JvmInline
+  public value class SourceGA4BigQueryExportValue(public val value: SourceGA4BigQueryExport) : SourceUpdateInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceBigQueryValue(public val value: SourceBigQuery) : SourceUpdateInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceUpdateDockerValue(public val value: SourceUpdateDocker) : SourceUpdateInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceUpdateCommercetoolsValue(public val value: SourceUpdateCommercetools) : SourceUpdateInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceJSONValue(public val value: SourceJSON) : SourceUpdateInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceCSVValue(public val value: SourceCSV) : SourceUpdateInput
+
+  @Serializable
+  @JvmInline
+  public value class SourceUpdateShopifyValue(public val value: SourceUpdateShopify) : SourceUpdateInput
 
   public companion object {
+
+    public fun of(value: SourceGA4BigQueryExport): SourceUpdateInput {
+      return SourceGA4BigQueryExportValue(value)
+    }
+    public fun of(value: SourceBigQuery): SourceUpdateInput {
+      return SourceBigQueryValue(value)
+    }
+    public fun of(value: SourceUpdateDocker): SourceUpdateInput {
+      return SourceUpdateDockerValue(value)
+    }
+    public fun of(value: SourceUpdateCommercetools): SourceUpdateInput {
+      return SourceUpdateCommercetoolsValue(value)
+    }
+    public fun of(value: SourceJSON): SourceUpdateInput {
+      return SourceJSONValue(value)
+    }
+    public fun of(value: SourceCSV): SourceUpdateInput {
+      return SourceCSVValue(value)
+    }
+    public fun of(value: SourceUpdateShopify): SourceUpdateInput {
+      return SourceUpdateShopifyValue(value)
+    }
   }
 }
 

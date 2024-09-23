@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * SearchParams
@@ -18,8 +19,22 @@ import kotlinx.serialization.json.*
  */
 @Serializable(SearchParamsSerializer::class)
 public sealed interface SearchParams {
+  @Serializable
+  @JvmInline
+  public value class SearchParamsStringValue(public val value: SearchParamsString) : SearchParams
+
+  @Serializable
+  @JvmInline
+  public value class SearchParamsObjectValue(public val value: SearchParamsObject) : SearchParams
 
   public companion object {
+
+    public fun of(value: SearchParamsString): SearchParams {
+      return SearchParamsStringValue(value)
+    }
+    public fun of(value: SearchParamsObject): SearchParams {
+      return SearchParamsObjectValue(value)
+    }
   }
 }
 

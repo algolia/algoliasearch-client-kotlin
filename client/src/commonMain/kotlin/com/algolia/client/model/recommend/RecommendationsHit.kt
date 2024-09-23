@@ -21,10 +21,17 @@ import kotlin.jvm.JvmInline
 public sealed interface RecommendationsHit {
   @Serializable
   @JvmInline
+  public value class TrendingFacetHitValue(public val value: TrendingFacetHit) : RecommendationsHit
+
+  @Serializable
+  @JvmInline
   public value class RecommendHitValue(public val value: RecommendHit) : RecommendationsHit
 
   public companion object {
 
+    public fun of(value: TrendingFacetHit): RecommendationsHit {
+      return TrendingFacetHitValue(value)
+    }
     public fun of(value: RecommendHit): RecommendationsHit {
       return RecommendHitValue(value)
     }
@@ -34,7 +41,8 @@ public sealed interface RecommendationsHit {
 internal class RecommendationsHitSerializer : JsonContentPolymorphicSerializer<RecommendationsHit>(RecommendationsHit::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RecommendationsHit> {
     return when {
-      element is JsonObject -> TrendingFacetHit.serializer()
+      element is JsonObject && element.containsKey("facetName") && element.containsKey("facetValue") -> TrendingFacetHit.serializer()
+      element is JsonObject && element.containsKey("objectID") -> RecommendHit.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

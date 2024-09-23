@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * Promote
@@ -18,8 +19,22 @@ import kotlinx.serialization.json.*
  */
 @Serializable(PromoteSerializer::class)
 public sealed interface Promote {
+  @Serializable
+  @JvmInline
+  public value class PromoteObjectIDsValue(public val value: PromoteObjectIDs) : Promote
+
+  @Serializable
+  @JvmInline
+  public value class PromoteObjectIDValue(public val value: PromoteObjectID) : Promote
 
   public companion object {
+
+    public fun of(value: PromoteObjectIDs): Promote {
+      return PromoteObjectIDsValue(value)
+    }
+    public fun of(value: PromoteObjectID): Promote {
+      return PromoteObjectIDValue(value)
+    }
   }
 }
 

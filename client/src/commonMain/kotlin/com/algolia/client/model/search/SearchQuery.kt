@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * SearchQuery
@@ -18,8 +19,22 @@ import kotlinx.serialization.json.*
  */
 @Serializable(SearchQuerySerializer::class)
 public sealed interface SearchQuery {
+  @Serializable
+  @JvmInline
+  public value class SearchForFacetsValue(public val value: SearchForFacets) : SearchQuery
+
+  @Serializable
+  @JvmInline
+  public value class SearchForHitsValue(public val value: SearchForHits) : SearchQuery
 
   public companion object {
+
+    public fun of(value: SearchForFacets): SearchQuery {
+      return SearchForFacetsValue(value)
+    }
+    public fun of(value: SearchForHits): SearchQuery {
+      return SearchForHitsValue(value)
+    }
   }
 }
 

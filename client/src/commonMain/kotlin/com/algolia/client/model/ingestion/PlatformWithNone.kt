@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * PlatformWithNone
@@ -18,8 +19,22 @@ import kotlinx.serialization.json.*
  */
 @Serializable(PlatformWithNoneSerializer::class)
 public sealed interface PlatformWithNone {
+  @Serializable
+  @JvmInline
+  public value class PlatformValue(public val value: Platform) : PlatformWithNone
+
+  @Serializable
+  @JvmInline
+  public value class PlatformNoneValue(public val value: PlatformNone) : PlatformWithNone
 
   public companion object {
+
+    public fun of(value: Platform): PlatformWithNone {
+      return PlatformValue(value)
+    }
+    public fun of(value: PlatformNone): PlatformWithNone {
+      return PlatformNoneValue(value)
+    }
   }
 }
 

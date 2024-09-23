@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * AuthInput
@@ -22,8 +23,50 @@ import kotlinx.serialization.json.*
  */
 @Serializable(AuthInputSerializer::class)
 public sealed interface AuthInput {
+  @Serializable
+  @JvmInline
+  public value class AuthOAuthValue(public val value: AuthOAuth) : AuthInput
+
+  @Serializable
+  @JvmInline
+  public value class AuthGoogleServiceAccountValue(public val value: AuthGoogleServiceAccount) : AuthInput
+
+  @Serializable
+  @JvmInline
+  public value class AuthBasicValue(public val value: AuthBasic) : AuthInput
+
+  @Serializable
+  @JvmInline
+  public value class AuthAPIKeyValue(public val value: AuthAPIKey) : AuthInput
+
+  @Serializable
+  @JvmInline
+  public value class AuthAlgoliaValue(public val value: AuthAlgolia) : AuthInput
+
+  @Serializable
+  @JvmInline
+  public value class AuthAlgoliaInsightsValue(public val value: AuthAlgoliaInsights) : AuthInput
 
   public companion object {
+
+    public fun of(value: AuthOAuth): AuthInput {
+      return AuthOAuthValue(value)
+    }
+    public fun of(value: AuthGoogleServiceAccount): AuthInput {
+      return AuthGoogleServiceAccountValue(value)
+    }
+    public fun of(value: AuthBasic): AuthInput {
+      return AuthBasicValue(value)
+    }
+    public fun of(value: AuthAPIKey): AuthInput {
+      return AuthAPIKeyValue(value)
+    }
+    public fun of(value: AuthAlgolia): AuthInput {
+      return AuthAlgoliaValue(value)
+    }
+    public fun of(value: AuthAlgoliaInsights): AuthInput {
+      return AuthAlgoliaInsightsValue(value)
+    }
   }
 }
 

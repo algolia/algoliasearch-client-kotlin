@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * RecommendationsRequest
@@ -22,8 +23,50 @@ import kotlinx.serialization.json.*
  */
 @Serializable(RecommendationsRequestSerializer::class)
 public sealed interface RecommendationsRequest {
+  @Serializable
+  @JvmInline
+  public value class BoughtTogetherQueryValue(public val value: BoughtTogetherQuery) : RecommendationsRequest
+
+  @Serializable
+  @JvmInline
+  public value class RelatedQueryValue(public val value: RelatedQuery) : RecommendationsRequest
+
+  @Serializable
+  @JvmInline
+  public value class TrendingItemsQueryValue(public val value: TrendingItemsQuery) : RecommendationsRequest
+
+  @Serializable
+  @JvmInline
+  public value class TrendingFacetsQueryValue(public val value: TrendingFacetsQuery) : RecommendationsRequest
+
+  @Serializable
+  @JvmInline
+  public value class LookingSimilarQueryValue(public val value: LookingSimilarQuery) : RecommendationsRequest
+
+  @Serializable
+  @JvmInline
+  public value class RecommendedForYouQueryValue(public val value: RecommendedForYouQuery) : RecommendationsRequest
 
   public companion object {
+
+    public fun of(value: BoughtTogetherQuery): RecommendationsRequest {
+      return BoughtTogetherQueryValue(value)
+    }
+    public fun of(value: RelatedQuery): RecommendationsRequest {
+      return RelatedQueryValue(value)
+    }
+    public fun of(value: TrendingItemsQuery): RecommendationsRequest {
+      return TrendingItemsQueryValue(value)
+    }
+    public fun of(value: TrendingFacetsQuery): RecommendationsRequest {
+      return TrendingFacetsQueryValue(value)
+    }
+    public fun of(value: LookingSimilarQuery): RecommendationsRequest {
+      return LookingSimilarQueryValue(value)
+    }
+    public fun of(value: RecommendedForYouQuery): RecommendationsRequest {
+      return RecommendedForYouQueryValue(value)
+    }
   }
 }
 

@@ -8,6 +8,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
+import kotlin.jvm.JvmInline
 
 /**
  * AuthInputPartial
@@ -22,8 +23,50 @@ import kotlinx.serialization.json.*
  */
 @Serializable(AuthInputPartialSerializer::class)
 public sealed interface AuthInputPartial {
+  @Serializable
+  @JvmInline
+  public value class AuthGoogleServiceAccountPartialValue(public val value: AuthGoogleServiceAccountPartial) : AuthInputPartial
+
+  @Serializable
+  @JvmInline
+  public value class AuthBasicPartialValue(public val value: AuthBasicPartial) : AuthInputPartial
+
+  @Serializable
+  @JvmInline
+  public value class AuthAPIKeyPartialValue(public val value: AuthAPIKeyPartial) : AuthInputPartial
+
+  @Serializable
+  @JvmInline
+  public value class AuthOAuthPartialValue(public val value: AuthOAuthPartial) : AuthInputPartial
+
+  @Serializable
+  @JvmInline
+  public value class AuthAlgoliaPartialValue(public val value: AuthAlgoliaPartial) : AuthInputPartial
+
+  @Serializable
+  @JvmInline
+  public value class AuthAlgoliaInsightsPartialValue(public val value: AuthAlgoliaInsightsPartial) : AuthInputPartial
 
   public companion object {
+
+    public fun of(value: AuthGoogleServiceAccountPartial): AuthInputPartial {
+      return AuthGoogleServiceAccountPartialValue(value)
+    }
+    public fun of(value: AuthBasicPartial): AuthInputPartial {
+      return AuthBasicPartialValue(value)
+    }
+    public fun of(value: AuthAPIKeyPartial): AuthInputPartial {
+      return AuthAPIKeyPartialValue(value)
+    }
+    public fun of(value: AuthOAuthPartial): AuthInputPartial {
+      return AuthOAuthPartialValue(value)
+    }
+    public fun of(value: AuthAlgoliaPartial): AuthInputPartial {
+      return AuthAlgoliaPartialValue(value)
+    }
+    public fun of(value: AuthAlgoliaInsightsPartial): AuthInputPartial {
+      return AuthAlgoliaInsightsPartialValue(value)
+    }
   }
 }
 

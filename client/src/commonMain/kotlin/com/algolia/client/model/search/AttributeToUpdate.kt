@@ -24,10 +24,17 @@ public sealed interface AttributeToUpdate {
   @JvmInline
   public value class StringValue(public val value: String) : AttributeToUpdate
 
+  @Serializable
+  @JvmInline
+  public value class BuiltInOperationValue(public val value: BuiltInOperation) : AttributeToUpdate
+
   public companion object {
 
     public fun of(value: String): AttributeToUpdate {
       return StringValue(value)
+    }
+    public fun of(value: BuiltInOperation): AttributeToUpdate {
+      return BuiltInOperationValue(value)
     }
   }
 }

@@ -41,7 +41,7 @@ public sealed interface Languages {
 internal class LanguagesSerializer : JsonContentPolymorphicSerializer<Languages>(Languages::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Languages> {
     return when {
-      element.isJsonArrayOfPrimitives -> Languages.ListOfStringValue.serializer()
+      element is JsonArray -> Languages.ListOfStringValue.serializer()
       element.isBoolean -> Languages.BooleanValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
