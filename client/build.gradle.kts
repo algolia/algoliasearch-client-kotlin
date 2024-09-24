@@ -1,4 +1,3 @@
-import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
@@ -9,7 +8,6 @@ plugins {
   id("binary-compatibility-validator")
 }
 
-@OptIn(ExperimentalKotlinGradlePluginApi::class)
 kotlin {
   applyDefaultHierarchyTemplate()
 

@@ -2,6 +2,7 @@ package com.algolia.client.extensions
 
 import com.algolia.client.api.SearchClient
 import com.algolia.client.exception.AlgoliaApiException
+import com.algolia.client.extensions.internal.DisjunctiveFaceting
 import com.algolia.client.extensions.internal.buildRestrictionString
 import com.algolia.client.extensions.internal.encodeKeySHA256
 import com.algolia.client.extensions.internal.retryUntil
@@ -105,7 +106,10 @@ public suspend fun SearchClient.waitForTask(
   )
 }
 
-@Deprecated("Please use waitForTask instead", ReplaceWith("waitForTask(indexName, taskID, maxRetries, timeout, initialDelay, maxDelay, requestOptions)"))
+@Deprecated(
+  "Please use waitForTask instead",
+  ReplaceWith("waitForTask(indexName, taskID, maxRetries, timeout, initialDelay, maxDelay, requestOptions)"),
+)
 public suspend fun SearchClient.waitTask(
   indexName: String,
   taskID: Long,
@@ -154,7 +158,10 @@ public suspend fun SearchClient.waitForAppTask(
   )
 }
 
-@Deprecated("Please use waitForAppTask instead", ReplaceWith("waitForAppTask(taskID, maxRetries, timeout, initialDelay, maxDelay, requestOptions)"))
+@Deprecated(
+  "Please use waitForAppTask instead",
+  ReplaceWith("waitForAppTask(taskID, maxRetries, timeout, initialDelay, maxDelay, requestOptions)"),
+)
 public suspend fun SearchClient.waitAppTask(
   taskID: Long,
   maxRetries: Int = 50,
@@ -409,7 +416,7 @@ public suspend fun SearchClient.deleteObjects(
  * Helper: Replaces object content of all the given objects according to their respective `objectID` field. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
  *
  * @param indexName The index in which to perform the request.
- * @param objectIDs The list of objects to update in the index.
+ * @param objects The list of objects to update in the index.
  * @param createIfNotExists To be provided if non-existing objects are passed, otherwise, the call will fail..
  * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
  * @return The list of responses from the batch requests.
@@ -498,7 +505,7 @@ public suspend fun SearchClient.replaceAllObjects(
  * Generate a virtual API Key without any call to the server.
  *
  * @param parentApiKey API key to generate from.
- * @param restriction Restriction to add the key
+ * @param restrictions Restriction to add the key
  * @throws Exception if an error occurs during the encoding
  */
 public fun SearchClient.generateSecuredApiKey(parentApiKey: String, restrictions: SecuredApiKeyRestrictions): String {
@@ -533,4 +540,40 @@ public suspend fun SearchClient.indexExists(indexName: String): Boolean {
   }
 
   return true
+}
+
+public data class SearchDisjunctiveFacetingResponse(
+  val response: SearchResponse,
+  val disjunctiveFacets: Map<String, Map<String, Int>>,
+)
+
+/**
+ * Method used for perform search with disjunctive facets.
+ *
+ * @param indexName The name of the index in which the search queries should be performed
+ * @param searchParamsObject The search query params.
+ * @param refinements Refinements to apply to the search in form of dictionary with
+ *  facet attribute as a key and a list of facet values for the designated attribute.
+ *  Any facet in this list not present in the `disjunctiveFacets` set will be filtered conjunctively (with AND operator).
+ * @param disjunctiveFacets Set of facets attributes applied disjunctively (with OR operator)
+ * @param requestOptions Configure request locally with RequestOptions.
+ * @return SearchDisjunctiveFacetingResponse - a struct containing the merge response from all the
+ * disjunctive faceting search queries, and a list of disjunctive facets
+ * @throws NoSuchElementException if there are no search response from the multi-query search
+ */
+public suspend fun SearchClient.searchDisjunctiveFaceting(
+  indexName: String,
+  searchParamsObject: SearchParamsObject,
+  refinements: Map<String, List<String>>,
+  disjunctiveFacets: Set<String>,
+  requestOptions: RequestOptions? = null
+): SearchDisjunctiveFacetingResponse {
+  val helper = DisjunctiveFaceting(
+    query = SearchForHits.from(searchParamsObject, indexName),
+    refinements = refinements,
+    disjunctiveFacets = disjunctiveFacets,
+  )
+  val queries = helper.buildQueries()
+  val responses = searchForHits(queries, requestOptions = requestOptions)
+  return helper.mergeResponses(responses)
 }
