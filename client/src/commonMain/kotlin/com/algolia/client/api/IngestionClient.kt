@@ -626,8 +626,8 @@ public class IngestionClient(
    * @param itemsPerPage Number of items per page. (default to 10)
    * @param page Page number of the paginated API response.
    * @param type Type of authentication resource to retrieve.
-   * @param platform Ecommerce platform for which to retrieve authentication resources.
-   * @param sort Property by which to sort the list of authentication resources. (default to createdAt)
+   * @param platform Ecommerce platform for which to retrieve authentications.
+   * @param sort Property by which to sort the list of authentications. (default to createdAt)
    * @param order Sort order of the response, ascending or descending. (default to desc)
    * @param requestOptions additional request configuration.
    */
@@ -661,11 +661,12 @@ public class IngestionClient(
    * @param page Page number of the paginated API response.
    * @param type Destination type.
    * @param authenticationID Authentication ID used by destinations.
+   * @param transformationID Get the list of destinations used by a transformation.
    * @param sort Property by which to sort the destinations. (default to createdAt)
    * @param order Sort order of the response, ascending or descending. (default to desc)
    * @param requestOptions additional request configuration.
    */
-  public suspend fun listDestinations(itemsPerPage: Int? = null, page: Int? = null, type: List<DestinationType>? = null, authenticationID: List<String>? = null, sort: DestinationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListDestinationsResponse {
+  public suspend fun listDestinations(itemsPerPage: Int? = null, page: Int? = null, type: List<DestinationType>? = null, authenticationID: List<String>? = null, transformationID: String? = null, sort: DestinationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListDestinationsResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
       path = listOf("1", "destinations"),
@@ -674,6 +675,7 @@ public class IngestionClient(
         page?.let { put("page", it) }
         type?.let { put("type", it.joinToString(",")) }
         authenticationID?.let { put("authenticationID", it.joinToString(",")) }
+        transformationID?.let { put("transformationID", it) }
         sort?.let { put("sort", it) }
         order?.let { put("order", it) }
       },
@@ -774,7 +776,7 @@ public class IngestionClient(
    * @param itemsPerPage Number of items per page. (default to 10)
    * @param page Page number of the paginated API response.
    * @param type Source type. Some sources require authentication.
-   * @param authenticationID Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication resource.
+   * @param authenticationID Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication.
    * @param sort Property by which to sort the list of sources. (default to createdAt)
    * @param order Sort order of the response, ascending or descending. (default to desc)
    * @param requestOptions additional request configuration.
@@ -887,11 +889,11 @@ public class IngestionClient(
    *   - editSettings
    * @param itemsPerPage Number of items per page. (default to 10)
    * @param page Page number of the paginated API response.
-   * @param sort Property by which to sort the list. (default to desc)
+   * @param sort Property by which to sort the list of transformations. (default to createdAt)
    * @param order Sort order of the response, ascending or descending. (default to desc)
    * @param requestOptions additional request configuration.
    */
-  public suspend fun listTransformations(itemsPerPage: Int? = null, page: Int? = null, sort: SortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTransformationsResponse {
+  public suspend fun listTransformations(itemsPerPage: Int? = null, page: Int? = null, sort: TransformationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTransformationsResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
       path = listOf("1", "transformations"),

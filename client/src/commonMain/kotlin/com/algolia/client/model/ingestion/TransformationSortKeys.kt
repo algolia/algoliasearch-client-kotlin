@@ -4,16 +4,13 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Property by which to sort the list.
+ * Property by which to sort the list of transformations.
  */
 @Serializable
-public enum class SortKeys(public val value: kotlin.String) {
+public enum class TransformationSortKeys(public val value: kotlin.String) {
 
   @SerialName(value = "name")
   Name("name"),
-
-  @SerialName(value = "type")
-  Type("type"),
 
   @SerialName(value = "updatedAt")
   UpdatedAt("updatedAt"),

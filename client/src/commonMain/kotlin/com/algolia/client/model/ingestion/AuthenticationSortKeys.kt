@@ -4,7 +4,7 @@ package com.algolia.client.model.ingestion
 import kotlinx.serialization.*
 
 /**
- * Property by which to sort the list of authentication resources.
+ * Property by which to sort the list of authentications.
  */
 @Serializable
 public enum class AuthenticationSortKeys(public val value: kotlin.String) {
@@ -12,8 +12,8 @@ public enum class AuthenticationSortKeys(public val value: kotlin.String) {
   @SerialName(value = "name")
   Name("name"),
 
-  @SerialName(value = "auth_type")
-  AuthType("auth_type"),
+  @SerialName(value = "type")
+  Type("type"),
 
   @SerialName(value = "platform")
   Platform("platform"),
