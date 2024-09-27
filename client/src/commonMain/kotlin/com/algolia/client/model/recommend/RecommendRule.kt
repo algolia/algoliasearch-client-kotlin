@@ -13,6 +13,7 @@ import kotlinx.serialization.json.*
  * @param consequence
  * @param description Description of the rule's purpose. This can be helpful for display in the Algolia dashboard.
  * @param enabled Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time.
+ * @param validity Time periods when the rule is active.
  */
 @Serializable
 public data class RecommendRule(
@@ -31,4 +32,7 @@ public data class RecommendRule(
 
   /** Indicates whether to enable the rule. If it isn't enabled, it isn't applied at query time. */
   @SerialName(value = "enabled") val enabled: Boolean? = null,
+
+  /** Time periods when the rule is active. */
+  @SerialName(value = "validity") val validity: List<TimeRange>? = null,
 )

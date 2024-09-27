@@ -32,6 +32,29 @@ public class RecommendClient(
   }
 
   /**
+   * Create or update a batch of Recommend Rules  Each Recommend Rule is created or updated, depending on whether a Recommend Rule with the same `objectID` already exists. You may also specify `true` for `clearExistingRules`, in which case the batch will atomically replace all the existing Recommend Rules.  Recommend Rules are similar to Search Rules, except that the conditions and consequences apply to a [source item](/doc/guides/algolia-recommend/overview/#recommend-models) instead of a query. The main differences are the following: - Conditions `pattern` and `anchoring` are unavailable. - Condition `filters` triggers if the source item matches the specified filters. - Condition `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. - Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to match the data source item's attributes instead).
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   * @param indexName Name of the index on which to perform the operation.
+   * @param model [Recommend model](https://www.algolia.com/doc/guides/algolia-recommend/overview/#recommend-models).
+   * @param recommendRule
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun batchRecommendRules(indexName: String, model: RecommendModels, recommendRule: List<RecommendRule>? = null, requestOptions: RequestOptions? = null): RecommendUpdatedAtResponse {
+    require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `batchRecommendRules`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "batch"),
+      body = recommendRule,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * This method allow you to send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
