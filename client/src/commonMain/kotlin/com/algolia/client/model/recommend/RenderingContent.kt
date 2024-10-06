@@ -9,6 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param facetOrdering
  * @param redirect
+ * @param widgets
  */
 @Serializable
 public data class RenderingContent(
@@ -16,4 +17,6 @@ public data class RenderingContent(
   @SerialName(value = "facetOrdering") val facetOrdering: FacetOrdering? = null,
 
   @SerialName(value = "redirect") val redirect: RedirectURL? = null,
+
+  @SerialName(value = "widgets") val widgets: Widgets? = null,
 )
