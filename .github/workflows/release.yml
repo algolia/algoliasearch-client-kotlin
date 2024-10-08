@@ -8,7 +8,7 @@ on:
 jobs:
   publish:
     name: Publish to Sonatype
-    runs-on: macos-13
+    runs-on: macos-14
     if: "startsWith(github.event.head_commit.message, 'chore: release')"
     steps:
       - name: Checkout
