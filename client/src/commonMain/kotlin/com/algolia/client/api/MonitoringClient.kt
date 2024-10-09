@@ -116,7 +116,7 @@ public class MonitoringClient(
 
   /**
    * Retrieves known incidents for the selected clusters.
-   * @param clusters Subset of clusters, separated by comma.
+   * @param clusters Subset of clusters, separated by commas.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getClusterIncidents(clusters: String, requestOptions: RequestOptions? = null): IncidentsResponse {
@@ -133,7 +133,7 @@ public class MonitoringClient(
 
   /**
    * Retrieves the status of selected clusters.
-   * @param clusters Subset of clusters, separated by comma.
+   * @param clusters Subset of clusters, separated by commas.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getClusterStatus(clusters: String, requestOptions: RequestOptions? = null): StatusResponse {
@@ -165,7 +165,7 @@ public class MonitoringClient(
 
   /**
    * Retrieves average times for indexing operations for selected clusters.
-   * @param clusters Subset of clusters, separated by comma.
+   * @param clusters Subset of clusters, separated by commas.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getIndexingTime(clusters: String, requestOptions: RequestOptions? = null): IndexingTimeResponse {
@@ -182,7 +182,7 @@ public class MonitoringClient(
 
   /**
    * Retrieves the average latency for search requests for selected clusters.
-   * @param clusters Subset of clusters, separated by comma.
+   * @param clusters Subset of clusters, separated by commas.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getLatency(clusters: String, requestOptions: RequestOptions? = null): LatencyResponse {
@@ -216,7 +216,7 @@ public class MonitoringClient(
 
   /**
    * Test whether clusters are reachable or not.
-   * @param clusters Subset of clusters, separated by comma.
+   * @param clusters Subset of clusters, separated by commas.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getReachability(clusters: String, requestOptions: RequestOptions? = null): Map<kotlin.String, Map<kotlin.String, Boolean>> {
