@@ -200,6 +200,7 @@ public class SearchClient(
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "indexes", "$indexName", "browse"),
+      isRead = true,
       body = browseParams,
     )
     return requester.execute(
