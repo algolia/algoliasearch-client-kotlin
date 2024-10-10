@@ -13,7 +13,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class BannerImage(
 
-  @SerialName(value = "urls") val urls: BannerImageUrl? = null,
+  @SerialName(value = "urls") val urls: List<BannerImageUrl>? = null,
 
   @SerialName(value = "title") val title: String? = null,
 )
