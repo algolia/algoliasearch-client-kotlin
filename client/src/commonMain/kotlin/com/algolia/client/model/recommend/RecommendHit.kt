@@ -11,20 +11,17 @@ import kotlinx.serialization.json.*
  * Recommend hit.
  *
  * @param objectID Unique record identifier.
- * @param score Recommendation score.
  * @param highlightResult Surround words that match the query with HTML tags for highlighting.
  * @param snippetResult Snippets that show the context around a matching search query.
  * @param rankingInfo
  * @param distinctSeqID
+ * @param score Recommendation score.
  */
 @Serializable(RecommendHitSerializer::class)
 public data class RecommendHit(
 
   /** Unique record identifier. */
   val objectID: String,
-
-  /** Recommendation score. */
-  val score: Double,
 
   /** Surround words that match the query with HTML tags for highlighting. */
   val highlightResult: Map<kotlin.String, HighlightResult>? = null,
@@ -36,6 +33,9 @@ public data class RecommendHit(
 
   val distinctSeqID: Int? = null,
 
+  /** Recommendation score. */
+  val score: Double? = null,
+
   val additionalProperties: Map<String, JsonElement>? = null,
 ) : RecommendationsHit
 
@@ -43,11 +43,11 @@ internal object RecommendHitSerializer : KSerializer<RecommendHit> {
 
   override val descriptor: SerialDescriptor = buildClassSerialDescriptor("RecommendHit") {
     element<String>("objectID")
-    element<Double>("_score")
     element<Map<kotlin.String, HighlightResult>>("_highlightResult", isOptional = true)
     element<Map<kotlin.String, SnippetResult>>("_snippetResult", isOptional = true)
     element<RankingInfo>("_rankingInfo", isOptional = true)
     element<Int>("_distinctSeqID", isOptional = true)
+    element<Double>("_score", isOptional = true)
   }
 
   override fun deserialize(decoder: Decoder): RecommendHit {
@@ -55,11 +55,11 @@ internal object RecommendHitSerializer : KSerializer<RecommendHit> {
     val tree = input.decodeJsonObject()
     return RecommendHit(
       objectID = tree.getValue("objectID").let { input.json.decodeFromJsonElement(it) },
-      score = tree.getValue("_score").let { input.json.decodeFromJsonElement(it) },
       highlightResult = tree["_highlightResult"]?.let { input.json.decodeFromJsonElement(it) },
       snippetResult = tree["_snippetResult"]?.let { input.json.decodeFromJsonElement(it) },
       rankingInfo = tree["_rankingInfo"]?.let { input.json.decodeFromJsonElement(it) },
       distinctSeqID = tree["_distinctSeqID"]?.let { input.json.decodeFromJsonElement(it) },
+      score = tree["_score"]?.let { input.json.decodeFromJsonElement(it) },
       additionalProperties = tree.filterKeys { it !in descriptor.elementNames },
     )
   }
@@ -68,11 +68,11 @@ internal object RecommendHitSerializer : KSerializer<RecommendHit> {
     val output = encoder.asJsonEncoder()
     val json = buildJsonObject {
       put("objectID", output.json.encodeToJsonElement(value.objectID))
-      put("_score", output.json.encodeToJsonElement(value.score))
       value.highlightResult?.let { put("_highlightResult", output.json.encodeToJsonElement(it)) }
       value.snippetResult?.let { put("_snippetResult", output.json.encodeToJsonElement(it)) }
       value.rankingInfo?.let { put("_rankingInfo", output.json.encodeToJsonElement(it)) }
       value.distinctSeqID?.let { put("_distinctSeqID", output.json.encodeToJsonElement(it)) }
+      value.score?.let { put("_score", output.json.encodeToJsonElement(it)) }
       value.additionalProperties?.onEach { (key, element) -> put(key, element) }
     }
     (encoder as JsonEncoder).encodeJsonElement(json)
