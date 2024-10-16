@@ -10,7 +10,6 @@ import kotlinx.serialization.json.*
  * @param addToCartCount Number of add-to-cart events for this variant.
  * @param clickCount Number of click events for this variant.
  * @param conversionCount Number of click events for this variant.
- * @param description Description for this variant.
  * @param index Index name of the A/B test variant (case-sensitive).
  * @param noResultCount Number of [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results) for this variant.
  * @param purchaseCount Number of purchase events for this variant.
@@ -23,6 +22,7 @@ import kotlinx.serialization.json.*
  * @param clickThroughRate [Click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate) for this variant.
  * @param conversionRate [Conversion rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#conversion-rate) for this variant.
  * @param currencies A/B test currencies.
+ * @param description Description for this variant.
  * @param estimatedSampleSize Estimated number of searches required to achieve the desired statistical significance.  The A/B test configuration must include a `mininmumDetectableEffect` setting for this number to be included in the response.
  * @param filterEffects
  * @param purchaseRate [Purchase rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#purchase-rate) for this variant.
@@ -39,9 +39,6 @@ public data class Variant(
 
   /** Number of click events for this variant. */
   @SerialName(value = "conversionCount") val conversionCount: Int,
-
-  /** Description for this variant. */
-  @SerialName(value = "description") val description: String,
 
   /** Index name of the A/B test variant (case-sensitive). */
   @SerialName(value = "index") val index: String,
@@ -78,6 +75,9 @@ public data class Variant(
 
   /** A/B test currencies. */
   @SerialName(value = "currencies") val currencies: Map<kotlin.String, Currency>? = null,
+
+  /** Description for this variant. */
+  @SerialName(value = "description") val description: String? = null,
 
   /** Estimated number of searches required to achieve the desired statistical significance.  The A/B test configuration must include a `mininmumDetectableEffect` setting for this number to be included in the response.  */
   @SerialName(value = "estimatedSampleSize") val estimatedSampleSize: Int? = null,

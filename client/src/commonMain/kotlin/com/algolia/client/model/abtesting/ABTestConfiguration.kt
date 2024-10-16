@@ -14,7 +14,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class ABTestConfiguration(
 
-  @SerialName(value = "outliers") val outliers: Outliers,
+  @SerialName(value = "outliers") val outliers: Outliers? = null,
 
   @SerialName(value = "emptySearch") val emptySearch: EmptySearch? = null,
 

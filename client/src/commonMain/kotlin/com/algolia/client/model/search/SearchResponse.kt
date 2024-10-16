@@ -19,6 +19,7 @@ import kotlinx.serialization.json.*
  * @param aroundLatLng Computed geographical location.
  * @param automaticRadius Distance from a central coordinate provided by `aroundLatLng`.
  * @param exhaustive
+ * @param appliedRules Rules applied to the query.
  * @param exhaustiveFacetsCount See the `facetsCount` field of the `exhaustive` object in the response.
  * @param exhaustiveNbHits See the `nbHits` field of the `exhaustive` object in the response.
  * @param exhaustiveTypo See the `typo` field of the `exhaustive` object in the response.
@@ -71,6 +72,9 @@ public data class SearchResponse(
   val automaticRadius: String? = null,
 
   val exhaustive: Exhaustive? = null,
+
+  /** Rules applied to the query. */
+  val appliedRules: List<JsonObject>? = null,
 
   /** See the `facetsCount` field of the `exhaustive` object in the response. */
   @Deprecated(message = "This property is deprecated.")
@@ -157,6 +161,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
     element<String>("aroundLatLng", isOptional = true)
     element<String>("automaticRadius", isOptional = true)
     element<Exhaustive>("exhaustive", isOptional = true)
+    element<List<JsonObject>>("appliedRules", isOptional = true)
     element<Boolean>("exhaustiveFacetsCount", isOptional = true)
     element<Boolean>("exhaustiveNbHits", isOptional = true)
     element<Boolean>("exhaustiveTypo", isOptional = true)
@@ -195,6 +200,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
       aroundLatLng = tree["aroundLatLng"]?.let { input.json.decodeFromJsonElement(it) },
       automaticRadius = tree["automaticRadius"]?.let { input.json.decodeFromJsonElement(it) },
       exhaustive = tree["exhaustive"]?.let { input.json.decodeFromJsonElement(it) },
+      appliedRules = tree["appliedRules"]?.let { input.json.decodeFromJsonElement(it) },
       exhaustiveFacetsCount = tree["exhaustiveFacetsCount"]?.let { input.json.decodeFromJsonElement(it) },
       exhaustiveNbHits = tree["exhaustiveNbHits"]?.let { input.json.decodeFromJsonElement(it) },
       exhaustiveTypo = tree["exhaustiveTypo"]?.let { input.json.decodeFromJsonElement(it) },
@@ -234,6 +240,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
       value.aroundLatLng?.let { put("aroundLatLng", output.json.encodeToJsonElement(it)) }
       value.automaticRadius?.let { put("automaticRadius", output.json.encodeToJsonElement(it)) }
       value.exhaustive?.let { put("exhaustive", output.json.encodeToJsonElement(it)) }
+      value.appliedRules?.let { put("appliedRules", output.json.encodeToJsonElement(it)) }
       value.exhaustiveFacetsCount?.let { put("exhaustiveFacetsCount", output.json.encodeToJsonElement(it)) }
       value.exhaustiveNbHits?.let { put("exhaustiveNbHits", output.json.encodeToJsonElement(it)) }
       value.exhaustiveTypo?.let { put("exhaustiveTypo", output.json.encodeToJsonElement(it)) }

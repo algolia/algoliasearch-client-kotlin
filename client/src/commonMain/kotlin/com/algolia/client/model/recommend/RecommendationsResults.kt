@@ -14,6 +14,7 @@ import kotlinx.serialization.json.*
  * @param aroundLatLng Computed geographical location.
  * @param automaticRadius Distance from a central coordinate provided by `aroundLatLng`.
  * @param exhaustive
+ * @param appliedRules Rules applied to the query.
  * @param exhaustiveFacetsCount See the `facetsCount` field of the `exhaustive` object in the response.
  * @param exhaustiveNbHits See the `nbHits` field of the `exhaustive` object in the response.
  * @param exhaustiveTypo See the `typo` field of the `exhaustive` object in the response.
@@ -59,6 +60,9 @@ public data class RecommendationsResults(
   @SerialName(value = "automaticRadius") val automaticRadius: String? = null,
 
   @SerialName(value = "exhaustive") val exhaustive: Exhaustive? = null,
+
+  /** Rules applied to the query. */
+  @SerialName(value = "appliedRules") val appliedRules: List<JsonObject>? = null,
 
   /** See the `facetsCount` field of the `exhaustive` object in the response. */
   @Deprecated(message = "This property is deprecated.")
