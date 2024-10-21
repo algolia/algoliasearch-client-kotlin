@@ -414,8 +414,8 @@ public class AnalyticsClient(
    * @param index Index name.
    * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
-   * @param limit Number of items to return.  Combined with the `offset` parameter, only the first 1000 items can be retrieved.  (default to 10)
-   * @param offset Position of the first item to return.  Combined with the `limit` parameter, only the first 1000 items can be retrieved.  (default to 0)
+   * @param limit Number of items to return.  (default to 10)
+   * @param offset Position of the first item to return.  (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -447,8 +447,8 @@ public class AnalyticsClient(
    * @param index Index name.
    * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
-   * @param limit Number of items to return.  Combined with the `offset` parameter, only the first 1000 items can be retrieved.  (default to 10)
-   * @param offset Position of the first item to return.  Combined with the `limit` parameter, only the first 1000 items can be retrieved.  (default to 0)
+   * @param limit Number of items to return.  (default to 10)
+   * @param offset Position of the first item to return.  (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -503,8 +503,8 @@ public class AnalyticsClient(
    * @param index Index name.
    * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
-   * @param limit Number of items to return.  Combined with the `offset` parameter, only the first 1000 items can be retrieved.  (default to 10)
-   * @param offset Position of the first item to return.  Combined with the `limit` parameter, only the first 1000 items can be retrieved.  (default to 0)
+   * @param limit Number of items to return.  (default to 10)
+   * @param offset Position of the first item to return.  (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -537,8 +537,8 @@ public class AnalyticsClient(
    * @param search Search query.
    * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
-   * @param limit Number of items to return.  Combined with the `offset` parameter, only the first 1000 items can be retrieved.  (default to 10)
-   * @param offset Position of the first item to return.  Combined with the `limit` parameter, only the first 1000 items can be retrieved.  (default to 0)
+   * @param limit Number of items to return.  (default to 10)
+   * @param offset Position of the first item to return.  (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -573,8 +573,8 @@ public class AnalyticsClient(
    * @param search Search query.
    * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
-   * @param limit Number of items to return.  Combined with the `offset` parameter, only the first 1000 items can be retrieved.  (default to 10)
-   * @param offset Position of the first item to return.  Combined with the `limit` parameter, only the first 1000 items can be retrieved.  (default to 0)
+   * @param limit Number of items to return.  (default to 10)
+   * @param offset Position of the first item to return.  (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -609,8 +609,8 @@ public class AnalyticsClient(
    * @param search Search query.
    * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
-   * @param limit Number of items to return.  Combined with the `offset` parameter, only the first 1000 items can be retrieved.  (default to 10)
-   * @param offset Position of the first item to return.  Combined with the `limit` parameter, only the first 1000 items can be retrieved.  (default to 0)
+   * @param limit Number of items to return.  (default to 10)
+   * @param offset Position of the first item to return.  (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -646,8 +646,8 @@ public class AnalyticsClient(
    * @param revenueAnalytics Whether to include revenue-related metrics in the response.  If true, metrics related to click and conversion events are also included in the response.  (default to false)
    * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
-   * @param limit Number of items to return.  Combined with the `offset` parameter, only the first 1000 items can be retrieved.  (default to 10)
-   * @param offset Position of the first item to return.  Combined with the `limit` parameter, only the first 1000 items can be retrieved.  (default to 0)
+   * @param limit Number of items to return.  (default to 10)
+   * @param offset Position of the first item to return.  (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
@@ -686,8 +686,8 @@ public class AnalyticsClient(
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param orderBy Attribute by which to order the response items.  If the `clickAnalytics` parameter is false, only `searchCount` is available.  (default to searchCount)
    * @param direction Sorting direction of the results: ascending or descending.  (default to asc)
-   * @param limit Number of items to return.  Combined with the `offset` parameter, only the first 1000 items can be retrieved.  (default to 10)
-   * @param offset Position of the first item to return.  Combined with the `limit` parameter, only the first 1000 items can be retrieved.  (default to 0)
+   * @param limit Number of items to return.  (default to 10)
+   * @param offset Position of the first item to return.  (default to 0)
    * @param tags Tags by which to segment the analytics.  You can combine multiple tags with `OR` and `AND`. Tags must be URL-encoded. For more information, see [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
    * @param requestOptions additional request configuration.
    */
