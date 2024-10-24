@@ -8,10 +8,14 @@ import kotlinx.serialization.json.*
  * GetObjectsResponse
  *
  * @param results Retrieved records.
+ * @param message An optional status message.
  */
 @Serializable
 public data class GetObjectsResponse(
 
   /** Retrieved records. */
   @SerialName(value = "results") val results: List<JsonObject>,
+
+  /** An optional status message. */
+  @SerialName(value = "message") val message: String? = null,
 )
