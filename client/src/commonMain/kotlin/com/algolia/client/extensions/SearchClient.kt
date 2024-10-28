@@ -369,6 +369,7 @@ public suspend fun SearchClient.chunkedBatch(
  *
  * @param indexName The index in which to perform the request.
  * @param objects The list of objects to index.
+ * @param waitForTask If true, wait for the task to complete.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
  * @return The list of responses from the batch requests.
  *
@@ -376,13 +377,14 @@ public suspend fun SearchClient.chunkedBatch(
 public suspend fun SearchClient.saveObjects(
   indexName: String,
   objects: List<JsonObject>,
+  waitForTask: Boolean = false,
   requestOptions: RequestOptions? = null,
 ): List<BatchResponse> {
   return this.chunkedBatch(
     indexName = indexName,
     objects = objects,
     action = Action.AddObject,
-    waitForTask = false,
+    waitForTask = waitForTask,
     batchSize = 1000,
     requestOptions = requestOptions,
   )
@@ -393,6 +395,7 @@ public suspend fun SearchClient.saveObjects(
  *
  * @param indexName The index in which to perform the request.
  * @param objectIDs The list of objectIDs to delete from the index.
+ * @param waitForTask If true, wait for the task to complete.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
  * @return The list of responses from the batch requests.
  *
@@ -400,13 +403,14 @@ public suspend fun SearchClient.saveObjects(
 public suspend fun SearchClient.deleteObjects(
   indexName: String,
   objectIDs: List<String>,
+  waitForTask: Boolean = false,
   requestOptions: RequestOptions? = null,
 ): List<BatchResponse> {
   return this.chunkedBatch(
     indexName = indexName,
     objects = objectIDs.map { id -> JsonObject(mapOf("objectID" to Json.encodeToJsonElement(id))) },
     action = Action.DeleteObject,
-    waitForTask = false,
+    waitForTask = waitForTask,
     batchSize = 1000,
     requestOptions = requestOptions,
   )
@@ -418,6 +422,7 @@ public suspend fun SearchClient.deleteObjects(
  * @param indexName The index in which to perform the request.
  * @param objects The list of objects to update in the index.
  * @param createIfNotExists To be provided if non-existing objects are passed, otherwise, the call will fail..
+ * @param waitForTask If true, wait for the task to complete.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
  * @return The list of responses from the batch requests.
  *
@@ -426,13 +431,14 @@ public suspend fun SearchClient.partialUpdateObjects(
   indexName: String,
   objects: List<JsonObject>,
   createIfNotExists: Boolean,
+  waitForTask: Boolean = false,
   requestOptions: RequestOptions? = null,
 ): List<BatchResponse> {
   return this.chunkedBatch(
     indexName = indexName,
     objects = objects,
     action = if (createIfNotExists) Action.PartialUpdateObject else Action.PartialUpdateObjectNoCreate,
-    waitForTask = false,
+    waitForTask = waitForTask,
     batchSize = 1000,
     requestOptions = requestOptions,
   )
