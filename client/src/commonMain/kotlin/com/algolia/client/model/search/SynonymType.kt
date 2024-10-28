@@ -22,7 +22,16 @@ public enum class SynonymType(public val value: kotlin.String) {
   Altcorrection2("altcorrection2"),
 
   @SerialName(value = "placeholder")
-  Placeholder("placeholder");
+  Placeholder("placeholder"),
+
+  @SerialName(value = "oneWaySynonym")
+  OneWaySynonym("oneWaySynonym"),
+
+  @SerialName(value = "altCorrection1")
+  AltCorrection1("altCorrection1"),
+
+  @SerialName(value = "altCorrection2")
+  AltCorrection2("altCorrection2");
 
   override fun toString(): kotlin.String = value
 }
