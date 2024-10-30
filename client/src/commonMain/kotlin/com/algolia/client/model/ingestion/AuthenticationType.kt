@@ -25,7 +25,10 @@ public enum class AuthenticationType(public val value: kotlin.String) {
   Algolia("algolia"),
 
   @SerialName(value = "algoliaInsights")
-  AlgoliaInsights("algoliaInsights");
+  AlgoliaInsights("algoliaInsights"),
+
+  @SerialName(value = "secrets")
+  Secrets("secrets");
 
   override fun toString(): kotlin.String = value
 }

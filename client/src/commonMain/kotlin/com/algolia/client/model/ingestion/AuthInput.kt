@@ -20,6 +20,7 @@ import kotlin.jvm.JvmInline
  * - [AuthBasic]
  * - [AuthGoogleServiceAccount]
  * - [AuthOAuth]
+ * - [Map<kotlin.String, String>] - *[AuthInput.of]*
  */
 @Serializable(AuthInputSerializer::class)
 public sealed interface AuthInput {
@@ -47,6 +48,10 @@ public sealed interface AuthInput {
   @JvmInline
   public value class AuthAlgoliaInsightsValue(public val value: AuthAlgoliaInsights) : AuthInput
 
+  @Serializable
+  @JvmInline
+  public value class MapOfkotlinStringStringValue(public val value: Map<kotlin.String, String>) : AuthInput
+
   public companion object {
 
     public fun of(value: AuthOAuth): AuthInput {
@@ -67,6 +72,9 @@ public sealed interface AuthInput {
     public fun of(value: AuthAlgoliaInsights): AuthInput {
       return AuthAlgoliaInsightsValue(value)
     }
+    public fun of(value: Map<kotlin.String, String>): AuthInput {
+      return MapOfkotlinStringStringValue(value)
+    }
   }
 }
 
@@ -79,6 +87,7 @@ internal class AuthInputSerializer : JsonContentPolymorphicSerializer<AuthInput>
       element is JsonObject && element.containsKey("key") -> AuthAPIKey.serializer()
       element is JsonObject -> AuthAlgolia.serializer()
       element is JsonObject -> AuthAlgoliaInsights.serializer()
+      element is JsonObject -> AuthInput.MapOfkotlinStringStringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
