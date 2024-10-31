@@ -54,3 +54,12 @@ public class AlgoliaRetryException(
 public class AlgoliaWaitException(
   message: String? = null,
 ) : AlgoliaRuntimeException(message)
+
+/**
+ * Exception thrown when an error occurs during an iterable helper execution.
+ *
+ * @param message the detail message
+ */
+public class AlgoliaIterableException(
+  message: String? = null,
+) : AlgoliaRuntimeException(message)
