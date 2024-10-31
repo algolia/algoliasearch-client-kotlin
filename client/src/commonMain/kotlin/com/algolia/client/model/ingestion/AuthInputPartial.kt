@@ -20,6 +20,7 @@ import kotlin.jvm.JvmInline
  * - [AuthBasicPartial]
  * - [AuthGoogleServiceAccountPartial]
  * - [AuthOAuthPartial]
+ * - [Map<kotlin.String, String>] - *[AuthInputPartial.of]*
  */
 @Serializable(AuthInputPartialSerializer::class)
 public sealed interface AuthInputPartial {
@@ -47,6 +48,10 @@ public sealed interface AuthInputPartial {
   @JvmInline
   public value class AuthAlgoliaInsightsPartialValue(public val value: AuthAlgoliaInsightsPartial) : AuthInputPartial
 
+  @Serializable
+  @JvmInline
+  public value class MapOfkotlinStringStringValue(public val value: Map<kotlin.String, String>) : AuthInputPartial
+
   public companion object {
 
     public fun of(value: AuthGoogleServiceAccountPartial): AuthInputPartial {
@@ -67,6 +72,9 @@ public sealed interface AuthInputPartial {
     public fun of(value: AuthAlgoliaInsightsPartial): AuthInputPartial {
       return AuthAlgoliaInsightsPartialValue(value)
     }
+    public fun of(value: Map<kotlin.String, String>): AuthInputPartial {
+      return MapOfkotlinStringStringValue(value)
+    }
   }
 }
 
@@ -79,6 +87,7 @@ internal class AuthInputPartialSerializer : JsonContentPolymorphicSerializer<Aut
       element is JsonObject && element.containsKey("url") -> AuthOAuthPartial.serializer()
       element is JsonObject -> AuthAlgoliaPartial.serializer()
       element is JsonObject -> AuthAlgoliaInsightsPartial.serializer()
+      element is JsonObject -> AuthInputPartial.MapOfkotlinStringStringValue.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
