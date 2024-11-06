@@ -1,3 +1,9 @@
+## [3.9.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.8.0...3.9.0)
+
+- [801241e12](https://github.com/algolia/api-clients-automation/commit/801241e12) fix(specs): add secrets payload for updates ([#4061](https://github.com/algolia/api-clients-automation/pull/4061)) by [@shortcuts](https://github.com/shortcuts/)
+- [b3804d7df](https://github.com/algolia/api-clients-automation/commit/b3804d7df) feat(kotlin): add browse helpers ([#4059](https://github.com/algolia/api-clients-automation/pull/4059)) by [@Fluf22](https://github.com/Fluf22/)
+- [ff2d23c14](https://github.com/algolia/api-clients-automation/commit/ff2d23c14) chore(deps): dependencies 2024-11-04 ([#4065](https://github.com/algolia/api-clients-automation/pull/4065)) by [@algolia-bot](https://github.com/algolia-bot/)
+
 ## [3.8.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.7.0...3.8.0)
 
 - [be40cf61d](https://github.com/algolia/api-clients-automation/commit/be40cf61d) feat(specs): add secrets authentications to ingestion ([#4054](https://github.com/algolia/api-clients-automation/pull/4054)) by [@shortcuts](https://github.com/shortcuts/)
