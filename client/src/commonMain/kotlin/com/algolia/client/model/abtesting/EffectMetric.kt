@@ -7,7 +7,7 @@ import kotlinx.serialization.*
  * Metric for which you want to detect the smallest relative difference.
  */
 @Serializable
-public enum class Effect(public val value: kotlin.String) {
+public enum class EffectMetric(public val value: kotlin.String) {
 
   @SerialName(value = "addToCartRate")
   AddToCartRate("addToCartRate"),

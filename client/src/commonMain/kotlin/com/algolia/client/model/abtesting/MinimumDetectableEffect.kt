@@ -8,13 +8,13 @@ import kotlinx.serialization.json.*
  * Configuration for the smallest difference between test variants you want to detect.
  *
  * @param size Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1.
- * @param effect
+ * @param metric
  */
 @Serializable
 public data class MinimumDetectableEffect(
 
   /** Smallest difference in an observable metric between variants. For example, to detect a 10% difference between variants, set this value to 0.1.  */
-  @SerialName(value = "size") val size: Double? = null,
+  @SerialName(value = "size") val size: Double,
 
-  @SerialName(value = "effect") val effect: Effect? = null,
+  @SerialName(value = "metric") val metric: EffectMetric,
 )

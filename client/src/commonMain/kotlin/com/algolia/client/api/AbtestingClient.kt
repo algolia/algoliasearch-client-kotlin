@@ -156,6 +156,26 @@ public class AbtestingClient(
   }
 
   /**
+   * Given the traffic percentage and the expected effect size, this endpoint estimates the sample size and duration of an A/B test based on historical traffic.
+   *
+   * Required API Key ACLs:
+   *   - analytics
+   * @param estimateABTestRequest
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun estimateABTest(estimateABTestRequest: EstimateABTestRequest, requestOptions: RequestOptions? = null): EstimateABTestResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("2", "abtests", "estimate"),
+      body = estimateABTestRequest,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * Retrieves the details for an A/B test by its ID.
    *
    * Required API Key ACLs:
