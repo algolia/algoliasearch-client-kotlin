@@ -11,13 +11,13 @@ import kotlinx.serialization.json.*
  * @param sourceID Universally uniqud identifier (UUID) of a source.
  * @param destinationID Universally unique identifier (UUID) of a destination resource.
  * @param enabled Whether the task is enabled.
- * @param action
  * @param createdAt Date of creation in RFC 3339 format.
  * @param cron Cron expression for the task's schedule.
  * @param lastRun The last time the scheduled task ran in RFC 3339 format.
  * @param nextRun The next scheduled run of the task in RFC 3339 format.
  * @param input
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
+ * @param action
  * @param cursor Date of the last cursor in RFC 3339 format.
  * @param updatedAt Date of last update in RFC 3339 format.
  */
@@ -36,8 +36,6 @@ public data class Task(
   /** Whether the task is enabled. */
   @SerialName(value = "enabled") val enabled: Boolean,
 
-  @SerialName(value = "action") val action: ActionType,
-
   /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
@@ -54,6 +52,8 @@ public data class Task(
 
   /** Maximum accepted percentage of failures for a task run to finish successfully. */
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
+
+  @SerialName(value = "action") val action: ActionType? = null,
 
   /** Date of the last cursor in RFC 3339 format. */
   @SerialName(value = "cursor") val cursor: String? = null,
