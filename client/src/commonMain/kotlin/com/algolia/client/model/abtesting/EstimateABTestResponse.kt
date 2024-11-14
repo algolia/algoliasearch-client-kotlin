@@ -8,8 +8,7 @@ import kotlinx.serialization.json.*
  * EstimateABTestResponse
  *
  * @param durationDays Estimated number of days needed to reach the sample sizes required for detecting the configured effect. This value is based on historical traffic.
- * @param controlSampleSize Number of tracked searches needed to be able to detect the configured effect for the control variant.
- * @param experimentSampleSize Number of tracked searches needed to be able to detect the configured effect for the experiment variant.
+ * @param sampleSizes Sample size estimates for each variant. The first element is the control variant. Each element is the estimated number of searches required to achieve the desired statistical significance.
  */
 @Serializable
 public data class EstimateABTestResponse(
@@ -17,9 +16,6 @@ public data class EstimateABTestResponse(
   /** Estimated number of days needed to reach the sample sizes required for detecting the configured effect. This value is based on historical traffic. */
   @SerialName(value = "durationDays") val durationDays: Long? = null,
 
-  /** Number of tracked searches needed to be able to detect the configured effect for the control variant. */
-  @SerialName(value = "controlSampleSize") val controlSampleSize: Long? = null,
-
-  /** Number of tracked searches needed to be able to detect the configured effect for the experiment variant. */
-  @SerialName(value = "experimentSampleSize") val experimentSampleSize: Long? = null,
+  /** Sample size estimates for each variant. The first element is the control variant. Each element is the estimated number of searches required to achieve the desired statistical significance.  */
+  @SerialName(value = "sampleSizes") val sampleSizes: List<Long>? = null,
 )
