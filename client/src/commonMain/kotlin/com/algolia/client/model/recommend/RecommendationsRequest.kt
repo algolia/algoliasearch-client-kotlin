@@ -16,7 +16,6 @@ import kotlin.jvm.JvmInline
  * Implementations:
  * - [BoughtTogetherQuery]
  * - [LookingSimilarQuery]
- * - [RecommendedForYouQuery]
  * - [RelatedQuery]
  * - [TrendingFacetsQuery]
  * - [TrendingItemsQuery]
@@ -43,10 +42,6 @@ public sealed interface RecommendationsRequest {
   @JvmInline
   public value class LookingSimilarQueryValue(public val value: LookingSimilarQuery) : RecommendationsRequest
 
-  @Serializable
-  @JvmInline
-  public value class RecommendedForYouQueryValue(public val value: RecommendedForYouQuery) : RecommendationsRequest
-
   public companion object {
 
     public fun of(value: BoughtTogetherQuery): RecommendationsRequest {
@@ -64,9 +59,6 @@ public sealed interface RecommendationsRequest {
     public fun of(value: LookingSimilarQuery): RecommendationsRequest {
       return LookingSimilarQueryValue(value)
     }
-    public fun of(value: RecommendedForYouQuery): RecommendationsRequest {
-      return RecommendedForYouQueryValue(value)
-    }
   }
 }
 
@@ -78,7 +70,6 @@ internal class RecommendationsRequestSerializer : JsonContentPolymorphicSerializ
       element is JsonObject -> TrendingItemsQuery.serializer()
       element is JsonObject -> TrendingFacetsQuery.serializer()
       element is JsonObject -> LookingSimilarQuery.serializer()
-      element is JsonObject -> RecommendedForYouQuery.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
