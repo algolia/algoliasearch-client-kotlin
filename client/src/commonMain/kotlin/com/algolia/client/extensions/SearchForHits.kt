@@ -84,7 +84,6 @@ public fun SearchForHits.Companion.from(
     replaceSynonymsInHighlight = searchParamsObject.replaceSynonymsInHighlight,
     minProximity = searchParamsObject.minProximity,
     responseFields = searchParamsObject.responseFields,
-    maxFacetHits = searchParamsObject.maxFacetHits,
     maxValuesPerFacet = searchParamsObject.maxValuesPerFacet,
     sortFacetValuesBy = searchParamsObject.sortFacetValuesBy,
     attributeCriteriaComputedByMinProximity = searchParamsObject.attributeCriteriaComputedByMinProximity,
