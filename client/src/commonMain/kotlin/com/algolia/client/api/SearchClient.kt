@@ -394,7 +394,7 @@ public class SearchClient(
    * @param deleteByParams
    * @param requestOptions additional request configuration.
    */
-  public suspend fun deleteBy(indexName: String, deleteByParams: DeleteByParams, requestOptions: RequestOptions? = null): DeletedAtResponse {
+  public suspend fun deleteBy(indexName: String, deleteByParams: DeleteByParams, requestOptions: RequestOptions? = null): UpdatedAtResponse {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `deleteBy`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
