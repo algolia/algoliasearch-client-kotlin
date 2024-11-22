@@ -16,8 +16,8 @@ import kotlinx.serialization.json.*
  * @param ip IP address of the client that performed the request.
  * @param queryHeaders Request headers (API keys are obfuscated).
  * @param sha1 SHA1 signature of the log entry.
- * @param nbApiCalls Number of API requests.
  * @param processingTimeMs Processing time for the query in milliseconds. This doesn't include latency due to the network.
+ * @param nbApiCalls Number of API requests.
  * @param index Index targeted by the query.
  * @param queryParams Query parameters sent with the request.
  * @param queryNbHits Number of search results (hits) returned for the query.
@@ -53,11 +53,11 @@ public data class Log(
   /** SHA1 signature of the log entry. */
   @SerialName(value = "sha1") val sha1: String,
 
-  /** Number of API requests. */
-  @SerialName(value = "nb_api_calls") val nbApiCalls: String,
-
   /** Processing time for the query in milliseconds. This doesn't include latency due to the network.  */
   @SerialName(value = "processing_time_ms") val processingTimeMs: String,
+
+  /** Number of API requests. */
+  @SerialName(value = "nb_api_calls") val nbApiCalls: String? = null,
 
   /** Index targeted by the query. */
   @SerialName(value = "index") val index: String? = null,
