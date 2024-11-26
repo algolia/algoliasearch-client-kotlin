@@ -1077,7 +1077,7 @@ public class SearchClient(
    * @param forwardToReplicas Whether changes are applied to replica indices.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun saveRule(indexName: String, objectID: String, rule: Rule, forwardToReplicas: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedRuleResponse {
+  public suspend fun saveRule(indexName: String, objectID: String, rule: Rule, forwardToReplicas: Boolean? = null, requestOptions: RequestOptions? = null): UpdatedAtResponse {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `saveRule`." }
     require(objectID.isNotBlank()) { "Parameter `objectID` is required when calling `saveRule`." }
     val requestConfig = RequestConfig(
