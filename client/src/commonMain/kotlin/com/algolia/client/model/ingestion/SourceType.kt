@@ -30,9 +30,6 @@ public enum class SourceType(public val value: kotlin.String) {
   @SerialName(value = "shopify")
   Shopify("shopify"),
 
-  @SerialName(value = "sfcc")
-  Sfcc("sfcc"),
-
   @SerialName(value = "push")
   Push("push");
 
