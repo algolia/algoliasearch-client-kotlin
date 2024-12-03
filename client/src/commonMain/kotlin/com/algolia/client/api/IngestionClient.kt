@@ -812,13 +812,14 @@ public class IngestionClient(
    * @param action Actions for filtering the list of tasks.
    * @param enabled Whether to filter the list of tasks by the `enabled` status.
    * @param sourceID Source IDs for filtering the list of tasks.
+   * @param sourceType Filters the tasks with the specified source type.
    * @param destinationID Destination IDs for filtering the list of tasks.
    * @param triggerType Type of task trigger for filtering the list of tasks.
    * @param sort Property by which to sort the list of tasks. (default to createdAt)
    * @param order Sort order of the response, ascending or descending. (default to desc)
    * @param requestOptions additional request configuration.
    */
-  public suspend fun listTasks(itemsPerPage: Int? = null, page: Int? = null, action: List<ActionType>? = null, enabled: Boolean? = null, sourceID: List<String>? = null, destinationID: List<String>? = null, triggerType: List<TriggerType>? = null, sort: TaskSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTasksResponse {
+  public suspend fun listTasks(itemsPerPage: Int? = null, page: Int? = null, action: List<ActionType>? = null, enabled: Boolean? = null, sourceID: List<String>? = null, sourceType: List<SourceType>? = null, destinationID: List<String>? = null, triggerType: List<TriggerType>? = null, sort: TaskSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTasksResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
       path = listOf("2", "tasks"),
@@ -828,6 +829,7 @@ public class IngestionClient(
         action?.let { put("action", it.joinToString(",")) }
         enabled?.let { put("enabled", it) }
         sourceID?.let { put("sourceID", it.joinToString(",")) }
+        sourceType?.let { put("sourceType", it.joinToString(",")) }
         destinationID?.let { put("destinationID", it.joinToString(",")) }
         triggerType?.let { put("triggerType", it.joinToString(",")) }
         sort?.let { put("sort", it) }
