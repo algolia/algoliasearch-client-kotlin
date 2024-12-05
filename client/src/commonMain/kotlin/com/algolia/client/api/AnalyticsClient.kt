@@ -8,6 +8,7 @@ import com.algolia.client.model.analytics.*
 import com.algolia.client.transport.*
 import com.algolia.client.transport.internal.*
 import kotlinx.serialization.json.*
+import kotlin.time.Duration.Companion.milliseconds
 
 public class AnalyticsClient(
   override val appId: String,
@@ -21,7 +22,7 @@ public class AnalyticsClient(
     require(apiKey.isNotBlank()) { "`apiKey` is missing." }
   }
 
-  override val requester: Requester = requesterOf(clientName = "Analytics", appId = appId, apiKey = apiKey, options = options) {
+  override val requester: Requester = requesterOf(clientName = "Analytics", appId = appId, apiKey = apiKey, connectTimeout = 2000.milliseconds, readTimeout = 5000.milliseconds, writeTimeout = 30000.milliseconds, options = options) {
     val allowedRegions = listOf("de", "us")
     require(region == null || region in allowedRegions) { "`region` must be one of the following: ${allowedRegions.joinToString()}" }
     val url = if (region == null) "analytics.algolia.com" else "analytics.$region.algolia.com"

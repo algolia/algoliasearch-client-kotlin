@@ -8,6 +8,7 @@ import com.algolia.client.model.recommend.*
 import com.algolia.client.transport.*
 import com.algolia.client.transport.internal.*
 import kotlinx.serialization.json.*
+import kotlin.time.Duration.Companion.milliseconds
 
 public class RecommendClient(
   override val appId: String,
@@ -20,7 +21,7 @@ public class RecommendClient(
     require(apiKey.isNotBlank()) { "`apiKey` is missing." }
   }
 
-  override val requester: Requester = requesterOf(clientName = "Recommend", appId = appId, apiKey = apiKey, options = options) {
+  override val requester: Requester = requesterOf(clientName = "Recommend", appId = appId, apiKey = apiKey, connectTimeout = 2000.milliseconds, readTimeout = 5000.milliseconds, writeTimeout = 30000.milliseconds, options = options) {
     listOf(
       Host("$appId-dsn.algolia.net", CallType.Read),
       Host("$appId.algolia.net", CallType.Write),

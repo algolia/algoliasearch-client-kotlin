@@ -11,6 +11,7 @@ import com.algolia.client.transport.RequestConfig
 import com.algolia.client.transport.RequestOptions
 import com.algolia.client.transport.Requester
 import io.ktor.util.reflect.*
+import kotlin.time.Duration
 
 /**
  * Executes a network request with the specified configuration and options, then returns the
@@ -40,6 +41,9 @@ internal fun requesterOf(
   clientName: String,
   appId: String,
   apiKey: String,
+  connectTimeout: Duration,
+  readTimeout: Duration,
+  writeTimeout: Duration,
   options: ClientOptions,
   defaultHosts: () -> List<Host>,
 ) = options.requester ?: KtorRequester(
@@ -52,8 +56,8 @@ internal fun requesterOf(
       add(AgentSegment(clientName, BuildConfig.VERSION))
     },
   ),
-  connectTimeout = options.connectTimeout,
-  readTimeout = options.readTimeout,
-  writeTimeout = options.writeTimeout,
+  connectTimeout = options.connectTimeout ?: connectTimeout,
+  readTimeout = options.readTimeout ?: readTimeout,
+  writeTimeout = options.writeTimeout ?: writeTimeout,
   hosts = options.hosts ?: defaultHosts(),
 )

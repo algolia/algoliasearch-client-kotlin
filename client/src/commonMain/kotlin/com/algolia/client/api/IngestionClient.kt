@@ -8,6 +8,7 @@ import com.algolia.client.model.ingestion.*
 import com.algolia.client.transport.*
 import com.algolia.client.transport.internal.*
 import kotlinx.serialization.json.*
+import kotlin.time.Duration.Companion.milliseconds
 
 public class IngestionClient(
   override val appId: String,
@@ -21,7 +22,7 @@ public class IngestionClient(
     require(apiKey.isNotBlank()) { "`apiKey` is missing." }
   }
 
-  override val requester: Requester = requesterOf(clientName = "Ingestion", appId = appId, apiKey = apiKey, options = options) {
+  override val requester: Requester = requesterOf(clientName = "Ingestion", appId = appId, apiKey = apiKey, connectTimeout = 25000.milliseconds, readTimeout = 25000.milliseconds, writeTimeout = 25000.milliseconds, options = options) {
     val allowedRegions = listOf("eu", "us")
     require(region in allowedRegions) { "`region` is required and must be one of the following: ${allowedRegions.joinToString()}" }
     val url = "data.$region.algolia.com"

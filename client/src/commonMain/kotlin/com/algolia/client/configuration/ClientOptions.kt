@@ -7,12 +7,11 @@ import io.ktor.client.plugins.logging.*
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonBuilder
 import kotlin.time.Duration
-import kotlin.time.Duration.Companion.seconds
 
 public expect class ClientOptions(
-  connectTimeout: Duration = 2.seconds,
-  writeTimeout: Duration = 30.seconds,
-  readTimeout: Duration = 5.seconds,
+  connectTimeout: Duration? = null,
+  writeTimeout: Duration? = null,
+  readTimeout: Duration? = null,
   logLevel: LogLevel = LogLevel.NONE,
   logger: Logger = Logger.DEFAULT,
   hosts: List<Host>? = null,
@@ -25,13 +24,13 @@ public expect class ClientOptions(
 ) {
 
   /** Connect timeout for each request */
-  public val connectTimeout: Duration
+  public val connectTimeout: Duration?
 
   /** The timeout for each request when performing write operations. */
-  public val writeTimeout: Duration
+  public val writeTimeout: Duration?
 
   /** The timeout for each request when performing read operations. */
-  public val readTimeout: Duration
+  public val readTimeout: Duration?
 
   /** [LogLevel] to display in the console. */
   public val logLevel: LogLevel
