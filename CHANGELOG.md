@@ -1,3 +1,17 @@
+## [3.11.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.10.1...3.11.0)
+
+- [068fdacb5](https://github.com/algolia/api-clients-automation/commit/068fdacb5) feat(specs): add info and link about indexing rate limits ([#4136](https://github.com/algolia/api-clients-automation/pull/4136)) by [@kai687](https://github.com/kai687/)
+- [9e0235697](https://github.com/algolia/api-clients-automation/commit/9e0235697) fix(specs): `nb_api_calls` in `getLogs` response is optional ([#4142](https://github.com/algolia/api-clients-automation/pull/4142)) by [@shortcuts](https://github.com/shortcuts/)
+- [56fd73fb6](https://github.com/algolia/api-clients-automation/commit/56fd73fb6) chore(deps): dependencies 2024-11-25 ([#4145](https://github.com/algolia/api-clients-automation/pull/4145)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [b728c5f25](https://github.com/algolia/api-clients-automation/commit/b728c5f25) fix(specs): `consequence` is required when saving rules ([#4146](https://github.com/algolia/api-clients-automation/pull/4146)) by [@shortcuts](https://github.com/shortcuts/)
+- [afd94fac8](https://github.com/algolia/api-clients-automation/commit/afd94fac8) fix(specs): `saveRule` response type ([#4170](https://github.com/algolia/api-clients-automation/pull/4170)) by [@shortcuts](https://github.com/shortcuts/)
+- [2325c61b8](https://github.com/algolia/api-clients-automation/commit/2325c61b8) feat(clients): allow batch size on objects helper ([#4172](https://github.com/algolia/api-clients-automation/pull/4172)) by [@shortcuts](https://github.com/shortcuts/)
+- [641c1c37f](https://github.com/algolia/api-clients-automation/commit/641c1c37f) chore(deps): dependencies 2024-12-02 ([#4174](https://github.com/algolia/api-clients-automation/pull/4174)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [aae74cb38](https://github.com/algolia/api-clients-automation/commit/aae74cb38) fix(specs): remove SFCC source type ([#4190](https://github.com/algolia/api-clients-automation/pull/4190)) by [@millotp](https://github.com/millotp/)
+- [254052857](https://github.com/algolia/api-clients-automation/commit/254052857) fix(specs): add sourceType to listTasks ([#4193](https://github.com/algolia/api-clients-automation/pull/4193)) by [@millotp](https://github.com/millotp/)
+- [106d64313](https://github.com/algolia/api-clients-automation/commit/106d64313) feat(generators): allow per-spec timeouts ([#4173](https://github.com/algolia/api-clients-automation/pull/4173)) by [@shortcuts](https://github.com/shortcuts/)
+- [9e1e60f9e](https://github.com/algolia/api-clients-automation/commit/9e1e60f9e) chore(deps): dependencies 2024-12-09 ([#4197](https://github.com/algolia/api-clients-automation/pull/4197)) by [@algolia-bot](https://github.com/algolia-bot/)
+
 ## [3.10.1](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.10.0...3.10.1)
 
 - [36d583e35](https://github.com/algolia/api-clients-automation/commit/36d583e35) fix(specs): make the searchParams compatible with v4 ([#4108](https://github.com/algolia/api-clients-automation/pull/4108)) by [@millotp](https://github.com/millotp/)
