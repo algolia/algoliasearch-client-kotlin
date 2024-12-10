@@ -922,13 +922,17 @@ public class IngestionClient(
    *   - editSettings
    * @param taskID Unique identifier of a task.
    * @param pushTaskPayload Request body of a Search API `batch` request that will be pushed in the Connectors pipeline.
+   * @param watch When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun pushTask(taskID: String, pushTaskPayload: PushTaskPayload, requestOptions: RequestOptions? = null): RunResponse {
+  public suspend fun pushTask(taskID: String, pushTaskPayload: PushTaskPayload, watch: Boolean? = null, requestOptions: RequestOptions? = null): RunResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `pushTask`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("2", "tasks", "$taskID", "push"),
+      query = buildMap {
+        watch?.let { put("watch", it) }
+      },
       body = pushTaskPayload,
     )
     return requester.execute(
