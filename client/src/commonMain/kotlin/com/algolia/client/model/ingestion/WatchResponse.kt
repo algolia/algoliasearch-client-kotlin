@@ -5,15 +5,15 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SourceWatchResponse
+ * WatchResponse
  *
  * @param message a message describing the outcome of a validate run.
  * @param runID Universally unique identifier (UUID) of a task run.
- * @param `data` depending on the source type, the validation returns sampling data of your source (JSON, CSV, BigQuery).
+ * @param `data` when used with discovering or validating sources, the sampled data of your source is returned.
  * @param events in case of error, observability events will be added to the response, if any.
  */
 @Serializable
-public data class SourceWatchResponse(
+public data class WatchResponse(
 
   /** a message describing the outcome of a validate run. */
   @SerialName(value = "message") val message: String,
@@ -21,7 +21,7 @@ public data class SourceWatchResponse(
   /** Universally unique identifier (UUID) of a task run. */
   @SerialName(value = "runID") val runID: String? = null,
 
-  /** depending on the source type, the validation returns sampling data of your source (JSON, CSV, BigQuery). */
+  /** when used with discovering or validating sources, the sampled data of your source is returned. */
   @SerialName(value = "data") val `data`: List<JsonObject>? = null,
 
   /** in case of error, observability events will be added to the response, if any. */

@@ -925,7 +925,7 @@ public class IngestionClient(
    * @param watch When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun pushTask(taskID: String, pushTaskPayload: PushTaskPayload, watch: Boolean? = null, requestOptions: RequestOptions? = null): RunResponse {
+  public suspend fun pushTask(taskID: String, pushTaskPayload: PushTaskPayload, watch: Boolean? = null, requestOptions: RequestOptions? = null): WatchResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `pushTask`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
@@ -1151,7 +1151,7 @@ public class IngestionClient(
    * @param sourceID Unique identifier of a source.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun triggerDockerSourceDiscover(sourceID: String, requestOptions: RequestOptions? = null): SourceWatchResponse {
+  public suspend fun triggerDockerSourceDiscover(sourceID: String, requestOptions: RequestOptions? = null): WatchResponse {
     require(sourceID.isNotBlank()) { "Parameter `sourceID` is required when calling `triggerDockerSourceDiscover`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
@@ -1348,7 +1348,7 @@ public class IngestionClient(
    * @param sourceCreate
    * @param requestOptions additional request configuration.
    */
-  public suspend fun validateSource(sourceCreate: SourceCreate? = null, requestOptions: RequestOptions? = null): SourceWatchResponse {
+  public suspend fun validateSource(sourceCreate: SourceCreate? = null, requestOptions: RequestOptions? = null): WatchResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "sources", "validate"),
@@ -1371,7 +1371,7 @@ public class IngestionClient(
    * @param sourceUpdate
    * @param requestOptions additional request configuration.
    */
-  public suspend fun validateSourceBeforeUpdate(sourceID: String, sourceUpdate: SourceUpdate, requestOptions: RequestOptions? = null): SourceWatchResponse {
+  public suspend fun validateSourceBeforeUpdate(sourceID: String, sourceUpdate: SourceUpdate, requestOptions: RequestOptions? = null): WatchResponse {
     require(sourceID.isNotBlank()) { "Parameter `sourceID` is required when calling `validateSourceBeforeUpdate`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
