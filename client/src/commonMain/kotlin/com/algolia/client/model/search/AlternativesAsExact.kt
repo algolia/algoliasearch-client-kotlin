@@ -13,7 +13,10 @@ public enum class AlternativesAsExact(public val value: kotlin.String) {
   SingleWordSynonym("singleWordSynonym"),
 
   @SerialName(value = "multiWordsSynonym")
-  MultiWordsSynonym("multiWordsSynonym");
+  MultiWordsSynonym("multiWordsSynonym"),
+
+  @SerialName(value = "ignoreConjugations")
+  IgnoreConjugations("ignoreConjugations");
 
   override fun toString(): kotlin.String = value
 }
