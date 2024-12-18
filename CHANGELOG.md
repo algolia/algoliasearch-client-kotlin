@@ -1,3 +1,7 @@
+## [3.12.2](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.12.1...3.12.2)
+
+- [0481473fe0](https://github.com/algolia/api-clients-automation/commit/0481473fe0) chore: trigger auto close pr ([#4250](https://github.com/algolia/api-clients-automation/pull/4250)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [3.12.1](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.12.0...3.12.1)
 
 - [cd59f445e](https://github.com/algolia/api-clients-automation/commit/cd59f445e) fix(specs): enable watcher for push ([#4229](https://github.com/algolia/api-clients-automation/pull/4229)) by [@shortcuts](https://github.com/shortcuts/)
