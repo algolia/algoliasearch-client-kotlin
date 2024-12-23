@@ -9,9 +9,6 @@ import kotlinx.serialization.*
 @Serializable
 public enum class DockerImageType(public val value: kotlin.String) {
 
-  @SerialName(value = "singer")
-  Singer("singer"),
-
   @SerialName(value = "custom")
   Custom("custom"),
 
