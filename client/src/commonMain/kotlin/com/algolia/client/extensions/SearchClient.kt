@@ -472,46 +472,52 @@ public suspend fun SearchClient.replaceAllObjects(
 ): ReplaceAllObjectsResponse {
   val tmpIndexName = "${indexName}_tmp_${Random.nextInt(from = 0, until = 100)}"
 
-  var copy = operationIndex(
-    indexName = indexName,
-    operationIndexParams = OperationIndexParams(
-      operation = OperationType.Copy,
-      destination = tmpIndexName,
-      scope = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
-    ),
-    requestOptions = requestOptions,
-  )
+  try {
+    var copy = operationIndex(
+      indexName = indexName,
+      operationIndexParams = OperationIndexParams(
+        operation = OperationType.Copy,
+        destination = tmpIndexName,
+        scope = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
+      ),
+      requestOptions = requestOptions,
+    )
 
-  val batchResponses = this.chunkedBatch(
-    indexName = tmpIndexName,
-    objects = objects,
-    action = Action.AddObject,
-    waitForTask = true,
-    batchSize = batchSize,
-    requestOptions = requestOptions,
-  )
+    val batchResponses = this.chunkedBatch(
+      indexName = tmpIndexName,
+      objects = objects,
+      action = Action.AddObject,
+      waitForTask = true,
+      batchSize = batchSize,
+      requestOptions = requestOptions,
+    )
 
-  waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
+    waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
 
-  copy = operationIndex(
-    indexName = indexName,
-    operationIndexParams = OperationIndexParams(
-      operation = OperationType.Copy,
-      destination = tmpIndexName,
-      scope = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
-    ),
-    requestOptions = requestOptions,
-  )
-  waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
+    copy = operationIndex(
+      indexName = indexName,
+      operationIndexParams = OperationIndexParams(
+        operation = OperationType.Copy,
+        destination = tmpIndexName,
+        scope = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
+      ),
+      requestOptions = requestOptions,
+    )
+    waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
 
-  val move = operationIndex(
-    indexName = tmpIndexName,
-    operationIndexParams = OperationIndexParams(operation = OperationType.Move, destination = indexName),
-    requestOptions = requestOptions,
-  )
-  waitForTask(indexName = tmpIndexName, taskID = move.taskID)
+    val move = operationIndex(
+      indexName = tmpIndexName,
+      operationIndexParams = OperationIndexParams(operation = OperationType.Move, destination = indexName),
+      requestOptions = requestOptions,
+    )
+    waitForTask(indexName = tmpIndexName, taskID = move.taskID)
 
-  return ReplaceAllObjectsResponse(copy, batchResponses, move)
+    return ReplaceAllObjectsResponse(copy, batchResponses, move)
+  } catch (e: Exception) {
+    deleteIndex(tmpIndexName)
+
+    throw e
+  }
 }
 
 /**
@@ -542,6 +548,13 @@ public fun securedApiKeyRemainingValidity(apiKey: String): Duration {
   return validUntil - Clock.System.now()
 }
 
+/**
+ * Checks that an index exists.
+ *
+ * @param indexName The name of the index to check.
+ * @return true if the index exists, false otherwise.
+ * @throws AlgoliaApiException if an error occurs during the request.
+ */
 public suspend fun SearchClient.indexExists(indexName: String): Boolean {
   try {
     getSettings(indexName)
