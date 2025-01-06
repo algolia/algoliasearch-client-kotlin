@@ -7,18 +7,18 @@ import kotlinx.serialization.json.*
 /**
  * PersonalizationStrategyParams
  *
- * @param eventScoring Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results.
- * @param facetScoring Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results.
+ * @param eventsScoring Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results.
+ * @param facetsScoring Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results.
  * @param personalizationImpact Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results.
  */
 @Serializable
 public data class PersonalizationStrategyParams(
 
   /** Scores associated with each event.  The higher the scores, the higher the impact of those events on the personalization of search results.  */
-  @SerialName(value = "eventScoring") val eventScoring: List<EventScoring>,
+  @SerialName(value = "eventsScoring") val eventsScoring: List<EventsScoring>,
 
   /** Scores associated with each facet.  The higher the scores, the higher the impact of those events on the personalization of search results.  */
-  @SerialName(value = "facetScoring") val facetScoring: List<FacetScoring>,
+  @SerialName(value = "facetsScoring") val facetsScoring: List<FacetsScoring>,
 
   /** Impact of personalization on the search results.  If set to 0, personalization has no impact on the search results.  */
   @SerialName(value = "personalizationImpact") val personalizationImpact: Int,

@@ -5,13 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * FacetScoring
+ * FacetsScoring
  *
  * @param score Event score.
  * @param facetName Facet attribute name.
  */
 @Serializable
-public data class FacetScoring(
+public data class FacetsScoring(
 
   /** Event score. */
   @SerialName(value = "score") val score: Int,
