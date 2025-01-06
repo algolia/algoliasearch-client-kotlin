@@ -17,6 +17,8 @@ import kotlinx.serialization.json.*
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
  * @param action
  * @param cursor Date of the last cursor in RFC 3339 format.
+ * @param notifications
+ * @param policies
  * @param updatedAt Date of last update in RFC 3339 format.
  */
 @Deprecated(message = "This schema is deprecated.")
@@ -49,6 +51,10 @@ public data class TaskV1(
 
   /** Date of the last cursor in RFC 3339 format. */
   @SerialName(value = "cursor") val cursor: String? = null,
+
+  @SerialName(value = "notifications") val notifications: Notifications? = null,
+
+  @SerialName(value = "policies") val policies: Policies? = null,
 
   /** Date of last update in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String? = null,

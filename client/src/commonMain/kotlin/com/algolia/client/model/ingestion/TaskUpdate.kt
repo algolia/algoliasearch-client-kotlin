@@ -12,6 +12,8 @@ import kotlinx.serialization.json.*
  * @param input
  * @param enabled Whether the task is enabled.
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
+ * @param notifications
+ * @param policies
  */
 @Serializable
 public data class TaskUpdate(
@@ -29,4 +31,8 @@ public data class TaskUpdate(
 
   /** Maximum accepted percentage of failures for a task run to finish successfully. */
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
+
+  @SerialName(value = "notifications") val notifications: Notifications? = null,
+
+  @SerialName(value = "policies") val policies: Policies? = null,
 )
