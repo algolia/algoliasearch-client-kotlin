@@ -462,12 +462,14 @@ public suspend fun SearchClient.partialUpdateObjects(
  * @param indexName The index in which to perform the request.
  * @param objects The list of objects to replace.
  * @param batchSize The size of the batch. Default is 1000.
+ * @param scopes The `scopes` to keep from the index. Defaults to ['settings', 'rules', 'synonyms'].
  * @return responses from the three-step operations: copy, batch, move.
  */
 public suspend fun SearchClient.replaceAllObjects(
   indexName: String,
   objects: List<JsonObject>,
   batchSize: Int = 1000,
+  scopes: List<ScopeType> = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
   requestOptions: RequestOptions? = null,
 ): ReplaceAllObjectsResponse {
   val tmpIndexName = "${indexName}_tmp_${Random.nextInt(from = 0, until = 100)}"
@@ -478,7 +480,7 @@ public suspend fun SearchClient.replaceAllObjects(
       operationIndexParams = OperationIndexParams(
         operation = OperationType.Copy,
         destination = tmpIndexName,
-        scope = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
+        scope = scopes,
       ),
       requestOptions = requestOptions,
     )
@@ -499,7 +501,7 @@ public suspend fun SearchClient.replaceAllObjects(
       operationIndexParams = OperationIndexParams(
         operation = OperationType.Copy,
         destination = tmpIndexName,
-        scope = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
+        scope = scopes,
       ),
       requestOptions = requestOptions,
     )
