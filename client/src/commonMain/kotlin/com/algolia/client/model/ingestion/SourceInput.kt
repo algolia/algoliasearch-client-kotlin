@@ -27,11 +27,11 @@ import kotlin.jvm.JvmInline
 public sealed interface SourceInput {
   @Serializable
   @JvmInline
-  public value class SourceDockerValue(public val value: SourceDocker) : SourceInput
+  public value class SourceGA4BigQueryExportValue(public val value: SourceGA4BigQueryExport) : SourceInput
 
   @Serializable
   @JvmInline
-  public value class SourceGA4BigQueryExportValue(public val value: SourceGA4BigQueryExport) : SourceInput
+  public value class SourceDockerValue(public val value: SourceDocker) : SourceInput
 
   @Serializable
   @JvmInline
@@ -59,11 +59,11 @@ public sealed interface SourceInput {
 
   public companion object {
 
-    public fun of(value: SourceDocker): SourceInput {
-      return SourceDockerValue(value)
-    }
     public fun of(value: SourceGA4BigQueryExport): SourceInput {
       return SourceGA4BigQueryExportValue(value)
+    }
+    public fun of(value: SourceDocker): SourceInput {
+      return SourceDockerValue(value)
     }
     public fun of(value: SourceCommercetools): SourceInput {
       return SourceCommercetoolsValue(value)
@@ -89,8 +89,8 @@ public sealed interface SourceInput {
 internal class SourceInputSerializer : JsonContentPolymorphicSerializer<SourceInput>(SourceInput::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SourceInput> {
     return when {
-      element is JsonObject && element.containsKey("registry") && element.containsKey("image") && element.containsKey("imageType") && element.containsKey("configuration") -> SourceDocker.serializer()
       element is JsonObject && element.containsKey("projectID") && element.containsKey("datasetID") && element.containsKey("tablePrefix") -> SourceGA4BigQueryExport.serializer()
+      element is JsonObject && element.containsKey("image") && element.containsKey("configuration") -> SourceDocker.serializer()
       element is JsonObject && element.containsKey("projectKey") -> SourceCommercetools.serializer()
       element is JsonObject && element.containsKey("storeHash") -> SourceBigCommerce.serializer()
       element is JsonObject && element.containsKey("projectID") -> SourceBigQuery.serializer()
