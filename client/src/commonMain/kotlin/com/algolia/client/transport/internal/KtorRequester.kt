@@ -118,7 +118,8 @@ public class KtorRequester(
           CallType.Read -> requestOptions?.readTimeout ?: readTimeout
           CallType.Write -> requestOptions?.writeTimeout ?: writeTimeout
         }
-      connectTimeoutMillis = connectTimeout.inWholeMilliseconds
+      val connectTimeoutDuration = requestOptions?.connectTimeout ?: connectTimeout
+      connectTimeoutMillis = connectTimeoutDuration.inWholeMilliseconds
       socketTimeoutMillis = timeout.inWholeMilliseconds * (host.retryCount + 1)
     }
   }

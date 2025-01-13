@@ -939,7 +939,11 @@ public class IngestionClient(
     )
     return requester.execute(
       requestConfig = requestConfig,
-      requestOptions = requestOptions,
+      requestOptions = RequestOptions(
+        readTimeout = 180000.milliseconds,
+        writeTimeout = 180000.milliseconds,
+        connectTimeout = 180000.milliseconds,
+      ) + requestOptions,
     )
   }
 
@@ -1161,7 +1165,11 @@ public class IngestionClient(
     )
     return requester.execute(
       requestConfig = requestConfig,
-      requestOptions = requestOptions,
+      requestOptions = RequestOptions(
+        readTimeout = 180000.milliseconds,
+        writeTimeout = 180000.milliseconds,
+        connectTimeout = 180000.milliseconds,
+      ) + requestOptions,
     )
   }
 
@@ -1358,7 +1366,11 @@ public class IngestionClient(
     )
     return requester.execute(
       requestConfig = requestConfig,
-      requestOptions = requestOptions,
+      requestOptions = RequestOptions(
+        readTimeout = 180000.milliseconds,
+        writeTimeout = 180000.milliseconds,
+        connectTimeout = 180000.milliseconds,
+      ) + requestOptions,
     )
   }
 
@@ -1382,7 +1394,11 @@ public class IngestionClient(
     )
     return requester.execute(
       requestConfig = requestConfig,
-      requestOptions = requestOptions,
+      requestOptions = RequestOptions(
+        readTimeout = 180000.milliseconds,
+        writeTimeout = 180000.milliseconds,
+        connectTimeout = 180000.milliseconds,
+      ) + requestOptions,
     )
   }
 }

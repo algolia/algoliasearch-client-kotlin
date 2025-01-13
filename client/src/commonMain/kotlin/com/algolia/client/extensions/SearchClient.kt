@@ -81,8 +81,7 @@ public suspend fun SearchClient.waitForApiKey(
  * @param indexName The index in which to perform the request.
  * @param taskID The ID of the task to wait for.
  * @param timeout If specified, the method will throw a
- *   [kotlinx.coroutines.TimeoutCancellationException] after the timeout value in milliseconds is
- *   elapsed.
+ *   [kotlinx.coroutines.TimeoutCancellationException] after the timeout value is elapsed.
  * @param maxRetries maximum number of retry attempts.
  * @param requestOptions additional request configuration.
  */
@@ -130,8 +129,7 @@ public suspend fun SearchClient.waitTask(
  *
  * @param taskID The ID of the task to wait for.
  * @param timeout If specified, the method will throw a
- *   [kotlinx.coroutines.TimeoutCancellationException] after the timeout value in milliseconds is
- *   elapsed.
+ *   [kotlinx.coroutines.TimeoutCancellationException] after the timeout value is elapsed.
  * @param maxRetries maximum number of retry attempts.
  * @param requestOptions additional request configuration.
  */
@@ -178,8 +176,7 @@ public suspend fun SearchClient.waitAppTask(
  * @param apiKey Necessary to know if an `update` operation has been processed, compare fields of
  *   the response with it.
  * @param timeout If specified, the method will throw a
- *   [kotlinx.coroutines.TimeoutCancellationException] after the timeout value in milliseconds is
- *   elapsed.
+ *   [kotlinx.coroutines.TimeoutCancellationException] after the timeout value is elapsed.
  * @param maxRetries Maximum number of retry attempts.
  * @param requestOptions Additional request configuration.
  */
@@ -216,8 +213,7 @@ public suspend fun SearchClient.waitKeyUpdate(
  * Wait on an API key creation operation.
  *
  * @param timeout If specified, the method will throw a
- *   [kotlinx.coroutines.TimeoutCancellationException] after the timeout value in milliseconds is
- *   elapsed.
+ *   [kotlinx.coroutines.TimeoutCancellationException] after the timeout value is elapsed.
  * @param maxRetries Maximum number of retry attempts.
  * @param requestOptions Additional request configuration.
  */
@@ -249,8 +245,7 @@ public suspend fun SearchClient.waitKeyCreation(
  *
  * @param maxRetries Maximum number of retry attempts.
  * @param timeout If specified, the method will throw a
- *   [kotlinx.coroutines.TimeoutCancellationException] after the timeout value in milliseconds is
- *   elapsed.
+ *   [kotlinx.coroutines.TimeoutCancellationException] after the timeout value is elapsed.
  * @param requestOptions Additional request configuration.
  */
 public suspend fun SearchClient.waitKeyDelete(
