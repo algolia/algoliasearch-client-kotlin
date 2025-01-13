@@ -34,25 +34,19 @@ public sealed interface GetTopSearchesResponse {
 
   public companion object {
 
-    public fun of(value: TopSearchesResponse): GetTopSearchesResponse {
-      return TopSearchesResponseValue(value)
-    }
-    public fun of(value: TopSearchesResponseWithAnalytics): GetTopSearchesResponse {
-      return TopSearchesResponseWithAnalyticsValue(value)
-    }
-    public fun of(value: TopSearchesResponseWithRevenueAnalytics): GetTopSearchesResponse {
-      return TopSearchesResponseWithRevenueAnalyticsValue(value)
-    }
+    public fun of(value: TopSearchesResponse): GetTopSearchesResponse = TopSearchesResponseValue(value)
+
+    public fun of(value: TopSearchesResponseWithAnalytics): GetTopSearchesResponse = TopSearchesResponseWithAnalyticsValue(value)
+
+    public fun of(value: TopSearchesResponseWithRevenueAnalytics): GetTopSearchesResponse = TopSearchesResponseWithRevenueAnalyticsValue(value)
   }
 }
 
 internal class GetTopSearchesResponseSerializer : JsonContentPolymorphicSerializer<GetTopSearchesResponse>(GetTopSearchesResponse::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<GetTopSearchesResponse> {
-    return when {
-      element is JsonObject -> TopSearchesResponse.serializer()
-      element is JsonObject -> TopSearchesResponseWithAnalytics.serializer()
-      element is JsonObject -> TopSearchesResponseWithRevenueAnalytics.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<GetTopSearchesResponse> = when {
+    element is JsonObject -> TopSearchesResponse.serializer()
+    element is JsonObject -> TopSearchesResponseWithAnalytics.serializer()
+    element is JsonObject -> TopSearchesResponseWithRevenueAnalytics.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

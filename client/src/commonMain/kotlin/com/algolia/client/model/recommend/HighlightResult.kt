@@ -34,25 +34,19 @@ public sealed interface HighlightResult {
 
   public companion object {
 
-    public fun of(value: HighlightResultOption): HighlightResult {
-      return HighlightResultOptionValue(value)
-    }
-    public fun of(value: Map<kotlin.String, HighlightResult>): HighlightResult {
-      return MapOfkotlinStringHighlightResultValue(value)
-    }
-    public fun of(value: List<HighlightResult>): HighlightResult {
-      return ListOfHighlightResultValue(value)
-    }
+    public fun of(value: HighlightResultOption): HighlightResult = HighlightResultOptionValue(value)
+
+    public fun of(value: Map<kotlin.String, HighlightResult>): HighlightResult = MapOfkotlinStringHighlightResultValue(value)
+
+    public fun of(value: List<HighlightResult>): HighlightResult = ListOfHighlightResultValue(value)
   }
 }
 
 internal class HighlightResultSerializer : JsonContentPolymorphicSerializer<HighlightResult>(HighlightResult::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<HighlightResult> {
-    return when {
-      element is JsonObject && element.containsKey("matchLevel") && element.containsKey("matchedWords") -> HighlightResultOption.serializer()
-      element is JsonObject -> HighlightResult.MapOfkotlinStringHighlightResultValue.serializer()
-      element is JsonArray -> HighlightResult.ListOfHighlightResultValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<HighlightResult> = when {
+    element is JsonObject && element.containsKey("matchLevel") && element.containsKey("matchedWords") -> HighlightResultOption.serializer()
+    element is JsonObject -> HighlightResult.MapOfkotlinStringHighlightResultValue.serializer()
+    element is JsonArray -> HighlightResult.ListOfHighlightResultValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

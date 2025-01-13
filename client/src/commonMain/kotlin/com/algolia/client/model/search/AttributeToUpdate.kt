@@ -30,21 +30,16 @@ public sealed interface AttributeToUpdate {
 
   public companion object {
 
-    public fun of(value: String): AttributeToUpdate {
-      return StringValue(value)
-    }
-    public fun of(value: BuiltInOperation): AttributeToUpdate {
-      return BuiltInOperationValue(value)
-    }
+    public fun of(value: String): AttributeToUpdate = StringValue(value)
+
+    public fun of(value: BuiltInOperation): AttributeToUpdate = BuiltInOperationValue(value)
   }
 }
 
 internal class AttributeToUpdateSerializer : JsonContentPolymorphicSerializer<AttributeToUpdate>(AttributeToUpdate::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AttributeToUpdate> {
-    return when {
-      element.isString -> AttributeToUpdate.StringValue.serializer()
-      element is JsonObject -> BuiltInOperation.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AttributeToUpdate> = when {
+    element.isString -> AttributeToUpdate.StringValue.serializer()
+    element is JsonObject -> BuiltInOperation.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

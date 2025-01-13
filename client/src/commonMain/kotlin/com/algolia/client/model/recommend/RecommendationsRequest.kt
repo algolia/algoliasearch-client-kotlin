@@ -44,33 +44,25 @@ public sealed interface RecommendationsRequest {
 
   public companion object {
 
-    public fun of(value: BoughtTogetherQuery): RecommendationsRequest {
-      return BoughtTogetherQueryValue(value)
-    }
-    public fun of(value: RelatedQuery): RecommendationsRequest {
-      return RelatedQueryValue(value)
-    }
-    public fun of(value: TrendingItemsQuery): RecommendationsRequest {
-      return TrendingItemsQueryValue(value)
-    }
-    public fun of(value: TrendingFacetsQuery): RecommendationsRequest {
-      return TrendingFacetsQueryValue(value)
-    }
-    public fun of(value: LookingSimilarQuery): RecommendationsRequest {
-      return LookingSimilarQueryValue(value)
-    }
+    public fun of(value: BoughtTogetherQuery): RecommendationsRequest = BoughtTogetherQueryValue(value)
+
+    public fun of(value: RelatedQuery): RecommendationsRequest = RelatedQueryValue(value)
+
+    public fun of(value: TrendingItemsQuery): RecommendationsRequest = TrendingItemsQueryValue(value)
+
+    public fun of(value: TrendingFacetsQuery): RecommendationsRequest = TrendingFacetsQueryValue(value)
+
+    public fun of(value: LookingSimilarQuery): RecommendationsRequest = LookingSimilarQueryValue(value)
   }
 }
 
 internal class RecommendationsRequestSerializer : JsonContentPolymorphicSerializer<RecommendationsRequest>(RecommendationsRequest::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RecommendationsRequest> {
-    return when {
-      element is JsonObject -> BoughtTogetherQuery.serializer()
-      element is JsonObject -> RelatedQuery.serializer()
-      element is JsonObject -> TrendingItemsQuery.serializer()
-      element is JsonObject -> TrendingFacetsQuery.serializer()
-      element is JsonObject -> LookingSimilarQuery.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RecommendationsRequest> = when {
+    element is JsonObject -> BoughtTogetherQuery.serializer()
+    element is JsonObject -> RelatedQuery.serializer()
+    element is JsonObject -> TrendingItemsQuery.serializer()
+    element is JsonObject -> TrendingFacetsQuery.serializer()
+    element is JsonObject -> LookingSimilarQuery.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

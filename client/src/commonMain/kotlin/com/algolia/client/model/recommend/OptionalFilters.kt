@@ -29,21 +29,16 @@ public sealed interface OptionalFilters {
 
   public companion object {
 
-    public fun of(value: List<OptionalFilters>): OptionalFilters {
-      return ListOfOptionalFiltersValue(value)
-    }
-    public fun of(value: String): OptionalFilters {
-      return StringValue(value)
-    }
+    public fun of(value: List<OptionalFilters>): OptionalFilters = ListOfOptionalFiltersValue(value)
+
+    public fun of(value: String): OptionalFilters = StringValue(value)
   }
 }
 
 internal class OptionalFiltersSerializer : JsonContentPolymorphicSerializer<OptionalFilters>(OptionalFilters::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<OptionalFilters> {
-    return when {
-      element is JsonArray -> OptionalFilters.ListOfOptionalFiltersValue.serializer()
-      element.isString -> OptionalFilters.StringValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<OptionalFilters> = when {
+    element is JsonArray -> OptionalFilters.ListOfOptionalFiltersValue.serializer()
+    element.isString -> OptionalFilters.StringValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

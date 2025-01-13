@@ -34,25 +34,19 @@ public sealed interface IgnorePlurals {
 
   public companion object {
 
-    public fun of(value: List<SupportedLanguage>): IgnorePlurals {
-      return ListOfSupportedLanguageValue(value)
-    }
-    public fun of(value: BooleanString): IgnorePlurals {
-      return BooleanStringValue(value)
-    }
-    public fun of(value: Boolean): IgnorePlurals {
-      return BooleanValue(value)
-    }
+    public fun of(value: List<SupportedLanguage>): IgnorePlurals = ListOfSupportedLanguageValue(value)
+
+    public fun of(value: BooleanString): IgnorePlurals = BooleanStringValue(value)
+
+    public fun of(value: Boolean): IgnorePlurals = BooleanValue(value)
   }
 }
 
 internal class IgnorePluralsSerializer : JsonContentPolymorphicSerializer<IgnorePlurals>(IgnorePlurals::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<IgnorePlurals> {
-    return when {
-      element is JsonArray -> IgnorePlurals.ListOfSupportedLanguageValue.serializer()
-      element.isString -> BooleanString.serializer()
-      element.isBoolean -> IgnorePlurals.BooleanValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<IgnorePlurals> = when {
+    element is JsonArray -> IgnorePlurals.ListOfSupportedLanguageValue.serializer()
+    element.isString -> BooleanString.serializer()
+    element.isBoolean -> IgnorePlurals.BooleanValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

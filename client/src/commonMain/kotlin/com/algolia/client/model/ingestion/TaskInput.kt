@@ -34,25 +34,19 @@ public sealed interface TaskInput {
 
   public companion object {
 
-    public fun of(value: StreamingInput): TaskInput {
-      return StreamingInputValue(value)
-    }
-    public fun of(value: DockerStreamsInput): TaskInput {
-      return DockerStreamsInputValue(value)
-    }
-    public fun of(value: ShopifyInput): TaskInput {
-      return ShopifyInputValue(value)
-    }
+    public fun of(value: StreamingInput): TaskInput = StreamingInputValue(value)
+
+    public fun of(value: DockerStreamsInput): TaskInput = DockerStreamsInputValue(value)
+
+    public fun of(value: ShopifyInput): TaskInput = ShopifyInputValue(value)
   }
 }
 
 internal class TaskInputSerializer : JsonContentPolymorphicSerializer<TaskInput>(TaskInput::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TaskInput> {
-    return when {
-      element is JsonObject && element.containsKey("mapping") -> StreamingInput.serializer()
-      element is JsonObject && element.containsKey("streams") -> DockerStreamsInput.serializer()
-      element is JsonObject -> ShopifyInput.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TaskInput> = when {
+    element is JsonObject && element.containsKey("mapping") -> StreamingInput.serializer()
+    element is JsonObject && element.containsKey("streams") -> DockerStreamsInput.serializer()
+    element is JsonObject -> ShopifyInput.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

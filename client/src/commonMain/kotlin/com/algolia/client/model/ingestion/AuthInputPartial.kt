@@ -54,41 +54,31 @@ public sealed interface AuthInputPartial {
 
   public companion object {
 
-    public fun of(value: AuthGoogleServiceAccountPartial): AuthInputPartial {
-      return AuthGoogleServiceAccountPartialValue(value)
-    }
-    public fun of(value: AuthBasicPartial): AuthInputPartial {
-      return AuthBasicPartialValue(value)
-    }
-    public fun of(value: AuthAPIKeyPartial): AuthInputPartial {
-      return AuthAPIKeyPartialValue(value)
-    }
-    public fun of(value: AuthOAuthPartial): AuthInputPartial {
-      return AuthOAuthPartialValue(value)
-    }
-    public fun of(value: AuthAlgoliaPartial): AuthInputPartial {
-      return AuthAlgoliaPartialValue(value)
-    }
-    public fun of(value: AuthAlgoliaInsightsPartial): AuthInputPartial {
-      return AuthAlgoliaInsightsPartialValue(value)
-    }
-    public fun of(value: Map<kotlin.String, String>): AuthInputPartial {
-      return MapOfkotlinStringStringValue(value)
-    }
+    public fun of(value: AuthGoogleServiceAccountPartial): AuthInputPartial = AuthGoogleServiceAccountPartialValue(value)
+
+    public fun of(value: AuthBasicPartial): AuthInputPartial = AuthBasicPartialValue(value)
+
+    public fun of(value: AuthAPIKeyPartial): AuthInputPartial = AuthAPIKeyPartialValue(value)
+
+    public fun of(value: AuthOAuthPartial): AuthInputPartial = AuthOAuthPartialValue(value)
+
+    public fun of(value: AuthAlgoliaPartial): AuthInputPartial = AuthAlgoliaPartialValue(value)
+
+    public fun of(value: AuthAlgoliaInsightsPartial): AuthInputPartial = AuthAlgoliaInsightsPartialValue(value)
+
+    public fun of(value: Map<kotlin.String, String>): AuthInputPartial = MapOfkotlinStringStringValue(value)
   }
 }
 
 internal class AuthInputPartialSerializer : JsonContentPolymorphicSerializer<AuthInputPartial>(AuthInputPartial::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AuthInputPartial> {
-    return when {
-      element is JsonObject && element.containsKey("clientEmail") -> AuthGoogleServiceAccountPartial.serializer()
-      element is JsonObject && element.containsKey("username") -> AuthBasicPartial.serializer()
-      element is JsonObject && element.containsKey("key") -> AuthAPIKeyPartial.serializer()
-      element is JsonObject && element.containsKey("url") -> AuthOAuthPartial.serializer()
-      element is JsonObject -> AuthAlgoliaPartial.serializer()
-      element is JsonObject -> AuthAlgoliaInsightsPartial.serializer()
-      element is JsonObject -> AuthInputPartial.MapOfkotlinStringStringValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AuthInputPartial> = when {
+    element is JsonObject && element.containsKey("clientEmail") -> AuthGoogleServiceAccountPartial.serializer()
+    element is JsonObject && element.containsKey("username") -> AuthBasicPartial.serializer()
+    element is JsonObject && element.containsKey("key") -> AuthAPIKeyPartial.serializer()
+    element is JsonObject && element.containsKey("url") -> AuthOAuthPartial.serializer()
+    element is JsonObject -> AuthAlgoliaPartial.serializer()
+    element is JsonObject -> AuthAlgoliaInsightsPartial.serializer()
+    element is JsonObject -> AuthInputPartial.MapOfkotlinStringStringValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

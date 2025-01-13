@@ -29,21 +29,16 @@ public sealed interface AroundPrecision {
 
   public companion object {
 
-    public fun of(value: Int): AroundPrecision {
-      return IntValue(value)
-    }
-    public fun of(value: List<Range>): AroundPrecision {
-      return ListOfRangeValue(value)
-    }
+    public fun of(value: Int): AroundPrecision = IntValue(value)
+
+    public fun of(value: List<Range>): AroundPrecision = ListOfRangeValue(value)
   }
 }
 
 internal class AroundPrecisionSerializer : JsonContentPolymorphicSerializer<AroundPrecision>(AroundPrecision::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AroundPrecision> {
-    return when {
-      element.isInt -> AroundPrecision.IntValue.serializer()
-      element is JsonArray -> AroundPrecision.ListOfRangeValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AroundPrecision> = when {
+    element.isInt -> AroundPrecision.IntValue.serializer()
+    element is JsonArray -> AroundPrecision.ListOfRangeValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

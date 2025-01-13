@@ -28,21 +28,15 @@ public sealed interface AutomaticFacetFilters {
   public value class ListOfStringValue(public val value: List<String>) : AutomaticFacetFilters
 
   public companion object {
-    public fun ofListOfAutomaticFacetFilter(value: List<AutomaticFacetFilter>): AutomaticFacetFilters {
-      return ListOfAutomaticFacetFilterValue(value)
-    }
-    public fun ofListOfString(value: List<String>): AutomaticFacetFilters {
-      return ListOfStringValue(value)
-    }
+    public fun ofListOfAutomaticFacetFilter(value: List<AutomaticFacetFilter>): AutomaticFacetFilters = ListOfAutomaticFacetFilterValue(value)
+    public fun ofListOfString(value: List<String>): AutomaticFacetFilters = ListOfStringValue(value)
   }
 }
 
 internal class AutomaticFacetFiltersSerializer : JsonContentPolymorphicSerializer<AutomaticFacetFilters>(AutomaticFacetFilters::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AutomaticFacetFilters> {
-    return when {
-      element is JsonArray -> AutomaticFacetFilters.ListOfAutomaticFacetFilterValue.serializer()
-      element is JsonArray -> AutomaticFacetFilters.ListOfStringValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AutomaticFacetFilters> = when {
+    element is JsonArray -> AutomaticFacetFilters.ListOfAutomaticFacetFilterValue.serializer()
+    element is JsonArray -> AutomaticFacetFilters.ListOfStringValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

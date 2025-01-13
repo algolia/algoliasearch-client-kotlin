@@ -29,21 +29,16 @@ public sealed interface TypoTolerance {
 
   public companion object {
 
-    public fun of(value: Boolean): TypoTolerance {
-      return BooleanValue(value)
-    }
-    public fun of(value: TypoToleranceEnum): TypoTolerance {
-      return TypoToleranceEnumValue(value)
-    }
+    public fun of(value: Boolean): TypoTolerance = BooleanValue(value)
+
+    public fun of(value: TypoToleranceEnum): TypoTolerance = TypoToleranceEnumValue(value)
   }
 }
 
 internal class TypoToleranceSerializer : JsonContentPolymorphicSerializer<TypoTolerance>(TypoTolerance::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TypoTolerance> {
-    return when {
-      element.isBoolean -> TypoTolerance.BooleanValue.serializer()
-      element.isString -> TypoToleranceEnum.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TypoTolerance> = when {
+    element.isBoolean -> TypoTolerance.BooleanValue.serializer()
+    element.isString -> TypoToleranceEnum.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

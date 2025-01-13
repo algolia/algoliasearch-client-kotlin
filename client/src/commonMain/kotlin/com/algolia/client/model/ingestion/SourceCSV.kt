@@ -29,4 +29,5 @@ public data class SourceCSV(
 
   /** The character used to split the value on each line, default to a comma (\\r, \\n, 0xFFFD, and space are forbidden). */
   @SerialName(value = "delimiter") val delimiter: String? = null,
-) : SourceInput, SourceUpdateInput
+) : SourceInput,
+  SourceUpdateInput

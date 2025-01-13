@@ -30,9 +30,7 @@ import kotlin.time.Duration
 internal suspend inline fun <reified T> Requester.execute(
   requestConfig: RequestConfig,
   requestOptions: RequestOptions? = null,
-): T {
-  return execute(requestConfig, requestOptions, typeInfo<T>())
-}
+): T = execute(requestConfig, requestOptions, typeInfo<T>())
 
 /**
  * Creates a [Requester] instance.

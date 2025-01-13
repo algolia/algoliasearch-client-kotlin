@@ -59,45 +59,34 @@ public sealed interface SourceInput {
 
   public companion object {
 
-    public fun of(value: SourceGA4BigQueryExport): SourceInput {
-      return SourceGA4BigQueryExportValue(value)
-    }
-    public fun of(value: SourceDocker): SourceInput {
-      return SourceDockerValue(value)
-    }
-    public fun of(value: SourceCommercetools): SourceInput {
-      return SourceCommercetoolsValue(value)
-    }
-    public fun of(value: SourceBigCommerce): SourceInput {
-      return SourceBigCommerceValue(value)
-    }
-    public fun of(value: SourceBigQuery): SourceInput {
-      return SourceBigQueryValue(value)
-    }
-    public fun of(value: SourceShopify): SourceInput {
-      return SourceShopifyValue(value)
-    }
-    public fun of(value: SourceJSON): SourceInput {
-      return SourceJSONValue(value)
-    }
-    public fun of(value: SourceCSV): SourceInput {
-      return SourceCSVValue(value)
-    }
+    public fun of(value: SourceGA4BigQueryExport): SourceInput = SourceGA4BigQueryExportValue(value)
+
+    public fun of(value: SourceDocker): SourceInput = SourceDockerValue(value)
+
+    public fun of(value: SourceCommercetools): SourceInput = SourceCommercetoolsValue(value)
+
+    public fun of(value: SourceBigCommerce): SourceInput = SourceBigCommerceValue(value)
+
+    public fun of(value: SourceBigQuery): SourceInput = SourceBigQueryValue(value)
+
+    public fun of(value: SourceShopify): SourceInput = SourceShopifyValue(value)
+
+    public fun of(value: SourceJSON): SourceInput = SourceJSONValue(value)
+
+    public fun of(value: SourceCSV): SourceInput = SourceCSVValue(value)
   }
 }
 
 internal class SourceInputSerializer : JsonContentPolymorphicSerializer<SourceInput>(SourceInput::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SourceInput> {
-    return when {
-      element is JsonObject && element.containsKey("projectID") && element.containsKey("datasetID") && element.containsKey("tablePrefix") -> SourceGA4BigQueryExport.serializer()
-      element is JsonObject && element.containsKey("image") && element.containsKey("configuration") -> SourceDocker.serializer()
-      element is JsonObject && element.containsKey("projectKey") -> SourceCommercetools.serializer()
-      element is JsonObject && element.containsKey("storeHash") -> SourceBigCommerce.serializer()
-      element is JsonObject && element.containsKey("projectID") -> SourceBigQuery.serializer()
-      element is JsonObject && element.containsKey("shopURL") -> SourceShopify.serializer()
-      element is JsonObject -> SourceJSON.serializer()
-      element is JsonObject -> SourceCSV.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SourceInput> = when {
+    element is JsonObject && element.containsKey("projectID") && element.containsKey("datasetID") && element.containsKey("tablePrefix") -> SourceGA4BigQueryExport.serializer()
+    element is JsonObject && element.containsKey("image") && element.containsKey("configuration") -> SourceDocker.serializer()
+    element is JsonObject && element.containsKey("projectKey") -> SourceCommercetools.serializer()
+    element is JsonObject && element.containsKey("storeHash") -> SourceBigCommerce.serializer()
+    element is JsonObject && element.containsKey("projectID") -> SourceBigQuery.serializer()
+    element is JsonObject && element.containsKey("shopURL") -> SourceShopify.serializer()
+    element is JsonObject -> SourceJSON.serializer()
+    element is JsonObject -> SourceCSV.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

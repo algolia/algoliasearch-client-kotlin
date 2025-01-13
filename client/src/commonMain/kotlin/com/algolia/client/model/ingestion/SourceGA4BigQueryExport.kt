@@ -22,4 +22,5 @@ public data class SourceGA4BigQueryExport(
 
   /** Prefix of the tables that the BigQuery Export writes to. */
   @SerialName(value = "tablePrefix") val tablePrefix: String,
-) : SourceInput, SourceUpdateInput
+) : SourceInput,
+  SourceUpdateInput

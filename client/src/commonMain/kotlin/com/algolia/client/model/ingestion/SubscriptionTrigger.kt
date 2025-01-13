@@ -13,4 +13,5 @@ import kotlinx.serialization.json.*
 public data class SubscriptionTrigger(
 
   @SerialName(value = "type") val type: SubscriptionTriggerType,
-) : Trigger, TaskCreateTrigger
+) : Trigger,
+  TaskCreateTrigger

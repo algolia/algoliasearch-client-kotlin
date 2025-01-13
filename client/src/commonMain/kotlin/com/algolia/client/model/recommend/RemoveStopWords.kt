@@ -29,21 +29,16 @@ public sealed interface RemoveStopWords {
 
   public companion object {
 
-    public fun of(value: List<SupportedLanguage>): RemoveStopWords {
-      return ListOfSupportedLanguageValue(value)
-    }
-    public fun of(value: Boolean): RemoveStopWords {
-      return BooleanValue(value)
-    }
+    public fun of(value: List<SupportedLanguage>): RemoveStopWords = ListOfSupportedLanguageValue(value)
+
+    public fun of(value: Boolean): RemoveStopWords = BooleanValue(value)
   }
 }
 
 internal class RemoveStopWordsSerializer : JsonContentPolymorphicSerializer<RemoveStopWords>(RemoveStopWords::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RemoveStopWords> {
-    return when {
-      element is JsonArray -> RemoveStopWords.ListOfSupportedLanguageValue.serializer()
-      element.isBoolean -> RemoveStopWords.BooleanValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RemoveStopWords> = when {
+    element is JsonArray -> RemoveStopWords.ListOfSupportedLanguageValue.serializer()
+    element.isBoolean -> RemoveStopWords.BooleanValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

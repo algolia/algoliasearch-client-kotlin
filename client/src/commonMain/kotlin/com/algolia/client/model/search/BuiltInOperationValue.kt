@@ -29,21 +29,16 @@ public sealed interface BuiltInOperationValue {
 
   public companion object {
 
-    public fun of(value: String): BuiltInOperationValue {
-      return StringValue(value)
-    }
-    public fun of(value: Int): BuiltInOperationValue {
-      return IntValue(value)
-    }
+    public fun of(value: String): BuiltInOperationValue = StringValue(value)
+
+    public fun of(value: Int): BuiltInOperationValue = IntValue(value)
   }
 }
 
 internal class BuiltInOperationValueSerializer : JsonContentPolymorphicSerializer<BuiltInOperationValue>(BuiltInOperationValue::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<BuiltInOperationValue> {
-    return when {
-      element.isString -> BuiltInOperationValue.StringValue.serializer()
-      element.isInt -> BuiltInOperationValue.IntValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<BuiltInOperationValue> = when {
+    element.isString -> BuiltInOperationValue.StringValue.serializer()
+    element.isInt -> BuiltInOperationValue.IntValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

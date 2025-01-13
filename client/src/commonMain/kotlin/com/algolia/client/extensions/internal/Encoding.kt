@@ -15,12 +15,10 @@ internal object Hex {
   /**
    * Take the [ByteArray] and convert it to a hex encoded [String].
    */
-  internal fun buildString(byteArray: ByteArray): String {
-    return buildString(capacity = byteArray.size * 2) {
-      for (byte in byteArray) {
-        append(HEX_CODE[byte.toInt() shr 4 and 0xF])
-        append(HEX_CODE[byte.toInt() and 0xF])
-      }
+  internal fun buildString(byteArray: ByteArray): String = buildString(capacity = byteArray.size * 2) {
+    for (byte in byteArray) {
+      append(HEX_CODE[byte.toInt() shr 4 and 0xF])
+      append(HEX_CODE[byte.toInt() and 0xF])
     }
   }
 }

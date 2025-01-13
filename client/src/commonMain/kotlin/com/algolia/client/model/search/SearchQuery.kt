@@ -29,21 +29,16 @@ public sealed interface SearchQuery {
 
   public companion object {
 
-    public fun of(value: SearchForFacets): SearchQuery {
-      return SearchForFacetsValue(value)
-    }
-    public fun of(value: SearchForHits): SearchQuery {
-      return SearchForHitsValue(value)
-    }
+    public fun of(value: SearchForFacets): SearchQuery = SearchForFacetsValue(value)
+
+    public fun of(value: SearchForHits): SearchQuery = SearchForHitsValue(value)
   }
 }
 
 internal class SearchQuerySerializer : JsonContentPolymorphicSerializer<SearchQuery>(SearchQuery::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SearchQuery> {
-    return when {
-      element is JsonObject && element.containsKey("facet") && element.containsKey("type") -> SearchForFacets.serializer()
-      element is JsonObject -> SearchForHits.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SearchQuery> = when {
+    element is JsonObject && element.containsKey("facet") && element.containsKey("type") -> SearchForFacets.serializer()
+    element is JsonObject -> SearchForHits.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

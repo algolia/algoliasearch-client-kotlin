@@ -39,29 +39,22 @@ public sealed interface TaskCreateTrigger {
 
   public companion object {
 
-    public fun of(value: ScheduleTriggerInput): TaskCreateTrigger {
-      return ScheduleTriggerInputValue(value)
-    }
-    public fun of(value: OnDemandTriggerInput): TaskCreateTrigger {
-      return OnDemandTriggerInputValue(value)
-    }
-    public fun of(value: SubscriptionTrigger): TaskCreateTrigger {
-      return SubscriptionTriggerValue(value)
-    }
-    public fun of(value: StreamingTrigger): TaskCreateTrigger {
-      return StreamingTriggerValue(value)
-    }
+    public fun of(value: ScheduleTriggerInput): TaskCreateTrigger = ScheduleTriggerInputValue(value)
+
+    public fun of(value: OnDemandTriggerInput): TaskCreateTrigger = OnDemandTriggerInputValue(value)
+
+    public fun of(value: SubscriptionTrigger): TaskCreateTrigger = SubscriptionTriggerValue(value)
+
+    public fun of(value: StreamingTrigger): TaskCreateTrigger = StreamingTriggerValue(value)
   }
 }
 
 internal class TaskCreateTriggerSerializer : JsonContentPolymorphicSerializer<TaskCreateTrigger>(TaskCreateTrigger::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TaskCreateTrigger> {
-    return when {
-      element is JsonObject && element.containsKey("cron") -> ScheduleTriggerInput.serializer()
-      element is JsonObject -> OnDemandTriggerInput.serializer()
-      element is JsonObject -> SubscriptionTrigger.serializer()
-      element is JsonObject -> StreamingTrigger.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TaskCreateTrigger> = when {
+    element is JsonObject && element.containsKey("cron") -> ScheduleTriggerInput.serializer()
+    element is JsonObject -> OnDemandTriggerInput.serializer()
+    element is JsonObject -> SubscriptionTrigger.serializer()
+    element is JsonObject -> StreamingTrigger.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

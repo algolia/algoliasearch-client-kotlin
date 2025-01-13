@@ -18,8 +18,7 @@ internal fun algoliaHttpClient(
   agent: AlgoliaAgent,
 ) = httpClientOf(options) { configure(appId, apiKey, options, agent) }
 
-private fun httpClientOf(options: ClientOptions, block: HttpClientConfig<*>.() -> Unit) =
-  options.engine?.let { HttpClient(it, block) } ?: HttpClient(block)
+private fun httpClientOf(options: ClientOptions, block: HttpClientConfig<*>.() -> Unit) = options.engine?.let { HttpClient(it, block) } ?: HttpClient(block)
 
 internal fun HttpClientConfig<*>.configure(
   appId: String,

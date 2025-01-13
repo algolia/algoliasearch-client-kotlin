@@ -29,21 +29,16 @@ public sealed interface AddABTestsVariant {
 
   public companion object {
 
-    public fun of(value: AbTestsVariantSearchParams): AddABTestsVariant {
-      return AbTestsVariantSearchParamsValue(value)
-    }
-    public fun of(value: AbTestsVariant): AddABTestsVariant {
-      return AbTestsVariantValue(value)
-    }
+    public fun of(value: AbTestsVariantSearchParams): AddABTestsVariant = AbTestsVariantSearchParamsValue(value)
+
+    public fun of(value: AbTestsVariant): AddABTestsVariant = AbTestsVariantValue(value)
   }
 }
 
 internal class AddABTestsVariantSerializer : JsonContentPolymorphicSerializer<AddABTestsVariant>(AddABTestsVariant::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AddABTestsVariant> {
-    return when {
-      element is JsonObject && element.containsKey("customSearchParameters") -> AbTestsVariantSearchParams.serializer()
-      element is JsonObject -> AbTestsVariant.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AddABTestsVariant> = when {
+    element is JsonObject && element.containsKey("customSearchParameters") -> AbTestsVariantSearchParams.serializer()
+    element is JsonObject -> AbTestsVariant.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

@@ -29,21 +29,16 @@ public sealed interface FacetFilters {
 
   public companion object {
 
-    public fun of(value: List<FacetFilters>): FacetFilters {
-      return ListOfFacetFiltersValue(value)
-    }
-    public fun of(value: String): FacetFilters {
-      return StringValue(value)
-    }
+    public fun of(value: List<FacetFilters>): FacetFilters = ListOfFacetFiltersValue(value)
+
+    public fun of(value: String): FacetFilters = StringValue(value)
   }
 }
 
 internal class FacetFiltersSerializer : JsonContentPolymorphicSerializer<FacetFilters>(FacetFilters::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<FacetFilters> {
-    return when {
-      element is JsonArray -> FacetFilters.ListOfFacetFiltersValue.serializer()
-      element.isString -> FacetFilters.StringValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<FacetFilters> = when {
+    element is JsonArray -> FacetFilters.ListOfFacetFiltersValue.serializer()
+    element.isString -> FacetFilters.StringValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

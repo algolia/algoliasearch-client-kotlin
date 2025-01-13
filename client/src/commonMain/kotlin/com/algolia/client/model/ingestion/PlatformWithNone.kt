@@ -29,21 +29,16 @@ public sealed interface PlatformWithNone {
 
   public companion object {
 
-    public fun of(value: Platform): PlatformWithNone {
-      return PlatformValue(value)
-    }
-    public fun of(value: PlatformNone): PlatformWithNone {
-      return PlatformNoneValue(value)
-    }
+    public fun of(value: Platform): PlatformWithNone = PlatformValue(value)
+
+    public fun of(value: PlatformNone): PlatformWithNone = PlatformNoneValue(value)
   }
 }
 
 internal class PlatformWithNoneSerializer : JsonContentPolymorphicSerializer<PlatformWithNone>(PlatformWithNone::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<PlatformWithNone> {
-    return when {
-      element.isString -> Platform.serializer()
-      element.isString -> PlatformNone.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<PlatformWithNone> = when {
+    element.isString -> Platform.serializer()
+    element.isString -> PlatformNone.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

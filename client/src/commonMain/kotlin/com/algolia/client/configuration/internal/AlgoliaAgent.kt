@@ -10,21 +10,13 @@ internal class AlgoliaAgent(clientVersion: String) {
       AgentSegment("Algolia for Kotlin", clientVersion),
     )
 
-  fun add(segment: AgentSegment): Boolean {
-    return segments.add(segment)
-  }
+  fun add(segment: AgentSegment): Boolean = segments.add(segment)
 
-  fun add(segments: List<AgentSegment>): Boolean {
-    return this.segments.addAll(segments)
-  }
+  fun add(segments: List<AgentSegment>): Boolean = this.segments.addAll(segments)
 
-  fun remove(segment: AgentSegment): Boolean {
-    return segments.remove(segment)
-  }
+  fun remove(segment: AgentSegment): Boolean = segments.remove(segment)
 
-  override fun toString(): String {
-    return segments.joinToString("; ") { it.formatted() }
-  }
+  override fun toString(): String = segments.joinToString("; ") { it.formatted() }
 
   private fun AgentSegment.formatted(): String = buildString {
     append(value)

@@ -29,21 +29,16 @@ public sealed interface ReRankingApplyFilter {
 
   public companion object {
 
-    public fun of(value: List<ReRankingApplyFilter>): ReRankingApplyFilter {
-      return ListOfReRankingApplyFilterValue(value)
-    }
-    public fun of(value: String): ReRankingApplyFilter {
-      return StringValue(value)
-    }
+    public fun of(value: List<ReRankingApplyFilter>): ReRankingApplyFilter = ListOfReRankingApplyFilterValue(value)
+
+    public fun of(value: String): ReRankingApplyFilter = StringValue(value)
   }
 }
 
 internal class ReRankingApplyFilterSerializer : JsonContentPolymorphicSerializer<ReRankingApplyFilter>(ReRankingApplyFilter::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ReRankingApplyFilter> {
-    return when {
-      element is JsonArray -> ReRankingApplyFilter.ListOfReRankingApplyFilterValue.serializer()
-      element.isString -> ReRankingApplyFilter.StringValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ReRankingApplyFilter> = when {
+    element is JsonArray -> ReRankingApplyFilter.ListOfReRankingApplyFilterValue.serializer()
+    element.isString -> ReRankingApplyFilter.StringValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

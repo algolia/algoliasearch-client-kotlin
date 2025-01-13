@@ -29,21 +29,16 @@ public sealed interface ConsequenceQuery {
 
   public companion object {
 
-    public fun of(value: ConsequenceQueryObject): ConsequenceQuery {
-      return ConsequenceQueryObjectValue(value)
-    }
-    public fun of(value: String): ConsequenceQuery {
-      return StringValue(value)
-    }
+    public fun of(value: ConsequenceQueryObject): ConsequenceQuery = ConsequenceQueryObjectValue(value)
+
+    public fun of(value: String): ConsequenceQuery = StringValue(value)
   }
 }
 
 internal class ConsequenceQuerySerializer : JsonContentPolymorphicSerializer<ConsequenceQuery>(ConsequenceQuery::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ConsequenceQuery> {
-    return when {
-      element is JsonObject -> ConsequenceQueryObject.serializer()
-      element.isString -> ConsequenceQuery.StringValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ConsequenceQuery> = when {
+    element is JsonObject -> ConsequenceQueryObject.serializer()
+    element.isString -> ConsequenceQuery.StringValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

@@ -34,25 +34,19 @@ public sealed interface GetTopHitsResponse {
 
   public companion object {
 
-    public fun of(value: TopHitsResponse): GetTopHitsResponse {
-      return TopHitsResponseValue(value)
-    }
-    public fun of(value: TopHitsResponseWithAnalytics): GetTopHitsResponse {
-      return TopHitsResponseWithAnalyticsValue(value)
-    }
-    public fun of(value: TopHitsResponseWithRevenueAnalytics): GetTopHitsResponse {
-      return TopHitsResponseWithRevenueAnalyticsValue(value)
-    }
+    public fun of(value: TopHitsResponse): GetTopHitsResponse = TopHitsResponseValue(value)
+
+    public fun of(value: TopHitsResponseWithAnalytics): GetTopHitsResponse = TopHitsResponseWithAnalyticsValue(value)
+
+    public fun of(value: TopHitsResponseWithRevenueAnalytics): GetTopHitsResponse = TopHitsResponseWithRevenueAnalyticsValue(value)
   }
 }
 
 internal class GetTopHitsResponseSerializer : JsonContentPolymorphicSerializer<GetTopHitsResponse>(GetTopHitsResponse::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<GetTopHitsResponse> {
-    return when {
-      element is JsonObject -> TopHitsResponse.serializer()
-      element is JsonObject -> TopHitsResponseWithAnalytics.serializer()
-      element is JsonObject -> TopHitsResponseWithRevenueAnalytics.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<GetTopHitsResponse> = when {
+    element is JsonObject -> TopHitsResponse.serializer()
+    element is JsonObject -> TopHitsResponseWithAnalytics.serializer()
+    element is JsonObject -> TopHitsResponseWithRevenueAnalytics.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

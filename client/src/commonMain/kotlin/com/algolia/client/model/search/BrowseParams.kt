@@ -29,21 +29,16 @@ public sealed interface BrowseParams {
 
   public companion object {
 
-    public fun of(value: SearchParamsString): BrowseParams {
-      return SearchParamsStringValue(value)
-    }
-    public fun of(value: BrowseParamsObject): BrowseParams {
-      return BrowseParamsObjectValue(value)
-    }
+    public fun of(value: SearchParamsString): BrowseParams = SearchParamsStringValue(value)
+
+    public fun of(value: BrowseParamsObject): BrowseParams = BrowseParamsObjectValue(value)
   }
 }
 
 internal class BrowseParamsSerializer : JsonContentPolymorphicSerializer<BrowseParams>(BrowseParams::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<BrowseParams> {
-    return when {
-      element is JsonObject && element.containsKey("params") -> SearchParamsString.serializer()
-      element is JsonObject -> BrowseParamsObject.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<BrowseParams> = when {
+    element is JsonObject && element.containsKey("params") -> SearchParamsString.serializer()
+    element is JsonObject -> BrowseParamsObject.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

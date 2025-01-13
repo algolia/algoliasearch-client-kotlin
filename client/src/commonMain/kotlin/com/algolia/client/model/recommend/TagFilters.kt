@@ -29,21 +29,16 @@ public sealed interface TagFilters {
 
   public companion object {
 
-    public fun of(value: List<TagFilters>): TagFilters {
-      return ListOfTagFiltersValue(value)
-    }
-    public fun of(value: String): TagFilters {
-      return StringValue(value)
-    }
+    public fun of(value: List<TagFilters>): TagFilters = ListOfTagFiltersValue(value)
+
+    public fun of(value: String): TagFilters = StringValue(value)
   }
 }
 
 internal class TagFiltersSerializer : JsonContentPolymorphicSerializer<TagFilters>(TagFilters::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TagFilters> {
-    return when {
-      element is JsonArray -> TagFilters.ListOfTagFiltersValue.serializer()
-      element.isString -> TagFilters.StringValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TagFilters> = when {
+    element is JsonArray -> TagFilters.ListOfTagFiltersValue.serializer()
+    element.isString -> TagFilters.StringValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

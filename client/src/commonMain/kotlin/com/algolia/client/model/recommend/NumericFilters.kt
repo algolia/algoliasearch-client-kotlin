@@ -29,21 +29,16 @@ public sealed interface NumericFilters {
 
   public companion object {
 
-    public fun of(value: List<NumericFilters>): NumericFilters {
-      return ListOfNumericFiltersValue(value)
-    }
-    public fun of(value: String): NumericFilters {
-      return StringValue(value)
-    }
+    public fun of(value: List<NumericFilters>): NumericFilters = ListOfNumericFiltersValue(value)
+
+    public fun of(value: String): NumericFilters = StringValue(value)
   }
 }
 
 internal class NumericFiltersSerializer : JsonContentPolymorphicSerializer<NumericFilters>(NumericFilters::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<NumericFilters> {
-    return when {
-      element is JsonArray -> NumericFilters.ListOfNumericFiltersValue.serializer()
-      element.isString -> NumericFilters.StringValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<NumericFilters> = when {
+    element is JsonArray -> NumericFilters.ListOfNumericFiltersValue.serializer()
+    element.isString -> NumericFilters.StringValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

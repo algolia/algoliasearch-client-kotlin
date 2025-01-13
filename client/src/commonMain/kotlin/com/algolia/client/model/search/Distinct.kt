@@ -29,21 +29,16 @@ public sealed interface Distinct {
 
   public companion object {
 
-    public fun of(value: Boolean): Distinct {
-      return BooleanValue(value)
-    }
-    public fun of(value: Int): Distinct {
-      return IntValue(value)
-    }
+    public fun of(value: Boolean): Distinct = BooleanValue(value)
+
+    public fun of(value: Int): Distinct = IntValue(value)
   }
 }
 
 internal class DistinctSerializer : JsonContentPolymorphicSerializer<Distinct>(Distinct::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Distinct> {
-    return when {
-      element.isBoolean -> Distinct.BooleanValue.serializer()
-      element.isInt -> Distinct.IntValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Distinct> = when {
+    element.isBoolean -> Distinct.BooleanValue.serializer()
+    element.isInt -> Distinct.IntValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

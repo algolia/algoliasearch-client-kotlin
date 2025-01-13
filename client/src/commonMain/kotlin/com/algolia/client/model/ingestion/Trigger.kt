@@ -39,29 +39,22 @@ public sealed interface Trigger {
 
   public companion object {
 
-    public fun of(value: OnDemandTrigger): Trigger {
-      return OnDemandTriggerValue(value)
-    }
-    public fun of(value: ScheduleTrigger): Trigger {
-      return ScheduleTriggerValue(value)
-    }
-    public fun of(value: SubscriptionTrigger): Trigger {
-      return SubscriptionTriggerValue(value)
-    }
-    public fun of(value: StreamingTrigger): Trigger {
-      return StreamingTriggerValue(value)
-    }
+    public fun of(value: OnDemandTrigger): Trigger = OnDemandTriggerValue(value)
+
+    public fun of(value: ScheduleTrigger): Trigger = ScheduleTriggerValue(value)
+
+    public fun of(value: SubscriptionTrigger): Trigger = SubscriptionTriggerValue(value)
+
+    public fun of(value: StreamingTrigger): Trigger = StreamingTriggerValue(value)
   }
 }
 
 internal class TriggerSerializer : JsonContentPolymorphicSerializer<Trigger>(Trigger::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Trigger> {
-    return when {
-      element is JsonObject -> OnDemandTrigger.serializer()
-      element is JsonObject -> ScheduleTrigger.serializer()
-      element is JsonObject -> SubscriptionTrigger.serializer()
-      element is JsonObject -> StreamingTrigger.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Trigger> = when {
+    element is JsonObject -> OnDemandTrigger.serializer()
+    element is JsonObject -> ScheduleTrigger.serializer()
+    element is JsonObject -> SubscriptionTrigger.serializer()
+    element is JsonObject -> StreamingTrigger.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

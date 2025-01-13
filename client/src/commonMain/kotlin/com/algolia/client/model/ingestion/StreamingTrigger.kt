@@ -13,4 +13,5 @@ import kotlinx.serialization.json.*
 public data class StreamingTrigger(
 
   @SerialName(value = "type") val type: StreamingTriggerType,
-) : Trigger, TaskCreateTrigger
+) : Trigger,
+  TaskCreateTrigger

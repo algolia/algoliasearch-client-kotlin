@@ -29,21 +29,16 @@ public sealed interface Discount {
 
   public companion object {
 
-    public fun of(value: Double): Discount {
-      return DoubleValue(value)
-    }
-    public fun of(value: String): Discount {
-      return StringValue(value)
-    }
+    public fun of(value: Double): Discount = DoubleValue(value)
+
+    public fun of(value: String): Discount = StringValue(value)
   }
 }
 
 internal class DiscountSerializer : JsonContentPolymorphicSerializer<Discount>(Discount::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Discount> {
-    return when {
-      element.isDouble -> Discount.DoubleValue.serializer()
-      element.isString -> Discount.StringValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Discount> = when {
+    element.isDouble -> Discount.DoubleValue.serializer()
+    element.isString -> Discount.StringValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

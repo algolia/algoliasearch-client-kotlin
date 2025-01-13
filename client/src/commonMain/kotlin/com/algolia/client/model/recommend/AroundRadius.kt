@@ -29,21 +29,16 @@ public sealed interface AroundRadius {
 
   public companion object {
 
-    public fun of(value: Int): AroundRadius {
-      return IntValue(value)
-    }
-    public fun of(value: AroundRadiusAll): AroundRadius {
-      return AroundRadiusAllValue(value)
-    }
+    public fun of(value: Int): AroundRadius = IntValue(value)
+
+    public fun of(value: AroundRadiusAll): AroundRadius = AroundRadiusAllValue(value)
   }
 }
 
 internal class AroundRadiusSerializer : JsonContentPolymorphicSerializer<AroundRadius>(AroundRadius::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AroundRadius> {
-    return when {
-      element.isInt -> AroundRadius.IntValue.serializer()
-      element.isString -> AroundRadiusAll.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AroundRadius> = when {
+    element.isInt -> AroundRadius.IntValue.serializer()
+    element.isString -> AroundRadiusAll.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

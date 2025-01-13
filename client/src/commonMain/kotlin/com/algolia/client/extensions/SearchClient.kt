@@ -41,36 +41,34 @@ public suspend fun SearchClient.waitForApiKey(
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
   requestOptions: RequestOptions? = null,
-): GetApiKeyResponse? {
-  return when (operation) {
-    ApiKeyOperation.Add -> waitKeyCreation(
-      key = key,
-      maxRetries = maxRetries,
-      timeout = timeout,
-      initialDelay = initialDelay,
-      maxDelay = maxDelay,
-      requestOptions = requestOptions,
-    )
+): GetApiKeyResponse? = when (operation) {
+  ApiKeyOperation.Add -> waitKeyCreation(
+    key = key,
+    maxRetries = maxRetries,
+    timeout = timeout,
+    initialDelay = initialDelay,
+    maxDelay = maxDelay,
+    requestOptions = requestOptions,
+  )
 
-    ApiKeyOperation.Delete -> waitKeyDelete(
-      key = key,
-      maxRetries = maxRetries,
-      timeout = timeout,
-      initialDelay = initialDelay,
-      maxDelay = maxDelay,
-      requestOptions = requestOptions,
-    )
+  ApiKeyOperation.Delete -> waitKeyDelete(
+    key = key,
+    maxRetries = maxRetries,
+    timeout = timeout,
+    initialDelay = initialDelay,
+    maxDelay = maxDelay,
+    requestOptions = requestOptions,
+  )
 
-    ApiKeyOperation.Update -> waitKeyUpdate(
-      key = key,
-      apiKey = requireNotNull(apiKey) { "apiKey is required for update api key operation" },
-      timeout = timeout,
-      maxRetries = maxRetries,
-      initialDelay = initialDelay,
-      maxDelay = maxDelay,
-      requestOptions = requestOptions,
-    )
-  }
+  ApiKeyOperation.Update -> waitKeyUpdate(
+    key = key,
+    apiKey = requireNotNull(apiKey) { "apiKey is required for update api key operation" },
+    timeout = timeout,
+    maxRetries = maxRetries,
+    initialDelay = initialDelay,
+    maxDelay = maxDelay,
+    requestOptions = requestOptions,
+  )
 }
 
 /**
@@ -96,16 +94,14 @@ public suspend fun SearchClient.waitForTask(
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
   requestOptions: RequestOptions? = null,
-): GetTaskResponse {
-  return retryUntil(
-    timeout = timeout,
-    maxRetries = maxRetries,
-    initialDelay = initialDelay,
-    maxDelay = maxDelay,
-    retry = { getTask(indexName, taskID, requestOptions) },
-    until = { it.status == TaskStatus.Published },
-  )
-}
+): GetTaskResponse = retryUntil(
+  timeout = timeout,
+  maxRetries = maxRetries,
+  initialDelay = initialDelay,
+  maxDelay = maxDelay,
+  retry = { getTask(indexName, taskID, requestOptions) },
+  until = { it.status == TaskStatus.Published },
+)
 
 @Deprecated(
   "Please use waitForTask instead",
@@ -119,17 +115,15 @@ public suspend fun SearchClient.waitTask(
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
   requestOptions: RequestOptions? = null,
-): TaskStatus {
-  return waitForTask(
-    indexName = indexName,
-    taskID = taskID,
-    maxRetries = maxRetries,
-    timeout = timeout,
-    initialDelay = initialDelay,
-    maxDelay = maxDelay,
-    requestOptions = requestOptions,
-  ).status
-}
+): TaskStatus = waitForTask(
+  indexName = indexName,
+  taskID = taskID,
+  maxRetries = maxRetries,
+  timeout = timeout,
+  initialDelay = initialDelay,
+  maxDelay = maxDelay,
+  requestOptions = requestOptions,
+).status
 
 /**
  * Wait for an application-level [taskID] to complete before executing the next line of code.
@@ -148,16 +142,14 @@ public suspend fun SearchClient.waitForAppTask(
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
   requestOptions: RequestOptions? = null,
-): GetTaskResponse {
-  return retryUntil(
-    timeout = timeout,
-    maxRetries = maxRetries,
-    initialDelay = initialDelay,
-    maxDelay = maxDelay,
-    retry = { getAppTask(taskID, requestOptions) },
-    until = { it.status == TaskStatus.Published },
-  )
-}
+): GetTaskResponse = retryUntil(
+  timeout = timeout,
+  maxRetries = maxRetries,
+  initialDelay = initialDelay,
+  maxDelay = maxDelay,
+  retry = { getAppTask(taskID, requestOptions) },
+  until = { it.status == TaskStatus.Published },
+)
 
 @Deprecated(
   "Please use waitForAppTask instead",
@@ -170,16 +162,14 @@ public suspend fun SearchClient.waitAppTask(
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
   requestOptions: RequestOptions? = null,
-): TaskStatus {
-  return waitForAppTask(
-    taskID = taskID,
-    maxRetries = maxRetries,
-    timeout = timeout,
-    initialDelay = initialDelay,
-    maxDelay = maxDelay,
-    requestOptions = requestOptions,
-  ).status
-}
+): TaskStatus = waitForAppTask(
+  taskID = taskID,
+  maxRetries = maxRetries,
+  timeout = timeout,
+  initialDelay = initialDelay,
+  maxDelay = maxDelay,
+  requestOptions = requestOptions,
+).status
 
 /**
  * Wait on an API key update operation.
@@ -201,28 +191,26 @@ public suspend fun SearchClient.waitKeyUpdate(
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
   requestOptions: RequestOptions? = null,
-): GetApiKeyResponse {
-  return retryUntil(
-    timeout = timeout,
-    maxRetries = maxRetries,
-    initialDelay = initialDelay,
-    maxDelay = maxDelay,
-    retry = { getApiKey(key, requestOptions) },
-    until = {
-      apiKey ==
-        ApiKey(
-          acl = it.acl,
-          description = it.description,
-          indexes = it.indexes,
-          maxHitsPerQuery = it.maxHitsPerQuery,
-          maxQueriesPerIPPerHour = it.maxQueriesPerIPPerHour,
-          queryParameters = it.queryParameters,
-          referers = it.referers,
-          validity = it.validity,
-        )
-    },
-  )
-}
+): GetApiKeyResponse = retryUntil(
+  timeout = timeout,
+  maxRetries = maxRetries,
+  initialDelay = initialDelay,
+  maxDelay = maxDelay,
+  retry = { getApiKey(key, requestOptions) },
+  until = {
+    apiKey ==
+      ApiKey(
+        acl = it.acl,
+        description = it.description,
+        indexes = it.indexes,
+        maxHitsPerQuery = it.maxHitsPerQuery,
+        maxQueriesPerIPPerHour = it.maxQueriesPerIPPerHour,
+        queryParameters = it.queryParameters,
+        referers = it.referers,
+        validity = it.validity,
+      )
+  },
+)
 
 /**
  * Wait on an API key creation operation.
@@ -240,23 +228,21 @@ public suspend fun SearchClient.waitKeyCreation(
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
   requestOptions: RequestOptions? = null,
-): GetApiKeyResponse {
-  return retryUntil(
-    timeout = timeout,
-    maxRetries = maxRetries,
-    initialDelay = initialDelay,
-    maxDelay = maxDelay,
-    retry = {
-      try {
-        val response = getApiKey(key, requestOptions)
-        Result.success(response)
-      } catch (e: AlgoliaApiException) {
-        Result.failure(e)
-      }
-    },
-    until = { it.isSuccess },
-  ).getOrThrow()
-}
+): GetApiKeyResponse = retryUntil(
+  timeout = timeout,
+  maxRetries = maxRetries,
+  initialDelay = initialDelay,
+  maxDelay = maxDelay,
+  retry = {
+    try {
+      val response = getApiKey(key, requestOptions)
+      Result.success(response)
+    } catch (e: AlgoliaApiException) {
+      Result.failure(e)
+    }
+  },
+  until = { it.isSuccess },
+).getOrThrow()
 
 /**
  * Wait on a delete API ket operation.
@@ -382,16 +368,14 @@ public suspend fun SearchClient.saveObjects(
   waitForTask: Boolean = false,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
-): List<BatchResponse> {
-  return this.chunkedBatch(
-    indexName = indexName,
-    objects = objects,
-    action = Action.AddObject,
-    waitForTask = waitForTask,
-    batchSize = batchSize,
-    requestOptions = requestOptions,
-  )
-}
+): List<BatchResponse> = this.chunkedBatch(
+  indexName = indexName,
+  objects = objects,
+  action = Action.AddObject,
+  waitForTask = waitForTask,
+  batchSize = batchSize,
+  requestOptions = requestOptions,
+)
 
 /**
  * Helper: Deletes every records for the given objectIDs. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objectIDs in it.
@@ -410,16 +394,14 @@ public suspend fun SearchClient.deleteObjects(
   waitForTask: Boolean = false,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
-): List<BatchResponse> {
-  return this.chunkedBatch(
-    indexName = indexName,
-    objects = objectIDs.map { id -> JsonObject(mapOf("objectID" to Json.encodeToJsonElement(id))) },
-    action = Action.DeleteObject,
-    waitForTask = waitForTask,
-    batchSize = batchSize,
-    requestOptions = requestOptions,
-  )
-}
+): List<BatchResponse> = this.chunkedBatch(
+  indexName = indexName,
+  objects = objectIDs.map { id -> JsonObject(mapOf("objectID" to Json.encodeToJsonElement(id))) },
+  action = Action.DeleteObject,
+  waitForTask = waitForTask,
+  batchSize = batchSize,
+  requestOptions = requestOptions,
+)
 
 /**
  * Helper: Replaces object content of all the given objects according to their respective `objectID` field. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objects in it.
@@ -440,16 +422,14 @@ public suspend fun SearchClient.partialUpdateObjects(
   waitForTask: Boolean = false,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
-): List<BatchResponse> {
-  return this.chunkedBatch(
-    indexName = indexName,
-    objects = objects,
-    action = if (createIfNotExists) Action.PartialUpdateObject else Action.PartialUpdateObjectNoCreate,
-    waitForTask = waitForTask,
-    batchSize = batchSize,
-    requestOptions = requestOptions,
-  )
-}
+): List<BatchResponse> = this.chunkedBatch(
+  indexName = indexName,
+  objects = objects,
+  action = if (createIfNotExists) Action.PartialUpdateObject else Action.PartialUpdateObjectNoCreate,
+  waitForTask = waitForTask,
+  batchSize = batchSize,
+  requestOptions = requestOptions,
+)
 
 /**
  * Push a new set of objects and remove all previous ones. Settings, synonyms and query rules are untouched.
@@ -622,19 +602,17 @@ public suspend fun SearchClient.browseObjects(
   validate: (BrowseResponse) -> Boolean = { response -> response.cursor == null },
   aggregator: ((BrowseResponse) -> Unit),
   requestOptions: RequestOptions? = null,
-): BrowseResponse {
-  return createIterable(
-    execute = { previousResponse ->
-      browse(
-        indexName,
-        params.copy(hitsPerPage = params.hitsPerPage ?: 1000, cursor = previousResponse?.cursor),
-        requestOptions,
-      )
-    },
-    validate = validate,
-    aggregator = aggregator,
-  )
-}
+): BrowseResponse = createIterable(
+  execute = { previousResponse ->
+    browse(
+      indexName,
+      params.copy(hitsPerPage = params.hitsPerPage ?: 1000, cursor = previousResponse?.cursor),
+      requestOptions,
+    )
+  },
+  validate = validate,
+  aggregator = aggregator,
+)
 
 /**
  * Helper: Returns an iterator on top of the `browse` method.

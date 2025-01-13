@@ -78,22 +78,18 @@ public class KtorRequester(
     throw AlgoliaRetryException(errors)
   }
 
-  private fun callTypeOf(requestConfig: RequestConfig): CallType {
-    return if (requestConfig.isRead || requestConfig.method == RequestMethod.GET) {
-      CallType.Read
-    } else {
-      CallType.Write
-    }
+  private fun callTypeOf(requestConfig: RequestConfig): CallType = if (requestConfig.isRead || requestConfig.method == RequestMethod.GET) {
+    CallType.Read
+  } else {
+    CallType.Write
   }
 
   /** Get list of [RetryableHost] for a given [CallType]. */
-  private suspend fun callableHosts(callType: CallType): List<RetryableHost> {
-    return mutex.withLock {
-      retryableHosts.expireHostsOlderThan(hostStatusExpirationDelayMS)
-      val hostsCallType = retryableHosts.filterCallType(callType)
-      val hostsCallTypeAreUp = hostsCallType.filter { it.isUp }
-      hostsCallTypeAreUp.ifEmpty { hostsCallType.onEach { it.reset() } }
-    }
+  private suspend fun callableHosts(callType: CallType): List<RetryableHost> = mutex.withLock {
+    retryableHosts.expireHostsOlderThan(hostStatusExpirationDelayMS)
+    val hostsCallType = retryableHosts.filterCallType(callType)
+    val hostsCallTypeAreUp = hostsCallType.filter { it.isUp }
+    hostsCallTypeAreUp.ifEmpty { hostsCallType.onEach { it.reset() } }
   }
 
   /** Handle API request exceptions. */
@@ -136,41 +132,36 @@ public class KtorRequester(
     }
   }
 
-  private fun List<RetryableHost>.filterCallType(callType: CallType): List<RetryableHost> {
-    return filter { it.callType == callType || it.callType == null }
-  }
+  private fun List<RetryableHost>.filterCallType(callType: CallType): List<RetryableHost> = filter { it.callType == callType || it.callType == null }
 
   private fun httpRequestBuilderOf(
     requestConfig: RequestConfig,
     requestOptions: RequestOptions? = null,
-  ): HttpRequestBuilder {
-    return HttpRequestBuilder().apply {
-      url {
-        pathSegments = requestConfig.path
-      }
-      method = requestConfig.method.ktorHttpMethod
-      contentType(ContentType.Application.Json)
+  ): HttpRequestBuilder = HttpRequestBuilder().apply {
+    url {
+      pathSegments = requestConfig.path
+    }
+    method = requestConfig.method.ktorHttpMethod
+    contentType(ContentType.Application.Json)
 
-      requestConfig.run {
-        requestHeaders(headers)
-        queryParameter(query)
-        when {
-          body != null -> setBody(body.body, body.bodyType)
-          requiresBody(requestConfig) -> setBody(EmptyObject)
-          else -> setBody(EmptyContent)
-        }
+    requestConfig.run {
+      requestHeaders(headers)
+      queryParameter(query)
+      when {
+        body != null -> setBody(body.body, body.bodyType)
+        requiresBody(requestConfig) -> setBody(EmptyObject)
+        else -> setBody(EmptyContent)
       }
+    }
 
-      requestOptions?.run {
-        requestHeaders(headers)
-        queryParameter(urlParameters)
-        body?.let { setBody(it) }
-      }
+    requestOptions?.run {
+      requestHeaders(headers)
+      queryParameter(urlParameters)
+      body?.let { setBody(it) }
     }
   }
 
-  private fun requiresBody(requestConfig: RequestConfig) =
-    requestConfig.method == RequestMethod.POST || requestConfig.method == RequestMethod.PUT
+  private fun requiresBody(requestConfig: RequestConfig) = requestConfig.method == RequestMethod.POST || requestConfig.method == RequestMethod.PUT
 
   private fun HttpRequestBuilder.requestHeaders(headerOptions: Map<String, Any>) {
     headers.replaceAll(headerOptions)

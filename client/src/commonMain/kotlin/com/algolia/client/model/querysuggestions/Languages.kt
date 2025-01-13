@@ -29,21 +29,16 @@ public sealed interface Languages {
 
   public companion object {
 
-    public fun of(value: List<String>): Languages {
-      return ListOfStringValue(value)
-    }
-    public fun of(value: Boolean): Languages {
-      return BooleanValue(value)
-    }
+    public fun of(value: List<String>): Languages = ListOfStringValue(value)
+
+    public fun of(value: Boolean): Languages = BooleanValue(value)
   }
 }
 
 internal class LanguagesSerializer : JsonContentPolymorphicSerializer<Languages>(Languages::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Languages> {
-    return when {
-      element is JsonArray -> Languages.ListOfStringValue.serializer()
-      element.isBoolean -> Languages.BooleanValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Languages> = when {
+    element is JsonArray -> Languages.ListOfStringValue.serializer()
+    element.isBoolean -> Languages.BooleanValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

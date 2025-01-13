@@ -34,25 +34,19 @@ public sealed interface SnippetResult {
 
   public companion object {
 
-    public fun of(value: SnippetResultOption): SnippetResult {
-      return SnippetResultOptionValue(value)
-    }
-    public fun of(value: Map<kotlin.String, SnippetResult>): SnippetResult {
-      return MapOfkotlinStringSnippetResultValue(value)
-    }
-    public fun of(value: List<SnippetResult>): SnippetResult {
-      return ListOfSnippetResultValue(value)
-    }
+    public fun of(value: SnippetResultOption): SnippetResult = SnippetResultOptionValue(value)
+
+    public fun of(value: Map<kotlin.String, SnippetResult>): SnippetResult = MapOfkotlinStringSnippetResultValue(value)
+
+    public fun of(value: List<SnippetResult>): SnippetResult = ListOfSnippetResultValue(value)
   }
 }
 
 internal class SnippetResultSerializer : JsonContentPolymorphicSerializer<SnippetResult>(SnippetResult::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SnippetResult> {
-    return when {
-      element is JsonObject && element.containsKey("matchLevel") -> SnippetResultOption.serializer()
-      element is JsonObject -> SnippetResult.MapOfkotlinStringSnippetResultValue.serializer()
-      element is JsonArray -> SnippetResult.ListOfSnippetResultValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<SnippetResult> = when {
+    element is JsonObject && element.containsKey("matchLevel") -> SnippetResultOption.serializer()
+    element is JsonObject -> SnippetResult.MapOfkotlinStringSnippetResultValue.serializer()
+    element is JsonArray -> SnippetResult.ListOfSnippetResultValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

@@ -29,21 +29,16 @@ public sealed interface Price {
 
   public companion object {
 
-    public fun of(value: Double): Price {
-      return DoubleValue(value)
-    }
-    public fun of(value: String): Price {
-      return StringValue(value)
-    }
+    public fun of(value: Double): Price = DoubleValue(value)
+
+    public fun of(value: String): Price = StringValue(value)
   }
 }
 
 internal class PriceSerializer : JsonContentPolymorphicSerializer<Price>(Price::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Price> {
-    return when {
-      element.isDouble -> Price.DoubleValue.serializer()
-      element.isString -> Price.StringValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Price> = when {
+    element.isDouble -> Price.DoubleValue.serializer()
+    element.isString -> Price.StringValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

@@ -24,17 +24,13 @@ public sealed interface DestinationInput {
 
   public companion object {
 
-    public fun of(value: DestinationIndexName): DestinationInput {
-      return DestinationIndexNameValue(value)
-    }
+    public fun of(value: DestinationIndexName): DestinationInput = DestinationIndexNameValue(value)
   }
 }
 
 internal class DestinationInputSerializer : JsonContentPolymorphicSerializer<DestinationInput>(DestinationInput::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<DestinationInput> {
-    return when {
-      element is JsonObject -> DestinationIndexName.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<DestinationInput> = when {
+    element is JsonObject -> DestinationIndexName.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

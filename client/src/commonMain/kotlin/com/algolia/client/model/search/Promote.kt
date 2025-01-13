@@ -29,21 +29,16 @@ public sealed interface Promote {
 
   public companion object {
 
-    public fun of(value: PromoteObjectIDs): Promote {
-      return PromoteObjectIDsValue(value)
-    }
-    public fun of(value: PromoteObjectID): Promote {
-      return PromoteObjectIDValue(value)
-    }
+    public fun of(value: PromoteObjectIDs): Promote = PromoteObjectIDsValue(value)
+
+    public fun of(value: PromoteObjectID): Promote = PromoteObjectIDValue(value)
   }
 }
 
 internal class PromoteSerializer : JsonContentPolymorphicSerializer<Promote>(Promote::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Promote> {
-    return when {
-      element is JsonObject && element.containsKey("objectIDs") -> PromoteObjectIDs.serializer()
-      element is JsonObject && element.containsKey("objectID") -> PromoteObjectID.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Promote> = when {
+    element is JsonObject && element.containsKey("objectIDs") -> PromoteObjectIDs.serializer()
+    element is JsonObject && element.containsKey("objectID") -> PromoteObjectID.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

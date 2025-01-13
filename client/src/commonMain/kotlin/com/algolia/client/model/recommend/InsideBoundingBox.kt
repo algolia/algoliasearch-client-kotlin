@@ -29,21 +29,16 @@ public sealed interface InsideBoundingBox {
 
   public companion object {
 
-    public fun of(value: String): InsideBoundingBox {
-      return StringValue(value)
-    }
-    public fun of(value: List<List<Double>>): InsideBoundingBox {
-      return ListOfListOfDoubleValue(value)
-    }
+    public fun of(value: String): InsideBoundingBox = StringValue(value)
+
+    public fun of(value: List<List<Double>>): InsideBoundingBox = ListOfListOfDoubleValue(value)
   }
 }
 
 internal class InsideBoundingBoxSerializer : JsonContentPolymorphicSerializer<InsideBoundingBox>(InsideBoundingBox::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<InsideBoundingBox> {
-    return when {
-      element.isString -> InsideBoundingBox.StringValue.serializer()
-      element is JsonArray -> InsideBoundingBox.ListOfListOfDoubleValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<InsideBoundingBox> = when {
+    element.isString -> InsideBoundingBox.StringValue.serializer()
+    element is JsonArray -> InsideBoundingBox.ListOfListOfDoubleValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

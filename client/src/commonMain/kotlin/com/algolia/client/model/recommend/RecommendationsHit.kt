@@ -29,21 +29,16 @@ public sealed interface RecommendationsHit {
 
   public companion object {
 
-    public fun of(value: TrendingFacetHit): RecommendationsHit {
-      return TrendingFacetHitValue(value)
-    }
-    public fun of(value: RecommendHit): RecommendationsHit {
-      return RecommendHitValue(value)
-    }
+    public fun of(value: TrendingFacetHit): RecommendationsHit = TrendingFacetHitValue(value)
+
+    public fun of(value: RecommendHit): RecommendationsHit = RecommendHitValue(value)
   }
 }
 
 internal class RecommendationsHitSerializer : JsonContentPolymorphicSerializer<RecommendationsHit>(RecommendationsHit::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RecommendationsHit> {
-    return when {
-      element is JsonObject && element.containsKey("facetName") && element.containsKey("facetValue") -> TrendingFacetHit.serializer()
-      element is JsonObject && element.containsKey("objectID") -> RecommendHit.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RecommendationsHit> = when {
+    element is JsonObject && element.containsKey("facetName") && element.containsKey("facetValue") -> TrendingFacetHit.serializer()
+    element is JsonObject && element.containsKey("objectID") -> RecommendHit.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

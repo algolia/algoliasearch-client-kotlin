@@ -14,4 +14,5 @@ public data class SearchParamsString(
 
   /** Search parameters as a URL-encoded query string. */
   @SerialName(value = "params") val params: String? = null,
-) : SearchParams, BrowseParams
+) : SearchParams,
+  BrowseParams

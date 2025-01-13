@@ -54,41 +54,31 @@ public sealed interface AuthInput {
 
   public companion object {
 
-    public fun of(value: AuthOAuth): AuthInput {
-      return AuthOAuthValue(value)
-    }
-    public fun of(value: AuthGoogleServiceAccount): AuthInput {
-      return AuthGoogleServiceAccountValue(value)
-    }
-    public fun of(value: AuthBasic): AuthInput {
-      return AuthBasicValue(value)
-    }
-    public fun of(value: AuthAPIKey): AuthInput {
-      return AuthAPIKeyValue(value)
-    }
-    public fun of(value: AuthAlgolia): AuthInput {
-      return AuthAlgoliaValue(value)
-    }
-    public fun of(value: AuthAlgoliaInsights): AuthInput {
-      return AuthAlgoliaInsightsValue(value)
-    }
-    public fun of(value: Map<kotlin.String, String>): AuthInput {
-      return MapOfkotlinStringStringValue(value)
-    }
+    public fun of(value: AuthOAuth): AuthInput = AuthOAuthValue(value)
+
+    public fun of(value: AuthGoogleServiceAccount): AuthInput = AuthGoogleServiceAccountValue(value)
+
+    public fun of(value: AuthBasic): AuthInput = AuthBasicValue(value)
+
+    public fun of(value: AuthAPIKey): AuthInput = AuthAPIKeyValue(value)
+
+    public fun of(value: AuthAlgolia): AuthInput = AuthAlgoliaValue(value)
+
+    public fun of(value: AuthAlgoliaInsights): AuthInput = AuthAlgoliaInsightsValue(value)
+
+    public fun of(value: Map<kotlin.String, String>): AuthInput = MapOfkotlinStringStringValue(value)
   }
 }
 
 internal class AuthInputSerializer : JsonContentPolymorphicSerializer<AuthInput>(AuthInput::class) {
-  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AuthInput> {
-    return when {
-      element is JsonObject && element.containsKey("url") && element.containsKey("client_id") && element.containsKey("client_secret") -> AuthOAuth.serializer()
-      element is JsonObject && element.containsKey("clientEmail") && element.containsKey("privateKey") -> AuthGoogleServiceAccount.serializer()
-      element is JsonObject && element.containsKey("username") && element.containsKey("password") -> AuthBasic.serializer()
-      element is JsonObject && element.containsKey("key") -> AuthAPIKey.serializer()
-      element is JsonObject -> AuthAlgolia.serializer()
-      element is JsonObject -> AuthAlgoliaInsights.serializer()
-      element is JsonObject -> AuthInput.MapOfkotlinStringStringValue.serializer()
-      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
-    }
+  override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AuthInput> = when {
+    element is JsonObject && element.containsKey("url") && element.containsKey("client_id") && element.containsKey("client_secret") -> AuthOAuth.serializer()
+    element is JsonObject && element.containsKey("clientEmail") && element.containsKey("privateKey") -> AuthGoogleServiceAccount.serializer()
+    element is JsonObject && element.containsKey("username") && element.containsKey("password") -> AuthBasic.serializer()
+    element is JsonObject && element.containsKey("key") -> AuthAPIKey.serializer()
+    element is JsonObject -> AuthAlgolia.serializer()
+    element is JsonObject -> AuthAlgoliaInsights.serializer()
+    element is JsonObject -> AuthInput.MapOfkotlinStringStringValue.serializer()
+    else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }
