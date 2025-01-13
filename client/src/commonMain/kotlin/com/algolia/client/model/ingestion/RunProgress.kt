@@ -13,7 +13,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class RunProgress(
 
-  @SerialName(value = "expectedNbOfEvents") val expectedNbOfEvents: Int? = null,
+  @SerialName(value = "expectedNbOfEvents") val expectedNbOfEvents: Int,
 
-  @SerialName(value = "receivedNbOfEvents") val receivedNbOfEvents: Int? = null,
+  @SerialName(value = "receivedNbOfEvents") val receivedNbOfEvents: Int,
 )
