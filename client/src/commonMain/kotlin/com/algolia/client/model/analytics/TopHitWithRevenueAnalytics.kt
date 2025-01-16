@@ -7,32 +7,32 @@ import kotlinx.serialization.json.*
 /**
  * TopHitWithRevenueAnalytics
  *
- * @param hit Object ID of a record that's returned as a search result.
+ * @param hit Object ID of a record returned as a search result.
  * @param count Number of occurrences.
- * @param clickThroughRate Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
- * @param conversionRate Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+ * @param clickThroughRate Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+ * @param conversionRate Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
  * @param trackedHitCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
  * @param clickCount Number of clicks associated with this search.
  * @param conversionCount Number of conversions from this search.
- * @param addToCartRate Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+ * @param addToCartRate Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
  * @param addToCartCount Number of add-to-cart events from this search.
- * @param purchaseRate Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+ * @param purchaseRate Purchase rate: calculated as the number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
  * @param purchaseCount Number of purchase events from this search.
- * @param currencies Revenue associated with this search, broken-down by currencies.
+ * @param currencies Revenue associated with this search: broken down by currency.
  */
 @Serializable
 public data class TopHitWithRevenueAnalytics(
 
-  /** Object ID of a record that's returned as a search result. */
+  /** Object ID of a record returned as a search result. */
   @SerialName(value = "hit") val hit: String,
 
   /** Number of occurrences. */
   @SerialName(value = "count") val count: Int,
 
-  /** Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
+  /** Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
   @SerialName(value = "clickThroughRate") val clickThroughRate: Double,
 
-  /** Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
+  /** Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
   @SerialName(value = "conversionRate") val conversionRate: Double,
 
   /** Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true. */
@@ -44,18 +44,18 @@ public data class TopHitWithRevenueAnalytics(
   /** Number of conversions from this search. */
   @SerialName(value = "conversionCount") val conversionCount: Int,
 
-  /** Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
+  /** Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
   @SerialName(value = "addToCartRate") val addToCartRate: Double,
 
   /** Number of add-to-cart events from this search. */
   @SerialName(value = "addToCartCount") val addToCartCount: Int,
 
-  /** Purchase rate, calculated as number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
+  /** Purchase rate: calculated as the number of tracked searches with at least one purchase event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
   @SerialName(value = "purchaseRate") val purchaseRate: Double,
 
   /** Number of purchase events from this search. */
   @SerialName(value = "purchaseCount") val purchaseCount: Int,
 
-  /** Revenue associated with this search, broken-down by currencies. */
+  /** Revenue associated with this search: broken down by currency.  */
   @SerialName(value = "currencies") val currencies: Map<kotlin.String, CurrencyCode>,
 )

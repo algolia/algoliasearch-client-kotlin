@@ -7,11 +7,11 @@ import kotlinx.serialization.json.*
 /**
  * GetTopFiltersNoResultsResponse
  *
- * @param values Filters for searches without any results. If null, the search term specified with the `search` parameter is not a search without results, or the `search` parameter is absent from the request.
+ * @param values Filters for searches without any results. If null, the search term specified with the `search` parameter isn't a search without results, or the `search` parameter is absent from the request.
  */
 @Serializable
 public data class GetTopFiltersNoResultsResponse(
 
-  /** Filters for searches without any results. If null, the search term specified with the `search` parameter is not a search without results, or the `search` parameter is absent from the request.  */
+  /** Filters for searches without any results. If null, the search term specified with the `search` parameter isn't a search without results, or the `search` parameter is absent from the request.  */
   @SerialName(value = "values") val values: List<GetTopFiltersNoResultsValues>,
 )

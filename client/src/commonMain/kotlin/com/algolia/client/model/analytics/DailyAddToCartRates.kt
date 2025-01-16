@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * DailyAddToCartRates
  *
- * @param rate Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+ * @param rate Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
  * @param trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
  * @param addToCartCount Number of add-to-cart events from this search.
  * @param date Date in the format YYYY-MM-DD.
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class DailyAddToCartRates(
 
-  /** Add-to-cart rate, calculated as number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
+  /** Add-to-cart rate: calculated as the number of tracked searches with at least one add-to-cart event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
   @SerialName(value = "rate") val rate: Double,
 
   /** Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true. */

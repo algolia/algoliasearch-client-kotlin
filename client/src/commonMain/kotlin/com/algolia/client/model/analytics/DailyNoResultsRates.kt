@@ -10,7 +10,7 @@ import kotlinx.serialization.json.*
  * @param date Date in the format YYYY-MM-DD.
  * @param noResultCount Number of searches without any results.
  * @param count Number of searches.
- * @param rate No results rate, calculated as number of searches with zero results divided by the total number of searches.
+ * @param rate No results rate: calculated as the number of searches with zero results divided by the total number of searches.
  */
 @Serializable
 public data class DailyNoResultsRates(
@@ -24,6 +24,6 @@ public data class DailyNoResultsRates(
   /** Number of searches. */
   @SerialName(value = "count") val count: Int,
 
-  /** No results rate, calculated as number of searches with zero results divided by the total number of searches. */
+  /** No results rate: calculated as the number of searches with zero results divided by the total number of searches.  */
   @SerialName(value = "rate") val rate: Double,
 )

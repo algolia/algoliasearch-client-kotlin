@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * GetConversionRateResponse
  *
- * @param rate Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+ * @param rate Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
  * @param trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
  * @param conversionCount Number of conversions from this search.
  * @param dates Daily conversion rates.
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class GetConversionRateResponse(
 
-  /** Conversion rate, calculated as number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
+  /** Conversion rate: calculated as the number of tracked searches with at least one conversion event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
   @SerialName(value = "rate") val rate: Double,
 
   /** Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true. */

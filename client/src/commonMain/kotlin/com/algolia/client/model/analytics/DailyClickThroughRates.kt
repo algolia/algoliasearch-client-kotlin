@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * DailyClickThroughRates
  *
- * @param rate Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
+ * @param rate Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.
  * @param clickCount Number of clicks associated with this search.
  * @param trackedSearchCount Number of tracked searches. Tracked searches are search requests where the `clickAnalytics` parameter is true.
  * @param date Date in the format YYYY-MM-DD.
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class DailyClickThroughRates(
 
-  /** Click-through rate, calculated as number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
+  /** Click-through rate: calculated as the number of tracked searches with at least one click event divided by the number of tracked searches. If null, Algolia didn't receive any search requests with `clickAnalytics` set to true.  */
   @SerialName(value = "rate") val rate: Double,
 
   /** Number of clicks associated with this search. */

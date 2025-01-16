@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * GetNoResultsRateResponse
  *
- * @param rate No results rate, calculated as number of searches with zero results divided by the total number of searches.
+ * @param rate No results rate: calculated as the number of searches with zero results divided by the total number of searches.
  * @param count Number of searches.
  * @param noResultCount Number of searches without any results.
  * @param dates Daily no results rates.
@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class GetNoResultsRateResponse(
 
-  /** No results rate, calculated as number of searches with zero results divided by the total number of searches. */
+  /** No results rate: calculated as the number of searches with zero results divided by the total number of searches.  */
   @SerialName(value = "rate") val rate: Double,
 
   /** Number of searches. */

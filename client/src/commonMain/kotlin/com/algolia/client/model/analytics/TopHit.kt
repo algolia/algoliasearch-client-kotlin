@@ -7,13 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * TopHit
  *
- * @param hit Object ID of a record that's returned as a search result.
+ * @param hit Object ID of a record returned as a search result.
  * @param count Number of occurrences.
  */
 @Serializable
 public data class TopHit(
 
-  /** Object ID of a record that's returned as a search result. */
+  /** Object ID of a record returned as a search result. */
   @SerialName(value = "hit") val hit: String,
 
   /** Number of occurrences. */
