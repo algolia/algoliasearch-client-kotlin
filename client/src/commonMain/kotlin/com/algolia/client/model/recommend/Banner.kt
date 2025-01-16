@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * a search banner with image and url.
+ * Banner with image and link to redirect users.
  *
  * @param image
  * @param link

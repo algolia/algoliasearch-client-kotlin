@@ -5,13 +5,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * widgets returned from any rules that are applied to the current search.
+ * Widgets returned from any rules that are applied to the current search.
  *
- * @param banners banners defined in the merchandising studio for the given search.
+ * @param banners Banners defined in the Merchandising Studio for a given search.
  */
 @Serializable
 public data class Widgets(
 
-  /** banners defined in the merchandising studio for the given search. */
+  /** Banners defined in the Merchandising Studio for a given search. */
   @SerialName(value = "banners") val banners: List<Banner>? = null,
 )
