@@ -7,14 +7,14 @@ import kotlinx.serialization.json.*
 /**
  * ListABTestsResponse
  *
- * @param abtests A/B tests.
+ * @param abtests The list of A/B tests, null if no A/B tests are configured for this application.
  * @param count Number of A/B tests.
  * @param total Number of retrievable A/B tests.
  */
 @Serializable
 public data class ListABTestsResponse(
 
-  /** A/B tests. */
+  /** The list of A/B tests, null if no A/B tests are configured for this application. */
   @SerialName(value = "abtests") val abtests: List<ABTest>,
 
   /** Number of A/B tests. */

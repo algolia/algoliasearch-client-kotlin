@@ -12,6 +12,6 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class GetStatusResponse(
 
-  /** Date and time when the object was updated, in RFC 3339 format.  */
+  /** Date and time when the object was updated, in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
 )
