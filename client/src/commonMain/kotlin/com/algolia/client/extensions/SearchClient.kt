@@ -311,7 +311,7 @@ public suspend fun SearchClient.searchForFacets(
  * @param indexName The index in which to perform the request.
  * @param objects The list of objects to index.
  * @param action The action to perform on the objects. Default is `Action.AddObject`.
- * @param waitForTask If true, wait for the task to complete.
+ * @param waitForTasks If true, wait for the task to complete.
  * @param batchSize The size of the batch. Default is 1000.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
  * @return The list of responses from the batch requests.
@@ -321,7 +321,7 @@ public suspend fun SearchClient.chunkedBatch(
   indexName: String,
   objects: List<JsonObject>,
   action: Action = Action.AddObject,
-  waitForTask: Boolean,
+  waitForTasks: Boolean,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
 ): List<BatchResponse> {
@@ -340,7 +340,7 @@ public suspend fun SearchClient.chunkedBatch(
     )
     tasks.add(batch)
   }
-  if (waitForTask) {
+  if (waitForTasks) {
     tasks.forEach { waitForTask(indexName, it.taskID) }
   }
   return tasks
@@ -351,7 +351,7 @@ public suspend fun SearchClient.chunkedBatch(
  *
  * @param indexName The index in which to perform the request.
  * @param objects The list of objects to index.
- * @param waitForTask If true, wait for the task to complete.
+ * @param waitForTasks If true, wait for the task to complete.
  * @param batchSize The size of the batch. Default is 1000.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
  * @return The list of responses from the batch requests.
@@ -360,24 +360,24 @@ public suspend fun SearchClient.chunkedBatch(
 public suspend fun SearchClient.saveObjects(
   indexName: String,
   objects: List<JsonObject>,
-  waitForTask: Boolean = false,
+  waitForTasks: Boolean = false,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
 ): List<BatchResponse> = this.chunkedBatch(
   indexName = indexName,
   objects = objects,
   action = Action.AddObject,
-  waitForTask = waitForTask,
+  waitForTasks = waitForTasks,
   batchSize = batchSize,
   requestOptions = requestOptions,
 )
 
 /**
- * Helper: Deletes every records for the given objectIDs. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objectIDs in it.
+ * Helper: Deletes every record for the given objectIDs. The `chunkedBatch` helper is used under the hood, which creates a `batch` requests with at most 1000 objectIDs in it.
  *
  * @param indexName The index in which to perform the request.
  * @param objectIDs The list of objectIDs to delete from the index.
- * @param waitForTask If true, wait for the task to complete.
+ * @param waitForTasks If true, wait for the task to complete.
  * @param batchSize The size of the batch. Default is 1000.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
  * @return The list of responses from the batch requests.
@@ -386,14 +386,14 @@ public suspend fun SearchClient.saveObjects(
 public suspend fun SearchClient.deleteObjects(
   indexName: String,
   objectIDs: List<String>,
-  waitForTask: Boolean = false,
+  waitForTasks: Boolean = false,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
 ): List<BatchResponse> = this.chunkedBatch(
   indexName = indexName,
   objects = objectIDs.map { id -> JsonObject(mapOf("objectID" to Json.encodeToJsonElement(id))) },
   action = Action.DeleteObject,
-  waitForTask = waitForTask,
+  waitForTasks = waitForTasks,
   batchSize = batchSize,
   requestOptions = requestOptions,
 )
@@ -404,7 +404,7 @@ public suspend fun SearchClient.deleteObjects(
  * @param indexName The index in which to perform the request.
  * @param objects The list of objects to update in the index.
  * @param createIfNotExists To be provided if non-existing objects are passed, otherwise, the call will fail..
- * @param waitForTask If true, wait for the task to complete.
+ * @param waitForTasks If true, wait for the task to complete.
  * @param batchSize The size of the batch. Default is 1000.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with the transporter requestOptions.
  * @return The list of responses from the batch requests.
@@ -414,14 +414,14 @@ public suspend fun SearchClient.partialUpdateObjects(
   indexName: String,
   objects: List<JsonObject>,
   createIfNotExists: Boolean,
-  waitForTask: Boolean = false,
+  waitForTasks: Boolean = false,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
 ): List<BatchResponse> = this.chunkedBatch(
   indexName = indexName,
   objects = objects,
   action = if (createIfNotExists) Action.PartialUpdateObject else Action.PartialUpdateObjectNoCreate,
-  waitForTask = waitForTask,
+  waitForTasks = waitForTasks,
   batchSize = batchSize,
   requestOptions = requestOptions,
 )
@@ -464,7 +464,7 @@ public suspend fun SearchClient.replaceAllObjects(
       indexName = tmpIndexName,
       objects = objects,
       action = Action.AddObject,
-      waitForTask = true,
+      waitForTasks = true,
       batchSize = batchSize,
       requestOptions = requestOptions,
     )
