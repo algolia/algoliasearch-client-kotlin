@@ -1,3 +1,7 @@
+## [3.15.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.14.1...3.15.0)
+
+- [fd2353a092](https://github.com/algolia/api-clients-automation/commit/fd2353a092) feat(clients): add manual snippets for search doc ([#4388](https://github.com/algolia/api-clients-automation/pull/4388)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [3.14.1](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.14.0...3.14.1)
 
 - [506b8a5636](https://github.com/algolia/api-clients-automation/commit/506b8a5636) fix(specs): responseFields description ([#4399](https://github.com/algolia/api-clients-automation/pull/4399)) by [@kai687](https://github.com/kai687/)
