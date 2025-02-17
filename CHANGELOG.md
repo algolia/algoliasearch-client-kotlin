@@ -1,3 +1,7 @@
+## [3.15.1](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.15.0...3.15.1)
+
+- [ecd6bc4fed](https://github.com/algolia/api-clients-automation/commit/ecd6bc4fed) chore(deps): dependencies 2025-02-17 ([#4459](https://github.com/algolia/api-clients-automation/pull/4459)) by [@algolia-bot](https://github.com/algolia-bot/)
+
 ## [3.15.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.14.1...3.15.0)
 
 - [fd2353a092](https://github.com/algolia/api-clients-automation/commit/fd2353a092) feat(clients): add manual snippets for search doc ([#4388](https://github.com/algolia/api-clients-automation/pull/4388)) by [@Fluf22](https://github.com/Fluf22/)
