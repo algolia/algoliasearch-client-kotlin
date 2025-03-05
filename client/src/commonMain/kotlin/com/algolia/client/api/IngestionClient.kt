@@ -147,7 +147,7 @@ public class IngestionClient(
   }
 
   /**
-   * This method allow you to send requests to the Algolia REST API.
+   * This method lets you send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
    * @param requestOptions additional request configuration.
@@ -168,7 +168,7 @@ public class IngestionClient(
   }
 
   /**
-   * This method allow you to send requests to the Algolia REST API.
+   * This method lets you send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
    * @param requestOptions additional request configuration.
@@ -189,7 +189,7 @@ public class IngestionClient(
   }
 
   /**
-   * This method allow you to send requests to the Algolia REST API.
+   * This method lets you send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
    * @param body Parameters to send with the custom request.
@@ -212,7 +212,7 @@ public class IngestionClient(
   }
 
   /**
-   * This method allow you to send requests to the Algolia REST API.
+   * This method lets you send requests to the Algolia REST API.
    * @param path Path of the endpoint, anything after \"/1\" must be specified.
    * @param parameters Query parameters to apply to the current query.
    * @param body Parameters to send with the custom request.

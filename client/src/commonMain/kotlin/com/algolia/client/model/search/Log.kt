@@ -42,7 +42,7 @@ public data class Log(
   @SerialName(value = "answer") val answer: String,
 
   /** URL of the API endpoint. */
-  @SerialName(value = "url") val url: kotlin.String,
+  @SerialName(value = "url") val url: String,
 
   /** IP address of the client that performed the request. */
   @SerialName(value = "ip") val ip: String,
