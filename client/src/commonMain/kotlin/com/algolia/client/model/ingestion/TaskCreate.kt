@@ -10,6 +10,7 @@ import kotlinx.serialization.json.*
  * @param sourceID Universally uniqud identifier (UUID) of a source.
  * @param destinationID Universally unique identifier (UUID) of a destination resource.
  * @param action
+ * @param subscriptionAction
  * @param cron Cron expression for the task's schedule.
  * @param enabled Whether the task is enabled.
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
@@ -28,6 +29,8 @@ public data class TaskCreate(
   @SerialName(value = "destinationID") val destinationID: String,
 
   @SerialName(value = "action") val action: ActionType,
+
+  @SerialName(value = "subscriptionAction") val subscriptionAction: ActionType? = null,
 
   /** Cron expression for the task's schedule. */
   @SerialName(value = "cron") val cron: String? = null,

@@ -11,6 +11,7 @@ import kotlinx.serialization.json.*
  * @param cron Cron expression for the task's schedule.
  * @param input
  * @param enabled Whether the task is enabled.
+ * @param subscriptionAction
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
  * @param notifications
  * @param policies
@@ -28,6 +29,8 @@ public data class TaskUpdate(
 
   /** Whether the task is enabled. */
   @SerialName(value = "enabled") val enabled: Boolean? = null,
+
+  @SerialName(value = "subscriptionAction") val subscriptionAction: ActionType? = null,
 
   /** Maximum accepted percentage of failures for a task run to finish successfully. */
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
