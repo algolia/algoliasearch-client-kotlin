@@ -13,6 +13,7 @@ import kotlinx.serialization.json.*
  * @param input
  * @param createdAt Date of creation in RFC 3339 format.
  * @param platform
+ * @param owner Owner of the resource.
  * @param updatedAt Date of last update in RFC 3339 format.
  */
 @Serializable
@@ -32,6 +33,9 @@ public data class Authentication(
   @SerialName(value = "createdAt") val createdAt: String,
 
   @SerialName(value = "platform") val platform: Platform? = null,
+
+  /** Owner of the resource. */
+  @SerialName(value = "owner") val owner: String? = null,
 
   /** Date of last update in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String? = null,

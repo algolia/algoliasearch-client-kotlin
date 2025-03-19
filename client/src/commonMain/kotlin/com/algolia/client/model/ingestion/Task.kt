@@ -15,6 +15,7 @@ import kotlinx.serialization.json.*
  * @param cron Cron expression for the task's schedule.
  * @param lastRun The last time the scheduled task ran in RFC 3339 format.
  * @param nextRun The next scheduled run of the task in RFC 3339 format.
+ * @param owner Owner of the resource.
  * @param input
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
  * @param action
@@ -50,6 +51,9 @@ public data class Task(
 
   /** The next scheduled run of the task in RFC 3339 format. */
   @SerialName(value = "nextRun") val nextRun: String? = null,
+
+  /** Owner of the resource. */
+  @SerialName(value = "owner") val owner: String? = null,
 
   @SerialName(value = "input") val input: TaskInput? = null,
 
