@@ -1,3 +1,8 @@
+## [3.18.1](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.18.0...3.18.1)
+
+- [8b5413f002](https://github.com/algolia/api-clients-automation/commit/8b5413f002) chore(deps): dependencies 2025-03-31 ([#4661](https://github.com/algolia/api-clients-automation/pull/4661)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [a51683025e](https://github.com/algolia/api-clients-automation/commit/a51683025e) chore: deprecate mcm methods ([#4694](https://github.com/algolia/api-clients-automation/pull/4694)) by [@kai687](https://github.com/kai687/)
+
 ## [3.18.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.17.0...3.18.0)
 
 - [c3addb449](https://github.com/algolia/api-clients-automation/commit/c3addb449) feat(specs): add CT Query predicate property ([#4654](https://github.com/algolia/api-clients-automation/pull/4654)) by [@morganleroi](https://github.com/morganleroi/)
