@@ -102,6 +102,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
+   * @deprecated
    * @param xAlgoliaUserID Unique identifier of the user who makes the search request.
    * @param assignUserIdParams
    * @param requestOptions additional request configuration.
@@ -146,6 +147,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
+   * @deprecated
    * @param xAlgoliaUserID Unique identifier of the user who makes the search request.
    * @param batchAssignUserIdsParams
    * @param requestOptions additional request configuration.
@@ -777,6 +779,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
+   * @deprecated
    * @param requestOptions additional request configuration.
    */
   public suspend fun getTopUserIds(requestOptions: RequestOptions? = null): GetTopUserIdsResponse {
@@ -795,6 +798,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
+   * @deprecated
    * @param userID Unique identifier of the user who makes the search request.
    * @param requestOptions additional request configuration.
    */
@@ -815,6 +819,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
+   * @deprecated
    * @param getClusters Whether to include the cluster's pending mapping state in the response.
    * @param requestOptions additional request configuration.
    */
@@ -855,6 +860,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
+   * @deprecated
    * @param requestOptions additional request configuration.
    */
   public suspend fun listClusters(requestOptions: RequestOptions? = null): ListClustersResponse {
@@ -897,6 +903,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
+   * @deprecated
    * @param page Requested page of the API response. If `null`, the API response is not paginated.
    * @param hitsPerPage Number of hits per page. (default to 100)
    * @param requestOptions additional request configuration.
@@ -989,6 +996,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
+   * @deprecated
    * @param userID Unique identifier of the user who makes the search request.
    * @param requestOptions additional request configuration.
    */
@@ -1321,6 +1329,7 @@ public class SearchClient(
    *
    * Required API Key ACLs:
    *   - admin
+   * @deprecated
    * @param searchUserIdsParams
    * @param requestOptions additional request configuration.
    */

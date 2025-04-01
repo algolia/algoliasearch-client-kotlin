@@ -114,6 +114,7 @@ public class IngestionClient(
 
   /**
    * Creates a new task using the v1 endpoint, please use `createTask` instead.
+   * @deprecated
    * @param taskCreate Request body for creating a task.
    * @param requestOptions additional request configuration.
    */
@@ -319,6 +320,7 @@ public class IngestionClient(
 
   /**
    * Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+   * @deprecated
    * @param taskID Unique identifier of a task.
    * @param requestOptions additional request configuration.
    */
@@ -380,6 +382,7 @@ public class IngestionClient(
    *   - addObject
    *   - deleteIndex
    *   - editSettings
+   * @deprecated
    * @param taskID Unique identifier of a task.
    * @param requestOptions additional request configuration.
    */
@@ -424,6 +427,7 @@ public class IngestionClient(
    *   - addObject
    *   - deleteIndex
    *   - editSettings
+   * @deprecated
    * @param taskID Unique identifier of a task.
    * @param requestOptions additional request configuration.
    */
@@ -580,6 +584,7 @@ public class IngestionClient(
    *   - addObject
    *   - deleteIndex
    *   - editSettings
+   * @deprecated
    * @param taskID Unique identifier of a task.
    * @param requestOptions additional request configuration.
    */
@@ -852,6 +857,7 @@ public class IngestionClient(
    *   - addObject
    *   - deleteIndex
    *   - editSettings
+   * @deprecated
    * @param itemsPerPage Number of items per page. (default to 10)
    * @param page Page number of the paginated API response.
    * @param action Actions for filtering the list of tasks.
@@ -1000,6 +1006,7 @@ public class IngestionClient(
    *   - addObject
    *   - deleteIndex
    *   - editSettings
+   * @deprecated
    * @param taskID Unique identifier of a task.
    * @param requestOptions additional request configuration.
    */
@@ -1110,6 +1117,7 @@ public class IngestionClient(
    *   - addObject
    *   - deleteIndex
    *   - editSettings
+   * @deprecated
    * @param taskSearch
    * @param requestOptions additional request configuration.
    */
@@ -1312,6 +1320,7 @@ public class IngestionClient(
 
   /**
    * Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
+   * @deprecated
    * @param taskID Unique identifier of a task.
    * @param taskUpdate
    * @param requestOptions additional request configuration.
