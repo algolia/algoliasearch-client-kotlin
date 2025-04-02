@@ -7,14 +7,14 @@ import kotlinx.serialization.json.*
 /**
  * TransformationTryResponse
  *
- * @param payloads The array of records returned by the transformation service.
+ * @param payloads The array of stringified records returned by the transformation service.
  * @param error
  */
 @Serializable
 public data class TransformationTryResponse(
 
-  /** The array of records returned by the transformation service. */
-  @SerialName(value = "payloads") val payloads: List<JsonObject>,
+  /** The array of stringified records returned by the transformation service. */
+  @SerialName(value = "payloads") val payloads: List<String>,
 
   @SerialName(value = "error") val error: TransformationError? = null,
 )

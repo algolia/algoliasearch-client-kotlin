@@ -11,10 +11,10 @@ import kotlinx.serialization.json.*
  * @param code The source code of the transformation.
  * @param name The uniquely identified name of your transformation.
  * @param createdAt Date of creation in RFC 3339 format.
+ * @param updatedAt Date of last update in RFC 3339 format.
  * @param authenticationIDs The authentications associated with the current transformation.
  * @param description A descriptive name for your transformation of what it does.
  * @param owner Owner of the resource.
- * @param updatedAt Date of last update in RFC 3339 format.
  */
 @Serializable
 public data class Transformation(
@@ -31,6 +31,9 @@ public data class Transformation(
   /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
+  /** Date of last update in RFC 3339 format. */
+  @SerialName(value = "updatedAt") val updatedAt: String,
+
   /** The authentications associated with the current transformation. */
   @SerialName(value = "authenticationIDs") val authenticationIDs: List<String>? = null,
 
@@ -39,7 +42,4 @@ public data class Transformation(
 
   /** Owner of the resource. */
   @SerialName(value = "owner") val owner: String? = null,
-
-  /** Date of last update in RFC 3339 format. */
-  @SerialName(value = "updatedAt") val updatedAt: String? = null,
 )

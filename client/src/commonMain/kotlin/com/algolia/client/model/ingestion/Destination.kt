@@ -12,8 +12,8 @@ import kotlinx.serialization.json.*
  * @param name Descriptive name for the resource.
  * @param input
  * @param createdAt Date of creation in RFC 3339 format.
- * @param owner Owner of the resource.
  * @param updatedAt Date of last update in RFC 3339 format.
+ * @param owner Owner of the resource.
  * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
  * @param transformationIDs
  */
@@ -33,11 +33,11 @@ public data class Destination(
   /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
+  /** Date of last update in RFC 3339 format. */
+  @SerialName(value = "updatedAt") val updatedAt: String,
+
   /** Owner of the resource. */
   @SerialName(value = "owner") val owner: String? = null,
-
-  /** Date of last update in RFC 3339 format. */
-  @SerialName(value = "updatedAt") val updatedAt: String? = null,
 
   /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,

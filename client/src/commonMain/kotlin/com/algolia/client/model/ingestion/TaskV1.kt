@@ -13,13 +13,13 @@ import kotlinx.serialization.json.*
  * @param trigger
  * @param enabled Whether the task is enabled.
  * @param createdAt Date of creation in RFC 3339 format.
+ * @param updatedAt Date of last update in RFC 3339 format.
  * @param input
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
  * @param action
  * @param cursor Date of the last cursor in RFC 3339 format.
  * @param notifications
  * @param policies
- * @param updatedAt Date of last update in RFC 3339 format.
  */
 @Deprecated(message = "This schema is deprecated.")
 @Serializable
@@ -42,6 +42,9 @@ public data class TaskV1(
   /** Date of creation in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
+  /** Date of last update in RFC 3339 format. */
+  @SerialName(value = "updatedAt") val updatedAt: String,
+
   @SerialName(value = "input") val input: TaskInput? = null,
 
   /** Maximum accepted percentage of failures for a task run to finish successfully. */
@@ -55,7 +58,4 @@ public data class TaskV1(
   @SerialName(value = "notifications") val notifications: Notifications? = null,
 
   @SerialName(value = "policies") val policies: Policies? = null,
-
-  /** Date of last update in RFC 3339 format. */
-  @SerialName(value = "updatedAt") val updatedAt: String? = null,
 )
