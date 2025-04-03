@@ -124,7 +124,7 @@ public data class BrowseResponse(
   @SerialName(value = "serverUsed") val serverUsed: String? = null,
 
   /** An object with custom data.  You can store up to 32kB as custom data.  */
-  @SerialName(value = "userData") val userData: JsonObject? = null,
+  @SerialName(value = "userData") val userData: JsonElement? = null,
 
   /** Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/). */
   @SerialName(value = "queryID") val queryID: String? = null,

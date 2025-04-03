@@ -126,7 +126,7 @@ public data class SearchResponse(
   val serverUsed: String? = null,
 
   /** An object with custom data.  You can store up to 32kB as custom data.  */
-  val userData: JsonObject? = null,
+  val userData: JsonElement? = null,
 
   /** Unique identifier for the query. This is used for [click analytics](https://www.algolia.com/doc/guides/analytics/click-analytics/). */
   val queryID: String? = null,
@@ -178,7 +178,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
     element<RenderingContent>("renderingContent", isOptional = true)
     element<Int>("serverTimeMS", isOptional = true)
     element<String>("serverUsed", isOptional = true)
-    element<JsonObject>("userData", isOptional = true)
+    element<JsonElement>("userData", isOptional = true)
     element<String>("queryID", isOptional = true)
     element<Boolean>("_automaticInsights", isOptional = true)
     element<Int>("page", isOptional = true)

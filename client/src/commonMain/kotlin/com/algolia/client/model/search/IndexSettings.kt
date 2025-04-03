@@ -115,7 +115,7 @@ public data class IndexSettings(
   @SerialName(value = "searchableAttributes") val searchableAttributes: List<String>? = null,
 
   /** An object with custom data.  You can store up to 32kB as custom data.  */
-  @SerialName(value = "userData") val userData: JsonObject? = null,
+  @SerialName(value = "userData") val userData: JsonElement? = null,
 
   /** Characters and their normalized replacements. This overrides Algolia's default [normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/normalization/).  */
   @SerialName(value = "customNormalization") val customNormalization: Map<kotlin.String, Map<kotlin.String, String>>? = null,
