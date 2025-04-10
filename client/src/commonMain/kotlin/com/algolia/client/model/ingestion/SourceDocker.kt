@@ -7,13 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * SourceDocker
  *
- * @param image Shortname of the image, as returned by the referential.
+ * @param image Name of the connector.
  * @param configuration Configuration of the spec.
  */
 @Serializable
 public data class SourceDocker(
 
-  /** Shortname of the image, as returned by the referential. */
+  /** Name of the connector. */
   @SerialName(value = "image") val image: String,
 
   /** Configuration of the spec. */
