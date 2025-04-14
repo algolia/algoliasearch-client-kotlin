@@ -13,7 +13,10 @@ public enum class RecordType(public val value: kotlin.String) {
   Product("product"),
 
   @SerialName(value = "variant")
-  Variant("variant");
+  Variant("variant"),
+
+  @SerialName(value = "collection")
+  Collection("collection");
 
   override fun toString(): kotlin.String = value
 }
