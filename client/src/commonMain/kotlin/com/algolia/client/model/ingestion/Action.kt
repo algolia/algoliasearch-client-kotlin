@@ -19,16 +19,7 @@ public enum class Action(public val value: kotlin.String) {
   PartialUpdateObject("partialUpdateObject"),
 
   @SerialName(value = "partialUpdateObjectNoCreate")
-  PartialUpdateObjectNoCreate("partialUpdateObjectNoCreate"),
-
-  @SerialName(value = "deleteObject")
-  DeleteObject("deleteObject"),
-
-  @SerialName(value = "delete")
-  Delete("delete"),
-
-  @SerialName(value = "clear")
-  Clear("clear");
+  PartialUpdateObjectNoCreate("partialUpdateObjectNoCreate");
 
   override fun toString(): kotlin.String = value
 }
