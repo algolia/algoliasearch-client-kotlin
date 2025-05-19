@@ -36,10 +36,10 @@ public data class FetchedIndex(
   @SerialName(value = "entries") val entries: Int,
 
   /** Number of bytes of the index in minified format. */
-  @SerialName(value = "dataSize") val dataSize: Int,
+  @SerialName(value = "dataSize") val dataSize: Long,
 
   /** Number of bytes of the index binary file. */
-  @SerialName(value = "fileSize") val fileSize: Int,
+  @SerialName(value = "fileSize") val fileSize: Long,
 
   /** Last build time. */
   @SerialName(value = "lastBuildTimeS") val lastBuildTimeS: Int,
