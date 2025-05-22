@@ -8,15 +8,20 @@ import kotlinx.serialization.json.*
  * WatchResponse
  *
  * @param runID Universally unique identifier (UUID) of a task run.
+ * @param eventID Universally unique identifier (UUID) of an event.
  * @param `data` when used with discovering or validating sources, the sampled data of your source is returned.
  * @param events in case of error, observability events will be added to the response, if any.
  * @param message a message describing the outcome of a validate run.
+ * @param createdAt Date of creation in RFC 3339 format.
  */
 @Serializable
 public data class WatchResponse(
 
   /** Universally unique identifier (UUID) of a task run. */
   @SerialName(value = "runID") val runID: String,
+
+  /** Universally unique identifier (UUID) of an event. */
+  @SerialName(value = "eventID") val eventID: String? = null,
 
   /** when used with discovering or validating sources, the sampled data of your source is returned. */
   @SerialName(value = "data") val `data`: List<JsonObject>? = null,
@@ -26,4 +31,7 @@ public data class WatchResponse(
 
   /** a message describing the outcome of a validate run. */
   @SerialName(value = "message") val message: String? = null,
+
+  /** Date of creation in RFC 3339 format. */
+  @SerialName(value = "createdAt") val createdAt: String? = null,
 )
