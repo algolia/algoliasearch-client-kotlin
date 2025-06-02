@@ -21,24 +21,24 @@ import kotlin.jvm.JvmInline
 public sealed interface TypoTolerance {
   @Serializable
   @JvmInline
-  public value class BooleanValue(public val value: Boolean) : TypoTolerance
+  public value class TypoToleranceEnumValue(public val value: TypoToleranceEnum) : TypoTolerance
 
   @Serializable
   @JvmInline
-  public value class TypoToleranceEnumValue(public val value: TypoToleranceEnum) : TypoTolerance
+  public value class BooleanValue(public val value: Boolean) : TypoTolerance
 
   public companion object {
 
-    public fun of(value: Boolean): TypoTolerance = BooleanValue(value)
-
     public fun of(value: TypoToleranceEnum): TypoTolerance = TypoToleranceEnumValue(value)
+
+    public fun of(value: Boolean): TypoTolerance = BooleanValue(value)
   }
 }
 
 internal class TypoToleranceSerializer : JsonContentPolymorphicSerializer<TypoTolerance>(TypoTolerance::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TypoTolerance> = when {
-    element.isBoolean -> TypoTolerance.BooleanValue.serializer()
     element.isString -> TypoToleranceEnum.serializer()
+    element.isBoolean -> TypoTolerance.BooleanValue.serializer()
     else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }

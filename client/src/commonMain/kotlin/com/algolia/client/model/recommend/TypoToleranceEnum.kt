@@ -13,7 +13,13 @@ public enum class TypoToleranceEnum(public val value: kotlin.String) : TypoToler
   Min("min"),
 
   @SerialName(value = "strict")
-  Strict("strict");
+  Strict("strict"),
+
+  @SerialName(value = "true")
+  True("true"),
+
+  @SerialName(value = "false")
+  False("false");
 
   override fun toString(): kotlin.String = value
 }

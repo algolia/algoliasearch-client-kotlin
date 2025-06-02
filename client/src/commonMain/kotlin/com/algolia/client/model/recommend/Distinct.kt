@@ -21,24 +21,24 @@ import kotlin.jvm.JvmInline
 public sealed interface Distinct {
   @Serializable
   @JvmInline
-  public value class BooleanValue(public val value: Boolean) : Distinct
+  public value class IntValue(public val value: Int) : Distinct
 
   @Serializable
   @JvmInline
-  public value class IntValue(public val value: Int) : Distinct
+  public value class BooleanValue(public val value: Boolean) : Distinct
 
   public companion object {
 
-    public fun of(value: Boolean): Distinct = BooleanValue(value)
-
     public fun of(value: Int): Distinct = IntValue(value)
+
+    public fun of(value: Boolean): Distinct = BooleanValue(value)
   }
 }
 
 internal class DistinctSerializer : JsonContentPolymorphicSerializer<Distinct>(Distinct::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Distinct> = when {
-    element.isBoolean -> Distinct.BooleanValue.serializer()
     element.isInt -> Distinct.IntValue.serializer()
+    element.isBoolean -> Distinct.BooleanValue.serializer()
     else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
   }
 }
