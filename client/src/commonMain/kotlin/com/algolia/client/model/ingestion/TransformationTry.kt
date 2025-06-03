@@ -7,14 +7,15 @@ import kotlinx.serialization.json.*
 /**
  * TransformationTry
  *
- * @param code The source code of the transformation.
+ * @param code It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
  * @param sampleRecord The record to apply the given code to.
  * @param authentications
  */
 @Serializable
 public data class TransformationTry(
 
-  /** The source code of the transformation. */
+  /** It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code. */
+  @Deprecated(message = "This property is deprecated.")
   @SerialName(value = "code") val code: String,
 
   /** The record to apply the given code to. */

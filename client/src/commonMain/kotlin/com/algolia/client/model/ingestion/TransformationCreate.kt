@@ -7,19 +7,26 @@ import kotlinx.serialization.json.*
 /**
  * API request body for creating a transformation.
  *
- * @param code The source code of the transformation.
  * @param name The uniquely identified name of your transformation.
+ * @param type
+ * @param input
+ * @param code It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
  * @param description A descriptive name for your transformation of what it does.
  * @param authenticationIDs The authentications associated with the current transformation.
  */
 @Serializable
 public data class TransformationCreate(
 
-  /** The source code of the transformation. */
-  @SerialName(value = "code") val code: String,
-
   /** The uniquely identified name of your transformation. */
   @SerialName(value = "name") val name: String,
+
+  @SerialName(value = "type") val type: TransformationType,
+
+  @SerialName(value = "input") val input: TransformationInput,
+
+  /** It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code. */
+  @Deprecated(message = "This property is deprecated.")
+  @SerialName(value = "code") val code: String? = null,
 
   /** A descriptive name for your transformation of what it does. */
   @SerialName(value = "description") val description: String? = null,

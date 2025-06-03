@@ -8,11 +8,13 @@ import kotlinx.serialization.json.*
  * Transformation
  *
  * @param transformationID Universally unique identifier (UUID) of a transformation.
- * @param code The source code of the transformation.
+ * @param code It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code.
  * @param name The uniquely identified name of your transformation.
  * @param createdAt Date of creation in RFC 3339 format.
  * @param updatedAt Date of last update in RFC 3339 format.
  * @param authenticationIDs The authentications associated with the current transformation.
+ * @param type
+ * @param input
  * @param description A descriptive name for your transformation of what it does.
  * @param owner Owner of the resource.
  */
@@ -22,7 +24,8 @@ public data class Transformation(
   /** Universally unique identifier (UUID) of a transformation. */
   @SerialName(value = "transformationID") val transformationID: String,
 
-  /** The source code of the transformation. */
+  /** It is deprecated. Use the `input` field with proper `type` instead to specify the transformation code. */
+  @Deprecated(message = "This property is deprecated.")
   @SerialName(value = "code") val code: String,
 
   /** The uniquely identified name of your transformation. */
@@ -36,6 +39,10 @@ public data class Transformation(
 
   /** The authentications associated with the current transformation. */
   @SerialName(value = "authenticationIDs") val authenticationIDs: List<String>? = null,
+
+  @SerialName(value = "type") val type: TransformationType? = null,
+
+  @SerialName(value = "input") val input: TransformationInput? = null,
 
   /** A descriptive name for your transformation of what it does. */
   @SerialName(value = "description") val description: String? = null,
