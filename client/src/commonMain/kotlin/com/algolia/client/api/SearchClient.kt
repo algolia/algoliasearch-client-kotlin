@@ -697,7 +697,7 @@ public class SearchClient(
    * Retrieves an object with non-null index settings.
    *
    * Required API Key ACLs:
-   *   - search
+   *   - settings
    * @param indexName Name of the index on which to perform the operation.
    * @param requestOptions additional request configuration.
    */
