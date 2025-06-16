@@ -931,15 +931,17 @@ public class IngestionClient(
    * @param indexName Name of the index on which to perform the operation.
    * @param pushTaskPayload
    * @param watch When provided, the push operation will be synchronous and the API will wait for the ingestion to be finished before responding.
+   * @param referenceIndexName This is required when targeting an index that does not have a push connector setup (e.g. a tmp index), but you wish to attach another index's transformation to it (e.g. the source index name).
    * @param requestOptions additional request configuration.
    */
-  public suspend fun push(indexName: String, pushTaskPayload: PushTaskPayload, watch: Boolean? = null, requestOptions: RequestOptions? = null): WatchResponse {
+  public suspend fun push(indexName: String, pushTaskPayload: PushTaskPayload, watch: Boolean? = null, referenceIndexName: String? = null, requestOptions: RequestOptions? = null): WatchResponse {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `push`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "push", "$indexName"),
       query = buildMap {
         watch?.let { put("watch", it) }
+        referenceIndexName?.let { put("referenceIndexName", it) }
       },
       body = pushTaskPayload,
     )
