@@ -10,7 +10,6 @@ import kotlinx.serialization.json.*
 /**
  * SearchResponse
  *
- * @param processingTimeMS Time the server took to process the request, in milliseconds.
  * @param hits Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.
  * @param query Search query.
  * @param params URL-encoded string of all search parameters.
@@ -30,6 +29,7 @@ import kotlinx.serialization.json.*
  * @param message Warnings about the query.
  * @param nbSortedHits Number of hits selected and sorted by the relevant sort algorithm.
  * @param parsedQuery Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched.
+ * @param processingTimeMS Time the server took to process the request, in milliseconds.
  * @param processingTimingsMS Experimental. List of processing steps and their times, in milliseconds. You can use this list to investigate performance issues.
  * @param queryAfterRemoval Markup text indicating which parts of the original query have been removed to retrieve a non-empty result set.
  * @param redirect
@@ -46,9 +46,6 @@ import kotlinx.serialization.json.*
  */
 @Serializable(SearchResponseSerializer::class)
 public data class SearchResponse(
-
-  /** Time the server took to process the request, in milliseconds. */
-  val processingTimeMS: Int,
 
   /** Search results (hits).  Hits are records from your index that match the search criteria, augmented with additional attributes, such as, for highlighting.  */
   val hits: List<Hit>,
@@ -109,6 +106,9 @@ public data class SearchResponse(
   /** Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched. */
   val parsedQuery: String? = null,
 
+  /** Time the server took to process the request, in milliseconds. */
+  val processingTimeMS: Int? = null,
+
   /** Experimental. List of processing steps and their times, in milliseconds. You can use this list to investigate performance issues. */
   val processingTimingsMS: JsonObject? = null,
 
@@ -152,7 +152,6 @@ public data class SearchResponse(
 internal object SearchResponseSerializer : KSerializer<SearchResponse> {
 
   override val descriptor: SerialDescriptor = buildClassSerialDescriptor("SearchResponse") {
-    element<Int>("processingTimeMS")
     element<List<Hit>>("hits")
     element<String>("query")
     element<String>("params")
@@ -172,6 +171,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
     element<String>("message", isOptional = true)
     element<Int>("nbSortedHits", isOptional = true)
     element<String>("parsedQuery", isOptional = true)
+    element<Int>("processingTimeMS", isOptional = true)
     element<JsonObject>("processingTimingsMS", isOptional = true)
     element<String>("queryAfterRemoval", isOptional = true)
     element<Redirect>("redirect", isOptional = true)
@@ -191,7 +191,6 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
     val input = decoder.asJsonDecoder()
     val tree = input.decodeJsonObject()
     return SearchResponse(
-      processingTimeMS = tree.getValue("processingTimeMS").let { input.json.decodeFromJsonElement(it) },
       hits = tree.getValue("hits").let { input.json.decodeFromJsonElement(it) },
       query = tree.getValue("query").let { input.json.decodeFromJsonElement(it) },
       params = tree.getValue("params").let { input.json.decodeFromJsonElement(it) },
@@ -211,6 +210,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
       message = tree["message"]?.let { input.json.decodeFromJsonElement(it) },
       nbSortedHits = tree["nbSortedHits"]?.let { input.json.decodeFromJsonElement(it) },
       parsedQuery = tree["parsedQuery"]?.let { input.json.decodeFromJsonElement(it) },
+      processingTimeMS = tree["processingTimeMS"]?.let { input.json.decodeFromJsonElement(it) },
       processingTimingsMS = tree["processingTimingsMS"]?.let { input.json.decodeFromJsonElement(it) },
       queryAfterRemoval = tree["queryAfterRemoval"]?.let { input.json.decodeFromJsonElement(it) },
       redirect = tree["redirect"]?.let { input.json.decodeFromJsonElement(it) },
@@ -231,7 +231,6 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
   override fun serialize(encoder: Encoder, value: SearchResponse) {
     val output = encoder.asJsonEncoder()
     val json = buildJsonObject {
-      put("processingTimeMS", output.json.encodeToJsonElement(value.processingTimeMS))
       put("hits", output.json.encodeToJsonElement(value.hits))
       put("query", output.json.encodeToJsonElement(value.query))
       put("params", output.json.encodeToJsonElement(value.params))
@@ -251,6 +250,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
       value.message?.let { put("message", output.json.encodeToJsonElement(it)) }
       value.nbSortedHits?.let { put("nbSortedHits", output.json.encodeToJsonElement(it)) }
       value.parsedQuery?.let { put("parsedQuery", output.json.encodeToJsonElement(it)) }
+      value.processingTimeMS?.let { put("processingTimeMS", output.json.encodeToJsonElement(it)) }
       value.processingTimingsMS?.let { put("processingTimingsMS", output.json.encodeToJsonElement(it)) }
       value.queryAfterRemoval?.let { put("queryAfterRemoval", output.json.encodeToJsonElement(it)) }
       value.redirect?.let { put("redirect", output.json.encodeToJsonElement(it)) }

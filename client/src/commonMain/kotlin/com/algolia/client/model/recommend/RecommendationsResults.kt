@@ -7,7 +7,6 @@ import kotlinx.serialization.json.*
 /**
  * RecommendationsResults
  *
- * @param processingTimeMS Time the server took to process the request, in milliseconds.
  * @param hits
  * @param abTestID A/B test ID. This is only included in the response for indices that are part of an A/B test.
  * @param abTestVariantID Variant ID. This is only included in the response for indices that are part of an A/B test.
@@ -25,6 +24,7 @@ import kotlinx.serialization.json.*
  * @param message Warnings about the query.
  * @param nbSortedHits Number of hits selected and sorted by the relevant sort algorithm.
  * @param parsedQuery Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched.
+ * @param processingTimeMS Time the server took to process the request, in milliseconds.
  * @param processingTimingsMS Experimental. List of processing steps and their times, in milliseconds. You can use this list to investigate performance issues.
  * @param queryAfterRemoval Markup text indicating which parts of the original query have been removed to retrieve a non-empty result set.
  * @param redirect
@@ -41,9 +41,6 @@ import kotlinx.serialization.json.*
  */
 @Serializable
 public data class RecommendationsResults(
-
-  /** Time the server took to process the request, in milliseconds. */
-  @SerialName(value = "processingTimeMS") val processingTimeMS: Int,
 
   @SerialName(value = "hits") val hits: List<RecommendationsHit>,
 
@@ -96,6 +93,9 @@ public data class RecommendationsResults(
 
   /** Post-[normalization](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/#what-does-normalization-mean) query string that will be searched. */
   @SerialName(value = "parsedQuery") val parsedQuery: String? = null,
+
+  /** Time the server took to process the request, in milliseconds. */
+  @SerialName(value = "processingTimeMS") val processingTimeMS: Int? = null,
 
   /** Experimental. List of processing steps and their times, in milliseconds. You can use this list to investigate performance issues. */
   @SerialName(value = "processingTimingsMS") val processingTimingsMS: JsonObject? = null,
