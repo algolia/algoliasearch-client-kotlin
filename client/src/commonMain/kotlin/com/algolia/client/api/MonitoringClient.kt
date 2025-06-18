@@ -29,7 +29,7 @@ public class MonitoringClient(
 
   /**
    * This method lets you send requests to the Algolia REST API.
-   * @param path Path of the endpoint, anything after \"/1\" must be specified.
+   * @param path Path of the endpoint, for example `1/newFeature`.
    * @param parameters Query parameters to apply to the current query.
    * @param requestOptions additional request configuration.
    */
@@ -50,7 +50,7 @@ public class MonitoringClient(
 
   /**
    * This method lets you send requests to the Algolia REST API.
-   * @param path Path of the endpoint, anything after \"/1\" must be specified.
+   * @param path Path of the endpoint, for example `1/newFeature`.
    * @param parameters Query parameters to apply to the current query.
    * @param requestOptions additional request configuration.
    */
@@ -71,7 +71,7 @@ public class MonitoringClient(
 
   /**
    * This method lets you send requests to the Algolia REST API.
-   * @param path Path of the endpoint, anything after \"/1\" must be specified.
+   * @param path Path of the endpoint, for example `1/newFeature`.
    * @param parameters Query parameters to apply to the current query.
    * @param body Parameters to send with the custom request.
    * @param requestOptions additional request configuration.
@@ -94,7 +94,7 @@ public class MonitoringClient(
 
   /**
    * This method lets you send requests to the Algolia REST API.
-   * @param path Path of the endpoint, anything after \"/1\" must be specified.
+   * @param path Path of the endpoint, for example `1/newFeature`.
    * @param parameters Query parameters to apply to the current query.
    * @param body Parameters to send with the custom request.
    * @param requestOptions additional request configuration.
