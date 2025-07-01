@@ -11,6 +11,7 @@ import kotlinx.serialization.json.*
  * @param revenue Revenue for this currency.
  * @param mean Mean for this currency.
  * @param standardDeviation Standard deviation for this currency.
+ * @param winsorizedAmount The amount of revenue for this currency that was removed after capping purchase amounts to the 95th percentile.
  */
 @Serializable
 public data class Currency(
@@ -26,4 +27,7 @@ public data class Currency(
 
   /** Standard deviation for this currency. */
   @SerialName(value = "standardDeviation") val standardDeviation: Double? = null,
+
+  /** The amount of revenue for this currency that was removed after capping purchase amounts to the 95th percentile. */
+  @SerialName(value = "winsorizedAmount") val winsorizedAmount: Double? = null,
 )
