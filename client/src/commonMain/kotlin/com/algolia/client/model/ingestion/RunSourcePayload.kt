@@ -7,21 +7,21 @@ import kotlinx.serialization.json.*
 /**
  * RunSourcePayload
  *
- * @param indexToInclude List of index names to include in reidexing/update.
- * @param indexToExclude List of index names to exclude in reidexing/update.
- * @param entityIDs List of entityID to update.
+ * @param indexToInclude List of index names to include in reindex/update.
+ * @param indexToExclude List of index names to exclude in reindex/update.
+ * @param entityIDs List of entityIDs to update.
  * @param entityType
  */
 @Serializable
 public data class RunSourcePayload(
 
-  /** List of index names to include in reidexing/update. */
+  /** List of index names to include in reindex/update. */
   @SerialName(value = "indexToInclude") val indexToInclude: List<String>? = null,
 
-  /** List of index names to exclude in reidexing/update. */
+  /** List of index names to exclude in reindex/update. */
   @SerialName(value = "indexToExclude") val indexToExclude: List<String>? = null,
 
-  /** List of entityID to update. */
+  /** List of entityIDs to update. */
   @SerialName(value = "entityIDs") val entityIDs: List<String>? = null,
 
   @SerialName(value = "entityType") val entityType: EntityType? = null,
