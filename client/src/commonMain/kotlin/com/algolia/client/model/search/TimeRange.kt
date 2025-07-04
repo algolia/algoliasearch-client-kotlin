@@ -14,8 +14,8 @@ import kotlinx.serialization.json.*
 public data class TimeRange(
 
   /** When the rule should start to be active, in Unix epoch time. */
-  @SerialName(value = "from") val from: Long,
+  @SerialName(value = "from") val from: Long? = null,
 
   /** When the rule should stop to be active, in Unix epoch time. */
-  @SerialName(value = "until") val until: Long,
+  @SerialName(value = "until") val until: Long? = null,
 )
