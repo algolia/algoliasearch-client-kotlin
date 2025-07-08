@@ -1,3 +1,7 @@
+## [3.24.2](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.24.1...3.24.2)
+
+- [7238519bc9](https://github.com/algolia/api-clients-automation/commit/7238519bc9) chore(clients): correctly upgrade to maven central publishing ([#5085](https://github.com/algolia/api-clients-automation/pull/5085)) by [@millotp](https://github.com/millotp/)
+
 ## [3.24.1](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.24.0...3.24.1)
 
 - [4c9416a9fe](https://github.com/algolia/api-clients-automation/commit/4c9416a9fe) fix(specs): update sourceRun docs ([#5057](https://github.com/algolia/api-clients-automation/pull/5057)) by [@DevinCodes](https://github.com/DevinCodes/)
