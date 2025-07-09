@@ -11,6 +11,7 @@ import kotlinx.serialization.json.*
  * @param indexToExclude List of index names to exclude in reindex/update.
  * @param entityIDs List of entityIDs to update.
  * @param entityType
+ * @param runMetadata Additional information that will be passed to the created runs.
  */
 @Serializable
 public data class RunSourcePayload(
@@ -25,4 +26,7 @@ public data class RunSourcePayload(
   @SerialName(value = "entityIDs") val entityIDs: List<String>? = null,
 
   @SerialName(value = "entityType") val entityType: EntityType? = null,
+
+  /** Additional information that will be passed to the created runs. */
+  @SerialName(value = "runMetadata") val runMetadata: JsonObject? = null,
 )

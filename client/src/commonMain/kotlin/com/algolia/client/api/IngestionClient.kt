@@ -1019,13 +1019,15 @@ public class IngestionClient(
    *   - deleteIndex
    *   - editSettings
    * @param taskID Unique identifier of a task.
+   * @param runTaskPayload
    * @param requestOptions additional request configuration.
    */
-  public suspend fun runTask(taskID: String, requestOptions: RequestOptions? = null): RunResponse {
+  public suspend fun runTask(taskID: String, runTaskPayload: RunTaskPayload? = null, requestOptions: RequestOptions? = null): RunResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `runTask`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("2", "tasks", "$taskID", "run"),
+      body = runTaskPayload,
     )
     return requester.execute(
       requestConfig = requestConfig,
@@ -1042,13 +1044,15 @@ public class IngestionClient(
    *   - editSettings
    * @deprecated
    * @param taskID Unique identifier of a task.
+   * @param runTaskPayload
    * @param requestOptions additional request configuration.
    */
-  public suspend fun runTaskV1(taskID: String, requestOptions: RequestOptions? = null): RunResponse {
+  public suspend fun runTaskV1(taskID: String, runTaskPayload: RunTaskPayload? = null, requestOptions: RequestOptions? = null): RunResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `runTaskV1`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.POST,
       path = listOf("1", "tasks", "$taskID", "run"),
+      body = runTaskPayload,
     )
     return requester.execute(
       requestConfig = requestConfig,
