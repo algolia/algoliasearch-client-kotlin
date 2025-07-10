@@ -65,7 +65,7 @@ public data class Variant(
   @SerialName(value = "addToCartRate") val addToCartRate: Double? = null,
 
   /** [Average click position](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-position) for this variant.  */
-  @SerialName(value = "averageClickPosition") val averageClickPosition: Int? = null,
+  @SerialName(value = "averageClickPosition") val averageClickPosition: Double? = null,
 
   /** [Click-through rate](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#click-through-rate) for this variant.  */
   @SerialName(value = "clickThroughRate") val clickThroughRate: Double? = null,
