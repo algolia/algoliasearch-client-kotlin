@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
 import kotlin.jvm.JvmInline
 
 /**
- * Total monetary value of this event in units of `currency`.
+ * Total monetary value of this event in units of `currency`. This should be equal to the sum of `price` times `quantity`.
  *
  * Implementations:
  * - [Double] - *[Value.of]*
