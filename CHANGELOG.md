@@ -1,3 +1,13 @@
+## [3.27.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.26.0...3.27.0)
+
+- [b0a24b653a](https://github.com/algolia/api-clients-automation/commit/b0a24b653a) docs: use the correct link for replaceAllObjects ([#5185](https://github.com/algolia/api-clients-automation/pull/5185)) by [@millotp](https://github.com/millotp/)
+- [5cbd251539](https://github.com/algolia/api-clients-automation/commit/5cbd251539) chore(deps): dependencies 2025-08-04 ([#5187](https://github.com/algolia/api-clients-automation/pull/5187)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [48672036c1](https://github.com/algolia/api-clients-automation/commit/48672036c1) refactor(specs): mutualise code between Search API & Comp API for search query parameters ([#5125](https://github.com/algolia/api-clients-automation/pull/5125)) by [@ClaraMuller](https://github.com/ClaraMuller/)
+- [ca6f3ca016](https://github.com/algolia/api-clients-automation/commit/ca6f3ca016) fix(specs): define batch actions ([#5242](https://github.com/algolia/api-clients-automation/pull/5242)) by [@kai687](https://github.com/kai687/)
+- [99f8174c7d](https://github.com/algolia/api-clients-automation/commit/99f8174c7d) feat(specs): add fields for metadata in composition injectedItems ([#5241](https://github.com/algolia/api-clients-automation/pull/5241)) by [@gavinwade12](https://github.com/gavinwade12/)
+- [e57faa4d4f](https://github.com/algolia/api-clients-automation/commit/e57faa4d4f) chore(deps): dependencies 2025-08-11 ([#5225](https://github.com/algolia/api-clients-automation/pull/5225)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [ff178d8118](https://github.com/algolia/api-clients-automation/commit/ff178d8118) feat(specs): abtests stopped at ([#5275](https://github.com/algolia/api-clients-automation/pull/5275)) by [@stevenMevans](https://github.com/stevenMevans/)
+
 ## [3.26.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.25.1...3.26.0)
 
 - [050aacef17](https://github.com/algolia/api-clients-automation/commit/050aacef17) chore(deps): dependencies 2025-07-28 ([#5161](https://github.com/algolia/api-clients-automation/pull/5161)) by [@algolia-bot](https://github.com/algolia-bot/)
