@@ -14,6 +14,7 @@ import kotlinx.serialization.json.*
  * @param name A/B test name.
  * @param status
  * @param variants A/B test variants.  The first variant is your _control_ index, typically your production index. All of the additional variants are indexes with changed settings that you want to test against the control.
+ * @param stoppedAt Date and time when the A/B test was stopped, in RFC 3339 format.
  * @param configuration
  * @param migratedAbTestID Unique migrated A/B test identifier.
  */
@@ -39,6 +40,9 @@ public data class ABTest(
 
   /** A/B test variants.  The first variant is your _control_ index, typically your production index. All of the additional variants are indexes with changed settings that you want to test against the control.  */
   @SerialName(value = "variants") val variants: List<Variant>,
+
+  /** Date and time when the A/B test was stopped, in RFC 3339 format. */
+  @SerialName(value = "stoppedAt") val stoppedAt: String? = null,
 
   @SerialName(value = "configuration") val configuration: ABTestConfiguration? = null,
 

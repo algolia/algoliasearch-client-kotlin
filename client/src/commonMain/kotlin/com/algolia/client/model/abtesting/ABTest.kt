@@ -19,6 +19,7 @@ import kotlinx.serialization.json.*
  * @param addToCartSignificance
  * @param purchaseSignificance
  * @param revenueSignificance
+ * @param stoppedAt Date and time when the A/B test was stopped, in RFC 3339 format.
  * @param configuration
  */
 @Serializable
@@ -53,6 +54,9 @@ public data class ABTest(
   @SerialName(value = "purchaseSignificance") val purchaseSignificance: Double? = null,
 
   @SerialName(value = "revenueSignificance") val revenueSignificance: Map<kotlin.String, Double>? = null,
+
+  /** Date and time when the A/B test was stopped, in RFC 3339 format. */
+  @SerialName(value = "stoppedAt") val stoppedAt: String? = null,
 
   @SerialName(value = "configuration") val configuration: ABTestConfiguration? = null,
 )
