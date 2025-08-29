@@ -5,35 +5,42 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * API request body for partially updating a task.
+ * API request body for updating a task.
  *
  * @param destinationID Universally unique identifier (UUID) of a destination resource.
- * @param cron Cron expression for the task's schedule.
- * @param input
- * @param enabled Whether the task is enabled.
+ * @param action
  * @param subscriptionAction
+ * @param cron Cron expression for the task's schedule.
+ * @param enabled Whether the task is enabled.
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish successfully.
+ * @param input
+ * @param cursor Date of the last cursor in RFC 3339 format.
  * @param notifications
  * @param policies
  */
 @Serializable
-public data class TaskUpdate(
+public data class TaskReplace(
 
   /** Universally unique identifier (UUID) of a destination resource. */
-  @SerialName(value = "destinationID") val destinationID: String? = null,
+  @SerialName(value = "destinationID") val destinationID: String,
+
+  @SerialName(value = "action") val action: ActionType,
+
+  @SerialName(value = "subscriptionAction") val subscriptionAction: ActionType? = null,
 
   /** Cron expression for the task's schedule. */
   @SerialName(value = "cron") val cron: String? = null,
 
-  @SerialName(value = "input") val input: TaskInput? = null,
-
   /** Whether the task is enabled. */
   @SerialName(value = "enabled") val enabled: Boolean? = null,
 
-  @SerialName(value = "subscriptionAction") val subscriptionAction: ActionType? = null,
-
   /** Maximum accepted percentage of failures for a task run to finish successfully. */
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
+
+  @SerialName(value = "input") val input: TaskInput? = null,
+
+  /** Date of the last cursor in RFC 3339 format. */
+  @SerialName(value = "cursor") val cursor: String? = null,
 
   @SerialName(value = "notifications") val notifications: Notifications? = null,
 

@@ -988,6 +988,25 @@ public class IngestionClient(
   }
 
   /**
+   * Fully updates a task by its ID, use partialUpdateTask if you only want to update a subset of fields.
+   * @param taskID Unique identifier of a task.
+   * @param taskReplace
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun replaceTask(taskID: String, taskReplace: TaskReplace, requestOptions: RequestOptions? = null): TaskUpdateResponse {
+    require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `replaceTask`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.PUT,
+      path = listOf("2", "tasks", "$taskID"),
+      body = taskReplace,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * Runs all tasks linked to a source, only available for Shopify, BigCommerce and commercetools sources. Creates one run per task.
    *
    * Required API Key ACLs:
@@ -1338,7 +1357,7 @@ public class IngestionClient(
   }
 
   /**
-   * Updates a task by its ID.
+   * Partially updates a task by its ID.
    * @param taskID Unique identifier of a task.
    * @param taskUpdate
    * @param requestOptions additional request configuration.
