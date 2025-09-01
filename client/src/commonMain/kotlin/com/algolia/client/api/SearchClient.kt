@@ -699,13 +699,17 @@ public class SearchClient(
    * Required API Key ACLs:
    *   - settings
    * @param indexName Name of the index on which to perform the operation.
+   * @param getVersion When set to 2, the endpoint will not include `synonyms` in the response. This parameter is here for backward compatibility. (default to 1)
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getSettings(indexName: String, requestOptions: RequestOptions? = null): SettingsResponse {
+  public suspend fun getSettings(indexName: String, getVersion: Int? = null, requestOptions: RequestOptions? = null): SettingsResponse {
     require(indexName.isNotBlank()) { "Parameter `indexName` is required when calling `getSettings`." }
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
       path = listOf("1", "indexes", "$indexName", "settings"),
+      query = buildMap {
+        getVersion?.let { put("getVersion", it) }
+      },
     )
     return requester.execute(
       requestConfig = requestConfig,
