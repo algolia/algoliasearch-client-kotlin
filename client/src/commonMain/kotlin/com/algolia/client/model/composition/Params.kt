@@ -33,6 +33,7 @@ import kotlinx.serialization.json.*
  * @param analyticsTags Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments/).
  * @param enableABTest Whether to enable index level A/B testing for this run request. If the composition mixes multiple indices, the A/B test is ignored.
  * @param enableReRanking Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/) This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
+ * @param injectedItems A list of extenrally injected objectID groups into from an external source.
  */
 @Serializable
 public data class Params(
@@ -108,4 +109,7 @@ public data class Params(
 
   /** Whether this search will use [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking/) This setting only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.  */
   @SerialName(value = "enableReRanking") val enableReRanking: Boolean? = null,
+
+  /** A list of extenrally injected objectID groups into from an external source.  */
+  @SerialName(value = "injectedItems") val injectedItems: Map<kotlin.String, ExternalInjectedItem>? = null,
 )
