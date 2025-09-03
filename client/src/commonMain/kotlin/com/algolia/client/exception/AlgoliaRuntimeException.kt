@@ -43,7 +43,7 @@ public class AlgoliaApiException(
  */
 public class AlgoliaRetryException(
   public val exceptions: List<Throwable>,
-) : AlgoliaRuntimeException("Error(s) while processing the retry strategy", exceptions.last())
+) : AlgoliaRuntimeException("Error(s) while processing the retry strategy. If the error persists, please visit our help center https://alg.li/support-unreachable-hosts or reach out to the Algolia Support team: https://alg.li/support", exceptions.last())
 
 /**
  * Exception thrown when an error occurs during the wait strategy. For example: maximum number of
