@@ -902,9 +902,10 @@ public class IngestionClient(
    * @param page Page number of the paginated API response.
    * @param sort Property by which to sort the list of transformations. (default to createdAt)
    * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param type Whether to filter the list of transformations by the type of transformation.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun listTransformations(itemsPerPage: Int? = null, page: Int? = null, sort: TransformationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTransformationsResponse {
+  public suspend fun listTransformations(itemsPerPage: Int? = null, page: Int? = null, sort: TransformationSortKeys? = null, order: OrderKeys? = null, type: TransformationType? = null, requestOptions: RequestOptions? = null): ListTransformationsResponse {
     val requestConfig = RequestConfig(
       method = RequestMethod.GET,
       path = listOf("1", "transformations"),
@@ -913,6 +914,7 @@ public class IngestionClient(
         page?.let { put("page", it) }
         sort?.let { put("sort", it) }
         order?.let { put("order", it) }
+        type?.let { put("type", it) }
       },
     )
     return requester.execute(
