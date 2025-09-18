@@ -21,7 +21,7 @@ jobs:
           java-version: 11
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4.4.1 # v4.4.2 fails because it uses Gradle 9.0 which is not compatible with Java < 17
+        uses: gradle/actions/setup-gradle@v4.4.3
 
       - name: Upload Artifacts
         run: ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
