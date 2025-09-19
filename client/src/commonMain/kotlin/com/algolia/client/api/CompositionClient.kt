@@ -34,6 +34,318 @@ public class CompositionClient(
   }
 
   /**
+   * This method lets you send requests to the Algolia REST API.
+   * @param path Path of the endpoint, for example `1/newFeature`.
+   * @param parameters Query parameters to apply to the current query.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun customDelete(path: String, parameters: Map<kotlin.String, Any>? = null, requestOptions: RequestOptions? = null): JsonObject {
+    require(path.isNotBlank()) { "Parameter `path` is required when calling `customDelete`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.DELETE,
+      path = "/{path}".replace("{path}", path),
+      query = buildMap {
+        parameters?.let { putAll(it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * This method lets you send requests to the Algolia REST API.
+   * @param path Path of the endpoint, for example `1/newFeature`.
+   * @param parameters Query parameters to apply to the current query.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun customGet(path: String, parameters: Map<kotlin.String, Any>? = null, requestOptions: RequestOptions? = null): JsonObject {
+    require(path.isNotBlank()) { "Parameter `path` is required when calling `customGet`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = "/{path}".replace("{path}", path),
+      query = buildMap {
+        parameters?.let { putAll(it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * This method lets you send requests to the Algolia REST API.
+   * @param path Path of the endpoint, for example `1/newFeature`.
+   * @param parameters Query parameters to apply to the current query.
+   * @param body Parameters to send with the custom request.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun customPost(path: String, parameters: Map<kotlin.String, Any>? = null, body: JsonObject? = null, requestOptions: RequestOptions? = null): JsonObject {
+    require(path.isNotBlank()) { "Parameter `path` is required when calling `customPost`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = "/{path}".replace("{path}", path),
+      query = buildMap {
+        parameters?.let { putAll(it) }
+      },
+      body = body,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * This method lets you send requests to the Algolia REST API.
+   * @param path Path of the endpoint, for example `1/newFeature`.
+   * @param parameters Query parameters to apply to the current query.
+   * @param body Parameters to send with the custom request.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun customPut(path: String, parameters: Map<kotlin.String, Any>? = null, body: JsonObject? = null, requestOptions: RequestOptions? = null): JsonObject {
+    require(path.isNotBlank()) { "Parameter `path` is required when calling `customPut`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.PUT,
+      path = "/{path}".replace("{path}", path),
+      query = buildMap {
+        parameters?.let { putAll(it) }
+      },
+      body = body,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Delete a composition from the current Algolia application.
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   * @param compositionID Unique Composition ObjectID.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun deleteComposition(compositionID: String, requestOptions: RequestOptions? = null): TaskIDResponse {
+    require(compositionID.isNotBlank()) { "Parameter `compositionID` is required when calling `deleteComposition`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.DELETE,
+      path = listOf("1", "compositions", "$compositionID"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Delete a Composition Rule from the specified Composition ID.
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   * @param compositionID Unique Composition ObjectID.
+   * @param objectID Unique identifier of a rule object.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun deleteCompositionRule(compositionID: String, objectID: String, requestOptions: RequestOptions? = null): TaskIDResponse {
+    require(compositionID.isNotBlank()) { "Parameter `compositionID` is required when calling `deleteCompositionRule`." }
+    require(objectID.isNotBlank()) { "Parameter `objectID` is required when calling `deleteCompositionRule`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.DELETE,
+      path = listOf("1", "compositions", "$compositionID", "rules", "$objectID"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Retrieve a single composition in the current Algolia application.
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   *   - settings
+   * @param compositionID Unique Composition ObjectID.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun getComposition(compositionID: String, requestOptions: RequestOptions? = null): Composition {
+    require(compositionID.isNotBlank()) { "Parameter `compositionID` is required when calling `getComposition`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "compositions", "$compositionID"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Retrieves a rule by its ID. To find the object ID of rules, use the [`search` operation](#tag/Rules/operation/searchRules).
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   *   - settings
+   * @param compositionID Unique Composition ObjectID.
+   * @param objectID Unique identifier of a rule object.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun getRule(compositionID: String, objectID: String, requestOptions: RequestOptions? = null): CompositionRule {
+    require(compositionID.isNotBlank()) { "Parameter `compositionID` is required when calling `getRule`." }
+    require(objectID.isNotBlank()) { "Parameter `objectID` is required when calling `getRule`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "compositions", "$compositionID", "rules", "$objectID"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Checks the status of a given task.
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   *   - settings
+   *   - addObject
+   *   - deleteObject
+   *   - deleteIndex
+   * @param compositionID Unique Composition ObjectID.
+   * @param taskID Unique task identifier.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun getTask(compositionID: String, taskID: Long, requestOptions: RequestOptions? = null): GetTaskResponse {
+    require(compositionID.isNotBlank()) { "Parameter `compositionID` is required when calling `getTask`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "compositions", "$compositionID", "task", "$taskID"),
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Lists all compositions in the current Algolia application.
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   *   - settings
+   * @param page Requested page of the API response. If `null`, the API response is not paginated.
+   * @param hitsPerPage Number of hits per page. (default to 100)
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun listCompositions(page: Int? = null, hitsPerPage: Int? = null, requestOptions: RequestOptions? = null): ListCompositionsResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.GET,
+      path = listOf("1", "compositions"),
+      query = buildMap {
+        page?.let { put("page", it) }
+        hitsPerPage?.let { put("hitsPerPage", it) }
+      },
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Adds, updates, or deletes compositions with a single API request.
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   * @param batchParams
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun multipleBatch(batchParams: BatchParams, requestOptions: RequestOptions? = null): MultipleBatchResponse {
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "compositions", "*", "batch"),
+      body = batchParams,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Upsert a composition in the current Algolia application.
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   * @param compositionID Unique Composition ObjectID.
+   * @param composition
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun putComposition(compositionID: String, composition: Composition, requestOptions: RequestOptions? = null): TaskIDResponse {
+    require(compositionID.isNotBlank()) { "Parameter `compositionID` is required when calling `putComposition`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.PUT,
+      path = listOf("1", "compositions", "$compositionID"),
+      body = composition,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Upsert a Composition Rule for the specified composition ID.
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   * @param compositionID Unique Composition ObjectID.
+   * @param objectID Unique identifier of a rule object.
+   * @param compositionRule
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun putCompositionRule(compositionID: String, objectID: String, compositionRule: CompositionRule, requestOptions: RequestOptions? = null): TaskIDResponse {
+    require(compositionID.isNotBlank()) { "Parameter `compositionID` is required when calling `putCompositionRule`." }
+    require(objectID.isNotBlank()) { "Parameter `objectID` is required when calling `putCompositionRule`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.PUT,
+      path = listOf("1", "compositions", "$compositionID", "rules", "$objectID"),
+      body = compositionRule,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Create or update or delete multiple composition rules.
+   *
+   * Required API Key ACLs:
+   *   - editSettings
+   * @param compositionID Unique Composition ObjectID.
+   * @param rules
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun saveRules(compositionID: String, rules: CompositionRulesBatchParams, requestOptions: RequestOptions? = null): RulesMultipleBatchResponse {
+    require(compositionID.isNotBlank()) { "Parameter `compositionID` is required when calling `saveRules`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "compositions", "$compositionID", "rules", "batch"),
+      body = rules,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
    * Runs a query on a single composition and returns matching results.
    *
    * Required API Key ACLs:
@@ -49,6 +361,28 @@ public class CompositionClient(
       path = listOf("1", "compositions", "$compositionID", "run"),
       isRead = true,
       body = requestBody,
+    )
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Searches for composition rules in your index.
+   *
+   * Required API Key ACLs:
+   *   - settings
+   * @param compositionID Unique Composition ObjectID.
+   * @param searchCompositionRulesParams
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun searchCompositionRules(compositionID: String, searchCompositionRulesParams: SearchCompositionRulesParams? = null, requestOptions: RequestOptions? = null): SearchCompositionRulesResponse {
+    require(compositionID.isNotBlank()) { "Parameter `compositionID` is required when calling `searchCompositionRules`." }
+    val requestConfig = RequestConfig(
+      method = RequestMethod.POST,
+      path = listOf("1", "compositions", "$compositionID", "rules", "search"),
+      body = searchCompositionRulesParams,
     )
     return requester.execute(
       requestConfig = requestConfig,
