@@ -18,6 +18,9 @@ public enum class ActionType(public val value: kotlin.String) {
   @SerialName(value = "partial")
   Partial("partial"),
 
+  @SerialName(value = "partialNoCreate")
+  PartialNoCreate("partialNoCreate"),
+
   @SerialName(value = "append")
   Append("append");
 
