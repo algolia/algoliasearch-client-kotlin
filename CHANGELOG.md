@@ -1,3 +1,7 @@
+## [3.30.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.29.0...3.30.0)
+
+- [ad51f60561](https://github.com/algolia/api-clients-automation/commit/ad51f60561) feat(specs): add partialNoCreate action to ingestion specs ([#5389](https://github.com/algolia/api-clients-automation/pull/5389)) by [@shortcuts](https://github.com/shortcuts/)
+
 ## [3.29.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.28.0...3.29.0)
 
 - [26129b969](https://github.com/algolia/api-clients-automation/commit/26129b969) chore(scripts): increase memory for kotlin release ([#5309](https://github.com/algolia/api-clients-automation/pull/5309)) by [@millotp](https://github.com/millotp/)
