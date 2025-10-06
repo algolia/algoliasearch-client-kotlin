@@ -7,13 +7,13 @@ import kotlinx.serialization.json.*
 /**
  * DeleteUserProfileResponse
  *
- * @param userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
+ * @param userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
  * @param deletedUntil Date and time when the user profile can be safely considered to be deleted. Any events received after the `deletedUntil` date start a new user profile.
  */
 @Serializable
 public data class DeleteUserProfileResponse(
 
-  /** Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  */
+  /** Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).  */
   @SerialName(value = "userToken") val userToken: String,
 
   /** Date and time when the user profile can be safely considered to be deleted. Any events received after the `deletedUntil` date start a new user profile.  */

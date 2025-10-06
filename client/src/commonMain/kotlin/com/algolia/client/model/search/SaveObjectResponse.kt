@@ -8,7 +8,7 @@ import kotlinx.serialization.json.*
  * SaveObjectResponse
  *
  * @param createdAt Date and time when the object was created, in RFC 3339 format.
- * @param taskID Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.
+ * @param taskID Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](https://www.algolia.com/doc/rest-api/search/get-task) and this task ID.
  * @param objectID Unique record identifier.
  */
 @Serializable
@@ -17,7 +17,7 @@ public data class SaveObjectResponse(
   /** Date and time when the object was created, in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
-  /** Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](#tag/Indices/operation/getTask) and this `taskID`.  */
+  /** Unique identifier of a task.  A successful API response means that a task was added to a queue. It might not run immediately. You can check the task's progress with the [`task` operation](https://www.algolia.com/doc/rest-api/search/get-task) and this task ID.  */
   @SerialName(value = "taskID") val taskID: Long,
 
   /** Unique record identifier. */

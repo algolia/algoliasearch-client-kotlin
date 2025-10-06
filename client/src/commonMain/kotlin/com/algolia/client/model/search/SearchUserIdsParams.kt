@@ -7,7 +7,7 @@ import kotlinx.serialization.json.*
 /**
  * OK
  *
- * @param query Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users.
+ * @param query
  * @param clusterName Cluster name.
  * @param page Page of search results to retrieve.
  * @param hitsPerPage Number of hits per page.
@@ -15,7 +15,6 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class SearchUserIdsParams(
 
-  /** Query to search. The search is a prefix search with [typo tolerance](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/) enabled. An empty query will retrieve all users. */
   @SerialName(value = "query") val query: String,
 
   /** Cluster name. */

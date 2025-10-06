@@ -7,14 +7,14 @@ import kotlinx.serialization.json.*
 /**
  * GetUserTokenResponse
  *
- * @param userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).
+ * @param userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
  * @param lastEventAt Date and time of the last event from this user, in RFC 3339 format.
  * @param scores Scores for different facet values.  Scores represent the user affinity for a user profile towards specific facet values, given the personalization strategy and past events.
  */
 @Serializable
 public data class GetUserTokenResponse(
 
-  /** Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken/).  */
+  /** Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).  */
   @SerialName(value = "userToken") val userToken: String,
 
   /** Date and time of the last event from this user, in RFC 3339 format. */
