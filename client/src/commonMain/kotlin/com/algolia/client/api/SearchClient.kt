@@ -604,7 +604,7 @@ public class SearchClient(
    * @param offset First log entry to retrieve. The most recent entries are listed first. (default to 0)
    * @param length Maximum number of entries to retrieve. (default to 10)
    * @param indexName Index for which to retrieve log entries. By default, log entries are retrieved for all indices.
-   * @param type Type of log entries to retrieve. By default, all log entries are retrieved.  (default to all)
+   * @param type Type of log entries to retrieve. By default, all log entries are retrieved.  (default to LogType.all)
    * @param requestOptions additional request configuration.
    */
   public suspend fun getLogs(offset: Int? = null, length: Int? = null, indexName: String? = null, type: LogType? = null, requestOptions: RequestOptions? = null): GetLogsResponse {

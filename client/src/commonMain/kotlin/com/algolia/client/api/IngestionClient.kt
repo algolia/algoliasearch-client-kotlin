@@ -633,8 +633,8 @@ public class IngestionClient(
    * @param page Page number of the paginated API response.
    * @param type Type of authentication resource to retrieve.
    * @param platform Ecommerce platform for which to retrieve authentications.
-   * @param sort Property by which to sort the list of authentications. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param sort Property by which to sort the list of authentications. (default to AuthenticationSortKeys.createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to OrderKeys.desc)
    * @param requestOptions additional request configuration.
    */
   public suspend fun listAuthentications(itemsPerPage: Int? = null, page: Int? = null, type: List<AuthenticationType>? = null, platform: List<PlatformWithNone>? = null, sort: AuthenticationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListAuthenticationsResponse {
@@ -668,8 +668,8 @@ public class IngestionClient(
    * @param type Destination type.
    * @param authenticationID Authentication ID used by destinations.
    * @param transformationID Get the list of destinations used by a transformation.
-   * @param sort Property by which to sort the destinations. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param sort Property by which to sort the destinations. (default to DestinationSortKeys.createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to OrderKeys.desc)
    * @param requestOptions additional request configuration.
    */
   public suspend fun listDestinations(itemsPerPage: Int? = null, page: Int? = null, type: List<DestinationType>? = null, authenticationID: List<String>? = null, transformationID: String? = null, sort: DestinationSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListDestinationsResponse {
@@ -705,7 +705,7 @@ public class IngestionClient(
    * @param status Event status for filtering the list of task runs.
    * @param type Event type for filtering the list of task runs.
    * @param sort Property by which to sort the list of task run events.
-   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param order Sort order of the response, ascending or descending. (default to OrderKeys.desc)
    * @param startDate Date and time in RFC 3339 format for the earliest events to retrieve. By default, the current time minus three hours is used.
    * @param endDate Date and time in RFC 3339 format for the latest events to retrieve. By default, the current time is used.
    * @param requestOptions additional request configuration.
@@ -744,8 +744,8 @@ public class IngestionClient(
    * @param status Run status for filtering the list of task runs.
    * @param type Run type for filtering the list of task runs.
    * @param taskID Task ID for filtering the list of task runs.
-   * @param sort Property by which to sort the list of task runs. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param sort Property by which to sort the list of task runs. (default to RunSortKeys.createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to OrderKeys.desc)
    * @param startDate Date in RFC 3339 format for the earliest run to retrieve. By default, the current day minus seven days is used.
    * @param endDate Date in RFC 3339 format for the latest run to retrieve. By default, the current day is used.
    * @param requestOptions additional request configuration.
@@ -783,8 +783,8 @@ public class IngestionClient(
    * @param page Page number of the paginated API response.
    * @param type Source type. Some sources require authentication.
    * @param authenticationID Authentication IDs of the sources to retrieve. 'none' returns sources that doesn't have an authentication.
-   * @param sort Property by which to sort the list of sources. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param sort Property by which to sort the list of sources. (default to SourceSortKeys.createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to OrderKeys.desc)
    * @param requestOptions additional request configuration.
    */
   public suspend fun listSources(itemsPerPage: Int? = null, page: Int? = null, type: List<SourceType>? = null, authenticationID: List<String>? = null, sort: SourceSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListSourcesResponse {
@@ -822,8 +822,8 @@ public class IngestionClient(
    * @param destinationID Destination IDs for filtering the list of tasks.
    * @param triggerType Type of task trigger for filtering the list of tasks.
    * @param withEmailNotifications If specified, the response only includes tasks with notifications.email.enabled set to this value.
-   * @param sort Property by which to sort the list of tasks. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param sort Property by which to sort the list of tasks. (default to TaskSortKeys.createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to OrderKeys.desc)
    * @param requestOptions additional request configuration.
    */
   public suspend fun listTasks(itemsPerPage: Int? = null, page: Int? = null, action: List<ActionType>? = null, enabled: Boolean? = null, sourceID: List<String>? = null, sourceType: List<SourceType>? = null, destinationID: List<String>? = null, triggerType: List<TriggerType>? = null, withEmailNotifications: Boolean? = null, sort: TaskSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTasksResponse {
@@ -865,8 +865,8 @@ public class IngestionClient(
    * @param sourceID Source IDs for filtering the list of tasks.
    * @param destinationID Destination IDs for filtering the list of tasks.
    * @param triggerType Type of task trigger for filtering the list of tasks.
-   * @param sort Property by which to sort the list of tasks. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param sort Property by which to sort the list of tasks. (default to TaskSortKeys.createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to OrderKeys.desc)
    * @param requestOptions additional request configuration.
    */
   public suspend fun listTasksV1(itemsPerPage: Int? = null, page: Int? = null, action: List<ActionType>? = null, enabled: Boolean? = null, sourceID: List<String>? = null, destinationID: List<String>? = null, triggerType: List<TriggerType>? = null, sort: TaskSortKeys? = null, order: OrderKeys? = null, requestOptions: RequestOptions? = null): ListTasksResponseV1 {
@@ -900,8 +900,8 @@ public class IngestionClient(
    *   - editSettings
    * @param itemsPerPage Number of items per page. (default to 10)
    * @param page Page number of the paginated API response.
-   * @param sort Property by which to sort the list of transformations. (default to createdAt)
-   * @param order Sort order of the response, ascending or descending. (default to desc)
+   * @param sort Property by which to sort the list of transformations. (default to TransformationSortKeys.createdAt)
+   * @param order Sort order of the response, ascending or descending. (default to OrderKeys.desc)
    * @param type Whether to filter the list of transformations by the type of transformation.
    * @param requestOptions additional request configuration.
    */
