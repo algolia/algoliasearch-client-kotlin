@@ -1,3 +1,7 @@
+## [3.31.1](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.31.0...3.31.1)
+
+- [940048904](https://github.com/algolia/api-clients-automation/commit/940048904) fix(scripts): checkout tag on release ([#5446](https://github.com/algolia/api-clients-automation/pull/5446)) by [@millotp](https://github.com/millotp/)
+
 ## [3.31.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.30.0...3.31.0)
 
 - [7de94353f](https://github.com/algolia/api-clients-automation/commit/7de94353f) feat(specs): add compositions deduplication setting ([#5418](https://github.com/algolia/api-clients-automation/pull/5418)) by [@ben-kalmus](https://github.com/ben-kalmus/)
