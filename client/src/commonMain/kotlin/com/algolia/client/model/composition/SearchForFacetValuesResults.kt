@@ -9,7 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param indexName
  * @param facetHits Matching facet values.
- * @param exhaustiveFacetsCount Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).
+ * @param exhaustiveFacetsCount Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate).
  * @param processingTimeMS Time the server took to process the request, in milliseconds.
  */
 @Serializable
@@ -20,7 +20,7 @@ public data class SearchForFacetValuesResults(
   /** Matching facet values. */
   @SerialName(value = "facetHits") val facetHits: List<FacetHits>,
 
-  /** Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).  */
+  /** Whether the facet count is exhaustive (true) or approximate (false). For more information, see [Why are my facet and hit counts not accurate](https://support.algolia.com/hc/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate).  */
   @SerialName(value = "exhaustiveFacetsCount") val exhaustiveFacetsCount: Boolean,
 
   /** Time the server took to process the request, in milliseconds. */

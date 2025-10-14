@@ -9,7 +9,7 @@ import kotlinx.serialization.json.*
  *
  * @param `value` Facet value.
  * @param highlighted Highlighted attribute value, including HTML tags.
- * @param count Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-).
+ * @param count Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate).
  */
 @Serializable
 public data class FacetHits(
@@ -20,6 +20,6 @@ public data class FacetHits(
   /** Highlighted attribute value, including HTML tags. */
   @SerialName(value = "highlighted") val highlighted: String,
 
-  /** Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/en-us/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate-). */
+  /** Number of records with this facet value. [The count may be approximated](https://support.algolia.com/hc/articles/4406975248145-Why-are-my-facet-and-hit-counts-not-accurate). */
   @SerialName(value = "count") val count: Int,
 )

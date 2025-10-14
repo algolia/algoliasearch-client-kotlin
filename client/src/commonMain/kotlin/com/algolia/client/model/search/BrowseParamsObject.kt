@@ -34,7 +34,7 @@ import kotlinx.serialization.json.*
  * @param userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
  * @param getRankingInfo Whether the search response should include detailed ranking information.
  * @param synonyms Whether to take into account an index's synonyms for this search.
- * @param clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/guides/sending-events/getting-started).
+ * @param clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
  * @param analytics Whether this search will be included in Analytics.
  * @param analyticsTags Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
  * @param percentileComputation Whether to include this search when calculating processing-time percentiles.
@@ -159,7 +159,7 @@ public data class BrowseParamsObject(
   /** Whether to take into account an index's synonyms for this search. */
   @SerialName(value = "synonyms") val synonyms: Boolean? = null,
 
-  /** Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/guides/sending-events/getting-started).  */
+  /** Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).  */
   @SerialName(value = "clickAnalytics") val clickAnalytics: Boolean? = null,
 
   /** Whether this search will be included in Analytics. */

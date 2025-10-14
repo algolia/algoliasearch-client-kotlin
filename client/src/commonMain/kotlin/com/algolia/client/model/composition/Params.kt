@@ -28,7 +28,7 @@ import kotlinx.serialization.json.*
  * @param enableRules Whether to enable composition rules.
  * @param ruleContexts Assigns a rule context to the run query [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context) are strings that you can use to trigger matching rules.
  * @param userToken Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
- * @param clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/guides/sending-events/getting-started).
+ * @param clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
  * @param analytics Whether this search will be included in Analytics.
  * @param analyticsTags Tags to apply to the query for [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
  * @param enableABTest Whether to enable index level A/B testing for this run request. If the composition mixes multiple indices, the A/B test is ignored.
@@ -95,7 +95,7 @@ public data class Params(
   /** Unique pseudonymous or anonymous user identifier.  This helps with analytics and click and conversion events. For more information, see [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).  */
   @SerialName(value = "userToken") val userToken: String? = null,
 
-  /** Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/guides/sending-events/getting-started).  */
+  /** Whether to include a `queryID` attribute in the response The query ID is a unique identifier for a search query and is required for tracking [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).  */
   @SerialName(value = "clickAnalytics") val clickAnalytics: Boolean? = null,
 
   /** Whether this search will be included in Analytics. */
