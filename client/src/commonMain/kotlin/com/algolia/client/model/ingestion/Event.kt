@@ -5,7 +5,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * An event describe a step of the task execution flow..
+ * An event describe a step of the task execution flow.
  *
  * @param eventID Universally unique identifier (UUID) of an event.
  * @param runID Universally unique identifier (UUID) of a task run.
