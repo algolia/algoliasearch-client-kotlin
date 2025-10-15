@@ -1,3 +1,10 @@
+## [3.31.2](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.31.1...3.31.2)
+
+- [9a92b3269](https://github.com/algolia/api-clients-automation/commit/9a92b3269) chore(deps): dependencies 2025-10-13 ([#5453](https://github.com/algolia/api-clients-automation/pull/5453)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [02b6a90ae](https://github.com/algolia/api-clients-automation/commit/02b6a90ae) fix(clients): upgrade linter ([#5476](https://github.com/algolia/api-clients-automation/pull/5476)) by [@millotp](https://github.com/millotp/)
+- [3fc252bec](https://github.com/algolia/api-clients-automation/commit/3fc252bec) chore: remove dead links ([#5472](https://github.com/algolia/api-clients-automation/pull/5472)) by [@millotp](https://github.com/millotp/)
+- [9eebe5113](https://github.com/algolia/api-clients-automation/commit/9eebe5113) docs: replace links for the new doc ([#5478](https://github.com/algolia/api-clients-automation/pull/5478)) by [@millotp](https://github.com/millotp/)
+
 ## [3.31.1](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.31.0...3.31.1)
 
 - [940048904](https://github.com/algolia/api-clients-automation/commit/940048904) fix(scripts): checkout tag on release ([#5446](https://github.com/algolia/api-clients-automation/pull/5446)) by [@millotp](https://github.com/millotp/)
