@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="https://www.algolia.com/doc/libraries/kotlin/" target="_blank">Documentation</a>  •
+  <a href="https://www.algolia.com/doc/libraries/sdk/install#kotlin" target="_blank">Documentation</a>  •
   <a href="https://discourse.algolia.com" target="_blank">Community Forum</a>  •
   <a href="http://stackoverflow.com/questions/tagged/algolia" target="_blank">Stack Overflow</a>  •
   <a href="https://github.com/algolia/algoliasearch-client-kotlin/issues" target="_blank">Report a bug</a>  •
@@ -47,7 +47,7 @@ Install the Kotlin client by adding the following dependency to your `gradle.bui
 Also, choose and add to your dependencies one of [Ktor http client engines](https://ktor.io/docs/http-client-engines.html).
 Alternatively, you can use [algoliasearch-client-kotlin-bom](/client-bom).  
 
-For full documentation, visit the **[Algolia Kotlin API Client](https://www.algolia.com/doc/libraries/kotlin/)**.
+For full documentation, visit the **[Algolia Kotlin API Client](https://www.algolia.com/doc/libraries/sdk/install#kotlin)**.
 
 ## ❓ Troubleshooting
 
