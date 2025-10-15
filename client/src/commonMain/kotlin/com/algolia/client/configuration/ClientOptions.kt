@@ -4,9 +4,9 @@ import com.algolia.client.transport.Requester
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.plugins.logging.*
+import kotlin.time.Duration
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonBuilder
-import kotlin.time.Duration
 
 public expect class ClientOptions(
   connectTimeout: Duration? = null,

@@ -5,10 +5,7 @@ import com.algolia.client.configuration.AgentSegment
 /** Handles to handle algolia agent segments. */
 internal class AlgoliaAgent(clientVersion: String) {
 
-  private val segments =
-    mutableSetOf(
-      AgentSegment("Algolia for Kotlin", clientVersion),
-    )
+  private val segments = mutableSetOf(AgentSegment("Algolia for Kotlin", clientVersion))
 
   fun add(segment: AgentSegment): Boolean = segments.add(segment)
 

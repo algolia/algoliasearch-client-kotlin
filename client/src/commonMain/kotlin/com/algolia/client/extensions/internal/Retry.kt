@@ -1,9 +1,9 @@
 package com.algolia.client.extensions.internal
 
 import com.algolia.client.exception.AlgoliaWaitException
+import kotlin.time.Duration
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeoutOrNull
-import kotlin.time.Duration
 
 /**
  * Retries the given [retry] function until the [until] condition is satisfied or the maximum number

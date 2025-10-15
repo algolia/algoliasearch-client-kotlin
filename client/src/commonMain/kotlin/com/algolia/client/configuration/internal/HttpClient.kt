@@ -18,7 +18,8 @@ internal fun algoliaHttpClient(
   agent: AlgoliaAgent,
 ) = httpClientOf(options) { configure(appId, apiKey, options, agent) }
 
-private fun httpClientOf(options: ClientOptions, block: HttpClientConfig<*>.() -> Unit) = options.engine?.let { HttpClient(it, block) } ?: HttpClient(block)
+private fun httpClientOf(options: ClientOptions, block: HttpClientConfig<*>.() -> Unit) =
+  options.engine?.let { HttpClient(it, block) } ?: HttpClient(block)
 
 internal fun HttpClientConfig<*>.configure(
   appId: String,
@@ -30,9 +31,7 @@ internal fun HttpClientConfig<*>.configure(
   options.httpClientConfig?.invoke(this)
 
   // Content negotiation and serialization
-  install(ContentNegotiation) {
-    json(options.json)
-  }
+  install(ContentNegotiation) { json(options.json) }
 
   // Logging
   if (options.logLevel != LogLevel.NONE) {
@@ -43,9 +42,7 @@ internal fun HttpClientConfig<*>.configure(
   }
 
   // Algolia user agent
-  install(UserAgent) {
-    agent = algoliaAgent.toString()
-  }
+  install(UserAgent) { agent = algoliaAgent.toString() }
 
   // Timeout
   install(HttpTimeout)

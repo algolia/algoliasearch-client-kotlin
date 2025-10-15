@@ -8,19 +8,21 @@ import kotlin.test.*
 class TestDisjunctiveFaceting {
   @Test
   fun testBuildFilters() {
-    val refinements = mapOf(
-      "size" to listOf("m", "s"),
-      "color" to listOf("blue", "green", "red"),
-      "brand" to listOf("apple", "samsung", "sony"),
-    )
+    val refinements =
+      mapOf(
+        "size" to listOf("m", "s"),
+        "color" to listOf("blue", "green", "red"),
+        "brand" to listOf("apple", "samsung", "sony"),
+      )
 
     val disjunctiveFacets = setOf("color")
 
-    val helper = DisjunctiveFaceting(
-      query = SearchForHits.from(SearchParamsObject(), "index_name"),
-      refinements = refinements,
-      disjunctiveFacets = disjunctiveFacets,
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = SearchForHits.from(SearchParamsObject(), "index_name"),
+        refinements = refinements,
+        disjunctiveFacets = disjunctiveFacets,
+      )
 
     assertEquals(
       """("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red") AND ("size":"m" AND "size":"s")""",
@@ -46,19 +48,21 @@ class TestDisjunctiveFaceting {
 
   @Test
   fun testAppliedDisjunctiveFacetValues() {
-    val refinements = mapOf(
-      "size" to listOf("m", "s"),
-      "color" to listOf("blue", "green", "red"),
-      "brand" to listOf("apple", "samsung", "sony"),
-    )
+    val refinements =
+      mapOf(
+        "size" to listOf("m", "s"),
+        "color" to listOf("blue", "green", "red"),
+        "brand" to listOf("apple", "samsung", "sony"),
+      )
 
     val disjunctiveFacets = setOf("color", "brand")
 
-    val helper = DisjunctiveFaceting(
-      query = SearchForHits.from(SearchParamsObject(), "index_name"),
-      refinements = refinements,
-      disjunctiveFacets = disjunctiveFacets,
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = SearchForHits.from(SearchParamsObject(), "index_name"),
+        refinements = refinements,
+        disjunctiveFacets = disjunctiveFacets,
+      )
 
     assertTrue(helper.appliedDisjunctiveFacetValues("popularity").isEmpty())
     assertTrue(helper.appliedDisjunctiveFacetValues("size").isEmpty())
@@ -68,17 +72,19 @@ class TestDisjunctiveFaceting {
 
   @Test
   fun testBuildQueriesNoDisjunctive() {
-    val refinements = mapOf(
-      "size" to listOf("m", "s"),
-      "color" to listOf("blue", "green", "red"),
-      "brand" to listOf("apple", "samsung", "sony"),
-    )
+    val refinements =
+      mapOf(
+        "size" to listOf("m", "s"),
+        "color" to listOf("blue", "green", "red"),
+        "brand" to listOf("apple", "samsung", "sony"),
+      )
 
-    val helper = DisjunctiveFaceting(
-      query = SearchForHits.from(SearchParamsObject(), "index_name"),
-      refinements = refinements,
-      disjunctiveFacets = emptySet(),
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = SearchForHits.from(SearchParamsObject(), "index_name"),
+        refinements = refinements,
+        disjunctiveFacets = emptySet(),
+      )
     val queries = helper.buildQueries()
     assertEquals(1, queries.size)
 
@@ -91,17 +97,19 @@ class TestDisjunctiveFaceting {
 
   @Test
   fun testBuildQueriesDisjunctiveSingle() {
-    val refinements = mapOf(
-      "size" to listOf("m", "s"),
-      "color" to listOf("blue", "green", "red"),
-      "brand" to listOf("apple", "samsung", "sony"),
-    )
+    val refinements =
+      mapOf(
+        "size" to listOf("m", "s"),
+        "color" to listOf("blue", "green", "red"),
+        "brand" to listOf("apple", "samsung", "sony"),
+      )
 
-    val helper = DisjunctiveFaceting(
-      query = SearchForHits.from(SearchParamsObject(), "index_name"),
-      refinements = refinements,
-      disjunctiveFacets = setOf("color"),
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = SearchForHits.from(SearchParamsObject(), "index_name"),
+        refinements = refinements,
+        disjunctiveFacets = setOf("color"),
+      )
     val queries = helper.buildQueries()
     assertEquals(2, queries.size)
     val searchForHits = queries.first()
@@ -119,17 +127,19 @@ class TestDisjunctiveFaceting {
 
   @Test
   fun testBuildQueriesDisjunctiveDouble() {
-    val refinements = mapOf(
-      "size" to listOf("m", "s"),
-      "color" to listOf("blue", "green", "red"),
-      "brand" to listOf("apple", "samsung", "sony"),
-    )
+    val refinements =
+      mapOf(
+        "size" to listOf("m", "s"),
+        "color" to listOf("blue", "green", "red"),
+        "brand" to listOf("apple", "samsung", "sony"),
+      )
     val disjunctiveFacets = setOf("color", "size")
-    val helper = DisjunctiveFaceting(
-      query = SearchForHits.from(SearchParamsObject(), "index_name"),
-      refinements = refinements,
-      disjunctiveFacets = disjunctiveFacets,
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = SearchForHits.from(SearchParamsObject(), "index_name"),
+        refinements = refinements,
+        disjunctiveFacets = disjunctiveFacets,
+      )
     val queries = helper.buildQueries()
     assertEquals(3, queries.size)
     val searchForHits = queries.first()
@@ -153,57 +163,60 @@ class TestDisjunctiveFaceting {
 
   @Test
   fun testMergeEmptyResponses() {
-    val refinements = mapOf(
-      "size" to listOf("m", "s"),
-      "color" to listOf("blue", "green", "red"),
-      "brand" to listOf("apple", "samsung", "sony"),
-    )
+    val refinements =
+      mapOf(
+        "size" to listOf("m", "s"),
+        "color" to listOf("blue", "green", "red"),
+        "brand" to listOf("apple", "samsung", "sony"),
+      )
     val disjunctiveFacets = setOf("color", "size")
-    val helper = DisjunctiveFaceting(
-      query = SearchForHits.from(SearchParamsObject(), "index_name"),
-      refinements = refinements,
-      disjunctiveFacets = disjunctiveFacets,
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = SearchForHits.from(SearchParamsObject(), "index_name"),
+        refinements = refinements,
+        disjunctiveFacets = disjunctiveFacets,
+      )
 
-    val exception = assertFailsWith<NoSuchElementException> {
-      helper.mergeResponses(emptyList())
-    }
+    val exception = assertFailsWith<NoSuchElementException> { helper.mergeResponses(emptyList()) }
     assertEquals("List is empty.", exception.message)
   }
 
   @Test
   fun testMergeDisjunctiveSingle() {
-    val refinements = mapOf(
-      "size" to listOf("m", "s"),
-      "color" to listOf("blue", "green", "red"),
-      "brand" to listOf("apple", "samsung", "sony"),
-    )
+    val refinements =
+      mapOf(
+        "size" to listOf("m", "s"),
+        "color" to listOf("blue", "green", "red"),
+        "brand" to listOf("apple", "samsung", "sony"),
+      )
     val disjunctiveFacets = setOf("color")
-    val helper = DisjunctiveFaceting(
-      query = SearchForHits.from(SearchParamsObject(), "index_name"),
-      refinements = refinements,
-      disjunctiveFacets = disjunctiveFacets,
-    )
-    val mainResponse = SearchResponse(
-      processingTimeMS = 100,
-      hits = emptyList(),
-      query = "",
-      params = "",
-      facets = mapOf(
-        "size" to mapOf("s" to 5, "m" to 7),
-        "color" to mapOf("red" to 1, "green" to 2, "blue" to 3),
-        "brand" to mapOf("samsung" to 5, "sony" to 10, "apple" to 15),
-      ),
-    )
-    val disjunctiveResponse = SearchResponse(
-      processingTimeMS = 100,
-      hits = emptyList(),
-      query = "",
-      params = "",
-      facets = mapOf(
-        "color" to mapOf("red" to 10, "green" to 20, "blue" to 30),
-      ),
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = SearchForHits.from(SearchParamsObject(), "index_name"),
+        refinements = refinements,
+        disjunctiveFacets = disjunctiveFacets,
+      )
+    val mainResponse =
+      SearchResponse(
+        processingTimeMS = 100,
+        hits = emptyList(),
+        query = "",
+        params = "",
+        facets =
+          mapOf(
+            "size" to mapOf("s" to 5, "m" to 7),
+            "color" to mapOf("red" to 1, "green" to 2, "blue" to 3),
+            "brand" to mapOf("samsung" to 5, "sony" to 10, "apple" to 15),
+          ),
+      )
+    val disjunctiveResponse =
+      SearchResponse(
+        processingTimeMS = 100,
+        hits = emptyList(),
+        query = "",
+        params = "",
+        facets = mapOf("color" to mapOf("red" to 10, "green" to 20, "blue" to 30)),
+      )
     val result = helper.mergeResponses(listOf(mainResponse, disjunctiveResponse))
     assertEquals(
       mapOf(
@@ -214,56 +227,59 @@ class TestDisjunctiveFaceting {
       result.response.facets,
     )
     assertEquals(
-      mapOf(
-        "color" to mapOf("red" to 10, "green" to 20, "blue" to 30),
-      ),
+      mapOf("color" to mapOf("red" to 10, "green" to 20, "blue" to 30)),
       result.disjunctiveFacets,
     )
   }
 
   @Test
   fun testMergeDisjunctiveDouble() {
-    val refinements = mapOf(
-      "size" to listOf("m", "s"),
-      "color" to listOf("blue", "green", "red"),
-      "brand" to listOf("apple", "samsung", "sony"),
-    )
+    val refinements =
+      mapOf(
+        "size" to listOf("m", "s"),
+        "color" to listOf("blue", "green", "red"),
+        "brand" to listOf("apple", "samsung", "sony"),
+      )
     val disjunctiveFacets = setOf("color", "size")
-    val helper = DisjunctiveFaceting(
-      query = SearchForHits.from(SearchParamsObject(), "index_name"),
-      refinements = refinements,
-      disjunctiveFacets = disjunctiveFacets,
-    )
-    val mainResponse = SearchResponse(
-      processingTimeMS = 100,
-      hits = emptyList(),
-      query = "",
-      params = "",
-      facets = mapOf(
-        "size" to mapOf("s" to 5, "m" to 7),
-        "color" to mapOf("red" to 1, "green" to 2, "blue" to 3),
-        "brand" to mapOf("samsung" to 5, "sony" to 10, "apple" to 15),
-      ),
-    )
-    val firstDisjunctiveResponse = SearchResponse(
-      processingTimeMS = 100,
-      hits = emptyList(),
-      query = "",
-      params = "",
-      facets = mapOf(
-        "color" to mapOf("red" to 10, "green" to 20, "blue" to 30),
-      ),
-    )
-    val secondDisjunctiveResponse = SearchResponse(
-      processingTimeMS = 100,
-      hits = emptyList(),
-      query = "",
-      params = "",
-      facets = mapOf(
-        "size" to mapOf("s" to 3, "m" to 4),
-      ),
-    )
-    val result = helper.mergeResponses(listOf(mainResponse, firstDisjunctiveResponse, secondDisjunctiveResponse))
+    val helper =
+      DisjunctiveFaceting(
+        query = SearchForHits.from(SearchParamsObject(), "index_name"),
+        refinements = refinements,
+        disjunctiveFacets = disjunctiveFacets,
+      )
+    val mainResponse =
+      SearchResponse(
+        processingTimeMS = 100,
+        hits = emptyList(),
+        query = "",
+        params = "",
+        facets =
+          mapOf(
+            "size" to mapOf("s" to 5, "m" to 7),
+            "color" to mapOf("red" to 1, "green" to 2, "blue" to 3),
+            "brand" to mapOf("samsung" to 5, "sony" to 10, "apple" to 15),
+          ),
+      )
+    val firstDisjunctiveResponse =
+      SearchResponse(
+        processingTimeMS = 100,
+        hits = emptyList(),
+        query = "",
+        params = "",
+        facets = mapOf("color" to mapOf("red" to 10, "green" to 20, "blue" to 30)),
+      )
+    val secondDisjunctiveResponse =
+      SearchResponse(
+        processingTimeMS = 100,
+        hits = emptyList(),
+        query = "",
+        params = "",
+        facets = mapOf("size" to mapOf("s" to 3, "m" to 4)),
+      )
+    val result =
+      helper.mergeResponses(
+        listOf(mainResponse, firstDisjunctiveResponse, secondDisjunctiveResponse)
+      )
     assertEquals(
       mapOf(
         "size" to mapOf("s" to 5, "m" to 7),
@@ -283,53 +299,70 @@ class TestDisjunctiveFaceting {
 
   @Test
   fun testMergeFacetStats() {
-    val helper = DisjunctiveFaceting(
-      query = SearchForHits.from(SearchParamsObject(), "index_name"),
-      refinements = emptyMap(),
-      disjunctiveFacets = emptySet(),
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = SearchForHits.from(SearchParamsObject(), "index_name"),
+        refinements = emptyMap(),
+        disjunctiveFacets = emptySet(),
+      )
 
-    val mainResponse = SearchResponse(
-      processingTimeMS = 100,
-      hits = emptyList(),
-      query = "",
-      params = "",
-      facetsStats = mapOf(
-        "price" to FacetStats(min = 5.0, max = 100.0, avg = 52.5, sum = 2400.0),
-        "target" to FacetStats(min = 1.0, max = 10.0, avg = 5.5, sum = 43.0),
-      ),
-    )
+    val mainResponse =
+      SearchResponse(
+        processingTimeMS = 100,
+        hits = emptyList(),
+        query = "",
+        params = "",
+        facetsStats =
+          mapOf(
+            "price" to FacetStats(min = 5.0, max = 100.0, avg = 52.5, sum = 2400.0),
+            "target" to FacetStats(min = 1.0, max = 10.0, avg = 5.5, sum = 43.0),
+          ),
+      )
 
-    val firstDisjunctiveResponse = SearchResponse(
-      processingTimeMS = 100,
-      hits = emptyList(),
-      query = "",
-      params = "",
-      facetsStats = mapOf(
-        "price" to FacetStats(min = 7.0, max = 103.0, avg = 55.0, sum = 3000.0),
-        "note" to FacetStats(min = 1.0, max = 5.0, avg = 3.0, sum = 37.0),
-      ),
-    )
+    val firstDisjunctiveResponse =
+      SearchResponse(
+        processingTimeMS = 100,
+        hits = emptyList(),
+        query = "",
+        params = "",
+        facetsStats =
+          mapOf(
+            "price" to FacetStats(min = 7.0, max = 103.0, avg = 55.0, sum = 3000.0),
+            "note" to FacetStats(min = 1.0, max = 5.0, avg = 3.0, sum = 37.0),
+          ),
+      )
 
-    val secondDisjunctiveResponse = SearchResponse(
-      processingTimeMS = 100,
-      hits = emptyList(),
-      query = "",
-      params = "",
-      facetsStats = mapOf(
-        "size" to FacetStats(min = 20.0, max = 56.0, avg = 38.0, sum = 242.0),
-      ),
-    )
+    val secondDisjunctiveResponse =
+      SearchResponse(
+        processingTimeMS = 100,
+        hits = emptyList(),
+        query = "",
+        params = "",
+        facetsStats = mapOf("size" to FacetStats(min = 20.0, max = 56.0, avg = 38.0, sum = 242.0)),
+      )
 
-    val result = helper.mergeResponses(
-      listOf(mainResponse, firstDisjunctiveResponse, secondDisjunctiveResponse),
-    )
+    val result =
+      helper.mergeResponses(
+        listOf(mainResponse, firstDisjunctiveResponse, secondDisjunctiveResponse)
+      )
 
     assertEquals(4, result.response.facetsStats?.size)
-    assertEqual(FacetStats(min = 7.0, max = 103.0, avg = 55.0, sum = 3000.0), result.response.facetsStats?.get("price"))
-    assertEqual(FacetStats(min = 1.0, max = 10.0, avg = 5.5, sum = 43.0), result.response.facetsStats?.get("target"))
-    assertEqual(FacetStats(min = 20.0, max = 56.0, avg = 38.0, sum = 242.0), result.response.facetsStats?.get("size"))
-    assertEqual(FacetStats(min = 1.0, max = 5.0, avg = 3.0, sum = 37.0), result.response.facetsStats?.get("note"))
+    assertEqual(
+      FacetStats(min = 7.0, max = 103.0, avg = 55.0, sum = 3000.0),
+      result.response.facetsStats?.get("price"),
+    )
+    assertEqual(
+      FacetStats(min = 1.0, max = 10.0, avg = 5.5, sum = 43.0),
+      result.response.facetsStats?.get("target"),
+    )
+    assertEqual(
+      FacetStats(min = 20.0, max = 56.0, avg = 38.0, sum = 242.0),
+      result.response.facetsStats?.get("size"),
+    )
+    assertEqual(
+      FacetStats(min = 1.0, max = 5.0, avg = 3.0, sum = 37.0),
+      result.response.facetsStats?.get("note"),
+    )
   }
 
   private fun assertEqual(lhs: FacetStats?, rhs: FacetStats?) {
@@ -365,47 +398,54 @@ class TestDisjunctiveFaceting {
 
   @Test
   fun testMergeExhaustiveFacetsCount() {
-    val helper = DisjunctiveFaceting(
-      query = SearchForHits.from(SearchParamsObject(), "index_name"),
-      refinements = emptyMap(),
-      disjunctiveFacets = emptySet(),
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = SearchForHits.from(SearchParamsObject(), "index_name"),
+        refinements = emptyMap(),
+        disjunctiveFacets = emptySet(),
+      )
 
-    val mainResponse = SearchResponse(
-      processingTimeMS = 100,
-      hits = emptyList(),
-      query = "",
-      params = "",
-      exhaustive = Exhaustive(facetsCount = true),
-    )
+    val mainResponse =
+      SearchResponse(
+        processingTimeMS = 100,
+        hits = emptyList(),
+        query = "",
+        params = "",
+        exhaustive = Exhaustive(facetsCount = true),
+      )
 
-    val firstDisjunctiveResponse = SearchResponse(
-      processingTimeMS = 100,
-      hits = emptyList(),
-      query = "",
-      params = "",
-      exhaustive = Exhaustive(facetsCount = true),
-    )
+    val firstDisjunctiveResponse =
+      SearchResponse(
+        processingTimeMS = 100,
+        hits = emptyList(),
+        query = "",
+        params = "",
+        exhaustive = Exhaustive(facetsCount = true),
+      )
 
-    var secondDisjunctiveResponse = SearchResponse(
-      processingTimeMS = 100,
-      hits = emptyList(),
-      query = "",
-      params = "",
-      exhaustive = Exhaustive(facetsCount = false),
-    )
+    var secondDisjunctiveResponse =
+      SearchResponse(
+        processingTimeMS = 100,
+        hits = emptyList(),
+        query = "",
+        params = "",
+        exhaustive = Exhaustive(facetsCount = false),
+      )
 
-    var result = helper.mergeResponses(
-      listOf(mainResponse, firstDisjunctiveResponse, secondDisjunctiveResponse),
-    )
+    var result =
+      helper.mergeResponses(
+        listOf(mainResponse, firstDisjunctiveResponse, secondDisjunctiveResponse)
+      )
 
     assertNotNull(result.response.exhaustive?.facetsCount)
     assertFalse(result.response.exhaustive!!.facetsCount!!)
 
-    secondDisjunctiveResponse = secondDisjunctiveResponse.copy(exhaustive = Exhaustive(facetsCount = true))
-    result = helper.mergeResponses(
-      listOf(mainResponse, firstDisjunctiveResponse, secondDisjunctiveResponse),
-    )
+    secondDisjunctiveResponse =
+      secondDisjunctiveResponse.copy(exhaustive = Exhaustive(facetsCount = true))
+    result =
+      helper.mergeResponses(
+        listOf(mainResponse, firstDisjunctiveResponse, secondDisjunctiveResponse)
+      )
 
     assertNotNull(result.response.exhaustive?.facetsCount)
     assertTrue(result.response.exhaustive!!.facetsCount!!)
@@ -413,21 +453,24 @@ class TestDisjunctiveFaceting {
 
   @Test
   fun testKeepExistingFilters() {
-    val query = SearchForHits.from(SearchParamsObject(), "index_name").copy(filters = "NOT color:blue")
+    val query =
+      SearchForHits.from(SearchParamsObject(), "index_name").copy(filters = "NOT color:blue")
 
-    val refinements = mapOf(
-      "size" to listOf("m", "s"),
-      "color" to listOf("blue", "green", "red"),
-      "brand" to listOf("apple", "samsung", "sony"),
-    )
+    val refinements =
+      mapOf(
+        "size" to listOf("m", "s"),
+        "color" to listOf("blue", "green", "red"),
+        "brand" to listOf("apple", "samsung", "sony"),
+      )
 
     val disjunctiveFacets = setOf("color", "size")
 
-    val helper = DisjunctiveFaceting(
-      query = query,
-      refinements = refinements,
-      disjunctiveFacets = disjunctiveFacets,
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = query,
+        refinements = refinements,
+        disjunctiveFacets = disjunctiveFacets,
+      )
 
     val queries = helper.buildQueries()
     assertEquals(3, queries.size)
@@ -437,7 +480,8 @@ class TestDisjunctiveFaceting {
       firstQuery.filters,
       """
             NOT color:blue AND ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red") AND ("size":"m" OR "size":"s")
-      """.trimIndent(),
+      """
+        .trimIndent(),
     )
 
     val secondQuery = queries[1]
@@ -445,7 +489,8 @@ class TestDisjunctiveFaceting {
     assertEquals(
       """
             NOT color:blue AND ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("size":"m" OR "size":"s")
-      """.trimIndent(),
+      """
+        .trimIndent(),
       secondQuery.filters,
     )
 
@@ -454,7 +499,8 @@ class TestDisjunctiveFaceting {
     assertEquals(
       """
             NOT color:blue AND ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red")
-      """.trimIndent(),
+      """
+        .trimIndent(),
       thirdQuery.filters,
     )
   }
@@ -463,19 +509,21 @@ class TestDisjunctiveFaceting {
   fun testKeepExistingFiltersEmpty() {
     val query = SearchForHits.from(SearchParamsObject(), "index_name").copy(filters = "")
 
-    val refinements = mapOf(
-      "size" to listOf("m", "s"),
-      "color" to listOf("blue", "green", "red"),
-      "brand" to listOf("apple", "samsung", "sony"),
-    )
+    val refinements =
+      mapOf(
+        "size" to listOf("m", "s"),
+        "color" to listOf("blue", "green", "red"),
+        "brand" to listOf("apple", "samsung", "sony"),
+      )
 
     val disjunctiveFacets = setOf("color", "size")
 
-    val helper = DisjunctiveFaceting(
-      query = query,
-      refinements = refinements,
-      disjunctiveFacets = disjunctiveFacets,
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = query,
+        refinements = refinements,
+        disjunctiveFacets = disjunctiveFacets,
+      )
 
     val queries = helper.buildQueries()
     assertEquals(3, queries.size)
@@ -484,7 +532,8 @@ class TestDisjunctiveFaceting {
     assertEquals(
       """
             ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red") AND ("size":"m" OR "size":"s")
-      """.trimIndent(),
+      """
+        .trimIndent(),
       firstQuery.filters,
     )
 
@@ -493,7 +542,8 @@ class TestDisjunctiveFaceting {
     assertEquals(
       """
             ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("size":"m" OR "size":"s")
-      """.trimIndent(),
+      """
+        .trimIndent(),
       secondQuery.filters,
     )
 
@@ -502,24 +552,25 @@ class TestDisjunctiveFaceting {
     assertEquals(
       """
             ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red")
-      """.trimIndent(),
+      """
+        .trimIndent(),
       thirdQuery.filters,
     )
   }
 
   @Test
   fun testKeepExistingFiltersNoRefinement() {
-    val query = SearchForHits
-      .from(SearchParamsObject(), "index_name")
-      .copy(filters = "NOT color:blue")
+    val query =
+      SearchForHits.from(SearchParamsObject(), "index_name").copy(filters = "NOT color:blue")
 
     val disjunctiveFacets = setOf("color", "size")
 
-    val helper = DisjunctiveFaceting(
-      query = query,
-      refinements = emptyMap(),
-      disjunctiveFacets = disjunctiveFacets,
-    )
+    val helper =
+      DisjunctiveFaceting(
+        query = query,
+        refinements = emptyMap(),
+        disjunctiveFacets = disjunctiveFacets,
+      )
 
     val queries = helper.buildQueries()
     assertEquals(3, queries.size)

@@ -6,10 +6,8 @@ package com.algolia.client.exception
  * @param message the detail message
  * @param cause the cause of the exception
  */
-public sealed class AlgoliaRuntimeException(
-  message: String? = null,
-  cause: Throwable? = null,
-) : RuntimeException(message, cause)
+public sealed class AlgoliaRuntimeException(message: String? = null, cause: Throwable? = null) :
+  RuntimeException(message, cause)
 
 /**
  * Exception thrown when an error occurs during API requests.
@@ -17,10 +15,8 @@ public sealed class AlgoliaRuntimeException(
  * @param message the detail message
  * @param cause the cause of the exception
  */
-public class AlgoliaClientException(
-  message: String? = null,
-  cause: Throwable? = null,
-) : AlgoliaRuntimeException(message, cause)
+public class AlgoliaClientException(message: String? = null, cause: Throwable? = null) :
+  AlgoliaRuntimeException(message, cause)
 
 /**
  * Exception thrown in case of API failure.
@@ -41,9 +37,11 @@ public class AlgoliaApiException(
  *
  * @param exceptions list of thrown exceptions
  */
-public class AlgoliaRetryException(
-  public val exceptions: List<Throwable>,
-) : AlgoliaRuntimeException("Error(s) while processing the retry strategy. If the error persists, please visit our help center https://alg.li/support-unreachable-hosts or reach out to the Algolia Support team: https://alg.li/support", exceptions.last())
+public class AlgoliaRetryException(public val exceptions: List<Throwable>) :
+  AlgoliaRuntimeException(
+    "Error(s) while processing the retry strategy. If the error persists, please visit our help center https://alg.li/support-unreachable-hosts or reach out to the Algolia Support team: https://alg.li/support",
+    exceptions.last(),
+  )
 
 /**
  * Exception thrown when an error occurs during the wait strategy. For example: maximum number of
@@ -51,15 +49,11 @@ public class AlgoliaRetryException(
  *
  * @param message the detail message
  */
-public class AlgoliaWaitException(
-  message: String? = null,
-) : AlgoliaRuntimeException(message)
+public class AlgoliaWaitException(message: String? = null) : AlgoliaRuntimeException(message)
 
 /**
  * Exception thrown when an error occurs during an iterable helper execution.
  *
  * @param message the detail message
  */
-public class AlgoliaIterableException(
-  message: String? = null,
-) : AlgoliaRuntimeException(message)
+public class AlgoliaIterableException(message: String? = null) : AlgoliaRuntimeException(message)

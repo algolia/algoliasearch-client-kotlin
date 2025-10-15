@@ -16,9 +16,7 @@ public sealed interface ApiClient {
   public val options: ClientOptions
   public val requester: Requester
 
-  /**
-   * Helper method to switch the API key used to authenticate requests.
-   */
+  /** Helper method to switch the API key used to authenticate requests. */
   public fun setClientApiKey(apiKey: String) {
     this.apiKey = apiKey
     this.requester.setClientApiKey(apiKey)

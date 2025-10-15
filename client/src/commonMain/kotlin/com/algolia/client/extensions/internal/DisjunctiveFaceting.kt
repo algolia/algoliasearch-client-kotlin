@@ -6,9 +6,8 @@ import com.algolia.client.model.search.SearchForHits
 import com.algolia.client.model.search.SearchResponse
 
 /**
- * Helper making multiple queries for disjunctive faceting
- * and merging the multiple search responses into a single one with
- * combined facets information
+ * Helper making multiple queries for disjunctive faceting and merging the multiple search responses
+ * into a single one with combined facets information
  */
 internal data class DisjunctiveFaceting(
   val query: SearchForHits,
@@ -17,13 +16,16 @@ internal data class DisjunctiveFaceting(
 ) {
   // Build filters SQL string from the provided refinements and disjunctive facets set
   internal fun buildFilters(excludedAttribute: String?): String {
-    val filters = refinements.entries.sortedBy { it.key }.filter {
-      it.key != excludedAttribute && it.value.isNotEmpty()
-    }.map {
-      val facetOperator = if (disjunctiveFacets.contains(it.key)) " OR " else " AND "
-      val expression = it.value.joinToString(facetOperator) { value -> """"${it.key}":"$value"""" }
-      return@map "($expression)"
-    }
+    val filters =
+      refinements.entries
+        .sortedBy { it.key }
+        .filter { it.key != excludedAttribute && it.value.isNotEmpty() }
+        .map {
+          val facetOperator = if (disjunctiveFacets.contains(it.key)) " OR " else " AND "
+          val expression =
+            it.value.joinToString(facetOperator) { value -> """"${it.key}":"$value"""" }
+          return@map "($expression)"
+        }
     return filters.joinToString(" AND ")
   }
 
@@ -34,30 +36,29 @@ internal data class DisjunctiveFaceting(
   fun buildQueries(): List<SearchForHits> {
     val queries = mutableListOf<SearchForHits>()
 
-    val mainQueryFilters = listOf(
-      query.filters,
-      buildFilters(null),
-    ).mapNotNull { it }
-      .filter { it.isNotEmpty() }
-      .joinToString(" AND ")
+    val mainQueryFilters =
+      listOf(query.filters, buildFilters(null))
+        .mapNotNull { it }
+        .filter { it.isNotEmpty() }
+        .joinToString(" AND ")
 
     queries.add(query.copy(filters = mainQueryFilters))
 
     disjunctiveFacets.sortedWith(compareBy { it }).forEach { facet ->
-      val disjunctiveQuery = query.copy(
-        facets = listOf(facet),
-        filters = listOf(
-          query.filters,
-          buildFilters(facet),
-        ).mapNotNull { it }
-          .filter { it.isNotEmpty() }
-          .joinToString(" AND "),
-        hitsPerPage = 0,
-        attributesToRetrieve = emptyList(),
-        attributesToHighlight = emptyList(),
-        attributesToSnippet = emptyList(),
-        analytics = false,
-      )
+      val disjunctiveQuery =
+        query.copy(
+          facets = listOf(facet),
+          filters =
+            listOf(query.filters, buildFilters(facet))
+              .mapNotNull { it }
+              .filter { it.isNotEmpty() }
+              .joinToString(" AND "),
+          hitsPerPage = 0,
+          attributesToRetrieve = emptyList(),
+          attributesToHighlight = emptyList(),
+          attributesToSnippet = emptyList(),
+          analytics = false,
+        )
 
       queries.add(disjunctiveQuery)
     }
@@ -75,9 +76,7 @@ internal data class DisjunctiveFaceting(
   }
 
   // Merge received search responses into single one with combined facets information
-  fun mergeResponses(
-    responses: List<SearchResponse>,
-  ): SearchDisjunctiveFacetingResponse {
+  fun mergeResponses(responses: List<SearchResponse>): SearchDisjunctiveFacetingResponse {
     val mainResponse = responses.first()
     val responsesForDisjunctiveFaceting = responses.drop(1)
 
@@ -90,7 +89,8 @@ internal data class DisjunctiveFaceting(
       for ((attribute, facets) in result.facets ?: emptyMap()) {
         // Complete facet values applied in the filters
         // but missed in the search response
-        val missingFacets = appliedDisjunctiveFacetValues(attribute).subtract(facets.keys).associateWith { 0 }
+        val missingFacets =
+          appliedDisjunctiveFacetValues(attribute).subtract(facets.keys).associateWith { 0 }
         mergedDisjunctiveFacets[attribute] = facets + missingFacets
       }
 
@@ -98,7 +98,8 @@ internal data class DisjunctiveFaceting(
       mergedFacetStats.putAll(result.facetsStats ?: emptyMap())
 
       // If facet counts are not exhaustive, propagate this information to the main results.
-      // Because disjunctive queries are less restrictive than the main query, it can happen that the main query
+      // Because disjunctive queries are less restrictive than the main query, it can happen that
+      // the main query
       // returns exhaustive facet counts, while the disjunctive queries do not.
       if (result.exhaustive?.facetsCount != null) {
         mergedExhaustiveFacetsCount = mergedExhaustiveFacetsCount && (result.exhaustive.facetsCount)
@@ -106,12 +107,13 @@ internal data class DisjunctiveFaceting(
     }
 
     return SearchDisjunctiveFacetingResponse(
-      response = mainResponse.copy(
-        facetsStats = mergedFacetStats,
-        exhaustive = mainResponse.exhaustive?.copy(
-          facetsCount = mergedExhaustiveFacetsCount,
-        ) ?: Exhaustive(facetsCount = mergedExhaustiveFacetsCount),
-      ),
+      response =
+        mainResponse.copy(
+          facetsStats = mergedFacetStats,
+          exhaustive =
+            mainResponse.exhaustive?.copy(facetsCount = mergedExhaustiveFacetsCount)
+              ?: Exhaustive(facetsCount = mergedExhaustiveFacetsCount),
+        ),
       disjunctiveFacets = mergedDisjunctiveFacets,
     )
   }

@@ -14,14 +14,7 @@ subprojects {
   configure<SpotlessExtension> {
     kotlin {
       target("**/*.kt")
-      ktlint()
-        .editorConfigOverride(
-          mapOf(
-            "ktlint_standard_no-wildcard-imports" to "disabled",
-            "ktlint_standard_trailing-comma-on-declaration-site" to "disabled",
-            "ktlint_standard_function-naming" to "disabled",
-          ),
-        )
+      ktfmt().googleStyle()
     }
   }
 }

@@ -8,9 +8,7 @@ import kotlinx.serialization.json.JsonBuilder
  *
  * @param jsonConfig custom json configuration
  */
-internal fun buildJson(
-  jsonConfig: ((JsonBuilder) -> Unit)? = null,
-) = Json {
+internal fun buildJson(jsonConfig: ((JsonBuilder) -> Unit)? = null) = Json {
   jsonConfig?.invoke(this)
   isLenient = true
   ignoreUnknownKeys = true

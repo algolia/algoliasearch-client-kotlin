@@ -5,11 +5,12 @@ import com.algolia.client.transport.Requester
 import io.ktor.client.*
 import io.ktor.client.engine.*
 import io.ktor.client.plugins.logging.*
+import kotlin.time.Duration
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonBuilder
-import kotlin.time.Duration
 
-public actual class ClientOptions actual constructor(
+public actual class ClientOptions
+actual constructor(
   public actual val connectTimeout: Duration?,
   public actual val writeTimeout: Duration?,
   public actual val readTimeout: Duration?,
@@ -21,7 +22,7 @@ public actual class ClientOptions actual constructor(
   public actual val httpClientConfig: ((HttpClientConfig<*>) -> Unit)?,
   jsonConfig: ((JsonBuilder) -> Unit)?,
   public actual val requester: Requester?,
-  public actual val algoliaAgentSegments: List<AgentSegment>
+  public actual val algoliaAgentSegments: List<AgentSegment>,
 ) {
 
   public actual val json: Json = buildJson(jsonConfig)

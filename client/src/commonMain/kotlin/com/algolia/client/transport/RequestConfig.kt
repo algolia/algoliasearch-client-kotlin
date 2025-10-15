@@ -30,10 +30,7 @@ public data class RequestConfig(
 }
 
 /** Represents a request body with it type. */
-public data class RequestBody(
-  val body: Any? = null,
-  val bodyType: TypeInfo,
-)
+public data class RequestBody(val body: Any? = null, val bodyType: TypeInfo)
 
 /** Create a [RequestConfig] instance. */
 public inline fun <reified T> RequestConfig(
@@ -43,14 +40,15 @@ public inline fun <reified T> RequestConfig(
   headers: Map<String, String> = emptyMap(),
   query: Map<String, Any> = emptyMap(),
   body: T?,
-): RequestConfig = RequestConfig(
-  method = method,
-  path = path,
-  isRead = isRead,
-  headers = headers,
-  query = query,
-  body = body?.let { RequestBody(it, bodyType = typeInfo<T>()) },
-)
+): RequestConfig =
+  RequestConfig(
+    method = method,
+    path = path,
+    isRead = isRead,
+    headers = headers,
+    query = query,
+    body = body?.let { RequestBody(it, bodyType = typeInfo<T>()) },
+  )
 
 /** Create a [RequestConfig] instance. */
 public inline fun <reified T> RequestConfig(
@@ -60,11 +58,12 @@ public inline fun <reified T> RequestConfig(
   headers: Map<String, String> = emptyMap(),
   query: Map<String, Any> = emptyMap(),
   body: T?,
-): RequestConfig = RequestConfig(
-  method = method,
-  path = path,
-  isRead = isRead,
-  headers = headers,
-  query = query,
-  body = body?.let { RequestBody(it, bodyType = typeInfo<T>()) },
-)
+): RequestConfig =
+  RequestConfig(
+    method = method,
+    path = path,
+    isRead = isRead,
+    headers = headers,
+    query = query,
+    body = body?.let { RequestBody(it, bodyType = typeInfo<T>()) },
+  )

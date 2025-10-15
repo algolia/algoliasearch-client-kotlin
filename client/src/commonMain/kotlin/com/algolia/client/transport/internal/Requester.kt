@@ -14,8 +14,8 @@ import io.ktor.util.reflect.*
 import kotlin.time.Duration
 
 /**
- * Executes a network request with the specified configuration and options, then returns the
- * result as the specified type.
+ * Executes a network request with the specified configuration and options, then returns the result
+ * as the specified type.
  *
  * This is a suspending function, which means it can be used with coroutines for asynchronous
  * execution.
@@ -32,9 +32,7 @@ internal suspend inline fun <reified T> Requester.execute(
   requestOptions: RequestOptions? = null,
 ): T = execute(requestConfig, requestOptions, typeInfo<T>())
 
-/**
- * Creates a [Requester] instance.
- */
+/** Creates a [Requester] instance. */
 internal fun requesterOf(
   clientName: String,
   appId: String,
@@ -44,18 +42,22 @@ internal fun requesterOf(
   writeTimeout: Duration,
   options: ClientOptions,
   defaultHosts: () -> List<Host>,
-) = options.requester ?: KtorRequester(
-  httpClient = algoliaHttpClient(
-    appId = appId,
-    apiKey = apiKey,
-    options = options,
-    agent = AlgoliaAgent(BuildConfig.VERSION).apply {
-      add(platformAgentSegment())
-      add(AgentSegment(clientName, BuildConfig.VERSION))
-    },
-  ),
-  connectTimeout = options.connectTimeout ?: connectTimeout,
-  readTimeout = options.readTimeout ?: readTimeout,
-  writeTimeout = options.writeTimeout ?: writeTimeout,
-  hosts = options.hosts ?: defaultHosts(),
-)
+) =
+  options.requester
+    ?: KtorRequester(
+      httpClient =
+        algoliaHttpClient(
+          appId = appId,
+          apiKey = apiKey,
+          options = options,
+          agent =
+            AlgoliaAgent(BuildConfig.VERSION).apply {
+              add(platformAgentSegment())
+              add(AgentSegment(clientName, BuildConfig.VERSION))
+            },
+        ),
+      connectTimeout = options.connectTimeout ?: connectTimeout,
+      readTimeout = options.readTimeout ?: readTimeout,
+      writeTimeout = options.writeTimeout ?: writeTimeout,
+      hosts = options.hosts ?: defaultHosts(),
+    )

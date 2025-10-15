@@ -10,15 +10,16 @@ import com.algolia.client.configuration.Host
  *
  * @property host The [Host] object that this RetryableHost is wrapping.
  */
-internal data class RetryableHost(
-  private val host: Host,
-) {
+internal data class RetryableHost(private val host: Host) {
   val url
     get() = host.url
+
   val protocol
     get() = host.protocol
+
   val port
     get() = host.port
+
   val callType
     get() = host.callType
 

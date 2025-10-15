@@ -5,7 +5,8 @@ import com.algolia.client.configuration.ClientOptions
 import com.algolia.client.configuration.CompressionType
 import io.ktor.client.*
 
-internal actual fun platformAgentSegment(): AgentSegment = AgentSegment("JVM", System.getProperty("java.version"))
+internal actual fun platformAgentSegment(): AgentSegment =
+  AgentSegment("JVM", System.getProperty("java.version"))
 
 internal actual fun HttpClientConfig<*>.platformConfig(options: ClientOptions) {
   if (options.compressionType == CompressionType.GZIP) {

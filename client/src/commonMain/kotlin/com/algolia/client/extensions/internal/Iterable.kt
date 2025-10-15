@@ -1,12 +1,12 @@
 package com.algolia.client.extensions.internal
 
 import com.algolia.client.exception.AlgoliaIterableException
-import kotlinx.coroutines.delay
 import kotlin.time.Duration
+import kotlinx.coroutines.delay
 
 public data class IterableError<T>(
   public val validate: (T) -> Boolean,
-  public val message: ((T) -> String)? = null
+  public val message: ((T) -> String)? = null,
 )
 
 public suspend fun <T> createIterable(
@@ -14,7 +14,7 @@ public suspend fun <T> createIterable(
   validate: (T) -> Boolean,
   aggregator: ((T) -> Unit)? = null,
   timeout: () -> Duration = { Duration.ZERO },
-  error: IterableError<T>? = null
+  error: IterableError<T>? = null,
 ): T {
   suspend fun executor(previousResponse: T? = null): T {
     val response = execute(previousResponse)
