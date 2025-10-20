@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SourceCommercetools
+ * Specific configuration attributes of a `commercetools` source.
  *
  * @param url
  * @param projectKey

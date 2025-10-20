@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SourceBigQuery
+ * Specific configuration attributes of a `bigquery` source.
  *
  * @param projectID Project ID of the BigQuery source.
  * @param datasetID Dataset ID of the BigQuery source.

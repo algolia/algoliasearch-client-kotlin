@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SourceBigCommerce
+ * Specific configuration attributes of a `bigcommerce` source.
  *
  * @param storeHash Store hash identifying your BigCommerce store.
  * @param channel

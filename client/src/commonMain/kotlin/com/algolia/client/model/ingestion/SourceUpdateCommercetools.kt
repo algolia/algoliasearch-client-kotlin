@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SourceUpdateCommercetools
+ * Specific configuration attributes of a `commercetools` source.
  *
  * @param storeKeys
  * @param locales Locales for your commercetools stores.

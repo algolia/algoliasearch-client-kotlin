@@ -12,7 +12,6 @@ import kotlinx.serialization.json.*
  *
  * @param type
  * @param name Descriptive name for the resource.
- * @param platform
  * @param input
  */
 @Serializable
@@ -21,6 +20,5 @@ public data class AuthenticationUpdate(
 
   /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String? = null,
-  @SerialName(value = "platform") val platform: Platform? = null,
   @SerialName(value = "input") val input: AuthInputPartial? = null,
 ) {}

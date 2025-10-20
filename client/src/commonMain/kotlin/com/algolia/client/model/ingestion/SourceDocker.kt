@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SourceDocker
+ * Specific configuration attributes of a `docker` source.
  *
  * @param image Name of the connector.
  * @param configuration Configuration of the spec.

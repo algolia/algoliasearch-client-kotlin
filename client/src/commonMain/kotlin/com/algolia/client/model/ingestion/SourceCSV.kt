@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SourceCSV
+ * Specific configuration attributes of a `csv` source.
  *
  * @param url URL of the file.
  * @param uniqueIDColumn Name of a column that contains a unique ID which will be used as `objectID`

@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * SourceGA4BigQueryExport
+ * Specific configuration attributes of a `ga4BigqueryExport` source.
  *
  * @param projectID GCP project ID that the BigQuery export writes to.
  * @param datasetID BigQuery dataset ID that the BigQuery export writes to.
