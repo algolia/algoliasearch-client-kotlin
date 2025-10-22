@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
  */
 @Serializable
 public data class FacetOrdering(
-  @SerialName(value = "facets") val facets: Facets? = null,
+  @SerialName(value = "facets") val facets: IndexSettingsFacets? = null,
 
   /** Order of facet values. One object for each facet. */
   @SerialName(value = "values") val values: Map<kotlin.String, Value>? = null,
