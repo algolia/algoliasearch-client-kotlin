@@ -163,6 +163,9 @@ public class SearchClient(
    * This operation is subject to
    * [indexing rate limits](https://support.algolia.com/hc/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
    *
+   * Required API Key ACLs:
+   * - addObject
+   *
    * @param indexName Name of the index on which to perform the operation.
    * @param batchWriteParams
    * @param requestOptions additional request configuration.
@@ -645,6 +648,9 @@ public class SearchClient(
    * other API keys, you can only retrieve information for that key, with the description replaced
    * by `<redacted>`.
    *
+   * Required API Key ACLs:
+   * - search
+   *
    * @param key API key.
    * @param requestOptions additional request configuration.
    */
@@ -1091,6 +1097,9 @@ public class SearchClient(
    * applied in the order they are specified. - Actions are equivalent to the individual API
    * requests of the same name. This operation is subject to
    * [indexing rate limits](https://support.algolia.com/hc/articles/4406975251089-Is-there-a-rate-limit-for-indexing-on-Algolia).
+   *
+   * Required API Key ACLs:
+   * - addObject
    *
    * @param batchParams
    * @param requestOptions additional request configuration.
