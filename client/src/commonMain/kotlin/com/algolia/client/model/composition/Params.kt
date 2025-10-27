@@ -33,11 +33,14 @@ import kotlinx.serialization.json.*
  *   in the results You can only set `relevancyStrictness` on
  *   [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
  *   Use this setting to strike a balance between the relevance and number of returned results.
- * @param facets Facets for which to retrieve facet values that match the search criteria and the
- *   number of matching facet values To retrieve all facets, use the wildcard character `*`. For
- *   more information, see
- *   [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts).
  * @param facetFilters
+ * @param facets Facets for which to retrieve facet values that match the search criteria and the
+ *   number of matching facet values To retrieve all facets, use the wildcard character `*`. To
+ *   retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For
+ *   more information, see
+ *   [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
+ *   and
+ *   [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
  * @param optionalFilters
  * @param numericFilters
  * @param hitsPerPage Number of hits per page.
@@ -132,15 +135,18 @@ public data class Params(
    * Use this setting to strike a balance between the relevance and number of returned results.
    */
   @SerialName(value = "relevancyStrictness") val relevancyStrictness: Int? = null,
+  @SerialName(value = "facetFilters") val facetFilters: FacetFilters? = null,
 
   /**
    * Facets for which to retrieve facet values that match the search criteria and the number of
-   * matching facet values To retrieve all facets, use the wildcard character `*`. For more
+   * matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve
+   * disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more
    * information, see
-   * [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts).
+   * [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
+   * and
+   * [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
    */
   @SerialName(value = "facets") val facets: List<String>? = null,
-  @SerialName(value = "facetFilters") val facetFilters: FacetFilters? = null,
   @SerialName(value = "optionalFilters") val optionalFilters: OptionalFilters? = null,
   @SerialName(value = "numericFilters") val numericFilters: NumericFilters? = null,
 

@@ -184,9 +184,12 @@ import kotlinx.serialization.json.*
  *   setting, as `facetingAfterDistinct` only computes correct facet counts if all records have the
  *   same facet values for the `attributeForDistinct`.
  * @param facets Facets for which to retrieve facet values that match the search criteria and the
- *   number of matching facet values To retrieve all facets, use the wildcard character `*`. For
+ *   number of matching facet values To retrieve all facets, use the wildcard character `*`. To
+ *   retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For
  *   more information, see
- *   [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts).
+ *   [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
+ *   and
+ *   [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
  * @param hitsPerPage Number of hits per page.
  * @param maxValuesPerFacet Maximum number of facet values to return for each facet.
  * @param renderingContent
@@ -502,9 +505,12 @@ public data class MainInjectionQueryParameters(
 
   /**
    * Facets for which to retrieve facet values that match the search criteria and the number of
-   * matching facet values To retrieve all facets, use the wildcard character `*`. For more
+   * matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve
+   * disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more
    * information, see
-   * [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts).
+   * [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
+   * and
+   * [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
    */
   @SerialName(value = "facets") val facets: List<String>? = null,
 
