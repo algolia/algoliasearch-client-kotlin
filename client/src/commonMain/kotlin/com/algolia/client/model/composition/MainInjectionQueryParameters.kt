@@ -189,6 +189,7 @@ import kotlinx.serialization.json.*
  *   [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts).
  * @param hitsPerPage Number of hits per page.
  * @param maxValuesPerFacet Maximum number of facet values to return for each facet.
+ * @param renderingContent
  * @param sortFacetValuesBy Order in which to retrieve facet values - `count`. Facet values are
  *   retrieved by decreasing count. The count is the number of matching records containing this
  *   facet value - `alpha`. Retrieve facet values alphabetically This setting doesn't influence how
@@ -512,6 +513,7 @@ public data class MainInjectionQueryParameters(
 
   /** Maximum number of facet values to return for each facet. */
   @SerialName(value = "maxValuesPerFacet") val maxValuesPerFacet: Int? = null,
+  @SerialName(value = "renderingContent") val renderingContent: RenderingContent? = null,
 
   /**
    * Order in which to retrieve facet values - `count`. Facet values are retrieved by decreasing
