@@ -1,3 +1,10 @@
+## [3.33.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.32.0...3.33.0)
+
+- [d9b21b4b1](https://github.com/algolia/api-clients-automation/commit/d9b21b4b1) feat(specs): add `renderingContent` query parameter in Composition API main injection ([#5549](https://github.com/algolia/api-clients-automation/pull/5549)) by [@ClaraMuller](https://github.com/ClaraMuller/)
+- [1eee2a5f7](https://github.com/algolia/api-clients-automation/commit/1eee2a5f7) fix(specs): add ACL to missing endpoints ([#5529](https://github.com/algolia/api-clients-automation/pull/5529)) by [@millotp](https://github.com/millotp/)
+- [564d615ca](https://github.com/algolia/api-clients-automation/commit/564d615ca) chore(deps): dependencies 2025-10-27 ([#5530](https://github.com/algolia/api-clients-automation/pull/5530)) by [@algolia-bot](https://github.com/algolia-bot/)
+- [38ae444d7](https://github.com/algolia/api-clients-automation/commit/38ae444d7) feat(specs): add specific documentation for `facets` query parameter in Composition API ([#5477](https://github.com/algolia/api-clients-automation/pull/5477)) by [@ClaraMuller](https://github.com/ClaraMuller/)
+
 ## [3.32.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.31.2...3.32.0)
 
 - [bb110a3fd](https://github.com/algolia/api-clients-automation/commit/bb110a3fd) fix(clients): switch kotlin formatter to ktfmt ([#5483](https://github.com/algolia/api-clients-automation/pull/5483)) by [@millotp](https://github.com/millotp/)
