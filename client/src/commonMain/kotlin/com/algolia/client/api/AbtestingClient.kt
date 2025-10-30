@@ -249,28 +249,6 @@ public class AbtestingClient(
   }
 
   /**
-   * Schedule an A/B test to be started at a later time.
-   *
-   * Required API Key ACLs:
-   * - editSettings
-   *
-   * @param scheduleABTestsRequest
-   * @param requestOptions additional request configuration.
-   */
-  public suspend fun scheduleABTest(
-    scheduleABTestsRequest: ScheduleABTestsRequest,
-    requestOptions: RequestOptions? = null,
-  ): ScheduleABTestResponse {
-    val requestConfig =
-      RequestConfig(
-        method = RequestMethod.POST,
-        path = listOf("2", "abtests", "schedule"),
-        body = scheduleABTestsRequest,
-      )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
-  }
-
-  /**
    * Stops an A/B test by its ID. You can't restart stopped A/B tests.
    *
    * Required API Key ACLs:
