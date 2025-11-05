@@ -19,6 +19,7 @@ import kotlinx.serialization.json.*
  *   recommendations and the other request parameters, the actual number of recommendations may be
  *   lower than this value.
  * @param queryParameters
+ * @param fallbackParameters
  */
 @Serializable
 public data class BoughtTogetherQuery(
@@ -40,4 +41,5 @@ public data class BoughtTogetherQuery(
    */
   @SerialName(value = "maxRecommendations") val maxRecommendations: Int? = null,
   @SerialName(value = "queryParameters") val queryParameters: RecommendSearchParams? = null,
+  @SerialName(value = "fallbackParameters") val fallbackParameters: FallbackParams? = null,
 ) : RecommendationsRequest {}
