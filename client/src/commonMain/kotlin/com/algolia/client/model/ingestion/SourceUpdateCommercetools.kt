@@ -17,6 +17,8 @@ import kotlinx.serialization.json.*
  *   no inventory information about the product.
  * @param productQueryPredicate Predicate to filter out specific products when indexing. For more
  *   information, see [Query Predicate](https://docs.commercetools.com/api/predicates/query).
+ * @param useImagesObjects When set to true, the connector indexes objects with all images
+ *   attributes instead of only the URLs.
  * @param customFields
  */
 @Serializable
@@ -38,5 +40,11 @@ public data class SourceUpdateCommercetools(
    * [Query Predicate](https://docs.commercetools.com/api/predicates/query).
    */
   @SerialName(value = "productQueryPredicate") val productQueryPredicate: String? = null,
+
+  /**
+   * When set to true, the connector indexes objects with all images attributes instead of only the
+   * URLs.
+   */
+  @SerialName(value = "useImagesObjects") val useImagesObjects: Boolean? = null,
   @SerialName(value = "customFields") val customFields: CommercetoolsCustomFields? = null,
 ) : SourceUpdateInput {}
