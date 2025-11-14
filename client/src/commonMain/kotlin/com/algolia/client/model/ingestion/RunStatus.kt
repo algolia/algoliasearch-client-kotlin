@@ -12,7 +12,6 @@ public enum class RunStatus(public val value: kotlin.String) {
 
   @SerialName(value = "created") Created("created"),
   @SerialName(value = "started") Started("started"),
-  @SerialName(value = "idled") Idled("idled"),
   @SerialName(value = "finished") Finished("finished"),
   @SerialName(value = "skipped") Skipped("skipped");
 

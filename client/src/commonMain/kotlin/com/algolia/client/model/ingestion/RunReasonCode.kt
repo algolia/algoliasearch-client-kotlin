@@ -14,12 +14,14 @@ import kotlinx.serialization.*
 public enum class RunReasonCode(public val value: kotlin.String) {
 
   @SerialName(value = "internal") Internal("internal"),
+  @SerialName(value = "cancelled") Cancelled("cancelled"),
   @SerialName(value = "critical") Critical("critical"),
   @SerialName(value = "no_events") NoEvents("no_events"),
   @SerialName(value = "too_many_errors") TooManyErrors("too_many_errors"),
+  @SerialName(value = "lacking_events") LackingEvents("lacking_events"),
   @SerialName(value = "ok") Ok("ok"),
-  @SerialName(value = "discarded") Discarded("discarded"),
-  @SerialName(value = "blocking") Blocking("blocking");
+  @SerialName(value = "blocking") Blocking("blocking"),
+  @SerialName(value = "idle") Idle("idle");
 
   override fun toString(): kotlin.String = value
 }
