@@ -10,7 +10,35 @@ import kotlinx.serialization.json.*
 /**
  * Params
  *
- * @param query Search query.
+ * @param analytics Whether this search will be included in Analytics.
+ * @param analyticsTags Tags to apply to the query for
+ *   [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
+ * @param aroundLatLng Coordinates for the center of a circle, expressed as a comma-separated string
+ *   of latitude and longitude. Only records included within a circle around this central location
+ *   are included in the results. The radius of the circle is determined by the `aroundRadius` and
+ *   `minimumAroundRadius` settings. This parameter is ignored if you also specify `insidePolygon`
+ *   or `insideBoundingBox`.
+ * @param aroundLatLngViaIP Whether to obtain the coordinates from the request's IP address.
+ * @param aroundRadius
+ * @param aroundPrecision
+ * @param clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a
+ *   unique identifier for a search query and is required for tracking
+ *   [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
+ * @param enableABTest Whether to enable index level A/B testing for this run request. If the
+ *   composition mixes multiple indices, the A/B test is ignored.
+ * @param enablePersonalization Whether to enable Personalization.
+ * @param enableReRanking Whether this search will use
+ *   [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting
+ *   only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
+ * @param enableRules Whether to enable composition rules.
+ * @param facetFilters
+ * @param facets Facets for which to retrieve facet values that match the search criteria and the
+ *   number of matching facet values To retrieve all facets, use the wildcard character `*`. To
+ *   retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For
+ *   more information, see
+ *   [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
+ *   and
+ *   [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
  * @param filters Filter expression to only include items that match the filter criteria in the
  *   response. You can use these filter expressions: - **Numeric filters.** `<facet> <op> <number>`,
  *   where `<op>` is one of `<`, `<=`, `=`, `!=`, `>`, `>=`. - **Ranges.** `<facet>:<lower> TO
@@ -27,39 +55,29 @@ import kotlinx.serialization.json.*
  *   attribute is an array, the filter matches if it matches at least one element of the array. For
  *   more information, see
  *   [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering).
- * @param page Page of search results to retrieve.
  * @param getRankingInfo Whether the run response should include detailed ranking information.
- * @param relevancyStrictness Relevancy threshold below which less relevant results aren't included
- *   in the results You can only set `relevancyStrictness` on
- *   [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
- *   Use this setting to strike a balance between the relevance and number of returned results.
- * @param facetFilters
- * @param facets Facets for which to retrieve facet values that match the search criteria and the
- *   number of matching facet values To retrieve all facets, use the wildcard character `*`. To
- *   retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For
- *   more information, see
- *   [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
- *   and
- *   [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
- * @param optionalFilters
- * @param numericFilters
  * @param hitsPerPage Number of hits per page.
- * @param aroundLatLng Coordinates for the center of a circle, expressed as a comma-separated string
- *   of latitude and longitude. Only records included within a circle around this central location
- *   are included in the results. The radius of the circle is determined by the `aroundRadius` and
- *   `minimumAroundRadius` settings. This parameter is ignored if you also specify `insidePolygon`
- *   or `insideBoundingBox`.
- * @param aroundLatLngViaIP Whether to obtain the coordinates from the request's IP address.
- * @param aroundRadius
- * @param aroundPrecision
- * @param minimumAroundRadius Minimum radius (in meters) for a search around a location when
- *   `aroundRadius` isn't set.
+ * @param injectedItems A list of extenrally injected objectID groups into from an external source.
  * @param insideBoundingBox
  * @param insidePolygon Coordinates of a polygon in which to search. Polygons are defined by 3 to
  *   10,000 points. Each point is represented by its latitude and longitude. Provide multiple
  *   polygons as nested arrays. For more information, see
  *   [filtering inside polygons](https://www.algolia.com/doc/guides/managing-results/refine-results/geolocation/#filtering-inside-rectangular-or-polygonal-areas).
  *   This parameter is ignored if you also specify `insideBoundingBox`.
+ * @param minimumAroundRadius Minimum radius (in meters) for a search around a location when
+ *   `aroundRadius` isn't set.
+ * @param naturalLanguages ISO language codes that adjust settings that are useful for processing
+ *   natural language queries (as opposed to keyword searches) - Sets `removeStopWords` and
+ *   `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to
+ *   `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
+ * @param numericFilters
+ * @param optionalFilters
+ * @param page Page of search results to retrieve.
+ * @param query Search query.
+ * @param relevancyStrictness Relevancy threshold below which less relevant results aren't included
+ *   in the results You can only set `relevancyStrictness` on
+ *   [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
+ *   Use this setting to strike a balance between the relevance and number of returned results.
  * @param queryLanguages Languages for language-specific query processing steps such as plurals,
  *   stop-word removal, and word-detection dictionaries This setting sets a default list of
  *   languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a
@@ -72,35 +90,76 @@ import kotlinx.serialization.json.*
  *   or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This
  *   can lead to unexpected search results. For more information, see
  *   [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations).
- * @param naturalLanguages ISO language codes that adjust settings that are useful for processing
- *   natural language queries (as opposed to keyword searches) - Sets `removeStopWords` and
- *   `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to
- *   `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
- * @param enableRules Whether to enable composition rules.
  * @param ruleContexts Assigns a rule context to the run query
  *   [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context)
  *   are strings that you can use to trigger matching rules.
  * @param userToken Unique pseudonymous or anonymous user identifier. This helps with analytics and
  *   click and conversion events. For more information, see
  *   [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
- * @param clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a
- *   unique identifier for a search query and is required for tracking
- *   [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
- * @param analytics Whether this search will be included in Analytics.
- * @param analyticsTags Tags to apply to the query for
- *   [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
- * @param enableABTest Whether to enable index level A/B testing for this run request. If the
- *   composition mixes multiple indices, the A/B test is ignored.
- * @param enableReRanking Whether this search will use
- *   [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting
- *   only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
- * @param injectedItems A list of extenrally injected objectID groups into from an external source.
  */
 @Serializable
 public data class Params(
 
-  /** Search query. */
-  @SerialName(value = "query") val query: String? = null,
+  /** Whether this search will be included in Analytics. */
+  @SerialName(value = "analytics") val analytics: Boolean? = null,
+
+  /**
+   * Tags to apply to the query for
+   * [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
+   */
+  @SerialName(value = "analyticsTags") val analyticsTags: List<String>? = null,
+
+  /**
+   * Coordinates for the center of a circle, expressed as a comma-separated string of latitude and
+   * longitude. Only records included within a circle around this central location are included in
+   * the results. The radius of the circle is determined by the `aroundRadius` and
+   * `minimumAroundRadius` settings. This parameter is ignored if you also specify `insidePolygon`
+   * or `insideBoundingBox`.
+   */
+  @SerialName(value = "aroundLatLng") val aroundLatLng: String? = null,
+
+  /** Whether to obtain the coordinates from the request's IP address. */
+  @SerialName(value = "aroundLatLngViaIP") val aroundLatLngViaIP: Boolean? = null,
+  @SerialName(value = "aroundRadius") val aroundRadius: AroundRadius? = null,
+  @SerialName(value = "aroundPrecision") val aroundPrecision: AroundPrecision? = null,
+
+  /**
+   * Whether to include a `queryID` attribute in the response The query ID is a unique identifier
+   * for a search query and is required for tracking
+   * [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
+   */
+  @SerialName(value = "clickAnalytics") val clickAnalytics: Boolean? = null,
+
+  /**
+   * Whether to enable index level A/B testing for this run request. If the composition mixes
+   * multiple indices, the A/B test is ignored.
+   */
+  @SerialName(value = "enableABTest") val enableABTest: Boolean? = null,
+
+  /** Whether to enable Personalization. */
+  @SerialName(value = "enablePersonalization") val enablePersonalization: Boolean? = null,
+
+  /**
+   * Whether this search will use
+   * [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting
+   * only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
+   */
+  @SerialName(value = "enableReRanking") val enableReRanking: Boolean? = null,
+
+  /** Whether to enable composition rules. */
+  @SerialName(value = "enableRules") val enableRules: Boolean? = null,
+  @SerialName(value = "facetFilters") val facetFilters: FacetFilters? = null,
+
+  /**
+   * Facets for which to retrieve facet values that match the search criteria and the number of
+   * matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve
+   * disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more
+   * information, see
+   * [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
+   * and
+   * [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
+   */
+  @SerialName(value = "facets") val facets: List<String>? = null,
 
   /**
    * Filter expression to only include items that match the filter criteria in the response. You can
@@ -122,53 +181,15 @@ public data class Params(
    */
   @SerialName(value = "filters") val filters: String? = null,
 
-  /** Page of search results to retrieve. */
-  @SerialName(value = "page") val page: Int? = null,
-
   /** Whether the run response should include detailed ranking information. */
   @SerialName(value = "getRankingInfo") val getRankingInfo: Boolean? = null,
-
-  /**
-   * Relevancy threshold below which less relevant results aren't included in the results You can
-   * only set `relevancyStrictness` on
-   * [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
-   * Use this setting to strike a balance between the relevance and number of returned results.
-   */
-  @SerialName(value = "relevancyStrictness") val relevancyStrictness: Int? = null,
-  @SerialName(value = "facetFilters") val facetFilters: FacetFilters? = null,
-
-  /**
-   * Facets for which to retrieve facet values that match the search criteria and the number of
-   * matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve
-   * disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more
-   * information, see
-   * [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
-   * and
-   * [disjunctive faceting for Smart Groups](https://www.algolia.com/doc/guides/managing-results/compositions/search-based-groups#facets-including-disjunctive-faceting).
-   */
-  @SerialName(value = "facets") val facets: List<String>? = null,
-  @SerialName(value = "optionalFilters") val optionalFilters: OptionalFilters? = null,
-  @SerialName(value = "numericFilters") val numericFilters: NumericFilters? = null,
 
   /** Number of hits per page. */
   @SerialName(value = "hitsPerPage") val hitsPerPage: Int? = null,
 
-  /**
-   * Coordinates for the center of a circle, expressed as a comma-separated string of latitude and
-   * longitude. Only records included within a circle around this central location are included in
-   * the results. The radius of the circle is determined by the `aroundRadius` and
-   * `minimumAroundRadius` settings. This parameter is ignored if you also specify `insidePolygon`
-   * or `insideBoundingBox`.
-   */
-  @SerialName(value = "aroundLatLng") val aroundLatLng: String? = null,
-
-  /** Whether to obtain the coordinates from the request's IP address. */
-  @SerialName(value = "aroundLatLngViaIP") val aroundLatLngViaIP: Boolean? = null,
-  @SerialName(value = "aroundRadius") val aroundRadius: AroundRadius? = null,
-  @SerialName(value = "aroundPrecision") val aroundPrecision: AroundPrecision? = null,
-
-  /** Minimum radius (in meters) for a search around a location when `aroundRadius` isn't set. */
-  @SerialName(value = "minimumAroundRadius") val minimumAroundRadius: Int? = null,
+  /** A list of extenrally injected objectID groups into from an external source. */
+  @SerialName(value = "injectedItems")
+  val injectedItems: Map<kotlin.String, ExternalInjectedItem>? = null,
   @SerialName(value = "insideBoundingBox") val insideBoundingBox: InsideBoundingBox? = null,
 
   /**
@@ -179,6 +200,33 @@ public data class Params(
    * This parameter is ignored if you also specify `insideBoundingBox`.
    */
   @SerialName(value = "insidePolygon") val insidePolygon: List<List<Double>>? = null,
+
+  /** Minimum radius (in meters) for a search around a location when `aroundRadius` isn't set. */
+  @SerialName(value = "minimumAroundRadius") val minimumAroundRadius: Int? = null,
+
+  /**
+   * ISO language codes that adjust settings that are useful for processing natural language queries
+   * (as opposed to keyword searches) - Sets `removeStopWords` and `ignorePlurals` to the list of
+   * provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a
+   * `natural_language` attribute to `ruleContexts` and `analyticsTags`.
+   */
+  @SerialName(value = "naturalLanguages") val naturalLanguages: List<SupportedLanguage>? = null,
+  @SerialName(value = "numericFilters") val numericFilters: NumericFilters? = null,
+  @SerialName(value = "optionalFilters") val optionalFilters: OptionalFilters? = null,
+
+  /** Page of search results to retrieve. */
+  @SerialName(value = "page") val page: Int? = null,
+
+  /** Search query. */
+  @SerialName(value = "query") val query: String? = null,
+
+  /**
+   * Relevancy threshold below which less relevant results aren't included in the results You can
+   * only set `relevancyStrictness` on
+   * [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
+   * Use this setting to strike a balance between the relevance and number of returned results.
+   */
+  @SerialName(value = "relevancyStrictness") val relevancyStrictness: Int? = null,
 
   /**
    * Languages for language-specific query processing steps such as plurals, stop-word removal, and
@@ -197,17 +245,6 @@ public data class Params(
   @SerialName(value = "queryLanguages") val queryLanguages: List<SupportedLanguage>? = null,
 
   /**
-   * ISO language codes that adjust settings that are useful for processing natural language queries
-   * (as opposed to keyword searches) - Sets `removeStopWords` and `ignorePlurals` to the list of
-   * provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a
-   * `natural_language` attribute to `ruleContexts` and `analyticsTags`.
-   */
-  @SerialName(value = "naturalLanguages") val naturalLanguages: List<SupportedLanguage>? = null,
-
-  /** Whether to enable composition rules. */
-  @SerialName(value = "enableRules") val enableRules: Boolean? = null,
-
-  /**
    * Assigns a rule context to the run query
    * [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context)
    * are strings that you can use to trigger matching rules.
@@ -220,37 +257,4 @@ public data class Params(
    * [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
    */
   @SerialName(value = "userToken") val userToken: String? = null,
-
-  /**
-   * Whether to include a `queryID` attribute in the response The query ID is a unique identifier
-   * for a search query and is required for tracking
-   * [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
-   */
-  @SerialName(value = "clickAnalytics") val clickAnalytics: Boolean? = null,
-
-  /** Whether this search will be included in Analytics. */
-  @SerialName(value = "analytics") val analytics: Boolean? = null,
-
-  /**
-   * Tags to apply to the query for
-   * [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
-   */
-  @SerialName(value = "analyticsTags") val analyticsTags: List<String>? = null,
-
-  /**
-   * Whether to enable index level A/B testing for this run request. If the composition mixes
-   * multiple indices, the A/B test is ignored.
-   */
-  @SerialName(value = "enableABTest") val enableABTest: Boolean? = null,
-
-  /**
-   * Whether this search will use
-   * [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting
-   * only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
-   */
-  @SerialName(value = "enableReRanking") val enableReRanking: Boolean? = null,
-
-  /** A list of extenrally injected objectID groups into from an external source. */
-  @SerialName(value = "injectedItems")
-  val injectedItems: Map<kotlin.String, ExternalInjectedItem>? = null,
 ) {}
