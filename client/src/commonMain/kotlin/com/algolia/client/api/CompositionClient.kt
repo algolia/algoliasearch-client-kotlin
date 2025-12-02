@@ -507,4 +507,37 @@ public class CompositionClient(
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
+
+  /**
+   * Updates the \"sortingStrategy\" field of an existing composition. This endpoint allows you to
+   * create a new sorting strategy mapping or replace the currently configured one. The provided
+   * sorting indices MUST be associated indices or replicas of the main targeted index. WARNING:
+   * This endpoint cannot validate if the sort index is related to the composition's main index.
+   * Validation will fail at runtime if the index you updated is not related! The update is applied
+   * to the specified composition within the current Algolia application and returns a taskID that
+   * can be used to track the operation’s completion.
+   *
+   * Required API Key ACLs:
+   * - editSettings
+   *
+   * @param compositionID Unique Composition ObjectID.
+   * @param requestBody
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun updateSortingStrategyComposition(
+    compositionID: String,
+    requestBody: Map<kotlin.String, String>,
+    requestOptions: RequestOptions? = null,
+  ): TaskIDResponse {
+    require(compositionID.isNotBlank()) {
+      "Parameter `compositionID` is required when calling `updateSortingStrategyComposition`."
+    }
+    val requestConfig =
+      RequestConfig(
+        method = RequestMethod.POST,
+        path = listOf("1", "compositions", "$compositionID", "sortingStrategy"),
+        body = requestBody,
+      )
+    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+  }
 }

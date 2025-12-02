@@ -74,10 +74,6 @@ import kotlinx.serialization.json.*
  * @param optionalFilters
  * @param page Page of search results to retrieve.
  * @param query Search query.
- * @param relevancyStrictness Relevancy threshold below which less relevant results aren't included
- *   in the results You can only set `relevancyStrictness` on
- *   [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
- *   Use this setting to strike a balance between the relevance and number of returned results.
  * @param queryLanguages Languages for language-specific query processing steps such as plurals,
  *   stop-word removal, and word-detection dictionaries This setting sets a default list of
  *   languages used by the `removeStopWords` and `ignorePlurals` settings. This setting also sets a
@@ -90,9 +86,20 @@ import kotlinx.serialization.json.*
  *   or the languages you specified with the `ignorePlurals` or `removeStopWords` parameters. This
  *   can lead to unexpected search results. For more information, see
  *   [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations).
+ * @param relevancyStrictness Relevancy threshold below which less relevant results aren't included
+ *   in the results You can only set `relevancyStrictness` on
+ *   [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
+ *   Use this setting to strike a balance between the relevance and number of returned results.
  * @param ruleContexts Assigns a rule context to the run query
  *   [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context)
  *   are strings that you can use to trigger matching rules.
+ * @param sortBy Indicates which sorting strategy to apply for the request. The value must match one
+ *   of the labels defined in the \"sortingStrategy\" mapping. For example, \"Price (asc)\", see
+ *   Upsert Composition. At runtime, this label is used to look up the corresponding index or
+ *   replica configured in \"sortingStrategy\", and the query is executed using that index instead
+ *   of main's. In addition to \"sortingStrategy\", this parameter is also used to apply a matching
+ *   Composition Rule that contains a condition defined to trigger on \"sortBy\", see Composition
+ *   Rules. If no value is provided or an invalid value, no sorting strategy is applied.
  * @param userToken Unique pseudonymous or anonymous user identifier. This helps with analytics and
  *   click and conversion events. For more information, see
  *   [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
@@ -221,14 +228,6 @@ public data class Params(
   @SerialName(value = "query") val query: String? = null,
 
   /**
-   * Relevancy threshold below which less relevant results aren't included in the results You can
-   * only set `relevancyStrictness` on
-   * [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
-   * Use this setting to strike a balance between the relevance and number of returned results.
-   */
-  @SerialName(value = "relevancyStrictness") val relevancyStrictness: Int? = null,
-
-  /**
    * Languages for language-specific query processing steps such as plurals, stop-word removal, and
    * word-detection dictionaries This setting sets a default list of languages used by the
    * `removeStopWords` and `ignorePlurals` settings. This setting also sets a dictionary for word
@@ -245,11 +244,30 @@ public data class Params(
   @SerialName(value = "queryLanguages") val queryLanguages: List<SupportedLanguage>? = null,
 
   /**
+   * Relevancy threshold below which less relevant results aren't included in the results You can
+   * only set `relevancyStrictness` on
+   * [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
+   * Use this setting to strike a balance between the relevance and number of returned results.
+   */
+  @SerialName(value = "relevancyStrictness") val relevancyStrictness: Int? = null,
+
+  /**
    * Assigns a rule context to the run query
    * [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context)
    * are strings that you can use to trigger matching rules.
    */
   @SerialName(value = "ruleContexts") val ruleContexts: List<String>? = null,
+
+  /**
+   * Indicates which sorting strategy to apply for the request. The value must match one of the
+   * labels defined in the \"sortingStrategy\" mapping. For example, \"Price (asc)\", see Upsert
+   * Composition. At runtime, this label is used to look up the corresponding index or replica
+   * configured in \"sortingStrategy\", and the query is executed using that index instead of
+   * main's. In addition to \"sortingStrategy\", this parameter is also used to apply a matching
+   * Composition Rule that contains a condition defined to trigger on \"sortBy\", see Composition
+   * Rules. If no value is provided or an invalid value, no sorting strategy is applied.
+   */
+  @SerialName(value = "sortBy") val sortBy: String? = null,
 
   /**
    * Unique pseudonymous or anonymous user identifier. This helps with analytics and click and
