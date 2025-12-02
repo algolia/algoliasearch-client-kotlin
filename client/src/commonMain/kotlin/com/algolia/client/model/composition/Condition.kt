@@ -23,6 +23,9 @@ import kotlinx.serialization.json.*
  * @param filters Filters that trigger the rule. You can add add filters using the syntax
  *   `facet:value` so that the rule is triggered, when the specific filter is selected. You can use
  *   `filters` on its own or combine it with the `pattern` parameter.
+ * @param sortBy Sort criteria that trigger the rule. You can trigger composition rules based on the
+ *   selected sorting strategy set by the parameter `sortBy`. The rule will trigger if the value
+ *   passed to `sortBy` matches the one defined in the condition.
  */
 @Serializable
 public data class Condition(
@@ -50,4 +53,11 @@ public data class Condition(
    * or combine it with the `pattern` parameter.
    */
   @SerialName(value = "filters") val filters: String? = null,
+
+  /**
+   * Sort criteria that trigger the rule. You can trigger composition rules based on the selected
+   * sorting strategy set by the parameter `sortBy`. The rule will trigger if the value passed to
+   * `sortBy` matches the one defined in the condition.
+   */
+  @SerialName(value = "sortBy") val sortBy: String? = null,
 ) {}
