@@ -10,12 +10,14 @@ import kotlinx.serialization.json.*
 /**
  * A/B test configuration.
  *
+ * @param featureFilters
  * @param outliers
  * @param emptySearch
  * @param minimumDetectableEffect
  */
 @Serializable
 public data class ABTestConfiguration(
+  @SerialName(value = "featureFilters") val featureFilters: FeatureFilters? = null,
   @SerialName(value = "outliers") val outliers: Outliers? = null,
   @SerialName(value = "emptySearch") val emptySearch: EmptySearch? = null,
   @SerialName(value = "minimumDetectableEffect")

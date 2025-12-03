@@ -12,6 +12,7 @@ import kotlinx.serialization.json.*
  * effect.
  *
  * @param minimumDetectableEffect
+ * @param featureFilters
  * @param outliers
  * @param emptySearch
  */
@@ -19,6 +20,7 @@ import kotlinx.serialization.json.*
 public data class EstimateConfiguration(
   @SerialName(value = "minimumDetectableEffect")
   val minimumDetectableEffect: MinimumDetectableEffect,
+  @SerialName(value = "featureFilters") val featureFilters: FeatureFilters? = null,
   @SerialName(value = "outliers") val outliers: Outliers? = null,
   @SerialName(value = "emptySearch") val emptySearch: EmptySearch? = null,
 ) {}
