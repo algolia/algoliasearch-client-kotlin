@@ -10,13 +10,13 @@ import kotlinx.serialization.json.*
 /**
  * SearchResultsItem
  *
- * @param page Page of search results to retrieve.
+ * @param page The current page of the results.
  * @param nbHits Number of results (hits).
  * @param nbPages Number of pages of results.
- * @param hitsPerPage Number of hits per page.
+ * @param hitsPerPage Number of hits returned per page.
  * @param hits Search results (hits). Hits are records from your index that match the search
  *   criteria, augmented with additional attributes, such as, for highlighting.
- * @param query Search query.
+ * @param query The search query string.
  * @param params URL-encoded string of all search parameters.
  * @param compositions
  * @param abTestID A/B test ID. This is only included in the response for indices that are part of
@@ -58,7 +58,7 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class SearchResultsItem(
 
-  /** Page of search results to retrieve. */
+  /** The current page of the results. */
   @SerialName(value = "page") val page: Int,
 
   /** Number of results (hits). */
@@ -67,7 +67,7 @@ public data class SearchResultsItem(
   /** Number of pages of results. */
   @SerialName(value = "nbPages") val nbPages: Int,
 
-  /** Number of hits per page. */
+  /** Number of hits returned per page. */
   @SerialName(value = "hitsPerPage") val hitsPerPage: Int,
 
   /**
@@ -76,7 +76,7 @@ public data class SearchResultsItem(
    */
   @SerialName(value = "hits") val hits: List<Hit>,
 
-  /** Search query. */
+  /** The search query string. */
   @SerialName(value = "query") val query: String,
 
   /** URL-encoded string of all search parameters. */
