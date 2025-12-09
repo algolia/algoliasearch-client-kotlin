@@ -56,8 +56,7 @@ public sealed interface EventsItems {
 
   @Serializable
   @JvmInline
-  public value class AddedToCartObjectIDsValue(public val value: AddedToCartObjectIDs) :
-    EventsItems
+  public value class AddedToCartObjectIDsValue(public val value: AddedToCartObjectIDs) : EventsItems
 
   @Serializable
   @JvmInline

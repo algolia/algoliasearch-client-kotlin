@@ -479,7 +479,7 @@ class TestDisjunctiveFaceting {
     assertEquals(
       firstQuery.filters,
       """
-            NOT color:blue AND ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red") AND ("size":"m" OR "size":"s")
+      NOT color:blue AND ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red") AND ("size":"m" OR "size":"s")
       """
         .trimIndent(),
     )
@@ -488,7 +488,7 @@ class TestDisjunctiveFaceting {
     assertEquals(listOf("color"), secondQuery.facets)
     assertEquals(
       """
-            NOT color:blue AND ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("size":"m" OR "size":"s")
+      NOT color:blue AND ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("size":"m" OR "size":"s")
       """
         .trimIndent(),
       secondQuery.filters,
@@ -498,7 +498,7 @@ class TestDisjunctiveFaceting {
     assertEquals(listOf("size"), thirdQuery.facets)
     assertEquals(
       """
-            NOT color:blue AND ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red")
+      NOT color:blue AND ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red")
       """
         .trimIndent(),
       thirdQuery.filters,
@@ -531,7 +531,7 @@ class TestDisjunctiveFaceting {
     val firstQuery = queries[0]
     assertEquals(
       """
-            ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red") AND ("size":"m" OR "size":"s")
+      ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red") AND ("size":"m" OR "size":"s")
       """
         .trimIndent(),
       firstQuery.filters,
@@ -541,7 +541,7 @@ class TestDisjunctiveFaceting {
     assertEquals(listOf("color"), secondQuery.facets)
     assertEquals(
       """
-            ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("size":"m" OR "size":"s")
+      ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("size":"m" OR "size":"s")
       """
         .trimIndent(),
       secondQuery.filters,
@@ -551,7 +551,7 @@ class TestDisjunctiveFaceting {
     assertEquals(listOf("size"), thirdQuery.facets)
     assertEquals(
       """
-            ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red")
+      ("brand":"apple" AND "brand":"samsung" AND "brand":"sony") AND ("color":"blue" OR "color":"green" OR "color":"red")
       """
         .trimIndent(),
       thirdQuery.filters,

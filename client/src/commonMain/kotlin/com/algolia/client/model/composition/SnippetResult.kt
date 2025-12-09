@@ -25,8 +25,7 @@ import kotlinx.serialization.json.*
 public sealed interface SnippetResult {
   @Serializable
   @JvmInline
-  public value class SnippetResultOptionValue(public val value: SnippetResultOption) :
-    SnippetResult
+  public value class SnippetResultOptionValue(public val value: SnippetResultOption) : SnippetResult
 
   @Serializable
   @JvmInline
@@ -36,8 +35,7 @@ public sealed interface SnippetResult {
 
   @Serializable
   @JvmInline
-  public value class ListOfSnippetResultValue(public val value: List<SnippetResult>) :
-    SnippetResult
+  public value class ListOfSnippetResultValue(public val value: List<SnippetResult>) : SnippetResult
 
   public companion object {
 

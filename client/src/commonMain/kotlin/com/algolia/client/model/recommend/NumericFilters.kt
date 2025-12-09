@@ -31,9 +31,7 @@ public sealed interface NumericFilters {
   public value class ListOfNumericFiltersValue(public val value: List<NumericFilters>) :
     NumericFilters
 
-  @Serializable
-  @JvmInline
-  public value class StringValue(public val value: String) : NumericFilters
+  @Serializable @JvmInline public value class StringValue(public val value: String) : NumericFilters
 
   public companion object {
 
