@@ -10,11 +10,11 @@ import kotlinx.serialization.json.*
 /**
  * CompositionRunAppliedRules
  *
- * @param objectID Unique record identifier.
+ * @param objectID The objectID of the applied composition rule on this query.
  */
 @Serializable
 public data class CompositionRunAppliedRules(
 
-  /** Unique record identifier. */
+  /** The objectID of the applied composition rule on this query. */
   @SerialName(value = "objectID") val objectID: String
 ) {}

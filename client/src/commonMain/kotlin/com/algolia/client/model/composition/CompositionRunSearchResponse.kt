@@ -13,13 +13,13 @@ import kotlinx.serialization.json.*
 /**
  * CompositionRunSearchResponse
  *
- * @param objectID Unique record identifier.
+ * @param objectID The objectID of the composition which generated this result set.
  * @param appliedRules
  */
 @Serializable(CompositionRunSearchResponseSerializer::class)
 public data class CompositionRunSearchResponse(
 
-  /** Unique record identifier. */
+  /** The objectID of the composition which generated this result set. */
   val objectID: String,
   val appliedRules: List<CompositionRunAppliedRules>? = null,
   val additionalProperties: Map<String, JsonElement>? = null,

@@ -10,11 +10,11 @@ import kotlinx.serialization.json.*
 /**
  * ResultsInjectedItemAppliedRulesInfoResponse
  *
- * @param objectID Unique record identifier.
+ * @param objectID The objectID of the applied index level rule on this injected group.
  */
 @Serializable
 public data class ResultsInjectedItemAppliedRulesInfoResponse(
 
-  /** Unique record identifier. */
+  /** The objectID of the applied index level rule on this injected group. */
   @SerialName(value = "objectID") val objectID: String
 ) {}

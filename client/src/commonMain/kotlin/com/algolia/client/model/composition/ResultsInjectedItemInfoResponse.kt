@@ -13,11 +13,13 @@ import kotlinx.serialization.json.*
 /**
  * ResultsInjectedItemInfoResponse
  *
- * @param key
+ * @param key The key of the injected group.
  * @param appliedRules
  */
 @Serializable(ResultsInjectedItemInfoResponseSerializer::class)
 public data class ResultsInjectedItemInfoResponse(
+
+  /** The key of the injected group. */
   val key: String,
   val appliedRules: List<ResultsInjectedItemAppliedRulesInfoResponse>? = null,
   val additionalProperties: Map<String, JsonElement>? = null,

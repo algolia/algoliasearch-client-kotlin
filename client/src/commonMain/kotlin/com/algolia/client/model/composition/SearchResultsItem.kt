@@ -10,14 +10,14 @@ import kotlinx.serialization.json.*
 /**
  * SearchResultsItem
  *
- * @param page The current page of the results.
- * @param nbHits Number of results (hits).
- * @param nbPages Number of pages of results.
- * @param hitsPerPage Number of hits returned per page.
  * @param hits Search results (hits). Hits are records from your index that match the search
  *   criteria, augmented with additional attributes, such as, for highlighting.
- * @param query The search query string.
+ * @param hitsPerPage Number of hits returned per page.
+ * @param nbHits Number of results (hits).
+ * @param nbPages Number of pages of results.
+ * @param page The current page of the results.
  * @param params URL-encoded string of all search parameters.
+ * @param query The search query string.
  * @param compositions
  * @param abTestID A/B test ID. This is only included in the response for indices that are part of
  *   an A/B test.
@@ -58,8 +58,14 @@ import kotlinx.serialization.json.*
 @Serializable
 public data class SearchResultsItem(
 
-  /** The current page of the results. */
-  @SerialName(value = "page") val page: Int,
+  /**
+   * Search results (hits). Hits are records from your index that match the search criteria,
+   * augmented with additional attributes, such as, for highlighting.
+   */
+  @SerialName(value = "hits") val hits: List<Hit>,
+
+  /** Number of hits returned per page. */
+  @SerialName(value = "hitsPerPage") val hitsPerPage: Int,
 
   /** Number of results (hits). */
   @SerialName(value = "nbHits") val nbHits: Int,
@@ -67,20 +73,14 @@ public data class SearchResultsItem(
   /** Number of pages of results. */
   @SerialName(value = "nbPages") val nbPages: Int,
 
-  /** Number of hits returned per page. */
-  @SerialName(value = "hitsPerPage") val hitsPerPage: Int,
-
-  /**
-   * Search results (hits). Hits are records from your index that match the search criteria,
-   * augmented with additional attributes, such as, for highlighting.
-   */
-  @SerialName(value = "hits") val hits: List<Hit>,
-
-  /** The search query string. */
-  @SerialName(value = "query") val query: String,
+  /** The current page of the results. */
+  @SerialName(value = "page") val page: Int,
 
   /** URL-encoded string of all search parameters. */
   @SerialName(value = "params") val params: String,
+
+  /** The search query string. */
+  @SerialName(value = "query") val query: String,
   @SerialName(value = "compositions")
   val compositions: Map<kotlin.String, ResultsCompositionInfoResponse>,
 
