@@ -25,7 +25,15 @@ public enum class Acl(public val value: kotlin.String) {
   @SerialName(value = "seeUnretrievableAttributes")
   SeeUnretrievableAttributes("seeUnretrievableAttributes"),
   @SerialName(value = "settings") Settings("settings"),
-  @SerialName(value = "usage") Usage("usage");
+  @SerialName(value = "usage") Usage("usage"),
+  @SerialName(value = "nluWriteProject") NluWriteProject("nluWriteProject"),
+  @SerialName(value = "nluReadProject") NluReadProject("nluReadProject"),
+  @SerialName(value = "nluWriteEntity") NluWriteEntity("nluWriteEntity"),
+  @SerialName(value = "nluReadEntity") NluReadEntity("nluReadEntity"),
+  @SerialName(value = "nluWriteIntent") NluWriteIntent("nluWriteIntent"),
+  @SerialName(value = "nluReadIntent") NluReadIntent("nluReadIntent"),
+  @SerialName(value = "nluPrediction") NluPrediction("nluPrediction"),
+  @SerialName(value = "nluReadAnswers") NluReadAnswers("nluReadAnswers");
 
   override fun toString(): kotlin.String = value
 }
