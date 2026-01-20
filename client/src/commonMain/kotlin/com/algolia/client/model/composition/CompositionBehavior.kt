@@ -8,9 +8,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * CompositionBehavior
+ * An object containing either an `injection` or `multifeed` behavior schema, but not both.
  *
  * @param injection
+ * @param multifeed
  */
 @Serializable
-public data class CompositionBehavior(@SerialName(value = "injection") val injection: Injection) {}
+public data class CompositionBehavior(
+  @SerialName(value = "injection") val injection: Injection? = null,
+  @SerialName(value = "multifeed") val multifeed: Multifeed? = null,
+) {}
