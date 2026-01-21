@@ -11,8 +11,8 @@ import kotlinx.serialization.json.*
  * CompositionRule
  *
  * @param objectID Composition rule unique identifier.
- * @param conditions Conditions that trigger a composition rule.
  * @param consequence
+ * @param conditions Conditions that trigger a composition rule.
  * @param description Description of the rule's purpose to help you distinguish between different
  *   rules.
  * @param enabled Whether the rule is active.
@@ -24,10 +24,10 @@ public data class CompositionRule(
 
   /** Composition rule unique identifier. */
   @SerialName(value = "objectID") val objectID: String,
+  @SerialName(value = "consequence") val consequence: CompositionRuleConsequence,
 
   /** Conditions that trigger a composition rule. */
-  @SerialName(value = "conditions") val conditions: List<Condition>,
-  @SerialName(value = "consequence") val consequence: CompositionRuleConsequence,
+  @SerialName(value = "conditions") val conditions: List<Condition>? = null,
 
   /** Description of the rule's purpose to help you distinguish between different rules. */
   @SerialName(value = "description") val description: String? = null,
