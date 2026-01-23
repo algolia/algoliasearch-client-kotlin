@@ -18,8 +18,6 @@ import kotlinx.serialization.json.*
  *   recommendations are returned and no fallback request is made. Depending on the available
  *   recommendations and the other request parameters, the actual number of recommendations may be
  *   lower than this value.
- * @param queryParameters
- * @param fallbackParameters
  */
 @Serializable
 public data class TrendingFacetsQuery(
@@ -40,6 +38,4 @@ public data class TrendingFacetsQuery(
    * parameters, the actual number of recommendations may be lower than this value.
    */
   @SerialName(value = "maxRecommendations") val maxRecommendations: Int? = null,
-  @SerialName(value = "queryParameters") val queryParameters: RecommendSearchParams? = null,
-  @SerialName(value = "fallbackParameters") val fallbackParameters: FallbackParams? = null,
 ) : RecommendationsRequest {}
