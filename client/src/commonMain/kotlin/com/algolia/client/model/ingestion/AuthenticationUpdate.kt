@@ -10,13 +10,11 @@ import kotlinx.serialization.json.*
 /**
  * Request body for updating an authentication resource.
  *
- * @param type
  * @param name Descriptive name for the resource.
  * @param input
  */
 @Serializable
 public data class AuthenticationUpdate(
-  @SerialName(value = "type") val type: AuthenticationType? = null,
 
   /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String? = null,
