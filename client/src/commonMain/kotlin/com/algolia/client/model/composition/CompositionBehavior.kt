@@ -4,17 +4,55 @@
  */
 package com.algolia.client.model.composition
 
+import com.algolia.client.exception.AlgoliaClientException
+import com.algolia.client.extensions.internal.*
+import kotlin.jvm.JvmInline
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
 
 /**
  * An object containing either an `injection` or `multifeed` behavior schema, but not both.
  *
- * @param injection
- * @param multifeed
+ * Implementations:
+ * - [CompositionInjectionBehavior]
+ * - [CompositionMultifeedBehavior]
  */
-@Serializable
-public data class CompositionBehavior(
-  @SerialName(value = "injection") val injection: Injection? = null,
-  @SerialName(value = "multifeed") val multifeed: Multifeed? = null,
-) {}
+@Serializable(CompositionBehaviorSerializer::class)
+public sealed interface CompositionBehavior {
+  @Serializable
+  @JvmInline
+  public value class CompositionInjectionBehaviorValue(
+    public val value: CompositionInjectionBehavior
+  ) : CompositionBehavior
+
+  @Serializable
+  @JvmInline
+  public value class CompositionMultifeedBehaviorValue(
+    public val value: CompositionMultifeedBehavior
+  ) : CompositionBehavior
+
+  public companion object {
+
+    public fun of(value: CompositionInjectionBehavior): CompositionBehavior =
+      CompositionInjectionBehaviorValue(value)
+
+    public fun of(value: CompositionMultifeedBehavior): CompositionBehavior =
+      CompositionMultifeedBehaviorValue(value)
+  }
+}
+
+internal class CompositionBehaviorSerializer :
+  JsonContentPolymorphicSerializer<CompositionBehavior>(CompositionBehavior::class) {
+  override fun selectDeserializer(
+    element: JsonElement
+  ): DeserializationStrategy<CompositionBehavior> {
+    return when {
+      element is JsonObject -> CompositionInjectionBehavior.serializer()
+      element is JsonObject -> CompositionMultifeedBehavior.serializer()
+      else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
+    }
+  }
+}
