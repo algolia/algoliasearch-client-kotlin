@@ -82,7 +82,8 @@ internal class AuthInputSerializer : JsonContentPolymorphicSerializer<AuthInput>
       element is JsonObject &&
         element.containsKey("url") &&
         element.containsKey("client_id") &&
-        element.containsKey("client_secret") -> AuthOAuth.serializer()
+        element.containsKey("client_secret") &&
+        element.containsKey("code") -> AuthOAuth.serializer()
       element is JsonObject &&
         element.containsKey("clientEmail") &&
         element.containsKey("privateKey") -> AuthGoogleServiceAccount.serializer()

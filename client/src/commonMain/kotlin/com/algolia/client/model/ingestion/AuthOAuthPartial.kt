@@ -13,6 +13,9 @@ import kotlinx.serialization.json.*
  * @param url URL for the OAuth endpoint.
  * @param clientId Client ID.
  * @param clientSecret Client secret. This field is `null` in the API response.
+ * @param code Authorization code. Used during an `authorization_code` grant type flow, to request
+ *   an access_token when creating/updating the authentication. This field is not returned in the
+ *   API response.
  * @param scope OAuth scope.
  */
 @Serializable
@@ -26,6 +29,13 @@ public data class AuthOAuthPartial(
 
   /** Client secret. This field is `null` in the API response. */
   @SerialName(value = "client_secret") val clientSecret: String? = null,
+
+  /**
+   * Authorization code. Used during an `authorization_code` grant type flow, to request an
+   * access_token when creating/updating the authentication. This field is not returned in the API
+   * response.
+   */
+  @SerialName(value = "code") val code: String? = null,
 
   /** OAuth scope. */
   @SerialName(value = "scope") val scope: String? = null,
