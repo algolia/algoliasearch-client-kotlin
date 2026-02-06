@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
  * @param status
  * @param type
  * @param batchSize The extracted record batch size.
- * @param publishedAt Date of publish RFC 3339 format.
+ * @param publishedAt Date and time when the resource was published, in RFC 3339 format.
  * @param `data`
  */
 @Serializable
@@ -32,7 +32,7 @@ public data class Event(
   /** The extracted record batch size. */
   @SerialName(value = "batchSize") val batchSize: Int,
 
-  /** Date of publish RFC 3339 format. */
+  /** Date and time when the resource was published, in RFC 3339 format. */
   @SerialName(value = "publishedAt") val publishedAt: String,
   @SerialName(value = "data") val `data`: JsonObject? = null,
 ) {}

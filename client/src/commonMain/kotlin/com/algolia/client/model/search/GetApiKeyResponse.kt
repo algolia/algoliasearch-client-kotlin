@@ -18,8 +18,8 @@ import kotlinx.serialization.json.*
  * @param description Description of an API key to help you identify this API key.
  * @param indexes Index names or patterns that this API key can access. By default, an API key can
  *   access all indices in the same application. You can use leading and trailing wildcard
- *   characters (`*`): - `dev_*` matches all indices starting with \"dev_\". - `*_dev` matches all
- *   indices ending with \"_dev\". - `*_products_*` matches all indices containing \"_products_\".
+ *   characters (`*`): - `dev_*` matches all indices starting with \"dev_\" - `*_dev` matches all
+ *   indices ending with \"_dev\" - `*_products_*` matches all indices containing \"_products_\".
  * @param maxHitsPerQuery Maximum number of results this API key can retrieve in one query. By
  *   default, there's no limit.
  * @param maxQueriesPerIPPerHour Maximum number of API requests allowed per IP address or
@@ -62,8 +62,8 @@ public data class GetApiKeyResponse(
   /**
    * Index names or patterns that this API key can access. By default, an API key can access all
    * indices in the same application. You can use leading and trailing wildcard characters (`*`): -
-   * `dev_*` matches all indices starting with \"dev_\". - `*_dev` matches all indices ending with
-   * \"_dev\". - `*_products_*` matches all indices containing \"_products_\".
+   * `dev_*` matches all indices starting with \"dev_\" - `*_dev` matches all indices ending with
+   * \"_dev\" - `*_products_*` matches all indices containing \"_products_\".
    */
   @SerialName(value = "indexes") val indexes: List<String>? = null,
 

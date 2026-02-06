@@ -10,15 +10,16 @@ import kotlinx.serialization.json.*
 /**
  * Time window by which to filter the observability data.
  *
- * @param startDate Date in RFC 3339 format representing the oldest data in the time window.
- * @param endDate Date in RFC 3339 format representing the newest data in the time window.
+ * @param startDate Date and time representing the oldest data in the time window, in RFC 3339
+ *   format.
+ * @param endDate Date and time representing the newest data in the time window, in RFC 3339 format.
  */
 @Serializable
 public data class Window(
 
-  /** Date in RFC 3339 format representing the oldest data in the time window. */
+  /** Date and time representing the oldest data in the time window, in RFC 3339 format. */
   @SerialName(value = "startDate") val startDate: String,
 
-  /** Date in RFC 3339 format representing the newest data in the time window. */
+  /** Date and time representing the newest data in the time window, in RFC 3339 format. */
   @SerialName(value = "endDate") val endDate: String,
 ) {}

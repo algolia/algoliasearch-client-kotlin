@@ -12,7 +12,7 @@ import kotlinx.serialization.json.*
  *
  * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
  * @param name Descriptive name for the resource.
- * @param createdAt Date of creation in RFC 3339 format.
+ * @param createdAt Date and time when the resource was created, in RFC 3339 format.
  */
 @Serializable
 public data class AuthenticationCreateResponse(
@@ -23,6 +23,6 @@ public data class AuthenticationCreateResponse(
   /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String,
 
-  /** Date of creation in RFC 3339 format. */
+  /** Date and time when the resource was created, in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 ) {}

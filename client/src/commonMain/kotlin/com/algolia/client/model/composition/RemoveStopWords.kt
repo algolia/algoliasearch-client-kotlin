@@ -16,8 +16,8 @@ import kotlinx.serialization.json.*
 /**
  * Removes stop words from the search query. Stop words are common words like articles,
  * conjunctions, prepositions, or pronouns that have little or no meaning on their own. In English,
- * \"the\", \"a\", or \"and\" are stop words. You should only use this feature for the languages
- * used in your index.
+ * \"the\", \"a\", or \"and\" are stop words. Only use this feature for the languages used in your
+ * index.
  *
  * Implementations:
  * - [Boolean] - *[RemoveStopWords.of]*

@@ -10,11 +10,11 @@ import kotlinx.serialization.json.*
 /**
  * DeleteResponse
  *
- * @param deletedAt Date of deletion in RFC 3339 format.
+ * @param deletedAt Date and time when the resource was deleted, in RFC 3339 format.
  */
 @Serializable
 public data class DeleteResponse(
 
-  /** Date of deletion in RFC 3339 format. */
+  /** Date and time when the resource was deleted, in RFC 3339 format. */
   @SerialName(value = "deletedAt") val deletedAt: String
 ) {}

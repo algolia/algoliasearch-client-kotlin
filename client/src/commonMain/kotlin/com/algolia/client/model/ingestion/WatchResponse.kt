@@ -17,7 +17,7 @@ import kotlinx.serialization.json.*
  * @param events in case of error, observability events will be added to the response.
  * @param message a message describing the outcome of the operation that has been ran (push,
  *   discover or validate) run.
- * @param createdAt Date of creation in RFC 3339 format.
+ * @param createdAt Date and time when the resource was created, in RFC 3339 format.
  */
 @Serializable
 public data class WatchResponse(
@@ -43,6 +43,6 @@ public data class WatchResponse(
    */
   @SerialName(value = "message") val message: String? = null,
 
-  /** Date of creation in RFC 3339 format. */
+  /** Date and time when the resource was created, in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String? = null,
 ) {}

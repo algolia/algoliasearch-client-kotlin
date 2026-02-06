@@ -14,8 +14,8 @@ import kotlinx.serialization.json.*
  * @param code It is deprecated. Use the `input` field with proper `type` instead to specify the
  *   transformation code.
  * @param name The uniquely identified name of your transformation.
- * @param createdAt Date of creation in RFC 3339 format.
- * @param updatedAt Date of last update in RFC 3339 format.
+ * @param createdAt Date and time when the resource was created, in RFC 3339 format.
+ * @param updatedAt Date and time when the resource was last updated, in RFC 3339 format.
  * @param authenticationIDs The authentications associated with the current transformation.
  * @param type
  * @param input
@@ -39,10 +39,10 @@ public data class Transformation(
   /** The uniquely identified name of your transformation. */
   @SerialName(value = "name") val name: String,
 
-  /** Date of creation in RFC 3339 format. */
+  /** Date and time when the resource was created, in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
-  /** Date of last update in RFC 3339 format. */
+  /** Date and time when the resource was last updated, in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
 
   /** The authentications associated with the current transformation. */

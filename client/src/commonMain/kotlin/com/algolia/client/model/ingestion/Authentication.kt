@@ -14,8 +14,8 @@ import kotlinx.serialization.json.*
  * @param type
  * @param name Descriptive name for the resource.
  * @param input
- * @param createdAt Date of creation in RFC 3339 format.
- * @param updatedAt Date of last update in RFC 3339 format.
+ * @param createdAt Date and time when the resource was created, in RFC 3339 format.
+ * @param updatedAt Date and time when the resource was last updated, in RFC 3339 format.
  * @param platform
  * @param owner Owner of the resource.
  */
@@ -30,10 +30,10 @@ public data class Authentication(
   @SerialName(value = "name") val name: String,
   @SerialName(value = "input") val input: AuthInputPartial,
 
-  /** Date of creation in RFC 3339 format. */
+  /** Date and time when the resource was created, in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
-  /** Date of last update in RFC 3339 format. */
+  /** Date and time when the resource was last updated, in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
   @SerialName(value = "platform") val platform: Platform? = null,
 

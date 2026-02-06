@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
  * API response for running a task.
  *
  * @param runID Universally unique identifier (UUID) of a task run.
- * @param createdAt Date of creation in RFC 3339 format.
+ * @param createdAt Date and time when the resource was created, in RFC 3339 format.
  */
 @Serializable
 public data class RunResponse(
@@ -19,6 +19,6 @@ public data class RunResponse(
   /** Universally unique identifier (UUID) of a task run. */
   @SerialName(value = "runID") val runID: String,
 
-  /** Date of creation in RFC 3339 format. */
+  /** Date and time when the resource was created, in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 ) {}

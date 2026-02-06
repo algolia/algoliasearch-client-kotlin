@@ -14,8 +14,8 @@ import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
 
 /**
- * Treat singular, plurals, and other forms of declensions as equivalent. You should only use this
- * feature for the languages used in your index.
+ * Treat singular, plurals, and other forms of declensions as equivalent. Only use this feature for
+ * the languages used in your index.
  *
  * Implementations:
  * - [Boolean] - *[IgnorePlurals.of]*

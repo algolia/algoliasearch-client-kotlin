@@ -10,15 +10,19 @@ import kotlinx.serialization.json.*
 /**
  * TimeRange
  *
- * @param from When the rule should start to be active, in Unix epoch time.
- * @param until When the rule should stop to be active, in Unix epoch time.
+ * @param from Timestamp when the rule should start to be active, measured in seconds since the Unix
+ *   epoch.
+ * @param until Timestamp when the rule should stop to be active, measured in seconds since the Unix
+ *   epoch.
  */
 @Serializable
 public data class TimeRange(
 
-  /** When the rule should start to be active, in Unix epoch time. */
+  /**
+   * Timestamp when the rule should start to be active, measured in seconds since the Unix epoch.
+   */
   @SerialName(value = "from") val from: Long? = null,
 
-  /** When the rule should stop to be active, in Unix epoch time. */
+  /** Timestamp when the rule should stop to be active, measured in seconds since the Unix epoch. */
   @SerialName(value = "until") val until: Long? = null,
 ) {}

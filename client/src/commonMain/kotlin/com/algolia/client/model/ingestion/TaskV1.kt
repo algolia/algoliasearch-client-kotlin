@@ -8,20 +8,20 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * The V1 task object, please use methods and types that don't contain the V1 suffix.
+ * The V1 task object. Use methods and types that don't contain the V1 suffix.
  *
  * @param taskID Universally unique identifier (UUID) of a task.
  * @param sourceID Universally uniqud identifier (UUID) of a source.
  * @param destinationID Universally unique identifier (UUID) of a destination resource.
  * @param trigger
  * @param enabled Whether the task is enabled.
- * @param createdAt Date of creation in RFC 3339 format.
- * @param updatedAt Date of last update in RFC 3339 format.
+ * @param createdAt Date and time when the resource was created, in RFC 3339 format.
+ * @param updatedAt Date and time when the resource was last updated, in RFC 3339 format.
  * @param input
  * @param failureThreshold Maximum accepted percentage of failures for a task run to finish
  *   successfully.
  * @param action
- * @param cursor Date of the last cursor in RFC 3339 format.
+ * @param cursor Date and time when the last cursor was created, in RFC 3339 format.
  * @param notifications
  * @param policies
  */
@@ -42,10 +42,10 @@ public data class TaskV1(
   /** Whether the task is enabled. */
   @SerialName(value = "enabled") val enabled: Boolean,
 
-  /** Date of creation in RFC 3339 format. */
+  /** Date and time when the resource was created, in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
-  /** Date of last update in RFC 3339 format. */
+  /** Date and time when the resource was last updated, in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
   @SerialName(value = "input") val input: TaskInput? = null,
 
@@ -53,7 +53,7 @@ public data class TaskV1(
   @SerialName(value = "failureThreshold") val failureThreshold: Int? = null,
   @SerialName(value = "action") val action: ActionType? = null,
 
-  /** Date of the last cursor in RFC 3339 format. */
+  /** Date and time when the last cursor was created, in RFC 3339 format. */
   @SerialName(value = "cursor") val cursor: String? = null,
   @SerialName(value = "notifications") val notifications: Notifications? = null,
   @SerialName(value = "policies") val policies: Policies? = null,

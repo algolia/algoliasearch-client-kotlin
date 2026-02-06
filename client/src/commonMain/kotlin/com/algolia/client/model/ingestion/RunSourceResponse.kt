@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
  * RunSourceResponse
  *
  * @param taskWithRunID Map of taskID sent for reindex with the corresponding runID.
- * @param createdAt Date of creation in RFC 3339 format.
+ * @param createdAt Date and time when the resource was created, in RFC 3339 format.
  */
 @Serializable
 public data class RunSourceResponse(
@@ -19,6 +19,6 @@ public data class RunSourceResponse(
   /** Map of taskID sent for reindex with the corresponding runID. */
   @SerialName(value = "taskWithRunID") val taskWithRunID: Map<kotlin.String, String>,
 
-  /** Date of creation in RFC 3339 format. */
+  /** Date and time when the resource was created, in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 ) {}

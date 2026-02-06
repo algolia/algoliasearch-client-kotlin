@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
  * API response for updating a transformation.
  *
  * @param transformationID Universally unique identifier (UUID) of a transformation.
- * @param updatedAt Date of last update in RFC 3339 format.
+ * @param updatedAt Date and time when the resource was last updated, in RFC 3339 format.
  */
 @Serializable
 public data class TransformationUpdateResponse(
@@ -19,6 +19,6 @@ public data class TransformationUpdateResponse(
   /** Universally unique identifier (UUID) of a transformation. */
   @SerialName(value = "transformationID") val transformationID: String,
 
-  /** Date of last update in RFC 3339 format. */
+  /** Date and time when the resource was last updated, in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
 ) {}

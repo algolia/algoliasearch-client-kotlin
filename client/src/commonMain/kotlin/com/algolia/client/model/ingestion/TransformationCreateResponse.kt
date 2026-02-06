@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
  * API response for creating a transformation.
  *
  * @param transformationID Universally unique identifier (UUID) of a transformation.
- * @param createdAt Date of creation in RFC 3339 format.
+ * @param createdAt Date and time when the resource was created, in RFC 3339 format.
  */
 @Serializable
 public data class TransformationCreateResponse(
@@ -19,6 +19,6 @@ public data class TransformationCreateResponse(
   /** Universally unique identifier (UUID) of a transformation. */
   @SerialName(value = "transformationID") val transformationID: String,
 
-  /** Date of creation in RFC 3339 format. */
+  /** Date and time when the resource was created, in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 ) {}

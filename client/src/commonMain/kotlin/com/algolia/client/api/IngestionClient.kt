@@ -132,7 +132,7 @@ public class IngestionClient(
   }
 
   /**
-   * Creates a new task using the v1 endpoint, please use `createTask` instead.
+   * Creates a new task using the v1 endpoint. Use `createTask` instead.
    *
    * Required API Key ACLs:
    * - addObject
@@ -368,7 +368,7 @@ public class IngestionClient(
   }
 
   /**
-   * Deletes a task by its ID using the v1 endpoint, please use `deleteTask` instead.
+   * Deletes a task by its ID using the v1 endpoint. Use `deleteTask` instead.
    *
    * Required API Key ACLs:
    * - addObject
@@ -437,7 +437,7 @@ public class IngestionClient(
   }
 
   /**
-   * Disables a task using the v1 endpoint, please use `disableTask` instead.
+   * Disables a task using the v1 endpoint. Use `disableTask` instead.
    *
    * Required API Key ACLs:
    * - addObject
@@ -480,7 +480,7 @@ public class IngestionClient(
   }
 
   /**
-   * Enables a task using the v1 endpoint, please use `enableTask` instead.
+   * Enables a task using the v1 endpoint. Use `enableTask` instead.
    *
    * Required API Key ACLs:
    * - addObject
@@ -635,7 +635,7 @@ public class IngestionClient(
   }
 
   /**
-   * Retrieves a task by its ID using the v1 endpoint, please use `getTask` instead.
+   * Retrieves a task by its ID using the v1 endpoint. Use `getTask` instead.
    *
    * Required API Key ACLs:
    * - addObject
@@ -836,10 +836,10 @@ public class IngestionClient(
    * @param taskID Task ID for filtering the list of task runs.
    * @param sort Property by which to sort the list of task runs. (default to RunSortKeys.createdAt)
    * @param order Sort order of the response, ascending or descending. (default to OrderKeys.desc)
-   * @param startDate Date in RFC 3339 format for the earliest run to retrieve. By default, the
-   *   current day minus seven days is used.
-   * @param endDate Date in RFC 3339 format for the latest run to retrieve. By default, the current
-   *   day is used.
+   * @param startDate Date and time for the earliest run to retrieve, in RFC 3339 format. By
+   *   default, the current day minus seven days is used.
+   * @param endDate Date and time for the latest run to retrieve, in RFC 3339 format. By default,
+   *   the current day is used.
    * @param requestOptions additional request configuration.
    */
   public suspend fun listRuns(
@@ -977,7 +977,7 @@ public class IngestionClient(
   }
 
   /**
-   * Retrieves a list of tasks using the v1 endpoint, please use `getTasks` instead.
+   * Retrieves a list of tasks using the v1 endpoint. Use `getTasks` instead.
    *
    * Required API Key ACLs:
    * - addObject
@@ -1249,8 +1249,8 @@ public class IngestionClient(
   }
 
   /**
-   * Runs a task using the v1 endpoint, please use `runTask` instead. You can check the status of
-   * task runs with the observability endpoints.
+   * Runs a task using the v1 endpoint. Use `runTask` instead. You can check the status of task runs
+   * with the observability endpoints.
    *
    * Required API Key ACLs:
    * - addObject
@@ -1374,7 +1374,7 @@ public class IngestionClient(
   }
 
   /**
-   * Searches for tasks using the v1 endpoint, please use `searchTasks` instead.
+   * Searches for tasks using the v1 endpoint. Use `searchTasks` instead.
    *
    * Required API Key ACLs:
    * - addObject
@@ -1625,7 +1625,7 @@ public class IngestionClient(
   }
 
   /**
-   * Updates a task by its ID using the v1 endpoint, please use `updateTask` instead.
+   * Updates a task by its ID using the v1 endpoint. Use `updateTask` instead.
    *
    * Required API Key ACLs:
    * - addObject

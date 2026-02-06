@@ -11,7 +11,7 @@ import kotlinx.serialization.json.*
  * API response for updating a task.
  *
  * @param taskID Universally unique identifier (UUID) of a task.
- * @param updatedAt Date of last update in RFC 3339 format.
+ * @param updatedAt Date and time when the resource was last updated, in RFC 3339 format.
  */
 @Serializable
 public data class TaskUpdateResponse(
@@ -19,6 +19,6 @@ public data class TaskUpdateResponse(
   /** Universally unique identifier (UUID) of a task. */
   @SerialName(value = "taskID") val taskID: String,
 
-  /** Date of last update in RFC 3339 format. */
+  /** Date and time when the resource was last updated, in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
 ) {}

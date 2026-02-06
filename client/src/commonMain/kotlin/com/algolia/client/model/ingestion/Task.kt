@@ -14,8 +14,8 @@ import kotlinx.serialization.json.*
  * @param sourceID Universally uniqud identifier (UUID) of a source.
  * @param destinationID Universally unique identifier (UUID) of a destination resource.
  * @param enabled Whether the task is enabled.
- * @param createdAt Date of creation in RFC 3339 format.
- * @param updatedAt Date of last update in RFC 3339 format.
+ * @param createdAt Date and time when the resource was created, in RFC 3339 format.
+ * @param updatedAt Date and time when the resource was last updated, in RFC 3339 format.
  * @param cron Cron expression for the task's schedule.
  * @param lastRun The last time the scheduled task ran in RFC 3339 format.
  * @param nextRun The next scheduled run of the task in RFC 3339 format.
@@ -25,7 +25,7 @@ import kotlinx.serialization.json.*
  *   successfully.
  * @param action
  * @param subscriptionAction
- * @param cursor Date of the last cursor in RFC 3339 format.
+ * @param cursor Date and time when the last cursor was created, in RFC 3339 format.
  * @param notifications
  * @param policies
  */
@@ -44,10 +44,10 @@ public data class Task(
   /** Whether the task is enabled. */
   @SerialName(value = "enabled") val enabled: Boolean,
 
-  /** Date of creation in RFC 3339 format. */
+  /** Date and time when the resource was created, in RFC 3339 format. */
   @SerialName(value = "createdAt") val createdAt: String,
 
-  /** Date of last update in RFC 3339 format. */
+  /** Date and time when the resource was last updated, in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
 
   /** Cron expression for the task's schedule. */
@@ -68,7 +68,7 @@ public data class Task(
   @SerialName(value = "action") val action: ActionType? = null,
   @SerialName(value = "subscriptionAction") val subscriptionAction: ActionType? = null,
 
-  /** Date of the last cursor in RFC 3339 format. */
+  /** Date and time when the last cursor was created, in RFC 3339 format. */
   @SerialName(value = "cursor") val cursor: String? = null,
   @SerialName(value = "notifications") val notifications: Notifications? = null,
   @SerialName(value = "policies") val policies: Policies? = null,
