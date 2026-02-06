@@ -34,8 +34,8 @@ import kotlinx.serialization.json.*
  * @param currency Three-letter [currency code](https://www.iso.org/iso-4217-currency-codes.html).
  * @param objectData Extra information about the records involved in a purchase or add-to-cart
  *   events. If provided, it must be the same length as `objectIDs`.
- * @param timestamp Timestamp of the event, measured in milliseconds since the Unix epoch. By
- *   default, the Insights API uses the time it receives an event as its timestamp.
+ * @param timestamp Timestamp of the event, measured in milliseconds since the Unix epoch. Must be
+ *   no older than 30 days. If not provided, we use the time at which the request was received.
  * @param `value`
  */
 @Serializable
@@ -90,8 +90,8 @@ public data class AddedToCartObjectIDsAfterSearch(
   @SerialName(value = "objectData") val objectData: List<ObjectDataAfterSearch>? = null,
 
   /**
-   * Timestamp of the event, measured in milliseconds since the Unix epoch. By default, the Insights
-   * API uses the time it receives an event as its timestamp.
+   * Timestamp of the event, measured in milliseconds since the Unix epoch. Must be no older than 30
+   * days. If not provided, we use the time at which the request was received.
    */
   @SerialName(value = "timestamp") val timestamp: Long? = null,
   @SerialName(value = "value") val `value`: Value? = null,

@@ -32,8 +32,8 @@ import kotlinx.serialization.json.*
  *   identify users across sessions. Don't use personally identifiable information in user tokens.
  *   For more information, see
  *   [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
- * @param timestamp Timestamp of the event, measured in milliseconds since the Unix epoch. By
- *   default, the Insights API uses the time it receives an event as its timestamp.
+ * @param timestamp Timestamp of the event, measured in milliseconds since the Unix epoch. Must be
+ *   no older than 30 days. If not provided, we use the time at which the request was received.
  */
 @Serializable
 public data class ClickedObjectIDsAfterSearch(
@@ -83,8 +83,8 @@ public data class ClickedObjectIDsAfterSearch(
   @SerialName(value = "authenticatedUserToken") val authenticatedUserToken: String? = null,
 
   /**
-   * Timestamp of the event, measured in milliseconds since the Unix epoch. By default, the Insights
-   * API uses the time it receives an event as its timestamp.
+   * Timestamp of the event, measured in milliseconds since the Unix epoch. Must be no older than 30
+   * days. If not provided, we use the time at which the request was received.
    */
   @SerialName(value = "timestamp") val timestamp: Long? = null,
 ) : EventsItems {}

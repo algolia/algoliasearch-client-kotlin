@@ -31,8 +31,8 @@ import kotlinx.serialization.json.*
  *   For more information, see
  *   [User token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
  * @param currency Three-letter [currency code](https://www.iso.org/iso-4217-currency-codes.html).
- * @param timestamp Timestamp of the event, measured in milliseconds since the Unix epoch. By
- *   default, the Insights API uses the time it receives an event as its timestamp.
+ * @param timestamp Timestamp of the event, measured in milliseconds since the Unix epoch. Must be
+ *   no older than 30 days. If not provided, we use the time at which the request was received.
  * @param `value`
  */
 @Serializable
@@ -80,8 +80,8 @@ public data class PurchasedObjectIDsAfterSearch(
   @SerialName(value = "currency") val currency: String? = null,
 
   /**
-   * Timestamp of the event, measured in milliseconds since the Unix epoch. By default, the Insights
-   * API uses the time it receives an event as its timestamp.
+   * Timestamp of the event, measured in milliseconds since the Unix epoch. Must be no older than 30
+   * days. If not provided, we use the time at which the request was received.
    */
   @SerialName(value = "timestamp") val timestamp: Long? = null,
   @SerialName(value = "value") val `value`: Value? = null,
