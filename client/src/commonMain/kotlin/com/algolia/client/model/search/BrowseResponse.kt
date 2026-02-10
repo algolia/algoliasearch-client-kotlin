@@ -12,8 +12,6 @@ import kotlinx.serialization.json.*
  *
  * @param hits Search results (hits). Hits are records from your index that match the search
  *   criteria, augmented with additional attributes, such as, for highlighting.
- * @param query Search query.
- * @param params URL-encoded string of all search parameters.
  * @param abTestID A/B test ID. This is only included in the response for indices that are part of
  *   an A/B test.
  * @param abTestVariantID Variant ID. This is only included in the response for indices that are
@@ -53,6 +51,8 @@ import kotlinx.serialization.json.*
  * @param nbHits Number of results (hits).
  * @param nbPages Number of pages of results.
  * @param hitsPerPage Number of hits per page.
+ * @param query Search query.
+ * @param params URL-encoded string of all search parameters.
  * @param cursor Cursor to get the next page of the response. The parameter must match the value
  *   returned in the response of a previous request. The last page of the response does not return a
  *   `cursor` attribute.
@@ -65,12 +65,6 @@ public data class BrowseResponse(
    * augmented with additional attributes, such as, for highlighting.
    */
   @SerialName(value = "hits") val hits: List<Hit>,
-
-  /** Search query. */
-  @SerialName(value = "query") val query: String,
-
-  /** URL-encoded string of all search parameters. */
-  @SerialName(value = "params") val params: String,
 
   /**
    * A/B test ID. This is only included in the response for indices that are part of an A/B test.
@@ -178,6 +172,12 @@ public data class BrowseResponse(
 
   /** Number of hits per page. */
   @SerialName(value = "hitsPerPage") val hitsPerPage: Int? = null,
+
+  /** Search query. */
+  @SerialName(value = "query") val query: String? = null,
+
+  /** URL-encoded string of all search parameters. */
+  @SerialName(value = "params") val params: String? = null,
 
   /**
    * Cursor to get the next page of the response. The parameter must match the value returned in the

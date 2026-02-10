@@ -15,8 +15,6 @@ import kotlinx.serialization.json.*
  *
  * @param hits Search results (hits). Hits are records from your index that match the search
  *   criteria, augmented with additional attributes, such as, for highlighting.
- * @param query Search query.
- * @param params URL-encoded string of all search parameters.
  * @param abTestID A/B test ID. This is only included in the response for indices that are part of
  *   an A/B test.
  * @param abTestVariantID Variant ID. This is only included in the response for indices that are
@@ -56,6 +54,8 @@ import kotlinx.serialization.json.*
  * @param nbHits Number of results (hits).
  * @param nbPages Number of pages of results.
  * @param hitsPerPage Number of hits per page.
+ * @param query Search query.
+ * @param params URL-encoded string of all search parameters.
  */
 @Serializable(SearchResponseSerializer::class)
 public data class SearchResponse(
@@ -65,12 +65,6 @@ public data class SearchResponse(
    * augmented with additional attributes, such as, for highlighting.
    */
   val hits: List<Hit>,
-
-  /** Search query. */
-  val query: String,
-
-  /** URL-encoded string of all search parameters. */
-  val params: String,
 
   /**
    * A/B test ID. This is only included in the response for indices that are part of an A/B test.
@@ -172,6 +166,12 @@ public data class SearchResponse(
 
   /** Number of hits per page. */
   val hitsPerPage: Int? = null,
+
+  /** Search query. */
+  val query: String? = null,
+
+  /** URL-encoded string of all search parameters. */
+  val params: String? = null,
   val additionalProperties: Map<String, JsonElement>? = null,
 ) : SearchResult {}
 
@@ -180,8 +180,6 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
   override val descriptor: SerialDescriptor =
     buildClassSerialDescriptor("SearchResponse") {
       element<List<Hit>>("hits")
-      element<String>("query")
-      element<String>("params")
       element<Int>("abTestID", isOptional = true)
       element<Int>("abTestVariantID", isOptional = true)
       element<String>("aroundLatLng", isOptional = true)
@@ -212,6 +210,8 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
       element<Int>("nbHits", isOptional = true)
       element<Int>("nbPages", isOptional = true)
       element<Int>("hitsPerPage", isOptional = true)
+      element<String>("query", isOptional = true)
+      element<String>("params", isOptional = true)
     }
 
   override fun deserialize(decoder: Decoder): SearchResponse {
@@ -219,8 +219,6 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
     val tree = input.decodeJsonObject()
     return SearchResponse(
       hits = tree.getValue("hits").let { input.json.decodeFromJsonElement(it) },
-      query = tree.getValue("query").let { input.json.decodeFromJsonElement(it) },
-      params = tree.getValue("params").let { input.json.decodeFromJsonElement(it) },
       abTestID = tree["abTestID"]?.let { input.json.decodeFromJsonElement(it) },
       abTestVariantID = tree["abTestVariantID"]?.let { input.json.decodeFromJsonElement(it) },
       aroundLatLng = tree["aroundLatLng"]?.let { input.json.decodeFromJsonElement(it) },
@@ -253,6 +251,8 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
       nbHits = tree["nbHits"]?.let { input.json.decodeFromJsonElement(it) },
       nbPages = tree["nbPages"]?.let { input.json.decodeFromJsonElement(it) },
       hitsPerPage = tree["hitsPerPage"]?.let { input.json.decodeFromJsonElement(it) },
+      query = tree["query"]?.let { input.json.decodeFromJsonElement(it) },
+      params = tree["params"]?.let { input.json.decodeFromJsonElement(it) },
       additionalProperties = tree.filterKeys { it !in descriptor.elementNames },
     )
   }
@@ -261,8 +261,6 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
     val output = encoder.asJsonEncoder()
     val json = buildJsonObject {
       put("hits", output.json.encodeToJsonElement(value.hits))
-      put("query", output.json.encodeToJsonElement(value.query))
-      put("params", output.json.encodeToJsonElement(value.params))
       value.abTestID?.let { put("abTestID", output.json.encodeToJsonElement(it)) }
       value.abTestVariantID?.let { put("abTestVariantID", output.json.encodeToJsonElement(it)) }
       value.aroundLatLng?.let { put("aroundLatLng", output.json.encodeToJsonElement(it)) }
@@ -299,6 +297,8 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
       value.nbHits?.let { put("nbHits", output.json.encodeToJsonElement(it)) }
       value.nbPages?.let { put("nbPages", output.json.encodeToJsonElement(it)) }
       value.hitsPerPage?.let { put("hitsPerPage", output.json.encodeToJsonElement(it)) }
+      value.query?.let { put("query", output.json.encodeToJsonElement(it)) }
+      value.params?.let { put("params", output.json.encodeToJsonElement(it)) }
       value.additionalProperties?.onEach { (key, element) -> put(key, element) }
     }
     (encoder as JsonEncoder).encodeJsonElement(json)
