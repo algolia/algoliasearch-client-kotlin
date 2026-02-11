@@ -22,6 +22,7 @@ import kotlinx.serialization.json.*
  *   match active filters to be displayed.** For examples, see
  *   [Promote results with rules](https://www.algolia.com/doc/guides/managing-results/rules/merchandising-and-promoting/how-to/promote-hits/#promote-results-matching-active-filters).
  * @param hide Records you want to hide from the search results.
+ * @param redirect
  * @param userData A JSON object with custom data that will be appended to the `userData` array in
  *   the response. This object isn't interpreted by the API and is limited to 1&nbsp;kB of minified
  *   JSON.
@@ -49,6 +50,7 @@ public data class Consequence(
 
   /** Records you want to hide from the search results. */
   @SerialName(value = "hide") val hide: List<ConsequenceHide>? = null,
+  @SerialName(value = "redirect") val redirect: ConsequenceRedirect? = null,
 
   /**
    * A JSON object with custom data that will be appended to the `userData` array in the response.
