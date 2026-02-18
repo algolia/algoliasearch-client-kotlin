@@ -23,7 +23,7 @@ public data class Multifeed(
   /**
    * A key-value store of Feed ID to Feed. Currently, the only supported Feed type is an Injection.
    */
-  @SerialName(value = "feeds") val feeds: Map<kotlin.String, Injection>,
+  @SerialName(value = "feeds") val feeds: Map<kotlin.String, FeedInjection>,
 
   /**
    * A list of Feed IDs that specifies the order in which to order the results in the response. The
