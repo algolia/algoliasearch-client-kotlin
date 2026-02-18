@@ -54,6 +54,7 @@ import kotlinx.serialization.json.*
  * @param page The current page of the results.
  * @param params URL-encoded string of all search parameters.
  * @param query The search query string.
+ * @param feedID The ID of the feed.
  */
 @Serializable
 public data class SearchResultsItem(
@@ -178,4 +179,7 @@ public data class SearchResultsItem(
 
   /** The search query string. */
   @SerialName(value = "query") val query: String? = null,
+
+  /** The ID of the feed. */
+  @SerialName(value = "feedID") val feedID: String? = null,
 ) {}
