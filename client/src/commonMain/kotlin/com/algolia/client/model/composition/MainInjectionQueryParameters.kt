@@ -32,7 +32,6 @@ import kotlinx.serialization.json.*
  *   considered exact matches - `singleWordSynonym`. Single-word synonyms, such as \"NY\" = \"NYC\",
  *   are considered exact matches - `multiWordsSynonym`. Multi-word synonyms, such as \"NY\" = \"New
  *   York\", are considered exact matches.
- * @param analytics Whether this search will be included in Analytics.
  * @param attributeCriteriaComputedByMinProximity Whether the best matching attribute should be
  *   determined by minimum proximity This setting only affects ranking if the Attribute ranking
  *   criterion comes before Proximity in the `ranking` setting. If true, the best matching attribute
@@ -59,14 +58,6 @@ import kotlinx.serialization.json.*
  * @param clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a
  *   unique identifier for a search query and is required for tracking
  *   [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
- * @param decompoundQuery Whether to split compound words in the query into their building blocks
- *   For more information, see
- *   [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words).
- *   Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and
- *   Norwegian. Decompounding doesn't work for words with
- *   [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark).
- *   For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈`
- *   (U+0308).
  * @param disableExactOnAttributes Searchable attributes for which you want to
  *   [turn off the Exact ranking criterion](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/override-search-engine-defaults/in-depth/adjust-exact-settings/#turn-off-exact-for-some-attributes).
  *   Attribute names are case-sensitive This can be useful for attributes with long values, where
@@ -113,8 +104,6 @@ import kotlinx.serialization.json.*
  * @param highlightPreTag HTML tag to insert before the highlighted parts in all highlighted results
  *   and snippets.
  * @param ignorePlurals
- * @param maxFacetHits Maximum number of facet values to return when
- *   [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
  * @param minProximity Minimum proximity score for two matching words This adjusts the
  *   [Proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity)
  *   by equally scoring matches that are farther apart For example, if `minProximity` is 2,
@@ -241,9 +230,6 @@ public data class MainInjectionQueryParameters(
   @SerialName(value = "alternativesAsExact")
   val alternativesAsExact: List<AlternativesAsExact>? = null,
 
-  /** Whether this search will be included in Analytics. */
-  @SerialName(value = "analytics") val analytics: Boolean? = null,
-
   /**
    * Whether the best matching attribute should be determined by minimum proximity This setting only
    * affects ranking if the Attribute ranking criterion comes before Proximity in the `ranking`
@@ -288,18 +274,6 @@ public data class MainInjectionQueryParameters(
    * [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
    */
   @SerialName(value = "clickAnalytics") val clickAnalytics: Boolean? = null,
-
-  /**
-   * Whether to split compound words in the query into their building blocks For more information,
-   * see
-   * [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words).
-   * Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and
-   * Norwegian. Decompounding doesn't work for words with
-   * [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark).
-   * For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈`
-   * (U+0308).
-   */
-  @SerialName(value = "decompoundQuery") val decompoundQuery: Boolean? = null,
 
   /**
    * Searchable attributes for which you want to
@@ -374,12 +348,6 @@ public data class MainInjectionQueryParameters(
   /** HTML tag to insert before the highlighted parts in all highlighted results and snippets. */
   @SerialName(value = "highlightPreTag") val highlightPreTag: String? = null,
   @SerialName(value = "ignorePlurals") val ignorePlurals: IgnorePlurals? = null,
-
-  /**
-   * Maximum number of facet values to return when
-   * [searching for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
-   */
-  @SerialName(value = "maxFacetHits") val maxFacetHits: Int? = null,
 
   /**
    * Minimum proximity score for two matching words This adjusts the
