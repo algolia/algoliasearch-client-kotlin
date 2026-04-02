@@ -44,8 +44,8 @@ internal class InjectedItemSourceSerializer :
     element: JsonElement
   ): DeserializationStrategy<InjectedItemSource> {
     return when {
-      element is JsonObject -> SearchSource.serializer()
-      element is JsonObject -> ExternalSource.serializer()
+      element is JsonObject && element.containsKey("search") -> SearchSource.serializer()
+      element is JsonObject && element.containsKey("external") -> ExternalSource.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
