@@ -25,17 +25,17 @@ import kotlinx.serialization.json.*
 public sealed interface AttributeToUpdate {
   @Serializable
   @JvmInline
-  public value class StringValue(public val value: String) : AttributeToUpdate
+  public value class BuiltInOperationValue(public val value: BuiltInOperation) : AttributeToUpdate
 
   @Serializable
   @JvmInline
-  public value class BuiltInOperationValue(public val value: BuiltInOperation) : AttributeToUpdate
+  public value class StringValue(public val value: String) : AttributeToUpdate
 
   public companion object {
 
-    public fun of(value: String): AttributeToUpdate = StringValue(value)
-
     public fun of(value: BuiltInOperation): AttributeToUpdate = BuiltInOperationValue(value)
+
+    public fun of(value: String): AttributeToUpdate = StringValue(value)
   }
 }
 
@@ -45,8 +45,9 @@ internal class AttributeToUpdateSerializer :
     element: JsonElement
   ): DeserializationStrategy<AttributeToUpdate> {
     return when {
+      element is JsonObject && element.containsKey("_operation") && element.containsKey("value") ->
+        BuiltInOperation.serializer()
       element.isString -> AttributeToUpdate.StringValue.serializer()
-      element is JsonObject -> BuiltInOperation.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

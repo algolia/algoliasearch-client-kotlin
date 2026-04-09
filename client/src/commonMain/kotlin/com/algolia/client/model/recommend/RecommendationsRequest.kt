@@ -27,6 +27,11 @@ import kotlinx.serialization.json.*
 public sealed interface RecommendationsRequest {
   @Serializable
   @JvmInline
+  public value class TrendingFacetsQueryValue(public val value: TrendingFacetsQuery) :
+    RecommendationsRequest
+
+  @Serializable
+  @JvmInline
   public value class BoughtTogetherQueryValue(public val value: BoughtTogetherQuery) :
     RecommendationsRequest
 
@@ -41,15 +46,13 @@ public sealed interface RecommendationsRequest {
 
   @Serializable
   @JvmInline
-  public value class TrendingFacetsQueryValue(public val value: TrendingFacetsQuery) :
-    RecommendationsRequest
-
-  @Serializable
-  @JvmInline
   public value class LookingSimilarQueryValue(public val value: LookingSimilarQuery) :
     RecommendationsRequest
 
   public companion object {
+
+    public fun of(value: TrendingFacetsQuery): RecommendationsRequest =
+      TrendingFacetsQueryValue(value)
 
     public fun of(value: BoughtTogetherQuery): RecommendationsRequest =
       BoughtTogetherQueryValue(value)
@@ -58,9 +61,6 @@ public sealed interface RecommendationsRequest {
 
     public fun of(value: TrendingItemsQuery): RecommendationsRequest =
       TrendingItemsQueryValue(value)
-
-    public fun of(value: TrendingFacetsQuery): RecommendationsRequest =
-      TrendingFacetsQueryValue(value)
 
     public fun of(value: LookingSimilarQuery): RecommendationsRequest =
       LookingSimilarQueryValue(value)
@@ -73,10 +73,10 @@ internal class RecommendationsRequestSerializer :
     element: JsonElement
   ): DeserializationStrategy<RecommendationsRequest> {
     return when {
+      element is JsonObject && element.containsKey("facetName") -> TrendingFacetsQuery.serializer()
       element is JsonObject -> BoughtTogetherQuery.serializer()
       element is JsonObject -> RelatedQuery.serializer()
       element is JsonObject -> TrendingItemsQuery.serializer()
-      element is JsonObject -> TrendingFacetsQuery.serializer()
       element is JsonObject -> LookingSimilarQuery.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

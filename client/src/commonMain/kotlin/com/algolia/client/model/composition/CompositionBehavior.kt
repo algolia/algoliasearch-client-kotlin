@@ -50,8 +50,10 @@ internal class CompositionBehaviorSerializer :
     element: JsonElement
   ): DeserializationStrategy<CompositionBehavior> {
     return when {
-      element is JsonObject -> CompositionInjectionBehavior.serializer()
-      element is JsonObject -> CompositionMultifeedBehavior.serializer()
+      element is JsonObject && element.containsKey("injection") ->
+        CompositionInjectionBehavior.serializer()
+      element is JsonObject && element.containsKey("multifeed") ->
+        CompositionMultifeedBehavior.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

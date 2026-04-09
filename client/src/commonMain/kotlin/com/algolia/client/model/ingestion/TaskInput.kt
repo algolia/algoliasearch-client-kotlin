@@ -25,32 +25,33 @@ import kotlinx.serialization.json.*
 public sealed interface TaskInput {
   @Serializable
   @JvmInline
+  public value class ShopifyInputValue(public val value: ShopifyInput) : TaskInput
+
+  @Serializable
+  @JvmInline
   public value class StreamingInputValue(public val value: StreamingInput) : TaskInput
 
   @Serializable
   @JvmInline
   public value class DockerStreamsInputValue(public val value: DockerStreamsInput) : TaskInput
 
-  @Serializable
-  @JvmInline
-  public value class ShopifyInputValue(public val value: ShopifyInput) : TaskInput
-
   public companion object {
+
+    public fun of(value: ShopifyInput): TaskInput = ShopifyInputValue(value)
 
     public fun of(value: StreamingInput): TaskInput = StreamingInputValue(value)
 
     public fun of(value: DockerStreamsInput): TaskInput = DockerStreamsInputValue(value)
-
-    public fun of(value: ShopifyInput): TaskInput = ShopifyInputValue(value)
   }
 }
 
 internal class TaskInputSerializer : JsonContentPolymorphicSerializer<TaskInput>(TaskInput::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<TaskInput> {
     return when {
+      element is JsonObject && element.containsKey("market") && element.containsKey("metafields") ->
+        ShopifyInput.serializer()
       element is JsonObject && element.containsKey("mapping") -> StreamingInput.serializer()
       element is JsonObject && element.containsKey("streams") -> DockerStreamsInput.serializer()
-      element is JsonObject -> ShopifyInput.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

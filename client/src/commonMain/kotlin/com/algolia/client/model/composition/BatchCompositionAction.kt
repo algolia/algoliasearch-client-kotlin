@@ -46,7 +46,8 @@ internal class BatchCompositionActionSerializer :
     element: JsonElement
   ): DeserializationStrategy<BatchCompositionAction> {
     return when {
-      element is JsonObject -> Composition.serializer()
+      element is JsonObject && element.containsKey("behavior") && element.containsKey("name") ->
+        Composition.serializer()
       element is JsonObject -> DeleteCompositionAction.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

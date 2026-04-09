@@ -26,11 +26,11 @@ import kotlinx.serialization.json.*
 public sealed interface Trigger {
   @Serializable
   @JvmInline
-  public value class OnDemandTriggerValue(public val value: OnDemandTrigger) : Trigger
+  public value class ScheduleTriggerValue(public val value: ScheduleTrigger) : Trigger
 
   @Serializable
   @JvmInline
-  public value class ScheduleTriggerValue(public val value: ScheduleTrigger) : Trigger
+  public value class OnDemandTriggerValue(public val value: OnDemandTrigger) : Trigger
 
   @Serializable
   @JvmInline
@@ -42,9 +42,9 @@ public sealed interface Trigger {
 
   public companion object {
 
-    public fun of(value: OnDemandTrigger): Trigger = OnDemandTriggerValue(value)
-
     public fun of(value: ScheduleTrigger): Trigger = ScheduleTriggerValue(value)
+
+    public fun of(value: OnDemandTrigger): Trigger = OnDemandTriggerValue(value)
 
     public fun of(value: SubscriptionTrigger): Trigger = SubscriptionTriggerValue(value)
 
@@ -55,8 +55,9 @@ public sealed interface Trigger {
 internal class TriggerSerializer : JsonContentPolymorphicSerializer<Trigger>(Trigger::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Trigger> {
     return when {
+      element is JsonObject && element.containsKey("cron") && element.containsKey("nextRun") ->
+        ScheduleTrigger.serializer()
       element is JsonObject -> OnDemandTrigger.serializer()
-      element is JsonObject -> ScheduleTrigger.serializer()
       element is JsonObject -> SubscriptionTrigger.serializer()
       element is JsonObject -> StreamingTrigger.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")

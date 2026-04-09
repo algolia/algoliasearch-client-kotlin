@@ -47,8 +47,8 @@ internal class TransformationInputSerializer :
     element: JsonElement
   ): DeserializationStrategy<TransformationInput> {
     return when {
-      element is JsonObject -> TransformationCode.serializer()
-      element is JsonObject -> TransformationNoCode.serializer()
+      element is JsonObject && element.containsKey("code") -> TransformationCode.serializer()
+      element is JsonObject && element.containsKey("steps") -> TransformationNoCode.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

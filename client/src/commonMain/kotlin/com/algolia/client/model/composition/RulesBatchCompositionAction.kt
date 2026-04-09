@@ -50,7 +50,7 @@ internal class RulesBatchCompositionActionSerializer :
     element: JsonElement
   ): DeserializationStrategy<RulesBatchCompositionAction> {
     return when {
-      element is JsonObject -> CompositionRule.serializer()
+      element is JsonObject && element.containsKey("consequence") -> CompositionRule.serializer()
       element is JsonObject -> DeleteCompositionRuleAction.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
