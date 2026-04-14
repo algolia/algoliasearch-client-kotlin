@@ -1,3 +1,9 @@
+## [3.39.4](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.39.3...3.39.4)
+
+- [16b17eea7b](https://github.com/algolia/api-clients-automation/commit/16b17eea7b) fix(clients): add discriminator fields for InjectedItemSource oneOf ([#6170](https://github.com/algolia/api-clients-automation/pull/6170)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+- [e8df706a83](https://github.com/algolia/api-clients-automation/commit/e8df706a83) fix(generators): auto-infer discriminator fields from unique required properties ([#6199](https://github.com/algolia/api-clients-automation/pull/6199)) by [@Fluf22](https://github.com/Fluf22/)
+- [d86a5438e2](https://github.com/algolia/api-clients-automation/commit/d86a5438e2) chore(deps): dependencies 2026-04-06 ([#6200](https://github.com/algolia/api-clients-automation/pull/6200)) by [@algolia-bot](https://github.com/algolia-bot/)
+
 ## [3.39.3](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.39.2...3.39.3)
 
 - [dc02ad1023](https://github.com/algolia/api-clients-automation/commit/dc02ad1023) chore(deps): dependencies 2026-03-30 ([#6169](https://github.com/algolia/api-clients-automation/pull/6169)) by [@algolia-bot](https://github.com/algolia-bot/)
