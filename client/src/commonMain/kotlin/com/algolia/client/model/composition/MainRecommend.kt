@@ -8,11 +8,13 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Injected items will originate from externally provided objectIDs (that must exist in the index)
- * given at runtime in the run request payload.
+ * MainRecommend
  *
- * @param `external`
+ * @param index Targeted index name.
  */
 @Serializable
-public data class ExternalSource(@SerialName(value = "external") val `external`: External) :
-  InjectedItemSource {}
+public data class MainRecommend(
+
+  /** Targeted index name. */
+  @SerialName(value = "index") val index: String
+) {}

@@ -8,15 +8,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Search
+ * InjectedItemExternal
  *
  * @param index Composition Index name.
  * @param params
+ * @param ordering
  */
 @Serializable
-public data class Search(
+public data class InjectedItemExternal(
 
   /** Composition Index name. */
   @SerialName(value = "index") val index: String,
   @SerialName(value = "params") val params: BaseInjectionQueryParameters? = null,
+  @SerialName(value = "ordering") val ordering: ExternalOrdering? = null,
 ) {}

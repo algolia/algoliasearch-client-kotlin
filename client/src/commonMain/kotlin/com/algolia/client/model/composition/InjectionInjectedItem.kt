@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * InjectedItem
+ * InjectionInjectedItem
  *
  * @param key injected Item unique identifier.
  * @param source
@@ -17,7 +17,7 @@ import kotlinx.serialization.json.*
  * @param metadata
  */
 @Serializable
-public data class InjectedItem(
+public data class InjectionInjectedItem(
 
   /** injected Item unique identifier. */
   @SerialName(value = "key") val key: String,

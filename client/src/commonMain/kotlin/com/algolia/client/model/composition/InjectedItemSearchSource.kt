@@ -8,11 +8,11 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * CompositionSource
+ * Injected items will originate from a search request performed on the specified index.
  *
  * @param search
  */
 @Serializable
-public data class CompositionSource(
-  @SerialName(value = "search") val search: CompositionSourceSearch
-) {}
+public data class InjectedItemSearchSource(
+  @SerialName(value = "search") val search: InjectedItemSearch
+) : InjectedItemSource {}

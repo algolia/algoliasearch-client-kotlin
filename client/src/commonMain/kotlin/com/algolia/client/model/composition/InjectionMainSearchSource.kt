@@ -8,15 +8,10 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * CompositionSourceSearch
+ * Organic result set will originate from a search request performed on the specified index.
  *
- * @param index Composition Main Index name.
- * @param params
+ * @param search
  */
 @Serializable
-public data class CompositionSourceSearch(
-
-  /** Composition Main Index name. */
-  @SerialName(value = "index") val index: String,
-  @SerialName(value = "params") val params: MainInjectionQueryParameters? = null,
-) {}
+public data class InjectionMainSearchSource(@SerialName(value = "search") val search: MainSearch) :
+  InjectionMainSource {}

@@ -8,8 +8,11 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Main
+ * Organic result set will originate from a recommend request.
  *
- * @param source
+ * @param recommend
  */
-@Serializable public data class Main(@SerialName(value = "source") val source: CompositionSource) {}
+@Serializable
+public data class InjectionMainRecommendSource(
+  @SerialName(value = "recommend") val recommend: MainRecommend
+) : InjectionMainSource {}

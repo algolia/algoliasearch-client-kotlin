@@ -8,10 +8,12 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Injected items will originate from a search request performed on the specified index.
+ * Injected items will originate from externally provided objectIDs (that must exist in the index)
+ * given at runtime in the run request payload.
  *
- * @param search
+ * @param `external`
  */
 @Serializable
-public data class SearchSource(@SerialName(value = "search") val search: Search) :
-  InjectedItemSource {}
+public data class InjectedItemExternalSource(
+  @SerialName(value = "external") val `external`: InjectedItemExternal
+) : InjectedItemSource {}

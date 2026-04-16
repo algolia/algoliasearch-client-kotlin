@@ -16,9 +16,9 @@ import kotlinx.serialization.json.*
  */
 @Serializable
 public data class Injection(
-  @SerialName(value = "main") val main: Main,
+  @SerialName(value = "main") val main: InjectionMain,
 
   /** list of injected items of the current Composition. */
-  @SerialName(value = "injectedItems") val injectedItems: List<InjectedItem>? = null,
+  @SerialName(value = "injectedItems") val injectedItems: List<InjectionInjectedItem>? = null,
   @SerialName(value = "deduplication") val deduplication: Deduplication? = null,
 ) {}
