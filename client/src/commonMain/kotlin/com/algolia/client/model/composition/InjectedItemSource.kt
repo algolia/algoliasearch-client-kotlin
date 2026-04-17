@@ -18,6 +18,7 @@ import kotlinx.serialization.json.*
  *
  * Implementations:
  * - [InjectedItemExternalSource]
+ * - [InjectedItemRecommendSource]
  * - [InjectedItemSearchSource]
  */
 @Serializable(InjectedItemSourceSerializer::class)
@@ -32,6 +33,12 @@ public sealed interface InjectedItemSource {
   public value class InjectedItemExternalSourceValue(public val value: InjectedItemExternalSource) :
     InjectedItemSource
 
+  @Serializable
+  @JvmInline
+  public value class InjectedItemRecommendSourceValue(
+    public val value: InjectedItemRecommendSource
+  ) : InjectedItemSource
+
   public companion object {
 
     public fun of(value: InjectedItemSearchSource): InjectedItemSource =
@@ -39,6 +46,9 @@ public sealed interface InjectedItemSource {
 
     public fun of(value: InjectedItemExternalSource): InjectedItemSource =
       InjectedItemExternalSourceValue(value)
+
+    public fun of(value: InjectedItemRecommendSource): InjectedItemSource =
+      InjectedItemRecommendSourceValue(value)
   }
 }
 
@@ -52,6 +62,8 @@ internal class InjectedItemSourceSerializer :
         InjectedItemSearchSource.serializer()
       element is JsonObject && element.containsKey("external") ->
         InjectedItemExternalSource.serializer()
+      element is JsonObject && element.containsKey("recommend") ->
+        InjectedItemRecommendSource.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

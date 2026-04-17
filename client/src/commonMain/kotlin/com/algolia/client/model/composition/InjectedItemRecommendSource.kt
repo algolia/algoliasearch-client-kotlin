@@ -8,15 +8,11 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * MainSearch
+ * Injected items will originate from a recommendation request performed on the specified index.
  *
- * @param index Index to retrieve search results from.
- * @param params
+ * @param recommend
  */
 @Serializable
-public data class MainSearch(
-
-  /** Index to retrieve search results from. */
-  @SerialName(value = "index") val index: String,
-  @SerialName(value = "params") val params: MainInjectionQueryParameters? = null,
-) {}
+public data class InjectedItemRecommendSource(
+  @SerialName(value = "recommend") val recommend: Recommend
+) : InjectedItemSource {}

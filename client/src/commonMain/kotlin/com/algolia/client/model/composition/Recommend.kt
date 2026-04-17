@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * MainRecommend
+ * Recommend
  *
  * @param indexName Index to retrieve recommendations from.
  * @param model
@@ -17,7 +17,7 @@ import kotlinx.serialization.json.*
  * @param fallbackParameters
  */
 @Serializable
-public data class MainRecommend(
+public data class Recommend(
 
   /** Index to retrieve recommendations from. */
   @SerialName(value = "indexName") val indexName: String,
@@ -25,7 +25,7 @@ public data class MainRecommend(
 
   /** Minimum score a recommendation must have to be included. */
   @SerialName(value = "threshold") val threshold: Int,
-  @SerialName(value = "queryParameters") val queryParameters: MainInjectionQueryParameters? = null,
+  @SerialName(value = "queryParameters") val queryParameters: BaseInjectionQueryParameters? = null,
   @SerialName(value = "fallbackParameters")
-  val fallbackParameters: MainInjectionQueryParameters? = null,
+  val fallbackParameters: BaseInjectionQueryParameters? = null,
 ) {}
