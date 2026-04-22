@@ -56,6 +56,7 @@ import kotlinx.serialization.json.*
  * @param hitsPerPage Number of hits per page.
  * @param query Search query.
  * @param params URL-encoded string of all search parameters.
+ * @param extensions
  */
 @Serializable(SearchResponseSerializer::class)
 public data class SearchResponse(
@@ -172,6 +173,7 @@ public data class SearchResponse(
 
   /** URL-encoded string of all search parameters. */
   val params: String? = null,
+  val extensions: ResponseExtensions? = null,
   val additionalProperties: Map<String, JsonElement>? = null,
 ) : SearchResult {}
 
@@ -212,6 +214,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
       element<Int>("hitsPerPage", isOptional = true)
       element<String>("query", isOptional = true)
       element<String>("params", isOptional = true)
+      element<ResponseExtensions>("extensions", isOptional = true)
     }
 
   override fun deserialize(decoder: Decoder): SearchResponse {
@@ -253,6 +256,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
       hitsPerPage = tree["hitsPerPage"]?.let { input.json.decodeFromJsonElement(it) },
       query = tree["query"]?.let { input.json.decodeFromJsonElement(it) },
       params = tree["params"]?.let { input.json.decodeFromJsonElement(it) },
+      extensions = tree["extensions"]?.let { input.json.decodeFromJsonElement(it) },
       additionalProperties = tree.filterKeys { it !in descriptor.elementNames },
     )
   }
@@ -299,6 +303,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
       value.hitsPerPage?.let { put("hitsPerPage", output.json.encodeToJsonElement(it)) }
       value.query?.let { put("query", output.json.encodeToJsonElement(it)) }
       value.params?.let { put("params", output.json.encodeToJsonElement(it)) }
+      value.extensions?.let { put("extensions", output.json.encodeToJsonElement(it)) }
       value.additionalProperties?.onEach { (key, element) -> put(key, element) }
     }
     (encoder as JsonEncoder).encodeJsonElement(json)

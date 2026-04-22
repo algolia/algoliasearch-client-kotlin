@@ -248,6 +248,7 @@ import kotlinx.serialization.json.*
  *   only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
  * @param reRankingApplyFilter
  * @param type
+ * @param extensions
  */
 @Serializable
 public data class SearchForHits(
@@ -669,4 +670,5 @@ public data class SearchForHits(
   @SerialName(value = "reRankingApplyFilter")
   val reRankingApplyFilter: ReRankingApplyFilter? = null,
   @SerialName(value = "type") val type: SearchTypeDefault? = null,
+  @SerialName(value = "extensions") val extensions: SearchExtensions? = null,
 ) : SearchQuery {}

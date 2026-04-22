@@ -53,6 +53,7 @@ import kotlinx.serialization.json.*
  * @param hitsPerPage Number of hits per page.
  * @param query Search query.
  * @param params URL-encoded string of all search parameters.
+ * @param extensions
  * @param cursor Cursor to get the next page of the response. The parameter must match the value
  *   returned in the response of a previous request. The last page of the response does not return a
  *   `cursor` attribute.
@@ -178,6 +179,7 @@ public data class BrowseResponse(
 
   /** URL-encoded string of all search parameters. */
   @SerialName(value = "params") val params: String? = null,
+  @SerialName(value = "extensions") val extensions: ResponseExtensions? = null,
 
   /**
    * Cursor to get the next page of the response. The parameter must match the value returned in the
