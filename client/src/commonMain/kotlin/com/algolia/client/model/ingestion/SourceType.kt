@@ -9,6 +9,7 @@ import kotlinx.serialization.*
 @Serializable
 public enum class SourceType(public val value: kotlin.String) {
 
+  @SerialName(value = "algoliaIndex") AlgoliaIndex("algoliaIndex"),
   @SerialName(value = "bigcommerce") Bigcommerce("bigcommerce"),
   @SerialName(value = "bigquery") Bigquery("bigquery"),
   @SerialName(value = "commercetools") Commercetools("commercetools"),

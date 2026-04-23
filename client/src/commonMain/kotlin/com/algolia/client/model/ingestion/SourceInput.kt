@@ -17,6 +17,7 @@ import kotlinx.serialization.json.*
  * SourceInput
  *
  * Implementations:
+ * - [SourceAlgoliaIndex]
  * - [SourceBigCommerce]
  * - [SourceBigQuery]
  * - [SourceCSV]
@@ -55,6 +56,10 @@ public sealed interface SourceInput {
 
   @Serializable
   @JvmInline
+  public value class SourceAlgoliaIndexValue(public val value: SourceAlgoliaIndex) : SourceInput
+
+  @Serializable
+  @JvmInline
   public value class SourceJSONValue(public val value: SourceJSON) : SourceInput
 
   @Serializable
@@ -74,6 +79,8 @@ public sealed interface SourceInput {
     public fun of(value: SourceBigQuery): SourceInput = SourceBigQueryValue(value)
 
     public fun of(value: SourceShopify): SourceInput = SourceShopifyValue(value)
+
+    public fun of(value: SourceAlgoliaIndex): SourceInput = SourceAlgoliaIndexValue(value)
 
     public fun of(value: SourceJSON): SourceInput = SourceJSONValue(value)
 
@@ -96,6 +103,7 @@ internal class SourceInputSerializer :
       element is JsonObject && element.containsKey("storeHash") -> SourceBigCommerce.serializer()
       element is JsonObject && element.containsKey("projectID") -> SourceBigQuery.serializer()
       element is JsonObject && element.containsKey("shopURL") -> SourceShopify.serializer()
+      element is JsonObject && element.containsKey("indexName") -> SourceAlgoliaIndex.serializer()
       element is JsonObject -> SourceJSON.serializer()
       element is JsonObject -> SourceCSV.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")

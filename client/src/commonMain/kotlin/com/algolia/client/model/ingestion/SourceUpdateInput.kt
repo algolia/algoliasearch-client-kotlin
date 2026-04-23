@@ -21,6 +21,7 @@ import kotlinx.serialization.json.*
  * - [SourceCSV]
  * - [SourceGA4BigQueryExport]
  * - [SourceJSON]
+ * - [SourceUpdateAlgoliaIndex]
  * - [SourceUpdateCommercetools]
  * - [SourceUpdateDocker]
  * - [SourceUpdateShopify]
@@ -59,6 +60,11 @@ public sealed interface SourceUpdateInput {
   public value class SourceUpdateShopifyValue(public val value: SourceUpdateShopify) :
     SourceUpdateInput
 
+  @Serializable
+  @JvmInline
+  public value class SourceUpdateAlgoliaIndexValue(public val value: SourceUpdateAlgoliaIndex) :
+    SourceUpdateInput
+
   public companion object {
 
     public fun of(value: SourceGA4BigQueryExport): SourceUpdateInput =
@@ -76,6 +82,9 @@ public sealed interface SourceUpdateInput {
     public fun of(value: SourceCSV): SourceUpdateInput = SourceCSVValue(value)
 
     public fun of(value: SourceUpdateShopify): SourceUpdateInput = SourceUpdateShopifyValue(value)
+
+    public fun of(value: SourceUpdateAlgoliaIndex): SourceUpdateInput =
+      SourceUpdateAlgoliaIndexValue(value)
   }
 }
 
@@ -96,6 +105,7 @@ internal class SourceUpdateInputSerializer :
       element is JsonObject -> SourceJSON.serializer()
       element is JsonObject -> SourceCSV.serializer()
       element is JsonObject -> SourceUpdateShopify.serializer()
+      element is JsonObject -> SourceUpdateAlgoliaIndex.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
