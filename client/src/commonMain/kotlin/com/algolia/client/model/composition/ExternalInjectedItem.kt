@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * ExternalInjectedItem
+ * Contains a list of objects to inject from an external source.
  *
  * @param items
  */

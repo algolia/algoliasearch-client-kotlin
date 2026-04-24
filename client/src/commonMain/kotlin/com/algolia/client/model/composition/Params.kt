@@ -57,7 +57,8 @@ import kotlinx.serialization.json.*
  *   [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering).
  * @param getRankingInfo Whether the run response should include detailed ranking information.
  * @param hitsPerPage Number of hits per page.
- * @param injectedItems A list of extenrally injected objectID groups into from an external source.
+ * @param injectedItems An object containing keys corresponding to the `key`s from an injection's
+ *   `injectedItems` and values containing a list of hits to inject.
  * @param insideBoundingBox
  * @param insidePolygon Coordinates of a polygon in which to search. Polygons are defined by 3 to
  *   10,000 points. Each point is represented by its latitude and longitude. Provide multiple
@@ -192,7 +193,10 @@ public data class Params(
   /** Number of hits per page. */
   @SerialName(value = "hitsPerPage") val hitsPerPage: Int? = null,
 
-  /** A list of extenrally injected objectID groups into from an external source. */
+  /**
+   * An object containing keys corresponding to the `key`s from an injection's `injectedItems` and
+   * values containing a list of hits to inject.
+   */
   @SerialName(value = "injectedItems")
   val injectedItems: Map<kotlin.String, ExternalInjectedItem>? = null,
   @SerialName(value = "insideBoundingBox") val insideBoundingBox: InsideBoundingBox? = null,
