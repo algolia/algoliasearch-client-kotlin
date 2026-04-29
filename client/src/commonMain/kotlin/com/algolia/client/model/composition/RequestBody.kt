@@ -11,6 +11,22 @@ import kotlinx.serialization.json.*
  * RequestBody
  *
  * @param params
+ * @param feedsOrder A list of Feed IDs that specifies the order in which to order the results in
+ *   the response. The IDs should be a subset of those in the `feeds` object of the targeted
+ *   `multifeed` Composition / Composition Rule, and only those specified will be processed. The
+ *   value overrides the value in the defined behavior, and when unspecified, the value defined in
+ *   the behavior is used. When neither value is present, all feeds are processed.
  */
 @Serializable
-public data class RequestBody(@SerialName(value = "params") val params: Params? = null) {}
+public data class RequestBody(
+  @SerialName(value = "params") val params: Params? = null,
+
+  /**
+   * A list of Feed IDs that specifies the order in which to order the results in the response. The
+   * IDs should be a subset of those in the `feeds` object of the targeted `multifeed` Composition /
+   * Composition Rule, and only those specified will be processed. The value overrides the value in
+   * the defined behavior, and when unspecified, the value defined in the behavior is used. When
+   * neither value is present, all feeds are processed.
+   */
+  @SerialName(value = "feedsOrder") val feedsOrder: List<String>? = null,
+) {}
