@@ -10,7 +10,6 @@ import kotlinx.serialization.json.*
 /**
  * API request body for updating a destination.
  *
- * @param type
  * @param name Descriptive name for the resource.
  * @param input
  * @param authenticationID Universally unique identifier (UUID) of an authentication resource.
@@ -18,11 +17,10 @@ import kotlinx.serialization.json.*
  */
 @Serializable
 public data class DestinationUpdate(
-  @SerialName(value = "type") val type: DestinationType? = null,
 
   /** Descriptive name for the resource. */
   @SerialName(value = "name") val name: String? = null,
-  @SerialName(value = "input") val input: DestinationInput? = null,
+  @SerialName(value = "input") val input: DestinationUpdateInput? = null,
 
   /** Universally unique identifier (UUID) of an authentication resource. */
   @SerialName(value = "authenticationID") val authenticationID: String? = null,
