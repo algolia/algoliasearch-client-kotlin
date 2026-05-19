@@ -14,7 +14,7 @@ import kotlinx.serialization.json.*
  *   suggestions.
  * @param indexName Name of the Query Suggestions index (case-sensitive).
  * @param languages
- * @param exclude
+ * @param exclude Words or regular expressions to exclude from the suggestions.
  * @param enablePersonalization Whether to turn on personalized query suggestions.
  * @param allowSpecialCharacters Whether to include suggestions with special characters.
  */
@@ -27,6 +27,8 @@ public data class ConfigurationWithIndex(
   /** Name of the Query Suggestions index (case-sensitive). */
   @SerialName(value = "indexName") val indexName: String,
   @SerialName(value = "languages") val languages: Languages? = null,
+
+  /** Words or regular expressions to exclude from the suggestions. */
   @SerialName(value = "exclude") val exclude: List<String>? = null,
 
   /** Whether to turn on personalized query suggestions. */

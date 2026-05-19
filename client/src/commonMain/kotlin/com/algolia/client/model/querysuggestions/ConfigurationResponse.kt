@@ -15,7 +15,7 @@ import kotlinx.serialization.json.*
  * @param sourceIndices Algolia indices from which to get the popular searches for query
  *   suggestions.
  * @param languages
- * @param exclude
+ * @param exclude Words or regular expressions to exclude from the suggestions.
  * @param enablePersonalization Whether to turn on personalized query suggestions.
  * @param allowSpecialCharacters Whether to include suggestions with special characters.
  */
@@ -31,6 +31,8 @@ public data class ConfigurationResponse(
   /** Algolia indices from which to get the popular searches for query suggestions. */
   @SerialName(value = "sourceIndices") val sourceIndices: List<SourceIndex>,
   @SerialName(value = "languages") val languages: Languages,
+
+  /** Words or regular expressions to exclude from the suggestions. */
   @SerialName(value = "exclude") val exclude: List<String>,
 
   /** Whether to turn on personalized query suggestions. */

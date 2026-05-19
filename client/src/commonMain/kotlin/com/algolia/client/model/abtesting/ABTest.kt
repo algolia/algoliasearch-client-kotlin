@@ -19,11 +19,21 @@ import kotlinx.serialization.json.*
  * @param variants A/B test variants. The first variant is your _control_ index, typically your
  *   production index. The second variant is an index with changed settings that you want to test
  *   against the control.
- * @param clickSignificance
- * @param conversionSignificance
- * @param addToCartSignificance
- * @param purchaseSignificance
- * @param revenueSignificance
+ * @param clickSignificance A/B test significance calculated from click events. Values of 0.95 or
+ *   higher can be considered significant, that is, the difference between A and B variants is _not_
+ *   due to random variations. Lower values have a.
+ * @param conversionSignificance A/B test significance calculated from conversion events. Values of
+ *   0.95 or higher can be considered significant, that is, the difference between A and B variants
+ *   is _not_ due to random variations.
+ * @param addToCartSignificance A/B test significance calculated from add-to-cart events. Values of
+ *   0.95 or higher can be considered significant, that is, the difference between A and B variants
+ *   is _not_ due to random variations.
+ * @param purchaseSignificance A/B test significance calculated from purchase events. Values of 0.95
+ *   or higher can be considered significant, that is, the difference between A and B variants is
+ *   _not_ due to random variations.
+ * @param revenueSignificance A/B test significance calculated from revenue data. Values of 0.95 or
+ *   higher can be considered significant, that is, the difference between A and B variants is _not_
+ *   due to random variations.
  * @param stoppedAt Date and time when the A/B test was stopped, in RFC 3339 format.
  * @param configuration
  */
@@ -51,10 +61,40 @@ public data class ABTest(
    * The second variant is an index with changed settings that you want to test against the control.
    */
   @SerialName(value = "variants") val variants: List<Variant>,
+
+  /**
+   * A/B test significance calculated from click events. Values of 0.95 or higher can be considered
+   * significant, that is, the difference between A and B variants is _not_ due to random
+   * variations. Lower values have a.
+   */
   @SerialName(value = "clickSignificance") val clickSignificance: Double? = null,
+
+  /**
+   * A/B test significance calculated from conversion events. Values of 0.95 or higher can be
+   * considered significant, that is, the difference between A and B variants is _not_ due to random
+   * variations.
+   */
   @SerialName(value = "conversionSignificance") val conversionSignificance: Double? = null,
+
+  /**
+   * A/B test significance calculated from add-to-cart events. Values of 0.95 or higher can be
+   * considered significant, that is, the difference between A and B variants is _not_ due to random
+   * variations.
+   */
   @SerialName(value = "addToCartSignificance") val addToCartSignificance: Double? = null,
+
+  /**
+   * A/B test significance calculated from purchase events. Values of 0.95 or higher can be
+   * considered significant, that is, the difference between A and B variants is _not_ due to random
+   * variations.
+   */
   @SerialName(value = "purchaseSignificance") val purchaseSignificance: Double? = null,
+
+  /**
+   * A/B test significance calculated from revenue data. Values of 0.95 or higher can be considered
+   * significant, that is, the difference between A and B variants is _not_ due to random
+   * variations.
+   */
   @SerialName(value = "revenueSignificance")
   val revenueSignificance: Map<kotlin.String, Double>? = null,
 

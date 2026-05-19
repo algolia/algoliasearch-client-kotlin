@@ -14,14 +14,24 @@ import kotlinx.serialization.json.*
  *   suggestions.
  * @param replicas If true, Query Suggestions uses all replica indices to find popular searches. If
  *   false, only the primary index is used.
- * @param analyticsTags
- * @param facets
+ * @param analyticsTags Analytics tags for filtering the popular searches. For more information, see
+ *   [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
+ * @param facets Facets to use as top categories with your suggestions. If provided, Query
+ *   Suggestions adds the top facet values to each suggestion.
  * @param minHits Minimum number of hits required to be included as a suggestion. A search query
  *   must at least generate `minHits` search results to be included in the Query Suggestions index.
  * @param minLetters Minimum letters required to be included as a suggestion. A search query must be
  *   at least `minLetters` long to be included in the Query Suggestions index.
- * @param generate
- * @param `external`
+ * @param generate Facets used for generating query suggestions from facet values. For example, if
+ *   you set `generate: [\"color\", \"brand\"]`, combinations from the facet values are added as
+ *   query suggestions, such as \"blue adidas\", \"red adidas\", \"blue nike\", \"red nike\", etc.
+ *   You can include nested lists.
+ * @param `external` Algolia indices with popular searches to use as query suggestions. Records of
+ *   these indices must have these attributes: - `query`: search query which will be added as a
+ *   suggestion - `count`: measure of popularity of that search query For example, you can export
+ *   popular searches from an external analytics provider, such as Google Analytics or Adobe
+ *   Analytics, and feed this data into an Algolia index. You can use this index to generate query
+ *   suggestions until your Algolia Analytics has collected enough data.
  */
 @Serializable
 public data class SourceIndex(
@@ -34,7 +44,17 @@ public data class SourceIndex(
    * the primary index is used.
    */
   @SerialName(value = "replicas") val replicas: Boolean? = null,
+
+  /**
+   * Analytics tags for filtering the popular searches. For more information, see
+   * [Segment your analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
+   */
   @SerialName(value = "analyticsTags") val analyticsTags: List<String>? = null,
+
+  /**
+   * Facets to use as top categories with your suggestions. If provided, Query Suggestions adds the
+   * top facet values to each suggestion.
+   */
   @SerialName(value = "facets") val facets: List<Facet>? = null,
 
   /**
@@ -48,6 +68,22 @@ public data class SourceIndex(
    * `minLetters` long to be included in the Query Suggestions index.
    */
   @SerialName(value = "minLetters") val minLetters: Int? = null,
+
+  /**
+   * Facets used for generating query suggestions from facet values. For example, if you set
+   * `generate: [\"color\", \"brand\"]`, combinations from the facet values are added as query
+   * suggestions, such as \"blue adidas\", \"red adidas\", \"blue nike\", \"red nike\", etc. You can
+   * include nested lists.
+   */
   @SerialName(value = "generate") val generate: List<List<String>>? = null,
+
+  /**
+   * Algolia indices with popular searches to use as query suggestions. Records of these indices
+   * must have these attributes: - `query`: search query which will be added as a suggestion -
+   * `count`: measure of popularity of that search query For example, you can export popular
+   * searches from an external analytics provider, such as Google Analytics or Adobe Analytics, and
+   * feed this data into an Algolia index. You can use this index to generate query suggestions
+   * until your Algolia Analytics has collected enough data.
+   */
   @SerialName(value = "external") val `external`: List<String>? = null,
 ) {}
