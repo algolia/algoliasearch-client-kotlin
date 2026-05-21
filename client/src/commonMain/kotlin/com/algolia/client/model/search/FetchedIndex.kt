@@ -27,6 +27,9 @@ import kotlinx.serialization.json.*
  *   all linked replicas.
  * @param virtual Only present if the index is a
  *   [virtual replica](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-an-index-alphabetically/#virtual-replicas).
+ * @param abTest
+ * @param sourceABTest Name of the index that owns the A/B test configuration. Only present when
+ *   this index participates in an A/B test configured on another index.
  */
 @Serializable
 public data class FetchedIndex(
@@ -75,4 +78,11 @@ public data class FetchedIndex(
    * [virtual replica](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-an-index-alphabetically/#virtual-replicas).
    */
   @SerialName(value = "virtual") val virtual: Boolean? = null,
+  @SerialName(value = "abTest") val abTest: FetchedIndexAbTest? = null,
+
+  /**
+   * Name of the index that owns the A/B test configuration. Only present when this index
+   * participates in an A/B test configured on another index.
+   */
+  @SerialName(value = "sourceABTest") val sourceABTest: String? = null,
 ) {}
