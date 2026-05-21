@@ -12,8 +12,6 @@ import kotlinx.serialization.json.*
  *
  * @param id A/B test ID.
  * @param variants A/B test variants.
- * @param isDark Whether the A/B test is a dark test (server-side measured, not user-facing). Only
- *   present when true.
  * @param version A/B test schema version. Only present for v2 and later tests.
  * @param type A/B test type. Only present for v2 and later tests. Currently always
  *   `index-configuration`.
@@ -27,12 +25,6 @@ public data class FetchedIndexAbTest(
 
   /** A/B test variants. */
   @SerialName(value = "variants") val variants: List<FetchedIndexAbTestVariant>,
-
-  /**
-   * Whether the A/B test is a dark test (server-side measured, not user-facing). Only present when
-   * true.
-   */
-  @SerialName(value = "isDark") val isDark: Boolean? = null,
 
   /** A/B test schema version. Only present for v2 and later tests. */
   @SerialName(value = "version") val version: Int? = null,
