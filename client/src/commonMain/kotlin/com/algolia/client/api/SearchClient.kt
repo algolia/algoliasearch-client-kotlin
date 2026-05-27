@@ -47,6 +47,54 @@ public class SearchClient(
     }
 
   /**
+   * Ingestion transporter used by the `*WithTransformation` helpers on this client. Set via
+   * [setTransformationOptions] or the [withTransformation] companion factory; `null` until one of
+   * those paths runs. Internal to the module — consumers reconfigure through the public setter and
+   * factory, matching the encapsulation chosen by every other language's client.
+   */
+  @kotlin.concurrent.Volatile
+  internal var ingestionTransporter: IngestionClient? = null
+    private set
+
+  /**
+   * Replaces the ingestion transporter used by the `*WithTransformation` helpers. Builds a fresh
+   * [IngestionClient] from the supplied [TransformationOptions], applying Ingestion API defaults
+   * for any field left unset.
+   *
+   * The write to [ingestionTransporter] is annotated [kotlin.concurrent.Volatile]; concurrent
+   * readers in `*WithTransformation` helpers will observe either the old or new transporter, never
+   * a torn reference. Calling this while a `*WithTransformation` operation is in flight may cause
+   * that operation to fail — callers SHOULD avoid in-flight reconfiguration.
+   */
+  public fun setTransformationOptions(transformationOptions: TransformationOptions) {
+    ingestionTransporter =
+      IngestionClient(
+        appId = appId,
+        apiKey = apiKey,
+        region = transformationOptions.region,
+        options = transformationOptions.clientOptions ?: ClientOptions(),
+      )
+  }
+
+  public companion object {
+    /**
+     * Creates a [SearchClient] preconfigured with a [TransformationOptions] for use with the
+     * `*WithTransformation` helpers. The ingestion transporter is initialised eagerly using
+     * Ingestion API defaults; only fields explicitly set on [transformationOptions] override those
+     * defaults.
+     */
+    public fun withTransformation(
+      appId: String,
+      apiKey: String,
+      transformationOptions: TransformationOptions,
+      options: ClientOptions = ClientOptions(),
+    ): SearchClient =
+      SearchClient(appId = appId, apiKey = apiKey, options = options).apply {
+        setTransformationOptions(transformationOptions)
+      }
+  }
+
+  /**
    * Creates a new API key with specific permissions and restrictions.
    *
    * Required API Key ACLs:

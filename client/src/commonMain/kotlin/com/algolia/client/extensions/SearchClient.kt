@@ -1,12 +1,16 @@
 package com.algolia.client.extensions
 
+import com.algolia.client.api.IngestionClient
 import com.algolia.client.api.SearchClient
 import com.algolia.client.exception.AlgoliaApiException
+import com.algolia.client.exception.AlgoliaClientException
 import com.algolia.client.extensions.internal.*
 import com.algolia.client.extensions.internal.DisjunctiveFaceting
 import com.algolia.client.extensions.internal.buildRestrictionString
 import com.algolia.client.extensions.internal.encodeKeySHA256
 import com.algolia.client.extensions.internal.retryUntil
+import com.algolia.client.model.ingestion.Action as IngestionAction
+import com.algolia.client.model.ingestion.WatchResponse as IngestionWatchResponse
 import com.algolia.client.model.search.*
 import com.algolia.client.transport.RequestOptions
 import io.ktor.util.*
@@ -16,8 +20,33 @@ import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.*
 import kotlinx.serialization.json.JsonObject
+
+private const val TRANSFORMATION_OPTIONS_REQUIRED =
+  "`transformationOptions` must be installed on the client before calling this method. " +
+    "Use `SearchClient.withTransformation(...)` or `searchClient.setTransformationOptions(...)`. " +
+    "See https://www.algolia.com/doc/libraries/sdk/methods/ingestion"
+
+private fun SearchClient.requireIngestionTransporter(): IngestionClient =
+  ingestionTransporter ?: throw AlgoliaClientException(TRANSFORMATION_OPTIONS_REQUIRED)
+
+private fun SearchClient.ingestionToSearchWatchResponses(
+  responses: List<IngestionWatchResponse>
+): List<WatchResponse> {
+  return try {
+    val json = options.json
+    val encoded =
+      json.encodeToString(ListSerializer(IngestionWatchResponse.serializer()), responses)
+    json.decodeFromString(ListSerializer(WatchResponse.serializer()), encoded)
+  } catch (e: Throwable) {
+    throw AlgoliaClientException(
+      "ingestion WatchResponse cannot be converted to a search WatchResponse",
+      e,
+    )
+  }
+}
 
 /**
  * Wait for an API key to be added, updated or deleted based on a given `operation`.
@@ -518,8 +547,11 @@ public suspend fun SearchClient.replaceAllObjects(
 
     return ReplaceAllObjectsResponse(copy, batchResponses, move)
   } catch (e: Exception) {
-    deleteIndex(tmpIndexName)
-
+    try {
+      deleteIndex(tmpIndexName)
+    } catch (rollback: Throwable) {
+      e.addSuppressed(rollback)
+    }
     throw e
   }
 }
@@ -716,4 +748,163 @@ public suspend fun SearchClient.browseSynonyms(
     validate = validate ?: { response -> response.hits.count() < hitsPerPage },
     aggregator = aggregator,
   )
+}
+
+/**
+ * Helper: Similar to the `saveObjects` method but requires a Push connector to be created first, in
+ * order to transform records before indexing them to Algolia. The [TransformationOptions] must have
+ * been installed on the client via [SearchClient.withTransformation] or
+ * [SearchClient.setTransformationOptions].
+ *
+ * @param indexName The index in which to perform the request.
+ * @param objects The list of objects to index.
+ * @param waitForTasks If true, wait for each push to complete before returning.
+ * @param batchSize The size of the batch. Default is 1000.
+ * @param requestOptions The requestOptions to send along with the query, they will be merged with
+ *   the transporter requestOptions.
+ * @return The list of ingestion `WatchResponse`s, one per push request.
+ */
+public suspend fun SearchClient.saveObjectsWithTransformation(
+  indexName: String,
+  objects: List<JsonObject>,
+  waitForTasks: Boolean = false,
+  batchSize: Int = 1000,
+  requestOptions: RequestOptions? = null,
+): List<IngestionWatchResponse> =
+  requireIngestionTransporter()
+    .chunkedPush(
+      indexName = indexName,
+      objects = objects,
+      action = IngestionAction.AddObject,
+      waitForTasks = waitForTasks,
+      batchSize = batchSize,
+      referenceIndexName = null,
+      requestOptions = requestOptions,
+    )
+
+/**
+ * Helper: Similar to the `partialUpdateObjects` method but requires a Push connector to be created
+ * first, in order to transform records before indexing them to Algolia. The [TransformationOptions]
+ * must have been installed on the client via [SearchClient.withTransformation] or
+ * [SearchClient.setTransformationOptions].
+ *
+ * @param indexName The index in which to perform the request.
+ * @param objects The list of objects to update in the index.
+ * @param createIfNotExists To be provided if non-existing objects are passed, otherwise, the call
+ *   will fail.
+ * @param waitForTasks If true, wait for each push to complete before returning.
+ * @param batchSize The size of the batch. Default is 1000.
+ * @param requestOptions The requestOptions to send along with the query, they will be merged with
+ *   the transporter requestOptions.
+ * @return The list of ingestion `WatchResponse`s, one per push request.
+ */
+public suspend fun SearchClient.partialUpdateObjectsWithTransformation(
+  indexName: String,
+  objects: List<JsonObject>,
+  createIfNotExists: Boolean = false,
+  waitForTasks: Boolean = false,
+  batchSize: Int = 1000,
+  requestOptions: RequestOptions? = null,
+): List<IngestionWatchResponse> =
+  requireIngestionTransporter()
+    .chunkedPush(
+      indexName = indexName,
+      objects = objects,
+      action =
+        if (createIfNotExists) IngestionAction.PartialUpdateObject
+        else IngestionAction.PartialUpdateObjectNoCreate,
+      waitForTasks = waitForTasks,
+      batchSize = batchSize,
+      referenceIndexName = null,
+      requestOptions = requestOptions,
+    )
+
+/**
+ * Helper: Replaces all records in an index with a new set of records by leveraging the
+ * Transformation pipeline. The [TransformationOptions] must have been installed on the client via
+ * [SearchClient.withTransformation] or [SearchClient.setTransformationOptions].
+ *
+ * Internally, this method copies the existing index settings, synonyms and query rules, pushes the
+ * new records to a temporary index through the ingestion pipeline, and finally moves the temporary
+ * index over the original one.
+ *
+ * @param indexName The index in which to perform the request.
+ * @param objects The list of objects to replace.
+ * @param batchSize The size of the batch. Default is 1000.
+ * @param scopes The `scopes` to keep from the index. Defaults to ['settings', 'rules', 'synonyms'].
+ * @param requestOptions The requestOptions to send along with the query, they will be merged with
+ *   the transporter requestOptions.
+ * @return The responses from the three-step operations: copy, push, move.
+ */
+public suspend fun SearchClient.replaceAllObjectsWithTransformation(
+  indexName: String,
+  objects: List<JsonObject>,
+  batchSize: Int = 1000,
+  scopes: List<ScopeType> = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
+  requestOptions: RequestOptions? = null,
+): ReplaceAllObjectsWithTransformationResponse {
+  val transporter = requireIngestionTransporter()
+  val tmpIndexName = "${indexName}_tmp_${Random.nextInt(from = 0, until = 100)}"
+
+  try {
+    var copy =
+      operationIndex(
+        indexName = indexName,
+        operationIndexParams =
+          OperationIndexParams(
+            operation = OperationType.Copy,
+            destination = tmpIndexName,
+            scope = scopes,
+          ),
+        requestOptions = requestOptions,
+      )
+
+    val watchResponses =
+      transporter.chunkedPush(
+        indexName = tmpIndexName,
+        objects = objects,
+        action = IngestionAction.AddObject,
+        waitForTasks = true,
+        batchSize = batchSize,
+        referenceIndexName = indexName,
+        requestOptions = requestOptions,
+      )
+
+    waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
+
+    copy =
+      operationIndex(
+        indexName = indexName,
+        operationIndexParams =
+          OperationIndexParams(
+            operation = OperationType.Copy,
+            destination = tmpIndexName,
+            scope = scopes,
+          ),
+        requestOptions = requestOptions,
+      )
+    waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
+
+    val move =
+      operationIndex(
+        indexName = tmpIndexName,
+        operationIndexParams =
+          OperationIndexParams(operation = OperationType.Move, destination = indexName),
+        requestOptions = requestOptions,
+      )
+    waitForTask(indexName = tmpIndexName, taskID = move.taskID)
+
+    return ReplaceAllObjectsWithTransformationResponse(
+      copyOperationResponse = copy,
+      watchResponses = ingestionToSearchWatchResponses(watchResponses),
+      moveOperationResponse = move,
+    )
+  } catch (e: Exception) {
+    try {
+      deleteIndex(tmpIndexName)
+    } catch (rollback: Throwable) {
+      e.addSuppressed(rollback)
+    }
+    throw e
+  }
 }
