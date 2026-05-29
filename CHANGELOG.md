@@ -1,3 +1,13 @@
+## [3.42.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.41.1...3.42.0)
+
+- [84ebc480a8](https://github.com/algolia/api-clients-automation/commit/84ebc480a8) chore(deps): dependencies 2026-05-15 ([#6400](https://github.com/algolia/api-clients-automation/pull/6400)) by [@Fluf22](https://github.com/Fluf22/)
+- [90da6bf0ae](https://github.com/algolia/api-clients-automation/commit/90da6bf0ae) chore(deps): dependencies 2026-05-18 ([#6429](https://github.com/algolia/api-clients-automation/pull/6429)) by [@Fluf22](https://github.com/Fluf22/)
+- [eddd51e349](https://github.com/algolia/api-clients-automation/commit/eddd51e349) fix(specs): document abTest field on listIndices response ([#6443](https://github.com/algolia/api-clients-automation/pull/6443)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+- [1d3f2c149b](https://github.com/algolia/api-clients-automation/commit/1d3f2c149b) fix(specs): clean up abTest schema on listIndices response ([#6448](https://github.com/algolia/api-clients-automation/pull/6448)) by [@Fluf22](https://github.com/Fluf22/)
+- [35bf16c848](https://github.com/algolia/api-clients-automation/commit/35bf16c848) fix(specs): BREAKING CHANGE – add searchResponsePartial fallback to searchResult oneOf ([#6350](https://github.com/algolia/api-clients-automation/pull/6350)) by [@Fluf22](https://github.com/Fluf22/)
+  - For those of you who want really clean responses without hits nor facets, we added a third fallback type to the search response. It should not impact the rest of the users.
+- [e4e5d7f555](https://github.com/algolia/api-clients-automation/commit/e4e5d7f555) feat(kotlin): add TransformationOptions for ingestion transporter ([#6462](https://github.com/algolia/api-clients-automation/pull/6462)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+
 ## [3.41.1](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.41.0...3.41.1)
 
 - [363cc2d91b](https://github.com/algolia/api-clients-automation/commit/363cc2d91b) fix(specs): Ingestion API - update destination payload ([#6320](https://github.com/algolia/api-clients-automation/pull/6320)) by [@sbellone](https://github.com/sbellone/)

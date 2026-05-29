@@ -1,5 +1,5 @@
 package com.algolia.client
 
 internal object BuildConfig {
-  internal const val VERSION: String = "3.41.1"
+  internal const val VERSION: String = "3.42.0"
 }
