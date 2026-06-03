@@ -24,6 +24,9 @@ import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.*
 import kotlinx.serialization.json.JsonObject
 
+/** The default maximum number of retries when polling for task completion. */
+public const val DEFAULT_MAX_RETRIES: Int = 100
+
 private const val TRANSFORMATION_OPTIONS_REQUIRED =
   "`transformationOptions` must be installed on the client before calling this method. " +
     "Use `SearchClient.withTransformation(...)` or `searchClient.setTransformationOptions(...)`. " +
@@ -55,7 +58,7 @@ private fun SearchClient.ingestionToSearchWatchResponses(
  * @param operation The `operation` that was done on a `key`.
  * @param apiKey Necessary to know if an `update` operation has been processed, compare fields of
  *   the response with it.
- * @param maxRetries The maximum number of retries. 50 by default. (optional)
+ * @param maxRetries The maximum number of retries. 100 by default. (optional)
  * @param timeout The function to decide how long to wait between retries. min(retries * 200,
  *     5000) by default. (optional)
  *
@@ -66,7 +69,7 @@ public suspend fun SearchClient.waitForApiKey(
   key: String,
   operation: ApiKeyOperation,
   apiKey: ApiKey? = null,
-  maxRetries: Int = 50,
+  maxRetries: Int = DEFAULT_MAX_RETRIES,
   timeout: Duration = Duration.INFINITE,
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
@@ -122,7 +125,7 @@ public suspend fun SearchClient.waitForApiKey(
 public suspend fun SearchClient.waitForTask(
   indexName: String,
   taskID: Long,
-  maxRetries: Int = 50,
+  maxRetries: Int = DEFAULT_MAX_RETRIES,
   timeout: Duration = Duration.INFINITE,
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
@@ -146,7 +149,7 @@ public suspend fun SearchClient.waitForTask(
 public suspend fun SearchClient.waitTask(
   indexName: String,
   taskID: Long,
-  maxRetries: Int = 50,
+  maxRetries: Int = DEFAULT_MAX_RETRIES,
   timeout: Duration = Duration.INFINITE,
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
@@ -174,7 +177,7 @@ public suspend fun SearchClient.waitTask(
  */
 public suspend fun SearchClient.waitForAppTask(
   taskID: Long,
-  maxRetries: Int = 50,
+  maxRetries: Int = DEFAULT_MAX_RETRIES,
   timeout: Duration = Duration.INFINITE,
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
@@ -195,7 +198,7 @@ public suspend fun SearchClient.waitForAppTask(
 )
 public suspend fun SearchClient.waitAppTask(
   taskID: Long,
-  maxRetries: Int = 50,
+  maxRetries: Int = DEFAULT_MAX_RETRIES,
   timeout: Duration = Duration.INFINITE,
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
@@ -225,7 +228,7 @@ public suspend fun SearchClient.waitAppTask(
 public suspend fun SearchClient.waitKeyUpdate(
   key: String,
   apiKey: ApiKey,
-  maxRetries: Int = 50,
+  maxRetries: Int = DEFAULT_MAX_RETRIES,
   timeout: Duration = Duration.INFINITE,
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
@@ -262,7 +265,7 @@ public suspend fun SearchClient.waitKeyUpdate(
  */
 public suspend fun SearchClient.waitKeyCreation(
   key: String,
-  maxRetries: Int = 50,
+  maxRetries: Int = DEFAULT_MAX_RETRIES,
   timeout: Duration = Duration.INFINITE,
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
@@ -295,7 +298,7 @@ public suspend fun SearchClient.waitKeyCreation(
  */
 public suspend fun SearchClient.waitKeyDelete(
   key: String,
-  maxRetries: Int = 50,
+  maxRetries: Int = DEFAULT_MAX_RETRIES,
   timeout: Duration = Duration.INFINITE,
   initialDelay: Duration = 200.milliseconds,
   maxDelay: Duration = 5.seconds,
@@ -358,6 +361,7 @@ public suspend fun SearchClient.searchForFacets(
  * @param batchSize The size of the batch. Default is 1000.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with
  *   the transporter requestOptions.
+ * @param chunkedOptions Optional shared configuration for chunked helpers (e.g. `maxRetries`).
  * @return The list of responses from the batch requests.
  */
 public suspend fun SearchClient.chunkedBatch(
@@ -367,7 +371,9 @@ public suspend fun SearchClient.chunkedBatch(
   waitForTasks: Boolean,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
+  chunkedOptions: ChunkedHelperOptions = ChunkedHelperOptions(),
 ): List<BatchResponse> {
+  val maxRetries = chunkedOptions.maxRetries
   val tasks = mutableListOf<BatchResponse>()
   objects.chunked(batchSize).forEach { chunk ->
     val requests = chunk.map { BatchRequest(action = action, body = it) }
@@ -380,7 +386,7 @@ public suspend fun SearchClient.chunkedBatch(
     tasks.add(batch)
   }
   if (waitForTasks) {
-    tasks.forEach { waitForTask(indexName, it.taskID) }
+    tasks.forEach { waitForTask(indexName, it.taskID, maxRetries = maxRetries) }
   }
   return tasks
 }
@@ -395,6 +401,7 @@ public suspend fun SearchClient.chunkedBatch(
  * @param batchSize The size of the batch. Default is 1000.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with
  *   the transporter requestOptions.
+ * @param chunkedOptions Optional shared configuration for chunked helpers (e.g. `maxRetries`).
  * @return The list of responses from the batch requests.
  */
 public suspend fun SearchClient.saveObjects(
@@ -403,6 +410,7 @@ public suspend fun SearchClient.saveObjects(
   waitForTasks: Boolean = false,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
+  chunkedOptions: ChunkedHelperOptions = ChunkedHelperOptions(),
 ): List<BatchResponse> =
   this.chunkedBatch(
     indexName = indexName,
@@ -411,6 +419,7 @@ public suspend fun SearchClient.saveObjects(
     waitForTasks = waitForTasks,
     batchSize = batchSize,
     requestOptions = requestOptions,
+    chunkedOptions = chunkedOptions,
   )
 
 /**
@@ -423,6 +432,7 @@ public suspend fun SearchClient.saveObjects(
  * @param batchSize The size of the batch. Default is 1000.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with
  *   the transporter requestOptions.
+ * @param chunkedOptions Optional shared configuration for chunked helpers (e.g. `maxRetries`).
  * @return The list of responses from the batch requests.
  */
 public suspend fun SearchClient.deleteObjects(
@@ -431,6 +441,7 @@ public suspend fun SearchClient.deleteObjects(
   waitForTasks: Boolean = false,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
+  chunkedOptions: ChunkedHelperOptions = ChunkedHelperOptions(),
 ): List<BatchResponse> =
   this.chunkedBatch(
     indexName = indexName,
@@ -439,6 +450,7 @@ public suspend fun SearchClient.deleteObjects(
     waitForTasks = waitForTasks,
     batchSize = batchSize,
     requestOptions = requestOptions,
+    chunkedOptions = chunkedOptions,
   )
 
 /**
@@ -454,6 +466,7 @@ public suspend fun SearchClient.deleteObjects(
  * @param batchSize The size of the batch. Default is 1000.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with
  *   the transporter requestOptions.
+ * @param chunkedOptions Optional shared configuration for chunked helpers (e.g. `maxRetries`).
  * @return The list of responses from the batch requests.
  */
 public suspend fun SearchClient.partialUpdateObjects(
@@ -463,6 +476,7 @@ public suspend fun SearchClient.partialUpdateObjects(
   waitForTasks: Boolean = false,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
+  chunkedOptions: ChunkedHelperOptions = ChunkedHelperOptions(),
 ): List<BatchResponse> =
   this.chunkedBatch(
     indexName = indexName,
@@ -472,6 +486,7 @@ public suspend fun SearchClient.partialUpdateObjects(
     waitForTasks = waitForTasks,
     batchSize = batchSize,
     requestOptions = requestOptions,
+    chunkedOptions = chunkedOptions,
   )
 
 /**
@@ -487,6 +502,7 @@ public suspend fun SearchClient.partialUpdateObjects(
  * @param objects The list of objects to replace.
  * @param batchSize The size of the batch. Default is 1000.
  * @param scopes The `scopes` to keep from the index. Defaults to ['settings', 'rules', 'synonyms'].
+ * @param chunkedOptions Optional shared configuration for chunked helpers (e.g. `maxRetries`).
  * @return responses from the three-step operations: copy, batch, move.
  */
 public suspend fun SearchClient.replaceAllObjects(
@@ -495,7 +511,9 @@ public suspend fun SearchClient.replaceAllObjects(
   batchSize: Int = 1000,
   scopes: List<ScopeType> = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
   requestOptions: RequestOptions? = null,
+  chunkedOptions: ChunkedHelperOptions = ChunkedHelperOptions(),
 ): ReplaceAllObjectsResponse {
+  val maxRetries = chunkedOptions.maxRetries
   val tmpIndexName = "${indexName}_tmp_${Random.nextInt(from = 0, until = 100)}"
 
   try {
@@ -519,9 +537,10 @@ public suspend fun SearchClient.replaceAllObjects(
         waitForTasks = true,
         batchSize = batchSize,
         requestOptions = requestOptions,
+        chunkedOptions = chunkedOptions,
       )
 
-    waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
+    waitForTask(indexName = tmpIndexName, taskID = copy.taskID, maxRetries = maxRetries)
 
     copy =
       operationIndex(
@@ -534,7 +553,7 @@ public suspend fun SearchClient.replaceAllObjects(
           ),
         requestOptions = requestOptions,
       )
-    waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
+    waitForTask(indexName = tmpIndexName, taskID = copy.taskID, maxRetries = maxRetries)
 
     val move =
       operationIndex(
@@ -543,7 +562,7 @@ public suspend fun SearchClient.replaceAllObjects(
           OperationIndexParams(operation = OperationType.Move, destination = indexName),
         requestOptions = requestOptions,
       )
-    waitForTask(indexName = tmpIndexName, taskID = move.taskID)
+    waitForTask(indexName = tmpIndexName, taskID = move.taskID, maxRetries = maxRetries)
 
     return ReplaceAllObjectsResponse(copy, batchResponses, move)
   } catch (e: Exception) {
@@ -762,6 +781,7 @@ public suspend fun SearchClient.browseSynonyms(
  * @param batchSize The size of the batch. Default is 1000.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with
  *   the transporter requestOptions.
+ * @param chunkedOptions Optional shared configuration for chunked helpers (e.g. `maxRetries`).
  * @return The list of ingestion `WatchResponse`s, one per push request.
  */
 public suspend fun SearchClient.saveObjectsWithTransformation(
@@ -770,6 +790,7 @@ public suspend fun SearchClient.saveObjectsWithTransformation(
   waitForTasks: Boolean = false,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
+  chunkedOptions: ChunkedHelperOptions = ChunkedHelperOptions(),
 ): List<IngestionWatchResponse> =
   requireIngestionTransporter()
     .chunkedPush(
@@ -780,6 +801,7 @@ public suspend fun SearchClient.saveObjectsWithTransformation(
       batchSize = batchSize,
       referenceIndexName = null,
       requestOptions = requestOptions,
+      chunkedOptions = chunkedOptions,
     )
 
 /**
@@ -796,6 +818,7 @@ public suspend fun SearchClient.saveObjectsWithTransformation(
  * @param batchSize The size of the batch. Default is 1000.
  * @param requestOptions The requestOptions to send along with the query, they will be merged with
  *   the transporter requestOptions.
+ * @param chunkedOptions Optional shared configuration for chunked helpers (e.g. `maxRetries`).
  * @return The list of ingestion `WatchResponse`s, one per push request.
  */
 public suspend fun SearchClient.partialUpdateObjectsWithTransformation(
@@ -805,6 +828,7 @@ public suspend fun SearchClient.partialUpdateObjectsWithTransformation(
   waitForTasks: Boolean = false,
   batchSize: Int = 1000,
   requestOptions: RequestOptions? = null,
+  chunkedOptions: ChunkedHelperOptions = ChunkedHelperOptions(),
 ): List<IngestionWatchResponse> =
   requireIngestionTransporter()
     .chunkedPush(
@@ -817,6 +841,7 @@ public suspend fun SearchClient.partialUpdateObjectsWithTransformation(
       batchSize = batchSize,
       referenceIndexName = null,
       requestOptions = requestOptions,
+      chunkedOptions = chunkedOptions,
     )
 
 /**
@@ -834,6 +859,7 @@ public suspend fun SearchClient.partialUpdateObjectsWithTransformation(
  * @param scopes The `scopes` to keep from the index. Defaults to ['settings', 'rules', 'synonyms'].
  * @param requestOptions The requestOptions to send along with the query, they will be merged with
  *   the transporter requestOptions.
+ * @param chunkedOptions Optional shared configuration for chunked helpers (e.g. `maxRetries`).
  * @return The responses from the three-step operations: copy, push, move.
  */
 public suspend fun SearchClient.replaceAllObjectsWithTransformation(
@@ -842,8 +868,10 @@ public suspend fun SearchClient.replaceAllObjectsWithTransformation(
   batchSize: Int = 1000,
   scopes: List<ScopeType> = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
   requestOptions: RequestOptions? = null,
+  chunkedOptions: ChunkedHelperOptions = ChunkedHelperOptions(),
 ): ReplaceAllObjectsWithTransformationResponse {
   val transporter = requireIngestionTransporter()
+  val maxRetries = chunkedOptions.maxRetries
   val tmpIndexName = "${indexName}_tmp_${Random.nextInt(from = 0, until = 100)}"
 
   try {
@@ -868,9 +896,10 @@ public suspend fun SearchClient.replaceAllObjectsWithTransformation(
         batchSize = batchSize,
         referenceIndexName = indexName,
         requestOptions = requestOptions,
+        chunkedOptions = chunkedOptions,
       )
 
-    waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
+    waitForTask(indexName = tmpIndexName, taskID = copy.taskID, maxRetries = maxRetries)
 
     copy =
       operationIndex(
@@ -883,7 +912,7 @@ public suspend fun SearchClient.replaceAllObjectsWithTransformation(
           ),
         requestOptions = requestOptions,
       )
-    waitForTask(indexName = tmpIndexName, taskID = copy.taskID)
+    waitForTask(indexName = tmpIndexName, taskID = copy.taskID, maxRetries = maxRetries)
 
     val move =
       operationIndex(
@@ -892,7 +921,7 @@ public suspend fun SearchClient.replaceAllObjectsWithTransformation(
           OperationIndexParams(operation = OperationType.Move, destination = indexName),
         requestOptions = requestOptions,
       )
-    waitForTask(indexName = tmpIndexName, taskID = move.taskID)
+    waitForTask(indexName = tmpIndexName, taskID = move.taskID, maxRetries = maxRetries)
 
     return ReplaceAllObjectsWithTransformationResponse(
       copyOperationResponse = copy,

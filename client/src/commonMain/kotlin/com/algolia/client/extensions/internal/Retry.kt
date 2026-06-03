@@ -11,7 +11,7 @@ import kotlinx.coroutines.withTimeoutOrNull
  *
  * @param retry The suspend function to be retried.
  * @param until The condition to be satisfied for the [retry] function to stop retrying.
- * @param maxRetries The maximum number of retries allowed. If null, it will default to 50 retries.
+ * @param maxRetries The maximum number of retries allowed. If null, it will default to 100 retries.
  * @param timeout The maximum time allowed for the retries in milliseconds. If null, no timeout is
  *   applied.
  * @param initialDelay The initial delay between retries in milliseconds (default: 200 ms).
@@ -33,7 +33,9 @@ internal suspend fun <T> retryUntil(
       delay(currentDelay)
       currentDelay = minOf(currentDelay * 2, maxDelay)
     }
-    throw AlgoliaWaitException("The maximum number of retries ($maxRetries) exceeded")
+    throw AlgoliaWaitException(
+      "Stopped waiting for the task after $maxRetries retries. This does not mean the operation failed; it may still complete. If you need to keep polling, retry with a higher maxRetries."
+    )
   }
 
   return if (timeout != Duration.INFINITE) {

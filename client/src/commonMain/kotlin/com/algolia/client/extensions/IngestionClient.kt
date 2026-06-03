@@ -31,6 +31,7 @@ import kotlinx.serialization.json.jsonPrimitive
  * @param referenceIndexName Required when targeting an index that does not have a push connector
  *   setup, but you wish to attach another index's transformation to it.
  * @param requestOptions Additional request configuration.
+ * @param chunkedOptions Optional shared configuration for chunked helpers (e.g. `maxRetries`).
  * @return The list of responses from each push request.
  */
 public suspend fun IngestionClient.chunkedPush(
@@ -41,9 +42,11 @@ public suspend fun IngestionClient.chunkedPush(
   batchSize: Int = 1000,
   referenceIndexName: String? = null,
   requestOptions: RequestOptions? = null,
+  chunkedOptions: ChunkedHelperOptions = ChunkedHelperOptions(),
 ): List<WatchResponse> {
   require(batchSize > 0) { "`batchSize` must be greater than 0" }
 
+  val maxRetries = chunkedOptions.maxRetries
   val responses = mutableListOf<WatchResponse>()
   val pollInterval = maxOf(1, batchSize / 10)
 
@@ -62,7 +65,7 @@ public suspend fun IngestionClient.chunkedPush(
     responses += pushed
 
     if (waitForTasks) {
-      pushed.forEach { pollEvent(it, requestOptions) }
+      pushed.forEach { pollEvent(it, maxRetries, requestOptions) }
     }
   }
 
@@ -84,6 +87,7 @@ private fun JsonObject.toPushTaskRecord(): PushTaskRecords {
 
 private suspend fun IngestionClient.pollEvent(
   response: WatchResponse,
+  maxRetries: Int,
   requestOptions: RequestOptions?,
 ): Event {
   val eventID =
@@ -100,7 +104,7 @@ private suspend fun IngestionClient.pollEvent(
         }
       },
       until = { it.isSuccess },
-      maxRetries = 50,
+      maxRetries = maxRetries,
       timeout = Duration.INFINITE,
       initialDelay = 1500.milliseconds,
       maxDelay = 5.seconds,
