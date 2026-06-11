@@ -60,7 +60,7 @@ public class QuerySuggestionsClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "configs"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "configs"),
         body = configurationWithIndex,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -179,7 +179,10 @@ public class QuerySuggestionsClient(
       "Parameter `indexName` is required when calling `deleteConfig`."
     }
     val requestConfig =
-      RequestConfig(method = RequestMethod.DELETE, path = listOf("1", "configs", "$indexName"))
+      RequestConfig(
+        method = RequestMethod.DELETE,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "configs", "$indexName"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -194,7 +197,11 @@ public class QuerySuggestionsClient(
   public suspend fun getAllConfigs(
     requestOptions: RequestOptions? = null
   ): List<ConfigurationResponse> {
-    val requestConfig = RequestConfig(method = RequestMethod.GET, path = listOf("1", "configs"))
+    val requestConfig =
+      RequestConfig(
+        method = RequestMethod.GET,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "configs"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -215,7 +222,10 @@ public class QuerySuggestionsClient(
       "Parameter `indexName` is required when calling `getConfig`."
     }
     val requestConfig =
-      RequestConfig(method = RequestMethod.GET, path = listOf("1", "configs", "$indexName"))
+      RequestConfig(
+        method = RequestMethod.GET,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "configs", "$indexName"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -238,7 +248,8 @@ public class QuerySuggestionsClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "configs", "$indexName", "status"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "configs", "$indexName", "status"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -260,7 +271,10 @@ public class QuerySuggestionsClient(
       "Parameter `indexName` is required when calling `getLogFile`."
     }
     val requestConfig =
-      RequestConfig(method = RequestMethod.GET, path = listOf("1", "logs", "$indexName"))
+      RequestConfig(
+        method = RequestMethod.GET,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "logs", "$indexName"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -285,7 +299,7 @@ public class QuerySuggestionsClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PUT,
-        path = listOf("1", "configs", "$indexName"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "configs", "$indexName"),
         body = configuration,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)

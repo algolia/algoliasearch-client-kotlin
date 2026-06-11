@@ -153,7 +153,10 @@ public class InsightsClient(
       "Parameter `userToken` is required when calling `deleteUserToken`."
     }
     val requestConfig =
-      RequestConfig(method = RequestMethod.DELETE, path = listOf("1", "usertokens", "$userToken"))
+      RequestConfig(
+        method = RequestMethod.DELETE,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "usertokens", "$userToken"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -174,7 +177,7 @@ public class InsightsClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "events"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "events"),
         body = insightsEvents,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)

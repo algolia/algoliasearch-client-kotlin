@@ -26,7 +26,7 @@ public data class DailyClickThroughRates(
    * divided by the number of tracked searches. If null, Algolia didn't receive any search requests
    * with `clickAnalytics` set to true.
    */
-  @SerialName(value = "rate") val rate: Double,
+  @SerialName(value = "rate") val rate: Double? = null,
 
   /** Number of clicks associated with this search. */
   @SerialName(value = "clickCount") val clickCount: Int,

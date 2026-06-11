@@ -5,6 +5,9 @@
 package com.algolia.client.model.analytics
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 @Serializable
 public enum class Direction(public val value: kotlin.String) {

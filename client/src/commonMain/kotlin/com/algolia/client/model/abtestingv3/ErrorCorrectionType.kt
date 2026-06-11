@@ -5,6 +5,9 @@
 package com.algolia.client.model.abtestingv3
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /** Multiple-testing correction method applied when evaluating metric significance. */
 @Serializable

@@ -5,6 +5,9 @@
 package com.algolia.client.model.composition
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Deduplication positioning configures how a duplicate result should be resolved between an

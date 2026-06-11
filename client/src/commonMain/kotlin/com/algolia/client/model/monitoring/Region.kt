@@ -5,6 +5,9 @@
 package com.algolia.client.model.monitoring
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /** Region where the cluster is located. */
 @Serializable

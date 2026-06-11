@@ -5,6 +5,9 @@
 package com.algolia.client.model.abtestingv3
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Sort order for A/B tests by start date. Use 'asc' for ascending or 'desc' for descending. Active

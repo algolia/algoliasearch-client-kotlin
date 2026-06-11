@@ -59,7 +59,7 @@ public class AbtestingV3Client(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("3", "abtests"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("3", "abtests"),
         body = addABTestsRequest,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -170,7 +170,10 @@ public class AbtestingV3Client(
    */
   public suspend fun deleteABTest(id: Int, requestOptions: RequestOptions? = null): ABTestResponse {
     val requestConfig =
-      RequestConfig(method = RequestMethod.DELETE, path = listOf("3", "abtests", "$id"))
+      RequestConfig(
+        method = RequestMethod.DELETE,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("3", "abtests", "$id"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -191,7 +194,7 @@ public class AbtestingV3Client(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("3", "abtests", "estimate"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("3", "abtests", "estimate"),
         body = estimateABTestRequest,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -208,7 +211,10 @@ public class AbtestingV3Client(
    */
   public suspend fun getABTest(id: Int, requestOptions: RequestOptions? = null): ABTest {
     val requestConfig =
-      RequestConfig(method = RequestMethod.GET, path = listOf("3", "abtests", "$id"))
+      RequestConfig(
+        method = RequestMethod.GET,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("3", "abtests", "$id"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -234,7 +240,8 @@ public class AbtestingV3Client(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("3", "abtests", "$id", "timeseries"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("3", "abtests", "$id", "timeseries"),
         query =
           buildMap {
             startDate?.let { put("startDate", it) }
@@ -272,7 +279,7 @@ public class AbtestingV3Client(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("3", "abtests"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("3", "abtests"),
         query =
           buildMap {
             offset?.let { put("offset", it) }
@@ -296,7 +303,10 @@ public class AbtestingV3Client(
    */
   public suspend fun stopABTest(id: Int, requestOptions: RequestOptions? = null): ABTestResponse {
     val requestConfig =
-      RequestConfig(method = RequestMethod.POST, path = listOf("3", "abtests", "$id", "stop"))
+      RequestConfig(
+        method = RequestMethod.POST,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("3", "abtests", "$id", "stop"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 }

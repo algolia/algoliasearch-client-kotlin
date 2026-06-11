@@ -5,6 +5,9 @@
 package com.algolia.client.model.ingestion
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /** Action to perform on the Algolia index. */
 @Serializable

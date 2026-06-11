@@ -27,6 +27,7 @@ kotlin {
       languageSettings {
         optIn("kotlinx.coroutines.ExperimentalCoroutinesApi")
         optIn("kotlinx.serialization.ExperimentalSerializationApi")
+        optIn("kotlin.io.encoding.ExperimentalEncodingApi")
       }
     }
     val commonMain by getting {

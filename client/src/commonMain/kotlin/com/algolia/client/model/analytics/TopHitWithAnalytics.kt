@@ -37,14 +37,14 @@ public data class TopHitWithAnalytics(
    * divided by the number of tracked searches. If null, Algolia didn't receive any search requests
    * with `clickAnalytics` set to true.
    */
-  @SerialName(value = "clickThroughRate") val clickThroughRate: Double,
+  @SerialName(value = "clickThroughRate") val clickThroughRate: Double? = null,
 
   /**
    * Conversion rate: calculated as the number of tracked searches with at least one conversion
    * event divided by the number of tracked searches. If null, Algolia didn't receive any search
    * requests with `clickAnalytics` set to true.
    */
-  @SerialName(value = "conversionRate") val conversionRate: Double,
+  @SerialName(value = "conversionRate") val conversionRate: Double? = null,
 
   /**
    * Number of tracked searches. Tracked searches are search requests where the `clickAnalytics`

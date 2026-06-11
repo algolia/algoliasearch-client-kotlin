@@ -156,7 +156,10 @@ public class PersonalizationClient(
       "Parameter `userToken` is required when calling `deleteUserProfile`."
     }
     val requestConfig =
-      RequestConfig(method = RequestMethod.DELETE, path = listOf("1", "profiles", "$userToken"))
+      RequestConfig(
+        method = RequestMethod.DELETE,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "profiles", "$userToken"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -172,7 +175,11 @@ public class PersonalizationClient(
     requestOptions: RequestOptions? = null
   ): PersonalizationStrategyParams {
     val requestConfig =
-      RequestConfig(method = RequestMethod.GET, path = listOf("1", "strategies", "personalization"))
+      RequestConfig(
+        method = RequestMethod.GET,
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "strategies", "personalization"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -196,7 +203,9 @@ public class PersonalizationClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "profiles", "personalization", "$userToken"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "profiles", "personalization", "$userToken"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -217,7 +226,8 @@ public class PersonalizationClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "strategies", "personalization"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "strategies", "personalization"),
         body = personalizationStrategyParams,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)

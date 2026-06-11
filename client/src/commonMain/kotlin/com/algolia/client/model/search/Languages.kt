@@ -16,7 +16,7 @@ import kotlinx.serialization.json.*
  */
 @Serializable
 public data class Languages(
-  @SerialName(value = "plurals") val plurals: DictionaryLanguage,
-  @SerialName(value = "stopwords") val stopwords: DictionaryLanguage,
-  @SerialName(value = "compounds") val compounds: DictionaryLanguage,
+  @SerialName(value = "plurals") val plurals: DictionaryLanguage? = null,
+  @SerialName(value = "stopwords") val stopwords: DictionaryLanguage? = null,
+  @SerialName(value = "compounds") val compounds: DictionaryLanguage? = null,
 ) {}

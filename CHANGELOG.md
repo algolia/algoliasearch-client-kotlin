@@ -1,3 +1,8 @@
+## [3.43.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.42.0...3.43.0)
+
+- [0a7fb00c80](https://github.com/algolia/api-clients-automation/commit/0a7fb00c80) feat(kotlin): expose maximum number of retries ([#6458](https://github.com/algolia/api-clients-automation/pull/6458)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+- [7f2ce8cd3a](https://github.com/algolia/api-clients-automation/commit/7f2ce8cd3a) feat(clients): Agent Studio v1 ([#6097](https://github.com/algolia/api-clients-automation/pull/6097)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [3.42.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.41.1...3.42.0)
 
 - [84ebc480a8](https://github.com/algolia/api-clients-automation/commit/84ebc480a8) chore(deps): dependencies 2026-05-15 ([#6400](https://github.com/algolia/api-clients-automation/pull/6400)) by [@Fluf22](https://github.com/Fluf22/)

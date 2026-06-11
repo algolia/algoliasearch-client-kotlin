@@ -5,6 +5,9 @@
 package com.algolia.client.model.recommend
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Trending facet values model. This model recommends trending facet values for the specified facet

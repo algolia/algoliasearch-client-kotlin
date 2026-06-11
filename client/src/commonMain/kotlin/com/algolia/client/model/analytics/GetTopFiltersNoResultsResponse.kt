@@ -21,5 +21,5 @@ public data class GetTopFiltersNoResultsResponse(
    * Filters for searches without any results. If null, the search term specified with the `search`
    * parameter isn't a search without results, or the `search` parameter is absent from the request.
    */
-  @SerialName(value = "values") val values: List<GetTopFiltersNoResultsValues>
+  @SerialName(value = "values") val values: List<GetTopFiltersNoResultsValues>? = null
 ) {}

@@ -80,7 +80,9 @@ public class RecommendClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "batch"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "batch"),
         body = recommendRule,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -207,7 +209,9 @@ public class RecommendClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.DELETE,
-        path = listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "$objectID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "$objectID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -239,7 +243,9 @@ public class RecommendClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "$objectID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "$objectID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -270,7 +276,9 @@ public class RecommendClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "indexes", "$indexName", "$model", "task", "$taskID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "indexes", "$indexName", "$model", "task", "$taskID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -291,7 +299,8 @@ public class RecommendClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "indexes", "*", "recommendations"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "indexes", "*", "recommendations"),
         isRead = true,
         body = getRecommendationsParams,
       )
@@ -323,7 +332,9 @@ public class RecommendClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "search"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "search"),
         isRead = true,
         body = searchRecommendRulesParams,
       )

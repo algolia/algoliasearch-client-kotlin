@@ -5,6 +5,9 @@
 package com.algolia.client.model.ingestion
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /** The type of transformation, which can be either 'code' or 'noCode'. */
 @Serializable

@@ -5,6 +5,9 @@
 package com.algolia.client.model.recommend
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Strategy for removing words from the query when it doesn't return any results. This helps to

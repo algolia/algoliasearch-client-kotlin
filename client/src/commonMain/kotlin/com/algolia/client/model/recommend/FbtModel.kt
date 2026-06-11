@@ -5,6 +5,9 @@
 package com.algolia.client.model.recommend
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Frequently bought together model. This model recommends items that have been purchased within 1

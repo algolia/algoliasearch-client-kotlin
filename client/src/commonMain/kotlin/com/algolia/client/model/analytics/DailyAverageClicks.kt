@@ -22,7 +22,7 @@ public data class DailyAverageClicks(
    * Average position of a clicked search result in the list of search results. If null, Algolia
    * didn't receive any search requests with `clickAnalytics` set to true.
    */
-  @SerialName(value = "average") val average: Double,
+  @SerialName(value = "average") val average: Double? = null,
 
   /** Number of clicks associated with this search. */
   @SerialName(value = "clickCount") val clickCount: Int,

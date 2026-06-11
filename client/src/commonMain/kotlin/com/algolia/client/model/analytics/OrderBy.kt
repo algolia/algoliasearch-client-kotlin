@@ -5,6 +5,9 @@
 package com.algolia.client.model.analytics
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Attribute by which to order the response items. If the `clickAnalytics` parameter is false, only

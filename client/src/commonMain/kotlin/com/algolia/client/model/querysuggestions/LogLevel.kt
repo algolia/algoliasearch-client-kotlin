@@ -5,6 +5,9 @@
 package com.algolia.client.model.querysuggestions
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Type of log entry. - `SKIP`. A query is skipped because it doesn't match the conditions for

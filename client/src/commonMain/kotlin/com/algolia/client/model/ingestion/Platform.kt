@@ -5,6 +5,9 @@
 package com.algolia.client.model.ingestion
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Name of an ecommerce platform with which to authenticate. This determines which authentication

@@ -5,6 +5,9 @@
 package com.algolia.client.model.abtestingv3
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * A/B test status. - `active`. The A/B test is live and search traffic is split between the two

@@ -26,7 +26,7 @@ public data class GetPurchaseRateResponse(
    * divided by the number of tracked searches. If null, Algolia didn't receive any search requests
    * with `clickAnalytics` set to true.
    */
-  @SerialName(value = "rate") val rate: Double,
+  @SerialName(value = "rate") val rate: Double? = null,
 
   /**
    * Number of tracked searches. Tracked searches are search requests where the `clickAnalytics`

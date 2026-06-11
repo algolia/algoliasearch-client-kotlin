@@ -66,22 +66,22 @@ public data class Variant(
    * [searches without results](https://www.algolia.com/doc/guides/search-analytics/concepts/metrics/#searches-without-results)
    * for this variant.
    */
-  @SerialName(value = "noResultCount") val noResultCount: Int,
+  @SerialName(value = "noResultCount") val noResultCount: Int? = null,
 
   /** Number of purchase events for this variant. */
   @SerialName(value = "purchaseCount") val purchaseCount: Int,
 
   /** Number of searches for this variant. */
-  @SerialName(value = "searchCount") val searchCount: Int,
+  @SerialName(value = "searchCount") val searchCount: Int? = null,
 
   /** Percentage of search requests each variant receives. */
   @SerialName(value = "trafficPercentage") val trafficPercentage: Int,
 
   /** Number of users that made searches to this variant. */
-  @SerialName(value = "userCount") val userCount: Int,
+  @SerialName(value = "userCount") val userCount: Int? = null,
 
   /** Number of users that made tracked searches to this variant. */
-  @SerialName(value = "trackedUserCount") val trackedUserCount: Int,
+  @SerialName(value = "trackedUserCount") val trackedUserCount: Int? = null,
 
   /**
    * [Add-to-cart

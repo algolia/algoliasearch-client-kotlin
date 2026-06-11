@@ -5,6 +5,9 @@
 package com.algolia.client.model.composition
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Which part of the search query the pattern should match: - `startsWith`. The pattern must match

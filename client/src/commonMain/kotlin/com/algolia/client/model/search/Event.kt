@@ -26,7 +26,7 @@ public data class Event(
 
   /** Universally unique identifier (UUID) of a task run. */
   @SerialName(value = "runID") val runID: String,
-  @SerialName(value = "status") val status: EventStatus,
+  @SerialName(value = "status") val status: EventStatus? = null,
   @SerialName(value = "type") val type: EventType,
 
   /** The extracted record batch size. */

@@ -5,6 +5,9 @@
 package com.algolia.client.model.ingestion
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Task trigger, describing when a task should run. - `onDemand`. Manually trigger the task with the

@@ -5,6 +5,9 @@
 package com.algolia.client.model.search
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * - `min`. Return matches with the lowest number of typos. For example, if you have matches without

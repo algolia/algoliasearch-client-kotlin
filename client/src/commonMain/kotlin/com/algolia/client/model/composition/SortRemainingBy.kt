@@ -5,6 +5,9 @@
 package com.algolia.client.model.composition
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Order of facet values that aren't explicitly positioned with the `order` setting. - `count`.

@@ -160,7 +160,8 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.DELETE,
-        path = listOf("1", "compositions", "$compositionID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "compositions", "$compositionID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -189,7 +190,9 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.DELETE,
-        path = listOf("1", "compositions", "$compositionID", "rules", "$objectID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "compositions", "$compositionID", "rules", "$objectID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -214,7 +217,8 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "compositions", "$compositionID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "compositions", "$compositionID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -243,7 +247,9 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "compositions", "$compositionID", "rules", "$objectID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "compositions", "$compositionID", "rules", "$objectID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -273,7 +279,9 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "compositions", "$compositionID", "task", "$taskID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "compositions", "$compositionID", "task", "$taskID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -297,7 +305,7 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "compositions"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "compositions"),
         query =
           buildMap {
             page?.let { put("page", it) }
@@ -323,7 +331,7 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "compositions", "*", "batch"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "compositions", "*", "batch"),
         body = batchParams,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -350,7 +358,8 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PUT,
-        path = listOf("1", "compositions", "$compositionID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "compositions", "$compositionID"),
         body = composition,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -383,7 +392,9 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PUT,
-        path = listOf("1", "compositions", "$compositionID", "rules", "$objectID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "compositions", "$compositionID", "rules", "$objectID"),
         body = compositionRule,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -410,7 +421,9 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "compositions", "$compositionID", "rules", "batch"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "compositions", "$compositionID", "rules", "batch"),
         body = rules,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -437,7 +450,9 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "compositions", "$compositionID", "run"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "compositions", "$compositionID", "run"),
         isRead = true,
         body = requestBody,
       )
@@ -465,7 +480,9 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "compositions", "$compositionID", "rules", "search"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "compositions", "$compositionID", "rules", "search"),
         body = searchCompositionRulesParams,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -501,7 +518,9 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "compositions", "$compositionID", "facets", "$facetName", "query"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "compositions", "$compositionID", "facets", "$facetName", "query"),
         isRead = true,
         body = searchForFacetValuesRequest,
       )
@@ -535,7 +554,9 @@ public class CompositionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "compositions", "$compositionID", "sortingStrategy"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "compositions", "$compositionID", "sortingStrategy"),
         body = requestBody,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)

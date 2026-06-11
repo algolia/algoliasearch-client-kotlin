@@ -61,7 +61,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "authentications"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "authentications"),
         body = authenticationCreate,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -85,7 +85,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "destinations"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "destinations"),
         body = destinationCreate,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -107,7 +107,11 @@ public class IngestionClient(
     requestOptions: RequestOptions? = null,
   ): SourceCreateResponse {
     val requestConfig =
-      RequestConfig(method = RequestMethod.POST, path = listOf("1", "sources"), body = sourceCreate)
+      RequestConfig(
+        method = RequestMethod.POST,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources"),
+        body = sourceCreate,
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -127,7 +131,11 @@ public class IngestionClient(
     requestOptions: RequestOptions? = null,
   ): TaskCreateResponse {
     val requestConfig =
-      RequestConfig(method = RequestMethod.POST, path = listOf("2", "tasks"), body = taskCreate)
+      RequestConfig(
+        method = RequestMethod.POST,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks"),
+        body = taskCreate,
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -148,7 +156,11 @@ public class IngestionClient(
     requestOptions: RequestOptions? = null,
   ): TaskCreateResponse {
     val requestConfig =
-      RequestConfig(method = RequestMethod.POST, path = listOf("1", "tasks"), body = taskCreate)
+      RequestConfig(
+        method = RequestMethod.POST,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks"),
+        body = taskCreate,
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -170,7 +182,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "transformations"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "transformations"),
         body = transformationCreate,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -292,7 +304,9 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.DELETE,
-        path = listOf("1", "authentications", "$authenticationID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "authentications", "$authenticationID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -318,7 +332,8 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.DELETE,
-        path = listOf("1", "destinations", "$destinationID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "destinations", "$destinationID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -342,7 +357,10 @@ public class IngestionClient(
       "Parameter `sourceID` is required when calling `deleteSource`."
     }
     val requestConfig =
-      RequestConfig(method = RequestMethod.DELETE, path = listOf("1", "sources", "$sourceID"))
+      RequestConfig(
+        method = RequestMethod.DELETE,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "$sourceID"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -363,7 +381,10 @@ public class IngestionClient(
   ): DeleteResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `deleteTask`." }
     val requestConfig =
-      RequestConfig(method = RequestMethod.DELETE, path = listOf("2", "tasks", "$taskID"))
+      RequestConfig(
+        method = RequestMethod.DELETE,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -385,7 +406,10 @@ public class IngestionClient(
   ): DeleteResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `deleteTaskV1`." }
     val requestConfig =
-      RequestConfig(method = RequestMethod.DELETE, path = listOf("1", "tasks", "$taskID"))
+      RequestConfig(
+        method = RequestMethod.DELETE,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -410,7 +434,9 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.DELETE,
-        path = listOf("1", "transformations", "$transformationID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "transformations", "$transformationID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -432,7 +458,10 @@ public class IngestionClient(
   ): TaskUpdateResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `disableTask`." }
     val requestConfig =
-      RequestConfig(method = RequestMethod.PUT, path = listOf("2", "tasks", "$taskID", "disable"))
+      RequestConfig(
+        method = RequestMethod.PUT,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID", "disable"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -454,7 +483,10 @@ public class IngestionClient(
   ): TaskUpdateResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `disableTaskV1`." }
     val requestConfig =
-      RequestConfig(method = RequestMethod.PUT, path = listOf("1", "tasks", "$taskID", "disable"))
+      RequestConfig(
+        method = RequestMethod.PUT,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID", "disable"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -475,7 +507,10 @@ public class IngestionClient(
   ): TaskUpdateResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `enableTask`." }
     val requestConfig =
-      RequestConfig(method = RequestMethod.PUT, path = listOf("2", "tasks", "$taskID", "enable"))
+      RequestConfig(
+        method = RequestMethod.PUT,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID", "enable"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -497,7 +532,10 @@ public class IngestionClient(
   ): TaskUpdateResponse {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `enableTaskV1`." }
     val requestConfig =
-      RequestConfig(method = RequestMethod.PUT, path = listOf("1", "tasks", "$taskID", "enable"))
+      RequestConfig(
+        method = RequestMethod.PUT,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID", "enable"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -522,7 +560,9 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "authentications", "$authenticationID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "authentications", "$authenticationID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -548,7 +588,8 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "destinations", "$destinationID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "destinations", "$destinationID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -575,7 +616,9 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "runs", "$runID", "events", "$eventID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "runs", "$runID", "events", "$eventID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -594,7 +637,10 @@ public class IngestionClient(
   public suspend fun getRun(runID: String, requestOptions: RequestOptions? = null): Run {
     require(runID.isNotBlank()) { "Parameter `runID` is required when calling `getRun`." }
     val requestConfig =
-      RequestConfig(method = RequestMethod.GET, path = listOf("1", "runs", "$runID"))
+      RequestConfig(
+        method = RequestMethod.GET,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "runs", "$runID"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -612,7 +658,10 @@ public class IngestionClient(
   public suspend fun getSource(sourceID: String, requestOptions: RequestOptions? = null): Source {
     require(sourceID.isNotBlank()) { "Parameter `sourceID` is required when calling `getSource`." }
     val requestConfig =
-      RequestConfig(method = RequestMethod.GET, path = listOf("1", "sources", "$sourceID"))
+      RequestConfig(
+        method = RequestMethod.GET,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "$sourceID"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -630,7 +679,10 @@ public class IngestionClient(
   public suspend fun getTask(taskID: String, requestOptions: RequestOptions? = null): Task {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `getTask`." }
     val requestConfig =
-      RequestConfig(method = RequestMethod.GET, path = listOf("2", "tasks", "$taskID"))
+      RequestConfig(
+        method = RequestMethod.GET,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -649,7 +701,10 @@ public class IngestionClient(
   public suspend fun getTaskV1(taskID: String, requestOptions: RequestOptions? = null): TaskV1 {
     require(taskID.isNotBlank()) { "Parameter `taskID` is required when calling `getTaskV1`." }
     val requestConfig =
-      RequestConfig(method = RequestMethod.GET, path = listOf("1", "tasks", "$taskID"))
+      RequestConfig(
+        method = RequestMethod.GET,
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID"),
+      )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
 
@@ -674,7 +729,9 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "transformations", "$transformationID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "transformations", "$transformationID"),
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
   }
@@ -708,7 +765,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "authentications"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "authentications"),
         query =
           buildMap {
             itemsPerPage?.let { put("itemsPerPage", it) }
@@ -753,7 +810,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "destinations"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "destinations"),
         query =
           buildMap {
             itemsPerPage?.let { put("itemsPerPage", it) }
@@ -805,7 +862,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "runs", "$runID", "events"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "runs", "$runID", "events"),
         query =
           buildMap {
             itemsPerPage?.let { put("itemsPerPage", it) }
@@ -857,7 +914,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "runs"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "runs"),
         query =
           buildMap {
             itemsPerPage?.let { put("itemsPerPage", it) }
@@ -904,7 +961,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "sources"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources"),
         query =
           buildMap {
             itemsPerPage?.let { put("itemsPerPage", it) }
@@ -957,7 +1014,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("2", "tasks"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks"),
         query =
           buildMap {
             itemsPerPage?.let { put("itemsPerPage", it) }
@@ -1011,7 +1068,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "tasks"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks"),
         query =
           buildMap {
             itemsPerPage?.let { put("itemsPerPage", it) }
@@ -1055,7 +1112,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.GET,
-        path = listOf("1", "transformations"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "transformations"),
         query =
           buildMap {
             itemsPerPage?.let { put("itemsPerPage", it) }
@@ -1102,7 +1159,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "push", "$indexName"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "push", "$indexName"),
         query =
           buildMap {
             watch?.let { put("watch", it) }
@@ -1150,7 +1207,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("2", "tasks", "$taskID", "push"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID", "push"),
         query = buildMap { watch?.let { put("watch", it) } },
         body = pushTaskPayload,
       )
@@ -1187,7 +1244,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PUT,
-        path = listOf("2", "tasks", "$taskID"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID"),
         body = taskReplace,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1215,7 +1272,8 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "sources", "$sourceID", "run"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "$sourceID", "run"),
         body = runSourcePayload,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1242,7 +1300,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("2", "tasks", "$taskID", "run"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID", "run"),
         body = runTaskPayload,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1271,7 +1329,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "tasks", "$taskID", "run"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID", "run"),
         body = runTaskPayload,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1295,7 +1353,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "authentications", "search"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "authentications", "search"),
         body = authenticationSearch,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1319,7 +1377,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "destinations", "search"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "destinations", "search"),
         body = destinationSearch,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1343,7 +1401,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "sources", "search"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "search"),
         body = sourceSearch,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1367,7 +1425,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("2", "tasks", "search"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "search"),
         body = taskSearch,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1392,7 +1450,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "tasks", "search"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "search"),
         body = taskSearch,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1416,7 +1474,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "transformations", "search"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "transformations", "search"),
         body = transformationSearch,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1444,7 +1502,8 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "sources", "$sourceID", "discover"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "$sourceID", "discover"),
       )
     return requester.execute(
       requestConfig = requestConfig,
@@ -1475,7 +1534,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "transformations", "try"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "transformations", "try"),
         body = transformationTry,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1504,7 +1563,9 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "transformations", "$transformationID", "try"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "transformations", "$transformationID", "try"),
         body = transformationTry,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1533,7 +1594,9 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PATCH,
-        path = listOf("1", "authentications", "$authenticationID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "authentications", "$authenticationID"),
         body = authenticationUpdate,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1562,7 +1625,8 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PATCH,
-        path = listOf("1", "destinations", "$destinationID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "destinations", "$destinationID"),
         body = destinationUpdate,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1591,7 +1655,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PATCH,
-        path = listOf("1", "sources", "$sourceID"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "$sourceID"),
         body = sourceUpdate,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1618,7 +1682,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PATCH,
-        path = listOf("2", "tasks", "$taskID"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID"),
         body = taskUpdate,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1646,7 +1710,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PATCH,
-        path = listOf("1", "tasks", "$taskID"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID"),
         body = taskUpdate,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1675,7 +1739,9 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PUT,
-        path = listOf("1", "transformations", "$transformationID"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "transformations", "$transformationID"),
         body = transformationCreate,
       )
     return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
@@ -1700,7 +1766,7 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "sources", "validate"),
+        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "validate"),
         body = sourceCreate,
       )
     return requester.execute(
@@ -1738,7 +1804,9 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.POST,
-        path = listOf("1", "sources", "$sourceID", "validate"),
+        path =
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "sources", "$sourceID", "validate"),
         body = sourceUpdate,
       )
     return requester.execute(

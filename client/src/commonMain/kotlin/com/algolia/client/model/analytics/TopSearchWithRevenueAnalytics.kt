@@ -51,13 +51,13 @@ public data class TopSearchWithRevenueAnalytics(
    * divided by the number of tracked searches. If null, Algolia didn't receive any search requests
    * with `clickAnalytics` set to true.
    */
-  @SerialName(value = "clickThroughRate") val clickThroughRate: Double,
+  @SerialName(value = "clickThroughRate") val clickThroughRate: Double? = null,
 
   /**
    * Average position of a clicked search result in the list of search results. If null, Algolia
    * didn't receive any search requests with `clickAnalytics` set to true.
    */
-  @SerialName(value = "averageClickPosition") val averageClickPosition: Double,
+  @SerialName(value = "averageClickPosition") val averageClickPosition: Double? = null,
 
   /** List of positions in the search results and clicks associated with this search. */
   @SerialName(value = "clickPositions") val clickPositions: List<ClickPosition>,
@@ -67,7 +67,7 @@ public data class TopSearchWithRevenueAnalytics(
    * event divided by the number of tracked searches. If null, Algolia didn't receive any search
    * requests with `clickAnalytics` set to true.
    */
-  @SerialName(value = "conversionRate") val conversionRate: Double,
+  @SerialName(value = "conversionRate") val conversionRate: Double? = null,
 
   /**
    * Number of tracked searches. Tracked searches are search requests where the `clickAnalytics`
@@ -92,7 +92,7 @@ public data class TopSearchWithRevenueAnalytics(
    * event divided by the number of tracked searches. If null, Algolia didn't receive any search
    * requests with `clickAnalytics` set to true.
    */
-  @SerialName(value = "addToCartRate") val addToCartRate: Double,
+  @SerialName(value = "addToCartRate") val addToCartRate: Double? = null,
 
   /** Number of add-to-cart events from this search. */
   @SerialName(value = "addToCartCount") val addToCartCount: Int,
@@ -102,7 +102,7 @@ public data class TopSearchWithRevenueAnalytics(
    * divided by the number of tracked searches. If null, Algolia didn't receive any search requests
    * with `clickAnalytics` set to true.
    */
-  @SerialName(value = "purchaseRate") val purchaseRate: Double,
+  @SerialName(value = "purchaseRate") val purchaseRate: Double? = null,
 
   /** Number of purchase events from this search. */
   @SerialName(value = "purchaseCount") val purchaseCount: Int,

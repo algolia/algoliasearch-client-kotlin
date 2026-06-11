@@ -5,6 +5,9 @@
 package com.algolia.client.model.search
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Strategy for multiple search queries: - `none`. Run all queries. - `stopIfEnoughMatches`. Run the

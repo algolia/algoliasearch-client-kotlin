@@ -67,7 +67,10 @@ public class KtorRequester(
       requestBuilder.setTimeout(requestOptions, callType, host)
       try {
         val response = httpClient.request(requestBuilder)
-        val body = response.body<T>(returnType)
+        @Suppress("UNCHECKED_CAST")
+        val body: T =
+          if (response.status.value == 204 || response.contentLength() == 0L) null as T
+          else response.body<T>(returnType)
         mutex.withLock { host.reset() }
         return body
       } catch (exception: Throwable) {

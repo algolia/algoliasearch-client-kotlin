@@ -33,7 +33,7 @@ public data class ConfigurationResponse(
   @SerialName(value = "languages") val languages: Languages,
 
   /** Words or regular expressions to exclude from the suggestions. */
-  @SerialName(value = "exclude") val exclude: List<String>,
+  @SerialName(value = "exclude") val exclude: List<String>? = null,
 
   /** Whether to turn on personalized query suggestions. */
   @SerialName(value = "enablePersonalization") val enablePersonalization: Boolean,

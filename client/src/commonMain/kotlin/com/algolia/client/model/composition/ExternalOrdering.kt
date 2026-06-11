@@ -5,6 +5,9 @@
 package com.algolia.client.model.composition
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /**
  * Ordering to apply on the injected items coming from the external source. 'default' means the

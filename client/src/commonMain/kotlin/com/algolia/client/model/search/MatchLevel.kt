@@ -5,6 +5,9 @@
 package com.algolia.client.model.search
 
 import kotlinx.serialization.*
+import kotlinx.serialization.builtins.*
+import kotlinx.serialization.descriptors.*
+import kotlinx.serialization.encoding.*
 
 /** Whether the whole query string matches or only a part. */
 @Serializable

@@ -18,7 +18,7 @@ import kotlinx.serialization.json.*
 public data class ListABTestsResponse(
 
   /** The list of A/B tests, null if no A/B tests are configured for this application. */
-  @SerialName(value = "abtests") val abtests: List<ABTest>,
+  @SerialName(value = "abtests") val abtests: List<ABTest>? = null,
 
   /** Number of A/B tests. */
   @SerialName(value = "count") val count: Int,
