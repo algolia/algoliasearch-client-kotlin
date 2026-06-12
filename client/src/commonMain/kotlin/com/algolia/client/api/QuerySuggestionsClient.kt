@@ -18,7 +18,7 @@ public class QuerySuggestionsClient(
   override var apiKey: String,
   public val region: String,
   override val options: ClientOptions = ClientOptions(),
-) : ApiClient {
+) : ApiClient, kotlin.AutoCloseable {
 
   init {
     require(appId.isNotBlank()) { "`appId` is missing." }
@@ -42,6 +42,13 @@ public class QuerySuggestionsClient(
       val url = "query-suggestions.$region.algolia.com"
       listOf(Host(url))
     }
+
+  /** Closes the client and releases its underlying resources (the HTTP transport). */
+  override fun close() {
+    // Requester does not require AutoCloseable (a custom requester may not own
+    // closeable resources); close only if the concrete implementation is closeable.
+    (requester as? kotlin.AutoCloseable)?.close()
+  }
 
   /**
    * Creates a new Query Suggestions configuration. You can have up to 100 configurations per

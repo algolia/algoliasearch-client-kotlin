@@ -18,7 +18,7 @@ public class AbtestingV3Client(
   override var apiKey: String,
   public val region: String? = null,
   override val options: ClientOptions = ClientOptions(),
-) : ApiClient {
+) : ApiClient, kotlin.AutoCloseable {
 
   init {
     require(appId.isNotBlank()) { "`appId` is missing." }
@@ -42,6 +42,13 @@ public class AbtestingV3Client(
       val url = if (region == null) "analytics.algolia.com" else "analytics.$region.algolia.com"
       listOf(Host(url))
     }
+
+  /** Closes the client and releases its underlying resources (the HTTP transport). */
+  override fun close() {
+    // Requester does not require AutoCloseable (a custom requester may not own
+    // closeable resources); close only if the concrete implementation is closeable.
+    (requester as? kotlin.AutoCloseable)?.close()
+  }
 
   /**
    * Creates a new A/B test.

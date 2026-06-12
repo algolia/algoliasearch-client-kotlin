@@ -17,7 +17,7 @@ public class SearchClient(
   override val appId: String,
   override var apiKey: String,
   override val options: ClientOptions = ClientOptions(),
-) : ApiClient {
+) : ApiClient, kotlin.AutoCloseable {
 
   init {
     require(appId.isNotBlank()) { "`appId` is missing." }
@@ -47,6 +47,22 @@ public class SearchClient(
     }
 
   /**
+   * Closes the client and releases its underlying resources (the HTTP transport and, if set, the
+   * ingestion transporter).
+   */
+  override fun close() {
+    // Release the ingestion transporter first, but always close the main requester
+    // (the critical resource) even if closing the ingestion transporter throws.
+    try {
+      ingestionTransporter?.close()
+    } finally {
+      // Requester does not require AutoCloseable (a custom requester may not own
+      // closeable resources); close only if the concrete implementation is closeable.
+      (requester as? kotlin.AutoCloseable)?.close()
+    }
+  }
+
+  /**
    * Ingestion transporter used by the `*WithTransformation` helpers on this client. Set via
    * [setTransformationOptions] or the [withTransformation] companion factory; `null` until one of
    * those paths runs. Internal to the module — consumers reconfigure through the public setter and
@@ -67,6 +83,7 @@ public class SearchClient(
    * that operation to fail — callers SHOULD avoid in-flight reconfiguration.
    */
   public fun setTransformationOptions(transformationOptions: TransformationOptions) {
+    val previous = ingestionTransporter
     ingestionTransporter =
       IngestionClient(
         appId = appId,
@@ -74,6 +91,7 @@ public class SearchClient(
         region = transformationOptions.region,
         options = transformationOptions.clientOptions ?: ClientOptions(),
       )
+    previous?.close()
   }
 
   public companion object {

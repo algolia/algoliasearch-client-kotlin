@@ -22,7 +22,7 @@ public class AgentStudioClient(
   override val appId: String,
   override var apiKey: String,
   override val options: ClientOptions = ClientOptions(),
-) : ApiClient {
+) : ApiClient, kotlin.AutoCloseable {
 
   init {
     require(appId.isNotBlank()) { "`appId` is missing." }
@@ -50,6 +50,13 @@ public class AgentStudioClient(
           )
           .apply { shuffle() }
     }
+
+  /** Closes the client and releases its underlying resources (the HTTP transport). */
+  override fun close() {
+    // Requester does not require AutoCloseable (a custom requester may not own
+    // closeable resources); close only if the concrete implementation is closeable.
+    (requester as? kotlin.AutoCloseable)?.close()
+  }
 
   /**
    * Add multiple allowed domain patterns. Duplicates are skipped.

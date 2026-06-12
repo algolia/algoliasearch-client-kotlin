@@ -33,7 +33,7 @@ public class KtorRequester(
   private val readTimeout: Duration,
   private val writeTimeout: Duration,
   hosts: List<Host>,
-) : Requester {
+) : Requester, kotlin.AutoCloseable {
 
   private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
   private val mutex: Mutex = Mutex()
@@ -46,6 +46,10 @@ public class KtorRequester(
       }
       append(HEADER_APIKEY, apiKey)
     }
+  }
+
+  override fun close() {
+    httpClient.close()
   }
 
   override suspend fun <T> execute(
