@@ -1,3 +1,8 @@
+## [3.44.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.43.0...3.44.0)
+
+- [579e6dc013](https://github.com/algolia/api-clients-automation/commit/579e6dc013) feat(kotlin): add AutoCloseable support and close the ingestion transporter on replacement ([#6493](https://github.com/algolia/api-clients-automation/pull/6493)) by [@MarioAlexandruDan](https://github.com/MarioAlexandruDan/)
+- [ebe3dac95f](https://github.com/algolia/api-clients-automation/commit/ebe3dac95f) chore(ci): upgrade Gradle action ([#6503](https://github.com/algolia/api-clients-automation/pull/6503)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [3.43.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.42.0...3.43.0)
 
 - [0a7fb00c80](https://github.com/algolia/api-clients-automation/commit/0a7fb00c80) feat(kotlin): expose maximum number of retries ([#6458](https://github.com/algolia/api-clients-automation/pull/6458)) by [@eric-zaharia](https://github.com/eric-zaharia/)
