@@ -1,3 +1,7 @@
+## [3.45.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.44.0...3.45.0)
+
+- [52ebd28f58](https://github.com/algolia/api-clients-automation/commit/52ebd28f58) feat(clients): release Agent Studio package updates ([#6573](https://github.com/algolia/api-clients-automation/pull/6573)) by [@Fluf22](https://github.com/Fluf22/)
+
 ## [3.44.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.43.0...3.44.0)
 
 - [579e6dc013](https://github.com/algolia/api-clients-automation/commit/579e6dc013) feat(kotlin): add AutoCloseable support and close the ingestion transporter on replacement ([#6493](https://github.com/algolia/api-clients-automation/pull/6493)) by [@MarioAlexandruDan](https://github.com/MarioAlexandruDan/)
