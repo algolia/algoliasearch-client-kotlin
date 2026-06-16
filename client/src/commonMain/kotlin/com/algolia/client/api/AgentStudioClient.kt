@@ -13,11 +13,6 @@ import com.algolia.client.transport.internal.*
 import kotlin.time.Duration.Companion.milliseconds
 import kotlinx.serialization.json.*
 
-/**
- * Beta: The Agent Studio API is not yet stable and may change without notice.
- *
- * @see [Agent Studio API docs](https://www.algolia.com/doc/rest-api/agent-studio)
- */
 public class AgentStudioClient(
   override val appId: String,
   override var apiKey: String,
