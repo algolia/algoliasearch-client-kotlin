@@ -27,6 +27,9 @@ import kotlinx.serialization.json.JsonObject
 /** The default maximum number of retries when polling for task completion. */
 public const val DEFAULT_MAX_RETRIES: Int = 100
 
+/** The default maximum number of retries used by `replaceAllObjects`. */
+public const val DEFAULT_REPLACE_ALL_OBJECTS_MAX_RETRIES: Int = 800
+
 private const val TRANSFORMATION_OPTIONS_REQUIRED =
   "`transformationOptions` must be installed on the client before calling this method. " +
     "Use `SearchClient.withTransformation(...)` or `searchClient.setTransformationOptions(...)`. " +
@@ -511,7 +514,8 @@ public suspend fun SearchClient.replaceAllObjects(
   batchSize: Int = 1000,
   scopes: List<ScopeType> = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
   requestOptions: RequestOptions? = null,
-  chunkedOptions: ChunkedHelperOptions = ChunkedHelperOptions(),
+  chunkedOptions: ChunkedHelperOptions =
+    ChunkedHelperOptions(maxRetries = DEFAULT_REPLACE_ALL_OBJECTS_MAX_RETRIES),
 ): ReplaceAllObjectsResponse {
   val maxRetries = chunkedOptions.maxRetries
   val tmpIndexName = "${indexName}_tmp_${Random.nextInt(from = 0, until = 100)}"
@@ -868,7 +872,8 @@ public suspend fun SearchClient.replaceAllObjectsWithTransformation(
   batchSize: Int = 1000,
   scopes: List<ScopeType> = listOf(ScopeType.Settings, ScopeType.Rules, ScopeType.Synonyms),
   requestOptions: RequestOptions? = null,
-  chunkedOptions: ChunkedHelperOptions = ChunkedHelperOptions(),
+  chunkedOptions: ChunkedHelperOptions =
+    ChunkedHelperOptions(maxRetries = DEFAULT_REPLACE_ALL_OBJECTS_MAX_RETRIES),
 ): ReplaceAllObjectsWithTransformationResponse {
   val transporter = requireIngestionTransporter()
   val maxRetries = chunkedOptions.maxRetries
