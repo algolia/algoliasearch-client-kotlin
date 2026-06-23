@@ -32,7 +32,6 @@ import kotlinx.serialization.json.*
  *   array, the filter matches if it matches at least one element of the array. For more
  *   information, see
  *   [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering).
- * @param facetFilters
  * @param optionalFilters
  * @param numericFilters
  * @param tagFilters
@@ -90,7 +89,6 @@ import kotlinx.serialization.json.*
  *   [segmenting analytics data](https://www.algolia.com/doc/guides/search-analytics/guides/segments).
  * @param percentileComputation Whether to include this search when calculating processing-time
  *   percentiles.
- * @param enableABTest Whether to enable A/B testing for this search.
  * @param query Search query.
  * @param attributesForFaceting Attributes used for
  *   [faceting](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting). Facets
@@ -214,17 +212,6 @@ import kotlinx.serialization.json.*
  *   `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix
  *   the attribute with a dash and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The
  *   `objectID` attribute is always included.
- * @param ranking Determines the order in which Algolia returns your results. By default, each entry
- *   corresponds to a
- *   [ranking criteria](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria).
- *   The tie-breaking algorithm sequentially applies each criterion in the order they're specified.
- *   If you configure a replica index for
- *   [sorting by an attribute](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-by-attribute),
- *   you put the sorting attribute at the top of the list. **Modifiers** - `asc(\"ATTRIBUTE\")`.
- *   Sort the index by the values of an attribute, in ascending order. - `desc(\"ATTRIBUTE\")`. Sort
- *   the index by the values of an attribute, in descending order. Before you modify the default
- *   setting, test your changes in the dashboard, and by
- *   [A/B testing](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing).
  * @param relevancyStrictness Relevancy threshold below which less relevant results aren't included
  *   in the results You can only set `relevancyStrictness` on
  *   [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
@@ -289,7 +276,6 @@ import kotlinx.serialization.json.*
  *   [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark).
  *   For example, `Gartenstühle` won't be decompounded if the `ü` consists of `u` (U+0075) and `◌̈`
  *   (U+0308).
- * @param enableRules Whether to enable rules.
  * @param enablePersonalization Whether to enable Personalization.
  * @param queryType
  * @param removeWordsIfNoResults
@@ -355,6 +341,7 @@ import kotlinx.serialization.json.*
  *   [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting
  *   only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
  * @param reRankingApplyFilter
+ * @param enableRules Whether to enable rules.
  */
 @Serializable
 public data class RecommendSearchParams(
@@ -387,7 +374,6 @@ public data class RecommendSearchParams(
    * [Filters](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering).
    */
   @SerialName(value = "filters") val filters: String? = null,
-  @SerialName(value = "facetFilters") val facetFilters: FacetFilters? = null,
   @SerialName(value = "optionalFilters") val optionalFilters: OptionalFilters? = null,
   @SerialName(value = "numericFilters") val numericFilters: NumericFilters? = null,
   @SerialName(value = "tagFilters") val tagFilters: TagFilters? = null,
@@ -503,9 +489,6 @@ public data class RecommendSearchParams(
 
   /** Whether to include this search when calculating processing-time percentiles. */
   @SerialName(value = "percentileComputation") val percentileComputation: Boolean? = null,
-
-  /** Whether to enable A/B testing for this search. */
-  @SerialName(value = "enableABTest") val enableABTest: Boolean? = null,
 
   /** Search query. */
   @SerialName(value = "query") val query: String? = null,
@@ -717,21 +700,6 @@ public data class RecommendSearchParams(
   @SerialName(value = "attributesToRetrieve") val attributesToRetrieve: List<String>? = null,
 
   /**
-   * Determines the order in which Algolia returns your results. By default, each entry corresponds
-   * to a
-   * [ranking criteria](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria).
-   * The tie-breaking algorithm sequentially applies each criterion in the order they're specified.
-   * If you configure a replica index for
-   * [sorting by an attribute](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/how-to/sort-by-attribute),
-   * you put the sorting attribute at the top of the list. **Modifiers** - `asc(\"ATTRIBUTE\")`.
-   * Sort the index by the values of an attribute, in ascending order. - `desc(\"ATTRIBUTE\")`. Sort
-   * the index by the values of an attribute, in descending order. Before you modify the default
-   * setting, test your changes in the dashboard, and by
-   * [A/B testing](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing).
-   */
-  @SerialName(value = "ranking") val ranking: List<String>? = null,
-
-  /**
    * Relevancy threshold below which less relevant results aren't included in the results You can
    * only set `relevancyStrictness` on
    * [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
@@ -835,9 +803,6 @@ public data class RecommendSearchParams(
    * (U+0308).
    */
   @SerialName(value = "decompoundQuery") val decompoundQuery: Boolean? = null,
-
-  /** Whether to enable rules. */
-  @SerialName(value = "enableRules") val enableRules: Boolean? = null,
 
   /** Whether to enable Personalization. */
   @SerialName(value = "enablePersonalization") val enablePersonalization: Boolean? = null,
@@ -950,5 +915,9 @@ public data class RecommendSearchParams(
    * only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
    */
   @SerialName(value = "enableReRanking") val enableReRanking: Boolean? = null,
-  @SerialName(value = "reRankingApplyFilter") val reRankingApplyFilter: ReRankingApplyFilter? = null,
+  @SerialName(value = "reRankingApplyFilter")
+  val reRankingApplyFilter: ReRankingApplyFilter? = null,
+
+  /** Whether to enable rules. */
+  @SerialName(value = "enableRules") val enableRules: Boolean? = null,
 ) {}
