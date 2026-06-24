@@ -25,5 +25,6 @@ public data class SourceBigCommerce(
   @SerialName(value = "customFields") val customFields: List<String>? = null,
   @SerialName(value = "productMetafields")
   val productMetafields: List<BigCommerceMetafield>? = null,
-  @SerialName(value = "variantMetafields") val variantMetafields: List<BigCommerceMetafield>? = null,
+  @SerialName(value = "variantMetafields")
+  val variantMetafields: List<BigCommerceMetafield>? = null,
 ) : SourceInput {}

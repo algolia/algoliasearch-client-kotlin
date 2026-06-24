@@ -51,17 +51,16 @@ public suspend fun IngestionClient.chunkedPush(
   val pollInterval = maxOf(1, batchSize / 10)
 
   objects.chunked(batchSize).chunked(pollInterval).forEach { superBatch ->
-    val pushed =
-      superBatch.map { chunk ->
-        push(
-          indexName = indexName,
-          pushTaskPayload =
-            PushTaskPayload(action = action, records = chunk.map { it.toPushTaskRecord() }),
-          watch = false,
-          referenceIndexName = referenceIndexName,
-          requestOptions = requestOptions,
-        )
-      }
+    val pushed = superBatch.map { chunk ->
+      push(
+        indexName = indexName,
+        pushTaskPayload =
+          PushTaskPayload(action = action, records = chunk.map { it.toPushTaskRecord() }),
+        watch = false,
+        referenceIndexName = referenceIndexName,
+        requestOptions = requestOptions,
+      )
+    }
     responses += pushed
 
     if (waitForTasks) {

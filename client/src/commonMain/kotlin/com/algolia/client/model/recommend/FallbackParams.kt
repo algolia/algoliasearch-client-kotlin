@@ -914,5 +914,6 @@ public data class FallbackParams(
    * only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
    */
   @SerialName(value = "enableReRanking") val enableReRanking: Boolean? = null,
-  @SerialName(value = "reRankingApplyFilter") val reRankingApplyFilter: ReRankingApplyFilter? = null,
+  @SerialName(value = "reRankingApplyFilter")
+  val reRankingApplyFilter: ReRankingApplyFilter? = null,
 ) {}

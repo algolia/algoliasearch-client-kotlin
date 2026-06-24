@@ -131,7 +131,10 @@ public class SearchClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "keys"),
         body = apiKey,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -173,7 +176,10 @@ public class SearchClient(
             listOf("1", "indexes", "$indexName", "$objectID"),
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -196,7 +202,10 @@ public class SearchClient(
           "".split("/").filter { it.isNotBlank() } + listOf("1", "security", "sources", "append"),
         body = source,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -223,10 +232,16 @@ public class SearchClient(
       RequestConfig(
         method = RequestMethod.POST,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "clusters", "mapping"),
-        headers = buildMap { put("X-Algolia-User-ID", xAlgoliaUserID) },
+        headers =
+          buildMap {
+            put("X-Algolia-User-ID", xAlgoliaUserID)
+          },
         body = assignUserIdParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -256,7 +271,10 @@ public class SearchClient(
           "".split("/").filter { it.isNotBlank() } + listOf("1", "indexes", "$indexName", "batch"),
         body = batchWriteParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -283,10 +301,16 @@ public class SearchClient(
         method = RequestMethod.POST,
         path =
           "".split("/").filter { it.isNotBlank() } + listOf("1", "clusters", "mapping", "batch"),
-        headers = buildMap { put("X-Algolia-User-ID", xAlgoliaUserID) },
+        headers =
+          buildMap {
+            put("X-Algolia-User-ID", xAlgoliaUserID)
+          },
         body = batchAssignUserIdsParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -312,7 +336,10 @@ public class SearchClient(
             listOf("1", "dictionaries", "$dictionaryName", "batch"),
         body = batchDictionaryEntriesParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -348,7 +375,10 @@ public class SearchClient(
         isRead = true,
         body = browseParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -375,7 +405,10 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } + listOf("1", "indexes", "$indexName", "clear"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -402,9 +435,15 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "rules", "clear"),
-        query = buildMap { forwardToReplicas?.let { put("forwardToReplicas", it) } },
+        query =
+          buildMap {
+            forwardToReplicas?.let { put("forwardToReplicas", it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -431,9 +470,15 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "synonyms", "clear"),
-        query = buildMap { forwardToReplicas?.let { put("forwardToReplicas", it) } },
+        query =
+          buildMap {
+            forwardToReplicas?.let { put("forwardToReplicas", it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -453,9 +498,15 @@ public class SearchClient(
       RequestConfig(
         method = RequestMethod.DELETE,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -475,9 +526,15 @@ public class SearchClient(
       RequestConfig(
         method = RequestMethod.GET,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -499,10 +556,16 @@ public class SearchClient(
       RequestConfig(
         method = RequestMethod.POST,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -524,10 +587,16 @@ public class SearchClient(
       RequestConfig(
         method = RequestMethod.PUT,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -549,7 +618,10 @@ public class SearchClient(
         method = RequestMethod.DELETE,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "keys", "$key"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -582,7 +654,10 @@ public class SearchClient(
             listOf("1", "indexes", "$indexName", "deleteByQuery"),
         body = deleteByParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -611,7 +686,10 @@ public class SearchClient(
         method = RequestMethod.DELETE,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "indexes", "$indexName"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -645,7 +723,10 @@ public class SearchClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "$objectID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -676,9 +757,15 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "rules", "$objectID"),
-        query = buildMap { forwardToReplicas?.let { put("forwardToReplicas", it) } },
+        query =
+          buildMap {
+            forwardToReplicas?.let { put("forwardToReplicas", it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -701,7 +788,10 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } + listOf("1", "security", "sources", "$source"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -734,9 +824,15 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "synonyms", "$objectID"),
-        query = buildMap { forwardToReplicas?.let { put("forwardToReplicas", it) } },
+        query =
+          buildMap {
+            forwardToReplicas?.let { put("forwardToReplicas", it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -761,7 +857,10 @@ public class SearchClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "keys", "$key"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -782,7 +881,10 @@ public class SearchClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "task", "$taskID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -802,7 +904,10 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } + listOf("1", "dictionaries", "*", "languages"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -822,7 +927,10 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } + listOf("1", "dictionaries", "*", "settings"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -864,7 +972,10 @@ public class SearchClient(
             type?.let { put("type", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -903,7 +1014,10 @@ public class SearchClient(
             attributesToRetrieve?.let { put("attributesToRetrieve", it.joinToString(",")) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -927,7 +1041,10 @@ public class SearchClient(
         isRead = true,
         body = getObjectsParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -955,7 +1072,10 @@ public class SearchClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "rules", "$objectID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -983,9 +1103,15 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "settings"),
-        query = buildMap { getVersion?.let { put("getVersion", it) } },
+        query =
+          buildMap {
+            getVersion?.let { put("getVersion", it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1002,7 +1128,10 @@ public class SearchClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "security", "sources"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1032,7 +1161,10 @@ public class SearchClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "synonyms", "$objectID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1061,7 +1193,10 @@ public class SearchClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "task", "$taskID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1080,7 +1215,10 @@ public class SearchClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "clusters", "mapping", "top"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1102,7 +1240,10 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } + listOf("1", "clusters", "mapping", "$userID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1126,9 +1267,15 @@ public class SearchClient(
         method = RequestMethod.GET,
         path =
           "".split("/").filter { it.isNotBlank() } + listOf("1", "clusters", "mapping", "pending"),
-        query = buildMap { getClusters?.let { put("getClusters", it) } },
+        query =
+          buildMap {
+            getClusters?.let { put("getClusters", it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1146,7 +1293,10 @@ public class SearchClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "keys"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1164,7 +1314,10 @@ public class SearchClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "clusters"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1193,7 +1346,10 @@ public class SearchClient(
             hitsPerPage?.let { put("hitsPerPage", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1223,7 +1379,10 @@ public class SearchClient(
             hitsPerPage?.let { put("hitsPerPage", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1248,7 +1407,10 @@ public class SearchClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "indexes", "*", "batch"),
         body = batchParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1294,7 +1456,10 @@ public class SearchClient(
             listOf("1", "indexes", "$indexName", "operation"),
         body = operationIndexParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1355,10 +1520,16 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "$objectID", "partial"),
-        query = buildMap { createIfNotExists?.let { put("createIfNotExists", it) } },
+        query =
+          buildMap {
+            createIfNotExists?.let { put("createIfNotExists", it) }
+          },
         body = attributesToUpdate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1382,7 +1553,10 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } + listOf("1", "clusters", "mapping", "$userID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1404,7 +1578,10 @@ public class SearchClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "security", "sources"),
         body = source,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1428,7 +1605,10 @@ public class SearchClient(
         method = RequestMethod.POST,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "keys", "$key", "restore"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1466,7 +1646,10 @@ public class SearchClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "indexes", "$indexName"),
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1498,10 +1681,16 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "rules", "$objectID"),
-        query = buildMap { forwardToReplicas?.let { put("forwardToReplicas", it) } },
+        query =
+          buildMap {
+            forwardToReplicas?.let { put("forwardToReplicas", it) }
+          },
         body = rule,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1541,7 +1730,10 @@ public class SearchClient(
           },
         body = rules,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1577,10 +1769,16 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "synonyms", "$objectID"),
-        query = buildMap { forwardToReplicas?.let { put("forwardToReplicas", it) } },
+        query =
+          buildMap {
+            forwardToReplicas?.let { put("forwardToReplicas", it) }
+          },
         body = synonymHit,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1621,7 +1819,10 @@ public class SearchClient(
           },
         body = synonymHit,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1648,7 +1849,10 @@ public class SearchClient(
         isRead = true,
         body = searchMethodParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1675,7 +1879,10 @@ public class SearchClient(
         isRead = true,
         body = searchDictionaryEntriesParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1714,7 +1921,10 @@ public class SearchClient(
         isRead = true,
         body = searchForFacetValuesRequest,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1744,7 +1954,10 @@ public class SearchClient(
         isRead = true,
         body = searchRulesParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1776,7 +1989,10 @@ public class SearchClient(
         isRead = true,
         body = searchParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1806,7 +2022,10 @@ public class SearchClient(
         isRead = true,
         body = searchSynonymsParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1835,7 +2054,10 @@ public class SearchClient(
         isRead = true,
         body = searchUserIdsParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1858,7 +2080,10 @@ public class SearchClient(
           "".split("/").filter { it.isNotBlank() } + listOf("1", "dictionaries", "*", "settings"),
         body = dictionarySettingsParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1889,10 +2114,16 @@ public class SearchClient(
         path =
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "settings"),
-        query = buildMap { forwardToReplicas?.let { put("forwardToReplicas", it) } },
+        query =
+          buildMap {
+            forwardToReplicas?.let { put("forwardToReplicas", it) }
+          },
         body = indexSettings,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1918,6 +2149,9 @@ public class SearchClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "keys", "$key"),
         body = apiKey,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 }

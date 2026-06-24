@@ -61,9 +61,15 @@ public class MonitoringClient(
       RequestConfig(
         method = RequestMethod.DELETE,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -83,9 +89,15 @@ public class MonitoringClient(
       RequestConfig(
         method = RequestMethod.GET,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -107,10 +119,16 @@ public class MonitoringClient(
       RequestConfig(
         method = RequestMethod.POST,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -132,10 +150,16 @@ public class MonitoringClient(
       RequestConfig(
         method = RequestMethod.PUT,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -156,7 +180,10 @@ public class MonitoringClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "incidents", "$clusters"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -177,7 +204,10 @@ public class MonitoringClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "status", "$clusters"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -191,7 +221,10 @@ public class MonitoringClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "incidents"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -217,7 +250,10 @@ public class MonitoringClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "indexing", "$clusters"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -236,7 +272,10 @@ public class MonitoringClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "latency", "$clusters"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -266,7 +305,10 @@ public class MonitoringClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "infrastructure", "$metric", "period", "$period"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -289,7 +331,10 @@ public class MonitoringClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "reachability", "$clusters", "probes"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -306,7 +351,10 @@ public class MonitoringClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "inventory", "servers"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -320,6 +368,9 @@ public class MonitoringClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "status"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 }

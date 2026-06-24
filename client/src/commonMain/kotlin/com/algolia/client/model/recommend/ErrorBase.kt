@@ -24,7 +24,9 @@ public data class ErrorBase(
 internal object ErrorBaseSerializer : KSerializer<ErrorBase> {
 
   override val descriptor: SerialDescriptor =
-    buildClassSerialDescriptor("ErrorBase") { element<String>("message", isOptional = true) }
+    buildClassSerialDescriptor("ErrorBase") {
+      element<String>("message", isOptional = true)
+    }
 
   override fun deserialize(decoder: Decoder): ErrorBase {
     val input = decoder.asJsonDecoder()

@@ -92,7 +92,10 @@ public class RecommendClient(
             listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "batch"),
         body = recommendRule,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -112,9 +115,15 @@ public class RecommendClient(
       RequestConfig(
         method = RequestMethod.DELETE,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -134,9 +143,15 @@ public class RecommendClient(
       RequestConfig(
         method = RequestMethod.GET,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -158,10 +173,16 @@ public class RecommendClient(
       RequestConfig(
         method = RequestMethod.POST,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -183,10 +204,16 @@ public class RecommendClient(
       RequestConfig(
         method = RequestMethod.PUT,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -220,7 +247,10 @@ public class RecommendClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "$objectID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -254,7 +284,10 @@ public class RecommendClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "$model", "recommend", "rules", "$objectID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -287,7 +320,10 @@ public class RecommendClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "indexes", "$indexName", "$model", "task", "$taskID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -311,7 +347,10 @@ public class RecommendClient(
         isRead = true,
         body = getRecommendationsParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -345,6 +384,9 @@ public class RecommendClient(
         isRead = true,
         body = searchRecommendRulesParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 }

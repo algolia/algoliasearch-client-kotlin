@@ -72,5 +72,6 @@ public data class HitRankingInfo(
 
   /** Whether the record is re-ranked. */
   @SerialName(value = "promotedByReRanking") val promotedByReRanking: Boolean? = null,
-  @SerialName(value = "composed") val composed: Map<kotlin.String, CompositionIdRankingInfo>? = null,
+  @SerialName(value = "composed")
+  val composed: Map<kotlin.String, CompositionIdRankingInfo>? = null,
 ) {}

@@ -71,7 +71,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "authentications"),
         body = authenticationCreate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -95,7 +98,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "destinations"),
         body = destinationCreate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -119,7 +125,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources"),
         body = sourceCreate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -143,7 +152,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks"),
         body = taskCreate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -168,7 +180,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks"),
         body = taskCreate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -192,7 +207,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "transformations"),
         body = transformationCreate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -212,9 +230,15 @@ public class IngestionClient(
       RequestConfig(
         method = RequestMethod.DELETE,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -234,9 +258,15 @@ public class IngestionClient(
       RequestConfig(
         method = RequestMethod.GET,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -258,10 +288,16 @@ public class IngestionClient(
       RequestConfig(
         method = RequestMethod.POST,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -283,10 +319,16 @@ public class IngestionClient(
       RequestConfig(
         method = RequestMethod.PUT,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -315,7 +357,10 @@ public class IngestionClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "authentications", "$authenticationID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -342,7 +387,10 @@ public class IngestionClient(
         path =
           "".split("/").filter { it.isNotBlank() } + listOf("1", "destinations", "$destinationID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -368,7 +416,10 @@ public class IngestionClient(
         method = RequestMethod.DELETE,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "$sourceID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -392,7 +443,10 @@ public class IngestionClient(
         method = RequestMethod.DELETE,
         path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -417,7 +471,10 @@ public class IngestionClient(
         method = RequestMethod.DELETE,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -445,7 +502,10 @@ public class IngestionClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "transformations", "$transformationID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -467,9 +527,13 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PUT,
-        path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID", "disable"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID", "disable"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -492,9 +556,13 @@ public class IngestionClient(
     val requestConfig =
       RequestConfig(
         method = RequestMethod.PUT,
-        path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID", "disable"),
+        path =
+          "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID", "disable"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -518,7 +586,10 @@ public class IngestionClient(
         method = RequestMethod.PUT,
         path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID", "enable"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -543,7 +614,10 @@ public class IngestionClient(
         method = RequestMethod.PUT,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID", "enable"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -571,7 +645,10 @@ public class IngestionClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "authentications", "$authenticationID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -598,7 +675,10 @@ public class IngestionClient(
         path =
           "".split("/").filter { it.isNotBlank() } + listOf("1", "destinations", "$destinationID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -627,7 +707,10 @@ public class IngestionClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "runs", "$runID", "events", "$eventID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -648,7 +731,10 @@ public class IngestionClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "runs", "$runID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -669,7 +755,10 @@ public class IngestionClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "$sourceID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -690,7 +779,10 @@ public class IngestionClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -712,7 +804,10 @@ public class IngestionClient(
         method = RequestMethod.GET,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -740,7 +835,10 @@ public class IngestionClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "transformations", "$transformationID"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -783,7 +881,10 @@ public class IngestionClient(
             order?.let { put("order", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -829,7 +930,10 @@ public class IngestionClient(
             order?.let { put("order", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -882,7 +986,10 @@ public class IngestionClient(
             endDate?.let { put("endDate", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -935,7 +1042,10 @@ public class IngestionClient(
             endDate?.let { put("endDate", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -979,7 +1089,10 @@ public class IngestionClient(
             order?.let { put("order", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1037,7 +1150,10 @@ public class IngestionClient(
             order?.let { put("order", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1089,7 +1205,10 @@ public class IngestionClient(
             order?.let { put("order", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1129,7 +1248,10 @@ public class IngestionClient(
             type?.let { put("type", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1215,7 +1337,10 @@ public class IngestionClient(
       RequestConfig(
         method = RequestMethod.POST,
         path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID", "push"),
-        query = buildMap { watch?.let { put("watch", it) } },
+        query =
+          buildMap {
+            watch?.let { put("watch", it) }
+          },
         body = pushTaskPayload,
       )
     return requester.execute(
@@ -1254,7 +1379,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID"),
         body = taskReplace,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1283,7 +1411,10 @@ public class IngestionClient(
           "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "$sourceID", "run"),
         body = runSourcePayload,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1310,7 +1441,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID", "run"),
         body = runTaskPayload,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1339,7 +1473,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID", "run"),
         body = runTaskPayload,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1363,7 +1500,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "authentications", "search"),
         body = authenticationSearch,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1387,7 +1527,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "destinations", "search"),
         body = destinationSearch,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1411,7 +1554,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "search"),
         body = sourceSearch,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1435,7 +1581,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "search"),
         body = taskSearch,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1460,7 +1609,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "search"),
         body = taskSearch,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1484,7 +1636,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "transformations", "search"),
         body = transformationSearch,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1510,7 +1665,8 @@ public class IngestionClient(
       RequestConfig(
         method = RequestMethod.POST,
         path =
-          "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "$sourceID", "discover"),
+          "".split("/").filter { it.isNotBlank() } +
+            listOf("1", "sources", "$sourceID", "discover"),
       )
     return requester.execute(
       requestConfig = requestConfig,
@@ -1544,7 +1700,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "transformations", "try"),
         body = transformationTry,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1575,7 +1734,10 @@ public class IngestionClient(
             listOf("1", "transformations", "$transformationID", "try"),
         body = transformationTry,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1606,7 +1768,10 @@ public class IngestionClient(
             listOf("1", "authentications", "$authenticationID"),
         body = authenticationUpdate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1636,7 +1801,10 @@ public class IngestionClient(
           "".split("/").filter { it.isNotBlank() } + listOf("1", "destinations", "$destinationID"),
         body = destinationUpdate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1665,7 +1833,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "sources", "$sourceID"),
         body = sourceUpdate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1692,7 +1863,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("2", "tasks", "$taskID"),
         body = taskUpdate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1720,7 +1894,10 @@ public class IngestionClient(
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "tasks", "$taskID"),
         body = taskUpdate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1751,7 +1928,10 @@ public class IngestionClient(
             listOf("1", "transformations", "$transformationID"),
         body = transformationCreate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**

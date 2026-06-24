@@ -28,5 +28,6 @@ public data class AutoFilteringResult(
   @SerialName(value = "facetFilters") val facetFilters: List<AutoFilteringFilterEntry>? = null,
 
   /** Optional filters automatically applied to boost relevant categories. */
-  @SerialName(value = "optionalFilters") val optionalFilters: List<AutoFilteringFilterEntry>? = null,
+  @SerialName(value = "optionalFilters")
+  val optionalFilters: List<AutoFilteringFilterEntry>? = null,
 ) {}

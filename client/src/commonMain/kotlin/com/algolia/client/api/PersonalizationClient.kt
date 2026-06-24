@@ -67,9 +67,15 @@ public class PersonalizationClient(
       RequestConfig(
         method = RequestMethod.DELETE,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -89,9 +95,15 @@ public class PersonalizationClient(
       RequestConfig(
         method = RequestMethod.GET,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -113,10 +125,16 @@ public class PersonalizationClient(
       RequestConfig(
         method = RequestMethod.POST,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -138,10 +156,16 @@ public class PersonalizationClient(
       RequestConfig(
         method = RequestMethod.PUT,
         path = "/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -167,7 +191,10 @@ public class PersonalizationClient(
         method = RequestMethod.DELETE,
         path = "".split("/").filter { it.isNotBlank() } + listOf("1", "profiles", "$userToken"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -187,7 +214,10 @@ public class PersonalizationClient(
         path =
           "".split("/").filter { it.isNotBlank() } + listOf("1", "strategies", "personalization"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -214,7 +244,10 @@ public class PersonalizationClient(
           "".split("/").filter { it.isNotBlank() } +
             listOf("1", "profiles", "personalization", "$userToken"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -237,6 +270,9 @@ public class PersonalizationClient(
           "".split("/").filter { it.isNotBlank() } + listOf("1", "strategies", "personalization"),
         body = personalizationStrategyParams,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 }

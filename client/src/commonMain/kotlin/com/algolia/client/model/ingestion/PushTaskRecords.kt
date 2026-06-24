@@ -26,7 +26,9 @@ public data class PushTaskRecords(
 internal object PushTaskRecordsSerializer : KSerializer<PushTaskRecords> {
 
   override val descriptor: SerialDescriptor =
-    buildClassSerialDescriptor("PushTaskRecords") { element<String>("objectID") }
+    buildClassSerialDescriptor("PushTaskRecords") {
+      element<String>("objectID")
+    }
 
   override fun deserialize(decoder: Decoder): PushTaskRecords {
     val input = decoder.asJsonDecoder()

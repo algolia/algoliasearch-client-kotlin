@@ -34,5 +34,6 @@ public data class ConfigStatus(
   @SerialName(value = "lastSuccessfulBuiltAt") val lastSuccessfulBuiltAt: String? = null,
 
   /** Duration of the last successful build in seconds. */
-  @SerialName(value = "lastSuccessfulBuildDuration") val lastSuccessfulBuildDuration: String? = null,
+  @SerialName(value = "lastSuccessfulBuildDuration")
+  val lastSuccessfulBuildDuration: String? = null,
 ) {}

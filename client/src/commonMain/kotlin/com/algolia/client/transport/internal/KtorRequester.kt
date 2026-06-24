@@ -93,13 +93,12 @@ public class KtorRequester(
     }
 
   /** Get list of [RetryableHost] for a given [CallType]. */
-  private suspend fun callableHosts(callType: CallType): List<RetryableHost> =
-    mutex.withLock {
-      retryableHosts.expireHostsOlderThan(hostStatusExpirationDelayMS)
-      val hostsCallType = retryableHosts.filterCallType(callType)
-      val hostsCallTypeAreUp = hostsCallType.filter { it.isUp }
-      hostsCallTypeAreUp.ifEmpty { hostsCallType.onEach { it.reset() } }
-    }
+  private suspend fun callableHosts(callType: CallType): List<RetryableHost> = mutex.withLock {
+    retryableHosts.expireHostsOlderThan(hostStatusExpirationDelayMS)
+    val hostsCallType = retryableHosts.filterCallType(callType)
+    val hostsCallTypeAreUp = hostsCallType.filter { it.isUp }
+    hostsCallTypeAreUp.ifEmpty { hostsCallType.onEach { it.reset() } }
+  }
 
   /** Handle API request exceptions. */
   private suspend fun RetryableHost.onError(throwable: Throwable) {

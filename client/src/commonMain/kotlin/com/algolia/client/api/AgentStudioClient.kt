@@ -79,7 +79,10 @@ public class AgentStudioClient(
             listOf("1", "agents", "$agentId", "allowed-domains", "bulk"),
         body = allowedDomainBulkInsert,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -108,7 +111,10 @@ public class AgentStudioClient(
             listOf("1", "agents", "$agentId", "allowed-domains", "bulk"),
         body = allowedDomainBulkDelete,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -130,7 +136,10 @@ public class AgentStudioClient(
         path = "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "agents"),
         body = agentConfigCreate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -159,7 +168,10 @@ public class AgentStudioClient(
             listOf("1", "agents", "$agentId", "allowed-domains"),
         body = allowedDomainCreate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -218,7 +230,10 @@ public class AgentStudioClient(
           },
         body = agentCompletionRequest,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -240,7 +255,10 @@ public class AgentStudioClient(
         path = "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "feedback"),
         body = feedbackCreationRequest,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -262,7 +280,10 @@ public class AgentStudioClient(
         path = "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "providers"),
         body = providerAuthenticationCreate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -284,7 +305,10 @@ public class AgentStudioClient(
         path = "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "secret-keys"),
         body = secretKeyCreate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -304,9 +328,15 @@ public class AgentStudioClient(
       RequestConfig(
         method = RequestMethod.DELETE,
         path = "/agent-studio/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -326,9 +356,15 @@ public class AgentStudioClient(
       RequestConfig(
         method = RequestMethod.GET,
         path = "/agent-studio/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -350,10 +386,16 @@ public class AgentStudioClient(
       RequestConfig(
         method = RequestMethod.POST,
         path = "/agent-studio/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -375,10 +417,16 @@ public class AgentStudioClient(
       RequestConfig(
         method = RequestMethod.PUT,
         path = "/agent-studio/{path}".replace("{path}", path),
-        query = buildMap { parameters?.let { putAll(it) } },
+        query =
+          buildMap {
+            parameters?.let { putAll(it) }
+          },
         body = body,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -398,7 +446,10 @@ public class AgentStudioClient(
         path =
           "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "agents", "$agentId"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -433,7 +484,10 @@ public class AgentStudioClient(
             endDate?.let { put("endDate", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -464,7 +518,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "agents", "$agentId", "allowed-domains", "$domainId"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -495,7 +552,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "agents", "$agentId", "conversations", "$conversationId"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -518,7 +578,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "providers", "$providerId"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -541,7 +604,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "secret-keys", "$secretKeyId"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -564,7 +630,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "user-data", "$userToken"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -599,7 +668,10 @@ public class AgentStudioClient(
             endDate?.let { put("endDate", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -622,7 +694,10 @@ public class AgentStudioClient(
         path =
           "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "agents", "$agentId"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -653,7 +728,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "agents", "$agentId", "allowed-domains", "$domainId"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -672,7 +750,10 @@ public class AgentStudioClient(
         method = RequestMethod.GET,
         path = "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "configuration"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -710,9 +791,15 @@ public class AgentStudioClient(
           buildMap {
             xAlgoliaSecureUserToken?.let { header -> put("X-Algolia-Secure-User-Token", header) }
           },
-        query = buildMap { includeFeedback?.let { put("includeFeedback", it) } },
+        query =
+          buildMap {
+            includeFeedback?.let { put("includeFeedback", it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -738,7 +825,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "providers", "$providerId"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -764,7 +854,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "secret-keys", "$secretKeyId"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -790,7 +883,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "user-data", "$userToken"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -817,9 +913,15 @@ public class AgentStudioClient(
         path =
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "agents", "$agentId", "cache"),
-        query = buildMap { before?.let { put("before", it) } },
+        query =
+          buildMap {
+            before?.let { put("before", it) }
+          },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -845,7 +947,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "agents", "$agentId", "allowed-domains"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -898,7 +1003,10 @@ public class AgentStudioClient(
             limit?.let { put("limit", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -929,7 +1037,10 @@ public class AgentStudioClient(
             providerId?.let { put("providerId", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -947,9 +1058,13 @@ public class AgentStudioClient(
       RequestConfig(
         method = RequestMethod.GET,
         path =
-          "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "providers", "models"),
+          "/agent-studio".split("/").filter { it.isNotBlank() } +
+            listOf("1", "providers", "models"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -975,7 +1090,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "providers", "$providerId", "models"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1003,7 +1121,10 @@ public class AgentStudioClient(
             limit?.let { put("limit", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1031,7 +1152,10 @@ public class AgentStudioClient(
             limit?.let { put("limit", it) }
           },
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1055,7 +1179,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "agents", "$agentId", "publish"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1081,7 +1208,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } +
             listOf("1", "agents", "$agentId", "unpublish"),
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1107,7 +1237,10 @@ public class AgentStudioClient(
           "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "agents", "$agentId"),
         body = agentConfigUpdate,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1129,7 +1262,10 @@ public class AgentStudioClient(
         path = "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "configuration"),
         body = applicationConfigPatch,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1158,7 +1294,10 @@ public class AgentStudioClient(
             listOf("1", "providers", "$providerId"),
         body = providerAuthenticationPatch,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**
@@ -1187,7 +1326,10 @@ public class AgentStudioClient(
             listOf("1", "secret-keys", "$secretKeyId"),
         body = secretKeyPatch,
       )
-    return requester.execute(requestConfig = requestConfig, requestOptions = requestOptions)
+    return requester.execute(
+      requestConfig = requestConfig,
+      requestOptions = requestOptions,
+    )
   }
 
   /**

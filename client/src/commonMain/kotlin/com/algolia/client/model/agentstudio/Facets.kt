@@ -24,7 +24,9 @@ public data class Facets(
 internal object FacetsSerializer : KSerializer<Facets> {
 
   override val descriptor: SerialDescriptor =
-    buildClassSerialDescriptor("Facets") { element<List<String>>("order", isOptional = true) }
+    buildClassSerialDescriptor("Facets") {
+      element<List<String>>("order", isOptional = true)
+    }
 
   override fun deserialize(decoder: Decoder): Facets {
     val input = decoder.asJsonDecoder()
