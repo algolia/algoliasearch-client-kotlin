@@ -22,6 +22,7 @@ import kotlinx.serialization.json.*
  * @param stoppedAt Date and time when the A/B test was stopped, in RFC 3339 format.
  * @param configuration
  * @param migratedAbTestID Unique migrated A/B test identifier.
+ * @param decision
  */
 @Serializable
 public data class ABTest(
@@ -55,4 +56,5 @@ public data class ABTest(
 
   /** Unique migrated A/B test identifier. */
   @SerialName(value = "migratedAbTestID") val migratedAbTestID: Int? = null,
+  @SerialName(value = "decision") val decision: Decision? = null,
 ) {}
