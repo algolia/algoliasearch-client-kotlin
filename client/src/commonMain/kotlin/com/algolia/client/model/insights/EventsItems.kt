@@ -25,6 +25,7 @@ import kotlinx.serialization.json.*
  * - [ConvertedFilters]
  * - [ConvertedObjectIDs]
  * - [ConvertedObjectIDsAfterSearch]
+ * - [Instantsearch]
  * - [PurchasedObjectIDs]
  * - [PurchasedObjectIDsAfterSearch]
  * - [ViewedFilters]
@@ -88,6 +89,10 @@ public sealed interface EventsItems {
   @JvmInline
   public value class ViewedFiltersValue(public val value: ViewedFilters) : EventsItems
 
+  @Serializable
+  @JvmInline
+  public value class InstantsearchValue(public val value: Instantsearch) : EventsItems
+
   public companion object {
 
     public fun of(value: AddedToCartObjectIDsAfterSearch): EventsItems =
@@ -117,6 +122,8 @@ public sealed interface EventsItems {
     public fun of(value: ViewedObjectIDs): EventsItems = ViewedObjectIDsValue(value)
 
     public fun of(value: ViewedFilters): EventsItems = ViewedFiltersValue(value)
+
+    public fun of(value: Instantsearch): EventsItems = InstantsearchValue(value)
   }
 }
 
@@ -163,6 +170,7 @@ internal class EventsItemsSerializer :
         element.containsKey("objectIDs") -> ViewedObjectIDs.serializer()
       element is JsonObject && element.containsKey("eventType") && element.containsKey("filters") ->
         ViewedFilters.serializer()
+      element is JsonObject && element.containsKey("eventType") -> Instantsearch.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
