@@ -24,11 +24,13 @@ public class AlgoliaClientException(message: String? = null, cause: Throwable? =
  * @param message the detail message
  * @param cause the cause of the exception
  * @param httpErrorCode
+ * @param correlationId the `Correlation-ID` response header of the failed request, when present
  */
 public class AlgoliaApiException(
   message: String? = null,
   cause: Throwable? = null,
   public val httpErrorCode: Int? = null,
+  public val correlationId: String? = null,
 ) : AlgoliaRuntimeException(message, cause)
 
 /**
@@ -36,8 +38,12 @@ public class AlgoliaApiException(
  * as the cause for the returned exception.
  *
  * @param exceptions list of thrown exceptions
+ * @param correlationId the `Correlation-ID` of the last attempt that returned one, when present
  */
-public class AlgoliaRetryException(public val exceptions: List<Throwable>) :
+public class AlgoliaRetryException(
+  public val exceptions: List<Throwable>,
+  public val correlationId: String? = null,
+) :
   AlgoliaRuntimeException(
     "Error(s) while processing the retry strategy. If the error persists, please visit our help center https://alg.li/support-unreachable-hosts or reach out to the Algolia Support team: https://alg.li/support",
     exceptions.last(),

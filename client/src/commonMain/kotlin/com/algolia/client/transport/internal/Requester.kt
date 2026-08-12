@@ -61,6 +61,7 @@ internal fun requesterOf(
   readTimeout: Duration,
   writeTimeout: Duration,
   options: ClientOptions,
+  sendsRequestId: Boolean = false,
   defaultHosts: () -> List<Host>,
 ) =
   options.requester
@@ -80,4 +81,5 @@ internal fun requesterOf(
       readTimeout = options.readTimeout ?: readTimeout,
       writeTimeout = options.writeTimeout ?: writeTimeout,
       hosts = options.hosts ?: defaultHosts(),
+      sendsRequestId = sendsRequestId && options.defaultHeaders?.hasRequestIdHeader() != true,
     )

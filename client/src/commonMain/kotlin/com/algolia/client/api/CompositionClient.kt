@@ -34,6 +34,7 @@ public class CompositionClient(
       readTimeout = 5000.milliseconds,
       writeTimeout = 30000.milliseconds,
       options = options,
+      sendsRequestId = true,
     ) {
       listOf(
         Host("$appId-dsn.algolia.net", CallType.Read),

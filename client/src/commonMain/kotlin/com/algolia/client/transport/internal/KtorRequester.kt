@@ -35,6 +35,7 @@ public class KtorRequester(
   private val readTimeout: Duration,
   private val writeTimeout: Duration,
   hosts: List<Host>,
+  internal val sendsRequestId: Boolean = false,
 ) : Requester, kotlin.AutoCloseable {
 
   private val hostStatusExpirationDelayMS: Long = 1000L * 60L * 5L
@@ -89,6 +90,7 @@ public class KtorRequester(
     val hosts = callableHosts(callType)
     val errors by lazy(LazyThreadSafetyMode.NONE) { mutableListOf<Throwable>() }
     val requestBuilder = httpRequestBuilderOf(requestConfig, requestOptions)
+    var lastCorrelationId: String? = null
 
     for (host in hosts) {
       requestBuilder.url.protocol = URLProtocol.createOrDefault(host.protocol)
@@ -103,11 +105,14 @@ public class KtorRequester(
         mutex.withLock { host.reset() }
         return result
       } catch (exception: Throwable) {
+        if (exception is ResponseException) {
+          lastCorrelationId = exception.response.headers[HEADER_CORRELATION_ID] ?: lastCorrelationId
+        }
         host.onError(exception)
         errors += exception.asClientException()
       }
     }
-    throw AlgoliaRetryException(errors)
+    throw AlgoliaRetryException(errors, lastCorrelationId)
   }
 
   private fun HttpResponse.hasEmptyBody(): Boolean = status.value == 204 || contentLength() == 0L
@@ -196,7 +201,15 @@ public class KtorRequester(
         queryParameter(urlParameters)
         body?.let { setBody(it) }
       }
+
+      if (sendsRequestId && !carriesRequestId()) {
+        headers.append(HEADER_REQUEST_ID, generateRequestId())
+      }
     }
+
+  private fun HttpRequestBuilder.carriesRequestId(): Boolean =
+    headers.contains(HEADER_REQUEST_ID) ||
+      url.encodedParameters.names().any { it.equals(QUERY_PARAM_REQUEST_ID, ignoreCase = true) }
 
   private fun requiresBody(requestConfig: RequestConfig) =
     requestConfig.method == RequestMethod.POST || requestConfig.method == RequestMethod.PUT
