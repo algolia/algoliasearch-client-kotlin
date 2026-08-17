@@ -970,6 +970,50 @@ public class AnalyticsClient(
   }
 
   /**
+   * **Beta**: this endpoint is under active development and may change without notice. Returns the
+   * static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups,
+   * distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs
+   * before building the other `/3/patterns/_*` queries; two fields are combinable in one query only
+   * when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is
+   * actually used in a query.
+   *
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun getPatternsFields(requestOptions: RequestOptions? = null): Catalog {
+    return requester.execute(
+      requestConfig = getPatternsFieldsRequestConfig(),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * **Beta**: this endpoint is under active development and may change without notice. Returns the
+   * static catalog of analytics fields, grouped by domain and usage (metrics, filters, groups,
+   * distributions). No authentication is required. Use it to discover valid `(domain, kind)` pairs
+   * before building the other `/3/patterns/_*` queries; two fields are combinable in one query only
+   * when their `roots` intersect. Each entry's `requires` lists the ACLs needed when that field is
+   * actually used in a query. This variant of [getPatternsFields] returns the full HTTP response
+   * information (status code, headers, raw body) along with the deserialized response body.
+   *
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun getPatternsFieldsWithHTTPInfo(
+    requestOptions: RequestOptions? = null
+  ): AlgoliaHttpResponse<Catalog> {
+    return requester.executeWithHttpInfo(
+      requestConfig = getPatternsFieldsRequestConfig(),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun getPatternsFieldsRequestConfig(): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.GET,
+      path = "".split("/").filter { it.isNotBlank() } + listOf("3", "patterns", "fields"),
+    )
+  }
+
+  /**
    * Retrieves the purchase rate for all your searches with at least one purchase event, including a
    * daily breakdown. By default, the analyzed period includes the last eight days, including the
    * current day. The rate is purchase conversion events divided by tracked searches. A search is
@@ -2410,6 +2454,294 @@ public class AnalyticsClient(
           endDate?.let { put("endDate", it) }
           tags?.let { put("tags", it) }
         },
+    )
+  }
+
+  /**
+   * **Beta**: this endpoint is under active development and may change without notice. Buckets one
+   * or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each
+   * mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is
+   * optional. Discover valid field kinds per domain with `/3/patterns/fields`.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   *
+   * @param distributionPayload
+   * @param index Comma-separated list of indices the request runs on, used for authorization.
+   *   Required for index-restricted API keys and must match the indices supplied in the request
+   *   body's `indices` parameter; optional for unrestricted keys.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun queryPatternsDistribution(
+    distributionPayload: DistributionPayload,
+    index: String? = null,
+    requestOptions: RequestOptions? = null,
+  ): Map<kotlin.String, Any> {
+    return requester.execute(
+      requestConfig =
+        queryPatternsDistributionRequestConfig(
+          distributionPayload = distributionPayload,
+          index = index,
+        ),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * **Beta**: this endpoint is under active development and may change without notice. Buckets one
+   * or more numeric fields into histograms and returns an object keyed by `histogram<Field>`, each
+   * mapping a bin label to a count. `distributions` and `parameters` are required; `filters` is
+   * optional. Discover valid field kinds per domain with `/3/patterns/fields`. This variant of
+   * [queryPatternsDistribution] returns the full HTTP response information (status code, headers,
+   * raw body) along with the deserialized response body.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   *
+   * @param distributionPayload
+   * @param index Comma-separated list of indices the request runs on, used for authorization.
+   *   Required for index-restricted API keys and must match the indices supplied in the request
+   *   body's `indices` parameter; optional for unrestricted keys.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun queryPatternsDistributionWithHTTPInfo(
+    distributionPayload: DistributionPayload,
+    index: String? = null,
+    requestOptions: RequestOptions? = null,
+  ): AlgoliaHttpResponse<Map<kotlin.String, Any>> {
+    return requester.executeWithHttpInfo(
+      requestConfig =
+        queryPatternsDistributionRequestConfig(
+          distributionPayload = distributionPayload,
+          index = index,
+        ),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun queryPatternsDistributionRequestConfig(
+    distributionPayload: DistributionPayload,
+    index: String?,
+  ): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.POST,
+      path = "".split("/").filter { it.isNotBlank() } + listOf("3", "patterns", "distribution"),
+      query =
+        buildMap {
+          index?.let { put("index", it) }
+        },
+      body = distributionPayload,
+    )
+  }
+
+  /**
+   * **Beta**: this endpoint is under active development and may change without notice. Aggregates
+   * the requested `metrics` over the whole period and returns a single object keyed by metric kind.
+   * `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per
+   * domain with `/3/patterns/fields`.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   *
+   * @param scalarPayload
+   * @param index Comma-separated list of indices the request runs on, used for authorization.
+   *   Required for index-restricted API keys and must match the indices supplied in the request
+   *   body's `indices` parameter; optional for unrestricted keys.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun queryPatternsScalar(
+    scalarPayload: ScalarPayload,
+    index: String? = null,
+    requestOptions: RequestOptions? = null,
+  ): Map<kotlin.String, Any> {
+    return requester.execute(
+      requestConfig =
+        queryPatternsScalarRequestConfig(scalarPayload = scalarPayload, index = index),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * **Beta**: this endpoint is under active development and may change without notice. Aggregates
+   * the requested `metrics` over the whole period and returns a single object keyed by metric kind.
+   * `metrics` and `parameters` are required; `filters` is optional. Discover valid field kinds per
+   * domain with `/3/patterns/fields`. This variant of [queryPatternsScalar] returns the full HTTP
+   * response information (status code, headers, raw body) along with the deserialized response
+   * body.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   *
+   * @param scalarPayload
+   * @param index Comma-separated list of indices the request runs on, used for authorization.
+   *   Required for index-restricted API keys and must match the indices supplied in the request
+   *   body's `indices` parameter; optional for unrestricted keys.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun queryPatternsScalarWithHTTPInfo(
+    scalarPayload: ScalarPayload,
+    index: String? = null,
+    requestOptions: RequestOptions? = null,
+  ): AlgoliaHttpResponse<Map<kotlin.String, Any>> {
+    return requester.executeWithHttpInfo(
+      requestConfig =
+        queryPatternsScalarRequestConfig(scalarPayload = scalarPayload, index = index),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun queryPatternsScalarRequestConfig(
+    scalarPayload: ScalarPayload,
+    index: String?,
+  ): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.POST,
+      path = "".split("/").filter { it.isNotBlank() } + listOf("3", "patterns", "scalar"),
+      query =
+        buildMap {
+          index?.let { put("index", it) }
+        },
+      body = scalarPayload,
+    )
+  }
+
+  /**
+   * **Beta**: this endpoint is under active development and may change without notice. Returns
+   * `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required;
+   * `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy`
+   * is set. Discover valid field kinds per domain with `/3/patterns/fields`.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   *
+   * @param tablePayload
+   * @param index Comma-separated list of indices the request runs on, used for authorization.
+   *   Required for index-restricted API keys and must match the indices supplied in the request
+   *   body's `indices` parameter; optional for unrestricted keys.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun queryPatternsTable(
+    tablePayload: TablePayload,
+    index: String? = null,
+    requestOptions: RequestOptions? = null,
+  ): TableResponse {
+    return requester.execute(
+      requestConfig = queryPatternsTableRequestConfig(tablePayload = tablePayload, index = index),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * **Beta**: this endpoint is under active development and may change without notice. Returns
+   * `rows`, each a flat object of the requested fields. `metrics` and `parameters` are required;
+   * `groupBy`, `filters`, and `orderBy` are optional, though `orderBy` is required when `groupBy`
+   * is set. Discover valid field kinds per domain with `/3/patterns/fields`. This variant of
+   * [queryPatternsTable] returns the full HTTP response information (status code, headers, raw
+   * body) along with the deserialized response body.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   *
+   * @param tablePayload
+   * @param index Comma-separated list of indices the request runs on, used for authorization.
+   *   Required for index-restricted API keys and must match the indices supplied in the request
+   *   body's `indices` parameter; optional for unrestricted keys.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun queryPatternsTableWithHTTPInfo(
+    tablePayload: TablePayload,
+    index: String? = null,
+    requestOptions: RequestOptions? = null,
+  ): AlgoliaHttpResponse<TableResponse> {
+    return requester.executeWithHttpInfo(
+      requestConfig = queryPatternsTableRequestConfig(tablePayload = tablePayload, index = index),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun queryPatternsTableRequestConfig(
+    tablePayload: TablePayload,
+    index: String?,
+  ): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.POST,
+      path = "".split("/").filter { it.isNotBlank() } + listOf("3", "patterns", "table"),
+      query =
+        buildMap {
+          index?.let { put("index", it) }
+        },
+      body = tablePayload,
+    )
+  }
+
+  /**
+   * **Beta**: this endpoint is under active development and may change without notice. Returns one
+   * time series per `groupBy` combination, each with period `totals` and a per-day metric
+   * breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional.
+   * Discover valid field kinds per domain with `/3/patterns/fields`.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   *
+   * @param timeseriesPayload
+   * @param index Comma-separated list of indices the request runs on, used for authorization.
+   *   Required for index-restricted API keys and must match the indices supplied in the request
+   *   body's `indices` parameter; optional for unrestricted keys.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun queryPatternsTimeseries(
+    timeseriesPayload: TimeseriesPayload,
+    index: String? = null,
+    requestOptions: RequestOptions? = null,
+  ): TimeseriesResponse {
+    return requester.execute(
+      requestConfig =
+        queryPatternsTimeseriesRequestConfig(timeseriesPayload = timeseriesPayload, index = index),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * **Beta**: this endpoint is under active development and may change without notice. Returns one
+   * time series per `groupBy` combination, each with period `totals` and a per-day metric
+   * breakdown. `metrics` and `parameters` are required; `groupBy` and `filters` are optional.
+   * Discover valid field kinds per domain with `/3/patterns/fields`. This variant of
+   * [queryPatternsTimeseries] returns the full HTTP response information (status code, headers, raw
+   * body) along with the deserialized response body.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   *
+   * @param timeseriesPayload
+   * @param index Comma-separated list of indices the request runs on, used for authorization.
+   *   Required for index-restricted API keys and must match the indices supplied in the request
+   *   body's `indices` parameter; optional for unrestricted keys.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun queryPatternsTimeseriesWithHTTPInfo(
+    timeseriesPayload: TimeseriesPayload,
+    index: String? = null,
+    requestOptions: RequestOptions? = null,
+  ): AlgoliaHttpResponse<TimeseriesResponse> {
+    return requester.executeWithHttpInfo(
+      requestConfig =
+        queryPatternsTimeseriesRequestConfig(timeseriesPayload = timeseriesPayload, index = index),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun queryPatternsTimeseriesRequestConfig(
+    timeseriesPayload: TimeseriesPayload,
+    index: String?,
+  ): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.POST,
+      path = "".split("/").filter { it.isNotBlank() } + listOf("3", "patterns", "timeseries"),
+      query =
+        buildMap {
+          index?.let { put("index", it) }
+        },
+      body = timeseriesPayload,
     )
   }
 }
