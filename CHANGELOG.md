@@ -1,3 +1,9 @@
+## [3.48.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.47.0...3.48.0)
+
+- [e4a6ab510a](https://github.com/algolia/api-clients-automation/commit/e4a6ab510a) chore(ci): fail CI if a personal access token secret is referenced ([#6919](https://github.com/algolia/api-clients-automation/pull/6919)) by [@eric-zaharia](https://github.com/eric-zaharia/)
+- [085364de00](https://github.com/algolia/api-clients-automation/commit/085364de00) feat(specs): deprecates /2 abtests endpoints ([#6921](https://github.com/algolia/api-clients-automation/pull/6921)) by [@Niamsy](https://github.com/Niamsy/)
+- [32c1aaa192](https://github.com/algolia/api-clients-automation/commit/32c1aaa192) chore(deps): dependencies 2026-08-24 ([#6922](https://github.com/algolia/api-clients-automation/pull/6922)) by [@algolia-api-clients-automation-bot[bot]](https://github.com/apps/algolia-api-clients-automation-bot)
+
 ## [3.47.0](https://github.com/algolia/algoliasearch-client-kotlin/compare/3.46.0...3.47.0)
 
 - [3bee6d1dee](https://github.com/algolia/api-clients-automation/commit/3bee6d1dee) chore(ci): pin all GitHub Action refs to commit SHAs (API-475) ([#6819](https://github.com/algolia/api-clients-automation/pull/6819)) by [@MarioAlexandruDan](https://github.com/MarioAlexandruDan/)
