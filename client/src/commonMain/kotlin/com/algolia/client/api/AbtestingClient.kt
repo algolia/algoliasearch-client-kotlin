@@ -51,6 +51,7 @@ public class AbtestingClient(
   }
 
   /**
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `POST /3/abtests`.
    * Creates a new A/B test.
    *
    * Required API Key ACLs:
@@ -58,6 +59,7 @@ public class AbtestingClient(
    *
    * @param addABTestsRequest
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun addABTests(
     addABTestsRequest: AddABTestsRequest,
@@ -70,6 +72,7 @@ public class AbtestingClient(
   }
 
   /**
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `POST /3/abtests`.
    * Creates a new A/B test. This variant of [addABTests] returns the full HTTP response information
    * (status code, headers, raw body) along with the deserialized response body.
    *
@@ -78,6 +81,7 @@ public class AbtestingClient(
    *
    * @param addABTestsRequest
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun addABTestsWithHTTPInfo(
     addABTestsRequest: AddABTestsRequest,
@@ -322,13 +326,15 @@ public class AbtestingClient(
   }
 
   /**
-   * Deletes an A/B test by its ID.
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `DELETE
+   * /3/abtests/{id}`. Deletes an A/B test by its ID.
    *
    * Required API Key ACLs:
    * - editSettings
    *
    * @param id Unique A/B test identifier.
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun deleteABTest(id: Int, requestOptions: RequestOptions? = null): ABTestResponse {
     return requester.execute(
@@ -338,14 +344,17 @@ public class AbtestingClient(
   }
 
   /**
-   * Deletes an A/B test by its ID. This variant of [deleteABTest] returns the full HTTP response
-   * information (status code, headers, raw body) along with the deserialized response body.
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `DELETE
+   * /3/abtests/{id}`. Deletes an A/B test by its ID. This variant of [deleteABTest] returns the
+   * full HTTP response information (status code, headers, raw body) along with the deserialized
+   * response body.
    *
    * Required API Key ACLs:
    * - editSettings
    *
    * @param id Unique A/B test identifier.
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun deleteABTestWithHTTPInfo(
     id: Int,
@@ -365,14 +374,16 @@ public class AbtestingClient(
   }
 
   /**
-   * Given the traffic percentage and the expected effect size, this endpoint estimates the sample
-   * size and duration of an A/B test based on historical traffic.
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `POST
+   * /3/abtests/estimate`. Given the traffic percentage and the expected effect size, this endpoint
+   * estimates the sample size and duration of an A/B test based on historical traffic.
    *
    * Required API Key ACLs:
    * - analytics
    *
    * @param estimateABTestRequest
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun estimateABTest(
     estimateABTestRequest: EstimateABTestRequest,
@@ -385,16 +396,18 @@ public class AbtestingClient(
   }
 
   /**
-   * Given the traffic percentage and the expected effect size, this endpoint estimates the sample
-   * size and duration of an A/B test based on historical traffic. This variant of [estimateABTest]
-   * returns the full HTTP response information (status code, headers, raw body) along with the
-   * deserialized response body.
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `POST
+   * /3/abtests/estimate`. Given the traffic percentage and the expected effect size, this endpoint
+   * estimates the sample size and duration of an A/B test based on historical traffic. This variant
+   * of [estimateABTest] returns the full HTTP response information (status code, headers, raw body)
+   * along with the deserialized response body.
    *
    * Required API Key ACLs:
    * - analytics
    *
    * @param estimateABTestRequest
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun estimateABTestWithHTTPInfo(
     estimateABTestRequest: EstimateABTestRequest,
@@ -417,13 +430,15 @@ public class AbtestingClient(
   }
 
   /**
-   * Retrieves the details for an A/B test by its ID.
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `GET
+   * /3/abtests/{id}`. Retrieves the details for an A/B test by its ID.
    *
    * Required API Key ACLs:
    * - analytics
    *
    * @param id Unique A/B test identifier.
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun getABTest(id: Int, requestOptions: RequestOptions? = null): ABTest {
     return requester.execute(
@@ -433,15 +448,17 @@ public class AbtestingClient(
   }
 
   /**
-   * Retrieves the details for an A/B test by its ID. This variant of [getABTest] returns the full
-   * HTTP response information (status code, headers, raw body) along with the deserialized response
-   * body.
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `GET
+   * /3/abtests/{id}`. Retrieves the details for an A/B test by its ID. This variant of [getABTest]
+   * returns the full HTTP response information (status code, headers, raw body) along with the
+   * deserialized response body.
    *
    * Required API Key ACLs:
    * - analytics
    *
    * @param id Unique A/B test identifier.
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun getABTestWithHTTPInfo(
     id: Int,
@@ -461,6 +478,7 @@ public class AbtestingClient(
   }
 
   /**
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `GET /3/abtests`.
    * Lists all A/B tests you configured for this application.
    *
    * Required API Key ACLs:
@@ -473,6 +491,7 @@ public class AbtestingClient(
    * @param indexSuffix Index name suffix. Only A/B tests for indices ending with this string are
    *   included in the response.
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun listABTests(
     offset: Int? = null,
@@ -494,6 +513,7 @@ public class AbtestingClient(
   }
 
   /**
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `GET /3/abtests`.
    * Lists all A/B tests you configured for this application. This variant of [listABTests] returns
    * the full HTTP response information (status code, headers, raw body) along with the deserialized
    * response body.
@@ -508,6 +528,7 @@ public class AbtestingClient(
    * @param indexSuffix Index name suffix. Only A/B tests for indices ending with this string are
    *   included in the response.
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun listABTestsWithHTTPInfo(
     offset: Int? = null,
@@ -548,13 +569,15 @@ public class AbtestingClient(
   }
 
   /**
-   * Stops an A/B test by its ID. You can't restart stopped A/B tests.
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `POST
+   * /3/abtests/{id}/stop`. Stops an A/B test by its ID. You can't restart stopped A/B tests.
    *
    * Required API Key ACLs:
    * - editSettings
    *
    * @param id Unique A/B test identifier.
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun stopABTest(id: Int, requestOptions: RequestOptions? = null): ABTestResponse {
     return requester.execute(
@@ -564,15 +587,17 @@ public class AbtestingClient(
   }
 
   /**
-   * Stops an A/B test by its ID. You can't restart stopped A/B tests. This variant of [stopABTest]
-   * returns the full HTTP response information (status code, headers, raw body) along with the
-   * deserialized response body.
+   * This endpoint is deprecated. Use the A/B Testing API v3 instead. Replaced by `POST
+   * /3/abtests/{id}/stop`. Stops an A/B test by its ID. You can't restart stopped A/B tests. This
+   * variant of [stopABTest] returns the full HTTP response information (status code, headers, raw
+   * body) along with the deserialized response body.
    *
    * Required API Key ACLs:
    * - editSettings
    *
    * @param id Unique A/B test identifier.
    * @param requestOptions additional request configuration.
+   * @deprecated
    */
   public suspend fun stopABTestWithHTTPInfo(
     id: Int,
