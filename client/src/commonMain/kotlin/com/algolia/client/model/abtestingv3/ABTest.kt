@@ -21,7 +21,6 @@ import kotlinx.serialization.json.*
  *   want to test against the control.
  * @param stoppedAt Date and time when the A/B test was stopped, in RFC 3339 format.
  * @param configuration
- * @param migratedAbTestID Unique migrated A/B test identifier.
  * @param decision
  */
 @Serializable
@@ -53,8 +52,5 @@ public data class ABTest(
   /** Date and time when the A/B test was stopped, in RFC 3339 format. */
   @SerialName(value = "stoppedAt") val stoppedAt: String? = null,
   @SerialName(value = "configuration") val configuration: ABTestConfiguration? = null,
-
-  /** Unique migrated A/B test identifier. */
-  @SerialName(value = "migratedAbTestID") val migratedAbTestID: Int? = null,
   @SerialName(value = "decision") val decision: Decision? = null,
 ) {}

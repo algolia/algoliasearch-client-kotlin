@@ -21,6 +21,8 @@ import kotlinx.serialization.json.*
  * @param sha1 SHA1 signature of the log entry.
  * @param processingTimeMs Processing time for the query in milliseconds. This doesn't include
  *   latency due to the network.
+ * @param cid Correlation ID of the logged API request, also returned in that request's
+ *   `Correlation-ID` response header.
  * @param nbApiCalls Number of API requests.
  * @param index Index targeted by the query.
  * @param queryParams Query parameters sent with the request.
@@ -61,6 +63,12 @@ public data class Log(
    * Processing time for the query in milliseconds. This doesn't include latency due to the network.
    */
   @SerialName(value = "processing_time_ms") val processingTimeMs: String,
+
+  /**
+   * Correlation ID of the logged API request, also returned in that request's `Correlation-ID`
+   * response header.
+   */
+  @SerialName(value = "cid") val cid: String? = null,
 
   /** Number of API requests. */
   @SerialName(value = "nb_api_calls") val nbApiCalls: String? = null,
