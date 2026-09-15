@@ -82,4 +82,5 @@ internal fun requesterOf(
       writeTimeout = options.writeTimeout ?: writeTimeout,
       hosts = options.hosts ?: defaultHosts(),
       sendsRequestId = sendsRequestId && options.defaultHeaders?.hasRequestIdHeader() != true,
+      maxRateLimitRetries = options.maxRateLimitRetries,
     )

@@ -23,6 +23,7 @@ public actual class ClientOptions(
   jsonConfig: ((JsonBuilder) -> Unit)? = null,
   public actual val algoliaAgentSegments: List<AgentSegment> = emptyList(),
   public val compressionType: CompressionType,
+  public actual val maxRateLimitRetries: Int = 3,
 ) {
 
   public actual val json: Json = buildJson(jsonConfig)
@@ -40,6 +41,7 @@ public actual class ClientOptions(
     jsonConfig: ((JsonBuilder) -> Unit)?,
     requester: Requester?,
     algoliaAgentSegments: List<AgentSegment>,
+    maxRateLimitRetries: Int,
   ) : this(
     connectTimeout = connectTimeout,
     writeTimeout = writeTimeout,
@@ -54,5 +56,6 @@ public actual class ClientOptions(
     requester = requester,
     algoliaAgentSegments = algoliaAgentSegments,
     compressionType = CompressionType.NONE,
+    maxRateLimitRetries = maxRateLimitRetries,
   )
 }

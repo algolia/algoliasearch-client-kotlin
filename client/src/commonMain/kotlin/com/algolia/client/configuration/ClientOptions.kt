@@ -21,6 +21,7 @@ public expect class ClientOptions(
   jsonConfig: ((JsonBuilder) -> Unit)? = null,
   requester: Requester? = null,
   algoliaAgentSegments: List<AgentSegment> = emptyList(),
+  maxRateLimitRetries: Int = 3,
 ) {
 
   /** Connect timeout for each request */
@@ -58,4 +59,10 @@ public expect class ClientOptions(
 
   /** List of Algolia agent segments */
   public val algoliaAgentSegments: List<AgentSegment>
+
+  /**
+   * How many times to wait and retry on the same host after HTTP 429. `0` fails on the first 429.
+   * The wait is `Retry-After` in whole seconds, or 1 second if the header is missing or invalid.
+   */
+  public val maxRateLimitRetries: Int
 }
