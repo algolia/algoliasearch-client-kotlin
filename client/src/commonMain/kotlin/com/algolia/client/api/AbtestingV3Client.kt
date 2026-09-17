@@ -98,6 +98,73 @@ public class AbtestingV3Client(
   }
 
   /**
+   * Applies the captured settings of the given variant to the control index. The settings must
+   * first be captured with the `saveVariantSettings` operation. To revert previously applied
+   * settings on the control index, use this operation with the control variant (variant 1).
+   * Settings can be applied up to 14 days after the A/B test ends, and reverted up to 15 days
+   * after. Later requests return `400`. Each set of captured settings can only be applied once, and
+   * settings that were reverted can't be applied again. Both cases return `400`. The control index
+   * must not be in use by an active A/B test. Otherwise, the request returns `422`.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   * - editSettings
+   *
+   * @param id Unique A/B test identifier.
+   * @param variantId One-based index of the A/B test variant. The control is variant 1.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun applyVariantSettings(
+    id: Int,
+    variantId: Int,
+    requestOptions: RequestOptions? = null,
+  ) {
+    return requester.execute(
+      requestConfig = applyVariantSettingsRequestConfig(id = id, variantId = variantId),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Applies the captured settings of the given variant to the control index. The settings must
+   * first be captured with the `saveVariantSettings` operation. To revert previously applied
+   * settings on the control index, use this operation with the control variant (variant 1).
+   * Settings can be applied up to 14 days after the A/B test ends, and reverted up to 15 days
+   * after. Later requests return `400`. Each set of captured settings can only be applied once, and
+   * settings that were reverted can't be applied again. Both cases return `400`. The control index
+   * must not be in use by an active A/B test. Otherwise, the request returns `422`. This variant of
+   * [applyVariantSettings] returns the full HTTP response information (status code, headers, raw
+   * body) along with the deserialized response body.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   * - editSettings
+   *
+   * @param id Unique A/B test identifier.
+   * @param variantId One-based index of the A/B test variant. The control is variant 1.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun applyVariantSettingsWithHTTPInfo(
+    id: Int,
+    variantId: Int,
+    requestOptions: RequestOptions? = null,
+  ): AlgoliaHttpResponse<Unit> {
+    return requester.executeWithHttpInfo(
+      requestConfig = applyVariantSettingsRequestConfig(id = id, variantId = variantId),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun applyVariantSettingsRequestConfig(id: Int, variantId: Int): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.POST,
+      path =
+        "".split("/").filter { it.isNotBlank() } +
+          listOf("3", "abtests", "$id", "settings", "$variantId", "apply"),
+    )
+  }
+
+  /**
    * This method lets you send requests to the Algolia REST API.
    *
    * @param path Path of the endpoint, for example `1/newFeature`.
@@ -461,6 +528,61 @@ public class AbtestingV3Client(
   }
 
   /**
+   * Retrieves the settings captured for each variant of an A/B test, and whether another active A/B
+   * test is using the control index. Settings are captured by the `saveVariantSettings` operation.
+   * The response includes an entry for the control (variant 1) alongside the captured variant, so
+   * the control's original configuration can be restored later. Returns `404` if the A/B test
+   * doesn't exist or no settings have been captured for it.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   *
+   * @param id Unique A/B test identifier.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun getABTestSettings(
+    id: Int,
+    requestOptions: RequestOptions? = null,
+  ): ABTestSettingsResponse {
+    return requester.execute(
+      requestConfig = getABTestSettingsRequestConfig(id = id),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Retrieves the settings captured for each variant of an A/B test, and whether another active A/B
+   * test is using the control index. Settings are captured by the `saveVariantSettings` operation.
+   * The response includes an entry for the control (variant 1) alongside the captured variant, so
+   * the control's original configuration can be restored later. Returns `404` if the A/B test
+   * doesn't exist or no settings have been captured for it. This variant of [getABTestSettings]
+   * returns the full HTTP response information (status code, headers, raw body) along with the
+   * deserialized response body.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   *
+   * @param id Unique A/B test identifier.
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun getABTestSettingsWithHTTPInfo(
+    id: Int,
+    requestOptions: RequestOptions? = null,
+  ): AlgoliaHttpResponse<ABTestSettingsResponse> {
+    return requester.executeWithHttpInfo(
+      requestConfig = getABTestSettingsRequestConfig(id = id),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun getABTestSettingsRequestConfig(id: Int): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.GET,
+      path = "".split("/").filter { it.isNotBlank() } + listOf("3", "abtests", "$id", "settings"),
+    )
+  }
+
+  /**
    * Retrieves timeseries for an A/B test by its ID.
    *
    * Required API Key ACLs:
@@ -636,6 +758,90 @@ public class AbtestingV3Client(
           indexSuffix?.let { put("indexSuffix", it) }
           direction?.let { put("direction", it) }
         },
+    )
+  }
+
+  /**
+   * Captures the settings of the given variant and of the control, then stops the A/B test. The
+   * captured settings can later be applied to the control index with the `applyVariantSettings`
+   * operation, and read back with the `getABTestSettings` operation. The A/B test must have reached
+   * 80% of its planned duration. Earlier requests return `400`. Settings can only be captured once
+   * per A/B test. A second request returns `409`. `synonyms` and `enableRules` are not captured, so
+   * applying the captured settings never changes them on the control index.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   * - editSettings
+   *
+   * @param id Unique A/B test identifier.
+   * @param variantId One-based index of the A/B test variant. The control is variant 1.
+   * @param saveSettingsRequest
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun saveVariantSettings(
+    id: Int,
+    variantId: Int,
+    saveSettingsRequest: SaveSettingsRequest,
+    requestOptions: RequestOptions? = null,
+  ) {
+    return requester.execute(
+      requestConfig =
+        saveVariantSettingsRequestConfig(
+          id = id,
+          variantId = variantId,
+          saveSettingsRequest = saveSettingsRequest,
+        ),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Captures the settings of the given variant and of the control, then stops the A/B test. The
+   * captured settings can later be applied to the control index with the `applyVariantSettings`
+   * operation, and read back with the `getABTestSettings` operation. The A/B test must have reached
+   * 80% of its planned duration. Earlier requests return `400`. Settings can only be captured once
+   * per A/B test. A second request returns `409`. `synonyms` and `enableRules` are not captured, so
+   * applying the captured settings never changes them on the control index. This variant of
+   * [saveVariantSettings] returns the full HTTP response information (status code, headers, raw
+   * body) along with the deserialized response body.
+   *
+   * Required API Key ACLs:
+   * - analytics
+   * - editSettings
+   *
+   * @param id Unique A/B test identifier.
+   * @param variantId One-based index of the A/B test variant. The control is variant 1.
+   * @param saveSettingsRequest
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun saveVariantSettingsWithHTTPInfo(
+    id: Int,
+    variantId: Int,
+    saveSettingsRequest: SaveSettingsRequest,
+    requestOptions: RequestOptions? = null,
+  ): AlgoliaHttpResponse<Unit> {
+    return requester.executeWithHttpInfo(
+      requestConfig =
+        saveVariantSettingsRequestConfig(
+          id = id,
+          variantId = variantId,
+          saveSettingsRequest = saveSettingsRequest,
+        ),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun saveVariantSettingsRequestConfig(
+    id: Int,
+    variantId: Int,
+    saveSettingsRequest: SaveSettingsRequest,
+  ): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.POST,
+      path =
+        "".split("/").filter { it.isNotBlank() } +
+          listOf("3", "abtests", "$id", "settings", "$variantId"),
+      body = saveSettingsRequest,
     )
   }
 
