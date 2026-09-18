@@ -1,6 +1,7 @@
 package com.algolia.client.transport
 
 import io.ktor.util.reflect.*
+import kotlinx.serialization.json.JsonObject
 
 /** Defines a config object for a given request. */
 public data class RequestConfig(
@@ -47,7 +48,9 @@ public inline fun <reified T> RequestConfig(
     isRead = isRead,
     headers = headers,
     query = query,
-    body = body?.let { RequestBody(it, bodyType = typeInfo<T>()) },
+    body =
+      body?.let { RequestBody(it, bodyType = typeInfo<T>()) }
+        ?: RequestBody(JsonObject(emptyMap()), bodyType = typeInfo<JsonObject>()),
   )
 
 /** Create a [RequestConfig] instance. */
@@ -65,5 +68,7 @@ public inline fun <reified T> RequestConfig(
     isRead = isRead,
     headers = headers,
     query = query,
-    body = body?.let { RequestBody(it, bodyType = typeInfo<T>()) },
+    body =
+      body?.let { RequestBody(it, bodyType = typeInfo<T>()) }
+        ?: RequestBody(JsonObject(emptyMap()), bodyType = typeInfo<JsonObject>()),
   )

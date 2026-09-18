@@ -10,7 +10,7 @@ import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 /**
- * - `default`: perform a search query - `facet`
+ * - `default`: perform a search query. - `facet`
  *   [searches for facet values](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#search-for-facet-values).
  */
 @Serializable

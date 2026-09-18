@@ -21,19 +21,19 @@ import kotlinx.serialization.json.*
  * @param aroundLatLngViaIP Whether to obtain the coordinates from the request's IP address.
  * @param aroundRadius
  * @param aroundPrecision
- * @param clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a
+ * @param clickAnalytics Whether to include a `queryID` attribute in the response. The query ID is a
  *   unique identifier for a search query and is required for tracking
  *   [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
  * @param enableABTest Whether to enable index level A/B testing for this run request. If the
  *   composition mixes multiple indices, the A/B test is ignored.
  * @param enablePersonalization Whether to enable Personalization.
  * @param enableReRanking Whether this search will use
- *   [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting
+ *   [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking). This setting
  *   only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
  * @param enableRules Whether to enable composition rules.
  * @param facetFilters
  * @param facets Facets for which to retrieve facet values that match the search criteria and the
- *   number of matching facet values To retrieve all facets, use the wildcard character `*`. To
+ *   number of matching facet values. To retrieve all facets, use the wildcard character `*`. To
  *   retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For
  *   more information, see
  *   [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
@@ -68,7 +68,7 @@ import kotlinx.serialization.json.*
  * @param minimumAroundRadius Minimum radius (in meters) for a search around a location when
  *   `aroundRadius` isn't set.
  * @param naturalLanguages ISO language codes that adjust settings that are useful for processing
- *   natural language queries (as opposed to keyword searches) - Sets `removeStopWords` and
+ *   natural language queries (as opposed to keyword searches). - Sets `removeStopWords` and
  *   `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to
  *   `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
  * @param numericFilters
@@ -87,10 +87,10 @@ import kotlinx.serialization.json.*
  *   can lead to unexpected search results. For more information, see
  *   [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations).
  * @param relevancyStrictness Relevancy threshold below which less relevant results aren't included
- *   in the results You can only set `relevancyStrictness` on
+ *   in the results. You can only set `relevancyStrictness` on
  *   [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
  *   Use this setting to strike a balance between the relevance and number of returned results.
- * @param ruleContexts Assigns a rule context to the run query
+ * @param ruleContexts Assigns a rule context to the run query.
  *   [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context)
  *   are strings that you can use to trigger matching rules.
  * @param sortBy Indicates which sorting strategy to apply for the request. The value must match one
@@ -131,7 +131,7 @@ public data class Params(
   @SerialName(value = "aroundPrecision") val aroundPrecision: AroundPrecision? = null,
 
   /**
-   * Whether to include a `queryID` attribute in the response The query ID is a unique identifier
+   * Whether to include a `queryID` attribute in the response. The query ID is a unique identifier
    * for a search query and is required for tracking
    * [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
    */
@@ -148,7 +148,7 @@ public data class Params(
 
   /**
    * Whether this search will use
-   * [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting
+   * [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking). This setting
    * only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
    */
   @SerialName(value = "enableReRanking") val enableReRanking: Boolean? = null,
@@ -159,7 +159,7 @@ public data class Params(
 
   /**
    * Facets for which to retrieve facet values that match the search criteria and the number of
-   * matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve
+   * matching facet values. To retrieve all facets, use the wildcard character `*`. To retrieve
    * disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more
    * information, see
    * [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
@@ -215,7 +215,7 @@ public data class Params(
 
   /**
    * ISO language codes that adjust settings that are useful for processing natural language queries
-   * (as opposed to keyword searches) - Sets `removeStopWords` and `ignorePlurals` to the list of
+   * (as opposed to keyword searches). - Sets `removeStopWords` and `ignorePlurals` to the list of
    * provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a
    * `natural_language` attribute to `ruleContexts` and `analyticsTags`.
    */
@@ -245,7 +245,7 @@ public data class Params(
   @SerialName(value = "queryLanguages") val queryLanguages: List<SupportedLanguage>? = null,
 
   /**
-   * Relevancy threshold below which less relevant results aren't included in the results You can
+   * Relevancy threshold below which less relevant results aren't included in the results. You can
    * only set `relevancyStrictness` on
    * [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
    * Use this setting to strike a balance between the relevance and number of returned results.
@@ -253,7 +253,7 @@ public data class Params(
   @SerialName(value = "relevancyStrictness") val relevancyStrictness: Int? = null,
 
   /**
-   * Assigns a rule context to the run query
+   * Assigns a rule context to the run query.
    * [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context)
    * are strings that you can use to trigger matching rules.
    */

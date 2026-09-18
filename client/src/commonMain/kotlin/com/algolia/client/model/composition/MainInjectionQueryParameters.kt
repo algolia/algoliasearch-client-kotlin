@@ -10,41 +10,43 @@ import kotlinx.serialization.json.*
 /**
  * MainInjectionQueryParameters
  *
- * @param advancedSyntax Whether to support phrase matching and excluding words from search queries
+ * @param advancedSyntax Whether to support phrase matching and excluding words from search queries.
  *   Use the `advancedSyntaxFeatures` parameter to control which feature is supported.
- * @param advancedSyntaxFeatures Advanced search syntax features you want to support -
+ * @param advancedSyntaxFeatures Advanced search syntax features you want to support. -
  *   `exactPhrase`. Phrases in quotes must match exactly. For example, `sparkly blue \"iPhone
- *   case\"` only returns records with the exact string \"iPhone case\" - `excludeWords`. Query
+ *   case\"` only returns records with the exact string \"iPhone case\". - `excludeWords`. Query
  *   words prefixed with a `-` must not occur in a record. For example, `search -engine` matches
- *   records that contain \"search\" but not \"engine\" This setting only has an effect if
+ *   records that contain \"search\" but not \"engine\". This setting only has an effect if
  *   `advancedSyntax` is true.
- * @param allowTyposOnNumericTokens Whether to allow typos on numbers in the search query Turn off
+ * @param allowTyposOnNumericTokens Whether to allow typos on numbers in the search query. Turn off
  *   this setting to reduce the number of irrelevant matches when searching in large sets of similar
  *   numbers.
  * @param alternativesAsExact Determine which plurals and synonyms should be considered an exact
- *   matches By default, Algolia treats singular and plural forms of a word, and single-word
+ *   matches. By default, Algolia treats singular and plural forms of a word, and single-word
  *   synonyms, as
  *   [exact](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#exact)
- *   matches when searching. For example - \"swimsuit\" and \"swimsuits\" are treated the same -
+ *   matches when searching. For example: - \"swimsuit\" and \"swimsuits\" are treated the same. -
  *   \"swimsuit\" and \"swimwear\" are treated the same (if they are
- *   [synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#regular-synonyms)) -
+ *   [synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#regular-synonyms)). -
  *   `ignorePlurals`. Plurals and similar declensions added by the `ignorePlurals` setting are
- *   considered exact matches - `singleWordSynonym`. Single-word synonyms, such as \"NY\" = \"NYC\",
- *   are considered exact matches - `multiWordsSynonym`. Multi-word synonyms, such as \"NY\" = \"New
- *   York\", are considered exact matches.
+ *   considered exact matches. - `singleWordSynonym`. Single-word synonyms, such as \"NY\" =
+ *   \"NYC\", are considered exact matches. - `multiWordsSynonym`. Multi-word synonyms, such as
+ *   \"NY\" = \"New York\", are considered exact matches.
  * @param attributeCriteriaComputedByMinProximity Whether the best matching attribute should be
- *   determined by minimum proximity This setting only affects ranking if the Attribute ranking
+ *   determined by minimum proximity. This setting only affects ranking if the Attribute ranking
  *   criterion comes before Proximity in the `ranking` setting. If true, the best matching attribute
  *   is selected based on the minimum proximity of multiple matches. Otherwise, the best matching
- *   attribute is determined by the order in the `searchableAttributes` setting.
- * @param attributesToHighlight Attributes to highlight By default, all searchable attributes are
+ *   attribute is determined by the order in the `searchableAttributes` setting. Prefer
+ *   `attributeCriteriaComputedBy`, which expresses the same two behaviors and adds the `sum`
+ *   strategy. If you set both, `attributeCriteriaComputedBy` takes precedence.
+ * @param attributesToHighlight Attributes to highlight. By default, all searchable attributes are
  *   highlighted. Use `*` to highlight all attributes or use an empty array `[]` to turn off
  *   highlighting. Attribute names are case-sensitive With highlighting, strings that match the
  *   search query are surrounded by HTML tags defined by `highlightPreTag` and `highlightPostTag`.
  *   You can use this to visually highlight matching parts of a search query in your UI For more
  *   information, see
  *   [Highlighting and snippeting](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/highlighting-snippeting/js).
- * @param attributesToRetrieve Attributes to include in the API response To reduce the size of your
+ * @param attributesToRetrieve Attributes to include in the API response. To reduce the size of your
  *   response, you can retrieve only some of the attributes. Attribute names are case-sensitive -
  *   `*` retrieves all attributes, except attributes included in the `customRanking` and
  *   `unretrievableAttributes` settings. - To retrieve all attributes except a specific one, prefix
@@ -55,7 +57,7 @@ import kotlinx.serialization.json.*
  *   they include 10 words, including the matched word. The matched word will also be wrapped by
  *   HTML tags for highlighting. You can adjust the number of words with the following notation:
  *   `ATTRIBUTE:NUMBER`, where `NUMBER` is the number of words to be extracted.
- * @param clickAnalytics Whether to include a `queryID` attribute in the response The query ID is a
+ * @param clickAnalytics Whether to include a `queryID` attribute in the response. The query ID is a
  *   unique identifier for a search query and is required for tracking
  *   [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
  * @param disableExactOnAttributes Searchable attributes for which you want to
@@ -70,14 +72,14 @@ import kotlinx.serialization.json.*
  *   hyphenated
  *   attributes](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/how-to/how-to-search-in-hyphenated-attributes). -
  *   Reducing the number of matches when you have too many. This can happen with attributes that are
- *   long blocks of text, such as product descriptions Consider alternatives such as
+ *   long blocks of text, such as product descriptions. Consider alternatives such as
  *   `disableTypoToleranceOnWords` or adding synonyms if your attributes have intentional unusual
  *   spellings that might look like typos.
  * @param distinct
  * @param enableABTest Whether to enable A/B testing for this search.
  * @param enablePersonalization Whether to enable Personalization.
  * @param enableReRanking Whether this search will use
- *   [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting
+ *   [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking). This setting
  *   only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
  * @param enableRules Whether to enable rules.
  * @param exactOnSingleWordQuery
@@ -104,7 +106,7 @@ import kotlinx.serialization.json.*
  * @param highlightPreTag HTML tag to insert before the highlighted parts in all highlighted results
  *   and snippets.
  * @param ignorePlurals
- * @param minProximity Minimum proximity score for two matching words This adjusts the
+ * @param minProximity Minimum proximity score for two matching words. This adjusts the
  *   [Proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity)
  *   by equally scoring matches that are farther apart For example, if `minProximity` is 2,
  *   neighboring matches and matches with one word between them would have the same score.
@@ -115,7 +117,7 @@ import kotlinx.serialization.json.*
  *   to accept matches with
  *   [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
  * @param naturalLanguages ISO language codes that adjust settings that are useful for processing
- *   natural language queries (as opposed to keyword searches) - Sets `removeStopWords` and
+ *   natural language queries (as opposed to keyword searches). - Sets `removeStopWords` and
  *   `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to
  *   `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
  * @param numericFilters
@@ -123,7 +125,7 @@ import kotlinx.serialization.json.*
  * @param optionalWords
  * @param percentileComputation Whether to include this search when calculating processing-time
  *   percentiles.
- * @param personalizationImpact Impact that Personalization should have on this search The higher
+ * @param personalizationImpact Impact that Personalization should have on this search. The higher
  *   this value is, the more Personalization determines the ranking compared to other factors. For
  *   more information, see
  *   [Understanding Personalization impact](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact).
@@ -141,13 +143,13 @@ import kotlinx.serialization.json.*
  * @param queryType
  * @param removeStopWords
  * @param removeWordsIfNoResults
- * @param replaceSynonymsInHighlight Whether to replace a highlighted word with the matched synonym
+ * @param replaceSynonymsInHighlight Whether to replace a highlighted word with the matched synonym.
  *   By default, the original words are highlighted even if a synonym matches. For example, with
  *   `home` as a synonym for `house` and a search for `home`, records matching either \"home\" or
  *   \"house\" are included in the search results, and either \"home\" or \"house\" are highlighted
  *   With `replaceSynonymsInHighlight` set to `true`, a search for `home` still matches the same
  *   records, but all occurrences of \"house\" are replaced by \"home\" in the highlighted response.
- * @param responseFields Properties to include in the API response of search and browse requests By
+ * @param responseFields Properties to include in the API response of search and browse requests. By
  *   default, all response properties are included. To reduce the response size, you can select
  *   which properties should be included An empty list may lead to an empty API response (except
  *   properties you can't exclude) You can't exclude these properties: `message`, `warning`,
@@ -160,19 +162,19 @@ import kotlinx.serialization.json.*
  *   snippeted.
  * @param restrictSearchableAttributes Restricts a search to a subset of your searchable attributes.
  *   Attribute names are case-sensitive.
- * @param ruleContexts Assigns a rule context to the search query
+ * @param ruleContexts Assigns a rule context to the search query.
  *   [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context)
  *   are strings that you can use to trigger matching rules.
  * @param snippetEllipsisText String used as an ellipsis indicator when a snippet is truncated.
  * @param synonyms Whether to take into account an index's synonyms for this search.
  * @param typoTolerance
  * @param facetingAfterDistinct Whether faceting should be applied after deduplication with
- *   `distinct` This leads to accurate facet counts when using faceting in combination with
+ *   `distinct`. This leads to accurate facet counts when using faceting in combination with
  *   `distinct`. It's usually better to use `afterDistinct` modifiers in the `attributesForFaceting`
  *   setting, as `facetingAfterDistinct` only computes correct facet counts if all records have the
  *   same facet values for the `attributeForDistinct`.
  * @param facets Facets for which to retrieve facet values that match the search criteria and the
- *   number of matching facet values To retrieve all facets, use the wildcard character `*`. To
+ *   number of matching facet values. To retrieve all facets, use the wildcard character `*`. To
  *   retrieve disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For
  *   more information, see
  *   [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
@@ -181,67 +183,69 @@ import kotlinx.serialization.json.*
  * @param hitsPerPage Number of hits per page.
  * @param maxValuesPerFacet Maximum number of facet values to return for each facet.
  * @param renderingContent
- * @param sortFacetValuesBy Order in which to retrieve facet values - `count`. Facet values are
+ * @param sortFacetValuesBy Order in which to retrieve facet values. - `count`. Facet values are
  *   retrieved by decreasing count. The count is the number of matching records containing this
- *   facet value - `alpha`. Retrieve facet values alphabetically This setting doesn't influence how
- *   facet values are displayed in your UI (see `renderingContent`). For more information, see
+ *   facet value. - `alpha`. Retrieve facet values alphabetically. This setting doesn't influence
+ *   how facet values are displayed in your UI (see `renderingContent`). For more information, see
  *   [facet value display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/js).
- * @param sumOrFiltersScores Whether to sum all filter scores If true, all filter scores are summed.
- *   Otherwise, the maximum filter score is kept. For more information, see
+ * @param sumOrFiltersScores Whether to sum all filter scores. If true, all filter scores are
+ *   summed. Otherwise, the maximum filter score is kept. For more information, see
  *   [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores).
  */
 @Serializable
 public data class MainInjectionQueryParameters(
 
   /**
-   * Whether to support phrase matching and excluding words from search queries Use the
+   * Whether to support phrase matching and excluding words from search queries. Use the
    * `advancedSyntaxFeatures` parameter to control which feature is supported.
    */
   @SerialName(value = "advancedSyntax") val advancedSyntax: Boolean? = null,
 
   /**
-   * Advanced search syntax features you want to support - `exactPhrase`. Phrases in quotes must
+   * Advanced search syntax features you want to support. - `exactPhrase`. Phrases in quotes must
    * match exactly. For example, `sparkly blue \"iPhone case\"` only returns records with the exact
-   * string \"iPhone case\" - `excludeWords`. Query words prefixed with a `-` must not occur in a
+   * string \"iPhone case\". - `excludeWords`. Query words prefixed with a `-` must not occur in a
    * record. For example, `search -engine` matches records that contain \"search\" but not
-   * \"engine\" This setting only has an effect if `advancedSyntax` is true.
+   * \"engine\". This setting only has an effect if `advancedSyntax` is true.
    */
   @SerialName(value = "advancedSyntaxFeatures")
   val advancedSyntaxFeatures: List<AdvancedSyntaxFeatures>? = null,
 
   /**
-   * Whether to allow typos on numbers in the search query Turn off this setting to reduce the
+   * Whether to allow typos on numbers in the search query. Turn off this setting to reduce the
    * number of irrelevant matches when searching in large sets of similar numbers.
    */
   @SerialName(value = "allowTyposOnNumericTokens") val allowTyposOnNumericTokens: Boolean? = null,
 
   /**
-   * Determine which plurals and synonyms should be considered an exact matches By default, Algolia
+   * Determine which plurals and synonyms should be considered an exact matches. By default, Algolia
    * treats singular and plural forms of a word, and single-word synonyms, as
    * [exact](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#exact)
-   * matches when searching. For example - \"swimsuit\" and \"swimsuits\" are treated the same -
+   * matches when searching. For example: - \"swimsuit\" and \"swimsuits\" are treated the same. -
    * \"swimsuit\" and \"swimwear\" are treated the same (if they are
-   * [synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#regular-synonyms)) -
+   * [synonyms](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/adding-synonyms/#regular-synonyms)). -
    * `ignorePlurals`. Plurals and similar declensions added by the `ignorePlurals` setting are
-   * considered exact matches - `singleWordSynonym`. Single-word synonyms, such as \"NY\" = \"NYC\",
-   * are considered exact matches - `multiWordsSynonym`. Multi-word synonyms, such as \"NY\" = \"New
-   * York\", are considered exact matches.
+   * considered exact matches. - `singleWordSynonym`. Single-word synonyms, such as \"NY\" =
+   * \"NYC\", are considered exact matches. - `multiWordsSynonym`. Multi-word synonyms, such as
+   * \"NY\" = \"New York\", are considered exact matches.
    */
   @SerialName(value = "alternativesAsExact")
   val alternativesAsExact: List<AlternativesAsExact>? = null,
 
   /**
-   * Whether the best matching attribute should be determined by minimum proximity This setting only
-   * affects ranking if the Attribute ranking criterion comes before Proximity in the `ranking`
+   * Whether the best matching attribute should be determined by minimum proximity. This setting
+   * only affects ranking if the Attribute ranking criterion comes before Proximity in the `ranking`
    * setting. If true, the best matching attribute is selected based on the minimum proximity of
    * multiple matches. Otherwise, the best matching attribute is determined by the order in the
-   * `searchableAttributes` setting.
+   * `searchableAttributes` setting. Prefer `attributeCriteriaComputedBy`, which expresses the same
+   * two behaviors and adds the `sum` strategy. If you set both, `attributeCriteriaComputedBy` takes
+   * precedence.
    */
   @SerialName(value = "attributeCriteriaComputedByMinProximity")
   val attributeCriteriaComputedByMinProximity: Boolean? = null,
 
   /**
-   * Attributes to highlight By default, all searchable attributes are highlighted. Use `*` to
+   * Attributes to highlight. By default, all searchable attributes are highlighted. Use `*` to
    * highlight all attributes or use an empty array `[]` to turn off highlighting. Attribute names
    * are case-sensitive With highlighting, strings that match the search query are surrounded by
    * HTML tags defined by `highlightPreTag` and `highlightPostTag`. You can use this to visually
@@ -251,11 +255,12 @@ public data class MainInjectionQueryParameters(
   @SerialName(value = "attributesToHighlight") val attributesToHighlight: List<String>? = null,
 
   /**
-   * Attributes to include in the API response To reduce the size of your response, you can retrieve
-   * only some of the attributes. Attribute names are case-sensitive - `*` retrieves all attributes,
-   * except attributes included in the `customRanking` and `unretrievableAttributes` settings. - To
-   * retrieve all attributes except a specific one, prefix the attribute with a dash and combine it
-   * with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always included.
+   * Attributes to include in the API response. To reduce the size of your response, you can
+   * retrieve only some of the attributes. Attribute names are case-sensitive - `*` retrieves all
+   * attributes, except attributes included in the `customRanking` and `unretrievableAttributes`
+   * settings. - To retrieve all attributes except a specific one, prefix the attribute with a dash
+   * and combine it with the `*`: `[\"*\", \"-ATTRIBUTE\"]`. - The `objectID` attribute is always
+   * included.
    */
   @SerialName(value = "attributesToRetrieve") val attributesToRetrieve: List<String>? = null,
 
@@ -269,7 +274,7 @@ public data class MainInjectionQueryParameters(
   @SerialName(value = "attributesToSnippet") val attributesToSnippet: List<String>? = null,
 
   /**
-   * Whether to include a `queryID` attribute in the response The query ID is a unique identifier
+   * Whether to include a `queryID` attribute in the response. The query ID is a unique identifier
    * for a search query and is required for tracking
    * [click and conversion events](https://www.algolia.com/doc/guides/sending-events/getting-started).
    */
@@ -293,7 +298,7 @@ public data class MainInjectionQueryParameters(
    * hyphenated
    * attributes](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/how-to/how-to-search-in-hyphenated-attributes). -
    * Reducing the number of matches when you have too many. This can happen with attributes that are
-   * long blocks of text, such as product descriptions Consider alternatives such as
+   * long blocks of text, such as product descriptions. Consider alternatives such as
    * `disableTypoToleranceOnWords` or adding synonyms if your attributes have intentional unusual
    * spellings that might look like typos.
    */
@@ -309,7 +314,7 @@ public data class MainInjectionQueryParameters(
 
   /**
    * Whether this search will use
-   * [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) This setting
+   * [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking). This setting
    * only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
    */
   @SerialName(value = "enableReRanking") val enableReRanking: Boolean? = null,
@@ -350,7 +355,7 @@ public data class MainInjectionQueryParameters(
   @SerialName(value = "ignorePlurals") val ignorePlurals: IgnorePlurals? = null,
 
   /**
-   * Minimum proximity score for two matching words This adjusts the
+   * Minimum proximity score for two matching words. This adjusts the
    * [Proximity ranking criterion](https://www.algolia.com/doc/guides/managing-results/relevance-overview/in-depth/ranking-criteria/#proximity)
    * by equally scoring matches that are farther apart For example, if `minProximity` is 2,
    * neighboring matches and matches with one word between them would have the same score.
@@ -371,7 +376,7 @@ public data class MainInjectionQueryParameters(
 
   /**
    * ISO language codes that adjust settings that are useful for processing natural language queries
-   * (as opposed to keyword searches) - Sets `removeStopWords` and `ignorePlurals` to the list of
+   * (as opposed to keyword searches). - Sets `removeStopWords` and `ignorePlurals` to the list of
    * provided languages. - Sets `removeWordsIfNoResults` to `allOptional`. - Adds a
    * `natural_language` attribute to `ruleContexts` and `analyticsTags`.
    */
@@ -384,7 +389,7 @@ public data class MainInjectionQueryParameters(
   @SerialName(value = "percentileComputation") val percentileComputation: Boolean? = null,
 
   /**
-   * Impact that Personalization should have on this search The higher this value is, the more
+   * Impact that Personalization should have on this search. The higher this value is, the more
    * Personalization determines the ranking compared to other factors. For more information, see
    * [Understanding Personalization impact](https://www.algolia.com/doc/guides/personalization/personalizing-results/in-depth/configuring-personalization/#understanding-personalization-impact).
    */
@@ -410,7 +415,7 @@ public data class MainInjectionQueryParameters(
   val removeWordsIfNoResults: RemoveWordsIfNoResults? = null,
 
   /**
-   * Whether to replace a highlighted word with the matched synonym By default, the original words
+   * Whether to replace a highlighted word with the matched synonym. By default, the original words
    * are highlighted even if a synonym matches. For example, with `home` as a synonym for `house`
    * and a search for `home`, records matching either \"home\" or \"house\" are included in the
    * search results, and either \"home\" or \"house\" are highlighted With
@@ -420,7 +425,7 @@ public data class MainInjectionQueryParameters(
   @SerialName(value = "replaceSynonymsInHighlight") val replaceSynonymsInHighlight: Boolean? = null,
 
   /**
-   * Properties to include in the API response of search and browse requests By default, all
+   * Properties to include in the API response of search and browse requests. By default, all
    * response properties are included. To reduce the response size, you can select which properties
    * should be included An empty list may lead to an empty API response (except properties you can't
    * exclude) You can't exclude these properties: `message`, `warning`, `cursor`, `abTestVariantID`,
@@ -446,7 +451,7 @@ public data class MainInjectionQueryParameters(
   val restrictSearchableAttributes: List<String>? = null,
 
   /**
-   * Assigns a rule context to the search query
+   * Assigns a rule context to the search query.
    * [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context)
    * are strings that you can use to trigger matching rules.
    */
@@ -460,7 +465,7 @@ public data class MainInjectionQueryParameters(
   @SerialName(value = "typoTolerance") val typoTolerance: TypoTolerance? = null,
 
   /**
-   * Whether faceting should be applied after deduplication with `distinct` This leads to accurate
+   * Whether faceting should be applied after deduplication with `distinct`. This leads to accurate
    * facet counts when using faceting in combination with `distinct`. It's usually better to use
    * `afterDistinct` modifiers in the `attributesForFaceting` setting, as `facetingAfterDistinct`
    * only computes correct facet counts if all records have the same facet values for the
@@ -470,7 +475,7 @@ public data class MainInjectionQueryParameters(
 
   /**
    * Facets for which to retrieve facet values that match the search criteria and the number of
-   * matching facet values To retrieve all facets, use the wildcard character `*`. To retrieve
+   * matching facet values. To retrieve all facets, use the wildcard character `*`. To retrieve
    * disjunctive facets lists, annotate any facets with the `disjunctive` modifier. For more
    * information, see
    * [facets](https://www.algolia.com/doc/guides/managing-results/refine-results/faceting/#contextual-facet-values-and-counts)
@@ -487,16 +492,16 @@ public data class MainInjectionQueryParameters(
   @SerialName(value = "renderingContent") val renderingContent: RenderingContent? = null,
 
   /**
-   * Order in which to retrieve facet values - `count`. Facet values are retrieved by decreasing
-   * count. The count is the number of matching records containing this facet value - `alpha`.
-   * Retrieve facet values alphabetically This setting doesn't influence how facet values are
+   * Order in which to retrieve facet values. - `count`. Facet values are retrieved by decreasing
+   * count. The count is the number of matching records containing this facet value. - `alpha`.
+   * Retrieve facet values alphabetically. This setting doesn't influence how facet values are
    * displayed in your UI (see `renderingContent`). For more information, see
    * [facet value display](https://www.algolia.com/doc/guides/building-search-ui/ui-and-ux-patterns/facet-display/js).
    */
   @SerialName(value = "sortFacetValuesBy") val sortFacetValuesBy: String? = null,
 
   /**
-   * Whether to sum all filter scores If true, all filter scores are summed. Otherwise, the maximum
+   * Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum
    * filter score is kept. For more information, see
    * [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores).
    */

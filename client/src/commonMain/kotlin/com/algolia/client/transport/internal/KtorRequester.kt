@@ -30,7 +30,6 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.json.JsonObject
 
 internal const val RATE_LIMIT_STATUS_CODE: Int = 429
 
@@ -230,7 +229,6 @@ public class KtorRequester(
         queryParameter(query)
         when {
           body != null -> setBody(body.body, body.bodyType)
-          requiresBody(requestConfig) -> setBody(EmptyObject)
           else -> setBody(EmptyContent)
         }
       }
@@ -249,9 +247,6 @@ public class KtorRequester(
   private fun HttpRequestBuilder.carriesRequestId(): Boolean =
     headers.contains(HEADER_REQUEST_ID) ||
       url.encodedParameters.names().any { it.equals(QUERY_PARAM_REQUEST_ID, ignoreCase = true) }
-
-  private fun requiresBody(requestConfig: RequestConfig) =
-    requestConfig.method == RequestMethod.POST || requestConfig.method == RequestMethod.PUT
 
   private fun HttpRequestBuilder.requestHeaders(headerOptions: Map<String, Any>) {
     headers.replaceAll(headerOptions)
@@ -296,9 +291,4 @@ public class KtorRequester(
         RequestMethod.POST -> HttpMethod.Post
         RequestMethod.OPTIONS -> HttpMethod.Options
       }
-
-  public companion object {
-    /** Represents an empty Json object */
-    private val EmptyObject = JsonObject(emptyMap())
-  }
 }

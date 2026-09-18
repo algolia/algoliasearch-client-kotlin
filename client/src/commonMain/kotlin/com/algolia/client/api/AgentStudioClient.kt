@@ -309,7 +309,7 @@ public class AgentStudioClient(
    * Normal completion request: User message -> Agent response 2. Tool approval response: User
    * approval -> Execute tool -> Agent response Tool Approval Flow (for MCP tools with
    * requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return
-   * approval request - Request 2: User approves -> Execute tool -> Agent continues with result.
+   * approval request. - Request 2: User approves -> Execute tool -> Agent continues with result.
    *
    * Required API Key ACLs:
    * - search
@@ -358,7 +358,7 @@ public class AgentStudioClient(
    * Normal completion request: User message -> Agent response 2. Tool approval response: User
    * approval -> Execute tool -> Agent response Tool Approval Flow (for MCP tools with
    * requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return
-   * approval request - Request 2: User approves -> Execute tool -> Agent continues with result.
+   * approval request. - Request 2: User approves -> Execute tool -> Agent continues with result.
    * This variant of [createAgentCompletion] returns the full HTTP response information (status
    * code, headers, raw body) along with the deserialized response body.
    *
