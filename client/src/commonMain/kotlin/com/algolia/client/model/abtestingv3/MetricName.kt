@@ -17,6 +17,7 @@ public enum class MetricName(public val value: kotlin.String) {
   @SerialName(value = "user_count") UserCount("user_count"),
   @SerialName(value = "tracked_user_count") TrackedUserCount("tracked_user_count"),
   @SerialName(value = "no_result_count") NoResultCount("no_result_count"),
+  @SerialName(value = "tracked_no_result_count") TrackedNoResultCount("tracked_no_result_count"),
   @SerialName(value = "add_to_cart_count") AddToCartCount("add_to_cart_count"),
   @SerialName(value = "purchase_count") PurchaseCount("purchase_count"),
   @SerialName(value = "clicked_search_count") ClickedSearchCount("clicked_search_count"),
@@ -26,7 +27,9 @@ public enum class MetricName(public val value: kotlin.String) {
   @SerialName(value = "add_to_cart_rate") AddToCartRate("add_to_cart_rate"),
   @SerialName(value = "purchase_rate") PurchaseRate("purchase_rate"),
   @SerialName(value = "average_click_position") AverageClickPosition("average_click_position"),
-  @SerialName(value = "revenue") Revenue("revenue");
+  @SerialName(value = "revenue") Revenue("revenue"),
+  @SerialName(value = "revenue_per_search") RevenuePerSearch("revenue_per_search"),
+  @SerialName(value = "average_order_value") AverageOrderValue("average_order_value");
 
   override fun toString(): kotlin.String = value
 }

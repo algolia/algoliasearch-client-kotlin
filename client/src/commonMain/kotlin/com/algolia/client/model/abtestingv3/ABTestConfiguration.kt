@@ -13,6 +13,8 @@ import kotlinx.serialization.json.*
  * @param minimumDetectableEffect
  * @param filters List of metric filters applied to the test population.
  * @param errorCorrection
+ * @param method
+ * @param primaryMetric
  */
 @Serializable
 public data class ABTestConfiguration(
@@ -22,4 +24,6 @@ public data class ABTestConfiguration(
   /** List of metric filters applied to the test population. */
   @SerialName(value = "filters") val filters: List<MetricsFilter>? = null,
   @SerialName(value = "errorCorrection") val errorCorrection: ErrorCorrectionType? = null,
+  @SerialName(value = "method") val method: AnalysisMethod? = null,
+  @SerialName(value = "primaryMetric") val primaryMetric: PrimaryMetric? = null,
 ) {}

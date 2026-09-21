@@ -490,11 +490,19 @@ public class AbtestingV3Client(
    * - analytics
    *
    * @param id Unique A/B test identifier.
+   * @param methods Statistical analysis results to include, as a comma-separated list. When
+   *   omitted, each test uses its configured method, or `frequentist` if no method is configured.
+   *   Request both methods to include both sets of available results. This doesn't change the test
+   *   configuration or compute missing results. Duplicate values aren't allowed.
    * @param requestOptions additional request configuration.
    */
-  public suspend fun getABTest(id: Int, requestOptions: RequestOptions? = null): ABTest {
+  public suspend fun getABTest(
+    id: Int,
+    methods: List<AnalysisMethod>? = null,
+    requestOptions: RequestOptions? = null,
+  ): ABTest {
     return requester.execute(
-      requestConfig = getABTestRequestConfig(id = id),
+      requestConfig = getABTestRequestConfig(id = id, methods = methods),
       requestOptions = requestOptions,
     )
   }
@@ -508,22 +516,31 @@ public class AbtestingV3Client(
    * - analytics
    *
    * @param id Unique A/B test identifier.
+   * @param methods Statistical analysis results to include, as a comma-separated list. When
+   *   omitted, each test uses its configured method, or `frequentist` if no method is configured.
+   *   Request both methods to include both sets of available results. This doesn't change the test
+   *   configuration or compute missing results. Duplicate values aren't allowed.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getABTestWithHTTPInfo(
     id: Int,
+    methods: List<AnalysisMethod>? = null,
     requestOptions: RequestOptions? = null,
   ): AlgoliaHttpResponse<ABTest> {
     return requester.executeWithHttpInfo(
-      requestConfig = getABTestRequestConfig(id = id),
+      requestConfig = getABTestRequestConfig(id = id, methods = methods),
       requestOptions = requestOptions,
     )
   }
 
-  private fun getABTestRequestConfig(id: Int): RequestConfig {
+  private fun getABTestRequestConfig(id: Int, methods: List<AnalysisMethod>?): RequestConfig {
     return RequestConfig(
       method = RequestMethod.GET,
       path = "".split("/").filter { it.isNotBlank() } + listOf("3", "abtests", "$id"),
+      query =
+        buildMap {
+          methods?.let { put("methods", it.joinToString(",")) }
+        },
     )
   }
 
@@ -592,6 +609,10 @@ public class AbtestingV3Client(
    * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param metric List of metrics to retrieve. If not specified, all metrics are returned.
+   * @param methods Statistical analysis results to include, as a comma-separated list. When
+   *   omitted, each test uses its configured method, or `frequentist` if no method is configured.
+   *   Request both methods to include both sets of available results. This doesn't change the test
+   *   configuration or compute missing results. Duplicate values aren't allowed.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getTimeseries(
@@ -599,6 +620,7 @@ public class AbtestingV3Client(
     startDate: String? = null,
     endDate: String? = null,
     metric: List<MetricName>? = null,
+    methods: List<AnalysisMethod>? = null,
     requestOptions: RequestOptions? = null,
   ): Timeseries {
     return requester.execute(
@@ -608,6 +630,7 @@ public class AbtestingV3Client(
           startDate = startDate,
           endDate = endDate,
           metric = metric,
+          methods = methods,
         ),
       requestOptions = requestOptions,
     )
@@ -625,6 +648,10 @@ public class AbtestingV3Client(
    * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
    * @param metric List of metrics to retrieve. If not specified, all metrics are returned.
+   * @param methods Statistical analysis results to include, as a comma-separated list. When
+   *   omitted, each test uses its configured method, or `frequentist` if no method is configured.
+   *   Request both methods to include both sets of available results. This doesn't change the test
+   *   configuration or compute missing results. Duplicate values aren't allowed.
    * @param requestOptions additional request configuration.
    */
   public suspend fun getTimeseriesWithHTTPInfo(
@@ -632,6 +659,7 @@ public class AbtestingV3Client(
     startDate: String? = null,
     endDate: String? = null,
     metric: List<MetricName>? = null,
+    methods: List<AnalysisMethod>? = null,
     requestOptions: RequestOptions? = null,
   ): AlgoliaHttpResponse<Timeseries> {
     return requester.executeWithHttpInfo(
@@ -641,6 +669,7 @@ public class AbtestingV3Client(
           startDate = startDate,
           endDate = endDate,
           metric = metric,
+          methods = methods,
         ),
       requestOptions = requestOptions,
     )
@@ -651,6 +680,7 @@ public class AbtestingV3Client(
     startDate: String?,
     endDate: String?,
     metric: List<MetricName>?,
+    methods: List<AnalysisMethod>?,
   ): RequestConfig {
     return RequestConfig(
       method = RequestMethod.GET,
@@ -660,6 +690,7 @@ public class AbtestingV3Client(
           startDate?.let { put("startDate", it) }
           endDate?.let { put("endDate", it) }
           metric?.let { put("metric", it.joinToString(",")) }
+          methods?.let { put("methods", it.joinToString(",")) }
         },
     )
   }
@@ -678,6 +709,10 @@ public class AbtestingV3Client(
    *   included in the response.
    * @param direction Sort order for A/B tests by start date. Use 'asc' for ascending or 'desc' for
    *   descending. Active A/B tests are always listed first.
+   * @param methods Statistical analysis results to include, as a comma-separated list. When
+   *   omitted, each test uses its configured method, or `frequentist` if no method is configured.
+   *   Request both methods to include both sets of available results. This doesn't change the test
+   *   configuration or compute missing results. Duplicate values aren't allowed.
    * @param requestOptions additional request configuration.
    */
   public suspend fun listABTests(
@@ -686,6 +721,7 @@ public class AbtestingV3Client(
     indexPrefix: String? = null,
     indexSuffix: String? = null,
     direction: Direction? = null,
+    methods: List<AnalysisMethod>? = null,
     requestOptions: RequestOptions? = null,
   ): ListABTestsResponse {
     return requester.execute(
@@ -696,6 +732,7 @@ public class AbtestingV3Client(
           indexPrefix = indexPrefix,
           indexSuffix = indexSuffix,
           direction = direction,
+          methods = methods,
         ),
       requestOptions = requestOptions,
     )
@@ -717,6 +754,10 @@ public class AbtestingV3Client(
    *   included in the response.
    * @param direction Sort order for A/B tests by start date. Use 'asc' for ascending or 'desc' for
    *   descending. Active A/B tests are always listed first.
+   * @param methods Statistical analysis results to include, as a comma-separated list. When
+   *   omitted, each test uses its configured method, or `frequentist` if no method is configured.
+   *   Request both methods to include both sets of available results. This doesn't change the test
+   *   configuration or compute missing results. Duplicate values aren't allowed.
    * @param requestOptions additional request configuration.
    */
   public suspend fun listABTestsWithHTTPInfo(
@@ -725,6 +766,7 @@ public class AbtestingV3Client(
     indexPrefix: String? = null,
     indexSuffix: String? = null,
     direction: Direction? = null,
+    methods: List<AnalysisMethod>? = null,
     requestOptions: RequestOptions? = null,
   ): AlgoliaHttpResponse<ListABTestsResponse> {
     return requester.executeWithHttpInfo(
@@ -735,6 +777,7 @@ public class AbtestingV3Client(
           indexPrefix = indexPrefix,
           indexSuffix = indexSuffix,
           direction = direction,
+          methods = methods,
         ),
       requestOptions = requestOptions,
     )
@@ -746,6 +789,7 @@ public class AbtestingV3Client(
     indexPrefix: String?,
     indexSuffix: String?,
     direction: Direction?,
+    methods: List<AnalysisMethod>?,
   ): RequestConfig {
     return RequestConfig(
       method = RequestMethod.GET,
@@ -757,6 +801,7 @@ public class AbtestingV3Client(
           indexPrefix?.let { put("indexPrefix", it) }
           indexSuffix?.let { put("indexSuffix", it) }
           direction?.let { put("direction", it) }
+          methods?.let { put("methods", it.joinToString(",")) }
         },
     )
   }

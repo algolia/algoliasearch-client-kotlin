@@ -10,11 +10,10 @@ import kotlinx.serialization.json.*
 /**
  * MetricResult
  *
- * @param name
+ * @param name Metric name. Revenue per search results use `revenue_per_search`.
  * @param updatedAt Date and time when the metric was last updated, in RFC 3339 format.
- * @param `value`
- * @param pValue PValue for the first variant (control) will always be 0. For the other variants,
- *   pValue is calculated for the current variant based on the control.
+ * @param `value` Metric value. For `revenue_per_search`, this is the winsorized mean revenue per
+ *   search in the specified currency.
  * @param valueCIHigh The upper bound of the 95% confidence interval for the metric value. The
  *   confidence interval is calculated using either the relative ratio or relative difference
  *   between the metric values for the control and the variant. Relative ratio is used for metrics
@@ -25,27 +24,32 @@ import kotlinx.serialization.json.*
  *   between the metric values for the control and the variant. Relative ratio is used for metrics
  *   that are ratios (e.g., click-through rate, conversion rate), while relative difference is used
  *   for continuous metrics (e.g., revenue).
- * @param dimension Dimension defined during test creation.
+ * @param pValue P-value for this variant compared to the control. Omitted when no p-value is
+ *   available for this metric.
+ * @param dimension Dimension defined during test creation. For revenue metrics, including
+ *   `revenue_per_search`, this is the currency.
  * @param metadata
  * @param criticalValue The value that was computed during error correction. It is used to determine
  *   significance of the metric pValue. The critical value is calculated using Bonferroni or
  *   Benjamini-Hochberg corrections, based on the given configuration during the A/B test creation.
  * @param significant Whether the pValue is significant or not based on the critical value and the
  *   error correction algorithm used.
+ * @param bayesian
  */
 @Serializable
 public data class MetricResult(
+
+  /** Metric name. Revenue per search results use `revenue_per_search`. */
   @SerialName(value = "name") val name: String,
 
   /** Date and time when the metric was last updated, in RFC 3339 format. */
   @SerialName(value = "updatedAt") val updatedAt: String,
-  @SerialName(value = "value") val `value`: Double,
 
   /**
-   * PValue for the first variant (control) will always be 0. For the other variants, pValue is
-   * calculated for the current variant based on the control.
+   * Metric value. For `revenue_per_search`, this is the winsorized mean revenue per search in the
+   * specified currency.
    */
-  @SerialName(value = "pValue") val pValue: Double,
+  @SerialName(value = "value") val `value`: Double,
 
   /**
    * The upper bound of the 95% confidence interval for the metric value. The confidence interval is
@@ -65,7 +69,16 @@ public data class MetricResult(
    */
   @SerialName(value = "valueCILow") val valueCILow: Double? = null,
 
-  /** Dimension defined during test creation. */
+  /**
+   * P-value for this variant compared to the control. Omitted when no p-value is available for this
+   * metric.
+   */
+  @SerialName(value = "pValue") val pValue: Double? = null,
+
+  /**
+   * Dimension defined during test creation. For revenue metrics, including `revenue_per_search`,
+   * this is the currency.
+   */
   @SerialName(value = "dimension") val dimension: String? = null,
   @SerialName(value = "metadata") val metadata: MetricMetadata? = null,
 
@@ -81,4 +94,5 @@ public data class MetricResult(
    * algorithm used.
    */
   @SerialName(value = "significant") val significant: Boolean? = null,
+  @SerialName(value = "bayesian") val bayesian: BayesianMetricResult? = null,
 ) {}

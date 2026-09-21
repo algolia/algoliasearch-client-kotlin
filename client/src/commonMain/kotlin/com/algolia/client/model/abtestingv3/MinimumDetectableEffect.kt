@@ -8,7 +8,8 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Configuration for the smallest difference between test variants you want to detect.
+ * Configuration for the smallest difference between test variants you want to detect, used to
+ * estimate the required sample size.
  *
  * @param size Smallest difference in an observable metric between variants. For example, to detect
  *   a 10% difference between variants, set this value to 0.1.

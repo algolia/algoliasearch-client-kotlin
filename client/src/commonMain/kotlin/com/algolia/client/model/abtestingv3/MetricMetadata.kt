@@ -10,8 +10,8 @@ import kotlinx.serialization.json.*
 /**
  * Metric specific metadata.
  *
- * @param winsorizedValue Only present in case the metric is 'revenue'. It is the amount exceeding
- *   the 95th percentile of global revenue transactions involved in the AB Test. This amount is not
+ * @param winsorizedValue Only present for `revenue` metrics. It is the amount exceeding the 95th
+ *   percentile of global revenue transactions involved in the AB Test. This amount is not
  *   considered when calculating statistical significance. It is tied to a per revenue-currency pair
  *   contrary to other global filter effects (such as outliers and empty search count).
  * @param mean Mean value for this metric.
@@ -20,10 +20,10 @@ import kotlinx.serialization.json.*
 public data class MetricMetadata(
 
   /**
-   * Only present in case the metric is 'revenue'. It is the amount exceeding the 95th percentile of
-   * global revenue transactions involved in the AB Test. This amount is not considered when
-   * calculating statistical significance. It is tied to a per revenue-currency pair contrary to
-   * other global filter effects (such as outliers and empty search count).
+   * Only present for `revenue` metrics. It is the amount exceeding the 95th percentile of global
+   * revenue transactions involved in the AB Test. This amount is not considered when calculating
+   * statistical significance. It is tied to a per revenue-currency pair contrary to other global
+   * filter effects (such as outliers and empty search count).
    */
   @SerialName(value = "winsorizedValue") val winsorizedValue: Double? = null,
 
