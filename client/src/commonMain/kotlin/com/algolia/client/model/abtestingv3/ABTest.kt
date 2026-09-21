@@ -15,6 +15,7 @@ import kotlinx.serialization.json.*
  * @param createdAt Date and time when the A/B test was created, in RFC 3339 format.
  * @param endAt End date and time of the A/B test, in RFC 3339 format.
  * @param name A/B test name.
+ * @param hypothesis Expected outcome of the A/B test.
  * @param status
  * @param variants A/B test variants. The first variant is your _control_ index, typically your
  *   production index. All of the additional variants are indexes with changed settings that you
@@ -40,6 +41,9 @@ public data class ABTest(
 
   /** A/B test name. */
   @SerialName(value = "name") val name: String,
+
+  /** Expected outcome of the A/B test. */
+  @SerialName(value = "hypothesis") val hypothesis: String,
   @SerialName(value = "status") val status: Status,
 
   /**

@@ -15,6 +15,7 @@ import kotlinx.serialization.json.*
  * @param metrics A/B test metrics involved in the test. Only these metrics will be considered when
  *   calculating results.
  * @param endAt End date and time of the A/B test, in RFC 3339 format.
+ * @param hypothesis Expected outcome of the A/B test.
  * @param configuration
  */
 @Serializable
@@ -34,5 +35,8 @@ public data class AddABTestsRequest(
 
   /** End date and time of the A/B test, in RFC 3339 format. */
   @SerialName(value = "endAt") val endAt: String,
+
+  /** Expected outcome of the A/B test. */
+  @SerialName(value = "hypothesis") val hypothesis: String? = null,
   @SerialName(value = "configuration") val configuration: ABTestConfiguration? = null,
 ) {}
