@@ -15,6 +15,9 @@ import kotlinx.serialization.json.*
  *
  * @param results Search results.
  * @param compositions
+ * @param errors Non-critical errors encountered while processing the request that may have affected
+ *   the returned results (for example, an external provider failure that fell back to another
+ *   result set).
  */
 @Serializable(SearchResponseSerializer::class)
 public data class SearchResponse(
@@ -22,6 +25,13 @@ public data class SearchResponse(
   /** Search results. */
   val results: List<SearchResultsItem>,
   val compositions: CompositionsSearchResponse? = null,
+
+  /**
+   * Non-critical errors encountered while processing the request that may have affected the
+   * returned results (for example, an external provider failure that fell back to another result
+   * set).
+   */
+  val errors: List<ProcessingError>? = null,
   val additionalProperties: Map<String, JsonElement>? = null,
 ) {}
 
@@ -31,6 +41,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
     buildClassSerialDescriptor("SearchResponse") {
       element<List<SearchResultsItem>>("results")
       element<CompositionsSearchResponse>("compositions", isOptional = true)
+      element<List<ProcessingError>>("errors", isOptional = true)
     }
 
   override fun deserialize(decoder: Decoder): SearchResponse {
@@ -39,6 +50,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
     return SearchResponse(
       results = tree.getValue("results").let { input.json.decodeFromJsonElement(it) },
       compositions = tree["compositions"]?.let { input.json.decodeFromJsonElement(it) },
+      errors = tree["errors"]?.let { input.json.decodeFromJsonElement(it) },
       additionalProperties = tree.filterKeys { it !in descriptor.elementNames },
     )
   }
@@ -48,6 +60,7 @@ internal object SearchResponseSerializer : KSerializer<SearchResponse> {
     val json = buildJsonObject {
       put("results", output.json.encodeToJsonElement(value.results))
       value.compositions?.let { put("compositions", output.json.encodeToJsonElement(it)) }
+      value.errors?.let { put("errors", output.json.encodeToJsonElement(it)) }
       value.additionalProperties?.onEach { (key, element) -> put(key, element) }
     }
     (encoder as JsonEncoder).encodeJsonElement(json)

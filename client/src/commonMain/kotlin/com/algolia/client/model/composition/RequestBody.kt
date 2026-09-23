@@ -16,6 +16,7 @@ import kotlinx.serialization.json.*
  *   `multifeed` Composition / Composition Rule, and only those specified will be processed. The
  *   value overrides the value in the defined behavior, and when unspecified, the value defined in
  *   the behavior is used. When neither value is present, all feeds are processed.
+ * @param externalProvider
  */
 @Serializable
 public data class RequestBody(
@@ -29,4 +30,5 @@ public data class RequestBody(
    * neither value is present, all feeds are processed.
    */
   @SerialName(value = "feedsOrder") val feedsOrder: List<String>? = null,
+  @SerialName(value = "externalProvider") val externalProvider: ExternalProvider? = null,
 ) {}

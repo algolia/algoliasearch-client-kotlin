@@ -17,6 +17,7 @@ import kotlinx.serialization.json.*
  * Source to be used to retrieve organic result set.
  *
  * Implementations:
+ * - [InjectionMainExternalProviderSource]
  * - [InjectionMainRecommendSource]
  * - [InjectionMainSearchSource]
  */
@@ -33,6 +34,12 @@ public sealed interface InjectionMainSource {
     public val value: InjectionMainRecommendSource
   ) : InjectionMainSource
 
+  @Serializable
+  @JvmInline
+  public value class InjectionMainExternalProviderSourceValue(
+    public val value: InjectionMainExternalProviderSource
+  ) : InjectionMainSource
+
   public companion object {
 
     public fun of(value: InjectionMainSearchSource): InjectionMainSource =
@@ -40,6 +47,9 @@ public sealed interface InjectionMainSource {
 
     public fun of(value: InjectionMainRecommendSource): InjectionMainSource =
       InjectionMainRecommendSourceValue(value)
+
+    public fun of(value: InjectionMainExternalProviderSource): InjectionMainSource =
+      InjectionMainExternalProviderSourceValue(value)
   }
 }
 
@@ -53,6 +63,8 @@ internal class InjectionMainSourceSerializer :
         InjectionMainSearchSource.serializer()
       element is JsonObject && element.containsKey("recommend") ->
         InjectionMainRecommendSource.serializer()
+      element is JsonObject && element.containsKey("externalProvider") ->
+        InjectionMainExternalProviderSource.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }
