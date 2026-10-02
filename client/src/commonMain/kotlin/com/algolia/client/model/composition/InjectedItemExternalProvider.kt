@@ -14,8 +14,8 @@ import kotlinx.serialization.json.*
  * @param configurationID Identifier of the external provider configuration.
  * @param configurationParams Default values for the configuration placeholders that are not
  *   reserved Composition placeholders.
- * @param params
  * @param ordering
+ * @param params
  */
 @Serializable
 public data class InjectedItemExternalProvider(
@@ -31,6 +31,6 @@ public data class InjectedItemExternalProvider(
    * placeholders.
    */
   @SerialName(value = "configurationParams") val configurationParams: JsonObject? = null,
-  @SerialName(value = "params") val params: BaseInjectionQueryParameters? = null,
   @SerialName(value = "ordering") val ordering: ExternalProviderOrdering? = null,
+  @SerialName(value = "params") val params: BaseInjectionQueryParameters? = null,
 ) {}

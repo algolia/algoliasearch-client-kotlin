@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * MainRecommend
+ * InjectionMainRecommend
  *
  * @param indexName Index to retrieve recommendations from.
  * @param model
@@ -17,7 +17,7 @@ import kotlinx.serialization.json.*
  * @param fallbackParameters
  */
 @Serializable
-public data class MainRecommend(
+public data class InjectionMainRecommend(
 
   /** Index to retrieve recommendations from. */
   @SerialName(value = "indexName") val indexName: String,

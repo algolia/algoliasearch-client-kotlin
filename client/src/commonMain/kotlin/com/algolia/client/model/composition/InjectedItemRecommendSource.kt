@@ -14,5 +14,5 @@ import kotlinx.serialization.json.*
  */
 @Serializable
 public data class InjectedItemRecommendSource(
-  @SerialName(value = "recommend") val recommend: Recommend
+  @SerialName(value = "recommend") val recommend: InjectedItemRecommend
 ) : InjectedItemSource {}

@@ -10,15 +10,15 @@ import kotlinx.serialization.json.*
 /**
  * InjectedItemExternal
  *
- * @param index Composition Index name.
- * @param params
+ * @param index Algolia index used to retrieve records.
  * @param ordering
+ * @param params
  */
 @Serializable
 public data class InjectedItemExternal(
 
-  /** Composition Index name. */
+  /** Algolia index used to retrieve records. */
   @SerialName(value = "index") val index: String,
-  @SerialName(value = "params") val params: BaseInjectionQueryParameters? = null,
   @SerialName(value = "ordering") val ordering: ExternalOrdering? = null,
+  @SerialName(value = "params") val params: BaseInjectionQueryParameters? = null,
 ) {}

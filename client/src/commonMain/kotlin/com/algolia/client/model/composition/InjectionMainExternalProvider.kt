@@ -8,17 +8,17 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * MainExternalProvider
+ * InjectionMainExternalProvider
  *
  * @param index Algolia index used to fetch the records.
  * @param configurationID Identifier of the external provider configuration.
  * @param configurationParams Default values for the configuration placeholders that are not
  *   reserved Composition placeholders.
- * @param params
  * @param ordering
+ * @param params
  */
 @Serializable
-public data class MainExternalProvider(
+public data class InjectionMainExternalProvider(
 
   /** Algolia index used to fetch the records. */
   @SerialName(value = "index") val index: String,
@@ -31,6 +31,6 @@ public data class MainExternalProvider(
    * placeholders.
    */
   @SerialName(value = "configurationParams") val configurationParams: JsonObject? = null,
-  @SerialName(value = "params") val params: MainInjectionQueryParameters? = null,
   @SerialName(value = "ordering") val ordering: ExternalProviderOrdering? = null,
+  @SerialName(value = "params") val params: MainInjectionQueryParameters? = null,
 ) {}

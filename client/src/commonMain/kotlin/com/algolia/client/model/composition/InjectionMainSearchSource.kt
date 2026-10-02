@@ -13,5 +13,6 @@ import kotlinx.serialization.json.*
  * @param search
  */
 @Serializable
-public data class InjectionMainSearchSource(@SerialName(value = "search") val search: MainSearch) :
-  InjectionMainSource {}
+public data class InjectionMainSearchSource(
+  @SerialName(value = "search") val search: InjectionMainSearch
+) : InjectionMainSource {}

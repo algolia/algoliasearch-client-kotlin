@@ -14,5 +14,5 @@ import kotlinx.serialization.json.*
  */
 @Serializable
 public data class InjectionMainExternalProviderSource(
-  @SerialName(value = "externalProvider") val externalProvider: MainExternalProvider
+  @SerialName(value = "externalProvider") val externalProvider: InjectionMainExternalProvider
 ) : InjectionMainSource {}

@@ -10,13 +10,13 @@ import kotlinx.serialization.json.*
 /**
  * InjectedItemSearch
  *
- * @param index Composition Index name.
+ * @param index Algolia index used to retrieve records.
  * @param params
  */
 @Serializable
 public data class InjectedItemSearch(
 
-  /** Composition Index name. */
+  /** Algolia index used to retrieve records. */
   @SerialName(value = "index") val index: String,
   @SerialName(value = "params") val params: BaseInjectionQueryParameters? = null,
 ) {}

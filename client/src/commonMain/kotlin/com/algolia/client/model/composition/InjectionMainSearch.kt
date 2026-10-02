@@ -8,15 +8,15 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * MainSearch
+ * InjectionMainSearch
  *
- * @param index Index to retrieve search results from.
+ * @param index Algolia index used to retrieve records.
  * @param params
  */
 @Serializable
-public data class MainSearch(
+public data class InjectionMainSearch(
 
-  /** Index to retrieve search results from. */
+  /** Algolia index used to retrieve records. */
   @SerialName(value = "index") val index: String,
   @SerialName(value = "params") val params: MainInjectionQueryParameters? = null,
 ) {}
