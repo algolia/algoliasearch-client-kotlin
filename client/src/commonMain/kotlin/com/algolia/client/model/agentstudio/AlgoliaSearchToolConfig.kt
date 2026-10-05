@@ -13,10 +13,14 @@ import kotlinx.serialization.json.*
  * @param name
  * @param type
  * @param indices
+ * @param mode
+ * @param allowUnlistedIndices
  */
 @Serializable
 public data class AlgoliaSearchToolConfig(
   @SerialName(value = "name") val name: String,
   @SerialName(value = "type") val type: String,
   @SerialName(value = "indices") val indices: List<AlgoliaSearchToolIndexConfig>,
-) : ToolConfigInput {}
+  @SerialName(value = "mode") val mode: ModeEnum? = null,
+  @SerialName(value = "allowUnlistedIndices") val allowUnlistedIndices: Boolean? = null,
+) : ToolConfigOutput, ItemsUnion, ToolConfigInput {}

@@ -14,6 +14,7 @@ import kotlinx.serialization.json.*
  * @param toolCallId
  * @param toolName
  * @param args
+ * @param rawArgs
  * @param requiresApproval
  * @param providerOptions
  */
@@ -23,6 +24,7 @@ public data class ToolCallPart(
   @SerialName(value = "toolCallId") val toolCallId: String,
   @SerialName(value = "toolName") val toolName: String,
   @SerialName(value = "args") val args: JsonElement? = null,
+  @SerialName(value = "rawArgs") val rawArgs: JsonObject? = null,
   @SerialName(value = "requiresApproval") val requiresApproval: Boolean? = null,
   @SerialName(value = "providerOptions") val providerOptions: JsonObject? = null,
 ) : MessagePart {}

@@ -11,8 +11,7 @@ import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
 
 /**
- * Exists only to ensure that when you change branch from toolX to feat/toolY, your config stays
- * valid.
+ * A tool configuration that this version of the API does not recognize.
  *
  * @param name
  * @param type
@@ -22,7 +21,7 @@ public data class UnknownToolConfig(
   val name: String,
   val type: String,
   val additionalProperties: Map<String, JsonElement>? = null,
-) : ToolConfigInput {}
+) : ToolConfigOutput, ItemsUnion, ToolConfigInput {}
 
 internal object UnknownToolConfigSerializer : KSerializer<UnknownToolConfig> {
 

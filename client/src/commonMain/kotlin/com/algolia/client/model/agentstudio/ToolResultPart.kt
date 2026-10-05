@@ -15,6 +15,10 @@ import kotlinx.serialization.json.*
  * @param toolName
  * @param output
  * @param providerOptions
+ * @param mcpConfigId
+ * @param mcpConfigName
+ * @param isTerminal
+ * @param outputMetadata
  */
 @Serializable
 public data class ToolResultPart(
@@ -23,4 +27,8 @@ public data class ToolResultPart(
   @SerialName(value = "toolName") val toolName: String,
   @SerialName(value = "output") val output: ToolResultOutput,
   @SerialName(value = "providerOptions") val providerOptions: JsonObject? = null,
+  @SerialName(value = "mcpConfigId") val mcpConfigId: String? = null,
+  @SerialName(value = "mcpConfigName") val mcpConfigName: String? = null,
+  @SerialName(value = "isTerminal") val isTerminal: Boolean? = null,
+  @SerialName(value = "outputMetadata") val outputMetadata: JsonObject? = null,
 ) : MessagePart {}

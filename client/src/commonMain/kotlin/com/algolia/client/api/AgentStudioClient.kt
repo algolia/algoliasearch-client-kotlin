@@ -190,6 +190,82 @@ public class AgentStudioClient(
   }
 
   /**
+   * Summarize the older part of a conversation into a single user message via the caller's LLM.
+   * Everything except the trailing `keepLastMessages` messages is summarized; the summary is
+   * returned as a user-role message followed by the kept tail verbatim. Your provider runs the
+   * summary, so the provider adds the cost to your account. A conversation too large for the
+   * summarizer's context window is split into chunks that each fit, summarized concurrently, then
+   * merged in a reduce pass - so payload size alone does not fail the request. When the
+   * conversation still cannot be summarized (it needs more chunks than the server allows, or the
+   * chunk summaries will not converge), the response is a `400`, not a `500`. Two optional controls
+   * shape the output. `instructions` adds caller guidance inside the server-owned prompt frame, so
+   * it steers the summary without the model echoing the wording back. `targetTokensEstimate` sets a
+   * desired summary size, translated into word-count guidance. The `compaction` block reports what
+   * happened: `compacted` is `false` when the payload passed through untouched (nothing older than
+   * the kept tail), alongside chunk/pass counts and the summarizer's own token usage.
+   *
+   * Required API Key ACLs:
+   * - search
+   *
+   * @param contextCompactRequest
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun compactContext(
+    contextCompactRequest: ContextCompactRequest,
+    requestOptions: RequestOptions? = null,
+  ): ContextResponse {
+    return requester.execute(
+      requestConfig = compactContextRequestConfig(contextCompactRequest = contextCompactRequest),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Summarize the older part of a conversation into a single user message via the caller's LLM.
+   * Everything except the trailing `keepLastMessages` messages is summarized; the summary is
+   * returned as a user-role message followed by the kept tail verbatim. Your provider runs the
+   * summary, so the provider adds the cost to your account. A conversation too large for the
+   * summarizer's context window is split into chunks that each fit, summarized concurrently, then
+   * merged in a reduce pass - so payload size alone does not fail the request. When the
+   * conversation still cannot be summarized (it needs more chunks than the server allows, or the
+   * chunk summaries will not converge), the response is a `400`, not a `500`. Two optional controls
+   * shape the output. `instructions` adds caller guidance inside the server-owned prompt frame, so
+   * it steers the summary without the model echoing the wording back. `targetTokensEstimate` sets a
+   * desired summary size, translated into word-count guidance. The `compaction` block reports what
+   * happened: `compacted` is `false` when the payload passed through untouched (nothing older than
+   * the kept tail), alongside chunk/pass counts and the summarizer's own token usage. This variant
+   * of [compactContext] returns the full HTTP response information (status code, headers, raw body)
+   * along with the deserialized response body.
+   *
+   * Required API Key ACLs:
+   * - search
+   *
+   * @param contextCompactRequest
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun compactContextWithHTTPInfo(
+    contextCompactRequest: ContextCompactRequest,
+    requestOptions: RequestOptions? = null,
+  ): AlgoliaHttpResponse<ContextResponse> {
+    return requester.executeWithHttpInfo(
+      requestConfig = compactContextRequestConfig(contextCompactRequest = contextCompactRequest),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun compactContextRequestConfig(
+    contextCompactRequest: ContextCompactRequest
+  ): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.POST,
+      path =
+        "/agent-studio".split("/").filter { it.isNotBlank() } +
+          listOf("1", "unstable", "context", "compact"),
+      body = contextCompactRequest,
+    )
+  }
+
+  /**
    * Create a new agent.
    *
    * Required API Key ACLs:
@@ -309,7 +385,7 @@ public class AgentStudioClient(
    * Normal completion request: User message -> Agent response 2. Tool approval response: User
    * approval -> Execute tool -> Agent response Tool Approval Flow (for MCP tools with
    * requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return
-   * approval request. - Request 2: User approves -> Execute tool -> Agent continues with result.
+   * approval request - Request 2: User approves -> Execute tool -> Agent continues with result.
    *
    * Required API Key ACLs:
    * - search
@@ -329,7 +405,7 @@ public class AgentStudioClient(
   public suspend fun createAgentCompletion(
     agentId: String,
     compatibilityMode: CompatibilityMode,
-    agentCompletionRequest: AgentCompletionRequest,
+    agentCompletionRequest: AgentCompletionRequestUnion,
     stream: Boolean? = null,
     cache: Boolean? = null,
     memory: Boolean? = null,
@@ -358,7 +434,7 @@ public class AgentStudioClient(
    * Normal completion request: User message -> Agent response 2. Tool approval response: User
    * approval -> Execute tool -> Agent response Tool Approval Flow (for MCP tools with
    * requiresApproval: true): - Request 1: User sends message -> Agent requests tool call -> Return
-   * approval request. - Request 2: User approves -> Execute tool -> Agent continues with result.
+   * approval request - Request 2: User approves -> Execute tool -> Agent continues with result.
    * This variant of [createAgentCompletion] returns the full HTTP response information (status
    * code, headers, raw body) along with the deserialized response body.
    *
@@ -380,7 +456,7 @@ public class AgentStudioClient(
   public suspend fun createAgentCompletionWithHTTPInfo(
     agentId: String,
     compatibilityMode: CompatibilityMode,
-    agentCompletionRequest: AgentCompletionRequest,
+    agentCompletionRequest: AgentCompletionRequestUnion,
     stream: Boolean? = null,
     cache: Boolean? = null,
     memory: Boolean? = null,
@@ -407,7 +483,7 @@ public class AgentStudioClient(
   private fun createAgentCompletionRequestConfig(
     agentId: String,
     compatibilityMode: CompatibilityMode,
-    agentCompletionRequest: AgentCompletionRequest,
+    agentCompletionRequest: AgentCompletionRequestUnion,
     stream: Boolean?,
     cache: Boolean?,
     memory: Boolean?,
@@ -435,6 +511,108 @@ public class AgentStudioClient(
           analytics?.let { put("analytics", it) }
         },
       body = agentCompletionRequest,
+    )
+  }
+
+  /**
+   * Run a configured task and return the generated object as ``{ output }``. With ``?stream=true``,
+   * returns the raw partial JSON text stream expected by AI SDK v5 ``useObject``. The streamed JSON
+   * is the task output itself.
+   *
+   * Required API Key ACLs:
+   * - search
+   *
+   * @param agentId The agentId.
+   * @param taskRequest
+   * @param stream Whether to stream the response or not. (default to false)
+   * @param cache Use cached responses if available. (default to true)
+   * @param analytics Set to false to skip endpoint-specific analytics for this task call (default:
+   *   true). Disables the task analytics event; operational metrics and traces are always emitted.
+   *   (default to true)
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun createAgentTask(
+    agentId: String,
+    taskRequest: TaskRequest,
+    stream: Boolean? = null,
+    cache: Boolean? = null,
+    analytics: Boolean? = null,
+    requestOptions: RequestOptions? = null,
+  ): TaskResponse {
+    return requester.execute(
+      requestConfig =
+        createAgentTaskRequestConfig(
+          agentId = agentId,
+          taskRequest = taskRequest,
+          stream = stream,
+          cache = cache,
+          analytics = analytics,
+        ),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Run a configured task and return the generated object as ``{ output }``. With ``?stream=true``,
+   * returns the raw partial JSON text stream expected by AI SDK v5 ``useObject``. The streamed JSON
+   * is the task output itself. This variant of [createAgentTask] returns the full HTTP response
+   * information (status code, headers, raw body) along with the deserialized response body.
+   *
+   * Required API Key ACLs:
+   * - search
+   *
+   * @param agentId The agentId.
+   * @param taskRequest
+   * @param stream Whether to stream the response or not. (default to false)
+   * @param cache Use cached responses if available. (default to true)
+   * @param analytics Set to false to skip endpoint-specific analytics for this task call (default:
+   *   true). Disables the task analytics event; operational metrics and traces are always emitted.
+   *   (default to true)
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun createAgentTaskWithHTTPInfo(
+    agentId: String,
+    taskRequest: TaskRequest,
+    stream: Boolean? = null,
+    cache: Boolean? = null,
+    analytics: Boolean? = null,
+    requestOptions: RequestOptions? = null,
+  ): AlgoliaHttpResponse<TaskResponse> {
+    return requester.executeWithHttpInfo(
+      requestConfig =
+        createAgentTaskRequestConfig(
+          agentId = agentId,
+          taskRequest = taskRequest,
+          stream = stream,
+          cache = cache,
+          analytics = analytics,
+        ),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun createAgentTaskRequestConfig(
+    agentId: String,
+    taskRequest: TaskRequest,
+    stream: Boolean?,
+    cache: Boolean?,
+    analytics: Boolean?,
+  ): RequestConfig {
+    require(agentId.isNotBlank()) {
+      "Parameter `agentId` is required when calling `createAgentTask`."
+    }
+    return RequestConfig(
+      method = RequestMethod.POST,
+      path =
+        "/agent-studio".split("/").filter { it.isNotBlank() } +
+          listOf("1", "agents", "$agentId", "tasks"),
+      query =
+        buildMap {
+          stream?.let { put("stream", it) }
+          cache?.let { put("cache", it) }
+          analytics?.let { put("analytics", it) }
+        },
+      body = taskRequest,
     )
   }
 
@@ -857,7 +1035,7 @@ public class AgentStudioClient(
   }
 
   /**
-   * Deletes the conversations matching the given filers.
+   * Deletes the conversations matching the given filters.
    *
    * Required API Key ACLs:
    * - logs
@@ -885,9 +1063,9 @@ public class AgentStudioClient(
   }
 
   /**
-   * Deletes the conversations matching the given filers. This variant of [deleteAgentConversations]
-   * returns the full HTTP response information (status code, headers, raw body) along with the
-   * deserialized response body.
+   * Deletes the conversations matching the given filters. This variant of
+   * [deleteAgentConversations] returns the full HTTP response information (status code, headers,
+   * raw body) along with the deserialized response body.
    *
    * Required API Key ACLs:
    * - logs
@@ -1441,6 +1619,10 @@ public class AgentStudioClient(
    * @param conversationId The conversationId.
    * @param agentId The agentId.
    * @param includeFeedback Include feedback for the conversation. (default to false)
+   * @param includeMessageEvents Include Insights events attributed to each assistant message.
+   *   (default to false)
+   * @param includeImpactAnalytics Include outcome signals (hasView, hasClick, hasConversion) for
+   *   the conversation. (default to false)
    * @param xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token.
    * @param requestOptions additional request configuration.
    */
@@ -1448,6 +1630,8 @@ public class AgentStudioClient(
     conversationId: String,
     agentId: String,
     includeFeedback: Boolean? = null,
+    includeMessageEvents: Boolean? = null,
+    includeImpactAnalytics: Boolean? = null,
     xAlgoliaSecureUserToken: String? = null,
     requestOptions: RequestOptions? = null,
   ): ConversationFullResponse {
@@ -1457,6 +1641,8 @@ public class AgentStudioClient(
           conversationId = conversationId,
           agentId = agentId,
           includeFeedback = includeFeedback,
+          includeMessageEvents = includeMessageEvents,
+          includeImpactAnalytics = includeImpactAnalytics,
           xAlgoliaSecureUserToken = xAlgoliaSecureUserToken,
         ),
       requestOptions = requestOptions,
@@ -1474,6 +1660,10 @@ public class AgentStudioClient(
    * @param conversationId The conversationId.
    * @param agentId The agentId.
    * @param includeFeedback Include feedback for the conversation. (default to false)
+   * @param includeMessageEvents Include Insights events attributed to each assistant message.
+   *   (default to false)
+   * @param includeImpactAnalytics Include outcome signals (hasView, hasClick, hasConversion) for
+   *   the conversation. (default to false)
    * @param xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token.
    * @param requestOptions additional request configuration.
    */
@@ -1481,6 +1671,8 @@ public class AgentStudioClient(
     conversationId: String,
     agentId: String,
     includeFeedback: Boolean? = null,
+    includeMessageEvents: Boolean? = null,
+    includeImpactAnalytics: Boolean? = null,
     xAlgoliaSecureUserToken: String? = null,
     requestOptions: RequestOptions? = null,
   ): AlgoliaHttpResponse<ConversationFullResponse> {
@@ -1490,6 +1682,8 @@ public class AgentStudioClient(
           conversationId = conversationId,
           agentId = agentId,
           includeFeedback = includeFeedback,
+          includeMessageEvents = includeMessageEvents,
+          includeImpactAnalytics = includeImpactAnalytics,
           xAlgoliaSecureUserToken = xAlgoliaSecureUserToken,
         ),
       requestOptions = requestOptions,
@@ -1500,6 +1694,8 @@ public class AgentStudioClient(
     conversationId: String,
     agentId: String,
     includeFeedback: Boolean?,
+    includeMessageEvents: Boolean?,
+    includeImpactAnalytics: Boolean?,
     xAlgoliaSecureUserToken: String?,
   ): RequestConfig {
     require(conversationId.isNotBlank()) {
@@ -1520,6 +1716,8 @@ public class AgentStudioClient(
       query =
         buildMap {
           includeFeedback?.let { put("includeFeedback", it) }
+          includeMessageEvents?.let { put("includeMessageEvents", it) }
+          includeImpactAnalytics?.let { put("includeImpactAnalytics", it) }
         },
     )
   }
@@ -1679,7 +1877,8 @@ public class AgentStudioClient(
   }
 
   /**
-   * Invalidate cached completions for this agent. Filter with `before` (exclusive).
+   * Invalidate cached completions and task outputs for this agent. Filter with `before`
+   * (exclusive).
    *
    * Required API Key ACLs:
    * - editSettings
@@ -1700,9 +1899,9 @@ public class AgentStudioClient(
   }
 
   /**
-   * Invalidate cached completions for this agent. Filter with `before` (exclusive). This variant of
-   * [invalidateAgentCache] returns the full HTTP response information (status code, headers, raw
-   * body) along with the deserialized response body.
+   * Invalidate cached completions and task outputs for this agent. Filter with `before`
+   * (exclusive). This variant of [invalidateAgentCache] returns the full HTTP response information
+   * (status code, headers, raw body) along with the deserialized response body.
    *
    * Required API Key ACLs:
    * - editSettings
@@ -1803,6 +2002,11 @@ public class AgentStudioClient(
    * @param feedbackVote Filter by feedback value (requires includeFeedback=true).
    * @param page Page number. (default to 1)
    * @param limit Items per page. (default to 20)
+   * @param includeImpactAnalytics Include impact analytics (hasView, hasClick, hasConversion) per
+   *   conversation.
+   * @param clicked Filter by conversations with at least one item click.
+   * @param converted Filter by conversations with at least one conversion.
+   * @param hasAlgoliaSearch Filter by conversations where the search tool was used.
    * @param xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token.
    * @param requestOptions additional request configuration.
    */
@@ -1814,6 +2018,10 @@ public class AgentStudioClient(
     feedbackVote: Int? = null,
     page: Int? = null,
     limit: Int? = null,
+    includeImpactAnalytics: Boolean? = null,
+    clicked: Boolean? = null,
+    converted: Boolean? = null,
+    hasAlgoliaSearch: Boolean? = null,
     xAlgoliaSecureUserToken: String? = null,
     requestOptions: RequestOptions? = null,
   ): PaginatedConversationsResponse {
@@ -1827,6 +2035,10 @@ public class AgentStudioClient(
           feedbackVote = feedbackVote,
           page = page,
           limit = limit,
+          includeImpactAnalytics = includeImpactAnalytics,
+          clicked = clicked,
+          converted = converted,
+          hasAlgoliaSearch = hasAlgoliaSearch,
           xAlgoliaSecureUserToken = xAlgoliaSecureUserToken,
         ),
       requestOptions = requestOptions,
@@ -1848,6 +2060,11 @@ public class AgentStudioClient(
    * @param feedbackVote Filter by feedback value (requires includeFeedback=true).
    * @param page Page number. (default to 1)
    * @param limit Items per page. (default to 20)
+   * @param includeImpactAnalytics Include impact analytics (hasView, hasClick, hasConversion) per
+   *   conversation.
+   * @param clicked Filter by conversations with at least one item click.
+   * @param converted Filter by conversations with at least one conversion.
+   * @param hasAlgoliaSearch Filter by conversations where the search tool was used.
    * @param xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token.
    * @param requestOptions additional request configuration.
    */
@@ -1859,6 +2076,10 @@ public class AgentStudioClient(
     feedbackVote: Int? = null,
     page: Int? = null,
     limit: Int? = null,
+    includeImpactAnalytics: Boolean? = null,
+    clicked: Boolean? = null,
+    converted: Boolean? = null,
+    hasAlgoliaSearch: Boolean? = null,
     xAlgoliaSecureUserToken: String? = null,
     requestOptions: RequestOptions? = null,
   ): AlgoliaHttpResponse<PaginatedConversationsResponse> {
@@ -1872,6 +2093,10 @@ public class AgentStudioClient(
           feedbackVote = feedbackVote,
           page = page,
           limit = limit,
+          includeImpactAnalytics = includeImpactAnalytics,
+          clicked = clicked,
+          converted = converted,
+          hasAlgoliaSearch = hasAlgoliaSearch,
           xAlgoliaSecureUserToken = xAlgoliaSecureUserToken,
         ),
       requestOptions = requestOptions,
@@ -1886,6 +2111,10 @@ public class AgentStudioClient(
     feedbackVote: Int?,
     page: Int?,
     limit: Int?,
+    includeImpactAnalytics: Boolean?,
+    clicked: Boolean?,
+    converted: Boolean?,
+    hasAlgoliaSearch: Boolean?,
     xAlgoliaSecureUserToken: String?,
   ): RequestConfig {
     require(agentId.isNotBlank()) {
@@ -1908,6 +2137,10 @@ public class AgentStudioClient(
           feedbackVote?.let { put("feedbackVote", it) }
           page?.let { put("page", it) }
           limit?.let { put("limit", it) }
+          includeImpactAnalytics?.let { put("includeImpactAnalytics", it) }
+          clicked?.let { put("clicked", it) }
+          converted?.let { put("converted", it) }
+          hasAlgoliaSearch?.let { put("hasAlgoliaSearch", it) }
         },
     )
   }
@@ -2228,6 +2461,64 @@ public class AgentStudioClient(
   }
 
   /**
+   * Deterministically trim a conversation payload (no LLM calls). Keep the last N messages and/or
+   * fit a heuristic token budget, optionally dropping tool parts from what is kept (tool parts are
+   * stripped before the budget is applied). Returns the trimmed messages plus before/after stats.
+   * With no constraints set, the messages are returned unchanged and only the stats are computed -
+   * a deliberate, cheap \"how big is my context?\" probe (no LLM call, no mutation).
+   *
+   * Required API Key ACLs:
+   * - search
+   *
+   * @param contextTrimRequest
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun trimContext(
+    contextTrimRequest: ContextTrimRequest,
+    requestOptions: RequestOptions? = null,
+  ): ContextResponse {
+    return requester.execute(
+      requestConfig = trimContextRequestConfig(contextTrimRequest = contextTrimRequest),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Deterministically trim a conversation payload (no LLM calls). Keep the last N messages and/or
+   * fit a heuristic token budget, optionally dropping tool parts from what is kept (tool parts are
+   * stripped before the budget is applied). Returns the trimmed messages plus before/after stats.
+   * With no constraints set, the messages are returned unchanged and only the stats are computed -
+   * a deliberate, cheap \"how big is my context?\" probe (no LLM call, no mutation). This variant
+   * of [trimContext] returns the full HTTP response information (status code, headers, raw body)
+   * along with the deserialized response body.
+   *
+   * Required API Key ACLs:
+   * - search
+   *
+   * @param contextTrimRequest
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun trimContextWithHTTPInfo(
+    contextTrimRequest: ContextTrimRequest,
+    requestOptions: RequestOptions? = null,
+  ): AlgoliaHttpResponse<ContextResponse> {
+    return requester.executeWithHttpInfo(
+      requestConfig = trimContextRequestConfig(contextTrimRequest = contextTrimRequest),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun trimContextRequestConfig(contextTrimRequest: ContextTrimRequest): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.POST,
+      path =
+        "/agent-studio".split("/").filter { it.isNotBlank() } +
+          listOf("1", "unstable", "context", "trim"),
+      body = contextTrimRequest,
+    )
+  }
+
+  /**
    * Unpublish the specified agent.
    *
    * Required API Key ACLs:
@@ -2384,6 +2675,56 @@ public class AgentStudioClient(
       method = RequestMethod.PATCH,
       path = "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "configuration"),
       body = applicationConfigPatch,
+    )
+  }
+
+  /**
+   * Update an existing feedback entry.
+   *
+   * Required API Key ACLs:
+   * - search
+   *
+   * @param feedbackUpdateRequest
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun updateFeedback(
+    feedbackUpdateRequest: FeedbackUpdateRequest,
+    requestOptions: RequestOptions? = null,
+  ): FeedbackResponse {
+    return requester.execute(
+      requestConfig = updateFeedbackRequestConfig(feedbackUpdateRequest = feedbackUpdateRequest),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Update an existing feedback entry. This variant of [updateFeedback] returns the full HTTP
+   * response information (status code, headers, raw body) along with the deserialized response
+   * body.
+   *
+   * Required API Key ACLs:
+   * - search
+   *
+   * @param feedbackUpdateRequest
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun updateFeedbackWithHTTPInfo(
+    feedbackUpdateRequest: FeedbackUpdateRequest,
+    requestOptions: RequestOptions? = null,
+  ): AlgoliaHttpResponse<FeedbackResponse> {
+    return requester.executeWithHttpInfo(
+      requestConfig = updateFeedbackRequestConfig(feedbackUpdateRequest = feedbackUpdateRequest),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun updateFeedbackRequestConfig(
+    feedbackUpdateRequest: FeedbackUpdateRequest
+  ): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.PATCH,
+      path = "/agent-studio".split("/").filter { it.isNotBlank() } + listOf("1", "feedback"),
+      body = feedbackUpdateRequest,
     )
   }
 

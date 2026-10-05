@@ -29,4 +29,4 @@ public data class McpServerToolConfig(
   /** Stable unique identifier for this MCP tool. */
   @SerialName(value = "id") val id: String? = null,
   @SerialName(value = "allowedTools") val allowedTools: JsonObject? = null,
-) : ToolConfigInput {}
+) : ToolConfigOutput, ItemsUnion, ToolConfigInput {}

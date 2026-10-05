@@ -12,9 +12,11 @@ import kotlinx.serialization.json.*
  *
  * @param `data`
  * @param pagination
+ * @param analyticsDegraded
  */
 @Serializable
 public data class PaginatedConversationsResponse(
   @SerialName(value = "data") val `data`: List<ConversationBaseResponse>,
   @SerialName(value = "pagination") val pagination: PaginationMetadata,
+  @SerialName(value = "analyticsDegraded") val analyticsDegraded: Boolean? = null,
 ) {}

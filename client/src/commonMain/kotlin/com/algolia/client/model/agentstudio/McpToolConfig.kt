@@ -17,4 +17,4 @@ import kotlinx.serialization.json.*
 public data class McpToolConfig(
   @SerialName(value = "requiresApproval") val requiresApproval: Boolean? = null,
   @SerialName(value = "alias") val alias: String? = null,
-) : ToolConfig {}
+) : ToolConfigOrBooleanUnion {}

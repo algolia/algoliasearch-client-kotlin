@@ -12,6 +12,15 @@ import kotlinx.serialization.json.*
  *
  * @param mcpServers
  * @param searchParameters
+ * @param indices Per-request override for the Algolia Search tool's indices, honored only when the
+ *   tool is configured with `mode=\"dynamic\"`. A list of index names; the API looks up each name
+ *   in the agent's static `tool.indices` and reuses that entry, including its description and
+ *   access-control fields. A name the agent configuration does not list is rejected with HTTP 422
+ *   (`index_not_listed_on_tool`) unless the tool sets `allowUnlistedIndices`, in which case the API
+ *   synthesizes a minimal entry carrying the index name only. Capped at 10 entries. Sending this
+ *   field against an agent whose tool is in `mode=\"static\"` (the default) is rejected with HTTP
+ *   422 — change the tool's `mode` in the agent configuration first. Defaults to `null`, which
+ *   preserves the existing static behavior.
  */
 @Serializable
 public data class AgentCompletionAlgoliaParams(
@@ -19,4 +28,17 @@ public data class AgentCompletionAlgoliaParams(
   val mcpServers: Map<kotlin.String, Map<kotlin.String, Map<kotlin.String, String>>>? = null,
   @SerialName(value = "searchParameters")
   val searchParameters: Map<kotlin.String, SearchParametersOverrides>? = null,
+
+  /**
+   * Per-request override for the Algolia Search tool's indices, honored only when the tool is
+   * configured with `mode=\"dynamic\"`. A list of index names; the API looks up each name in the
+   * agent's static `tool.indices` and reuses that entry, including its description and
+   * access-control fields. A name the agent configuration does not list is rejected with HTTP 422
+   * (`index_not_listed_on_tool`) unless the tool sets `allowUnlistedIndices`, in which case the API
+   * synthesizes a minimal entry carrying the index name only. Capped at 10 entries. Sending this
+   * field against an agent whose tool is in `mode=\"static\"` (the default) is rejected with HTTP
+   * 422 — change the tool's `mode` in the agent configuration first. Defaults to `null`, which
+   * preserves the existing static behavior.
+   */
+  @SerialName(value = "indices") val indices: List<String>? = null,
 ) {}

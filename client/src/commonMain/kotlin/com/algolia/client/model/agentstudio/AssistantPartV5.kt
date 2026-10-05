@@ -17,6 +17,8 @@ import kotlinx.serialization.json.*
  * AssistantPartV5
  *
  * Implementations:
+ * - [DataGuardrailViolationPartV5]
+ * - [DataPartV5]
  * - [ReasoningPartV5]
  * - [StepStartPartV5]
  * - [TextPartV5]
@@ -24,6 +26,12 @@ import kotlinx.serialization.json.*
  */
 @Serializable(AssistantPartV5Serializer::class)
 public sealed interface AssistantPartV5 {
+  @Serializable
+  @JvmInline
+  public value class DataGuardrailViolationPartV5Value(
+    public val value: DataGuardrailViolationPartV5
+  ) : AssistantPartV5
+
   @Serializable
   @JvmInline
   public value class ToolPartV5Value(public val value: ToolPartV5) : AssistantPartV5
@@ -40,7 +48,14 @@ public sealed interface AssistantPartV5 {
   @JvmInline
   public value class ReasoningPartV5Value(public val value: ReasoningPartV5) : AssistantPartV5
 
+  @Serializable
+  @JvmInline
+  public value class DataPartV5Value(public val value: DataPartV5) : AssistantPartV5
+
   public companion object {
+
+    public fun of(value: DataGuardrailViolationPartV5): AssistantPartV5 =
+      DataGuardrailViolationPartV5Value(value)
 
     public fun of(value: ToolPartV5): AssistantPartV5 = ToolPartV5Value(value)
 
@@ -49,6 +64,8 @@ public sealed interface AssistantPartV5 {
     public fun of(value: TextPartV5): AssistantPartV5 = TextPartV5Value(value)
 
     public fun of(value: ReasoningPartV5): AssistantPartV5 = ReasoningPartV5Value(value)
+
+    public fun of(value: DataPartV5): AssistantPartV5 = DataPartV5Value(value)
   }
 }
 
@@ -56,11 +73,13 @@ internal class AssistantPartV5Serializer :
   JsonContentPolymorphicSerializer<AssistantPartV5>(AssistantPartV5::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<AssistantPartV5> {
     return when {
-      element is JsonObject && element.containsKey("toolCallId") && element.containsKey("type") ->
-        ToolPartV5.serializer()
+      element is JsonObject && element.containsKey("data") ->
+        DataGuardrailViolationPartV5.serializer()
+      element is JsonObject && element.containsKey("toolCallId") -> ToolPartV5.serializer()
       element is JsonObject -> StepStartPartV5.serializer()
       element is JsonObject -> TextPartV5.serializer()
       element is JsonObject -> ReasoningPartV5.serializer()
+      element is JsonObject -> DataPartV5.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

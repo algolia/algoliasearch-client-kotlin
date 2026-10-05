@@ -25,6 +25,8 @@ import kotlinx.serialization.json.*
  * @param totalTokens
  * @param conversationMetadata
  * @param feedback
+ * @param impactAnalytics
+ * @param analyticsDegraded
  */
 @Serializable
 public data class ConversationFullResponse(
@@ -44,4 +46,6 @@ public data class ConversationFullResponse(
   @SerialName(value = "conversationMetadata")
   val conversationMetadata: ConversationMetadata? = null,
   @SerialName(value = "feedback") val feedback: List<FeedbackResponse>? = null,
+  @SerialName(value = "impactAnalytics") val impactAnalytics: ImpactAnalytics? = null,
+  @SerialName(value = "analyticsDegraded") val analyticsDegraded: Boolean? = null,
 ) {}

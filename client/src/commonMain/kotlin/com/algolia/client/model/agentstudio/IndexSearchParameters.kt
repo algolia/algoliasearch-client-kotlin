@@ -16,6 +16,7 @@ import kotlinx.serialization.json.*
  * @param page
  * @param attributesToRetrieve
  * @param responseFields
+ * @param distinct
  * @param facets
  * @param custom
  */
@@ -26,6 +27,7 @@ public data class IndexSearchParameters(
   @SerialName(value = "page") val page: NumberParam? = null,
   @SerialName(value = "attributesToRetrieve") val attributesToRetrieve: StringArrayParam? = null,
   @SerialName(value = "responseFields") val responseFields: StringArrayParam? = null,
+  @SerialName(value = "distinct") val distinct: BooleanParam? = null,
   @SerialName(value = "facets") val facets: FacetsParam? = null,
   @SerialName(value = "custom") val custom: JsonObject? = null,
 ) {}

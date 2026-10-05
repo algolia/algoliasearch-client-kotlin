@@ -39,6 +39,6 @@ public data class AgentWithVersionResponse(
   @SerialName(value = "lastUsedAt") val lastUsedAt: String? = null,
   @SerialName(value = "model") val model: String? = null,
   @SerialName(value = "systemPrompt") val systemPrompt: String? = null,
-  @SerialName(value = "tools") val tools: List<ToolConfigInput>? = null,
+  @SerialName(value = "tools") val tools: List<ToolConfigOutput>? = null,
   @SerialName(value = "templateType") val templateType: String? = null,
 ) {}

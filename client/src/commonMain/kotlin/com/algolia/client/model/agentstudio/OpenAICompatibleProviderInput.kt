@@ -8,9 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * OpenAI-compatible provider input. Contrary to the OpenAIProviderInput, the base_url is required.
- * A model is required to verify connectivity and get saved as the default model. This can later be
- * changed at the Agent level.
+ * Input for a provider with an OpenAI-compatible API.
  *
  * @param apiKey
  * @param baseUrl
@@ -27,4 +25,4 @@ public data class OpenAICompatibleProviderInput(
    * at agent level.
    */
   @SerialName(value = "defaultModel") val defaultModel: String,
-) : ProviderInputNullable, ProviderInput {}
+) : InputUnion, ProviderInputNullable, ProviderInput {}

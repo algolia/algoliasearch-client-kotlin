@@ -22,7 +22,7 @@ import kotlinx.serialization.json.*
 public data class AgentTestConfiguration(
   @SerialName(value = "instructions") val instructions: String,
   @SerialName(value = "config") val config: JsonObject,
-  @SerialName(value = "tools") val tools: List<ToolConfigInput>,
+  @SerialName(value = "tools") val tools: List<ItemsUnion>,
   @SerialName(value = "id") val id: String? = null,
   @SerialName(value = "providerId") val providerId: String? = null,
   @SerialName(value = "model") val model: String? = null,

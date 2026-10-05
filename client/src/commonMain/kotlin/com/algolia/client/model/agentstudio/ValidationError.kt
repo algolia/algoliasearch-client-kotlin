@@ -13,14 +13,10 @@ import kotlinx.serialization.json.*
  * @param loc
  * @param msg
  * @param type
- * @param input
- * @param ctx
  */
 @Serializable
 public data class ValidationError(
   @SerialName(value = "loc") val loc: List<LocationItemUnion>,
   @SerialName(value = "msg") val msg: String,
   @SerialName(value = "type") val type: String,
-  @SerialName(value = "input") val input: JsonElement? = null,
-  @SerialName(value = "ctx") val ctx: JsonObject? = null,
 ) {}

@@ -27,4 +27,4 @@ public data class AgentCompletionRequest(
 
   /** Approval decisions for pending tool calls keyed by toolCallId. */
   @SerialName(value = "toolApprovals") val toolApprovals: JsonObject? = null,
-) {}
+) : AgentCompletionRequestUnion {}

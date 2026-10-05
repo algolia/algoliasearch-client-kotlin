@@ -8,7 +8,7 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Model for tool invocation in a Message.
+ * A tool invocation in a message.
  *
  * @param toolCallId
  * @param toolName

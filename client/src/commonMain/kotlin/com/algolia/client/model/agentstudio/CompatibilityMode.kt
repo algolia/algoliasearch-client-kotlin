@@ -14,7 +14,8 @@ import kotlinx.serialization.encoding.*
 public enum class CompatibilityMode(public val value: kotlin.String) {
 
   @SerialName(value = "ai-sdk-4") AiSdk4("ai-sdk-4"),
-  @SerialName(value = "ai-sdk-5") AiSdk5("ai-sdk-5");
+  @SerialName(value = "ai-sdk-5") AiSdk5("ai-sdk-5"),
+  @SerialName(value = "ag-ui") AgUi("ag-ui");
 
   override fun toString(): kotlin.String = value
 }

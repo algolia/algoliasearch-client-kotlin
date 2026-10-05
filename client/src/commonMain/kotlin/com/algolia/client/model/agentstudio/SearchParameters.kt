@@ -9,9 +9,8 @@ import kotlinx.serialization.json.*
 
 /**
  * Algolia Search API parameters that can be predefined for the search tool. Reference:
- * https://www.algolia.com/doc/api-reference/search-api-parameters/ The parameters that seemed
- * irrelevant for the search tool have been commented out. Uses types from
- * algoliasearch.search.models for better type safety.
+ * https://www.algolia.com/doc/api-reference/search-api-parameters/ The search tool supports the
+ * relevant subset of search parameters in the context of agentic interactions.
  *
  * @param queryType
  * @param similarQuery

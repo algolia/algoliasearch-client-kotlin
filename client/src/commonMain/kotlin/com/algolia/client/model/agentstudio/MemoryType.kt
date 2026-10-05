@@ -9,10 +9,7 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
-/**
- * Memory types implemented so far. Follows LangMem's ontology:
- * https://langchain-ai.github.io/langmem/concepts/conceptual_guide/#memory-types.
- */
+/** The type of the stored memory. */
 @Serializable
 public enum class MemoryType(public val value: kotlin.String) {
 

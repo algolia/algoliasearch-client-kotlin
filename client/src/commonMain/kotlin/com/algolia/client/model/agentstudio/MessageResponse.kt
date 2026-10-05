@@ -19,7 +19,13 @@ import kotlinx.serialization.json.*
  * @param model
  * @param inputTokens
  * @param outputTokens
+ * @param reasoningTokens
+ * @param inputTokenDetails
+ * @param outputTokenDetails
+ * @param isCacheHit
  * @param turnContext
+ * @param events
+ * @param guardrail
  */
 @Serializable
 public data class MessageResponse(
@@ -32,5 +38,11 @@ public data class MessageResponse(
   @SerialName(value = "model") val model: String? = null,
   @SerialName(value = "inputTokens") val inputTokens: Int? = null,
   @SerialName(value = "outputTokens") val outputTokens: Int? = null,
-  @SerialName(value = "turnContext") val turnContext: Map<kotlin.String, String>? = null,
+  @SerialName(value = "reasoningTokens") val reasoningTokens: Int? = null,
+  @SerialName(value = "inputTokenDetails") val inputTokenDetails: Map<kotlin.String, Int>? = null,
+  @SerialName(value = "outputTokenDetails") val outputTokenDetails: Map<kotlin.String, Int>? = null,
+  @SerialName(value = "isCacheHit") val isCacheHit: Boolean? = null,
+  @SerialName(value = "turnContext") val turnContext: JsonObject? = null,
+  @SerialName(value = "events") val events: List<MessageEvent>? = null,
+  @SerialName(value = "guardrail") val guardrail: GuardrailOutcome? = null,
 ) {}

@@ -17,6 +17,7 @@ public enum class ProviderName(public val value: kotlin.String) {
   @SerialName(value = "google_genai") GoogleGenai("google_genai"),
   @SerialName(value = "deepseek") Deepseek("deepseek"),
   @SerialName(value = "openai_compatible") OpenaiCompatible("openai_compatible"),
+  @SerialName(value = "xai") Xai("xai"),
   @SerialName(value = "anthropic") Anthropic("anthropic");
 
   override fun toString(): kotlin.String = value

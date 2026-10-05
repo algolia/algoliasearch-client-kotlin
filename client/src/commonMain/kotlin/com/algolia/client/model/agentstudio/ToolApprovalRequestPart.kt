@@ -18,6 +18,7 @@ import kotlinx.serialization.json.*
  * @param providerOptions
  * @param argsHash
  * @param appId
+ * @param conversationId
  */
 @Serializable
 public data class ToolApprovalRequestPart(
@@ -29,4 +30,5 @@ public data class ToolApprovalRequestPart(
   @SerialName(value = "providerOptions") val providerOptions: JsonObject? = null,
   @SerialName(value = "argsHash") val argsHash: String? = null,
   @SerialName(value = "appId") val appId: String? = null,
+  @SerialName(value = "conversationId") val conversationId: String? = null,
 ) : MessagePart {}

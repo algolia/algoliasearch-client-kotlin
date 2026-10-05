@@ -14,4 +14,4 @@ import kotlinx.serialization.json.*
  */
 @Serializable
 public data class BaseProviderInput(@SerialName(value = "apiKey") val apiKey: String) :
-  ProviderInputNullable, ProviderInput {}
+  InputUnion, ProviderInputNullable, ProviderInput {}

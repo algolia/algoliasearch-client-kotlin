@@ -8,22 +8,18 @@ import kotlinx.serialization.*
 import kotlinx.serialization.json.*
 
 /**
- * Universal storage model for all memory types (semantic, episodic). This is the ONLY model that
- * touches storage (Algolia). Domain models (SemanticMemory, EpisodicMemory) are used for LLM
- * extraction and converted to MemoryRecord before saving. See
- * https://langchain-ai.github.io/langmem/concepts/conceptual_guide/#memory-types for memory type
- * definitions.
+ * A stored memory record.
  *
  * @param text Self-contained, first-person memory for long-term recall.
  * @param rawExtract Verbatim conversation extract, not paraphrased.
  * @param memoryType
  * @param episode
- * @param keywords 5-20 free-form keywords: entities, context, search terms (any words).
- * @param topics 2-4 topics ONLY from this list:
+ * @param keywords Keywords for retrieval: entities, context, search terms.
+ * @param topics Topics that classify the memory. Each must be one of:
  *   [complaints, entertainment, family, feedback, finance, food, goals, health, history, hobbies, learning, praise, preferences, schedule, shopping, technical, travel, work].
  * @param tags Arbitrary labels/themes for flexible categorization (e.g., 'Q1-goals', 'paris-trip',
  *   'vip-customer').
- * @param recallTriggers 3-5 natural phrases that should trigger this memory.
+ * @param recallTriggers Phrases that cause the API to recall this memory.
  * @param objectID ObjectID of existing memory to update. Leave empty for new memory.
  * @param appId Application ID.
  * @param agentIDs Agent IDs with access: ['agent1'], ['*'] for all, ['*', '-agent1'] to exclude.
@@ -42,11 +38,11 @@ public data class MemoryRecord(
   @SerialName(value = "memoryType") val memoryType: MemoryType? = null,
   @SerialName(value = "episode") val episode: Episode? = null,
 
-  /** 5-20 free-form keywords: entities, context, search terms (any words). */
+  /** Keywords for retrieval: entities, context, search terms. */
   @SerialName(value = "keywords") val keywords: List<String>? = null,
 
   /**
-   * 2-4 topics ONLY from this list:
+   * Topics that classify the memory. Each must be one of:
    * [complaints, entertainment, family, feedback, finance, food, goals, health, history, hobbies, learning, praise, preferences, schedule, shopping, technical, travel, work].
    */
   @SerialName(value = "topics") val topics: List<String>? = null,
@@ -57,7 +53,7 @@ public data class MemoryRecord(
    */
   @SerialName(value = "_tags") val tags: List<String>? = null,
 
-  /** 3-5 natural phrases that should trigger this memory. */
+  /** Phrases that cause the API to recall this memory. */
   @SerialName(value = "recallTriggers") val recallTriggers: List<String>? = null,
 
   /** ObjectID of existing memory to update. Leave empty for new memory. */

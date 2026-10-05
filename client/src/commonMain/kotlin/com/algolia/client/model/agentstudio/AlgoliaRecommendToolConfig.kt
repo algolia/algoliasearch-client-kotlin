@@ -17,11 +17,11 @@ import kotlinx.serialization.json.*
  * @param predefinedRecommendParameters
  */
 @Serializable
-public data class AlgoliaRecommendToolConfigInput(
+public data class AlgoliaRecommendToolConfig(
   @SerialName(value = "name") val name: String,
   @SerialName(value = "type") val type: String,
   @SerialName(value = "allowedConfigs")
   val allowedConfigs: List<AlgoliaRecommendToolIndexConfig>? = null,
   @SerialName(value = "predefinedRecommendParameters")
   val predefinedRecommendParameters: JsonObject? = null,
-) : ToolConfigInput {}
+) : ToolConfigOutput, ItemsUnion, ToolConfigInput {}

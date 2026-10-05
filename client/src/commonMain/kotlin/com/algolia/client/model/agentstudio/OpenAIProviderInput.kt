@@ -17,4 +17,4 @@ import kotlinx.serialization.json.*
 public data class OpenAIProviderInput(
   @SerialName(value = "apiKey") val apiKey: String,
   @SerialName(value = "baseUrl") val baseUrl: String? = null,
-) : ProviderInputNullable, ProviderInput {}
+) : InputUnion, ProviderInputNullable, ProviderInput {}

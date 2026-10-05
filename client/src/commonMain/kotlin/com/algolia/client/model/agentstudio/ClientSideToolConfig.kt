@@ -21,4 +21,4 @@ public data class ClientSideToolConfig(
   @SerialName(value = "type") val type: String,
   @SerialName(value = "description") val description: String,
   @SerialName(value = "inputSchema") val inputSchema: ClientToolsArgsSchema,
-) : ToolConfigInput {}
+) : ToolConfigOutput, ItemsUnion, ToolConfigInput {}

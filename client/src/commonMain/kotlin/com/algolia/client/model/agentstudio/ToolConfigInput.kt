@@ -17,8 +17,7 @@ import kotlinx.serialization.json.*
  * ToolConfigInput
  *
  * Implementations:
- * - [AlgoliaDisplayResultsToolConfig]
- * - [AlgoliaRecommendToolConfigInput]
+ * - [AlgoliaRecommendToolConfig]
  * - [AlgoliaSearchToolConfig]
  * - [ClientSideToolConfig]
  * - [McpServerToolConfig]
@@ -43,15 +42,8 @@ public sealed interface ToolConfigInput {
 
   @Serializable
   @JvmInline
-  public value class AlgoliaRecommendToolConfigInputValue(
-    public val value: AlgoliaRecommendToolConfigInput
-  ) : ToolConfigInput
-
-  @Serializable
-  @JvmInline
-  public value class AlgoliaDisplayResultsToolConfigValue(
-    public val value: AlgoliaDisplayResultsToolConfig
-  ) : ToolConfigInput
+  public value class AlgoliaRecommendToolConfigValue(public val value: AlgoliaRecommendToolConfig) :
+    ToolConfigInput
 
   @Serializable
   @JvmInline
@@ -66,11 +58,8 @@ public sealed interface ToolConfigInput {
     public fun of(value: AlgoliaSearchToolConfig): ToolConfigInput =
       AlgoliaSearchToolConfigValue(value)
 
-    public fun of(value: AlgoliaRecommendToolConfigInput): ToolConfigInput =
-      AlgoliaRecommendToolConfigInputValue(value)
-
-    public fun of(value: AlgoliaDisplayResultsToolConfig): ToolConfigInput =
-      AlgoliaDisplayResultsToolConfigValue(value)
+    public fun of(value: AlgoliaRecommendToolConfig): ToolConfigInput =
+      AlgoliaRecommendToolConfigValue(value)
 
     public fun of(value: UnknownToolConfig): ToolConfigInput = UnknownToolConfigValue(value)
   }
@@ -80,8 +69,7 @@ internal class ToolConfigInputSerializer :
   JsonContentPolymorphicSerializer<ToolConfigInput>(ToolConfigInput::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ToolConfigInput> {
     when (element.jsonObject["type"]?.jsonPrimitive?.contentOrNull) {
-      "algolia_display_results" -> return AlgoliaDisplayResultsToolConfig.serializer()
-      "algolia_recommend" -> return AlgoliaRecommendToolConfigInput.serializer()
+      "algolia_recommend" -> return AlgoliaRecommendToolConfig.serializer()
       "algolia_search_index" -> return AlgoliaSearchToolConfig.serializer()
       "client_side" -> return ClientSideToolConfig.serializer()
       "mcp_tools" -> return McpServerToolConfig.serializer()
@@ -95,8 +83,7 @@ internal class ToolConfigInputSerializer :
         McpServerToolConfig.serializer()
       element is JsonObject && element.containsKey("indices") ->
         AlgoliaSearchToolConfig.serializer()
-      element is JsonObject -> AlgoliaRecommendToolConfigInput.serializer()
-      element is JsonObject -> AlgoliaDisplayResultsToolConfig.serializer()
+      element is JsonObject -> AlgoliaRecommendToolConfig.serializer()
       element is JsonObject -> UnknownToolConfig.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
