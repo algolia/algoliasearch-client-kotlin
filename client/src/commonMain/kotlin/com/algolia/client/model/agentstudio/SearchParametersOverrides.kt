@@ -20,6 +20,12 @@ import kotlinx.serialization.json.*
  * @param enablePersonalization
  * @param personalizationImpact
  * @param optionalFilters
+ * @param aroundLatLng
+ * @param aroundRadius
+ * @param aroundPrecision
+ * @param minimumAroundRadius
+ * @param insideBoundingBox
+ * @param insidePolygon
  */
 @Serializable
 public data class SearchParametersOverrides(
@@ -32,4 +38,10 @@ public data class SearchParametersOverrides(
   @SerialName(value = "enablePersonalization") val enablePersonalization: Boolean? = null,
   @SerialName(value = "personalizationImpact") val personalizationImpact: Int? = null,
   @SerialName(value = "optionalFilters") val optionalFilters: OptionalFiltersUnion? = null,
+  @SerialName(value = "aroundLatLng") val aroundLatLng: String? = null,
+  @SerialName(value = "aroundRadius") val aroundRadius: AroundRadiusUnion? = null,
+  @SerialName(value = "aroundPrecision") val aroundPrecision: AroundPrecisionUnion? = null,
+  @SerialName(value = "minimumAroundRadius") val minimumAroundRadius: Int? = null,
+  @SerialName(value = "insideBoundingBox") val insideBoundingBox: InsideBoundingBoxUnion? = null,
+  @SerialName(value = "insidePolygon") val insidePolygon: InsidePolygonUnion? = null,
 ) {}
