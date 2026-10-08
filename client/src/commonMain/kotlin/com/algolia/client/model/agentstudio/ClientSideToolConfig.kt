@@ -14,6 +14,10 @@ import kotlinx.serialization.json.*
  * @param type
  * @param description
  * @param inputSchema
+ * @param isTerminal Server-side declaration that this tool is display/render-only: a resolved
+ *   result ends the turn and the model is not re-invoked on it (CR-11753). The client's terminal
+ *   claim on a tool result is honored only when this agrees; leave false for data tools whose
+ *   result the model must reason about.
  */
 @Serializable
 public data class ClientSideToolConfig(
@@ -21,4 +25,12 @@ public data class ClientSideToolConfig(
   @SerialName(value = "type") val type: String,
   @SerialName(value = "description") val description: String,
   @SerialName(value = "inputSchema") val inputSchema: ClientToolsArgsSchema,
+
+  /**
+   * Server-side declaration that this tool is display/render-only: a resolved result ends the turn
+   * and the model is not re-invoked on it (CR-11753). The client's terminal claim on a tool result
+   * is honored only when this agrees; leave false for data tools whose result the model must reason
+   * about.
+   */
+  @SerialName(value = "isTerminal") val isTerminal: Boolean? = null,
 ) : ToolConfigOutput, ItemsUnion, ToolConfigInput {}

@@ -20,6 +20,7 @@ import kotlinx.serialization.json.*
  * @param enablePersonalization
  * @param personalizationImpact
  * @param optionalFilters
+ * @param facetFilters
  * @param aroundLatLng
  * @param aroundRadius
  * @param aroundPrecision
@@ -38,6 +39,8 @@ public data class SearchParametersOverrides(
   @SerialName(value = "enablePersonalization") val enablePersonalization: Boolean? = null,
   @SerialName(value = "personalizationImpact") val personalizationImpact: Int? = null,
   @SerialName(value = "optionalFilters") val optionalFilters: OptionalFiltersUnion? = null,
+  @SerialName(value = "facetFilters")
+  val facetFilters: FacetFiltersUnionSearchParametersOverrides? = null,
   @SerialName(value = "aroundLatLng") val aroundLatLng: String? = null,
   @SerialName(value = "aroundRadius") val aroundRadius: AroundRadiusUnion? = null,
   @SerialName(value = "aroundPrecision") val aroundPrecision: AroundPrecisionUnion? = null,

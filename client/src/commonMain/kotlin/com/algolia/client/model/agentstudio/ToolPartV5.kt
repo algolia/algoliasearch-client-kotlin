@@ -18,6 +18,7 @@ import kotlinx.serialization.json.*
  * @param output
  * @param outputMetadata
  * @param errorText
+ * @param terminal
  * @param providerOptions
  * @param requiresApproval
  * @param description
@@ -33,6 +34,7 @@ public data class ToolPartV5(
   @SerialName(value = "output") val output: JsonObject? = null,
   @SerialName(value = "outputMetadata") val outputMetadata: JsonObject? = null,
   @SerialName(value = "errorText") val errorText: String? = null,
+  @SerialName(value = "terminal") val terminal: Boolean? = null,
   @SerialName(value = "providerOptions") val providerOptions: JsonObject? = null,
   @SerialName(value = "requiresApproval") val requiresApproval: Boolean? = null,
   @SerialName(value = "description") val description: String? = null,
