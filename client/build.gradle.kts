@@ -1,3 +1,5 @@
+import java.time.Duration
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.jetbrains.kotlin.konan.target.HostManager
 
 plugins {
@@ -12,7 +14,19 @@ kotlin {
   applyDefaultHierarchyTemplate()
 
   explicitApi()
-  jvm()
+  jvm {
+    val main = compilations.getByName("main")
+    val test = compilations.getByName("test")
+    compilations.create("dslLive") {
+      associateWith(main)
+      associateWith(test)
+      defaultSourceSet.dependencies {
+        implementation(libs.kotlin.test.junit)
+        implementation(libs.ktor.client.okhttp)
+        implementation(libs.dotenv.kotlin)
+      }
+    }
+  }
 
   if (HostManager.hostIsMac) {
     iosX64()
@@ -79,3 +93,28 @@ kotlin {
     }
   }
 }
+
+val dslLive = kotlin.jvm().compilations.getByName("dslLive")
+
+tasks.register<Test>("jvmDslLiveTest") {
+  group = "verification"
+  description = "Kotlin DSL live suite against the Algolia API."
+  useJUnit()
+  dependsOn(dslLive.compileTaskProvider)
+  testClassesDirs = dslLive.output.classesDirs
+  classpath =
+    dslLive.compileDependencyFiles +
+      dslLive.runtimeDependencyFiles +
+      dslLive.output.allOutputs +
+      kotlin.jvm().compilations.getByName("test").output.allOutputs
+  systemProperty("algolia.dsl.live", "true")
+  systemProperty("algolia.repoRoot", rootDir.resolve("../..").canonicalPath)
+  outputs.upToDateWhen { false }
+  timeout.set(Duration.ofMinutes(12))
+  testLogging {
+    events("failed", "skipped")
+    exceptionFormat = TestExceptionFormat.FULL
+  }
+}
+
+tasks.named("jvmTest") { dependsOn(dslLive.compileTaskProvider) }

@@ -13,6 +13,12 @@ import kotlinx.serialization.json.jsonPrimitive
 
 class TestForgeSecuredUserToken {
 
+  /**
+   * JWT parts are base64url without `=`. Default [Base64.UrlSafe] requires padding and rejects
+   * those parts. Java's `Base64.getUrlDecoder()` accepts missing padding; this matches that.
+   */
+  private val jwtBase64 = Base64.UrlSafe.withPadding(Base64.PaddingOption.PRESENT_OPTIONAL)
+
   @Test
   fun forgeSecuredUserToken() {
     val client = AgentStudioClient(appId = "appID", apiKey = "apiKey")
@@ -22,13 +28,13 @@ class TestForgeSecuredUserToken {
     val parts = token.split(".")
     assertEquals(3, parts.size)
 
-    val headerJson = Base64.UrlSafe.decode(parts[0]).decodeToString()
+    val headerJson = jwtBase64.decode(parts[0]).decodeToString()
     val header = Json.decodeFromString<JsonObject>(headerJson)
     assertEquals("HS256", header["alg"]!!.jsonPrimitive.content)
     assertEquals("JWT", header["typ"]!!.jsonPrimitive.content)
     assertEquals("my-key-id", header["kid"]!!.jsonPrimitive.content)
 
-    val payloadJson = Base64.UrlSafe.decode(parts[1]).decodeToString()
+    val payloadJson = jwtBase64.decode(parts[1]).decodeToString()
     val payload = Json.decodeFromString<JsonObject>(payloadJson)
     assertEquals("user-123", payload["sub"]!!.jsonPrimitive.content)
     val exp = payload["exp"]!!.jsonPrimitive.content.toLong()
@@ -40,7 +46,7 @@ class TestForgeSecuredUserToken {
 
     val expectedHmacHex =
       encodeKeySHA256(key = "my-secret-key", message = "${parts[0]}.${parts[1]}")
-    val actualSigBytes = Base64.UrlSafe.decode(parts[2])
+    val actualSigBytes = jwtBase64.decode(parts[2])
     val actualSigHex =
       actualSigBytes.joinToString("") {
         val i = it.toInt() and 0xFF
@@ -56,7 +62,7 @@ class TestForgeSecuredUserToken {
     val token = client.forgeSecuredUserToken("my-secret-key", "my-key-id", "user-456", 3600)
 
     val parts = token.split(".")
-    val payloadJson = Base64.UrlSafe.decode(parts[1]).decodeToString()
+    val payloadJson = jwtBase64.decode(parts[1]).decodeToString()
     val payload = Json.decodeFromString<JsonObject>(payloadJson)
     val exp = payload["exp"]!!.jsonPrimitive.content.toLong()
     val expectedExp = Clock.System.now().epochSeconds + 3600
