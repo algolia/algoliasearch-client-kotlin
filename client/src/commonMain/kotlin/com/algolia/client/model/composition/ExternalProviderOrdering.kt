@@ -10,14 +10,14 @@ import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
 /**
- * Ordering to apply on the items retrieved from the external provider. 'default' uses the relevance
- * ranking from the Algolia retrieval step. 'providerDefined' uses the ordering returned by the
- * external provider.
+ * Ordering to apply on the items retrieved from the external provider. 'algoliaDefined' uses the
+ * relevance ranking from the Algolia retrieval step. 'providerDefined' uses the ordering returned
+ * by the external provider.
  */
 @Serializable
 public enum class ExternalProviderOrdering(public val value: kotlin.String) {
 
-  @SerialName(value = "default") Default("default"),
+  @SerialName(value = "algoliaDefined") AlgoliaDefined("algoliaDefined"),
   @SerialName(value = "providerDefined") ProviderDefined("providerDefined");
 
   override fun toString(): kotlin.String = value
