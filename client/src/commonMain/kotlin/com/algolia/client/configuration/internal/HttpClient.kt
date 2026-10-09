@@ -33,6 +33,9 @@ internal fun HttpClientConfig<*>.configure(
   // Content negotiation and serialization
   install(ContentNegotiation) { json(options.json) }
 
+  // Response decompression
+  platformResponseDecompression()
+
   // Logging
   if (options.logLevel != LogLevel.NONE) {
     install(Logging) {

@@ -9,3 +9,8 @@ internal expect fun platformAgentSegment(): AgentSegment
 
 /** Platform specific http client configuration */
 internal expect fun HttpClientConfig<*>.platformConfig(options: ClientOptions)
+
+/**
+ * Platform specific response decompression, installed before logging so logs show decoded bodies.
+ */
+internal expect fun HttpClientConfig<*>.platformResponseDecompression()

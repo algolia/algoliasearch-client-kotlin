@@ -14,3 +14,7 @@ internal actual fun platformAgentSegment(): AgentSegment {
 internal actual fun HttpClientConfig<*>.platformConfig(options: ClientOptions) {
   // NO-OP
 }
+
+internal actual fun HttpClientConfig<*>.platformResponseDecompression() {
+  // NO-OP: the Darwin engine (NSURLSession) already advertises and decodes gzip.
+}
