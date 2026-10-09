@@ -43,7 +43,7 @@ import kotlinx.serialization.json.*
  * @param tagFilters
  * @param sumOrFiltersScores Whether to sum all filter scores. If true, all filter scores are
  *   summed. Otherwise, the maximum filter score is kept. For more information, see
- *   [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores).
+ *   [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulate-scores-with-sumorfiltersscores).
  * @param restrictSearchableAttributes Restricts a search to a subset of your searchable attributes.
  *   Attribute names are case-sensitive.
  * @param facets Facets for which to retrieve facet values that match the search criteria and the
@@ -79,7 +79,7 @@ import kotlinx.serialization.json.*
  *   `ignorePlurals` to the list of provided languages. - Sets `removeWordsIfNoResults` to
  *   `allOptional`. - Adds a `natural_language` attribute to `ruleContexts` and `analyticsTags`.
  * @param ruleContexts Assigns a rule context to the search query.
- *   [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context)
+ *   [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#assign-context)
  *   are strings that you can use to trigger matching rules.
  * @param personalizationImpact Impact that Personalization should have on this search. The higher
  *   this value is, the more Personalization determines the ranking compared to other factors. For
@@ -118,7 +118,7 @@ import kotlinx.serialization.json.*
  *   [A/B testing](https://www.algolia.com/doc/guides/ab-testing/what-is-ab-testing).
  * @param relevancyStrictness Relevancy threshold below which less relevant results aren't included
  *   in the results. You can only set `relevancyStrictness` on
- *   [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
+ *   [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#standard-and-virtual-replicas).
  *   Use this setting to strike a balance between the relevance and number of returned results.
  * @param attributesToHighlight Attributes to highlight. By default, all searchable attributes are
  *   highlighted. Use `*` to highlight all attributes or use an empty array `[]` to turn off
@@ -143,10 +143,10 @@ import kotlinx.serialization.json.*
  * @param hitsPerPage Number of hits per page.
  * @param minWordSizefor1Typo Minimum number of characters a word in the search query must contain
  *   to accept matches with
- *   [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+ *   [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
  * @param minWordSizefor2Typos Minimum number of characters a word in the search query must contain
  *   to accept matches with
- *   [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+ *   [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
  * @param typoTolerance
  * @param allowTyposOnNumericTokens Whether to allow typos on numbers in the search query. Turn off
  *   this setting to reduce the number of irrelevant matches when searching in large sets of similar
@@ -175,7 +175,7 @@ import kotlinx.serialization.json.*
  *   [Language-specific configuration](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations).
  * @param decompoundQuery Whether to split compound words in the query into their building blocks.
  *   For more information, see
- *   [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words).
+ *   [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#split-compound-words).
  *   Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and
  *   Norwegian. Decompounding doesn't work for words with
  *   [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark).
@@ -308,7 +308,7 @@ public data class SearchForFacets(
   /**
    * Whether to sum all filter scores. If true, all filter scores are summed. Otherwise, the maximum
    * filter score is kept. For more information, see
-   * [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulating-scores-with-sumorfiltersscores).
+   * [filter scores](https://www.algolia.com/doc/guides/managing-results/refine-results/filtering/in-depth/filter-scoring/#accumulate-scores-with-sumorfiltersscores).
    */
   @SerialName(value = "sumOrFiltersScores") val sumOrFiltersScores: Boolean? = null,
 
@@ -382,7 +382,7 @@ public data class SearchForFacets(
 
   /**
    * Assigns a rule context to the search query.
-   * [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#whats-a-context)
+   * [Rule contexts](https://www.algolia.com/doc/guides/managing-results/rules/rules-overview/how-to/customize-search-results-by-platform/#assign-context)
    * are strings that you can use to trigger matching rules.
    */
   @SerialName(value = "ruleContexts") val ruleContexts: List<String>? = null,
@@ -457,7 +457,7 @@ public data class SearchForFacets(
   /**
    * Relevancy threshold below which less relevant results aren't included in the results. You can
    * only set `relevancyStrictness` on
-   * [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#what-are-virtual-replicas).
+   * [virtual replica indices](https://www.algolia.com/doc/guides/managing-results/refine-results/sorting/in-depth/replicas/#standard-and-virtual-replicas).
    * Use this setting to strike a balance between the relevance and number of returned results.
    */
   @SerialName(value = "relevancyStrictness") val relevancyStrictness: Int? = null,
@@ -502,13 +502,13 @@ public data class SearchForFacets(
 
   /**
    * Minimum number of characters a word in the search query must contain to accept matches with
-   * [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+   * [one typo](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
    */
   @SerialName(value = "minWordSizefor1Typo") val minWordSizefor1Typo: Int? = null,
 
   /**
    * Minimum number of characters a word in the search query must contain to accept matches with
-   * [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configuring-word-length-for-typos).
+   * [two typos](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/typo-tolerance/in-depth/configuring-typo-tolerance/#configure-word-size-threshold-for-typos).
    */
   @SerialName(value = "minWordSizefor2Typos") val minWordSizefor2Typos: Int? = null,
   @SerialName(value = "typoTolerance") val typoTolerance: TypoTolerance? = null,
@@ -553,7 +553,7 @@ public data class SearchForFacets(
   /**
    * Whether to split compound words in the query into their building blocks. For more information,
    * see
-   * [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#splitting-compound-words).
+   * [Word segmentation](https://www.algolia.com/doc/guides/managing-results/optimize-search-results/handling-natural-languages-nlp/in-depth/language-specific-configurations/#split-compound-words).
    * Word segmentation is supported for these languages: German, Dutch, Finnish, Swedish, and
    * Norwegian. Decompounding doesn't work for words with
    * [non-spacing mark Unicode characters](https://www.charactercodes.net/category/non-spacing_mark).

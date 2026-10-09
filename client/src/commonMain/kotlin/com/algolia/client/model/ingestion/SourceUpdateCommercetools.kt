@@ -19,6 +19,8 @@ import kotlinx.serialization.json.*
  *   information, see [Query Predicate](https://docs.commercetools.com/api/predicates/query).
  * @param useImagesObjects When set to true, the connector indexes objects with all images
  *   attributes instead of only the URLs.
+ * @param categoriesCustomFieldsFullPath When set to true, the connector uses the complete category
+ *   path (e.g. \"Root > Level 1 > Category name\") in `categoriesCustomFields`.
  * @param customFields
  */
 @Serializable
@@ -46,5 +48,12 @@ public data class SourceUpdateCommercetools(
    * URLs.
    */
   @SerialName(value = "useImagesObjects") val useImagesObjects: Boolean? = null,
+
+  /**
+   * When set to true, the connector uses the complete category path (e.g. \"Root > Level 1 >
+   * Category name\") in `categoriesCustomFields`.
+   */
+  @SerialName(value = "categoriesCustomFieldsFullPath")
+  val categoriesCustomFieldsFullPath: Boolean? = null,
   @SerialName(value = "customFields") val customFields: CommercetoolsCustomFields? = null,
 ) : SourceUpdateInput {}

@@ -34,7 +34,7 @@ import kotlinx.serialization.json.*
  *   ending with \".algolia.com\". - `*algolia.com*` allows all referrers in the domain
  *   \"algolia.com\". Like all HTTP headers, referrers can be spoofed. Don't rely on them to secure
  *   your data. For more information, see
- *   [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrers-restrictions).
+ *   [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrer-restrictions).
  * @param validity Duration (in seconds) after which the API key expires. By default, API keys don't
  *   expire.
  */
@@ -87,7 +87,7 @@ public data class ApiKey(
    * \".algolia.com\". - `*algolia.com*` allows all referrers in the domain \"algolia.com\". Like
    * all HTTP headers, referrers can be spoofed. Don't rely on them to secure your data. For more
    * information, see
-   * [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrers-restrictions).
+   * [HTTP referrer restrictions](https://www.algolia.com/doc/guides/security/security-best-practices/#http-referrer-restrictions).
    */
   @SerialName(value = "referers") val referers: List<String>? = null,
 
