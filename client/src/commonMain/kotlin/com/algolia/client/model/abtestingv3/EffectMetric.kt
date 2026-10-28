@@ -9,7 +9,12 @@ import kotlinx.serialization.builtins.*
 import kotlinx.serialization.descriptors.*
 import kotlinx.serialization.encoding.*
 
-/** Metric for which you want to detect the smallest relative difference. */
+/**
+ * Metric for which you want to detect the smallest relative difference. Metrics ending in
+ * `UsersRate` are user-level rates: the share of tracked users with at least one search with a
+ * click, conversion, add-to-cart, or purchase. For these metrics, sample sizes count users instead
+ * of searches.
+ */
 @Serializable
 public enum class EffectMetric(public val value: kotlin.String) {
 
@@ -17,7 +22,11 @@ public enum class EffectMetric(public val value: kotlin.String) {
   @SerialName(value = "clickThroughRate") ClickThroughRate("clickThroughRate"),
   @SerialName(value = "conversionRate") ConversionRate("conversionRate"),
   @SerialName(value = "purchaseRate") PurchaseRate("purchaseRate"),
-  @SerialName(value = "noResultsRate") NoResultsRate("noResultsRate");
+  @SerialName(value = "noResultsRate") NoResultsRate("noResultsRate"),
+  @SerialName(value = "addToCartUsersRate") AddToCartUsersRate("addToCartUsersRate"),
+  @SerialName(value = "clickedUsersRate") ClickedUsersRate("clickedUsersRate"),
+  @SerialName(value = "convertedUsersRate") ConvertedUsersRate("convertedUsersRate"),
+  @SerialName(value = "purchaseUsersRate") PurchaseUsersRate("purchaseUsersRate");
 
   override fun toString(): kotlin.String = value
 }
