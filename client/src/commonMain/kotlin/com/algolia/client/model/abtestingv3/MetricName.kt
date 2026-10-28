@@ -29,7 +29,31 @@ public enum class MetricName(public val value: kotlin.String) {
   @SerialName(value = "average_click_position") AverageClickPosition("average_click_position"),
   @SerialName(value = "revenue") Revenue("revenue"),
   @SerialName(value = "revenue_per_search") RevenuePerSearch("revenue_per_search"),
-  @SerialName(value = "average_order_value") AverageOrderValue("average_order_value");
+  @SerialName(value = "average_order_value") AverageOrderValue("average_order_value"),
+  @SerialName(value = "clicked_users_count") ClickedUsersCount("clicked_users_count"),
+  @SerialName(value = "converted_users_count") ConvertedUsersCount("converted_users_count"),
+  @SerialName(value = "add_to_cart_users_count") AddToCartUsersCount("add_to_cart_users_count"),
+  @SerialName(value = "purchase_users_count") PurchaseUsersCount("purchase_users_count"),
+  @SerialName(value = "users_with_no_results_count")
+  UsersWithNoResultsCount("users_with_no_results_count"),
+  @SerialName(value = "clicked_users_rate") ClickedUsersRate("clicked_users_rate"),
+  @SerialName(value = "converted_users_rate") ConvertedUsersRate("converted_users_rate"),
+  @SerialName(value = "add_to_cart_users_rate") AddToCartUsersRate("add_to_cart_users_rate"),
+  @SerialName(value = "purchase_users_rate") PurchaseUsersRate("purchase_users_rate"),
+  @SerialName(value = "avg_click_through_rate_per_user")
+  AvgClickThroughRatePerUser("avg_click_through_rate_per_user"),
+  @SerialName(value = "avg_conversion_rate_per_user")
+  AvgConversionRatePerUser("avg_conversion_rate_per_user"),
+  @SerialName(value = "avg_purchase_rate_per_user")
+  AvgPurchaseRatePerUser("avg_purchase_rate_per_user"),
+  @SerialName(value = "avg_add_to_cart_rate_per_user")
+  AvgAddToCartRatePerUser("avg_add_to_cart_rate_per_user"),
+  @SerialName(value = "avg_click_position_per_user")
+  AvgClickPositionPerUser("avg_click_position_per_user"),
+  @SerialName(value = "winsorized_revenue_per_user")
+  WinsorizedRevenuePerUser("winsorized_revenue_per_user"),
+  @SerialName(value = "winsorized_revenue_per_purchaser")
+  WinsorizedRevenuePerPurchaser("winsorized_revenue_per_purchaser");
 
   override fun toString(): kotlin.String = value
 }

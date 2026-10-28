@@ -14,7 +14,9 @@ import kotlinx.serialization.encoding.*
  * omitted and the test defaults to `bayesian`, the default primary metric is `conversion_rate`, or
  * the first metric in `metrics` that supports Bayesian analysis if `metrics` doesn't include
  * conversion rate. If the request includes a non-empty `metrics` list, this metric must be in that
- * list. Revenue per search requires access to revenue analytics.
+ * list. User-level rates (`*_users_rate`) are the share of tracked users with at least one such
+ * search. Add-to-cart rates, purchase rates, and revenue per search require access to revenue
+ * analytics.
  */
 @Serializable
 public enum class PrimaryMetric(public val value: kotlin.String) {
@@ -23,7 +25,11 @@ public enum class PrimaryMetric(public val value: kotlin.String) {
   @SerialName(value = "click_through_rate") ClickThroughRate("click_through_rate"),
   @SerialName(value = "conversion_rate") ConversionRate("conversion_rate"),
   @SerialName(value = "purchase_rate") PurchaseRate("purchase_rate"),
-  @SerialName(value = "revenue_per_search") RevenuePerSearch("revenue_per_search");
+  @SerialName(value = "revenue_per_search") RevenuePerSearch("revenue_per_search"),
+  @SerialName(value = "add_to_cart_users_rate") AddToCartUsersRate("add_to_cart_users_rate"),
+  @SerialName(value = "clicked_users_rate") ClickedUsersRate("clicked_users_rate"),
+  @SerialName(value = "converted_users_rate") ConvertedUsersRate("converted_users_rate"),
+  @SerialName(value = "purchase_users_rate") PurchaseUsersRate("purchase_users_rate");
 
   override fun toString(): kotlin.String = value
 }

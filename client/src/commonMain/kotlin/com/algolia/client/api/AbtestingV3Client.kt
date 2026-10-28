@@ -608,7 +608,8 @@ public class AbtestingV3Client(
    * @param id Unique A/B test identifier.
    * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
-   * @param metric List of metrics to retrieve. If not specified, all metrics are returned.
+   * @param metric Metrics to retrieve, as a comma-separated list. If not specified, all metrics are
+   *   returned.
    * @param methods Statistical analysis results to include, as a comma-separated list. When
    *   omitted, each test uses its configured method, or `frequentist` if no method is configured.
    *   Request both methods to include both sets of available results. This doesn't change the test
@@ -647,7 +648,8 @@ public class AbtestingV3Client(
    * @param id Unique A/B test identifier.
    * @param startDate Start date of the period to analyze, in `YYYY-MM-DD` format.
    * @param endDate End date of the period to analyze, in `YYYY-MM-DD` format.
-   * @param metric List of metrics to retrieve. If not specified, all metrics are returned.
+   * @param metric Metrics to retrieve, as a comma-separated list. If not specified, all metrics are
+   *   returned.
    * @param methods Statistical analysis results to include, as a comma-separated list. When
    *   omitted, each test uses its configured method, or `frequentist` if no method is configured.
    *   Request both methods to include both sets of available results. This doesn't change the test
