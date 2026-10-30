@@ -20,8 +20,9 @@ import kotlinx.serialization.json.*
  *   access all indices in the same application. You can use leading and trailing wildcard
  *   characters (`*`): - `dev_*` matches all indices starting with \"dev_\". - `*_dev` matches all
  *   indices ending with \"_dev\". - `*_products_*` matches all indices containing \"_products_\".
- * @param maxHitsPerQuery Maximum number of results this API key can retrieve in one query. By
- *   default, there's no limit.
+ * @param maxHitsPerQuery Maximum number of hits this API key can retrieve per page. If you set this
+ *   to 0, the maximum allowed value (1,000) applies. If you also set `hitsPerPage` on the index,
+ *   the engine uses the lower of the two values.
  * @param maxQueriesPerIPPerHour Maximum number of API requests allowed per IP address or
  *   [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken) per hour. If
  *   this limit is reached, the API returns an error with status code `429`. By default, there's no
@@ -68,7 +69,9 @@ public data class GetApiKeyResponse(
   @SerialName(value = "indexes") val indexes: List<String>? = null,
 
   /**
-   * Maximum number of results this API key can retrieve in one query. By default, there's no limit.
+   * Maximum number of hits this API key can retrieve per page. If you set this to 0, the maximum
+   * allowed value (1,000) applies. If you also set `hitsPerPage` on the index, the engine uses the
+   * lower of the two values.
    */
   @SerialName(value = "maxHitsPerQuery") val maxHitsPerQuery: Int? = null,
 
