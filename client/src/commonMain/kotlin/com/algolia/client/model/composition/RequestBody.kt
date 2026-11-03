@@ -17,6 +17,15 @@ import kotlinx.serialization.json.*
  *   value overrides the value in the defined behavior, and when unspecified, the value defined in
  *   the behavior is used. When neither value is present, all feeds are processed.
  * @param externalProvider
+ * @param feeds Per-feed parameters for `multifeed` compositions. Each key is a feed ID. Feed
+ *   `params` take precedence over the root `params`. A feed inherits every root key it doesn't set.
+ *   A feed value replaces the root value instead of combining with it. This applies to every key,
+ *   including `filters`, `facetFilters`, `optionalFilters`, and `analyticsTags`. For example,
+ *   `filters` must repeat the common values. An empty value such as `filters: \"\"` discards the
+ *   root value. The API validates feed `params` like the root `params`. An unsupported parameter
+ *   returns a 400 error. A feed ID may not exist in the composition (for example, because a rule
+ *   removed it). The response reports it in the `errors` field but request still succeeds. Rules
+ *   match once per request, against the root `params` only.
  */
 @Serializable
 public data class RequestBody(
@@ -31,4 +40,17 @@ public data class RequestBody(
    */
   @SerialName(value = "feedsOrder") val feedsOrder: List<String>? = null,
   @SerialName(value = "externalProvider") val externalProvider: ExternalProvider? = null,
+
+  /**
+   * Per-feed parameters for `multifeed` compositions. Each key is a feed ID. Feed `params` take
+   * precedence over the root `params`. A feed inherits every root key it doesn't set. A feed value
+   * replaces the root value instead of combining with it. This applies to every key, including
+   * `filters`, `facetFilters`, `optionalFilters`, and `analyticsTags`. For example, `filters` must
+   * repeat the common values. An empty value such as `filters: \"\"` discards the root value. The
+   * API validates feed `params` like the root `params`. An unsupported parameter returns a 400
+   * error. A feed ID may not exist in the composition (for example, because a rule removed it). The
+   * response reports it in the `errors` field but request still succeeds. Rules match once per
+   * request, against the root `params` only.
+   */
+  @SerialName(value = "feeds") val feeds: Map<kotlin.String, FeedRequest>? = null,
 ) {}

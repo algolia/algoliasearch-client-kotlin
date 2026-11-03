@@ -99,7 +99,11 @@ import kotlinx.serialization.json.*
  *   replica configured in \"sortingStrategy\", and the query is executed using that index instead
  *   of main's. In addition to \"sortingStrategy\", this parameter is also used to apply a matching
  *   Composition Rule that contains a condition defined to trigger on \"sortBy\", see Composition
- *   Rules. If no value is provided or an invalid value, no sorting strategy is applied.
+ *   Rules. If no value is provided or an invalid value, no sorting strategy is applied. For
+ *   `multifeed` compositions, every feed inherits the root \"sortBy\" unless the feed sets its own
+ *   \"sortBy\" in `feeds.<id>.params`. An empty string disables sorting for that feed. The response
+ *   reports an invalid value in the `errors` field. This includes a value whose index is unrelated
+ *   to the feed's indices. Composition Rules still match on the root \"sortBy\".
  * @param userToken Unique pseudonymous or anonymous user identifier. This helps with analytics and
  *   click and conversion events. For more information, see
  *   [user token](https://www.algolia.com/doc/guides/sending-events/concepts/usertoken).
@@ -266,7 +270,11 @@ public data class Params(
    * configured in \"sortingStrategy\", and the query is executed using that index instead of
    * main's. In addition to \"sortingStrategy\", this parameter is also used to apply a matching
    * Composition Rule that contains a condition defined to trigger on \"sortBy\", see Composition
-   * Rules. If no value is provided or an invalid value, no sorting strategy is applied.
+   * Rules. If no value is provided or an invalid value, no sorting strategy is applied. For
+   * `multifeed` compositions, every feed inherits the root \"sortBy\" unless the feed sets its own
+   * \"sortBy\" in `feeds.<id>.params`. An empty string disables sorting for that feed. The response
+   * reports an invalid value in the `errors` field. This includes a value whose index is unrelated
+   * to the feed's indices. Composition Rules still match on the root \"sortBy\".
    */
   @SerialName(value = "sortBy") val sortBy: String? = null,
 
