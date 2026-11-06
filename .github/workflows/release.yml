@@ -8,7 +8,7 @@ on:
 jobs:
   publish:
     name: Publish to Maven Central
-    runs-on: macos-14
+    runs-on: macos-15
     if: "startsWith(github.event.head_commit.message, 'chore: release')"
     steps:
       - name: Checkout
