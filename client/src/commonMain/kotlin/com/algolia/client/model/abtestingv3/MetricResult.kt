@@ -27,7 +27,7 @@ import kotlinx.serialization.json.*
  * @param pValue P-value for this variant compared to the control. Omitted when no p-value is
  *   available for this metric.
  * @param dimension Dimension defined during test creation. For revenue metrics, including
- *   `revenue_per_search`, this is the currency.
+ *   `revenue_per_search` and `winsorized_revenue_per_user`, this is the currency.
  * @param metadata
  * @param criticalValue The value that was computed during error correction. It is used to determine
  *   significance of the metric pValue. The critical value is calculated using Bonferroni or
@@ -76,8 +76,8 @@ public data class MetricResult(
   @SerialName(value = "pValue") val pValue: Double? = null,
 
   /**
-   * Dimension defined during test creation. For revenue metrics, including `revenue_per_search`,
-   * this is the currency.
+   * Dimension defined during test creation. For revenue metrics, including `revenue_per_search` and
+   * `winsorized_revenue_per_user`, this is the currency.
    */
   @SerialName(value = "dimension") val dimension: String? = null,
   @SerialName(value = "metadata") val metadata: MetricMetadata? = null,

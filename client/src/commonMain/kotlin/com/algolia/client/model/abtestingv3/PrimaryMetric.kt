@@ -15,8 +15,9 @@ import kotlinx.serialization.encoding.*
  * the first metric in `metrics` that supports Bayesian analysis if `metrics` doesn't include
  * conversion rate. If the request includes a non-empty `metrics` list, this metric must be in that
  * list. User-level rates (`*_users_rate`) are the share of tracked users with at least one such
- * search. Add-to-cart rates, purchase rates, and revenue per search require access to revenue
- * analytics.
+ * search. For `users_with_no_results_rate`, this is the share of tracked users with at least one
+ * search returning no results. Lower values are better. Add-to-cart rates, purchase rates, and
+ * revenue per search require access to revenue analytics.
  */
 @Serializable
 public enum class PrimaryMetric(public val value: kotlin.String) {
@@ -29,7 +30,9 @@ public enum class PrimaryMetric(public val value: kotlin.String) {
   @SerialName(value = "add_to_cart_users_rate") AddToCartUsersRate("add_to_cart_users_rate"),
   @SerialName(value = "clicked_users_rate") ClickedUsersRate("clicked_users_rate"),
   @SerialName(value = "converted_users_rate") ConvertedUsersRate("converted_users_rate"),
-  @SerialName(value = "purchase_users_rate") PurchaseUsersRate("purchase_users_rate");
+  @SerialName(value = "purchase_users_rate") PurchaseUsersRate("purchase_users_rate"),
+  @SerialName(value = "users_with_no_results_rate")
+  UsersWithNoResultsRate("users_with_no_results_rate");
 
   override fun toString(): kotlin.String = value
 }

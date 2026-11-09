@@ -40,6 +40,8 @@ public enum class MetricName(public val value: kotlin.String) {
   @SerialName(value = "converted_users_rate") ConvertedUsersRate("converted_users_rate"),
   @SerialName(value = "add_to_cart_users_rate") AddToCartUsersRate("add_to_cart_users_rate"),
   @SerialName(value = "purchase_users_rate") PurchaseUsersRate("purchase_users_rate"),
+  @SerialName(value = "users_with_no_results_rate")
+  UsersWithNoResultsRate("users_with_no_results_rate"),
   @SerialName(value = "avg_click_through_rate_per_user")
   AvgClickThroughRatePerUser("avg_click_through_rate_per_user"),
   @SerialName(value = "avg_conversion_rate_per_user")
