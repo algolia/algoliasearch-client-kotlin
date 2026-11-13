@@ -11,7 +11,8 @@ import kotlinx.serialization.encoding.*
 import kotlinx.serialization.json.*
 
 /**
- * CompositionsSearchResponse
+ * Information about the compositions processed by the run request. Only present when
+ * `getRankingInfo` is `true`.
  *
  * @param run
  */
