@@ -14,8 +14,8 @@ public enum class RecommendModels(public val value: kotlin.String) {
 
   @SerialName(value = "related-products") RelatedProducts("related-products"),
   @SerialName(value = "bought-together") BoughtTogether("bought-together"),
-  @SerialName(value = "trending-facets") TrendingFacets("trending-facets"),
-  @SerialName(value = "trending-items") TrendingItems("trending-items");
+  @SerialName(value = "trending-items") TrendingItems("trending-items"),
+  @SerialName(value = "looking-similar") LookingSimilar("looking-similar");
 
   override fun toString(): kotlin.String = value
 }

@@ -31,6 +31,7 @@ import kotlinx.serialization.json.*
  *   same value as `ruleContexts` parameter. For example, if `context: mobile`, the rule is only
  *   triggered when the search request has a matching `ruleContexts: mobile`. A rule context must
  *   only contain alphanumeric characters.
+ * @param requestScope
  */
 @Serializable
 public data class Condition(
@@ -61,4 +62,5 @@ public data class Condition(
    * alphanumeric characters.
    */
   @SerialName(value = "context") val context: String? = null,
+  @SerialName(value = "requestScope") val requestScope: RequestScope? = null,
 ) {}

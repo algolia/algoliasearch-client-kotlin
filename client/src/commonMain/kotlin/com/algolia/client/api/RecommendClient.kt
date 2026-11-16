@@ -65,7 +65,10 @@ public class RecommendClient(
    * Condition `filters` triggers if the source item matches the specified filters. - Condition
    * `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. -
    * Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to
-   * match the data source item's attributes instead).
+   * match the data source item's attributes instead). Trending Items requests have no source item,
+   * so rules for the `trending-items` model differ: - Condition `filters` and consequence
+   * `automaticFacetFilters` are unavailable. - Condition `requestScope` applies the rule to
+   * requests without a facet, or to requests for a specific facet.
    *
    * Required API Key ACLs:
    * - editSettings
@@ -104,9 +107,12 @@ public class RecommendClient(
    * Condition `filters` triggers if the source item matches the specified filters. - Condition
    * `filters` accepts numeric filters. - Consequence `params` only covers filtering parameters. -
    * Consequence `automaticFacetFilters` doesn't require a facet value placeholder (it tries to
-   * match the data source item's attributes instead). This variant of [batchRecommendRules] returns
-   * the full HTTP response information (status code, headers, raw body) along with the deserialized
-   * response body.
+   * match the data source item's attributes instead). Trending Items requests have no source item,
+   * so rules for the `trending-items` model differ: - Condition `filters` and consequence
+   * `automaticFacetFilters` are unavailable. - Condition `requestScope` applies the rule to
+   * requests without a facet, or to requests for a specific facet. This variant of
+   * [batchRecommendRules] returns the full HTTP response information (status code, headers, raw
+   * body) along with the deserialized response body.
    *
    * Required API Key ACLs:
    * - editSettings
