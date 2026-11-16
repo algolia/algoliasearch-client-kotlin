@@ -11,23 +11,30 @@ import kotlinx.serialization.json.*
  * Boolean filter applied to the A/B test population. Each filter targets a boolean metric and
  * decides whether to include (true) or exclude (false) matching records.
  *
- * @param domain Metric domain (for example `abtesting`, `personalization`).
+ * @param domain Metric domain (for example `abtesting`, `core`, `personalization`).
  * @param name Public metric name.
- * @param trackEffects Whether the experiment should record the effects of this filter.
- * @param includes If true, keep items that match the filter; if false, exclude them.
+ * @param trackEffects Whether the experiment should record the effects of this filter. Not
+ *   supported by `core.hasExactCategoryFilter`.
+ * @param includes If true, keep items that match the filter; if false, exclude them. Defaults to
+ *   false.
+ * @param parameters
  */
 @Serializable
 public data class MetricsFilter(
 
-  /** Metric domain (for example `abtesting`, `personalization`). */
+  /** Metric domain (for example `abtesting`, `core`, `personalization`). */
   @SerialName(value = "domain") val domain: String,
 
   /** Public metric name. */
   @SerialName(value = "name") val name: String,
 
-  /** Whether the experiment should record the effects of this filter. */
+  /**
+   * Whether the experiment should record the effects of this filter. Not supported by
+   * `core.hasExactCategoryFilter`.
+   */
   @SerialName(value = "trackEffects") val trackEffects: Boolean? = null,
 
-  /** If true, keep items that match the filter; if false, exclude them. */
+  /** If true, keep items that match the filter; if false, exclude them. Defaults to false. */
   @SerialName(value = "includes") val includes: Boolean? = null,
+  @SerialName(value = "parameters") val parameters: MetricsFilterParameters? = null,
 ) {}
