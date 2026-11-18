@@ -13,6 +13,7 @@ import kotlinx.serialization.json.*
  * @param apiKey
  * @param azureEndpoint
  * @param azureDeployment Azure model deployment name.
+ * @param apiMode
  * @param apiVersion
  */
 @Serializable
@@ -22,5 +23,6 @@ public data class AzureOpenAIProviderInput(
 
   /** Azure model deployment name. */
   @SerialName(value = "azureDeployment") val azureDeployment: String,
+  @SerialName(value = "apiMode") val apiMode: ApiModeEnum? = null,
   @SerialName(value = "apiVersion") val apiVersion: String? = null,
-) : InputUnion, ProviderInputNullable, ProviderInput {}
+) : InputUnion, InputUnionProviderAuthenticationResponse, ProviderInputNullable {}

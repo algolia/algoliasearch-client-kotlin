@@ -17,21 +17,19 @@ import kotlinx.serialization.json.*
  * InputUnion
  *
  * Implementations:
+ * - [AlgoliaManagedLLMCreateInput]
  * - [AnthropicProviderInput]
+ * - [AzureOpenAIProviderCreateInput]
  * - [AzureOpenAIProviderInput]
  * - [BaseProviderInput]
- * - [ManagedProviderResponseInput]
+ * - [MistralProviderInput]
  * - [OpenAICompatibleProviderInput]
  * - [OpenAIProviderInput]
+ * - [VertexAIProviderInput]
  * - [XAIProviderInput]
  */
 @Serializable(InputUnionSerializer::class)
 public sealed interface InputUnion {
-  @Serializable
-  @JvmInline
-  public value class AzureOpenAIProviderInputValue(public val value: AzureOpenAIProviderInput) :
-    InputUnion
-
   @Serializable
   @JvmInline
   public value class OpenAICompatibleProviderInputValue(
@@ -40,7 +38,18 @@ public sealed interface InputUnion {
 
   @Serializable
   @JvmInline
+  public value class AzureOpenAIProviderCreateInputValue(
+    public val value: AzureOpenAIProviderCreateInput
+  ) : InputUnion
+
+  @Serializable
+  @JvmInline
   public value class OpenAIProviderInputValue(public val value: OpenAIProviderInput) : InputUnion
+
+  @Serializable
+  @JvmInline
+  public value class AzureOpenAIProviderInputValue(public val value: AzureOpenAIProviderInput) :
+    InputUnion
 
   @Serializable
   @JvmInline
@@ -57,19 +66,31 @@ public sealed interface InputUnion {
 
   @Serializable
   @JvmInline
-  public value class ManagedProviderResponseInputValue(
-    public val value: ManagedProviderResponseInput
+  public value class MistralProviderInputValue(public val value: MistralProviderInput) : InputUnion
+
+  @Serializable
+  @JvmInline
+  public value class VertexAIProviderInputValue(public val value: VertexAIProviderInput) :
+    InputUnion
+
+  @Serializable
+  @JvmInline
+  public value class AlgoliaManagedLLMCreateInputValue(
+    public val value: AlgoliaManagedLLMCreateInput
   ) : InputUnion
 
   public companion object {
 
-    public fun of(value: AzureOpenAIProviderInput): InputUnion =
-      AzureOpenAIProviderInputValue(value)
-
     public fun of(value: OpenAICompatibleProviderInput): InputUnion =
       OpenAICompatibleProviderInputValue(value)
 
+    public fun of(value: AzureOpenAIProviderCreateInput): InputUnion =
+      AzureOpenAIProviderCreateInputValue(value)
+
     public fun of(value: OpenAIProviderInput): InputUnion = OpenAIProviderInputValue(value)
+
+    public fun of(value: AzureOpenAIProviderInput): InputUnion =
+      AzureOpenAIProviderInputValue(value)
 
     public fun of(value: BaseProviderInput): InputUnion = BaseProviderInputValue(value)
 
@@ -77,8 +98,12 @@ public sealed interface InputUnion {
 
     public fun of(value: XAIProviderInput): InputUnion = XAIProviderInputValue(value)
 
-    public fun of(value: ManagedProviderResponseInput): InputUnion =
-      ManagedProviderResponseInputValue(value)
+    public fun of(value: MistralProviderInput): InputUnion = MistralProviderInputValue(value)
+
+    public fun of(value: VertexAIProviderInput): InputUnion = VertexAIProviderInputValue(value)
+
+    public fun of(value: AlgoliaManagedLLMCreateInput): InputUnion =
+      AlgoliaManagedLLMCreateInputValue(value)
   }
 }
 
@@ -87,16 +112,17 @@ internal class InputUnionSerializer :
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<InputUnion> {
     return when {
       element is JsonObject &&
-        element.containsKey("azureDeployment") &&
-        element.containsKey("azureEndpoint") -> AzureOpenAIProviderInput.serializer()
-      element is JsonObject &&
         element.containsKey("baseUrl") &&
         element.containsKey("defaultModel") -> OpenAICompatibleProviderInput.serializer()
+      element is JsonObject -> AzureOpenAIProviderCreateInput.serializer()
       element is JsonObject -> OpenAIProviderInput.serializer()
+      element is JsonObject -> AzureOpenAIProviderInput.serializer()
       element is JsonObject -> BaseProviderInput.serializer()
       element is JsonObject -> AnthropicProviderInput.serializer()
       element is JsonObject -> XAIProviderInput.serializer()
-      element is JsonObject -> ManagedProviderResponseInput.serializer()
+      element is JsonObject -> MistralProviderInput.serializer()
+      element is JsonObject -> VertexAIProviderInput.serializer()
+      element is JsonObject -> AlgoliaManagedLLMCreateInput.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

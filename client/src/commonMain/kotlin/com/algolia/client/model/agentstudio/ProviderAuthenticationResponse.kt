@@ -17,16 +17,14 @@ import kotlinx.serialization.json.*
  * @param createdAt
  * @param updatedAt
  * @param lastUsedAt
- * @param isAlgoliaManaged
  */
 @Serializable
 public data class ProviderAuthenticationResponse(
   @SerialName(value = "id") val id: String,
   @SerialName(value = "name") val name: String,
   @SerialName(value = "providerName") val providerName: String,
-  @SerialName(value = "input") val input: InputUnion,
+  @SerialName(value = "input") val input: InputUnionProviderAuthenticationResponse,
   @SerialName(value = "createdAt") val createdAt: String,
   @SerialName(value = "updatedAt") val updatedAt: String,
   @SerialName(value = "lastUsedAt") val lastUsedAt: String? = null,
-  @SerialName(value = "isAlgoliaManaged") val isAlgoliaManaged: Boolean? = null,
 ) {}

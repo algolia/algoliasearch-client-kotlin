@@ -18,5 +18,5 @@ import kotlinx.serialization.json.*
 public data class ProviderAuthenticationCreate(
   @SerialName(value = "name") val name: String,
   @SerialName(value = "providerName") val providerName: ProviderName,
-  @SerialName(value = "input") val input: ProviderInput,
+  @SerialName(value = "input") val input: InputUnion,
 ) {}

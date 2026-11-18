@@ -14,5 +14,5 @@ import kotlinx.serialization.json.*
  */
 @Serializable
 public data class ManagedProviderResponseInput(
-  @SerialName(value = "defaultModel") val defaultModel: String? = null
-) : InputUnion {}
+  @SerialName(value = "defaultModel") val defaultModel: String
+) : InputUnionProviderAuthenticationResponse {}

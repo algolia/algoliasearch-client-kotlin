@@ -1464,7 +1464,7 @@ public class AgentStudioClient(
    * Retrieve details of the specified agent.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param agentId The agentId.
    * @param requestOptions additional request configuration.
@@ -1485,7 +1485,7 @@ public class AgentStudioClient(
    * body.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param agentId The agentId.
    * @param requestOptions additional request configuration.
@@ -1513,7 +1513,7 @@ public class AgentStudioClient(
    * Get a single allowed domain by id.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param domainId The domainId.
    * @param agentId The agentId.
@@ -1536,7 +1536,7 @@ public class AgentStudioClient(
    * body.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param domainId The domainId.
    * @param agentId The agentId.
@@ -1726,7 +1726,7 @@ public class AgentStudioClient(
    * Get Provider.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param providerId The providerId.
    * @param requestOptions additional request configuration.
@@ -1746,7 +1746,7 @@ public class AgentStudioClient(
    * code, headers, raw body) along with the deserialized response body.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param providerId The providerId.
    * @param requestOptions additional request configuration.
@@ -1941,7 +1941,7 @@ public class AgentStudioClient(
    * List all allowed domain patterns for this agent.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param agentId The agentId.
    * @param requestOptions additional request configuration.
@@ -1962,7 +1962,7 @@ public class AgentStudioClient(
    * deserialized response body.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param agentId The agentId.
    * @param requestOptions additional request configuration.
@@ -2149,7 +2149,7 @@ public class AgentStudioClient(
    * List all agents with pagination and filtering.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param page Page number. (default to 1)
    * @param limit Items per page. (default to 10)
@@ -2174,7 +2174,7 @@ public class AgentStudioClient(
    * body.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param page Page number. (default to 1)
    * @param limit Items per page. (default to 10)
@@ -2253,7 +2253,7 @@ public class AgentStudioClient(
    * Get available models for a specific provider.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param providerId The providerId.
    * @param requestOptions additional request configuration.
@@ -2274,7 +2274,7 @@ public class AgentStudioClient(
    * response body.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param providerId The providerId.
    * @param requestOptions additional request configuration.
@@ -2305,7 +2305,7 @@ public class AgentStudioClient(
    * List Providers.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param page Page number. (default to 1)
    * @param limit Items per page. (default to 10)
@@ -2327,7 +2327,7 @@ public class AgentStudioClient(
    * (status code, headers, raw body) along with the deserialized response body.
    *
    * Required API Key ACLs:
-   * - settings
+   * - editSettings
    *
    * @param page Page number. (default to 1)
    * @param limit Items per page. (default to 10)

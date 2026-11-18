@@ -12,9 +12,17 @@ import kotlinx.serialization.json.*
  *
  * @param apiKey
  * @param baseUrl
+ * @param workspaceId Required for API keys not scoped to a single workspace (sk-ant-usr-...). Sent
+ *   as the anthropic-workspace-id header on every request.
  */
 @Serializable
 public data class AnthropicProviderInput(
   @SerialName(value = "apiKey") val apiKey: String,
   @SerialName(value = "baseUrl") val baseUrl: String? = null,
-) : InputUnion, ProviderInputNullable, ProviderInput {}
+
+  /**
+   * Required for API keys not scoped to a single workspace (sk-ant-usr-...). Sent as the
+   * anthropic-workspace-id header on every request.
+   */
+  @SerialName(value = "workspaceId") val workspaceId: String? = null,
+) : InputUnion, InputUnionProviderAuthenticationResponse, ProviderInputNullable {}

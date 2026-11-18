@@ -19,4 +19,4 @@ import kotlinx.serialization.json.*
 public data class XAIProviderInput(
   @SerialName(value = "apiKey") val apiKey: String,
   @SerialName(value = "baseUrl") val baseUrl: String? = null,
-) : InputUnion, ProviderInputNullable, ProviderInput {}
+) : InputUnion, InputUnionProviderAuthenticationResponse, ProviderInputNullable {}

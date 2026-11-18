@@ -26,6 +26,7 @@ import kotlinx.serialization.json.*
  * @param turnContext
  * @param events
  * @param guardrail
+ * @param metadata
  */
 @Serializable
 public data class MessageResponse(
@@ -45,4 +46,5 @@ public data class MessageResponse(
   @SerialName(value = "turnContext") val turnContext: JsonObject? = null,
   @SerialName(value = "events") val events: List<MessageEvent>? = null,
   @SerialName(value = "guardrail") val guardrail: GuardrailOutcome? = null,
+  @SerialName(value = "metadata") val metadata: JsonObject? = null,
 ) {}

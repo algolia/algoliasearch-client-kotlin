@@ -20,8 +20,10 @@ import kotlinx.serialization.json.*
  * - [AnthropicProviderInput]
  * - [AzureOpenAIProviderInput]
  * - [BaseProviderInput]
+ * - [MistralProviderInput]
  * - [OpenAICompatibleProviderInput]
  * - [OpenAIProviderInput]
+ * - [VertexAIProviderInput]
  * - [XAIProviderInput]
  */
 @Serializable(ProviderInputNullableSerializer::class)
@@ -57,6 +59,16 @@ public sealed interface ProviderInputNullable {
   public value class XAIProviderInputValue(public val value: XAIProviderInput) :
     ProviderInputNullable
 
+  @Serializable
+  @JvmInline
+  public value class MistralProviderInputValue(public val value: MistralProviderInput) :
+    ProviderInputNullable
+
+  @Serializable
+  @JvmInline
+  public value class VertexAIProviderInputValue(public val value: VertexAIProviderInput) :
+    ProviderInputNullable
+
   public companion object {
 
     public fun of(value: AzureOpenAIProviderInput): ProviderInputNullable =
@@ -74,6 +86,12 @@ public sealed interface ProviderInputNullable {
       AnthropicProviderInputValue(value)
 
     public fun of(value: XAIProviderInput): ProviderInputNullable = XAIProviderInputValue(value)
+
+    public fun of(value: MistralProviderInput): ProviderInputNullable =
+      MistralProviderInputValue(value)
+
+    public fun of(value: VertexAIProviderInput): ProviderInputNullable =
+      VertexAIProviderInputValue(value)
   }
 }
 
@@ -93,6 +111,8 @@ internal class ProviderInputNullableSerializer :
       element is JsonObject -> BaseProviderInput.serializer()
       element is JsonObject -> AnthropicProviderInput.serializer()
       element is JsonObject -> XAIProviderInput.serializer()
+      element is JsonObject -> MistralProviderInput.serializer()
+      element is JsonObject -> VertexAIProviderInput.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }
   }

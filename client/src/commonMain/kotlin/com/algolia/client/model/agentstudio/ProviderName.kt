@@ -15,10 +15,13 @@ public enum class ProviderName(public val value: kotlin.String) {
   @SerialName(value = "openai") Openai("openai"),
   @SerialName(value = "azure_openai") AzureOpenai("azure_openai"),
   @SerialName(value = "google_genai") GoogleGenai("google_genai"),
+  @SerialName(value = "google_vertexai") GoogleVertexai("google_vertexai"),
   @SerialName(value = "deepseek") Deepseek("deepseek"),
   @SerialName(value = "openai_compatible") OpenaiCompatible("openai_compatible"),
+  @SerialName(value = "algolia_managed_llm") AlgoliaManagedLlm("algolia_managed_llm"),
   @SerialName(value = "xai") Xai("xai"),
-  @SerialName(value = "anthropic") Anthropic("anthropic");
+  @SerialName(value = "anthropic") Anthropic("anthropic"),
+  @SerialName(value = "mistralai") Mistralai("mistralai");
 
   override fun toString(): kotlin.String = value
 }
