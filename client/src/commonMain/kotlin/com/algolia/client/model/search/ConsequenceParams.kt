@@ -250,6 +250,10 @@ import kotlinx.serialization.json.*
  * @param query
  * @param automaticFacetFilters
  * @param automaticOptionalFacetFilters
+ * @param allowReRankingOnPersonalization Whether
+ *   [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs
+ *   concurrently with Personalization. Dynamic Re-Ranking isn't applied when `distinct` > 1, even
+ *   if `allowReRankingOnPersonalization` is `true`.
  */
 @Serializable
 public data class ConsequenceParams(
@@ -671,4 +675,12 @@ public data class ConsequenceParams(
   val automaticFacetFilters: AutomaticFacetFilters? = null,
   @SerialName(value = "automaticOptionalFacetFilters")
   val automaticOptionalFacetFilters: AutomaticFacetFilters? = null,
+
+  /**
+   * Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs
+   * concurrently with Personalization. Dynamic Re-Ranking isn't applied when `distinct` > 1, even
+   * if `allowReRankingOnPersonalization` is `true`.
+   */
+  @SerialName(value = "allowReRankingOnPersonalization")
+  val allowReRankingOnPersonalization: Boolean? = null,
 ) {}

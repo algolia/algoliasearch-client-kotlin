@@ -248,6 +248,10 @@ import kotlinx.serialization.json.*
  *   [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking). This setting
  *   only has an effect if you activated Dynamic Re-Ranking for this index in the Algolia dashboard.
  * @param reRankingApplyFilter
+ * @param allowReRankingOnPersonalization Whether
+ *   [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs
+ *   concurrently with Personalization. Dynamic Re-Ranking isn't applied when `distinct` > 1, even
+ *   if `allowReRankingOnPersonalization` is `true`.
  */
 @Serializable
 public data class SearchParamsObject(
@@ -667,4 +671,12 @@ public data class SearchParamsObject(
   @SerialName(value = "enableReRanking") val enableReRanking: Boolean? = null,
   @SerialName(value = "reRankingApplyFilter")
   val reRankingApplyFilter: ReRankingApplyFilter? = null,
+
+  /**
+   * Whether [Dynamic Re-Ranking](https://www.algolia.com/doc/guides/algolia-ai/re-ranking) runs
+   * concurrently with Personalization. Dynamic Re-Ranking isn't applied when `distinct` > 1, even
+   * if `allowReRankingOnPersonalization` is `true`.
+   */
+  @SerialName(value = "allowReRankingOnPersonalization")
+  val allowReRankingOnPersonalization: Boolean? = null,
 ) : SearchParams {}

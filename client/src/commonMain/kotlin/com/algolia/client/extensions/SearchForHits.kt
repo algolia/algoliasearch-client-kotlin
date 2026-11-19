@@ -86,9 +86,11 @@ public fun SearchForHits.Companion.from(
     sortFacetValuesBy = searchParamsObject.sortFacetValuesBy,
     attributeCriteriaComputedByMinProximity =
       searchParamsObject.attributeCriteriaComputedByMinProximity,
+    attributeCriteriaComputedBy = searchParamsObject.attributeCriteriaComputedBy,
     renderingContent = searchParamsObject.renderingContent,
     enableReRanking = searchParamsObject.enableReRanking,
     reRankingApplyFilter = searchParamsObject.reRankingApplyFilter,
+    allowReRankingOnPersonalization = searchParamsObject.allowReRankingOnPersonalization,
     indexName = indexName,
     type = SearchTypeDefault.Default,
   )

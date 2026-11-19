@@ -91,6 +91,7 @@ public class DSLSearchParamsObject internal constructor() {
   public var renderingContent: RenderingContent? = null
   public var enableReRanking: Boolean? = null
   public var reRankingApplyFilter: ReRankingApplyFilter? = null
+  public var allowReRankingOnPersonalization: Boolean? = null
 
   internal constructor(source: SearchParamsObject) : this() {
     this.query = source.query
@@ -167,6 +168,7 @@ public class DSLSearchParamsObject internal constructor() {
     this.renderingContent = source.renderingContent
     this.enableReRanking = source.enableReRanking
     this.reRankingApplyFilter = source.reRankingApplyFilter
+    this.allowReRankingOnPersonalization = source.allowReRankingOnPersonalization
   }
 
   private var filtersWrite: FilterWrite<String, Filter>? = null
@@ -343,5 +345,6 @@ public class DSLSearchParamsObject internal constructor() {
       renderingContent = renderingContent,
       enableReRanking = enableReRanking,
       reRankingApplyFilter = reRankingApplyFilter,
+      allowReRankingOnPersonalization = allowReRankingOnPersonalization,
     )
 }

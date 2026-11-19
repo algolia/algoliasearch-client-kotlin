@@ -91,6 +91,7 @@ public class DSLBrowseParamsObject internal constructor() {
   public var renderingContent: RenderingContent? = null
   public var enableReRanking: Boolean? = null
   public var reRankingApplyFilter: ReRankingApplyFilter? = null
+  public var allowReRankingOnPersonalization: Boolean? = null
   public var cursor: String? = null
 
   internal constructor(source: BrowseParamsObject) : this() {
@@ -168,6 +169,7 @@ public class DSLBrowseParamsObject internal constructor() {
     this.renderingContent = source.renderingContent
     this.enableReRanking = source.enableReRanking
     this.reRankingApplyFilter = source.reRankingApplyFilter
+    this.allowReRankingOnPersonalization = source.allowReRankingOnPersonalization
     this.cursor = source.cursor
   }
 
@@ -345,6 +347,7 @@ public class DSLBrowseParamsObject internal constructor() {
       renderingContent = renderingContent,
       enableReRanking = enableReRanking,
       reRankingApplyFilter = reRankingApplyFilter,
+      allowReRankingOnPersonalization = allowReRankingOnPersonalization,
       cursor = cursor,
     )
 }

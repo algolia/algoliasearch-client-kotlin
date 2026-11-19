@@ -93,6 +93,7 @@ public class DSLConsequenceParams internal constructor() {
   public var query: ConsequenceQuery? = null
   public var automaticFacetFilters: AutomaticFacetFilters? = null
   public var automaticOptionalFacetFilters: AutomaticFacetFilters? = null
+  public var allowReRankingOnPersonalization: Boolean? = null
 
   internal constructor(source: ConsequenceParams) : this() {
     this.similarQuery = source.similarQuery
@@ -171,6 +172,7 @@ public class DSLConsequenceParams internal constructor() {
     this.query = source.query
     this.automaticFacetFilters = source.automaticFacetFilters
     this.automaticOptionalFacetFilters = source.automaticOptionalFacetFilters
+    this.allowReRankingOnPersonalization = source.allowReRankingOnPersonalization
   }
 
   private var filtersWrite: FilterWrite<String, Filter>? = null
@@ -349,5 +351,6 @@ public class DSLConsequenceParams internal constructor() {
       query = query,
       automaticFacetFilters = automaticFacetFilters,
       automaticOptionalFacetFilters = automaticOptionalFacetFilters,
+      allowReRankingOnPersonalization = allowReRankingOnPersonalization,
     )
 }
