@@ -17,6 +17,7 @@ import kotlinx.serialization.json.*
  * ToolConfigInput
  *
  * Implementations:
+ * - [AlgoliaCompareProductsToolConfig]
  * - [AlgoliaRecommendToolConfig]
  * - [AlgoliaSearchToolConfig]
  * - [ClientSideToolConfig]
@@ -47,6 +48,12 @@ public sealed interface ToolConfigInput {
 
   @Serializable
   @JvmInline
+  public value class AlgoliaCompareProductsToolConfigValue(
+    public val value: AlgoliaCompareProductsToolConfig
+  ) : ToolConfigInput
+
+  @Serializable
+  @JvmInline
   public value class UnknownToolConfigValue(public val value: UnknownToolConfig) : ToolConfigInput
 
   public companion object {
@@ -61,6 +68,9 @@ public sealed interface ToolConfigInput {
     public fun of(value: AlgoliaRecommendToolConfig): ToolConfigInput =
       AlgoliaRecommendToolConfigValue(value)
 
+    public fun of(value: AlgoliaCompareProductsToolConfig): ToolConfigInput =
+      AlgoliaCompareProductsToolConfigValue(value)
+
     public fun of(value: UnknownToolConfig): ToolConfigInput = UnknownToolConfigValue(value)
   }
 }
@@ -69,6 +79,7 @@ internal class ToolConfigInputSerializer :
   JsonContentPolymorphicSerializer<ToolConfigInput>(ToolConfigInput::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ToolConfigInput> {
     when (element.jsonObject["type"]?.jsonPrimitive?.contentOrNull) {
+      "algolia_compare_products" -> return AlgoliaCompareProductsToolConfig.serializer()
       "algolia_recommend" -> return AlgoliaRecommendToolConfig.serializer()
       "algolia_search_index" -> return AlgoliaSearchToolConfig.serializer()
       "client_side" -> return ClientSideToolConfig.serializer()
@@ -84,6 +95,7 @@ internal class ToolConfigInputSerializer :
       element is JsonObject && element.containsKey("indices") ->
         AlgoliaSearchToolConfig.serializer()
       element is JsonObject -> AlgoliaRecommendToolConfig.serializer()
+      element is JsonObject -> AlgoliaCompareProductsToolConfig.serializer()
       element is JsonObject -> UnknownToolConfig.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

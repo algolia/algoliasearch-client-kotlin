@@ -25,6 +25,7 @@ import kotlinx.serialization.json.*
  * @param conversationMetadata
  * @param feedback
  * @param impactAnalytics
+ * @param isEphemeral
  */
 @Serializable
 public data class ConversationBaseResponse(
@@ -44,4 +45,5 @@ public data class ConversationBaseResponse(
   val conversationMetadata: ConversationMetadata? = null,
   @SerialName(value = "feedback") val feedback: List<FeedbackResponse>? = null,
   @SerialName(value = "impactAnalytics") val impactAnalytics: ImpactAnalytics? = null,
+  @SerialName(value = "isEphemeral") val isEphemeral: Boolean? = null,
 ) {}

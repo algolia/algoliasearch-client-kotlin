@@ -17,6 +17,7 @@ import kotlinx.serialization.json.*
  * ItemsUnion
  *
  * Implementations:
+ * - [AlgoliaCompareProductsToolConfig]
  * - [AlgoliaGroupedResultsCompatToolConfig]
  * - [AlgoliaGroupedResultsToolConfig]
  * - [AlgoliaRecommendToolConfig]
@@ -59,6 +60,12 @@ public sealed interface ItemsUnion {
 
   @Serializable
   @JvmInline
+  public value class AlgoliaCompareProductsToolConfigValue(
+    public val value: AlgoliaCompareProductsToolConfig
+  ) : ItemsUnion
+
+  @Serializable
+  @JvmInline
   public value class UnknownToolConfigValue(public val value: UnknownToolConfig) : ItemsUnion
 
   public companion object {
@@ -78,6 +85,9 @@ public sealed interface ItemsUnion {
     public fun of(value: AlgoliaGroupedResultsCompatToolConfig): ItemsUnion =
       AlgoliaGroupedResultsCompatToolConfigValue(value)
 
+    public fun of(value: AlgoliaCompareProductsToolConfig): ItemsUnion =
+      AlgoliaCompareProductsToolConfigValue(value)
+
     public fun of(value: UnknownToolConfig): ItemsUnion = UnknownToolConfigValue(value)
   }
 }
@@ -86,6 +96,7 @@ internal class ItemsUnionSerializer :
   JsonContentPolymorphicSerializer<ItemsUnion>(ItemsUnion::class) {
   override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ItemsUnion> {
     when (element.jsonObject["type"]?.jsonPrimitive?.contentOrNull) {
+      "algolia_compare_products" -> return AlgoliaCompareProductsToolConfig.serializer()
       "algolia_display_results" -> return AlgoliaGroupedResultsCompatToolConfig.serializer()
       "algolia_grouped_results" -> return AlgoliaGroupedResultsToolConfig.serializer()
       "algolia_recommend" -> return AlgoliaRecommendToolConfig.serializer()
@@ -105,6 +116,7 @@ internal class ItemsUnionSerializer :
       element is JsonObject -> AlgoliaRecommendToolConfig.serializer()
       element is JsonObject -> AlgoliaGroupedResultsToolConfig.serializer()
       element is JsonObject -> AlgoliaGroupedResultsCompatToolConfig.serializer()
+      element is JsonObject -> AlgoliaCompareProductsToolConfig.serializer()
       element is JsonObject -> UnknownToolConfig.serializer()
       else -> throw AlgoliaClientException("Failed to deserialize json element: $element")
     }

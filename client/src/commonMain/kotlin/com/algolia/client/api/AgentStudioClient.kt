@@ -400,6 +400,9 @@ public class AgentStudioClient(
    *   Agent Studio BigQuery analytics, Algolia search analytics, click analytics, and
    *   query-suggestions training. Useful for offline-eval workflows. (default to true)
    * @param xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token.
+   * @param ephemeral Set to true to not retain the conversation: it is processed and analyzed like
+   *   any other, but removed by the next cleanup run instead of being kept in the history.
+   *   Overrides the agent's ephemeralConversations setting; omit to use it.
    * @param requestOptions additional request configuration.
    */
   public suspend fun createAgentCompletion(
@@ -411,6 +414,7 @@ public class AgentStudioClient(
     memory: Boolean? = null,
     analytics: Boolean? = null,
     xAlgoliaSecureUserToken: String? = null,
+    ephemeral: Boolean? = null,
     requestOptions: RequestOptions? = null,
   ): Map<kotlin.String, Any> {
     return requester.execute(
@@ -424,6 +428,7 @@ public class AgentStudioClient(
           memory = memory,
           analytics = analytics,
           xAlgoliaSecureUserToken = xAlgoliaSecureUserToken,
+          ephemeral = ephemeral,
         ),
       requestOptions = requestOptions,
     )
@@ -451,6 +456,9 @@ public class AgentStudioClient(
    *   Agent Studio BigQuery analytics, Algolia search analytics, click analytics, and
    *   query-suggestions training. Useful for offline-eval workflows. (default to true)
    * @param xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token.
+   * @param ephemeral Set to true to not retain the conversation: it is processed and analyzed like
+   *   any other, but removed by the next cleanup run instead of being kept in the history.
+   *   Overrides the agent's ephemeralConversations setting; omit to use it.
    * @param requestOptions additional request configuration.
    */
   public suspend fun createAgentCompletionWithHTTPInfo(
@@ -462,6 +470,7 @@ public class AgentStudioClient(
     memory: Boolean? = null,
     analytics: Boolean? = null,
     xAlgoliaSecureUserToken: String? = null,
+    ephemeral: Boolean? = null,
     requestOptions: RequestOptions? = null,
   ): AlgoliaHttpResponse<Map<kotlin.String, Any>> {
     return requester.executeWithHttpInfo(
@@ -475,6 +484,7 @@ public class AgentStudioClient(
           memory = memory,
           analytics = analytics,
           xAlgoliaSecureUserToken = xAlgoliaSecureUserToken,
+          ephemeral = ephemeral,
         ),
       requestOptions = requestOptions,
     )
@@ -489,6 +499,7 @@ public class AgentStudioClient(
     memory: Boolean?,
     analytics: Boolean?,
     xAlgoliaSecureUserToken: String?,
+    ephemeral: Boolean?,
   ): RequestConfig {
     require(agentId.isNotBlank()) {
       "Parameter `agentId` is required when calling `createAgentCompletion`."
@@ -509,6 +520,7 @@ public class AgentStudioClient(
           cache?.let { put("cache", it) }
           memory?.let { put("memory", it) }
           analytics?.let { put("analytics", it) }
+          ephemeral?.let { put("ephemeral", it) }
         },
       body = agentCompletionRequest,
     )
@@ -1043,12 +1055,14 @@ public class AgentStudioClient(
    * @param agentId The agentId.
    * @param startDate Filter conversations created after this date (format: YYYY-MM-DD).
    * @param endDate Filter conversations created before this date (format: YYYY-MM-DD).
+   * @param ephemeral Filter by ephemeral (not retained) conversations; omit to include both.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteAgentConversations(
     agentId: String,
     startDate: String? = null,
     endDate: String? = null,
+    ephemeral: Boolean? = null,
     requestOptions: RequestOptions? = null,
   ) {
     return requester.execute(
@@ -1057,6 +1071,7 @@ public class AgentStudioClient(
           agentId = agentId,
           startDate = startDate,
           endDate = endDate,
+          ephemeral = ephemeral,
         ),
       requestOptions = requestOptions,
     )
@@ -1073,12 +1088,14 @@ public class AgentStudioClient(
    * @param agentId The agentId.
    * @param startDate Filter conversations created after this date (format: YYYY-MM-DD).
    * @param endDate Filter conversations created before this date (format: YYYY-MM-DD).
+   * @param ephemeral Filter by ephemeral (not retained) conversations; omit to include both.
    * @param requestOptions additional request configuration.
    */
   public suspend fun deleteAgentConversationsWithHTTPInfo(
     agentId: String,
     startDate: String? = null,
     endDate: String? = null,
+    ephemeral: Boolean? = null,
     requestOptions: RequestOptions? = null,
   ): AlgoliaHttpResponse<Unit> {
     return requester.executeWithHttpInfo(
@@ -1087,6 +1104,7 @@ public class AgentStudioClient(
           agentId = agentId,
           startDate = startDate,
           endDate = endDate,
+          ephemeral = ephemeral,
         ),
       requestOptions = requestOptions,
     )
@@ -1096,6 +1114,7 @@ public class AgentStudioClient(
     agentId: String,
     startDate: String?,
     endDate: String?,
+    ephemeral: Boolean?,
   ): RequestConfig {
     require(agentId.isNotBlank()) {
       "Parameter `agentId` is required when calling `deleteAgentConversations`."
@@ -1109,6 +1128,7 @@ public class AgentStudioClient(
         buildMap {
           startDate?.let { put("startDate", it) }
           endDate?.let { put("endDate", it) }
+          ephemeral?.let { put("ephemeral", it) }
         },
     )
   }
@@ -1390,12 +1410,14 @@ public class AgentStudioClient(
    * @param agentId The agentId.
    * @param startDate Filter conversations created after this date (format: YYYY-MM-DD).
    * @param endDate Filter conversations created before this date (format: YYYY-MM-DD).
+   * @param ephemeral Filter by ephemeral (not retained) conversations; omit to include both.
    * @param requestOptions additional request configuration.
    */
   public suspend fun exportConversations(
     agentId: String,
     startDate: String? = null,
     endDate: String? = null,
+    ephemeral: Boolean? = null,
     requestOptions: RequestOptions? = null,
   ): List<ConversationFullResponse> {
     return requester.execute(
@@ -1404,6 +1426,7 @@ public class AgentStudioClient(
           agentId = agentId,
           startDate = startDate,
           endDate = endDate,
+          ephemeral = ephemeral,
         ),
       requestOptions = requestOptions,
     )
@@ -1420,12 +1443,14 @@ public class AgentStudioClient(
    * @param agentId The agentId.
    * @param startDate Filter conversations created after this date (format: YYYY-MM-DD).
    * @param endDate Filter conversations created before this date (format: YYYY-MM-DD).
+   * @param ephemeral Filter by ephemeral (not retained) conversations; omit to include both.
    * @param requestOptions additional request configuration.
    */
   public suspend fun exportConversationsWithHTTPInfo(
     agentId: String,
     startDate: String? = null,
     endDate: String? = null,
+    ephemeral: Boolean? = null,
     requestOptions: RequestOptions? = null,
   ): AlgoliaHttpResponse<List<ConversationFullResponse>> {
     return requester.executeWithHttpInfo(
@@ -1434,6 +1459,7 @@ public class AgentStudioClient(
           agentId = agentId,
           startDate = startDate,
           endDate = endDate,
+          ephemeral = ephemeral,
         ),
       requestOptions = requestOptions,
     )
@@ -1443,6 +1469,7 @@ public class AgentStudioClient(
     agentId: String,
     startDate: String?,
     endDate: String?,
+    ephemeral: Boolean?,
   ): RequestConfig {
     require(agentId.isNotBlank()) {
       "Parameter `agentId` is required when calling `exportConversations`."
@@ -1456,6 +1483,7 @@ public class AgentStudioClient(
         buildMap {
           startDate?.let { put("startDate", it) }
           endDate?.let { put("endDate", it) }
+          ephemeral?.let { put("ephemeral", it) }
         },
     )
   }
@@ -2008,6 +2036,7 @@ public class AgentStudioClient(
    * @param converted Filter by conversations with at least one conversion.
    * @param hasAlgoliaSearch Filter by conversations where the search tool was used.
    * @param xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token.
+   * @param ephemeral Filter by ephemeral (not retained) conversations; omit to include both.
    * @param requestOptions additional request configuration.
    */
   public suspend fun listAgentConversations(
@@ -2023,6 +2052,7 @@ public class AgentStudioClient(
     converted: Boolean? = null,
     hasAlgoliaSearch: Boolean? = null,
     xAlgoliaSecureUserToken: String? = null,
+    ephemeral: Boolean? = null,
     requestOptions: RequestOptions? = null,
   ): PaginatedConversationsResponse {
     return requester.execute(
@@ -2040,6 +2070,7 @@ public class AgentStudioClient(
           converted = converted,
           hasAlgoliaSearch = hasAlgoliaSearch,
           xAlgoliaSecureUserToken = xAlgoliaSecureUserToken,
+          ephemeral = ephemeral,
         ),
       requestOptions = requestOptions,
     )
@@ -2066,6 +2097,7 @@ public class AgentStudioClient(
    * @param converted Filter by conversations with at least one conversion.
    * @param hasAlgoliaSearch Filter by conversations where the search tool was used.
    * @param xAlgoliaSecureUserToken The X-Algolia-Secure-User-Token.
+   * @param ephemeral Filter by ephemeral (not retained) conversations; omit to include both.
    * @param requestOptions additional request configuration.
    */
   public suspend fun listAgentConversationsWithHTTPInfo(
@@ -2081,6 +2113,7 @@ public class AgentStudioClient(
     converted: Boolean? = null,
     hasAlgoliaSearch: Boolean? = null,
     xAlgoliaSecureUserToken: String? = null,
+    ephemeral: Boolean? = null,
     requestOptions: RequestOptions? = null,
   ): AlgoliaHttpResponse<PaginatedConversationsResponse> {
     return requester.executeWithHttpInfo(
@@ -2098,6 +2131,7 @@ public class AgentStudioClient(
           converted = converted,
           hasAlgoliaSearch = hasAlgoliaSearch,
           xAlgoliaSecureUserToken = xAlgoliaSecureUserToken,
+          ephemeral = ephemeral,
         ),
       requestOptions = requestOptions,
     )
@@ -2116,6 +2150,7 @@ public class AgentStudioClient(
     converted: Boolean?,
     hasAlgoliaSearch: Boolean?,
     xAlgoliaSecureUserToken: String?,
+    ephemeral: Boolean?,
   ): RequestConfig {
     require(agentId.isNotBlank()) {
       "Parameter `agentId` is required when calling `listAgentConversations`."
@@ -2141,6 +2176,7 @@ public class AgentStudioClient(
           clicked?.let { put("clicked", it) }
           converted?.let { put("converted", it) }
           hasAlgoliaSearch?.let { put("hasAlgoliaSearch", it) }
+          ephemeral?.let { put("ephemeral", it) }
         },
     )
   }
@@ -2203,6 +2239,51 @@ public class AgentStudioClient(
           limit?.let { put("limit", it) }
           providerId?.let { put("providerId", it) }
         },
+    )
+  }
+
+  /**
+   * Live conversations counted against the per-application limit.
+   *
+   * Required API Key ACLs:
+   * - logs
+   *
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun listConversationUsage(
+    requestOptions: RequestOptions? = null
+  ): ConversationUsageResponse {
+    return requester.execute(
+      requestConfig = listConversationUsageRequestConfig(),
+      requestOptions = requestOptions,
+    )
+  }
+
+  /**
+   * Live conversations counted against the per-application limit. This variant of
+   * [listConversationUsage] returns the full HTTP response information (status code, headers, raw
+   * body) along with the deserialized response body.
+   *
+   * Required API Key ACLs:
+   * - logs
+   *
+   * @param requestOptions additional request configuration.
+   */
+  public suspend fun listConversationUsageWithHTTPInfo(
+    requestOptions: RequestOptions? = null
+  ): AlgoliaHttpResponse<ConversationUsageResponse> {
+    return requester.executeWithHttpInfo(
+      requestConfig = listConversationUsageRequestConfig(),
+      requestOptions = requestOptions,
+    )
+  }
+
+  private fun listConversationUsageRequestConfig(): RequestConfig {
+    return RequestConfig(
+      method = RequestMethod.GET,
+      path =
+        "/agent-studio".split("/").filter { it.isNotBlank() } +
+          listOf("1", "configuration", "conversation-usage"),
     )
   }
 

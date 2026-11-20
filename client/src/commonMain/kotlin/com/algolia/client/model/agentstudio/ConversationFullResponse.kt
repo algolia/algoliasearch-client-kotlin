@@ -27,6 +27,7 @@ import kotlinx.serialization.json.*
  * @param feedback
  * @param impactAnalytics
  * @param analyticsDegraded
+ * @param isEphemeral
  */
 @Serializable
 public data class ConversationFullResponse(
@@ -48,4 +49,5 @@ public data class ConversationFullResponse(
   @SerialName(value = "feedback") val feedback: List<FeedbackResponse>? = null,
   @SerialName(value = "impactAnalytics") val impactAnalytics: ImpactAnalytics? = null,
   @SerialName(value = "analyticsDegraded") val analyticsDegraded: Boolean? = null,
+  @SerialName(value = "isEphemeral") val isEphemeral: Boolean? = null,
 ) {}
