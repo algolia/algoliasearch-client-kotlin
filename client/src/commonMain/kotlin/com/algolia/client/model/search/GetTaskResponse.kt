@@ -11,6 +11,18 @@ import kotlinx.serialization.json.*
  * GetTaskResponse
  *
  * @param status
+ * @param pendingTask Indicates whether the index has pending tasks. This value is deprecated and
+ *   always `false`. Don't use it.
  */
 @Serializable
-public data class GetTaskResponse(@SerialName(value = "status") val status: TaskStatus) {}
+public data class GetTaskResponse(
+  @SerialName(value = "status") val status: TaskStatus,
+
+  /**
+   * Indicates whether the index has pending tasks. This value is deprecated and always `false`.
+   * Don't use it.
+   */
+  @Deprecated(message = "This property is deprecated.")
+  @SerialName(value = "pendingTask")
+  val pendingTask: Boolean? = null,
+) {}
