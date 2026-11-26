@@ -6,6 +6,7 @@ import com.algolia.client.exception.AlgoliaClientException
 import com.algolia.client.extensions.internal.retryUntil
 import com.algolia.client.model.ingestion.Action
 import com.algolia.client.model.ingestion.Event
+import com.algolia.client.model.ingestion.EventStatus
 import com.algolia.client.model.ingestion.PushTaskPayload
 import com.algolia.client.model.ingestion.PushTaskRecords
 import com.algolia.client.model.ingestion.WatchResponse
@@ -14,6 +15,8 @@ import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 import kotlin.time.Duration.Companion.seconds
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.contentOrNull
 import kotlinx.serialization.json.jsonPrimitive
 
 /**
@@ -64,7 +67,7 @@ public suspend fun IngestionClient.chunkedPush(
     responses += pushed
 
     if (waitForTasks) {
-      pushed.forEach { pollEvent(it, maxRetries, requestOptions) }
+      pushed.forEach { pollEvent(indexName, it, maxRetries, requestOptions) }
     }
   }
 
@@ -85,6 +88,7 @@ private fun JsonObject.toPushTaskRecord(): PushTaskRecords {
 }
 
 private suspend fun IngestionClient.pollEvent(
+  indexName: String,
   response: WatchResponse,
   maxRetries: Int,
   requestOptions: RequestOptions?,
@@ -102,7 +106,23 @@ private suspend fun IngestionClient.pollEvent(
           if (e.httpErrorCode == 404) Result.failure(e) else throw e
         }
       },
-      until = { it.isSuccess },
+      until = { result ->
+        val event = result.getOrNull()
+        when (val status = event?.status) {
+          EventStatus.Created,
+          EventStatus.Started,
+          EventStatus.Retried -> false
+          null -> event != null
+          EventStatus.Succeeded -> true
+          else -> {
+            val message = (event?.data?.get("message") as? JsonPrimitive)?.contentOrNull
+            val reason = if (message.isNullOrEmpty()) "" else ": $message"
+            throw AlgoliaClientException(
+              "ingestion push to index $indexName did not succeed: event $eventID of run ${response.runID} has status $status$reason"
+            )
+          }
+        }
+      },
       maxRetries = maxRetries,
       timeout = Duration.INFINITE,
       initialDelay = 1500.milliseconds,
